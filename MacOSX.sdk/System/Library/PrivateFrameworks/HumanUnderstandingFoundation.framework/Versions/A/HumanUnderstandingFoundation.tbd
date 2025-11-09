@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           992D421D-6AC2-3DCC-942E-C8CFF30CC2E9
-  - target:          x86_64-maccatalyst
-    value:           992D421D-6AC2-3DCC-942E-C8CFF30CC2E9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FD49BD98-6F78-3D81-8A7D-AF6C66480A3C
-  - target:          arm64e-maccatalyst
-    value:           FD49BD98-6F78-3D81-8A7D-AF6C66480A3C
 install-name:    '/System/Library/PrivateFrameworks/HumanUnderstandingFoundation.framework/Versions/A/HumanUnderstandingFoundation'
-current-version: 28.13
+current-version: 28.24
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

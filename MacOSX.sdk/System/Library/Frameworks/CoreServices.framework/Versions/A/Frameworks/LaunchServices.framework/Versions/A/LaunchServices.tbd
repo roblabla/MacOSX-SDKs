@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
-  - target:          x86_64-maccatalyst
-    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
-  - target:          arm64e-maccatalyst
-    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:

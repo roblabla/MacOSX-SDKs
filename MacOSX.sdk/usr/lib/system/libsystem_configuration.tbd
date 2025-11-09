@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E7F80C5C-E18C-3201-ACB6-9A4C46B6574B
-  - target:          x86_64-maccatalyst
-    value:           E7F80C5C-E18C-3201-ACB6-9A4C46B6574B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           113A1DDB-1B61-3C33-9FD5-B39A2A29D779
-  - target:          arm64e-maccatalyst
-    value:           113A1DDB-1B61-3C33-9FD5-B39A2A29D779
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1241.60.3
+current-version: 1241.100.11
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

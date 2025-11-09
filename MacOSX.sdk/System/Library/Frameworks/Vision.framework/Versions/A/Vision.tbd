@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           00DD699E-4F17-36DA-8EB2-EBB803F0A7EE
-  - target:          x86_64-maccatalyst
-    value:           00DD699E-4F17-36DA-8EB2-EBB803F0A7EE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           557FC1D7-D40B-3429-9E19-99A5C361A798
-  - target:          arm64e-maccatalyst
-    value:           557FC1D7-D40B-3429-9E19-99A5C361A798
 install-name:    '/System/Library/Frameworks/Vision.framework/Versions/A/Vision'
-current-version: 6.0.48
+current-version: 6.0.51
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -80,8 +67,8 @@ exports:
                        _VNBodyLandmarkKeyRoot, _VNBodyLandmarkRegionKeyFace, _VNBodyLandmarkRegionKeyLeftArm, 
                        _VNBodyLandmarkRegionKeyLeftLeg, _VNBodyLandmarkRegionKeyRightArm, 
                        _VNBodyLandmarkRegionKeyRightLeg, _VNBodyLandmarkRegionKeyTorso, 
-                       _VNCleanupLevel_Complete, _VNCleanupLevel_Partial, _VNCleanupPurgeAll, 
-                       _VNClusteringAlgorithm_Greedy, _VNClusteringAlgorithm_GreedyWithTorso, 
+                       _VNCheckRatioMismatch, _VNCleanupLevel_Complete, _VNCleanupLevel_Partial, 
+                       _VNCleanupPurgeAll, _VNClusteringAlgorithm_Greedy, _VNClusteringAlgorithm_GreedyWithTorso, 
                        _VNCropAndScaleFromURLToPixelBuffers, _VNCropAndScalePixelBufferToPixelBuffers, 
                        _VNDGCsUiwnQwGz0qSSQPGGd177EyoSaoGN, _VNDebugBoundingBoxColor, 
                        _VNDebugColorFromValues, _VNDebugContrastOutlineColor, _VNDebugFallbackSizeWhenImagesizeIsUnknown, 

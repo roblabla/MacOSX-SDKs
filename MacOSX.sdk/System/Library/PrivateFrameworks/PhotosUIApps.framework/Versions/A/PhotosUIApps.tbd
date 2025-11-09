@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1C6BA212-6E69-3E1D-A839-AA0F1174F742
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3E37FAF0-B42B-3991-B6BE-236683738EDB
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIApps.framework/Versions/A/PhotosUIApps'
-current-version: 520.0.240
+current-version: 541.0.110
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -300,7 +293,7 @@ exports:
                        '_$sSo21PXTimelineContentTypeVs23CustomStringConvertible12PhotosUIAppsMc', 
                        _PhotosUIAppsVersionNumber, _PhotosUIAppsVersionString ]
     objc-classes:    [ PUXFlexMusicViewController, PUXHelloWorld, PUXHelloWorldView, 
-                       PUXPhotosReliveWidgetHelper, PUXRootSettings, PUXStoryThumbnailActionPerformer, 
+                       PUXPhotosReliveWidgetHelper, PUXStoryThumbnailActionPerformer, 
                        PUXStoryUISwiftFactory, PUXStoryViewController, PUXViewController, 
                        _TtC12PhotosUIApps33PUXStoryMusicEditorViewController, _TtC12PhotosUIApps36PUXMacAppleMusicPickerViewController ]
 ...

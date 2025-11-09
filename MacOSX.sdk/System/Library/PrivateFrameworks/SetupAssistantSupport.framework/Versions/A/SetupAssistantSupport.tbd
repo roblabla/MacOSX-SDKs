@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           BC39246D-7F04-3B9E-AF76-3EC18522C063
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           00D61B62-7335-313C-ACD9-C05BAD67277B
 install-name:    '/System/Library/PrivateFrameworks/SetupAssistantSupport.framework/Versions/A/SetupAssistantSupport'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DB8C2E51-7C27-3DFC-8718-75AB2F13FF18
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BB57B8B7-7B15-34F9-B9C2-04073194311F
 install-name:    '/usr/lib/usd/libMaterialXFormat.dylib'
-current-version: 0
+current-version: 20.105.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

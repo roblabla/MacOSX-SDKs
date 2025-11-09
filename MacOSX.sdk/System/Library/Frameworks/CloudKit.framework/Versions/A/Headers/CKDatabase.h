@@ -11,7 +11,7 @@
 
 @class CKDatabaseOperation, CKRecord, CKRecordID, CKRecordZone, CKRecordZoneID, CKQuery;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, CKDatabaseScope) {
     CKDatabaseScopePublic = 1,
@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, CKDatabaseScope) {
 } API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKDatabase : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -37,9 +38,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 #pragma mark Record Convenience Methods
 /*! @c CKFetchRecordsOperation and @c CKModifyRecordsOperation are the more configurable, @c CKOperation -based alternatives to these methods */
-- (void)fetchRecordWithID:(CKRecordID *)recordID completionHandler:(void (^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(record(for:));
-- (void)saveRecord:(CKRecord *)record completionHandler:(void (^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler;
-- (void)deleteRecordWithID:(CKRecordID *)recordID completionHandler:(void (^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecord(withID:));
+- (void)fetchRecordWithID:(CKRecordID *)recordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(record(for:));
+- (void)saveRecord:(CKRecord *)record completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler;
+- (void)deleteRecordWithID:(CKRecordID *)recordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecord(withID:));
 
 #pragma mark Query Convenience Method
 /*! @discussion @c CKQueryOperation is the more configurable, @c CKOperation -based alternative to this method
@@ -48,23 +49,23 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  Queries invoked within a @c sharedCloudDatabase must specify a @c zoneID.  Cross-zone queries are not supported in a @c sharedCloudDatabase
  *  Queries that do not specify a @c zoneID will perform a query across all zones in the database.
  */
-- (void)performQuery:(CKQuery *)query inZoneWithID:(nullable CKRecordZoneID *)zoneID completionHandler:(void (^)(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error))completionHandler
+- (void)performQuery:(CKQuery *)query inZoneWithID:(nullable CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error))completionHandler
 CK_SWIFT_DEPRECATED("renamed to fetch(withQuery:inZoneWith:desiredKeys:resultsLimit:completionHandler:)", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
 #pragma mark Record Zone Convenience Methods
 /*! @c CKFetchRecordZonesOperation and @c CKModifyRecordZonesOperation are the more configurable, @c CKOperation -based alternatives to these methods */
-- (void)fetchAllRecordZonesWithCompletionHandler:(void (^)(NSArray<CKRecordZone *> * _Nullable zones, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(allRecordZones());
-- (void)fetchRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(recordZone(for:));
-- (void)saveRecordZone:(CKRecordZone *)zone completionHandler:(void (^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler;
-- (void)deleteRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (^)(CKRecordZoneID * _Nullable zoneID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecordZone(withID:));
+- (void)fetchAllRecordZonesWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKRecordZone *> * _Nullable zones, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(allRecordZones());
+- (void)fetchRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(recordZone(for:));
+- (void)saveRecordZone:(CKRecordZone *)zone completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler;
+- (void)deleteRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZoneID * _Nullable zoneID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecordZone(withID:));
 
 #pragma mark Subscription Convenience Methods
 /*! @c CKFetchSubscriptionsOperation and @c CKModifySubscriptionsOperation are the more configurable, @c CKOperation -based alternative to these methods */
-- (void)fetchSubscriptionWithID:(CKSubscriptionID)subscriptionID completionHandler:(void (^)(CKSubscription * _Nullable subscription, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
-- (void)fetchAllSubscriptionsWithCompletionHandler:(void (^)(NSArray<CKSubscription *> * _Nullable subscriptions, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_SWIFT_ASYNC_NAME(allSubscriptions());
-- (void)saveSubscription:(CKSubscription *)subscription completionHandler:(void (^)(CKSubscription * _Nullable subscription, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
-- (void)deleteSubscriptionWithID:(CKSubscriptionID)subscriptionID completionHandler:(void (^)(CKSubscriptionID _Nullable subscriptionID, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
+- (void)fetchSubscriptionWithID:(CKSubscriptionID)subscriptionID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKSubscription * _Nullable subscription, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
+- (void)fetchAllSubscriptionsWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKSubscription *> * _Nullable subscriptions, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_SWIFT_ASYNC_NAME(allSubscriptions());
+- (void)saveSubscription:(CKSubscription *)subscription completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKSubscription * _Nullable subscription, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+- (void)deleteSubscriptionWithID:(CKSubscriptionID)subscriptionID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKSubscriptionID _Nullable subscriptionID, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -2,25 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8411605B-6046-3A76-BB79-0AA088BCADFC
-  - target:          x86_64-maccatalyst
-    value:           8411605B-6046-3A76-BB79-0AA088BCADFC
-  - target:          x86_64h-macos
-    value:           5029B729-27ED-3BAF-B14D-EC5868C410E5
-  - target:          x86_64h-maccatalyst
-    value:           5029B729-27ED-3BAF-B14D-EC5868C410E5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4164117A-3586-3412-97EF-9851D97A3F4D
-  - target:          arm64e-maccatalyst
-    value:           4164117A-3586-3412-97EF-9851D97A3F4D
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1690.3.3
+current-version: 1690.5.4
 compatibility-version: 64
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

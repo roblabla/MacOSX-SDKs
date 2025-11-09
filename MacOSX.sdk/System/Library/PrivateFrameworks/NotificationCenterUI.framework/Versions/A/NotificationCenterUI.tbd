@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C2C020A7-9ECC-36D8-9E08-937ECCB120E5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           303A004F-BE52-3B0C-9BB5-E7CB0F412A72
 install-name:    '/System/Library/PrivateFrameworks/NotificationCenterUI.framework/Versions/A/NotificationCenterUI'
-current-version: 1235.1
+current-version: 1235.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

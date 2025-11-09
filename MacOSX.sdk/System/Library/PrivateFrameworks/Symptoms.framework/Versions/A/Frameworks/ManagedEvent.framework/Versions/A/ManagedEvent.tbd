@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1FD8B404-2E61-3D15-AF7D-CF9BA59D0E03
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           12ACBC17-F3A8-3FC8-9112-B21EB039506E
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/ManagedEvent.framework/Versions/A/ManagedEvent'
-current-version: 1732.60.4
+current-version: 1732.100.12
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kManagedEventKeyBackgroundCombinedFlowProperties, _kManagedEventKeyBackgroundSpecificFlowClassifications, 

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0786F238-271A-3551-BF1F-DFC555C1B8E4
-  - target:          x86_64-maccatalyst
-    value:           0786F238-271A-3551-BF1F-DFC555C1B8E4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6A00E850-0E32-3A5F-B762-2E038F219DBE
-  - target:          arm64e-maccatalyst
-    value:           6A00E850-0E32-3A5F-B762-2E038F219DBE
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 1123
+current-version: 1123.4.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

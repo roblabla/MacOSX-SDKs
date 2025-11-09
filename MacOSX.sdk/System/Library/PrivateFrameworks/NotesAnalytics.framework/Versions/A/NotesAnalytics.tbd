@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1598B88C-6B40-36D6-A21C-5DD719EC4AF3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AF8BEBAC-EB00-3622-A387-F9398335FAB2
 install-name:    '/System/Library/PrivateFrameworks/NotesAnalytics.framework/Versions/A/NotesAnalytics'
-current-version: 2185
+current-version: 2215
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ICCoreAnalyticsNoteViewApproachIOSDeeplinkThumbnail, _ICCoreAnalyticsNoteViewApproachIOSSafariMenuAffordance, 
@@ -30,22 +23,23 @@ exports:
                        _kICNAInactiveSessionID, _kICNAIntentsExtensionReferralURL, 
                        _kICNAInternalServerEnvironmentType, _kICNALastSnapshotRunningTimeStamp, 
                        _kICNALastSnapshotScheduleTimeStamp, _kICNANoteCreateApproachEnumValue, 
-                       _kICNANotificationCenterReferralURL, _kICNASharingExtensionReferralURL, 
-                       _kICNAShortcutItemReferralURL, _kICNASnapshotBackgroundTaskIdentifier, 
-                       _kICNASubtrackerNameAppDelegate, _kICNASubtrackerNameCollaborationController, 
-                       _kICNASubtrackerNameCreateNoteIntentHandler, _kICNASubtrackerNameDeleteDecisionController, 
-                       _kICNASubtrackerNameFolderListViewController, _kICNASubtrackerNameGalleryEditorViewController, 
-                       _kICNASubtrackerNameImportNoteProcessor, _kICNASubtrackerNameModernNoteListArrayController, 
-                       _kICNASubtrackerNameNotesBrowserViewController, _kICNASubtrackerNameSnapshotReporter, 
-                       _kICNATodayExtensionReferralURL, _kICNAUserActivityReferralURL ]
+                       _kICNANotificationCenterReferralURL, _kICNAPreSydneyDDataRemoved, 
+                       _kICNASharingExtensionReferralURL, _kICNAShortcutItemReferralURL, 
+                       _kICNASnapshotBackgroundTaskIdentifier, _kICNASubtrackerNameAppDelegate, 
+                       _kICNASubtrackerNameCollaborationController, _kICNASubtrackerNameCreateNoteIntentHandler, 
+                       _kICNASubtrackerNameDeleteDecisionController, _kICNASubtrackerNameFolderListViewController, 
+                       _kICNASubtrackerNameGalleryEditorViewController, _kICNASubtrackerNameImportNoteProcessor, 
+                       _kICNASubtrackerNameModernNoteListArrayController, _kICNASubtrackerNameNotesBrowserViewController, 
+                       _kICNASubtrackerNameSnapshotReporter, _kICNATodayExtensionReferralURL, 
+                       _kICNAUserActivityReferralURL ]
     objc-classes:    [ ICASAccountData, ICASAccountNotesTwoFactorItemData, ICASAccountPurpose, 
                        ICASAccountSnapshotData, ICASAccountSnapshotEvent, ICASAccountSnapshotItemData, 
                        ICASAccountType, ICASAccountTypeItemData, ICASActionMenuContextType, 
                        ICASActionMenuData, ICASActionMenuUsageType, ICASActionType, 
                        ICASActivityStreamDurationSummaryData, ICASActivityStreamSummaryEvent, 
-                       ICASAppData, ICASAppSessionEndEvent, ICASAppSessionResignEvent, 
-                       ICASAppSessionResumeEvent, ICASAppSessionStartEvent, ICASAttachmentActionData, 
-                       ICASAttachmentAddEvent, ICASAttachmentBrowserActionEvent, 
+                       ICASAppData, ICASAppReviewPromptRequestEvent, ICASAppSessionEndEvent, 
+                       ICASAppSessionResignEvent, ICASAppSessionResumeEvent, ICASAppSessionStartEvent, 
+                       ICASAttachmentActionData, ICASAttachmentAddEvent, ICASAttachmentBrowserActionEvent, 
                        ICASAttachmentBrowserTapEvent, ICASAttachmentData, ICASAttachmentItemTypeData, 
                        ICASAttachmentSnapshotData, ICASAttachmentSnapshotEvent, ICASAttachmentSnapshotItemData, 
                        ICASAttachmentUTIItemData, ICASAttributionSideBarViewEvent, 
@@ -96,7 +90,8 @@ exports:
                        ICASNotePasswordSuccessEvent, ICASNotePinEvent, ICASNoteResetPasswordEvent, 
                        ICASNoteSelectionData, ICASNoteSharrowEvent, ICASNoteSnapshotData, 
                        ICASNoteSnapshotEvent, ICASNoteSnapshotItemData, ICASNoteType, 
-                       ICASNoteUnpinEvent, ICASNoteViewEvent, ICASOnboardingScreenData, 
+                       ICASNoteUnpinEvent, ICASNoteViewEvent, ICASNotesToPagesContextPath, 
+                       ICASNotesToPagesContextPathData, ICASNotesToPagesEvent, ICASOnboardingScreenData, 
                        ICASOnboardingScreenType, ICASOnboardingScreenViewEvent, ICASOnboardingUserAction, 
                        ICASOperationType, ICASOrientationData, ICASOsInstallVariant, 
                        ICASPaletteEngagementData, ICASPaletteEngagementEvent, ICASPaletteEngagementType, 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4419D103-C0FC-3899-92CC-68F9C5E1F2B7
-  - target:          x86_64-maccatalyst
-    value:           4419D103-C0FC-3899-92CC-68F9C5E1F2B7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A5575412-7B88-37A5-96CE-EC9B3CE40E58
-  - target:          arm64e-maccatalyst
-    value:           A5575412-7B88-37A5-96CE-EC9B3CE40E58
 install-name:    '/System/Library/PrivateFrameworks/CMCapture.framework/Versions/A/CMCapture'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -774,8 +761,8 @@ exports:
                        _kFigCaptureSourceWhiteBalanceCalibrationsKey_Temperature, 
                        _kFigCaptureSourceWhiteBalanceOperationKey_DeviceWhiteBalanceGains, 
                        _kFigCaptureSourceWhiteBalanceOperationKey_Mode, _kFigCaptureSourceWhiteBalanceOperationKey_RequestID, 
-                       _kFigCaptureStreamNotificationPayloadKey_EventTimeStamp, _kFigCaptureStreamNotification_Discontinuity, 
-                       _kFigCaptureStreamNotification_InUseByAnotherApplication, 
+                       _kFigCaptureStreamNotificationPayloadKey_EventTimeStamp, _kFigCaptureStreamNotification_CMIOCenterStageRectOfInterestChanged, 
+                       _kFigCaptureStreamNotification_Discontinuity, _kFigCaptureStreamNotification_InUseByAnotherApplication, 
                        _kFigCaptureStreamNotification_OverflowDetected, _kFigCaptureStreamNotification_ResumedByUser, 
                        _kFigCaptureStreamNotification_StreamControlRelinquishedByAnotherClient, 
                        _kFigCaptureStreamNotification_StreamControlTakenByAnotherClient, 
@@ -987,19 +974,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
-  - target:          x86_64-maccatalyst
-    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
-  - target:          arm64e-maccatalyst
-    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1236,8 +1210,10 @@ exports:
                        _kFigCaptureSampleBufferMetadata_LTMSoftGain, _kFigCaptureSampleBufferMetadata_LensPositionPrecomputed, 
                        _kFigCaptureSampleBufferMetadata_NRFInputBracketCount, _kFigCaptureSampleBufferMetadata_NRFRegisteredBracketCount, 
                        _kFigCaptureSampleBufferMetadata_NRFSRLStatus, _kFigCaptureSampleBufferMetadata_NRFStatus, 
-                       _kFigCaptureSampleBufferMetadata_RedEyeReductionStatus, _kFigCaptureSampleBufferMetadata_RequestedExposureBias, 
-                       _kFigCaptureSampleBufferMetadata_SISMethod, _kFigCaptureSampleBufferMetadata_STFStillAnalyticsVersion, 
+                       _kFigCaptureSampleBufferMetadata_Option10Changed21, _kFigCaptureSampleBufferMetadata_Option18Changed5, 
+                       _kFigCaptureSampleBufferMetadata_Option50Changed1, _kFigCaptureSampleBufferMetadata_RedEyeReductionStatus, 
+                       _kFigCaptureSampleBufferMetadata_RequestedExposureBias, _kFigCaptureSampleBufferMetadata_SISMethod, 
+                       _kFigCaptureSampleBufferMetadata_STFStillAnalyticsVersion, 
                        _kFigCaptureSampleBufferMetadata_STFStillApplied, _kFigCaptureSampleBufferMetadata_STFStillCorrectionStrength, 
                        _kFigCaptureSampleBufferMetadata_STFStillSupported, _kFigCaptureSampleBufferMetadata_SWFRAnalyticsVersion, 
                        _kFigCaptureSampleBufferMetadata_SWFRApplied, _kFigCaptureSampleBufferMetadata_SWFRBackgroundCorrectionDirection, 

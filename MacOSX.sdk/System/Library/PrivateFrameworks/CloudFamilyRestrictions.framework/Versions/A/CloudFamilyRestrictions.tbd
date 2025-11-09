@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0D91537B-E073-3173-9406-52D017AFDB17
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           68338D83-5A80-3059-8471-D8047803649F
 install-name:    '/System/Library/PrivateFrameworks/CloudFamilyRestrictions.framework/Versions/A/CloudFamilyRestrictions'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

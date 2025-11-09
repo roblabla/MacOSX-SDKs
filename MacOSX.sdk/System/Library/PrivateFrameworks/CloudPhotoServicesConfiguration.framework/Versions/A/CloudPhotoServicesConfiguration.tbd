@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FC987A78-1403-3180-A80E-3B024316F5CD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           591A0BBE-8017-315A-8411-E2C12A515AC4
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoServicesConfiguration.framework/Versions/A/CloudPhotoServicesConfiguration'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CPSAccountAvailabilityDataClassURLKey, _CPSAccountDisplayNameKey, 

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D9BC356C-47D6-3A32-B060-BF2A4BEB86FD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6613ACC5-3E27-3497-A6D5-F99310D21B95
 install-name:    '/System/Library/PrivateFrameworks/NotesUI.framework/Versions/A/NotesUI'
-current-version: 2185
+current-version: 2215
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -41,6 +34,9 @@ exports:
                        '_$s11NotesShared18ShareActivityEventV0A2UIE19activityItemIdPartsSaySSGvg', 
                        '_$s11NotesShared18ShareActivityEventV0A2UIE19activityItemIdPartsSaySSGvpMV', 
                        '_$s11NotesShared18ShareActivityEventV0A2UIE23activityItemDestination8resolverAD0D6StreamV12DestinationsOSgAD0dE8ResolverC_tF', 
+                       '_$s11NotesShared19CloudRecordSnapshotV0A2UISo7CKShareCRszrlE20isOwnedByCurrentUserSbvg', 
+                       '_$s11NotesShared19CloudRecordSnapshotV0A2UISo7CKShareCRszrlE20isOwnedByCurrentUserSbvpMV', 
+                       '_$s11NotesShared19CloudRecordSnapshotV0A2UISo7CKShareCRszrlE6record4fromACyAFGSgAFm_10Foundation12NotificationVtcfC', 
                        '_$s11NotesShared21FallbackActivityEventV0A2UI0D21StreamItemConvertibleADMc', 
                        '_$s11NotesShared21FallbackActivityEventV0A2UI0D21StreamItemConvertibleADWP', 
                        '_$s11NotesShared21FallbackActivityEventV0A2UIE17activityItemTitle8resolver05SwiftF04TextVAD0dE8ResolverC_tF', 
@@ -835,6 +831,7 @@ exports:
                        _ICAuthorHighlightsControllerWillPerformHighlightUpdatesNotification, 
                        _ICChineseLanguageCode, _ICChineseSimplifiedLanguageCode, 
                        _ICChineseTraditionalLanguageCode, _ICCloudSyncingObjectDidUpdateShareNotification, 
+                       _ICCloudSyncingObjectShareDataKey, _ICCloudSyncingObjectShareRecordIDKey, 
                        _ICCurrentAppearanceType, _ICDisplayLinkDefaultPreferredFramesPerSecond, 
                        _ICDrawingPencilKitConvertedNotification, _ICDrawingPencilKitConvertedNotificationAutomaticKey, 
                        _ICDrawingPencilKitConvertedNotificationFinalAttachmentKey, 
@@ -964,9 +961,9 @@ exports:
                        ICThumbnailGeneratorNote, ICThumbnailGeneratorNoteAttachments, 
                        ICThumbnailKey, ICThumbnailService, ICTintedLayer, ICTodoButton, 
                        ICTrackedParagraph, ICUnifiedNoteContext, ICUnsupportedTextAttachmentWithFallbackImage, 
-                       ICVirtualSmartFolderItemIdentifier, NPNotePreviewProviderInternal, 
-                       NoteAttachmentPresentation, NoteAttachmentPresentationOccurence, 
-                       NoteHTMLEditorView, NoteHTMLEditorViewScriptMessageHandler, 
+                       ICUnsupportedTextAttachmentWithFallbackPDF, ICVirtualSmartFolderItemIdentifier, 
+                       NPNotePreviewProviderInternal, NoteAttachmentPresentation, 
+                       NoteAttachmentPresentationOccurence, NoteHTMLEditorView, NoteHTMLEditorViewScriptMessageHandler, 
                        NoteHTMLEditorViewURLSchemeHandler, NoteWKWebView, NotesCIDURLProtocol, 
                        TTTextController, TTTextStorage, TTZoomController, UserStyleSheetGenerator ]
     objc-ivars:      [ ICPressableAttachmentAccessibilityElement._textView ]

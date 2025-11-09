@@ -2,7 +2,7 @@
 //  INBillPayee.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED("INBillPayee is deprecated. There is no replacement", ios(10.3, 15.0), watchos(3.2, 8.0))
+API_DEPRECATED("INBillPayee is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INBillPayee : NSObject <NSCopying, NSSecureCoding>
 

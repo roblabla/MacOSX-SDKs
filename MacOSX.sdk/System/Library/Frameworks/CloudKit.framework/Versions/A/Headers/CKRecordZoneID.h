@@ -7,9 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
 @interface CKRecordZoneID : NSObject <NSSecureCoding, NSCopying>
 
 /*! Zone names must be 255 characters or less. Most UTF-8 characters are valid. */
@@ -23,4 +24,4 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

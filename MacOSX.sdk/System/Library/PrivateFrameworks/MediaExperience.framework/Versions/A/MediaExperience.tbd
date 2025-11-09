@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C4D1FF8A-8E03-3668-955D-C60AD80CC1A6
-  - target:          x86_64-maccatalyst
-    value:           C4D1FF8A-8E03-3668-955D-C60AD80CC1A6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F1789B78-5123-356A-885E-DE3BCE6E60D9
-  - target:          arm64e-maccatalyst
-    value:           F1789B78-5123-356A-885E-DE3BCE6E60D9
 install-name:    '/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

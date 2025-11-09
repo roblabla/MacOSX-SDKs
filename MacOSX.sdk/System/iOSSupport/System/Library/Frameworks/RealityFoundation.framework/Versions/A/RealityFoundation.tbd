@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           98F1452A-7AA2-3F20-AE2F-D2E0F60106FF
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           44CCC0A0-1C9F-329F-9204-35F97A37C6A3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 225.123
+current-version: 225.255.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -2333,6 +2326,7 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV22__addIntrospectionDatayys13OpaquePointerVSgFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV4fromACs7Decoder_p_tKcfC$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6__free2to6offsetySv_SitFZ$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6__load4from6offsetAA0E0_pSV_SitFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6encode2toys7Encoder_p_tKF$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAMc$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAWP$', 
@@ -5346,11 +5340,15 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8ResourceMp$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8ResourcePAAE10__fromCoreyxAA10__AssetRefVFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8ResourceTL$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvg$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvpMV$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTj$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$2$13.0$15.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvg$', 
@@ -8238,6 +8236,7 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV22__addIntrospectionDatayys13OpaquePointerVSgFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV4fromACs7Decoder_p_tKcfC$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6__free2to6offsetySv_SitFZ$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6__load4from6offsetAA0E0_pSV_SitFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentV6encode2toys7Encoder_p_tKF$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAMc$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAWP$', 
@@ -11251,11 +11250,15 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8ResourceMp$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8ResourcePAAE10__fromCoreyxAA10__AssetRefVFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8ResourceTL$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvg$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvpMV$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTj$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvg$', 
@@ -17219,10 +17222,13 @@ exports:
                        '_$s10RealityKit8REAngleFV7radiansSfvs', '_$s10RealityKit8REAngleFVMa', 
                        '_$s10RealityKit8REAngleFVMn', '_$s10RealityKit8REAngleFVN', 
                        '_$s10RealityKit8ResourceMp', '_$s10RealityKit8ResourcePAAE10__fromCoreyxAA10__AssetRefVFZ', 
+                       '_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTj', 
+                       '_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTq', 
                        '_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvg', '_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvpMV', 
                        '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTj', '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTq', 
-                       '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV', '_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ', 
-                       '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM', 
+                       '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV', '_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTj', 
+                       '_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTq', 
+                       '_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ', '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvg', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvpMV', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvs', 

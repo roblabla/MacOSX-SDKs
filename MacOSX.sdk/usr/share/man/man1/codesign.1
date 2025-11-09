@@ -325,6 +325,9 @@ Preserve the option flags (-o), see the OPTION FLAGS section below.
 .It runtime
 Preserve the hardened runtime version (-o runtime flag, --runtime-version option) instead of
 overriding or deriving the version.
+.It launch-constraints
+Preserve any existing launch constraints set on the binary rather than removing them. This
+option is ignored if any of the --launch-constraint-* options are set.
 .El
 For historical reasons, this option can be given without a value, which preserves all
 of these values as presently known. This use is deprecated and will eventually be removed;
@@ -364,6 +367,21 @@ OPTION FLAG is set, explicitly specify the hardened runtime version stored in th
 If this option is omitted, but the \fIruntime\fR
 OPTION FLAG is set then the hardened runtime version is omitted for non-Mach-O files and derived from the SDK
 version of Mach-O files.
+.It Fl -launch-constraint-self Ar path
+When signing, take the file at the given path and embed its contents in the signature
+as a launch constraint on this executable. The file at path should contain a plist
+expressing the desired launch constraint conditions. This executable will not launch
+if its launch constraint is not satisfied.
+.It Fl -launch-constraint-parent Ar path
+When signing, take the file at the given path and embed its contents in the signature
+as a launch constraint on this executable's parent. The file at path should contain a plist
+expressing the desired launch constraint conditions. This executable will not launch
+if its parent does not satisfy this launch constraint.
+.It Fl -launch-constraint-responsible Ar path
+When signing, take the file at the given path and embed its contents in the signature
+as a launch constraint on this executable's responsible process. The file at path should
+contain a plist expressing the desired launch constraint conditions. This executable
+will not launch if its responsible process does not satisfy this launch constraint.
 .El
 .Sh OPERATION
 .\" Signing

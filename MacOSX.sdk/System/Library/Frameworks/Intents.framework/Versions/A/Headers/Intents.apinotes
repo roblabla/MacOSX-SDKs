@@ -415,6 +415,17 @@ SwiftVersions:
     - Selector: 'resolveTargetTimerForDeleteTimer:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveTargetTimer(forDeleteTimer:with:)'
+  - Name: INEditMessageIntentHandling
+    Methods:
+    - Selector: 'confirmEditMessage:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(editMessage:completion:)'
+    - Selector: 'handleEditMessage:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(editMessage:completion:)'
+    - Selector: 'resolveEditedContentForEditMessage:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveEditedContent(forEditMessage:with:)'
   - Name: INEndWorkoutIntentHandling
     Methods:
     - Selector: 'confirmEndWorkout:completion:'

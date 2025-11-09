@@ -9,7 +9,7 @@
 
 #import <CloudKit/CKDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, CKSharingParticipantAccessOption) {
     /*! If specified, the system sharing UI will allow the user to share publicly i.e. anyone with the link has access. */
@@ -20,7 +20,7 @@ typedef NS_OPTIONS(NSUInteger, CKSharingParticipantAccessOption) {
 
     /*! Allow the user to configure the share with either access option. */
     CKSharingParticipantAccessOptionAny = CKSharingParticipantAccessOptionAnyoneWithLink | CKSharingParticipantAccessOptionSpecifiedRecipientsOnly,
-} API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_OPTIONS(NSUInteger, CKSharingParticipantPermissionOption) {
     /*! If specified, the system sharing UI will allow the user to grant participants read-only permissions. */
@@ -31,16 +31,16 @@ typedef NS_OPTIONS(NSUInteger, CKSharingParticipantPermissionOption) {
 
     /*! Allow the user to configure added share participants with either permission option. */
     CKSharingParticipantPermissionOptionAny = CKSharingParticipantPermissionOptionReadOnly | CKSharingParticipantPermissionOptionReadWrite,
-} API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
-CK_EXTERN
 API_AVAILABLE(macos(13.0), ios(16.0))
-API_UNAVAILABLE(watchos, tvos)
+API_UNAVAILABLE(tvos, watchos)
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4))
 @interface CKAllowedSharingOptions : NSObject <NSSecureCoding, NSCopying>
 - (instancetype)initWithAllowedParticipantPermissionOptions:(CKSharingParticipantPermissionOption)allowedParticipantPermissionOptions allowedParticipantAccessOptions:(CKSharingParticipantAccessOption)allowedParticipantAccessOptions;
 
-@property (nonatomic, assign) CKSharingParticipantPermissionOption allowedParticipantPermissionOptions;
-@property (nonatomic, assign) CKSharingParticipantAccessOption allowedParticipantAccessOptions;
+@property (atomic, assign) CKSharingParticipantPermissionOption allowedParticipantPermissionOptions;
+@property (atomic, assign) CKSharingParticipantAccessOption allowedParticipantAccessOptions;
 
 /*!
  Standard allowed options are most permissive i.e. @c allowedParticipantPermissionOptions = @c CKSharingParticipantPermissionOptionAny
@@ -49,6 +49,4 @@ API_UNAVAILABLE(watchos, tvos)
 @property (class, nonatomic, strong, readonly) CKAllowedSharingOptions *standardOptions;
 @end
 
-NS_ASSUME_NONNULL_END
-
-
+NS_HEADER_AUDIT_END(nullability, sendability)

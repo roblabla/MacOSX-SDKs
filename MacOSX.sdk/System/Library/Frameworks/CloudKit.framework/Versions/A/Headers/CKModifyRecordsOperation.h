@@ -9,7 +9,7 @@
 
 @class CKRecord, CKRecordID;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @enum CKRecordSavePolicy
  *
@@ -68,6 +68,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  @discussion This method is called at least once with a progress of 1.0 for every record. Intermediate progress is only reported for records that contain assets.
  *  It is possible for progress to regress when a retry is automatically triggered.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^perRecordProgressBlock)(CKRecord *record, double progress);
 
@@ -75,6 +77,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *
  *  @discussion Will not be invoked if @c perRecordSaveBlock is set.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^perRecordCompletionBlock)(CKRecord *record, NSError * _Nullable error) API_DEPRECATED_WITH_REPLACEMENT("perRecordSaveBlock", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
@@ -84,12 +88,16 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  @discussion Following a successful record save, this callback will be invoked with a nonnull @c record, and a nil @c error.
  *  Following a save failure due to a per-item error (@c CKErrorServerRecordChanged, for example), this callback will be invoked with a nil @c record, and a nonnull @c error
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^perRecordSaveBlock)(CKRecordID *recordID, CKRecord * _Nullable record, NSError * _Nullable error) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
 
 /*! @abstract Called on success or failure of a record deletion
  *
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^perRecordDeleteBlock)(CKRecordID *recordID, NSError * _Nullable error) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
 
@@ -100,10 +108,12 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  @c savedRecords, @c deletedRecordIDs and any @c CKPartialErrorsByItemIDKey errors are repeats of the data sent back in previous @c perRecordSaveBlock and @c perRecordDeleteBlock invocations
  *  This call happens as soon as the server has seen all record changes, and may be invoked while the server is processing the side effects of those changes.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^modifyRecordsCompletionBlock)(NSArray<CKRecord *> * _Nullable savedRecords, NSArray<CKRecordID *> * _Nullable deletedRecordIDs, NSError * _Nullable operationError)
 CK_SWIFT_DEPRECATED("Use modifyRecordsResultBlock instead", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

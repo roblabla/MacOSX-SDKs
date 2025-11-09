@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0948481C-00C9-3716-9EF7-D1402EAC4664
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AC42965F-371B-39A6-9FB0-D2899E6A5600
 install-name:    '/System/Library/PrivateFrameworks/SiriTranslationIntents.framework/Versions/A/SiriTranslationIntents'
 swift-abi-version: 7
 exports:

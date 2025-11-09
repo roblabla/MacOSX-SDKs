@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSArray.iig */
+/* iig(DriverKit-256.100.8) generated from OSArray.iig */
 
 /* OSArray.iig:1-36 */
 /*
@@ -374,7 +374,7 @@ public:
 
 #if !KERNEL
 
-class OSArrayInterface : public OSInterface
+class  OSArrayInterface : public OSInterface
 {
 public:
 };

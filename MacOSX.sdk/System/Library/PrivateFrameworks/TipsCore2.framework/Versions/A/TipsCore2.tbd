@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           00822E1D-658E-32EB-83BB-B1BD7B8D881A
-  - target:          x86_64-maccatalyst
-    value:           00822E1D-658E-32EB-83BB-B1BD7B8D881A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7E7A9709-82F8-30E3-A7A0-E0636E523FD5
-  - target:          arm64e-maccatalyst
-    value:           7E7A9709-82F8-30E3-A7A0-E0636E523FD5
 install-name:    '/System/Library/PrivateFrameworks/TipsCore2.framework/Versions/A/TipsCore2'
-current-version: 28
+current-version: 28.5.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -63,13 +50,7 @@ exports:
                        '_$s9TipsCore210EventQueryV5eventAA0C0Cvg', '_$s9TipsCore210EventQueryV5eventAA0C0CvpMV', 
                        '_$s9TipsCore210EventQueryV7requestSSvg', '_$s9TipsCore210EventQueryV7requestSSvpMV', 
                        '_$s9TipsCore210EventQueryVMa', '_$s9TipsCore210EventQueryVMn', 
-                       '_$s9TipsCore210EventQueryVN', '_$s9TipsCore210ProxyValueV07wrappedD0q_vM', 
-                       '_$s9TipsCore210ProxyValueV07wrappedD0q_vg', '_$s9TipsCore210ProxyValueV07wrappedD0q_vpMV', 
-                       '_$s9TipsCore210ProxyValueV07wrappedD0q_vs', '_$s9TipsCore210ProxyValueV18_enclosingInstance7wrapped7storageq_x_s7KeyPathCyxq_GAHyxACyxq_GGtciMZ', 
-                       '_$s9TipsCore210ProxyValueV18_enclosingInstance7wrapped7storageq_x_s7KeyPathCyxq_GAHyxACyxq_GGtcigZ', 
-                       '_$s9TipsCore210ProxyValueV18_enclosingInstance7wrapped7storageq_x_s7KeyPathCyxq_GAHyxACyxq_GGtcisZ', 
-                       '_$s9TipsCore210ProxyValueVMa', '_$s9TipsCore210ProxyValueVMn', 
-                       '_$s9TipsCore210ProxyValueVyACyxq_Gs7KeyPathCyxq_GcfC', '_$s9TipsCore210RuleRecordC10expressionSSvpMV', 
+                       '_$s9TipsCore210EventQueryVN', '_$s9TipsCore210RuleRecordC10expressionSSvpMV', 
                        '_$s9TipsCore210RuleRecordC13lastEvaluated10Foundation4DateVSgvpMV', 
                        '_$s9TipsCore210RuleRecordC14eventPredicateSo11NSPredicateCvg', 
                        '_$s9TipsCore210RuleRecordC14eventPredicateSo11NSPredicateCvpMV', 
@@ -360,14 +341,8 @@ exports:
                        '_$s9TipsCore215DonationOptionsVN', '_$s9TipsCore215DonationOptionsVSQAAMc', 
                        '_$s9TipsCore215DonationOptionsVSYAAMc', '_$s9TipsCore215DonationOptionsVs10SetAlgebraAAMc', 
                        '_$s9TipsCore215DonationOptionsVs25ExpressibleByArrayLiteralAAMc', 
-                       '_$s9TipsCore215DonationOptionsVs9OptionSetAAMc', '_$s9TipsCore217DictionaryStorageV12wrappedValueq_vM', 
-                       '_$s9TipsCore217DictionaryStorageV12wrappedValueq_vg', '_$s9TipsCore217DictionaryStorageV12wrappedValueq_vpMV', 
-                       '_$s9TipsCore217DictionaryStorageV12wrappedValueq_vs', '_$s9TipsCore217DictionaryStorageV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtciMZ', 
-                       '_$s9TipsCore217DictionaryStorageV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtcigZ', 
-                       '_$s9TipsCore217DictionaryStorageV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtcisZ', 
-                       '_$s9TipsCore217DictionaryStorageVMa', '_$s9TipsCore217DictionaryStorageVMn', 
-                       '_$s9TipsCore218MessageContentTypeO4textyA2CmFWC', '_$s9TipsCore218MessageContentTypeO6symbolyA2CmFWC', 
-                       '_$s9TipsCore218MessageContentTypeO8rawValueACSgSS_tcfC', 
+                       '_$s9TipsCore215DonationOptionsVs9OptionSetAAMc', '_$s9TipsCore218MessageContentTypeO4textyA2CmFWC', 
+                       '_$s9TipsCore218MessageContentTypeO6symbolyA2CmFWC', '_$s9TipsCore218MessageContentTypeO8rawValueACSgSS_tcfC', 
                        '_$s9TipsCore218MessageContentTypeO8rawValueSSvg', '_$s9TipsCore218MessageContentTypeO8rawValueSSvpMV', 
                        '_$s9TipsCore218MessageContentTypeOMa', '_$s9TipsCore218MessageContentTypeOMn', 
                        '_$s9TipsCore218MessageContentTypeON', '_$s9TipsCore218MessageContentTypeOSEAAMc', 
@@ -375,13 +350,7 @@ exports:
                        '_$s9TipsCore218MessageContentTypeOSYAAMc', '_$s9TipsCore218MessageContentTypeOSeAAMc', 
                        '_$s9TipsCore218MessageConvertableMp', '_$s9TipsCore218MessageConvertableP12messageValueAA0C0CvgTj', 
                        '_$s9TipsCore218MessageConvertableP12messageValueAA0C0CvgTq', 
-                       '_$s9TipsCore218MessageConvertableTL', '_$s9TipsCore218RepresentableValueV07wrappedD0q_vM', 
-                       '_$s9TipsCore218RepresentableValueV07wrappedD0q_vg', '_$s9TipsCore218RepresentableValueV07wrappedD0q_vpMV', 
-                       '_$s9TipsCore218RepresentableValueV07wrappedD0q_vs', '_$s9TipsCore218RepresentableValueV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtciMZ', 
-                       '_$s9TipsCore218RepresentableValueV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtcigZ', 
-                       '_$s9TipsCore218RepresentableValueV18_enclosingInstance7wrapped7storageq_x_s24ReferenceWritableKeyPathCyxq_GAHyxACyxq_GGtcisZ', 
-                       '_$s9TipsCore218RepresentableValueVMa', '_$s9TipsCore218RepresentableValueVMn', 
-                       '_$s9TipsCore219ConstellationParserC5parse8metaData09documentsG0SDySSypGSg10Foundation0G0V_AKtYaF', 
+                       '_$s9TipsCore218MessageConvertableTL', '_$s9TipsCore219ConstellationParserC5parse8metaData09documentsG0SDySSypGSg10Foundation0G0V_AKtYaF', 
                        '_$s9TipsCore219ConstellationParserC5parse8metaData09documentsG0SDySSypGSg10Foundation0G0V_AKtYaFTu', 
                        '_$s9TipsCore219ConstellationParserCMa', '_$s9TipsCore219ConstellationParserCMm', 
                        '_$s9TipsCore219ConstellationParserCMn', '_$s9TipsCore219ConstellationParserCMo', 

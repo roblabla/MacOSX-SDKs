@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9A6F0FDA-063B-3F23-AD11-C37643984EF4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           293C4542-9197-374A-AA1C-7AAA58BFFC8E
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
 swift-abi-version: 7
 exports:

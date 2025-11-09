@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6DEFA0A3-8D9A-3E1C-94C7-DECC75B59D10
-  - target:          x86_64-maccatalyst
-    value:           6DEFA0A3-8D9A-3E1C-94C7-DECC75B59D10
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4233F1AB-B2A6-3A16-B4DF-B2C55E47BFE3
-  - target:          arm64e-maccatalyst
-    value:           4233F1AB-B2A6-3A16-B4DF-B2C55E47BFE3
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 126.1.1
+current-version: 126.3.5
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -39,8 +26,9 @@ exports:
                        MPSNDArrayClamp, MPSNDArrayClampPrimaryGradient, MPSNDArrayClampSecondaryGradient, 
                        MPSNDArrayClampTertiaryGradient, MPSNDArrayConvolution2D, 
                        MPSNDArrayConvolution2DDescriptor, MPSNDArrayConvolution2DGradientWithInput, 
-                       MPSNDArrayConvolution2DGradientWithWeights, MPSNDArrayCos, 
-                       MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
+                       MPSNDArrayConvolution2DGradientWithWeights, MPSNDArrayConvolution3D, 
+                       MPSNDArrayConvolution3DGradientWithInput, MPSNDArrayConvolution3DGradientWithWeights, 
+                       MPSNDArrayCos, MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
                        MPSNDArrayCropResize, MPSNDArrayDecompositionLU, MPSNDArrayDecompositionQR, 
                        MPSNDArrayDepthwiseConvolution2DDescriptor, MPSNDArrayDepthwiseConvolutionKernel, 
                        MPSNDArrayDivision, MPSNDArrayDivisionPrimaryGradient, MPSNDArrayDivisionSecondaryGradient, 
@@ -119,5 +107,6 @@ exports:
                        MPSNDArrayConvolution2DGradientWithInput._autoTuningTarget, 
                        MPSNDArrayConvolution2DGradientWithWeights._autoTuning, MPSNDArrayConvolution2DGradientWithWeights._autoTuningParams, 
                        MPSNDArrayGatherGradientState._axis, MPSNDArrayGradientState._provenance, 
-                       MPSNDArrayGradientState._srcCount, MPSNDArrayGradientState._srcInfo ]
+                       MPSNDArrayGradientState._srcCount, MPSNDArrayGradientState._srcInfo, 
+                       MPSNDArrayMatrixMultiplication._autoTuningParams, MPSNDArrayMatrixMultiplication._autoTuningTarget ]
 ...

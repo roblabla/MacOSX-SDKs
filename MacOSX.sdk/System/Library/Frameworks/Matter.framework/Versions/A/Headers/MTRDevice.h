@@ -1,6 +1,6 @@
 /**
  *
- *    Copyright (c) 2022 Project CHIP Authors
+ *    Copyright (c) 2022-2023 Project CHIP Authors
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -44,7 +44,8 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  * retrieved when performing actions using a combination of MTRBaseDevice
  * and MTRAsyncCallbackQueue.
  */
-+ (instancetype)deviceWithNodeID:(uint64_t)nodeID deviceController:(MTRDeviceController *)deviceController;
++ (instancetype)deviceWithNodeID:(NSNumber *)nodeID
+                      controller:(MTRDeviceController *)controller API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
  * The current state of the device.
@@ -87,7 +88,7 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  *                    MTRDeviceResponseHandler.
  *
  * @param expectedValueInterval  maximum interval in milliseconds during which reads of the attribute will return the value being
- * written. This value will be clamped to timeoutMs
+ * written. This value must be within [1, UINT32_MAX], and will be clamped to this range.
  *
  * TODO: document that -readAttribute... will return the expected value for the [endpoint,cluster,attribute] until one of the
  * following:
@@ -96,7 +97,8 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  *  3. We succeed at writing the attribute.
  *  4. We fail at writing the attribute and give up on the write
  *
- * @param timeout   timeout in milliseconds for timed write, or nil.
+ * @param timeout   timeout in milliseconds for timed write, or nil. This value must be within [1, UINT16_MAX], and will be clamped
+ * to this range.
  * TODO: make timeout arguments uniform
  */
 - (void)writeAttributeWithEndpointID:(NSNumber *)endpointID
@@ -117,13 +119,18 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  * @param expectedValues  array of dictionaries containing the expected values in the same format as
  *                       attribute read completion handler. Requires MTRAttributePathKey values.
  *                       See MTRDeviceResponseHandler definition for dictionary details.
+ *                       The expectedValues and expectedValueInterval arguments need to be both
+ *                       nil or both non-nil, or both will be both ignored.
+ *
  * TODO: document better the expectedValues is how this command is expected to change attributes when read, and that the next
  * readAttribute will get these values
  *
  * @param expectedValueInterval  maximum interval in milliseconds during which reads of the attribute will return the value being
- * written. This value will be clamped to timeout
+ * written. If the value is less than 1, both this value and expectedValues will be ignored.
+            If this value is greater than UINT32_MAX, it will be clamped to UINT32_MAX.
  *
- * @param timeout   timeout in milliseconds for timed invoke, or nil.
+ * @param timeout   timeout in milliseconds for timed invoke, or nil. This value must be within [1, UINT16_MAX], and will be clamped
+ * to this range.
  *
  * @param completion  response handler will receive either values or error.
  */
@@ -134,8 +141,9 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
                      expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues
               expectedValueInterval:(NSNumber * _Nullable)expectedValueInterval
                  timedInvokeTimeout:(NSNumber * _Nullable)timeout
-                        clientQueue:(dispatch_queue_t)clientQueue
-                         completion:(MTRDeviceResponseHandler)completion;
+                              queue:(dispatch_queue_t)queue
+                         completion:(MTRDeviceResponseHandler)completion
+    API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
  * Open a commissioning window on the device.
@@ -163,15 +171,11 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
 @protocol MTRDeviceDelegate <NSObject>
 @required
 /**
- * device:stateChanged:
- *
  * @param state The current state of the device
  */
 - (void)device:(MTRDevice *)device stateChanged:(MTRDeviceState)state;
 
 /**
- * device:receivedAttributeReport:
- *
  * Notifies delegate of attribute reports from the MTRDevice
  *
  * @param attributeReport  An array of response-value objects as described in MTRDeviceResponseHandler
@@ -179,13 +183,46 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
 - (void)device:(MTRDevice *)device receivedAttributeReport:(NSArray<NSDictionary<NSString *, id> *> *)attributeReport;
 
 /**
- * subscriptionReceivedEventReport:
- *
  * Notifies delegate of event reports from the MTRDevice
  *
  * @param eventReport  An array of response-value objects as described in MTRDeviceResponseHandler
  */
 - (void)device:(MTRDevice *)device receivedEventReport:(NSArray<NSDictionary<NSString *, id> *> *)eventReport;
+
+@optional
+/**
+ * Notifies delegate the device is currently actively communicating.
+ *
+ * This can be used as a hint that now is a good time to send commands to the
+ * device, especially if the device is sleepy and might not be active very often.
+ */
+- (void)deviceBecameActive:(MTRDevice *)device API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+@end
+
+@interface MTRDevice (Deprecated)
+
+/**
+ * Deprecated MTRDevice APIs.
+ */
++ (instancetype)deviceWithNodeID:(uint64_t)nodeID
+                deviceController:(MTRDeviceController *)deviceController
+    API_DEPRECATED(
+        "Please use deviceWithNodeID:controller:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (void)invokeCommandWithEndpointID:(NSNumber *)endpointID
+                          clusterID:(NSNumber *)clusterID
+                          commandID:(NSNumber *)commandID
+                      commandFields:(id)commandFields
+                     expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues
+              expectedValueInterval:(NSNumber * _Nullable)expectedValueInterval
+                 timedInvokeTimeout:(NSNumber * _Nullable)timeout
+                        clientQueue:(dispatch_queue_t)queue
+                         completion:(MTRDeviceResponseHandler)completion
+    API_DEPRECATED("Please use "
+                   "invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:"
+                   "timedInvokeTimeout:queue:completion:",
+        ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 @end
 

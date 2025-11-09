@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accelerate
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accelerate
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 41
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
@@ -4223,7 +4223,7 @@ extension Accelerate.BNNS {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNS.FusedParametersLayer {
-  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
   public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
   public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputCGradient inputCGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
 }
@@ -9015,7 +9015,7 @@ extension Accelerate.BNNS {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNS.FusedParametersLayer {
-  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
   public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
   public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
 }
@@ -9839,9 +9839,9 @@ extension Swift.UInt64 : Accelerate.BNNSScalar {
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
   public init(dataType: Accelerate.BNNSDataType, shape: Accelerate.BNNS.Shape)
-  public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape)
+  public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape)
   public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape) where T : Accelerate.BNNSScalar
-  public static func allocateUninitialized(scalarType: Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor
+  public static func allocateUninitialized(scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor
   public static func allocate<C>(initializingFrom source: C, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where C : Swift.Collection, C.Element : Accelerate.BNNSScalar
   public static func allocate<Scalar>(randomIn range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where Scalar : Accelerate.BNNSScalar, Scalar : Swift.FixedWidthInteger
   public static func allocate<Scalar>(randomIn range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where Scalar : Accelerate.BNNSScalar, Scalar : Swift.BinaryFloatingPoint, Scalar.RawSignificand : Swift.FixedWidthInteger
@@ -9856,7 +9856,7 @@ extension Accelerate.BNNSNDArrayDescriptor {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
-  public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int)
+  public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int)
   public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int) where T : Accelerate.BNNSScalar
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -13249,7 +13249,7 @@ public protocol FusableLayerParameters {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedParametersLayer : Accelerate.BNNS.FusedLayer {
-    convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
   }
 }

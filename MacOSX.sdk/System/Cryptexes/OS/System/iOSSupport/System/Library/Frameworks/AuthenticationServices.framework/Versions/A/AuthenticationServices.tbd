@@ -1,18 +1,25 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           C4DC2574-B91A-3813-A6AA-E2B4B1426E15
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           DC8F1224-68F6-3033-A4AA-664F76832519
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 614.3.7
+current-version: 615.1.26
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
+    symbols:         [ '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12relyingPartySSvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12relyingPartySSvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV4nameSSvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV4nameSSvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVMa', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVMn', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVN', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaF', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaFTu', 
+                       _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
                        _ASAuthorizationAppleIDProviderCredentialRevokedNotification, 
                        _ASAuthorizationErrorDomain, _ASAuthorizationOperationImplicit, 
                        _ASAuthorizationOperationLogin, _ASAuthorizationOperationLogout, 
@@ -56,11 +63,13 @@ exports:
                        ASAuthorizationSecurityKeyPublicKeyCredentialRegistration, 
                        ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest, 
                        ASAuthorizationSingleSignOnCredential, ASAuthorizationSingleSignOnProvider, 
-                       ASAuthorizationSingleSignOnRequest, ASCredentialIdentityStore, 
+                       ASAuthorizationSingleSignOnRequest, ASAuthorizationWebBrowserPlatformPublicKeyCredential, 
+                       ASAuthorizationWebBrowserPublicKeyCredentialManager, ASCredentialIdentityStore, 
                        ASCredentialIdentityStoreState, ASCredentialProviderExtensionContext, 
                        ASCredentialProviderViewController, ASCredentialServiceIdentifier, 
                        ASPasswordCredential, ASPasswordCredentialIdentity, ASWebAuthenticationSession, 
                        ASWebAuthenticationSessionRequest, ASWebAuthenticationSessionRequestClient, 
-                       _ASIncomingCallObserver, _ASPasswordManagerDeleteAlertConfiguration, 
+                       _ASAccountManagerTipContent, _ASAccountManagerTipManager, 
+                       _ASIncomingCallObserver, _ASPasskeysLearnMoreContent, _ASPasswordManagerDeleteAlertConfiguration, 
                        _ASWebAuthenticationSessionRequestServer ]
 ...

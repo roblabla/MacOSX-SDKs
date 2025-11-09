@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           26BD7FBC-D201-300F-B1DC-F3E628205A54
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           19EB157A-66F1-3E09-A8B2-35F6BF30C021
 install-name:    '/System/Library/PrivateFrameworks/SleepHealthUI.framework/Versions/A/SleepHealthUI'
 swift-abi-version: 7
 exports:

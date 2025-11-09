@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios14.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _StoreKit_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 811.2.8
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _StoreKit_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 812.0.27
 import Foundation
 @_exported import StoreKit
 import Swift
@@ -39,7 +39,7 @@ extension SwiftUI.View {
   @available(macOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  public func offerCodeRedemption(isPresented: SwiftUI.Binding<Swift.Bool>, onCompletion: @escaping @_Concurrency.MainActor (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void = { _ in }) -> some SwiftUI.View
+  public func offerCodeRedemption(isPresented: SwiftUI.Binding<Swift.Bool>, onCompletion: @escaping @_Concurrency.MainActor (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void = { _ in }) -> some SwiftUI.View
   
 }
 @available(iOS 16.0, macCatalyst 16.0, macOS 13.0, *)

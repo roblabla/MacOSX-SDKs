@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4C623CBE-6FF4-3731-A647-6EEF7A6F51C7
-  - target:          x86_64-maccatalyst
-    value:           4C623CBE-6FF4-3731-A647-6EEF7A6F51C7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B63E11DD-4648-3355-A51C-C1B650654C0F
-  - target:          arm64e-maccatalyst
-    value:           B63E11DD-4648-3355-A51C-C1B650654C0F
 install-name:    '/usr/lib/system/libkeymgr.dylib'
 current-version: 31
 parent-umbrella:

@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/aaefcfd1-5c95-11ed-8734-2e32217d8374/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/namespacex/namespacex.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/namespacex/namespacex.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 200? Neil Madden (http://wiki.tcl.tk/12790)
 '\" Copyright (c) 200? Various (http://wiki.tcl.tk/1489)
 '\" Copyright (c) 2010 Documentation, Andreas Kupries

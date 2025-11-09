@@ -1,11 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ arm64-macos, arm64e-macos ]
-uuids:
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E6FC5ECA-275E-39BB-99E1-CC5DC0A67A64
 install-name:    '/System/Library/PrivateFrameworks/OAHSoftwareUpdate.framework/Versions/A/OAHSoftwareUpdate'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]

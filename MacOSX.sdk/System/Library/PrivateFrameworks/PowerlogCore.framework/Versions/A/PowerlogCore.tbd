@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F3B18815-21DB-3C48-B6D8-D838CEAD5EDB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           580A861C-0B90-33C0-AAD4-75982BB48277
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -147,7 +140,12 @@ exports:
                        _kPLTaskingDefaultsCheckPLTaskingRequest, _kPLTaskingEndNotification, 
                        _kPLTaskingStartNotification, _kPLThreadStatsDefaultPercent, 
                        _kPLThreadStatsDefaultThreshold, _kPLThreadStatsErrorDomain, 
-                       _kPLTimerFiredNotification, _logHandle, _nanoSecondsFromMachTime, 
+                       _kPLTimerFiredNotification, _kPPTMetadataDynamicTableKeyBuild, 
+                       _kPPTMetadataDynamicTableKeyMetadata, _kPPTMetadataDynamicTableKeyName, 
+                       _kPPTMetadataDynamicTableKeyVersion, _kPPTMetadataDynamicTableName, 
+                       _kPPTMetadataTableKeyCategory, _kPPTMetadataTableKeySubsystem, 
+                       _kPPTMetadataTableName, _kPPTMetadataVersionTableKeyVersion, 
+                       _kPPTMetadataVersionTableName, _logHandle, _nanoSecondsFromMachTime, 
                        _pptCoreStorageLog, _sqlLog ]
     objc-classes:    [ OperatorTask, PLAccountingOperator, PLActivity, PLActivityCriterion, 
                        PLActivityCriterionEntry, PLActivityCriterionTime, PLActivityScheduler, 
@@ -164,12 +162,13 @@ exports:
                        PLSQLStatement, PLSQLiteConnection, PLSemaphore, PLService, 
                        PLSleepState, PLState, PLStateTrackingComposition, PLStorageCache, 
                        PLStorageOperator, PLSubmissionConfig, PLSubmissionFile, PLSubmissionFileBDC, 
-                       PLSubmissionFileMSS, PLSubmissionFilePLL, PLSubmissionFileSP, 
-                       PLSubmissionRecord, PLSubmissions, PLThreadInfo, PLThreadStats, 
-                       PLTimeManager, PLTimeReference, PLTimeReferenceDynamic, PLTimeReferenceKernel, 
-                       PLTimeReferenceSystem, PLTimer, PLUserIdleState, PLUtilities, 
-                       PLValueComparison, PLValueUtilties, PLWakeState, PLXPCListenerOperatorComposition, 
-                       PLXPCRelay, PLXPCResponderOperatorComposition, PPTCollectionOperator, 
-                       PPTCoreStorage, PPTCoreUtilities, PPTEntryDefinition, PPTEntryKey, 
-                       PPTFlatStorage, PPTSQLStorage, PPTStorage, PowerlogCore, SignpostReaderHelper ]
+                       PLSubmissionFileCE, PLSubmissionFileMSS, PLSubmissionFilePLL, 
+                       PLSubmissionFileSP, PLSubmissionRecord, PLSubmissions, PLThreadInfo, 
+                       PLThreadStats, PLTimeManager, PLTimeReference, PLTimeReferenceDynamic, 
+                       PLTimeReferenceKernel, PLTimeReferenceSystem, PLTimer, PLUserIdleState, 
+                       PLUtilities, PLValueComparison, PLValueUtilties, PLWakeState, 
+                       PLXPCListenerOperatorComposition, PLXPCRelay, PLXPCResponderOperatorComposition, 
+                       PPTCollectionOperator, PPTCoreStorage, PPTCoreUtilities, PPTEntryDefinition, 
+                       PPTEntryKey, PPTFlatStorage, PPTSQLStorage, PPTStorage, PowerlogCore, 
+                       SignpostReaderHelper ]
 ...

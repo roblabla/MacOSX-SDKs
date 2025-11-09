@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4027E8F4-ECA0-382B-9E4E-DA737F94432A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BC5D9914-7C4A-357A-920C-E0197C5A6169
 install-name:    '/System/Library/PrivateFrameworks/SCEP.framework/Versions/A/SCEP'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

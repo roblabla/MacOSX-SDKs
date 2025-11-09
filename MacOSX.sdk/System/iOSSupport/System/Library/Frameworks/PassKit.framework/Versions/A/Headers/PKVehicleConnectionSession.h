@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKVehicleConnectionSession.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKVehicleConnectionSession.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //

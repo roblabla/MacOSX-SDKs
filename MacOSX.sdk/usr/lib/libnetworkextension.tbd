@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A3691E06-B61E-3C5E-AD9D-1DA17857AB73
-  - target:          x86_64-maccatalyst
-    value:           A3691E06-B61E-3C5E-AD9D-1DA17857AB73
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1D6BAB21-9E2B-3B55-B630-2DE7ADAB0FAA
-  - target:          arm64e-maccatalyst
-    value:           1D6BAB21-9E2B-3B55-B630-2DE7ADAB0FAA
 install-name:    '/usr/lib/libnetworkextension.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

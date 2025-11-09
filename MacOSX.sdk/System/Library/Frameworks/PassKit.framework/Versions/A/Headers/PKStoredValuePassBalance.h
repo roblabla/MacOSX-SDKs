@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKStoredValuePassBalance.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKStoredValuePassBalance.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EF67173F-A373-38F1-A379-C5D72FDD9B41
-  - target:          x86_64-maccatalyst
-    value:           EF67173F-A373-38F1-A379-C5D72FDD9B41
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           001B107A-517F-3AB7-8CAD-C8DB0AB11623
-  - target:          arm64e-maccatalyst
-    value:           001B107A-517F-3AB7-8CAD-C8DB0AB11623
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -77,11 +64,11 @@ exports:
                        _kTCCServiceSystemPolicyNetworkVolumes, _kTCCServiceSystemPolicyRemovableVolumes, 
                        _kTCCServiceSystemPolicySysAdminFiles, _kTCCServiceTencentWeibo, 
                        _kTCCServiceTwitter, _kTCCServiceUbiquity, _kTCCServiceUserAvailability, 
-                       _kTCCServiceUserTracking, _kTCCServiceWebKitIntelligentTrackingPrevention, 
-                       _kTCCServiceWillow, _kTCCSetNoKill, _tcc_attributed_entity_create, 
-                       _tcc_attributed_entity_get_path, _tcc_attributed_entity_get_type, 
-                       _tcc_authorization_cache_copy_authorization, _tcc_authorization_cache_create, 
-                       _tcc_authorization_cache_handle_authorization_changed_for_service, 
+                       _kTCCServiceUserTracking, _kTCCServiceWebBrowserPublicKeyCredential, 
+                       _kTCCServiceWebKitIntelligentTrackingPrevention, _kTCCServiceWillow, 
+                       _kTCCSetNoKill, _tcc_attributed_entity_create, _tcc_attributed_entity_get_path, 
+                       _tcc_attributed_entity_get_type, _tcc_authorization_cache_copy_authorization, 
+                       _tcc_authorization_cache_create, _tcc_authorization_cache_handle_authorization_changed_for_service, 
                        _tcc_authorization_cache_set_authorization, _tcc_authorization_cache_shared_instance, 
                        _tcc_authorization_change_monitor_create, _tcc_authorization_change_monitor_start_monitoring_service, 
                        _tcc_authorization_changed_for_service_notification_name, 

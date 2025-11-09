@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5834244E-FCE7-3ECC-807E-2B67CFEEA52B
-  - target:          x86_64-maccatalyst
-    value:           5834244E-FCE7-3ECC-807E-2B67CFEEA52B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F8D5BF12-898A-3562-B7EF-3B13CE643644
-  - target:          arm64e-maccatalyst
-    value:           F8D5BF12-898A-3562-B7EF-3B13CE643644
 install-name:    '/System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity'
 current-version: 0
 compatibility-version: 0
@@ -39,6 +26,7 @@ exports:
                        _MSEncryptionAlgorithmAES192_KeyWrap, _MSEncryptionAlgorithmAES256_CBC, 
                        _MSEncryptionAlgorithmAES256_CCM, _MSEncryptionAlgorithmAES256_ECB, 
                        _MSEncryptionAlgorithmAES256_GCM, _MSEncryptionAlgorithmAES256_KeyWrap, 
+                       _MSEncryptionAlgorithmDES_CBC, _MSEncryptionAlgorithmDES_ECB, 
                        _MSEncryptionAlgorithmRC2_CBC, _MSEncryptionAlgorithmRSA, 
                        _MSEncryptionAlgorithmRSAOAEP, _MSErrorASN1Domain, _MSErrorAllocationDomain, 
                        _MSErrorCMSDomain, _MSErrorCryptoDomain, _MSErrorKeychainDomain, 
@@ -419,7 +407,7 @@ exports:
     objc-classes:    [ MSAlgorithmIdentifier, MSCMSAppleExpirationTimeAttribute, 
                        MSCMSAppleHashAgilityAttribute, MSCMSAppleHashAgilityV2Attribute, 
                        MSCMSAttribute, MSCMSContentInfo, MSCMSContentTypeAttribute, 
-                       MSCMSCountersignatureAttribute, MSCMSEncryptionKeyPreferenceAttribute, 
+                       MSCMSCounterSignerInfo, MSCMSCountersignatureAttribute, MSCMSEncryptionKeyPreferenceAttribute, 
                        MSCMSEnvelopedData, MSCMSIdentifier, MSCMSMessageDigestAttribute, 
                        MSCMSMutableAttributeArray, MSCMSRecipientInfo, MSCMSSMIMECapabilitiesAttribute, 
                        MSCMSSignedData, MSCMSSignerInfo, MSCMSSigningTimeAttribute, 

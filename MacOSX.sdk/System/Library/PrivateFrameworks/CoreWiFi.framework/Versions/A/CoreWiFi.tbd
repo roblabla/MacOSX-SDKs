@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           97725B02-B677-34A9-B9C2-7FB4E50E99EF
-  - target:          x86_64-maccatalyst
-    value:           97725B02-B677-34A9-B9C2-7FB4E50E99EF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           29F3350F-F100-3334-ADEA-D8FE9FD8B611
-  - target:          arm64e-maccatalyst
-    value:           29F3350F-F100-3334-ADEA-D8FE9FD8B611
 install-name:    '/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi'
 current-version: 0
 compatibility-version: 0
@@ -23,31 +10,36 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CWFApple80211ErrorDomain, _CWFBSSPropertyAWDLRealTimeModeTimestampKey, 
                        _CWFBSSPropertyBSSIDKey, _CWFBSSPropertyChannelFlagsKey, _CWFBSSPropertyChannelKey, 
-                       _CWFBSSPropertyColocatedScopeIDKey, _CWFBSSPropertyLastAssociatedAtKey, 
-                       _CWFBSSPropertyLocationAccuracyKey, _CWFBSSPropertyLocationLatitudeKey, 
-                       _CWFBSSPropertyLocationLongitudeKey, _CWFBSSPropertyLocationTimestampKey, 
-                       _CWFBSSPropertyOSSpecificAttributesKey, _CWFBSSPropertyRouterIPAddressKey, 
-                       _CWFBSSPropertyRouterMACAddressKey, _CWFBootArgs, _CWFColocatedNetworksMatchingScanResult, 
-                       _CWFCompareLowDataMode, _CWFComparePHYMode, _CWFCompareSecurityType, 
+                       _CWFBSSPropertyColocated2GHzRNRChannelFlagsKey, _CWFBSSPropertyColocated2GHzRNRChannelKey, 
+                       _CWFBSSPropertyColocated5GHzRNRChannelFlagsKey, _CWFBSSPropertyColocated5GHzRNRChannelKey, 
+                       _CWFBSSPropertyDHCPServerIDKey, _CWFBSSPropertyDHCPv6ServerIDKey, 
+                       _CWFBSSPropertyIPv4NetworkSignatureKey, _CWFBSSPropertyIPv6NetworkSignatureKey, 
+                       _CWFBSSPropertyLastAssociatedAtKey, _CWFBSSPropertyLocationAccuracyKey, 
+                       _CWFBSSPropertyLocationLatitudeKey, _CWFBSSPropertyLocationLongitudeKey, 
+                       _CWFBSSPropertyLocationTimestampKey, _CWFBSSPropertyOSSpecificAttributesKey, 
+                       _CWFBootArgs, _CWFColocatedNetworksMatchingScanResult, _CWFCompareLowDataMode, 
+                       _CWFComparePHYMode, _CWFCompareSecurityType, _CWFContiguousMatchingByteChunks, 
                        _CWFConvertObjectToJSON, _CWFConvertPropertyListToJSON, _CWFCoreWiFiSpecificAttributesKey, 
                        _CWFCorrectEthernetAddressString, _CWFDebugDescriptionForLQMSummary, 
                        _CWFEthernetAddressDataFromString, _CWFEthernetAddressStringFromData, 
                        _CWFEventAutoJoinStatusKey, _CWFEventJoinStatusKey, _CWFEventLinkChangeStatusKey, 
                        _CWFEventLinkQualityMetricKey, _CWFEventRoamStatusKey, _CWFFastestPHYMode, 
                        _CWFFilteredScanResults, _CWFHexadecimalStringFromData, _CWFHumanReadableStringFromData, 
-                       _CWFInternalEventAutoJoinResultKey, _CWFInternalEventAutoJoinStateKey, 
-                       _CWFInternalEventAutoJoinTriggerKey, _CWFInternalEventErrorKey, 
-                       _CWFInternalEventIsAutoJoinKey, _CWFInternalEventKnownNetworkEventTypeKey, 
-                       _CWFInternalEventKnownNetworkProfileKey, _CWFInternalEventScanResultKey, 
-                       _CWFIsAutoJoinRetryTrigger, _CWFKnownNetworkAssociatedDuringAWDLRealTimeMode, 
-                       _CWFKnownNetworkSupportsSeamlessSSIDTransition, _CWFKnownNetworksStoreIdentifier, 
-                       _CWFKnownNetworksSupportingSeamlessSSIDTransitionForScanResult, 
+                       _CWFIPv4AddressesFromDHCPOptionData, _CWFIPv4Subnets, _CWFInternalEventAutoJoinResultKey, 
+                       _CWFInternalEventAutoJoinStateKey, _CWFInternalEventAutoJoinTriggerKey, 
+                       _CWFInternalEventErrorKey, _CWFInternalEventIsAutoJoinKey, 
+                       _CWFInternalEventKnownNetworkEventTypeKey, _CWFInternalEventKnownNetworkProfileKey, 
+                       _CWFInternalEventScanResultKey, _CWFIsAutoJoinRetryTrigger, 
+                       _CWFIsIPv4AddressLinkLocal, _CWFIsIPv4AddressLoopback, _CWFIsIPv6AddressLinkLocal, 
+                       _CWFKnownNetworkAssociatedDuringAWDLRealTimeMode, _CWFKnownNetworkSupportsSeamlessSSIDTransition, 
+                       _CWFKnownNetworksStoreIdentifier, _CWFKnownNetworksSupportingSeamlessSSIDTransitionForScanResult, 
                        _CWFLog, _CWFMachineSerialNumber, _CWFManagerErrorDomain, 
                        _CWFNetworkConfigurationTimeout, _CWFNetworkProfilePropertyAddReasonKey, 
                        _CWFNetworkProfilePropertyAddedAtKey, _CWFNetworkProfilePropertyAutoJoinDisabledKey, 
                        _CWFNetworkProfilePropertyBSSListKey, _CWFNetworkProfilePropertyBundleIDKey, 
                        _CWFNetworkProfilePropertyCaptiveProfileKey, _CWFNetworkProfilePropertyCarPlayNetworkKey, 
-                       _CWFNetworkProfilePropertyCarPlayUUIDKey, _CWFNetworkProfilePropertyEAPProfileKey, 
+                       _CWFNetworkProfilePropertyCarPlayUUIDKey, _CWFNetworkProfilePropertyDisable6EModeKey, 
+                       _CWFNetworkProfilePropertyDisable6EModeTimestampKey, _CWFNetworkProfilePropertyEAPProfileKey, 
                        _CWFNetworkProfilePropertyHiddenStateKey, _CWFNetworkProfilePropertyLastDiscoveredAtKey, 
                        _CWFNetworkProfilePropertyLastJoinedBySystemAtKey, _CWFNetworkProfilePropertyLastJoinedByUserAtKey, 
                        _CWFNetworkProfilePropertyLowDataModeKey, _CWFNetworkProfilePropertyMovingKey, 
@@ -61,10 +53,10 @@ exports:
                        _CWFNetworkProfilePropertyPasswordSharingDisabledKey, _CWFNetworkProfilePropertyPayloadUUIDKey, 
                        _CWFNetworkProfilePropertyPersonalHotspotKey, _CWFNetworkProfilePropertyPrivacyProxyBlockedReasonKey, 
                        _CWFNetworkProfilePropertyPrivacyProxyEnabledKey, _CWFNetworkProfilePropertyPublicKey, 
-                       _CWFNetworkProfilePropertySSIDKey, _CWFNetworkProfilePropertySupportedSecurityTypesKey, 
-                       _CWFNetworkProfilePropertySystemModeKey, _CWFNetworkProfilePropertyTransitionDisabledFlagsKey, 
-                       _CWFNetworkProfilePropertyUpdatedAtKey, _CWFNetworkProfilePropertyUserPreferredNetworkNamesKey, 
-                       _CWFNetworkProfilePropertyUserPreferredPasspointDomainsKey, 
+                       _CWFNetworkProfilePropertySSIDKey, _CWFNetworkProfilePropertyStandalone6GKey, 
+                       _CWFNetworkProfilePropertySupportedSecurityTypesKey, _CWFNetworkProfilePropertySystemModeKey, 
+                       _CWFNetworkProfilePropertyTransitionDisabledFlagsKey, _CWFNetworkProfilePropertyUpdatedAtKey, 
+                       _CWFNetworkProfilePropertyUserPreferredNetworkNamesKey, _CWFNetworkProfilePropertyUserPreferredPasspointDomainsKey, 
                        _CWFNetworkProfilePropertyWAPISubtypeKey, _CWFNetworkProfilePropertyWEPSubtypeKey, 
                        _CWFScanResultPropertyOSSpecificAttributesKey, _CWFScanResultSupportsSeamlessSSIDTransition, 
                        _CWFSecItemQueryPassword, _CWFSecItemSetPassword, _CWFSlowestPHYMode, 
@@ -87,7 +79,7 @@ exports:
                        CWFAutoJoinParameters, CWFAutoJoinStatistics, CWFAutoJoinStatus, 
                        CWFBSS, CWFChannel, CWFEAPCredentials, CWFEvent, CWFEventID, 
                        CWFInterface, CWFJoinStatus, CWFKeyValueStore, CWFLinkChangeStatus, 
-                       CWFLinkQualityMetric, CWFNetworkProfile, CWFRangingMeasurement, 
+                       CWFLinkQualityMetric, CWFNetworkProfile, CWFRNRBSS, CWFRangingMeasurement, 
                        CWFRangingPeer, CWFRangingResult, CWFRequestParameters, CWFRoamStatus, 
                        CWFScanParameters, CWFScanResult, CWFSensingParameters, CWFSensingResult, 
                        CWFUserSettings, CWFXPCConnection, CWFXPCEvent, CWFXPCManager, 

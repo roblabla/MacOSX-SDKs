@@ -92,8 +92,8 @@ Return the manager responsible for the default domain.
  In addition to using this method, your application/extension can register for
  pushes using the PKPushTypeFileProvider push type. Pushes of the form
  {
-     container-identifier = "<identifier>"
-     domain = "<domain identifier>"
+     "container-identifier": "<identifier>",
+     "domain": "<domain identifier>"
  }
  with a topic of "<your application identifier>.pushkit.fileprovider" will be
  translated into a call to signalEnumeratorForContainerItemIdentifier:completionHandler:.
@@ -267,14 +267,17 @@ FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
  The global progress exposes the two following data:
  - Number of items with an ongoing matching kind operation along with the grand total;
- - Number of bytes already transfered along with the total amount of bytes to transfer.
+ - Number of bytes already transferred along with the total amount of bytes to transfer.
 
- The grand total will only be reset to 0 when there are no operations left. If new operations of the matching kind arrive while
- the global progress is already ongoing, they will just be summed to the existing global progress.
+ `totalUnitCount` will only be reset when there are no operations left. If new operations of the matching
+ kind arrive while the global progress is already ongoing, they will just be summed to the existing global
+ progress.
 
- By default, when no matching kind operations are active, the progress has its values set to 1 and its state set to finished.
+ By default, when no matching kind operations are active, the progress has its values set to 1 and its state set
+ to finished.
 
- The progress will be updated on the main queue. It is to be retained by the caller and to be observed through KVO.
+ The progress will be updated on the main queue. It is to be retained by the caller and to be observed through
+ KVO.
 
  The two only supported values for kind are:
  - NSProgressFileOperationKindUploading

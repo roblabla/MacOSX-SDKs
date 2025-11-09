@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           09114B12-EC3D-3943-A1BD-9909EE2F85B6
-  - target:          x86_64-maccatalyst
-    value:           09114B12-EC3D-3943-A1BD-9909EE2F85B6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8737AB7F-91FA-3C06-B797-566A62D0751C
-  - target:          arm64e-maccatalyst
-    value:           8737AB7F-91FA-3C06-B797-566A62D0751C
 install-name:    '/usr/lib/system/libsystem_networkextension.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -39,9 +26,9 @@ exports:
                        _NEHelperSettingsSetArray, _NEHelperSettingsSetBool, _NEHelperSettingsSetNumber, 
                        _NEHelperVPNConfigurationExists, _NEHelperVPNSetEnabled, _g_ne_read_uuid_cache, 
                        _g_ne_uuid_cache_hit, _ne_copy_cached_bundle_identifier_for_uuid, 
-                       _ne_copy_cached_preferred_bundle_for_bundle_identifier, _ne_copy_cached_uuids_for_bundle_identifier, 
-                       _ne_copy_signature_info_for_pid, _ne_copy_signing_identifier_for_pid, 
-                       _ne_copy_uuid_cache, _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
+                       _ne_copy_cached_uuids_for_bundle_identifier, _ne_copy_signature_info_for_pid, 
+                       _ne_copy_signing_identifier_for_pid, _ne_copy_uuid_cache, 
+                       _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
                        _ne_is_sockaddr_valid, _ne_log_large_obj, _ne_log_obj, _ne_print_backtrace, 
                        _ne_privacy_dns_netagent_id, _ne_privacy_proxy_netagent_id, 
                        _ne_session_add_necp_drop_dest_from_dest_list, _ne_session_add_necp_drop_dest_from_path, 
@@ -69,20 +56,20 @@ exports:
                        _ne_session_policy_match_get_service, _ne_session_policy_match_get_service_action, 
                        _ne_session_policy_match_get_service_type, _ne_session_policy_match_is_drop, 
                        _ne_session_policy_match_is_flow_divert, _ne_session_policy_match_service_is_registered, 
-                       _ne_session_release, _ne_session_retain, _ne_session_send_barrier, 
-                       _ne_session_service_get_dns_service_id, _ne_session_service_get_dns_service_id_for_interface, 
-                       _ne_session_service_matches_address, _ne_session_service_matches_address_for_interface, 
-                       _ne_session_set_event_handler, _ne_session_set_socket_attributes, 
-                       _ne_session_set_socket_context_attribute, _ne_session_set_socket_tracker_attributes, 
-                       _ne_session_should_disable_nexus, _ne_session_start, _ne_session_start_on_behalf_of, 
-                       _ne_session_start_with_options, _ne_session_status_to_string, 
-                       _ne_session_stop, _ne_session_stop_all_with_plugin_type, _ne_session_stop_reason_to_string, 
-                       _ne_session_type_to_string, _ne_session_use_as_system_vpn, 
-                       _ne_session_vod_evaluate_connection_present, _ne_session_vpn_include_all_networks_configs_present, 
-                       _ne_socket_set_attribution, _ne_socket_set_domains, _ne_socket_set_is_app_initiated, 
-                       _ne_socket_set_website_attribution, _ne_tracker_build_cache, 
-                       _ne_tracker_build_trie, _ne_tracker_check_info_changed, _ne_tracker_clear_cache, 
-                       _ne_tracker_context_get_domain, _ne_tracker_context_get_domain_owner, 
+                       _ne_session_random_port_fallback, _ne_session_release, _ne_session_retain, 
+                       _ne_session_send_barrier, _ne_session_service_get_dns_service_id, 
+                       _ne_session_service_get_dns_service_id_for_interface, _ne_session_service_matches_address, 
+                       _ne_session_service_matches_address_for_interface, _ne_session_set_event_handler, 
+                       _ne_session_set_socket_attributes, _ne_session_set_socket_context_attribute, 
+                       _ne_session_set_socket_tracker_attributes, _ne_session_should_disable_nexus, 
+                       _ne_session_start, _ne_session_start_on_behalf_of, _ne_session_start_with_options, 
+                       _ne_session_status_to_string, _ne_session_stop, _ne_session_stop_all_with_plugin_type, 
+                       _ne_session_stop_reason_to_string, _ne_session_type_to_string, 
+                       _ne_session_use_as_system_vpn, _ne_session_vod_evaluate_connection_present, 
+                       _ne_session_vpn_include_all_networks_configs_present, _ne_socket_set_attribution, 
+                       _ne_socket_set_domains, _ne_socket_set_is_app_initiated, _ne_socket_set_website_attribution, 
+                       _ne_tracker_build_cache, _ne_tracker_build_trie, _ne_tracker_check_info_changed, 
+                       _ne_tracker_clear_cache, _ne_tracker_context_get_domain, _ne_tracker_context_get_domain_owner, 
                        _ne_tracker_context_is_from_app_list, _ne_tracker_context_is_from_web_list, 
                        _ne_tracker_get_ddg_dictionary, _ne_tracker_lookup_app_domains, 
                        _ne_tracker_set_test_domains, _ne_tracker_validate_domain, 

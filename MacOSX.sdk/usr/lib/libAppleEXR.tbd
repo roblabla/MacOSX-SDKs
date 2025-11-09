@@ -2,25 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B1542D34-DF3F-3BBB-8642-4593DECAF321
-  - target:          x86_64-maccatalyst
-    value:           B1542D34-DF3F-3BBB-8642-4593DECAF321
-  - target:          x86_64h-macos
-    value:           83E4626D-EFB5-3E22-82F4-45E3A49F08C9
-  - target:          x86_64h-maccatalyst
-    value:           83E4626D-EFB5-3E22-82F4-45E3A49F08C9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B8A36033-B217-3440-8236-0D920F277D82
-  - target:          arm64e-maccatalyst
-    value:           B8A36033-B217-3440-8236-0D920F277D82
 install-name:    '/usr/lib/libAppleEXR.dylib'
-current-version: 3.0.3
+current-version: 3.0.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

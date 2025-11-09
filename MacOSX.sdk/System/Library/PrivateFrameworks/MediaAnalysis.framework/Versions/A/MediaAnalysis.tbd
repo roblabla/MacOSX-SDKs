@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CA9FC18C-A250-356D-8D01-713E6E5DE39A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E62E5711-136D-3684-95BC-0B8AEF656080
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysis.framework/Versions/A/MediaAnalysis'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

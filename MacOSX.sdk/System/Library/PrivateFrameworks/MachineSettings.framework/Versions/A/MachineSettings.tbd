@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           722E2602-DFAB-31F6-95EB-24396F177603
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E0A82A2E-B435-3669-B679-EAB6944FB1F5
 install-name:    '/System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

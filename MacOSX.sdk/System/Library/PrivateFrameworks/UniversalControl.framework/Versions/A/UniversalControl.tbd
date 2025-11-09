@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F839BBA9-750B-3701-BAD9-4C9FF04A9DBE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           66689CFC-6E6F-31B1-AAE7-A2E0BB287AC7
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 124.3
+current-version: 124.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -680,10 +673,10 @@ exports:
                        '_$s16UniversalControl0aB7DisplayC14typeIdentifier22UniformTypeIdentifiers6UTTypeVSgvsTq', 
                        '_$s16UniversalControl0aB7DisplayC16debugDescriptionSSvg', 
                        '_$s16UniversalControl0aB7DisplayC16debugDescriptionSSvpMV', 
-                       '_$s16UniversalControl0aB7DisplayC2eeoiySbAC_ACtFZ', '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifierAcA0abC2IDV_SSSgAMSgAC11OrientationVSgSo6CGSizeVATSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgtcfC', 
-                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifierAcA0abC2IDV_SSSgAMSgAC11OrientationVSgSo6CGSizeVATSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgtcfCTj', 
-                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifierAcA0abC2IDV_SSSgAMSgAC11OrientationVSgSo6CGSizeVATSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgtcfCTq', 
-                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifierAcA0abC2IDV_SSSgAMSgAC11OrientationVSgSo6CGSizeVATSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgtcfc', 
+                       '_$s16UniversalControl0aB7DisplayC2eeoiySbAC_ACtFZ', '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifier8vendorID07productR0AcA0abcR0V_SSSgAOSgAC11OrientationVSgSo6CGSizeVAVSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgs6UInt32VSgA3_tcfC', 
+                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifier8vendorID07productR0AcA0abcR0V_SSSgAOSgAC11OrientationVSgSo6CGSizeVAVSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgs6UInt32VSgA3_tcfCTj', 
+                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifier8vendorID07productR0AcA0abcR0V_SSSgAOSgAC11OrientationVSgSo6CGSizeVAVSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgs6UInt32VSgA3_tcfCTq', 
+                       '_$s16UniversalControl0aB7DisplayC2id11displayName13mirrorPrimary11orientation12physicalSize05pixelK010screenRect14typeIdentifier8vendorID07productR0AcA0abcR0V_SSSgAOSgAC11OrientationVSgSo6CGSizeVAVSo6CGRectV22UniformTypeIdentifiers6UTTypeVSgs6UInt32VSgA3_tcfc', 
                        '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvMTj', '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvMTq', 
                        '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvgTj', '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvgTq', 
                        '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvpMV', '_$s16UniversalControl0aB7DisplayC2idAA0abC2IDVvsTj', 
@@ -718,6 +711,13 @@ exports:
                        '_$s16UniversalControl0aB7DisplayC8isMirrorSbvMTq', '_$s16UniversalControl0aB7DisplayC8isMirrorSbvgTj', 
                        '_$s16UniversalControl0aB7DisplayC8isMirrorSbvgTq', '_$s16UniversalControl0aB7DisplayC8isMirrorSbvpMV', 
                        '_$s16UniversalControl0aB7DisplayC8isMirrorSbvsTj', '_$s16UniversalControl0aB7DisplayC8isMirrorSbvsTq', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvMTj', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvMTq', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvgTj', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvgTq', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvpMV', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvsTj', 
+                       '_$s16UniversalControl0aB7DisplayC8vendorIDs6UInt32VSgvsTq', 
                        '_$s16UniversalControl0aB7DisplayC9RectangleV1x1y5width6heightAESi_S3itcfC', 
                        '_$s16UniversalControl0aB7DisplayC9RectangleV1xSivM', '_$s16UniversalControl0aB7DisplayC9RectangleV1xSivg', 
                        '_$s16UniversalControl0aB7DisplayC9RectangleV1xSivpMV', '_$s16UniversalControl0aB7DisplayC9RectangleV1xSivs', 
@@ -755,6 +755,13 @@ exports:
                        '_$s16UniversalControl0aB7DisplayC9pixelSizeSo6CGSizeVvpMV', 
                        '_$s16UniversalControl0aB7DisplayC9pixelSizeSo6CGSizeVvsTj', 
                        '_$s16UniversalControl0aB7DisplayC9pixelSizeSo6CGSizeVvsTq', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvMTj', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvMTq', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvgTj', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvgTq', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvpMV', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvsTj', 
+                       '_$s16UniversalControl0aB7DisplayC9productIDs6UInt32VSgvsTq', 
                        '_$s16UniversalControl0aB7DisplayCMa', '_$s16UniversalControl0aB7DisplayCMm', 
                        '_$s16UniversalControl0aB7DisplayCMn', '_$s16UniversalControl0aB7DisplayCMo', 
                        '_$s16UniversalControl0aB7DisplayCMu', '_$s16UniversalControl0aB7DisplayCN', 

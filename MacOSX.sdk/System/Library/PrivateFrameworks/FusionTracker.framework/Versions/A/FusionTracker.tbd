@@ -1,20 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           63CD0933-B936-300C-884E-3B9FC7A891B2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3831F7B8-9986-3FAA-967F-9A89EC39C4F1
 install-name:    '/System/Library/PrivateFrameworks/FusionTracker.framework/Versions/A/FusionTracker'
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2ft20SiameseRpnStageErrorE, __ZTIN2ik11EspressoNetE, 
                        __ZTIN2ik13TensorStorageE, __ZTIN2ik14EspressoTensorE, __ZTIN2ik14InferenceErrorE, 
-                       __ZTIN2ik17PixelBufferTensorE, __ZTIN2ik4core14EspressoBinderE, 
-                       __ZTIN2ik4core18PixelBufferStorageE, __ZTIN2ik4core21EspressoBufferStorageE, 
+                       __ZTIN2ik17PixelBufferTensorE, __ZTIN2ik20PixelBufferScopeLockE, 
+                       __ZTIN2ik4core14EspressoBinderE, __ZTIN2ik4core18PixelBufferStorageE, 
+                       __ZTIN2ik4core21EspressoBufferStorageE, __ZTIN2ik4core24CorePixelBufferScopeLockE, 
                        __ZTIN2ik6BinderE, __ZTIN2ik6TensorE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN2ft10ProxyTrackENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN2ft11KalmanTrackENS_9allocatorIS2_EEEE, 
@@ -27,8 +21,9 @@ exports:
                        __ZTINSt3__120__shared_ptr_pointerIPhNS_10shared_ptrIA_hE27__shared_ptr_default_deleteIS3_hEENS_9allocatorIhEEEE, 
                        __ZTSN2ft20SiameseRpnStageErrorE, __ZTSN2ik11EspressoNetE, 
                        __ZTSN2ik13TensorStorageE, __ZTSN2ik14EspressoTensorE, __ZTSN2ik14InferenceErrorE, 
-                       __ZTSN2ik17PixelBufferTensorE, __ZTSN2ik4core14EspressoBinderE, 
-                       __ZTSN2ik4core18PixelBufferStorageE, __ZTSN2ik4core21EspressoBufferStorageE, 
+                       __ZTSN2ik17PixelBufferTensorE, __ZTSN2ik20PixelBufferScopeLockE, 
+                       __ZTSN2ik4core14EspressoBinderE, __ZTSN2ik4core18PixelBufferStorageE, 
+                       __ZTSN2ik4core21EspressoBufferStorageE, __ZTSN2ik4core24CorePixelBufferScopeLockE, 
                        __ZTSN2ik6BinderE, __ZTSN2ik6TensorE, __ZTSNSt3__110shared_ptrIA_hE27__shared_ptr_default_deleteIS1_hEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceIN2ft10ProxyTrackENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN2ft11KalmanTrackENS_9allocatorIS2_EEEE, 

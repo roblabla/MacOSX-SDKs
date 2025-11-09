@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D75692D3-65DE-3282-8898-099FDF5558A4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0573795D-E158-3B88-B9C1-FF845A03346B
 install-name:    '/System/Library/PrivateFrameworks/Settings.framework/Versions/A/Settings'
 current-version: 0
 compatibility-version: 0
@@ -561,10 +554,10 @@ exports:
                        '_$s8Settings22CloudSyncConfigurationCMa', '_$s8Settings22CloudSyncConfigurationCMn', 
                        '_$s8Settings22CloudSyncConfigurationCMo', '_$s8Settings22CloudSyncConfigurationCMu', 
                        '_$s8Settings22CloudSyncConfigurationCN', '_$s8Settings22CloudSyncConfigurationCfD', 
-                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchorACSSSg_AFtcfC', 
-                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchorACSSSg_AFtcfCTj', 
-                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchorACSSSg_AFtcfCTq', 
-                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchorACSSSg_AFtcfc', 
+                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchor12contentWidthACSSSg_AG12CoreGraphics7CGFloatVSgtcfC', 
+                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchor12contentWidthACSSSg_AG12CoreGraphics7CGFloatVSgtcfCTj', 
+                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchor12contentWidthACSSSg_AG12CoreGraphics7CGFloatVSgtcfCTq', 
+                       '_$s8Settings24InitializationParametersC14itemIdentifier6anchor12contentWidthACSSSg_AG12CoreGraphics7CGFloatVSgtcfc', 
                        '_$s8Settings24InitializationParametersC20supportsSecureCodingSbvgZ', 
                        '_$s8Settings24InitializationParametersC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s8Settings24InitializationParametersC5coderACSgSo7NSCoderC_tcfCTj', 

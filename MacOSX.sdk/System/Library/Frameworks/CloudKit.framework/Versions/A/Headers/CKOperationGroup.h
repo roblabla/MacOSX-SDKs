@@ -11,7 +11,7 @@
 
 @class CKOperationConfiguration;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @enum CKOperationGroupTransferSize
  *  @abstract Valid values for expectedSendSize and expectedReceiveSize
@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, CKOperationGroupTransferSize) {
  *  You associate @c CKOperationGroup s with@c  CKOperation s by setting the @c CKOperation.group property.  Create a new @c CKOperationGroup instance for each distinct user action.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
 @interface CKOperationGroup : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -102,4 +103,4 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

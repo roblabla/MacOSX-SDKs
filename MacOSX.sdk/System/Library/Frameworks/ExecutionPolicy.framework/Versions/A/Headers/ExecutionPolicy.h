@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(10.15), macCatalyst(13.0))
 @interface EPExecutionPolicy : NSObject
 
-/*!
+/*
  @method init
  Initialization sets up the IPC resources required, allowing the caller to manage the initialization overhead.
  */
 - (instancetype)init;
 
-/*!
+/*
  @method addPolicyExceptionForURL
  Creates a system-wide exception to bypass execution policy for the bundle or executable at
  the given location.

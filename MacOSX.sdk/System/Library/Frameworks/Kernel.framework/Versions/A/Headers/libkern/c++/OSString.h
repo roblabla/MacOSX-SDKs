@@ -53,7 +53,9 @@ typedef OSString const* OSStringConstPtr;
  *
  * For internal use.
  */
-enum { kOSStringNoCopy = 0x00000001 };
+enum {
+	kOSStringNoCopy         = 0x001,
+};
 
 
 /*!

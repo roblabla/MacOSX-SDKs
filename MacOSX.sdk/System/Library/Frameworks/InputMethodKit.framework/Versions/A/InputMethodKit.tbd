@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D222B29F-7953-3933-8536-4B83B9FF5B9D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           79C39B51-F09B-3C40-A581-A166C158B084
 install-name:    '/System/Library/Frameworks/InputMethodKit.framework/Versions/A/InputMethodKit'
 current-version: 506
 exports:

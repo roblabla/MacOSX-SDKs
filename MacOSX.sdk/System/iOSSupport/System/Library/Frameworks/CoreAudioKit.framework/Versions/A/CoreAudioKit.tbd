@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           437B0BD9-23BF-3635-9EF5-705772980D57
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           DC52ADD8-6248-3244-A23E-702D93F7F531
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
 swift-abi-version: 7
 exports:
@@ -398,35 +391,7 @@ exports:
                        '_$s12CoreAudioKit24AUVerticalSegmentControlCMo', '_$s12CoreAudioKit24AUVerticalSegmentControlCMu', 
                        '_$s12CoreAudioKit24AUVerticalSegmentControlCN', '_$s12CoreAudioKit24AUVerticalSegmentControlCfD', 
                        _CAUI_createCustomViewForAudioUnit, _CAUI_createGenericViewForAudioUnit, 
-                       _CAUI_retrieveHostIconForAudioUnit, '_OBJC_CLASS_$__TtC12CoreAudioKit13AUKnobControl', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit13CAAUGraphView', '_OBJC_CLASS_$__TtC12CoreAudioKit14CAAUEQViewBase', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit15CAAUEQGraphView', '_OBJC_CLASS_$__TtC12CoreAudioKit16AUDelayGraphView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit16AUDistortionView', '_OBJC_CLASS_$__TtC12CoreAudioKit16CAAUEQHeaderView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit16CAAUSettingsView', '_OBJC_CLASS_$__TtC12CoreAudioKit17AUVerticalTabView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit17CAAUFilterControl', '_OBJC_CLASS_$__TtC12CoreAudioKit17CACompressionView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit18AULabeledMeterView', '_OBJC_CLASS_$__TtC12CoreAudioKit18AULimiterGraphView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit18CANBandEQGraphView', '_OBJC_CLASS_$__TtC12CoreAudioKit21AUGenericViewInternal', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit21AULimiterControlsView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit21CAAUNBandEQHeaderView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit21CAAdjustingHeaderView', 
-                       '_OBJC_CLASS_$__TtC12CoreAudioKit24AUVerticalSegmentControl', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit13AUKnobControl', '_OBJC_METACLASS_$__TtC12CoreAudioKit13CAAUGraphView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit14CAAUEQViewBase', '_OBJC_METACLASS_$__TtC12CoreAudioKit15CAAUEQGraphView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit16AUDelayGraphView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit16AUDistortionView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit16CAAUEQHeaderView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit16CAAUSettingsView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit17AUVerticalTabView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit17CAAUFilterControl', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit17CACompressionView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit18AULabeledMeterView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit18AULimiterGraphView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit18CANBandEQGraphView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit21AUGenericViewInternal', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit21AULimiterControlsView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit21CAAUNBandEQHeaderView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit21CAAdjustingHeaderView', 
-                       '_OBJC_METACLASS_$__TtC12CoreAudioKit24AUVerticalSegmentControl' ]
+                       _CAUI_retrieveHostIconForAudioUnit ]
     objc-classes:    [ AUAudioUnitRemoteViewController, AUAudioUnitViewConfiguration, 
                        AUAudioUnitViewService, AUGenericViewController, AUViewController, 
                        CABTMIDICentralViewController, CABTMIDILocalPeripheralViewController, 

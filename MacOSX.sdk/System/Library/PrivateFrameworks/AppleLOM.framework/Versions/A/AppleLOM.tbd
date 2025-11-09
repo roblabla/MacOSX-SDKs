@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C8C4E245-7E65-3B32-84EE-BBE9450E2DEC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C17FF82F-3A20-3D26-AA95-3801163E9D25
 install-name:    '/System/Library/PrivateFrameworks/AppleLOM.framework/Versions/A/AppleLOM'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,12 +8,13 @@ exports:
                        _LOMDumpDeviceStatusData, _LOMEnqueuePersistentLog, _LOMLog, 
                        _LOMLogAnalytics, _LOMLogAnalyticsForName, _LOMNVEnableNetworkInterface, 
                        _LOMNVGetIPV6Addresses, _LOMNVGetIPV6Interfaces, _LOMNVGetSecondaryIPV6Addresses, 
-                       _LOMNVIsSupportedStatus, _LOMNVReceiveData, _LOMNVSendData, 
-                       _LOMNVSendMagicPacketForIPV6, _LOMNVSetupNetworkPolicy, _LOMSMCreateTransitionsFromStatesToDestination, 
-                       _LOMSecCopyControllerCertsAndKeyFromPresistantRef, _LOMSecCopyKeychainItemFromPersistantRef, 
-                       _LOMSecCreateCertificateFromData, _LOMSecCreateCertificatesDataFromPersistantRef, 
-                       _LOMSecCreateDataFromCertificate, _LOMSecCreateDataFromPrivateKey, 
-                       _LOMSecCreateDeviceDataFromCertsAndKey, _LOMSecCreateIdentityFromPersistantCertificateAndKeyData, 
+                       _LOMNVGetSupportedInterfaces, _LOMNVIsSupportedStatus, _LOMNVReceiveData, 
+                       _LOMNVSendData, _LOMNVSendMagicPacketForIPV6, _LOMNVSetupNetworkPolicy, 
+                       _LOMSMCreateTransitionsFromStatesToDestination, _LOMSecCopyControllerCertsAndKeyFromPresistantRef, 
+                       _LOMSecCopyKeychainItemFromPersistantRef, _LOMSecCreateCertificateFromData, 
+                       _LOMSecCreateCertificatesDataFromPersistantRef, _LOMSecCreateDataFromCertificate, 
+                       _LOMSecCreateDataFromPrivateKey, _LOMSecCreateDeviceDataFromCertsAndKey, 
+                       _LOMSecCreateIdentityFromPersistantCertificateAndKeyData, 
                        _LOMSecCreatePrivateKeyDataFromPersistantRef, _LOMSecCreatePrivateKeyFromData, 
                        _LOMSecEraseCertificate, _LOMSecEraseDeviceCertsAndKey, _LOMSecEraseDevicePersistantCertsAndKey, 
                        _LOMSecEraseKey, _LOMSecLoadCertificate, _LOMSecLoadCertificatePreference, 

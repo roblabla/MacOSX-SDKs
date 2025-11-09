@@ -9,7 +9,7 @@
 
 @class CKUserIdentity;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, CKShareParticipantAcceptanceStatus) {
     CKShareParticipantAcceptanceStatusUnknown,
@@ -69,4 +69,4 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

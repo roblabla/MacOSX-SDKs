@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           720707CD-C159-3EEB-847B-6B1619EDB892
-  - target:          x86_64-maccatalyst
-    value:           720707CD-C159-3EEB-847B-6B1619EDB892
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6D0AAF71-C0E5-39F1-B0AF-85F85BC7AE14
-  - target:          arm64e-maccatalyst
-    value:           6D0AAF71-C0E5-39F1-B0AF-85F85BC7AE14
 install-name:    '/System/Library/PrivateFrameworks/DataAccessExpress.framework/Versions/A/DataAccessExpress'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

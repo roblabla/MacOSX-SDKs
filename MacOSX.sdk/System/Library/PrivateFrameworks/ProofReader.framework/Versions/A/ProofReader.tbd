@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           10A889D2-7F45-3EBF-941F-3734F1DC8FB4
-  - target:          x86_64-maccatalyst
-    value:           10A889D2-7F45-3EBF-941F-3734F1DC8FB4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           240DA765-BEDA-3F17-AE02-F016D8A41E26
-  - target:          arm64e-maccatalyst
-    value:           240DA765-BEDA-3F17-AE02-F016D8A41E26
 install-name:    '/System/Library/PrivateFrameworks/ProofReader.framework/Versions/A/ProofReader'
-current-version: 584.2
+current-version: 584.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

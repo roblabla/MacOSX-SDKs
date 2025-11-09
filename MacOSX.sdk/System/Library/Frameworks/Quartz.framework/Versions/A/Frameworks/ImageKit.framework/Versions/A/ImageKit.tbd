@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6CA32827-D0BF-38B2-BA08-AD1F1172F939
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5BEF979A-E0E0-39E8-ADA1-A7F0CDB29BBB
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

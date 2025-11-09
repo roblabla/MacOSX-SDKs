@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2E67F0A0-72BC-39B1-8FD8-C2A0C21DCFFB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           614EF82A-459D-3AE4-9EED-6A7B434957B6
 install-name:    '/System/Library/PrivateFrameworks/OctagonTrust.framework/Versions/A/OctagonTrust'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

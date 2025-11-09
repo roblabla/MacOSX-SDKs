@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKPaymentRequest.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentRequest.h
-//  PassKit
+//    PassKit
 //  Copyright (c) 2014, Apple Inc. All rights reserved.
 //
 
@@ -13,6 +13,8 @@
 #import <PassKit/PKShippingMethod.h>
 #import <PassKit/PKAutomaticReloadPaymentRequest.h>
 #import <PassKit/PKRecurringPaymentRequest.h>
+
+#import <PassKit/PKDeferredPaymentRequest.h>
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 #import <AddressBook/ABRecord.h>
@@ -166,7 +168,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // The sum of all context amounts must be less than or equal to the total amount of the enclosing
 // payment request, as indicated by the last payment summary item.
 //
-// This property cannot be used simultaneously with recurring or automatic reload payment requests.
+// This property cannot be used simultaneously with recurring, automatic reload or deferred payment requests.
 //
 // Multiple payment tokens are not supported on watchOS.
 @property (nonatomic, copy) NSArray<PKPaymentTokenContext *> *multiTokenContexts API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
@@ -175,7 +177,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // will receive a merchant-specific payment token if the payment network supports merchant-specific
 // payment tokens.
 //
-// This property cannot be used simultaneously with multi token contexts or automatic reload payment requests.
+// This property cannot be used simultaneously with multi token contexts, automatic reload or deferred payment requests.
 //
 // Merchant-specific payment tokens are not supported on watchOS.
 @property (nonatomic, strong, nullable) PKRecurringPaymentRequest *recurringPaymentRequest API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
@@ -184,10 +186,19 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // will receive a merchant-specific payment token if the payment network supports merchant-specific
 // payment tokens.
 //
-// This property cannot be used simultaneously with multi token contexts or recurring payment requests.
+// This property cannot be used simultaneously with multi token contexts, recurring payment requests or deferred payment requests.
 //
 // Merchant-specific payment tokens are not supported on watchOS.
 @property (nonatomic, strong, nullable) PKAutomaticReloadPaymentRequest *automaticReloadPaymentRequest API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
+
+// Optional request to set up a deferred payment, such as a hospitality booking or a pre-order. This payment request
+// will receive a merchant-specific payment token if the payment network supports merchant-specific
+// payment tokens.
+//
+// This property cannot be used simultaneously with: multi token contexts, recurring payment requests or automatic reload payment requests.
+//
+// Merchant-specific payment tokens are not supported on watchOS.
+@property (nonatomic, strong, nullable) PKDeferredPaymentRequest *deferredPaymentRequest API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(watchos);
 
 @end
 

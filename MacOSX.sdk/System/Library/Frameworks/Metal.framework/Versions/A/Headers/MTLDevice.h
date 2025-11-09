@@ -550,7 +550,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Query device for BC Texture format support
  @return BOOL value. If YES, the device supports compressed BC Texture formats. If NO, the device does not.
  */
- @property (readonly) BOOL supportsBCTextureCompression API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+ @property (readonly) BOOL supportsBCTextureCompression API_AVAILABLE(macos(11.0), ios(16.4));
 
 /*!
  @property supportsPullModelInterpolation
@@ -1221,6 +1221,20 @@ typedef uint64_t MTLTimestamp;
  */
 @property (readonly) BOOL supportsPrimitiveMotionBlur API_AVAILABLE(macos(11.0), ios(14.0));
 
+
+/*!
+ @property shouldMaximizeConcurrentCompilation
+ @abstract Allow this device to use additional CPU threads (scaled automatically to the host machine) to be used for compilation tasks. Default is `NO`.
+ @discussion Use the `maximumConcurrentCompilationTaskCount` property to determine the current number of concurrent CPU threads that this device is using.
+ */
+@property (atomic) BOOL shouldMaximizeConcurrentCompilation API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios);
+
+/*!
+ @property maximumConcurrentCompilationTaskCount
+ @abstract Returns the maximum count of concurrent executing compilation tasks.
+ @discussion The property returns a different value depending on the value of the property `shouldMaximizeConcurrentCompilation`.
+ */
+@property (readonly) NSUInteger maximumConcurrentCompilationTaskCount API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios);
 
 @end
 NS_ASSUME_NONNULL_END

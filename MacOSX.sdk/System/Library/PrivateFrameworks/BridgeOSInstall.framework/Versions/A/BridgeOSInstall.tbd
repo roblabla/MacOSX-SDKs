@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E43525BE-FBF1-3393-A940-624DCC6BF625
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CDB8430F-2832-3EE8-B85C-ED06658A3F75
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSInstall.framework/Versions/A/BridgeOSInstall'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

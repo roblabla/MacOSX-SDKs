@@ -17,7 +17,9 @@
 #define MPSFunctionConstantIndexReserved              (MPSDeviceCapsIndex-5)  // unavailable to user
 #define MPSTextureLinkingConstantIndex                (MPSDeviceCapsIndex-6)  // unavailable to user
 #define MPSNDArrayConstantMultiDestIndex              (MPSDeviceCapsIndex-7)  // unavailable to user
-#define MPSUserAvailableFunctionConstantStartIndex    (MPSDeviceCapsIndex-8)  // first index availble to user
+#define MPSNDArrayConstantMultiDestSrcAddressingIndex (MPSDeviceCapsIndex-8)  // unavailable to user
+#define MPSNDArrayConstantMultiDestDstAddressingIndex (MPSDeviceCapsIndex-9)  // unavailable to user
+#define MPSUserAvailableFunctionConstantStartIndex    (MPSDeviceCapsIndex-10)  // first index availble to user
 
 
 #endif /* MPSFunctionConstantIndices_h */

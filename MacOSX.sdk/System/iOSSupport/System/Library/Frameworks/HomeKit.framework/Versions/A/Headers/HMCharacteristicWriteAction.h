@@ -21,6 +21,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
     @interface HMCharacteristicWriteAction<TargetValueType : id<NSCopying>> : HMAction
 
 - (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 /*!
  * @brief Initializer method that ties the action to a particular characteristic.

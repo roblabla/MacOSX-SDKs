@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6BC81CDA-9812-3D8E-ADED-FEEC34C67534
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0BA0B260-C189-3312-94CD-1ED3420853AF
 install-name:    '/System/Library/PrivateFrameworks/FeedbackCore.framework/Versions/A/FeedbackCore'
 swift-abi-version: 7
 exports:
@@ -206,6 +199,8 @@ exports:
                        '_$sSo11FBKQuestionC12FeedbackCoreE33EnhancedLoggingModalConfigurationSo08FBKModalG0CSgvg', 
                        '_$sSo11FBKQuestionC12FeedbackCoreE33EnhancedLoggingModalConfigurationSo08FBKModalG0CSgvpMV', 
                        '_$sSo14FBKFileManagerC12FeedbackCoreE18temporaryDirectory14pathComponents10Foundation3URLVSgSaySSG_tFZ', 
+                       '_$sSo15NSURLComponentsC12FeedbackCoreE22queryItemsAsDictionarySDySSyXlGvg', 
+                       '_$sSo15NSURLComponentsC12FeedbackCoreE22queryItemsAsDictionarySDySSyXlGvpMV', 
                        '_$sSo16FBKGroupedDeviceC12FeedbackCoreE13sortedDevicesySayABGAEFZ', 
                        '_$sSo16FBKGroupedDeviceC12FeedbackCoreE25deviceIconPromiseForScale5scale7Combine6FutureCy10Foundation4DataVSgs5NeverOGSf_tF', 
                        '_$sSo16FBKGroupedDeviceC12FeedbackCoreE4hashSivg', '_$sSo16FBKSeedPortalAPIC12FeedbackCoreE06assignD011feedbackIDs8inTeamID013toParticipantK07success5errorySaySiG_S2iyShySo14FBKContentItemCGcSgys5Error_pSgcSgtF', 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2327297D-D81F-3BD7-B504-3DD3A6D195B1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C2438DFC-AE0D-337D-A688-E817F4D0ED77
 install-name:    '/System/Library/Frameworks/Tcl.framework/Versions/8.5/Tcl'
 current-version: 8.5.9
 compatibility-version: 8.5

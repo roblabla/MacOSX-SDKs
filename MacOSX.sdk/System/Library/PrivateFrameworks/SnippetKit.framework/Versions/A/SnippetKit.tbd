@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5A7F0A15-C623-3277-AA50-01AF9DA87701
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           70D17F24-C7DC-3B61-BA36-41EB7BD7E085
 install-name:    '/System/Library/PrivateFrameworks/SnippetKit.framework/Versions/A/SnippetKit'
 swift-abi-version: 7
 exports:
@@ -632,6 +625,7 @@ exports:
                        '_$s10SnippetKit12ContactImageOMa', '_$s10SnippetKit12ContactImageOMn', 
                        '_$s10SnippetKit12ContactImageON', '_$s10SnippetKit12ContactImageOSEAAMc', 
                        '_$s10SnippetKit12ContactImageOSeAAMc', '_$s10SnippetKit12ContactImageOyAC10Foundation4DataVKcfC', 
+                       '_$s10SnippetKit12CustomCanvasV10bundleName6viewId0G4Data09componentF014safeForLogging17requestsKeyWindow23hideConversationKeylineACSS_SS10Foundation0I0VSSS3btcfC', 
                        '_$s10SnippetKit12CustomCanvasV10bundleName6viewId0G4Data09componentF014safeForLogging17requestsKeyWindowACSS_SS10Foundation0I0VSSS2btcfC', 
                        '_$s10SnippetKit12CustomCanvasV10bundleName6viewId0G4Data09componentF014safeForLoggingACSS_SS10Foundation0I0VSSSbtcfC', 
                        '_$s10SnippetKit12CustomCanvasV10bundleName6viewId0G4Data09componentF0ACSS_SS10Foundation0I0VSStcfC', 
@@ -649,6 +643,8 @@ exports:
                        '_$s10SnippetKit12CustomCanvasV15asVisualElementAA0fG0OyF', 
                        '_$s10SnippetKit12CustomCanvasV17requestsKeyWindowSbvg', '_$s10SnippetKit12CustomCanvasV17requestsKeyWindowSbvpMV', 
                        '_$s10SnippetKit12CustomCanvasV21asButtonContainerItemAA0fG0V0fH0OyF', 
+                       '_$s10SnippetKit12CustomCanvasV23hideConversationKeylineSbvg', 
+                       '_$s10SnippetKit12CustomCanvasV23hideConversationKeylineSbvpMV', 
                        '_$s10SnippetKit12CustomCanvasV2eeoiySbAC_ACtFZ', '_$s10SnippetKit12CustomCanvasV4hash4intoys6HasherVz_tF', 
                        '_$s10SnippetKit12CustomCanvasV5protoAA06_ProtocD0Vvg', '_$s10SnippetKit12CustomCanvasV5protoAA06_ProtocD0VvpMV', 
                        '_$s10SnippetKit12CustomCanvasV5protoAcA06_ProtocD0V_tcfC', 
@@ -3644,6 +3640,10 @@ exports:
                        '_$s10SnippetKit18_ProtoCustomCanvasV21InternalSwiftProtobuf01_C13NameProvidingAAMc', 
                        '_$s10SnippetKit18_ProtoCustomCanvasV21InternalSwiftProtobuf26_MessageImplementationBaseAAMc', 
                        '_$s10SnippetKit18_ProtoCustomCanvasV21InternalSwiftProtobuf7MessageAAMc', 
+                       '_$s10SnippetKit18_ProtoCustomCanvasV23hideConversationKeylineSbvM', 
+                       '_$s10SnippetKit18_ProtoCustomCanvasV23hideConversationKeylineSbvg', 
+                       '_$s10SnippetKit18_ProtoCustomCanvasV23hideConversationKeylineSbvpMV', 
+                       '_$s10SnippetKit18_ProtoCustomCanvasV23hideConversationKeylineSbvs', 
                        '_$s10SnippetKit18_ProtoCustomCanvasV2eeoiySbAC_ACtFZ', '_$s10SnippetKit18_ProtoCustomCanvasV6viewIDSSvM', 
                        '_$s10SnippetKit18_ProtoCustomCanvasV6viewIDSSvg', '_$s10SnippetKit18_ProtoCustomCanvasV6viewIDSSvpMV', 
                        '_$s10SnippetKit18_ProtoCustomCanvasV6viewIDSSvs', '_$s10SnippetKit18_ProtoCustomCanvasV8traverse7visitoryxz_tK21InternalSwiftProtobuf7VisitorRzlF', 

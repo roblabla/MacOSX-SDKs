@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           98C53462-85E7-37EA-9825-DD6655EF79DF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5FBF4979-2D43-3B71-AC61-758DFE5F7C34
 install-name:    '/System/Library/PrivateFrameworks/AccountSuggestions.framework/Versions/A/AccountSuggestions'
 swift-abi-version: 7
 exports:
@@ -93,6 +86,8 @@ exports:
                        '_$s18AccountSuggestions0A17SuggestionManagerC13kvsSubscriber7Combine14AnyCancellableCSgvpfi', 
                        '_$s18AccountSuggestions0A17SuggestionManagerC14_resetSyncInfoyyF', 
                        '_$s18AccountSuggestions0A17SuggestionManagerC14_resetSyncInfoyyFTq', 
+                       '_$s18AccountSuggestions0A17SuggestionManagerC14deduplicateAllyyF', 
+                       '_$s18AccountSuggestions0A17SuggestionManagerC14deduplicateAllyyFTq', 
                        '_$s18AccountSuggestions0A17SuggestionManagerC14featureEnabledSbyFZ', 
                        '_$s18AccountSuggestions0A17SuggestionManagerC14featureEnabledSbyFZTq', 
                        '_$s18AccountSuggestions0A17SuggestionManagerC14reloadAccountsyyF', 

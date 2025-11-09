@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FBE65EEE-D6A2-338B-A04D-6F9ADE67BD4F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3586EAF6-F951-3C89-9E3C-CEC19AACCF9E
 install-name:    '/System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

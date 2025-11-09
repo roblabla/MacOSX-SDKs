@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F85751EC-BA59-380D-ACD9-2B90E8C08C5C
-  - target:          x86_64-maccatalyst
-    value:           F85751EC-BA59-380D-ACD9-2B90E8C08C5C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F1357FAD-D427-30C2-A268-35C612C0D530
-  - target:          arm64e-maccatalyst
-    value:           F1357FAD-D427-30C2-A268-35C612C0D530
 install-name:    '/System/Library/PrivateFrameworks/MessageProtection.framework/Versions/A/MessageProtection'
-current-version: 263.0.7
+current-version: 264.100.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -44,10 +31,11 @@ exports:
                        _SecMPFullIdentityCreateFromRefs, _SecMPFullIdentityCreateOTRSessionWith, 
                        _SecMPFullIdentityCreateOTRSessionWithFlags, _SecMPFullIdentityCreateWithAccess, 
                        _SecMPFullIdentityCreateWithAccessProtClass, _SecMPFullIdentityCreateWithProtClass, 
-                       _SecMPPIAppendSerialization, _SecMPPublicIdentityCopyFromPrivate, 
-                       _SecMPPublicIdentityCreateFromData, _SecMPSignAndProtectMessage, 
-                       _SecMPVerifyAndExposeMessage, _SecMWCreateEphemeralDeviceIdentity, 
-                       _SecMWCreateSessionSalt, _SecMWCreateSessionSeed, _SecProtectStream ]
+                       _SecMPFullIdentityObjCCreateOTRSessionWithFlags, _SecMPPIAppendSerialization, 
+                       _SecMPPublicIdentityCopyFromPrivate, _SecMPPublicIdentityCreateFromData, 
+                       _SecMPSignAndProtectMessage, _SecMPVerifyAndExposeMessage, 
+                       _SecMWCreateEphemeralDeviceIdentity, _SecMWCreateSessionSalt, 
+                       _SecMWCreateSessionSeed, _SecProtectStream ]
     objc-classes:    [ GFTKeyWrapping, GLTDiversifiedKeyAndTPS, GLTKeyDiversification, 
                        MPStatusKitIncomingRatchet, MPStatusKitMessage, MPStatusKitOutgoingRatchet, 
                        MPStatusKitSubscriptionKeys, NGMFullDeviceIdentity, NGMKeyRollingTicket, 

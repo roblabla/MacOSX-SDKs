@@ -30,6 +30,7 @@ UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConf
 typedef NSString * UIActivityItemsConfigurationInteraction NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionShare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionCopy API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR

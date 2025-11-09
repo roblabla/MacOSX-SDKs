@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           33A8E823-2658-31EC-8C5C-23606F8557DB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           84A767F0-5D04-3CF8-A470-580E9D795B3B
 install-name:    '/usr/lib/libmdns.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -69,11 +62,13 @@ exports:
                        _mdns_interface_monitor_is_expensive, _mdns_interface_monitor_is_vpn, 
                        _mdns_interface_monitor_set_event_handler, _mdns_interface_monitor_set_queue, 
                        _mdns_interface_monitor_set_update_handler, _mdns_mach_ticks_per_second, 
-                       _mdns_managed_defaults_create, _mdns_managed_defaults_get_int_clamped, 
-                       _mdns_object_context_finalizer, _mdns_pf_delete_thread_rules, 
-                       _mdns_pf_set_thread_nat64_rules, _mdns_power_cancel_all_events, 
-                       _mdns_power_schedule_wake, _mdns_querier_activate, _mdns_querier_get_context, 
-                       _mdns_querier_get_dnssec_ok, _mdns_querier_get_error, _mdns_querier_get_over_tcp_reason, 
+                       _mdns_managed_defaults_create, _mdns_managed_defaults_get_bool_easy, 
+                       _mdns_managed_defaults_get_int_clamped, _mdns_object_context_finalizer, 
+                       _mdns_pf_delete_thread_pass_all_rule_for_conn_tracking, _mdns_pf_delete_thread_rules, 
+                       _mdns_pf_set_thread_nat64_rules, _mdns_pf_set_thread_pass_all_rule_for_conn_tracking, 
+                       _mdns_power_cancel_all_events, _mdns_power_schedule_wake, 
+                       _mdns_querier_activate, _mdns_querier_enable_sensitive_logging, 
+                       _mdns_querier_get_context, _mdns_querier_get_dnssec_ok, _mdns_querier_get_error, 
                        _mdns_querier_get_qclass, _mdns_querier_get_qname, _mdns_querier_get_qtype, 
                        _mdns_querier_get_query_length, _mdns_querier_get_resolver_type, 
                        _mdns_querier_get_response_length, _mdns_querier_get_response_ptr, 

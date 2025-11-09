@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           09AF69FE-481E-3229-9239-2A19C3A9E56C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           45AFD093-DF98-3429-9904-7940428A2D07
 install-name:    '/System/Library/PrivateFrameworks/HealthDomainsTools.framework/Versions/A/HealthDomainsTools'
 swift-abi-version: 7
 exports:
@@ -69,7 +62,7 @@ exports:
                        '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE10endWorkoutyAA0cd20Builder_stop_common_I0CSSSgFZ', 
                        '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE12pauseWorkoutyAA0cd8Builder_h8_common_I0CSSSgFZ', 
                        '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE12startWorkout_16goalDefinedValue0J8UnitType0jL004areaN013sequenceLabel13appIdentifierAA0cd22Builder_create_common_I0CSSSg_AA0c7Entity_v1_I4GoalC0K6ValuesOSgAA0cw1_v12_MeasurementM0CAQOSgs5Int64VSgAnA0cw1_V13_ListPositionCAQOSgANtFZ', 
-                       '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE13cancelWorkoutyAA0cd22Builder_noVerb_common_I0CSSSgFZ', 
+                       '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE13cancelWorkoutyAA0cd8Builder_h8_common_I0CSSSgFZ', 
                        '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE13modifyWorkout_4verbAA0C37_VerbTemplateBuilder_ReferenceControlCyAA0c6Entitym8_common_I0CGSSSg_AD06ModifyidK0OtFZ', 
                        '_$s12SiriOntology7UsoTaskC18HealthDomainsToolsE13resumeWorkoutyAA0cd8Builder_h8_common_I0CSSSgFZ', 
                        '_$s16SiriDialogEngine0B8CalendarC18HealthDomainsToolsE4make4dateAC10Foundation4DateV_tFZ', 
@@ -135,10 +128,13 @@ exports:
                        '_$s18HealthDomainsTools12SequenceFlowCMa', '_$s18HealthDomainsTools12SequenceFlowCMm', 
                        '_$s18HealthDomainsTools12SequenceFlowCMn', '_$s18HealthDomainsTools12SequenceFlowCN', 
                        '_$s18HealthDomainsTools12SequenceFlowCfD', '_$s18HealthDomainsTools12SequenceFlowCfd', 
+                       '_$s18HealthDomainsTools12currentIdiom11deviceState13SiriUtilities06DeviceE0O0H7KitFlow0jG0_p_tF', 
                        '_$s18HealthDomainsTools12getAppEntity4from12SiriOntology03Usof8_common_E0CSgAD0J4TaskC_tF', 
                        '_$s18HealthDomainsTools13LaunchAppFlowV07SiriKitF00F0AAMc', 
-                       '_$s18HealthDomainsTools13LaunchAppFlowV10aceService3appAC07SiriKitF003AceH7Invoker_p_AA0A4AppsOtcfC', 
+                       '_$s18HealthDomainsTools13LaunchAppFlowV10aceService3appAC07SiriKitF003AceH12InvokerAsync_p_AA0A4AppsOtcfC', 
                        '_$s18HealthDomainsTools13LaunchAppFlowV2on5inputSb07SiriKitF05InputV_tF', 
+                       '_$s18HealthDomainsTools13LaunchAppFlowV7execute07SiriKitF015ExecuteResponseVyYaF', 
+                       '_$s18HealthDomainsTools13LaunchAppFlowV7execute07SiriKitF015ExecuteResponseVyYaFTu', 
                        '_$s18HealthDomainsTools13LaunchAppFlowV7execute10completionyy07SiriKitF015ExecuteResponseVc_tF', 
                        '_$s18HealthDomainsTools13LaunchAppFlowVMa', '_$s18HealthDomainsTools13LaunchAppFlowVMn', 
                        '_$s18HealthDomainsTools13LaunchAppFlowVN', '_$s18HealthDomainsTools13NetworkErrorsO21__derived_enum_equalsySbAC_ACtFZ', 
@@ -147,9 +143,9 @@ exports:
                        '_$s18HealthDomainsTools13NetworkErrorsOMa', '_$s18HealthDomainsTools13NetworkErrorsOMn', 
                        '_$s18HealthDomainsTools13NetworkErrorsON', '_$s18HealthDomainsTools13NetworkErrorsOSHAAMc', 
                        '_$s18HealthDomainsTools13NetworkErrorsOSQAAMc', '_$s18HealthDomainsTools13NetworkErrorsOs5ErrorAAMc', 
-                       '_$s18HealthDomainsTools14getWorkoutName4fromSSSg12SiriOntology017UsoEntity_common_E0CSg_tF', 
+                       '_$s18HealthDomainsTools14getWorkoutName4from8fallbackSSSg12SiriOntology017UsoEntity_common_E0CSg_SbtF', 
                        '_$s18HealthDomainsTools15AppPunchOutFlowV07SiriKitG00G0AAMc', 
-                       '_$s18HealthDomainsTools15AppPunchOutFlowV10aceService3urlAC07SiriKitG003AceI7Invoker_p_10Foundation3URLVtcfC', 
+                       '_$s18HealthDomainsTools15AppPunchOutFlowV10aceService3url19instrumentationTaskAC07SiriKitG003AceI7Invoker_p_10Foundation3URLVSSSgtcfC', 
                        '_$s18HealthDomainsTools15AppPunchOutFlowV2on5inputSb07SiriKitG05InputV_tF', 
                        '_$s18HealthDomainsTools15AppPunchOutFlowV7execute10completionyy07SiriKitG015ExecuteResponseVc_tF', 
                        '_$s18HealthDomainsTools15AppPunchOutFlowVMa', '_$s18HealthDomainsTools15AppPunchOutFlowVMn', 
@@ -184,8 +180,11 @@ exports:
                        '_$s18HealthDomainsTools15LocationServiceVAA0D9ProvidingAAWP', 
                        '_$s18HealthDomainsTools15LocationServiceVMa', '_$s18HealthDomainsTools15LocationServiceVMn', 
                        '_$s18HealthDomainsTools15LocationServiceVN', '_$s18HealthDomainsTools16FlowConfigurableMp', 
-                       '_$s18HealthDomainsTools16FlowConfigurableTL', '_$s18HealthDomainsTools16getWorkoutEntity4from12SiriOntology03Usof8_common_E0CSgAD0J4TaskC_tF', 
+                       '_$s18HealthDomainsTools16FlowConfigurableTL', '_$s18HealthDomainsTools16findRemoteDevice4with23deviceResolutionService011SiriVirtualfI00F4UnitCSg0K9Utilities0F5IdiomO_AE0fI9Providing_ptYaF', 
+                       '_$s18HealthDomainsTools16findRemoteDevice4with23deviceResolutionService011SiriVirtualfI00F4UnitCSg0K9Utilities0F5IdiomO_AE0fI9Providing_ptYaFTu', 
+                       '_$s18HealthDomainsTools16getWorkoutEntity4from12SiriOntology03Usof8_common_E0CSgAD0J4TaskC_tF', 
                        '_$s18HealthDomainsTools17LocationProvidingMp', '_$s18HealthDomainsTools17LocationProvidingTL', 
+                       '_$s18HealthDomainsTools17isProbablyWorkout4fromSb11SiriKitFlow5ParseO_tF', 
                        '_$s18HealthDomainsTools18ServerFallbackFlowV07SiriKitF00F0AAMc', 
                        '_$s18HealthDomainsTools18ServerFallbackFlowV2on5inputSb07SiriKitF05InputV_tF', 
                        '_$s18HealthDomainsTools18ServerFallbackFlowV7execute07SiriKitF015ExecuteResponseVyYaF', 
@@ -193,6 +192,7 @@ exports:
                        '_$s18HealthDomainsTools18ServerFallbackFlowV7execute10completionyy07SiriKitF015ExecuteResponseVc_tF', 
                        '_$s18HealthDomainsTools18ServerFallbackFlowVACycfC', '_$s18HealthDomainsTools18ServerFallbackFlowVMa', 
                        '_$s18HealthDomainsTools18ServerFallbackFlowVMn', '_$s18HealthDomainsTools18ServerFallbackFlowVN', 
+                       '_$s18HealthDomainsTools20appBundleIsInstalledySbSSF', '_$s18HealthDomainsTools20hasWorkoutIdentifier4fromSb11SiriKitFlow5ParseO_tF', 
                        '_$s18HealthDomainsTools20vocabularyIdentifier3forSSSgAA0A7LogNameOSg_tF', 
                        '_$s18HealthDomainsTools21ModifyWorkoutTaskVerbO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s18HealthDomainsTools21ModifyWorkoutTaskVerbO4hash4intoys6HasherVz_tF', 
@@ -219,6 +219,8 @@ exports:
                        '_$s18HealthDomainsTools22USOIdentifierNamespaceON', '_$s18HealthDomainsTools22USOIdentifierNamespaceOSHAAMc', 
                        '_$s18HealthDomainsTools22USOIdentifierNamespaceOSQAAMc', 
                        '_$s18HealthDomainsTools22USOIdentifierNamespaceOSYAAMc', 
+                       '_$s18HealthDomainsTools23isFitnessPlusSubscriberSbyYaF', 
+                       '_$s18HealthDomainsTools23isFitnessPlusSubscriberSbyYaFTu', 
                        '_$s18HealthDomainsTools23makeConfirmationButtons13confirmButton06rejectH06deviceSaySo9SAAceViewCGAA016DirectInvocationH0V_AJ11SiriKitFlow11DeviceState_ptF', 
                        '_$s18HealthDomainsTools3LogO6commonSo9OS_os_logCvau', '_$s18HealthDomainsTools3LogO6commonSo9OS_os_logCvgZ', 
                        '_$s18HealthDomainsTools3LogO6commonSo9OS_os_logCvpZ', '_$s18HealthDomainsTools3LogO6healthSo9OS_os_logCvau', 
@@ -258,5 +260,8 @@ exports:
                        '_$sSo13SABaseCommandC18HealthDomainsToolsE12asVCatStringSSSgvpMV', 
                        '_$sSo14SASTButtonItemC18HealthDomainsToolsE5label8commands8centeredABSS_SaySo20SAClientBoundCommand_pGSbtcfC', 
                        '_$sSo15SAUIAppPunchOutC18HealthDomainsToolsE10aceService3urlAB11SiriKitFlow03AceH7Invoker_p_10Foundation3URLVtcfC', 
+                       '_$sSo22SASTCountdownTimerItemC18HealthDomainsToolsE9sashTitle8commands5delayABSS_SaySo24SABaseClientBoundCommandCGSitcfC', 
+                       '_$sSo25SASTCommandTemplateActionC18HealthDomainsToolsE8commandsABSaySo20SAClientBoundCommand_pG_tcfC', 
+                       '_$sSo25SASTSideBySideButtonsItemC18HealthDomainsToolsE31primaryButtonConfirmationOption09secondaryjkL0ABSo016SAUIConfirmationL0C_AGtcfC', 
                        _HealthDomainsToolsVersionNumber, _HealthDomainsToolsVersionString ]
 ...

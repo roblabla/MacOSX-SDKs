@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKShippingMethod.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKShippingMethod.h
-//  PassKit
+//    PassKit
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
 

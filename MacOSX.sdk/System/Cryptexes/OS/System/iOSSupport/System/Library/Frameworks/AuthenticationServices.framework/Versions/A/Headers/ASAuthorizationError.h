@@ -8,7 +8,7 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 AS_EXTERN NSErrorDomain const ASAuthorizationErrorDomain API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0));
 
@@ -21,4 +21,4 @@ typedef NS_ERROR_ENUM(ASAuthorizationErrorDomain, ASAuthorizationError) {
     ASAuthorizationErrorNotInteractive API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos) = 1005,
 } API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

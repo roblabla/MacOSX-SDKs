@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3925CF4D-2262-3AF3-9F88-5DA5DB501CC6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E8CC4278-58A2-39D3-9245-DF67BA00C900
 install-name:    '/usr/lib/libhunspell-1.2.0.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

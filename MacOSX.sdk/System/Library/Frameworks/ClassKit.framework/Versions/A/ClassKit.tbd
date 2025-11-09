@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E1C77E97-DCA2-3597-8066-537CA3371956
-  - target:          x86_64-maccatalyst
-    value:           E1C77E97-DCA2-3597-8066-537CA3371956
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2670BE50-F927-3189-A592-C86C3D570280
-  - target:          arm64e-maccatalyst
-    value:           2670BE50-F927-3189-A592-C86C3D570280
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 148.2.6
+current-version: 148.4.37
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

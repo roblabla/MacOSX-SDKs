@@ -1,21 +1,21 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name CoreML
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1436.60.2
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name CoreML
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1436.100.12
 @_exported import CoreML
 import Swift
 import _Concurrency
 import _StringProcessing
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension CoreML.MLModel {
-  public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration(), completionHandler handler: @escaping (Swift.Result<CoreML.MLModel, Swift.Error>) -> Swift.Void)
+  public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration(), completionHandler handler: @escaping (Swift.Result<CoreML.MLModel, any Swift.Error>) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration()) async throws -> CoreML.MLModel
   #endif
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
-  public class func compileModel(at url: Foundation.URL, completionHandler handler: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
+  public class func compileModel(at url: Foundation.URL, completionHandler handler: @escaping (Swift.Result<Foundation.URL, any Swift.Error>) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
@@ -99,8 +99,8 @@ extension Swift.UnsafeMutableBufferPointer {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension CoreML.MLModelCollection {
-  public class func beginAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<CoreML.MLModelCollection, Swift.Error>) -> Swift.Void) -> Foundation.Progress
-  public class func endAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  public class func beginAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<CoreML.MLModelCollection, any Swift.Error>) -> Swift.Void) -> Foundation.Progress
+  public class func endAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public protocol MLShapedArrayProtocol : Swift.ExpressibleByArrayLiteral, Swift.MutableCollection, Swift.RandomAccessCollection where Self.Index == Swift.Int {
@@ -117,7 +117,7 @@ public protocol MLShapedArrayProtocol : Swift.ExpressibleByArrayLiteral, Swift.M
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLShapedArrayProtocol {
-  public subscript<C>(partialSliceRanges: C) -> CoreML.MLShapedArraySlice<Self.Scalar> where C : Swift.Collection, C.Element == CoreML.MLShapedArrayRangeExpression {
+  public subscript<C>(partialSliceRanges: C) -> CoreML.MLShapedArraySlice<Self.Scalar> where C : Swift.Collection, C.Element == any CoreML.MLShapedArrayRangeExpression {
     get
     set
   }
@@ -125,11 +125,11 @@ extension CoreML.MLShapedArrayProtocol {
     get
     set
   }
-  public subscript(sliceRanges: CoreML.MLShapedArrayRangeExpression...) -> CoreML.MLShapedArraySlice<Self.Scalar> {
+  public subscript(sliceRanges: any CoreML.MLShapedArrayRangeExpression...) -> CoreML.MLShapedArraySlice<Self.Scalar> {
     get
     set
   }
-  public subscript(sliceRange: CoreML.MLShapedArrayRangeExpression) -> CoreML.MLShapedArraySlice<Self.Scalar> {
+  public subscript(sliceRange: any CoreML.MLShapedArrayRangeExpression) -> CoreML.MLShapedArraySlice<Self.Scalar> {
     get
     set
   }
@@ -271,11 +271,11 @@ extension CoreML.MLShapedArray {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreML.MLShapedArray : Swift.Encodable where Scalar : Swift.Encodable {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreML.MLShapedArray : Swift.Decodable where Scalar : Swift.Decodable {
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public struct MLShapedArraySlice<Scalar> : CoreML.MLShapedArrayProtocol where Scalar : CoreML.MLShapedArrayScalar {
@@ -324,11 +324,11 @@ extension CoreML.MLShapedArraySlice {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreML.MLShapedArraySlice : Swift.Encodable where Scalar : Swift.Encodable {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreML.MLShapedArraySlice : Swift.Decodable where Scalar : Swift.Decodable {
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public protocol MLShapedArrayScalar {

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A57F54F0-6984-39A0-AF92-2EDC099269DB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E45E6A54-9BE9-358B-88F0-47B494CCB095
 install-name:    '/System/Library/PrivateFrameworks/ShareKit.framework/Versions/A/ShareKit'
-current-version: 845
+current-version: 871
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSSharingPlugInServiceOptionAppIDKey, _NSSharingPlugInServiceOptionAppIsBackgroundOnlyKey, 

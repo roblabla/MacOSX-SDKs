@@ -11,7 +11,7 @@
 
 @class CKUserIdentity;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @class CKDiscoverAllUserIdentitiesOperation
  *
@@ -28,6 +28,8 @@ API_UNAVAILABLE(tvos)
 /*! @abstract Called once for each successfully-discovered user identity from the device's address book.
  *
  *  @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^userIdentityDiscoveredBlock)(CKUserIdentity *identity);
 
@@ -35,10 +37,12 @@ API_UNAVAILABLE(tvos)
  *
  *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^discoverAllUserIdentitiesCompletionBlock)(NSError * _Nullable operationError)
 CK_SWIFT_DEPRECATED("Use discoverAllUserIdentitiesResultBlock instead", macos(10.12, 12.0), ios(10.0, 15.0), watchos(3.0, 8.0));
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

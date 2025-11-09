@@ -1,9 +1,9 @@
-/*
- *  GKChallengesViewController.h
- *  GameKit
- *
- *  Copyright 2010-2013 Apple Inc. All rights reserved.
- */
+//
+//  GKChallengesViewController.h
+//  Game Center
+//
+//  Copyright 2013-2023 Apple Inc. All rights reserved.
+//
 
 #if !TARGET_OS_IPHONE
 

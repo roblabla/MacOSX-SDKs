@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           9077EE08-B744-3966-AF4D-36A5E95E98D2
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           E0A26229-C464-36DF-9F14-DABB97398838
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SpriteKit.framework/Versions/A/SpriteKit'
-current-version: 49.5.1
+current-version: 49.7.4
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _SKComponentRGBABlack, _SKComponentRGBABlue, _SKComponentRGBAClear, 

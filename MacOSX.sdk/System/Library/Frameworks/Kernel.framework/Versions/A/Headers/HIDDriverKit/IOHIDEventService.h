@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOHIDEventService.iig */
+/* iig(DriverKit-256.100.8) generated from IOHIDEventService.iig */
 
 /* IOHIDEventService.iig:1-48 */
 /*
@@ -67,7 +67,7 @@ public:
      * @return
      * true on success.
      */
-    virtual bool init() override;
+    virtual bool init() override __attribute__((availability(driverkit, introduced=21.0)));
 
     /*!
      * @function free
@@ -75,7 +75,7 @@ public:
      * @abstract
      * frees the object.
      */
-    virtual void free() override;
+    virtual void free() override __attribute__((availability(driverkit, introduced=21.0)));
 
     /*!
      * @function Start
@@ -95,7 +95,7 @@ public:
      * @return
      * returns kIOReturnSuccess on success.
      */
-    virtual kern_return_t Start(IOService * provider) override;
+    virtual kern_return_t Start(IOService * provider) override __attribute__((availability(driverkit, introduced=21.0)));
 
     /*!
      * @function Stop
@@ -115,7 +115,7 @@ public:
      * @return
      * returns kIOReturnSuccess on success.
      */
-    virtual kern_return_t Stop(IOService * provider) override;
+    virtual kern_return_t Stop(IOService * provider) override __attribute__((availability(driverkit, introduced=21.0)));
 
     /*!
      * @function DispatchKeyboardEvent
@@ -151,7 +151,7 @@ public:
                                                 uint32_t usage,
                                                 uint32_t value,
                                                 IOOptionBits options,
-                                                bool repeat = true) LOCALONLY;
+                                                bool repeat = true) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 
     /*!
      * @function DispatchRelativePointerEvent
@@ -183,7 +183,7 @@ public:
                                                        IOFixed dy,
                                                        uint32_t buttonState,
                                                        IOOptionBits options,
-                                                       bool accelerate = true) LOCALONLY;
+                                                       bool accelerate = true) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function DispatchAbsolutePointerEvent
@@ -215,7 +215,7 @@ public:
                                                        IOFixed y,
                                                        uint32_t buttonState,
                                                        IOOptionBits options,
-                                                       bool accelerate = true) LOCALONLY;
+                                                       bool accelerate = true) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function DispatchRelativeScrollWheelEvent
@@ -247,7 +247,7 @@ public:
                                                            IOFixed dy,
                                                            IOFixed dz,
                                                            IOOptionBits options,
-                                                           bool accelerate = true) LOCALONLY;
+                                                           bool accelerate = true) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function dispatchDigitizerStylusEvent
@@ -264,7 +264,7 @@ public:
      */
     virtual kern_return_t dispatchDigitizerStylusEvent(
                                         uint64_t timeStamp,
-                                        IOHIDDigitizerStylusData *stylusData) LOCALONLY;
+                                        IOHIDDigitizerStylusData *stylusData) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function dispatchDigitizerTouchEvent
@@ -285,7 +285,7 @@ public:
     virtual kern_return_t dispatchDigitizerTouchEvent(
                                             uint64_t timeStamp,
                                             IOHIDDigitizerTouchData *touchData,
-                                            uint32_t touchDataCount) LOCALONLY;
+                                            uint32_t touchDataCount) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 
 protected:
 
@@ -310,7 +310,7 @@ protected:
      * @param on
      * Turn on or off the LED.
      */
-    virtual void SetLED(uint32_t usage, bool on) LOCAL;
+    virtual void SetLED(uint32_t usage, bool on) LOCAL __attribute__((availability(driverkit, introduced=19.0)));
 
     /*!
      * @function SetLEDState
@@ -333,7 +333,7 @@ protected:
      * @param on
      * Turn on or off the LED.
      */
-    virtual kern_return_t SetLEDState(uint32_t usagePage, uint32_t usage, bool on) LOCAL;
+    virtual kern_return_t SetLEDState(uint32_t usagePage, uint32_t usage, bool on) LOCAL __attribute__((availability(driverkit, introduced=21.0)));
     
     /*!
      * @function dispatchEvent
@@ -344,7 +344,7 @@ protected:
      * @param event
      * The IOHIDEvent to dispatch.
      */
-    virtual void dispatchEvent(IOHIDEvent *event) LOCALONLY;
+    virtual void dispatchEvent(IOHIDEvent *event) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 
     /*!
      * @function handleCopyMatchingEvent
@@ -364,7 +364,7 @@ protected:
      * @return
      * Returns kIOReturnSuccess on success.
      */
-    virtual kern_return_t handleCopyMatchingEvent(OSDictionary * matching, IOHIDEvent **event) LOCAL;
+    virtual kern_return_t handleCopyMatchingEvent(OSDictionary * matching, IOHIDEvent **event) LOCAL __attribute__((availability(driverkit, introduced=21.0)));
 
     /*!
      * @function SetProperties
@@ -386,7 +386,7 @@ protected:
      * @return
      * Returns kIOReturnSuccess on success.
      */
-    virtual kern_return_t SetProperties(OSDictionary *properties) override;
+    virtual kern_return_t SetProperties(OSDictionary *properties) override __attribute__((availability(driverkit, introduced=21.0)));
 };
 
 #undef KERNEL
@@ -648,20 +648,20 @@ public:\
     SetLED(\
         uint32_t usage,\
         bool on,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     SetLEDState(\
         uint32_t usagePage,\
         uint32_t usage,\
         bool on,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=21.0)));\
 \
     kern_return_t\
     handleCopyMatchingEvent(\
         OSDictionary * matching,\
         IOHIDEvent ** event,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=21.0)));\
 \
 \
 protected:\
@@ -857,11 +857,11 @@ public:\
 \
     virtual bool\
     init(\
-) APPLE_KEXT_OVERRIDE;\
+) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=21.0)));\
 \
     virtual void\
     free(\
-) APPLE_KEXT_OVERRIDE;\
+) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=21.0)));\
 \
     virtual kern_return_t\
     dispatchKeyboardEvent(\
@@ -870,7 +870,7 @@ public:\
         uint32_t usage,\
         uint32_t value,\
         IOOptionBits options,\
-        bool repeat = true) APPLE_KEXT_OVERRIDE;\
+        bool repeat = true) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     dispatchRelativePointerEvent(\
@@ -879,7 +879,7 @@ public:\
         IOFixed dy,\
         uint32_t buttonState,\
         IOOptionBits options,\
-        bool accelerate = true) APPLE_KEXT_OVERRIDE;\
+        bool accelerate = true) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     dispatchAbsolutePointerEvent(\
@@ -888,7 +888,7 @@ public:\
         IOFixed y,\
         uint32_t buttonState,\
         IOOptionBits options,\
-        bool accelerate = true) APPLE_KEXT_OVERRIDE;\
+        bool accelerate = true) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     dispatchRelativeScrollWheelEvent(\
@@ -897,22 +897,22 @@ public:\
         IOFixed dy,\
         IOFixed dz,\
         IOOptionBits options,\
-        bool accelerate = true) APPLE_KEXT_OVERRIDE;\
+        bool accelerate = true) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     dispatchDigitizerStylusEvent(\
         uint64_t timeStamp,\
-        IOHIDDigitizerStylusData * stylusData) APPLE_KEXT_OVERRIDE;\
+        IOHIDDigitizerStylusData * stylusData) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     dispatchDigitizerTouchEvent(\
         uint64_t timeStamp,\
         IOHIDDigitizerTouchData * touchData,\
-        uint32_t touchDataCount) APPLE_KEXT_OVERRIDE;\
+        uint32_t touchDataCount) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual void\
     dispatchEvent(\
-        IOHIDEvent * event) APPLE_KEXT_OVERRIDE;\
+        IOHIDEvent * event) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
 
 
@@ -934,7 +934,7 @@ public:
 
 #if !KERNEL
 
-class IOHIDEventServiceInterface : public OSInterface
+class  IOHIDEventServiceInterface : public OSInterface
 {
 public:
     virtual kern_return_t
@@ -943,7 +943,7 @@ public:
         uint32_t usage,
         uint32_t value,
         IOOptionBits options,
-        bool repeat) = 0;
+        bool repeat) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     dispatchRelativePointerEvent(uint64_t timeStamp,
@@ -951,7 +951,7 @@ public:
         IOFixed dy,
         uint32_t buttonState,
         IOOptionBits options,
-        bool accelerate) = 0;
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     dispatchAbsolutePointerEvent(uint64_t timeStamp,
@@ -959,7 +959,7 @@ public:
         IOFixed y,
         uint32_t buttonState,
         IOOptionBits options,
-        bool accelerate) = 0;
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     dispatchRelativeScrollWheelEvent(uint64_t timeStamp,
@@ -967,19 +967,19 @@ public:
         IOFixed dy,
         IOFixed dz,
         IOOptionBits options,
-        bool accelerate) = 0;
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     dispatchDigitizerStylusEvent(uint64_t timeStamp,
-        IOHIDDigitizerStylusData * stylusData) = 0;
+        IOHIDDigitizerStylusData * stylusData) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     dispatchDigitizerTouchEvent(uint64_t timeStamp,
         IOHIDDigitizerTouchData * touchData,
-        uint32_t touchDataCount) = 0;
+        uint32_t touchDataCount) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual void
-    dispatchEvent(IOHIDEvent * event) = 0;
+    dispatchEvent(IOHIDEvent * event) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     kern_return_t
     dispatchKeyboardEvent_Call(uint64_t timeStamp,
@@ -987,7 +987,7 @@ public:
         uint32_t usage,
         uint32_t value,
         IOOptionBits options,
-        bool repeat)  { return dispatchKeyboardEvent(timeStamp, usagePage, usage, value, options, repeat); };\
+        bool repeat) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchKeyboardEvent(timeStamp, usagePage, usage, value, options, repeat); };\
 
     kern_return_t
     dispatchRelativePointerEvent_Call(uint64_t timeStamp,
@@ -995,7 +995,7 @@ public:
         IOFixed dy,
         uint32_t buttonState,
         IOOptionBits options,
-        bool accelerate)  { return dispatchRelativePointerEvent(timeStamp, dx, dy, buttonState, options, accelerate); };\
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchRelativePointerEvent(timeStamp, dx, dy, buttonState, options, accelerate); };\
 
     kern_return_t
     dispatchAbsolutePointerEvent_Call(uint64_t timeStamp,
@@ -1003,7 +1003,7 @@ public:
         IOFixed y,
         uint32_t buttonState,
         IOOptionBits options,
-        bool accelerate)  { return dispatchAbsolutePointerEvent(timeStamp, x, y, buttonState, options, accelerate); };\
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchAbsolutePointerEvent(timeStamp, x, y, buttonState, options, accelerate); };\
 
     kern_return_t
     dispatchRelativeScrollWheelEvent_Call(uint64_t timeStamp,
@@ -1011,19 +1011,19 @@ public:
         IOFixed dy,
         IOFixed dz,
         IOOptionBits options,
-        bool accelerate)  { return dispatchRelativeScrollWheelEvent(timeStamp, dx, dy, dz, options, accelerate); };\
+        bool accelerate) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchRelativeScrollWheelEvent(timeStamp, dx, dy, dz, options, accelerate); };\
 
     kern_return_t
     dispatchDigitizerStylusEvent_Call(uint64_t timeStamp,
-        IOHIDDigitizerStylusData * stylusData)  { return dispatchDigitizerStylusEvent(timeStamp, stylusData); };\
+        IOHIDDigitizerStylusData * stylusData) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchDigitizerStylusEvent(timeStamp, stylusData); };\
 
     kern_return_t
     dispatchDigitizerTouchEvent_Call(uint64_t timeStamp,
         IOHIDDigitizerTouchData * touchData,
-        uint32_t touchDataCount)  { return dispatchDigitizerTouchEvent(timeStamp, touchData, touchDataCount); };\
+        uint32_t touchDataCount) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchDigitizerTouchEvent(timeStamp, touchData, touchDataCount); };\
 
     void
-    dispatchEvent_Call(IOHIDEvent * event)  { return dispatchEvent(event); };\
+    dispatchEvent_Call(IOHIDEvent * event) __attribute__((availability(driverkit,introduced=19.0)))  { return dispatchEvent(event); };\
 
 };
 
@@ -1114,7 +1114,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_IOHIDEventService__SetLEDInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDEventService__SetLEDInterface : public OSInterface
 {
 public:
 };
@@ -1207,7 +1207,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_IOHIDEventService__SetUserPropertiesInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDEventService__SetUserPropertiesInterface : public OSInterface
 {
 public:
 };
@@ -1300,7 +1300,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_IOHIDEventService__CopyEventInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDEventService__CopyEventInterface : public OSInterface
 {
 public:
 };

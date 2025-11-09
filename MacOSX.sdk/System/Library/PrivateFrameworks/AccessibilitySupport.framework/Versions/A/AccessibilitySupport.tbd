@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9315ADAA-3FEA-3166-BC9C-BEA92A80701C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A84A8CBD-AE65-314B-883A-F5155412FE76
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/AccessibilitySupport'
 current-version: 0
 compatibility-version: 0
@@ -23,13 +16,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3698191C-D414-3F32-A7C6-9E67FB551BFF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FBAE522F-65E5-36C5-8771-C97F6B347BDD
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents'
 current-version: 2
 compatibility-version: 0
@@ -66,13 +52,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B25A6969-E026-3DA2-A41B-8232D1FE39CC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           294EFA4D-6186-36FB-A44C-AB1646C9611E
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
@@ -89,7 +68,7 @@ exports:
                        _AXFApplicationInfoIconSizeKey, _AXFApplicationInfoNameKey, 
                        _AXFApplicationShownNotification, _AXFBundleIdentifierFromPID, 
                        _AXFBundlePathFromPID, _AXFContainerTypeFromiOSAXContainerType, 
-                       _AXFCopyProcessIDForWindowID, _AXFCopyStringToUChar32Array, 
+                       _AXFConvertToInteger, _AXFCopyProcessIDForWindowID, _AXFCopyStringToUChar32Array, 
                        _AXFCopyStringToUniCharArray, _AXFCreateLog, _AXFCreatedNotification, 
                        _AXFCursorIsUsingCustomCursors, _AXFCursorRegisterAll, _AXFCursorSetAndReturnSeed, 
                        _AXFCursorUnregisterAll, _AXFDebugPrintHierarchy, _AXFDrawerCreatedNotification, 
@@ -125,7 +104,6 @@ exports:
                        _AXFMainWindowChangedNotification, _AXFMap, _AXFMenuClosedNotification, 
                        _AXFMenuItemSelectedNotification, _AXFMenuOpenedNotification, 
                        _AXFMovedNotification, _AXFPSNFromPID, _AXFPSNIsEqualToPSN, 
-                       _AXFPerformPrivilegedAttributedStringTransformation, _AXFPerformPrivilegedAttributedStringTransformations, 
                        _AXFResizedNotification, _AXFRowCollapsedNotification, _AXFRowCountChangedNotification, 
                        _AXFRowExpandedNotification, _AXFScreenCaptureBorderFrameKey, 
                        _AXFScreenCaptureDisplayNativeScaleKey, _AXFScreenCaptureImageDataKey, 
@@ -194,13 +172,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F9AB6A80-FF3B-36F1-906E-C95916205FE9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           856FCE00-3DB0-3BAA-A505-19ACA22787EA
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
 compatibility-version: 0
@@ -209,8 +180,8 @@ exports:
     symbols:         [ _AXKAreDifferentFonts, _AXKAreDifferentTextStyles, _AXKBundle, 
                        _AXKCmyk2rgb, _AXKContrastRatioForColor, _AXKDebugPrintHierarchy, 
                        _AXKDisableTRMStateIfNeeded, _AXKDisableTRMStateIfNeededWithCompletionBlock, 
-                       _AXKEnumerateEmojiDescriptionsInString, _AXKFullKeyboardAccessAvailableCommands, 
-                       _AXKGrayscale2rgb, _AXKHasBoldFont, _AXKHasItalicFont, _AXKHasPlainFont, 
+                       _AXKEnumerateEmojiDescriptionsInString, _AXKFontTraits, _AXKFullKeyboardAccessAvailableCommands, 
+                       _AXKGrayscale2rgb, _AXKHasBoldFont, _AXKHasItalicFont, _AXKHasPlainFontTraits, 
                        _AXKHsv2rgb, _AXKLocalizedString, _AXKLuminanceForColor, _AXKRecommendedColorForColors, 
                        _AXKRgb2cmyk, _AXKRgb2grayscale, _AXKRgb2hsv, _AXKShouldShowDisableTRMDialog, 
                        _AXKStringByReplacingEmojiWithDescriptions, _AXKThreadingCheckAssertCurrentQueueIsAppQueueForApp, 
@@ -236,13 +207,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E5AEBA58-A552-3891-A151-F9F7525C28CF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F597E0A7-361A-3F7D-B238-B7CB4E966064
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals'
 current-version: 2
 compatibility-version: 0

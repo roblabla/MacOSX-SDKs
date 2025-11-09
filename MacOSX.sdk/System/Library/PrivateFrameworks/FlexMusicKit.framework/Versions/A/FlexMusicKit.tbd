@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           42426D53-7D25-3B3B-A9AD-B3405FA884ED
-  - target:          x86_64-maccatalyst
-    value:           42426D53-7D25-3B3B-A9AD-B3405FA884ED
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           003536E5-1E49-3CDB-9A1D-01836842F934
-  - target:          arm64e-maccatalyst
-    value:           003536E5-1E49-3CDB-9A1D-01836842F934
 install-name:    '/System/Library/PrivateFrameworks/FlexMusicKit.framework/Versions/A/FlexMusicKit'
 current-version: 18.2
 exports:

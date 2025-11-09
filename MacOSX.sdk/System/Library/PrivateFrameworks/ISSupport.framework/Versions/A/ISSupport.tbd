@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           BBA666B3-A8A3-3B7B-8FD6-60D69C227BCC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F80CFD7D-D9F0-3443-8C4B-A36B68482546
 install-name:    '/System/Library/PrivateFrameworks/ISSupport.framework/Versions/A/ISSupport'
 current-version: 58
 exports:

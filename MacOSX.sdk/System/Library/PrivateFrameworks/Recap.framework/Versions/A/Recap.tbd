@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6C0442CD-6791-305A-B666-AAB7C3D98A29
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D596B60C-8E2E-309F-8F64-4AD8526C1859
 install-name:    '/System/Library/PrivateFrameworks/Recap.framework/Versions/A/Recap'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

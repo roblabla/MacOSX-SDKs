@@ -462,6 +462,7 @@ __BEGIN_DECLS
  */
 #define kOSKextKernelIdentifier                 "__kernel__"
 
+
 /*!
  * @define  kOSKextBundlePackageTypeKext
  * @abstract

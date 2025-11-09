@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKSuicaPassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKSuicaPassProperties.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2016 Apple, Inc. All rights reserved.
 //

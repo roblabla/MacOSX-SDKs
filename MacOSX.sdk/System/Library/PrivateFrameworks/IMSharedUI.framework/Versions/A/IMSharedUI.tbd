@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CFA7B4DF-C07A-3C05-A160-A6C948567DB4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           38F3E8B9-B556-3E56-BAD8-D6EF3BF99DE5
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUI.framework/Versions/A/IMSharedUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

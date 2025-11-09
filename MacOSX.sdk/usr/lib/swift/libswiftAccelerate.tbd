@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DCF563B6-A827-36E5-85FD-36E0F5783317
-  - target:          x86_64-maccatalyst
-    value:           DCF563B6-A827-36E5-85FD-36E0F5783317
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2A61AB2A-BD4B-3E12-9124-FAB70060C90A
-  - target:          arm64e-maccatalyst
-    value:           2A61AB2A-BD4B-3E12-9124-FAB70060C90A
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
 current-version: 41
 swift-abi-version: 7
@@ -1476,7 +1463,9 @@ exports:
                        '_$s10Accelerate4vDSPO3addySaySdGx_q_tAA0A6BufferRzAaFR_Sd7ElementRtzSdAGRt_r0_lFZ', 
                        '_$s10Accelerate4vDSPO3addySaySfGSf_xtAA0A6BufferRzSf7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO3addySaySfGx_q_tAA0A6BufferRzAaFR_Sf7ElementRtzSfAGRt_r0_lFZ', 
+                       '_$s10Accelerate4vDSPO3dotySdx_q_tAA0A6BufferRzAaER_Sd7ElementRtzSdAFRt_r0_lFZ', 
                        '_$s10Accelerate4vDSPO3dotySdx_xtAA0A6BufferRzSd7ElementRtzlFZ', 
+                       '_$s10Accelerate4vDSPO3dotySfx_q_tAA0A6BufferRzAaER_Sf7ElementRtzSfAFRt_r0_lFZ', 
                        '_$s10Accelerate4vDSPO3dotySfx_xtAA0A6BufferRzSf7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO3sumySdxAA0A6BufferRzSd7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO3sumySfxAA0A6BufferRzSf7ElementRtzlFZ', 

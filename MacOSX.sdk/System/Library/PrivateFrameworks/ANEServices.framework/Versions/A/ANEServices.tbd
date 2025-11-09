@@ -1,18 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4679E509-BAA9-3F18-B774-9A58B20D0528
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1E4B2CC3-3380-3B09-8827-76F33595EC3D
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _H11ANEDeviceClose, _H11ANEDeviceOpen, _H11ANEDeviceUpdateParameters, 
-                       _H11ANEHandleDeviceOpen, _H11ANELocateAndOpenHintedDevice, 
+    symbols:         [ _H11ANECheckPrivilegedVMAccess, _H11ANEDeviceClose, _H11ANEDeviceOpen, 
+                       _H11ANEDeviceUpdateParameters, _H11ANEHandleDeviceOpen, _H11ANELocateAndOpenHintedDevice, 
                        _H11ANEProgramCancelAllRequests, _H11ANEProgramChainingPrepare, 
                        _H11ANEProgramCompleteAllRequests, _H11ANEProgramCreate, _H11ANEProgramCreateNewInstance, 
                        _H11ANEProgramDestroy, _H11ANEProgramInputsReady, _H11ANEProgramMemoryMapRequest, 

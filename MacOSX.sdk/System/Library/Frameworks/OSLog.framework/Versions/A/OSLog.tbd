@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           354F6C36-80D0-3C17-8E80-4D220D9E932B
-  - target:          x86_64-maccatalyst
-    value:           354F6C36-80D0-3C17-8E80-4D220D9E932B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           54F94C3A-0D37-3B18-BF9E-CE416720E2C4
-  - target:          arm64e-maccatalyst
-    value:           54F94C3A-0D37-3B18-BF9E-CE416720E2C4
 install-name:    '/System/Library/Frameworks/OSLog.framework/Versions/A/OSLog'
-current-version: 1406.60.2
+current-version: 1431.100.13
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

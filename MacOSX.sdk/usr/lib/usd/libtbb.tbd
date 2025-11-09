@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A09357C2-7750-3A37-BCC1-13ACCA0F3232
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86B552E0-BC82-3072-BEAA-974C33D355A7
 install-name:    '/usr/lib/usd/libtbb.dylib'
-current-version: 20.102.2
+current-version: 20.105.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

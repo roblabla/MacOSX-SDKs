@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5113BF5D-0B78-3E82-AF73-5105F6D237D8
-  - target:          x86_64-maccatalyst
-    value:           5113BF5D-0B78-3E82-AF73-5105F6D237D8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E6A4277A-F3A4-3F40-99E2-5E673B3B6327
-  - target:          arm64e-maccatalyst
-    value:           E6A4277A-F3A4-3F40-99E2-5E673B3B6327
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -75,7 +62,8 @@ exports:
                        _QuasarCPDecTranslator_translate, _QuasarCPDecTranslator_translateResult, 
                        _QuasarCSystemConfigInfoCacheReset, _QuasarCSystemConfig_delete, 
                        _QuasarCSystemConfig_new, _QuasarCSystemConfig_readJsonFile, 
-                       _QuasarC_setLogLevel ]
+                       _QuasarC_getSpeechRecognizerDisableOverBuffer, _QuasarC_setLogLevel, 
+                       _QuasarC_setSpeechRecognizerDisableOverBuffer ]
     objc-classes:    [ EARAudioReader, EARAudioResult, EARAudioResultsGenerator, 
                        EARCaesuraSilencePosteriorGenerator, EARClientSilenceFeatures, 
                        EARKeywordFinder, EARKeywordFinderResult, EARPSRAudioProcessor, 
@@ -88,9 +76,9 @@ exports:
                        _EARCommandTagging, _EARCommandTaggingResult, _EARContextualData, 
                        _EARCustomLMBuilder, _EARCustomPronData, _EARDefaultServerEndpointFeatures, 
                        _EAREditDistance, _EAREmojiRecognition, _EAREndpointFeatures, 
-                       _EAREndpointer, _EARFormatter, _EARGeoLMHelper, _EARInterpolator, 
-                       _EARJitProfile, _EARLMTGlobalNNLM, _EARLMTKaldiVocab, _EARLanguageDetector, 
-                       _EARLanguageDetectorAudioBuffer, _EARLanguageDetectorLoggingInfo, 
+                       _EAREndpointer, _EAREuclid, _EARFormatter, _EARGeoLMHelper, 
+                       _EARInterpolator, _EARJitProfile, _EARLMTGlobalNNLM, _EARLMTKaldiVocab, 
+                       _EARLanguageDetector, _EARLanguageDetectorAudioBuffer, _EARLanguageDetectorLoggingInfo, 
                        _EARLanguageDetectorRequestContext, _EARLanguageDetectorResult, 
                        _EARLanguageModel, _EARLatticeMitigatorResult, _EARLmBuilder, 
                        _EARLmData, _EARLmEvaluator, _EARLmHandle, _EARLmInterpolator, 
@@ -98,13 +86,14 @@ exports:
                        _EARNgramLmModel, _EARNgramLmModel2, _EARNnetUtil, _EAROnDeviceEndpointerInfo, 
                        _EAROovToken, _EARPeopleSuggesterConfig, _EARPhonesetMapping, 
                        _EARPhoneticMatchBuilder, _EARPhoneticMatchData, _EARPlsParser, 
-                       _EARProfiler, _EARRecognitionMetrics, _EARResultCombiner, 
-                       _EARSdapiTokenizer, _EARSpeakerCodeInfo, _EARSpeakerCodeReader, 
-                       _EARSpeakerCodeWriter, _EARSpeechModelInfo, _EARSpeechRecognition, 
-                       _EARSpeechRecognitionActiveConfiguration, _EARSpeechRecognitionAudioBuffer, 
-                       _EARSpeechRecognitionResult, _EARSpeechRecognitionResultPackage, 
-                       _EARSpeechRecognitionToken, _EARSpeechRecognizer, _EARSyncResultStreamHelper, 
-                       _EARSyncSpeechRecognizer, _EARSystemResult, _EARTextNormalization, 
-                       _EARTokenizer, _EARTransformUtil, _EARUserProfile, _EARUserProfileBuilder, 
-                       _EARUserProfileConfig, _EARUserProfileContainer, _EARWordPart ]
+                       _EARProfiler, _EARQuasarTokenizer, _EARRecognitionMetrics, 
+                       _EARResultCombiner, _EARSdapiTokenizer, _EARSpeakerCodeInfo, 
+                       _EARSpeakerCodeReader, _EARSpeakerCodeWriter, _EARSpeechModelInfo, 
+                       _EARSpeechRecognition, _EARSpeechRecognitionActiveConfiguration, 
+                       _EARSpeechRecognitionAudioBuffer, _EARSpeechRecognitionResult, 
+                       _EARSpeechRecognitionResultPackage, _EARSpeechRecognitionToken, 
+                       _EARSpeechRecognizer, _EARSyncResultStreamHelper, _EARSyncSpeechRecognizer, 
+                       _EARSystemResult, _EARTextNormalization, _EARTokenizer, _EARTransformUtil, 
+                       _EARUserProfile, _EARUserProfileBuilder, _EARUserProfileConfig, 
+                       _EARUserProfileContainer, _EARWordPart ]
 ...

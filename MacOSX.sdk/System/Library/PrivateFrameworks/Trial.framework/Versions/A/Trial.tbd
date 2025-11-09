@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           525C64F7-95D7-3CDC-ADDF-6FDC2812FE37
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3CEFF9D9-1E14-3230-B722-713EC2D5FDFA
 install-name:    '/System/Library/PrivateFrameworks/Trial.framework/Versions/A/Trial'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -55,13 +48,14 @@ exports:
                        _TRILogCategory_XCTest, _TRILoggedNamespaceName, _TRINamespaceUpdateNotificationName, 
                        _TRIPersistedFactorsState_ClearStateOneOfCase, _TRIPersistedNetworkBehavior_DiscretionaryBehavior_EnumDescriptor, 
                        _TRIPersistedNetworkBehavior_DiscretionaryBehavior_IsValidValue, 
-                       _TRIPurgeabilityLevel_EnumDescriptor, _TRIPurgeabilityLevel_IsValidValue, 
-                       _TRISystemFactor_AllowFetchTasks, _TRISystemFactor_AllowTrialTelemetry, 
-                       _TRISystemFactor_CloudKitAssetDownloadTimeoutSeconds, _TRISystemFactor_CloudKitCacheControlMaxAge, 
-                       _TRISystemFactor_CloudKitUseNativeAPI, _TRISystemFactor_FetchExperimentsJitter, 
-                       _TRISystemFactor_FetchRollbacksInterval, _TRISystemFactor_FetchRollbacksJitter, 
-                       _TRISystemFactor_LogUserKeyboardEnabledInputMode, _TRISystemFactor_LogUserSettingsLanguageCode, 
-                       _TRISystemFactor_LogUserSettingsRegionCode, _TRISystemFactor_TaskQueueScheduledTaskDefaultGracePeriod, 
+                       _TRIPopulationOverrideKey, _TRIPurgeabilityLevel_EnumDescriptor, 
+                       _TRIPurgeabilityLevel_IsValidValue, _TRISystemFactor_AllowFetchTasks, 
+                       _TRISystemFactor_AllowTrialTelemetry, _TRISystemFactor_CloudKitAssetDownloadTimeoutSeconds, 
+                       _TRISystemFactor_CloudKitCacheControlMaxAge, _TRISystemFactor_CloudKitUseNativeAPI, 
+                       _TRISystemFactor_FetchExperimentsJitter, _TRISystemFactor_FetchRollbacksInterval, 
+                       _TRISystemFactor_FetchRollbacksJitter, _TRISystemFactor_LogUserKeyboardEnabledInputMode, 
+                       _TRISystemFactor_LogUserSettingsLanguageCode, _TRISystemFactor_LogUserSettingsRegionCode, 
+                       _TRISystemFactor_TaskQueueScheduledTaskDefaultGracePeriod, 
                        _TRISystemFactor_TelemetryLevel, _TRISystemNamespaceName, 
                        _TRIValidateAssetId, _TRIValidateFactorPackId, _TRIValidateFactorPackSetId, 
                        _TRIValidateMLRuntimeEvaluationId, _TRIValidateRampId, _TrialVersionNumber, 

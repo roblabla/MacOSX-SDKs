@@ -1,11 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CA2E2A4B-954C-3B1D-B512-4A9517495D1A
-  - target:          arm64e-macos
-    value:           B8E66655-67D1-38D3-824D-8C135A72CB2A
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -5567,10 +5562,7 @@ exports:
                        ___jit_debug_register_code, _abort, _decodeInstruction, _getPointerToNamedFunction, 
                        _llvm_regcomp, _llvm_regerror, _llvm_regexec, _llvm_regfree, 
                        _llvm_strlcpy, _raise, _x86DisassemblerDebug, _x86DisassemblerGetInstrName ]
-    weak-symbols:    [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
+    weak-symbols:    [ __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE11removeBlockEPS1_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13changeLoopForEPS1_PS2_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13releaseMemoryEv, 
@@ -6065,9 +6057,6 @@ exports:
                        __ZTIN4llvm6object13ELFObjectFileILNS_7support10endiannessE1ELb0EEE, 
                        __ZTIN4llvm6object13ELFObjectFileILNS_7support10endiannessE1ELb1EEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                       __ZTINSt3__113__vector_baseIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
-                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__121__basic_string_commonILb1EEE, 
                        __ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTINSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
                        __ZTSN4llvm10FoldingSetINS_14AttributesImplEEE, __ZTSN4llvm10FoldingSetINS_17AttributeListImplEEE, 
@@ -6193,9 +6182,6 @@ exports:
                        __ZTSN4llvm6object13ELFObjectFileILNS_7support10endiannessE1ELb0EEE, 
                        __ZTSN4llvm6object13ELFObjectFileILNS_7support10endiannessE1ELb1EEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                       __ZTSNSt3__113__vector_baseIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
-                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
                        __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
                        __ZTVN4llvm17DominatorTreeBaseINS_10BasicBlockEEE, __ZTVN4llvm17DominatorTreeBaseINS_17MachineBasicBlockEEE, 

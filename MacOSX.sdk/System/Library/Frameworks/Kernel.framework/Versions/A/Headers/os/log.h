@@ -544,7 +544,6 @@ os_log_coprocessor_register(const char *uuid, const char *file_path, bool copy);
 
 typedef enum {
 	os_log_coproc_register_memory,
-	os_log_coproc_register_harvest_fs_img4,
 	os_log_coproc_register_harvest_fs_ftab,
 } os_log_coproc_reg_t;
 

@@ -759,6 +759,10 @@ const CFStringRef kCFURLAttributeModificationDateKey API_AVAILABLE(macos(10.6), 
     /* The time the resource's attributes were last modified (Read-only, value type CFDate) */
 
 CF_EXPORT
+const CFStringRef kCFURLFileIdentifierKey API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+    /* The file system's internal inode identifier for the item. This value is not stable for all file systems or across all mounts, so it should be used sparingly and not persisted. It is useful, for example, to match URLs from the URL enumerator with paths from FSEvents. (Read-only, value type CFNumber containing a long long which should be cast to a UInt64). */
+
+CF_EXPORT
 const CFStringRef kCFURLFileContentIdentifierKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
     /* A 64-bit value assigned by APFS that identifies a file's content data stream. Only cloned files and their originals can have the same identifier. (CFNumber) */
 
@@ -1120,6 +1124,18 @@ const CFStringRef kCFURLVolumeSupportsAccessPermissionsKey API_AVAILABLE(macosx(
 CF_EXPORT
 const CFStringRef kCFURLVolumeSupportsFileProtectionKey API_AVAILABLE(macosx(11.0), ios(14.0), watchos(7.0), tvos(14.0));
     /* true if the volume supports data protection for files (see kCFURLFileProtectionKey). (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeTypeNameKey API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+/* The name of the file system type. (Read-only, value type CFString) */
+
+CF_EXPORT
+const CFStringRef  kCFURLVolumeSubtypeKey API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+/* The file system subtype value. (Read-only, value type CFNumber) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeMountFromLocationKey API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+/* The volume mounted from location. (Read-only, value type CFString) */
 
 /* UbiquitousItem Properties */
 

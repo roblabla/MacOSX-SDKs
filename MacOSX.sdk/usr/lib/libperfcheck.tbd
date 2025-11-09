@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           21F25C5E-61FB-3337-BC40-6F1DBB98C9B5
-  - target:          x86_64-maccatalyst
-    value:           21F25C5E-61FB-3337-BC40-6F1DBB98C9B5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FCAB30FD-4F98-30A7-B17D-82634A05CE90
-  - target:          arm64e-maccatalyst
-    value:           FCAB30FD-4F98-30A7-B17D-82634A05CE90
 install-name:    '/usr/lib/libperfcheck.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -2,28 +2,19 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           02CC53C7-BDE7-36E9-AF56-99D94A96A540
-  - target:          x86_64-maccatalyst
-    value:           02CC53C7-BDE7-36E9-AF56-99D94A96A540
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C4BC17CB-E2C8-346E-A5DC-3B15040F54C5
-  - target:          arm64e-maccatalyst
-    value:           C4BC17CB-E2C8-346E-A5DC-3B15040F54C5
 install-name:    '/System/Library/PrivateFrameworks/TipsDaemon.framework/Versions/A/TipsDaemon'
-current-version: 663
+current-version: 665.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfC', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTj', 
-                       '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTq', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfc', 
-                       '_$s10TipsDaemon17SearchItemIndexerC5index4tips16qualityOfService17completionHandlerySaySo6TPSTipCG_So09NSQualityiJ0Vys5Error_pSgcSgtF', 
+    symbols:         [ '_$s10TipsDaemon16UserGuideManagerC10userGuidesSay0A4Core0cD0CGyFZ', 
+                       '_$s10TipsDaemon16UserGuideManagerCACycfC', '_$s10TipsDaemon16UserGuideManagerCACycfc', 
+                       '_$s10TipsDaemon16UserGuideManagerCMa', '_$s10TipsDaemon16UserGuideManagerCMn', 
+                       '_$s10TipsDaemon16UserGuideManagerCMo', '_$s10TipsDaemon16UserGuideManagerCN', 
+                       '_$s10TipsDaemon16UserGuideManagerCfD', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfC', 
+                       '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTj', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTq', 
+                       '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfc', '_$s10TipsDaemon17SearchItemIndexerC5index4tips16qualityOfService17completionHandlerySaySo6TPSTipCG_So09NSQualityiJ0Vys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC7defaultACvgZ', '_$s10TipsDaemon17SearchItemIndexerC7reindex4tips16qualityOfService17completionHandlerySaySo6TPSTipCG_So09NSQualityiJ0Vys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC9deleteAll17completionHandleryys5Error_pSgcSg_tF', 
                        '_$s10TipsDaemon17SearchItemIndexerCACycfC', '_$s10TipsDaemon17SearchItemIndexerCACycfc', 
@@ -90,8 +81,9 @@ exports:
                        '_$sSo6TPSTipC10TipsDaemonE9indexableSbvpMV', _TPSContextualEventSinceDateGracePeriod, 
                        _TPSDeliveryPreconditionRootKey, _TPSHMManagerSpeakersConfiguredChangedNotificationString, 
                        _TPSTipsManagerErrorDomain, _TipsDaemonVersionNumber, _TipsDaemonVersionString, 
-                       _kTPSPairedAirTagValidation, _kTPSPairedCarPlayValidation, 
-                       _kTPSPairedHomePodMiniValidation, _kTPSPairedHomePodValidation, 
+                       _kTPSPairedAirTagValidation, _kTPSPairedAppleWatch, _kTPSPairedAppleWatchUltra, 
+                       _kTPSPairedCarPlayValidation, _kTPSPairedHomePodMiniValidation, 
+                       _kTPSPairedHomePodValidation, _kTPSPairedLargeHomePodValidation, 
                        _kTPSPairedWatchValidation ]
     objc-classes:    [ TPSAltAccountPairingValidation, TPSAnalyticsEventProcessedUsageEvents, 
                        TPSAnalyticsHistoricTipsDataProcessor, TPSAnalyticsProcessingController, 
@@ -130,7 +122,8 @@ exports:
                        TPSNotificationsModelTrial, TPSOfflineContentManager, TPSPairedAirTagValidation, 
                        TPSPairedCarPlayValidation, TPSPairedDeviceValidation, TPSPairedDevicesCondition, 
                        TPSPairedHomePodMiniValidation, TPSPairedHomePodValidation, 
-                       TPSPairedWatchValidation, TPSPeopleSuggestionValidation, TPSPineBoardBulletinController, 
+                       TPSPairedLargeHomePodValidation, TPSPairedWatchValidation, 
+                       TPSPeopleSuggestionValidation, TPSPineBoardBulletinController, 
                        TPSPreferredLanguageValidation, TPSRegionsCondition, TPSRegionsValidation, 
                        TPSReminderCloudKitValidation, TPSReminderCompletedItemValidation, 
                        TPSReminderCustomBadgeValidation, TPSReminderCustomSmartListValidation, 
@@ -139,7 +132,7 @@ exports:
                        TPSSiriLanguageValidation, TPSSiriLanguagesCondition, TPSSiriSystemLanguageMatchValidation, 
                        TPSSleepSetupValidation, TPSSpatialAudioValidation, TPSSystemVersionUpdateValidation, 
                        TPSTargetingCache, TPSTargetingValidateOperation, TPSTargetingValidation, 
-                       TPSTargetingValidator, TPSTipsManager, TPSTrial, TPSUserNotificationController, 
-                       TPSUserTypeCondition, TPSUserTypesValidation, TPSWelcomeDocument, 
-                       TPSWelcomeInformation ]
+                       TPSTargetingValidator, TPSTipsManager, TPSTrial, TPSUserGuideManager, 
+                       TPSUserNotificationController, TPSUserTypeCondition, TPSUserTypesValidation, 
+                       TPSWelcomeDocument, TPSWelcomeInformation ]
 ...

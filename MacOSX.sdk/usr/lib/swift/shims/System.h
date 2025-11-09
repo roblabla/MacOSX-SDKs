@@ -117,8 +117,8 @@
 #define SWIFT_ABI_DARWIN_X86_64_LEAST_VALID_POINTER 0x100000000ULL
 
 // Only the bottom 56 bits are used, and heap objects are eight-byte-aligned.
-// This is conservative: in practice architectual limitations and other
-// compatiblity concerns likely constrain the address space to 52 bits.
+// This is conservative: in practice architectural limitations and other
+// compatibility concerns likely constrain the address space to 52 bits.
 #define SWIFT_ABI_X86_64_SWIFT_SPARE_BITS_MASK                                 \
   SWIFT_ABI_DEFAULT_64BIT_SPARE_BITS_MASK
 
@@ -215,5 +215,13 @@
    1<<SWIFT_ABI_S390X_OBJC_NUM_RESERVED_LOW_BITS)
 #define SWIFT_ABI_S390X_OBJC_WEAK_REFERENCE_MARKER_VALUE \
   (1<<SWIFT_ABI_S390X_OBJC_NUM_RESERVED_LOW_BITS)
+
+/*********************************** wasm32 ************************************/
+
+// WebAssembly doesn't reserve low addresses. But without "extra inhabitants" of
+// the pointer representation, runtime performance and memory footprint are
+// worse. So assume that compiler driver uses wasm-ld and --global-base=1024 to
+// reserve low 1KB.
+#define SWIFT_ABI_WASM32_LEAST_VALID_POINTER 4096
 
 #endif // SWIFT_STDLIB_SHIMS_ABI_SYSTEM_H

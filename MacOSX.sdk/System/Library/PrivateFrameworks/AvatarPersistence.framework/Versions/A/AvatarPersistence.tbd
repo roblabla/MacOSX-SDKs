@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9F131F26-64EB-380B-BE20-9AE6931521AA
-  - target:          x86_64-maccatalyst
-    value:           9F131F26-64EB-380B-BE20-9AE6931521AA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           27078163-3576-388A-BDF0-87FCFE75D3BD
-  - target:          arm64e-maccatalyst
-    value:           27078163-3576-388A-BDF0-87FCFE75D3BD
 install-name:    '/System/Library/PrivateFrameworks/AvatarPersistence.framework/Versions/A/AvatarPersistence'
-current-version: 306
+current-version: 306.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

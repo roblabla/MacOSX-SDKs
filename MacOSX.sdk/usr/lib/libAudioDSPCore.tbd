@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7C13BE83-74C5-3B91-89A9-0AB0DBA061A3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           66088FC8-E64C-3549-AAA5-FE7B9929128F
 install-name:    '/usr/lib/libAudioDSPCore.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -40,8 +33,12 @@ exports:
                        __ZN2IR13IRCoordinatesC1Ev, __ZN2IR13IRCoordinatesC2Ev, __ZN2IR14copyHRTFBinURLEv, 
                        __ZN2IR15FFTFilterKernel10accumulateERKS0_f, __ZN2IR15FFTFilterKernel10initializeEjjb, 
                        __ZN2IR15FFTFilterKernel11storeCoeffsEPKfjP17MultiRadixRealFFT, 
+                       __ZN2IR15FFTFilterKernel11storeCoeffsEPKfjP17MultiRadixRealFFTNS_31FFTFilterOptimizationParametersE, 
+                       __ZN2IR15FFTFilterKernel11storeCoeffsEPKfjP17MultiRadixRealFFTNS_31FFTFilterOptimizationParametersEf, 
                        __ZN2IR15FFTFilterKernel22calculateFIRActiveTapsEPKfj, __ZN2IR15FFTFilterKernel24calculateFIRFilterLengthEjjb, 
                        __ZN2IR15FFTFilterKernel24initializeAndStoreCoeffsEPKfjjbP17MultiRadixRealFFT, 
+                       __ZN2IR15FFTFilterKernel24initializeAndStoreCoeffsEPKfjjbP17MultiRadixRealFFTNS_31FFTFilterOptimizationParametersE, 
+                       __ZN2IR15FFTFilterKernel24initializeAndStoreCoeffsEPKfjjbP17MultiRadixRealFFTNS_31FFTFilterOptimizationParametersEf, 
                        __ZN2IR15FFTFilterKernel5resetEv, __ZN2IR15FFTFilterKernel5scaleEf, 
                        __ZN2IR15FFTFilterKernel9overwriteERKS0_f, __ZN2IR15FFTFilterKernelC1EOS0_, 
                        __ZN2IR15FFTFilterKernelC1ERKS0_, __ZN2IR15FFTFilterKernelC1Ejjb, 
@@ -52,11 +49,14 @@ exports:
                        __ZN2IR15FFTFilterKernelaSERKS0_, __ZN2IR16FFTSubFilterData10accumulateERKS0_f, 
                        __ZN2IR16FFTSubFilterData5resetEv, __ZN2IR16FFTSubFilterData5scaleEf, 
                        __ZN2IR16FFTSubFilterData9SetFilterEPKfjfP17MultiRadixRealFFT, 
-                       __ZN2IR16FFTSubFilterData9overwriteERKS0_f, __ZN2IR16FFTSubFilterDataC1EOS0_, 
-                       __ZN2IR16FFTSubFilterDataC1ERKS0_, __ZN2IR16FFTSubFilterDataC1Ejj, 
-                       __ZN2IR16FFTSubFilterDataC2EOS0_, __ZN2IR16FFTSubFilterDataC2ERKS0_, 
-                       __ZN2IR16FFTSubFilterDataC2Ejj, __ZN2IR16FFTSubFilterDataaSEOS0_, 
-                       __ZN2IR16FFTSubFilterDataaSERKS0_, __ZN2IR18PersonalizedIRData10GetHRIRKeyE21PersonalHRIRType_temp, 
+                       __ZN2IR16FFTSubFilterData9overwriteERKS0_f, __ZN2IR16FFTSubFilterData9setFilterEPKfjfP17MultiRadixRealFFTNS_31FFTFilterOptimizationParametersE, 
+                       __ZN2IR16FFTSubFilterDataC1EOS0_, __ZN2IR16FFTSubFilterDataC1ERKS0_, 
+                       __ZN2IR16FFTSubFilterDataC1Ejj, __ZN2IR16FFTSubFilterDataC2EOS0_, 
+                       __ZN2IR16FFTSubFilterDataC2ERKS0_, __ZN2IR16FFTSubFilterDataC2Ejj, 
+                       __ZN2IR16FFTSubFilterDataaSEOS0_, __ZN2IR16FFTSubFilterDataaSERKS0_, 
+                       __ZN2IR18FFTFilterTransposeC1Ev, __ZN2IR18FFTFilterTransposeC2Ev, 
+                       __ZN2IR18FFTFilterTransposeD1Ev, __ZN2IR18FFTFilterTransposeD2Ev, 
+                       __ZN2IR18PersonalizedIRData10GetHRIRKeyE21PersonalHRIRType_temp, 
                        __ZN2IR18PersonalizedIRData11CacheIRDataENS_16IRDataAttributesENS_25IRDataLoaderCachingSchemeENSt3__18functionIFvbEEEN10applesauce2CF13DictionaryRefE, 
                        __ZN2IR18PersonalizedIRData12SetInHALModeEb, __ZN2IR18PersonalizedIRData16RegisterObserverERKNSt3__18functionIFvbEEEb, 
                        __ZN2IR18PersonalizedIRData17RegisterObserversERKNSt3__18functionIFvbEEE, 
@@ -101,13 +101,18 @@ exports:
                        __ZN2IR6IRDataC2ERKNSt3__16vectorINS2_IfNS1_9allocatorIfEEEENS3_IS5_EEEES9_RKNS2_INS_16IRCoordinateTypeENS3_ISA_EEEES9_fjRKS5_RKNS2_INS_21IRInterpolationMethodENS3_ISH_EEEERKN10applesauce2CF13DictionaryRefERKNS1_12basic_stringIcNS1_11char_traitsIcEENS3_IcEEEEjbjNS_24IRSphericalInterpolationESG_, 
                        __ZN2IR6IRDataC2EfjjfbjjjRKNSt3__16vectorINS_16IRCoordinateTypeENS1_9allocatorIS3_EEEERKNS2_IfNS4_IfEEEERKNS2_INS_21IRInterpolationMethodENS4_ISD_EEEENS_24IRSphericalInterpolationEN10applesauce2CF13DictionaryRefE, 
                        __ZN2IR6IRDataD1Ev, __ZN2IR6IRDataD2Ev, __ZN2IR9FFTFilter10initializeEjjjbjj, 
-                       __ZN2IR9FFTFilter12uninitializeEv, __ZN2IR9FFTFilter15setFilterCoeffsEPKPKfjj, 
-                       __ZN2IR9FFTFilter16setFilterKernelsEPKNSt3__16vectorINS_15FFTFilterKernelENS1_9allocatorIS3_EEEE, 
+                       __ZN2IR9FFTFilter10initializeEjjjbjjbb, __ZN2IR9FFTFilter12uninitializeEv, 
+                       __ZN2IR9FFTFilter15setFilterCoeffsEPKPKfjj, __ZN2IR9FFTFilter16setFilterKernelsEPKNSt3__16vectorINS_15FFTFilterKernelENS1_9allocatorIS3_EEEE, 
                        __ZN2IR9FFTFilter17getScratchKernelsEv, __ZN2IR9FFTFilter18getFIRFilterLengthEv, 
-                       __ZN2IR9FFTFilter18getPartitionLengthEv, __ZN2IR9FFTFilter29initializeAndSetFilterKernelsEPKNSt3__16vectorINS_15FFTFilterKernelENS1_9allocatorIS3_EEEEjj, 
+                       __ZN2IR9FFTFilter18getPartitionLengthEv, __ZN2IR9FFTFilter21processMultipleInputsEPKPfS3_jjjP21ComplexDataCircBuffer, 
+                       __ZN2IR9FFTFilter29initializeAndSetFilterKernelsEPKNSt3__16vectorINS_15FFTFilterKernelENS1_9allocatorIS3_EEEEjj, 
+                       __ZN2IR9FFTFilter29initializeAndSetFilterKernelsEPKNSt3__16vectorINS_15FFTFilterKernelENS1_9allocatorIS3_EEEEjjbb, 
                        __ZN2IR9FFTFilter5resetEv, __ZN2IR9FFTFilter7processEPKfPKPfjj, 
-                       __ZN2IR9FFTFilterC1Ev, __ZN2IR9FFTFilterC2Ev, __ZN2IR9FFTFilterD1Ev, 
-                       __ZN2IR9FFTFilterD2Ev, __ZN8AudioDSP4Core11HeadTracker12DisconnectRMEv, 
+                       __ZN2IR9FFTFilter7processEPKfPKPfjjP21ComplexDataCircBuffer, 
+                       __ZN2IR9FFTFilterC1ENSt3__110unique_ptrINS0_14ImplementationENS1_14default_deleteIS3_EEEE, 
+                       __ZN2IR9FFTFilterC1Ev, __ZN2IR9FFTFilterC2ENSt3__110unique_ptrINS0_14ImplementationENS1_14default_deleteIS3_EEEE, 
+                       __ZN2IR9FFTFilterC2Ev, __ZN2IR9FFTFilterD1Ev, __ZN2IR9FFTFilterD2Ev, 
+                       __ZN8AudioDSP4Core11HeadTracker10InitializeEv, __ZN8AudioDSP4Core11HeadTracker12DisconnectRMEv, 
                        __ZN8AudioDSP4Core11HeadTracker12SetInHALModeEb, __ZN8AudioDSP4Core11HeadTracker13GetUserChoiceEjRj, 
                        __ZN8AudioDSP4Core11HeadTracker16CallbackFunctionEjjPK26AudioObjectPropertyAddressPv, 
                        __ZN8AudioDSP4Core11HeadTracker18GetCurrentHeadPoseER10simd_quatf, 
@@ -131,14 +136,15 @@ exports:
                        __ZNK2IR13IRCoordinatesneERKS0_, __ZNK2IR15FFTFilterKernel16getFFTSubFiltersEv, 
                        __ZNK2IR15FFTFilterKernel18getMaxFilterLengthEv, __ZNK2IR15FFTFilterKernel18getPartitionLengthEv, 
                        __ZNK2IR15FFTFilterKernel19getNumFFTSubFiltersEv, __ZNK2IR15FFTFilterKernel21getActiveFilterLengthEv, 
-                       __ZNK2IR15FFTFilterKernel25getNumActiveFFTSubFiltersEv, __ZNK2IR6IRData11getMaxDelayEv, 
-                       __ZNK2IR6IRData11getUserDataEv, __ZNK2IR6IRData12getAverageIREv, 
-                       __ZNK2IR6IRData13getDataLayoutEv, __ZNK2IR6IRData13getSampleRateEv, 
-                       __ZNK2IR6IRData14getDescriptionEv, __ZNK2IR6IRData15getFilterLengthEv, 
-                       __ZNK2IR6IRData16getNumDimensionsEv, __ZNK2IR6IRData18getPartitionLengthEv, 
-                       __ZNK2IR6IRData19getIRDataAttributesEv, __ZNK2IR6IRData19getNumSpatialPointsEv, 
-                       __ZNK2IR6IRData19isAverageIRComputedEv, __ZNK2IR6IRData20getTriangulationDataEv, 
-                       __ZNK2IR6IRData21getDefaultCoordinatesEv, __ZNK2IR6IRData21getInterpolatedCoeffsERKNS_13IRCoordinatesERKNSt3__16vectorIjNS4_9allocatorIjEEEERNS5_INS_15FFTFilterKernelENS6_ISB_EEEERNS5_IfNS6_IfEEEENS_21IRInterpolationMethodE, 
+                       __ZNK2IR15FFTFilterKernel25getNumActiveFFTSubFiltersEv, __ZNK2IR15FFTFilterKernel31getComplexMultiplicationLengthsEv, 
+                       __ZNK2IR6IRData11getMaxDelayEv, __ZNK2IR6IRData11getUserDataEv, 
+                       __ZNK2IR6IRData12getAverageIREv, __ZNK2IR6IRData13getDataLayoutEv, 
+                       __ZNK2IR6IRData13getSampleRateEv, __ZNK2IR6IRData14getDescriptionEv, 
+                       __ZNK2IR6IRData15getFilterLengthEv, __ZNK2IR6IRData16getNumDimensionsEv, 
+                       __ZNK2IR6IRData18getPartitionLengthEv, __ZNK2IR6IRData19getIRDataAttributesEv, 
+                       __ZNK2IR6IRData19getNumSpatialPointsEv, __ZNK2IR6IRData19isAverageIRComputedEv, 
+                       __ZNK2IR6IRData20getTriangulationDataEv, __ZNK2IR6IRData21getDefaultCoordinatesEv, 
+                       __ZNK2IR6IRData21getInterpolatedCoeffsERKNS_13IRCoordinatesERKNSt3__16vectorIjNS4_9allocatorIjEEEERNS5_INS_15FFTFilterKernelENS6_ISB_EEEERNS5_IfNS6_IfEEEENS_21IRInterpolationMethodE, 
                        __ZNK2IR6IRData21getInterpolatedCoeffsERKNS_13IRCoordinatesERNSt3__16vectorINS_15FFTFilterKernelENS4_9allocatorIS6_EEEERNS5_IfNS7_IfEEEENS_21IRInterpolationMethodE, 
                        __ZNK2IR6IRData21getInterpolatedCoeffsERKNS_13IRCoordinatesEjRNS_15FFTFilterKernelERfNS_21IRInterpolationMethodE, 
                        __ZNK2IR6IRData21getOriginalSampleRateEv, __ZNK2IR6IRData22getInterpolationMethodEv, 
@@ -148,5 +154,6 @@ exports:
                        __ZNK2IR6IRData31getInterpolatedTimeDomainCoeffsERKNS_13IRCoordinatesERNSt3__16vectorINS5_IfNS4_9allocatorIfEEEENS6_IS8_EEEERS8_NS_21IRInterpolationMethodE, 
                        __ZNK2IR6IRData31getInterpolatedTimeDomainCoeffsERKNS_13IRCoordinatesEjRNSt3__16vectorIfNS4_9allocatorIfEEEERfNS_21IRInterpolationMethodE, 
                        __ZNK2IR6IRData36getOriginalNumFiltersPerSpatialPointEv, __ZNK2IR6IRData8usesVBAPEv, 
-                       __ZNK2IR9FFTFilter22getNumActiveSubFiltersEv ]
+                       __ZNK2IR9FFTFilter13doXFadeUpdateEv, __ZNK2IR9FFTFilter15getConfigParamsEv, 
+                       __ZNK2IR9FFTFilter22getNumActiveSubFiltersEv, __ZTVN2IR9FFTFilterE ]
 ...

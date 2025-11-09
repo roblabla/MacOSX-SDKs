@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           69F8EA39-C0FF-3452-A0F5-0033C362A859
-  - target:          x86_64-maccatalyst
-    value:           69F8EA39-C0FF-3452-A0F5-0033C362A859
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FFE191B7-9340-302E-B8CD-3673EE4F6399
-  - target:          arm64e-maccatalyst
-    value:           FFE191B7-9340-302E-B8CD-3673EE4F6399
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 306.3.4
+current-version: 306.5.16
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -73,11 +60,13 @@ exports:
                        _MTLFeatureSetSupportsSamplingFromPixelFormat, _MTLFunctionTypeString, 
                        _MTLGPUDebugEnabled, _MTLGPUFamilySupportsSamplingFromPixelFormat, 
                        _MTLGPUOperationString, _MTLGetAllArchitectures, _MTLGetArchitectures, 
-                       _MTLGetDisallowedTextureUsagesWhenSwizzling, _MTLGetEnvDefault, 
-                       _MTLGetEnvDefaultDouble, _MTLGetGPUArchiverCachePath, _MTLGetGPUFamilyFromFeatureSet, 
-                       _MTLGetModulesCachePath, _MTLGetOverridenDeviceCreationFlags, 
-                       _MTLGetPackFloatFunction, _MTLGetPackSintFunction, _MTLGetPackUintFunction, 
-                       _MTLGetReportFailureBlock, _MTLGetShaderCachePath, _MTLGetTextureLevelInfoForDevice, 
+                       _MTLGetDefaultCompilerProcessesCount, _MTLGetDisallowedTextureUsagesWhenSwizzling, 
+                       _MTLGetEnvDefault, _MTLGetEnvDefaultDouble, _MTLGetGPUArchiverCachePath, 
+                       _MTLGetGPUFamilyFromFeatureSet, _MTLGetMaximumCompilerProcessesCount, 
+                       _MTLGetModulesCachePath, _MTLGetOptimalCompilerProcessesCount, 
+                       _MTLGetOverridenDeviceCreationFlags, _MTLGetPackFloatFunction, 
+                       _MTLGetPackSintFunction, _MTLGetPackUintFunction, _MTLGetReportFailureBlock, 
+                       _MTLGetShaderCachePath, _MTLGetTextureLevelInfoForDevice, 
                        _MTLGetTextureLevelInfoForDeviceWithOptions, _MTLGetWarningMode, 
                        _MTLHazardTrackingModeString, _MTLIOAccelCommandBufferStorageAllocResourceAtIndex, 
                        _MTLIOAccelCommandBufferStorageBeginKernelCommands, _MTLIOAccelCommandBufferStorageBeginSegment, 
@@ -133,10 +122,10 @@ exports:
                        _MTLRangeAllocatorDestroy, _MTLRangeAllocatorGetFragmentCapacity, 
                        _MTLRangeAllocatorGetFragmentCount, _MTLRangeAllocatorGetFreeCount, 
                        _MTLRangeAllocatorGetMaxFreeSize, _MTLRangeAllocatorInit, 
-                       _MTLRangeAllocatorSetFragmentCapacityIncrement, _MTLReadWriteTextureIsSupported, 
-                       _MTLReleaseAssertionFailure, _MTLRemoveDeviceObserver, _MTLRemoveMessageObserver, 
-                       _MTLRenderPipelineColorAttachmentDescriptorDescription, _MTLReportFailure, 
-                       _MTLReportFailureTypeEnabled, _MTLResourceListAddResource, 
+                       _MTLRangeAllocatorInitWithStartRange, _MTLRangeAllocatorSetFragmentCapacityIncrement, 
+                       _MTLReadWriteTextureIsSupported, _MTLReleaseAssertionFailure, 
+                       _MTLRemoveDeviceObserver, _MTLRemoveMessageObserver, _MTLRenderPipelineColorAttachmentDescriptorDescription, 
+                       _MTLReportFailure, _MTLReportFailureTypeEnabled, _MTLResourceListAddResource, 
                        _MTLResourceListPoolCreateResourceList, _MTLResourceListRelease, 
                        _MTLResourceOptionsString, _MTLSamplerBorderColorString, _MTLSetCompilerTestMode, 
                        _MTLSetReportFailureBlock, _MTLSetShaderCachePath, _MTLSetWarningMode, 

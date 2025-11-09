@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1FA4A590-F60C-3813-A408-A407FBCD0E89
-  - target:          x86_64-maccatalyst
-    value:           1FA4A590-F60C-3813-A408-A407FBCD0E89
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           20A1D2A7-4C7C-36D4-ADE6-C65D68317BCA
-  - target:          arm64e-maccatalyst
-    value:           20A1D2A7-4C7C-36D4-ADE6-C65D68317BCA
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 1300.36
+current-version: 1500.65
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

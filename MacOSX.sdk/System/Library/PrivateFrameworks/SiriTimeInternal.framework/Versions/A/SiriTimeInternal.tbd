@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B13B0FDA-7291-365E-8C81-0147E4563037
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9BD50DFA-0013-3606-A097-509E52730154
 install-name:    '/System/Library/PrivateFrameworks/SiriTimeInternal.framework/Versions/A/SiriTimeInternal'
 swift-abi-version: 7
 exports:
@@ -218,6 +211,7 @@ exports:
                        '_$s16SiriTimeInternal0aB12FeatureFlagsTL', '_$s16SiriTimeInternal0aB16FeatureFlagsImplV07isAlarmA8XEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV07isTimerA8XEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV14isJindoEnabledSbyF', 
+                       '_$s16SiriTimeInternal0aB16FeatureFlagsImplV20isTimerBobcatEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV21isCoordinationEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV31isAlarmResponseFrameworkEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV31isClockResponseFrameworkEnabledSbyF', 
@@ -264,6 +258,9 @@ exports:
                        '_$s16SiriTimeInternal0aB3LogO25alarmExtensionOSLogObjectSo9OS_os_logCvau', 
                        '_$s16SiriTimeInternal0aB3LogO25alarmExtensionOSLogObjectSo9OS_os_logCvgZ', 
                        '_$s16SiriTimeInternal0aB3LogO25alarmExtensionOSLogObjectSo9OS_os_logCvpZ', 
+                       '_$s16SiriTimeInternal0aB3LogO25timerExtensionOSLogObjectSo9OS_os_logCvau', 
+                       '_$s16SiriTimeInternal0aB3LogO25timerExtensionOSLogObjectSo9OS_os_logCvgZ', 
+                       '_$s16SiriTimeInternal0aB3LogO25timerExtensionOSLogObjectSo9OS_os_logCvpZ', 
                        '_$s16SiriTimeInternal0aB3LogO6logger8category2os6LoggerVSS_tFZ', 
                        '_$s16SiriTimeInternal0aB3LogO7timerUI2os6LoggerVvau', '_$s16SiriTimeInternal0aB3LogO7timerUI2os6LoggerVvgZ', 
                        '_$s16SiriTimeInternal0aB3LogO7timerUI2os6LoggerVvpZ', '_$s16SiriTimeInternal0aB3LogO9alarmFlow2os6LoggerVvau', 

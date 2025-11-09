@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8DBE0F78-50D6-3EEB-B1F0-8396EEBB0249
-  - target:          x86_64-maccatalyst
-    value:           8DBE0F78-50D6-3EEB-B1F0-8396EEBB0249
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E50FE226-82DC-30FF-9847-255A680DE553
-  - target:          arm64e-maccatalyst
-    value:           E50FE226-82DC-30FF-9847-255A680DE553
 install-name:    '/usr/lib/libAudioToolboxUtility.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -26,8 +13,9 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZNK11PListLogger4vlogEPKcP13__va_list_tag ]
-    weak-symbols:    [ __ZTI11CAException, __ZTI12CAXException, __ZTS11CAException, 
-                       __ZTS12CAXException ]
+    weak-symbols:    [ __ZTI11CAException, __ZTI12CAXException, __ZTIN5boost9container12out_of_rangeE, 
+                       __ZTIN5boost9container9exceptionE, __ZTS11CAException, __ZTS12CAXException, 
+                       __ZTSN5boost9container12out_of_rangeE, __ZTSN5boost9container9exceptionE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CASDefaultLog, _CAShowAudioBufferList, _CAShowAudioChannelLayout, 
@@ -157,7 +145,8 @@ exports:
                        __ZN12MemoryStreamC2Ev, __ZN12MemoryStreamD0Ev, __ZN12MemoryStreamD1Ev, 
                        __ZN12MemoryStreamD2Ev, __ZN13CAVolumeCurve10ResetRangeEv, 
                        __ZN13CAVolumeCurve19SetTransferFunctionEj, __ZN13CAVolumeCurve8AddRangeEiiff, 
-                       __ZN13CAVolumeCurveC1Ev, __ZN13CAVolumeCurveC2Ev, __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
+                       __ZN13CAVolumeCurveC1Ev, __ZN13CAVolumeCurveC2Ev, __ZN13MultiRadixFFT10InitializeEj, 
+                       __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
                        __ZN13MultiRadixFFT21NearestSupportedSizesEj, __ZN13MultiRadixFFT23CplxOutOfPlaceTransformEPK15DSPSplitComplexPS0_i, 
                        __ZN13RamstadKernelC1Eiidb, __ZN13RamstadKernelC2Eiidb, __ZN13XOSTransactor14endTransactionEv, 
                        __ZN13XOSTransactor16beginTransactionEv, __ZN14CABundleLockerC1Ev, 
@@ -227,10 +216,10 @@ exports:
                        __ZN16CAAppWorkArounds22Needs6442415WorkAroundEv, __ZN16CAAppWorkArounds22Needs6513185WorkaroundEv, 
                        __ZN16CAAppWorkArounds22Needs6858274WorkAroundEv, __ZN16CAAppWorkArounds22Needs7025278WorkaroundEv, 
                        __ZN16CAAppWorkArounds22Neesd6552759WorkAroundEv, __ZN16CAAppWorkArounds23Needs32137910WorkaroundEv, 
-                       __ZN16CAAppWorkArounds24Needs6860184UIWorkaroundEv, __ZN17PlatformUtilities11ProcessNameEi, 
-                       __ZN17PlatformUtilities11processNameEi, __ZN17PlatformUtilities18CopyAcousticIDNameEv, 
-                       __ZN17PlatformUtilities25CopyHardwareModelFullNameEv, __ZN17PlatformUtilities26CopyHardwareModelShortNameEv, 
-                       __ZN17SincKernelFactory17ReleaseSincKernelEP10SincKernel, 
+                       __ZN16CAAppWorkArounds24Needs6860184UIWorkaroundEv, __ZN17MultiRadixRealFFT10InitializeEj, 
+                       __ZN17PlatformUtilities11ProcessNameEi, __ZN17PlatformUtilities11processNameEi, 
+                       __ZN17PlatformUtilities18CopyAcousticIDNameEv, __ZN17PlatformUtilities25CopyHardwareModelFullNameEv, 
+                       __ZN17PlatformUtilities26CopyHardwareModelShortNameEv, __ZN17SincKernelFactory17ReleaseSincKernelEP10SincKernel, 
                        __ZN17SincKernelFactory19ReferenceSincKernelEiidd, __ZN18CASmartPreferences11RereadPrefsEv, 
                        __ZN18CASmartPreferences14InterpretFloatEPKvRb, __ZN18CASmartPreferences16InterpretBooleanEPKvRb, 
                        __ZN18CASmartPreferences16InterpretIntegerEPKvRb, __ZN18CASmartPreferences21_RegisterFirstHandlerEPK10__CFStringS2_NSt3__18functionIFbPKvEEE, 
@@ -259,14 +248,11 @@ exports:
                        __ZN20CAAudioChannelLayoutC2Ejb, __ZN20CAAudioChannelLayoutC2Ev, 
                        __ZN20CAAudioChannelLayoutD1Ev, __ZN20CAAudioChannelLayoutD2Ev, 
                        __ZN20CAAudioChannelLayoutaSEPK18AudioChannelLayout, __ZN20CAAudioChannelLayoutaSERKS_, 
-                       __ZN20RamstadKernelFactory20ReleaseRamstadKernelEP13RamstadKernel, 
-                       __ZN20RamstadKernelFactory22ReferenceRamstadKernelEiidb, __ZN21CAFileSystemUtilities16FileExistsAtPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPb, 
+                       __ZN21CAFileSystemUtilities16FileExistsAtPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPb, 
                        __ZN21CAFileSystemUtilities21CreateDirectoryAtPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEbPK14__CFDictionaryPP9__CFError, 
                        __ZN21CAFileSystemUtilities24GetTemporarySubDirectoryEPKc, 
                        __ZN21CAFileSystemUtilities25ContentsOfDirectoryAtPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPP9__CFError, 
                        __ZN21PlatformUtilities_iOS24CopyAcousticIDFilePrefixEv, __ZN21PlatformUtilities_iOS25CopyProductTypeFilePrefixE14iOSProductType, 
-                       __ZN21RamstadKernelFactoryD20ReleaseRamstadKernelEP14RamstadKernelD, 
-                       __ZN21RamstadKernelFactoryD22ReferenceRamstadKernelEiidb, 
                        __ZN24CAStreamBasicDescription11ResetFormatER27AudioStreamBasicDescription, 
                        __ZN24CAStreamBasicDescription13FillOutFormatER27AudioStreamBasicDescriptionRKS0_, 
                        __ZN24CAStreamBasicDescription23sTextParsingUsageStringE, 
@@ -345,9 +331,10 @@ exports:
                        __ZNK13CAVolumeCurve14ConvertRawToDBEi, __ZNK13CAVolumeCurve17ConvertDBToScalarEf, 
                        __ZNK13CAVolumeCurve17ConvertScalarToDBEf, __ZNK13CAVolumeCurve18CheckForContinuityEv, 
                        __ZNK13CAVolumeCurve18ConvertRawToScalarEi, __ZNK13CAVolumeCurve18ConvertScalarToRawEf, 
-                       __ZNK13CAVolumeCurve29GetIsApplyingTransferFunctionEv, __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, 
-                       __ZNK14CACFDictionary10GetFixed64EPK10__CFStringRd, __ZNK14CACFDictionary10GetFloat32EPK10__CFStringRf, 
-                       __ZNK14CACFDictionary10GetFloat64EPK10__CFStringRd, __ZNK14CACFDictionary12GetCACFArrayEPK10__CFStringR9CACFArray, 
+                       __ZNK13CAVolumeCurve29GetIsApplyingTransferFunctionEv, __ZNK13MultiRadixFFT4SizeEv, 
+                       __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, __ZNK14CACFDictionary10GetFixed64EPK10__CFStringRd, 
+                       __ZNK14CACFDictionary10GetFloat32EPK10__CFStringRf, __ZNK14CACFDictionary10GetFloat64EPK10__CFStringRd, 
+                       __ZNK14CACFDictionary12GetCACFArrayEPK10__CFStringR9CACFArray, 
                        __ZNK14CACFDictionary13GetCACFStringEPK10__CFStringR10CACFString, 
                        __ZNK14CACFDictionary13GetDictionaryEPK10__CFStringRPK14__CFDictionary, 
                        __ZNK14CACFDictionary16GetKeysAndValuesEPPKvS2_, __ZNK14CACFDictionary17GetCACFDictionaryEPK10__CFStringRS_, 
@@ -377,8 +364,9 @@ exports:
                        __ZNK14XPC_Dictionary8GetArrayEPKcR9XPC_Array, __ZNK17MultiRadixRealFFT20RealInPlaceTransformEP15DSPSplitComplexif, 
                        __ZNK17MultiRadixRealFFT30RealOutOfPlaceForwardTransformEPKfP15DSPSplitComplexf, 
                        __ZNK17MultiRadixRealFFT30RealOutOfPlaceInverseTransformEPK15DSPSplitComplexPf, 
-                       __ZNK20CAAudioChannelLayout5PrintEP7__sFILE, __ZNK20CAAudioChannelLayouteqERKS_, 
-                       __ZNK20CAAudioChannelLayoutneERKS_, __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescription, 
+                       __ZNK17MultiRadixRealFFT4SizeEv, __ZNK20CAAudioChannelLayout5PrintEP7__sFILE, 
+                       __ZNK20CAAudioChannelLayouteqERKS_, __ZNK20CAAudioChannelLayoutneERKS_, 
+                       __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescription, 
                        __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescriptionb, 
                        __ZNK8RampList6Reader22GetNumberOfInputFramesEdj, __ZNK8RampList6Reader5PrintEP7__sFILE, 
                        __ZNK8RampList6Reader5frontEv, __ZNK8RampList6Writer4backEv, 
@@ -417,18 +405,6 @@ exports:
                        __ZrsR14CADeserializerRPK10__CFString, __ZrsR14CADeserializerRPK7__CFURL, 
                        __ZrsR14CADeserializerRPK8__CFData, _gBogusAuditToken, _gCAVectorUnitType, 
                        _realFFTMultiply, _realFFTZeroPad, _realIFFTUnload, _sReadCounter_BSD ]
-    weak-symbols:    [ __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE5sOnceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE9sInstanceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb1EEE5sOnceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb1EEE9sInstanceE, 
-                       __ZN9DFTHandleILb0EE10InitializeEj, __ZN9DFTHandleILb0EEC1ERKS0_, 
-                       __ZN9DFTHandleILb0EEC1Ev, __ZN9DFTHandleILb0EEC2ERKS0_, __ZN9DFTHandleILb0EEC2Ev, 
-                       __ZN9DFTHandleILb0EED0Ev, __ZN9DFTHandleILb0EED1Ev, __ZN9DFTHandleILb0EED2Ev, 
-                       __ZN9DFTHandleILb0EEaSERKS0_, __ZN9DFTHandleILb1EE10InitializeEj, 
-                       __ZN9DFTHandleILb1EEC1ERKS0_, __ZN9DFTHandleILb1EEC1Ev, __ZN9DFTHandleILb1EEC2ERKS0_, 
-                       __ZN9DFTHandleILb1EEC2Ev, __ZN9DFTHandleILb1EED0Ev, __ZN9DFTHandleILb1EED1Ev, 
-                       __ZN9DFTHandleILb1EED2Ev, __ZN9DFTHandleILb1EEaSERKS0_, __ZNK9DFTHandleILb0EE4SizeEv, 
-                       __ZNK9DFTHandleILb1EE4SizeEv, __ZTV9DFTHandleILb0EE, __ZTV9DFTHandleILb1EE ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZNK11PListLogger4vlogEPKcPc ]
 ...

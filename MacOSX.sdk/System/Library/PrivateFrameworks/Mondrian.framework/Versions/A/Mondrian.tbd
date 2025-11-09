@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C5E79FB4-2CB4-390E-BAE2-5D4EC0BC7748
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4E049598-C21C-32F7-ADDD-E8DCC28E574D
 install-name:    '/System/Library/PrivateFrameworks/Mondrian.framework/Versions/A/Mondrian'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GridRectEdgeOppositeEdge, _MOAVAssetCreateThumbnailWithURL, 

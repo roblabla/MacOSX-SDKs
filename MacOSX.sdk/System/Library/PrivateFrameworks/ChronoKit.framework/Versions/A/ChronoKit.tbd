@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           44CA420F-0E83-36E9-98B5-DF517C5524D9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           750BD2E7-DE11-3222-BCB0-21C73892EAC0
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 281.49
+current-version: 281.114
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

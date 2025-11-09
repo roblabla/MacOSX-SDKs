@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4ABA72E7-A498-360D-8D6C-DEA4D59A9103
-  - target:          x86_64-maccatalyst
-    value:           4ABA72E7-A498-360D-8D6C-DEA4D59A9103
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           940C88F1-1FD5-35AC-9394-131B215C9257
-  - target:          arm64e-maccatalyst
-    value:           940C88F1-1FD5-35AC-9394-131B215C9257
 install-name:    '/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -116,10 +103,10 @@ exports:
                        _ACIsInternal, _ACKeepPasswordsAround, _ACKeyTransparencyTokenKey, 
                        _ACLinkedInAppIdKey, _ACLinkedInAppIdKeyDeprecated, _ACLinkedInPermissionsKey, 
                        _ACLinkedInPermissionsKeyDeprecated, _ACLiverpoolContainerIdKey, 
-                       _ACMDMServerAuthTokenKey, _ACMapsTokenKey, _ACOAuthGraphAPITokenKey, 
-                       _ACOAuthTokenKey, _ACOAuthTokenNoSyncKey, _ACOAuthTokenNoSyncSeparator, 
-                       _ACOAuthTokenSecretKey, _ACOldPasswordKey, _ACPasswordKey, 
-                       _ACPasswordResetTokenBackupKey, _ACPasswordResetTokenKey, 
+                       _ACMDMServerAuthTokenKey, _ACMapsTokenKey, _ACMonitoredAccountStoreDidChangeNotification, 
+                       _ACOAuthGraphAPITokenKey, _ACOAuthTokenKey, _ACOAuthTokenNoSyncKey, 
+                       _ACOAuthTokenNoSyncSeparator, _ACOAuthTokenSecretKey, _ACOldPasswordKey, 
+                       _ACPasswordKey, _ACPasswordResetTokenBackupKey, _ACPasswordResetTokenKey, 
                        _ACPropertyKeyAccountProperties, _ACPropertyKeyAccountType, 
                        _ACPropertyKeyActive, _ACPropertyKeyAuthenticated, _ACPropertyKeyCredential, 
                        _ACPropertyKeyDataclassProperties, _ACPropertyKeyDate, _ACPropertyKeyEnabledDataclasses, 

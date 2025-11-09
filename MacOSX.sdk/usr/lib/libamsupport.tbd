@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C1EFD621-0909-3834-81CA-44E06B2A89BE
-  - target:          x86_64-maccatalyst
-    value:           C1EFD621-0909-3834-81CA-44E06B2A89BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           499F60BD-6F2A-374F-BAC3-0B59BFAC119F
-  - target:          arm64e-maccatalyst
-    value:           499F60BD-6F2A-374F-BAC3-0B59BFAC119F
 install-name:    '/usr/lib/libamsupport.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -79,6 +66,7 @@ exports:
                        _AMSupportX509DecodeCertificate, _AMSupportX509DecodeIterateCertChainBegin, 
                        _AMSupportX509DecodeIterateCertChainNext, _AMSupportX509DecodeVerifyCertIssuer, 
                        _DEREncoderAddBoolean, _DEREncoderAddData, _DEREncoderAddDataFromEncoder, 
+                       _DEREncoderAddDataFromEncoderNoCopy, _DEREncoderAddDataNoCopy, 
                        _DEREncoderAddIA5String, _DEREncoderAddInt32AsData, _DEREncoderAddInt64AsData, 
                        _DEREncoderAddPrivateFromEncoder, _DEREncoderAddSequenceFromEncoder, 
                        _DEREncoderAddSetFromEncoder, _DEREncoderAddUInt32, _DEREncoderAddUInt64, 
@@ -166,7 +154,8 @@ exports:
                        _kImg4TagStr_eg1t, _kImg4TagStr_eg3n, _kImg4TagStr_eg3t, _kImg4TagStr_esca, 
                        _kImg4TagStr_esdm, _kImg4TagStr_euou, _kImg4TagStr_fchp, _kImg4TagStr_fpgt, 
                        _kImg4TagStr_ftap, _kImg4TagStr_ftot, _kImg4TagStr_ftsp, _kImg4TagStr_fuos, 
-                       _kImg4TagStr_glyc, _kImg4TagStr_glyp, _kImg4TagStr_hclo, _kImg4TagStr_hrlp, 
+                       _kImg4TagStr_gdmg, _kImg4TagStr_ginf, _kImg4TagStr_glyc, _kImg4TagStr_glyp, 
+                       _kImg4TagStr_gtcd, _kImg4TagStr_gtgv, _kImg4TagStr_hclo, _kImg4TagStr_hrlp, 
                        _kImg4TagStr_ibec, _kImg4TagStr_ibot, _kImg4TagStr_ibss, _kImg4TagStr_illb, 
                        _kImg4TagStr_isys, _kImg4TagStr_iuob, _kImg4TagStr_iuos, _kImg4TagStr_iuou, 
                        _kImg4TagStr_kdlv, _kImg4TagStr_krnl, _kImg4TagStr_kuid, _kImg4TagStr_lobo, 

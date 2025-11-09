@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E574698D-9A26-3712-A6A1-D2FB064EC0EA
-  - target:          x86_64-maccatalyst
-    value:           E574698D-9A26-3712-A6A1-D2FB064EC0EA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           45424223-7574-31E6-B365-F6A87C62CA4D
-  - target:          arm64e-maccatalyst
-    value:           45424223-7574-31E6-B365-F6A87C62CA4D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

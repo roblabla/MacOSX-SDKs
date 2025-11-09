@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOUSBHostPipe.iig */
+/* iig(DriverKit-256.100.8) generated from IOUSBHostPipe.iig */
 
 /* IOUSBHostPipe.iig:1-95 */
 /*
@@ -764,7 +764,7 @@ public:
 
 #if !KERNEL
 
-class IOUSBHostPipeInterface : public OSInterface
+class  IOUSBHostPipeInterface : public OSInterface
 {
 public:
 };

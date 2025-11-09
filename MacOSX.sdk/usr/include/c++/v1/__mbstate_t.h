@@ -13,7 +13,7 @@
 #include <__config>
 
 #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
-#pragma GCC system_header
+#  pragma GCC system_header
 #endif
 
 // TODO(ldionne):
@@ -31,6 +31,8 @@
 #   include <bits/types/mbstate_t.h> // works on most Unixes
 #elif __has_include(<sys/_types/_mbstate_t.h>)
 #   include <sys/_types/_mbstate_t.h> // works on Darwin
+#elif defined(_LIBCPP_ON_RTKIT)
+#   include_next <wchar.h>
 #elif defined(_LIBCPP_ON_SEP)
 struct mbstate_t; // just forward declare it to satisfy <iosfwd>
 #else

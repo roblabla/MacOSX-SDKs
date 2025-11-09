@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKPaymentPass.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentPass.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //

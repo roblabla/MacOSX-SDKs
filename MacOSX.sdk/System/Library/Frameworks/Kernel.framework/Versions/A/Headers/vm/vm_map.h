@@ -70,6 +70,8 @@
 #ifndef _VM_VM_MAP_H_
 #define _VM_VM_MAP_H_
 
+#include <sys/cdefs.h>
+
 #include <mach/mach_types.h>
 #include <mach/kern_return.h>
 #include <mach/boolean.h>
@@ -82,5 +84,9 @@
 #include <vm/pmap.h>
 #include <os/overflow.h>
 
+__BEGIN_DECLS
+
+
+__END_DECLS
 
 #endif  /* _VM_VM_MAP_H_ */

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           736E5834-5A29-36B5-9876-14BB38327CB4
-  - target:          x86_64-maccatalyst
-    value:           736E5834-5A29-36B5-9876-14BB38327CB4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3CB850A8-31AD-300C-A4E8-90F29E416029
-  - target:          arm64e-maccatalyst
-    value:           3CB850A8-31AD-300C-A4E8-90F29E416029
 install-name:    '/System/Library/PrivateFrameworks/LinkServices.framework/Versions/A/LinkServices'
-current-version: 130.100.5
+current-version: 136.100.13
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -717,10 +704,12 @@ exports:
                        _LNActionExecutorErrorUnderlyingErrorKey, _LNActionExecutorStateAsString, 
                        _LNAppIntentsExtensionPointIdentifier, _LNAppShortcutsChangedNotification, 
                        _LNAppShortcutsChangedNotificationAppBundleIdentifierKey, 
+                       _LNAppShortcutsChangedNotificationAppBundleIdentifiersKey, 
                        _LNAuditTokenForBundleIdentifier, _LNAvailabilityResultAvailable, 
                        _LNAvailabilityResultDeprecated, _LNAvailabilityResultUnavailable, 
-                       _LNConnectionClientXPCInterface, _LNConnectionErrorDescriptionWithCode, 
-                       _LNConnectionErrorDomain, _LNConnectionErrorWithCode, _LNConnectionHostXPCInterface, 
+                       _LNBackgroundAssertionAttributeName, _LNConnectionClientXPCInterface, 
+                       _LNConnectionErrorDescriptionWithCode, _LNConnectionErrorDomain, 
+                       _LNConnectionErrorWithCode, _LNConnectionHostXPCInterface, 
                        _LNConnectionIdleTimeout, _LNConnectionOperationRequestTimeout, 
                        _LNConnectionOperationRequestTimeoutDisabled, _LNConnectionRequestTimeout, 
                        _LNDaemonAutoShortcutMachServiceName, _LNDaemonAutoShortcutXPCInterface, 
@@ -730,22 +719,22 @@ exports:
                        _LNDaemonSuggestionsService, _LNDaemonSuggestionsXPCInterface, 
                        _LNDisplayRepresentationFetchErrorDomain, _LNEUIDForAuditToken, 
                        _LNEnterSandbox, _LNEnvironmentDefaultLocaleIdentifier, _LNEqualAuditTokens, 
-                       _LNFetchMetadataErrorDomain, _LNInteractionModeAsString, _LNIsLinkEnabled, 
-                       _LNMetadataChangedNotification, _LNMetadataChangedNotificationBundlesKey, 
-                       _LNMetadataChangedNotificationEventKey, _LNMetadataProviderErrorDomain, 
-                       _LNPIDForAuditToken, _LNPerformActionErrorCodeAsString, _LNPerformActionErrorDialogDataKey, 
-                       _LNPerformActionErrorDomain, _LNPerformActionErrorLocalizedStringResourceDataKey, 
-                       _LNPerformActionErrorParameterIdentifierKey, _LNPerformQueryErrorDomain, 
-                       _LNSetUserDirSuffix, _LNSpecialClassDStreamIdentifier, _LNStructuredDataRepresentationsAsString, 
-                       _LNSuggestedActionDialogParameterKeyChangeOperation, _LNSuggestedActionDialogParameterKeyDefaultValue, 
-                       _LNSuggestedActionDialogParameterKeyDescription, _LNSuggestedActionDialogParameterKeyDirection, 
-                       _LNSuggestedActionDialogParameterKeyEntityName, _LNSuggestedActionDialogParameterKeyEntityType, 
-                       _LNSuggestedActionDialogParameterKeyIconSystemImageName, _LNSuggestionsProviderErrorDomain, 
-                       _LNSystemStreamIdentifier, _LNTranscriptActionSourceAsString, 
-                       _LNTranscriptChangedNotification, _LNTranscriptChangedNotificationEventKey, 
-                       _LNTranscriptChangedNotificationStreamsKey, _LNTranscriptErrorDomain, 
-                       _LNTranscriptMatchingPredicateTypeAsString, _LNTranscriptServiceName, 
-                       _LNTranscriptXPCInterface, _LNTranscriptXPCPrivilegedInterface, 
+                       _LNFetchMetadataErrorDomain, _LNForegroundAssertionAttributeName, 
+                       _LNInteractionModeAsString, _LNIsLinkEnabled, _LNMetadataChangedNotification, 
+                       _LNMetadataChangedNotificationBundlesKey, _LNMetadataChangedNotificationEventKey, 
+                       _LNMetadataProviderErrorDomain, _LNPIDForAuditToken, _LNPerformActionErrorCodeAsString, 
+                       _LNPerformActionErrorDialogDataKey, _LNPerformActionErrorDomain, 
+                       _LNPerformActionErrorLocalizedStringResourceDataKey, _LNPerformActionErrorParameterIdentifierKey, 
+                       _LNPerformQueryErrorDomain, _LNSetUserDirSuffix, _LNSpecialClassDStreamIdentifier, 
+                       _LNStructuredDataRepresentationsAsString, _LNSuggestedActionDialogParameterKeyChangeOperation, 
+                       _LNSuggestedActionDialogParameterKeyDefaultValue, _LNSuggestedActionDialogParameterKeyDescription, 
+                       _LNSuggestedActionDialogParameterKeyDirection, _LNSuggestedActionDialogParameterKeyEntityName, 
+                       _LNSuggestedActionDialogParameterKeyEntityType, _LNSuggestedActionDialogParameterKeyIconSystemImageName, 
+                       _LNSuggestionsProviderErrorDomain, _LNSystemStreamIdentifier, 
+                       _LNTranscriptActionSourceAsString, _LNTranscriptChangedNotification, 
+                       _LNTranscriptChangedNotificationEventKey, _LNTranscriptChangedNotificationStreamsKey, 
+                       _LNTranscriptErrorDomain, _LNTranscriptMatchingPredicateTypeAsString, 
+                       _LNTranscriptServiceName, _LNTranscriptXPCInterface, _LNTranscriptXPCPrivilegedInterface, 
                        _LNViewLocationAsString, _LNVocabularyDonationTimeout, _LNVocabularyTermQuota, 
                        _LNVocabularyTraitId, _LNVocabularyTraitModel, _LNVocabularyTraitModelAppEntity, 
                        _LNVocabularyTraitModelAppEntityType, _LNVocabularyTraitModelAppSetting, 
@@ -759,7 +748,8 @@ exports:
                        LNBundleConnectionPolicy, LNConfirmationActionName, LNConfirmationRequest, 
                        LNConfirmationResponse, LNConnection, LNConnectionAction, 
                        LNConnectionActionResponse, LNConnectionOptions, LNConnectionPolicy, 
-                       LNCorpus, LNDeallocationHandler, LNDebouncer, LNDisambiguationRequest, 
+                       LNContinueInAppRequest, LNContinueInAppResponse, LNCorpus, 
+                       LNDeallocationHandler, LNDebouncer, LNDisambiguationRequest, 
                        LNDisambiguationResponse, LNDisplayRepresentationFetchResult, 
                        LNDynamicOption, LNDynamicOptionsResult, LNDynamicOptionsSection, 
                        LNDynamicTerm, LNEntitlementsValidator, LNEntityQueryConnectionPolicy, 
@@ -779,21 +769,8 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4B12CCAF-30A0-34A2-BDFD-69D29FEC298E
-  - target:          x86_64-maccatalyst
-    value:           4B12CCAF-30A0-34A2-BDFD-69D29FEC298E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           44D08DF4-98FA-3EF3-860D-C159AEEAB62F
-  - target:          arm64e-maccatalyst
-    value:           44D08DF4-98FA-3EF3-860D-C159AEEAB62F
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 130.100.5
+current-version: 136.100.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -860,15 +837,18 @@ exports:
                        '_$sSo46LNActionParameterMetadataDynamicOptionsSupportVSe04LinkC0Mc', 
                        '_$sSo48LNActionConfigurationConditionComparisonOperatorVSE12LinkMetadataMc', 
                        '_$sSo48LNActionConfigurationConditionComparisonOperatorVSe12LinkMetadataMc', 
+                       '_$sSo48LNActionParameterMetadataInputConnectionBehaviorVSE04LinkC0Mc', 
+                       '_$sSo48LNActionParameterMetadataInputConnectionBehaviorVSe04LinkC0Mc', 
                        '_$sSo8NSStringC12LinkMetadataE15localizedString16withReplacements5table9bundleURL16localeIdentifierSSSayypG_SSSg10Foundation0J0VAJtF', 
                        _LNActionTypeSpecificMetadataKeyDefaultValue, _LNActionTypeSpecificMetadataKeyEntityMetadata, 
                        _LNActionTypeSpecificMetadataKeyEntityType, _LNAvailabilityAnnotationWildcardVersion, 
                        _LNBundleMetadataVersionAsString, _LNEntityIdentifierMaximumValueLength, 
                        _LNEnumIdentifierIsSystem, _LNIdentifierScopeAsString, _LNIntentsValueTypeIdentifierAsString, 
-                       _LNLogCategoryExecution, _LNLogCategoryGeneral, _LNLogCategoryMetadata, 
-                       _LNLogCategoryPolicy, _LNLogCategoryQuery, _LNLogCategorySandbox, 
-                       _LNLogCategorySecurity, _LNLogCategoryView, _LNLogCategoryVocabulary, 
-                       _LNLogSubsystem, _LNMeasurementUnitTypeOfUnit, _LNMeasurementUnitTypeToUnit, 
+                       _LNLogCategoryExecution, _LNLogCategoryExtensionMediator, 
+                       _LNLogCategoryGeneral, _LNLogCategoryMetadata, _LNLogCategoryPolicy, 
+                       _LNLogCategoryQuery, _LNLogCategorySandbox, _LNLogCategorySecurity, 
+                       _LNLogCategoryView, _LNLogCategoryVocabulary, _LNLogSubsystem, 
+                       _LNMeasurementUnitTypeOfUnit, _LNMeasurementUnitTypeToUnit, 
                        _LNPlatformNameIOS, _LNPlatformNameMACOS, _LNPlatformNameTVOS, 
                        _LNPlatformNameWATCHOS, _LNPlatformNameWildcard, _LNPrimitiveValueTypeIdentifierAsString, 
                        _LNShortcutTileColorAsString, _LNSystemProtocolIdentifierAudioStarting, 
@@ -906,9 +886,10 @@ exports:
                        _LNValueTypeSpecificMetadataKeyStringCapitalizationType, _LNValueTypeSpecificMetadataKeyStringKeyboardType, 
                        _LNValueTypeSpecificMetadataKeyStringMultiline, _LNValueTypeSpecificMetadataKeyStringSmartDashes, 
                        _LNValueTypeSpecificMetadataKeyStringSmartQuotes, _getLNLogCategoryExecution, 
-                       _getLNLogCategoryGeneral, _getLNLogCategoryMetadata, _getLNLogCategoryPolicy, 
-                       _getLNLogCategoryQuery, _getLNLogCategorySandbox, _getLNLogCategorySecurity, 
-                       _getLNLogCategoryView, _getLNLogCategoryVocabulary ]
+                       _getLNLogCategoryExtensionMediator, _getLNLogCategoryGeneral, 
+                       _getLNLogCategoryMetadata, _getLNLogCategoryPolicy, _getLNLogCategoryQuery, 
+                       _getLNLogCategorySandbox, _getLNLogCategorySecurity, _getLNLogCategoryView, 
+                       _getLNLogCategoryVocabulary ]
     objc-classes:    [ LNAction, LNActionConfiguration, LNActionConfigurationCondition, 
                        LNActionConfigurationSwitch, LNActionConfigurationSwitchCase, 
                        LNActionConfigurationWhen, LNActionDescriptionMetadata, LNActionMetadata, 

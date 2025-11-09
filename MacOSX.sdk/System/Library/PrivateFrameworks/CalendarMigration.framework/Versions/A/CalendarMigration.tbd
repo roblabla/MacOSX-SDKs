@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           679C78EC-D8FC-3119-925F-DE86F2B40A98
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           534F4330-DF98-3F99-988B-9C438CBDD014
 install-name:    '/System/Library/PrivateFrameworks/CalendarMigration.framework/Versions/A/CalendarMigration'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

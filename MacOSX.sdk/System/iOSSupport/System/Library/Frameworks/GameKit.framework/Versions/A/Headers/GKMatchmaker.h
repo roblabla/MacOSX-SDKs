@@ -2,7 +2,7 @@
 //  GKMatchmaker.h
 //  Game Center
 //
-//  Copyright 2010-2022 Apple Inc. All rights reserved.
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
 //
 
 #include <Foundation/Foundation.h>
@@ -174,10 +174,10 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 
 #if !TARGET_OS_TV && !TARGET_OS_WATCH
 /// Activate  a  group activity by Game Center for your game, which allows people in the FaceTime call to join the local player's game. The handler will be called for each player who joined from the activity.
-- (void)startGroupActivityWithPlayerHandler:(void(^)(GKPlayer *player))handler API_AVAILABLE(ios(16.0), macos(13.0)) NS_SWIFT_DISABLE_ASYNC;
+- (void)startGroupActivityWithPlayerHandler:(void(^)(GKPlayer *player))handler API_AVAILABLE(ios(16.2), macos(13.1)) NS_SWIFT_DISABLE_ASYNC;
 
 /// End the group activity created by Game Center for your game, which was activated by the local player.
-- (void)stopGroupActivity API_AVAILABLE(ios(16.0), macos(13.0));
+- (void)stopGroupActivity API_AVAILABLE(ios(16.2), macos(13.1));
 #endif
 
 @end

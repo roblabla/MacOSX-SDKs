@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1802E5B4-A1C6-3B8B-A55E-484797D66241
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E28B5F0C-DF7F-376E-8030-A4488035F349
 install-name:    '/System/Library/PrivateFrameworks/_JetUI_SwiftUI.framework/Versions/A/_JetUI_SwiftUI'
 swift-abi-version: 7
 exports:
@@ -36,6 +29,38 @@ exports:
                        '_$s012_JetUI_SwiftB015JUComponentViewVMa', '_$s012_JetUI_SwiftB015JUComponentViewVMn', 
                        '_$s012_JetUI_SwiftB015JUComponentViewVyxG0cB00E0AAMc', '_$s012_JetUI_SwiftB015JUComponentViewVyxG0cB019NSViewRepresentableAAMc', 
                        '_$s012_JetUI_SwiftB015JUComponentViewVyxGAA0aE13RepresentableAAMc', 
+                       '_$s012_JetUI_SwiftB015JUPresenterViewV4bodyQrvg', '_$s012_JetUI_SwiftB015JUPresenterViewV4bodyQrvpMV', 
+                       '_$s012_JetUI_SwiftB015JUPresenterViewV4bodyQrvpQOMQ', '_$s012_JetUI_SwiftB015JUPresenterViewV9presenter7contentACyAA20_JUObservedPresenterCyqd__Gq_Gqd__yc_q_qd__ctcAHRsz0A6Engine0e10ControllerI0Rd__lufC', 
+                       '_$s012_JetUI_SwiftB015JUPresenterViewV9presenter7contentACyxq_Gxyc_q_xctcfC', 
+                       '_$s012_JetUI_SwiftB015JUPresenterViewVMa', '_$s012_JetUI_SwiftB015JUPresenterViewVMn', 
+                       '_$s012_JetUI_SwiftB015JUPresenterViewVyxq_G0cB00E0AAMc', 
+                       '_$s012_JetUI_SwiftB020JUDiffableDataReaderV4bodyQrvg', '_$s012_JetUI_SwiftB020JUDiffableDataReaderV4bodyQrvpMV', 
+                       '_$s012_JetUI_SwiftB020JUDiffableDataReaderV4bodyQrvpQOMQ', 
+                       '_$s012_JetUI_SwiftB020JUDiffableDataReaderV9observing7contentACyxq_Gx_q_6AppKit010NSDiffableE14SourceSnapshotVy0A6Engine12DiffableLensVy7SectionQzGALy4ItemQzGGctcfC', 
+                       '_$s012_JetUI_SwiftB020JUDiffableDataReaderVMa', '_$s012_JetUI_SwiftB020JUDiffableDataReaderVMn', 
+                       '_$s012_JetUI_SwiftB020JUDiffableDataReaderVyxq_G0cB04ViewAAMc', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterC11descriptionSSvg', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterC11descriptionSSvpMV', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterC4basexvg', '_$s012_JetUI_SwiftB020_JUObservedPresenterC4basexvpMV', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE11viewDidLoadyyF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE13viewDidAppearyyF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE14viewWillAppearyyF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE16viewDidDisappearyyF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE17viewWillDisappear9forReasonyAD0gjkM0V_tF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCAA0A6Engine014ViewControllerE0RzrlE27viewDidReceiveMemoryWarningyyF', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCMa', '_$s012_JetUI_SwiftB020_JUObservedPresenterCMn', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCMo', '_$s012_JetUI_SwiftB020_JUObservedPresenterCMu', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCfD', '_$s012_JetUI_SwiftB020_JUObservedPresenterCfd', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyACyxGxcfC', '_$s012_JetUI_SwiftB020_JUObservedPresenterCyACyxGxcfCTj', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyACyxGxcfCTq', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyACyxGxcfc', '_$s012_JetUI_SwiftB020_JUObservedPresenterCyxG0A6Engine014ViewControllerE0AaeFRzrlMc', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyxG0A6Engine03AnyE0AAMc', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyxG7Combine16ObservableObjectAAMc', 
+                       '_$s012_JetUI_SwiftB020_JUObservedPresenterCyxGs23CustomStringConvertibleAAMc', 
+                       '_$s18_JetEngine_SwiftUI15ShelfCollectionV01_ad1_cD0E9shelvesOf7spacing12shelfContentACySayqd__G0cD07ForEachVyAA019IndexedRandomAccessF0VyAHG2IDQyd__qd_0_GG6AppKit28NSDiffableDataSourceSnapshotVy0aB012DiffableLensVyqd__GAXyAV14ComponentModel_pGG_12CoreGraphics7CGFloatVSgqd_0_qd___AC7ContextVyAhQ_GtctcAHRszAQRs_AV0E5ModelRd__AI4ViewRd_0_r0_lufC', 
+                       '_$s18_JetEngine_SwiftUI15ShelfCollectionV01_ad1_cD0E9shelvesOf7spacing7contentACySayqd__Gq_G6AppKit28NSDiffableDataSourceSnapshotVy0aB012DiffableLensVyqd__GAOyAM14ComponentModel_pGG_12CoreGraphics7CGFloatVSgq_AHctcAHRszAM0eT0Rd__lufC', 
+                       '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9component15onSelectPerformQry5StateQzzc_tFZ', 
+                       '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9component15onSelectPerformQry5StateQzzc_tFZQOMQ', 
                        '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvgZ', '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvpZQOMQ', 
                        '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tF', 
                        '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tFQOMQ', 

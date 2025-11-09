@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5B4C2909-DF91-37CF-B22A-BF2DDD3AB2E8
-  - target:          x86_64-maccatalyst
-    value:           5B4C2909-DF91-37CF-B22A-BF2DDD3AB2E8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A0E91038-140A-3984-9B69-291C3369CB90
-  - target:          arm64e-maccatalyst
-    value:           A0E91038-140A-3984-9B69-291C3369CB90
 install-name:    '/System/Library/PrivateFrameworks/UIKitMacHelper.framework/Versions/A/UIKitMacHelper'
-current-version: 6209.1.255
+current-version: 6441
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

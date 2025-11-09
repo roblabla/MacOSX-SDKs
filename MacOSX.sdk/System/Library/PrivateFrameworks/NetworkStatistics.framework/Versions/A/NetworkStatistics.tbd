@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9B135608-CF08-3CBC-85DF-C89EC618FAC0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A5E9CBFF-BFC4-33CA-8972-8D27E10DD25F
 install-name:    '/System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -1,9 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           53D2A08E-E3A1-323B-8955-41540578A4D7
 install-name:    '/System/Library/Frameworks/QTKit.framework/Versions/A/QTKit'
 exports:
   - targets:         [ x86_64-macos ]

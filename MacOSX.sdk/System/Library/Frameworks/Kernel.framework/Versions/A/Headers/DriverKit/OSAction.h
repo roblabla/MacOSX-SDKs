@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSAction.iig */
+/* iig(DriverKit-256.100.8) generated from OSAction.iig */
 
 /* OSAction.iig:1-38 */
 /*
@@ -321,7 +321,7 @@ public:\
 
 
 
-class OSActionInterface : public OSInterface
+class  OSActionInterface : public OSInterface
 {
 public:
 };

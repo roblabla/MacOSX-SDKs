@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           18F2C591-3695-36F5-B1A5-6027BE593D79
-  - target:          x86_64-maccatalyst
-    value:           18F2C591-3695-36F5-B1A5-6027BE593D79
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           387E39B3-3C40-32D6-A4B0-F2DDC94791DC
-  - target:          arm64e-maccatalyst
-    value:           387E39B3-3C40-32D6-A4B0-F2DDC94791DC
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/RemoteManagement'
 current-version: 2
 exports:

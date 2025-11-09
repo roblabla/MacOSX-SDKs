@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           08393E20-4198-3D67-93D4-8D9D40ADB832
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BCFF8B43-91F0-301B-AD70-04E1A419F609
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 281.49
+current-version: 281.114
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -993,14 +986,8 @@ exports:
                        '_$sSo7NSErrorC9WidgetKitE6domain4code15underlyingError16debugDescription6__file6__lineABSS_Sis0G0_pSgSSSgs12StaticStringVSitcfC', 
                        '_$sSo7NSErrorC9WidgetKitE6domain4code15underlyingError16debugDescription6__file6__lineABSS_Sis0G0_pSgSSSgs12StaticStringVSitcfc', 
                        '_$sSo9CHSWidgetC9WidgetKitE14logDescriptionSSvg', '_$sSo9CHSWidgetC9WidgetKitE14logDescriptionSSvpMV', 
-                       _NSUserActivityTypeLiveActivity, '_OBJC_CLASS_$_CHKWidgetEnvironment', 
-                       '_OBJC_CLASS_$_CHKWidgetPersonality', '_OBJC_CLASS_$__TtC9WidgetKit15TimelineRequest', 
-                       '_OBJC_CLASS_$__TtC9WidgetKit18PlaceholderRequest', '_OBJC_CLASS_$__TtC9WidgetKit21DescriptorFetchResult', 
-                       '_OBJC_METACLASS_$_CHKWidgetEnvironment', '_OBJC_METACLASS_$_CHKWidgetPersonality', 
-                       '_OBJC_METACLASS_$__TtC9WidgetKit15TimelineRequest', '_OBJC_METACLASS_$__TtC9WidgetKit18PlaceholderRequest', 
-                       '_OBJC_METACLASS_$__TtC9WidgetKit21DescriptorFetchResult', 
-                       _WGWidgetUserInfoKeyActivityID, _WGWidgetUserInfoKeyFamily, 
-                       _WGWidgetUserInfoKeyKind ]
+                       _NSUserActivityTypeLiveActivity, _WGWidgetUserInfoKeyActivityID, 
+                       _WGWidgetUserInfoKeyFamily, _WGWidgetUserInfoKeyKind ]
     objc-classes:    [ CHKWidgetEnvironment, CHKWidgetPersonality, _TtC9WidgetKit15TimelineRequest, 
                        _TtC9WidgetKit18PlaceholderRequest, _TtC9WidgetKit21DescriptorFetchResult ]
 ...

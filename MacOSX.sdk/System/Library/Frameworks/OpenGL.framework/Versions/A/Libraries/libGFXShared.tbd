@@ -1,17 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4431A906-75B4-3FCB-9D92-45FEFED3B8C7
-  - target:          x86_64-maccatalyst
-    value:           4431A906-75B4-3FCB-9D92-45FEFED3B8C7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BD2DDE11-5325-356A-A28F-47B5334930BC
-  - target:          arm64e-maccatalyst
-    value:           BD2DDE11-5325-356A-A28F-47B5334930BC
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]

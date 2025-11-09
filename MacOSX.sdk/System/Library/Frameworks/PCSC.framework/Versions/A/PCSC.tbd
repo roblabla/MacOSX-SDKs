@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C6106537-050D-3B76-900B-6E4C75400ED6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           77A2DA3C-A8E6-35BB-8169-1B09F83C14C2
 install-name:    '/System/Library/Frameworks/PCSC.framework/Versions/A/PCSC'
-current-version: 602.60.5
+current-version: 603.100.33
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           20028FB7-A8AB-3D09-A160-484493D625E1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B4FB7E22-83A0-39DC-BAF1-4AD33E5AD095
 install-name:    '/System/Library/Frameworks/SharedWithYou.framework/Versions/A/SharedWithYou'
 swift-abi-version: 7
 reexported-libraries:
@@ -83,10 +76,10 @@ exports:
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC11headerTitleSSvs', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderACSo06NSItemI0C_tcfC', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderACSo06NSItemI0C_tcfc', 
-                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CvM', 
-                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0Cvg', 
-                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CvpMV', 
-                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0Cvs', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CSgvM', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CSgvg', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CSgvpMV', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC12itemProviderSo06NSItemI0CSgvs', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC14dismissPopover8animated10completionySb_yycSgtF', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC14headerSubtitleSSvM', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC14headerSubtitleSSvg', 
@@ -98,6 +91,7 @@ exports:
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC22activeParticipantCountSuvg', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC22activeParticipantCountSuvpMV', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC22activeParticipantCountSuvs', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC23updatePlaceholderSymbol5scale6weight9pointSizeySo07NSImageJ5ScaleV_So12NSFontWeighta12CoreGraphics7CGFloatVtF', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC32viewDidChangeEffectiveAppearanceyyF', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC5frameACSo6CGRectV_tcfC', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC5frameACSo6CGRectV_tcfc', 
@@ -174,12 +168,11 @@ exports:
                        '_$sSo36_SWCollaborationDetailViewControllerC13SharedWithYouE9viewModelAC013CollaborationbcI0CvpMV', 
                        '_$sSo36_SWCollaborationDetailViewControllerC13SharedWithYouE9viewModelAC013CollaborationbcI0Cvs', 
                        _NSPasteboardTypeCollaborationMetadata, _NSPasteboardTypePendingCollaboration, 
-                       '_OBJC_CLASS_$_SWCollaborationDetailViewModel', '_OBJC_CLASS_$__SWCollaborationButtonViewImpl', 
-                       '_OBJC_METACLASS_$_SWCollaborationDetailViewModel', '_OBJC_METACLASS_$__SWCollaborationButtonViewImpl', 
                        _SWCollaborationMetadataTypeIdentifier, _SWHighlightErrorDomain ]
-    objc-classes:    [ NSItemProviderExtraction, SWAttributionView, SWCollaborationDetailViewModel, 
-                       SWCollaborationHighlight, SWCollaborationView, SWCoreSpotlightUtilities, 
-                       SWHighlight, SWHighlightCenter, SWHighlightChangeEvent, SWHighlightContextMenu, 
+    objc-classes:    [ NSItemProviderExtraction, SWAttributionView, SWBackgroundSendUtility, 
+                       SWCollaborationDetailViewModel, SWCollaborationHighlight, 
+                       SWCollaborationView, SWCoreSpotlightUtilities, SWHighlight, 
+                       SWHighlightCenter, SWHighlightChangeEvent, SWHighlightContextMenu, 
                        SWHighlightMembershipEvent, SWHighlightMentionEvent, SWHighlightPersistenceEvent, 
                        SWRemoveParticipantAlert, SWShareableContent, SWShareableContentExtractor, 
                        _SWCollaborationButtonView, _SWCollaborationButtonViewImpl, 

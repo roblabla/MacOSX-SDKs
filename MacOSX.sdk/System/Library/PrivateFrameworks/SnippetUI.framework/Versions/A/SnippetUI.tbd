@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DD965108-D382-3283-BAD7-9FAB6261472D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C3345E5B-58C7-36C5-8597-3F0092F52BB1
 install-name:    '/System/Library/PrivateFrameworks/SnippetUI.framework/Versions/A/SnippetUI'
 swift-abi-version: 7
 exports:
@@ -16,6 +9,8 @@ exports:
                        '_$s10SnippetKit11TextElementV0A2UIE6asViewQryF', '_$s10SnippetKit11TextElementV0A2UIE6asViewQryFQOMQ', 
                        '_$s10SnippetKit11_ProtoColorV0A2UIE10swiftValue05SwiftE00D0VSgvg', 
                        '_$s10SnippetKit11_ProtoColorV0A2UIE10swiftValue05SwiftE00D0VSgvpMV', 
+                       '_$s10SnippetKit12BinaryButtonV0A2UIE4view05SwiftE07AnyViewVvg', 
+                       '_$s10SnippetKit12BinaryButtonV0A2UIE4view05SwiftE07AnyViewVvpMV', 
                        '_$s10SnippetKit12ImageElementV0A2UIE010isCircularC5Style_5idiomSbAC0cH0O_So8VRXIdiomVtFZ', 
                        '_$s10SnippetKit12ImageElementV0A2UIE12cornerRadius3for5idiom12CoreGraphics7CGFloatVAC0C5StyleO_So8VRXIdiomVtFZ', 
                        '_$s10SnippetKit12ImageElementV0A2UIE4size3for5idiomSo6CGSizeVAC0C5StyleO_So8VRXIdiomVtFZ', 
@@ -758,6 +753,7 @@ exports:
                        '_$s9SnippetUI7ContextC16changeBackground14newBackgroundsySay0A3Kit0E18ElementConvertible_pG_tFTj', 
                        '_$s9SnippetUI7ContextC16changeBackground14newBackgroundsySay0A3Kit0E18ElementConvertible_pG_tFTq', 
                        '_$s9SnippetUI7ContextC16willBeginEditingyyFTj', '_$s9SnippetUI7ContextC16willBeginEditingyyFTq', 
+                       '_$s9SnippetUI7ContextC17closeButtonTappedyyFTj', '_$s9SnippetUI7ContextC17closeButtonTappedyyFTq', 
                        '_$s9SnippetUI7ContextC18backgroundMaterialSo11VRXMaterialVvMTj', 
                        '_$s9SnippetUI7ContextC18backgroundMaterialSo11VRXMaterialVvMTq', 
                        '_$s9SnippetUI7ContextC18backgroundMaterialSo11VRXMaterialVvgTj', 

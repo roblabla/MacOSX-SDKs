@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FB4B6EA0-400C-3026-BC85-908598CA52C5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8BFA89A4-03A3-3214-8B49-7176A3DCEAD8
 install-name:    '/System/Library/PrivateFrameworks/StrokeAnimation.framework/Versions/A/StrokeAnimation'
 swift-abi-version: 7
 exports:

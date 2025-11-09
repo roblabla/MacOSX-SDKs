@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7863D9CB-C4A9-3357-9E4F-F36D67849345
-  - target:          x86_64-maccatalyst
-    value:           7863D9CB-C4A9-3357-9E4F-F36D67849345
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           067F83D9-1749-3E9A-8115-AB6052888842
-  - target:          arm64e-maccatalyst
-    value:           067F83D9-1749-3E9A-8115-AB6052888842
 install-name:    '/System/Library/Frameworks/BackgroundAssets.framework/Versions/A/BackgroundAssets'
 swift-abi-version: 7
 reexported-libraries:
@@ -24,25 +11,18 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _BAAppStoreClientErrorDomain, _BABackgroundDownloaderExtensionLabel, 
-                       _BADownloaderExtensionMetadataKeyApplicationCacheLocationURL, 
-                       _BADownloaderExtensionMetadataKeyApplicationIdentifier, _BADownloaderExtensionMetadataKeyApplicationLocationURL, 
-                       _BADownloaderExtensionMetadataKeyLocalizedApplicationName, 
-                       _BADownloaderPriorityDefault, _BADownloaderPriorityManifest, 
-                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAErrorDomain, 
+    symbols:         [ _BAAppStoreClientErrorDomain, _BAAppStoreProgressObserverStateString, 
+                       _BABackgroundDownloaderExtensionLabel, _BAContentRequestToString, 
+                       _BADownloadNecessityToString, _BADownloaderPriorityDefault, 
+                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAEssentialMaxInstallSize, 
                        _BAInitialRestrictionsDomainAllowList, _BAInitialRestrictionsDownloadAllowance, 
-                       _BAInitialRestrictionsKey, _BAManifestURL, _BAMaxInstallSize, 
-                       _NSErrorWithBAErrorCode, _NSErrorWithBAErrorCodeUnderlying, 
-                       _kBackgroundAssetsAgentMachServiceName, _kBackgroundAssetsAgentSPIMachServiceName, 
-                       _kBackgroundAssetsAppInfoAllowedDomain, _kBackgroundAssetsAppInfoAmountDownloadAllowance, 
-                       _kBackgroundAssetsAppInfoAmountDownloadedKey, _kBackgroundAssetsAppInfoAppIdentifierKey, 
-                       _kBackgroundAssetsAppInfoAppTeamIdentifierKey, _kBackgroundAssetsAppInfoDeliveredAppDidInstall, 
-                       _kBackgroundAssetsAppInfoDeliveredAppHasLaunched, _kBackgroundAssetsAppInfoInitialBackgroundCellularPolicy, 
-                       _kBackgroundAssetsAppInfoLastApplicationLaunchTime, _kBackgroundAssetsAppInfoLastTimeCheckKey, 
-                       _kBackgroundAssetsAppInfoManifestURL, _kBackgroundAssetsAppInfoPermittedForInitialBackgroundActivity, 
-                       _kBackgroundAssetsAppInfoUserForceQuitApp, _kBackgroundAssetsDeveloperTeamIdentifierEntitlement ]
+                       _BAInitialRestrictionsEssentialDownloadAllowance, _BAInitialRestrictionsKey, 
+                       _BAInitialRestrictionsOptionalDownloadAllowance, _BAManifestURL, 
+                       _BAMaxInstallSize, _BAOptionalMaxInstallSize ]
     objc-classes:    [ BAAgentSystemProxy, BAAppExtensionInfo, BAAppStoreClient, 
-                       BAAppStoreGrantDescriptor, BACloudKitDownload, BADownload, 
+                       BAAppStoreEventDescriptor, BAAppStorePrepareDescriptor, BAAppStoreProgressConfiguration, 
+                       BAAppStoreProgressInfoDescriptor, BAAppStoreProgressObserver, 
+                       BAApplicationConfigurationOverrides, BACloudKitDownload, BADownload, 
                        BADownloadManager, BAURLDownload ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s16BackgroundAssets21BADownloaderExtensionMp', '_$s16BackgroundAssets21BADownloaderExtensionP0D10Foundation03AppD0Tb', 
@@ -70,5 +50,7 @@ exports:
                        '_$s16BackgroundAssets34BADownloaderExtensionConfigurationP0D10Foundation03AppdE0Tb', 
                        '_$s16BackgroundAssets34BADownloaderExtensionConfigurationTL', 
                        '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE31restrictedDownloadSizeRemainingSiSgvg', 
-                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE31restrictedDownloadSizeRemainingSiSgvpMV' ]
+                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE31restrictedDownloadSizeRemainingSiSgvpMV', 
+                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE40restrictedEssentialDownloadSizeRemainingSiSgvg', 
+                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE40restrictedEssentialDownloadSizeRemainingSiSgvpMV' ]
 ...

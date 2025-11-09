@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E7BE1743-4EBF-38EC-A91E-C7E37B3DBB67
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           05E20BF0-F89E-3C2F-AD35-6C3B6694C46E
 install-name:    '/System/Library/PrivateFrameworks/WindowManager.framework/Versions/A/WindowManager'
-current-version: 61.9
+current-version: 61.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

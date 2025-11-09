@@ -227,6 +227,8 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  */
 @property (readwrite, assign) BOOL supportsSyncingTrash FILEPROVIDER_API_AVAILABILITY_V5_0;
 
+@property (nonatomic, readonly, nullable) NSUUID *volumeUUID;
+
 @end
 
 FILEPROVIDER_API_AVAILABILITY_V2

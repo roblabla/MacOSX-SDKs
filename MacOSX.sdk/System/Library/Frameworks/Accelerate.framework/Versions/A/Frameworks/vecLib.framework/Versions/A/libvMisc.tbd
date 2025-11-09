@@ -2,25 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0988E921-F214-39D5-803B-6FA0EEF2A6C4
-  - target:          x86_64-maccatalyst
-    value:           0988E921-F214-39D5-803B-6FA0EEF2A6C4
-  - target:          x86_64h-macos
-    value:           31D3C531-06A8-3F92-9BDB-8022BE0C895D
-  - target:          x86_64h-maccatalyst
-    value:           31D3C531-06A8-3F92-9BDB-8022BE0C895D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           91750923-545F-3AB2-8A56-2A99B8393D11
-  - target:          arm64e-maccatalyst
-    value:           91750923-545F-3AB2-8A56-2A99B8393D11
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 818.60.3
+current-version: 818.100.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

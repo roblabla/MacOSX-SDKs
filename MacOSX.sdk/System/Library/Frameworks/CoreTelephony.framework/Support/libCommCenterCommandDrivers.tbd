@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A078AB6E-0115-36D3-BF2B-F06127756726
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           529BE5F1-79D2-3758-85E1-F9178E755D83
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterCommandDrivers.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -71,7 +64,8 @@ exports:
                        __ZTIN3ctu8LoggableI33DataSubscriptionBaseCommandDriverNS_11OsLogLoggerEEE, 
                        __ZTIN3ctu8LoggableIN10subscriber16SimCommandDriverENS_11OsLogLoggerEEE, 
                        __ZTIN3ctu8LoggableIN3awd16AwdCommandDriverENS_11OsLogLoggerEEE, 
-                       __ZTINSt3__110__function6__baseIFvN3xpc6objectEEEE, __ZTINSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4lessIS4_EENS8_INS_4pairIKS4_SA_EEEEEEEEE, 
+                       __ZTIN5boost6detail15sp_counted_baseE, __ZTINSt3__110__function6__baseIFvN3xpc6objectEEEE, 
+                       __ZTINSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4lessIS4_EENS8_INS_4pairIKS4_SA_EEEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotEtNS_4lessIS4_EENS_9allocatorINS_4pairIKS4_tEEEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvbEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__123enable_shared_from_thisI15ATCommandDriverEE, 
@@ -162,7 +156,8 @@ exports:
                        __ZTSN3ctu8LoggableI33DataSubscriptionBaseCommandDriverNS_11OsLogLoggerEEE, 
                        __ZTSN3ctu8LoggableIN10subscriber16SimCommandDriverENS_11OsLogLoggerEEE, 
                        __ZTSN3ctu8LoggableIN3awd16AwdCommandDriverENS_11OsLogLoggerEEE, 
-                       __ZTSNSt3__110__function6__baseIFvN3xpc6objectEEEE, __ZTSNSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4lessIS4_EENS8_INS_4pairIKS4_SA_EEEEEEEEE, 
+                       __ZTSN5boost6detail15sp_counted_baseE, __ZTSNSt3__110__function6__baseIFvN3xpc6objectEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4lessIS4_EENS8_INS_4pairIKS4_SA_EEEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotEtNS_4lessIS4_EENS_9allocatorINS_4pairIKS4_tEEEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvbEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
                        __ZTSNSt3__110shared_ptrI21CommandDriversFactoryE27__shared_ptr_default_deleteIS1_S1_EE, 
@@ -219,11 +214,11 @@ exports:
                        __Z23convertBandToMaskForRatt21RadioAccessTechnology, __Z24convertMaskToBandsForRaty21RadioAccessTechnology, 
                        __Z3end8FileType, __Z5begin8FileType, __Z8asString14DormancyStatus, 
                        __Z8asString14FileFormatType, __Z8asString14FilePushReason, 
-                       __Z8asString16VinylDriverError, __Z8asString16VinylDriverReady, 
-                       __Z8asString18FileTransferResult, __Z8asString18FileTransferStatus, 
-                       __Z8asString25FilePushTransactionResult, __Z8asString26ApplicationProcessorStatus, 
-                       __Z8asString27ClosedSubscriberGroupAction, __Z8asString8BandType, 
-                       __Z8asString8FileType, __Z8asStringN21NetworkListScanResult5StateE, 
+                       __Z8asString16FileTransferTask, __Z8asString16VinylDriverError, 
+                       __Z8asString16VinylDriverReady, __Z8asString18FileTransferResult, 
+                       __Z8asString18FileTransferStatus, __Z8asString25FilePushTransactionResult, 
+                       __Z8asString26ApplicationProcessorStatus, __Z8asString27ClosedSubscriberGroupAction, 
+                       __Z8asString8BandType, __Z8asString8FileType, __Z8asStringN21NetworkListScanResult5StateE, 
                        __Z8asStringN22PhonebookCommandDriver13ResponseError5ErrorE, 
                        __Z8asStringN22PhonebookCommandDriver13ResponseError7CommandE, 
                        __Z8asStringN23ActivationCommandDriver13ResponseError5ErrorE, 

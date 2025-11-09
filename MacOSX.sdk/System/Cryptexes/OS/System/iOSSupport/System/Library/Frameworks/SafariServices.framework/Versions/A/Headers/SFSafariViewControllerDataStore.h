@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SF_EXTERN API_AVAILABLE(ios(16.0))
+SF_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(SFSafariViewController.DataStore)
 @interface SFSafariViewControllerDataStore : NSObject
 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D6BD46A5-CF1B-39E1-AF10-A6AB4EFA955C
-  - target:          x86_64-maccatalyst
-    value:           D6BD46A5-CF1B-39E1-AF10-A6AB4EFA955C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E158B753-CD59-30EF-9FC7-342A4394650D
-  - target:          arm64e-maccatalyst
-    value:           E158B753-CD59-30EF-9FC7-342A4394650D
 install-name:    '/System/Library/PrivateFrameworks/LiveExecutionResultsFoundation.framework/Versions/A/LiveExecutionResultsFoundation'
 swift-abi-version: 7
 exports:
@@ -104,6 +91,21 @@ exports:
                        '_$s30LiveExecutionResultsFoundation28SourceLocationCollectionModeOSYAAMc', 
                        '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC024sourceLocationForAddresse7CurrentF0yAA06SourceJ0Vs6UInt64VKFTj', 
                        '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC024sourceLocationForAddresse7CurrentF0yAA06SourceJ0Vs6UInt64VKFTq', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO0D009LocalizedI0AAMc', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO11nilFilePathyA2EmFWC', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO11unsupportedyA2EmFWC', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO16errorDescriptionSSSgvg', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO16errorDescriptionSSSgvpMV', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO2eeoiySbAE_AEtFZ', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO9hashValueSivg', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorO9hashValueSivpMV', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorOMa', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorOMn', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorON', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorOSHAAMc', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorOSQAAMc', 
+                       '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC0G5ErrorOs0I0AAMc', 
                        '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceC6sharedACvgZ', 
                        '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceCMa', 
                        '_$s30LiveExecutionResultsFoundation29InProcessSymbolicationServiceCMm', 
@@ -172,5 +174,6 @@ exports:
                        '_$sSo9OS_os_logC30LiveExecutionResultsFoundationE0B0AD6LoggerVvgZ', 
                        '_$sSo9OS_os_logC30LiveExecutionResultsFoundationE4host0B06LoggerVvgZ', 
                        '_$sSo9OS_os_logC30LiveExecutionResultsFoundationE5agent0B06LoggerVvgZ', 
+                       '_$sSo9OS_os_logC30LiveExecutionResultsFoundationE5probe0B06LoggerVvgZ', 
                        _LiveExecutionResultsFoundationVersionNumber, _LiveExecutionResultsFoundationVersionString ]
 ...

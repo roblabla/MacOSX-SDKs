@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIBackgroundConfiguration.h>
+#import <UIKit/NSParagraphStyle.h>
 
 @class UIImageSymbolConfiguration;
 @class UIButton;
@@ -118,10 +119,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 @property (nonatomic, readwrite, copy, nullable) NSString *title;
 @property (nonatomic, readwrite, copy, nullable) NSAttributedString *attributedTitle;
 @property (nonatomic, readwrite, copy, nullable) UIConfigurationTextAttributesTransformer titleTextAttributesTransformer;
+/// Default is WordWrapping. WordWrapping and CharWrapping both allow for multi-line text, other modes will restrict the title to a single line of text.
+@property (nonatomic, readwrite, assign) NSLineBreakMode titleLineBreakMode;
 
 @property (nonatomic, readwrite, copy, nullable) NSString *subtitle;
 @property (nonatomic, readwrite, copy, nullable) NSAttributedString *attributedSubtitle;
 @property (nonatomic, readwrite, copy, nullable) UIConfigurationTextAttributesTransformer subtitleTextAttributesTransformer;
+/// Default is WordWrapping. WordWrapping and CharWrapping both allow for multi-line text, other modes will restrict the subtitle to a single line of text.
+@property (nonatomic, readwrite, assign) NSLineBreakMode subtitleLineBreakMode;
 
 /// What kind of indicator should the button show. Default value is .automatic.
 @property (nonatomic, readwrite, assign) UIButtonConfigurationIndicator indicator API_AVAILABLE(ios(16.0));

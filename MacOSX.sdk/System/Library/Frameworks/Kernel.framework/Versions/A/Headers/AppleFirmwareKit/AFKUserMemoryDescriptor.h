@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from AFKUserMemoryDescriptor.iig */
+/* iig(DriverKit-256.100.8) generated from AFKUserMemoryDescriptor.iig */
 
 /* AFKUserMemoryDescriptor.iig:1-23 */
 /*
@@ -192,7 +192,7 @@ public:
 
 #if !KERNEL
 
-class AFKUserMemoryDescriptorInterface : public OSInterface
+class  AFKUserMemoryDescriptorInterface : public OSInterface
 {
 public:
     virtual IOReturn

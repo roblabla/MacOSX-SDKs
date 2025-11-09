@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3025D8CE-324B-3CFF-9790-693386BFF5CC
-  - target:          x86_64-maccatalyst
-    value:           3025D8CE-324B-3CFF-9790-693386BFF5CC
-  - target:          arm64-macos
-    value:           7F3B92F2-DFBD-31C1-BB28-4F5D88FE0D8D
-  - target:          arm64-maccatalyst
-    value:           7F3B92F2-DFBD-31C1-BB28-4F5D88FE0D8D
-  - target:          arm64e-macos
-    value:           B141AED1-2230-3096-878B-7175EBB55AC9
-  - target:          arm64e-maccatalyst
-    value:           B141AED1-2230-3096-878B-7175EBB55AC9
 install-name:    '/usr/lib/libAppleArchive.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

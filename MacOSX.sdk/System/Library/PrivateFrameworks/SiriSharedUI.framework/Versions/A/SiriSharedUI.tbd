@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5AF43067-D15A-3CBE-82DC-57F1266E4B35
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3A2B8294-B7F2-3DE2-B551-94BC3371B0F3
 install-name:    '/System/Library/PrivateFrameworks/SiriSharedUI.framework/Versions/A/SiriSharedUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

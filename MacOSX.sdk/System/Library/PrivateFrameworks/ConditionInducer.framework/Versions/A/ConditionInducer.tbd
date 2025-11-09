@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CE88973B-C322-364B-95F3-38D849D5952F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           46D694A8-5516-3F3D-9B4A-3BCB78C11F16
 install-name:    '/System/Library/PrivateFrameworks/ConditionInducer.framework/Versions/A/ConditionInducer'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

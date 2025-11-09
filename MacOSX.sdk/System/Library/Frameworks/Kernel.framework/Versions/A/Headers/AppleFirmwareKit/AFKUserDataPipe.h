@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from AFKUserDataPipe.iig */
+/* iig(DriverKit-256.100.8) generated from AFKUserDataPipe.iig */
 
 /* AFKUserDataPipe.iig:1-38 */
 /*
@@ -487,7 +487,7 @@ public:
 
 #if !KERNEL
 
-class AFKUserDataPipeInterface : public OSInterface
+class  AFKUserDataPipeInterface : public OSInterface
 {
 public:
     virtual AFKUserMemoryDescriptor *
@@ -659,7 +659,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_AFKUserDataPipe__HandleResponseInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_AFKUserDataPipe__HandleResponseInterface : public OSInterface
 {
 public:
 };
@@ -752,7 +752,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_AFKUserDataPipe__HandleCommandInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_AFKUserDataPipe__HandleCommandInterface : public OSInterface
 {
 public:
 };
@@ -845,7 +845,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_AFKUserDataPipe__HandleReportInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_AFKUserDataPipe__HandleReportInterface : public OSInterface
 {
 public:
 };

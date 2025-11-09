@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           790F1C6F-8A65-3BFB-96EF-D001835FDCDD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DAB98FFD-9177-3D1D-BFDF-DA0BCC598C63
 install-name:    '/System/Library/PrivateFrameworks/CalendarUIKit.framework/Versions/A/CalendarUIKit'
 current-version: 0
 exports:

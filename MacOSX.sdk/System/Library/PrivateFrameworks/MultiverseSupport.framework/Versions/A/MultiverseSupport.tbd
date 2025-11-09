@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2BFE979E-2B7B-3A0E-A9EF-EFD53F6D0727
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           56740D7C-F3FE-3507-8E24-7CA96E5221FC
 install-name:    '/System/Library/PrivateFrameworks/MultiverseSupport.framework/Versions/A/MultiverseSupport'
 current-version: 113
 exports:

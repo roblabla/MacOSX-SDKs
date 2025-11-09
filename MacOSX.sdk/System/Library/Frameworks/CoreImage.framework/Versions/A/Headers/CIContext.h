@@ -12,7 +12,13 @@
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
 
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+  #define COREIMAGE_SUPPORTS_OPENGLES 1
+#else
+  #define COREIMAGE_SUPPORTS_OPENGLES 0
+#endif 
+
+#if COREIMAGE_SUPPORTS_OPENGLES
  #import <OpenGLES/EAGL.h>
 #elif TARGET_OS_OSX
  #import <OpenGL/CGLTypes.h>
@@ -155,7 +161,7 @@ NS_AVAILABLE(10_4,5_0);
  *
  * The [context drawImage:...] render methods will render to the EAGLContext.
  */
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
+#if COREIMAGE_SUPPORTS_OPENGLES
 + (CIContext *)contextWithEAGLContext:(EAGLContext *)eaglContext
     CI_GL_DEPRECATED_IOS(5_0,12_0);
 

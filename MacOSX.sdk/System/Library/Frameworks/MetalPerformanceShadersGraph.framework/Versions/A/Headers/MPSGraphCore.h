@@ -55,6 +55,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  *  @constant   MPSGraphTensorNamedDataLayoutCHW             LayoutCHW
  *  @constant   MPSGraphTensorNamedDataLayoutHWC             LayoutHWC
  *  @constant   MPSGraphTensorNamedDataLayoutHW                LayoutHW
+ *  @constant   MPSGraphTensorNamedDataLayoutNCDHW        LayoutNCDHW
+ *  @constant   MPSGraphTensorNamedDataLayoutNDHWC        LayoutNDHWC
+ *  @constant   MPSGraphTensorNamedDataLayoutOIDHW         LayoutOIDHW
+ *  @constant   MPSGraphTensorNamedDataLayoutDHWIO         LayoutDHWIO
  */
 typedef NS_ENUM(NSUInteger, MPSGraphTensorNamedDataLayout)
 {
@@ -65,6 +69,10 @@ typedef NS_ENUM(NSUInteger, MPSGraphTensorNamedDataLayout)
     MPSGraphTensorNamedDataLayoutCHW        MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  4L,
     MPSGraphTensorNamedDataLayoutHWC        MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  5L,
     MPSGraphTensorNamedDataLayoutHW         MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  6L,
+    MPSGraphTensorNamedDataLayoutNCDHW      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  7L,
+    MPSGraphTensorNamedDataLayoutNDHWC      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  8L,
+    MPSGraphTensorNamedDataLayoutOIDHW      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  9L,
+    MPSGraphTensorNamedDataLayoutDHWIO      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  10L,
 };
 
 /*!

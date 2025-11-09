@@ -1,27 +1,22 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           93D18B18-B1C4-3701-A0AE-C72FC0A2A1A7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4046716D-8436-35A8-997A-32E83858182C
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
-current-version: 2.23.6
-compatibility-version: 2.23.6
+current-version: 2.36
+compatibility-version: 2.36
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
+    weak-symbols:    [ __ZTIFvvE, __ZTIN5boost9container12out_of_rangeE, __ZTIN5boost9container9exceptionE, 
+                       __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
                        __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
-                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__16vectorIfNS_9allocatorIfEEEE, 
-                       __ZTINSt3__16vectorIhNS_9allocatorIhEEEE, __ZTINSt3__16vectorItNS_9allocatorItEEEE, 
-                       __ZTIPFvvE, __ZTISt11logic_error, __ZTISt11range_error, __ZTISt12length_error, 
-                       __ZTISt12out_of_range, __ZTISt13runtime_error, __ZTISt16invalid_argument, 
-                       __ZTISt18bad_variant_access, __ZTISt19bad_optional_access, 
-                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSFvvE, __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
+                       __ZTINSt3__16vectorIfNS_9allocatorIfEEEE, __ZTINSt3__16vectorIhNS_9allocatorIhEEEE, 
+                       __ZTINSt3__16vectorItNS_9allocatorItEEEE, __ZTIPFvvE, __ZTISt11logic_error, 
+                       __ZTISt11range_error, __ZTISt12length_error, __ZTISt12out_of_range, 
+                       __ZTISt13runtime_error, __ZTISt16invalid_argument, __ZTISt18bad_variant_access, 
+                       __ZTISt19bad_optional_access, __ZTISt20bad_array_new_length, 
+                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSFvvE, __ZTSN5boost9container12out_of_rangeE, 
+                       __ZTSN5boost9container9exceptionE, __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS7_S6_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ifstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
@@ -29,12 +24,12 @@ exports:
                        __ZTSNSt3__110shared_ptrINS_18basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS6_S6_EE, 
                        __ZTSNSt3__114default_deleteINS_14basic_ifstreamIcNS_11char_traitsIcEEEEEE, 
                        __ZTSNSt3__114default_deleteINS_14basic_ofstreamIcNS_11char_traitsIcEEEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__vector_base_commonILb1EEE, 
-                       __ZTSNSt3__16vectorIfNS_9allocatorIfEEEE, __ZTSNSt3__16vectorIhNS_9allocatorIhEEEE, 
-                       __ZTSNSt3__16vectorItNS_9allocatorItEEEE, __ZTSPFvvE, __ZTSSt11logic_error, 
-                       __ZTSSt11range_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
-                       __ZTSSt13runtime_error, __ZTSSt16invalid_argument, __ZTSSt18bad_variant_access, 
-                       __ZTSSt19bad_optional_access, __ZTSSt9bad_alloc, __ZTSSt9exception ]
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__16vectorIfNS_9allocatorIfEEEE, 
+                       __ZTSNSt3__16vectorIhNS_9allocatorIhEEEE, __ZTSNSt3__16vectorItNS_9allocatorItEEEE, 
+                       __ZTSPFvvE, __ZTSSt11logic_error, __ZTSSt11range_error, __ZTSSt12length_error, 
+                       __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt16invalid_argument, 
+                       __ZTSSt18bad_variant_access, __ZTSSt19bad_optional_access, 
+                       __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, __ZTSSt9exception ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AccelerateCVDoGCreateOctaveList, _AccelerateCVDoGExtractKeypoints, 
                        _AccelerateCVDoGParametersDefault, _AccelerateCVOctaveListFree, 

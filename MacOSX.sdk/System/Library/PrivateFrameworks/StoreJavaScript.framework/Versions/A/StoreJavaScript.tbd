@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5DAF5C51-57BC-3C93-BE11-938DE69E5E5D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AA067611-D595-32BE-84BB-4F95268E95FC
 install-name:    '/System/Library/PrivateFrameworks/StoreJavaScript.framework/Versions/A/StoreJavaScript'
 current-version: 379
 exports:

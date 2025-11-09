@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FEE68B86-E795-339E-8084-3665F60D5FA1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           326D59AF-156A-3821-845B-574D97A456C7
 install-name:    '/System/Library/PrivateFrameworks/TuriCore.framework/Versions/A/TuriCore'
 current-version: 0
 compatibility-version: 0

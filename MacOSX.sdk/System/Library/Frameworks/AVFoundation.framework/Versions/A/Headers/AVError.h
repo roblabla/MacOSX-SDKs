@@ -117,6 +117,8 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorInvalidSampleCursor API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11880,
 	AVErrorFailedToLoadSampleData API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11881,
 	AVErrorAirPlayReceiverTemporarilyUnavailable API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11882,
+	AVErrorEncodeFailed API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11883,
+	AVErrorSandboxExtensionDenied API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11884,
 };
 
 #else

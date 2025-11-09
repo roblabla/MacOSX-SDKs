@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-818.60
+     Version:    vecLib-818.100
  
-     Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2023 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -47,6 +47,18 @@
 #endif
 #endif
 
+#if defined(ACCELERATE_NEW_LAPACK)
+
+#include <vecLib/blas_new.h>
+#include <vecLib/cblas_new.h>
+#include <vecLib/lapack.h>
+
+// Prevent nested inclusion of old headers if we are using the new ones
+#define CBLAS_H
+#define __CLAPACK_H
+
+#else
+
 #include <vecLib/fortran_blas.h>
 
 #ifndef CBLAS_H
@@ -56,6 +68,8 @@
 #ifndef __CLAPACK_H
 #include <vecLib/clapack.h>
 #endif
+
+#endif // #if defined(ACCELERATE_NEW_LAPACK)
 
 #ifndef __LINEAR_ALGEBRA_PUBLIC_HEADER__
 #include <vecLib/LinearAlgebra/LinearAlgebra.h>

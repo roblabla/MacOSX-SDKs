@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           645A960C-75CF-3426-B8B9-3B7FFC572414
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A57FAC6E-CB10-3BCF-96F5-78C85BC4EC52
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 218
+current-version: 218.3.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 

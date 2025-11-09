@@ -9,7 +9,7 @@
 #import <AuthenticationServices/ASAuthorizationCustomMethod.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class ASAuthorization;
 @class ASAuthorizationRequest;
@@ -40,7 +40,7 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(wat
 typedef NS_OPTIONS(NSUInteger, ASAuthorizationControllerRequestOptions) {
     /*! @abstract Tell the authorization controller that it should prefer credentials that are immediately available on the local device.
      */
-    ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials = 1 << 0,
+    ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials API_UNAVAILABLE(tvos, watchos) = 1 << 0,
 } NS_SWIFT_NAME(ASAuthorizationController.RequestOptions) API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
@@ -109,4 +109,4 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

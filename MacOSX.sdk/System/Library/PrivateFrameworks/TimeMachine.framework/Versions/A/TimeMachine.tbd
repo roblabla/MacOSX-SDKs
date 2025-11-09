@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           34A5BD1C-37CE-35DD-AD78-8757BABAFF7C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           44EDE41A-4F25-3AE4-B103-37C605886BCC
 install-name:    '/System/Library/PrivateFrameworks/TimeMachine.framework/Versions/A/TimeMachine'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

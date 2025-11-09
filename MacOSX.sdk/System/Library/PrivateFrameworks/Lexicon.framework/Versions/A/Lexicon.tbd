@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           219CCCF2-0174-35C9-80DE-AB4560CA3013
-  - target:          x86_64-maccatalyst
-    value:           219CCCF2-0174-35C9-80DE-AB4560CA3013
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           99056F83-B25D-36CF-9D09-815F2EDAE102
-  - target:          arm64e-maccatalyst
-    value:           99056F83-B25D-36CF-9D09-815F2EDAE102
 install-name:    '/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon'
-current-version: 104.1
+current-version: 105.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

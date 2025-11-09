@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B25A6969-E026-3DA2-A41B-8232D1FE39CC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           294EFA4D-6186-36FB-A44C-AB1646C9611E
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
@@ -24,7 +17,7 @@ exports:
                        _AXFApplicationInfoIconSizeKey, _AXFApplicationInfoNameKey, 
                        _AXFApplicationShownNotification, _AXFBundleIdentifierFromPID, 
                        _AXFBundlePathFromPID, _AXFContainerTypeFromiOSAXContainerType, 
-                       _AXFCopyProcessIDForWindowID, _AXFCopyStringToUChar32Array, 
+                       _AXFConvertToInteger, _AXFCopyProcessIDForWindowID, _AXFCopyStringToUChar32Array, 
                        _AXFCopyStringToUniCharArray, _AXFCreateLog, _AXFCreatedNotification, 
                        _AXFCursorIsUsingCustomCursors, _AXFCursorRegisterAll, _AXFCursorSetAndReturnSeed, 
                        _AXFCursorUnregisterAll, _AXFDebugPrintHierarchy, _AXFDrawerCreatedNotification, 
@@ -60,7 +53,6 @@ exports:
                        _AXFMainWindowChangedNotification, _AXFMap, _AXFMenuClosedNotification, 
                        _AXFMenuItemSelectedNotification, _AXFMenuOpenedNotification, 
                        _AXFMovedNotification, _AXFPSNFromPID, _AXFPSNIsEqualToPSN, 
-                       _AXFPerformPrivilegedAttributedStringTransformation, _AXFPerformPrivilegedAttributedStringTransformations, 
                        _AXFResizedNotification, _AXFRowCollapsedNotification, _AXFRowCountChangedNotification, 
                        _AXFRowExpandedNotification, _AXFScreenCaptureBorderFrameKey, 
                        _AXFScreenCaptureDisplayNativeScaleKey, _AXFScreenCaptureImageDataKey, 

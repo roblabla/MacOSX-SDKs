@@ -1,11 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           20DF550C-A8A0-3FF5-9D66-C8C43422B0B0
-  - target:          x86_64-maccatalyst
-    value:           20DF550C-A8A0-3FF5-9D66-C8C43422B0B0
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/half_rgba.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

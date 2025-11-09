@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E272E2C2-8511-3C94-8C39-F5319F2812BB
-  - target:          x86_64-maccatalyst
-    value:           E272E2C2-8511-3C94-8C39-F5319F2812BB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           74F6C923-5FF6-39D0-90DE-8FB4812EA263
-  - target:          arm64e-maccatalyst
-    value:           74F6C923-5FF6-39D0-90DE-8FB4812EA263
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

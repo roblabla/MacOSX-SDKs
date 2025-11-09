@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           08C1A911-66F7-3C6C-AAF1-CDAEE3C2946A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EAB70C91-5FF9-38F2-8498-2E587BE5FE28
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomNetworkUsage.framework/Versions/A/SymptomNetworkUsage'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

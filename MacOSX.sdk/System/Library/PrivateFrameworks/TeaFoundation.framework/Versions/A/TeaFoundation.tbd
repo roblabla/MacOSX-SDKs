@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DF6D4B30-3E85-3E1F-B53F-1FECFE08F8BE
-  - target:          x86_64-maccatalyst
-    value:           DF6D4B30-3E85-3E1F-B53F-1FECFE08F8BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5A2C5E38-56D9-3F0D-B865-E4A984F82D8C
-  - target:          arm64e-maccatalyst
-    value:           5A2C5E38-56D9-3F0D-B865-E4A984F82D8C
 install-name:    '/System/Library/PrivateFrameworks/TeaFoundation.framework/Versions/A/TeaFoundation'
-current-version: 715
+current-version: 727.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -44,9 +31,10 @@ allowable-clients:
                        WeatherCore, WeatherCore2, WeatherCore2Tests, WeatherCoreTests, 
                        WeatherDaemon, WeatherDaemonMemoryTests, WeatherDaemonTests, 
                        WeatherDemo, WeatherDiagnosticExtension, WeatherIntents, WeatherKit, 
-                       WeatherKitTests, WeatherMaps, WeatherMapsTests, WeatherNotifications, 
-                       WeatherUI, WeatherUITests, WeatherUnitTests, WeatherWidget, 
-                       WeatherWidgetExtension, com.apple.news, newsd, weatherd ]
+                       WeatherKitDemo, WeatherKitTests, WeatherMaps, WeatherMapsTests, 
+                       WeatherNotifications, WeatherUI, WeatherUITests, WeatherUnitTests, 
+                       WeatherWidget, WeatherWidgetExtension, com.apple.news, newsd, 
+                       weatherd ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -636,6 +624,7 @@ exports:
                        '_$s13TeaFoundation14PromiseDeduperC7optionsACyxq_GAA0cD5FlagsV_tcfCTj', 
                        '_$s13TeaFoundation14PromiseDeduperC7optionsACyxq_GAA0cD5FlagsV_tcfCTq', 
                        '_$s13TeaFoundation14PromiseDeduperC7optionsACyxq_GAA0cD5FlagsV_tcfc', 
+                       '_$s13TeaFoundation14PromiseDeduperC7promise3key10loggingKey11createBlockAA0C0Cyq_Gx_SSSgAJyXEtF', 
                        '_$s13TeaFoundation14PromiseDeduperC7promise3key11createBlockAA0C0Cyq_Gx_AIyXEtF', 
                        '_$s13TeaFoundation14PromiseDeduperCMa', '_$s13TeaFoundation14PromiseDeduperCMn', 
                        '_$s13TeaFoundation14PromiseDeduperCMo', '_$s13TeaFoundation14PromiseDeduperCMu', 
@@ -1984,7 +1973,7 @@ exports:
                        '_$s13TeaFoundation6SemVerO7matches11requirement4withSbAA16VersionQualifierV_AHtFZ', 
                        '_$s13TeaFoundation6SemVerO7matches11requirement4withSbAA7VersionV_AHtFZ', 
                        '_$s13TeaFoundation6SemVerOMa', '_$s13TeaFoundation6SemVerOMn', 
-                       '_$s13TeaFoundation6SemVerON', '_$s13TeaFoundation7ManagerC5fetch4keys11cachePolicy0D4With09readCacheH005writejH07deduper7optionsAA7PromiseCySDyxq_GGSayxG_AA0jG0OAoPcAoP_SdtcAoNcAA0N7DeduperCyShyxGANGAA0C7OptionsVtFZ', 
+                       '_$s13TeaFoundation6SemVerON', '_$s13TeaFoundation7ManagerC5fetch4keys11cachePolicy0D4With09readCacheH005writejH07deduper7options10loggingKeyAA7PromiseCySDyxq_GGSayxG_AA0jG0OApQcApQ_SdtcApOcAA0P7DeduperCyShyxGAOGAA0C7OptionsVSSSgtFZ', 
                        '_$s13TeaFoundation7ManagerCMa', '_$s13TeaFoundation7ManagerCMn', 
                        '_$s13TeaFoundation7ManagerCMo', '_$s13TeaFoundation7ManagerCMu', 
                        '_$s13TeaFoundation7ManagerCfD', '_$s13TeaFoundation7ManagerCfd', 
@@ -2038,12 +2027,12 @@ exports:
                        '_$s13TeaFoundation7PromiseC7recover2on9disposeOn7closureACyxGSo17OS_dispatch_queueC_qd__AHs5Error_p_qd__tKctRld__ClFTq', 
                        '_$s13TeaFoundation7PromiseC7recover2on9disposeOn7closureACyxGSo17OS_dispatch_queueC_qd__xs5Error_p_qd__tKctRld__ClFTj', 
                        '_$s13TeaFoundation7PromiseC7recover2on9disposeOn7closureACyxGSo17OS_dispatch_queueC_qd__xs5Error_p_qd__tKctRld__ClFTq', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7messageACyqd__G8Dispatch0G4TimeV_SSSgtlFZ', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7messageACyqd__GSd_SSSgtlFZ', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7messageACyxG8Dispatch0G4TimeV_SSSgtF', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7messageACyxGSd_SSSgtF', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7promise7messageACyqd__G8Dispatch0H4TimeV_AHSSSgtlFZ', 
-                       '_$s13TeaFoundation7PromiseC7timeout5after7promise7messageACyqd__GSd_AHSSSgtlFZ', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7messageACyqd__G8Dispatch0H4TimeV_So17OS_dispatch_queueCSSSgtlFZ', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7messageACyqd__GSd_So17OS_dispatch_queueCSSSgtlFZ', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7messageACyxG8Dispatch0H4TimeV_So17OS_dispatch_queueCSSSgtF', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7messageACyxGSd_So17OS_dispatch_queueCSSSgtF', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7promise7messageACyqd__G8Dispatch0I4TimeV_So17OS_dispatch_queueCAISSSgtlFZ', 
+                       '_$s13TeaFoundation7PromiseC7timeout5after2on7promise7messageACyqd__GSd_So17OS_dispatch_queueCAISSSgtlFZ', 
                        '_$s13TeaFoundation7PromiseC8resolverACyxGyyxc_ys5Error_pctXE_tcfC', 
                        '_$s13TeaFoundation7PromiseC8resolverACyxGyyxc_ys5Error_pctXE_tcfCTj', 
                        '_$s13TeaFoundation7PromiseC8resolverACyxGyyxc_ys5Error_pctXE_tcfCTq', 

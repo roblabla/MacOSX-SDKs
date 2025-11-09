@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           574B5E5A-2A0E-39BD-84F8-A736A022F650
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           109CB5C7-E728-3758-9034-7CD265D92E3A
 install-name:    '/usr/lib/swift/libswiftExtensionKit.dylib'
 current-version: 97
 swift-abi-version: 7

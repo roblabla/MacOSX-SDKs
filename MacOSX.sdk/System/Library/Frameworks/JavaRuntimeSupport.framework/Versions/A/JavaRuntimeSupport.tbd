@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           770AEF78-1D51-30DC-9AAC-791DDC2F3DAB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           69A6E873-31CE-3781-BFF8-3D6307E94F19
 install-name:    '/System/Library/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport'
 current-version: 79
 exports:

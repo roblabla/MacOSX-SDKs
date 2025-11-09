@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4AB27722-4A98-36B8-9FF8-DB97E5800204
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4ECB0D80-0556-3DC3-A2CC-0565F52788E1
 install-name:    '/System/Library/PrivateFrameworks/Admin.framework/Versions/A/Admin'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

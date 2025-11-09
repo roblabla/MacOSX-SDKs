@@ -1,6 +1,6 @@
-framework module SafariServices [extern_c] [system] {
-  umbrella header "SafariServices.h"
-  header "SFSwiftOverlaySupport.h"
-  export *
-  module * { export * }
+framework module SafariServices [system] {
+    umbrella header "SafariServices.h"
+    header "SFSwiftOverlaySupport.h"
+    export *
+    module * { export * }
 }

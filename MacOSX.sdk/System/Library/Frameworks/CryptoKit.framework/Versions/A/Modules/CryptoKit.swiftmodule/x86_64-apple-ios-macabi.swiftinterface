@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target x86_64-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CryptoKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 110.60.3
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 111.100.9
 import Foundation
 import LocalAuthentication
 import Security.SecAccessControl
@@ -61,7 +61,7 @@ public enum P521 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.HMAC {
   @usableFromInline
-  internal static func isValidAuthenticationCode<D>(_ authenticationCode: Foundation.ContiguousBytes, authenticating authenticatedData: D, using key: CryptoKit.SymmetricKey) -> Swift.Bool where D : Foundation.DataProtocol
+  internal static func isValidAuthenticationCode<D>(_ authenticationCode: any Foundation.ContiguousBytes, authenticating authenticatedData: D, using key: CryptoKit.SymmetricKey) -> Swift.Bool where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 public protocol Digest : Foundation.ContiguousBytes, Swift.CustomStringConvertible, Swift.Hashable, Swift.Sequence where Self.Element == Swift.UInt8 {

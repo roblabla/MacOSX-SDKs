@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           24FA5E96-54E4-39D0-A8A8-8F204235BBFF
-  - target:          x86_64-maccatalyst
-    value:           24FA5E96-54E4-39D0-A8A8-8F204235BBFF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           83EC0948-7EBC-33B7-B442-C06F2CB0DE62
-  - target:          arm64e-maccatalyst
-    value:           83EC0948-7EBC-33B7-B442-C06F2CB0DE62
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3731.255.101
+current-version: 3731.255.231
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -34,7 +21,7 @@ exports:
                        _ECConvertEncodingToCharacterSetName, _ECDKIMMessageHeaderParseErrorDomain, 
                        _ECDefaultNumberOfDaysToKeepJunk, _ECDefaultNumberOfDaysToKeepTrash, 
                        _ECEmailAddressAttributedStringKey, _ECEncodingIsASCIISuperset, 
-                       _ECEndDisallowingNetworkActivity, _ECGetNextHeaderFromData, 
+                       _ECEndDisallowingNetworkActivity, _ECFindHTMLEntity, _ECGetNextHeaderFromData, 
                        _ECGetNextHeaderFromDataInRange, _ECGmailLabelDrafts, _ECGmailLabelImportant, 
                        _ECGmailLabelInbox, _ECGmailLabelSent, _ECGmailLabelSpam, 
                        _ECGmailLabelStarred, _ECGmailLabelTrash, _ECHeaderAuthenticationResultPropertyTypeBody, 
@@ -94,10 +81,10 @@ exports:
                        _ECMailDataclassPropertyOutboxMailboxName, _ECMailDataclassPropertyQueriedUserToSetPathPrefix, 
                        _ECMailDataclassPropertySentMessagesMailboxName, _ECMailDataclassPropertyShouldUseGmailLabelStores, 
                        _ECMailDataclassPropertyToDosMailboxName, _ECMailDataclassPropertyTrashMailboxName, 
-                       _ECMessageHeaderKeyAttachments, _ECMessageHeaderKeyAuthenticationResults, 
-                       _ECMessageHeaderKeyAutoSubmitted, _ECMessageHeaderKeyBCC, 
-                       _ECMessageHeaderKeyBIMIIndicator, _ECMessageHeaderKeyBIMILocation, 
-                       _ECMessageHeaderKeyCC, _ECMessageHeaderKeyContentDescription, 
+                       _ECMessageBodyHTMLParserErrorDomain, _ECMessageHeaderKeyAttachments, 
+                       _ECMessageHeaderKeyAuthenticationResults, _ECMessageHeaderKeyAutoSubmitted, 
+                       _ECMessageHeaderKeyBCC, _ECMessageHeaderKeyBIMIIndicator, 
+                       _ECMessageHeaderKeyBIMILocation, _ECMessageHeaderKeyCC, _ECMessageHeaderKeyContentDescription, 
                        _ECMessageHeaderKeyContentDisposition, _ECMessageHeaderKeyContentID, 
                        _ECMessageHeaderKeyContentLanguage, _ECMessageHeaderKeyContentLocation, 
                        _ECMessageHeaderKeyContentTransferEncoding, _ECMessageHeaderKeyContentType, 
@@ -127,7 +114,8 @@ exports:
                        _ECWhiteMailboxNameGoogleMail, _ECWhiteMailboxNameGoogleSpaceMail, 
                        __ECBeginAllowingMainThreadNetworking, __ECEndAllowingMainThreadNetworking, 
                        __ECIsNetworkActivityAllowed, __ef_log_ECDKIMCryptoUtil, __ef_log_ECDKIMVerifier, 
-                       __ef_log_ECHeaderAuthenticationResults, __ef_log_ECTaggedHeaderParser ]
+                       __ef_log_ECHeaderAuthenticationResults, __ef_log_ECMessageBodyParser, 
+                       __ef_log_ECTaggedHeaderParser ]
     objc-classes:    [ ECAPOPAuthScheme, ECAccount, ECAccountFactory, ECAccountsObserver, 
                        ECAngleBracketIDHash, ECAppleTokenAuthScheme, ECAuthScheme, 
                        ECAuthenticationScheme, ECBIMIData, ECCramMD5AuthScheme, ECDKIMCryptoUtil, 
@@ -143,7 +131,10 @@ exports:
                        ECIDNADecoder, ECIDNAEncoder, ECIMAPAccount, ECIMAPAppendInfo, 
                        ECIMAPCopyInfo, ECIMAPFlagChangeActionReplayer, ECIMAPFlagChangeUndownloadedActionReplayer, 
                        ECLabelChangeMessageAction, ECLocalActionReplayer, ECLocalMessageAction, 
-                       ECLocalMessageActionResults, ECMessageFlagChange, ECMessageFlags, 
+                       ECLocalMessageActionResults, ECMessageBodyElement, ECMessageBodyHTMLParser, 
+                       ECMessageBodyOriginalTextSubparser, ECMessageBodyParser, ECMessageBodyParserObject, 
+                       ECMessageBodyParsingUtils, ECMessageBodyStringAccumulator, 
+                       ECMessageBodySubparser, ECMessageFlagChange, ECMessageFlags, 
                        ECNTLMAuthScheme, ECNWActivity, ECNWConnectionWrapper, ECOAuth2AuthScheme, 
                        ECPOPAccount, ECPlainAuthScheme, ECRawMessageHeader, ECRawMessageHeaders, 
                        ECSASLAuthenticator, ECSASLClient, ECSMTPAccount, ECSecureMIMETrustEvaluation, 
@@ -152,5 +143,17 @@ exports:
                        ECTransferMessageAction, ECTransferMessageActionItem, ECTransferMessageActionResults, 
                        ECTransferUndownloadedActionIMAPReplayer, ECTransferUndownloadedMessageAction, 
                        _ECBIMIHeaderParser, _ECHeaderAuthenticationResultsParser, 
-                       _ECSVGProfileExtractor, _ECSubjectFormatterContext ]
+                       _ECMessageBodyConsumableNewline, _ECMessageBodyHTMLElement, 
+                       _ECParsedHTMLNode, _ECParsedHTMLTag, _ECParsedHTMLText, _ECSVGProfileExtractor, 
+                       _ECSubjectFormatterContext ]
+    objc-ivars:      [ ECMessageBodyElement._attributes, ECMessageBodyElement._externalRetainCount, 
+                       ECMessageBodyElement._nodes, ECMessageBodyElement._parser, 
+                       ECMessageBodyElement._quoteLevel, ECMessageBodyElement._validAttributes, 
+                       ECMessageBodyParser._nodesLevelCache, ECMessageBodyParser._nodesQuoteLevelCache, 
+                       ECMessageBodyParser._nodesStackCache, ECMessageBodyParser._parserError, 
+                       ECMessageBodyParserObject._didTimeout, ECMessageBodyParserObject._shouldAbort, 
+                       ECMessageBodyParserObject._timeoutTime, _ECParsedHTMLNode._childNodes, 
+                       _ECParsedHTMLNode._endLocation, _ECParsedHTMLNode._htmlString, 
+                       _ECParsedHTMLNode._nextSibling, _ECParsedHTMLNode._parentNode, 
+                       _ECParsedHTMLNode._startLocation, _ECParsedHTMLTag._tagName ]
 ...

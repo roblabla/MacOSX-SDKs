@@ -71,7 +71,7 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 /// effects on the ability to match the audio. The time variable is validated by the session to ensure that the audio is contiguous and mitigate the effect of discontiguous audio.
 /// @param buffer A buffer of audio to be used for recognition
 /// @param time Where in the stream the audio occurs
-/// @note This method will throw an exception if the audio format is not PCM in one of the following sample rates: 48000, 44100, 32000, 16000.
+/// @note This method only accepts PCM audio formats. The following sample rates are recommended but not required: 48000, 44100, 32000, 16000.
 - (void)matchStreamingBuffer:(AVAudioPCMBuffer *)buffer atTime:(nullable AVAudioTime *)time;
 
 /// Match the @c SHSignature against the provided @c SHCatalog

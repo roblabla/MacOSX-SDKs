@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           94029269-BC74-364A-ABE3-0C95DC87C343
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           971145C5-3EC5-3B96-AAA6-9D510E3D20A8
 install-name:    '/System/Library/PrivateFrameworks/ExposureNotificationDaemon.framework/Versions/A/ExposureNotificationDaemon'
 current-version: 0
 compatibility-version: 0

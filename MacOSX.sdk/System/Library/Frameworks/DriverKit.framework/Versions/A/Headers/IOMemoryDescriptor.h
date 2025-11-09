@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOMemoryDescriptor.iig */
+/* iig(DriverKit-256.100.8) generated from IOMemoryDescriptor.iig */
 
 /* IOMemoryDescriptor.iig:1-78 */
 /*
@@ -360,7 +360,7 @@ public:
 
 
 
-class IOMemoryDescriptorInterface : public OSInterface
+class  IOMemoryDescriptorInterface : public OSInterface
 {
 public:
 };

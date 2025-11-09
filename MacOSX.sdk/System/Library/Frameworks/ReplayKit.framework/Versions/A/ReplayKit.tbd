@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7D507D53-EE16-3E76-AAD6-9A36EEADF378
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D22A97EF-BF9F-3DF4-9CEF-37BF211FE25E
 install-name:    '/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

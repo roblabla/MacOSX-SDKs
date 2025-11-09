@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F4CDF51E-86DA-3D3E-810F-EFFB3783493A
-  - target:          x86_64-maccatalyst
-    value:           F4CDF51E-86DA-3D3E-810F-EFFB3783493A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           885FAE97-BCE1-3597-84FA-A0610B24CB51
-  - target:          arm64e-maccatalyst
-    value:           885FAE97-BCE1-3597-84FA-A0610B24CB51
 install-name:    '/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

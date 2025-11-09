@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3C65B224-95BE-3F11-8D83-E40CFF466154
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D69EAEC2-B59E-3FA2-8EA5-C2DA505E022E
 install-name:    '/System/Library/PrivateFrameworks/MiniSoftwareUpdate.framework/Versions/A/MiniSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

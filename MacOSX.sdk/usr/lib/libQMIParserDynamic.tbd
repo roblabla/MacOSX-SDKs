@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           163613DB-E2FF-3251-9E44-B1D6519D3AA8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           91FB9B87-7CB1-38C3-92BC-6997FA316CA4
 install-name:    '/usr/lib/libQMIParserDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

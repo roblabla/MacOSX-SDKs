@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7632289D-BBA4-356C-AD4A-BEC13DA6D87A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8CF9D01B-B5FC-3ACE-8716-E800DDF6CCEC
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1045
+current-version: 1066
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -94,25 +87,28 @@ exports:
                        '_$s14FamilyControls0aB23AuthenticationUIServiceCMu', '_$s14FamilyControls0aB23AuthenticationUIServiceCN', 
                        '_$s14FamilyControls0aB23AuthenticationUIServiceCfD', '_$s14FamilyControls0aB23AuthenticationUIServiceCfd', 
                        '_$s14FamilyControls0aB5ErrorO07networkC0yA2CmFWC', '_$s14FamilyControls0aB5ErrorO10Foundation09LocalizedC0AAMc', 
+                       '_$s14FamilyControls0aB5ErrorO10Foundation13CustomNSErrorAAMc', 
                        '_$s14FamilyControls0aB5ErrorO10restrictedyA2CmFWC', '_$s14FamilyControls0aB5ErrorO11unavailableyA2CmFWC', 
+                       '_$s14FamilyControls0aB5ErrorO13errorUserInfoSDySSypGvg', 
+                       '_$s14FamilyControls0aB5ErrorO13errorUserInfoSDySSypGvpMV', 
                        '_$s14FamilyControls0aB5ErrorO15invalidArgumentyA2CmFWC', 
                        '_$s14FamilyControls0aB5ErrorO16errorDescriptionSSSgvg', '_$s14FamilyControls0aB5ErrorO16errorDescriptionSSSgvpMV', 
                        '_$s14FamilyControls0aB5ErrorO18invalidAccountTypeyA2CmFWC', 
                        '_$s14FamilyControls0aB5ErrorO21authorizationCanceledyA2CmFWC', 
                        '_$s14FamilyControls0aB5ErrorO21authorizationConflictyA2CmFWC', 
-                       '_$s14FamilyControls0aB5ErrorO2eeoiySbAC_ACtFZ', '_$s14FamilyControls0aB5ErrorO31authenticationMethodUnavailableyA2CmFWC', 
-                       '_$s14FamilyControls0aB5ErrorO4hash4intoys6HasherVz_tF', '_$s14FamilyControls0aB5ErrorO9hashValueSivg', 
-                       '_$s14FamilyControls0aB5ErrorO9hashValueSivpMV', '_$s14FamilyControls0aB5ErrorOMa', 
+                       '_$s14FamilyControls0aB5ErrorO31authenticationMethodUnavailableyA2CmFWC', 
+                       '_$s14FamilyControls0aB5ErrorO8rawValueACSgSi_tcfC', '_$s14FamilyControls0aB5ErrorO8rawValueSivg', 
+                       '_$s14FamilyControls0aB5ErrorO8rawValueSivpMV', '_$s14FamilyControls0aB5ErrorOMa', 
                        '_$s14FamilyControls0aB5ErrorOMn', '_$s14FamilyControls0aB5ErrorON', 
                        '_$s14FamilyControls0aB5ErrorOSHAAMc', '_$s14FamilyControls0aB5ErrorOSQAAMc', 
-                       '_$s14FamilyControls0aB5ErrorOs0C0AAMc', '_$s14FamilyControls0aB6MemberO11descriptionSSvg', 
-                       '_$s14FamilyControls0aB6MemberO11descriptionSSvpMV', '_$s14FamilyControls0aB6MemberO8rawValueACSgSi_tcfC', 
-                       '_$s14FamilyControls0aB6MemberO8rawValueSivg', '_$s14FamilyControls0aB6MemberO8rawValueSivpMV', 
-                       '_$s14FamilyControls0aB6MemberOMa', '_$s14FamilyControls0aB6MemberOMn', 
-                       '_$s14FamilyControls0aB6MemberON', '_$s14FamilyControls0aB6MemberOSEAAMc', 
-                       '_$s14FamilyControls0aB6MemberOSHAAMc', '_$s14FamilyControls0aB6MemberOSQAAMc', 
-                       '_$s14FamilyControls0aB6MemberOSYAAMc', '_$s14FamilyControls0aB6MemberOSeAAMc', 
-                       '_$s14FamilyControls0aB6MemberOs23CustomStringConvertibleAAMc', 
+                       '_$s14FamilyControls0aB5ErrorOSYAAMc', '_$s14FamilyControls0aB5ErrorOs0C0AAMc', 
+                       '_$s14FamilyControls0aB6MemberO11descriptionSSvg', '_$s14FamilyControls0aB6MemberO11descriptionSSvpMV', 
+                       '_$s14FamilyControls0aB6MemberO8rawValueACSgSi_tcfC', '_$s14FamilyControls0aB6MemberO8rawValueSivg', 
+                       '_$s14FamilyControls0aB6MemberO8rawValueSivpMV', '_$s14FamilyControls0aB6MemberOMa', 
+                       '_$s14FamilyControls0aB6MemberOMn', '_$s14FamilyControls0aB6MemberON', 
+                       '_$s14FamilyControls0aB6MemberOSEAAMc', '_$s14FamilyControls0aB6MemberOSHAAMc', 
+                       '_$s14FamilyControls0aB6MemberOSQAAMc', '_$s14FamilyControls0aB6MemberOSYAAMc', 
+                       '_$s14FamilyControls0aB6MemberOSeAAMc', '_$s14FamilyControls0aB6MemberOs23CustomStringConvertibleAAMc', 
                        '_$s14FamilyControls0aB7ServiceV10connection14exportedObjectAA14XPCConnectable_px_tAA0aB6ClientRzlFZ', 
                        '_$s14FamilyControls0aB7ServiceV10connectionAA14XPCConnectable_pyFZ', 
                        '_$s14FamilyControls0aB7ServiceV11namePrivateSSvgZ', '_$s14FamilyControls0aB7ServiceV14agentInterfaceSo14NSXPCInterfaceCvgZ', 

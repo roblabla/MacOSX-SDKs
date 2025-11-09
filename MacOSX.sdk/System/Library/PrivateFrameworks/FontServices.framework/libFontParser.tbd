@@ -2,26 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           624B6918-B7EF-30E4-AD33-62C2CD1BFDC2
-  - target:          x86_64-maccatalyst
-    value:           624B6918-B7EF-30E4-AD33-62C2CD1BFDC2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B7300186-1425-344E-A7F3-54E39B8EF1BA
-  - target:          arm64e-maccatalyst
-    value:           B7300186-1425-344E-A7F3-54E39B8EF1BA
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvjPbEEE, __ZTINSt3__117bad_function_callE, 
-                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__110__function6__baseIFvjPbEEE, 
-                       __ZTSNSt3__110shared_ptrI10MCacheDataE27__shared_ptr_default_deleteIS1_S1_EE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__vector_base_commonILb1EEE ]
+                       __ZTSNSt3__110__function6__baseIFvjPbEEE, __ZTSNSt3__110shared_ptrI10MCacheDataE27__shared_ptr_default_deleteIS1_S1_EE, 
+                       __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateFontForScaler, _FPFontCanCreatePostScriptSubset, _FPFontCopyAdditionalPostScriptNames, 

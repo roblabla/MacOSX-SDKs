@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6282E528-6A67-334B-ACCF-1F8FD89369BD
-  - target:          x86_64-maccatalyst
-    value:           6282E528-6A67-334B-ACCF-1F8FD89369BD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           191028D2-0477-3EBC-9EEF-A85ACAFC7193
-  - target:          arm64e-maccatalyst
-    value:           191028D2-0477-3EBC-9EEF-A85ACAFC7193
 install-name:    '/usr/lib/system/libdispatch.dylib'
-current-version: 1412
+current-version: 1415.100.11
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

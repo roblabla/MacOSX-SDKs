@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           77B9565C-1765-318F-88FF-95556D01BB3E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A34D90A0-C787-31D9-BF42-D5D14EA0FB0E
 install-name:    '/System/Library/PrivateFrameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 663
+current-version: 665.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

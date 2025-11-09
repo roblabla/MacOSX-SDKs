@@ -1024,6 +1024,7 @@ __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
  BNNSActivationFunctionSoftShrink
  BNNSActivationFunctionTanhShrink
  BNNSActivationFunctionThreshold
+ BNNSActivationFunctionGELUApproximationSigmoid
 
  The activation functions above can be fused with computation in training, only if the forward pass output y is provided in backward apply.
 
@@ -1223,6 +1224,7 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
  BNNSActivationFunctionSoftShrink
  BNNSActivationFunctionTanhShrink
  BNNSActivationFunctionThreshold
+ BNNSActivationFunctionGELUApproximationSigmoid
 
  The activation functions above can be fused with computation in training, only if the forward pass output y is provided in backward apply.
 

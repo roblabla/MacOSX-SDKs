@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A73DAB63-92E5-3868-AF16-465848BEC993
-  - target:          x86_64-maccatalyst
-    value:           A73DAB63-92E5-3868-AF16-465848BEC993
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7730FB7E-E506-385A-95DC-B39E7C1C61A5
-  - target:          arm64e-maccatalyst
-    value:           7730FB7E-E506-385A-95DC-B39E7C1C61A5
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -29,17 +16,12 @@ exports:
                        _SwapPCM16_X86, _SwapPCM32_X86, _UpmixMonoToStereoInterleaved16_X86, 
                        _UpmixMonoToStereoInterleaved32_X86 ]
     objc-classes:    [ _ACCarbonComponentCache ]
-    weak-symbols:    [ __ZTI11CAException, __ZTIN5boost16exception_detail10clone_baseE, 
-                       __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorISt12domain_errorEEEE, 
-                       __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorISt14overflow_errorEEEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorISt12domain_errorEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorISt14overflow_errorEE, 
+    weak-symbols:    [ __ZTI11CAException, __ZTIN5boost10wrapexceptISt12domain_errorEE, 
+                       __ZTIN5boost10wrapexceptISt14overflow_errorEE, __ZTIN5boost16exception_detail10clone_baseE, 
                        __ZTIN5boost9exceptionE, __ZTIN8DSPGraph9ExceptionE, __ZTS11CAException, 
-                       __ZTSN5boost16exception_detail10clone_baseE, __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorISt12domain_errorEEEE, 
-                       __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorISt14overflow_errorEEEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorISt12domain_errorEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorISt14overflow_errorEE, 
-                       __ZTSN5boost9exceptionE, __ZTSN8DSPGraph9ExceptionE ]
+                       __ZTSN5boost10wrapexceptISt12domain_errorEE, __ZTSN5boost10wrapexceptISt14overflow_errorEE, 
+                       __ZTSN5boost16exception_detail10clone_baseE, __ZTSN5boost9exceptionE, 
+                       __ZTSN8DSPGraph9ExceptionE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AUEventListenerAddEventType, _AUEventListenerCreate, _AUEventListenerCreateWithDispatchQueue, 

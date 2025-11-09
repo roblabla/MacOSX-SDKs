@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F81329FB-F790-3799-A146-7C11844D0621
-  - target:          x86_64-maccatalyst
-    value:           F81329FB-F790-3799-A146-7C11844D0621
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D38F9DD1-25AD-336E-96BB-28B199181989
-  - target:          arm64e-maccatalyst
-    value:           D38F9DD1-25AD-336E-96BB-28B199181989
 install-name:    '/System/Library/PrivateFrameworks/HumanUnderstandingEvidence.framework/Versions/A/HumanUnderstandingEvidence'
-current-version: 28.13
+current-version: 28.24
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

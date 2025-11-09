@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0463374D-9E62-3E58-A668-C9EFF9DB217C
-  - target:          x86_64-maccatalyst
-    value:           0463374D-9E62-3E58-A668-C9EFF9DB217C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           62FA1CCF-D4BB-3606-BDC9-C2F247A12CE8
-  - target:          arm64e-maccatalyst
-    value:           62FA1CCF-D4BB-3606-BDC9-C2F247A12CE8
 install-name:    '/usr/lib/system/libsystem_notify.dylib'
-current-version: 306
+current-version: 312
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

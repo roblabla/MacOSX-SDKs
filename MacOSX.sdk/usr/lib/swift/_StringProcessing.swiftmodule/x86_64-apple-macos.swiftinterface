@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macosx13.1 -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -enforce-exclusivity=unchecked -module-name _StringProcessing
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.7.1.134.4
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macosx13.3 -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -module-name _StringProcessing
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.8.0.117.59
 import Swift
 extension Swift.Collection where Self.Element : Swift.Equatable {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -119,7 +119,7 @@ public struct AnyRegexOutput {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.AnyRegexOutput {
   public init<Output>(_ match: _StringProcessing.Regex<Output>.Match)
-  public func extractValues<Output>(as type: Output.Type = Output.self) -> Output?
+  public func extractValues<Output>(as outputType: Output.Type = Output.self) -> Output?
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.AnyRegexOutput : Swift.RandomAccessCollection {
@@ -133,7 +133,7 @@ extension _StringProcessing.AnyRegexOutput : Swift.RandomAccessCollection {
     public var value: Any? {
       get
     }
-    public var type: Any.Type {
+    public var type: any Any.Type {
       get
     }
     public var name: Swift.String? {
@@ -167,7 +167,7 @@ extension _StringProcessing.AnyRegexOutput {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex.Match where Output == _StringProcessing.AnyRegexOutput {
-  public subscript(dynamicMember keyPath: Swift.KeyPath<(Swift.Substring, _doNotUse: ()), Swift.Substring>) -> Swift.Substring {
+  public subscript(dynamicMember _keyPath: Swift.KeyPath<(Swift.Substring, _doNotUse: ()), Swift.Substring>) -> Swift.Substring {
     get
   }
   public subscript(name: Swift.String) -> _StringProcessing.AnyRegexOutput.Element? {
@@ -180,8 +180,8 @@ extension _StringProcessing.Regex where Output == _StringProcessing.AnyRegexOutp
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
-  public init(_ pattern: Swift.String, as: Output.Type = Output.self) throws
-  public init(verbatim: Swift.String)
+  public init(_ pattern: Swift.String, as outputType: Output.Type = Output.self) throws
+  public init(verbatim verbatimString: Swift.String)
   public func contains(captureNamed name: Swift.String) -> Swift.Bool
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -194,7 +194,7 @@ extension _StringProcessing.Regex.Match where Output == _StringProcessing.AnyReg
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
-  public init?(_ erased: _StringProcessing.Regex<_StringProcessing.AnyRegexOutput>, as: Output.Type = Output.self)
+  public init?(_ regex: _StringProcessing.Regex<_StringProcessing.AnyRegexOutput>, as outputType: Output.Type = Output.self)
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -223,7 +223,7 @@ public struct Regex<Output> : _StringProcessing.RegexComponent {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
   @available(*, deprecated, renamed: "init(verbatim:)")
-  public init(quoting string: Swift.String)
+  public init(quoting _string: Swift.String)
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol CustomConsumingRegexComponent : _StringProcessing.RegexComponent {
@@ -249,23 +249,23 @@ extension _StringProcessing.Regex.Match {
   public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Output, T>) -> T {
     get
   }
-  @_disfavoredOverload public subscript(dynamicMember keyPath: Swift.KeyPath<(Output, _doNotUse: ()), Output>) -> Output {
+  @_disfavoredOverload public subscript(dynamicMember _keyPath: Swift.KeyPath<(Output, _doNotUse: ()), Output>) -> Output {
     get
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
-  public func wholeMatch(in s: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
-  public func prefixMatch(in s: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
-  public func firstMatch(in s: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
-  public func wholeMatch(in s: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
-  public func prefixMatch(in s: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
-  public func firstMatch(in s: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  public func wholeMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  public func prefixMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  public func firstMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  public func wholeMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  public func prefixMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  public func firstMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
-  public func wholeMatch<R>(of r: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
-  public func prefixMatch<R>(of r: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
+  public func wholeMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
+  public func prefixMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {

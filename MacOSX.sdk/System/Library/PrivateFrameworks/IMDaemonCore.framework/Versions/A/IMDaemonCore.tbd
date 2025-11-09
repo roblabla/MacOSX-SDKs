@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5B3D5A94-F26C-3FA6-8348-933C69B58A4F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           90404D46-3194-3192-9ED2-C08754351744
 install-name:    '/System/Library/PrivateFrameworks/IMDaemonCore.framework/Versions/A/IMDaemonCore'
 current-version: 800
 swift-abi-version: 7
@@ -343,40 +336,40 @@ exports:
                        IMDMessageHistoryIDSTransactionLogSyncTask, IMDMessageHistorySyncController, 
                        IMDMessageHistorySyncTaskLiveFactory, IMDMessagePTask, IMDMessagePTaskXPCStore, 
                        IMDMessageProcessingController, IMDMessageSortOrderAssigner, 
-                       IMDMessageStore, IMDMessageSuppressionController, IMDMomentShareManager, 
-                       IMDNicknameController, IMDNotificationResponseUtilities, IMDOneTimeCodeManager, 
-                       IMDPhotosSyndicationLibraryChangeListener, IMDPlainTextTapbackInterpreter, 
-                       IMDQuickSwitchController, IMDRecentsController, IMDRecordZoneManager, 
-                       IMDReplayController, IMDReplayStorageController, IMDReplayStorageIterationContext, 
-                       IMDSIMSubscriptionUpdateTracker, IMDService, IMDServiceController, 
-                       IMDServiceSession, IMDSoundUtilities, IMDSpamController, IMDSpamMessageCreator, 
-                       IMDSpotlightIndexDelegate, IMDStickerRegistry, IMDWorkQueue, 
-                       IMDXPCEventStreamHandler, IMDaemonCoreHelloWorldClass, IMDaemonCoreHelloWorldClass_Impl, 
+                       IMDMessageStore, IMDMomentShareManager, IMDNicknameController, 
+                       IMDNotificationResponseUtilities, IMDOneTimeCodeManager, IMDPhotosSyndicationLibraryChangeListener, 
+                       IMDPlainTextTapbackInterpreter, IMDQuickSwitchController, 
+                       IMDRecentsController, IMDRecordZoneManager, IMDReplayController, 
+                       IMDReplayStorageController, IMDReplayStorageIterationContext, 
+                       IMDService, IMDServiceController, IMDServiceSession, IMDSoundUtilities, 
+                       IMDSpamController, IMDSpamMessageCreator, IMDSpotlightIndexDelegate, 
+                       IMDStickerRegistry, IMDWorkQueue, IMDXPCEventStreamHandler, 
+                       IMDaemonCoreHelloWorldClass, IMDaemonCoreHelloWorldClass_Impl, 
                        IMDeliveredQuietlyReceiptPipelineParameter, IMDeliveredQuietlyReceiptProcessingPipelineComponent, 
                        IMDeliveryReceiptPipelineParameter, IMDeliveryReceiptProcessingPipelineComponent, 
                        IMDiMessageIDSDelegate, IMDiMessageIDSDelegateHandlerRegistry, 
                        IMDiMessageIDSTrustedData, IMDiMessageIncomingMessageHandler, 
                        IMDiMessagePipelineResources, IMEditMessageCommandPipelineParameter, 
-                       IMEditMessageCommandProcessingPipelineComponent, IMFindChatProcessingPipelineComponent, 
-                       IMJunkMessageProcessingPipelineComponent, IMMarkUnreadRequestPipelineParameter, 
-                       IMMarkUnreadRequestProcessingPipelineComponent, IMMessageFromStoragePipelineComponent, 
-                       IMMessageLegacyProcessingPipelineComponent, IMMessageMomentShareProcessingPipelineComponent, 
-                       IMMessagesToTrack, IMNotifyRecipientCommandPipelineParameter, 
-                       IMNotifyRecipientCommandProcessingPipelineComponent, IMPlayedReceiptPipelineParameter, 
-                       IMPlayedReceiptProcessingPipelineComponent, IMReadReceiptPipelineParameter, 
-                       IMReadReceiptProcessingPipelineComponent, IMTextMessageAttributedStringContent, 
-                       IMTextMessagePipelineParameter, IMTextMessageProcessingPipelineComponent, 
-                       _IMDInternalWorkQueue, _TtC12IMDaemonCore28PersistedCollaborationNotice, 
-                       __IMDBackwardCompatibilityMessageIdentifier, __IMDPlainTextTapbackInterpreterImpl ]
+                       IMEditMessageCommandProcessingPipelineComponent, IMFamilySenderMessageProcessingPipelineComponent, 
+                       IMFindChatProcessingPipelineComponent, IMJunkMessageProcessingPipelineComponent, 
+                       IMMarkUnreadRequestPipelineParameter, IMMarkUnreadRequestProcessingPipelineComponent, 
+                       IMMessageFromStoragePipelineComponent, IMMessageLegacyProcessingPipelineComponent, 
+                       IMMessageMomentShareProcessingPipelineComponent, IMMessagesToTrack, 
+                       IMNotifyRecipientCommandPipelineParameter, IMNotifyRecipientCommandProcessingPipelineComponent, 
+                       IMPlayedReceiptPipelineParameter, IMPlayedReceiptProcessingPipelineComponent, 
+                       IMReadReceiptPipelineParameter, IMReadReceiptProcessingPipelineComponent, 
+                       IMRecoverJunkCommandPipelineParameter, IMRecoverJunkCommandProcessingPipelineComponent, 
+                       IMTextMessageAttributedStringContent, IMTextMessagePipelineParameter, 
+                       IMTextMessageProcessingPipelineComponent, _IMDInternalWorkQueue, 
+                       _TtC12IMDaemonCore28PersistedCollaborationNotice, __IMDBackwardCompatibilityMessageIdentifier, 
+                       __IMDPlainTextTapbackInterpreterImpl ]
     objc-ivars:      [ IMChatSessionCloseProcessingPipelineComponent._account, IMChatSessionCloseProcessingPipelineComponent._chatRegistry, 
                        IMChatSessionCloseProcessingPipelineComponent._idsTrustedData, 
                        IMChatSessionCloseProcessingPipelineComponent._messageStore, 
                        IMDLocationSharingController._session, IMDMessageStore._cachedLastFailedMessageDate, 
                        IMDMessageStore._cachedUnreadMessageCount, IMDMessageStore._modificationStamp, 
                        IMDMessageStore._pendingDBUpdatePost, IMDMessageStore._suppressedUpdates, 
-                       IMDMessageStore._suppressedUpdatesTimer, IMDMessageSuppressionController._chatSuppressionFlagMap, 
-                       IMDMessageSuppressionController._chatSuppressionTimerMap, 
-                       IMDMessageSuppressionController._suppressedMessages, IMDServiceSession._buddies, 
+                       IMDMessageStore._suppressedUpdatesTimer, IMDServiceSession._buddies, 
                        IMDServiceSession._password, IMDServiceSession._proxyAccount, 
                        IMDServiceSession._proxyHost, IMDServiceSession._proxyPassword, 
                        IMDServiceSession._proxyPort, IMDServiceSession._proxyType, 
@@ -385,15 +378,14 @@ exports:
                        IMFindChatProcessingPipelineComponent._account, IMFindChatProcessingPipelineComponent._chatRegistry, 
                        IMMarkUnreadRequestProcessingPipelineComponent._chatRegistry, 
                        IMMarkUnreadRequestProcessingPipelineComponent._messageStore, 
-                       IMMarkUnreadRequestProcessingPipelineComponent._messageSuppressionController, 
                        IMMarkUnreadRequestProcessingPipelineComponent._recents, IMMarkUnreadRequestProcessingPipelineComponent._service, 
                        IMMessageFromStoragePipelineComponent._broadcaster, IMMessageFromStoragePipelineComponent._processingType, 
                        IMMessageFromStoragePipelineComponent._service, IMMessageFromStoragePipelineComponent._storageController, 
-                       IMMessageLegacyProcessingPipelineComponent._account, IMMessageLegacyProcessingPipelineComponent._idsTrustedData, 
+                       IMMessageLegacyProcessingPipelineComponent._account, IMMessageLegacyProcessingPipelineComponent._idsService, 
+                       IMMessageLegacyProcessingPipelineComponent._idsTrustedData, 
                        IMMessageLegacyProcessingPipelineComponent._messageContext, 
                        IMMessageLegacyProcessingPipelineComponent._serviceSession, 
                        IMReadReceiptProcessingPipelineComponent._chatRegistry, IMReadReceiptProcessingPipelineComponent._messageStore, 
-                       IMReadReceiptProcessingPipelineComponent._messageSuppressionController, 
                        IMReadReceiptProcessingPipelineComponent._recents, IMReadReceiptProcessingPipelineComponent._service, 
                        IMTextMessageProcessingPipelineComponent._account, IMTextMessageProcessingPipelineComponent._messageStore ]
 ...

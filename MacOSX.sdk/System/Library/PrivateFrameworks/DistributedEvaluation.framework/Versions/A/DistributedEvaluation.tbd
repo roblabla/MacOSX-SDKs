@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6A2D438E-8FA8-3CAA-B63B-8584A117232B
-  - target:          x86_64-maccatalyst
-    value:           6A2D438E-8FA8-3CAA-B63B-8584A117232B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B119609E-C8B7-31B3-BF91-AEEDB82AC091
-  - target:          arm64e-maccatalyst
-    value:           B119609E-C8B7-31B3-BF91-AEEDB82AC091
 install-name:    '/System/Library/PrivateFrameworks/DistributedEvaluation.framework/Versions/A/DistributedEvaluation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -51,21 +38,24 @@ exports:
                        _DESSubmissionLogGarbageCollect, _DESSubmissionLogSetHandler, 
                        _DESSystemTelemetryResponseReadFrom, _DESTemporaryDownloadDirectoryURL, 
                        _DESTrialEvent_ActivityDeferredDuration, _DESTrialEvent_ActivityScheduled, 
-                       _DESTrialEvent_AvailablePluginCount, _DESTrialEvent_TaskCompletedError, 
-                       _DESTrialEvent_TaskCompletedStatus, _DESTrialEvent_TaskCrashed, 
-                       _DESTrialEvent_TaskDuration, _DESTrialEvent_TaskFetchedStatus, 
+                       _DESTrialEvent_ActivityScheduledWithID, _DESTrialEvent_AvailablePluginCount, 
+                       _DESTrialEvent_TaskCompletedError, _DESTrialEvent_TaskCompletedStatus, 
+                       _DESTrialEvent_TaskCrashed, _DESTrialEvent_TaskDuration, _DESTrialEvent_TaskFetchedStatus, 
                        _DESTrialEvent_TaskScheduledStatus, _DESTrialEvent_TaskSchedulingError, 
                        _DESTrialEvent_TasksFetchedCount, _DESTrialEvent_TasksFetchingError, 
-                       _DESWriteSubmissionLogData, _DistributedEvaluationVersionNumber, 
-                       _DistributedEvaluationVersionString, _FSCopyFormatNameForFSType, 
-                       _FindRecordTypeForRecordUUID, _GarbageCollectAllRecords, _GarbageCollectOldRecords, 
-                       _GetDiskImageEncryptionStatus, _GetFSEncryptionStatus, _MLRuntimePluginID_DPMLRuntimePlugin, 
+                       _DESTrialEvent_TrialPostedBMLActivatedEvent, _DESWriteSubmissionLogData, 
+                       _DistributedEvaluationVersionNumber, _DistributedEvaluationVersionString, 
+                       _FSCopyFormatNameForFSType, _FindRecordTypeForRecordUUID, 
+                       _GarbageCollectAllRecords, _GarbageCollectOldRecords, _GetDiskImageEncryptionStatus, 
+                       _GetFSEncryptionStatus, _MLRuntimePluginID_DPMLRuntimePlugin, 
                        _MLRuntimePluginID_DPMLRuntimePluginClassB, _MLRuntimePluginID_DPMeadPlugin, 
                        _MLRuntimePluginID_ExtensionXCTestHigh, _MLRuntimePluginID_ExtensionXCTestLow, 
                        _MLRuntimePluginID_ExtensionXCTestOnDemand, _MLRuntimePluginID_ExtensionXCTestRestricted, 
+                       _MLRuntimePluginID_LighthouseNightingalePluginBattery, _MLRuntimePluginID_LighthouseNightingalePluginCharger, 
                        _MLRuntimePluginID_ProactiveShareSheetLighthousePFLPlugin, 
-                       _MLRuntimePluginID_XCTest, _RecordDataForUUID, _RecordDirPathForRecordType, 
-                       _RecordDirURLForRecordType, _RecordInfoForUUID, __FSCopyLocalizedNameForVolumeFormatAtNode, 
+                       _MLRuntimePluginID_RepackagingPlugin, _MLRuntimePluginID_XCTest, 
+                       _RecordDataForUUID, _RecordDirPathForRecordType, _RecordDirURLForRecordType, 
+                       _RecordInfoForUUID, __FSCopyLocalizedNameForVolumeFormatAtNode, 
                        __FSCopyLocalizedNameForVolumeFormatAtURL, __FSCopyNameForVolumeFormatAtNode, 
                        __FSCopyNameForVolumeFormatAtURL, __FSGetLocationForFileDescriptor, 
                        __FSGetLocationForPath, __FSGetLocationFromStatfs, __FSGetMediaEncryptionStatus, 

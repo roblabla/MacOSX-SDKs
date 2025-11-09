@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A560E279-D380-3C33-90D3-7835B0965CC5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E49A41E3-1CAC-3DA6-BACB-981038CC0801
 install-name:    '/System/Library/PrivateFrameworks/RecoveryOS.framework/Versions/A/RecoveryOS'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

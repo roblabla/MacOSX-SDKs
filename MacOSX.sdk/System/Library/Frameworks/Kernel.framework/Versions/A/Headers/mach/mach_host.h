@@ -294,7 +294,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_zone_info
 (
-	host_priv_t host,
+	mach_port_t host,
 	mach_zone_name_array_t *names,
 	mach_msg_type_number_t *namesCnt,
 	mach_zone_info_array_t *info,
@@ -376,7 +376,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_memory_info
 (
-	host_priv_t host,
+	mach_port_t host,
 	mach_zone_name_array_t *names,
 	mach_msg_type_number_t *namesCnt,
 	mach_zone_info_array_t *info,

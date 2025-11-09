@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           34E9F5F6-807B-31E3-B1F0-C0352A3993AE
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           57A504BB-A7DB-33BD-8741-364151F0E710
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftQuickLook.dylib'
-current-version: 925.3.2
+current-version: 925.5.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

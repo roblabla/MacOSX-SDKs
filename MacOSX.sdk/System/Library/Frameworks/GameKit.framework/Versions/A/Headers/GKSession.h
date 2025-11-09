@@ -1,9 +1,9 @@
-/*
- GKSession.h
- GameKit
- 
- Copyright 2010 Apple Inc. All rights reserved.
-*/
+//
+//  GKSession.h
+//  Game Center
+//
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
+//
 
 /**
  The Game Connectivity Kit (GCK) is a framework for handling connectivity and data transport in multiplayer network games.  

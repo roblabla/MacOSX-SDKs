@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           80B33482-38E2-343B-A5CA-2FEE66BE370B
-  - target:          x86_64-maccatalyst
-    value:           80B33482-38E2-343B-A5CA-2FEE66BE370B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B13B71F1-3CDE-3F94-A1E2-183CC736D128
-  - target:          arm64e-maccatalyst
-    value:           B13B71F1-3CDE-3F94-A1E2-183CC736D128
 install-name:    '/System/Library/Frameworks/CoreTransferable.framework/Versions/A/CoreTransferable'
 swift-abi-version: 7
 exports:
@@ -159,6 +146,30 @@ exports:
                        '_$s16CoreTransferable29_TransferRepresentationInputsVMa', 
                        '_$s16CoreTransferable29_TransferRepresentationInputsVMn', 
                        '_$s16CoreTransferable29_TransferRepresentationInputsVN', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV10visibilityAA0dE10VisibilityVvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV10visibilityAA0dE10VisibilityVvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV10visibilityAA0dE10VisibilityVvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV10visibilityAA0dE10VisibilityVvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV11contentType07UniformG11Identifiers6UTTypeVvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV11contentType07UniformG11Identifiers6UTTypeVvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV11contentType07UniformG11Identifiers6UTTypeVvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV11contentType07UniformG11Identifiers6UTTypeVvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV17suggestedFileNameSSSgvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV17suggestedFileNameSSSgvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV17suggestedFileNameSSSgvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV17suggestedFileNameSSSgvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18exportingConditionSbAA0B0_pYaYbKcSgvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18exportingConditionSbAA0B0_pYaYbKcSgvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18exportingConditionSbAA0B0_pYaYbKcSgvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18exportingConditionSbAA0B0_pYaYbKcSgvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18representationTypeAA0B8Currency_pXpvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18representationTypeAA0B8Currency_pXpvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18representationTypeAA0B8Currency_pXpvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV18representationTypeAA0B8Currency_pXpvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV26shouldAttemptToOpenInPlaceSbSgvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV26shouldAttemptToOpenInPlaceSbSgvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV26shouldAttemptToOpenInPlaceSbSgvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV26shouldAttemptToOpenInPlaceSbSgvs', 
                        '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvM', 
                        '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvg', 
                        '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvpMV', 

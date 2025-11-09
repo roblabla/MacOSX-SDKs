@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2A54E105-4BD9-345C-9457-CF5CAE2A827B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1A2B5110-9F72-3528-B15C-82D538792EEF
 install-name:    '/System/Library/PrivateFrameworks/ACDEClient.framework/Versions/A/ACDEClient'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

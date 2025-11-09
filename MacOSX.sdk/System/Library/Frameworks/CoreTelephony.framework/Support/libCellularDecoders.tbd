@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           543580D5-C43A-3A95-823E-56F35E4D1051
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BABA3A12-D35D-37FF-AFF7-6D6CA178C5FC
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCellularDecoders.dylib'
 exports:
   - targets:         [ x86_64-macos ]

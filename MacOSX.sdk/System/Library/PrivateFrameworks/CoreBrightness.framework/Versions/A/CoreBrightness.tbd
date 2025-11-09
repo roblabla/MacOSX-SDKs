@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2761B100-E051-3611-96C5-53FA1E8D03A3
-  - target:          x86_64-maccatalyst
-    value:           2761B100-E051-3611-96C5-53FA1E8D03A3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DEECD3E6-DDB2-3C38-8106-6C0A15B8CBD4
-  - target:          arm64e-maccatalyst
-    value:           DEECD3E6-DDB2-3C38-8106-6C0A15B8CBD4
 install-name:    '/System/Library/PrivateFrameworks/CoreBrightness.framework/Versions/A/CoreBrightness'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

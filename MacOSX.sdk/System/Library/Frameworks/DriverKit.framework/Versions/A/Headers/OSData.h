@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSData.iig */
+/* iig(DriverKit-256.100.8) generated from OSData.iig */
 
 /* OSData.iig:1-37 */
 /*
@@ -339,7 +339,7 @@ public:
 
 #if !KERNEL
 
-class OSDataInterface : public OSInterface
+class  OSDataInterface : public OSInterface
 {
 public:
 };

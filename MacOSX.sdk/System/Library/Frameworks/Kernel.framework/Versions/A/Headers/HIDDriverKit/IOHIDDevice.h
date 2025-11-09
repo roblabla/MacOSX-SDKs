@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOHIDDevice.iig */
+/* iig(DriverKit-256.100.8) generated from IOHIDDevice.iig */
 
 /* IOHIDDevice.iig:1-44 */
 /*
@@ -69,7 +69,7 @@ public:
                                        IOMemoryDescriptor        *report,
                                        uint32_t                  reportLength,
                                        IOHIDReportType           reportType = kIOHIDReportTypeInput,
-                                       IOOptionBits              options    = 0) LOCALONLY;
+                                       IOOptionBits              options    = 0) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 
 
     
@@ -91,7 +91,7 @@ public:
                                     IOHIDReportType         reportType,
                                     IOOptionBits            options,
                                     uint32_t                completionTimeout,
-                                    OSAction                * action) LOCALONLY;
+                                    OSAction                * action) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     
     /*!
@@ -112,7 +112,7 @@ public:
                                     IOHIDReportType         reportType,
                                     IOOptionBits            options,
                                     uint32_t                completionTimeout,
-                                    OSAction                * action) LOCALONLY;
+                                    OSAction                * action) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 
     
 protected:
@@ -128,11 +128,11 @@ protected:
 
     virtual void  CompleteReport (OSAction            * action TARGET,
                                   IOReturn            status,
-                                  uint32_t            actualByteCount) LOCAL = 0;
+                                  uint32_t            actualByteCount) LOCAL __attribute__((availability(driverkit, introduced=19.0))) = 0;
 
     
 
-    virtual void setProperty (OSObject * key, OSObject * value) LOCALONLY;
+    virtual void setProperty (OSObject * key, OSObject * value) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
 
 public:
@@ -229,7 +229,7 @@ public:\
         OSAction * action,\
         IOReturn status,\
         uint32_t actualByteCount,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
 \
 protected:\
@@ -309,7 +309,7 @@ public:\
         IOMemoryDescriptor * report,\
         uint32_t reportLength,\
         IOHIDReportType reportType = kIOHIDReportTypeInput,\
-        IOOptionBits options = 0) APPLE_KEXT_OVERRIDE;\
+        IOOptionBits options = 0) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     getReport(\
@@ -317,7 +317,7 @@ public:\
         IOHIDReportType reportType,\
         IOOptionBits options,\
         uint32_t completionTimeout,\
-        OSAction * action) APPLE_KEXT_OVERRIDE;\
+        OSAction * action) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     setReport(\
@@ -325,12 +325,12 @@ public:\
         IOHIDReportType reportType,\
         IOOptionBits options,\
         uint32_t completionTimeout,\
-        OSAction * action) APPLE_KEXT_OVERRIDE;\
+        OSAction * action) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual void\
     setProperty(\
         OSObject * key,\
-        OSObject * value) APPLE_KEXT_OVERRIDE;\
+        OSObject * value) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
 
 
@@ -352,7 +352,7 @@ public:
 
 #if !KERNEL
 
-class IOHIDDeviceInterface : public OSInterface
+class  IOHIDDeviceInterface : public OSInterface
 {
 public:
     virtual kern_return_t
@@ -360,50 +360,50 @@ public:
         IOMemoryDescriptor * report,
         uint32_t reportLength,
         IOHIDReportType reportType,
-        IOOptionBits options) = 0;
+        IOOptionBits options) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     getReport(IOMemoryDescriptor * report,
         IOHIDReportType reportType,
         IOOptionBits options,
         uint32_t completionTimeout,
-        OSAction * action) = 0;
+        OSAction * action) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     setReport(IOMemoryDescriptor * report,
         IOHIDReportType reportType,
         IOOptionBits options,
         uint32_t completionTimeout,
-        OSAction * action) = 0;
+        OSAction * action) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual void
     setProperty(OSObject * key,
-        OSObject * value) = 0;
+        OSObject * value) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     kern_return_t
     handleReport_Call(uint64_t timestamp,
         IOMemoryDescriptor * report,
         uint32_t reportLength,
         IOHIDReportType reportType,
-        IOOptionBits options)  { return handleReport(timestamp, report, reportLength, reportType, options); };\
+        IOOptionBits options) __attribute__((availability(driverkit,introduced=19.0)))  { return handleReport(timestamp, report, reportLength, reportType, options); };\
 
     kern_return_t
     getReport_Call(IOMemoryDescriptor * report,
         IOHIDReportType reportType,
         IOOptionBits options,
         uint32_t completionTimeout,
-        OSAction * action)  { return getReport(report, reportType, options, completionTimeout, action); };\
+        OSAction * action) __attribute__((availability(driverkit,introduced=19.0)))  { return getReport(report, reportType, options, completionTimeout, action); };\
 
     kern_return_t
     setReport_Call(IOMemoryDescriptor * report,
         IOHIDReportType reportType,
         IOOptionBits options,
         uint32_t completionTimeout,
-        OSAction * action)  { return setReport(report, reportType, options, completionTimeout, action); };\
+        OSAction * action) __attribute__((availability(driverkit,introduced=19.0)))  { return setReport(report, reportType, options, completionTimeout, action); };\
 
     void
     setProperty_Call(OSObject * key,
-        OSObject * value)  { return setProperty(key, value); };\
+        OSObject * value) __attribute__((availability(driverkit,introduced=19.0)))  { return setProperty(key, value); };\
 
 };
 
@@ -494,7 +494,7 @@ public:
 
 #endif /* !KERNEL */
 
-class OSAction_IOHIDDevice__CompleteReportInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDDevice__CompleteReportInterface : public OSInterface
 {
 public:
 };

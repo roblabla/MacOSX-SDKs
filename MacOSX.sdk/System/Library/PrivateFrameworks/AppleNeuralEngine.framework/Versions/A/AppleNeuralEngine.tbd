@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8E681290-38AE-3D44-87DD-AC8E70144094
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           17ABDF53-9E7F-3681-9B1E-EB7619527D78
 install-name:    '/System/Library/PrivateFrameworks/AppleNeuralEngine.framework/Versions/A/AppleNeuralEngine'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,9 +11,10 @@ exports:
                        _kANEFInMemoryModelIdentifierKey, _kANEFInMemoryModelIsCachedKey, 
                        _kANEFIntermediateBufferHandleKey, _kANEFMemoryPoolIDKey, 
                        _kANEFModelANECIRValue, _kANEFModelCoreMLValue, _kANEFModelDescriptionKey, 
-                       _kANEFModelIdentityStrKey, _kANEFModelInputSymbolIndexArrayKey, 
-                       _kANEFModelInputSymbolsArrayKey, _kANEFModelIsEncryptedKey, 
-                       _kANEFModelLoadPerformanceStatsKey, _kANEFModelMILValue, _kANEFModelOutputSymbolIndexArrayKey, 
+                       _kANEFModelHasCacheURLIdentifierKey, _kANEFModelIdentityStrKey, 
+                       _kANEFModelInputSymbolIndexArrayKey, _kANEFModelInputSymbolsArrayKey, 
+                       _kANEFModelIsEncryptedKey, _kANEFModelLoadPerformanceStatsKey, 
+                       _kANEFModelMILValue, _kANEFModelOutputSymbolIndexArrayKey, 
                        _kANEFModelOutputSymbolsArrayKey, _kANEFModelPreCompiledValue, 
                        _kANEFModelProcedureIDKey, _kANEFModelProcedureNameToIDMapKey, 
                        _kANEFModelProcedureNameToStatsSizeMapKey, _kANEFModelProceduresArrayKey, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8EB0AAB4-96B5-3E5E-80C6-B3C39427F39F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AF792C6A-CC8F-31A1-B607-D98BA24DD5B3
 install-name:    '/System/Library/PrivateFrameworks/SiriFoundation.framework/Versions/A/SiriFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C627E6CD-7AA1-37DD-A0A9-61AA11287E56
-  - target:          x86_64-maccatalyst
-    value:           C627E6CD-7AA1-37DD-A0A9-61AA11287E56
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           57143558-DB58-31B0-899F-17BF9FBF230F
-  - target:          arm64e-maccatalyst
-    value:           57143558-DB58-31B0-899F-17BF9FBF230F
 install-name:    '/System/Library/PrivateFrameworks/ApplePushService.framework/Versions/A/ApplePushService'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

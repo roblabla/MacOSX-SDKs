@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           894410AA-5066-3755-B159-0F186F094CE8
-  - target:          x86_64-maccatalyst
-    value:           894410AA-5066-3755-B159-0F186F094CE8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CB0A3CA3-E38B-3579-B8A2-9D2B2680D809
-  - target:          arm64e-maccatalyst
-    value:           CB0A3CA3-E38B-3579-B8A2-9D2B2680D809
 install-name:    '/System/Library/PrivateFrameworks/VirtualGarage.framework/Versions/A/VirtualGarage'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -44,7 +31,8 @@ exports:
                        _VirtualGarageConfig_EVRoutingOEMAppPullInterval, _VirtualGarageConfig_EVRoutingResourceNameForAllowAndDenylists, 
                        _VirtualGarageConfig_EVRoutingStreamUpdatesDuringNav, _VirtualGarageConfig_EVRoutingSynchronousVehicleStateUpdate, 
                        _VirtualGarageConfig_EVRoutingUseCarDisplaySimIdentifier, 
-                       _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
+                       _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_EnableAutomaticVehicleUnpairing, 
+                       _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
                        _startHostingVirtualGarageServiceWithPersister, _stopHostingVirtualGarageService ]
     objc-classes:    [ VGDataCoordinator, VGOEMApplication, VGOEMApplicationFinder, 
                        VGVehicle, VGVehicleDeduper, VGVehicleState, VGVehicleStateStorage, 

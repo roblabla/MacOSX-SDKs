@@ -18,7 +18,7 @@ typedef NS_OPTIONS(NSUInteger, MPMediaPlaylistAttribute) {
     MPMediaPlaylistAttributeNone    = 0,
     MPMediaPlaylistAttributeOnTheGo = (1 << 0), // if set, the playlist was created on a device rather than synced from iTunes
     MPMediaPlaylistAttributeSmart   = (1 << 1),
-    MPMediaPlaylistAttributeGenius  = (1 << 2)
+    MPMediaPlaylistAttributeGenius  = (1 << 2),
 } MP_API(ios(3.0)) API_UNAVAILABLE(tvos, watchos, macos);
 
 // An MPMediaPlaylist is a collection of related MPMediaItems in an MPMediaLibrary.

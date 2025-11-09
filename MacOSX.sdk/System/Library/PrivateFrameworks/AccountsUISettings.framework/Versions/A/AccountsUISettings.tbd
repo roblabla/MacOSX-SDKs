@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FFC7648F-8449-3D20-8744-FEB477E0CD5A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DEDBA98F-40C4-397A-A019-726FEF95CF5C
 install-name:    '/System/Library/PrivateFrameworks/AccountsUISettings.framework/Versions/A/AccountsUISettings'
 swift-abi-version: 7
 exports:
@@ -85,9 +78,23 @@ exports:
                        '_$s18AccountsUISettings0A7UIModelC17accountWasRemovedyySo9ACAccountCFTq', 
                        '_$s18AccountsUISettings0A7UIModelC18accountWasModifiedyySo9ACAccountCF', 
                        '_$s18AccountsUISettings0A7UIModelC18accountWasModifiedyySo9ACAccountCFTq', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvM', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvMTq', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvg', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvgTq', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvpMV', 
                        '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvpfP', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvs', 
+                       '_$s18AccountsUISettings0A7UIModelC18deleteAccountShownSbvsTq', 
                        '_$s18AccountsUISettings0A7UIModelC18selectAddedAccountyySSF', 
                        '_$s18AccountsUISettings0A7UIModelC18selectAddedAccountyySSFTq', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_GvM', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_GvMTq', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_Gvg', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_GvgTq', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_GvpMV', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_Gvs', 
+                       '_$s18AccountsUISettings0A7UIModelC19$deleteAccountShown7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s18AccountsUISettings0A7UIModelC19_deleteAccountShown33_B4E6C936F40F2BFC100FA211B64C7D63LL7Combine9PublishedVySbGvpfi', 
                        '_$s18AccountsUISettings0A7UIModelC21persistentDetailModelAA0abeF0CSgvpfP', 
                        '_$s18AccountsUISettings0A7UIModelC21selectedDeleteAccountyyF', 
@@ -191,7 +198,13 @@ exports:
                        '_$s18AccountsUISettings0aB6PluginPAAE21supportedAccountTypesSaySSGvpMV', 
                        '_$s18AccountsUISettings0aB6PluginPAAE5image_8iconTypeSo7NSImageCSgSS_AA0A5TypesV04IconF0OtF', 
                        '_$s18AccountsUISettings0aB6PluginPAAE8sections3forSayAA23AccountUISettingSectionCGSgSo9ACAccountC_tF', 
-                       '_$s18AccountsUISettings0aB6PluginTL', '_$s18AccountsUISettings14AccountAddViewV014accountTypesByD4TypeSDyAC0dI0OSaySSGGvpfi', 
+                       '_$s18AccountsUISettings0aB6PluginTL', '_$s18AccountsUISettings13DetailsHeaderV13detailsConfigAA16AccountUISettingV0C13ConfigurationVvpfP', 
+                       '_$s18AccountsUISettings13DetailsHeaderV13detailsConfigAcA16AccountUISettingV0C13ConfigurationV_tcfC', 
+                       '_$s18AccountsUISettings13DetailsHeaderV4bodyQrvg', '_$s18AccountsUISettings13DetailsHeaderV4bodyQrvpMV', 
+                       '_$s18AccountsUISettings13DetailsHeaderV4bodyQrvpQOMQ', '_$s18AccountsUISettings13DetailsHeaderV6_model33_CBF29F3A030BBE1CCE444D59A320E715LL7SwiftUI17EnvironmentObjectVyAA0A7UIModelCGvpfi', 
+                       '_$s18AccountsUISettings13DetailsHeaderV7SwiftUI4ViewAAMc', 
+                       '_$s18AccountsUISettings13DetailsHeaderVMa', '_$s18AccountsUISettings13DetailsHeaderVMn', 
+                       '_$s18AccountsUISettings13DetailsHeaderVN', '_$s18AccountsUISettings14AccountAddViewV014accountTypesByD4TypeSDyAC0dI0OSaySSGGvpfi', 
                        '_$s18AccountsUISettings14AccountAddViewV05chinaC5TypesSaySSGvpfi', 
                        '_$s18AccountsUISettings14AccountAddViewV05otherC5TypesSaySSGvpfi', 
                        '_$s18AccountsUISettings14AccountAddViewV0D4TypeO21__derived_enum_equalsySbAE_AEtFZ', 
@@ -437,6 +450,13 @@ exports:
                        '_$s18AccountsUISettings16AccountUISettingV8editableSbvs', 
                        '_$s18AccountsUISettings16AccountUISettingVMa', '_$s18AccountsUISettings16AccountUISettingVMn', 
                        '_$s18AccountsUISettings16AccountUISettingVN', '_$s18AccountsUISettings16AccountUISettingVs12IdentifiableAAMc', 
+                       '_$s18AccountsUISettings16DeleteButtonViewV18_withCurrentWindow33_CBF29F3A030BBE1CCE444D59A320E715LL7SwiftUI11EnvironmentVyAF04WithgH6ActionVGvpfi', 
+                       '_$s18AccountsUISettings16DeleteButtonViewV4bodyQrvg', '_$s18AccountsUISettings16DeleteButtonViewV4bodyQrvpMV', 
+                       '_$s18AccountsUISettings16DeleteButtonViewV4bodyQrvpQOMQ', 
+                       '_$s18AccountsUISettings16DeleteButtonViewV6_model33_CBF29F3A030BBE1CCE444D59A320E715LL7SwiftUI17EnvironmentObjectVyAA0A7UIModelCGvpfi', 
+                       '_$s18AccountsUISettings16DeleteButtonViewV7SwiftUI0E0AAMc', 
+                       '_$s18AccountsUISettings16DeleteButtonViewVACycfC', '_$s18AccountsUISettings16DeleteButtonViewVMa', 
+                       '_$s18AccountsUISettings16DeleteButtonViewVMn', '_$s18AccountsUISettings16DeleteButtonViewVN', 
                        '_$s18AccountsUISettings18GenericDetailsViewV4bodyQrvg', '_$s18AccountsUISettings18GenericDetailsViewV4bodyQrvpMV', 
                        '_$s18AccountsUISettings18GenericDetailsViewV4bodyQrvpQOMQ', 
                        '_$s18AccountsUISettings18GenericDetailsViewV6_model33_BB4808BEC359D7815B1DDB08E8282AA5LL7SwiftUI17EnvironmentObjectVyAA0A7UIModelCGvpfi', 

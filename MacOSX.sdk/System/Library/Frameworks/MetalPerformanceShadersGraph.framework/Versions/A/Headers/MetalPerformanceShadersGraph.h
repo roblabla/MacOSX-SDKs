@@ -27,10 +27,12 @@
 #import <MetalPerformanceShadersGraph/MPSGraphOneHotOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphOptimizerOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphPoolingOps.h>
+#import <MetalPerformanceShadersGraph/MPSGraphQuantizationOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphRandomOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphReductionOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphResizeOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphRNNOps.h>
+#import <MetalPerformanceShadersGraph/MPSGraphSampleGridOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphScatterNDOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphSortOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphSparseOps.h>

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           ED04F5B0-49B8-32FC-A90A-ECFA6647839E
-  - target:          x86_64-maccatalyst
-    value:           ED04F5B0-49B8-32FC-A90A-ECFA6647839E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           19C21089-4828-39FD-A861-E60EFFD7F885
-  - target:          arm64e-maccatalyst
-    value:           19C21089-4828-39FD-A861-E60EFFD7F885
 install-name:    '/System/Library/PrivateFrameworks/SAObjects.framework/Versions/A/SAObjects'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -287,21 +274,22 @@ exports:
                        _SAAppsGetRestrictedAppsExecutionEnvironmentPListKey, _SAAppsGetRestrictedAppsResponseAppToItsRestrictionsMapPListKey, 
                        _SAAppsGetRestrictedAppsResponseClassIdentifier, _SAAppsGetRestrictedAppsResponseRestrictedAppsPListKey, 
                        _SAAppsGroupAcronym, _SAAppsGroupIdentifier, _SAAppsLaunchAppApplicationClientIdentifierPListKey, 
-                       _SAAppsLaunchAppClassIdentifier, _SAAppsLaunchAppExecutionEnvironmentPListKey, 
-                       _SAAppsLaunchAppLaunchIdPListKey, _SAAppsLaunchAppSTARK_EXECUTION_ENVValue, 
-                       _SAAppsQuitAllAppsClassIdentifier, _SAAppsQuitAppAppBundleIdPListKey, 
-                       _SAAppsQuitAppClassIdentifier, _SAAppsQuitAppSceneIdPListKey, 
-                       _SAAssistantCreatedAssistantIdPListKey, _SAAssistantCreatedClassIdentifier, 
-                       _SAAssistantCreatedSpeechIdPListKey, _SAAssistantDataFetchFailedErrorCode, 
-                       _SAAssistantDestroyedAssistantIdPListKey, _SAAssistantDestroyedClassIdentifier, 
-                       _SAAssistantLoadedAppleConnectSessionTokenPListKey, _SAAssistantLoadedClassIdentifier, 
-                       _SAAssistantLoadedDataAnchorPListKey, _SAAssistantLoadedRequestSyncPListKey, 
-                       _SAAssistantLoadedSyncAnchorsPListKey, _SAAssistantLoadedVersionPListKey, 
-                       _SAAssistantNotFoundClassIdentifier, _SAAssistantNotReadyClassIdentifier, 
-                       _SAAssistantNotReadyLanguagePListKey, _SAAttachmentClassIdentifier, 
-                       _SAAttentionFocusAppClassIdentifier, _SAAttentionFocusAppResponseAppBundleIdPListKey, 
-                       _SAAttentionFocusAppResponseClassIdentifier, _SAAttentionFocusAppResponseSceneIdPListKey, 
-                       _SAAttentionGroupAcronym, _SAAttentionGroupIdentifier, _SABackgroundUpdateRequestAttachmentPListKey, 
+                       _SAAppsLaunchAppClassIdentifier, _SAAppsLaunchAppDoNotDismissSiriPListKey, 
+                       _SAAppsLaunchAppExecutionEnvironmentPListKey, _SAAppsLaunchAppLaunchIdPListKey, 
+                       _SAAppsLaunchAppSTARK_EXECUTION_ENVValue, _SAAppsQuitAllAppsClassIdentifier, 
+                       _SAAppsQuitAppAppBundleIdPListKey, _SAAppsQuitAppClassIdentifier, 
+                       _SAAppsQuitAppSceneIdPListKey, _SAAssistantCreatedAssistantIdPListKey, 
+                       _SAAssistantCreatedClassIdentifier, _SAAssistantCreatedSpeechIdPListKey, 
+                       _SAAssistantDataFetchFailedErrorCode, _SAAssistantDestroyedAssistantIdPListKey, 
+                       _SAAssistantDestroyedClassIdentifier, _SAAssistantLoadedAppleConnectSessionTokenPListKey, 
+                       _SAAssistantLoadedClassIdentifier, _SAAssistantLoadedDataAnchorPListKey, 
+                       _SAAssistantLoadedRequestSyncPListKey, _SAAssistantLoadedSyncAnchorsPListKey, 
+                       _SAAssistantLoadedVersionPListKey, _SAAssistantNotFoundClassIdentifier, 
+                       _SAAssistantNotReadyClassIdentifier, _SAAssistantNotReadyLanguagePListKey, 
+                       _SAAttachmentClassIdentifier, _SAAttentionFocusAppClassIdentifier, 
+                       _SAAttentionFocusAppResponseAppBundleIdPListKey, _SAAttentionFocusAppResponseClassIdentifier, 
+                       _SAAttentionFocusAppResponseSceneIdPListKey, _SAAttentionGroupAcronym, 
+                       _SAAttentionGroupIdentifier, _SABackgroundUpdateRequestAttachmentPListKey, 
                        _SABackgroundUpdateRequestClassIdentifier, _SABaseAceObjectAceIdPListKey, 
                        _SABaseAceObjectClassIdentifier, _SABaseAceObjectMetricsContextPListKey, 
                        _SABaseClientBoundCommandAppIdPListKey, _SABaseClientBoundCommandCallbacksPListKey, 
@@ -1244,6 +1232,7 @@ exports:
                        _SAIntentGroupLabelTemplateComponentStyleFootnoteValue, _SAIntentGroupLabelTemplateComponentStyleHeadingValue, 
                        _SAIntentGroupLabelTemplateComponentStyleLargeValue, _SAIntentGroupLabelTemplateComponentStyleSubheadingValue, 
                        _SAIntentGroupLabelTemplateComponentTextPListKey, _SAIntentGroupLaunchAppWithIntentClassIdentifier, 
+                       _SAIntentGroupLaunchAppWithIntentDoNotDismissSiriPListKey, 
                        _SAIntentGroupLaunchAppWithIntentHandledIntentPListKey, _SAIntentGroupLaunchAppWithIntentHandledIntentResponsePListKey, 
                        _SAIntentGroupLaunchAppWithIntentJsonEncodedHandledIntentPListKey, 
                        _SAIntentGroupLaunchAppWithIntentJsonEncodedHandledIntentResponsePListKey, 
@@ -2500,7 +2489,7 @@ exports:
                        _SASRecordingInfoButtonDowntimePListKey, _SASRecordingInfoButtonUpTimePListKey, 
                        _SASRecordingInfoClassIdentifier, _SASRecordingInfoRingerSwitchOffPListKey, 
                        _SASRecordingInfoZeroLatencyLaunchPListKey, _SASResultCandidateClassIdentifier, 
-                       _SASResultCandidateLatticeRnnMitigatorCalibrationOffsetPListKey, 
+                       _SASResultCandidateFilteredRecognitionPListKey, _SASResultCandidateLatticeRnnMitigatorCalibrationOffsetPListKey, 
                        _SASResultCandidateLatticeRnnMitigatorCalibrationScalePListKey, 
                        _SASResultCandidateLatticeRnnMitigatorScorePListKey, _SASResultCandidateLatticeRnnMitigatorThresholdPListKey, 
                        _SASResultCandidateProcessedAudioDurationPListKey, _SASResultCandidateRecognitionPListKey, 

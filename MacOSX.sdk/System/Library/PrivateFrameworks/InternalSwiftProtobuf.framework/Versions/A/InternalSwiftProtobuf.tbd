@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1C6ECC00-1A6A-334F-9530-E5D294040320
-  - target:          x86_64-maccatalyst
-    value:           1C6ECC00-1A6A-334F-9530-E5D294040320
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CC08C94D-6A7E-3D35-ABB6-3B168E12E230
-  - target:          arm64e-maccatalyst
-    value:           CC08C94D-6A7E-3D35-ABB6-3B168E12E230
 install-name:    '/System/Library/PrivateFrameworks/InternalSwiftProtobuf.framework/Versions/A/InternalSwiftProtobuf'
 swift-abi-version: 7
 exports:
@@ -703,9 +690,16 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV13unknownFieldsAA14UnknownStorageVvg', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV13unknownFieldsAA14UnknownStorageVvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV13unknownFieldsAA14UnknownStorageVvs', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV14unverifiedLazySbvM', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV14unverifiedLazySbvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV14unverifiedLazySbvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV14unverifiedLazySbvs', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV15clearDeprecatedyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV16protoMessageNameSSvgZ', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV17_protobuf_nameMapAA05_NameI0VvgZ', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV17hasUnverifiedLazySbvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV17hasUnverifiedLazySbvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV19clearUnverifiedLazyyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV19uninterpretedOptionSayAA0d1_c14_UninterpretedH0VGvM', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV19uninterpretedOptionSayAA0d1_c14_UninterpretedH0VGvg', 
                        '_$s21InternalSwiftProtobuf07Google_C13_FieldOptionsV19uninterpretedOptionSayAA0d1_c14_UninterpretedH0VGvpMV', 
@@ -1353,6 +1347,9 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV10sourceFileSSvg', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV10sourceFileSSvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV10sourceFileSSvs', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV11hasSemanticSbvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV11hasSemanticSbvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV13clearSemanticyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV13decodeMessage7decoderyxz_tKAA7DecoderRzlF', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV13hasSourceFileSbvg', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV13hasSourceFileSbvpMV', 
@@ -1378,9 +1375,33 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV5begins5Int32Vvs', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV6hasEndSbvg', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV6hasEndSbvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO17_protobuf_nameMapAA05_NameL0VvgZ', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO3setyA2GmFWC', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO4noneyA2GmFWC', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO5aliasyA2GmFWC', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO8allCasesSayAGGvgZ', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO8rawValueAGSgSi_tcfC', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO8rawValueSivg', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticO8rawValueSivpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOAA19_ProtoNameProvidingAAMc', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOAA19_ProtoNameProvidingAAWP', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOAA4EnumAAMc', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOAA4EnumAAWP', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOAGycfC', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOMa', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOMn', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticON', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOSHAAMc', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOSQAAMc', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOSYAAMc', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8SemanticOs12CaseIterableAAMc', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8clearEndyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8hasBeginSbvg', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8hasBeginSbvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8semanticAE8SemanticOvM', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8semanticAE8SemanticOvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8semanticAE8SemanticOvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8semanticAE8SemanticOvs', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV8traverse7visitoryxz_tKAA7VisitorRzlF', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV9hashValueSivg', 
                        '_$s21InternalSwiftProtobuf07Google_C18_GeneratedCodeInfoV10AnnotationV9hashValueSivpMV', 
@@ -1519,6 +1540,8 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10dependencySaySSGvg', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10dependencySaySSGvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10dependencySaySSGvs', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10hasEditionSbvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10hasEditionSbvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10hasOptionsSbvg', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10hasOptionsSbvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV10hasPackageSbvg', 
@@ -1528,6 +1551,7 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV11messageTypeSayAA0d1_c1_fG0VGvg', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV11messageTypeSayAA0d1_c1_fG0VGvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV11messageTypeSayAA0d1_c1_fG0VGvs', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV12clearEditionyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV12clearOptionsyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV12clearPackageyyF', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV13decodeMessage7decoderyxz_tKAA7DecoderRzlF', 
@@ -1563,6 +1587,10 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV6syntaxSSvg', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV6syntaxSSvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV6syntaxSSvs', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7editionSSvM', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7editionSSvg', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7editionSSvpMV', 
+                       '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7editionSSvs', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7hasNameSbvg', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7hasNameSbvpMV', 
                        '_$s21InternalSwiftProtobuf07Google_C20_FileDescriptorProtoV7optionsAA0d1_c1_E7OptionsVvM', 

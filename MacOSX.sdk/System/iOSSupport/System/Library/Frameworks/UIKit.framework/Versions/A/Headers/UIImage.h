@@ -334,7 +334,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 @interface NSTextAttachment (UIImage)
 
-+ (NSTextAttachment *)textAttachmentWithImage:(UIImage *)image API_AVAILABLE(ios(13.0),tvos(13.0));
++ (NSTextAttachment *)textAttachmentWithImage:(UIImage *)image API_AVAILABLE(ios(13.0),tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 #endif

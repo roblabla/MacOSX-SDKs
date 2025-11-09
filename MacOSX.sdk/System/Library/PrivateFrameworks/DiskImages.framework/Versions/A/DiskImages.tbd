@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FDE04FB0-BAA9-3B4E-ABB0-C11A00AA1036
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4601F927-8676-32C6-A4AD-B34A9F6C60AE
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 628.40.2
+current-version: 628.100.8
 compatibility-version: 1.0.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

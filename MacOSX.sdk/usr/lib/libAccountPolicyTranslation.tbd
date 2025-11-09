@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5779B937-2385-3D26-ABBB-FB157C79389C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5C0BEB62-E9F6-3472-A5C6-7184272A8F3D
 install-name:    '/usr/lib/libAccountPolicyTranslation.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A44F8E42-96B6-3263-8F23-83B09FC60651
-  - target:          x86_64-maccatalyst
-    value:           A44F8E42-96B6-3263-8F23-83B09FC60651
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           58F6469F-B056-347B-90B0-7D0143085BB6
-  - target:          arm64e-maccatalyst
-    value:           58F6469F-B056-347B-90B0-7D0143085BB6
 install-name:    '/System/Library/PrivateFrameworks/_Coherence_CloudKit_Private.framework/Versions/A/_Coherence_CloudKit_Private'
 swift-abi-version: 7
 allowable-clients:

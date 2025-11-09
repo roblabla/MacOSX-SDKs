@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D505D3A7-5AF0-3B6C-AD37-C98A88CBBAF8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           12A9CA33-534D-308A-9EFF-94003ABC32D4
 install-name:    '/usr/lib/libbootpolicy.dylib'
-current-version: 199.40.4
+current-version: 200.101.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _bootpolicy_consume_kcos_auth_token, _bootpolicy_create_kcos_auth_token, 

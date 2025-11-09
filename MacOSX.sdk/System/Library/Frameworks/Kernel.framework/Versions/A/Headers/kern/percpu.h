@@ -30,6 +30,7 @@
 #define _KERN_PERCPU_H_
 
 #include <mach/vm_types.h>
+#include <mach/machine/vm_param.h> /* For PAGE_MASK */
 
 __BEGIN_DECLS
 

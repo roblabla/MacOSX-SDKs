@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           213A218B-556E-386A-8E8D-54B56B4E573D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5296ADA8-AD54-3692-99DF-083514C4FAD3
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

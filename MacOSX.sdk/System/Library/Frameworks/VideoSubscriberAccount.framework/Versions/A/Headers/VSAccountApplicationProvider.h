@@ -15,8 +15,7 @@ VS_EXPORT API_AVAILABLE(ios(14.2), tvos(14.2)) API_UNAVAILABLE(macCatalyst)
 @interface VSAccountApplicationProvider : NSObject
 
 /// Unavailable for this class.
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+VS_INIT_UNAVAILABLE
 
 /// Returns an application provider using a given display name and identifier.
 /// Both the localizedDisplayName and identifier parameters must be non-empty strings.

@@ -1,11 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D54E323D-B23C-379B-BF9B-D0F0DCE4D85E
-  - target:          x86_64-maccatalyst
-    value:           D54E323D-B23C-379B-BF9B-D0F0DCE4D85E
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/uint32_rgba.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

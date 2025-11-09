@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKDeferredPaymentSummaryItem.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKDeferredPaymentSummaryItem.h
-//  PassKit
+//    PassKit
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
 

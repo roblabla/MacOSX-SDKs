@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D32DFE04-D5D4-3BD7-B9B5-9ED721B993EE
-  - target:          x86_64-maccatalyst
-    value:           D32DFE04-D5D4-3BD7-B9B5-9ED721B993EE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1E8F925A-501E-32BD-9BE3-2EE5FDEA8818
-  - target:          arm64e-maccatalyst
-    value:           1E8F925A-501E-32BD-9BE3-2EE5FDEA8818
 install-name:    '/usr/lib/system/libsystem_asl.dylib'
 current-version: 395
 parent-umbrella:

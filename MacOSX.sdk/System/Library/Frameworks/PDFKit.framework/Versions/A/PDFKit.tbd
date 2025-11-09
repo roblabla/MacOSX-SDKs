@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           915C35B0-ABED-3A30-B00F-A8E121069947
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DF7D535E-5669-3114-A4A2-834D316B779D
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
-current-version: 1158.3.3
+current-version: 1158.5.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
@@ -71,12 +64,12 @@ exports:
                        _PDFDocumentDidEndWriteNotification, _PDFDocumentDidFindMatchNotification, 
                        _PDFDocumentDidUnlockNotification, _PDFDocumentFoundSelectionKey, 
                        _PDFDocumentKeywordsAttribute, _PDFDocumentModificationDateAttribute, 
-                       _PDFDocumentOwnerPasswordOption, _PDFDocumentPageIndexKey, 
-                       _PDFDocumentProducerAttribute, _PDFDocumentSaveTextFromOCROption, 
-                       _PDFDocumentSubjectAttribute, _PDFDocumentTitleAttribute, 
-                       _PDFDocumentUserPasswordOption, _PDFHUDLaunchPreviewControl, 
-                       _PDFHUDSavePDFControl, _PDFHUDSeperatorControl, _PDFHUDZoomInControl, 
-                       _PDFHUDZoomOutControl, _PDFPageAnnotationAddedNotification, 
+                       _PDFDocumentOptimizeImagesForScreenOption, _PDFDocumentOwnerPasswordOption, 
+                       _PDFDocumentPageIndexKey, _PDFDocumentProducerAttribute, _PDFDocumentSaveImagesAsJPEGOption, 
+                       _PDFDocumentSaveTextFromOCROption, _PDFDocumentSubjectAttribute, 
+                       _PDFDocumentTitleAttribute, _PDFDocumentUserPasswordOption, 
+                       _PDFHUDLaunchPreviewControl, _PDFHUDSavePDFControl, _PDFHUDSeperatorControl, 
+                       _PDFHUDZoomInControl, _PDFHUDZoomOutControl, _PDFPageAnnotationAddedNotification, 
                        _PDFPageAnnotationRemovedNotification, _PDFPageBackgroundCompleteNotification, 
                        _PDFPageChangedBoundsForBoxNotification, _PDFPageDrawWithBoxOption_DrawAnnotations, 
                        _PDFPageDrawWithBoxOption_DrawBookmark, _PDFPageDrawWithBoxOption_DrawProgressCallback, 
@@ -130,10 +123,10 @@ exports:
                        PDFActionResetForm, PDFActionURL, PDFAnnotation, PDFAnnotationButtonWidget, 
                        PDFAnnotationChoiceWidget, PDFAnnotationCircle, PDFAnnotationFreeText, 
                        PDFAnnotationInk, PDFAnnotationLine, PDFAnnotationLink, PDFAnnotationMarkup, 
-                       PDFAnnotationPopup, PDFAnnotationSquare, PDFAnnotationStamp, 
-                       PDFAnnotationText, PDFAnnotationTextWidget, PDFAppearanceCharacteristics, 
-                       PDFBorder, PDFDestination, PDFDocument, PDFEncryptionOptionsEditor, 
-                       PDFEncryptionOptionsViewer, PDFHUDLayerController, PDFLayerController, 
-                       PDFOutline, PDFPage, PDFPageEvaluator, PDFSelection, PDFThumbnailView, 
-                       PDFView, PDFViewLayout ]
+                       PDFAnnotationPKDrawing, PDFAnnotationPopup, PDFAnnotationSquare, 
+                       PDFAnnotationStamp, PDFAnnotationText, PDFAnnotationTextWidget, 
+                       PDFAppearanceCharacteristics, PDFBorder, PDFDestination, PDFDocument, 
+                       PDFEncryptionOptionsEditor, PDFEncryptionOptionsViewer, PDFHUDLayerController, 
+                       PDFLayerController, PDFOutline, PDFPage, PDFPageEvaluator, 
+                       PDFSelection, PDFThumbnailView, PDFView, PDFViewLayout ]
 ...

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           43089DDC-0646-3C3A-AB3F-38CDE2313587
-  - target:          x86_64-maccatalyst
-    value:           43089DDC-0646-3C3A-AB3F-38CDE2313587
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6C664260-0245-31B8-9202-71D9D27A1F2C
-  - target:          arm64e-maccatalyst
-    value:           6C664260-0245-31B8-9202-71D9D27A1F2C
 install-name:    '/usr/lib/swift/libswift_StringProcessing.dylib'
 current-version: 0
 swift-abi-version: 7
@@ -31,6 +18,7 @@ exports:
                        '_$s17_StringProcessing13_RegexFactoryV10accumulateyAA0C0VyxGq__q0_tAA0C9ComponentR_AaHR0_r1_lF', 
                        '_$s17_StringProcessing13_RegexFactoryV10zeroOrMoreyAA0C0VyxGq__AA0C18RepetitionBehaviorVSgtAA0C9ComponentR_r0_lF', 
                        '_$s17_StringProcessing13_RegexFactoryV13orderedChoiceyAA0C0VyxGq_AA0C9ComponentR_r0_lF', 
+                       '_$s17_StringProcessing13_RegexFactoryV14characterClassyAA0C0VyxGAA7DSLTreeV4AtomO09CharacterF0OlF', 
                        '_$s17_StringProcessing13_RegexFactoryV15captureOptionalyAA0C0VyxGq1__SiSgq0_Sgq_KctAA0C9ComponentR1_r2_lF', 
                        '_$s17_StringProcessing13_RegexFactoryV17symbolicReferenceyAA0C0VyxGAA0F2IDVlF', 
                        '_$s17_StringProcessing13_RegexFactoryV18atomicNonCapturingyAA0C0VyxGq_AA0C9ComponentR_r0_lF', 
@@ -80,7 +68,17 @@ exports:
                        '_$s17_StringProcessing14AnyRegexOutputVyAcA0D0V5MatchVyx_GclufC', 
                        '_$s17_StringProcessing14RegexComponentMp', '_$s17_StringProcessing14RegexComponentP5regexAA0C0Vy0C6OutputQzGvgTj', 
                        '_$s17_StringProcessing14RegexComponentP5regexAA0C0Vy0C6OutputQzGvgTq', 
-                       '_$s17_StringProcessing14RegexComponentTL', '_$s17_StringProcessing18RegexSemanticLevelV13unicodeScalarACvgZ', 
+                       '_$s17_StringProcessing14RegexComponentTL', '_$s17_StringProcessing15_CompileOptionsV13enableMetricsACvgZ', 
+                       '_$s17_StringProcessing15_CompileOptionsV13enableTracingACvgZ', 
+                       '_$s17_StringProcessing15_CompileOptionsV20disableOptimizationsACvgZ', 
+                       '_$s17_StringProcessing15_CompileOptionsV7defaultACvgZ', '_$s17_StringProcessing15_CompileOptionsV8rawValueACSi_tcfC', 
+                       '_$s17_StringProcessing15_CompileOptionsV8rawValueSivg', '_$s17_StringProcessing15_CompileOptionsV8rawValueSivpMV', 
+                       '_$s17_StringProcessing15_CompileOptionsVMa', '_$s17_StringProcessing15_CompileOptionsVMn', 
+                       '_$s17_StringProcessing15_CompileOptionsVN', '_$s17_StringProcessing15_CompileOptionsVSQAAMc', 
+                       '_$s17_StringProcessing15_CompileOptionsVSYAAMc', '_$s17_StringProcessing15_CompileOptionsVs10SetAlgebraAAMc', 
+                       '_$s17_StringProcessing15_CompileOptionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s17_StringProcessing15_CompileOptionsVs9OptionSetAAMc', 
+                       '_$s17_StringProcessing18RegexSemanticLevelV13unicodeScalarACvgZ', 
                        '_$s17_StringProcessing18RegexSemanticLevelV15graphemeClusterACvgZ', 
                        '_$s17_StringProcessing18RegexSemanticLevelV2eeoiySbAC_ACtFZ', 
                        '_$s17_StringProcessing18RegexSemanticLevelV4hash4intoys6HasherVz_tF', 
@@ -116,6 +114,9 @@ exports:
                        '_$s17_StringProcessing29CustomConsumingRegexComponentPAAE5regexAA0E0Vy0E6OutputQzGvg', 
                        '_$s17_StringProcessing29CustomConsumingRegexComponentPAAE5regexAA0E0Vy0E6OutputQzGvpMV', 
                        '_$s17_StringProcessing29CustomConsumingRegexComponentTL', 
+                       '_$s17_StringProcessing5RegexV01_C14InternalActionO10addOptionsyAEyx_GAA08_CompileG0VcAGmlFWC', 
+                       '_$s17_StringProcessing5RegexV01_C14InternalActionO9recompileyAEyx_GAGmlFWC', 
+                       '_$s17_StringProcessing5RegexV01_C14InternalActionOMa', '_$s17_StringProcessing5RegexV01_C14InternalActionOMn', 
                        '_$s17_StringProcessing5RegexV06_regexA07versionACyxGSS_SitcfC', 
                        '_$s17_StringProcessing5RegexV06_regexA0ACyxGSS_tcfC', '_$s17_StringProcessing5RegexV10firstMatch2inAC0E0Vyx_GSgSS_tKF', 
                        '_$s17_StringProcessing5RegexV10firstMatch2inAC0E0Vyx_GSgSs_tKF', 
@@ -123,6 +124,7 @@ exports:
                        '_$s17_StringProcessing5RegexV10wholeMatch2inAC0E0Vyx_GSgSs_tKF', 
                        '_$s17_StringProcessing5RegexV11ignoresCaseyACyxGSbF', '_$s17_StringProcessing5RegexV11prefixMatch2inAC0E0Vyx_GSgSS_tKF', 
                        '_$s17_StringProcessing5RegexV11prefixMatch2inAC0E0Vyx_GSgSs_tKF', 
+                       '_$s17_StringProcessing5RegexV12_forceActionySbAC01_c8InternalE0Oyx_GF', 
                        '_$s17_StringProcessing5RegexV15asciiOnlyDigitsyACyxGSbF', 
                        '_$s17_StringProcessing5RegexV16wordBoundaryKindyACyxGAA0c4WordeF0VF', 
                        '_$s17_StringProcessing5RegexV17matchingSemanticsyACyxGAA0C13SemanticLevelVF', 
@@ -174,6 +176,32 @@ exports:
                        '_$s17_StringProcessing7DSLTreeV4AtomO11unconvertedyAeC4_ASTOADVcAEmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO13anyNonNewlineyA2EmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO13backreferenceyAeC4_ASTO9ReferenceVcAEmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO10notNewlineyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO10whitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO11anyGraphemeyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO13notWhitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO15newlineSequenceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO16anyUnicodeScalaryA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO18verticalWhitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO20horizontalWhitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO21notVerticalWhitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO23notHorizontalWhitespaceyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO2eeoiySbAG_AGtFZ', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO4hash4intoys6HasherVz_tF', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO4wordyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO5digityA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO7notWordyA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO8invertedAGSgvg', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO8invertedAGSgvpMV', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO8notDigityA2GmFWC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO9hashValueSivg', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassO9hashValueSivpMV', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassOMa', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassOMn', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassON', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassOSHAAMc', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14CharacterClassOSQAAMc', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO14characterClassyA2E09CharacterF0OcAEmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO17symbolicReferenceyAeA0F2IDVcAEmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO21changeMatchingOptionsyAeC4_ASTO0F14OptionSequenceVcAEmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO3anyyA2EmFWC', '_$s17_StringProcessing7DSLTreeV4AtomO3dotyA2EmFWC', 
@@ -190,15 +218,15 @@ exports:
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO15notWordBoundaryyA2GmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO17resetStartOfMatchyA2GmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO25endOfSubjectBeforeNewlineyA2GmFWC', 
-                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO2eeoiySbAG_AGtFZ', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO30firstMatchingPositionInSubjectyA2GmFWC', 
-                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO4hash4intoys6HasherVz_tF', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO8rawValueAGSgs6UInt64V_tcfC', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO8rawValues6UInt64Vvg', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO8rawValues6UInt64VvpMV', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO9endOfLineyA2GmFWC', 
-                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO9hashValueSivg', 
-                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionO9hashValueSivpMV', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionOMa', '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionOMn', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionON', '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionOSHAAMc', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionOSQAAMc', 
+                       '_$s17_StringProcessing7DSLTreeV4AtomO9AssertionOSYAAMc', 
                        '_$s17_StringProcessing7DSLTreeV4AtomO9assertionyA2E9AssertionOcAEmFWC', 
                        '_$s17_StringProcessing7DSLTreeV4AtomOMa', '_$s17_StringProcessing7DSLTreeV4AtomOMn', 
                        '_$s17_StringProcessing7DSLTreeV4AtomON', '_$s17_StringProcessing7DSLTreeV4_ASTO13ConditionKindVMa', 
@@ -226,13 +254,6 @@ exports:
                        '_$s17_StringProcessing7DSLTreeV4_ASTO22MatchingOptionSequenceVMa', 
                        '_$s17_StringProcessing7DSLTreeV4_ASTO22MatchingOptionSequenceVMn', 
                        '_$s17_StringProcessing7DSLTreeV4_ASTO22MatchingOptionSequenceVN', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV11_whitespaceAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV12_anyGraphemeAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV16_newlineSequenceAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV19_verticalWhitespaceAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV21_horizontalWhitespaceAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV5_wordAGvgZ', 
-                       '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomV6_digitAGvgZ', 
                        '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomVMa', '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomVMn', 
                        '_$s17_StringProcessing7DSLTreeV4_ASTO4AtomVN', '_$s17_StringProcessing7DSLTreeV4_ASTO7ASTNodeVMa', 
                        '_$s17_StringProcessing7DSLTreeV4_ASTO7ASTNodeVMn', '_$s17_StringProcessing7DSLTreeV4_ASTO7ASTNodeVN', 
@@ -279,6 +300,6 @@ exports:
                        '_$sSy17_StringProcessingE8containsySbSSF', '_$sSy17_StringProcessingE8containsySbSsF', 
                        '_$sSy17_StringProcessingSs11SubSequenceRtzrlE6_split9separator9maxSplits25omittingEmptySubsequencesSaySsGSS_SiSbtF', 
                        '_$sSy17_StringProcessingSs11SubSequenceRtzrlE6_split9separator9maxSplits25omittingEmptySubsequencesSaySsGSs_SiSbtF', 
-                       __swift_stdlib_getMphIdx, __swift_stdlib_getScalarBitArrayIdx, 
-                       __swift_stdlib_getScript, __swift_stdlib_getScriptExtensions ]
+                       __swift_string_processing_getMphIdx, __swift_string_processing_getScalarBitArrayIdx, 
+                       __swift_string_processing_getScript, __swift_string_processing_getScriptExtensions ]
 ...

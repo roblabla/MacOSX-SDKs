@@ -311,7 +311,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Register for specific Wi-Fi event notifications.
@@ -329,7 +329,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract
  * Unregister for specific Wi-Fi event notifications.
@@ -344,7 +344,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract
  * Unregister for all Wi-Fi event notifications.

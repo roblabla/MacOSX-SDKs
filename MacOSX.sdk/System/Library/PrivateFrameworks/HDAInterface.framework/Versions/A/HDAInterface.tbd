@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2E13013B-C5A3-3DEB-AD13-3A50913A3994
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           44727C38-E6DE-3FC4-972A-52E5E65AE483
 install-name:    '/System/Library/PrivateFrameworks/HDAInterface.framework/Versions/A/HDAInterface'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

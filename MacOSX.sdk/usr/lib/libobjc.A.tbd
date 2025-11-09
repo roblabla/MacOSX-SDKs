@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           AFBB513A-5F1E-3130-B434-FA09A2124C9A
-  - target:          x86_64-maccatalyst
-    value:           AFBB513A-5F1E-3130-B434-FA09A2124C9A
-  - target:          x86_64h-macos
-    value:           38D89F3C-DC4C-3B0A-A09C-461739132150
-  - target:          x86_64h-maccatalyst
-    value:           38D89F3C-DC4C-3B0A-A09C-461739132150
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FC6D1C4F-2E83-37CC-B972-C5529F1C0E40
-  - target:          arm64e-maccatalyst
-    value:           FC6D1C4F-2E83-37CC-B972-C5529F1C0E40
 install-name:    '/usr/lib/libobjc.A.dylib'
 current-version: 228
 exports:

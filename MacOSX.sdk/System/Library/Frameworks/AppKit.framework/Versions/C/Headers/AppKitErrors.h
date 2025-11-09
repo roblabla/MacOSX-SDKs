@@ -49,6 +49,13 @@ enum {
     NSWorkspaceAuthorizationInvalidError API_AVAILABLE(macos(10.14)) = 67328,
     NSWorkspaceErrorMinimum API_AVAILABLE(macos(10.14)) = 67328,
     NSWorkspaceErrorMaximum API_AVAILABLE(macos(10.14)) = 67455,
+
+    // Window Sharing
+    NSWindowSharingRequestAlreadyRequested API_AVAILABLE(macos(13.3)) = 67456,
+    NSWindowSharingRequestNoEligibleSession API_AVAILABLE(macos(13.3)) = 67457,
+    NSWindowSharingRequestUnspecifiedError API_AVAILABLE(macos(13.3)) = 67458,
+    NSWindowSharingErrorMinimum API_AVAILABLE(macos(13.3)) = 67456,
+    NSWindowSharingErrorMaximum API_AVAILABLE(macos(13.3)) = 67466,
 };
 
 API_UNAVAILABLE_END

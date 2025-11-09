@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
-  - target:          x86_64-maccatalyst
-    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
-  - target:          arm64e-maccatalyst
-    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -641,6 +628,10 @@ exports:
                        _AVPlayerCurrentItemDidChangeReasonKey, _AVPlayerCurrentItemDidChangeRemovalReason, 
                        _AVPlayerCurrentItemDidChangeUnknownReason, _AVPlayerEligibleForHDRPlaybackDidChangeNotification, 
                        _AVPlayerInterstitialEventJoinCue, _AVPlayerInterstitialEventLeaveCue, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, 
                        _AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification, 
                        _AVPlayerInterstitialEventMonitorEventsDidChangeNotification, 
                        _AVPlayerInterstitialEventNoCue, _AVPlayerInterstitialPlayerDidChangeNotification, 

@@ -148,7 +148,10 @@ static_assert(alignof(HeapObject) == alignof(void*),
 #elif (defined(__arm64__) || defined(__aarch64__) || defined(_M_ARM64)) &&     \
       (__POINTER_WIDTH__ == 64)
 
-#ifdef __APPLE__
+
+
+// value as Darwin, so we don't have to handle it here.
+#if defined(__APPLE__) && !0
 #define _swift_abi_LeastValidPointerValue                                      \
   (__swift_uintptr_t) SWIFT_ABI_DARWIN_ARM64_LEAST_VALID_POINTER
 #else
@@ -199,6 +202,22 @@ static_assert(alignof(HeapObject) == alignof(void*),
   (unsigned) SWIFT_ABI_S390X_OBJC_NUM_RESERVED_LOW_BITS
 #define _swift_BridgeObject_TaggedPointerBits                                  \
   (__swift_uintptr_t) SWIFT_ABI_DEFAULT_BRIDGEOBJECT_TAG_64
+
+#elif defined(__wasm32__)
+
+#define _swift_abi_LeastValidPointerValue                                      \
+  (__swift_uintptr_t) SWIFT_ABI_WASM32_LEAST_VALID_POINTER
+
+#define _swift_abi_SwiftSpareBitsMask                                          \
+  (__swift_uintptr_t) SWIFT_ABI_DEFAULT_SWIFT_SPARE_BITS_MASK
+
+#define _swift_abi_ObjCReservedBitsMask                                        \
+  (__swift_uintptr_t) SWIFT_ABI_DEFAULT_OBJC_RESERVED_BITS_MASK
+#define _swift_abi_ObjCReservedLowBits                                         \
+  (unsigned) SWIFT_ABI_DEFAULT_OBJC_NUM_RESERVED_LOW_BITS
+
+#define _swift_BridgeObject_TaggedPointerBits                                  \
+  (__swift_uintptr_t) SWIFT_ABI_DEFAULT_BRIDGEOBJECT_TAG_32
 
 #else
 

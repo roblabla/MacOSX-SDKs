@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B0CEF228-3E75-3EC9-80E2-C75542DCDCFD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65588449-4407-3D38-84C2-16A8B3AF063E
 install-name:    '/System/Library/PrivateFrameworks/GridDataServices.framework/Versions/A/GridDataServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

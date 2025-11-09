@@ -1,21 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7E6EDB39-09F9-391B-B508-A330F9C9E01D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8B1BCD81-FF16-3E43-A294-DEB0C657BE51
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
-current-version: 614.3.7
+current-version: 615.1.26
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
                        _BookmarksMenuSpecialID, _BookmarksNotificationBookmarkIdentifierKey, 
                        _BookmarksReadingListSpecialID, _BookmarksRootID, _BookmarksWebFilterAllowedSitesSpecialID, 
-                       _DidDownloadBookmarkIconsNotification, _WBBackgroundImageModifiedStateAttributeKey, 
+                       _DidDownloadBookmarkIconsNotification, _WBBackgroundImageFileDidChangeNotification, 
+                       _WBBackgroundImageIdentifierUserInfoKey, _WBBackgroundImageModifiedStateAttributeKey, 
                        _WBBookmarkSyncModifiedAttributesForKey, _WBBookmarkSyncModifiedAttributesForKeys, 
                        _WBCurrentProcessContainerPath, _WBDatabaseContainsShareRecordSyncKey, 
                        _WBDatabaseLockAcquisitorDefaultTimeout, _WBDefaultPositionKey, 
@@ -24,10 +18,10 @@ exports:
                        _WBLocalTitleKey, _WBLocalURLKey, _WBNSStringFromCollectionStoreOwner, 
                        _WBNSStringFromCollectionType, _WBPageWebArchiveName, _WBReaderWebArchiveName, 
                        _WBRecoveredBookmarksSpecialID, _WBSafariContainerPath, _WBSafariDirectoryPath, 
-                       _WBSafariPreferencesDomain, _WBTabGroupBackgroundImageFileDidChangeNotification, 
-                       _WBTabGroupBackgroundImageIdentifierUserInfoKey, _WBTabGroupSyncAgentDidFinishSyncNotificationName, 
-                       _WBTabGroupSyncAgentErrorDomain, _WBTabGroupSyncAgentSyncObserverInterface, 
-                       _WBTabGroupSyncAgentSyncResultKey, _WebBookmarkChangeSetFirstBookmarkIDForAddingBookmarkInMemory, 
+                       _WBSafariPreferencesDomain, _WBSetupTabGroupSyncAgentProtocolInterface, 
+                       _WBTabGroupSyncAgentDidFinishSyncNotificationName, _WBTabGroupSyncAgentErrorDomain, 
+                       _WBTabGroupSyncAgentSyncObserverInterface, _WBTabGroupSyncAgentSyncResultKey, 
+                       _WBTabGroupTopScopedBookmarkListServerIDPrefix, _WebBookmarkChangeSetFirstBookmarkIDForAddingBookmarkInMemory, 
                        _WebBookmarkIDFromNSString, _WebBookmarkSyncErrorDomain, _WebBookmarksBookmarksBarFolderTitle, 
                        _WebBookmarksBookmarksMenuFolderTitle, _WebBookmarksChangedFolderIDKey, 
                        _WebBookmarksDatabaseResetReasonKey, _WebBookmarksDataclassDidChangeNotification, 
@@ -69,16 +63,17 @@ exports:
                        WBBrowserState, WBChangeRecord, WBCollectionConfiguration, 
                        WBDatabaseLockAcquisitor, WBFeatureManager, WBLocalTabAttributes, 
                        WBMutableTab, WBMutableTabGroup, WBReadonlyTabCollection, 
-                       WBReusableTabManager, WBSavedStateManager, WBSettingsSyncEngineAccess, 
-                       WBSettingsTask, WBTab, WBTabCollection, WBTabCyclerCommandHandler, 
-                       WBTabGroup, WBTabGroupManager, WBTabGroupSyncAgent, WBTabGroupSyncAgentProxy, 
+                       WBReusableTabManager, WBSettingsSyncEngineAccess, WBSettingsTask, 
+                       WBTab, WBTabCollection, WBTabCyclerCommandHandler, WBTabGroup, 
+                       WBTabGroupManager, WBTabGroupSyncAgent, WBTabGroupSyncAgentProxy, 
                        WBWebsiteDataRecord, WBWindow, WBWindowState, WebBookmark, 
                        WebBookmarkChange, WebBookmarkChangeSet, WebBookmarkCollection, 
-                       WebBookmarkDeviceIdentifier, WebBookmarkList, WebBookmarkListQuery, 
-                       WebBookmarkProductionSafariTabCollection, WebBookmarkReadonlyCollection, 
-                       WebBookmarkSafariAutomationTabCollection, WebBookmarkSafariTechnologyPreviewTabCollection, 
-                       WebBookmarkSecondaryCollection, WebBookmarkTabCollection, 
-                       WebBookmarksSettingsGateway, WebBookmarksXPCConnection, WebBookmarksXPCListener ]
+                       WebBookmarkDebugSafariTabCollection, WebBookmarkDeviceIdentifier, 
+                       WebBookmarkList, WebBookmarkListQuery, WebBookmarkProductionSafariTabCollection, 
+                       WebBookmarkReadonlyCollection, WebBookmarkSafariAutomationTabCollection, 
+                       WebBookmarkSafariTechnologyPreviewTabCollection, WebBookmarkSecondaryCollection, 
+                       WebBookmarkTabCollection, WebBookmarksSettingsGateway, WebBookmarksXPCConnection, 
+                       WebBookmarksXPCListener ]
     objc-ivars:      [ WBTab._added, WBTab._bookmark, WBTab._local, WBTab._modified, 
                        WBTab._moved, WBTab._privateBrowsing, WBTab._shared, WBTab._tabGroupUUID, 
                        WBTabGroup._bookmark, WBTabGroup._cachedImmutableTabs, WBTabGroup._deletedTabs, 

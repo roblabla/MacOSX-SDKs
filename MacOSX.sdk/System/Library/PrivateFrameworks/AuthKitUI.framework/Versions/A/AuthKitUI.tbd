@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           17A5821E-348B-31FB-90D1-FFF837E04A3C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7A149B64-BFB8-3711-809A-3A0BFE329F4C
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -76,10 +69,16 @@ exports:
                        _kWebViewCustodianRecoverySessionKey, _kWebViewCustodianRecoveryTokenKey, 
                        _kWebViewExitSettingDidCreateFamilyKey, _kWebViewExitSettingDidJoinFamilyKey, 
                        _kWebViewExitSettingDidUpdateFamilyKey, _kWebViewExitSettingGoToLocation, 
-                       _kWebViewExitSettingGoToSection, _kWebViewImageFormat, _kWebViewRefresh, 
-                       _kWebViewToLocation, _kWebViewToSection, _kWebviewAuthCancelButtonStringKey, 
-                       _kWebviewAuthCredentialRecoveryRequiredKey, _kWebviewAuthDefaultButtonStringKey, 
-                       _kWebviewAuthIsEphemeralKey, _kWebviewAuthPasswordKey, _kWebviewAuthPrimaryAccountKey, 
+                       _kWebViewExitSettingGoToSection, _kWebViewFidoAuthenticationAuthenticatorDataKey, 
+                       _kWebViewFidoAuthenticationSignatureKey, _kWebViewFidoIconName, 
+                       _kWebViewFidoRecoveryTokenKey, _kWebViewFidoRegisterAttestationKey, 
+                       _kWebViewFidoRegisterChallengeKey, _kWebViewFidoRegisterClientDataKey, 
+                       _kWebViewFidoRegisterCredentialIDKey, _kWebViewFidoRegisterCredentialNameKey, 
+                       _kWebViewFidoRegisterRelyingPartyIdKey, _kWebViewFidoRegisterUserHandleKey, 
+                       _kWebViewImageFormat, _kWebViewRefresh, _kWebViewToLocation, 
+                       _kWebViewToSection, _kWebviewAuthCancelButtonStringKey, _kWebviewAuthCredentialRecoveryRequiredKey, 
+                       _kWebviewAuthDefaultButtonStringKey, _kWebviewAuthIsEphemeralKey, 
+                       _kWebviewAuthPasswordKey, _kWebviewAuthPrimaryAccountKey, 
                        _kWebviewAuthReasonKey, _kWebviewAuthResultErrorCodeKey, _kWebviewAuthResultKey, 
                        _kWebviewAuthShouldPromptForPasswordOnlyKey, _kWebviewAuthTitleKey, 
                        _kWebviewAuthUsernameKey, _kWorkflowInviteCodeKey, _kWorkflowOrganizerDSIDKey, 
@@ -121,9 +120,11 @@ exports:
                        AKCASatoriReporter, AKCATiburonAuthorizationUIReporter, AKCATiburonInputUIReporter, 
                        AKCATiburonRequestAttemptReporter, AKCATiburonRequestReporter, 
                        AKCurvePoint, AKDateFormatter, AKDefaultSignInPromptViewController, 
-                       AKDeviceInfo, AKExtensionlessFollowUpHelperContext, AKGeneratedComplexCodeFormatter, 
-                       AKICAWebKitViewController, AKIDPHandler, AKIDPProvidedSignInViewController, 
-                       AKIDPProvidedSignInWindow, AKIDPUtility, AKIcon, AKInAppAuthenticationMacOSUIProvider, 
+                       AKDeviceInfo, AKExtensionlessFollowUpHelperContext, AKFidoRVSBootstrapper, 
+                       AKFidoRVSRemoteViewController, AKFidoUIController, AKFidoUIWindowProvider, 
+                       AKGeneratedComplexCodeFormatter, AKICAWebKitViewController, 
+                       AKIDPHandler, AKIDPProvidedSignInViewController, AKIDPProvidedSignInWindow, 
+                       AKIDPUtility, AKIcon, AKInAppAuthenticationMacOSUIProvider, 
                        AKInAssistantSecondFactorCodeEntry, AKInfoLabel, AKInlineSignInViewController, 
                        AKKeepUsingController, AKLargeSignInBackground, AKLargeSignInPromptViewController, 
                        AKLargeSignInSecureTextField, AKLargeSignInTextField, AKLargeSignInTextFieldBackgroundView, 

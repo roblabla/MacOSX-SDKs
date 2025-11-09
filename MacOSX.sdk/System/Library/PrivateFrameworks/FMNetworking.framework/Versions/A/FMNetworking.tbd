@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4A372E58-F983-3002-A1B0-B7433AA358CD
-  - target:          x86_64-maccatalyst
-    value:           4A372E58-F983-3002-A1B0-B7433AA358CD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CDDA519A-7F57-3A7D-8D96-DF8222FE3EDA
-  - target:          arm64e-maccatalyst
-    value:           CDDA519A-7F57-3A7D-8D96-DF8222FE3EDA
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
@@ -79,6 +66,7 @@ exports:
                        '_$s12FMNetworking14FMNAccountTypeO11w2AccessoryyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO15secureLocationsyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO20fmipPlaceholderForSPyA2CmFWC', 
+                       '_$s12FMNetworking14FMNAccountTypeO20ownedDeviceLocationsyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO3fmfyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO4fmipyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO4noneyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO5setupyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO6fmfAppyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO8fmipSiriyA2CmFWC', 

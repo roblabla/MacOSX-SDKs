@@ -70,7 +70,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_SENDABLE
     API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
 + (instancetype)configurationWithPaletteColors:(NSArray<UIColor *> *)paletteColors API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
 + (instancetype)configurationPreferringMulticolor API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-+ (instancetype)configurationPreferringMonochrome API_AVAILABLE(ios(16.0),macCatalyst(16.0),tvos(16.0),watchos(9.0));
++ (instancetype)configurationPreferringMonochrome API_AVAILABLE(ios(16.0),tvos(16.0),watchos(9.0));
 
 // Removes attributes from the configuration if they are set
 - (instancetype)configurationWithoutTextStyle;

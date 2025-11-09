@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           ADF6BA18-C427-3A6C-8CB2-1D128D126ACA
-  - target:          x86_64-maccatalyst
-    value:           ADF6BA18-C427-3A6C-8CB2-1D128D126ACA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C929E42B-F6AA-32A2-864F-F94283524854
-  - target:          arm64e-maccatalyst
-    value:           C929E42B-F6AA-32A2-864F-F94283524854
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 exports:

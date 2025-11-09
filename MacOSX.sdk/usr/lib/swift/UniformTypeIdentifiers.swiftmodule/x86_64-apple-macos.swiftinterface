@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UniformTypeIdentifiers
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 761.2.1
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UniformTypeIdentifiers
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 761.4.6
 import Foundation
 import Swift
 @_exported import UniformTypeIdentifiers
@@ -113,8 +113,8 @@ extension UniformTypeIdentifiers.UTType : Foundation.ReferenceConvertible {
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType {
@@ -517,16 +517,16 @@ extension UniformTypeIdentifiers.UTType {
 extension Foundation.NSItemProvider {
   convenience public init(contentsOf fileURL: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?, openInPlace: Swift.Bool = false, coordinated: Swift.Bool = false, visibility: Foundation.NSItemProviderRepresentationVisibility = .all)
   #if compiler(>=5.3) && $Sendable
-  public func registerDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, loadHandler: @escaping @Sendable (@escaping (Foundation.Data?, Swift.Error?) -> Swift.Void) -> Foundation.Progress?)
+  public func registerDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, loadHandler: @escaping @Sendable (@escaping (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
   #endif
   #if compiler(>=5.3) && $Sendable
-  public func registerFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, openInPlace: Swift.Bool = false, loadHandler: @escaping @Sendable (@escaping (Foundation.URL?, Swift.Bool, Swift.Error?) -> Swift.Void) -> Foundation.Progress?)
+  public func registerFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, openInPlace: Swift.Bool = false, loadHandler: @escaping @Sendable (@escaping (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
   #endif
   #if compiler(>=5.3) && $Sendable
-  public func loadDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, completionHandler: @escaping @Sendable (Foundation.Data?, Swift.Error?) -> Swift.Void) -> Foundation.Progress
+  public func loadDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, completionHandler: @escaping @Sendable (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
   #endif
   #if compiler(>=5.3) && $Sendable
-  public func loadFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, openInPlace: Swift.Bool = false, completionHandler: @escaping @Sendable (Foundation.URL?, Swift.Bool, Swift.Error?) -> Swift.Void) -> Foundation.Progress
+  public func loadFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, openInPlace: Swift.Bool = false, completionHandler: @escaping @Sendable (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
   #endif
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -560,6 +560,6 @@ extension UniformTypeIdentifiers.UTTagClass : Swift.CustomStringConvertible, Swi
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTTagClass : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }

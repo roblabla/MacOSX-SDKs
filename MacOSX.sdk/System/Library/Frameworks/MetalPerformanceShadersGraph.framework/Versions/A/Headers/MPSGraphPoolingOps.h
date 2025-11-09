@@ -276,8 +276,7 @@ MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
                                              indicesTensor:(MPSGraphTensor *) indices
                                                outputShape:(MPSShape*) outputShape
                                                descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
-                                                     name:(NSString * _Nullable) name;
-MPS_SWIFT_NAME( maxPooling2DGradient(gradient:indices:outputShape:descriptor:name:))
+                                                     name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 /*!
@@ -294,8 +293,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                              indicesTensor:(MPSGraphTensor *) indices
                                          outputShapeTensor:(MPSGraphTensor*) outputShape
                                                descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
-                                                     name:(NSString * _Nullable) name;
-MPS_SWIFT_NAME( maxPooling2DGradient(gradient:indices:outputShape:descriptor:name:))
+                                                     name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 -(MPSGraphTensor *) avgPooling2DWithSourceTensor:(MPSGraphTensor *) source
@@ -351,8 +349,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                                              indicesTensor:(MPSGraphTensor *) indices
                                                outputShape:(MPSShape*) outputShape
                                                descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor
-                                                     name:(NSString * _Nullable) name;
-MPS_SWIFT_NAME( maxPooling4DGradient(gradient:indices:outputShape:descriptor:name:))
+                                                     name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 /*!
@@ -370,8 +367,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                              indicesTensor:(MPSGraphTensor *) indices
                                          outputShapeTensor:(MPSGraphTensor*) outputShape
                                                descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor
-                                                     name:(NSString * _Nullable) name;
-MPS_SWIFT_NAME( maxPooling4DGradient(gradient:indices:outputShape:descriptor:name:))
+                                                     name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 -(MPSGraphTensor *) avgPooling4DWithSourceTensor:(MPSGraphTensor *) source

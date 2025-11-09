@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0F4364DC-4B8A-31A8-AC52-7DFE88A1AA6F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8A3076BE-D776-3F07-B19E-C9A857A859CF
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 614.3.7
+current-version: 615.1.26
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 
@@ -23,6 +16,7 @@ exports:
                        _WDFindNodesScriptSource, _WDFormElementClearScriptFunctionString, 
                        _WDFormElementClearScriptSource, _WDFormSubmitScriptFunctionString, 
                        _WDFormSubmitScriptSource, _WDHTTPContentTypeTextPlain, _WDHTTPContentTypeUTF8EncodedJSON, 
+                       _WDHTTPCookieSameSitePolicyFromString, _WDHTTPCookieSameSitePolicyToString, 
                        _WDLoggingInitializeIfNecessary, _WDNSStringFromCoordinateSystem, 
                        _WDNSStringFromRemoteElementSearchStrategy, _WDOSLogLauncher, 
                        _WDOSLogProtocol, _WDOSLogRouting, _WDOSLogSession, _WDOSLogTestHost, 

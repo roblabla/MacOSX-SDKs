@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2E360D09-374F-35E6-B7B5-2FC7655550AE
-  - target:          x86_64-maccatalyst
-    value:           2E360D09-374F-35E6-B7B5-2FC7655550AE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           52F5539C-5951-3F2C-8249-36777D710BFE
-  - target:          arm64e-maccatalyst
-    value:           52F5539C-5951-3F2C-8249-36777D710BFE
 install-name:    '/usr/lib/swift/libswiftHealthKit_Private.dylib'
-current-version: 3232.2.1
+current-version: 3232.4.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

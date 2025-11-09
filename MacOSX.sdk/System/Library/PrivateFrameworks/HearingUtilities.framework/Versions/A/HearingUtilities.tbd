@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           91654D28-1975-375B-9EF4-D0A24E53AA5D
-  - target:          x86_64-maccatalyst
-    value:           91654D28-1975-375B-9EF4-D0A24E53AA5D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1A8D1053-9B3D-3DC8-9FBA-ECB90DF67FB8
-  - target:          arm64e-maccatalyst
-    value:           1A8D1053-9B3D-3DC8-9FBA-ECB90DF67FB8
 install-name:    '/System/Library/PrivateFrameworks/HearingUtilities.framework/Versions/A/HearingUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -47,9 +34,9 @@ exports:
                        _hearingAidReceivingAudio, _hearingAidStreamAvailable, _hearingAidStreamSelected, 
                        _hearingDeamonShouldBeRunning, _hearingEarFromInputOption, 
                        _hearingInputRouteStringForOption, _hearingLocString, _hearingPropertyDescription, 
-                       _hearingUIShouldBeAvailable, _inputOptionFromHearingEar, _kAXSClearPartialPairingPreference, 
-                       _kAXSCloudHearingAidsPreference, _kAXSCloudHearingDevicesPreference, 
-                       _kAXSHearingAidComplicationPreferredDisplayModePreference, 
+                       _hearingUIShouldBeAvailable, _inputOptionFromHearingEar, _iteratePairedBluetoothDevicesOnQueue, 
+                       _kAXSClearPartialPairingPreference, _kAXSCloudHearingAidsPreference, 
+                       _kAXSCloudHearingDevicesPreference, _kAXSHearingAidComplicationPreferredDisplayModePreference, 
                        _kAXSHearingAidEarIndependencePreference, _kAXSHearingAidMultideviceAudioPreference, 
                        _kAXSHearingAidMultideviceSettingsPreference, _kAXSHearingAidSystemSoundsStreamPreference, 
                        _kAXSHearingAidsCallAudioRoutePreference, _kAXSHearingAidsCloudDenylistPreference, 
@@ -67,11 +54,11 @@ exports:
                        AXHASettings, AXHeardController, AXHearingAidDevice, AXHearingAidDeviceController, 
                        AXHearingAidMode, AXPSAPDevice, AXRemoteHearingAidDevice, 
                        HANanoSettings, HUAccessoryListenerHelper, HUAccessoryManager, 
-                       HUAudioSession, HUComfortSound, HUComfortSoundsAssetManager, 
-                       HUComfortSoundsController, HUComfortSoundsSettings, HUComfortSoundsShuffler, 
-                       HUDeviceController, HUFakeXPCClient, HUHearingAidSettings, 
-                       HUNearbyController, HUNearbyDevice, HUNearbyHearingAidController, 
-                       HUNearbyListenerHelper, HUUtilities ]
+                       HUComfortSound, HUComfortSoundsAssetManager, HUComfortSoundsController, 
+                       HUComfortSoundsSettings, HUComfortSoundsShuffler, HUDeviceController, 
+                       HUFakeXPCClient, HUHearingAidSettings, HUNearbyController, 
+                       HUNearbyDevice, HUNearbyHearingAidController, HUNearbyListenerHelper, 
+                       HUUtilities ]
     objc-ivars:      [ AXFakeHearingAidDevice._leftFakePrograms, AXFakeHearingAidDevice._rightFakePrograms, 
                        AXFakePSAPDevice._leftFakePrograms, AXFakePSAPDevice._rightFakePrograms ]
 ...

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           964F4CD5-F21C-3DC6-971C-C275306B8084
-  - target:          x86_64-maccatalyst
-    value:           964F4CD5-F21C-3DC6-971C-C275306B8084
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           28D756CD-8E8A-3AEC-9D39-FE31A06C0DEB
-  - target:          arm64e-maccatalyst
-    value:           28D756CD-8E8A-3AEC-9D39-FE31A06C0DEB
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:

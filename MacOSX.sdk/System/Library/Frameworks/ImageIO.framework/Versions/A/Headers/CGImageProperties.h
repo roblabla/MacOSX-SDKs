@@ -793,6 +793,12 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGCompressionFilter IMAGEIO_AV
 #define IMAGEIO_PNG_FILTER_PAETH   0x80
 #define IMAGEIO_PNG_ALL_FILTERS (IMAGEIO_PNG_FILTER_NONE | IMAGEIO_PNG_FILTER_SUB | IMAGEIO_PNG_FILTER_UP | IMAGEIO_PNG_FILTER_AVG | IMAGEIO_PNG_FILTER_PAETH)
 
+/*  For EXR files:
+ *  The value (CFNumberRef) specifies the EXR compression method. See AppleEXR.h for possible values.
+ *  Default value if not specified is 'axr_compression_piz'
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyOpenEXRCompression    IMAGEIO_AVAILABLE_STARTING(13.3, 16.3);
+
 /*
  * For PNG files:
  * When writing indexed color PNGs, the data for the transparity chunk 'tRNS' can be passed in with this key.

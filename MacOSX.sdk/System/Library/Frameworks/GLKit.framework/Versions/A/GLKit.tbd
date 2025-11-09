@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C72DD295-196F-3196-8FD3-77D0814F13DA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           15295F88-BD42-3823-998E-7B36C0307285
 install-name:    '/System/Library/Frameworks/GLKit.framework/Versions/A/GLKit'
 current-version: 126
 exports:

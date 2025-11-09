@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DA3900A8-6384-364E-9D3F-9889C4BCA8DA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           757ECE40-1788-39CF-887A-30919F4F0663
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -154,13 +147,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           70531113-A38F-3B34-8E03-20A0FCB076D7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8716B3B0-6111-3E6F-9E1A-C708F5688D1F
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

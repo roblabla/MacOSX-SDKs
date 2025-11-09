@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3076F37D-F29E-38AE-B2F5-B3804FAAA33F
-  - target:          x86_64-maccatalyst
-    value:           3076F37D-F29E-38AE-B2F5-B3804FAAA33F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CBC600CD-4913-3ECF-9BA9-080E5A1FAFE2
-  - target:          arm64e-maccatalyst
-    value:           CBC600CD-4913-3ECF-9BA9-080E5A1FAFE2
 install-name:    '/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

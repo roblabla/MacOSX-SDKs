@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           081FE3AC-3751-3B5B-AF35-C745B24C4B95
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8B429D04-A2BC-380D-AF36-B887303185C0
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

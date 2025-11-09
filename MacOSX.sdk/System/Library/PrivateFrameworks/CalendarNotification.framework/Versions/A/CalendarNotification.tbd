@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FB60752C-117F-3A95-86C9-747FC3CB29B3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           66A8F105-36B0-3A1E-A51E-286EF0AD2AF8
 install-name:    '/System/Library/PrivateFrameworks/CalendarNotification.framework/Versions/A/CalendarNotification'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

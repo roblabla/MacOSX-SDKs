@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4ECCB41A-A2E1-36D4-BB73-D9F8F04B5A7A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2F23C11E-3AFA-3D5E-B351-F537440392B8
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 216.8
+current-version: 218.7
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -303,14 +296,6 @@ exports:
                        '_$s13TranslationUI13NetworkStatusOMa', '_$s13TranslationUI13NetworkStatusOMn', 
                        '_$s13TranslationUI13NetworkStatusON', '_$s13TranslationUI13NetworkStatusOSHAAMc', 
                        '_$s13TranslationUI13NetworkStatusOSQAAMc', '_$s13TranslationUI13NetworkStatusOSYAAMc', 
-                       '_$s13TranslationUI16ConfigurationKeyO22EnableHybridEndpointeryA2CmFWC', 
-                       '_$s13TranslationUI16ConfigurationKeyO6stringSSvg', '_$s13TranslationUI16ConfigurationKeyO6stringSSvpMV', 
-                       '_$s13TranslationUI16ConfigurationKeyO8rawValueACSgSS_tcfC', 
-                       '_$s13TranslationUI16ConfigurationKeyO8rawValueSSvg', '_$s13TranslationUI16ConfigurationKeyO8rawValueSSvpMV', 
-                       '_$s13TranslationUI16ConfigurationKeyOMa', '_$s13TranslationUI16ConfigurationKeyOMn', 
-                       '_$s13TranslationUI16ConfigurationKeyON', '_$s13TranslationUI16ConfigurationKeyOSEAAMc', 
-                       '_$s13TranslationUI16ConfigurationKeyOSHAAMc', '_$s13TranslationUI16ConfigurationKeyOSQAAMc', 
-                       '_$s13TranslationUI16ConfigurationKeyOSYAAMc', '_$s13TranslationUI16ConfigurationKeyOSeAAMc', 
                        '_$s13TranslationUI16LanguagePairPathO11descriptionSSvg', 
                        '_$s13TranslationUI16LanguagePairPathO11descriptionSSvpMV', 
                        '_$s13TranslationUI16LanguagePairPathO7isReadySbvg', '_$s13TranslationUI16LanguagePairPathO7isReadySbvpMV', 
@@ -456,11 +441,7 @@ exports:
                        '_$s13TranslationUI20BottomPanelContainerV7content5panelACyxq_Gxyc_q_yctcfC', 
                        '_$s13TranslationUI20BottomPanelContainerVMa', '_$s13TranslationUI20BottomPanelContainerVMn', 
                        '_$s13TranslationUI20BottomPanelContainerVyxq_G05SwiftB04ViewAAMc', 
-                       '_$s13TranslationUI20ConfigurationServiceO5fetch10completionyys6ResultOySDyAA0C3KeyOypGs5Error_pGc_tFZ', 
-                       '_$s13TranslationUI20ConfigurationServiceO9fetchSyncs6ResultOySDyAA0C3KeyOypGs5Error_pGyFZ', 
-                       '_$s13TranslationUI20ConfigurationServiceO9isEnabled_19forLocaleIdentifierSbAA0C3KeyO_SStFZ', 
-                       '_$s13TranslationUI20ConfigurationServiceOMa', '_$s13TranslationUI20ConfigurationServiceOMn', 
-                       '_$s13TranslationUI20ConfigurationServiceON', '_$s13TranslationUI20LanguagesModelBridgeC11descriptionSSvg', 
+                       '_$s13TranslationUI20LanguagesModelBridgeC11descriptionSSvg', 
                        '_$s13TranslationUI20LanguagesModelBridgeC11displayNameSSvg', 
                        '_$s13TranslationUI20LanguagesModelBridgeC11displayNameSSvpMV', 
                        '_$s13TranslationUI20LanguagesModelBridgeC1loiySbAC_ACtFZ', 

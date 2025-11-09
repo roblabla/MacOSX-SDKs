@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3F9A208D-9C6E-3BE0-90E0-E769A7B7C31C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AFA90F2F-2BE5-31DE-8B67-EEC1B383805D
 install-name:    '/System/Library/PrivateFrameworks/HTTPServer.framework/Versions/A/HTTPServer'
 current-version: 39
 exports:

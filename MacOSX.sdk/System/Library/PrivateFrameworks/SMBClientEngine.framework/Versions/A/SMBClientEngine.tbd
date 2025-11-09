@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AA498FA0-941E-3179-A401-92509156F2BF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C4F8316B-62B0-3ED1-B37A-C3C3126C84A0
 install-name:    '/System/Library/PrivateFrameworks/SMBClientEngine.framework/Versions/A/SMBClientEngine'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -2,23 +2,13 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F6AFC1A3-2458-3F37-912D-C43806DC0068
-  - target:          x86_64-maccatalyst
-    value:           F6AFC1A3-2458-3F37-912D-C43806DC0068
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           93FC7FC6-9391-394F-8E3A-70295FC16BCD
-  - target:          arm64e-maccatalyst
-    value:           93FC7FC6-9391-394F-8E3A-70295FC16BCD
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTS17AwdMetadataLoader ]
+    weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTIN5boost6system6detail12std_categoryE, 
+                       __ZTIN5boost6system6detail21system_error_categoryE, __ZTIN5boost6system6detail22generic_error_categoryE, 
+                       __ZTS17AwdMetadataLoader, __ZTSN5boost6system6detail12std_categoryE, 
+                       __ZTSN5boost6system6detail21system_error_categoryE, __ZTSN5boost6system6detail22generic_error_categoryE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
@@ -81,9 +71,26 @@ exports:
                        __ZN3awd8protobuf15NumberConverterILNS_7reflect4TypeE8EE6decodeEy, 
                        __ZN3awd8protobuf15NumberConverterILNS_7reflect4TypeE8EE6encodeEi, 
                        __ZN3awd8protobuf9skipFieldERN20wireless_diagnostics6google8protobuf2io16CodedInputStreamENS_7reflect8WireTypeE, 
-                       __ZNK14MetadataHandle10getMessageEv, __ZNK14MetadataHandle7getEnumEv, 
-                       __ZNK14MetadataHandle8getFieldEv, __ZNK14MetadataHelper14getBuiltinTypeE14MetadataHandle, 
-                       __ZNK14MetadataHelper18descendIntoMessageE14MetadataHandle, 
+                       __ZN5boost10filesystem16filesystem_error14get_empty_pathEv, 
+                       __ZN5boost10filesystem16filesystem_errorC1EPKcNS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1EPKcRKNS0_4pathENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1EPKcRKNS0_4pathES6_NS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS0_4pathENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS0_4pathESD_NS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC1ERKS1_, __ZN5boost10filesystem16filesystem_errorC2EPKcNS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2EPKcRKNS0_4pathENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2EPKcRKNS0_4pathES6_NS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS0_4pathENS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS0_4pathESD_NS_6system10error_codeE, 
+                       __ZN5boost10filesystem16filesystem_errorC2ERKS1_, __ZN5boost10filesystem16filesystem_errorD0Ev, 
+                       __ZN5boost10filesystem16filesystem_errorD1Ev, __ZN5boost10filesystem16filesystem_errorD2Ev, 
+                       __ZN5boost10filesystem16filesystem_erroraSERKS1_, __ZN5boost10filesystem6detail18utf8_codecvt_facet24get_cont_octet_out_countEw, 
+                       __ZN5boost10filesystem6detail18utf8_codecvt_facetD0Ev, __ZN5boost10filesystem6detail18utf8_codecvt_facetD1Ev, 
+                       __ZN5boost10filesystem6detail18utf8_codecvt_facetD2Ev, __ZNK14MetadataHandle10getMessageEv, 
+                       __ZNK14MetadataHandle7getEnumEv, __ZNK14MetadataHandle8getFieldEv, 
+                       __ZNK14MetadataHelper14getBuiltinTypeE14MetadataHandle, __ZNK14MetadataHelper18descendIntoMessageE14MetadataHandle, 
                        __ZNK14MetadataHelper23resolveSubfieldInHandleE14MetadataHandlej, 
                        __ZNK14MetadataHelper8getFieldE14MetadataHandle, __ZNK17AwdMetadataLoader14getMetricIndexEv, 
                        __ZNK17AwdMetadataLoader22getComponentsAvailableEv, __ZNK24MetricFileMetadataHelper11getSubfieldE14MetadataHandlej, 
@@ -94,8 +101,12 @@ exports:
                        __ZNK24MetricFileMetadataHelper26createMetadataForComponentEj, 
                        __ZNK24MetricFileMetadataHelper29resolveSubfieldInMetricHandleE14MetadataHandlej, 
                        __ZNK26DeviceConfigMetadataHelper15getSubfieldTypeE14MetadataHandlej, 
+                       __ZNK5boost10filesystem16filesystem_error4whatEv, __ZNK5boost10filesystem6detail18utf8_codecvt_facet9do_lengthER11__mbstate_tPKcS6_m, 
                        __ZTI25AwdMetadataLoaderDelegate, __ZTI32BestChoiceMetadataLoaderDelegate, 
                        __ZTS25AwdMetadataLoaderDelegate, __ZTS32BestChoiceMetadataLoaderDelegate, 
                        __ZTV25AwdMetadataLoaderDelegate, __ZTV32BestChoiceMetadataLoaderDelegate, 
-                       _createDescriptionForMetriclogFile, _setupAWDConnection, _teardownAWDConnection ]
+                       __ZTVN5boost10filesystem16filesystem_errorE, _createDescriptionForMetriclogFile, 
+                       _setupAWDConnection, _teardownAWDConnection ]
+    weak-symbols:    [ __ZN5boost6system6detail17system_cat_holderIvE8instanceE, 
+                       __ZN5boost6system6detail18generic_cat_holderIvE8instanceE ]
 ...

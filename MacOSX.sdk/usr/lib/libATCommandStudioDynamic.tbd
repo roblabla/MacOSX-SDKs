@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           18E2E9BD-E332-3517-BDC4-0FDD09278B8B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           39F5BC49-8BAE-35C9-B1AA-BD4C276D7DF5
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]

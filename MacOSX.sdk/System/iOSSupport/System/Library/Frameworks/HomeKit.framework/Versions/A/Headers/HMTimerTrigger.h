@@ -30,14 +30,10 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                 HMErrorCodeDateMustBeOnSpecifiedBoundaries will be returned when adding the trigger
  *                 to a home if the fireDate includes a seconds value other than 0.
  *
- * @param timeZone The time zone of the initial fire date. A value of nil indicates default timezone.
- *
  * @param recurrence The recurrence interval to fire the trigger. A value of nil indicates that the
  *                   trigger is non-repeating. The minimum reccurence interval is 5 minutes, maximum
  *                   recurrence interval is 5 weeks and the recurrence interval must be specified in
  *                   multiples of whole minutes.
- *
- * @param recurrenceCalendar The calendar corresponding to a recurring timer trigger. May be nil.
  *
  * @discussion Validity checks are performed when the trigger is added to the home and the NSError in
  *             the completion block for addTrigger: method indicates the reason for the failure:
@@ -49,9 +45,13 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  */
 - (instancetype)initWithName:(NSString *)name
                     fireDate:(NSDate *)fireDate
+                  recurrence:(nullable NSDateComponents *)recurrence API_AVAILABLE(ios(16.4), watchos(9.4), tvos(16.4), macCatalyst(16.4))API_UNAVAILABLE(macos);
+
+- (instancetype)initWithName:(NSString *)name
+                    fireDate:(NSDate *)fireDate
                     timeZone:(nullable NSTimeZone *)timeZone
                   recurrence:(nullable NSDateComponents *)recurrence
-          recurrenceCalendar:(nullable NSCalendar *)recurrenceCalendar NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(watchos, tvos);
+          recurrenceCalendar:(nullable NSCalendar *)recurrenceCalendar API_DEPRECATED_WITH_REPLACEMENT("-initWithName:fireDate:recurrence:", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
 
 /*!
  * @brief Specifies when, in an absolute time, the trigger should fire the first time.
@@ -64,14 +64,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  */
 @property (readonly, copy, nonatomic) NSDate *fireDate;
 
-/*!
- * @brief Set the time zone to interpret the fire date in. 
- * 
- * @discussion If this value is nil and the user switches time zones, the time the trigger is
- *             fired will be adjusted to account for the time zone change. If this value is
- *             non-nil, the trigger will fire at the specified time in the specific time zone.
- */
-@property (readonly, copy, nonatomic, nullable) NSTimeZone *timeZone;
+@property (readonly, copy, nonatomic, nullable) NSTimeZone *timeZone API_DEPRECATED("Use HMEventTrigger with HMCalendarEvent for triggers based on a time-zone-relative time of day", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
 
 /*!
  * @brief The date components that specify how a trigger is to be repeated. 
@@ -88,10 +81,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  */
 @property (readonly, copy, nonatomic, nullable) NSDateComponents *recurrence;
 
-/*!
-  * @brief The calendar corresponding to a recurring timer trigger.
-  */
-@property (readonly, copy, nonatomic, nullable) NSCalendar *recurrenceCalendar;
+@property (readonly, copy, nonatomic, nullable) NSCalendar *recurrenceCalendar API_DEPRECATED("No longer supported", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
 
 /*!
  * @brief This method is used to change the fire date of a timer trigger.
@@ -105,17 +95,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  */
 - (void)updateFireDate:(NSDate *)fireDate completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
-/*!
- * @brief This method is used to change the time zone of the fire date of a timer trigger.
- *
- * @param timeZone New time zone for the trigger. Passing a nil indicates that the default
- *                 (system) timezone is used.
- *
- * @param completion Block that is invoked once the request is processed.
- *                   The NSError provides more information on the status of the request,
- *                   error will be nil on success.
- */
-- (void)updateTimeZone:(nullable NSTimeZone *)timeZone completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateTimeZone:(nullable NSTimeZone *)timeZone completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use HMEventTrigger with HMCalendarEvent for triggers based on a time-zone-relative time of day", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(12.0, 16.4), watchos(5.0, 9.4));
 
 /*!
  * @brief This method is used to change the recurrence interval for a timer trigger.

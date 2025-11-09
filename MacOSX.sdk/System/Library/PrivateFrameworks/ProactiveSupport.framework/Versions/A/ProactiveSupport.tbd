@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EEF7A0BD-D34B-3217-8CAA-019829860F7A
-  - target:          x86_64-maccatalyst
-    value:           EEF7A0BD-D34B-3217-8CAA-019829860F7A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           691B3524-B09A-3327-A2B1-C6B986DA5CF3
-  - target:          arm64e-maccatalyst
-    value:           691B3524-B09A-3327-A2B1-C6B986DA5CF3
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 365.3
+current-version: 365.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -1,24 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2B3126E0-9548-3610-8AC7-520F0AD07977
-  - target:          x86_64-maccatalyst
-    value:           2B3126E0-9548-3610-8AC7-520F0AD07977
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CCA3B489-1298-3739-B547-38DFEE5FA508
-  - target:          arm64e-maccatalyst
-    value:           CCA3B489-1298-3739-B547-38DFEE5FA508
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/libatos.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AddDsymSearchPath, _CreateSessionWithPathAndArchitecture, 
                        _CreateSessionWithPathArchitectureAndUUID, _CreateSessionWithSignatureBytes, 
                        _CreateSessionWithSignaturePath, _DestroySymbolicationResult, 

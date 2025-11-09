@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9D6D69F7-0935-39BE-ABA6-A154DF15EA62
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ED8B8A15-697F-35AD-A70A-90D9D2F50D58
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusKit.framework/Versions/A/OpusKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

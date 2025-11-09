@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8B7051C3-06A9-3235-9A0C-D70162224E0E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5742FE1B-56F0-3DB3-B7A8-5CD961613F3C
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -130,9 +123,6 @@ exports:
                        __ZTIN4llvm6object13ELFObjectFileINS0_7ELFTypeILNS_7support10endiannessE1ELm4ELb0EEEEE, 
                        __ZTIN4llvm6object13ELFObjectFileINS0_7ELFTypeILNS_7support10endiannessE1ELm8ELb1EEEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                       __ZTINSt3__113__vector_baseIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
-                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__121__basic_string_commonILb1EEE, 
                        __ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTINSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
                        __ZTSN4llvm10FoldingSetINS_12SDVTListNodeEEE, __ZTSN4llvm10FoldingSetINS_13AttributeImplEEE, 
@@ -254,9 +244,6 @@ exports:
                        __ZTSN4llvm6object13ELFObjectFileINS0_7ELFTypeILNS_7support10endiannessE1ELm4ELb0EEEEE, 
                        __ZTSN4llvm6object13ELFObjectFileINS0_7ELFTypeILNS_7support10endiannessE1ELm8ELb1EEEEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                       __ZTSNSt3__113__vector_baseIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE, 
-                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
                        __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -7668,10 +7655,7 @@ exports:
                        _getNumBytesForUTF8, _getPointerToNamedFunction, _isLegalUTF8Sequence, 
                        _isLegalUTF8String, _llvm_regcomp, _llvm_regerror, _llvm_regexec, 
                        _llvm_regfree, _llvm_strlcpy, _x86DisassemblerDebug, _x86DisassemblerGetInstrName ]
-    weak-symbols:    [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
+    weak-symbols:    [ __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE11removeBlockEPS1_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13changeLoopForEPS1_PS2_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13releaseMemoryEv, 
@@ -8080,4 +8064,8 @@ exports:
                        __ZTVN4llvm2cl12basic_parserIyEE, __ZTVN4llvm2cl3optINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEELb0ENS0_6parserIS8_EEEE, 
                        __ZTVN4llvm2cl3optIbLb0ENS0_6parserIbEEEE, __ZTVN4llvm2cl3optIcLb0ENS0_6parserIcEEEE, 
                        __ZTVN4llvm2cl3optIiLb0ENS0_6parserIiEEEE, __ZTVN4llvm2cl3optIjLb0ENS0_6parserIjEEEE ]
+  - targets:         [ arm64-macos, arm64e-macos ]
+    weak-symbols:    [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj ]
 ...

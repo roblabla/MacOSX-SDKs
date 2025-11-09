@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A77B0332-02E4-379E-856E-5F1B05B4AA66
-  - target:          x86_64-maccatalyst
-    value:           A77B0332-02E4-379E-856E-5F1B05B4AA66
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9587691E-9800-3A9A-A2A0-75C5037A00B0
-  - target:          arm64e-maccatalyst
-    value:           9587691E-9800-3A9A-A2A0-75C5037A00B0
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

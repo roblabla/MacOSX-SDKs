@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FBC970E1-C2BA-3D05-96A6-0C2858747FA5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C5EAA78F-243D-338F-B542-0D873CAA3DAD
 install-name:    '/System/Library/PrivateFrameworks/FinanceDaemon.framework/Versions/A/FinanceDaemon'
 swift-abi-version: 7
 exports:
@@ -55,6 +48,7 @@ exports:
                        '_$s13FinanceDaemon10RawAddressVN', '_$s13FinanceDaemon10RawAddressVSEAAMc', 
                        '_$s13FinanceDaemon10RawAddressVSQAAMc', '_$s13FinanceDaemon10RawAddressVSeAAMc', 
                        '_$s13FinanceDaemon10RawAddressVyACSo08CNPostalD0CcfC', '_$s13FinanceDaemon16BundleIdentifierV10financeKitACvgZ', 
+                       '_$s13FinanceDaemon16BundleIdentifierV15passbookWidgetsACvgZ', 
                        '_$s13FinanceDaemon16BundleIdentifierV6walletACvgZ', '_$s13FinanceDaemon16BundleIdentifierV8rawValueACSS_tcfC', 
                        '_$s13FinanceDaemon16BundleIdentifierV8rawValueSSvg', '_$s13FinanceDaemon16BundleIdentifierV8rawValueSSvpMV', 
                        '_$s13FinanceDaemon16BundleIdentifierVMa', '_$s13FinanceDaemon16BundleIdentifierVMn', 
@@ -63,7 +57,9 @@ exports:
                        '_$s13FinanceDaemon16DisplayUtilitiesO13scaleSuffixesSaySSGvgZ', 
                        '_$s13FinanceDaemon16DisplayUtilitiesO15mainScreenScaleSivgZ', 
                        '_$s13FinanceDaemon16DisplayUtilitiesOMa', '_$s13FinanceDaemon16DisplayUtilitiesOMn', 
-                       '_$s13FinanceDaemon16DisplayUtilitiesON', '_$s13FinanceDaemon23WalletMessagingProviderC04makeE0ACyFZ', 
+                       '_$s13FinanceDaemon16DisplayUtilitiesON', '_$s13FinanceDaemon16OrderRefreshTaskV5fqoid22orderWebServiceBaseURL19authenticationToken17lastModifiedValue17analyticsProviderAC0A3Kit014FullyQualifiedC10IdentifierV_10Foundation0K0VS2SSgAI22CoreAnalyticsProviding_ptcfC', 
+                       '_$s13FinanceDaemon16OrderRefreshTaskVMa', '_$s13FinanceDaemon16OrderRefreshTaskVMn', 
+                       '_$s13FinanceDaemon16OrderRefreshTaskVN', '_$s13FinanceDaemon23WalletMessagingProviderC04makeE0ACyFZ', 
                        '_$s13FinanceDaemon23WalletMessagingProviderC15processMessagesyyYaF', 
                        '_$s13FinanceDaemon23WalletMessagingProviderC15processMessagesyyYaFTu', 
                        '_$s13FinanceDaemon23WalletMessagingProviderC22applicationMessageSink_016createContentForG4WithSo013PKApplicationgJ0CSgSo0mgH0_p_So0mG12RegistrationCtF', 
@@ -84,10 +80,11 @@ exports:
                        '_$s13FinanceDaemon26AccountNotificationHandlerCMa', '_$s13FinanceDaemon26AccountNotificationHandlerCMn', 
                        '_$s13FinanceDaemon26AccountNotificationHandlerCMo', '_$s13FinanceDaemon26AccountNotificationHandlerCMu', 
                        '_$s13FinanceDaemon26AccountNotificationHandlerCN', '_$s13FinanceDaemon26AccountNotificationHandlerCfD', 
-                       '_$s2os6LoggerV13FinanceDaemonE12transactionsACvgZ', '_$s2os6LoggerV13FinanceDaemonE13notificationsACvgZ', 
-                       '_$s2os6LoggerV13FinanceDaemonE4pushACvgZ', '_$s2os6LoggerV13FinanceDaemonE5cloudACvgZ', 
-                       '_$s2os6LoggerV13FinanceDaemonE5storeACvgZ', '_$s2os6LoggerV13FinanceDaemonE6daemonACvgZ', 
-                       '_$s2os6LoggerV13FinanceDaemonE6ordersACvgZ', '_$s2os6LoggerV13FinanceDaemonE7displayACvgZ', 
+                       '_$s2os6LoggerV13FinanceDaemonE12financeStoreACvgZ', '_$s2os6LoggerV13FinanceDaemonE12transactionsACvgZ', 
+                       '_$s2os6LoggerV13FinanceDaemonE13notificationsACvgZ', '_$s2os6LoggerV13FinanceDaemonE4pushACvgZ', 
+                       '_$s2os6LoggerV13FinanceDaemonE5cloudACvgZ', '_$s2os6LoggerV13FinanceDaemonE5storeACvgZ', 
+                       '_$s2os6LoggerV13FinanceDaemonE6daemonACvgZ', '_$s2os6LoggerV13FinanceDaemonE6ordersACvgZ', 
+                       '_$s2os6LoggerV13FinanceDaemonE6widgetACvgZ', '_$s2os6LoggerV13FinanceDaemonE7displayACvgZ', 
                        '_$s2os6LoggerV13FinanceDaemonE8accountsACvgZ', '_$s2os6LoggerV13FinanceDaemonE8activityACvgZ', 
                        '_$sSo22CNMutablePostalAddressC13FinanceDaemonE03rawC0AbC03RawC0V_tcfC', 
                        _FinanceDaemonVersionNumber, _FinanceDaemonVersionString ]

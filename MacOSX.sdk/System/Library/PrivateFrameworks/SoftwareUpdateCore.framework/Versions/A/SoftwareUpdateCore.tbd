@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           60EE280C-4350-3A8F-81A9-418E945D8FE1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BE0937D3-C639-3AED-B662-BCAE9A301DC5
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCore.framework/Versions/A/SoftwareUpdateCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -39,7 +32,11 @@ exports:
                        _kSUAssetPreferencesIconFileNameKey, _kSUAssetProductTypeKey, 
                        _kSUAssetPromoteAlternateUpdateKey, _kSUAssetRSEPDigestKey, 
                        _kSUAssetRSEPTBMDigestsKey, _kSUAssetRampKey, _kSUAssetRampingScanTypeKey, 
-                       _kSUAssetRelativePathKey, _kSUAssetReleaseDateKey, _kSUAssetReleaseNotesFileNameKey, 
+                       _kSUAssetRecommendedUpdate, _kSUAssetRecommendedUpdateAlertBodyString, 
+                       _kSUAssetRecommendedUpdateEnabled, _kSUAssetRecommendedUpdateMaxOSVersion, 
+                       _kSUAssetRecommendedUpdateMinOSVersion, _kSUAssetRecommendedUpdateNotificationFrequencyDays, 
+                       _kSUAssetRecommendedUpdateTitleString, _kSUAssetRelativePathKey, 
+                       _kSUAssetReleaseDateKey, _kSUAssetReleaseNotesFileNameKey, 
                        _kSUAssetReleaseNotesKey, _kSUAssetReleaseNotesSummaryFileNameKey, 
                        _kSUAssetReleaseNotesSummaryKey, _kSUAssetRequireInstallAssistantUpdateKey, 
                        _kSUAssetRestoreVersionKey, _kSUAssetRollbackKey, _kSUAssetSEPDigestKey, 

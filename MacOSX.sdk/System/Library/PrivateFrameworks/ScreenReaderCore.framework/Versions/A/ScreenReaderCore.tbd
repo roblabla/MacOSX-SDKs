@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1723E371-C296-3DB1-B231-8A33CA923588
-  - target:          x86_64-maccatalyst
-    value:           1723E371-C296-3DB1-B231-8A33CA923588
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EA39F453-E3B6-30A4-B5FA-8A8BA4325467
-  - target:          arm64e-maccatalyst
-    value:           EA39F453-E3B6-30A4-B5FA-8A8BA4325467
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:
@@ -25,23 +12,23 @@ exports:
                        _SCRCDebugPrint, _SCRCDebugPrintToFile, _SCRCDoubleAlmostEqual, 
                        _SCRCEnableProcessKeepAlive, _SCRCFileHandleForTempFile, _SCRCFloatAlmostEqual, 
                        _SCRCFormatFloat, _SCRCFormatFloatWithPercentage, _SCRCFormatInteger, 
-                       _SCRCFormatNumber, _SCRCFormatUnsignedInteger, _SCRCGestureStateToString, 
-                       _SCRCIsConsoleSessionEnabled, _SCRCIsInt32BitSafe, _SCRCIsUInt32BitSafe, 
-                       _SCRCLinkRelationshipStringForType, _SCRCLogInitializeWithKeys, 
-                       _SCRCLogMaskAppleScript, _SCRCLogMaskBraille, _SCRCLogMaskBrailleAnnounce, 
-                       _SCRCLogMaskBrailleVariant, _SCRCLogMaskBusySignal, _SCRCLogMaskConfiguration, 
-                       _SCRCLogMaskElement, _SCRCLogMaskElementHistory, _SCRCLogMaskElementRestoration, 
-                       _SCRCLogMaskError, _SCRCLogMaskEvent, _SCRCLogMaskFindText, 
-                       _SCRCLogMaskForKey, _SCRCLogMaskGuide, _SCRCLogMaskHotSpot, 
-                       _SCRCLogMaskInvalidElements, _SCRCLogMaskKeyEcho, _SCRCLogMaskKeyNames, 
-                       _SCRCLogMaskKeyboard, _SCRCLogMaskKeyboardFocus, _SCRCLogMaskLocalization, 
-                       _SCRCLogMaskMenu, _SCRCLogMaskObserverDispatches, _SCRCLogMaskObserverRegistrations, 
-                       _SCRCLogMaskOutput, _SCRCLogMaskOutputCompact, _SCRCLogMaskOutputCompactWithBraille, 
-                       _SCRCLogMaskOutputRequest, _SCRCLogMaskSpeechArbitration, 
-                       _SCRCLogMaskSpeechMessages, _SCRCLogMaskSpeechSynthesisDaemonStatus, 
-                       _SCRCLogMaskTextAttributesManager, _SCRCLogMaskTextDisplay, 
-                       _SCRCLogMaskThread, _SCRCLogMaskUIElement, _SCRCLogMaskUIElementErrors, 
-                       _SCRCLogMaskUserDefaults, _SCRCLogMaskUserDefaultsSynching, 
+                       _SCRCFormatNumber, _SCRCFormatUnsignedInteger, _SCRCFormattedString, 
+                       _SCRCGestureStateToString, _SCRCIsConsoleSessionEnabled, _SCRCIsInt32BitSafe, 
+                       _SCRCIsUInt32BitSafe, _SCRCLinkRelationshipStringForType, 
+                       _SCRCLogInitializeWithKeys, _SCRCLogMaskAppleScript, _SCRCLogMaskBraille, 
+                       _SCRCLogMaskBrailleAnnounce, _SCRCLogMaskBrailleVariant, _SCRCLogMaskBusySignal, 
+                       _SCRCLogMaskConfiguration, _SCRCLogMaskElement, _SCRCLogMaskElementHistory, 
+                       _SCRCLogMaskElementRestoration, _SCRCLogMaskError, _SCRCLogMaskEvent, 
+                       _SCRCLogMaskFindText, _SCRCLogMaskForKey, _SCRCLogMaskGuide, 
+                       _SCRCLogMaskHotSpot, _SCRCLogMaskInvalidElements, _SCRCLogMaskKeyEcho, 
+                       _SCRCLogMaskKeyNames, _SCRCLogMaskKeyboard, _SCRCLogMaskKeyboardFocus, 
+                       _SCRCLogMaskLocalization, _SCRCLogMaskMenu, _SCRCLogMaskObserverDispatches, 
+                       _SCRCLogMaskObserverRegistrations, _SCRCLogMaskOutput, _SCRCLogMaskOutputCompact, 
+                       _SCRCLogMaskOutputCompactWithBraille, _SCRCLogMaskOutputRequest, 
+                       _SCRCLogMaskSpeechArbitration, _SCRCLogMaskSpeechMessages, 
+                       _SCRCLogMaskSpeechSynthesisDaemonStatus, _SCRCLogMaskTextAttributesManager, 
+                       _SCRCLogMaskTextDisplay, _SCRCLogMaskThread, _SCRCLogMaskUIElement, 
+                       _SCRCLogMaskUIElementErrors, _SCRCLogMaskUserDefaults, _SCRCLogMaskUserDefaultsSynching, 
                        _SCRCLogMaskVoiceOverCursor, _SCRCLogMaskWebGroups, _SCRCLogMaskWebText, 
                        _SCRCLogMaskWindow, _SCRCLogMaskWorkspace, _SCRCMathClearAverage, 
                        _SCRCMathGetAverage, _SCRCMathGetDistanceBetweenPoints, _SCRCMathGetVectorAndDistanceForPoints, 
@@ -114,24 +101,25 @@ exports:
                        _kSCRCUserDefaultsAudioDuckingRampOutDelay, _kSCRCUserDefaultsAutoDrillContainersEnabled, 
                        _kSCRCUserDefaultsAutoKeyboardSyncInTables, _kSCRCUserDefaultsAutoKeyboardSyncInText, 
                        _kSCRCUserDefaultsAutoKeyboardSyncInUI, _kSCRCUserDefaultsAutomaticallySpeakWebPage, 
-                       _kSCRCUserDefaultsAutomaticallySpeakWebPageSummary, _kSCRCUserDefaultsBrailleAlertTimeoutInSeconds, 
+                       _kSCRCUserDefaultsAutomaticallySpeakWebPageSummary, _kSCRCUserDefaultsBraille2DIntensity, 
+                       _kSCRCUserDefaultsBraille2DInvert, _kSCRCUserDefaultsBrailleAlertTimeoutInSeconds, 
                        _kSCRCUserDefaultsBrailleAutoAdvanceDuration, _kSCRCUserDefaultsBrailleAutomaticTranslationEnabled, 
                        _kSCRCUserDefaultsBrailleBluetoothDisplay, _kSCRCUserDefaultsBrailleContractionMode, 
                        _kSCRCUserDefaultsBrailleDisplayExtendedMainStatus, _kSCRCUserDefaultsBrailleDisplayExtendedTextStatus, 
                        _kSCRCUserDefaultsBrailleDisplayInputAccessMode, _kSCRCUserDefaultsBrailleDisplayInputIdentifiers, 
                        _kSCRCUserDefaultsBrailleDisplayMainStatus, _kSCRCUserDefaultsBrailleDisplayTextStatus, 
-                       _kSCRCUserDefaultsBrailleEightDotMode, _kSCRCUserDefaultsBrailleFollowSpeedVerbosity, 
-                       _kSCRCUserDefaultsBrailleHasDisplayHistory, _kSCRCUserDefaultsBrailleInputMode, 
-                       _kSCRCUserDefaultsBrailleKeyDebounceTimeout, _kSCRCUserDefaultsBrailleMasterStatusCellIndex, 
-                       _kSCRCUserDefaultsBrailleOutputMode, _kSCRCUserDefaultsBraillePanWithTextCursorEnabled, 
-                       _kSCRCUserDefaultsBrailleShowDotsSevenAndEight, _kSCRCUserDefaultsBrailleTableGuideItems, 
-                       _kSCRCUserDefaultsBrailleTableIdentifier, _kSCRCUserDefaultsBrailleTurnPageWhenPanning, 
-                       _kSCRCUserDefaultsBrailleVirtualStatusAlignment, _kSCRCUserDefaultsBrailleWordWrapEnabled, 
-                       _kSCRCUserDefaultsCacheAudiographDisplayTemporary, _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, 
-                       _kSCRCUserDefaultsCacheElementDictionaryTemporary, _kSCRCUserDefaultsCachePortablePreferencesDictionary, 
-                       _kSCRCUserDefaultsCacheScreenCurtainState, _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryContent_PitchAsPercent, _kSCRCUserDefaultsCategoryContent_RateAsPercent, 
-                       _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsBrailleDisplayTextStyle, _kSCRCUserDefaultsBrailleEightDotMode, 
+                       _kSCRCUserDefaultsBrailleFollowSpeedVerbosity, _kSCRCUserDefaultsBrailleHasDisplayHistory, 
+                       _kSCRCUserDefaultsBrailleInputMode, _kSCRCUserDefaultsBrailleKeyDebounceTimeout, 
+                       _kSCRCUserDefaultsBrailleMasterStatusCellIndex, _kSCRCUserDefaultsBrailleOutputMode, 
+                       _kSCRCUserDefaultsBraillePanWithTextCursorEnabled, _kSCRCUserDefaultsBrailleShowDotsSevenAndEight, 
+                       _kSCRCUserDefaultsBrailleTableGuideItems, _kSCRCUserDefaultsBrailleTableIdentifier, 
+                       _kSCRCUserDefaultsBrailleTurnPageWhenPanning, _kSCRCUserDefaultsBrailleVirtualStatusAlignment, 
+                       _kSCRCUserDefaultsBrailleWordWrapEnabled, _kSCRCUserDefaultsCacheAudiographDisplayTemporary, 
+                       _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, _kSCRCUserDefaultsCacheElementDictionaryTemporary, 
+                       _kSCRCUserDefaultsCachePortablePreferencesDictionary, _kSCRCUserDefaultsCacheScreenCurtainState, 
+                       _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, _kSCRCUserDefaultsCategoryContent_PitchAsPercent, 
+                       _kSCRCUserDefaultsCategoryContent_RateAsPercent, _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryContent_VoiceIdentifier, _kSCRCUserDefaultsCategoryContent_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryContent_VolumeAsPercent, _kSCRCUserDefaultsCategoryElementType_CategoryIsEnabled, 
                        _kSCRCUserDefaultsCategoryElementType_PitchAsPercent, _kSCRCUserDefaultsCategoryElementType_RateAsPercent, 

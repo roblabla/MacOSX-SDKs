@@ -5,16 +5,17 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <CoreLocation/CLLocation.h>
 #import <Foundation/Foundation.h>
 
 #import <CloudKit/CKAsset.h>
 #import <CloudKit/CKDefines.h>
 #import <CloudKit/CKReference.h>
 
+#import <CoreLocation/CLLocation.h>
+
 @class CKRecordID, CKRecordZoneID;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString *CKRecordType;
 typedef NSString *CKRecordFieldKey;
@@ -196,4 +197,4 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0))
                                                                                                      
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

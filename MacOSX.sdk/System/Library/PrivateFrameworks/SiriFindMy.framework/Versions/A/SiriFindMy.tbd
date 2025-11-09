@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6E875DDE-D293-332C-8A23-78D1EAB9076D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C304DAF5-2EE0-3837-AE93-E36FC9425107
 install-name:    '/System/Library/PrivateFrameworks/SiriFindMy.framework/Versions/A/SiriFindMy'
 swift-abi-version: 7
 allowable-clients:
@@ -34,6 +27,7 @@ exports:
                        '_$s10SiriFindMy0B13DeviceSessionMp', '_$s10SiriFindMy0B13DeviceSessionPAA13DeactivatableTb', 
                        '_$s10SiriFindMy0B13DeviceSessionTL', '_$s10SiriFindMy0B15FriendUISessionMp', 
                        '_$s10SiriFindMy0B15FriendUISessionTL', '_$s10SiriFindMy0B17DeviceFlowFactoryV04makeE4From5parse0a3KitE003AnyE0CAF5ParseO_tF', 
+                       '_$s10SiriFindMy0B17DeviceFlowFactoryV10taskParserAA0bD4TaskO0H0Vvpfi', 
                        '_$s10SiriFindMy0B17DeviceFlowFactoryV14featureManagerAA0bc7FeatureH0Vvpfi', 
                        '_$s10SiriFindMy0B17DeviceFlowFactoryV15patternExecutorAA0bd23AndPlaySoundCATPatternsH0Cvpfi', 
                        '_$s10SiriFindMy0B17DeviceFlowFactoryV17responseGenerator0a3KitE008ResponseF0Cvpfi', 

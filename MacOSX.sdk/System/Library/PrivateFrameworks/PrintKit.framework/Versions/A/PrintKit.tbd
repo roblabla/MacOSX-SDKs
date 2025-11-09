@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9866E24E-05C1-3E7D-8CCF-B0F41A497B6A
-  - target:          x86_64-maccatalyst
-    value:           9866E24E-05C1-3E7D-8CCF-B0F41A497B6A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           78BAE47C-7E7D-3E2A-B8AE-F444AD8B45D1
-  - target:          arm64e-maccatalyst
-    value:           78BAE47C-7E7D-3E2A-B8AE-F444AD8B45D1
 install-name:    '/System/Library/PrivateFrameworks/PrintKit.framework/Versions/A/PrintKit'
 current-version: 271
 exports:

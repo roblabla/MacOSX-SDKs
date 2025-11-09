@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D94728F3-714E-33E8-94CB-32C963EBDF4F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7A581FBE-877D-38C2-86BC-33E153488DD3
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

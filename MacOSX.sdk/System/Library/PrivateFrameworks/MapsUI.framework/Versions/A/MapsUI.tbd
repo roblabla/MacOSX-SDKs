@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1B2C211E-BB83-3104-91DD-4436E18EF4FA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6D3B1C7A-F83C-3DD0-AD46-0C3305760637
 install-name:    '/System/Library/PrivateFrameworks/MapsUI.framework/Versions/A/MapsUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -50,5 +43,5 @@ exports:
                        MUPlatterView, MUPresentationOptions, MUScrollViewImpressionsCalculator, 
                        MUScrollableStackView, MUStackView, MUTextFactoidViewModel, 
                        MUTimeExpirableLRUCache, MUVendorLinkSortParameters, MUVendorLinkSorter, 
-                       MUVendorLinkViewModel ]
+                       MUVendorLinkViewModel, MapsUIUtilities ]
 ...

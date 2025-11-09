@@ -29,6 +29,7 @@
 #define _MACHINE_MACHINE_ROUTINES_H
 
 #include <sys/cdefs.h>
+#include <stdint.h>
 
 #if defined (__i386__) || defined(__x86_64__)
 #include "i386/machine_routines.h"

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1DFE4260-A794-3A6F-B36C-F17A0739273D
-  - target:          x86_64-maccatalyst
-    value:           1DFE4260-A794-3A6F-B36C-F17A0739273D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F4DBE272-8A09-3BD1-9BBA-279F24FD4920
-  - target:          arm64e-maccatalyst
-    value:           F4DBE272-8A09-3BD1-9BBA-279F24FD4920
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1

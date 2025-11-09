@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           64108216-6EF8-3097-AC0A-BA942899AC61
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           694B0B32-E201-3552-9FF3-6AE7C6FF97B1
 install-name:    '/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/StorageManagement'
 swift-abi-version: 7
 exports:
@@ -15,7 +8,7 @@ exports:
     symbols:         [ _ITEM_DATE_COLUMN, _ITEM_MINIMAL_VISIBLE_SIZE, _STMExtensionOperationErrorDomain, 
                        _STMExtensionTotalSpaceUsedGreaterThanZero, _STMExtensionTotalSpaceUsedUnknown, 
                        _STMInfoStorageUsageReportingBytesUsedDidChangeNotification, 
-                       _STMLog, _STMLogDuration, _STMLogSize, _STMOpaqueExtensionAddedResourcesKey, 
+                       _STMLog, _STMLogDuration, _STMLogFault, _STMLogSize, _STMOpaqueExtensionAddedResourcesKey, 
                        _STMOpaqueExtensionBytesUsedDidChangeNotification, _STMOpaqueExtensionRecommendationsDidChangeNotification, 
                        _STMOpaqueExtensionResourceEnumerationProgressNotification, 
                        _STMOpaqueExtensionResourcesDidChangeNotification, _STMOperationDidFinishNotification, 
@@ -44,8 +37,8 @@ exports:
                        _kSTDataDeviceDiskName, _kSTDataDeviceDisks, _kSTDataDeviceOpticalDiskFormats, 
                        _kSTDataDeviceOpticalDisks, _kSTDataDeviceSizeAvailable, _kSTDataDeviceSizePurgeable, 
                        _kSTDataDeviceSizeUsed, _kSTDataDeviceType, _kSTDataDeviceVolumeMountPath, 
-                       _kSTDataDeviceVolumeName, _kSTDataDeviceVolumes, _kSTDataOSVersion, 
-                       _kSTDataSizeTotal, _kSTDataTimestamp, _kSecondaryTitleKey, 
+                       _kSTDataDeviceVolumeName, _kSTDataDeviceVolumes, _kSTDataOSCheck, 
+                       _kSTDataOSVersion, _kSTDataSizeTotal, _kSTDataTimestamp, _kSecondaryTitleKey, 
                        _kShowViewedColumnKey, _kShowsSummaryKey, _kSizeKey, _kSkipConfirmationKey, 
                        _kSummaryButtonKey, _kSummaryFooterKey, _kSummaryKind, _kSummaryMessageKey, 
                        _kSummaryTitleKey, _kTagKey, _kTipKind, _kTipPerformActionKey, 

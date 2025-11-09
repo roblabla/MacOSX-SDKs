@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Spatial
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Spatial
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 58
 @_exported import Spatial
 import Swift
@@ -309,8 +309,8 @@ extension Spatial.Point3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Point3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Point3D : Swift.CustomStringConvertible {
@@ -737,8 +737,8 @@ extension Spatial.Pose3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Pose3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Pose3D : Swift.CustomStringConvertible {
@@ -764,8 +764,8 @@ extension Spatial.Angle2D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Angle2D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Angle2D : Swift.CustomStringConvertible {
@@ -899,8 +899,8 @@ extension Spatial.ProjectiveTransform3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.ProjectiveTransform3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.ProjectiveTransform3D : Swift.CustomStringConvertible {
@@ -993,8 +993,8 @@ extension Spatial.Rect3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rect3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rect3D {
@@ -1298,8 +1298,8 @@ extension Spatial.Ray3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Ray3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Ray3D : Swift.CustomStringConvertible {
@@ -1424,8 +1424,8 @@ extension Spatial.Vector3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Vector3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Vector3D : Swift.CustomStringConvertible {
@@ -1654,8 +1654,8 @@ extension Spatial.Size3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Size3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Size3D : Swift.CustomStringConvertible {
@@ -1694,8 +1694,8 @@ extension Spatial.Rotation3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D : Swift.CustomStringConvertible {
@@ -1840,8 +1840,8 @@ extension Spatial.AffineTransform3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D : Swift.CustomStringConvertible {
@@ -1931,8 +1931,8 @@ extension Spatial.RotationAxis3D : Swift.Hashable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.RotationAxis3D : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.RotationAxis3D : Swift.CustomStringConvertible {

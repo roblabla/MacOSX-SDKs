@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           514D105F-0357-3EB5-ADCF-2B5D6AD33A2C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           044FE6A3-CCCA-32C6-BD33-10A8F63DB466
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

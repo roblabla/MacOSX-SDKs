@@ -1,11 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ arm64-macos, arm64e-macos ]
-uuids:
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0257DF91-ED48-3609-A1DB-727FDA9DAE51
 install-name:    '/usr/lib/libUSBCfwflasher.dylib'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]

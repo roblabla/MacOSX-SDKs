@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D199B283-8F09-3F2F-A17E-274BFF7733BE
-  - target:          x86_64-maccatalyst
-    value:           D199B283-8F09-3F2F-A17E-274BFF7733BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3680811A-78F7-361A-ABBE-8E783165AC81
-  - target:          arm64e-maccatalyst
-    value:           3680811A-78F7-361A-ABBE-8E783165AC81
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1845.60.12
+current-version: 1846.100.185
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -44,8 +31,8 @@ exports:
                        _rootless_check_trusted_class, _rootless_check_trusted_fd, 
                        _rootless_convert_to_datavault, _rootless_manifest_free, _rootless_manifest_parse, 
                        _rootless_mkdir_datavault, _rootless_mkdir_nounlink, _rootless_mkdir_restricted, 
-                       _rootless_preflight, _rootless_protected_volume, _rootless_register_trusted_storage_class, 
-                       _rootless_remove_datavault_in_favor_of_static_storage_class, 
+                       _rootless_preflight, _rootless_protected_volume, _rootless_protected_volume_fd, 
+                       _rootless_register_trusted_storage_class, _rootless_remove_datavault_in_favor_of_static_storage_class, 
                        _rootless_remove_restricted_in_favor_of_static_storage_class, 
                        _rootless_restricted_environment, _rootless_suspend, _rootless_trusted_by_self_token, 
                        _rootless_verify_trusted_by_self_token, _sandbox_builtin_query, 

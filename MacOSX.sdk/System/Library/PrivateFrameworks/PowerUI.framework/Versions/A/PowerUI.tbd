@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E98F6470-B439-339B-B571-00D1FE746A80
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B8EF922B-2C0E-3F95-B6F7-1F324CF94CEE
 install-name:    '/System/Library/PrivateFrameworks/PowerUI.framework/Versions/A/PowerUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           41A3BD27-581B-3DE7-8B22-6E70AB942B17
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E7E13A7A-7E57-37DD-B02D-F1FC98DB9F30
 install-name:    '/System/Library/PrivateFrameworks/SiriVideoIntents.framework/Versions/A/SiriVideoIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -217,6 +210,7 @@ exports:
                        '_$s16SiriVideoIntents11LiveServiceC11channelNameSSSgvpMV', 
                        '_$s16SiriVideoIntents11LiveServiceC11isInstalledSo8NSNumberCSgvpMV', 
                        '_$s16SiriVideoIntents11LiveServiceC12isSubscribedSo8NSNumberCSgvpMV', 
+                       '_$s16SiriVideoIntents11LiveServiceC14isRemoteResultSo8NSNumberCSgvpMV', 
                        '_$s16SiriVideoIntents11LiveServiceC15playPunchoutUrlSSSgvpMV', 
                        '_$s16SiriVideoIntents11LiveServiceC20supportsSecureCodingSbvgZ', 
                        '_$s16SiriVideoIntents11LiveServiceC4nameSSSgvpMV', '_$s16SiriVideoIntents11LiveServiceC5coderACSgSo7NSCoderC_tcfC', 
@@ -392,8 +386,10 @@ exports:
                        '_$s16SiriVideoIntents20InstalledAppProviderVMa', '_$s16SiriVideoIntents20InstalledAppProviderVMn', 
                        '_$s16SiriVideoIntents20InstalledAppProviderVN', '_$s16SiriVideoIntents21InstalledAppProvidingMp', 
                        '_$s16SiriVideoIntents21InstalledAppProvidingTL', '_$s16SiriVideoIntents21PlayLiveServiceIntentC04liveF0AA0eF0CSgvpMV', 
+                       '_$s16SiriVideoIntents21PlayLiveServiceIntentC05localF7ResultsSayAA0eF0CGSgvpMV', 
                        '_$s16SiriVideoIntents21PlayLiveServiceIntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfC', 
                        '_$s16SiriVideoIntents21PlayLiveServiceIntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfc', 
+                       '_$s16SiriVideoIntents21PlayLiveServiceIntentC17isRemoteExecutionSo8NSNumberCSgvpMV', 
                        '_$s16SiriVideoIntents21PlayLiveServiceIntentC17serviceNameSearchSSSgvpMV', 
                        '_$s16SiriVideoIntents21PlayLiveServiceIntentC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s16SiriVideoIntents21PlayLiveServiceIntentC5coderACSgSo7NSCoderC_tcfc', 

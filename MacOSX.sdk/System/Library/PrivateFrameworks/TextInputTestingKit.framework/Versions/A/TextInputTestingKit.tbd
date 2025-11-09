@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D12DBB80-FFC7-3D31-A442-104C1D03D1EB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           13D9B1D4-597C-366A-9972-78324C7613CC
 install-name:    '/System/Library/PrivateFrameworks/TextInputTestingKit.framework/Versions/A/TextInputTestingKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -43,18 +36,18 @@ exports:
                        _TTKLogFacility, __TIBeginMockingAggdReporter, __TIBeginMockingAnalyticsService, 
                        __TIBeginMockingAssetManager, __TIBeginMockingContactManagerWithContactCollection, 
                        __TIBeginMockingCryptographer, __TIBeginMockingKeyboardActivityController, 
-                       __TIBeginMockingLMTrial, __TIBeginMockingLanguageLikelihoodModel, 
-                       __TIBeginMockingLanguageLikelihoodModelWithModel, __TIBeginMockingProactiveQuickTypeManager, 
-                       __TIBeginMockingSingletons, __TIBeginMockingSingletonsWithData, 
-                       __TIBeginMockingSingletonsWithMockData, __TIBeginMockingSingletonsWithResources, 
-                       __TIBeginMockingTransientLexiconManagerWithData, __TIBeginMockingUserDictionaryServer, 
+                       __TIBeginMockingLanguageLikelihoodModel, __TIBeginMockingLanguageLikelihoodModelWithModel, 
+                       __TIBeginMockingProactiveQuickTypeManager, __TIBeginMockingSingletons, 
+                       __TIBeginMockingSingletonsWithData, __TIBeginMockingSingletonsWithMockData, 
+                       __TIBeginMockingSingletonsWithResources, __TIBeginMockingTransientLexiconManagerWithData, 
+                       __TIBeginMockingTrialManager, __TIBeginMockingUserDictionaryServer, 
                        __TIBeginMockingUserDictionaryServerWithPairs, __TIBeginMockingUserModelDataStore, 
                        __TIConvertTIMockContactCollection, __TIEndMockingAggdReporter, 
                        __TIEndMockingAnalyticsService, __TIEndMockingAssetManager, 
                        __TIEndMockingContactManager, __TIEndMockingCryptographer, 
-                       __TIEndMockingKeyboardActivityController, __TIEndMockingLMTrial, 
-                       __TIEndMockingLanguageLikelihoodModel, __TIEndMockingProactiveQuickTypeManager, 
-                       __TIEndMockingSingletons, __TIEndMockingTransientLexiconManager, 
+                       __TIEndMockingKeyboardActivityController, __TIEndMockingLanguageLikelihoodModel, 
+                       __TIEndMockingProactiveQuickTypeManager, __TIEndMockingSingletons, 
+                       __TIEndMockingTransientLexiconManager, __TIEndMockingTrialManager, 
                        __TIEndMockingUserDictionaryServer, __TIEndMockingUserModelDataStore, 
                        __TIGetMockLanguageLikelihoodModel, __TIGetMockingAggdReporterDistribution, 
                        __TIGetMockingAggdReporterScalar, __TIGetMockingAnalyticsInputAnalyticsServiceEvents, 
@@ -171,9 +164,9 @@ exports:
     objc-classes:    [ ACTClientProxy, AutocorrectionFailure, AutocorrectionResult, 
                        AutocorrectionTest, CapitalizedWordFailure, ContextSpaceBarFailure, 
                        ControlKeyTouchedFailure, GenericFailure, HitTestFailure, 
-                       MissedKeyFailure, PlaybackTest, PunctuationFailure, SpaceBarFailure, 
-                       SpaceBarFollowingPunctuationFailure, TIAggdReporterMock, TIAlignedIndexes, 
-                       TIAlignedTokens, TIAlignedTyping, TIAnalyticsServiceProviderMock, 
+                       MissedKeyFailure, MockTITrialManager, PlaybackTest, PunctuationFailure, 
+                       SpaceBarFailure, SpaceBarFollowingPunctuationFailure, TIAggdReporterMock, 
+                       TIAlignedIndexes, TIAlignedTokens, TIAlignedTyping, TIAnalyticsServiceProviderMock, 
                        TIAssetManagerMock, TIContactManagerMock, TIContinuousPath, 
                        TIContinuousPathSample, TICryptographerMock, TIDebugValue, 
                        TIDynamicLanguageLikelihoodModel, TIErrorGenerator, TIGaussianErrorGenerator, 
@@ -183,11 +176,11 @@ exports:
                        TIPointError, TIProactiveQuickTypeManagerMock, TIRadialErrorGenerator, 
                        TIReporter, TISerializingResultLogger, TIStaticLanguageLikelihoodModel, 
                        TISweepSource, TITesterUtils, TITransientLexiconManagerMock, 
-                       TITrialProxyMock, TITypingLog, TIUserDictionaryServerMock, 
-                       TIUserModelDataStoreMock, TTKConversationMessage, TTKConversationTest, 
-                       TTKDirSink, TTKDirSource, TTKFileSink, TTKFileSource, TTKSimpleKey, 
-                       TTKSimpleKeyboardPlane, TTKTestCase, TTKTestCaseReader, TTKTestCaseRecord, 
-                       TTKTestCaseWriter, TouchFailure ]
+                       TITypingLog, TIUserDictionaryServerMock, TIUserModelDataStoreMock, 
+                       TTKConversationMessage, TTKConversationTest, TTKDirSink, TTKDirSource, 
+                       TTKFileSink, TTKFileSource, TTKSimpleKey, TTKSimpleKeyboardPlane, 
+                       TTKTestCase, TTKTestCaseReader, TTKTestCaseRecord, TTKTestCaseWriter, 
+                       TouchFailure ]
     objc-ivars:      [ AutocorrectionFailure._letters, AutocorrectionTest._corpusId, 
                        AutocorrectionTest._expectedOutput, AutocorrectionTest._input, 
                        AutocorrectionTest._sourceMetadata, AutocorrectionTest._touches, 

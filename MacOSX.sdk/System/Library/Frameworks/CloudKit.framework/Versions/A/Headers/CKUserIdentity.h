@@ -9,19 +9,20 @@
 
 @class CKRecordID, CKUserIdentityLookupInfo;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
 @interface CKUserIdentity : NSObject <NSSecureCoding, NSCopying>
 /*! Use @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation to create a @c CKUserIdentity */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 /*! This is the @c lookupInfo you passed in to @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation */
-@property (nonatomic, readonly, copy, nullable) CKUserIdentityLookupInfo *lookupInfo;
+@property (atomic, readonly, copy, nullable) CKUserIdentityLookupInfo *lookupInfo;
 
-@property (nonatomic, readonly, copy, nullable) NSPersonNameComponents *nameComponents;
-@property (nonatomic, readonly, copy, nullable) CKRecordID *userRecordID;
+@property (atomic, readonly, copy, nullable) NSPersonNameComponents *nameComponents;
+@property (atomic, readonly, copy, nullable) CKRecordID *userRecordID;
 
 /*! @abstract Link to the Contacts database.
  *
@@ -33,11 +34,11 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  *
  *  @see Contacts.framework and CNContact.identifier
  */
-@property (nonatomic, readonly, copy) NSArray<NSString *> *contactIdentifiers API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+@property (atomic, readonly, copy) NSArray<NSString *> *contactIdentifiers API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
 
-@property (nonatomic, readonly, assign) BOOL hasiCloudAccount;
+@property (atomic, readonly, assign) BOOL hasiCloudAccount;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

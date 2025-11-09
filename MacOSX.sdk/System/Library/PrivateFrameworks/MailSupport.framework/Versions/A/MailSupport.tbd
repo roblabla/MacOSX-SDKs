@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BB50A5EE-9620-3B7D-BB05-80890B8C0B77
-  - target:          x86_64-maccatalyst
-    value:           BB50A5EE-9620-3B7D-BB05-80890B8C0B77
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0F868BD9-2521-3453-A9D3-C4D3F6B86EE3
-  - target:          arm64e-maccatalyst
-    value:           0F868BD9-2521-3453-A9D3-C4D3F6B86EE3
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3731.255.101
+current-version: 3731.255.231
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -46,8 +33,8 @@ exports:
                        _MSAccessibilityIdentifierDatePickerStepper, _MSAccessibilityIdentifierFilterCard, 
                        _MSAccessibilityIdentifierFilterCardFilterBar, _MSAccessibilityIdentifierFilterCardMailboxPicker, 
                        _MSAccessibilityIdentifierFilterCardVIPs, _MSAccessibilityIdentifierImageSizeLabel, 
-                       _MSAccessibilityIdentifierImageSizeView, _MSAccessibilityIdentifierLargeTitleAccessoryView, 
-                       _MSAccessibilityIdentifierLargeTitleAccessoryViewCompose, 
+                       _MSAccessibilityIdentifierImageSizeView, _MSAccessibilityIdentifierInputAssistantButton, 
+                       _MSAccessibilityIdentifierLargeTitleAccessoryView, _MSAccessibilityIdentifierLargeTitleAccessoryViewCompose, 
                        _MSAccessibilityIdentifierLargeTitleAccessoryViewEdit, _MSAccessibilityIdentifierLargeTitleAccessoryViewMore, 
                        _MSAccessibilityIdentifierMailHeaderMessageCount, _MSAccessibilityIdentifierMailMessageCell, 
                        _MSAccessibilityIdentifierMailMessageCellFooterView, _MSAccessibilityIdentifierMailMessageCellFooterViewReplyAllButton, 
@@ -64,16 +51,17 @@ exports:
                        _MSAccessibilityIdentifierMailMessageCellViewSubjectLabel, 
                        _MSAccessibilityIdentifierMailMessageCellViewSummaryLabel, 
                        _MSAccessibilityIdentifierMailMessageCellViewUnread, _MSAccessibilityIdentifierMailMessageCellViewVIP, 
-                       _MSAccessibilityIdentifierMailMessageList, _MSAccessibilityIdentifierMailMessageViewAttachment, 
-                       _MSAccessibilityIdentifierMailMessageViewBlockedSender, _MSAccessibilityIdentifierMailMessageViewDateTimeLabel, 
-                       _MSAccessibilityIdentifierMailMessageViewDetailsButton, _MSAccessibilityIdentifierMailMessageViewDownArrow, 
-                       _MSAccessibilityIdentifierMailMessageViewFlagged, _MSAccessibilityIdentifierMailMessageViewForwarded, 
-                       _MSAccessibilityIdentifierMailMessageViewHideDetailsButton, 
+                       _MSAccessibilityIdentifierMailMessageList, _MSAccessibilityIdentifierMailMessageListSearchBarSearchTextField, 
+                       _MSAccessibilityIdentifierMailMessageViewAttachment, _MSAccessibilityIdentifierMailMessageViewBlockedSender, 
+                       _MSAccessibilityIdentifierMailMessageViewDateTimeLabel, _MSAccessibilityIdentifierMailMessageViewDetailsButton, 
+                       _MSAccessibilityIdentifierMailMessageViewDownArrow, _MSAccessibilityIdentifierMailMessageViewFlagged, 
+                       _MSAccessibilityIdentifierMailMessageViewForwarded, _MSAccessibilityIdentifierMailMessageViewHideDetailsButton, 
                        _MSAccessibilityIdentifierMailMessageViewMailboxLabel, _MSAccessibilityIdentifierMailMessageViewNotify, 
                        _MSAccessibilityIdentifierMailMessageViewReplied, _MSAccessibilityIdentifierMailMessageViewRepliedForwarded, 
                        _MSAccessibilityIdentifierMailMessageViewSubjectLabel, _MSAccessibilityIdentifierMailMessageViewUnread, 
                        _MSAccessibilityIdentifierMailMessageViewUnreadVIPFlagged, 
                        _MSAccessibilityIdentifierMailMessageViewUpArrow, _MSAccessibilityIdentifierMailMessageViewVIP, 
+                       _MSAccessibilityIdentifierMailSearchSuggestionTokenFormat, 
                        _MSAccessibilityIdentifierMailSearchSuggestions, _MSAccessibilityIdentifierMailSearchSuggestionsCell, 
                        _MSAccessibilityIdentifierMailSearchSuggestionsCellContactImage, 
                        _MSAccessibilityIdentifierMailSearchSuggestionsCellDocumentImage, 
@@ -81,8 +69,10 @@ exports:
                        _MSAccessibilityIdentifierMailSearchSuggestionsCellListRowImage, 
                        _MSAccessibilityIdentifierMailSearchSuggestionsCellLocationImage, 
                        _MSAccessibilityIdentifierMailSearchSuggestionsHeader, _MSAccessibilityIdentifierMailboxList, 
-                       _MSAccessibilityIdentifierMailboxListCell, _MSAccessibilityIdentifierMoreActionsButton, 
-                       _MSAccessibilityIdentifierNotifyButton, _MSAccessibilityIdentifierRemindMeTimeSelectionMenu, 
+                       _MSAccessibilityIdentifierMailboxListAccountCell, _MSAccessibilityIdentifierMailboxListCell, 
+                       _MSAccessibilityIdentifierMoreActionsButton, _MSAccessibilityIdentifierNotifyButton, 
+                       _MSAccessibilityIdentifierPopoverCancel, _MSAccessibilityIdentifierPopoverDeleteDraft, 
+                       _MSAccessibilityIdentifierPopoverSaveDraft, _MSAccessibilityIdentifierRemindMeTimeSelectionMenu, 
                        _MSAccessibilityIdentifierSendButton, _MSAccessibilityIdentifierSubjectField, 
                        _MSAccessibilityIdentifierTextFormatBoldButton, _MSAccessibilityIdentifierTextFormatCloseButton, 
                        _MSAccessibilityIdentifierTextFormatDecreaseFontSizeButton, 
@@ -96,7 +86,8 @@ exports:
                        _MSAccessibilityIdentifierTextFormatTextColorButton, _MSAccessibilityIdentifierTextFormatTitle, 
                        _MSAccessibilityIdentifierTextFormatUnderlineButton, _MSAccessibilityIdentifierTimePicker, 
                        _MSAccessibilityIdentifierTimePickerClock, _MSAccessibilityIdentifierTimePickerStepper, 
-                       _MSAccessibilityIdentifierToField, _MSBlobURLScheme, _MSComposeBodyFieldExceptionKeyCallStackSymbols, 
+                       _MSAccessibilityIdentifierToField, _MSAccessibiltyIdentifierMessageViewerWindowFormat, 
+                       _MSBlobURLScheme, _MSComposeBodyFieldExceptionKeyCallStackSymbols, 
                        _MSComposeBodyFieldExceptionKeyJavaScriptStack, _MSContentIDURLScheme, 
                        _MSCopyClosestMatchingExistingContactUsingAddressesAndDisplayName, 
                        _MSCopyClosestMatchingExistingContactUsingAddressesAndDisplayNameUnified, 
@@ -114,14 +105,16 @@ exports:
                        _MSSearchScopeFrom, _MSSearchScopeMailbox, _MSSearchScopeMessage, 
                        _MSSearchScopeSubject, _MSSearchScopeTo, _MSSearchSuggestionCategoryAttachment, 
                        _MSSearchSuggestionCategoryContact, _MSSearchSuggestionCategoryDates, 
-                       _MSSearchSuggestionCategoryDocument, _MSSearchSuggestionCategoryFlagged, 
+                       _MSSearchSuggestionCategoryDocument, _MSSearchSuggestionCategoryFlagColor, 
+                       _MSSearchSuggestionCategoryFlagStatus, _MSSearchSuggestionCategoryFlagged, 
                        _MSSearchSuggestionCategoryFreeText, _MSSearchSuggestionCategoryGeneric, 
                        _MSSearchSuggestionCategoryLink, _MSSearchSuggestionCategoryLocation, 
                        _MSSearchSuggestionCategoryMailboxes, _MSSearchSuggestionCategoryOther, 
                        _MSSearchSuggestionCategoryPeople, _MSSearchSuggestionCategoryRaw, 
-                       _MSSearchSuggestionCategorySubject, _MSSearchSuggestionCategoryTopHit, 
-                       _MSSearchSuggestionCategoryUnread, _MSSearchSuggestionCategoryVIPs, 
-                       _MSSharedContactStore, _MSUserNotificationCenterTopicFavoriteMailboxes, 
+                       _MSSearchSuggestionCategoryReadStatus, _MSSearchSuggestionCategorySubject, 
+                       _MSSearchSuggestionCategorySubjectContains, _MSSearchSuggestionCategoryTopHit, 
+                       _MSSearchSuggestionCategoryUnread, _MSSearchSuggestionCategoryUserTyped, 
+                       _MSSearchSuggestionCategoryVIPs, _MSSharedContactStore, _MSUserNotificationCenterTopicFavoriteMailboxes, 
                        _MSUserNotificationCenterTopicNotifiedThreads, _MSUserNotificationCenterTopicRemindMe, 
                        _MSUserNotificationCenterTopicVIP, _MSUserNotificationContentKeyAccountReference, 
                        _MSUserNotificationContentKeyMessageReference, _MSUserNotificationContentKeyMissingSummary, 

@@ -84,16 +84,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @interface UIWindow(UIWindowLayout)
 
-/// This layout guide is designed specifically for full-screen media content, and attaching constraints from deep in the window's view heirarchy will raise an exception.
+/// This layout guide is designed specifically for full-screen media content, and attaching constraints from deep in the window's view hierarchy will raise an exception.
 ///
 /// This guide provides a layout area for placing media content of a given aspect ratio (width over height) such that the content will be completely visible within the window.
 /// Compared to the standard `safeAreaLayoutGuide` on a view, this guide takes into account the aspect ratio of the content, allowing it the maximum size within the window's
 /// true safe area, including the actual shape of the screen when that is the only factor contributing to the safe area. The rect defined by this guide will be centered within the
 /// window.
 ///
-/// This layout guide should only be used for fixed aspect ratio content that is indended to fill the window (such as image or video content) and is not a replacement for the
+/// This layout guide should only be used for fixed aspect ratio content that is intended to fill the window (such as image or video content) and is not a replacement for the
 /// standard `safeAreaLayoutGuide` on each UIView which should be used for most content layout. The `safeAreaAspectFitLayoutGuide` should only be used with views
-/// that are direct subviews of, or very close descendants of, the guide's window. Creating constraints from this layout guide to views deeper in the view heirarchy or across
+/// that are direct subviews of, or very close descendants of, the guide's window. Creating constraints from this layout guide to views deeper in the view hierarchy or across
 /// views owned by child view controllers can significantly degrade performance and possibly raise an exception. Additionally, the safe area insets added by child view
 /// controllers will not be reflected in these cases. For anything other than full-screen/window media content, the standard `safeAreaLayoutGuide` on UIView should be used.
 @property(nonatomic,readonly,strong) UILayoutGuide<UILayoutGuideAspectFitting> *safeAreaAspectFitLayoutGuide API_AVAILABLE(ios(16.0), tvos(16.0));

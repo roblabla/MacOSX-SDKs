@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSOrderedSet.iig */
+/* iig(DriverKit-256.100.8) generated from OSOrderedSet.iig */
 
 /* OSOrderedSet.iig:1-69 */
 /*
@@ -285,7 +285,7 @@ public:
 
 #if !KERNEL
 
-class OSOrderedSetInterface : public OSInterface
+class  OSOrderedSetInterface : public OSInterface
 {
 public:
 };

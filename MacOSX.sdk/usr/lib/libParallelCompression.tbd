@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           201C7F76-3968-3FC7-B187-146E6789DBEA
-  - target:          x86_64-maccatalyst
-    value:           201C7F76-3968-3FC7-B187-146E6789DBEA
-  - target:          arm64-macos
-    value:           2F91346C-F0DC-3945-9865-C87270C3441C
-  - target:          arm64-maccatalyst
-    value:           2F91346C-F0DC-3945-9865-C87270C3441C
-  - target:          arm64e-macos
-    value:           97F0FAEC-7E07-31BC-BF15-2AD69936F5E0
-  - target:          arm64e-maccatalyst
-    value:           97F0FAEC-7E07-31BC-BF15-2AD69936F5E0
 install-name:    '/usr/lib/libParallelCompression.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

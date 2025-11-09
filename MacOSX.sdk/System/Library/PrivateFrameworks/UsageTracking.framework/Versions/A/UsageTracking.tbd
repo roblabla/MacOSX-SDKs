@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DE80D394-724E-3BA9-9E5D-FE87AAD50EA9
-  - target:          x86_64-maccatalyst
-    value:           DE80D394-724E-3BA9-9E5D-FE87AAD50EA9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F19DF9DC-0821-376C-9092-043CD91054CE
-  - target:          arm64e-maccatalyst
-    value:           F19DF9DC-0821-376C-9092-043CD91054CE
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
 current-version: 280
 allowable-clients:

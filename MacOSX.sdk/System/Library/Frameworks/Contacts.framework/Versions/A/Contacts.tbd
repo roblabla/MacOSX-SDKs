@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DA8FEB92-7B7F-3F8A-959F-53235AF70536
-  - target:          x86_64-maccatalyst
-    value:           DA8FEB92-7B7F-3F8A-959F-53235AF70536
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B6175D33-BD52-36C9-9A45-A260F6307458
-  - target:          arm64e-maccatalyst
-    value:           B6175D33-BD52-36C9-9A45-A260F6307458
 install-name:    '/System/Library/Frameworks/Contacts.framework/Versions/A/Contacts'
-current-version: 3581.1
+current-version: 3582.9
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -55,10 +42,10 @@ exports:
                        _CNActionTypeTTYCall, _CNActionTypeTTYRelayCall, _CNActionTypeVideoCall, 
                        _CNActivityAlertIgnoreMuteKey, _CNActivityAlertSoundKey, _CNActivityAlertVibrationKey, 
                        _CNAnyLabel, _CNApplicationProxyServiceName, _CNContactAccountIdentifierKey, 
-                       _CNContactAddressingGrammarKey, _CNContactBirthdayKey, _CNContactBirthdaysKey, 
-                       _CNContactCalendarURIsKey, _CNContactCallAlertKey, _CNContactCreationDateKey, 
-                       _CNContactCropRectHashKey, _CNContactCropRectIDKey, _CNContactCropRectKey, 
-                       _CNContactDatesKey, _CNContactDepartmentNameKey, _CNContactDisplayNameOrderKey, 
+                       _CNContactBirthdayKey, _CNContactBirthdaysKey, _CNContactCalendarURIsKey, 
+                       _CNContactCallAlertKey, _CNContactCreationDateKey, _CNContactCropRectHashKey, 
+                       _CNContactCropRectIDKey, _CNContactCropRectKey, _CNContactDatesKey, 
+                       _CNContactDepartmentNameKey, _CNContactDisplayNameOrderKey, 
                        _CNContactDowntimeWhitelistKey, _CNContactEmailAddressesKey, 
                        _CNContactExplicitDisplayNameKey, _CNContactExternalIdentifierKey, 
                        _CNContactExternalImageURIKey, _CNContactExternalModificationTagKey, 
@@ -84,19 +71,15 @@ exports:
                        _CNContactPhoneticFamilyNameKey, _CNContactPhoneticGivenNameKey, 
                        _CNContactPhoneticMiddleNameKey, _CNContactPhoneticOrganizationNameKey, 
                        _CNContactPostalAddressesKey, _CNContactPreferredApplePersonaIdentifierKey, 
-                       _CNContactPreferredChannelKey, _CNContactPreferredForImageKey, 
-                       _CNContactPreferredForNameKey, _CNContactPreferredLikenessSourceKey, 
-                       _CNContactPreviousFamilyNameKey, _CNContactPronunciationFamilyNameKey, 
-                       _CNContactPronunciationGivenNameKey, _CNContactPropertyAttribute, 
-                       _CNContactPropertyNotFetchedExceptionName, _CNContactRelatedNamesKey, 
-                       _CNContactRelationsKey, _CNContactSectionForSortingByFamilyNameKey, 
-                       _CNContactSectionForSortingByGivenNameKey, _CNContactSocialProfilesKey, 
+                       _CNContactPreferredForImageKey, _CNContactPreferredForNameKey, 
+                       _CNContactPreferredLikenessSourceKey, _CNContactPreviousFamilyNameKey, 
+                       _CNContactPropertyAttribute, _CNContactPropertyNotFetchedExceptionName, 
+                       _CNContactRelatedNamesKey, _CNContactRelationsKey, _CNContactSocialProfilesKey, 
                        _CNContactSortingFamilyNameKey, _CNContactSortingGivenNameKey, 
                        _CNContactStoreDidChangeNotification, _CNContactStoreMeContactDidChangeNotification, 
-                       _CNContactSyncImageDataKey, _CNContactTextAlertKey, _CNContactThumbnailImageDataKey, 
-                       _CNContactToIdentifier, _CNContactTypeKey, _CNContactUrlAddressesKey, 
-                       _CNContainerAccountIdentifierKey, _CNContainerConstraintsPathKey, 
-                       _CNContainerEnabledKey, _CNContainerExternalIdentifierKey, 
+                       _CNContactTextAlertKey, _CNContactThumbnailImageDataKey, _CNContactToIdentifier, 
+                       _CNContactTypeKey, _CNContactUrlAddressesKey, _CNContainerAccountIdentifierKey, 
+                       _CNContainerConstraintsPathKey, _CNContainerEnabledKey, _CNContainerExternalIdentifierKey, 
                        _CNContainerExternalModificationTagKey, _CNContainerExternalSyncDataKey, 
                        _CNContainerExternalSyncTagKey, _CNContainerGuardianRestrictedKey, 
                        _CNContainerGuardianStateDirtyKey, _CNContainerIOSLegacyIdentifierKey, 
@@ -106,9 +89,7 @@ exports:
                        _CNEntityArrayToSet, _CNEntitySetToArray, _CNErrorDomain, 
                        _CNErrorUserInfoAffectedRecordIdentifiersKey, _CNErrorUserInfoAffectedRecordsKey, 
                        _CNErrorUserInfoKeyPathsKey, _CNErrorUserInfoValidationErrorsKey, 
-                       _CNFavoritesChangedExternallyNotification, _CNFavoritesChangedNotification, 
-                       _CNFavoritesEntryIdentityChangedNotification, _CNGroupCreationDateKey, 
-                       _CNGroupExternalIdentifierKey, _CNGroupExternalModificationTagKey, 
+                       _CNGroupCreationDateKey, _CNGroupExternalIdentifierKey, _CNGroupExternalModificationTagKey, 
                        _CNGroupExternalRepresentationKey, _CNGroupExternalURIKey, 
                        _CNGroupExternalUUIDKey, _CNGroupIOSLegacyIdentifierInvalid, 
                        _CNGroupIOSLegacyIdentifierKey, _CNGroupIdentifierKey, _CNGroupModificationDateKey, 
@@ -312,18 +293,17 @@ exports:
                        CNErrorFactory, CNExplicitDisplayNameDescription, CNExternalIdentifierDescription, 
                        CNExternalImageURIDescription, CNExternalModificationTagDescription, 
                        CNExternalRepresentationDescription, CNExternalUUIDDescription, 
-                       CNFamilyNameDescription, CNFavorites, CNFavoritesEntry, CNFeatureFlags, 
+                       CNFamilyNameDescription, CNFavoritesEntry, CNFeatureFlags, 
                        CNFetchRequest, CNFetchResult, CNFromABCDConversions, CNFullscreenImageDataDescription, 
                        CNGivenNameDescription, CNGroup, CNHandleExpander, CNIOSLegacyIdentifierDescription, 
                        CNImageDataAvailableDescription, CNImageDataDescription, CNImageHashDescription, 
-                       CNImageTypeDescription, CNIndexRequestHandler, CNInstantMessageAddress, 
-                       CNInstantMessageAddressesDescription, CNInternalIdentifierDescription, 
-                       CNJobTitleDescription, CNLabeledValue, CNLaunchServicesRemoteAdapter, 
-                       CNLibraryImageDiscovery, CNLinkIdentifierDescription, CNLocalAccountSyncRequest, 
-                       CNMailToGroup, CNMapsDataDescription, CNMemojiBackgroundColor, 
-                       CNMemojiBackgroundParameters, CNMemojiMetadata, CNMemojiMetadataDescription, 
-                       CNMemojiMetadataUtilities, CNMessageToGroup, CNMiddleNameDescription, 
-                       CNModificationDateDescription, CNMultiValuePropertyDescription, 
+                       CNImageTypeDescription, CNInstantMessageAddress, CNInstantMessageAddressesDescription, 
+                       CNInternalIdentifierDescription, CNJobTitleDescription, CNLabeledValue, 
+                       CNLaunchServicesRemoteAdapter, CNLibraryImageDiscovery, CNLinkIdentifierDescription, 
+                       CNLocalAccountSyncRequest, CNMailToGroup, CNMapsDataDescription, 
+                       CNMemojiBackgroundColor, CNMemojiBackgroundParameters, CNMemojiMetadata, 
+                       CNMemojiMetadataDescription, CNMemojiMetadataUtilities, CNMessageToGroup, 
+                       CNMiddleNameDescription, CNModificationDateDescription, CNMultiValuePropertyDescription, 
                        CNMutableActivityAlert, CNMutableContact, CNMutableContactKeyVector, 
                        CNMutableContainer, CNMutableGroup, CNMutableInstantMessageAddress, 
                        CNMutablePostalAddress, CNMutableSocialProfile, CNNamePrefixDescription, 
@@ -335,19 +315,16 @@ exports:
                        CNPhoneticOrganizationNameDescription, CNPolicy, CNPolicyDescription, 
                        CNPostalAddress, CNPostalAddressFormatter, CNPostalAddressFormattingSpecification, 
                        CNPostalAddressesDescription, CNPredicate, CNPredicateValidator, 
-                       CNPreferredApplePersonaIdentifierDescription, CNPreferredChannelDescription, 
-                       CNPreferredForImageDescription, CNPreferredForNameDescription, 
-                       CNPreferredLikenessSourceDescription, CNPreviousFamilyNameDescription, 
-                       CNPronunciationFamilyNameDescription, CNPronunciationGivenNameDescription, 
-                       CNPropertyDescription, CNReputationHandle, CNReputationResult, 
-                       CNReputationStore, CNSaveRequest, CNSearchIndexDescription, 
-                       CNSectionForSortingByFamilyNameDescription, CNSectionForSortingByGivenNameDescription, 
+                       CNPreferredApplePersonaIdentifierDescription, CNPreferredForImageDescription, 
+                       CNPreferredForNameDescription, CNPreferredLikenessSourceDescription, 
+                       CNPreviousFamilyNameDescription, CNPropertyDescription, CNReputationHandle, 
+                       CNReputationResult, CNReputationStore, CNSaveRequest, CNSearchIndexDescription, 
                        CNSeedCardProvider, CNSocialProfile, CNSocialProfilesDescription, 
                        CNSortingFamilyNameDescription, CNSortingGivenNameDescription, 
-                       CNSuggestedSaveRequest, CNSyncImageDataDescription, CNTCC, 
-                       CNTestSmartFetcher, CNTextAlertDescription, CNThumbnailImageDataDescription, 
-                       CNUrlAddressesDescription, CNUserSetupPictureData, CNUserSetupPictureManager, 
-                       CNValueOrigin, CNXPCDataMapper, CNXPCDataMapperProgressiveHandler ]
+                       CNSuggestedSaveRequest, CNTCC, CNTestSmartFetcher, CNTextAlertDescription, 
+                       CNThumbnailImageDataDescription, CNUrlAddressesDescription, 
+                       CNUserSetupPictureData, CNUserSetupPictureManager, CNValueOrigin, 
+                       CNXPCDataMapper, CNXPCDataMapperProgressiveHandler ]
     objc-ivars:      [ CNContainerPermissions._canCreateContacts, CNContainerPermissions._canCreateGroups, 
                        CNContainerPermissions._canDeleteContacts, CNDataMapperContactStore._logger, 
                        CNDataMapperContactStore._mapper, CNXPCDataMapperProgressiveHandler._completionBlock, 
@@ -721,14 +698,7 @@ exports:
                        _CNLDAPAttributePostalAddress, _CNLDAPAttributePostalCode, 
                        _CNLDAPAttributeState, _CNLDAPAttributeStreet, _CNLDAPAttributeSurname, 
                        _CNLDAPAttributeTelephoneNumber, _CNLDAPAttributeTitle, _CNLDAPAttributeWorkURL, 
-                       _CNLDAPErrorDomain, '_OBJC_CLASS_$_CNDuplicateCohort', '_OBJC_CLASS_$_CNDuplicateContactsManager', 
-                       '_OBJC_CLASS_$_CNDuplicateSet', '_OBJC_CLASS_$_CNDuplicateSetContactImage', 
-                       '_OBJC_CLASS_$_CNManagedCohort', '_OBJC_CLASS_$_CNManagedDuplicate', 
-                       '_OBJC_CLASS_$__TtC8Contacts17DuplicateContacts', '_OBJC_CLASS_$__TtC8Contacts21DuplicateCohortRanker', 
-                       '_OBJC_METACLASS_$_CNDuplicateCohort', '_OBJC_METACLASS_$_CNDuplicateContactsManager', 
-                       '_OBJC_METACLASS_$_CNDuplicateSet', '_OBJC_METACLASS_$_CNDuplicateSetContactImage', 
-                       '_OBJC_METACLASS_$_CNManagedCohort', '_OBJC_METACLASS_$_CNManagedDuplicate', 
-                       '_OBJC_METACLASS_$__TtC8Contacts17DuplicateContacts', '_OBJC_METACLASS_$__TtC8Contacts21DuplicateCohortRanker' ]
+                       _CNLDAPErrorDomain ]
     objc-classes:    [ CNDuplicateCohort, CNDuplicateContactsManager, CNDuplicateSet, 
                        CNDuplicateSetContactImage, CNLDAPConnection, CNLDAPFetchRequest, 
                        CNLDAPSearchBase, CNManagedCohort, CNManagedDuplicate, CNSiriIntelligenceSettingsProvider, 

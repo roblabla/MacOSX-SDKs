@@ -1,32 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           844B3D92-3A92-3E13-BFC1-EB642CC55D21
-  - target:          x86_64-maccatalyst
-    value:           844B3D92-3A92-3E13-BFC1-EB642CC55D21
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EBB960F1-6892-39C7-AA61-26463AF2D45C
-  - target:          arm64e-maccatalyst
-    value:           EBB960F1-6892-39C7-AA61-26463AF2D45C
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64556.3.1
+current-version: 64559.91.1
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _VMUBacktraceIsExcludedMarker, _VMUCreateRootNodeMarkingMap, 
                        _VMUDirectedGraphCompatibilityVersionNumberInGraphKey, _VMUDirectedGraphToolCompatibilityVersionKey, 
                        _VMUEnumerateVMAnnotatedMallocObjectsWithBlock, _VMUGetFlagsForAllVMRegionStatistics, 
-                       _VMUGraphNodeTypeDescription, _VMUGraphNodeType_IsRoot, _VMUGraphNodeType_IsVMRegion, 
-                       _VMUIntersectionRange, _VMUIsOwningReference, _VMULiteZoneIndex, 
-                       _VMUMarkObject, _VMUMemorySizeString, _VMUOAHRuntimeLocation, 
-                       _VMUOptionParserError, _VMUOptionParserRegisterFlag, _VMUOptionParserRegisterFlagInternal, 
+                       _VMUGraphNodeTypeDescription, _VMUGraphNodeType_IsAddressValid, 
+                       _VMUGraphNodeType_IsRoot, _VMUGraphNodeType_IsVMRegion, _VMUIntersectionRange, 
+                       _VMUIsOwningReference, _VMULiteZoneIndex, _VMUMarkObject, 
+                       _VMUMemorySizeString, _VMUOAHRuntimeLocation, _VMUOptionParserError, 
+                       _VMUOptionParserRegisterFlag, _VMUOptionParserRegisterFlagInternal, 
                        _VMUPlatformForTask, _VMUPlatformNameForPlatform, _VMUPlatformNameForTask, 
                        _VMUPurgeableDisplayCharacter, _VMURangeContainsRange, _VMURangeDescription, 
                        _VMURangeIntersectsOrAbutsRange, _VMURangeIntersectsRange, 
@@ -41,9 +27,9 @@ exports:
                        _dispositionDescription, _kVMUAutoreleasePoolBoundaryClassName, 
                        _kVMUAutoreleasePoolThreadSpecificDataKeyString, _kVMUPrintArchivingTiming, 
                        _kVMURootRetainCycle, _kVMUThreadSpecificDataKeyString, _pidFromHint, 
-                       _psName, _task_enumerate_malloc_blocks, _task_find_leaks, 
-                       _task_foreach_malloc_zone, _task_get_malloc_ptrs, _task_get_malloc_ptrs_by_zone, 
-                       _task_peek, _task_peek_natural_size, _task_peek_string, _task_read_ptr_at, 
+                       _psName, _task_enumerate_malloc_blocks, _task_foreach_malloc_zone, 
+                       _task_get_malloc_ptrs, _task_get_malloc_ptrs_by_zone, _task_peek, 
+                       _task_peek_natural_size, _task_peek_string, _task_read_ptr_at, 
                        _task_read_unsigned_at, _task_start_peeking, _task_stop_peeking, 
                        _task_try_peek, _vmu_context_for_uniqued_stack, _vmu_create_backtrace_uniquing_table, 
                        _vmu_destroy_backtrace_uniquing_table, _vmu_enter_ptrSized_stack_in_backtrace_uniquing_table, 
@@ -60,7 +46,7 @@ exports:
                        VMUMutableClassInfo, VMUMutableFieldInfo, VMUNodeGroup, VMUNodeToStringMap, 
                        VMUNonOverlappingRangeArray, VMUObjectGraph, VMUObjectIdentifier, 
                        VMUObjectIdentifierDriverKitSupport, VMUOptionParser, VMUProcInfo, 
-                       VMUProcList, VMUProcessDescription, VMUProcessObjectGraph, 
+                       VMUProcList, VMUProcessDescription, VMUProcessLedger, VMUProcessObjectGraph, 
                        VMUProgressBar, VMURangeArray, VMURangeToStringMap, VMUReverseGraphEnumerator, 
                        VMUSampler, VMUScanOverlay, VMUSourceInfo, VMUStackLogConsolidator, 
                        VMUStackLogReaderBase, VMUSwiftRuntimeInfo, VMUSymbol, VMUSymbolOwnerCache, 

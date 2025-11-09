@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CB5D4690-384D-3789-94FB-9AC97D79E8CB
-  - target:          x86_64-maccatalyst
-    value:           CB5D4690-384D-3789-94FB-9AC97D79E8CB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AB25D050-F32E-3FD1-BCFD-3AAEFF653DDF
-  - target:          arm64e-maccatalyst
-    value:           AB25D050-F32E-3FD1-BCFD-3AAEFF653DDF
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeCore'
-current-version: 502.2.3
+current-version: 502.3.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -127,11 +114,11 @@ exports:
                        STPersistenceController, STPresetsAgeSelectedCoreAnalyticsEvent, 
                        STPresetsChooseAgeTappedCoreAnalyticsEvent, STPresetsClient, 
                        STPresetsConfiguration, STPresetsEnableRestrictionsCoreAnalyticsEvent, 
-                       STReconciler, STRestrictionsCoreAnalyticsEvent, STScreenTimeAgentPrivateConnection, 
-                       STScreenTimeCoreBundle, STScreenTimeEnabledUserNotificationContext, 
-                       STScreenTimeEnablementCoreAnalyticsEvent, STScreenTimeSettings, 
-                       STSetupClient, STSetupConfiguration, STTestSyncableObject, 
-                       STTestSyncableSubObject, STUnifiedTransportPayloadDestination, 
+                       STPresetsValueChangedCoreAnalyticsEvent, STReconciler, STRestrictionsCoreAnalyticsEvent, 
+                       STScreenTimeAgentPrivateConnection, STScreenTimeCoreBundle, 
+                       STScreenTimeEnabledUserNotificationContext, STScreenTimeEnablementCoreAnalyticsEvent, 
+                       STScreenTimeSettings, STSetupClient, STSetupConfiguration, 
+                       STTestSyncableObject, STTestSyncableSubObject, STUnifiedTransportPayloadDestination, 
                        STUnique, STUniquedManagedObject, STUsage, STUsageBlock, STUsageCategory, 
                        STUsageCountedItem, STUsageDetailItem, STUsageReporter, STUsageRequest, 
                        STUsageTimedItem, STUsageTrustIdentifier, STUserData, STUserDescription, 

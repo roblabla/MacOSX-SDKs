@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8BD57A9D-F8A3-3DD9-BC1F-F7E05ADDA322
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           265A677C-56EA-3856-8AD5-8AF90E28F886
 install-name:    '/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/CoreFollowUp'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

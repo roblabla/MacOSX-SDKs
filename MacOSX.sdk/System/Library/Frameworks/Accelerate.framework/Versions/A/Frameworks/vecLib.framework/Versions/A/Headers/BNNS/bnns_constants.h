@@ -172,6 +172,9 @@ BNNS_ENUM(BNNSPoolingFunction, uint32_t,
  @constant BNNSActivationFunctionRectifiedLinear
  0 if x<0, and x if x>=0
 
+ @constant BNNSActivationFunctionReLU6
+ min(max(0,x),6)
+
  @constant BNNSActivationFunctionLeakyRectifiedLinear
  alpha*x if x<0, and x if x>=0
  A pointer to the alpha value can be obtained via a BNNSGetPointer() call, and the delta with respect to alpha
@@ -278,6 +281,15 @@ BNNS_ENUM(BNNSPoolingFunction, uint32_t,
  @constant BNNSActivationFunctionSiLU
  SiLU(x) = x*sigmoid(x)
 
+ @constant BNNSActivationFunctionErf
+ erf(x)
+
+ @constant BNNSActivationFunctionGELU
+ GELU(x)_i = 0.5*x * ( 1 + erf(x/sqrt(2)) )
+
+ @constant BNNSActivationFunctionGELUApproximationSigmoid
+ GELUApproxSigmoid(x)_i = x * sigmoid(1.702 * x)
+
 */
 BNNS_ENUM(BNNSActivationFunction, uint32_t,
 
@@ -314,6 +326,10 @@ BNNS_ENUM(BNNSActivationFunction, uint32_t,
   BNNSActivationFunctionGELUApproximation2               __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 30,
   BNNSActivationFunctionHardSwish                        __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = BNNSActivationFunctionGELUApproximation2,
   BNNSActivationFunctionSiLU                             __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 31,
+  BNNSActivationFunctionReLU6                            __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 32,
+  BNNSActivationFunctionErf                              __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 33,
+  BNNSActivationFunctionGELU                             __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 34,
+  BNNSActivationFunctionGELUApproximationSigmoid         __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 35,
 
 );
 
@@ -1089,6 +1105,9 @@ BNNS_ENUM(BNNSFilterType, uint32_t,
  
  @constant BNNSReduceFunctionProduct
  product(X)
+
+ @constant BNNSReduceFunctionLogSum
+ log(sum(X))
  
  @constant BNNSReduceFunctionAny
   Alias of BNNSReduceFunctionLogicalOr
@@ -1121,6 +1140,7 @@ BNNS_ENUM(BNNSReduceFunction, uint32_t,
           BNNSReduceFunctionLogSumExp    __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 13,
           BNNSReduceFunctionProduct      __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 14,
           BNNSReduceFunctionNone         __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 15,
+          BNNSReduceFunctionLogSum       __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 16,
 
           // Friendly aliases
           BNNSReduceFunctionAny           __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = BNNSReduceFunctionLogicalOr,
@@ -1392,12 +1412,12 @@ BNNS_ENUM(BNNSDataLayout, uint32_t,
   BNNSDataLayout3DFirstMajor                   __API_AVAILABLE(macos(11.0),  ios(14.0), watchos(7.0), tvos(14.0)) = 0x38001,
 
   // 4-dimensional layouts
-  BNNSDataLayoutConvolutionWeightsOIHW         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x40000,
-  BNNSDataLayoutConvolutionWeightsOIHrWr       __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x40001,
-  BNNSDataLayoutConvolutionWeightsIOHrWr       __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x40002,
-  BNNSDataLayoutConvolutionWeightsOIHW_Pack32  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x40010,
-  BNNSDataLayout4DLastMajor                    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x48000,
-  BNNSDataLayout4DFirstMajor                   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x48001,
+  BNNSDataLayoutConvolutionWeightsOIHW         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x40000,
+  BNNSDataLayoutConvolutionWeightsOIHrWr       __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x40001,
+  BNNSDataLayoutConvolutionWeightsIOHrWr       __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x40002,
+  BNNSDataLayoutConvolutionWeightsOIHW_Pack32  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x40010,
+  BNNSDataLayout4DLastMajor                    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x48000,
+  BNNSDataLayout4DFirstMajor                   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0),  tvos(14.0)) = 0x48001,
 
   // 5-dimensional layouts
   BNNSDataLayout5DLastMajor                    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x58000,
@@ -1633,11 +1653,23 @@ BNNS_ENUM(BNNSTargetSystem, uint32_t,
  *  pixel unshuffle for NCHW format, reverse of pixel shuffle, i.e.,
  *  reverses the PixelShuffle operation by rearranging elements in a tensor of shape (N,C,H×r,W×r) to a tensor of shape (N,C×rxr,H,W),
  *  where r is a downscale factor
+ *
+ *  @constant BNNSShuffleTypeDepthToSpaceNCHW
+ *  `depth_to_space` for NCHW format, reverse of `space_to_depth` for NCHW.
+ *  `depth_to_space` rearranges elements from (N, Cxbxb, H, W) --> (N, C, Hxb, Wxb), where b is the block size
+ *  Elements are rearranged different to `BNNSShuffleTypePixelShuffleNCHW` for cases
+ *  where the number of output channels is > 1. e.g., (1, 12, 3, 3) --> (1, 3, 6, 6)
+ *
+ *  @constant  BNNSShuffleTypeSpaceToDepthNCHW
+ *  `space_to_depth` for NCHW format, reverse of `depth_to_space`,
+ *  rearranges elements to enable atrous convolution to be performed using dense convolution operations
  */
 
 BNNS_ENUM(BNNSShuffleType, uint32_t,
           BNNSShuffleTypePixelShuffleNCHW     __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0,
           BNNSShuffleTypePixelUnshuffleNCHW   __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 1,
+          BNNSShuffleTypeDepthToSpaceNCHW     __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 2,
+          BNNSShuffleTypeSpaceToDepthNCHW     __API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)) = 3,
 );
 
 #if !__has_include( <Availability.h> )

@@ -1,9 +1,9 @@
-/*
- GKPublicConstants.h
- GameKit
- 
- Copyright 2010 Apple Inc. All rights reserved.
-*/
+//
+//  GKPublicConstants.h
+//  Game Center
+//
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 

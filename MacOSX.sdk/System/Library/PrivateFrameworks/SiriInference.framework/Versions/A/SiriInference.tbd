@@ -1,20 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           65E3FAC4-C563-3EB7-8064-46C06102C448
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A276D6C8-8FB0-35FD-9581-389C70156B96
 install-name:    '/System/Library/PrivateFrameworks/SiriInference.framework/Versions/A/SiriInference'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s11RunTimeData13SiriInference13ValueResolverPTl', '_$s12SiriOntology15TerminalElementV10RecurrenceV0A9InferenceE02toE0AF8DateTimeC0E7PatternCSgyF', 
+    symbols:         [ '_$s11RunTimeData13SiriInference13ValueResolverPTl', '_$s12FeatureFlags0aB3KeyP13SiriInferenceAD0A6ToggleRzrlE9isEnabledSbvg', 
+                       '_$s12FeatureFlags0aB3KeyP13SiriInferenceAD0A6ToggleRzrlE9isEnabledSbvpMV', 
+                       '_$s12SiriOntology15TerminalElementV10RecurrenceV0A9InferenceE02toE0AF8DateTimeC0E7PatternCSgyF', 
                        '_$s12SiriOntology15TerminalElementV13DateTimeValueV0A9InferenceE02toeF0AF0eF0CyF', 
                        '_$s12SiriOntology15TerminalElementV14DateTimePeriodV0A9InferenceE09toDefinedE0AF0eF0C0E0C0jE0OSgyF', 
                        '_$s12SiriOntology15TerminalElementV14DateTimePeriodV0A9InferenceE09toDefinedF0AF0eF0C0F0C0jF0OSgyF', 
@@ -456,8 +451,8 @@ exports:
                        '_$s13SiriInference10StreetTypeVMa', '_$s13SiriInference10StreetTypeVMn', 
                        '_$s13SiriInference10StreetTypeVN', '_$s13SiriInference10StreetTypeVSEAAMc', 
                        '_$s13SiriInference10StreetTypeVSQAAMc', '_$s13SiriInference10StreetTypeVSeAAMc', 
-                       '_$s13SiriInference11PLUSFeatureVMa', '_$s13SiriInference11PLUSFeatureVMn', 
-                       '_$s13SiriInference11PLUSFeatureVN', '_$s13SiriInference11POILandmarkV2eeoiySbAC_ACtFZ', 
+                       '_$s13SiriInference11PLUSFeatureOMa', '_$s13SiriInference11PLUSFeatureOMn', 
+                       '_$s13SiriInference11PLUSFeatureON', '_$s13SiriInference11POILandmarkV2eeoiySbAC_ACtFZ', 
                        '_$s13SiriInference11POILandmarkV4fromACs7Decoder_p_tKcfC', 
                        '_$s13SiriInference11POILandmarkV4name6prefixACSS_AC6PrefixOSgtcfC', 
                        '_$s13SiriInference11POILandmarkV4nameSSvg', '_$s13SiriInference11POILandmarkV4nameSSvpMV', 
@@ -517,6 +512,7 @@ exports:
                        '_$s13SiriInference11XPCActivityV14RepeatIntervalOSQAAMc', 
                        '_$s13SiriInference11XPCActivityV17registerFirstBootyyFZ', 
                        '_$s13SiriInference11XPCActivityV26registerDailySignalRefresh07refreshF8Callbackyyyc_tFZ', 
+                       '_$s13SiriInference11XPCActivityV27registerHourlySignalRefresh06hourlyfG0yyyc_tFZ', 
                        '_$s13SiriInference11XPCActivityV34registerDailyTaskSuccessEvaluationyyFZ', 
                        '_$s13SiriInference11XPCActivityV8register4name14repeatInterval17isPrivacyCritical13makeOperationySS_AC06RepeatG0OSbAA0cL0CSo13OS_xpc_object_pctFZ', 
                        '_$s13SiriInference11XPCActivityVMa', '_$s13SiriInference11XPCActivityVMn', 
@@ -586,7 +582,10 @@ exports:
                        '_$s13SiriInference12DoubleSignalVN', '_$s13SiriInference12DoubleSignalVSEAAMc', 
                        '_$s13SiriInference12DoubleSignalVSQAAMc', '_$s13SiriInference12DoubleSignalVSeAAMc', 
                        '_$s13SiriInference12DoubleSignalVs23CustomStringConvertibleAAMc', 
-                       '_$s13SiriInference12LocationNameV2eeoiySbAC_ACtFZ', '_$s13SiriInference12LocationNameV4fromACs7Decoder_p_tKcfC', 
+                       '_$s13SiriInference12HypocorismDBV24superSlowFetchEverythingSaySS6locale_SS6properSS10hypocorismtGyKFZ', 
+                       '_$s13SiriInference12HypocorismDBVMa', '_$s13SiriInference12HypocorismDBVMn', 
+                       '_$s13SiriInference12HypocorismDBVN', '_$s13SiriInference12LocationNameV2eeoiySbAC_ACtFZ', 
+                       '_$s13SiriInference12LocationNameV4fromACs7Decoder_p_tKcfC', 
                        '_$s13SiriInference12LocationNameV4name6prefixACSS_AC6PrefixOSgtcfC', 
                        '_$s13SiriInference12LocationNameV4nameSSvg', '_$s13SiriInference12LocationNameV4nameSSvpMV', 
                        '_$s13SiriInference12LocationNameV6PrefixO2inyA2EmFWC', '_$s13SiriInference12LocationNameV6PrefixO2onyA2EmFWC', 
@@ -741,6 +740,8 @@ exports:
                        '_$s13SiriInference13ContinentNameVMa', '_$s13SiriInference13ContinentNameVMn', 
                        '_$s13SiriInference13ContinentNameVN', '_$s13SiriInference13ContinentNameVSEAAMc', 
                        '_$s13SiriInference13ContinentNameVSQAAMc', '_$s13SiriInference13ContinentNameVSeAAMc', 
+                       '_$s13SiriInference13FeatureToggleMp', '_$s13SiriInference13FeatureToggleP9isEnabledSbvgTj', 
+                       '_$s13SiriInference13FeatureToggleP9isEnabledSbvgTq', '_$s13SiriInference13FeatureToggleTL', 
                        '_$s13SiriInference13RunTimeDataDBV10defaultURLs6ResultOy10Foundation0H0Vs5Error_pGvMZ', 
                        '_$s13SiriInference13RunTimeDataDBV10defaultURLs6ResultOy10Foundation0H0Vs5Error_pGvgZ', 
                        '_$s13SiriInference13RunTimeDataDBV10defaultURLs6ResultOy10Foundation0H0Vs5Error_pGvsZ', 
@@ -768,6 +769,8 @@ exports:
                        '_$s13SiriInference13StreetAddressV10streetTypeAA0cF0VSgvpMV', 
                        '_$s13SiriInference13StreetAddressV12streetNumberAA0cF0VSgvg', 
                        '_$s13SiriInference13StreetAddressV12streetNumberAA0cF0VSgvpMV', 
+                       '_$s13SiriInference13StreetAddressV16fullThoroughfareSSSgvg', 
+                       '_$s13SiriInference13StreetAddressV16fullThoroughfareSSSgvpMV', 
                        '_$s13SiriInference13StreetAddressV2eeoiySbAC_ACtFZ', '_$s13SiriInference13StreetAddressV4fromACs7Decoder_p_tKcfC', 
                        '_$s13SiriInference13StreetAddressV6encode2toys7Encoder_p_tKF', 
                        '_$s13SiriInference13StreetAddressVMa', '_$s13SiriInference13StreetAddressVMn', 
@@ -806,7 +809,9 @@ exports:
                        '_$s13SiriInference14RecommendationOMa', '_$s13SiriInference14RecommendationOMn', 
                        '_$s13SiriInference14RecommendationOyxGSEAASeRzSERzlMc', '_$s13SiriInference14RecommendationOyxGSQAASQRzlMc', 
                        '_$s13SiriInference14RecommendationOyxGSeAASeRzSERzlMc', '_$s13SiriInference14RecommendationOyxGs23CustomStringConvertibleAAMc', 
-                       '_$s13SiriInference14SimpleTaskInfoO012longDurationD0yACSi_tcACmFWC', 
+                       '_$s13SiriInference14RelationshipDBV24superSlowFetchEverythingSaySS6locale_SS12relationshipSS5aliastGyKFZ', 
+                       '_$s13SiriInference14RelationshipDBVMa', '_$s13SiriInference14RelationshipDBVMn', 
+                       '_$s13SiriInference14RelationshipDBVN', '_$s13SiriInference14SimpleTaskInfoO012longDurationD0yACSi_tcACmFWC', 
                        '_$s13SiriInference14SimpleTaskInfoO013infoRetrievalD0yA2CmFWC', 
                        '_$s13SiriInference14SimpleTaskInfoO013userConfirmedD0yA2CmFWC', 
                        '_$s13SiriInference14SimpleTaskInfoO08editableD0yA2CmFWC', 
@@ -1297,7 +1302,19 @@ exports:
                        '_$s13SiriInference16HolidaysDatabaseCMn', '_$s13SiriInference16HolidaysDatabaseCMo', 
                        '_$s13SiriInference16HolidaysDatabaseCMu', '_$s13SiriInference16HolidaysDatabaseCN', 
                        '_$s13SiriInference16HolidaysDatabaseCfD', '_$s13SiriInference16HolidaysDatabaseCfd', 
-                       '_$s13SiriInference16LocationResolverV11findMatches5value7context4specSayAA5MatchVyAA0C0VAA0C9SignalSetVGGAK_AA0C17ResolutionContextVAA0cM4SpecVtKF', 
+                       '_$s13SiriInference16LocationFeaturesO09memorableC14RecommendationyA2CmFWC', 
+                       '_$s13SiriInference16LocationFeaturesO12FeatureFlags0eF3KeyAAMc', 
+                       '_$s13SiriInference16LocationFeaturesO2eeoiySbAC_ACtFZ', '_$s13SiriInference16LocationFeaturesO4hash4intoys6HasherVz_tF', 
+                       '_$s13SiriInference16LocationFeaturesO6domains12StaticStringVvg', 
+                       '_$s13SiriInference16LocationFeaturesO6domains12StaticStringVvpMV', 
+                       '_$s13SiriInference16LocationFeaturesO7features12StaticStringVvg', 
+                       '_$s13SiriInference16LocationFeaturesO7features12StaticStringVvpMV', 
+                       '_$s13SiriInference16LocationFeaturesO9hashValueSivg', '_$s13SiriInference16LocationFeaturesO9hashValueSivpMV', 
+                       '_$s13SiriInference16LocationFeaturesOAA13FeatureToggleAAMc', 
+                       '_$s13SiriInference16LocationFeaturesOAA13FeatureToggleAAWP', 
+                       '_$s13SiriInference16LocationFeaturesOMa', '_$s13SiriInference16LocationFeaturesOMn', 
+                       '_$s13SiriInference16LocationFeaturesON', '_$s13SiriInference16LocationFeaturesOSHAAMc', 
+                       '_$s13SiriInference16LocationFeaturesOSQAAMc', '_$s13SiriInference16LocationResolverV11findMatches5value7context4specSayAA5MatchVyAA0C0VAA0C9SignalSetVGGAK_AA0C17ResolutionContextVAA0cM4SpecVtKF', 
                        '_$s13SiriInference16LocationResolverV18makeRecommendation5value7context4specAA0F0OyAA0C0VGAK_AA0C17ResolutionContextVAA0cJ4SpecVtKF', 
                        '_$s13SiriInference16LocationResolverV4names12StaticStringVvMZ', 
                        '_$s13SiriInference16LocationResolverV4names12StaticStringVvgZ', 
@@ -2495,16 +2512,7 @@ exports:
                        '_$s13SiriInference7CountryV6suffixAC6SuffixOSgvpMV', '_$s13SiriInference7CountryVMa', 
                        '_$s13SiriInference7CountryVMn', '_$s13SiriInference7CountryVN', 
                        '_$s13SiriInference7CountryVSEAAMc', '_$s13SiriInference7CountryVSQAAMc', 
-                       '_$s13SiriInference7CountryVSeAAMc', '_$s13SiriInference7FeatureO0C5Flags0cD3KeyAAMc', 
-                       '_$s13SiriInference7FeatureO2eeoiySbAC_ACtFZ', '_$s13SiriInference7FeatureO31memorableLocationRecommendationyA2CmFWC', 
-                       '_$s13SiriInference7FeatureO4hash4intoys6HasherVz_tF', '_$s13SiriInference7FeatureO6domains12StaticStringVvg', 
-                       '_$s13SiriInference7FeatureO6domains12StaticStringVvpMV', 
-                       '_$s13SiriInference7FeatureO7features12StaticStringVvg', '_$s13SiriInference7FeatureO7features12StaticStringVvpMV', 
-                       '_$s13SiriInference7FeatureO9hashValueSivg', '_$s13SiriInference7FeatureO9hashValueSivpMV', 
-                       '_$s13SiriInference7FeatureO9isEnabledSbvg', '_$s13SiriInference7FeatureO9isEnabledSbvpMV', 
-                       '_$s13SiriInference7FeatureOMa', '_$s13SiriInference7FeatureOMn', 
-                       '_$s13SiriInference7FeatureON', '_$s13SiriInference7FeatureOSHAAMc', 
-                       '_$s13SiriInference7FeatureOSQAAMc', '_$s13SiriInference7ZipcodeV2eeoiySbAC_ACtFZ', 
+                       '_$s13SiriInference7CountryVSeAAMc', '_$s13SiriInference7ZipcodeV2eeoiySbAC_ACtFZ', 
                        '_$s13SiriInference7ZipcodeV4fromACs7Decoder_p_tKcfC', '_$s13SiriInference7ZipcodeV5value6prefixACSS_AC6PrefixOSgtcfC', 
                        '_$s13SiriInference7ZipcodeV5valueSSvg', '_$s13SiriInference7ZipcodeV5valueSSvpMV', 
                        '_$s13SiriInference7ZipcodeV6PrefixO2inyA2EmFWC', '_$s13SiriInference7ZipcodeV6PrefixO4nearyA2EmFWC', 
@@ -2977,6 +2985,7 @@ exports:
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O7tonightyA2GmFWC', 
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O7weekdayyA2GmFWC', 
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O7weekendyA2GmFWC', 
+                       '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O8forenoonyA2GmFWC', 
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O8rawValueAGSgSi_tcfC', 
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O8rawValueSivg', 
                        '_$s13SiriInference8DateTimeC0cD5RangeC07DefinedcdE0O8rawValueSivpMV', 

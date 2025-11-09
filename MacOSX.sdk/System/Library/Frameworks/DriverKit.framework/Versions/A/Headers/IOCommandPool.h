@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOCommandPool.iig */
+/* iig(DriverKit-256.100.8) generated from IOCommandPool.iig */
 
 /* IOCommandPool.iig:1-41 */
 /*
@@ -218,7 +218,7 @@ public:
 
 #if !KERNEL
 
-class IOCommandPoolInterface : public OSInterface
+class  IOCommandPoolInterface : public OSInterface
 {
 public:
     virtual bool

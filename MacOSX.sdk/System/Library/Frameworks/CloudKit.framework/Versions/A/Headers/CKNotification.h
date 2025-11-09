@@ -13,9 +13,10 @@
 
 @class CKRecordID, CKRecordZoneID;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+// NS_SWIFT_SENDABLE on swift(4.2)
 @interface CKNotificationID : NSObject <NSCopying, NSSecureCoding>
 @end
 
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, CKNotificationType) {
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKNotification : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -54,8 +56,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 /*! @abstract Whether or not the notification fully represents what the server wanted to send.
  *
- * @discussion Push notifications have a limited size.  In some cases, CloudKit servers may not be able to send you a full @c CKNotification's worth of info in one push.  In those cases, isPruned returns YES.  The order in which we'll drop properties is defined in each @c CKNotification subclass below.
- * The @c CKNotification can be obtained in full via a @c CKFetchNotificationChangesOperation
+ *  @discussion Push notifications have a limited size.  In some cases, CloudKit servers may not be able to send you a full @c CKNotification's worth of info in one push.  In those cases, isPruned returns YES.  The order in which we'll drop properties is defined in each @c CKNotification subclass below.
+ *  The @c CKNotification can be obtained in full via a @c CKFetchNotificationChangesOperation
  */
 @property (nonatomic, readonly, assign) BOOL isPruned;
 
@@ -137,15 +139,16 @@ typedef NS_ENUM(NSInteger, CKQueryNotificationReason) {
  *  - subtitle
  */
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKQueryNotification : CKNotification
 
 @property (nonatomic, readonly, assign) CKQueryNotificationReason queryNotificationReason;
 
 /*! @abstract A set of key->value pairs for creates and updates.
  *
- * @discussion You request the server fill out this property via the @c desiredKeys property of @c CKNotificationInfo
+ *  @discussion You request the server fill out this property via the @c desiredKeys property of @c CKNotificationInfo
  */
-@property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, id> *recordFields;
+@property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NS_SWIFT_SENDABLE id> *recordFields;
 
 @property (nonatomic, readonly, copy, nullable) CKRecordID *recordID;
 
@@ -179,6 +182,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  */
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKRecordZoneNotification : CKNotification
 
 @property (nonatomic, readonly, copy, nullable) CKRecordZoneID *recordZoneID;
@@ -212,10 +216,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  */
 
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKDatabaseNotification : CKNotification
 
 @property (nonatomic, readonly, assign) CKDatabaseScope databaseScope;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

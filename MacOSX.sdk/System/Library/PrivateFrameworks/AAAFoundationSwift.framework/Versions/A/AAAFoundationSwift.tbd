@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B5D7C68F-9E06-3ED2-ADAD-7FBBB78F22ED
-  - target:          x86_64-maccatalyst
-    value:           B5D7C68F-9E06-3ED2-ADAD-7FBBB78F22ED
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1A93D235-4999-3255-A883-CC3523D98212
-  - target:          arm64e-maccatalyst
-    value:           1A93D235-4999-3255-A883-CC3523D98212
 install-name:    '/System/Library/PrivateFrameworks/AAAFoundationSwift.framework/Versions/A/AAAFoundationSwift'
 swift-abi-version: 7
 exports:
@@ -116,6 +103,8 @@ exports:
                        '_$s18AAAFoundationSwift13OSTransactionC4nameACs12StaticStringV_tcfCTq', 
                        '_$s18AAAFoundationSwift13OSTransactionC4nameACs12StaticStringV_tcfc', 
                        '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yACXEtFZ', 
+                       '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yACYaKXEtYaKFZ', 
+                       '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yACYaKXEtYaKFZTu', 
                        '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yyXEtFZ', 
                        '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yyYaKXEtYaKFZ', 
                        '_$s18AAAFoundationSwift13OSTransactionC5named_5blockys12StaticStringV_yyYaKXEtYaKFZTu', 
@@ -135,7 +124,10 @@ exports:
                        '_$s18AAAFoundationSwift14MessagingErrorO18NoAvailableHandlerVMn', 
                        '_$s18AAAFoundationSwift14MessagingErrorO18NoAvailableHandlerVy_xGs0D0AAMc', 
                        '_$s18AAAFoundationSwift14MessagingErrorOMa', '_$s18AAAFoundationSwift14MessagingErrorOMn', 
-                       '_$s18AAAFoundationSwift14MessagingErrorON', '_$s18AAAFoundationSwift14XPCCodingErrorO14UnexpectedTypeV06actualF0SSvg', 
+                       '_$s18AAAFoundationSwift14MessagingErrorON', '_$s18AAAFoundationSwift14MetricsServiceMp', 
+                       '_$s18AAAFoundationSwift14MetricsServiceP14sendOneMessage11sessionInfo04userI08category4type7payloadySDys11AnyHashableVypG_ALs6UInt16VAnLSgtKFTj', 
+                       '_$s18AAAFoundationSwift14MetricsServiceP14sendOneMessage11sessionInfo04userI08category4type7payloadySDys11AnyHashableVypG_ALs6UInt16VAnLSgtKFTq', 
+                       '_$s18AAAFoundationSwift14MetricsServiceTL', '_$s18AAAFoundationSwift14XPCCodingErrorO14UnexpectedTypeV06actualF0SSvg', 
                        '_$s18AAAFoundationSwift14XPCCodingErrorO14UnexpectedTypeV06actualF0SSvpMV', 
                        '_$s18AAAFoundationSwift14XPCCodingErrorO14UnexpectedTypeV08expectedF0SSvg', 
                        '_$s18AAAFoundationSwift14XPCCodingErrorO14UnexpectedTypeV08expectedF0SSvpMV', 
@@ -315,7 +307,34 @@ exports:
                        '_$s18AAAFoundationSwift18OptionalDependencyV14projectedValueACyxGvpMV', 
                        '_$s18AAAFoundationSwift18OptionalDependencyV14projectedValueACyxGvs', 
                        '_$s18AAAFoundationSwift18OptionalDependencyVMa', '_$s18AAAFoundationSwift18OptionalDependencyVMn', 
-                       '_$s18AAAFoundationSwift19BroadcastDispatcherC06handleC7Message_4withySe_SEp_qd__tlFTj', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV10clientType0E7Version0E8BundleID0E4Name07serviceJ0012defaultEventF0012auroraSchemaI014metricsServiceACSi_SiS3Ss6UInt16VSSSgAA07MetricsQ0_pSgtcfC', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV10successKeySSvM', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV10successKeySSvg', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV10successKeySSvpMV', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV10successKeySSvs', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV11durationKeySSvM', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV11durationKeySSvg', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV11durationKeySSvpMV', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV11durationKeySSvs', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV11reportEvent8category4type7payloadys6UInt16V_AISgSDySSypGtF', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV12errorCodeKeySSvM', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV12errorCodeKeySSvg', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV12errorCodeKeySSvpMV', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV12errorCodeKeySSvs', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV14metricsServiceAA07MetricsF0_pvg', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV14metricsServiceAA07MetricsF0_pvpMV', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV17auroraSchemaIDKeySSvM', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV17auroraSchemaIDKeySSvg', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV17auroraSchemaIDKeySSvpMV', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV17auroraSchemaIDKeySSvs', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV17defaultSuccessKeySSvgZ', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV18defaultDurationKeySSvgZ', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV19defaultErrorCodeKeySSvgZ', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV24defaultAuroraSchemaIDKeySSvgZ', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV7perform8category4type9workBlockxs6UInt16V_AISgxyYaKXEtYaKAA23MetricsEventConvertibleRzlF', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterV7perform8category4type9workBlockxs6UInt16V_AISgxyYaKXEtYaKAA23MetricsEventConvertibleRzlFTu', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterVMa', '_$s18AAAFoundationSwift18RTCMetricsReporterVMn', 
+                       '_$s18AAAFoundationSwift18RTCMetricsReporterVN', '_$s18AAAFoundationSwift19BroadcastDispatcherC06handleC7Message_4withySe_SEp_qd__tlFTj', 
                        '_$s18AAAFoundationSwift19BroadcastDispatcherC06handleC7Message_4withySe_SEp_qd__tlFTq', 
                        '_$s18AAAFoundationSwift19BroadcastDispatcherC06handleC7MessageyySe_SEpFTj', 
                        '_$s18AAAFoundationSwift19BroadcastDispatcherC06handleC7MessageyySe_SEpFTq', 
@@ -372,7 +391,9 @@ exports:
                        '_$s18AAAFoundationSwift22LazyOptionalDependencyV14projectedValueACyxGvpMV', 
                        '_$s18AAAFoundationSwift22LazyOptionalDependencyV14projectedValueACyxGvs', 
                        '_$s18AAAFoundationSwift22LazyOptionalDependencyVMa', '_$s18AAAFoundationSwift22LazyOptionalDependencyVMn', 
-                       '_$s18AAAFoundationSwift28InitializedInjectableServiceMp', 
+                       '_$s18AAAFoundationSwift23MetricsEventConvertibleMp', '_$s18AAAFoundationSwift23MetricsEventConvertibleP14metricsPayloadSDySSypGvgTj', 
+                       '_$s18AAAFoundationSwift23MetricsEventConvertibleP14metricsPayloadSDySSypGvgTq', 
+                       '_$s18AAAFoundationSwift23MetricsEventConvertibleTL', '_$s18AAAFoundationSwift28InitializedInjectableServiceMp', 
                        '_$s18AAAFoundationSwift28InitializedInjectableServiceP6configxSDys11AnyHashableVypGSg_tcfCTj', 
                        '_$s18AAAFoundationSwift28InitializedInjectableServiceP6configxSDys11AnyHashableVypGSg_tcfCTq', 
                        '_$s18AAAFoundationSwift28InitializedInjectableServicePAA0dE0Tb', 

@@ -1,23 +1,35 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           73F4FDF2-6E88-3A78-AC7B-E7A429F31D45
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           90892461-C4A1-3612-BFB5-7A1454DBCCF4
 install-name:    '/System/Library/PrivateFrameworks/NotesSupport.framework/Versions/A/NotesSupport'
-current-version: 2185
+current-version: 2215
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ICACAccountPropertyDidChooseToMigrate, _ICACAccountPropertyDidFinishMigration, 
+    symbols:         [ '_$s10Foundation4DateV12NotesSupportE014briefFormattedB0SSvg', 
+                       '_$s10Foundation4DateV12NotesSupportE014briefFormattedB0SSvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE014briefFormattedB16ForAccessibilitySSvg', 
+                       '_$s10Foundation4DateV12NotesSupportE014briefFormattedB16ForAccessibilitySSvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE014shortFormattedB0SSvg', 
+                       '_$s10Foundation4DateV12NotesSupportE014shortFormattedB0SSvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE05localB11WithSecondsSSvg', 
+                       '_$s10Foundation4DateV12NotesSupportE05localB11WithSecondsSSvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE10startOfDayACvg', '_$s10Foundation4DateV12NotesSupportE10startOfDayACvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE11isYesterdaySbvg', '_$s10Foundation4DateV12NotesSupportE11isYesterdaySbvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE12numberOfDays4fromSuAC_tF', 
+                       '_$s10Foundation4DateV12NotesSupportE4dateACSgSS_tcfC', '_$s10Foundation4DateV12NotesSupportE7isLater4thanSbAC_tF', 
+                       '_$s10Foundation4DateV12NotesSupportE7isTodaySbvg', '_$s10Foundation4DateV12NotesSupportE7isTodaySbvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE8endOfDayACvg', '_$s10Foundation4DateV12NotesSupportE8endOfDayACvpMV', 
+                       '_$s10Foundation4DateV12NotesSupportE9isEarlier4thanSbAC_tF', 
+                       '_$s10Foundation4DateV12NotesSupportE9isSameDay2asSbAC_tF', 
+                       '_$s10Foundation4DateV12NotesSupportE9truncatedACvg', '_$s10Foundation4DateV12NotesSupportE9truncatedACvpMV', 
+                       _ICACAccountPropertyDidChooseToMigrate, _ICACAccountPropertyDidFinishMigration, 
                        _ICACAccountPropertyDidMigrateOnMac, _ICACAccountPropertyNeedsMigrationAfterIA, 
                        _ICAccountBundlesDirectoryName, _ICAccountExportableMediaDirectoryName, 
-                       _ICAccountFallbackImagesDirectoryName, _ICAccountMediaDirectoryName, 
-                       _ICAccountPaperDirectoryName, _ICAccountPreviewsDirectoryName, 
-                       _ICAccountThumbnailsDirectoryName, _ICAccountUtilitiesPrimaryICloudAccountDidChooseToMigrateKey, 
+                       _ICAccountFallbackImagesDirectoryName, _ICAccountFallbackPDFsDirectoryName, 
+                       _ICAccountMediaDirectoryName, _ICAccountPaperDirectoryName, 
+                       _ICAccountPreviewsDirectoryName, _ICAccountThumbnailsDirectoryName, 
+                       _ICAccountUtilitiesPrimaryICloudAccountDidChooseToMigrateKey, 
                        _ICAccountUtilitiesPrimaryICloudAccountEnabledKey, _ICAccountUtilitiesStoreDidChangeNotification, 
                        _ICAccountsDirectoryName, _ICActivityTypeShareToNote, _ICAssertBreakpoint, 
                        _ICAttachmentNameMaxLength, _ICCFTypeCast, _ICCGColorCopyInverse, 

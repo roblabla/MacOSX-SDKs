@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7BAFFE26-1711-39F5-97E5-33F7A7A9E599
-  - target:          x86_64-maccatalyst
-    value:           7BAFFE26-1711-39F5-97E5-33F7A7A9E599
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1AE9B5F4-A483-30E2-8D66-7F3BF2E10B91
-  - target:          arm64e-maccatalyst
-    value:           1AE9B5F4-A483-30E2-8D66-7F3BF2E10B91
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
@@ -186,19 +173,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DA177218-ACD1-3AED-BC51-396BC0DF807E
-  - target:          x86_64-maccatalyst
-    value:           DA177218-ACD1-3AED-BC51-396BC0DF807E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           95069972-7E6A-39CB-B950-06B38B5F9F46
-  - target:          arm64e-maccatalyst
-    value:           95069972-7E6A-39CB-B950-06B38B5F9F46
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
@@ -341,9 +315,10 @@ exports:
                        BSMachPortRight, BSMachPortSendOnceRight, BSMachPortSendRight, 
                        BSMachPortTaskNameRight, BSMachServiceAliases, BSMonotonicReferenceTime, 
                        BSMutableAnimationSettings, BSMutableIntegerMap, BSMutableIntegerSet, 
-                       BSMutableKeyedSettings, BSMutableMachServiceAliases, BSMutableSettings, 
-                       BSMutableSpringAnimationSettings, BSObjCArgument, BSObjCBlockArgument, 
-                       BSObjCMethod, BSObjCProtocol, BSPathProviderFactory, BSPlatform, 
+                       BSMutableKeyedSettings, BSMutableMachServiceAliases, BSMutableOrderedDictionary, 
+                       BSMutableSettings, BSMutableSpringAnimationSettings, BSObjCArgument, 
+                       BSObjCBlockArgument, BSObjCMethod, BSObjCProtocol, BSOrderedDictionary, 
+                       BSOrderedDictionaryKeyStrategy, BSPathProviderFactory, BSPlatform, 
                        BSPluginBundle, BSPluginManager, BSPluginManagerCoordinator, 
                        BSPortDeathSentinel, BSPortDeathWatcher, BSPowerMonitor, BSProcessDeathWatcher, 
                        BSProcessHandle, BSProtobufSchema, BSProtobufSerialization, 
@@ -361,19 +336,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EEF4A9B5-2A80-32E8-B855-0D829F9D8A4B
-  - target:          x86_64-maccatalyst
-    value:           EEF4A9B5-2A80-32E8-B855-0D829F9D8A4B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C1FAE60C-189F-3DB6-8990-93956F8F74A4
-  - target:          arm64e-maccatalyst
-    value:           C1FAE60C-189F-3DB6-8990-93956F8F74A4
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:

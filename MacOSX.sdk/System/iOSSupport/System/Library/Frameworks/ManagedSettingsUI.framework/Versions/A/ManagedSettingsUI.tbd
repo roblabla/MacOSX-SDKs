@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           7F7C086F-AB2A-3BD6-840A-6118F81C02C4
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           AF31057F-0A38-39A2-AAEB-2EF2F593C3D7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ManagedSettingsUI.framework/Versions/A/ManagedSettingsUI'
-current-version: 66
+current-version: 84
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -52,8 +45,6 @@ exports:
                        '_$s17ManagedSettingsUI29ShieldConfigurationDataSourceCMo', 
                        '_$s17ManagedSettingsUI29ShieldConfigurationDataSourceCMu', 
                        '_$s17ManagedSettingsUI29ShieldConfigurationDataSourceCN', 
-                       '_$s17ManagedSettingsUI29ShieldConfigurationDataSourceCfD', 
-                       '_OBJC_CLASS_$__TtC17ManagedSettingsUI29ShieldConfigurationDataSource', 
-                       '_OBJC_METACLASS_$__TtC17ManagedSettingsUI29ShieldConfigurationDataSource' ]
+                       '_$s17ManagedSettingsUI29ShieldConfigurationDataSourceCfD' ]
     objc-classes:    [ _TtC17ManagedSettingsUI29ShieldConfigurationDataSource ]
 ...

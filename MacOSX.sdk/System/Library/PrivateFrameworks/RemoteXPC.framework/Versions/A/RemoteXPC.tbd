@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           007FF847-2AAE-33C1-B691-DF8FC8956443
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F48683B4-3D68-3BD8-87B6-E0DECC477DC0
 install-name:    '/System/Library/PrivateFrameworks/RemoteXPC.framework/Versions/A/RemoteXPC'
-current-version: 2462.60.15
+current-version: 2462.100.95
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _XPC_REMOTE_CONNECTION_PROTOCOL_VERSION_CURRENT, __xpc_type_remote_connection, 

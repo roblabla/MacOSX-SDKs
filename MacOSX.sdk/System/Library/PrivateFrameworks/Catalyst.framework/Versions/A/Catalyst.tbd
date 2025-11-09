@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7D62AADD-E03B-32D2-AEA4-7C43C84E5A5D
-  - target:          x86_64-maccatalyst
-    value:           7D62AADD-E03B-32D2-AEA4-7C43C84E5A5D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           08984EFD-C7F3-376C-A521-2309811DB8C0
-  - target:          arm64e-maccatalyst
-    value:           08984EFD-C7F3-376C-A521-2309811DB8C0
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
 current-version: 9.1
 exports:

@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from AFKEndpointInterface.iig */
+/* iig(DriverKit-256.100.8) generated from AFKEndpointInterface.iig */
 
 /* AFKEndpointInterface.iig:1-24 */
 /*
@@ -353,7 +353,7 @@ public:
 
 #if !KERNEL
 
-class AFKEndpointInterfaceInterface : public OSInterface
+class  AFKEndpointInterfaceInterface : public OSInterface
 {
 public:
     virtual bool

@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IODataQueueDispatchSource.iig */
+/* iig(DriverKit-256.100.8) generated from IODataQueueDispatchSource.iig */
 
 /* IODataQueueDispatchSource.iig:1-37 */
 /*
@@ -526,7 +526,7 @@ public:
 };
 
 
-class IODataQueueDispatchSourceInterface : public OSInterface
+class  IODataQueueDispatchSourceInterface : public OSInterface
 {
 public:
 };

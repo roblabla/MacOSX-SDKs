@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #ifndef CK_EXTERN
 #ifdef __cplusplus
@@ -39,4 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
     #endif
 #endif
 
-NS_ASSUME_NONNULL_END
+#ifndef CK_SUBCLASSING_RESTRICTED
+    #define CK_SUBCLASSING_RESTRICTED __attribute__((__objc_subclassing_restricted__))
+#endif
+
+NS_HEADER_AUDIT_END(nullability, sendability)

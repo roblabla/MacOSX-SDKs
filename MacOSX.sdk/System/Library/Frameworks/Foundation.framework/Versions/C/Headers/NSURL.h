@@ -239,6 +239,7 @@ FOUNDATION_EXPORT NSURLResourceKey const NSURLDocumentIdentifierKey API_AVAILABL
 FOUNDATION_EXPORT NSURLResourceKey const NSURLAddedToDirectoryDateKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // The date the resource was created, or renamed into or within its parent directory. Note that inconsistent behavior may be observed when this attribute is requested on hard-linked items. This property is not supported by all volumes. (Read-only before macOS 10.15, iOS 13.0, watchOS 6.0, and tvOS 13.0; Read-write after, value type NSDate)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLQuarantinePropertiesKey API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos); // The quarantine properties as defined in LSQuarantine.h. To remove quarantine information from a file, pass NSNull as the value when setting this property. (Read-write, value type NSDictionary)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLFileResourceTypeKey            API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); // Returns the file system object type. (Read-only, value type NSString)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLFileIdentifierKey              API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)); 	// The file system's internal inode identifier for the item. This value is not stable for all file systems or across all mounts, so it should be used sparingly and not persisted. It is useful, for example, to match URLs from the URL enumerator with paths from FSEvents. (Read-only, value type NSNumber containing an unsigned long long).
 FOUNDATION_EXPORT NSURLResourceKey const NSURLFileContentIdentifierKey       API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)); // A 64-bit value assigned by APFS that identifies a file's content data stream. Only cloned files and their originals can have the same identifier. (Read-only, value type NSNumber)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLMayShareFileContentKey         API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)); // True for cloned files and their originals that may share all, some, or no data blocks. (Read-only, value type NSNumber)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLMayHaveExtendedAttributesKey   API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)); // True if the file has extended attributes. False guarantees there are none. (Read-only, value type NSNumber)
@@ -342,6 +343,9 @@ FOUNDATION_EXPORT NSURLResourceKey const NSURLVolumeAvailableCapacityForImportan
  */
 FOUNDATION_EXPORT NSURLResourceKey const NSURLVolumeAvailableCapacityForOpportunisticUsageKey API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos); // (Read-only, value type NSNumber)
 
+FOUNDATION_EXPORT NSURLResourceKey const NSURLVolumeTypeNameKey                       API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)); // The name of the file system type. (Read-only, value type NSString)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLVolumeSubtypeKey                        API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)); // The file system subtype value. (Read-only, value type NSNumber)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLVolumeMountFromLocationKey              API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4)); // The volume mounted from location. (Read-only, value type NSString)
 
 /* Ubiquitous item resource keys
  */

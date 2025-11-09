@@ -1,22 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           C67BAF9B-D1F7-331C-A0FC-A0E2715F95AE
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           3560D4BA-2B56-39F4-A793-E80FC0BFFFCC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3731.255.101
+current-version: 3731.255.231
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _MFAutomaticHorizontalDirectionalEdgeInsets, _MFAutomaticHorizontalEdgeInsets, 
-                       _MFCenteredRectInRectWithViewScale, _MFComposeRecipientDragType, 
-                       _MFComposeRecipientStringMatchAddress, _MFComposeRecipientStringMatchFirstName, 
-                       _MFComposeRecipientStringMatchLastName, _MFComposeRecipientStringMatchMiddleName, 
-                       _MFComposeRecipientStringMatchType, _MFComposeRecipientTextViewIsCollectingPreviousKeyResponder, 
+    symbols:         [ _MFComposeRecipientDragType, _MFComposeRecipientStringMatchAddress, 
+                       _MFComposeRecipientStringMatchFirstName, _MFComposeRecipientStringMatchLastName, 
+                       _MFComposeRecipientStringMatchMiddleName, _MFComposeRecipientStringMatchType, 
+                       _MFComposeRecipientTextViewIsCollectingPreviousKeyResponder, 
                        _MFComposeRecipientViewDidChangeNotification, _MFEdgeInsetsFromDirectionalEdgeInsets, 
                        _MFFirstIndexInRangePassingTest, _MFFirstIndexPassingTest, 
                        _MFFontMetricCacheInvalidationNotification, _MFImageGlyphAlignCenter, 
@@ -76,8 +68,7 @@ exports:
                        _MFMessageComposeViewControllerTextMessageAvailabilityKey, 
                        _MFModernUIApplicationPreferredContentSizeCode, _MFModernUIApplicationPreferredContentSizeIsAccessibility, 
                        _MFModernUIApplicationPreferredContentSizeIsLargerThanLarge, 
-                       _MFModernUIContentSizeAwareImageNameWithPrefix, _MFModernUIContentSizeCategoryOrdering, 
-                       _MFPointRoundedToViewScale ]
+                       _MFModernUIContentSizeAwareImageNameWithPrefix, _MFModernUIContentSizeCategoryOrdering ]
     objc-classes:    [ MFAddressConcatenator, MFAlertOverlayController, MFAtomTextView, 
                        MFAttachmentMarkup, MFAutocompleteResultsTableViewController, 
                        MFCalendarComposeRecipient, MFComposeAttachmentInfo, MFComposeDisplayMetrics, 

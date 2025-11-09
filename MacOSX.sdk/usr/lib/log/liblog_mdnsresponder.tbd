@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           27347062-2145-353D-918E-EECA227DC8A0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ACF01600-E686-331B-88A2-E215AA3C7933
 install-name:    '/usr/lib/log/liblog_mdnsresponder.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

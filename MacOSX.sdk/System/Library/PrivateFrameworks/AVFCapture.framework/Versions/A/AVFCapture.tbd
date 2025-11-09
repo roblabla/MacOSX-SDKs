@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
-  - target:          x86_64-maccatalyst
-    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
-  - target:          arm64e-maccatalyst
-    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

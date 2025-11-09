@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D5C81760-BA91-3022-A40A-43C500FA8C89
-  - target:          x86_64-maccatalyst
-    value:           D5C81760-BA91-3022-A40A-43C500FA8C89
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           25CB25BD-5C61-329C-8444-BC37BB189094
-  - target:          arm64e-maccatalyst
-    value:           25CB25BD-5C61-329C-8444-BC37BB189094
 install-name:    '/System/Library/PrivateFrameworks/CoreSpeechFoundation.framework/Versions/A/CoreSpeechFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

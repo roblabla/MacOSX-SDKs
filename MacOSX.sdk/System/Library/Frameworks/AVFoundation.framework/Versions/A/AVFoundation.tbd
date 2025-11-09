@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           59803F12-E14D-3BA6-862E-93066F9B08F3
-  - target:          x86_64-maccatalyst
-    value:           59803F12-E14D-3BA6-862E-93066F9B08F3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0797D98A-3B4B-3474-9BE2-3D4746AFFC40
-  - target:          arm64e-maccatalyst
-    value:           0797D98A-3B4B-3474-9BE2-3D4746AFFC40
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation'
 current-version: 2
 reexported-libraries:
@@ -31,19 +18,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
-  - target:          x86_64-maccatalyst
-    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
-  - target:          arm64e-maccatalyst
-    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -314,19 +288,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
-  - target:          x86_64-maccatalyst
-    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
-  - target:          arm64e-maccatalyst
-    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -948,6 +909,10 @@ exports:
                        _AVPlayerCurrentItemDidChangeReasonKey, _AVPlayerCurrentItemDidChangeRemovalReason, 
                        _AVPlayerCurrentItemDidChangeUnknownReason, _AVPlayerEligibleForHDRPlaybackDidChangeNotification, 
                        _AVPlayerInterstitialEventJoinCue, _AVPlayerInterstitialEventLeaveCue, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification, 
+                       _AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, 
                        _AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification, 
                        _AVPlayerInterstitialEventMonitorEventsDidChangeNotification, 
                        _AVPlayerInterstitialEventNoCue, _AVPlayerInterstitialPlayerDidChangeNotification, 

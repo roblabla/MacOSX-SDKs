@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9DEF88E6-F73F-3424-B094-4EF810C83A32
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           92D54967-3F31-32B8-8A02-9684213D20A6
 install-name:    '/System/Library/PrivateFrameworks/DMCUtilities.framework/Versions/A/DMCUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -34,16 +27,16 @@ exports:
                        _DMCDefaultsKeyDeviceNameOverride, _DMCDefaultsKeyESSOTestModeEnabled, 
                        _DMCDefaultsKeyEnrollmentStepTimeout, _DMCDefaultsKeyIgnoreEnrollmentMode, 
                        _DMCDefaultsKeyMDMProfilePath, _DMCDefaultsKeyMobileGestaltOverride, 
-                       _DMCDefaultsKeyModelNameOverride, _DMCDefaultsKeyProductNameOverride, 
-                       _DMCDefaultsKeyServiceDiscoveryDefaultPort, _DMCDefaultsKeyServiceDiscoveryDomain, 
-                       _DMCDefaultsKeyServiceDiscoveryFallbackURL, _DMCDefaultsKeySimulateMDMBYODSignIn, 
-                       _DMCDefaultsKeySimulateMDMCommunication, _DMCDefaultsKeySimulatedMDMBYODAuthMethod, 
-                       _DMCDefaultsKeySimulatedMDMBYODDefaultUsername, _DMCDefaultsKeySimulatedMDMBYODProfile, 
-                       _DMCDefaultsKeySoftwareUpdateDeviceIDOverride, _DMCDefaultsKeyUseHTTPLogging, 
-                       _DMCDefaultsKeyUseNonEphemeralWebAuthSession, _DMCDeviceIsNetworkTethered, 
-                       _DMCEnrollmentErrorDomain, _DMCErrorArray, _DMCErrorTypeFatal, 
-                       _DMCErrorTypeKey, _DMCErrorTypeNeedsRetry, _DMCErrorTypeRetryable, 
-                       _DMCErrorTypeSkippable, _DMCFixPermissionOfSystemGroupContainerFileFM, 
+                       _DMCDefaultsKeyModelNameOverride, _DMCDefaultsKeyModelNumberOverride, 
+                       _DMCDefaultsKeyProductNameOverride, _DMCDefaultsKeyServiceDiscoveryDefaultPort, 
+                       _DMCDefaultsKeyServiceDiscoveryDomain, _DMCDefaultsKeyServiceDiscoveryFallbackURL, 
+                       _DMCDefaultsKeySimulateMDMBYODSignIn, _DMCDefaultsKeySimulateMDMCommunication, 
+                       _DMCDefaultsKeySimulatedMDMBYODAuthMethod, _DMCDefaultsKeySimulatedMDMBYODDefaultUsername, 
+                       _DMCDefaultsKeySimulatedMDMBYODProfile, _DMCDefaultsKeySoftwareUpdateDeviceIDOverride, 
+                       _DMCDefaultsKeyUseHTTPLogging, _DMCDefaultsKeyUseNonEphemeralWebAuthSession, 
+                       _DMCDeviceIsNetworkTethered, _DMCEnrollmentErrorDomain, _DMCErrorArray, 
+                       _DMCErrorTypeFatal, _DMCErrorTypeKey, _DMCErrorTypeNeedsRetry, 
+                       _DMCErrorTypeRetryable, _DMCErrorTypeSkippable, _DMCFixPermissionOfSystemGroupContainerFileFM, 
                        _DMCFixPermissionsOfSystemGroupContainerDirectoryAndContents, 
                        _DMCFixPermissionsOfSystemGroupContainerDirectoryAndContentsFM, 
                        _DMCHCUCopyCertificateFromKeychainForMappedLabel, _DMCHCUCopyHostCertificateForMappedLabel, 
@@ -60,23 +53,23 @@ exports:
                        _DMCHTTPMAIDFieldUsername, _DMCHTTPMethodDELETE, _DMCHTTPMethodGET, 
                        _DMCHTTPMethodPOST, _DMCHTTPMethodPUT, _DMCHTTPRequestTimeout, 
                        _DMCHTTPTransactionErrorDomain, _DMCHangTracerDirectory, _DMCHasMDMMigrated, 
-                       _DMCIOBluetoothMAC, _DMCIOModelString, _DMCIOSerialString, 
-                       _DMCInstallationErrorDomain, _DMCInternalErrorDomain, _DMCIsBundleIDRunning, 
-                       _DMCIsDeviceLocked, _DMCIsGreenTea, _DMCIsSetupBuddyDone, 
-                       _DMCKeybagErrorDomain, _DMCKeychainErrorDomain, _DMCLocalizedFormat, 
-                       _DMCLocalizedString, _DMCLocalizedStringByDevice, _DMCLocalizedStringForDevice, 
-                       _DMCLockdownSetDeviceName, _DMCLogObjects, _DMCMultiUserDeviceConfigurationFilePath, 
-                       _DMCPersonaErrorDomain, _DMCProvisioningProfileErrorDomain, 
-                       _DMCRestoreErrorDomain, _DMCSBUserNotificationDismissOnLock, 
-                       _DMCSBUserNotificationDontDismissOnUnlock, _DMCSafelyCopyItemAtPathToDestinationPath, 
-                       _DMCSafelyCopyItemAtPathToDestinationPathFM, _DMCSendSettingsChangedNotification, 
-                       _DMCSetSkipBackupAttributeToItemAtPath, _DMCSettingsChangedNotification, 
-                       _DMCSettingsErrorDomain, _DMCStoreErrorDomain, _DMCStringForBool, 
-                       _DMCSystemContainerPathWithBundleIdentifier, _DMCSystemRootDirectory, 
-                       _DMCTunnelErrorDomain, _DMCUSEnglishLocale, _DMCUSEnglishNumberFormatter, 
-                       _DMCUSEnglishString, _DMCUnformattedErrorArray, _DMCUserAgent, 
-                       _DMCUtilitiesVersionNumber, _DMCUtilitiesVersionString, _DMCXPCErrorDomain, 
-                       _MCFileAccessRepairToolErrorDomain, _MCLegacyMetadataFilePath, 
+                       _DMCIOBluetoothMAC, _DMCIOModelPrefixString, _DMCIOModelString, 
+                       _DMCIOSerialString, _DMCInstallationErrorDomain, _DMCInternalErrorDomain, 
+                       _DMCIsBundleIDRunning, _DMCIsDeviceLocked, _DMCIsGreenTea, 
+                       _DMCIsSetupBuddyDone, _DMCKeybagErrorDomain, _DMCKeychainErrorDomain, 
+                       _DMCLocalizedFormat, _DMCLocalizedString, _DMCLocalizedStringByDevice, 
+                       _DMCLocalizedStringForDevice, _DMCLockdownSetDeviceName, _DMCLogObjects, 
+                       _DMCMultiUserDeviceConfigurationFilePath, _DMCPersonaErrorDomain, 
+                       _DMCProvisioningProfileErrorDomain, _DMCRestoreErrorDomain, 
+                       _DMCSBUserNotificationDismissOnLock, _DMCSBUserNotificationDontDismissOnUnlock, 
+                       _DMCSafelyCopyItemAtPathToDestinationPath, _DMCSafelyCopyItemAtPathToDestinationPathFM, 
+                       _DMCSendSettingsChangedNotification, _DMCSetSkipBackupAttributeToItemAtPath, 
+                       _DMCSettingsChangedNotification, _DMCSettingsErrorDomain, 
+                       _DMCStoreErrorDomain, _DMCStringForBool, _DMCSystemContainerPathWithBundleIdentifier, 
+                       _DMCSystemRootDirectory, _DMCTunnelErrorDomain, _DMCUSEnglishLocale, 
+                       _DMCUSEnglishNumberFormatter, _DMCUSEnglishString, _DMCUnformattedErrorArray, 
+                       _DMCUserAgent, _DMCUtilitiesVersionNumber, _DMCUtilitiesVersionString, 
+                       _DMCXPCErrorDomain, _MCFileAccessRepairToolErrorDomain, _MCLegacyMetadataFilePath, 
                        _MCSystemMetadataFilePath, _MCUserMetadataFilePath, _MDMAppManagementFilePath, 
                        _MDMAuthenticationResultsCacheFilePath, _MDMCloudConfigurationDetailsFilePath, 
                        _MDMCloudConfigurationSetAsideDetailsFilePath, _MDMDirtyEnrollmentStateFilePath, 

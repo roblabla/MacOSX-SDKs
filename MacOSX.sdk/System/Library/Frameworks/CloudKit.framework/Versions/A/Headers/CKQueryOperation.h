@@ -5,15 +5,18 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <CloudKit/CKDefines.h>
+#import <Foundation/Foundation.h>
+
 #import <CloudKit/CKDatabaseOperation.h>
+#import <CloudKit/CKDefines.h>
 #import <CloudKit/CKRecord.h>
 
 @class CKQuery, CKRecord, CKRecordZoneID;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
 @interface CKQueryCursor : NSObject <NSCopying, NSSecureCoding>
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -62,6 +65,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  @discussion The callbacks will happen in the order that the results were sorted in.
  *  If the replacement callback @c recordMatchedBlock is set, this callback block is ignored.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record) API_DEPRECATED("Use recordMatchedBlock instead, which surfaces per-record errors", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
@@ -69,6 +74,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *
  *  @discussion The callbacks will happen in the order that the results were sorted in.  If a record fails in post-processing (say, a network failure materializing a @c CKAsset record field), the per-record error will be passed here.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^recordMatchedBlock)(CKRecordID *recordID, CKRecord * _Nullable record, NSError * _Nullable error) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
 
@@ -78,10 +85,12 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
  *  If the error is @c CKErrorPartialFailure, the error's userInfo dictionary contains a dictionary of recordIDs to errors keyed off of @c CKPartialErrorsByItemIDKey.  These errors are repeats of those sent back in previous @c recordMatchedBlock invocations
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^queryCompletionBlock)(CKQueryCursor * _Nullable cursor, NSError * _Nullable operationError)
 CK_SWIFT_DEPRECATED("Use queryResultBlock instead", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

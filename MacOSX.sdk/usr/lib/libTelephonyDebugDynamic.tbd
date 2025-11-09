@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           79D2CDB9-32E5-36EC-A3BE-00AAED422359
-  - target:          x86_64-maccatalyst
-    value:           79D2CDB9-32E5-36EC-A3BE-00AAED422359
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           35386D0E-3321-344A-8E54-A81A0D50108F
-  - target:          arm64e-maccatalyst
-    value:           35386D0E-3321-344A-8E54-A81A0D50108F
 install-name:    '/usr/lib/libTelephonyDebugDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

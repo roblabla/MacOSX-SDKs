@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKPaymentRequestStatus.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentRequestStatus.h
-//  PassKit
+//    PassKit
 //  Copyright © 2016 Apple, Inc. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKPaymentTokenContext;
 @class PKAutomaticReloadPaymentRequest;
 @class PKRecurringPaymentRequest;
+@class PKDeferredPaymentRequest;
 @class PKPaymentOrderDetails;
 
 API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
@@ -77,6 +78,14 @@ API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 //
 // This property cannot be used simultaneously with multi token contexts or recurring payment requests.
 @property (nonatomic, strong, nullable) PKAutomaticReloadPaymentRequest *automaticReloadPaymentRequest API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
+
+// The new deferred payment request to update the payment request with.
+// The default value is `nil`, which indicates no update is needed.
+//
+// The billing agreeement cannot be changed.
+//
+// This property cannot be used simultaneously with: multi token contexts, recurring payment requests or automatic reload payment requests.
+@property (nonatomic, strong, nullable) PKDeferredPaymentRequest *deferredPaymentRequest API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(watchos);
 
 @end
 

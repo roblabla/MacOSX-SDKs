@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6976BFBE-6804-38BC-976D-01EB79357D6A
-  - target:          x86_64-maccatalyst
-    value:           6976BFBE-6804-38BC-976D-01EB79357D6A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           52C4C8DB-9B97-3FBE-B91A-2DFA3C4B4198
-  - target:          arm64e-maccatalyst
-    value:           52C4C8DB-9B97-3FBE-B91A-2DFA3C4B4198
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
 current-version: 1228
 reexported-libraries:
@@ -51,21 +38,8 @@ reexports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           769381C9-E6F5-3DFC-9B8B-2810B71A487E
-  - target:          x86_64-maccatalyst
-    value:           769381C9-E6F5-3DFC-9B8B-2810B71A487E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2370B854-34D9-3E85-8EA6-C5E2C032D47E
-  - target:          arm64e-maccatalyst
-    value:           2370B854-34D9-3E85-8EA6-C5E2C032D47E
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 946
+current-version: 944
 compatibility-version: 0
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -151,13 +125,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2B9E1AC4-8848-364E-B156-FFA612021B3D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6A70DC09-F6A9-3303-B782-7EAEF8220EF2
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
 current-version: 1333
 parent-umbrella:
@@ -805,19 +772,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B37CE800-1ED8-3656-98A8-7FD1E619C3BA
-  - target:          x86_64-maccatalyst
-    value:           B37CE800-1ED8-3656-98A8-7FD1E619C3BA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7A6DD0E2-596F-346D-85A7-D4DA501BF6BC
-  - target:          arm64e-maccatalyst
-    value:           7A6DD0E2-596F-346D-85A7-D4DA501BF6BC
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 355
 parent-umbrella:
@@ -888,21 +842,8 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A6DCA847-22B1-3F2D-BF74-11802EDAC016
-  - target:          x86_64-maccatalyst
-    value:           A6DCA847-22B1-3F2D-BF74-11802EDAC016
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           24D4220E-9746-35CA-801F-0ED2D73E9AF1
-  - target:          arm64e-maccatalyst
-    value:           24D4220E-9746-35CA-801F-0ED2D73E9AF1
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1355
+current-version: 1358.100.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -924,19 +865,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
-  - target:          x86_64-maccatalyst
-    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
-  - target:          arm64e-maccatalyst
-    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
@@ -1394,21 +1322,8 @@ reexports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F8F24EEC-C959-3505-8CED-A3AF6767FFD6
-  - target:          x86_64-maccatalyst
-    value:           F8F24EEC-C959-3505-8CED-A3AF6767FFD6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C03BDE17-399F-3E6C-A0C5-51576C5C85DC
-  - target:          arm64e-maccatalyst
-    value:           C03BDE17-399F-3E6C-A0C5-51576C5C85DC
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2230.7
+current-version: 2230.18
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1878,19 +1793,6 @@ reexports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
-  - target:          x86_64-maccatalyst
-    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
-  - target:          arm64e-maccatalyst
-    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
@@ -1972,9 +1874,10 @@ exports:
                        __CSCopySecIdentityForAppleID, __CSCopyUserIdentityForPersonInfo, 
                        __CSCreateAppleIDIdentityWithCertificate, __CSCreateAppleIDIdentityWithCertificateChain, 
                        __CSCreateAppleIDIdentityWithNameAndAccountIdentifier, __CSCreatePosixNameFromString, 
-                       __CSDeviceSupportsAirDrop, __CSDeviceSupportsODisk, __CSDisassociateWireless, 
-                       __CSEnableWirelessP2P, __CSGetAppleIDIdentityAuthority, __CSIdentityAddLinkedIdentityWithNameAndAuthority, 
-                       __CSIdentityAllowsPasswordResetWithAuthority, __CSIdentityAllowsPasswordResetWithAuthorityFromDSAttrData, 
+                       __CSDefaultLog, __CSDeviceSupportsAirDrop, __CSDeviceSupportsODisk, 
+                       __CSDisassociateWireless, __CSEnableWirelessP2P, __CSGetAppleIDIdentityAuthority, 
+                       __CSIdentityAddLinkedIdentityWithNameAndAuthority, __CSIdentityAllowsPasswordResetWithAuthority, 
+                       __CSIdentityAllowsPasswordResetWithAuthorityFromDSAttrData, 
                        __CSIdentityAuthenticateUsingCertificate, __CSIdentityAuthenticateUsingCertificateChain, 
                        __CSIdentityAuthenticateUsingPassword, __CSIdentityAuthorityAuthenticateNameAndPassword, 
                        __CSIdentityAuthorityCopyIdentityWithName, __CSIdentityChangePassword, 
@@ -2032,19 +1935,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CC6AF2FB-CD68-35A6-9CA0-0E985C7C93A1
-  - target:          x86_64-maccatalyst
-    value:           CC6AF2FB-CD68-35A6-9CA0-0E985C7C93A1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4664089A-9C82-3AC7-A060-E0659143357D
-  - target:          arm64e-maccatalyst
-    value:           4664089A-9C82-3AC7-A060-E0659143357D
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:
@@ -2172,19 +2062,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B62E2A1C-BC67-33B7-879D-E324CB47B8DF
-  - target:          x86_64-maccatalyst
-    value:           B62E2A1C-BC67-33B7-879D-E324CB47B8DF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2689B4F0-E199-3090-93C2-29B10D8D31F9
-  - target:          arm64e-maccatalyst
-    value:           2689B4F0-E199-3090-93C2-29B10D8D31F9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 225
 parent-umbrella:

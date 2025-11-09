@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9422E453-D248-39E9-BD0A-C0F9ECC28945
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7D611ADA-C85F-38AE-8403-78404111AD92
 install-name:    '/System/Library/PrivateFrameworks/RequestDispatcherBridges.framework/Versions/A/RequestDispatcherBridges'
 swift-abi-version: 7
 exports:

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D74CF70D-19DF-3296-8FAC-8FFCDADC8C44
-  - target:          x86_64-maccatalyst
-    value:           D74CF70D-19DF-3296-8FAC-8FFCDADC8C44
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BE5EDD52-BDA2-3E9B-986A-14177E5C9E2C
-  - target:          arm64e-maccatalyst
-    value:           BE5EDD52-BDA2-3E9B-986A-14177E5C9E2C
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufLocation.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

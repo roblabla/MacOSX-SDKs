@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F5169B7E-1237-3475-B7CD-370C6E500894
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2FD85AE6-8FCA-3FE2-80A4-3B749A455AB5
 install-name:    '/usr/lib/AppleConvergedTransport.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

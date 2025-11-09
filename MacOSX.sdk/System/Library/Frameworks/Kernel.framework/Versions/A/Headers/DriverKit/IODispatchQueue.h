@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IODispatchQueue.iig */
+/* iig(DriverKit-256.100.8) generated from IODispatchQueue.iig */
 
 /* IODispatchQueue.iig:1-54 */
 /*
@@ -404,7 +404,7 @@ public:\
 
 
 
-class IODispatchQueueInterface : public OSInterface
+class  IODispatchQueueInterface : public OSInterface
 {
 public:
 };

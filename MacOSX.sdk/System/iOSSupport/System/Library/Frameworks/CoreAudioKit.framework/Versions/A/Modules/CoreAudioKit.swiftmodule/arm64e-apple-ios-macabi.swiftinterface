@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreAudioKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 243.2
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 243.61
 import AVFoundation
 import AudioToolbox
 @_exported import CoreAudioKit
@@ -63,7 +63,7 @@ extension CoreAudioKit.AUGenericViewInternal {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func accessibilityIncrement()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func accessibilityDecrement()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func accessibilityActivate() -> Swift.Bool
-  @objc @_Concurrency.MainActor(unsafe) public var dataSource: (CoreAudioKit.CAAUViewParameterDataSource)? {
+  @objc @_Concurrency.MainActor(unsafe) public var dataSource: (any CoreAudioKit.CAAUViewParameterDataSource)? {
     @objc get
     @objc set
   }
@@ -106,7 +106,7 @@ extension CoreAudioKit.AUGenericViewInternal {
 }
 @objc @_inheritsConvenienceInitializers @available(iOS, introduced: 15, deprecated: 16)
 @_Concurrency.MainActor(unsafe) public class AUDistortionView : UIKit.UIView, UIKit.UICollectionViewDelegate {
-  @objc @_Concurrency.MainActor(unsafe) public var parameterDataSource: CoreAudioKit.CAAUViewParameterDataSource!
+  @objc @_Concurrency.MainActor(unsafe) public var parameterDataSource: (any CoreAudioKit.CAAUViewParameterDataSource)!
   @objc @_Concurrency.MainActor(unsafe) public var auAudioUnit: AudioToolbox.AUAudioUnit? {
     @objc get
     @objc set
@@ -229,7 +229,7 @@ extension CoreAudioKit.AUDistortionView {
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS, introduced: 15, deprecated: 16)
 @objc @_Concurrency.MainActor(unsafe) public class CACompressionView : CoreAudioKit.CAAUGraphView {
-  @objc @_Concurrency.MainActor(unsafe) public var dataSource: (CoreAudioKit.AUCompressionParameterDataSource & CoreAudioKit.CAAUViewParameterDataSource)? {
+  @objc @_Concurrency.MainActor(unsafe) public var dataSource: (any CoreAudioKit.AUCompressionParameterDataSource & CoreAudioKit.CAAUViewParameterDataSource)? {
     @objc get
     @objc set
   }
@@ -251,7 +251,7 @@ extension CoreAudioKit.AUDistortionView {
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 14, *)
 @objc @_Concurrency.MainActor(unsafe) public class CAAUEQGraphView : CoreAudioKit.CAAUGraphView {
-  @objc @_Concurrency.MainActor(unsafe) public var dataSource: CoreAudioKit.CAAUViewParameterDataSource? {
+  @objc @_Concurrency.MainActor(unsafe) public var dataSource: (any CoreAudioKit.CAAUViewParameterDataSource)? {
     @objc get
     @objc set
   }
@@ -302,7 +302,7 @@ extension CoreAudioKit.AUDistortionView {
 }
 @_hasMissingDesignatedInitializers @available(iOS 14, *)
 @objc public class CAAUFilterControl : ObjectiveC.NSObject, QuartzCore.CALayerDelegate {
-  @objc final public let dataSource: CoreAudioKit.CAAUViewParameterDataSource
+  @objc final public let dataSource: any CoreAudioKit.CAAUViewParameterDataSource
   @objc public var controlLayer: QuartzCore.CALayer?
   @objc public var enabled: Swift.Bool {
     @objc get

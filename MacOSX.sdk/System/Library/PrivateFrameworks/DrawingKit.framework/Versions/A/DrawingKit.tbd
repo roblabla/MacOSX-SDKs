@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8E8914B1-C860-30AC-A94A-C179256E2BF2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           39F5C4C3-4605-3D88-8C49-97F059CE1890
 install-name:    '/System/Library/PrivateFrameworks/DrawingKit.framework/Versions/A/DrawingKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

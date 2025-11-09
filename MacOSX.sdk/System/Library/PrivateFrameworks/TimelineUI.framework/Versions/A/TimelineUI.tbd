@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           87FA1EA7-5855-306C-8023-6F760B80E857
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B659344A-0FF1-35F2-8324-D88DEFC43099
 install-name:    '/System/Library/PrivateFrameworks/TimelineUI.framework/Versions/A/TimelineUI'
 swift-abi-version: 7
 allowable-clients:

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2C73C62D-D12E-355D-A489-C66C4F9F8E44
-  - target:          x86_64-maccatalyst
-    value:           2C73C62D-D12E-355D-A489-C66C4F9F8E44
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CA02452C-0887-3D1D-9AD6-50BDCE990AC8
-  - target:          arm64e-maccatalyst
-    value:           CA02452C-0887-3D1D-9AD6-50BDCE990AC8
 install-name:    '/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport'
-current-version: 103
+current-version: 106
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

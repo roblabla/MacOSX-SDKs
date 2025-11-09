@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           020CA35C-82CF-320A-BDE5-1356BB716A59
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BCF362DE-D78D-311E-B427-6B5CB58431BF
 install-name:    '/usr/lib/libsysmon.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

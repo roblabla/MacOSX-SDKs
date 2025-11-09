@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           70DEBCF3-87C4-3C25-A2BB-1163C77B2B2D
-  - target:          x86_64-maccatalyst
-    value:           70DEBCF3-87C4-3C25-A2BB-1163C77B2B2D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           14F34F42-CE39-3F72-B697-87DD77DAC2AD
-  - target:          arm64e-maccatalyst
-    value:           14F34F42-CE39-3F72-B697-87DD77DAC2AD
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 800.60.5
+current-version: 803.100.24
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

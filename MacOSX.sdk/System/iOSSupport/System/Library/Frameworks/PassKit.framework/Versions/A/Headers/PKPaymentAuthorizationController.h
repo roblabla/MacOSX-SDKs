@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitUI/PKPaymentAuthorizationController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationController.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //

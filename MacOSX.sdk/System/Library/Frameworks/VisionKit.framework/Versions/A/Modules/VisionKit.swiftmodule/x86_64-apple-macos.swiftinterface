@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name VisionKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 201.5
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name VisionKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 201.7
 import AppKit
 import Foundation
 import Swift
@@ -60,13 +60,13 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
 }
 @available(macOS 13.0, *)
 @_Concurrency.MainActor public protocol ImageAnalysisOverlayViewDelegate : AnyObject {
-  func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldBeginAt point: CoreFoundation.CGPoint, forAnalysisType analysisType: VisionKit.ImageAnalysisOverlayView.InteractionTypes) -> Swift.Bool
-  func contentsRect(for overlayView: VisionKit.ImageAnalysisOverlayView) -> CoreFoundation.CGRect
-  func contentView(for overlayView: VisionKit.ImageAnalysisOverlayView) -> AppKit.NSView?
-  func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldHandleKeyDownEvent event: AppKit.NSEvent) -> Swift.Bool
-  func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldShowMenuForEvent event: AppKit.NSEvent, atPoint point: CoreFoundation.CGPoint) -> Swift.Bool
-  func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, liveTextButtonDidChangeToVisible visible: Swift.Bool)
-  func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, highlightSelectedItemsDidChange highlightSelectedItems: Swift.Bool)
+  @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldBeginAt point: CoreFoundation.CGPoint, forAnalysisType analysisType: VisionKit.ImageAnalysisOverlayView.InteractionTypes) -> Swift.Bool
+  @_Concurrency.MainActor func contentsRect(for overlayView: VisionKit.ImageAnalysisOverlayView) -> CoreFoundation.CGRect
+  @_Concurrency.MainActor func contentView(for overlayView: VisionKit.ImageAnalysisOverlayView) -> AppKit.NSView?
+  @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldHandleKeyDownEvent event: AppKit.NSEvent) -> Swift.Bool
+  @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldShowMenuForEvent event: AppKit.NSEvent, atPoint point: CoreFoundation.CGPoint) -> Swift.Bool
+  @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, liveTextButtonDidChangeToVisible visible: Swift.Bool)
+  @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, highlightSelectedItemsDidChange highlightSelectedItems: Swift.Bool)
 }
 @available(macOS 13.0, *)
 extension VisionKit.ImageAnalysisOverlayViewDelegate {
@@ -92,8 +92,8 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
   }
   @_Concurrency.MainActor @objc override dynamic public init(frame frameRect: Foundation.NSRect)
   @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @_Concurrency.MainActor convenience public init(_ delegate: VisionKit.ImageAnalysisOverlayViewDelegate)
-  @_Concurrency.MainActor weak final public var delegate: VisionKit.ImageAnalysisOverlayViewDelegate? {
+  @_Concurrency.MainActor convenience public init(_ delegate: any VisionKit.ImageAnalysisOverlayViewDelegate)
+  @_Concurrency.MainActor weak final public var delegate: (any VisionKit.ImageAnalysisOverlayViewDelegate)? {
     get
     set
   }

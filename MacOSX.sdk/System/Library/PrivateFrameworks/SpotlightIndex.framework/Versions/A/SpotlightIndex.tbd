@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           26D415DF-01EB-3AC1-9A39-C681062DC5CC
-  - target:          x86_64-maccatalyst
-    value:           26D415DF-01EB-3AC1-9A39-C681062DC5CC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CE802714-E693-368D-A76E-91053C0B0DA8
-  - target:          arm64e-maccatalyst
-    value:           CE802714-E693-368D-A76E-91053C0B0DA8
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2230.7
+current-version: 2230.18
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -31,9 +18,10 @@ exports:
                        _SIDeserialize, _SIExecuteQuery, _SIExecuteQueryWithResultsCallback, 
                        _SIExecuteQueryWithResultsCallbackForTags, _SIFetchCSClientState, 
                        _SIFetchTopKTerms, _SIFixupPaths, _SIFlushAndSuspendIndex, 
-                       _SIForceResume, _SIGetAccumulatedCountForBundleId, _SIGetAccumulatedSizeForGroup, 
-                       _SIGetAccumulatedStorageSizeForBundleId, _SIGetAccumulatedWorkTimeSinceLastSync, 
-                       _SIGetAttributes, _SIGetCSAttributes, _SIGetCompletionOptionsFromRankingWeights, 
+                       _SIForceDefaultSchemaData, _SIForceResume, _SIGetAccumulatedCountForBundleId, 
+                       _SIGetAccumulatedSizeForGroup, _SIGetAccumulatedStorageSizeForBundleId, 
+                       _SIGetAccumulatedWorkTimeSinceLastSync, _SIGetAttributes, 
+                       _SIGetCSAttributes, _SIGetCompletionOptionsFromRankingWeights, 
                        _SIGetExceptionPort, _SIGetIndexVersion, _SIGetLargestOid, 
                        _SIGetMaxTransactionID, _SIGetPermCacheStatistics, _SIGetStoreCookie, 
                        _SIHasPersistentStoreCookie, _SIHealthCheckFiles, _SIIndexInactive, 

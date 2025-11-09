@@ -5,7 +5,7 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @abstract The base protocol for all PublicKeyCredential credential types.
  */
@@ -23,4 +23,4 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

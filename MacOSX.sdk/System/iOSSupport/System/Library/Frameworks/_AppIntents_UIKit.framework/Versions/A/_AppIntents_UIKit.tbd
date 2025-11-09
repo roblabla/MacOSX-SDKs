@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           8D192756-A0D7-3F7B-AB31-1D306D5C2FB1
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           B84F7CE3-2898-373E-B341-62CB2D96BD68
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_UIKit.framework/Versions/A/_AppIntents_UIKit'
-current-version: 130.100.5
+current-version: 136.100.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -73,9 +66,6 @@ exports:
                        '_$s17_AppIntents_UIKit23IntentSceneConfiguratorTL', '_$s17_AppIntents_UIKit24IntentSceneConfigurationO03newE0yA2CmFWC', 
                        '_$s17_AppIntents_UIKit24IntentSceneConfigurationO08existingE0yACSo7UISceneCcACmFWC', 
                        '_$s17_AppIntents_UIKit24IntentSceneConfigurationOMa', '_$s17_AppIntents_UIKit24IntentSceneConfigurationOMn', 
-                       '_$s17_AppIntents_UIKit24IntentSceneConfigurationON', '_OBJC_CLASS_$__TtC17_AppIntents_UIKit22UIAppEntityInteraction', 
-                       '_OBJC_CLASS_$__TtC17_AppIntents_UIKit22UIAppIntentInteraction', 
-                       '_OBJC_METACLASS_$__TtC17_AppIntents_UIKit22UIAppEntityInteraction', 
-                       '_OBJC_METACLASS_$__TtC17_AppIntents_UIKit22UIAppIntentInteraction' ]
+                       '_$s17_AppIntents_UIKit24IntentSceneConfigurationON' ]
     objc-classes:    [ _TtC17_AppIntents_UIKit22UIAppEntityInteraction, _TtC17_AppIntents_UIKit22UIAppIntentInteraction ]
 ...

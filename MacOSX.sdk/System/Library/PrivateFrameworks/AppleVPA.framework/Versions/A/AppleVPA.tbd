@@ -1,9 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A694C420-0BC0-36C4-A7FD-9B70AC4445F8
 install-name:    '/System/Library/PrivateFrameworks/AppleVPA.framework/Versions/A/AppleVPA'
 exports:
   - targets:         [ x86_64-macos ]

@@ -5,7 +5,7 @@
 
      Version:    Accelerate-1
 
-     Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2023 by Apple Inc. All rights reserved.
 
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:

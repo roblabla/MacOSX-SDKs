@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DA72CE52-FA9A-3FCF-9C67-0424FBD34CEC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D37B3BAF-98AD-3C92-8FED-EB30D141823D
 install-name:    '/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 0
 exports:
@@ -23,6 +16,7 @@ exports:
                        _MKArrowAppendStraightArrowToPathInRect, _MKArrowAppendUTurnToPathInRect, 
                        _MKArrowCreateBezierPathsForArrivalWithSize, _MKArrowCreateBezierPathsForArrivalWithSizeAndReturnCenter, 
                        _MKArrowCreateBezierPathsForProceedToRouteWithSize, _MKArrowCreateBezierPathsForProceedToRouteWithSizeAndReturnCenter, 
+                       _MKArrowDrawingUseUpdatedGuidanceManeuverMetricsDefaultsKey, 
                        _MKBalloonCalloutDidShowNotification, _MKBearingFromCoordinateToCoordinate, 
                        _MKCalculateDistance, _MKCenterWithLayerPosition, _MKClosestMapPointInLineSegmentFromMapPoint, 
                        _MKCompassPointFromLocationDirection, _MKCompassPointNEWSForHeading, 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8E8D80CC-E7FD-3197-ACB0-4C747F4596EB
-  - target:          x86_64-maccatalyst
-    value:           8E8D80CC-E7FD-3197-ACB0-4C747F4596EB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9064B344-9EE1-330B-AB2D-222CD11A4249
-  - target:          arm64e-maccatalyst
-    value:           9064B344-9EE1-330B-AB2D-222CD11A4249
 install-name:    '/System/Library/Frameworks/SoundAnalysis.framework/Versions/A/SoundAnalysis'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -9,27 +9,29 @@
 
 #import <CloudKit/CKDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-CK_EXTERN NSString * const CKErrorDomain API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
+API_AVAILABLE_BEGIN(macos(10.10), ios(8.0), watchos(3.0))
+
+CK_EXTERN NSString * const CKErrorDomain;
 
 /*! @abstract When a CKErrorPartialFailure happens this key will be set in the error's userInfo dictionary.
  *
  *  @discussion The value of this key will be a dictionary, and the values will be errors for individual items with the keys being the item IDs that failed.
  */
-CK_EXTERN NSString * const CKPartialErrorsByItemIDKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
+CK_EXTERN NSString * const CKPartialErrorsByItemIDKey;
 
 /*! If the server rejects a record save because it has been modified since the last time it was read, a @c CKErrorServerRecordChanged error will be returned and it will contain versions of the record in its userInfo dictionary. Apply your custom conflict resolution logic to the server record under @c CKServerRecordKey and attempt a save of that record. */
-CK_EXTERN NSString * const CKRecordChangedErrorAncestorRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
-CK_EXTERN NSString * const CKRecordChangedErrorServerRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
-CK_EXTERN NSString * const CKRecordChangedErrorClientRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
+CK_EXTERN NSString * const CKRecordChangedErrorAncestorRecordKey;
+CK_EXTERN NSString * const CKRecordChangedErrorServerRecordKey;
+CK_EXTERN NSString * const CKRecordChangedErrorClientRecordKey;
 
 /* On error CKErrorZoneNotFound, the userInfo dictionary may contain a NSNumber instance that specifies a boolean value representing if the error is caused by the user having reset all encrypted data for their account */
 CK_EXTERN NSString * const CKErrorUserDidResetEncryptedDataKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*! On some errors, the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request. For example, this key will be on @c CKErrorServiceUnavailable, @c CKErrorRequestRateLimited, and other errors for which the recommended resolution is to retry after a delay.
  */
-CK_EXTERN NSString * const CKErrorRetryAfterKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
+CK_EXTERN NSString * const CKErrorRetryAfterKey;
 
 typedef NS_ENUM(NSInteger, CKErrorCode) {
     /*! CloudKit.framework encountered an error.  This is a non-recoverable error. */
@@ -141,6 +143,8 @@ typedef NS_ENUM(NSInteger, CKErrorCode) {
 
     /*! The current account is in a state that may need user intervention to recover from. The user should be directed to check the Settings app. Listen for CKAccountChangedNotifications to know when to re-check account status and retry. */
     CKErrorAccountTemporarilyUnavailable  API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) = 36
-} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
+};
 
-NS_ASSUME_NONNULL_END
+API_AVAILABLE_END // (macos(10.10), ios(8.0), watchos(3.0))
+
+NS_HEADER_AUDIT_END(nullability, sendability)

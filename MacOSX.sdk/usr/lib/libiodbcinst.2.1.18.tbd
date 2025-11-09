@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4A46979A-6749-34C6-AC08-563C1FBA865C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DB252022-79A6-3A99-8AA4-54253E147D91
 install-name:    '/usr/lib/libiodbcinst.2.dylib'
 current-version: 4.18
 compatibility-version: 4

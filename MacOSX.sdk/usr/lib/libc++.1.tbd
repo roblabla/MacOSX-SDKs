@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5C425EA0-066D-38B9-9DB4-8D3885D78B6B
-  - target:          x86_64-maccatalyst
-    value:           5C425EA0-066D-38B9-9DB4-8D3885D78B6B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A4BED887-64CE-3F2E-80DF-87D583B262D9
-  - target:          arm64e-maccatalyst
-    value:           A4BED887-64CE-3F2E-80DF-87D583B262D9
 install-name:    '/usr/lib/libc++.1.dylib'
-current-version: 1300.36
+current-version: 1500.65
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZTINSt3__110__time_getE, __ZTINSt3__110__time_putE, __ZTINSt3__110ctype_baseE, 
@@ -856,7 +843,7 @@ exports:
                        __ZNSt3__121recursive_timed_mutex8try_lockEv, __ZNSt3__121recursive_timed_mutexC1Ev, 
                        __ZNSt3__121recursive_timed_mutexC2Ev, __ZNSt3__121recursive_timed_mutexD1Ev, 
                        __ZNSt3__121recursive_timed_mutexD2Ev, __ZNSt3__121undeclare_no_pointersEPcm, 
-                       __ZNSt3__123__cxx_atomic_notify_allEPVKNS_17__cxx_atomic_implIxNS_22__cxx_atomic_base_implIxEEEE, 
+                       __ZNSt3__122__libcpp_verbose_abortEPKcz, __ZNSt3__123__cxx_atomic_notify_allEPVKNS_17__cxx_atomic_implIxNS_22__cxx_atomic_base_implIxEEEE, 
                        __ZNSt3__123__cxx_atomic_notify_allEPVKv, __ZNSt3__123__cxx_atomic_notify_oneEPVKNS_17__cxx_atomic_implIxNS_22__cxx_atomic_base_implIxEEEE, 
                        __ZNSt3__123__cxx_atomic_notify_oneEPVKv, __ZNSt3__123__libcpp_atomic_monitorEPVKNS_17__cxx_atomic_implIxNS_22__cxx_atomic_base_implIxEEEE, 
                        __ZNSt3__123__libcpp_atomic_monitorEPVKv, __ZNSt3__125notify_all_at_thread_exitERNS_18condition_variableENS_11unique_lockINS_5mutexEEE, 
@@ -932,8 +919,9 @@ exports:
                        __ZNSt3__14stoiERKNS_12basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEEPmi, 
                        __ZNSt3__14stolERKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPmi, 
                        __ZNSt3__14stolERKNS_12basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEEPmi, 
-                       __ZNSt3__14wcinE, __ZNSt3__15alignEmmRPvRm, __ZNSt3__15ctypeIcE13classic_tableEv, 
-                       __ZNSt3__15ctypeIcE2idE, __ZNSt3__15ctypeIcEC1EPKjbm, __ZNSt3__15ctypeIcEC2EPKjbm, 
+                       __ZNSt3__14wcinE, __ZNSt3__15alignEmmRPvRm, __ZNSt3__15ctypeIcE10table_sizeE, 
+                       __ZNSt3__15ctypeIcE13classic_tableEv, __ZNSt3__15ctypeIcE2idE, 
+                       __ZNSt3__15ctypeIcEC1EPKjbm, __ZNSt3__15ctypeIcEC2EPKjbm, 
                        __ZNSt3__15ctypeIcED0Ev, __ZNSt3__15ctypeIcED1Ev, __ZNSt3__15ctypeIcED2Ev, 
                        __ZNSt3__15ctypeIwE2idE, __ZNSt3__15ctypeIwED0Ev, __ZNSt3__15ctypeIwED1Ev, 
                        __ZNSt3__15ctypeIwED2Ev, __ZNSt3__15mutex4lockEv, __ZNSt3__15mutex6unlockEv, 
@@ -1039,9 +1027,13 @@ exports:
                        __ZNSt3__18time_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE, 
                        __ZNSt3__18time_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE, 
                        __ZNSt3__18time_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE, 
-                       __ZNSt3__18valarrayImE6resizeEmm, __ZNSt3__18valarrayImEC1Em, 
-                       __ZNSt3__18valarrayImEC2Em, __ZNSt3__18valarrayImED1Ev, __ZNSt3__18valarrayImED2Ev, 
-                       __ZNSt3__19__num_getIcE17__stage2_int_loopEciPcRS2_RjcRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPjRSD_S2_, 
+                       __ZNSt3__18to_charsEPcS0_d, __ZNSt3__18to_charsEPcS0_dNS_12chars_formatE, 
+                       __ZNSt3__18to_charsEPcS0_dNS_12chars_formatEi, __ZNSt3__18to_charsEPcS0_e, 
+                       __ZNSt3__18to_charsEPcS0_eNS_12chars_formatE, __ZNSt3__18to_charsEPcS0_eNS_12chars_formatEi, 
+                       __ZNSt3__18to_charsEPcS0_f, __ZNSt3__18to_charsEPcS0_fNS_12chars_formatE, 
+                       __ZNSt3__18to_charsEPcS0_fNS_12chars_formatEi, __ZNSt3__18valarrayImE6resizeEmm, 
+                       __ZNSt3__18valarrayImEC1Em, __ZNSt3__18valarrayImEC2Em, __ZNSt3__18valarrayImED1Ev, 
+                       __ZNSt3__18valarrayImED2Ev, __ZNSt3__19__num_getIcE17__stage2_int_loopEciPcRS2_RjcRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPjRSD_S2_, 
                        __ZNSt3__19__num_getIcE17__stage2_int_prepERNS_8ios_baseEPcRc, 
                        __ZNSt3__19__num_getIcE19__stage2_float_loopEcRbRcPcRS4_ccRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPjRSE_RjS4_, 
                        __ZNSt3__19__num_getIcE19__stage2_float_prepERNS_8ios_baseEPcRcS5_, 

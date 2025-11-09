@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1DA83829-6FE7-34F7-A076-10D61720AC54
-  - target:          x86_64-maccatalyst
-    value:           1DA83829-6FE7-34F7-A076-10D61720AC54
-  - target:          x86_64h-macos
-    value:           E5AD377F-81E0-33E6-B2CC-4EEBD66EC549
-  - target:          x86_64h-maccatalyst
-    value:           E5AD377F-81E0-33E6-B2CC-4EEBD66EC549
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F82DA294-2D8D-3D4A-83FA-5ABF1DEE8D03
-  - target:          arm64e-maccatalyst
-    value:           F82DA294-2D8D-3D4A-83FA-5ABF1DEE8D03
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

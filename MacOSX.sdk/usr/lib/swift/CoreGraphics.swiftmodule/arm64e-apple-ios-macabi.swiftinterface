@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreGraphics
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreGraphics
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 15
 @_exported import CoreFoundation
 @_exported import CoreGraphics
@@ -270,8 +270,8 @@ extension CoreFoundation.CGPoint : Swift.Equatable {
   }
 }
 extension CoreFoundation.CGPoint : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreFoundation.CGSize {
   public static var zero: CoreFoundation.CGSize {
@@ -307,8 +307,8 @@ extension CoreFoundation.CGSize : Swift.Equatable {
   }
 }
 extension CoreFoundation.CGSize : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreFoundation.CGVector {
   public static var zero: CoreFoundation.CGVector {
@@ -332,8 +332,8 @@ extension CoreFoundation.CGVector : Swift.CustomDebugStringConvertible {
   }
 }
 extension CoreFoundation.CGVector : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreFoundation.CGRect {
   public static var zero: CoreFoundation.CGRect {
@@ -390,8 +390,8 @@ extension CoreFoundation.CGRect : Swift.Equatable {
   }
 }
 extension CoreFoundation.CGRect : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreFoundation.CGAffineTransform {
   public static var identity: CoreFoundation.CGAffineTransform {
@@ -399,8 +399,8 @@ extension CoreFoundation.CGAffineTransform {
   }
 }
 extension CoreFoundation.CGAffineTransform : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreGraphics.CGImage {
   public func copy(maskingColorComponents components: [CoreFoundation.CGFloat]) -> CoreGraphics.CGImage?

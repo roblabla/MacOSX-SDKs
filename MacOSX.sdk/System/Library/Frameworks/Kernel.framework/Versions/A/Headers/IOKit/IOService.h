@@ -380,24 +380,7 @@ protected:
 /*! @struct ExpansionData
  *   @discussion This structure will be used to expand the capablilties of this class in the future.
  */
-	struct ExpansionData {
-		uint64_t authorizationID;
-		/*
-		 * Variables associated with interrupt accounting.  Consists of an array
-		 * (that pairs reporters with opaque "statistics" objects), the count for
-		 * the array, and a lock to guard both of the former variables.  The lock
-		 * is necessary as IOReporting will not update reports in a manner that is
-		 * synchonized with the service (i.e, on a workloop).
-		 */
-		IOLock * interruptStatisticsLock;
-		IOInterruptAccountingReporter * interruptStatisticsArray;
-		int interruptStatisticsArrayCount;
-
-		OSObjectUserVars * uvars;
-		IOServiceStateChangeVars * svars;
-
-		IOInterruptSourcePrivate * interruptSourcesPrivate;
-	};
+	struct ExpansionData;
 
 /*! @var reserved
  *   Reserved for future use.  (Internal use only)  */

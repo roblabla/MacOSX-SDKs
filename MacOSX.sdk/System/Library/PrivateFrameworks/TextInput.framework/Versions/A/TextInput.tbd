@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6C7B67DF-67D7-3170-94FD-128738F3E82C
-  - target:          x86_64-maccatalyst
-    value:           6C7B67DF-67D7-3170-94FD-128738F3E82C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           32A5538B-95D5-359A-81A9-2EE0F78E3480
-  - target:          arm64e-maccatalyst
-    value:           32A5538B-95D5-359A-81A9-2EE0F78E3480
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -88,15 +75,17 @@ exports:
                        _TIInputModeGetRegion, _TIInputModeGetSWLayout, _TIInputModeGetVariant, 
                        _TIInputModeIsTransliteration, _TIInputModePhrasesResourceName, 
                        _TIInputModePropertiesAccentKeyStringsKey, _TIInputModePropertiesAlwaysShowCandidateBar, 
-                       _TIInputModePropertiesAutocorrectSpellingKey, _TIInputModePropertiesCPAllowsDeleteWord, 
-                       _TIInputModePropertiesCPEnabledKey, _TIInputModePropertiesComposesTextKey, 
-                       _TIInputModePropertiesCompositionMap, _TIInputModePropertiesContinuousPathParametersKey, 
-                       _TIInputModePropertiesDefaultLayoutIsASCIICapableKey, _TIInputModePropertiesDefaultLayoutIsSecureKey, 
-                       _TIInputModePropertiesDoubleSpaceReplacementKey, _TIInputModePropertiesEnablePrediction, 
-                       _TIInputModePropertiesFontFallbackLanguage, _TIInputModePropertiesFontFallbacksRequiredKey, 
-                       _TIInputModePropertiesFontsToAvoidKey, _TIInputModePropertiesHasWordNgramModel, 
-                       _TIInputModePropertiesIncludeLightweightLMMobileAssets, _TIInputModePropertiesInputManagerClassKey, 
-                       _TIInputModePropertiesKeyboardFeatureSpecializationClassKey, 
+                       _TIInputModePropertiesAutocorrectSpellingKey, _TIInputModePropertiesAutocorrectionLocaleIdentifier, 
+                       _TIInputModePropertiesCPAllowsDeleteWord, _TIInputModePropertiesCPEnabledKey, 
+                       _TIInputModePropertiesComposesTextKey, _TIInputModePropertiesCompositionMap, 
+                       _TIInputModePropertiesContinuousPathEnsembleSourceScalesKey, 
+                       _TIInputModePropertiesContinuousPathEnsembleSourceWeightsKey, 
+                       _TIInputModePropertiesContinuousPathParametersKey, _TIInputModePropertiesDefaultLayoutIsASCIICapableKey, 
+                       _TIInputModePropertiesDefaultLayoutIsSecureKey, _TIInputModePropertiesDoubleSpaceReplacementKey, 
+                       _TIInputModePropertiesEnablePrediction, _TIInputModePropertiesFontFallbackLanguage, 
+                       _TIInputModePropertiesFontFallbacksRequiredKey, _TIInputModePropertiesFontsToAvoidKey, 
+                       _TIInputModePropertiesHasWordNgramModel, _TIInputModePropertiesIncludeLightweightLMMobileAssets, 
+                       _TIInputModePropertiesInputManagerClassKey, _TIInputModePropertiesKeyboardFeatureSpecializationClassKey, 
                        _TIInputModePropertiesLayoutTags, _TIInputModePropertiesMultilingualOnly, 
                        _TIInputModePropertiesNeverShowCandidateBar, _TIInputModePropertiesNonstopPunctuationCharactersKey, 
                        _TIInputModePropertiesPreferredASCIICapableInputModeKey, _TIInputModePropertiesPreferredNonASCIICapableInputModeKey, 
@@ -145,10 +134,12 @@ exports:
                        _TIKeyboardSecureCandidateCellWidthThreeCellAutofillExtraStr, 
                        _TIKeyboardSecureCandidateCellWidthThreeCellEvenStr, _TIKeyboardSecureCandidateCellWidthTwoCellAutofillExtraStr, 
                        _TIKeyboardSecureCandidateCellWidthTwoCellEvenStr, _TIKeyboardSecureCandidateCellWidthZeroCellAutofillExtraStr, 
-                       _TIKeyboardSensorKitAggregatedWordsThresholdPreference, _TIKeyboardSensorKitEnabledPreference, 
-                       _TIKeyboardShowPredictionBarPreference, _TIKeyboardSimulateAutofillCandidatesPreference, 
-                       _TIKeyboardSkipCandidateQualityFilterPreference, _TIKeyboardStateAutofillContextAppIdKey, 
-                       _TIKeyboardStateAutofillContextAssociatedDomainsKey, _TIKeyboardStateAutofillContextBundleIdKey, 
+                       _TIKeyboardSecureCandidateHideMyEmailStr, _TIKeyboardSensorKitAggregatedWordsThresholdPreference, 
+                       _TIKeyboardSensorKitEnabledPreference, _TIKeyboardShowPredictionBarPreference, 
+                       _TIKeyboardSimulateAutofillCandidatesPreference, _TIKeyboardSkipCandidateQualityFilterPreference, 
+                       _TIKeyboardStateAutofillContextAppIdKey, _TIKeyboardStateAutofillContextAssociatedDomainsKey, 
+                       _TIKeyboardStateAutofillContextBundleIdKey, _TIKeyboardStateAutofillContextCredentialTypeKey, 
+                       _TIKeyboardStateAutofillContextFrameIdKey, _TIKeyboardStateAutofillContextPageIdKey, 
                        _TIKeyboardStateAutofillContextWebViewURLKey, _TIKeyboardTransformerLMForAutocorrectionPreference, 
                        _TIKeyboardTypeIsNumberPad, _TIKeyboardUseProLayoutPreference, 
                        _TIKeyboardUserModelLoggingEnabledPreference, _TIKeyboardVisceralPreference, 
@@ -301,10 +292,10 @@ exports:
                        _UIKeyboardSuggestedDefaultLanguageInputModesForPadBundleKey, 
                        _UIKeyboardSuggestedLanguageInputModesBundleKey, _UIKeyboardSupportedInputModesBundleKey, 
                        _UISuggestedDictationLanguagesBundleKey, __TIQueueBackground, 
-                       __TIQueueLow, __TIQueueUserInitiated, __activeInputStringCountKey, 
-                       __assistantInternalQueue, _acute_accent_form, _adhocEventConfig, 
-                       _autoCorrrectionTypeAsString, _candidateSourceAsString, _caron_form, 
-                       _character_is_composable_accent, _character_is_tamil_script, 
+                       __TIQueueLow, __TIQueueUserInitiated, __Z14compareWithNilP11objc_objectS0_, 
+                       __activeInputStringCountKey, __assistantInternalQueue, _acute_accent_form, 
+                       _adhocEventConfig, _autoCorrrectionTypeAsString, _candidateSourceAsString, 
+                       _caron_form, _character_is_composable_accent, _character_is_tamil_script, 
                        _circumflex_form, _combine_with_accent, _combines_with_selective_modifier, 
                        _diaeresis_form, _dialytika_tonos_form, _grave_accent_form, 
                        _kCommonMetricQueryTimeFrame, _kCurrentDurableVersion, _kCurrentPropertiesVersion, 
@@ -339,14 +330,14 @@ exports:
                        TIHandwritingStrokes, TIHardwareKeyboardLayout, TIImageCacheClient, 
                        TIImageCacheItem, TIInputContextHistory, TIInputModeController, 
                        TIInputModeLocaleIdentifierOverrideMapping, TIInputModeParser, 
-                       TIKeyEventMap, TIKeyEventMapTransliteration, TIKeyEventMapTransliteration_bn, 
-                       TIKeyEventMap_ja, TIKeyEventMap_ja_LiveConversion, TIKeyEventMap_zh, 
-                       TIKeyEventMap_zh_Hans_Pinyin, TIKeyEventMap_zh_Hans_Stroke, 
-                       TIKeyEventMap_zh_Hans_Wubixing, TIKeyEventMap_zh_Hant_Cangjie, 
-                       TIKeyEventMap_zh_Hant_Pinyin, TIKeyEventMap_zh_Hant_Stroke, 
-                       TIKeyEventMap_zh_Hant_Zhuyin, TIKeyEventMap_zh_Hant_Zhuyin_LiveConversion, 
-                       TIKeyEventMap_zh_Phonetic, TIKeyEventMap_zh_Stroke, TIKeyboardBehaviorState, 
-                       TIKeyboardBehaviors, TIKeyboardBehaviors_Autocorrect, TIKeyboardBehaviors_Cangjie, 
+                       TIKeyEventMap, TIKeyEventMapTransliteration, TIKeyEventMap_ja, 
+                       TIKeyEventMap_ja_LiveConversion, TIKeyEventMap_zh, TIKeyEventMap_zh_Hans_Pinyin, 
+                       TIKeyEventMap_zh_Hans_Stroke, TIKeyEventMap_zh_Hans_Wubixing, 
+                       TIKeyEventMap_zh_Hant_Cangjie, TIKeyEventMap_zh_Hant_Pinyin, 
+                       TIKeyEventMap_zh_Hant_Stroke, TIKeyEventMap_zh_Hant_Zhuyin, 
+                       TIKeyEventMap_zh_Hant_Zhuyin_LiveConversion, TIKeyEventMap_zh_Phonetic, 
+                       TIKeyEventMap_zh_Stroke, TIKeyboardBehaviorState, TIKeyboardBehaviors, 
+                       TIKeyboardBehaviors_Autocorrect, TIKeyboardBehaviors_Cangjie, 
                        TIKeyboardBehaviors_Handwriting, TIKeyboardBehaviors_Japanese, 
                        TIKeyboardBehaviors_Japanese_LiveConversion, TIKeyboardBehaviors_Pinyin, 
                        TIKeyboardBehaviors_ShapeBased, TIKeyboardBehaviors_Simple, 

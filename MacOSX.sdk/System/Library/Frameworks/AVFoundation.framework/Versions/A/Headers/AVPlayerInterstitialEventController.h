@@ -234,6 +234,30 @@ AV_INIT_UNAVAILABLE
 */
 @property (nonatomic, readonly) NSDictionary *userDefinedAttributes;
 
+/*!
+  @property     assetListResponse
+  @abstract     The asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event.
+  @discussion   If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
+*/
+@property (nonatomic, readonly, nullable) NSDictionary *assetListResponse API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+
+/*!
+  @enum AVPlayerInterstitialEventAssetListResponseStatus
+  @abstract These constants describe the status of the asset list response for an AVPlayerInterstitialEvent.
+
+  @constant	 AVPlayerInterstitialEventAssetListResponseStatusAvailable
+	Indicates that the asset list response is now available and non-nil, meaning the asset list read was successful.
+  @constant	 AVPlayerInterstitialEventAssetListResponseStatusCleared
+	Indicates that asset list response has been cleared and reverted to its original state of nil.
+  @constant	 AVPlayerInterstitialEventAssetListResponseStatusUnavailable
+	Indicates that the asset list response is unavailable, meaning the asset list read failed.
+*/
+typedef NS_ENUM(NSInteger, AVPlayerInterstitialEventAssetListResponseStatus) {
+	AVPlayerInterstitialEventAssetListResponseStatusAvailable = 0,
+	AVPlayerInterstitialEventAssetListResponseStatusCleared = 1,
+	AVPlayerInterstitialEventAssetListResponseStatusUnavailable = 2
+} API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+
 @end
 
 @interface AVPlayerInterstitialEvent (MutableEvents)
@@ -318,6 +342,36 @@ AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorEventsDidCha
 */
 AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
+/*!
+  @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification
+  @abstract     A notification that is posted whenever an AVPlayerInterstitialEvent's asset list response status changes.
+  @discussion   Carries a userInfo dictionary that can contain the following keys and values:
+                    1. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, with a value that indicates the AVPlayerInterstitialEvent for which the asset response status has changed.
+                    2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status.
+                    3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
+*/
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+
+/*!
+  @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey
+  @abstract     The dictionary key for the AVPlayerInterstitial event that had its asset list response status changed in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
+  @discussion   The value corresponding to this key is of type AVPlayerInterstitialEvent.
+*/
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+
+/*!
+  @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey
+  @abstract     The dictionary key for the asset list response status in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
+  @discussion   The value corresponding to this key is of type AVPlayerInterstitialEventAssetListResponseStatus.
+*/
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+
+/*!
+  @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey
+  @abstract     The dictionary key for the NSError in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
+  @discussion   The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification if AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey in the same payload points to a value of AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
+*/
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
 
 /*!
   @class        AVPlayerInterstitialEventController

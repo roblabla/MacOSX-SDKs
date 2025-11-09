@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DBDA7F71-E59C-37C0-B550-B2C7C3D9142A
-  - target:          x86_64-maccatalyst
-    value:           DBDA7F71-E59C-37C0-B550-B2C7C3D9142A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           45EED692-0259-3875-A6C9-A651447FEA3B
-  - target:          arm64e-maccatalyst
-    value:           45EED692-0259-3875-A6C9-A651447FEA3B
 install-name:    '/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

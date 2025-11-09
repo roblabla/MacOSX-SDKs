@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C4EC05F3-D6EC-3867-AD5B-A6805D0EB186
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CAE79419-E037-3FD8-9D8B-0348BFC47060
 install-name:    '/System/Library/PrivateFrameworks/PlacesKit.framework/Versions/A/PlacesKit'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PKPlacesCoarseLocationMediaInfoKey, _PXMapStoreDefaultCapacityPerNode, 

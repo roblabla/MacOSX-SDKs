@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B88F23E0-648F-3E9F-83F8-2E3C55CAD05F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AC9ABE11-AD91-32A9-B115-9B811DBB16E5
 install-name:    '/System/Library/PrivateFrameworks/CloudSharingUI.framework/Versions/A/CloudSharingUI'
-current-version: 57.1.2
+current-version: 106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -94,6 +87,7 @@ exports:
                        '_$s14CloudSharingUI14AddressingViewV4bodyQrvg', '_$s14CloudSharingUI14AddressingViewV4bodyQrvpMV', 
                        '_$s14CloudSharingUI14AddressingViewV4bodyQrvpQOMQ', '_$s14CloudSharingUI14AddressingViewV9viewModelAA0deG0Cvg', 
                        '_$s14CloudSharingUI14AddressingViewV9viewModelAA0deG0CvpMV', 
+                       '_$s14CloudSharingUI14AddressingViewV9viewModelAcA0deG0C_tcfC', 
                        '_$s14CloudSharingUI14AddressingViewVMa', '_$s14CloudSharingUI14AddressingViewVMn', 
                        '_$s14CloudSharingUI14AddressingViewVN', '_$s14CloudSharingUI19AddressingViewModelC10$addresses7Combine9PublishedV9PublisherVySaySSG_GvMTj', 
                        '_$s14CloudSharingUI19AddressingViewModelC10$addresses7Combine9PublishedV9PublisherVySaySSG_GvMTq', 

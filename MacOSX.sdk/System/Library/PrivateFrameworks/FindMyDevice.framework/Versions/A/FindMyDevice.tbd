@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B641B797-3CA9-3D8B-9984-354BB0A4BE58
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DA9DB4EC-FEF1-3EA8-BE01-7356CCCE4ED7
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

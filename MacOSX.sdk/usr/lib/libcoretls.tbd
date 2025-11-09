@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           30DC89FF-D0EA-3DED-8F56-A2FD01E982C1
-  - target:          x86_64-maccatalyst
-    value:           30DC89FF-D0EA-3DED-8F56-A2FD01E982C1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           434435FC-08ED-3C62-B8A2-3CC13E54864E
-  - target:          arm64e-maccatalyst
-    value:           434435FC-08ED-3C62-B8A2-3CC13E54864E
 install-name:    '/usr/lib/libcoretls.dylib'
 current-version: 183
 exports:

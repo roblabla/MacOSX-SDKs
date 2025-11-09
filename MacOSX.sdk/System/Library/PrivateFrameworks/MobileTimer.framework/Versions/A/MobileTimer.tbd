@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5D25646E-5340-3E9B-B396-0F11B9D60E00
-  - target:          x86_64-maccatalyst
-    value:           5D25646E-5340-3E9B-B396-0F11B9D60E00
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           72BB63F2-21EB-3CB4-837D-0BC09186EE62
-  - target:          arm64e-maccatalyst
-    value:           72BB63F2-21EB-3CB4-837D-0BC09186EE62
 install-name:    '/System/Library/PrivateFrameworks/MobileTimer.framework/Versions/A/MobileTimer'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

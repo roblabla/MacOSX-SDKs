@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5FCE0A3D-F3A0-3CC2-9336-1BC5CCBDB080
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B2EACEEC-D4F8-3380-81A6-857902DB33B3
 install-name:    '/System/Library/Frameworks/InstallerPlugins.framework/Versions/A/InstallerPlugins'
 current-version: 815
 exports:

@@ -1,21 +1,27 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0DB7ABE5-515C-38D5-A83D-4084AFD5337B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7B6A3E9E-D467-357B-899E-96FD71EB5338
 install-name:    '/System/Library/PrivateFrameworks/PlatformSSO.framework/Versions/A/PlatformSSO'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _POAuthenticationMethodInvalid, _POAuthenticationMethodPassword, 
-                       _POAuthenticationMethodUserSecureEnclaveKey, _kPOAuthenticationResult, 
+                       _POAuthenticationMethodUserSecureEnclaveKey, _POSOAPErrorFaultCodeKey, 
+                       _POSOAPErrorFaultStringKey, _POSOAPErrorHTTPStatusKey, _POSOAPErrorSOAPHeaderKey, 
+                       _POSOAPFaultKey, _POSOAPNamespaceURI, _POSOAPWebServicesErrorDomain, 
+                       _POWSTrust13TrustNamespaceURI, _POWSTrust2005TrustNamespaceURI, 
+                       _POWSTrustErrorsNamespaceURI, _POWSTrustMessagesNamespaceURI, 
+                       _POWSTrustPolicyNamespaceURI, _POWSTrustSAMLNamespaceURI, 
+                       _POWSTrustSecurityExtension10NamespaceURI, _POWSTrustSecurityExtension11NamespaceURI, 
+                       _POWSTrustSecurityNamespaceURI, _POWSTrustTypesNamespaceURI, 
+                       _POWSTrustWebServiceAddressingNamespaceURI, _kPOAuthenticationResult, 
                        _kPONotificationAuthenticationCompleted, _kPONotificationCategoryLogin, 
                        _kPONotificationCategoryRegisterDevice, _kPONotificationCategoryRegisterUser, 
-                       _kPOScreenSaverRuleCheckKey, _kPlatformSSOConfigurationPath ]
+                       _kPOScreenSaverRuleCheckKey, _kPlatformSSOConfigurationPath, 
+                       _kSAML11Namespace, _kSAML20Namespace, _kWSTrust13IssueResponse, 
+                       _kWSTrust13KeyType, _kWSTrust13NameSpace, _kWSTrust13RequestType, 
+                       _kWSTrust13SOAPAction, _kWSTrust13SecurityPolicy, _kWSTrust2005IssueResponse, 
+                       _kWSTrust2005KeyType, _kWSTrust2005NameSpace, _kWSTrust2005RequestType, 
+                       _kWSTrust2005SOAPAction, _kWSTrust2005SecurityPolicy ]
     objc-classes:    [ POAgentAuthenticationProcess, POAgentProcess, POAlgorithm, 
                        POAnalytics, POAuthPluginProcess, POAuthenticationContext, 
                        POAuthenticationProcess, POConcatKDF, POConfigurationManager, 
@@ -27,6 +33,25 @@ exports:
                        POKerberosMapping, POKerberosStatus, POKeyBag, POKeyWrap, 
                        POKeychainHelper, POLoginConfiguration, POLoginManager, POMutableJWT, 
                        POMutableJWTBody, POMutableJWTHeader, POPreferences, PORS256JWTSigningAlgorithm, 
-                       PORegistrationContext, POSecKeyHelper, POServiceConnection, 
-                       POServiceLoginManagerConnection, POUserConfiguration ]
+                       PORegistrationContext, POSOAPBody, POSOAPCode, POSOAPDocument, 
+                       POSOAPEnvelope, POSOAPFault, POSOAPFaultDetail, POSOAPHeader, 
+                       POSOAPReason, POSOAPSubcode, POSOAPText, POSecKeyHelper, POServiceConnection, 
+                       POServiceLoginManagerConnection, POUserConfiguration, POWSTrust13RequestSecurityTokenResponseCollectionType, 
+                       POWSTrust13RequestSecurityTokenResponseType, POWSTrust13RequestSecurityTokenType, 
+                       POWSTrust2005RequestSecurityTokenResponseType, POWSTrust2005RequestSecurityTokenType, 
+                       POWSTrustActionType, POWSTrustAppliesToType, POWSTrustBaseRequestType, 
+                       POWSTrustEndpointReferenceType, POWSTrustKeyIdentifierType, 
+                       POWSTrustMessageIDType, POWSTrustMexResponse, POWSTrustProcess, 
+                       POWSTrustReferenceType, POWSTrustRelatesToType, POWSTrustReplyToType, 
+                       POWSTrustRequest, POWSTrustRequestedSecurityTokenType, POWSTrustResponse, 
+                       POWSTrustSecurityTokenReferenceType, POWSTrustSecurityType, 
+                       POWSTrustTimestampType, POWSTrustToType, POWSTrustUsernameTokenType, 
+                       POXMLContext, POXMLHelper, POXMLNode, POXMLXPathContext, POXMLXPathResult, 
+                       POXSBase64BinaryDefinition, POXSBooleanDefinition, POXSChoiceDefinition, 
+                       POXSComplexTypeDefinition, POXSDateDefinition, POXSDateFormatterFactory, 
+                       POXSDateTimeDefinition, POXSDefinition, POXSDefinitions, POXSDoubleDefinition, 
+                       POXSDurationDefinition, POXSElement, POXSIntegerDefinition, 
+                       POXSNamespaces, POXSNullDefinition, POXSRFC3339DateDefinition, 
+                       POXSRawDataDefinition, POXSSimpleTypeDefinition, POXSStringDefinition, 
+                       POXSTimeDefinition, SOAPBaseDocument ]
 ...

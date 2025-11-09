@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8FF43F16-4AB4-3FBB-BA21-AE076922F6D7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6F4E93DF-6829-32F7-849C-D7C9198D8DFE
 install-name:    '/System/Library/PrivateFrameworks/InAppMessages.framework/Versions/A/InAppMessages'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -26,19 +19,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4DB5BF3D-0132-34EB-8D95-46C1FB7030C5
-  - target:          x86_64-maccatalyst
-    value:           4DB5BF3D-0132-34EB-8D95-46C1FB7030C5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           91E8DDFB-B4D5-3627-9681-27AEEC5123E5
-  - target:          arm64e-maccatalyst
-    value:           91E8DDFB-B4D5-3627-9681-27AEEC5123E5
 install-name:    '/System/Library/PrivateFrameworks/InAppMessagesCore.framework/Versions/A/InAppMessagesCore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

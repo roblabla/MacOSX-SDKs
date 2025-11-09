@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FC851E7C-3A50-3214-A2E6-E05060707293
-  - target:          x86_64-maccatalyst
-    value:           FC851E7C-3A50-3214-A2E6-E05060707293
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           29C0F26A-AE2C-3EE8-B884-225C20FD4A67
-  - target:          arm64e-maccatalyst
-    value:           29C0F26A-AE2C-3EE8-B884-225C20FD4A67
 install-name:    '/System/Library/PrivateFrameworks/PhoneNumbers.framework/Versions/A/PhoneNumbers'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,19 +15,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6FEB2056-BA12-30FE-AC14-D7A2B54EE08F
-  - target:          x86_64-maccatalyst
-    value:           6FEB2056-BA12-30FE-AC14-D7A2B54EE08F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DA25C3B7-F906-3FAF-8C5A-ACED7F88B845
-  - target:          arm64e-maccatalyst
-    value:           DA25C3B7-F906-3FAF-8C5A-ACED7F88B845
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

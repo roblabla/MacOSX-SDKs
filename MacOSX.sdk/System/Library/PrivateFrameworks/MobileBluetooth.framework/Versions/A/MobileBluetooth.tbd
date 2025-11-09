@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8BB997AB-B25C-3886-9A46-C52DC534F1E8
-  - target:          x86_64-maccatalyst
-    value:           8BB997AB-B25C-3886-9A46-C52DC534F1E8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0BD3A49B-2AB0-31B0-A1F8-99482444553F
-  - target:          arm64e-maccatalyst
-    value:           0BD3A49B-2AB0-31B0-A1F8-99482444553F
 install-name:    '/System/Library/PrivateFrameworks/MobileBluetooth.framework/Versions/A/MobileBluetooth'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2F16AC93-617A-3060-9569-3334815CF943
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A326FB72-6958-3145-BBB7-9AC76B9297F8
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUIPaymentSheets.framework/Versions/A/AppleMediaServicesUIPaymentSheets'
 swift-abi-version: 7
 exports:

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PhotosUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 520.0.240
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PhotosUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 541.0.110
 import Photos
 @_exported import PhotosUI
 import Swift
@@ -117,7 +117,7 @@ public struct PHPickerResult : Swift.Equatable, Swift.Hashable {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 @_Concurrency.MainActor(unsafe) public protocol PHPickerViewControllerDelegate : AnyObject {
-  func picker(_ picker: PhotosUI.PHPickerViewController, didFinishPicking results: [PhotosUI.PHPickerResult])
+  @_Concurrency.MainActor(unsafe) func picker(_ picker: PhotosUI.PHPickerViewController, didFinishPicking results: [PhotosUI.PHPickerResult])
 }
 @available(iOS 14.0, macOS 13.0, *)
 @available(watchOS, unavailable)
@@ -126,7 +126,7 @@ extension PhotosUI.PHPickerViewController {
   @_Concurrency.MainActor(unsafe) public var configuration: PhotosUI.PHPickerConfiguration {
     get
   }
-  @_Concurrency.MainActor(unsafe) weak public var delegate: PhotosUI.PHPickerViewControllerDelegate? {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: (any PhotosUI.PHPickerViewControllerDelegate)? {
     get
     set
   }

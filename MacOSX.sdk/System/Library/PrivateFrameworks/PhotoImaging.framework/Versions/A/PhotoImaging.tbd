@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           09FB53B9-247C-3A14-97C8-3FF755B43B9A
-  - target:          x86_64-maccatalyst
-    value:           09FB53B9-247C-3A14-97C8-3FF755B43B9A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9BA7A302-A4FB-3DFB-875C-EB9AC9E25EB7
-  - target:          arm64e-maccatalyst
-    value:           9BA7A302-A4FB-3DFB-875C-EB9AC9E25EB7
 install-name:    '/System/Library/PrivateFrameworks/PhotoImaging.framework/Versions/A/PhotoImaging'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

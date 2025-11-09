@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppIntents
-// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 130.100.5
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppIntents
+// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 136.100.13
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -80,7 +80,7 @@ extension AppIntents.IntentParameter {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter {
   @available(*, deprecated, message: "Please use needsValueError(_ dialog:)")
-  final public func requestValue(_ dialog: AppIntents.IntentDialog? = nil) -> Swift.Error
+  final public func requestValue(_ dialog: AppIntents.IntentDialog? = nil) -> any Swift.Error
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol EntityQuery : AppIntents.DynamicOptionsProvider, AppIntents.PersistentlyIdentifiable, Swift.Sendable {
@@ -140,7 +140,7 @@ public protocol AppIntent : AppIntents.PersistentlyIdentifiable, AppIntents._Sup
 extension AppIntents.AppIntent {
   public typealias Parameter = AppIntents.IntentParameter
   public typealias When = AppIntents.ParameterSummaryWhenCondition
-  public typealias Switch = AppIntents.ParameterSummarySwitchCondition
+  public typealias Switch<Value, CaseCondition> = AppIntents.ParameterSummarySwitchCondition<Self, Value, CaseCondition> where Value : AppIntents._IntentValue, CaseCondition : AppIntents._ParameterSummarySwitchCase
   public typealias Case = AppIntents.ParameterSummaryCaseCondition
   public typealias DefaultCase = AppIntents.ParameterSummaryDefaultCaseCondition
   public typealias Summary = AppIntents.IntentParameterSummary<Self>
@@ -257,7 +257,7 @@ extension Swift.Float : AppIntents.EntityIdentifierConvertible {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct EntityIdentifier : Swift.CustomStringConvertible, Swift.Hashable, Swift.Sendable {
-  public let entityType: AppIntents.AppEntity.Type
+  public let entityType: any AppIntents.AppEntity.Type
   public let identifier: Swift.String
   public static let valueMaximumLength: Swift.Int
   public var description: Swift.String {
@@ -685,6 +685,29 @@ extension AppIntents.AppIntentsExtension {
     get
   }
 }
+@available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+@available(iOSApplicationExtension, unavailable)
+@available(tvOSApplicationExtension, unavailable)
+@available(watchOSApplicationExtension, unavailable)
+@available(macCatalystApplicationExtension, unavailable)
+@available(macOSApplicationExtension, unavailable)
+public protocol ForegroundContinuableIntent : AppIntents.AppIntent {
+}
+@available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+@available(iOSApplicationExtension, unavailable)
+@available(tvOSApplicationExtension, unavailable)
+@available(watchOSApplicationExtension, unavailable)
+@available(macCatalystApplicationExtension, unavailable)
+@available(macOSApplicationExtension, unavailable)
+extension AppIntents.ForegroundContinuableIntent {
+  #if compiler(>=5.3) && $AsyncAwait
+  public func needsToContinueInForegroundError(_ dialog: AppIntents.IntentDialog? = nil, continuation: (@_Concurrency.MainActor () async throws -> Swift.Void)? = nil) -> AppIntents.AppIntentError
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func requestToContinueInForeground<ResultValue>(_ dialog: AppIntents.IntentDialog? = nil, continuation: (@_Concurrency.MainActor () async throws -> ResultValue) = { () }) async throws -> ResultValue where ResultValue : Swift.Sendable
+  #endif
+}
 @_hasMissingDesignatedInitializers @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 final public class EqualToComparator<Property, PropertyType, ComparatorMappingType> : AppIntents.EntityQueryComparator<Property, PropertyType, PropertyType, ComparatorMappingType> where Property : AppIntents.EntityProperty<PropertyType>, PropertyType : AppIntents._IntentValue, PropertyType : Swift.Equatable, PropertyType : Swift.Sendable {
   public init(mappingTransform: @escaping (PropertyType) -> ComparatorMappingType)
@@ -991,7 +1014,12 @@ public struct IntentItemSection<Result> where Result : AppIntents._IntentValue {
   public var description: AppIntents.DisplayRepresentation?
   public var items: [AppIntents.IntentItem<Result>]
   public init(items: [AppIntents.IntentItem<Result>])
+  @available(*, deprecated, renamed: "init(_:items:)")
   public init(title: Foundation.LocalizedStringResource, items: [AppIntents.IntentItem<Result>])
+  @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+  public init(_ title: Foundation.LocalizedStringResource, items: [AppIntents.IntentItem<Result>])
+  @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+  public init(_ title: Foundation.LocalizedStringResource, items: [Result])
   public init(_ title: Foundation.LocalizedStringResource? = nil, @AppIntents.IntentItem<Result>.Builder itemsBuilder: () -> [AppIntents.IntentItem<Result>])
   public init(_ title: Foundation.LocalizedStringResource, subtitle: Foundation.LocalizedStringResource? = nil, image: AppIntents.DisplayRepresentation.Image? = nil, @AppIntents.IntentItem<Result>.Builder itemsBuilder: () -> [AppIntents.IntentItem<Result>])
 }
@@ -1238,7 +1266,7 @@ public struct IntentPrediction<Intent, T> : AppIntents.IntentPredictionConfigura
 public struct IntentDonationMatchingPredicate {
   public static func donationIdentifier(_ identifier: AppIntents.IntentDonationIdentifier) -> AppIntents.IntentDonationMatchingPredicate
   public static func entityIdentifier(_ identifier: AppIntents.EntityIdentifier) -> AppIntents.IntentDonationMatchingPredicate
-  public static func intentType(_ intentType: AppIntents.AppIntent.Type, entityIdentifier: AppIntents.EntityIdentifier? = nil) -> AppIntents.IntentDonationMatchingPredicate
+  public static func intentType(_ intentType: any AppIntents.AppIntent.Type, entityIdentifier: AppIntents.EntityIdentifier? = nil) -> AppIntents.IntentDonationMatchingPredicate
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct IntentDonationManager {
@@ -1304,8 +1332,8 @@ public protocol DynamicOptionsProvider : AppIntents._SupportsAppDependencies {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.DynamicOptionsProvider {
   public typealias ItemCollection = AppIntents.IntentItemCollection
-  public typealias ItemSection = AppIntents.IntentItemSection
-  public typealias Item = AppIntents.IntentItem
+  public typealias ItemSection<R> = AppIntents.IntentItemSection<R> where R == Self.Result.Result
+  public typealias Item<R> = AppIntents.IntentItem<R> where R == Self.Result.Result
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.DynamicOptionsProvider {
@@ -1418,6 +1446,10 @@ extension AppIntents.IntentResult {
 extension AppIntents.IntentResult {
   public static func result<Value, OpensAppIntent>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent
 }
+@available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+extension AppIntents.IntentResult {
+  public static func result<OpensAppIntent>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent
+}
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
   public static func result<Intent>(actionButtonIntent: Intent) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, Swift.Never, Swift.Never>, Intent : AppIntents.AppIntent
@@ -1502,6 +1534,8 @@ public struct IntentItem<Value> where Value : AppIntents._IntentValue {
   public var value: Value
   public var description: AppIntents.DisplayRepresentation
   public init(_ value: Value, title: Foundation.LocalizedStringResource, subtitle: Foundation.LocalizedStringResource? = nil, image: AppIntents.DisplayRepresentation.Image? = nil)
+  @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+  public init(_ value: Value)
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentItem {
@@ -1509,6 +1543,20 @@ extension AppIntents.IntentItem {
     public static func buildExpression(_ expression: Value) -> AppIntents.IntentItem<Value>
     public static func buildExpression<ExpressionValue>(_ expression: AppIntents.IntentItem<ExpressionValue>) -> AppIntents.IntentItem<ExpressionValue> where ExpressionValue : AppIntents._IntentValue
     public static func buildBlock(_ items: AppIntents.IntentItem<Value>...) -> [AppIntents.IntentItem<Value>]
+    @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+    @_backDeploy(before: macOS 13.3)
+    @_backDeploy(before: iOS 16.4)
+    @_backDeploy(before: watchOS 9.4)
+    @_backDeploy(before: tvOS 16.4)
+    public static func buildBlock(_ items: [AppIntents.IntentItem<Value>]) -> [AppIntents.IntentItem<Value>] { items }
+    @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+    @_backDeploy(before: macOS 13.3)
+    @_backDeploy(before: iOS 16.4)
+    @_backDeploy(before: watchOS 9.4)
+    @_backDeploy(before: tvOS 16.4)
+    public static func buildArray(_ components: [[AppIntents.IntentItem<Value>]]) -> [AppIntents.IntentItem<Value>] {
+            components.flatMap { $0 }
+        }
     public static func buildBlock() -> [Value]
   }
 }
@@ -1569,7 +1617,7 @@ extension AppIntents.AppDependencyManager {
   public enum Error<Value> : Foundation.LocalizedError {
     case failedToRetrieveDependency(Swift.AnyHashable, Value.Type)
     case failedToLoadDependency(Swift.AnyHashable, Value.Type)
-    case incorrectDependencyType(Swift.AnyHashable, Value.Type, Any.Type)
+    case incorrectDependencyType(Swift.AnyHashable, Value.Type, any Any.Type)
     public var errorDescription: Swift.String? {
       get
     }
@@ -1735,7 +1783,7 @@ extension AppIntents.EntityProperty where Value.ValueType == Foundation.URL {
   convenience public init(title: Foundation.LocalizedStringResource)
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public protocol ResolverSpecification : Swift.Hashable, Swift.Sendable, Swift.Sequence where Self.Element == AppIntents.Resolver {
+public protocol ResolverSpecification : Swift.Hashable, Swift.Sendable, Swift.Sequence where Self.Element == any AppIntents.Resolver {
   associatedtype Output : AppIntents._IntentValue
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -1750,11 +1798,11 @@ extension AppIntents.ResolverSpecificationBuilder {
 public struct EmptyResolverSpecification<Value> : AppIntents.ResolverSpecification where Value : AppIntents._IntentValue {
   public typealias Output = Value
   public init()
-  public func makeIterator() -> Swift.IndexingIterator<[AppIntents.Resolver]>
+  public func makeIterator() -> Swift.IndexingIterator<[any AppIntents.Resolver]>
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.EmptyResolverSpecification<Value>, b: AppIntents.EmptyResolverSpecification<Value>) -> Swift.Bool
-  public typealias Element = Swift.IndexingIterator<[AppIntents.Resolver]>.Element
-  public typealias Iterator = Swift.IndexingIterator<[AppIntents.Resolver]>
+  public typealias Element = Swift.IndexingIterator<[any AppIntents.Resolver]>.Element
+  public typealias Iterator = Swift.IndexingIterator<[any AppIntents.Resolver]>
   public var hashValue: Swift.Int {
     get
   }
@@ -1811,15 +1859,6 @@ extension AppIntents.AppEnum {
   public static var defaultResolverSpecification: some AppIntents.ResolverSpecification {
     get
   }
-}
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public struct AppEnumOptionsProvider<Enum> : AppIntents.DynamicOptionsProvider where Enum : AppIntents.AppEnum {
-  public init(supportedValues: [Enum]?)
-  #if compiler(>=5.3) && $AsyncAwait
-  public func results() async throws -> [Enum]
-  #endif
-  public typealias DefaultValue = Swift.Array<Enum>.Result
-  public typealias Result = [Enum]
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol RangeCheckingResolver : AppIntents.Resolver {
@@ -2090,6 +2129,8 @@ extension AppIntents.SetFocusFilterIntent {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public enum SetFocusFilterIntentError : Foundation.LocalizedError, Swift.Equatable {
   case notFound
+  @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+  case missingParameterValue
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.SetFocusFilterIntentError, b: AppIntents.SetFocusFilterIntentError) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -2124,8 +2165,8 @@ public struct EntityQuerySortingOptions<Entity> where Entity : AppIntents.AppEnt
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct IntentDonationIdentifier : Swift.Hashable, Swift.Codable, Swift.Sendable {
   public static func == (lhs: AppIntents.IntentDonationIdentifier, rhs: AppIntents.IntentDonationIdentifier) -> Swift.Bool
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
@@ -2461,10 +2502,10 @@ extension AppIntents.IntentParameter where Value.ValueType : AppIntents.AppEntit
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter where Value.ValueType == AppIntents.IntentFile {
-  convenience public init(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.plain-text"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default)
-  convenience public init<Spec>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.plain-text"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification
-  convenience public init<OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.plain-text"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider) where OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentFile
-  convenience public init<Spec, OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.plain-text"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification, OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentFile
+  convenience public init(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.item"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default)
+  convenience public init<Spec>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.item"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification
+  convenience public init<OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.item"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider) where OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentFile
+  convenience public init<Spec, OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, supportedTypeIdentifiers: _const [Swift.String] = ["public.item"], requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification, OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentFile
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter where Value.ValueType == AppIntents.IntentPerson {

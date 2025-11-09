@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, HKVisionPrescriptionType) {
  @abstract      HKSample subclass representing a vision prescription
  */
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
-@interface HKVisionPrescription : HKSample
+@interface HKVisionPrescription : HKSample <NSSecureCoding, NSCopying>
 
 /*!
  @property      prescriptionType
@@ -46,6 +46,7 @@ HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
  */
 @property (nonatomic, copy, readonly, nullable) NSDate *expirationDate;
 
+
 /*!
  @method        prescriptionWithType:dateIssued:expirationDate:device:metadata
 
@@ -60,6 +61,7 @@ HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
                       expirationDate:(nullable NSDate *)expirationDate
                               device:(nullable HKDevice *)device
                             metadata:(nullable NSDictionary<NSString *, id> *)metadata;
+
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus
-#define DD_EXTERN extern "C" __attribute__((visibility ("default")))
+#define _DD_EXTERN extern "C" __attribute__((visibility ("default")))
 #else
-#define DD_EXTERN extern __attribute__((visibility ("default")))
+#define _DD_EXTERN extern __attribute__((visibility ("default")))
 #endif

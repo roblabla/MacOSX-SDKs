@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           08598454-BBCF-37FE-8AB3-82AB7BC32BB3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4BB4F5CD-0F42-3A3F-830A-243CFF840599
 install-name:    '/usr/lib/swift/libswiftRemoteMirror.dylib'
 current-version: 0
 exports:

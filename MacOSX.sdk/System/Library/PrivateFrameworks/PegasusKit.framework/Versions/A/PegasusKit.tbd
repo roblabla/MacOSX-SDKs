@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CEBF06FA-AEBF-3B0D-800B-47F637B9A69A
-  - target:          x86_64-maccatalyst
-    value:           CEBF06FA-AEBF-3B0D-800B-47F637B9A69A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2AA634F3-9EEE-3358-875D-9BBC5FBF2EF7
-  - target:          arm64e-maccatalyst
-    value:           2AA634F3-9EEE-3358-875D-9BBC5FBF2EF7
 install-name:    '/System/Library/PrivateFrameworks/PegasusKit.framework/Versions/A/PegasusKit'
 swift-abi-version: 7
 exports:
@@ -40,7 +27,9 @@ exports:
                        '_$s10PegasusKit04BaseA5ProxyC19feedbackEventStream7Combine18PassthroughSubjectCy0A3API025Apple_Parsec_Feedback_V2_N7PayloadVs5NeverOGvpMV', 
                        '_$s10PegasusKit04BaseA5ProxyC24warmUpConnectionIfNeededyyFTj', 
                        '_$s10PegasusKit04BaseA5ProxyC24warmUpConnectionIfNeededyyFTq', 
+                       '_$s10PegasusKit04BaseA5ProxyC5ErrorO08internalE0yA2EmFWC', 
                        '_$s10PegasusKit04BaseA5ProxyC5ErrorO13notConfiguredyA2EmFWC', 
+                       '_$s10PegasusKit04BaseA5ProxyC5ErrorO15featureDisabledyA2EmFWC', 
                        '_$s10PegasusKit04BaseA5ProxyC5ErrorO2eeoiySbAE_AEtFZ', '_$s10PegasusKit04BaseA5ProxyC5ErrorO4hash4intoys6HasherVz_tF', 
                        '_$s10PegasusKit04BaseA5ProxyC5ErrorO7unknownyA2EmFWC', '_$s10PegasusKit04BaseA5ProxyC5ErrorO9hashValueSivg', 
                        '_$s10PegasusKit04BaseA5ProxyC5ErrorO9hashValueSivpMV', '_$s10PegasusKit04BaseA5ProxyC5ErrorOMa', 
@@ -226,25 +215,10 @@ exports:
                        '_$s10PegasusKit0A27ProxyForSiriPersonalizationCN', '_$s10PegasusKit0A27ProxyForSiriPersonalizationCfD', 
                        '_$s10PegasusKit0A27ProxyForSiriPersonalizationCfd', '_$s10PegasusKit10ClientNameC07extractcD10FromStringySSSgAEFZ', 
                        '_$s10PegasusKit10ClientNameC07extractcD13FromUserAgent_17allowAbbreviationSSSgAF_SbtFZ', 
-                       '_$s10PegasusKit10ClientNameC10DuetExpertSSvgZ', '_$s10PegasusKit10ClientNameC10ParsecToolSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC11PhotoPickerSSvgZ', '_$s10PegasusKit10ClientNameC14MediaAnalysisdSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC15CoreSuggestionsSSvgZ', '_$s10PegasusKit10ClientNameC15FlightUtilitiesSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC15MapsSuggestionsSSvgZ', '_$s10PegasusKit10ClientNameC16ReverseTemplatedSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC18VisualIntelligenceSSvgZ', '_$s10PegasusKit10ClientNameC20NotificationsLoggingSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC4MailSSvgZ', '_$s10PegasusKit10ClientNameC4NewsSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC4SiriSSvgZ', '_$s10PegasusKit10ClientNameC6LookupSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC6PhotosSSvgZ', '_$s10PegasusKit10ClientNameC6SafariSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC7ParsecdSSvgZ', '_$s10PegasusKit10ClientNameC8MessagesSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC8TrysteroSSvgZ', '_$s10PegasusKit10ClientNameC9SpotlightSSvgZ', 
-                       '_$s10PegasusKit10ClientNameCAASSvgZ', '_$s10PegasusKit10ClientNameCACycfC', 
-                       '_$s10PegasusKit10ClientNameCACycfc', '_$s10PegasusKit10ClientNameCMa', 
-                       '_$s10PegasusKit10ClientNameCMn', '_$s10PegasusKit10ClientNameCMo', 
-                       '_$s10PegasusKit10ClientNameCN', '_$s10PegasusKit10ClientNameCfD', 
-                       '_$s10PegasusKit10ClientTypeO8rawValueACSgSu_tcfC', '_$s10PegasusKit10ClientTypeO8rawValueSuvg', 
-                       '_$s10PegasusKit10ClientTypeO8rawValueSuvpMV', '_$s10PegasusKit10ClientTypeOMa', 
-                       '_$s10PegasusKit10ClientTypeOMn', '_$s10PegasusKit10ClientTypeON', 
-                       '_$s10PegasusKit10ClientTypeOSHAAMc', '_$s10PegasusKit10ClientTypeOSQAAMc', 
-                       '_$s10PegasusKit10ClientTypeOSYAAMc', '_$s10PegasusKit11AtomicValueC4loadxyF', 
+                       '_$s10PegasusKit10ClientNameCACycfC', '_$s10PegasusKit10ClientNameCACycfc', 
+                       '_$s10PegasusKit10ClientNameCMa', '_$s10PegasusKit10ClientNameCMn', 
+                       '_$s10PegasusKit10ClientNameCMo', '_$s10PegasusKit10ClientNameCN', 
+                       '_$s10PegasusKit10ClientNameCfD', '_$s10PegasusKit11AtomicValueC4loadxyF', 
                        '_$s10PegasusKit11AtomicValueC5store8resultOfyxxKXE_tKF', 
                        '_$s10PegasusKit11AtomicValueC5storeyyxF', '_$s10PegasusKit11AtomicValueCMa', 
                        '_$s10PegasusKit11AtomicValueCMn', '_$s10PegasusKit11AtomicValueCMo', 
@@ -260,6 +234,8 @@ exports:
                        '_$s10PegasusKit13ConditionLockCMa', '_$s10PegasusKit13ConditionLockCMn', 
                        '_$s10PegasusKit13ConditionLockCMo', '_$s10PegasusKit13ConditionLockCMu', 
                        '_$s10PegasusKit13ConditionLockCfD', '_$s10PegasusKit13ConditionLockCfd', 
+                       '_$s10PegasusKit13ContextVendorC05queryC06client7Combine12AnyPublisherVys6ResultOy0A3API020Apple_Parsec_Search_a5QueryC0Vs5Error_pGs5NeverOG0A13Configuration10ClientTypeO_tFTj', 
+                       '_$s10PegasusKit13ContextVendorC05queryC06client7Combine12AnyPublisherVys6ResultOy0A3API020Apple_Parsec_Search_a5QueryC0Vs5Error_pGs5NeverOG0A13Configuration10ClientTypeO_tFTq', 
                        '_$s10PegasusKit13ContextVendorC05queryC07Combine12AnyPublisherVys6ResultOy0A3API020Apple_Parsec_Search_a5QueryC0Vs5Error_pGs5NeverOGvgTj', 
                        '_$s10PegasusKit13ContextVendorC05queryC07Combine12AnyPublisherVys6ResultOy0A3API020Apple_Parsec_Search_a5QueryC0Vs5Error_pGs5NeverOGvgTq', 
                        '_$s10PegasusKit13ContextVendorC05queryC07Combine12AnyPublisherVys6ResultOy0A3API020Apple_Parsec_Search_a5QueryC0Vs5Error_pGs5NeverOGvpMV', 

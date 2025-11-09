@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name Foundation
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1953.301
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name Foundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1971
 import Combine
 import CoreFoundation
 import Darwin
@@ -52,11 +52,11 @@ public struct IntegerParseStrategy<Format> : Swift.Codable, Swift.Hashable where
   public var lenient: Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.IntegerParseStrategy<Format>, b: Foundation.IntegerParseStrategy<Format>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerParseStrategy : Swift.Sendable where Format : Swift.Sendable {
@@ -130,11 +130,11 @@ extension Swift.Duration {
       public static func minuteSecond(padMinuteToLength: Swift.Int, fractionalSecondsLength: Swift.Int = 0, roundFractionalSeconds: Swift.FloatingPointRoundingRule = .toNearestOrEven) -> Swift.Duration.TimeFormatStyle.Pattern
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Swift.Duration.TimeFormatStyle.Pattern, b: Swift.Duration.TimeFormatStyle.Pattern) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var locale: Foundation.Locale {
       get
@@ -154,11 +154,11 @@ extension Swift.Duration {
     public static func == (a: Swift.Duration.TimeFormatStyle, b: Swift.Duration.TimeFormatStyle) -> Swift.Bool
     public typealias FormatInput = Swift.Duration
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -175,11 +175,11 @@ extension Swift.Duration.TimeFormatStyle {
     public static func == (a: Swift.Duration.TimeFormatStyle.Attributed, b: Swift.Duration.TimeFormatStyle.Attributed) -> Swift.Bool
     public typealias FormatInput = Swift.Duration
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -209,11 +209,11 @@ extension Foundation.Date {
     public static func == (a: Foundation.Date.AttributedStyle, b: Foundation.Date.AttributedStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Date
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -247,8 +247,8 @@ extension Foundation.Date.FormatStyle : Foundation.ParseStrategy {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Date.FormatStyle : Swift.Codable, Swift.Hashable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.Date.FormatStyle, b: Foundation.Date.FormatStyle) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -265,11 +265,11 @@ extension Foundation.Date.FormatStyle {
     public static let complete: Foundation.Date.FormatStyle.DateStyle
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Date.FormatStyle.DateStyle, b: Foundation.Date.FormatStyle.DateStyle) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct TimeStyle : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public static let omitted: Foundation.Date.FormatStyle.TimeStyle
@@ -278,11 +278,11 @@ extension Foundation.Date.FormatStyle {
     public static let complete: Foundation.Date.FormatStyle.TimeStyle
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Date.FormatStyle.TimeStyle, b: Foundation.Date.FormatStyle.TimeStyle) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -433,11 +433,11 @@ extension Foundation.Date {
     public static func == (a: Foundation.Date.IntervalFormatStyle, b: Foundation.Date.IntervalFormatStyle) -> Swift.Bool
     public typealias FormatInput = Swift.Range<Foundation.Date>
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -549,11 +549,11 @@ extension Foundation.Locale {
     public init(languageCode: Foundation.Locale.LanguageCode? = nil, script: Foundation.Locale.Script? = nil, languageRegion: Foundation.Locale.Region? = nil)
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Locale.Components, b: Foundation.Locale.Components) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension Foundation.Locale {
@@ -587,14 +587,14 @@ extension Foundation.Locale {
     public static let unavailable: Foundation.Locale.LanguageCode
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.LanguageCode, rhs: Foundation.Locale.LanguageCode) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Script : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -610,14 +610,14 @@ extension Foundation.Locale {
     public static let unknown: Foundation.Locale.Script
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Script, rhs: Foundation.Locale.Script) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Region : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -645,14 +645,14 @@ extension Foundation.Locale {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Region, rhs: Foundation.Locale.Region) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Collation : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -670,14 +670,14 @@ extension Foundation.Locale {
     public static func availableCollations(for language: Foundation.Locale.Language) -> [Foundation.Locale.Collation]
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Collation, rhs: Foundation.Locale.Collation) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Currency : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -696,14 +696,14 @@ extension Foundation.Locale {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Currency, rhs: Foundation.Locale.Currency) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct NumberingSystem : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -718,14 +718,14 @@ extension Foundation.Locale {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.NumberingSystem, rhs: Foundation.Locale.NumberingSystem) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public enum Weekday : Swift.String, Swift.Codable, Swift.Hashable, Swift.Sendable {
@@ -770,14 +770,14 @@ extension Foundation.Locale {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.MeasurementSystem, rhs: Foundation.Locale.MeasurementSystem) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Subdivision : Swift.Hashable, Swift.Codable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -790,14 +790,14 @@ extension Foundation.Locale {
     public static func subdivision(for region: Foundation.Locale.Region) -> Foundation.Locale.Subdivision
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Subdivision, rhs: Foundation.Locale.Subdivision) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct Variant : Swift.Codable, Swift.Hashable, Swift.Sendable, Swift.ExpressibleByStringLiteral {
@@ -810,14 +810,14 @@ extension Foundation.Locale {
     public static let posix: Foundation.Locale.Variant
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Foundation.Locale.Variant, rhs: Foundation.Locale.Variant) -> Swift.Bool
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
   }
 }
 @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
@@ -2042,11 +2042,11 @@ extension Foundation.Date {
     public static func == (a: Foundation.Date.VerbatimFormatStyle, b: Foundation.Date.VerbatimFormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Date
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -2154,21 +2154,21 @@ extension Foundation.RunLoop : Combine.Scheduler {
       public static func microseconds(_ us: Swift.Int) -> Foundation.RunLoop.SchedulerTimeType.Stride
       public static func nanoseconds(_ ns: Swift.Int) -> Foundation.RunLoop.SchedulerTimeType.Stride
       public static func == (a: Foundation.RunLoop.SchedulerTimeType.Stride, b: Foundation.RunLoop.SchedulerTimeType.Stride) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
-      public init(from decoder: Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct SchedulerOptions : Swift.Sendable {
   }
   public func schedule(options: Foundation.RunLoop.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
   public func schedule(after date: Foundation.RunLoop.SchedulerTimeType, tolerance: Foundation.RunLoop.SchedulerTimeType.Stride, options: Foundation.RunLoop.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
-  public func schedule(after date: Foundation.RunLoop.SchedulerTimeType, interval: Foundation.RunLoop.SchedulerTimeType.Stride, tolerance: Foundation.RunLoop.SchedulerTimeType.Stride, options: Foundation.RunLoop.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> Combine.Cancellable
+  public func schedule(after date: Foundation.RunLoop.SchedulerTimeType, interval: Foundation.RunLoop.SchedulerTimeType.Stride, tolerance: Foundation.RunLoop.SchedulerTimeType.Stride, options: Foundation.RunLoop.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
   public var now: Foundation.RunLoop.SchedulerTimeType {
     get
   }
@@ -2182,11 +2182,11 @@ extension Foundation.URL {
     public init(scheme: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .required, user: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .optional, password: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .optional, host: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .required, port: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.Int> = .optional, path: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .optional, query: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .optional, fragment: Foundation.URL.ParseStrategy.ComponentParseStrategy<Swift.String> = .optional)
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.URL.ParseStrategy, b: Foundation.URL.ParseStrategy) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -2200,11 +2200,11 @@ extension Foundation.URL.ParseStrategy {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.URL.ParseStrategy.ComponentParseStrategy<Component>, b: Foundation.URL.ParseStrategy.ComponentParseStrategy<Component>) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -2318,7 +2318,7 @@ extension Foundation.FileManager {
   @available(macOS 10.6, iOS 4.0, *)
   public func replaceItemAt(_ originalItemURL: Foundation.URL, withItemAt newItemURL: Foundation.URL, backupItemName: Swift.String? = nil, options: Foundation.FileManager.ItemReplacementOptions = []) throws -> Foundation.URL?
   @available(macOS 10.6, iOS 4.0, *)
-  @nonobjc public func enumerator(at url: Foundation.URL, includingPropertiesForKeys keys: [Foundation.URLResourceKey]?, options mask: Foundation.FileManager.DirectoryEnumerationOptions = [], errorHandler handler: ((Foundation.URL, Swift.Error) -> Swift.Bool)? = nil) -> Foundation.FileManager.DirectoryEnumerator?
+  @nonobjc public func enumerator(at url: Foundation.URL, includingPropertiesForKeys keys: [Foundation.URLResourceKey]?, options mask: Foundation.FileManager.DirectoryEnumerationOptions = [], errorHandler handler: ((Foundation.URL, any Swift.Error) -> Swift.Bool)? = nil) -> Foundation.FileManager.DirectoryEnumerator?
 }
 extension Foundation.FileHandle {
   @available(macOS 10.15.4, iOS 13.4, watchOS 6.2, tvOS 13.4, *)
@@ -2371,25 +2371,25 @@ extension Swift.ContiguousArray : Foundation.MutableDataProtocol where Element =
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol EncodableAttributedStringKey : Foundation.AttributedStringKey {
-  static func encode(_ value: Self.Value, to encoder: Swift.Encoder) throws
+  static func encode(_ value: Self.Value, to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol DecodableAttributedStringKey : Foundation.AttributedStringKey {
-  static func decode(from decoder: Swift.Decoder) throws -> Self.Value
+  static func decode(from decoder: any Swift.Decoder) throws -> Self.Value
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public typealias CodableAttributedStringKey = Foundation.DecodableAttributedStringKey & Foundation.EncodableAttributedStringKey
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.EncodableAttributedStringKey where Self.Value : Swift.Encodable {
-  public static func encode(_ value: Self.Value, to encoder: Swift.Encoder) throws
+  public static func encode(_ value: Self.Value, to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.DecodableAttributedStringKey where Self.Value : Swift.Decodable {
-  public static func decode(from decoder: Swift.Decoder) throws -> Self.Value
+  public static func decode(from decoder: any Swift.Decoder) throws -> Self.Value
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol MarkdownDecodableAttributedStringKey : Foundation.AttributedStringKey {
-  static func decodeMarkdown(from decoder: Swift.Decoder) throws -> Self.Value
+  static func decodeMarkdown(from decoder: any Swift.Decoder) throws -> Self.Value
   static var markdownName: Swift.String { get }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -2400,15 +2400,15 @@ extension Foundation.MarkdownDecodableAttributedStringKey {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.MarkdownDecodableAttributedStringKey where Self : Foundation.DecodableAttributedStringKey {
-  public static func decodeMarkdown(from decoder: Swift.Decoder) throws -> Self.Value
+  public static func decodeMarkdown(from decoder: any Swift.Decoder) throws -> Self.Value
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.EncodableAttributedStringKey where Self.Value : ObjectiveC.NSObject, Self.Value : Foundation.NSSecureCoding {
-  public static func encode(_ value: Self.Value, to encoder: Swift.Encoder) throws
+  public static func encode(_ value: Self.Value, to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.DecodableAttributedStringKey where Self.Value : ObjectiveC.NSObject, Self.Value : Foundation.NSSecureCoding {
-  public static func decode(from decoder: Swift.Decoder) throws -> Self.Value
+  public static func decode(from decoder: any Swift.Decoder) throws -> Self.Value
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol EncodingConfigurationProviding {
@@ -2418,7 +2418,7 @@ public protocol EncodingConfigurationProviding {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol EncodableWithConfiguration {
   associatedtype EncodingConfiguration
-  func encode(to encoder: Swift.Encoder, configuration: Self.EncodingConfiguration) throws
+  func encode(to encoder: any Swift.Encoder, configuration: Self.EncodingConfiguration) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol DecodingConfigurationProviding {
@@ -2428,7 +2428,7 @@ public protocol DecodingConfigurationProviding {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol DecodableWithConfiguration {
   associatedtype DecodingConfiguration
-  init(from decoder: Swift.Decoder, configuration: Self.DecodingConfiguration) throws
+  init(from decoder: any Swift.Decoder, configuration: Self.DecodingConfiguration) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public typealias CodableWithConfiguration = Foundation.DecodableWithConfiguration & Foundation.EncodableWithConfiguration
@@ -2471,8 +2471,8 @@ extension Swift.UnkeyedDecodingContainer {
   public var wrappedValue: T
   public init(wrappedValue: T)
   public init(wrappedValue: T, from configurationProvider: ConfigurationProvider.Type)
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.CodableConfiguration : Swift.Sendable where T : Swift.Sendable {
@@ -2490,22 +2490,22 @@ extension Foundation.CodableConfiguration : Swift.Hashable where T : Swift.Hasha
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Swift.Optional : Foundation.EncodableWithConfiguration where Wrapped : Foundation.EncodableWithConfiguration {
-  public func encode(to encoder: Swift.Encoder, configuration: Wrapped.EncodingConfiguration) throws
+  public func encode(to encoder: any Swift.Encoder, configuration: Wrapped.EncodingConfiguration) throws
   public typealias EncodingConfiguration = Wrapped.EncodingConfiguration
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Swift.Optional : Foundation.DecodableWithConfiguration where Wrapped : Foundation.DecodableWithConfiguration {
-  public init(from decoder: Swift.Decoder, configuration: Wrapped.DecodingConfiguration) throws
+  public init(from decoder: any Swift.Decoder, configuration: Wrapped.DecodingConfiguration) throws
   public typealias DecodingConfiguration = Wrapped.DecodingConfiguration
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Swift.Array : Foundation.EncodableWithConfiguration where Element : Foundation.EncodableWithConfiguration {
-  public func encode(to encoder: Swift.Encoder, configuration: Element.EncodingConfiguration) throws
+  public func encode(to encoder: any Swift.Encoder, configuration: Element.EncodingConfiguration) throws
   public typealias EncodingConfiguration = Element.EncodingConfiguration
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Swift.Array : Foundation.DecodableWithConfiguration where Element : Foundation.DecodableWithConfiguration {
-  public init(from decoder: Swift.Decoder, configuration: Element.DecodingConfiguration) throws
+  public init(from decoder: any Swift.Decoder, configuration: Element.DecodingConfiguration) throws
   public typealias DecodingConfiguration = Element.DecodingConfiguration
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -2522,20 +2522,20 @@ extension Foundation.AttributeScope {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributedString : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributedString : Foundation.CodableWithConfiguration {
-  public func encode(to encoder: Swift.Encoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
-  public init(from decoder: Swift.Decoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
+  public func encode(to encoder: any Swift.Encoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
+  public init(from decoder: any Swift.Decoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
   public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeContainer : Foundation.CodableWithConfiguration {
-  public func encode(to encoder: Swift.Encoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
-  public init(from decoder: Swift.Decoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
+  public func encode(to encoder: any Swift.Encoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
+  public init(from decoder: any Swift.Decoder, configuration: Foundation.AttributeScopeCodableConfiguration) throws
   public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
 }
@@ -2653,7 +2653,7 @@ public struct CharacterSet : Foundation.ReferenceConvertible, Swift.Equatable, S
   }
 }
 extension Foundation.CharacterSet : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSCharacterSet
   public static func _forceBridgeFromObjectiveC(_ input: Foundation.NSCharacterSet, result: inout Foundation.CharacterSet?)
   public static func _conditionallyBridgeFromObjectiveC(_ input: Foundation.NSCharacterSet, result: inout Foundation.CharacterSet?) -> Swift.Bool
@@ -2672,8 +2672,8 @@ extension Foundation.NSCharacterSet : Swift._HasCustomAnyHashableRepresentation 
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.CharacterSet : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Foundation.CharacterSet : Swift.Sendable {
@@ -2741,8 +2741,8 @@ extension Foundation.MeasurementFormatter {
 }
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 extension Foundation.Measurement : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Foundation.NSCoder {
   public func decodeObject<DecodedObjectType>(of cls: DecodedObjectType.Type, forKey key: Swift.String) -> DecodedObjectType? where DecodedObjectType : ObjectiveC.NSObject, DecodedObjectType : Foundation.NSCoding
@@ -2787,17 +2787,17 @@ extension Foundation.NSKeyedArchiver {
 extension Foundation.NSKeyedUnarchiver {
   @available(macOS 10.11, iOS 9.0, *)
   @available(swift, obsoleted: 4)
-  @available(macOS, introduced: 10.11, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(iOS, introduced: 9.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(tvOS, introduced: 9.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(watchOS, introduced: 2.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(macOS, introduced: 10.11, deprecated: 10.14, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(iOS, introduced: 9.0, deprecated: 12.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(tvOS, introduced: 9.0, deprecated: 12.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(watchOS, introduced: 2.0, deprecated: 5.0, message: "Use unarchivedObject(ofClass:from:) instead")
   @nonobjc public class func unarchiveTopLevelObjectWithData(_ data: Foundation.NSData) throws -> Swift.AnyObject?
   @available(swift 4)
   @available(macOS 10.11, iOS 9.0, *)
-  @available(macOS, introduced: 10.11, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(iOS, introduced: 9.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(tvOS, introduced: 9.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
-  @available(watchOS, introduced: 2.0, deprecated: 100000.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(macOS, introduced: 10.11, deprecated: 10.14, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(iOS, introduced: 9.0, deprecated: 12.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(tvOS, introduced: 9.0, deprecated: 12.0, message: "Use unarchivedObject(ofClass:from:) instead")
+  @available(watchOS, introduced: 2.0, deprecated: 5.0, message: "Use unarchivedObject(ofClass:from:) instead")
   @nonobjc public class func unarchiveTopLevelObjectWithData(_ data: Foundation.Data) throws -> Any?
   @available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *)
   @nonobjc public static func unarchivedObject<DecodedObjectType>(ofClass cls: DecodedObjectType.Type, from data: Foundation.Data) throws -> DecodedObjectType? where DecodedObjectType : ObjectiveC.NSObject, DecodedObjectType : Foundation.NSCoding
@@ -2967,7 +2967,6 @@ public struct Locale : Swift.Hashable, Swift.Equatable, Foundation.ReferenceConv
   @available(watchOS, deprecated: 9, message: "Use `Locale.Components(identifier:)` to access components")
   public static func components(fromIdentifier string: Swift.String) -> [Swift.String : Swift.String]
   public static func identifier(fromComponents components: [Swift.String : Swift.String]) -> Swift.String
-  @available(*, deprecated, renamed: "identifier(_:from:)")
   @available(macOS, deprecated: 13, renamed: "identifier(_:from:)")
   @available(iOS, deprecated: 16, renamed: "identifier(_:from:)")
   @available(tvOS, deprecated: 16, renamed: "identifier(_:from:)")
@@ -3014,8 +3013,8 @@ extension Foundation.NSLocale : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.Locale : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -3129,11 +3128,11 @@ public struct FloatingPointFormatStyle<Value> : Swift.Codable, Swift.Hashable, S
   public func notation(_ notation: Foundation.FloatingPointFormatStyle<Value>.Configuration.Notation) -> Foundation.FloatingPointFormatStyle<Value>
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.FloatingPointFormatStyle<Value>, b: Foundation.FloatingPointFormatStyle<Value>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle {
@@ -3153,11 +3152,11 @@ extension Foundation.FloatingPointFormatStyle {
     public func notation(_ notation: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.Notation) -> Foundation.FloatingPointFormatStyle<Value>.Percent
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Percent, b: Foundation.FloatingPointFormatStyle<Value>.Percent) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public struct Currency : Swift.Codable, Swift.Hashable, Swift.Sendable {
@@ -3177,11 +3176,11 @@ extension Foundation.FloatingPointFormatStyle {
     public func presentation(_ p: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.Presentation) -> Foundation.FloatingPointFormatStyle<Value>.Currency
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Currency, b: Foundation.FloatingPointFormatStyle<Value>.Currency) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -3277,11 +3276,11 @@ extension Foundation.FloatingPointFormatStyle {
     public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Attributed, b: Foundation.FloatingPointFormatStyle<Value>.Attributed) -> Swift.Bool
     public typealias FormatInput = Value
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -3455,8 +3454,8 @@ extension Foundation.AttributeScopes.FoundationAttributes {
       case second
       case secondFraction
       case timeZone
-      public init(from decoder: Swift.Decoder) throws
-      public func encode(to encoder: Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public static func == (a: Foundation.AttributeScopes.FoundationAttributes.DateFieldAttribute.Field, b: Foundation.AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
@@ -3472,7 +3471,7 @@ extension Foundation.AttributeScopes.FoundationAttributes {
     public typealias ObjectiveCValue = ObjectiveC.NSObject
     public static let name: Swift.String
     public static let markdownName: Swift.String
-    public static func decodeMarkdown(from decoder: Swift.Decoder) throws -> Foundation.AttributedString
+    public static func decodeMarkdown(from decoder: any Swift.Decoder) throws -> Foundation.AttributedString
     public static func objectiveCValue(for value: Foundation.AttributedString) throws -> ObjectiveC.NSObject
     public static func value(for object: ObjectiveC.NSObject) throws -> Foundation.AttributedString
   }
@@ -3529,11 +3528,11 @@ extension Foundation.AttributeScopes.FoundationAttributes {
       case actualByteCount
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Component, b: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Component) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public enum Unit : Swift.Codable, Swift.Sendable {
       case byte
@@ -3547,11 +3546,11 @@ extension Foundation.AttributeScopes.FoundationAttributes {
       case yb
       public static func == (a: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit, b: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
   }
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
@@ -3595,11 +3594,11 @@ extension Foundation.AttributeScopes.FoundationAttributes {
         case decimal(Foundation.Decimal)
         public func hash(into hasher: inout Swift.Hasher)
         public static func == (a: Foundation.AttributeScopes.FoundationAttributes.LocalizedStringArgumentAttributes.LocalizedNumericArgumentAttribute.Value, b: Foundation.AttributeScopes.FoundationAttributes.LocalizedStringArgumentAttributes.LocalizedNumericArgumentAttribute.Value) -> Swift.Bool
-        public func encode(to encoder: Swift.Encoder) throws
+        public func encode(to encoder: any Swift.Encoder) throws
         public var hashValue: Swift.Int {
           get
         }
-        public init(from decoder: Swift.Decoder) throws
+        public init(from decoder: any Swift.Decoder) throws
       }
     }
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
@@ -3842,10 +3841,14 @@ public struct URLResourceValues {
   public var localizedLabel: Swift.String? {
     get
   }
-  public var fileResourceIdentifier: (Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
+  public var fileResourceIdentifier: (any Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
     get
   }
-  public var volumeIdentifier: (Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
+  public var volumeIdentifier: (any Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
+    get
+  }
+  @available(macOS 13.3, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
+  public var fileIdentifier: Swift.UInt64? {
     get
   }
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -3883,7 +3886,7 @@ public struct URLResourceValues {
     get
   }
   @available(macOS 10.10, iOS 8.0, *)
-  public var generationIdentifier: (Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
+  public var generationIdentifier: (any Foundation.NSCopying & Foundation.NSSecureCoding & ObjectiveC.NSObjectProtocol)? {
     get
   }
   @available(macOS 10.10, iOS 8.0, *)
@@ -4049,6 +4052,18 @@ public struct URLResourceValues {
   }
   @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
   public var volumeSupportsAccessPermissions: Swift.Bool? {
+    get
+  }
+  @available(macOS 13.3, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
+  public var volumeTypeName: Swift.String? {
+    get
+  }
+  @available(macOS 13.3, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
+  public var volumeSubtype: Swift.Int? {
+    get
+  }
+  @available(macOS 13.3, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
+  public var volumeMountFromLocation: Swift.String? {
     get
   }
   public var isUbiquitousItem: Swift.Bool? {
@@ -4458,8 +4473,8 @@ extension Foundation.URL : Swift._CustomPlaygroundQuickLookable {
   }
 }
 extension Foundation.URL : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Foundation.URL : Swift._ExpressibleByFileReferenceLiteral {
   public init(fileReferenceLiteralResourceName name: Swift.String)
@@ -4596,7 +4611,7 @@ extension Foundation.PersonNameComponents : Swift.CustomStringConvertible, Swift
 }
 @available(macOS 10.11, iOS 9.0, *)
 extension Foundation.PersonNameComponents : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSPersonNameComponents
   public static func _forceBridgeFromObjectiveC(_ personNameComponents: Foundation.NSPersonNameComponents, result: inout Foundation.PersonNameComponents?)
   public static func _conditionallyBridgeFromObjectiveC(_ personNameComponents: Foundation.NSPersonNameComponents, result: inout Foundation.PersonNameComponents?) -> Swift.Bool
@@ -4609,8 +4624,8 @@ extension Foundation.NSPersonNameComponents : Swift._HasCustomAnyHashableReprese
 }
 @available(macOS 10.11, iOS 9.0, *)
 extension Foundation.PersonNameComponents : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Measurement where UnitType : Foundation.Dimension {
@@ -4621,11 +4636,11 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
     public static func == (a: Foundation.Measurement<UnitType>.AttributedStyle, b: Foundation.Measurement<UnitType>.AttributedStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Measurement<UnitType>
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -4660,11 +4675,11 @@ extension Foundation.Measurement.AttributedStyle where UnitType == Foundation.Un
     public static func == (a: Foundation.Measurement<UnitType>.AttributedStyle.ByteCount, b: Foundation.Measurement<UnitType>.AttributedStyle.ByteCount) -> Swift.Bool
     public typealias FormatInput = Foundation.Measurement<Foundation.UnitInformationStorage>
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -4753,33 +4768,33 @@ extension Foundation.InflectionRule : Swift.Hashable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology.CustomPronoun : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology.GrammaticalGender : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology.GrammaticalNumber : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology.PartOfSpeech : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.InflectionRule : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.InflectionRule {
@@ -4855,8 +4870,8 @@ extension Foundation.Decimal : Swift.CustomStringConvertible {
   }
 }
 extension Foundation.Decimal : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Foundation.Decimal : Swift.ExpressibleByFloatLiteral {
   public init(floatLiteral value: Swift.Double)
@@ -5007,7 +5022,7 @@ extension Foundation.Decimal : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = Foundation.NSDecimalNumber
 }
 extension Foundation.NSPredicate {
-  convenience public init(format predicateFormat: __shared Swift.String, _ args: Swift.CVarArg...)
+  convenience public init(format predicateFormat: __shared Swift.String, _ args: any Swift.CVarArg...)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Date.FormatStyle {
@@ -5378,11 +5393,11 @@ extension Foundation.Date.FormatStyle.Symbol.Hour {
     public static let wide: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle, b: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public static func defaultDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
   public static func twoDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
@@ -5404,22 +5419,22 @@ extension Foundation.Date.FormatStyle.Symbol.VerbatimHour {
     public static let oneBased: Foundation.Date.FormatStyle.Symbol.VerbatimHour.HourCycle
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Date.FormatStyle.Symbol.VerbatimHour.HourCycle, b: Foundation.Date.FormatStyle.Symbol.VerbatimHour.HourCycle) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Clock : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public static let twelveHour: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock
     public static let twentyFourHour: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock, b: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public static func defaultDigits(clock: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock, hourCycle: Foundation.Date.FormatStyle.Symbol.VerbatimHour.HourCycle) -> Foundation.Date.FormatStyle.Symbol.VerbatimHour
   public static func twoDigits(clock: Foundation.Date.FormatStyle.Symbol.VerbatimHour.Clock, hourCycle: Foundation.Date.FormatStyle.Symbol.VerbatimHour.HourCycle) -> Foundation.Date.FormatStyle.Symbol.VerbatimHour
@@ -5603,7 +5618,7 @@ extension Foundation.IndexSet {
   public static func == (lhs: Foundation.IndexSet, rhs: Foundation.IndexSet) -> Swift.Bool
 }
 extension Foundation.IndexSet : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSIndexSet
   public static func _forceBridgeFromObjectiveC(_ x: Foundation.NSIndexSet, result: inout Foundation.IndexSet?)
   public static func _conditionallyBridgeFromObjectiveC(_ x: Foundation.NSIndexSet, result: inout Foundation.IndexSet?) -> Swift.Bool
@@ -5614,8 +5629,8 @@ extension Foundation.NSIndexSet : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.IndexSet : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Foundation.IndexSet : Swift.Sendable {
@@ -5668,11 +5683,11 @@ extension Foundation.URL {
     public init(scheme: Foundation.URL.FormatStyle.ComponentDisplayOption = .always, user: Foundation.URL.FormatStyle.ComponentDisplayOption = .never, password: Foundation.URL.FormatStyle.ComponentDisplayOption = .never, host: Foundation.URL.FormatStyle.HostDisplayOption = .always, port: Foundation.URL.FormatStyle.ComponentDisplayOption = .omitIfHTTPFamily, path: Foundation.URL.FormatStyle.ComponentDisplayOption = .always, query: Foundation.URL.FormatStyle.ComponentDisplayOption = .never, fragment: Foundation.URL.FormatStyle.ComponentDisplayOption = .never)
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.URL.FormatStyle, b: Foundation.URL.FormatStyle) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -5715,11 +5730,11 @@ extension Foundation.URL.FormatStyle {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.URL.FormatStyle.ComponentDisplayOption, b: Foundation.URL.FormatStyle.ComponentDisplayOption) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct HostDisplayOption : Swift.Codable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
     public var description: Swift.String {
@@ -5740,11 +5755,11 @@ extension Foundation.URL.FormatStyle {
     public static func omitSpecificSubdomains(_ subdomainsToOmit: Swift.Set<Swift.String> = Set(), includeMultiLevelSubdomains omitMultiLevelSubdomains: Swift.Bool = false, when component: Foundation.URL.FormatStyle.Component, matches requirements: Swift.Set<Swift.String>) -> Foundation.URL.FormatStyle.HostDisplayOption
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.URL.FormatStyle.HostDisplayOption, b: Foundation.URL.FormatStyle.HostDisplayOption) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -5774,6 +5789,7 @@ extension Foundation.URL.FormatStyle : Foundation.FormatStyle {
 extension Foundation.URL {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public func formatted<F>(_ format: F) -> F.FormatOutput where F : Foundation.FormatStyle, F.FormatInput == Foundation.URL
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public func formatted() -> Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -5798,11 +5814,11 @@ extension Foundation.Decimal {
     public static func == (a: Foundation.Decimal.ParseStrategy<Format>, b: Foundation.Decimal.ParseStrategy<Format>) -> Swift.Bool
     public typealias ParseInput = Swift.String
     public typealias ParseOutput = Foundation.Decimal
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -5873,21 +5889,21 @@ extension Foundation.OperationQueue : Combine.Scheduler {
       public static func microseconds(_ us: Swift.Int) -> Foundation.OperationQueue.SchedulerTimeType.Stride
       public static func nanoseconds(_ ns: Swift.Int) -> Foundation.OperationQueue.SchedulerTimeType.Stride
       public static func == (a: Foundation.OperationQueue.SchedulerTimeType.Stride, b: Foundation.OperationQueue.SchedulerTimeType.Stride) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
-      public init(from decoder: Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct SchedulerOptions : Swift.Sendable {
   }
   public func schedule(options: Foundation.OperationQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
   public func schedule(after date: Foundation.OperationQueue.SchedulerTimeType, tolerance: Foundation.OperationQueue.SchedulerTimeType.Stride, options: Foundation.OperationQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
-  public func schedule(after date: Foundation.OperationQueue.SchedulerTimeType, interval: Foundation.OperationQueue.SchedulerTimeType.Stride, tolerance: Foundation.OperationQueue.SchedulerTimeType.Stride, options: Foundation.OperationQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> Combine.Cancellable
+  public func schedule(after date: Foundation.OperationQueue.SchedulerTimeType, interval: Foundation.OperationQueue.SchedulerTimeType.Stride, tolerance: Foundation.OperationQueue.SchedulerTimeType.Stride, options: Foundation.OperationQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
   public var now: Foundation.OperationQueue.SchedulerTimeType {
     get
   }
@@ -5936,11 +5952,11 @@ public struct SortDescriptor<Compared> : Foundation.SortComparator, Swift.Codabl
   public func compare(_ lhs: Compared, _ rhs: Compared) -> Foundation.ComparisonResult
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.SortDescriptor<Compared>, b: Foundation.SortDescriptor<Compared>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.NSSortDescriptor {
@@ -5961,11 +5977,11 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, b: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth
     public var locale: Foundation.Locale
@@ -5981,11 +5997,11 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
     public static func == (a: Foundation.Measurement<UnitType>.FormatStyle, b: Foundation.Measurement<UnitType>.FormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Measurement<UnitType>
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -6016,11 +6032,11 @@ extension Foundation.Measurement.FormatStyle where UnitType == Foundation.UnitIn
     public static func == (a: Foundation.Measurement<UnitType>.FormatStyle.ByteCount, b: Foundation.Measurement<UnitType>.FormatStyle.ByteCount) -> Swift.Bool
     public typealias FormatInput = Foundation.Measurement<Foundation.UnitInformationStorage>
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -6033,11 +6049,11 @@ public struct MeasurementFormatUnitUsage<UnitType> : Swift.Codable, Swift.Hashab
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.MeasurementFormatUnitUsage<UnitType>, b: Foundation.MeasurementFormatUnitUsage<UnitType>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitTemperature {
@@ -6113,7 +6129,7 @@ extension Foundation.URLSessionWebSocketTask {
     case data(Foundation.Data)
     case string(Swift.String)
   }
-  public func send(_ message: Foundation.URLSessionWebSocketTask.Message, completionHandler: @escaping (Swift.Error?) -> Swift.Void)
+  public func send(_ message: Foundation.URLSessionWebSocketTask.Message, completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @_silgen_name("_$sSo25NSURLSessionWebSocketTaskC10FoundationE4sendyyAbCE7MessageOYaKF")
   @_alwaysEmitIntoClient public func send(_ message: Foundation.URLSessionWebSocketTask.Message) async throws {
@@ -6128,7 +6144,7 @@ extension Foundation.URLSessionWebSocketTask {
         } as Void
     }
   #endif
-  public func receive(completionHandler: @escaping (Swift.Result<Foundation.URLSessionWebSocketTask.Message, Swift.Error>) -> Swift.Void)
+  public func receive(completionHandler: @escaping (Swift.Result<Foundation.URLSessionWebSocketTask.Message, any Swift.Error>) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @_silgen_name("_$sSo25NSURLSessionWebSocketTaskC10FoundationE7receiveAbCE7MessageOyYaKF")
   @_alwaysEmitIntoClient public func receive() async throws -> Foundation.URLSessionWebSocketTask.Message {
@@ -6191,25 +6207,25 @@ extension Foundation.URLSession {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Foundation.URLSession {
   #if compiler(>=5.3) && $AsyncAwait
-  public func data(for request: Foundation.URLRequest, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func data(for request: Foundation.URLRequest, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func data(from url: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func data(from url: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func upload(for request: Foundation.URLRequest, fromFile fileURL: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func upload(for request: Foundation.URLRequest, fromFile fileURL: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func upload(for request: Foundation.URLRequest, from bodyData: Foundation.Data, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func upload(for request: Foundation.URLRequest, from bodyData: Foundation.Data, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func download(for request: Foundation.URLRequest, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+  public func download(for request: Foundation.URLRequest, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func download(from url: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+  public func download(from url: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  public func download(resumeFrom resumeData: Foundation.Data, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+  public func download(resumeFrom resumeData: Foundation.Data, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $RethrowsProtocol
   public struct AsyncBytes : _Concurrency.AsyncSequence, Swift.Sendable {
@@ -6232,10 +6248,10 @@ extension Foundation.URLSession {
   }
   #endif
   #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol
-  public func bytes(for request: Foundation.URLRequest, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.URLSession.AsyncBytes, Foundation.URLResponse)
+  public func bytes(for request: Foundation.URLRequest, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.URLSession.AsyncBytes, Foundation.URLResponse)
   #endif
   #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol
-  public func bytes(from url: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil) async throws -> (Foundation.URLSession.AsyncBytes, Foundation.URLResponse)
+  public func bytes(from url: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil) async throws -> (Foundation.URLSession.AsyncBytes, Foundation.URLResponse)
   #endif
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -6384,11 +6400,11 @@ public struct FloatingPointParseStrategy<Format> : Swift.Codable, Swift.Hashable
   public var lenient: Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.FloatingPointParseStrategy<Format>, b: Foundation.FloatingPointParseStrategy<Format>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointParseStrategy : Swift.Sendable where Format : Swift.Sendable {
@@ -6425,11 +6441,11 @@ extension Foundation.Locale {
       public init(language: Foundation.Locale.Language)
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Locale.Language.Components, b: Foundation.Locale.Language.Components) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public init(components: Foundation.Locale.Language.Components)
     public init(languageCode: Foundation.Locale.LanguageCode? = nil, script: Foundation.Locale.Script? = nil, region: Foundation.Locale.Region? = nil)
@@ -6465,11 +6481,11 @@ extension Foundation.Locale {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.Locale.Language, b: Foundation.Locale.Language) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension Foundation.NSString : Swift.ExpressibleByStringLiteral {
@@ -6482,13 +6498,13 @@ extension Foundation.NSString : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.NSString {
-  convenience public init(format: __shared Foundation.NSString, _ args: Swift.CVarArg...)
-  convenience public init(format: __shared Foundation.NSString, locale: Foundation.Locale?, _ args: Swift.CVarArg...)
-  public class func localizedStringWithFormat(_ format: Foundation.NSString, _ args: Swift.CVarArg...) -> Self
-  public func appendingFormat(_ format: Foundation.NSString, _ args: Swift.CVarArg...) -> Foundation.NSString
+  convenience public init(format: __shared Foundation.NSString, _ args: any Swift.CVarArg...)
+  convenience public init(format: __shared Foundation.NSString, locale: Foundation.Locale?, _ args: any Swift.CVarArg...)
+  public class func localizedStringWithFormat(_ format: Foundation.NSString, _ args: any Swift.CVarArg...) -> Self
+  public func appendingFormat(_ format: Foundation.NSString, _ args: any Swift.CVarArg...) -> Foundation.NSString
 }
 extension Foundation.NSMutableString {
-  public func appendFormat(_ format: Foundation.NSString, _ args: Swift.CVarArg...)
+  public func appendFormat(_ format: Foundation.NSString, _ args: any Swift.CVarArg...)
 }
 extension Foundation.NSString {
   @nonobjc convenience public init(string aString: __shared Foundation.NSString)
@@ -6500,7 +6516,7 @@ extension Foundation.NSString : Swift._CustomPlaygroundQuickLookable {
   }
 }
 extension Foundation.NSExpression {
-  convenience public init(format expressionFormat: __shared Swift.String, _ args: Swift.CVarArg...)
+  convenience public init(format expressionFormat: __shared Swift.String, _ args: any Swift.CVarArg...)
 }
 extension Foundation.NSExpression {
   convenience public init<Root, Value>(forKeyPath keyPath: Swift.KeyPath<Root, Value>)
@@ -6564,8 +6580,8 @@ public struct PresentationIntent : Swift.Hashable, Swift.Codable, Swift.CustomDe
     public var debugDescription: Swift.String {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
-    public func encode(to encoder: Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.PresentationIntent.Kind, b: Foundation.PresentationIntent.Kind) -> Swift.Bool
     public var hashValue: Swift.Int {
@@ -6587,11 +6603,11 @@ public struct PresentationIntent : Swift.Hashable, Swift.Codable, Swift.CustomDe
     public init(alignment: Foundation.PresentationIntent.TableColumn.Alignment)
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.PresentationIntent.TableColumn, b: Foundation.PresentationIntent.TableColumn) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct IntentType : Swift.Hashable, Swift.Codable, Swift.CustomDebugStringConvertible, Swift.Sendable {
     public var kind: Foundation.PresentationIntent.Kind
@@ -6601,11 +6617,11 @@ public struct PresentationIntent : Swift.Hashable, Swift.Codable, Swift.CustomDe
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.PresentationIntent.IntentType, b: Foundation.PresentationIntent.IntentType) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public init(_ kind: Foundation.PresentationIntent.Kind, identity: Swift.Int, parent: Foundation.PresentationIntent? = nil)
   public init(types: [Foundation.PresentationIntent.IntentType])
@@ -6617,15 +6633,15 @@ public struct PresentationIntent : Swift.Hashable, Swift.Codable, Swift.CustomDe
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.PresentationIntent, b: Foundation.PresentationIntent) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.PresentationIntent : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.__NSPresentationIntent
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.__NSPresentationIntent, result: inout Foundation.PresentationIntent?)
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.__NSPresentationIntent, result: inout Foundation.PresentationIntent?) -> Swift.Bool
@@ -6650,11 +6666,11 @@ extension Foundation.Date {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Date.RelativeFormatStyle.UnitsStyle, b: Foundation.Date.RelativeFormatStyle.UnitsStyle) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public struct Presentation : Swift.Codable, Swift.Hashable, Swift.Sendable {
       public static var numeric: Foundation.Date.RelativeFormatStyle.Presentation {
@@ -6665,11 +6681,11 @@ extension Foundation.Date {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Date.RelativeFormatStyle.Presentation, b: Foundation.Date.RelativeFormatStyle.Presentation) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var presentation: Foundation.Date.RelativeFormatStyle.Presentation
     public var unitsStyle: Foundation.Date.RelativeFormatStyle.UnitsStyle
@@ -6683,11 +6699,11 @@ extension Foundation.Date {
     public static func == (a: Foundation.Date.RelativeFormatStyle, b: Foundation.Date.RelativeFormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Date
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -6719,7 +6735,7 @@ extension Foundation.Notification : Swift.CustomReflectable {
   }
 }
 extension Foundation.Notification : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSNotification
   public static func _forceBridgeFromObjectiveC(_ x: Foundation.NSNotification, result: inout Foundation.Notification?)
   public static func _conditionallyBridgeFromObjectiveC(_ x: Foundation.NSNotification, result: inout Foundation.Notification?) -> Swift.Bool
@@ -6735,8 +6751,8 @@ extension Foundation.Notification : @unchecked Swift.Sendable {
 }
 public typealias NSErrorPointer = Swift.AutoreleasingUnsafeMutablePointer<Foundation.NSError?>?
 public typealias ErrorPointer = Foundation.NSErrorPointer
-public func _convertNSErrorToError(_ error: Foundation.NSError?) -> Swift.Error
-public func _convertErrorToNSError(_ error: Swift.Error) -> Foundation.NSError
+public func _convertNSErrorToError(_ error: Foundation.NSError?) -> any Swift.Error
+public func _convertErrorToNSError(_ error: any Swift.Error) -> Foundation.NSError
 public protocol LocalizedError : Swift.Error {
   var errorDescription: Swift.String? { get }
   var failureReason: Swift.String? { get }
@@ -6885,13 +6901,13 @@ public protocol _ErrorCodeProtocol : Swift.Equatable {
   associatedtype _ErrorType : Foundation._BridgedStoredNSError where Self == Self._ErrorType.Code
 }
 extension Foundation._ErrorCodeProtocol {
-  public static func ~= (match: Self, error: Swift.Error) -> Swift.Bool
+  public static func ~= (match: Self, error: any Swift.Error) -> Swift.Bool
 }
 extension Foundation._BridgedStoredNSError {
   public func _getEmbeddedNSError() -> Swift.AnyObject?
   public static func == (lhs: Self, rhs: Self) -> Swift.Bool
 }
-extension Swift._SwiftNewtypeWrapper where Self.RawValue == Swift.Error {
+extension Swift._SwiftNewtypeWrapper where Self.RawValue == any Swift.Error {
   @inlinable public func _bridgeToObjectiveC() -> Foundation.NSError {
         return rawValue as NSError
     }
@@ -6929,10 +6945,11 @@ extension Foundation.CocoaError {
   public var stringEncoding: Swift.String.Encoding? {
     get
   }
-  public var underlying: Swift.Error? {
+  public var underlying: (any Swift.Error)? {
     get
   }
-  public var underlyingErrors: [Swift.Error] {
+  @available(macOS 11.3, iOS 14.5, watchOS 7.4, tvOS 14.5, *)
+  public var underlyingErrors: [any Swift.Error] {
     get
   }
   public var url: Foundation.URL? {
@@ -6940,7 +6957,7 @@ extension Foundation.CocoaError {
   }
 }
 extension Foundation.CocoaError {
-  public static func error(_ code: Foundation.CocoaError.Code, userInfo: [Swift.AnyHashable : Any]? = nil, url: Foundation.URL? = nil) -> Swift.Error
+  public static func error(_ code: Foundation.CocoaError.Code, userInfo: [Swift.AnyHashable : Any]? = nil, url: Foundation.URL? = nil) -> any Swift.Error
 }
 extension Foundation.CocoaError.Code {
   public static var fileNoSuchFile: Foundation.CocoaError.Code {
@@ -8772,7 +8789,7 @@ extension Foundation.URLRequest : Swift.CustomStringConvertible, Swift.CustomDeb
   }
 }
 extension Foundation.URLRequest : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSURLRequest
   public static func _forceBridgeFromObjectiveC(_ input: Foundation.NSURLRequest, result: inout Foundation.URLRequest?)
   public static func _conditionallyBridgeFromObjectiveC(_ input: Foundation.NSURLRequest, result: inout Foundation.URLRequest?) -> Swift.Bool
@@ -8848,7 +8865,7 @@ extension Foundation.FileHandle {
   #endif
 }
 public struct NSFastEnumerationIterator : Swift.IteratorProtocol {
-  public init(_ enumerable: Foundation.NSFastEnumeration)
+  public init(_ enumerable: any Foundation.NSFastEnumeration)
   public mutating func next() -> Any?
   public typealias Element = Any
 }
@@ -8999,7 +9016,7 @@ extension Foundation.URLComponents : Swift.CustomStringConvertible, Swift.Custom
   }
 }
 extension Foundation.URLComponents : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSURLComponents
   public static func _forceBridgeFromObjectiveC(_ x: Foundation.NSURLComponents, result: inout Foundation.URLComponents?)
   public static func _conditionallyBridgeFromObjectiveC(_ x: Foundation.NSURLComponents, result: inout Foundation.URLComponents?) -> Swift.Bool
@@ -9042,7 +9059,7 @@ extension Foundation.URLQueryItem : Swift.CustomStringConvertible, Swift.CustomD
 }
 @available(macOS 10.10, iOS 8.0, *)
 extension Foundation.URLQueryItem : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSURLQueryItem
   public static func _forceBridgeFromObjectiveC(_ x: Foundation.NSURLQueryItem, result: inout Foundation.URLQueryItem?)
   public static func _conditionallyBridgeFromObjectiveC(_ x: Foundation.NSURLQueryItem, result: inout Foundation.URLQueryItem?) -> Swift.Bool
@@ -9054,8 +9071,8 @@ extension Foundation.NSURLQueryItem : Swift._HasCustomAnyHashableRepresentation 
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.URLComponents : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Dispatch.DispatchData : Foundation.DataProtocol {
   public struct Region : Foundation.DataProtocol, Foundation.ContiguousBytes, Swift.Sendable {
@@ -9176,11 +9193,11 @@ public struct DateInterval : Foundation.ReferenceConvertible, Swift.Comparable, 
   public static func == (lhs: Foundation.DateInterval, rhs: Foundation.DateInterval) -> Swift.Bool
   @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static func < (lhs: Foundation.DateInterval, rhs: Foundation.DateInterval) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 extension Foundation.DateInterval : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomReflectable {
@@ -9196,7 +9213,7 @@ extension Foundation.DateInterval : Swift.CustomStringConvertible, Swift.CustomD
 }
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 extension Foundation.DateInterval : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSDateInterval
   public static func _forceBridgeFromObjectiveC(_ dateInterval: Foundation.NSDateInterval, result: inout Foundation.DateInterval?)
   public static func _conditionallyBridgeFromObjectiveC(_ dateInterval: Foundation.NSDateInterval, result: inout Foundation.DateInterval?) -> Swift.Bool
@@ -9374,11 +9391,11 @@ extension Foundation.Date.ISO8601FormatStyle : Foundation.FormatStyle {
   public static func == (a: Foundation.Date.ISO8601FormatStyle, b: Foundation.Date.ISO8601FormatStyle) -> Swift.Bool
   public typealias FormatInput = Foundation.Date
   public typealias FormatOutput = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Date.ISO8601FormatStyle : Foundation.ParseStrategy {
@@ -9454,8 +9471,8 @@ extension Foundation.Date.ParseStrategy : Foundation.ParseStrategy {
   public func parse(_ value: Swift.String) throws -> Foundation.Date
   public typealias ParseInput = Swift.String
   public typealias ParseOutput = Foundation.Date
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.ParseStrategy {
@@ -9479,7 +9496,7 @@ extension _StringProcessing.RegexComponent where Self == Foundation.Date.ParseSt
 extension Swift.String {
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct LocalizationOptions {
-    public var replacements: [Swift.CVarArg]?
+    public var replacements: [any Swift.CVarArg]?
     public init()
   }
   public struct LocalizationValue : Swift.Equatable, Swift.ExpressibleByStringInterpolation {
@@ -9492,11 +9509,11 @@ extension Swift.String {
       case object
       public static func == (a: Swift.String.LocalizationValue.Placeholder, b: Swift.String.LocalizationValue.Placeholder) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public init(_ value: Swift.String)
     @_semantics("localization_key.init_literal") public init(stringLiteral value: Swift.String)
@@ -9541,7 +9558,7 @@ extension Swift.String {
 extension Foundation.AttributedString {
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public struct LocalizationOptions {
-    public var replacements: [Swift.CVarArg]?
+    public var replacements: [any Swift.CVarArg]?
     public var applyReplacementIndexAttribute: Swift.Bool
     public init()
   }
@@ -9582,8 +9599,8 @@ extension Foundation.AttributedString {
 }
 @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
 extension Swift.String.LocalizationValue : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
 @_alwaysEmitIntoClient @_semantics("constant_evaluable") internal func placeholderFormatSpecifier(_ placeholder: Swift.String.LocalizationValue.Placeholder) -> Swift.String {
@@ -9761,8 +9778,8 @@ public struct LocalizedStringResource : Swift.Equatable, Swift.Codable, Foundati
   public var localizedStringResource: Foundation.LocalizedStringResource {
     get
   }
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: Foundation.LocalizedStringResource, rhs: Foundation.LocalizedStringResource) -> Swift.Bool
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
   public typealias StringInterpolation = Swift.String.LocalizationValue.StringInterpolation
@@ -9808,11 +9825,11 @@ public struct IntegerFormatStyle<Value> : Swift.Codable, Swift.Hashable, Swift.S
   public func notation(_ notation: Foundation.IntegerFormatStyle<Value>.Configuration.Notation) -> Foundation.IntegerFormatStyle<Value>
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.IntegerFormatStyle<Value>, b: Foundation.IntegerFormatStyle<Value>) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle {
@@ -9832,11 +9849,11 @@ extension Foundation.IntegerFormatStyle {
     public func notation(_ notation: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.Notation) -> Foundation.IntegerFormatStyle<Value>.Percent
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.IntegerFormatStyle<Value>.Percent, b: Foundation.IntegerFormatStyle<Value>.Percent) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public struct Currency : Swift.Codable, Swift.Hashable, Swift.Sendable {
@@ -9856,11 +9873,11 @@ extension Foundation.IntegerFormatStyle {
     public func presentation(_ p: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.Presentation) -> Foundation.IntegerFormatStyle<Value>.Currency
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.IntegerFormatStyle<Value>.Currency, b: Foundation.IntegerFormatStyle<Value>.Currency) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -10041,11 +10058,11 @@ extension Foundation.IntegerFormatStyle {
     public static func == (a: Foundation.IntegerFormatStyle<Value>.Attributed, b: Foundation.IntegerFormatStyle<Value>.Attributed) -> Swift.Bool
     public typealias FormatInput = Value
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -10161,21 +10178,21 @@ public struct ByteCountFormatStyle : Foundation.FormatStyle, Swift.Sendable {
     public static func == (a: Foundation.ByteCountFormatStyle.Attributed, b: Foundation.ByteCountFormatStyle.Attributed) -> Swift.Bool
     public typealias FormatInput = Swift.Int64
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.ByteCountFormatStyle, b: Foundation.ByteCountFormatStyle) -> Swift.Bool
   public typealias FormatInput = Swift.Int64
   public typealias FormatOutput = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FormatStyle where Self == Foundation.ByteCountFormatStyle {
@@ -10209,11 +10226,11 @@ extension Foundation.Decimal {
     public static func == (a: Foundation.Decimal.FormatStyle, b: Foundation.Decimal.FormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Decimal
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -10238,11 +10255,11 @@ extension Foundation.Decimal.FormatStyle {
     public static func == (a: Foundation.Decimal.FormatStyle.Percent, b: Foundation.Decimal.FormatStyle.Percent) -> Swift.Bool
     public typealias FormatInput = Foundation.Decimal
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public struct Currency : Foundation.FormatStyle, Swift.Sendable {
@@ -10266,11 +10283,11 @@ extension Foundation.Decimal.FormatStyle {
     public static func == (a: Foundation.Decimal.FormatStyle.Currency, b: Foundation.Decimal.FormatStyle.Currency) -> Swift.Bool
     public typealias FormatInput = Foundation.Decimal
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Attributed : Foundation.FormatStyle, Swift.Sendable {
     public func format(_ value: Foundation.Decimal) -> Foundation.AttributedString
@@ -10279,11 +10296,11 @@ extension Foundation.Decimal.FormatStyle {
     public static func == (a: Foundation.Decimal.FormatStyle.Attributed, b: Foundation.Decimal.FormatStyle.Attributed) -> Swift.Bool
     public typealias FormatInput = Foundation.Decimal
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -10407,8 +10424,8 @@ extension Foundation.NSUUID : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.UUID : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct DateComponents : Foundation.ReferenceConvertible, Swift.Hashable, Swift.Equatable, Swift.Sendable {
   public typealias ReferenceType = Foundation.NSDateComponents
@@ -10512,7 +10529,7 @@ extension Foundation.DateComponents : Swift.CustomStringConvertible, Swift.Custo
   }
 }
 extension Foundation.DateComponents : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSDateComponents
   public static func _forceBridgeFromObjectiveC(_ dateComponents: Foundation.NSDateComponents, result: inout Foundation.DateComponents?)
   public static func _conditionallyBridgeFromObjectiveC(_ dateComponents: Foundation.NSDateComponents, result: inout Foundation.DateComponents?) -> Swift.Bool
@@ -10523,8 +10540,8 @@ extension Foundation.NSDateComponents : Swift._HasCustomAnyHashableRepresentatio
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.DateComponents : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct Calendar : Swift.Hashable, Swift.Equatable, Foundation.ReferenceConvertible, Swift.Sendable {
   public typealias ReferenceType = Foundation.NSCalendar
@@ -10772,12 +10789,12 @@ extension Foundation.NSCalendar : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.Calendar : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Foundation.Calendar.Identifier : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ObjectiveC.NSObject : Swift.CustomStringConvertible {
 }
@@ -10785,7 +10802,7 @@ extension ObjectiveC.NSObject : Swift.CustomDebugStringConvertible {
 }
 public let NSNotFound: Swift.Int
 public func NSLocalizedString(_ key: Swift.String, tableName: Swift.String? = nil, bundle: Foundation.Bundle = Bundle.main, value: Swift.String = "", comment: Swift.String) -> Swift.String
-public func NSLog(_ format: Swift.String, _ args: Swift.CVarArg...)
+public func NSLog(_ format: Swift.String, _ args: any Swift.CVarArg...)
 extension Swift.AnyHashable : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> ObjectiveC.NSObject
   public static func _forceBridgeFromObjectiveC(_ x: ObjectiveC.NSObject, result: inout Swift.AnyHashable?)
@@ -10836,11 +10853,11 @@ public struct ListFormatStyle<Style, Base> : Foundation.FormatStyle where Style 
   public static func == (a: Foundation.ListFormatStyle<Style, Base>, b: Foundation.ListFormatStyle<Style, Base>) -> Swift.Bool
   public typealias FormatInput = Base
   public typealias FormatOutput = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.ListFormatStyle : Swift.Sendable where Style : Swift.Sendable {
@@ -10852,11 +10869,11 @@ public struct StringStyle : Foundation.FormatStyle, Swift.Sendable {
   public static func == (a: Foundation.StringStyle, b: Foundation.StringStyle) -> Swift.Bool
   public typealias FormatInput = Swift.String
   public typealias FormatOutput = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Swift.Sequence {
@@ -10942,11 +10959,11 @@ extension Foundation.NSDate : Swift._CustomPlaygroundQuickLookable {
 @available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *)
 extension Foundation.NSItemProvider {
   @available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *)
-  public func registerObject<T>(ofClass: T.Type, visibility: Foundation.NSItemProviderRepresentationVisibility, loadHandler: @escaping ((T?, Swift.Error?) -> Swift.Void) -> Foundation.Progress?) where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderWriting
+  public func registerObject<T>(ofClass: T.Type, visibility: Foundation.NSItemProviderRepresentationVisibility, loadHandler: @escaping ((T?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?) where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderWriting
   @available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *)
   public func canLoadObject<T>(ofClass: T.Type) -> Swift.Bool where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderReading
   @available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *)
-  public func loadObject<T>(ofClass: T.Type, completionHandler: @escaping (T?, Swift.Error?) -> Swift.Void) -> Foundation.Progress where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderReading
+  public func loadObject<T>(ofClass: T.Type, completionHandler: @escaping (T?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderReading
 }
 extension Foundation.URL {
   #if compiler(>=5.3) && $RethrowsProtocol
@@ -10989,8 +11006,8 @@ public protocol SortComparator : Swift.Hashable {
 @frozen public enum SortOrder : Swift.Hashable, Swift.Codable, Swift.Sendable {
   case forward
   case reverse
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: Foundation.SortOrder, b: Foundation.SortOrder) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -11015,10 +11032,10 @@ extension Swift.String {
     public static let lexical: Swift.String.StandardComparator
     public var order: Foundation.SortOrder
     public init(_ base: Swift.String.StandardComparator, order: Foundation.SortOrder = .forward)
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
     public func compare(_ lhs: Swift.String, _ rhs: Swift.String) -> Foundation.ComparisonResult
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: Swift.String.StandardComparator, b: Swift.String.StandardComparator) -> Swift.Bool
     public typealias Compared = Swift.String
     public var hashValue: Swift.Int {
@@ -11031,10 +11048,10 @@ extension Swift.String {
     public var order: Foundation.SortOrder
     public init(options: Swift.String.CompareOptions, locale: Foundation.Locale? = Locale.current, order: Foundation.SortOrder = .forward)
     public init(_ standardComparison: Swift.String.StandardComparator)
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
     public func compare(_ lhs: Swift.String, _ rhs: Swift.String) -> Foundation.ComparisonResult
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: Swift.String.Comparator, b: Swift.String.Comparator) -> Swift.Bool
     public typealias Compared = Swift.String
     public var hashValue: Swift.Int {
@@ -11145,8 +11162,8 @@ extension Foundation.Date : Swift._CustomPlaygroundQuickLookable {
   }
 }
 extension Foundation.Date : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Swift.String {
   public static var availableStringEncodings: [Swift.String.Encoding] {
@@ -11156,7 +11173,7 @@ extension Swift.String {
     get
   }
   public static func localizedName(of encoding: Swift.String.Encoding) -> Swift.String
-  public static func localizedStringWithFormat(_ format: Swift.String, _ arguments: Swift.CVarArg...) -> Swift.String
+  public static func localizedStringWithFormat(_ format: Swift.String, _ arguments: any Swift.CVarArg...) -> Swift.String
   public init?(utf8String bytes: Swift.UnsafePointer<Swift.CChar>)
   @_alwaysEmitIntoClient public init?(utf8String bytes: [Swift.CChar]) {
         // the stdlib's validatingUTF8 [CChar] overload checks for null termination.
@@ -11270,10 +11287,10 @@ extension Swift.String {
         self = ""
     }
   public init?(data: __shared Foundation.Data, encoding: Swift.String.Encoding)
-  public init(format: __shared Swift.String, _ arguments: Swift.CVarArg...)
-  public init(format: __shared Swift.String, arguments: __shared [Swift.CVarArg])
-  public init(format: __shared Swift.String, locale: __shared Foundation.Locale?, _ args: Swift.CVarArg...)
-  public init(format: __shared Swift.String, locale: __shared Foundation.Locale?, arguments: __shared [Swift.CVarArg])
+  public init(format: __shared Swift.String, _ arguments: any Swift.CVarArg...)
+  public init(format: __shared Swift.String, arguments: __shared [any Swift.CVarArg])
+  public init(format: __shared Swift.String, locale: __shared Foundation.Locale?, _ args: any Swift.CVarArg...)
+  public init(format: __shared Swift.String, locale: __shared Foundation.Locale?, arguments: __shared [any Swift.CVarArg])
 }
 extension Swift.StringProtocol {
   @inlinable internal func _toRelativeNSRange(_ r: Swift.Range<Swift.String.Index>) -> Foundation.NSRange {
@@ -11334,7 +11351,7 @@ extension Swift.StringProtocol {
     get
   }
   public func addingPercentEncoding(withAllowedCharacters allowedCharacters: Foundation.CharacterSet) -> Swift.String?
-  public func appendingFormat<T>(_ format: T, _ arguments: Swift.CVarArg...) -> Swift.String where T : Swift.StringProtocol
+  public func appendingFormat<T>(_ format: T, _ arguments: any Swift.CVarArg...) -> Swift.String where T : Swift.StringProtocol
   public func appending<T>(_ aString: T) -> Swift.String where T : Swift.StringProtocol
   public func folding(options: Swift.String.CompareOptions = [], locale: Foundation.Locale?) -> Swift.String
   public func padding<T>(toLength newLength: Swift.Int, withPad padString: T, startingAt padIndex: Swift.Int) -> Swift.String where T : Swift.StringProtocol
@@ -11501,11 +11518,11 @@ extension Swift.Duration {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Swift.Duration.UnitsFormatStyle.UnitWidth, b: Swift.Duration.UnitsFormatStyle.UnitWidth) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public struct Unit : Swift.Codable, Swift.Hashable, Swift.Sendable {
       public static var weeks: Swift.Duration.UnitsFormatStyle.Unit {
@@ -11534,11 +11551,11 @@ extension Swift.Duration {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Swift.Duration.UnitsFormatStyle.Unit, b: Swift.Duration.UnitsFormatStyle.Unit) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public struct ZeroValueUnitsDisplayStrategy : Swift.Codable, Swift.Hashable, Swift.Sendable {
       public static var hide: Swift.Duration.UnitsFormatStyle.ZeroValueUnitsDisplayStrategy {
@@ -11547,11 +11564,11 @@ extension Swift.Duration {
       public static func show(length: Swift.Int) -> Swift.Duration.UnitsFormatStyle.ZeroValueUnitsDisplayStrategy
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Swift.Duration.UnitsFormatStyle.ZeroValueUnitsDisplayStrategy, b: Swift.Duration.UnitsFormatStyle.ZeroValueUnitsDisplayStrategy) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public struct FractionalPartDisplayStrategy : Swift.Codable, Swift.Hashable, Swift.Sendable {
       public var minimumLength: Swift.Int
@@ -11566,11 +11583,11 @@ extension Swift.Duration {
       public static func hide(rounded: Swift.FloatingPointRoundingRule = .toNearestOrEven) -> Swift.Duration.UnitsFormatStyle.FractionalPartDisplayStrategy
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Swift.Duration.UnitsFormatStyle.FractionalPartDisplayStrategy, b: Swift.Duration.UnitsFormatStyle.FractionalPartDisplayStrategy) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var locale: Foundation.Locale
     public var allowedUnits: Swift.Set<Swift.Duration.UnitsFormatStyle.Unit>
@@ -11590,11 +11607,11 @@ extension Swift.Duration {
     public static func == (a: Swift.Duration.UnitsFormatStyle, b: Swift.Duration.UnitsFormatStyle) -> Swift.Bool
     public typealias FormatInput = Swift.Duration
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -11612,11 +11629,11 @@ extension Swift.Duration.UnitsFormatStyle {
     public static func == (a: Swift.Duration.UnitsFormatStyle.Attributed, b: Swift.Duration.UnitsFormatStyle.Attributed) -> Swift.Bool
     public typealias FormatInput = Swift.Duration
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension Swift.UnsafeRawBufferPointer : Foundation.DataProtocol {
@@ -11675,11 +11692,11 @@ extension Foundation.AttributedString {
     public init(startLine: Swift.Int, startColumn: Swift.Int, endLine: Swift.Int, endColumn: Swift.Int)
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.AttributedString.MarkdownSourcePosition, b: Foundation.AttributedString.MarkdownSourcePosition) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public init<S>(markdown: Swift.String, including scope: Swift.KeyPath<Foundation.AttributeScopes, S.Type>, options: Foundation.AttributedString.MarkdownParsingOptions = .init(), baseURL: Foundation.URL? = nil) throws where S : Foundation.AttributeScope
   public init(markdown: Swift.String, options: Foundation.AttributedString.MarkdownParsingOptions = .init(), baseURL: Foundation.URL? = nil) throws
@@ -13194,8 +13211,8 @@ extension Foundation.NSData : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.Data : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS, unavailable, introduced: 7)
 @available(*, unavailable)
@@ -13256,7 +13273,7 @@ extension Foundation.Timer {
     final public let options: Foundation.RunLoop.SchedulerOptions?
     public init(interval: Foundation.TimeInterval, tolerance: Foundation.TimeInterval? = nil, runLoop: Foundation.RunLoop, mode: Foundation.RunLoop.Mode, options: Foundation.RunLoop.SchedulerOptions? = nil)
     @objc deinit
-    final public func connect() -> Combine.Cancellable
+    final public func connect() -> any Combine.Cancellable
     final public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == Swift.Never, S.Input == Foundation.Date
   }
 }
@@ -13853,12 +13870,12 @@ extension Foundation.AttributedSubstring : @unchecked Swift.Sendable {
     @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
     case iso8601
     case formatted(Foundation.DateFormatter)
-    @preconcurrency case custom(@Sendable (Foundation.Date, Swift.Encoder) throws -> Swift.Void)
+    @preconcurrency case custom(@Sendable (Foundation.Date, any Swift.Encoder) throws -> Swift.Void)
   }
   public enum DataEncodingStrategy : Swift.Sendable {
     case deferredToData
     case base64
-    @preconcurrency case custom(@Sendable (Foundation.Data, Swift.Encoder) throws -> Swift.Void)
+    @preconcurrency case custom(@Sendable (Foundation.Data, any Swift.Encoder) throws -> Swift.Void)
   }
   public enum NonConformingFloatEncodingStrategy : Swift.Sendable {
     case `throw`
@@ -13867,7 +13884,7 @@ extension Foundation.AttributedSubstring : @unchecked Swift.Sendable {
   public enum KeyEncodingStrategy : Swift.Sendable {
     case useDefaultKeys
     case convertToSnakeCase
-    @preconcurrency case custom(@Sendable (_ codingPath: [Swift.CodingKey]) -> Swift.CodingKey)
+    @preconcurrency case custom(@Sendable (_ codingPath: [any Swift.CodingKey]) -> any Swift.CodingKey)
   }
   open var outputFormatting: Foundation.JSONEncoder.OutputFormatting {
     get
@@ -13911,12 +13928,12 @@ extension Foundation.AttributedSubstring : @unchecked Swift.Sendable {
     @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
     case iso8601
     case formatted(Foundation.DateFormatter)
-    @preconcurrency case custom(@Sendable (_ decoder: Swift.Decoder) throws -> Foundation.Date)
+    @preconcurrency case custom(@Sendable (_ decoder: any Swift.Decoder) throws -> Foundation.Date)
   }
   public enum DataDecodingStrategy : Swift.Sendable {
     case deferredToData
     case base64
-    @preconcurrency case custom(@Sendable (_ decoder: Swift.Decoder) throws -> Foundation.Data)
+    @preconcurrency case custom(@Sendable (_ decoder: any Swift.Decoder) throws -> Foundation.Data)
   }
   public enum NonConformingFloatDecodingStrategy : Swift.Sendable {
     case `throw`
@@ -13925,7 +13942,7 @@ extension Foundation.AttributedSubstring : @unchecked Swift.Sendable {
   public enum KeyDecodingStrategy : Swift.Sendable {
     case useDefaultKeys
     case convertFromSnakeCase
-    @preconcurrency case custom(@Sendable (_ codingPath: [Swift.CodingKey]) -> Swift.CodingKey)
+    @preconcurrency case custom(@Sendable (_ codingPath: [any Swift.CodingKey]) -> any Swift.CodingKey)
   }
   open var dateDecodingStrategy: Foundation.JSONDecoder.DateDecodingStrategy {
     get
@@ -14184,8 +14201,8 @@ extension Foundation._NSRange : Swift._CustomPlaygroundQuickLookable {
   }
 }
 extension Foundation._NSRange : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Swift.BinaryInteger {
@@ -14208,8 +14225,8 @@ public struct URLResource : Swift.Hashable, Swift.Codable {
   public let subdirectory: Swift.String?
   public var locale: Foundation.Locale
   public init(name: Swift.String, subdirectory: Swift.String? = nil, locale: Foundation.Locale = .current, bundle: Foundation.Bundle = .main)
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.URLResource, b: Foundation.URLResource) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -14271,11 +14288,11 @@ public struct FormatStyleCapitalizationContext : Swift.Codable, Swift.Hashable, 
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.FormatStyleCapitalizationContext, b: Foundation.FormatStyleCapitalizationContext) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public enum NumberFormatStyleConfiguration {
@@ -14292,11 +14309,11 @@ public enum NumberFormatStyleConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NumberFormatStyleConfiguration.Grouping, b: Foundation.NumberFormatStyleConfiguration.Grouping) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Precision : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public static func significantDigits<R>(_ limits: R) -> Foundation.NumberFormatStyleConfiguration.Precision where R : Swift.RangeExpression, R.Bound == Swift.Int
@@ -14309,11 +14326,11 @@ public enum NumberFormatStyleConfiguration {
     public static func fractionLength(_ length: Swift.Int) -> Foundation.NumberFormatStyleConfiguration.Precision
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NumberFormatStyleConfiguration.Precision, b: Foundation.NumberFormatStyleConfiguration.Precision) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct DecimalSeparatorDisplayStrategy : Swift.Codable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
     public static var automatic: Foundation.NumberFormatStyleConfiguration.DecimalSeparatorDisplayStrategy {
@@ -14327,11 +14344,11 @@ public enum NumberFormatStyleConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NumberFormatStyleConfiguration.DecimalSeparatorDisplayStrategy, b: Foundation.NumberFormatStyleConfiguration.DecimalSeparatorDisplayStrategy) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct SignDisplayStrategy : Swift.Codable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
     public static var automatic: Foundation.NumberFormatStyleConfiguration.SignDisplayStrategy {
@@ -14346,11 +14363,11 @@ public enum NumberFormatStyleConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NumberFormatStyleConfiguration.SignDisplayStrategy, b: Foundation.NumberFormatStyleConfiguration.SignDisplayStrategy) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Notation : Swift.Codable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
     public static var scientific: Foundation.NumberFormatStyleConfiguration.Notation {
@@ -14367,11 +14384,11 @@ public enum NumberFormatStyleConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NumberFormatStyleConfiguration.Notation, b: Foundation.NumberFormatStyleConfiguration.Notation) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -14394,11 +14411,11 @@ public enum CurrencyFormatStyleConfiguration {
     public static func accountingAlways(showZero: Swift.Bool = false) -> Foundation.CurrencyFormatStyleConfiguration.SignDisplayStrategy
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.CurrencyFormatStyleConfiguration.SignDisplayStrategy, b: Foundation.CurrencyFormatStyleConfiguration.SignDisplayStrategy) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Presentation : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public static var narrow: Foundation.CurrencyFormatStyleConfiguration.Presentation {
@@ -14415,11 +14432,11 @@ public enum CurrencyFormatStyleConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.CurrencyFormatStyleConfiguration.Presentation, b: Foundation.CurrencyFormatStyleConfiguration.Presentation) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -14434,17 +14451,17 @@ public enum DescriptiveNumberFormatConfiguration {
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.DescriptiveNumberFormatConfiguration.Presentation, b: Foundation.DescriptiveNumberFormatConfiguration.Presentation) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Swift.FloatingPointRoundingRule : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS, unavailable, introduced: 15)
 @available(*, unavailable)
@@ -14489,11 +14506,11 @@ extension Foundation.PersonNameComponents {
     public static func == (a: Foundation.PersonNameComponents.FormatStyle, b: Foundation.PersonNameComponents.FormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.PersonNameComponents
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct AttributedStyle : Foundation.FormatStyle, Swift.Sendable {
     public var style: Foundation.PersonNameComponents.FormatStyle.Style
@@ -14505,11 +14522,11 @@ extension Foundation.PersonNameComponents {
     public static func == (a: Foundation.PersonNameComponents.AttributedStyle, b: Foundation.PersonNameComponents.AttributedStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.PersonNameComponents
     public typealias FormatOutput = Foundation.AttributedString
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -14521,11 +14538,11 @@ extension Foundation.PersonNameComponents {
     public static func == (a: Foundation.PersonNameComponents.ParseStrategy, b: Foundation.PersonNameComponents.ParseStrategy) -> Swift.Bool
     public typealias ParseInput = Swift.String
     public typealias ParseOutput = Foundation.PersonNameComponents
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -14621,8 +14638,8 @@ extension Foundation.NSTimeZone : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.TimeZone : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct IndexPath : Foundation.ReferenceConvertible, Swift.Equatable, Swift.Hashable, Swift.MutableCollection, Swift.RandomAccessCollection, Swift.Comparable, Swift.ExpressibleByArrayLiteral, Swift.Sendable {
   public typealias ReferenceType = Foundation.NSIndexPath
@@ -14689,7 +14706,7 @@ extension Foundation.IndexPath : Swift.CustomStringConvertible, Swift.CustomDebu
   }
 }
 extension Foundation.IndexPath : Swift._ObjectiveCBridgeable {
-  public static func _getObjectiveCType() -> Any.Type
+  public static func _getObjectiveCType() -> any Any.Type
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Foundation.NSIndexPath
   public static func _forceBridgeFromObjectiveC(_ x: Foundation.NSIndexPath, result: inout Foundation.IndexPath?)
   public static func _conditionallyBridgeFromObjectiveC(_ x: Foundation.NSIndexPath, result: inout Foundation.IndexPath?) -> Swift.Bool
@@ -14700,8 +14717,8 @@ extension Foundation.NSIndexPath : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 extension Foundation.IndexPath : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension Swift.Int8 : Swift._ObjectiveCBridgeable {
   @available(swift, deprecated: 4, renamed: "init(truncating:)")
@@ -14895,11 +14912,11 @@ extension Foundation.Date {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Date.ComponentsFormatStyle.Field, b: Foundation.Date.ComponentsFormatStyle.Field) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public struct Style : Swift.Codable, Swift.Hashable, Swift.Sendable {
       public static var wide: Foundation.Date.ComponentsFormatStyle.Style {
@@ -14919,11 +14936,11 @@ extension Foundation.Date {
       }
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Foundation.Date.ComponentsFormatStyle.Style, b: Foundation.Date.ComponentsFormatStyle.Style) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var style: Foundation.Date.ComponentsFormatStyle.Style
     public var fields: Swift.Set<Foundation.Date.ComponentsFormatStyle.Field>?
@@ -14937,11 +14954,11 @@ extension Foundation.Date {
     public static func == (a: Foundation.Date.ComponentsFormatStyle, b: Foundation.Date.ComponentsFormatStyle) -> Swift.Bool
     public typealias FormatInput = Swift.Range<Foundation.Date>
     public typealias FormatOutput = Swift.String
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)

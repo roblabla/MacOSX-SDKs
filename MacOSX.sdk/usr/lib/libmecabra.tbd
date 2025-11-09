@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           04C8C965-8325-3BF9-AFCC-923830F45A68
-  - target:          x86_64-maccatalyst
-    value:           04C8C965-8325-3BF9-AFCC-923830F45A68
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           38C7960E-62D3-3C4F-AC92-A255C1665ABE
-  - target:          arm64e-maccatalyst
-    value:           38C7960E-62D3-3C4F-AC92-A255C1665ABE
 install-name:    '/usr/lib/libmecabra.dylib'
 current-version: 1019
 exports:
@@ -139,6 +126,11 @@ exports:
                        _kMecabraCreationInputMethodTypeKey, _kMecabraCreationLearningEnabledKey, 
                        _kMecabraCreationLiteModeKey, _kMecabraCreationSyncLearningDataKey, 
                        _kMecabraCreationUseSpecialSymbolKey, _kMecabraCreationWubixingStandardKey, 
+                       _kMecabraLearningValidatorCandidateAnalysisStringKey, _kMecabraLearningValidatorCandidateConvertedAnalysisStringKey, 
+                       _kMecabraLearningValidatorCandidateDictionaryReadingKey, _kMecabraLearningValidatorCandidateSurfaceKey, 
+                       _kMecabraLearningValidatorCandidateWordBoundaryKey, _kMecabraLearningValidatorGeometryModelKey, 
+                       _kMecabraLearningValidatorLeftContextReadingKey, _kMecabraLearningValidatorLeftContextSurfaceKey, 
+                       _kMecabraLearningValidatorLeftContextWordBoundaryKey, _kMecabraLearningValidatorNotificationName, 
                        _kMecabraSupplementalLexiconIdentifiersKey, _kMecabraSupplementalLexiconItemPrefixKey, 
                        _kMecabraSupplementalLexiconReadingKey, _kMecabraSupplementalLexiconSurfaceKey, 
                        _kMecabraTraditionalChineseArchitectureDictionary, _kMecabraTraditionalChineseBiologyDictionary, 

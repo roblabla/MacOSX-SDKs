@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E9412018-811C-36B7-9F58-6471398EE465
-  - target:          arm64-macos
-    value:           954CFCC0-97A8-329B-B5AA-FF9046F3E94F
-  - target:          arm64e-macos
-    value:           9F57BC0A-3F18-3F00-B772-40B6A8616E26
 install-name:    '/usr/lib/system/libcompiler_rt.dylib'
 current-version: 103.1
 parent-umbrella:

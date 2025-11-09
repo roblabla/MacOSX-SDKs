@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F18938B2-FE56-3C5B-87F7-53171B995D39
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65C6EA19-07BC-3DF5-89E8-BFCF263E84B6
 install-name:    '/System/Library/PrivateFrameworks/DataDetectors.framework/Versions/A/DataDetectors'
-current-version: 441.1
+current-version: 445
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDActionsManagerDidRunActionNotification, _DDActionsManagerWillRunActionNotification, 

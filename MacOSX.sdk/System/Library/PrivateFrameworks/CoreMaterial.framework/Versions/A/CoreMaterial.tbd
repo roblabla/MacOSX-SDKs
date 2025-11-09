@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           530BEEA6-D568-3E84-958D-D64464713BDE
-  - target:          x86_64-maccatalyst
-    value:           530BEEA6-D568-3E84-958D-D64464713BDE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           518584C8-A153-39F7-BA61-37DC02E79E2F
-  - target:          arm64e-maccatalyst
-    value:           518584C8-A153-39F7-BA61-37DC02E79E2F
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -6,13 +6,13 @@
 */
 
 #import <AppKit/AppKitDefines.h>
-#import <AppKit/NSImage.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
-#import <Foundation/NSItemProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
+
+@class NSImage, NSItemProvider;
 
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @protocol NSPreviewRepresentableActivityItem <NSObject>

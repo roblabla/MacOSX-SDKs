@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1BD3BEE7-40BF-3B4E-8CDE-1B144B85663C
-  - target:          x86_64-maccatalyst
-    value:           1BD3BEE7-40BF-3B4E-8CDE-1B144B85663C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           79DA16AC-DA61-36FA-869A-D2E193E28885
-  - target:          arm64e-maccatalyst
-    value:           79DA16AC-DA61-36FA-869A-D2E193E28885
 install-name:    '/System/Library/PrivateFrameworks/DeviceIdentity.framework/Versions/A/DeviceIdentity'
 current-version: 0
 compatibility-version: 0
@@ -49,7 +36,8 @@ exports:
                        _kMAOptionsBAAOIDUCRTDeviceIdentifiers, _kMAOptionsBAAPerformOperationsOverIPC, 
                        _kMAOptionsBAAReturnReferenceDate, _kMAOptionsBAASCRTAttestation, 
                        _kMAOptionsBAASkipNetworkRequest, _kMAOptionsBAAUseAuthenticationUI, 
-                       _kMAOptionsBAAValidity, _kMAOptionsResuseExistingKey, _kMAOptionsUseCellularBootstrapConnection, 
+                       _kMAOptionsBAAValidity, _kMAOptionsResuseExistingKey, _kMAOptionsSOCKSProxyHost, 
+                       _kMAOptionsSOCKSProxyPort, _kMAOptionsUseCellularBootstrapConnection, 
                        _kMAOptionsUseCellularOTAConnection, _kMAOptionsUseSoftwareGeneratedKey, 
                        _mobileactivationErrorHasDomainAndErrorCode ]
 ...

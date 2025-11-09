@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           988E5DDB-46C0-39A2-9FA0-11D16FE08157
-  - target:          x86_64-maccatalyst
-    value:           988E5DDB-46C0-39A2-9FA0-11D16FE08157
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9F96820A-889F-3A33-AE39-4E26F328CBD9
-  - target:          arm64e-maccatalyst
-    value:           9F96820A-889F-3A33-AE39-4E26F328CBD9
 install-name:    '/System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/ContactsDonation'
 current-version: 0
 exports:

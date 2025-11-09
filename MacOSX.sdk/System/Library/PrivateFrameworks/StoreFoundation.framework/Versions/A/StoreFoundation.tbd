@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           396580E5-2868-3EB8-AC73-06E41EB99D42
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           90826DDB-3C82-389F-9991-7E37C21E3988
 install-name:    '/System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation'
 current-version: 379
 exports:

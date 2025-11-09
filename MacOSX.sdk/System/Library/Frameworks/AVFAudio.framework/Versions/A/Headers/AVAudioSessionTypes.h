@@ -411,12 +411,13 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionInterruptionOptions) {
 
     @var   AVAudioSessionInterruptionReasonBuiltInMicMuted
         The audio session was interrupted due to the built-in mic being muted e.g. due to an iPad's Smart Folio being closed.
-
+ 
  */
 typedef NS_ENUM(NSUInteger, AVAudioSessionInterruptionReason) {
     AVAudioSessionInterruptionReasonDefault         = 0,
     AVAudioSessionInterruptionReasonAppWasSuspended API_DEPRECATED("wasSuspended reason no longer present", ios(14.5, 16.0)) = 1,
-    AVAudioSessionInterruptionReasonBuiltInMicMuted = 2
+    AVAudioSessionInterruptionReasonBuiltInMicMuted = 2,
+
 } NS_SWIFT_NAME(AVAudioSession.InterruptionReason);
 
 ///  options for use when calling setActive:withOptions:error:

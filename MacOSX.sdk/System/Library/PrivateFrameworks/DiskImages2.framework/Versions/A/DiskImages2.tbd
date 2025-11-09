@@ -1,16 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           EECBC321-2A9E-3574-870C-BA19818E404F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D83CECEF-7443-3CEC-AC92-44B33B2E3E82
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 198.40.3
+current-version: 198.100.13
 exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTIN5boost10wrapexceptINS_5uuids13entropy_errorEEE, __ZTIN5boost10wrapexceptISt13runtime_errorEE, 
+                       __ZTIN5boost5uuids13entropy_errorE, __ZTIN5boost9container12out_of_rangeE, 
+                       __ZTIN5boost9container9exceptionE, __ZTSN5boost10wrapexceptINS_5uuids13entropy_errorEEE, 
+                       __ZTSN5boost10wrapexceptISt13runtime_errorEE, __ZTSN5boost5uuids13entropy_errorE, 
+                       __ZTSN5boost9container12out_of_rangeE, __ZTSN5boost9container9exceptionE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DIErrorDomain, _DIErrorVerboseInfoKey, _DiskImages2_Attach, 
                        __Z15make_error_code11DIErrorEnum, __ZN13diskimage_uio11add_di_roleENS_9diskimage4roleEONS_21diskimage_open_paramsE, 

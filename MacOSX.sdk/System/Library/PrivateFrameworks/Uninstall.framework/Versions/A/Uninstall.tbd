@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2F9724B2-7425-32D4-9AF7-E36198363B52
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           61BB1629-7BAE-3643-90A1-B4D9DC092831
 install-name:    '/System/Library/PrivateFrameworks/Uninstall.framework/Versions/A/Uninstall'
 current-version: 211
 exports:

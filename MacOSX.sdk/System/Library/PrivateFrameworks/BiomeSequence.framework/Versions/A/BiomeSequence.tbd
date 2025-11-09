@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9DD7378D-1D54-39CD-907C-45AD9E9FC1EF
-  - target:          x86_64-maccatalyst
-    value:           9DD7378D-1D54-39CD-907C-45AD9E9FC1EF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7D39BDED-E638-3946-A20C-1781DB33BA56
-  - target:          arm64e-maccatalyst
-    value:           7D39BDED-E638-3946-A20C-1781DB33BA56
 install-name:    '/System/Library/PrivateFrameworks/BiomeSequence.framework/Versions/A/BiomeSequence'
 swift-abi-version: 7
 exports:

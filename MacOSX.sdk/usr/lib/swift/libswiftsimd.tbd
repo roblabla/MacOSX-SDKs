@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           765BD292-26C8-3CE5-BEBF-6D9BF276A070
-  - target:          x86_64-maccatalyst
-    value:           765BD292-26C8-3CE5-BEBF-6D9BF276A070
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8CBCD724-BB16-3F8C-ACFB-7143842CA871
-  - target:          arm64e-maccatalyst
-    value:           8CBCD724-BB16-3F8C-ACFB-7143842CA871
 install-name:    '/usr/lib/swift/libswiftsimd.dylib'
-current-version: 9
+current-version: 9.100.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -843,5 +830,8 @@ exports:
                        '_$sSo14simd_double4x4a0A0Eys5SIMD4VySdGSicis', '_$sSo14simd_double4x4aSQ0A0Mc', 
                        '_$sSo14simd_double4x4as28CustomDebugStringConvertible0A0Mc', 
                        '_$ss4SIMDP4simdEyx6ScalarQzcfC', '_$ss4SIMDP4simds17FixedWidthInteger6ScalarRpzrlE1sopyxxFZ', 
+                       '_$ss5SIMD2V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD2V4simdE19_descriptionAsArraySSvpMV', 
+                       '_$ss5SIMD3V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD3V4simdE19_descriptionAsArraySSvpMV', 
+                       '_$ss5SIMD4V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD4V4simdE19_descriptionAsArraySSvpMV', 
                        '__swift_FORCE_LOAD_$_swiftsimd' ]
 ...

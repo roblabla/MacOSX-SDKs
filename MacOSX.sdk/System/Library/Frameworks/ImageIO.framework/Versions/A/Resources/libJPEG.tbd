@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9FDF76BD-1D95-336B-8FF1-6815FA3857ED
-  - target:          x86_64-maccatalyst
-    value:           9FDF76BD-1D95-336B-8FF1-6815FA3857ED
-  - target:          x86_64h-macos
-    value:           57D8CC65-A941-38C1-AC74-547494342CCE
-  - target:          x86_64h-maccatalyst
-    value:           57D8CC65-A941-38C1-AC74-547494342CCE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C6D4392F-5906-3B29-A38B-096C8FE847F7
-  - target:          arm64e-maccatalyst
-    value:           C6D4392F-5906-3B29-A38B-096C8FE847F7
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

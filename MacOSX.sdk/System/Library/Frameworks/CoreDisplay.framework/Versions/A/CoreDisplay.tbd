@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DF4DB88F-5912-3C88-B52F-C7FD2841B855
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           818132DD-4FF3-3E5A-9DF6-CB502B73B0C0
 install-name:    '/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay'
-current-version: 276
+current-version: 277.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CDNotificationRegisterCallbackBlock, _CDNotificationRegisterCallbackBlockOnQueue, 

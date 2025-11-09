@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A7BD86DE-6DE7-3657-BAA6-311CF2EA035C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6613F90B-2337-3C0B-B891-21B893F7AA8C
 install-name:    '/System/Library/PrivateFrameworks/iCloudNotification.framework/Versions/A/iCloudNotification'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

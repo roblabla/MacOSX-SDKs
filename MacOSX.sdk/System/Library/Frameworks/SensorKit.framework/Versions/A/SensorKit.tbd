@@ -2,46 +2,33 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3DB907AB-570A-383F-BF18-84F1D06FE75A
-  - target:          x86_64-maccatalyst
-    value:           3DB907AB-570A-383F-BF18-84F1D06FE75A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65D0E26E-A3CB-374C-BCB2-F9FE82DA481B
-  - target:          arm64e-maccatalyst
-    value:           65D0E26E-A3CB-374C-BCB2-F9FE82DA481B
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SRAbsoluteTimeFromCFAbsoluteTime, _SRAbsoluteTimeFromContinuousTime, 
                        _SRAbsoluteTimeGetCurrent, _SRAbsoluteTimeGetOffsets, _SRAbsoluteTimeInitWithRemoteRTCOffset, 
-                       _SRAbsoluteTimeSetSyntheticStartFromRemoteTime, _SRAbsoluteTimeToCFAbsoluteTime, 
-                       _SRAddBundleToPendingAuthorizations, _SRAuthorizationFetchSnapshot, 
-                       _SRAuthorizationResetWithCompletionHandler, _SRAuthorizationSnapshot, 
-                       _SRAuthorizationStatusForBundleIdentifier, _SRBundleIdentifiersAuthorizedToUseSensorKit, 
-                       _SRBundleIdentifiersWithPendingAuthorizations, _SRDeletionReasonRTCRollback, 
-                       _SRDeletionReasonRequiredAppNotInstalled, _SRDeviceUsageCategoryBooks, 
-                       _SRDeviceUsageCategoryBusiness, _SRDeviceUsageCategoryCatalogs, 
-                       _SRDeviceUsageCategoryDeveloperTools, _SRDeviceUsageCategoryEducation, 
-                       _SRDeviceUsageCategoryEntertainment, _SRDeviceUsageCategoryFinance, 
-                       _SRDeviceUsageCategoryFoodAndDrink, _SRDeviceUsageCategoryGames, 
-                       _SRDeviceUsageCategoryGraphicsAndDesign, _SRDeviceUsageCategoryHealthAndFitness, 
-                       _SRDeviceUsageCategoryKids, _SRDeviceUsageCategoryLifestyle, 
-                       _SRDeviceUsageCategoryMedical, _SRDeviceUsageCategoryMiscellaneous, 
-                       _SRDeviceUsageCategoryMusic, _SRDeviceUsageCategoryNavigation, 
-                       _SRDeviceUsageCategoryNews, _SRDeviceUsageCategoryNewsstand, 
-                       _SRDeviceUsageCategoryPhotoAndVideo, _SRDeviceUsageCategoryProductivity, 
-                       _SRDeviceUsageCategoryReference, _SRDeviceUsageCategoryShopping, 
-                       _SRDeviceUsageCategorySocialNetworking, _SRDeviceUsageCategorySports, 
-                       _SRDeviceUsageCategoryStickers, _SRDeviceUsageCategoryTravel, 
-                       _SRDeviceUsageCategoryUtilities, _SRDeviceUsageCategoryWeather, 
-                       _SRErrorDomain, _SRGetAuthorizationStatusForBundleIdentifier, 
+                       _SRAbsoluteTimeRoundedDownToNearestInterval, _SRAbsoluteTimeSetSyntheticStartFromRemoteTime, 
+                       _SRAbsoluteTimeToCFAbsoluteTime, _SRAddBundleToPendingAuthorizations, 
+                       _SRAuthorizationFetchSnapshot, _SRAuthorizationResetWithCompletionHandler, 
+                       _SRAuthorizationSnapshot, _SRAuthorizationStatusForBundleIdentifier, 
+                       _SRBundleIdentifiersAuthorizedToUseSensorKit, _SRBundleIdentifiersWithPendingAuthorizations, 
+                       _SRDeletionReasonRTCRollback, _SRDeletionReasonRequiredAppNotInstalled, 
+                       _SRDeviceUsageCategoryBooks, _SRDeviceUsageCategoryBusiness, 
+                       _SRDeviceUsageCategoryCatalogs, _SRDeviceUsageCategoryDeveloperTools, 
+                       _SRDeviceUsageCategoryEducation, _SRDeviceUsageCategoryEntertainment, 
+                       _SRDeviceUsageCategoryFinance, _SRDeviceUsageCategoryFoodAndDrink, 
+                       _SRDeviceUsageCategoryGames, _SRDeviceUsageCategoryGraphicsAndDesign, 
+                       _SRDeviceUsageCategoryHealthAndFitness, _SRDeviceUsageCategoryKids, 
+                       _SRDeviceUsageCategoryLifestyle, _SRDeviceUsageCategoryMedical, 
+                       _SRDeviceUsageCategoryMiscellaneous, _SRDeviceUsageCategoryMusic, 
+                       _SRDeviceUsageCategoryNavigation, _SRDeviceUsageCategoryNews, 
+                       _SRDeviceUsageCategoryNewsstand, _SRDeviceUsageCategoryPhotoAndVideo, 
+                       _SRDeviceUsageCategoryProductivity, _SRDeviceUsageCategoryReference, 
+                       _SRDeviceUsageCategoryShopping, _SRDeviceUsageCategorySocialNetworking, 
+                       _SRDeviceUsageCategorySports, _SRDeviceUsageCategoryStickers, 
+                       _SRDeviceUsageCategoryTravel, _SRDeviceUsageCategoryUtilities, 
+                       _SRDeviceUsageCategoryWeather, _SRErrorDomain, _SRGetAuthorizationStatusForBundleIdentifier, 
                        _SRIsDataCollectionEnabled, _SRIsRequiredOnboardingCompleted, 
                        _SRKeyboardMetaAppNameKey, _SRKeyboardMetaInformationHeightKey, 
                        _SRKeyboardMetaInformationIdentifierKey, _SRKeyboardMetaInformationInputModesKey, 
@@ -107,9 +94,10 @@ exports:
                        _SRSensorFacialMetrics, _SRSensorFallStatistics, _SRSensorFilterDeveloperOptOut, 
                        _SRSensorFilterMessagingApp, _SRSensorFilterTelephonyApp, 
                        _SRSensorGyroscope, _SRSensorHeartRate, _SRSensorKeyboardMetrics, 
-                       _SRSensorMessagesUsageReport, _SRSensorOdometer, _SRSensorOdometerSuitability, 
-                       _SRSensorOnWristDetailedState, _SRSensorOnWristState, _SRSensorPPG, 
-                       _SRSensorPedometerData, _SRSensorPhoneUsageReport, _SRSensorPhysicalActivityEvents, 
+                       _SRSensorMediaEvents, _SRSensorMessagesUsageReport, _SRSensorOdometer, 
+                       _SRSensorOdometerSuitability, _SRSensorOnWristDetailedState, 
+                       _SRSensorOnWristState, _SRSensorPPG, _SRSensorPedometerData, 
+                       _SRSensorPhoneUsageReport, _SRSensorPhysicalActivityEvents, 
                        _SRSensorRotationRate, _SRSensorSiriAudio, _SRSensorSiriSoundDetection, 
                        _SRSensorSiriSpeechEmotion, _SRSensorSiriSpeechMetrics, _SRSensorSpeechMetrics, 
                        _SRSensorStrideCalibration, _SRSensorTelephonyAudio, _SRSensorTelephonySoundDetection, 
@@ -121,9 +109,9 @@ exports:
                        SRAuthHostExtensionContext, SRAuthorizationClient, SRAuthorizationStore, 
                        SRDebugInfoClient, SRDeletionRecord, SRDevice, SRDeviceUsageReport, 
                        SRError, SRFetchRequest, SRFetchResult, SRKeyboardMetrics, 
-                       SRKeyboardProbabilityMetric, SRMessagesUsageReport, SRNotificationUsage, 
-                       SRPhoneUsageReport, SRSensorDescription, SRSensorPruner, SRSensorReader, 
-                       SRSensorWriter, SRSupplementalCategory, SRTextInputSession, 
-                       SRVisit, SRWebUsage, SRWristDetection, _SRDeviceUsageActivityLevel, 
-                       _SRDeviceUsageMotionActivity ]
+                       SRKeyboardProbabilityMetric, SRMediaEvent, SRMessagesUsageReport, 
+                       SRNotificationUsage, SRPhoneUsageReport, SRSensorDescription, 
+                       SRSensorPruner, SRSensorReader, SRSensorWriter, SRSupplementalCategory, 
+                       SRTextInputSession, SRVisit, SRWebUsage, SRWristDetection, 
+                       _SRDeviceUsageActivityLevel, _SRDeviceUsageMotionActivity ]
 ...

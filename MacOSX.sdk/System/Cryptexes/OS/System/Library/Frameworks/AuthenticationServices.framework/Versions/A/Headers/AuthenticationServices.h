@@ -76,3 +76,8 @@
 #import <AuthenticationServices/ASAuthorizationProviderExtensionLoginConfiguration.h>
 #import <AuthenticationServices/ASAuthorizationProviderExtensionLoginManager.h>
 #import <AuthenticationServices/ASAuthorizationProviderExtensionRegistrationHandler.h>
+
+#import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredential.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPublicKeyCredentialManager.h>
+

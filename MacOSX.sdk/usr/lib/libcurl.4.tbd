@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           70A0A24D-5945-3BE2-9F9D-C045B2261088
-  - target:          x86_64-maccatalyst
-    value:           70A0A24D-5945-3BE2-9F9D-C045B2261088
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86328110-E0B6-3469-9A6A-307AEC0E715B
-  - target:          arm64e-maccatalyst
-    value:           86328110-E0B6-3469-9A6A-307AEC0E715B
 install-name:    '/usr/lib/libcurl.4.dylib'
 current-version: 9
 compatibility-version: 7
@@ -45,5 +32,6 @@ exports:
                        _curl_share_setopt, _curl_share_strerror, _curl_slist_append, 
                        _curl_slist_free_all, _curl_strequal, _curl_strnequal, _curl_unescape, 
                        _curl_url, _curl_url_cleanup, _curl_url_dup, _curl_url_get, 
-                       _curl_url_set, _curl_url_strerror, _curl_version, _curl_version_info ]
+                       _curl_url_set, _curl_url_strerror, _curl_version, _curl_version_info, 
+                       _curl_ws_meta, _curl_ws_recv, _curl_ws_send ]
 ...

@@ -15,6 +15,7 @@
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSKeyValueBinding.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSPreviewRepresentingActivityItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
@@ -660,6 +661,10 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 /* Given the NSSharingServicePicker used by an NSDocumentController-owned Share menu (either an automatically inserted one, or one returned by +[NSDocumentController standardShareMenuItem]), make any final changes before that menu is presented. Specifically, you may choose to set a custom NSSharingServicePickerDelegate to customize the construction of the resulting menu, or provide a custom NSSharingServiceDelegate for the chosen service.
  */
 - (void)prepareSharingServicePicker:(NSSharingServicePicker *)sharingServicePicker API_AVAILABLE(macos(10.13));
+
+/* Preview representable activity items, used for sharing and collaboration.
+*/
+@property (nullable, copy) NSArray<id<NSPreviewRepresentableActivityItem>> *previewRepresentableActivityItems API_AVAILABLE(macos(13.2)) API_UNAVAILABLE(ios);
 
 #pragma mark *** Change Management ***
 

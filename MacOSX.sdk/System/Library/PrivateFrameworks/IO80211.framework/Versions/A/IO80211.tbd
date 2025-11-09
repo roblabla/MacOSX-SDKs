@@ -1,18 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           472A3C48-C234-3B97-B3FF-B00589BA72CA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1AB35FB1-4F7E-3B7A-8509-767F7FB5A578
 install-name:    '/System/Library/PrivateFrameworks/IO80211.framework/Versions/A/IO80211'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASL_LOG, _Apple80211Associate, _Apple80211Associate2, _Apple80211BindToInterface, 
-                       _Apple80211BindToInterfaceWithService, _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, 
+                       _Apple80211BindToInterfaceWithService, _Apple80211CalculateShortSSIDCopy, 
+                       _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, _Apple80211CopyCurrentNetwork, 
                        _Apple80211CopyLeakyAPStatus, _Apple80211CopyRangingCapabilities, 
                        _Apple80211CopyValue, _Apple80211Disassociate, _Apple80211ErrToStr, 
                        _Apple80211EventMonitoringHalt, _Apple80211EventMonitoringInit, 
@@ -24,14 +18,15 @@ exports:
                        _Apple80211MonitorEventsWithBlock, _Apple80211Open, _Apple80211Parse80211dIE, 
                        _Apple80211ParseAppleDeviceIE, _Apple80211ParseAppleIE, _Apple80211ParseAppleP2PIE, 
                        _Apple80211ParseAppleSWAPIE, _Apple80211ParseAppleiOSIE, _Apple80211ParseCyclopsIE, 
-                       _Apple80211ParseDSIE, _Apple80211ParseExtCapsIE, _Apple80211ParseHE_IEs, 
-                       _Apple80211ParseHS20IE, _Apple80211ParseHT_Caps, _Apple80211ParseHT_IE, 
-                       _Apple80211ParseInterworkingIE, _Apple80211ParseMobilityDomainIE, 
-                       _Apple80211ParseP2PIE, _Apple80211ParseQBSSLoadIE, _Apple80211ParseRSNIE, 
-                       _Apple80211ParseSES_IE, _Apple80211ParseSSIDIE, _Apple80211ParseVHT_Caps, 
-                       _Apple80211ParseVhtCapsIE, _Apple80211ParseVhtOpIE, _Apple80211ParseWPAIE, 
-                       _Apple80211ParseWPAPassword, _Apple80211ParseWPS_IE, _Apple80211RangeAsync, 
-                       _Apple80211RangingStopAsync, _Apple80211RawEventMonitoringInit, 
+                       _Apple80211ParseDSIE, _Apple80211ParseExtCapsIE, _Apple80211ParseFILSDiscoveryFrame, 
+                       _Apple80211ParseHEOperationIE, _Apple80211ParseHE_IEs, _Apple80211ParseHS20IE, 
+                       _Apple80211ParseHT_Caps, _Apple80211ParseHT_IE, _Apple80211ParseInterworkingIE, 
+                       _Apple80211ParseMBOOCEIE, _Apple80211ParseMobilityDomainIE, 
+                       _Apple80211ParseP2PIE, _Apple80211ParseQBSSLoadIE, _Apple80211ParseRNRIE, 
+                       _Apple80211ParseRSNIE, _Apple80211ParseSES_IE, _Apple80211ParseSSIDIE, 
+                       _Apple80211ParseVHT_Caps, _Apple80211ParseVhtCapsIE, _Apple80211ParseVhtOpIE, 
+                       _Apple80211ParseWPAIE, _Apple80211ParseWPAPassword, _Apple80211ParseWPS_IE, 
+                       _Apple80211RangeAsync, _Apple80211RangingStopAsync, _Apple80211RawEventMonitoringInit, 
                        _Apple80211RawEventMonitoringInitWithCFRunLoop, _Apple80211RawGet, 
                        _Apple80211RawP2PEventMonitoringInit, _Apple80211RawSet, _Apple80211RawStartMonitoringEventAll, 
                        _Apple80211Scan, _Apple80211ScanAsync, _Apple80211ScanDynamic, 

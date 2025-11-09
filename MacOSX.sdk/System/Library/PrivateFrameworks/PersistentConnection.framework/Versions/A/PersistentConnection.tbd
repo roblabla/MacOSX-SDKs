@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5BBBE0C9-E0D4-327A-ABCB-FC57D1327549
-  - target:          x86_64-maccatalyst
-    value:           5BBBE0C9-E0D4-327A-ABCB-FC57D1327549
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F6B1DF39-665E-39BF-9922-D2FF13AAB683
-  - target:          arm64e-maccatalyst
-    value:           F6B1DF39-665E-39BF-9922-D2FF13AAB683
 install-name:    '/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

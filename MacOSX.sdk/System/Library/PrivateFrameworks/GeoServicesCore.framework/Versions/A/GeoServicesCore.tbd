@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           532D6D32-A744-3C81-84E4-18D9ECB9D889
-  - target:          x86_64-maccatalyst
-    value:           532D6D32-A744-3C81-84E4-18D9ECB9D889
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3AF7BB5C-25AB-377F-887E-B0A799886912
-  - target:          arm64e-maccatalyst
-    value:           3AF7BB5C-25AB-377F-887E-B0A799886912
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 1889.22.9
+current-version: 1889.24.9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

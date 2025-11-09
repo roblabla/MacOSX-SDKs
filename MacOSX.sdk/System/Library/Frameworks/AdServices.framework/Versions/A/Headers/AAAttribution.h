@@ -9,51 +9,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- * @enum AAAttributionErrorCode
- *
- * @const AAAttributionErrorCodeNetworkNotAvailable
- * A token could not be provided because a network error occured.
- *
- * @const AAAttributionErrorCodeInternalError
- * A token could not be provided because an internal error occurred.
- *
- * @discussion
- * Error codes for NSErrors returned from the attributionTokenWithError: method.
- */
+/// The framework attribution error domain.
 extern NSErrorDomain const AAAttributionErrorDomain API_AVAILABLE(ios(14.3), macosx(11.1), tvos(14.3));
-                                                                  
+        
+/// The error code that the parent class issues.
 typedef NS_ERROR_ENUM(AAAttributionErrorDomain, AAAttributionErrorCode)
 {
+    /// The server is unable to provide a token because the internet isn’t available.
+    ///
+    /// To receive an attribution token, you must have unimpeded internet access. Make sure
+    /// you’re not using a simulator when generating a token.
     AAAttributionErrorCodeNetworkError = 1,
+    /// The server is unable to provide a token because of an internal error.
     AAAttributionErrorCodeInternalError = 2,
+    /// The server is unable to provide a token because of an unsupported operating system.
     AAAttributionErrorCodePlatformNotSupported = 3
 } API_AVAILABLE(ios(14.3), macosx(11.1), tvos(14.3));
 
-/*!
- * @class AAAttribution
- *
- * @discussion
- * This class contains a method that generates a token used to obtain the app's attribution from Apple’s Attribution Server.
- */
+/// The parent class that the framework uses to request a token.
 API_AVAILABLE(ios(14.3), macosx(11.1), tvos(14.3))
 @interface AAAttribution : NSObject
 
-/*!
- * @method attributionTokenWithError:
- *
- * @param error
- * If the error parameter is not nil it will contain any errors encountered during the call. The code property on the error object will be a member of the enum AAAttributionErrorCode.
- *
- * @return NSString
- * The value returned will be a token string. If there are any errors the return value will be nil and error parameter populated.
- *
- * @discussion
- * This method is used to generate an attribution token. The token is used in conjunction with Ad Platforms Attribution REST API to obtain the app's attribution information from Apple’s Attribution Server.
- * This method requires that the network is available otherwise it will return an error.
- * The token string can be used directly with the REST API.
- * If an error occurs, the return value of the method will be nil and the error parameter, if provided, will contain a reference to an NSError object describing the error that occurred.
- */
+/// Generates a token.
 + (nullable NSString *)attributionTokenWithError:(NSError * __autoreleasing _Nullable * _Nullable)error;
 
 @end

@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOInterruptDispatchSource.iig */
+/* iig(DriverKit-256.100.8) generated from IOInterruptDispatchSource.iig */
 
 /* IOInterruptDispatchSource.iig:1-50 */
 /*
@@ -356,7 +356,7 @@ public:
 };
 
 
-class IOInterruptDispatchSourceInterface : public OSInterface
+class  IOInterruptDispatchSourceInterface : public OSInterface
 {
 public:
 };

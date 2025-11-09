@@ -2,7 +2,7 @@
 //  GKGameSessionError.h
 //  Game Center
 //
-//  Copyright 2016-2022 Apple Inc. All rights reserved.
+//  Copyright 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

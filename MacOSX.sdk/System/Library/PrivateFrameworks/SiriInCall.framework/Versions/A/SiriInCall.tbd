@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C2D510B9-CD4C-3C98-8799-0B8E150CFEF6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5812971D-BB64-30D9-8B16-3297BA75B481
 install-name:    '/System/Library/PrivateFrameworks/SiriInCall.framework/Versions/A/SiriInCall'
 swift-abi-version: 7
 exports:
@@ -28,17 +21,11 @@ exports:
                        '_$s10SiriInCall0abC11FeatureFlagOMa', '_$s10SiriInCall0abC11FeatureFlagOMn', 
                        '_$s10SiriInCall0abC11FeatureFlagON', '_$s10SiriInCall0abC11FeatureFlagOSHAAMc', 
                        '_$s10SiriInCall0abC11FeatureFlagOSQAAMc', '_$s10SiriInCall0abC11FeatureFlagOs23CustomStringConvertibleAAMc', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC14logRequestLink9requestIdySS_tFTj', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC14logRequestLink9requestIdySS_tFTq', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC14sharedInstanceACvgZ', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext12occurringFor7isMutedySS_SbtFTj', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext12occurringFor7isMutedySS_SbtFTq', 
+                       '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext12occurringFor12callMetadataySS_AA7SICCallVtFTj', 
+                       '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext12occurringFor12callMetadataySS_AA7SICCallVtFTq', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext8endedFor11isCancelledySS_SbtFTj', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext8endedFor11isCancelledySS_SbtFTq', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC23logPublicSessionContext12occurringFor7isOwner0L5MutedySS_SbSgAHtFTj', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC23logPublicSessionContext12occurringFor7isOwner0L5MutedySS_SbSgAHtFTq', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC23logPublicSessionContext8endedFor7isOwnerySS_SbSgtFTj', 
-                       '_$s10SiriInCall0abC19InstrumentationUtilC23logPublicSessionContext8endedFor7isOwnerySS_SbSgtFTq', 
                        '_$s10SiriInCall0abC19InstrumentationUtilCMa', '_$s10SiriInCall0abC19InstrumentationUtilCMm', 
                        '_$s10SiriInCall0abC19InstrumentationUtilCMn', '_$s10SiriInCall0abC19InstrumentationUtilCMo', 
                        '_$s10SiriInCall0abC19InstrumentationUtilCMu', '_$s10SiriInCall0abC19InstrumentationUtilCN', 
@@ -49,11 +36,26 @@ exports:
                        '_$s10SiriInCall0abC19InstrumentationUtilCyACSo0A22AnalyticsMessageStream_p_So0af6ClientgH0Ctcfc', 
                        '_$s10SiriInCall15FeatureFlaggingMp', '_$s10SiriInCall15FeatureFlaggingP9isEnabledSbvgTj', 
                        '_$s10SiriInCall15FeatureFlaggingP9isEnabledSbvgTq', '_$s10SiriInCall15FeatureFlaggingPs23CustomStringConvertibleTb', 
-                       '_$s10SiriInCall15FeatureFlaggingTL', _SICSchemaProvisionalSICClientEventMetadataReadFrom, 
-                       _SICSchemaProvisionalSICClientEventReadFrom, _SICSchemaProvisionalSICErrorReadFrom, 
-                       _SICSchemaProvisionalSICInvocationCancelledReadFrom, _SICSchemaProvisionalSICInvocationContextReadFrom, 
-                       _SICSchemaProvisionalSICInvocationEndedReadFrom, _SICSchemaProvisionalSICInvocationStartedReadFrom, 
-                       _SiriInCallVersionNumber, _SiriInCallVersionString, _qname_SICSchemaProvisionalSICClientEvent_WhichEvent_Type_None, 
+                       '_$s10SiriInCall15FeatureFlaggingTL', '_$s10SiriInCall7SICCallV12providerTypeSo08SISchemac3AppF0VSgvg', 
+                       '_$s10SiriInCall7SICCallV12providerTypeSo08SISchemac3AppF0VSgvpMV', 
+                       '_$s10SiriInCall7SICCallV22participantCountBucketSo023SICSchemaSICParticipantfG0VSgvg', 
+                       '_$s10SiriInCall7SICCallV22participantCountBucketSo023SICSchemaSICParticipantfG0VSgvpMV', 
+                       '_$s10SiriInCall7SICCallV6statusSo08SISchemaC5StateVSgvg', 
+                       '_$s10SiriInCall7SICCallV6statusSo08SISchemaC5StateVSgvpMV', 
+                       '_$s10SiriInCall7SICCallV7isMuted9mediaType6status16participantCount08providerH0ACSbSg_So08SISchemacH0VSgSo0mC5StateVSgs5Int32VSgSo0mc3AppH0VSgtcfC', 
+                       '_$s10SiriInCall7SICCallV7isMutedSbSgvg', '_$s10SiriInCall7SICCallV7isMutedSbSgvpMV', 
+                       '_$s10SiriInCall7SICCallV9mediaTypeSo08SISchemacF0VSgvg', 
+                       '_$s10SiriInCall7SICCallV9mediaTypeSo08SISchemacF0VSgvpMV', 
+                       '_$s10SiriInCall7SICCallV9readStateACyFZ', '_$s10SiriInCall7SICCallVMa', 
+                       '_$s10SiriInCall7SICCallVMn', '_$s10SiriInCall7SICCallVN', 
+                       '_$sSo34SICSchemaSICParticipantCountBucketV10SiriInCallE16debugDescriptionSSvg', 
+                       '_$sSo34SICSchemaSICParticipantCountBucketV10SiriInCallE16debugDescriptionSSvpMV', 
+                       '_$sSo34SICSchemaSICParticipantCountBucketVs28CustomDebugStringConvertible10SiriInCallMc', 
+                       _SICSchemaProvisionalSICClientEventMetadataReadFrom, _SICSchemaProvisionalSICClientEventReadFrom, 
+                       _SICSchemaProvisionalSICErrorReadFrom, _SICSchemaProvisionalSICInvocationCancelledReadFrom, 
+                       _SICSchemaProvisionalSICInvocationContextReadFrom, _SICSchemaProvisionalSICInvocationEndedReadFrom, 
+                       _SICSchemaProvisionalSICInvocationStartedReadFrom, _SiriInCallVersionNumber, 
+                       _SiriInCallVersionString, _qname_SICSchemaProvisionalSICClientEvent_WhichEvent_Type_None, 
                        _qname_SICSchemaProvisionalSICClientEvent_WhichEvent_Type_siriInCallInvocationContext ]
     objc-classes:    [ SICSchemaProvisionalSICClientEvent, SICSchemaProvisionalSICClientEventMetadata, 
                        SICSchemaProvisionalSICError, SICSchemaProvisionalSICInvocationCancelled, 
@@ -66,5 +68,7 @@ exports:
                        SICSchemaProvisionalSICInvocationCancelled._has, SICSchemaProvisionalSICInvocationContext._cancelled, 
                        SICSchemaProvisionalSICInvocationContext._ended, SICSchemaProvisionalSICInvocationContext._startedOrChanged, 
                        SICSchemaProvisionalSICInvocationEnded._exists, SICSchemaProvisionalSICInvocationEnded._has, 
-                       SICSchemaProvisionalSICInvocationStarted._has, SICSchemaProvisionalSICInvocationStarted._isMuted ]
+                       SICSchemaProvisionalSICInvocationStarted._callAppType, SICSchemaProvisionalSICInvocationStarted._callState, 
+                       SICSchemaProvisionalSICInvocationStarted._callType, SICSchemaProvisionalSICInvocationStarted._has, 
+                       SICSchemaProvisionalSICInvocationStarted._isMuted, SICSchemaProvisionalSICInvocationStarted._participantCountBucket ]
 ...

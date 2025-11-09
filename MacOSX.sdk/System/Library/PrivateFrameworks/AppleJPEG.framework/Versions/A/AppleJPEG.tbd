@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           49D8CCAB-D032-3E45-A085-7032A735DED0
-  - target:          x86_64-maccatalyst
-    value:           49D8CCAB-D032-3E45-A085-7032A735DED0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C78714BC-E7AA-3765-B88F-6F7312B23244
-  - target:          arm64e-maccatalyst
-    value:           C78714BC-E7AA-3765-B88F-6F7312B23244
 install-name:    '/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

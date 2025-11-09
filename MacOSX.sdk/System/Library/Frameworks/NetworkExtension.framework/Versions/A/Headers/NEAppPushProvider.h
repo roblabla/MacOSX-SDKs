@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Apple Inc.
+ * Copyright (c) 2020-2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -60,6 +60,13 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @param userInfo A dictionary of custom information associated with the incoming call. This dictionary is passed to containg app as-is.
 */
 - (void)reportIncomingCallWithUserInfo:(NSDictionary * _Nonnull)userInfo API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @method reportPushToTalkMessageWithUserInfo:userinfo:
+ * @discussion This function is called by the provider when it receives a Push to Talk message on the connection.
+ * @param userInfo A dictionary of custom information associated with the Push to Talk message, such as the active remote participant. This dictionary is passed to the PTChannelManagerDelegate of the containing app if the user is joined to a Push to Talk channel.
+*/
+- (void)reportPushToTalkMessageWithUserInfo:(NSDictionary * _Nonnull)userInfo API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(macos, macCatalyst, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method handleTimerEvent

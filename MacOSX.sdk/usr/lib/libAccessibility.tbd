@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9CB48B15-8413-3D40-8635-BA088E570CB5
-  - target:          x86_64-maccatalyst
-    value:           9CB48B15-8413-3D40-8635-BA088E570CB5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           23347A97-4DCF-37AF-976C-89A92FB8F838
-  - target:          arm64e-maccatalyst
-    value:           23347A97-4DCF-37AF-976C-89A92FB8F838
 install-name:    '/usr/lib/libAccessibility.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -117,15 +104,19 @@ exports:
                        __AXSOpaqueTouchTapSpeed, __AXSPearlAuthenticationHapticsEnabled, 
                        __AXSPearlRestingUnlock, __AXSPearlRestingUnlockEverSet, __AXSPearlSetRestingUnlock, 
                        __AXSPhoneLockToEndCallEnabled, __AXSPhoneLockToEndCallSetEnabled, 
-                       __AXSPhoneticFeedbackEnabled, __AXSPreferredFontSize, __AXSPreferredFontSizeSetSize, 
-                       __AXSProcessDrawsAssistiveUI, __AXSQuickSpeakCopyPreferredLocalesForLanguages, 
-                       __AXSQuickSpeakEnabled, __AXSQuickSpeakHighlightTextEnabled, 
-                       __AXSQuickSpeakSetEnabled, __AXSQuickSpeakSetHighlightTextEnabled, 
-                       __AXSQuickSpeakSetPreferredLocaleForLanguage, __AXSQuickTypePredictionFeedbackEnabled, 
-                       __AXSRedGreenFilterEnabled, __AXSRedGreenFilterSetEnabled, 
-                       __AXSReduceMotionAutoplayMessagesEffectsEnabled, __AXSReduceMotionAutoplayVideoPreviewsEnabled, 
-                       __AXSReduceMotionAutoplayVideoPreviewsEnabledApp, __AXSReduceMotionAutoplayVideoPreviewsEnabledGlobal, 
-                       __AXSReduceMotionEnabled, __AXSReduceMotionEnabledApp, __AXSReduceMotionEnabledGlobal, 
+                       __AXSPhoneticFeedbackEnabled, __AXSPhotosensitiveMitigationEnabled, 
+                       __AXSPhotosensitiveMitigationSetEnabled, __AXSPhotosensitiveSourceCopyDebuggingEnabled, 
+                       __AXSPhotosensitiveSourceCopyDebuggingSetEnabled, __AXSPhotosensitiveVisualDebuggingEnabled, 
+                       __AXSPhotosensitiveVisualDebuggingSetEnabled, __AXSPreferredFontSize, 
+                       __AXSPreferredFontSizeSetSize, __AXSProcessDrawsAssistiveUI, 
+                       __AXSQuickSpeakCopyPreferredLocalesForLanguages, __AXSQuickSpeakEnabled, 
+                       __AXSQuickSpeakHighlightTextEnabled, __AXSQuickSpeakSetEnabled, 
+                       __AXSQuickSpeakSetHighlightTextEnabled, __AXSQuickSpeakSetPreferredLocaleForLanguage, 
+                       __AXSQuickTypePredictionFeedbackEnabled, __AXSRedGreenFilterEnabled, 
+                       __AXSRedGreenFilterSetEnabled, __AXSReduceMotionAutoplayMessagesEffectsEnabled, 
+                       __AXSReduceMotionAutoplayVideoPreviewsEnabled, __AXSReduceMotionAutoplayVideoPreviewsEnabledApp, 
+                       __AXSReduceMotionAutoplayVideoPreviewsEnabledGlobal, __AXSReduceMotionEnabled, 
+                       __AXSReduceMotionEnabledApp, __AXSReduceMotionEnabledGlobal, 
                        __AXSReduceMotionReduceSlideTransitionsEnabled, __AXSReduceMotionReduceSlideTransitionsEnabledApp, 
                        __AXSReduceMotionReduceSlideTransitionsEnabledGlobal, __AXSReduceWhitePointEnabled, 
                        __AXSReportValidationErrors, __AXSResetAccessibilityFeatures, 
@@ -290,13 +281,14 @@ exports:
                        _kAXSOpaqueTouchTapSpeedChangedNotification, _kAXSOpaqueTouchTapSpeedPreference, 
                        _kAXSPairedHearingUUIDsChangedNotification, _kAXSPearlAuthenticationHapticsEnabledNotification, 
                        _kAXSPersonalAudioPreferenceDomain, _kAXSPhoneticFeedbackEnabledNotification, 
-                       _kAXSPreLoadInvertColorsEnabledNotification, _kAXSPreferredFontSizeChangedNotification, 
-                       _kAXSPreferredFontSizeDisabled, _kAXSPreferredFontSizePreference, 
-                       _kAXSQuickSpeakEnabledNotification, _kAXSQuickSpeakEnabledPreference, 
-                       _kAXSQuickSpeakHighlightTextEnabledNotification, _kAXSQuickSpeakHighlightTextEnabledPreference, 
-                       _kAXSQuickSpeakLocaleForLanguageNotification, _kAXSQuickSpeakLocaleForLanguagePreference, 
-                       _kAXSQuickSpeakPreferenceDomain, _kAXSQuickTypePredictionFeedbackEnabledNotification, 
-                       _kAXSReduceMotionAutoplayMessagesEffectsChangedNotification, 
+                       _kAXSPhotosensitiveMitigationEnabledNotification, _kAXSPhotosensitiveSourceCopyDebuggingEnabledNotification, 
+                       _kAXSPhotosensitiveVisualDebuggingEnabledNotification, _kAXSPreLoadInvertColorsEnabledNotification, 
+                       _kAXSPreferredFontSizeChangedNotification, _kAXSPreferredFontSizeDisabled, 
+                       _kAXSPreferredFontSizePreference, _kAXSQuickSpeakEnabledNotification, 
+                       _kAXSQuickSpeakEnabledPreference, _kAXSQuickSpeakHighlightTextEnabledNotification, 
+                       _kAXSQuickSpeakHighlightTextEnabledPreference, _kAXSQuickSpeakLocaleForLanguageNotification, 
+                       _kAXSQuickSpeakLocaleForLanguagePreference, _kAXSQuickSpeakPreferenceDomain, 
+                       _kAXSQuickTypePredictionFeedbackEnabledNotification, _kAXSReduceMotionAutoplayMessagesEffectsChangedNotification, 
                        _kAXSReduceMotionAutoplayVideoPreviewsChangedNotification, 
                        _kAXSReduceMotionChangedNotification, _kAXSReduceMotionPreference, 
                        _kAXSReduceMotionReduceSlideTransitionsChangedNotification, 

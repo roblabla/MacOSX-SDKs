@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSCollection.iig */
+/* iig(DriverKit-256.100.8) generated from OSCollection.iig */
 
 /* OSCollection.iig:1-42 */
 /*
@@ -135,7 +135,7 @@ public:
 
 #if !KERNEL
 
-class OSCollectionInterface : public OSInterface
+class  OSCollectionInterface : public OSInterface
 {
 public:
     virtual uint32_t

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accessibility
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 387.10.3
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accessibility
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 387.10.10
 @_exported import Accessibility
 import Foundation
 import Swift
@@ -38,16 +38,16 @@ extension Accessibility.AXDataPoint {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accessibility.AXChartDescriptor {
-  public var xAxis: Accessibility.AXDataAxisDescriptor {
+  public var xAxis: any Accessibility.AXDataAxisDescriptor {
     get
     set(newAxis)
   }
-  public var additionalAxes: [Accessibility.AXDataAxisDescriptor] {
+  public var additionalAxes: [any Accessibility.AXDataAxisDescriptor] {
     get
     set(newAdditionalAxes)
   }
-  convenience public init(title: Swift.String? = nil, summary: Swift.String? = nil, xAxis: Accessibility.AXDataAxisDescriptor, yAxis: Accessibility.AXNumericDataAxisDescriptor? = nil, additionalAxes: [Accessibility.AXDataAxisDescriptor] = [], series: [Accessibility.AXDataSeriesDescriptor])
-  convenience public init(attributedTitle: Foundation.NSAttributedString? = nil, summary: Swift.String? = nil, xAxis: Accessibility.AXDataAxisDescriptor, yAxis: Accessibility.AXNumericDataAxisDescriptor? = nil, additionalAxes: [Accessibility.AXDataAxisDescriptor] = [], series: [Accessibility.AXDataSeriesDescriptor])
+  convenience public init(title: Swift.String? = nil, summary: Swift.String? = nil, xAxis: any Accessibility.AXDataAxisDescriptor, yAxis: Accessibility.AXNumericDataAxisDescriptor? = nil, additionalAxes: [any Accessibility.AXDataAxisDescriptor] = [], series: [Accessibility.AXDataSeriesDescriptor])
+  convenience public init(attributedTitle: Foundation.NSAttributedString? = nil, summary: Swift.String? = nil, xAxis: any Accessibility.AXDataAxisDescriptor, yAxis: Accessibility.AXNumericDataAxisDescriptor? = nil, additionalAxes: [any Accessibility.AXDataAxisDescriptor] = [], series: [Accessibility.AXDataSeriesDescriptor])
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes {
@@ -82,7 +82,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
       get
     }
     public static let markdownName: Swift.String
-    public static func decodeMarkdown(from decoder: Swift.Decoder) throws -> Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel
+    public static func decodeMarkdown(from decoder: any Swift.Decoder) throws -> Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel
     public static func objectiveCValue(for value: Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel) throws -> Foundation.NSNumber
     public static func value(for object: Foundation.NSNumber) throws -> Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel
     public enum HeadingLevel : Swift.Int, Swift.Codable {
@@ -108,7 +108,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
       get
     }
     public static let markdownName: Swift.String
-    public static func decodeMarkdown(from decoder: Swift.Decoder) throws -> Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext
+    public static func decodeMarkdown(from decoder: any Swift.Decoder) throws -> Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext
     public static func objectiveCValue(for value: Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext) throws -> Foundation.NSString
     public static func value(for object: Foundation.NSString) throws -> Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext
     public enum TextualContext : Swift.String, Swift.Codable {

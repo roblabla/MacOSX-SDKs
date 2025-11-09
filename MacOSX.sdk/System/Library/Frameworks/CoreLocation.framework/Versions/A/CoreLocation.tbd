@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           49C336A8-96E0-3107-AE12-0D44CC3F8915
-  - target:          x86_64-maccatalyst
-    value:           49C336A8-96E0-3107-AE12-0D44CC3F8915
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CC8B3362-6089-3E15-9D9B-9A60309B147E
-  - target:          arm64e-maccatalyst
-    value:           CC8B3362-6089-3E15-9D9B-9A60309B147E
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 2780.0.27
+current-version: 2785.0.30
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -68,9 +55,9 @@ exports:
                        _UTDegradationReasonWifiOffKey, _UTDisableReasonAirplaneModeOnKey, 
                        _UTDisableReasonBTOffKey, _UTDisableReasonFindMyDeletedKey, 
                        _UTDisableReasonLocationServicesOffKey, _UTDisableReasonTrackingNotificationsDisallowedKey, 
-                       _UTEnablementStatusKey, __CLLinkedOnOrAfter, _kCLClientDistanceFilterNone, 
-                       _kCLClientHeadingFilterNone, _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, 
-                       _kCLCommonLocationAlwaysUsageDescriptionKey, _kCLCommonLocationAuthorizationPurposeDescriptionDictionaryKey, 
+                       _UTEnablementStatusKey, _kCLClientDistanceFilterNone, _kCLClientHeadingFilterNone, 
+                       _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, _kCLCommonLocationAlwaysUsageDescriptionKey, 
+                       _kCLCommonLocationAuthorizationPurposeDescriptionDictionaryKey, 
                        _kCLCommonLocationDefaultAccuracyReducedKey, _kCLCommonLocationInterestZonesKey, 
                        _kCLCommonLocationTemporaryUsageDescriptionDictionaryKey, 
                        _kCLCommonLocationUsageDescriptionKey, _kCLCommonLocationWhenInUseUsageDescriptionKey, 

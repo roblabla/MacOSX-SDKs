@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A14B2E9F-89BA-348F-B230-77FD4713085E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           162194D2-CA33-3E9E-B75A-D7AC32E8658C
 install-name:    '/System/Library/PrivateFrameworks/SiriCorrections.framework/Versions/A/SiriCorrections'
 swift-abi-version: 7
 exports:
@@ -66,6 +59,8 @@ exports:
                        '_$s15SiriCorrections0B14PlatformClientC12setupNewTurn13executionUUIDy10Foundation0I0V_tFTq', 
                        '_$s15SiriCorrections0B14PlatformClientC17setUndoInvocation06directG07contextyAA0b6DirectG0V_AA0B7ContextVSgtFTj', 
                        '_$s15SiriCorrections0B14PlatformClientC17setUndoInvocation06directG07contextyAA0b6DirectG0V_AA0B7ContextVSgtFTq', 
+                       '_$s15SiriCorrections0B14PlatformClientC20isCorrectionPossible7contextSbAA0B7ContextVSg_tFTj', 
+                       '_$s15SiriCorrections0B14PlatformClientC20isCorrectionPossible7contextSbAA0B7ContextVSg_tFTq', 
                        '_$s15SiriCorrections0B14PlatformClientC35undoFollowUpPluginActionUserDataKeySSvg', 
                        '_$s15SiriCorrections0B14PlatformClientC35undoFollowUpPluginActionUserDataKeySSvpMV', 
                        '_$s15SiriCorrections0B14PlatformClientC6commityyFTj', '_$s15SiriCorrections0B14PlatformClientC6commityyFTq', 
@@ -124,6 +119,8 @@ exports:
                        '_$s15SiriCorrections0B5ParseO3usoyAcA0B8USOParseVcACmFWC', 
                        '_$s15SiriCorrections0B5ParseO5emptyyA2CmFWC', '_$s15SiriCorrections0B5ParseOMa', 
                        '_$s15SiriCorrections0B5ParseOMn', '_$s15SiriCorrections0B5ParseON', 
+                       '_$s15SiriCorrections0B6EngineC14isUndoPossible7contextSbAA0B7ContextVSg_tF', 
+                       '_$s15SiriCorrections0B6EngineC14isUndoPossible7contextSbAA0B7ContextVSg_tFTq', 
                        '_$s15SiriCorrections0B6EngineC15checkCorrection5input14customizationsAA0E9OperationVSg0A8NLUTypes0A23_Nlu_External_UserParseV_AA0B11Customizing_pSgtF', 
                        '_$s15SiriCorrections0B6EngineC15checkCorrection5input14customizationsAA0E9OperationVSg0A8NLUTypes0A23_Nlu_External_UserParseV_AA0B11Customizing_pSgtFTq', 
                        '_$s15SiriCorrections0B6EngineC15checkCorrection5inputAA0E9OperationVSg0A8NLUTypes0A23_Nlu_External_UserParseV_tF', 

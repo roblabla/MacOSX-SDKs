@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           12691B5C-B1CE-349F-9ADD-E315C5FDA324
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8168BDFD-1622-3473-865A-298F385345A5
 install-name:    '/System/Library/PrivateFrameworks/MDMClientLibrary.framework/Versions/A/MDMClientLibrary'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -46,10 +39,10 @@ exports:
                        _kMDMLastPushTokenHash, _kMDMLockManagedProfilesKey, _kMDMManagedAppAttributeAssociatedDomains, 
                        _kMDMManagedAppAttributeAssociatedDomainsEnableDirectDownloads, 
                        _kMDMManagedAppAttributeContentFilterUUID, _kMDMManagedAppAttributeDNSProxyUUID, 
-                       _kMDMManagedAppAttributeRemovable, _kMDMManagedAppAttributeVPNUUID, 
-                       _kMDMManagedAppMetadataAttributes, _kMDMManagedAppMetadataByBundleIDKey, 
-                       _kMDMManagedAppMetadataFlags, _kMDMManagedAppMetadataState, 
-                       _kMDMManagedAppleIDKey, _kMDMManagingProfileIdentifierKey, 
+                       _kMDMManagedAppAttributeRemovable, _kMDMManagedAppAttributeTapToPayScreenLock, 
+                       _kMDMManagedAppAttributeVPNUUID, _kMDMManagedAppMetadataAttributes, 
+                       _kMDMManagedAppMetadataByBundleIDKey, _kMDMManagedAppMetadataFlags, 
+                       _kMDMManagedAppMetadataState, _kMDMManagedAppleIDKey, _kMDMManagingProfileIdentifierKey, 
                        _kMDMMessageAwaitingConfigurationKey, _kMDMMessageChallengeKey, 
                        _kMDMMessageEIDKey, _kMDMMessageIMEIKey, _kMDMMessageIOSBuildVersionKey, 
                        _kMDMMessageIOSVersionKey, _kMDMMessageMDMSignatureKey, _kMDMMessageMEIDKey, 
@@ -76,17 +69,17 @@ exports:
                        _kMDMPQueryIsRoaming, _kMDMPQueryIsSupervised, _kMDMPQueryLastCloudBackupDate, 
                        _kMDMPQueryMDMOptions, _kMDMPQueryMEID, _kMDMPQueryMID, _kMDMPQueryManagedAppleIDDefaultDomains, 
                        _kMDMPQueryMaximumResidentUsers, _kMDMPQueryModel, _kMDMPQueryModelName, 
-                       _kMDMPQueryModemFirmwareVersion, _kMDMPQueryOSVersion, _kMDMPQueryOnlineAuthenticationGracePeriod, 
-                       _kMDMPQueryOrganizationInfo, _kMDMPQueryPersonalHotspotEnabled, 
-                       _kMDMPQueryPhoneNumber, _kMDMPQueryProductName, _kMDMPQueryPushToken, 
-                       _kMDMPQueryQuotaSize, _kMDMPQueryResidentUsers, _kMDMPQuerySIMCarrierNetwork, 
-                       _kMDMPQuerySerialNumber, _kMDMPQueryServiceSubscriptionIsDataPreferred, 
-                       _kMDMPQueryServiceSubscriptionIsVoicePreferred, _kMDMPQueryServiceSubscriptionLabel, 
-                       _kMDMPQueryServiceSubscriptionLabelID, _kMDMPQueryServiceSubscriptionSlot, 
-                       _kMDMPQueryServiceSubscriptions, _kMDMPQuerySkipLanguageAndLocaleSetupForNewUsers, 
-                       _kMDMPQuerySoftwareUpdate, _kMDMPQuerySoftwareUpdateDeviceID, 
-                       _kMDMPQuerySubscriberCarrierNetwork, _kMDMPQuerySubscriberMCC, 
-                       _kMDMPQuerySubscriberMNC, _kMDMPQuerySupplementalBuildVersion, 
+                       _kMDMPQueryModelNumber, _kMDMPQueryModemFirmwareVersion, _kMDMPQueryOSVersion, 
+                       _kMDMPQueryOnlineAuthenticationGracePeriod, _kMDMPQueryOrganizationInfo, 
+                       _kMDMPQueryPersonalHotspotEnabled, _kMDMPQueryPhoneNumber, 
+                       _kMDMPQueryProductName, _kMDMPQueryPushToken, _kMDMPQueryQuotaSize, 
+                       _kMDMPQueryResidentUsers, _kMDMPQuerySIMCarrierNetwork, _kMDMPQuerySerialNumber, 
+                       _kMDMPQueryServiceSubscriptionIsDataPreferred, _kMDMPQueryServiceSubscriptionIsVoicePreferred, 
+                       _kMDMPQueryServiceSubscriptionLabel, _kMDMPQueryServiceSubscriptionLabelID, 
+                       _kMDMPQueryServiceSubscriptionSlot, _kMDMPQueryServiceSubscriptions, 
+                       _kMDMPQuerySkipLanguageAndLocaleSetupForNewUsers, _kMDMPQuerySoftwareUpdate, 
+                       _kMDMPQuerySoftwareUpdateDeviceID, _kMDMPQuerySubscriberCarrierNetwork, 
+                       _kMDMPQuerySubscriberMCC, _kMDMPQuerySubscriberMNC, _kMDMPQuerySupplementalBuildVersion, 
                        _kMDMPQuerySupplementalOSVersionExtra, _kMDMPQueryTemporarySessionOnly, 
                        _kMDMPQueryTemporarySessionTimeout, _kMDMPQueryTimezone, _kMDMPQueryUDID, 
                        _kMDMPQueryUserSessionTimeout, _kMDMPQueryVIDSeed, _kMDMPQueryVoiceRoamingEnabled, 
@@ -102,7 +95,7 @@ exports:
                        _kMDMProfileSignerCertificatesKey, _kMDMProfileUUIDKey, _kMDMProfileVersionKey, 
                        _kMDMPushDictionaryKey, _kMDMPushMagicKey, _kMDMPushMagicMismatchDateMarkerKey, 
                        _kMDMPushServiceBootstrapNameDev, _kMDMPushServiceBootstrapNameProd, 
-                       _kMDMRMAccountIDKey, _kMDMRemoveManagedProfilesOnRemovalKey, 
+                       _kMDMRMAccountIDKey, _kMDMReauthChangedNotification, _kMDMRemoveManagedProfilesOnRemovalKey, 
                        _kMDMRequiredAppIDForMDMKey, _kMDMServerCapabilitiesKey, _kMDMServerPinningCertPersistentRefsKey, 
                        _kMDMServerPinningCertUUIDsKey, _kMDMServerURLKey, _kMDMServiceBootstrapName, 
                        _kMDMServiceKey, _kMDMSettingsURLManagedAccount, _kMDMSettingsURLManagedAccountHeader, 
@@ -124,13 +117,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9EB3E6F9-C56A-3A49-895D-EA63C9537AC8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D8895D46-775B-323D-8C95-BE1995719C6B
 install-name:    '/System/Library/PrivateFrameworks/DEPClientLibrary.framework/Versions/A/DEPClientLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

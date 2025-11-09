@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           31F4B43E-A2DF-3069-8306-A7AFAB11404D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EC6BDC54-76E7-3CA5-A600-8F6936E14661
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolver.framework/Versions/A/SiriReferenceResolver'
 current-version: 0
 compatibility-version: 0

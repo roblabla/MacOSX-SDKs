@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           12E00F87-6BE3-3C35-A4B9-16E7D32E4895
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           EFC52A9C-0893-352B-AFFB-084419870358
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_DeviceActivity_SwiftUI.framework/Versions/A/_DeviceActivity_SwiftUI'
 current-version: 280
 swift-abi-version: 7

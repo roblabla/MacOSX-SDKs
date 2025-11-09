@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1265844E-9299-3184-8769-F97E223661B6
-  - target:          x86_64-maccatalyst
-    value:           1265844E-9299-3184-8769-F97E223661B6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4BD864E7-3657-3E57-B11B-5F3D6DDB5FEF
-  - target:          arm64e-maccatalyst
-    value:           4BD864E7-3657-3E57-B11B-5F3D6DDB5FEF
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 520.0.240
+current-version: 541.0.110
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

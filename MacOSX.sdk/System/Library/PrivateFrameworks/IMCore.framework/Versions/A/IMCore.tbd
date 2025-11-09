@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           98221A9A-7F28-30A5-B005-01938727F7AA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           20FA1F52-1EFA-34BA-A698-C00A21E24B05
 install-name:    '/System/Library/PrivateFrameworks/IMCore.framework/Versions/A/IMCore'
 current-version: 800
 swift-abi-version: 7
@@ -266,26 +259,27 @@ exports:
                        _IMSPISendMessageWithAttachmentsSynchronously, _IMSPISendMessageWithAttachmentsToMany, 
                        _IMSPISendMessageWithAttachmentsToManyWithCB, _IMSPISendRichLink, 
                        _IMSPISendRichLinkSynchronously, _IMSPISendRichLinkToMany, 
-                       _IMSPIShareSheetCanSendMedia, _IMSPISimulateMessageReceive, 
-                       _IMSPIUnhideSyndicationForAttachmentGUID, _IMSPIUnhideSyndicationForMessageGUID, 
-                       _IMSPIUnreadMessageCount, _IMSPIUnreadMessageCountChangedNotification, 
-                       _IMSPIUnreadMessageCountWithQOS, _IMSPIiMessageService, _IMServiceAgentCapAVChatInfo, 
-                       _IMServiceAgentCapAppleVC, _IMServiceAgentCapAuxInput, _IMServiceAgentCapChats, 
-                       _IMServiceAgentCapManageStatus, _IMServiceAgentCapNotifications, 
-                       _IMServiceDefaultsChangedNotification, _IMServiceDidConnectNotification, 
-                       _IMServiceDidDisconnectNotification, _IMServiceDidReconnectNotification, 
-                       _IMServiceInitialSyncPerformedNotification, _IMServiceNotificationActiveAccountChangedNotification, 
-                       _IMSetPreferredAccountForService, _IMSharedDowntimeController, 
-                       _IMSimulatedMessageInfoBodyKey, _IMSimulatedMessageInfoGUIDKey, 
-                       _IMSimulatedMessageInfoIsFromDemoUserKey, _IMTranscriptChatItemEqual, 
-                       _IMTranscriptEffectBalloonsMomentIdentifier, _IMTranscriptEffectCelebrationMomentIdentifier, 
-                       _IMTranscriptEffectConfettiMomentIdentifier, _IMTranscriptEffectEchoMomentIdentifier, 
-                       _IMTranscriptEffectFireworksMomentIdentifier, _IMTranscriptEffectGentleImpactIdentifier, 
-                       _IMTranscriptEffectInvisibleInkIdentifier, _IMTranscriptEffectLasersMomentIdentifier, 
-                       _IMTranscriptEffectLoudImpactIdentifier, _IMTranscriptEffectLoveMomentIdentifier, 
-                       _IMTranscriptEffectShootingStarMomentIdentifier, _IMTranscriptEffectSlamImpactIdentifier, 
-                       _IMTranscriptEffectSpotlightMomentIdentifier, _IMTransferCenterErrorDomain, 
-                       _IMUnformattedDisplayStringForIDInAddressBook, _IMUnformattedDisplayStringForIDWithAccountInAddressBook, 
+                       _IMSPISetChatContextForSubscriptionIdentifier, _IMSPIShareSheetCanSendMedia, 
+                       _IMSPISimulateMessageReceive, _IMSPIUnhideSyndicationForAttachmentGUID, 
+                       _IMSPIUnhideSyndicationForMessageGUID, _IMSPIUnreadMessageCount, 
+                       _IMSPIUnreadMessageCountChangedNotification, _IMSPIUnreadMessageCountWithQOS, 
+                       _IMSPIiMessageService, _IMServiceAgentCapAVChatInfo, _IMServiceAgentCapAppleVC, 
+                       _IMServiceAgentCapAuxInput, _IMServiceAgentCapChats, _IMServiceAgentCapManageStatus, 
+                       _IMServiceAgentCapNotifications, _IMServiceDefaultsChangedNotification, 
+                       _IMServiceDidConnectNotification, _IMServiceDidDisconnectNotification, 
+                       _IMServiceDidReconnectNotification, _IMServiceInitialSyncPerformedNotification, 
+                       _IMServiceNotificationActiveAccountChangedNotification, _IMSetPreferredAccountForService, 
+                       _IMSharedDowntimeController, _IMSimulatedMessageInfoBodyKey, 
+                       _IMSimulatedMessageInfoGUIDKey, _IMSimulatedMessageInfoIsFromDemoUserKey, 
+                       _IMTranscriptChatItemEqual, _IMTranscriptEffectBalloonsMomentIdentifier, 
+                       _IMTranscriptEffectCelebrationMomentIdentifier, _IMTranscriptEffectConfettiMomentIdentifier, 
+                       _IMTranscriptEffectEchoMomentIdentifier, _IMTranscriptEffectFireworksMomentIdentifier, 
+                       _IMTranscriptEffectGentleImpactIdentifier, _IMTranscriptEffectInvisibleInkIdentifier, 
+                       _IMTranscriptEffectLasersMomentIdentifier, _IMTranscriptEffectLoudImpactIdentifier, 
+                       _IMTranscriptEffectLoveMomentIdentifier, _IMTranscriptEffectShootingStarMomentIdentifier, 
+                       _IMTranscriptEffectSlamImpactIdentifier, _IMTranscriptEffectSpotlightMomentIdentifier, 
+                       _IMTransferCenterErrorDomain, _IMUnformattedDisplayStringForIDInAddressBook, 
+                       _IMUnformattedDisplayStringForIDWithAccountInAddressBook, 
                        _IMUnformattedDisplayStringForIDWithCountryCodeInAddressBook, 
                        _IMVCardDataFromLocation, _IMWatermarkMessageIDCache, _Testing_IMItemOrderMessageByDate, 
                        __CreateIMMessageFromIMItem, __CreateIMMessageFromIMMessageItemDictionary, 
@@ -387,19 +381,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           762BD66B-FE82-3817-B089-1BAC313FB57A
-  - target:          x86_64-maccatalyst
-    value:           762BD66B-FE82-3817-B089-1BAC313FB57A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9E04A700-2039-3E7A-87C0-6E8774DE5652
-  - target:          arm64e-maccatalyst
-    value:           9E04A700-2039-3E7A-87C0-6E8774DE5652
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:

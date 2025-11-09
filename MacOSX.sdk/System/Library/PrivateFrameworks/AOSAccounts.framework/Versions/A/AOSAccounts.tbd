@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3F4F5E5B-6C3F-3F50-84FA-CFC01757DC76
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C3B96C26-F67A-371D-AAB2-5560D7AB0A20
 install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6ED8BC03-BD67-3697-9C2F-96DEDA2D5A12
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           20095DAF-0F7B-3C8E-89A9-F5EB014F7EF5
 install-name:    '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

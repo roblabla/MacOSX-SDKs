@@ -1,26 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F275D444-2D64-35E4-BB1D-D3241A73E12F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2FC9A9AB-90F2-3BAC-AFD4-406565459059
 install-name:    '/System/Library/PrivateFrameworks/DataDeliveryServices.framework/Versions/A/DataDeliveryServices'
-current-version: 44
+current-version: 44.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AggregatedDurationAnalyticKey, _AllowCellularOverride, _AllowExpensiveAccessOverride, 
                        _AnalyticKeyPrefix, _AssetCenterQueueName, _AssetDownloadAnalytic, 
-                       _AssetLocaleKey, _AssetNameAnalyticKey, _AssetUpdatedNotificationSuffix, 
-                       _ClientQueueName, _CompatibilityVersionAnalyticKey, _CompatibilityVersionKey, 
-                       _ContentVersionAnalyticKey, _ContentVersionKey, _DDSAssertionContentFile, 
-                       _DDSAssertionContentFolder, _DDSAttributeAssetLocale, _DDSAttributeAssetType, 
-                       _DDSAttributeAssetVersion, _DDSAttributeCity, _DDSAttributeCompatibilityVersion, 
-                       _DDSAttributeContentItemLocale, _DDSAttributeContentType, 
-                       _DDSAttributeContentVersion, _DDSAttributeCountry, _DDSAttributeKeyContentPath, 
+                       _AssetNameAnalyticKey, _AssetUpdatedNotificationSuffix, _ClientQueueName, 
+                       _CompatibilityVersionAnalyticKey, _ContentVersionAnalyticKey, 
+                       _DDSAssertionContentFile, _DDSAssertionContentFolder, _DDSAssetDataDirectoryName, 
+                       _DDSAssetInfoListKeyMobileAssetProperties, _DDSAttributeAssetLocale, 
+                       _DDSAttributeAssetType, _DDSAttributeAssetVersion, _DDSAttributeCity, 
+                       _DDSAttributeCompatibilityVersion, _DDSAttributeContentItemLocale, 
+                       _DDSAttributeContentType, _DDSAttributeContentVersion, _DDSAttributeCountry, 
+                       _DDSAttributeInstallDateKey, _DDSAttributeKeyContentPath, 
                        _DDSAttributeKeyContentType, _DDSAttributeKeyContents, _DDSAttributeKeyInputLayout, 
                        _DDSAttributeKeyLanguage, _DDSAttributeKeyLocale, _DDSAttributeKeyLocationCity, 
                        _DDSAttributeKeyLocationCountry, _DDSAttributeKeyLocationProvince, 
@@ -35,13 +29,13 @@ exports:
                        _DDSAttributeValueNeedTypeRequired, _DDSAttributeValueProactiveLocationHome, 
                        _DDSAttributeValueProactiveLocationWork, _DDSFilterValueUnspecified, 
                        _DDSGetPreferenceIntForKey, _DDSGetPreferenceObjectForKey, 
-                       _DDSMachServiceName, _DDSObjectsAreEqualOrNil, _DDSSetPreferenceObjectForKey, 
-                       _DDS_BUILD_VERSION_STRING, _DDS_IS_INTERNAL_INSTALL, _DDS_LOG_REDACTED, 
-                       _DDS_STRING_FROM_DATE, _DDS_USE_MA_V2, _DataDeliveryServicesVersionNumber, 
-                       _DataDeliveryServicesVersionString, _DefaultLog, _DesiredRegularUpdateDayIncrement, 
-                       _DesiredRegularUpdateWindowStart, _DesiredUpdateWindowSize, 
-                       _DurationAnalyticKey, _ErrorDomainv2, _InstallDateKey, _LanguageAssetType, 
-                       _LinguisticDataAssetType, _LinguisticDataMobileAssetType, 
+                       _DDSLinguisticDataMobileAssetType, _DDSMachServiceName, _DDSObjectsAreEqualOrNil, 
+                       _DDSSetPreferenceObjectForKey, _DDSTrialErrorDomain, _DDSTrialErrorWithCode, 
+                       _DDSTrialParameterNameAsset, _DDS_BUILD_VERSION_STRING, _DDS_IS_INTERNAL_INSTALL, 
+                       _DDS_LOG_REDACTED, _DDS_STRING_FROM_DATE, _DDS_USE_MA_V2, 
+                       _DataDeliveryServicesVersionNumber, _DataDeliveryServicesVersionString, 
+                       _DefaultLog, _DesiredRegularUpdateDayIncrement, _DesiredRegularUpdateWindowStart, 
+                       _DesiredUpdateWindowSize, _DurationAnalyticKey, _ErrorDomainv2, 
                        _ProcessAnalyticKey, _QueryLog, _RetryAnalyticKey, _ServerQueueName, 
                        _SuccessAnalyticKey, _UpdateCycleAnalytic, _UpdateCycleAnalyticIdentifier, 
                        _UpdateLog, __DDSBeginMocking, __DDSBeginMockingServices, 
@@ -53,7 +47,9 @@ exports:
                        DDSAssetObserver, DDSAssetPolicy, DDSAssetQuery, DDSAssetQueryResultCache, 
                        DDSAttributeFilter, DDSBackgroundActivityScheduler, DDSCache, 
                        DDSContentItem, DDSContentItemMatcher, DDSInterface, DDSLinguisticAssetQuery, 
-                       DDSLinguisticAttributeFilter, DDSManager, DDSMobileAssetv1PredicateAdapter, 
-                       DDSMobileAssetv2Provider, DDSMobileAssetv2QueryAdapter, DDSRemoteSyncState, 
-                       DDSServer, DDSTimedAnalytic ]
+                       DDSLinguisticAttributeFilter, DDSMAAsset, DDSManager, DDSMobileAssetv2Provider, 
+                       DDSMobileAssetv2QueryAdapter, DDSRemoteSyncState, DDSServer, 
+                       DDSTRIClient, DDSTimedAnalytic, DDSTrialAsset, DDSTrialClient, 
+                       DDSTrialExperimentIdentifiers, DDSTrialManager, DDSTrialManagerDataSource, 
+                       DDSTrialQuery ]
 ...

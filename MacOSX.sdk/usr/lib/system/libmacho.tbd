@@ -1,21 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           632C478C-AAF6-3330-AA8E-0D0FCA4C6237
-  - target:          x86_64-maccatalyst
-    value:           632C478C-AAF6-3330-AA8E-0D0FCA4C6237
-  - target:          arm64-macos
-    value:           F71DA09E-609F-3C9A-95BF-22B22CFAD5A5
-  - target:          arm64-maccatalyst
-    value:           F71DA09E-609F-3C9A-95BF-22B22CFAD5A5
-  - target:          arm64e-macos
-    value:           471DA066-B65F-36B1-93B7-243C71F8838B
-  - target:          arm64e-maccatalyst
-    value:           471DA066-B65F-36B1-93B7-243C71F8838B
 install-name:    '/usr/lib/system/libmacho.dylib'
-current-version: 1001.2
+current-version: 1005
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     umbrella:        System

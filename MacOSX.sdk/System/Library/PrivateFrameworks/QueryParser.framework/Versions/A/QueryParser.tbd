@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AE740897-7DDC-344B-9398-467206653023
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A5C58B03-9033-34BE-8B90-4523FE6A97AE
 install-name:    '/System/Library/PrivateFrameworks/QueryParser.framework/Versions/A/QueryParser'
-current-version: 43.5
+current-version: 43.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _QPParseAttributeDateKey, _QPParseAttributeRecipientKey, _QPParseAttributeSenderKey, 

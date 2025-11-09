@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6A9B3665-9FEB-3534-8C87-BB1D2361EC36
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9B0EB33E-79F7-3FCB-ABBC-97770B0C76C6
 install-name:    '/System/Library/Frameworks/SyncServices.framework/Versions/A/SyncServices'
 current-version: 729
 compatibility-version: 48

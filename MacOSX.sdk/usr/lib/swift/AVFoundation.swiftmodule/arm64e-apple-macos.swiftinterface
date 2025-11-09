@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2140.6.2
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2150.23.1
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -21,7 +21,7 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMetada
   public static var extraAttributes: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMetadataExtraAttributeKey : Any]?> {
     get
   }
-  public static var value: AVFoundation.AVAsyncProperty<Root, (Foundation.NSCopying & ObjectiveC.NSObjectProtocol)?> {
+  public static var value: AVFoundation.AVAsyncProperty<Root, (any Foundation.NSCopying & ObjectiveC.NSObjectProtocol)?> {
     get
   }
 }
@@ -515,10 +515,10 @@ extension AVFoundation.AVPlayerItem {
   #endif
 }
 extension Foundation.NSNotification.Name {
-  @available(macOS, deprecated, introduced: 10.7, renamed: "AVPlayerItem.timeJumpedNotification")
-  @available(iOS, deprecated, introduced: 5.0, renamed: "AVPlayerItem.timeJumpedNotification")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVPlayerItem.timeJumpedNotification")
-  @available(watchOS, deprecated, introduced: 1.0, renamed: "AVPlayerItem.timeJumpedNotification")
+  @available(macOS, deprecated, introduced: 10.7, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(iOS, deprecated, introduced: 5.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(tvOS, deprecated, introduced: 9.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(watchOS, deprecated, introduced: 1.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
   @_alwaysEmitIntoClient public static var AVPlayerItemTimeJumped: Foundation.NSNotification.Name {
     get {
 		Self("AVPlayerItemTimeJumpedNotification")
@@ -543,7 +543,7 @@ extension AVFoundation.AVAssetImageGenerator {
   public struct Images : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol {
     @frozen public enum Element {
       case success(requestedTime: CoreMedia.CMTime, image: CoreGraphics.CGImage, actualTime: CoreMedia.CMTime)
-      case failure(requestedTime: CoreMedia.CMTime, error: Swift.Error)
+      case failure(requestedTime: CoreMedia.CMTime, error: any Swift.Error)
     }
     public func makeAsyncIterator() -> AVFoundation.AVAssetImageGenerator.Images
     #if compiler(>=5.3) && $AsyncAwait
@@ -798,6 +798,8 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVURLAss
     get
   }
 }
+#if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 13, iOS 16, tvOS 16, *)
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetImageGenerator.Images.Element : Swift.Sendable {}
+#endif

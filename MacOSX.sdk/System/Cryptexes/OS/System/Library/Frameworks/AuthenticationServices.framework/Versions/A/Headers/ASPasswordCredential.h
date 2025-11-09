@@ -9,7 +9,7 @@
 #import <AuthenticationServices/ASAuthorizationCredential.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macos(10.15), tvos(15.0), watchos(6.0))
 @interface ASPasswordCredential : NSObject <ASAuthorizationCredential>
@@ -38,4 +38,4 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macos(10.15), tvos(15.0), watchos(6.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

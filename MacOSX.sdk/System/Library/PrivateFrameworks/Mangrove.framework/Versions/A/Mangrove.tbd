@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6BB6A2AF-6597-30C2-A9D3-C755F0CF6F26
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           78E77253-878D-3168-A4C6-0D457394E54A
 install-name:    '/System/Library/PrivateFrameworks/Mangrove.framework/Versions/A/Mangrove'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

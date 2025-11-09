@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           444484FF-9D63-3D68-A492-5AA7445C4B91
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           98756BBC-8176-3490-A224-EBD306C57385
 install-name:    '/System/Library/PrivateFrameworks/OSPersonalization.framework/Versions/A/OSPersonalization'
-current-version: 131
+current-version: 135
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DERAccessDescriptionItemSpecs, _DERAlgorithmIdItemSpecs, 

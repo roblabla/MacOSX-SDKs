@@ -1,23 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           93A5F293-4E3C-3CB5-9D5B-8CAB5E47264D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7013801C-9B91-382B-96CD-1C5BCEE6A5D8
 install-name:    '/System/Library/PrivateFrameworks/EAFirmwareUpdater.framework/Versions/A/EAFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AUSandboxPlatformInit, _UARPUtilsBuildURLForTemporaryFile, 
-                       _appendFirstUarpFilenameToFilepath, _currentTrainName, _generateHashForDataAtLocation, 
-                       _generateHashForDataAtLocationAsData, _generateSHA256HashForDataAtLocation, 
-                       _generateSHA256HashForDataAtLocationAsData, _isDynamicAssetAnalytics, 
-                       _isDynamicAssetHeySiri, _isDynamicAssetLogs, _isDynamicAssetPersonalization, 
-                       _isDynamicAssetVoiceAssist, _nullableObjectsEqual, _uarpDynamicAssetComponentURL, 
-                       _uarpDynamicAssetURL, _uarpUtilsConcatenateURLs, _uarpVersionCompareStrings ]
+    symbols:         [ _AUSandboxPlatformInit, _generateHashForDataAtLocation, _generateHashForDataAtLocationAsData, 
+                       _generateSHA256HashForDataAtLocation, _generateSHA256HashForDataAtLocationAsData ]
     objc-classes:    [ EAFirmwareUpdater, FirmwareBundle, HSModel, iAUPServer ]
     objc-ivars:      [ EAFirmwareUpdater._accessory, EAFirmwareUpdater._appProtocol, 
                        EAFirmwareUpdater._applyCompletion, EAFirmwareUpdater._bootloaderProtocol, 

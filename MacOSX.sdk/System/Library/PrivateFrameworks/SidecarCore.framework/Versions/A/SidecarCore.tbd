@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FFB49AB5-BF1A-3979-93AE-FF649E3F7A56
-  - target:          x86_64-maccatalyst
-    value:           FFB49AB5-BF1A-3979-93AE-FF649E3F7A56
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9D656F07-730D-353E-80F8-1D935C60DBE5
-  - target:          arm64e-maccatalyst
-    value:           9D656F07-730D-353E-80F8-1D935C60DBE5
 install-name:    '/System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore'
-current-version: 280.3
+current-version: 280.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -1078,14 +1078,14 @@
  *	This symbol is defined if using the FILE_ptr macro as an lvalue
  *	to increase the pointer by n leaves File_cnt(fp) unchanged.
  */
-#define USE_STDIO_PTR	/**/
+/*#define USE_STDIO_PTR	/ **/
 #ifdef USE_STDIO_PTR
 #define FILE_ptr(fp)	((fp)->_p)
-#define STDIO_PTR_LVALUE		/**/
+/*#define STDIO_PTR_LVALUE		/ **/
 #define FILE_cnt(fp)	((fp)->_r)
-#define STDIO_CNT_LVALUE		/**/
+/*#define STDIO_CNT_LVALUE		/ **/
 /*#define STDIO_PTR_LVAL_SETS_CNT	/ **/
-#define STDIO_PTR_LVAL_NOCHANGE_CNT	/**/
+/*#define STDIO_PTR_LVAL_NOCHANGE_CNT	/ **/
 #endif
 
 /* USE_STDIO_BASE:
@@ -1108,7 +1108,7 @@
  *	structure pointed to its argument. This macro will always be defined
  *	if USE_STDIO_BASE is defined.
  */
-#define USE_STDIO_BASE	/**/
+/*#define USE_STDIO_BASE	/ **/
 #ifdef USE_STDIO_BASE
 #define FILE_base(fp)	((fp)->_ub._base ? (fp)->_ub._base : (fp)->_bf._base)
 #define FILE_bufsiz(fp)	((fp)->_ub._base ? (fp)->_ub._size : (fp)->_bf._size)
@@ -2443,7 +2443,7 @@
  *	This symbol, if defined, indicates that the "fast stdio"
  *	is available to manipulate the stdio buffers directly.
  */
-#define HAS_FAST_STDIO		/**/
+/*#define HAS_FAST_STDIO		/ **/
 
 /* HAS_FCHDIR:
  *	This symbol, if defined, indicates that the fchdir routine is
@@ -2678,7 +2678,7 @@
  *	This symbol, if defined, indicates that the futimes routine is
  *	available to change file descriptor time stamps with struct timevals.
  */
-#define HAS_FUTIMES		/**/
+/*#define HAS_FUTIMES		/ **/
 
 /* HAS_GAI_STRERROR:
  *	This symbol, if defined, indicates that the gai_strerror routine

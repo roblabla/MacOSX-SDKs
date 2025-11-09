@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C5359E6E-7B63-3E51-A664-3E3581E15F52
-  - target:          x86_64-maccatalyst
-    value:           C5359E6E-7B63-3E51-A664-3E3581E15F52
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           616F473A-EB21-377D-B3B4-F1581F127F0D
-  - target:          arm64e-maccatalyst
-    value:           616F473A-EB21-377D-B3B4-F1581F127F0D
 install-name:    '/usr/lib/system/libsystem_trace.dylib'
-current-version: 1406.60.2
+current-version: 1431.100.13
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -62,15 +49,17 @@ exports:
                        _os_log_backtrace_create_from_return_address, _os_log_backtrace_destroy, 
                        _os_log_backtrace_get_frames, _os_log_backtrace_get_length, 
                        _os_log_backtrace_print_to_blob, _os_log_backtrace_serialize_to_blob, 
-                       _os_log_create, _os_log_errors_count, _os_log_fault_default_callback, 
-                       _os_log_faults_count, _os_log_fmt_compose, _os_log_fmt_convert_trace, 
-                       _os_log_fmt_extract_pubdata, _os_log_fmt_get_plugin, _os_log_get_type, 
-                       _os_log_is_debug_enabled, _os_log_is_enabled, _os_log_pack_compose, 
-                       _os_log_pack_send, _os_log_pack_send_and_compose, _os_log_set_client_type, 
-                       _os_log_set_enabled, _os_log_set_fault_callback, _os_log_shim_enabled, 
+                       _os_log_compare_enablement, _os_log_copy_decorated_message, 
+                       _os_log_copy_message_string, _os_log_create, _os_log_errors_count, 
+                       _os_log_fault_default_callback, _os_log_faults_count, _os_log_fmt_compose, 
+                       _os_log_fmt_convert_trace, _os_log_fmt_extract_pubdata, _os_log_fmt_get_plugin, 
+                       _os_log_get_type, _os_log_is_debug_enabled, _os_log_is_enabled, 
+                       _os_log_pack_compose, _os_log_pack_send, _os_log_pack_send_and_compose, 
+                       _os_log_set_client_type, _os_log_set_enabled, _os_log_set_fault_callback, 
+                       _os_log_set_hook, _os_log_set_test_callback, _os_log_shim_enabled, 
                        _os_log_shim_legacy_logging_enabled, _os_log_shim_with_CFString, 
-                       _os_log_type_enabled, _os_log_with_args, _os_signpost_enabled, 
-                       _os_signpost_id_generate, _os_signpost_id_make_with_pointer, 
+                       _os_log_type_enabled, _os_log_type_get_name, _os_log_with_args, 
+                       _os_signpost_enabled, _os_signpost_id_generate, _os_signpost_id_make_with_pointer, 
                        _os_signpost_set_introspection_hook_4Perf, _os_state_add_handler, 
                        _os_state_remove_handler, _os_trace_debug_enabled, _os_trace_get_mode, 
                        _os_trace_get_type, _os_trace_info_enabled, _os_trace_set_mode ]

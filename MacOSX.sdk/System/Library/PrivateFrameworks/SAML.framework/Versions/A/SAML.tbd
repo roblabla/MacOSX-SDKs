@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8288B74A-AA88-3649-9B9B-F95DC41FED64
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           60023C78-CA18-3AB1-97DC-D98E9CCF810B
 install-name:    '/System/Library/PrivateFrameworks/SAML.framework/Versions/A/SAML'
-current-version: 453.20.8
+current-version: 453.40.37
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SAMLAttributePropertyNameAccountProviderID, _SAMLAttributePropertyNameAuthenticationTTL, 

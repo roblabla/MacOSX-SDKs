@@ -82,6 +82,7 @@ class OSNumber : public OSObject
 
 protected:
 	unsigned int size;
+
 	unsigned long long value;
 
 #else /* APPLE_KEXT_ALIGN_CONTAINERS */
@@ -340,6 +341,8 @@ public:
  * giving no indication of truncation or other potential conversion problems.
  */
 	virtual unsigned long long unsigned64BitValue() const;
+
+
 
 // xx-review: wow, there's no addNumber(OSNumber *)!
 

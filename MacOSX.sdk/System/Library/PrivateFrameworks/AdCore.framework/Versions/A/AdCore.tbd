@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C9FD0DD4-E68D-35EE-BAB9-621080B2A8A6
-  - target:          x86_64-maccatalyst
-    value:           C9FD0DD4-E68D-35EE-BAB9-621080B2A8A6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           17B4BC31-889D-3D55-BAAD-EA0EC4D7492A
-  - target:          arm64e-maccatalyst
-    value:           17B4BC31-889D-3D55-BAAD-EA0EC4D7492A
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

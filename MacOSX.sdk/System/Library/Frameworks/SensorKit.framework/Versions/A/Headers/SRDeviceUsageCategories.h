@@ -42,11 +42,8 @@ SR_EXTERN SRDeviceUsageCategoryKey const SRDeviceUsageCategoryGraphicsAndDesign 
 SR_EXTERN SRDeviceUsageCategoryKey const SRDeviceUsageCategoryShopping API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 SR_EXTERN SRDeviceUsageCategoryKey const SRDeviceUsageCategoryStickers API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
-// ** NOTE **
-// This API has only been reviewed internally for the C release without an SDK
-// The final version will appear in the E release
 NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
-SR_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos)
+SR_EXTERN API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
 /*!
  * @class SRSupplementalCategory
  *
@@ -54,8 +51,9 @@ SR_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILAB
  * A supplemental category to provide more context than just the app category
  *
  * @discussion
- * The app categories are very general. Providing a supplemental category will
- * allow more context about the specific app while not revealing the exact app name.
+ * The app categories from \c SRDeviceUsageCategoryKey are very general.
+ * Providing a supplemental category allows more context about the specific app while
+ * not revealing the exact app identity.
  */
 @interface SRSupplementalCategory : NSObject <NSCopying, NSSecureCoding>
 
@@ -64,7 +62,7 @@ SR_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILAB
  * @brief An opaque identifier for the supplemental category
  * @discussion More information about what this category represents can be found in Apple's developer documentation
  */
-@property (nonatomic, readonly) NSString *identifier;
+@property (nonatomic, readonly, copy) NSString *identifier;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

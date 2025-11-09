@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2560E5B9-E687-3BDA-BAA1-B3BE1C3CFE16
-  - target:          x86_64-maccatalyst
-    value:           2560E5B9-E687-3BDA-BAA1-B3BE1C3CFE16
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F8A9D544-B063-3854-912E-C8BA19BC2EB4
-  - target:          arm64e-maccatalyst
-    value:           F8A9D544-B063-3854-912E-C8BA19BC2EB4
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 1732.60.4
+current-version: 1732.100.12
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7E15BAEA-2D17-3053-8728-DE46C2126A82
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           72C75205-5CC5-3FC6-89B3-C85315320A89
 install-name:    '/System/Library/PrivateFrameworks/iPod.framework/Versions/A/iPod'
 current-version: 26.1
 exports:

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           39E6A2F7-9170-3B5C-80DE-A61C94484C12
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4D0A3C14-0F8B-3048-BA8F-67144B1A0C60
 install-name:    '/System/Library/PrivateFrameworks/oncrpc.framework/Versions/A/oncrpc'
-current-version: 73
+current-version: 76.100.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __newrpclib___rpc_createerr, __newrpclib__authenticate, __newrpclib__null_auth, 

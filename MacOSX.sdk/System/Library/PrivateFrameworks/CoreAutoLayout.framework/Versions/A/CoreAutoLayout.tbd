@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CF4194FD-49CF-3CA9-8111-1EF50202097D
-  - target:          x86_64-maccatalyst
-    value:           CF4194FD-49CF-3CA9-8111-1EF50202097D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FF9D4220-57B5-3446-946E-29509C3E3C5A
-  - target:          arm64e-maccatalyst
-    value:           FF9D4220-57B5-3446-946E-29509C3E3C5A
 install-name:    '/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout'
 current-version: 29
 exports:

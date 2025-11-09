@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MTLArgumentEncoder;
 
-typedef __autoreleasing MTLArgument *__nullable MTLAutoreleasedArgument;
+typedef __autoreleasing MTLArgument *__nullable MTLAutoreleasedArgument API_DEPRECATED("Use MTLBinding and cast to specific Binding (MTLTextureBinding, MTLBufferBinding, .etc) instead", macos(10.11, 13.0), ios(8.0, 16.0));
 
 typedef NS_ENUM(NSUInteger, MTLPatchType) {
     MTLPatchTypeNone = 0,
@@ -167,7 +167,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @abstract Creates an argument encoder which will encode arguments matching the layout of the argument buffer at the given bind point index.
  */
 - (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex
-                                                                  reflection:(MTLAutoreleasedArgument * __nullable)reflection API_AVAILABLE(macos(10.13), ios(11.0));
+                                                  reflection:(MTLAutoreleasedArgument * __nullable)reflection API_DEPRECATED("Use MTLDevice's newArgumentEncoderWithBufferBinding: instead", macos(10.13, 13.0), ios(11.0, 16.0));
 
 
 
@@ -213,6 +213,13 @@ typedef NS_ENUM(NSInteger, MTLLibraryOptimizationLevel)
     MTLLibraryOptimizationLevelDefault = 0,
     MTLLibraryOptimizationLevelSize = 1,
 } API_AVAILABLE(macos(13.0), ios(16.0));
+
+
+typedef NS_ENUM(NSInteger, MTLCompileSymbolVisibility)
+{
+    MTLCompileSymbolVisibilityDefault = 0,
+    MTLCompileSymbolVisibilityHidden = 1,
+} API_AVAILABLE(macos(13.3), ios(16.4));
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLCompileOptions : NSObject <NSCopying>
@@ -287,6 +294,24 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Sets the compiler optimization level.
  */
 @property (readwrite, nonatomic) MTLLibraryOptimizationLevel optimizationLevel API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+@property
+@abstract Adds a compiler command to force the default visibility of symbols to be hidden
+*/
+@property (readwrite, nonatomic) MTLCompileSymbolVisibility compileSymbolVisibility API_AVAILABLE(macos(13.3), ios(16.4));
+
+/*!
+@property allowReferencingUndefinedSymbols
+@abstract Adds a compiler command to allow the reference of undefined symbols
+*/
+@property (readwrite, nonatomic) BOOL allowReferencingUndefinedSymbols API_AVAILABLE(macos(13.3), ios(16.4));
+
+/*!
+@property maxTotalThreadsPerThreadgroup
+@abstract Adds a compiler command to specify the total threads per threadgroup
+*/
+@property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(13.3), ios(16.4));
 
 @end
 

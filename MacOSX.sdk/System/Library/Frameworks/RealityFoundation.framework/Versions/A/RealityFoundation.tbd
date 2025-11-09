@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           30569D2F-E51C-3AF3-8C47-519EF119D0DB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           15BCA1B7-4777-3D57-9E94-C92F47579D98
 install-name:    '/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 225.123
+current-version: 225.255.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -2295,6 +2288,7 @@ exports:
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentV22__addIntrospectionDatayys13OpaquePointerVSgFZ$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentV4fromACs7Decoder_p_tKcfC$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentV6__free2to6offsetySv_SitFZ$', 
+                       '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentV6__load4from6offsetAA0E0_pSV_SitFZ$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentV6encode2toys7Encoder_p_tKF$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAMc$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit21__EntityInfoComponentVAA0E0AAWP$', 
@@ -5387,11 +5381,15 @@ exports:
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8ResourceMp$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8ResourcePAAE10__fromCoreyxAA10__AssetRefVFZ$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8ResourceTL$', 
+                       '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTj$', 
+                       '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTq$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvg$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvpMV$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTj$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTq$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV$', 
+                       '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTj$', 
+                       '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTq$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM$', 
                        '$ld$previous$/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$1$10.15$12.0$_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvg$', 
@@ -10977,10 +10975,13 @@ exports:
                        '_$s10RealityKit8REAngleFV7radiansSfvs', '_$s10RealityKit8REAngleFVMa', 
                        '_$s10RealityKit8REAngleFVMn', '_$s10RealityKit8REAngleFVN', 
                        '_$s10RealityKit8ResourceMp', '_$s10RealityKit8ResourcePAAE10__fromCoreyxAA10__AssetRefVFZ', 
+                       '_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTj', 
+                       '_$s10RealityKit8__EngineC012asyncAfterOnC5Queue8deadline_y8Dispatch0I4TimeV_yyScMYcctFTq', 
                        '_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvg', '_$s10RealityKit8__EngineC04coreC0s13OpaquePointerVvpMV', 
                        '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTj', '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvgTq', 
-                       '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV', '_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ', 
-                       '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM', 
+                       '_$s10RealityKit8__EngineC06__coreC0AA02__C3RefVvpMV', '_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTj', 
+                       '_$s10RealityKit8__EngineC07asyncOnC5QueueyyyyScMYccFTq', 
+                       '_$s10RealityKit8__EngineC10__fromCoreyAcA02__C3RefVFZ', '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvM', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvg', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvpMV', 
                        '_$s10RealityKit8__EngineC13ConfigurationV03useA2IOSbvs', 

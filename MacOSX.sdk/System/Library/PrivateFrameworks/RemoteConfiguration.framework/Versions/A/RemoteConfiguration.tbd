@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           ABFBA307-95F4-370F-BFD2-4532599BDDD0
-  - target:          x86_64-maccatalyst
-    value:           ABFBA307-95F4-370F-BFD2-4532599BDDD0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           16A81259-D42B-38AD-B6FC-4BDCAC906433
-  - target:          arm64e-maccatalyst
-    value:           16A81259-D42B-38AD-B6FC-4BDCAC906433
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 161
+current-version: 169
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

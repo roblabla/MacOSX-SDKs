@@ -9,7 +9,7 @@
 
 @class CKRecord, CKRecordID, CKAsset;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @enum CKReferenceAction
  *  @constant CKReferenceActionNone When the referred record is deleted, this record is unchanged, and has a dangling pointer
@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, CKReferenceAction) {
 
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKReference : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -40,4 +41,4 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

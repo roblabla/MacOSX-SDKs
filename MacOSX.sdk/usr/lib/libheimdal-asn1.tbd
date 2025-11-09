@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8D03AD28-8D97-3993-AFC6-976875D22EFB
-  - target:          x86_64-maccatalyst
-    value:           8D03AD28-8D97-3993-AFC6-976875D22EFB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CE377D64-96FB-37C5-B1D0-808D153B1CBE
-  - target:          arm64e-maccatalyst
-    value:           CE377D64-96FB-37C5-B1D0-808D153B1CBE
 install-name:    '/usr/lib/libheimdal-asn1.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

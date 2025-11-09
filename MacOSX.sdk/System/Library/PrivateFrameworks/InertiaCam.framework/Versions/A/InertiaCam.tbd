@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A6F16BDB-E0C0-3393-9CF9-7DEFCB76075E
-  - target:          x86_64-maccatalyst
-    value:           A6F16BDB-E0C0-3393-9CF9-7DEFCB76075E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           98E3F5E7-8850-3D87-9B9B-EB6FF198F485
-  - target:          arm64e-maccatalyst
-    value:           98E3F5E7-8850-3D87-9B9B-EB6FF198F485
 install-name:    '/System/Library/PrivateFrameworks/InertiaCam.framework/Versions/A/InertiaCam'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

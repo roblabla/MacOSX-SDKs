@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           97490297-E5EB-3DA3-BE17-A3B1127EDA9E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           37CD05E7-09B0-31D4-B751-B59015D55521
 install-name:    '/System/Library/PrivateFrameworks/RunningBoard.framework/Versions/A/RunningBoard'
-current-version: 800.60.5
+current-version: 803.100.24
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RBAttributePrimitiveEntitlement, _RBBackBoardClientEntitlement, 

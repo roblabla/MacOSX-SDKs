@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0DD8FD8D-9A38-322F-B083-5C50CF552BF3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           33D30053-342A-3ABF-8791-16F7966E35BC
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlSupport.framework/Versions/A/SiriPlaybackControlSupport'
 swift-abi-version: 7
 allowable-clients:
@@ -226,6 +219,7 @@ exports:
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV02isA10Xv2EnabledSbyF', 
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV02isA8XEnabledSbyF', 
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV02isE14OnWatchEnabledSbyF', 
+                       '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV26isCoordinatedVolumeEnabledSbyF', 
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV26isResponseFrameworkEnabledSbyF', 
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV29shouldSuppressSnippetIfNeededSbyF', 
                        '_$s26SiriPlaybackControlSupport0B27ControlsFeatureFlagProviderV31isPermanentSpeakerGroupsEnabledSbyF', 
@@ -242,6 +236,8 @@ exports:
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP02isA8XEnabledSbyFTq', 
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP02isE14OnWatchEnabledSbyFTj', 
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP02isE14OnWatchEnabledSbyFTq', 
+                       '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP26isCoordinatedVolumeEnabledSbyFTj', 
+                       '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP26isCoordinatedVolumeEnabledSbyFTq', 
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP26isResponseFrameworkEnabledSbyFTj', 
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP26isResponseFrameworkEnabledSbyFTq', 
                        '_$s26SiriPlaybackControlSupport0B28ControlsFeatureFlagProvidingP29shouldSuppressSnippetIfNeededSbyFTj', 
@@ -434,6 +430,20 @@ exports:
                        '_$s26SiriPlaybackControlSupport14DeviceSelectorCMn', '_$s26SiriPlaybackControlSupport14DeviceSelectorCMo', 
                        '_$s26SiriPlaybackControlSupport14DeviceSelectorCMu', '_$s26SiriPlaybackControlSupport14DeviceSelectorCN', 
                        '_$s26SiriPlaybackControlSupport14DeviceSelectorCfD', '_$s26SiriPlaybackControlSupport14DeviceSelectorCfd', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO011approximateF0yA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO05aliasF0yA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO07partialF0yA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO07perfectF0yA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO11descriptionSSvg', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO11descriptionSSvpMV', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO8rawValueACSgSi_tcfC', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO8rawValueSivg', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeO8rawValueSivpMV', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOMa', '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOMn', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeON', '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOSHAAMc', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOSQAAMc', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOSYAAMc', 
+                       '_$s26SiriPlaybackControlSupport14FuzzyMatchTypeOs23CustomStringConvertibleAAMc', 
                        '_$s26SiriPlaybackControlSupport14LanguageOptionV04autoE020localizationProvider6localeAcA21LocalizationProviding_p_10Foundation6LocaleVtFZ', 
                        '_$s26SiriPlaybackControlSupport14LanguageOptionV10identifierSSvg', 
                        '_$s26SiriPlaybackControlSupport14LanguageOptionV10identifierSSvpMV', 

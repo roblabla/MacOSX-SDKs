@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BAFA57A7-4CEF-30C4-8891-8B3E152FA34D
-  - target:          x86_64-maccatalyst
-    value:           BAFA57A7-4CEF-30C4-8891-8B3E152FA34D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           85F7D05A-EC8D-3632-846A-8E48B45A5A1B
-  - target:          arm64e-maccatalyst
-    value:           85F7D05A-EC8D-3632-846A-8E48B45A5A1B
 install-name:    '/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce'
 current-version: 0
 compatibility-version: 0

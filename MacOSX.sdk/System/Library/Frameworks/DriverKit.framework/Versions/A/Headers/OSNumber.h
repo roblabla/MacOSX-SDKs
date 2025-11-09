@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSNumber.iig */
+/* iig(DriverKit-256.100.8) generated from OSNumber.iig */
 
 /* OSNumber.iig:1-36 */
 /*
@@ -236,7 +236,7 @@ public:
 
 #if !KERNEL
 
-class OSNumberInterface : public OSInterface
+class  OSNumberInterface : public OSInterface
 {
 public:
 };

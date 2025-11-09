@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKStoredValuePassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKStoredValuePassProperties.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

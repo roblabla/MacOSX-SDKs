@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           75DEC8BF-3661-3B72-9C74-40A902439E40
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C9E538DD-E35A-37F0-BAF6-FAC2268A58CC
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/AMPLibrary.framework/Versions/A/Frameworks/libgnsdk_manager.3.06.1.dylib'
 current-version: 3.6.1

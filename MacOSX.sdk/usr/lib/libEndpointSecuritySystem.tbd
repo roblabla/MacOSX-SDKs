@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           BA6D1955-39C1-35CE-868B-FCCC8C85D4C5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3F92A1E5-22A0-3B44-B9C6-30A57DD701C7
 install-name:    '/usr/lib/libEndpointSecuritySystem.dylib'
-current-version: 367.60.4
+current-version: 368.100.47
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ess_authorize_file_provider_materialize, _ess_authorize_file_provider_update, 

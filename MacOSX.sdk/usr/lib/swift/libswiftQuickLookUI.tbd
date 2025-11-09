@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DDDDF249-AE3C-383C-A543-B3EC5FDCD8A6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           75055F08-EB22-345F-8D55-9E1EB71AEF81
 install-name:    '/usr/lib/swift/libswiftQuickLookUI.dylib'
-current-version: 965.1
+current-version: 965.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

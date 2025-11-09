@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name _MusicKit_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4022.300.3
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name _MusicKit_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4022.500.35
 import CoreGraphics
 import Foundation
 @_exported import MusicKit
@@ -28,7 +28,7 @@ public struct MusicSubscriptionOffer {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.View {
-  public func musicSubscriptionOffer(isPresented: SwiftUI.Binding<Swift.Bool>, options: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options = .default, onLoadCompletion: @escaping (Swift.Error?) -> Swift.Void = { _ in }) -> some SwiftUI.View
+  public func musicSubscriptionOffer(isPresented: SwiftUI.Binding<Swift.Bool>, options: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options = .default, onLoadCompletion: @escaping ((any Swift.Error)?) -> Swift.Void = { _ in }) -> some SwiftUI.View
   
 }
 @available(iOS 15.0, macOS 12.0, *)

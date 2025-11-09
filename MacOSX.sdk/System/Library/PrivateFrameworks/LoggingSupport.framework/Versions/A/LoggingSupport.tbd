@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           AC482628-8110-3EBB-B0E2-43EF33C2C69F
-  - target:          x86_64-maccatalyst
-    value:           AC482628-8110-3EBB-B0E2-43EF33C2C69F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4A50A53D-E720-39A0-A535-9A73AFB09BC6
-  - target:          arm64e-maccatalyst
-    value:           4A50A53D-E720-39A0-A535-9A73AFB09BC6
 install-name:    '/System/Library/PrivateFrameworks/LoggingSupport.framework/Versions/A/LoggingSupport'
-current-version: 1406.60.2
+current-version: 1431.100.13
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -65,10 +52,10 @@ exports:
                        _ctf_dprintf, _ctf_dtd_delete, _ctf_dtd_insert, _ctf_dtd_lookup, 
                        _ctf_enum_iter, _ctf_enum_name, _ctf_enum_value, _ctf_errmsg, 
                        _ctf_errno, _ctf_fdopen, _ctf_free, _ctf_func_args, _ctf_func_info, 
-                       _ctf_get_ctt_size, _ctf_getmodel, _ctf_getspecific, _ctf_hash_create, 
-                       _ctf_hash_define, _ctf_hash_destroy, _ctf_hash_insert, _ctf_hash_lookup, 
-                       _ctf_hash_size, _ctf_import, _ctf_list_append, _ctf_list_delete, 
-                       _ctf_list_prepend, _ctf_lookup_by_id, _ctf_lookup_by_name, 
+                       _ctf_get_ctt_lsize, _ctf_get_ctt_size, _ctf_getmodel, _ctf_getspecific, 
+                       _ctf_hash_create, _ctf_hash_define, _ctf_hash_destroy, _ctf_hash_insert, 
+                       _ctf_hash_lookup, _ctf_hash_size, _ctf_import, _ctf_list_append, 
+                       _ctf_list_delete, _ctf_list_prepend, _ctf_lookup_by_id, _ctf_lookup_by_name, 
                        _ctf_lookup_by_symbol, _ctf_member_info, _ctf_member_iter, 
                        _ctf_open, _ctf_parent_file, _ctf_parent_name, _ctf_sect_mmap, 
                        _ctf_sect_munmap, _ctf_set_array, _ctf_set_errno, _ctf_set_open_errno, 
@@ -78,7 +65,8 @@ exports:
                        _ctf_type_lname, _ctf_type_name, _ctf_type_pointer, _ctf_type_printf_compat, 
                        _ctf_type_ptrauth, _ctf_type_reference, _ctf_type_resolve, 
                        _ctf_type_size, _ctf_type_visit, _ctf_update, _ctf_version, 
-                       _ctf_write, _ctf_zopen, _kOSLogPersistenceKeyActivityCreationCount, 
+                       _ctf_write, _ctf_zopen, _get_type_ctt_info, _get_type_ctt_name, 
+                       _get_type_ctt_size, _get_type_ctt_type, _kOSLogPersistenceKeyActivityCreationCount, 
                        _kOSLogPersistenceKeyLogMessageCount, _kOSLogPersistenceKeyLogPrivateSize, 
                        _kOSLogPersistenceKeyLogPublicSize, _kOSLogPersistenceKeyPath, 
                        _kOSLogPersistenceKeyPerProcessStatistics, _kOSLogPersistenceKeyPerSenderStatistics, 

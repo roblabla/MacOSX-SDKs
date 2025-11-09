@@ -2,25 +2,9 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           11C035C9-E223-345C-BE92-C9E428B0A43A
-  - target:          x86_64-maccatalyst
-    value:           11C035C9-E223-345C-BE92-C9E428B0A43A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B8585E3A-BEDF-3171-BF75-BE0C9E0C10FF
-  - target:          arm64e-maccatalyst
-    value:           B8585E3A-BEDF-3171-BF75-BE0C9E0C10FF
 install-name:    '/System/Library/PrivateFrameworks/CoreHandwriting.framework/Versions/A/CoreHandwriting'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTIN5boost16exception_detail10clone_baseE, __ZTIN5boost9exceptionE, 
-                       __ZTSN5boost16exception_detail10clone_baseE, __ZTSN5boost9exceptionE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CHDescriptionForCorrectionResultType, _CHPostProcessingStepOptionAdjustColumns, 

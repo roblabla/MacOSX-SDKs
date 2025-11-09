@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FC710CDA-465F-3748-8F06-7ECF2115AB98
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4BC743C9-84DC-329D-9028-5528ED0323B2
 install-name:    '/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 212.11
+current-version: 213.12
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LPErrorDomain, _LPLinkMetadataTypeIdentifier, _LPLogChannelFetching, 

@@ -348,12 +348,16 @@ typedef NS_ENUM(NSInteger, CWChannelWidth)
  *
  * @constant kCWChannelBand5GHz
  * 5GHz channel band.
+ *
+ * @constant kCWChannelBand6GHz
+ * 6GHz channel band.
  */
 typedef NS_ENUM(NSInteger, CWChannelBand)
 {
 	kCWChannelBandUnknown	= 0,
 	kCWChannelBand2GHz		= 1,
 	kCWChannelBand5GHz		= 2,
+    kCWChannelBand6GHz      = 3,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
 /*!

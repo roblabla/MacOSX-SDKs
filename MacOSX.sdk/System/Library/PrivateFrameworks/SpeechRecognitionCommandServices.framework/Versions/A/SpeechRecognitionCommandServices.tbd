@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4E679579-54BA-33EC-9DD3-05DEBEE12D66
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           721ED89E-EE69-3FA8-BF2D-B85D059D0BBE
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCommandServices.framework/Versions/A/SpeechRecognitionCommandServices'
 exports:
   - targets:         [ x86_64-macos ]

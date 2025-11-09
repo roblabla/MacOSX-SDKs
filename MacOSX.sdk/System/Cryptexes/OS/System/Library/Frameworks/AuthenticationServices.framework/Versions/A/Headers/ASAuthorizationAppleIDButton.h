@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, ASAuthorizationAppleIDButtonStyle) {
 } NS_SWIFT_NAME(ASAuthorizationAppleIDButton.Style) API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if TARGET_OS_IPHONE
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos)
@@ -44,4 +44,4 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(wat
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

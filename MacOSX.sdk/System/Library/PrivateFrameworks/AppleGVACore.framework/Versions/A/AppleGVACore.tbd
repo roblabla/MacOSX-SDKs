@@ -1,9 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           BA91F42C-04EA-3DD2-9BAC-221DC957072F
 install-name:    '/System/Library/PrivateFrameworks/AppleGVACore.framework/Versions/A/AppleGVACore'
 current-version: 10.0.20
 exports:

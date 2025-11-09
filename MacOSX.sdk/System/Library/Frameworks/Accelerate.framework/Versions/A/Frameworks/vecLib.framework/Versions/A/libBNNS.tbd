@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F83FA348-F910-3398-857B-F6F0126BF5C1
-  - target:          x86_64-maccatalyst
-    value:           F83FA348-F910-3398-857B-F6F0126BF5C1
-  - target:          x86_64h-macos
-    value:           A6F95063-0613-3E28-A972-2F56E4EEBB89
-  - target:          x86_64h-maccatalyst
-    value:           A6F95063-0613-3E28-A972-2F56E4EEBB89
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FF6BFF89-A956-37F4-BD70-5511326A880D
-  - target:          arm64e-maccatalyst
-    value:           FF6BFF89-A956-37F4-BD70-5511326A880D
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -58,14 +41,25 @@ exports:
                        _BNNSFilterSetState, _BNNSFunctionGRUFusedGates, _BNNSFusedFilterApplyBackwardBatch, 
                        _BNNSFusedFilterApplyBackwardMultiInputBatch, _BNNSFusedFilterApplyBatch, 
                        _BNNSFusedFilterApplyMultiInputBatch, _BNNSGather, _BNNSGatherND, 
-                       _BNNSGetPointer, _BNNSGumbelMax, _BNNSInitGumbel, _BNNSLossFilterApplyBackwardBatch, 
+                       _BNNSGetPointer, _BNNSGraphCompileFromFile, _BNNSGraphContextExecute, 
+                       _BNNSGraphContextGetArgPosition, _BNNSGraphContextGetContextSize, 
+                       _BNNSGraphContextGetWorkspaceSize, _BNNSGraphContextInitialize, 
+                       _BNNSGraphContextSetBatchSize, _BNNSGraphContextSetDynamicSizes, 
+                       _BNNSGraphContextSetSignposts, _BNNSGraphExecute, _BNNSGraphGetArgPosition, 
+                       _BNNSGraphGetSize, _BNNSGraphGetWorkspaceSize, _BNNSGraphOptionsCreateDefault, 
+                       _BNNSGraphOptionsGetDebugInfo, _BNNSGraphOptionsGetPredefinedOptimizations, 
+                       _BNNSGraphOptionsGetSingleThread, _BNNSGraphOptionsSetDebugInfo, 
+                       _BNNSGraphOptionsSetPredefinedOptimizations, _BNNSGraphOptionsSetSingleThread, 
+                       _BNNSGumbelMax, _BNNSInitGumbel, _BNNSLossFilterApplyBackwardBatch, 
                        _BNNSLossFilterApplyBatch, _BNNSMatMul, _BNNSMatMulWorkspaceSize, 
+                       _BNNSNDArrayConvolutionSparsify, _BNNSNDArrayConvolutionSparsifySparseCOO, 
                        _BNNSNDArrayFullyConnectedSparsify, _BNNSNDArrayFullyConnectedSparsifySparseCOO, 
                        _BNNSNDArrayFullyConnectedSparsifySparseCSR, _BNNSNDArrayGetDataSize, 
                        _BNNSNormalizationFilterApplyBackwardBatch, _BNNSNormalizationFilterApplyBatch, 
                        _BNNSOptimizerStep, _BNNSPermuteFilterApplyBackwardBatch, 
                        _BNNSPoolingFilterApplyBackwardBatch, _BNNSPoolingFilterApplyBackwardBatchEx, 
                        _BNNSPoolingFilterApplyBatch, _BNNSPoolingFilterApplyBatchEx, 
+                       _BNNSPose384InitFromPointers, _BNNSPoseExecute, _BNNSPoseInitFromPointers, 
                        _BNNSRandomFillNormalFloat, _BNNSRandomFillUniformFloat, _BNNSRandomFillUniformInt, 
                        _BNNSRandomGeneratorGetState, _BNNSRandomGeneratorSetState, 
                        _BNNSRandomGeneratorStateSize, _BNNSRecommendDataLayoutsContraction, 
@@ -74,14 +68,19 @@ exports:
                        _BNNSSparseEmbeddingApplyBackward, _BNNSSparseEmbeddingGetDense, 
                        _BNNSSparseEmbeddingOptimizerStep, _BNNSSparseGetRepresentation, 
                        _BNNSSparseSetRepresentation, _BNNSTile, _BNNSTileBackward, 
-                       _BNNSTranspose, __ZN4bnns12GraphCompileE16BNNSTargetSystemONSt3__110unique_ptrIN3MIL9IRProgramENS1_14default_deleteIS4_EEEENS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKNS_12GraphOptionsE, 
+                       _BNNSTranspose, __Z37BNNSGraphContextSetDebugIntermediatesPvPNSt3__13mapINS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPKvNS0_4lessIS7_EENS5_INS0_4pairIKS7_S9_EEEEEE, 
+                       __ZN4bnns12GraphCompileE16BNNSTargetSystemONSt3__110unique_ptrIN3MIL9IRProgramENS1_14default_deleteIS4_EEEENS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKNS_12GraphOptionsE, 
                        __ZN4bnns12GraphExecuteEPvPS0_Pc, __ZN4bnns12GraphGetSizeEPv, 
                        __ZN4bnns12GraphOptions14DefaultOptionsEv, __ZN4bnns12GraphOptions17set_single_threadEb, 
-                       __ZN4bnns12GraphOptions23set_generate_debug_infoEb, __ZN4bnns12GraphOptionsD0Ev, 
-                       __ZN4bnns12GraphOptionsD1Ev, __ZN4bnns12GraphOptionsD2Ev, 
-                       __ZN4bnns13GraphInternalC1EPKcPPvPc, __ZN4bnns13GraphInternalC2EPKcPPvPc, 
-                       __ZN4bnns19GraphGetArgPositionEPvPKc, __ZN4bnns21GraphExecuteWithDebugEPvPS0_NSt3__13mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKvNS2_4lessIS9_EENS7_INS2_4pairIKS9_SB_EEEEEEPc, 
-                       __ZN4bnns21GraphGetWorkspaceSizeEPv, __ZNK4bnns12GraphOptions17get_single_threadEv, 
-                       __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, __ZNK4bnns13GraphInternal13estimated_opsEv, 
+                       __ZN4bnns12GraphOptions23set_generate_debug_infoEb, __ZN4bnns12GraphOptions28set_predefined_optimizationsEj, 
+                       __ZN4bnns12GraphOptionsD0Ev, __ZN4bnns12GraphOptionsD1Ev, 
+                       __ZN4bnns12GraphOptionsD2Ev, __ZN4bnns13GraphInternalC1EPKc, 
+                       __ZN4bnns13GraphInternalC2EPKc, __ZN4bnns15PoseInitFromMILEPvPKN3MIL9IRProgramE, 
+                       __ZN4bnns16FirstMajorTensor11DeserializeERKNS_13GraphInternalEPKv, 
+                       __ZN4bnns19GraphGetArgPositionEPvPKc, __ZN4bnns21GraphGetWorkspaceSizeEPv, 
+                       __ZNK4bnns12GraphOptions17get_single_threadEv, __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, 
+                       __ZNK4bnns12GraphOptions28get_predefined_optimizationsEv, 
+                       __ZNK4bnns13GraphInternal12generate_dotEP7__sFILE, __ZNK4bnns13GraphInternal13estimated_opsEv, 
+                       __ZNK4bnns13GraphInternal15get_tensor_descEy, __ZNK4bnns13GraphInternal7dump_irEP7__sFILE, 
                        __ZTIN4bnns12GraphOptionsE, __ZTSN4bnns12GraphOptionsE, __ZTVN4bnns12GraphOptionsE ]
 ...

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8F88A457-044C-3635-8D59-95667E82ADD2
-  - target:          x86_64-maccatalyst
-    value:           8F88A457-044C-3635-8D59-95667E82ADD2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           60A251BF-5539-384B-90D9-652E0D379789
-  - target:          arm64e-maccatalyst
-    value:           60A251BF-5539-384B-90D9-652E0D379789
 install-name:    '/usr/lib/swift/libswiftCoreMediaIO.dylib'
-current-version: 5428.4
+current-version: 5430.13.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

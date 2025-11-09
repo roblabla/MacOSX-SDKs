@@ -74,7 +74,15 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 
 /*!
  * @property includeAllNetworks
- * @discussion If YES, all traffic will be sent over the tunnel, and all traffic will be dropped if the tunnel is down. The default is NO.
+ * @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions
+ * can be controlled with the excludeLocalNetworks, excludeCellularServices, and excludeAPNs properties. See the documentation for those properties.
+ * The following traffic is always excluded from the tunnel:
+ * - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP.
+ * - Traffic necessary for connecting to captive networks.
+ * - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the
+ *   excludeCellularServices property for more details.
+ * - Network communication with a companion device such as a watchOS device.
+ * The default value of this property is NO.
  */
 @property BOOL includeAllNetworks API_AVAILABLE(macos(10.15), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
@@ -83,6 +91,22 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
  */
 @property BOOL excludeLocalNetworks API_AVAILABLE(macos(10.15), ios(14.2)) API_UNAVAILABLE(tvos, watchos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property excludeCellularServices
+ * @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services
+ * (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic
+ * directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this
+ * property is YES.
+ */
+@property BOOL excludeCellularServices API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property excludeAPNs
+ * @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs)
+ * is excluded from the tunnel. The default value of this property is YES.
+ */
+@property BOOL excludeAPNs API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property enforceRoutes

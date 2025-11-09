@@ -1,12 +1,7 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64h-macos, x86_64h-maccatalyst ]
-uuids:
-  - target:          x86_64h-macos
-    value:           7DA0B4E8-22D5-3617-830D-EC5F96C03540
-  - target:          x86_64h-maccatalyst
-    value:           7DA0B4E8-22D5-3617-830D-EC5F96C03540
-install-name:    '/AppleInternal/Library/BuildRoots/aaefcfd1-5c95-11ed-8734-2e32217d8374/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
+install-name:    '/AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
 current-version: 0
 compatibility-version: 0
 exports:

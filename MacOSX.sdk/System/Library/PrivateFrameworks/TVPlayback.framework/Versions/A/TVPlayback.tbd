@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0AB5581F-AEFC-3E4E-848B-C6CD00C27354
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E11D76A8-121E-3560-818C-C6AEA2541031
 install-name:    '/System/Library/PrivateFrameworks/TVPlayback.framework/Versions/A/TVPlayback'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -73,7 +66,8 @@ exports:
                        _TVPMediaItemMetadataPhotoSensitivityDuration, _TVPMediaItemMetadataPhotoSensitivityImageURL, 
                        _TVPMediaItemMetadataPlaybackCoordinatorIdentifier, _TVPMediaItemMetadataPlaybackProgress, 
                        _TVPMediaItemMetadataPlaybackSummarySent, _TVPMediaItemMetadataPostPlayStartTime, 
-                       _TVPMediaItemMetadataProductPlacementInfo, _TVPMediaItemMetadataRTCChildHierarchyToken, 
+                       _TVPMediaItemMetadataProductPlacementInfo, _TVPMediaItemMetadataProgramScheduleEndTime, 
+                       _TVPMediaItemMetadataProgramScheduleStartTime, _TVPMediaItemMetadataRTCChildHierarchyToken, 
                        _TVPMediaItemMetadataRTCParentHierarchyToken, _TVPMediaItemMetadataRadioAdImageURLString, 
                        _TVPMediaItemMetadataRadioStationAttribution, _TVPMediaItemMetadataRadioStationHash, 
                        _TVPMediaItemMetadataRadioStationIdentifier, _TVPMediaItemMetadataRadioStationName, 

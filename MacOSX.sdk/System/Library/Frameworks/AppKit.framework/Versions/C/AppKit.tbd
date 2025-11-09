@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           93BF8535-B50A-3B6E-9E2E-EBF535F22B94
-  - target:          x86_64-maccatalyst
-    value:           93BF8535-B50A-3B6E-9E2E-EBF535F22B94
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6CB39B23-EFB5-3657-B907-A8B964549BA1
-  - target:          arm64e-maccatalyst
-    value:           6CB39B23-EFB5-3657-B907-A8B964549BA1
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2299.30.112
+current-version: 2299.50.120
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -908,10 +895,11 @@ exports:
                        _NSWorkspaceVolumeURLKey, _NSWorkspaceWillLaunchApplicationNotification, 
                        _NSWorkspaceWillPowerOffNotification, _NSWorkspaceWillSleepNotification, 
                        _NSWorkspaceWillUnmountNotification, _ResetNSAlertConstraintBasedLayout, 
-                       _ResetNSAlertWeakDelegate, _ResetNSAutoFillHeuristicControllerEnabled, 
-                       _ResetNSAutomaticallyTrackKeyValueDependencies, _ResetNSCollectionViewWeakDelegate, 
-                       _ResetNSConservativeTAMICConstraintCreation, _ResetNSConstraintBasedLayoutDetectAmbiguousViews, 
-                       _ResetNSConstraintBasedLayoutEngageNonLazily, _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
+                       _ResetNSAlertWeakDelegate, _ResetNSAllowApplicationDisableScreenUpdates, 
+                       _ResetNSAutoFillHeuristicControllerEnabled, _ResetNSAutomaticallyTrackKeyValueDependencies, 
+                       _ResetNSCollectionViewWeakDelegate, _ResetNSConservativeTAMICConstraintCreation, 
+                       _ResetNSConstraintBasedLayoutDetectAmbiguousViews, _ResetNSConstraintBasedLayoutEngageNonLazily, 
+                       _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
                        _ResetNSISIconPreparationMode, _ResetNSImageCompositeFromRectIsInRepCoords, 
                        _ResetNSLifeguardOnDuty, _ResetNSLifeguardTestable, _ResetNSLoadNibDataPolicy, 
                        _ResetNSOutlineViewValidateChanges, _ResetNSPasteboardRequiresSecureCoding, 
@@ -924,16 +912,16 @@ exports:
                        _ResetNSWindowAssertWhenDisplayCycleLimitReached, _ResetNSWindowSnappingDoClientSide, 
                        _ResetNSWindowTabbingEnabled, _ResetNSWorkspaceRaiseOnInvalidConfigurationDictionary, 
                        _SetNSAlertConstraintBasedLayout, _SetNSAlertWeakDelegate, 
-                       _SetNSAutoFillHeuristicControllerEnabled, _SetNSAutomaticallyTrackKeyValueDependencies, 
-                       _SetNSCollectionViewWeakDelegate, _SetNSConservativeTAMICConstraintCreation, 
-                       _SetNSConstraintBasedLayoutDetectAmbiguousViews, _SetNSConstraintBasedLayoutEngageNonLazily, 
-                       _SetNSDynamicPropertiesCaptureDependencyContextMetadata, _SetNSISIconPreparationMode, 
-                       _SetNSImageCompositeFromRectIsInRepCoords, _SetNSLifeguardOnDuty, 
-                       _SetNSLifeguardTestable, _SetNSLoadNibDataPolicy, _SetNSOutlineViewValidateChanges, 
-                       _SetNSPasteboardRequiresSecureCoding, _SetNSPopoverWeakDelegate, 
-                       _SetNSSafeApertureCompatibilitySetsEnvironmentVariables, _SetNSSavePanelForceMicrosoftAccessoryViewCentering, 
-                       _SetNSSavePanelWorkAroundBadAccessoryViewFittingSizes, _SetNSScreenIsMutable, 
-                       _SetNSSplitViewWeakDelegate, _SetNSStackViewWeakDelegate, 
+                       _SetNSAllowApplicationDisableScreenUpdates, _SetNSAutoFillHeuristicControllerEnabled, 
+                       _SetNSAutomaticallyTrackKeyValueDependencies, _SetNSCollectionViewWeakDelegate, 
+                       _SetNSConservativeTAMICConstraintCreation, _SetNSConstraintBasedLayoutDetectAmbiguousViews, 
+                       _SetNSConstraintBasedLayoutEngageNonLazily, _SetNSDynamicPropertiesCaptureDependencyContextMetadata, 
+                       _SetNSISIconPreparationMode, _SetNSImageCompositeFromRectIsInRepCoords, 
+                       _SetNSLifeguardOnDuty, _SetNSLifeguardTestable, _SetNSLoadNibDataPolicy, 
+                       _SetNSOutlineViewValidateChanges, _SetNSPasteboardRequiresSecureCoding, 
+                       _SetNSPopoverWeakDelegate, _SetNSSafeApertureCompatibilitySetsEnvironmentVariables, 
+                       _SetNSSavePanelForceMicrosoftAccessoryViewCentering, _SetNSSavePanelWorkAroundBadAccessoryViewFittingSizes, 
+                       _SetNSScreenIsMutable, _SetNSSplitViewWeakDelegate, _SetNSStackViewWeakDelegate, 
                        _SetNSSynchronizeAppKitDefaults, _SetNSToolbarSynchronizeConfiguration, 
                        _SetNSUseRemoteSavePanel, _SetNSViewControllerSupports10_10Features, 
                        _SetNSViewThrowUnsatisfiableConstraints, _SetNSVisualEffectViewAlwaysUseBackdrop, 
@@ -1350,19 +1338,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
-  - target:          x86_64-maccatalyst
-    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
-  - target:          arm64e-maccatalyst
-    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
 install-name:    '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1380,21 +1355,8 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
-  - target:          x86_64-maccatalyst
-    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
-  - target:          arm64e-maccatalyst
-    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 856.3
+current-version: 857.8
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

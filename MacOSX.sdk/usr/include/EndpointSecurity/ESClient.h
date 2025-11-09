@@ -616,6 +616,15 @@ typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * 
  *       It is possible to both inspect and unmute the set of default muted paths and associated event types using the
  *       appropriate mute-related API, however it is not recommended to unmute these items.
  *
+ * @note The only supported way to check if an application is properly TCC authorized for Full Disk Access
+ *       is to call es_new_client and handling ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED in a way appropriate
+ *       to your application.  Most applications will want to ask the user for TCC authorization when
+ *       es_new_client returns ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED.
+ *       To direct the user to the Full Disk Access section in System Settings, applications can use the following URLs:
+ *       `x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles` (macOS 13 and later)
+ *       `x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles` (until macOS 12)
+ *       Applications are advised to use the new URL in macOS 13 as the old one may stop working in a future release.
+ *
  * @see es_retain_message
  * @see es_release_message
  * @see es_new_client_result_t

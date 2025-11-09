@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2C6B763D-2347-353E-ADCA-A8CA2A7AE423
-  - target:          x86_64-maccatalyst
-    value:           2C6B763D-2347-353E-ADCA-A8CA2A7AE423
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65AD99F0-C87D-305A-80BA-7B4E728E020A
-  - target:          arm64e-maccatalyst
-    value:           65AD99F0-C87D-305A-80BA-7B4E728E020A
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage'
-current-version: 126.1.1
+current-version: 126.3.5
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

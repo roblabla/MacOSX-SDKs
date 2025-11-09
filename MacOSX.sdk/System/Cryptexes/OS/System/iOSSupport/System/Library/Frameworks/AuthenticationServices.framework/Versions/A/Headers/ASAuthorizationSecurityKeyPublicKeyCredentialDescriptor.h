@@ -3,7 +3,7 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialDescriptor.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @abstract A string indicating a transport for communicating with an authenticator.
  */
@@ -46,4 +46,4 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

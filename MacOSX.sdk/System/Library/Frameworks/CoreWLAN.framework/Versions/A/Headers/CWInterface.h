@@ -360,7 +360,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result 
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Sets the Wi-Fi interface power state.
@@ -380,7 +380,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Sets the Wi-Fi interface channel.
@@ -404,7 +404,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Sets the Wi-Fi interface pairwise master key (PMK).
@@ -432,7 +432,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Sets the Wi-Fi interface WEP key.
@@ -579,7 +579,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Associates to a W-Fi network using the specified passphrase.
@@ -619,7 +619,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract
  * Associates to an enterprise W-Fi network using the specified 802.1X credentials.
@@ -652,7 +652,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract
  * Creates a computer-to-computer (IBSS) network.
@@ -677,7 +677,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This parameter is optional.
  *
  * @result
- * A BOOL value indicating whether or not an error occurred. YES indicates no error occurred.
+ * Returns YES upon success, or NO if an error occurred.
  *
  * @abstract 
  * Commits a CWConfiguration for the given Wi-Fi interface.

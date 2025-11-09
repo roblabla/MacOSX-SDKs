@@ -65,7 +65,10 @@ struct IOKit_allocator {
 
 } // end namespace os_detail
 
-template <typename T, typename Allocator = os_detail::IOKit_allocator>
+template <
+	typename T,
+	typename Allocator = os_detail::IOKit_allocator
+	>
 using OSAllocation = libkern::safe_allocation<T, Allocator, os_detail::panic_trapping_policy>;
 
 

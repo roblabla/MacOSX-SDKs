@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           77F887A4-F523-3DF7-9022-735DDB54E296
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           84C6A740-2CB5-34E0-9A20-89FB730259B0
 install-name:    '/System/Library/PrivateFrameworks/SyncedModels.framework/Versions/A/SyncedModels'
 swift-abi-version: 7
 exports:

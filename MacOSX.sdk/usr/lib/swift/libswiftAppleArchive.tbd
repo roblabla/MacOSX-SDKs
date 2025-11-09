@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           311C969E-C770-32F1-B78D-2B6DF2FFDF3E
-  - target:          x86_64-maccatalyst
-    value:           311C969E-C770-32F1-B78D-2B6DF2FFDF3E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9576E793-FF3E-3B5B-9A78-61D34D36C2A6
-  - target:          arm64e-maccatalyst
-    value:           9576E793-FF3E-3B5B-9A78-61D34D36C2A6
 install-name:    '/usr/lib/swift/libswiftAppleArchive.dylib'
-current-version: 364.60.3
+current-version: 364.100.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

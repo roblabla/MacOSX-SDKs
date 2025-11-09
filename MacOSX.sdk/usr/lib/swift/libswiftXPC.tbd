@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7255E51B-B2D3-3852-9AF3-33829D29581A
-  - target:          x86_64-maccatalyst
-    value:           7255E51B-B2D3-3852-9AF3-33829D29581A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           865933C1-E915-3AC2-8400-D307D3998A6A
-  - target:          arm64e-maccatalyst
-    value:           865933C1-E915-3AC2-8400-D307D3998A6A
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
 current-version: 6
 swift-abi-version: 7

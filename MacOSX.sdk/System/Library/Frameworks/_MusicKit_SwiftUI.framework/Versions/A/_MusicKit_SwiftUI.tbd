@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CA5F9FF1-AAD1-3885-9C6D-1794566B8CDF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DA6EE4A0-074E-3005-996D-33A3149A06B3
 install-name:    '/System/Library/Frameworks/_MusicKit_SwiftUI.framework/Versions/A/_MusicKit_SwiftUI'
 swift-abi-version: 7
 exports:
@@ -55,6 +48,14 @@ exports:
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV17messageIdentifierAC07MessageI0Vvg', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV17messageIdentifierAC07MessageI0VvpMV', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV17messageIdentifierAC07MessageI0Vvs', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignGroupSSSgvM', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignGroupSSSgvg', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignGroupSSSgvpMV', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignGroupSSSgvs', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignTokenSSSgvM', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignTokenSSSgvg', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignTokenSSSgvpMV', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV20_figaroCampaignTokenSSSgvs', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV2eeoiySbAE_AEtFZ', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV4hash4intoys6HasherVz_tF', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6action17messageIdentifier6itemID14affiliateToken08campaignN0AeC6ActionV_AC07MessageJ0V0aB00a4ItemL0VSgSSSgAStcfC', 
@@ -77,17 +78,6 @@ exports:
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsVs23CustomStringConvertibleAAMc', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMa', '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMn', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVN', '_$s17_MusicKit_SwiftUI12ArtworkImageV0cD04ViewAAMc', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV2eeoiySbAE_AEtFZ', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV4hash4intoys6HasherVz_tF', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV5widthSivg', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV5widthSivpMV', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV6heightSivg', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV6heightSivpMV', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV9hashValueSivg', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeV9hashValueSivpMV', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeVMa', '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeVMn', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeVN', '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeVSHAAMc', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV10ScaledSizeVSQAAMc', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV18automaticallySized4withAC0aB00E0V_tFZ', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvg', '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpMV', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpQOMQ', '_$s17_MusicKit_SwiftUI12ArtworkImageVMa', 
@@ -95,10 +85,10 @@ exports:
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_5width6heightAC0aB00E0V_12CoreGraphics7CGFloatVAKtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_5widthAC0aB00E0V_12CoreGraphics7CGFloatVtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_6heightAC0aB00E0V_12CoreGraphics7CGFloatVtcfC', 
-                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E18artworkURLResolver10Foundation3URLVSg0eF07ArtworkV_AD0K5ImageV10ScaledSizeVtcSgvM', 
-                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E18artworkURLResolver10Foundation3URLVSg0eF07ArtworkV_AD0K5ImageV10ScaledSizeVtcSgvg', 
-                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E18artworkURLResolver10Foundation3URLVSg0eF07ArtworkV_AD0K5ImageV10ScaledSizeVtcSgvpMV', 
-                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E18artworkURLResolver10Foundation3URLVSg0eF07ArtworkV_AD0K5ImageV10ScaledSizeVtcSgvs', 
+                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E34artworkCatalogConfigurationHandleryypcSgvM', 
+                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E34artworkCatalogConfigurationHandleryypcSgvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E34artworkCatalogConfigurationHandleryypcSgvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV010_MusicKit_aB0E34artworkCatalogConfigurationHandleryypcSgvs', 
                        '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctF', 
                        '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctFQOMQ' ]
 ...

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           565047B1-7AD9-3DD8-8264-0AF4E7026F73
-  - target:          x86_64-maccatalyst
-    value:           565047B1-7AD9-3DD8-8264-0AF4E7026F73
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           46F89198-0983-390B-BB61-3F7B25388B22
-  - target:          arm64e-maccatalyst
-    value:           46F89198-0983-390B-BB61-3F7B25388B22
 install-name:    '/System/Library/Frameworks/ManagedSettings.framework/Versions/A/ManagedSettings'
-current-version: 66
+current-version: 84
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -804,8 +791,8 @@ exports:
                        '_$s15ManagedSettings11PersistenceC19directoryAttributesSDySo18NSFileAttributeKeyaypGvgZ', 
                        '_$s15ManagedSettings11PersistenceC4read4fromSDySSSo8NSObjectCG10Foundation3URLV_tKFZ', 
                        '_$s15ManagedSettings11PersistenceC5write_2toySDySSSo8NSObjectCG_10Foundation3URLVtKFZ', 
-                       '_$s15ManagedSettings11PersistenceC6reinit15frameworkClientyAA19FrameworkClientable_p_tFZTj', 
-                       '_$s15ManagedSettings11PersistenceC6reinit15frameworkClientyAA19FrameworkClientable_p_tFZTq', 
+                       '_$s15ManagedSettings11PersistenceC6reinit16defaultContainerySS_tFZTj', 
+                       '_$s15ManagedSettings11PersistenceC6reinit16defaultContainerySS_tFZTq', 
                        '_$s15ManagedSettings11PersistenceC6sharedACSgvMZ', '_$s15ManagedSettings11PersistenceC6sharedACSgvgZ', 
                        '_$s15ManagedSettings11PersistenceC6sharedACSgvsZ', '_$s15ManagedSettings11PersistenceCMa', 
                        '_$s15ManagedSettings11PersistenceCMm', '_$s15ManagedSettings11PersistenceCMn', 
@@ -1050,10 +1037,7 @@ exports:
                        '_$s15ManagedSettings18TokenInitializableP5tokenAA0C0VyxGSgvgTq', 
                        '_$s15ManagedSettings18TokenInitializableP5tokenxAA0C0VyxG_tcfCTj', 
                        '_$s15ManagedSettings18TokenInitializableP5tokenxAA0C0VyxG_tcfCTq', 
-                       '_$s15ManagedSettings18TokenInitializableTL', '_$s15ManagedSettings19FrameworkClientableMp', 
-                       '_$s15ManagedSettings19FrameworkClientableP10isInternalSbvgTj', 
-                       '_$s15ManagedSettings19FrameworkClientableP10isInternalSbvgTq', 
-                       '_$s15ManagedSettings19FrameworkClientableTL', '_$s15ManagedSettings20EffectivePersistenceC09effectiveB3URL10Foundation0F0Vvg', 
+                       '_$s15ManagedSettings18TokenInitializableTL', '_$s15ManagedSettings20EffectivePersistenceC09effectiveB3URL10Foundation0F0Vvg', 
                        '_$s15ManagedSettings20EffectivePersistenceC09effectiveB3URL10Foundation0F0VvpMV', 
                        '_$s15ManagedSettings20EffectivePersistenceC6sharedACSgvMZ', 
                        '_$s15ManagedSettings20EffectivePersistenceC6sharedACSgvgZ', 
@@ -1195,10 +1179,6 @@ exports:
                        '_$sSo15NSXPCConnectionC15ManagedSettings14XPCConnectableACWP', 
                        '_$sSo15NSXPCConnectionC15ManagedSettingsE15setNonLaunchingyySbF', 
                        '_$sSo18NSNotificationNamea15ManagedSettingsE011mcEffectiveD7ChangedABvgZ', 
-                       '_$sSo18NSNotificationNamea15ManagedSettingsE014effectiveMediaD7ChangedABvgZ', 
-                       '_OBJC_CLASS_$__TtC15ManagedSettings20ShieldActionDelegate', 
-                       '_OBJC_CLASS_$__TtC15ManagedSettings23OverrideSettingsHandler', 
-                       '_OBJC_METACLASS_$__TtC15ManagedSettings20ShieldActionDelegate', 
-                       '_OBJC_METACLASS_$__TtC15ManagedSettings23OverrideSettingsHandler' ]
+                       '_$sSo18NSNotificationNamea15ManagedSettingsE014effectiveMediaD7ChangedABvgZ' ]
     objc-classes:    [ _TtC15ManagedSettings20ShieldActionDelegate, _TtC15ManagedSettings23OverrideSettingsHandler ]
 ...

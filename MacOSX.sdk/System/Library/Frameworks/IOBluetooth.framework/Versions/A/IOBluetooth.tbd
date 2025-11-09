@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C0C0B536-D3B0-3139-AA3B-E44C5379A1D9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           37FFD0EF-18FD-39D5-BDCE-7C1392AA52D2
 install-name:    '/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

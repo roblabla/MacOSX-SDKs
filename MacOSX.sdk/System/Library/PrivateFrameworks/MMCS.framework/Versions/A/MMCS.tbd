@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           47232B96-FA9B-32D3-ADCD-189AAC1E98DB
-  - target:          x86_64-maccatalyst
-    value:           47232B96-FA9B-32D3-ADCD-189AAC1E98DB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DA64CCF0-686C-36FC-B60A-09C0ED9E56B1
-  - target:          arm64e-maccatalyst
-    value:           DA64CCF0-686C-36FC-B60A-09C0ED9E56B1
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
-current-version: 2000.129.2
+current-version: 2050.13.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

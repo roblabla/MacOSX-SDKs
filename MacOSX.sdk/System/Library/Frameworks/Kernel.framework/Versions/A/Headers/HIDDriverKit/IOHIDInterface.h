@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOHIDInterface.iig */
+/* iig(DriverKit-256.100.8) generated from IOHIDInterface.iig */
 
 /* IOHIDInterface.iig:1-46 */
 /*
@@ -81,7 +81,7 @@ public:
      * @return
      * true on success.
      */
-    virtual bool init() override;
+    virtual bool init() override __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function free
@@ -89,7 +89,7 @@ public:
      * @abstract
      * frees the IOHIDInterface object.
      */
-    virtual void free() override;
+    virtual void free() override __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function ReportAvailable
@@ -120,7 +120,7 @@ public:
                                  uint32_t reportLength,
                                  IOHIDReportType type,
                                  IOMemoryDescriptor *report,
-                                 OSAction *action TARGET) LOCAL = 0;
+                                 OSAction *action TARGET) LOCAL __attribute__((availability(driverkit, introduced=19.0))) = 0;
     
     /*!
      * @function AddReportToPool
@@ -134,7 +134,7 @@ public:
      * @return
      * Returns kIOReturnSuccess on success.
      */
-    virtual kern_return_t AddReportToPool(IOBufferMemoryDescriptor *report);
+    virtual kern_return_t AddReportToPool(IOBufferMemoryDescriptor *report) __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function Open
@@ -156,7 +156,7 @@ public:
      */
     virtual kern_return_t Open(IOService *forClient,
                                IOOptionBits options,
-                               OSAction *action TYPE(ReportAvailable));
+                               OSAction *action TYPE(ReportAvailable)) __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function Close
@@ -174,7 +174,7 @@ public:
      * Returns kIOReturnSuccess on success.
      */
     virtual kern_return_t Close(IOService *forClient,
-                                IOOptionBits options);
+                                IOOptionBits options) __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function SetReport
@@ -202,7 +202,7 @@ public:
     virtual kern_return_t SetReport (IOMemoryDescriptor *        report,
                                      IOHIDReportType             reportType,
                                      uint32_t                    reportID            = 0,
-                                     IOOptionBits                options             = 0);
+                                     IOOptionBits                options             = 0) __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function GetReport
@@ -230,7 +230,7 @@ public:
     virtual kern_return_t GetReport (IOMemoryDescriptor *        report,
                                      IOHIDReportType             reportType,
                                      uint32_t                    reportID            = 0,
-                                     IOOptionBits                options             = 0);
+                                     IOOptionBits                options             = 0) __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function processReport
@@ -259,7 +259,7 @@ public:
                                uint8_t *report,
                                uint32_t reportLength,
                                IOHIDReportType type,
-                               uint32_t reportID) LOCALONLY;
+                               uint32_t reportID) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function getElements
@@ -271,7 +271,7 @@ public:
      * @return
      * Returns an array of IOHIDElement objects.
      */
-    virtual OSArray *getElements() LOCALONLY;
+    virtual OSArray *getElements() LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
     
     /*!
      * @function commitElements
@@ -290,7 +290,7 @@ public:
      * Returns kIOReturnSuccess on success.
      */
     virtual kern_return_t commitElements(OSArray *elements,
-                                         IOHIDElementCommitDirection direction) LOCALONLY;
+                                         IOHIDElementCommitDirection direction) LOCALONLY __attribute__((availability(driverkit, introduced=19.0)));
 };
 
 #undef KERNEL
@@ -399,25 +399,25 @@ public:\
         IOHIDReportType type,\
         IOMemoryDescriptor * report,\
         OSAction * action,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     AddReportToPool(\
         IOBufferMemoryDescriptor * report,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     Open(\
         IOService * forClient,\
         IOOptionBits options,\
         OSAction * action,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     Close(\
         IOService * forClient,\
         IOOptionBits options,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     SetReport(\
@@ -425,7 +425,7 @@ public:\
         IOHIDReportType reportType,\
         uint32_t reportID = 0,\
         IOOptionBits options = 0,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
     kern_return_t\
     GetReport(\
@@ -433,7 +433,7 @@ public:\
         IOHIDReportType reportType,\
         uint32_t reportID = 0,\
         IOOptionBits options = 0,\
-        OSDispatchMethod supermethod = NULL);\
+        OSDispatchMethod supermethod = NULL) __attribute__((availability(driverkit,introduced=19.0)));\
 \
 \
 protected:\
@@ -559,11 +559,11 @@ public:\
 \
     virtual bool\
     init(\
-) APPLE_KEXT_OVERRIDE;\
+) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual void\
     free(\
-) APPLE_KEXT_OVERRIDE;\
+) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual void\
     processReport(\
@@ -571,16 +571,16 @@ public:\
         uint8_t * report,\
         uint32_t reportLength,\
         IOHIDReportType type,\
-        uint32_t reportID) APPLE_KEXT_OVERRIDE;\
+        uint32_t reportID) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual OSArray *\
     getElements(\
-) APPLE_KEXT_OVERRIDE;\
+) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
     virtual kern_return_t\
     commitElements(\
         OSArray * elements,\
-        IOHIDElementCommitDirection direction) APPLE_KEXT_OVERRIDE;\
+        IOHIDElementCommitDirection direction) APPLE_KEXT_OVERRIDE __attribute__((availability(driverkit,introduced=19.0)));\
 \
 
 
@@ -602,7 +602,7 @@ public:
 
 #if !KERNEL
 
-class IOHIDInterfaceInterface : public OSInterface
+class  IOHIDInterfaceInterface : public OSInterface
 {
 public:
     virtual kern_return_t
@@ -616,14 +616,14 @@ public:
         uint8_t * report,
         uint32_t reportLength,
         IOHIDReportType type,
-        uint32_t reportID) = 0;
+        uint32_t reportID) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual OSArray *
-    getElements() = 0;
+    getElements() __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     virtual kern_return_t
     commitElements(OSArray * elements,
-        IOHIDElementCommitDirection direction) = 0;
+        IOHIDElementCommitDirection direction) __attribute__((availability(driverkit,introduced=19.0))) = 0;
 
     kern_return_t
     getElementValues_Call(OSArray * elements)  { return getElementValues(elements); };\
@@ -636,14 +636,14 @@ public:
         uint8_t * report,
         uint32_t reportLength,
         IOHIDReportType type,
-        uint32_t reportID)  { return processReport(timestamp, report, reportLength, type, reportID); };\
+        uint32_t reportID) __attribute__((availability(driverkit,introduced=19.0)))  { return processReport(timestamp, report, reportLength, type, reportID); };\
 
     OSArray *
-    getElements_Call()  { return getElements(); };\
+    getElements_Call() __attribute__((availability(driverkit,introduced=19.0)))  { return getElements(); };\
 
     kern_return_t
     commitElements_Call(OSArray * elements,
-        IOHIDElementCommitDirection direction)  { return commitElements(elements, direction); };\
+        IOHIDElementCommitDirection direction) __attribute__((availability(driverkit,introduced=19.0)))  { return commitElements(elements, direction); };\
 
 };
 

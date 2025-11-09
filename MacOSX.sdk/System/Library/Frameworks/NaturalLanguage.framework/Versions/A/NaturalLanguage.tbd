@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9086418F-AF23-340B-B32D-9EC1BAC20C49
-  - target:          x86_64-maccatalyst
-    value:           9086418F-AF23-340B-B32D-9EC1BAC20C49
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0C64D98E-0B58-3C65-9513-A91236938378
-  - target:          arm64e-maccatalyst
-    value:           0C64D98E-0B58-3C65-9513-A91236938378
 install-name:    '/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage'
 current-version: 108
 exports:

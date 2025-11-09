@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -library-level other -module-name Network
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3013.60.42
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -library-level other -module-name Network
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3100.101.1
 import Darwin
 import Dispatch
 import Foundation
@@ -387,7 +387,7 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public class NWProtocolFramer : Network.NWProtocol {
   @_hasMissingDesignatedInitializers public class Definition : Network.NWProtocolDefinition {
-    public init(implementation: Network.NWProtocolFramerImplementation.Type)
+    public init(implementation: any Network.NWProtocolFramerImplementation.Type)
     @objc deinit
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Options : Network.NWProtocolOptions {
@@ -615,6 +615,18 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
     get
   }
   public static func == (a: Network.NWError, b: Network.NWError) -> Swift.Bool
+}
+@available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+extension Network.NWError : Foundation.CustomNSError {
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+  public var _domain: Swift.String {
+    get
+  }
 }
 @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network13_NWConnection) final public class NWConnection : Swift.CustomDebugStringConvertible {
@@ -1356,9 +1368,9 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public func extract(connectionTo: Network.NWEndpoint? = nil, using: Network.NWProtocolOptions? = nil) -> Network.NWConnection?
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   final public func reinsert(connection: Network.NWConnection) -> Swift.Bool
-  final public let descriptor: Network.NWGroupDescriptor
+  final public let descriptor: any Network.NWGroupDescriptor
   final public let parameters: Network.NWParameters
-  public init(with: Network.NWGroupDescriptor, using: Network.NWParameters)
+  public init(with: any Network.NWGroupDescriptor, using: Network.NWParameters)
   final public func start(queue: Dispatch.DispatchQueue)
   final public var queue: Dispatch.DispatchQueue? {
     get

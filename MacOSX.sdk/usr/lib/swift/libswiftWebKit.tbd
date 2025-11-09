@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C9F58E71-D1E4-34DE-A78B-3E263CA9A9C9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E6C67D90-102B-3BC3-9AC4-EDF75E33631E
 install-name:    '/usr/lib/swift/libswiftWebKit.dylib'
-current-version: 614.3.7
+current-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -12,5 +12,15 @@
 #else
 #define PK_EXPORT           extern __attribute__((visibility("default")))
 #endif
-
+/// Constants reflecting the push types you want to support.
+///
+/// ## Topics
+///
+/// ### Notification Types
+///
+/// - ``PushKit/PKPushTypeComplication``
+/// - ``PushKit/PKPushTypeFileProvider``
+/// - ``PushKit/PKPushTypeVoIP``
+///
+/// 
 typedef NSString *PKPushType NS_STRING_ENUM;

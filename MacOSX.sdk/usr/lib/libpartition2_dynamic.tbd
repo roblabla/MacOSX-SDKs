@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7CE884DF-5E1F-3367-8DE9-EC5D247A5BA5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7BDCE012-FF4C-35A7-A296-3DAC47BB6781
 install-name:    '/usr/lib/libpartition2_dynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

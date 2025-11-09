@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           86D5B7ED-0552-3683-90BB-E2E5F5EB0326
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           035C9E0D-DCF0-3240-A0CB-EA5540F66075
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

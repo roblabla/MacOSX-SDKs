@@ -36,6 +36,9 @@ Classes:
     MethodKind: Instance
 - Name: HMTimerTrigger
   Methods:
+  - Selector: 'initWithName:fireDate:recurrence:'
+    SwiftName: 'init(name:fireDate:recurrence:)'
+    MethodKind: Instance
   - Selector: 'initWithName:fireDate:timeZone:recurrence:recurrenceCalendar:'
     SwiftName: 'init(name:fireDate:timeZone:recurrence:recurrenceCalendar:)'
     MethodKind: Instance

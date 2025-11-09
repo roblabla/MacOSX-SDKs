@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5B1AE2C2-049C-36B4-ADFA-131DC19560EA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AA87C115-991B-3134-92FC-2B0E8946BF47
 install-name:    '/System/Library/PrivateFrameworks/AppleDepth.framework/Versions/A/AppleDepth'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,8 +8,10 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __Z13ADMLModelPathP8NSStringa ]
-    weak-symbols:    [ __ZTISt11logic_error, __ZTISt12length_error, __ZTISt9exception, 
-                       __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt9exception ]
+    weak-symbols:    [ __ZTISt11logic_error, __ZTISt12length_error, __ZTISt20bad_array_new_length, 
+                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSSt11logic_error, 
+                       __ZTSSt12length_error, __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, 
+                       __ZTSSt9exception ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ADExecutorCalibrationAttachmentName, _AdaptiveCorrection_applyDistortionModel, 
                        _AdaptiveCorrection_applyDistortionModelSimplified, _AdaptiveCorrection_applyTemporalCorrectionState, 
@@ -34,22 +29,24 @@ exports:
                        _FundamentalDistortionError_MeanVal, _FundamentalDistortionError_MeanValPlusGradient, 
                        _FundamentalEpipolarErrorForCalModel, _FundamentalEpipolarError_ABSVec, 
                        _FundamentalEpipolarError_MeanVal, _FundamentalEpipolarError_MeanValPlusGradient, 
-                       _FundamentalEpipolarError_precomputeFundamental, _PCE_BIAS_METADATA_KEY, 
-                       _SelectPointsWithEpipolarThreshold, _TRAINING_WIDTH_METADATA_KEY, 
-                       __Z11dumpTextureNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPU21objcproto10MTLTexture11objc_object, 
+                       _FundamentalEpipolarError_precomputeFundamental, _OUTPUT_DISPARITY_BIAS_METADATA_KEY, 
+                       _PCE_BIAS_METADATA_KEY, _SelectPointsWithEpipolarThreshold, 
+                       _TRAINING_WIDTH_METADATA_KEY, __Z11dumpTextureNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPU21objcproto10MTLTexture11objc_object, 
                        __Z11getterDummyP11objc_objectP13objc_selector, __Z11setterDummyP11objc_objectP13objc_selectorS0_, 
                        __Z13bidiagonalSVDlPdS_S_S_S_, __Z16dumpRawImageFileNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPfm, 
                        __Z16dumpRawImageFileNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPhm, 
                        __Z16dumpRawImageFileNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPtm, 
                        __Z17calibrationAttachP10__CVBufferPK14__CFDictionary, __Z25calibrationFromAttachmentP10__CVBuffer, 
-                       __Z31debugQuickLookObjectFromCGImageP7CGImage, __Z6dlasr_PKcS0_PlS1_PdS2_S2_S1_, 
-                       __Z6svd_oslPdS_S_S_, __Z7dbdsqr_PlS_S_PdS0_S0_S_S0_S_S0_S_, 
-                       __Z7dlasv2_PdS_S_S_S_S_S_S_S_, __ZN10ImageUtils12CloseRect2x2ERK6MatrixIbEPS1_, 
-                       __ZN10ImageUtils12CloseRect3x3ERK6MatrixIbEPS1_, __ZN10ImageUtils12ErodeRect2x2ERK6MatrixIbEPS1_, 
-                       __ZN10ImageUtils12ErodeRect3x3ERK6MatrixIbEPS1_, __ZN10ImageUtils13DilateRect2x2ERK6MatrixIbEPS1_, 
-                       __ZN10ImageUtils13DilateRect3x3ERK6MatrixIbEPS1_, __ZN10ImageUtils13OtsuThresholdERK6MatrixIdE, 
-                       __ZN12ADDebugUtils20isVerboseLogsEnabledEv, __ZN12ADDebugUtils21setVerboseLogsEnabledEb, 
-                       __ZN12SparseMatrix11allocateMemEv, __ZN12SparseMatrix14SolveLTInPlaceEP11MatrixNxPtsILj1EdE, 
+                       __Z29analyzeOneShotExtremeRotationjfffP8NSStringPj, __Z31debugQuickLookObjectFromCGImageP7CGImage, 
+                       __Z39fireOneShotLargeRotationEventIfDetectedPK8NSStringff14OneShotBitMaskjPS_Pj, 
+                       __Z6dlasr_PKcS0_PlS1_PdS2_S2_S1_, __Z6svd_oslPdS_S_S_, __Z7dbdsqr_PlS_S_PdS0_S0_S_S0_S_S0_S_, 
+                       __Z7dlasv2_PdS_S_S_S_S_S_S_S_, __Z9findModelP8NSStringS0_, 
+                       __ZN10ImageUtils12CloseRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils12CloseRect3x3ERK6MatrixIbEPS1_, 
+                       __ZN10ImageUtils12ErodeRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils12ErodeRect3x3ERK6MatrixIbEPS1_, 
+                       __ZN10ImageUtils13DilateRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils13DilateRect3x3ERK6MatrixIbEPS1_, 
+                       __ZN10ImageUtils13OtsuThresholdERK6MatrixIdE, __ZN12ADDebugUtils20isVerboseLogsEnabledEv, 
+                       __ZN12ADDebugUtils21setVerboseLogsEnabledEb, __ZN12SparseMatrix11allocateMemEv, 
+                       __ZN12SparseMatrix14SolveLTInPlaceEP11MatrixNxPtsILj1EdE, 
                        __ZN12SparseMatrix22ReverseStorageOfColumnEi, __ZN12SparseMatrix4ZeroEv, 
                        __ZN12SparseMatrix6ExpandEmm, __ZN12SparseMatrix7SqueezeEmm, 
                        __ZN12SparseMatrix7freeMemEv, __ZN12SparseMatrix8AddValueEiid, 
@@ -69,20 +66,22 @@ exports:
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
                        __ZN13ADCommonUtils17computeMaximalRoiE6CGSizeS0_, __ZN13ADCommonUtils17machTimeToSecondsEy, 
-                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
+                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils18extrinsicsToStringE13simd_float4x3, 
+                       __ZN13ADCommonUtils18intrinsicsToStringE13simd_float3x3, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
                        __ZN13ADCommonUtils21runtimePlatformHasANEEv, __ZN13ADCommonUtils22matrixForImageRotationE10ADRotation, 
                        __ZN13ADCommonUtils22rotationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils23matrixFromArrayRowFirstEP7NSArray, __ZN13ADCommonUtils25translationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils26matrixFromArrayColumnFirstEP7NSArray, 
                        __ZN13ADCommonUtils28transformMetersToMillimitersE13simd_float4x4, 
                        __ZN13ADCommonUtils28transformMillimitersToMetersE13simd_float4x4, 
-                       __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, 
-                       __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
-                       __ZN16CRandomGenerator10NormalRandEf, __ZN16CRandomGenerator11UniformRandEv, 
-                       __ZN16CRandomGenerator4InitEj, __ZN16CRandomGeneratorC1Ej, 
-                       __ZN16CRandomGeneratorC2Ej, __ZN16CRandomGeneratorD0Ev, __ZN16CRandomGeneratorD1Ev, 
-                       __ZN16CRandomGeneratorD2Ev, __ZN16PixelBufferUtils11getJetColorEfRfS0_S0_, 
-                       __ZN16PixelBufferUtils13asPixelBufferEmmjPv, __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferS1_U13block_pointerFvPvjS2_jEi, 
+                       __ZN13ADCommonUtils31runtimePlatformANEProductStringEv, __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, 
+                       __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
+                       __ZN13ADCommonUtils9hashArrayEP7NSArray, __ZN16CRandomGenerator10NormalRandEf, 
+                       __ZN16CRandomGenerator11UniformRandEv, __ZN16CRandomGenerator4InitEj, 
+                       __ZN16CRandomGeneratorC1Ej, __ZN16CRandomGeneratorC2Ej, __ZN16CRandomGeneratorD0Ev, 
+                       __ZN16CRandomGeneratorD1Ev, __ZN16CRandomGeneratorD2Ev, __ZN16PixelBufferUtils10alphaBlendEP10__CVBufferS1_fPS1_b, 
+                       __ZN16PixelBufferUtils11getJetColorEfRfS0_S0_, __ZN16PixelBufferUtils13asPixelBufferEmmjPv, 
+                       __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferS1_U13block_pointerFvPvjS2_jEi, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferU13block_pointerFvPvjEi, 
                        __ZN16PixelBufferUtils14asVImageBufferEP10__CVBuffer, __ZN16PixelBufferUtils14asVImageBufferEP10__CVBufferm, 
                        __ZN16PixelBufferUtils14copyAttachmentEP10__CVBufferPK10__CFStringP16CVAttachmentMode, 
@@ -113,7 +112,7 @@ exports:
                        __ZN16PixelBufferUtils27rotationBetweenOrientationsE26CGImagePropertyOrientationS0_, 
                        __ZN16PixelBufferUtils29createPixelBufferWithSameSizeEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils29scaleConvertRotatePixelBufferEP10__CVBufferi6CGRectS1_PS1_S3_b, 
-                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPf, 
+                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPfS1_f, 
                        __ZN16PixelBufferUtils32componentsPerPixelForPixelFormatEjm, 
                        __ZN16PixelBufferUtils32createConvertedPixelBufferFormatEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils32pixelBufferFromRawFileWithBufferEPKcP10__CVBuffer, 
@@ -242,13 +241,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           13C40E6A-456D-3B33-9AA4-0D9B4962E305
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9DE075B9-19A1-3FCD-9DC2-0EEFDAA42F3F
 install-name:    '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore'
 current-version: 0
 compatibility-version: 0
@@ -280,15 +272,17 @@ exports:
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
                        __ZN13ADCommonUtils17computeMaximalRoiE6CGSizeS0_, __ZN13ADCommonUtils17machTimeToSecondsEy, 
-                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
+                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils18extrinsicsToStringE13simd_float4x3, 
+                       __ZN13ADCommonUtils18intrinsicsToStringE13simd_float3x3, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
                        __ZN13ADCommonUtils21runtimePlatformHasANEEv, __ZN13ADCommonUtils22matrixForImageRotationE10ADRotation, 
                        __ZN13ADCommonUtils22rotationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils23matrixFromArrayRowFirstEP7NSArray, __ZN13ADCommonUtils25translationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils26matrixFromArrayColumnFirstEP7NSArray, 
                        __ZN13ADCommonUtils28transformMetersToMillimitersE13simd_float4x4, 
                        __ZN13ADCommonUtils28transformMillimitersToMetersE13simd_float4x4, 
-                       __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, 
-                       __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
+                       __ZN13ADCommonUtils31runtimePlatformANEProductStringEv, __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, 
+                       __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
+                       __ZN13ADCommonUtils9hashArrayEP7NSArray, __ZN16PixelBufferUtils10alphaBlendEP10__CVBufferS1_fPS1_b, 
                        __ZN16PixelBufferUtils11getJetColorEfRfS0_S0_, __ZN16PixelBufferUtils13asPixelBufferEmmjPv, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferS1_U13block_pointerFvPvjS2_jEi, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferU13block_pointerFvPvjEi, 
@@ -321,7 +315,7 @@ exports:
                        __ZN16PixelBufferUtils27rotationBetweenOrientationsE26CGImagePropertyOrientationS0_, 
                        __ZN16PixelBufferUtils29createPixelBufferWithSameSizeEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils29scaleConvertRotatePixelBufferEP10__CVBufferi6CGRectS1_PS1_S3_b, 
-                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPf, 
+                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPfS1_f, 
                        __ZN16PixelBufferUtils32componentsPerPixelForPixelFormatEjm, 
                        __ZN16PixelBufferUtils32createConvertedPixelBufferFormatEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils32pixelBufferFromRawFileWithBufferEPKcP10__CVBuffer, 
@@ -362,9 +356,10 @@ exports:
     objc-classes:    [ ADAggregationParameters, ADCameraCalibration, ADDynamicPolynomialsLensDistortionModel, 
                        ADEspressoBufferHandle, ADEspressoImageDescriptor, ADEspressoInferenceDescriptor, 
                        ADEspressoRunner, ADEspressoRunnerV1, ADEspressoRunnerV2, 
-                       ADImageDescriptor, ADImageSupportedSize, ADInterSessionFilter, 
-                       ADInterSessionFilterParameters, ADJasperPointCloud, ADJasperPointCloudFilterParamaters, 
-                       ADJasperPointCloudFilterParameters, ADLayoutUtils, ADMagnificationForRadiusLensDistortionModel, 
+                       ADFigCameraCalibrationSource, ADImageDescriptor, ADImageSupportedSize, 
+                       ADInterSessionFilter, ADInterSessionFilterParameters, ADJasperPointCloud, 
+                       ADJasperPointCloudFilterParamaters, ADJasperPointCloudFilterParameters, 
+                       ADLayoutUtils, ADMagnificationForRadiusLensDistortionModel, 
                        ADMillimeterRadiusPairsLensDistortionModel, ADMutableCameraCalibration, 
                        ADMutableJasperPointCloud, ADNilDistortionModel, ADPointCloudAggregator, 
                        ADPolynomialsLensDistortionModel, ADRefinedPolynomialsLensDistortionModel, 

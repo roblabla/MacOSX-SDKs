@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An object subclass representing a glasses prescription
  */
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
-@interface HKGlassesPrescription : HKVisionPrescription
+@interface HKGlassesPrescription : HKVisionPrescription <NSSecureCoding, NSCopying>
 
 /*!
  @property      rightEye

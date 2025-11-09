@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DB44C568-848D-3DCA-9573-BEC0AE792296
-  - target:          x86_64-maccatalyst
-    value:           DB44C568-848D-3DCA-9573-BEC0AE792296
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0A925280-1693-32A9-8EE7-646AA7677B18
-  - target:          arm64e-maccatalyst
-    value:           0A925280-1693-32A9-8EE7-646AA7677B18
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1372,19 +1359,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           97551A0B-6BD5-32FE-8501-A50BDCCE15F7
-  - target:          x86_64-maccatalyst
-    value:           97551A0B-6BD5-32FE-8501-A50BDCCE15F7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CB7AC1C8-CEE8-3E72-A11C-DEA1356D2B79
-  - target:          arm64e-maccatalyst
-    value:           CB7AC1C8-CEE8-3E72-A11C-DEA1356D2B79
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

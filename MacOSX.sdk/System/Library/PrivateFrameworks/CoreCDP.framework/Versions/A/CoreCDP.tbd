@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5E3DE08A-5290-3DF5-9B7E-6FB19A0F54BB
-  - target:          x86_64-maccatalyst
-    value:           5E3DE08A-5290-3DF5-9B7E-6FB19A0F54BB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           47AD4CDF-4FC3-3FA5-9EBC-CF750BEC0D45
-  - target:          arm64e-maccatalyst
-    value:           47AD4CDF-4FC3-3FA5-9EBC-CF750BEC0D45
 install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -38,23 +25,28 @@ exports:
                        __CDPStateErrorWithUnderlying, __CDPSuffixForDeviceClass, 
                        __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass, 
                        __CDPWalrusStateChangeDarwinNotification, __CDPWebAccessStateChangeDarwinNotification, 
-                       _kCDPAccountRpdProbationFirstSeenDateKey, _kCDPCAErrorCode, 
-                       _kCDPCAErrorDomain, _kCDPCAWasSuccess, _kCDPGateFlag, _kCDPPCSServiceReminders, 
-                       _kCDPSuite ]
+                       _kCDPAccountRpdProbationFirstSeenDateKey, _kCDPCADomainForDomainNotInAllowlist, 
+                       _kCDPCAErrorCode, _kCDPCAErrorDomain, _kCDPCAEscrowWalrusStatus, 
+                       _kCDPCAOctagonWalrusStatus, _kCDPCAPCSWalrusStatus, _kCDPCAUnderlyingErrorCode, 
+                       _kCDPCAUnderlyingErrorDomain, _kCDPCAVersion, _kCDPCAWalrusStatus, 
+                       _kCDPCAWalrusStatusChange, _kCDPCAWasSuccess, _kCDPPCSServiceReminders ]
     objc-classes:    [ CDPAccount, CDPAccountRepresentation, CDPAuthProviderProxy, 
-                       CDPCABackupRecoveryReporter, CDPCAReporter, CDPCircleProxyImpl, 
+                       CDPCABackupRecoveryReporter, CDPCABaseRecoveryKeyReporter, 
+                       CDPCACustodianRecoveryReporter, CDPCARecoveryKeyCreationReporter, 
+                       CDPCARecoveryKeyDeletionReporter, CDPCARecoveryKeyVerificationReporter, 
+                       CDPCAReporter, CDPCAWalrusReporter, CDPCircleProxyImpl, CDPCombinedWalrusStatus, 
                        CDPContext, CDPController, CDPCustodianRecoveryInfo, CDPCustodianRecoveryKeyController, 
                        CDPDaemonConnection, CDPDataPrivacyController, CDPDevice, 
                        CDPEscrowRecordReport, CDPEscrowRecordViability, CDPFollowUpContext, 
-                       CDPFollowUpController, CDPInheritanceTrustController, CDPKeychainSync, 
-                       CDPLocalDevice, CDPLocalDeviceSecretHandler, CDPLocalDeviceSecretProxyImpl, 
-                       CDPLocalSecret, CDPLocalizedStringBuilder, CDPManateeStateController, 
-                       CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, CDPRecoveryController, 
-                       CDPRecoveryFlowContext, CDPRecoveryKeySecretValidatorProxyImpl, 
-                       CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
-                       CDPStateController, CDPStateUIProviderProxy, CDPTermsInfoBackupController, 
-                       CDPToolFakeUIProvider, CDPUpdateDataPrivacyContext, CDPUtilities, 
-                       CDPWalrusNotificationHandler, CDPWalrusStateCache, CDPWalrusStateController, 
+                       CDPFollowUpController, CDPInheritanceTrustController, CDPKeychainItemDescriptor, 
+                       CDPKeychainSync, CDPLocalDevice, CDPLocalDeviceSecretHandler, 
+                       CDPLocalDeviceSecretProxyImpl, CDPLocalSecret, CDPLocalizedStringBuilder, 
+                       CDPManateeStateController, CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, 
+                       CDPRecoveryController, CDPRecoveryFlowContext, CDPRecoveryKeyCache, 
+                       CDPRecoveryKeySecretValidatorProxyImpl, CDPRecoveryKeyValidatorProxyImpl, 
+                       CDPRemoteDeviceSecretValidator, CDPStateController, CDPStateUIProviderProxy, 
+                       CDPTermsInfoBackupController, CDPToolFakeUIProvider, CDPUpdateDataPrivacyContext, 
+                       CDPUtilities, CDPWalrusNotificationHandler, CDPWalrusStateController, 
                        CDPWebAccessNotificationHandler, CDPWebAccessStateCache, CDPWebAccessStateController ]
     objc-ivars:      [ CDPDevice._deviceColor, CDPDevice._enclosureColor, CDPDevice._hasNumericSecret, 
                        CDPDevice._hasRandomSecret, CDPDevice._isCurrentDevice, CDPDevice._isUsingMultipleiCSC, 

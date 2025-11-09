@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1E4B036D-7492-315E-B674-0D62EC220878
-  - target:          x86_64-maccatalyst
-    value:           1E4B036D-7492-315E-B674-0D62EC220878
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F66C6999-7753-30C5-A830-78E618596245
-  - target:          arm64e-maccatalyst
-    value:           F66C6999-7753-30C5-A830-78E618596245
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 802
+current-version: 804.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,14 +40,16 @@ exports:
                        _CUIGetFormatForFeatureSetAndPixelFormat, _CUIGetRGBAImageBuffer, 
                        _CUIGetSVGAttributeUnitScale, _CUIHitTest, _CUIImageCompressedWithColorQuantization, 
                        _CUIImageIsMonochrome, _CUIImageIsWideGamut, _CUIKeyFormatToArrayString, 
-                       _CUILogLogToStderr, _CUIMaxDimensionForVectorGlyph, _CUIMaxScaleForTargetPlatform, 
-                       _CUIMinDimensionForVectorGlyph, _CUIMinScaleForTargetPlatform, 
-                       _CUIParseDeploymentTarget, _CUIPlaceHolderRendition, _CUIPlatformForPlatformString, 
-                       _CUIPlatformNameForPlatform, _CUIPointSizeForDimensionForVectorGlyph, 
-                       _CUIPreferredVectorGlyphConfigurationsForPlatform, _CUIRendererCopyProperties, 
-                       _CUIRendererSetProperties, _CUIRenditionKeyCopy, _CUIRenditionKeyFormatRemoveAttribute, 
-                       _CUIRenditionKeyHasIdentifier, _CUIRenditionKeySetValueForAttribute, 
-                       _CUIRenditionKeyStandardize, _CUIRenditionKeyTokenCount, _CUIRenditionKeyValueForAttribute, 
+                       _CUILogEnableRenditionLog, _CUILogHandle, _CUILogLogToStderr, 
+                       _CUILogRenditionLogEnabled, _CUIMaxDimensionForVectorGlyph, 
+                       _CUIMaxScaleForTargetPlatform, _CUIMinDimensionForVectorGlyph, 
+                       _CUIMinScaleForTargetPlatform, _CUIParseDeploymentTarget, 
+                       _CUIPlaceHolderRendition, _CUIPlatformForPlatformString, _CUIPlatformNameForPlatform, 
+                       _CUIPointSizeForDimensionForVectorGlyph, _CUIPreferredVectorGlyphConfigurationsForPlatform, 
+                       _CUIRendererCopyProperties, _CUIRendererSetProperties, _CUIRenditionKeyCopy, 
+                       _CUIRenditionKeyFormatRemoveAttribute, _CUIRenditionKeyHasIdentifier, 
+                       _CUIRenditionKeySetValueForAttribute, _CUIRenditionKeyStandardize, 
+                       _CUIRenditionKeyTokenCount, _CUIRenditionKeyValueForAttribute, 
                        _CUISDFTexturesSupported, _CUISVGAttributeGetBoolean, _CUISVGNodeCanBeRepresentedAsPath, 
                        _CUISVGNodeGetTransform, _CUISetCustomColorInContext, _CUISetDebugValue, 
                        _CUISetUpContext, _CUISystemTheme, _CUISystemThemeRenditionKeyFormat, 

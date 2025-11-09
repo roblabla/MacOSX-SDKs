@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E97E6C94-635C-34FA-83D5-855420A89FBA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D9D15060-200F-3EC3-8E9C-A8F9DBE45204
 install-name:    '/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

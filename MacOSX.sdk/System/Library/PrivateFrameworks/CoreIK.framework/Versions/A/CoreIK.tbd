@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           95EF8F01-387D-3C21-BB71-01C6AD8D4401
-  - target:          x86_64-maccatalyst
-    value:           95EF8F01-387D-3C21-BB71-01C6AD8D4401
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           899CC363-0A5C-3A1A-B8FE-88F93DAFE297
-  - target:          arm64e-maccatalyst
-    value:           899CC363-0A5C-3A1A-B8FE-88F93DAFE297
 install-name:    '/System/Library/PrivateFrameworks/CoreIK.framework/Versions/A/CoreIK'
-current-version: 225.123
+current-version: 225.255.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTSDv3_f ]

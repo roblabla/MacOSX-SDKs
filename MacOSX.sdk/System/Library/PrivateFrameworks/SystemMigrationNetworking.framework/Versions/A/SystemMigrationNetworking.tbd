@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           42011870-216C-340A-8E47-C4780057CB7E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           19B01E1E-A611-30B1-B9A8-CC1339D30D2C
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationNetworking.framework/Versions/A/SystemMigrationNetworking'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           13C40E6A-456D-3B33-9AA4-0D9B4962E305
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9DE075B9-19A1-3FCD-9DC2-0EEFDAA42F3F
 install-name:    '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore'
 current-version: 0
 compatibility-version: 0
@@ -39,15 +32,17 @@ exports:
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
                        __ZN13ADCommonUtils17computeMaximalRoiE6CGSizeS0_, __ZN13ADCommonUtils17machTimeToSecondsEy, 
-                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
+                       __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils18extrinsicsToStringE13simd_float4x3, 
+                       __ZN13ADCommonUtils18intrinsicsToStringE13simd_float3x3, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
                        __ZN13ADCommonUtils21runtimePlatformHasANEEv, __ZN13ADCommonUtils22matrixForImageRotationE10ADRotation, 
                        __ZN13ADCommonUtils22rotationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils23matrixFromArrayRowFirstEP7NSArray, __ZN13ADCommonUtils25translationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils26matrixFromArrayColumnFirstEP7NSArray, 
                        __ZN13ADCommonUtils28transformMetersToMillimitersE13simd_float4x4, 
                        __ZN13ADCommonUtils28transformMillimitersToMetersE13simd_float4x4, 
-                       __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, 
-                       __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
+                       __ZN13ADCommonUtils31runtimePlatformANEProductStringEv, __ZN13ADCommonUtils31runtimePlatformANEVersionNumberEv, 
+                       __ZN13ADCommonUtils31runtimePlatformANEVersionStringEv, __ZN13ADCommonUtils33extrinsicsFromRotationTranslationERK13simd_float3x3RKDv3_f, 
+                       __ZN13ADCommonUtils9hashArrayEP7NSArray, __ZN16PixelBufferUtils10alphaBlendEP10__CVBufferS1_fPS1_b, 
                        __ZN16PixelBufferUtils11getJetColorEfRfS0_S0_, __ZN16PixelBufferUtils13asPixelBufferEmmjPv, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferS1_U13block_pointerFvPvjS2_jEi, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferU13block_pointerFvPvjEi, 
@@ -80,7 +75,7 @@ exports:
                        __ZN16PixelBufferUtils27rotationBetweenOrientationsE26CGImagePropertyOrientationS0_, 
                        __ZN16PixelBufferUtils29createPixelBufferWithSameSizeEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils29scaleConvertRotatePixelBufferEP10__CVBufferi6CGRectS1_PS1_S3_b, 
-                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPf, 
+                       __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPfS1_f, 
                        __ZN16PixelBufferUtils32componentsPerPixelForPixelFormatEjm, 
                        __ZN16PixelBufferUtils32createConvertedPixelBufferFormatEP10__CVBufferjb, 
                        __ZN16PixelBufferUtils32pixelBufferFromRawFileWithBufferEPKcP10__CVBuffer, 
@@ -121,9 +116,10 @@ exports:
     objc-classes:    [ ADAggregationParameters, ADCameraCalibration, ADDynamicPolynomialsLensDistortionModel, 
                        ADEspressoBufferHandle, ADEspressoImageDescriptor, ADEspressoInferenceDescriptor, 
                        ADEspressoRunner, ADEspressoRunnerV1, ADEspressoRunnerV2, 
-                       ADImageDescriptor, ADImageSupportedSize, ADInterSessionFilter, 
-                       ADInterSessionFilterParameters, ADJasperPointCloud, ADJasperPointCloudFilterParamaters, 
-                       ADJasperPointCloudFilterParameters, ADLayoutUtils, ADMagnificationForRadiusLensDistortionModel, 
+                       ADFigCameraCalibrationSource, ADImageDescriptor, ADImageSupportedSize, 
+                       ADInterSessionFilter, ADInterSessionFilterParameters, ADJasperPointCloud, 
+                       ADJasperPointCloudFilterParamaters, ADJasperPointCloudFilterParameters, 
+                       ADLayoutUtils, ADMagnificationForRadiusLensDistortionModel, 
                        ADMillimeterRadiusPairsLensDistortionModel, ADMutableCameraCalibration, 
                        ADMutableJasperPointCloud, ADNilDistortionModel, ADPointCloudAggregator, 
                        ADPolynomialsLensDistortionModel, ADRefinedPolynomialsLensDistortionModel, 

@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitUI/PKAddSecureElementPassViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddSecureElementPassViewController.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

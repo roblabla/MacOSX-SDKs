@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1828E3F4-71CD-3952-8C82-F95EFE8E0C30
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A448E6FC-F812-302F-A97E-86A4342AEFEA
 install-name:    '/System/Library/PrivateFrameworks/PAImagingCore.framework/Versions/A/PAImagingCore'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2PA10RectFinderE, __ZTIN2PA14PathRectFinderE, __ZTIN2PA16AnchorRectFinderE, 

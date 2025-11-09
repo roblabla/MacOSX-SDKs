@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           599B28CA-0D0D-3798-8181-2810119DABB5
-  - target:          x86_64-maccatalyst
-    value:           599B28CA-0D0D-3798-8181-2810119DABB5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3CC1B337-3431-373D-BAD4-B997F58862EF
-  - target:          arm64e-maccatalyst
-    value:           3CC1B337-3431-373D-BAD4-B997F58862EF
 install-name:    '/System/Library/PrivateFrameworks/HomeAI.framework/Versions/A/HomeAI'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

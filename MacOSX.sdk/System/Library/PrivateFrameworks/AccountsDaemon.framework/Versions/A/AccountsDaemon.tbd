@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A207C961-FEE3-333B-8256-9CA523075F13
-  - target:          x86_64-maccatalyst
-    value:           A207C961-FEE3-333B-8256-9CA523075F13
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2FFFFE01-461A-34D1-9FB0-760DFCD66599
-  - target:          arm64e-maccatalyst
-    value:           2FFFFE01-461A-34D1-9FB0-760DFCD66599
 install-name:    '/System/Library/PrivateFrameworks/AccountsDaemon.framework/Versions/A/AccountsDaemon'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

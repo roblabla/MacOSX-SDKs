@@ -1,17 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           66B47764-F1EA-3226-8E66-79DB2AC25A9A
-  - target:          x86_64-maccatalyst
-    value:           66B47764-F1EA-3226-8E66-79DB2AC25A9A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0F185DF2-38E4-3943-A978-C4D14A47FF38
-  - target:          arm64e-maccatalyst
-    value:           0F185DF2-38E4-3943-A978-C4D14A47FF38
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]

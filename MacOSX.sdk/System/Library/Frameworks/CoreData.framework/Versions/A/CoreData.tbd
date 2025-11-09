@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1FED3D48-AD38-38C6-B374-85A767EDB2D8
-  - target:          x86_64-maccatalyst
-    value:           1FED3D48-AD38-38C6-B374-85A767EDB2D8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           571DE63C-8125-3E4F-B599-CC3D7B486FDB
-  - target:          arm64e-maccatalyst
-    value:           571DE63C-8125-3E4F-B599-CC3D7B486FDB
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1244.6
+current-version: 1251.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

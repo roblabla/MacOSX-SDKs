@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4AABBB7B-44B0-3D46-9B16-8237224DBE8B
-  - target:          x86_64-maccatalyst
-    value:           4AABBB7B-44B0-3D46-9B16-8237224DBE8B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BEC5BE35-9392-3D55-AD7F-3B466C758F17
-  - target:          arm64e-maccatalyst
-    value:           BEC5BE35-9392-3D55-AD7F-3B466C758F17
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatform.framework/Versions/A/IntelligencePlatform'
-current-version: 28.13
+current-version: 28.24
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -131,6 +118,9 @@ exports:
                        '_$s20IntelligencePlatform11ViewServiceC011peopleAliasC0AA06PeoplefC0VSgvgTj', 
                        '_$s20IntelligencePlatform11ViewServiceC011peopleAliasC0AA06PeoplefC0VSgvgTq', 
                        '_$s20IntelligencePlatform11ViewServiceC011peopleAliasC0AA06PeoplefC0VSgvpMV', 
+                       '_$s20IntelligencePlatform11ViewServiceC032entityRelevanceHistoricalFeatureC0AA06EntityfghC0VSgvgTj', 
+                       '_$s20IntelligencePlatform11ViewServiceC032entityRelevanceHistoricalFeatureC0AA06EntityfghC0VSgvgTq', 
+                       '_$s20IntelligencePlatform11ViewServiceC032entityRelevanceHistoricalFeatureC0AA06EntityfghC0VSgvpMV', 
                        '_$s20IntelligencePlatform11ViewServiceC06handleC0AA06HandleC0VSgvgTj', 
                        '_$s20IntelligencePlatform11ViewServiceC06handleC0AA06HandleC0VSgvgTq', 
                        '_$s20IntelligencePlatform11ViewServiceC06handleC0AA06HandleC0VSgvpMV', 
@@ -152,7 +142,36 @@ exports:
                        '_$s20IntelligencePlatform12AssetManagerV3forAcA0C5GroupO_tcfC', 
                        '_$s20IntelligencePlatform12AssetManagerV8filePath3for2in10Foundation3URLVSgSS_AA0C5GroupO9NamespaceOtF', 
                        '_$s20IntelligencePlatform12AssetManagerVMa', '_$s20IntelligencePlatform12AssetManagerVMn', 
-                       '_$s20IntelligencePlatform12AssetManagerVN', '_$s20IntelligencePlatform12FeatureIndexV11descriptionSSvg', 
+                       '_$s20IntelligencePlatform12AssetManagerVN', '_$s20IntelligencePlatform12BehaviorTypeO10linkActionyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO11descriptionSSvg', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO11descriptionSSvpMV', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO11poiCategoryyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO12airplaneModeyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO12deviceLockedyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO13chargingEventyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO14bluetoothEventyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO16semanticLocationyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO17personInteractionyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO18microlocationVisityA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO21homeKitAccessoryEventyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO21userFocusComputedModeyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO23photosPersonInteractionyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO4fromyACSSFZ', '_$s20IntelligencePlatform12BehaviorTypeO7carPlayyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO7unknownyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO8allCasesSayACGvgZ', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO8loiVisityA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO8rawValueACSgSi_tcfC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO8rawValueSivg', '_$s20IntelligencePlatform12BehaviorTypeO8rawValueSivpMV', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO9appIntentyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO9appLaunchyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeO9wifiEventyA2CmFWC', 
+                       '_$s20IntelligencePlatform12BehaviorTypeOMa', '_$s20IntelligencePlatform12BehaviorTypeOMn', 
+                       '_$s20IntelligencePlatform12BehaviorTypeON', '_$s20IntelligencePlatform12BehaviorTypeOSEAAMc', 
+                       '_$s20IntelligencePlatform12BehaviorTypeOSHAAMc', '_$s20IntelligencePlatform12BehaviorTypeOSQAAMc', 
+                       '_$s20IntelligencePlatform12BehaviorTypeOSYAAMc', '_$s20IntelligencePlatform12BehaviorTypeOSeAAMc', 
+                       '_$s20IntelligencePlatform12BehaviorTypeOs12CaseIterableAAMc', 
+                       '_$s20IntelligencePlatform12BehaviorTypeOs23CustomStringConvertibleAAMc', 
+                       '_$s20IntelligencePlatform12FeatureIndexV11descriptionSSvg', 
                        '_$s20IntelligencePlatform12FeatureIndexV11descriptionSSvpMV', 
                        '_$s20IntelligencePlatform12FeatureIndexV2eeoiySbAC_ACtFZ', 
                        '_$s20IntelligencePlatform12FeatureIndexV3add13subidentifierAA03SubcD0VSS_tF', 
@@ -239,6 +258,24 @@ exports:
                        '_$s20IntelligencePlatform16EntityIdentifierVs23CustomStringConvertibleAAMc', 
                        '_$s20IntelligencePlatform16EntityIdentifierVyACSgSScfC', 
                        '_$s20IntelligencePlatform16EntityIdentifierVyACs6UInt64VcfC', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplC36personalizationDataCollectionAllowedSbyFZ', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplC42updatePersonalizationDataCollectionAllowedyySbFZ', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplCACycfC', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplCACycfc', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplCMa', '_$s20IntelligencePlatform21SystemPreferencesImplCMn', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplCMo', '_$s20IntelligencePlatform21SystemPreferencesImplCN', 
+                       '_$s20IntelligencePlatform21SystemPreferencesImplCfD', '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsV07labeledE0SaySaySo8NSNumberCG11inputVector_AF6targettGvg', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsV07labeledE0SaySaySo8NSNumberCG11inputVector_AF6targettGvpMV', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsV12featureNamesSaySSGvg', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsV12featureNamesSaySSGvpMV', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsVMa', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsVMn', 
+                       '_$s20IntelligencePlatform27GDGBDTLabeledFeatureVectorsVN', 
+                       '_$s20IntelligencePlatform36EntityRelevanceHistoricalFeatureViewV06legacyF11NameMappingSDyS2SGvgZ', 
+                       '_$s20IntelligencePlatform36EntityRelevanceHistoricalFeatureViewV30getPFLTrainingDataForAllEvents07orderedF5Names11entityTypesAA013GDGBDTLabeledF7VectorsVSaySSG_AISgtKF', 
+                       '_$s20IntelligencePlatform36EntityRelevanceHistoricalFeatureViewVMa', 
+                       '_$s20IntelligencePlatform36EntityRelevanceHistoricalFeatureViewVMn', 
+                       '_$s20IntelligencePlatform36EntityRelevanceHistoricalFeatureViewVN', 
                        '_$s20IntelligencePlatform5GDLogO10defaultLog2os6LoggerVvgZ', 
                        '_$s20IntelligencePlatform5GDLogO12construction2os6LoggerVvgZ', 
                        '_$s20IntelligencePlatform5GDLogO8signpost2os6LoggerVvgZ', 
@@ -255,6 +292,8 @@ exports:
                        '_$sSo12GDFeatureKeyC20IntelligencePlatformE6stringABSgSS_tcfC', 
                        '_$sSo12GDFeatureKeyC20IntelligencePlatformE9separatorSSvgZ', 
                        '_$sSo14NSUserDefaultsC20IntelligencePlatformE04makecd4UserB0AByFZ', 
+                       '_$sSo17MLFeatureProviderP20IntelligencePlatformE10dictionarySDySSSo0A5ValueCGvg', 
+                       '_$sSo17MLFeatureProviderP20IntelligencePlatformE10dictionarySDySSSo0A5ValueCGvpMV', 
                        '_$sSp20IntelligencePlatformSo16os_unfair_lock_sVRszlE0E0yyF', 
                        '_$sSp20IntelligencePlatformSo16os_unfair_lock_sVRszlE11cleanupLockyyF', 
                        '_$sSp20IntelligencePlatformSo16os_unfair_lock_sVRszlE6unlockyyF', 
@@ -267,13 +306,14 @@ exports:
                        _kGDEntityIdentifierGraphIdPrefix, _kGDFeatureKeyErrorDomain, 
                        _kGDFeatureKeySeparator, _kGDLoggingSubsystem, _kGDNotificationsConstructionDeferred, 
                        _kGDNotificationsConstructionEnd, _kGDNotificationsConstructionFailure, 
-                       _kGDNotificationsConstructionStart, _kGDXPCCoordinationEntitlement, 
-                       _kGDXPCCoordinationServiceName, _kGDXPCEntityResolutionEntitlement, 
-                       _kGDXPCEntityResolutionServiceName, _kGDXPCInternalEntitlement, 
-                       _kGDXPCInternalServiceName, _kGDXPCKnosisEntitlement, _kGDXPCKnosisServiceName, 
-                       _kGDXPCKnowledgeConstructionEntitlement, _kGDXPCKnowledgeConstructionServiceName, 
-                       _kGDXPCLighthouseEntitlement, _kGDXPCLighthouseServiceName, 
-                       _kGDXPCViewEntitlement, _kGDXPCViewFeatureViewName, _kGDXPCViewServiceName ]
+                       _kGDNotificationsConstructionStart, _kGDNotificationsPersonalizationDataCollectionAllowedChanged, 
+                       _kGDXPCCoordinationEntitlement, _kGDXPCCoordinationServiceName, 
+                       _kGDXPCEntityResolutionEntitlement, _kGDXPCEntityResolutionServiceName, 
+                       _kGDXPCInternalEntitlement, _kGDXPCInternalServiceName, _kGDXPCKnosisEntitlement, 
+                       _kGDXPCKnosisServiceName, _kGDXPCKnowledgeConstructionEntitlement, 
+                       _kGDXPCKnowledgeConstructionServiceName, _kGDXPCLighthouseEntitlement, 
+                       _kGDXPCLighthouseServiceName, _kGDXPCViewEntitlement, _kGDXPCViewFeatureViewName, 
+                       _kGDXPCViewServiceName ]
     objc-classes:    [ GDAnalytics, GDEntityIdentifier, GDEntityResolutionCollectionCandidate, 
                        GDEntityResolutionCollectionResult, GDEntityResolutionRequest, 
                        GDEntityResolutionResult, GDFeatureKey, GDKnosisAlias, GDKnosisAnswer, 
@@ -281,9 +321,10 @@ exports:
                        GDKnosisResult, GDLocation, GDLocationAddress, GDMetaContext, 
                        GDOSVariant, GDPerson, GDPersonLink, GDPersonNameComponents, 
                        GDPersonViewPerson, GDRankerItem, GDRankerResult, GDSpan, 
-                       GDSubEntityIdentifier, GDViewAccessRequester, GDViewAccessToken, 
-                       GDViewService, GDVisualIdentifier, GDVisualIdentifierViewLocation, 
-                       GDVisualIdentifierViewPerson, GDXPCCoordinationService, GDXPCEntityResolutionService, 
-                       GDXPCInternalService, GDXPCKnosisService, GDXPCKnowledgeConstructionService, 
-                       GDXPCLighthouseService, GDXPCViewService ]
+                       GDSubEntityIdentifier, GDSystemPreferences, GDSystemPreferencesImpl, 
+                       GDViewAccessRequester, GDViewAccessToken, GDViewService, GDVisualIdentifier, 
+                       GDVisualIdentifierViewLocation, GDVisualIdentifierViewPerson, 
+                       GDXPCCoordinationService, GDXPCEntityResolutionService, GDXPCInternalService, 
+                       GDXPCKnosisService, GDXPCKnowledgeConstructionService, GDXPCLighthouseService, 
+                       GDXPCViewService ]
 ...

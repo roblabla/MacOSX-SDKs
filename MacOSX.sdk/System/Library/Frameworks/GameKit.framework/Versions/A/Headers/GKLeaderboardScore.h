@@ -1,9 +1,10 @@
 //
 //  GKLeaderboardScore.h
-//  GameCenterFoundation.framework
+//  Game Center
 //
-//  Copyright © 2020 Apple Inc. All rights reserved.
+//  Copyright 2020-2023 Apple Inc. All rights reserved.
 //
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class GKPlayer;

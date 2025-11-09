@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E74890EF-BC42-393C-A339-22C590BC6230
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D9C116D3-3AB9-3992-A284-DFC926595976
 install-name:    '/System/Library/PrivateFrameworks/HIDDisplay.framework/Versions/A/HIDDisplay'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

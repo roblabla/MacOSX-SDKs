@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOReporters.iig */
+/* iig(DriverKit-256.100.8) generated from IOReporters.iig */
 
 /* IOReporters.iig:1-113 */
 /*
@@ -412,7 +412,7 @@ public:
 
 #if !KERNEL
 
-class IOReporterInterface : public OSInterface
+class  IOReporterInterface : public OSInterface
 {
 public:
 };
@@ -621,7 +621,7 @@ public:
 
 #if !KERNEL
 
-class IOSimpleReporterInterface : public OSInterface
+class  IOSimpleReporterInterface : public OSInterface
 {
 public:
 };
@@ -1238,7 +1238,7 @@ public:
 
 #if !KERNEL
 
-class IOStateReporterInterface : public OSInterface
+class  IOStateReporterInterface : public OSInterface
 {
 public:
 };
@@ -1474,7 +1474,7 @@ public:
 
 #if !KERNEL
 
-class IOHistogramReporterInterface : public OSInterface
+class  IOHistogramReporterInterface : public OSInterface
 {
 public:
 };
@@ -1763,7 +1763,7 @@ public:
 
 #if !KERNEL
 
-class IOReportLegendInterface : public OSInterface
+class  IOReportLegendInterface : public OSInterface
 {
 public:
 };

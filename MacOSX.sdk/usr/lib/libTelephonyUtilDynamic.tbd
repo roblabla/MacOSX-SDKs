@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DFE7E6BA-6A41-38AC-8766-79784075E9F4
-  - target:          x86_64-maccatalyst
-    value:           DFE7E6BA-6A41-38AC-8766-79784075E9F4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1B4CBBD8-98EE-3993-9DF4-FEE49ABC320B
-  - target:          arm64e-maccatalyst
-    value:           1B4CBBD8-98EE-3993-9DF4-FEE49ABC320B
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -318,7 +305,7 @@ exports:
                        __ZN3ctu18XpcJetsamAssertionC2Ev, __ZN3ctu18appendLeftoverBitsERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEmPKc, 
                        __ZN3ctu18appendLeftoverBitsERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEyPKc, 
                        __ZN3ctu18getBytePrettyPrintEmhRKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN3ctu18symbolicate_framesEPPvm, __ZN3ctu19RequestRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container16container_detail12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_24RequestRestResourceStateENS1_14default_deleteISG_EEEEEELb0EEE, 
+                       __ZN3ctu18symbolicate_framesEPPvm, __ZN3ctu19RequestRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_24RequestRestResourceStateENS1_14default_deleteISF_EEEEEELb0EEE, 
                        __ZN3ctu19RequestRestResource21handleRestMessage_GETERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu19RequestRestResource21handleRestMessage_POPERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu19RequestRestResource21handleRestMessage_SETERNS_19RestResourceContextERKNS_8PathViewE, 
@@ -352,7 +339,7 @@ exports:
                        __ZN3ctu20DispatchTimerServiceC1ENSt3__110shared_ptrINS_9LogServerEEE, 
                        __ZN3ctu20DispatchTimerServiceC2ENSt3__110shared_ptrINS_9LogServerEEE, 
                        __ZN3ctu20DispatchTimerServiceD0Ev, __ZN3ctu20DispatchTimerServiceD1Ev, 
-                       __ZN3ctu20DispatchTimerServiceD2Ev, __ZN3ctu20PropertyRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container16container_detail12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_25PropertyRestResourceStateENS1_14default_deleteISG_EEEEEELb0EEE, 
+                       __ZN3ctu20DispatchTimerServiceD2Ev, __ZN3ctu20PropertyRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_25PropertyRestResourceStateENS1_14default_deleteISF_EEEEEELb0EEE, 
                        __ZN3ctu20PropertyRestResource21handleRestMessage_GETERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu20PropertyRestResource21handleRestMessage_POPERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu20PropertyRestResource21handleRestMessage_SETERNS_19RestResourceContextERKNS_8PathViewE, 
@@ -385,7 +372,7 @@ exports:
                        __ZN3ctu20RestDispatchListener28handleClientMessageWithReplyENSt3__110shared_ptrIKNS_4rest23RestConnectorSourceBaseEEEN3xpc4dictENS1_8functionIFvNS7_6objectEEEE, 
                        __ZN3ctu20RestDispatchListener34getOrCreateResourceConnection_syncERKNSt3__110shared_ptrIKNS_4rest23RestConnectorSourceBaseEEENS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN3ctu20RestDispatchListener6createEN8dispatch5queueE, __ZN3ctu20RestDispatchListenerC1EN8dispatch5queueE, 
-                       __ZN3ctu20RestDispatchListenerC2EN8dispatch5queueE, __ZN3ctu21AssertionRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container16container_detail12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_26AssertionRestResourceStateENS1_14default_deleteISG_EEEEEELb0EEE, 
+                       __ZN3ctu20RestDispatchListenerC2EN8dispatch5queueE, __ZN3ctu21AssertionRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_26AssertionRestResourceStateENS1_14default_deleteISF_EEEEEELb0EEE, 
                        __ZN3ctu21AssertionRestResource21handleRestMessage_GETERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu21AssertionRestResource21handleRestMessage_POPERNS_19RestResourceContextERKNS_8PathViewE, 
                        __ZN3ctu21AssertionRestResource21handleRestMessage_SETERNS_19RestResourceContextERKNS_8PathViewE, 

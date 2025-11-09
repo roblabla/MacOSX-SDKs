@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5ABF22CE-99B6-3A2C-845D-57D3BA412C81
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ED8F5C1A-D91B-3CED-B5A5-684F7B92A4B0
 install-name:    '/System/Library/PrivateFrameworks/AppleConvergedFirmwareUpdater.framework/Versions/A/AppleConvergedFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos ]
@@ -320,8 +313,10 @@ exports:
                        __ZN9ACFUTimer4initEjU13block_pointerFvvE, __ZN9ACFUTimer4stopEv, 
                        __ZN9ACFUTimer5startEv, __ZN9ACFUTimer6createEjU13block_pointerFvvE, 
                        __ZN9ACFUTimer8hasFiredEv, __ZN9ACFUTimerD0Ev, __ZN9ACFUTimerD1Ev, 
-                       __ZN9ACFUTimerD2Ev, __ZNK12ACFUFirmware11getManifestEv, __ZNK12ACFUFirmware15copyFWDataByTagEPK10__CFString, 
-                       __ZNK12ACFUFirmware16hasValidFirmwareEv, __ZNK12ACFUFirmware20copyFWDataByFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
+                       __ZN9ACFUTimerD2Ev, __ZN9ACFUTrace4initEjjjb, __ZN9ACFUTrace8getTraceEv, 
+                       __ZN9ACFUTraceC1Ev, __ZN9ACFUTraceC2Ev, __ZNK12ACFUFirmware11getManifestEv, 
+                       __ZNK12ACFUFirmware15copyFWDataByTagEPK10__CFString, __ZNK12ACFUFirmware16hasValidFirmwareEv, 
+                       __ZNK12ACFUFirmware20copyFWDataByFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZNK12ACFUFirmware21getMeasureDataWithTagEPK10__CFString, 
                        __ZNK12ACFUFirmware23copyFWDataRefByFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEjj, 
                        __ZNK12ACFUFirmware25copyFWContainerFromOffsetEim, __ZNK12ACFUFirmware8hashDataENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEj, 

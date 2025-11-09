@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           14CBCEA6-EE6D-31EB-89BA-6E6C72134FD9
-  - target:          x86_64-maccatalyst
-    value:           14CBCEA6-EE6D-31EB-89BA-6E6C72134FD9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0012AFDA-870C-3062-9E0E-2175D092F201
-  - target:          arm64e-maccatalyst
-    value:           0012AFDA-870C-3062-9E0E-2175D092F201
 install-name:    '/System/Library/PrivateFrameworks/AXMediaUtilities.framework/Versions/A/AXMediaUtilities'
 swift-abi-version: 7
 exports:

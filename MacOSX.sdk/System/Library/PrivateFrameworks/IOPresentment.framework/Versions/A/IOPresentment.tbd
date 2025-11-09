@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           87F83365-0565-3960-96B4-C1E472182850
-  - target:          x86_64-maccatalyst
-    value:           87F83365-0565-3960-96B4-C1E472182850
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           85B961A8-28BF-32C6-9D6C-E5CBF4683E6E
-  - target:          arm64e-maccatalyst
-    value:           85B961A8-28BF-32C6-9D6C-E5CBF4683E6E
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
 current-version: 62
 exports:

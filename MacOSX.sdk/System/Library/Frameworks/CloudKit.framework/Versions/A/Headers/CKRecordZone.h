@@ -11,7 +11,7 @@
 
 @class CKRecordZoneID, CKReference;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, CKRecordZoneCapabilities) {
     /*! This zone supports CKFetchRecordChangesOperation */
@@ -53,4 +53,4 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

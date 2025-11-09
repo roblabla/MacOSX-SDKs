@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FD0142CD-8A9C-31D1-8F39-CA94C30E2E0A
-  - target:          x86_64-maccatalyst
-    value:           FD0142CD-8A9C-31D1-8F39-CA94C30E2E0A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1C712F17-50DA-3731-8AB0-E86CE9C3C9B9
-  - target:          arm64e-maccatalyst
-    value:           1C712F17-50DA-3731-8AB0-E86CE9C3C9B9
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 1131.60.22
+current-version: 1132.100.131
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

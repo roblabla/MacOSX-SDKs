@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AC402A82-8334-313F-941A-E4E57B2135EF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5A794BB6-EDD1-30A2-B482-0BB815E4A7E1
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 9.12
+current-version: 10.5.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
@@ -198,6 +191,8 @@ exports:
                        __ZNK11jet_texture30is_color_attachment_compatibleEv, __ZNK11jet_texture30is_depth_attachment_compatibleEv, 
                        __ZNK11jet_texture32is_stencil_attachment_compatibleEv, __ZNK15jet_buffer_pool10get_lengthEv, 
                        __ZNK15jet_buffer_pool18get_current_bufferEv, __ZNK15jet_framebuffer5cloneEv, 
+                       __ZNK17jet_context_Metal20get_max_texture_sizeE16jet_texture_type, 
+                       __ZNK18jet_context_OpenGL20get_max_texture_sizeE16jet_texture_type, 
                        __ZTI10jet_buffer, __ZTI11jet_context, __ZTI11jet_program, 
                        __ZTI11jet_sampler, __ZTI11jet_texture, __ZTI12jet_constant, 
                        __ZTI15jet_buffer_pool, __ZTI15jet_framebuffer, __ZTI15jet_render_mode, 

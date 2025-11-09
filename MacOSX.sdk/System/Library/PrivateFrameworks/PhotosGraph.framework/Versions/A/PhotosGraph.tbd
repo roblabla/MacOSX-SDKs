@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1E748482-87A9-3013-B31D-F256620F2484
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8ECBEC23-9CF3-36CF-AF78-8AAC213C94BC
 install-name:    '/System/Library/PrivateFrameworks/PhotosGraph.framework/Versions/A/PhotosGraph'
 swift-abi-version: 7
 allowable-clients:
@@ -1965,7 +1958,9 @@ exports:
                        _PGCurationOptionsDefaultTargetDurationForMediumCurationLength, 
                        _PGCurationOptionsDefaultTargetDurationForShortCurationLength, 
                        _PGCurationRatioOfAssetsInTopTier, _PGCurationRatioOfAssetsInTopTierForTripKeyAsset, 
-                       _PGCurrentPhotosGraphVersion, _PGErrorDomain, _PGExtendedMeaningActivityBeaching, 
+                       _PGCurrentPhotosGraphVersion, _PGErrorDomain, _PGExhaustiveMomentLabellingQuestionDateInterval, 
+                       _PGExhaustiveMomentLabellingQuestionDefaultFactoryScore, _PGExhaustiveMomentLabellingQuestionMeaningLabelsKey, 
+                       _PGExhaustiveMomentLabellingQuestionNumberOfQuestions, _PGExtendedMeaningActivityBeaching, 
                        _PGExtendedMeaningActivityClimbing, _PGExtendedMeaningActivityDiving, 
                        _PGExtendedMeaningActivityHiking, _PGExtendedMeaningActivityWinterSport, 
                        _PGExtendedMeaningRestaurantBreakfast, _PGExtendedMeaningRestaurantDinner, 
@@ -2650,7 +2645,8 @@ exports:
                        PGDiscoveryFeedGenerationSession, PGDiscoveryFeedItem, PGEarlyMomentsWithPeopleMemoryGenerator, 
                        PGEnrichableEventSuggestion, PGEnrichedMemory, PGEnrichedMemoryFactory, 
                        PGError, PGExampleConfiguration, PGExcitingMomentsMemoryGenerator, 
-                       PGExcitingMomentsMemoryTitleGenerator, PGFaceFeatureExtractor, 
+                       PGExcitingMomentsMemoryTitleGenerator, PGExhaustiveMomentLabellingQuestion, 
+                       PGExhaustiveMomentLabellingQuestionFactory, PGFaceFeatureExtractor, 
                        PGFacesFromAssetAverageFeatureValidator, PGFacesFromAssetFeatureExtractor, 
                        PGFeature, PGFeatureAggregationValidator, PGFeatureAugmenterMixUp, 
                        PGFeatureAugmenterSupervisedMixUp, PGFeatureExtractionSourceCoreDuet, 

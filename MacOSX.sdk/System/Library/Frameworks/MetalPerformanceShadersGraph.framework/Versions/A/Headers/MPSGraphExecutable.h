@@ -107,6 +107,19 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
        compilationDescriptor:(MPSGraphCompilationDescriptor * _Nullable) compilationDescriptor;
 
 /*!
+ *  @abstract   Get output shapes for a specialized  MPSGraphExecutable - in case specialization has not been done yet then calling this function will specialize for the given input shapes.
+ *
+ *  @param      device                                    optional MPSGraph device to compile with
+ *  @param      inputTypes                           input types
+ *  @param      compilationDescriptor  compilationDescriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can
+ *
+ */
+-(NSArray<MPSGraphShapedType *> * _Nullable) getOutputTypesWithDevice:(MPSGraphDevice * _Nullable) device
+                                                           inputTypes:(NSArray<MPSGraphType *> *) inputTypes
+                                                compilationDescriptor:(MPSGraphCompilationDescriptor * _Nullable) compilationDescriptor
+MPS_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3));
+
+/*!
  *  @abstract   Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed.
  *              This call  is synchronous and will return on completion of execution
  *

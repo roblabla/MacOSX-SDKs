@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E4E27E9C-DD37-3B17-ACFA-7380C5A03176
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           71360AF4-1EB7-37EE-AEF5-5F802ABE1863
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -23,12 +16,13 @@ exports:
                        _PTErrorDatabase, _PTErrorInternal, _PTErrorInvalidParameters, 
                        _PTErrorKeyAlreadyExist, _PTErrorKeyNotFound, _PTErrorNoMemory, 
                        _PTErrorRefresh, _PTErrorRequireLocalValidation ]
-    objc-classes:    [ NFApplet, NFAssertion, NFContactlessPaymentEndEvent, NFContactlessPaymentSession, 
-                       NFContactlessPaymentSessionCallbacks, NFContactlessPaymentSessionInterface, 
-                       NFContactlessPaymentStartEvent, NFContactlessSession, NFContactlessSessionCallbacks, 
-                       NFContactlessSessionInterface, NFDCKAssertion, NFDigitalCarKeyEndEvent, 
-                       NFDigitalCarKeySession, NFDigitalCarKeyStartEvent, NFECommercePaymentRequest, 
-                       NFECommercePaymentResponse, NFECommercePaymentSession, NFECommercePaymentSessionInterface, 
+    objc-classes:    [ NFApplet, NFAppletExtraInfo, NFAssertion, NFContactlessPaymentEndEvent, 
+                       NFContactlessPaymentSession, NFContactlessPaymentSessionCallbacks, 
+                       NFContactlessPaymentSessionInterface, NFContactlessPaymentStartEvent, 
+                       NFContactlessSession, NFContactlessSessionCallbacks, NFContactlessSessionInterface, 
+                       NFDCKAssertion, NFDigitalCarKeyEndEvent, NFDigitalCarKeySession, 
+                       NFDigitalCarKeyStartEvent, NFECommercePaymentRequest, NFECommercePaymentResponse, 
+                       NFECommercePaymentSession, NFECommercePaymentSessionInterface, 
                        NFFieldDetectSession, NFFieldDetectSessionInterfaceCallbacks, 
                        NFFieldNotification, NFFieldNotificationECP1_0, NFFieldNotificationECP2_0, 
                        NFHCESession, NFHardwareControllerInfo, NFHardwareManager, 

@@ -2,38 +2,26 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B44E6F7C-9125-383D-9229-EAC1E1FC22EE
-  - target:          x86_64-maccatalyst
-    value:           B44E6F7C-9125-383D-9229-EAC1E1FC22EE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           263DB5EF-C5E5-367A-A9E5-D5B4AC06DC0F
-  - target:          arm64e-maccatalyst
-    value:           263DB5EF-C5E5-367A-A9E5-D5B4AC06DC0F
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 323.2
+current-version: 323.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTIN5boost16exception_detail10clone_baseE, __ZTIN5boost9exceptionE, 
+    weak-symbols:    [ __ZTIN5boost10wrapexceptINS_17bad_function_callEEE, __ZTIN5boost16exception_detail10clone_baseE, 
+                       __ZTIN5boost17bad_function_callE, __ZTIN5boost9exceptionE, 
                        __ZTINSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
                        __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFdmEEE, 
                        __ZTINSt3__110__function6__baseIFfjjEEE, __ZTINSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4spanIKjLm18446744073709551615EEEEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__121__basic_string_commonILb1EEE, 
-                       __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, __ZTSN5boost16exception_detail10clone_baseE, 
-                       __ZTSN5boost9exceptionE, __ZTSNSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, 
+                       __ZTSN5boost10wrapexceptINS_17bad_function_callEEE, __ZTSN5boost16exception_detail10clone_baseE, 
+                       __ZTSN5boost17bad_function_callE, __ZTSN5boost9exceptionE, 
+                       __ZTSNSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
                        __ZTSNSt3__110__function6__baseIFbjEEE, __ZTSNSt3__110__function6__baseIFdmEEE, 
                        __ZTSNSt3__110__function6__baseIFfjjEEE, __ZTSNSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4spanIKjLm18446744073709551615EEEEEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
-                       __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LMCreateMontrealIDsFromLMTokenIDSequence, _LMEnumerateAssetDataItems, 
@@ -285,20 +273,21 @@ exports:
                        _kLMLanguageModelMaxDynamicLexiconEntryCount, _kLMLanguageModelMaxDynamicModelSizeKey, 
                        _kLMLanguageModelMaxMontrealPredictionsKey, _kLMLanguageModelMinDynamicTokensTypedThresholdKey, 
                        _kLMLanguageModelMontrealFullCacheSize, _kLMLanguageModelMontrealSparseCacheSize, 
-                       _kLMLanguageModelNegativeLearningThresholdKey, _kLMLanguageModelPruningTargetSizeKey, 
-                       _kLMLanguageModelRecencyModelWeightKey, _kLMLanguageModelRecencyNgramCountThresholdKey, 
-                       _kLMLanguageModelRecencyUnigramCountThresholdKey, _kLMLanguageModelRecipientContextKey, 
-                       _kLMLanguageModelRequiresStaticModelKey, _kLMLanguageModelShouldExcludeMobileAssetsKey, 
-                       _kLMLanguageModelSpatialTemporalContextKey, _kLMLanguageModelStaticModelWeightKey, 
-                       _kLMLanguageModelStaticModelsEnabledKey, _kLMLanguageModelTagBitCountKey, 
-                       _kLMLanguageModelTagGenreMatchCountWeightKey, _kLMLanguageModelTagMatchCountWeightKey, 
-                       _kLMLanguageModelTagMismatchCountWeightKey, _kLMLanguageModelTagRecipientMatchCountWeightKey, 
-                       _kLMLanguageModelTagSpatialTemporalMatchCountWeightKey, _kLMLanguageModelUnknownTokenPenaltyKey, 
-                       _kLMLanguageModelUseDynamicTokenCharacterFilterKey, _kLMLanguageModelUseMontrealKey, 
-                       _kLMLanguageModelUseMontrealUNKKey, _kLMLanguageModelUseSerializedCacheKey, 
-                       _kLMLanguageModelUseSpecialNumberTokenKey, _kLMLearnStaticWordCaseVariantsForLocalesKey, 
-                       _kLMLinguisticDataResources, _kLMRecordFamilyNameKey, _kLMRecordGivenNameKey, 
-                       _kLMRecordHashKey, _kLMRecordNicknameKey, _kLMTestingParametersGeometryModelBundlePathKey, 
+                       _kLMLanguageModelNegativeLearningThresholdKey, _kLMLanguageModelPrioritizeVocabulariesKey, 
+                       _kLMLanguageModelPruningTargetSizeKey, _kLMLanguageModelRecencyModelWeightKey, 
+                       _kLMLanguageModelRecencyNgramCountThresholdKey, _kLMLanguageModelRecencyUnigramCountThresholdKey, 
+                       _kLMLanguageModelRecipientContextKey, _kLMLanguageModelRequiresStaticModelKey, 
+                       _kLMLanguageModelShouldExcludeMobileAssetsKey, _kLMLanguageModelSpatialTemporalContextKey, 
+                       _kLMLanguageModelStaticModelWeightKey, _kLMLanguageModelStaticModelsEnabledKey, 
+                       _kLMLanguageModelTagBitCountKey, _kLMLanguageModelTagGenreMatchCountWeightKey, 
+                       _kLMLanguageModelTagMatchCountWeightKey, _kLMLanguageModelTagMismatchCountWeightKey, 
+                       _kLMLanguageModelTagRecipientMatchCountWeightKey, _kLMLanguageModelTagSpatialTemporalMatchCountWeightKey, 
+                       _kLMLanguageModelUnknownTokenPenaltyKey, _kLMLanguageModelUseDynamicTokenCharacterFilterKey, 
+                       _kLMLanguageModelUseMontrealKey, _kLMLanguageModelUseMontrealUNKKey, 
+                       _kLMLanguageModelUseSerializedCacheKey, _kLMLanguageModelUseSpecialNumberTokenKey, 
+                       _kLMLearnStaticWordCaseVariantsForLocalesKey, _kLMLinguisticDataResources, 
+                       _kLMRecordFamilyNameKey, _kLMRecordGivenNameKey, _kLMRecordHashKey, 
+                       _kLMRecordNicknameKey, _kLMTestingParametersGeometryModelBundlePathKey, 
                        _kLMVocabularyLocaleKey, _lmga_getAttributeValue, _lmga_setAttributeValue ]
     objc-classes:    [ LMTrial ]
 ...

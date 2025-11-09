@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSBoolean.iig */
+/* iig(DriverKit-256.100.8) generated from OSBoolean.iig */
 
 /* OSBoolean.iig:1-64 */
 /*
@@ -158,7 +158,7 @@ public:
 
 #if !KERNEL
 
-class OSBooleanInterface : public OSInterface
+class  OSBooleanInterface : public OSInterface
 {
 public:
 };

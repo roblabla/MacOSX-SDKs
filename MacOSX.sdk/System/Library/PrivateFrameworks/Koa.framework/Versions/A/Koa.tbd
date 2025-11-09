@@ -1,31 +1,27 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           69853D90-FF61-3D0E-81D6-DE7F02F6A568
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E7A82EC6-7A14-35F8-A630-A79025E39A60
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Koa.framework/Versions/A/Koa'
 exports:
-  - targets:         [ x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN10skitbridge16MathSymbolFilterE, __ZTIN10skitbridge9A2ZFilterE, 
                        __ZTIN4skit10WordFilterE, __ZTIN4skit11TokenFilterE, __ZTIN4skit17MphStopWordFilterE, 
                        __ZTIN4skit8AnalyzerE, __ZTSN10skitbridge16MathSymbolFilterE, 
                        __ZTSN10skitbridge9A2ZFilterE, __ZTSN4skit10WordFilterE, __ZTSN4skit11TokenFilterE, 
                        __ZTSN4skit17MphStopWordFilterE, __ZTSN4skit8AnalyzerE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _KVActivationResultIsSuccessful, _KVAdditionalFieldTypeFromNumber, 
                        _KVAdditionalFieldTypeToNumber, _KVAllDataDirectories, _KVAllLMEDirectories, 
                        _KVDataDirectoryURL, _KVDatabaseURL, _KVDefaultRootDirectoryPath, 
-                       _KVDonateServiceRequestDescription, _KVDonateServiceResponseDescription, 
-                       _KVFieldTypeDescription, _KVFieldTypeFromName, _KVFieldTypeFromNumber, 
-                       _KVFieldTypeIsValid, _KVFieldTypeIsValidForItemType, _KVFieldTypeName, 
-                       _KVFieldTypeToNumber, _KVFieldType_MAX, _KVFilesystemReadJSON, 
-                       _KVFilesystemReadObject, _KVFilesystemReadPlist, _KVFilesystemWriteJSON, 
-                       _KVFilesystemWriteObject, _KVFilesystemWritePlist, _KVGetOrCreateDirectoryURL, 
+                       _KVDefaultRootDirectoryURL, _KVDonateServiceRequestDescription, 
+                       _KVDonateServiceResponseDescription, _KVFieldTypeDescription, 
+                       _KVFieldTypeFromName, _KVFieldTypeFromNumber, _KVFieldTypeIsValid, 
+                       _KVFieldTypeIsValidForItemType, _KVFieldTypeName, _KVFieldTypeToNumber, 
+                       _KVFieldType_MAX, _KVFilesystemReadJSON, _KVFilesystemReadObject, 
+                       _KVFilesystemReadPlist, _KVFilesystemWriteJSON, _KVFilesystemWriteObject, 
+                       _KVFilesystemWritePlist, _KVGetOrCreateDirectory, _KVGetOrCreateDirectoryURL, 
                        _KVHash64, _KVHash64String, _KVIsEmptyOrWhitespace, _KVItemTypeDescription, 
                        _KVItemTypeFromFieldType, _KVItemTypeFromName, _KVItemTypeFromNumber, 
                        _KVItemTypeIsValid, _KVItemTypeName, _KVItemTypeToNumber, 
@@ -33,11 +29,14 @@ exports:
                        _KVLocaleTypeFromNSLocale, _KVLocaleTypeFromName, _KVLocaleTypeFromNumber, 
                        _KVLocaleTypeIsValid, _KVLocaleTypeName, _KVLocaleTypeToNSLocale, 
                        _KVLocaleTypeToNumber, _KVLocaleType_MAX, _KVOriginAppIdApplications, 
-                       _KVOriginAppIdContacts, _KVOriginAppIdFitness, _KVOriginAppIdHomeMemberInfo, 
-                       _KVOriginAppIdMediaPlayer, _KVOriginAppIdPodcasts, _KVSBLogContext, 
-                       _KVScanHexString, _KVSetAndReportError, _KVSetError, _KVSkitDirectoryURL, 
-                       _KVUserDescription, _KVUserIdHash, _KVUserIdHashFromDataDirectoryURL, 
-                       _KVUserIdHashFromString, _KVUserIdHashToString, __ZN10skitbridge10is_indexedEN3koa10vocabulary9FieldTypeE, 
+                       _KVOriginAppIdCalendar, _KVOriginAppIdContacts, _KVOriginAppIdCoreRoutine, 
+                       _KVOriginAppIdFitness, _KVOriginAppIdHomeKit, _KVOriginAppIdHomeMemberInfo, 
+                       _KVOriginAppIdKeyboard, _KVOriginAppIdMediaPlayer, _KVOriginAppIdMessages, 
+                       _KVOriginAppIdPhotos, _KVOriginAppIdPodcasts, _KVOriginAppIdPortrait, 
+                       _KVOriginAppIdShortcuts, _KVSBLogContext, _KVScanHexString, 
+                       _KVSetAndReportError, _KVSetError, _KVSkitDirectoryURL, _KVUserDescription, 
+                       _KVUserIdHash, _KVUserIdHashFromDataDirectoryURL, _KVUserIdHashFromString, 
+                       _KVUserIdHashToString, __ZN10skitbridge10is_indexedEN3koa10vocabulary9FieldTypeE, 
                        __ZN10skitbridge12cj_tokenizerEN4skit11TokenStreamE, __ZN10skitbridge14LogInitializer4initEv, 
                        __ZN10skitbridge14LogInitializerC1Ev, __ZN10skitbridge14LogInitializerC2Ev, 
                        __ZN10skitbridge14build_documentERN5apple4aiml12flatbuffers217FlatBufferBuilderEPKhmNSt3__117basic_string_viewIcNS7_11char_traitsIcEEEERKNS7_6vectorINS2_6OffsetIN3koa10vocabulary14TokenizedFieldEEENS7_9allocatorISH_EEEE, 
@@ -78,15 +77,15 @@ exports:
                        __ZTIN10skitbridge8AnalyzerE, __ZTSN10skitbridge8AnalyzerE, 
                        __ZTVN10skitbridge8AnalyzerE ]
     objc-classes:    [ KVDataset, KVDatasetBuilder, KVDatasetInfo, KVDatasetStream, 
-                       KVDonateVersionLog, KVDonator, KVField, KVFieldMatch, KVFullDatasetStream, 
-                       KVIncrementalDatasetStream, KVItem, KVItemBuilder, KVItemInfo, 
-                       KVItemMapper, KVLinkOOVItemBuilder, KVMediaItemBuilder, KVPeopleSuggesterPriorRetriever, 
-                       KVPodcastItemBuilder, KVPriorInfo, KVProfile, KVProfileBuilder, 
-                       KVProfileInfo, KVProvisionalResourceManager, KVSimulatedPriorRetriever, 
-                       KVSkitEmptyAccess, KVSkitReader, KVSkitWriter, KVSpanInfo, 
-                       KVSpanMatchQuery, KVSpanMatchQueryBuilder, KVSpanMatchResult, 
-                       KVSpanMatchResultInterpreter, KVSpanMatcher, KVTokenizer, 
-                       KVXPCClient ]
+                       KVDictionaryLog, KVDonateVersionLog, KVDonator, KVField, KVFieldMatch, 
+                       KVFullDatasetStream, KVIncrementalDatasetStream, KVItem, KVItemBuilder, 
+                       KVItemInfo, KVItemMapper, KVLinkOOVItemBuilder, KVMediaItemBuilder, 
+                       KVPeopleSuggesterPriorRetriever, KVPodcastItemBuilder, KVPriorInfo, 
+                       KVProfile, KVProfileBuilder, KVProfileInfo, KVProvisionalResourceManager, 
+                       KVSimulatedPriorRetriever, KVSkitEmptyAccess, KVSkitReader, 
+                       KVSkitWriter, KVSpanInfo, KVSpanMatchQuery, KVSpanMatchQueryBuilder, 
+                       KVSpanMatchResult, KVSpanMatchResultInterpreter, KVSpanMatcher, 
+                       KVTokenizer, KVXPCClient ]
     weak-symbols:    [ __ZN10skitbridge10trigger_arE, __ZN10skitbridge10trigger_daE, 
                        __ZN10skitbridge10trigger_enE, __ZN10skitbridge10trigger_esE, 
                        __ZN10skitbridge10trigger_fiE, __ZN10skitbridge10trigger_frE, 

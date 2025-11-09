@@ -9,7 +9,7 @@
 
 @class CKRecordZoneID, CKServerChangeToken;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @class CKFetchDatabaseChangesOperation
  *
@@ -36,16 +36,29 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  *  When set to NO, it is the responsibility of the caller to issue subsequent fetch-changes operations when moreComing is YES in a @c fetchDatabaseChangesCompletionBlock invocation.
  *  @c fetchAllChanges is @c YES by default
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations
+ *  Blocks assigned to this operation may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, assign) BOOL fetchAllChanges;
 
+/*! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
+ */
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDChangedBlock)(CKRecordZoneID *zoneID);
+
+/*! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
+ */
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDWasDeletedBlock)(CKRecordZoneID *zoneID);
 
 /*! @abstract If this block is set it will be called instead of @c recordZoneWithIDWasDeletedBlock if the user deleted this zone via the iCloud storage UI.
  *
  *  @discussion This is an indication that the user wanted all data deleted, so local cached data should be wiped and not re-uploaded to the server.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDWasPurgedBlock)(CKRecordZoneID *zoneID) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -53,10 +66,15 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  *
  *  @discussion This is an indication that the user had to reset encrypted data during account recovery, so local cached data should be re-uploaded to the server to minimize data loss.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock)(CKRecordZoneID *zoneID) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
-//! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+/*! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
+ */
 @property (nonatomic, copy, nullable) void (^changeTokenUpdatedBlock)(CKServerChangeToken * serverChangeToken);
 
 /*! @abstract This block is called when the operation completes.
@@ -65,10 +83,12 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  *  If the server returns a @c CKErrorChangeTokenExpired error, the @c previousServerChangeToken value was too old and the client should toss its local cache and re-fetch the changes in this record zone starting with a nil @c previousServerChangeToken.
  *  If @c moreComing is true then the server wasn't able to return all the changes in this response. Another @c CKFetchDatabaseChangesOperation operation should be run with the @c previousServerChangeToken token from this operation.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^fetchDatabaseChangesCompletionBlock)(CKServerChangeToken * _Nullable serverChangeToken, BOOL moreComing, NSError * _Nullable operationError)
 CK_SWIFT_DEPRECATED("Use fetchDatabaseChangesResultBlock instead", macos(10.12, 12.0), ios(10.0, 15.0), tvos(10.0, 15.0), watchos(3.0, 8.0));
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

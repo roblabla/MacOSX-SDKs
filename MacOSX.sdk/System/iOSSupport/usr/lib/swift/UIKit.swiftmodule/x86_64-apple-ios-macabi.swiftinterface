@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UIKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 6209.1.402
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UIKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 6441
 @_exported import Accessibility
 @_exported import CoreGraphics
 import DataDetection
@@ -177,33 +177,33 @@ extension UIKit.UIPasteboard {
 }
 extension UIKit.UIPasteboard {
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIKit.UIPasteboard.DetectionPattern>, Swift.Error>) -> ())
+  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIKit.UIPasteboard.DetectionPattern>, any Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, Swift.Error>) -> ())
+  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, any Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIKit.UIPasteboard.DetectionPattern>], Swift.Error>) -> ())
+  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIKit.UIPasteboard.DetectionPattern>], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>], Swift.Error>) -> ())
+  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>], any Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>]
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectionPattern : Any], Swift.Error>) -> ())
+  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectionPattern : Any], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIKit.UIPasteboard.DetectedValues, Swift.Error>) -> ())
+  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIKit.UIPasteboard.DetectedValues, any Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> UIKit.UIPasteboard.DetectedValues
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIKit.UIPasteboard.DetectionPattern : Any]], Swift.Error>) -> ())
+  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIKit.UIPasteboard.DetectionPattern : Any]], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectedValues], Swift.Error>) -> ())
+  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectedValues], any Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [UIKit.UIPasteboard.DetectedValues]
@@ -261,7 +261,7 @@ extension UIKit.NSDiffableDataSourceSectionSnapshot : Swift._ObjectiveCBridgeabl
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICollectionViewCell {
   @available(iOS 14.0, tvOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) public var contentConfiguration: UIKit.UIContentConfiguration? {
+  @_Concurrency.MainActor(unsafe) public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
@@ -274,7 +274,7 @@ extension UIKit.UICollectionViewListCell {
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UITableViewCell {
   @available(iOS 14.0, tvOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) public var contentConfiguration: UIKit.UIContentConfiguration? {
+  @_Concurrency.MainActor(unsafe) public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
@@ -284,7 +284,7 @@ extension UIKit.UITableViewCell {
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UITableViewHeaderFooterView {
   @available(iOS 14.0, tvOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) public var contentConfiguration: UIKit.UIContentConfiguration? {
+  @_Concurrency.MainActor(unsafe) public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
@@ -294,9 +294,9 @@ extension UIKit.UITableViewHeaderFooterView {
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UIListContentView : UIKit.UIContentView {
   @available(iOS 16.0, tvOS 16.0, *)
-  @_Concurrency.MainActor(unsafe) public func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
+  @_Concurrency.MainActor public func supports(_ configuration: any UIKit.UIContentConfiguration) -> Swift.Bool
   @available(iOS 14.0, tvOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) public var configuration: UIKit.UIContentConfiguration {
+  @_Concurrency.MainActor public var configuration: any UIKit.UIContentConfiguration {
     get
     set(config)
   }
@@ -304,19 +304,19 @@ extension UIKit.UIListContentView : UIKit.UIContentView {
   @_Concurrency.MainActor(unsafe) convenience public init(configuration: UIKit.UIListContentConfiguration)
 }
 @available(iOS 14.0, tvOS 14.0, *)
-public protocol UIContentView : ObjectiveC.NSObjectProtocol {
-  var configuration: UIKit.UIContentConfiguration { get set }
+@_Concurrency.MainActor public protocol UIContentView : ObjectiveC.NSObjectProtocol {
+  @_Concurrency.MainActor var configuration: any UIKit.UIContentConfiguration { get set }
   @available(iOS 16.0, tvOS 16.0, *)
-  func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
+  @_Concurrency.MainActor func supports(_ configuration: any UIKit.UIContentConfiguration) -> Swift.Bool
 }
 @available(iOS 16.0, tvOS 16.0, *)
 extension UIKit.UIContentView {
-  public func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
+  @_Concurrency.MainActor public func supports(_ configuration: any UIKit.UIContentConfiguration) -> Swift.Bool
 }
 @available(iOS 14.0, tvOS 14.0, *)
 public protocol UIContentConfiguration {
-  func makeContentView() -> UIKit.UIView & UIKit.UIContentView
-  func updated(for state: UIKit.UIConfigurationState) -> Self
+  @_Concurrency.MainActor func makeContentView() -> any UIKit.UIView & UIKit.UIContentView
+  func updated(for state: any UIKit.UIConfigurationState) -> Self
 }
 @available(iOS 14.0, tvOS 14.0, *)
 public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.Hashable {
@@ -451,8 +451,8 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
   public static func accompaniedSidebarCell() -> UIKit.UIListContentConfiguration
   public static func accompaniedSidebarSubtitleCell() -> UIKit.UIListContentConfiguration
   public static func sidebarHeader() -> UIKit.UIListContentConfiguration
-  public func makeContentView() -> UIKit.UIView & UIKit.UIContentView
-  public func updated(for state: UIKit.UIConfigurationState) -> UIKit.UIListContentConfiguration
+  @_Concurrency.MainActor public func makeContentView() -> any UIKit.UIView & UIKit.UIContentView
+  public func updated(for state: any UIKit.UIConfigurationState) -> UIKit.UIListContentConfiguration
   public var image: UIKit.UIImage? {
     get
     set(image)
@@ -747,15 +747,15 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public typealias Value = UIKit.NSUnderlineStyle
     public typealias ObjectiveCValue = Foundation.NSNumber
     public static let name: Swift.String
-    public static func encode(_ value: UIKit.NSUnderlineStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> UIKit.NSUnderlineStyle
+    public static func encode(_ value: UIKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> UIKit.NSUnderlineStyle
   }
   @frozen public enum UnderlineStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
     public typealias Value = UIKit.NSUnderlineStyle
     public typealias ObjectiveCValue = Foundation.NSNumber
     public static let name: Swift.String
-    public static func encode(_ value: UIKit.NSUnderlineStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> UIKit.NSUnderlineStyle
+    public static func encode(_ value: UIKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> UIKit.NSUnderlineStyle
   }
   @frozen public enum StrokeColorAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = UIKit.UIColor
@@ -772,8 +772,8 @@ extension Foundation.AttributeScopes.UIKitAttributes {
   @frozen public enum TextEffectAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = Foundation.NSAttributedString.TextEffectStyle
     public static let name: Swift.String
-    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
+    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
   }
   @available(watchOS, unavailable)
   @frozen public enum AttachmentAttribute : Foundation.CodableAttributedStringKey {
@@ -905,9 +905,9 @@ extension UIKit.UITextSearchingFindSession {
 @available(tvOS, unavailable)
 extension UIKit.UISheetPresentationController.Detent {
   @available(iOS 16.0, *)
-  @_Concurrency.MainActor(unsafe) public static func custom(identifier: UIKit.UISheetPresentationController.Detent.Identifier? = nil, resolver: @escaping (_ context: UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?) -> UIKit.UISheetPresentationController.Detent
+  @_Concurrency.MainActor(unsafe) public static func custom(identifier: UIKit.UISheetPresentationController.Detent.Identifier? = nil, resolver: @escaping (_ context: any UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?) -> UIKit.UISheetPresentationController.Detent
   @available(iOS 16.0, *)
-  @_Concurrency.MainActor(unsafe) public func resolvedValue(in context: UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?
+  @_Concurrency.MainActor(unsafe) public func resolvedValue(in context: any UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?
 }
 @available(tvOS, unavailable)
 extension UIKit.UISheetPresentationController {
@@ -980,7 +980,7 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
   public static func listSidebarHeader() -> UIKit.UIBackgroundConfiguration
   public static func listSidebarCell() -> UIKit.UIBackgroundConfiguration
   public static func listAccompaniedSidebarCell() -> UIKit.UIBackgroundConfiguration
-  public func updated(for state: UIKit.UIConfigurationState) -> UIKit.UIBackgroundConfiguration
+  public func updated(for state: any UIKit.UIConfigurationState) -> UIKit.UIBackgroundConfiguration
   public var customView: UIKit.UIView? {
     get
     set(view)
@@ -1074,35 +1074,35 @@ extension UIKit.UIBackgroundConfiguration : Swift.CustomStringConvertible, Swift
 @available(iOS 14.0, *)
 public protocol UIIndirectScribbleInteractionDelegate : ObjectiveC.NSObjectProtocol {
   associatedtype ElementIdentifier : Swift.Hashable = Swift.String
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect, completion: @escaping ([Self.ElementIdentifier]) -> Swift.Void)
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect, completion: @escaping ([Self.ElementIdentifier]) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
+  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
   #endif
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, isElementFocused elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, frameForElement elementIdentifier: Self.ElementIdentifier) -> CoreFoundation.CGRect
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint, completion: @escaping ((UIKit.UIResponder & UIKit.UITextInput)?) -> Swift.Void)
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, isElementFocused elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, frameForElement elementIdentifier: Self.ElementIdentifier) -> CoreFoundation.CGRect
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint, completion: @escaping ((any UIKit.UIResponder & UIKit.UITextInput)?) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
+  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (any UIKit.UIResponder & UIKit.UITextInput)?
   #endif
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
+  func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
 }
 @available(iOS 14.0, *)
 extension UIKit.UIIndirectScribbleInteractionDelegate {
-  public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
-  public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
-  public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
+  public func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
+  public func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
+  public func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
 }
 @available(iOS 15.0, *)
 extension UIKit.UIIndirectScribbleInteractionDelegate {
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
+  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
+  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: any UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (any UIKit.UIResponder & UIKit.UITextInput)?
   #endif
 }
 extension UIKit.NSCollectionLayoutGroup {
@@ -1129,7 +1129,7 @@ extension UIKit.UINavigationItem {
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  @_Concurrency.MainActor(unsafe) weak public var renameDelegate: UIKit.UINavigationItemRenameDelegate? {
+  @_Concurrency.MainActor(unsafe) weak public var renameDelegate: (any UIKit.UINavigationItemRenameDelegate)? {
     get
     set(renameDelegate)
   }
@@ -1205,21 +1205,21 @@ public func UIOffsetEqualToOffset(_ offset1: UIKit.UIOffset, _ offset2: UIKit.UI
 @available(swift, deprecated: 4.2, message: "Use == operator instead.")
 public func UIFloatRangeIsEqualToRange(_ range: UIKit.UIFloatRange, _ otherRange: UIKit.UIFloatRange) -> Swift.Bool
 extension UIKit.UIEdgeInsets : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension UIKit.NSDirectionalEdgeInsets : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension UIKit.UIOffset : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension UIKit.UIFloatRange : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(swift 4)
 public protocol _UIKitNumericRawRepresentable : Swift.Comparable, Swift.RawRepresentable where Self.RawValue : Swift.Comparable, Self.RawValue : Swift.Numeric {
@@ -1253,11 +1253,11 @@ public func UIInterfaceOrientationIsPortrait(_ orientation: UIKit.UIInterfaceOri
 public func UIInterfaceOrientationIsLandscape(_ orientation: UIKit.UIInterfaceOrientation) -> Swift.Bool
 @available(iOS, introduced: 2.0, deprecated: 8.3, message: "UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead")
 extension UIKit.UIActionSheet {
-  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String?, delegate: UIKit.UIActionSheetDelegate?, cancelButtonTitle: Swift.String?, destructiveButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
+  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String?, delegate: (any UIKit.UIActionSheetDelegate)?, cancelButtonTitle: Swift.String?, destructiveButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }
 @available(iOS, introduced: 2.0, deprecated: 9.0, message: "UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead")
 extension UIKit.UIAlertView {
-  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, message: Swift.String, delegate: UIKit.UIAlertViewDelegate?, cancelButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
+  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, message: Swift.String, delegate: (any UIKit.UIAlertViewDelegate)?, cancelButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }
 extension UIKit.UIView : Swift.__DefaultCustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "UIView._defaultCustomPlaygroundQuickLook will be removed in a future Swift version")
@@ -1296,7 +1296,7 @@ extension UIKit.UIContentSizeCategory {
 @available(iOS 11.0, tvOS 11.0, *)
 extension UIKit.UIFocusEnvironment {
   @available(iOS 11.0, tvOS 11.0, *)
-  @_Concurrency.MainActor(unsafe) public func contains(_ environment: UIKit.UIFocusEnvironment) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func contains(_ environment: any UIKit.UIFocusEnvironment) -> Swift.Bool
 }
 @available(iOS 11.0, tvOS 11.0, *)
 extension UIKit.UIFocusItem {
@@ -1551,11 +1551,28 @@ extension UIKit.UIWindowScene.ActivationAction {
 }
 @available(iOS 13.0, *)
 extension UIKit.UIContextMenuConfiguration {
-  @_alwaysEmitIntoClient @_Concurrency.MainActor(unsafe) convenience public init(identifier: Foundation.NSCopying? = nil, previewProvider: UIKit.UIContextMenuContentPreviewProvider? = nil, actionProvider: UIKit.UIContextMenuActionProvider? = nil) {
+  @_alwaysEmitIntoClient @_Concurrency.MainActor(unsafe) convenience public init(identifier: (any Foundation.NSCopying)? = nil, previewProvider: UIKit.UIContextMenuContentPreviewProvider? = nil, actionProvider: UIKit.UIContextMenuActionProvider? = nil) {
         self.init(__identifier: identifier,
                   previewProvider: previewProvider,
                   actionProvider: actionProvider)
     }
+}
+extension UIKit.UIViewController {
+  @available(swift 5.1)
+  @available(iOS 16.4, tvOS 16.4, *)
+  @propertyWrapper public struct ViewLoading<Value> {
+    @available(*, unavailable, message: "@UIViewController.ViewLoading can only be used on subclasses of UIViewController")
+    public var wrappedValue: Value {
+      get
+      set
+    }
+    public init()
+    public init(wrappedValue: Value)
+    public static subscript<EnclosingSelf>(_enclosingInstance observed: EnclosingSelf, wrapped wrappedKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, Value>, storage storageKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, UIKit.UIViewController.ViewLoading<Value>>) -> Value where EnclosingSelf : UIKit.UIViewController {
+      get
+      set
+    }
+  }
 }
 @available(iOS 14.5, *)
 @available(tvOS, unavailable)
@@ -1842,6 +1859,21 @@ extension UIKit.UIButton {
   }
 }
 @available(iOS 15.0, tvOS 15.0, *)
+extension UIKit.UIButton.Configuration {
+  public var titleLineBreakMode: UIKit.NSLineBreakMode {
+    get
+    set
+  }
+  public var subtitleLineBreakMode: UIKit.NSLineBreakMode {
+    get
+    set
+  }
+  public var imageReservation: CoreFoundation.CGFloat {
+    get
+    set
+  }
+}
+@available(iOS 15.0, tvOS 15.0, *)
 extension UIKit.UIButton.Configuration : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> UIKit.__UIButtonConfiguration
   public static func _forceBridgeFromObjectiveC(_ input: UIKit.__UIButtonConfiguration, result: inout UIKit.UIButton.Configuration?)
@@ -2012,7 +2044,7 @@ public struct UICellAccessory {
 }
 @available(iOS 15.0, tvOS 15.0, *)
 extension UIKit.UIFocusSystem {
-  @_Concurrency.MainActor(unsafe) public class func focusSystem(for environment: UIKit.UIFocusEnvironment) -> UIKit.UIFocusSystem?
+  @_Concurrency.MainActor(unsafe) public class func focusSystem(for environment: any UIKit.UIFocusEnvironment) -> UIKit.UIFocusSystem?
 }
 @available(iOS 14.0, tvOS 14.0, *)
 public struct UICollectionLayoutListConfiguration {
@@ -2107,7 +2139,7 @@ extension UIKit.UICollectionViewCompositionalLayout {
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.NSCollectionLayoutSection {
-  @_Concurrency.MainActor(unsafe) public static func list(using configuration: UIKit.UICollectionLayoutListConfiguration, layoutEnvironment: UIKit.NSCollectionLayoutEnvironment) -> UIKit.NSCollectionLayoutSection
+  @_Concurrency.MainActor(unsafe) public static func list(using configuration: UIKit.UICollectionLayoutListConfiguration, layoutEnvironment: any UIKit.NSCollectionLayoutEnvironment) -> UIKit.NSCollectionLayoutSection
 }
 @available(iOS 16.0, *)
 extension UIKit.UIPasteControl.Configuration {

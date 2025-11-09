@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9691593A-354F-3240-A389-B02D138250C2
-  - target:          x86_64-maccatalyst
-    value:           9691593A-354F-3240-A389-B02D138250C2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7E28A265-A2A4-3885-9BE9-DF420B5D1A04
-  - target:          arm64e-maccatalyst
-    value:           7E28A265-A2A4-3885-9BE9-DF420B5D1A04
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 761.2.1
+current-version: 761.4.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

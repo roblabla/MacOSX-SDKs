@@ -203,12 +203,28 @@ typedef union {
 
 
 
+/* H14S e-Core */
+#define CPU_PART_BLIZZARD_RHODES_CHOP   0x34
+
+/* H14S p-Core */
+#define CPU_PART_AVALANCHE_RHODES_CHOP  0x35
+
+/* H14C e-Core */
+#define CPU_PART_BLIZZARD_RHODES_DIE    0x38
+
+/* H14C p-Core */
+#define CPU_PART_AVALANCHE_RHODES_DIE   0x39
+
+
 
 /* H15 e-Core */
 #define CPU_PART_SAWTOOTH           0x40
 
 /* H15 p-Core */
 #define CPU_PART_EVEREST            0x41
+
+
+
 
 
 /* M11 e-Core */
@@ -227,6 +243,7 @@ typedef enum {
 } cache_type_t;
 
 typedef struct {
+	boolean_t    c_valid;            /* has this cache info been populated? */
 	boolean_t    c_unified;          /* unified I & D cache? */
 	uint32_t     c_isize;            /* in Bytes (ARM caches can be 0.5 KB) */
 	boolean_t    c_i_ppage;          /* protected page restriction for I cache

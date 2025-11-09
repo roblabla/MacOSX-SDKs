@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, MPSGraphResizeNearestRoundingMode)
     MPSGraphResizeNearestRoundingModeRoundPreferFloor       MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  1L,
     MPSGraphResizeNearestRoundingModeCeil                   MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  2L,
     MPSGraphResizeNearestRoundingModeFloor                  MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  3L,
+    MPSGraphResizeNearestRoundingModeRoundToEven            MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                                    =  4L,
+    MPSGraphResizeNearestRoundingModeRoundToOdd             MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                                    =  5L,
 };
 
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))

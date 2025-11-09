@@ -73,3 +73,8 @@
 
 
 
+
+#import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredential.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPublicKeyCredentialManager.h>
+

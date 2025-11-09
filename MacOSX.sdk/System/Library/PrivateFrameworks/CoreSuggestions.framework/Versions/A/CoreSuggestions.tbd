@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9DBD26EF-7952-3EDC-9F01-7F6F7F601358
-  - target:          x86_64-maccatalyst
-    value:           9DBD26EF-7952-3EDC-9F01-7F6F7F601358
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C95CA6CA-A88A-3E91-819F-DB383EB45754
-  - target:          arm64e-maccatalyst
-    value:           C95CA6CA-A88A-3E91-819F-DB383EB45754
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/CoreSuggestions'
-current-version: 1193.8.6
+current-version: 1193.26
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -142,7 +129,7 @@ exports:
                        _kSGDPRecorderToAlpha, _kSGDPRecorderToLowercase, _kSGDetectContacts, 
                        _kSGDetectMessageEventsML, _kSGDetectNLEvents, _kSGDetectReminders, 
                        _kSGDetectRemindersInMail, _kSGDetectSalientMails, _kSGDetectStructuredEvents, 
-                       _kSGDetectStructuredEventsML, _kSGEmailSearchableItemSourceKey, 
+                       _kSGDetectStructuredEventsML, _kSGDidKVSMigrationToken, _kSGEmailSearchableItemSourceKey, 
                        _kSGEventActivityEndDateKey, _kSGEventActivityStartDateKey, 
                        _kSGEventActivityTeamIdentifierKey, _kSGEventActivityTypeCheckInKey, 
                        _kSGEventActivityTypeKey, _kSGEventActivityTypeUnknownKey, 
@@ -158,15 +145,15 @@ exports:
                        _kSGOnlyShowSignificantNLEvents, _kSGOnlyShowSignificantPseudoContacts, 
                        _kSGParsecFlightCachingAPIBaseURL, _kSGShowOperatingSystemVersionInSnippets, 
                        _kSGShowPastEvents, _kSGShowSuggestionsCalendar, _kSGSuggestionsBundleIdentifier, 
-                       _kSGSuggestionsDaemonIdentifier, _kSGSuggestionsNotificationsChangedBySuggestions, 
-                       _kSGSuggestionsNotificationsChangedByUser, _kSGSuggestionsPrepareForQuery, 
-                       _kSGSuggestionsSettingsChanged, _kSGSuggestionsSettingsSuiteIdentifier, 
-                       _kSGSuppressSyncHistoryToCloud, _kSGTimeToLeaveAlertsEnabled, 
-                       _kSGTimeToLeaveLocationEnabled, _kSGTrustCoreNLPKey, _kSGTrustDataDetectorsKey, 
-                       _kSGTrustHMMKey, _kSGURLChangeNotification, _kSGUseManateeSaltForHistory, 
-                       _kSGUserAccountsPersistedState, _kSuggestionsDaemonStringsFileExtension, 
-                       _kSuggestionsDaemonStringsFileName, _kSuggestionsEKEventAvailabilityState, 
-                       _kSuggestionsEkEventIsEligibleForNotification, _kSuggestionsEkEventNLEventDictionaryCalendarAppUsageLevelKey, 
+                       _kSGSuggestionsNotificationsChangedBySuggestions, _kSGSuggestionsNotificationsChangedByUser, 
+                       _kSGSuggestionsPrepareForQuery, _kSGSuggestionsSettingsChanged, 
+                       _kSGSuggestionsSettingsSuiteIdentifier, _kSGSuppressSyncHistoryToCloud, 
+                       _kSGTimeToLeaveAlertsEnabled, _kSGTimeToLeaveLocationEnabled, 
+                       _kSGTrustCoreNLPKey, _kSGTrustDataDetectorsKey, _kSGTrustHMMKey, 
+                       _kSGURLChangeNotification, _kSGUseManateeSaltForHistory, _kSGUserAccountsPersistedState, 
+                       _kSuggestionsDaemonStringsFileExtension, _kSuggestionsDaemonStringsFileName, 
+                       _kSuggestionsEKEventAvailabilityState, _kSuggestionsEkEventIsEligibleForNotification, 
+                       _kSuggestionsEkEventNLEventDictionaryCalendarAppUsageLevelKey, 
                        _kSuggestionsEkEventNLEventDictionaryEventAttributesKey, _kSuggestionsEkEventNLEventDictionaryEventConfidenceScoreKey, 
                        _kSuggestionsEkEventNLEventDictionaryEventLanguageIDKey, _kSuggestionsEkEventNLEventDictionaryEventParticipantCountKey, 
                        _kSuggestionsEkEventNLEventDictionaryEventSignificantSenderKey, 

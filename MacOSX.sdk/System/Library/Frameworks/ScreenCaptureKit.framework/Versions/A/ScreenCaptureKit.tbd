@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           82295E18-D081-3A97-8935-6C63888728ED
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           57C352D9-549E-35C2-AB79-9850D6BC18C6
 install-name:    '/System/Library/Frameworks/ScreenCaptureKit.framework/Versions/A/ScreenCaptureKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

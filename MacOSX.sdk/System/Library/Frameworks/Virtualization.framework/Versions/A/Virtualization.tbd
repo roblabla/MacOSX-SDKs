@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           ECA043BC-E8B4-3188-832D-AC3A17AC3726
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           757F57EA-D97A-3F37-87B6-3FCE0220B67A
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 104.7.1
+current-version: 104.22
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __VZVirtualMachineGuestTypeMacOS ]

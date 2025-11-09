@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name GameController
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 10.3.5
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name GameController
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 10.5.10
 @_exported import GameController
 import Swift
 import _Concurrency
@@ -43,7 +43,7 @@ public struct GCPhysicalInputElementName : Swift.RawRepresentable, Swift.Hashabl
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension GameController.GCPhysicalInputElementCollection where T == GameController.GCPhysicalInputElement {
+extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCPhysicalInputElement {
   public subscript(elementName: GameController.GCPhysicalInputElementName) -> T? {
     get
   }
@@ -61,26 +61,26 @@ public struct GCAxisElementName : Swift.RawRepresentable, Swift.Hashable, Swift.
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension GameController.GCPhysicalInputElementCollection where T == GameController.GCAxisElement {
+extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCAxisElement {
   public subscript(elementName: GameController.GCAxisElementName) -> T? {
     get
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCDevicePhysicalInputState {
-  public var elements: GameController.GCPhysicalInputElementCollection<GameController.GCPhysicalInputElement> {
+  public var elements: GameController.GCPhysicalInputElementCollection<any GameController.GCPhysicalInputElement> {
     get
   }
-  public var buttons: GameController.GCPhysicalInputElementCollection<GameController.GCButtonElement> {
+  public var buttons: GameController.GCPhysicalInputElementCollection<any GameController.GCButtonElement> {
     get
   }
-  public var axes: GameController.GCPhysicalInputElementCollection<GameController.GCAxisElement> {
+  public var axes: GameController.GCPhysicalInputElementCollection<any GameController.GCAxisElement> {
     get
   }
-  public var switches: GameController.GCPhysicalInputElementCollection<GameController.GCSwitchElement> {
+  public var switches: GameController.GCPhysicalInputElementCollection<any GameController.GCSwitchElement> {
     get
   }
-  public var dpads: GameController.GCPhysicalInputElementCollection<GameController.GCDirectionPadElement> {
+  public var dpads: GameController.GCPhysicalInputElementCollection<any GameController.GCDirectionPadElement> {
     get
   }
 }
@@ -96,7 +96,7 @@ public struct GCDirectionPadElementName : Swift.RawRepresentable, Swift.Hashable
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension GameController.GCPhysicalInputElementCollection where T == GameController.GCDirectionPadElement {
+extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCDirectionPadElement {
   public subscript(elementName: GameController.GCDirectionPadElementName) -> T? {
     get
   }
@@ -248,7 +248,7 @@ public struct GCSwitchElementName : Swift.RawRepresentable, Swift.Hashable, Swif
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension GameController.GCPhysicalInputElementCollection where T == GameController.GCSwitchElement {
+extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCSwitchElement {
   public subscript(elementName: GameController.GCSwitchElementName) -> T? {
     get
   }
@@ -296,7 +296,7 @@ public struct GCButtonElementName : Swift.RawRepresentable, Swift.Hashable, Swif
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension GameController.GCPhysicalInputElementCollection where T == GameController.GCButtonElement {
+extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCButtonElement {
   public subscript(elementName: GameController.GCButtonElementName) -> T? {
     get
   }

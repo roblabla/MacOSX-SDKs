@@ -219,7 +219,7 @@ SR_EXTERN SRSensor const SRSensorTelephonySpeechMetrics API_AVAILABLE(ios(15.0))
  * Ambient pressure sensor stream
  *
  * @discussion
- * This stream stores simple pressure and temperature masurements including:
+ * This stream stores simple pressure and temperature measurements including:
  * @textblock
  *   - Pressure and temperature
  *   - Date when metric was collected
@@ -228,4 +228,20 @@ SR_EXTERN SRSensor const SRSensorTelephonySpeechMetrics API_AVAILABLE(ios(15.0))
  * Fetches from this stream return objects of type NSArray<CMRecordedPressureData *> * as defined in the CoreMotion framework.
  */
 SR_EXTERN SRSensor const SRSensorAmbientPressure API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+
+/*!
+ * @const SRSensorMediaEvents
+ *
+ * @brief
+ * Media events sensor stream
+ *
+ * @discussion
+ * This stream stores data about user interaction with photo and video content in messaging apps including:
+ * @textblock
+ *   - Event type
+ *   - Media identifier
+ * @/textblock
+ * Fetches from this stream return objects of type SRMediaEvent.
+ */
+SR_EXTERN SRSensor const SRSensorMediaEvents API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
 NS_ASSUME_NONNULL_END

@@ -5,7 +5,9 @@
 #import <AuthenticationServices/ASAuthorizationRequest.h>
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
+
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 @interface ASAuthorizationPlatformPublicKeyCredentialAssertionRequest : ASAuthorizationRequest<ASAuthorizationPublicKeyCredentialAssertionRequest>
@@ -19,4 +21,8 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos)
+@interface ASAuthorizationPlatformPublicKeyCredentialAssertionRequest () <ASAuthorizationWebBrowserExternallyAuthenticatableRequest>
+@end
+
+NS_HEADER_AUDIT_END(nullability, sendability)

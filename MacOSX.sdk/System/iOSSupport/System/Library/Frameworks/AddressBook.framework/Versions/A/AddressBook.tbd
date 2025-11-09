@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           6DACA41F-0E6F-3C54-B884-E121A4E3FDDB
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           6B1010AE-5BF3-3512-8D69-2423B7B1C644
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

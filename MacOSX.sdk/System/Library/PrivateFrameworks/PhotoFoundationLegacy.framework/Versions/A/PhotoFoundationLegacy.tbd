@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C5F00A5D-9123-39F0-98E7-6D526D48A5A0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D74039E0-0CC2-30E4-947F-1D135C85E742
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundationLegacy.framework/Versions/A/PhotoFoundationLegacy'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LastAddRemoveTaskState, _PFCMTimeDescription, _PFCMTimeFromQTTimeString, 

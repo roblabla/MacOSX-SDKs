@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FFC584AC-1DDE-3346-B4F6-E8DCE86B201A
-  - target:          x86_64-maccatalyst
-    value:           FFC584AC-1DDE-3346-B4F6-E8DCE86B201A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B3693FB9-E645-3EDD-B900-1A56170BAA57
-  - target:          arm64e-maccatalyst
-    value:           B3693FB9-E645-3EDD-B900-1A56170BAA57
 install-name:    '/System/Library/PrivateFrameworks/Coordination.framework/Versions/A/Coordination'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -38,6 +25,7 @@ exports:
                        _COStateManagerClusterPingMaximumKey, _COStateManagerClusterPingMinimumKey, 
                        _COStateManagerErrorDomain, _COStateManagerErrorFailedClustersKey, 
                        _COStateManagerNodeAccessoryIdentifierKey, _COStateManagerNodeBallotKey, 
+                       _COStateManagerNodeConnectionTypeKey, _COStateManagerNodeDiscoveryTypeKey, 
                        _COStateManagerNodeGenerationKey, _COStateManagerNodeHasOutstandingProbeKey, 
                        _COStateManagerNodeIDSIdentifierKey, _COStateManagerNodeIdentifierKey, 
                        _COStateManagerNodeIsClusterLeaderKey, _COStateManagerNodeIsCurrentDevice, 
@@ -49,11 +37,12 @@ exports:
                        _COTimerManagerTimersAdded, _COTimerManagerTimersChanged, 
                        _COTimerManagerTimersRemoved, _COTimerManagerTimersUpdated, 
                        _COTimerSiriContextTargetReferenceForAccessory, _COTimerSiriContextTargetReferenceKey ]
-    objc-classes:    [ COAlarmManager, COCapabilityManager, COCluster, COClusterMember, 
-                       COClusterMemberRoleSnapshot, COClusterRole, COClusterRoleMonitor, 
-                       COFeatureStatus, COKeyPath, COMessageChannel, COMessageChannelRequest, 
-                       COMessageChannelResponse, COMessageSession, COMessageSessionConsumer, 
-                       COMessageSessionManagementRequest, COMessageSessionManagementResponse, 
-                       COMessageSessionNotice, COMessageSessionProducer, COMessageSessionRequest, 
-                       COMessageSessionResponse, COStateManager, COTimerManager ]
+    objc-classes:    [ COAlarmManager, COCapabilityManager, COCluster, COClusterConfiguration, 
+                       COClusterMember, COClusterMemberRoleSnapshot, COClusterRealm, 
+                       COClusterRole, COClusterRoleMonitor, COFeatureStatus, COKeyPath, 
+                       COMessageChannel, COMessageChannelRequest, COMessageChannelResponse, 
+                       COMessageSession, COMessageSessionConsumer, COMessageSessionManagementRequest, 
+                       COMessageSessionManagementResponse, COMessageSessionNotice, 
+                       COMessageSessionProducer, COMessageSessionRequest, COMessageSessionResponse, 
+                       COStateManager, COTimerManager ]
 ...

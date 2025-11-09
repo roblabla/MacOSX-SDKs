@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKIdentityError.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKIdentityError.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2022 Apple, Inc. All rights reserved.
 //

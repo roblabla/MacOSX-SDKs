@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0779AD08-4614-3129-B708-1D014007ADE0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           64780470-A624-37CD-B7E3-D6CEBE066F26
 install-name:    '/System/Library/PrivateFrameworks/CoreChartSwift.framework/Versions/A/CoreChartSwift'
-current-version: 12.2.2
+current-version: 12.2.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

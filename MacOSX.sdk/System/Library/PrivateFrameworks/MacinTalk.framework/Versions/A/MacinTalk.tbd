@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           49766872-729B-384D-8480-B8079AA9E73F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5F05E19E-6F4E-3F10-A293-17FFC11E300A
 install-name:    '/System/Library/PrivateFrameworks/MacinTalk.framework/Versions/A/MacinTalk'
 swift-abi-version: 7
 exports:
@@ -1143,15 +1136,12 @@ exports:
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1ESt16initializer_listIS2_E, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1ESt16initializer_listIS2_ERKS4_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1Em, __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1EmRKS2_, 
-                       __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1EmRKS2_RKS4_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC1EmRKS4_, __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2ERKS5_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2ERKS5_RKS4_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2ESt16initializer_listIS2_E, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2ESt16initializer_listIS2_ERKS4_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2Em, __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2EmRKS2_, 
-                       __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2EmRKS2_RKS4_, 
                        __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEC2EmRKS4_, __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEEaSERKS5_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE11__vallocateEm, 
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE12__move_rangeEPS2_S6_S6_, 
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE13__move_assignERS5_NS_17integral_constantIbLb0EEE, 
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE13__move_assignERS5_NS_17integral_constantIbLb1EEE, 
@@ -1174,8 +1164,7 @@ exports:
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE8__appendEmRKS2_, 
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1ERKS5_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1ERKS5_RKS4_, 
                        __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1Em, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1EmRKS2_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1EmRKS2_RKS4_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1EmRKS4_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2ERKS5_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2ERKS5_RKS4_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2Em, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2EmRKS2_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2EmRKS2_RKS4_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2EmRKS4_ ]
+                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC1EmRKS4_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2ERKS5_, 
+                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2ERKS5_RKS4_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2Em, 
+                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2EmRKS2_, __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEEC2EmRKS4_ ]
 ...

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           93392DB2-0D2F-34E5-91C1-88CBD2AC7E80
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CE56C1D2-9CBD-3469-BBC3-34057ADFA1C2
 install-name:    '/System/Library/PrivateFrameworks/SnippetCommands.framework/Versions/A/SnippetCommands'
 swift-abi-version: 7
 exports:

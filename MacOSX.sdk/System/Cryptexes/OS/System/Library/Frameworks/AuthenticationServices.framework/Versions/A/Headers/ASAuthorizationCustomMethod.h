@@ -4,7 +4,7 @@
 
 #import <AuthenticationServices/ASFoundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString * ASAuthorizationCustomMethod NS_TYPED_ENUM API_AVAILABLE(tvos(15.0)) API_UNAVAILABLE(ios, macos, watchos);
 
@@ -17,4 +17,4 @@ AS_EXTERN ASAuthorizationCustomMethod const ASAuthorizationCustomMethodRestorePu
 /// An authorization method that uses some other sign-in mechanism.
 AS_EXTERN ASAuthorizationCustomMethod const ASAuthorizationCustomMethodOther API_AVAILABLE(tvos(15.0)) API_UNAVAILABLE(ios, macos, watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

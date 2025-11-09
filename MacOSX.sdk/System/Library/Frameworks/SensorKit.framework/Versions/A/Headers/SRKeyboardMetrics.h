@@ -31,6 +31,9 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 /// The input modes used during a keyboard session
 @property (readonly, copy) NSArray<NSString *> *inputModes API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
+/// The keyboard session identifiers. These are the identifiers of the keyboard sessions that contributed to keyboard metrics sample to correlate current stream with another stream using the same keyboard session indentifiers
+@property (readonly, copy) NSArray<NSString *> *sessionIdentifiers API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
 @end
 
 SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
@@ -145,12 +148,8 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 /// The duration between touch down to touch down for any key
 @property (readonly, strong) SRKeyboardProbabilityMetric<NSUnitDuration *> *touchDownDown;
 
-/**
- * WARNING!!! Availability for touchUpDown metrics is not accurate,
- * since we're introducing these in C which doesn't have an SDK !!!
- */
-/// The duration between touch up to touch down for any key
-@property (readonly, strong) SRKeyboardProbabilityMetric<NSUnitDuration *> *touchUpDown API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+/// The duration between touch up and touch down for any key
+@property (readonly, strong) SRKeyboardProbabilityMetric<NSUnitDuration *> *touchUpDown API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
 /// The duration between touchup on a character key and touch down on a word in the prediction bar
 @property (readonly, strong) SRKeyboardProbabilityMetric<NSUnitDuration *> *charKeyToPrediction;
@@ -251,12 +250,8 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 /// The duration between touch down and touch down of the character keys of all the long words in the session.
 @property (readonly, strong) NSArray<SRKeyboardProbabilityMetric<NSUnitDuration *> *> *longWordTouchDownDown;
 
-/**
- * WARNING!!! Availability for longWordTouchUpDown metrics is not accurate,
- * since we're introducing these in C which doesn't have an SDK !!!
- */
 /// The duration between touch up and touch down of the character keys of all the long words in the session.
-@property (readonly, strong) NSArray<SRKeyboardProbabilityMetric<NSUnitDuration *> *> *longWordTouchUpDown API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+@property (readonly, strong) NSArray<SRKeyboardProbabilityMetric<NSUnitDuration *> *> *longWordTouchUpDown API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
 /// The duration between touchup of the delete key and touch down of a sequential delete key
 @property (readonly, strong) NSArray<SRKeyboardProbabilityMetric<NSUnitDuration *> *> *deleteToDeletes;

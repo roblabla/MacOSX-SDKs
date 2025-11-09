@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           303FE66E-77EC-3D2D-A1F0-2335938A97A8
-  - target:          x86_64-maccatalyst
-    value:           303FE66E-77EC-3D2D-A1F0-2335938A97A8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           85BA4D60-14D5-3149-BCC7-51478F481158
-  - target:          arm64e-maccatalyst
-    value:           85BA4D60-14D5-3149-BCC7-51478F481158
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1517.3.2
+current-version: 1517.4.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -213,8 +200,8 @@ exports:
                        CalEmailProvider, CalEntitlementsVerifier, CalFileSensor, 
                        CalFloatingDateHelper, CalFoundationBundle, CalFoundationPreferences, 
                        CalGeocoder, CalGoogleConferenceFormat, CalGrantedDelegate, 
-                       CalHolidayAccountUtils, CalLazyCreateUtils, CalLimitingQueue, 
-                       CalLocation, CalLocationAuthorization, CalLocationAuthorizationStatus, 
+                       CalHolidayAccountUtils, CalIdleTimer, CalLazyCreateUtils, 
+                       CalLimitingQueue, CalLocation, CalLocationAuthorization, CalLocationAuthorizationStatus, 
                        CalLocationBundle, CalLocationManager, CalLocationManagerDelegate, 
                        CalLocationPrediction, CalLogBasicTextFormatter, CalLogConfiguration, 
                        CalLogEnvelope, CalLogFileWriter, CalLogFilter, CalLogMaster, 

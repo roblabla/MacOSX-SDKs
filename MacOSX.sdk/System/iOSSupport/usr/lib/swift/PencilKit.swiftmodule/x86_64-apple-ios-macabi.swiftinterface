@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPencilKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPencilKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 7
 @_exported import PencilKit
 import Swift
@@ -8,7 +8,7 @@ import _Concurrency
 import _StringProcessing
 @available(iOS 13.0, *)
 extension PencilKit.PKCanvasView {
-  @_Concurrency.MainActor(unsafe) public var tool: PencilKit.PKTool {
+  @_Concurrency.MainActor(unsafe) public var tool: any PencilKit.PKTool {
     get
     set
   }
@@ -227,8 +227,8 @@ extension PencilKit.PKDrawing : Swift.Equatable {
 }
 @available(iOS 13.0, macOS 10.15, *)
 extension PencilKit.PKDrawing : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS 13.0, macOS 10.15, *)
 extension PencilKit.PKDrawing : Swift._ObjectiveCBridgeable {
@@ -253,7 +253,7 @@ extension PencilKit.PKLassoTool : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 13.0, *)
 extension PencilKit.PKToolPicker {
-  public var selectedTool: PencilKit.PKTool {
+  public var selectedTool: any PencilKit.PKTool {
     get
     set
   }

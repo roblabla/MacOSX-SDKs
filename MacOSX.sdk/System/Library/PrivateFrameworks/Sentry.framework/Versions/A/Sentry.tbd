@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9E365E95-090B-381F-8FAD-5EB5436646CE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           10D1CF3E-DAEC-306C-8EBF-D48647078705
 install-name:    '/System/Library/PrivateFrameworks/Sentry.framework/Versions/A/Sentry'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

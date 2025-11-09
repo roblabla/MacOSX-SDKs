@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -enforce-exclusivity=unchecked -module-name Distributed
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.7.1.134.4
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -module-name Distributed
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.8.0.117.59
 import Darwin
 import Swift
 import _Concurrency
@@ -24,11 +24,11 @@ extension Swift.CodingUserInfoKey {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor where Self.ID : Swift.Decodable {
-  nonisolated public init(from decoder: Swift.Decoder) throws
+  nonisolated public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor where Self.ID : Swift.Encodable {
-  nonisolated public func encode(to encoder: Swift.Encoder) throws
+  nonisolated public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor {
@@ -52,7 +52,7 @@ public protocol DistributedActorSystem : Swift.Sendable {
   func resignID(_ id: Self.ActorID)
   func makeInvocationEncoder() -> Self.InvocationEncoder
   #if compiler(>=5.3) && $AsyncAwait
-  func invokeHandlerOnReturn(handler: Self.ResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: Any.Type) async throws
+  func invokeHandlerOnReturn(handler: Self.ResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: any Any.Type) async throws
   #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -96,9 +96,9 @@ public struct RemoteCallArgument<Value> {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationDecoder {
   associatedtype SerializationRequirement
-  mutating func decodeGenericSubstitutions() throws -> [Any.Type]
-  mutating func decodeErrorType() throws -> Any.Type?
-  mutating func decodeReturnType() throws -> Any.Type?
+  mutating func decodeGenericSubstitutions() throws -> [any Any.Type]
+  mutating func decodeErrorType() throws -> (any Any.Type)?
+  mutating func decodeReturnType() throws -> (any Any.Type)?
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationResultHandler {
@@ -150,10 +150,10 @@ public func _getParameterTypeInfo(mangledMethodName name: Swift.String, genericE
 @_silgen_name("swift_func_getParameterTypeInfo")
 public func __getParameterTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?, _ types: Builtin.RawPointer, _ typesLength: Swift.Int) -> Swift.Int32
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public func _getReturnTypeInfo(mangledMethodName name: Swift.String, genericEnv: Swift.UnsafeRawPointer?, genericArguments: Swift.UnsafeRawPointer?) -> Any.Type?
+public func _getReturnTypeInfo(mangledMethodName name: Swift.String, genericEnv: Swift.UnsafeRawPointer?, genericArguments: Swift.UnsafeRawPointer?) -> (any Any.Type)?
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_func_getReturnTypeInfo")
-public func __getReturnTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?) -> Any.Type?
+public func __getReturnTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?) -> (any Any.Type)?
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_distributed_getGenericEnvironment")
 public func _getGenericEnvironmentOfDistributedTarget(_ targetNameStart: Swift.UnsafePointer<Swift.UInt8>, _ targetNameLength: Swift.UInt) -> Swift.UnsafeRawPointer?
@@ -181,7 +181,7 @@ final public class LocalTestingDistributedActorSystem : Distributed.DistributedA
   #endif
   @objc deinit
   #if compiler(>=5.3) && $AsyncAwait
-  final public func invokeHandlerOnReturn(handler: Distributed.LocalTestingInvocationResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: Any.Type) async throws
+  final public func invokeHandlerOnReturn(handler: Distributed.LocalTestingInvocationResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: any Any.Type) async throws
   #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -197,8 +197,8 @@ public struct LocalTestingActorID : Swift.Hashable, Swift.Sendable, Swift.Codabl
   @available(*, deprecated, renamed: "init(id:)")
   public init(parse id: Swift.String)
   public init(id: Swift.String)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Distributed.LocalTestingActorID, b: Distributed.LocalTestingActorID) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -217,10 +217,10 @@ public struct LocalTestingInvocationEncoder : Distributed.DistributedTargetInvoc
 @_hasMissingDesignatedInitializers @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 final public class LocalTestingInvocationDecoder : Distributed.DistributedTargetInvocationDecoder {
   public typealias SerializationRequirement = Swift.Codable
-  final public func decodeGenericSubstitutions() throws -> [Any.Type]
+  final public func decodeGenericSubstitutions() throws -> [any Any.Type]
   final public func decodeNextArgument<Argument>() throws -> Argument where Argument : Swift.Decodable, Argument : Swift.Encodable
-  final public func decodeErrorType() throws -> Any.Type?
-  final public func decodeReturnType() throws -> Any.Type?
+  final public func decodeErrorType() throws -> (any Any.Type)?
+  final public func decodeReturnType() throws -> (any Any.Type)?
   @objc deinit
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

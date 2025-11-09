@@ -2,20 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5984BB13-59BF-3A45-98B9-B1EC62D5C8CC
-  - target:          x86_64-maccatalyst
-    value:           5984BB13-59BF-3A45-98B9-B1EC62D5C8CC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BC7F507B-F1A6-3DE0-A9D9-9FB9835B0D42
-  - target:          arm64e-maccatalyst
-    value:           BC7F507B-F1A6-3DE0-A9D9-9FB9835B0D42
-install-name:    '/AppleInternal/Library/BuildRoots/aaefcfd1-5c95-11ed-8734-2e32217d8374/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono600.dylib'
+install-name:    '/AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono600.dylib'
 current-version: 0
 compatibility-version: 0
 exports:

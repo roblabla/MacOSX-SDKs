@@ -7,11 +7,13 @@
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for MediaSetup.
+//! The version number of the Media Setup framework.
 FOUNDATION_EXPORT double MediaSetupVersionNumber;
+/// The version number of the Media Setup framework.
 
-//! Project version string for MediaSetup.
+//! The version of the Media Setup framework.
 FOUNDATION_EXPORT const unsigned char MediaSetupVersionString[];
+/// The version of the Media Setup framework.
 
 #import <MediaSetup/MSServiceAccount.h>
 #import <MediaSetup/MSSetupSession.h>

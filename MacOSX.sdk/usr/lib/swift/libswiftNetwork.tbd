@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           01D46C5F-D97D-33B8-8A66-6BC71EF1E62E
-  - target:          x86_64-maccatalyst
-    value:           01D46C5F-D97D-33B8-8A66-6BC71EF1E62E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4D3FC211-5ED5-3C1F-945F-37BD35B45B3B
-  - target:          arm64e-maccatalyst
-    value:           4D3FC211-5ED5-3C1F-945F-37BD35B45B3B
 install-name:    '/usr/lib/swift/libswiftNetwork.dylib'
-current-version: 3013.60.42
+current-version: 3100.101.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -2003,9 +1990,13 @@ exports:
                        '_$s7Network6NWPathV8gatewaysSayAA10NWEndpointOGvg', '_$s7Network6NWPathV8gatewaysSayAA10NWEndpointOGvpMV', 
                        '_$s7Network6NWPathVMa', '_$s7Network6NWPathVMn', '_$s7Network6NWPathVN', 
                        '_$s7Network6NWPathVSQAAMc', '_$s7Network6NWPathVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s7Network7NWErrorO16debugDescriptionSSvg', '_$s7Network7NWErrorO16debugDescriptionSSvpMV', 
-                       '_$s7Network7NWErrorO2eeoiySbAC_ACtFZ', '_$s7Network7NWErrorO3dnsyACs5Int32VcACmFWC', 
-                       '_$s7Network7NWErrorO3tlsyACs5Int32VcACmFWC', '_$s7Network7NWErrorO5posixyAC6Darwin14POSIXErrorCodeOcACmFWC', 
+                       '_$s7Network7NWErrorO10Foundation13CustomNSErrorAAMc', '_$s7Network7NWErrorO13errorUserInfoSDySSypGvg', 
+                       '_$s7Network7NWErrorO13errorUserInfoSDySSypGvpMV', '_$s7Network7NWErrorO16debugDescriptionSSvg', 
+                       '_$s7Network7NWErrorO16debugDescriptionSSvpMV', '_$s7Network7NWErrorO2eeoiySbAC_ACtFZ', 
+                       '_$s7Network7NWErrorO3dnsyACs5Int32VcACmFWC', '_$s7Network7NWErrorO3tlsyACs5Int32VcACmFWC', 
+                       '_$s7Network7NWErrorO5posixyAC6Darwin14POSIXErrorCodeOcACmFWC', 
+                       '_$s7Network7NWErrorO7_domainSSvg', '_$s7Network7NWErrorO7_domainSSvpMV', 
+                       '_$s7Network7NWErrorO9errorCodeSivg', '_$s7Network7NWErrorO9errorCodeSivpMV', 
                        '_$s7Network7NWErrorOMa', '_$s7Network7NWErrorOMn', '_$s7Network7NWErrorON', 
                        '_$s7Network7NWErrorOSQAAMc', '_$s7Network7NWErrorOs28CustomDebugStringConvertibleAAMc', 
                        '_$s7Network7NWErrorOs5ErrorAAMc', '_$s7Network7NWErrorOyACSo11OS_nw_error_pcfC', 

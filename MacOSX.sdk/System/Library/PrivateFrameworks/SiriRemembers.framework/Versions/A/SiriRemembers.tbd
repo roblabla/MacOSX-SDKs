@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           85CA3F4C-3E9C-3474-8342-E963AF8A67E4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           80FF5CA9-3F17-309C-AA02-03D1A5C81258
 install-name:    '/System/Library/PrivateFrameworks/SiriRemembers.framework/Versions/A/SiriRemembers'
 current-version: 0
 compatibility-version: 0
@@ -90,6 +83,8 @@ exports:
                        '_$s13SiriRemembers12HistoryStatsV10privatizedAA010PrivatizedcD0VvpMV', 
                        '_$s13SiriRemembers12HistoryStatsV11frequenciesSays5Int16VGvg', 
                        '_$s13SiriRemembers12HistoryStatsV11frequenciesSays5Int16VGvpMV', 
+                       '_$s13SiriRemembers12HistoryStatsV16computeDirichlet9bandwidthS2d_tF', 
+                       '_$s13SiriRemembers12HistoryStatsV26computeNormalizedDirichlet5stats9bandwidthSaySdGSayACG_SdtFZ', 
                        '_$s13SiriRemembers12HistoryStatsV2eeoiySbAC_ACtFZ', '_$s13SiriRemembers12HistoryStatsV4fromACs7Decoder_p_tKcfC', 
                        '_$s13SiriRemembers12HistoryStatsV6encode2toys7Encoder_p_tKF', 
                        '_$s13SiriRemembers12HistoryStatsV6insert4datey10Foundation4DateV_tF', 
@@ -223,7 +218,15 @@ exports:
                        '_$s13SiriRemembers17AppMatcherSignalsV8bundleId12recencyOrder10secondsAgo0H5Score09frequencyL007overallL0ACSS_SiS4dtcfC', 
                        '_$s13SiriRemembers17AppMatcherSignalsV8bundleIdSSvg', '_$s13SiriRemembers17AppMatcherSignalsV8bundleIdSSvpMV', 
                        '_$s13SiriRemembers17AppMatcherSignalsVMa', '_$s13SiriRemembers17AppMatcherSignalsVMn', 
-                       '_$s13SiriRemembers17AppMatcherSignalsVN', '_$s13SiriRemembers17OrderedDictionaryV10dictionarySDyxq_GvM', 
+                       '_$s13SiriRemembers17AppMatcherSignalsVN', '_$s13SiriRemembers17IntervalFrequencyV2eeoiySbAC_ACtFZ', 
+                       '_$s13SiriRemembers17IntervalFrequencyV5countSivM', '_$s13SiriRemembers17IntervalFrequencyV5countSivg', 
+                       '_$s13SiriRemembers17IntervalFrequencyV5countSivpMV', '_$s13SiriRemembers17IntervalFrequencyV5countSivs', 
+                       '_$s13SiriRemembers17IntervalFrequencyV8interval5countACSd_SitcfC', 
+                       '_$s13SiriRemembers17IntervalFrequencyV8intervalSdvM', '_$s13SiriRemembers17IntervalFrequencyV8intervalSdvg', 
+                       '_$s13SiriRemembers17IntervalFrequencyV8intervalSdvpMV', '_$s13SiriRemembers17IntervalFrequencyV8intervalSdvs', 
+                       '_$s13SiriRemembers17IntervalFrequencyVMa', '_$s13SiriRemembers17IntervalFrequencyVMn', 
+                       '_$s13SiriRemembers17IntervalFrequencyVN', '_$s13SiriRemembers17IntervalFrequencyVSQAAMc', 
+                       '_$s13SiriRemembers17OrderedDictionaryV10dictionarySDyxq_GvM', 
                        '_$s13SiriRemembers17OrderedDictionaryV10dictionarySDyxq_Gvg', 
                        '_$s13SiriRemembers17OrderedDictionaryV10dictionarySDyxq_GvpMV', 
                        '_$s13SiriRemembers17OrderedDictionaryV10dictionarySDyxq_Gvs', 
@@ -316,7 +319,12 @@ exports:
                        '_$s13SiriRemembers21NowPlayingEventSourceVMn', '_$s13SiriRemembers21NowPlayingEventSourceVN', 
                        '_$s13SiriRemembers21QueryValueConvertibleMp', '_$s13SiriRemembers21QueryValueConvertibleP05queryD0AA0cD0OvgTj', 
                        '_$s13SiriRemembers21QueryValueConvertibleP05queryD0AA0cD0OvgTq', 
-                       '_$s13SiriRemembers21QueryValueConvertibleTL', '_$s13SiriRemembers22PrivatizedHistoryStatsV11frequenciesSays5Int32VGvg', 
+                       '_$s13SiriRemembers21QueryValueConvertibleTL', '_$s13SiriRemembers21ScrubInteractionStoreV8registeryyFZ', 
+                       '_$s13SiriRemembers21ScrubInteractionStoreVMa', '_$s13SiriRemembers21ScrubInteractionStoreVMn', 
+                       '_$s13SiriRemembers21ScrubInteractionStoreVN', '_$s13SiriRemembers22PriorDistributionUtilsO16computeDirichlet11frequencies9bandwidthSdSayAA17IntervalFrequencyVG_SdtFZ', 
+                       '_$s13SiriRemembers22PriorDistributionUtilsO9normalize6scoresSaySdGAF_tFZ', 
+                       '_$s13SiriRemembers22PriorDistributionUtilsOMa', '_$s13SiriRemembers22PriorDistributionUtilsOMn', 
+                       '_$s13SiriRemembers22PriorDistributionUtilsON', '_$s13SiriRemembers22PrivatizedHistoryStatsV11frequenciesSays5Int32VGvg', 
                        '_$s13SiriRemembers22PrivatizedHistoryStatsV11frequenciesSays5Int32VGvpMV', 
                        '_$s13SiriRemembers22PrivatizedHistoryStatsV2eeoiySbAC_ACtFZ', 
                        '_$s13SiriRemembers22PrivatizedHistoryStatsV4fromACs7Decoder_p_tKcfC', 

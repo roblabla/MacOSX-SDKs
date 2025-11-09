@@ -1,5 +1,5 @@
-.\" Copyright (c) 2004-2016 Apple Inc. All rights reserved.
-.Dd August 24, 2016
+.\" Copyright (c) 2004-2022 Apple Inc. All rights reserved.
+.Dd August 9, 2022
 .Dt "vmmap" 1
 .Os
 .Sh NAME
@@ -7,6 +7,7 @@
 .Nd Display the virtual memory regions allocated in a process
 .Sh SYNOPSIS
 .Nm vmmap
+.Op Fl s
 .Op Fl w
 .Op Fl v
 .Op Fl pages
@@ -36,6 +37,8 @@ address (if any) and the regions around it.
 .Pp
 .Sh OPTIONS
 .Bl -tag -width "-allSplitLibs"
+.It Fl s, Fl sortBySize
+Print sorted regions and malloc zones by size (dirty + swapped)
 .It Fl w, Fl wide
 Print wide output, to show full paths of mapped files.
 .It Fl v, Fl verbose

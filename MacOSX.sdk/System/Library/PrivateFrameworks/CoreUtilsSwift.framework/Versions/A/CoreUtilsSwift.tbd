@@ -1,20 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7CF770C2-B820-3B39-8ED3-38B2F2EC6EF6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C7699E19-C37A-31AB-928C-23A64F102751
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsSwift.framework/Versions/A/CoreUtilsSwift'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s10Foundation4UUIDV14CoreUtilsSwiftE5bytesSays5UInt8VGvg', 
+    symbols:         [ '_$s10Foundation4DataV14CoreUtilsSwiftE23xpcObjectRepresentationSo03OS_F7_object_pvg', 
+                       '_$s10Foundation4DataV14CoreUtilsSwiftE23xpcObjectRepresentationSo03OS_F7_object_pvpMV', 
+                       '_$s10Foundation4DataV14CoreUtilsSwiftE9xpcObjectACSo03OS_F7_object_p_tKcfC', 
+                       '_$s10Foundation4UUIDV14CoreUtilsSwiftE4base4nodeA2C_s6UInt64VtcfC', 
+                       '_$s10Foundation4UUIDV14CoreUtilsSwiftE4nodeACs6UInt64V_tcfC', 
+                       '_$s10Foundation4UUIDV14CoreUtilsSwiftE5bytesSays5UInt8VGvg', 
                        '_$s10Foundation4UUIDV14CoreUtilsSwiftE5bytesSays5UInt8VGvpMV', 
                        '_$s14CoreUtilsSwift05PrintB13IntegerFormatV3HEXACvgZ', '_$s14CoreUtilsSwift05PrintB13IntegerFormatV3hexACvgZ', 
                        '_$s14CoreUtilsSwift05PrintB13IntegerFormatV5octalACvgZ', 
@@ -243,7 +241,20 @@ exports:
                        '_$s14CoreUtilsSwift17CLIVersionCommandC_9shortHelp04longG07handlerACSS_S2SSgyAA10CLIContextCKcSgtcfC', 
                        '_$s14CoreUtilsSwift17CLIVersionCommandC_9shortHelp04longG07handlerACSS_S2SSgyAA10CLIContextCKcSgtcfc', 
                        '_$s14CoreUtilsSwift17CLIVersionCommandCfD', '_$s14CoreUtilsSwift17CLIVersionCommandCfd', 
-                       '_$s14CoreUtilsSwift17SecondsToUpTicksFys6UInt64VSdF', '_$s14CoreUtilsSwift17UpTicksToSecondsFySds6UInt64VF', 
+                       '_$s14CoreUtilsSwift17CUSendableWrapperV5valuexvg', '_$s14CoreUtilsSwift17CUSendableWrapperV5valuexvpMV', 
+                       '_$s14CoreUtilsSwift17CUSendableWrapperVMa', '_$s14CoreUtilsSwift17CUSendableWrapperVMn', 
+                       '_$s14CoreUtilsSwift17CUSendableWrapperVyACyxGxcfC', '_$s14CoreUtilsSwift17SecondsToUpTicksFys6UInt64VSdF', 
+                       '_$s14CoreUtilsSwift17UpTicksToSecondsFySds6UInt64VF', '_$s14CoreUtilsSwift19CUStringAppendFlagsV10colonFirstACvgZ', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsV5commaACvgZ', '_$s14CoreUtilsSwift19CUStringAppendFlagsV5firstACvgZ', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsV6secondACvgZ', '_$s14CoreUtilsSwift19CUStringAppendFlagsV8rawValueACSi_tcfC', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsV8rawValueSivg', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsV8rawValueSivpMV', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsV8standardACvgZ', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsVMa', '_$s14CoreUtilsSwift19CUStringAppendFlagsVMn', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsVN', '_$s14CoreUtilsSwift19CUStringAppendFlagsVSQAAMc', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsVSYAAMc', '_$s14CoreUtilsSwift19CUStringAppendFlagsVs10SetAlgebraAAMc', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s14CoreUtilsSwift19CUStringAppendFlagsVs9OptionSetAAMc', 
                        '_$s14CoreUtilsSwift19CUStringConvertibleMp', '_$s14CoreUtilsSwift19CUStringConvertibleP11description4typeSSSo07os_log_G2_ta_tFTj', 
                        '_$s14CoreUtilsSwift19CUStringConvertibleP11description4typeSSSo07os_log_G2_ta_tFTq', 
                        '_$s14CoreUtilsSwift19CUStringConvertibleTL', '_$s14CoreUtilsSwift20AttosecondsPerSeconds5Int64Vvg', 
@@ -310,7 +321,20 @@ exports:
                        '_$s14CoreUtilsSwift7CLIFlagO9hashValueSivpMV', '_$s14CoreUtilsSwift7CLIFlagOMa', 
                        '_$s14CoreUtilsSwift7CLIFlagOMn', '_$s14CoreUtilsSwift7CLIFlagON', 
                        '_$s14CoreUtilsSwift7CLIFlagOSHAAMc', '_$s14CoreUtilsSwift7CLIFlagOSQAAMc', 
-                       '_$s14CoreUtilsSwift7CUError6domain4code7message10underlyingSo7NSErrorCSS_SiSSSgs5Error_pSgtF', 
+                       '_$s14CoreUtilsSwift7CUErrorC10messageKeySSvgZ', '_$s14CoreUtilsSwift7CUErrorC20supportsSecureCodingSbvgZ', 
+                       '_$s14CoreUtilsSwift7CUErrorC4fromACs7Decoder_p_tKcfC', '_$s14CoreUtilsSwift7CUErrorC6domain4code7message10underlyingACSS_SiSSSgs5Error_pSgtcfC', 
+                       '_$s14CoreUtilsSwift7CUErrorC6domain4code7message10underlyingACSS_SiSSSgs5Error_pSgtcfCTj', 
+                       '_$s14CoreUtilsSwift7CUErrorC6domain4code7message10underlyingACSS_SiSSSgs5Error_pSgtcfCTq', 
+                       '_$s14CoreUtilsSwift7CUErrorC6domain4code7message10underlyingACSS_SiSSSgs5Error_pSgtcfc', 
+                       '_$s14CoreUtilsSwift7CUErrorC6domain4code8userInfoACSS_SiSDySSypGSgtcfC', 
+                       '_$s14CoreUtilsSwift7CUErrorC6domain4code8userInfoACSS_SiSDySSypGSgtcfc', 
+                       '_$s14CoreUtilsSwift7CUErrorC6encode2toys7Encoder_p_tKF', 
+                       '_$s14CoreUtilsSwift7CUErrorCMa', '_$s14CoreUtilsSwift7CUErrorCMn', 
+                       '_$s14CoreUtilsSwift7CUErrorCMo', '_$s14CoreUtilsSwift7CUErrorCMu', 
+                       '_$s14CoreUtilsSwift7CUErrorCN', '_$s14CoreUtilsSwift7CUErrorCSEAAMc', 
+                       '_$s14CoreUtilsSwift7CUErrorCSeAAMc', '_$s14CoreUtilsSwift7CUErrorCfD', 
+                       '_$s14CoreUtilsSwift7CUErrorCyACs5Error_pcfC', '_$s14CoreUtilsSwift7CUErrorCyACs5Error_pcfCTj', 
+                       '_$s14CoreUtilsSwift7CUErrorCyACs5Error_pcfCTq', '_$s14CoreUtilsSwift7CUErrorCyACs5Error_pcfc', 
                        '_$s14CoreUtilsSwift7PThreadC4exits5NeverOyFTj', '_$s14CoreUtilsSwift7PThreadC4exits5NeverOyFTq', 
                        '_$s14CoreUtilsSwift7PThreadC4exits5NeverOyFZTj', '_$s14CoreUtilsSwift7PThreadC4exits5NeverOyFZTq', 
                        '_$s14CoreUtilsSwift7PThreadC4joinyyFTj', '_$s14CoreUtilsSwift7PThreadC4joinyyFTq', 
@@ -395,16 +419,23 @@ exports:
                        '_$s14CoreUtilsSwift9CLIOptionCMm', '_$s14CoreUtilsSwift9CLIOptionCMn', 
                        '_$s14CoreUtilsSwift9CLIOptionCMo', '_$s14CoreUtilsSwift9CLIOptionCMu', 
                        '_$s14CoreUtilsSwift9CLIOptionCN', '_$s14CoreUtilsSwift9CLIOptionCfD', 
-                       '_$s14CoreUtilsSwift9CLIOptionCfd', '_$s7Network10NWEndpointO4PortV14CoreUtilsSwiftE4fromAEs7Decoder_p_tKcfC', 
+                       '_$s14CoreUtilsSwift9CLIOptionCfd', '_$s14CoreUtilsSwift9CUWeakBoxV4itemxSgvM', 
+                       '_$s14CoreUtilsSwift9CUWeakBoxV4itemxSgvg', '_$s14CoreUtilsSwift9CUWeakBoxV4itemxSgvpMV', 
+                       '_$s14CoreUtilsSwift9CUWeakBoxV4itemxSgvs', '_$s14CoreUtilsSwift9CUWeakBoxVMa', 
+                       '_$s14CoreUtilsSwift9CUWeakBoxVMn', '_$s14CoreUtilsSwift9CUWeakBoxVyACyxGxcfC', 
+                       '_$s7Network10NWEndpointO4PortV14CoreUtilsSwiftE4fromAEs7Decoder_p_tKcfC', 
                        '_$s7Network10NWEndpointO4PortV14CoreUtilsSwiftE6encode2toys7Encoder_p_tKF', 
                        '_$s7Network10NWEndpointO4PortVSE14CoreUtilsSwiftMc', '_$s7Network10NWEndpointO4PortVSe14CoreUtilsSwiftMc', 
-                       '_$sSJ14CoreUtilsSwiftE10octalDigitSiSgvg', '_$sSJ14CoreUtilsSwiftE10octalDigitSiSgvpMV', 
-                       '_$sSJ14CoreUtilsSwiftE11binaryDigitSiSgvg', '_$sSJ14CoreUtilsSwiftE11binaryDigitSiSgvpMV', 
-                       '_$sSJ14CoreUtilsSwiftE12isOctalDigitSbvg', '_$sSJ14CoreUtilsSwiftE12isOctalDigitSbvpMV', 
-                       '_$sSJ14CoreUtilsSwiftE13isBinaryDigitSbvg', '_$sSJ14CoreUtilsSwiftE13isBinaryDigitSbvpMV', 
-                       '_$sSJ14CoreUtilsSwiftE9isLetterBSbvg', '_$sSJ14CoreUtilsSwiftE9isLetterBSbvpMV', 
-                       '_$sSJ14CoreUtilsSwiftE9isLetterXSbvg', '_$sSJ14CoreUtilsSwiftE9isLetterXSbvpMV', 
-                       '_$sSK14CoreUtilsSwiftSQ7ElementRpzrlE6suffix11afterLastOf11SubSequenceQzAC_tF', 
+                       '_$sSB14CoreUtilsSwiftE3map4from2toxSNyxG_AEtF', '_$sSJ14CoreUtilsSwiftE10octalDigitSiSgvg', 
+                       '_$sSJ14CoreUtilsSwiftE10octalDigitSiSgvpMV', '_$sSJ14CoreUtilsSwiftE11binaryDigitSiSgvg', 
+                       '_$sSJ14CoreUtilsSwiftE11binaryDigitSiSgvpMV', '_$sSJ14CoreUtilsSwiftE12isOctalDigitSbvg', 
+                       '_$sSJ14CoreUtilsSwiftE12isOctalDigitSbvpMV', '_$sSJ14CoreUtilsSwiftE13isBinaryDigitSbvg', 
+                       '_$sSJ14CoreUtilsSwiftE13isBinaryDigitSbvpMV', '_$sSJ14CoreUtilsSwiftE9isLetterBSbvg', 
+                       '_$sSJ14CoreUtilsSwiftE9isLetterBSbvpMV', '_$sSJ14CoreUtilsSwiftE9isLetterXSbvg', 
+                       '_$sSJ14CoreUtilsSwiftE9isLetterXSbvpMV', '_$sSK14CoreUtilsSwiftSQ7ElementRpzrlE6suffix11afterLastOf11SubSequenceQzAC_tF', 
+                       '_$sSL14CoreUtilsSwiftE7clamped2toxSNyxG_tF', '_$sSL14CoreUtilsSwiftE7clamped2toxs16PartialRangeFromVyxG_tF', 
+                       '_$sSL14CoreUtilsSwiftE7clamped2toxs19PartialRangeThroughVyxG_tF', 
+                       '_$sSS14CoreUtilsSwiftE6appendyyAA19CUStringAppendFlagsVz_SStF', 
                        '_$sST14CoreUtilsSwifts5UInt8V7ElementRtzrlE9hexString9separator9uppercase8maxBytes9truncatorS2S_SbSiSStF', 
                        '_$sSd14CoreUtilsSwiftE14bigEndianBytes6offset3endSdx_5IndexQzzAFtKcSkRzs5UInt8V7ElementRtzlufC', 
                        '_$sSd14CoreUtilsSwiftE14bigEndianBytesSays5UInt8VGvg', '_$sSd14CoreUtilsSwiftE14bigEndianBytesSays5UInt8VGvpMV', 
@@ -428,11 +459,16 @@ exports:
                        '_$sSl14CoreUtilsSwiftE4safe4from7ElementQzSgSi_5IndexQztcipMV', 
                        '_$sSl14CoreUtilsSwiftE4safe7ElementQzSgSi_tcig', '_$sSl14CoreUtilsSwiftE4safe7ElementQzSgSi_tcipMV', 
                        '_$sSo11CULogHandleC14CoreUtilsSwiftE4ulogyySo0A5LevelV_SStF', 
+                       '_$sSo13OS_xpc_objectP14CoreUtilsSwiftE17nestedDescriptionSSvg', 
+                       '_$sSo13OS_xpc_objectP14CoreUtilsSwiftE17nestedDescriptionSSvpMV', 
+                       '_$sSo14NSUserDefaultsC14CoreUtilsSwiftE7allKeys9suiteNameSaySSGSS_tFZ', 
+                       '_$sSo14NSUserDefaultsC14CoreUtilsSwiftE7intLike6forKeySiSgSS_tF', 
+                       '_$sSo14NSUserDefaultsC14CoreUtilsSwiftE8boolLike6forKeySbSgSS_tF', 
                        '_$sSq14CoreUtilsSwiftE6unwrap_4file4linexSSyXK_s12StaticStringVSutF', 
                        '_$sSy14CoreUtilsSwiftE12parseInteger__5radixqd__SS5IndexVz_AESitKs010FixedWidthE0Rd__lF', 
                        '_$sSy14CoreUtilsSwiftE16parseNumericSign5start3endSiSS5IndexVz_AFtF', 
                        '_$sSy14CoreUtilsSwiftE18parseNumericPrefix5start3end5radixSiSS5IndexVz_AGSitF', 
-                       '_$sSy14CoreUtilsSwiftE22parseLeadingWhitespaceyySS5IndexVz_ADtF', 
+                       '_$sSy14CoreUtilsSwiftE19collapsedWhitespaceSSyF', '_$sSy14CoreUtilsSwiftE22parseLeadingWhitespaceyySS5IndexVz_ADtF', 
                        '_$sSy14CoreUtilsSwiftE24hasPrefixCaseInsensitiveySbqd__SyRd__lF', 
                        '_$sSy14CoreUtilsSwiftE6isTrueSbvg', '_$sSy14CoreUtilsSwiftE6isTrueSbvpMV', 
                        '_$sSy14CoreUtilsSwiftE7isFalseSbvg', '_$sSy14CoreUtilsSwiftE7isFalseSbvpMV', 
@@ -483,4 +519,5 @@ exports:
                        '_$ss5ErrorP14CoreUtilsSwiftE15flatDescriptionSSvg', '_$ss5ErrorP14CoreUtilsSwiftE15flatDescriptionSSvpMV', 
                        '_$ss5ErrorP14CoreUtilsSwiftE17nestedDescriptionSSvg', '_$ss5ErrorP14CoreUtilsSwiftE17nestedDescriptionSSvpMV', 
                        '_$ss5UInt8V14CoreUtilsSwiftE5bytes6offset3endABx_5IndexQzzAHtKcSkRzAB7ElementRtzlufC' ]
+    objc-classes:    [ _TtC14CoreUtilsSwift7CUError ]
 ...

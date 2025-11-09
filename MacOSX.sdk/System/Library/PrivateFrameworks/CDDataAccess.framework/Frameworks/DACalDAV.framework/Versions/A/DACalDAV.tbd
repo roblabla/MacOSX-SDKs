@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0322B3ED-D099-358E-A7BB-51F615013097
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           12A571C5-8BF9-37EE-A750-48B9E5D8CD43
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

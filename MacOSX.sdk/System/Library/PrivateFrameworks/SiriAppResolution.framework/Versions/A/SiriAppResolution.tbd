@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E34659CC-9444-32E1-822A-C9CAE3BF1709
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F241C378-3BF2-3FBF-A8ED-F13BFFD1197D
 install-name:    '/System/Library/PrivateFrameworks/SiriAppResolution.framework/Versions/A/SiriAppResolution'
 swift-abi-version: 7
 exports:

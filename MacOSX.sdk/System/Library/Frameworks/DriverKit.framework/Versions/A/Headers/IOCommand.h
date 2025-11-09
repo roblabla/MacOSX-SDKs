@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOCommand.iig */
+/* iig(DriverKit-256.100.8) generated from IOCommand.iig */
 
 /* IOCommand.iig:1-38 */
 /*
@@ -149,7 +149,7 @@ public:
 
 #if !KERNEL
 
-class IOCommandInterface : public OSInterface
+class  IOCommandInterface : public OSInterface
 {
 public:
 };

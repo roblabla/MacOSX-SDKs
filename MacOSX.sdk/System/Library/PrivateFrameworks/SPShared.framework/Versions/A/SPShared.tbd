@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2BA2AA6F-5F4E-34DD-8DEA-FED05429247D
-  - target:          x86_64-maccatalyst
-    value:           2BA2AA6F-5F4E-34DD-8DEA-FED05429247D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           68940257-92F7-3151-960B-8825EA3AEBF1
-  - target:          arm64e-maccatalyst
-    value:           68940257-92F7-3151-960B-8825EA3AEBF1
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
@@ -143,6 +130,16 @@ exports:
                        '_$s8SPShared10MACAddressVs26ExpressibleByStringLiteralAAMc', 
                        '_$s8SPShared10MACAddressVs33ExpressibleByUnicodeScalarLiteralAAMc', 
                        '_$s8SPShared10MACAddressVs43ExpressibleByExtendedGraphemeClusterLiteralAAMc', 
+                       '_$s8SPShared10MultiAwaitC15unownedExecutorScevg', '_$s8SPShared10MultiAwaitC15unownedExecutorScevpMV', 
+                       '_$s8SPShared10MultiAwaitC5awaityyYaFTj', '_$s8SPShared10MultiAwaitC5awaityyYaFTjTu', 
+                       '_$s8SPShared10MultiAwaitC5awaityyYaFTq', '_$s8SPShared10MultiAwaitC6notifyyyFTj', 
+                       '_$s8SPShared10MultiAwaitC6notifyyyFTq', '_$s8SPShared10MultiAwaitCACycfC', 
+                       '_$s8SPShared10MultiAwaitCACycfCTj', '_$s8SPShared10MultiAwaitCACycfCTq', 
+                       '_$s8SPShared10MultiAwaitCACycfc', '_$s8SPShared10MultiAwaitCMa', 
+                       '_$s8SPShared10MultiAwaitCMm', '_$s8SPShared10MultiAwaitCMn', 
+                       '_$s8SPShared10MultiAwaitCMo', '_$s8SPShared10MultiAwaitCMu', 
+                       '_$s8SPShared10MultiAwaitCN', '_$s8SPShared10MultiAwaitCScAAAMc', 
+                       '_$s8SPShared10MultiAwaitCfD', '_$s8SPShared10MultiAwaitCfd', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfC', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfCTj', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfCTq', 
@@ -314,8 +311,38 @@ exports:
                        '_$s8SPShared13KeyedThrottleCMa', '_$s8SPShared13KeyedThrottleCMn', 
                        '_$s8SPShared13KeyedThrottleCMo', '_$s8SPShared13KeyedThrottleCMu', 
                        '_$s8SPShared13KeyedThrottleCfD', '_$s8SPShared13KeyedThrottleCfd', 
-                       '_$s8SPShared13deoptionalizeyxxSglF', '_$s8SPShared13deoptionalizeyxxlF', 
-                       '_$s8SPShared14BinaryDecodingMp', '_$s8SPShared14BinaryDecodingP9containerAA0bC10Containing_pyFTj', 
+                       '_$s8SPShared13WorkItemQueueC05flushD0yyFTj', '_$s8SPShared13WorkItemQueueC05flushD0yyFTq', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C10identifier5block10completionAE10Foundation4UUIDV_yyYaYbKcys6ResultOyyts5Error_pGYaYbctcfC', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C10identifier5block10completionAE10Foundation4UUIDV_yyYaYbKcys6ResultOyyts5Error_pGYaYbctcfCTj', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C10identifier5block10completionAE10Foundation4UUIDV_yyYaYbKcys6ResultOyyts5Error_pGYaYbctcfCTq', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C10identifier5block10completionAE10Foundation4UUIDV_yyYaYbKcys6ResultOyyts5Error_pGYaYbctcfc', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C15unownedExecutorScevg', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C15unownedExecutorScevpMV', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C2id10Foundation4UUIDVvg', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C2id10Foundation4UUIDVvpMV', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C6cancelyyYaFTj', '_$s8SPShared13WorkItemQueueC0bC0C6cancelyyYaFTjTu', 
+                       '_$s8SPShared13WorkItemQueueC0bC0C6cancelyyYaFTq', '_$s8SPShared13WorkItemQueueC0bC0CMa', 
+                       '_$s8SPShared13WorkItemQueueC0bC0CMm', '_$s8SPShared13WorkItemQueueC0bC0CMn', 
+                       '_$s8SPShared13WorkItemQueueC0bC0CMo', '_$s8SPShared13WorkItemQueueC0bC0CMu', 
+                       '_$s8SPShared13WorkItemQueueC0bC0CN', '_$s8SPShared13WorkItemQueueC0bC0CScAAAMc', 
+                       '_$s8SPShared13WorkItemQueueC0bC0CfD', '_$s8SPShared13WorkItemQueueC0bC0Cfd', 
+                       '_$s8SPShared13WorkItemQueueC0bC0Cs12IdentifiableAAMc', '_$s8SPShared13WorkItemQueueC10awaitEmptyyyYaFTj', 
+                       '_$s8SPShared13WorkItemQueueC10awaitEmptyyyYaFTjTu', '_$s8SPShared13WorkItemQueueC10awaitEmptyyyYaFTq', 
+                       '_$s8SPShared13WorkItemQueueC10identifierAC10Foundation4UUIDV_tcfC', 
+                       '_$s8SPShared13WorkItemQueueC10identifierAC10Foundation4UUIDV_tcfCTj', 
+                       '_$s8SPShared13WorkItemQueueC10identifierAC10Foundation4UUIDV_tcfCTq', 
+                       '_$s8SPShared13WorkItemQueueC10identifierAC10Foundation4UUIDV_tcfc', 
+                       '_$s8SPShared13WorkItemQueueC15unownedExecutorScevg', '_$s8SPShared13WorkItemQueueC15unownedExecutorScevpMV', 
+                       '_$s8SPShared13WorkItemQueueC2id10Foundation4UUIDVvg', '_$s8SPShared13WorkItemQueueC2id10Foundation4UUIDVvpMV', 
+                       '_$s8SPShared13WorkItemQueueC7enqueueyyAC0bC0CYaFTj', '_$s8SPShared13WorkItemQueueC7enqueueyyAC0bC0CYaFTjTu', 
+                       '_$s8SPShared13WorkItemQueueC7enqueueyyAC0bC0CYaFTq', '_$s8SPShared13WorkItemQueueCMa', 
+                       '_$s8SPShared13WorkItemQueueCMm', '_$s8SPShared13WorkItemQueueCMn', 
+                       '_$s8SPShared13WorkItemQueueCMo', '_$s8SPShared13WorkItemQueueCMu', 
+                       '_$s8SPShared13WorkItemQueueCN', '_$s8SPShared13WorkItemQueueCScAAAMc', 
+                       '_$s8SPShared13WorkItemQueueCfD', '_$s8SPShared13WorkItemQueueCfd', 
+                       '_$s8SPShared13WorkItemQueueCs12IdentifiableAAMc', '_$s8SPShared13deoptionalizeyxxSglF', 
+                       '_$s8SPShared13deoptionalizeyxxlF', '_$s8SPShared14BinaryDecodingMp', 
+                       '_$s8SPShared14BinaryDecodingP9containerAA0bC10Containing_pyFTj', 
                        '_$s8SPShared14BinaryDecodingP9containerAA0bC10Containing_pyFTq', 
                        '_$s8SPShared14BinaryDecodingTL', '_$s8SPShared14BinaryEncodingMp', 
                        '_$s8SPShared14BinaryEncodingP9containerAA0bC10Containing_pyFTj', 
@@ -885,6 +912,8 @@ exports:
                        '_$sSS8SPSharedE24replaceCharactersFromSet09characterE017replacementStringSS10Foundation09CharacterE0V_SStF', 
                        '_$sSS8SPSharedE8utf8Data10Foundation0C0Vvg', '_$sSS8SPSharedE8utf8Data10Foundation0C0VvpMV', 
                        '_$sSS8SPSharedE9imagePath4typeS2S_tF', '_$sST8SPShared7Combine9Publisher7ElementRpzrlE6mergedAB03AnyC0VyAD_6OutputQZAD_7FailureQZGyF', 
+                       '_$sST8SPSharedE11asyncFilterySay7ElementQzGSbADYaYbKXEYaKF', 
+                       '_$sST8SPSharedE11asyncFilterySay7ElementQzGSbADYaYbKXEYaKFTu', 
                        '_$sST8SPSharedE15asyncCompactMapySayqd__Gqd__Sg7ElementQzYaYbKXEYaKlF', 
                        '_$sST8SPSharedE15asyncCompactMapySayqd__Gqd__Sg7ElementQzYaYbKXEYaKlFTu', 
                        '_$sST8SPSharedE8asyncMapySayqd__Gqd__7ElementQzYaYbKXEYaKlF', 

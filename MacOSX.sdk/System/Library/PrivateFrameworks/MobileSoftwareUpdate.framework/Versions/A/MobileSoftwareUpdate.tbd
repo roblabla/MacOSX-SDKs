@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DE6D3E42-BDDC-363B-B345-7E40A0462107
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EB3EA990-FCD3-39AE-9D2A-AAA99F1FD520
 install-name:    '/System/Library/PrivateFrameworks/MobileSoftwareUpdate.framework/Versions/A/MobileSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4F26DCFD-558F-3F4F-B8BA-A96B504261AD
-  - target:          x86_64-maccatalyst
-    value:           4F26DCFD-558F-3F4F-B8BA-A96B504261AD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2C23A57A-C0A6-3F2A-A43D-22B0944B9ABB
-  - target:          arm64e-maccatalyst
-    value:           2C23A57A-C0A6-3F2A-A43D-22B0944B9ABB
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
 current-version: 6
 swift-abi-version: 7

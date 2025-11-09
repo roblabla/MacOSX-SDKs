@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B28B86CF-B277-3599-B86E-62588D0AC40B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7993BAC7-ACDE-38FF-856E-C76C1E45E77E
 install-name:    '/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration'
 exports:
   - targets:         [ x86_64-macos ]
@@ -17,12 +10,12 @@ exports:
                        __ZTIN4aura16StereoPanControlE, __ZTIN4aura18ResourceArbitratorE, 
                        __ZTIN4aura3BoxE, __ZTIN4aura4PortE, __ZTIN4aura5ClockE, __ZTIN4aura6DeviceE, 
                        __ZTIN4aura6DriverE, __ZTIN4aura6ObjectE, __ZTIN4aura6StreamE, 
-                       __ZTIN4aura7ControlE, __ZTIN4aura8IOStreamE, __ZTINSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
+                       __ZTIN4aura7ControlE, __ZTIN4aura8IOStreamE, __ZTIN5boost9container12out_of_rangeE, 
+                       __ZTIN5boost9container9exceptionE, __ZTINSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvPK35aura_ConfigurationChangeDescriptionEEE, 
                        __ZTINSt3__110__function6__baseIFvjEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__vector_base_commonILb1EEE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTINSt3__15tupleIJjjEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__15tupleIJjjEEE, 
                        __ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTINSt3__16vectorIaNS_9allocatorIaEEEE, __ZTINSt3__16vectorIbNS_9allocatorIbEEEE, 
                        __ZTINSt3__16vectorIcNS_9allocatorIcEEEE, __ZTINSt3__16vectorIdNS_9allocatorIdEEEE, 
@@ -38,12 +31,12 @@ exports:
                        __ZTSN4aura18ResourceArbitratorE, __ZTSN4aura3BoxE, __ZTSN4aura4PortE, 
                        __ZTSN4aura5ClockE, __ZTSN4aura6DeviceE, __ZTSN4aura6DriverE, 
                        __ZTSN4aura6ObjectE, __ZTSN4aura6StreamE, __ZTSN4aura7ControlE, 
-                       __ZTSN4aura8IOStreamE, __ZTSNSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
+                       __ZTSN4aura8IOStreamE, __ZTSN5boost9container12out_of_rangeE, 
+                       __ZTSN5boost9container9exceptionE, __ZTSNSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvPK35aura_ConfigurationChangeDescriptionEEE, 
                        __ZTSNSt3__110__function6__baseIFvjEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__vector_base_commonILb1EEE, 
-                       __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSNSt3__15tupleIJjjEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__15tupleIJjjEEE, 
                        __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__16vectorIaNS_9allocatorIaEEEE, __ZTSNSt3__16vectorIbNS_9allocatorIbEEEE, 
                        __ZTSNSt3__16vectorIcNS_9allocatorIcEEEE, __ZTSNSt3__16vectorIdNS_9allocatorIdEEEE, 

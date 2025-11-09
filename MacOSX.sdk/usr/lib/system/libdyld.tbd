@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6F97B8FD-BA81-3779-ADB2-5ECD91F42B75
-  - target:          x86_64-maccatalyst
-    value:           6F97B8FD-BA81-3779-ADB2-5ECD91F42B75
-  - target:          arm64-macos
-    value:           427D321B-B30E-367F-8E2C-1DA6FD2D0962
-  - target:          arm64-maccatalyst
-    value:           427D321B-B30E-367F-8E2C-1DA6FD2D0962
-  - target:          arm64e-macos
-    value:           C1700833-CCA0-3BA5-8614-C149347F5503
-  - target:          arm64e-maccatalyst
-    value:           C1700833-CCA0-3BA5-8614-C149347F5503
 install-name:    '/usr/lib/system/libdyld.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8275D5A2-DB57-3D6B-B24F-1DB373442E4D
-  - target:          x86_64-maccatalyst
-    value:           8275D5A2-DB57-3D6B-B24F-1DB373442E4D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           648CC74A-A121-3781-BDD7-14701F0D9220
-  - target:          arm64e-maccatalyst
-    value:           648CC74A-A121-3781-BDD7-14701F0D9220
 install-name:    '/System/Library/PrivateFrameworks/TeaSettings.framework/Versions/A/TeaSettings'
-current-version: 715
+current-version: 727.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -44,9 +31,10 @@ allowable-clients:
                        WeatherCore, WeatherCore2, WeatherCore2Tests, WeatherCoreTests, 
                        WeatherDaemon, WeatherDaemonMemoryTests, WeatherDaemonTests, 
                        WeatherDemo, WeatherDiagnosticExtension, WeatherIntents, WeatherKit, 
-                       WeatherKitTests, WeatherMaps, WeatherMapsTests, WeatherNotifications, 
-                       WeatherUI, WeatherUITests, WeatherUnitTests, WeatherWidget, 
-                       WeatherWidgetExtension, com.apple.news, newsd, weatherd ]
+                       WeatherKitDemo, WeatherKitTests, WeatherMaps, WeatherMapsTests, 
+                       WeatherNotifications, WeatherUI, WeatherUITests, WeatherUnitTests, 
+                       WeatherWidget, WeatherWidgetExtension, com.apple.news, newsd, 
+                       weatherd ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

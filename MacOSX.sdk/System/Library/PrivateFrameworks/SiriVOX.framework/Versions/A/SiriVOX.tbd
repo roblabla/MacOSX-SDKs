@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EEC65B42-637D-33D2-A99A-D314995C1F5F
-  - target:          x86_64-maccatalyst
-    value:           EEC65B42-637D-33D2-A99A-D314995C1F5F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AB6C7478-BAE4-3C74-BBBE-B4659FA8A087
-  - target:          arm64e-maccatalyst
-    value:           AB6C7478-BAE4-3C74-BBBE-B4659FA8A087
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
@@ -67,7 +54,10 @@ exports:
                        _SVXLocalizationKeyStoreDemoStyle1Stage3Version3, _SVXLocalizationKeyStoreDemoStyle2IntroVersion1, 
                        _SVXLocalizationKeyStoreDemoStyle2OutroVersion1, _SVXLocalizationKeyStoreDemoStyle2Stage1Version1, 
                        _SVXLocalizationKeyStoreDemoStyle2Stage2Version1, _SVXLocalizationKeyStoreDemoStyle2Stage3Version1, 
-                       _SVXLocalizationKeyStoreDemoStyle2Stage4Version1, _SVXLocalizationKeyWiFiError0, 
+                       _SVXLocalizationKeyStoreDemoStyle2Stage4Version1, _SVXLocalizationKeyStoreDemoStyle3Intro, 
+                       _SVXLocalizationKeyStoreDemoStyle3Outro, _SVXLocalizationKeyStoreDemoStyle3Stage1, 
+                       _SVXLocalizationKeyStoreDemoStyle3Stage2, _SVXLocalizationKeyStoreDemoStyle3Stage3, 
+                       _SVXLocalizationKeyStoreDemoStyle3Stage4, _SVXLocalizationKeyWiFiError0, 
                        _SVXLocalizationKeyWiFiError1, _SVXLocalizationTableClock, 
                        _SVXLocalizationTableDefault, _SVXLocalizationTableDeviceSetup, 
                        _SVXLocalizationTableErrors, _SVXLocalizationTableInterstitials, 

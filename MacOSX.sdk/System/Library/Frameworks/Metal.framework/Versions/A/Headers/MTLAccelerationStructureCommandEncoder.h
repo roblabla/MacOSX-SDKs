@@ -96,7 +96,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (void)refitAccelerationStructure:(id <MTLAccelerationStructure>)sourceAccelerationStructure
                         descriptor:(MTLAccelerationStructureDescriptor *)descriptor
                        destination:(nullable id <MTLAccelerationStructure>)destinationAccelerationStructure
-                     scratchBuffer:(id <MTLBuffer>)scratchBuffer
+                     scratchBuffer:(nullable id <MTLBuffer>)scratchBuffer
                scratchBufferOffset:(NSUInteger)scratchBufferOffset;
 
 /*!
@@ -129,7 +129,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (void)refitAccelerationStructure:(id <MTLAccelerationStructure>)sourceAccelerationStructure
                         descriptor:(MTLAccelerationStructureDescriptor *)descriptor
                        destination:(nullable id <MTLAccelerationStructure>)destinationAccelerationStructure
-                     scratchBuffer:(id <MTLBuffer>)scratchBuffer
+                     scratchBuffer:(nullable id <MTLBuffer>)scratchBuffer
                scratchBufferOffset:(NSUInteger)scratchBufferOffset
                            options:(MTLAccelerationStructureRefitOptions)options
                            API_AVAILABLE(macos(13.0), ios(16.0));

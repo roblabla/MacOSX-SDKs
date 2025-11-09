@@ -2,7 +2,7 @@
 //  INHangUpCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -17,7 +17,7 @@ API_UNAVAILABLE(tvos)
 - (instancetype)initWithCallIdentifier:(nullable NSString *)callIdentifier NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.2), watchos(9.2), macosx(13.1));
 
 // The identifier of the call that the user wishes to hang up.
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *callIdentifier API_UNAVAILABLE(ios, macos, watchos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *callIdentifier;
 
 @end
 

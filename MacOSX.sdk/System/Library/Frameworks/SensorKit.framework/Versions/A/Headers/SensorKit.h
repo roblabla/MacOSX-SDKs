@@ -25,3 +25,4 @@
 #import <SensorKit/SRDeletionRecord.h>
 #import <SensorKit/SRSensors+SRDeletionRecord.h>
 #import <SensorKit/SRWristDetection.h>
+#import <SensorKit/SRMediaEvent.h>

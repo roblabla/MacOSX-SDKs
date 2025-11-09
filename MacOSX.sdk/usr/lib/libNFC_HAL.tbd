@@ -1,18 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           32B1416B-8CCF-38CD-93CA-5E40F7EAAA45
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BBC11D2C-65CD-342A-AACC-1E11A0C7110E
 install-name:    '/usr/lib/libNFC_HAL.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NFCalibrationGetData, _NFCalibrationGetRFConfigTLVs, _NFHardwareAllowsVBATOff, 
-                       _NFHardwareDebug, _NFHardwareGPIOClose, _NFHardwareGPIOConfigureHammerfestSPMI, 
+    symbols:         [ _NFCalibrationCopyAntennaName, _NFCalibrationGetData, _NFCalibrationGetRFConfigTLVs, 
+                       _NFHardwareAllowsVBATOff, _NFHardwareCopyAntennaName, _NFHardwareDebug, 
+                       _NFHardwareGPIOClose, _NFHardwareGPIOConfigureHammerfestSPMI, 
                        _NFHardwareGPIOIsHostWakeCapable, _NFHardwareGPIOOpen, _NFHardwareGPIOSPMISlaveReset, 
                        _NFHardwareGPIOSetDeviceWake, _NFHardwareGPIOSetDownloadRequest, 
                        _NFHardwareGPIOSetPMUStandbyPowerEnabled, _NFHardwareGPIOSetPower, 
@@ -43,12 +37,13 @@ exports:
                        _NFHardwareSerialReadBlockAbort, _NFHardwareSerialReset, _NFHardwareSerialSetBaudRate, 
                        _NFHardwareSerialSetCRCEnabled, _NFHardwareSerialSetLogFunction, 
                        _NFHardwareSerialSetOnDemandClientMode, _NFHardwareSerialWriteBlock, 
-                       _NFHardwareSerialWriteBlockAbort, _NFHardwareUnload, _phOsalNf_GetTimestamp, 
-                       _phOsalNfc_CloseLogFile, _phOsalNfc_DeInit, _phOsalNfc_Delay, 
-                       _phOsalNfc_FreeLibrary, _phOsalNfc_FreeMemory, _phOsalNfc_GetMemory, 
-                       _phOsalNfc_Init, _phOsalNfc_LoadLibrary, _phOsalNfc_LogBool, 
-                       _phOsalNfc_LogFunc, _phOsalNfc_LogHexData, _phOsalNfc_LogStr, 
-                       _phOsalNfc_LogU32, _phOsalNfc_LogX32, _phOsalNfc_LogX64, _phOsalNfc_MemCompare, 
+                       _NFHardwareSerialWriteBlockAbort, _NFHardwareSkipSpmiReconfig, 
+                       _NFHardwareUnload, _phOsalNf_GetTimestamp, _phOsalNfc_CloseLogFile, 
+                       _phOsalNfc_DeInit, _phOsalNfc_Delay, _phOsalNfc_FreeLibrary, 
+                       _phOsalNfc_FreeMemory, _phOsalNfc_GetMemory, _phOsalNfc_Init, 
+                       _phOsalNfc_LoadLibrary, _phOsalNfc_LogBool, _phOsalNfc_LogFunc, 
+                       _phOsalNfc_LogHexData, _phOsalNfc_LogStr, _phOsalNfc_LogU32, 
+                       _phOsalNfc_LogX32, _phOsalNfc_LogX64, _phOsalNfc_MemCompare, 
                        _phOsalNfc_MemCopy, _phOsalNfc_OpenLogFile, _phOsalNfc_RaiseException, 
                        _phOsalNfc_RaiseExceptionWithDescription, _phOsalNfc_SetMemory, 
                        _phOsalNfc_SignPostLogFunc, _phOsalNfc_SignPostLogHexData, 

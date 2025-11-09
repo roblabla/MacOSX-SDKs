@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EC859B93-24A3-3302-9CF7-246BC9C6145A
-  - target:          x86_64-maccatalyst
-    value:           EC859B93-24A3-3302-9CF7-246BC9C6145A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DC7B608C-2CFB-3264-8FEF-B19050619B21
-  - target:          arm64e-maccatalyst
-    value:           DC7B608C-2CFB-3264-8FEF-B19050619B21
 install-name:    '/System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

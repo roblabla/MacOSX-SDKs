@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C2149622-E80D-3686-8DFD-5CAF324CA552
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D0A0A23B-7B05-356A-860C-31F7B1D208E2
 install-name:    '/System/Library/PrivateFrameworks/TVRemoteCore.framework/Versions/A/TVRemoteCore'
-current-version: 252.20.5
+current-version: 252.40.30
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRMSMessageType, _NSStringFromRMSResponseCode, 

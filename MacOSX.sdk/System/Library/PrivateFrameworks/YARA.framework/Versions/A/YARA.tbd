@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AF39E16E-9BC2-3EAD-B5A4-5C281E77422F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           06C79266-678D-3D3C-B149-CF5069EBE93F
 install-name:    '/System/Library/PrivateFrameworks/yara.framework/Versions/A/yara'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

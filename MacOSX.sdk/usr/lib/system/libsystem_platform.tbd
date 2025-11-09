@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F314B62B-98F4-3A7C-8296-8739F8B6855A
-  - target:          x86_64-maccatalyst
-    value:           F314B62B-98F4-3A7C-8296-8739F8B6855A
-  - target:          arm64-macos
-    value:           ABF0BAEB-706B-3AC1-B6AD-B5CF380B8963
-  - target:          arm64-maccatalyst
-    value:           ABF0BAEB-706B-3AC1-B6AD-B5CF380B8963
-  - target:          arm64e-macos
-    value:           B215AE90-4ED2-3FCD-8CCC-6C0D93CC4F41
-  - target:          arm64e-maccatalyst
-    value:           B215AE90-4ED2-3FCD-8CCC-6C0D93CC4F41
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 288
+current-version: 292.100.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -78,16 +65,10 @@ exports:
                        _os_unfair_lock_unlock, _os_unfair_lock_unlock_no_tsd, _os_unfair_recursive_lock_lock_with_options, 
                        _os_unfair_recursive_lock_owned, _os_unfair_recursive_lock_trylock, 
                        _os_unfair_recursive_lock_tryunlock4objc, _os_unfair_recursive_lock_unlock, 
-                       _os_unfair_recursive_lock_unlock_forked_child, _platform_task_attach, 
-                       _platform_task_copy_next_thread, _platform_task_detach, _platform_task_is_64_bit, 
-                       _platform_task_perform, _platform_task_resume_threads, _platform_task_suspend_threads, 
-                       _platform_task_update_threads, _platform_thread_abort_safely, 
-                       _platform_thread_get_pthread, _platform_thread_get_state, 
-                       _platform_thread_get_unique_id, _platform_thread_info, _platform_thread_perform, 
-                       _platform_thread_release, _platform_thread_resume, _platform_thread_set_state, 
-                       _platform_thread_suspend, _setcontext, _setjmp, _siglongjmp, 
-                       _sigsetjmp, _spin_lock, _spin_lock_try, _spin_unlock, _swapcontext, 
-                       _sys_cache_control, _sys_dcache_flush, _sys_icache_invalidate ]
+                       _os_unfair_recursive_lock_unlock_forked_child, _setcontext, 
+                       _setjmp, _siglongjmp, _sigsetjmp, _spin_lock, _spin_lock_try, 
+                       _spin_unlock, _swapcontext, _sys_cache_control, _sys_dcache_flush, 
+                       _sys_icache_invalidate ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ctx_done ]
 ...

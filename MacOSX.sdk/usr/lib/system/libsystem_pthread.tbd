@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5920E36F-53EC-33F0-B675-8AE48B58418C
-  - target:          x86_64-maccatalyst
-    value:           5920E36F-53EC-33F0-B675-8AE48B58418C
-  - target:          arm64-macos
-    value:           51C613E3-4ABF-359C-B275-2608BB1BE0B6
-  - target:          arm64-maccatalyst
-    value:           51C613E3-4ABF-359C-B275-2608BB1BE0B6
-  - target:          arm64e-macos
-    value:           132084C6-C347-3489-9AC2-FCAAD21CDB73
-  - target:          arm64e-maccatalyst
-    value:           132084C6-C347-3489-9AC2-FCAAD21CDB73
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 514
+current-version: 514.100.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

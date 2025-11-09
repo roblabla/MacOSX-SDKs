@@ -16,6 +16,7 @@
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/NSPreviewRepresentingActivityItem.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSUserInterfaceValidation.h>
@@ -708,6 +709,24 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
  */
 @property (readonly, weak) NSWindowTabGroup *tabGroup API_AVAILABLE(macos(10.13));
 
+#pragma mark - Window Sharing
+
+/*!
+     @abstract Attempt to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content.
+     @param window
+        A window that is replacing the reciever in representing the user's current activity.
+     @param completionHandler
+        A completion block that is called after the request finishes.
+        @param error
+            In the event of a failed transfer request, a non-nil error contains details about the failure.
+*/
+- (void)transferWindowSharingToWindow:(NSWindow *)window completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.3));
+
+/*!
+ @abstract Indicates whether the receiver is the subject of an active SharePlay sharing session.
+ */
+@property (readonly) BOOL hasActiveWindowSharingSession API_AVAILABLE(macos(13.3));
+
 #pragma mark - Other
 
 /*! Retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
@@ -830,6 +849,10 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 /*! Method called by `-[NSWindow restoreStateWithCoder:]` to give the delegate a chance to restore its own state, which it may decode from the \c NSCoder. See the header `NSWindowRestoration.h` for more information.
 */
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
+
+/*! Preview representable activity items, used for sharing and collaboration.
+*/
+- (NSArray<id<NSPreviewRepresentableActivityItem>> *_Nullable)previewRepresentableActivityItemsForWindow:(NSWindow *)window NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(13.2)) API_UNAVAILABLE(ios);
 
 /* Notifications
 */

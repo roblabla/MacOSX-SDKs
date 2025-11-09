@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6F8D76AD-E9EB-3393-83E8-240FA0D23283
-  - target:          x86_64-maccatalyst
-    value:           6F8D76AD-E9EB-3393-83E8-240FA0D23283
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FD74EA00-B7F9-3325-B569-4ABDA57C91FD
-  - target:          arm64e-maccatalyst
-    value:           FD74EA00-B7F9-3325-B569-4ABDA57C91FD
 install-name:    '/System/Library/Frameworks/Vision.framework/libfaceCore.dylib'
-current-version: 6.0.48
+current-version: 6.0.51
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

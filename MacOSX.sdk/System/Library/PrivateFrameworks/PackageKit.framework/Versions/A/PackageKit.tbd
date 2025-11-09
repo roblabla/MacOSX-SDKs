@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1BCBBB0D-5F03-33B9-93EA-0A0189FE9FD6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           624A500C-1125-3B7A-9D13-CD1760451D61
 install-name:    '/System/Library/PrivateFrameworks/PackageKit.framework/Versions/A/PackageKit'
 current-version: 434
 exports:
@@ -107,10 +100,10 @@ exports:
                        _PKReceiptPathExtendedAttributes, _PKReceiptPathSHA1Checksums, 
                        _PKReceiptStandardReceiptsPath, _PKReceiptSystemContentReceiptsPath, 
                        _PKReceiptSystemDataContentReceiptsPath, _PKSIPCurrentProcessCanModifySystemIntegrityProtectionFiles, 
-                       _PKSIPFullyProtected, _PKSIPFullyProtectedPath, _PKSIPSystemTrustedFromRootAtPath, 
-                       _PKSO_CODERKEY_DestPath, _PKSO_CODERKEY_OptionFlags, _PKSO_CODERKEY_SourcePath, 
-                       _PKSecureNetEnabledProductInfoFilename, _PKSignedContainerErrorDomain, 
-                       _PKSignedContainerFileSystemCompressionFormatKey, _PKSignedContainerFileSystemCompressionFormatSnowLeopardValue, 
+                       _PKSIPFullyProtected, _PKSIPSystemTrustedFromRootAtPath, _PKSO_CODERKEY_DestPath, 
+                       _PKSO_CODERKEY_OptionFlags, _PKSO_CODERKEY_SourcePath, _PKSecureNetEnabledProductInfoFilename, 
+                       _PKSignedContainerErrorDomain, _PKSignedContainerFileSystemCompressionFormatKey, 
+                       _PKSignedContainerFileSystemCompressionFormatSnowLeopardValue, 
                        _PKSignedContainerFileSystemCompressionFormatYosemiteValue, 
                        _PKSigningIdentityErrorDomain, _PKTrustLevelToNSString, _PKURLTransportErrorDomain, 
                        _PKURLTransportErrorResponseHeadersKey, _PKURLTransportErrorStatusCodeKey, 

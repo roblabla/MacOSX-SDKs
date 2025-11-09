@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           83018D6B-27EA-3AD4-A83C-71C0A2EAFDDF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7EFA8740-F677-34CD-A688-CF478FB84518
 install-name:    '/System/Library/PrivateFrameworks/CoreChineseEngine.framework/Versions/A/CoreChineseEngine'
-current-version: 521
+current-version: 519
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CCEGetLionUserDictionariesMigrated, _CCEGetPidForApplication, 

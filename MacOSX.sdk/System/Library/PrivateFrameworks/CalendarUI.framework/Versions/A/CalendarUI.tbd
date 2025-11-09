@@ -1,20 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9E8324C4-04A4-30D2-8810-7186CE42759C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5B976FAF-F632-367E-8B4E-F77022EDA00F
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
-current-version: 1138.3.3
+current-version: 1138.5.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALGroupPboardType, _CALLocationPboardType, _CALPixelAlignedPoint, 
                        _CALPixelAlignedRect, _CALPixelAlignedSize, _CALResourcePboardType, 
-                       _CALVCardPboardType, _CalAccountsNS_CertificatePanel, _CalLaunchSuggestedEventURLString, 
+                       _CalAccountsNS_CertificatePanel, _CalLaunchSuggestedEventURLString, 
                        _CalLinkColorAttributeName, _CalOffsetToCenterNumberWithFont, 
                        _CalRoundToScreenScale, _CalTextDirectionIsLeftToRight, _CalUIDayOccurrenceVisibleHeightNotSet, 
                        _CalUIDefaultFirstDayOfWeek, _CalUIIsRunningInWidgetApplication, 

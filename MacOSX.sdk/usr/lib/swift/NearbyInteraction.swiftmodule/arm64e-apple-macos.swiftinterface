@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNearbyInteraction -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name NearbyInteraction
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 335.0.11
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNearbyInteraction -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name NearbyInteraction
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 336.0.3
 @_exported import NearbyInteraction
 import Swift
 import _Concurrency

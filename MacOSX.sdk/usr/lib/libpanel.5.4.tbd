@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8E7A0FE0-4D0C-3BE6-88C7-5723CD896C57
-  - target:          x86_64-maccatalyst
-    value:           8E7A0FE0-4D0C-3BE6-88C7-5723CD896C57
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           493A561A-4793-3F76-9E7A-801967A8803B
-  - target:          arm64e-maccatalyst
-    value:           493A561A-4793-3F76-9E7A-801967A8803B
 install-name:    '/usr/lib/libpanel.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

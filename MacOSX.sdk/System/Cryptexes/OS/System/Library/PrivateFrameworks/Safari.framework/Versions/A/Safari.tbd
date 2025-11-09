@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           01CE37CD-430E-348F-A77C-344616371B57
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8E75D6E4-B04D-3873-98DF-B9DEB842A34A
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 614.3.7
+current-version: 615.1.26
 compatibility-version: 528
 exports:
   - targets:         [ x86_64-macos ]
@@ -33,11 +26,11 @@ exports:
                        __ZN6Safari11Certificate6createEP16__SecCertificate, __ZN6Safari11CertificateC1EP16__SecCertificate, 
                        __ZN6Safari11CertificateC2EP16__SecCertificate, __ZN6Safari11CertificateD0Ev, 
                        __ZN6Safari11CertificateD1Ev, __ZN6Safari11CertificateD2Ev, 
-                       __ZN6Safari23PasswordAutoFillStrings21descriptionForPasskeyEv, 
+                       __ZN6Safari23PasswordAutoFillStrings21descriptionForPasskeyEP20WBSSavedAccountMatch, 
                        __ZN6Safari23PasswordAutoFillStrings26titleForSFSafariCredentialEP18SFSafariCredential, 
+                       __ZN6Safari23PasswordAutoFillStrings28titleForSFCredentialIdentityEP20SFCredentialIdentity, 
                        __ZN6Safari23PasswordAutoFillStrings28titleForWBSSavedAccountMatchEP20WBSSavedAccountMatch, 
-                       __ZN6Safari23PasswordAutoFillStrings36titleForSFPasswordCredentialIdentityEP28SFPasswordCredentialIdentity, 
-                       __ZN6Safari23PasswordAutoFillStrings48originDescriptionForSFPasswordCredentialIdentityEP28SFPasswordCredentialIdentityP8NSString, 
+                       __ZN6Safari23PasswordAutoFillStrings40originDescriptionForSFCredentialIdentityEP20SFCredentialIdentityP8NSString, 
                        __ZN6Safari31appleIntermediateCAExpiring2023Ev, __ZN6Safari31appleIntermediateCAExpiring2030Ev, 
                        __ZNK6Safari11Certificate11subjectNameEv, __ZNK6Safari11Certificate14secCertificateEv, 
                        __ZNK6Safari11Certificate16rawPublicKeyDataEv, __ZNK6Safari11Certificate19hasExtendedKeyUsageE9cssm_data, 
@@ -58,7 +51,7 @@ exports:
                        _safariSharedFrameworkBundleIdentifier, _safariTechnologyPreviewApplicationBundleIdentifier, 
                        _touchIDAvailabilityMayHaveChangedNotification, _touchIDToAutoFillToggledNotification ]
     objc-classes:    [ AccountManagerContainerViewController, AccountManagerViewController, 
-                       AutoFillAuthorizationController, AutoFillCredentialPicker, 
+                       AutoFillAuthorizationController, AutoFillCredentialPickerCoordinator, 
                        AutoFillLocalAuthenticationManager, BookmarksController, CredentialCompletionAutoFillCellView, 
                        FeatureAvailability, MacSafariBookmarkDBAccess, MenuTableRowView, 
                        MenuTableSeparatorRowView, OneTimeCodeAutoFillCellView, PurgeableDirectory, 

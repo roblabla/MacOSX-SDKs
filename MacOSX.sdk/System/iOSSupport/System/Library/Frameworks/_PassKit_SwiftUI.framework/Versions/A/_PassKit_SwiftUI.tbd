@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           41F15D4D-5F3B-3DCE-B37D-E4CC7E07FF55
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           85F1C169-CE81-3891-8FEA-DECE1B5B22CB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_PassKit_SwiftUI.framework/Versions/A/_PassKit_SwiftUI'
 swift-abi-version: 7
 exports:

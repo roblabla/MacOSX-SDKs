@@ -172,6 +172,7 @@
 #import <UIKit/UITextChecker.h>
 #import <UIKit/UITextField.h>
 #import <UIKit/UITextInput.h>
+#import <UIKit/UITextInputContext.h>
 #import <UIKit/UITextInputTraits.h>
 #import <UIKit/UITextView.h>
 #import <UIKit/UIToolbar.h>

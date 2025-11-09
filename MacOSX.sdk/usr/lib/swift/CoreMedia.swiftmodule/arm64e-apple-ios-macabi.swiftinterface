@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreMedia
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3005.6.1.4.1
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreMedia
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3015.23.1.4.3
 import CoreAudio
 import CoreAudioTypes
 import CoreFoundation
@@ -152,7 +152,7 @@ extension CoreMedia.CMTimebase {
     get
   }
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var source: CoreMedia.CMSyncProtocol {
+  public var source: any CoreMedia.CMSyncProtocol {
     get
     set
   }
@@ -160,7 +160,7 @@ extension CoreMedia.CMTimebase {
   @available(iOS, introduced: 13.0, deprecated: 15.0, renamed: "source")
   @available(tvOS, introduced: 13.0, deprecated: 15.0, renamed: "source")
   @available(watchOS, introduced: 6.0, deprecated: 8.0, renamed: "source")
-  public var master: CoreMedia.CMSyncProtocol {
+  public var master: any CoreMedia.CMSyncProtocol {
     get
     set
   }

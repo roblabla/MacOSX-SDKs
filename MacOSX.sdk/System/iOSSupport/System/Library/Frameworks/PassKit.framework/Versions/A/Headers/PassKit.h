@@ -46,6 +46,9 @@
 #if __has_include(<PassKit/PKDeferredPaymentSummaryItem.h>)
 #import <PassKit/PKDeferredPaymentSummaryItem.h>
 #endif
+#if __has_include(<PassKit/PKDeferredPaymentRequest.h>)
+#import <PassKit/PKDeferredPaymentRequest.h>
+#endif
 #if __has_include(<PassKit/PKPaymentTokenContext.h>)
 #import <PassKit/PKPaymentTokenContext.h>
 #endif

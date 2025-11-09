@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Charts
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.1.15
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Charts
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.4.11
 import Darwin.C
 import Darwin
 import Foundation
@@ -21,6 +21,17 @@ public struct ScaleType {
     get
   }
   public static var category: Charts.ScaleType {
+    get
+  }
+}
+@available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
+extension Charts.ScaleType {
+  public static func power(exponent: Swift.Double) -> Charts.ScaleType
+  public static var squareRoot: Charts.ScaleType {
+    get
+  }
+  public static func symmetricLog(slopeAtZero: Swift.Double) -> Charts.ScaleType
+  public static var symmetricLog: Charts.ScaleType {
     get
   }
 }
@@ -147,17 +158,17 @@ extension SwiftUI.View {
   
   public func chartSymbolScale<Domain, Range>(domain: Domain, range: Range) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale<Domain>(domain: Domain, range: [Charts.ChartSymbolShape]) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  @_disfavoredOverload public func chartSymbolScale<Domain>(domain: Domain, range: [any Charts.ChartSymbolShape]) -> some SwiftUI.View where Domain : Charts.ScaleDomain
   
   public func chartSymbolScale<Domain>(domain: Domain) -> some SwiftUI.View where Domain : Charts.ScaleDomain
   
   public func chartSymbolScale<Range>(range: Range) -> some SwiftUI.View where Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale(range: [Charts.ChartSymbolShape]) -> some SwiftUI.View
+  @_disfavoredOverload public func chartSymbolScale(range: [any Charts.ChartSymbolShape]) -> some SwiftUI.View
   
   public func chartSymbolScale<DataValue, S>(_ mapping: Swift.KeyValuePairs<DataValue, S>) -> some SwiftUI.View where DataValue : Charts.Plottable, S : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, Charts.ChartSymbolShape>) -> some SwiftUI.View where DataValue : Charts.Plottable
+  @_disfavoredOverload public func chartSymbolScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, any Charts.ChartSymbolShape>) -> some SwiftUI.View where DataValue : Charts.Plottable
   
   public func chartSymbolScale<Domain, S>(domain: Domain, mapping: @escaping (Domain.Element) -> S) -> some SwiftUI.View where Domain : Swift.Collection, S : Charts.ChartSymbolShape, Domain.Element : Charts.Plottable
   
@@ -366,9 +377,9 @@ extension Charts.AxisMark {
     case center
     case unstacked
     @usableFromInline
-    internal static func == (a: Charts.MarkStackingMethod.Storage, b: Charts.MarkStackingMethod.Storage) -> Swift.Bool
-    @usableFromInline
     internal func hash(into hasher: inout Swift.Hasher)
+    @usableFromInline
+    internal static func == (a: Charts.MarkStackingMethod.Storage, b: Charts.MarkStackingMethod.Storage) -> Swift.Bool
     @usableFromInline
     internal var hashValue: Swift.Int {
       @usableFromInline
@@ -513,6 +524,22 @@ public struct ChartProxy {
   public func value<P>(atX position: CoreFoundation.CGFloat, as: P.Type = P.self) -> P? where P : Charts.Plottable
   public func value<P>(atY position: CoreFoundation.CGFloat, as: P.Type = P.self) -> P? where P : Charts.Plottable
   public func value<X, Y>(at position: CoreFoundation.CGPoint, as: (X, Y).Type = (X, Y).self) -> (X, Y)? where X : Charts.Plottable, Y : Charts.Plottable
+}
+@available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
+extension Charts.ChartProxy {
+  public func foregroundStyle<P>(for value: P) -> SwiftUI.AnyShapeStyle? where P : Charts.Plottable
+  public func lineStyle<P>(for value: P) -> SwiftUI.StrokeStyle? where P : Charts.Plottable
+  public func symbol<P>(for value: P) -> Charts.AnyChartSymbolShape? where P : Charts.Plottable
+  public func symbolSize<P>(for value: P) -> CoreFoundation.CGFloat? where P : Charts.Plottable
+}
+@available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
+extension Charts.ChartProxy {
+  public func xDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
+  public func yDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
+  public func foregroundStyleDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
+  public func symbolDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
+  public func symbolSizeDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
+  public func lineStyleDomain<P>(dataType: P.Type) -> [P] where P : Charts.Plottable
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUI.View {
@@ -762,6 +789,13 @@ extension Charts.ChartContent {
   public func interpolationMethod(_ method: Charts.InterpolationMethod) -> some Charts.ChartContent
   
 }
+@available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
+extension Charts.ChartContent {
+  public func blur(radius: CoreFoundation.CGFloat) -> some Charts.ChartContent
+  
+  public func shadow(color: SwiftUI.Color = Color(.sRGBLinear, white: 0, opacity: 0.33), radius: CoreFoundation.CGFloat, x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
+  
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_functionBuilder public struct ChartContentBuilder {
   @_alwaysEmitIntoClient public static func buildBlock() -> some Charts.ChartContent {
@@ -785,9 +819,12 @@ extension Charts.ChartContent {
         return .init(storage: .falseContent(second))
     }
   @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some Charts.ChartContent where Content : Charts.ChartContent {
-        return content
+        content
     }
   
+  @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.ChartContent {
+        content
+    }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Never : Charts.ChartContent {
@@ -804,6 +841,7 @@ extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartConte
   }
   public static func _layoutChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentLayoutInputs)
   public static func _renderChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @usableFromInline
@@ -876,8 +914,8 @@ extension Charts.BuilderPair : Charts.ChartContent where T0 : Charts.ChartConten
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct AnyChartContent {
   @usableFromInline
-  internal let storage: Charts.ChartContent
-  @inlinable public init(_ content: Charts.ChartContent) {
+  internal let storage: any Charts.ChartContent
+  @inlinable public init(_ content: any Charts.ChartContent) {
         self.storage = content
     }
   @inlinable public init(erasing content: some ChartContent) {
@@ -992,6 +1030,7 @@ extension SwiftUI.ForEach : Charts.ChartContent where Content : Charts.ChartCont
   }
   public static func _layoutChartContent(_ content: SwiftUI.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentLayoutInputs)
   public static func _renderChartContent(_ content: SwiftUI.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUI.ForEach where ID == Data.Element.ID, Content : Charts.ChartContent, Data.Element : Swift.Identifiable {
@@ -1027,6 +1066,9 @@ extension SwiftUI.ForEach where Content : Charts.ChartContent {
         return AnyAxisMark(content)
     }
   
+  @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.AxisMark {
+        content
+    }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderPair : Charts.AxisContent where T0 : Charts.AxisContent, T1 : Charts.AxisContent {
@@ -1086,8 +1128,8 @@ extension Charts.ChartSymbolShape where Self : SwiftUI.InsettableShape {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct AnyChartSymbolShape : Charts.ChartSymbolShape {
-  internal let storage: Charts.ChartSymbolShape
-  public init(_ content: Charts.ChartSymbolShape)
+  internal let storage: any Charts.ChartSymbolShape
+  public init(_ content: any Charts.ChartSymbolShape)
   public func path(in rect: CoreFoundation.CGRect) -> SwiftUI.Path
   public var perceptualUnitRect: CoreFoundation.CGRect {
     get
@@ -1165,6 +1207,9 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
         AnyAxisContent(content)
     }
   
+  @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.AxisContent {
+        content
+    }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct PointMark {
@@ -1192,8 +1237,8 @@ extension Swift.Never : Charts.AxisContent {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct AnyAxisContent : Charts.AxisContent {
   @usableFromInline
-  internal let storage: Charts.AxisContent
-  @inlinable public init(_ content: Charts.AxisContent) {
+  internal let storage: any Charts.AxisContent
+  @inlinable public init(_ content: any Charts.AxisContent) {
         storage = content
     }
   @inlinable public init(erasing content: some AxisContent) {
@@ -1415,8 +1460,8 @@ extension Swift.Never : Charts.AxisMark {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct AnyAxisMark : Charts.AxisMark {
   @usableFromInline
-  internal let storage: Charts.AxisMark
-  @inlinable public init(_ content: Charts.AxisMark) {
+  internal let storage: any Charts.AxisMark
+  @inlinable public init(_ content: any Charts.AxisMark) {
         storage = content
     }
   @inlinable public init(erasing content: some AxisMark) {

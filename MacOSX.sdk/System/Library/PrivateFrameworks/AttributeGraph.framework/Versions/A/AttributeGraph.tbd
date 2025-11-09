@@ -2,26 +2,13 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           57F20439-E27C-3D5D-A766-882CC01D8525
-  - target:          x86_64-maccatalyst
-    value:           57F20439-E27C-3D5D-A766-882CC01D8525
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           35553500-37D6-34B6-95E5-58D30C436E77
-  - target:          arm64e-maccatalyst
-    value:           35553500-37D6-34B6-95E5-58D30C436E77
 install-name:    '/System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTISt11logic_error, __ZTISt12length_error, __ZTISt18bad_variant_access, 
-                       __ZTISt9exception, __ZTSSt11logic_error, __ZTSSt12length_error, 
-                       __ZTSSt18bad_variant_access, __ZTSSt9exception ]
+    weak-symbols:    [ __ZTISt18bad_variant_access, __ZTISt20bad_array_new_length, 
+                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSSt18bad_variant_access, 
+                       __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, __ZTSSt9exception ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14AttributeGraph011AnyOptionalA0V10identifierSo11AGAttributeavM', 

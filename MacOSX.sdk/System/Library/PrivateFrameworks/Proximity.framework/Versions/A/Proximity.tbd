@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F924ADF6-E45E-3D57-8BFC-E1F0484BD17A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           315CDB4B-116F-3700-853F-3D79439E7E21
 install-name:    '/System/Library/PrivateFrameworks/Proximity.framework/Versions/A/Proximity'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

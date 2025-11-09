@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6AAC694E-4D23-3DE1-A505-D7B2ECE061AD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           487E9841-37C4-3269-A852-189B9ACE536F
 install-name:    '/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

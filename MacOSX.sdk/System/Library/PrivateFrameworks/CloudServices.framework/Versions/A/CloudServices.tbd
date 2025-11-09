@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CA1CD2AF-D948-3869-8F5B-8FA8458C4E70
-  - target:          x86_64-maccatalyst
-    value:           CA1CD2AF-D948-3869-8F5B-8FA8458C4E70
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A9F0DB96-B607-379C-B6A6-4BA2A81F0952
-  - target:          arm64e-maccatalyst
-    value:           A9F0DB96-B607-379C-B6A6-4BA2A81F0952
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -71,10 +58,11 @@ exports:
                        _kSecureBackupIsEnabledKey, _kSecureBackupKeybagDigestKey, 
                        _kSecureBackupLastBackupDateKey, _kSecureBackupLastBackupTimestampKey, 
                        _kSecureBackupMetadataKey, _kSecureBackupNewPassphraseKey, 
-                       _kSecureBackupNotificationKey, _kSecureBackupNumericPassphraseLengthKey, 
-                       _kSecureBackupPassphraseKey, _kSecureBackupPeerInfoDataKey, 
-                       _kSecureBackupPeerInfoOSVersionKey, _kSecureBackupPeerInfoSerialNumberKey, 
-                       _kSecureBackupRecordIDKey, _kSecureBackupRecordLabelKey, _kSecureBackupRecordStatusInvalid, 
+                       _kSecureBackupNonViableRepairKey, _kSecureBackupNotificationKey, 
+                       _kSecureBackupNumericPassphraseLengthKey, _kSecureBackupPassphraseKey, 
+                       _kSecureBackupPeerInfoDataKey, _kSecureBackupPeerInfoOSVersionKey, 
+                       _kSecureBackupPeerInfoSerialNumberKey, _kSecureBackupRecordIDKey, 
+                       _kSecureBackupRecordLabelKey, _kSecureBackupRecordStatusInvalid, 
                        _kSecureBackupRecordStatusKey, _kSecureBackupRecordStatusValid, 
                        _kSecureBackupRecoveryKeyKey, _kSecureBackupRecoveryRequiresVerificationTokenKey, 
                        _kSecureBackupRecoveryStatusKey, _kSecureBackupRecoveryVerificationTokenLengthKey, 

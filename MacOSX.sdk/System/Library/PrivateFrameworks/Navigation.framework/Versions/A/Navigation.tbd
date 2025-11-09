@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9A5CF249-E59F-37C7-B5D9-7773F222A9D9
-  - target:          x86_64-maccatalyst
-    value:           9A5CF249-E59F-37C7-B5D9-7773F222A9D9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3310C206-1852-33F7-A232-C289A734D845
-  - target:          arm64e-maccatalyst
-    value:           3310C206-1852-33F7-A232-C289A734D845
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -52,11 +39,11 @@ exports:
                        _MNLogFacilityNavigationSessionManager, _MNLogFacilityNavigationSimulation, 
                        _MNLogFacilityNavigationStateGuidance, _MNLogFacilityNavigationStateManager, 
                        _MNLogFacilityNavigationStateNoDestination, _MNLogFacilityNavigationStateRoutePreview, 
-                       _MNLogFacilityRouteAttributes, _MNLogFacilityRouteStorage, 
-                       _MNLogFacilitySessionUpdateManager, _MNLogFacilitySettingsManager, 
-                       _MNLogFacilityTrace, _MNLogFacilityTransitUpdateRequest, _MNLogFacilityVehicleMonitor, 
-                       _MNLogFacilityXPC, _MNLogFacilityXPCTransactionCounter, _MNLogFacilityXPCTransactionManager, 
-                       _MNLoggingAudioSubsystem, _MNLoggingSubsystem, _MNMap, _MNNavigationServiceStateAsString, 
+                       _MNLogFacilityRouteStorage, _MNLogFacilitySessionUpdateManager, 
+                       _MNLogFacilitySettingsManager, _MNLogFacilityTrace, _MNLogFacilityTransitUpdateRequest, 
+                       _MNLogFacilityVehicleMonitor, _MNLogFacilityXPC, _MNLogFacilityXPCTransactionCounter, 
+                       _MNLogFacilityXPCTransactionManager, _MNLoggingAudioSubsystem, 
+                       _MNLoggingSubsystem, _MNMap, _MNNavigationServiceStateAsString, 
                        _MNNavigationServiceStateChangedFromNavigatingToStopped, _MNNavigationServiceStateChangedToNavigating, 
                        _MNNavigationServiceStateIsNavigating, _MNNavigationTypeForRouteInCountry, 
                        _MNProtocolDeclaresSelector, _MNSaveRoute, _MNStringForJSONObject, 
@@ -135,8 +122,8 @@ exports:
                        MNLocation, MNLocationManager, MNLocationTracker, MNNanoFormattedStringFormatter, 
                        MNNavdStateUpdater, MNNavigationProxyUpdater, MNNavigationServer, 
                        MNNavigationService, MNNavigationServiceDirectionsRequestTicket, 
-                       MNNavigationSession, MNNavigationSessionManager, MNNavigationState, 
-                       MNNavigationStateGuidance, MNNavigationStateGuidanceTurnByTurn, 
+                       MNNavigationSession, MNNavigationSessionManager, MNNavigationSessionState, 
+                       MNNavigationState, MNNavigationStateGuidance, MNNavigationStateGuidanceTurnByTurn, 
                        MNNavigationStateManager, MNNavigationStateNoDestination, 
                        MNNavigationStateRoutePreview, MNNavigationStateRoutePreviewGuidance, 
                        MNNavigationTraceInfo, MNNavigationTraceManager, MNNotificationManager, 
@@ -145,21 +132,22 @@ exports:
                        MNRouteDivergenceOverlappingSection, MNRouteDivergenceOverlappingSectionComponent, 
                        MNRouteDivergenceResult, MNRouteDivergenceResults, MNRouteGeniusRemoteService, 
                        MNRouteManager, MNRouteOverlapResult, MNRouteProximitySensor, 
-                       MNSignInstructionContents, MNSimulatedLocationGenerator, MNSpokenInstructionContents, 
-                       MNStartNavigationDetails, MNTimeManager, MNTrace, MNTraceAnnotatedUserBehaviorRow, 
-                       MNTraceAnnotatedUserEnvironmentRow, MNTraceBookmark, MNTraceBookmarkRecorder, 
-                       MNTraceDirectionsRow, MNTraceETAUpdateRow, MNTraceEVDataRow, 
-                       MNTraceHeadingDataRow, MNTraceLoader, MNTraceLocationRow, 
-                       MNTraceMiscInfo, MNTraceMotionDataRow, MNTraceNavigationEventRow, 
-                       MNTraceNavigationUpdatesChangeRouteRow, MNTraceNavigationUpdatesDepartWaypointRow, 
-                       MNTraceNavigationUpdatesRow, MNTracePlaybackDetails, MNTracePlayer, 
-                       MNTracePlayerScheduler, MNTracePlayerTimelineStream, MNTraceRecorder, 
-                       MNTraceRecordingData, MNTraceVehicleHeadingRow, MNTraceVehicleSpeedRow, 
-                       MNTrafficIncidentAlert, MNTransitAlert, MNTransitInstruction, 
-                       MNTransitStepInstruction, MNTransitWalkingSegmentInstruction, 
-                       MNTunnelLocationProjector, MNTurnByTurnLocationTracker, MNUserOptions, 
-                       MNVehicleMonitor, MNVoiceLanguageUtil, MNWalkingTurnByTurnLocationTracker, 
-                       MNXPCActivity, MNXPCTransactionCounter ]
+                       MNSequence, MNSignInstructionContents, MNSimulatedLocationGenerator, 
+                       MNSpokenInstructionContents, MNStartNavigationDetails, MNTimeManager, 
+                       MNTrace, MNTraceAnnotatedUserBehaviorRow, MNTraceAnnotatedUserEnvironmentRow, 
+                       MNTraceBookmark, MNTraceBookmarkRecorder, MNTraceDirectionsRow, 
+                       MNTraceETAUpdateRow, MNTraceEVDataRow, MNTraceHeadingDataRow, 
+                       MNTraceLoader, MNTraceLocationRow, MNTraceMiscInfo, MNTraceMotionDataRow, 
+                       MNTraceNavigationEventRow, MNTraceNavigationUpdatesChangeRouteRow, 
+                       MNTraceNavigationUpdatesDepartWaypointRow, MNTraceNavigationUpdatesRow, 
+                       MNTracePlaybackDetails, MNTracePlayer, MNTracePlayerScheduler, 
+                       MNTracePlayerTimelineStream, MNTraceRecorder, MNTraceRecordingData, 
+                       MNTraceVehicleHeadingRow, MNTraceVehicleSpeedRow, MNTrafficIncidentAlert, 
+                       MNTransitAlert, MNTransitInstruction, MNTransitStepInstruction, 
+                       MNTransitWalkingSegmentInstruction, MNTunnelLocationProjector, 
+                       MNTurnByTurnLocationTracker, MNUserOptions, MNVehicleMonitor, 
+                       MNVoiceLanguageUtil, MNWalkingTurnByTurnLocationTracker, MNXPCActivity, 
+                       MNXPCTransactionCounter ]
     objc-ivars:      [ MNListInstructionContents._branchNames, MNListInstructionContents._destinationName, 
                        MNListInstructionContents._distance, MNListInstructionContents._distanceFormat, 
                        MNListInstructionContents._exitNumber, MNListInstructionContents._instructionFormats, 

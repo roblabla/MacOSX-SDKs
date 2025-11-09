@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E7D116F9-CA93-3CC4-9082-D45B7D9A0642
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6E58FB68-0E50-3AE1-B060-C70FA1973D13
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 581.203
+current-version: 581.255
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D9B41735-BD51-3BD0-A48A-2236740F60BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           182BBA99-61AF-3A37-826E-210B58D63C32
 install-name:    '/System/Library/PrivateFrameworks/SiriSocialConversation.framework/Versions/A/SiriSocialConversation'
 swift-abi-version: 7
 exports:

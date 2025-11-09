@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           0D6FDF4E-2D59-35D4-A64A-C8E2A8DBFDA7
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           2FFCBB13-DB81-3298-8BC3-15F687BFB780
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
-current-version: 10.3.5
+current-version: 10.5.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -116,7 +109,7 @@ exports:
                        _GCExtendedGamepadInitInfoMake, _GCExtendedGamepadInitInfoPopulateNames, 
                        _GCExtendedGamepadSnapShotDataV100FromNSData, _GCExtendedGamepadSnapshotDataFromNSData, 
                        _GCFrameworkBundle, _GCFrameworkInitializationReasonToString, 
-                       _GCFrameworkStaticInitializer, _GCGamepadSnapShotDataV100FromNSData, 
+                       _GCFrameworkStaticInitializer, _GCGameIntentBlocklist, _GCGamepadSnapShotDataV100FromNSData, 
                        _GCHandSkeletonAny, _GCHandSkeletonLeft, _GCHandSkeletonRight, 
                        _GCHapticDurationInfinite, _GCHapticsLocalityAll, _GCHapticsLocalityDefault, 
                        _GCHapticsLocalityHandles, _GCHapticsLocalityLeftHandle, _GCHapticsLocalityLeftTrigger, 
@@ -238,8 +231,8 @@ exports:
                        _hexStringFromByteArray, _isDeviceAppleControlCenterRemote, 
                        _isDeviceAppleDirectionalRemote, _isDeviceAppleEmbeddedBluetoothButtons, 
                        _isDeviceAppleMultiPointDigitizer, _isDeviceAppleSiriRemote, 
-                       _isDeviceAppleTouchpad, _isDeviceDualSense, _isDeviceDualShock4, 
-                       _isDeviceKeyboard, _isDeviceLuna, _isDeviceMFiAuthenticated, 
+                       _isDeviceAppleTouchpad, _isDeviceDualSense, _isDeviceDualSenseEdge, 
+                       _isDeviceDualShock4, _isDeviceKeyboard, _isDeviceLuna, _isDeviceMFiAuthenticated, 
                        _isDeviceMFiGamepadCompliantForDeviceRef, _isDeviceMFiGamepadCompliantForServiceClientRef, 
                        _isDeviceMotionLite, _isDeviceMouse, _isDeviceParentAuthenticated, 
                        _isDeviceSwitchJoyCon, _isDeviceSwitchProController, _isDeviceSwitchSuperFamicomController, 
@@ -283,6 +276,6 @@ exports:
                        _GCDevicePhysicalInputComponentDescription, _GCDriverClientConnection, 
                        _GCGamepadEventGamepadHIDAdapterDescription, _GCGamepadEventImpl, 
                        _GCHIDEventSubject, _GCHandSkeleton, _GCHapticEvent, _GCHapticServerManager, 
-                       _GCIPCRemoteProcess, _GCImplicitIPCObjectDescription, _GCObservation, 
-                       _GCXRComponent ]
+                       _GCIPCRemoteProcess, _GCImplicitIPCObjectDescription, _GCKeyboardEventImpl, 
+                       _GCObservation, _GCXRComponent ]
 ...

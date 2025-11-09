@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           781D2CE3-3E8A-3A97-AB3E-DEBC3B5ADA41
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1171DA9A-D6C0-39FF-9536-17084EEEC79E
 install-name:    '/usr/lib/libSMC.dylib'
-current-version: 25.0.1
+current-version: 25.100.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AccumSetupSettingsCPU, _AccumSetupSettingsGPU, _AccumSetupSettingsHP, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2DC8AC25-1B6E-39C0-90B1-A45C46DCB2C0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FD42286D-FFC3-3960-80D7-F62FB62751E9
 install-name:    '/System/Library/PrivateFrameworks/GraphKit.framework/Versions/A/GraphKit'
 current-version: 25
 exports:

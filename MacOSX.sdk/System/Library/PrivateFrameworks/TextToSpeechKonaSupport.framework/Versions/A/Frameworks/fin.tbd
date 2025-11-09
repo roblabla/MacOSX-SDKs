@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C15995BF-D0BD-31DA-835A-11F1FBD9CA30
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9DB84A0C-7334-362C-8426-2D631BB0AD32
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/fin.dylib'
 current-version: 0
 compatibility-version: 0

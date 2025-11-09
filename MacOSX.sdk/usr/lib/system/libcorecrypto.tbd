@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1A8A8D34-268F-3D42-936A-8A0029817E22
-  - target:          x86_64-maccatalyst
-    value:           1A8A8D34-268F-3D42-936A-8A0029817E22
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E32C0A9B-EDD0-376D-A504-A06C215E89FE
-  - target:          arm64e-maccatalyst
-    value:           E32C0A9B-EDD0-376D-A504-A06C215E89FE
 install-name:    '/usr/lib/system/libcorecrypto.dylib'
-current-version: 1386.60.8
+current-version: 1387.100.43
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

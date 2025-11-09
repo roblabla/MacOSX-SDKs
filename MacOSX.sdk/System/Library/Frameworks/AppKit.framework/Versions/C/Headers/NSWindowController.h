@@ -11,6 +11,7 @@
 #import <AppKit/NSStoryboardSegue.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSPreviewRepresentingActivityItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
@@ -54,6 +55,10 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 */
 @property BOOL shouldCascadeWindows;
 
+/* Preview representable activity items, used for sharing and collaboration.
+   If set to nil, NSWindowController shall return the previewRepresentableActivityItems of its associated NSDocument (if any)
+*/
+@property (nullable, copy) NSArray<id<NSPreviewRepresentableActivityItem>> *previewRepresentableActivityItems API_AVAILABLE(macos(13.2)) API_UNAVAILABLE(ios);
 
 // -----------------------------------------------------------------------------
 // Dealing with the document

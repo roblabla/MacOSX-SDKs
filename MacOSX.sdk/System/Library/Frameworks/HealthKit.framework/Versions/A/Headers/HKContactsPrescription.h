@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An object representing a contacts prescription
  */
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
-@interface HKContactsPrescription: HKVisionPrescription
+@interface HKContactsPrescription: HKVisionPrescription <NSSecureCoding, NSCopying>
 
 /*!
  @property      rightEye
@@ -57,6 +57,7 @@ HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
                                        expirationDate:(nullable NSDate *)expirationDate
                                                device:(nullable HKDevice *)device
                                              metadata:(nullable NSDictionary<NSString *, id> *)metadata;
+
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           CB0A2487-E3B0-3D71-A907-CF0FE2C6639B
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           2E334D65-D906-3781-B8C0-703C7A806EC3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_GroupActivities_UIKit.framework/Versions/A/_GroupActivities_UIKit'
 swift-abi-version: 7
 exports:
@@ -249,13 +242,7 @@ exports:
                        '_$s2os6LoggerV22_GroupActivities_UIKitE9subsystem8categoryACx_SStcSYRzSS8RawValueRtzlufC', 
                        '_$sSo14NSItemProviderC22_GroupActivities_UIKitE04loadC8ActivitySo014TUConversationG0CyYaKF', 
                        '_$sSo14NSItemProviderC22_GroupActivities_UIKitE04loadC8ActivitySo014TUConversationG0CyYaKFTu', 
-                       '_$ss26DefaultStringInterpolationV22_GroupActivities_UIKitE06appendC0yyxSglF', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit22PeoplePickerController', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit30GroupActivitySharingController', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit22PeoplePickerController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit30GroupActivitySharingController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController' ]
+                       '_$ss26DefaultStringInterpolationV22_GroupActivities_UIKitE06appendC0yyxSglF' ]
     objc-classes:    [ _TtC22_GroupActivities_UIKit22PeoplePickerController, _TtC22_GroupActivities_UIKit30GroupActivitySharingController, 
                        _TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController ]
 ...

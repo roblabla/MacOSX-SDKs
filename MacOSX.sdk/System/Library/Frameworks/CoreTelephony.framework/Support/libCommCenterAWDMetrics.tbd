@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8D34728E-B08A-3D8D-B075-BDC507AD5DA6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B79EAA74-CA14-3A5D-91EC-725F6F6676C8
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterAWDMetrics.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -167,6 +160,7 @@ exports:
                        __ZN3awd7metrics45CommCenter_Instruments_CellularLteRrcMsgEventC1Ev, 
                        __ZN3awd7metrics45CommCenter_Instruments_CellularLteRrcMsgEventD1Ev, 
                        __ZN3awd7metrics46CommCenterSubscriptionImeiChangeReason_IsValidEi, 
+                       __ZN3awd7metrics47CommCenterCellularPlanInternetTransport_IsValidEi, 
                        __ZN3awd7metrics47CommCenterTransferPlanListingStatus_ListingInfoC1Ev, 
                        __ZN3awd7metrics47CommCenter_Instruments_CellularWcdmaRrcMsgEventC1Ev, 
                        __ZN3awd7metrics47CommCenter_Instruments_CellularWcdmaRrcMsgEventD1Ev, 

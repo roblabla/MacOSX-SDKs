@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           AC9BCAF4-A9EA-36F3-ABEB-64F1EBE03502
-  - target:          x86_64-maccatalyst
-    value:           AC9BCAF4-A9EA-36F3-ABEB-64F1EBE03502
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CBD03669-79A5-3664-9397-26E91F5B0C74
-  - target:          arm64e-maccatalyst
-    value:           CBD03669-79A5-3664-9397-26E91F5B0C74
 install-name:    '/System/Library/PrivateFrameworks/CoreParsec.framework/Versions/A/CoreParsec'
 swift-abi-version: 7
 exports:
@@ -22,26 +9,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CoreParsec10ClientNameC07extractcD10FromStringySSSgAEFZ', 
                        '_$s10CoreParsec10ClientNameC07extractcD13FromUserAgent_17allowAbbreviationSSSgAF_SbtFZ', 
-                       '_$s10CoreParsec10ClientNameC0A11SuggestionsSSvgZ', '_$s10CoreParsec10ClientNameC0B4ToolSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC10DuetExpertSSvgZ', '_$s10CoreParsec10ClientNameC10PegasusKitSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC11PhotoPickerSSvgZ', '_$s10CoreParsec10ClientNameC14MediaAnalysisdSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC15FlightUtilitiesSSvgZ', '_$s10CoreParsec10ClientNameC15MapsSuggestionsSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC16ReverseTemplatedSSvgZ', '_$s10CoreParsec10ClientNameC18VisualIntelligenceSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC20NotificationsLoggingSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC4MailSSvgZ', '_$s10CoreParsec10ClientNameC4NewsSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC4SiriSSvgZ', '_$s10CoreParsec10ClientNameC6LookupSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC6PhotosSSvgZ', '_$s10CoreParsec10ClientNameC6SafariSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC7ParsecdSSvgZ', '_$s10CoreParsec10ClientNameC8MessagesSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC8TrysteroSSvgZ', '_$s10CoreParsec10ClientNameC9SpotlightSSvgZ', 
                        '_$s10CoreParsec10ClientNameCACycfC', '_$s10CoreParsec10ClientNameCACycfc', 
                        '_$s10CoreParsec10ClientNameCMa', '_$s10CoreParsec10ClientNameCMn', 
                        '_$s10CoreParsec10ClientNameCMo', '_$s10CoreParsec10ClientNameCN', 
-                       '_$s10CoreParsec10ClientNameCfD', '_$s10CoreParsec10ClientTypeO8rawValueACSgSu_tcfC', 
-                       '_$s10CoreParsec10ClientTypeO8rawValueSuvg', '_$s10CoreParsec10ClientTypeO8rawValueSuvpMV', 
-                       '_$s10CoreParsec10ClientTypeOMa', '_$s10CoreParsec10ClientTypeOMn', 
-                       '_$s10CoreParsec10ClientTypeON', '_$s10CoreParsec10ClientTypeOSHAAMc', 
-                       '_$s10CoreParsec10ClientTypeOSQAAMc', '_$s10CoreParsec10ClientTypeOSYAAMc', 
-                       '_$s10CoreParsec13URLDataSourceMp', '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTj', 
+                       '_$s10CoreParsec10ClientNameCfD', '_$s10CoreParsec13URLDataSourceMp', 
+                       '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTj', 
                        '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTjTu', 
                        '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTq', 
                        '_$s10CoreParsec13URLDataSourceTL', '_$s10CoreParsec14ProtobufHelperC07processC0_6result4dataySo8PARReplyCSg_So14SFSearchResult_p10Foundation4DataVtFZ', 
@@ -222,8 +194,6 @@ exports:
                        '_$s10PegasusAPI36Apple_Parsec_Spotlight_V1alpha_TopicV04CoreD0E05queryG0So07SFQueryG0CvpMV', 
                        '_$sSo10PARSessionC10CoreParsecE4load_7contextSo7SFImageCAG_So0F7ContextCSgtYaKF', 
                        '_$sSo10PARSessionC10CoreParsecE4load_7contextSo7SFImageCAG_So0F7ContextCSgtYaKFTu', 
-                       '_$sSo11PARResponseC10CoreParsecE5reply7factory6dataV2ABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfC', 
-                       '_$sSo11PARResponseC10CoreParsecE5reply7factory6dataV2ABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfc', 
                        '_$sSo11PARResponseC10CoreParsecE5reply7factory7dataZKWABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfC', 
                        '_$sSo11PARResponseC10CoreParsecE5reply7factory7dataZKWABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfc', 
                        '_$sSo12NSURLSessionC10CoreParsec24URLDataSourceConvertibleACMc', 
@@ -291,7 +261,7 @@ exports:
                        _kPARSpotlightModels, _kPARSpotlightResultFeaturesDir, _kPARSpotlightShadowResources, 
                        _kPARTrysteroClient, _kPARTrysteroDir, _kPARUserReportDir, 
                        _kPARWebsiteCategoryLabels, _kSilhouetteConfig, _kSilhouetteTopicMapping, 
-                       _kSilhouetteWhitelistedTopics, _visualCATLog ]
+                       _kSilhouetteWhitelistedTopics ]
     objc-classes:    [ PARAsyncCard, PARAsyncMoreResults, PARBag, PARCardRequest, 
                        PARCloudSubscriptionChannel, PARDefaultFactory, PAREngagedCompletionCache, 
                        PAREngagedResult, PARFlightResponse, PARFlightSearchRequest, 

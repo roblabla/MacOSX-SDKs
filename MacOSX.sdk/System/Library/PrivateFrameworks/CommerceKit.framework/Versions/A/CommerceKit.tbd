@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           76AF8ECB-36BC-3B15-A823-88FBE303A46A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CCFB5F03-4415-3C9B-84B4-289D47028AB5
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/CommerceKit'
 current-version: 379
 reexported-libraries:
@@ -117,13 +110,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E02373AE-9268-3685-9C9E-CEF47B84ED9C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           01386CBD-3196-3A4C-9A7A-07765106042D
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:

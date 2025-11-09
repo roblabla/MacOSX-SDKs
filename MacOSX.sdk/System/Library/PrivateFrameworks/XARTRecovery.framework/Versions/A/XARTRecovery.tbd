@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           042AB7C0-6DA5-3A2D-A90F-7A9F22B02581
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7C133912-B2AB-3DE6-9D68-74801BB6EAD0
 install-name:    '/System/Library/PrivateFrameworks/XARTRecovery.framework/Versions/A/XARTRecovery'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

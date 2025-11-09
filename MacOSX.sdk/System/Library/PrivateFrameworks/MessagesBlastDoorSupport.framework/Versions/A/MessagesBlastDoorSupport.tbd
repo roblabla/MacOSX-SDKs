@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           EC1D38AB-7FB5-3DF7-A83F-08F3C988FB1F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5589AABA-E850-3873-988C-3958F9312B5B
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
 allowable-clients:
@@ -26,6 +19,8 @@ exports:
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWith17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWith17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWithSo8NSObjectC10Foundation3URLV_tKFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWithSo8NSObjectC10Foundation3URLV_tKFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview20forAnimatedImageWith17maxPixelDimension5index0L5Count13resultHandlery10Foundation3URLV_SfS2iySo8NSObjectCSg_s5Error_pSgtctFTj', 
@@ -38,12 +33,18 @@ exports:
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC30defuseCollaborationClearNotice7payload13resultHandlery10Foundation4DataV_y0bC0018_ObjCCollaborationhI7WrapperCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse13smsDictionary13resultHandlerySDySSypG_ySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse13smsDictionary13resultHandlerySDySSypG_ySo8NSObjectCSg_s5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse13smsDictionarySo8NSObjectCSDySSypG_tKFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse13smsDictionarySo8NSObjectCSDySSypG_tKFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse16actionDictionary13resultHandlerySDySSypG_ySi_SaySSGSgs5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse16actionDictionary13resultHandlerySDySSypG_ySi_SaySSGSgs5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18nicknameDictionary4with9recordTag13resultHandlerySDySS10Foundation4DataVG_AKSSy0bC020_ObjCNicknameWrapperCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18nicknameDictionary4with9recordTag13resultHandlerySDySS10Foundation4DataVG_AKSSy0bC020_ObjCNicknameWrapperCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18topLevelDictionary13resultHandlerySDySSypG_yAA11MessageTypeO_So8NSObjectCSgs5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18topLevelDictionary13resultHandlerySDySSypG_yAA11MessageTypeO_So8NSObjectCSgs5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18topLevelDictionarySo8NSObjectCSDySSypG_tKFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse18topLevelDictionarySo8NSObjectCSDySSypG_tKFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse20balloonPluginPayload4with0bC0013_ObjCCombinedH17AttachmentWrapperC10Foundation4DataV_SStKFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse20balloonPluginPayload4with0bC0013_ObjCCombinedH17AttachmentWrapperC10Foundation4DataV_SStKFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse20balloonPluginPayload4with13resultHandlery10Foundation4DataV_SSy0bC0013_ObjCCombinedH17AttachmentWrapperCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse20balloonPluginPayload4with13resultHandlery10Foundation4DataV_SSy0bC0013_ObjCCombinedH17AttachmentWrapperCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC6defuse26collaborationNoticePayload13resultHandlery10Foundation4DataV_y0bC0018_ObjCCollaborationH7WrapperCSg_s5Error_pSgtctFTj', 

@@ -1,20 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B0F9C15D-9255-36C3-A45C-3305D8E82595
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           54F86E8C-47F3-37D0-A2AC-8E3924ADE3BA
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/ScreenReader'
 current-version: 390
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CPSPSNFromPSN, _FinderColumnCellIdentifier, _SCRBundleExtrasInitialize, 
-                       _SCRColorNameForValue, _SCRCompareCommandFamilies, _SCRCompareCommands, 
-                       _SCRCreateCGImageFromFile, _SCRCreateImageData, _SCRDebugHumanReadableTextFromSpeechSynthesizerMessage, 
+    symbols:         [ _CPSPSNFromPSN, _FinderColumnCellIdentifier, _SCRBrailleCommandFamilies, 
+                       _SCRBundleExtrasInitialize, _SCRColorNameForValue, _SCRCompareCommandFamilies, 
+                       _SCRCompareCommands, _SCRCreateCGImageFromFile, _SCRCreateImageData, 
+                       _SCRCustomCommandKeys, _SCRDebugHumanReadableTextFromSpeechSynthesizerMessage, 
                        _SCRDigestForImageRef, _SCRDisplayTextFontIndexForFontSize, 
                        _SCRDisplayTextFontSizes, _SCRDisplayTextFontSizesCount, _SCRHIDDetectionDisable, 
                        _SCRHIDDetectionEnable, _SCRHIDTrackpads, _SCRIsCodesignedByApple, 

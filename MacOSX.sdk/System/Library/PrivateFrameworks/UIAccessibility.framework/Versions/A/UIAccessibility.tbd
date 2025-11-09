@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6C21FDD0-E986-3B8C-9535-186ACBF730DA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           620CB9F4-94F8-3C37-BCA8-551FCAA4BBF3
 install-name:    '/System/Library/PrivateFrameworks/UIAccessibility.framework/Versions/A/UIAccessibility'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

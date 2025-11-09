@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           92919C41-227E-367C-98DA-58F5EE5F9565
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C0A0B9FC-7B6B-37BD-B71A-B10686DAD22B
 install-name:    '/usr/lib/swift/libswiftGameplayKit.dylib'
 current-version: 2
 swift-abi-version: 7

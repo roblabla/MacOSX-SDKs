@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           EE5F5896-65D0-334A-AB06-62290DE0DCE7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F0437FF1-DC8C-37F8-A633-428684ABE520
 install-name:    '/System/Library/Frameworks/VisionKit.framework/Versions/A/VisionKit'
 swift-abi-version: 7
 reexported-libraries:
@@ -152,19 +145,11 @@ exports:
                        '_$s9VisionKit32ImageAnalysisOverlayViewDelegatePAAE07overlayF0_31highlightSelectedItemsDidChangeyAA0cdeF0C_SbtF', 
                        '_$s9VisionKit32ImageAnalysisOverlayViewDelegatePAAE07overlayF0_32liveTextButtonDidChangeToVisibleyAA0cdeF0C_SbtF', 
                        '_$s9VisionKit32ImageAnalysisOverlayViewDelegatePAAE12contentsRect3forSo6CGRectVAA0cdeF0C_tF', 
-                       '_$s9VisionKit32ImageAnalysisOverlayViewDelegateTL', '_OBJC_CLASS_$__TtC9VisionKit24ImageAnalysisOverlayView', 
-                       '_OBJC_METACLASS_$__TtC9VisionKit24ImageAnalysisOverlayView' ]
+                       '_$s9VisionKit32ImageAnalysisOverlayViewDelegateTL' ]
     objc-classes:    [ _TtC9VisionKit24ImageAnalysisOverlayView ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D8053DD9-FF36-3391-856A-C938D0E0CF2D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C7544786-EAEB-3D03-B61D-C9950779C0E7
 install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
 current-version: 115
 exports:

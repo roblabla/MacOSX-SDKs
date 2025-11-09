@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           14563CE5-2754-30EF-8077-472DF4727CCC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5EDCC687-B9B9-362B-AA37-48E030C392A9
 install-name:    '/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 1.1.15
+current-version: 1.4.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,18 +11,28 @@ exports:
                        '_$s10Foundation4DateV6Charts9PlottableADMc', '_$s10Foundation4DateV6Charts9PlottableADWP', 
                        '_$s10Foundation4DateV6ChartsE23_primitivePlottableKindAD010_PrimitiveeF0VyACGvgZ', 
                        '_$s11VisualValue6Charts10ScaleRangePTl', '_$s18PrimitivePlottable6Charts0B0PTl', 
-                       '_$s4Body6Charts12ChartContentPTl', '_$s6Charts10ChartProxyV12plotAreaSizeSo6CGSizeVvg', 
-                       '_$s6Charts10ChartProxyV12plotAreaSizeSo6CGSizeVvpMV', '_$s6Charts10ChartProxyV13plotAreaFrame7SwiftUI6AnchorVySo6CGRectVGvg', 
+                       '_$s4Body6Charts12ChartContentPTl', '_$s6Charts10ChartProxyV10symbolSize3for12CoreGraphics7CGFloatVSgx_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV12plotAreaSizeSo6CGSizeVvg', '_$s6Charts10ChartProxyV12plotAreaSizeSo6CGSizeVvpMV', 
+                       '_$s6Charts10ChartProxyV12symbolDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV13plotAreaFrame7SwiftUI6AnchorVySo6CGRectVGvg', 
                        '_$s6Charts10ChartProxyV13plotAreaFrame7SwiftUI6AnchorVySo6CGRectVGvpMV', 
                        '_$s6Charts10ChartProxyV13positionRange3forSo6CGRectVSgx1x_q_1yt_tAA9PlottableRzAaKR_r0_lF', 
                        '_$s6Charts10ChartProxyV13positionRange4forXSNy12CoreGraphics7CGFloatVGSgx_tAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyV13positionRange4forYSNy12CoreGraphics7CGFloatVGSgx_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV15foregroundStyle3for7SwiftUI08AnyShapeE0VSgx_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV15lineStyleDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV16symbolSizeDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV21foregroundStyleDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyV5value2at2asx_q_tSgSo7CGPointV_x_q_tmtAA9PlottableRzAaJR_r0_lF', 
                        '_$s6Charts10ChartProxyV5value3atX2asxSg12CoreGraphics7CGFloatV_xmtAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyV5value3atY2asxSg12CoreGraphics7CGFloatV_xmtAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV6symbol3forAA03AnyB11SymbolShapeVSgx_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV7xDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV7yDomain8dataTypeSayxGxm_tAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyV8position3forSo7CGPointVSgx1x_q_1yt_tAA9PlottableRzAaKR_r0_lF', 
                        '_$s6Charts10ChartProxyV8position4forX12CoreGraphics7CGFloatVSgx_tAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyV8position4forY12CoreGraphics7CGFloatVSgx_tAA9PlottableRzlF', 
+                       '_$s6Charts10ChartProxyV9lineStyle3for7SwiftUI06StrokeE0VSgx_tAA9PlottableRzlF', 
                        '_$s6Charts10ChartProxyVMa', '_$s6Charts10ChartProxyVMn', 
                        '_$s6Charts10ChartProxyVN', '_$s6Charts10NumberBinsV10startIndexSivg', 
                        '_$s6Charts10NumberBinsV10startIndexSivpMV', '_$s6Charts10NumberBinsV10thresholdsACyxGSayxG_tcfC', 
@@ -149,6 +152,8 @@ exports:
                        '_$s6Charts12ChartContentPAAE23accessibilityIdentifieryQrSSFQOMQ', 
                        '_$s6Charts12ChartContentPAAE28alignsMarkStylesWithPlotAreayQrSbF', 
                        '_$s6Charts12ChartContentPAAE28alignsMarkStylesWithPlotAreayQrSbFQOMQ', 
+                       '_$s6Charts12ChartContentPAAE4blur6radiusQr12CoreGraphics7CGFloatV_tF', 
+                       '_$s6Charts12ChartContentPAAE4blur6radiusQr12CoreGraphics7CGFloatV_tFQOMQ', 
                        '_$s6Charts12ChartContentPAAE4mask7contentQrqd__yXE_tAaBRd__lF', 
                        '_$s6Charts12ChartContentPAAE4mask7contentQrqd__yXE_tAaBRd__lFQOMQ', 
                        '_$s6Charts12ChartContentPAAE6offset1x1yQr12CoreGraphics7CGFloatV_AItF', 
@@ -160,6 +165,8 @@ exports:
                        '_$s6Charts12ChartContentPAAE6offset6xStart4xEnd1yQr12CoreGraphics7CGFloatV_A2JtF', 
                        '_$s6Charts12ChartContentPAAE6offset6xStart4xEnd1yQr12CoreGraphics7CGFloatV_A2JtFQOMQ', 
                        '_$s6Charts12ChartContentPAAE6offsetyQrSo6CGSizeVF', '_$s6Charts12ChartContentPAAE6offsetyQrSo6CGSizeVFQOMQ', 
+                       '_$s6Charts12ChartContentPAAE6shadow5color6radius1x1yQr7SwiftUI5ColorV_12CoreGraphics7CGFloatVA2NtF', 
+                       '_$s6Charts12ChartContentPAAE6shadow5color6radius1x1yQr7SwiftUI5ColorV_12CoreGraphics7CGFloatVA2NtFQOMQ', 
                        '_$s6Charts12ChartContentPAAE6symbol2byQrAA14PlottableValueVyqd__G_tAA0F0Rd__lF', 
                        '_$s6Charts12ChartContentPAAE6symbol2byQrAA14PlottableValueVyqd__G_tAA0F0Rd__lFQOMQ', 
                        '_$s6Charts12ChartContentPAAE6symbolADQrqd__yXE_t7SwiftUI4ViewRd__lF', 
@@ -374,11 +381,15 @@ exports:
                        '_$s6Charts21BasicChartSymbolShapeV7SwiftUI4ViewAAMc', '_$s6Charts21BasicChartSymbolShapeVAA0cdE0AAMc', 
                        '_$s6Charts21BasicChartSymbolShapeVAA0cdE0AAWP', '_$s6Charts21BasicChartSymbolShapeVMa', 
                        '_$s6Charts21BasicChartSymbolShapeVMn', '_$s6Charts21BasicChartSymbolShapeVN', 
-                       '_$s6Charts21_AxisMarkLayoutInputsVMa', '_$s6Charts21_AxisMarkLayoutInputsVMn', 
-                       '_$s6Charts21_AxisMarkLayoutInputsVN', '_$s6Charts21_AxisMarkRenderInputsVMa', 
-                       '_$s6Charts21_AxisMarkRenderInputsVMn', '_$s6Charts21_AxisMarkRenderInputsVN', 
-                       '_$s6Charts22_AxisMarkRenderOutputsVMa', '_$s6Charts22_AxisMarkRenderOutputsVMn', 
-                       '_$s6Charts22_AxisMarkRenderOutputsVN', '_$s6Charts23PlotDimensionScaleRangeV05_makedE0AA01_dE7OutputsVy12CoreGraphics7CGFloatVGyF', 
+                       '_$s6Charts21ChartCoordinateSystemV2eeoiySbAC_ACtFZ', '_$s6Charts21ChartCoordinateSystemV5polarACvgZ', 
+                       '_$s6Charts21ChartCoordinateSystemV9cartesianACvgZ', '_$s6Charts21ChartCoordinateSystemVMa', 
+                       '_$s6Charts21ChartCoordinateSystemVMn', '_$s6Charts21ChartCoordinateSystemVN', 
+                       '_$s6Charts21ChartCoordinateSystemVSQAAMc', '_$s6Charts21_AxisMarkLayoutInputsVMa', 
+                       '_$s6Charts21_AxisMarkLayoutInputsVMn', '_$s6Charts21_AxisMarkLayoutInputsVN', 
+                       '_$s6Charts21_AxisMarkRenderInputsVMa', '_$s6Charts21_AxisMarkRenderInputsVMn', 
+                       '_$s6Charts21_AxisMarkRenderInputsVN', '_$s6Charts22_AxisMarkRenderOutputsVMa', 
+                       '_$s6Charts22_AxisMarkRenderOutputsVMn', '_$s6Charts22_AxisMarkRenderOutputsVN', 
+                       '_$s6Charts23PlotDimensionScaleRangeV05_makedE0AA01_dE7OutputsVy12CoreGraphics7CGFloatVGyF', 
                        '_$s6Charts23PlotDimensionScaleRangeVAA08PositiondE0AAMc', 
                        '_$s6Charts23PlotDimensionScaleRangeVAA08PositiondE0AAWP', 
                        '_$s6Charts23PlotDimensionScaleRangeVAA0dE0AAMc', '_$s6Charts23PlotDimensionScaleRangeVAA0dE0AAWP', 
@@ -520,7 +531,9 @@ exports:
                        '_$s6Charts9PointMarkV1x1yAcA14PlottableValueVyxG_AGyq_GtcAA0D0RzAaJR_r0_lufC', 
                        '_$s6Charts9PointMarkVAA12ChartContentAAMc', '_$s6Charts9PointMarkVAA12ChartContentAAWP', 
                        '_$s6Charts9PointMarkVMa', '_$s6Charts9PointMarkVMn', '_$s6Charts9PointMarkVN', 
-                       '_$s6Charts9ScaleTypeV3logACvgZ', '_$s6Charts9ScaleTypeV4dateACvgZ', 
+                       '_$s6Charts9ScaleTypeV10squareRootACvgZ', '_$s6Charts9ScaleTypeV12symmetricLog11slopeAtZeroACSd_tFZ', 
+                       '_$s6Charts9ScaleTypeV12symmetricLogACvgZ', '_$s6Charts9ScaleTypeV3logACvgZ', 
+                       '_$s6Charts9ScaleTypeV4dateACvgZ', '_$s6Charts9ScaleTypeV5power8exponentACSd_tFZ', 
                        '_$s6Charts9ScaleTypeV6linearACvgZ', '_$s6Charts9ScaleTypeV8categoryACvgZ', 
                        '_$s6Charts9ScaleTypeVMa', '_$s6Charts9ScaleTypeVMn', '_$s6Charts9ScaleTypeVN', 
                        '_$s7SwiftUI11AnyGradientV6Charts10ScaleRangeADMc', '_$s7SwiftUI11AnyGradientV6Charts10ScaleRangeADWP', 
@@ -617,6 +630,8 @@ exports:
                        '_$s7SwiftUI4ViewP6ChartsE20chartSymbolSizeScale7mappingQr12CoreGraphics7CGFloatVqd__c_tAD9PlottableRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP6ChartsE20chartSymbolSizeScaleyQrs13KeyValuePairsVyqd__12CoreGraphics7CGFloatVGAD9PlottableRd__lF', 
                        '_$s7SwiftUI4ViewP6ChartsE20chartSymbolSizeScaleyQrs13KeyValuePairsVyqd__12CoreGraphics7CGFloatVGAD9PlottableRd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewP6ChartsE21chartCoordinateSystemyQrAD05ChartfG0VF', 
+                       '_$s7SwiftUI4ViewP6ChartsE21chartCoordinateSystemyQrAD05ChartfG0VFQOMQ', 
                        '_$s7SwiftUI4ViewP6ChartsE25chartForegroundStyleScale4typeQrAD0H4TypeVSg_tF', 
                        '_$s7SwiftUI4ViewP6ChartsE25chartForegroundStyleScale4typeQrAD0H4TypeVSg_tFQOMQ', 
                        '_$s7SwiftUI4ViewP6ChartsE25chartForegroundStyleScale5range4typeQrqd___AD0H4TypeVSgtAD0H5RangeRd__AA05ShapeG011VisualValueRpd__lF', 

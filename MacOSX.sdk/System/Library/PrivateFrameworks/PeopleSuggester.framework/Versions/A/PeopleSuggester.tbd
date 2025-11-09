@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3FF24156-F272-33FA-83C5-F3E51FCE6697
-  - target:          x86_64-maccatalyst
-    value:           3FF24156-F272-33FA-83C5-F3E51FCE6697
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2EE17C88-4C25-3F0D-844B-335DEE761222
-  - target:          arm64e-maccatalyst
-    value:           2EE17C88-4C25-3F0D-844B-335DEE761222
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -62,31 +49,35 @@ exports:
                        _PSContactFillerDataCollectionUtilities, _PSContactFillerNormalizationConstants, 
                        _PSContactFillerRecipient, _PSContactPrior, _PSContactResolver, 
                        _PSContactSuggester, _PSContactSuggesterArchive, _PSContactSuggesterForPeopleWidget, 
-                       _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSDBSCAN, 
-                       _PSEnsembleModel, _PSFTZKWConfig, _PSFTZKWOrchestrator, _PSFTZKWSuggestionsTransformerFactory, 
+                       _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSContentFeatures, 
+                       _PSDBSCAN, _PSDeviceStateFeatures, _PSEnsembleModel, _PSFTZKWConfig, 
+                       _PSFTZKWOrchestrator, _PSFTZKWSuggestionsTransformerFactory, 
                        _PSFTZKWTrialData, _PSFTZKWTrialUpdateGuardedData, _PSFTZKWTrialWrapper, 
                        _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyPhotoSuggestions, 
-                       _PSFamilyUtilities, _PSFeatureStatistics, _PSFeaturizedBehaviorRule, 
-                       _PSFeedback, _PSFeedbackAction, _PSFeedbackUtils, _PSHandleRanker, 
-                       _PSHeuristics, _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
+                       _PSFamilyUtilities, _PSFeatureCache, _PSFeatureStatistics, 
+                       _PSFeaturizedBehaviorRule, _PSFeedback, _PSFeedbackAction, 
+                       _PSFeedbackUtils, _PSHandleRanker, _PSHeuristics, _PSHistogramFeatureData, 
+                       _PSHistogramFeatures, _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
                        _PSInteractionStoreUtils, _PSKNNModel, _PSKNNModelConfiguration, 
-                       _PSKNNZKWATXDelegateWrapper, _PSKNNeighbor, _PSLogging, _PSMLArrayProvider, 
-                       _PSMailUtils, _PSMapsFeedback, _PSMapsFeedbackAction, _PSMapsPredictionContext, 
-                       _PSMapsSuggester, _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, 
-                       _PSMessagesPinningSuggestion, _PSMessagesPinningUtilities, 
-                       _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, _PSPhotoSuggestions, 
-                       _PSPhotoUtils, _PSPredictionContext, _PSPrivacyDataRetentionPeriod, 
-                       _PSProximityBooster, _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
-                       _PSRuleRankingMLModel, _PSShareSheetSuggestLessFeedback, _PSSharingContactFeatureExtraction, 
-                       _PSSharingContactRankerMLModel, _PSSharingContactRankerModel, 
-                       _PSSharingContactRankerScoredContact, _PSSiriHandleRanker, 
-                       _PSSiriHandleRankerPredictionContext, _PSSiriNLLogger, _PSSiriNLRankerUtilities, 
-                       _PSSuggester, _PSSuggesterConfiguration, _PSSuggestion, _PSSuggestionFromTextPredictor, 
-                       _PSSuggestionFromTextPredictorDelegateWrapper, _PSSuggestionProxy, 
-                       _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, _PSZKWFTFallbackInteractionsConfig, 
-                       _PSZKWFTPrimaryInteractionsConfig, _PSZKWFTUnstructuredCalendarConfig, 
-                       _PSZKWFTUnstructuredRemindersConfig, _PSZkwUtils, _PS_TPSDiscoverabilitySignal, 
-                       evaluatedRule, scoredModel, scoredRule ]
+                       _PSKNNZKWATXDelegateWrapper, _PSKNNeighbor, _PSLastCommunicatedFeatures, 
+                       _PSLogging, _PSMLArrayProvider, _PSMailUtils, _PSMapsFeedback, 
+                       _PSMapsFeedbackAction, _PSMapsPredictionContext, _PSMapsSuggester, 
+                       _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, _PSMessagesPinningSuggestion, 
+                       _PSMessagesPinningUtilities, _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, 
+                       _PSPhotoSuggestions, _PSPhotoUtils, _PSPredictionContext, 
+                       _PSPrivacyDataRetentionPeriod, _PSProximityBooster, _PSRecipient, 
+                       _PSRuleMiningModel, _PSRuleOverlapFeedback, _PSRuleRankingMLModel, 
+                       _PSShareSheetEphemeralFeatureManager, _PSShareSheetSuggestLessFeedback, 
+                       _PSSharingContactFeatureExtraction, _PSSharingContactRankerMLModel, 
+                       _PSSharingContactRankerModel, _PSSharingContactRankerScoredContact, 
+                       _PSSiriHandleRanker, _PSSiriHandleRankerPredictionContext, 
+                       _PSSiriNLLogger, _PSSiriNLRankerUtilities, _PSSuggester, _PSSuggesterConfiguration, 
+                       _PSSuggestion, _PSSuggestionFromTextPredictor, _PSSuggestionFromTextPredictorDelegateWrapper, 
+                       _PSSuggestionProxy, _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, 
+                       _PSZKWFTFallbackInteractionsConfig, _PSZKWFTPrimaryInteractionsConfig, 
+                       _PSZKWFTUnstructuredCalendarConfig, _PSZKWFTUnstructuredRemindersConfig, 
+                       _PSZkwUtils, _PS_TPSDiscoverabilitySignal, evaluatedRule, 
+                       scoredModel, scoredRule ]
     objc-ivars:      [ CAPContactFillerContactEvent._averageBehavioralRuleConfidence, 
                        CAPContactFillerContactEvent._averageBehavioralRuleConviction, 
                        CAPContactFillerContactEvent._averageBehavioralRuleLift, CAPContactFillerContactEvent._averageBehavioralRuleMLScore, 

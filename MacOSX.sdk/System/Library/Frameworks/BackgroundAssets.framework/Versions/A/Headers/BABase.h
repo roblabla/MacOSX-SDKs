@@ -24,5 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
         #define BA_HIDDEN   __attribute__((visibility("hidden")))
     #endif
 #endif
+#ifndef BA_HIDDEN_EXTERN
+    #ifdef __cplusplus
+        #define BA_HIDDEN_EXTERN  extern "C" __attribute__((visibility("hidden")))
+    #else
+        #define BA_HIDDEN_EXTERN  extern __attribute__((visibility("hidden")))
+    #endif
+#endif
 
 NS_ASSUME_NONNULL_END

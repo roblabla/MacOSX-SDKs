@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4115D8B4-0E57-36EF-8E45-19F43A723138
-  - target:          x86_64-maccatalyst
-    value:           4115D8B4-0E57-36EF-8E45-19F43A723138
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1F464538-906C-3172-9DE6-58DD1DE0C59D
-  - target:          arm64e-maccatalyst
-    value:           1F464538-906C-3172-9DE6-58DD1DE0C59D
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/Versions/A/AccessibilityUtilities'
 swift-abi-version: 7
 reexported-libraries:
@@ -24,9 +11,7 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s22AccessibilityUtilities19_axUnwrapSwiftValueyypSgyXlF', 
-                       '_$s22AccessibilityUtilities27_validateSwiftIntrospection3obj0F4Type3key8hasField11typeMatched08expectedG0yyXl_ypXpSSS2bypXpSgtF', 
-                       _AXASTCustomGesturePrefixName, _AXASTSiriShortcutPrefixName, 
+    symbols:         [ _AXASTCustomGesturePrefixName, _AXASTSiriShortcutPrefixName, 
                        _AXAirPodsB494LocalizedStringForKey, _AXAirPodsB698LocalizedStringForKey, 
                        _AXAirPodsLocalizedStringForKey, _AXAppNameForBundleId, _AXApplicationGetMainBundleIdentifier, 
                        _AXApplicationIsForeground, _AXApplicationIsViewService, _AXAssertMainThreadCallback, 
@@ -115,25 +100,26 @@ exports:
                        _AXDeviceSupportsConcurrentHPLPMics, _AXDeviceSupportsDetectionMode, 
                        _AXDeviceSupportsHeadTracking, _AXDeviceSupportsHoverText, 
                        _AXDeviceSupportsManyTouches, _AXDeviceSupportsPencil, _AXDeviceSupportsPencilHover, 
-                       _AXDeviceSupportsQuickNote, _AXDeviceSupportsSecureDoubleClick, 
-                       _AXDeviceSupportsSideApp, _AXDeviceSupportsVoiceTriggers, 
-                       _AXDeviceUnregisterForDisplayUpdates, _AXDictionaryElementKeyHint, 
-                       _AXDictionaryElementKeyIndex, _AXDictionaryElementKeyIsKeyboardKey, 
-                       _AXDictionaryElementKeyLabel, _AXDictionaryElementKeyLanguage, 
-                       _AXDictionaryElementKeyTraits, _AXDictionaryElementKeyTraitsDescription, 
-                       _AXDictionaryElementKeyValue, _AXDisplayFilterUIServiceName, 
-                       _AXDragServiceNameCommandAndControl, _AXDragServiceNameFullKeyboardAccess, 
-                       _AXDragServiceNameSwitchControl, _AXDragServiceNameVoiceOver, 
-                       _AXDurationForDurationString, _AXDurationStringForDuration, 
-                       _AXDurationStringForDurationWithSeconds, _AXEventHIDTapIdentifierGuidedAccess, 
-                       _AXEventTapIdentifierGuidedAccess, _AXEventTypeIsHomeButtonPress, 
-                       _AXEventTypeIsKeyboardKey, _AXEventTypeIsLockButtonPress, 
-                       _AXEventTypeIsMotion, _AXEventTypeIsOrientationChange, _AXEventTypeIsRingerSwitchStateChange, 
-                       _AXEventTypeIsShake, _AXEventTypeIsTouch, _AXEventTypeIsVolumeButtonPress, 
-                       _AXEventTypeShouldLetBackboardProcess, _AXFallbackDeviceSizeMM, 
-                       _AXForceTouchAvailableAndEnabled, _AXForceTouchDuration, _AXForceTouchThreshold, 
-                       _AXForceTouchThresholdPeek, _AXForceTouchThresholdPeekPopMidpoint, 
-                       _AXForceTouchThresholdPop, _AXForceTouchUpdateInterval, _AXFormatAndListWithElements, 
+                       _AXDeviceSupportsPhotosensitiveMitigation, _AXDeviceSupportsQuickNote, 
+                       _AXDeviceSupportsSecureDoubleClick, _AXDeviceSupportsSideApp, 
+                       _AXDeviceSupportsVoiceTriggers, _AXDeviceUnregisterForDisplayUpdates, 
+                       _AXDictionaryElementKeyHint, _AXDictionaryElementKeyIndex, 
+                       _AXDictionaryElementKeyIsKeyboardKey, _AXDictionaryElementKeyLabel, 
+                       _AXDictionaryElementKeyLanguage, _AXDictionaryElementKeyTraits, 
+                       _AXDictionaryElementKeyTraitsDescription, _AXDictionaryElementKeyValue, 
+                       _AXDisplayFilterUIServiceName, _AXDragServiceNameCommandAndControl, 
+                       _AXDragServiceNameFullKeyboardAccess, _AXDragServiceNameSwitchControl, 
+                       _AXDragServiceNameVoiceOver, _AXDurationForDurationString, 
+                       _AXDurationStringForDuration, _AXDurationStringForDurationWithSeconds, 
+                       _AXEventHIDTapIdentifierGuidedAccess, _AXEventTapIdentifierGuidedAccess, 
+                       _AXEventTypeIsHomeButtonPress, _AXEventTypeIsKeyboardKey, 
+                       _AXEventTypeIsLockButtonPress, _AXEventTypeIsMotion, _AXEventTypeIsOrientationChange, 
+                       _AXEventTypeIsRingerSwitchStateChange, _AXEventTypeIsShake, 
+                       _AXEventTypeIsTouch, _AXEventTypeIsVolumeButtonPress, _AXEventTypeShouldLetBackboardProcess, 
+                       _AXFallbackDeviceSizeMM, _AXForceTouchAvailableAndEnabled, 
+                       _AXForceTouchDuration, _AXForceTouchThreshold, _AXForceTouchThresholdPeek, 
+                       _AXForceTouchThresholdPeekPopMidpoint, _AXForceTouchThresholdPop, 
+                       _AXForceTouchUpdateInterval, _AXFormatAndListWithElements, 
                        _AXGetComponentsInNamedSiriVoiceIdentifier, _AXGetComponentsInNashvilleVoiceIdentifier, 
                        _AXGetComponentsInOldSiriVoiceIdentifier, _AXGetComponentsInSiriVoiceIdentifier, 
                        _AXGetNonCombinedVoiceIdentifierForCombinedVoiceIdentifier, 
@@ -343,8 +329,9 @@ exports:
                        _AX_iBooksBundleName, _AXkMobileKeyBagLockStatusNotificationID, 
                        _InitializeMaps, _MSHCreateMIGServerSource, _MSHCreateMachServerSource, 
                        _MSHGetMachPortFromSource, _MSHMIGSourceSetNoSendersCallback, 
-                       _MSHMIGSourceSetSendOnceCallback, _ModifySpeechJobsLock, _SCATATVRemoteDeviceMatchingDictionary, 
-                       _SCATATVRemoteSwitchActions, _SCATActionDescription, _SCATAddOrUpdateCameraSwitchToSettings, 
+                       _MSHMIGSourceSetSendOnceCallback, _ModifySpeechJobsLock, _PSESettingsFooterText, 
+                       _SCATATVRemoteDeviceMatchingDictionary, _SCATATVRemoteSwitchActions, 
+                       _SCATActionDescription, _SCATAddOrUpdateCameraSwitchToSettings, 
                        _SCATAddOrUpdateSwitchToSettings, _SCATHeadTrackingSwitchActions, 
                        _SCATIsATVRemoteButtonEvent, _SCATIsATVRemoteButtonSwitchCandidateEvent, 
                        _SCATIsGamepadKeyEvent, _SCATIsKeyboardKeyEvent, _SCATIsMFIButtonDownValue, 
@@ -535,10 +522,10 @@ exports:
                        AXLogColorizer, AXLoggingSubsystem, AXMobileConfigurationInterface, 
                        AXMutableReplayableGesture, AXNamedReplayableGesture, AXOrator, 
                        AXOutputAction, AXOutputRequest, AXPageTurningReplayableGesture, 
-                       AXPasscodeAccessor, AXPathWrapper, AXPerformanceTestReportingServer, 
-                       AXPostConnectionTask, AXPredictiveTypingModel, AXRedirectedEventDetector, 
-                       AXReplayableGesture, AXReplayer, AXResourceLoader, AXServer, 
-                       AXSettings, AXSubsystemAXAggregateLogging, AXSubsystemAXCharacterVoices, 
+                       AXPasscodeAccessor, AXPerformanceTestReportingServer, AXPostConnectionTask, 
+                       AXPredictiveTypingModel, AXRedirectedEventDetector, AXReplayableGesture, 
+                       AXReplayer, AXResourceLoader, AXSLDServiceProxyDelegateObject, 
+                       AXServer, AXSettings, AXSubsystemAXAggregateLogging, AXSubsystemAXCharacterVoices, 
                        AXSubsystemAXCustomizableMouse, AXSubsystemAXNotifications, 
                        AXSubsystemAXSettings, AXSubsystemAXSoundBoard, AXSubsystemAXUIViewService, 
                        AXSubsystemAXVectorKit, AXSubsystemAudioRouting, AXSubsystemBBServer, 
@@ -568,19 +555,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3076F37D-F29E-38AE-B2F5-B3804FAAA33F
-  - target:          x86_64-maccatalyst
-    value:           3076F37D-F29E-38AE-B2F5-B3804FAAA33F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CBC600CD-4913-3ECF-9BA9-080E5A1FAFE2
-  - target:          arm64e-maccatalyst
-    value:           CBC600CD-4913-3ECF-9BA9-080E5A1FAFE2
 install-name:    '/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

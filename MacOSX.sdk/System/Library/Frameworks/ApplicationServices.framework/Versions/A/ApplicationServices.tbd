@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C05DD8E6-0448-3D1C-AB62-6B4DFAFED293
-  - target:          x86_64-maccatalyst
-    value:           C05DD8E6-0448-3D1C-AB62-6B4DFAFED293
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           047845F9-5EF1-39B2-8B88-089B92AC4AC6
-  - target:          arm64e-maccatalyst
-    value:           047845F9-5EF1-39B2-8B88-089B92AC4AC6
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
 current-version: 61
 reexported-libraries:
@@ -39,19 +26,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9260E70C-187B-37C8-96B4-5A34A0F37730
-  - target:          x86_64-maccatalyst
-    value:           9260E70C-187B-37C8-96B4-5A34A0F37730
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           71681583-E880-320A-84AE-33B024C0B727
-  - target:          arm64e-maccatalyst
-    value:           71681583-E880-320A-84AE-33B024C0B727
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -209,13 +183,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           ACF96ABA-06D9-3AF7-AED1-0F5F6DA8BC13
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D5D09CBA-4151-3886-BF49-8C7BDECAC4A0
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -277,13 +244,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9A04F0E4-18BD-3216-B712-E048732547D1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A582EE22-F481-3C55-A76E-266B9BACC364
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -340,13 +300,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           38E5C75E-2B25-3BFD-A3F3-39D0A18BFAA1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           03B96076-442C-34DD-AE9C-0AC02AFEFF86
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
 current-version: 768
 parent-umbrella:
@@ -584,15 +537,8 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E95A1193-7879-3DFF-8CD5-FA05E09DCF55
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           457695DF-66A3-30D6-B3C9-7ED185B22EB8
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 567
+current-version: 572.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -661,9 +607,9 @@ exports:
                        _PMPrinterCanDuplex, _PMPrinterCanIdentify, _PMPrinterCanScan, 
                        _PMPrinterChargeInfoURI, _PMPrinterCopyACL, _PMPrinterCopyDefaultUserCredentials, 
                        _PMPrinterCopyDescriptionURL, _PMPrinterCopyDeviceURI, _PMPrinterCopyFinalDeviceURI, 
-                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyPresets, 
-                       _PMPrinterCopyRequiredUserCredentials, _PMPrinterCopyScannerUUID, 
-                       _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
+                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyOAUTHInfo, 
+                       _PMPrinterCopyPresets, _PMPrinterCopyRequiredUserCredentials, 
+                       _PMPrinterCopyScannerUUID, _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
                        _PMPrinterCopyState, _PMPrinterCopySuppliesURI, _PMPrinterCopyTempPPDURL, 
                        _PMPrinterCreateFromPrinterID, _PMPrinterCreatePaperInfoListForMenuPriv, 
                        _PMPrinterGetCommInfo, _PMPrinterGetConsumables, _PMPrinterGetConsumablesDisclaimer, 
@@ -766,13 +712,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D977074C-237E-3FCF-9168-6A27AA360F99
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           79AAAAE0-8081-3BFE-A3EE-54E1650DFF5F
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1160,13 +1099,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0322A6AB-C364-375B-8D4A-094C145B0AAE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           00C36679-A4A0-3AB8-BD1A-5D65CCFBB0C8
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1174,16 +1106,22 @@ parent-umbrella:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CancelSpokenNotification, _CancelSpokenNotificationForProcess, 
-                       _CancelTalkingAlert, _ContinueSpeech, _CopyAvailableIntervals, 
-                       _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _CancelTalkingAlert, _CancelTalkingAlertForPID, _ContinueSpeech, 
+                       _CopyAvailableIntervals, _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
                        _CopyIdentifierStringForPreferredVoiceWithLocale, _CopyIdentifierStringForVoiceSpec, 
                        _CopyPhonemesFromText, _CopySpeechProperty, _CopySpeechSynthesisVoicesForMode, 
                        _CopyTimeAnnouncementsPreferences, _CountVoices, _CreateSpeechLanguageLocale, 
-                       _DisposeSpeechChannel, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _DisposeSpeechChannel, _DisposeSpeechDoneUPP, _DisposeSpeechErrorUPP, 
+                       _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, _DisposeSpeechTextDoneUPP, 
+                       _DisposeSpeechWordUPP, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
                        _GetIdentifierStringForPreferredVoiceWithLocale, _GetIndVoice, 
                        _GetSpeechInfo, _GetSpeechPitch, _GetSpeechRate, _GetVoiceDescription, 
-                       _GetVoiceInfo, _MakeVoiceSpec, _MakeVoiceSpecForIdentifierString, 
-                       _NewSpeechChannel, _PauseSpeechAt, _RegisterSpokenNotificationForProcess, 
+                       _GetVoiceInfo, _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, 
+                       _InvokeSpeechPhonemeUPP, _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, 
+                       _InvokeSpeechWordUPP, _MakeVoiceSpec, _MakeVoiceSpecForIdentifierString, 
+                       _NewSpeechChannel, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
+                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
+                       _NewSpeechWordUPP, _PauseSpeechAt, _RegisterSpokenNotificationForProcess, 
                        _RegisterTalkingAlertWithProperties, _SRSetSecurityFlags, 
                        _SUAddAppPathToLoginStartupList, _SUCopyAXUIElementExceptionsDictionary, 
                        _SUCopyKeyNamesPropertyList, _SUCopyPhraseArrayFromDisk, _SUIsMainBundleUsingEnglishLocalization, 
@@ -1230,140 +1168,20 @@ exports:
                        _kSpeechSpeechDoneCallBack, _kSpeechStatusNumberOfCharactersLeft, 
                        _kSpeechStatusOutputBusy, _kSpeechStatusOutputPaused, _kSpeechStatusPhonemeCode, 
                        _kSpeechStatusProperty, _kSpeechSyncCallBack, _kSpeechSynthExtensionProperty, 
-                       _kSpeechSynthesizerInfoIdentifier, _kSpeechSynthesizerInfoProperty, 
-                       _kSpeechSynthesizerInfoVersion, _kSpeechTextDoneCallBack, 
-                       _kSpeechVoiceAge, _kSpeechVoiceCreator, _kSpeechVoiceDemoText, 
-                       _kSpeechVoiceGender, _kSpeechVoiceGenderFemale, _kSpeechVoiceGenderMale, 
-                       _kSpeechVoiceGenderNeuter, _kSpeechVoiceGenderNeutral, _kSpeechVoiceID, 
-                       _kSpeechVoiceIdentifier, _kSpeechVoiceIndividuallySpokenCharacters, 
-                       _kSpeechVoiceLanguage, _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceLocalizedNames, 
-                       _kSpeechVoiceName, _kSpeechVoiceNameRoot, _kSpeechVoiceNumericID, 
-                       _kSpeechVoiceSupportedCharacters, _kSpeechVoiceSynthesizerNumericID, 
-                       _kSpeechVoiceUnicodeCharBegin, _kSpeechVoiceUnicodeCharEnd, 
-                       _kSpeechVoiceVersion, _kSpeechVolumeProperty, _kSpeechWordCFCallBack, 
-                       _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
-                       _kVoiceSupportedCharacters ]
-  - targets:         [ arm64-macos, arm64e-macos ]
-    symbols:         [ _CancelTalkingAlertForPID, _DisposeServerConnection, _DisposeSpeechDoneUPP, 
-                       _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, 
-                       _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, _InitServerConnection, 
-                       _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, _InvokeSpeechPhonemeUPP, 
-                       _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, _InvokeSpeechWordUPP, 
-                       _IsAppAlreadyRunning, _IsValueCArrayOK, _MTUOpenResourceFile, 
-                       _MTUReadResourceDataFile, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
-                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
-                       _NewSpeechWordUPP, _ReadDefaultVoiceSpecFromPrefs, _SendMessagePrimitive, 
-                       _SendMessageToServer, _StartServerConnection, _TTSIsSpeakingSelection_XPC, 
-                       _TTSStartSpeakingSelectionWithString_XPC, _TTSStartSpeakingSelection_XPC, 
-                       _TTSStopSpeakingSelection_XPC, __Z12BFSpeechBusyv, __Z13BFCountVoicesPs, 
-                       __Z13BFGetIndVoicesP9VoiceSpec, __Z13BFSpeakBufferP19SpeechChannelRecordPKvmi, 
-                       __Z13numberToFixedP8NSNumber, __Z14BFGetVoiceInfoPK9VoiceSpecjPv, 
-                       __Z15BFGetSpeechInfoP19SpeechChannelRecordPK10__CFStringPv, 
-                       __Z15BFGetSpeechRateP19SpeechChannelRecordPi, __Z15BFPauseSpeechAtP19SpeechChannelRecordi, 
-                       __Z15BFSetSpeechInfoP19SpeechChannelRecordPK10__CFStringPKv, 
-                       __Z15BFSetSpeechRateP19SpeechChannelRecordi, __Z15BFSpeakCFStringP19SpeechChannelRecordPK10__CFString, 
-                       __Z15numberFromFixedi, __Z16BFContinueSpeechP19SpeechChannelRecord, 
-                       __Z16BFGetSpeechPitchP19SpeechChannelRecordPi, __Z16BFSetSpeechPitchP19SpeechChannelRecordi, 
-                       __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, __Z16specToDictionary9VoiceSpec, 
-                       __Z18BFNewSpeechChannelP9VoiceSpecPP19SpeechChannelRecord, 
-                       __Z18specFromDictionaryP12NSDictionary, __Z19BFSetSpeechPropertyP19SpeechChannelRecordPK10__CFStringPKv, 
-                       __Z19BFStopSpeechChannelP19SpeechChannelRecordi, __Z20BFCopySpeechPropertyP19SpeechChannelRecordPK10__CFStringPPKv, 
-                       __Z22BFDisposeSpeechChannelP19SpeechChannelRecord, __Z30ShouldRedirectCallsToBabelfishv, 
-                       __Z34BFCopyIdentifierStringForVoiceSpecPK9VoiceSpec, __Z34BFCopySpeechSynthesisVoicesForModePKv, 
-                       __Z34BFMakeVoiceSpecForIdentifierStringPK10__CFStringP9VoiceSpec, 
-                       __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
-                       __Z37CopyPreferredVoiceIdentifierForLocalePK10__CFLocale, 
-                       __Z49BFCopyIdentifierStringForPreferredVoiceWithLocalePK10__CFLocale, 
-                       __Z55BFCopyIdentifierStringForPreferredVoiceInListWithLocalePK9__CFArrayPK10__CFLocale, 
-                       __ZN13SpeechGlobals11CopyVoiceIDEPK9VoiceSpecPPK10__CFString, 
-                       __ZN13SpeechGlobals13CopyVoicePathEPK9VoiceSpecPPK10__CFString, 
-                       __ZN13SpeechGlobals13SessionSwitchE19CGSNotificationTypePvjS1_, 
-                       __ZN13SpeechGlobals14GetChannelByIdEy, __ZN13SpeechGlobals14SendXPCMessageEPv10SpeechArch, 
-                       __ZN13SpeechGlobals15RegisterChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals15SetSessionStateEb, __ZN13SpeechGlobals15SetupConnectionEPKc, 
-                       __ZN13SpeechGlobals15ValidateChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals16ArchForVoiceSpecEPK9VoiceSpec, __ZN13SpeechGlobals17ConnectionForArchE10SpeechArch, 
-                       __ZN13SpeechGlobals17UnregisterChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals19AddArchForVoiceSpecEPK9VoiceSpec10SpeechArch, 
-                       __ZN13SpeechGlobals19CopyVoiceAttributesEPK9VoiceSpecPPK14__CFDictionary, 
-                       __ZN13SpeechGlobals20CopyVoiceDescriptionEPK10__CFStringP16VoiceDescription, 
-                       __ZN13SpeechGlobals20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescriptionb, 
-                       __ZN13SpeechGlobals20PerformOnCorrectArchEPK9VoiceSpecU13block_pointerFv10SpeechArchPbE, 
-                       __ZN13SpeechGlobals21BuildArchForVoiceSpecEPK9VoiceSpec, __ZN13SpeechGlobals22ArchForVoiceIdentifierEPK10__CFString, 
-                       __ZN13SpeechGlobals23MayHaveNonNativeEnginesEv, __ZN13SpeechGlobals25AddArchForVoiceIdentifierEPK10__CFString10SpeechArch, 
-                       __ZN13SpeechGlobals27BuildArchForVoiceIdentifierEPK10__CFString, 
-                       __ZN13SpeechGlobals32RecomputeMayHaveNonNativeEnginesEv, __ZN13SpeechGlobals8InstanceEv, 
-                       __ZN13SpeechGlobals9sInstanceE, __ZN13SpeechGlobalsC1Ev, __ZN13SpeechGlobalsC2Ev, 
-                       __ZN14SpeechAPITimer5SetupEv, __ZN18SpeechElapsedTimer11ElapsedTimeEv, 
-                       __ZN19SpeechChannelHandle10CopyVoicesEPKv, __ZN19SpeechChannelHandle10InitializeEP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle10SetLoggingEii, __ZN19SpeechChannelHandle10SpeechBusyEb, 
-                       __ZN19SpeechChannelHandle10StopSpeechExb, __ZN19SpeechChannelHandle11EnvironmentEPPKcS2_, 
-                       __ZN19SpeechChannelHandle11FromChannelEP19SpeechChannelRecord, 
-                       __ZN19SpeechChannelHandle11PauseSpeechEx, __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvP9__CFErrorE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvPK10__CFString7CFRangeE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvPPKvPmPiE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvjE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvmtE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvsE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvslE, 
-                       __ZN19SpeechChannelHandle11SpeakBufferEPKvmx, __ZN19SpeechChannelHandle12CurrentVoiceEv, 
-                       __ZN19SpeechChannelHandle12OutputToFileEP18OpaqueExtAudioFile, 
-                       __ZN19SpeechChannelHandle12OutputToFileEPKv, __ZN19SpeechChannelHandle13SpeakCFStringEPK10__CFStringPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle13TrackPropertyEPKcPv, __ZN19SpeechChannelHandle13UseDictionaryEPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle13UseDictionaryEPKvm, __ZN19SpeechChannelHandle14CachedPropertyEPKc, 
-                       __ZN19SpeechChannelHandle14ContinueSpeechEv, __ZN19SpeechChannelHandle14HandleCallbackEPvb, 
-                       __ZN19SpeechChannelHandle14PrivateChannelEv, __ZN19SpeechChannelHandle14RecoverChannelEv, 
-                       __ZN19SpeechChannelHandle14RegisterModuleEPK7__CFURL, __ZN19SpeechChannelHandle14TextToPhonemesEPKvmPPvPl, 
-                       __ZN19SpeechChannelHandle15PermitAllVoicesEv, __ZN19SpeechChannelHandle16UnregisterModuleEPK7__CFURL, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringPKv, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK13DelimiterInfo, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK14SpeechXtndData, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK9VoiceSpec, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringb, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringi, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringj, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringx, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP14SpeechXtndData, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP15SpeechErrorInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP16SpeechStatusInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP17SpeechVersionInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPPKv, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPPP17PhonemeDescriptor, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPb, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPi, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPj, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPx, 
-                       __ZN19SpeechChannelHandle18SetLatencyCallbackEPFvP19SpeechChannelRecordPvjE, 
-                       __ZN19SpeechChannelHandle19CopyVoiceAttributesEPK9VoiceSpecPPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle19CopyVoiceBundlePathEPK9VoiceSpecPPK10__CFString, 
-                       __ZN19SpeechChannelHandle19OutputToAudioDeviceEPKv, __ZN19SpeechChannelHandle19OutputToAudioDeviceEj, 
-                       __ZN19SpeechChannelHandle20CopyPhonemesFromTextEPK10__CFStringPS2_, 
-                       __ZN19SpeechChannelHandle20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescription, 
-                       __ZN19SpeechChannelHandle22OutputToFileDescriptorEPKv, __ZN19SpeechChannelHandle32CopyIdentifierStringForVoiceSpecEPK9VoiceSpec, 
-                       __ZN19SpeechChannelHandle32MakeVoiceSpecForIdentifierStringEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle37CopyIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
-                       __ZN19SpeechChannelHandle8ShutdownEv, __ZN19SpeechChannelHandle9SetRefConEPv, 
-                       __ZN19SpeechChannelHandleC1Ev, __ZN19SpeechChannelHandleC2Ev, 
-                       __ZN19SpeechChannelHandleD1Ev, __ZN19SpeechChannelHandleD2Ev, 
-                       __ZltRK9VoiceSpecS1_, _gOurCGSConnectionID, _gServerConnections, 
-                       _kPlainTalkCommandRegex, _kSSDKeyAllVoices, _kSSDKeyCallback, 
-                       _kSSDKeyChannel, _kSSDKeyEnabled, _kSSDKeyEncoding, _kSSDKeyError, 
-                       _kSSDKeyFlags, _kSSDKeyLength, _kSSDKeyLocale, _kSSDKeyMessage, 
-                       _kSSDKeyMode, _kSSDKeyOffset, _kSSDKeyPath, _kSSDKeyProperty, 
-                       _kSSDKeyReply, _kSSDKeySetEnv, _kSSDKeySystemWide, _kSSDKeyTAAppPID, 
-                       _kSSDKeyTAEnabled, _kSSDKeyTANotifyType, _kSSDKeyTARegID, 
-                       _kSSDKeyTARegProps, _kSSDKeyText, _kSSDKeyTextID, _kSSDKeyUnsetEnv, 
-                       _kSSDKeyValue, _kSSDKeyVoiceAttr, _kSSDKeyVoiceDesc, _kSSDKeyVoiceID, 
-                       _kSSDKeyVoiceList, _kSSDKeyVoiceSpec, _kSSDKeyWhere, _kSpeechSynthesizerInfoManufacturer, 
+                       _kSpeechSynthesizerInfoIdentifier, _kSpeechSynthesizerInfoManufacturer, 
+                       _kSpeechSynthesizerInfoProperty, _kSpeechSynthesizerInfoVersion, 
+                       _kSpeechTextDoneCallBack, _kSpeechVoiceAge, _kSpeechVoiceCreator, 
+                       _kSpeechVoiceDemoText, _kSpeechVoiceGender, _kSpeechVoiceGenderFemale, 
+                       _kSpeechVoiceGenderMale, _kSpeechVoiceGenderNeuter, _kSpeechVoiceGenderNeutral, 
                        _kSpeechVoiceGroup, _kSpeechVoiceGroupCompact, _kSpeechVoiceGroupCustom, 
                        _kSpeechVoiceGroupCustomCompact, _kSpeechVoiceGroupDefault, 
-                       _kSpeechVoiceRelativeDesirability, _kVoiceConstantRateOnly, 
-                       _kVoiceShowInFullListOnly, _midiToHertz, _sCachedTimeAnnouncementsDictionary, 
-                       _stateNames, _voiceSortFn ]
-    objc-classes:    [ BFConversionUtils, BFIsoProsodicTextSpeechElement, BFPauseSpeechElement, 
-                       BFPlaintalkParser, BFProsodicState, BFRegexCache, BFSkipSpeechElement, 
-                       BFSpeechChannel, BFSpeechElement, BFSyncSpeechElement, BabelFish, 
-                       SpeechSynthesisApps ]
+                       _kSpeechVoiceID, _kSpeechVoiceIdentifier, _kSpeechVoiceIndividuallySpokenCharacters, 
+                       _kSpeechVoiceLanguage, _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceLocalizedNames, 
+                       _kSpeechVoiceName, _kSpeechVoiceNameRoot, _kSpeechVoiceNumericID, 
+                       _kSpeechVoiceRelativeDesirability, _kSpeechVoiceSupportedCharacters, 
+                       _kSpeechVoiceSynthesizerNumericID, _kSpeechVoiceUnicodeCharBegin, 
+                       _kSpeechVoiceUnicodeCharEnd, _kSpeechVoiceVersion, _kSpeechVolumeProperty, 
+                       _kSpeechWordCFCallBack, _kSpeechWordCallBack, _kVoiceConstantRateOnly, 
+                       _kVoiceIndividuallySpokenCharacters, _kVoiceShowInFullListOnly, 
+                       _kVoiceSupportedCharacters ]
 ...

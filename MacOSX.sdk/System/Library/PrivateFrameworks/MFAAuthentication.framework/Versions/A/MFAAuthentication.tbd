@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4BA8099B-8624-38F0-9A60-65DA9F4E6EC3
-  - target:          x86_64-maccatalyst
-    value:           4BA8099B-8624-38F0-9A60-65DA9F4E6EC3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0E807FB2-D615-333D-8EBF-89719B8B587B
-  - target:          arm64e-maccatalyst
-    value:           0E807FB2-D615-333D-8EBF-89719B8B587B
 install-name:    '/System/Library/PrivateFrameworks/MFAAuthentication.framework/Versions/A/MFAAuthentication'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -158,10 +145,11 @@ exports:
                        _X509CertificateParseImplicit, _X509CertificateParseKey, _X509CertificateParseSPKI, 
                        _X509CertificateParseValidity, _X509CertificateParseWithExtension, 
                        _X509CertificateSubjectNameGetCommonName, _X509CertificateValidAtTime, 
-                       _X509ChainBuildPath, _X509ChainCheckPath, _X509ChainCheckPathWithOptions, 
-                       _X509ChainGetCertificateUsingKeyIdentifier, _X509ChainParseCertificateSet, 
-                       _X509ChainResetChain, _X509PolicyCheckForBlockedKeys, _X509PolicySetFlagsForCommonNames, 
-                       _X509PolicySetFlagsForMFI, _X509PolicySetFlagsForRoots, __CopyKeyForMFi4UserPublicKey, 
+                       _X509ChainBuildPath, _X509ChainBuildPathPartial, _X509ChainCheckPath, 
+                       _X509ChainCheckPathWithOptions, _X509ChainGetCertificateUsingKeyIdentifier, 
+                       _X509ChainParseCertificateSet, _X509ChainResetChain, _X509PolicyCheckForBlockedKeys, 
+                       _X509PolicySetFlagsForCommonNames, _X509PolicySetFlagsForMFI, 
+                       _X509PolicySetFlagsForRoots, __CopyKeyForMFi4UserPublicKey, 
                        __CopyPublicKeyForMFi4UserPublicKey, __CreateKeyForMFi4UserPublicKey, 
                        __DeleteAllSynchronizableKeysForMFi4, __DeleteKeyForMFi4UserPublicKey, 
                        __SecKeyVerifySignedSHA1_Transform, __UpdateMFi4FeatureKeyAttributes, 

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4E4A3891-40F6-3467-B435-AAE71C578547
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9B0CCA81-C453-3964-BB1F-5DAB18D5CF5F
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 20.10.11
+current-version: 20.30.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -104,6 +97,6 @@ exports:
                        '_$s18PreviewsServicesUI22SuppressedPresentationOSQAAMc', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationOSYAAMc', 
                        _PreviewsServicesUIVersionNumber, _PreviewsServicesUIVersionString, 
-                       _UVPreviewsInjectionLog, _UVPreviewsServicesError, _UVSuppressedPresentationFromCatalystErrorCode ]
+                       _UVPreviewsServicesError, _UVSuppressedPresentationFromCatalystErrorCode ]
     objc-classes:    [ UVFenceHandle, UVHardwareEvent ]
 ...

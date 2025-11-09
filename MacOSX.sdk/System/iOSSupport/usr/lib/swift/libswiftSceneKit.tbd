@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           78A86914-ABF3-37A3-8134-C3EA2B8CB1A4
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           EBF526C7-35E6-3B82-8C48-AA183126F603
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSceneKit.dylib'
 current-version: 1.2
 swift-abi-version: 7

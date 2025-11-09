@@ -195,8 +195,8 @@ enum tIOUSBHostPortStatus
 #define kUSBHostPropertyForceLinkSpeed                          "UsbLinkSpeed"
 #define kUSBHostPropertyForceHardwareException                  "UsbHardwareException"
 #define kUSBHostPropertyAllowSoftRetry                          "UsbAllowSoftRetry"
+#define kUSBHostPropertyExclusiveOwner                          "UsbExclusiveOwner"                 // OSString describing the service or process with an exclusive session to the USB service
 
-#define kUSBHostUserClientPropertyOwningTaskName                "UsbUserClientOwningTaskName"
 #define kUSBHostUserClientPropertyEntitlementRequired           "UsbUserClientEntitlementRequired"
 #define kUSBHostUserClientPropertyEnableReset                   "UsbUserClientEnableReset"
 #define kUSBHostUserClientPropertyEnableDataToggleReset         "UsbUserClientEnableDataToggleReset"

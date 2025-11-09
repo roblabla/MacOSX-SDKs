@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DC5215F4-8679-3A61-BBAB-24A2C569F181
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2E7CD7A7-3645-3248-BE5A-EE82FC8414FB
 install-name:    '/System/Library/PrivateFrameworks/PhotoPrintProduct.framework/Versions/A/PhotoPrintProduct'
 current-version: 694
 exports:

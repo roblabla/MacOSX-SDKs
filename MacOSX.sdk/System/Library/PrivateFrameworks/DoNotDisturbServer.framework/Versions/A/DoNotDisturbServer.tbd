@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2174376B-F4C5-34C5-B697-791270534F0B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           38B1EEB9-A60B-353C-9C80-1D37E43884DE
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbServer.framework/Versions/A/DoNotDisturbServer'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -69,9 +62,11 @@ exports:
                        _kDNDModeAssertionScheduleLifetimeBehaviorRecordMatchScheduleValue, 
                        _kDNDSIDSSyncEngineActionAck, _kDNDSIDSSyncEngineActionReplace, 
                        _kDNDSIDSSyncEngineActionResync, _kDNDSIDSSyncEngineActionUnlock, 
-                       _kDNDSIDSSyncEngineActionUpdate, _kDNDSModeConfigurationsMinimumRequiredVersionKey, 
+                       _kDNDSIDSSyncEngineActionUpdate, _kDNDSModeConfigurationsForceUpdateKey, 
+                       _kDNDSModeConfigurationsLastModifiedKey, _kDNDSModeConfigurationsMinimumRequiredVersionKey, 
                        _kDNDSModeConfigurationsRecordDataKey, _kDNDSModeConfigurationsRecordMainPartitionKey, 
                        _kDNDSModeConfigurationsRecordPartitionedDataKey, _kDNDSModeConfigurationsRecordSecondaryPartitionKey, 
+                       _kDNDSModeConfigurationsSourceDeviceIdentifierKey, _kDNDSModeConfigurationsSourceFrameworkVersionKey, 
                        _kDNDSModeConfigurationsVersionKey, _kDNDSModeConfigurationsVersionSupported, 
                        _kDNDSSyncSettingsCloudSyncDisabledKey, _kDNDSSyncSettingsMirrorDNDKey, 
                        _kDefaultPreventAutoReplySetting, _kDefaultPreventModesCanImpactAvailabilitySetting, 
@@ -98,15 +93,16 @@ exports:
                        DNDSContactProvider, DNDSContactRecord, DNDSContentHandleExceptionalModesBox, 
                        DNDSCoreDataBackingStore, DNDSDailyHeartbeatMetricsRecord, 
                        DNDSDateIntervalLifetimeMonitor, DNDSDefaultLifetimeMonitor, 
-                       DNDSDrivingTriggerManager, DNDSEventBehaviorResolution, DNDSEventBehaviorResolver, 
-                       DNDSExplicitRegionLocationLifetimeMonitor, DNDSExplicitRegionStore, 
-                       DNDSFirstUnlockPurgedBackingStore, DNDSGamingTriggerManager, 
-                       DNDSGlobalConfiguration, DNDSGlobalConfigurationManager, DNDSGlobalConfigurationStore, 
-                       DNDSHeartbeatMetricsRecord, DNDSIDSRecord, DNDSIDSRecordID, 
-                       DNDSIDSRecordMetadata, DNDSIDSServerBagValues, DNDSIDSSyncEngine, 
-                       DNDSIDSSyncEngineMetadataStore, DNDSIDSSyncService, DNDSJSONBackingStore, 
-                       DNDSKeybag, DNDSLegacyBehaviorOverride, DNDSLegacyBehaviorOverrideEffectiveInterval, 
-                       DNDSLifetimeMonitorResult, DNDSLocationLifetimeMonitor, DNDSLocationTriggerConfiguration, 
+                       DNDSDevice, DNDSDrivingTriggerManager, DNDSEventBehaviorResolution, 
+                       DNDSEventBehaviorResolver, DNDSExplicitRegionLocationLifetimeMonitor, 
+                       DNDSExplicitRegionStore, DNDSFirstUnlockPurgedBackingStore, 
+                       DNDSGamingTriggerManager, DNDSGlobalConfiguration, DNDSGlobalConfigurationManager, 
+                       DNDSGlobalConfigurationStore, DNDSHeartbeatMetricsRecord, 
+                       DNDSIDSRecord, DNDSIDSRecordID, DNDSIDSRecordMetadata, DNDSIDSServerBagValues, 
+                       DNDSIDSSyncEngine, DNDSIDSSyncEngineMetadataStore, DNDSIDSSyncService, 
+                       DNDSJSONBackingStore, DNDSKeybag, DNDSLegacyBehaviorOverride, 
+                       DNDSLegacyBehaviorOverrideEffectiveInterval, DNDSLifetimeMonitorResult, 
+                       DNDSLocationLifetimeMonitor, DNDSLocationTriggerConfiguration, 
                        DNDSMeDeviceService, DNDSMeDeviceStore, DNDSMemoryCachedBackingStore, 
                        DNDSMetricsManager, DNDSMetricsRecord, DNDSMindfulnessTriggerManager, 
                        DNDSModeAssertionClientIdentifierInvalidationPredicate, DNDSModeAssertionDateInvalidationPredicate, 
@@ -171,7 +167,8 @@ exports:
                        DNDSConfigurationRecord._applicationConfigurationType, DNDSConfigurationRecord._compatibilityVersion, 
                        DNDSConfigurationRecord._hideApplicationBadges, DNDSConfigurationRecord._minimumBreakthroughUrgency, 
                        DNDSConfigurationRecord._senderConfigurationType, DNDSConfigurationRecord._suppressionType, 
-                       DNDSConfigurationSecureRecord._allowedApplications, DNDSConfigurationSecureRecord._deniedApplications, 
+                       DNDSConfigurationSecureRecord._allowedApplications, DNDSConfigurationSecureRecord._allowedWebApplications, 
+                       DNDSConfigurationSecureRecord._deniedApplications, DNDSConfigurationSecureRecord._deniedWebApplications, 
                        DNDSConfigurationSecureRecord._senderConfiguration, DNDSConfigurationsRecord._modeConfigurations, 
                        DNDSConfigurationsSecureRecord._modeConfigurations, DNDSContactMonitorChangeCollector._deletedContactIdentifiers, 
                        DNDSContactMonitorChangeCollector._monitoredContactIdentifiers, 
@@ -203,7 +200,8 @@ exports:
                        DNDSModeConfigurationRecord._created, DNDSModeConfigurationRecord._dimsLockScreen, 
                        DNDSModeConfigurationRecord._ephemeralResolvedCompatibilityVersion, 
                        DNDSModeConfigurationRecord._hasSecureData, DNDSModeConfigurationRecord._impactsAvailability, 
-                       DNDSModeConfigurationRecord._lastModified, DNDSModeConfigurationRecord._mode, 
+                       DNDSModeConfigurationRecord._lastModified, DNDSModeConfigurationRecord._lastModifiedByDeviceID, 
+                       DNDSModeConfigurationRecord._lastModifiedByVersion, DNDSModeConfigurationRecord._mode, 
                        DNDSModeConfigurationRecord._secureConfiguration, DNDSModeConfigurationRecord._triggers, 
                        DNDSModeConfigurationTriggersRecord._triggers, DNDSModeConfigurationsRecord._modeConfigurationsByModeIdentifier, 
                        DNDSModeRecord._identifier, DNDSModeRecord._modeIdentifier, 

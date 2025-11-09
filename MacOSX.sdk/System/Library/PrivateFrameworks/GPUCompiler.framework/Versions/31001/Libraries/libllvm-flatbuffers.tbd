@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E3B9041A-0AEA-385E-B6CC-41E15280639E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2D5B8EFF-37AB-3226-B642-396ECD87EF5F
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libllvm-flatbuffers.dylib'
 current-version: 0
 compatibility-version: 0
@@ -128,7 +121,6 @@ exports:
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7EnumValEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7RPCCallEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7ServiceEEENSt3__19allocatorIS4_EEEEPT_RNS5_6vectorIS8_T0_EEE1t, 
-                       __ZZN11flatbuffers4dataINS_6OffsetIN10reflection8KeyValueEEENSt3__19allocatorIS4_EEEEPT_RNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetINS_6StringEEENSt3__19allocatorIS3_EEEEPKT_RKNS4_6vectorIS7_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIPKNS_5TableEEENSt3__19allocatorIS5_EEEEPKT_RKNS6_6vectorIS9_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIPKNS_6StringEEENSt3__19allocatorIS5_EEEEPKT_RKNS6_6vectorIS9_T0_EEE1t, 

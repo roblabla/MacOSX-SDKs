@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D14AA9E7-53A7-312A-AB51-1FDF9B010FE3
-  - target:          x86_64-maccatalyst
-    value:           D14AA9E7-53A7-312A-AB51-1FDF9B010FE3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1F570DB3-5CB1-3F43-BFC3-7980C085CC31
-  - target:          arm64e-maccatalyst
-    value:           1F570DB3-5CB1-3F43-BFC3-7980C085CC31
 install-name:    '/usr/lib/libmarisa.dylib'
 current-version: 24
 exports:

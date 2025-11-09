@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           411FBC29-37B2-3DF5-AABC-24CE72A3D1E3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           180D204A-311B-3C65-BF81-BB5D4C9C8879
 install-name:    '/System/Library/Perl/5.34/darwin-thread-multi-2level/CORE/libperl.dylib'
 current-version: 5.34
 compatibility-version: 5.34
@@ -65,20 +58,18 @@ exports:
                        _PerlIOPending_set_ptrcnt, _PerlIOPop_pushed, _PerlIORaw_pushed, 
                        _PerlIOStdio_clearerr, _PerlIOStdio_close, _PerlIOStdio_dup, 
                        _PerlIOStdio_eof, _PerlIOStdio_error, _PerlIOStdio_fileno, 
-                       _PerlIOStdio_fill, _PerlIOStdio_flush, _PerlIOStdio_get_base, 
-                       _PerlIOStdio_get_bufsiz, _PerlIOStdio_get_cnt, _PerlIOStdio_get_ptr, 
-                       _PerlIOStdio_mode, _PerlIOStdio_open, _PerlIOStdio_pushed, 
-                       _PerlIOStdio_read, _PerlIOStdio_seek, _PerlIOStdio_set_ptrcnt, 
-                       _PerlIOStdio_setlinebuf, _PerlIOStdio_tell, _PerlIOStdio_unread, 
-                       _PerlIOStdio_write, _PerlIOUnix_close, _PerlIOUnix_dup, _PerlIOUnix_fileno, 
-                       _PerlIOUnix_oflags, _PerlIOUnix_open, _PerlIOUnix_pushed, 
-                       _PerlIOUnix_read, _PerlIOUnix_refcnt, _PerlIOUnix_refcnt_dec, 
-                       _PerlIOUnix_refcnt_inc, _PerlIOUnix_seek, _PerlIOUnix_tell, 
-                       _PerlIOUnix_write, _PerlIOUtf8_pushed, _PerlIO__close, _PerlIO_allocate, 
-                       _PerlIO_apply_layera, _PerlIO_apply_layers, _PerlIO_arg_fetch, 
-                       _PerlIO_binmode, _PerlIO_byte, _PerlIO_canset_cnt, _PerlIO_cleantable, 
-                       _PerlIO_cleanup, _PerlIO_clone, _PerlIO_clone_list, _PerlIO_crlf, 
-                       _PerlIO_debug, _PerlIO_default_buffer, _PerlIO_default_layer, 
+                       _PerlIOStdio_fill, _PerlIOStdio_flush, _PerlIOStdio_mode, 
+                       _PerlIOStdio_open, _PerlIOStdio_pushed, _PerlIOStdio_read, 
+                       _PerlIOStdio_seek, _PerlIOStdio_setlinebuf, _PerlIOStdio_tell, 
+                       _PerlIOStdio_unread, _PerlIOStdio_write, _PerlIOUnix_close, 
+                       _PerlIOUnix_dup, _PerlIOUnix_fileno, _PerlIOUnix_oflags, _PerlIOUnix_open, 
+                       _PerlIOUnix_pushed, _PerlIOUnix_read, _PerlIOUnix_refcnt, 
+                       _PerlIOUnix_refcnt_dec, _PerlIOUnix_refcnt_inc, _PerlIOUnix_seek, 
+                       _PerlIOUnix_tell, _PerlIOUnix_write, _PerlIOUtf8_pushed, _PerlIO__close, 
+                       _PerlIO_allocate, _PerlIO_apply_layera, _PerlIO_apply_layers, 
+                       _PerlIO_arg_fetch, _PerlIO_binmode, _PerlIO_byte, _PerlIO_canset_cnt, 
+                       _PerlIO_cleantable, _PerlIO_cleanup, _PerlIO_clone, _PerlIO_clone_list, 
+                       _PerlIO_crlf, _PerlIO_debug, _PerlIO_default_buffer, _PerlIO_default_layer, 
                        _PerlIO_default_layers, _PerlIO_define_layer, _PerlIO_destruct, 
                        _PerlIO_exportFILE, _PerlIO_fast_gets, _PerlIO_fdopen, _PerlIO_fdupopen, 
                        _PerlIO_findFILE, _PerlIO_find_layer, _PerlIO_get_layers, 

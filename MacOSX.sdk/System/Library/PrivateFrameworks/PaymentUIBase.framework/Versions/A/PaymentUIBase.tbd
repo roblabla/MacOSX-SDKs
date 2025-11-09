@@ -1,19 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           85A5EB67-01A0-322D-AF2A-4B7692C3F461
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           99D47FF3-C132-32B7-B247-CA9935B1C019
 install-name:    '/System/Library/PrivateFrameworks/PaymentUIBase.framework/Versions/A/PaymentUIBase'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s13PaymentUIBase0A11DetailSheetO015automaticReloadA7RequestyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO05setupA6MethodyA2CmFWC', 
+                       '_$s13PaymentUIBase0A11DetailSheetO08deferredA7RequestyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO09recurringA7RequestyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO11paymentPassyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO14paymentSummaryyA2CmFWC', 
@@ -157,7 +151,7 @@ exports:
                        '_$s13PaymentUIBase18DecorativeNSButtonVyxG7SwiftUI4ViewAAMc', 
                        '_$s13PaymentUIBase18MultiLineTextLabelV10makeNSView7contextSo11NSTextFieldC7SwiftUI0H20RepresentableContextVyACG_tF', 
                        '_$s13PaymentUIBase18MultiLineTextLabelV12updateNSView_7contextySo11NSTextFieldC_7SwiftUI0H20RepresentableContextVyACGtF', 
-                       '_$s13PaymentUIBase18MultiLineTextLabelV4text6weight0G5StyleACSS_So12NSFontWeightaSo0jeI0atcfC', 
+                       '_$s13PaymentUIBase18MultiLineTextLabelV4text6weight0G5Style9alignment0G5ColorACSS_So12NSFontWeightaSo0leI0aSo15NSTextAlignmentVSg7SwiftUI0K0VSgtcfC', 
                        '_$s13PaymentUIBase18MultiLineTextLabelV7SwiftUI19NSViewRepresentableAAMc', 
                        '_$s13PaymentUIBase18MultiLineTextLabelV7SwiftUI4ViewAAMc', 
                        '_$s13PaymentUIBase18MultiLineTextLabelVMa', '_$s13PaymentUIBase18MultiLineTextLabelVMn', 
@@ -213,6 +207,11 @@ exports:
                        '_$s7SwiftUI17EnvironmentValuesV13PaymentUIBaseE25shouldUseAccessibleLayoutSbvg', 
                        '_$s7SwiftUI17EnvironmentValuesV13PaymentUIBaseE25shouldUseAccessibleLayoutSbvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV13PaymentUIBaseE25shouldUseAccessibleLayoutSbvs', 
+                       '_$s7SwiftUI4FontV13PaymentUIBaseE17chinItemSecondaryACvgZ', 
+                       '_$s7SwiftUI4FontV13PaymentUIBaseE20paymentItemSecondaryACvgZ', 
+                       '_$s7SwiftUI4FontV13PaymentUIBaseE23detailSheetRowAccessoryACvgZ', 
+                       '_$s7SwiftUI4FontV13PaymentUIBaseE23detailSheetRowSecondaryACvgZ', 
+                       '_$s7SwiftUI4FontV13PaymentUIBaseE25paymentItemSecondaryErrorACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE04logoC0ACvgZ', '_$s7SwiftUI5ColorV13PaymentUIBaseE09boxBorderC0ACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE10itemBorderACvgZ', '_$s7SwiftUI5ColorV13PaymentUIBaseE11primaryTextACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE13macSystemFillACvgZ', 
@@ -241,6 +240,5 @@ exports:
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE30thumbnailPlaceholderBackgroundACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE30thumbnailPlaceholderForegroundACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE38appleCashInsufficientBalanceBackgroundACvgZ', 
-                       '_$sSo8NSBundleC13PaymentUIBaseE07paymentC0ABvgZ', '_$sSo8NSBundleC13PaymentUIBaseE9paymentUIABvgZ', 
                        _PaymentUIBaseVersionNumber, _PaymentUIBaseVersionString ]
 ...

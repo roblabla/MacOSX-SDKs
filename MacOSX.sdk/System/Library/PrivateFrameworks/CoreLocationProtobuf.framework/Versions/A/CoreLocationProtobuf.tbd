@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           266984C5-FBDF-38C5-912E-5B68FA48364F
-  - target:          x86_64-maccatalyst
-    value:           266984C5-FBDF-38C5-912E-5B68FA48364F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ECA8B6B7-3794-3AF1-8FBB-C30185556BE7
-  - target:          arm64e-maccatalyst
-    value:           ECA8B6B7-3794-3AF1-8FBB-C30185556BE7
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationProtobuf.framework/Versions/A/CoreLocationProtobuf'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -299,10 +286,10 @@ exports:
                        CLPLteCellTowerLocation._pmax, CLPLteCellTowerLocation._rscp, 
                        CLPLteCellTowerLocation._rssi, CLPLteCellTowerLocation._serverHash, 
                        CLPLteCellTowerLocation._serviceProviderName, CLPLteCellTowerLocation._tac, 
-                       CLPLteCellTowerLocation._uarfcn, CLPMeta._has, CLPMeta._probeId, 
-                       CLPMeta._productId, CLPMeta._softwareVersion, CLPMeta._submissionId, 
-                       CLPMotionActivity._confidence, CLPMotionActivity._has, CLPMotionActivity._type, 
-                       CLPNRCellNeighbor._bandwidth, CLPNRCellNeighbor._bwpSupport, 
+                       CLPLteCellTowerLocation._timingAdvance, CLPLteCellTowerLocation._uarfcn, 
+                       CLPMeta._has, CLPMeta._probeId, CLPMeta._productId, CLPMeta._softwareVersion, 
+                       CLPMeta._submissionId, CLPMotionActivity._confidence, CLPMotionActivity._has, 
+                       CLPMotionActivity._type, CLPNRCellNeighbor._bandwidth, CLPNRCellNeighbor._bwpSupport, 
                        CLPNRCellNeighbor._ecn0, CLPNRCellNeighbor._has, CLPNRCellNeighbor._maxThroughput, 
                        CLPNRCellNeighbor._neighborType, CLPNRCellNeighbor._nrarfcn, 
                        CLPNRCellNeighbor._pid, CLPNRCellNeighbor._rscp, CLPNRCellNeighbor._rssi, 

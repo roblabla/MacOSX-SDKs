@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CCB2F5AA-368A-34D9-A74C-AC1570633D95
-  - target:          x86_64-maccatalyst
-    value:           CCB2F5AA-368A-34D9-A74C-AC1570633D95
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D638D84A-63D9-3128-B66C-0CA5678F9C00
-  - target:          arm64e-maccatalyst
-    value:           D638D84A-63D9-3128-B66C-0CA5678F9C00
 install-name:    '/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

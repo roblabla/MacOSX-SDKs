@@ -173,7 +173,7 @@ extern int nfs_ticks;
 #define NFS_ARGSVERSION_XDR     88      /* NFS mount args are in XDR format */
 
 #define NFS_XDRARGS_VERSION_0   0
-#define NFS_MATTR_BITMAP_LEN    1               /* length of mount attributes bitmap */
+#define NFS_MATTR_BITMAP_LEN    2               /* length of mount attributes bitmap */
 #define NFS_MFLAG_BITMAP_LEN    1               /* length of mount flags bitmap */
 
 /* NFS mount attributes */
@@ -209,6 +209,7 @@ extern int nfs_ticks;
 #define NFS_MATTR_LOCAL_NFS_PORT        29      /* Unix domain socket for NFS protocol */
 #define NFS_MATTR_LOCAL_MOUNT_PORT      30      /* Unix domain socket for MOUNT protocol */
 #define NFS_MATTR_SET_MOUNT_OWNER       31      /* Set owner of mount point */
+#define NFS_MATTR_READLINK_NOCACHE      32      /* Readlink nocache mode */
 
 /* NFS mount flags */
 #define NFS_MFLAG_SOFT                  0       /* soft mount (requests fail if unresponsive) */

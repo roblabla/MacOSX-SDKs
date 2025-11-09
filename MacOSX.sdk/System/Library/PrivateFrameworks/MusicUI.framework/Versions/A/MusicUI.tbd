@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F1ACFBCE-C121-34BE-B807-6CD4A5DBB273
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           52076FEA-9BB4-36CB-A77B-C10A8120E571
 install-name:    '/System/Library/PrivateFrameworks/MusicUI.framework/Versions/A/MusicUI'
 swift-abi-version: 7
 exports:
@@ -39,7 +32,12 @@ exports:
                        '_$s7MusicUI0A5TasteO9hashValueSivg', '_$s7MusicUI0A5TasteO9hashValueSivpMV', 
                        '_$s7MusicUI0A5TasteOMa', '_$s7MusicUI0A5TasteOMn', '_$s7MusicUI0A5TasteON', 
                        '_$s7MusicUI0A5TasteOSHAAMc', '_$s7MusicUI0A5TasteOSQAAMc', 
-                       '_$s7MusicUI10FlowActionV11DestinationO11catalogPageyAE9JetEngine9AnyIntentVyAA0G0VGcAEmFWC', 
+                       '_$s7MusicUI10FlowActionV10IdentifierV8rawValueAESS_tcfC', 
+                       '_$s7MusicUI10FlowActionV10IdentifierV8rawValueSSvg', '_$s7MusicUI10FlowActionV10IdentifierV8rawValueSSvpMV', 
+                       '_$s7MusicUI10FlowActionV10IdentifierVMa', '_$s7MusicUI10FlowActionV10IdentifierVMn', 
+                       '_$s7MusicUI10FlowActionV10IdentifierVN', '_$s7MusicUI10FlowActionV10IdentifierVSHAAMc', 
+                       '_$s7MusicUI10FlowActionV10IdentifierVSQAAMc', '_$s7MusicUI10FlowActionV10IdentifierVSYAAMc', 
+                       '_$s7MusicUI10FlowActionV11DestinationO11catalogPageyAE9JetEngine14AnyIntentModelVyAA0G0VGcAEmFWC', 
                        '_$s7MusicUI10FlowActionV11DestinationO13deserializing5usingAE9JetEngine10JSONObjectV_AH11JSONContextVtKcfC', 
                        '_$s7MusicUI10FlowActionV11DestinationO13searchResultsyAeA16SearchParametersVcAEmFWC', 
                        '_$s7MusicUI10FlowActionV11DestinationO14onboardingPageyA2EmFWC', 
@@ -50,18 +48,22 @@ exports:
                        '_$s7MusicUI10FlowActionV11DestinationOMa', '_$s7MusicUI10FlowActionV11DestinationOMn', 
                        '_$s7MusicUI10FlowActionV11DestinationON', '_$s7MusicUI10FlowActionV11destinationAC11DestinationOvg', 
                        '_$s7MusicUI10FlowActionV11destinationAC11DestinationOvpMV', 
-                       '_$s7MusicUI10FlowActionV13actionMetrics11destinationAC9JetEngine0dF0V_AC11DestinationOtcfC', 
+                       '_$s7MusicUI10FlowActionV13actionMetrics11destination2idAC9JetEngine0dF0V_AC11DestinationOAC10IdentifierVSgtcfC', 
                        '_$s7MusicUI10FlowActionV13actionMetrics9JetEngine0dF0Vvg', 
                        '_$s7MusicUI10FlowActionV13actionMetrics9JetEngine0dF0VvpMV', 
                        '_$s7MusicUI10FlowActionV13deserializing5usingAC9JetEngine10JSONObjectV_AF11JSONContextVtKcfC', 
+                       '_$s7MusicUI10FlowActionV2eeoiySbAC_ACtFZ', '_$s7MusicUI10FlowActionV2idAC10IdentifierVvg', 
+                       '_$s7MusicUI10FlowActionV2idAC10IdentifierVvpMV', '_$s7MusicUI10FlowActionV4hash4intoys6HasherVz_tF', 
                        '_$s7MusicUI10FlowActionV9JetEngine0D5ModelAAMc', '_$s7MusicUI10FlowActionV9JetEngine0cD5ModelAAMc', 
                        '_$s7MusicUI10FlowActionV9JetEngine17ExpressibleByJSONAAMc', 
+                       '_$s7MusicUI10FlowActionV9hashValueSivg', '_$s7MusicUI10FlowActionV9hashValueSivpMV', 
                        '_$s7MusicUI10FlowActionVMa', '_$s7MusicUI10FlowActionVMn', 
-                       '_$s7MusicUI10FlowActionVN', '_$s7MusicUI11ContentKindO10musicVideoyA2CmFWC', 
-                       '_$s7MusicUI11ContentKindO11recordLabelyA2CmFWC', '_$s7MusicUI11ContentKindO12appleCuratoryA2CmFWC', 
-                       '_$s7MusicUI11ContentKindO12radioStationyA2CmFWC', '_$s7MusicUI11ContentKindO13editorialItemyA2CmFWC', 
-                       '_$s7MusicUI11ContentKindO13socialProfileyA2CmFWC', '_$s7MusicUI11ContentKindO18artistUploadedSongyA2CmFWC', 
-                       '_$s7MusicUI11ContentKindO19artistUploadedVideoyA2CmFWC', 
+                       '_$s7MusicUI10FlowActionVN', '_$s7MusicUI10FlowActionVSHAAMc', 
+                       '_$s7MusicUI10FlowActionVSQAAMc', '_$s7MusicUI10FlowActionVs12IdentifiableAAMc', 
+                       '_$s7MusicUI11ContentKindO10musicVideoyA2CmFWC', '_$s7MusicUI11ContentKindO11recordLabelyA2CmFWC', 
+                       '_$s7MusicUI11ContentKindO12appleCuratoryA2CmFWC', '_$s7MusicUI11ContentKindO12radioStationyA2CmFWC', 
+                       '_$s7MusicUI11ContentKindO13editorialItemyA2CmFWC', '_$s7MusicUI11ContentKindO13socialProfileyA2CmFWC', 
+                       '_$s7MusicUI11ContentKindO18artistUploadedSongyA2CmFWC', '_$s7MusicUI11ContentKindO19artistUploadedVideoyA2CmFWC', 
                        '_$s7MusicUI11ContentKindO4songyA2CmFWC', '_$s7MusicUI11ContentKindO5albumyA2CmFWC', 
                        '_$s7MusicUI11ContentKindO5movieyA2CmFWC', '_$s7MusicUI11ContentKindO6artistyA2CmFWC', 
                        '_$s7MusicUI11ContentKindO6tvShowyA2CmFWC', '_$s7MusicUI11ContentKindO7curatoryA2CmFWC', 
@@ -631,9 +633,8 @@ exports:
                        '_$sSu7MusicUIE9makeValue2inSo7JSValueCSo9JSContextC_tF', 
                        '_$sSu9JetEngine24CustomJSValueConvertible7MusicUIMc', '_$ss6UInt64V7MusicUIE9makeValue2inSo7JSValueCSo9JSContextC_tF', 
                        '_$ss6UInt64V9JetEngine24CustomJSValueConvertible7MusicUIMc', 
-                       '_$sxSg9JetEngine17ExpressibleByJSON7MusicUIAbCRzlMc', '_$sxSg9JetEngine24CustomJSValueConvertible7MusicUIMc', 
-                       _MPCSceneLastFrame, _MPCScriptedLooperErrorDomain, _MusicUIVersionNumber, 
-                       _MusicUIVersionString ]
+                       '_$sxSg9JetEngine24CustomJSValueConvertible7MusicUIMc', _MPCSceneLastFrame, 
+                       _MPCScriptedLooperErrorDomain, _MusicUIVersionNumber, _MusicUIVersionString ]
     objc-classes:    [ MPCScene, MPCSceneCollection, MPCScriptedLooper, MPCScriptedSceneCollectionParser, 
                        MUINotificationObserver ]
 ...

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(10.15), ios(16.0))
-@interface CAEDRMetadata : NSObject
+@interface CAEDRMetadata : NSObject<NSCopying, NSSecureCoding>
 {
 @private
   struct _CAEDRMetadataPrivate *_priv;

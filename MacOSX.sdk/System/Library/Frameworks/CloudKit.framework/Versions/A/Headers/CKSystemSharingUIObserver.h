@@ -11,11 +11,11 @@
 
 @class CKContainer, CKShare, CKRecordID;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-CK_EXTERN
 API_AVAILABLE(macos(13.0), ios(16.0))
-API_UNAVAILABLE(watchos, tvos)
+API_UNAVAILABLE(tvos, watchos)
+NS_SWIFT_SENDABLE // This is a partial lie, it's only available on iOS 16.4 and later: 103448861
 @interface CKSystemSharingUIObserver : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -29,14 +29,14 @@ API_UNAVAILABLE(watchos, tvos)
  *  Following a save failure due to a per-item error (@c CKErrorServerRecordChanged, for example), this callback will be invoked with a nonnull @c recordID, a nil @c share, and a nonnull @c error
  *  Each @c CKSystemSharingUIObserver instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (atomic, copy, nullable) void (^systemSharingUIDidSaveShareBlock)(CKRecordID *recordID, CKShare * _Nullable share, NSError * _Nullable error) NS_REFINED_FOR_SWIFT;
+@property (atomic, copy, nullable) NS_SWIFT_SENDABLE void (^systemSharingUIDidSaveShareBlock)(CKRecordID *recordID, CKShare * _Nullable share, NSError * _Nullable error) NS_REFINED_FOR_SWIFT;
 
 /*! @abstract Called on success or failure of a @c CKShare delete when the user decides to stop sharing via the system sharing UI
  *
  *  @discussion Each @c CKSystemSharingUIObserver instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (atomic, copy, nullable) void (^systemSharingUIDidStopSharingBlock)(CKRecordID *recordID, NSError * _Nullable error) NS_REFINED_FOR_SWIFT;
+@property (atomic, copy, nullable) NS_SWIFT_SENDABLE void (^systemSharingUIDidStopSharingBlock)(CKRecordID *recordID, NSError * _Nullable error) NS_REFINED_FOR_SWIFT;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

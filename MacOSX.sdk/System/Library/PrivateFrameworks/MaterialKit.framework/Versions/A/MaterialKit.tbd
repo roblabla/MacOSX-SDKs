@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           52E60434-ECF0-3C16-95DF-1A25053426BB
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           23877E68-AD33-3520-A6C5-77AC22C0F297
 install-name:    '/System/Library/PrivateFrameworks/MaterialKit.framework/Versions/A/MaterialKit'
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

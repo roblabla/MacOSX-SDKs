@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BD301F5E-ED1B-3D0C-9E19-F7FF0F022D2D
-  - target:          x86_64-maccatalyst
-    value:           BD301F5E-ED1B-3D0C-9E19-F7FF0F022D2D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8AF0F262-F312-342D-8BE6-4D2A37596B8B
-  - target:          arm64e-maccatalyst
-    value:           8AF0F262-F312-342D-8BE6-4D2A37596B8B
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2780.0.27
+current-version: 2785.0.30
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
@@ -200,11 +187,11 @@ exports:
                        CMAbsoluteAltitudeData, CMAccelerometerData, CMAccelerometerDataArray, 
                        CMActivity, CMActivityAlarm, CMActivityEventData, CMActivityManager, 
                        CMAltimeter, CMAltitudeData, CMAmbientPressureData, CMAmbientPressureDataArray, 
-                       CMAnomalyEvent, CMAttitude, CMAudioAccessoryManager, CMCalorieData, 
-                       CMCalorieUserInfo, CMCalorieUtils, CMCameraBodyMetrics, CMCameraFitnessMachineSample, 
-                       CMCameraWorkoutEvent, CMCameraWorkoutSession, CMCatherineData, 
-                       CMCatherineFeeder, CMContextConfigurationManager, CMDeviceMotion, 
-                       CMDeviceMotionLite, CMDeviceOrientation, CMDistributedSensingManager, 
+                       CMAnomalyEvent, CMAttitude, CMAudioAccessoryManager, CMAudioAccessoryUsageManager, 
+                       CMCalorieData, CMCalorieUserInfo, CMCalorieUtils, CMCameraBodyMetrics, 
+                       CMCameraFitnessMachineSample, CMCameraWorkoutEvent, CMCameraWorkoutSession, 
+                       CMCatherineData, CMCatherineFeeder, CMContextConfigurationManager, 
+                       CMDeviceMotion, CMDeviceMotionLite, CMDeviceOrientation, CMDistributedSensingManager, 
                        CMDistributedSensingManagerInternal, CMDyskineticSymptomResult, 
                        CMElevation, CMElevationData, CMExerciseMinute, CMExerciseMinuteData, 
                        CMFacePose, CMFall, CMFallDetectionClient, CMFallDetectionEvent, 

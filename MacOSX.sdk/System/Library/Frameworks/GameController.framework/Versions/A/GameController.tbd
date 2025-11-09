@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2F4FE978-85CE-3B31-9C7E-55F307586AD7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           71F2A970-4F1A-3F1E-BCC5-C084A9CD2527
 install-name:    '/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
-current-version: 10.3.5
+current-version: 10.5.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -238,8 +231,8 @@ exports:
                        _hexStringFromByteArray, _isDeviceAppleControlCenterRemote, 
                        _isDeviceAppleDirectionalRemote, _isDeviceAppleEmbeddedBluetoothButtons, 
                        _isDeviceAppleMultiPointDigitizer, _isDeviceAppleSiriRemote, 
-                       _isDeviceAppleTouchpad, _isDeviceDualSense, _isDeviceDualShock4, 
-                       _isDeviceKeyboard, _isDeviceLuna, _isDeviceMFiAuthenticated, 
+                       _isDeviceAppleTouchpad, _isDeviceDualSense, _isDeviceDualSenseEdge, 
+                       _isDeviceDualShock4, _isDeviceKeyboard, _isDeviceLuna, _isDeviceMFiAuthenticated, 
                        _isDeviceMFiGamepadCompliantForDeviceRef, _isDeviceMFiGamepadCompliantForServiceClientRef, 
                        _isDeviceMotionLite, _isDeviceMouse, _isDeviceParentAuthenticated, 
                        _isDeviceSwitchJoyCon, _isDeviceSwitchProController, _isDeviceSwitchSuperFamicomController, 
@@ -282,6 +275,6 @@ exports:
                        _GCDevicePhysicalInputComponentDescription, _GCDriverClientConnection, 
                        _GCGamepadEventGamepadHIDAdapterDescription, _GCGamepadEventImpl, 
                        _GCHIDEventSubject, _GCHandSkeleton, _GCHapticEvent, _GCHapticServerManager, 
-                       _GCIPCRemoteProcess, _GCImplicitIPCObjectDescription, _GCObservation, 
-                       _GCXRComponent ]
+                       _GCIPCRemoteProcess, _GCImplicitIPCObjectDescription, _GCKeyboardEventImpl, 
+                       _GCObservation, _GCXRComponent ]
 ...

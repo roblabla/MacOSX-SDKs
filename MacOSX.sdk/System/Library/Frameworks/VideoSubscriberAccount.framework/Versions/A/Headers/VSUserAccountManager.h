@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSInteger, VSUserAccountQueryOptions) {
     VSUserAccountQueryNone = 0,  // default
     VSUserAccountQueryAllDevices // return VSUserAccounts also registered on other devices in the users iCloud account
-} NS_SWIFT_NAME(VSUserAccountManager.QueryOptions) API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macCatalyst);
+} NS_SWIFT_NAME(VSUserAccountManager.QueryOptions) API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst);
 
-VS_EXPORT API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macCatalyst)
+VS_EXPORT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst)
 @interface VSUserAccountManager : NSObject
 
 @property (nonatomic, readonly, class) VSUserAccountManager *sharedUserAccountManager;

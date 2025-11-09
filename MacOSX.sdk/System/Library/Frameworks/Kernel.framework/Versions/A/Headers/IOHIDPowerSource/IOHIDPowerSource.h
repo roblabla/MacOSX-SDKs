@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Apple Inc. All rights reserved.
+ * Copyright (C) 2021-2022 Apple Inc. All rights reserved.
  *
  * This document is the property of Apple Inc.
  * It is considered confidential and proprietary.
@@ -11,6 +11,7 @@
 #pragma once
 
 #include <IOKit/IOService.h>
+#include <AppleCallbackPowerSource/AppleCallbackPowerSourceProvider.hpp>
 
 class IOHIDTranslationService;
 
@@ -19,7 +20,7 @@ class IOHIDPowerSourceClient;
 /*! @class IOHIDPowerSource
     @abstract Power source interface
  */
-class IOHIDPowerSource: public IOService
+class IOHIDPowerSource: public AppleCallbackPowerSourceProvider
 {
     OSDeclareDefaultStructors(IOHIDPowerSource)
  
@@ -166,7 +167,7 @@ public:
      * @result   true if  succeed, false otherwise
      *
      */
-    virtual bool open (IOService *forClient, PowerSourceEventHandler handler, uint32_t options);
+    virtual bool open (IOService *forClient, PowerSourceEventHandler handler, uint32_t options) APPLE_KEXT_OVERRIDE;
 
     /*!
      * @function start

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2EC1AAB5-3AE6-32E7-ADA1-3A0CC7E9113F
-  - target:          x86_64-maccatalyst
-    value:           2EC1AAB5-3AE6-32E7-ADA1-3A0CC7E9113F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E1BD6D76-3A7F-34FB-825F-426E998BEA73
-  - target:          arm64e-maccatalyst
-    value:           E1BD6D76-3A7F-34FB-825F-426E998BEA73
 install-name:    '/System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage'
-current-version: 339
+current-version: 339.100.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -11,6 +11,7 @@
 #import <AuthenticationServices/ASPasswordCredentialIdentity.h>
 #import <Foundation/Foundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
@@ -41,7 +42,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  @note When this method is called, your extension's view controller is not present on the screen. Do not attempt or expect to show any user
  interface in this method.
  */
-- (void)provideCredentialWithoutUserInteractionForIdentity:(ASPasswordCredentialIdentity *)credentialIdentity;
+- (void)provideCredentialWithoutUserInteractionForIdentity:(ASPasswordCredentialIdentity *)credentialIdentity
+    ;
+
 
 /*! @abstract Prepare the view controller to show user interface for providing the user-requested credential.
  @param credentialIdentity the credential identity for which a credential should be provided.
@@ -54,7 +57,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  ASExtensionErrorDomain and an appropriate error code from ASExtensionErrorCode. For example, if the credential identity cannot
  be found in the database, pass an error with code ASExtensionErrorCodeCredentialIdentityNotFound.
  */
-- (void)prepareInterfaceToProvideCredentialForIdentity:(ASPasswordCredentialIdentity *)credentialIdentity;
+- (void)prepareInterfaceToProvideCredentialForIdentity:(ASPasswordCredentialIdentity *)credentialIdentity
+    ;
+
 
 
 /*! @abstract Prepare the view controller to show user interface when the user enables your extension.
@@ -65,6 +70,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  "ASCredentialProviderExtensionShowsConfigurationUI": YES in its extension attributes.
  */
 - (void)prepareInterfaceForExtensionConfiguration;
+
 
 @end
 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4E4727CA-DC78-3460-817C-791E38E27701
-  - target:          x86_64-maccatalyst
-    value:           4E4727CA-DC78-3460-817C-791E38E27701
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           228BA7E1-3C50-3CFA-A047-519583915DA6
-  - target:          arm64e-maccatalyst
-    value:           228BA7E1-3C50-3CFA-A047-519583915DA6
 install-name:    '/usr/lib/libapp_launch_measurement.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

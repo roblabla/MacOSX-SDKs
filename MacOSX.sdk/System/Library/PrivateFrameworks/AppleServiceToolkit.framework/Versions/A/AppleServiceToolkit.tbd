@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2BC18980-75DF-303E-8B3E-3927D38E4FBA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3A6CA135-1EA3-3D6D-8F4A-43B4719FBB21
 install-name:    '/System/Library/PrivateFrameworks/AppleServiceToolkit.framework/Versions/A/AppleServiceToolkit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

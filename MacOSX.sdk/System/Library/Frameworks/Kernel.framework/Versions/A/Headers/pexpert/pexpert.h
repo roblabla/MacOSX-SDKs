@@ -95,9 +95,6 @@ extern int32_t gPESerialBaud;
 extern uint8_t gPlatformECID[8];
 
 extern uint32_t gPlatformMemoryID;
-#if defined(XNU_TARGET_OS_XR)
-extern uint32_t gPlatformChipRole;
-#endif /* not XNU_TARGET_OS_XR */
 
 unsigned int PE_init_taproot(vm_offset_t *taddr);
 

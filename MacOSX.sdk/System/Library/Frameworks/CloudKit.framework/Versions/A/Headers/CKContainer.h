@@ -13,7 +13,7 @@
 
 @class CKRecordID, CKUserIdentity, CKShareParticipant, CKShare, CKShareMetadata;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! Stand-in for the current user's ID; most often used in RecordZoneID->ownerName */
 CK_EXTERN NSString * const CKCurrentUserDefaultName API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
@@ -30,6 +30,7 @@ CK_EXTERN NSString * const CKOwnerDefaultName API_DEPRECATED_WITH_REPLACEMENT("C
  *  Each of these handlers and blocks is invoked on a non-main serial queue.  The receiver is responsible for handling the message on a different queue or thread if it is required.
  */
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
+NS_SWIFT_SENDABLE
 @interface CKContainer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -110,7 +111,7 @@ CK_EXTERN NSString * const CKAccountChangedNotification API_AVAILABLE(macos(10.1
 
 @interface CKContainer (AccountStatus)
 
-- (void)accountStatusWithCompletionHandler:(void (^)(CKAccountStatus accountStatus, NSError * _Nullable error))completionHandler;
+- (void)accountStatusWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(CKAccountStatus accountStatus, NSError * _Nullable error))completionHandler;
 
 @end
 
@@ -136,8 +137,8 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
 
 @interface CKContainer (ApplicationPermission)
 
-- (void)statusForApplicationPermission:(CKApplicationPermissions)applicationPermission completionHandler:(CKApplicationPermissionBlock)completionHandler NS_SWIFT_ASYNC_NAME(applicationPermissionStatus(for:));
-- (void)requestApplicationPermission:(CKApplicationPermissions)applicationPermission completionHandler:(CKApplicationPermissionBlock)completionHandler;
+- (void)statusForApplicationPermission:(CKApplicationPermissions)applicationPermission completionHandler:(NS_SWIFT_SENDABLE CKApplicationPermissionBlock)completionHandler NS_SWIFT_ASYNC_NAME(applicationPermissionStatus(for:));
+- (void)requestApplicationPermission:(CKApplicationPermissions)applicationPermission completionHandler:(NS_SWIFT_SENDABLE CKApplicationPermissionBlock)completionHandler;
 
 @end
 
@@ -147,31 +148,31 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
  *
  *  This work is treated as having @c NSQualityOfServiceUserInitiated quality of service.
  */
-- (void)fetchUserRecordIDWithCompletionHandler:(void (^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(userRecordID());
+- (void)fetchUserRecordIDWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(userRecordID());
 
 /*! @abstract Fetches all user identities that match an entry in the user's contacts database.
  *
  *  @discussion @c CKDiscoverAllUserIdentitiesOperation is the more configurable, @c CKOperation -based alternative to this methods
  */
-- (void)discoverAllIdentitiesWithCompletionHandler:(void (^)(NSArray<CKUserIdentity *> * _Nullable userIdentities, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_ASYNC_NAME(allUserIdentitiesFromContacts());
+- (void)discoverAllIdentitiesWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKUserIdentity *> * _Nullable userIdentities, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_ASYNC_NAME(allUserIdentitiesFromContacts());
 
 /*! @abstract Fetches the user identity that corresponds to the given email address.
  *
  *  @discussion Only users who have opted-in to user discoverability will have their identities returned by this method.  If a user with the inputted email exists in iCloud, but has not opted-in to user discoverability, this method completes with a nil @c userInfo.  @c CKDiscoverUserIdentitiesOperation is the more configurable, @c CKOperation -based alternative to this method
  */
-- (void)discoverUserIdentityWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forEmailAddress:));
+- (void)discoverUserIdentityWithEmailAddress:(NSString *)email completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forEmailAddress:));
 
 /*! @abstract Fetches the user identity that corresponds to the given phone number.
  *
  *  @discussion Only users who have opted-in to user discoverability will have their identities returned by this method.  If a user with the inputted phone number exists in iCloud, but has not opted-in to user discoverability, this method completes with a nil @c userInfo.  @c CKDiscoverUserIdentitiesOperation is the more configurable, @c CKOperation -based alternative to this method
  */
-- (void)discoverUserIdentityWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forPhoneNumber:));
+- (void)discoverUserIdentityWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forPhoneNumber:));
 
 /*! @abstract Fetches the user identity that corresponds to the given user record id.
  *
  *  @discussion Only users who have opted-in to user discoverability will have their identities returned by this method.  If a user has not opted-in to user discoverability, this method completes with a nil @c userInfo.  @c CKDiscoverUserIdentitiesOperation is the more configurable, @c CKOperation -based alternative to this method
  */
-- (void)discoverUserIdentityWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forUserRecordID:));
+- (void)discoverUserIdentityWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKUserIdentity * _Nullable_result userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(userIdentity(forUserRecordID:));
 
 @end
 
@@ -181,12 +182,12 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
  *
  *  @discussion @c CKFetchShareParticipantsOperation is the more configurable, @c CKOperation -based alternative to these methods.
  */
-- (void)fetchShareParticipantWithEmailAddress:(NSString *)emailAddress completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forEmailAddress:));
-- (void)fetchShareParticipantWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forPhoneNumber:));
-- (void)fetchShareParticipantWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKShareParticipant *_Nullable shareParticipant, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forUserRecordID:));
+- (void)fetchShareParticipantWithEmailAddress:(NSString *)emailAddress completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKShareParticipant * _Nullable shareParticipant, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forEmailAddress:));
+- (void)fetchShareParticipantWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKShareParticipant * _Nullable shareParticipant, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forPhoneNumber:));
+- (void)fetchShareParticipantWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKShareParticipant *_Nullable shareParticipant, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareParticipant(forUserRecordID:));
 
-- (void)fetchShareMetadataWithURL:(NSURL *)url completionHandler:(void (^)(CKShareMetadata *_Nullable metadata, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareMetadata(for:));
-- (void)acceptShareMetadata:(CKShareMetadata *)metadata completionHandler:(void (^)(CKShare *_Nullable acceptedShare, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+- (void)fetchShareMetadataWithURL:(NSURL *)url completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKShareMetadata *_Nullable metadata, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_SWIFT_ASYNC_NAME(shareMetadata(for:));
+- (void)acceptShareMetadata:(CKShareMetadata *)metadata completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKShare *_Nullable acceptedShare, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 @end
 
@@ -196,8 +197,8 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
  *  If an operation has already completed against the server, and is subsequently resumed, that operation will replay all of its callbacks from the start of the operation, but the request will not be re-sent to the server.
  *  If a long lived operation is cancelled or finishes completely it is no longer returned by these calls.
  */
-- (void)fetchAllLongLivedOperationIDsWithCompletionHandler:(void (^)(NSArray<CKOperationID> * _Nullable outstandingOperationIDs, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0)) NS_REFINED_FOR_SWIFT_ASYNC(1);
-- (void)fetchLongLivedOperationWithID:(CKOperationID)operationID completionHandler:(void (^)(CKOperation * _Nullable_result outstandingOperation, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
+- (void)fetchAllLongLivedOperationIDsWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKOperationID> * _Nullable outstandingOperationIDs, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0)) NS_REFINED_FOR_SWIFT_ASYNC(1);
+- (void)fetchLongLivedOperationWithID:(CKOperationID)operationID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKOperation * _Nullable_result outstandingOperation, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

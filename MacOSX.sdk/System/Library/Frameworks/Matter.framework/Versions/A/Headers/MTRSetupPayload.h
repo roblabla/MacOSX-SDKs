@@ -1,6 +1,6 @@
 /**
  *
- *    Copyright (c) 2020 Project CHIP Authors
+ *    Copyright (c) 2020-2023 Project CHIP Authors
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,8 +19,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, MTRDiscoveryCapabilities) {
-    MTRDiscoveryCapabilitiesNone = 0, // Device does not support any method for rendezvous
+typedef NS_OPTIONS(NSUInteger, MTRDiscoveryCapabilities) {
+    MTRDiscoveryCapabilitiesUnknown = 0, // Device capabilities are not known (e.g. all we have is a numeric code).
+    MTRDiscoveryCapabilitiesNone API_DEPRECATED_WITH_REPLACEMENT(
+        "MTRDiscoveryCapabilitiesUnknown", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+    = 0,
     MTRDiscoveryCapabilitiesSoftAP = 1 << 0, // Device supports WiFi softAP
     MTRDiscoveryCapabilitiesBLE = 1 << 1, // Device supports BLE
     MTRDiscoveryCapabilitiesOnNetwork = 1 << 2, // Device supports On Network setup
@@ -30,46 +33,74 @@ typedef NS_ENUM(NSUInteger, MTRDiscoveryCapabilities) {
 };
 
 typedef NS_ENUM(NSUInteger, MTRCommissioningFlow) {
-    MTRCommissioningFlowStandard = 0, // Device automatically enters pairing mode upon power-up
-    MTRCommissioningFlowUserActionRequired = 1, // Device requires a user interaction to enter pairing mode
+    MTRCommissioningFlowStandard = 0, // Device automatically enters commissioning mode upon power-up
+    MTRCommissioningFlowUserActionRequired = 1, // Device requires a user interaction to enter commissioning mode
     MTRCommissioningFlowCustom = 2, // Commissioning steps should be retrieved from the distributed compliance ledger
     MTRCommissioningFlowInvalid = 3,
 };
 
 typedef NS_ENUM(NSUInteger, MTROptionalQRCodeInfoType) {
-    MTROptionalQRCodeInfoTypeUnknown,
+    MTROptionalQRCodeInfoTypeUnknown API_DEPRECATED(
+        "The type is never actually unknown", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)),
     MTROptionalQRCodeInfoTypeString,
-    MTROptionalQRCodeInfoTypeInt32
+    MTROptionalQRCodeInfoTypeInt32,
 };
 
+/**
+ * An optional information item present in the QR code the setup payload was
+ * initialized from.
+ */
 @interface MTROptionalQRCodeInfo : NSObject
-@property (nonatomic, copy) NSNumber * infoType;
+
+@property (nonatomic, assign) MTROptionalQRCodeInfoType type API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * The numeric value of the TLV tag for this information item.
+ */
 @property (nonatomic, copy) NSNumber * tag;
-// Exactly one of integerValue and stringValue will be non-nil, depending on the
-// the value of "infoType".
+
+/**
+ * Exactly one of integerValue and stringValue will be non-nil, depending on the
+ * the value of "type".
+ */
 @property (nonatomic, copy, nullable) NSNumber * integerValue;
 @property (nonatomic, copy, nullable) NSString * stringValue;
+
 @end
 
+/**
+ * A setup payload that can be created from a numeric code or QR code and
+ * serialized to a numeric code or QR code, though serializing to QR code after
+ * creating from numeric code will not work, because some required information
+ * will be missing.
+ */
 @interface MTRSetupPayload : NSObject <NSSecureCoding>
 
 @property (nonatomic, copy) NSNumber * version;
 @property (nonatomic, copy) NSNumber * vendorID;
 @property (nonatomic, copy) NSNumber * productID;
 @property (nonatomic, assign) MTRCommissioningFlow commissioningFlow;
+
 /**
- * rendezvousInformation is nil when the discovery capabilities bitmask is
- * unknown.
- *
- * Otherwise its value is made up of the MTRDiscoveryCapabilities flags.
+ * The value of discoveryCapabilities is made up of the various
+ * MTRDiscoveryCapabilities flags.  If the discovery capabilities are not known,
+ * this will be set to MTRDiscoveryCapabilitiesUnknown.
  */
-@property (nonatomic, copy, nullable) NSNumber * rendezvousInformation;
+@property (nonatomic, assign)
+    MTRDiscoveryCapabilities discoveryCapabilities API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 @property (nonatomic, copy) NSNumber * discriminator;
+
+/**
+ * If hasShortDiscriminator is true, the discriminator value contains just the
+ * high 4 bits of the full discriminator.  For example, if
+ * hasShortDiscriminator is true and discriminator is 0xA, then the full
+ * discriminator can be anything in the range 0xA00 t0 0xAFF.
+ */
 @property (nonatomic, assign) BOOL hasShortDiscriminator;
-@property (nonatomic, copy) NSNumber * setUpPINCode;
+@property (nonatomic, copy) NSNumber * setupPasscode API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 @property (nonatomic, copy, nullable) NSString * serialNumber;
-- (nullable NSArray<MTROptionalQRCodeInfo *> *)getAllOptionalVendorData:(NSError * __autoreleasing *)error;
+- (NSArray<MTROptionalQRCodeInfo *> * _Nullable)getAllOptionalVendorData:(NSError * __autoreleasing *)error;
 
 /**
  * Generate a random Matter-valid setup PIN.
@@ -98,7 +129,7 @@ typedef NS_ENUM(NSUInteger, MTROptionalQRCodeInfoType) {
                         discriminator:(NSNumber *)discriminator API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
 
 /** Get 11 digit manual entry code from the setup payload. */
-- (nullable NSString *)manualEntryCode;
+- (NSString * _Nullable)manualEntryCode;
 
 /**
  * Get a QR code from the setup payload.
@@ -108,6 +139,27 @@ typedef NS_ENUM(NSUInteger, MTROptionalQRCodeInfoType) {
  */
 - (NSString * _Nullable)qrCodeString:(NSError * __autoreleasing *)error
     API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
+
+@end
+
+@interface MTROptionalQRCodeInfo (Deprecated)
+
+@property (nonatomic, copy)
+    NSNumber * infoType API_DEPRECATED("Please use type", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+@end
+
+@interface MTRSetupPayload (Deprecated)
+
+@property (nonatomic, copy, nullable) NSNumber * rendezvousInformation API_DEPRECATED(
+    "Please use discoveryCapabilities", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+@property (nonatomic, copy) NSNumber * setUpPINCode API_DEPRECATED(
+    "Please use setupPasscode", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (instancetype)init API_DEPRECATED("Please use initWithSetupPasscode or setupPayloadWithOnboardingPayload", ios(16.1, 16.4),
+    macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
++ (instancetype)new API_DEPRECATED("Please use initWithSetupPasscode or setupPayloadWithOnboardingPayload", ios(16.1, 16.4),
+    macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 @end
 

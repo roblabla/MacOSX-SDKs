@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Dispatch
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 17
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Dispatch
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 20
 import Combine
 @_exported import Dispatch
 import Swift
@@ -255,18 +255,18 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias RawValue = Swift.UInt
   }
-  public class func makeMachSendSource(port: Darwin.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceMachSend
-  public class func makeMachReceiveSource(port: Darwin.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceMachReceive
-  public class func makeMemoryPressureSource(eventMask: Dispatch.DispatchSource.MemoryPressureEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceMemoryPressure
-  public class func makeProcessSource(identifier: Darwin.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceProcess
-  public class func makeReadSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceRead
-  public class func makeSignalSource(signal: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceSignal
-  public class func makeTimerSource(flags: Dispatch.DispatchSource.TimerFlags = [], queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceTimer
-  public class func makeUserDataAddSource(queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceUserDataAdd
-  public class func makeUserDataOrSource(queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceUserDataOr
-  public class func makeUserDataReplaceSource(queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceUserDataReplace
-  public class func makeFileSystemObjectSource(fileDescriptor: Swift.Int32, eventMask: Dispatch.DispatchSource.FileSystemEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceFileSystemObject
-  public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceWrite
+  public class func makeMachSendSource(port: Darwin.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
+  public class func makeMachReceiveSource(port: Darwin.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
+  public class func makeMemoryPressureSource(eventMask: Dispatch.DispatchSource.MemoryPressureEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMemoryPressure
+  public class func makeProcessSource(identifier: Darwin.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceProcess
+  public class func makeReadSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceRead
+  public class func makeSignalSource(signal: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceSignal
+  public class func makeTimerSource(flags: Dispatch.DispatchSource.TimerFlags = [], queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceTimer
+  public class func makeUserDataAddSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataAdd
+  public class func makeUserDataOrSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataOr
+  public class func makeUserDataReplaceSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataReplace
+  public class func makeFileSystemObjectSource(fileDescriptor: Swift.Int32, eventMask: Dispatch.DispatchSource.FileSystemEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceFileSystemObject
+  public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceWrite
 }
 extension Dispatch.DispatchSourceMachSend {
   public var handle: Darwin.mach_port_t {
@@ -394,8 +394,8 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
   public struct SchedulerTimeType : Swift.Strideable, Swift.Codable, Swift.Hashable {
     public var dispatchTime: Dispatch.DispatchTime
     public init(_ time: Dispatch.DispatchTime)
-    public init(from decoder: Swift.Decoder) throws
-    public func encode(to encoder: Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public func distance(to other: Dispatch.DispatchQueue.SchedulerTimeType) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
     public func advanced(by n: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Dispatch.DispatchQueue.SchedulerTimeType
     public func hash(into hasher: inout Swift.Hasher)
@@ -431,11 +431,11 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
       public static func nanoseconds(_ ns: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Dispatch.DispatchQueue.SchedulerTimeType.Stride, b: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public init(from decoder: Swift.Decoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public var hashValue: Swift.Int {
       get
@@ -455,7 +455,7 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
   }
   public func schedule(options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
   public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
-  public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, interval: Dispatch.DispatchQueue.SchedulerTimeType.Stride, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> Combine.Cancellable
+  public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, interval: Dispatch.DispatchQueue.SchedulerTimeType.Stride, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
 }
 public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable {
   public let rawValue: Swift.UInt

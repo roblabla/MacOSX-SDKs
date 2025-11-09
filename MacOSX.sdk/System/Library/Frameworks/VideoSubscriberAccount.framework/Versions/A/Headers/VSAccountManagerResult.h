@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst)
 @interface VSAccountManagerResult : NSObject
 
-- (instancetype)init NS_UNAVAILABLE;
+VS_INIT_UNAVAILABLE
 
 /// Advise the account manager that the app no longer needs the requested work to be done.
 - (void)cancel;

@@ -2,26 +2,27 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7B7A83C3-383B-39D3-9925-BC1EDDC23B96
-  - target:          x86_64-maccatalyst
-    value:           7B7A83C3-383B-39D3-9925-BC1EDDC23B96
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B30C74EF-7D6E-3BB8-8C72-FC0CE73E3F22
-  - target:          arm64e-maccatalyst
-    value:           B30C74EF-7D6E-3BB8-8C72-FC0CE73E3F22
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 20.10.11
+current-version: 20.30.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s16PreviewsServices0A17ServiceConnectionC0C0O11processExityA2EmFWC', 
+    symbols:         [ '_$s16PreviewsServices09HostToSimA7ServiceO04machF4NameSSvg', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO04machF4NameSSvpMV', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO11descriptionSSvg', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO11descriptionSSvpMV', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO2eeoiySbAC_ACtFZ', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO4hash4intoys6HasherVz_tF', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO7previewyA2CmFWC', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO9agentPipeyA2CmFWC', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO9hashValueSivg', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceO9hashValueSivpMV', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceOMa', '_$s16PreviewsServices09HostToSimA7ServiceOMn', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceON', '_$s16PreviewsServices09HostToSimA7ServiceOSHAAMc', 
+                       '_$s16PreviewsServices09HostToSimA7ServiceOSQAAMc', '_$s16PreviewsServices09HostToSimA7ServiceOs23CustomStringConvertibleAAMc', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC09hostToSimD0ACSo13OS_xpc_object_p_tcfC', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC0C0O11processExityA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O13crashListeneryA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7installyA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7previewyA2EmFWC', 
@@ -46,12 +47,16 @@ exports:
                        '_$s16PreviewsServices0A17ServiceConnectionC4send7message12replyHandlerySo14UVPropertyListC_yAHSg_s5Error_pSgtctF', 
                        '_$s16PreviewsServices0A17ServiceConnectionC4send7messageySo14UVPropertyListC_tF', 
                        '_$s16PreviewsServices0A17ServiceConnectionC7serviceA2C0C0O_tcfC', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeC0C0O_tcfC', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeC0C0O_tcfCTj', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeC0C0O_tcfCTq', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeC0C0O_tcfc', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC7serviceAcA0aC0O_tcfC', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfC', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfCTj', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfCTq', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfc', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfC', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfCTj', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfCTq', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfc', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC8activate7handleryyACc_tF', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC8listener_015shouldAcceptNewD0SbSo13NSXPCListenerC_So15NSXPCConnectionCtF', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCAEycfC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCAEycfc', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCMa', 
@@ -71,11 +76,33 @@ exports:
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7message12replyHandlerySo14UVPropertyListC_yAHSg_s5Error_pSgtctFTq', 
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7messageySo14UVPropertyListC_tFTj', 
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7messageySo14UVPropertyListC_tFTq', 
-                       '_$s16PreviewsServices0A22ServiceMessageReceiverTL', '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV9subsystemSSvgZ', 
+                       '_$s16PreviewsServices0A22ServiceMessageReceiverTL', '_$s16PreviewsServices0A7ServiceO11descriptionSSvg', 
+                       '_$s16PreviewsServices0A7ServiceO11descriptionSSvpMV', '_$s16PreviewsServices0A7ServiceO11processExityA2CmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO13crashListeneryA2CmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO2eeoiySbAE_AEtFZ', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO3macyA2EmFWC', '_$s16PreviewsServices0A7ServiceO7VariantO4hash4intoys6HasherVz_tF', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO7defaultyA2EmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO9hashValueSivg', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO9hashValueSivpMV', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantOMa', '_$s16PreviewsServices0A7ServiceO7VariantOMn', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantON', '_$s16PreviewsServices0A7ServiceO7VariantOSHAAMc', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantOSQAAMc', '_$s16PreviewsServices0A7ServiceO7installyA2C7VariantO_tcACmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO7previewyA2C7VariantO_tcACmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO9agentPipeyA2C7VariantO_tcACmFWC', 
+                       '_$s16PreviewsServices0A7ServiceOMa', '_$s16PreviewsServices0A7ServiceOMn', 
+                       '_$s16PreviewsServices0A7ServiceON', '_$s16PreviewsServices0A7ServiceOs23CustomStringConvertibleAAMc', 
+                       '_$s2os6LoggerV16PreviewsServicesE4uvOSACvgZ', '_$s2os6LoggerV16PreviewsServicesE6libxpcACvgZ', 
+                       '_$s2os6LoggerV16PreviewsServicesE8servicesACvgZ', '_$sSo9OS_os_logC16PreviewsServicesE02uvA0ABvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV2uvSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV6libxpcSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVMa', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVMn', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVN', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV9subsystemSSvgZ', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMa', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMn', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVN', 
                        '_$sSo9OS_os_logC16PreviewsServicesE8servicesABvgZ', _PreviewsServicesVersionNumber, 
-                       _PreviewsServicesVersionString, _UVPreviewsServicesLog ]
-    objc-classes:    [ UVPropertyList, _TtCC16PreviewsServices25PreviewsServiceConnection8Listener ]
+                       _PreviewsServicesVersionString, _UVLog ]
+    objc-classes:    [ UVPropertyList, UVRawXPCCoder, UVRawXPCDecoder, _TtCC16PreviewsServices25PreviewsServiceConnection8Listener ]
 ...

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E8DDFCDD-305D-3206-A3AB-A6A79D6E5C01
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BC645597-858C-3945-B5AC-4BB74E16E1A1
 install-name:    '/System/Library/PrivateFrameworks/Geode.framework/Versions/A/Geode'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGPointOffset, _CGPointScale, _CGRectFlipInRect, _CGRectGrowInRect, 

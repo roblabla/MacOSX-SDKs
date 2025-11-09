@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E51FEDF8-F9E0-33CA-B4B1-AF3ECEA2C08A
-  - target:          x86_64-maccatalyst
-    value:           E51FEDF8-F9E0-33CA-B4B1-AF3ECEA2C08A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           21EA331C-26D2-3D46-B032-2A68A6806A60
-  - target:          arm64e-maccatalyst
-    value:           21EA331C-26D2-3D46-B032-2A68A6806A60
 install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

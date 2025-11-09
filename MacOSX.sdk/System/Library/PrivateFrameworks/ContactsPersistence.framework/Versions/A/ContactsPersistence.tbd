@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4AA37EFE-6193-3939-BB66-03265E8E1362
-  - target:          x86_64-maccatalyst
-    value:           4AA37EFE-6193-3939-BB66-03265E8E1362
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ADE442EE-4598-307E-89B1-B0A06537A2AB
-  - target:          arm64e-maccatalyst
-    value:           ADE442EE-4598-307E-89B1-B0A06537A2AB
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
@@ -188,8 +175,8 @@ exports:
                        _CNEWSMappingKeyItemId, _CNFilenameContactsDatabase, _CNFilenameExchangeSyncDatabase, 
                        _CNLocalAccountIdentifier, _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
                        _kABAlertToneRelationshipName, _kABAlternateBirthdayRelationshipName, 
-                       _kABCDContactAddressingGrammarKey, _kABCDContactBirthdayComponentsKey, 
-                       _kABCDContactBirthdayKey, _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
+                       _kABCDContactBirthdayComponentsKey, _kABCDContactBirthdayKey, 
+                       _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
                        _kABCDContactCropRectHashKey, _kABCDContactCropRectIDKey, 
                        _kABCDContactCropRectKey, _kABCDContactDepartmentKey, _kABCDContactFirstNameKey, 
                        _kABCDContactIOSLegacyIdentifier, _kABCDContactIdentitityUniqueIdKey, 

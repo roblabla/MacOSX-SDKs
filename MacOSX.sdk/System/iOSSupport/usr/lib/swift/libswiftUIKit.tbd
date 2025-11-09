@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           A589BDAA-D4A9-385B-A39B-9DBC181939D7
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           E05FF38F-522C-34AB-82F6-4896370754D3
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib'
-current-version: 6209.1.255
+current-version: 6441
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -920,6 +913,14 @@ exports:
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV11maximumSizeSo6CGSizeVvg', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV11maximumSizeSo6CGSizeVvpMV', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV11maximumSizeSo6CGSizeVvs', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeColorSo7UIColorCSgvM', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeColorSo7UIColorCSgvg', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeColorSo7UIColorCSgvpMV', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeColorSo7UIColorCSgvs', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeWidth12CoreGraphics7CGFloatVvM', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeWidth12CoreGraphics7CGFloatVvg', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeWidth12CoreGraphics7CGFloatVvpMV', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12_strokeWidth12CoreGraphics7CGFloatVvs', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12cornerRadius12CoreGraphics7CGFloatVvM', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12cornerRadius12CoreGraphics7CGFloatVvg', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV12cornerRadius12CoreGraphics7CGFloatVvpMV', 
@@ -934,10 +935,15 @@ exports:
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV18reservedLayoutSizeSo6CGSizeVvg', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV18reservedLayoutSizeSo6CGSizeVvpMV', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV18reservedLayoutSizeSo6CGSizeVvs', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV20_resolvedStrokeColor3forSo7UIColorCAI_tF', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV20tintColorTransformerAA015UIConfigurationhI0VSgvM', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV20tintColorTransformerAA015UIConfigurationhI0VSgvg', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV20tintColorTransformerAA015UIConfigurationhI0VSgvpMV', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV20tintColorTransformerAA015UIConfigurationhI0VSgvs', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV23_strokeColorTransformerAA015UIConfigurationhI0VSgvM', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV23_strokeColorTransformerAA015UIConfigurationhI0VSgvg', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV23_strokeColorTransformerAA015UIConfigurationhI0VSgvpMV', 
+                       '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV23_strokeColorTransformerAA015UIConfigurationhI0VSgvs', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV2eeoiySbAE_AEtFZ', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV32accessibilityIgnoresInvertColorsSbvM', 
                        '_$s5UIKit26UIListContentConfigurationV15ImagePropertiesV32accessibilityIgnoresInvertColorsSbvg', 
@@ -1645,6 +1651,16 @@ exports:
                        '_$sSo16UINavigationItemC5UIKitE14renameDelegateAC0ab6RenameE0_pSgvg', 
                        '_$sSo16UINavigationItemC5UIKitE14renameDelegateAC0ab6RenameE0_pSgvpMV', 
                        '_$sSo16UINavigationItemC5UIKitE14renameDelegateAC0ab6RenameE0_pSgvs', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV12wrappedValueAEy_xGx_tcfC', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV12wrappedValuexvM', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV12wrappedValuexvg', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV12wrappedValuexvpMV', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV12wrappedValuexvs', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luiMZ', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luigZ', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luisZ', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingVAEy_xGycfC', 
+                       '_$sSo16UIViewControllerC5UIKitE11ViewLoadingVMa', '_$sSo16UIViewControllerC5UIKitE11ViewLoadingVMn', 
                        '_$sSo16UIViewControllerC5UIKitE20setContentScrollViewyySo08UIScrollG0CSgF', 
                        '_$sSo17UIDragDropSessionP5UIKitE14canLoadObjects7ofClassSbqd__m_ts21_ObjectiveCBridgeableRd__So21NSItemProviderReading01_J5CTypeRpd__lF', 
                        '_$sSo17UIListContentViewC5UIKit09UIContentC0ACMc', '_$sSo17UIListContentViewC5UIKit09UIContentC0ACWP', 

@@ -560,6 +560,24 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 /*!
+ *  @abstract   Create reinterpret cast op and return the result tensor
+ *  @discussion Returns input tensor (with element type `tensor_type`)  reinterpreted to element type `type`
+ *              passed in with the last dimension scaled by `sizeof(tensor_type) / sizeof(type)`.
+ *              This operation is endianness agnostic and data will be reinterpreted with the endianness of the
+ *              system.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      type        The element type of the returned tensor.
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+- (MPSGraphTensor *)reinterpretCastTensor:(MPSGraphTensor *)tensor
+                                   toType:(MPSDataType)type
+                                     name:(NSString *_Nullable)name
+MPS_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3));
+
+/*!
  *  @abstract   Create stack op and return the result
  *  @discussion Stacks all input tensors along `axis` into a result tensor of rank + 1. Tensors must be broadcast
  *              compatible along all dimensions, and have the same type.

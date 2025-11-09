@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1462D4A9-0D94-3DAC-9100-FB5EDA3BEEF3
-  - target:          x86_64-maccatalyst
-    value:           1462D4A9-0D94-3DAC-9100-FB5EDA3BEEF3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C4385FC7-FF0C-37A9-A5CC-85016B13C6EA
-  - target:          arm64e-maccatalyst
-    value:           C4385FC7-FF0C-37A9-A5CC-85016B13C6EA
 install-name:    '/System/Library/Frameworks/GroupActivities.framework/Versions/A/GroupActivities'
 swift-abi-version: 7
 exports:
@@ -105,9 +92,9 @@ exports:
                        '_$s15GroupActivities010BackgroundA14SessionManagerC20pluginClientReporter14CopresenceCore06PlugingH0CSgvg', 
                        '_$s15GroupActivities010BackgroundA14SessionManagerC20pluginClientReporter14CopresenceCore06PlugingH0CSgvgTq', 
                        '_$s15GroupActivities010BackgroundA14SessionManagerC20pluginClientReporter14CopresenceCore06PlugingH0CSgvpMV', 
-                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivationAA0a8ActivityH6ResultOyYaF', 
-                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivationAA0a8ActivityH6ResultOyYaFTq', 
-                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivationAA0a8ActivityH6ResultOyYaFTu', 
+                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaF', 
+                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTq', 
+                       '_$s15GroupActivities010BackgroundA14SessionManagerC20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTu', 
                        '_$s15GroupActivities010BackgroundA14SessionManagerC22groupSessionsPublisher7Combine03AnyH0VySayAA0aD0CyAA0jA8ActivityVGGs5NeverOGvg', 
                        '_$s15GroupActivities010BackgroundA14SessionManagerC22groupSessionsPublisher7Combine03AnyH0VySayAA0aD0CyAA0jA8ActivityVGGs5NeverOGvgTq', 
                        '_$s15GroupActivities010BackgroundA14SessionManagerC22groupSessionsPublisher7Combine03AnyH0VySayAA0aD0CyAA0jA8ActivityVGGs5NeverOGvpMV', 
@@ -334,9 +321,9 @@ exports:
                        '_$s15GroupActivities08InternalA15SessionProviderP12topicManagerAA05TopicG0CvgTq', 
                        '_$s15GroupActivities08InternalA15SessionProviderP13groupSessionsSayAA0aD0CyAA03AnyA8ActivityVGGvgTj', 
                        '_$s15GroupActivities08InternalA15SessionProviderP13groupSessionsSayAA0aD0CyAA03AnyA8ActivityVGGvgTq', 
-                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivationAA0a8ActivityH6ResultOyYaFTj', 
-                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivationAA0a8ActivityH6ResultOyYaFTjTu', 
-                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivationAA0a8ActivityH6ResultOyYaFTq', 
+                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTj', 
+                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTjTu', 
+                       '_$s15GroupActivities08InternalA15SessionProviderP20prepareForActivation7optionsAA0a8ActivityH6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTq', 
                        '_$s15GroupActivities08InternalA15SessionProviderP22groupSessionsPublisher7Combine03AnyH0VySayAA0aD0CyAA0jA8ActivityVGGs5NeverOGvgTj', 
                        '_$s15GroupActivities08InternalA15SessionProviderP22groupSessionsPublisher7Combine03AnyH0VySayAA0aD0CyAA0jA8ActivityVGGs5NeverOGvgTq', 
                        '_$s15GroupActivities08InternalA15SessionProviderP3end8activityyAA03AnyA8ActivityV_tYaKFTj', 
@@ -1042,6 +1029,8 @@ exports:
                        '_$s15GroupActivities0A8ActivityPAAE18activityIdentifierSSvgZ', 
                        '_$s15GroupActivities0A8ActivityPAAE18awaitMetadataValue7Combine6FutureCyAA0acE0Vs5NeverOGyF', 
                        '_$s15GroupActivities0A8ActivityPAAE20prepareForActivation17completionHandleryyAA0acF6ResultOc_tF', 
+                       '_$s15GroupActivities0A8ActivityPAAE20prepareForActivation7optionsAA0acF6ResultOAA26AuthorizationPromptOptionsVSg_tYaF', 
+                       '_$s15GroupActivities0A8ActivityPAAE20prepareForActivation7optionsAA0acF6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTu', 
                        '_$s15GroupActivities0A8ActivityPAAE20prepareForActivationAA0acF6ResultOyYaF', 
                        '_$s15GroupActivities0A8ActivityPAAE20prepareForActivationAA0acF6ResultOyYaFTu', 
                        '_$s15GroupActivities0A8ActivityPAAE8activateSbyYaKF', '_$s15GroupActivities0A8ActivityPAAE8activateSbyYaKFTu', 
@@ -1747,9 +1736,9 @@ exports:
                        '_$s15GroupActivities19ConversationManagerC17groupSessionTableAA0afG0CvpMV', 
                        '_$s15GroupActivities19ConversationManagerC17groupSessionTableAA0afG0CvsTj', 
                        '_$s15GroupActivities19ConversationManagerC17groupSessionTableAA0afG0CvsTq', 
-                       '_$s15GroupActivities19ConversationManagerC20prepareForActivationAA0a8ActivityG6ResultOyYaFTj', 
-                       '_$s15GroupActivities19ConversationManagerC20prepareForActivationAA0a8ActivityG6ResultOyYaFTjTu', 
-                       '_$s15GroupActivities19ConversationManagerC20prepareForActivationAA0a8ActivityG6ResultOyYaFTq', 
+                       '_$s15GroupActivities19ConversationManagerC20prepareForActivation7optionsAA0a8ActivityG6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTj', 
+                       '_$s15GroupActivities19ConversationManagerC20prepareForActivation7optionsAA0a8ActivityG6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTjTu', 
+                       '_$s15GroupActivities19ConversationManagerC20prepareForActivation7optionsAA0a8ActivityG6ResultOAA26AuthorizationPromptOptionsVSg_tYaFTq', 
                        '_$s15GroupActivities19ConversationManagerC22conversationsPublisher7Combine03AnyF0VySayAA0C0CGs5NeverOGvMTj', 
                        '_$s15GroupActivities19ConversationManagerC22conversationsPublisher7Combine03AnyF0VySayAA0C0CGs5NeverOGvMTq', 
                        '_$s15GroupActivities19ConversationManagerC22conversationsPublisher7Combine03AnyF0VySayAA0C0CGs5NeverOGvgTj', 
@@ -2262,7 +2251,23 @@ exports:
                        '_$s15GroupActivities24SceneAssociationBehaviorVyACSo022TUConversationActivitycdE0CcfC', 
                        '_$s15GroupActivities25CustomMessageIdentifiableMp', '_$s15GroupActivities25CustomMessageIdentifiableP17messageIdentifierSSvgZTj', 
                        '_$s15GroupActivities25CustomMessageIdentifiableP17messageIdentifierSSvgZTq', 
-                       '_$s15GroupActivities25CustomMessageIdentifiableTL', '_$s15GroupActivities28AudioSessionAssertionManagerMp', 
+                       '_$s15GroupActivities25CustomMessageIdentifiableTL', '_$s15GroupActivities26AuthorizationPromptOptionsV06alwaysD0Sbvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV06alwaysD0SbvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV10startForMeSSSgvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV10startForMeSSSgvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV16startForEveryoneSSSgvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV16startForEveryoneSSSgvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV18confirmReplacementSbvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV18confirmReplacementSbvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV5title7message16startForEveryone0hI2Me06alwaysD018confirmReplacementACSSSg_A3JS2btcfC', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV5titleSSSgvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV5titleSSSgvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV7messageSSSgvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV7messageSSSgvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV9overrides14CopresenceCore0C16RequestOverridesCvg', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsV9overrides14CopresenceCore0C16RequestOverridesCvpMV', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsVMa', '_$s15GroupActivities26AuthorizationPromptOptionsVMn', 
+                       '_$s15GroupActivities26AuthorizationPromptOptionsVN', '_$s15GroupActivities28AudioSessionAssertionManagerMp', 
                        '_$s15GroupActivities28AudioSessionAssertionManagerP03addD02idy10Foundation4UUIDV_tFTj', 
                        '_$s15GroupActivities28AudioSessionAssertionManagerP03addD02idy10Foundation4UUIDV_tFTq', 
                        '_$s15GroupActivities28AudioSessionAssertionManagerP06removeD02idy10Foundation4UUIDV_tFTj', 
@@ -2542,8 +2547,6 @@ exports:
                        '_$ss17CodingUserInfoKeyV15GroupActivitiesE22typedPayloadDecoderMapABvau', 
                        '_$ss17CodingUserInfoKeyV15GroupActivitiesE22typedPayloadDecoderMapABvgZ', 
                        '_$ss17CodingUserInfoKeyV15GroupActivitiesE22typedPayloadDecoderMapABvpZ', 
-                       '_$ss26DefaultStringInterpolationV15GroupActivitiesE06appendC0yyxSglF', 
-                       '_OBJC_CLASS_$__TtC15GroupActivities11LinkManager', '_OBJC_CLASS_$__TtCC15GroupActivities14PlaybackSyncer27AVCoordinatorDelegateBridge', 
-                       '_OBJC_METACLASS_$__TtC15GroupActivities11LinkManager', '_OBJC_METACLASS_$__TtCC15GroupActivities14PlaybackSyncer27AVCoordinatorDelegateBridge' ]
+                       '_$ss26DefaultStringInterpolationV15GroupActivitiesE06appendC0yyxSglF' ]
     objc-classes:    [ _TtC15GroupActivities11LinkManager, _TtCC15GroupActivities14PlaybackSyncer27AVCoordinatorDelegateBridge ]
 ...

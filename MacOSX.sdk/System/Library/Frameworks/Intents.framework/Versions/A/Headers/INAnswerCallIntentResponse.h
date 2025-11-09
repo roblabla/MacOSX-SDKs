@@ -2,7 +2,7 @@
 //  INAnswerCallIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -35,7 +35,7 @@ API_UNAVAILABLE(tvos)
 @property (readonly, NS_NONATOMIC_IOSONLY) INAnswerCallIntentResponseCode code;
 
 // The call that was targeted, if found, otherwise empty. The call type should be in-progress or missed.
-@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INCallRecord *> *callRecords API_UNAVAILABLE(macos);
+@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INCallRecord *> *callRecords;
 
 @end
 

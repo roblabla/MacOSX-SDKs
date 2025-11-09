@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           95DDF190-8FD6-34BE-966F-75E8E2E0CFB5
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           62F3A7E1-4A06-3CB4-838D-D2EB7E758325
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_SwiftUI.framework/Versions/A/_AppIntents_SwiftUI'
-current-version: 130.100.5
+current-version: 136.100.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5F932C7C-AF22-33B5-8D05-1E4C780BBBFB
-  - target:          x86_64-maccatalyst
-    value:           5F932C7C-AF22-33B5-8D05-1E4C780BBBFB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4C0753B3-0220-3066-8B48-44A8260440DF
-  - target:          arm64e-maccatalyst
-    value:           4C0753B3-0220-3066-8B48-44A8260440DF
 install-name:    '/System/Library/PrivateFrameworks/UserManagement.framework/Versions/A/UserManagement'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

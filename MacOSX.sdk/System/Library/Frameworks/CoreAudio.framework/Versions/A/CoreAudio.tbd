@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           97A3CD09-7112-376C-9613-7F38D4CF8C41
-  - target:          x86_64-maccatalyst
-    value:           97A3CD09-7112-376C-9613-7F38D4CF8C41
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F48D3A38-B71E-36E6-AC64-3E614CF0B9B3
-  - target:          arm64e-maccatalyst
-    value:           F48D3A38-B71E-36E6-AC64-3E614CF0B9B3
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -317,13 +304,13 @@ exports:
                        __ZNK4AMCP6System14get_clock_listEv, __ZNK4AMCP6System15get_device_listEv, 
                        __ZNK4AMCP6System15get_driver_listEv, __ZNK4AMCP6System19get_io_context_listEv, 
                        __ZNK4AMCP6System31wait_for_notification_quiesenceEd, __ZNK4AMCP6System32create_ioc_graph_update_observerERKNSt3__14pairINS1_8functionIFNS2_INS_17Graph_DescriptionENS_25Modify_Graph_Destroy_ListEEEvEEENS3_IFvRKS4_EEEEE, 
-                       __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
-                       __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
+                       __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeEvEESE_SE_EEENS1_4lessIjEEvEEEEEEEE, 
+                       __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeEvEESE_SE_EEENS1_4lessIjEEvEEEEEEEE, 
                        __ZNK4AMCP6System35create_begin_config_change_observerERKNSt3__18functionIFvjEEE, 
-                       __ZNK4AMCP6System35create_begin_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
+                       __ZNK4AMCP6System35create_begin_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeEvEESE_SE_EEENS1_4lessIjEEvEEEEEEEE, 
                        __ZNK4AMCP6System35execute_task_against_config_changesERKNSt3__18functionIFvvEEE, 
                        __ZNK4AMCP6System38find_devices_to_stop_for_config_changeEj, 
-                       __ZNK4AMCP6System40create_continuing_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
+                       __ZNK4AMCP6System40create_continuing_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeEvEESE_SE_EEENS1_4lessIjEEvEEEEEEEE, 
                        __ZNK4AMCP6System41execute_task_against_config_changes_asyncERKNSt3__18functionIFvvEEE, 
                        __ZNK4AMCP7Control11get_elementEv, __ZNK4AMCP7Control12is_read_onlyEv, 
                        __ZNK4AMCP7Control9get_scopeEv, __ZNK4AMCP9IOContext11get_latencyEv, 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 410.4
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 410.13
 import Foundation
 @_exported import PencilKit
 import Swift
@@ -51,9 +51,21 @@ extension PencilKit.PKStroke : Swift._ObjectiveCBridgeable {
 @available(iOS 13.0, macOS 11.0, *)
 public struct PKEraserTool : PencilKit.PKTool, Swift.Equatable {
   public init(_ eraserType: PencilKit.PKEraserTool.EraserType)
+  @available(iOS 16.4, macOS 13.3, *)
+  public init(_ eraserType: PencilKit.PKEraserTool.EraserType, width: CoreFoundation.CGFloat)
   public enum EraserType {
     case vector
     case bitmap
+    @available(iOS 16.4, macOS 13.3, *)
+    case fixedWidthBitmap
+    @available(iOS 16.4, macOS 13.3, *)
+    public var defaultWidth: CoreFoundation.CGFloat {
+      get
+    }
+    @available(iOS 16.4, macOS 13.3, *)
+    public var validWidthRange: Swift.ClosedRange<CoreFoundation.CGFloat> {
+      get
+    }
     public static func == (a: PencilKit.PKEraserTool.EraserType, b: PencilKit.PKEraserTool.EraserType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -61,6 +73,11 @@ public struct PKEraserTool : PencilKit.PKTool, Swift.Equatable {
     }
   }
   public var eraserType: PencilKit.PKEraserTool.EraserType {
+    get
+    set
+  }
+  @available(iOS 16.4, macOS 13.3, *)
+  public var width: CoreFoundation.CGFloat {
     get
     set
   }
@@ -135,8 +152,8 @@ extension PencilKit.PKDrawing : Swift.Equatable {
 }
 @available(iOS 13.0, macOS 10.15, *)
 extension PencilKit.PKDrawing : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS 13.0, macOS 10.15, *)
 extension PencilKit.PKDrawing : Swift._ObjectiveCBridgeable {
@@ -237,14 +254,14 @@ extension PencilKit.PKLassoTool : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 13.0, *)
 extension PencilKit.PKToolPicker {
-  public var selectedTool: PencilKit.PKTool {
+  public var selectedTool: any PencilKit.PKTool {
     get
     set
   }
 }
 @available(iOS 13.0, *)
 extension PencilKit.PKCanvasView {
-  @_Concurrency.MainActor(unsafe) public var tool: PencilKit.PKTool {
+  @_Concurrency.MainActor(unsafe) public var tool: any PencilKit.PKTool {
     get
     set
   }

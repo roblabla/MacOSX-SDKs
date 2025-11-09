@@ -86,7 +86,6 @@ typedef NS_ENUM(NSUInteger, MTLAttributeFormat)
     MTLAttributeFormatShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 52,
     
     MTLAttributeFormatHalf API_AVAILABLE(macos(10.13), ios(11.0)) = 53,
-
     
 } API_AVAILABLE(macos(10.12), ios(10.0));
 

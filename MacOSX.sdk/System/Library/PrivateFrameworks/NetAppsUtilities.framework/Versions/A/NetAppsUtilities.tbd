@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1C4FA34D-3303-3E6F-A1D3-5C2DC0CA3028
-  - target:          x86_64-maccatalyst
-    value:           1C4FA34D-3303-3E6F-A1D3-5C2DC0CA3028
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           09CE2C2D-C32B-346E-A645-C03566BD32B6
-  - target:          arm64e-maccatalyst
-    value:           09CE2C2D-C32B-346E-A645-C03566BD32B6
 install-name:    '/System/Library/PrivateFrameworks/NetAppsUtilities.framework/Versions/A/NetAppsUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKConstants.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKConstants.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //
@@ -44,6 +44,8 @@ extern PKPaymentNetwork const PKPaymentNetworkBarcode API_AVAILABLE(macos(11.0),
 extern PKPaymentNetwork const PKPaymentNetworkGirocard API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0));
 extern PKPaymentNetwork const PKPaymentNetworkWaon API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
 extern PKPaymentNetwork const PKPaymentNetworkNanaco API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
+extern PKPaymentNetwork const PKPaymentNetworkPostFinance API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4));
+
 typedef NSString * PKContactField NS_STRING_ENUM;
 extern PKContactField const PKContactFieldPostalAddress API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
 extern PKContactField const PKContactFieldEmailAddress  API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));

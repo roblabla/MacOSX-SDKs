@@ -303,8 +303,14 @@ your component property list when using
 which will cause the attributes of previously existing bundles to be propagated forward.
 .Pp
 .Sy BundleOverwriteAction
-specifies how an existing version of the bundle on disk should be handled when the version in
-the package is installed. If you specify
+specifies how an existing version of the bundle on disk should be handled if the version in
+the package is installed. Despite the name, both
+.Ar upgrade
+and
+.Ar update
+do no version checking. Conditionally installing based on version is controlled entirely by
+.Cm BundleIsVersionChecked.
+If you specify
 .Ar upgrade ,
 the bundle in the package atomically replaces any version on disk; this has the effect of 
 deleting old paths that no longer exist in the new version of the bundle.

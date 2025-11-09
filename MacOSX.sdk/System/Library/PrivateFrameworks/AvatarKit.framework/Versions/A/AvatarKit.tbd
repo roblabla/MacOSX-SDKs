@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E3E2911D-C41C-3458-85D7-40BD06105A2C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C516B3F7-003F-374D-8472-E9D5A4FB0505
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 325.205
+current-version: 325.255
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 

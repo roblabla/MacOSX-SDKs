@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           142572DE-CFB7-336B-9B84-BF026470C41D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DD93DF24-B4BF-393A-9490-BBE08C065AB7
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Libraries/libAlembic.1.7.10.dylib'
 current-version: 1.7.10
 compatibility-version: 1.7
@@ -109,7 +102,7 @@ exports:
                        __ZTINSt3__120__shared_ptr_pointerIPN7Alembic5Ogawa3v118IStreamsENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN7Alembic7AbcGeom3v1112OXformSchema4DataENS_10shared_ptrIS5_E27__shared_ptr_default_deleteIS5_S5_EENS_9allocatorIS5_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_NS_4lessIS7_EENS5_INS_4pairIKS7_S7_EEEEEENS_10shared_ptrISE_E27__shared_ptr_default_deleteISE_SE_EENS5_ISE_EEEE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTINSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116ArImplEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116ArImplEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116OrImplEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v117CprImplEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN7Alembic12AbcCoreOgawa3v116ArImplEEE, 
@@ -262,7 +255,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN7Alembic5Ogawa3v118IStreamsENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN7Alembic7AbcGeom3v1112OXformSchema4DataENS_10shared_ptrIS5_E27__shared_ptr_default_deleteIS5_S5_EENS_9allocatorIS5_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_NS_4lessIS7_EENS5_INS_4pairIKS7_S7_EEEEEENS_10shared_ptrISE_E27__shared_ptr_default_deleteISE_SE_EENS5_ISE_EEEE, 
-                       __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116ArImplEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116ArImplEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v116OrImplEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreLayer3v117CprImplEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreOgawa3v116ArImplEEE, 

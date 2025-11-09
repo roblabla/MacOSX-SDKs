@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           91AE8945-E360-3AA6-AFF7-9ECD0D240EF3
-  - target:          x86_64-maccatalyst
-    value:           91AE8945-E360-3AA6-AFF7-9ECD0D240EF3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C8E9A755-FD27-3F49-A96B-94F7C5004CE7
-  - target:          arm64e-maccatalyst
-    value:           C8E9A755-FD27-3F49-A96B-94F7C5004CE7
 install-name:    '/System/Library/PrivateFrameworks/TeaDB.framework/Versions/A/TeaDB'
-current-version: 715
+current-version: 727.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -44,9 +31,10 @@ allowable-clients:
                        WeatherCore, WeatherCore2, WeatherCore2Tests, WeatherCoreTests, 
                        WeatherDaemon, WeatherDaemonMemoryTests, WeatherDaemonTests, 
                        WeatherDemo, WeatherDiagnosticExtension, WeatherIntents, WeatherKit, 
-                       WeatherKitTests, WeatherMaps, WeatherMapsTests, WeatherNotifications, 
-                       WeatherUI, WeatherUITests, WeatherUnitTests, WeatherWidget, 
-                       WeatherWidgetExtension, com.apple.news, newsd, weatherd ]
+                       WeatherKitDemo, WeatherKitTests, WeatherMaps, WeatherMapsTests, 
+                       WeatherNotifications, WeatherUI, WeatherUITests, WeatherUnitTests, 
+                       WeatherWidget, WeatherWidgetExtension, com.apple.news, newsd, 
+                       weatherd ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

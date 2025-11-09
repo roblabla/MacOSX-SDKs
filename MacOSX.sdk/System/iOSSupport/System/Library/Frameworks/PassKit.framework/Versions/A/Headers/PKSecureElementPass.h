@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKSecureElementPass.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKSecureElementPass.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9E8F6D69-C171-39CF-9894-5E0E13B27341
-  - target:          x86_64-maccatalyst
-    value:           9E8F6D69-C171-39CF-9894-5E0E13B27341
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7BD6A3B3-D3BE-3D1A-93EE-F780BAD217FB
-  - target:          arm64e-maccatalyst
-    value:           7BD6A3B3-D3BE-3D1A-93EE-F780BAD217FB
 install-name:    '/usr/lib/libcmph.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

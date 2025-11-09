@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           08F924EF-CF18-304D-9E5D-8B88852BA93E
-  - target:          x86_64-maccatalyst
-    value:           08F924EF-CF18-304D-9E5D-8B88852BA93E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           398DBE24-B039-3233-B0A5-70FD631537E9
-  - target:          arm64e-maccatalyst
-    value:           398DBE24-B039-3233-B0A5-70FD631537E9
 install-name:    '/System/Library/PrivateFrameworks/CoreDuet.framework/Versions/A/CoreDuet'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -33,7 +20,8 @@ exports:
                        _VisionSignalGradingEntryReadFrom, _VisionSignalGradingVisionGradeEventReadFrom, 
                        _VisionSignalGradingVisionGradeReadFrom, __CDCurrentOrXPCProcessName, 
                        __CDDomainAvailabilityDescription, __CDFormattedDate, __CDInteractionMachServiceName, 
-                       __CDInteractionNSXPCInterface, __CDInteractionStoreDeletedInteractionsNotification, 
+                       __CDInteractionNSXPCInterface, __CDInteractionStoreDeleteAllInteractionsNotification, 
+                       __CDInteractionStoreDeletedInteractionsNotification, __CDInteractionStoreInteractionDeletedXPCEventStreamName, 
                        __CDInteractionStoreInteractionRecordedXPCEventStreamName, 
                        __CDInteractionStoreRecordedInteractionsNotification, __CDInteractionUserConnectionOptions, 
                        __CDInteractionUserMachServiceName, __CDInteractionsKey, __CDLoggingUUIDAsInteger, 
@@ -88,19 +76,20 @@ exports:
                        __cdknowledge_signpost_query_begin, __cdknowledge_signpost_query_end, 
                        __cdknowledge_signpost_save_begin, __cdknowledge_signpost_save_end, 
                        __isTimeRestrictionOverwritten, __streamNameFromStreams, _active_memory_limit, 
-                       _batchSize, _bucket_name_for_timing, _ceilDateWithOffset, 
-                       _convert1dReversedBitPatternTo2dArray, _convert2dArrayTo1dReversedBitPattern, 
-                       _cumulateSleepWakeProbability, _directionToString, _dispatchDebounceTime, 
-                       _earlyAggregate, _findAutoSuPlanByProbability, _floorDateWithOffset, 
-                       _getMaxInterval, _get_memory_usage, _kCDBitmapActiveValue, 
-                       _kCDBitmapInactiveValue, _kCDBitmapMissingValue, _kCDConstantHourSeconds, 
-                       _kCDConstantNumSlotPerDay, _kCDConstantSleepDayAlignment, 
-                       _kCDConstantSleepDaysPerWeek, _kCDConstantSleepLongLambda, 
-                       _kCDConstantSleepLongMaxCount, _kCDConstantSleepLongMinCount, 
-                       _kCDConstantSleepLongOverShortRatio, _kCDConstantSleepRequestedDays, 
-                       _kCDConstantSleepShortLambda, _kCDConstantSleepShortMaxCount, 
-                       _kCDConstantSleepShortMinCount, _kCDConsumerIdentifierShareSheet, 
-                       _kCDContextErrorDomain, _kCDESPDataCollectionKey, _kCDESPEphemeralityInSecondsKey, 
+                       _batchSize, _bucket_name_for_timing, _cacheSizeMultiplier, 
+                       _ceilDateWithOffset, _convert1dReversedBitPatternTo2dArray, 
+                       _convert2dArrayTo1dReversedBitPattern, _cumulateSleepWakeProbability, 
+                       _directionToString, _dispatchDebounceTime, _earlyAggregate, 
+                       _findAutoSuPlanByProbability, _floorDateWithOffset, _getMaxInterval, 
+                       _get_memory_usage, _kCDBitmapActiveValue, _kCDBitmapInactiveValue, 
+                       _kCDBitmapMissingValue, _kCDConstantHourSeconds, _kCDConstantNumSlotPerDay, 
+                       _kCDConstantSleepDayAlignment, _kCDConstantSleepDaysPerWeek, 
+                       _kCDConstantSleepLongLambda, _kCDConstantSleepLongMaxCount, 
+                       _kCDConstantSleepLongMinCount, _kCDConstantSleepLongOverShortRatio, 
+                       _kCDConstantSleepRequestedDays, _kCDConstantSleepShortLambda, 
+                       _kCDConstantSleepShortMaxCount, _kCDConstantSleepShortMinCount, 
+                       _kCDConsumerIdentifierShareSheet, _kCDContextErrorDomain, 
+                       _kCDESPDataCollectionKey, _kCDESPEphemeralityInSecondsKey, 
                        _kCDESPEventDescriptionKey, _kCDESPEventFormattedNameKey, 
                        _kCDESPEventNameKey, _kCDESPEventTypeKey, _kCDESPIsHistorical, 
                        _kCDESPIsInstant, _kCDESPKnowledgeBaseEventNameKey, _kCDESPKnowledgeBaseMetadataClassKey, 

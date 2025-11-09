@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           822EAEB2-86C3-36CA-8887-C20500A4BA39
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           086A64A1-2ED9-3A45-8F1C-C2868B0B7E14
 install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/SiriUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -23,11 +16,12 @@ exports:
                        _SiriUIDefaultOutputDevice, _SiriUIDefaultSnippetViewInsets, 
                        _SiriUIDefaultSnippetWidth, _SiriUIDefaultWindowWidth, _SiriUIDismissalReasonToSISchemaDismissalReason, 
                        _SiriUIDismissalString, _SiriUIFontSizeSubtitle, _SiriUIFrameworkBundleIdentifier, 
-                       _SiriUIGetLanguageCode, _SiriUIInvokeOnMainQueue, _SiriUILocalizedListStringForString, 
-                       _SiriUILocalizedRelativeDateStringForDateWithWantsAgo, _SiriUIPreviousConversationIdentifier, 
-                       _SiriUIRectInset, _SiriUIRequestInputTypeGetDescription, _SiriUIRequestSourceGetName, 
-                       _SiriUIRequestSourceGetSISchemaInvocationSource, _SiriUIRequestSourceRequiresVoiceInput, 
-                       _SiriUISnippetPluginErrorDomain, _SiriUIUsingVoiceInput, _SiriUIUtteranceBaselineToBaselineSpacing, 
+                       _SiriUIGetLanguageCode, _SiriUIInvokeOnMainQueue, _SiriUIIsButtonDownRequest, 
+                       _SiriUILocalizedListStringForString, _SiriUILocalizedRelativeDateStringForDateWithWantsAgo, 
+                       _SiriUIPreviousConversationIdentifier, _SiriUIRectInset, _SiriUIRequestInputTypeGetDescription, 
+                       _SiriUIRequestSourceGetName, _SiriUIRequestSourceGetSISchemaInvocationSource, 
+                       _SiriUIRequestSourceRequiresVoiceInput, _SiriUISnippetPluginErrorDomain, 
+                       _SiriUIUsingVoiceInput, _SiriUIUtteranceBaselineToBaselineSpacing, 
                        _UIRectCenteredIntegralRect, _UIRectCenteredIntegralRectScale, 
                        _UIRectCenteredXInRect, _UIRectCenteredYInRect, _kRadarComposeClassificationField, 
                        _kRadarComposeComponentNameField, _kRadarComposeComponentVersionField, 

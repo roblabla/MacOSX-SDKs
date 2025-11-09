@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B1F8C151-99B7-3002-9702-4D3E17264A79
-  - target:          x86_64-maccatalyst
-    value:           B1F8C151-99B7-3002-9702-4D3E17264A79
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           42959BFB-8A00-3A39-BB00-93A13F01A530
-  - target:          arm64e-maccatalyst
-    value:           42959BFB-8A00-3A39-BB00-93A13F01A530
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 6400.44
+current-version: 6440.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

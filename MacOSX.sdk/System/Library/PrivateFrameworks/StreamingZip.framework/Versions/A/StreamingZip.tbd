@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0A2B9745-4027-3863-96ED-10A60C5154BE
-  - target:          x86_64-maccatalyst
-    value:           0A2B9745-4027-3863-96ED-10A60C5154BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AC01F05D-8472-3528-A8A8-4C1EC9EA0E9E
-  - target:          arm64e-maccatalyst
-    value:           AC01F05D-8472-3528-A8A8-4C1EC9EA0E9E
 install-name:    '/System/Library/PrivateFrameworks/StreamingZip.framework/Versions/A/StreamingZip'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

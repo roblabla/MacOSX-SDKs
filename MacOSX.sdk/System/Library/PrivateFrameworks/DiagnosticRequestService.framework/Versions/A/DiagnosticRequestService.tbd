@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0434C295-E6C6-397C-9475-6690A613EEA8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2BF8467B-A44E-3653-B9F6-CA62BD4AEA34
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequestService.framework/Versions/A/DiagnosticRequestService'
 current-version: 4
 swift-abi-version: 7
@@ -382,18 +375,18 @@ exports:
                        _kDRSDMCoreAudioTeamID, _kDRSDMCountCapKey, _kDRSDMDRMResourceUsageIssueCategory, 
                        _kDRSDMDRMTeamID, _kDRSDMDefaultConfigKey, _kDRSDMDefaultSignatureAcceptanceRate, 
                        _kDRSDMDefaultSignatureCap, _kDRSDMDefaultSignatureHysteresis, 
-                       _kDRSDMDefaultTailspinHysteresis, _kDRSDMHangTracerFirstPartyLongHangIssueCategory, 
-                       _kDRSDMHangTracerFirstPartyMicroHangIssueCategory, _kDRSDMHangTracerFirstPartyNormalHangIssueCategory, 
-                       _kDRSDMHangTracerTeamID, _kDRSDMHangTracerThirdPartyLongHangIssueCategory, 
-                       _kDRSDMHangTracerThirdPartyNormalHangIssueCategory, _kDRSDMHysteresisKey, 
-                       _kDRSDMIssueCategoryDictKey, _kDRSDMMailConversationViewIssueCategory, 
+                       _kDRSDMHangTracerFirstPartyLongHangIssueCategory, _kDRSDMHangTracerFirstPartyMicroHangIssueCategory, 
+                       _kDRSDMHangTracerFirstPartyNormalHangIssueCategory, _kDRSDMHangTracerTeamID, 
+                       _kDRSDMHangTracerThirdPartyLongHangIssueCategory, _kDRSDMHangTracerThirdPartyNormalHangIssueCategory, 
+                       _kDRSDMHysteresisKey, _kDRSDMIssueCategoryDictKey, _kDRSDMMailConversationViewIssueCategory, 
                        _kDRSDMMailMessageListIssueCategory, _kDRSDMMailMiscResponsivenessIssueCategory, 
                        _kDRSDMMailTeamID, _kDRSDMMemoryToolsMemgraphDmonThresholdCategory, 
                        _kDRSDMMemoryToolsMemgraphOverTimeCategory, _kDRSDMMemoryToolsTeamID, 
                        _kDRSDMNandAutoGBBSweepIssueCategory, _kDRSDMNandGBBTeamID, 
                        _kDRSDMNandTeamID, _kDRSDMNoCap, _kDRSDMNoHysteresis, _kDRSDMPPSArchiveIssueCategory, 
-                       _kDRSDMPPSTeamID, _kDRSDMRapidMicroDiagnosticIssueCategory, 
-                       _kDRSDMRapidTeamID, _kDRSDMSentryMacOsAppLaunchIssueCategory, 
+                       _kDRSDMPPSTeamID, _kDRSDMRMEMemoryExceptionIssueCategory, 
+                       _kDRSDMRapidMicroDiagnosticIssueCategory, _kDRSDMRapidTeamID, 
+                       _kDRSDMReportMemoryExceptionTeamID, _kDRSDMSentryMacOsAppLaunchIssueCategory, 
                        _kDRSDMSentryTeamID, _kDRSDMSpindumpSlowHIDIssueCategory, 
                        _kDRSDMSpindumpTeamID, _kDRSDMWatchdogdTeamID, _kDRSEnableDataQueryNoFetchLimit, 
                        _kDRSPopulationPingMessageCurrentVersion, _kDRSRequestDBFileName, 

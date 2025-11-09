@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           63414E0F-C667-3683-A3BE-38AC279B49B3
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           A46B6092-BE0C-338D-984A-7CF425715496
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 1189.2
+current-version: 1190.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -74,9 +67,6 @@ exports:
                        _CNUIPixelAlignedPoint, _CNUIPixelAlignedRect, _CNUIPixelAlignedSize, 
                        _CNUIRoundToScale, _CNUIRoundToViewScale, _CNUISetLoggingBlock, 
                        _CNUISetUseSiriLocalization, _CNUIShouldUseSiriLocalization, 
-                       '_OBJC_CLASS_$__TtC10ContactsUI18DuplicatesUIHelper', '_OBJC_CLASS_$__TtC10ContactsUI33ContactListMergeUnifyActionHelper', 
-                       '_OBJC_METACLASS_$__TtC10ContactsUI18DuplicatesUIHelper', 
-                       '_OBJC_METACLASS_$__TtC10ContactsUI33ContactListMergeUnifyActionHelper', 
                        __CNUILog, _kCNActionViewMaxLabelWidth, _kCNActionViewPlatterSize, 
                        _kCNTransportButtonSize ]
     objc-classes:    [ CNActionItem, CNActionView, CNActionsView, CNAvatarAccessoryView, 

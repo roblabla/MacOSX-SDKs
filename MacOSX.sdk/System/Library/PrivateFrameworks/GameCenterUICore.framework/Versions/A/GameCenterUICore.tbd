@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
-  - target:          x86_64-maccatalyst
-    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
-  - target:          arm64e-maccatalyst
-    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -41,16 +28,17 @@ exports:
                        GKImageSource, GKInGameColorPalette, GKLocalImageSource, GKLocalPlayerAuthenticator, 
                        GKLoginAlertAccessoryView, GKLoginAlertView, GKMButton, GKMButtonCell, 
                        GKMacGameIconBrush, GKMultiCircleImageBrush, GKNetworkImageSource, 
-                       GKPanel, GKPasswordVerifyAlert, GKRemoteSignInViewController, 
-                       GKRemoteViewController, GKRemoteViewControllerProxy, GKScreenConfigurationController, 
-                       GKServerWebViewController, GKServerWebViewJSAccount, GKServerWebViewJSEnvironment, 
-                       GKServerWebViewJSExternalAccounts, GKServerWebViewJSGame, 
-                       GKServerWebViewJSRoot, GKTextStyle, GKTextStyleFocus, GKTextStyleMac, 
-                       GKTextStylePad, GKTextStylePhone, GKThemeBrush, GKThreadsafeImageCache, 
-                       GKUIActivityIndicatorView, GKUITheme, GKWelcomeBannerVisibility, 
-                       SortHueEntry, UXAlertAction, UXAlertController, UXNavigationBar, 
-                       UXNavigationController, UXNavigationItem, UXResizableImage, 
-                       UXResizableImageView, UXViewController, _GKAlert ]
+                       GKPanel, GKParentSheetDimmingControlView, GKPasswordVerifyAlert, 
+                       GKRemoteSignInViewController, GKRemoteViewController, GKRemoteViewControllerProxy, 
+                       GKScreenConfigurationController, GKServerWebViewController, 
+                       GKServerWebViewJSAccount, GKServerWebViewJSEnvironment, GKServerWebViewJSExternalAccounts, 
+                       GKServerWebViewJSGame, GKServerWebViewJSRoot, GKTextStyle, 
+                       GKTextStyleFocus, GKTextStyleMac, GKTextStylePad, GKTextStylePhone, 
+                       GKThemeBrush, GKThreadsafeImageCache, GKUIActivityIndicatorView, 
+                       GKUITheme, GKWelcomeBannerVisibility, SortHueEntry, UXAlertAction, 
+                       UXAlertController, UXNavigationBar, UXNavigationController, 
+                       UXNavigationItem, UXResizableImage, UXResizableImageView, 
+                       UXViewController, _GKAlert ]
     objc-ivars:      [ GKAccountViewController._accountName, GKAccountViewController._alias, 
                        GKAccountViewController._firstName, GKAccountViewController._lastName, 
                        GKAccountViewController._mode, GKAccountViewController._shouldUploadContacts, 

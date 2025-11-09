@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EABF75BD-5D32-3428-AFED-81228607C5DC
-  - target:          x86_64-maccatalyst
-    value:           EABF75BD-5D32-3428-AFED-81228607C5DC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           13D2BD04-7FC4-3FC5-8AA9-1245F3F36C3A
-  - target:          arm64e-maccatalyst
-    value:           13D2BD04-7FC4-3FC5-8AA9-1245F3F36C3A
 install-name:    '/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP'
-current-version: 303
+current-version: 304
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

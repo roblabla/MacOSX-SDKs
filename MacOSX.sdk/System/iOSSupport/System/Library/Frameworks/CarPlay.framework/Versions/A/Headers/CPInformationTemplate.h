@@ -9,6 +9,7 @@
 #import <CarPlay/CPTemplate.h>
 #import <CarPlay/CPInformationItem.h>
 #import <CarPlay/CPInformationRatingItem.h>
+#import <CarPlay/CPBarButtonProviding.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +25,7 @@ typedef NS_ENUM(NSInteger, CPInformationTemplateLayout) {
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
-@interface CPInformationTemplate : CPTemplate
+@interface CPInformationTemplate : CPTemplate <CPBarButtonProviding>
 
 /**
  Initialize a CPInformationTemplate with a title, optional labels, and optional action buttons.

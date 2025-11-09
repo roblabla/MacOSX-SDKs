@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4BF45FC8-5DAF-383C-A46F-42C2410CDB37
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BD5ABC3A-C4CD-35BD-BDC3-67736607E294
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 1732.60.4
+current-version: 1732.100.12
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AlgosPackScore, _AlgosUnpackScore, _CLIPS_BASEBAND_BEDF_MODULE, 
@@ -61,40 +54,32 @@ exports:
                        _kNotificationCellThroughputAdvisoryCapable, _kNotificationCellTrafficClassReportCapable, 
                        _kNotificationConsiderAlternateUpdate, _kNotificationConsiderAlternateUpdateDetail, 
                        _kNotificationCurrentICCID, _kNotificationCurrentICCIDChange, 
-                       _kNotificationDomainPrivacyReset, _kNotificationDomainResolving, 
-                       _kNotificationDomainResolvingBundleName, _kNotificationDomainResolvingDomain, 
-                       _kNotificationDomainResolvingEffectiveUserId, _kNotificationDomainResolvingEndpoints, 
-                       _kNotificationDomainUserAppTracking, _kNotificationDomainUserAppTrackingState, 
-                       _kNotificationDomainUserAppTrackingUserID, _kNotificationDomainUserEndpointTracking, 
-                       _kNotificationDomainUserEndpointTrackingState, _kNotificationDomainUserEndpointTrackingUserID, 
-                       _kNotificationDomainUserManagementSwitching, _kNotificationDomainUserManagementSwitchingFromUserID, 
-                       _kNotificationDomainUserManagementSwitchingToUserID, _kNotificationFallbackAdminEnableValue, 
-                       _kNotificationFallbackAdminEnablementChange, _kNotificationFallbackRecommendation, 
-                       _kNotificationLinkQualityValue, _kNotificationNewConnectivityEpochCell, 
-                       _kNotificationNewConnectivityEpochCompanionLink, _kNotificationNewConnectivityEpochWiFi, 
-                       _kNotificationNewConnectivityEpochWired, _kNotificationNewModelGenerated, 
-                       _kNotificationNewPrimaryInterface, _kNotificationNewTraffic, 
-                       _kNotificationOfFlowDisruptingEvent, _kNotificationOfTetheringState, 
-                       _kNotificationRecommendationDetail, _kNotificationStateChangeTimeStamp, 
-                       _kNotificationStateDetail, _kNotificationStateHashedPrimaryKey, 
-                       _kNotificationStateKeyOnOff, _kNotificationStateRelayReady, 
-                       _kNotificationSymptomsOSLogReceivedFromSymptomsTool, _kNotificationWiFiLinkQualityChange, 
-                       _kNotificationWiredLinkQualityChange, _kPrefAppIdentifierKey, 
-                       _kStateMachineStatusKeyAdminState, _kStateMachineStatusKeyInternalVariables, 
-                       _kStateMachineStatusKeyState, _kSymptomActivityBitmapCellularInterface, 
-                       _kSymptomActivityBitmapCurrentMachAbsTime, _kSymptomActivityBitmapEndTime, 
-                       _kSymptomActivityBitmapEthernetInterface, _kSymptomActivityBitmapIPSecInterface, 
-                       _kSymptomActivityBitmapStartTime, _kSymptomActivityBitmapWiFiInterface, 
-                       _kSymptomActivityBitmapsActualStartTimeKey, _kSymptomActivityBitmapsBitmapKey, 
-                       _kSymptomActivityBitmapsValidBitsCountKey, _kSymptomAnalyticsHelperServiceEndpoint, 
-                       _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, 
-                       _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, _kSymptomAnalyticsNetworkAdvisoryError, 
-                       _kSymptomAnalyticsNetworkAdvisoryInconclusive, _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, 
-                       _kSymptomAnalyticsNetworkAdvisoryKey, _kSymptomAnalyticsNetworkAdvisoryNoImprovement, 
-                       _kSymptomAnalyticsNetworkAdvisoryNotSupported, _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, 
-                       _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, _kSymptomAnalyticsNetworkAdvisoryWeakUse, 
-                       _kSymptomAnalyticsServiceCalendarUsageToggle, _kSymptomAnalyticsServiceCopyRelationship, 
-                       _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
+                       _kNotificationFallbackAdminEnableValue, _kNotificationFallbackAdminEnablementChange, 
+                       _kNotificationFallbackRecommendation, _kNotificationLinkQualityValue, 
+                       _kNotificationNewConnectivityEpochCell, _kNotificationNewConnectivityEpochCompanionLink, 
+                       _kNotificationNewConnectivityEpochWiFi, _kNotificationNewConnectivityEpochWired, 
+                       _kNotificationNewModelGenerated, _kNotificationNewPrimaryInterface, 
+                       _kNotificationNewTraffic, _kNotificationOfFlowDisruptingEvent, 
+                       _kNotificationOfTetheringState, _kNotificationRecommendationDetail, 
+                       _kNotificationStateChangeTimeStamp, _kNotificationStateDetail, 
+                       _kNotificationStateHashedPrimaryKey, _kNotificationStateKeyOnOff, 
+                       _kNotificationStateRelayReady, _kNotificationSymptomsOSLogReceivedFromSymptomsTool, 
+                       _kNotificationWiFiLinkQualityChange, _kNotificationWiredLinkQualityChange, 
+                       _kPrefAppIdentifierKey, _kStateMachineStatusKeyAdminState, 
+                       _kStateMachineStatusKeyInternalVariables, _kStateMachineStatusKeyState, 
+                       _kSymptomActivityBitmapCellularInterface, _kSymptomActivityBitmapCurrentMachAbsTime, 
+                       _kSymptomActivityBitmapEndTime, _kSymptomActivityBitmapEthernetInterface, 
+                       _kSymptomActivityBitmapIPSecInterface, _kSymptomActivityBitmapStartTime, 
+                       _kSymptomActivityBitmapWiFiInterface, _kSymptomActivityBitmapsActualStartTimeKey, 
+                       _kSymptomActivityBitmapsBitmapKey, _kSymptomActivityBitmapsValidBitsCountKey, 
+                       _kSymptomAnalyticsHelperServiceEndpoint, _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, 
+                       _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, 
+                       _kSymptomAnalyticsNetworkAdvisoryError, _kSymptomAnalyticsNetworkAdvisoryInconclusive, 
+                       _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, _kSymptomAnalyticsNetworkAdvisoryKey, 
+                       _kSymptomAnalyticsNetworkAdvisoryNoImprovement, _kSymptomAnalyticsNetworkAdvisoryNotSupported, 
+                       _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, 
+                       _kSymptomAnalyticsNetworkAdvisoryWeakUse, _kSymptomAnalyticsServiceCalendarUsageToggle, 
+                       _kSymptomAnalyticsServiceCopyRelationship, _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryEndDate, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryKey, _kSymptomAnalyticsServiceDomainTrackingClearHistoryStartDate, 
                        _kSymptomAnalyticsServiceDomainTrackingContext, _kSymptomAnalyticsServiceDomainTrackingContextVerificationType, 

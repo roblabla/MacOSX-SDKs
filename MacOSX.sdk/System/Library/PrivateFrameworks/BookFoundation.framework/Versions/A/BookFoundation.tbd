@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7F9C341F-EFC1-3C3E-A257-B8425E92AE81
-  - target:          x86_64-maccatalyst
-    value:           7F9C341F-EFC1-3C3E-A257-B8425E92AE81
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0A098825-F38B-344D-8D19-19E7158DDEDB
-  - target:          arm64e-maccatalyst
-    value:           0A098825-F38B-344D-8D19-19E7158DDEDB
 install-name:    '/System/Library/PrivateFrameworks/BookFoundation.framework/Versions/A/BookFoundation'
 swift-abi-version: 7
 exports:
@@ -303,6 +290,10 @@ exports:
                        '_$s14BookFoundation5MBookC4with6configACSDys11AnyHashableVypG_AA21MCatalogServiceConfigCtcfc', 
                        '_$s14BookFoundation5MBookCMa', '_$s14BookFoundation5MBookCMn', 
                        '_$s14BookFoundation5MBookCN', '_$s14BookFoundation5MBookCfD', 
+                       '_$s2os21OSAllocatedUnfairLockV14BookFoundationE09valueWithD0xvM', 
+                       '_$s2os21OSAllocatedUnfairLockV14BookFoundationE09valueWithD0xvg', 
+                       '_$s2os21OSAllocatedUnfairLockV14BookFoundationE09valueWithD0xvpMV', 
+                       '_$s2os21OSAllocatedUnfairLockV14BookFoundationE09valueWithD0xvs', 
                        '_$s2os6LoggerV14BookFoundationE14catalogServiceACvau', '_$s2os6LoggerV14BookFoundationE14catalogServiceACvgZ', 
                        '_$s2os6LoggerV14BookFoundationE14catalogServiceACvpZ', '_$s2os6LoggerV14BookFoundationE16bundleIdentifierSSvau', 
                        '_$s2os6LoggerV14BookFoundationE16bundleIdentifierSSvgZ', 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           437790CD-E082-321A-B1B5-EA5870341BB5
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           5083A4CA-34B1-32A6-AB5C-61C52CBDD4F1
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:
@@ -451,6 +444,11 @@ exports:
                        '_$s9PencilKit12PKCustomToolVAA6PKToolAAMc', '_$s9PencilKit12PKCustomToolVAA6PKToolAAWP', 
                        '_$s9PencilKit12PKCustomToolVMa', '_$s9PencilKit12PKCustomToolVMn', 
                        '_$s9PencilKit12PKCustomToolVN', '_$s9PencilKit12PKCustomToolVSQAAMc', 
+                       '_$s9PencilKit12PKEraserToolV10EraserTypeO12defaultWidth12CoreGraphics7CGFloatVvg', 
+                       '_$s9PencilKit12PKEraserToolV10EraserTypeO12defaultWidth12CoreGraphics7CGFloatVvpMV', 
+                       '_$s9PencilKit12PKEraserToolV10EraserTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvg', 
+                       '_$s9PencilKit12PKEraserToolV10EraserTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvpMV', 
+                       '_$s9PencilKit12PKEraserToolV10EraserTypeO16fixedWidthBitmapyA2EmFWC', 
                        '_$s9PencilKit12PKEraserToolV10EraserTypeO2eeoiySbAE_AEtFZ', 
                        '_$s9PencilKit12PKEraserToolV10EraserTypeO4hash4intoys6HasherVz_tF', 
                        '_$s9PencilKit12PKEraserToolV10EraserTypeO6bitmapyA2EmFWC', 
@@ -467,9 +465,14 @@ exports:
                        '_$s9PencilKit12PKEraserToolV26_forceBridgeFromObjectiveC_6resultySoABC_ACSgztFZ', 
                        '_$s9PencilKit12PKEraserToolV2eeoiySbAC_ACtFZ', '_$s9PencilKit12PKEraserToolV34_conditionallyBridgeFromObjectiveC_6resultSbSoABC_ACSgztFZ', 
                        '_$s9PencilKit12PKEraserToolV36_unconditionallyBridgeFromObjectiveCyACSoABCSgFZ', 
+                       '_$s9PencilKit12PKEraserToolV5width12CoreGraphics7CGFloatVvM', 
+                       '_$s9PencilKit12PKEraserToolV5width12CoreGraphics7CGFloatVvg', 
+                       '_$s9PencilKit12PKEraserToolV5width12CoreGraphics7CGFloatVvpMV', 
+                       '_$s9PencilKit12PKEraserToolV5width12CoreGraphics7CGFloatVvs', 
                        '_$s9PencilKit12PKEraserToolVAA6PKToolAAMc', '_$s9PencilKit12PKEraserToolVAA6PKToolAAWP', 
                        '_$s9PencilKit12PKEraserToolVMa', '_$s9PencilKit12PKEraserToolVMn', 
                        '_$s9PencilKit12PKEraserToolVN', '_$s9PencilKit12PKEraserToolVSQAAMc', 
+                       '_$s9PencilKit12PKEraserToolV_5widthA2C10EraserTypeO_12CoreGraphics7CGFloatVtcfC', 
                        '_$s9PencilKit12PKEraserToolVs21_ObjectiveCBridgeableAAMc', 
                        '_$s9PencilKit12PKEraserToolVyA2C10EraserTypeOcfC', '_$s9PencilKit12PKInkingToolV12convertColor_4from2toSo7UIColorCAH_So20UIUserInterfaceStyleVAJtFZ', 
                        '_$s9PencilKit12PKInkingToolV19_bridgeToObjectiveCSoABCyF', 

@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           018B6DCE-606A-3F23-ABA3-41E91D70930F
-  - target:          x86_64-maccatalyst
-    value:           018B6DCE-606A-3F23-ABA3-41E91D70930F
-  - target:          x86_64h-macos
-    value:           3077529D-0067-3A47-9CD1-529CF2DFD381
-  - target:          x86_64h-maccatalyst
-    value:           3077529D-0067-3A47-9CD1-529CF2DFD381
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86E02645-0E19-3536-90DC-7FCB922A8BB4
-  - target:          arm64e-maccatalyst
-    value:           86E02645-0E19-3536-90DC-7FCB922A8BB4
 install-name:    '/usr/lib/libsqlite3.dylib'
 current-version: 346
 compatibility-version: 9

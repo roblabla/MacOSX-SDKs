@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           75440C1F-6595-3A93-A0D1-684598951E7F
-  - target:          x86_64-maccatalyst
-    value:           75440C1F-6595-3A93-A0D1-684598951E7F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1DD21055-6DB8-3E66-8533-2B708B522320
-  - target:          arm64e-maccatalyst
-    value:           1DD21055-6DB8-3E66-8533-2B708B522320
 install-name:    '/System/Library/PrivateFrameworks/ShazamEvents.framework/Versions/A/ShazamEvents'
 swift-abi-version: 7
 exports:
@@ -23,32 +10,30 @@ exports:
     symbols:         [ '_$s11Participant12ShazamEvents14PerformedEventPTl', '_$s12ShazamEvents0B5ErrorO013xpcConnectionC0yA2CmFWC', 
                        '_$s12ShazamEvents0B5ErrorO07networkC0yA2CmFWC', '_$s12ShazamEvents0B5ErrorO10Foundation09LocalizedC0AAMc', 
                        '_$s12ShazamEvents0B5ErrorO11descriptionSSvg', '_$s12ShazamEvents0B5ErrorO11descriptionSSvpMV', 
-                       '_$s12ShazamEvents0B5ErrorO11missingDatayA2CmFWC', '_$s12ShazamEvents0B5ErrorO14invalidRequestyA2CmFWC', 
-                       '_$s12ShazamEvents0B5ErrorO8rawValueACSgSS_tcfC', '_$s12ShazamEvents0B5ErrorO8rawValueSSvg', 
-                       '_$s12ShazamEvents0B5ErrorO8rawValueSSvpMV', '_$s12ShazamEvents0B5ErrorOMa', 
-                       '_$s12ShazamEvents0B5ErrorOMn', '_$s12ShazamEvents0B5ErrorON', 
-                       '_$s12ShazamEvents0B5ErrorOSEAAMc', '_$s12ShazamEvents0B5ErrorOSHAAMc', 
-                       '_$s12ShazamEvents0B5ErrorOSQAAMc', '_$s12ShazamEvents0B5ErrorOSYAAMc', 
-                       '_$s12ShazamEvents0B5ErrorOSeAAMc', '_$s12ShazamEvents0B5ErrorOs0C0AAMc', 
-                       '_$s12ShazamEvents0B5ErrorOs23CustomStringConvertibleAAMc', 
+                       '_$s12ShazamEvents0B5ErrorO11invalidDatayA2CmFWC', '_$s12ShazamEvents0B5ErrorO11missingDatayA2CmFWC', 
+                       '_$s12ShazamEvents0B5ErrorO14invalidRequestyA2CmFWC', '_$s12ShazamEvents0B5ErrorO8rawValueACSgSS_tcfC', 
+                       '_$s12ShazamEvents0B5ErrorO8rawValueSSvg', '_$s12ShazamEvents0B5ErrorO8rawValueSSvpMV', 
+                       '_$s12ShazamEvents0B5ErrorOMa', '_$s12ShazamEvents0B5ErrorOMn', 
+                       '_$s12ShazamEvents0B5ErrorON', '_$s12ShazamEvents0B5ErrorOSEAAMc', 
+                       '_$s12ShazamEvents0B5ErrorOSHAAMc', '_$s12ShazamEvents0B5ErrorOSQAAMc', 
+                       '_$s12ShazamEvents0B5ErrorOSYAAMc', '_$s12ShazamEvents0B5ErrorOSeAAMc', 
+                       '_$s12ShazamEvents0B5ErrorOs0C0AAMc', '_$s12ShazamEvents0B5ErrorOs23CustomStringConvertibleAAMc', 
                        '_$s12ShazamEvents0aB7ServiceC016initializeGlobalC5StateyyFZ', 
-                       '_$s12ShazamEvents0aB7ServiceC04machC4NameSSyFZ', '_$s12ShazamEvents0aB7ServiceC11shouldStartySbSo8SHWorker_pF', 
-                       '_$s12ShazamEvents0aB7ServiceC13workerUpdated_16withRunningStateySo8SHWorker_p_SbtF', 
-                       '_$s12ShazamEvents0aB7ServiceC14liveMusicEvent7eventID17completionHandlerySS_yAA04LiveeF17XPCValueContainerCYbctF', 
+                       '_$s12ShazamEvents0aB7ServiceC04machC4NameSSyFZ', '_$s12ShazamEvents0aB7ServiceC14liveMusicEvent7eventID17completionHandlerySS_yAA04LiveeF17XPCValueContainerCYbctF', 
                        '_$s12ShazamEvents0aB7ServiceC15serviceDelegateSo09SHServiceE0_pSgvM', 
                        '_$s12ShazamEvents0aB7ServiceC15serviceDelegateSo09SHServiceE0_pSgvg', 
                        '_$s12ShazamEvents0aB7ServiceC15serviceDelegateSo09SHServiceE0_pSgvpMV', 
                        '_$s12ShazamEvents0aB7ServiceC15serviceDelegateSo09SHServiceE0_pSgvs', 
                        '_$s12ShazamEvents0aB7ServiceC17liveMusicSchedule7venueID17completionHandlerySS_yAA04Livee5VenueF17XPCValueContainerCYbctF', 
                        '_$s12ShazamEvents0aB7ServiceC17liveMusicSchedule8artistID17completionHandlerySS_yAA04LiveeF17XPCValueContainerCYbctF', 
-                       '_$s12ShazamEvents0aB7ServiceC7workersSaySo8SHWorker_pGvg', 
-                       '_$s12ShazamEvents0aB7ServiceCACycfC', '_$s12ShazamEvents0aB7ServiceCACycfc', 
-                       '_$s12ShazamEvents0aB7ServiceCMa', '_$s12ShazamEvents0aB7ServiceCMn', 
-                       '_$s12ShazamEvents0aB7ServiceCMo', '_$s12ShazamEvents0aB7ServiceCN', 
-                       '_$s12ShazamEvents0aB7ServiceCfD', '_$s12ShazamEvents10ExperienceMp', 
-                       '_$s12ShazamEvents10ExperiencePSETb', '_$s12ShazamEvents10ExperiencePSHTb', 
-                       '_$s12ShazamEvents10ExperiencePSeTb', '_$s12ShazamEvents10ExperienceTL', 
-                       '_$s12ShazamEvents11OnlineEventMp', '_$s12ShazamEvents11OnlineEventP13onlineAddress10Foundation3URLVvgTj', 
+                       '_$s12ShazamEvents0aB7ServiceC4stopyyF', '_$s12ShazamEvents0aB7ServiceCACycfC', 
+                       '_$s12ShazamEvents0aB7ServiceCACycfc', '_$s12ShazamEvents0aB7ServiceCMa', 
+                       '_$s12ShazamEvents0aB7ServiceCMn', '_$s12ShazamEvents0aB7ServiceCMo', 
+                       '_$s12ShazamEvents0aB7ServiceCN', '_$s12ShazamEvents0aB7ServiceCfD', 
+                       '_$s12ShazamEvents10ExperienceMp', '_$s12ShazamEvents10ExperiencePSETb', 
+                       '_$s12ShazamEvents10ExperiencePSHTb', '_$s12ShazamEvents10ExperiencePSeTb', 
+                       '_$s12ShazamEvents10ExperienceTL', '_$s12ShazamEvents11OnlineEventMp', 
+                       '_$s12ShazamEvents11OnlineEventP13onlineAddress10Foundation3URLVvgTj', 
                        '_$s12ShazamEvents11OnlineEventP13onlineAddress10Foundation3URLVvgTq', 
                        '_$s12ShazamEvents11OnlineEventTL', '_$s12ShazamEvents12ParticipantsV2eeoiySbACyxG_AEtFZ', 
                        '_$s12ShazamEvents12ParticipantsV4fromACyxGs7Decoder_p_tKcfC', 

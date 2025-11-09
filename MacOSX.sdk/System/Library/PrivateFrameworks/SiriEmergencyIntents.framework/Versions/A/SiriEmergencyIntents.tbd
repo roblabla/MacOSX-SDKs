@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C85C1189-CB54-354E-8E58-6E437D9B869F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A3C53570-1EA4-3E0B-813D-0A3BD1820E4F
 install-name:    '/System/Library/PrivateFrameworks/SiriEmergencyIntents.framework/Versions/A/SiriEmergencyIntents'
 swift-abi-version: 7
 exports:
@@ -102,6 +95,7 @@ exports:
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV4fromACs7Decoder_p_tKcfC', 
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV4nameSSvg', 
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV4nameSSvpMV', 
+                       '_$s20SiriEmergencyIntents0B16OrganizationInfoV5sirenACyFZ', 
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV6encode2toys7Encoder_p_tKF', 
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV7websiteSSvg', 
                        '_$s20SiriEmergencyIntents0B16OrganizationInfoV7websiteSSvpMV', 
@@ -234,6 +228,13 @@ exports:
                        '_$s20SiriEmergencyIntents19DirectInvocationURIOMa', '_$s20SiriEmergencyIntents19DirectInvocationURIOMn', 
                        '_$s20SiriEmergencyIntents19DirectInvocationURION', '_$s20SiriEmergencyIntents19DirectInvocationURIOSHAAMc', 
                        '_$s20SiriEmergencyIntents19DirectInvocationURIOSQAAMc', '_$s20SiriEmergencyIntents19DirectInvocationURIOSYAAMc', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskO8rawValueACSgSS_tcfC', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskO8rawValueSSvg', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskO8rawValueSSvpMV', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskO8taskTypeSSyF', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskOMa', '_$s20SiriEmergencyIntents19InstrumentationTaskOMn', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskON', '_$s20SiriEmergencyIntents19InstrumentationTaskOSHAAMc', 
+                       '_$s20SiriEmergencyIntents19InstrumentationTaskOSQAAMc', '_$s20SiriEmergencyIntents19InstrumentationTaskOSYAAMc', 
                        '_$s20SiriEmergencyIntents23NLv4IdentifierNamespaceO8rawValueACSgSS_tcfC', 
                        '_$s20SiriEmergencyIntents23NLv4IdentifierNamespaceO8rawValueSSvg', 
                        '_$s20SiriEmergencyIntents23NLv4IdentifierNamespaceO8rawValueSSvpMV', 

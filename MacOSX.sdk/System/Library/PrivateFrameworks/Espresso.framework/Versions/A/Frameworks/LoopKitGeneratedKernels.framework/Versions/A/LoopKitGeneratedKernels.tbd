@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8B26D083-4ED9-30EF-819B-19018F99D2A8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DD10C7C0-A8EA-3F3F-8108-6AF227DCACD3
 install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Frameworks/LoopKitGeneratedKernels.framework/Versions/A/LoopKitGeneratedKernels'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

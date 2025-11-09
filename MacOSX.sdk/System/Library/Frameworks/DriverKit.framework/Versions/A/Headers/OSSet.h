@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSSet.iig */
+/* iig(DriverKit-256.100.8) generated from OSSet.iig */
 
 /* OSSet.iig:1-36 */
 /*
@@ -247,7 +247,7 @@ public:
 
 #if !KERNEL
 
-class OSSetInterface : public OSInterface
+class  OSSetInterface : public OSInterface
 {
 public:
 };

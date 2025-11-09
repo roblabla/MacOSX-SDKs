@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8C790785-E03D-366A-9B4D-B5EABD8B88CB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DA729493-0A87-3369-BE0F-A627588E7707
 install-name:    '/System/Library/PrivateFrameworks/AnnotationKit.framework/Versions/A/AnnotationKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

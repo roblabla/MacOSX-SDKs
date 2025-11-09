@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           48B783CC-CA86-3459-B1CD-FDFFCAE9FD7E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0910F55B-B0EB-39F2-8CCF-22379C5CB172
 install-name:    '/usr/lib/swift/libswiftMetalKit.dylib'
 current-version: 1.2
 swift-abi-version: 7

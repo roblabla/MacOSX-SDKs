@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOTimerDispatchSource.iig */
+/* iig(DriverKit-256.100.8) generated from IOTimerDispatchSource.iig */
 
 /* IOTimerDispatchSource.iig:1-74 */
 /*
@@ -341,7 +341,7 @@ public:
 
 #if !KERNEL
 
-class IOTimerDispatchSourceInterface : public OSInterface
+class  IOTimerDispatchSourceInterface : public OSInterface
 {
 public:
 };

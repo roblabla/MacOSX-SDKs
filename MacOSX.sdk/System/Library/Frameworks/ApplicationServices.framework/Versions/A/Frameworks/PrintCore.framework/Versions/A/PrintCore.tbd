@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E95A1193-7879-3DFF-8CD5-FA05E09DCF55
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           457695DF-66A3-30D6-B3C9-7ED185B22EB8
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 567
+current-version: 572.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -78,9 +71,9 @@ exports:
                        _PMPrinterCanDuplex, _PMPrinterCanIdentify, _PMPrinterCanScan, 
                        _PMPrinterChargeInfoURI, _PMPrinterCopyACL, _PMPrinterCopyDefaultUserCredentials, 
                        _PMPrinterCopyDescriptionURL, _PMPrinterCopyDeviceURI, _PMPrinterCopyFinalDeviceURI, 
-                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyPresets, 
-                       _PMPrinterCopyRequiredUserCredentials, _PMPrinterCopyScannerUUID, 
-                       _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
+                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyOAUTHInfo, 
+                       _PMPrinterCopyPresets, _PMPrinterCopyRequiredUserCredentials, 
+                       _PMPrinterCopyScannerUUID, _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
                        _PMPrinterCopyState, _PMPrinterCopySuppliesURI, _PMPrinterCopyTempPPDURL, 
                        _PMPrinterCreateFromPrinterID, _PMPrinterCreatePaperInfoListForMenuPriv, 
                        _PMPrinterGetCommInfo, _PMPrinterGetConsumables, _PMPrinterGetConsumablesDisclaimer, 

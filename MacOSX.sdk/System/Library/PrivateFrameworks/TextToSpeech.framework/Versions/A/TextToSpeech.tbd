@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           943F9B8C-2526-3F6B-AA13-E4F02EBA90DD
-  - target:          x86_64-maccatalyst
-    value:           943F9B8C-2526-3F6B-AA13-E4F02EBA90DD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           05FF120A-5E28-358F-A0A7-B67ED86F0927
-  - target:          arm64e-maccatalyst
-    value:           05FF120A-5E28-358F-A0A7-B67ED86F0927
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Versions/A/TextToSpeech'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -49,13 +36,14 @@ exports:
                        _TTSCopyContentsOfDirectoryAtURL, _TTSCopyModificationDateForFileAtURL, 
                        _TTSCreateDataFromContentsOfURL, _TTSCreateDecryptedDataFromEncryptedData, 
                        _TTSCreateDirectory, _TTSCreateStringFromFileAtPath, _TTSCreateTemporaryDirectory, 
-                       _TTSCreateURLAndDirectory, _TTSDeleteItemAtURL, _TTSDirectoryExistsAtURL, 
-                       _TTSErrorCreate, _TTSFileExistsAtURL, _TTSFootprintCompactIdentifier, 
-                       _TTSFootprintPremiumIdentifier, _TTSFootprintSuperCompactIdentifier, 
-                       _TTSIsBaseSystem, _TTSIsInternalBuild, _TTSIsRunningInLoginWindow, 
-                       _TTSNashvilleRateToSpeechRate, _TTSPreferencesBoolValueForKey, 
-                       _TTSPreferencesCopyAutoDownloadedAssetsInfo, _TTSPreferencesCopyAvailableLanguageIdentifiers, 
-                       _TTSPreferencesCopyAvailableOutputLanguageIdentifiers, _TTSPreferencesCopyDefaultOutputLanguageIdentifierForLanguage, 
+                       _TTSCreateURLAndDirectory, _TTSDeleteItemAtURL, _TTSDidMigrateUninformedSiriVoices, 
+                       _TTSDirectoryExistsAtURL, _TTSErrorCreate, _TTSFileExistsAtURL, 
+                       _TTSFootprintCompactIdentifier, _TTSFootprintPremiumIdentifier, 
+                       _TTSFootprintSuperCompactIdentifier, _TTSIsBaseSystem, _TTSIsInternalBuild, 
+                       _TTSIsRunningInLoginWindow, _TTSNashvilleRateToSpeechRate, 
+                       _TTSPreferencesBoolValueForKey, _TTSPreferencesCopyAutoDownloadedAssetsInfo, 
+                       _TTSPreferencesCopyAvailableLanguageIdentifiers, _TTSPreferencesCopyAvailableOutputLanguageIdentifiers, 
+                       _TTSPreferencesCopyDefaultOutputLanguageIdentifierForLanguage, 
                        _TTSPreferencesCopyDefaultOutputLanguageIdentifierForUserPreferences, 
                        _TTSPreferencesCopyDefaultSpokenLanguageIdentifierForUserPreferences, 
                        _TTSPreferencesCopySpokenLanguageIdentifier, _TTSPreferencesCopySpokenLanguageIdentifierArray, 
@@ -91,9 +79,9 @@ exports:
                        __TTSPreferencesCopyDefaultOutputLanguageIdentifierForUserPreferredLocalizations, 
                        __TTSVocalizerCopyVoiceEngineFormatVersionsForLanguage, __VocalizerFootprintForSpeechFootprint, 
                        __VocalizerGenderForSpeechGender, __Z45TTS_NSStringFromAudioUnitComponentDescription25AudioComponentDescription, 
-                       _audioDeviceKey, _audioQueueFlagsKey, _audioSessionKey, _kAudioUnitMaxRetries, 
-                       _kTTSATVActiveJetsamLimit, _kTTSAXAssetIdKey, _kTTSAXAssetSizeKey, 
-                       _kTTSAXCanBeDownloadedKey, _kTTSAXDennisResourceContentsPath, 
+                       _audioDeviceKey, _audioQueueFlagsKey, _audioSessionKey, _channelsKey, 
+                       _kAudioUnitMaxRetries, _kTTSATVActiveJetsamLimit, _kTTSAXAssetIdKey, 
+                       _kTTSAXAssetSizeKey, _kTTSAXCanBeDownloadedKey, _kTTSAXDennisResourceContentsPath, 
                        _kTTSAXIsInstalledKey, _kTTSAXNoveltyVoiceKey, _kTTSAXResourceContentsPath, 
                        _kTTSAXResourceOnDiskMacinTalkContentsPath, _kTTSAXResourceSubtypeGryphon, 
                        _kTTSAXResourceSubtypeHydra, _kTTSAXResourceSubtypeMacinTalk, 

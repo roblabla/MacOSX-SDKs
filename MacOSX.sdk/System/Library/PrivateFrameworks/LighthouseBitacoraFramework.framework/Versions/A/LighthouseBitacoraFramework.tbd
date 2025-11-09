@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           082A7762-8ACD-3385-B1FD-F99B5FBE6404
-  - target:          x86_64-maccatalyst
-    value:           082A7762-8ACD-3385-B1FD-F99B5FBE6404
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8BEF0BB6-A0C4-3592-B858-E9F781CBE04B
-  - target:          arm64e-maccatalyst
-    value:           8BEF0BB6-A0C4-3592-B858-E9F781CBE04B
 install-name:    '/System/Library/PrivateFrameworks/LighthouseBitacoraFramework.framework/Versions/A/LighthouseBitacoraFramework'
 swift-abi-version: 7
 exports:
@@ -32,8 +19,11 @@ exports:
                        '_$s27LighthouseBitacoraFramework20LBFProtoToJson_swiftCN', 
                        '_$s27LighthouseBitacoraFramework20LBFProtoToJson_swiftCfD', 
                        _LBFLogContextAggregator, _LBFLogContextBiomeConverter, _LBFLogContextBiomeManager, 
-                       _LBFLogContextEventManager, _LBFLogContextEventsHolder, _LBFLogContextProtoConverter, 
-                       _LBFLoggingUtilsInit, _LIGHTHOUSE_BITACORA_PROTOBMLTIdentifiersReadFrom, 
+                       _LBFLogContextBitacoraStateInfo, _LBFLogContextBitacoraStateTransition, 
+                       _LBFLogContextEventFiltering, _LBFLogContextEventManager, 
+                       _LBFLogContextEventsHolder, _LBFLogContextProtoConverter, 
+                       _LBFLogContextStateDetector, _LBFLogContextTrialIdentifires, 
+                       _LBFLogContextTrialStatusDetector, _LBFLoggingUtilsInit, _LIGHTHOUSE_BITACORA_PROTOBMLTIdentifiersReadFrom, 
                        _LIGHTHOUSE_BITACORA_PROTOBitacoraStateReadFrom, _LIGHTHOUSE_BITACORA_PROTOEventStatusReadFrom, 
                        _LIGHTHOUSE_BITACORA_PROTOExperimentIdentifiersReadFrom, _LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerLighthousePluginEventReadFrom, 
                        _LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerMlruntimedEventReadFrom, 
@@ -41,8 +31,11 @@ exports:
                        _LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerTrialdEventReadFrom, 
                        _LIGHTHOUSE_BITACORA_PROTOScheduleStatusReadFrom, _LIGHTHOUSE_BITACORA_PROTOTaskEventReadFrom, 
                        _LRRLoggingCategoryAggregator, _LRRLoggingCategoryBiomeConverter, 
-                       _LRRLoggingCategoryBiomeManager, _LRRLoggingCategoryEventManager, 
-                       _LRRLoggingCategoryEventsHolder, _LRRLoggingCategoryProtoConverter, 
+                       _LRRLoggingCategoryBiomeManager, _LRRLoggingCategoryBitacoraStateInfo, 
+                       _LRRLoggingCategoryBitacoraStateTransition, _LRRLoggingCategoryEventFiltering, 
+                       _LRRLoggingCategoryEventManager, _LRRLoggingCategoryEventsHolder, 
+                       _LRRLoggingCategoryProtoConverter, _LRRLoggingCategoryStateDetector, 
+                       _LRRLoggingCategoryTrialIdentifires, _LRRLoggingCategoryTrialStatusDetector, 
                        _LRRLoggingSubsystem, _LighthouseBitacoraFrameworkVersionNumber, 
                        _LighthouseBitacoraFrameworkVersionString, _kBiomeBitacoraStreamId, 
                        _kBiomeBitacoraTrialStreamId, _kDataversionLighthousePluginEvent, 
@@ -51,12 +44,14 @@ exports:
                        _onceTokenBiomeManagerLighthouse, _onceTokenBiomeManagerMLRuntimed, 
                        _onceTokenBiomeManagerTrial, _onceTokenBiomeSource ]
     objc-classes:    [ LBFAggregator, LBFBiomeManager, LBFBiomeStoreDataConverter, 
+                       LBFBitacoraStateInfo, LBFBitacoraStateTransition, LBFBucket, 
                        LBFContextId, LBFCoreAnalyticsUtils, LBFDeploymentEventsHolder, 
                        LBFEventManager, LBFExperimentEventsHolder, LBFLighthouseEvent, 
-                       LBFMLRuntimedEvent, LBFProtoConverter, LBFTrialEvent, LBFTrialIdentifiers, 
-                       LBFUtils, LIGHTHOUSE_BITACORA_PROTOBMLTIdentifiers, LIGHTHOUSE_BITACORA_PROTOBitacoraState, 
-                       LIGHTHOUSE_BITACORA_PROTOEventStatus, LIGHTHOUSE_BITACORA_PROTOExperimentIdentifiers, 
-                       LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerLighthousePluginEvent, 
+                       LBFMLRuntimedEvent, LBFObservedTrialStatus, LBFProtoConverter, 
+                       LBFStateDetector, LBFTestEventManager, LBFTrialEvent, LBFTrialIdentifiers, 
+                       LBFTrialStatusDetector, LBFUtils, LIGHTHOUSE_BITACORA_PROTOBMLTIdentifiers, 
+                       LIGHTHOUSE_BITACORA_PROTOBitacoraState, LIGHTHOUSE_BITACORA_PROTOEventStatus, 
+                       LIGHTHOUSE_BITACORA_PROTOExperimentIdentifiers, LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerLighthousePluginEvent, 
                        LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerMlruntimedEvent, 
                        LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerTrialIdentifiers, 
                        LIGHTHOUSE_BITACORA_PROTOLighthouseLedgerTrialdEvent, LIGHTHOUSE_BITACORA_PROTOScheduleStatus, 

@@ -2,7 +2,7 @@
 //  GKMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2022 Apple Inc. All rights reserved.
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
 //
 
 @class GKMatchRequest, GKInvite, GKMatch, GKPlayer;

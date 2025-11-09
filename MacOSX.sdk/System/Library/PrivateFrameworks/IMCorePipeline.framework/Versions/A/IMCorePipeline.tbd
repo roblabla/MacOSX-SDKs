@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6475B4F3-496C-3B23-90C1-A0EB11179A02
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1E5B4D04-68B7-39E8-8DC7-B4CE07D8CE55
 install-name:    '/System/Library/PrivateFrameworks/IMCorePipeline.framework/Versions/A/IMCorePipeline'
 swift-abi-version: 7
 exports:

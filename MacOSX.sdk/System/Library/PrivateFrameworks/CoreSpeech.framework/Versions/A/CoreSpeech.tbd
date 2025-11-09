@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DBC26A26-C8D4-340E-B56F-7F67BE8EDD8E
-  - target:          x86_64-maccatalyst
-    value:           DBC26A26-C8D4-340E-B56F-7F67BE8EDD8E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           93D4D580-C7E7-384C-9156-46A665C0F1E3
-  - target:          arm64e-maccatalyst
-    value:           93D4D580-C7E7-384C-9156-46A665C0F1E3
 install-name:    '/System/Library/PrivateFrameworks/CoreSpeech.framework/Versions/A/CoreSpeech'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -56,6 +43,7 @@ exports:
                        _CSSiriAudioSessionPortHDMI, _CSSiriAudioSessionPortHeadphones, 
                        _CSSiriAudioSessionPortHeadsetMic, _CSSiriAudioSessionPortLineIn, 
                        _CSSiriAudioSessionPortOther, _CSSiriAudioSessionPortUSBAudio, 
+                       _CSSiriDebug_NotifyVTNearMissFeedbackBanner, _CSSiriDebug_NotifyVTRejectedFeedbackBanner, 
                        _CSSiriDebug_RemoteNearMissGradingTrigger, _CSSiriDebug_SpeakerGradingTrigger, 
                        _CSSiriDebug_VoiceProfileAddedTrigger, _CSSiriDebug_VoiceProfileSyncTrigger, 
                        _CSSiriGlobalKeychainAccountIdentifier, _CSSiriRefreshDeviceExperimentGroup, 
@@ -147,9 +135,9 @@ exports:
                        CSAudioServerCrashMonitor, CSAudioSessionController, CSAudioSessionInfoProvider, 
                        CSAudioSessionMonitor, CSAudioStartStreamOption, CSAudioStream, 
                        CSAudioStreamHolding, CSAudioStreamRequest, CSAudioTandemStream, 
-                       CSAutomaticVolumeEnabledMonitor, CSBatteryMonitor, CSBenchmarkService, 
-                       CSBiometricMatchMonitor, CSBluetoothDeviceInfo, CSBluetoothManager, 
-                       CSBluetoothWirelessSplitterInfo, CSBluetoothWirelessSplitterMonitor, 
+                       CSAudioTapProvider, CSAutomaticVolumeEnabledMonitor, CSBatteryMonitor, 
+                       CSBenchmarkService, CSBiometricMatchMonitor, CSBluetoothDeviceInfo, 
+                       CSBluetoothManager, CSBluetoothWirelessSplitterInfo, CSBluetoothWirelessSplitterMonitor, 
                        CSBluetoothWirelessSplitterMonitorImplDarwin, CSBuiltInVoiceTrigger, 
                        CSBuiltInVoiceTriggerEnabledPolicy, CSBuiltinSpeakerStateMonitor, 
                        CSCXPhoneCallStateMonitor, CSClamshellStateMonitor, CSCommandControlBehaviorMonitor, 
@@ -165,13 +153,14 @@ exports:
                        CSFallbackAudioSessionReleaseProvider, CSFirstUnlockMonitor, 
                        CSGestureDropEvent, CSGestureMonitor, CSHangUpEnabledMonitor, 
                        CSHearstSecondPassRequest, CSHomePodSettingsMonitor, CSHostLauncherDarwin, 
-                       CSHostPowerSourceMonitor, CSHybridEndpointAnalyzer, CSHybridEndpointer, 
-                       CSJarvisTriggerModeMonitor, CSKeywordDetector, CSLanguageCodeUpdateMonitor, 
-                       CSLanguageCodeUpdateMonitorImpl, CSLanguageCodeUpdateMonitorImplDarwin, 
-                       CSLanguageDetector, CSLanguageDetectorAssetMonitor, CSLanguageDetectorOption, 
-                       CSListeningEnabledPolicyWatch, CSMSNExceptionManager, CSMacWakeSleepMonitor, 
-                       CSMediaPlayingMonitor, CSMicUsageReporter, CSMyriadNotifier, 
-                       CSMyriadPHash, CSMyriadPHashFactors, CSMyriadSelfTriggerCoordinator, 
+                       CSHostPowerSourceMonitor, CSHostPowerStateMonitor, CSHybridEndpointAnalyzer, 
+                       CSHybridEndpointer, CSJarvisTriggerModeMonitor, CSKeywordDetector, 
+                       CSLanguageCodeUpdateMonitor, CSLanguageCodeUpdateMonitorImpl, 
+                       CSLanguageCodeUpdateMonitorImplDarwin, CSLanguageDetector, 
+                       CSLanguageDetectorAssetMonitor, CSLanguageDetectorOption, 
+                       CSListeningEnabledPolicyWatch, CSMSNExceptionManager, CSMacHostStudioDisplaySelfTriggerEnabledPolicy, 
+                       CSMacWakeSleepMonitor, CSMediaPlayingMonitor, CSMicUsageReporter, 
+                       CSMyriadNotifier, CSMyriadPHash, CSMyriadPHashFactors, CSMyriadSelfTriggerCoordinator, 
                        CSNNVADEndpointAnalyzer, CSNetworkAvailabilityMonitor, CSOpportuneSpeakBehaviorMonitor, 
                        CSOpportuneSpeakEventMonitor, CSOpportuneSpeakListener, CSOpportuneSpeakListenerDeviceManager, 
                        CSOpportuneSpeakListenerOption, CSOpportuneSpeakListnerTestService, 
@@ -184,8 +173,9 @@ exports:
                        CSRemoteDeviceProtocolInfo, CSRemoteRecordClient, CSRemoteVADCircularBuffer, 
                        CSSACInfoMonitor, CSSPGEndpointAnalyzer, CSSRFUserSettingMonitor, 
                        CSSSRXPCClient, CSScreenLockMonitor, CSSelfTriggerDetector, 
-                       CSSelfTriggerDetectorEnabledPolicyASMac, CSSelfTriggerDetectorEnabledPolicyFactory, 
-                       CSSelfTriggerDetectorEnabledPolicyMac, CSServerEndpointFeatures, 
+                       CSSelfTriggerDetectorEnabledPolicyFactory, CSSelfTriggerDetectorEnabledPolicyMac, 
+                       CSSelfTriggerDetectorUseAVVCEnabledPolicyASMac, CSSelfTriggerDetectorUseAudioTapEnabledPolicyASMac, 
+                       CSSelfTriggerEnabledMonitorAccessory, CSServerEndpointFeatures, 
                        CSShadowMicScoreCreator, CSSiriAcousticFingerprinter, CSSiriAssertionMonitor, 
                        CSSiriAudioActivationInfo, CSSiriAudioFileWriter, CSSiriAudioPlaybackService, 
                        CSSiriAudioPlaybackSessionImplAVAudioPlayerBased, CSSiriAudioPlaybackSessionImplAVPlayerBased, 

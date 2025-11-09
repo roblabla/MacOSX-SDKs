@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           5F7010C6-136A-331A-9B9F-6A1079ADF128
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           18CC27E2-A06F-3EEE-A8A8-98A0F8630845
 install-name:    '/System/Library/PrivateFrameworks/CloudSubscriptionFeatures.framework/Versions/A/CloudSubscriptionFeatures'
 swift-abi-version: 7
 exports:
@@ -143,6 +136,6 @@ exports:
                        '_$sSo26CSFGeoClassificationStatusVs23CustomStringConvertible25CloudSubscriptionFeaturesMc', 
                        _CSFGeoClassificationStatusDescription, _CloudSubscriptionFeaturesVersionNumber, 
                        _CloudSubscriptionFeaturesVersionString, _kCloudSubscriptionFeatureChangedNotificationName ]
-    objc-classes:    [ CSFFeatureManager, CloudFeature, CloudFeatureObject, CloudSubscriptionFeatures, 
-                       DaemonController, FeatureChangeObserver, FeaturesDaemon, _TtC25CloudSubscriptionFeatures21GeoClassificationInfo ]
+    objc-classes:    [ CSFFeatureManager, CloudFeature, CloudFeatureObject, DaemonController, 
+                       FeatureChangeObserver, FeaturesDaemon, _TtC25CloudSubscriptionFeatures21GeoClassificationInfo ]
 ...

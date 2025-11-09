@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOServiceNotificationDispatchSource.iig */
+/* iig(DriverKit-256.100.8) generated from IOServiceNotificationDispatchSource.iig */
 
 /* IOServiceNotificationDispatchSource.iig:1-45 */
 /*
@@ -307,7 +307,7 @@ public:
 };
 
 
-class IOServiceNotificationDispatchSourceInterface : public OSInterface
+class  IOServiceNotificationDispatchSourceInterface : public OSInterface
 {
 public:
 };

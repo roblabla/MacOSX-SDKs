@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E84FA0AE-4A40-3879-A6AE-86112DEAEC72
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           705EA83F-B398-3E0B-A19E-6D51025CEAE1
 install-name:    '/System/Library/PrivateFrameworks/IMDPersistence.framework/Versions/A/IMDPersistence'
 current-version: 800
 swift-abi-version: 7
@@ -155,14 +148,15 @@ exports:
                        _IMDGenerateInClauseForCount, _IMDGetDatabasePath, _IMDGetDefaultAnonymizedDatabaseFilePath, 
                        _IMDGetDefaultAnonymizedDatabaseFolderPath, _IMDGetDefaultTrimmedDatabaseFilePath, 
                        _IMDGetDefaultTrimmedDatabaseFolderPath, _IMDGetDestinationFilePath, 
-                       _IMDGetTimeStampedFilePath, _IMDHandleRecordAddHandleRecord, 
-                       _IMDHandleRecordBulkCopy, _IMDHandleRecordBulkUpdate, _IMDHandleRecordCopyCountry, 
-                       _IMDHandleRecordCopyHandleForIDOnService, _IMDHandleRecordCopyHandleRecord, 
-                       _IMDHandleRecordCopyHandleRecordUnlocked, _IMDHandleRecordCopyID, 
-                       _IMDHandleRecordCopyPersonCentricID, _IMDHandleRecordCopyUncanonicalizedID, 
-                       _IMDHandleRecordCreate, _IMDHandleRecordCreateFromRecordID, 
-                       _IMDHandleRecordCreateFromRecordIDUnlocked, _IMDHandleRecordGetIdentifier, 
-                       _IMDHandleRecordGetTypeID, _IMDImportAttachmentWithData, _IMDImportAttachmentWithPath, 
+                       _IMDGetTimeStampedFilePath, _IMDHandleCanonicalizedIDsBulkUpdateQuery, 
+                       _IMDHandleRecordAddHandleRecord, _IMDHandleRecordBulkCopy, 
+                       _IMDHandleRecordBulkUpdate, _IMDHandleRecordCopyCountry, _IMDHandleRecordCopyHandleForIDOnService, 
+                       _IMDHandleRecordCopyHandleRecord, _IMDHandleRecordCopyHandleRecordUnlocked, 
+                       _IMDHandleRecordCopyID, _IMDHandleRecordCopyPersonCentricID, 
+                       _IMDHandleRecordCopyUncanonicalizedID, _IMDHandleRecordCreate, 
+                       _IMDHandleRecordCreateFromRecordID, _IMDHandleRecordCreateFromRecordIDUnlocked, 
+                       _IMDHandleRecordGetIdentifier, _IMDHandleRecordGetTypeID, 
+                       _IMDImportAttachmentWithData, _IMDImportAttachmentWithPath, 
                        _IMDImportMessage, _IMDInt64FromSqlColumn, _IMDIntFromSqlColumn, 
                        _IMDIsFavoritedContact, _IMDIsRunningInDatabaseServerProcess, 
                        _IMDKVPersistValueForKey, _IMDKVValueForKey, _IMDLegacyMigrator, 
@@ -250,7 +244,8 @@ exports:
                        _IMDMessageRecordMarkMessageGUIDUnread, _IMDMessageRecordMarkMessageWithROWIDAsIgnoreButNeedingSyncWithCloudKit, 
                        _IMDMessageRecordMarkMessageWithROWIDAsSyncedWithCloudKit, 
                        _IMDMessageRecordMarkMessagesAsUnreadWithChatGUIDUpToGUIDFromMe, 
-                       _IMDMessageRecordMaxMessageIDFromChatMessageJoin, _IMDMessageRecordSelectMessagesWithGUIDsChatIdentifiersOnServicesQuery1, 
+                       _IMDMessageRecordMaxMessageIDFromChatMessageJoin, _IMDMessageRecordRetractNotificationsForMessagesMatchingChatGUIDs, 
+                       _IMDMessageRecordSelectMessagesWithGUIDsChatIdentifiersOnServicesQuery1, 
                        _IMDMessageRecordSelectMessagesWithGUIDsChatIdentifiersOnServicesQuery1_Original, 
                        _IMDMessageRecordSetHandle, _IMDMessageRecordSetOtherHandle, 
                        _IMDMessageRecordSetWasDeduplicated, _IMDMessageRecordUnassociateMessageWithGUIDFromAttachmentWithGUID, 
@@ -281,12 +276,14 @@ exports:
                        _IMDMigrateTo16000, _IMDMigrateTo16001, _IMDMigrateTo16002, 
                        _IMDMigrateTo16003, _IMDMigrateTo16004, _IMDMigrateTo16005, 
                        _IMDMigrateTo16006, _IMDMigrateTo16007, _IMDMigrateTo16008, 
-                       _IMDMigrateTo16100, _IMDMigrateTo16101, _IMDMigrateTo8200, 
-                       _IMDMigrateTo9002, _IMDNotificationsApplicationDomain, _IMDNotificationsHideKnown, 
-                       _IMDNotificationsHidePromotions, _IMDNotificationsHideTransactions, 
-                       _IMDNotificationsHideUnknown, _IMDNotificationsPostFirstUnlockMessage, 
-                       _IMDNotificationsPostNotificationsWithContext, _IMDNotificationsPostUrgentNotificationsForMessages, 
-                       _IMDNotificationsRetractNotificationsForReadMessages, _IMDNotificationsRetractNotificationsFromFirstUnlockWithContext, 
+                       _IMDMigrateTo16100, _IMDMigrateTo16101, _IMDMigrateTo16102, 
+                       _IMDMigrateTo16200, _IMDMigrateTo16300, _IMDMigrateTo16301, 
+                       _IMDMigrateTo8200, _IMDMigrateTo9002, _IMDNotificationsApplicationDomain, 
+                       _IMDNotificationsHideKnown, _IMDNotificationsHidePromotions, 
+                       _IMDNotificationsHideTransactions, _IMDNotificationsHideUnknown, 
+                       _IMDNotificationsPostFirstUnlockMessage, _IMDNotificationsPostNotificationsWithContext, 
+                       _IMDNotificationsPostUrgentNotificationsForMessages, _IMDNotificationsRetractNotificationsForReadMessages, 
+                       _IMDNotificationsRetractNotificationsFromFirstUnlockWithContext, 
                        _IMDNotificationsUpdatePostedNotificationsForMessages, _IMDPersistenceCheckDatabaseThread, 
                        _IMDPersistencePerformBlock, _IMDPersistencePerformBlockAfterDelay, 
                        _IMDPersistenceProtectionMerge_DeleteUnprotectedDatabase, 
@@ -353,8 +350,8 @@ exports:
                        __IMDChatRecordCopyChatsFromRecords, __IMDChatRecordCopyChatsFromXPCArray, 
                        __IMDChatRecordCopyChatsToXPCArray, __IMDChatRecordCopyProperty, 
                        __IMDChatRecordGetDateProperty, __IMDChatRecordGetProperty, 
-                       __IMDChatRecordSetProperty, __IMDContactNameForNickname, __IMDContactStore, 
-                       __IMDContactsKindForID, __IMDCopyAttachmentsNeedingFileSizeUpdatesForWatermark, 
+                       __IMDChatRecordSetGUID, __IMDChatRecordSetProperty, __IMDContactNameForNickname, 
+                       __IMDContactStore, __IMDContactsKindForID, __IMDCopyAttachmentsNeedingFileSizeUpdatesForWatermark, 
                        __IMDCopyIMDAttachmentRecordFromXPCObjectClient, __IMDCopyIMDAttachmentRecordFromXPCObjectServer, 
                        __IMDCopyIMDChatRecordFromXPCObjectClient, __IMDCopyIMDChatRecordFromXPCObjectServer, 
                        __IMDCopyIMDHandleRecordFromXPCObjectClient, __IMDCopyIMDHandleRecordFromXPCObjectServer, 
@@ -548,6 +545,7 @@ exports:
                        ___XPCServerIMDMessageRecordMarkMessageWithROWIDAsSyncedWithCloudKit_IPCAction, 
                        ___XPCServerIMDMessageRecordMarkMessagesAsUnreadWithChatGUIDUpToGUIDFromMe_IPCAction, 
                        ___XPCServerIMDMessageRecordMaxMessageIDFromChatMessageJoin_IPCAction, 
+                       ___XPCServerIMDMessageRecordRetractNotificationsForChatGuids_asyncIPCAction, 
                        ___XPCServerIMDMessageRecordSetCloudKitSyncCounts_IPCAction, 
                        ___XPCServerIMDMessageRecordSetHandle_IPCAction, ___XPCServerIMDMessageRecordUnassociateMessageWithGUIDFromAttachmentWithGUID_IPCAction, 
                        ___XPCServerIMDMessageStoreIsFull_IPCAction, ___XPCServerIMDMessageStoreSave_IPCAction, 
@@ -560,6 +558,7 @@ exports:
                        ___XPCServerIMDNotificationsUpdatePostedNotificationsForMessages_IPCAction, 
                        ___XPCServerIMDSwitchDatabase_IPCAction, ___XPCServerInsertIntoDeletedChatsTable_IPCAction, 
                        ___asyncXPCIMDCNRecordIDAndHistoryTokenForAliases_IPAction, 
+                       ___asyncXPCIMDMessageRecordRetractNotificationsForChatGuids_IPCAction, 
                        ___asyncXPCIMDNotificationsPostNotifications_IPCAction, ___asyncXPCIMDNotificationsRetractNotificationsForReadMessages_IPCAction, 
                        ___asyncXPCIMDNotificationsRetractNotificationsFromFirstUnlock_IPCAction, 
                        ___syncXPCIMDAddIncompatibleGroupPhotoChangedMessagesToDeleteFromCloudKit_IPCAction, 

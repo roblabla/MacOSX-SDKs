@@ -2,7 +2,7 @@
 //  INAnswerCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -20,10 +20,10 @@ API_UNAVAILABLE(tvos)
                     callIdentifier:(nullable NSString *)callIdentifier NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.2), watchos(9.2), macosx(13.1));
 
 // The audio route to answer the call on.
-@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallAudioRoute audioRoute API_UNAVAILABLE(ios, macos, tvos);
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallAudioRoute audioRoute API_UNAVAILABLE(tvos);
 
 // The identifier of the call that the user wishes to answer.
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *callIdentifier API_UNAVAILABLE(ios, macos, watchos, tvos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *callIdentifier API_UNAVAILABLE(tvos);
 
 @end
 

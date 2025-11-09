@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKAddShareablePassConfiguration.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddShareablePassConfiguration.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

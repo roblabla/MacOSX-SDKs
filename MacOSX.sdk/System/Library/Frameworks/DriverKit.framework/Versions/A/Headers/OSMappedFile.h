@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSMappedFile.iig */
+/* iig(DriverKit-256.100.8) generated from OSMappedFile.iig */
 
 /* OSMappedFile.iig:1-33 */
 /*
@@ -155,7 +155,7 @@ public:
 
 #if !KERNEL
 
-class OSMappedFileInterface : public OSInterface
+class  OSMappedFileInterface : public OSInterface
 {
 public:
 };

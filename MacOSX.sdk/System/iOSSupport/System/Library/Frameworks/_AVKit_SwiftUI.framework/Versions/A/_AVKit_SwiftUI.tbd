@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           C3115F01-01CE-301E-86CD-7663C709357A
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           359A9CED-1C8B-37FF-A965-C05B2F68D128
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AVKit_SwiftUI.framework/Versions/A/_AVKit_SwiftUI'
 swift-abi-version: 7
 exports:

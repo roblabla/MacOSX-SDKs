@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D7D965B3-C53A-3215-98A0-883823BE50B2
-  - target:          x86_64-maccatalyst
-    value:           D7D965B3-C53A-3215-98A0-883823BE50B2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C1288DC8-1EC1-31AA-915B-6DCD0F99B264
-  - target:          arm64e-maccatalyst
-    value:           C1288DC8-1EC1-31AA-915B-6DCD0F99B264
 install-name:    '/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight'
 current-version: 600
 compatibility-version: 64
@@ -199,25 +186,26 @@ exports:
                        _SLSDeviceGetProfile, _SLSDeviceGetResolution, _SLSDeviceInvalidate, 
                        _SLSDeviceLock, _SLSDeviceScroll, _SLSDeviceSynchronize, _SLSDeviceUnlock, 
                        _SLSDisableCursorObscure, _SLSDisableDisableUpdate, _SLSDisableUpdate, 
-                       _SLSDisableUpdateToken, _SLSDisconnectWindowManager, _SLSDisplayChangedSeed, 
-                       _SLSDisplayConfigurationOrigin, _SLSDisplayCopyCalibrationInfo, 
+                       _SLSDisableUpdateToken, _SLSDisconnectWindowManager, _SLSDisplayCalibrationBegin, 
+                       _SLSDisplayCalibrationEnd, _SLSDisplayCalibrationToolboxCommand, 
+                       _SLSDisplayChangedSeed, _SLSDisplayConfigurationOrigin, _SLSDisplayCopyCalibrationInfo, 
                        _SLSDisplayCopyCurrentMetalDevice, _SLSDisplayCopyPreset, 
                        _SLSDisplayCopyPresetData, _SLSDisplayCopyPresetUniqueID, 
                        _SLSDisplayCopyUserAdjustment, _SLSDisplayCopyUserAdjustmentData, 
                        _SLSDisplayCreateImage, _SLSDisplayFactoryReset, _SLSDisplayGetActivePresetIndex, 
-                       _SLSDisplayGetCalibrationInfo, _SLSDisplayGetCurrentHeadroom, 
-                       _SLSDisplayGetCurrentVBLDelta, _SLSDisplayGetCurrentVBLDeltaInNanoseconds, 
-                       _SLSDisplayGetFactoryDefaultPresetIndex, _SLSDisplayGetLuminanceCorrectionFactor, 
-                       _SLSDisplayGetPotentialHeadroom, _SLSDisplayGetPreferHDR10, 
-                       _SLSDisplayGetPresetCount, _SLSDisplayGetPresetInfo, _SLSDisplayGetPriorVBLTime, 
-                       _SLSDisplayGetPriorVBLTimeInNanoseconds, _SLSDisplayGetReferenceHeadroom, 
-                       _SLSDisplayGetRefreshTiming, _SLSDisplayGetTiming, _SLSDisplayGetUnderscan, 
-                       _SLSDisplayGetUnderscanParameters, _SLSDisplayGetUserAdjustmentLuminanceCorrectionFactor, 
-                       _SLSDisplayInvalidateUserAdjustment, _SLSDisplayIsHDRModeEnabled, 
-                       _SLSDisplayIsPresetValid, _SLSDisplayIsPresetWritable, _SLSDisplayIsThermallyLimited, 
-                       _SLSDisplayIsUserAdjustmentSupported, _SLSDisplayIsUserAdjustmentValid, 
-                       _SLSDisplayLoadUserPreferences, _SLSDisplayManagerRegisterPowerStateNotification, 
-                       _SLSDisplayManagerRegisterPowerStateNotificationDictionary, 
+                       _SLSDisplayGetCalibrationInfo, _SLSDisplayGetCalibrationInfoWithLuminanceScale, 
+                       _SLSDisplayGetCurrentHeadroom, _SLSDisplayGetCurrentVBLDelta, 
+                       _SLSDisplayGetCurrentVBLDeltaInNanoseconds, _SLSDisplayGetFactoryDefaultPresetIndex, 
+                       _SLSDisplayGetLuminanceCorrectionFactor, _SLSDisplayGetPotentialHeadroom, 
+                       _SLSDisplayGetPreferHDR10, _SLSDisplayGetPresetCount, _SLSDisplayGetPresetInfo, 
+                       _SLSDisplayGetPriorVBLTime, _SLSDisplayGetPriorVBLTimeInNanoseconds, 
+                       _SLSDisplayGetReferenceHeadroom, _SLSDisplayGetRefreshTiming, 
+                       _SLSDisplayGetTiming, _SLSDisplayGetUnderscan, _SLSDisplayGetUnderscanParameters, 
+                       _SLSDisplayGetUserAdjustmentLuminanceCorrectionFactor, _SLSDisplayInvalidateUserAdjustment, 
+                       _SLSDisplayIsHDRModeEnabled, _SLSDisplayIsPresetValid, _SLSDisplayIsPresetWritable, 
+                       _SLSDisplayIsThermallyLimited, _SLSDisplayIsUserAdjustmentSupported, 
+                       _SLSDisplayIsUserAdjustmentValid, _SLSDisplayLoadUserPreferences, 
+                       _SLSDisplayManagerRegisterPowerStateNotification, _SLSDisplayManagerRegisterPowerStateNotificationDictionary, 
                        _SLSDisplayManagerRegisterPowerStateNotificationOptions, _SLSDisplayManagerRegisterPowerStateNotificationWithPayloadDictionary, 
                        _SLSDisplayManagerRequestDisplaysIdle, _SLSDisplayManagerUnregisterPowerStateNotification, 
                        _SLSDisplayManagerUnregisterPowerStateNotificationDictionary, 
@@ -463,14 +451,15 @@ exports:
                        _SLSSetMenuBarDrawingStyle, _SLSSetMenuBarInsetAndAlpha, _SLSSetMenuBarSystemOverrideAlpha, 
                        _SLSSetMenuBarVisibilityOverrideOnDisplay, _SLSSetMenuBars, 
                        _SLSSetMouseEventEnableFlags, _SLSSetMouseFocusWindow, _SLSSetOtherUniversalConnection, 
-                       _SLSSetPerUserConfigurationData, _SLSSetPressureConfigurationOverride, 
-                       _SLSSetPreventsActivation, _SLSSetRegisteredCursor, _SLSSetSarlaccPathShow, 
-                       _SLSSetSecureEventInput, _SLSSetSessionPropertiesTemporaryBridge, 
-                       _SLSSetSessionSwitchCubeAnimation, _SLSSetSpaceManagementMode, 
-                       _SLSSetSurfaceBackgroundBlur, _SLSSetSurfaceBounds, _SLSSetSurfaceColorSpace, 
-                       _SLSSetSurfaceLayerBackingOptions, _SLSSetSurfaceListAlpha, 
-                       _SLSSetSurfaceOpacity, _SLSSetSurfaceProperty, _SLSSetSurfaceProxiesForNextFlush, 
-                       _SLSSetSurfaceResolution, _SLSSetSurfaceShape, _SLSSetSurfaceVersionedProxiesForNextFlush, 
+                       _SLSSetPerUserConfigurationData, _SLSSetPhotosensitivityProcessingEnabled, 
+                       _SLSSetPressureConfigurationOverride, _SLSSetPreventsActivation, 
+                       _SLSSetRegisteredCursor, _SLSSetSarlaccPathShow, _SLSSetSecureEventInput, 
+                       _SLSSetSessionPropertiesTemporaryBridge, _SLSSetSessionSwitchCubeAnimation, 
+                       _SLSSetSpaceManagementMode, _SLSSetSurfaceBackgroundBlur, 
+                       _SLSSetSurfaceBounds, _SLSSetSurfaceColorSpace, _SLSSetSurfaceLayerBackingOptions, 
+                       _SLSSetSurfaceListAlpha, _SLSSetSurfaceOpacity, _SLSSetSurfaceProperty, 
+                       _SLSSetSurfaceProxiesForNextFlush, _SLSSetSurfaceResolution, 
+                       _SLSSetSurfaceShape, _SLSSetSurfaceVersionedProxiesForNextFlush, 
                        _SLSSetSwipeScrollDirection, _SLSSetSymbolicHotKey, _SLSSetSymbolicHotKeyButtonValue, 
                        _SLSSetSymbolicHotKeyEnabled, _SLSSetSymbolicHotKeyEnabledForConnection, 
                        _SLSSetSymbolicHotKeyRepresentation, _SLSSetSymbolicHotKeyValue, 

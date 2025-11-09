@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7E6B48F4-EC4C-373A-A1EC-0F852B2FA8F5
-  - target:          x86_64-maccatalyst
-    value:           7E6B48F4-EC4C-373A-A1EC-0F852B2FA8F5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65F37A4A-B8B9-3961-AA9D-313829C91A87
-  - target:          arm64e-maccatalyst
-    value:           65F37A4A-B8B9-3961-AA9D-313829C91A87
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -47,8 +34,9 @@ exports:
                        _PHAssetExportRequestErrorDomain, _PHAssetExportRequestFullSizePhotoURLKey, 
                        _PHAssetExportRequestFullSizeVideoURLKey, _PHAssetExportRequestLivePhotoBundleURLKey, 
                        _PHAssetExportRequestLocationMetadataOperationForAssetWithOptions, 
-                       _PHAssetExportRequestMediaFormatConversionManager, _PHAssetExportRequestOriginalAdjustmentDataFileURLKey, 
-                       _PHAssetExportRequestPhotoFileURLKey, _PHAssetExportRequestProcessingRequiredForAssetWithOptions, 
+                       _PHAssetExportRequestMaximumAnalyticsIntervalEvents, _PHAssetExportRequestMediaFormatConversionManager, 
+                       _PHAssetExportRequestOriginalAdjustmentDataFileURLKey, _PHAssetExportRequestPhotoFileURLKey, 
+                       _PHAssetExportRequestProcessingRequiredForAssetWithOptions, 
                        _PHAssetExportRequestSpatialOvercapturePairedVideoURLKey, 
                        _PHAssetExportRequestSpatialOvercapturePhotoURLKey, _PHAssetExportRequestSpatialOvercaptureVideoURLKey, 
                        _PHAssetExportRequestStateDebugDescription, _PHAssetExportRequestVideoFileURLKey, 
@@ -65,18 +53,18 @@ exports:
                        _PHAssetMediaSubtypesDebugDescription, _PHAssetMediaTypeDebugDescription, 
                        _PHAssetNSFWGeneralSceneClassificationIdentifier, _PHAssetOriginalAccessibilityDescriptionForAsset, 
                        _PHAssetOriginalCaptionForAsset, _PHAssetOriginalLocationForAsset, 
-                       _PHAssetPlaybackStyleDebugDescription, _PHAssetPlaybackVariationDebugDescription, 
-                       _PHAssetPreviewAestheticsScorePercentileThresholdKey, _PHAssetPreviewCurationScorePercentileThresholdKey, 
-                       _PHAssetPreviewDefaultAestheticScorePercentileThreshold, _PHAssetPreviewDefaultCurationScorePercentileThreshold, 
-                       _PHAssetPropertySetAdjustment, _PHAssetPropertySetAesthetic, 
-                       _PHAssetPropertySetAnalysisState, _PHAssetPropertySetCameraCaptureDevice, 
-                       _PHAssetPropertySetCharacterRecognition, _PHAssetPropertySetCloudLocalState, 
-                       _PHAssetPropertySetCoarseLocation, _PHAssetPropertySetComments, 
-                       _PHAssetPropertySetCore, _PHAssetPropertySetCuration, _PHAssetPropertySetDescription, 
-                       _PHAssetPropertySetDestinationAssetCopy, _PHAssetPropertySetFaceWorker, 
-                       _PHAssetPropertySetGridMetadata, _PHAssetPropertySetIdentifier, 
-                       _PHAssetPropertySetImageManager, _PHAssetPropertySetImport, 
-                       _PHAssetPropertySetKeywords, _PHAssetPropertySetLibraryScope, 
+                       _PHAssetOriginalMetadataOfAsset, _PHAssetPlaybackStyleDebugDescription, 
+                       _PHAssetPlaybackVariationDebugDescription, _PHAssetPreviewAestheticsScorePercentileThresholdKey, 
+                       _PHAssetPreviewCurationScorePercentileThresholdKey, _PHAssetPreviewDefaultAestheticScorePercentileThreshold, 
+                       _PHAssetPreviewDefaultCurationScorePercentileThreshold, _PHAssetPropertySetAdjustment, 
+                       _PHAssetPropertySetAesthetic, _PHAssetPropertySetAnalysisState, 
+                       _PHAssetPropertySetCameraCaptureDevice, _PHAssetPropertySetCharacterRecognition, 
+                       _PHAssetPropertySetCloudLocalState, _PHAssetPropertySetCoarseLocation, 
+                       _PHAssetPropertySetComments, _PHAssetPropertySetCore, _PHAssetPropertySetCuration, 
+                       _PHAssetPropertySetDescription, _PHAssetPropertySetDestinationAssetCopy, 
+                       _PHAssetPropertySetFaceWorker, _PHAssetPropertySetGridMetadata, 
+                       _PHAssetPropertySetIdentifier, _PHAssetPropertySetImageManager, 
+                       _PHAssetPropertySetImport, _PHAssetPropertySetKeywords, _PHAssetPropertySetLibraryScope, 
                        _PHAssetPropertySetLocalDate, _PHAssetPropertySetLocationData, 
                        _PHAssetPropertySetMediaAnalysis, _PHAssetPropertySetMonoskiMedia, 
                        _PHAssetPropertySetMontage, _PHAssetPropertySetOriginalMetadata, 
@@ -142,6 +130,7 @@ exports:
                        _PHImageManagerRecordEnabled, _PHImageRequestResultCacheMetricsShouldRecordHit, 
                        _PHImageRequestResultEligibleForCacheMetricsLogging, _PHImageResultAVAssetOutOfBandPresentationHintsKey, 
                        _PHImageResultClientShouldRetryKey, _PHImageResultDeliveredImageFormatKey, 
+                       _PHImageResultExpirationKey, _PHImageResultFingerPrintKey, 
                        _PHImageResultIsDegradedKey, _PHImageResultIsInCloudKey, _PHImageResultIsPlaceholderKey, 
                        _PHImageResultRequestIDKey, _PHImportConcurrencyLimit, _PHImportDumpCGImageToURL, 
                        _PHImportErrorDomain, _PHImportErrorUserInfoMoreSpaceRequiredKey, 

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FF2212A7-733B-307C-A1DC-8078DA09E999
-  - target:          x86_64-maccatalyst
-    value:           FF2212A7-733B-307C-A1DC-8078DA09E999
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FC3641E5-D29C-3C3A-A458-203FF0375B30
-  - target:          arm64e-maccatalyst
-    value:           FC3641E5-D29C-3C3A-A458-203FF0375B30
 install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
-current-version: 164
+current-version: 175
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

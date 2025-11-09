@@ -1,22 +1,28 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E5856EC8-D48F-3108-80C2-9DCEB8094347
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8E5FD5A1-0BCA-38C1-9B6D-0C8CEC2AF6B8
 install-name:    '/System/Library/PrivateFrameworks/SiriSetup.framework/Versions/A/SiriSetup'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s9SiriSetup0aB11CoordinatorC14enrollmentMode20navigationController8delegateAcA0ab10EnrollmentE0O_So06NSViewG0CAA0abC8Delegate_ptcfC', 
+    symbols:         [ '_$s9SiriSetup0B4PageC017requiredSuccessorC0ACSgvpfi', '_$s9SiriSetup0B4PageC10identifier33_7F39902FBB6AC74A54DD77CC03D42D14LLSSvpfi', 
+                       '_$s9SiriSetup0B4PageC11descriptionSSvg', '_$s9SiriSetup0B4PageC11descriptionSSvgTq', 
+                       '_$s9SiriSetup0B4PageC11descriptionSSvpMV', '_$s9SiriSetup0B4PageC2eeoiySbAC_ACtFZ', 
+                       '_$s9SiriSetup0B4PageC33dependencyForDataSourceCommitmentACSgvpfi', 
+                       '_$s9SiriSetup0B4PageC4hash4intoys6HasherVz_tF', '_$s9SiriSetup0B4PageC4hash4intoys6HasherVz_tFTq', 
+                       '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvM', '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvMTq', 
+                       '_$s9SiriSetup0B4PageC8pageTypeAA0cE0Ovg', '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvgTq', 
+                       '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvpMV', '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvpWvd', 
+                       '_$s9SiriSetup0B4PageC8pageTypeAA0cE0Ovs', '_$s9SiriSetup0B4PageC8pageTypeAA0cE0OvsTq', 
+                       '_$s9SiriSetup0B4PageC9hashValueSivg', '_$s9SiriSetup0B4PageC9hashValueSivgTq', 
+                       '_$s9SiriSetup0B4PageC9hashValueSivpMV', '_$s9SiriSetup0B4PageCMa', 
+                       '_$s9SiriSetup0B4PageCMm', '_$s9SiriSetup0B4PageCMn', '_$s9SiriSetup0B4PageCN', 
+                       '_$s9SiriSetup0B4PageCSHAAMc', '_$s9SiriSetup0B4PageCSQAAMc', 
+                       '_$s9SiriSetup0B4PageCfD', '_$s9SiriSetup0B4PageCfd', '_$s9SiriSetup0B4PageCs23CustomStringConvertibleAAMc', 
+                       '_$s9SiriSetup0aB11CoordinatorC14enrollmentMode20navigationController8delegateAcA0ab10EnrollmentE0O_So06NSViewG0CAA0abC8Delegate_ptcfC', 
                        '_$s9SiriSetup0aB11CoordinatorC14enrollmentMode20navigationController8delegateAcA0ab10EnrollmentE0O_So06NSViewG0CAA0abC8Delegate_ptcfCTq', 
                        '_$s9SiriSetup0aB11CoordinatorC14enrollmentMode20navigationController8delegateAcA0ab10EnrollmentE0O_So06NSViewG0CAA0abC8Delegate_ptcfc', 
                        '_$s9SiriSetup0aB11CoordinatorC15startEnrollmentyyF', '_$s9SiriSetup0aB11CoordinatorC15startEnrollmentyyFTq', 
-                       '_$s9SiriSetup0aB11CoordinatorC16currentPageIndex33_ECD9CDAF1848EF70A63159B9A72C8084LLSivpfi', 
                        '_$s9SiriSetup0aB11CoordinatorC16currentPresenter33_ECD9CDAF1848EF70A63159B9A72C8084LLAA0E0_pSgvpfi', 
                        '_$s9SiriSetup0aB11CoordinatorC8delegate33_ECD9CDAF1848EF70A63159B9A72C8084LLAA0abC8Delegate_pSgvpfi', 
                        '_$s9SiriSetup0aB11CoordinatorCACycfC', '_$s9SiriSetup0aB11CoordinatorCACycfc', 
@@ -31,6 +37,17 @@ exports:
                        '_$s9SiriSetup0aB16EnrollmentResultV11siriEnabledSbvs', '_$s9SiriSetup0aB16EnrollmentResultVMa', 
                        '_$s9SiriSetup0aB16EnrollmentResultVMn', '_$s9SiriSetup0aB16EnrollmentResultVN', 
                        '_$s9SiriSetup0aB19CoordinatorDelegateMp', '_$s9SiriSetup0aB19CoordinatorDelegateTL', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC04siriD13SharingStatusSo06AFSiridh5OptInI0VSgvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC11descriptionSSvg', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC11siriEnabledSo9AFBooleanVvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC14setupDismissedSo9AFBooleanVvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC19voiceTriggerEnabledSo9AFBooleanVvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC2id33_4322B5B754290DBD7B6747AA01390309LLSSvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC34voiceTriggerDuringPhoneCallEnabledSo9AFBooleanVvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC9siriVoiceSo11AFVoiceInfoCSgvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterCACycfC', '_$s9SiriSetup21LocalDataSourceWriterCACycfc', 
+                       '_$s9SiriSetup21LocalDataSourceWriterCMa', '_$s9SiriSetup21LocalDataSourceWriterCMn', 
+                       '_$s9SiriSetup21LocalDataSourceWriterCN', '_$s9SiriSetup21LocalDataSourceWriterCfD', 
                        '_$s9SiriSetup8PageTypeO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s9SiriSetup8PageTypeO4hash4intoys6HasherVz_tF', '_$s9SiriSetup8PageTypeO9hashValueSivg', 
                        '_$s9SiriSetup8PageTypeO9hashValueSivpMV', '_$s9SiriSetup8PageTypeOMa', 
@@ -45,7 +62,7 @@ exports:
                        SetupSchemaProvisionalSiriSetupContext, SetupSchemaProvisionalSiriSetupEnded, 
                        SetupSchemaProvisionalSiriSetupEvent, SetupSchemaProvisionalSiriSetupEventMetadata, 
                        SetupSchemaProvisionalSiriSetupStarted, SetupSchemaProvisionalSiriSetupStep, 
-                       _TtC9SiriSetup20SiriSetupCoordinator ]
+                       _TtC9SiriSetup20SiriSetupCoordinator, _TtC9SiriSetup21LocalDataSourceWriter ]
     objc-ivars:      [ SetupSchemaProvisionalSiriSetupContext._ended, SetupSchemaProvisionalSiriSetupContext._started, 
                        SetupSchemaProvisionalSiriSetupContext._step, SetupSchemaProvisionalSiriSetupEnded._dismissed, 
                        SetupSchemaProvisionalSiriSetupEnded._has, SetupSchemaProvisionalSiriSetupEnded._siriEnabled, 

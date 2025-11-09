@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6A147938-0264-388A-B420-5CE855889E71
-  - target:          x86_64-maccatalyst
-    value:           6A147938-0264-388A-B420-5CE855889E71
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           04E0519F-7FDC-3FEC-A8E2-F332AFD2EB0C
-  - target:          arm64e-maccatalyst
-    value:           04E0519F-7FDC-3FEC-A8E2-F332AFD2EB0C
 install-name:    '/System/Library/PrivateFrameworks/PersonalUnderstanding.framework/Versions/A/PersonalUnderstanding'
-current-version: 28.13
+current-version: 28.24
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

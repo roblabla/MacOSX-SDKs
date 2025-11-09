@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSString.iig */
+/* iig(DriverKit-256.100.8) generated from OSString.iig */
 
 /* OSString.iig:1-40 */
 /*
@@ -263,7 +263,7 @@ public:
 
 #if !KERNEL
 
-class OSStringInterface : public OSInterface
+class  OSStringInterface : public OSInterface
 {
 public:
 };

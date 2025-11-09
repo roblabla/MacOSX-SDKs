@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           49A55EC9-0D63-3DD1-BA68-90C0E0D2B923
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9C8A6606-65CF-3B95-8ADA-2D37BBA1F6D4
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 502.2.3
+current-version: 502.3.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -21,6 +14,8 @@ exports:
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC025sendChooseAgeButtonTappedG5EventyyYbFTq', 
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC026sendResetAgePresetSelectedG5EventyyYbF', 
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC026sendResetAgePresetSelectedG5EventyyYbFTq', 
+                       '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC04sendf12ValueChangedG5Event19recommendedPresetId9fieldName010recomendedI008selectedI0ySSSg_SSypSgAJtYbF', 
+                       '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC04sendf12ValueChangedG5Event19recommendedPresetId9fieldName010recomendedI008selectedI0ySSSg_SSypSgAJtYbFTq', 
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC04sendf6ViewedG5Event14isInitialSetupySb_tYbF', 
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC04sendf6ViewedG5Event14isInitialSetupySb_tYbFTq', 
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsC28sendEnabledRestrictionsEvent13selectionType10lowerBound05upperO0ySo0ef9SelectionM0V_So8NSNumberCSgALtYbF', 

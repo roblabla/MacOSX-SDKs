@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name System
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 23
 import Darwin
@@ -384,19 +384,19 @@ extension System.FilePath.Component {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
@@ -446,11 +446,11 @@ extension System.FilePath {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FilePermissions : Swift.OptionSet, Swift.Hashable, Swift.Codable {
@@ -1221,11 +1221,11 @@ extension System.FilePath {
 extension System.FilePath : Swift.Hashable, Swift.Codable {
   public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
@@ -2115,7 +2115,7 @@ extension System.Errno : Swift.CustomStringConvertible, Swift.CustomDebugStringC
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.Errno {
-  @_alwaysEmitIntoClient public static func ~= (lhs: System.Errno, rhs: Swift.Error) -> Swift.Bool {
+  @_alwaysEmitIntoClient public static func ~= (lhs: System.Errno, rhs: any Swift.Error) -> Swift.Bool {
     guard let value = rhs as? Errno else { return false }
     return lhs == value
   }

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A5B30A96-50A2-36BA-B7BF-8626E4E4BC2D
-  - target:          x86_64-maccatalyst
-    value:           A5B30A96-50A2-36BA-B7BF-8626E4E4BC2D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6FBB8A7F-3BA5-3FEE-962E-68FCAB930CF9
-  - target:          arm64e-maccatalyst
-    value:           6FBB8A7F-3BA5-3FEE-962E-68FCAB930CF9
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 1732.60.4
+current-version: 1732.100.12
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

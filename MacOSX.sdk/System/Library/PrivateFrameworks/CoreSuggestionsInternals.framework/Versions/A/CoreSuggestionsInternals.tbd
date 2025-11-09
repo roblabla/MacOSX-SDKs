@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C2532F93-1B82-341D-8C33-C64945A4DD5C
-  - target:          x86_64-maccatalyst
-    value:           C2532F93-1B82-341D-8C33-C64945A4DD5C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           35FD3FDB-AD85-3F1B-A719-04FB5D9A34E0
-  - target:          arm64e-maccatalyst
-    value:           35FD3FDB-AD85-3F1B-A719-04FB5D9A34E0
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
-current-version: 1193.8.6
+current-version: 1193.26
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN3re217NumCapturesWalkerE, __ZTIN3re218CaptureNamesWalkerE, 
@@ -315,11 +302,11 @@ exports:
                        _kJSOutputGeocodingModeAddressAndPOI, _kJSOutputGeocodingModeAddressOnly, 
                        _kJSOutputGeocodingModeCanonical, _kJSOutputGeocodingModeKey, 
                        _kJSOutputGeocodingModePOIOnly, _kJSOutputPOIFiltersKey, _kLastLimitCheckedForTopSGMISaliency, 
-                       _kLastMailboxCheckedForTopSGMISaliency, _kLastSGMIModelGroundTruthVersion, 
-                       _kLastSGMIModelInferenceVersion, _kLastSGMINicknameProcessingDate, 
-                       _kLastSGMIUpdaterProcessingDate, _kLoggingTimeWindowInDays, 
-                       _kMaxWindowSizeAroundCore, _kMessageProcessingLimit, _kMinEmailsProcessedForLogging, 
-                       _kMinimumDelayToRunATrainingAfterOneThatReachedTheMaxCountPerSessionInSeconds, 
+                       _kLastMailboxCheckedForTopSGMISaliency, _kLastSGMIFollowUpStatsAndSettingReportingDate, 
+                       _kLastSGMIModelGroundTruthVersion, _kLastSGMIModelInferenceVersion, 
+                       _kLastSGMINicknameProcessingDate, _kLastSGMIUpdaterProcessingDate, 
+                       _kLoggingTimeWindowInDays, _kMaxWindowSizeAroundCore, _kMessageProcessingLimit, 
+                       _kMinEmailsProcessedForLogging, _kMinimumDelayToRunATrainingAfterOneThatReachedTheMaxCountPerSessionInSeconds, 
                        _kNicknameExtractionTimeWindowInSeconds, _kNonDyadicConversation, 
                        _kPackedJSAccountHandlesKey, _kPackedJSAccountServerIdentifierKey, 
                        _kPackedJSBundleIDKey, _kPackedJSDocumentTypeKey, _kPackedJSEpochKey, 
@@ -482,9 +469,9 @@ exports:
                        SGMINaiveBayesModel, SGMINaiveBayesModelQueryResult, SGMINicknameManager, 
                        SGMISaliencyInference, SGMISaliencyModel, SGMISaliencyModelConfig, 
                        SGMISaliencyModelConfigRule, SGMISaliencyModelFeatureProvider, 
-                       SGMISaliencyModelOutput, SGMISpotlightUtility, SGMIStagedLogRecord, 
-                       SGMISubmodelsAccumulator, SGMISubmodelsManager, SGMITokenCounts, 
-                       SGMITrialClientWrapper, SGMITrialClientWrapperGuardedData, 
+                       SGMISaliencyModelOutput, SGMISimpleEngagementStats, SGMISpotlightUtility, 
+                       SGMIStagedLogRecord, SGMISubmodelsAccumulator, SGMISubmodelsManager, 
+                       SGMITokenCounts, SGMITrialClientWrapper, SGMITrialClientWrapperGuardedData, 
                        SGMIWarningsConfig, SGMIWarningsDetectionRegex, SGMIWarningsDetectionRegexMatch, 
                        SGMIWarningsDetectionRegexes, SGMIWarningsDetectors, SGMailAttachment, 
                        SGMailClientUtil, SGMailClientUtilMock, SGMailIntelligenceDissector, 
@@ -551,17 +538,20 @@ exports:
                        SGDCKTimeRange._floating, SGDCKTimeRange._has, SGDCKTimeRange._start, 
                        SGDCKTimeRange._startUTCOffsetSeconds, SGDomainWhitelistCheckerGuardedData._trie, 
                        SGEntityStoreToFeatureStoreLockGuardedData._sgmiFeatureStore, 
-                       SGHistorySharedData.cachedSalt, SGHistorySharedData.confirmedEventFieldHashes, 
-                       SGHistorySharedData.confirmedEventHashes, SGHistorySharedData.confirmedEventWithoutTimestampFieldHashes, 
+                       SGHistorySharedData.cachedSalt, SGHistorySharedData.cachedSaltLegacyManatee, 
+                       SGHistorySharedData.confirmedEventFieldHashes, SGHistorySharedData.confirmedEventHashes, 
+                       SGHistorySharedData.confirmedEventWithoutTimestampFieldHashes, 
                        SGHistorySharedData.confirmedEventWithoutTimestampHashes, 
                        SGHistorySharedData.confirmedReminderHashes, SGHistorySharedData.contactHashes, 
-                       SGHistorySharedData.dontUpdate, SGHistorySharedData.observers, 
-                       SGHistorySharedData.rejectedEventHashes, SGHistorySharedData.rejectedReminderHashes, 
-                       SGHistorySharedData.resetInfo, SGHistorySharedData.storageDetailHashes, 
-                       SGIdentityEdge.a, SGIdentityEdge.b, SGIdentityEdge.strength, 
-                       SGIdentityName._privFullName, SGM2AutocompleteUserSelectedContact._app, 
-                       SGM2AutocompleteUserSelectedContact._has, SGM2AutocompleteUserSelectedContact._key, 
-                       SGM2AutocompleteUserSelectedContact._wasKnownContact, SGM2AutocompleteUserSelectedContact._wasSuggestedContact, 
+                       SGHistorySharedData.dontUpdate, SGHistorySharedData.isMigrating, 
+                       SGHistorySharedData.lastMigrationAttempt, SGHistorySharedData.migrateFromStore, 
+                       SGHistorySharedData.observers, SGHistorySharedData.rejectedEventHashes, 
+                       SGHistorySharedData.rejectedReminderHashes, SGHistorySharedData.resetInfo, 
+                       SGHistorySharedData.storageDetailHashes, SGIdentityEdge.a, 
+                       SGIdentityEdge.b, SGIdentityEdge.strength, SGIdentityName._privFullName, 
+                       SGM2AutocompleteUserSelectedContact._app, SGM2AutocompleteUserSelectedContact._has, 
+                       SGM2AutocompleteUserSelectedContact._key, SGM2AutocompleteUserSelectedContact._wasKnownContact, 
+                       SGM2AutocompleteUserSelectedContact._wasSuggestedContact, 
                        SGM2BirthdayExtractionWithSupervision._dateIsCorrect, SGM2BirthdayExtractionWithSupervision._didRegexTrigger, 
                        SGM2BirthdayExtractionWithSupervision._didResponseKitTrigger, 
                        SGM2BirthdayExtractionWithSupervision._has, SGM2BirthdayExtractionWithSupervision._isFromCongratulation, 

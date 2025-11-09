@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D86D13CC-2AF9-3A17-BCF3-0D16703F99A7
-  - target:          x86_64-maccatalyst
-    value:           D86D13CC-2AF9-3A17-BCF3-0D16703F99A7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6E9DED8E-2A44-33E3-909F-74B4786482A2
-  - target:          arm64e-maccatalyst
-    value:           6E9DED8E-2A44-33E3-909F-74B4786482A2
 install-name:    '/usr/lib/system/libsystem_coreservices.dylib'
 current-version: 129
 parent-umbrella:

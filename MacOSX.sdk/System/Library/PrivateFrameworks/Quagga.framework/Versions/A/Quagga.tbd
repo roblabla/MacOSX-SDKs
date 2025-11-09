@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           59EB78C6-037D-3BDF-9CE0-B60CBDB9202E
-  - target:          x86_64-maccatalyst
-    value:           59EB78C6-037D-3BDF-9CE0-B60CBDB9202E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6432F2A4-283F-3F92-AB9A-937B5B094954
-  - target:          arm64e-maccatalyst
-    value:           6432F2A4-283F-3F92-AB9A-937B5B094954
 install-name:    '/System/Library/PrivateFrameworks/Quagga.framework/Versions/A/Quagga'
-current-version: 119.3
+current-version: 127.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -29,17 +16,22 @@ exports:
                        _ACBSCopyAllSupportedBarcodeTypes, _ACBSCreateFrameInfoBySearchingForBarcodesInCGImage, 
                        _ACBSCreateFrameInfoBySearchingForBarcodesInCVPixelBuffer, 
                        _ACBSCreateSymbolDescriptorFromBasicDescriptor, _ACBSCreateSymbolDescriptorFromBasicDescriptorWithDefaultPayloadEncoding, 
-                       _MRCContextCreate, _MRCContextGetTypeID, _MRCContextPerform, 
-                       _MRCContextPerformAsync, _MRCContextPurge, _MRCDecoderCreateWithOptions, 
+                       _MRCContextCreate, _MRCContextCreateWithOptions, _MRCContextGetTypeID, 
+                       _MRCContextOptionInferenceFlags, _MRCContextPerform, _MRCContextPerformAsync, 
+                       _MRCContextPreflightForDecoderUsingOptions, _MRCContextPurge, 
+                       _MRCDecoderAlgorithmVersionLatest, _MRCDecoderCreateWithOptions, 
                        _MRCDecoderDecodeSample, _MRCDecoderDecodeSampleWithRegions, 
                        _MRCDecoderDecodeSampleWithSegmentationMask, _MRCDecoderGetTypeID, 
                        _MRCDecoderOptionAccuracy, _MRCDecoderOptionAlgorithmVersion, 
-                       _MRCDecoderOptionContext, _MRCDecoderOptionLocatingMode, _MRCDecoderOptionMaximum1DSymbologyDecodingScanlineCount, 
+                       _MRCDecoderOptionAllowsAlgorithmicVersioningFallback, _MRCDecoderOptionContext, 
+                       _MRCDecoderOptionLocatingMode, _MRCDecoderOptionMaximum1DSymbologyDecodingScanlineCount, 
                        _MRCDecoderOptionMaximum1DSymbologyDecodingTime, _MRCDecoderOptionMaximumQRFinderPatternTripletCount, 
                        _MRCDecoderOptionMaximumQRModuleSamplingCount, _MRCDecoderOptionMinimum1DSymbologyDecodingScanlineCount, 
-                       _MRCDecoderOptionNeededResultAttributes, _MRCDecoderOptionShouldStopAtFirstPyramidWith2DSymbologies, 
+                       _MRCDecoderOptionNeededResultAttributes, _MRCDecoderOptionShouldCollectMetrics, 
+                       _MRCDecoderOptionShouldStopAtFirstPyramidWith2DSymbologies, 
                        _MRCDecoderOptionSymbologies, _MRCDecoderResultAttributeDebugInfo, 
-                       _MRCDecoderResultAttributeFocusSharpness, _MRCDecoderResultAttributeUnmatchedFinderPatternPoints, 
+                       _MRCDecoderResultAttributeDecodingElapsedTime, _MRCDecoderResultAttributeFocusSharpness, 
+                       _MRCDecoderResultAttributeInferenceElapsedTime, _MRCDecoderResultAttributeUnmatchedFinderPatternPoints, 
                        _MRCDecoderResultAttributeUnrecognizedCornerPointQuadruplets, 
                        _MRCDecoderResultCopyAttribute, _MRCDecoderResultCopyAttributes, 
                        _MRCDecoderResultGetDescriptorAtIndex, _MRCDecoderResultGetDescriptorCount, 
@@ -58,12 +50,14 @@ exports:
                        _MRCDescriptorCreateWithAttributes, _MRCDescriptorDecodePayload, 
                        _MRCDescriptorDecodePayloadWithOptions, _MRCDescriptorGetTypeID, 
                        _MRCDescriptorPayloadDecodingOptionDefaultEncoding, _MRCDescriptorPayloadDecodingOptionShouldForceInProcessDecoding, 
-                       _MRCErrorACBSReturnCodeKey, _MRCErrorDomain, _MRCRegionCreate, 
-                       _MRCRegionGetConfidence, _MRCRegionGetCornerPoints, _MRCRegionGetOrientation, 
-                       _MRCRegionGetSymbology, _MRCRegionGetTransform, _MRCRegionGetTypeID, 
-                       _MRCSampleAttributeCameraIntrinsicMatrix, _MRCSampleAttributePresentationTimeStamp, 
-                       _MRCSampleAttributePyramid, _MRCSampleAttributeRegionOfInterest, 
-                       _MRCSampleCopyAttribute, _MRCSampleCopyAttributes, _MRCSampleCreateByGeneratingPyramid, 
+                       _MRCErrorACBSReturnCodeKey, _MRCErrorACBSReturnKey, _MRCErrorCVReturnKey, 
+                       _MRCErrorDomain, _MRCErrorEspressoReturnStatusKey, _MRCErrorEspressoReturnStatusStringKey, 
+                       _MRCErrorvImaggeErrorKey, _MRCRegionCreate, _MRCRegionGetConfidence, 
+                       _MRCRegionGetCornerPoints, _MRCRegionGetOrientation, _MRCRegionGetSymbology, 
+                       _MRCRegionGetTransform, _MRCRegionGetTypeID, _MRCSampleAttributeCameraIntrinsicMatrix, 
+                       _MRCSampleAttributePresentationTimeStamp, _MRCSampleAttributePyramid, 
+                       _MRCSampleAttributeRegionOfInterest, _MRCSampleCopyAttribute, 
+                       _MRCSampleCopyAttributes, _MRCSampleCreateByGeneratingPyramid, 
                        _MRCSampleCreateWithCVPixelBuffer, _MRCSampleCreateWithCVPixelBufferAndAttributes, 
                        _MRCSampleCreateWithCVPixelBufferAndPyramid, _MRCSampleGeneratePyramidIfNotPresent, 
                        _MRCSampleGetCVPixelBuffer, _MRCSampleGetPyramid, _MRCSampleGetRegionOfInterest, 

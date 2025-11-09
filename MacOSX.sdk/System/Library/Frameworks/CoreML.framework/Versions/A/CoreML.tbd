@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B9C08813-9B25-3DFE-8625-8B936597FD9E
-  - target:          x86_64-maccatalyst
-    value:           B9C08813-9B25-3DFE-8625-8B936597FD9E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3763642F-C334-3F26-B438-22FDAC1F2CAD
-  - target:          arm64e-maccatalyst
-    value:           3763642F-C334-3F26-B438-22FDAC1F2CAD
 install-name:    '/System/Library/Frameworks/CoreML.framework/Versions/A/CoreML'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

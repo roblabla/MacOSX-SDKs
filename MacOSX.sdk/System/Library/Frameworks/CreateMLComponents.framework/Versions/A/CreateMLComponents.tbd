@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4E9BC63E-1ECC-3AA3-831F-21FE43BE8B05
-  - target:          x86_64-maccatalyst
-    value:           4E9BC63E-1ECC-3AA3-831F-21FE43BE8B05
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F30A7BEF-1D07-31EE-9EE6-12817C851BC3
-  - target:          arm64e-maccatalyst
-    value:           F30A7BEF-1D07-31EE-9EE6-12817C851BC3
 install-name:    '/System/Library/Frameworks/CreateMLComponents.framework/Versions/A/CreateMLComponents'
 swift-abi-version: 7
 exports:

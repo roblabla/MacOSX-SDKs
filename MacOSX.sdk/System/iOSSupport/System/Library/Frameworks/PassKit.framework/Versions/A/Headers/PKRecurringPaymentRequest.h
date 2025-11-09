@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKRecurringPaymentRequest.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKRecurringPaymentRequest.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //

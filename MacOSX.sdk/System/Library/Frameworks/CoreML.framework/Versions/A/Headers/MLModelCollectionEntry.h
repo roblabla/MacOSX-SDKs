@@ -14,16 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
  * MLModelCollectionEntry
  * Information about a model in a model collection.
  */
-API_AVAILABLE(macos(11.0), ios(14.0))
+API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED))
 API_UNAVAILABLE(tvos, watchos)
 ML_EXPORT
 @interface MLModelCollectionEntry : NSObject
 
-@property (readonly, nonatomic) NSString *modelIdentifier;
+@property (readonly, nonatomic) NSString *modelIdentifier API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
-@property (readonly, nonatomic) NSURL *modelURL;
+@property (readonly, nonatomic) NSURL *modelURL API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
-- (BOOL)isEqualToModelCollectionEntry:(MLModelCollectionEntry *)entry;
+- (BOOL)isEqualToModelCollectionEntry:(MLModelCollectionEntry *)entry API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 - (instancetype)init NS_UNAVAILABLE;
 

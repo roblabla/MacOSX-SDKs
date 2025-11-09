@@ -17,6 +17,8 @@ typedef NSString * HKFHIRResourceType NS_TYPED_ENUM API_AVAILABLE(ios(12.0), mac
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeAllergyIntolerance API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeCondition API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeCoverage API_AVAILABLE(ios(14.0), macCatalyst(14.0), macos(13.0)) API_UNAVAILABLE(watchos);
+HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeDiagnosticReport API_AVAILABLE(ios(16.4), macCatalyst(16.4), macos(13.3)) API_UNAVAILABLE(watchos);
+HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeDocumentReference API_AVAILABLE(ios(16.4), macCatalyst(16.4), macos(13.3)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeImmunization API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeMedicationDispense API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeMedicationOrder API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);

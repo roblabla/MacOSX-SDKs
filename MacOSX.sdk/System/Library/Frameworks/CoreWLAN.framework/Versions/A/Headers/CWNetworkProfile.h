@@ -49,6 +49,7 @@ NS_CLASS_AVAILABLE_MAC(10_7)
 
     BOOL            _isPasspoint;
     
+    BOOL            _standalone6G;
     
     NSUInteger      _transitionDisabledFlags;
     

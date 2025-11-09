@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C3575C78-A70C-30DE-A0F5-FD3EFDCC9CB5
-  - target:          x86_64-maccatalyst
-    value:           C3575C78-A70C-30DE-A0F5-FD3EFDCC9CB5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A2F06952-C6FC-31D0-8C40-A94D1BD6D40B
-  - target:          arm64e-maccatalyst
-    value:           A2F06952-C6FC-31D0-8C40-A94D1BD6D40B
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 725.3.1
+current-version: 735.5.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -54,51 +41,58 @@ exports:
                        _HMFProductInfoBugleOSVersion, _HMFProductInfoButlerOSVersion, 
                        _HMFProductInfoCatamaranOSVersion, _HMFProductInfoCinarOSVersion, 
                        _HMFProductInfoCoralOSVersion, _HMFProductInfoCoyoteOSVersion, 
-                       _HMFProductInfoDaytonaOSVersion, _HMFProductInfoDonnerTideOSVersion, 
-                       _HMFProductInfoEagleOSVersion, _HMFProductInfoEatonOSVersion, 
-                       _HMFProductInfoElectricOSVersion, _HMFProductInfoEmeraldOSVersion, 
-                       _HMFProductInfoEmetOSVersion, _HMFProductInfoEmperorOSVersion, 
-                       _HMFProductInfoErieOSVersion, _HMFProductInfoFatsaOSVersion, 
-                       _HMFProductInfoFerryOSVersion, _HMFProductInfoFortuneOSVersion, 
-                       _HMFProductInfoFrancisOSVersion, _HMFProductInfoGloryBOSVersion, 
-                       _HMFProductInfoGloryCOSVersion, _HMFProductInfoGloryGOSVersion, 
-                       _HMFProductInfoGloryOSVersion, _HMFProductInfoGoldenGateEOSVersion, 
-                       _HMFProductInfoGoldenGateGOSVersion, _HMFProductInfoGoldenGateOSVersion, 
-                       _HMFProductInfoGoldenOSVersion, _HMFProductInfoGraceBOSVersion, 
-                       _HMFProductInfoGraceFOSVersion, _HMFProductInfoGraceOSVersion, 
-                       _HMFProductInfoHopeBOSVersion, _HMFProductInfoHopeCOSVersion, 
-                       _HMFProductInfoHopeGOSVersion, _HMFProductInfoHopeOSVersion, 
-                       _HMFProductInfoHunterBOSVersion, _HMFProductInfoHunterEOSVersion, 
-                       _HMFProductInfoHunterGOSVersion, _HMFProductInfoHunterOSVersion, 
-                       _HMFProductInfoJazzBOSVersion, _HMFProductInfoJazzFOSVersion, 
-                       _HMFProductInfoJazzOSVersion, _HMFProductInfoJupiterBOSVersion, 
-                       _HMFProductInfoJupiterCOSVersion, _HMFProductInfoJupiterEOSVersion, 
-                       _HMFProductInfoJupiterFOSVersion, _HMFProductInfoJupiterOSVersion, 
-                       _HMFProductInfoKincaidBOSVersion, _HMFProductInfoKincaidCOSVersion, 
-                       _HMFProductInfoKincaidOSVersion, _HMFProductInfoLibertyBOSVersion, 
-                       _HMFProductInfoLibertyCOSVersion, _HMFProductInfoLibertyGOSVersion, 
-                       _HMFProductInfoLibertyOSVersion, _HMFProductInfoMonarchOSVersion, 
+                       _HMFProductInfoDawnOSVersion, _HMFProductInfoDaytonaOSVersion, 
+                       _HMFProductInfoDonnerTideOSVersion, _HMFProductInfoEagleOSVersion, 
+                       _HMFProductInfoEatonOSVersion, _HMFProductInfoElectricOSVersion, 
+                       _HMFProductInfoEmeraldOSVersion, _HMFProductInfoEmetOSVersion, 
+                       _HMFProductInfoEmperorOSVersion, _HMFProductInfoErieOSVersion, 
+                       _HMFProductInfoFatsaOSVersion, _HMFProductInfoFerryOSVersion, 
+                       _HMFProductInfoFortuneOSVersion, _HMFProductInfoFrancisOSVersion, 
+                       _HMFProductInfoGloryBOSVersion, _HMFProductInfoGloryCOSVersion, 
+                       _HMFProductInfoGloryGOSVersion, _HMFProductInfoGloryOSVersion, 
+                       _HMFProductInfoGoldenGateEOSVersion, _HMFProductInfoGoldenGateGOSVersion, 
+                       _HMFProductInfoGoldenGateOSVersion, _HMFProductInfoGoldenOSVersion, 
+                       _HMFProductInfoGraceBOSVersion, _HMFProductInfoGraceFOSVersion, 
+                       _HMFProductInfoGraceOSVersion, _HMFProductInfoHopeBOSVersion, 
+                       _HMFProductInfoHopeCOSVersion, _HMFProductInfoHopeGOSVersion, 
+                       _HMFProductInfoHopeOSVersion, _HMFProductInfoHunterBOSVersion, 
+                       _HMFProductInfoHunterEOSVersion, _HMFProductInfoHunterGOSVersion, 
+                       _HMFProductInfoHunterOSVersion, _HMFProductInfoJazzBOSVersion, 
+                       _HMFProductInfoJazzFOSVersion, _HMFProductInfoJazzOSVersion, 
+                       _HMFProductInfoJupiterBOSVersion, _HMFProductInfoJupiterCOSVersion, 
+                       _HMFProductInfoJupiterEOSVersion, _HMFProductInfoJupiterFOSVersion, 
+                       _HMFProductInfoJupiterOSVersion, _HMFProductInfoKincaidBOSVersion, 
+                       _HMFProductInfoKincaidCOSVersion, _HMFProductInfoKincaidDOSVersion, 
+                       _HMFProductInfoKincaidEOSVersion, _HMFProductInfoKincaidOSVersion, 
+                       _HMFProductInfoLibertyBOSVersion, _HMFProductInfoLibertyCOSVersion, 
+                       _HMFProductInfoLibertyGOSVersion, _HMFProductInfoLibertyOSVersion, 
+                       _HMFProductInfoLighthouseOSVersion, _HMFProductInfoMonarchOSVersion, 
                        _HMFProductInfoParisBOSVersion, _HMFProductInfoParisCOSVersion, 
-                       _HMFProductInfoParisOSVersion, _HMFProductInfoPeaceBOSVersion, 
-                       _HMFProductInfoPeaceCOSVersion, _HMFProductInfoPeaceGOSVersion, 
-                       _HMFProductInfoPeaceOSVersion, _HMFProductInfoRomeCOSVersion, 
-                       _HMFProductInfoRomeOSVersion, _HMFProductInfoSatelliteBOSVersion, 
-                       _HMFProductInfoSatelliteCOSVersion, _HMFProductInfoSatelliteEOSVersion, 
-                       _HMFProductInfoSatelliteFOSVersion, _HMFProductInfoSatelliteOSVersion, 
-                       _HMFProductInfoSkyBOSVersion, _HMFProductInfoSkyCOSVersion, 
-                       _HMFProductInfoSkyEchoOSVersion, _HMFProductInfoSkyFOSVersion, 
-                       _HMFProductInfoSkyOSVersion, _HMFProductInfoStarBravoOSVersion, 
-                       _HMFProductInfoStarCOSVersion, _HMFProductInfoStarEOSVersion, 
-                       _HMFProductInfoStarFOSVersion, _HMFProductInfoStarOSVersion, 
-                       _HMFProductInfoSydneyBOSVersion, _HMFProductInfoSydneyCOSVersion, 
-                       _HMFProductInfoSydneyOSVersion, _HMFProductInfoTigrisOSVersion, 
-                       _HMFProductInfoTildenOSVersion, _HMFProductInfoTopazOSVersion, 
-                       _HMFProductInfoUnionOSVersion, _HMFProductInfoWhitetailOSVersion, 
-                       _HMFProductInfoYagerBOSVersion, _HMFProductInfoYagerFOSVersion, 
-                       _HMFProductInfoYagerOSVersion, _HMFProductInfoYukonBOSVersion, 
-                       _HMFProductInfoYukonFOSVersion, _HMFProductInfoYukonOSVersion, 
-                       _HMFProductInfoYukonPreOSVersion, _HMFProductPlatformFromString, 
-                       _HMFProductPlatformToString, _HMFProductVariantToString, _HMFQOSClassFromQualityOfService, 
+                       _HMFProductInfoParisCRRUOSVersion, _HMFProductInfoParisDOSVersion, 
+                       _HMFProductInfoParisEOSVersion, _HMFProductInfoParisOSVersion, 
+                       _HMFProductInfoPeaceBOSVersion, _HMFProductInfoPeaceCOSVersion, 
+                       _HMFProductInfoPeaceGOSVersion, _HMFProductInfoPeaceOSVersion, 
+                       _HMFProductInfoRomeCOSVersion, _HMFProductInfoRomeDOSVersion, 
+                       _HMFProductInfoRomeEOSVersion, _HMFProductInfoRomeOSVersion, 
+                       _HMFProductInfoSatelliteBOSVersion, _HMFProductInfoSatelliteCOSVersion, 
+                       _HMFProductInfoSatelliteEOSVersion, _HMFProductInfoSatelliteFOSVersion, 
+                       _HMFProductInfoSatelliteOSVersion, _HMFProductInfoSkyBOSVersion, 
+                       _HMFProductInfoSkyCOSVersion, _HMFProductInfoSkyEchoOSVersion, 
+                       _HMFProductInfoSkyFOSVersion, _HMFProductInfoSkyOSVersion, 
+                       _HMFProductInfoStarBravoOSVersion, _HMFProductInfoStarCOSVersion, 
+                       _HMFProductInfoStarEOSVersion, _HMFProductInfoStarFOSVersion, 
+                       _HMFProductInfoStarOSVersion, _HMFProductInfoStarlightOSVersion, 
+                       _HMFProductInfoSunburstOSVersion, _HMFProductInfoSydneyBOSVersion, 
+                       _HMFProductInfoSydneyCOSVersion, _HMFProductInfoSydneyDOSVersion, 
+                       _HMFProductInfoSydneyEOSVersion, _HMFProductInfoSydneyOSVersion, 
+                       _HMFProductInfoTigrisOSVersion, _HMFProductInfoTildenOSVersion, 
+                       _HMFProductInfoTopazOSVersion, _HMFProductInfoUnionOSVersion, 
+                       _HMFProductInfoWhitetailOSVersion, _HMFProductInfoYagerBOSVersion, 
+                       _HMFProductInfoYagerFOSVersion, _HMFProductInfoYagerOSVersion, 
+                       _HMFProductInfoYukonBOSVersion, _HMFProductInfoYukonFOSVersion, 
+                       _HMFProductInfoYukonOSVersion, _HMFProductInfoYukonPreOSVersion, 
+                       _HMFProductPlatformFromString, _HMFProductPlatformToString, 
+                       _HMFProductVariantToString, _HMFQOSClassFromQualityOfService, 
                        _HMFQualityOfServiceCompare, _HMFQualityOfServiceToString, 
                        _HMFRequireCurrentAsyncContext, _HMFReverseIntrinsicComparator, 
                        _HMFSecondsFromMachTime, _HMFSessionIdentifierKey, _HMFSystemInfoMigratingUpdatedNotification, 
@@ -153,7 +147,7 @@ exports:
                        HMFRTCSessionFactory, HMFRingBuffer, HMFScheduler, HMFSoftwareVersion, 
                        HMFStagedValue, HMFStringIndentation, HMFSystemInfo, HMFSystemPreference, 
                        HMFTimer, HMFUnfairLock, HMFVersion, HMFWeakObject, HMFWiFiManager, 
-                       HMFWiFiManagerDataSource, HMFWiFiNetworkInfo, HMUIndent, _HMFCFHTTPServer, 
-                       __HMFMessageHandler ]
+                       HMFWiFiManagerDataSource, HMFWiFiNetworkInfo, HMFWifiNetworkAssociation, 
+                       HMUIndent, _HMFCFHTTPServer, __HMFMessageHandler ]
     objc-ivars:      [ HMFAssertion._valid ]
 ...

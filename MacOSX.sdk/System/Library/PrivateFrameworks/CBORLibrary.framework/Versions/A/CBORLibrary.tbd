@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           52482BFB-5BE2-30E9-B095-DC859C5EAB59
-  - target:          x86_64-maccatalyst
-    value:           52482BFB-5BE2-30E9-B095-DC859C5EAB59
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5C007F5F-C55F-3AA1-A75F-F923BC41FE96
-  - target:          arm64e-maccatalyst
-    value:           5C007F5F-C55F-3AA1-A75F-F923BC41FE96
 install-name:    '/System/Library/PrivateFrameworks/CBORLibrary.framework/Versions/A/CBORLibrary'
 swift-abi-version: 7
 exports:

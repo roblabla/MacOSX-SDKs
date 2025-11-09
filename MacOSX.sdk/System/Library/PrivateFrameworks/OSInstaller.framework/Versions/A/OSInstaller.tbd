@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           ED6AD836-B802-3647-896C-E250233B762E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           32D80950-7AD5-33FC-9D7A-4B4906F3269D
 install-name:    '/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller'
 current-version: 660
 exports:

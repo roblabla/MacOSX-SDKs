@@ -9,7 +9,7 @@
 
 #import <CloudKit/CKRecord.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @class CKQuery
  *
@@ -42,8 +42,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @property (nonatomic, readonly, copy) CKRecordType recordType;
 @property (nonatomic, readonly, copy) NSPredicate *predicate;
 
-@property (nonatomic, copy, nullable) NSArray<NSSortDescriptor *> *sortDescriptors;
+@property (atomic, copy, nullable) NSArray<NSSortDescriptor *> *sortDescriptors;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 70.300.161.1.2
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 70.500.192
 import AVFoundation
 import CloudKit
 import Combine
+import Combine/*.Combine*/
 import CoreGraphics
 import CryptoKit
 import Darwin
@@ -23,7 +24,7 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
   public enum State {
     case waiting
     case joined
-    case invalidated(reason: Swift.Error)
+    case invalidated(reason: any Swift.Error)
   }
   final public let id: Foundation.UUID
   @Combine.Published @_projectedValueProperty($state) final public var state: GroupActivities.GroupSession<ActivityType>.State {
@@ -118,19 +119,17 @@ final public class GroupStateObserver : Combine.ObservableObject {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-extension Foundation.NSItemProvider {
+@objc extension Foundation.NSItemProvider {
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 15.4, macCatalyst 15.4, *)
+  @available(iOS 15.4, macCatalyst 15.4, macOS 13.0, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  public func registerGroupActivity<ActivityType>(preparationHandler: @escaping () async throws -> ActivityType) where ActivityType : GroupActivities.GroupActivity
+  @nonobjc public func registerGroupActivity<ActivityType>(preparationHandler: @escaping () async throws -> ActivityType) where ActivityType : GroupActivities.GroupActivity
   #endif
-  @available(iOS 15.4, macCatalyst 15.4, *)
+  @available(iOS 15.4, macCatalyst 15.4, macOS 13.0, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  public func registerGroupActivity<ActivityType>(_ activity: ActivityType) where ActivityType : GroupActivities.GroupActivity
+  @nonobjc public func registerGroupActivity<ActivityType>(_ activity: ActivityType) where ActivityType : GroupActivities.GroupActivity
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -175,8 +174,8 @@ extension GroupActivities.GroupSessionMessenger {
   }
 }
 extension GroupActivities.GroupSessionMessenger {
-  final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all, completion: @escaping (Swift.Error?) -> Swift.Void) where Message : Swift.Decodable, Message : Swift.Encodable
-  final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all, completion: @escaping (Swift.Error?) -> Swift.Void)
+  final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all, completion: @escaping ((any Swift.Error)?) -> Swift.Void) where Message : Swift.Decodable, Message : Swift.Encodable
+  final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all, completion: @escaping ((any Swift.Error)?) -> Swift.Void)
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -246,9 +245,15 @@ extension GroupActivities.GroupSession {
   @available(*, deprecated, message: "Use GroupSessionEvent")
   final public func postEvent(_ event: GroupActivities.GroupSession<ActivityType>.Event)
 }
-@available(*, deprecated, message: "`GroupSession.Event` is renamed to `GroupSessionEvent`")
+@available(iOS, introduced: 15, deprecated: 15, message: "`GroupSession.Event` is renamed to `GroupSessionEvent`")
+@available(macOS, introduced: 12, deprecated: 12, message: "`GroupSession.Event` is renamed to `GroupSessionEvent`")
+@available(tvOS, introduced: 15, deprecated: 15, message: "`GroupSession.Event` is renamed to `GroupSessionEvent`")
+@available(watchOS, unavailable)
 extension GroupActivities.GroupSession.Event {
-  @available(*, deprecated, message: "This has been deprecated in favor of the action property")
+  @available(iOS, introduced: 15, deprecated: 15, message: "This has been deprecated in favor of the action property")
+  @available(macOS, introduced: 12, deprecated: 12, message: "This has been deprecated in favor of the action property")
+  @available(tvOS, introduced: 15, deprecated: 15, message: "This has been deprecated in favor of the action property")
+  @available(watchOS, unavailable)
   public var localizedDescription: Swift.String {
     get
   }
@@ -356,8 +361,8 @@ public struct GroupActivityMetadata : Swift.Equatable {
   public static func == (a: GroupActivities.GroupActivityMetadata, b: GroupActivities.GroupActivityMetadata) -> Swift.Bool
 }
 extension GroupActivities.GroupActivityMetadata : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension GroupActivities.GroupActivityMetadata {
   @available(*, deprecated, renamed: "ActivityType")

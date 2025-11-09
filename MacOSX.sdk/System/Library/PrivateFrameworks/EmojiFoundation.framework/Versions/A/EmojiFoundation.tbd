@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1A831247-647D-37FB-B3E2-C32FF0BA03E8
-  - target:          x86_64-maccatalyst
-    value:           1A831247-647D-37FB-B3E2-C32FF0BA03E8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           940882E8-1618-3487-9FC9-EAC8F0302864
-  - target:          arm64e-maccatalyst
-    value:           940882E8-1618-3487-9FC9-EAC8F0302864
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
 current-version: 117
 exports:
@@ -55,27 +42,29 @@ exports:
                        _in_grouping_b_U, _indonesian_UTF_8_close_env, _indonesian_UTF_8_create_env, 
                        _indonesian_UTF_8_stem, _insert_s, _insert_v, _irish_UTF_8_close_env, 
                        _irish_UTF_8_create_env, _irish_UTF_8_stem, _italian_UTF_8_close_env, 
-                       _italian_UTF_8_create_env, _italian_UTF_8_stem, _kEMFEmojiIndexRaisedFistSkintone4, 
-                       _kEMFEmojiIndexRaisedFistSkintone5, _kEMFEmojiIndexRaisedFistSkintone6, 
-                       _kFontFeatureSelectorSilhouetteOnLeft, _kFontFeatureSelectorSilhouetteOnRight, 
-                       _kFontFeatureTypeIdentifier, _len_utf8, _lithuanian_UTF_8_close_env, 
-                       _lithuanian_UTF_8_create_env, _lithuanian_UTF_8_stem, _log_emoji_string_lookup_error, 
-                       _log_emoji_token_creation_error, _lose_s, _nepali_UTF_8_close_env, 
-                       _nepali_UTF_8_create_env, _nepali_UTF_8_stem, _norwegian_UTF_8_close_env, 
-                       _norwegian_UTF_8_create_env, _norwegian_UTF_8_stem, _out_grouping, 
-                       _out_grouping_U, _out_grouping_b, _out_grouping_b_U, _porter_UTF_8_close_env, 
-                       _porter_UTF_8_create_env, _porter_UTF_8_stem, _portuguese_UTF_8_close_env, 
-                       _portuguese_UTF_8_create_env, _portuguese_UTF_8_stem, _replace_s, 
-                       _romanian_UTF_8_close_env, _romanian_UTF_8_create_env, _romanian_UTF_8_stem, 
-                       _russian_UTF_8_close_env, _russian_UTF_8_create_env, _russian_UTF_8_stem, 
-                       _sb_stemmer_delete, _sb_stemmer_length, _sb_stemmer_list, 
-                       _sb_stemmer_new, _sb_stemmer_stem, _skip_utf8, _slice_del, 
-                       _slice_from_s, _slice_from_v, _slice_to, _spanish_UTF_8_close_env, 
-                       _spanish_UTF_8_create_env, _spanish_UTF_8_stem, _swedish_UTF_8_close_env, 
-                       _swedish_UTF_8_create_env, _swedish_UTF_8_stem, _tamil_UTF_8_close_env, 
-                       _tamil_UTF_8_create_env, _tamil_UTF_8_stem, _turkish_UTF_8_close_env, 
-                       _turkish_UTF_8_create_env, _turkish_UTF_8_stem ]
-    objc-classes:    [ EMFAbstractIndexStrategy, EMFDPEmojiUsageRecorder, EMFDPEventDispatcher, 
+                       _italian_UTF_8_create_env, _italian_UTF_8_stem, _kEMFContextBuilderContextWindowLengthDefault, 
+                       _kEMFEmojiIndexRaisedFistSkintone4, _kEMFEmojiIndexRaisedFistSkintone5, 
+                       _kEMFEmojiIndexRaisedFistSkintone6, _kFontFeatureSelectorSilhouetteOnLeft, 
+                       _kFontFeatureSelectorSilhouetteOnRight, _kFontFeatureTypeIdentifier, 
+                       _len_utf8, _lithuanian_UTF_8_close_env, _lithuanian_UTF_8_create_env, 
+                       _lithuanian_UTF_8_stem, _log_emoji_string_lookup_error, _log_emoji_token_creation_error, 
+                       _lose_s, _nepali_UTF_8_close_env, _nepali_UTF_8_create_env, 
+                       _nepali_UTF_8_stem, _norwegian_UTF_8_close_env, _norwegian_UTF_8_create_env, 
+                       _norwegian_UTF_8_stem, _out_grouping, _out_grouping_U, _out_grouping_b, 
+                       _out_grouping_b_U, _porter_UTF_8_close_env, _porter_UTF_8_create_env, 
+                       _porter_UTF_8_stem, _portuguese_UTF_8_close_env, _portuguese_UTF_8_create_env, 
+                       _portuguese_UTF_8_stem, _replace_s, _romanian_UTF_8_close_env, 
+                       _romanian_UTF_8_create_env, _romanian_UTF_8_stem, _russian_UTF_8_close_env, 
+                       _russian_UTF_8_create_env, _russian_UTF_8_stem, _sb_stemmer_delete, 
+                       _sb_stemmer_length, _sb_stemmer_list, _sb_stemmer_new, _sb_stemmer_stem, 
+                       _skip_utf8, _slice_del, _slice_from_s, _slice_from_v, _slice_to, 
+                       _spanish_UTF_8_close_env, _spanish_UTF_8_create_env, _spanish_UTF_8_stem, 
+                       _swedish_UTF_8_close_env, _swedish_UTF_8_create_env, _swedish_UTF_8_stem, 
+                       _tamil_UTF_8_close_env, _tamil_UTF_8_create_env, _tamil_UTF_8_stem, 
+                       _turkish_UTF_8_close_env, _turkish_UTF_8_create_env, _turkish_UTF_8_stem ]
+    objc-classes:    [ EMFAbstractIndexStrategy, EMFAnchoredSearchAnchorsLoader, 
+                       EMFAnchoredSearchManager, EMFContextBuilder, EMFContextBuilderLeftHand, 
+                       EMFContextBuilderRightHand, EMFDPEmojiUsageRecorder, EMFDPEventDispatcher, 
                        EMFDPRecorder, EMFDPReporterMock, EMFDefaultAutocompleteCandidateProvider, 
                        EMFEmojiCategory, EMFEmojiLocaleData, EMFEmojiPreferences, 
                        EMFEmojiPreferencesClient, EMFEmojiPreferencesService, EMFEmojiSearchEngine, 

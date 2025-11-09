@@ -10,6 +10,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern __attribute__((visibility ("default")))
 
+/// A class that contains credentials for a Thread network.
+///
+/// A Thread network defines parameters that all connected devices use.
+/// ``THCredentials`` provides these parameters.
 API_AVAILABLE(ios(15.0)) @interface THCredentials : NSObject<NSSecureCoding>
 
 /*
@@ -22,25 +26,35 @@ API_AVAILABLE(ios(15.0)) @interface THCredentials : NSObject<NSSecureCoding>
  * use rest of the parameter to join the Thread Network
  */
 
-/// networkName : Thread Network name
+/// The Thread network name.
 @property (nonatomic, nullable, readonly) NSString *networkName;
-/// extendedPANID : Thread Network extended PAN ID
+/// The Thread network extended PAN identifier.
 @property (nonatomic, nullable, readonly) NSData *extendedPANID;
-/// extendedPANID : Active Thread Network Border Agent Identifier
+/// The identifer of an active Thread network Border Agent.
+///
+/// This property’s value is the MAC Extended Address, a random identifier that
+/// the active Thread network border router generates.
 @property (nonatomic, nullable, readonly) NSData *borderAgentID;
-/// Active Operational Data Set in Bytes.
+/// The essential operational parameters for the Thread network.
+///
+/// The framework parses this property, then extracts and sets
+/// ``THCredentials/channel``, ``THCredentials/extendedPANID``,
+/// ``THCredentials/networkKey``, ``THCredentials/networkName``,
+/// ``THCredentials/panID``, and ``THCredentials/PSKC`` when you call
+/// ``THClient/storeCredentialsForBorderAgent:activeOperationalDataSet:completion:``.
 @property (nonatomic, nullable, readonly) NSData *activeOperationalDataSet;
-/// networkKey : A 16 byte value. e.g. 7dd5b9bffe1285f27e78898658aa88f4
+/// The sixteen byte Thread network key.
 @property (nonatomic, nullable, readonly) NSData *networkKey;
-/// PSKc : A 16 byte value. e.g. 0eec92e950c4cbc6966d32613f08efe0
+/// The sixteen byte Thread network pre-shared key for the Commissioner.
 @property (nonatomic, nullable, readonly) NSData *PSKC;
-/// channel : Thread network channel
+/// The Thread network radio channel.
 @property (nonatomic) uint8_t channel;
-/// PANID : A 2 byte value. e.g. 308f
+/// The two byte Thead network PAN identifier.
 @property (nonatomic, nullable, readonly) NSData *panID;
 
-/// Metadata
+/// The date and time that the framework stored the credential in the database.
 @property (nonatomic, nullable, readonly) NSDate *creationDate;
+/// The date and time that the framework updated the credential in the database.
 @property (nonatomic, nullable, readonly) NSDate *lastModificationDate;
 
 - (instancetype)init NS_UNAVAILABLE;

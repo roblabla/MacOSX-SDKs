@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F5DE32B4-6249-3E62-9CB1-75D228F829A1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F06AF7D5-EA6E-30E5-AECD-74F178089BB8
 install-name:    '/System/Library/PrivateFrameworks/CoreEmbeddedSpeechRecognition.framework/Versions/A/CoreEmbeddedSpeechRecognition'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -36,10 +29,11 @@ exports:
                        CESRAudioSamplingConfigManager, CESRAudioSamplingPolicy, CESRAudioSamplingUtilities, 
                        CESRContextualData, CESRCorrectionPronunciation, CESRDictationOnDeviceSampling, 
                        CESRFormatter, CESRModelProperties, CESRSamplingDimension, 
-                       CESRSpeechParameters, CESRSpeechProfileBuilder, CESRTrialAssetManager, 
-                       CESRUserCorrectionsProfileEntry, CESRUserData, CESRUserDataContactWord, 
-                       CESRUtilities, CESRVocabularyCategory, CESRXPCActivity, CoreEmbeddedSpeechRecognizer, 
-                       TrialNamespaceProjectPair, _CESRModelPropertiesMutation, _CESRSpeechParametersMutation ]
+                       CESRSignpostHelper, CESRSpeechParameters, CESRSpeechProfileBuilder, 
+                       CESRTrialAssetManager, CESRUserCorrectionsProfileEntry, CESRUserData, 
+                       CESRUserDataContactWord, CESRUtilities, CESRVocabularyCategory, 
+                       CESRXPCActivity, CoreEmbeddedSpeechRecognizer, TrialNamespaceProjectPair, 
+                       _CESRModelPropertiesMutation, _CESRSpeechParametersMutation ]
     objc-ivars:      [ CESRCorrectionPronunciation._apgId, CESRCorrectionPronunciation._asrPronunciationData, 
                        CESRCorrectionPronunciation._has, CESRCorrectionPronunciation._language, 
                        CESRCorrectionPronunciation._orthography, CESRCorrectionPronunciation._tokenOffset, 

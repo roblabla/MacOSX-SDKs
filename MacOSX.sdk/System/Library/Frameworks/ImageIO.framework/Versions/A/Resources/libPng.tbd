@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           24821A9E-2DDB-3084-B927-5156514B3B0C
-  - target:          x86_64-maccatalyst
-    value:           24821A9E-2DDB-3084-B927-5156514B3B0C
-  - target:          x86_64h-macos
-    value:           2E1B1C87-EB40-3BCF-8C9E-B8B53CE26DE7
-  - target:          x86_64h-maccatalyst
-    value:           2E1B1C87-EB40-3BCF-8C9E-B8B53CE26DE7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9A121E13-AAA2-3C30-9272-F6B3D70372D5
-  - target:          arm64e-maccatalyst
-    value:           9A121E13-AAA2-3C30-9272-F6B3D70372D5
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

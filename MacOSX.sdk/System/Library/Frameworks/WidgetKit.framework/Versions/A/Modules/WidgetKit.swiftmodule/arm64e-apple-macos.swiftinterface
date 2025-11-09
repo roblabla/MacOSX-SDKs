@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name WidgetKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 281.49
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name WidgetKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 281.114
 import Combine
 import Foundation
 import Intents
@@ -18,11 +18,11 @@ public struct TimelineEntryRelevance : Swift.Codable, Swift.Hashable {
   public init(score: Swift.Float, duration: Foundation.TimeInterval = 0.0)
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: WidgetKit.TimelineEntryRelevance, b: WidgetKit.TimelineEntryRelevance) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
@@ -113,7 +113,7 @@ public class WidgetCenter {
   @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
   @available(tvOS, unavailable)
   public func invalidateConfigurationRecommendations()
-  public func getCurrentConfigurations(_ completion: @escaping (Swift.Result<[WidgetKit.WidgetInfo], Swift.Error>) -> Swift.Void)
+  public func getCurrentConfigurations(_ completion: @escaping (Swift.Result<[WidgetKit.WidgetInfo], any Swift.Error>) -> Swift.Void)
   public func reloadTimelines(ofKind kind: Swift.String)
   public func reloadAllTimelines()
   @objc deinit

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           71A25332-BB88-3BC2-BCB4-DA5D8A5AF167
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F0A0A29F-E9FB-3192-97B4-6E04FBF65435
 install-name:    '/System/Library/PrivateFrameworks/BluetoothAudio.framework/Versions/A/BluetoothAudio'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

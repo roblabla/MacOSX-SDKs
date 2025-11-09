@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           27455250-7AF1-3672-9C27-17DCD81166F5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           28ADDD5D-054E-3E9C-B524-25E47DF3A607
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/UniversalAccess'
 current-version: 236
 reexported-libraries:
@@ -53,13 +46,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E8332396-3B42-3A6C-9924-BC1F16CA9036
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0BE354FA-FF8F-393B-93A3-484E83571078
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore'
 current-version: 236
 reexported-libraries:
@@ -253,13 +239,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CA0E0959-E7F9-393C-AF01-1C894330F273
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9EF24FBD-8C47-36AF-9442-4D77FE95A585
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

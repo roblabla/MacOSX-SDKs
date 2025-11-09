@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9899B082-1BF5-3B36-9F2D-073401B34BEA
-  - target:          x86_64-maccatalyst
-    value:           9899B082-1BF5-3B36-9F2D-073401B34BEA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B9917298-1D1E-35DF-890A-493D827D0367
-  - target:          arm64e-maccatalyst
-    value:           B9917298-1D1E-35DF-890A-493D827D0367
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 

@@ -507,6 +507,8 @@ typedef enum {
 	nw_quic_stream_type_bidirectional = 1,
 	/*! @const nw_quic_stream_type_unidirectional 	An unidirectional QUIC stream. */
 	nw_quic_stream_type_unidirectional = 2,
+	/*! @const nw_quic_stream_type_datagram 		A QUIC datagram stream. */
+	nw_quic_stream_type_datagram = 3,
 } nw_quic_stream_type_t;
 
 /*!

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name os
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name os
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1034
 import ObjectiveC
 import Swift
@@ -389,7 +389,7 @@ extension os.OSLogArguments {
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public func os_signpost(_ type: os.OSSignpostType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive)
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
-public func os_signpost(_ type: os.OSSignpostType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: Swift.StaticString, _ arguments: Swift.CVarArg...)
+public func os_signpost(_ type: os.OSSignpostType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: Swift.StaticString, _ arguments: any Swift.CVarArg...)
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum AnimationFormatString {
   @inlinable @_optimize(none) @_semantics("constant_evaluable") internal static func constructOSLogInterpolation(_ formatString: Swift.String) -> os.OSLogInterpolation {
@@ -430,9 +430,9 @@ public enum OSSignpostAnimationBegin {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @usableFromInline
-internal func animationBeginSignpostHelper(dso: Swift.UnsafeRawPointer, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID, formatStringPointer: Swift.UnsafePointer<Swift.CChar>, arguments: [Swift.CVarArg])
+internal func animationBeginSignpostHelper(dso: Swift.UnsafeRawPointer, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID, formatStringPointer: Swift.UnsafePointer<Swift.CChar>, arguments: [any Swift.CVarArg])
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-@_transparent public func os_signpost(_ animationBegin: os.OSSignpostAnimationBegin, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: os.AnimationFormatString.OSLogMessage, _ arguments: Swift.CVarArg...) {
+@_transparent public func os_signpost(_ animationBegin: os.OSSignpostAnimationBegin, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: os.AnimationFormatString.OSLogMessage, _ arguments: any Swift.CVarArg...) {
   // This function should be transparent which means that the body will always be
   // inlined in the caller. This is necessary as `_swift_os_log_return_address` is used
   // by the following helper function.
@@ -633,9 +633,9 @@ extension os.OSLogArguments {
   bufferPosition += byteCount
 }
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
-public func os_log(_ type: os.OSLogType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog = .default, _ message: Swift.StaticString, _ args: Swift.CVarArg...)
+public func os_log(_ type: os.OSLogType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog = .default, _ message: Swift.StaticString, _ args: any Swift.CVarArg...)
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-public func os_log(_ message: Swift.StaticString, dso: Swift.UnsafeRawPointer? = #dsohandle, log: os.OSLog = .default, type: os.OSLogType = .default, _ args: Swift.CVarArg...)
+public func os_log(_ message: Swift.StaticString, dso: Swift.UnsafeRawPointer? = #dsohandle, log: os.OSLog = .default, type: os.OSLogType = .default, _ args: any Swift.CVarArg...)
 extension os.OSLogType {
   @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let `default`: os.OSLogType
@@ -1328,12 +1328,12 @@ internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout Sw
 internal func getNullTerminatedUTF8Pointer(_ stringValue: Swift.String, using stringStorage: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
-  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> Swift.Error, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
+  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> any Swift.Error, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
     // Error bridges to NSError which is NSObject, but importing Foundation
     // creates a dependency cycle
     self.appendInterpolation(unsafeBitCast(_bridgeErrorToNSError(error()), to: NSObject.self), privacy: privacy, attributes: attributes)
   }
-  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> Swift.Error?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
+  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> (any Swift.Error)?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
     // Error bridges to NSError which is NSObject, but importing Foundation
     // creates a dependency cycle
     self.appendInterpolation(error().map({ unsafeBitCast(_bridgeErrorToNSError($0), to: NSObject.self) }), privacy: privacy, attributes: attributes)
@@ -1475,8 +1475,8 @@ public class OSSignpostIntervalState : Swift.Codable {
   @inlinable @inline(__always) public static func beginState(id: os.OSSignpostID) -> os.OSSignpostIntervalState {
     return OSSignpostIntervalState(id: id)
   }
-  required public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public func _hasValue(id: os.OSSignpostID, isOpen: Swift.Bool) -> Swift.Bool
   @objc deinit
 }
@@ -2485,13 +2485,13 @@ extension os.OSLogInterpolation {
     // that.
     appendInterpolation(value().description, align: align, privacy: privacy, attributes: attributes)
   }
-  @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ value: @autoclosure @escaping () -> Any.Type, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
+  @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ value: @autoclosure @escaping () -> any Any.Type, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
     appendInterpolation(
       _typeName(value(), qualified: false),
       align: align,
       privacy: privacy)
   }
-  @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ value: @autoclosure @escaping () -> Any.Type, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String) {
+  @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ value: @autoclosure @escaping () -> any Any.Type, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String) {
     appendInterpolation(
       _typeName(value(), qualified: false),
       align: align,

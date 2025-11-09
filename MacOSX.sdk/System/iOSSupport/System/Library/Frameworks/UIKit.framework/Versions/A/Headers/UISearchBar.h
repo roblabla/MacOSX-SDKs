@@ -109,6 +109,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  */
 @property (nullable, nonatomic, readwrite, strong) UIView *inputAccessoryView;
 
+/// When set to false, user interaction will be prevented and the search bar will take on a disabled appearance
+/// If the search bar is associated with a UINavigationItem with `UINavigationItemSearchBarPlacementInline`,
+/// then the minimized (icon-only) UISearchBar will not grow to the text field while `enabled` is false.
+@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(16.4),tvos(16.4)); // Default YES
+
 // 1pt wide images and resizable images will be scaled or tiled according to the resizable area, otherwise the image will be tiled
 @property(nullable, nonatomic,strong) UIImage *backgroundImage API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 @property(nullable, nonatomic,strong) UIImage *scopeBarBackgroundImage API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;

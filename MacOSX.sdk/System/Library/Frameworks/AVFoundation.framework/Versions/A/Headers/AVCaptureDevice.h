@@ -2180,6 +2180,34 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
  */
 @property(nonatomic, readonly, getter=isCenterStageActive) BOOL centerStageActive API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
+/*!
+ @property centerStageRectOfInterestSupported
+ @abstract
+    Indicates whether the device supports the Center Stage Rect of Interest feature.
+ 
+ @discussion
+    This property returns YES if the device supports Center Stage Rect of Interest.
+ */
+@property(nonatomic, readonly, getter=isCenterStageRectOfInterestSupported) BOOL centerStageRectOfInterestSupported API_UNAVAILABLE(macos, ios, macCatalyst) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property centerStageRectOfInterest
+ @abstract
+    Specifies the effective region within the output pixel buffer that will be used to perform Center Stage framing.
+ 
+ @discussion
+    Applications that wish to apply additional processing (such as cropping) on top of Center Stage's output can use this property to guide Center Stage's framing.
+ 
+    The rectangle's origin is top left and is relative to the coordinate space of the output pixel buffer. The default value of this property is the value CGRectMake(0, 0, 1, 1), where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This rectangle of interest is applied prior to rotation, mirroring or scaling.
+ 
+    Pixels outside of this rectangle of interest will be blackened out.
+ 
+    Setting this property has no impact on objects specified in the metadata output.
+ 
+    -setCenterStageRectOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if none of the AVCaptureDeviceFormats supported by the receiver support CenterStage. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if +centerStageEnabled is NO on the AVCaptureDevice class. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if the provided rectOfInterest goes outside the normalized (0-1) coordinate space.
+ */
+@property(nonatomic) CGRect centerStageRectOfInterest API_AVAILABLE(macos(13.3), ios(16.4), macCatalyst(16.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
 @end
 
 
@@ -2920,7 +2948,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(tvos) A
  @discussion
     This property changes to reflect the Studio Light state in Control Center. It is key-value observable.
  */
-@property(class, getter=isStudioLightEnabled) BOOL studioLightEnabled API_AVAILABLE(macos(13.0), ios(16.0), macCatalyst(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+@property(class, readonly, getter=isStudioLightEnabled) BOOL studioLightEnabled API_AVAILABLE(macos(13.0), ios(16.0), macCatalyst(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property studioLightActive

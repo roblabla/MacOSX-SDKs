@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E6498A65-8845-32EA-BD36-B17DE9BEFAA2
-  - target:          x86_64-maccatalyst
-    value:           E6498A65-8845-32EA-BD36-B17DE9BEFAA2
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A2F2537D-CEDB-3739-BE54-8B18C8F7FC2F
-  - target:          arm64e-maccatalyst
-    value:           A2F2537D-CEDB-3739-BE54-8B18C8F7FC2F
 install-name:    '/System/Library/PrivateFrameworks/BookDataStore.framework/Versions/A/BookDataStore'
-current-version: 1825
+current-version: 1854
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -257,6 +244,33 @@ exports:
                        '_$s13BookDataStore21ObservableTransactionCMa', '_$s13BookDataStore21ObservableTransactionCMm', 
                        '_$s13BookDataStore21ObservableTransactionCMn', '_$s13BookDataStore21ObservableTransactionCN', 
                        '_$s13BookDataStore21ObservableTransactionCfD', '_$s13BookDataStore21ObservableTransactionCfd', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010dissociatedB8FromSync10completionyySb_s5Error_pSgtcSg_tF', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvM', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvMTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvg', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvgTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvpMV', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvpWvd', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvs', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC010engagementF0So27BDSSecureEngagementManaging_pvsTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvM', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvMTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvg', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvgTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvpMV', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvpWvd', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvs', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC04userbF0So07BCCloude4UserbF0_pvsTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC06deletedB010completionyySb_s5Error_pSgtcSg_tF', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC09setEnableD4SyncyySbF', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC09setEnableD4SyncyySbFTq', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC6sharedAA0dE8Managing_pvMZ', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC6sharedAA0dE8Managing_pvau', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC6sharedAA0dE8Managing_pvgZ', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC6sharedAA0dE8Managing_pvpZ', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyC6sharedAA0dE8Managing_pvsZ', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyCMa', '_$s13BookDataStore23CloudSecureManagerProxyCMn', 
+                       '_$s13BookDataStore23CloudSecureManagerProxyCN', '_$s13BookDataStore23CloudSecureManagerProxyCfD', 
                        '_$s13BookDataStore24CRDTModelFileSyncManagerC011enableCloudF0SbvM', 
                        '_$s13BookDataStore24CRDTModelFileSyncManagerC011enableCloudF0Sbvg', 
                        '_$s13BookDataStore24CRDTModelFileSyncManagerC011enableCloudF0SbvpMV', 
@@ -382,21 +396,21 @@ exports:
                        _BCCloudCollectionDetailManagerChanged, _BCCloudCollectionMemberManagerChanged, 
                        _BCCloudKitAccountTemporarilyUnavailableErrorMessage, _BCCloudKitUnsyncedKeychainErrorMessage, 
                        _BCCloudReadingNowDetailManagerChanged, _BCCloudSecureUserDataManagerChanged, 
-                       _BCCloudSecureUserDataManagerFetchedRecordsChanged, _BCCloudStoreAssetManagerChanged, 
-                       _BCCollectionDefaultIDWantToRead, _BCNormalizedNumberOfStars, 
-                       _BCProtoAnnotationReadFrom, _BDSArrayAdditionsError, _BDSArtworkImporterLog, 
-                       _BDSCloudAssetTypeSideloadedLocal, _BDSCloudAssetTypeSideloadedUbiquity, 
-                       _BDSCloudAssetTypeStoreAudiobook, _BDSCloudAssetTypeStoreEbook, 
-                       _BDSCloudGlobalMetadataManagerChanged, _BDSCloudGlobalMetadataManagerFetchedRecordsChanged, 
-                       _BDSCloudKitAudiobookLog, _BDSCloudKitClientErrorDomain, _BDSCloudKitLog, 
-                       _BDSCloudKitSyncLog, _BDSCtlLog, _BDSErrorDomain, _BDSErrorFromUnderlyingError, 
+                       _BCCloudStoreAssetManagerChanged, _BCCollectionDefaultIDWantToRead, 
+                       _BCNormalizedNumberOfStars, _BCProtoAnnotationReadFrom, _BDSArrayAdditionsError, 
+                       _BDSArtworkImporterLog, _BDSCloudAssetTypeSideloadedLocal, 
+                       _BDSCloudAssetTypeSideloadedUbiquity, _BDSCloudAssetTypeStoreAudiobook, 
+                       _BDSCloudAssetTypeStoreEbook, _BDSCloudGlobalMetadataManagerChanged, 
+                       _BDSCloudGlobalMetadataManagerFetchedRecordsChanged, _BDSCloudKitAudiobookLog, 
+                       _BDSCloudKitClientErrorDomain, _BDSCloudKitLog, _BDSCloudKitSyncLog, 
+                       _BDSCtlLog, _BDSErrorDomain, _BDSErrorFromUnderlyingError, 
                        _BDSLibraryContentAssetTypeAudiobook, _BDSLibraryContentAssetTypeEbook, 
                        _BDSLibraryContentAssetTypeFromExtension, _BDSLibraryContentAssetTypePDF, 
                        _BDSLibraryContentAssetTypeUnknown, _BDSMediaLibraryLog, _BDSReachabilityErrorDomain, 
                        _BDSReadingHistoryServicesEnabled, _BDSReadingHistoryServicesFileSyncManagerEnabled, 
-                       _BDSReportAssertionFailureWithMessage, _BDSServiceCenterLog, 
-                       _BDSServiceLog, _BDSSystemBooksWidgetEnabled, _BDSUbiquityLog, 
-                       _BDSWidgetLog, _BookDataStoreBundle, _BookDataStoreCFBundle, 
+                       _BDSReportAssertionFailureWithMessage, _BDSSecureEngagementManagerChanged, 
+                       _BDSServiceCenterLog, _BDSServiceLog, _BDSSystemBooksWidgetEnabled, 
+                       _BDSUbiquityLog, _BDSWidgetLog, _BookDataStoreBundle, _BookDataStoreCFBundle, 
                        _NSManagedObjectContextIMAdditionsSafeAccessState, _bc_turnProtoAnnotationIntoTombstone, 
                        _kBCAssetAnnotationsRecord, _kBCCloudDataAppMigrationPath, 
                        _kBCCloudKitAssetDetailBookmarkTime, _kBCCloudKitAssetDetailDateFinished, 
@@ -435,8 +449,9 @@ exports:
                        _kBDSBookWidgetInfoIsTrackedAsRecent, _kBDSBookWidgetInfoLastEngagedDate, 
                        _kBDSBookWidgetInfoLibraryContentAssetType, _kBDSBookWidgetInfoPageProgressionDirection, 
                        _kBDSBookWidgetInfoRecordType, _kBDSBookWidgetInfoTitle, _kBDSBookWidgetInfoTotalDuration, 
-                       _kBDSReadingGoalsDefaultKeyBooksFinished, _kBDSReadingGoalsDefaultKeyDataHasBeenMoved, 
-                       _kBDSReadingGoalsDefaultKeyStreakDay ]
+                       _kBDSCloudKitSecureEngagementDurationInterval, _kBDSCloudKitSecureEngagementRecordType, 
+                       _kBDSCloudKitSecureEngagementValue, _kBDSReadingGoalsDefaultKeyBooksFinished, 
+                       _kBDSReadingGoalsDefaultKeyDataHasBeenMoved, _kBDSReadingGoalsDefaultKeyStreakDay ]
     objc-classes:    [ BCAnnotationRange, BCAnnotationsProtoBook, BCAssetAnnotations, 
                        BCAssetDetail, BCAssetReview, BCCloudAssetAnnotationManager, 
                        BCCloudAssetManager, BCCloudChangeTokenController, BCCloudCollectionsManager, 
@@ -445,25 +460,27 @@ exports:
                        BCCloudKitController, BCCloudKitDataChangedTransaction, BCCloudKitDatabaseController, 
                        BCCloudKitFetchChangesTransaction, BCCloudKitRecordZone, BCCloudKitSecureConfiguration, 
                        BCCloudKitSyncToCKTransaction, BCCloudKitTransaction, BCCloudKitTransactionManager, 
-                       BCCloudSecureUserDataManager, BCCloudSyncVersions, BCCollectionDetail, 
-                       BCCollectionMember, BCGlobalMetadatum, BCMutableAssetAnnotations, 
-                       BCMutableAssetDetail, BCMutableAssetReview, BCMutableCloudData, 
-                       BCMutableCloudSyncVersions, BCMutableCollectionDetail, BCMutableCollectionMember, 
-                       BCMutableGlobalMetadatum, BCMutableReadingNowDetail, BCMutableSecureUserDatum, 
-                       BCMutableStoreItem, BCProtoAnnotation, BCReadingNowDetail, 
-                       BCSaltVersionIdentifier, BCSecureUserDatum, BCStoreItem, BDSAppBundleIdentifier, 
-                       BDSAppGroupContainer, BDSAppVersion, BDSApplication, BDSBookWidgetInfo, 
-                       BDSBookWidgetInfoMO, BDSBookWidgetInfoManager, BDSBookWidgetReadingHistoryData, 
+                       BCCloudSyncVersions, BCCollectionDetail, BCCollectionMember, 
+                       BCGlobalMetadatum, BCMutableAssetAnnotations, BCMutableAssetDetail, 
+                       BCMutableAssetReview, BCMutableCloudData, BCMutableCloudSyncVersions, 
+                       BCMutableCollectionDetail, BCMutableCollectionMember, BCMutableGlobalMetadatum, 
+                       BCMutableReadingNowDetail, BCMutableSecureUserDatum, BCMutableStoreItem, 
+                       BCProtoAnnotation, BCReadingNowDetail, BCSaltVersionIdentifier, 
+                       BCSecureUserDatum, BCStoreItem, BDSAppBundleIdentifier, BDSAppGroupContainer, 
+                       BDSAppVersion, BDSApplication, BDSBookWidgetInfo, BDSBookWidgetInfoMO, 
+                       BDSBookWidgetInfoManager, BDSBookWidgetReadingHistoryData, 
                        BDSBookWidgetReadingHistoryDataFile, BDSCRDTModelSyncVersionInfo, 
                        BDSCloudGlobalMetadataManager, BDSICloudIdentityToken, BDSICloudIdentityTokenTracker, 
-                       BDSJaliscoDAAPClient, BDSLiverpoolStatusMonitor, BDSOSTransaction, 
-                       BDSReachability, BDSReadingDataMigrationManagerClient, BDSReadingGoalsServiceClient, 
-                       BDSReadingGoalsStateInfo, BDSReadingHistoryDayEntryInfo, BDSReadingHistoryDayInfo, 
-                       BDSReadingHistoryMigrationInfo, BDSReadingHistoryModelSnapshotInfo, 
-                       BDSReadingHistoryServiceClient, BDSReadingHistoryStateEstimator, 
-                       BDSReadingHistoryStateInfo, BDSReadingHistoryStreakInfo, BDSSaltVersionIdentifierManager, 
-                       BDSServiceCenter, BDSServiceProtocolInterface, BDSServiceProxy, 
-                       BDSSharedDataFile, BDSSyncUserDefaults, BookDataStoreBundleLookupClass ]
+                       BDSJaliscoDAAPClient, BDSLiverpoolStatusMonitor, BDSMutableSecureEngagementData, 
+                       BDSOSTransaction, BDSReachability, BDSReadingDataMigrationManagerClient, 
+                       BDSReadingGoalsServiceClient, BDSReadingGoalsStateInfo, BDSReadingHistoryDayEntryInfo, 
+                       BDSReadingHistoryDayInfo, BDSReadingHistoryMigrationInfo, 
+                       BDSReadingHistoryModelSnapshotInfo, BDSReadingHistoryServiceClient, 
+                       BDSReadingHistoryStateEstimator, BDSReadingHistoryStateInfo, 
+                       BDSReadingHistoryStreakInfo, BDSSaltVersionIdentifierManager, 
+                       BDSSecureEngagementData, BDSSecureManager, BDSServiceCenter, 
+                       BDSServiceProtocolInterface, BDSServiceProxy, BDSSharedDataFile, 
+                       BDSSyncUserDefaults, BookDataStoreBundleLookupClass, _TtC13BookDataStore23CloudSecureManagerProxy ]
     objc-ivars:      [ BCAnnotationRange._length, BCAnnotationRange._location, BCAnnotationsProtoBook._annotations, 
                        BCAnnotationsProtoBook._appVersion, BCAnnotationsProtoBook._assetID, 
                        BCAnnotationsProtoBook._assetVersion, BCProtoAnnotation._annotationVersion, 

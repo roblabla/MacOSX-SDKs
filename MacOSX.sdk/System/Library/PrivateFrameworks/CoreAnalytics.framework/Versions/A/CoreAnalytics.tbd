@@ -2,46 +2,20 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BCBE045F-3575-3A43-BD21-2B648B21DB66
-  - target:          x86_64-maccatalyst
-    value:           BCBE045F-3575-3A43-BD21-2B648B21DB66
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AAD7C802-B9B7-3687-9D1B-E35A94E5E225
-  - target:          arm64e-maccatalyst
-    value:           AAD7C802-B9B7-3687-9D1B-E35A94E5E225
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTIN5boost16exception_detail10clone_baseE, __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian16bad_day_of_monthEEEEE, 
-                       __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian8bad_yearEEEEE, 
-                       __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian9bad_monthEEEEE, 
-                       __ZTIN5boost16exception_detail10clone_implINS0_19error_info_injectorISt13runtime_errorEEEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorINS_9gregorian16bad_day_of_monthEEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorINS_9gregorian8bad_yearEEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorINS_9gregorian9bad_monthEEE, 
-                       __ZTIN5boost16exception_detail19error_info_injectorISt13runtime_errorEE, 
+    weak-symbols:    [ __ZTIN5boost10wrapexceptINS_9gregorian16bad_day_of_monthEEE, 
+                       __ZTIN5boost10wrapexceptINS_9gregorian8bad_yearEEE, __ZTIN5boost10wrapexceptINS_9gregorian9bad_monthEEE, 
+                       __ZTIN5boost10wrapexceptISt13runtime_errorEE, __ZTIN5boost16exception_detail10clone_baseE, 
                        __ZTIN5boost9exceptionE, __ZTIN5boost9gregorian16bad_day_of_monthE, 
                        __ZTIN5boost9gregorian8bad_yearE, __ZTIN5boost9gregorian9bad_monthE, 
-                       __ZTINSt3__110__function6__baseIFN10applesauce3xpc6objectEvEEE, 
                        __ZTINSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTSN5boost16exception_detail10clone_baseE, 
-                       __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian16bad_day_of_monthEEEEE, 
-                       __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian8bad_yearEEEEE, 
-                       __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorINS_9gregorian9bad_monthEEEEE, 
-                       __ZTSN5boost16exception_detail10clone_implINS0_19error_info_injectorISt13runtime_errorEEEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorINS_9gregorian16bad_day_of_monthEEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorINS_9gregorian8bad_yearEEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorINS_9gregorian9bad_monthEEE, 
-                       __ZTSN5boost16exception_detail19error_info_injectorISt13runtime_errorEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTSN5boost10wrapexceptINS_9gregorian16bad_day_of_monthEEE, 
+                       __ZTSN5boost10wrapexceptINS_9gregorian8bad_yearEEE, __ZTSN5boost10wrapexceptINS_9gregorian9bad_monthEEE, 
+                       __ZTSN5boost10wrapexceptISt13runtime_errorEE, __ZTSN5boost16exception_detail10clone_baseE, 
                        __ZTSN5boost9exceptionE, __ZTSN5boost9gregorian16bad_day_of_monthE, 
                        __ZTSN5boost9gregorian8bad_yearE, __ZTSN5boost9gregorian9bad_monthE, 
-                       __ZTSNSt3__110__function6__baseIFN10applesauce3xpc6objectEvEEE, 
                        __ZTSNSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -67,22 +41,23 @@ exports:
                        __ZN13CoreAnalytics13EventObserverD2Ev, __ZN13CoreAnalytics21ConfigurationObserverD0Ev, 
                        __ZN13CoreAnalytics21ConfigurationObserverD1Ev, __ZN13CoreAnalytics21ConfigurationObserverD2Ev, 
                        __ZN13CoreAnalytics6Client14allowAllEventsEv, __ZN13CoreAnalytics6Client14initConnectionEv, 
-                       __ZN13CoreAnalytics6Client17updateDaemonStateEi, __ZN13CoreAnalytics6Client20registerErrorHandlerENSt3__18functionIFvNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEEEE, 
+                       __ZN13CoreAnalytics6Client16cancelConnectionEv, __ZN13CoreAnalytics6Client17updateDaemonStateEi, 
+                       __ZN13CoreAnalytics6Client20registerErrorHandlerENSt3__18functionIFvNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEEEE, 
                        __ZN13CoreAnalytics6Client21registerEventObserverENSt3__18weak_ptrINS_13EventObserverEEE, 
                        __ZN13CoreAnalytics6Client23sendCheckinMessage_syncEv, __ZN13CoreAnalytics6Client24handleServerMessage_syncEN10applesauce3xpc4dictE, 
                        __ZN13CoreAnalytics6Client26handleSinkMessageEmit_syncERKN10applesauce3xpc4dictE, 
                        __ZN13CoreAnalytics6Client29registerConfigurationObserverENSt3__18weak_ptrINS_21ConfigurationObserverEEE, 
                        __ZN13CoreAnalytics6Client30handleConfigurationChange_syncERKN10applesauce3xpc4dictE, 
+                       __ZN13CoreAnalytics6Client30sendExitBarrierWithTimeoutSyncEj, 
                        __ZN13CoreAnalytics6Client3getEv, __ZN13CoreAnalytics6Client4initEv, 
                        __ZN13CoreAnalytics6ClientC1Ev, __ZN13CoreAnalytics6ClientC2Ev, 
                        __ZNK13CoreAnalytics6Client11isEventUsedENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZNK13CoreAnalytics6Client14sendXpcMessageEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
-                       __ZNK13CoreAnalytics6Client15sendEventAlwaysENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_8functionIFN10applesauce3xpc6objectEvEEE18XPCMessagePriority18EventPayloadFormat, 
+                       __ZNK13CoreAnalytics6Client15sendEventAlwaysENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_8functionIFN8nlohmann10basic_jsonINS1_3mapENS1_6vectorES7_bxydS5_NS9_14adl_serializerENSC_IhNS5_IhEEEEEEvEEE18XPCMessagePriority18EventPayloadFormat, 
                        __ZNK13CoreAnalytics6Client19sendXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
                        __ZNK13CoreAnalytics6Client20retryXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
                        __ZNK13CoreAnalytics6Client22acquireSendTransactionEv, __ZNK13CoreAnalytics6Client22releaseSendTransactionEv, 
                        __ZNK13CoreAnalytics6Client26retryXpcMessageHelper_syncEN10applesauce3xpc4dictE18XPCMessagePrioritybhy, 
-                       __ZNK13CoreAnalytics6Client30sendExitBarrierWithTimeoutSyncEj, 
                        __ZNK13CoreAnalytics6Client30sendManagementCommandWithReplyENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEN10applesauce3xpc4dictE, 
                        __ZNK13CoreAnalytics6Client9hasConfigEv, __ZTIN13CoreAnalytics13EventObserverE, 
                        __ZTIN13CoreAnalytics21ConfigurationObserverE, __ZTSN13CoreAnalytics13EventObserverE, 

@@ -69,13 +69,10 @@ struct thread_group;
 #define THREAD_GROUP_FLAGS_BEST_EFFORT  0x8
 
 /* Shared flags */
-#define THREAD_GROUP_FLAGS_UI_APP       0x100
-#define THREAD_GROUP_FLAGS_MANAGED      0x200
+#define THREAD_GROUP_FLAGS_UI_APP               0x100
+#define THREAD_GROUP_FLAGS_MANAGED              0x200
+#define THREAD_GROUP_FLAGS_STRICT_TIMERS        0x400
 
-#if defined(XNU_TARGET_OS_XR)
-/* Keep around for backwards compatibility. */
-#define THREAD_GROUP_FLAGS_UXM          0x200
-#endif /* XNU_TARGET_OS_XR */
 
 #define THREAD_GROUP_FLAGS_EXCLUSIVE ( \
     THREAD_GROUP_FLAGS_EFFICIENT |     \
@@ -92,7 +89,8 @@ static_assert(
 /* Shared flags */
 #define THREAD_GROUP_FLAGS_SHARED ( \
     THREAD_GROUP_FLAGS_UI_APP |     \
-    THREAD_GROUP_FLAGS_MANAGED)
+    THREAD_GROUP_FLAGS_MANAGED |    \
+    THREAD_GROUP_FLAGS_STRICT_TIMERS)
 
 static_assert(
 	(THREAD_GROUP_FLAGS_SHARED & THREAD_GROUP_EXCLUSIVE_FLAGS_MASK) == 0,

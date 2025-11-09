@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitUI/PKIdentityButton.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKIdentityButton.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2022 Apple, Inc. All rights reserved.
 //

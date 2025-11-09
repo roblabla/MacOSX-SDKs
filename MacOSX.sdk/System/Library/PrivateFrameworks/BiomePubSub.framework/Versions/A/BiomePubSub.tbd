@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BF8F0F25-64DA-3A12-8ECA-5023A279E4E5
-  - target:          x86_64-maccatalyst
-    value:           BF8F0F25-64DA-3A12-8ECA-5023A279E4E5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7C4BC21C-1D43-3885-9DDC-FF3BAE52AFDA
-  - target:          arm64e-maccatalyst
-    value:           7C4BC21C-1D43-3885-9DDC-FF3BAE52AFDA
 install-name:    '/System/Library/PrivateFrameworks/BiomePubSub.framework/Versions/A/BiomePubSub'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

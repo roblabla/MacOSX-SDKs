@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from OSBundle.iig */
+/* iig(DriverKit-256.100.8) generated from OSBundle.iig */
 
 /* OSBundle.iig:1-34 */
 /*
@@ -156,7 +156,7 @@ public:
 
 #if !KERNEL
 
-class OSBundleInterface : public OSInterface
+class  OSBundleInterface : public OSInterface
 {
 public:
 };

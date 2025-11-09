@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6E3DBC6F-32C3-3331-A7C8-F0CFEF72E96A
-  - target:          x86_64-maccatalyst
-    value:           6E3DBC6F-32C3-3331-A7C8-F0CFEF72E96A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B10FAD52-D0F5-3901-8A5E-5CA743161FA9
-  - target:          arm64e-maccatalyst
-    value:           B10FAD52-D0F5-3901-8A5E-5CA743161FA9
 install-name:    '/usr/lib/libmecab.dylib'
 current-version: 1019
 exports:

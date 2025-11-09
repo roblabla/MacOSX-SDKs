@@ -7,7 +7,7 @@
 .Nd Network quality testing tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl chksv          \" [-chksv]
+.Op Fl chksv          \" [-chkpsv]
 .Op Fl C Ar configuration URL \" [-C configuration URL]
 .Op Fl I Ar interface \" [-I interface]
 .Op Fl r Ar host \" [-r host]
@@ -45,6 +45,8 @@ Produce computer-readable output.
 Show help
 .It Fl k
 Disable verification of the server identity via TLS.
+.It Fl p
+Use iCloud Private Relay.
 .It Fl s
 Run tests sequentially instead of parallel upload/download.
 .It Fl v
@@ -52,6 +54,94 @@ Verbose output.
 .El                      \" Ends the list
 .Pp
 .\" .El
+.Sh COMPUTER OUTPUT FIELD DESCRIPTION
+The -c option will produce JSON output with the following fields:
+.Bl -tag -width lud_foreign_dl_h2_req_resp
+.It Ft base_rt
+The calculated idle latency of the test run (in milliseconds).
+.It Ft dl_flows
+Number of download flows initiated.
+.It Ft dl_responsiveness
+The downlink responsiveness score (in RPM)
+.Pp
+(only available when -s is specified).
+.It Ft dl_throughput
+The measured downlink throughput (in bytes per second).
+.It Ft end_date
+Time when test run was completed (in local time).
+.It Ft il_h2_req_resp
+The idle-latency Request/Response times for HTTP/2 (in milliseconds).
+.It Ft il_tcp_handshake_443
+The idle-latency TCP-handshake times (in milliseconds).
+.It Ft il_tls_handshake
+The idle-latency TLS-handshake times (in milliseconds).
+.It Ft interface_name
+Interface name in which the test ran against.
+.It Ft lud_foreign_dl_h2_req_resp
+Download latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_foreign_dl_tcp_handshake_443
+Download latency-under-load for for TCP-handshake times (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_foreign_dl_tls_handshake
+Download latency-under-load for for TLS-handshake times (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_foreign_h2_req_resp
+Combined upload/download latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is not specified).
+.It Ft lud_foreign_tcp_handshake_443
+Combined upload/download latency-under-load for for TCP-handshake times (in milliseconds).
+.Pp
+(only available when -s is not specified).
+.It Ft lud_foreign_tls_handshake
+Combined foreign upload/download latency-under-load for for TLS-handshake times (in milliseconds).
+.Pp
+(only available when -s is not specified).
+.It Ft lud_foreign_ul_h2_req_resp
+Foreign upload latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_foreign_ul_tcp_handshake_443
+Foreign upload latency-under-load for for TCP-handshake times (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_foreign_ul_tls_handshake
+Upload latency-under-load for for TLS-handshake times (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_self_dl_h2_req_resp
+Self download latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft lud_self_h2_req_resp
+Combined self upload/download latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is not specified).
+.It Ft lud_self_ul_h2_req_resp
+Self upload latency-under-load request/response times for HTTP/2 (in milliseconds).
+.Pp
+(only available when -s is specified).
+.It Ft os_version
+The version of the OS the test was run on.
+.It Ft responsiveness
+The responsiveness score (in RPM)
+.Pp
+(the combined value if -c is not specified).
+.It Ft start_date
+Time when test run was started (in local time).
+.It Ft ul_flows
+Number of upload flows created.
+.It Ft ul_responsiveness
+The uplink responsiveness score (in RPM)
+.Pp
+(only available when -s is specified).
+.It Ft ul_throughput
+The measured uplink throughput (in bytes per second).
+
 .Sh SEE ALSO
 .\" List links in ascending order by section, alphabetically within a section.
 .\" Please do not reference files that do not exist without filing a bug report

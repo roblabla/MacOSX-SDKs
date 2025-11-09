@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C11A23FD-3A93-36EA-80CB-6A65D967E06B
-  - target:          x86_64-maccatalyst
-    value:           C11A23FD-3A93-36EA-80CB-6A65D967E06B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FD0895D2-82CF-37D5-AA65-838C699C03CE
-  - target:          arm64e-maccatalyst
-    value:           FD0895D2-82CF-37D5-AA65-838C699C03CE
 install-name:    '/System/Library/PrivateFrameworks/SiriVirtualDeviceResolution.framework/Versions/A/SiriVirtualDeviceResolution'
 swift-abi-version: 7
 exports:
@@ -141,6 +128,12 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCMn', '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCMo', 
                        '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCMu', '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCN', 
                        '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCfD', '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCfd', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC015pairedCompanionC0AA0C4UnitCSgyYaKFTj', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC015pairedCompanionC0AA0C4UnitCSgyYaKFTjTu', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC015pairedCompanionC0AA0C4UnitCSgyYaKFTq', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC02meC0AA0C4UnitCSgyYaKFTj', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC02meC0AA0C4UnitCSgyYaKFTjTu', 
+                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC02meC0AA0C4UnitCSgyYaKFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC06sharedE0ACvgZ', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctFTq', 
@@ -203,6 +196,12 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0cD9AnalyticsPAAE19logCommandExecutionyyAA05CrosscgH0OF', 
                        '_$s27SiriVirtualDeviceResolution0cD9AnalyticsPAAE19selectHomeKitTarget_3foryAA0ghI0O_SStF', 
                        '_$s27SiriVirtualDeviceResolution0cD9AnalyticsTL', '_$s27SiriVirtualDeviceResolution0cD9ProvidingMp', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP015pairedCompanionC0AA0C4UnitCSgyYaKFTj', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP015pairedCompanionC0AA0C4UnitCSgyYaKFTjTu', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP015pairedCompanionC0AA0C4UnitCSgyYaKFTq', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP02meC0AA0C4UnitCSgyYaKFTj', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP02meC0AA0C4UnitCSgyYaKFTjTu', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingP02meC0AA0C4UnitCSgyYaKFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP13sourceDevices3forSDy10Foundation4UUIDVAA0C4UnitCGShyAHG_tYaKFTj', 
@@ -228,6 +227,10 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP7devices11matchingAnySDyAA0C4UnitCSo11HMAccessoryCGSayAA0cI11DescriptionVG_tYaKFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP7devices11matchingAnySDyAA0C4UnitCSo11HMAccessoryCGSayAA0cI11DescriptionVG_tYaKFTjTu', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP7devices11matchingAnySDyAA0C4UnitCSo11HMAccessoryCGSayAA0cI11DescriptionVG_tYaKFTq', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE015pairedCompanionC0AA0C4UnitCSgyYaKF', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE015pairedCompanionC0AA0C4UnitCSgyYaKFTu', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE02meC0AA0C4UnitCSgyYaKF', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE02meC0AA0C4UnitCSgyYaKFTu', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctF', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE13sourceDevices3forSDy10Foundation4UUIDVAA0C4UnitCGShyAHG_tYaKF', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE13sourceDevices3forSDy10Foundation4UUIDVAA0C4UnitCGShyAHG_tYaKFTu', 
@@ -605,6 +608,7 @@ exports:
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC3key8valueSetACSS_ShySo8NSObjectCGtcfc', 
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC3keySSvg', 
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC3keySSvpMV', 
+                       '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC4copy4withyp10ObjectiveC6NSZoneVSg_tF', 
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC5coderACSgSo7NSCoderC_tcfCTj', 
                        '_$s27SiriVirtualDeviceResolution21CapabilityDescriptionC5coderACSgSo7NSCoderC_tcfCTq', 

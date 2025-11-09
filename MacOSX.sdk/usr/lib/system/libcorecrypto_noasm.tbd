@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A94CBE9E-503F-3B24-B869-8BF3B9F1CE81
-  - target:          x86_64-maccatalyst
-    value:           A94CBE9E-503F-3B24-B869-8BF3B9F1CE81
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           29865E8C-4B9E-36D3-A798-E52F54F773B8
-  - target:          arm64e-maccatalyst
-    value:           29865E8C-4B9E-36D3-A798-E52F54F773B8
 install-name:    '/usr/lib/system/libcorecrypto_noasm.dylib'
-current-version: 1386.60.8
+current-version: 1387.100.43
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

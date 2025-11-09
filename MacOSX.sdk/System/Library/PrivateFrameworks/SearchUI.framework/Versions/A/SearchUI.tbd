@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           294B139A-4EC9-3D04-9F47-B854A8D73633
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           310805A1-6708-35DD-BBA5-4E59EA64469F
 install-name:    '/System/Library/PrivateFrameworks/SearchUI.framework/Versions/A/SearchUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

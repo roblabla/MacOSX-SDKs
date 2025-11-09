@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           09769F2E-E4D2-35C0-9CED-D49E334F1D4D
-  - target:          x86_64-maccatalyst
-    value:           09769F2E-E4D2-35C0-9CED-D49E334F1D4D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D3A564D5-EEB4-3841-AAAE-A04F4AAD5981
-  - target:          arm64e-maccatalyst
-    value:           D3A564D5-EEB4-3841-AAAE-A04F4AAD5981
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

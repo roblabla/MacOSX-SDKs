@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A2F9377B-2884-365A-9529-8FAB69F48501
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CC289932-D854-3BCF-A816-281E17DDC6BC
 install-name:    '/System/Library/Frameworks/DiscRecordingUI.framework/Versions/A/DiscRecordingUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

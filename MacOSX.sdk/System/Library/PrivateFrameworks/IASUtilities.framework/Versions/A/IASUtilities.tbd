@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F5F0D2C7-DF43-30E6-BD78-C2856E9E4932
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C15EDA93-FC3D-3867-9F1C-D6A93371AF6A
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
 reexported-libraries:
@@ -58,13 +51,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E9764191-2BA6-3680-8F7C-E48F2E28D290
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           45F402F2-E6D6-3661-B7FB-239D5D465B38
 install-name:    '/System/Library/PrivateFrameworks/IASUtilitiesCore.framework/Versions/A/IASUtilitiesCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

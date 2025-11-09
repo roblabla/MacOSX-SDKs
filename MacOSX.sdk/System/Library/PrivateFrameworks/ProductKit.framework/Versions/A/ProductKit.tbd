@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8A22C5C6-618D-3725-9BA7-7E41E2FFFD79
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C4364FA4-C9AE-3CCD-8689-42E9C52170A7
 install-name:    '/System/Library/PrivateFrameworks/ProductKit.framework/Versions/A/ProductKit'
 swift-abi-version: 7
 exports:
@@ -552,7 +545,8 @@ exports:
                        '_$s10ProductKit22HeadphoneHardwareModelO15beatsStudioBudsyA2CmFWC', 
                        '_$s10ProductKit22HeadphoneHardwareModelO22airPodsThirdGenerationyA2CmFWC', 
                        '_$s10ProductKit22HeadphoneHardwareModelO23airPodsSecondGenerationyA2CmFWC', 
-                       '_$s10ProductKit22HeadphoneHardwareModelO4b698yA2CmFWC', '_$s10ProductKit22HeadphoneHardwareModelO6beatsXyA2CmFWC', 
+                       '_$s10ProductKit22HeadphoneHardwareModelO4b607yA2CmFWC', '_$s10ProductKit22HeadphoneHardwareModelO4b698yA2CmFWC', 
+                       '_$s10ProductKit22HeadphoneHardwareModelO6beatsXyA2CmFWC', 
                        '_$s10ProductKit22HeadphoneHardwareModelO7airPodsyA2CmFWC', 
                        '_$s10ProductKit22HeadphoneHardwareModelO8allCasesSayACGvgZ', 
                        '_$s10ProductKit22HeadphoneHardwareModelO8codenameACSS_tKcfC', 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E02E52D7-31F3-3F7C-884F-56E778F87278
-  - target:          x86_64-maccatalyst
-    value:           E02E52D7-31F3-3F7C-884F-56E778F87278
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B2193611-3268-3AA0-907D-E864E6D7E0B2
-  - target:          arm64e-maccatalyst
-    value:           B2193611-3268-3AA0-907D-E864E6D7E0B2
 install-name:    '/System/Library/PrivateFrameworks/CalendarDatabase.framework/Versions/A/CalendarDatabase'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -155,8 +142,9 @@ exports:
                        _CalCalendarIsBirthdayCalendar, _CalCalendarIsDefaultCalendarForStore, 
                        _CalCalendarIsFacebookBirthdayCalendar, _CalCalendarIsFamilyCalendar, 
                        _CalCalendarIsFoundInMailCalendar, _CalCalendarIsHidden, _CalCalendarIsHolidaySubscribedCalendar, 
-                       _CalCalendarIsIgnoringEventAlerts, _CalCalendarIsIgnoringSharedCalendarNotifications, 
-                       _CalCalendarIsImmutable, _CalCalendarIsInbox, _CalCalendarIsMarkedImmutableSharees, 
+                       _CalCalendarIsHolidaySyncedCalendar, _CalCalendarIsIgnoringEventAlerts, 
+                       _CalCalendarIsIgnoringSharedCalendarNotifications, _CalCalendarIsImmutable, 
+                       _CalCalendarIsInbox, _CalCalendarIsMarkedImmutableSharees, 
                        _CalCalendarIsMarkedUndeletable, _CalCalendarIsNaturalLanguageSuggestedEventsCalendar, 
                        _CalCalendarIsNotificationsCollection, _CalCalendarIsReadOnly, 
                        _CalCalendarIsSchedulingProhibited, _CalCalendarIsSharingInvitation, 
@@ -565,8 +553,8 @@ exports:
                        _CalEventIsDetached, _CalEventIsDisplayable, _CalEventIsFloating, 
                        _CalEventIsHidden, _CalEventIsImmediatelyEligibleForTravelAdvisories, 
                        _CalEventIsInvite, _CalEventIsOnCalendarThatAllowsScheduling, 
-                       _CalEventIsOrganizedExternally, _CalEventIsProposed, _CalEventIsRecurring, 
-                       _CalEventIsSignificantlyDetached, _CalEventNeedsResponse, 
+                       _CalEventIsOrganizedExternally, _CalEventIsRecurring, _CalEventIsSignificantlyDetached, 
+                       _CalEventIsSignificantlyDetachedIgnoringParticipation, _CalEventNeedsResponse, 
                        _CalEventNotifyInvitationIfNeeded, _CalEventNotifyInvitationIfNeededWithOptions, 
                        _CalEventOccurrenceCacheCleanOrphans, _CalEventOccurrenceCacheCopyAllDaysAndOccurrenceCounts, 
                        _CalEventOccurrenceCacheCopyBoundsForTimeZone, _CalEventOccurrenceCacheCopyEventOccurrencesAfterDate, 
@@ -963,19 +951,19 @@ exports:
                        _EKEventProperty_endDateRaw, _EKEventProperty_externalTrackingStatus, 
                        _EKEventProperty_firedTTL, _EKEventProperty_invitationChangedProperties, 
                        _EKEventProperty_invitationStatus, _EKEventProperty_junkStatus, 
-                       _EKEventProperty_locationPredictionState, _EKEventProperty_needsOccurrenceCacheUpdate, 
-                       _EKEventProperty_originalStartDate, _EKEventProperty_participationStatusModifiedDate, 
-                       _EKEventProperty_privacyLevel, _EKEventProperty_proposedStartDate, 
-                       _EKEventProperty_recurrenceSet, _EKEventProperty_responseComment, 
-                       _EKEventProperty_specialDayString, _EKEventProperty_status, 
-                       _EKEventProperty_suggestionInfo, _EKEventProperty_travelAdvisoryBehavior, 
-                       _EKEventProperty_travelTime, _EKExceptionDateProperty_date, 
-                       _EKLocationProperty_address, _EKLocationProperty_alarmOwner, 
-                       _EKLocationProperty_calendarItemOwner, _EKLocationProperty_contactLabel, 
-                       _EKLocationProperty_derivedFrom, _EKLocationProperty_latitude, 
-                       _EKLocationProperty_longitude, _EKLocationProperty_mapKitHandle, 
-                       _EKLocationProperty_radius, _EKLocationProperty_referenceFrame, 
-                       _EKLocationProperty_routing, _EKLocationProperty_title, _EKNotificationProperty_alerted, 
+                       _EKEventProperty_locationPredictionState, _EKEventProperty_originalStartDate, 
+                       _EKEventProperty_participationStatusModifiedDate, _EKEventProperty_privacyLevel, 
+                       _EKEventProperty_proposedStartDate, _EKEventProperty_recurrenceSet, 
+                       _EKEventProperty_responseComment, _EKEventProperty_specialDayString, 
+                       _EKEventProperty_status, _EKEventProperty_suggestionInfo, 
+                       _EKEventProperty_travelAdvisoryBehavior, _EKEventProperty_travelTime, 
+                       _EKExceptionDateProperty_date, _EKLocationProperty_address, 
+                       _EKLocationProperty_alarmOwner, _EKLocationProperty_calendarItemOwner, 
+                       _EKLocationProperty_contactLabel, _EKLocationProperty_derivedFrom, 
+                       _EKLocationProperty_latitude, _EKLocationProperty_longitude, 
+                       _EKLocationProperty_mapKitHandle, _EKLocationProperty_radius, 
+                       _EKLocationProperty_referenceFrame, _EKLocationProperty_routing, 
+                       _EKLocationProperty_title, _EKNotificationProperty_alerted, 
                        _EKNotificationProperty_calendar, _EKNotificationProperty_creationDate, 
                        _EKNotificationProperty_externalModificationTag, _EKNotificationProperty_hostURL, 
                        _EKNotificationProperty_inReplyTo, _EKNotificationProperty_inviteReplyCalendar, 
@@ -1230,18 +1218,19 @@ exports:
                        _kCalCalendarChangesOwningEntityIDKey, _kCalCalendarChangesSequenceNumberKey, 
                        _kCalCalendarChangesTypeKey, _kCalCalendarChangesUniqueIDKey, 
                        _kCalCalendarClass, _kCalCalendarDefaultOptions, _kCalCalendarDontImportDuplicates, 
-                       _kCalCalendarDontImportIfLocalEventIsNewer, _kCalCalendarDontSearchForLocalMatch, 
-                       _kCalCalendarIgnoreNeedsReply, _kCalCalendarImportConvertInlineAttachmentsToManaged, 
-                       _kCalCalendarImportDontPrunePhantomDetachments, _kCalCalendarImportForMigration, 
-                       _kCalCalendarImportRepliesForPreview, _kCalCalendarImportTodos, 
-                       _kCalCalendarItemChangesCalendarIDKey, _kCalCalendarItemChangesChangeIDKey, 
-                       _kCalCalendarItemChangesEndDateKey, _kCalCalendarItemChangesExternalIDKey, 
-                       _kCalCalendarItemChangesExternalModTagKey, _kCalCalendarItemChangesIDKey, 
-                       _kCalCalendarItemChangesOldCalendarIDKey, _kCalCalendarItemChangesOldExternalIDKey, 
-                       _kCalCalendarItemChangesOwningEntityIDKey, _kCalCalendarItemChangesSequenceNumberKey, 
-                       _kCalCalendarItemChangesSignificantAttributeKey, _kCalCalendarItemChangesTypeKey, 
-                       _kCalCalendarItemChangesUUIDKey, _kCalCalendarItemChangesUniqueIDKey, 
-                       _kCalCalendarMergeFields, _kCalCalendarOldFlagsMethods, _kCalCalendarPreventLineFolding, 
+                       _kCalCalendarDontImportIfLocalEventIsNewer, _kCalCalendarDontImportUnlessLocalEventIsOlder, 
+                       _kCalCalendarDontSearchForLocalMatch, _kCalCalendarIgnoreNeedsReply, 
+                       _kCalCalendarImportConvertInlineAttachmentsToManaged, _kCalCalendarImportDontPrunePhantomDetachments, 
+                       _kCalCalendarImportForMigration, _kCalCalendarImportRepliesForPreview, 
+                       _kCalCalendarImportTodos, _kCalCalendarItemChangesCalendarIDKey, 
+                       _kCalCalendarItemChangesChangeIDKey, _kCalCalendarItemChangesEndDateKey, 
+                       _kCalCalendarItemChangesExternalIDKey, _kCalCalendarItemChangesExternalModTagKey, 
+                       _kCalCalendarItemChangesIDKey, _kCalCalendarItemChangesOldCalendarIDKey, 
+                       _kCalCalendarItemChangesOldExternalIDKey, _kCalCalendarItemChangesOwningEntityIDKey, 
+                       _kCalCalendarItemChangesSequenceNumberKey, _kCalCalendarItemChangesSignificantAttributeKey, 
+                       _kCalCalendarItemChangesTypeKey, _kCalCalendarItemChangesUUIDKey, 
+                       _kCalCalendarItemChangesUniqueIDKey, _kCalCalendarMergeFields, 
+                       _kCalCalendarOldFlagsMethods, _kCalCalendarPreventLineFolding, 
                        _kCalCalendarStripAlarms, _kCalCalendarStripAttachments, _kCalCalendarSupportCompression, 
                        _kCalCalendariMIPImport, _kCalCategoryClass, _kCalCategoryLinkClass, 
                        _kCalChangeAddition, _kCalChangeDeletion, _kCalChangeModification, 

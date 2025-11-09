@@ -1429,6 +1429,9 @@ Protocols:
     MethodKind: Instance
   - Selector: 'setFragmentBuffer:offset:atIndex:'
     SwiftName: setFragmentBuffer(_:offset:at:)
+    MethodKind: Instance    
+  - Selector: 'setObjectThreadgroupMemoryLength:atIndex:'
+    SwiftName: setObjectThreadgroupMemoryLength(_:index:)
     MethodKind: Instance
 - Name: MTLIndirectComputeCommand
   Methods:

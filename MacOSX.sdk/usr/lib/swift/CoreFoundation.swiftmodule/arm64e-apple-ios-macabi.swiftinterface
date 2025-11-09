@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -module-name CoreFoundation
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -module-name CoreFoundation
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 18
 @_exported import CoreFoundation
 import Swift
@@ -514,7 +514,7 @@ extension CoreFoundation.CGFloat : Swift._CVarArgPassedAsDouble, Swift._CVarArgA
 @_originallyDefinedIn(module: "CoreGraphics", watchOS 1.0)
 @_originallyDefinedIn(module: "CoreGraphics", tvOS 9.0)
 extension CoreFoundation.CGFloat : Swift.Codable {
-  @_transparent public init(from decoder: Swift.Decoder) throws {
+  @_transparent public init(from decoder: any Swift.Decoder) throws {
     let container = try decoder.singleValueContainer()
     do {
       self.native = try container.decode(NativeType.self)
@@ -536,7 +536,7 @@ extension CoreFoundation.CGFloat : Swift.Codable {
       }
     }
   }
-  @_transparent public func encode(to encoder: Swift.Encoder) throws {
+  @_transparent public func encode(to encoder: any Swift.Encoder) throws {
     var container = encoder.singleValueContainer()
     try container.encode(self.native)
   }

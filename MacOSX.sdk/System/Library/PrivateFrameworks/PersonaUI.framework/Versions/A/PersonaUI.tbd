@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6AC9B2D6-2A11-39A4-B448-FA7FCDEC36EA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           14959155-C602-3308-9047-2666A932C760
 install-name:    '/System/Library/PrivateFrameworks/PersonaUI.framework/Versions/A/PersonaUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

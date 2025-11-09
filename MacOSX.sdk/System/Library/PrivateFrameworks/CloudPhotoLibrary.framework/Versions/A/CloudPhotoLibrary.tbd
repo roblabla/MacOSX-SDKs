@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6F3E888F-5F00-3E53-86B6-136E6BB4536F
-  - target:          x86_64-maccatalyst
-    value:           6F3E888F-5F00-3E53-86B6-136E6BB4536F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C4E906B4-7A18-30FA-9193-E712278F3737
-  - target:          arm64e-maccatalyst
-    value:           C4E906B4-7A18-30FA-9193-E712278F3737
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoLibrary.framework/Versions/A/CloudPhotoLibrary'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -73,12 +60,20 @@ exports:
                        _CPLSuggestionAssetReadFrom, _CPLSuggestionMemoryReadFrom, 
                        _CPLSuggestionPersonReadFrom, _CPLSuggestionRecordListReadFrom, 
                        _CPLSyncProgressCountOfPulledAssetsKey, _CPLSyncProgressStateKey, 
-                       _CPLSyncSessionDetachedSequenceNumber, _CPLSyncSessionPredictionTypeDownloadResourceSize, 
-                       _CPLSyncSessionPredictionTypeUploadResourceSize, _CloudPhotoLibraryVersionNumber, 
-                       _CloudPhotoLibraryVersionString, __CPLAbort, __CPLConfigurationDidChangeNotification, 
-                       __CPLDefaultValueBOOLNO, __CPLDefaultValueNSINTEGER0, __CPLDefaultValueObjectNil, 
-                       __CPLDontDelayChangeSessionUpdate, __CPLExit, __CPLFakeUserIdentifier, 
-                       __CPLOSLogSubsystem, __CPLShortDescriptionForFaceCropType, 
+                       _CPLSyncSessionDetachedSequenceNumber, _CPLSyncSessionMetricsNotificationName, 
+                       _CPLSyncSessionPredictionTypeDownloadResourceSize, _CPLSyncSessionPredictionTypeUploadResourceSize, 
+                       _CloudPhotoLibraryVersionNumber, _CloudPhotoLibraryVersionString, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionBatteryBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionBlockedSessionsCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionCellularBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionLowDataModeBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionLowPowerModeBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionTotalSessionsCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionUIVisibleBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionUnknownReasonBlockedCountKey, 
+                       __CPLAbort, __CPLConfigurationDidChangeNotification, __CPLDefaultValueBOOLNO, 
+                       __CPLDefaultValueNSINTEGER0, __CPLDefaultValueObjectNil, __CPLDontDelayChangeSessionUpdate, 
+                       __CPLExit, __CPLFakeUserIdentifier, __CPLOSLogSubsystem, __CPLShortDescriptionForFaceCropType, 
                        __CPLSilentLogging, __CPLStatusDidChangeNotification, __CPLStoreFailure, 
                        ___CPLBuildVersion, ___CPLCheckOriginalResourceInMaster, ___CPLEngineOSLogDomain, 
                        ___CPLEngineResourceDownloadQueueRequestBackgroundDownloadQueueImmediately, 
@@ -155,11 +150,12 @@ exports:
                        CPLSimpleTaskSyncStep, CPLStagingScopeChange, CPLStatus, CPLSuggestionAsset, 
                        CPLSuggestionAssetFlag, CPLSuggestionChange, CPLSuggestionMemory, 
                        CPLSuggestionPerson, CPLSuggestionRecordList, CPLSyncIndicator, 
-                       CPLSyncSession, CPLSyncSessionPrediction, CPLSyncSessionPredictor, 
-                       CPLSyncStep, CPLTestFeedbackMessage, CPLTransaction, CPLTransientRepositoryStorage, 
-                       CPLTransportScopeMapping, CPLTransportUpdateScopeTask, CPLTransportUpdateTask, 
-                       CPLTrashedAssetExtractionStep, CPLUnacknowledgedChangeStorage, 
-                       CPLUnionEnumerator, _CPLEngineStoreBatchedTransaction, _CPLForcedSyncHistory, 
+                       CPLSyncSession, CPLSyncSessionMetrics, CPLSyncSessionPrediction, 
+                       CPLSyncSessionPredictor, CPLSyncStep, CPLTestFeedbackMessage, 
+                       CPLTransaction, CPLTransientRepositoryStorage, CPLTransportScopeMapping, 
+                       CPLTransportUpdateScopeTask, CPLTransportUpdateTask, CPLTrashedAssetExtractionStep, 
+                       CPLUnacknowledgedChangeStorage, CPLUnionEnumerator, CPLUploadPushedChangesTask, 
+                       _CPLEngineStoreBatchedTransaction, _CPLForcedSyncHistory, 
                        _CPLOptimisticIDMapping, _CPLScheduledOverride, _CPLTransientStatus ]
     objc-ivars:      [ CPLAccountFlags._defaultHEVC, CPLAccountFlags._has, CPLAccountFlags._reason, 
                        CPLAccountFlags._version, CPLFaceAnalysis._completed, CPLFaceAnalysis._faceInstances, 

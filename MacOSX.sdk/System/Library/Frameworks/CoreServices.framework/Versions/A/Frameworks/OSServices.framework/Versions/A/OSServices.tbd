@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
-  - target:          x86_64-maccatalyst
-    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
-  - target:          arm64e-maccatalyst
-    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
@@ -96,9 +83,10 @@ exports:
                        __CSCopySecIdentityForAppleID, __CSCopyUserIdentityForPersonInfo, 
                        __CSCreateAppleIDIdentityWithCertificate, __CSCreateAppleIDIdentityWithCertificateChain, 
                        __CSCreateAppleIDIdentityWithNameAndAccountIdentifier, __CSCreatePosixNameFromString, 
-                       __CSDeviceSupportsAirDrop, __CSDeviceSupportsODisk, __CSDisassociateWireless, 
-                       __CSEnableWirelessP2P, __CSGetAppleIDIdentityAuthority, __CSIdentityAddLinkedIdentityWithNameAndAuthority, 
-                       __CSIdentityAllowsPasswordResetWithAuthority, __CSIdentityAllowsPasswordResetWithAuthorityFromDSAttrData, 
+                       __CSDefaultLog, __CSDeviceSupportsAirDrop, __CSDeviceSupportsODisk, 
+                       __CSDisassociateWireless, __CSEnableWirelessP2P, __CSGetAppleIDIdentityAuthority, 
+                       __CSIdentityAddLinkedIdentityWithNameAndAuthority, __CSIdentityAllowsPasswordResetWithAuthority, 
+                       __CSIdentityAllowsPasswordResetWithAuthorityFromDSAttrData, 
                        __CSIdentityAuthenticateUsingCertificate, __CSIdentityAuthenticateUsingCertificateChain, 
                        __CSIdentityAuthenticateUsingPassword, __CSIdentityAuthorityAuthenticateNameAndPassword, 
                        __CSIdentityAuthorityCopyIdentityWithName, __CSIdentityChangePassword, 

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6B582595-586B-35A4-9DCE-7B42F8A145AC
-  - target:          x86_64-maccatalyst
-    value:           6B582595-586B-35A4-9DCE-7B42F8A145AC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F600B6AA-A71C-3529-AAC3-42973C0B6CC7
-  - target:          arm64e-maccatalyst
-    value:           F600B6AA-A71C-3529-AAC3-42973C0B6CC7
 install-name:    '/System/Library/Frameworks/GSS.framework/Versions/A/GSS'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

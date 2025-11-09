@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6C644D28-EB23-39BA-83D1-7071825A7059
-  - target:          x86_64-maccatalyst
-    value:           6C644D28-EB23-39BA-83D1-7071825A7059
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C340F48B-51BD-3173-B7A0-DBAFA9C96190
-  - target:          arm64e-maccatalyst
-    value:           C340F48B-51BD-3173-B7A0-DBAFA9C96190
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
 current-version: 483
 allowable-clients:

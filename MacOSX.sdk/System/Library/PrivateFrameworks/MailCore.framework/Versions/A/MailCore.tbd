@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DAB400A7-0F5E-31A6-8524-5252356BE2F1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           68E0071C-78D2-3030-B4E3-C74243D35133
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3731.255.101
+current-version: 3731.255.231
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -17,9 +10,9 @@ allowable-clients:
                        EmailUIPlugin, IMAP, IMAPFunctionalTests, Mail, MailCacheDelete, 
                        MailCoreTests, MailFrameworkTests, MailMigratorPlugin, MailNotificationContentExtension, 
                        MailQuickLookExtension, MailService, MailShareExtension, MailStorageManagement, 
-                       MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, Rot13Encryption, 
-                       TestSuggestions, WebDocumentViewTestApp, com.apple.MailServiceAgent, 
-                       maild, migrationhelper ]
+                       MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, MessageIMAPTests, 
+                       Rot13Encryption, TestSuggestions, WebDocumentViewTestApp, 
+                       com.apple.MailServiceAgent, maild, migrationhelper ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 

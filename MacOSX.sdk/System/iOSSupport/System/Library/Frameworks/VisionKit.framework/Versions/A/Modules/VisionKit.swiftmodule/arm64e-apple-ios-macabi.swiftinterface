@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target arm64e-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name VisionKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 201.5
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 201.7
 import CoreGraphics
 import Foundation
 import Swift
@@ -102,11 +102,11 @@ extension VisionKit.ImageAnalysisInteractionDelegate {
     public typealias RawValue = Swift.UInt
   }
   @_Concurrency.MainActor @objc override dynamic public init()
-  @_Concurrency.MainActor weak final public var delegate: VisionKit.ImageAnalysisInteractionDelegate? {
+  @_Concurrency.MainActor weak final public var delegate: (any VisionKit.ImageAnalysisInteractionDelegate)? {
     get
     set
   }
-  @_Concurrency.MainActor convenience public init(_ delegate: VisionKit.ImageAnalysisInteractionDelegate)
+  @_Concurrency.MainActor convenience public init(_ delegate: any VisionKit.ImageAnalysisInteractionDelegate)
   @_Concurrency.MainActor final public var analysis: VisionKit.ImageAnalysis? {
     get
     set
@@ -215,12 +215,12 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
 @available(iOS 16.0, *)
 @available(macCatalyst, unavailable)
 @_Concurrency.MainActor public protocol DataScannerViewControllerDelegate : AnyObject {
-  func dataScannerDidZoom(_ dataScanner: VisionKit.DataScannerViewController)
-  func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didTapOn item: VisionKit.RecognizedItem)
-  func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didAdd addedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
-  func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didUpdate updatedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
-  func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didRemove removedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
-  func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, becameUnavailableWithError error: VisionKit.DataScannerViewController.ScanningUnavailable)
+  @_Concurrency.MainActor func dataScannerDidZoom(_ dataScanner: VisionKit.DataScannerViewController)
+  @_Concurrency.MainActor func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didTapOn item: VisionKit.RecognizedItem)
+  @_Concurrency.MainActor func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didAdd addedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
+  @_Concurrency.MainActor func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didUpdate updatedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
+  @_Concurrency.MainActor func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, didRemove removedItems: [VisionKit.RecognizedItem], allItems: [VisionKit.RecognizedItem])
+  @_Concurrency.MainActor func dataScanner(_ dataScanner: VisionKit.DataScannerViewController, becameUnavailableWithError error: VisionKit.DataScannerViewController.ScanningUnavailable)
 }
 @available(iOS 16.0, *)
 @available(macCatalyst, unavailable)
@@ -286,7 +286,7 @@ extension VisionKit.DataScannerViewControllerDelegate {
   @_Concurrency.MainActor public class var supportedTextRecognitionLanguages: [Swift.String] {
     get
   }
-  @_Concurrency.MainActor weak public var delegate: VisionKit.DataScannerViewControllerDelegate?
+  @_Concurrency.MainActor weak public var delegate: (any VisionKit.DataScannerViewControllerDelegate)?
   @_Concurrency.MainActor public var overlayContainerView: UIKit.UIView {
     get
   }

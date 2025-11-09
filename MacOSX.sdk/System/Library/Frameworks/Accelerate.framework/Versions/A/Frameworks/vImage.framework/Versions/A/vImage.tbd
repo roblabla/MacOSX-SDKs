@@ -2,23 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9FDB8A6E-DD40-3EFF-AEE4-9C0E21609D66
-  - target:          x86_64-maccatalyst
-    value:           9FDB8A6E-DD40-3EFF-AEE4-9C0E21609D66
-  - target:          x86_64h-macos
-    value:           41986B8E-C2BB-31F7-AA05-CFB48FF2954D
-  - target:          x86_64h-maccatalyst
-    value:           41986B8E-C2BB-31F7-AA05-CFB48FF2954D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           C24F3764-099D-33DB-9D3C-62B9E3F15E2A
-  - target:          arm64e-maccatalyst
-    value:           C24F3764-099D-33DB-9D3C-62B9E3F15E2A
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
 current-version: 575
 exports:

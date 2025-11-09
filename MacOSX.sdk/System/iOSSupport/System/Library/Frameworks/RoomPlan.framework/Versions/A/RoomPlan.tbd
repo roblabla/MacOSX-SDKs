@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           C5997694-F285-3809-B9F2-8B16BA7A9147
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           658661EF-E2B5-3533-9D22-111FCB57A45E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RoomPlan.framework/Versions/A/RoomPlan'
 swift-abi-version: 7
 exports:
@@ -287,8 +280,7 @@ exports:
                        '_$s8RoomPlan15SettingsManagerCMm', '_$s8RoomPlan15SettingsManagerCMn', 
                        '_$s8RoomPlan15SettingsManagerCMo', '_$s8RoomPlan15SettingsManagerCMu', 
                        '_$s8RoomPlan15SettingsManagerCN', '_$s8RoomPlan15SettingsManagerCfD', 
-                       '_$s8RoomPlan15SettingsManagerCfd', '_OBJC_CLASS_$__TtC8RoomPlan15RoomCaptureView', 
-                       '_OBJC_METACLASS_$__TtC8RoomPlan15RoomCaptureView', _RoomPlanVersionNumber, 
+                       '_$s8RoomPlan15SettingsManagerCfd', _RoomPlanVersionNumber, 
                        _RoomPlanVersionString ]
     objc-classes:    [ _TtC8RoomPlan15RoomCaptureView ]
 ...

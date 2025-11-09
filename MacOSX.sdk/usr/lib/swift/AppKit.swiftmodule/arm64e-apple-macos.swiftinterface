@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 111
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 113
 @_exported import Accessibility
 @_exported import AppKit
 @_exported import CoreGraphics
@@ -139,7 +139,7 @@ extension AppKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
 @available(macOS 10.15.1, *)
 open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, AppKit.NSCollectionViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public typealias ItemProvider = (AppKit.NSCollectionView, Foundation.IndexPath, ItemIdentifierType) -> AppKit.NSCollectionViewItem?
-  public typealias SupplementaryViewProvider = (AppKit.NSCollectionView, Swift.String, Foundation.IndexPath) -> (AppKit.NSView & AppKit.NSCollectionViewElement)?
+  public typealias SupplementaryViewProvider = (AppKit.NSCollectionView, Swift.String, Foundation.IndexPath) -> (any AppKit.NSView & AppKit.NSCollectionViewElement)?
   public var supplementaryViewProvider: AppKit.NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.SupplementaryViewProvider? {
     get
     set
@@ -712,6 +712,40 @@ extension Foundation.URLResourceValues {
     get
   }
 }
+extension AppKit.NSViewController {
+  @available(swift 5.1)
+  @available(macOS 13.3, *)
+  @propertyWrapper public struct ViewLoading<Value> {
+    @available(*, unavailable, message: "@NSViewController.ViewLoading can only be used on subclasses of NSViewController")
+    public var wrappedValue: Value {
+      get
+      set
+    }
+    public init()
+    public init(wrappedValue: Value)
+    public static subscript<EnclosingSelf>(_enclosingInstance observed: EnclosingSelf, wrapped wrappedKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, Value>, storage storageKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, AppKit.NSViewController.ViewLoading<Value>>) -> Value where EnclosingSelf : AppKit.NSViewController {
+      get
+      set
+    }
+  }
+}
+extension AppKit.NSWindowController {
+  @available(swift 5.1)
+  @available(macOS 13.3, *)
+  @propertyWrapper public struct WindowLoading<Value> {
+    @available(*, unavailable, message: "@NSWindowController.WindowLoading can only be used on subclasses of NSWindowController")
+    public var wrappedValue: Value {
+      get
+      set
+    }
+    public init()
+    public init(wrappedValue: Value)
+    public static subscript<EnclosingSelf>(_enclosingInstance observed: EnclosingSelf, wrapped wrappedKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, Value>, storage storageKeyPath: Swift.ReferenceWritableKeyPath<EnclosingSelf, AppKit.NSWindowController.WindowLoading<Value>>) -> Value where EnclosingSelf : AppKit.NSWindowController {
+      get
+      set
+    }
+  }
+}
 extension AppKit.NSAppKitVersion {
   @available(*, deprecated, renamed: "macOS10_14")
   public static var number10_14: AppKit.NSAppKitVersion {
@@ -822,15 +856,15 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public typealias Value = AppKit.NSUnderlineStyle
     public typealias ObjectiveCValue = Foundation.NSNumber
     public static let name: Swift.String
-    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> AppKit.NSUnderlineStyle
+    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
   }
   @frozen public enum UnderlineStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
     public typealias Value = AppKit.NSUnderlineStyle
     public typealias ObjectiveCValue = Foundation.NSNumber
     public static let name: Swift.String
-    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> AppKit.NSUnderlineStyle
+    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
   }
   @frozen public enum StrokeColorAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = AppKit.NSColor
@@ -847,8 +881,8 @@ extension Foundation.AttributeScopes.AppKitAttributes {
   @frozen public enum TextEffectAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = Foundation.NSAttributedString.TextEffectStyle
     public static let name: Swift.String
-    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: Swift.Encoder) throws
-    public static func decode(from decoder: Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
+    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
   }
   @frozen public enum AttachmentAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = AppKit.NSTextAttachment

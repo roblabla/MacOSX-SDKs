@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           66BBA3CA-BCE1-32F8-8269-99FAC92469FC
-  - target:          x86_64-maccatalyst
-    value:           66BBA3CA-BCE1-32F8-8269-99FAC92469FC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0978E37E-6087-35F8-A623-B9D02160B84F
-  - target:          arm64e-maccatalyst
-    value:           0978E37E-6087-35F8-A623-B9D02160B84F
 install-name:    '/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

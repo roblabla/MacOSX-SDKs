@@ -19,7 +19,8 @@
  @class MTKView
  @abstract View for rendering metal content
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0))
+
 @interface MTKView : UIView <NSCoding,CALayerDelegate>
 
 /*!
@@ -230,7 +231,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @class MTKViewDelegate
  @abstract Allows an object to render into the view and respond to resize events
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0))
+
 @protocol MTKViewDelegate <NSObject>
 
 /*!

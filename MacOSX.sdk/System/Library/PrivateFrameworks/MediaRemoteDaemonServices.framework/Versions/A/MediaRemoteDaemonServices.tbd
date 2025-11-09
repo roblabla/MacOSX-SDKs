@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           622B4486-36E1-3250-8F73-C2F6CB6A763E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1269D554-FA2E-3C0F-83C4-F6C7CF04D6E5
 install-name:    '/System/Library/PrivateFrameworks/MediaRemoteDaemonServices.framework/Versions/A/MediaRemoteDaemonServices'
 swift-abi-version: 7
 exports:

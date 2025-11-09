@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           808307AC-17E1-3C18-95DD-A66ACCFD6A85
-  - target:          x86_64-maccatalyst
-    value:           808307AC-17E1-3C18-95DD-A66ACCFD6A85
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           65A8D314-D7EC-3988-A3F8-8E47BBA7F335
-  - target:          arm64e-maccatalyst
-    value:           65A8D314-D7EC-3988-A3F8-8E47BBA7F335
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircle.framework/Versions/A/FamilyCircle'
 swift-abi-version: 7
 exports:

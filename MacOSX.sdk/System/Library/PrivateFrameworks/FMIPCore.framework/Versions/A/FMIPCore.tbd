@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E4D32B02-A903-323B-B1D8-7C7191FACCBC
-  - target:          x86_64-maccatalyst
-    value:           E4D32B02-A903-323B-B1D8-7C7191FACCBC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5764B7CA-A12E-3E0C-B987-F05628A49E06
-  - target:          arm64e-maccatalyst
-    value:           5764B7CA-A12E-3E0C-B987-F05628A49E06
 install-name:    '/System/Library/PrivateFrameworks/FMIPCore.framework/Versions/A/FMIPCore'
 swift-abi-version: 7
 allowable-clients:

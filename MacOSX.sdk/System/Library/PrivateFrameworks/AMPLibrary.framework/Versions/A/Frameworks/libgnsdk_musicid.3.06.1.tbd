@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FF6DC455-2C33-3676-8ABA-E7A6EEE32B1F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0D5F805B-8DCD-35E3-B19D-0763FE29B2D9
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/AMPLibrary.framework/Versions/A/Frameworks/libgnsdk_musicid.3.06.1.dylib'
 current-version: 3.6.1

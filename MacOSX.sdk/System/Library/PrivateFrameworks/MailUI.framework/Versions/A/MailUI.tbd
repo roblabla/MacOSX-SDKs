@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           59F74E59-5181-34C9-8C23-5D66632DA0D5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           89644CD8-27CC-36F8-95E8-2C7B014A4798
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3731.255.101
+current-version: 3731.255.231
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

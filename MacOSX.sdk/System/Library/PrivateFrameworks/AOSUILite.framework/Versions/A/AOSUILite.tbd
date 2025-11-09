@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A566E306-A99B-3BEF-B70F-4D93DFB0C1E1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7FE65EB3-E599-30DA-865C-00BEE4A40719
 install-name:    '/System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite'
 current-version: 415
 exports:

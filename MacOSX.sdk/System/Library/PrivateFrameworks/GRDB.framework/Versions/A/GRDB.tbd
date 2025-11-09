@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D2A9EB49-EA48-30CB-9901-573C69DA259D
-  - target:          x86_64-maccatalyst
-    value:           D2A9EB49-EA48-30CB-9901-573C69DA259D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AE1F889C-7BCC-314E-9E2C-ED65CD6A4728
-  - target:          arm64e-maccatalyst
-    value:           AE1F889C-7BCC-314E-9E2C-ED65CD6A4728
 install-name:    '/System/Library/PrivateFrameworks/GRDB.framework/Versions/A/GRDB'
 current-version: 5
 swift-abi-version: 7

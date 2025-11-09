@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8AD58D65-078B-3557-B693-409C7C299D5B
-  - target:          x86_64-maccatalyst
-    value:           8AD58D65-078B-3557-B693-409C7C299D5B
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           09E10E69-7070-3AD5-BC6E-338C12664432
-  - target:          arm64e-maccatalyst
-    value:           09E10E69-7070-3AD5-BC6E-338C12664432
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortraitInternals.framework/Versions/A/PersonalizationPortraitInternals'
-current-version: 1193.8.6
+current-version: 1193.26
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -594,6 +581,7 @@ exports:
                        PPTextToTopicTransformGuardedData._vocabularyTrie, PPTopicDissectorGuardedData.namedEntities, 
                        PPTopicDissectorGuardedData.stop, PPTopicDissectorGuardedData.topics, 
                        PPTopicDissectorGuardedData.topicsExactMatchesInSourceText, 
-                       PPTrialWrapperGuardedData.mostRecentUpdateDate, PPTrialWrapperGuardedData.notificationTokens, 
-                       PPTrialWrapperGuardedData.pathOverrides, PPTrialWrapperGuardedData.trackingId ]
+                       PPTrialWrapperGuardedData.concatenatedTreatmentNames, PPTrialWrapperGuardedData.mostRecentUpdateDate, 
+                       PPTrialWrapperGuardedData.notificationTokens, PPTrialWrapperGuardedData.pathOverrides, 
+                       PPTrialWrapperGuardedData.trackingId, PPTrialWrapperGuardedData.treatmentsHash ]
 ...

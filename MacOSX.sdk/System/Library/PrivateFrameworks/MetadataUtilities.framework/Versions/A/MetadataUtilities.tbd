@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           20F6EECE-94BA-3826-A1D4-72E763655634
-  - target:          x86_64-maccatalyst
-    value:           20F6EECE-94BA-3826-A1D4-72E763655634
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E47FF3E9-DEF3-3203-966F-55912334E031
-  - target:          arm64e-maccatalyst
-    value:           E47FF3E9-DEF3-3203-966F-55912334E031
 install-name:    '/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities'
-current-version: 2230.7
+current-version: 2230.18
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -120,8 +107,10 @@ exports:
                        _icu_search_context_item_get_item_count, _icu_search_match, 
                        _icu_term_key_starts, _icu_word_matcher_count, _icu_word_matcher_create, 
                        _icu_word_matcher_matches, _icu_word_matcher_matches_string, 
-                       _resolve_transcriptions_for_locale, _strFromUTF32, _strFromUTF8, 
-                       _strToUTF8 ]
+                       _md_deadline_once_cancel, _md_deadline_once_create, _md_deadline_once_release, 
+                       _md_deadline_once_retain, _md_deadline_once_run_block_with_lock, 
+                       _md_deadline_once_start, _md_deadline_once_wait, _resolve_transcriptions_for_locale, 
+                       _strFromUTF32, _strFromUTF8, _strToUTF8 ]
     objc-classes:    [ MDPathFilter, MDPathFilterGenerator, _MDMutablePlistBytes, 
                        _MDPlistBytes ]
     objc-ivars:      [ _MDMutablePlistBytes._curContainer, _MDMutablePlistBytes._currentUID, 

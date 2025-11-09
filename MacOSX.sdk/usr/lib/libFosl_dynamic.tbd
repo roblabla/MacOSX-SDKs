@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F4749680-EABC-335D-B6AC-77A129D3169C
-  - target:          x86_64-maccatalyst
-    value:           F4749680-EABC-335D-B6AC-77A129D3169C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           51B754D4-04BC-31C2-AC13-7CD35A057A7C
-  - target:          arm64e-maccatalyst
-    value:           51B754D4-04BC-31C2-AC13-7CD35A057A7C
 install-name:    '/usr/lib/libFosl_dynamic.dylib'
 current-version: 0
 compatibility-version: 0

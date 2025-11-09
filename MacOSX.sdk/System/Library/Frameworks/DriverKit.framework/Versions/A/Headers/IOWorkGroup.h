@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOWorkGroup.iig */
+/* iig(DriverKit-256.100.8) generated from IOWorkGroup.iig */
 
 /* IOWorkGroup.iig:1-38 */
 /*
@@ -285,7 +285,7 @@ public:
 };
 
 
-class IOWorkGroupInterface : public OSInterface
+class  IOWorkGroupInterface : public OSInterface
 {
 public:
 };

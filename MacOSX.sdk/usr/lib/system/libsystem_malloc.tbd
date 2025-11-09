@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F609F029-BCD0-3A54-B48A-99B3CE8378CE
-  - target:          x86_64-maccatalyst
-    value:           F609F029-BCD0-3A54-B48A-99B3CE8378CE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           04185997-16D2-30DA-8691-7C82612635A3
-  - target:          arm64e-maccatalyst
-    value:           04185997-16D2-30DA-8691-7C82612635A3
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 409.60.6
+current-version: 425.100.7
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -56,7 +43,7 @@ exports:
                        _malloc_zone_print, _malloc_zone_print_ptr_info, _malloc_zone_realloc, 
                        _malloc_zone_register, _malloc_zone_statistics, _malloc_zone_unregister, 
                        _malloc_zone_valloc, _malloc_zones, _mstats, _pgm_diagnose_fault_from_crash_reporter, 
-                       _pgm_disable_for_current_thread, _posix_memalign, _quarantine_diagnose_fault_from_crash_reporter, 
+                       _posix_memalign, _quarantine_diagnose_fault_from_crash_reporter, 
                        _realloc, '_reallocarray$DARWIN_EXTSN', '_reallocarrayf$DARWIN_EXTSN', 
                        _scalable_zone_info, _scalable_zone_statistics, _set_malloc_singlethreaded, 
                        _stack_logging_enable_logging, _szone_check_counter, _szone_check_modulo, 

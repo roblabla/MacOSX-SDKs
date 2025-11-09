@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreData
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1244.6
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreData
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1251.6
 import Combine
 @_exported import CoreData
 import Foundation
@@ -10,7 +10,7 @@ import _Concurrency
 import _StringProcessing
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 extension CoreData.NSManagedObject {
-  @_disfavoredOverload @objc dynamic public class func fetchRequest() -> CoreData.NSFetchRequest<CoreData.NSFetchRequestResult>
+  @_disfavoredOverload @objc dynamic public class func fetchRequest() -> CoreData.NSFetchRequest<any CoreData.NSFetchRequestResult>
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension CoreData.NSManagedObject : Foundation.ObservableObject {
@@ -64,6 +64,7 @@ extension CoreData.NSPersistentStoreCoordinator {
   public func perform<T>(_ block: @escaping () throws -> T) async rethrows -> T
   #endif
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError.Code {
   public static var managedObjectValidation: Foundation.CocoaError.Code {
     get
@@ -192,6 +193,7 @@ extension Foundation.CocoaError.Code {
     get
   }
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError.Code {
   @available(*, deprecated, renamed: "managedObjectValidation")
   public static var managedObjectValidationError: Foundation.CocoaError.Code {
@@ -362,6 +364,7 @@ extension Foundation.CocoaError.Code {
     get
   }
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError {
   public static var managedObjectValidation: Foundation.CocoaError.Code {
     get
@@ -490,6 +493,7 @@ extension Foundation.CocoaError {
     get
   }
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError {
   @available(*, deprecated, renamed: "managedObjectValidation")
   public static var managedObjectValidationError: Foundation.CocoaError.Code {
@@ -660,6 +664,7 @@ extension Foundation.CocoaError {
     get
   }
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError {
   public var validationObject: Any? {
     get
@@ -905,28 +910,46 @@ extension CoreData.NSAttributeDescription.AttributeType {
 }
 extension CoreData.NSManagedObjectContext {
   public func fetch<T>(_ request: CoreData.NSFetchRequest<T>) throws -> [T] where T : CoreData.NSFetchRequestResult
-  @_disfavoredOverload public func fetch(_ request: CoreData.NSFetchRequest<CoreData.NSFetchRequestResult>) throws -> [Any]
+  @_disfavoredOverload public func fetch(_ request: CoreData.NSFetchRequest<any CoreData.NSFetchRequestResult>) throws -> [Any]
   public func count<T>(for request: CoreData.NSFetchRequest<T>) throws -> Swift.Int where T : CoreData.NSFetchRequestResult
 }
-@available(iOS 14.0, *)
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext {
+  @available(macOS 10.5, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public static let willSaveObjectsNotification: Foundation.Notification.Name
+  @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public static let didSaveObjectsNotification: Foundation.Notification.Name
+  @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public static let didChangeObjectsNotification: Foundation.Notification.Name
+  @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
   public static let didSaveObjectIDsNotification: Foundation.Notification.Name
+  @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
   public static let didMergeChangesObjectIDsNotification: Foundation.Notification.Name
+  @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public enum NotificationKey : Swift.String {
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     case queryGeneration
+    @available(macOS 10.5, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case invalidatedAllObjects
+    @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case insertedObjects
+    @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case updatedObjects
+    @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case deletedObjects
+    @available(macOS 10.5, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case refreshedObjects
+    @available(macOS 10.5, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
     case invalidatedObjects
+    @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case insertedObjectIDs
+    @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case updatedObjectIDs
+    @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case deletedObjectIDs
+    @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case refreshedObjectIDs
+    @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case invalidatedObjectIDs
     public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
@@ -965,11 +988,11 @@ extension CoreData.NSManagedObjectContext {
   public func perform<T>(schedule: CoreData.NSManagedObjectContext.ScheduledTaskType = .immediate, _ block: @escaping () throws -> T) async rethrows -> T
   #endif
 }
-@available(iOS 14.0, *)
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.Equatable {}
-@available(iOS 14.0, *)
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.Hashable {}
-@available(iOS 14.0, *)
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.RawRepresentable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension CoreData.NSManagedObjectContext.ScheduledTaskType : Swift.Equatable {}

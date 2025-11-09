@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C48DD482-BFB8-3B59-ADB8-F59CFB26186D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7F98DDAA-5BD2-3D62-BAA7-9C1155BA5D79
 install-name:    '/System/Library/PrivateFrameworks/SiriUtilities.framework/Versions/A/SiriUtilities'
 swift-abi-version: 7
 exports:
@@ -1030,6 +1023,7 @@ exports:
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO11descriptionSSvg', 
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO11descriptionSSvpMV', 
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO11unavailableyA2EmFWC', 
+                       '_$s13SiriUtilities19NetworkAvailabilityC6StatusO17reachabilityStateAESo021SUNetworkReachabilityG0V_tcfC', 
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO2eeoiySbAE_AEtFZ', 
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO4hash4intoys6HasherVz_tF', 
                        '_$s13SiriUtilities19NetworkAvailabilityC6StatusO7unknownyA2EmFWC', 
@@ -1135,7 +1129,21 @@ exports:
                        '_$s13SiriUtilities20TransformationPluginPAA0D0Tb', '_$s13SiriUtilities20TransformationPluginPAAE20namedTransformationsSayAA0C10DescriptorVGyF', 
                        '_$s13SiriUtilities20TransformationPluginPAAE20typedTransformationsSayAA0C10DescriptorVGyF', 
                        '_$s13SiriUtilities20TransformationPluginPAAE24supportedTransformationsSayAA0C10DescriptorVGyF', 
-                       '_$s13SiriUtilities20TransformationPluginTL', '_$s13SiriUtilities21DeadlockDetectingLockC04takeE0yyFTj', 
+                       '_$s13SiriUtilities20TransformationPluginTL', '_$s13SiriUtilities21AutoBugCaptureManagerC14createSnapshot9signatureSbSDys11AnyHashableVypG_tFTj', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC14createSnapshot9signatureSbSDys11AnyHashableVypG_tFTq', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC15createSignature9errorType0i3SubJ003subJ7Context6domainSo19NSMutableDictionaryCSgSS_S3StFTj', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC15createSignature9errorType0i3SubJ003subJ7Context6domainSo19NSMutableDictionaryCSgSS_S3StFTq', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC16generateSnapshot9errorType0i3SubJ003subJ7Context10completionySS_S2SySbctFTj', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC16generateSnapshot9errorType0i3SubJ003subJ7Context10completionySS_S2SySbctFTq', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC6domain15sessionDurationACSS_SdtcfC', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC6domain15sessionDurationACSS_SdtcfCTj', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC6domain15sessionDurationACSS_SdtcfCTq', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerC6domain15sessionDurationACSS_Sdtcfc', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerCMa', '_$s13SiriUtilities21AutoBugCaptureManagerCMm', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerCMn', '_$s13SiriUtilities21AutoBugCaptureManagerCMo', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerCMu', '_$s13SiriUtilities21AutoBugCaptureManagerCN', 
+                       '_$s13SiriUtilities21AutoBugCaptureManagerCfD', '_$s13SiriUtilities21AutoBugCaptureManagerCfd', 
+                       '_$s13SiriUtilities21DeadlockDetectingLockC04takeE0yyFTj', 
                        '_$s13SiriUtilities21DeadlockDetectingLockC04takeE0yyFTq', 
                        '_$s13SiriUtilities21DeadlockDetectingLockC07defaultC6ActionyyACcvgZ', 
                        '_$s13SiriUtilities21DeadlockDetectingLockC07releaseE0yyFTj', 

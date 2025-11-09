@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1BCC80D2-6052-3462-825F-3A1A45AA7FFB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           209E4CA3-007E-39AA-B244-99405F3AE821
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:
@@ -67,10 +60,11 @@ exports:
                        _ASCLockupContextIsAdMaterialContext, _ASCLockupContextIsAdMaterialWithLandscapeScreenshotsContext, 
                        _ASCLockupContextOfferOnly, _ASCLockupContextOverlay, _ASCLockupContextOverlayClip, 
                        _ASCLockupContextSafariExtension, _ASCLockupContextSingleSignOn, 
-                       _ASCLockupContextStandard, _ASCLockupContextWatch, _ASCLockupKindApp, 
-                       _ASCLockupKindAppBundle, _ASCLockupKindInAppPurchase, _ASCLockupViewSizeDefault, 
-                       _ASCLockupViewSizeGetEstimatedSize, _ASCLockupViewSizeGetEstimatedSizeForTraits, 
-                       _ASCLockupViewSizeGetIconSize, _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
+                       _ASCLockupContextStandard, _ASCLockupContextTVProvider, _ASCLockupContextWatch, 
+                       _ASCLockupKindApp, _ASCLockupKindAppBundle, _ASCLockupKindInAppPurchase, 
+                       _ASCLockupViewSizeDefault, _ASCLockupViewSizeGetEstimatedSize, 
+                       _ASCLockupViewSizeGetEstimatedSizeForTraits, _ASCLockupViewSizeGetIconSize, 
+                       _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
                        _ASCLockupViewSizeMedium, _ASCLockupViewSizeMediumOfferButton, 
                        _ASCLockupViewSizeMini, _ASCLockupViewSizeSmall, _ASCLockupViewSizeSmallOfferButton, 
                        _ASCMetricsActivityKeyHostApp, _ASCMetricsActivityKeyRedirectURL, 

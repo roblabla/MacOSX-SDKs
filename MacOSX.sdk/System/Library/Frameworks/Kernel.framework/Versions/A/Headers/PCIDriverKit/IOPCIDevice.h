@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOPCIDevice.iig */
+/* iig(DriverKit-256.100.8) generated from IOPCIDevice.iig */
 
 /* IOPCIDevice.iig:1-83 */
 /*
@@ -938,7 +938,7 @@ public:
 
 #if !KERNEL
 
-class IOPCIDeviceInterface : public OSInterface
+class  IOPCIDeviceInterface : public OSInterface
 {
 public:
 };

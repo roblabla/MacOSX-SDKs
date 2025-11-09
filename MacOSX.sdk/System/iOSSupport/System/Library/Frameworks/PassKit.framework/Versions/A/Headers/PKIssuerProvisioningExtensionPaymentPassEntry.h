@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKIssuerProvisioningExtensionPaymentPassEntry.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKIssuerProvisioningExtensionPaymentPassEntry.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //

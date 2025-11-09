@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C874ECBF-2A85-38EF-A1B3-798E366C57C0
-  - target:          x86_64-maccatalyst
-    value:           C874ECBF-2A85-38EF-A1B3-798E366C57C0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1AE8435D-4ED9-37DB-97CF-F796D11EC917
-  - target:          arm64e-maccatalyst
-    value:           1AE8435D-4ED9-37DB-97CF-F796D11EC917
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -26,15 +13,16 @@ exports:
                        __ZN26MusicDeviceBase_CMDispatch22ComponentEntryDispatchEP19ComponentParametersPN5ausdk15MusicDeviceBaseE ]
     weak-symbols:    [ __ZTINSt3__112system_errorE, __ZTINSt3__117bad_function_callE, 
                        __ZTISt11logic_error, __ZTISt12length_error, __ZTISt12out_of_range, 
-                       __ZTISt13runtime_error, __ZTISt14overflow_error, __ZTISt9bad_alloc, 
-                       __ZTISt9exception, __ZTSNSt3__112system_errorE, __ZTSNSt3__117bad_function_callE, 
-                       __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
-                       __ZTSSt13runtime_error, __ZTSSt14overflow_error, __ZTSSt9bad_alloc, 
-                       __ZTSSt9exception ]
+                       __ZTISt13runtime_error, __ZTISt14overflow_error, __ZTISt20bad_array_new_length, 
+                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSNSt3__112system_errorE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, __ZTSSt12length_error, 
+                       __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt14overflow_error, 
+                       __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, __ZTSSt9exception ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ACGKDecoderFactory, _ACGKEncoderFactory, _AVCKeyDaemonProcessInfoError, 
-                       _AVCKeyDaemonProcessInfoUniquePID, _AVCMediaStreamNegotiatorHDRMode, 
+                       _AVCKeyDaemonProcessInfoUniquePID, _AVCMediaStreamNegotiatorAccessNetworkType, 
+                       _AVCMediaStreamNegotiatorHDRMode, _AVCMediaStreamNegotiatorTransportProtocolType, 
                        _AVCMediaStreamNegotiatorTransportType, _AVCMediaStreamNegotiatorVideoHeight, 
                        _AVCMediaStreamNegotiatorVideoResolution, _AVCMediaStreamNegotiatorVideoWidth, 
                        _AVCQoSReportChannelSequence, _AVCQoSReportDisplayedFrameCount, 
@@ -168,7 +156,8 @@ exports:
                        _VCNackGeneratorSeqNumAgingTime, _VCNackGeneratorStorebagConfigVersion, 
                        _VCNoRemoteDuplicationThresholdFast, _VCPreWarmCellEnableThreshold, 
                        _VCPreferRelayOverP2PThreshold, _VCPrimaryConnHealthAllowedDelay, 
-                       _VCRedStateValueA, _VCRemoteMediaStallTimeout, _VCSecureMessagingEnableThreshold, 
+                       _VCRedStateValueA, _VCRemoteMediaStallTimeout, _VCRtcpPSFBForLTRAck, 
+                       _VCRtcpPSFBForLossFeedback, _VCSecureMessagingEnableThreshold, 
                        _VCSendFeedbackControllerReport, _VCServerPacketRetransmissionEnabledForVideo, 
                        _VCStreamOutputInProcessDelegate, _VCStreamOutputInProcessDelegateQueue, 
                        _VCUpdatedAFRCHeaderEnableThreshold, _VCVideoEnableLateFrameRecovery, 
@@ -233,7 +222,8 @@ exports:
                        __ZN12VPFilterBankD0Ev, __ZN12VPFilterBankD1Ev, __ZN12VPFilterBankD2Ev, 
                        __ZN13CACFFormatterC1EPKv, __ZN13CACFFormatterC2EPKv, __ZN13MP4SampleRate11DeserializeER16TBitstreamReaderIjEb, 
                        __ZN13MP4SampleRate12SetFromIndexEjh, __ZN13MP4SampleRateC1Ejh, 
-                       __ZN13MP4SampleRateC2Ejh, __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
+                       __ZN13MP4SampleRateC2Ejh, __ZN13MultiRadixFFT10InitializeEj, 
+                       __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
                        __ZN13MultiRadixFFT21NearestSupportedSizesEj, __ZN13MultiRadixFFT23CplxOutOfPlaceTransformEPK15DSPSplitComplexPS0_i, 
                        __ZN13USACSBRHeader11DeserializeER16TBitstreamReaderIjE, __ZN14BSFuzzerCFPref16loadCFPreferenceEv, 
                        __ZN14CABundleLockerC1Ev, __ZN14CABundleLockerC2Ev, __ZN14CABundleLockerD1Ev, 
@@ -262,12 +252,12 @@ exports:
                        __ZN16RandBitGenerator6getBitEv, __ZN16RandBitGeneratorC1Ejf, 
                        __ZN16RandBitGeneratorC2Ejf, __ZN16TBitstreamReaderIhE13FillCacheFromEPKh, 
                        __ZN16TBitstreamReaderIhEC1EPKhj, __ZN16TBitstreamReaderIhEC2EPKhj, 
-                       __ZN17MutableADTSHeader14SetCRCCheckSumEt, __ZN17MutableADTSHeader19SetNumRawDataBlocksEj, 
-                       __ZN17MutableADTSHeader20SetADTSBufferFulnessEj, __ZN17MutableADTSHeader21SetPayloadFrameLengthEj, 
-                       __ZN17MutableADTSHeader9SerializeEPhRj, __ZN17MutableADTSHeaderC1ERKS_, 
-                       __ZN17MutableADTSHeaderC1Ejjbbjb, __ZN17MutableADTSHeaderC2ERKS_, 
-                       __ZN17MutableADTSHeaderC2Ejjbbjb, __ZN17MutableADTSHeaderaSERKS_, 
-                       __ZN18CAAudioFileFormats14FileFormatInfo15LoadDataFormatsEv, 
+                       __ZN17MultiRadixRealFFT10InitializeEj, __ZN17MutableADTSHeader14SetCRCCheckSumEt, 
+                       __ZN17MutableADTSHeader19SetNumRawDataBlocksEj, __ZN17MutableADTSHeader20SetADTSBufferFulnessEj, 
+                       __ZN17MutableADTSHeader21SetPayloadFrameLengthEj, __ZN17MutableADTSHeader9SerializeEPhRj, 
+                       __ZN17MutableADTSHeaderC1ERKS_, __ZN17MutableADTSHeaderC1Ejjbbjb, 
+                       __ZN17MutableADTSHeaderC2ERKS_, __ZN17MutableADTSHeaderC2Ejjbbjb, 
+                       __ZN17MutableADTSHeaderaSERKS_, __ZN18CAAudioFileFormats14FileFormatInfo15LoadDataFormatsEv, 
                        __ZN18CAAudioFileFormats14FileFormatInfo18AnyWritableFormatsEv, 
                        __ZN18CAAudioFileFormats14FindFileFormatEj, __ZN18CAAudioFileFormats17IsKnownDataFormatEj, 
                        __ZN18CAAudioFileFormats27InferFileFormatFromFilenameEPK10__CFStringRj, 
@@ -286,8 +276,9 @@ exports:
                        __ZN18DecoderConfigDescr21MakeStreamDescriptionER27AudioStreamBasicDescription, 
                        __ZN18DecoderConfigDescr35DeserializeMPEG4AudioSpecificConfigER16TBitstreamReaderIjEj, 
                        __ZN18DecoderConfigDescr36DeserializeMPEG4AudioSpecificPayloadER16TBitstreamReaderIjEPjS3_, 
-                       __ZN18DecoderConfigDescr38DeserializeVoiceDecoderSpecificPayloadER16TBitstreamReaderIjE, 
-                       __ZN18DecoderConfigDescr46DeserializeMPEG1Or2AudioDecoderSpecificPayloadER16TBitstreamReaderIjE, 
+                       __ZN18DecoderConfigDescr38DeserializeVoiceDecoderSpecificPayloadER16TBitstreamReaderIjEPjS3_, 
+                       __ZN18DecoderConfigDescr39DeserializeVorbisDecoderSpecificPayloadER16TBitstreamReaderIjEPjS3_, 
+                       __ZN18DecoderConfigDescr46DeserializeMPEG1Or2AudioDecoderSpecificPayloadER16TBitstreamReaderIjEPjS3_, 
                        __ZN18MP4AOTSpecificBase15MakeAOTSpecificE18MP4AudioObjectType13MP4SampleRatej, 
                        __ZN18MP4AudioObjectType11DeserializeER16TBitstreamReaderIjE, 
                        __ZN18MP4AudioObjectType11IsAACObjectEj, __ZN18MP4AudioObjectType19IsAACLowDelayObjectEj, 
@@ -320,7 +311,8 @@ exports:
                        __ZN22MultiDelayMatrixFilter7ProcessEPK15AudioBufferListPS0_Rj, 
                        __ZN22MultiDelayMatrixFilterC1Ev, __ZN22MultiDelayMatrixFilterC2Ev, 
                        __ZN22MultiDelayMatrixFilterD1Ev, __ZN22MultiDelayMatrixFilterD2Ev, 
-                       __ZN23MP4ObjectTypeIndication22Is13KVoiceObjectTypeIDEj, __ZN23MP4ObjectTypeIndication24IsMPEG4AudioObjectTypeIDEj, 
+                       __ZN23MP4ObjectTypeIndication20IsVorbisObjectTypeIDEj, __ZN23MP4ObjectTypeIndication22Is13KVoiceObjectTypeIDEj, 
+                       __ZN23MP4ObjectTypeIndication24IsMPEG4AudioObjectTypeIDEj, 
                        __ZN23MP4ObjectTypeIndication27IsMPEG1Or2AudioObjectTypeIDEj, 
                        __ZN23MP4ObjectTypeIndicationC1Ej, __ZN23MP4ObjectTypeIndicationC2Ej, 
                        __ZN24CAStreamBasicDescription11ResetFormatER27AudioStreamBasicDescription, 
@@ -403,8 +395,8 @@ exports:
                        __ZN5ausdk6AUBase25ProcessForScheduledParamsERNSt3__16vectorI23AudioUnitParameterEventNS1_9allocatorIS3_EEEEjPv, 
                        __ZN5ausdk6AUBase26SetAFactoryPresetAsCurrentERK8AUPreset, 
                        __ZN5ausdk6AUBase27DispatchRemovePropertyValueEjjj, __ZN5ausdk6AUBase5ResetEjj, 
-                       __ZN5ausdk6AUBase7CleanupEv, __ZN5ausdk6AUBase7HasIconEv, 
-                       __ZN5ausdk6AUBase8DoRenderERjRK14AudioTimeStampjjR15AudioBufferList, 
+                       __ZN5ausdk6AUBase7CleanupEv, __ZN5ausdk6AUBase7DoResetEjj, 
+                       __ZN5ausdk6AUBase7HasIconEv, __ZN5ausdk6AUBase8DoRenderERjRK14AudioTimeStampjjR15AudioBufferList, 
                        __ZN5ausdk6AUBase9DoCleanupEv, __ZN5ausdk6AUBase9DoProcessERjRK14AudioTimeStampjR15AudioBufferList, 
                        __ZN5ausdk6AUBase9SaveStateEPPKv, __ZN5ausdk6AUBaseC2EP23ComponentInstanceRecordjjj, 
                        __ZN5ausdk6AUBaseD0Ev, __ZN5ausdk6AUBaseD1Ev, __ZN5ausdk6AUBaseD2Ev, 
@@ -447,9 +439,10 @@ exports:
                        __ZNK11SBRHeaderBS9SerializeER16TBitstreamWriterIjE, __ZNK12MP4AudioESDS18SerializeByteCountEj, 
                        __ZNK12MP4AudioESDS9SerializeER16TBitstreamWriterIjEjPv, __ZNK13MP4SampleRate14SerializeCountEv, 
                        __ZNK13MP4SampleRate20NearestBoundaryIndexEv, __ZNK13MP4SampleRate5IndexEv, 
-                       __ZNK13MP4SampleRate9SerializeER16TBitstreamWriterIjE, __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, 
-                       __ZNK14CACFDictionary10GetFixed64EPK10__CFStringRd, __ZNK14CACFDictionary10GetFloat32EPK10__CFStringRf, 
-                       __ZNK14CACFDictionary10GetFloat64EPK10__CFStringRd, __ZNK14CACFDictionary12GetCACFArrayEPK10__CFStringR9CACFArray, 
+                       __ZNK13MP4SampleRate9SerializeER16TBitstreamWriterIjE, __ZNK13MultiRadixFFT4SizeEv, 
+                       __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, __ZNK14CACFDictionary10GetFixed64EPK10__CFStringRd, 
+                       __ZNK14CACFDictionary10GetFloat32EPK10__CFStringRf, __ZNK14CACFDictionary10GetFloat64EPK10__CFStringRd, 
+                       __ZNK14CACFDictionary12GetCACFArrayEPK10__CFStringR9CACFArray, 
                        __ZNK14CACFDictionary13GetCACFStringEPK10__CFStringR10CACFString, 
                        __ZNK14CACFDictionary13GetDictionaryEPK10__CFStringRPK14__CFDictionary, 
                        __ZNK14CACFDictionary16GetKeysAndValuesEPPKvS2_, __ZNK14CACFDictionary17GetCACFDictionaryEPK10__CFStringRS_, 
@@ -466,7 +459,8 @@ exports:
                        __ZNK17MultiRadixRealFFT20RealInPlaceTransformEP15DSPSplitComplexif, 
                        __ZNK17MultiRadixRealFFT30RealOutOfPlaceForwardTransformEPKfP15DSPSplitComplexf, 
                        __ZNK17MultiRadixRealFFT30RealOutOfPlaceInverseTransformEPK15DSPSplitComplexPf, 
-                       __ZNK18DecoderConfigDescr14GetIPFsPresentEv, __ZNK18DecoderConfigDescr16GetBaseLevelASBDER27AudioStreamBasicDescription, 
+                       __ZNK17MultiRadixRealFFT4SizeEv, __ZNK18DecoderConfigDescr14GetIPFsPresentEv, 
+                       __ZNK18DecoderConfigDescr16GetBaseLevelASBDER27AudioStreamBasicDescription, 
                        __ZNK18DecoderConfigDescr16GetChannelConfigERj, __ZNK18DecoderConfigDescr17GetDefaultPrimingERj, 
                        __ZNK18DecoderConfigDescr17GetIFPrerollCountEv, __ZNK18DecoderConfigDescr18GetFramesPerPacketEv, 
                        __ZNK18DecoderConfigDescr18SerializeByteCountEj, __ZNK18DecoderConfigDescr19GetChannelLayoutTagERj, 
@@ -485,7 +479,8 @@ exports:
                        __ZNK21MP4AudioProgramConfig14SerializeCountEv, __ZNK21MP4AudioProgramConfig16TotalNumChannelsEv, 
                        __ZNK21MP4AudioProgramConfig9SerializeER16TBitstreamWriterIjE, 
                        __ZNK21MP4USACSpecificConfig14IFPrerollCountEv, __ZNK21MP4USACSpecificConfig17OutputFrameLengthEv, 
-                       __ZNK21SoundActivityDetector18GetCurrentMetadataEPj, __ZNK23MP4ObjectTypeIndication22Is13KVoiceObjectTypeIDEv, 
+                       __ZNK21SoundActivityDetector18GetCurrentMetadataEPj, __ZNK23MP4ObjectTypeIndication20IsVorbisObjectTypeIDEv, 
+                       __ZNK23MP4ObjectTypeIndication22Is13KVoiceObjectTypeIDEv, 
                        __ZNK23MP4ObjectTypeIndication24IsMPEG4AudioObjectTypeIDEv, 
                        __ZNK23MP4ObjectTypeIndication27IsMPEG1Or2AudioObjectTypeIDEv, 
                        __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescription, 
@@ -569,11 +564,11 @@ exports:
                        AVCAudioStreamConfig._enableMaxBitrateOnNoChangeCMR, AVCAudioStreamConfig._headerFullOnly, 
                        AVCAudioStreamConfig._latencySensitiveMode, AVCAudioStreamConfig._maxPtime, 
                        AVCAudioStreamConfig._numRedundantPayloads, AVCAudioStreamConfig._octetAligned, 
-                       AVCAudioStreamConfig._preferredCodecRateMode, AVCAudioStreamConfig._ptime, 
-                       AVCAudioStreamConfig._rxRedPayloadType, AVCAudioStreamConfig._subscriptionSlot, 
-                       AVCAudioStreamConfig._txRedPayloadType, AVCAudioStreamConfig._volume, 
-                       AVCCaptionsConfig._locale, AVCCaptionsToken._confidence, AVCCaptionsToken._range, 
-                       AVCCaptionsToken._text, AVCEffects._avConferenceEffectsQueue, 
+                       AVCAudioStreamConfig._preferredCodecRateMode, AVCAudioStreamConfig._preferredMediaBitRate, 
+                       AVCAudioStreamConfig._ptime, AVCAudioStreamConfig._rxRedPayloadType, 
+                       AVCAudioStreamConfig._subscriptionSlot, AVCAudioStreamConfig._txRedPayloadType, 
+                       AVCAudioStreamConfig._volume, AVCCaptionsConfig._locale, AVCCaptionsToken._confidence, 
+                       AVCCaptionsToken._range, AVCCaptionsToken._text, AVCEffects._avConferenceEffectsQueue, 
                        AVCEffects._connection, AVCEffects._delegate, AVCEffects._effectType, 
                        AVCEffects._isEffectsApplied, AVCEffects._isFaceMeshTrackingEnabled, 
                        AVCEffects._mode, AVCMoments._capabilities, AVCMoments._connection, 
@@ -622,11 +617,8 @@ exports:
                        VideoAttributes.contentsRect, VideoAttributes.framePresentationTime, 
                        VideoAttributes.orientation, VideoAttributes.ratio, VideoAttributes.scaleFactor, 
                        VideoAttributes.videoMirrored, VideoAttributes.videoSourceScreen ]
-    weak-symbols:    [ __ZGVZN5caulk9host_time7details13timebase_info8instanceEvE4info, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE5sOnceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE9sInstanceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb1EEE5sOnceE, 
-                       __ZN12CADeprecated10TSingletonI12DFTSetupListILb1EEE9sInstanceE, 
+    weak-symbols:    [ __ZGVZN12DFTSetupListILb0EE8instanceEvE6global, __ZGVZN12DFTSetupListILb1EE8instanceEvE6global, 
+                       __ZGVZN5caulk9host_time7details13timebase_info8instanceEvE4info, 
                        __ZN12CADeprecated10TSingletonI14BSFuzzerCFPrefE5sOnceE, __ZN12CADeprecated10TSingletonI14BSFuzzerCFPrefE9sInstanceE, 
                        __ZN13MP4SampleRate19kMP4SampleRateTableE, __ZN13MP4SampleRate29kMP4SampleRateBoundariesTableE, 
                        __ZN14CAMemoryStream5WriteEPvPKci, __ZN16TBitstreamReaderIhE15AlignToNextByteEv, 
@@ -652,17 +644,10 @@ exports:
                        __ZN21TSingletonThreadLocalI14BSSectionStackE4sKeyE, __ZN21TSingletonThreadLocalI14BSSectionStackE8sKeyOnceE, 
                        __ZN5ausdk31ParameterEventListSortPredicateERK23AudioUnitParameterEventS2_, 
                        __ZN8RandLFSR18uniformlyRandomBitEv, __ZN8RandLFSR3oneEv, 
-                       __ZN8RandLFSR4zeroEv, __ZN9DFTHandleILb0EE10InitializeEj, 
-                       __ZN9DFTHandleILb0EEC1ERKS0_, __ZN9DFTHandleILb0EEC1Ev, __ZN9DFTHandleILb0EEC2ERKS0_, 
-                       __ZN9DFTHandleILb0EEC2Ev, __ZN9DFTHandleILb0EED0Ev, __ZN9DFTHandleILb0EED1Ev, 
-                       __ZN9DFTHandleILb0EED2Ev, __ZN9DFTHandleILb0EEaSERKS0_, __ZN9DFTHandleILb1EE10InitializeEj, 
-                       __ZN9DFTHandleILb1EEC1ERKS0_, __ZN9DFTHandleILb1EEC1Ev, __ZN9DFTHandleILb1EEC2ERKS0_, 
-                       __ZN9DFTHandleILb1EEC2Ev, __ZN9DFTHandleILb1EED0Ev, __ZN9DFTHandleILb1EED1Ev, 
-                       __ZN9DFTHandleILb1EED2Ev, __ZN9DFTHandleILb1EEaSERKS0_, __ZNK16TBitstreamReaderIhE13BitsRemainingEv, 
+                       __ZN8RandLFSR4zeroEv, __ZNK16TBitstreamReaderIhE13BitsRemainingEv, 
                        __ZNK16TBitstreamReaderIjE13BitsRemainingEv, __ZNK16TBitstreamWriterIhE11BitsWrittenEv, 
                        __ZNK16TBitstreamWriterIhE13BitsRemainingEv, __ZNK16TBitstreamWriterIjE11BitsWrittenEv, 
                        __ZNK16TBitstreamWriterIjE13BitsRemainingEv, __ZNK16TBitstreamWriterItE11BitsWrittenEv, 
-                       __ZNK16TBitstreamWriterItE13BitsRemainingEv, __ZNK9DFTHandleILb0EE4SizeEv, 
-                       __ZNK9DFTHandleILb1EE4SizeEv, __ZTV9DFTHandleILb0EE, __ZTV9DFTHandleILb1EE, 
-                       __ZZN5caulk9host_time7details13timebase_info8instanceEvE4info ]
+                       __ZNK16TBitstreamWriterItE13BitsRemainingEv, __ZZN12DFTSetupListILb0EE8instanceEvE6global, 
+                       __ZZN12DFTSetupListILb1EE8instanceEvE6global, __ZZN5caulk9host_time7details13timebase_info8instanceEvE4info ]
 ...

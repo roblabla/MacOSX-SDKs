@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CB2F1AC0-659A-350C-9F93-86A778C84659
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4B0B2314-4CBD-368B-8559-A1BEF789DCDB
 install-name:    '/System/Library/PrivateFrameworks/TrustedPeers.framework/Versions/A/TrustedPeers'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

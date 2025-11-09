@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-ios16.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name WeatherKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 327
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name WeatherKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 348
 import CoreLocation
 import Foundation
 import Swift
@@ -28,8 +28,8 @@ extension WeatherKit.WeatherAvailability : Swift.Equatable {
   public static func == (a: WeatherKit.WeatherAvailability, b: WeatherKit.WeatherAvailability) -> Swift.Bool
 }
 extension WeatherKit.WeatherAvailability : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct MinuteWeather {
@@ -42,8 +42,8 @@ extension WeatherKit.MinuteWeather : Swift.Equatable {
   public static func == (a: WeatherKit.MinuteWeather, b: WeatherKit.MinuteWeather) -> Swift.Bool
 }
 extension WeatherKit.MinuteWeather : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct DayWeather {
@@ -54,6 +54,20 @@ public struct DayWeather {
   public var lowTemperature: Foundation.Measurement<Foundation.UnitTemperature>
   public var precipitation: WeatherKit.Precipitation
   public var precipitationChance: Swift.Double
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @_backDeploy(before: iOS 16.4)
+  @_backDeploy(before: macOS 13.3)
+  @_backDeploy(before: tvOS 16.4)
+  @_backDeploy(before: watchOS 9.4)
+  public var precipitationAmount: Foundation.Measurement<Foundation.UnitLength> {
+    get {
+        return rainfallAmount
+    }
+  }
+  @available(iOS, introduced: 16.0, deprecated: 16.4, renamed: "precipitationAmount")
+  @available(macOS, introduced: 13.0, deprecated: 13.3, renamed: "precipitationAmount")
+  @available(tvOS, introduced: 16.0, deprecated: 16.4, renamed: "precipitationAmount")
+  @available(watchOS, introduced: 9.0, deprecated: 9.4, renamed: "precipitationAmount")
   public var rainfallAmount: Foundation.Measurement<Foundation.UnitLength>
   public var snowfallAmount: Foundation.Measurement<Foundation.UnitLength>
   public var sun: WeatherKit.SunEvents
@@ -65,8 +79,8 @@ extension WeatherKit.DayWeather : Swift.Equatable {
   public static func == (a: WeatherKit.DayWeather, b: WeatherKit.DayWeather) -> Swift.Bool
 }
 extension WeatherKit.DayWeather : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct UVIndex {
@@ -103,8 +117,8 @@ extension WeatherKit.UVIndex : Swift.Equatable {
   public static func == (a: WeatherKit.UVIndex, b: WeatherKit.UVIndex) -> Swift.Bool
 }
 extension WeatherKit.UVIndex : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct HourWeather {
@@ -130,8 +144,8 @@ extension WeatherKit.HourWeather : Swift.Equatable {
   public static func == (a: WeatherKit.HourWeather, b: WeatherKit.HourWeather) -> Swift.Bool
 }
 extension WeatherKit.HourWeather : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum WeatherError : Foundation.LocalizedError {
@@ -172,8 +186,8 @@ extension WeatherKit.SunEvents : Swift.Equatable {
   public static func == (a: WeatherKit.SunEvents, b: WeatherKit.SunEvents) -> Swift.Bool
 }
 extension WeatherKit.SunEvents : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum WeatherCondition : Swift.String, Swift.CaseIterable, Swift.CustomStringConvertible, Swift.Hashable {
@@ -238,13 +252,17 @@ public struct WeatherAttribution {
   public var squareMarkURL: Foundation.URL
   public var combinedMarkDarkURL: Foundation.URL
   public var combinedMarkLightURL: Foundation.URL
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
+  public var legalAttributionText: Swift.String {
+    get
+  }
 }
 extension WeatherKit.WeatherAttribution : Swift.Equatable {
   public static func == (a: WeatherKit.WeatherAttribution, b: WeatherKit.WeatherAttribution) -> Swift.Bool
 }
 extension WeatherKit.WeatherAttribution : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherQuery<T> {
@@ -285,8 +303,8 @@ extension WeatherKit.MoonEvents : Swift.Equatable {
   public static func == (a: WeatherKit.MoonEvents, b: WeatherKit.MoonEvents) -> Swift.Bool
 }
 extension WeatherKit.MoonEvents : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherMetadata {
@@ -300,8 +318,8 @@ extension WeatherKit.WeatherMetadata : Swift.Equatable {
   public static func == (a: WeatherKit.WeatherMetadata, b: WeatherKit.WeatherMetadata) -> Swift.Bool
 }
 extension WeatherKit.WeatherMetadata : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct Weather {
@@ -316,8 +334,8 @@ extension WeatherKit.Weather : Swift.Equatable {
   public static func == (a: WeatherKit.Weather, b: WeatherKit.Weather) -> Swift.Bool
 }
 extension WeatherKit.Weather : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct Forecast<Element> : Swift.RandomAccessCollection, Swift.Codable, Swift.Equatable where Element : Swift.Decodable, Element : Swift.Encodable, Element : Swift.Equatable {
@@ -337,8 +355,8 @@ public struct Forecast<Element> : Swift.RandomAccessCollection, Swift.Codable, S
   public typealias Indices = Swift.Range<WeatherKit.Forecast<Element>.Index>
   public typealias Iterator = Swift.IndexingIterator<WeatherKit.Forecast<Element>>
   public typealias SubSequence = Swift.Slice<WeatherKit.Forecast<Element>>
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.Forecast where Element == WeatherKit.MinuteWeather {
@@ -350,12 +368,12 @@ extension WeatherKit.Forecast {
   public static func == (lhs: WeatherKit.Forecast<WeatherKit.MinuteWeather>, rhs: WeatherKit.Forecast<WeatherKit.MinuteWeather>) -> Swift.Bool
 }
 extension WeatherKit.Forecast where Element == WeatherKit.HourWeather {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension WeatherKit.Forecast where Element == WeatherKit.DayWeather {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum Precipitation : Swift.String, Swift.CaseIterable, Swift.CustomStringConvertible, Swift.Hashable {
@@ -457,8 +475,8 @@ extension WeatherKit.Wind : Swift.Equatable {
   public static func == (a: WeatherKit.Wind, b: WeatherKit.Wind) -> Swift.Bool
 }
 extension WeatherKit.Wind : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 final public class WeatherService : @unchecked Swift.Sendable {
@@ -574,8 +592,8 @@ extension WeatherKit.CurrentWeather : Swift.Equatable {
   public static func == (a: WeatherKit.CurrentWeather, b: WeatherKit.CurrentWeather) -> Swift.Bool
 }
 extension WeatherKit.CurrentWeather : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherAlert {
@@ -590,8 +608,8 @@ extension WeatherKit.WeatherAlert : Swift.Equatable {
   public static func == (a: WeatherKit.WeatherAlert, b: WeatherKit.WeatherAlert) -> Swift.Bool
 }
 extension WeatherKit.WeatherAlert : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherAvailability.AvailabilityKind : Swift.Equatable {}

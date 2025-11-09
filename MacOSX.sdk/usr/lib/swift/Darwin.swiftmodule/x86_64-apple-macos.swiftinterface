@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macosx13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 5 -O -enforce-exclusivity=unchecked -disable-objc-attr-requires-foundation-module -module-name Darwin
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.7.1.134.4
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macosx13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -disable-objc-attr-requires-foundation-module -module-name Darwin
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.8.0.117.59
 @_exported import Darwin
 import Swift
 import SwiftOverlayShims
@@ -62,8 +62,8 @@ public var stderr: Swift.UnsafeMutablePointer<Darwin.FILE> {
   get
   set
 }
-public func dprintf(_ fd: Swift.Int, _ format: Swift.UnsafePointer<Swift.Int8>, _ args: Swift.CVarArg...) -> Swift.Int32
-public func snprintf(ptr: Swift.UnsafeMutablePointer<Swift.Int8>, _ len: Swift.Int, _ format: Swift.UnsafePointer<Swift.Int8>, _ args: Swift.CVarArg...) -> Swift.Int32
+public func dprintf(_ fd: Swift.Int, _ format: Swift.UnsafePointer<Swift.Int8>, _ args: any Swift.CVarArg...) -> Swift.Int32
+public func snprintf(ptr: Swift.UnsafeMutablePointer<Swift.Int8>, _ len: Swift.Int, _ format: Swift.UnsafePointer<Swift.Int8>, _ args: any Swift.CVarArg...) -> Swift.Int32
 public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.Int32
 public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: Darwin.mode_t) -> Swift.Int32
 public func openat(_ fd: Swift.Int32, _ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.Int32

@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5ACA9918-8C5F-3F56-A799-496287F5347F
-  - target:          x86_64-maccatalyst
-    value:           5ACA9918-8C5F-3F56-A799-496287F5347F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           78A477FF-BD24-3EC0-B7F0-55F1620B66ED
-  - target:          arm64e-maccatalyst
-    value:           78A477FF-BD24-3EC0-B7F0-55F1620B66ED
 install-name:    '/System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices'
 current-version: 281
 exports:
@@ -70,8 +57,9 @@ exports:
                        _ExchangeWebServicesVersionString, _JWTClockSkew, _SOAPErrorFaultCodeKey, 
                        _SOAPErrorFaultStringKey, _SOAPErrorHTTPStatusKey, _SOAPErrorSOAPHeaderKey, 
                        _SOAPFaultKey, _SOAPNamespaceURI, _SOAPWebServicesErrorDomain, 
-                       _autodiscoverKillSwitchURL, _kAutodiscoverProtocolActiveSync, 
-                       _kAutodiscoverProtocolEWS, _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
+                       _autodiscoverKillSwitchURL, _encodedTypeCopy, _encodedTypeNonatomic, 
+                       _encodedTypeRetain, _kAutodiscoverProtocolActiveSync, _kAutodiscoverProtocolEWS, 
+                       _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
                        _kExchangeBasicAccountMigrationStatus, _kExchangeJWKSCacheDate, 
                        _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthSupportedKey, 
                        _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 

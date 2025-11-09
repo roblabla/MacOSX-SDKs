@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           23ECAA94-1209-3E51-9F2F-B4BABBF8A544
-  - target:          x86_64-maccatalyst
-    value:           23ECAA94-1209-3E51-9F2F-B4BABBF8A544
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           94C403BF-13DC-399E-9F39-B3F162AB05AC
-  - target:          arm64e-maccatalyst
-    value:           94C403BF-13DC-399E-9F39-B3F162AB05AC
 install-name:    '/System/Library/PrivateFrameworks/VisualIntelligence.framework/Versions/A/VisualIntelligence'
 swift-abi-version: 7
 exports:

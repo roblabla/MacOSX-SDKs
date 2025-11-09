@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C63B00EF-C555-3F87-90F5-C5130704BEBA
-  - target:          x86_64-maccatalyst
-    value:           C63B00EF-C555-3F87-90F5-C5130704BEBA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A5BCE73C-4572-37E2-AA20-ACD98D67698D
-  - target:          arm64e-maccatalyst
-    value:           A5BCE73C-4572-37E2-AA20-ACD98D67698D
 install-name:    '/usr/lib/libmis.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

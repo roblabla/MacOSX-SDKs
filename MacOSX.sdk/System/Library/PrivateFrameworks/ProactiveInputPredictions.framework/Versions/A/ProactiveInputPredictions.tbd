@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4628ED0B-3760-38DF-B74E-90BC65E59C61
-  - target:          x86_64-maccatalyst
-    value:           4628ED0B-3760-38DF-B74E-90BC65E59C61
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           782E77A6-8B77-306D-ABB5-44923FA96009
-  - target:          arm64e-maccatalyst
-    value:           782E77A6-8B77-306D-ABB5-44923FA96009
 install-name:    '/System/Library/PrivateFrameworks/ProactiveInputPredictions.framework/Versions/A/ProactiveInputPredictions'
-current-version: 1193.8.6
+current-version: 1193.26
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

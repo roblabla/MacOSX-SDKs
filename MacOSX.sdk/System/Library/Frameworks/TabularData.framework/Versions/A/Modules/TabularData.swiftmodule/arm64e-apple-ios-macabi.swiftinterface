@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target arm64e-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name TabularData
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 27
 import Combine
@@ -34,7 +34,7 @@ public protocol OptionalColumnProtocol : TabularData.ColumnProtocol {
 public protocol AnyColumnProtocol {
   var name: Swift.String { get set }
   var count: Swift.Int { get }
-  var wrappedElementType: Any.Type { get }
+  var wrappedElementType: any Any.Type { get }
   subscript(position: Swift.Int) -> Any? { get }
   subscript(range: Swift.Range<Swift.Int>) -> TabularData.AnyColumnSlice { get }
 }
@@ -393,10 +393,10 @@ public struct Column<WrappedElement> : TabularData.OptionalColumnProtocol {
   public var missingCount: Swift.Int {
     get
   }
-  public var wrappedElementType: Any.Type {
+  public var wrappedElementType: any Any.Type {
     get
   }
-  public var prototype: TabularData.AnyColumnPrototype {
+  public var prototype: any TabularData.AnyColumnPrototype {
     get
   }
   public init(name: Swift.String, capacity: Swift.Int)
@@ -474,11 +474,11 @@ extension TabularData.Column : Swift.Hashable where WrappedElement : Swift.Hasha
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.Encodable where WrappedElement : Swift.Encodable {
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.Decodable where WrappedElement : Swift.Decodable {
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.Sendable where WrappedElement : Swift.Sendable {
@@ -510,12 +510,12 @@ public struct ColumnSlice<WrappedElement> : TabularData.OptionalColumnProtocol {
             slice = Slice(base: newBase, bounds: slice.startIndex ..< slice.endIndex)
         }
   }
-  @inlinable public var wrappedElementType: Any.Type {
+  @inlinable public var wrappedElementType: any Any.Type {
     get {
         WrappedElement.self
     }
   }
-  public var prototype: TabularData.AnyColumnPrototype {
+  public var prototype: any TabularData.AnyColumnPrototype {
     get
   }
   @usableFromInline
@@ -1099,7 +1099,7 @@ public struct AnyCategoricalSummary : Swift.Equatable {
   }
   public var uniqueCount: Swift.Int
   public var mode: [Any]
-  public var modeType: Any.Type
+  public var modeType: any Any.Type
   public init<T>(_ summary: TabularData.CategoricalSummary<T>) where T : Swift.Hashable
   public init(_ summary: TabularData.CategoricalSummary<Swift.AnyHashable>)
   public static func == (lhs: TabularData.AnyCategoricalSummary, rhs: TabularData.AnyCategoricalSummary) -> Swift.Bool
@@ -1157,7 +1157,7 @@ extension TabularData.DataFrame {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public enum JSONReadingError : Swift.Error {
   case unsupportedStructure
-  case wrongType(row: Swift.Int, column: Swift.String, expectedType: TabularData.JSONType, value: Swift.Sendable)
+  case wrongType(row: Swift.Int, column: Swift.String, expectedType: TabularData.JSONType, value: any Swift.Sendable)
   case incompatibleValues(column: Swift.String)
   case failedToParse(row: Swift.Int, column: Swift.String, type: TabularData.JSONType, contents: Swift.String)
 }
@@ -1310,12 +1310,12 @@ public struct DiscontiguousColumnSlice<WrappedElement> : TabularData.OptionalCol
     get
     set
   }
-  @inlinable public var wrappedElementType: Any.Type {
+  @inlinable public var wrappedElementType: any Any.Type {
     get {
         WrappedElement.self
     }
   }
-  public var prototype: TabularData.AnyColumnPrototype {
+  public var prototype: any TabularData.AnyColumnPrototype {
     get
   }
   public init(_ column: TabularData.Column<WrappedElement>)
@@ -1459,7 +1459,7 @@ public struct AnyColumnSlice : TabularData.AnyColumnProtocol, Swift.Hashable {
     get
     set
   }
-  public var wrappedElementType: Any.Type {
+  public var wrappedElementType: any Any.Type {
     get
   }
   public var count: Swift.Int {
@@ -1534,8 +1534,8 @@ public protocol RowGroupingProtocol : Swift.CustomStringConvertible {
   func filter(_ isIncluded: (TabularData.DataFrame.Slice) throws -> Swift.Bool) rethrows -> Self
   func mapGroups(_ transform: (TabularData.DataFrame.Slice) throws -> TabularData.DataFrame) rethrows -> Self
   func randomSplit(by proportion: Swift.Double, seed: Swift.Int?) -> (Self, Self)
-  func summary() -> TabularData.GroupSummaries
-  func summary(of columnNames: [Swift.String]) -> TabularData.GroupSummaries
+  func summary() -> any TabularData.GroupSummaries
+  func summary(of columnNames: [Swift.String]) -> any TabularData.GroupSummaries
   subscript(keys: Any?...) -> TabularData.DataFrame.Slice? { get }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1951,11 +1951,11 @@ public enum CSVType : Swift.Sendable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame {
-  public func grouped(by columnName: Swift.String) -> TabularData.RowGroupingProtocol
+  public func grouped(by columnName: Swift.String) -> any TabularData.RowGroupingProtocol
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame.Slice {
-  public func grouped(by columnName: Swift.String) -> TabularData.RowGroupingProtocol
+  public func grouped(by columnName: Swift.String) -> any TabularData.RowGroupingProtocol
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrameProtocol {
@@ -1975,12 +1975,12 @@ extension TabularData.DataFrameProtocol {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.RowGroupingProtocol {
-  public func summary(of columnNames: Swift.String...) -> TabularData.GroupSummaries
+  public func summary(of columnNames: Swift.String...) -> any TabularData.GroupSummaries
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.RowGrouping {
-  public func summary() -> TabularData.GroupSummaries
-  public func summary(of columnNames: [Swift.String]) -> TabularData.GroupSummaries
+  public func summary() -> any TabularData.GroupSummaries
+  public func summary(of columnNames: [Swift.String]) -> any TabularData.GroupSummaries
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 @usableFromInline
@@ -2096,10 +2096,10 @@ public struct AnyColumn : TabularData.AnyColumnProtocol, Swift.Hashable {
     get
     set
   }
-  public var wrappedElementType: Any.Type {
+  public var wrappedElementType: any Any.Type {
     get
   }
-  public var prototype: TabularData.AnyColumnPrototype {
+  public var prototype: any TabularData.AnyColumnPrototype {
     get
   }
   public var count: Swift.Int {

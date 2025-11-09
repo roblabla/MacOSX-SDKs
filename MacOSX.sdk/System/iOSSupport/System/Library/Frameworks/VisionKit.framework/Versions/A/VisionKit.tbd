@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           35B14585-F323-3B8F-9843-79FCA313DEF5
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           B4223B26-8AF3-3C33-B457-B232BE339BE7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/VisionKit.framework/Versions/A/VisionKit'
 swift-abi-version: 7
 reexported-libraries:
@@ -410,22 +403,11 @@ exports:
                        '_$s9VisionKit40DataScannerViewControllerPrivateDelegatePAAE04dataD20DidFinishPreparationyyAA0cdeF0CF', 
                        '_$s9VisionKit40DataScannerViewControllerPrivateDelegatePAAE04dataD24DidUpdateSceneLuminosity_03newM0yAA0cdeF0C_SdtF', 
                        '_$s9VisionKit40DataScannerViewControllerPrivateDelegatePAAE04dataD28DidUpdateSceneStabilityState_03newN0yAA0cdeF0C_AG0lmN0OtF', 
-                       '_$s9VisionKit40DataScannerViewControllerPrivateDelegateTL', 
-                       '_OBJC_CLASS_$__TtC9VisionKit24ImageAnalysisInteraction', 
-                       '_OBJC_CLASS_$__TtC9VisionKit25DataScannerViewController', 
-                       '_OBJC_METACLASS_$__TtC9VisionKit24ImageAnalysisInteraction', 
-                       '_OBJC_METACLASS_$__TtC9VisionKit25DataScannerViewController' ]
+                       '_$s9VisionKit40DataScannerViewControllerPrivateDelegateTL' ]
     objc-classes:    [ _TtC9VisionKit24ImageAnalysisInteraction, _TtC9VisionKit25DataScannerViewController ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           BD1B307F-B272-3A88-ABA7-F3B62D41DF08
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           044F927C-E8F5-3103-9D4E-ADBED6431CC1
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
 current-version: 115
 exports:

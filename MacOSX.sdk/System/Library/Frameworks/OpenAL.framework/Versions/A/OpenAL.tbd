@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           D2642499-2D32-3DB3-AD4E-F9568893E031
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D7335F0A-CE6B-3F89-8E4B-DCAD35D4779E
 install-name:    '/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

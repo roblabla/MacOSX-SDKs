@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           7C3DCC95-9F42-3C7C-8796-476FF67B9CF7
-  - target:          x86_64-maccatalyst
-    value:           7C3DCC95-9F42-3C7C-8796-476FF67B9CF7
-  - target:          arm64-macos
-    value:           EB0327EE-CB9C-37ED-AB6A-E9AF74E814F0
-  - target:          arm64-maccatalyst
-    value:           EB0327EE-CB9C-37ED-AB6A-E9AF74E814F0
-  - target:          arm64e-macos
-    value:           AEBF397E-E2EF-3A49-BE58-23D4558511F6
-  - target:          arm64e-maccatalyst
-    value:           AEBF397E-E2EF-3A49-BE58-23D4558511F6
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 8792.61.2
+current-version: 8796.101.5
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -36,19 +23,20 @@ exports:
                        ___channel_get_opt, ___channel_open, ___channel_set_opt, ___channel_sync, 
                        ___chmod, ___chmod_extended, ___close_nocancel, ___coalition, 
                        ___coalition_info, ___coalition_ledger, ___commpage_gettimeofday, 
-                       ___connect, ___connect_nocancel, ___copyfile, ___csrctl, ___darwin_check_fd_set_overflow, 
-                       ___debug_syscall_reject, ___debug_syscall_reject_config, ___delete, 
-                       ___disable_threadsignal, ___error, ___execve, ___exit, ___fchmod, 
-                       ___fchmod_extended, ___fcntl, ___fcntl_nocancel, ___fork, 
-                       ___fs_snapshot, ___fstat64_extended, ___fstat_extended, ___fsync_nocancel, 
-                       ___get_remove_counter, ___getattrlist, ___getdirentries64, 
-                       ___gethostuuid, ___getlogin, ___getpeername, ___getpid, ___getrlimit, 
-                       ___getsgroups, ___getsockname, ___gettid, ___gettimeofday, 
-                       ___getwgroups, ___guarded_open_dprotected_np, ___guarded_open_np, 
-                       ___identitysvc, ___inc_remove_counter, ___initgroups, ___ioctl, 
-                       ___iopolicysys, ___kdebug_trace, ___kdebug_trace64, ___kdebug_trace_string, 
-                       ___kdebug_typefilter, ___kill, ___kqueue_workloop_ctl, ___lchown, 
-                       ___libkernel_init, ___libkernel_init_after_boot_tasks, ___libkernel_init_late, 
+                       ___connect, ___connect_nocancel, ___copyfile, ___crossarch_trap, 
+                       ___csrctl, ___darwin_check_fd_set_overflow, ___debug_syscall_reject, 
+                       ___debug_syscall_reject_config, ___delete, ___disable_threadsignal, 
+                       ___error, ___execve, ___exit, ___fchmod, ___fchmod_extended, 
+                       ___fcntl, ___fcntl_nocancel, ___fork, ___fs_snapshot, ___fstat64_extended, 
+                       ___fstat_extended, ___fsync_nocancel, ___get_remove_counter, 
+                       ___getattrlist, ___getdirentries64, ___gethostuuid, ___getlogin, 
+                       ___getpeername, ___getpid, ___getrlimit, ___getsgroups, ___getsockname, 
+                       ___gettid, ___gettimeofday, ___getwgroups, ___guarded_open_dprotected_np, 
+                       ___guarded_open_np, ___identitysvc, ___inc_remove_counter, 
+                       ___initgroups, ___ioctl, ___iopolicysys, ___kdebug_trace, 
+                       ___kdebug_trace64, ___kdebug_trace_string, ___kdebug_typefilter, 
+                       ___kill, ___kqueue_workloop_ctl, ___lchown, ___libkernel_init, 
+                       ___libkernel_init_after_boot_tasks, ___libkernel_init_late, 
                        ___libkernel_platform_init, ___libkernel_voucher_init, ___listen, 
                        ___log_data, ___lseek, ___lstat64_extended, ___lstat_extended, 
                        ___mac_execve, ___mac_get_fd, ___mac_get_file, ___mac_get_link, 
@@ -365,32 +353,32 @@ exports:
                        _posix_spawnattr_set_uid_np, _posix_spawnattr_setarchpref_np, 
                        _posix_spawnattr_setauditsessionport_np, _posix_spawnattr_setbinpref_np, 
                        _posix_spawnattr_setcoalition_np, _posix_spawnattr_setcpumonitor, 
-                       _posix_spawnattr_setcpumonitor_default, _posix_spawnattr_setexceptionports_np, 
-                       _posix_spawnattr_setflags, _posix_spawnattr_setjetsam_ext, 
-                       _posix_spawnattr_setmacpolicyinfo_np, _posix_spawnattr_setnosmt_np, 
-                       _posix_spawnattr_setpcontrol_np, _posix_spawnattr_setpgroup, 
-                       _posix_spawnattr_setprocesstype_np, _posix_spawnattr_setsigdefault, 
-                       _posix_spawnattr_setsigmask, _posix_spawnattr_setspecialport_np, 
-                       _pread, '_pread$NOCANCEL', _preadv, '_preadv$NOCANCEL', _proc_clear_cpulimits, 
-                       _proc_clear_delayidlesleep, _proc_clear_dirty, _proc_clear_vmpressure, 
-                       _proc_current_thread_schedinfo, _proc_denap_assertion_begin_with_msg, 
-                       _proc_denap_assertion_complete, _proc_disable_apptype, _proc_disable_cpumon, 
-                       _proc_disable_wakemon, _proc_donate_importance_boost, _proc_enable_apptype, 
-                       _proc_get_cpumon_params, _proc_get_dirty, _proc_get_wakemon_params, 
-                       _proc_importance_assertion_begin_with_msg, _proc_importance_assertion_complete, 
-                       _proc_kmsgbuf, _proc_libversion, _proc_list_dynkqueueids, 
-                       _proc_list_uptrs, _proc_listallpids, _proc_listchildpids, 
-                       _proc_listcoalitions, _proc_listpgrppids, _proc_listpids, 
-                       _proc_listpidspath, _proc_name, _proc_pid_rusage, _proc_piddynkqueueinfo, 
-                       _proc_pidfdinfo, _proc_pidfileportinfo, _proc_pidinfo, _proc_pidoriginatorinfo, 
-                       _proc_pidpath, _proc_pidpath_audittoken, _proc_regionfilename, 
-                       _proc_reset_footprint_interval, _proc_resume_cpumon, _proc_rlimit_control, 
-                       _proc_set_cpumon_defaults, _proc_set_cpumon_params, _proc_set_cpumon_params_fatal, 
-                       _proc_set_csm, _proc_set_delayidlesleep, _proc_set_dirty, 
-                       _proc_set_no_smt, _proc_set_owner_vmpressure, _proc_set_wakemon_defaults, 
-                       _proc_set_wakemon_params, _proc_setcpu_percentage, _proc_setpcontrol, 
-                       _proc_setthread_cpupercent, _proc_setthread_csm, _proc_setthread_no_smt, 
-                       _proc_suppress, _proc_terminate, _proc_terminate_all_rsr, 
+                       _posix_spawnattr_setcpumonitor_default, _posix_spawnattr_setdataless_iopolicy_np, 
+                       _posix_spawnattr_setexceptionports_np, _posix_spawnattr_setflags, 
+                       _posix_spawnattr_setjetsam_ext, _posix_spawnattr_setmacpolicyinfo_np, 
+                       _posix_spawnattr_setnosmt_np, _posix_spawnattr_setpcontrol_np, 
+                       _posix_spawnattr_setpgroup, _posix_spawnattr_setprocesstype_np, 
+                       _posix_spawnattr_setsigdefault, _posix_spawnattr_setsigmask, 
+                       _posix_spawnattr_setspecialport_np, _pread, '_pread$NOCANCEL', 
+                       _preadv, '_preadv$NOCANCEL', _proc_clear_cpulimits, _proc_clear_delayidlesleep, 
+                       _proc_clear_dirty, _proc_clear_vmpressure, _proc_current_thread_schedinfo, 
+                       _proc_denap_assertion_begin_with_msg, _proc_denap_assertion_complete, 
+                       _proc_disable_apptype, _proc_disable_cpumon, _proc_disable_wakemon, 
+                       _proc_donate_importance_boost, _proc_enable_apptype, _proc_get_cpumon_params, 
+                       _proc_get_dirty, _proc_get_wakemon_params, _proc_importance_assertion_begin_with_msg, 
+                       _proc_importance_assertion_complete, _proc_kmsgbuf, _proc_libversion, 
+                       _proc_list_dynkqueueids, _proc_list_uptrs, _proc_listallpids, 
+                       _proc_listchildpids, _proc_listcoalitions, _proc_listpgrppids, 
+                       _proc_listpids, _proc_listpidspath, _proc_name, _proc_pid_rusage, 
+                       _proc_piddynkqueueinfo, _proc_pidfdinfo, _proc_pidfileportinfo, 
+                       _proc_pidinfo, _proc_pidoriginatorinfo, _proc_pidpath, _proc_pidpath_audittoken, 
+                       _proc_regionfilename, _proc_reset_footprint_interval, _proc_resume_cpumon, 
+                       _proc_rlimit_control, _proc_set_cpumon_defaults, _proc_set_cpumon_params, 
+                       _proc_set_cpumon_params_fatal, _proc_set_csm, _proc_set_delayidlesleep, 
+                       _proc_set_dirty, _proc_set_no_smt, _proc_set_owner_vmpressure, 
+                       _proc_set_wakemon_defaults, _proc_set_wakemon_params, _proc_setcpu_percentage, 
+                       _proc_setpcontrol, _proc_setthread_cpupercent, _proc_setthread_csm, 
+                       _proc_setthread_no_smt, _proc_suppress, _proc_terminate, _proc_terminate_all_rsr, 
                        _proc_trace_log, _proc_track_dirty, _proc_udata_info, _proc_uuid_policy, 
                        _processor_assign, _processor_control, _processor_exit, _processor_get_assignment, 
                        _processor_info, _processor_set_create, _processor_set_default, 

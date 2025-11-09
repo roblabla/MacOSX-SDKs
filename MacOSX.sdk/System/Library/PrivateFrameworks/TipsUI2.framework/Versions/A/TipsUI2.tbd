@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           EB9754F3-82BA-3BAE-8A0E-820AB1D64BE5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F9EFD423-3AB9-387D-88C6-816F4CF536A8
 install-name:    '/System/Library/PrivateFrameworks/TipsUI2.framework/Versions/A/TipsUI2'
-current-version: 28
+current-version: 28.5.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

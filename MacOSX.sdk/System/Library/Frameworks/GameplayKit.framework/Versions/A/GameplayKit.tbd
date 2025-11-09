@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           72420F16-0F46-3681-B6D3-FBF40129395E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0A80554C-7380-3B0F-8408-DEBB035762D6
 install-name:    '/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit'
 current-version: 96.1
 exports:

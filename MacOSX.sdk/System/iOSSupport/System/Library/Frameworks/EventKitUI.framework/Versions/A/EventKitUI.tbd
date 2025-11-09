@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           EB40375B-3625-31F5-9EB4-0953E46F9B70
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           9B5BA362-B320-3831-9759-6569756DF2DC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/EventKitUI.framework/Versions/A/EventKitUI'
 current-version: 0
 compatibility-version: 0
@@ -22,8 +15,9 @@ exports:
                        _CalDateCountdownString, _CalDateIntervalMonthDayYear, _CalDateIntervalMonthYear, 
                        _CalDateIntervalShortMonthDay, _CalDateIntervalShortMonthDayYear, 
                        _CalDateIntervalShortMonthYear, _CalDateIntervalVeryShortMonthDay, 
-                       _CalDayLongMonthStringForDate, _CalDayOfWeekIsWeekend, _CalDetailStringsForCalendarEvent, 
-                       _CalDetermineWeekStart, _CalDisableFocusRingForView, _CalDisplayStringForAvailability, 
+                       _CalDayLongMonthStringForDate, _CalDayOfWeekIsWeekend, _CalDefaultDurationForNewEvents, 
+                       _CalDetailStringsForCalendarEvent, _CalDetermineWeekStart, 
+                       _CalDisableFocusRingForView, _CalDisplayStringForAvailability, 
                        _CalDisplayStringForTravelTimeUsingShortFormat, _CalDisplayStringLocationUsingFirstCommaSeparatedFragment, 
                        _CalDisplayStringLocationUsingFirstLine, _CalDisplayStringTravelTimeAndDuration, 
                        _CalDisplayStringTravelToLocationWithRoutingModeAndDuration, 
@@ -37,9 +31,10 @@ exports:
                        _CalGregorianUnitsForRecurrenceTypeAndInterval, _CalHourDesignatorsAreBeforeHour, 
                        _CalImageFromGlyph, _CalInterfaceIsLeftToRight, _CalInvalidateToday, 
                        _CalInvalidateTodayAndDetermineIfChanged, _CalIsDateNumberBeforeWeekdayName, 
-                       _CalIsRectEffectivelyEqualToRect, _CalIsWeekdayNameFirst, 
-                       _CalIsWeekdayNameLast, _CalIsYearBeforeMonth, _CalLocaleChangedNotification, 
-                       _CalLocaleIsRightToLeft, _CalLocalizedStringForInteger, _CalLocalizedStringForNumber, 
+                       _CalIsRectEffectivelyEqualToRect, _CalIsValidDurationForNewEvents, 
+                       _CalIsWeekdayNameFirst, _CalIsWeekdayNameLast, _CalIsYearBeforeMonth, 
+                       _CalLocaleChangedNotification, _CalLocaleIsRightToLeft, _CalLocalizedStringForInteger, 
+                       _CalLocalizedStringForNumber, _CalLocalizedStringForNumberWithMinimumTwoDigits, 
                        _CalLongDayLongMonthStringForDate, _CalLongDayStringForDate, 
                        _CalLongDayStringForDateNoYear, _CalLongMonthStringWithDateNoYear, 
                        _CalLongStringForDateAndTime, _CalLongStringForDateWithCommaAndYear, 
@@ -58,9 +53,10 @@ exports:
                        _CalShortStringForMonthYear, _CalShortStringForWeekday, _CalShortStringForWeekdayWithDateComponents, 
                        _CalShortStringMonthAndDay, _CalShortTZString, _CalShouldDisplayNotes, 
                        _CalShouldShowTimezoneClarification, _CalShow24Hours, _CalSizeClassChangedNotification, 
-                       _CalSnapDateTo15MinuteInterval, _CalSpaceBetweenDesignatorsAndHour, 
-                       _CalStringAbbreviationForDayOfWeek, _CalStringAbbreviationForDayOfWeekNotStandalone, 
-                       _CalStringAbbreviationForMonth, _CalStringForDate, _CalStringForDateAndDayOfWeekInCalendarTimezone, 
+                       _CalSnapDateTo15MinuteInterval, _CalSnapDateTo15MinuteOr5MinuteInterval, 
+                       _CalSpaceBetweenDesignatorsAndHour, _CalStringAbbreviationForDayOfWeek, 
+                       _CalStringAbbreviationForDayOfWeekNotStandalone, _CalStringAbbreviationForMonth, 
+                       _CalStringForDate, _CalStringForDateAndDayOfWeekInCalendarTimezone, 
                        _CalStringForDateAndDayOfWeekInCalendarTimezoneWithFormattingContext, 
                        _CalStringForDateAndDayOfWeekInTimezone, _CalStringForDateAndDayOfWeekSystemTime, 
                        _CalStringForDateAndTime, _CalStringForDateComponents, _CalStringForDateWithCommaAndYear, 
@@ -223,10 +219,10 @@ exports:
                        EKParticipantForDisplay, EKShareePickerViewController, EKShareeViewController, 
                        EKStrikethroughLabel, EKStringFactory, EKTextViewWithLabelTextMetrics, 
                        EKUIAccountErrorDisplayer, EKUIAccountErrorsAnalyticsTracker, 
-                       EKUICenteredTextTableViewCell, EKUIClearButtonCell, EKUIConstrainedFontUtilities, 
-                       EKUIConstrainedFontsTableViewCell, EKUIContextMenuActions, 
-                       EKUICustomRecurrenceViewController, EKUIDebugPreferences, 
-                       EKUIDeclineCommentController, EKUIEmailCompositionManager, 
+                       EKUIAppReviewUtils, EKUICenteredTextTableViewCell, EKUIClearButtonCell, 
+                       EKUIConstrainedFontUtilities, EKUIConstrainedFontsTableViewCell, 
+                       EKUIContextMenuActions, EKUICustomRecurrenceViewController, 
+                       EKUIDebugPreferences, EKUIDeclineCommentController, EKUIEmailCompositionManager, 
                        EKUIEventDescriptionGenerator, EKUIEventStatusButtonsView, 
                        EKUIIOSMacUtils, EKUILabeledAvatarView, EKUILargeTextUtilities, 
                        EKUILocationSearchResultCell, EKUIManagedNavigationController, 

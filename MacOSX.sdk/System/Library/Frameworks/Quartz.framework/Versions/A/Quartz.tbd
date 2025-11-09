@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F920D86E-8776-3E86-AE90-7F48820EAF8D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           057E712B-9148-31A8-8FEB-82614DEA11F8
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -20,13 +13,6 @@ reexported-libraries:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6CA32827-D0BF-38B2-BA08-AD1F1172F939
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5BEF979A-E0E0-39E8-ADA1-A7F0CDB29BBB
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -241,13 +227,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           94291679-3C80-3CFD-8798-F8EB4AE25496
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5224D687-386A-3C46-8ECE-479F1FDD8BEC
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
@@ -3146,13 +3125,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DADF75F1-B9CD-3486-8479-94AAB813FE4C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           148125AA-01A5-3EAC-A707-59E757D9407B
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

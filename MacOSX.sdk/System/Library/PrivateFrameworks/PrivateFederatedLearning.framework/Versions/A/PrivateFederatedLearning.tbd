@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           7A300FFD-D6B8-3707-943E-A88E98B1DAF1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D1D90D3E-5E9D-38E3-9C3B-8FA60F9AA61B
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

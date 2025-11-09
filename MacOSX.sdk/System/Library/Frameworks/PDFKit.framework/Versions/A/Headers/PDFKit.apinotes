@@ -25,3 +25,8 @@ Enumerators:
       SwiftName: PDFDocumentWriteOption.burnInAnnotations
     - Name: PDFDocumentSaveTextFromOCROption
       SwiftName: PDFDocumentWriteOption.saveTextFromOCR
+    - Name: PDFDocumentSaveImagesAsJPEGOption
+      SwiftName: PDFDocumentWriteOption.saveImagesAsJPEG
+    - Name: PDFDocumentOptimizeImagesForScreenOption
+      SwiftName: PDFDocumentWriteOption.optimizeImagesForScreen
+

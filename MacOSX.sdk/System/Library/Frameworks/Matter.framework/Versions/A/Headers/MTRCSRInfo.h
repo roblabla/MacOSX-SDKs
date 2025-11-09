@@ -1,6 +1,6 @@
 /**
  *
- *    Copyright (c) 2022 Project CHIP Authors
+ *    Copyright (c) 2022-2023 Project CHIP Authors
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,12 +17,51 @@
 
 #import <Foundation/Foundation.h>
 
+#import <Matter/MTRDefines.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Represents information relating to NOC CSR.
- *
+ * Represents information relating to a certificate signing request for a Matter
+ * operational certificate.
  */
+API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
+@interface MTROperationalCSRInfo : NSObject
+
+/**
+ * DER-encoded certificate signing request.
+ */
+@property (nonatomic, copy, readonly) MTRCSRDERBytes csr;
+
+/**
+ * The nonce provided in the original CSRRequest command that led to this CSR
+ * being created.
+ */
+@property (nonatomic, copy, readonly) NSData * csrNonce;
+
+/**
+ * TLV-encoded nocsr-elements structure.  This includes the "csr" and "csrNonce"
+ * fields, and can include additional vendor-specific information.
+ */
+@property (nonatomic, copy, readonly) MTRTLVBytes csrElementsTLV;
+
+/**
+ * A signature, using the device attestation private key of the device that
+ * created the CSR, over the concatenation of csrElementsTLV and the attestation
+ * challenge from the secure session.
+ *
+ * The attestation challenge is available in MTRAttestionInfo.
+ */
+@property (nonatomic, copy, readonly) NSData * attestationSignature;
+
+- (instancetype)initWithCSR:(MTRCSRDERBytes)csr
+                   csrNonce:(NSData *)csrNonce
+             csrElementsTLV:(MTRTLVBytes)csrElementsTLV
+       attestationSignature:(NSData *)attestationSignature;
+
+@end
+
+API_DEPRECATED("Please use MTROperationalCSRInfo", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface CSRInfo : NSObject
 
 @property (nonatomic, copy) NSData * nonce;

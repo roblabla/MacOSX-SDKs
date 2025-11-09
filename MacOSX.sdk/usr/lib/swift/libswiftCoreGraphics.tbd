@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6A0B3AB5-1896-320C-970E-9EB20D6A0076
-  - target:          x86_64-maccatalyst
-    value:           6A0B3AB5-1896-320C-970E-9EB20D6A0076
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           92929365-DFBF-373A-B761-6943EC42D326
-  - target:          arm64e-maccatalyst
-    value:           92929365-DFBF-373A-B761-6943EC42D326
 install-name:    '/usr/lib/swift/libswiftCoreGraphics.dylib'
 current-version: 15
 swift-abi-version: 7

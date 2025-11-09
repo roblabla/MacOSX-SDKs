@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8E5066F0-31CB-34BB-A6EE-0EB39F67338E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1DD18CB5-49E1-337E-931B-A5A09F6BA4CE
 install-name:    '/System/Library/PrivateFrameworks/GeoKit.framework/Versions/A/GeoKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

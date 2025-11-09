@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1773F126-3F33-3A64-BFD8-24BF058CEE7F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F7B30EF8-23BD-30EC-B12C-771A7CDACFBA
 install-name:    '/System/Library/PrivateFrameworks/SiriMessageBus.framework/Versions/A/SiriMessageBus'
 swift-abi-version: 7
 exports:
@@ -81,6 +74,8 @@ exports:
                        '_$s14SiriMessageBus17RequestDispatcherC34startUnderstandingDictationSession15withAssistantId12languageCode21understandingOnDeviceySS_SSSbtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC7domainsSaySSGyFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC7domainsSaySSGyFTq', 
+                       '_$s14SiriMessageBus17RequestDispatcherC7prewarm15withAssistantId12languageCode0F7Options010sharedUserI0ySS_SSSo09AFRequeste7PrewarmL0VSSSgtFTj', 
+                       '_$s14SiriMessageBus17RequestDispatcherC7prewarm15withAssistantId12languageCode0F7Options010sharedUserI0ySS_SSSo09AFRequeste7PrewarmL0VSSSgtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC8commands9forDomainSaySSGSS_tFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC8commands9forDomainSaySSGSS_tFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherCACycfC', '_$s14SiriMessageBus17RequestDispatcherCACycfc', 

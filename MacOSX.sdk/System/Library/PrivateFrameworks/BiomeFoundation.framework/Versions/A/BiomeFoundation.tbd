@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           8DF6C9AC-9B92-3FA2-AF8A-79BD18E024DA
-  - target:          x86_64-maccatalyst
-    value:           8DF6C9AC-9B92-3FA2-AF8A-79BD18E024DA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CF0330CD-7574-377A-BB1C-31BCF1612E7E
-  - target:          arm64e-maccatalyst
-    value:           CF0330CD-7574-377A-BB1C-31BCF1612E7E
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -40,7 +27,7 @@ exports:
                        ___biome_log_create, ___biome_log_create_for_category ]
     objc-classes:    [ BMAccessControlPolicy, BMCoreAnalyticsEvents, BMDeviceMetadataUtils, 
                        BMPaths, BMProcess, BMProcessCurrent, BMPublicStreamUtilities, 
-                       BMStoreDirectory ]
+                       BMStoreDirectory, BMStreamMigrations ]
     objc-ivars:      [ BMProcess._auditToken, BMProcess._entitlementCache, BMProcess._entitlementCacheLock, 
                        BMProcess._executablePath, BMProcess._machLookupCache, BMProcess._machLookupCacheLock, 
                        BMProcess._reliesOnCoreDuetAccess, BMProcess._reliesOnCoreDuetAccessLock ]

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           929287B8-82F7-3E4B-B103-5E78155232CA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A7C8606F-7B04-3379-B432-236928623D6D
 install-name:    '/System/Library/PrivateFrameworks/WebContentAnalysis.framework/Versions/A/WebContentAnalysis'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -19,8 +12,9 @@ exports:
                        _HolyInquisitionSetProxyToLocalPort, _HolyInquisitionTurnOnHTTPSFiltering, 
                        _NS64BaseStringFromString, _NSStringFrom64BaseString, _OSLogForCategory, 
                        _WFDebugLevel, _WFIsURLExplicit, _WFIsURLToRestrictForUser, 
-                       _WFIsWebPageExplicit, _WFIsWebPageToRestrictForUser, _WFSetDebugLevel, 
-                       _WFWebPageToTrainingText_Category1, _kWFImgDimensionUnknown ]
+                       _WFIsURLToRestrictForUserWithWCR, _WFIsWebPageExplicit, _WFIsWebPageToRestrictForUser, 
+                       _WFIsWebPageToRestrictForUserWithWCR, _WFSetDebugLevel, _WFWebPageToTrainingText_Category1, 
+                       _kWFImgDimensionUnknown ]
     objc-classes:    [ WCAUserSettings, WFBlockPage, WFCategoryJudgement, WFContentSniffer, 
                        WFDocumentStructureTag, WFImg, WFImgArrayCache, WFJavascriptStripper, 
                        WFJudge, WFLSMMap, WFLSMResult, WFLSMScoreNormalizedMap, WFLink, 

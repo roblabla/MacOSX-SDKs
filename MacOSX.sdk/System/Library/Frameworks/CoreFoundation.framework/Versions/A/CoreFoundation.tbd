@@ -2,25 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F3846A86-644B-3BCD-ACCE-FC7B751105C1
-  - target:          x86_64-maccatalyst
-    value:           F3846A86-644B-3BCD-ACCE-FC7B751105C1
-  - target:          x86_64h-macos
-    value:           BEB5FC0B-7196-3C1D-A59A-F62ADA98F592
-  - target:          x86_64h-maccatalyst
-    value:           BEB5FC0B-7196-3C1D-A59A-F62ADA98F592
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FD16D6D9-10C0-323B-B43B-9781C4A4D268
-  - target:          arm64e-maccatalyst
-    value:           FD16D6D9-10C0-323B-B43B-9781C4A4D268
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1953.255
+current-version: 1971
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -504,7 +487,7 @@ exports:
                        _NSURLContentAccessDateKey, _NSURLContentModificationDateKey, 
                        _NSURLContentTypeKey, _NSURLCreationDateKey, _NSURLCustomIconKey, 
                        _NSURLDocumentIdentifierKey, _NSURLEffectiveIconKey, _NSURLFileAllocatedSizeKey, 
-                       _NSURLFileContentIdentifierKey, _NSURLFileProtectionComplete, 
+                       _NSURLFileContentIdentifierKey, _NSURLFileIdentifierKey, _NSURLFileProtectionComplete, 
                        _NSURLFileProtectionCompleteUnlessOpen, _NSURLFileProtectionCompleteUntilFirstUserAuthentication, 
                        _NSURLFileProtectionKey, _NSURLFileProtectionNone, _NSURLFileResourceIdentifierKey, 
                        _NSURLFileResourceTypeBlockSpecial, _NSURLFileResourceTypeCharacterSpecial, 
@@ -548,7 +531,8 @@ exports:
                        _NSURLVolumeIsJournalingKey, _NSURLVolumeIsLocalKey, _NSURLVolumeIsReadOnlyKey, 
                        _NSURLVolumeIsRemovableKey, _NSURLVolumeIsRootFileSystemKey, 
                        _NSURLVolumeLocalizedFormatDescriptionKey, _NSURLVolumeLocalizedNameKey, 
-                       _NSURLVolumeMaximumFileSizeKey, _NSURLVolumeNameKey, _NSURLVolumeResourceCountKey, 
+                       _NSURLVolumeMaximumFileSizeKey, _NSURLVolumeMountFromLocationKey, 
+                       _NSURLVolumeNameKey, _NSURLVolumeResourceCountKey, _NSURLVolumeSubtypeKey, 
                        _NSURLVolumeSupportsAccessPermissionsKey, _NSURLVolumeSupportsAdvisoryFileLockingKey, 
                        _NSURLVolumeSupportsCasePreservedNamesKey, _NSURLVolumeSupportsCaseSensitiveNamesKey, 
                        _NSURLVolumeSupportsCompressionKey, _NSURLVolumeSupportsExclusiveRenamingKey, 
@@ -559,7 +543,7 @@ exports:
                        _NSURLVolumeSupportsRootDirectoryDatesKey, _NSURLVolumeSupportsSparseFilesKey, 
                        _NSURLVolumeSupportsSwapRenamingKey, _NSURLVolumeSupportsSymbolicLinksKey, 
                        _NSURLVolumeSupportsVolumeSizesKey, _NSURLVolumeSupportsZeroRunsKey, 
-                       _NSURLVolumeTotalCapacityKey, _NSURLVolumeURLForRemountingKey, 
+                       _NSURLVolumeTotalCapacityKey, _NSURLVolumeTypeNameKey, _NSURLVolumeURLForRemountingKey, 
                        _NSURLVolumeURLKey, _NSURLVolumeUUIDStringKey, __CFAccentuatedStringCreate, 
                        __CFAffixedStringCreate, __CFAppVersionCheck, __CFAppVersionCheckLessThan, 
                        __CFAppVersionLessThan, __CFArgc, __CFArgv, __CFArrayCheckAndGetValueAtIndex, 
@@ -590,14 +574,15 @@ exports:
                        __CFBundleCopyInfoDictionaryForExecutableFileData, __CFBundleCopyInfoDictionaryInResourceFork, 
                        __CFBundleCopyInfoPlistURL, __CFBundleCopyLocalizedStringForLocalizationAndTableURL, 
                        __CFBundleCopyLocalizedStringForLocalizationTableURLAndMarkdownOption, 
-                       __CFBundleCopyMainBundleExecutableURL, __CFBundleCopyOtherExecutableURLInDirectory, 
-                       __CFBundleCopyPrivateFrameworksURL, __CFBundleCopyResourceForkURL, 
-                       __CFBundleCopyResourceURLForLanguage, __CFBundleCopyResourceURLsOfTypeForLanguage, 
-                       __CFBundleCopySharedFrameworksURL, __CFBundleCopySharedSupportURL, 
-                       __CFBundleCopyWrappedBundleURL, __CFBundleCopyWrapperContainerURL, 
-                       __CFBundleCreateError, __CFBundleCreateFilteredInfoPlist, 
-                       __CFBundleCreateFilteredLocalizedInfoPlist, __CFBundleCreateIfLooksLikeBundle, 
-                       __CFBundleCreateIfMightBeBundle, __CFBundleCreateUnique, __CFBundleCreateWithExecutableURLIfLooksLikeBundle, 
+                       __CFBundleCopyLocalizedStringForLocalizations, __CFBundleCopyMainBundleExecutableURL, 
+                       __CFBundleCopyOtherExecutableURLInDirectory, __CFBundleCopyPrivateFrameworksURL, 
+                       __CFBundleCopyResourceForkURL, __CFBundleCopyResourceURLForLanguage, 
+                       __CFBundleCopyResourceURLsOfTypeForLanguage, __CFBundleCopySharedFrameworksURL, 
+                       __CFBundleCopySharedSupportURL, __CFBundleCopyWrappedBundleURL, 
+                       __CFBundleCopyWrapperContainerURL, __CFBundleCreateError, 
+                       __CFBundleCreateFilteredInfoPlist, __CFBundleCreateFilteredLocalizedInfoPlist, 
+                       __CFBundleCreateIfLooksLikeBundle, __CFBundleCreateIfMightBeBundle, 
+                       __CFBundleCreateUnique, __CFBundleCreateWithExecutableURLIfLooksLikeBundle, 
                        __CFBundleCreateWithExecutableURLIfMightBeBundle, __CFBundleDlfcnPreflight, 
                        __CFBundleFlushBundleCaches, __CFBundleFlushCaches, __CFBundleFlushCachesForURL, 
                        __CFBundleFlushLanguageCachesAfterEUIDChange, __CFBundleGetBundleWithIdentifierAndLibraryName, 
@@ -650,10 +635,9 @@ exports:
                        __CFHyphenationGetAllPossibleHyphenationLocations, __CFHyphenationGetLinguisticDataPath, 
                        __CFHyphenationSetLinguisticDataPath, __CFICULog, __CFIsDeallocating, 
                        __CFIsObjC, __CFKeyedArchiverUIDCreate, __CFKeyedArchiverUIDGetTypeID, 
-                       __CFKeyedArchiverUIDGetValue, __CFLexiconAppearsUsable, __CFLexiconPackedTrieCopyLemmaDictionariesForWord, 
-                       __CFLibraryVersionCompare, __CFLinkedOnOrAfter, __CFListFormatterCreate, 
-                       __CFListFormatterCreateStringByJoiningStrings, __CFListFormatterGetTypeID, 
-                       __CFLocaleCopyAsIfCurrent, __CFLocaleCopyAsIfCurrentWithOverrides, 
+                       __CFKeyedArchiverUIDGetValue, __CFLibraryVersionCompare, __CFLinkedOnOrAfter, 
+                       __CFListFormatterCreate, __CFListFormatterCreateStringByJoiningStrings, 
+                       __CFListFormatterGetTypeID, __CFLocaleCopyAsIfCurrent, __CFLocaleCopyAsIfCurrentWithOverrides, 
                        __CFLocaleCopyNumberingSystemForLocaleIdentifier, __CFLocaleCopyPreferred, 
                        __CFLocaleCopyPreferredLanguagesForCurrentUser, __CFLocaleCopyPreferredMeasurementSystem, 
                        __CFLocaleCopyPreferredTemperatureUnit, __CFLocaleCopyValidNumberingSystemsForLocaleIdentifier, 
@@ -892,10 +876,8 @@ exports:
                        __kCFBundleTypeIconFileKey, __kCFBundleTypeMIMETypesKey, __kCFBundleTypeNameKey, 
                        __kCFBundleTypeOSTypesKey, __kCFBundleTypeRoleKey, __kCFBundleURLIconFileKey, 
                        __kCFBundleURLNameKey, __kCFBundleURLSchemesKey, __kCFBundleURLTypesKey, 
-                       __kCFLexiconLemmaAttributesPackedRepresentation, __kCFLexiconLemmaName, 
-                       __kCFLexiconLemmaWords, __kCFLexiconWordAttributesPackedRepresentation, 
-                       __kCFLexiconWordParts, __kCFLexiconWordToken, __kCFStreamPropertyFileNativeHandle, 
-                       __kCFStreamPropertyHTTPTrailer, __kCFStreamPropertySocketSecurityAuthenticatesServerCertificate, 
+                       __kCFStreamPropertyFileNativeHandle, __kCFStreamPropertyHTTPTrailer, 
+                       __kCFStreamPropertySocketSecurityAuthenticatesServerCertificate, 
                        __kCFStringFormatMetadataArgumentNumberKey, __kCFStringFormatMetadataArgumentObjectKey, 
                        __kCFStringFormatMetadataReplacementIndexKey, __kCFStringFormatMetadataReplacementRangeLengthKey, 
                        __kCFStringFormatMetadataReplacementRangeLocationKey, __kCFStringFormatMetadataSpecifierRangeLengthInFormatStringKey, 
@@ -1148,9 +1130,9 @@ exports:
                        _kCFURLContentAccessDateKey, _kCFURLContentModificationDateKey, 
                        _kCFURLCreationDateKey, _kCFURLCustomIconKey, _kCFURLDocumentIdentifierKey, 
                        _kCFURLEffectiveIconKey, _kCFURLFileAllocatedSizeKey, _kCFURLFileContentIdentifierKey, 
-                       _kCFURLFileDirectoryContents, _kCFURLFileExists, _kCFURLFileLastModificationTime, 
-                       _kCFURLFileLength, _kCFURLFileOwnerID, _kCFURLFilePOSIXMode, 
-                       _kCFURLFileProtectionComplete, _kCFURLFileProtectionCompleteUnlessOpen, 
+                       _kCFURLFileDirectoryContents, _kCFURLFileExists, _kCFURLFileIdentifierKey, 
+                       _kCFURLFileLastModificationTime, _kCFURLFileLength, _kCFURLFileOwnerID, 
+                       _kCFURLFilePOSIXMode, _kCFURLFileProtectionComplete, _kCFURLFileProtectionCompleteUnlessOpen, 
                        _kCFURLFileProtectionCompleteUntilFirstUserAuthentication, 
                        _kCFURLFileProtectionKey, _kCFURLFileProtectionNone, _kCFURLFileResourceIdentifierKey, 
                        _kCFURLFileResourceTypeBlockSpecial, _kCFURLFileResourceTypeCharacterSpecial, 
@@ -1197,7 +1179,8 @@ exports:
                        _kCFURLVolumeIsLocalKey, _kCFURLVolumeIsReadOnlyKey, _kCFURLVolumeIsRemovableKey, 
                        _kCFURLVolumeIsRootFileSystemKey, _kCFURLVolumeLocalizedFormatDescriptionKey, 
                        _kCFURLVolumeLocalizedNameKey, _kCFURLVolumeMaximumFileSizeKey, 
-                       _kCFURLVolumeNameKey, _kCFURLVolumeResourceCountKey, _kCFURLVolumeSupportsAccessPermissionsKey, 
+                       _kCFURLVolumeMountFromLocationKey, _kCFURLVolumeNameKey, _kCFURLVolumeResourceCountKey, 
+                       _kCFURLVolumeSubtypeKey, _kCFURLVolumeSupportsAccessPermissionsKey, 
                        _kCFURLVolumeSupportsAdvisoryFileLockingKey, _kCFURLVolumeSupportsCasePreservedNamesKey, 
                        _kCFURLVolumeSupportsCaseSensitiveNamesKey, _kCFURLVolumeSupportsCompressionKey, 
                        _kCFURLVolumeSupportsExclusiveRenamingKey, _kCFURLVolumeSupportsExtendedSecurityKey, 
@@ -1208,27 +1191,28 @@ exports:
                        _kCFURLVolumeSupportsSparseFilesKey, _kCFURLVolumeSupportsSwapRenamingKey, 
                        _kCFURLVolumeSupportsSymbolicLinksKey, _kCFURLVolumeSupportsVolumeSizesKey, 
                        _kCFURLVolumeSupportsZeroRunsKey, _kCFURLVolumeTotalCapacityKey, 
-                       _kCFURLVolumeURLForRemountingKey, _kCFURLVolumeURLKey, _kCFURLVolumeUUIDStringKey, 
-                       _kCFUseCollectableAllocator, _kCFUserNotificationAlertHeaderKey, 
-                       _kCFUserNotificationAlertMessageKey, _kCFUserNotificationAlertSourceKey, 
-                       _kCFUserNotificationAlertTopMostKey, _kCFUserNotificationAlternateButtonTitleKey, 
-                       _kCFUserNotificationCheckBoxLabelsKey, _kCFUserNotificationCheckBoxTitlesKey, 
-                       _kCFUserNotificationDefaultButtonTitleKey, _kCFUserNotificationEnsureVisibilityForProcessIDKey, 
-                       _kCFUserNotificationFlagsKey, _kCFUserNotificationHelpAnchorKey, 
-                       _kCFUserNotificationHelpBookKey, _kCFUserNotificationHelpBundlePathKey, 
-                       _kCFUserNotificationHelpBundleURLKey, _kCFUserNotificationIconPathKey, 
-                       _kCFUserNotificationIconURLKey, _kCFUserNotificationKeyboardTypesKey, 
-                       _kCFUserNotificationLocalizationPathKey, _kCFUserNotificationLocalizationURLKey, 
-                       _kCFUserNotificationOtherButtonTitleKey, _kCFUserNotificationPopUpSelectionKey, 
-                       _kCFUserNotificationPopUpTitlesKey, _kCFUserNotificationProgressIndicatorValueKey, 
-                       _kCFUserNotificationSessionIDKey, _kCFUserNotificationSoundPathKey, 
-                       _kCFUserNotificationSoundURLKey, _kCFUserNotificationTextFieldLabelsKey, 
-                       _kCFUserNotificationTextFieldTitlesKey, _kCFUserNotificationTextFieldValuesKey, 
-                       _kCFUserNotificationTimeoutKey, _kCFUserNotificationTokenKey, 
-                       _kCFWebServicesProviderChangedNotificationName, _kCFWebServicesProviderDefaultDisplayNameKey, 
-                       _kCFWebServicesProviderIdentifierKey, _kCFWebServicesTypeImageSearch, 
-                       _kCFWebServicesTypeMap, _kCFWebServicesTypeWebSearch, _kCFXNotificationEmptyHandler, 
-                       _mdict_keysOfEntriesWithOptionsPassingTest, _os_log_callback ]
+                       _kCFURLVolumeTypeNameKey, _kCFURLVolumeURLForRemountingKey, 
+                       _kCFURLVolumeURLKey, _kCFURLVolumeUUIDStringKey, _kCFUseCollectableAllocator, 
+                       _kCFUserNotificationAlertHeaderKey, _kCFUserNotificationAlertMessageKey, 
+                       _kCFUserNotificationAlertSourceKey, _kCFUserNotificationAlertTopMostKey, 
+                       _kCFUserNotificationAlternateButtonTitleKey, _kCFUserNotificationCheckBoxLabelsKey, 
+                       _kCFUserNotificationCheckBoxTitlesKey, _kCFUserNotificationDefaultButtonTitleKey, 
+                       _kCFUserNotificationEnsureVisibilityForProcessIDKey, _kCFUserNotificationFlagsKey, 
+                       _kCFUserNotificationHelpAnchorKey, _kCFUserNotificationHelpBookKey, 
+                       _kCFUserNotificationHelpBundlePathKey, _kCFUserNotificationHelpBundleURLKey, 
+                       _kCFUserNotificationIconPathKey, _kCFUserNotificationIconURLKey, 
+                       _kCFUserNotificationKeyboardTypesKey, _kCFUserNotificationLocalizationPathKey, 
+                       _kCFUserNotificationLocalizationURLKey, _kCFUserNotificationOtherButtonTitleKey, 
+                       _kCFUserNotificationPopUpSelectionKey, _kCFUserNotificationPopUpTitlesKey, 
+                       _kCFUserNotificationProgressIndicatorValueKey, _kCFUserNotificationSessionIDKey, 
+                       _kCFUserNotificationSoundPathKey, _kCFUserNotificationSoundURLKey, 
+                       _kCFUserNotificationTextFieldLabelsKey, _kCFUserNotificationTextFieldTitlesKey, 
+                       _kCFUserNotificationTextFieldValuesKey, _kCFUserNotificationTimeoutKey, 
+                       _kCFUserNotificationTokenKey, _kCFWebServicesProviderChangedNotificationName, 
+                       _kCFWebServicesProviderDefaultDisplayNameKey, _kCFWebServicesProviderIdentifierKey, 
+                       _kCFWebServicesTypeImageSearch, _kCFWebServicesTypeMap, _kCFWebServicesTypeWebSearch, 
+                       _kCFXNotificationEmptyHandler, _mdict_keysOfEntriesWithOptionsPassingTest, 
+                       _os_log_callback ]
     objc-classes:    [ NSArray, NSBlock, NSBlockInvocation, NSCache, NSCalendar, 
                        NSConstantArray, NSConstantData, NSConstantDate, NSConstantDictionary, 
                        NSData, NSDate, NSDateComponents, NSDictionary, NSEnumerator, 

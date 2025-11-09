@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           824A0DCF-1AC8-3856-A1CF-05228A41A4CE
-  - target:          x86_64-maccatalyst
-    value:           824A0DCF-1AC8-3856-A1CF-05228A41A4CE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5C02D112-3144-302A-9BD4-E91313D228B8
-  - target:          arm64e-maccatalyst
-    value:           5C02D112-3144-302A-9BD4-E91313D228B8
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Versions/A/CoreTelephony'
 current-version: 0
 exports:
@@ -426,12 +413,14 @@ exports:
                        _kCTAudioOutputsKey, _kCTAudioReceiverKey, _kCTAudioSampleRateSwitchCompleteNotification, 
                        _kCTAudioSampleRateSwitchCompleteStatus, _kCTAudioSpeakerKey, 
                        _kCTAudioTTYModeStatus, _kCTAudioTTYModeStatusNotification, 
+                       _kCTAudioVocoderAmrMode, _kCTAudioVocoderEvsBandwidth, _kCTAudioVocoderEvsBitrate, 
                        _kCTAudioVocoderI2SClockRate, _kCTAudioVocoderInfoNotification, 
                        _kCTAudioVocoderInfoSupported, _kCTAudioVocoderSampleRate, 
-                       _kCTAudioVocoderType, _kCTAudioVocoderType4GVNB, _kCTAudioVocoderType4GVNW, 
-                       _kCTAudioVocoderType4GVWB, _kCTAudioVocoderTypeAMR, _kCTAudioVocoderTypeAMRWithBWE, 
-                       _kCTAudioVocoderTypeEAMR, _kCTAudioVocoderTypeEFR, _kCTAudioVocoderTypeEFRWithBWE, 
-                       _kCTAudioVocoderTypeEVRC, _kCTAudioVocoderTypeEVRCB, _kCTAudioVocoderTypeEVRCBWithBWE, 
+                       _kCTAudioVocoderStack, _kCTAudioVocoderType, _kCTAudioVocoderType4GVNB, 
+                       _kCTAudioVocoderType4GVNW, _kCTAudioVocoderType4GVWB, _kCTAudioVocoderTypeAMR, 
+                       _kCTAudioVocoderTypeAMRWithBWE, _kCTAudioVocoderTypeEAMR, 
+                       _kCTAudioVocoderTypeEFR, _kCTAudioVocoderTypeEFRWithBWE, _kCTAudioVocoderTypeEVRC, 
+                       _kCTAudioVocoderTypeEVRCB, _kCTAudioVocoderTypeEVRCBWithBWE, 
                        _kCTAudioVocoderTypeEVS, _kCTAudioVocoderTypeFR, _kCTAudioVocoderTypeFRWithBWE, 
                        _kCTAudioVocoderTypeHR, _kCTAudioVocoderTypeHRWithBWE, _kCTAudioVocoderTypeQCELP13, 
                        _kCTAudioVocoderTypeWAMR, _kCTAudioVoiceMuteStatus, _kCTAudioVoiceMuteStatusNotification, 
@@ -879,12 +868,13 @@ exports:
                        _kCTSIMToolkitHelpAvailable, _kCTSIMToolkitIcon, _kCTSIMToolkitIdleTextNotification, 
                        _kCTSIMToolkitLanguage, _kCTSIMToolkitLanguageNotification, 
                        _kCTSIMToolkitLocalInformationNotification, _kCTSIMToolkitMenuItems, 
-                       _kCTSIMToolkitNoDisplay, _kCTSIMToolkitNotificationResponseBack, 
-                       _kCTSIMToolkitNotificationResponseBusy, _kCTSIMToolkitNotificationResponseCancelled, 
-                       _kCTSIMToolkitNotificationResponseHelp, _kCTSIMToolkitNotificationResponseNotSupported, 
-                       _kCTSIMToolkitNotificationResponseRefused, _kCTSIMToolkitNotificationResponseSuccess, 
-                       _kCTSIMToolkitNotificationResponseSuccessNoIcon, _kCTSIMToolkitNotificationResponseTimeout, 
-                       _kCTSIMToolkitPlayTone, _kCTSIMToolkitPlayToneBusy, _kCTSIMToolkitPlayToneCallDropped, 
+                       _kCTSIMToolkitNoDisplay, _kCTSIMToolkitNotificationBundle, 
+                       _kCTSIMToolkitNotificationResponseBack, _kCTSIMToolkitNotificationResponseBusy, 
+                       _kCTSIMToolkitNotificationResponseCancelled, _kCTSIMToolkitNotificationResponseHelp, 
+                       _kCTSIMToolkitNotificationResponseNotSupported, _kCTSIMToolkitNotificationResponseRefused, 
+                       _kCTSIMToolkitNotificationResponseSuccess, _kCTSIMToolkitNotificationResponseSuccessNoIcon, 
+                       _kCTSIMToolkitNotificationResponseTimeout, _kCTSIMToolkitPlayTone, 
+                       _kCTSIMToolkitPlayToneBusy, _kCTSIMToolkitPlayToneCallDropped, 
                        _kCTSIMToolkitPlayToneCallWaiting, _kCTSIMToolkitPlayToneCongestion, 
                        _kCTSIMToolkitPlayToneDial, _kCTSIMToolkitPlayToneDuration, 
                        _kCTSIMToolkitPlayToneError, _kCTSIMToolkitPlayToneGeneralBeep, 
@@ -998,10 +988,10 @@ exports:
                        _kCTWirelessTechnologyNR, _kCTWirelessTechnologyType, _kCTWirelessTechnologyUMTS, 
                        _kCTWirelessTechnologyUnknown, _kCallAudioSource, _kCallDirectionMobileOriginated, 
                        _kCallDuration, _kCallForwardingCapability, _kCallLikelyToFail, 
-                       _kCallName, _kCallSessionStart, _kCallSimSlot, _kCallSourceMode, 
-                       _kCallStartTime, _kCallStatus, _kCallSubType, _kCallSubTypeTelephony, 
-                       _kCallSubTypeVoLTE, _kCallSubTypeVoNR, _kCallSubTypeWifi, 
-                       _kCallType, _kCallWaitingCapability, _kCallerIDCapability, 
+                       _kCallListedAsEmergency, _kCallName, _kCallSessionStart, _kCallSimSlot, 
+                       _kCallSourceMode, _kCallStartTime, _kCallStatus, _kCallSubType, 
+                       _kCallSubTypeTelephony, _kCallSubTypeVoLTE, _kCallSubTypeVoNR, 
+                       _kCallSubTypeWifi, _kCallType, _kCallWaitingCapability, _kCallerIDCapability, 
                        _kCallerIdAvailability, _kCarrierPLMNPriorityMCC, _kCarrierPLMNPriorityMNC, 
                        _kCarrierPLMNPriorityMetered, _kCarrierPLMNPriorityOthers, 
                        _kCarrierPLMNPriorityPLMN, _kCarrierPLMNPriorityRatMask, _kCarrierPLMNPriorityUnlimited, 

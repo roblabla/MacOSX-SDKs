@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           236151E7-ACF4-3179-9DBA-AAC13761CBAE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           524DED81-77BE-3BB6-ADA0-47D025EE3823
 install-name:    '/System/Library/PrivateFrameworks/JavaScriptAppleEvents.framework/Versions/A/JavaScriptAppleEvents'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

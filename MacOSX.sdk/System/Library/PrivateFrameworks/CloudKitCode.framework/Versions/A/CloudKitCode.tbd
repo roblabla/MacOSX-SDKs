@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A73B91EC-F7F8-3A79-BA69-E884C4306EF3
-  - target:          x86_64-maccatalyst
-    value:           A73B91EC-F7F8-3A79-BA69-E884C4306EF3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           27A6E10F-8C14-3043-9AD8-20C1FC4A5F3A
-  - target:          arm64e-maccatalyst
-    value:           27A6E10F-8C14-3043-9AD8-20C1FC4A5F3A
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 2030.20
+current-version: 2050.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -417,7 +404,11 @@ exports:
                        '_$sSo10CKDatabaseC12CloudKitCodeE25deserializedModifications4fromSaySo8CKRecordCG13recordsToSave_SaySo0H2IDCG09recordIDsJ6Deletet10Foundation4DataV_tYaKF', 
                        '_$sSo10CKDatabaseC12CloudKitCodeE25deserializedModifications4fromSaySo8CKRecordCG13recordsToSave_SaySo0H2IDCG09recordIDsJ6Deletet10Foundation4DataV_tYaKFTu', 
                        '_$sSo10CKDatabaseC12CloudKitCodeE9serialize13recordsToSave09recordIDsG6Delete17completionHandlerySaySo8CKRecordCG_SaySo0N2IDCGys6ResultOy10Foundation4DataVs5Error_pGctF', 
+                       '_$sSo11CKContainerC12CloudKitCodeE7decline_17completionHandlerySaySo15CKShareMetadataCG_ys6ResultOySDyAgJyyts5Error_pGGsAK_pGctF', 
+                       '_$sSo11CKContainerC12CloudKitCodeE7declineySDySo15CKShareMetadataCs6ResultOyyts5Error_pGGSayAFGYaKF', 
+                       '_$sSo11CKContainerC12CloudKitCodeE7declineySDySo15CKShareMetadataCs6ResultOyyts5Error_pGGSayAFGYaKFTu', 
                        '_$sSo11CKMergeableP12CloudKitCodeE5mergeyySo0A11RecordValueCKF', 
+                       '_$sSo11CKSchedulerC12CloudKitCodeE26registerActivityIdentifier_7handlerySS_So0aF6ResultVSo0aF0CYaYbctF', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvg', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvpMV', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE3addyyAC0A9OperationCyxq_G21InternalSwiftProtobuf7MessageRzAhIR_r0_lF', 
@@ -445,6 +436,14 @@ exports:
                        '_$sSo16CKRecordObserverC12CloudKitCodeE13recordChangesAbCE06RecordG0VvpMV', 
                        '_$sSo16CKRecordObserverC12CloudKitCodeE9container10recordTypeABSo11CKContainerC_SSSgtcfC', 
                        '_$sSo22CKMergeableRecordValueC12CloudKitCodeE15addDeltasToSave4fromyAC0A0_p_tKF', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE07declineB11ResultBlockys0H0Oyyts5Error_pGcSgvM', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE07declineB11ResultBlockys0H0Oyyts5Error_pGcSgvg', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE07declineB11ResultBlockys0H0Oyyts5Error_pGcSgvpMV', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE07declineB11ResultBlockys0H0Oyyts5Error_pGcSgvs', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE19perShareResultBlockySo15CKShareMetadataC_s0I0Oyyts5Error_pGtcSgvM', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE19perShareResultBlockySo15CKShareMetadataC_s0I0Oyyts5Error_pGtcSgvg', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE19perShareResultBlockySo15CKShareMetadataC_s0I0Oyyts5Error_pGtcSgvpMV', 
+                       '_$sSo24CKDeclineSharesOperationC12CloudKitCodeE19perShareResultBlockySo15CKShareMetadataC_s0I0Oyyts5Error_pGtcSgvs', 
                        '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE13recordsToSave09recordIDsI6DeleteABSaySo8CKRecordCGSg_SaySo0N2IDCGSgtcfC', 
                        '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvM', 
                        '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvg', 

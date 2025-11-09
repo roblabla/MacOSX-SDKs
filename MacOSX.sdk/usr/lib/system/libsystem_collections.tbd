@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2053883C-79F4-3AF8-A37C-DE204E208C60
-  - target:          x86_64-maccatalyst
-    value:           2053883C-79F4-3AF8-A37C-DE204E208C60
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CB445464-28B4-353C-976E-59DA0E229FED
-  - target:          arm64e-maccatalyst
-    value:           CB445464-28B4-353C-976E-59DA0E229FED
 install-name:    '/usr/lib/system/libsystem_collections.dylib'
-current-version: 1534.40.2
+current-version: 1534.100.14
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

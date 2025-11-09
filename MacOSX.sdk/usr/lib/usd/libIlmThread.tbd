@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           3BFC7576-FF45-37CD-B702-4AF318B0F32F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2D400CC2-7557-37B0-86AB-532DFBCBE8AF
 install-name:    '/usr/lib/usd/libIlmThread.dylib'
-current-version: 20.102.2
+current-version: 20.105.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

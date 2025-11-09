@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           51558D71-D2BD-3770-B402-D931E8100EE4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           90014306-3620-3B33-8EEC-F333A10CC90A
 install-name:    '/System/Library/PrivateFrameworks/BiometricSupport.framework/Versions/A/BiometricSupport'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -33,19 +26,6 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D5E2B820-8F0E-37AC-B089-E18AB642E8EC
-  - target:          x86_64-maccatalyst
-    value:           D5E2B820-8F0E-37AC-B089-E18AB642E8EC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           04CD560D-10FE-3B20-8843-0E6B4DE25DAA
-  - target:          arm64e-maccatalyst
-    value:           04CD560D-10FE-3B20-8843-0E6B4DE25DAA
 install-name:    '/System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -72,8 +52,8 @@ exports:
                        _kBiometricKitTemplateDetailTotalNodes, _kBiometricKitTemplateUpdated, 
                        _localizeAbsolute, _nanosecondsToAbsolute, _rotateBitmap90Data16, 
                        _rotateBitmap90Data8, _roundMostSignificant ]
-    objc-classes:    [ BKDevice, BKDeviceDescriptor, BKDeviceManager, BKDevicePearl, 
-                       BKDeviceTouchID, BKEnrollOperation, BKEnrollPearlOperation, 
+    objc-classes:    [ BKDefaults, BKDevice, BKDeviceDescriptor, BKDeviceManager, 
+                       BKDevicePearl, BKDeviceTouchID, BKEnrollOperation, BKEnrollPearlOperation, 
                        BKEnrollPearlProgressInfo, BKEnrollPearlResultInfo, BKEnrollResultInfo, 
                        BKEnrollTouchIDOperation, BKExtendEnrollTouchIDOperation, 
                        BKFaceDetectOperation, BKFaceDetectStateInfo, BKFaceOcclusionInfo, 
@@ -81,10 +61,10 @@ exports:
                        BKMatchEvent, BKMatchOperation, BKMatchPearlOperation, BKMatchPearlResultInfo, 
                        BKMatchResultInfo, BKMatchTouchIDOperation, BKOperation, BKPresenceDetectOperation, 
                        BKSystemProtectedConfiguration, BKUserProtectedConfiguration, 
-                       BiometricKit, BiometricKitEnrollProgressCoordinates, BiometricKitEnrollProgressInfo, 
-                       BiometricKitEnrollProgressMergedComponent, BiometricKitIdentity, 
-                       BiometricKitMatchInfo, BiometricKitTemplateInfo, BiometricPreferences, 
-                       BiometricSupportTools ]
+                       BioUserDefaults, BiometricKit, BiometricKitEnrollProgressCoordinates, 
+                       BiometricKitEnrollProgressInfo, BiometricKitEnrollProgressMergedComponent, 
+                       BiometricKitIdentity, BiometricKitMatchInfo, BiometricKitTemplateInfo, 
+                       BiometricPreferences, BiometricSupportTools ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kBiometricKitIdentityAccessoryKey ]
     objc-classes:    [ BKAccessory, BKAccessoryGroup, BiometricKitAccessory, BiometricKitAccessoryGroup ]

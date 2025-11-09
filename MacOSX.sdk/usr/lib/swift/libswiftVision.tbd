@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9C86206A-98C2-35FB-B56C-9C4E179FFB3E
-  - target:          x86_64-maccatalyst
-    value:           9C86206A-98C2-35FB-B56C-9C4E179FFB3E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           314DE612-7BAF-390C-A4E2-EF58717BE30C
-  - target:          arm64e-maccatalyst
-    value:           314DE612-7BAF-390C-A4E2-EF58717BE30C
 install-name:    '/usr/lib/swift/libswiftVision.dylib'
 current-version: 2.1.2
 swift-abi-version: 7
@@ -28,6 +15,16 @@ exports:
     symbols:         [ '_$sSo16VNRecognizedTextC6VisionE11boundingBox3forSo22VNRectangleObservationCSgSnySS5IndexVG_tKF', 
                        '_$sSo17VNFaceObservationC6VisionE18faceCaptureQualitySfSgvg', 
                        '_$sSo17VNFaceObservationC6VisionE18faceCaptureQualitySfSgvpMV', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE10DataMatrixABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE13I2of5ChecksumABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE14Code39ChecksumABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE15Code39FullASCIIABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE23Code39FullASCIIChecksumABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE2QRABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE4EAN8ABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE4UPCEABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE5AztecABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE5EAN13ABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE5I2of5ABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE5ITF14ABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE6Code39ABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE6Code93ABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE6PDF417ABvgZ', 
+                       '_$sSo18VNBarcodeSymbologya6VisionE7Code128ABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE7Code93iABvgZ', 
                        '_$sSo22VNFaceLandmarkRegion2DC6VisionE13pointsInImage9imageSizeSaySo7CGPointVGSo6CGSizeV_tF', 
                        '_$sSo22VNFaceLandmarkRegion2DC6VisionE16normalizedPointsSaySo7CGPointVGvg', 
                        '_$sSo22VNFaceLandmarkRegion2DC6VisionE16normalizedPointsSaySo7CGPointVGvpMV', 

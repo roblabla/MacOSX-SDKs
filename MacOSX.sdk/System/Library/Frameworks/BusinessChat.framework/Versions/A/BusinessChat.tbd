@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E9C92C27-C66B-3552-B32E-3BD70F1C2773
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           183D5C7F-05EA-3CDA-B802-7CC9601114E8
 install-name:    '/System/Library/Frameworks/BusinessChat.framework/Versions/A/BusinessChat'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

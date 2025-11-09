@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C9E8386C-86B0-3C6F-A562-D412713CF84C
-  - target:          x86_64-maccatalyst
-    value:           C9E8386C-86B0-3C6F-A562-D412713CF84C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           70799132-1CB2-3D95-A62B-B1FA9D4E6FCC
-  - target:          arm64e-maccatalyst
-    value:           70799132-1CB2-3D95-A62B-B1FA9D4E6FCC
 install-name:    '/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -32,10 +19,12 @@ exports:
                        _PCSCopyWrappedKey, _PCSCreateLogContext, _PCSCurrentPersonaMatchesDSID, 
                        _PCSCurrentPersonaMatchesDSIDFromSet, _PCSDaemonKeyRollIsPending, 
                        _PCSDeleteBoundaryKey, _PCSDeriveIdentity, _PCSErrorCreate, 
-                       _PCSEventGetRollEpoch, _PCSEventItemAddedToOutgoingQueue, 
-                       _PCSEventKeyCreation, _PCSEventKeyRollOperation, _PCSEventKeyRollStateChange, 
-                       _PCSEventMBValidate, _PCSEventMobileRestore, _PCSEventPushNotificationReceived, 
-                       _PCSEventTestKeyRollStateChange, _PCSFDECopyUnwrappedDataWithSet, 
+                       _PCSEventGetRollEpoch, _PCSEventIndividualKeyRoll, _PCSEventInitiateKeyRolling, 
+                       _PCSEventItemAddedToOutgoingQueue, _PCSEventKeyCreation, _PCSEventKeyRollOperation, 
+                       _PCSEventKeyRollStateChange, _PCSEventMBValidate, _PCSEventMarkForKeyRolling, 
+                       _PCSEventMobileRestore, _PCSEventPushNotificationReceived, 
+                       _PCSEventTestKeyRollStateChange, _PCSEventWalrusRepairNotNeeded, 
+                       _PCSEventWalrusRepairPerformed, _PCSFDECopyUnwrappedDataWithSet, 
                        _PCSFPAddCurrentIdentity, _PCSFPAddEncryptedSharePCS, _PCSFPAddPrivateKey, 
                        _PCSFPAddPublicIdentity, _PCSFPAddPublicIdentityWithShareFlags, 
                        _PCSFPAddSharePCS, _PCSFPAddSharePCSWithFlags, _PCSFPChainingAddIdentity, 
@@ -57,15 +46,16 @@ exports:
                        _PCSFPSetAuthorshipIdentity, _PCSFPSetCurrentPrivateKey, _PCSFPSetOwnerIdentity, 
                        _PCSFPShouldRoll, _PCSFPShouldUpdate, _PCSFPStatus, _PCSFPSupportFeature, 
                        _PCSFPUpdateIdentityAndRollZoneKey, _PCSFPUpdateZoneKey, _PCSFPValidateShare, 
-                       _PCSGetBoundaryKey, _PCSGetPublicIdentitites, _PCSIdentityCheckValidPublicKey, 
-                       _PCSIdentityCheckWrappable, _PCSIdentityCollectionCopyCurrent, 
-                       _PCSIdentityCollectionDestroy, _PCSIdentityCollectionSetup, 
-                       _PCSIdentityCopyCircleFingerPrint, _PCSIdentityCopyCurrentKeyFingerprint, 
-                       _PCSIdentityCopyDiagnostic, _PCSIdentityCopyExportedPrivateKey, 
-                       _PCSIdentityCopyExportedPublicKey, _PCSIdentityCopyExternalForm, 
-                       _PCSIdentityCopyPublicIdentity, _PCSIdentityCopyPublicKeyInfo, 
-                       _PCSIdentityCopyServiceNumber, _PCSIdentityCopySignatureKeyID, 
-                       _PCSIdentityCopyWrappedKey, _PCSIdentityCreateDiversifiedIdentityFromPublicIdentityOptions, 
+                       _PCSGetBoundaryKey, _PCSGetHealthSummary, _PCSGetPublicIdentitites, 
+                       _PCSIdentityCheckValidPublicKey, _PCSIdentityCheckWrappable, 
+                       _PCSIdentityCollectionCopyCurrent, _PCSIdentityCollectionDestroy, 
+                       _PCSIdentityCollectionSetup, _PCSIdentityCopyCircleFingerPrint, 
+                       _PCSIdentityCopyCurrentKeyFingerprint, _PCSIdentityCopyDiagnostic, 
+                       _PCSIdentityCopyExportedPrivateKey, _PCSIdentityCopyExportedPublicKey, 
+                       _PCSIdentityCopyExternalForm, _PCSIdentityCopyPublicIdentity, 
+                       _PCSIdentityCopyPublicKeyInfo, _PCSIdentityCopyServiceNumber, 
+                       _PCSIdentityCopySignatureKeyID, _PCSIdentityCopyWrappedKey, 
+                       _PCSIdentityCreateDiversifiedIdentityFromPublicIdentityOptions, 
                        _PCSIdentityCreateDiversifiedIdentityOptions, _PCSIdentityCreateExportedRawCompact, 
                        _PCSIdentityCreateFromData, _PCSIdentityCreateFromPersistentReference, 
                        _PCSIdentityCreateFromPersistentReferenceAndGetSHA1, _PCSIdentityCreateFromRaw, 
@@ -92,14 +82,15 @@ exports:
                        _PCSIdentitySetCreateFromExternalForm, _PCSIdentitySetCreateKeychain, 
                        _PCSIdentitySetCreateManatee, _PCSIdentitySetCreateMutable, 
                        _PCSIdentitySetCreateNamed, _PCSIdentitySetEnableCompanionCircleMember, 
-                       _PCSIdentitySetEnableICDP, _PCSIdentitySetEnumeratePublicKeys, 
-                       _PCSIdentitySetGetCurrentCreationTime, _PCSIdentitySetGetTypeID, 
-                       _PCSIdentitySetIsICDP, _PCSIdentitySetIsICDPNetwork, _PCSIdentitySetIsICDPNetworkWithOptions, 
-                       _PCSIdentitySetIsPlesio, _PCSIdentitySetIsWalrus, _PCSIdentitySetRemoveIdentity, 
-                       _PCSIdentitySetRollManateeServices, _PCSIdentitySetSetCurrentIdentity, 
-                       _PCSIdentitySetSetCurrentIdentityWithError, _PCSIdentitySetSetPlesio, 
-                       _PCSIdentitySetSetWalrus, _PCSIdentitySetValidate, _PCSIdentitySetup, 
-                       _PCSIdentityShouldRecoverHSMBackup, _PCSIdentitySynchronizeKeys, 
+                       _PCSIdentitySetEnableICDP, _PCSIdentitySetEnumerateIdentities, 
+                       _PCSIdentitySetEnumeratePublicKeys, _PCSIdentitySetGetCurrentCreationTime, 
+                       _PCSIdentitySetGetTypeID, _PCSIdentitySetIsICDP, _PCSIdentitySetIsICDPNetwork, 
+                       _PCSIdentitySetIsICDPNetworkWithOptions, _PCSIdentitySetIsPlesio, 
+                       _PCSIdentitySetIsWalrus, _PCSIdentitySetIsWalrusWithForceFetch, 
+                       _PCSIdentitySetRemoveIdentity, _PCSIdentitySetRollManateeServices, 
+                       _PCSIdentitySetSetCurrentIdentity, _PCSIdentitySetSetCurrentIdentityWithError, 
+                       _PCSIdentitySetSetPlesio, _PCSIdentitySetSetWalrus, _PCSIdentitySetValidate, 
+                       _PCSIdentitySetup, _PCSIdentityShouldRecoverHSMBackup, _PCSIdentitySynchronizeKeys, 
                        _PCSIdentityWebSafePublicKeyID, _PCSIdentityiCDPPlesio, _PCSIdentityiCDPSignOut, 
                        _PCSIdentityiCDPWalrus, _PCSKeyCreateKeyFromRandomData, _PCSKeyCreateWithPCSSPKey, 
                        _PCSKeyEnvelopeAuthenticate, _PCSKeyEnvelopeCreate, _PCSKeyEnvelopeCreateWithValues, 
@@ -122,8 +113,7 @@ exports:
                        _PCSPublicIdentityGetServiceID, _PCSPublicIdentityGetServiceName, 
                        _PCSPublicIdentityGetTypeID, _PCSPublicServiceIdentityCopyWrappedKey, 
                        _PCSReportKeyRollPending, _PCSReportManateeStatus, _PCSRestoreCKBackup, 
-                       _PCSRestoreCKBackupWithCompletion, _PCSServiceIdentityCopyExportedPublicKey, 
-                       _PCSServiceIdentityCopyPublicKeyInfo, _PCSServiceIdentityCopyUnwrappedKey, 
+                       _PCSRestoreCKBackupWithCompletion, _PCSServiceIdentityCopyUnwrappedKey, 
                        _PCSServiceItemAllowKeyExportByIndex, _PCSServiceItemAllowSyntheticManateeSharing, 
                        _PCSServiceItemAnonymousSharingByIndex, _PCSServiceItemCanRoll, 
                        _PCSServiceItemEscrowManateeIdentityByName, _PCSServiceItemGetAccessClassByName, 
@@ -146,11 +136,12 @@ exports:
                        _PCSSupportsPersonaMultiuser, _PCSSyncKeyRegistryWithOptions, 
                        _PCSSyncKeyRegistryWithServiceName, _PCSTapToRadar, _PCSTestCDPStatus, 
                        _PCSTriggerWatchSyncing, _PCSUseSyncKeychain, _PCSValidateSignature, 
-                       _PCSValidateSignatureGetSigner, __PCSCreateHexString, __PCSError, 
-                       __PCSErrorASN1, __PCSErrorContext, __PCSErrorOOM, __PCSErrorUserInfo, 
-                       __PCSErrorVA, __PCSFPCopyExportedWithOptions, __PCSFPSetShouldRoll, 
-                       __PCSFillOctetString, __PCSIdentityAddFromExternalForm, __PCSIdentityCheckPCSAttributes, 
-                       __PCSIdentityComparePublicKey, __PCSIdentityCopyBAT, __PCSIdentityCopyKeychainAttributes, 
+                       _PCSValidateSignatureGetSigner, _PCSValidateSignatureWithSet, 
+                       __PCSCreateHexString, __PCSError, __PCSErrorASN1, __PCSErrorContext, 
+                       __PCSErrorOOM, __PCSErrorUserInfo, __PCSErrorVA, __PCSFPCopyExportedWithOptions, 
+                       __PCSFPSetShouldRoll, __PCSFillOctetString, __PCSIdentityAddFromExternalForm, 
+                       __PCSIdentityCheckPCSAttributes, __PCSIdentityComparePublicKey, 
+                       __PCSIdentityCopyBAT, __PCSIdentityCopyKeychainAttributes, 
                        __PCSIdentityCreateEmpty, __PCSIdentityGetKey, __PCSIdentityGetPersistentReference, 
                        __PCSIdentityGetSigningIdentity, __PCSIdentityHavePCSCKKSAttributes, 
                        __PCSIdentityIsManatee, __PCSIdentityIsShareableManatee, __PCSIdentityIsTooRolled, 
@@ -231,6 +222,7 @@ exports:
                        _kPCSServiceTTYCallHistory, _kPCSServiceWalletPaymentServices, 
                        _kPCSServiceiAD, _kPCSServiceiMessage, _kPCSSettingStingrayRoll, 
                        _kPCSSettingsSuiteName, _kPCSSetupAuthToken, _kPCSSetupBoundaryNoCreate, 
+                       _kPCSSetupCallbackKeyRegistry, _kPCSSetupCallbackMarkNegative, 
                        _kPCSSetupDSID, _kPCSSetupDSIDAny, _kPCSSetupDeviceIdentifier, 
                        _kPCSSetupDisableiCDP, _kPCSSetupDontImportManatee, _kPCSSetupEnvionment, 
                        _kPCSSetupEscrowURL, _kPCSSetupForceLogging, _kPCSSetupForceNewIdentity, 
@@ -250,7 +242,7 @@ exports:
                        PCSCKKSCreateIdentityOperation, PCSCKKSEnsurePCSFieldsOperation, 
                        PCSCKKSFetchCurrentOperation, PCSCKKSItemModifyContext, PCSCKKSOperation, 
                        PCSCKKSSyncViewOperation, PCSKeybagKey, PCSMTT, PCSMTTPoint, 
-                       PCSManatee, PCSMobileBackup, PCSShareProtectionObject, PCSUtilities, 
-                       UserRegistryDB, UserRegistryStats ]
+                       PCSMobileBackup, PCSShareProtectionObject, PCSUtilities, UserRegistryDB, 
+                       UserRegistryStats ]
     objc-ivars:      [ PCSCKKSItemModifyContext._rollAttributes ]
 ...

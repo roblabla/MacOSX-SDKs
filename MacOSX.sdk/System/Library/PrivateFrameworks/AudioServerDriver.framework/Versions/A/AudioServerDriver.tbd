@@ -1,23 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6A82E9DA-F646-38D6-8D73-5A69327B5BFE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1556FC1E-6F1A-321B-891D-A440DB635255
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringP13__va_list_tag, 
                        __ZN5CALog7vprintfEiPKcP13__va_list_tag ]
     weak-symbols:    [ __ZTI11CAException, __ZTIN8DSPGraph9ExceptionE, __ZTINSt3__117bad_function_callE, 
-                       __ZTISt11logic_error, __ZTISt12length_error, __ZTISt13runtime_error, 
-                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTS11CAException, 
-                       __ZTSN8DSPGraph9ExceptionE, __ZTSNSt3__117bad_function_callE, 
-                       __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt13runtime_error, 
+                       __ZTISt11logic_error, __ZTISt12length_error, __ZTISt12out_of_range, 
+                       __ZTISt13runtime_error, __ZTISt20bad_array_new_length, __ZTISt9bad_alloc, 
+                       __ZTISt9exception, __ZTS11CAException, __ZTSN8DSPGraph9ExceptionE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, __ZTSSt12length_error, 
+                       __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt20bad_array_new_length, 
                        __ZTSSt9bad_alloc, __ZTSSt9exception ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASDStereoPanControlCenter, _ASDStereoPanControlFullLeft, 

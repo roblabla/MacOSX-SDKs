@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           7C78D4CD-A263-3A0F-9B62-46AD28462629
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           2FAACD1B-7CBD-376B-98D6-FDF9F8B92B2F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit'
-current-version: 225.123
+current-version: 225.255.1
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

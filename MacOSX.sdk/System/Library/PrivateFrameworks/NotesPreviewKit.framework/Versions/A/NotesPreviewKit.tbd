@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C9746656-9A5A-3F9A-B538-CD1DEA18F0AB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8DF5EAFF-9BB8-3AA7-8DED-56E734A0F5AC
 install-name:    '/System/Library/PrivateFrameworks/NotesPreviewKit.framework/Versions/A/NotesPreviewKit'
-current-version: 2185
+current-version: 2215
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

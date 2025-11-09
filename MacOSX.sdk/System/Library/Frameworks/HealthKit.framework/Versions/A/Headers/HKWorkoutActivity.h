@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An HKWorkoutActivity is an object describing the properties of an activity within an HKWorkout.
  */
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
-@interface HKWorkoutActivity : NSObject
+@interface HKWorkoutActivity : NSObject <NSSecureCoding, NSCopying>
 
 /*!
  @property      UUID

@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           17982770-5396-39C2-ACEA-F0A168407F1C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           40946F7C-6BF2-3DAB-9FDC-C1011E363058
 install-name:    '/System/Library/PrivateFrameworks/WebGPU.framework/Versions/A/WebGPU'
-current-version: 614.3.7
+current-version: 615.1.26
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _wgpuAdapterEnumerateFeatures, _wgpuAdapterGetLimits, _wgpuAdapterGetProperties, 
@@ -18,9 +11,9 @@ exports:
                        _wgpuBindGroupLayoutRelease, _wgpuBindGroupLayoutSetLabel, 
                        _wgpuBindGroupRelease, _wgpuBindGroupSetLabel, _wgpuBufferDestroy, 
                        _wgpuBufferGetConstMappedRange, _wgpuBufferGetMappedRange, 
-                       _wgpuBufferMapAsync, _wgpuBufferMapAsyncWithBlock, _wgpuBufferRelease, 
-                       _wgpuBufferSetLabel, _wgpuBufferUnmap, _wgpuCommandBufferRelease, 
-                       _wgpuCommandBufferSetLabel, _wgpuCommandEncoderBeginComputePass, 
+                       _wgpuBufferGetSize, _wgpuBufferMapAsync, _wgpuBufferMapAsyncWithBlock, 
+                       _wgpuBufferRelease, _wgpuBufferSetLabel, _wgpuBufferUnmap, 
+                       _wgpuCommandBufferRelease, _wgpuCommandBufferSetLabel, _wgpuCommandEncoderBeginComputePass, 
                        _wgpuCommandEncoderBeginRenderPass, _wgpuCommandEncoderClearBuffer, 
                        _wgpuCommandEncoderCopyBufferToBuffer, _wgpuCommandEncoderCopyBufferToTexture, 
                        _wgpuCommandEncoderCopyTextureToBuffer, _wgpuCommandEncoderCopyTextureToTexture, 
@@ -77,7 +70,8 @@ exports:
                        _wgpuRenderPipelineGetBindGroupLayout, _wgpuRenderPipelineRelease, 
                        _wgpuRenderPipelineSetLabel, _wgpuSamplerRelease, _wgpuSamplerSetLabel, 
                        _wgpuShaderModuleGetCompilationInfo, _wgpuShaderModuleGetCompilationInfoWithBlock, 
-                       _wgpuShaderModuleRelease, _wgpuShaderModuleSetLabel, _wgpuSurfaceGetPreferredFormat, 
+                       _wgpuShaderModuleRelease, _wgpuShaderModuleSetLabel, _wgpuSurfaceCocoaCustomSurfaceGetDisplayBuffer, 
+                       _wgpuSurfaceCocoaCustomSurfaceGetDrawingBuffer, _wgpuSurfaceGetPreferredFormat, 
                        _wgpuSurfaceRelease, _wgpuSwapChainGetCurrentTextureView, 
                        _wgpuSwapChainPresent, _wgpuSwapChainRelease, _wgpuTextureCreateView, 
                        _wgpuTextureDestroy, _wgpuTextureRelease, _wgpuTextureSetLabel, 

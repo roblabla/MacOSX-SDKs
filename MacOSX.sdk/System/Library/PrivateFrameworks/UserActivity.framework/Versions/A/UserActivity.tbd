@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EDD8B0E2-5F46-3C5D-8751-B560AE67544F
-  - target:          x86_64-maccatalyst
-    value:           EDD8B0E2-5F46-3C5D-8751-B560AE67544F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F94C9610-E911-3358-8A5E-9D1712F57C5A
-  - target:          arm64e-maccatalyst
-    value:           F94C9610-E911-3358-8A5E-9D1712F57C5A
 install-name:    '/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity'
 current-version: 551
 exports:

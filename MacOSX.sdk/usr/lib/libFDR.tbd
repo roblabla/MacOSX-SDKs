@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           338FE23A-F919-31B7-BF9A-C4E2A7FA98DE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           173FA3C4-BE97-3217-A282-7FB238F94032
 install-name:    '/usr/lib/libFDR.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -106,9 +99,10 @@ exports:
                        _kAMFDRSealingMapAttributes, _kAMFDRSealingMapDataInstanceIdentifier, 
                        _kAMFDRSealingMapDataInstanceIdentifierList, _kAMFDRSealingMapIdentifierZhuGePrefix, 
                        _kAMFDRSealingMapManifestProperties, _kAMFDRSealingMapMaxSize, 
-                       _kAMFDRSealingMapMultiDataInstanceIdentifierList, _kAMFDRSealingMapPropertyAttributeMatching, 
-                       _kAMFDRSealingMapPropertyAttributeRequired, _kAMFDRSealingMapPropertyAttributeStoreAsData, 
-                       _kAMFDRSealingMapPropertyAttributeStoreAsInteger, _kAMFDRSealingMapPropertyAttributeSysCfg, 
-                       _kAMFDRSealingMapPropertyAttributes, _kAMFDRSealingMapPropertyIdentifier, 
-                       _kAMFDRSealingMapStoreMaxSize, _kAMFDRSealingMapTag ]
+                       _kAMFDRSealingMapMinimalSealingManifest, _kAMFDRSealingMapMultiDataInstanceIdentifierList, 
+                       _kAMFDRSealingMapPropertyAttributeMatching, _kAMFDRSealingMapPropertyAttributeRequired, 
+                       _kAMFDRSealingMapPropertyAttributeStoreAsData, _kAMFDRSealingMapPropertyAttributeStoreAsInteger, 
+                       _kAMFDRSealingMapPropertyAttributeSysCfg, _kAMFDRSealingMapPropertyAttributes, 
+                       _kAMFDRSealingMapPropertyIdentifier, _kAMFDRSealingMapStoreMaxSize, 
+                       _kAMFDRSealingMapTag ]
 ...

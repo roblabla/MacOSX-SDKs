@@ -16,3 +16,13 @@
 #define SK_EXTERN_CLASS_AVAILABLE_MAC(version) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_MAC(version)
 #define SK_EXTERN_CLASS_AVAILABLE_IOS(version) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_IOS(version)
 #define SK_CLASS_FINAL __attribute__((objc_subclassing_restricted))
+
+#ifdef DEBUG
+// Allow for the framework to be deployed in alternate locations.
+#define StoreKitBundle [NSBundle bundleWithIdentifier:@"com.apple.StoreKit"]
+#else
+// Slightly more direct way to retrieve bundle.
+#define StoreKitBundle [NSBundle bundleWithPath:@"/System/Library/Frameworks/StoreKit.framework"]
+#endif
+
+#define SKLocalizedString(x) NSLocalizedStringFromTableInBundle(x, nil, StoreKitBundle, @"")

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FFC5D06C-67AF-3315-908F-56E12356D608
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9C05EB23-A4B3-3BA6-A01D-AD4076C00FBC
 install-name:    '/System/Library/PrivateFrameworks/AppleShareClientCore.framework/Versions/A/AppleShareClientCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

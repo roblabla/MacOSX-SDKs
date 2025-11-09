@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C4680740-7486-333D-8D4C-2BF104DD1624
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           ED647654-C580-3840-A727-CF31EAB3D821
 install-name:    '/System/Library/PrivateFrameworks/iPodSync.framework/Versions/A/iPodSync'
 current-version: 121.1
 exports:

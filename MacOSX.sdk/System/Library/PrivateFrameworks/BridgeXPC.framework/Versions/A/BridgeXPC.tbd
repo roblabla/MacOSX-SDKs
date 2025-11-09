@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           007983E2-1AE5-3522-9192-4F4868DACFCB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           523F7C94-B730-38A1-B185-1BF93192A5FC
 install-name:    '/System/Library/PrivateFrameworks/BridgeXPC.framework/Versions/A/BridgeXPC'
 current-version: 38
 exports:

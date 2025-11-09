@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
 // swift-module-flags: -target arm64e-apple-ios16.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftHealthKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name HealthKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3232.2.1.14
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3232.4.1.31
 import CoreLocation
 import Foundation
 @_exported import HealthKit
@@ -340,7 +340,7 @@ extension HealthKit.HKSamplePredicate {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
 extension HealthKit.HKAttachmentStore {
-  public func addAttachment(to object: HealthKit.HKObject, name: Swift.String, contentType: UniformTypeIdentifiers.UTType, url: Foundation.URL, metadata: [Swift.String : Any] = [:], completion: @escaping (HealthKit.HKAttachment?, Swift.Error?) -> Swift.Void)
+  public func addAttachment(to object: HealthKit.HKObject, name: Swift.String, contentType: UniformTypeIdentifiers.UTType, url: Foundation.URL, metadata: [Swift.String : Any] = [:], completion: @escaping (HealthKit.HKAttachment?, (any Swift.Error)?) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   public func addAttachment(to object: HealthKit.HKObject, name: Swift.String, contentType: UniformTypeIdentifiers.UTType, url: Foundation.URL, metadata: [Swift.String : Any] = [:]) async throws -> HealthKit.HKAttachment
   #endif
@@ -615,7 +615,7 @@ extension HealthKit.HKQuantitySeriesSampleQueryDescriptor : HealthKit.HKAsyncSeq
 extension HealthKit.HKElectrocardiogramQuery {
   public enum Result {
     case measurement(HealthKit.HKElectrocardiogram.VoltageMeasurement)
-    case error(Swift.Error)
+    case error(any Swift.Error)
     case done
   }
   convenience public init(_ ecg: HealthKit.HKElectrocardiogram, dataHandler: @escaping (HealthKit.HKElectrocardiogramQuery, HealthKit.HKElectrocardiogramQuery.Result) -> Swift.Void)

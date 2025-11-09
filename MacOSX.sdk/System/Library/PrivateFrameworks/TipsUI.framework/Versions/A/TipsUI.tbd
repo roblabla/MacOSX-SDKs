@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1B630237-DE4A-3E7D-90EC-FC73236B74E7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AECE1FA4-F802-3575-9E72-267235FD7A90
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 663
+current-version: 665.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -472,7 +465,50 @@ exports:
                        '_$s6TipsUI22DocumentAssetViewModelCMm', '_$s6TipsUI22DocumentAssetViewModelCMn', 
                        '_$s6TipsUI22DocumentAssetViewModelCMo', '_$s6TipsUI22DocumentAssetViewModelCMu', 
                        '_$s6TipsUI22DocumentAssetViewModelCN', '_$s6TipsUI22DocumentAssetViewModelCfD', 
-                       '_$s6TipsUI22DocumentAssetViewModelCfd', '_$s6TipsUI23defaultParagraphSpacing12CoreGraphics7CGFloatVvg', 
+                       '_$s6TipsUI22DocumentAssetViewModelCfd', '_$s6TipsUI22TipNavigationViewModelC06selectC07atIndexySi_tFTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC06selectC07atIndexySi_tFTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvMTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvMTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvsTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC0So6TPSTipCSgvsTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC5IndexSivgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC5IndexSivgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC07currentC5IndexSivpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvMTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvMTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvsTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC08$currentC07Combine9PublishedV9PublisherVySo6TPSTipCSg_GvsTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvMTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvMTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvsTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC4tipsSaySo6TPSTipCGvsTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvMTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvMTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvsTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC5$tips7Combine9PublishedV9PublisherVySaySo6TPSTipCG_GvsTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC6goBackyyFTj', '_$s6TipsUI22TipNavigationViewModelC6goBackyyFTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC6goNextyyFTj', '_$s6TipsUI22TipNavigationViewModelC6goNextyyFTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC7Combine16ObservableObjectAAMc', 
+                       '_$s6TipsUI22TipNavigationViewModelC9canGoBackSbvgTj', '_$s6TipsUI22TipNavigationViewModelC9canGoBackSbvgTq', 
+                       '_$s6TipsUI22TipNavigationViewModelC9canGoBackSbvpMV', '_$s6TipsUI22TipNavigationViewModelC9canGoNextSbvgTj', 
+                       '_$s6TipsUI22TipNavigationViewModelC9canGoNextSbvgTq', '_$s6TipsUI22TipNavigationViewModelC9canGoNextSbvpMV', 
+                       '_$s6TipsUI22TipNavigationViewModelCACycfC', '_$s6TipsUI22TipNavigationViewModelCACycfc', 
+                       '_$s6TipsUI22TipNavigationViewModelCMa', '_$s6TipsUI22TipNavigationViewModelCMn', 
+                       '_$s6TipsUI22TipNavigationViewModelCMo', '_$s6TipsUI22TipNavigationViewModelCMu', 
+                       '_$s6TipsUI22TipNavigationViewModelCN', '_$s6TipsUI22TipNavigationViewModelCfD', 
+                       '_$s6TipsUI23defaultParagraphSpacing12CoreGraphics7CGFloatVvg', 
                        '_$s6TipsUI24ConstellationContentViewV03rawD08language13assetsBaseURL20assetFileInfoManager10attributes4size8maxWidth16textIsSelectable8delegateACSaySDySSypGG_SS10Foundation0J0VSgSo08TPSAssetlmN0CSgAA0cD10AttributesVSgSo6CGSizeV12CoreGraphics7CGFloatVSgSbAA0cD8Delegate_pSgtcfC', 
                        '_$s6TipsUI24ConstellationContentViewV05SwiftB00E0AAMc', '_$s6TipsUI24ConstellationContentViewV4bodyQrvg', 
                        '_$s6TipsUI24ConstellationContentViewV4bodyQrvpMV', '_$s6TipsUI24ConstellationContentViewV4bodyQrvpQOMQ', 
@@ -482,9 +518,17 @@ exports:
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD13LinkActivated3urly10Foundation3URLV_tFTq', 
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD23PersonalizedStringForIDySSSgSiFTj', 
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD23PersonalizedStringForIDySSSgSiFTq', 
-                       '_$s6TipsUI28ConstellationContentDelegateTL', '_$s6TipsUI30ConstellationContentAttributesV4font15foregroundColor06accentH018titleGradientStyle13textAlignment16paragraphSpacing13numberOfLines13lineBreakModeACSo6NSFontCSg_05SwiftB00H0VSgArO06LinearK0VSgSo06NSTextN0V12CoreGraphics7CGFloatVSiSo06NSLineuV0VtcfC', 
+                       '_$s6TipsUI28ConstellationContentDelegateTL', '_$s6TipsUI30ConstellationContentAttributesV4font15foregroundColor06accentH018titleGradientStyle13textAlignment16paragraphSpacing0oL013numberOfLines13lineBreakMode11symbolScale013useForegroundH9ForSymbolACSo6NSFontCSg_05SwiftB00H0VSgAuR06LinearK0VSgSo06NSTextN0V12CoreGraphics7CGFloatVAA0cd9ParagraphL0OSiSo06NSLineuV0VSo013NSImageSymbolX0VSgSbSgtcfC', 
                        '_$s6TipsUI30ConstellationContentAttributesVMa', '_$s6TipsUI30ConstellationContentAttributesVMn', 
-                       '_$s6TipsUI30ConstellationContentAttributesVN', '_$s7SwiftUI17EnvironmentValuesV04TipsB0E16assetContentModeAA0gH0OvM', 
+                       '_$s6TipsUI30ConstellationContentAttributesVN', '_$s6TipsUI34ConstellationContentParagraphStyleO2eeoiySbAC_ACtFZ', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleO4hash4intoys6HasherVz_tF', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleO5spaceyA2CmFWC', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleO7newlineyA2CmFWC', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleO9hashValueSivg', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleO9hashValueSivpMV', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleOMa', '_$s6TipsUI34ConstellationContentParagraphStyleOMn', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleON', '_$s6TipsUI34ConstellationContentParagraphStyleOSHAAMc', 
+                       '_$s6TipsUI34ConstellationContentParagraphStyleOSQAAMc', '_$s7SwiftUI17EnvironmentValuesV04TipsB0E16assetContentModeAA0gH0OvM', 
                        '_$s7SwiftUI17EnvironmentValuesV04TipsB0E16assetContentModeAA0gH0Ovg', 
                        '_$s7SwiftUI17EnvironmentValuesV04TipsB0E16assetContentModeAA0gH0OvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV04TipsB0E16assetContentModeAA0gH0Ovs', 
@@ -509,9 +553,9 @@ exports:
                        '_$sSo7NSImageC6TipsUIE13isSymbolImageSbvg', '_$sSo7NSImageC6TipsUIE13isSymbolImageSbvpMV', 
                        '_$sSo7NSImageC6TipsUIE13withTintColor_13renderingModeABSo7NSColorC_AC014UIKitRenderingH0OtF', 
                        '_$sSo7NSImageC6TipsUIE13withTintColoryABSo7NSColorCF', '_$sSo7NSImageC6TipsUIE15systemImageNameABSgSS_tcfC', 
-                       '_$sSo7NSImageC6TipsUIE21tipsAppHomeScreenIconABSgyFZ', '_$sSo7NSImageC6TipsUIE25imageWithSymbolAttributes_9textStyleABSgSDySSypG_So010NSFontTextI0atFZ', 
+                       '_$sSo7NSImageC6TipsUIE21tipsAppHomeScreenIconABSgyFZ', '_$sSo7NSImageC6TipsUIE25imageWithSymbolAttributes_9textStyle5scaleABSgSDySSypG_So010NSFontTextI0aSo0aF5ScaleVSgtFZ', 
                        '_$sSo7NSImageC6TipsUIE7resized2toABSgSo6CGSizeV_tF', _TipsUIVersionNumber, 
                        _TipsUIVersionString ]
-    objc-classes:    [ TPSImageAssetController, TPSTipsAssetPrefetchingManager, _TtC6TipsUI10PlayerView, 
-                       _TtC6TipsUI16TipsContentModel ]
+    objc-classes:    [ TPSImageAssetController, TPSTipsAssetPrefetchingManager, TipNavigationViewModel, 
+                       _TtC6TipsUI10PlayerView, _TtC6TipsUI16TipsContentModel ]
 ...

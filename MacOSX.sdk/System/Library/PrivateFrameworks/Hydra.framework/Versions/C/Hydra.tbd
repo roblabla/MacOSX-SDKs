@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E62AF8FB-47D0-324D-8397-945A1C158478
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           07250873-272E-32FF-9793-0A67524F5B4C
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Hydra'
 current-version: 0
 compatibility-version: 0
@@ -133,18 +126,28 @@ exports:
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__r_anchor_multilineIcEE, 
                        __ZTSU13block_pointerFbPKcE, __ZTSU13block_pointerFvvE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _TIFFCIELab16ToXYZ, _TIFFCreateGPSDirectory, _TIFFDeferStrileArrayWriting, 
+    symbols:         [ _TIFFCIELab16ToXYZ, _TIFFClientOpenExt, _TIFFCreateGPSDirectory, 
+                       _TIFFDeferStrileArrayWriting, _TIFFErrorExtR, _TIFFFdOpenExt, 
                        _TIFFFieldIsAnonymous, _TIFFFieldSetGetCountSize, _TIFFFieldSetGetSize, 
                        _TIFFForceStrileArrayWriting, _TIFFGetStrileByteCount, _TIFFGetStrileByteCountWithErr, 
-                       _TIFFGetStrileOffset, _TIFFGetStrileOffsetWithErr, _TIFFIsBigTIFF, 
-                       _TIFFJPEGIsFullStripRequired, _TIFFReadFromUserBuffer, _TIFFReadGPSDirectory, 
-                       _TIFFReadRGBAStripExt, _TIFFReadRGBATileExt, __TIFFCastUInt64ToSSize, 
+                       _TIFFGetStrileOffset, _TIFFGetStrileOffsetWithErr, _TIFFHashSetDestroy, 
+                       _TIFFHashSetInsert, _TIFFHashSetLookup, _TIFFHashSetNew, _TIFFHashSetRemove, 
+                       _TIFFHashSetSize, _TIFFInitLZMA, _TIFFIsBigTIFF, _TIFFJPEGIsFullStripRequired, 
+                       _TIFFOpenExt, _TIFFOpenOptionsAlloc, _TIFFOpenOptionsFree, 
+                       _TIFFOpenOptionsSetErrorHandlerExtR, _TIFFOpenOptionsSetMaxSingleMemAlloc, 
+                       _TIFFOpenOptionsSetWarningHandlerExtR, _TIFFReadFromUserBuffer, 
+                       _TIFFReadGPSDirectory, _TIFFReadRGBAStripExt, _TIFFReadRGBATileExt, 
+                       _TIFFWarningExtR, __TIFFCastUInt64ToSSize, __TIFFCheckDirNumberAndOffset, 
                        __TIFFCheckFieldIsValidForCodec, __TIFFClampDoubleToFloat, 
-                       __TIFFClampDoubleToUInt32, __TIFFGetGpsFields, __TIFFMultiplySSize, 
-                       __TIFFReadEncodedStripAndAllocBuffer, __TIFFReadEncodedTileAndAllocBuffer, 
-                       __TIFFReadTileAndAllocBuffer, __TIFFSeekOK, __TIFFcalloc, 
-                       __Z12IsGoldenTestR16HYDRenderOptions, __Z14GetMetalDevicev, 
-                       __Z14computeFrustumRKN32pxrInternal_v0_20__pxrReserved__10GfMatrix4dE6CGSizeRK12CameraParams, 
+                       __TIFFClampDoubleToUInt32, __TIFFCleanupIFDOffsetAndNumberMaps, 
+                       __TIFFErrorEarly, __TIFFGetDirNumberFromOffset, __TIFFGetGpsFields, 
+                       __TIFFMultiplySSize, __TIFFReadEncodedStripAndAllocBuffer, 
+                       __TIFFReadEncodedTileAndAllocBuffer, __TIFFReadTileAndAllocBuffer, 
+                       __TIFFSeekOK, __TIFFcalloc, __TIFFcallocExt, __TIFFfreeExt, 
+                       __TIFFmallocExt, __TIFFreallocExt, __TIFFsetByteArrayExt, 
+                       __TIFFsetDoubleArrayExt, __TIFFsetFloatArrayExt, __TIFFsetLongArrayExt, 
+                       __TIFFsetShortArrayExt, __Z12IsGoldenTestR16HYDRenderOptions, 
+                       __Z14GetMetalDevicev, __Z14computeFrustumRKN32pxrInternal_v0_20__pxrReserved__10GfMatrix4dE6CGSizeRK12CameraParams, 
                        __Z14usd_initializev, __Z17pruneInvisibleRecP12HYDSceneNodeP5NSSetS2_l, 
                        __Z23buildHierarchialPathRecP15NSMutableStringP12HYDSceneNode, 
                        __Z5TFAddPKcPFvPvS1_ES0_, __Z9isVisibleP12HYDSceneNodeP5NSSetS2_, 

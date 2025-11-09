@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           8A24C119-BF49-378A-9D7C-BE0D75CC6C55
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           21392CC9-273B-3BFE-BFDC-5380A63B5F2A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 212.11
+current-version: 213.12
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _LPErrorDomain, _LPLinkMetadataTypeIdentifier, _LPLogChannelFetching, 

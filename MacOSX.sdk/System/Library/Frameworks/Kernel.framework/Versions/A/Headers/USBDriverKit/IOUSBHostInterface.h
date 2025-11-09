@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOUSBHostInterface.iig */
+/* iig(DriverKit-256.100.8) generated from IOUSBHostInterface.iig */
 
 /* IOUSBHostInterface.iig:1-39 */
 /*
@@ -560,7 +560,7 @@ public:
 
 #if !KERNEL
 
-class IOUSBHostInterfaceInterface : public OSInterface
+class  IOUSBHostInterfaceInterface : public OSInterface
 {
 public:
     virtual const IOUSBConfigurationDescriptor *

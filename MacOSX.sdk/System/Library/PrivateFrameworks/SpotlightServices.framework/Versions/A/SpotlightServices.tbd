@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B8EA5ED9-B23F-3C98-BC2E-756DAD398AA4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EFFDD077-2334-33BD-A14F-9379A8905421
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2230.7
+current-version: 2230.18
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MDItemAppStoreHasMetadataPlist, _MDItemTextContentConfidenceHigh, 
@@ -56,6 +49,7 @@ exports:
                        _PRSRankingDueDateBetweenNowAndOneHour, _PRSRankingDueDateBetweenNowAndTomorrow, 
                        _PRSRankingEmailAddressesInVIP, _PRSRankingEscapedWords, _PRSRankingExactCount, 
                        _PRSRankingExactMultiFieldsTCNearMatch, _PRSRankingFileBasedSettingsBundleString, 
+                       _PRSRankingFileProviderFilesBundleString, _PRSRankingFileProviderManagedFilesBundleString, 
                        _PRSRankingFilesBundleString, _PRSRankingFindMyBundleString, 
                        _PRSRankingFinderBundleString, _PRSRankingFontsBundleString, 
                        _PRSRankingIsFlagged, _PRSRankingItemRankerAddJunkFilter, 
@@ -197,7 +191,8 @@ exports:
                        _SSPhraseQueryUnquoteString, _SSPreferLocalResultsOnLocalEngagment, 
                        _SSQueryDisplayNameFuzzyQuery, _SSQueryEscapeString, _SSQueryParseResultsForQueryString, 
                        _SSQueryParserStripKindFromString, _SSResultBuilderTextSeparator, 
-                       _SSResultBundleIdContact, _SSResultBundleIdDocument, _SSResultBundleIdPeople, 
+                       _SSResultBundleIdContact, _SSResultBundleIdDocument, _SSResultBundleIdFileProviderDocument, 
+                       _SSResultBundleIdFileProviderManagedDocument, _SSResultBundleIdPeople, 
                        _SSResultBundleIdSuggestionContact, _SSResultBundleIdSuggestionEntity, 
                        _SSResultBundleIdSuggestionLocal, _SSResultBundleIdSuggestionParsec, 
                        _SSResultBundleIdSuggestionPeople, _SSResultBundleIdSuggestionPhoto, 
@@ -205,7 +200,8 @@ exports:
                        _SSResultBundleIdSuggestionSiri, _SSResultBundleIdSuggestionUserTypedString, 
                        _SSResultBundleIdWebSuggestionParsec, _SSResultBundleIdWebSuggestionUserTypedString, 
                        _SSResultTypeIsLocalSuggestion, _SSResultTypeIsServer, _SSResultTypeIsSuggestion, 
-                       _SSRoundDouble, _SSRoundUInt64, _SSScreenTimeStatusForApplicationPathWithCompletionHandler, 
+                       _SSRoundDouble, _SSRoundUInt64, _SSScreenTimeStatusClearCache, 
+                       _SSScreenTimeStatusForApplicationPathWithCompletionHandler, 
                        _SSScreenTimeStatusForBundleIDWithCompletionHandler, _SSScreenTimeStatusForFilePathWithCompletionHandler, 
                        _SSSearchInAppIdentifierPrefix, _SSSearchResultIdentifierShowMore, 
                        _SSSectionIdentifierPeopleResults, _SSSectionIdentifierPeopleSuggestions, 
@@ -230,12 +226,11 @@ exports:
                        _bundleFeatureHasAssociatedResultSetFeature, _comp, _comparatorForDateAttribute, 
                        _comparatorForFutureDateRecency, _comparatorForPastDateRecency, 
                        _comparatorWithBlock, _compareApplications, _compareBestLocalResults, 
-                       _comparePreferences, _compareSafariResults, _compareSameDatePreferences, 
-                       _compareShortcuts, _compareShortcutsNames, _countsArrayComparator, 
-                       _createConsonantsStringForKorean, _defaultValueForCrossAttributeFeature, 
-                       _defaultValueForResultSetSnippetFeature, _destroyQueryTermMatchCounts, 
-                       _doBlockCompression, _doBlockDecompression, _findIndexOfFirstGreaterOrEqualInRange, 
-                       _findMin, _formattedTextsForStringWithMatchesFromEvaluator, 
+                       _comparePreferences, _compareSafariResults, _compareShortcuts, 
+                       _compareShortcutsNames, _countsArrayComparator, _createConsonantsStringForKorean, 
+                       _defaultValueForCrossAttributeFeature, _defaultValueForResultSetSnippetFeature, 
+                       _destroyQueryTermMatchCounts, _doBlockCompression, _doBlockDecompression, 
+                       _findIndexOfFirstGreaterOrEqualInRange, _findMin, _formattedTextsForStringWithMatchesFromEvaluator, 
                        _formattedTextsForStringWithMatchesFromEvaluatorWithHeadTruncaction, 
                        _gExtraParam, _gShouldUpdateOnMax, _gShouldUpdateOnMin, _getBinForValue, 
                        _getCardSection, _getCompletedQuery, _getCorrectedQuery, _getDescriptionCardSection, 
@@ -288,10 +283,11 @@ exports:
                        _reorderRanges, _requiredParsecTextTypes, _restOfDay, _resultset_computation_ctx_destroy, 
                        _resultset_computation_ctx_init, _richTextForStringWithMatchesFromEvaluatorWithHeadTruncation, 
                        _sMaxAccumulator, _sMaxPicker, _sMeanAccumulator, _sMinAccumulator, 
-                       _sMinPicker, _sRankingQueryIndexDictionary, _shouldUpdateCrossAttributeFeature, 
-                       _shouldUpdateFuncForSnippetFeature, _strippedURL, _suffixTrimSetForMathQueries, 
-                       _syllableToConsonant, _syllableToConsonantCompatibility, _updateBatch, 
-                       _updateMatchCounts, _updateMatchCountsQueryMatchCounts, _updateMeEmailAddresses, 
+                       _sMinPicker, _sRankingQueryIndexDictionary, _screenTimeCacheLock, 
+                       _shouldUpdateCrossAttributeFeature, _shouldUpdateFuncForSnippetFeature, 
+                       _strippedURL, _suffixTrimSetForMathQueries, _syllableToConsonant, 
+                       _syllableToConsonantCompatibility, _updateBatch, _updateMatchCounts, 
+                       _updateMatchCountsQueryMatchCounts, _updateMeEmailAddresses, 
                        _updatePhoneFavoritesQuery, _updateVIPList, _updateVIPRankingQuery, 
                        _updatedCrossAttributeFeature, _utf32BEToHex, _whiteSpaceCharacterSet ]
     objc-classes:    [ LocaleObserver, NeighborItem, PRSAnonymousPipelineManager, 

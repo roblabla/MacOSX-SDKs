@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           DA6C7CFE-75A7-3FE2-BC86-AC32448B5776
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           ADC381FA-8C24-3EF6-BC0E-4A8E7DDB1882
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 520.0.240
+current-version: 541.0.110
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           94F92D05-6ECD-32C5-A59C-A066AD7F90D8
-  - target:          x86_64-maccatalyst
-    value:           94F92D05-6ECD-32C5-A59C-A066AD7F90D8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           840F5925-273F-39BF-81C3-9DC1E803DD7F
-  - target:          arm64e-maccatalyst
-    value:           840F5925-273F-39BF-81C3-9DC1E803DD7F
 install-name:    '/usr/lib/libtailspin.dylib'
-current-version: 139.3
+current-version: 153
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -32,9 +19,10 @@ exports:
                        _TSPDumpOptions_ExistingTailspinMode, _TSPDumpOptions_FilePath, 
                        _TSPDumpOptions_FullFSyncAfterEvents, _TSPDumpOptions_KtraceCompressionLevel, 
                        _TSPDumpOptions_MaxTimestamp, _TSPDumpOptions_MinTimestamp, 
-                       _TSPDumpOptions_NoSymbolicate, _TSPDumpOptions_OsLogArchive, 
-                       _TSPDumpOptions_ReasonString, _TSPDumpOptions_ResampleTruncatedStacks, 
-                       _TSPDumpOptions_ScrubOutput, _TSPDumpOptions_TargetPID, _TSPDumpOptions_UseDsymForUUID, 
+                       _TSPDumpOptions_MinTraceBufferDurationSec, _TSPDumpOptions_NoSymbolicate, 
+                       _TSPDumpOptions_OsLogArchive, _TSPDumpOptions_ReasonString, 
+                       _TSPDumpOptions_ResampleTruncatedStacks, _TSPDumpOptions_ScrubOutput, 
+                       _TSPDumpOptions_TargetPID, _TSPDumpOptions_UseDsymForUUID, 
                        _TSPMetadata_AGXVersionKey, _TSPMetadata_AutomatedDeviceGroupKey, 
                        _TSPMetadata_CountryCodeKey, _TSPMetadata_HWMemSizeKey, _TSPMetadata_HWModelKey, 
                        _TSPMetadata_HWPageSizeKey, _TSPMetadata_HardwareKeyboardKey, 
@@ -70,14 +58,14 @@ exports:
                        _TSPTimeSnapshot_MachAbsTimeKey, _TSPTimeSnapshot_MachContTimeKey, 
                        _TSPTimeSnapshot_TimeZoneDSTTimeKey, _TSPTimeSnapshot_TimeZoneMinutesWestKey, 
                        _TSPTimeSnapshot_WallTimeNSecsKey, _TSPTimeSnapshot_WallTimeSecsKey, 
-                       _add_binary_info_to_binary_dictionary, _do_symbolicate_server, 
-                       _get_responsible_pid_and_name, _get_tailspin_ondisk_config, 
-                       _get_tailspin_profile_config, _get_tailspin_tasking_config, 
-                       _is_apple_internal_setting, _main_binary_for_pid_in_ktrace, 
-                       _set_config_field_modifier, _tailspin_augment_output, _tailspin_buffer_size_get, 
-                       _tailspin_buffer_size_get_default, _tailspin_buffer_size_is_default, 
-                       _tailspin_buffer_size_reset, _tailspin_buffer_size_set, _tailspin_compress_file, 
-                       _tailspin_config_apply, _tailspin_config_apply_sync, _tailspin_config_copy_description, 
+                       _add_binary_info_to_binary_dictionary, _get_responsible_pid_and_name, 
+                       _get_tailspin_ondisk_config, _get_tailspin_profile_config, 
+                       _get_tailspin_tasking_config, _is_apple_internal_setting, 
+                       _main_binary_for_pid_in_ktrace, _set_config_field_modifier, 
+                       _tailspin_augment_output, _tailspin_buffer_size_get, _tailspin_buffer_size_get_default, 
+                       _tailspin_buffer_size_is_default, _tailspin_buffer_size_reset, 
+                       _tailspin_buffer_size_set, _tailspin_compress_file, _tailspin_config_apply, 
+                       _tailspin_config_apply_sync, _tailspin_config_copy_description, 
                        _tailspin_config_create_new, _tailspin_config_create_with_config, 
                        _tailspin_config_create_with_current_state, _tailspin_config_create_with_default_config, 
                        _tailspin_config_free, _tailspin_currently_running, _tailspin_dump_output, 
@@ -101,7 +89,6 @@ exports:
                        _tailspin_start_artrace, _tailspin_start_artrace_sync, _tailspin_stop_artrace, 
                        _tailspin_stop_artrace_sync, _tailspin_symbolicate_file_async, 
                        _tailspin_symbolicator_copy_symbol_data_using_uuid_pid_path, 
-                       _tailspin_symbolicator_create, _tailspin_symbolicator_destroy, 
                        _tailspin_write_metadata_chunk, _tailspin_write_os_signpost_support_chunks, 
                        _tailspin_write_symbolless_binary_info_chunk ]
 ...

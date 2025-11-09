@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F6F25B67-E0DD-3964-A5AE-55882F1561E9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           68F5C68D-9C06-3BE1-9F23-ED14C1F7B0D5
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircleUI.framework/Versions/A/FamilyCircleUI'
 swift-abi-version: 7
 exports:
@@ -18,7 +11,6 @@ exports:
                        '_$s14FamilyCircleUI015PurchaseSharingA5CacheCMn', '_$s14FamilyCircleUI015PurchaseSharingA5CacheCMo', 
                        '_$s14FamilyCircleUI015PurchaseSharingA5CacheCMu', '_$s14FamilyCircleUI015PurchaseSharingA5CacheCN', 
                        '_$s14FamilyCircleUI015PurchaseSharingA5CacheCfD', '_$s14FamilyCircleUI015PurchaseSharingA5CacheCfd', 
-                       '_$s14FamilyCircleUI015PurchaseSharingA5CacheCyACSScfC', '_$s14FamilyCircleUI015PurchaseSharingA5CacheCyACSScfc', 
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheC3getySo8NSObjectCSgAA0aF3KeyVFTj', 
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheC3getySo8NSObjectCSgAA0aF3KeyVFTq', 
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheC3set_5valueyAA0aF3KeyV_So8NSObjectCtFTj', 
@@ -30,8 +22,6 @@ exports:
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheCMn', '_$s14FamilyCircleUI06SimpleA11ServerCacheCMo', 
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheCMu', '_$s14FamilyCircleUI06SimpleA11ServerCacheCN', 
                        '_$s14FamilyCircleUI06SimpleA11ServerCacheCfD', '_$s14FamilyCircleUI06SimpleA11ServerCacheCfd', 
-                       '_$s14FamilyCircleUI06SimpleA11ServerCacheCyACSScfC', '_$s14FamilyCircleUI06SimpleA11ServerCacheCyACSScfCTj', 
-                       '_$s14FamilyCircleUI06SimpleA11ServerCacheCyACSScfCTq', '_$s14FamilyCircleUI06SimpleA11ServerCacheCyACSScfc', 
                        '_$s14FamilyCircleUI0A15InviteAnalyticsC04sendA16SuggestionsEvent06familyG5Count18hasBoostedContactsySi_SbtFTj', 
                        '_$s14FamilyCircleUI0A15InviteAnalyticsC04sendA16SuggestionsEvent06familyG5Count18hasBoostedContactsySi_SbtFTq', 
                        '_$s14FamilyCircleUI0A15InviteAnalyticsC04sendaD16InteractionEvent6action11inviteState10isReceiverySS_SSSbtFTj', 
@@ -50,11 +40,10 @@ exports:
                        '_$s14FamilyCircleUI0A15InviteAnalyticsCACycfc', '_$s14FamilyCircleUI0A15InviteAnalyticsCMa', 
                        '_$s14FamilyCircleUI0A15InviteAnalyticsCMn', '_$s14FamilyCircleUI0A15InviteAnalyticsCMo', 
                        '_$s14FamilyCircleUI0A15InviteAnalyticsCMu', '_$s14FamilyCircleUI0A15InviteAnalyticsCN', 
-                       '_$s14FamilyCircleUI0A15InviteAnalyticsCfD', '_$s14FamilyCircleUI0A15LandingMainPageV05SwiftC04ViewAAMc', 
-                       '_$s14FamilyCircleUI0A15LandingMainPageV13settingsModel7contextAcA0a8SettingsH8Provider_p_AA19FAFamilyViewContextCtcfC', 
+                       '_$s14FamilyCircleUI0A15InviteAnalyticsCfD', '_$s14FamilyCircleUI0A15LandingMainPageV13settingsModel7contextACyxGx_AA19FAFamilyViewContextCtcfC', 
                        '_$s14FamilyCircleUI0A15LandingMainPageV4bodyQrvg', '_$s14FamilyCircleUI0A15LandingMainPageV4bodyQrvpMV', 
                        '_$s14FamilyCircleUI0A15LandingMainPageV4bodyQrvpQOMQ', '_$s14FamilyCircleUI0A15LandingMainPageVMa', 
-                       '_$s14FamilyCircleUI0A15LandingMainPageVMn', '_$s14FamilyCircleUI0A15LandingMainPageVN', 
+                       '_$s14FamilyCircleUI0A15LandingMainPageVMn', '_$s14FamilyCircleUI0A15LandingMainPageVyxG05SwiftC04ViewAAMc', 
                        '_$s14FamilyCircleUI0A18ChecklistAnalyticsC014sendCommLimitsE5EventyyFTj', 
                        '_$s14FamilyCircleUI0A18ChecklistAnalyticsC014sendCommLimitsE5EventyyFTq', 
                        '_$s14FamilyCircleUI0A18ChecklistAnalyticsC017sendChildSettingsE5EventyyFTj', 
@@ -129,12 +118,13 @@ exports:
                        '_$s14FamilyCircleUI0A21SettingsModelProviderP24familyEventURLParametersSDyS2SGvgTq', 
                        '_$s14FamilyCircleUI0A21SettingsModelProviderP24familyEventURLParametersSDyS2SGvsTj', 
                        '_$s14FamilyCircleUI0A21SettingsModelProviderP24familyEventURLParametersSDyS2SGvsTq', 
-                       '_$s14FamilyCircleUI0A21SettingsModelProviderTL', '_$s14FamilyCircleUI0A22MemberDetailsSplitViewV05SwiftC00G0AAMc', 
-                       '_$s14FamilyCircleUI0A22MemberDetailsSplitViewV4bodyQrvg', 
+                       '_$s14FamilyCircleUI0A21SettingsModelProviderP7Combine16ObservableObjectTb', 
+                       '_$s14FamilyCircleUI0A21SettingsModelProviderTL', '_$s14FamilyCircleUI0A22MemberDetailsSplitViewV4bodyQrvg', 
                        '_$s14FamilyCircleUI0A22MemberDetailsSplitViewV4bodyQrvpMV', 
                        '_$s14FamilyCircleUI0A22MemberDetailsSplitViewV4bodyQrvpQOMQ', 
                        '_$s14FamilyCircleUI0A22MemberDetailsSplitViewVMa', '_$s14FamilyCircleUI0A22MemberDetailsSplitViewVMn', 
-                       '_$s14FamilyCircleUI0A22MemberDetailsSplitViewVN', '_$s14FamilyCircleUI0A24SettingsExtensionHelpersC13isAccountSame7account05otherH0SbSo9ACAccountC_AHtFTj', 
+                       '_$s14FamilyCircleUI0A22MemberDetailsSplitViewVyxG05SwiftC00G0AAMc', 
+                       '_$s14FamilyCircleUI0A24SettingsExtensionHelpersC13isAccountSame7account05otherH0SbSo9ACAccountC_AHtFTj', 
                        '_$s14FamilyCircleUI0A24SettingsExtensionHelpersC13isAccountSame7account05otherH0SbSo9ACAccountC_AHtFTq', 
                        '_$s14FamilyCircleUI0A24SettingsExtensionHelpersCACycfC', 
                        '_$s14FamilyCircleUI0A24SettingsExtensionHelpersCACycfCTj', 
@@ -421,8 +411,6 @@ exports:
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC22locationSharingServiceSo08FASharedJ0CSgvpMV', 
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC7Combine16ObservableObjectAAMc', 
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC7account13familyMembersACSo9ACAccountC_SaySo14FAFamilyMemberCGtcfC', 
-                       '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC7account13familyMembersACSo9ACAccountC_SaySo14FAFamilyMemberCGtcfCTj', 
-                       '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC7account13familyMembersACSo9ACAccountC_SaySo14FAFamilyMemberCGtcfCTq', 
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC7account13familyMembersACSo9ACAccountC_SaySo14FAFamilyMemberCGtcfc', 
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC9firstLoadyyFTj', 
                        '_$s14FamilyCircleUI30SubscriptionServicesDataLoaderC9firstLoadyyFTq', 

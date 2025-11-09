@@ -1,8 +1,12 @@
-/*
-  GKVoiceChatService.h
+//
+//  GKVoiceChatService.h
+//  Game Center
+//
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
+//
 
-  Copyright 2010 Apple Inc. All rights reserved.
- 
+/*
+
  This service is useful for setting up a voice chat in two cases.
  1) You have a server that connects two clients, but you have no way of establishing a peer-to-peer channel.
     An example of this case is if you had an xmpp (jabber) client, and wanted to add voice chat.

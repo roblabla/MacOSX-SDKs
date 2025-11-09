@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           11A243C4-2A64-3371-B661-9F36E30A3C89
-  - target:          x86_64-maccatalyst
-    value:           11A243C4-2A64-3371-B661-9F36E30A3C89
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           43B4ECA5-CA71-31A7-8106-442A3A0A00E1
-  - target:          arm64e-maccatalyst
-    value:           43B4ECA5-CA71-31A7-8106-442A3A0A00E1
 install-name:    '/System/Library/PrivateFrameworks/CVNLP.framework/Versions/A/CVNLP'
 current-version: 119
 exports:

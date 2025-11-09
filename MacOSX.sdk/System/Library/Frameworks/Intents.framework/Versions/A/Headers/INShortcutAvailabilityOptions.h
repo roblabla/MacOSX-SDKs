@@ -2,7 +2,7 @@
 //  INShortcutAvailabilityOptions.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef INShortcutAvailabilityOptions_h

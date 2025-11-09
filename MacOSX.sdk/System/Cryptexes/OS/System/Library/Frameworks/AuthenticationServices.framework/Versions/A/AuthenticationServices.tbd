@@ -1,18 +1,25 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           104C8615-9F2E-3C03-A9A6-CA90CF14058A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F151CD0D-53EC-3780-97AC-6167A68A067C
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 614.3.7
+current-version: 615.1.26
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
+    symbols:         [ '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12relyingPartySSvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12relyingPartySSvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV4nameSSvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV4nameSSvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVMa', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVMn', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialVN', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaF', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaFTu', 
+                       _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
                        _ASAuthorizationAppleIDProviderCredentialRevokedNotification, 
                        _ASAuthorizationErrorDomain, _ASAuthorizationOperationImplicit, 
                        _ASAuthorizationOperationLogin, _ASAuthorizationOperationLogout, 
@@ -32,7 +39,7 @@ exports:
                        _ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC, 
                        _ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB, 
                        _ASCredentialIdentityStoreErrorDomain, _ASExtensionErrorDomain, 
-                       _ASPasswordManagerIconFilePath, _ASWebAuthenticationSessionErrorDomain, 
+                       _ASPasswordManagerIconBundlePath, _ASWebAuthenticationSessionErrorDomain, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsEphemeralBrowserSessionKey, 
@@ -55,14 +62,16 @@ exports:
                        ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest, 
                        ASAuthorizationSingleSignOnCredential, ASAuthorizationSingleSignOnProvider, 
                        ASAuthorizationSingleSignOnRequest, ASAuthorizationViewController, 
+                       ASAuthorizationWebBrowserPlatformPublicKeyCredential, ASAuthorizationWebBrowserPublicKeyCredentialManager, 
                        ASCredentialIdentityStore, ASCredentialIdentityStoreState, 
                        ASCredentialProviderExtensionContext, ASCredentialProviderViewController, 
                        ASCredentialServiceIdentifier, ASPasswordCredential, ASPasswordCredentialIdentity, 
                        ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
                        ASWebAuthenticationSessionRequestClient, ASWebAuthenticationSessionWebBrowserSessionManager, 
-                       _ASCredentialListViewController, _ASCredentialProviderExtensionConfigurationViewController, 
+                       _ASAccountManagerTipContent, _ASAccountManagerTipManager, 
+                       _ASCredentialAuthenticationViewController, _ASCredentialListViewController, 
+                       _ASCredentialProviderExtensionConfigurationViewController, 
                        _ASExtensionViewController, _ASIncomingCallObserver, _ASPasskeysLearnMoreContent, 
-                       _ASPasswordCredentialAuthenticationViewController, _ASPasswordManagerDeleteAlertConfiguration, 
-                       _ASPasswordManagerIconController, _ASPasswordManagerMacFrameworksTrampoline, 
-                       _ASWebAuthenticationSessionRequestServer ]
+                       _ASPasswordManagerDeleteAlertConfiguration, _ASPasswordManagerIconController, 
+                       _ASPasswordManagerMacFrameworksTrampoline, _ASWebAuthenticationSessionRequestServer ]
 ...

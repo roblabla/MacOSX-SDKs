@@ -12,116 +12,226 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(15.0))
 
+/// A class that supports safely sharing Thread credentials between multiple
+/// clients.
+///
+/// Request credentials for either a specific Thread network or for the
+/// _preferred network_ using `THClient`. The preferred network is the default
+/// Thread network chosen by the framework for a home.
+///
+/// The ThreadNetwork framework maintains a database of network credentials. The
+/// class allows clients to store, list, and delete credentials for a given
+/// network from the database.
+///
+/// Some methods in `THClient` use the _team ID_, a string that you store in
+/// your application’s `Info.plist`. The ThreadNetwork framework uses the team
+/// ID to preserve the privacy of the Thread network credentials across
+/// different clients. For example, credentials stored by one client can’t be
+/// deleted or modified by another client.
+///
+/// - Important: Thread credentials give you the ability to add any device into
+///   the Thread network. Use this information responsibly.
 @interface THClient : NSObject
 
-/*
- * @function init
- *
- * @discussion
- * Initialize instance of THClient
- *
- * @parameter
- * no parameters
- */
-
+/// Creates the client object.
+///
+/// - Returns: An instance of the client object.
 - (instancetype)init API_AVAILABLE(ios(15.0));
 
-/*
- * @function retrieveAllCredentials
- *
- * @discussion
- * Retrieve All Credentials, stored by the client
- *
- * @parameter
- * completion : Callback function to receive all credentials
- *
- */
+/// Requests all Thread credentials from the framework.
+///
+/// The framework identifies the developer by the team ID. When calling this
+/// method, you receive credentials for your team ID only.
+///
+/// - Parameters:
+///   - completion: The completion handler the framework calls when the
+///     credentials become available.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func allCredentials() async throws -> Set<THCredentials>
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)retrieveAllCredentials:(void (^)(NSSet<THCredentials*>* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(allCredentials());
 
-/*
- * @function deleteActiveDataSetRecordForBorderAgent
- *
- * @discussion
- * Delete Credentials For The given Border Agent identifier, stored by the client
- *
- * @parameter
- * borderAgentID : Thread Network Border Agent Identifier
- * @parameter
- * completion : Callback function to return the status of the delete operation
- *
- */
+/// Requests all Thread credentials with active border routers around from the framework.
+///
+/// The framework identifies the developer by the team ID. When calling this
+/// method, you will receive credentials for active border routers around.
+/// You receive credentials for your team ID only.
+///
+/// - Parameters:
+///   - completion: The completion handler the framework calls when the
+///     credentials become available.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func allActiveCredentials() async throws -> Set<THCredentials>
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+- (void)retrieveAllActiveCredentials:(void (^)(NSSet<THCredentials*>* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(allActiveCredentials());
+
+/// Deletes Thread network credentials from the framework database for a Border
+/// Agent.
+///
+/// The Border Agent is the software component running in the Border Router
+/// responsible for advertising itself in the Wi-Fi or Ethernet network.
+///
+/// - Parameters:
+///   - borderAgentID: The identifer of a Thread network Border Agent.
+///   - completion: The completion handler the framework calls after deleting
+///     the credentials.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func deleteCredentials(forBorderAgent borderAgentID: Data) async throws
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)deleteCredentialsForBorderAgent:(NSData *)borderAgentID completion:(void (^)(NSError* _Nullable error))completion API_AVAILABLE(ios(15.0));
 
-/*
- * @function retrieveCredentialsForBorderAgent
- *
- * @discussion
- * Retrieve Credentials For The given Thread Border Agent identifier, stored by the client
- *
- * @parameter
- * completion : Callback function to receive the matching active dataset record
- *
- */
+/// Requests Thread credentials for a Border Agent.
+///
+/// The framework identifies the developer by the team ID. When calling this
+/// method, you receive credentials for your team ID only.
+///
+/// - Parameters:
+///   - borderAgentID: The identifer of a Thread network Border Agent.
+///   - completion: The completion handler the framework calls when the
+///     credentials become available.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func credentials(forBorderAgentID borderAgentID: Data) async throws -> THCredentials
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)retrieveCredentialsForBorderAgent:(NSData *)borderAgentID completion:( void (^)(THCredentials* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(credentials(forBorderAgentID:));
 
-/*
- * @function storeCredentialsForBorderAgent
- *
- * @discussion
- * Store the Credentials Record
- *
- * @parameters
- * borderAgent              : Border Agent Identifier
- * activeOperationalDataSet : byte array of active operational dataset
- * completion               : Callback function to return the status of the store operation
- *
- */
-
+/// Stores Thread network credentials into the framework database
+/// that a Border Agent provides.
+///
+/// The Border Agent is the software component running in the
+/// Border Router responsible for advertising itself in the Wi-Fi
+/// or Ethernet network.
+///
+/// The framework only stores credentials if it can find an mDNS
+/// record for the Border Agent that contains the specified Border
+/// Agent identifier.
+///
+/// - Parameters:
+///   - borderAgentID: The identifer of an active Thread network Border Agent.
+///   - activeOperationalDataSet: The essential operational parameters for the
+///     Thread network.
+///   - completion: The completion handler the framework calls after
+/// storing the credentials.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func storeCredentials(forBorderAgent borderAgentID: Data, activeOperationalDataSet: Data) async throws
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)storeCredentialsForBorderAgent:(NSData *)borderAgentID
               activeOperationalDataSet:(NSData *)activeOperationalDataSet
                             completion:(void (^)(NSError* _Nullable error))completion API_AVAILABLE(ios(15.0));
 
-/*
- * @function retrievePreferredCredentials
- *
- * @discussion
- * Retrieve Preferred Thread Network Credentials.
- * Invoking this API will result into UI Alert prompt seeking user's permission to access the credentials
- *
- * @parameter
- * completion : Callback function to receive preferred network active dataset record
- *
- */
+/// Requests Thread credentials for the preferred network.
+///
+/// When you call this method, an alert appears asking for user permission to
+/// access credentials.
+///
+/// - Parameters:
+///   - completion: The completion handler the framework calls when the
+///     credentials become available.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func preferredCredentials() async throws -> THCredentials
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)retrievePreferredCredentials:(void (^)(THCredentials* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(preferredCredentials());
 
-/*
- * @function retrieveActiveDataSetRecordForExtendedPANID
- *
- * @discussion
- * Retrieve Credentials For The given Extended-PAN Id
- * Invoking this API will result into UI Alert prompt seeking user's permission to access the credentials
- *
- * @parameter
- * extendedPANID    : Extended PAN Id identifying the thread network
- * completion       : Callback function to receive the matching active dataset record
- *
- */
+/// Requests Thread credentials for an extended Personal Area Network (PAN) ID.
+///
+/// When calling this method, an alert appears asking for user permission to
+/// access credentials.
+///
+/// - Parameters:
+///   - extendedPANID: The extended PAN identifier.
+///   - completion: The completion handler the framework calls when the
+///     credentials become available.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func credentials(forExtendedPANID extendedPANID: Data) async throws -> THCredentials
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)retrieveCredentialsForExtendedPANID:(NSData *)extendedPANID completion:( void (^)(THCredentials* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(credentials(forExtendedPANID:));
 
-/*
- * @function checkPreferredNetworkForActiveOperationalDataset
- *
- * @discussion
- * Returns true if the dataset matches to the preferred network
- *
- * @parameters
- * activeOperationalDataSet : byte array of active operational dataset
- * completion               : Callback function gives true if dataset matches to preferred network, else false
- *
- */
-
+/// Determines if the essential operating parameters match the preferred
+/// network’s parameters.
+///
+/// - Parameters:
+///   - activeOperationalDataSet: The essential operating parameters to compare
+///     against the preferred network’s parameters.
+///   - completion: The completion handler that returns the result of the
+///     comparison.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func isPreferred(forActiveOperationalDataset activeOperationalDataSet: Data) async -> Bool
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)checkPreferredNetworkForActiveOperationalDataset:(NSData *)activeOperationalDataSet
                                            completion:(void (^)(BOOL isPreferred))completion API_AVAILABLE(ios(15.0))   NS_SWIFT_ASYNC_NAME(isPreferred(forActiveOperationalDataset:));
+
+/// Determines if the preferred network is available or not
+///
+/// - Parameters:
+///   - completion: The completion handler that returns the result of the
+///     preferred network availability.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func isPreferredAvailable() async -> Bool
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+- (void)isPreferredNetworkAvailableWithCompletion:(void (^)(BOOL isPreferredAvailable))completion API_AVAILABLE(ios(15.0))   NS_SWIFT_ASYNC_NAME(isPreferredAvailable());
+
 @end
 
 NS_ASSUME_NONNULL_END

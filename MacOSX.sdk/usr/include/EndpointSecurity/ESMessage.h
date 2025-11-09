@@ -202,7 +202,10 @@ typedef struct {
  * @brief Execute a new process
  *
  * @field target The new process that is being executed
- * @field reserved0 This field must not be accessed directly (see notes)
+ * @field dyld_exec_path The exec path passed up to dyld, before symlink resolution.
+ *        This is the path argument to execve(2) or posix_spawn(2), or the interpreter
+ *        from the shebang line for scripts run through the shell script image activator.
+ *        Field available only if message version >= 7.
  * @field script Script being executed by interpreter. This field is only valid if a script was
  *        executed directly and not as an argument to the interpreter (e.g. `./foo.sh` not `/bin/sh ./foo.sh`)
  *        Field available only if message version >= 2.
@@ -252,7 +255,7 @@ typedef struct {
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	es_token_t reserved0;
+	es_string_token_t dyld_exec_path; /* field available only if message version >= 7 */
 	union {
 		uint8_t reserved[64];
 		struct {
@@ -1606,7 +1609,7 @@ typedef struct {
 /**
  * @brief Notification that Screen Sharing has attached to a graphical session.
  *
- * @field success               True iff remediation was successful.
+ * @field success               True iff Screen Sharing successfully attached.
  * @field source_address_type   Type of source address.
  * @field source_address        Optional.  Source address of connection, or NULL.
  *                              Depending on the transport used, the source

@@ -246,11 +246,11 @@ static OBJC_INLINE id objc_allocate_object(Class cls, int extra)
 #endif
 
 OBJC_GC_DEPRECATED("it does nothing")
-static OBJC_INLINE void objc_registerThreadWithCollector() { }
+static OBJC_INLINE void objc_registerThreadWithCollector(void) { }
 OBJC_GC_DEPRECATED("it does nothing")
-static OBJC_INLINE void objc_unregisterThreadWithCollector() { }
+static OBJC_INLINE void objc_unregisterThreadWithCollector(void) { }
 OBJC_GC_DEPRECATED("it does nothing")
-static OBJC_INLINE void objc_assertRegisteredThreadWithCollector() { }
+static OBJC_INLINE void objc_assertRegisteredThreadWithCollector(void) { }
 
 /* defined(OBJC_NO_GC) */
 #endif

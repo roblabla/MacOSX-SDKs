@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           82963280-A3E5-3D84-AF15-4E1850AA8AF6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           329A0C97-2AA8-3A4E-B6BA-6E3B5A5C9372
 install-name:    '/System/Library/PrivateFrameworks/RemoteServiceDiscovery.framework/Versions/A/RemoteServiceDiscovery'
-current-version: 95.60.4
+current-version: 103.100.10
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _bridge_version_compare, _bridge_version_copy_current_string, 
@@ -50,11 +43,15 @@ exports:
                        _remote_service_create_connected_socket, _remote_service_get_name, 
                        _remote_service_get_version, _remote_service_get_xpc_remote_connection_version_flags, 
                        _remote_service_listen, _remote_service_listen_with_device, 
-                       _remote_service_set_connect_timeout, _remote_service_supports_feature, 
+                       _remote_service_set_connect_timeout, _remote_service_set_keepalive, 
+                       _remote_service_set_keepalive_time, _remote_service_set_keepcount, 
+                       _remote_service_set_keepinterval, _remote_service_supports_feature, 
                        _remote_socket_create_connected_ipv6_pair, _remote_socket_poll_connect_async, 
                        _remote_socket_poll_connect_sync ]
     objc-classes:    [ OS_remote_device, OS_remote_device_browser, OS_remote_service ]
     objc-ivars:      [ OS_remote_device.device_alias, OS_remote_device.device_name, 
                        OS_remote_service.connect_timeout, OS_remote_service.connection, 
-                       OS_remote_service.device, OS_remote_service.name, OS_remote_service.properties ]
+                       OS_remote_service.device, OS_remote_service.keepalive, OS_remote_service.keepalive_time, 
+                       OS_remote_service.keepcount, OS_remote_service.keepinterval, 
+                       OS_remote_service.name, OS_remote_service.properties ]
 ...

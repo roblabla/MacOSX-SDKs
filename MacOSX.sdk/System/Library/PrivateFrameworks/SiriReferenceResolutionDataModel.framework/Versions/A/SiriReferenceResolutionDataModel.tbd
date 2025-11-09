@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2BA9C5BF-D5DB-3A6B-B26F-60B44B07BBE8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           84968BAC-98C3-3389-95AD-4D76924A8102
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolutionDataModel.framework/Versions/A/SiriReferenceResolutionDataModel'
 swift-abi-version: 7
 exports:
@@ -133,6 +126,7 @@ exports:
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO11mentionedAtyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO12nowPlayingAtyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO22notificationReceivedAtyA2CmFWC', 
+                       '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO8nearbyAtyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO8rawValueACSgSS_tcfC', 
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO8rawValueSSvg', 
                        '_$s32SiriReferenceResolutionDataModel16RRAnnotationNameO8rawValueSSvpMV', 
@@ -280,6 +274,13 @@ exports:
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8metadataSayAA10RRMetadataOGvpMV', 
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8metadataSayAA10RRMetadataOGvsTj', 
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8metadataSayAA10RRMetadataOGvsTq', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvMTj', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvMTq', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvgTj', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvgTq', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvpMV', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvsTj', 
+                       '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityC8nearbyAt10Foundation4DateVSgvsTq', 
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityCACycfC', 
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityCACycfc', 
                        '_$s32SiriReferenceResolutionDataModel17RRAnnotatedEntityCMa', 
@@ -377,6 +378,7 @@ exports:
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO4fromACs7Decoder_p_tKcfC', 
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO4hash4intoys6HasherVz_tF', 
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO6encode2toys7Encoder_p_tKF', 
+                       '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO6nearbyyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO6visualyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueO8onScreenyA2CmFWC', 
                        '_$s32SiriReferenceResolutionDataModel25RRDataSourceMetadataValueOMa', 

@@ -130,7 +130,7 @@ MPS_SWIFT_NAME( init(_:) );
 
 /*! @abstract   Initialize an MPSGraphTensorData with an MPSImage batch, the dataLayout used will be NHWC,
  *              call a transpose or permute to change to a layout of your choice.
- *  @param      imageBatch  The device on which the kernel will run
+ *  @param      imageBatch  The device on which the kernel will run, unorm8 and unorm16 images will create a float32 tensorData
  *  @return     A valid MPSGraphTensorData, or nil if allocation failure.
  */
 -(instancetype) initWithMPSImageBatch:(MPSImageBatch *) imageBatch

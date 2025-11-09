@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           C7A01EF5-F297-3B19-9BC7-7D9DC17BC85A
-  - target:          x86_64-maccatalyst
-    value:           C7A01EF5-F297-3B19-9BC7-7D9DC17BC85A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AC24509A-5D4C-37AA-B331-14A3D63A3908
-  - target:          arm64e-maccatalyst
-    value:           AC24509A-5D4C-37AA-B331-14A3D63A3908
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2140.6.2
+current-version: 2150.23.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

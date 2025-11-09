@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           4B36E225-21FF-30D8-A1BA-7B1E9D25EEEE
-  - target:          x86_64-maccatalyst
-    value:           4B36E225-21FF-30D8-A1BA-7B1E9D25EEEE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2F72D0B9-F0BD-38AD-AF6F-E3586708DBC5
-  - target:          arm64e-maccatalyst
-    value:           2F72D0B9-F0BD-38AD-AF6F-E3586708DBC5
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -63,7 +50,7 @@ exports:
                        _ASDUpdateItemMetricsInstallStart, _ASDUpdateItemMetricsPurchaseCompleteDate, 
                        _ASDUpdateItemMetricsPurchaseStartDate, _ASDUpdateServiceDidChangeNotification, 
                        _ASDUserActivityUniqueIdentifierArcadeTab, _ASDUserPresentableErrorDomain, 
-                       _CreateLogContext, _kASDPurchaseHistoryQuerySortOptionDate ]
+                       _kASDPurchaseHistoryQuerySortOptionDate ]
     objc-classes:    [ ASDAccountLookupRequest, ASDAccountLookupRequestOptions, ASDAccountLookupResponse, 
                        ASDAggregateClusterMappingData, ASDApp, ASDAppClusterMapping, 
                        ASDAppEvent, ASDAppLibrary, ASDAppMetricsEvent, ASDAppMetricsService, 

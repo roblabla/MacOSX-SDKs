@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           92634324-F2EB-37AD-A011-EE46422429FC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D590BC7A-91B5-3319-A698-269F356EC9A6
 install-name:    '/System/Library/Frameworks/Automator.framework/Versions/A/Automator'
 current-version: 0
 exports:

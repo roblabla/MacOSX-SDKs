@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9EB3E6F9-C56A-3A49-895D-EA63C9537AC8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D8895D46-775B-323D-8C95-BE1995719C6B
 install-name:    '/System/Library/PrivateFrameworks/DEPClientLibrary.framework/Versions/A/DEPClientLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

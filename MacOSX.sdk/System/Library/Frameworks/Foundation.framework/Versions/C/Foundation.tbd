@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           AB5F8DB8-B03B-33B6-98F7-FFAEC27A8EAB
-  - target:          x86_64-maccatalyst
-    value:           AB5F8DB8-B03B-33B6-98F7-FFAEC27A8EAB
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F1F5F857-8C3C-36D5-BC27-7702D6795468
-  - target:          arm64e-maccatalyst
-    value:           F1F5F857-8C3C-36D5-BC27-7702D6795468
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 1953.255
+current-version: 1971
 compatibility-version: 300
 swift-abi-version: 7
 reexported-libraries:
@@ -26581,8 +26568,7 @@ exports:
                        NSXPCCoder, NSXPCConnection, NSXPCInterface, NSXPCListener, 
                        NSXPCListenerEndpoint, NSZipFileArchive, _NSAttributedStringGrammar, 
                        _NSAttributedStringGrammarInflection, _NSBundleODRTag, _NSCloudSharingDescriptor, 
-                       _NSExtensionContextVendor, _NSKVOCompatibility, _NSLexicon, 
-                       _NSLexiconLemma, _NSLexiconWord, _NSLocalizedStringResource, 
+                       _NSExtensionContextVendor, _NSKVOCompatibility, _NSLocalizedStringResource, 
                        _NSSharedValueTransformer, _NSStringFormattingOptions ]
     objc-ivars:      [ NSBlockPredicate._block, NSComplexOrthography._dominantScript, 
                        NSComplexOrthography._languageMap, NSComplexOrthography._orthographyFlags, 
@@ -29444,6 +29430,10 @@ exports:
                        '_$s10Foundation17URLResourceValuesV13totalFileSizeSiSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV13volumeIsLocalSbSgvg', 
                        '_$s10Foundation17URLResourceValuesV13volumeIsLocalSbSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV13volumeSubtypeSiSgvg', 
+                       '_$s10Foundation17URLResourceValuesV13volumeSubtypeSiSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV14fileIdentifiers6UInt64VSgvg', 
+                       '_$s10Foundation17URLResourceValuesV14fileIdentifiers6UInt64VSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV14fileProtectionSo09NSURLFileE4TypeaSgvg', 
                        '_$s10Foundation17URLResourceValuesV14fileProtectionSo09NSURLFileE4TypeaSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV14isMountTriggerSbSgvg', 
@@ -29454,6 +29444,8 @@ exports:
                        '_$s10Foundation17URLResourceValuesV14localizedLabelSSSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV14typeIdentifierSSSgvg', 
                        '_$s10Foundation17URLResourceValuesV14typeIdentifierSSSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV14volumeTypeNameSSSgvg', 
+                       '_$s10Foundation17URLResourceValuesV14volumeTypeNameSSSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV15isUserImmutableSbSgvM', 
                        '_$s10Foundation17URLResourceValuesV15isUserImmutableSbSgvg', 
                        '_$s10Foundation17URLResourceValuesV15isUserImmutableSbSgvpMV', 
@@ -29548,6 +29540,8 @@ exports:
                        '_$s10Foundation17URLResourceValuesV23contentModificationDateAA0F0VSgvs', 
                        '_$s10Foundation17URLResourceValuesV23volumeAvailableCapacitySiSgvg', 
                        '_$s10Foundation17URLResourceValuesV23volumeAvailableCapacitySiSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV23volumeMountFromLocationSSSgvg', 
+                       '_$s10Foundation17URLResourceValuesV23volumeMountFromLocationSSSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV23volumeSupportsHardLinksSbSgvg', 
                        '_$s10Foundation17URLResourceValuesV23volumeSupportsHardLinksSbSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV24localizedTypeDescriptionSSSgvg', 
@@ -34690,8 +34684,7 @@ exports:
                        _NSShortMonthNameArray, _NSShortTimeDateFormatString, _NSShortWeekDayNameArray, 
                        _NSThisDayDesignations, _NSThousandsSeparator, _NSTimeDateFormatString, 
                        _NSTimeFormatString, _NSWeekDayNameArray, _NSXMLTidyBufferDecode, 
-                       _NSYearMonthWeekDesignations, _NXReadNSObjectFromCoder, '_OBJC_CLASS_$__NSKeyValueObservation', 
-                       '_OBJC_METACLASS_$__NSKeyValueObservation', __NSAELanguageNameByConvertingLanguageCode, 
+                       _NSYearMonthWeekDesignations, _NXReadNSObjectFromCoder, __NSAELanguageNameByConvertingLanguageCode, 
                        __NSAddHandler2, __NSDictionaryOfVariableBindings, __NSErrorWithFSRefAndOSStatus, 
                        __NSErrorWithFSRefOSStatusAndVariant, __NSErrorWithFilePathAndOSStatus, 
                        __NSErrorWithFilePathOSStatusAndVariant, __NSExceptionObjectFromHandler2, 

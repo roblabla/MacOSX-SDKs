@@ -46,6 +46,14 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
+API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos)
+typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionFederationType)
+{
+    ASAuthorizationProviderExtensionFederationTypeNone = 0,
+    ASAuthorizationProviderExtensionFederationTypeWSTrust = 1,
+    ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust = 2,
+}  NS_SWIFT_NAME(ASAuthorizationProviderExtensionLoginConfiguration.FederationType);
+
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface ASAuthorizationProviderExtensionLoginConfiguration : NSObject
 
@@ -191,6 +199,43 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  */
 @property (nonatomic, copy) NSArray<ASAuthorizationProviderExtensionKerberosMapping *> *kerberosTicketMappings;
 
+
+// MARK: - Federation
+
+/*!
+ @abstract The federation method to use.
+ */
+@property (nonatomic) ASAuthorizationProviderExtensionFederationType federationType API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The URN to request when performing a federated login.
+ */
+@property (nonatomic, nullable, copy) NSString *federationRequestURN API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The federation MEX URL to use.  This can be overwritten when using dynamic federation.
+ */
+@property (nonatomic, nullable, copy) NSURL *federationMEXURL API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The URL to use when performing dynamic federation.
+ */
+@property (nonatomic, nullable, copy) NSURL *federationUserPreauthenticationURL API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The claim in the preauthentication response that contains the MEX URL.
+ */
+@property (nonatomic, nullable, copy) NSString *federationMEXURLKeypath API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The predicate to apply to the preauthentication response to perform federation or not.
+ */
+@property (nonatomic, nullable, copy) NSString *federationPredicate API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The custom query string values to add when making the preauthenticaion request.
+ */
+@property (nonatomic, copy) NSArray<NSURLQueryItem *> *customFederationUserPreauthenticationRequestValues API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

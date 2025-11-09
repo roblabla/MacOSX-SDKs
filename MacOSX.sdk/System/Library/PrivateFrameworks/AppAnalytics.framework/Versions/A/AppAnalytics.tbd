@@ -2,27 +2,15 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           F3DCA8F8-26CB-3C08-858A-5F599C7F6041
-  - target:          x86_64-maccatalyst
-    value:           F3DCA8F8-26CB-3C08-858A-5F599C7F6041
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6E39C8F3-57FD-3661-A681-81021512696E
-  - target:          arm64e-maccatalyst
-    value:           6E39C8F3-57FD-3661-A681-81021512696E
 install-name:    '/System/Library/PrivateFrameworks/AppAnalytics.framework/Versions/A/AppAnalytics'
-current-version: 218
+current-version: 228
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AppAnalyticsTests, ArticleNotificationExtension, ArticleNotificationServiceExtension, 
-                       BookAnalytics, BookCore, BookStoreUI, Books, BooksNotificationContentExtension, 
+    clients:         [ AEBookPlugins, AppAnalyticsTests, ArticleNotificationExtension, 
+                       ArticleNotificationServiceExtension, BookAnalytics, BookCore, 
+                       BookStoreUI, BookStoreUITests, Books, BooksNotificationContentExtension, 
                        BooksUI, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
                        MarketingNotificationExtension, MomentsTesting, MomentsTestingAnalytics, 
                        MomentsTestingTests, NVCDemo, NanoBooks, News, NewsAds, NewsAdsTests, 
@@ -1160,6 +1148,7 @@ exports:
                        '_$s12AppAnalytics7TrackerC14explicitSubmit_10submitTime10completionyxm_10Foundation4DateVyAA05EventE6ResultOyxGcSgtAA0K4TypeRzlF', 
                        '_$s12AppAnalytics7TrackerC15onSessionChange5blockAA0E8ObserverCyAA06AccessC0C_AA0eF0Otc_tF', 
                        '_$s12AppAnalytics7TrackerC18dynamicTransaction10identifier5blockySS_yAA06AccessC0CctF', 
+                       '_$s12AppAnalytics7TrackerC21checkForActiveSession10completionyySbc_tF', 
                        '_$s12AppAnalytics7TrackerC22removeSessionObservers9forObjectyyXl_tF', 
                        '_$s12AppAnalytics7TrackerC3pop4typeyxm_tAA13DataEventTypeRzlF', 
                        '_$s12AppAnalytics7TrackerC4copy4type4from6traits12popIfMissingyxm_ACSayAA14DataEventTraitOGSbtAA0kL4TypeRzlF', 
@@ -1235,12 +1224,13 @@ exports:
                        '_$sSo9OS_os_logC12AppAnalyticsE9analyticsABvgZ', '_$sSo9OS_os_logC12AppAnalyticsE9analyticsyABSSSgFZ', 
                        _AppAnalyticsVersionNumber, _AppAnalyticsVersionString ]
     objc-classes:    [ AAAccessQueue, AAAccessSessionManager, AAAccessTracker, AAAppSessionManager, 
-                       AAClient, AADataEventTraits, AADelayedToken, AAEndpoint, AAEventData, 
-                       AAEventProperty, AAFlushManager, AAGroup, AAJSON, AALoggingEventProcessor, 
-                       AAPrivacyValidation, AAPrivacyValidationProvider, AAProcessEvent, 
-                       AAProcessorManager, AARawDataEvent, AARawEvent, AARawEventProperty, 
-                       AASession, AASessionData, AASessionGroup, AASessionManager, 
-                       AASessionObserver, AATimedData, AATimestampGranularityFactory, 
-                       AATimestampJitter, AATracker, AATrackingConsent, AAUploadBatchEventConfig, 
-                       AAUploadBatchEventProcessor, AAViewingSession, AAViewingSessionManager ]
+                       AABridgedMescalSigner, AAClient, AADataEventTraits, AADelayedToken, 
+                       AAEndpoint, AAEventData, AAEventProperty, AAFlushManager, 
+                       AAGroup, AAJSON, AALoggingEventProcessor, AAPrivacyValidation, 
+                       AAPrivacyValidationProvider, AAProcessEvent, AAProcessorManager, 
+                       AARawDataEvent, AARawEvent, AARawEventProperty, AASession, 
+                       AASessionData, AASessionGroup, AASessionManager, AASessionObserver, 
+                       AATimedData, AATimestampGranularityFactory, AATimestampJitter, 
+                       AATracker, AATrackingConsent, AAUploadBatchEventConfig, AAUploadBatchEventProcessor, 
+                       AAViewingSession, AAViewingSessionManager ]
 ...

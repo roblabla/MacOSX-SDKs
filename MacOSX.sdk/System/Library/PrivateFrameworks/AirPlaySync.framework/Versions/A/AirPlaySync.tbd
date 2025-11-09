@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           266B85D3-0732-3646-B81D-3942AAECD9E3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F809A1FC-8AAC-3CF3-9D6F-344F93DF3E44
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySync.framework/Versions/A/AirPlaySync'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

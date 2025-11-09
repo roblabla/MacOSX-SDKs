@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           511613D3-B292-341B-9C1E-275C1F744A5D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2D3A0644-1C5E-3F92-BF55-C08C61A56115
 install-name:    '/usr/lib/usd/libImath.dylib'
-current-version: 20.102.2
+current-version: 20.105.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

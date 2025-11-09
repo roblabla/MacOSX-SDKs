@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A8B8BD1D-7D57-3E25-9C3B-6B2DA6604513
-  - target:          x86_64-maccatalyst
-    value:           A8B8BD1D-7D57-3E25-9C3B-6B2DA6604513
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           14CADF19-6E2C-3E22-97A3-600026F83A4C
-  - target:          arm64e-maccatalyst
-    value:           14CADF19-6E2C-3E22-97A3-600026F83A4C
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
 current-version: 4.28.4
 compatibility-version: 4.28
@@ -32,7 +19,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFvRN3MIL11IROperationENS_10shared_ptrIKNS2_7IRValueEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__117bad_function_callE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTINSt3__123enable_shared_from_thisIN3MIL7Builder16OperationBuilderEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN3MIL7Builder16OperationBuilderEEE, 
                        __ZTIPFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTSFN3MIL16ValidationResultERKNS_11IROperationEE, 
                        __ZTSNSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_10shared_ptrIKN3MIL7IRValueEEERKNS3_11IROperationEEEE, 
@@ -70,8 +57,7 @@ exports:
                        __ZTSNSt3__114default_deleteIN3MIL7IRBlockEEE, __ZTSNSt3__114default_deleteINS_13unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN3MIL11IRParameterEEENS_4hashIS7_EENS_8equal_toIS7_EENS5_INS_4pairIKS7_SB_EEEEEEEE, 
                        __ZTSNSt3__114default_deleteINS_6vectorINS_10shared_ptrIN3MIL11IRParameterEEENS_9allocatorIS5_EEEEEE, 
                        __ZTSNSt3__114default_deleteINS_6vectorIPKN3MIL11IRDimensionENS_9allocatorIS5_EEEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
-                       __ZTSNSt3__123enable_shared_from_thisIN3MIL7Builder16OperationBuilderEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__123enable_shared_from_thisIN3MIL7Builder16OperationBuilderEEE, 
                        __ZTSPFN3MIL16ValidationResultERKNS_11IROperationEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

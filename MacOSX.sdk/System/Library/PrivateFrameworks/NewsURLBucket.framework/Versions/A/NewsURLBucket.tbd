@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           AB4BAE7B-5C23-31E6-8A19-5727097A8BA7
-  - target:          x86_64-maccatalyst
-    value:           AB4BAE7B-5C23-31E6-8A19-5727097A8BA7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           4CF4EF5E-A00A-3D4B-AE80-823C1D741E3C
-  - target:          arm64e-maccatalyst
-    value:           4CF4EF5E-A00A-3D4B-AE80-823C1D741E3C
 install-name:    '/System/Library/PrivateFrameworks/NewsURLBucket.framework/Versions/A/NewsURLBucket'
 swift-abi-version: 7
 exports:

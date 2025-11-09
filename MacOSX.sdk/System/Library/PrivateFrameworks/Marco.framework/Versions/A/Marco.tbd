@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           57B00A9A-D553-3B61-A4AC-4622B3DB701A
-  - target:          x86_64-maccatalyst
-    value:           57B00A9A-D553-3B61-A4AC-4622B3DB701A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EC1F1B69-E772-3109-BEAB-EED66D66D33A
-  - target:          arm64e-maccatalyst
-    value:           EC1F1B69-E772-3109-BEAB-EED66D66D33A
 install-name:    '/System/Library/PrivateFrameworks/Marco.framework/Versions/A/Marco'
 current-version: 800
 exports:

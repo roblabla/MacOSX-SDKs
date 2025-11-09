@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D805F012-88DE-3460-9066-E427DBE7172F
-  - target:          x86_64-maccatalyst
-    value:           D805F012-88DE-3460-9066-E427DBE7172F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           62B84218-9D1C-31BE-A1D7-07130008D015
-  - target:          arm64e-maccatalyst
-    value:           62B84218-9D1C-31BE-A1D7-07130008D015
 install-name:    '/System/Library/PrivateFrameworks/GameControllerFoundation.framework/Versions/A/GameControllerFoundation'
-current-version: 10.3.5
+current-version: 10.5.10
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -55,6 +42,7 @@ exports:
                        GCGenericDeviceDataInterpolateExpressionModel, GCGenericDeviceDataInterpolateExpressionModelBuilder, 
                        GCGenericDeviceDataMultiplyExpressionModel, GCGenericDeviceDataMultiplyExpressionModelBuilder, 
                        GCGenericDeviceDataProcessorExpressionModel, GCGenericDeviceDataProcessorExpressionModelBuilder, 
+                       GCGenericDeviceDataRumbleMotorValueExpressionModel, GCGenericDeviceDataRumbleMotorValueExpressionModelBuilder, 
                        GCGenericDeviceDataSDLHatFunctionExpressionModel, GCGenericDeviceDataSDLHatFunctionExpressionModelBuilder, 
                        GCGenericDeviceDriverModel, GCGenericDeviceDriverModelBuilder, 
                        GCGenericDeviceElementModel, GCGenericDeviceElementModelBuilder, 
@@ -64,10 +52,13 @@ exports:
                        GCGenericDevicePhysicalInputButtonModelBuilder, GCGenericDevicePhysicalInputDpadModel, 
                        GCGenericDevicePhysicalInputDpadModelBuilder, GCGenericDevicePhysicalInputElementModel, 
                        GCGenericDevicePhysicalInputElementModelBuilder, GCGenericDevicePhysicalInputModel, 
-                       GCGenericDevicePhysicalInputModelBuilder, GCHIDDevice, GCHIDDeviceInput, 
+                       GCGenericDevicePhysicalInputModelBuilder, GCGenericDeviceRumbleActuatorModel, 
+                       GCGenericDeviceRumbleActuatorModelBuilder, GCGenericDeviceRumbleModel, 
+                       GCGenericDeviceRumbleModelBuilder, GCGenericDeviceRumbleOutputFieldModel, 
+                       GCGenericDeviceRumbleOutputFieldModelBuilder, GCGenericDeviceRumbleOutputModel, 
+                       GCGenericDeviceRumbleOutputModelBuilder, GCHIDDevice, GCHIDDeviceInput, 
                        GCHIDDeviceSnapshot, GCHIDElementSnapshot, GCHIDInputElement, 
-                       GCHIDKernelDeviceSnapshot, GCHIDUserDeviceSnapshot, GCIPCRemoteConnection, 
-                       GCIPCRemoteIncomingConnection, GCIPCRemoteOutgoingConnection, 
+                       GCIPCRemoteConnection, GCIPCRemoteIncomingConnection, GCIPCRemoteOutgoingConnection, 
                        GCOperation, GCPromise, GCVersion, _GCDeviceConfiguration, 
                        _GCDeviceConfigurationEvaluator, _GCGenericDeviceManager, 
                        _GCGenericPhysicalDevicePending, _GCHIDServiceInfo, _GCLogitechRacingWheelDeviceManager, 

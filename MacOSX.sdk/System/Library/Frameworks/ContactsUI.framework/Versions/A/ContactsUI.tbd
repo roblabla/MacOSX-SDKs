@@ -1,15 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4FF919CE-2EE5-3627-9DC6-66890C52C774
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D4FA0CAA-D924-3F12-BFEC-4C4CAEF86ECD
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2538.1
+current-version: 2539.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -110,11 +103,7 @@ exports:
                        _CNCompositeAvatarSize, _CNLikenessEditorFamilyNameKey, _CNLikenessEditorFullNameKey, 
                        _CNLikenessEditorGivenNameKey, _CNLikenessEditorImageCropRectKey, 
                        _CNLikenessEditorImageDataKey, _CNTouchBarItemIdentifierUserAction, 
-                       _CNUIApplicationDidCompletelyFinishLaunching, '_OBJC_CLASS_$__TtC10ContactsUI24ContactHeaderViewWrapper', 
-                       '_OBJC_CLASS_$__TtC10ContactsUI27CNAvatarPickerViewInterface', 
-                       '_OBJC_METACLASS_$__TtC10ContactsUI24ContactHeaderViewWrapper', 
-                       '_OBJC_METACLASS_$__TtC10ContactsUI27CNAvatarPickerViewInterface', 
-                       _sCNUIConvertABPersonToCNContact ]
+                       _CNUIApplicationDidCompletelyFinishLaunching, _sCNUIConvertABPersonToCNContact ]
     objc-classes:    [ ABCNContactNameFormatter, CNAvatarCache, CNAvatarEditorViewController, 
                        CNAvatarImageLoading, CNAvatarImageLoadingOptions, CNAvatarImageRenderer, 
                        CNAvatarImageRenderingScope, CNAvatarPickerUserSetupMemojiData, 

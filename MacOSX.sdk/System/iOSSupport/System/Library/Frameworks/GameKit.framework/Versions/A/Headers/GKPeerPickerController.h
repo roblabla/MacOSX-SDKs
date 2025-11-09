@@ -1,9 +1,11 @@
+//
+//  GKPeerPickerController.h
+//  Game Center
+//
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
+//
+
 /*
- GKPeerPickerController.h
- Game Kit
- 
- Copyright 2010 Apple Inc. All rights reserved.
- 
  This API provides a system-supplied user interface for selecting and connecting to another device for a multiplayer game.  The API introduces GKPeerPickerController for this purpose, and should be used in conjunction with the GKSession API.
  
  This a not a Game Center feature. To support Game Center and online play, see GKMatchMatchmakerViewController.

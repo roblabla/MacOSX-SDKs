@@ -1,18 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B8BD68D3-F3E0-3FAA-80FA-3A666FA70E6F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6A5EBFB9-CDB0-3DEC-AAA5-77E90EABC01A
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 762.23.1
+current-version: 762.43.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
+    symbols:         [ _CALayerKeyBounds, _CALayerKeyBoundsOrigin, _CALayerKeyBoundsSize, 
+                       _CALayerKeyPosition, _CALayerKeyShadowPath, _VUIAccessibilityIdDisplayTypeDocument, 
+                       _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
                        _VUIAccessibilityVoiceOverStatusDidChangeNotification, _VUIApplicationDidBecomeActiveNotification, 
                        _VUIApplicationDidEnterBackgroundNotification, _VUIApplicationWillEnterForegroundNotification, 
                        _VUIApplicationWillResignActiveNotification, _VUIApplicationWillTerminateNotification, 
@@ -43,7 +38,8 @@ exports:
                        _VUIModalPresentationKeyActionStyleDestructive, _VUIModalPresentationKeyAllowMenuDismissal, 
                        _VUIModalPresentationKeyAllowsModalOverModal, _VUIModalPresentationKeyBarButtonItem, 
                        _VUIModalPresentationKeyNavigationBarHidden, _VUIModalPresentationKeySourceRect, 
-                       _VUIModalPresentationKeySourceView, _VUIModalPresentationNavigationControllerDismissedNotification, 
+                       _VUIModalPresentationKeySourceView, _VUIModalPresentationNavigationControllerDidShowNotification, 
+                       _VUIModalPresentationNavigationControllerDismissedNotification, 
                        _VUIModalPresentationTypeKey, _VUIModalPresentationTypeKeyActionSheet, 
                        _VUIModalPresentationTypeKeyAlert, _VUIModalPresentationTypeKeyBlurOverFullScreen, 
                        _VUIModalPresentationTypeKeyCurrentContext, _VUIModalPresentationTypeKeyCustom, 
@@ -53,11 +49,12 @@ exports:
                        _VUIModalPresentationTypeKeyPlayback, _VUIModalPresentationTypeKeyPopover, 
                        _VUINSImageScalingFromVUIContentMode, _VUINSNavigationItemBackButtonItemKeyPath, 
                        _VUINSNavigationItemBackButtonTitleKeyPath, _VUINSNavigationItemHidesBackButtonKeyPath, 
-                       _VUINSNavigationItemKeyPath, _VUINSNavigationItemLeftBarButtonItemKeyPath, 
-                       _VUINSNavigationItemLeftBarButtonItemsKeyPath, _VUINSNavigationItemObservableKeyPathsSet, 
-                       _VUINSNavigationItemRightBarButtonItemKeyPath, _VUINSNavigationItemRightBarButtonItemsKeyPath, 
-                       _VUINSNavigationItemTitleKeyPath, _VUINSNavigationItemTitleViewKeyPath, 
-                       _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeNotification, 
+                       _VUINSNavigationItemKeyPath, _VUINSNavigationItemLargeTitleDisplayModeKeyPath, 
+                       _VUINSNavigationItemLeftBarButtonItemKeyPath, _VUINSNavigationItemLeftBarButtonItemsKeyPath, 
+                       _VUINSNavigationItemObservableKeyPathsSet, _VUINSNavigationItemRightBarButtonItemKeyPath, 
+                       _VUINSNavigationItemRightBarButtonItemsKeyPath, _VUINSNavigationItemTitleKeyPath, 
+                       _VUINSNavigationItemTitleViewKeyPath, _VUINSNavigationItemVisibilityThresholdProviderKeyPath, 
+                       _VUINavigationBarDefaultTitleViewVisibilityPercentage, _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeNotification, 
                        _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeUserInfoKeyNetworkReachable, 
                        _VUIRectMakeWithDirectionalOriginRelativeToBoundingRect, _VUIRectWithFlippedOriginRelativeToBoundingRect, 
                        _VUIRectWithFlippedOriginRelativeToBoundingRectWithCondition, 
@@ -66,7 +63,7 @@ exports:
                        _VUIStateMachineOldStateKey, _VUIStateMachineStateChangedNotification, 
                        _VUIUserInterfaceStyleFromTheme, _VUIViewContentModeFromContentGravity, 
                        _VUIWaitForDebugger, _VUIWaitForDebuggerUntilDate, _VideosUICoreErrorDomain, 
-                       _VideosUICoreErrorHTTPStatusKey ]
+                       _VideosUICoreErrorHTTPStatusKey, _kVUINSNavigationBarButtonDefaultCornerRadius ]
     objc-classes:    [ VUIAccessibility, VUIApplicationNotificationManager, VUIAssetLibrary, 
                        VUIAsynchronousOperation, VUIAsynchronousWorkToken, VUICollectionChange, 
                        VUICollectionChangeSet, VUICollectionComparator, VUIContentRating, 
@@ -77,9 +74,10 @@ exports:
                        VUIImageProxy, VUIImageScaleDecorator, VUIImageView, VUIMobileGestaltLookup, 
                        VUIModalPresentationConfiguration, VUIModalPresentationNavigationController, 
                        VUIModalPresenter, VUINSBarButtonItem, VUINSNavigationBar, 
-                       VUINSNavigationBarButton, VUINSNavigationController, VUINSNavigationItem, 
-                       VUINSTraitCollection, VUINetworkReachabilityMonitor, VUIRemoteImageDescriptor, 
-                       VUIResourceImageDescriptor, VUIRestrictions, VUISortUtilities, 
-                       VUIStateMachine, VUITitleSortDescriptor, VUIURLImageLoader, 
-                       VUIURLRequestOperation ]
+                       VUINSNavigationBarButton, VUINSNavigationClipView, VUINSNavigationController, 
+                       VUINSNavigationItem, VUINSTraitCollection, VUINetworkReachabilityMonitor, 
+                       VUIPathAnimationAction, VUIPointAnimationAction, VUIRectAnimationAction, 
+                       VUIRemoteImageDescriptor, VUIResourceImageDescriptor, VUIRestrictions, 
+                       VUISortUtilities, VUIStateMachine, VUITitleSortDescriptor, 
+                       VUIURLImageLoader, VUIURLRequestOperation ]
 ...

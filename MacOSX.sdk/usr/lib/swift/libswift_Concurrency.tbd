@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           B99D7780-85D2-364B-89D1-9ECAE1F0E620
-  - target:          x86_64-maccatalyst
-    value:           B99D7780-85D2-364B-89D1-9ECAE1F0E620
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3CC87F02-D5C8-33CA-A96E-22E8F00D4214
-  - target:          arm64e-maccatalyst
-    value:           3CC87F02-D5C8-33CA-A96E-22E8F00D4214
 install-name:    '/usr/lib/swift/libswift_Concurrency.dylib'
-current-version: 5.7.1
+current-version: 5.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -526,7 +513,7 @@ exports:
                        '_$ss9TaskLocalC14projectedValueAByxGvM', '_$ss9TaskLocalC14projectedValueAByxGvg', 
                        '_$ss9TaskLocalC14projectedValueAByxGvpMV', '_$ss9TaskLocalC14projectedValueAByxGvs', 
                        '_$ss9TaskLocalC18_enclosingInstance7wrapped7storagexs5NeverO_s24ReferenceWritableKeyPathCyAGxGAIyAgByxGGtcigZ', 
-                       '_$ss9TaskLocalC3getxyF', '_$ss9TaskLocalC9withValue_9operation4file4lineqd__x_qd__yKXESSSutKlF', 
+                       '_$ss9TaskLocalC3getxyF', '_$ss9TaskLocalC3keyBpvpMV', '_$ss9TaskLocalC9withValue_9operation4file4lineqd__x_qd__yKXESSSutKlF', 
                        '_$ss9TaskLocalC9withValue_9operation4file4lineqd__x_qd__yYaKXESSSutYaKlF', 
                        '_$ss9TaskLocalC9withValue_9operation4file4lineqd__x_qd__yYaKXESSSutYaKlFTu', 
                        '_$ss9TaskLocalCMa', '_$ss9TaskLocalCMn', '_$ss9TaskLocalCMo', 

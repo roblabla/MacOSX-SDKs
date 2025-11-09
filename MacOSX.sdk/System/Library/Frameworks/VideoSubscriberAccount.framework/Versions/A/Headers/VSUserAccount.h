@@ -15,14 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, VSUserAccountType) {
     VSUserAccountTypeFree,    // Default. The user has access to free content only.
     VSUserAccountTypePaid     // The user has access to content offered to paid subscriptions.
-} NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macCatalyst);
+} NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst);
 
 typedef NS_ENUM(NSInteger, VSOriginatingDeviceCategory) {
     VSOriginatingDeviceCategoryMobile,
     VSOriginatingDeviceCategoryOther
-} NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macCatalyst);
+} NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst);
 
-VS_EXPORT API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macCatalyst)
+VS_EXPORT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst)
 NS_REFINED_FOR_SWIFT
 @interface VSUserAccount : NSObject
 
@@ -42,8 +42,8 @@ NS_REFINED_FOR_SWIFT
 
 @property (nonatomic, assign) VSUserAccountType accountType;
 
-// Indicates that the user has deleted their account.
-@property (nonatomic, assign, getter=isDeleted) BOOL deleted;
+// Indicates if the user has signed out of their account.
+@property (nonatomic, assign, getter=isSignedOut) BOOL signedOut;
 
 // The date in which the billing cycle ends for paid accounts.
 // used as a heuristic to determine when a refresh should occur.
@@ -76,8 +76,7 @@ NS_REFINED_FOR_SWIFT
 @property (nonatomic, readonly) VSOriginatingDeviceCategory deviceCategory;
 
 // Use -initWithAccountType:updateURL: or -initWithAccountProviderIdentifier: instead.
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+VS_INIT_UNAVAILABLE
 
 // Initializes a new VSUserAccount with a URL that points to an application JS
 // that can respond to account update requests.

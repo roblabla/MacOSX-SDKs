@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           844DCE44-91D2-37F4-A3BA-6E44E379DF48
-  - target:          x86_64-maccatalyst
-    value:           844DCE44-91D2-37F4-A3BA-6E44E379DF48
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           96B15EEA-B113-3450-BFDF-931ED3A4F007
-  - target:          arm64e-maccatalyst
-    value:           96B15EEA-B113-3450-BFDF-931ED3A4F007
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -432,14 +419,15 @@ exports:
                        _kVTPixelTransferPropertyKey_HistogramRectangle, _kVTPixelTransferPropertyKey_MetalShouldWaitToComplete, 
                        _kVTPixelTransferPropertyKey_MostRecentConversionType, _kVTPixelTransferPropertyKey_PQEOTFOpticalScale, 
                        _kVTPixelTransferPropertyKey_PQInvEOTFOpticalScale, _kVTPixelTransferPropertyKey_RealTime, 
+                       _kVTPixelTransferPropertyKey_ReducedPrecisionFractionalOffsets, 
                        _kVTPixelTransferPropertyKey_ScalingMode, _kVTPixelTransferPropertyKey_SetGPUPriorityLow, 
                        _kVTPixelTransferPropertyKey_SourceCropRectangle, _kVTPixelTransferPropertyKey_UseOptimalMSRCoefficients, 
                        _kVTPixelTransferPropertyKey_WriteBlackPixelsOutsideDestRect, 
                        _kVTPixelTransferPropertyKey_vImageFlags, _kVTPixelTransferServiceKey_DisableDither, 
                        _kVTPixelTransferServiceKey_EnableHighSpeedTransfer, _kVTPixelTransferServiceKey_HistogramData, 
-                       _kVTPixelTransferServiceKey_HistogramRectangle, _kVTPixelTransferServiceKey_UseOptimalMSRCoefficients, 
-                       _kVTPreprocessingFrameProperty_OnlyForLookAhead, _kVTPreprocessingFrameProperty_OnlyForLookBehind, 
-                       _kVTPreprocessingPropertyKey_SourcePixelBufferAttributes, 
+                       _kVTPixelTransferServiceKey_HistogramRectangle, _kVTPixelTransferServiceKey_ReducedPrecisionFractionalOffsets, 
+                       _kVTPixelTransferServiceKey_UseOptimalMSRCoefficients, _kVTPreprocessingFrameProperty_OnlyForLookAhead, 
+                       _kVTPreprocessingFrameProperty_OnlyForLookBehind, _kVTPreprocessingPropertyKey_SourcePixelBufferAttributes, 
                        _kVTProfileLevel_H263_Profile0_Level10, _kVTProfileLevel_H263_Profile0_Level45, 
                        _kVTProfileLevel_H263_Profile3_Level45, _kVTProfileLevel_H264_Baseline_1_3, 
                        _kVTProfileLevel_H264_Baseline_3_0, _kVTProfileLevel_H264_Baseline_3_1, 

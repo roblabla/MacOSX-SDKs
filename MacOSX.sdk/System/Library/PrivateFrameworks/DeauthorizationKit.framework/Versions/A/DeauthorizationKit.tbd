@@ -1,32 +1,26 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CD3348FF-C376-3F7A-8E4D-9BCC4E616CA7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B7EDA375-C347-36A1-B7D9-88CE5E00F28D
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APMechanismSetContextValue, _APMechanismSetResult, _DKEACSAccountOptionAdminUserID, 
                        _DKEACSAccountOptionAdminUserPassword, _DKEACSAdminInitiated, 
-                       _DKEACSBootstrapTokenString, _DKEACSConsiderPreliminaryChecksNonFatal, 
-                       _DKEACSFactoryInitiated, _DKEACSPassword, _DKEACSSkipSystemModalBlur, 
-                       _DKEACSTaskIdentifiersToSkip, _DKEACSUID, _DKErrorDomain, 
-                       _DKHelperDaemonServiceInterface, _DKIntegrityCheckErrorDomain, 
-                       _DKLogObject, _DKNotificationEACSDomain, _DKNotificationNameEACSTerminated, 
-                       _DKPrefEnableFeature, _DKPrefFakeAccountRemoval, _DKPrefFakeBootPolicyTransactionRetryFailure, 
-                       _DKPrefFakeCompromisedSystem, _DKPrefFakeEFIPassword, _DKPrefFakeFullSecurity, 
-                       _DKPrefFakeInvalidDiskLayout, _DKPrefFakeNeedsPhotosSync, 
-                       _DKPrefFakeNeedsiCloudSync, _DKPrefFakeSealedSystem, _DKPrefFakeSupportedHardware, 
-                       _DKPrefFakeTimeMachineEnabled, _DKPrefFakeUpdateBootPolicyFailure, 
-                       _DKPrefFakeValidDiskLayout, _DKPrefFakeiMessageFacetimeSignout, 
-                       _DKPrefMDMAllowEraseContentAndSettings, _DKPrefMDMInitiated, 
-                       _DKPrefObliterationOptionsOverridePath, _DKPrefPerformDryRunObliteration, 
-                       _DKPrefSkipApplePayRemoval, _DKPrefSkipBootPolicyCalls, _DKPrefSkipFindMyDeactivation, 
+                       _DKEACSBootstrapTokenString, _DKEACSBuddyInitiated, _DKEACSConsiderPreliminaryChecksNonFatal, 
+                       _DKEACSDeKOTAInitiated, _DKEACSFactoryInitiated, _DKEACSLocalAuthenticationContext, 
+                       _DKEACSPassword, _DKEACSSkipSystemModalBlur, _DKEACSTaskIdentifiersToSkip, 
+                       _DKEACSUID, _DKErrorDomain, _DKHelperDaemonServiceInterface, 
+                       _DKIntegrityCheckErrorDomain, _DKLogObject, _DKNotificationEACSDomain, 
+                       _DKNotificationNameEACSTerminated, _DKPrefEnableFeature, _DKPrefFakeAccountRemoval, 
+                       _DKPrefFakeBootPolicyTransactionRetryFailure, _DKPrefFakeCompromisedSystem, 
+                       _DKPrefFakeEFIPassword, _DKPrefFakeFullSecurity, _DKPrefFakeInvalidDiskLayout, 
+                       _DKPrefFakeNeedsPhotosSync, _DKPrefFakeNeedsiCloudSync, _DKPrefFakeSealedSystem, 
+                       _DKPrefFakeSupportedHardware, _DKPrefFakeTimeMachineEnabled, 
+                       _DKPrefFakeUpdateBootPolicyFailure, _DKPrefFakeValidDiskLayout, 
+                       _DKPrefFakeiMessageFacetimeSignout, _DKPrefMDMAllowEraseContentAndSettings, 
+                       _DKPrefMDMInitiated, _DKPrefObliterationOptionsOverridePath, 
+                       _DKPrefPerformDryRunObliteration, _DKPrefSkipApplePayRemoval, 
+                       _DKPrefSkipBootPolicyCalls, _DKPrefSkipFindMyDeactivation, 
                        _DKPrefSkipNVRAM, _DKPrefSkipReboot, _DKPrefSkipSystemModalBlur, 
                        _DKPrefiCloudSyncTime, _DKSyncingAppPhotos, _DKSyncingAppiCloud, 
                        _DKTaskConfirmationCheckIdentifier, _DKTaskDeactivateFindMyIdentifier, 

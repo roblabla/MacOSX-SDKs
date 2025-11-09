@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DA177218-ACD1-3AED-BC51-396BC0DF807E
-  - target:          x86_64-maccatalyst
-    value:           DA177218-ACD1-3AED-BC51-396BC0DF807E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           95069972-7E6A-39CB-B950-06B38B5F9F46
-  - target:          arm64e-maccatalyst
-    value:           95069972-7E6A-39CB-B950-06B38B5F9F46
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
@@ -176,8 +163,9 @@ exports:
                        BSMachPortSendRight, BSMachPortTaskNameRight, BSMachServiceAliases, 
                        BSMonotonicReferenceTime, BSMutableAnimationSettings, BSMutableIntegerMap, 
                        BSMutableIntegerSet, BSMutableKeyedSettings, BSMutableMachServiceAliases, 
-                       BSMutableSettings, BSMutableSpringAnimationSettings, BSObjCArgument, 
-                       BSObjCBlockArgument, BSObjCMethod, BSObjCProtocol, BSPathProviderFactory, 
+                       BSMutableOrderedDictionary, BSMutableSettings, BSMutableSpringAnimationSettings, 
+                       BSObjCArgument, BSObjCBlockArgument, BSObjCMethod, BSObjCProtocol, 
+                       BSOrderedDictionary, BSOrderedDictionaryKeyStrategy, BSPathProviderFactory, 
                        BSPlatform, BSPluginBundle, BSPluginManager, BSPluginManagerCoordinator, 
                        BSPluginSpecification, BSPortDeathSentinel, BSPortDeathWatcher, 
                        BSPowerMonitor, BSProcessDeathWatcher, BSProcessHandle, BSPropertyMetadata, 
@@ -192,10 +180,10 @@ exports:
                        BSXPCConnectionListenerManager, BSXPCMessage, BSXPCReply, 
                        BSZeroingWeakReference, _BSActionResponder, _BSCompoundAssertionAcquisitionRecord, 
                        _BSCompoundAssertionAcquisitionReference, _BSCompoundAssertionState, 
-                       _BSDefaultObserver, _BSProtobufTranslator_BSAuditToken, _BSSqliteDeferredPreparedSimpleStatement, 
-                       _BSSqliteFrozenResultRow, _BSSqlitePreparedCompoundStatement, 
-                       _BSSqlitePreparedSimpleStatement, _BSTransactionChildRelationship, 
-                       _BSTransactionDefaults, _BSTransactionParentRelationship ]
+                       _BSDefaultObserver, _BSEmptyOrderedDictionary, _BSProtobufTranslator_BSAuditToken, 
+                       _BSSqliteDeferredPreparedSimpleStatement, _BSSqliteFrozenResultRow, 
+                       _BSSqlitePreparedCompoundStatement, _BSSqlitePreparedSimpleStatement, 
+                       _BSTransactionChildRelationship, _BSTransactionDefaults, _BSTransactionParentRelationship ]
     objc-ivars:      [ BSBaseXPCClient._queue, BSBaseXPCServer._queue, BSBasicServerClient._connection, 
                        BSIntegerMap._mapTable, BSIntegerMap._zeroIndexValue, BSIntegerSet._hasZeroValue, 
                        BSIntegerSet._hashTable, BSKeyedSettings._keyMap, BSObjCArgument._encoding, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0F7E730D-B3B3-3618-9B5C-0AE137748E18
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5A6D7C1B-8E4F-311D-B260-408427258DBE
 install-name:    '/usr/lib/libodmodule.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -946,6 +946,7 @@ vmnet_interface_get_ip_port_forwarding_rules(interface_ref interface,
  * @result
  * Returns a non-NULL array of strings if successful, NULL otherwise.
  */
+XPC_RETURNS_RETAINED
 xpc_object_t __nullable
 vmnet_copy_shared_interface_list(void)
     API_AVAILABLE(macos(10.15));

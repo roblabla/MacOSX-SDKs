@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.40.4) generated from IOUserClient.iig */
+/* iig(DriverKit-256.100.8) generated from IOUserClient.iig */
 
 /* IOUserClient.iig:1-156 */
 /*
@@ -511,7 +511,7 @@ public:
 
 
 
-class IOUserClientInterface : public OSInterface
+class  IOUserClientInterface : public OSInterface
 {
 public:
     virtual kern_return_t
@@ -606,7 +606,7 @@ public:
 };
 
 
-class OSAction_IOUserClient_KernelCompletionInterface : public OSInterface
+class  __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserClient_KernelCompletionInterface : public OSInterface
 {
 public:
 };

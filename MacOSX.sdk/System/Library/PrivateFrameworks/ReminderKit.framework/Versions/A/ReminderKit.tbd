@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D33D345D-4080-33F9-B662-CD59411BE800
-  - target:          x86_64-maccatalyst
-    value:           D33D345D-4080-33F9-B662-CD59411BE800
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E2889019-E66D-3670-851A-D22FB2A68928
-  - target:          arm64e-maccatalyst
-    value:           E2889019-E66D-3670-851A-D22FB2A68928
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 845
+current-version: 861
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -42,8 +29,8 @@ exports:
                        _RDSyncActivityNotificationEngineAuthor, _RDTemplateOperationAuthor, 
                        _RDTodayNotificationLastBannerPresentationDateAuthor, _REMACAccountPropertyDidChooseToMigrate, 
                        _REMACAccountPropertyDidFinishMigration, _REMAccountTypeMaskContainsType, 
-                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMBundleGet, 
-                       _REMCFTypeCast, _REMChangeErrorDomain, _REMCheckedDynamicCast, 
+                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMAppStoreCreatedOrCompletedRemindersLastMonthCountFetchResultKey, 
+                       _REMBundleGet, _REMCFTypeCast, _REMChangeErrorDomain, _REMCheckedDynamicCast, 
                        _REMCheckedProtocolCast, _REMClassAndProtocolCast, _REMDA_kCalDAVMobileAccountDelegatePrincipalPath, 
                        _REMDaemonAPSNamedDelegatePort, _REMDaemonBundleIdentifier, 
                        _REMDaemonCoreSpotlightIndexName, _REMDaemonExecutableName, 
@@ -143,6 +130,9 @@ exports:
                        REMAccountsDataViewInvocation_fetchByObjectID, REMAccountsDataViewInvocation_fetchPrimaryActiveCloudKitAccount, 
                        REMAlarm, REMAlarmContactTrigger, REMAlarmDateTrigger, REMAlarmLocationTrigger, 
                        REMAlarmTimeIntervalTrigger, REMAlarmTrigger, REMAlarmVehicleTrigger, 
+                       REMAppStoreDataView, REMAppStoreDataViewConfigurationsInvocationResult, 
+                       REMAppStoreDataViewInvocation_fetchCreatedOrCompletedRemindersCount, 
+                       REMAppStoreDataViewInvocation_fetchICCloudConfigurationProperties, 
                        REMAppleAccountUtilities, REMAssignment, REMAssignmentsDataViewInvocationResult, 
                        REMAssignmentsDataViewInvocation_fetchByObjectID, REMAttachment, 
                        REMAuxiliaryChangeInfoFetchResult, REMAuxiliaryChangeInfoType, 
@@ -164,8 +154,9 @@ exports:
                        REMExporting, REMExternalSyncMetadataUtils, REMFetchMetadata, 
                        REMFetchRequest, REMFetchResult, REMFetchResultToken, REMFileAttachment, 
                        REMHashtag, REMHashtagLabel, REMHashtagsDataViewInvocationResult, 
-                       REMHashtagsDataViewInvocation_fetchByObjectID, REMImageAttachment, 
-                       REMList, REMListAppearanceContext, REMListAppearanceContextChangeItem, 
+                       REMHashtagsDataViewInvocation_fetchByObjectID, REMICloudIsOffDataView, 
+                       REMICloudIsOffDataViewConfigurationsInvocationResult, REMICloudIsOffDataViewInvocation_fetchICCloudConfigurationProperties, 
+                       REMImageAttachment, REMList, REMListAppearanceContext, REMListAppearanceContextChangeItem, 
                        REMListBadge, REMListCalDAVNotificationContext, REMListCalDAVNotificationContextChangeItem, 
                        REMListChangeItem, REMListFetchExecutor, REMListFetchMetadata, 
                        REMListPredicateDescriptor, REMListShareeContext, REMListShareeContextChangeItem, 
@@ -239,8 +230,10 @@ exports:
                        REMXPCStorageClasses, REMXPCStorePerformerInterface, REMXPCSuggestedAttributesPerformerInterface, 
                        REMXPCSyncInterfacePerformerInterface, TTArray, TTMergeableAttributedString, 
                        TTMergeableStringVersionedDocument, TTParagraphStyle, TTREMHashtag, 
-                       TTVectorTimestamp, TTVectorTimestampElement, _REMChangeTrackingClientID, 
-                       _REMChangeUniversalToken, _REMChangedObjectIDStorage, _REMDACalDAVSyncReplicaManagerProvider, 
-                       _REMDefaultReplicaManagerProvider, _REMFetchExecutor, _REMInProgressSaveRequestsContainer, 
-                       _REMNSPersistentHistoryChangeStorage, _REMNSPersistentHistoryTransactionStorage ]
+                       TTVectorTimestamp, TTVectorTimestampElement, _REMAppStoreReviewCloudConfigurationStorage, 
+                       _REMChangeTrackingClientID, _REMChangeUniversalToken, _REMChangedObjectIDStorage, 
+                       _REMDACalDAVSyncReplicaManagerProvider, _REMDefaultReplicaManagerProvider, 
+                       _REMFetchExecutor, _REMICloudIsOffCloudConfigurationStorage, 
+                       _REMInProgressSaveRequestsContainer, _REMNSPersistentHistoryChangeStorage, 
+                       _REMNSPersistentHistoryTransactionStorage ]
 ...

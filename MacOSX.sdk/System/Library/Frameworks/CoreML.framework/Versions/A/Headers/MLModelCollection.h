@@ -16,19 +16,18 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * A collection of models managed as part of Core ML Model Deployment.
  */
-API_AVAILABLE(macos(11.0), ios(14.0))
-API_UNAVAILABLE(tvos, watchos)
+API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED))API_UNAVAILABLE(tvos, watchos)
 ML_EXPORT
 @interface MLModelCollection : NSObject
 
 /// The identifier of the model collection you want to access, as configured in the Core ML Model Deployment dashboard.
-@property (readonly, nonatomic, copy) NSString *identifier;
+@property (readonly, nonatomic, copy) NSString *identifier  API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 /// Information about the models downloaded in the collection, or an empty dictionary if the collection has not been downloaded.
-@property (readonly, nonatomic, copy) NSDictionary<NSString *, MLModelCollectionEntry *> *entries;
+@property (readonly, nonatomic, copy) NSDictionary<NSString *, MLModelCollectionEntry *> *entries API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 /// The identifier for the currently downloaded deployment, corresponding to a recent deployment on the Core ML Model Deployment dashboard.
-@property (readonly, nonatomic, copy) NSString *deploymentID;
+@property (readonly, nonatomic, copy) NSString *deploymentID API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 /*!
   Request access to a model collection. If the collection is not downloaded on the device, it is requested
@@ -42,7 +41,8 @@ ML_EXPORT
   @result NSProgress for updates during setup and download of the model collection
 */
 + (NSProgress *)beginAccessingModelCollectionWithIdentifier:(NSString *)identifier
-                                          completionHandler:(void (^)(MLModelCollection *_Nullable modelCollection, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT;
+                                          completionHandler:(void (^)(MLModelCollection *_Nullable modelCollection, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT
+                                          API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 /*!
   End access to a model collection. This informs the system you have finished accessing the models within the collection.
@@ -53,7 +53,8 @@ ML_EXPORT
   @param completionHandler The completion handler, invoked with YES on success or NSError on failure.
 */
 + (void)endAccessingModelCollectionWithIdentifier:(NSString *)identifier
-                                completionHandler:(void (^)(BOOL success, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(endAccessing(identifier:));
+                                completionHandler:(void (^)(BOOL success, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(endAccessing(identifier:))
+                                API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -62,9 +63,9 @@ ML_EXPORT
 @end
 
 /// Notification posted when the model collection has changed.
-API_AVAILABLE(macos(11.0), ios(14.0))
+API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED))API_UNAVAILABLE(tvos, watchos)
 API_UNAVAILABLE(tvos, watchos)
 ML_EXPORT
-NSNotificationName const MLModelCollectionDidChangeNotification;
+NSNotificationName const MLModelCollectionDidChangeNotification API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED));
 
 NS_ASSUME_NONNULL_END

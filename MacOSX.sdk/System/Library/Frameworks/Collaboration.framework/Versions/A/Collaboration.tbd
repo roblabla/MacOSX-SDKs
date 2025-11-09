@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           DAE49B30-D868-37D5-992B-E3BA4B9854C1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CACCF349-1EC6-390F-9062-D8C4F16E5665
 install-name:    '/System/Library/Frameworks/Collaboration.framework/Versions/A/Collaboration'
 current-version: 84
 exports:

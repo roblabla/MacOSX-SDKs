@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D44E0845-001C-3C46-B3A7-E4926DAEF6B3
-  - target:          x86_64-maccatalyst
-    value:           D44E0845-001C-3C46-B3A7-E4926DAEF6B3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2694748C-A452-3438-BB47-161D7B220AE2
-  - target:          arm64e-maccatalyst
-    value:           2694748C-A452-3438-BB47-161D7B220AE2
 install-name:    '/usr/lib/system/libsystem_containermanager.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -59,6 +46,7 @@ exports:
                        _container_create_or_lookup_app_group_paths, _container_create_or_lookup_app_group_paths_for_current_user, 
                        _container_create_or_lookup_app_group_paths_for_platform, 
                        _container_create_or_lookup_app_group_paths_from_entitlements, 
+                       _container_create_or_lookup_app_group_paths_from_entitlements_4ls, 
                        _container_create_or_lookup_for_current_user, _container_create_or_lookup_for_platform, 
                        _container_create_or_lookup_group_container_paths_for_current_user, 
                        _container_create_or_lookup_path, _container_create_or_lookup_path_for_current_user, 

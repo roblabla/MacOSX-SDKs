@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           927CE8FC-5905-3FC6-BC80-9D3EE2DE448F
-  - target:          x86_64-maccatalyst
-    value:           927CE8FC-5905-3FC6-BC80-9D3EE2DE448F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FC89D439-D723-3A8C-A222-F64AC354DF8D
-  - target:          arm64e-maccatalyst
-    value:           FC89D439-D723-3A8C-A222-F64AC354DF8D
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 current-version: 0
 compatibility-version: 0
@@ -154,6 +141,7 @@ exports:
                        _kCMIOOutputCoordinatorNotification_StartingToRun, _kCMIOOutputCoordinatorNotification_StartupComplete, 
                        _kCMIOSampleBufferAttachmentKey_CAAudioTimeStamp, _kCMIOSampleBufferAttachmentKey_CMIOAsyncSMPTETimeStamp, 
                        _kCMIOSampleBufferAttachmentKey_ClientSequenceID, _kCMIOSampleBufferAttachmentKey_ClosedCaptionSampleBuffer, 
+                       _kCMIOSampleBufferAttachmentKey_ContinuityCaptureTryItNowActive, 
                        _kCMIOSampleBufferAttachmentKey_DiscontinuityFlags, _kCMIOSampleBufferAttachmentKey_FireWirePacketInformation, 
                        _kCMIOSampleBufferAttachmentKey_HDV1_PackData, _kCMIOSampleBufferAttachmentKey_HDV2_VAUX, 
                        _kCMIOSampleBufferAttachmentKey_HostTime, _kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers, 

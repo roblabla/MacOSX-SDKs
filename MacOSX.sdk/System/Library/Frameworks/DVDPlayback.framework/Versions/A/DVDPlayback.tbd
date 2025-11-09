@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           78401990-B3AA-320C-9365-3E5BAA85BC3D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E8D9A68E-6957-3E26-8592-6E4981A8A10F
 install-name:    '/System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback'
 current-version: 5960
 compatibility-version: 5000

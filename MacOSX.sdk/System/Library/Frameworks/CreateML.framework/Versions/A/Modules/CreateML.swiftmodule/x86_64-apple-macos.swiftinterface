@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CreateML
-// swift-module-flags-ignorable: -target-min-inlining-version target -enable-bare-slash-regex -user-module-version 831.40.3
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CreateML
+// swift-module-flags-ignorable: -target-min-inlining-version target -enable-bare-slash-regex -user-module-version 846.100.11
 import AVFoundation
 import Combine
 import CoreGraphics
@@ -879,7 +879,7 @@ extension CreateML.MLWordTagger.FeatureExtractorType : Swift.CustomStringConvert
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 public struct MLWordTaggerMetrics {
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -916,8 +916,8 @@ public struct MLCheckpoint : Swift.Codable {
   public var iteration: Swift.Int
   public var date: Foundation.Date
   public var metrics: [CreateML.MLProgress.Metric : Any]
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(*, unavailable)
 extension CreateML.MLCheckpoint : Swift.Sendable {
@@ -1142,7 +1142,7 @@ public struct MLRecommender {
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
   public init(trainingData: CreateML.MLDataTable, userColumn: Swift.String, itemColumn: Swift.String, ratingColumn: Swift.String? = nil, parameters: CreateML.MLRecommender.ModelParameters = ModelParameters()) throws
-  public func recommendations(fromUsers: [CreateML.MLIdentifier], maxCount: Swift.Int = 10, restrictingToItems: [CreateML.MLIdentifier]? = nil, excluding userItemObservations: CreateML.MLDataTable? = nil, excludingObserved: Swift.Bool = true) throws -> CreateML.MLDataTable
+  public func recommendations(fromUsers: [any CreateML.MLIdentifier], maxCount: Swift.Int = 10, restrictingToItems: [any CreateML.MLIdentifier]? = nil, excluding userItemObservations: CreateML.MLDataTable? = nil, excludingObserved: Swift.Bool = true) throws -> CreateML.MLDataTable
   public func recommendations<T>(fromUsers: CreateML.MLDataColumn<T>, maxCount: Swift.Int = 10, restrictingToItems: CreateML.MLDataColumn<T>? = nil, excluding userItemObservations: CreateML.MLDataTable? = nil, excludingObserved: Swift.Bool = true) throws -> CreateML.MLDataTable where T : CreateML.MLDataValueConvertible, T : CreateML.MLIdentifier
   @available(macOS 13.0, *)
   @available(iOS, unavailable)
@@ -1186,7 +1186,7 @@ extension CreateML.MLRecommender.ModelParameters : Swift.Sendable {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 public struct MLRecommenderMetrics {
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -1207,7 +1207,7 @@ extension CreateML.MLRecommenderMetrics : Swift.Sendable {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 extension CreateML.MLRecommender {
-  public func getSimilarItems(fromItems: [CreateML.MLIdentifier], maxCount: Swift.Int = 10) throws -> CreateML.MLDataTable
+  public func getSimilarItems(fromItems: [any CreateML.MLIdentifier], maxCount: Swift.Int = 10) throws -> CreateML.MLDataTable
   public func getSimilarItems<T>(fromItems: CreateML.MLDataColumn<T>, maxCount: Swift.Int = 10) throws -> CreateML.MLDataTable where T : CreateML.MLDataValueConvertible
 }
 @available(macOS 10.15, *)
@@ -1621,7 +1621,7 @@ extension CreateML.MLImageClassifier {
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLRegressorMetrics : Swift.Sendable {
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -1674,7 +1674,7 @@ public struct MLDataColumn<Element> where Element : CreateML.MLDataValueConverti
   public var isEmpty: Swift.Bool {
     get
   }
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -1751,7 +1751,7 @@ extension CreateML.MLDataColumn {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 extension CreateML.MLDataColumn {
-  public func show() -> CreateML.MLStreamingVisualizable
+  public func show() -> any CreateML.MLStreamingVisualizable
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Array where Element : CreateML.MLDataValueConvertible {
@@ -2163,8 +2163,8 @@ public struct MLProgress : Swift.Codable {
       get
     }
   }
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(*, unavailable)
 extension CreateML.MLProgress : Swift.Sendable {
@@ -2443,7 +2443,7 @@ extension CreateML.MLSoundClassifier {
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLClassifierMetrics {
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -3531,7 +3531,7 @@ extension CreateML.MLActionClassifier.ModelParameters : Swift.CustomStringConver
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLDataTable {
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -3546,7 +3546,7 @@ public struct MLDataTable {
   public init()
   public init(contentsOf url: Foundation.URL, options: CreateML.MLDataTable.ParsingOptions = ParsingOptions()) throws
   public init(namedColumns: [Swift.String : CreateML.MLUntypedColumn]) throws
-  public init(dictionary: [Swift.String : CreateML.MLDataValueConvertible]) throws
+  public init(dictionary: [Swift.String : any CreateML.MLDataValueConvertible]) throws
   public struct ParsingOptions : Swift.Sendable {
     public var containsHeader: Swift.Bool
     public var delimiter: Swift.String
@@ -3776,7 +3776,7 @@ extension CreateML.MLDataTable {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 extension CreateML.MLDataTable {
-  public func show() -> CreateML.MLStreamingVisualizable
+  public func show() -> any CreateML.MLStreamingVisualizable
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable : Swift.CustomStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
@@ -4013,7 +4013,7 @@ public struct MLObjectDetectorMetrics : Swift.Sendable {
     get
   }
   public init(averagePrecision: (variedIoU: [Swift.String : Swift.Double], IoU50: [Swift.String : Swift.Double]), meanAveragePrecision: (variedIoU: Swift.Double, IoU50: Swift.Double))
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -4406,7 +4406,7 @@ public struct MLUntypedColumn {
   public var type: CreateML.MLDataValue.ValueType {
     get
   }
-  public var error: Swift.Error? {
+  public var error: (any Swift.Error)? {
     get
   }
   public var isValid: Swift.Bool {
@@ -4445,26 +4445,26 @@ extension CreateML.MLUntypedColumn : Swift.Sendable {
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
-  public static func == (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func != (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func > (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func < (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func >= (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func <= (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func + (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func - (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func * (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func / (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
-  public static func == (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func != (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func > (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func < (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func >= (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func <= (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func + (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func - (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func * (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
-  public static func / (a: CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func == (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func != (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func > (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func < (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func >= (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func <= (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func + (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func - (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func * (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func / (a: CreateML.MLUntypedColumn, b: any CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
+  public static func == (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func != (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func > (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func < (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func >= (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func <= (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func + (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func - (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func * (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
+  public static func / (a: any CreateML.MLDataValueConvertible, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
   public static func == (a: CreateML.MLUntypedColumn, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
   public static func != (a: CreateML.MLUntypedColumn, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
   public static func > (a: CreateML.MLUntypedColumn, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
@@ -4531,7 +4531,7 @@ extension Swift.Array where Element == CreateML.MLDataValue {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 extension CreateML.MLUntypedColumn {
-  public func show() -> CreateML.MLStreamingVisualizable
+  public func show() -> any CreateML.MLStreamingVisualizable
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn : Swift.CustomReflectable {
@@ -4561,7 +4561,7 @@ final public class MLJob<Result> : Combine.Cancellable {
   final public var checkpoints: Combine.AnyPublisher<CreateML.MLCheckpoint, Swift.Never> {
     get
   }
-  final public var result: Combine.AnyPublisher<Result, Swift.Error> {
+  final public var result: Combine.AnyPublisher<Result, any Swift.Error> {
     get
   }
   @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
@@ -4587,23 +4587,23 @@ public protocol MLStreamingVisualizable : CreateML.MLVisualizable {
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
-public func show(_ x: CreateML.MLUntypedColumn, _ y: CreateML.MLUntypedColumn) -> CreateML.MLStreamingVisualizable
+public func show(_ x: CreateML.MLUntypedColumn, _ y: CreateML.MLUntypedColumn) -> any CreateML.MLStreamingVisualizable
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
-public func show<ElementX, ElementY>(_ x: CreateML.MLDataColumn<ElementX>, _ y: CreateML.MLDataColumn<ElementY>) -> CreateML.MLStreamingVisualizable where ElementX : CreateML.MLDataValueConvertible, ElementY : CreateML.MLDataValueConvertible
+public func show<ElementX, ElementY>(_ x: CreateML.MLDataColumn<ElementX>, _ y: CreateML.MLDataColumn<ElementY>) -> any CreateML.MLStreamingVisualizable where ElementX : CreateML.MLDataValueConvertible, ElementY : CreateML.MLDataValueConvertible
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
-public func show(_ column: CreateML.MLUntypedColumn) -> CreateML.MLStreamingVisualizable
+public func show(_ column: CreateML.MLUntypedColumn) -> any CreateML.MLStreamingVisualizable
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
-public func show<Element>(_ column: CreateML.MLDataColumn<Element>) -> CreateML.MLStreamingVisualizable where Element : CreateML.MLDataValueConvertible
+public func show<Element>(_ column: CreateML.MLDataColumn<Element>) -> any CreateML.MLStreamingVisualizable where Element : CreateML.MLDataValueConvertible
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
-public func show(_ table: CreateML.MLDataTable) -> CreateML.MLStreamingVisualizable
+public func show(_ table: CreateML.MLDataTable) -> any CreateML.MLStreamingVisualizable
 @available(macOS 11.0, iOS 15.0, *)
 @available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Equatable {}

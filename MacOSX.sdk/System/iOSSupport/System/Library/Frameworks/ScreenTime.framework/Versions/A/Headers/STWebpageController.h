@@ -22,29 +22,54 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 @interface STWebpageController : UIViewController
 #endif
 
-/// Suppresses the recording of web usage.
+/// A Boolean that indicates whether the webpage controller is not recording web
+/// usage.
 ///
-/// When this property is set to @c YES, the current usage recording is stopped, and no further usage is recorded in Screen Time.
+/// Set to `YES` to stop recording and reporting web-usage data.
 @property (nonatomic) BOOL suppressUsageRecording;
 
-@property (nullable, nonatomic, copy) NSURL *URL;
-/// Whether or not there are one or more videos that are currently playing in the webpage.
-@property (nonatomic) BOOL URLIsPlayingVideo NS_SWIFT_NAME(urlIsPlayingVideo);
-/// Whether or not the webpage has a video displayed in a floating Picture in Picture window.
-@property (nonatomic) BOOL URLIsPictureInPicture NS_SWIFT_NAME(urlIsPictureInPicture);
-/// If @c URL is blocked or not.
+/// The URL for the webpage.
 ///
-/// This property can be used for pausing media and ending any Picture in Picture video. It will change at a random delay (for user privacy reasons)
-/// after the URL should be blocked, and is KVO-compliant.
+/// Set this value to the webpage’s URL when the user navigates to a new URL.
+@property (nullable, nonatomic, copy) NSURL *URL;
+
+/// A Boolean that indicates whether there are one or more videos currently
+/// playing in the webpage.
+///
+/// The default value is `NO`. Set this value when the webpage starts or
+/// stops playing video.
+///
+/// - Important: Set this value to `NO` prior to changing
+/// ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL stops currently
+/// playing media and won’t immediately start playing new media.
+@property (nonatomic) BOOL URLIsPlayingVideo NS_SWIFT_NAME(urlIsPlayingVideo);
+
+/// A Boolean that indicates whether the webpage is currently displaying a
+/// floating picture in picture window.
+///
+/// The default value is `NO`. Set this value when the webpage starts or
+/// stops displaying a Picture in Picture window.
+///
+/// - Important: Set this value to `NO` prior to changing
+/// ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL ends all
+/// currently displayed Picture in Picture windows, and won’t immediately
+/// display a new one.
+@property (nonatomic) BOOL URLIsPictureInPicture NS_SWIFT_NAME(urlIsPictureInPicture);
+
+/// A Boolean that indicates whether a parent or guardian has blocked the URL.
+///
+/// When a parent or guardian blocks the webpage’s URL, the webpage controller
+/// displays a blocking UI and then sets this property to `YES`.
 @property (readonly) BOOL URLIsBlocked NS_SWIFT_NAME(urlIsBlocked);
 
 /// Changes the bundle identifier used to report web usage.
 ///
 /// This is only supported for web browsers that have been properly registered with Screen Time.
 ///
-/// @param bundleIdentifier Defaults to @c NSBundle.mainBundle.bundleIdentifier but can be changed to facilitate reporting web usage
-/// for a parent web browser from one of its helper processes or extensions.
-/// @param error Any error that occurred while changing the bundle identifier.
+/// - Parameters:
+///   - bundleIdentifier: The bundle identifier that can be changed to facilitate web usage
+///     reporting for a parent web browser from one of its helper processes or extensions.
+///   - error: Any error that occurred while changing the bundle identifier.
 - (BOOL)setBundleIdentifier:(NSString *)bundleIdentifier error:(NSError **)error;
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;

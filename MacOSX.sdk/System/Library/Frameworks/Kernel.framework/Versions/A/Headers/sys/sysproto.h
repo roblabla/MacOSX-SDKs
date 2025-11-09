@@ -207,6 +207,9 @@ struct kill_args {
 	char signum_l_[PADL_(int)]; int signum; char signum_r_[PADR_(int)];
 	char posix_l_[PADL_(int)]; int posix; char posix_r_[PADR_(int)];
 };
+struct crossarch_trap_args {
+	char name_l_[PADL_(uint32_t)]; uint32_t name; char name_r_[PADR_(uint32_t)];
+};
 struct getppid_args {
 	int32_t dummy;
 };
@@ -2552,6 +2555,7 @@ int chflags(struct proc *, struct chflags_args *, int *);
 int fchflags(struct proc *, struct fchflags_args *, int *);
 int sync(struct proc *, struct sync_args *, int *);
 int kill(struct proc *, struct kill_args *, int *);
+int sys_crossarch_trap(struct proc *, struct crossarch_trap_args *, int *);
 int getppid(struct proc *, struct getppid_args *, int *);
 int sys_dup(struct proc *, struct dup_args *, int *);
 int pipe(struct proc *, struct pipe_args *, int *);

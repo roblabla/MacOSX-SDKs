@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           496B867B-F991-3C32-A81D-1074F930DBFE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           338745BF-8AC5-31C2-81C5-F095FA7EA81E
 install-name:    '/System/Library/Frameworks/InstantMessage.framework/Versions/A/InstantMessage'
 current-version: 800
 exports:

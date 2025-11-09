@@ -89,7 +89,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderMaterializationFlags) {
      file to be marked as materialized. This is useful if the resulting file is known to contain sparse parts,
      and all the remaining parts have been filled in.
      This flag is ignored if the provided range doesn't cover the entire file (ie. [0, EOF]).
-     This flag is currently ignored.
+     This flag is not functional prior to macOS 13.3.
      */
     NSFileProviderMaterializationFlagsKnownSparseRanges = (1 << 0)
 } FILEPROVIDER_API_AVAILABILITY_V4_1;

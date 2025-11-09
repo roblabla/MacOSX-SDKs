@@ -1,6 +1,6 @@
 /**
  *
- *    Copyright (c) 2020 Project CHIP Authors
+ *    Copyright (c) 2020-2023 Project CHIP Authors
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,27 +17,39 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Matter/MTRNOCChainIssuer.h>
-#import <Matter/MTROnboardingPayloadParser.h>
+#import <Matter/MTROperationalCertificateIssuer.h>
 
 @class MTRBaseDevice;
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_DEPRECATED("Please use MTRBaseDevice deviceWithNodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NSError * _Nullable error);
 
 @class MTRCommissioningParameters;
+@class MTRSetupPayload;
 @protocol MTRDevicePairingDelegate;
+@protocol MTRDeviceControllerDelegate;
 
 @interface MTRDeviceController : NSObject
 
-@property (readonly, nonatomic) BOOL isRunning;
+/**
+ * Controllers are created via the MTRDeviceControllerFactory object.
+ */
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
- * Return the Node Id assigned to the controller.  Will return nil if the
+ * If true, the controller has not been shut down yet.
+ */
+@property (readonly, nonatomic, getter=isRunning) BOOL running;
+
+/**
+ * Return the Node ID assigned to the controller.  Will return nil if the
  * controller is not running (and hence does not know its node id).
  */
-@property (readonly, nonatomic, nullable) NSNumber * controllerNodeId;
+@property (readonly, nonatomic, nullable)
+    NSNumber * controllerNodeID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
  * Set up a commissioning session for a device, using the provided setup payload
@@ -53,9 +65,9 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
  * provided discriminator.
  *
  * Then a PASE session will be established with the device, unless an error
- * occurs.  MTRDevicePairingDelegate will be notified as follows:
+ * occurs.  MTRDeviceControllerDelegate will be notified as follows:
  *
- * * Discovery fails: onStatusUpdate with MTRPairingStatusFailed.
+ * * Discovery fails: onStatusUpdate with MTRCommissioningStatusFailed.
  *
  * * Discovery succeeds but commissioning session setup fails: onPairingComplete
  *   with an error.
@@ -73,99 +85,59 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
     API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
 
 /**
- * Start pairing for a device with the given ID, using the provided setup PIN
- * to establish a PASE connection.
- *
- * The IP and port for the device will be discovered automatically based on the
- * provided discriminator.
- *
- * The pairing process will proceed until a PASE session is established or an
- * error occurs, then notify onPairingComplete on the MTRDevicePairingDelegate
- * for this controller.  That delegate is expected to call commissionDevice
- * after that point if it wants to commission the device.
+ * Commission the node with the given node ID.  The node ID must match the node
+ * ID that was used to set up the commissioning session.
  */
-- (BOOL)pairDevice:(uint64_t)deviceID
-     discriminator:(uint16_t)discriminator
-      setupPINCode:(uint32_t)setupPINCode
-             error:(NSError * __autoreleasing *)error;
+- (BOOL)commissionNodeWithID:(NSNumber *)nodeID
+         commissioningParams:(MTRCommissioningParameters *)commissioningParams
+                       error:(NSError * __autoreleasing *)error API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * Start pairing for a device with the given ID, using the provided IP address
- * and port to connect to the device and the provided setup PIN to establish a
- * PASE connection.
- *
- * The pairing process will proceed until a PASE session is established or an
- * error occurs, then notify onPairingComplete on the MTRDevicePairingDelegate
- * for this controller.  That delegate is expected to call commissionDevice
- * after that point if it wants to commission the device.
+ * Call this method after MTRDeviceAttestationDelegate
+ * deviceAttestationFailedForController:opaqueDeviceHandle:error: or
+ * deviceAttestationCompletedForController:opaqueDeviceHandle:attestationDeviceInfo:error:
+ * is called to continue commissioning the device.
  */
-- (BOOL)pairDevice:(uint64_t)deviceID
-           address:(NSString *)address
-              port:(uint16_t)port
-      setupPINCode:(uint32_t)setupPINCode
-             error:(NSError * __autoreleasing *)error;
-
-/**
- * Start pairing for a device with the given ID and onboarding payload (QR code
- * or manual setup code).  The payload will be used to discover the device and
- * establish a PASE connection.
- *
- * The pairing process will proceed until a PASE session is established or an
- * error occurs, then notify onPairingComplete on the MTRDevicePairingDelegate
- * for this controller.  That delegate is expected to call commissionDevice
- * after that point if it wants to commission the device.
- */
-- (BOOL)pairDevice:(uint64_t)deviceID onboardingPayload:(NSString *)onboardingPayload error:(NSError * __autoreleasing *)error;
-- (BOOL)commissionDevice:(uint64_t)deviceId
-     commissioningParams:(MTRCommissioningParameters *)commissioningParams
-                   error:(NSError * __autoreleasing *)error;
-
-- (BOOL)continueCommissioningDevice:(void *)device
+- (BOOL)continueCommissioningDevice:(void *)opaqueDeviceHandle
            ignoreAttestationFailure:(BOOL)ignoreAttestationFailure
                               error:(NSError * __autoreleasing *)error;
 
-- (BOOL)stopDevicePairing:(uint64_t)deviceID error:(NSError * __autoreleasing *)error;
-
-- (nullable MTRBaseDevice *)getDeviceBeingCommissioned:(uint64_t)deviceId error:(NSError * __autoreleasing *)error;
-- (BOOL)getBaseDevice:(uint64_t)deviceID
-                queue:(dispatch_queue_t)queue
-    completionHandler:(MTRDeviceConnectionCallback)completionHandler;
-
-- (BOOL)openPairingWindow:(uint64_t)deviceID duration:(NSUInteger)duration error:(NSError * __autoreleasing *)error;
-- (nullable NSString *)openPairingWindowWithPIN:(uint64_t)deviceID
-                                       duration:(NSUInteger)duration
-                                  discriminator:(NSUInteger)discriminator
-                                       setupPIN:(NSUInteger)setupPIN
-                                          error:(NSError * __autoreleasing *)error;
-
 /**
- * Controllers are created via the MTRControllerFactory object.
+ * Cancel commissioning for the given node id.  This will shut down any existing
+ * commissioning session for that node id.
  */
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (BOOL)cancelCommissioningForNodeID:(NSNumber *)nodeID
+                               error:(NSError * __autoreleasing *)error
+    API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * Set the Delegate for the Device Pairing  as well as the Queue on which the Delegate callbacks will be triggered
+ * Get an MTRBaseDevice for a commissioning session that was set up for the
+ * given node ID.  Returns nil if no such commissioning session is available.
+ */
+- (nullable MTRBaseDevice *)deviceBeingCommissionedWithNodeID:(NSNumber *)nodeID
+                                                        error:(NSError * __autoreleasing *)error
+    API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * Optionally pre-warm the controller for setting up a commissioning session.
+ * This may be called before setupCommissioningSessionWithPayload if it's known
+ * that a commissioning attempt will soon take place but the commissioning
+ * payload is not known yet.
  *
- * @param[in] delegate The delegate the pairing process should use
+ * For example this may do a BLE scan in advance so results are ready earlier
+ * once the discriminator is known.
+ */
+- (void)preWarmCommissioningSession API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * Set the Delegate for the device controller  as well as the Queue on which the Delegate callbacks will be triggered
+ *
+ * @param[in] delegate The delegate the commissioning process should use
  *
  * @param[in] queue The queue on which the callbacks will be delivered
  */
-- (void)setPairingDelegate:(id<MTRDevicePairingDelegate>)delegate queue:(dispatch_queue_t)queue;
-
-/**
- * Sets this MTRDeviceController to use the given issuer for issuing operational certs. By default, the MTRDeviceController uses an
- * internal issuer.
- *
- * When a nocChainIssuer is set, the device commissioner will delegate verification to the chip::Credentials::PartialDACVerifier so
- * that DAC chain and CD validation can be performed by custom code triggered by MTRNOCChainIssuer.onNOCChainGenerationNeeded().
- * Otherwise, the device commissioner uses the chip::Credentials::DefaultDACVerifier
- *
- * @param[in] nocChainIssuer the NOC Chain issuer to use for issuer operational certs
- *
- * @param[in] queue The queue on which the callbacks will be delivered
- */
-- (void)setNocChainIssuer:(id<MTRNOCChainIssuer>)nocChainIssuer queue:(dispatch_queue_t)queue;
+- (void)setDeviceControllerDelegate:(id<MTRDeviceControllerDelegate>)delegate
+                              queue:(dispatch_queue_t)queue API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
  * Return the attestation challenge for the secure session of the device being commissioned.
@@ -173,25 +145,110 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
  * Attempts to retrieve the attestation challenge for a commissionee with the given Device ID.
  * Returns nil if given Device ID does not match an active commissionee, or if a Secure Session is not availale.
  */
-- (nullable NSData *)fetchAttestationChallengeForDeviceId:(uint64_t)deviceId;
+- (NSData * _Nullable)attestationChallengeForDeviceID:(NSNumber *)deviceID
+    API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * Compute a PASE verifier and passcode ID for the desired setup pincode.
+ * Compute a PASE verifier for the desired setup passcode.
  *
- * @param[in] setupPincode    The desired PIN code to use
- * @param[in] iterations      The number of iterations to use when generating the verifier
- * @param[in] salt            The 16-byte salt for verifier computation
+ * @param[in] setupPasscode   The desired passcode to use.
+ * @param[in] iterations      The number of iterations to use when generating the verifier.
+ * @param[in] salt            The 16-byte salt for verifier computation.
  *
  * Returns nil on errors (e.g. salt has the wrong size), otherwise the computed
  * verifier bytes.
  */
-- (nullable NSData *)computePaseVerifier:(uint32_t)setupPincode iterations:(uint32_t)iterations salt:(NSData *)salt;
++ (nullable NSData *)computePASEVerifierForSetupPasscode:(NSNumber *)setupPasscode
+                                              iterations:(NSNumber *)iterations
+                                                    salt:(NSData *)salt
+                                                   error:(NSError * __autoreleasing *)error
+    API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * Shutdown the controller. Calls to shutdown after the first one are NO-OPs.
+ * Shut down the controller. Calls to shutdown after the first one are NO-OPs.
+ * This must be called, either directly or via shutting down the
+ * MTRDeviceControllerFactory, to avoid leaking the controller.
  */
 - (void)shutdown;
 
+@end
+
+@interface MTRDeviceController (Deprecated)
+
+@property (readonly, nonatomic, nullable) NSNumber * controllerNodeId API_DEPRECATED(
+    "Please use controllerNodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (nullable NSData *)fetchAttestationChallengeForDeviceId:(uint64_t)deviceId
+    API_DEPRECATED(
+        "Please use attestationChallengeForDeviceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (BOOL)getBaseDevice:(uint64_t)deviceID
+                queue:(dispatch_queue_t)queue
+    completionHandler:(MTRDeviceConnectionCallback)completionHandler
+    API_DEPRECATED("Please use [MTRBaseDevice deviceWithNodeID:controller:]", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
+        tvos(16.1, 16.4));
+
+- (BOOL)pairDevice:(uint64_t)deviceID
+     discriminator:(uint16_t)discriminator
+      setupPINCode:(uint32_t)setupPINCode
+             error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+        watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (BOOL)pairDevice:(uint64_t)deviceID
+           address:(NSString *)address
+              port:(uint16_t)port
+      setupPINCode:(uint32_t)setupPINCode
+             error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+        watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (BOOL)pairDevice:(uint64_t)deviceID
+    onboardingPayload:(NSString *)onboardingPayload
+                error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+        watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (BOOL)commissionDevice:(uint64_t)deviceId
+     commissioningParams:(MTRCommissioningParameters *)commissioningParams
+                   error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use commissionNodeWithID:commissioningParams:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+        watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (BOOL)stopDevicePairing:(uint64_t)deviceID
+                    error:(NSError * __autoreleasing *)error
+    API_DEPRECATED(
+        "Please use cancelCommissioningForNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (nullable MTRBaseDevice *)getDeviceBeingCommissioned:(uint64_t)deviceId
+                                                 error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use deviceBeingCommissionedWithNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
+        tvos(16.1, 16.4));
+
+- (BOOL)openPairingWindow:(uint64_t)deviceID
+                 duration:(NSUInteger)duration
+                    error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
+        macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (nullable NSString *)openPairingWindowWithPIN:(uint64_t)deviceID
+                                       duration:(NSUInteger)duration
+                                  discriminator:(NSUInteger)discriminator
+                                       setupPIN:(NSUInteger)setupPIN
+                                          error:(NSError * __autoreleasing *)error
+    API_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
+        macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (nullable NSData *)computePaseVerifier:(uint32_t)setupPincode
+                              iterations:(uint32_t)iterations
+                                    salt:(NSData *)salt
+    API_DEPRECATED("Please use computePASEVerifierForSetupPasscode:iterations:salt:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+        watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (void)setPairingDelegate:(id<MTRDevicePairingDelegate>)delegate
+                     queue:(dispatch_queue_t)queue API_DEPRECATED("Please use setDeviceControllerDelegate:", ios(16.1, 16.4),
+                               macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+- (void)setNocChainIssuer:(id<MTRNOCChainIssuer>)nocChainIssuer
+                    queue:(dispatch_queue_t)queue
+    API_DEPRECATED("Please set the operationalCertificateIssuer in the MTRDeviceControllerStartupParams instead.", ios(16.1, 16.4),
+        macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 NS_ASSUME_NONNULL_END

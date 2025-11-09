@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           0C6C2086-DBDC-344E-8D34-2E121DE25476
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B896B40C-783C-3E8A-A33B-61C2CF2E253E
 install-name:    '/System/Library/PrivateFrameworks/SiriInferenceFlow.framework/Versions/A/SiriInferenceFlow'
 swift-abi-version: 7
 exports:

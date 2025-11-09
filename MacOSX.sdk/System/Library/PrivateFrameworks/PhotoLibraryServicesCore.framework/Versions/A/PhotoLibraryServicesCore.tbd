@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           3E37AE14-4231-37E8-BEB3-D596ABDB2FCF
-  - target:          x86_64-maccatalyst
-    value:           3E37AE14-4231-37E8-BEB3-D596ABDB2FCF
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0B2E5CB6-EA35-3FF0-8E1E-16D903FC886C
-  - target:          arm64e-maccatalyst
-    value:           0B2E5CB6-EA35-3FF0-8E1E-16D903FC886C
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 520.0.240
+current-version: 541.0.110
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -181,28 +168,32 @@ exports:
                        _PLCoreAnalyticsLibrarySummaryCacheMetricsImageCacheMissCountKey, 
                        _PLCoreAnalyticsLibrarySummaryCacheMetricsVideoComplementCacheHitCountKey, 
                        _PLCoreAnalyticsLibrarySummaryCacheMetricsVideoComplementCacheMissCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryContactLinkedPersonCountKey, 
                        _PLCoreAnalyticsLibrarySummaryDuplicateAssetCountKey, _PLCoreAnalyticsLibrarySummaryDuplicateAssetGroupCountKey, 
                        _PLCoreAnalyticsLibrarySummaryDuplicateSharedLibraryAssetCountKey, 
                        _PLCoreAnalyticsLibrarySummaryEvent, _PLCoreAnalyticsLibrarySummaryFaceCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryFavoriteCountKey, _PLCoreAnalyticsLibrarySummaryFileSystemIsInternalKey, 
-                       _PLCoreAnalyticsLibrarySummaryFileSystemIsNetworkKey, _PLCoreAnalyticsLibrarySummaryFinderSyncedAssetCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryHeifCountKey, _PLCoreAnalyticsLibrarySummaryImportedByCameraKey, 
-                       _PLCoreAnalyticsLibrarySummaryIsActiveKey, _PLCoreAnalyticsLibrarySummaryJpegCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryJunkCountKey, _PLCoreAnalyticsLibrarySummaryLivePhotoCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentKey, 
+                       _PLCoreAnalyticsLibrarySummaryFavoriteCountKey, _PLCoreAnalyticsLibrarySummaryFavoritedPersonCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryFileSystemIsInternalKey, _PLCoreAnalyticsLibrarySummaryFileSystemIsNetworkKey, 
+                       _PLCoreAnalyticsLibrarySummaryFinderSyncedAssetCountKey, _PLCoreAnalyticsLibrarySummaryGraphVerifiedPersonCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryHeifCountKey, _PLCoreAnalyticsLibrarySummaryHiddenPersonCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryImportedByCameraKey, _PLCoreAnalyticsLibrarySummaryIsActiveKey, 
+                       _PLCoreAnalyticsLibrarySummaryJpegCountKey, _PLCoreAnalyticsLibrarySummaryJunkCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryLivePhotoCountKey, _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentKey, 
                        _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentPhotoKey, 
                        _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentVideoKey, 
                        _PLCoreAnalyticsLibrarySummaryLocationCountKey, _PLCoreAnalyticsLibrarySummaryManuallyAddedSharedLibraryAssetCountKey, 
                        _PLCoreAnalyticsLibrarySummaryMedianCameraAssetInTheLast30DaysKey, 
                        _PLCoreAnalyticsLibrarySummaryMedianNonCameraAssetInTheLast30DaysKey, 
                        _PLCoreAnalyticsLibrarySummaryMediumOriginalPercentKey, _PLCoreAnalyticsLibrarySummaryMediumPercentKey, 
-                       _PLCoreAnalyticsLibrarySummaryNonGuestSavedFromMessagesCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryNamedPersonCountKey, _PLCoreAnalyticsLibrarySummaryNonGuestSavedFromMessagesCountKey, 
                        _PLCoreAnalyticsLibrarySummaryOriginalLibrarySizeKey, _PLCoreAnalyticsLibrarySummaryOriginalPercentKey, 
+                       _PLCoreAnalyticsLibrarySummaryOrphanedSceneClassificationsCountKey, 
                        _PLCoreAnalyticsLibrarySummaryOtherImagesCountKey, _PLCoreAnalyticsLibrarySummaryOtherMediaCountKey, 
                        _PLCoreAnalyticsLibrarySummaryPersistentHistoryDaysSinceEarliestTransactionKey, 
                        _PLCoreAnalyticsLibrarySummaryPersistentHistoryPercentOfPayloadKey, 
                        _PLCoreAnalyticsLibrarySummaryPersistentHistoryPercentOfTotalKey, 
                        _PLCoreAnalyticsLibrarySummaryPersistentHistoryTransactionCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryPersonCountKey, _PLCoreAnalyticsLibrarySummaryPersonPetDetectionTypeCountKey, 
                        _PLCoreAnalyticsLibrarySummaryPersonalLibraryAssetCountKey, 
                        _PLCoreAnalyticsLibrarySummaryPhotoCountKey, _PLCoreAnalyticsLibrarySummaryPortraitCountKey, 
                        _PLCoreAnalyticsLibrarySummaryRawCountKey, _PLCoreAnalyticsLibrarySummaryReferenceMediaSizeKey, 
@@ -219,12 +210,21 @@ exports:
                        _PLCoreAnalyticsLibrarySummarySavedFromPhotosCountKey, _PLCoreAnalyticsLibrarySummaryScreenshotCountKey, 
                        _PLCoreAnalyticsLibrarySummarySharedLibraryAssetCountKey, 
                        _PLCoreAnalyticsLibrarySummarySharedLibraryPercentOfLocalAssetsAutoSharedInCameraKey, 
-                       _PLCoreAnalyticsLibrarySummaryThumbPercentKey, _PLCoreAnalyticsLibrarySummaryTotalResourcesCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryTotalStorageKey, _PLCoreAnalyticsLibrarySummaryTrashedAssetCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryThumbPercentKey, _PLCoreAnalyticsLibrarySummaryTombstonePersonCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryTotalResourcesCountKey, _PLCoreAnalyticsLibrarySummaryTotalStorageKey, 
+                       _PLCoreAnalyticsLibrarySummaryTrashedAssetCountKey, _PLCoreAnalyticsLibrarySummaryUserFeedbackPersonCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryUserVerifiedPersonCountKey, 
                        _PLCoreAnalyticsLibrarySummaryVideosCountKey, _PLCoreAnalyticsLibrarySummaryiCPLModeKey, 
-                       _PLCoreAnalyticsLibrarySummaryiCPLPhotoCountKey, _PLCoreAnalyticsLibrarySummaryiCPLTrashedAssetsCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryiCPLVideoCountKey, _PLCoreAnalyticsMomentStatisticsEvent, 
-                       _PLCoreAnalyticsMomentStatisticsEventAverageNumOfAssetsInMomentsKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLPhotoCountKey, _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionBatteryBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionBlockedSessionsCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionCellularBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionLowDataModeBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionLowPowerModeBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionTotalSessionsCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionUIVisibleBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLSyncSessionUnknownReasonBlockedCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryiCPLTrashedAssetsCountKey, _PLCoreAnalyticsLibrarySummaryiCPLVideoCountKey, 
+                       _PLCoreAnalyticsMomentStatisticsEvent, _PLCoreAnalyticsMomentStatisticsEventAverageNumOfAssetsInMomentsKey, 
                        _PLCoreAnalyticsMomentStatisticsEventMedianNumOfAssetsInMomentsKey, 
                        _PLCoreAnalyticsMomentStatisticsEventNumOfMomentsKey, _PLCoreAnalyticsMomentStatisticsEventNumOfSingleAssetMomentsKey, 
                        _PLCoreAnalyticsMomentYearsEvent, _PLCoreAnalyticsMomentYearsEventEndKey, 
@@ -321,9 +321,9 @@ exports:
                        _PLFileSystemPersistenceSyndicationHistoryKey, _PLFileSystemPersistenceSyndicationIdentifierKey, 
                        _PLFileSystemPersistenceTimeZoneNameKey, _PLFileSystemPersistenceTimeZoneOffsetKey, 
                        _PLFileSystemPersistenceTitleKey, _PLFileSystemPersistenceTrashedKey, 
-                       _PLFileSystemPersistenceUUIDKey, _PLFileSystemPersistenceVideoComplementVisibilityKey, 
-                       _PLFlipDimensionsForImageOrientation, _PLFrameDropRecoveryProxyFileSuffix, 
-                       _PLGadgetsGetLog, _PLGatekeeperUpdateCPLDownloadStatusCompletedKey, 
+                       _PLFileSystemPersistenceTrashedReasonKey, _PLFileSystemPersistenceUUIDKey, 
+                       _PLFileSystemPersistenceVideoComplementVisibilityKey, _PLFlipDimensionsForImageOrientation, 
+                       _PLFrameDropRecoveryProxyFileSuffix, _PLGadgetsGetLog, _PLGatekeeperUpdateCPLDownloadStatusCompletedKey, 
                        _PLGatekeeperUpdateCPLDownloadStatusDataKey, _PLGatekeeperUpdateCPLDownloadStatusErrorKey, 
                        _PLGatekeeperUpdateCPLDownloadStatusNotification, _PLGatekeeperUpdateCPLDownloadStatusProgressKey, 
                        _PLGatekeeperUpdateCPLDownloadStatusTaskIdentifierKey, _PLGatekeeperXPCGetLog, 
@@ -713,9 +713,9 @@ exports:
                        PLCoreAnalyticsEventManager, PLDelayedActionTimer, PLDeviceConfiguration, 
                        PLDiskController, PLExclusiveFileLock, PLFilePathDescription, 
                        PLFileSystemCapabilities, PLFileSystemPersistence, PLFileSystemPersistenceAttributes, 
-                       PLFileSystemPersistenceBatchItem, PLFileUtilities, PLFormatChooser, 
-                       PLGatekeeperClient, PLIOSurfaceData, PLImageDataInfo, PLImageFormat, 
-                       PLLazyObject, PLLibraryBookmarkManager, PLLibraryMigrationMessageTracer, 
+                       PLFileSystemPersistenceBatchItem, PLFileUtilities, PLFilesystemIterator, 
+                       PLFormatChooser, PLGatekeeperClient, PLIOSurfaceData, PLImageDataInfo, 
+                       PLImageFormat, PLLazyObject, PLLibraryBookmarkManager, PLLibraryMigrationMessageTracer, 
                        PLLibraryServicesOperation, PLLibraryServicesStateNode, PLMigrationServiceOptions, 
                        PLNonBindingAssetsdClient, PLPhotoDCFDirectory, PLPhotoDCFFileGroup, 
                        PLPhotoDCFObject, PLPhotoDCIMDirectory, PLPhotoLibraryFileIdentifier, 

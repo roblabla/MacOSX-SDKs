@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6E87AA16-B833-319A-9CF3-FC3AF5B40AD5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           108C02B2-2DE0-360F-AE28-DF5144E926A1
 install-name:    '/System/Library/PrivateFrameworks/SystemMigration.framework/Versions/A/SystemMigration'
 current-version: 866
 exports:
@@ -114,8 +107,9 @@ exports:
                        SMRequestStateTransformer, SMRequestTypeTransformer, SMRestartController, 
                        SMSandboxTools, SMSelectSnapshotItem, SMSelectSourceDetailDisplayNameTransformer, 
                        SMSelectSourceDetailDisplayStateTransformer, SMSelectSourceDetailImageTransformer, 
-                       SMSelectSourceDetailTableCellView, SMSelectSourceDetailTableDelegate, 
-                       SMSelectSourceViewController, SMSelectSourceViewItem, SMSelectSourceViewItemContainingView, 
+                       SMSelectSourceDetailIneligibilityDescriptionTransformer, SMSelectSourceDetailTableCellView, 
+                       SMSelectSourceDetailTableDelegate, SMSelectSourceViewController, 
+                       SMSelectSourceViewItem, SMSelectSourceViewItemContainingView, 
                        SMShortNameFormatter, SMSizeFormatter, SMSizeTransformer, 
                        SMSourceSelectionController, SMSummaryNode, SMSummaryViewController, 
                        SMSystem, SMSystemArchiver, SMSystemScanner, SMSystemScanner_Client, 

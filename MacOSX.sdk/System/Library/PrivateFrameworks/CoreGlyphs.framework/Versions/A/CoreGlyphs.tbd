@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           2E525671-1ECE-3028-9E29-60FC0B232580
-  - target:          x86_64-maccatalyst
-    value:           2E525671-1ECE-3028-9E29-60FC0B232580
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           15950E14-8F4D-361D-ABDC-6ABFB376AB3B
-  - target:          arm64e-maccatalyst
-    value:           15950E14-8F4D-361D-ABDC-6ABFB376AB3B
 install-name:    '/System/Library/PrivateFrameworks/CoreGlyphs.framework/Versions/A/CoreGlyphs'
-current-version: 99.2
+current-version: 101.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

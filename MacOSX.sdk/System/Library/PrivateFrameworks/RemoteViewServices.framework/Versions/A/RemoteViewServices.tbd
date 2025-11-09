@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F9993175-F189-365E-B3A6-E82BE9341A88
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8507CA5F-1FD9-37ED-8F58-2FA01D967923
 install-name:    '/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

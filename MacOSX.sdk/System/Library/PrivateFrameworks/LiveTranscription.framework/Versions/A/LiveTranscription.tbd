@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           68E3F1F1-736B-38CF-B5C3-09262AFAF535
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CD551436-8C0E-3DB6-9E27-8A080F72E9DD
 install-name:    '/System/Library/PrivateFrameworks/LiveTranscription.framework/Versions/A/LiveTranscription'
 swift-abi-version: 7
 exports:

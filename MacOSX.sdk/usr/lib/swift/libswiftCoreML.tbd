@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           71801E3A-AFE6-3F32-A0A4-C10A9E340E45
-  - target:          x86_64-maccatalyst
-    value:           71801E3A-AFE6-3F32-A0A4-C10A9E340E45
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9D4CAF48-8D49-37B5-AF91-6659A4159399
-  - target:          arm64e-maccatalyst
-    value:           9D4CAF48-8D49-37B5-AF91-6659A4159399
 install-name:    '/usr/lib/swift/libswiftCoreML.dylib'
-current-version: 1436.60.2
+current-version: 1436.100.12
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

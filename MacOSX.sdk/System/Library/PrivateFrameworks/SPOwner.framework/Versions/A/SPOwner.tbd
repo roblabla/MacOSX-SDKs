@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           EA3186DB-110A-3453-B10D-66D79EA656BE
-  - target:          x86_64-maccatalyst
-    value:           EA3186DB-110A-3453-B10D-66D79EA656BE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           45511753-FC99-3ABC-A531-74D7E7325DB5
-  - target:          arm64e-maccatalyst
-    value:           45511753-FC99-3ABC-A531-74D7E7325DB5
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

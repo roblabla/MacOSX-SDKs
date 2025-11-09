@@ -11,7 +11,7 @@
 
 @class CKContainer, CKOperationConfiguration, CKOperationGroup;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString *CKOperationID;
 
@@ -40,6 +40,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *
  *  @discussion Once this callback is called the operation will continue running even if the current process exits.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ *  This block may share mutable state with other blocks assigned to this operation, but any such mutable state
+ *  should not be concurrently used outside of blocks assigned to this operation.
  */
 @property (nonatomic, copy, nullable) void (^longLivedOperationWasPersistedBlock)(void) API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0));
 
@@ -66,10 +68,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  = allow cellular access
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+// NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
 @interface CKOperationConfiguration : NSObject
 
 /*! If no container is set, [CKContainer defaultContainer] is used */
-@property (nonatomic, strong, nullable) CKContainer *container;
+@property (atomic, strong, nullable) CKContainer *container;
 
 /*! @discussion CKOperations behave differently depending on how you set qualityOfService.
  *
@@ -95,11 +98,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  *
  * CKOperations have a default qualityOfService of Default.
  */
-@property (nonatomic, assign) NSQualityOfService qualityOfService;
+@property (atomic, assign) NSQualityOfService qualityOfService;
 
 
 /*! Defaults to @c YES */
-@property (nonatomic, assign) BOOL allowsCellularAccess;
+@property (atomic, assign) BOOL allowsCellularAccess;
 
 /*! @discussion Long lived operations will continue running even if your process exits. If your process remains alive for the lifetime of the long lived operation its behavior is the same as a regular operation.
  *
@@ -110,21 +113,21 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  *
  *  The default value for longLived is NO. Changing the value of longLived on an already started operation or on an outstanding long lived operation fetched from CKContainer has no effect.
  */
-@property (nonatomic, assign, getter=isLongLived) BOOL longLived;
+@property (atomic, assign, getter=isLongLived) BOOL longLived;
 
 /*! @discussion If non-zero, overrides the timeout interval for any network requests issued by this operation.
  *  The default value is 60.
  *
  * @see NSURLSessionConfiguration.timeoutIntervalForRequest
  */
-@property (nonatomic, assign) NSTimeInterval timeoutIntervalForRequest;
+@property (atomic, assign) NSTimeInterval timeoutIntervalForRequest;
 
 /*! @discussion If set, overrides the timeout interval for any network resources retrieved by this operation.
  *  If not explicitly set, defaults to a value based on the operation's @c qualityOfService
  *
  * @see NSURLSessionConfiguration.timeoutIntervalForResource
  */
-@property (nonatomic, assign) NSTimeInterval timeoutIntervalForResource;
+@property (atomic, assign) NSTimeInterval timeoutIntervalForResource;
 
 
 @end
@@ -140,5 +143,4 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @property (nonatomic, assign) NSTimeInterval timeoutIntervalForResource API_DEPRECATED("Use CKOperationConfiguration", macos(10.12, 10.13), ios(10.0, 11.0), tvos(10.0, 11.0), watchos(3.0, 4.0));
 @end
 
-NS_ASSUME_NONNULL_END
-
+NS_HEADER_AUDIT_END(nullability, sendability)

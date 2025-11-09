@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D0C91232-2B60-3FDB-83BA-25789857E2C7
-  - target:          x86_64-maccatalyst
-    value:           D0C91232-2B60-3FDB-83BA-25789857E2C7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           35B31759-030A-3A7C-B0A3-AAF44772B235
-  - target:          arm64e-maccatalyst
-    value:           35B31759-030A-3A7C-B0A3-AAF44772B235
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcutClient.framework/Versions/A/VoiceShortcutClient'
 swift-abi-version: 7
 exports:
@@ -312,11 +299,12 @@ exports:
                        _WFDataFromSpotlightResultRunnable, _WFDatabaseChangedNotification, 
                        _WFDatePickerModeDate, _WFDatePickerModeDateAndTime, _WFDatePickerModeTime, 
                        _WFDescribeFinderImageResizeFormat, _WFDescribeFinderImageResizeSize, 
-                       _WFDescribeWorkflowOutputBehavior, _WFDeviceCapabilityCellularData, 
+                       _WFDescribeWorkflowOutputBehavior, _WFDeviceCapabilityAlwaysOnDisplay, 
+                       _WFDeviceCapabilityCellularData, _WFDeviceCapabilityCellularTelephony, 
                        _WFDeviceCapabilityForceTouch, _WFDeviceCapabilityHapticFeedback, 
                        _WFDeviceCapabilityHomeButton, _WFDeviceCapabilityPersonalHotspot, 
-                       _WFDeviceCapabilityPosters, _WFDeviceCapabilityScarlett, _WFDeviceCapabilityVibration, 
-                       _WFDeviceCapabilityWAPI, _WFDialogNotificationCategoryIdentifier, 
+                       _WFDeviceCapabilityPosters, _WFDeviceCapabilityScarlett, _WFDeviceCapabilityStageManager, 
+                       _WFDeviceCapabilityVibration, _WFDeviceCapabilityWAPI, _WFDialogNotificationCategoryIdentifier, 
                        _WFDialogNotificationConfirmationCategoryIdentifier, _WFEncodableError, 
                        _WFExportAsFilesActionIdentifier, _WFFastPathContextualActionsForSurface, 
                        _WFFileTypeAppleM4A, _WFFileTypeUIKitImage, _WFFileTypeURLName, 
@@ -446,15 +434,15 @@ exports:
                        WFImage, WFImageIcon, WFImageSymbolConfiguration, WFInputDateDialogRequest, 
                        WFInputDateDialogResponse, WFInputTextDialogRequest, WFInputTextDialogResponse, 
                        WFLinkActionRunDescriptor, WFLinkActionWorkflowRunnerClient, 
-                       WFLinkContextualAction, WFMenuBarWorkflowRunnerClient, WFObservableArrayResult, 
-                       WFObservableObjectResult, WFObservableResult, WFOnScreenContent, 
-                       WFOnScreenContentExtractor, WFOnScreenContentNode, WFOnScreenContentService, 
-                       WFOnScreenContentServiceOptions, WFOpenURLContextualAction, 
-                       WFParentDirectoryUtilities, WFRemoteImageDrawingContext, WFRequestRideContextualAction, 
-                       WFResultQuery, WFReverseContextualAction, WFSensitiveSmartPromptIntent, 
-                       WFSensitiveSmartPromptIntentResponse, WFServicesRunnerClient, 
-                       WFServicesWorkflow, WFServicesWorkflowRunRequest, WFShareSheetWorkflow, 
-                       WFShojiSystemActionsRunnerClient, WFShowAlertDialogRequest, 
+                       WFLinkContextualAction, WFListDisplayConfiguration, WFMenuBarWorkflowRunnerClient, 
+                       WFObservableArrayResult, WFObservableObjectResult, WFObservableResult, 
+                       WFOnScreenContent, WFOnScreenContentExtractor, WFOnScreenContentNode, 
+                       WFOnScreenContentService, WFOnScreenContentServiceOptions, 
+                       WFOpenURLContextualAction, WFParentDirectoryUtilities, WFRemoteImageDrawingContext, 
+                       WFRequestRideContextualAction, WFResultQuery, WFReverseContextualAction, 
+                       WFSensitiveSmartPromptIntent, WFSensitiveSmartPromptIntentResponse, 
+                       WFServicesRunnerClient, WFServicesWorkflow, WFServicesWorkflowRunRequest, 
+                       WFShareSheetWorkflow, WFShojiSystemActionsRunnerClient, WFShowAlertDialogRequest, 
                        WFShowSecureConfirmationDialogRequest, WFSingleConnectionXPCListener, 
                        WFSiriActionRequest, WFSiriActionResponse, WFSiriDialogRequest, 
                        WFSiriDialogResponse, WFSiriExecutionMetrics, WFSiriInteractionResponse, 

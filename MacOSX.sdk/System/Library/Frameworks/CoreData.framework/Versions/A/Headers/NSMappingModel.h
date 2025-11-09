@@ -1,7 +1,7 @@
 /*
     NSMappingModel.h
     Core Data
-    Copyright (c) 2004-2022, Apple Inc.
+    Copyright (c) 2004-2023, Apple Inc.
     All rights reserved.
 */
 

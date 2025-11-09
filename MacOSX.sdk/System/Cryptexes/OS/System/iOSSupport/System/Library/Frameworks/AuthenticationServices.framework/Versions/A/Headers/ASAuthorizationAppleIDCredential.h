@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, ASUserDetectionStatus) {
     ASUserDetectionStatusLikelyReal,
 };
 
-NS_ASSUME_NONNULL_BEGIN
+
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 @interface ASAuthorizationAppleIDCredential : NSObject <ASAuthorizationCredential>
@@ -59,10 +60,11 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
  */
 @property (nonatomic, readonly) ASUserDetectionStatus realUserStatus;
 
+
 + (instancetype)new NS_UNAVAILABLE;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -1,8 +1,8 @@
 //
 //  GKDialogController.h
-//  GameKit
+//  Game Center
 //
-//  Copyright (c) 2012 Apple Inc. All rights reserved.
+//  Copyright 2012-2023 Apple Inc. All rights reserved.
 //
 
 #if !TARGET_OS_MACCATALYST

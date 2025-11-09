@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           6358A855-1EC4-327F-97FE-2EF2DEBD9DFA
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6AC498C8-A49E-36D1-8579-DA2A4BC86B41
 install-name:    '/usr/lib/libpcre.0.dylib'
 current-version: 1.1
 exports:

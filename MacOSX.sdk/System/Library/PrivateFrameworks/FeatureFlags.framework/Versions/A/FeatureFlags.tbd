@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D68FE552-D775-363B-9E13-DA3218A35CBD
-  - target:          x86_64-maccatalyst
-    value:           D68FE552-D775-363B-9E13-DA3218A35CBD
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           079F0F9E-AA9E-3D76-B2B5-083ADC89F92F
-  - target:          arm64e-maccatalyst
-    value:           079F0F9E-AA9E-3D76-B2B5-083ADC89F92F
 install-name:    '/System/Library/PrivateFrameworks/FeatureFlags.framework/Versions/A/FeatureFlags'
-current-version: 71
+current-version: 74
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

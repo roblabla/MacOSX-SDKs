@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           5A42A5E6-9EA9-3556-85EA-B4AB7919AB5D
-  - target:          x86_64-maccatalyst
-    value:           5A42A5E6-9EA9-3556-85EA-B4AB7919AB5D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           AD567C0E-36EF-3560-AC81-EFE47C83A4A3
-  - target:          arm64e-maccatalyst
-    value:           AD567C0E-36EF-3560-AC81-EFE47C83A4A3
 install-name:    '/System/Library/PrivateFrameworks/HomeKitBackingStore.framework/Versions/A/HomeKitBackingStore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

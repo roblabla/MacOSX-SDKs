@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C342BE6C-F80C-341F-B171-352BFC582AD0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E4172FCC-95A6-3810-9756-1E63D4C0ACCB
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsUI.framework/Versions/A/CoreUtilsUI'
 current-version: 0
 compatibility-version: 0

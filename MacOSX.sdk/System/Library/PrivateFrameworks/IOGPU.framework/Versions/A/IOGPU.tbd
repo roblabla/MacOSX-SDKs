@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           36A159C9-13BF-3C64-A559-891008001B06
-  - target:          x86_64-maccatalyst
-    value:           36A159C9-13BF-3C64-A559-891008001B06
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D9FD60D4-D23C-3589-822D-B317F45372C8
-  - target:          arm64e-maccatalyst
-    value:           D9FD60D4-D23C-3589-822D-B317F45372C8
 install-name:    '/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -35,10 +22,9 @@ exports:
                        _IOGPUDeviceGetMemoryData, _IOGPUDeviceGetName, _IOGPUDeviceGetNextGlobalTraceID, 
                        _IOGPUDeviceGetSharedMemorySize, _IOGPUDeviceGetSurfaceInfo, 
                        _IOGPUDeviceGetTypeID, _IOGPUDeviceRelease, _IOGPUDeviceSetAppGPURole, 
-                       _IOGPUDeviceSetDisplayParams, _IOGPUDeviceSetResourcesPurgeable, 
-                       _IOGPUDeviceSetWaitForGPUCallback, _IOGPUDeviceTestEvent, 
-                       _IOGPUDeviceTestEventFast, _IOGPUDeviceTraceEvent, _IOGPUDeviceTraceEventEnd, 
-                       _IOGPUDeviceTraceEventStart, _IOGPUDeviceTraceObjectLabel, 
+                       _IOGPUDeviceSetDisplayParams, _IOGPUDeviceSetWaitForGPUCallback, 
+                       _IOGPUDeviceTestEvent, _IOGPUDeviceTestEventFast, _IOGPUDeviceTraceEvent, 
+                       _IOGPUDeviceTraceEventEnd, _IOGPUDeviceTraceEventStart, _IOGPUDeviceTraceObjectLabel, 
                        _IOGPUGLDrawableClearDrawable, _IOGPUGLDrawableCreate, _IOGPUGLDrawableGetConnect, 
                        _IOGPUGLDrawableGetTypeID, _IOGPUGLDrawableLookupIOSurfaceFromIndex, 
                        _IOGPUGLDrawableRelease, _IOGPUGLDrawableSetDrawable, _IOGPUGLDrawableSetSwapInterval, 

@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B134F9DB-B781-3190-9F78-BFCB714BE195
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0746189E-0011-3180-AAB0-C458B5CF3766
 install-name:    '/System/Library/PrivateFrameworks/SocialLayer.framework/Versions/A/SocialLayer'
 swift-abi-version: 7
 exports:
@@ -213,6 +206,13 @@ exports:
                        '_$s11SocialLayer28CollaborationAttributionViewC20remoteContentDidLoadyycSgvpMV', 
                        '_$s11SocialLayer28CollaborationAttributionViewC20remoteContentDidLoadyycSgvsTj', 
                        '_$s11SocialLayer28CollaborationAttributionViewC20remoteContentDidLoadyycSgvsTq', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvMTj', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvMTq', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvgTj', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvgTq', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvpMV', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvsTj', 
+                       '_$s11SocialLayer28CollaborationAttributionViewC29placeholderGlyphConfigurationSo014SLDImageSymbolH0CSgvsTq', 
                        '_$s11SocialLayer28CollaborationAttributionViewC39automaticallyAdjustsMaxWidthToFitBoundsSbvMTj', 
                        '_$s11SocialLayer28CollaborationAttributionViewC39automaticallyAdjustsMaxWidthToFitBoundsSbvMTq', 
                        '_$s11SocialLayer28CollaborationAttributionViewC39automaticallyAdjustsMaxWidthToFitBoundsSbvgTj', 
@@ -334,7 +334,8 @@ exports:
                        _SLPersonErrorDomain, _SLPersonIsEqualToPerson, _SLRectCenteredInRectToScale, 
                        _SLReplyContextMenuIdentifier, _SLResolvedURLKey, _SLRoundToScale, 
                        _SLSendPortraitFeedbackTypeAppButtonForAttribution, _SLSendPortraitFeedbackTypeDisplayedHighlight, 
-                       _SLSendPortraitFeedbackTypeUserInteractedWithHighlight, _SL_CGFloatApproximatelyEqualToFloat, 
+                       _SLSendPortraitFeedbackTypeUserInteractedWithHighlight, _SLShareableContentLogHandle, 
+                       _SLURLMinusFragmentForCKURLs, _SL_CGFloatApproximatelyEqualToFloat, 
                        _SL_NSStringFromRect ]
     objc-classes:    [ SLActiveCallView, SLActiveCallViewSwift, SLAttribution, SLAttributionView, 
                        SLCollaborationAttributionConversationDrawingMetadata, SLCollaborationAttributionRecipientDrawingMetadata, 
@@ -359,13 +360,14 @@ exports:
                        SLDHighlightDisambiguationPillSlotDrawer, SLDHighlightDisambiguationPillSlotTag, 
                        SLDHighlightPillDrawing, SLDHighlightPillEmptySlotContent, 
                        SLDHighlightPillRenderer, SLDHighlightPillSlotDrawer, SLDHighlightPillSlotTag, 
-                       SLDPillService, SLDProcessVerifier, SLDRemoteRenderingService, 
-                       SLDRemoteViewIdentifier, SLDServiceCenter, SLDServiceListenerMultiplex, 
-                       SLDServiceProxy, SLDShareableContentService, SLDSlotTag, SLDSyndicationService, 
-                       SLDTaskManager, SLGracePeriodTimer, SLHighlight, SLHighlightCenter, 
-                       SLHighlightDisambiguationPillMetrics, SLHighlightPillMetrics, 
-                       SLHighlightsCache, SLInteractionHandler, SLKeyQueryController, 
-                       SLPerson, SLPersonIdentityGenerator, SLRBSAssertion, SLRemoteTaskManager, 
-                       SLSWActionDispatcher, SLShareableContentActionHandler, SLShareableContentMetadata, 
-                       SLSyndicationController, SocialLayerDaemon ]
+                       SLDImageSymbolConfiguration, SLDPillService, SLDProcessVerifier, 
+                       SLDRemoteRenderingService, SLDRemoteViewIdentifier, SLDServiceCenter, 
+                       SLDServiceListenerMultiplex, SLDServiceProxy, SLDShareableContentService, 
+                       SLDSlotTag, SLDSyndicationService, SLDTaskManager, SLGracePeriodTimer, 
+                       SLHighlight, SLHighlightCenter, SLHighlightDisambiguationPillMetrics, 
+                       SLHighlightPillMetrics, SLHighlightsCache, SLInteractionHandler, 
+                       SLKeyQueryController, SLPerson, SLPersonIdentityGenerator, 
+                       SLRBSAssertion, SLRemoteTaskManager, SLSWActionDispatcher, 
+                       SLShareableContentActionHandler, SLShareableContentInitiatorRequest, 
+                       SLShareableContentMetadata, SLSyndicationController, SocialLayerDaemon ]
 ...

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -module-name CoreTransferable
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.1
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -module-name CoreTransferable
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.1.3
 import Combine
 @_exported import CoreTransferable
 import Swift
@@ -20,7 +20,7 @@ extension Foundation.AttributedString : CoreTransferable.Transferable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension CoreTransferable.TransferRepresentation {
-  public func visibility(_ visibility: CoreTransferable.TransferRepresentationVisibility) -> some CoreTransferable.TransferRepresentation
+  public func visibility(_ visibility: CoreTransferable.TransferRepresentationVisibility) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -128,7 +128,7 @@ public struct _ConditionalTransferRepresentation<Base> : CoreTransferable.Transf
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension CoreTransferable.TransferRepresentation {
-  public func suggestedFileName(_ fileName: Swift.String) -> some CoreTransferable.TransferRepresentation
+  public func suggestedFileName(_ fileName: Swift.String) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -250,6 +250,6 @@ extension Foundation.NSItemProvider {
   public func register<T>(_ transferable: @autoclosure @escaping @Sendable () -> T) where T : CoreTransferable.Transferable
   #endif
   #if compiler(>=5.3) && $Sendable
-  public func loadTransferable<T>(type transferableType: T.Type, completionHandler: @escaping @Sendable (Swift.Result<T, Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
+  public func loadTransferable<T>(type transferableType: T.Type, completionHandler: @escaping @Sendable (Swift.Result<T, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
   #endif
 }

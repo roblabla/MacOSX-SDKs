@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           25F3CB4E-6421-37AF-A3DA-B35E5CB7E4C1
-  - target:          x86_64-maccatalyst
-    value:           25F3CB4E-6421-37AF-A3DA-B35E5CB7E4C1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F475ABA3-425C-392E-86C2-956EB61F3FEE
-  - target:          arm64e-maccatalyst
-    value:           F475ABA3-425C-392E-86C2-956EB61F3FEE
 install-name:    '/System/Library/PrivateFrameworks/AuthenticationServicesCore.framework/Versions/A/AuthenticationServicesCore'
-current-version: 614.3.7
+current-version: 615.1.26
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -75,9 +62,9 @@ exports:
                        _ASCAgentServiceName, _ASCAuthorizationErrorDomain, _ASCAuthorizationPresentationContextDataKey, 
                        _ASCAuthorizationPresenterClientEntitlementName, _ASFIDOAuthenticatorAttachmentCrossPlatform, 
                        _ASFIDOAuthenticatorAttachmentPlatform, _ASKeychainSyncStatusMayHaveChangedNotification, 
-                       _ASViewServiceClientEntitlement, _ASViewServiceProcess, _ascCredentialRequestTypesAllPasskey, 
-                       _ascCredentialRequestTypesAllPublicKey, _authenticationServicesViewServiceBundleIdentifier, 
-                       _descriptionForErrorCode ]
+                       _ASPasskeyTCCService, _ASViewServiceClientEntitlement, _ASViewServiceProcess, 
+                       _ascCredentialRequestTypesAllPasskey, _ascCredentialRequestTypesAllPublicKey, 
+                       _authenticationServicesViewServiceBundleIdentifier, _descriptionForErrorCode ]
     objc-classes:    [ ASAgentAutoFillListener, ASAuthorizationRemoteViewController, 
                        ASCABLELoginChoice, ASCAgent, ASCAgentInterface, ASCAgentListener, 
                        ASCAgentProxy, ASCAppleIDCredential, ASCAppleIDLoginChoice, 
@@ -91,6 +78,7 @@ exports:
                        ASCSecurityKeyPublicKeyCredentialLoginChoice, ASCSecurityKeyPublicKeyCredentialRegistration, 
                        ASCViewServiceInterface, ASCWebAuthenticationExtensionsClientInputs, 
                        ASCWebKitSPISupport, ASFeatureManager, ASGlobalFrameIdentifier, 
-                       _ASCABLEPowerLogger, _ASDevice, _TtC26AuthenticationServicesCore13ASCABLEClient, 
+                       ASPublicKeyCredentialOperationTestDelegate, _ASCABLEPowerLogger, 
+                       _ASDevice, _TtC26AuthenticationServicesCore13ASCABLEClient, 
                        _TtC26AuthenticationServicesCore23_ASCABLEQRCodeUtilities ]
 ...
