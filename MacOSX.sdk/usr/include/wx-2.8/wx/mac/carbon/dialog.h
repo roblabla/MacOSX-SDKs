@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: dialog.h,v 1.13 2006/09/05 20:45:49 VZ Exp $
+// RCS-ID:      $Id: dialog.h 41020 2006-09-05 20:47:48Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

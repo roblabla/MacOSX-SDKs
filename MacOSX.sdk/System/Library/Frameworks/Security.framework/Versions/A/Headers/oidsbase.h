@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2001,2003-2004 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 1999-2001,2003-2004,2008 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -73,6 +73,9 @@ representation is implied */
 #define OID_DOD                				OID_ISO_IDENTIFIED_ORG, 6
 #define OID_OIW                				OID_ISO_IDENTIFIED_ORG, 14 
 
+#define OID_ITU_RFCDATA_MEMBER_LENGTH		1
+#define OID_ITU_RFCDATA						9
+
 /* From the PKCS Standards */
 #define OID_ISO_MEMBER_LENGTH 				1
 #define OID_US_LENGTH         				OID_ISO_MEMBER_LENGTH + 2
@@ -111,6 +114,18 @@ representation is implied */
 #define OID_ANSI_X9_42_SCHEME_LEN			OID_ANSI_X9_42_LEN + 1
 #define OID_ANSI_X9_42_NAMED_SCHEME			OID_ANSI_X9_42, 4
 #define OID_ANSI_X9_42_NAMED_SCHEME_LEN		OID_ANSI_X9_42_LEN + 1
+
+/* ANSI X9.62 (1 2 840 10045) */
+#define OID_ANSI_X9_62						0x2A, 0x86, 0x48, 0xCE, 0x3D
+#define OID_ANSI_X9_62_LEN					5
+#define OID_ANSI_X9_62_FIELD_TYPE			OID_ANSI_X9_62, 1
+#define OID_ANSI_X9_62_PUBKEY_TYPE			OID_ANSI_X9_62, 2
+#define OID_ANSI_X9_62_ELL_CURVE			OID_ANSI_X9_62, 3
+#define OID_ANSI_X9_62_ELL_CURVE_LEN		OID_ANSI_X9_62_LEN+1
+#define OID_ANSI_X9_62_C_TWO_CURVE			OID_ANSI_X9_62_ELL_CURVE, 0
+#define OID_ANSI_X9_62_PRIME_CURVE			OID_ANSI_X9_62_ELL_CURVE, 1
+#define OID_ANSI_X9_62_SIG_TYPE				OID_ANSI_X9_62, 4
+#define OID_ANSI_X9_62_SIG_TYPE_LEN			OID_ANSI_X9_62_LEN+1
 
 /* PKIX */
 #define OID_PKIX							OID_DOD, 1, 5, 5, 7
@@ -154,6 +169,12 @@ representation is implied */
 #define OID_KERBv5_LEN						5
 #define OID_KERBv5_PKINIT					OID_KERBv5, 3
 #define OID_KERBv5_PKINIT_LEN				OID_KERBv5_LEN + 1
+
+/* Certicom (1 3 132) */
+#define OID_CERTICOM						0x2B, 0x81, 0x04
+#define OID_CERTICOM_LEN					3
+#define OID_CERTICOM_ELL_CURVE				OID_CERTICOM, 0
+#define OID_CERTICOM_ELL_CURVE_LEN			OID_CERTICOM_LEN+1
 
 /*
  * Apple-specific OID bases
@@ -226,7 +247,7 @@ representation is implied */
 #define APPLE_DOTMAC_CERT_EXTEN_OID_LENGTH  APPLE_DOTMAC_CERT_OID_LENGTH + 1
 
 /*
- * Basis of .mac Certificate request OID/value identitifiers
+ * Basis of .mac Certificate request OID/value identifiers
  *
  * dotMacCertificateRequestValues OBJECT IDENTIFIER ::= 
  *		{ appleDotMacCertificate 3 }
@@ -249,19 +270,68 @@ representation is implied */
  * Basis of Apple Code Signing extended key usages
  * appleCodeSigning  OBJECT IDENTIFIER ::= 
  *		{ appleExtendedKeyUsage 1 }
- *      { 1 2 840 113635 100 4 1}
+ *      { 1 2 840 113635 100 4 1 }
  */
 #define APPLE_EKU_CODE_SIGNING			APPLE_EKU_OID, 1
 #define APPLE_EKU_CODE_SIGNING_LENGTH	APPLE_EKU_OID_LENGTH + 1
 
+/* -------------------------------------------------------------------------*/
+
 /*
- * Basis of Apple-specific Certific Policy IDs.
+ * Basis of Apple-specific Certificate Policy identifiers
  * appleCertificatePolicies OBJECT IDENTIFIER ::= 
- *		{appleDataSecurity 5}
+ *		{ appleDataSecurity 5 }
  *		{ 1 2 840 113635 100 5 }
  */
 #define APPLE_CERT_POLICIES				APPLE_ADS_OID, 5
 #define APPLE_CERT_POLICIES_LENGTH		APPLE_ADS_OID_LENGTH + 1
+
+/*
+ * Base for MacAppStore Certificate Policy identifiers
+ * macAppStoreCertificatePolicyIDs OBJECT IDENTIFIER ::= 
+ *		{ appleCertificatePolicies 6 }
+ *		{ 1 2 840 113635 100 5 6 }
+ */
+#define APPLE_CERT_POLICIES_MACAPPSTORE		APPLE_CERT_POLICIES, 6
+#define APPLE_CERT_POLICIES_MACAPPSTORE_LENGTH	APPLE_CERT_POLICIES_LENGTH + 1
+
+/*
+ * MacAppStore receipt verification Certificate Policy identifier
+ * macAppStoreReceiptCertificatePolicyID OBJECT IDENTIFIER ::= 
+ *		{ appleCertificatePolicies 6 1 }
+ *		{ 1 2 840 113635 100 5 6 1 }
+ */
+#define APPLE_CERT_POLICIES_MACAPPSTORE_RECEIPT		APPLE_CERT_POLICIES_MACAPPSTORE, 1
+#define APPLE_CERT_POLICIES_MACAPPSTORE_RECEIPT_LENGTH	APPLE_CERT_POLICIES_MACAPPSTORE_LENGTH + 1
+
+/* -------------------------------------------------------------------------*/
+
+/*
+ * Basis of Apple-specific certificate extensions
+ * appleCertificateExtensions OBJECT IDENTIFIER ::= 
+ *		{ appleDataSecurity 6 }
+ *		{ 1 2 840 113635 100 6 }
+ */
+#define APPLE_EXTENSION_OID				APPLE_ADS_OID, 6
+#define APPLE_EXTENSION_OID_LENGTH		APPLE_ADS_OID_LENGTH + 1
+
+/*
+ * Basis of Apple-specific Code Signing certificate extensions
+ * appleCertificateExtensionCodeSigning OBJECT IDENTIFIER ::= 
+ *		{ appleCertificateExtensions 1 }
+ *		{ 1 2 840 113635 100 6 1 }
+ */
+#define APPLE_EXTENSION_CODE_SIGNING		APPLE_EXTENSION_OID, 1
+#define APPLE_EXTENSION_CODE_SIGNING_LENGTH	APPLE_EXTENSION_OID_LENGTH + 1
+
+/*
+ * Basis of MacAppStore receipt verification certificate extensions
+ * macAppStoreReceiptExtension OBJECT IDENTIFIER ::= 
+ *		{ appleCertificateExtensions 11 1 }
+ *		{ 1 2 840 113635 100 6 11 1 }
+ */
+#define APPLE_EXTENSION_MACAPPSTORE_RECEIPT		APPLE_EXTENSION_OID, 11, 1
+#define APPLE_EXTENSION_MACAPPSTORE_RECEIPT_LENGTH	APPLE_EXTENSION_OID_LENGTH + 2
 
 /*
  * Netscape OIDs.
@@ -282,6 +352,27 @@ representation is implied */
 
 #define NETSCAPE_CERT_POLICY		NETSCAPE_BASE_OID, 0x04
 #define NETSCAPE_CERT_POLICY_LENGTH	NETSCAPE_BASE_OID_LEN + 1
+
+/*
+ * Domain Component OID
+ */
+#define OID_ITU_RFCDATA_2342 OID_ITU_RFCDATA, 0x49, 0x86
+#define OID_ITU_RFCDATA_2342_LENGTH OID_ITU_RFCDATA_MEMBER_LENGTH + 2
+
+#define OID_ITU_RFCDATA_2342_UCL OID_ITU_RFCDATA_2342, 0x49, 0x1F, 0x12, 0x8C
+#define OID_ITU_RFCDATA_2342_UCL_LENGTH OID_ITU_RFCDATA_2342_LENGTH + 4
+
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT 	OID_ITU_RFCDATA_2342_UCL, 0xE4
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_LENGTH OID_ITU_RFCDATA_2342_UCL_LENGTH + 1
+
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT, 0x81
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_LENGTH OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_LENGTH + 1
+
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_DOMAINCOMPONENT OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES, 0x99
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_DOMAINCOMPONENT_LENGTH OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_LENGTH + 1
+
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_USERID OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES, 0x81
+#define OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_USERID_LENGTH OID_ITU_RFCDATA_2342_UCL_DIRECTORYPILOT_ATTRIBUTES_LENGTH + 1
 
 #ifdef __cplusplus
 }

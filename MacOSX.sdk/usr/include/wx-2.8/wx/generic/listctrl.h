@@ -3,7 +3,7 @@
 // Purpose:     Generic list control
 // Author:      Robert Roebling
 // Created:     01/02/97
-// RCS-ID:      $Id: listctrl.h,v 1.117.4.1 2007/05/10 02:01:54 VZ Exp $
+// RCS-ID:      $Id: listctrl.h 46432 2007-06-13 03:46:20Z SC $
 // Copyright:   (c) 1998 Robert Roebling and Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -252,7 +252,7 @@ private:
     DECLARE_DYNAMIC_CLASS(wxGenericListCtrl)
 };
 
-#if (!defined(__WXMSW__) || defined(__WXUNIVERSAL__)) && !defined(__WXMAC__)
+#if (!defined(__WXMSW__) || defined(__WXUNIVERSAL__)) && (!defined(__WXMAC__) || defined(__WXUNIVERSAL__))
 /*
  * wxListCtrl has to be a real class or we have problems with
  * the run-time information.

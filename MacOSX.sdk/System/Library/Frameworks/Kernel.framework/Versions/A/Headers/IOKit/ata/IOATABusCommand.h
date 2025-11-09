@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,62 +19,22 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+
 /*
  *
  *	IOATABusCommand.h
  *
  */
  
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
- * $Log: IOATABusCommand.h,v $
- * Revision 1.9  2006/06/17 01:01:19  barras
- * Bug #: 4588941
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.8  2006/06/09 01:37:17  barras
- * Bug #: 4575901  IOATAFamily changes for support using IODMACommand for 64-bit.
- * Submitted by: Larry Barras
- * Reviewed by:
- *
- * Revision 1.7  2002/11/09 03:46:38  barras
- *
- * Bug #: 3083512, 3090979
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.6  2002/02/14 04:02:06  barras
- *
- * Adding API's for 48 bit lba
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.5  2001/05/04 01:50:36  barras
- *
- * Fix line endings to be all unix style in order to prevent CVS from corrupting source files.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- *
- */ 
-#endif
-
-
 #ifndef _IOATABUSCOMMAND_H
 #define _IOATABUSCOMMAND_H
 
 #include <IOKit/IOTypes.h>
 #include "IOATATypes.h"
 #include "IOATACommand.h"
-#include <IOKit/IOSyncer.h>
+
+
+class IOSyncer;
 
 
 /*!
@@ -104,7 +64,7 @@ internal use.
 
 class IOATABusCommand : public IOATACommand {
 
-	OSDeclareDefaultStructors( IOATABusCommand )
+	OSDeclareDefaultStructors( IOATABusCommand );
 	
 	public:
 	
@@ -123,7 +83,7 @@ class IOATABusCommand : public IOATACommand {
 
 	/*!@function allocateCmd
 	@abstract factory method to create an instance of this class used by subclasses of IOATADevice
-	*/	  
+	*/
 	static IOATABusCommand* allocateCmd(void);
 
 	/*!@function zeroCommand
@@ -133,12 +93,13 @@ class IOATABusCommand : public IOATACommand {
   	
  	/*!@function getOpcode
 	@abstract return the command opcode
-	*/ 
+	*/
 	virtual ataOpcode getOpcode( void );  
 	
 	/*!@function getFlags
 	@abstract return the flags for this command.
-	*/	virtual ataFlags getFlags ( void ); 
+	*/
+	virtual ataFlags getFlags ( void ); 
 		
 	/*!@function getRegMask
 	@abstract  get the register mask for desired regs
@@ -227,7 +188,7 @@ class IOATABusCommand : public IOATACommand {
 
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
-    */    
+    */
     struct ExpansionData { };
 
 /*! @var reserved
@@ -263,7 +224,7 @@ private:
 class IOATABusCommand64 : public IOATABusCommand
 {
 
-	OSDeclareDefaultStructors( IOATABusCommand64 )
+	OSDeclareDefaultStructors( IOATABusCommand64 );
 	
 	public:
 	

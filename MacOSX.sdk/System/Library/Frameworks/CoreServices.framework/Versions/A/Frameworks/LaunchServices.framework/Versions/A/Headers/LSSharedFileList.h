@@ -3,9 +3,9 @@
  
      Contains:   Services to load and share file lists.
  
-     Version:    LaunchServices-283~12
+     Version:    LaunchServices-362.3~1
  
-     Copyright:  © 2005-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2005-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -28,8 +28,9 @@
 #include <LaunchServices/IconsCore.h>
 #endif
 
-#ifndef __SECURITY__
-#include <Security/Security.h>
+
+#ifndef __AUTHORIZATION__
+#include <Security/Authorization.h>
 #endif
 
 
@@ -44,7 +45,7 @@
 extern "C" {
 #endif
 
-/* The shared file fist API is for sharing and storing list of references to file system objects.
+/* The shared file list API is for sharing and storing list of references to file system objects.
    The shared file list is a persistent list of objects, where each item has assigned display name, icon, and url
    as well as other optional properties.
 
@@ -230,7 +231,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemLast             AVAILABLE_M
  *  kLSSharedFileListItemHidden
  *  
  *  Discussion:
- *    Is item hidden? Associated property is CFBoolean.
+ *    Is item hidden in UI? Associated property is CFBoolean.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
@@ -238,7 +239,19 @@ extern LSSharedFileListItemRef kLSSharedFileListItemLast             AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef kLSSharedFileListItemHidden                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
+/*
+ *  kLSSharedFileListLoginItemHidden
+ *  
+ *  Discussion:
+ *    Should UI hide login item's window? Associated property is
+ *    CFBoolean.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kLSSharedFileListLoginItemHidden                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* LSSharedFileListItemResolve flags */
 enum {

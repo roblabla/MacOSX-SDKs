@@ -18,10 +18,13 @@
     #define QL_EXTERN_C_END
 #endif
 
+#define QUICKLOOK_VERSION 3270
+
 #define QL_EXPORT extern
-#define QL_PRIVATE_EXPORT __private_extern__
+#define QL_PRIVATE_EXPORT __attribute__((visibility("hidden")))
 #define QL_INLINE static __inline__ __attribute__((always_inline))
 #define QL_NOINLINE __attribute__((noinline))
 #define QL_DEPRECATED __attribute__((deprecated))
+#define QL_FORMAT_ARG(F, A) __attribute__((format(CFString, F, A)))
 
 #endif

@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,7 +19,7 @@
 
 #ifdef PERLIO_LAYERS
 #include "perliol.h"
-#else 
+#else
 #include "iperlsys.h"
 #endif
 
@@ -53,7 +54,7 @@ void modperl_apr_perlio_init(pTHX);
 #ifndef MP_SOURCE_SCAN
 
 #ifdef PERLIO_LAYERS
-PerlIO *modperl_apr_perlio_apr_file_to_PerlIO(pTHX_ apr_file_t *file, 
+PerlIO *modperl_apr_perlio_apr_file_to_PerlIO(pTHX_ apr_file_t *file,
                                               apr_pool_t *pool,
                                               modperl_apr_perlio_hook_e type);
 APR_DECLARE_OPTIONAL_FN(PerlIO *,
@@ -63,7 +64,7 @@ APR_DECLARE_OPTIONAL_FN(PerlIO *,
 #endif /* PERLIO_LAYERS */
 
 
-SV *modperl_apr_perlio_apr_file_to_glob(pTHX_ apr_file_t *file, 
+SV *modperl_apr_perlio_apr_file_to_glob(pTHX_ apr_file_t *file,
                                         apr_pool_t *pool,
                                         modperl_apr_perlio_hook_e type);
 APR_DECLARE_OPTIONAL_FN(SV *,

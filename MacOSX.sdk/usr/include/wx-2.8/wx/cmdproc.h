@@ -4,7 +4,7 @@
 // Author:      Julian Smart (extracted from docview.h by VZ)
 // Modified by:
 // Created:     05.11.00
-// RCS-ID:      $Id: cmdproc.h,v 1.22 2006/09/05 20:44:58 VZ Exp $
+// RCS-ID:      $Id: cmdproc.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@
 #include "wx/object.h"
 #include "wx/list.h"
 
-class WXDLLEXPORT wxMenu;
+class WXDLLIMPEXP_FWD_CORE wxMenu;
 
 // ----------------------------------------------------------------------------
 // wxCommand: a single command capable of performing itself

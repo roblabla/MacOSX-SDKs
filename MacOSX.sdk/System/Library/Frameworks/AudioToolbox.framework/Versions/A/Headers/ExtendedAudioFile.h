@@ -3,10 +3,7 @@
 
      Contains:   API for reading/writing AudioFiles via an AudioConverter
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,7 +14,7 @@
 #ifndef __ExtendedAudioFile_h__
 #define __ExtendedAudioFile_h__
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreFoundation/CoreFoundation.h>
 	#include <AudioToolbox/AudioFile.h>
@@ -179,24 +176,7 @@ enum {
 */
 extern OSStatus
 ExtAudioFileOpenURL(		CFURLRef					inURL,
-							ExtAudioFileRef *			outExtAudioFile)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-/*!
-	@function   ExtAudioFileOpen
-	
-	@abstract   Opens an audio file specified by an FSRef.
-	@param		inFSRef
-					The audio file to read.
-	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
-	@result		An OSStatus error code.
-
-	@discussion
-				Allocates a new ExtAudioFileRef, for reading an existing audio file.
-*/
-extern OSStatus
-ExtAudioFileOpen(			const FSRef *				inFSRef,
-							ExtAudioFileRef *			outExtAudioFile)	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							ExtAudioFileRef *			outExtAudioFile)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileWrapAudioFileID
@@ -213,50 +193,15 @@ ExtAudioFileOpen(			const FSRef *				inFSRef,
 	@discussion
 				Allocates a new ExtAudioFileRef which wraps an existing AudioFileID. The
 				client is responsible for keeping the AudioFileID open until the
-				ExtAudioFileRef is disposed.
+				ExtAudioFileRef is disposed. Disposing the ExtAudioFileRef will not close
+				the AudioFileID when this Wrap API call is used, so the client is also
+				responsible for closing the AudioFileID when finished with it.
 */
 extern OSStatus
 ExtAudioFileWrapAudioFileID(AudioFileID					inFileID,
 							Boolean						inForWriting,
 							ExtAudioFileRef *			outExtAudioFile)	
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-/*!
-	@function   ExtAudioFileCreateNew
-	
-	@abstract   Create a new audio file.
-	@param		inParentDir
-					The directory in which to create the new file.
-	@param		inFileName
-					The name of the new file.
-	@param		inFileType
-					The type of file to create. This is a constant from AudioToolbox/AudioFile.h, e.g.
-					kAudioFileAIFFType. Note that this is not an HFSTypeCode.
-	@param		inStreamDesc
-					The format of the audio data to be written to the file.
-	@param		inChannelLayout
-					The channel layout of the audio data. If non-null, this must be consistent
-					with the number of channels specified by inStreamDesc.
-	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
-	@result		An OSStatus error code.
-
-	@discussion
-				Creates a new audio file.
-				
-				If the file to be created is in an encoded format, it is permissible for the
-				sample rate in inStreamDesc to be 0, since in all cases, the file's encoding
-				AudioConverter may produce audio at a different sample rate than the source. The
-				file will be created with the audio format actually produced by the encoder.
-*/
-extern OSStatus
-ExtAudioFileCreateNew(		const FSRef *						inParentDir,
-							CFStringRef							inFileName,
-							AudioFileTypeID						inFileType,
-							const AudioStreamBasicDescription * inStreamDesc,
-							const AudioChannelLayout *			inChannelLayout,
-							ExtAudioFileRef *					outExtAudioFile)
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileCreateWithURL
@@ -294,7 +239,67 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 							const AudioChannelLayout *			inChannelLayout,
                     		UInt32								inFlags,
 							ExtAudioFileRef *					outExtAudioFile)						
-																			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
+																			
+#if !TARGET_OS_IPHONE && !CA_NO_CORE_SERVICES
+/*!
+	@function   ExtAudioFileOpen
+	
+	@abstract   Opens an audio file specified by an FSRef.
+	@param		inFSRef
+					The audio file to read.
+	@param		outExtAudioFile
+					On exit, a newly-allocated ExtAudioAudioFileRef.
+	@result		An OSStatus error code.
+
+	@discussion
+				Allocates a new ExtAudioFileRef, for reading an existing audio file.
+				
+				This function is deprecated as of Mac OS 10.6. ExtAudioFileOpenURL is preferred.
+*/
+extern OSStatus
+ExtAudioFileOpen(			const struct FSRef *		inFSRef,
+							ExtAudioFileRef *			outExtAudioFile)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+
+/*!
+	@function   ExtAudioFileCreateNew
+	
+	@abstract   Create a new audio file.
+	@param		inParentDir
+					The directory in which to create the new file.
+	@param		inFileName
+					The name of the new file.
+	@param		inFileType
+					The type of file to create. This is a constant from AudioToolbox/AudioFile.h, e.g.
+					kAudioFileAIFFType. Note that this is not an HFSTypeCode.
+	@param		inStreamDesc
+					The format of the audio data to be written to the file.
+	@param		inChannelLayout
+					The channel layout of the audio data. If non-null, this must be consistent
+					with the number of channels specified by inStreamDesc.
+	@param		outExtAudioFile
+					On exit, a newly-allocated ExtAudioAudioFileRef.
+	@result		An OSStatus error code.
+
+	@discussion
+				Creates a new audio file.
+				
+				If the file to be created is in an encoded format, it is permissible for the
+				sample rate in inStreamDesc to be 0, since in all cases, the file's encoding
+				AudioConverter may produce audio at a different sample rate than the source. The
+				file will be created with the audio format actually produced by the encoder.
+
+				This function is deprecated as of Mac OS 10.6. ExtAudioFileCreateWithURL is preferred.
+*/
+extern OSStatus
+ExtAudioFileCreateNew(		const struct FSRef *				inParentDir,
+							CFStringRef							inFileName,
+							AudioFileTypeID						inFileType,
+							const AudioStreamBasicDescription * inStreamDesc,
+							const AudioChannelLayout *			inChannelLayout,
+							ExtAudioFileRef *					outExtAudioFile)
+																			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif
 
 /*!
 	@function   ExtAudioFileDispose
@@ -309,7 +314,7 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 */
 extern OSStatus
 ExtAudioFileDispose(		ExtAudioFileRef				inExtAudioFile)		
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 
 //==================================================================================================
@@ -348,7 +353,7 @@ extern OSStatus
 ExtAudioFileRead(			ExtAudioFileRef			inExtAudioFile,
 							UInt32 *				ioNumberFrames,
 							AudioBufferList *		ioData)					
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileWrite
@@ -372,7 +377,7 @@ extern OSStatus
 ExtAudioFileWrite(			ExtAudioFileRef			inExtAudioFile,
 							UInt32					inNumberFrames,
 							const AudioBufferList * ioData)					
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileWriteAsync
@@ -407,7 +412,7 @@ extern OSStatus
 ExtAudioFileWriteAsync(		ExtAudioFileRef			inExtAudioFile,
 							UInt32					inNumberFrames,
 							const AudioBufferList * ioData)					
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileSeek
@@ -418,7 +423,8 @@ ExtAudioFileWriteAsync(		ExtAudioFileRef			inExtAudioFile,
 					The extended audio file object.
 	@param		inFrameOffset
 					The desired seek position, in sample frames, relative to the beginning of
-					the file.
+					the file. This is specified in the sample rate and frame count of the file's format
+					(not the client format)
 	@result		An OSStatus error code.
 	
 	@discussion
@@ -431,7 +437,7 @@ ExtAudioFileWriteAsync(		ExtAudioFileRef			inExtAudioFile,
 extern OSStatus
 ExtAudioFileSeek(			ExtAudioFileRef			inExtAudioFile,
 							SInt64					inFrameOffset)			
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileTell
@@ -441,7 +447,8 @@ ExtAudioFileSeek(			ExtAudioFileRef			inExtAudioFile,
 	@param		inExtAudioFile
 					The extended audio file object.
 	@param		outFrameOffset
-					On exit, the file's current read/write position in sample frames.
+					On exit, the file's current read/write position in sample frames. This is specified in the 
+					sample rate and frame count of the file's format (not the client format)
 	@result		An OSStatus error code.
 	
 	@discussion
@@ -449,7 +456,7 @@ ExtAudioFileSeek(			ExtAudioFileRef			inExtAudioFile,
 extern OSStatus
 ExtAudioFileTell(			ExtAudioFileRef			inExtAudioFile,
 							SInt64 *				outFrameOffset)			
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 //==================================================================================================
 //	Property Access
@@ -478,7 +485,7 @@ ExtAudioFileGetPropertyInfo(ExtAudioFileRef			inExtAudioFile,
 							ExtAudioFilePropertyID	inPropertyID,
 							UInt32 *				outSize,
 							Boolean *				outWritable)			
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileGetProperty
@@ -502,7 +509,7 @@ ExtAudioFileGetProperty(	ExtAudioFileRef			inExtAudioFile,
 							ExtAudioFilePropertyID	inPropertyID,
 							UInt32 *				ioPropertyDataSize,
 							void *					outPropertyData)		
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileSetProperty
@@ -525,7 +532,7 @@ ExtAudioFileSetProperty(	ExtAudioFileRef			inExtAudioFile,
 							ExtAudioFilePropertyID	inPropertyID,
 							UInt32					inPropertyDataSize,
 							const void *			inPropertyData)			
-																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 
 

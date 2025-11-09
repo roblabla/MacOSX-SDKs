@@ -3,9 +3,9 @@
  
      Contains:   Text Services Manager Interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1366,6 +1366,16 @@ CopyTextServiceInputModeList(
 #endif  /* !__LP64__ */
 
 #define kComponentBundleInputModeDictKey  CFSTR("ComponentInputModeDict")
+
+/*
+    Info.plist keys for an Input Method icon TIFF file.
+    The filepath (.tif or .icns file) specified for an icon is relative to the input method bundle's Resources directory.
+    NOTE:  This key is required if the input method (Component) does not contain a resource fork icon.  This icon will
+            also be used for any input modes that do not specify their own icon.
+*/
+
+#define kTSInputMethodIconFileKey       CFSTR("tsInputMethodIconFileKey")
+#define kTSInputMethodAlternateIconFileKey  CFSTR("tsInputMethodAlternateIconFileKey")
 
 /*
     Key for dictionary of individual input modes

@@ -3,7 +3,7 @@
 	
 	Public interface to the default audio output AudioUnit.
 	
-	Copyright (c) 2000 Apple Computer, Inc.  All Rights Reserved
+	Copyright (c) 2000 - 2008 Apple Inc.  All Rights Reserved
 =============================================================================*/
 
 #ifndef __DefaultAudioOutput_h__
@@ -11,7 +11,7 @@
 
 #if !__LP64__
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AudioUnit.h>
 #else
@@ -23,9 +23,9 @@ extern "C" {
 #endif
 
 // Open an instance of the default audio output unit (it can be closed with CloseComponent).
-extern OSStatus	OpenDefaultAudioOutput(AudioUnit *outUnit)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern OSStatus	OpenDefaultAudioOutput(AudioUnit *outUnit)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
-extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 				// for system sounds like alerts, modems, etc.
 
 #ifdef __cplusplus

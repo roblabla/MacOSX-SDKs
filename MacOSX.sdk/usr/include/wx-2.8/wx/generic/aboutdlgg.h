@@ -3,7 +3,7 @@
 // Purpose:     generic wxAboutBox() implementation
 // Author:      Vadim Zeitlin
 // Created:     2006-10-07
-// RCS-ID:      $Id: aboutdlgg.h,v 1.5 2006/11/12 23:18:52 VZ Exp $
+// RCS-ID:      $Id: aboutdlgg.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2006 Vadim Zeitlin <vadim@wxwindows.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -17,9 +17,9 @@
 
 #include "wx/dialog.h"
 
-class WXDLLIMPEXP_ADV  wxAboutDialogInfo;
-class WXDLLIMPEXP_CORE wxSizer;
-class WXDLLIMPEXP_CORE wxSizerFlags;
+class WXDLLIMPEXP_FWD_ADV wxAboutDialogInfo;
+class WXDLLIMPEXP_FWD_CORE wxSizer;
+class WXDLLIMPEXP_FWD_CORE wxSizerFlags;
 
 // ----------------------------------------------------------------------------
 // wxGenericAboutDialog: generic "About" dialog implementation

@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1999-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -358,11 +358,19 @@ enum {
   typeMouseTrackingRef          = 'mtrf' /* MouseTrackingRef*/
 };
 
+/* Gesture event parameters*/
+
+enum {
+  kEventParamMagnificationAmount = 'magn', /* typeCGFloat*/
+  kEventParamRotationAmount     = 'rota', /* typeCGFloat*/
+  kEventParamSwipeDirection     = 'swip' /* typeHIPoint*/
+};
+
 /* Keyboard event parameter and types*/
 
 enum {
   kEventParamKeyCode            = 'kcod', /* typeUInt32*/
-  kEventParamKeyMacCharCodes    = 'kchr', /* typeChar*/
+  kEventParamKeyMacCharCodes    = 'kchr', /* typeChar  (DEPRECATED for 64bit on Mac OS X 10.6 and later.)*/
   kEventParamKeyModifiers       = 'kmod', /* typeUInt32*/
   kEventParamKeyUnicodes        = 'kuni', /* typeUnicodeText*/
   kEventParamKeyboardType       = 'kbdt', /* typeUInt32*/
@@ -584,6 +592,7 @@ enum {
   kEventParamLaunchRefCon       = 'lref', /* typeRefCon*/
   kEventParamLaunchErr          = 'err ', /* typeOSStatus*/
   kEventParamSystemUIMode       = 'uimd', /* typeUInt32*/
+  kEventParamSystemUIOptions    = 'uiop', /* typeUInt32*/
   kEventParamIsInInstantMouser  = 'imou', /* typeBoolean*/
   kEventParamPreviousWindow     = 'prvw', /* typeWindowRef*/
   kEventParamCurrentWindow      = 'curw' /* typeWindowRef*/
@@ -1415,7 +1424,12 @@ enum {
    * Events related to Ink.
    */
   kEventClassInk                = 'ink ',
-  kEventClassTSMDocumentAccess  = 'tdac'
+  kEventClassTSMDocumentAccess  = 'tdac',
+
+  /*
+   * Events related to gestures: magnify, swipe, rotate.
+   */
+  kEventClassGesture            = 'gest'
 };
 
 /*--------------------------------------------------------------------------------------*/
@@ -2001,6 +2015,241 @@ enum {
 };
 
 /*--------------------------------------------------------------------------------------*/
+/* Gesture Events                                                                       */
+/*--------------------------------------------------------------------------------------*/
+/*
+    kEventClassGesture quick reference:
+    
+    kEventGestureStarted                = 1,
+    kEventGestureEnded                  = 2,
+    
+    kEventGestureMagnify                = 4,
+    kEventGestureSwipe                  = 5,
+    kEventGestureRotate                 = 6,
+*/
+/*
+ *  kEventClassGesture / kEventGestureStarted
+ *  
+ *  Discussion:
+ *    Sent when a gesture has started.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamMouseLocation (in, typeHIPoint)
+ *          The mouse location, in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventGestureStarted          = 1
+};
+
+/*
+ *  kEventClassGesture / kEventGestureEnded
+ *  
+ *  Discussion:
+ *    Sent when a gesture has ended.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamMouseLocation (in, typeHIPoint)
+ *          The mouse location, in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventGestureEnded            = 2
+};
+
+/*
+ *  kEventClassGesture / kEventGestureMagnify
+ *  
+ *  Discussion:
+ *    Sent when the user performs a magnify gesture, otherwise known as
+ *    a zoom gesture, or a pinch.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamMouseLocation (in, typeHIPoint)
+ *          The mouse location, in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated.
+ *    
+ *    --> kEventParamMagnificationAmount (in, typeCGFloat)
+ *          The desired magnification percentage based on the user's
+ *          gesture.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventGestureMagnify          = 4
+};
+
+/*
+ *  kEventClassGesture / kEventGestureSwipe
+ *  
+ *  Discussion:
+ *    Sent when the user performs a swipe gesture.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamMouseLocation (in, typeHIPoint)
+ *          The mouse location, in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated.
+ *    
+ *    --> kEventParamSwipeDirection (in, typeHIPoint)
+ *          A point describing the direction to move the content in
+ *          respond to the user's gesture. If the y coordinate is -1,
+ *          move the content up. If the y coordinate is 1, move the
+ *          content down. If the x coordinate is -1, move the content
+ *          to the left. If the x coordinate is 1, move the content to
+ *          the right.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventGestureSwipe            = 5
+};
+
+/*
+ *  kEventClassGesture / kEventGestureRotate
+ *  
+ *  Discussion:
+ *    Sent when the user performs a rotate gesture.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamMouseLocation (in, typeHIPoint)
+ *          The mouse location, in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated.
+ *    
+ *    --> kEventParamRotationAmount (in, typeCGFloat)
+ *          The desired rotation amount, in degrees in polar
+ *          coordinates.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventGestureRotate           = 6
+};
+
+/*--------------------------------------------------------------------------------------*/
 /* TSM Document Access Events                                                           */
 /*--------------------------------------------------------------------------------------*/
 /*
@@ -2396,8 +2645,8 @@ enum {
 
 typedef UInt32 TSMDocAccessAttributes;
 enum {
-  kTSMDocAccessFontSizeAttribute = 1L << kTSMDocAccessFontSizeAttributeBit,
-  kTSMDocAccessEffectiveRangeAttribute = 1L << kTSMDocAccessEffectiveRangeAttributeBit /* More attributes may be added in the future*/
+  kTSMDocAccessFontSizeAttribute = 1 << kTSMDocAccessFontSizeAttributeBit,
+  kTSMDocAccessEffectiveRangeAttribute = 1 << kTSMDocAccessEffectiveRangeAttributeBit /* More attributes may be added in the future*/
 };
 
 
@@ -3276,6 +3525,7 @@ enum {
  *          
  *          kEventParamKeyUnicodes      typeUnicodeText
  *           kEventParamKeyMacCharCodes  typeChar (if available)
+ *           (DEPRECATED for 64bit on Mac OS X 10.6 and later.)
  *           
  *          The kEventParamKeyUnicodes parameter of the raw keyboard
  *          event is identical to the TextInput event’s
@@ -4253,7 +4503,14 @@ enum {
                     process window rotation and the universal keyboard access equivalents for interprocess
                     window rotation and document, floating, toolbar, and menubar keyboard focus.
                     
+    @param          kEventParamKeyUnicodes
+                        The Unicode(s) generated by the key that was pressed.<BR>
+                        This parameter is preferred for obtaining text for a key press and should be
+                        used instead of kEventParamKeyMacCharCodes, in particular in 64bit.
+                        
     @param          kEventParamKeyMacCharCodes
+                        This event parameter is DEPRECATED for 64bit on Mac OS X 10.6 and later.<BR>
+                        <BR>
                         The character generated by the key that was pressed. The character’s encoding
                         is determined by the current keyboard script.
                         
@@ -4298,7 +4555,16 @@ enum {
  *  
  *  Parameters:
  *    
+ *    --> kEventParamKeyUnicodes (in, typeUnicodeText)
+ *          The Unicode(s) generated by the key that was pressed.
+ *           This parameter is preferred for obtaining text for a key
+ *          press and should be used instead of
+ *          kEventParamKeyMacCharCodes, in particular in 64bit.
+ *    
  *    --> kEventParamKeyMacCharCodes (in, typeChar)
+ *          This event parameter is DEPRECATED for 64bit on Mac OS X
+ *          10.6 and later.
+ *          
  *          The character generated by the key that was pressed. The
  *          character’s encoding is determined by the current keyboard
  *          script.
@@ -4332,7 +4598,16 @@ enum {
  *  
  *  Parameters:
  *    
+ *    --> kEventParamKeyUnicodes (in, typeUnicodeText)
+ *          The Unicode(s) generated by the key that was released.
+ *           This parameter is preferred for obtaining text for a key
+ *          press and should be used instead of
+ *          kEventParamKeyMacCharCodes, in particular in 64bit.
+ *    
  *    --> kEventParamKeyMacCharCodes (in, typeChar)
+ *          This event parameter is DEPRECATED for 64bit on Mac OS X
+ *          10.6 and later.
+ *          
  *          The character generated by the key that was released. The
  *          character’s encoding is determined by the current keyboard
  *          script.
@@ -4455,8 +4730,8 @@ enum {
 };
 
 enum {
-  kEventKeyModifierNumLockMask  = 1L << kEventKeyModifierNumLockBit,
-  kEventKeyModifierFnMask       = 1L << kEventKeyModifierFnBit
+  kEventKeyModifierNumLockMask  = 1 << kEventKeyModifierNumLockBit,
+  kEventKeyModifierFnMask       = 1 << kEventKeyModifierFnBit
 };
 
 
@@ -4735,10 +5010,15 @@ enum {
  *  kEventClassApplication / kEventAppSystemUIModeChanged
  *  
  *  Summary:
- *    The system UI mode of the frontmost application has changed.
+ *    The system UI mode or options of the frontmost application have
+ *    changed.
  *  
  *  Discussion:
- *    This event is sent to all handlers registered for it.
+ *    On Mac OS X 10.6 and later, this event is sent if the UI options
+ *    of the frontmost application change, even if the mode remains the
+ *    same. Prior to Mac OS X 10.6, this event is only sent if the UI
+ *    mode changes. This event is sent to all handlers registered for
+ *    it.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4748,6 +5028,11 @@ enum {
  *    --> kEventParamSystemUIMode (in, typeUInt32)
  *          The new system UI mode. Contains a kUIMode constant from
  *          MacApplication.h.
+ *    
+ *    --> kEventParamSystemUIOptions (in, typeUInt32)
+ *          The new system UI options. Contains a bitmask of kUIOption
+ *          constants from MacApplication.h. This parameter is
+ *          available on Mac OS X 10.6 and later.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -5355,6 +5640,7 @@ enum {
     kEventWindowGetMinimumSize          = 81,
     kEventWindowGetMaximumSize          = 82,
     kEventWindowConstrain               = 83,
+    kEventWindowRestoreFromDock         = 84,
     kEventWindowHandleContentClick      = 85,
     (kEventWindowCollapsing             = 86)
     (kEventWindowExpanding              = 87)
@@ -5758,9 +6044,9 @@ enum {
    * If kHIModalClickIsModal is set and kHIModalClickAllowEvent is not
    * set, this flag indicates whether the caller should announce that
    * the click has been blocked by a modal window using appropriate UI
-   * (typically, by calling AlertSoundPlay). If kHIModalClickIsModal is
-   * not set, or if kHIModalClickAllowEvent is set, this flag is
-   * ignored.
+   * (typically, by calling AudioServicesPlayAlertSound). If
+   * kHIModalClickIsModal is not set, or if kHIModalClickAllowEvent is
+   * set, this flag is ignored.
    */
   kHIModalClickAnnounce         = 1 << 2,
 
@@ -5873,7 +6159,8 @@ enum {
  *          modal window that is in front of the clicked window, if
  *          any. This parameter is only required if the
  *          kEventParamModalClickResult parameter contains
- *          kHIModalClickIsModal.
+ *          kHIModalClickIsModal. The modality values you may add here
+ *          are from the WindowModality enumeration in MacWindows.h.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
@@ -7933,12 +8220,13 @@ enum {
  *  
  *  Discussion:
  *    The basic window handler responds to this event by calling
- *    ConstrainWindowToScreen. This event is generated in two
- *    situations: changes in graphics device configuration, and changes
- *    to Dock size. In either case, a window which was previously
- *    visible onscreen may become obscured or be totally offscreen, and
- *    should be repositioned back inside the available window
- *    positioning bounds. 
+ *    ConstrainWindowToScreen. This event is generated in three
+ *    situations: changes in graphics device configuration, changes to
+ *    Dock size, and (in Mac OS X 10.6 and later) after a window has
+ *    been dragged. In each of these cases, a window which was
+ *    previously visible onscreen may become obscured or be totally
+ *    offscreen, and should be repositioned back inside the available
+ *    window positioning bounds. 
  *    
  *    The behavior of the basic window handler may be customized by
  *    modifying the parameters to the event and then allowing the event
@@ -7958,13 +8246,15 @@ enum {
  *    --> kEventParamDirectObject (in, typeWindowRef)
  *          The window being constrained.
  *    
- *    --> kEventParamAvailableBounds (in, typeQDRectangle)
+ *    --> kEventParamReason (in, typeUInt32)
  *          The reasons why the window is being constrained. This
  *          parameter contains one or more of the
  *          kAvailBoundsChangedFor constants. This parameter is
- *          available only on Mac OS X 10.3 and later.
+ *          available only on Mac OS X 10.3 and later. This parameter
+ *          is not present on Mac OS X 10.6 and later if the event is
+ *          being sent after a window drag.
  *    
- *    --> kEventParamAttributes (in, typeUInt32)
+ *    --> kEventParamTransactionID (in, typeUInt32)
  *          An integer which is the same for all instances of this
  *          event that are produced by the same configuration change.
  *          For example, if multiple displays are attached, then this
@@ -7975,7 +8265,7 @@ enum {
  *          the transaction ID. This parameter is available only on Mac
  *          OS X 10.3 and later.
  *    
- *    --> kEventParamWindowRegionCode (in, typeWindowRegionCode)
+ *    --> kEventParamAvailableBounds (in, typeQDRectangle)
  *          The available window positioning bounds in which the window
  *          should be positioned. Event handlers may change the value
  *          in this parameter and then return eventNotHandledErr to
@@ -7988,7 +8278,7 @@ enum {
  *          rect returned by GetAvailableWindowPositioningBounds for
  *          the window’s device.
  *    
- *    --> kEventParamRgnHandle (in, typeQDRgnHandle)
+ *    --> kEventParamAttributes (in, typeUInt32)
  *          Window constraint options that should be passed to
  *          ConstrainWindowToScreen. This parameter is optional and may
  *          not be present in all instances of this event. If present,
@@ -8003,7 +8293,7 @@ enum {
  *          kWindowConstrainMoveRegardlessOfFit |
  *          kWindowConstrainAllowPartial in Mac OS 10.1 and later.
  *    
- *    --> kEventParamPreviousDockRect (in, typeHIRect)
+ *    --> kEventParamWindowRegionCode (in, typeWindowRegionCode)
  *          A WindowRegionCode that should be passed to
  *          ConstrainWindowToScreen. This parameter is optional and may
  *          not be present in all instances of this event. 
@@ -8013,7 +8303,7 @@ enum {
  *          this parameter is missing, the basic window handler passes
  *          kWindowDragRgn to ConstrainWindowToScreen.
  *    
- *    --> kEventParamPreviousDockDevice (in, typeCGDisplayID)
+ *    --> kEventParamRgnHandle (in, typeQDRgnHandle)
  *          The GrayRgn before a graphics device configuration change.
  *          This parameter is optional and may not be present in all
  *          instances of this event. It is present in events generated
@@ -8026,13 +8316,13 @@ enum {
  *          that were not onscreen before the device configuration
  *          change.
  *    
- *    --> kEventParamCurrentDockRect (in, typeHIRect)
+ *    --> kEventParamPreviousDockRect (in, typeHIRect)
  *          The Dock bounding rect before a Dock size change. This
  *          parameter is optional and may not be present in all
  *          instances of this event. It is present in events in events
  *          generated on Mac OS X 10.2 and later.
  *    
- *    --> kEventParamCurrentDockDevice (in, typeCGDisplayID)
+ *    --> kEventParamPreviousDockDevice (in, typeCGDisplayID)
  *          The display device on which the Dock was previously
  *          positioned. This parameter is optional and may not be
  *          present in all instances of this event. It is present in
@@ -8042,13 +8332,13 @@ enum {
  *          parameter is also available as a CGDirectDisplayID using
  *          typeCGDisplayID.
  *    
- *    --> kEventParamTabletEventType (in, typeUInt32)
+ *    --> kEventParamCurrentDockRect (in, typeHIRect)
  *          The Dock bounding rect after a Dock size change. This
  *          parameter is optional and may not be present in all
  *          instances of this event. It is present in events in events
  *          generated on Mac OS X 10.2 and later.
  *    
- *    --> kEventParamTabletPointRec (in, typeTabletPointRec)
+ *    --> kEventParamCurrentDockDevice (in, typeCGDisplayID)
  *          The display device on which the Dock is currently
  *          positioned. This parameter is optional and may not be
  *          present in all instances of this event. It is present in
@@ -8064,6 +8354,41 @@ enum {
  */
 enum {
   kEventWindowConstrain         = 83
+};
+
+/*
+ *  kEventClassWindow / kEventWindowRestoreFromDock
+ *  
+ *  Summary:
+ *    Requests that a collapsed window be restored from the Dock.
+ *  
+ *  Discussion:
+ *    The basic window handler responds to this event by calling
+ *    SelectWindow or CollapseWindow(false), depending on whether the
+ *    window should be made active. Your application may handle this
+ *    event to be notified before a window is restored from the Dock. A
+ *    handler for this event should generally either return noErr to
+ *    prevent a window from being restored from the Dock, or
+ *    eventNotHandledErr to allow the basic handler to restore the
+ *    window from the Dock. 
+ *    
+ *    This event is sent only to the window, and is not propagated past
+ *    it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window to be restored from the Dock.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowRestoreFromDock   = 84
 };
 
 /*
@@ -8293,6 +8618,34 @@ enum {
 };
 
 /*
+ *  kEventClassWindow / kEventWindowColorSpaceChanged
+ *  
+ *  Summary:
+ *    Notification that the color space of the window has changed.
+ *  
+ *  Discussion:
+ *    When the kHIWindowBitAutoCalibration attribute is set, this event
+ *    is sent when the window's colorspace is changed by the Window
+ *    Manager. The standard window handler's response is to paint the
+ *    entire window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window with the updated color space.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowColorSpaceChanged = 95
+};
+
+/*
  *  kEventClassWindow / kEventWindowToolbarSwitchMode
  *  
  *  Summary:
@@ -8319,57 +8672,72 @@ enum {
  *    
  *    --> kEventParamWindowRef (in, typeWindowRef)
  *          The window under the mouse. Available in Mac OS X 10.1 and
- *          later.
+ *          later. This parameter may not be present in all instances
+ *          of this event, even on Mac OS X 10.1 and later.
  *    
  *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
  *          The window-relative position of the mouse in the window
  *          given in the kEventParamWindowRef parameter. 0,0 is at the
  *          top left of the structure of the window. Available in Mac
- *          OS X 10.1 and later.
+ *          OS X 10.1 and later. This parameter may not be present in
+ *          all instances of this event, even on Mac OS X 10.1 and
+ *          later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
  *          The part code that the mouse location hit in the window.
- *          This parameter only exists if the WindowRef parameter
- *          exists. This saves you the trouble of calling FindWindow,
+ *          This parameter may not be present in all instances of this
+ *          event. This saves you the trouble of calling FindWindow,
  *          which is expensive on Mac OS X as it needs to call the
- *          Window Server. Available in Mac OS X 10.3 and later.
+ *          Window Server. Available in Mac OS X 10.3 and later. This
+ *          parameter may not be present in all instances of this
+ *          event, even on Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
  *          generated.
  *    
  *    --> kEventParamMouseButton (in, typeMouseButton)
- *          Which mouse button was pressed.
+ *          Which mouse button was pressed. This parameter may not be
+ *          present in all instances of this event.
  *    
  *    --> kEventParamClickCount (in, typeUInt32)
- *          Whether this is a single click, double click, etc.
+ *          Whether this is a single click, double click, etc. This
+ *          parameter may not be present in all instances of this event.
  *    
  *    --> kEventParamMouseChord (in, typeUInt32)
  *          Which other mouse buttons were pressed when the event was
- *          generated. Available on Mac OS X only.
+ *          generated. Available on Mac OS X only. This parameter may
+ *          not be present in all instances of this event, even on Mac
+ *          OS X.
  *    
  *    --> kEventParamTabletEventType (in, typeUInt32)
  *          The type of tablet event which generated this mouse event;
  *          contains either kEventTabletPoint or kEventTabletProximity.
  *          Only present if the event was generated from a tablet.
  *          Available in Mac OS X 10.1 and CarbonLib 1.5, and later.
+ *          This parameter may not be present in all instances of this
+ *          event, even on the previously mentioned platforms.
  *    
  *    --> kEventParamTabletPointRec (in, typeTabletPointRec)
  *          Further information about the tablet event which generated
  *          this mouse event. Present if the the
  *          kEventParamTabletEventType parameter contains
  *          kEventTabletPoint. Available on Mac OS X 10.1 and CarbonLib
- *          1.5, and later.
+ *          1.5, and later. This parameter may not be present in all
+ *          instances of this event, even on the previously mentioned
+ *          platforms.
  *    
  *    --> kEventParamTabletProximityRec (in, typeTabletProximityRec)
  *          Further information about the tablet event which generated
  *          this mouse event. Present if the the
  *          kEventParamTabletEventType parameter contains
  *          kEventTabletProximity. Available on Mac OS X 10.1 and
- *          CarbonLib 1.5, and later.
+ *          CarbonLib 1.5, and later. This parameter may not be present
+ *          in all instances of this event, even on the previously
+ *          mentioned platforms.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
  *    CarbonLib:        not available
  */
 enum {
@@ -9492,7 +9860,9 @@ enum {
 
   /*
    * Indicates that this Carbon event has been sent during a popup menu
-   * tracking session.
+   * tracking session. In Mac OS X 10.6 and later,
+   * kMenuContextContextualMenu may also be set if the popup menu is a
+   * contextual menu.
    */
   kMenuContextPopUpTracking     = 1 << 17,
 
@@ -9534,7 +9904,16 @@ enum {
    * determine if any menu item content does not need to be updated.
    * Available on Mac OS X 10.5 and later.
    */
-  kMenuContextInspection        = 1 << 22
+  kMenuContextInspection        = 1 << 22,
+
+  /*
+   * Indicates that this Carbon event has been sent during display of a
+   * contextual menu. When this flag is set, the
+   * kMenuContextPopUpTracking flag will also be set (since contextual
+   * menus are always also popup menus). Available in Mac OS X 10.6 and
+   * later.
+   */
+  kMenuContextContextualMenu    = 1 << 23
 };
 
 
@@ -11219,7 +11598,7 @@ enum {
    * This bit is set for commands generated from menu items in all
    * versions of CarbonLib and Mac OS X.
    */
-  kHICommandFromMenu            = (1L << 0),
+  kHICommandFromMenu            = (1 << 0),
 
   /*
    * Indicates that the command originates from a control. The
@@ -11227,7 +11606,7 @@ enum {
    * introduced in Mac OS X 10.2 and CarbonLib 1.6. It is never set in
    * earlier versions of Mac OS X or CarbonLib.
    */
-  kHICommandFromControl         = (1L << 1),
+  kHICommandFromControl         = (1 << 1),
 
   /*
    * Indicates that the command originates from a window. The
@@ -11235,7 +11614,7 @@ enum {
    * introduced in Mac OS X 10.2 and CarbonLib 1.6. It is never set in
    * earlier versions of Mac OS X or CarbonLib.
    */
-  kHICommandFromWindow          = (1L << 2)
+  kHICommandFromWindow          = (1 << 2)
 };
 
 
@@ -14277,6 +14656,8 @@ extern EventTargetRef
 GetMenuEventTarget(MenuRef inMenu)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* !__LP64__ */
+
 /*
  *  GetApplicationEventTarget()
  *  
@@ -14292,7 +14673,7 @@ GetMenuEventTarget(MenuRef inMenu)                            AVAILABLE_MAC_OS_X
  *    An EventTargetRef.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -14300,6 +14681,7 @@ extern EventTargetRef
 GetApplicationEventTarget(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  GetUserFocusEventTarget()
  *  
@@ -14483,7 +14865,6 @@ EventHandlerUPP Get ## x ## UPP()             \
 /*======================================================================================*/
 /*  • Command Routines                                                                  */
 /*======================================================================================*/
-#if !__LP64__
 /*
  *  ProcessHICommand()
  *  
@@ -14509,7 +14890,7 @@ EventHandlerUPP Get ## x ## UPP()             \
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -14521,6 +14902,7 @@ ProcessHICommand(const HICommand * inCommand)                 AVAILABLE_MAC_OS_X
 /*  • Event Loop Routines                                                               */
 /*--------------------------------------------------------------------------------------*/
 
+#if !__LP64__
 /*
  *  RunApplicationEventLoop()
  *  

@@ -4,7 +4,7 @@
 // Author:      Aleksandras Gluchovas <mailto:alex@soften.ktu.lt>
 // Modified by:
 // Created:     06/09/98
-// RCS-ID:      $Id: panedrawpl.h,v 1.6 2005/09/23 12:46:58 MR Exp $
+// RCS-ID:      $Id: panedrawpl.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) Aleksandras Gluchovas
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

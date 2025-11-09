@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor (lifted from dnd.h)
 // Modified by:
 // Created:     10/21/99
-// RCS-ID:      $Id: dataform.h,v 1.6.8.1 2007/03/08 01:21:03 VZ Exp $
+// RCS-ID:      $Id: dataform.h 46150 2007-05-21 20:26:40Z SC $
 // Copyright:   (c) 1999 Stefan Csomor
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,9 +19,11 @@ public:
 
     wxDataFormat();
     wxDataFormat(wxDataFormatId vType);
+    wxDataFormat(const wxDataFormat& rFormat);
     wxDataFormat(const wxString& rId);
     wxDataFormat(const wxChar* pId);
     wxDataFormat(NativeFormat vFormat);
+    ~wxDataFormat();
 
     wxDataFormat& operator=(NativeFormat vFormat)
         { SetId(vFormat); return *this; }
@@ -34,6 +36,8 @@ public:
         { return m_type == (wxDataFormatId)format; }
     bool operator!=(wxDataFormatId format) const
         { return m_type != (wxDataFormatId)format; }
+
+    wxDataFormat& operator=(const wxDataFormat& format);
 
     // explicit and implicit conversions to NativeFormat which is one of
     // standard data types (implicit conversion is useful for preserving the

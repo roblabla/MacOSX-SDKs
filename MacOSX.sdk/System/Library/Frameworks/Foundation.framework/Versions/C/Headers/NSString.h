@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 typedef unsigned short unichar;
@@ -9,7 +9,7 @@ typedef unsigned short unichar;
 #import <Foundation/NSRange.h>
 #import <stdarg.h>
 
-@class NSData, NSArray, NSDictionary, NSCharacterSet, NSData, NSURL, NSError, NSLocale;
+@class NSData, NSArray, NSDictionary, NSCharacterSet, NSURL, NSError, NSLocale;
 
 FOUNDATION_EXPORT NSString * const NSParseErrorException; // raised by -propertyList
 
@@ -25,7 +25,7 @@ enum {
     NSBackwardsSearch = 4,		/* Search from end of source string */
     NSAnchoredSearch = 8,		/* Search is limited to start (or end, if NSBackwardsSearch) of source string */
     NSNumericSearch = 64		/* Added in 10.2; Numbers within strings are compared using numeric value, that is, Foo2.txt < Foo7.txt < Foo25.txt; only applies to compare methods, not find */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
     ,
     NSDiacriticInsensitiveSearch = 128, /* If specified, ignores diacritics (o-umlaut == o) */
     NSWidthInsensitiveSearch = 256, /* If specified, ignores width differences ('a' == UFF41) */
@@ -46,7 +46,7 @@ enum {
     NSISOLatin1StringEncoding = 5,
     NSSymbolStringEncoding = 6,
     NSNonLossyASCIIStringEncoding = 7,
-    NSShiftJISStringEncoding = 8,
+    NSShiftJISStringEncoding = 8,          /* kCFStringEncodingDOSJapanese */
     NSISOLatin2StringEncoding = 9,
     NSUnicodeStringEncoding = 10,
     NSWindowsCP1251StringEncoding = 11,    /* Cyrillic; same as AdobeStandardCyrillic */
@@ -92,7 +92,6 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 @interface NSString (NSStringExtensionMethods)
 
-- (void)getCharacters:(unichar *)buffer;
 - (void)getCharacters:(unichar *)buffer range:(NSRange)aRange;
 
 - (NSString *)substringFromIndex:(NSUInteger)from;
@@ -106,6 +105,10 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (NSComparisonResult)caseInsensitiveCompare:(NSString *)string;
 - (NSComparisonResult)localizedCompare:(NSString *)string;
 - (NSComparisonResult)localizedCaseInsensitiveCompare:(NSString *)string;
+
+/* localizedStandardCompare:, added in 10.6, should be used whenever file names or other strings are presented in lists and tables where Finder-like sorting is appropriate.  The exact behavior of this method may be tweaked in future releases, and will be different under different localizations, so clients should not depend on the exact sorting order of the strings.
+*/
+- (NSComparisonResult)localizedStandardCompare:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (BOOL)isEqualToString:(NSString *)aString;
 
@@ -133,7 +136,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 #endif
 
 - (NSString *)stringByAppendingString:(NSString *)aString;
-- (NSString *)stringByAppendingFormat:(NSString *)format, ...;
+- (NSString *)stringByAppendingFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 /* The following convenience methods all skip initial space characters (whitespaceSet) and ignore trailing characters. NSScanner can be used for more "exact" parsing of numbers.
 */
@@ -170,6 +173,25 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (NSRange)paragraphRangeForRange:(NSRange)range;
 #endif
 
+#if NS_BLOCKS_AVAILABLE
+enum {
+	// Pass in one of the "By" options:
+	NSStringEnumerationByLines = 0,                       // Equivalent to lineRangeForRange:
+        NSStringEnumerationByParagraphs = 1,                  // Equivalent to paragraphRangeForRange:
+	NSStringEnumerationByComposedCharacterSequences = 2,  // Equivalent to rangeOfComposedCharacterSequencesForRange:
+	NSStringEnumerationByWords = 3,
+        NSStringEnumerationBySentences = 4,
+	// ...and combine any of the desired additional options:
+	NSStringEnumerationReverse = 1UL << 8,
+	NSStringEnumerationSubstringNotRequired = 1UL << 9,
+	NSStringEnumerationLocalized = 1UL << 10              // User's default locale
+};
+typedef NSUInteger NSStringEnumerationOptions;
+
+- (void)enumerateSubstringsInRange:(NSRange)range options:(NSStringEnumerationOptions)opts usingBlock:(void (^)(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+-  (void)enumerateLinesUsingBlock:(void (^)(NSString *line, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
 - (NSString *)description;
 
 - (NSUInteger)hash;
@@ -187,7 +209,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /* Methods to convert NSString to a NULL-terminated cString using the specified encoding. Note, these are the "new" cString methods, and are not deprecated like the older cString methods which do not take encoding arguments.
 */
-- (const char *)cStringUsingEncoding:(NSStringEncoding)encoding;	// "Autoreleased"; NULL return if encoding conversion not possible; for performance reasons, lifetime of this should not be considered longer than the lifetime of the receiving string (if the receiver string is freed, this might go invalid then, before the end of the autorelease scope)
+- (__strong const char *)cStringUsingEncoding:(NSStringEncoding)encoding;	// "Autoreleased"; NULL return if encoding conversion not possible; for performance reasons, lifetime of this should not be considered longer than the lifetime of the receiving string (if the receiver string is freed, this might go invalid then, before the end of the autorelease scope)
 - (BOOL)getCString:(char *)buffer maxLength:(NSUInteger)maxBufferCount encoding:(NSStringEncoding)encoding;	// NO return if conversion not possible due to encoding errors or too small of a buffer. The buffer should include room for maxBufferCount bytes; this number should accomodate the expected size of the return value plus the NULL termination character, which this method adds. (So note that the maxLength passed to this method is one more than the one you would have passed to the deprecated getCString:maxLength:.)
 
 /* Use this to convert string section at a time into a fixed-size buffer, without any allocations.  Does not NULL-terminate. 
@@ -205,8 +227,8 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 /* These return the maximum and exact number of bytes needed to store the receiver in the specified encoding in non-external representation. The first one is O(1), while the second one is O(n). These do not include space for a terminating null.
 */
-- (NSUInteger)maximumLengthOfBytesUsingEncoding:(NSStringEncoding)enc;	// Result in O(1) time; the estimate may be way over what's needed
-- (NSUInteger)lengthOfBytesUsingEncoding:(NSStringEncoding)enc;		// Result in O(n) time; the result is exact
+- (NSUInteger)maximumLengthOfBytesUsingEncoding:(NSStringEncoding)enc;	// Result in O(1) time; the estimate may be way over what's needed. Returns 0 on error (overflow)
+- (NSUInteger)lengthOfBytesUsingEncoding:(NSStringEncoding)enc;		// Result in O(n) time; the result is exact. Returns 0 on error (cannot convert to specified encoding, or overflow)
 #endif
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
@@ -234,7 +256,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement;
 #endif
 
-- (const char *)UTF8String;	// Convenience to return null-terminated UTF8 representation
+- (__strong const char *)UTF8String;	// Convenience to return null-terminated UTF8 representation
 
 /* User-dependent encoding who value is derived from user's default language and potentially other factors. The use of this encoding might sometimes be needed when interpreting user documents with unknown encodings, in the absence of other hints.  This encoding should be used rarely, if at all. Note that some potential values here might result in unexpected encoding conversions of even fairly straightforward NSString content --- for instance, punctuation characters with a bidirectional encoding.
 */
@@ -252,10 +274,10 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (id)initWithCharacters:(const unichar *)characters length:(NSUInteger)length;
 - (id)initWithUTF8String:(const char *)nullTerminatedCString;
 - (id)initWithString:(NSString *)aString;
-- (id)initWithFormat:(NSString *)format, ...;
-- (id)initWithFormat:(NSString *)format arguments:(va_list)argList;
-- (id)initWithFormat:(NSString *)format locale:(id)locale, ...;
-- (id)initWithFormat:(NSString *)format locale:(id)locale arguments:(va_list)argList;
+- (id)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+- (id)initWithFormat:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
+- (id)initWithFormat:(NSString *)format locale:(id)locale, ... NS_FORMAT_FUNCTION(1,3);
+- (id)initWithFormat:(NSString *)format locale:(id)locale arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
 - (id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 - (id)initWithBytes:(const void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding;
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
@@ -266,8 +288,8 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 + (id)stringWithString:(NSString *)string;
 + (id)stringWithCharacters:(const unichar *)characters length:(NSUInteger)length;
 + (id)stringWithUTF8String:(const char *)nullTerminatedCString;
-+ (id)stringWithFormat:(NSString *)format, ...;
-+ (id)localizedStringWithFormat:(NSString *)format, ...;
++ (id)stringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
++ (id)localizedStringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
@@ -311,7 +333,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (void)insertString:(NSString *)aString atIndex:(NSUInteger)loc;
 - (void)deleteCharactersInRange:(NSRange)range;
 - (void)appendString:(NSString *)aString;
-- (void)appendFormat:(NSString *)format, ...;
+- (void)appendFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 - (void)setString:(NSString *)aString;
 
 /* In addition to these two, NSMutableString responds properly to all NSString creation methods.
@@ -340,7 +362,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 @interface NSString (NSStringDeprecated)
 
-/* The methods in this category are deprecated and will be removed from this header file in the near future. These methods use [NSString defaultCStringEncoding] as the encoding to convert to, which means the results depend on the user's language and potentially other settings. This might be appropriate in some cases, but often these methods are misused, resulting in issues when running in languages other then English. UTF8String in general is a much better choice when converting arbitrary NSStrings into 8-bit representations. Additional potential replacement methods are being introduced in NSString as appropriate.
+/* The following methods are deprecated and will be removed from this header file in the near future. These methods use [NSString defaultCStringEncoding] as the encoding to convert to, which means the results depend on the user's language and potentially other settings. This might be appropriate in some cases, but often these methods are misused, resulting in issues when running in languages other then English. UTF8String in general is a much better choice when converting arbitrary NSStrings into 8-bit representations. Additional potential replacement methods are being introduced in NSString as appropriate.
 */
 - (const char *)cString DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 - (const char *)lossyCString DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -363,6 +385,10 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 + (id)stringWithCString:(const char *)bytes length:(NSUInteger)length DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 + (id)stringWithCString:(const char *)bytes DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+/* This method is unsafe because it could potentially cause buffer overruns. You should use -getCharacters:range: instead.
+*/
+- (void)getCharacters:(unichar *)buffer;
+
 @end
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5
@@ -382,7 +408,7 @@ enum {
 #define NS_UNICHAR_IS_EIGHT_BIT 0
 
 @interface NSSimpleCString : NSString {
-@protected
+@package
     char *bytes;
     int numBytes;
 #if __LP64__
@@ -394,6 +420,8 @@ enum {
 @interface NSConstantString : NSSimpleCString
 @end
 
-#if !__LP64__
+#if __LP64__
+#else
 extern void *_NSConstantStringClassReference;
 #endif
+

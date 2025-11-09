@@ -1,9 +1,7 @@
 /*
 	Contains:	A way to find bluetooth devices.
-	Copyright:	(C) 2004 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c) 2008 by Apple Computer, Inc., all rights reserved.
 */
-
-#import <Foundation/Foundation.h>
 
 #import <IOBluetooth/Bluetooth.h>
 #import <IOBluetooth/IOBluetoothUserLib.h>
@@ -12,6 +10,7 @@
 //	Forward Declarations
 //===========================================================================================================================
 
+@class NSMutableArray;
 @class IOBluetoothDevice;
 
 //===========================================================================================================================
@@ -36,12 +35,12 @@
 @private
 	
 	void *							_nameRequestHintType;
-	void *							_searchAttributes;
+	IOBluetoothDeviceSearchAttributes *_searchAttributes;
 	void *							_deviceAttributes;
 
-	void *							_expansion[4];
+	__strong void *					_expansion[4];
 
-	id								_delegate;
+	id __weak						_delegate;
 
 	BluetoothServiceClassMajor		_serviceClassMajor;
 	BluetoothDeviceClassMajor		_deviceClassMajor;
@@ -62,6 +61,7 @@
 	
 }
 
+@property(assign) id __weak delegate;
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		inquiryWithDelegate
 	@abstract	Class method to create an inquiry object.
@@ -139,23 +139,6 @@
 */
 
 - (BOOL)updateNewDeviceNames;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		setDelegate
-	@abstract   Set the delegate that will receive delegate messages, as defined below.
-	@param		id	The object that should receive delegate messages.
-	@discussion All delegate methods are optional, although it would be a good idea to implement them all. The passed object will be retained.
-*/
-
-- (void)setDelegate:(id)delegate;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		delegate
-	@abstract	Returns the current delegate, if any.
-	@result		Returns delegate object, otherwise returns nil.
-*/
-
-- (id)delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		foundDevices

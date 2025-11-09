@@ -9,9 +9,12 @@ require 'rubygems/security'
 
 ##
 # Mixin methods for install and update options for Gem::Commands
+
 module Gem::InstallUpdateOptions
 
+  ##
   # Add the install/update options to the option parser.
+
   def add_install_update_options
     OptionParser.accept Gem::Security::Policy do |value|
       value = Gem::Security::Policies[value]
@@ -23,6 +26,12 @@ module Gem::InstallUpdateOptions
                'Gem repository directory to get installed',
                'gems') do |value, options|
       options[:install_dir] = File.expand_path(value)
+    end
+
+    add_option(:"Install/Update", '-n', '--bindir DIR',
+	       'Directory where binary files are',
+	       'located') do |value, options|
+      options[:bin_dir] = File.expand_path(value)
     end
 
     add_option(:"Install/Update", '-d', '--[no-]rdoc',
@@ -37,7 +46,7 @@ module Gem::InstallUpdateOptions
       options[:generate_ri] = value
     end
 
-    add_option(:"Install/Update", '-E', '--env-shebang',
+    add_option(:"Install/Update", '-E', '--[no-]env-shebang',
                "Rewrite the shebang line on installed",
                "scripts to use /usr/bin/env") do |value, options|
       options[:env_shebang] = value
@@ -83,9 +92,31 @@ module Gem::InstallUpdateOptions
                'foo_exec18') do |value, options|
       options[:format_executable] = value
     end
+
+    add_option(:"Install/Update",       '--[no-]user-install',
+               'Install in user\'s home directory instead',
+               'of GEM_HOME. Defaults to using home',
+               'only if GEM_HOME is not writable.') do |value, options|
+      options[:user_install] = value
+    end
+
+    add_option(:"Install/Update", "--development",
+                "Install any additional development",
+                "dependencies") do |value, options|
+      options[:development] = true
+    end
+
+    add_option(:"Install/Update", "--prerelease",
+               "Install prerelease versions of a gem if",
+               "available. Defaults to skipping",
+               "prereleases.") do |value, options|
+      options[:prerelease] = true
+    end
   end
 
+  ##
   # Default options for the gem install command.
+
   def install_update_defaults_str
     '--rdoc --no-force --no-test --wrappers'
   end

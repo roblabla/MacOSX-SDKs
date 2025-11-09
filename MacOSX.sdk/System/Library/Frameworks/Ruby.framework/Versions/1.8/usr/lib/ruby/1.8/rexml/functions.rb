@@ -235,7 +235,7 @@ module REXML
       # from string then we ignore the second &
       # subsequent mappings
       #
-      # if a charactcer maps to nil then we delete it
+      # if a character maps to nil then we delete it
       # in the output.  This happens if the from
       # string is longer than the to string
       #
@@ -339,7 +339,6 @@ module REXML
         object.to_f
       else
         str = string( object )
-        #puts "STRING OF #{object.inspect} = #{str}"
         # If XPath ever gets scientific notation...
         #if str =~ /^\s*-?(\d*\.?\d+|\d+\.)([Ee]\d*)?\s*$/
         if str =~ /^\s*-?(\d*\.?\d+|\d+\.)\s*$/

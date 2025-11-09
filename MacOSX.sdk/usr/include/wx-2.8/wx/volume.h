@@ -4,7 +4,7 @@
 // Author:      George Policello
 // Modified by:
 // Created:     28 Jan 02
-// RCS-ID:      $Id: volume.h,v 1.17 2006/05/28 23:08:31 ABX Exp $
+// RCS-ID:      $Id: volume.h 39399 2006-05-28 23:08:31Z ABX $
 // Copyright:   (c) 2002 George Policello
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

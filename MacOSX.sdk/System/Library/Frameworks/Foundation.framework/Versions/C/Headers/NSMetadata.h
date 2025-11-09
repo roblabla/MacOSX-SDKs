@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,20 +9,20 @@
 
 @class NSString, NSArray, NSDictionary, NSPredicate;
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
-
+@protocol NSMetadataQueryDelegate;
 
 @interface NSMetadataQuery : NSObject {
 @private
     NSUInteger _flags;
     NSTimeInterval _interval;
     id _private[11];
-    void *_reserved;
+    __strong void *_reserved;
 }
 
 - (id)init;
 
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id <NSMetadataQueryDelegate>)delegate;
+- (void)setDelegate:(id <NSMetadataQueryDelegate>)delegate;
 
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)predicate;
@@ -74,7 +74,8 @@
 
 @end
 
-@interface NSObject (NSMetadataQueryDelegate)
+@protocol NSMetadataQueryDelegate <NSObject>
+@optional
 
 - (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result;
 - (id)metadataQuery:(NSMetadataQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue;
@@ -97,7 +98,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope AVAILABLE_MAC_OS_
 @interface NSMetadataItem : NSObject {
 @private
     id _item;
-    void *_reserved;
+    __strong void *_reserved;
 }
 
 - (id)valueForAttribute:(NSString *)key;

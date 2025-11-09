@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -23,7 +23,11 @@
 #ifndef _IOKIT_IOAUDIOSELECTORCONTROL_H
 #define _IOKIT_IOAUDIOSELECTORCONTROL_H
 
+#ifndef IOAUDIOFAMILY_SELF_BUILD
 #include <IOKit/audio/IOAudioControl.h>
+#else
+#include "IOAudioControl.h"
+#endif
 
 class OSString;
 class OSArray;
@@ -63,15 +67,18 @@ public:
 	virtual IOReturn replaceAvailableSelection(SInt32 selectionValue, const char *selectionDescription);
     // OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 2);
 	virtual IOReturn replaceAvailableSelection(SInt32 selectionValue, OSString *selectionDescription);
+    // OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 3);
+	virtual IOReturn addAvailableSelection(SInt32 selectionValue, OSString *selectionDescription, const char* pszName, OSObject* tag);		// <rdar://8202424>
 
 private:
     OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 0);
     OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 1);
     OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 2);
+    OSMetaClassDeclareReservedUsed(IOAudioSelectorControl, 3);			// <rdar://8202424>
 
-    OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 3);
-    OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 4);
-    OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 5);
+    OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 4);		// <rdar://8202424>
+
+    OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 5);		// <rdar://8202424>
     OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 6);
     OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 7);
     OSMetaClassDeclareReservedUnused(IOAudioSelectorControl, 8);

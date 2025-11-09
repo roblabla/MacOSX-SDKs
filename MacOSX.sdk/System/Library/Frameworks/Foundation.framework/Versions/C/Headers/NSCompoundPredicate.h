@@ -1,10 +1,10 @@
 /*	NSCompoundPredicate.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray;
 

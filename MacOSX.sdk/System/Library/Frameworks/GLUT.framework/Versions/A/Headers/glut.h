@@ -56,6 +56,7 @@ typedef unsigned short wchar_t;
 #endif
 
 #if defined(__APPLE__) || defined(MACOSX)
+#include <AvailabilityMacros.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #else
@@ -151,6 +152,7 @@ extern "C" {
  GLUT_MACOSX_IMPLEMENTATION=1  glutSurfaceTexture.
 
  GLUT_MACOSX_IMPLEMENTATION=2  glutWMCloseFunc, glutCheckLoop.
+  
 **/
 #ifndef GLUT_MACOSX_IMPLEMENTATION  /* Allow this to be overriden. */
 #define GLUT_MACOSX_IMPLEMENTATION	2
@@ -452,8 +454,15 @@ extern void APIENTRY glutSetCursor(int cursor);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
 extern void APIENTRY glutWarpPointer(int x, int y);
 #if (GLUT_MACOSX_IMPLEMENTATION >= 1)
-/* surface texturing API Mac OS X specific */
+/* surface texturing API Mac OS X specific
+*  Note:
+*	glutSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object
+*/
+#ifdef MAC_OS_X_VERSION_10_5
+extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin); AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5
+#else
 extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin);
+#endif
 #endif
 #if (GLUT_MACOSX_IMPLEMENTATION >= 2)
 /* Mac OS X specific API */

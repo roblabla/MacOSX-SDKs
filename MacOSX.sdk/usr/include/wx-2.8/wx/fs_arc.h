@@ -3,7 +3,7 @@
 // Purpose:     Archive file system
 // Author:      Vaclav Slavik, Mike Wetherell
 // Copyright:   (c) 1999 Vaclav Slavik, (c) 2006 Mike Wetherell
-// CVS-ID:      $Id: fs_arc.h,v 1.4 2006/10/30 11:56:10 ABX Exp $
+// CVS-ID:      $Id: fs_arc.h 42713 2006-10-30 11:56:12Z ABX $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

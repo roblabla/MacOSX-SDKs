@@ -1,7 +1,7 @@
 /*
         NSTableHeaderView.h
         Application Kit
-        Copyright (c) 1995-2007, Apple Inc.
+        Copyright (c) 1995-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -24,7 +24,7 @@
     BOOL			_isColumnResizing;
     BOOL			_showHandCursorFired;
     BOOL			_toolTipRectsDirty;
-    BOOL			_reserved4;
+    BOOL			_alignTitleWithDataCell;
     BOOL			_skipDrawingSeparator;
     id				_reserved;
 }

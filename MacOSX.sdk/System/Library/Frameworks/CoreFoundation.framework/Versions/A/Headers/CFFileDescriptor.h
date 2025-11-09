@@ -1,5 +1,5 @@
 /*	CFFileDescriptor.h
-	Copyright (c) 2006-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2009, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFFILEDESCRIPTOR__)
@@ -9,8 +9,6 @@
 
 #if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-#if defined(__MACH__)
-
 CF_EXTERN_C_BEGIN
 
 typedef int CFFileDescriptorNativeDescriptor;
@@ -19,8 +17,8 @@ typedef struct __CFFileDescriptor * CFFileDescriptorRef;
 
 /* Callback Reason Types */
 enum {
-    kCFFileDescriptorReadCallBack = 1 << 0,
-    kCFFileDescriptorWriteCallBack = 1 << 1
+    kCFFileDescriptorReadCallBack = 1UL << 0,
+    kCFFileDescriptorWriteCallBack = 1UL << 1
 };
 
 typedef void (*CFFileDescriptorCallBack)(CFFileDescriptorRef f, CFOptionFlags callBackTypes, void *info);
@@ -51,8 +49,6 @@ CF_EXPORT CFRunLoopSourceRef	CFFileDescriptorCreateRunLoopSource(CFAllocatorRef 
 
 
 CF_EXTERN_C_END
-
-#endif
 
 #endif
 

@@ -44,8 +44,9 @@ typedef	unsigned int		lck_sleep_action_t;
 #define	LCK_SLEEP_UNLOCK	0x01	/* Release the lock and return unheld */
 #define	LCK_SLEEP_SHARED	0x02	/* Reclaim the lock in shared mode (RW only) */
 #define	LCK_SLEEP_EXCLUSIVE	0x04	/* Reclaim the lock in exclusive mode (RW only) */
+#define	LCK_SLEEP_SPIN		0x08	/* Reclaim the lock in spin mode (mutex only) */
 
-#define	LCK_SLEEP_MASK		0x07	/* Valid actions */
+#define	LCK_SLEEP_MASK		0x0f	/* Valid actions */
 
 typedef struct __lck_grp__ lck_grp_t;
 
@@ -153,13 +154,15 @@ extern void				lck_mtx_init(
 									lck_mtx_t		*lck, 
 									lck_grp_t		*grp,
 									lck_attr_t		*attr);
-
 extern void				lck_mtx_lock(
 									lck_mtx_t		*lck);
 
+#if	defined(__i386__)
+extern void	lck_mtx_unlock(lck_mtx_t		*lck) __DARWIN10_ALIAS(lck_mtx_unlock);
+#else
 extern void				lck_mtx_unlock(
 									lck_mtx_t		*lck);
-
+#endif	/* __i386__ */
 extern void				lck_mtx_destroy(
 									lck_mtx_t		*lck,
 									lck_grp_t		*grp);

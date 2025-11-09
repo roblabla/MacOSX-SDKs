@@ -3,9 +3,9 @@
  
      Contains:   Keychain API's with Human Interfaces
  
-     Version:    SecurityHI-30817~522
+     Version:    SecurityHI-36638~1292
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2000-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,10 +33,13 @@ extern "C" {
 
 /* High-level interface for storing passwords */
 /*
- *  KCAddAppleSharePassword()
+ *  KCAddAppleSharePassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -49,14 +52,17 @@ KCAddAppleSharePassword(
   StringPtr             accountName,
   UInt32                passwordLength,
   const void *          passwordData,
-  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  KCAddInternetPassword()
+ *  KCAddInternetPassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -70,14 +76,17 @@ KCAddInternetPassword(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  KCAddInternetPasswordWithPath()
+ *  KCAddInternetPasswordWithPath()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 2.0 and later
  */
@@ -92,14 +101,17 @@ KCAddInternetPasswordWithPath(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  KCAddGenericPassword()
+ *  KCAddGenericPassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddGenericPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -109,96 +121,117 @@ KCAddGenericPassword(
   StringPtr     accountName,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Low-level interface for storing keychain items */
 /*
- *  KCAddItem()
+ *  KCAddItem()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainItemCreateFromContent
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
-KCAddItem(KCItemRef item)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+KCAddItem(KCItemRef item)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Managing keychains */
 /*
- *  KCUnlock()
+ *  KCUnlock()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainUnlock
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
 KCUnlock(
   KCRef       keychain,       /* can be NULL */
-  StringPtr   password)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr   password)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  KCCreateKeychain()
+ *  KCCreateKeychain()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainCreate
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
 KCCreateKeychain(
   StringPtr   password,       /* can be NULL */
-  KCRef *     keychain)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCRef *     keychain)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  KCChangeSettings()
+ *  KCChangeSettings()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainSetSettings
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 2.0 and later
  */
 extern OSStatus 
-KCChangeSettings(KCRef keychain)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+KCChangeSettings(KCRef keychain)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kcunlock()
+ *  kcunlock()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainUnlock
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
 kcunlock(
   KCRef         keychain,       /* can be NULL */
-  const char *  password)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const char *  password)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kccreatekeychain()
+ *  kccreatekeychain()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainCreate
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
 kccreatekeychain(
   const char *  password,       /* can be NULL */
-  KCRef *       keychain)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCRef *       keychain)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kcaddapplesharepassword()
+ *  kcaddapplesharepassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -211,14 +244,17 @@ kcaddapplesharepassword(
   const char *          accountName,
   UInt32                passwordLength,
   const void *          passwordData,
-  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kcaddinternetpassword()
+ *  kcaddinternetpassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -232,14 +268,17 @@ kcaddinternetpassword(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kcaddinternetpasswordwithpath()
+ *  kcaddinternetpasswordwithpath()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddInternetPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 2.0 and later
  */
@@ -254,14 +293,17 @@ kcaddinternetpasswordwithpath(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  kcaddgenericpassword()
+ *  kcaddgenericpassword()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SecKeychainAddGenericPassword
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
@@ -271,7 +313,7 @@ kcaddgenericpassword(
   const char *  accountName,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Working with certificates */

@@ -1,6 +1,6 @@
 /*	
 	NSGlyphInfo.h
-	Copyright (c) 2002-2007, Apple Inc.
+	Copyright (c) 2002-2009, Apple Inc.
 	All rights reserved.
 */
 

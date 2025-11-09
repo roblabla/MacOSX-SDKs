@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class NSString;
 @class NSURL;
@@ -43,6 +44,14 @@
 @property(copy) NSString *useMap;
 @property int vspace;
 @property int width;
-@property(readonly, copy) NSString *altDisplayString;
-@property(readonly, copy) NSURL *absoluteImageURL;
+@property(readonly) BOOL complete AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *lowsrc AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int naturalHeight AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int naturalWidth AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int x AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int y AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *altDisplayString AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSURL *absoluteImageURL AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

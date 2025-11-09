@@ -2,9 +2,17 @@
  *	CTRun.h
  *	CoreText
  *
- *	Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
  *
  */
+
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
 
 #ifndef __CTRUN__
 #define __CTRUN__
@@ -219,6 +227,55 @@ void CTRunGetPositions(
 	CTRunRef run,
 	CFRange range,
 	CGPoint buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@function	CTRunGetAdvancesPtr
+	@abstract	Returns a direct pointer for the glyph advance array stored in
+				the run.
+
+	@discussion The advance array will have a length equal to the value returned
+				by CTRunGetGlyphCount. The caller should be prepared for this
+				function to return NULL even if there are glyphs in the stream.
+				Should this function return NULL, the caller will need to
+				allocate their own buffer and call CTRunGetAdvances to fetch the
+				advances. Note that advances alone are not sufficient for correctly
+				positioning glyphs in a line, as a run may have a non-identity
+				matrix or the initial glyph in a line may have a non-zero origin;
+				callers should consider using positions instead.
+
+	@param		run
+				The run whose advances you wish to access.
+
+	@result		A valid pointer to an array of CGSize structures or NULL.
+*/
+
+const CGSize* CTRunGetAdvancesPtr(
+	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@function	CTRunGetAdvances
+	@abstract	Copies a range of glyph advances into a user-provided buffer.
+
+	@param		run
+				The run whose advances you wish to copy.
+
+	@param		range
+				The range of glyph advances you wish to copy. If the length of
+				the range is set to 0, then the copy operation will continue from
+				the range's start index to the end of the run.
+
+	@param		buffer
+				The buffer where the glyph advances will be copied to. The buffer
+				must be allocated to at least the value specified by the range's
+				length.
+*/
+
+void CTRunGetAdvances(
+	CTRunRef run,
+	CFRange range,
+	CGSize buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*!

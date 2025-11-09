@@ -4,7 +4,7 @@
 // Author:      Michael Bedward (based on code by Julian Smart, Robin Dunn)
 // Modified by: Santiago Palacios
 // Created:     1/08/1999
-// RCS-ID:      $Id: grid.h,v 1.160 2006/10/28 13:57:33 VZ Exp $
+// RCS-ID:      $Id: grid.h 53135 2008-04-12 02:31:04Z VZ $
 // Copyright:   (c) Michael Bedward
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -51,25 +51,31 @@ extern WXDLLIMPEXP_DATA_ADV(const wxChar) wxGridNameStr[];
 #define wxGRID_VALUE_TEXT wxGRID_VALUE_STRING
 #define wxGRID_VALUE_LONG wxGRID_VALUE_NUMBER
 
+#if wxABI_VERSION >= 20808
+    // magic constant which tells (to some functions) to automatically
+    // calculate the appropriate size
+    #define wxGRID_AUTOSIZE (-1)
+#endif // wxABI_VERSION >= 20808
+
 // ----------------------------------------------------------------------------
 // forward declarations
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxGrid;
-class WXDLLIMPEXP_ADV wxGridCellAttr;
-class WXDLLIMPEXP_ADV wxGridCellAttrProviderData;
-class WXDLLIMPEXP_ADV wxGridColLabelWindow;
-class WXDLLIMPEXP_ADV wxGridCornerLabelWindow;
-class WXDLLIMPEXP_ADV wxGridRowLabelWindow;
-class WXDLLIMPEXP_ADV wxGridWindow;
-class WXDLLIMPEXP_ADV wxGridTypeRegistry;
-class WXDLLIMPEXP_ADV wxGridSelection;
+class WXDLLIMPEXP_FWD_ADV wxGrid;
+class WXDLLIMPEXP_FWD_ADV wxGridCellAttr;
+class WXDLLIMPEXP_FWD_ADV wxGridCellAttrProviderData;
+class WXDLLIMPEXP_FWD_ADV wxGridColLabelWindow;
+class WXDLLIMPEXP_FWD_ADV wxGridCornerLabelWindow;
+class WXDLLIMPEXP_FWD_ADV wxGridRowLabelWindow;
+class WXDLLIMPEXP_FWD_ADV wxGridWindow;
+class WXDLLIMPEXP_FWD_ADV wxGridTypeRegistry;
+class WXDLLIMPEXP_FWD_ADV wxGridSelection;
 
-class WXDLLEXPORT wxCheckBox;
-class WXDLLEXPORT wxComboBox;
-class WXDLLEXPORT wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class WXDLLIMPEXP_FWD_CORE wxComboBox;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 #if wxUSE_SPINCTRL
-class WXDLLEXPORT wxSpinCtrl;
+class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -1996,7 +2002,11 @@ protected:
     bool GetModelValues();
     bool SetModelValues();
 
-    friend class WXDLLIMPEXP_ADV wxGridSelection;
+private:
+    // Calculate the minimum acceptable size for labels area
+    wxCoord CalcColOrRowLabelAreaMinSize(bool column /* or row? */);
+
+    friend class WXDLLIMPEXP_FWD_ADV wxGridSelection;
 
     DECLARE_DYNAMIC_CLASS( wxGrid )
     DECLARE_EVENT_TABLE()
@@ -2203,6 +2213,7 @@ BEGIN_DECLARE_EVENT_TYPES()
     DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_ADV, wxEVT_GRID_EDITOR_HIDDEN, 1594)
     DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_ADV, wxEVT_GRID_EDITOR_CREATED, 1595)
     DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_ADV, wxEVT_GRID_CELL_BEGIN_DRAG, 1596)
+    DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_ADV, wxEVT_GRID_COL_MOVE, 1597)
 END_DECLARE_EVENT_TYPES()
 
 
@@ -2245,6 +2256,7 @@ typedef void (wxEvtHandler::*wxGridEditorCreatedEventFunction)(wxGridEditorCreat
 #define EVT_GRID_CMD_LABEL_RIGHT_DCLICK(id, fn)  wx__DECLARE_GRIDEVT(LABEL_RIGHT_DCLICK, id, fn)
 #define EVT_GRID_CMD_ROW_SIZE(id, fn)            wx__DECLARE_GRIDSIZEEVT(ROW_SIZE, id, fn)
 #define EVT_GRID_CMD_COL_SIZE(id, fn)            wx__DECLARE_GRIDSIZEEVT(COL_SIZE, id, fn)
+#define EVT_GRID_CMD_COL_MOVE(id, fn)            wx__DECLARE_GRIDSIZEEVT(COL_MOVE, id, fn)
 #define EVT_GRID_CMD_RANGE_SELECT(id, fn)        wx__DECLARE_GRIDRANGESELEVT(RANGE_SELECT, id, fn)
 #define EVT_GRID_CMD_CELL_CHANGE(id, fn)         wx__DECLARE_GRIDEVT(CELL_CHANGE, id, fn)
 #define EVT_GRID_CMD_SELECT_CELL(id, fn)         wx__DECLARE_GRIDEVT(SELECT_CELL, id, fn)
@@ -2265,6 +2277,7 @@ typedef void (wxEvtHandler::*wxGridEditorCreatedEventFunction)(wxGridEditorCreat
 #define EVT_GRID_LABEL_RIGHT_DCLICK(fn)  EVT_GRID_CMD_LABEL_RIGHT_DCLICK(wxID_ANY, fn)
 #define EVT_GRID_ROW_SIZE(fn)            EVT_GRID_CMD_ROW_SIZE(wxID_ANY, fn)
 #define EVT_GRID_COL_SIZE(fn)            EVT_GRID_CMD_COL_SIZE(wxID_ANY, fn)
+#define EVT_GRID_COL_MOVE(fn)            EVT_GRID_CMD_COL_MOVE(wxID_ANY, fn)
 #define EVT_GRID_RANGE_SELECT(fn)        EVT_GRID_CMD_RANGE_SELECT(wxID_ANY, fn)
 #define EVT_GRID_CELL_CHANGE(fn)         EVT_GRID_CMD_CELL_CHANGE(wxID_ANY, fn)
 #define EVT_GRID_SELECT_CELL(fn)         EVT_GRID_CMD_SELECT_CELL(wxID_ANY, fn)

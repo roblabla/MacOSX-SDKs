@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2007, Apple Inc.
+	Copyright (c) 2003-2009, Apple Inc.
 	All rights reserved.
  */
 
@@ -31,14 +31,13 @@
 	unsigned int sendsWholeSearchString:1;
 	unsigned int maximumRecents:8;
 	unsigned int cancelVisible:1;
-	unsigned int drawSize:2;
+	unsigned int reserved2:2;
 	unsigned int disableText:1;
 	unsigned int menuTracking:1;
 	unsigned int deferredUpdate:1;
 	unsigned int sendsImmediately:1;
-        unsigned int activeTimer:1;
 
-	unsigned int reserved:15;
+	unsigned int reserved:16;
     } _sfFlags;
     NSButtonCell*   _searchButtonCell;
     NSButtonCell*   _cancelButtonCell;

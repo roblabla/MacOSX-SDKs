@@ -4,7 +4,7 @@
 // Author:      David Webster (adapted from Robert Roebling's gtk port
 // Modified by:
 // Created:     10/21/99
-// RCS-ID:      $Id: dataobj2.h,v 1.8 2006/09/05 20:45:49 VZ Exp $
+// RCS-ID:      $Id: dataobj2.h 51164 2008-01-11 19:17:46Z SC $
 // Copyright:   (c) 1998, 1999 Vadim Zeitlin, Robert Roebling
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,20 +35,15 @@ public:
     virtual size_t GetDataSize() const ;
     virtual bool GetDataHere(void *buf) const ;
     virtual bool SetData(size_t len, const void *buf);
-    // Must provide overloads to avoid hiding them (and warnings about it)
-    virtual size_t GetDataSize(const wxDataFormat&) const
-    {
-        return GetDataSize();
-    }
-    virtual bool GetDataHere(const wxDataFormat&, void *buf) const
-    {
-        return GetDataHere(buf);
-    }
-    virtual bool SetData(const wxDataFormat&, size_t len, const void *buf)
-    {
-        return SetData(len, buf);
-    }
 
+    // virtuals, we aren't breaking binary compat here
+    virtual size_t GetFormatCount(Direction WXUNUSED(dir) = Get) const;
+    virtual void GetAllFormats(wxDataFormat *formats,
+                               wxDataObjectBase::Direction WXUNUSED(dir) = Get) const;
+
+    virtual size_t GetDataSize(const wxDataFormat& format) const;
+    virtual bool GetDataHere(const wxDataFormat& format, void *pBuf) const;
+    virtual bool SetData(const wxDataFormat& format, size_t nLen, const void* pBuf);
 protected :
     void Init() ;
     void Clear() ;

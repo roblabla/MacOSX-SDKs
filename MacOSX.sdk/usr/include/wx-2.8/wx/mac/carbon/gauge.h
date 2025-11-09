@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: gauge.h,v 1.8 2006/09/09 13:36:43 RR Exp $
+// RCS-ID:      $Id: gauge.h 41089 2006-09-09 13:36:54Z RR $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

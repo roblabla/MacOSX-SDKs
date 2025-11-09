@@ -1,360 +1,395 @@
-/*
- *  CGDisplayConfiguration.h
- *  CoreGraphics
- *
- *  Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
- *
- */
-#ifndef __CGDISPLAY_CONFIGURATION_H__
-#define __CGDISPLAY_CONFIGURATION_H__ 1
+/* CoreGraphics - CGDisplayConfiguration.h
+   Copyright (c) 2002-2009 Apple Inc.
+   All rights reserved. */
+
+#ifndef CGDISPLAYCONFIGURATION_H_
+#define CGDISPLAYCONFIGURATION_H_
 
 #include <IOKit/IOKitLib.h>
 #include <CoreGraphics/CGDirectDisplay.h>
-#include <AvailabilityMacros.h>
 
-CG_EXTERN_C_BEGIN
-/*
- * Display reconfiguration process.
- * Call CGBeginDisplayConfiguration to start.
- * Make all desired changes, for all displays.
- * Commit the changes using CGPerformDisplayConfiguration(), or cancel with
- * CGCancelDisplayConfiguration()
- *
- * The resulting layout will be adjusted so as to remove gaps or overlaps from
- * the requested layout, if needed.
- */
-typedef struct _CGDisplayConfigRef * CGDisplayConfigRef;
+/* The display reconfiguration process:
+   - Call `CGBeginDisplayConfiguration' to start.
+   - Make all desired changes for all displays.
+   - Commit the changes using `CGPerformDisplayConfiguration', or cancel
+     with `CGCancelDisplayConfiguration'.
 
-/* Get a new CGDisplayConfigRef */
-CG_EXTERN CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *pConfigRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+   The resulting layout will be adjusted to remove gaps or overlaps from the
+   requested layout, if needed. */
 
-/*
- * Set the origin point for a display
- *
- * Note that setting the origin of a display which is mirroring
- * another display will remove that display from any mirroring set.
- *
- * Any display whose origin is not explicitly set in a reconfiguration
- * will be repositioned to a location as close as possible to it's
- * current location without overlapping or leaving a gap between displays.
- *
- * The actual position a display is placed at will be as close as possible
- * to the requested location without overlapping or leaving a gap between
- * displays.
- */
-CG_EXTERN CGError CGConfigureDisplayOrigin(CGDisplayConfigRef configRef,
-                                 CGDirectDisplayID display,
-                                 CGDisplayCoord x,
-                                 CGDisplayCoord y) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+typedef struct _CGDisplayConfigRef *CGDisplayConfigRef;
 
-/*
- * Set the display mode
- *
- * The mode dictionary passed in must be a dictionary vended by other CGDirectDisplay
- * APIs such as CGDisplayBestModeForParameters() and CGDisplayAvailableModes().
- *
- * When changing display modes of displays in a mirroring set, other displays in
- * the mirroring set whose mode is not explicitly changed will be set to a display
- * mode capable of mirroring the bounds of the largest display being explicitly set. 
- */
-CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef configRef,
-                                CGDirectDisplayID display,
-                                CFDictionaryRef mode) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Begin a new set of display configuration changes. This function creates a
+   display configuration which provides a context for a set of display
+   configuration changes. Use `CGCompleteDisplayConfiguration' to apply the
+   changes in a single transaction. */
 
-/*
- * Enable or disable stereo operation.
- *
- * Note that the system normally detects the presence of a stereo window,
- * and will automatically switch a display containing a stereo window to
- * stereo operation.  This function provides a mechanism to force a display
- * to stereo operation, and to set options (blue line sync signal) when in
- * stereo operation.
- *
- * Returns kCGErrorSuccess on success.
- * Returns kCGErrorRangeCheck if the display does not support
- * the stereo operation settings requested.
- *
- * On success, the display resolution, mirroring mode, and
- * available display modes may change, due to hardware-specific
- * capabilities and limitations.
- * Please check settings to verify that they are appropriate for
- * your application.
- *
- * When in stereo operation, a display may need to generate a special stereo
- * sync signal as part of the video output.  The sync signal consists of a blue
- * line which occupies the first 25% of the last scanline for the left eye view,
- * and the first 75% of the last scanline for the right eye view.  The remainder
- * of the scanline is black.   It may be set using the forceBlueLine option.
- */
-CG_EXTERN CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef configRef, CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine);
+CG_EXTERN CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *config)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
-/*
- * Make a display a mirror of masterDisplay.
- *
- * Use a CGDirectDisplayID of kCGNullDirectDisplay for the masterDisplay to disable
- * mirroring.
- * Use a CGDirectDisplayID of CGMainDisplayID() for the masterDisplay to mirror
- * the main display.
- *
- * Mirroring requests will be filled with hardware mirroring when possible,
- * at the device driver's choice.  Displays will be matted as appropriate,
- * using either hardware or software matte generation, again at the device driver's choice.
- *
- * Note that when hardware mirroring is in effect, the device driver may bind the hardware
- * accelerator, drawing engine, and 3D engine to any one of the displays in the hardware
- * mirroring set.  That display will become the active display for drawing purposes in that
- * hardware mirroring set.  Use CGDisplayPrimaryDisplay() to determine the correct display
- * device to process drawing operations in a hardware mirroring set.
- *
- * An app that uses CGGetActiveDisplayList() to determine the proper displays to draw to
- * (All Carbon and Cocoa apps using windows and/or DrawSprocket fall into this class)
- * will automatically get the correct behavior.
- */
-CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(CGDisplayConfigRef configRef,
-                                                     CGDirectDisplayID display,
-                                                     CGDirectDisplayID masterDisplay) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Configure the origin of a display in global display coordinates.
 
-/* Cancel a reconfiguration operation, discarding the configRef */
-CG_EXTERN CGError CGCancelDisplayConfiguration(CGDisplayConfigRef configRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+   The new origin of the display is placed as close as possible to the
+   requested location, without overlapping or leaving a gap between
+   displays.
 
-/*
- * Perform the requested reconfigurations and discard the configRef
- *
- * A configuration change can apply for the life of an app, the life of a login session, or
- * permanently. If a request is made to make a change permanent, and the change
- * cannot be supported by the Aqua UI (resolution and pixel depth constraints apply),
- * then the configuration  change is demoted to lasting the session.
- *
- * A permanent configuration change also becomes the current session's
- * configuration.
- *
- * When the system reverts confgurations at app termination, the
- * configuration always reverts to the session or permanent configuration setting.
- *
- * When the system reverts confgurations at session termination, the
- * configuration always reverts to the permanent configuration setting.
- *
- * This operation may fail if:
- *     An unsupported display mode is requested
- *     Another app is running in full-screen mode
- *
- */
-enum {
-    kCGConfigureForAppOnly = 0,
-    kCGConfigureForSession = 1,
-    kCGConfigurePermanently = 2
-};
-typedef u_int32_t CGConfigureOption;
+   Any display whose origin is not explicitly set in a reconfiguration will
+   be repositioned to a location as close as possible to its current
+   location without overlapping or leaving a gap between displays.
 
-CG_EXTERN CGError CGCompleteDisplayConfiguration( CGDisplayConfigRef configRef, CGConfigureOption option ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+   Note that setting the origin of a display which is mirroring another
+   display will remove that display from any mirroring set. */
 
-/* Restore the permanent display configuration from the user's display preferences settings */
-CG_EXTERN void CGRestorePermanentDisplayConfiguration(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGError CGConfigureDisplayOrigin(CGDisplayConfigRef config,
+  CGDirectDisplayID display, int32_t x, int32_t y)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
-/*
- * Applications may want to register for notifications of display changes.
- *
- * Display changes are reported via a callback mechanism.
- *
- * Callbacks are invoked when the app is listening for events,
- * on the event processing thread, or from within the display
- * reconfiguration function when in the program that is driving the
- * reconfiguration.
- *
- * Callbacks should avoid attempting to change display configurations,
- * and should not raise exceptions or perform a non-local return such as
- * calling longjmp().
- *
- * Before display reconfiguration, a callback fires to inform
- * applications of a pending configuration change. The callback runs
- * once for each on-line display.  The flags passed in are set to
- * kCGDisplayBeginConfigurationFlag.  This callback does not
- * carry other per-display information, as details of how a
- * reconfiguration affects a particular device rely on device-specific
- * behaviors which may not be exposed by a device driver.
- *
- * After display reconfiguration, at the time the callback function
- * is invoked, all display state reported by CoreGraphics, QuickDraw,
- * and the Carbon Display Manager API will be up to date.  This callback
- * runs after the Carbon Display Manager notification callbacks.
- * The callback runs once for each added, removed, and currently
- * on-line display.  Note that in the case of removed displays, calls into
- * the CoreGraphics API with the removed display ID will fail.
- */
+/* Configure the display mode of a display. The "options" field is reserved
+   for future expansion; pass NULL for now.
+
+   A display mode is a set of properties such as width, height, pixel depth,
+   and refresh rate, and options such as stretched LCD panel filling.
+
+   If you use this function to change the mode of a display in a mirroring
+   set, Quartz may adjust the bounds, resolutions, and depth of the other
+   displays in the set to a safe mode, with matching depth and the smallest
+   enclosing size. */
+
+CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(CGDisplayConfigRef config,
+  CGDirectDisplayID display, CGDisplayModeRef mode, CFDictionaryRef options)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Enable or disable stereo operation for a display.
+
+   Note that the system normally detects the presence of a stereo window,
+   and will automatically switch a display containing a stereo window to
+   stereo operation. This function provides a mechanism to force a display
+   to stereo operation, and to set options (such as blue line sync signal)
+   when in stereo operation.
+
+   When in stereo operation, a display may need to generate a special stereo
+   sync signal as part of the video output. The sync signal consists of a
+   blue line which occupies the first 25% of the last scanline for the left
+   eye view, and the first 75% of the last scanline for the right eye view.
+   The remainder of the scanline is black. To force the display to generate
+   this sync signal, pass true for `forceBlueLine'; otherwise, pass false.
+
+   Returns `kCGErrorSuccess' on success, or `kCGErrorRangeCheck' if the
+   display does not support the stereo operation settings requested.
+
+   On success, the display resolution, mirroring mode, and available display
+   modes may change due to hardware-specific capabilities and limitations.
+   You should check these settings to verify that they are appropriate for
+   your application. */
+
+CG_EXTERN CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef config,
+  CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Make a display a mirror of a master display.
+
+   Pass `kCGNullDirectDisplay' for the master display to disable mirroring.
+   Pass `CGMainDisplayID()' for the master display to mirror the main
+   display.
+
+   Display mirroring and display matte generation are implemented either in
+   hardware (preferred) or software, at the discretion of the device driver.
+
+   - Hardware mirroring
+
+     With hardware mirroring enabled, all drawing is directed to the primary
+     display --- see CGDisplayPrimaryDisplay.
+
+     If the device driver selects hardware matte generation, the display
+     bounds and rowbytes values are adjusted to reflect the active drawable
+     area.
+
+   - Software mirroring
+
+     In this form of mirroring, identical content is drawn into each display
+     in the mirroring set. Applications that use the window system need not
+     be concerned about mirroring, as the window system takes care of all
+     flushing of window content to the appropriate displays.
+
+     Applications that draw directly to the display, as with display
+     capture, must make sure to draw the same content to all mirrored
+     displays in a software mirror set. When drawing to software mirrored
+     displays using a full screen OpenGL context (not drawing through a
+     window), you should create shared OpenGL contexts for each display and
+     re-render for each display.
+
+     You can use the function `CGGetActiveDisplayList' to determine which
+     displays are active, or drawable. This automatically gives your
+     application the correct view of the current displays. */
+
+CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(CGDisplayConfigRef config,
+  CGDirectDisplayID display, CGDirectDisplayID master)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Cancel a set of display configuration changes. On return, the
+   configuration is cancelled and is no longer valid. */
+
+CG_EXTERN CGError CGCancelDisplayConfiguration(CGDisplayConfigRef config)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Complete a set of display configuration changes. On return, the
+   configuration is no longer valid.
+
+   A configuration change can apply for the life of an application, the life
+   of a login session, or permanently. If a request is made to make a change
+   permanent, and the change cannot be supported by Mac OS X user interface,
+   then the configuration change lasts only for the current login session.
+
+   A permanent configuration change also becomes the current session's
+   configuration.
+
+   When the system reverts configurations at app termination, the
+   configuration reverts to the session or permanent configuration setting.
+
+   When the system reverts configurations at session termination, the
+   configuration reverts to the permanent configuration setting.
+
+   This operation may fail if an unsupported display mode is requested, or
+   if another app is running in full-screen mode. */
 
 enum {
-    kCGDisplayBeginConfigurationFlag = (1 << 0), /* Set in pre-reconfiguration callback */
-    kCGDisplayMovedFlag              = (1 << 1), /* post-reconfiguration callback flag */
-    kCGDisplaySetMainFlag            = (1 << 2), /* post-reconfiguration callback flag */
-    kCGDisplaySetModeFlag            = (1 << 3), /* post-reconfiguration callback flag */
-    kCGDisplayAddFlag                = (1 << 4), /* post-reconfiguration callback flag */
-    kCGDisplayRemoveFlag             = (1 << 5), /* post-reconfiguration callback flag */
-    kCGDisplayEnabledFlag            = (1 << 8), /* post-reconfiguration callback flag */
-    kCGDisplayDisabledFlag           = (1 << 9), /* post-reconfiguration callback flag */
-    kCGDisplayMirrorFlag             = (1 << 10),/* post-reconfiguration callback flag */
-    kCGDisplayUnMirrorFlag           = (1 << 11),/* post-reconfiguration callback flag */
-    kCGDisplayDesktopShapeChangedFlag = (1 << 12) /* post-reconfiguration callback flag */
+  kCGConfigureForAppOnly = 0,
+  kCGConfigureForSession = 1,
+  kCGConfigurePermanently = 2
 };
-typedef u_int32_t CGDisplayChangeSummaryFlags;
+typedef uint32_t CGConfigureOption;
+
+CG_EXTERN CGError CGCompleteDisplayConfiguration(CGDisplayConfigRef config,
+  CGConfigureOption option) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Restore the permanent display configuration settings for the current
+   user. */
+
+CG_EXTERN void CGRestorePermanentDisplayConfiguration(void)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Display changes are reported via a callback mechanism.
+
+   Callbacks are invoked when the app is listening for events, on the event
+   processing thread, or from within the display reconfiguration function
+   when in the program that is driving the reconfiguration.
+
+   Callbacks should avoid changing display configurations, and should not
+   raise exceptions or perform a non-local return such as calling longjmp().
+
+   Before display reconfiguration, a callback fires to inform applications
+   of a configuration change. The callback runs once for each on-line
+   display. The flag is set to `kCGDisplayBeginConfigurationFlag'. This
+   callback does not carry other per-display information, as details of how
+   a reconfiguration affects a particular device rely on device-specific
+   behaviors which may not be exposed by a device driver.
+
+   After display reconfiguration, at the time the callback function is
+   invoked, all display state reported by CoreGraphics, QuickDraw, and the
+   Carbon Display Manager API will be up to date. This callback runs after
+   the Carbon Display Manager notification callbacks. The callback runs once
+   for each added, removed, and currently on-line display. Note that in the
+   case of removed displays, calls into the CoreGraphics API with the
+   removed display ID will fail. */
+
+enum {
+  kCGDisplayBeginConfigurationFlag	= (1 << 0),
+  kCGDisplayMovedFlag			= (1 << 1),
+  kCGDisplaySetMainFlag			= (1 << 2),
+  kCGDisplaySetModeFlag			= (1 << 3),
+  kCGDisplayAddFlag			= (1 << 4),
+  kCGDisplayRemoveFlag			= (1 << 5),
+  kCGDisplayEnabledFlag			= (1 << 8),
+  kCGDisplayDisabledFlag		= (1 << 9),
+  kCGDisplayMirrorFlag			= (1 << 10),
+  kCGDisplayUnMirrorFlag		= (1 << 11),
+  kCGDisplayDesktopShapeChangedFlag	= (1 << 12)
+};
+typedef uint32_t CGDisplayChangeSummaryFlags;
+
+/* A client-supplied callback function that’s invoked whenever the
+   configuration of a local display is changed. */
 
 typedef void(*CGDisplayReconfigurationCallBack)(CGDirectDisplayID display,
-                                                CGDisplayChangeSummaryFlags flags,
-                                                void *userInfo);
+  CGDisplayChangeSummaryFlags flags, void *userInfo);
 
-/*
- * Register and remove a display reconfiguration callback procedure
- * The userInfo argument is passed back to the callback procedure each time
- * it is invoked.
- */
-CG_EXTERN CGError CGDisplayRegisterReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+/* Register a display reconfiguration callback procedure. The `userInfo'
+   argument is passed back to the callback procedure each time it is
+   invoked. */
 
-/*
- * Specialized configuration changes should be done outside of the
- * scope of a CGBeginDisplayConfiguration/CGCompleteDisplayConfiguration
- * pair, as they may alter things such as the available display modes
- * which a normal reconfiguration sequence might assume are invariant.
- */
-/*
- * Enable or disable stereo operation.
- *
- * Note that the system normally detects the presence of a stereo window,
- * and will automatically switch a display containing a stereo window to
- * stereo operation.  This function provides a mechanism to force a display
- * to stereo operation, and to set options (blue line sync signal) when in
- * stereo operation.
- *
- * Returns kCGErrorSuccess on success.
- * Returns kCGErrorRangeCheck if the display does not support
- * the stereo operation settings requested.
- *
- * On success, the display resolution, mirroring mode, and
- * available display modes may change, due to hardware-specific
- * capabilities and limitations.
- * Please check settings to verify that they are appropriate for
- * your application.
- *
- * When in stereo operation, a display may need to generate a special stereo
- * sync signal as part of the video output.  The sync signal consists of a blue
- * line which occupies the first 25% of the last scanline for the left eye view,
- * and the first 75% of the last scanline for the right eye view.  The remainder
- * of the scanline is black.   It may be set using the forceBlueLine option.
- *
- * A configuration change can apply for the life of an app, the life of a login session, or
- * permanently. If a request is made to make a change permanent, and the change
- * cannot be supported by the Aqua UI (resolution and pixel depth constraints apply),
- * then the configuration  change is demoted to lasting the session.
- *
- * A permanent configuration change also becomes the current session's
- * configuration.
- *
- * When the system reverts configurations at app termination, the
- * configuration always reverts to the session or permanent configuration setting.
- *
- * When the system reverts configurations at session termination, the
- * configuration always reverts to the permanent configuration setting.
- */
-CG_EXTERN CGError CGDisplaySetStereoOperation(CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option);
+CG_EXTERN CGError CGDisplayRegisterReconfigurationCallback(
+  CGDisplayReconfigurationCallBack callback, void *userInfo)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
-/*
- * These APIs allow applications and higher level frameworks
- * such as DrawSprocket to determine interesting properties
- * of displays, such as if a display is built-in, if a display
- * is the main display, if a display is being mirrored, which
- * display in a hardware mirror set is bound to the graphics
- * accelerator (important for games!) and so on.
- *
- * An app that uses CGGetActiveDisplayList() to determine the
- * proper displays to draw to (All Carbon and Cocoa apps using
- * windows and/or DrawSprocket fall into this class) will
- * automatically get the correct behavior without using these APIs.
- * These APIs are primarily of interest to specialized applications
- * such as movie players, integrated TV/video graphics utilities,
- * and similar specialized applications.
- */
+/* Remove a display reconfiguration callback procedure. */
 
-/* True if the display is connected, awake, and drawable */
-CG_EXTERN boolean_t CGDisplayIsActive(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(
+  CGDisplayReconfigurationCallBack callback, void *userInfo)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
-/* True if the display is asleep and therefore not drawable */
-CG_EXTERN boolean_t CGDisplayIsAsleep(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Specialized configuration changes should be done outside of the scope of
+   a `CGBeginDisplayConfiguration'/`CGCompleteDisplayConfiguration' pair, as
+   they may alter things such as the available display modes which a normal
+   reconfiguration sequence might assume are invariant. */
 
-/*
- * True if the display is valid, with a monitor connected
- * (support for hot plugging of monitors)
- */
-CG_EXTERN boolean_t CGDisplayIsOnline(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Immediately enable or disable stereo operation for a display.
 
-/* True if the display is the current main display */
-CG_EXTERN boolean_t CGDisplayIsMain(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+   Note that the system normally detects the presence of a stereo window,
+   and will automatically switch a display containing a stereo window to
+   stereo operation. This function provides a mechanism to force a display
+   to stereo operation, and to set options (such as blue line sync signal)
+   when in stereo operation.
 
-/* True if the display is built in, such as the internal display in portables */
-CG_EXTERN boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+   When in stereo operation, a display may need to generate a special stereo
+   sync signal as part of the video output. The sync signal consists of a
+   blue line which occupies the first 25% of the last scanline for the left
+   eye view, and the first 75% of the last scanline for the right eye view.
+   The remainder of the scanline is black. To force the display to generate
+   this sync signal, pass true for `forceBlueLine'; otherwise, pass false.
 
-/* True if the display is in a mirroring set */
-CG_EXTERN boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+   Returns `kCGErrorSuccess' on success, or `kCGErrorRangeCheck' if the
+   display does not support the stereo operation settings requested.
 
-/* True if the display is always in a mirroring set, and cannot be unmirrored */
-CG_EXTERN boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+   On success, the display resolution, mirroring mode, and available display
+   modes may change due to hardware-specific capabilities and limitations.
+   You should check these settings to verify that they are appropriate for
+   your application. */
 
-/* True if the display is in a hardware mirroring set */
-CG_EXTERN boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGError CGDisplaySetStereoOperation(CGDirectDisplayID display,
+  boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* Returns display being mirrored, or kCGNullDirectDisplay if master or unmirrored */
-CG_EXTERN CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Return true if the display is connected, awake, and available for
+   drawing; false otherwise. */
 
-/* True if the display is using OpenGL acceleration */
-CG_EXTERN boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN boolean_t CGDisplayIsActive(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-/* True if the display is running in a stereo graphics mode */
-CG_EXTERN boolean_t CGDisplayIsStereo(CGDirectDisplayID display); /* 10.4.3 and later - need a macro */
+/* Return true if the display is asleep (and is therefore not drawable);
+   false otherwise. */
 
-/*
- * Returns the display bound to the hardware accelerator in a HW mirror set,
- * or 'display' if software mirrored or unmirrored
- */
-CG_EXTERN CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN boolean_t CGDisplayIsAsleep(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-/*
- * Returns the logical unit, vendor ID, vendor model number,
- * and serial number for a display
- */
-CG_EXTERN uint32_t CGDisplayUnitNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-CG_EXTERN uint32_t CGDisplayVendorNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-CG_EXTERN uint32_t CGDisplayModelNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Return true if the display is connected or online; false otherwise. */
 
-/* Returns the IOKit service port for a display device */
-CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN boolean_t CGDisplayIsOnline(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-/*
- * Returns the size of the specified display in millimeters.
- *
- * If 'display' is not a valid display ID, the size returned has a width and height of 0.
- *
- * If EDID data for the display device is not available, the size is estimated based on
- * the device width and height in pixels from CGDisplayBounds(), with an assumed resolution
- * of 2.835 pixels/mm, or 72 DPI, a reasonable guess for displays predating EDID support.
- */
-CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+/* Return true if the display is the current main display; false
+   otherwise. */
 
-/*
- * Returns the rotation of the specified display in degrees.
- *
- * The display's angle is clockwise.   That is, a display rotation of 90 degrees implies the display is
- * rotated clockwise 90 degrees, such that what was the physical  bottom of the display is now the left side,
- * and what was the physical top is now the right side.
- *
- * The content is rendered so as to look correct on the rotated display.
- *
- * If 'display' is not a valid display ID, the rotation returned is 0.0.
- */
-CG_EXTERN double CGDisplayRotation(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN boolean_t CGDisplayIsMain(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-/* Return a copy of the current color space of the specified display. */
+/* Return true if the display is built-in, such as the internal display in
+   portable systems; false otherwise. */
 
-CG_EXTERN CGColorSpaceRef CGDisplayCopyColorSpace(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-CG_EXTERN_C_END
+/* Return true if the display is in a mirroring set; false otherwise. */
 
-#endif /* __CGDISPLAY_CONFIGURATION_H__ */
+CG_EXTERN boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return true if the display is always in a mirroring set and cannot be
+   unmirrored; false otherwise. */
+
+CG_EXTERN boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return true if the display is in a hardware mirroring set; false
+   otherwise. */
+
+CG_EXTERN boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* For a secondary display in a mirror set, return the display being
+   mirrored (the primary display), or `kCGNullDirectDisplay' if the display
+   is the primary display or if the display is unmirrored. */
+
+CG_EXTERN CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return true if the display is using OpenGL acceleration; false
+   otherwise. */
+
+CG_EXTERN boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return true if the display is running in a stereo graphics mode; false
+   otherwise. */
+
+CG_EXTERN boolean_t CGDisplayIsStereo(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); /* 10.4.3 and later. */
+
+/* Return the primary display in a hardware mirror set, or `display' if the
+   display is not hardware-mirrored. */
+
+CG_EXTERN CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the logical unit number of a display. */
+
+CG_EXTERN uint32_t CGDisplayUnitNumber(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the vendor number of a display's monitor. */
+
+CG_EXTERN uint32_t CGDisplayVendorNumber(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the model number of a display's monitor. */
+
+CG_EXTERN uint32_t CGDisplayModelNumber(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the serial number of a display's monitor. */
+
+CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the IOKit service port of a display. */
+
+CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the width and height of a display in millimeters.
+
+   If 'display' is not a valid display ID, the size returned has a width and
+   height of 0.
+
+   If Extended Display Identification Data (EDID) for the display device is
+   not available, the size is estimated based on the device width and height
+   in pixels from `CGDisplayBounds', with an assumed resolution of 2.835
+   pixels/mm, or 72 DPI, a reasonable guess for displays predating EDID
+   support. */
+
+CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+/* Return the rotation angle of a display in degrees clockwise.
+
+   A display rotation of 90° implies the display is rotated clockwise 90°,
+   such that what was the physical bottom of the display is now the left
+   side, and what was the physical top is now the right side.
+
+   If `display' is not a valid display ID, the rotation returned is 0. */
+
+CG_EXTERN double CGDisplayRotation(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+
+/* Return the color space of a display. */
+
+CG_EXTERN CGColorSpaceRef CGDisplayCopyColorSpace(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+
+/* These functions are deprecated; do not use them. */
+
+CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef config,
+  CGDirectDisplayID display, CFDictionaryRef mode)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
+
+#endif /* CGDISPLAYCONFIGURATION_H_ */

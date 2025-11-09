@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -90,7 +90,7 @@ __BEGIN_DECLS
 int	ufs_remove_internal(vnode_t, vnode_t, struct componentname *, int);
 int	ufs_access_internal(vnode_t, mode_t, kauth_cred_t);
 
-int	ffs_read_internal(vnode_t, struct uio *, int);
+int	ffs_read_internal(vnode_t, struct uio *, int, int);
 int	ffs_write_internal(vnode_t, struct uio *, int, kauth_cred_t);
 int	ffs_truncate_internal(vnode_t, off_t, int, kauth_cred_t);
 
@@ -99,7 +99,7 @@ void	 diskerr
 void	 disksort(struct buf *, struct buf *);
 u_int	 dkcksum(struct disklabel *);
 char	*readdisklabel(dev_t, int (*)(), struct disklabel *);
-int	 setdisklabel(struct disklabel *, struct disklabel *, u_long);
+int	 setdisklabel(struct disklabel *, struct disklabel *, u_int32_t);
 int	 writedisklabel(dev_t, int (*)(), struct disklabel *);
 
 int	 ufs_access(struct vnop_access_args *);
@@ -142,7 +142,6 @@ int	 ufs_rename(struct vnop_rename_args *);
 int	 ufs_rmdir(struct vnop_rmdir_args *);
 int	 ufs_root(struct mount *, struct vnode **, vfs_context_t);
 int	 ufs_select(struct vnop_select_args *);
-int	 ufs_kqfilt_add(struct vnop_kqfilt_add_args *);
 int	 ufs_setattr(struct vnop_setattr_args *);
 int	 ufs_start(struct mount *, int, vfs_context_t);
 int	 ufs_strategy(struct vnop_strategy_args *);
@@ -156,7 +155,6 @@ int	 ufsspec_write(struct vnop_write_args *);
 int	ufsfifo_read(struct vnop_read_args *);
 int	ufsfifo_write(struct vnop_write_args *);
 int	ufsfifo_close(struct vnop_close_args *);
-int	ufsfifo_kqfilt_add(struct vnop_kqfilt_add_args *);
 #endif
 int	 ufs_blktooff(struct vnop_blktooff_args *);
 int	 ufs_blockmap(struct vnop_blockmap_args *);

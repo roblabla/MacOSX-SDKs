@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     7-July-1997
-// RCS-ID:      $Id: _cursor.i,v 1.16 2006/10/09 02:36:37 RD Exp $
+// RCS-ID:      $Id: _cursor.i 54038 2008-06-08 22:58:05Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public:
     %extend {
         DocStr(wxCursor,
                "Construct a Cursor from a file.  Specify the type of file using
-wx.BITAMP_TYPE* constants, and specify the hotspot if not using a .cur
+wx.BITMAP_TYPE* constants, and specify the hotspot if not using a .cur
 file.","
 :see: Alternate constructors `wx.StockCursor`,`wx.CursorFromImage`");
         wxCursor(const wxString& cursorName, long type, int hotSpotX=0, int hotSpotY=0) {

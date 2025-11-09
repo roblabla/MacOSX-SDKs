@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: panelg.h,v 1.47 2006/07/24 17:44:44 VZ Exp $
+// RCS-ID:      $Id: panelg.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@
 #include "wx/window.h"
 #include "wx/containr.h"
 
-class WXDLLEXPORT wxControlContainer;
+class WXDLLIMPEXP_FWD_CORE wxControlContainer;
 
 extern WXDLLEXPORT_DATA(const wxChar) wxPanelNameStr[];
 

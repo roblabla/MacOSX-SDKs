@@ -66,7 +66,7 @@
 #define EH_FRAME_FLAGS "aw"
 
 /*	Define this if you want extra debugging. */
-/*	#undef FFI_DEBUG */
+#undef FFI_DEBUG
 
 /*	Define this is you do not want support for the raw API. */
 #define FFI_NO_RAW_API 1

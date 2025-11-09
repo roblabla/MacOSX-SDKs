@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -34,9 +34,9 @@
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Constants
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 
 // Message constants
@@ -177,9 +177,9 @@ enum
 };
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // General IOKit headers
 #include <IOKit/IOLib.h>
@@ -197,9 +197,10 @@ enum
 class SCSIMultimediaCommands;
 class SCSIBlockCommands;
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
@@ -208,12 +209,16 @@ class IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 
+#ifndef __LP64__
+
     SCSIMultimediaCommands *	fSCSIMultimediaCommandObject;
     SCSIMultimediaCommands *	GetSCSIMultimediaCommandObject ( void );
 	
-    SCSIBlockCommands *			fSCSIBlockCommandObject;
-    SCSIBlockCommands *			GetSCSIBlockCommandObject ( void );
+    SCSIBlockCommands *			fSCSIBlockCommandObject;			/* OBSOLETE */
+    SCSIBlockCommands *			GetSCSIBlockCommandObject ( void );	/* OBSOLETE */
 
+#endif	/* !__LP64__ */
+	
 	static void		AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
 protected:
@@ -224,18 +229,28 @@ protected:
 		IONotifier *		fPowerDownNotifier;
 		bool				fDeviceSupportsPowerOff;
 		BDFeatures			fSupportedBDFeatures;
+		bool				fDeviceSupportsAsyncNotification;
+		bool				fDeviceSupportsFastSpindown;
+		UInt8				fCDLoadingMechanism;
 	};
     IOSCSIMultimediaCommandsDeviceExpansionData * fIOSCSIMultimediaCommandsDeviceReserved;
 	
-	#define fPowerDownNotifier 			fIOSCSIMultimediaCommandsDeviceReserved->fPowerDownNotifier
-	#define fDeviceSupportsPowerOff 	fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsPowerOff
-	#define fSupportedBDFeatures		fIOSCSIMultimediaCommandsDeviceReserved->fSupportedBDFeatures
+	#define fPowerDownNotifier 					fIOSCSIMultimediaCommandsDeviceReserved->fPowerDownNotifier
+	#define fDeviceSupportsPowerOff 			fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsPowerOff
+	#define fSupportedBDFeatures				fIOSCSIMultimediaCommandsDeviceReserved->fSupportedBDFeatures
+	#define fDeviceSupportsAsyncNotification	fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsAsyncNotification
+	#define fDeviceSupportsFastSpindown			fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsFastSpindown
+	#define fCDLoadingMechanism					fIOSCSIMultimediaCommandsDeviceReserved->fCDLoadingMechanism
+	
+#ifndef __LP64__
 	
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the subclasses base command set object.
 	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
-
+	
+#endif	/* !__LP64__ */
+	
 	CDFeatures						fSupportedCDFeatures;
 	DVDFeatures						fSupportedDVDFeatures;
 
@@ -363,12 +378,22 @@ protected:
 	virtual void		ResumeDeviceSupport ( void );
 	virtual void		StopDeviceSupport ( void );
 	virtual void		TerminateDeviceSupport ( void );
+	
+	virtual void		free ( void );
+	
+#ifndef __LP64__
+
 	virtual bool 		CreateCommandSetObjects ( void );
 	virtual void 		FreeCommandSetObjects ( void );
+
+#endif	/* !__LP64__ */
+
 	virtual IOReturn	VerifyDeviceState ( void );
 
 
 public:
+	
+	virtual IOReturn 	setAggressiveness ( unsigned long type, unsigned long minutes );
 	
 	virtual IOReturn	SyncReadWrite ( 	IOMemoryDescriptor *	buffer,
 											UInt64					startBlock,
@@ -421,6 +446,8 @@ public:
 	virtual IOReturn	ReadMCN ( CDMCN mcn);
 	
 	virtual IOReturn	ReadTOC ( IOMemoryDescriptor * buffer );
+
+#ifndef __LP64__
 	
 	virtual IOReturn	AudioPause ( bool pause );
 	
@@ -435,6 +462,8 @@ public:
 	virtual IOReturn	GetAudioVolume ( UInt8 * leftVolume, UInt8 * rightVolume );
 	
 	virtual IOReturn	SetAudioVolume ( UInt8 leftVolume, UInt8 rightVolume );
+
+#endif	/* !__LP64__ */
 	
 	/* DVD Specific */
 	virtual UInt32			GetMediaType		( void );
@@ -470,6 +499,8 @@ public:
 	
 	SCSICmdField4Byte ConvertMSFToLBA ( SCSICmdField3Byte MSF );
 
+#ifndef __LP64__
+
 	// Command methods to access all commands available to MMC based devices.
 	// The BLANK command as defined in section 6.1.1
 	virtual bool BLANK (
@@ -499,6 +530,9 @@ public:
 						SCSICmdField2Byte 			INTERLEAVE_VALUE, 
 						SCSICmdField1Byte 			CONTROL );
 
+#endif	/* !__LP64__ */
+	
+	
 	// The GET CONFIGURATION command as defined in section 6.1.4
     virtual bool GET_CONFIGURATION (
 						SCSITaskIdentifier			request,
@@ -544,6 +578,8 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
+#ifndef __LP64__
+
 	// The PAUSE/RESUME command as defined in section 6.1.9
     virtual bool PAUSE_RESUME (
 						SCSITaskIdentifier			request,
@@ -588,6 +624,8 @@ public:
 						SCSICmdField1Bit 			AUDIO,
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT *******************/
+
+#endif	/* !__LP64__ */
 	
 	virtual bool READ_10 (
 						SCSITaskIdentifier			request,
@@ -600,6 +638,8 @@ public:
 						SCSICmdField2Byte 			TRANSFER_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 	
+#ifndef __LP64__
+	
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The READ BUFFER CAPACITY command as defined in section 6.1.14
     virtual bool READ_BUFFER_CAPACITY (
@@ -608,7 +648,9 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT *******************/
-
+	
+#endif	/* !__LP64__ */
+	
 	// The READ CD command as defined in section 6.1.15
     virtual bool READ_CD (
 						SCSITaskIdentifier			request,
@@ -674,6 +716,8 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
+#ifndef __LP64__
+	
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The READ HEADER command as defined in section 6.1.21
     virtual bool READ_HEADER (
@@ -695,6 +739,8 @@ public:
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT ***********************/
 
+#endif	/* !__LP64__ */
+	
 	// The READ SUB-CHANNEL command as defined in section 6.1.23
     virtual bool READ_SUB_CHANNEL (
 						SCSITaskIdentifier			request,
@@ -725,6 +771,7 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
+#ifndef __LP64__
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The REPAIR TRACK command as defined in section 6.1.27
     virtual bool REPAIR_TRACK (
@@ -732,7 +779,7 @@ public:
 						SCSICmdField2Byte 			TRACK_NUMBER, 
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT ***********************/
-
+	
 	// The REPORT KEY command as defined in section 6.1.28
     virtual bool REPORT_KEY (
 						SCSITaskIdentifier			request,
@@ -742,13 +789,13 @@ public:
 						SCSICmdField2Bit 			AGID,
 						SCSICmdField6Bit 			KEY_FORMAT,
 						SCSICmdField1Byte 			CONTROL );
-
+	
 	// The RESERVE TRACK command as defined in section 6.1.29
     virtual bool RESERVE_TRACK (
 						SCSITaskIdentifier			request,
 						SCSICmdField4Byte			RESERVATION_SIZE,
 						SCSICmdField1Byte 			CONTROL );
-
+	
 	// The SCAN command as defined in section 6.1.30
     virtual bool SCAN (
 						SCSITaskIdentifier			request,
@@ -780,7 +827,7 @@ public:
 						SCSICmdField1Bit 			IMMED, 
 						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
-
+	
 	// The SEND KEY command as defined in section 6.1.34
     virtual bool SEND_KEY (
 						SCSITaskIdentifier			request,
@@ -797,6 +844,7 @@ public:
 						SCSICmdField1Bit 			DO_OPC, 
 						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
+#endif	/* !__LP64__ */
 
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The SET CD SPEED command as defined in section 6.1.36
@@ -828,11 +876,15 @@ public:
 						SCSICmdField1Bit 			LOEJ, 
 						SCSICmdField1Bit 			START, 
 						SCSICmdField1Byte 			CONTROL );
+
+#ifndef __LP64__
 	
 	// The STOP PLAY/SCAN command as defined in section 6.1.39
     virtual bool STOP_PLAY_SCAN (
 						SCSITaskIdentifier			request,
 						SCSICmdField1Byte 			CONTROL );
+
+#endif	/* !__LP64__ */
 
 	// The SYNCHRONIZE CACHE command as defined in section 6.1.40
     virtual bool SYNCHRONIZE_CACHE (
@@ -972,10 +1024,23 @@ public:
 								SCSICmdField1Byte 			CONTROL					);
 	
 	
+protected:
+	
+	
+	void		SetPollingMode ( UInt32 newPollingMode );
+	
+	
+public:
+	
+	
+	/* 10.6.0 */
+	
+	IOReturn	RequestIdle ( void );
+	
 private:
 	
 	// Space reserved for future expansion.
-    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice,  8 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	8 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	9 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 10 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 11 );

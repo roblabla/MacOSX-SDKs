@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: config.h,v 1.20 2005/05/04 18:51:55 JS Exp $
+// RCS-ID:      $Id: config.h 33948 2005-05-04 18:57:50Z JS $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

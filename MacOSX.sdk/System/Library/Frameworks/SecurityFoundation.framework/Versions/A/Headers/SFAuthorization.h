@@ -65,6 +65,15 @@
 - (void)invalidateCredentials;
 
 /*!
+ @method obtainWithRight:flags:
+ @abstract Call obtainWithRight to gain a right to have access to a privilege operation. On success, YES is returned.
+ @param rightName The name of an authorization right.
+ @param flags Authorization flags.
+ @param error Resulting error.
+ */
+- (BOOL)obtainWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags error:(NSError**)error;
+
+/*!
     @method obtainWithRights:flags:environment:authorizedRights:error:
 	@abstract Call obtainWithRights to gain the rights to have access to privileged operations. On success, YES is returned.
 	@param flags Authorization flags.
@@ -75,6 +84,10 @@
 */
 - (BOOL)obtainWithRights:(const AuthorizationRights *)rights flags:(AuthorizationFlags)flags environment:(const AuthorizationEnvironment *)environment authorizedRights:(AuthorizationRights **)authorizedRights error:(NSError**)error;
 
+@end
+
+@interface SFAuthorization (SFAuthorizationDeprecated)
+
 /*!
     DEPRECATED: Use obtainWithRights:flags:environment:authorizedRights:error:
     @method permitWithRights:flags:environment:authorizedRights:
@@ -84,16 +97,7 @@
     @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details.
     @param authorizedRights (output/optional) A pointer to a newly allocated AuthorizationInfoSet in which the authorized subset of rights are returned (authorizedRights should be deallocated by calling AuthorizationFreeInfoSet() when it is no longer needed).  If NULL the only information returned is the status.  Note that if the kAuthorizationFlagPreAuthorize flag was specified rights that could not be preauthorized are returned in authorizedRights, but their flags contains the kAuthorizationFlagCanNotPreAuthorize bit.
 */
-- (OSStatus)permitWithRights:(const AuthorizationRights *)rights flags:(AuthorizationFlags)flags environment:(const AuthorizationEnvironment *)environment authorizedRights:(AuthorizationRights *)authorizedRights;
-
-/*!
-	@method obtainWithRight:flags:
-	@abstract Call obtainWithRight to gain a right to have access to a privilege operation. On success, YES is returned.
-	@param rightName The name of an authorization right.
-	@param flags Authorization flags.
-	@param error Resulting error.
-*/
-- (BOOL)obtainWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags error:(NSError**)error;
+- (OSStatus)permitWithRights:(const AuthorizationRights *)rights flags:(AuthorizationFlags)flags environment:(const AuthorizationEnvironment *)environment authorizedRights:(AuthorizationRights *)authorizedRights DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
     DEPRECATED: Use obtainWithRight:flags:error:
@@ -102,7 +106,7 @@
 	@param rightName The name of an authorization right.
 	@param flags Authorization flags.
 */
-- (OSStatus)permitWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags;
+- (OSStatus)permitWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

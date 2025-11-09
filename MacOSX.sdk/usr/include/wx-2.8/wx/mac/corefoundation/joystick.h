@@ -4,7 +4,7 @@
 // Author:      Ryan Norton
 // Modified by:
 // Created:     2/13/2005
-// RCS-ID:      $Id: joystick.h,v 1.3 2005/11/29 12:49:59 MR Exp $
+// RCS-ID:      $Id: joystick.h 36284 2005-11-29 12:50:13Z MR $
 // Copyright:   (c) Ryan Norton
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

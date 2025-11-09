@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,9 +10,11 @@
 #import <Foundation/NSBundle.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSBitmapImageRep.h>
+#import <AppKit/NSPasteboard.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-@class NSArray, NSColor, NSImageRep, NSPasteboard, NSURL;
+@class NSArray, NSColor, NSImageRep, NSGraphicsContext, NSURL;
+@protocol NSImageDelegate;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
@@ -37,7 +39,13 @@ typedef NSUInteger NSImageCacheMode;
 
 @class _NSImageAuxiliary;
 
-@interface NSImage : NSObject <NSCopying, NSCoding> {
+@interface NSImage : NSObject
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+<NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
+#else
+<NSCopying, NSCoding>
+#endif
+{
     /*All instance variables are private*/
     NSString *_name;
     NSSize _size;
@@ -51,21 +59,20 @@ typedef NSUInteger NSImageCacheMode;
 	unsigned int useEPSOnResolutionMismatch:1;
 	unsigned int colorMatchPreferred:1;
 	unsigned int multipleResolutionMatching:1;
-	unsigned int subImage:1;
+	unsigned int focusedWhilePrinting:1;
 	unsigned int archiveByName:1;
 	unsigned int unboundedCacheDepth:1;
         unsigned int flipped:1;
         unsigned int aliased:1;
 	unsigned int dirtied:1;
         unsigned int cacheMode:2;
-        unsigned int sampleMode:2;
-        unsigned int focusedWhilePrinting:1;
-        unsigned int imageEffectsRequested:1;
+        unsigned int sampleMode:3;
+        unsigned int reserved2:1;
         unsigned int isTemplate:1;
         unsigned int failedToExpand:1;
         unsigned int reserved1:9;
     } _flags;
-    id _reps;
+    volatile id _reps;
     _NSImageAuxiliary *_imageAuxiliary;
 }
 
@@ -84,18 +91,13 @@ typedef NSUInteger NSImageCacheMode;
 #endif
 - (id)initWithPasteboard:(NSPasteboard *)pasteboard;
 
+// not for general use, but useful for compatibility with old NSImage behavior.  Ignore exif orientation tags in JPEG and such.  See AppKit release notes.
+- (id)initWithDataIgnoringOrientation:(NSData *)data AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (void)setSize:(NSSize)aSize;
 - (NSSize)size;
 - (BOOL)setName:(NSString *)string;
 - (NSString *)name;
-- (void)setScalesWhenResized:(BOOL)flag;
-- (BOOL)scalesWhenResized;
-- (void)setDataRetained:(BOOL)flag;
-- (BOOL)isDataRetained;
-- (void)setCachedSeparately:(BOOL)flag;
-- (BOOL)isCachedSeparately;
-- (void)setCacheDepthMatchesImageDepth:(BOOL)flag;
-- (BOOL)cacheDepthMatchesImageDepth;
 - (void)setBackgroundColor:(NSColor *)aColor;
 - (NSColor *)backgroundColor;
 - (void)setUsesEPSOnResolutionMismatch:(BOOL)flag;
@@ -104,14 +106,9 @@ typedef NSUInteger NSImageCacheMode;
 - (BOOL)prefersColorMatch;
 - (void)setMatchesOnMultipleResolution:(BOOL)flag;
 - (BOOL)matchesOnMultipleResolution;
-- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)aFloat;
-- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)aFloat;
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op;
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op;
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
+- (void)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(NSDictionary *)hints AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (BOOL)drawRepresentation:(NSImageRep *)imageRep inRect:(NSRect)rect;
 - (void)recache;
 - (NSData *)TIFFRepresentation;
@@ -124,13 +121,14 @@ typedef NSUInteger NSImageCacheMode;
 
 - (BOOL)isValid;
 - (void)lockFocus;
-- (void)lockFocusOnRepresentation:(NSImageRep *)imageRepresentation;
+- (void)lockFocusFlipped:(BOOL)flipped AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (void)unlockFocus;
 
-- (NSImageRep *)bestRepresentationForDevice:(NSDictionary *)deviceDescription;
+// use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.
+- (NSImageRep *)bestRepresentationForDevice:(NSDictionary *)deviceDescription AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
-- (void)setDelegate:(id)anObject;
-- (id)delegate;
+- (void)setDelegate:(id <NSImageDelegate>)anObject;
+- (id <NSImageDelegate>)delegate;
 
 /* These return union of all the types registered with NSImageRep.
 */
@@ -145,9 +143,6 @@ typedef NSUInteger NSImageCacheMode;
 #endif
 
 + (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
-
-- (void)setFlipped:(BOOL)flag;
-- (BOOL)isFlipped;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)cancelIncrementalLoad;
@@ -176,9 +171,57 @@ typedef NSUInteger NSImageCacheMode;
 - (void)setTemplate:(BOOL)isTemplate;
 #endif
 
+/* An accessibility description can be set on an image.  This description will be used automatically by interface elements that display images.  Like all accessibility descriptions, the string should be a short localized string that does not include the name of the interface element.  For instance, "delete" rather than "delete button". 
+*/
+- (NSString *)accessibilityDescription	AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setAccessibilityDescription:(NSString *)description AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Make an NSImage referencing a CGImage.  The client should not assume anything about the image, other than that drawing it is equivalent to drawing the CGImage.
+ 
+ If size is NSZeroSize, the pixel dimensions of cgImage are the returned image's size.   
+ 
+ This is not a designated initializer.
+ 
+ Size of an NSImage is distinct from pixel dimensions.  If an NSImage is placed in an NSButton, it will be drawn in a rect with the provided size in the ambient coordinate system.
+ */
+- (id)initWithCGImage:(CGImageRef)cgImage size:(NSSize)size AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Returns a CGImage capturing the drawing of the receiver.  This method returns an existing CGImage if one is available, or creates one if not.  It behaves the same as drawing the image with respect to caching and related behaviors.  This method is typically called, not overridden.  
+ 
+ An NSImage is potentially resolution independent, and may have representations that allow it to draw well in many contexts.  A CGImage is more like a single pixel-based representation.   This method produces a snapshot of how the NSImage would draw if it was asked to draw in *proposedDestRect in the passed context.  Producing this snapshot may be more expensive than just drawing the NSImage, so prefer to use -[NSImage drawInRect:fromRect:operation:fraction:] unless you require a CGImage.
+ 
+ The return value in *proposedDestRect tells the client where to draw the CGImage.  This rect may be outset from the requested rect, because a CGImage must have pixel-integral dimensions while an NSImage need not.
+ 
+ All input parameters are optional.  They provide hints for how to choose among existing CGImages, or how to create one if there isn't already a CGImage available.  The parameters are _only_ hints.  Any CGImage is a valid return.
+ 
+ If proposedDestRect is NULL, it defaults to the smallest pixel-integral rectangle containing {{0,0}, [self size]}.  The proposedDestRect is in user space in the reference context. 
+ 
+ If referenceContext is nil, the method behaves as if a window context scaled by the default user space scaling factor was passed, though no context is actually created.  The properties of the context are used as hints for choosing the best representation and for creating a CGImage if creation is necessary.  It also provides the coordinate space in which the proposedDestRect is interpreted.  Only the snapshotted state of the context at the moment its passed to this method is relevant. Future changes to the context have no bearing on image behavior.
+ 
+ The hints provide more context for selecting or generating a CGImage, and may override properties of the referenceContext.  Hints may be nil.  Any entries in a device description dictionary (see NSScreen) are valid, as are all CIContext creation options, plus a few extra hints defined below.  Unrecognized hints are ignored, but passed down to image reps (see -[NSImageRep CGImageForProposedRect:context:hints:]).  Explicit hints are particularly useful when it is not draw time and you don't have a context to pass in.  For example, if you want to pass a rect in pixels for proposedDestRect, you should pass a dictionary with the identity transform for NSImageHintCTM.  
+  
+ This method will always return a valid CGImage provided the NSImage is able to draw.  If the receiver is unable to draw for whatever reason, the error behavior is the same as when drawing the image.
+ 
+ The CGImageRef returned is guaranteed to live as long as the current autorelease pool.  The caller should not release the CGImage.  This is the standard Cocoa convention, but people may not realize that it applies to CFTypes.
+ */
+- (CGImageRef)CGImageForProposedRect:(NSRect *)proposedDestRect context:(NSGraphicsContext *)referenceContext hints:(NSDictionary *)hints AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Select best representation.  The parameters have the same meaning and behavior as in -CGImageForProposedRect:context:hints:.
+ */
+- (NSImageRep *)bestRepresentationForRect:(NSRect)rect context:(NSGraphicsContext *)referenceContext hints:(NSDictionary *)hints AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Answers the question, "If you were to draw the image in the passed destination rect in the passed context respecting the passed flippedness with the passed hints, would the test rect in the context intersect a non-transparent portion of the image?"
+ */
+- (BOOL)hitTestRect:(NSRect)testRectDestSpace withImageDestinationRect:(NSRect)imageRectDestSpace context:(NSGraphicsContext *)context hints:(NSDictionary *)hints flipped:(BOOL)flipped AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; 
+
 @end
 
-@interface NSObject(NSImageDelegate)
+APPKIT_EXTERN NSString *const NSImageHintCTM AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // value is NSAffineTransform
+APPKIT_EXTERN NSString *const NSImageHintInterpolation AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // value is NSNumber with NSImageInterpolation enum value
+
+@protocol NSImageDelegate <NSObject>
+@optional
+
 - (NSImage *)imageDidNotDraw:(id)sender inRect:(NSRect)aRect;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
@@ -191,8 +234,37 @@ typedef NSUInteger NSImageCacheMode;
 
 @interface NSBundle(NSBundleImageExtension)
 - (NSString *)pathForImageResource:(NSString *)name;	/* May return nil if no file found */
+- (NSURL *)URLForImageResource:(NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; /* May return nil if no file found */
 @end
 
+@interface NSImage (NSDeprecated)
+
+// the concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why, and for how to replace existing usage.
+- (void)setFlipped:(BOOL)flag;
+- (BOOL)isFlipped;
+
+// these methods have surprising semantics.  Prefer to use the 'draw' methods (and note the new draw method taking respectContextIsFlipped as a parameter).  Please see the AppKit 10.6 release notes for exactly what's going on.
+- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)aFloat;
+- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)aFloat;
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op;
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op;
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
+
+// this method doesn't do what people expect.  See AppKit 10.6 release notes.  Briefly, you can replace invocation of this method with code that locks focus on the image and then draws the rep in the image.
+- (void)lockFocusOnRepresentation:(NSImageRep *)imageRepresentation;
+
+// these methods have to do with NSImage's caching behavior.  You should be able to remove use of these methods without any replacement.  See 10.6 AppKit release notes for details.
+- (void)setScalesWhenResized:(BOOL)flag;
+- (BOOL)scalesWhenResized;
+- (void)setDataRetained:(BOOL)flag;
+- (BOOL)isDataRetained;
+- (void)setCachedSeparately:(BOOL)flag;
+- (BOOL)isCachedSeparately;
+- (void)setCacheDepthMatchesImageDepth:(BOOL)flag;
+- (BOOL)cacheDepthMatchesImageDepth;
+
+@end
 
 #pragma mark -
 #pragma mark Standard Images
@@ -260,11 +332,16 @@ APPKIT_EXTERN NSString *const NSImageNameRefreshTemplate AVAILABLE_MAC_OS_X_VERS
 APPKIT_EXTERN NSString *const NSImageNameRefreshFreestandingTemplate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 APPKIT_EXTERN NSString *const NSImageNameBonjour AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *const NSImageNameDotMac AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameComputer AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameFolderBurnable AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameFolderSmart AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameFolder AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameNetwork AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* NSImageNameDotMac will continue to work for the forseeable future, and will return the same image as NSImageNameMobileMe.
+ */
+APPKIT_EXTERN NSString *const NSImageNameDotMac AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // informally deprecated
+APPKIT_EXTERN NSString *const NSImageNameMobileMe AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* This image is appropriate as a drag image for multiple items.
  */
@@ -287,3 +364,23 @@ APPKIT_EXTERN NSString *const NSImageNameColorPanel AVAILABLE_MAC_OS_X_VERSION_1
 APPKIT_EXTERN NSString *const NSImageNameUser AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameUserGroup AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 APPKIT_EXTERN NSString *const NSImageNameEveryone AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  
+APPKIT_EXTERN NSString *const NSImageNameUserGuest AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* These images are the default state images used by NSMenuItem.  Drawing these outside of menus is discouraged.
+*/
+APPKIT_EXTERN NSString *const NSImageNameMenuOnStateTemplate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameMenuMixedStateTemplate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* The name @"NSApplicationIcon" has been available since Mac OS X 10.0.  The symbol NSImageNameApplicationIcon is new in 10.6.
+ */
+APPKIT_EXTERN NSString *const NSImageNameApplicationIcon AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+APPKIT_EXTERN NSString *const NSImageNameTrashEmpty AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameTrashFull AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameHomeTemplate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameBookmarksTemplate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameCaution AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameStatusAvailable AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameStatusPartiallyAvailable AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameStatusUnavailable AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSImageNameStatusNone AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;

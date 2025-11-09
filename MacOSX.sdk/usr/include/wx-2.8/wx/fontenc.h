@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     29.03.00
-// RCS-ID:      $Id: fontenc.h,v 1.25 2004/09/14 12:08:18 ABX Exp $
+// RCS-ID:      $Id: fontenc.h 29139 2004-09-14 12:08:28Z ABX $
 // Copyright:   (c) Vadim Zeitlin
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

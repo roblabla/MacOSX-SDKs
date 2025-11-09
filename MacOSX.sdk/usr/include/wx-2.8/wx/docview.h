@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: docview.h,v 1.75.2.1 2007/04/16 13:00:59 VZ Exp $
+// RCS-ID:      $Id: docview.h 53546 2008-05-10 21:02:36Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,15 @@
     #include "wx/print.h"
 #endif
 
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxDocument;
-class WXDLLEXPORT wxView;
-class WXDLLEXPORT wxDocTemplate;
-class WXDLLEXPORT wxDocManager;
-class WXDLLEXPORT wxPrintInfo;
-class WXDLLEXPORT wxCommandProcessor;
-class WXDLLEXPORT wxFileHistory;
-class WXDLLEXPORT wxConfigBase;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxDocument;
+class WXDLLIMPEXP_FWD_CORE wxView;
+class WXDLLIMPEXP_FWD_CORE wxDocTemplate;
+class WXDLLIMPEXP_FWD_CORE wxDocManager;
+class WXDLLIMPEXP_FWD_CORE wxPrintInfo;
+class WXDLLIMPEXP_FWD_CORE wxCommandProcessor;
+class WXDLLIMPEXP_FWD_CORE wxFileHistory;
+class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 
 #if wxUSE_STD_IOSTREAM
   #include "wx/iosfwrap.h"
@@ -141,7 +141,21 @@ public:
     virtual void SetDocumentTemplate(wxDocTemplate *temp) { m_documentTemplate = temp; }
 
     // Get title, or filename if no title, else [unnamed]
+    //
+    // NB: this method will be deprecated in wxWidgets 3.0, you still need to
+    //     override it if you need to modify the existing behaviour in this
+    //     version but use GetUserReadableName() below if you just need to call
+    //     it
     virtual bool GetPrintableName(wxString& buf) const;
+
+#if wxABI_VERSION >= 20805
+    wxString GetUserReadableName() const
+    {
+        wxString s;
+        GetPrintableName(s);
+        return s;
+    }
+#endif // wxABI 2.8.5+
 
     // Returns a window that can be used as a parent for document-related
     // dialogs. Override if necessary.
@@ -232,7 +246,7 @@ private:
 class WXDLLEXPORT wxDocTemplate: public wxObject
 {
 
-friend class WXDLLEXPORT wxDocManager;
+friend class WXDLLIMPEXP_FWD_CORE wxDocManager;
 
 public:
     // Associate document and view types. They're for identifying what view is
@@ -394,7 +408,21 @@ public:
     wxList& GetTemplates() { return m_templates; }
 
     // Make a default document name
+    //
+    // NB: this method is renamed to MakeNewDocumentName() in wx 3.0, you still
+    //     need to override it if your code needs to customize the default name
+    //     generation but if you just use it from your code, prefer the version
+    //     below which is forward-compatible with wx 3.0
     virtual bool MakeDefaultName(wxString& buf);
+
+#if wxABI_VERSION >= 20808
+    wxString MakeNewDocumentName() const
+    {
+        wxString s;
+        wx_const_cast(wxDocManager *, this)->MakeDefaultName(s);
+        return s;
+    }
+#endif // wx ABI >= 2.8.8
 
     // Make a frame title (override this to do something different)
     virtual wxString MakeFrameTitle(wxDocument* doc);

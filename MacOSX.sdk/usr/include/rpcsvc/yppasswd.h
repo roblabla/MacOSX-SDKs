@@ -43,6 +43,9 @@ extern  bool_t xdr_yppasswd(XDR *, yppasswd*);
 bool_t xdr_yppasswd();
 #endif /* Old Style C */
 
+#include <sys/cdefs.h>
+extern int _yppasswd( char * , struct x_passwd * );
+#define yppasswd(x,y) _yppasswd(x,y)
 
 #define YPPASSWDPROG ((rpc_uint)100009)
 #define YPPASSWDVERS ((rpc_uint)1)

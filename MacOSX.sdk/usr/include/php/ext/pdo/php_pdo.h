@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.7.2.5.2.4 2007/12/31 07:20:09 sebastian Exp $ */
+/* $Id: php_pdo.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
@@ -31,15 +31,17 @@ extern zend_module_entry pdo_module_entry;
 #define phpext_pdo_ptr &pdo_module_entry
 
 #ifdef PHP_WIN32
-# if defined(PDO_EXPORTS) || (!defined(COMPILE_DL_PDO))
-#  define PDO_API __declspec(dllexport)
-# elif defined(COMPILE_DL_PDO)
-#  define PDO_API __declspec(dllimport)
-# else
-#  define PDO_API /* nothing special */
-# endif
+#	if defined(PDO_EXPORTS) || (!defined(COMPILE_DL_PDO))
+#		define PDO_API __declspec(dllexport)
+#	elif defined(COMPILE_DL_PDO)
+#		define PDO_API __declspec(dllimport)
+#	else
+#		define PDO_API /* nothing special */
+#	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PDO_API __attribute__ ((visibility("default")))
 #else
-# define PDO_API /* nothing special */
+#	define PDO_API /* nothing special */
 #endif
 
 #ifdef ZTS

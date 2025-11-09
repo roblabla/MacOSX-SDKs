@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.66.2.4.2.6 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: mbstring.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -52,17 +52,20 @@
 #endif
 
 #ifdef PHP_WIN32
-# undef MBSTRING_API
-# ifdef MBSTRING_EXPORTS
-#  define MBSTRING_API __declspec(dllexport)
-# elif defined(COMPILE_DL_MBSTRING)
-#  define MBSTRING_API __declspec(dllimport)
-# else
-#  define MBSTRING_API /* nothing special */
-# endif
+#	undef MBSTRING_API
+#	ifdef MBSTRING_EXPORTS
+#		define MBSTRING_API __declspec(dllexport)
+#	elif defined(COMPILE_DL_MBSTRING)
+#		define MBSTRING_API __declspec(dllimport)
+#	else
+#		define MBSTRING_API /* nothing special */
+#	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	undef MBSTRING_API
+#	define MBSTRING_API __attribute__ ((visibility("default")))
 #else
-# undef MBSTRING_API
-# define MBSTRING_API /* nothing special */
+#	undef MBSTRING_API
+#	define MBSTRING_API /* nothing special */
 #endif
 
 
@@ -72,10 +75,6 @@
 #include "SAPI.h"
 
 #define PHP_MBSTRING_API 20021024
-
-#if HAVE_MBREGEX
-#include "php_mbregex.h"
-#endif
 
 extern zend_module_entry mbstring_module_entry;
 #define mbstring_module_ptr &mbstring_module_entry
@@ -118,8 +117,7 @@ PHP_FUNCTION(mb_strimwidth);
 PHP_FUNCTION(mb_convert_encoding);
 PHP_FUNCTION(mb_detect_encoding);
 PHP_FUNCTION(mb_list_encodings);
-PHP_FUNCTION(mb_list_encodings_alias_names);
-PHP_FUNCTION(mb_list_mime_names);
+PHP_FUNCTION(mb_encoding_aliases);
 PHP_FUNCTION(mb_convert_kana);
 PHP_FUNCTION(mb_encode_mimeheader);
 PHP_FUNCTION(mb_decode_mimeheader);
@@ -138,9 +136,9 @@ MBSTRING_API char *php_mb_safe_strrchr(const char *s, unsigned int c,
                                  size_t nbytes TSRMLS_DC);
 MBSTRING_API char *php_mb_strrchr(const char *s, char c TSRMLS_DC);
 
-MBSTRING_API char * php_mb_convert_encoding(char *input, size_t length,
-                                      char *_to_encoding,
-                                      char *_from_encodings,
+MBSTRING_API char * php_mb_convert_encoding(const char *input, size_t length,
+                                      const char *_to_encoding,
+                                      const char *_from_encodings,
                                       size_t *output_len TSRMLS_DC);
 
 MBSTRING_API int php_mb_check_encoding_list(const char *encoding_list TSRMLS_DC);
@@ -159,11 +157,13 @@ MBSTRING_API int php_mb_gpc_encoding_converter(char **str, int *len, int num, co
 
 MBSTRING_API int php_mb_gpc_encoding_detector(char **arg_string, int *arg_length, int num, char *arg_list TSRMLS_DC);
 
-MBSTRING_API int php_mb_stripos(int mode, char *old_haystack, int old_haystack_len, char *old_needle, int old_needle_len, long offset, char *from_encoding TSRMLS_DC);
+MBSTRING_API int php_mb_stripos(int mode, const char *old_haystack, unsigned int old_haystack_len, const char *old_needle, unsigned int old_needle_len, long offset, const char *from_encoding TSRMLS_DC);
+
+/* internal use only */
+int _php_mb_ini_mbstring_internal_encoding_set(const char *new_value, uint new_value_length TSRMLS_DC);
 
 ZEND_BEGIN_MODULE_GLOBALS(mbstring)
 	enum mbfl_no_language language;
-	enum mbfl_no_language current_language;
 	enum mbfl_no_encoding internal_encoding;
 	enum mbfl_no_encoding current_internal_encoding;
 #ifdef ZEND_MULTIBYTE
@@ -194,8 +194,9 @@ ZEND_BEGIN_MODULE_GLOBALS(mbstring)
 	long strict_detection;
 	long illegalchars;
 	mbfl_buffer_converter *outconv;
-#if HAVE_MBREGEX && defined(PHP_MBREGEX_GLOBALS)
-	PHP_MBREGEX_GLOBALS	
+    void *http_output_conv_mimetypes;
+#if HAVE_MBREGEX
+    struct _zend_mb_regex_globals *mb_regex_globals;
 #endif
 ZEND_END_MODULE_GLOBALS(mbstring)
 
@@ -215,16 +216,6 @@ struct mb_overload_def {
 #else
 #define MBSTRG(v) (mbstring_globals.v)
 #endif
-
-#ifdef ZEND_MULTIBYTE
-MBSTRING_API int php_mb_set_zend_encoding(TSRMLS_D);
-char* php_mb_encoding_detector(const char *string, int length, char *list
-		TSRMLS_DC);
-int php_mb_encoding_converter(char **to, int *to_length, const char *from,
-		int from_length, const char *encoding_to, const char *encoding_from
-		TSRMLS_DC);
-int php_mb_oddlen(const char *string, int length, const char *encoding TSRMLS_DC);
-#endif /* ZEND_MULTIBYTE */
 
 #else	/* HAVE_MBSTRING */
 

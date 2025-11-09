@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     31.05.03
-// RCS-ID:      $Id: htmllbox.h,v 1.22 2006/12/04 10:16:02 JS Exp $
+// RCS-ID:      $Id: htmllbox.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,10 +20,10 @@
     #include "wx/filesys.h"
 #endif // wxUSE_FILESYSTEM
 
-class WXDLLIMPEXP_HTML wxHtmlCell;
-class WXDLLIMPEXP_HTML wxHtmlWinParser;
-class WXDLLIMPEXP_HTML wxHtmlListBoxCache;
-class WXDLLIMPEXP_HTML wxHtmlListBoxStyle;
+class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
+class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
+class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;
+class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxStyle;
 
 extern WXDLLIMPEXP_DATA_HTML(const wxChar) wxHtmlListBoxNameStr[];
 extern WXDLLIMPEXP_DATA_HTML(const wxChar) wxSimpleHtmlListBoxNameStr[];

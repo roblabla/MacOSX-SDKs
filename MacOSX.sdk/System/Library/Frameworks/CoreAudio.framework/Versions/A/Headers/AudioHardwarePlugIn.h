@@ -4,10 +4,7 @@
      Contains:   API for the CFPlugIn that implements an audio driver for the HAL
                  from user space.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -844,7 +841,7 @@ extern OSStatus
 AudioObjectCreate(  AudioHardwarePlugInRef  inOwningPlugIn,
                     AudioObjectID           inOwningObjectID,
                     AudioClassID            inClassID,
-                    AudioObjectID*          outAudioObjectID)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function       AudioObjectsPublishedAndDied
@@ -873,7 +870,7 @@ AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef  inOwningPlugIn,
                                 UInt32                  inNumberPublishedAudioObjects,
                                 const AudioObjectID     inPublishedAudioObjects[],
                                 UInt32                  inNumberDeadAudioObjects,
-                                const AudioObjectID     inDeadAudioObjects[])                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function       AudioObjectPropertiesChanged
@@ -895,7 +892,7 @@ extern OSStatus
 AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlugIn,
                                 AudioObjectID                       inObjectID,
                                 UInt32                              inNumberAddresses,
-                                const AudioObjectPropertyAddress    inAddresses[])                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 //==================================================================================================
 #pragma mark    AudioDevice Functions
@@ -915,7 +912,7 @@ AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlug
 */
 extern OSStatus
 AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID*          outAudioDeviceID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                    AudioDeviceID*          outAudioDeviceID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicesCreated
@@ -933,7 +930,7 @@ AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
                                 UInt32                  inNumberDevices,
-                                const AudioDeviceID*    inAudioDeviceIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                const AudioDeviceID*    inAudioDeviceIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicesDied
@@ -949,7 +946,7 @@ AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareDevicesDied(   AudioHardwarePlugInRef  inOwner,
                             UInt32                  inNumberDevices,
-                            const AudioDeviceID*    inAudioDeviceIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                            const AudioDeviceID*    inAudioDeviceIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicePropertyChanged
@@ -973,7 +970,7 @@ AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inDeviceID,
                                     UInt32                  inChannel,
                                     Boolean                 isInput,
-                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                    AudioDevicePropertyID   inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 //==================================================================================================
 #pragma mark    AudioStream Functions
@@ -996,7 +993,7 @@ AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareClaimAudioStreamID(    AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inOwningDeviceID,
-                                    AudioStreamID*          outAudioStreamID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                    AudioStreamID*          outAudioStreamID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamsCreated
@@ -1017,7 +1014,7 @@ extern OSStatus
 AudioHardwareStreamsCreated(    AudioHardwarePlugInRef  inOwner,
                                 AudioDeviceID           inOwningDeviceID,
                                 UInt32                  inNumberStreams,
-                                const AudioStreamID*    inAudioStreamIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                const AudioStreamID*    inAudioStreamIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamsDied
@@ -1036,7 +1033,7 @@ extern OSStatus
 AudioHardwareStreamsDied(   AudioHardwarePlugInRef  inOwner,
                             AudioDeviceID           inOwningDeviceID,
                             UInt32                  inNumberStreams,
-                            const AudioStreamID*    inAudioStreamIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                            const AudioStreamID*    inAudioStreamIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamPropertyChanged
@@ -1060,7 +1057,7 @@ AudioHardwareStreamPropertyChanged( AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inOwningDeviceID,
                                     AudioStreamID           inStreamID,
                                     UInt32                  inChannel,
-                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+                                    AudioDevicePropertyID   inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 //==================================================================================================
 

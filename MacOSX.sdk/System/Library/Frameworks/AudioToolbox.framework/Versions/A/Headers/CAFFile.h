@@ -3,10 +3,7 @@
 
      Contains:   Tthe data structures contained within a CAF File
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2004 - 2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,9 +16,9 @@
 #define _CAFFile_H_
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>
+	#include <CoreAudio/CoreAudioTypes.h>
 #else
-	#include <MacTypes.h>
+	#include <CoreAudioTypes.h>
 #endif
 
 #if TARGET_OS_WIN32
@@ -171,14 +168,14 @@ struct CAFPacketTableHeader
         SInt32  mPrimingFrames;
         SInt32  mRemainderFrames;
 		
-		UInt8   mPacketDescriptions[kVariableLengthArray];
+		UInt8   mPacketDescriptions[1]; // this is a variable length array of mNumberPackets elements
 } ATTRIBUTE_PACKED;
 typedef struct CAFPacketTableHeader CAFPacketTableHeader;
 
 struct CAFDataChunk
 {
 		UInt32 mEditCount;
-		UInt8 mData[kVariableLengthArray];
+		UInt8 mData[1]; // this is a variable length data field based off the size of the data chunk
 } ATTRIBUTE_PACKED;
 typedef struct CAFDataChunk CAFDataChunk;
 
@@ -247,7 +244,7 @@ struct CAFMarkerChunk
 {
         UInt32          mSMPTE_TimeType;
         UInt32          mNumberMarkers;
-        CAFMarker       mMarkers[kVariableLengthArray]; 
+        CAFMarker       mMarkers[1]; // this is a variable length array of mNumberMarkers elements
 } ATTRIBUTE_PACKED;
 typedef struct CAFMarkerChunk CAFMarkerChunk;
 
@@ -264,7 +261,7 @@ struct CAFRegion
         UInt32          mRegionID;               
         UInt32          mFlags;
         UInt32          mNumberMarkers;
-        CAFMarker       mMarkers[kVariableLengthArray];
+        CAFMarker       mMarkers[1]; // this is a variable length array of mNumberMarkers elements
 } ATTRIBUTE_PACKED;
 typedef struct CAFRegion CAFRegion;
 
@@ -277,7 +274,7 @@ struct CAFRegionChunk
 {
         UInt32          mSMPTE_TimeType;
         UInt32          mNumberRegions;
-        CAFRegion       mRegions[kVariableLengthArray];  //variable sized chunk
+        CAFRegion       mRegions[1];  // this is a variable length array of mNumberRegions elements
 } ATTRIBUTE_PACKED;
 typedef struct CAFRegionChunk CAFRegionChunk;
 
@@ -309,9 +306,9 @@ typedef struct CAFStringID CAFStringID;
 struct CAFStrings
 {
         UInt32         mNumEntries;
-		CAFStringID    mStringsIDs[kVariableLengthArray];
+		CAFStringID    mStringsIDs[1]; // this is a variable length array of mNumEntries elements
 // this struct is only fictionally described due to the variable length fields
-//		UInt8          mStrings[kVariableLengthArray]; // null terminated UTF8 strings
+//		UInt8          mStrings[ variable num elements ]; // null terminated UTF8 strings
 } ATTRIBUTE_PACKED;
 typedef struct CAFStrings CAFStrings;
 
@@ -322,9 +319,9 @@ struct CAFInfoStrings
 
 // These are only fictionally defined in the struct due to the variable length fields.
 //      struct {
-//              UInt8   mKey[kVariableLengthArray];			// null terminated UTF8 string
-//              UInt8   mValue[kVariableLengthArray];		// null terminated UTF8 string
-//      } mStrings[kVariableLengthArray];
+//              UInt8   mKey[ variable num elements ];			// null terminated UTF8 string
+//              UInt8   mValue[ variable num elements ];		// null terminated UTF8 string
+//      } mStrings[ variable num elements ];
 } ATTRIBUTE_PACKED;
 typedef struct CAFInfoStrings CAFInfoStrings;
 
@@ -339,7 +336,7 @@ typedef struct CAFPositionPeak CAFPositionPeak;
 struct CAFPeakChunk
 {
 	UInt32 mEditCount;
-	CAFPositionPeak mPeaks[kVariableLengthArray];
+	CAFPositionPeak mPeaks[1]; // this is a variable length array of peak elements (calculated from the size of the chunk)
 } ATTRIBUTE_PACKED;
 typedef struct CAFPeakChunk CAFPeakChunk;
 
@@ -355,7 +352,7 @@ struct CAFOverviewChunk
 {
         UInt32                   mEditCount;
         UInt32                   mNumFramesPerOVWSample;
-        CAFOverviewSample        mData[kVariableLengthArray];
+        CAFOverviewSample        mData[1]; // data is of variable size, calculated from the sizeo of the chunk.
 } ATTRIBUTE_PACKED;
 typedef struct CAFOverviewChunk CAFOverviewChunk;
 

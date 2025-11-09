@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin, Robert Roebling
 // Modified by:
 // Created:     26.05.99
-// RCS-ID:      $Id: dataobj.h,v 1.63 2006/08/23 13:38:43 VZ Exp $
+// RCS-ID:      $Id: dataobj.h 40772 2006-08-23 13:38:45Z VZ $
 // Copyright:   (c) wxWidgets Team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

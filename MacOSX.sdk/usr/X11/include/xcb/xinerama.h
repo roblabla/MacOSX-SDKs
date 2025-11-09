@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xinerama.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xinerama.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XINERAMA_MAJOR_VERSION 1
 #define XCB_XINERAMA_MINOR_VERSION 1
@@ -152,7 +156,7 @@ typedef struct xcb_xinerama_get_screen_size_request_t {
     uint8_t      minor_opcode; /**<  */
     uint16_t     length; /**<  */
     xcb_window_t window; /**<  */
-    xcb_screen_t screen; /**<  */
+    uint32_t     screen; /**<  */
 } xcb_xinerama_get_screen_size_request_t;
 
 /**
@@ -166,7 +170,7 @@ typedef struct xcb_xinerama_get_screen_size_reply_t {
     uint32_t     width; /**<  */
     uint32_t     height; /**<  */
     xcb_window_t window; /**<  */
-    xcb_screen_t screen; /**<  */
+    uint32_t     screen; /**<  */
 } xcb_xinerama_get_screen_size_reply_t;
 
 /**
@@ -337,6 +341,8 @@ xcb_xinerama_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -415,6 +421,8 @@ xcb_xinerama_get_state_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_get_state_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -493,6 +501,8 @@ xcb_xinerama_get_screen_count_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_get_screen_count_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -526,7 +536,7 @@ xcb_xinerama_get_screen_count_reply (xcb_connection_t                        *c 
  ** 
  ** @param xcb_connection_t *c
  ** @param xcb_window_t      window
- ** @param xcb_screen_t      screen
+ ** @param uint32_t          screen
  ** @returns xcb_xinerama_get_screen_size_cookie_t
  **
  *****************************************************************************/
@@ -534,7 +544,7 @@ xcb_xinerama_get_screen_count_reply (xcb_connection_t                        *c 
 xcb_xinerama_get_screen_size_cookie_t
 xcb_xinerama_get_screen_size (xcb_connection_t *c  /**< */,
                               xcb_window_t      window  /**< */,
-                              xcb_screen_t      screen  /**< */);
+                              uint32_t          screen  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -554,7 +564,7 @@ xcb_xinerama_get_screen_size (xcb_connection_t *c  /**< */,
  ** 
  ** @param xcb_connection_t *c
  ** @param xcb_window_t      window
- ** @param xcb_screen_t      screen
+ ** @param uint32_t          screen
  ** @returns xcb_xinerama_get_screen_size_cookie_t
  **
  *****************************************************************************/
@@ -562,7 +572,7 @@ xcb_xinerama_get_screen_size (xcb_connection_t *c  /**< */,
 xcb_xinerama_get_screen_size_cookie_t
 xcb_xinerama_get_screen_size_unchecked (xcb_connection_t *c  /**< */,
                                         xcb_window_t      window  /**< */,
-                                        xcb_screen_t      screen  /**< */);
+                                        uint32_t          screen  /**< */);
 
 /**
  * Return the reply
@@ -575,6 +585,8 @@ xcb_xinerama_get_screen_size_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_get_screen_size_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -649,6 +661,8 @@ xcb_xinerama_is_active_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_is_active_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -762,6 +776,8 @@ xcb_xinerama_query_screens_screen_info_iterator (const xcb_xinerama_query_screen
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xinerama_query_screens_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -780,6 +796,10 @@ xcb_xinerama_query_screens_reply (xcb_connection_t                     *c  /**< 
                                   xcb_xinerama_query_screens_cookie_t   cookie  /**< */,
                                   xcb_generic_error_t                 **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

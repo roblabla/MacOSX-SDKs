@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureMovieFileOutput.h
 
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2008-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -18,9 +18,7 @@
 
 @interface QTCaptureMovieFileOutput : QTCaptureFileOutput {
 @private
-#if !__LP64__
 	QTCaptureMovieFileOutputInternal		*_internal;
-#endif
 	long									_reserved8;
 }
 

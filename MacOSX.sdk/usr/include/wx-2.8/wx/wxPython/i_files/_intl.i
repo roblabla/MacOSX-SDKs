@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     1-Apr-2002
-// RCS-ID:      $Id: _intl.i,v 1.13 2006/11/14 22:03:44 RD Exp $
+// RCS-ID:      $Id: _intl.i 53769 2008-05-26 20:50:38Z RD $
 // Copyright:   (c) 2002 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -185,6 +185,7 @@ enum wxLanguage
     wxLANGUAGE_ROMANIAN,
     wxLANGUAGE_RUSSIAN,
     wxLANGUAGE_RUSSIAN_UKRAINE,
+    wxLANGUAGE_SAMI,
     wxLANGUAGE_SAMOAN,
     wxLANGUAGE_SANGHO,
     wxLANGUAGE_SANSKRIT,
@@ -248,6 +249,7 @@ enum wxLanguage
     wxLANGUAGE_UZBEK,
     wxLANGUAGE_UZBEK_CYRILLIC,
     wxLANGUAGE_UZBEK_LATIN,
+    wxLANGUAGE_VALENCIAN,
     wxLANGUAGE_VIETNAMESE,
     wxLANGUAGE_VOLAPUK,
     wxLANGUAGE_WELSH,

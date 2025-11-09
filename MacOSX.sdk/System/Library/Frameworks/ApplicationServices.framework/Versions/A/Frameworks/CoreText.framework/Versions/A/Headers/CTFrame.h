@@ -2,10 +2,18 @@
  *	CTFrame.h
  *	CoreText
  *
- *	Copyright (c) 2003-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2008 Apple Inc. All rights reserved.
  *
  */
  
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
+
 #ifndef __CTFRAME__
 #define __CTFRAME__
 
@@ -72,6 +80,8 @@ typedef uint32_t CTFrameProgression;
 				Default is kCTFrameProgressionTopToBottom. This value determines
 				the line stacking behavior for a frame and does not affect the
 				appearance of the glyphs within that frame.
+
+	@seealso	CTFramesetterCreateFrame
 */
 
 extern const CFStringRef kCTFrameProgressionAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;

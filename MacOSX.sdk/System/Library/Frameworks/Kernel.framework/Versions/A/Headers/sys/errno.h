@@ -249,4 +249,7 @@
 /* pseudo-errors returned inside kernel to modify return to process */
 #define	ERESTART	(-1)		/* restart syscall */
 #define	EJUSTRETURN	(-2)		/* don't modify regs, just return */
+
+/* -5 and -6 are reserved for kernel internal use */
+
 #endif /* _SYS_ERRNO_H_ */

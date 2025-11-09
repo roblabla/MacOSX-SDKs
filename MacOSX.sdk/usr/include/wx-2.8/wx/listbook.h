@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     19.08.03
-// RCS-ID:      $Id: listbook.h,v 1.20 2007/01/07 19:27:33 VZ Exp $
+// RCS-ID:      $Id: listbook.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,8 +18,8 @@
 
 #include "wx/bookctrl.h"
 
-class WXDLLEXPORT wxListView;
-class WXDLLEXPORT wxListEvent;
+class WXDLLIMPEXP_FWD_CORE wxListView;
+class WXDLLIMPEXP_FWD_CORE wxListEvent;
 
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED;
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING;

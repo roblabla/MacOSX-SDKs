@@ -1,11 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        _window.i
+// Name:        _panel.i
 // Purpose:     SWIG interface for wxPanel and wxScrolledWindow
 //
 // Author:      Robin Dunn
 //
 // Created:     24-June-1997
-// RCS-ID:      $Id: _panel.i,v 1.17 2006/09/14 20:38:45 RD Exp $
+// RCS-ID:      $Id: _panel.i 46280 2007-06-02 23:42:18Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////

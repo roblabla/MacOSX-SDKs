@@ -1,13 +1,9 @@
 /*
- * "$Id: adminutil.h 6649 2007-07-11 21:46:42Z mike $"
+ * "$Id: adminutil.h 7026 2007-10-19 00:57:45Z mike $"
  *
- *   Administration utility API definitions for the Common UNIX Printing
- *   System (CUPS).
+ *   Administration utility API definitions for CUPS.
  *
- *   MANY OF THE FUNCTIONS IN THIS HEADER ARE PRIVATE AND SUBJECT TO
- *   CHANGE AT ANY TIME.  USE AT YOUR OWN RISK.
- *
- *   Copyright 2007 by Apple Inc.
+ *   Copyright 2007-2010 by Apple Inc.
  *   Copyright 2001-2007 by Easy Software Products.
  *
  *   These coded instructions, statements, and computer programs are the
@@ -58,16 +54,16 @@ extern int	cupsAdminExportSamba(const char *dest, const char *ppd,
 		                     const char *samba_server,
 			             const char *samba_user,
 				     const char *samba_password,
-				     FILE *logfile);
+				     FILE *logfile) _CUPS_API_1_2;
 extern char	*cupsAdminCreateWindowsPPD(http_t *http, const char *dest,
-		                           char *buffer, int bufsize);
+		                           char *buffer, int bufsize) _CUPS_API_1_2;
 
 extern int	cupsAdminGetServerSettings(http_t *http,
 			                   int *num_settings,
-		                           cups_option_t **settings);
+		                           cups_option_t **settings) _CUPS_API_1_3;
 extern int	cupsAdminSetServerSettings(http_t *http,
 		                           int num_settings,
-		                           cups_option_t *settings);
+		                           cups_option_t *settings) _CUPS_API_1_3;
 
 
 #  ifdef __cplusplus
@@ -77,5 +73,5 @@ extern int	cupsAdminSetServerSettings(http_t *http,
 #endif /* !_CUPS_ADMINUTIL_H_ */
 
 /*
- * End of "$Id: adminutil.h 6649 2007-07-11 21:46:42Z mike $".
+ * End of "$Id: adminutil.h 7026 2007-10-19 00:57:45Z mike $".
  */

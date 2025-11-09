@@ -7,8 +7,8 @@
 #ifndef __IMAGEIO__
 #define __IMAGEIO__
 
-#ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
+#ifndef __COREFOUNDATION__
+#include <CoreFoundation/CoreFoundation.h>
 #endif
 
 #include <ImageIO/CGImageSource.h>

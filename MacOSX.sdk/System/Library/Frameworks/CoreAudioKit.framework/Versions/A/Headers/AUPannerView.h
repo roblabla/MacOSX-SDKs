@@ -3,14 +3,15 @@
  
 	Contains:  Class definition for Generic Cocoa based view for any Panner Audio Unit
  
-	Version:   Mac OS X
- 
-	Copyright: (c) 2006 by Apple Computer, Inc., all rights reserved.
+	Copyright: (c) 2006-2008 by Apple Inc., all rights reserved.
  
 	Bugs?:      For bug reports, consult the following page on the World Wide Web:
  
 	http://developer.apple.com/bugreporter/
 */
+
+#import <Cocoa/Cocoa.h>
+#include <AudioUnit/AudioUnit.h>
 
 /*!
 @class AUPannerView

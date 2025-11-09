@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-June-1998
-// RCS-ID:      $Id: _listbox.i,v 1.24 2006/09/08 01:08:34 RD Exp $
+// RCS-ID:      $Id: _listbox.i 41057 2006-09-08 01:08:36Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////

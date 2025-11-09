@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: dcclient.h,v 1.11 2006/10/29 19:43:25 SC Exp $
+// RCS-ID:      $Id: dcclient.h 42649 2006-10-29 19:43:25Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

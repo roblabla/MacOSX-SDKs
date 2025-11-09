@@ -1,4 +1,4 @@
-/*	$NetBSD: histedit.h,v 1.28 2005/07/14 15:00:58 christos Exp $	*/
+/*	$NetBSD: histedit.h,v 1.34 2008/04/05 23:53:26 christos Exp $	*/
 
 /*-
  * Copyright (c) 1992, 1993
@@ -41,7 +41,7 @@
 #define	_HISTEDIT_H_
 
 #define	LIBEDIT_MAJOR 2
-#define	LIBEDIT_MINOR 9
+#define	LIBEDIT_MINOR 11
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -109,7 +109,7 @@ int		 el_parse(EditLine *, int, const char **);
  * Low level editline access functions
  */
 int		 el_set(EditLine *, int, ...);
-int		 el_get(EditLine *, int, void *);
+int		 el_get(EditLine *, int, ...);
 unsigned char	_el_fn_complete(EditLine *, int);
 
 /*
@@ -133,8 +133,12 @@ unsigned char	_el_fn_complete(EditLine *, int);
 #define	EL_CLIENTDATA	14	/* , void *);			*/
 #define	EL_UNBUFFERED	15	/* , int);			*/
 #define	EL_PREP_TERM    16      /* , int);                      */
+#define	EL_GETTC	17	/* , const char *, ..., NULL);	*/
+#define	EL_GETFP	18	/* , int, FILE **);		*/
+#define	EL_SETFP	19	/* , int, FILE *);		*/
+#define EL_REFRESH	20	/* , void);			*/
 
-#define EL_BUILTIN_GETCFN	(NULL)
+#define	EL_BUILTIN_GETCFN	(NULL)
 
 /*
  * Source named file or $PWD/.editrc or $HOME/.editrc

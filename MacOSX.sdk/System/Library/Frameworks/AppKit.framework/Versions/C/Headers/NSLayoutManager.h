@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2007, Apple Inc.
+        Copyright (c) 1994-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -35,6 +35,8 @@
 @class NSCell;
 @class NSGlyphGenerator;
 @class NSTextBlock;
+
+@protocol NSLayoutManagerDelegate;
 
 /* These glyph attributes are used only inside the glyph generation machinery, but must be shared between components. */
 enum {
@@ -206,8 +208,8 @@ typedef NSInteger NSTypesetterBehavior;
 - (void)setTypesetter:(NSTypesetter *)typesetter;
     // By default an NSLayoutManager uses the shared default typesetter.  Setting the typesetter invalidates all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
 
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id <NSLayoutManagerDelegate>)delegate;
+- (void)setDelegate:(id <NSLayoutManagerDelegate>)delegate;
     // Sets or gets the NSLayoutManager's delegate.
 
 /**************************** Text containers ****************************/
@@ -340,7 +342,6 @@ typedef NSInteger NSTypesetterBehavior;
 - (NSGlyph)glyphAtIndex:(NSUInteger)glyphIndex;
 - (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex;
     // If non-contiguous layout is not enabled, these will cause generation of all glyphs up to and including glyphIndex.  The first glyphAtIndex variant returns NSNullGlyph if the requested index is out of the range (0, numberOfGlyphs), and optionally returns a flag indicating whether the requested index is in range.  The second glyphAtIndex variant raises a NSRangeError if the requested index is in range.
-    // Java note:  glyphAtIndex:isValidIndex: is the primitive but is not exposed in Java.  Therefore it is not currently possible to override this functionality properly from Java.
 
 - (NSUInteger)characterIndexForGlyphAtIndex:(NSUInteger)glyphIndex;
     // If non-contiguous layout is not enabled, this will cause generation of all glyphs up to and including glyphIndex.  It will return the character index for the first character associated with the glyph at the specified index.
@@ -400,7 +401,6 @@ typedef NSInteger NSTypesetterBehavior;
 - (NSUInteger)firstUnlaidCharacterIndex;
 - (NSUInteger)firstUnlaidGlyphIndex;
     // Returns (by reference for the "get" method) the character index or glyph index or both of the first unlaid character/glyph in the layout manager at this time.
-    // Java note: The two "firstUnlaid" methods are the primitives and are the methods exposed in Java.  The "getFirstUnlaid" method calls the other two.  All Objective-C code calls the "getFirstUnlaid" method.  In either Objective-C or Java any overriding should be done for the "firstUnlaid" methods, not the "getFirstUnlaid" method.  This will all work out correctly with the exception of existing code that overrides the "getFirstUnlaid" method.  Existing subclasses that do this will not have their implementations available to Java developers.
 
 // Except as otherwise indicated, these methods will cause glyph generation and layout as needed.
 
@@ -486,8 +486,12 @@ typedef NSInteger NSTypesetterBehavior;
 - (NSUInteger)glyphIndexForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container fractionOfDistanceThroughGlyph:(CGFloat *)partialFraction;
 - (NSUInteger)glyphIndexForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container;
 - (CGFloat)fractionOfDistanceThroughGlyphForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container;
-    // Returns the index of the glyph falling under the given point, expressed in the given container's coordinate system.  If no glyph is under the point the nearest glyph is returned where nearest is defined according to the requirements of selection by mouse.  Clients who wish to determine whether the the point actually lies within the bounds of the glyph returned should follow this with a call to boundingRectForGlyphRange:inTextContainer: and test whether the point falls in the rect returned by that method.  If partialFraction is non-NULL, it will return by reference the fraction of the distance between the location of the glyph returned and the location of the next glyph. 
-    // Java note: The second and third methods are the primitives and are the methods exposed in Java.  The first method calls the other two.  All Objective-C code calls the first method.  In either Objective-C or Java any overriding should be done for the second and third methods, not the first method.  This will all work out correctly with the exception of existing code that overrides the first method.  Existing subclasses that do this will not have their implementations available to Java developers.
+    // Returns the index of the glyph falling under the given point, expressed in the given container's coordinate system.  If no glyph is under the point, the nearest glyph is returned, where nearest is defined according to the requirements of selection by mouse.  Clients who wish to determine whether the the point actually lies within the bounds of the glyph returned should follow this with a call to boundingRectForGlyphRange:inTextContainer: and test whether the point falls in the rect returned by that method.  If partialFraction is non-NULL, it will return by reference the fraction of the distance between the location of the glyph returned and the location of the next glyph. 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (NSUInteger)characterIndexForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container fractionOfDistanceBetweenInsertionPoints:(CGFloat *)partialFraction;
+    // Returns the index of the character falling under the given point, expressed in the given container's coordinate system.  If no character is under the point, the nearest character is returned, where nearest is defined according to the requirements of selection by mouse.  This is not simply equivalent to taking the result of the corresponding glyph index method and converting it to a character index, because in some cases a single glyph represents more than one selectable character, for example an fi ligature glyph.  In that case, there will be an insertion point within the glyph, and this method will return one character or the other, depending on whether the specified point lies to the left or the right of that insertion point.  In general, this method will return only character indexes for which there is an insertion point (see next method).  The partial fraction is a fraction of the distance from the insertion point logically before the given character to the next one, which may be either to the right or to the left depending on directionality.
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (NSUInteger)getLineFragmentInsertionPointsForCharacterAtIndex:(NSUInteger)charIndex alternatePositions:(BOOL)aFlag inDisplayOrder:(BOOL)dFlag positions:(CGFloat *)positions characterIndexes:(NSUInteger *)charIndexes;
@@ -557,6 +561,11 @@ typedef NSInteger NSTypesetterBehavior;
 - (void)showAttachmentCell:(NSCell *)cell inRect:(NSRect)rect characterIndex:(NSUInteger)attachmentIndex;
    // This is the primitive for actually drawing an attachment cell.  The attachment should be drawn within the given rect.  The character index is provided for those cells that alter their appearance based on their location.
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)fillBackgroundRectArray:(NSRectArray)rectArray count:(NSUInteger)rectCount forCharacterRange:(NSRange)charRange color:(NSColor *)color;
+   // This is the primitive used by -drawBackgroundForGlyphRange:atPoint: for actually filling rects with a particular background color, whether due to a background color attribute, a selected or marked range highlight, a block decoration, or any other rect fill needed by that method.  As with -showPackedGlyphs:..., the character range and color are merely for informational purposes; the color will already be set in the graphics state.  If for any reason you modify it, you must restore it before returning from this method.  You should never call this method, but you might override it.  The default implementation will simply fill the specified rect array.
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+
 - (void)drawUnderlineForGlyphRange:(NSRange)glyphRange underlineType:(NSInteger)underlineVal baselineOffset:(CGFloat)baselineOffset lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
 - (void)underlineGlyphRange:(NSRange)glyphRange underlineType:(NSInteger)underlineVal lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
     // The first of these methods actually draws an appropriate underline for the glyph range given.  The second method potentially breaks the range it is given up into subranges and calls drawUnderline... for ranges that should actually have the underline drawn.  As examples of why there are two methods, consider two situations.  First, in all cases you don't want to underline the leading and trailing whitespace on a line.  The -underlineGlyphRange... method is passed glyph ranges that have underlining turned on, but it will then look for this leading and trailing white space and only pass the ranges that should actually be underlined to -drawUnderline...  Second, if the underlineType: indicates that only words, (i.e., no whitespace), should be underlined, then -underlineGlyphRange... will carve the range it is passed up into words and only pass word ranges to -drawUnderline.
@@ -569,8 +578,8 @@ typedef NSInteger NSTypesetterBehavior;
 
 @end
 
-@interface NSObject (NSLayoutManagerDelegate)
-
+@protocol NSLayoutManagerDelegate <NSObject>
+@optional
 - (void)layoutManagerDidInvalidateLayout:(NSLayoutManager *)sender;
     // This is sent whenever layout or glyphs become invalidated in a layout manager which previously had all layout complete.
 

@@ -2,7 +2,7 @@
 // Name:        htmltag.h
 // Purpose:     wxHtmlTag class (represents single tag)
 // Author:      Vaclav Slavik
-// RCS-ID:      $Id: htmltag.h,v 1.23 2006/09/05 20:45:45 VZ Exp $
+// RCS-ID:      $Id: htmltag.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 1999 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,8 +17,8 @@
 #include "wx/object.h"
 #include "wx/arrstr.h"
 
-class WXDLLIMPEXP_CORE wxColour;
-class WXDLLIMPEXP_HTML wxHtmlEntitiesParser;
+class WXDLLIMPEXP_FWD_CORE wxColour;
+class WXDLLIMPEXP_FWD_HTML wxHtmlEntitiesParser;
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

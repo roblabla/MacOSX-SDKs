@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <SyncServices/ISyncCommon.h>
 
@@ -20,4 +20,20 @@ enum {
 	ISyncSessionDriverFatalError =			       300  // ISyncSessionDriver received a fatal error
 };
 
+typedef enum {
+	ISyncServerDisabledReasonNone = 1000,        // Returned when isEnabled has not been called or has returned YES.
+	ISyncServerDisabledReasonByPreference,      // Returned if syncing has been disabled with a preference
+	ISyncServerDisabledReasonSharedNetworkHome,// Returned if another sync server is running against a network home directory.
+	ISyncServerDisabledReasonUnresponsive,	 // Returned if isEnabled has timed out messaging to the Sync Server  
+	ISyncServerDisabledReasonUnknown,           // Returned if the Sync Server fails to respond because of an unexpected error.
+} ISyncServerDisabledReason;
+
+
+
+#endif
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+SYNCSERVICES_EXPORT NSString * const ISyncInvalidSchemaException;    // Raised when a client tries to register an invalid schema or schema extension.
+SYNCSERVICES_EXPORT NSString * const ISyncInvalidArgumentsException; // Raised when the sync services API is passed bad or inconsistent arguments.
 #endif

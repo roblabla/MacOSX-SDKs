@@ -35,6 +35,7 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFArray.h>
+#include <CoreFoundation/CFURL.h>
 
 #if !defined(MD_EXPORT)
         #if defined(macintosh) && defined(__MWERKS__)
@@ -86,6 +87,20 @@ MD_EXPORT CFTypeID MDItemGetTypeID(void) MD_AVAIL;
         @result An MDItemRef, or NULL on failure.
 */
 MD_EXPORT MDItemRef MDItemCreate(CFAllocatorRef allocator, CFStringRef path) MD_AVAIL;
+
+/*!
+ @function MDItemCreateWithURL
+ Returns an metadata item for the given path.
+ @param allocator The CFAllocator which should be used to allocate
+ memory for the query and its sub-storage. This
+ parameter may be NULL in which case the current default
+ CFAllocator is used.
+ @param url A url to the file for which to create the MDItem.
+ [[Currently, the file must exist. MDItemRefs may or
+ may not be uniqued. Use CFEqual() to compare them.]]
+ @result An MDItemRef, or NULL on failure.
+ */
+MD_EXPORT MDItemRef MDItemCreateWithURL(CFAllocatorRef allocator, CFURLRef url) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
         @function MDItemCopyAttribute
@@ -171,6 +186,10 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    the main editor or relative importance of the editors. Type is a
    CFArray of CFStrings.
  
+   @constant kMDItemParticipants
+   The list of people who are visible in an image or movie or
+   written about in a document. Type is CFArray of CFStrings.
+
    @constant kMDItemProjects
    The list of projects etc that this file is part of. For example if
    you were working on a movie, all of the movie files could be marked
@@ -231,6 +250,9 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    @constant kMDItemPixelWidth
    The width of the document in pixels (ie Image width or Video frame width)
 
+   @constant kMDItemPixelCount
+   The total number of pixels in the document.  Type is a CFNumber.
+
    @constant kMDItemColorSpace
    What color space model is this document following
    (For example, are examples "RGB", "CMYK", "YUV", "YCbCr")
@@ -268,8 +290,8 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    acquired. 0 is auto white balance and 1 is manual
 
    @const kMDItemAperture
-   The aperture setting of the camera when the image was
-   acquired. This unit is the APEX value.
+   The size of the lens aperture as a log-scale APEX value
+   when the image was acquired.
 
    @const kMDItemProfileName
    Name of the color profile used for the image
@@ -336,8 +358,8 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    value. Ordinarily it is given in the range of 00.00 to 99.99.
 
    @const kMDItemFNumber
-   FNumber expresses the diameter of the diaphragm aperture in terms
-   of the effective focal length of the lens.
+   The focal length of the lens divided by the diameter of the aperture
+   when the image was acquired.
 
    @const kMDItemExposureProgram
    The class of the program used by the camera to set exposure when
@@ -395,6 +417,9 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
  @const kMDItemImageDirection
  The direction of the item's image, in degrees from true north.
  
+ @const kMDItemNamedLocation
+ The name of the location or point of interest associated with the item.
+ The name may be user provided.
 */
 
 MD_EXPORT const CFStringRef     kMDItemAttributeChangeDate MD_AVAIL;       // CFDate
@@ -404,6 +429,7 @@ MD_EXPORT const CFStringRef     kMDItemKeywords MD_AVAIL;                  // CF
 MD_EXPORT const CFStringRef     kMDItemTitle MD_AVAIL;                     // CFString
 MD_EXPORT const CFStringRef     kMDItemAuthors MD_AVAIL;                   // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemEditors MD_AVAIL_LEOPARD;           // CFArray of CFString
+MD_EXPORT const CFStringRef     kMDItemParticipants AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemProjects MD_AVAIL;                  // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemWhereFroms MD_AVAIL;                // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemComment MD_AVAIL;                   // CFString
@@ -417,6 +443,7 @@ MD_EXPORT const CFStringRef     kMDItemVersion MD_AVAIL;                   // CF
 
 MD_EXPORT const CFStringRef     kMDItemPixelHeight MD_AVAIL;               // CFNumber
 MD_EXPORT const CFStringRef     kMDItemPixelWidth MD_AVAIL;                // CFNumber
+MD_EXPORT const CFStringRef     kMDItemPixelCount AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFNumber
 MD_EXPORT const CFStringRef     kMDItemColorSpace MD_AVAIL;                // CFString
 MD_EXPORT const CFStringRef     kMDItemBitsPerSample MD_AVAIL;             // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFlashOnOff MD_AVAIL;                // CFBoolean
@@ -443,6 +470,7 @@ MD_EXPORT const CFStringRef     kMDItemSpeed MD_AVAIL_LEOPARD;             // CF
 MD_EXPORT const CFStringRef     kMDItemTimestamp MD_AVAIL_LEOPARD;         // CFDate
 MD_EXPORT const CFStringRef     kMDItemGPSTrack MD_AVAIL_LEOPARD;          // CFNumber
 MD_EXPORT const CFStringRef     kMDItemImageDirection MD_AVAIL_LEOPARD;    // CFNumber
+MD_EXPORT const CFStringRef     kMDItemNamedLocation AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFString
 
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
@@ -841,7 +869,7 @@ MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentCategory MD_AVAIL;       
 MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentName MD_AVAIL;            // CFString
 
 MD_EXPORT const CFStringRef    kMDItemCFBundleIdentifier MD_AVAIL_LEOPARD;       // CFString
-MD_EXPORT const CFStringRef    kMDItemSupportFileType MD_AVAIL_LEOPARD;          // CFArray of CFStrings
+MD_EXPORT const CFStringRef    kMDItemSupportFileType AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;          // CFArray of CFStrings
 
 /*!
         @const kMDItemInformation
@@ -873,6 +901,12 @@ MD_EXPORT const CFStringRef    kMDItemSupportFileType MD_AVAIL_LEOPARD;         
         This attribute indicates the reciepients email addresses. (This is always the email
         address,  and not the human readable version).
 
+        @const kMDItemAuthorAddresses
+        This attribute indicates the author addresses of the document.
+ 
+        @const kMDItemRecipientAddresses
+        This attribute indicates the recipient addresses of the document. 
+ 
         @const kMDItemURL
         Url of the item
 
@@ -886,6 +920,8 @@ MD_EXPORT const CFStringRef    kMDItemOriginalFormat MD_AVAIL_LEOPARD;          
 MD_EXPORT const CFStringRef    kMDItemOriginalSource MD_AVAIL_LEOPARD;           // CFString
 MD_EXPORT const CFStringRef    kMDItemAuthorEmailAddresses MD_AVAIL_LEOPARD;     // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemRecipientEmailAddresses MD_AVAIL_LEOPARD;  // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemAuthorAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;     // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemRecipientAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;  // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemURL MD_AVAIL_LEOPARD;                      // CFString
 MD_END_C_DECLS
 

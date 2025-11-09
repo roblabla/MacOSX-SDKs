@@ -8,7 +8,7 @@
 // Author:      Robin Dunn
 //
 // Created:     14-Dec-2000
-// RCS-ID:      $Id: wxPython.h,v 1.17 2006/10/27 06:06:20 RD Exp $
+// RCS-ID:      $Id: wxPython.h 51090 2008-01-08 04:36:23Z RD $
 // Copyright:   (c) 2000 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,6 @@ inline wxPyCoreAPI* wxPyGetCoreAPIPtr()
 #define wxPyEndBlockThreads(a)                  (wxPyGetCoreAPIPtr()->p_wxPyEndBlockThreads(a))
 
 #define wxPyConstructObject(a,b,c)              (wxPyGetCoreAPIPtr()->p_wxPyConstructObject(a,b,c))
-#define wxPy_ConvertList(a)                     (wxPyGetCoreAPIPtr()->p_wxPy_ConvertList(a))
                                          
 #define wxString_in_helper(a)                   (wxPyGetCoreAPIPtr()->p_wxString_in_helper(a))
 #define Py2wxString(a)                          (wxPyGetCoreAPIPtr()->p_Py2wxString(a))
@@ -123,6 +122,8 @@ inline wxPyCoreAPI* wxPyGetCoreAPIPtr()
 #define wxPoint2D_LIST_helper(a,b)              (wxPyGetCoreAPIPtr()->p_wxPoint2D_LIST_helper(a, b))
 #define wxRect2D_helper(a,b)                    (wxPyGetCoreAPIPtr()->p_wxRect2D_helper(a,b))
 
+#define wxPyCBOutputStream_create(a, b)         (wxPyGetCoreAPIPtr()->p_wxPyCBOutputStream_create(a, b))
+#define wxPyCBOutputStream_copy(a)              (wxPyGetCoreAPIPtr()->p_wxPyCBOutputStream_copy(a))
 
 //----------------------------------------------------------------------
 #endif

@@ -1,5 +1,5 @@
 /*	NSXMLDTD.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -30,7 +30,9 @@
 	uint8_t _padding2[3];
 }
 
+#if 0
 #pragma mark --- Properties ---
+#endif
 
 - (id)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
 - (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error; //primitive
@@ -59,7 +61,9 @@
 */
 - (NSString *)systemID; //primitive
 
+#if 0
 #pragma mark --- Children ---
+#endif
 
 /*!
     @method insertChild:atIndex:
@@ -97,7 +101,9 @@
 */
 - (void)replaceChildAtIndex:(NSUInteger)index withNode:(NSXMLNode *)node;
 
+#if 0
 #pragma mark --- Accessors ---
+#endif
 
 /*!
     @method entityDeclarationForName:

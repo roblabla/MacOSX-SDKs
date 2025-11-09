@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000, 2003-2006, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -84,7 +84,14 @@ typedef struct {
 	int fts_rfd;			/* fd for root */
 	int fts_pathlen;		/* sizeof(path) */
 	int fts_nitems;			/* elements in the sort array */
-	int (*fts_compar)();		/* compare function */
+#ifdef __BLOCKS__
+	union {
+#endif /* __BLOCKS__ */
+	    int (*fts_compar)();	/* compare function */
+#ifdef __BLOCKS__
+	    int (^fts_compar_b)();	/* compare block */
+	};
+#endif /* __BLOCKS__ */
 
 #define	FTS_COMFOLLOW	0x001		/* follow command line symlinks */
 #define	FTS_LOGICAL	0x002		/* logical walk */
@@ -99,6 +106,9 @@ typedef struct {
 
 #define	FTS_NAMEONLY	0x100		/* (private) child names only */
 #define	FTS_STOP	0x200		/* (private) unrecoverable error */
+#ifdef __BLOCKS__
+#define	FTS_BLOCK_COMPAR 0x80000000	/* fts_compar is a block */
+#endif /* __BLOCKS__ */
 	int fts_options;		/* fts_open options, global flags */
 } FTS;
 
@@ -161,6 +171,10 @@ FTSENT	*fts_children(FTS *, int) __DARWIN_INODE64(fts_children);
 int	 fts_close(FTS *) __DARWIN_INODE64(fts_close);
 FTS	*fts_open(char * const *, int,
 	    int (*)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open);
+#ifdef __BLOCKS__
+FTS	*fts_open_b(char * const *, int,
+	    int (^)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open_b);
+#endif /* __BLOCKS__ */
 FTSENT	*fts_read(FTS *) __DARWIN_INODE64(fts_read);
 int	 fts_set(FTS *, FTSENT *, int) __DARWIN_INODE64(fts_set);
 __END_DECLS

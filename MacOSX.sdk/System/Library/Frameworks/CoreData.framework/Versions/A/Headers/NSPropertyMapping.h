@@ -1,7 +1,7 @@
 /*
     NSPropertyMapping.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -14,7 +14,7 @@
     @private
     void *_reserved;
     void *_reserved1;
-    void *_reserved2;
+    NSArray *_propertyTransforms;
     NSString *_name;
     NSExpression *_valueExpression;
     NSDictionary *_userInfo;

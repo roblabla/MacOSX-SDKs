@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,19 +19,9 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved. 
- *
- * IOEthernetController.h
- *
- * HISTORY
- *
- * Dec 3, 1998  jliu - C++ conversion.
- */
 
 #ifndef _IOETHERNETCONTROLLER_H
 #define _IOETHERNETCONTROLLER_H
-
 
 #include <IOKit/network/IONetworkController.h>
 
@@ -66,12 +56,22 @@
 
 /*! @defined kIOEthernetWakeOnLANFilterGroup
     @abstract kIOEthernetWakeOnLANFilterGroup describes the name assigned
-        to the Ethernet wake-On-LAN filter group. */
+        to the Ethernet Wake-On-LAN filter group. This group represents
+        wake filters that are supported by the controller. */
 
 #define kIOEthernetWakeOnLANFilterGroup   "IOEthernetWakeOnLANFilterGroup"
 
+/*! @defined kIOEthernetDisabledWakeOnLANFilterGroup
+    @abstract kIOEthernetDisabledWakeOnLANFilterGroup describes the name
+        assigned to the disabled Ethernet Wake-On-LAN filter group. This
+        group represents wake filters that are currently disabled.
+        Membership in this group is dynamic. */
+
+#define kIOEthernetDisabledWakeOnLANFilterGroup \
+        "IOEthernetDisabledWakeOnLANFilterGroup"
+
 /*! @enum WakeOnLANFilters.
-    @abstract All filters in the wake-on-LAN filter group.
+    @abstract All filters in the Wake-on-LAN filter group.
     @discussion Each filter listed will respond to a network event that
         will trigger a system wake-up.
     @constant kIOEthernetWakeOnMagicPacket Reception of a Magic Packet.
@@ -97,10 +97,17 @@ struct IOEthernetAddress {
 
 /*! @const gIOEthernetWakeOnLANFilterGroup
     @discussion gIOEthernetWakeOnLANFilterGroup is an OSSymbol object
-    that contains the name of the Ethernet wake-on-LAN filter group
+    that contains the name of the Ethernet Wake-on-LAN filter group
     defined by kIOEthernetWakeOnLANFilterGroup. */
 
 extern const OSSymbol * gIOEthernetWakeOnLANFilterGroup;
+
+/*! @const gIOEthernetDisabledWakeOnLANFilterGroup
+    @discussion gIOEthernetDisabledWakeOnLANFilterGroup is an OSSymbol object
+    that contains the name of the disabled Ethernet Wake-on-LAN filter group
+    defined by kIOEthernetDisabledWakeOnLANFilterGroup. */
+
+extern const OSSymbol * gIOEthernetDisabledWakeOnLANFilterGroup;
 
 /*! @class IOEthernetController
     @abstract Abstract superclass for Ethernet controllers. 
@@ -367,7 +374,7 @@ public:
 /*! @function setWakeOnMagicPacket
     @abstract Enables or disables the wake on Magic Packet support.
     @discussion Called by enablePacketFilter() or disablePacketFilter()
-    when there is a change in the activation state of the wake-on-LAN
+    when there is a change in the activation state of the Wake-on-LAN
     filter identified by kIOEthernetWakeOnMagicPacket. This method is
     called from the workloop context.
     @param active True to enable support for system wake on reception

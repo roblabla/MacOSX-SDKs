@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.41.2.1.2.6 2007/12/31 07:20:09 sebastian Exp $ */
+/* $Id: php_pcre.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -32,14 +32,6 @@
 #if HAVE_LOCALE_H
 #include <locale.h>
 #endif
-
-PHP_FUNCTION(preg_match);
-PHP_FUNCTION(preg_match_all);
-PHP_FUNCTION(preg_replace);
-PHP_FUNCTION(preg_replace_callback);
-PHP_FUNCTION(preg_split);
-PHP_FUNCTION(preg_quote);
-PHP_FUNCTION(preg_grep);
 
 PHPAPI char *php_pcre_replace(char *regex, int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *options TSRMLS_DC);

@@ -117,35 +117,21 @@ __END_DECLS
 
 #define getenv_int(a,b) (*b = 0)
 #define	KASSERT(exp,msg)
-
 /*
  * General function declarations.
  */
 __BEGIN_DECLS
+
+
+
 int	nullop(void);
 int	nulldev(void);
 int	enoioctl(void);
 int	enosys(void);
-int	errsys(void);
-void	nullsys(void);
 int	enxio(void);
 int	eopnotsupp(void);
-int	einval(void);
-
-
 void	*hashinit(int count, int type, u_long *hashmask);
-
-void	tablefull(const char *);
-
-int	kvprintf(char const *, void (*)(int, void*), void *, int,
-		      __darwin_va_list);
-
-void	uprintf(const char *, ...) __printflike(1,2);
-
-
 void	ovbcopy(const void *from, void *to, size_t len);
-int	copywithin(void *saddr, void *daddr, size_t len);
-
 int	fubyte(user_addr_t addr);
 int	fuibyte(user_addr_t addr);
 int	subyte(user_addr_t addr, int byte);
@@ -154,24 +140,21 @@ long   fuword(user_addr_t addr);
 long   fuiword(user_addr_t addr);
 int    suword(user_addr_t addr, long word);
 int    suiword(user_addr_t addr, long word);
-int64_t	fulong(user_addr_t addr);
-int	sulong(user_addr_t addr, int64_t longword);
-uint64_t fuulong(user_addr_t addr);
-int	suulong(user_addr_t addr, uint64_t ulongword);
 #define fusize(_a)	((user_size_t)fulong(_a))
 #define susize(_a, _s)	sulong((_a), (_s))
 #define fuptr(a)	((user_addr_t)fulong(_a)
 #define suptr(_a, _p)	sulong((_a), (_p))
 int	useracc(user_addr_t addr, user_size_t len,int prot);
-
 typedef void (*timeout_fcn_t)(void *);
 void	bsd_timeout(void (*)(void *), void *arg, struct timespec * ts);
 void	bsd_untimeout(void (*)(void *), void *arg);
-
 void	set_fsblocksize(struct vnode *);
-
-
-
+uint64_t tvtoabstime(struct timeval *);
+void	*throttle_info_create(void);
+void	throttle_info_mount_ref(mount_t mp, void * throttle_info);	
+void	throttle_info_mount_rel(mount_t mp);	
+void	throttle_info_release(void *throttle_info);
+void	throttle_info_update(void *throttle_info, int flags);
 __END_DECLS
 
 #endif /* !_SYS_SYSTM_H_ */

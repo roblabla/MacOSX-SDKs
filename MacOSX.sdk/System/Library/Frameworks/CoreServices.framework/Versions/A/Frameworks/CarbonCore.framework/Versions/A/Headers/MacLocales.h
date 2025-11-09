@@ -3,9 +3,9 @@
  
      Contains:   Types & prototypes for locale functions
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -131,6 +131,33 @@ LocaleRefGetPartString(
 
 /*
  *  LocaleStringToLangAndRegionCodes()
+ *  
+ *  Summary:
+ *    Map a CFLocale-style locale string to old Script Manager LangCode
+ *    and RegionCode values.
+ *  
+ *  Parameters:
+ *    
+ *    localeString:
+ *      A null-terminated C-string version of a CFLocale-style locale
+ *      identifier of the sort that could be passed to
+ *      CFLocaleCreateCanonicalLocaleIdentifierFromString, based on BCP
+ *      47 language tags: <http://www.rfc-editor.org/rfc/bcp/bcp47.txt>.
+ *    
+ *    lang:
+ *      A pointer to a LangCode to be set from the locale identifier;
+ *      will be set to langUnspecified or -1 if no language code can be
+ *      derived from the identifier. May be NULL if region is not also
+ *      NULL.
+ *    
+ *    region:
+ *      A pointer to a RegionCode to be set from the locale identifier;
+ *      will be set to -1 if no language code can be derived from the
+ *      identifier. May be NULL if lang is not also NULL.
+ *  
+ *  Result:
+ *    OSStatus, noErr if operation successful, otherwise paramErr or
+ *    possibly other errors.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework

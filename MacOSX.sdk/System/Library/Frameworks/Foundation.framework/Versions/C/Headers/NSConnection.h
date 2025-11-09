@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,6 +7,8 @@
 
 @class NSMutableData, NSDistantObject, NSException, NSData;
 @class NSPort, NSRunLoop, NSPortNameServer, NSDictionary, NSArray;
+@class NSDistantObjectRequest;
+@protocol NSConnectionDelegate;
 
 @interface NSConnection : NSObject {
     @private
@@ -45,7 +47,7 @@
 
 + (NSArray *)allConnections;
 
-+ (NSConnection *)defaultConnection;
++ (NSConnection *)defaultConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 + (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
 + (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
@@ -65,8 +67,8 @@
 
 - (NSDistantObject *)rootProxy;
   
-- (void)setDelegate:(id)anObject;
-- (id)delegate;
+- (void)setDelegate:(id <NSConnectionDelegate>)anObject;
+- (id <NSConnectionDelegate>)delegate;
 
 - (void)setIndependentConversationQueueing:(BOOL)yorn;
 - (BOOL)independentConversationQueueing;
@@ -108,7 +110,8 @@ FOUNDATION_EXPORT NSString * const NSConnectionReplyMode;
 FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification;
 
 
-@interface NSObject (NSConnectionDelegateMethods)
+@protocol NSConnectionDelegate <NSObject>
+@optional
 
 // Use the NSConnectionDidInitializeNotification notification instead
 // of this delegate method if possible.
@@ -122,6 +125,8 @@ FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification;
 - (BOOL)authenticateComponents:(NSArray *)components withData:(NSData *)signature;
 
 - (id)createConversationForConnection:(NSConnection *)conn;
+
+- (BOOL)connection:(NSConnection *)connection handleRequest:(NSDistantObjectRequest *)doreq;
 
 @end
 
@@ -137,10 +142,3 @@ FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification;
 - (void)replyWithException:(NSException *)exception;
 
 @end
-
-@interface NSObject (NSDistantObjectRequestMethods)
-
-- (BOOL)connection:(NSConnection *)connection handleRequest:(NSDistantObjectRequest *)doreq;
-
-@end
-

@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     11.11.97
-// RCS-ID:      $Id: menuitem.h,v 1.7 2006/05/17 10:41:56 JS Exp $
+// RCS-ID:      $Id: menuitem.h 48053 2007-08-13 17:07:01Z JS $
 // Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,6 +48,8 @@ public:
     void UpdateItemText() ;
     void UpdateItemStatus() ;
 
+    void DoUpdateItemBitmap( WXHMENU menu, wxUint16 index) ;
+
     // mark item as belonging to the given radio group
     void SetAsRadioGroupStart();
     void SetRadioGroupStart(int start);
@@ -73,6 +75,14 @@ private:
     void* m_menu ; // the appropriate menu , may also be a system menu
 
     DECLARE_DYNAMIC_CLASS(wxMenuItem)
+
+public:
+
+#if wxABI_VERSION >= 20805
+    // return the item label including any mnemonics and accelerators.
+    // This used to be called GetText.
+    wxString GetItemLabel() const { return GetText(); }
+#endif
 };
 
 #endif  //_MENUITEM_H

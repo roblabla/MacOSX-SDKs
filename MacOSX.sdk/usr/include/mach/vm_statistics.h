@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -68,6 +68,19 @@
 
 #include <mach/machine/vm_types.h>
 
+
+/*
+ * vm_statistics
+ *
+ * History:
+ *	rev0 - 	original structure.
+ *	rev1 - 	added purgable info (purgable_count and purges).
+ *	rev2 - 	added speculative_count.
+ *
+ * Note: you cannot add any new fields to this structure. Add them below in
+ * 	 vm_statistics64.
+ */
+
 struct vm_statistics {
 	natural_t	free_count;		/* # of pages free */
 	natural_t	active_count;		/* # of pages active */
@@ -96,8 +109,78 @@ struct vm_statistics {
 	natural_t	speculative_count;	/* # of pages speculative */
 };
 
+/* Used by all architectures */
 typedef struct vm_statistics	*vm_statistics_t;
 typedef struct vm_statistics	vm_statistics_data_t;
+
+#if defined(__ppc__) /* On ppc, vm statistics are still 32-bit */
+
+typedef struct vm_statistics	*vm_statistics64_t;
+typedef struct vm_statistics	vm_statistics64_data_t;
+
+#define VM_STATISTICS_TRUNCATE_TO_32_BIT(value) value
+
+#else /* !(defined(__ppc__))  */
+
+/* 
+ * vm_statistics64
+ *
+ * History:
+ *	rev0 - 	original structure.
+ *	rev1 - 	added purgable info (purgable_count and purges).
+ *	rev2 - 	added speculative_count.
+ *	   ----
+ *	rev3 - 	changed name to vm_statistics64.
+ *		changed some fields in structure to 64-bit on 
+ *		arm, i386 and x86_64 architectures.
+ *
+ */
+
+struct vm_statistics64 {
+	natural_t	free_count;		/* # of pages free */
+	natural_t	active_count;		/* # of pages active */
+	natural_t	inactive_count;		/* # of pages inactive */
+	natural_t	wire_count;		/* # of pages wired down */
+	uint64_t	zero_fill_count;	/* # of zero fill pages */
+	uint64_t	reactivations;		/* # of pages reactivated */
+	uint64_t	pageins;		/* # of pageins */
+	uint64_t	pageouts;		/* # of pageouts */
+	uint64_t	faults;			/* # of faults */
+	uint64_t	cow_faults;		/* # of copy-on-writes */
+	uint64_t	lookups;		/* object cache lookups */
+	uint64_t	hits;			/* object cache hits */
+
+	/* added for rev1 */
+	uint64_t	purges;			/* # of pages purged */
+	natural_t	purgeable_count;	/* # of pages purgeable */
+
+	/* added for rev2 */
+	/*
+	 * NB: speculative pages are already accounted for in "free_count",
+	 * so "speculative_count" is the number of "free" pages that are
+	 * used to hold data that was read speculatively from disk but
+	 * haven't actually been used by anyone so far.
+	 */
+	natural_t	speculative_count;	/* # of pages speculative */
+
+}
+#ifdef __arm__
+__attribute__((aligned(8)))
+#endif
+;
+
+typedef struct vm_statistics64	*vm_statistics64_t;
+typedef struct vm_statistics64	vm_statistics64_data_t;
+
+/* 
+ * VM_STATISTICS_TRUNCATE_TO_32_BIT
+ *
+ * This is used by host_statistics() to truncate and peg the 64-bit in-kernel values from
+ * vm_statistics64 to the 32-bit values of the older structure above (vm_statistics).
+ */
+#define VM_STATISTICS_TRUNCATE_TO_32_BIT(value) ((uint32_t)(((value) > UINT32_MAX ) ? UINT32_MAX : (value)))
+
+#endif /* !(defined(__ppc__)) */
 
 
 /* included for the vm_map_page_query call */
@@ -109,6 +192,9 @@ typedef struct vm_statistics	vm_statistics_data_t;
 #define VM_PAGE_QUERY_PAGE_PAGED_OUT    0x10
 #define VM_PAGE_QUERY_PAGE_COPIED       0x20
 #define VM_PAGE_QUERY_PAGE_SPECULATIVE	0x40
+#define VM_PAGE_QUERY_PAGE_EXTERNAL	0x80
+#define VM_PAGE_QUERY_PAGE_CS_VALIDATED	0x100
+#define VM_PAGE_QUERY_PAGE_CS_TAINTED	0x200
 
 
 /*
@@ -143,9 +229,22 @@ typedef struct vm_statistics	vm_statistics_data_t;
 #define VM_FLAGS_ANYWHERE	0x0001
 #define VM_FLAGS_PURGABLE	0x0002
 #define VM_FLAGS_NO_CACHE	0x0010
+#define VM_FLAGS_OVERWRITE	0x4000	/* delete any existing mappings first */
 
-#define VM_FLAGS_GUARD_BEFORE	0x0010
-#define VM_FLAGS_GUARD_AFTER	0x0020
+/*
+ * VM_FLAGS_SUPERPAGE_MASK
+ *	3 bits that specify whether large pages should be used instead of
+ *	base pages (!=0), as well as the requested page size.
+ */
+#define VM_FLAGS_SUPERPAGE_MASK	0x70000	/* bits 0x10000, 0x20000, 0x40000 */
+#define VM_FLAGS_SUPERPAGE_SHIFT 16
+
+#define SUPERPAGE_NONE			0	/* no superpages, if all bits are 0 */
+#define VM_FLAGS_SUPERPAGE_NONE		(SUPERPAGE_NONE<<VM_FLAGS_SUPERPAGE_SHIFT)
+#if defined(__x86_64__) || !defined(KERNEL)
+#define SUPERPAGE_SIZE_2MB		1
+#define VM_FLAGS_SUPERPAGE_SIZE_2MB	(SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
+#endif
 
 #define VM_FLAGS_ALIAS_MASK	0xFF000000
 #define VM_GET_FLAGS_ALIAS(flags, alias)			\
@@ -159,8 +258,13 @@ typedef struct vm_statistics	vm_statistics_data_t;
 				 VM_FLAGS_ANYWHERE |		\
 				 VM_FLAGS_PURGABLE |		\
 				 VM_FLAGS_NO_CACHE |		\
+				 VM_FLAGS_OVERWRITE |		\
+				 VM_FLAGS_SUPERPAGE_MASK |	\
 				 VM_FLAGS_ALIAS_MASK)
 #define VM_FLAGS_USER_MAP	VM_FLAGS_USER_ALLOCATE
+#define VM_FLAGS_USER_REMAP	(VM_FLAGS_FIXED |    \
+				 VM_FLAGS_ANYWHERE | \
+				 VM_FLAGS_OVERWRITE)
 
 #define VM_MEMORY_MALLOC 1
 #define VM_MEMORY_MALLOC_SMALL 2
@@ -169,6 +273,8 @@ typedef struct vm_statistics	vm_statistics_data_t;
 #define VM_MEMORY_SBRK 5// uninteresting -- no one should call
 #define VM_MEMORY_REALLOC 6
 #define VM_MEMORY_MALLOC_TINY 7
+#define VM_MEMORY_MALLOC_LARGE_REUSABLE 8
+#define VM_MEMORY_MALLOC_LARGE_REUSED 9
 
 #define VM_MEMORY_ANALYSIS_TOOL 10
 
@@ -179,6 +285,7 @@ typedef struct vm_statistics	vm_statistics_data_t;
 #define	VM_MEMORY_SHARED_PMAP 32
 /* memory containing a dylib */
 #define VM_MEMORY_DYLIB	33
+#define VM_MEMORY_OBJC_DISPATCHERS 34
 
 // Placeholders for now -- as we analyze the libraries and find how they
 // use memory, we can make these labels more specific.
@@ -211,6 +318,18 @@ typedef struct vm_statistics	vm_statistics_data_t;
 #define VM_MEMORY_DYLD 60
 /* malloc'd memory created by dyld */
 #define VM_MEMORY_DYLD_MALLOC 61
+
+/* Used for sqlite page cache */
+#define VM_MEMORY_SQLITE 62
+
+/* JavaScriptCore heaps */
+#define VM_MEMORY_JAVASCRIPT_CORE 63
+/* memory allocated for the JIT */
+#define VM_MEMORY_JAVASCRIPT_JIT_EXECUTABLE_ALLOCATOR 64
+#define VM_MEMORY_JAVASCRIPT_JIT_REGISTER_FILE 65
+
+/* memory allocated for GLSL */
+#define VM_MEMORY_GLSL  66
 
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240

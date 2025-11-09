@@ -242,7 +242,7 @@ struct ctlname {
 #define	KERN_SUGID_COREDUMP	52	/* int: whether to dump SUGID cores */
 #define	KERN_PROCDELAYTERM	53	/* int: set/reset current proc for delayed termination during shutdown */
 #define KERN_SHREG_PRIVATIZABLE	54	/* int: can shared regions be privatized ? */
-#define	KERN_PROC_LOW_PRI_IO	55	/* int: set/reset current proc for low priority I/O */
+                             /* 55 was KERN_PROC_LOW_PRI_IO... now deprecated */
 #define	KERN_LOW_PRI_WINDOW	56	/* int: set/reset throttle window - milliseconds */
 #define	KERN_LOW_PRI_DELAY	57	/* int: set/reset throttle delay - milliseconds */
 #define	KERN_POSIX		58	/* node: posix tunables */
@@ -258,7 +258,8 @@ struct ctlname {
 #define KERN_RAGEVNODE		68
 #define KERN_TTY		69	/* node: tty settings */
 #define KERN_CHECKOPENEVT       70      /* spi: check the VOPENEVT flag on vnodes at open time */
-#define	KERN_MAXID		71	/* number of valid kern ids */
+#define	KERN_THREADNAME		71	/* set/get thread name */
+#define	KERN_MAXID		72	/* number of valid kern ids */
 /*
  * Don't add any more sysctls like this.  Instead, use the SYSCTL_*() macros
  * and OID_AUTO. This will have the added benefit of not having to recompile
@@ -386,7 +387,8 @@ struct ctlname {
 	{ "lctx", CTLTYPE_NODE }, \
 	{ "rage_vnode", CTLTYPE_INT }, \
 	{ "tty", CTLTYPE_NODE },	\
-	{ "check_openevt", CTLTYPE_INT } \
+	{ "check_openevt", CTLTYPE_INT }, \
+	{ "thread_name", CTLTYPE_STRING } \
 }
 
 /*
@@ -414,10 +416,10 @@ struct ctlname {
 #define	KERN_LCTX_ALL		0	/* everything */
 #define	KERN_LCTX_LCID		1	/* by login context id */
 
+
 /* 
  * KERN_PROC subtype ops return arrays of augmented proc structures:
  */
-#ifdef __APPLE_API_UNSTABLE
 
 struct _pcred {
 	char	pc_lock[72];		/* opaque content */
@@ -476,7 +478,6 @@ struct kinfo_lctx {
 };
 
 
-#endif /* __APPLE_API_UNSTABLE */
 
 /*
  * KERN_IPC identifiers
@@ -740,7 +741,7 @@ extern struct loadavg averunnable;
 #define	CTL_DEBUG_MAXID		20
 
 
-#if (CTL_MAXID != 9) || (KERN_MAXID != 71) || (VM_MAXID != 6) || (HW_MAXID != 26) || (USER_MAXID != 21) || (CTL_DEBUG_MAXID != 20)
+#if (CTL_MAXID != 9) || (KERN_MAXID != 72) || (VM_MAXID != 6) || (HW_MAXID != 26) || (USER_MAXID != 21) || (CTL_DEBUG_MAXID != 20)
 #error Use the SYSCTL_*() macros and OID_AUTO instead!
 #endif
 

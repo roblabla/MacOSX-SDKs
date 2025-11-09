@@ -4,11 +4,12 @@
  * Copyright (c) 1996-1998 Sun Microsystems, Inc.
  * Copyright (c) 1998-2000 by Scriptics Corporation.
  * Copyright (c) 2001 by Kevin B. Kenny.  All rights reserved.
+ * Copyright (c) 2007 Daniel A. Steffen <das@users.sourceforge.net>
  *
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * RCS: @(#) $Id: tclCompile.h,v 1.33 2002/10/09 11:54:05 das Exp $
+ * RCS: @(#) $Id: tclCompile.h,v 1.33.2.2 2007/09/13 15:28:11 das Exp $
  */
 
 #ifndef _TCLCOMPILATION
@@ -120,6 +121,36 @@ typedef struct CmdLocation {
     int srcOffset;		/* Offset of first char of the command. */
     int numSrcBytes;		/* Number of command source chars. */
 } CmdLocation;
+
+#ifdef TCL_TIP280
+/*
+ * TIP #280
+ * Structure to record additional location information for byte code.
+ * This information is internal and not saved. I.e. tbcload'ed code
+ * will not have this information. It records the lines for all words
+ * of all commands found in the byte code. The association with a
+ * ByteCode structure BC is done through the 'lineBCPtr' HashTable in
+ * Interp, keyed by the address of BC. Also recorded is information
+ * coming from the context, i.e. type of the frame and associated
+ * information, like the path of a sourced file.
+ */
+
+typedef struct ECL {
+  int  srcOffset; /* cmd location to find the entry */
+  int  nline;     /* Number of words in the command */
+  int* line;      /* line information for all words in the command */
+} ECL;
+typedef struct ExtCmdLoc {
+  int      type;  /* Context type */
+  Tcl_Obj* path;  /* Path of the sourced file the command is in */
+  ECL*     loc;   /* Command word locations (lines) */
+  int      nloc;  /* Number of allocated entries in 'loc' */
+  int      nuloc; /* Number of used entries in 'loc' */
+  ExtIndex* eiloc;
+  int neiloc;
+  int nueiloc;
+} ExtCmdLoc;
+#endif
 
 /*
  * CompileProcs need the ability to record information during compilation
@@ -264,6 +295,14 @@ typedef struct CompileEnv {
                                 /* Initial storage for cmd location map. */
     AuxData staticAuxDataArraySpace[COMPILEENV_INIT_AUX_DATA_SIZE];
                                 /* Initial storage for aux data array. */
+#ifdef TCL_TIP280
+    /* TIP #280 */
+    ExtCmdLoc* extCmdMapPtr;    /* Extended command location information
+				 * for 'info frame'. */
+    int        line;            /* First line of the script, based on the
+				 * invoking context, then the line of the
+				 * command currently compiled. */
+#endif
 } CompileEnv;
 
 /*
@@ -727,8 +766,14 @@ EXTERN int              TclInterpReady _ANSI_ARGS_((Tcl_Interp *interp));
  *----------------------------------------------------------------
  */
 
+#ifndef TCL_TIP280
 EXTERN int		TclCompEvalObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr));
+#else
+EXTERN int		TclCompEvalObj _ANSI_ARGS_((Tcl_Interp *interp,
+			    Tcl_Obj *objPtr, CONST CmdFrame* invoker,
+			    int word));
+#endif
 
 /*
  *----------------------------------------------------------------
@@ -784,9 +829,15 @@ EXTERN void		TclInitAuxDataTypeTable _ANSI_ARGS_((void));
 EXTERN void		TclInitByteCodeObj _ANSI_ARGS_((Tcl_Obj *objPtr,
 			    CompileEnv *envPtr));
 EXTERN void		TclInitCompilation _ANSI_ARGS_((void));
+#ifndef TCL_TIP280
 EXTERN void		TclInitCompileEnv _ANSI_ARGS_((Tcl_Interp *interp,
 			    CompileEnv *envPtr, char *string,
 			    int numBytes));
+#else
+EXTERN void		TclInitCompileEnv _ANSI_ARGS_((Tcl_Interp *interp,
+			    CompileEnv *envPtr, char *string,
+			    int numBytes, CONST CmdFrame* invoker, int word));
+#endif
 EXTERN void		TclInitJumpFixupArray _ANSI_ARGS_((
 			    JumpFixupArray *fixupArrayPtr));
 EXTERN void		TclInitLiteralTable _ANSI_ARGS_((
@@ -1035,12 +1086,190 @@ EXTERN int		TclCompileVariableCmd _ANSI_ARGS_((
 #define TclMin(i, j)   ((((int) i) < ((int) j))? (i) : (j))
 #define TclMax(i, j)   ((((int) i) > ((int) j))? (i) : (j))
 
+/*
+ * DTrace probe macros (NOPs if DTrace support is not enabled).
+ */
+
+/*
+ * Define the following macros to enable debug logging of the DTrace proc,
+ * cmd, and inst probes. Note that this does _not_ require a platform with
+ * DTrace, it simply logs all probe output to /tmp/tclDTraceDebug-[pid].log.
+ *
+ * If the second macro is defined, logging to file starts immediately,
+ * otherwise only after the first call to [tcl::dtrace]. Note that the debug
+ * probe data is always computed, even when it is not logged to file.
+ * 
+ * Defining the third macro enables debug logging of inst probes (disabled
+ * by default due to the significant performance impact).
+ */
+
+/*
+#define TCL_DTRACE_DEBUG 1
+#define TCL_DTRACE_DEBUG_LOG_ENABLED 1
+#define TCL_DTRACE_DEBUG_INST_PROBES 1
+*/
+
+#if !(defined(TCL_DTRACE_DEBUG) && defined(__GNUC__))
+
+#ifdef USE_DTRACE
+
+#include "tclDTrace.h"
+
+#if defined(__GNUC__) && __GNUC__ > 2
+/* Use gcc branch prediction hint to minimize cost of DTrace ENABLED checks. */
+#define unlikely(x) (__builtin_expect((x), 0))
+#else
+#define unlikely(x) (x)
+#endif
+
+#define TCL_DTRACE_PROC_ENTRY_ENABLED()	    unlikely(TCL_PROC_ENTRY_ENABLED())
+#define TCL_DTRACE_PROC_RETURN_ENABLED()    unlikely(TCL_PROC_RETURN_ENABLED())
+#define TCL_DTRACE_PROC_RESULT_ENABLED()    unlikely(TCL_PROC_RESULT_ENABLED())
+#define TCL_DTRACE_PROC_ARGS_ENABLED()	    unlikely(TCL_PROC_ARGS_ENABLED())
+#define TCL_DTRACE_PROC_ENTRY(a0, a1, a2)   TCL_PROC_ENTRY(a0, a1, a2)
+#define TCL_DTRACE_PROC_RETURN(a0, a1)	    TCL_PROC_RETURN(a0, a1)
+#define TCL_DTRACE_PROC_RESULT(a0, a1, a2, a3) TCL_PROC_RESULT(a0, a1, a2, a3)
+#define TCL_DTRACE_PROC_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	TCL_PROC_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#define TCL_DTRACE_CMD_ENTRY_ENABLED()	    unlikely(TCL_CMD_ENTRY_ENABLED())
+#define TCL_DTRACE_CMD_RETURN_ENABLED()	    unlikely(TCL_CMD_RETURN_ENABLED())
+#define TCL_DTRACE_CMD_RESULT_ENABLED()	    unlikely(TCL_CMD_RESULT_ENABLED())
+#define TCL_DTRACE_CMD_ARGS_ENABLED()	    unlikely(TCL_CMD_ARGS_ENABLED())
+#define TCL_DTRACE_CMD_ENTRY(a0, a1, a2)    TCL_CMD_ENTRY(a0, a1, a2)
+#define TCL_DTRACE_CMD_RETURN(a0, a1)	    TCL_CMD_RETURN(a0, a1)
+#define TCL_DTRACE_CMD_RESULT(a0, a1, a2, a3) TCL_CMD_RESULT(a0, a1, a2, a3)
+#define TCL_DTRACE_CMD_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	TCL_CMD_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#define TCL_DTRACE_INST_START_ENABLED()	    unlikely(TCL_INST_START_ENABLED())
+#define TCL_DTRACE_INST_DONE_ENABLED()	    unlikely(TCL_INST_DONE_ENABLED())
+#define TCL_DTRACE_INST_START(a0, a1, a2)   TCL_INST_START(a0, a1, a2)
+#define TCL_DTRACE_INST_DONE(a0, a1, a2)    TCL_INST_DONE(a0, a1, a2)
+
+#define TCL_DTRACE_TCL_PROBE_ENABLED()	    unlikely(TCL_TCL_PROBE_ENABLED())
+#define TCL_DTRACE_TCL_PROBE(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	TCL_TCL_PROBE(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#define TCL_DTRACE_DEBUG_LOG()
+
+#else /* USE_DTRACE */
+
+#define TCL_DTRACE_PROC_ENTRY_ENABLED()	    0
+#define TCL_DTRACE_PROC_RETURN_ENABLED()    0
+#define TCL_DTRACE_PROC_RESULT_ENABLED()    0
+#define TCL_DTRACE_PROC_ARGS_ENABLED()	    0
+#define TCL_DTRACE_PROC_ENTRY(a0, a1, a2)   {}
+#define TCL_DTRACE_PROC_RETURN(a0, a1)	    {}
+#define TCL_DTRACE_PROC_RESULT(a0, a1, a2, a3) {}
+#define TCL_DTRACE_PROC_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {}
+
+#define TCL_DTRACE_CMD_ENTRY_ENABLED()	    0
+#define TCL_DTRACE_CMD_RETURN_ENABLED()	    0
+#define TCL_DTRACE_CMD_RESULT_ENABLED()	    0
+#define TCL_DTRACE_CMD_ARGS_ENABLED()	    0
+#define TCL_DTRACE_CMD_ENTRY(a0, a1, a2)    {}
+#define TCL_DTRACE_CMD_RETURN(a0, a1)	    {}
+#define TCL_DTRACE_CMD_RESULT(a0, a1, a2, a3) {}
+#define TCL_DTRACE_CMD_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {}
+
+#define TCL_DTRACE_INST_START_ENABLED()	    0
+#define TCL_DTRACE_INST_DONE_ENABLED()	    0
+#define TCL_DTRACE_INST_START(a0, a1, a2)   {}
+#define TCL_DTRACE_INST_DONE(a0, a1, a2)    {}
+
+#define TCL_DTRACE_TCL_PROBE_ENABLED()	    0
+#define TCL_DTRACE_TCL_PROBE(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {}
+
+#endif /* USE_DTRACE */
+
+#else /* TCL_DTRACE_DEBUG */
+
+#define USE_DTRACE 1
+
+#if !defined(TCL_DTRACE_DEBUG_LOG_ENABLED) || !(TCL_DTRACE_DEBUG_LOG_ENABLED)
+#undef TCL_DTRACE_DEBUG_LOG_ENABLED
+#define TCL_DTRACE_DEBUG_LOG_ENABLED 0
+#endif
+
+#if !defined(TCL_DTRACE_DEBUG_INST_PROBES) || !(TCL_DTRACE_DEBUG_INST_PROBES)
+#undef TCL_DTRACE_DEBUG_INST_PROBES
+#define TCL_DTRACE_DEBUG_INST_PROBES 0
+#endif
+
+MODULE_SCOPE int tclDTraceDebugEnabled, tclDTraceDebugIndent;
+MODULE_SCOPE FILE *tclDTraceDebugLog;
+MODULE_SCOPE void TclDTraceOpenDebugLog(void);
+MODULE_SCOPE void TclDTraceInfo(Tcl_Obj *info, char **args, int *argsi);
+
+#define TCL_DTRACE_DEBUG_LOG() \
+	int tclDTraceDebugEnabled = TCL_DTRACE_DEBUG_LOG_ENABLED;\
+	int tclDTraceDebugIndent = 0; \
+	FILE *tclDTraceDebugLog = NULL; \
+	void TclDTraceOpenDebugLog(void) { char n[35]; \
+	sprintf(n, "/tmp/tclDTraceDebug-%lu.log", (unsigned long) getpid()); \
+	tclDTraceDebugLog = fopen(n, "a"); } \
+
+#define TclDTraceDbgMsg(p, m, ...) do { if (tclDTraceDebugEnabled) { \
+	int _l, _t = 0; if (!tclDTraceDebugLog) { TclDTraceOpenDebugLog(); } \
+	fprintf(tclDTraceDebugLog, "%.12s:%.4d:%n", strrchr(__FILE__, '/') + \
+		1, __LINE__, &_l); _t += _l; \
+	fprintf(tclDTraceDebugLog, " %.*s():%n", (_t < 18 ? 18 - _t : 0) + \
+		18, __func__, &_l); _t += _l; \
+	fprintf(tclDTraceDebugLog, "%*s" p "%n", (_t < 40 ? 40 - _t : 0) + \
+		2 * tclDTraceDebugIndent, "", &_l); _t += _l; \
+	fprintf(tclDTraceDebugLog, "%*s" m "\n", (_t < 64 ? 64 - _t : 1), "", \
+		##__VA_ARGS__); fflush(tclDTraceDebugLog); \
+	} } while (0)
+
+#define TCL_DTRACE_PROC_ENTRY_ENABLED()	    1
+#define TCL_DTRACE_PROC_RETURN_ENABLED()    1
+#define TCL_DTRACE_PROC_RESULT_ENABLED()    1
+#define TCL_DTRACE_PROC_ARGS_ENABLED()	    1
+#define TCL_DTRACE_PROC_ENTRY(a0, a1, a2) \
+	tclDTraceDebugIndent++; \
+	TclDTraceDbgMsg("-> proc-entry", "%s %d %p", a0, a1, a2)
+#define TCL_DTRACE_PROC_RETURN(a0, a1) \
+	TclDTraceDbgMsg("<- proc-return", "%s %d", a0, a1); \
+	tclDTraceDebugIndent--
+#define TCL_DTRACE_PROC_RESULT(a0, a1, a2, a3) \
+	TclDTraceDbgMsg(" | proc-result", "%s %d %s %p", a0, a1, a2, a3)
+#define TCL_DTRACE_PROC_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	TclDTraceDbgMsg(" | proc-args", "%s %s %s %s %s %s %s %s %s %s", a0, \
+		a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#define TCL_DTRACE_CMD_ENTRY_ENABLED()	    1
+#define TCL_DTRACE_CMD_RETURN_ENABLED()	    1
+#define TCL_DTRACE_CMD_RESULT_ENABLED()	    1
+#define TCL_DTRACE_CMD_ARGS_ENABLED()	    1
+#define TCL_DTRACE_CMD_ENTRY(a0, a1, a2) \
+	tclDTraceDebugIndent++; \
+	TclDTraceDbgMsg("-> cmd-entry", "%s %d %p", a0, a1, a2)
+#define TCL_DTRACE_CMD_RETURN(a0, a1) \
+	TclDTraceDbgMsg("<- cmd-return", "%s %d", a0, a1); \
+	tclDTraceDebugIndent--
+#define TCL_DTRACE_CMD_RESULT(a0, a1, a2, a3) \
+	TclDTraceDbgMsg(" | cmd-result", "%s %d %s %p", a0, a1, a2, a3)
+#define TCL_DTRACE_CMD_ARGS(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	TclDTraceDbgMsg(" | cmd-args", "%s %s %s %s %s %s %s %s %s %s", a0, \
+		a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#define TCL_DTRACE_INST_START_ENABLED()	    TCL_DTRACE_DEBUG_INST_PROBES
+#define TCL_DTRACE_INST_DONE_ENABLED()	    TCL_DTRACE_DEBUG_INST_PROBES
+#define TCL_DTRACE_INST_START(a0, a1, a2) \
+	TclDTraceDbgMsg(" | inst-start", "%s %d %p", a0, a1, a2)
+#define TCL_DTRACE_INST_DONE(a0, a1, a2) \
+	TclDTraceDbgMsg(" | inst-end", "%s %d %p", a0, a1, a2)
+
+#define TCL_DTRACE_TCL_PROBE_ENABLED()	    1
+#define TCL_DTRACE_TCL_PROBE(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
+	tclDTraceDebugEnabled = 1; \
+	TclDTraceDbgMsg(" | tcl-probe", "%s %s %s %s %s %s %s %s %s %s", a0, \
+		a1, a2, a3, a4, a5, a6, a7, a8, a9)
+
+#endif /* TCL_DTRACE_DEBUG */
+
 # undef TCL_STORAGE_CLASS
 # define TCL_STORAGE_CLASS DLLIMPORT
 
 #endif /* _TCLCOMPILATION */
-
-
-
-
-

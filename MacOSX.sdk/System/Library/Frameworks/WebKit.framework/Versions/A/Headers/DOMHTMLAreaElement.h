@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class NSString;
 @class NSURL;
@@ -37,7 +38,15 @@
 @property(copy) NSString *href;
 @property BOOL noHref;
 @property(copy) NSString *shape;
-@property int tabIndex;
 @property(copy) NSString *target;
-@property(readonly, copy) NSURL *absoluteLinkURL;
+@property(readonly, copy) NSString *hashName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *host AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *hostname AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *pathname AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *port AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *protocol AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *search AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSURL *absoluteLinkURL AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

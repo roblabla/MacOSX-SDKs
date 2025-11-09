@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,8 @@
 
 #import <WebKit/DOMObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMNode;
 @class NSString;
 
@@ -36,12 +38,14 @@
 - (DOMNode *)setNamedItem:(DOMNode *)node;
 - (DOMNode *)removeNamedItem:(NSString *)name;
 - (DOMNode *)item:(unsigned)index;
-- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName;
+- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (DOMNode *)setNamedItemNS:(DOMNode *)node;
-- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName;
+- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 
 @interface DOMNamedNodeMap (DOMNamedNodeMapDeprecated)
-- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI :(NSString *)localName DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI :(NSString *)localName DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI :(NSString *)localName AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI :(NSString *)localName AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

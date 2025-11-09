@@ -2,7 +2,7 @@
 // Name:        htmlfilt.h
 // Purpose:     filters
 // Author:      Vaclav Slavik
-// RCS-ID:      $Id: htmlfilt.h,v 1.11 2005/09/23 12:49:26 MR Exp $
+// RCS-ID:      $Id: htmlfilt.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) 1999 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

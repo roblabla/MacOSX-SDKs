@@ -3,14 +3,22 @@
  
      Contains:   Public interfaces for Apple Type Services components.
  
-     Version:    ATS-236~129
+     Copyright:  © 1997-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1997-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:00 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                ATSTypes.i
+                     Revision:        1.14
+                     Dated:           2007/04/24 03:44:18
+                     Last change by:  juliog
+                     Last comment:    <rdar://problem/5152407> File based filter for 64bit causes binary
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __ATSTYPES__
@@ -116,24 +124,24 @@ struct FMFontFamilyInstanceIterator {
 };
 typedef struct FMFontFamilyInstanceIterator FMFontFamilyInstanceIterator;
 enum {
-  kInvalidGeneration            = 0L,
+  kInvalidGeneration            = 0,
   kInvalidFontFamily            = -1,
-  kInvalidFont                  = 0L
+  kInvalidFont                  = 0
 };
 
 enum {
-  kFMCurrentFilterFormat        = 0L
+  kFMCurrentFilterFormat        = 0
 };
 
 typedef UInt32 FMFilterSelector;
 enum {
-  kFMFontTechnologyFilterSelector = 1L,
-  kFMFontContainerFilterSelector = 2L,
-  kFMGenerationFilterSelector   = 3L,
-  kFMFontFamilyCallbackFilterSelector = 4L,
-  kFMFontCallbackFilterSelector = 5L,
-  kFMFontDirectoryFilterSelector = 6L,
-  kFMFontFileRefFilterSelector  = 10L
+  kFMFontTechnologyFilterSelector = 1,
+  kFMFontContainerFilterSelector = 2,
+  kFMGenerationFilterSelector   = 3,
+  kFMFontFamilyCallbackFilterSelector = 4,
+  kFMFontCallbackFilterSelector = 5,
+  kFMFontDirectoryFilterSelector = 6,
+  kFMFontFileRefFilterSelector  = 10
 };
 
 enum {
@@ -272,10 +280,10 @@ enum {
 };
 
 enum {
-  kATSGenerationUnspecified     = 0L,
-  kATSFontContainerRefUnspecified = 0L,
-  kATSFontFamilyRefUnspecified  = 0L,
-  kATSFontRefUnspecified        = 0L
+  kATSGenerationUnspecified     = 0,
+  kATSFontContainerRefUnspecified = 0,
+  kATSFontFamilyRefUnspecified  = 0,
+  kATSFontRefUnspecified        = 0
 };
 
 /*

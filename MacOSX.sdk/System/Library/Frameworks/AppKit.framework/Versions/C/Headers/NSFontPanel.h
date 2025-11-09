@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 

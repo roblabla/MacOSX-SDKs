@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 1999 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c) 1999-2008 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLTYPES_H
@@ -55,7 +55,8 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
 	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
 	kCGLPFAAllowOfflineRenderers = 96,	/* show offline renderers in pixel formats      */
-	kCGLPFAVirtualScreenCount = 128, 	/* number of virtual screens in this format     */
+	kCGLPFAAcceleratedCompute =  97,	/* choose a hardware accelerated compute device */
+	kCGLPFAVirtualScreenCount = 128,	/* number of virtual screens in this format     */
 
 /*
 	Note: 
@@ -98,7 +99,8 @@ typedef enum _CGLRendererProperty {
 	kCGLRPGPUVertProcCapable  = 122,	/* renderer capable of GPU vertex processing     */
 	kCGLRPGPUFragProcCapable  = 123,	/* renderer capable of GPU fragment processing   */
 	kCGLRPRendererCount       = 128,	/* the number of renderers in this renderer info */
-	kCGLRPOnline              = 129 	/* a boolean stating if renderer is on/offline   */
+	kCGLRPOnline              = 129,	/* a boolean stating if renderer is on/offline   */
+	kCGLRPAcceleratedCompute  = 130 	/* hardware accelerated compute device           */
 } CGLRendererProperty;
 
 /*
@@ -109,9 +111,9 @@ typedef enum _CGLContextEnable {
 	kCGLCESwapLimit        = 203,	/* Enable or disable the swap async limit        */
 	kCGLCERasterization    = 221,	/* Enable or disable all rasterization           */
 	kCGLCEStateValidation  = 301,	/* Validate state for multi-screen functionality */
-	kCGLCESurfaceBackingSize = 305, /* Enable or disable surface backing size override */
+	kCGLCESurfaceBackingSize = 305,  /* Enable or disable surface backing size override */
 	kCGLCEDisplayListOptimization = 307,  /* Ability to turn off display list optimizer */
-	kCGLCEMPEngine = 313            /* Enable or disable multi-threaded GL engine    */
+	kCGLCEMPEngine         = 313 	/* Enable or disable multi-threaded GL engine    */
 } CGLContextEnable;
 
 /*
@@ -119,7 +121,7 @@ typedef enum _CGLContextEnable {
 */
 typedef enum _CGLContextParameter {
 	kCGLCPSwapRectangle          = 200, /* 4 params.  Set or get the swap rectangle {x, y, w, h}        */
-	kCGLCPSwapInterval           = 222, /* 1 param.   0 -> Don't sync, n -> Sync every n retrace        */
+	kCGLCPSwapInterval           = 222, /* 1 param.   0 -> Don't sync, 1 -> Sync to vertical retrace    */
 	kCGLCPDispatchTableSize      = 224, /* 1 param.   Get the dispatch table size                       */
 	/* Note: kCGLCPClientStorage is always a pointer-sized parameter, even though the API claims GLint. */
 	kCGLCPClientStorage          = 226, /* 1 param.   Context specific generic storage                  */

@@ -81,8 +81,8 @@ extern NSString * const XGActionMonitorResultsOutputFilesKey;
 	@discussion This class allows you to initiate and monitor an action performed on a
 	resource. You normally do not instantiate this class directly, rather you obtain an
 	instance from a performXXXAction method of a resource.  Action monitors obtained from
-	a resource have alreadying had the perfromAction method called upon them.  If you
-	create your own action monitors you must call perfromAction to initiate the action.
+	a resource have alreadying had the performAction method called upon them.  If you
+	create your own action monitors you must call performAction to initiate the action.
     Once an action monitor's action has either succeeded or failed the outcome of the action
 	monitor changes.  Following a change in the outcome the results dictionary contains the
 	result of the action, if any.
@@ -140,7 +140,7 @@ extern NSString * const XGActionMonitorResultsOutputFilesKey;
 	@method performAction
 	@abstract Initates the action being monitored.
 	@discussion This method does not need to be called on XGActionMonitor instances
-	that are returned by XGResource perfromXXXAction methods.
+	that are returned by XGResource performXXXAction methods.
 */
 - (void)performAction;
 

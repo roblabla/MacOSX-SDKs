@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -72,7 +72,7 @@
 #ifndef _SYS_SOCKET_H_
 #define	_SYS_SOCKET_H_
 
-#include <sys/_types.h>
+#include <sys/types.h>
 #include <sys/cdefs.h>
 #include <machine/_param.h>
 
@@ -193,12 +193,15 @@ struct iovec {
 #define SO_REUSESHAREUID	0x1025		/* APPLE: Allow reuse of port/socket by different userids */
 #ifdef __APPLE_API_PRIVATE
 #define SO_NOTIFYCONFLICT	0x1026	/* APPLE: send notification if there is a bind on a port which is already in use */
+#define	SO_UPCALLCLOSEWAIT	0x1027	/* APPLE: block on close until an upcall returns */
 #endif
 #define SO_LINGER_SEC	0x1080          /* linger on close if data present (in seconds) */
 #define SO_RESTRICTIONS	0x1081	/* APPLE: deny inbound/outbound/both/flag set */
 #define SO_RESTRICT_DENYIN		0x00000001	/* flag for SO_RESTRICTIONS - deny inbound */
 #define SO_RESTRICT_DENYOUT		0x00000002	/* flag for SO_RESTRICTIONS - deny outbound */
 #define SO_RESTRICT_DENYSET		0x80000000	/* flag for SO_RESTRICTIONS - deny has been set */
+#define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
+#define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
 #define	SO_LABEL	0x1010		/* socket's MAC label */
 #define	SO_PEERLABEL	0x1011		/* socket's peer MAC label */
@@ -217,6 +220,24 @@ struct	accept_filter_arg {
 	char	af_name[16];
 	char	af_arg[256-16];
 };
+#endif
+
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#ifdef __APPLE__
+
+/*
+ * Structure to control non-portable Sockets extension to POSIX  
+ */
+struct so_np_extensions {
+	u_int32_t	npx_flags;
+	u_int32_t	npx_mask;
+};
+
+#define SONPX_SETOPTSHUT	0x000000001     /* flag for allowing setsockopt after shutdown */
+
+
+
+#endif
 #endif
 
 /*
@@ -285,7 +306,8 @@ struct	accept_filter_arg {
 #ifndef __APPLE__
 #define	AF_NETGRAPH	32		/* Netgraph sockets */
 #endif
-#define	AF_MAX		37
+#define AF_IEEE80211    37              /* IEEE 802.11 protocol */
+#define	AF_MAX		38
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -505,22 +527,37 @@ struct cmsgcred {
 
 /* given pointer to struct cmsghdr, return pointer to data */
 #define	CMSG_DATA(cmsg)		((unsigned char *)(cmsg) + \
-				 __DARWIN_ALIGN(sizeof(struct cmsghdr)))
+				 __DARWIN_ALIGN32(sizeof(struct cmsghdr)))
 
-/* given pointer to struct cmsghdr, return pointer to next cmsghdr */
-#define	CMSG_NXTHDR(mhdr, cmsg)	\
-	(((unsigned char *)(cmsg) + __DARWIN_ALIGN((__darwin_intptr_t)(cmsg)->cmsg_len) + \
-	  __DARWIN_ALIGN(sizeof(struct cmsghdr)) > \
-	    (unsigned char *)(mhdr)->msg_control + (mhdr)->msg_controllen) ? \
-	    (struct cmsghdr *)0L /* NULL */ : \
-	    (struct cmsghdr *)((unsigned char *)(cmsg) + __DARWIN_ALIGN((__darwin_intptr_t)(cmsg)->cmsg_len)))
+/*
+ * RFC 2292 requires to check msg_controllen, in case that the kernel returns
+ * an empty list for some reasons.
+ */
+#define CMSG_FIRSTHDR(mhdr) \
+        ((mhdr)->msg_controllen >= sizeof(struct cmsghdr) ? \
+         (struct cmsghdr *)(mhdr)->msg_control : \
+         (struct cmsghdr *)0L)
 
-#define	CMSG_FIRSTHDR(mhdr)	((struct cmsghdr *)(mhdr)->msg_control)
+
+/* 
+ * Given pointer to struct cmsghdr, return pointer to next cmsghdr
+ * RFC 2292 says that CMSG_NXTHDR(mhdr, NULL) is equivalent to CMSG_FIRSTHDR(mhdr)
+ */
+#define	CMSG_NXTHDR(mhdr, cmsg)						\
+	((char *)(cmsg) == (char *)0L ? CMSG_FIRSTHDR(mhdr) :		\
+	 ((((unsigned char *)(cmsg) +					\
+	    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len) +		\
+	    __DARWIN_ALIGN32(sizeof(struct cmsghdr))) >			\
+	    ((unsigned char *)(mhdr)->msg_control +			\
+	     (mhdr)->msg_controllen)) ?					\
+	  (struct cmsghdr *)0L /* NULL */ :				\
+	  (struct cmsghdr *)((unsigned char *)(cmsg) +			\
+	 		    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len))))
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /* RFC 2292 additions */
-#define	CMSG_SPACE(l)		(__DARWIN_ALIGN(sizeof(struct cmsghdr)) + __DARWIN_ALIGN(l))
-#define	CMSG_LEN(l)		(__DARWIN_ALIGN(sizeof(struct cmsghdr)) + (l))
+#define	CMSG_SPACE(l)		(__DARWIN_ALIGN32(sizeof(struct cmsghdr)) + __DARWIN_ALIGN32(l))
+#define	CMSG_LEN(l)		(__DARWIN_ALIGN32(sizeof(struct cmsghdr)) + (l))
 
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 

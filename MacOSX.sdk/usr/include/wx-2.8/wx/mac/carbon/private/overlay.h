@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     2006-10-20
-// RCS-ID:      $Id: overlay.h,v 1.1 2006/10/24 12:26:33 VS Exp $
+// RCS-ID:      $Id: overlay.h 42340 2006-10-24 12:29:14Z VS $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

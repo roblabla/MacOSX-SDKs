@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     25-Sept-2000
-// RCS-ID:      $Id: _filesys.i,v 1.16 2006/11/14 22:03:45 RD Exp $
+// RCS-ID:      $Id: _filesys.i 46591 2007-06-21 15:26:35Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -245,7 +245,7 @@ public:
         wxPyEndBlockThreads(blocked);
 
         wxMemoryFSHandler::AddFile(filename, ptr, size);
-    }
+    }    
 %}
 
 
@@ -280,6 +280,26 @@ public:
     // Add a file to the memory FS
     %pythoncode { AddFile = staticmethod(MemoryFSHandler_AddFile) }
 
+    %extend {
+        static void AddFileWithMimeType(const wxString& filename,
+                                        PyObject* data,
+                                        const wxString& mimetype)
+        {
+            if (! PyString_Check(data)) {
+                wxPyBLOCK_THREADS(PyErr_SetString(PyExc_TypeError,
+                                                  "Expected string object"));
+                return;
+            }
+
+            wxPyBlock_t blocked = wxPyBeginBlockThreads();
+            void*  ptr = (void*)PyString_AsString(data);
+            size_t size = PyString_Size(data);
+            wxPyEndBlockThreads(blocked);
+
+            wxMemoryFSHandler::AddFileWithMimeType(filename, ptr, size, mimetype);
+        }
+    }
+    
     bool CanOpen(const wxString& location);
     %newobject OpenFile;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);

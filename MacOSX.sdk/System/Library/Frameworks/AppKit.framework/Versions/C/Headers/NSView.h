@@ -1,7 +1,7 @@
 /*
 	NSView.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,10 +12,11 @@
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSAnimation.h>
 
-@class NSBitmapImageRep, NSCursor, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSWindow, NSAttributedString;
+@class NSBitmapImageRep, NSCursor, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 @class CIFilter, CALayer, NSDictionary, NSScreen, NSShadow, NSTrackingArea;
 #endif
+
 
 enum {
     NSViewNotSizable			=  0,
@@ -34,6 +35,34 @@ enum {
     NSGrooveBorder			= 3
 };
 typedef NSUInteger NSBorderType;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+enum {
+    NSViewLayerContentsRedrawNever                  = 0,
+    NSViewLayerContentsRedrawOnSetNeedsDisplay      = 1,
+    NSViewLayerContentsRedrawDuringViewResize       = 2,
+    NSViewLayerContentsRedrawBeforeViewResize       = 3
+};
+#endif
+typedef NSInteger NSViewLayerContentsRedrawPolicy;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+enum {
+    NSViewLayerContentsPlacementScaleAxesIndependently      =  0,
+    NSViewLayerContentsPlacementScaleProportionallyToFit    =  1,
+    NSViewLayerContentsPlacementScaleProportionallyToFill   =  2,
+    NSViewLayerContentsPlacementCenter                      =  3,
+    NSViewLayerContentsPlacementTop                         =  4,
+    NSViewLayerContentsPlacementTopRight                    =  5,
+    NSViewLayerContentsPlacementRight                       =  6,
+    NSViewLayerContentsPlacementBottomRight                 =  7,
+    NSViewLayerContentsPlacementBottom                      =  8,
+    NSViewLayerContentsPlacementBottomLeft                  =  9,
+    NSViewLayerContentsPlacementLeft                        = 10,
+    NSViewLayerContentsPlacementTopLeft                     = 11
+};
+#endif
+typedef NSInteger NSViewLayerContentsPlacement;
 
 typedef struct __VFlags {
 #ifdef __BIG_ENDIAN__
@@ -206,6 +235,13 @@ typedef NSInteger NSToolTipTag;
 - (NSRect)convertRectFromBase:(NSRect)aRect;
 #endif
 
+/* Reports whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO.
+*/
+- (BOOL)canDrawConcurrently AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Sets whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO for most kinds of views.  May be set to YES to enable threaded drawing for a particular view instance.  The view's window must also have its "allowsConcurrentViewDrawing" property set to YES (the default) for threading of view drawing to actually take place. */
+- (void)setCanDrawConcurrently:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (BOOL)canDraw;
 - (void)setNeedsDisplay:(BOOL)flag;
 - (void)setNeedsDisplayInRect:(NSRect)invalidRect;
@@ -226,7 +262,7 @@ typedef NSInteger NSToolTipTag;
 - (void)displayIfNeededInRect:(NSRect)rect;
 - (void)displayRectIgnoringOpacity:(NSRect)rect;
 - (void)displayIfNeededInRectIgnoringOpacity:(NSRect)rect;
-- (void)drawRect:(NSRect)rect;
+- (void)drawRect:(NSRect)dirtyRect;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)displayRectIgnoringOpacity:(NSRect)aRect inContext:(NSGraphicsContext *)context;
 
@@ -264,6 +300,16 @@ typedef NSInteger NSToolTipTag;
 - (BOOL)mouseDownCanMoveWindow;
 #endif
 
+/* By default, views do not accept touch events
+*/
+- (void)setAcceptsTouchEvents:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)acceptsTouchEvents AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* In some cases, the user may rest a thumb or other touch on the device. By default, these touches are not delivered and are not included in the event's set of touches. Touches may transition in and out of resting at any time. Unless the view wants restingTouches, began / ended events are simlulated as touches transition from resting to active and vice versa.
+*/
+- (void)setWantsRestingTouches:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)wantsRestingTouches AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (void)addCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
 - (void)removeCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
 - (void)discardCursorRects;
@@ -271,6 +317,14 @@ typedef NSInteger NSToolTipTag;
 
 - (NSTrackingRectTag)addTrackingRect:(NSRect)aRect owner:(id)anObject userData:(void *)data assumeInside:(BOOL)flag;
 - (void)removeTrackingRect:(NSTrackingRectTag)tag;
+
+- (CALayer *)makeBackingLayer AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+- (NSViewLayerContentsRedrawPolicy)layerContentsRedrawPolicy AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setLayerContentsRedrawPolicy:(NSViewLayerContentsRedrawPolicy)newPolicy AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+- (NSViewLayerContentsPlacement)layerContentsPlacement AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setLayerContentsPlacement:(NSViewLayerContentsPlacement)newPlacement AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (void)setWantsLayer:(BOOL)flag;
@@ -337,6 +391,11 @@ typedef NSInteger NSToolTipTag;
 /* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
 - (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(NSInteger *)count;
 #endif
+
+/* Text Input */
+/* Returns NSTextInputContext object for the receiver. Returns nil if the receiver doesn't conform to NSTextInputClient protocol.
+ */
+- (NSTextInputContext *)inputContext AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 @end
 
 @interface NSObject(NSToolTipOwner)
@@ -426,9 +485,41 @@ typedef NSInteger NSToolTipTag;
 @end
 
 /* Constants for options when entering and exiting full screen mode */
-APPKIT_EXTERN NSString * const NSFullScreenModeAllScreens;     // NSNumber numberWithBool:YES/NO
-APPKIT_EXTERN NSString * const NSFullScreenModeSetting;        // NSDictionary (obtained from CGSDisplay based functions)
-APPKIT_EXTERN NSString * const NSFullScreenModeWindowLevel;	   // NSNumber numberWithInt:windowLevel
+APPKIT_EXTERN NSString * const NSFullScreenModeAllScreens;                      // NSNumber numberWithBool:YES/NO
+APPKIT_EXTERN NSString * const NSFullScreenModeSetting;                         // NSDictionary (obtained from CGSDisplay based functions)
+APPKIT_EXTERN NSString * const NSFullScreenModeWindowLevel;                     // NSNumber numberWithInt:windowLevel
+APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions;  // NSNumber numberWithUnsignedInteger:(NSApplicationPresentationOptions flags)
+#endif
+
+@interface NSView(NSDefinition)
+/* Shows a window that displays the definition (or other subject depending on available dictionaries) of the specified attributed string.  This method can be used for implementing the same functionality as NSTextView's 'Look Up in Dictionary' contextual menu on a custom view.
+ 
+ textBaselineOrigin specifies the baseline origin of attrString in the receiver view coordinate system.  If a small overlay window is selected as default presentation (see NSDefinitionPresentationTypeKey option for details), the overlay text would be rendered starting from the location.  Otherwise, 'Dictionary' application will be invoked to show the definition of the specified string.
+ 
+ This method is equivalent to using showDefinitionForAttributedString:range:options:baselineOriginProvider: and passing attrString with the whole range, nil options, and an originProvider which returns textBaselineOrigin.
+ */
+- (void)showDefinitionForAttributedString:(NSAttributedString *)attrString atPoint:(NSPoint)textBaselineOrigin AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+#if NS_BLOCKS_AVAILABLE
+/* Takes a whole attributed string with the target range (normally, this is the selected range), and shows a window displaying the definition of the specified range.  The caller can pass a zero-length range and the appropriate range will be auto-detected around the range's offset.  That's the recommended approach when there is no selection.
+ 
+ This method also an 'options' dictionary containing options described below as key-value pairs (can be nil).
+ 
+ Except when NSDefinitionPresentationTypeKey with NSDefinitionPresentationTypeDictionaryApplication is specified in options, the caller must supply an originProvider Block which returns the baseline origin of the first character at proposed adjustedRange in the receiver view coordinate system.
+ 
+ If the receiver is an NSTextView, both attrString and originProvider may be nil, in which case the text view will automatically supply values suitable for displaying definitions for the specified range within its text content.  This method does not cause scrolling, so clients should perform any necessary scrolling before calling this method.
+ */
+- (void)showDefinitionForAttributedString:(NSAttributedString *)attrString range:(NSRange)targetRange options:(NSDictionary *)options baselineOriginProvider:(NSPoint (^)(NSRange adjustedRange))originProvider AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
+@end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/* NSDefinitionPresentationTypeKey is an optional key in 'options' that specifies the presentation type of the definition display.  The possible values are NSDefinitionPresentationTypeOverlay that produces a small overlay window at the string location, or NSDefinitionPresentationTypeDictionaryApplication that invokes 'Dictionary' application to display the definition.  Without this option, the definition will be shown in either of those presentation forms depending on the 'Contextual Menu:' setting in Dictionary application preferences.
+ */
+APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeOverlay AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif
 
 /* Notifications */

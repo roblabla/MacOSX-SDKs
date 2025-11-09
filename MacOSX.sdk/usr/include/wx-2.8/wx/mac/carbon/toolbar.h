@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: toolbar.h,v 1.12.4.1 2007/01/25 23:35:01 RD Exp $
+// RCS-ID:      $Id: toolbar.h 44317 2007-01-25 23:35:07Z RD $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

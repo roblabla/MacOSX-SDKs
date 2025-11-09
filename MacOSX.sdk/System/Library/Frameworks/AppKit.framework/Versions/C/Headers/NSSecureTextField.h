@@ -1,7 +1,7 @@
 /*
         NSSecureTextField.h
         Application Kit
-        Copyright (c) 1995-2007, Apple Inc.
+        Copyright (c) 1995-2009, Apple Inc.
         All rights reserved.
 */
 

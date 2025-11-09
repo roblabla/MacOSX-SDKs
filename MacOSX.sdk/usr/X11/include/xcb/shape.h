@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from shape.xml by c-client.xsl using XSLT.
+ * This file generated automatically from shape.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_SHAPE_MAJOR_VERSION 1
 #define XCB_SHAPE_MINOR_VERSION 1
@@ -73,6 +77,7 @@ typedef struct xcb_shape_notify_event_t {
     uint16_t         extents_height; /**<  */
     xcb_timestamp_t  server_time; /**<  */
     uint8_t          shaped; /**<  */
+    uint8_t          pad0[11]; /**<  */
 } xcb_shape_notify_event_t;
 
 /**
@@ -234,6 +239,7 @@ typedef struct xcb_shape_select_input_request_t {
     uint16_t     length; /**<  */
     xcb_window_t destination_window; /**<  */
     uint8_t      enable; /**<  */
+    uint8_t      pad0[3]; /**<  */
 } xcb_shape_select_input_request_t;
 
 /**
@@ -285,6 +291,7 @@ typedef struct xcb_shape_get_rectangles_request_t {
     uint16_t         length; /**<  */
     xcb_window_t     window; /**<  */
     xcb_shape_kind_t source_kind; /**<  */
+    uint8_t          pad0[3]; /**<  */
 } xcb_shape_get_rectangles_request_t;
 
 /**
@@ -440,6 +447,8 @@ xcb_shape_query_version_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shape_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -798,6 +807,8 @@ xcb_shape_query_extents_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shape_query_extents_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -929,6 +940,8 @@ xcb_shape_input_selected_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shape_input_selected_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1050,6 +1063,8 @@ xcb_shape_get_rectangles_rectangles_iterator (const xcb_shape_get_rectangles_rep
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shape_get_rectangles_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1068,6 +1083,10 @@ xcb_shape_get_rectangles_reply (xcb_connection_t                   *c  /**< */,
                                 xcb_shape_get_rectangles_cookie_t   cookie  /**< */,
                                 xcb_generic_error_t               **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

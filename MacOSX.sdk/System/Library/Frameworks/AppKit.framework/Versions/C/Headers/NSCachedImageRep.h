@@ -1,7 +1,7 @@
 /*
 	NSCachedImageRep.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 
 @class NSWindow;
 
+// this entire class is deprecated.  Please see the 10.6 AppKit release notes for more information.
 @interface NSCachedImageRep : NSImageRep {
     /*All instance variables are private*/
     NSPoint _origin;
@@ -18,12 +19,12 @@
 }
 
 /* References the specified rect within the window; the window is retained */
-- (id)initWithWindow:(NSWindow *)win rect:(NSRect)rect;
+- (id)initWithWindow:(NSWindow *)win rect:(NSRect)rect AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /* Creates a location in some window. Will be freed when rep is freed */
-- (id)initWithSize:(NSSize)size depth:(NSWindowDepth)depth separate:(BOOL)flag alpha:(BOOL)alpha;
+- (id)initWithSize:(NSSize)size depth:(NSWindowDepth)depth separate:(BOOL)flag alpha:(BOOL)alpha AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
-- (NSWindow *)window;
-- (NSRect)rect;
+- (NSWindow *)window AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+- (NSRect)rect AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 @end

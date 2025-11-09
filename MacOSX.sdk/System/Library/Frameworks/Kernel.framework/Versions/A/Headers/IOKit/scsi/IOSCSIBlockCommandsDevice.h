@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,9 +27,9 @@
 
 #if defined(KERNEL) && defined(__cplusplus)
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Constants
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // SBC power states as defined in T10:996D SCSI Block Commands - 3 (SBC-3)
 // Revision 8c, November 13, 1997, pages 10-11.
@@ -50,9 +50,9 @@ enum
 };
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // General IOKit headers
 #include <IOKit/IOLib.h>
@@ -71,9 +71,9 @@ enum
 // IOSCSIBlockCommandsDevice class.
 class SCSIBlockCommands;
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOSCSIBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
@@ -82,8 +82,14 @@ class IOSCSIBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 	
+
+#ifndef __LP64__
+	
 	SCSIBlockCommands *		fSCSIBlockCommandObject;
 	SCSIBlockCommands *		GetSCSIBlockCommandObject ( void );
+	
+#endif	/* !__LP64__ */
+
 	IOReturn				GetWriteCacheState ( IOMemoryDescriptor * 	buffer,
 												 UInt8					modePageControlValue );
 	
@@ -99,6 +105,8 @@ protected:
 		bool				fDeviceIsShared;
 		UInt64				fMediumBlockCount64;
 		bool				fDeviceHasSATTranslation;
+		bool				fProtocolSpecificPowerControl;
+		bool				fRequiresEjectWithStartStopUnit;
 	};
     IOSCSIBlockCommandsDeviceExpansionData * fIOSCSIBlockCommandsDeviceReserved;
 	
@@ -122,6 +130,13 @@ protected:
 	#define fMediumBlockCount64	fIOSCSIBlockCommandsDeviceReserved->fMediumBlockCount64
 	
 	#define fDeviceHasSATTranslation fIOSCSIBlockCommandsDeviceReserved->fDeviceHasSATTranslation
+	
+	// Device support protocol specific power off
+	#define fProtocolSpecificPowerControl fIOSCSIBlockCommandsDeviceReserved->fProtocolSpecificPowerControl
+	
+	// Device requires START_STOP_UNIT for ejects, regardless if PREVENT_ALLOW_MEIDUMREMOVAL
+	// failed. 
+	#define fRequiresEjectWithStartStopUnit fIOSCSIBlockCommandsDeviceReserved->fRequiresEjectWithStartStopUnit
 	
 private:
 	/* OBSOLETE. Use IOSCSIPrimaryCommandsDevice::Get/SetANSIVersion */
@@ -173,15 +188,21 @@ protected:
 	virtual void		ResumeDeviceSupport ( void );
 	virtual void		StopDeviceSupport ( void );
 	virtual void		TerminateDeviceSupport ( void );
+
+	virtual void 		free ( void );
+
+#ifndef __LP64__
 	
 	// This method will retrieve the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the subclasses base command set object.
 	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
 	
-	// ---- Methods used for   ----
 	virtual bool		CreateCommandSetObjects ( void );
 	virtual void		FreeCommandSetObjects ( void );
+	
+#endif	/* !__LP64__ */
+
 	virtual bool		ClearNotReadyStatus ( void );
 	virtual void 		CreateStorageServiceNub ( void );
 	virtual bool		DetermineDeviceCharacteristics ( void );
@@ -331,6 +352,8 @@ public:
 	
 protected:
 	
+
+#ifndef __LP64__
 	
 	// Command methods to access all commands available to SBC based devices.
 	virtual bool ERASE_10 (
@@ -433,7 +456,7 @@ protected:
 						SCSICmdField4Byte			TRANSFER_LENGTH,
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
-		
+	
 	virtual bool READ_6 (
 						SCSITaskIdentifier			request,
 						IOMemoryDescriptor *		dataBuffer,
@@ -442,6 +465,8 @@ protected:
 						SCSICmdField1Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
 
+#endif	/* __LP64__ */
+	
 	virtual bool READ_10 (
 						SCSITaskIdentifier			request,
 						IOMemoryDescriptor *		dataBuffer,
@@ -520,6 +545,8 @@ protected:
 						SCSICmdField4Byte			ALLOCATION_LENGTH,
 						SCSICmdField1Bit 			PMI,
 						SCSICmdField1Byte 			CONTROL );
+
+#ifndef __LP64__
 
 	virtual bool READ_DEFECT_DATA_10 (
 						SCSITaskIdentifier			request,
@@ -672,6 +699,8 @@ protected:
 						SCSICmdField4Byte 			NUMBER_OF_BLOCKS,
 						SCSICmdField1Byte 			CONTROL );
 
+#endif	/* __LP64__ */
+	
 	virtual bool START_STOP_UNIT (
 						SCSITaskIdentifier			request,
 						SCSICmdField1Bit 			IMMED,
@@ -707,6 +736,8 @@ protected:
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
 						
+#ifndef __LP64__
+
 	virtual bool UPDATE_BLOCK (
 						SCSITaskIdentifier			request,
 						IOMemoryDescriptor *		dataBuffer,
@@ -765,7 +796,7 @@ protected:
 						SCSICmdField4Byte			VERIFICATION_LENGTH,
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
-
+	
 	virtual bool WRITE_6 (
 						SCSITaskIdentifier			request,
 						IOMemoryDescriptor *		dataBuffer,
@@ -773,6 +804,8 @@ protected:
 						SCSICmdField2Byte 			LOGICAL_BLOCK_ADDRESS,
 						SCSICmdField1Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
+	
+#endif	/* __LP64__ */
 
 	virtual bool WRITE_10 (
 						SCSITaskIdentifier			request,
@@ -838,6 +871,8 @@ protected:
 						SCSICmdField4Byte			TRANSFER_LENGTH,
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
+
+#ifndef __LP64__
 				
 	virtual bool WRITE_AND_VERIFY_10 (
 						SCSITaskIdentifier			request,
@@ -900,7 +935,8 @@ protected:
 						SCSICmdField4Byte 			TRANSFER_LENGTH,
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte 			CONTROL );
-						
+
+
 	virtual bool WRITE_LONG (
 						SCSITaskIdentifier			request,
 						IOMemoryDescriptor *		dataBuffer,
@@ -1042,6 +1078,9 @@ protected:
 						SCSICmdField2Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
 
+#endif	/* __LP64__ */
+	
+	
 	/* Added with 10.2 */	
 	OSMetaClassDeclareReservedUsed ( IOSCSIBlockCommandsDevice, 1 );
 	
@@ -1063,17 +1102,30 @@ protected:
 	
 	
 	/* Added with 10.3.3 */		
-	OSMetaClassDeclareReservedUsed ( IOSCSIReducedBlockCommandsDevice, 3 );
+	OSMetaClassDeclareReservedUsed ( IOSCSIBlockCommandsDevice, 3 );
 	
 protected:
 
 	virtual	void AsyncReadWriteCompletion ( SCSITaskIdentifier completedTask );
 	
 	
+	/* Added with 10.6.0 */
+	OSMetaClassDeclareReservedUsed ( IOSCSIBlockCommandsDevice, 4 );
+	
+public:
+	
+	virtual	IOReturn AsyncReadWrite (
+							IOMemoryDescriptor *	buffer,
+							UInt64					startBlock,
+							UInt64					blockCount,
+							UInt64					blockSize,
+							IOStorageAttributes *	attributes,
+							void * 					clientData );
+	
+	
 private:
 	
 	// Space reserved for future expansion.
-	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 4 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 5 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 6 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 7 );

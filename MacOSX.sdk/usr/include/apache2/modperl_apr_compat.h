@@ -1,8 +1,9 @@
-/* Copyright 2003-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -108,7 +109,7 @@
 #ifndef APR_FOPEN_READ
 #define APR_FOPEN_READ        APR_READ
 #endif
-#ifndef APR_FOPEN_WRITE 
+#ifndef APR_FOPEN_WRITE
 #define APR_FOPEN_WRITE       APR_WRITE
 #endif
 #ifndef APR_FOPEN_CREATE
@@ -123,16 +124,16 @@
 #ifndef APR_FOPEN_BINARY
 #define APR_FOPEN_BINARY      APR_BINARY
 #endif
-#ifndef APR_FOPEN_EXCL 
+#ifndef APR_FOPEN_EXCL
 #define APR_FOPEN_EXCL        APR_EXCL
 #endif
-#ifndef APR_FOPEN_BUFFERED 
+#ifndef APR_FOPEN_BUFFERED
 #define APR_FOPEN_BUFFERED    APR_BUFFERED
 #endif
 #ifndef APR_FOPEN_DELONCLOSE
 #define APR_FOPEN_DELONCLOSE  APR_DELONCLOSE
 #endif
-#ifndef APR_FOPEN_XTHREAD 
+#ifndef APR_FOPEN_XTHREAD
 #define APR_FOPEN_XTHREAD     APR_XTHREAD
 #endif
 #ifndef APR_FOPEN_SHARELOCK

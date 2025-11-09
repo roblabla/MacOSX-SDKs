@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     2006-01-29
-// RCS-ID:      $Id: toolbook.h,v 1.6 2006/10/09 21:29:04 VZ Exp $
+// RCS-ID:      $Id: toolbook.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2006 Julian Smart
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,8 +18,8 @@
 
 #include "wx/bookctrl.h"
 
-class WXDLLEXPORT wxToolBarBase;
-class WXDLLEXPORT wxCommandEvent;
+class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
+class WXDLLIMPEXP_FWD_CORE wxCommandEvent;
 
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED;
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING;

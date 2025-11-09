@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -177,19 +177,23 @@ protected:
      * Attach the given media object to the device tree plane.
      */
 
+#ifdef __LP64__
+    virtual bool attachMediaObjectToDeviceTree(IOMedia * media);
+#else /* !__LP64__ */
     virtual bool attachMediaObjectToDeviceTree(IOMedia *    media,
-                                               IOOptionBits options = 0);
-
-    OSMetaClassDeclareReservedUsed(IOPartitionScheme, 0); /* 10.5.0 */
+                                               IOOptionBits options = 0); /* 10.5.0 */
+#endif /* !__LP64__ */
 
     /*
      * Detach the given media object from the device tree plane.
      */
 
+#ifdef __LP64__
+    virtual void detachMediaObjectFromDeviceTree(IOMedia * media);
+#else /* !__LP64__ */
     virtual void detachMediaObjectFromDeviceTree(IOMedia *    media,
-                                                 IOOptionBits options = 0);
-
-    OSMetaClassDeclareReservedUsed(IOPartitionScheme, 1); /* 10.5.0 */
+                                                 IOOptionBits options = 0); /* 10.5.0 */
+#endif /* !__LP64__ */
 
     /*
      * Updates a set of existing partitions, represented by partitionsOld,
@@ -202,9 +206,7 @@ protected:
      */
 
     virtual OSSet * juxtaposeMediaObjects(OSSet * partitionsOld,
-                                          OSSet * partitionsNew);
-
-    OSMetaClassDeclareReservedUsed(IOPartitionScheme, 2); /* 10.5.0 */
+                                          OSSet * partitionsNew); /* 10.5.0 */
 
 public:
 
@@ -299,6 +301,27 @@ public:
 
     virtual IOReturn synchronizeCache(IOService * client);
 
+    /*!
+     * @function unmap
+     * @discussion
+     * Delete unused data from the storage object at the specified byte offsets,
+     * synchronously.
+     * @param client
+     * Client requesting the operation.
+     * @param extents
+     * List of extents.  See IOStorageExtent.  It is legal for the callee to
+     * overwrite the contents of this buffer in order to satisfy the request.
+     * @param extentsCount
+     * Number of extents.
+     * @result
+     * Returns the status of the operation.
+     */
+
+    virtual IOReturn unmap(IOService *       client,
+                           IOStorageExtent * extents,
+                           UInt32            extentsCount,
+                           UInt32            options = 0);
+
     /*
      * Obtain this object's provider.  We override the superclass's method
      * to return a more specific subclass of OSObject -- an IOMedia.  This
@@ -307,6 +330,15 @@ public:
 
     virtual IOMedia * getProvider() const;
 
+#ifdef __LP64__
+    OSMetaClassDeclareReservedUnused(IOPartitionScheme,  0);
+    OSMetaClassDeclareReservedUnused(IOPartitionScheme,  1);
+    OSMetaClassDeclareReservedUnused(IOPartitionScheme,  2);
+#else /* !__LP64__ */
+    OSMetaClassDeclareReservedUsed(IOPartitionScheme,  0);
+    OSMetaClassDeclareReservedUsed(IOPartitionScheme,  1);
+    OSMetaClassDeclareReservedUsed(IOPartitionScheme,  2);
+#endif /* !__LP64__ */
     OSMetaClassDeclareReservedUnused(IOPartitionScheme,  3);
     OSMetaClassDeclareReservedUnused(IOPartitionScheme,  4);
     OSMetaClassDeclareReservedUnused(IOPartitionScheme,  5);

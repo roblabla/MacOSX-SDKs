@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -42,8 +42,6 @@
 
 #ifndef _IP_FW_H
 #define _IP_FW_H
-
-#if !__LP64__
 
 #include <sys/appleapiopts.h>
 
@@ -301,6 +299,5 @@ struct ipfw_dyn_rule {
  * Main firewall chains definitions and global var's definitions.
  */
 
-#endif /* !__LP64__ */
-#endif !IPFW2
+#endif /* !IPFW2 */
 #endif /* _IP_FW_H */

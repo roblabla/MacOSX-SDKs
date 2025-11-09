@@ -3,7 +3,7 @@
 // Purpose:     Filter file system handler
 // Author:      Mike Wetherell
 // Copyright:   (c) 2006 Mike Wetherell
-// CVS-ID:      $Id: fs_filter.h,v 1.2 2006/10/30 11:56:10 ABX Exp $
+// CVS-ID:      $Id: fs_filter.h 42713 2006-10-30 11:56:12Z ABX $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

@@ -3,9 +3,9 @@
  
      Contains:   Toolbar and Toolbar Item API
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1693,7 +1693,6 @@ HIToolbarItemCreate(
   HIToolbarItemRef *  outItem)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIToolbarItemCopyIdentifier HIToolbarItemCopyIdentifier
 /*
  *  HIToolbarItemCopyIdentifier()
  *  

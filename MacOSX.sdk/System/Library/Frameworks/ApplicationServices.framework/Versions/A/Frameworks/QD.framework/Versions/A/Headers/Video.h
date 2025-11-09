@@ -3,9 +3,9 @@
  
      Contains:   Video Driver Interfaces.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -655,24 +655,24 @@ typedef UInt32                          GammaTableID;
 /* Constants for the cscGetNextResolution call */
 enum {
   kDisplayModeIDCurrent         = 0x00, /* Reference the Current DisplayModeID */
-  kDisplayModeIDInvalid         = (long)0xFFFFFFFF, /* A bogus DisplayModeID in all cases */
-  kDisplayModeIDFindFirstResolution = (long)0xFFFFFFFE, /* Used in cscGetNextResolution to reset iterator */
-  kDisplayModeIDNoMoreResolutions = (long)0xFFFFFFFD, /* Used in cscGetNextResolution to indicate End Of List */
-  kDisplayModeIDFindFirstProgrammable = (long)0xFFFFFFFC, /* Used in cscGetNextResolution to find unused programmable timing */
-  kDisplayModeIDBootProgrammable = (long)0xFFFFFFFB, /* This is the ID given at boot time by the OF driver to a programmable timing */
-  kDisplayModeIDReservedBase    = (long)0x80000000 /* Lowest (unsigned) DisplayModeID reserved by Apple */
+  kDisplayModeIDInvalid         = (int)0xFFFFFFFF, /* A bogus DisplayModeID in all cases */
+  kDisplayModeIDFindFirstResolution = (int)0xFFFFFFFE, /* Used in cscGetNextResolution to reset iterator */
+  kDisplayModeIDNoMoreResolutions = (int)0xFFFFFFFD, /* Used in cscGetNextResolution to indicate End Of List */
+  kDisplayModeIDFindFirstProgrammable = (int)0xFFFFFFFC, /* Used in cscGetNextResolution to find unused programmable timing */
+  kDisplayModeIDBootProgrammable = (int)0xFFFFFFFB, /* This is the ID given at boot time by the OF driver to a programmable timing */
+  kDisplayModeIDReservedBase    = (int)0x80000000 /* Lowest (unsigned) DisplayModeID reserved by Apple */
 };
 
 /* Constants for the GetGammaInfoList call */
 enum {
-  kGammaTableIDFindFirst        = (long)0xFFFFFFFE, /* Get the first gamma table ID */
-  kGammaTableIDNoMoreTables     = (long)0xFFFFFFFD, /* Used to indicate end of list */
+  kGammaTableIDFindFirst        = (int)0xFFFFFFFE, /* Get the first gamma table ID */
+  kGammaTableIDNoMoreTables     = (int)0xFFFFFFFD, /* Used to indicate end of list */
   kGammaTableIDSpecific         = 0x00  /* Return the info for the given table id */
 };
 
 /* Constants for GetMultiConnect call*/
 enum {
-  kGetConnectionCount           = (long)0xFFFFFFFF, /* Used to get the number of possible connections in a “multi-headed” framebuffer environment.*/
+  kGetConnectionCount           = (int)0xFFFFFFFF, /* Used to get the number of possible connections in a “multi-headed” framebuffer environment.*/
   kActivateConnection           = (0 << kConnectionInactive), /* Used for activating a connection (csConnectFlags value).*/
   kDeactivateConnection         = (1 << kConnectionInactive) /* Used for deactivating a connection (csConnectFlags value.)*/
 };

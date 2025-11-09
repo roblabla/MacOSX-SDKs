@@ -2,9 +2,17 @@
  *	CTFramesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2008 Apple Inc. All rights reserved.
  *
  */
+
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
 
 #ifndef __CTFRAMESETTER__
 #define __CTFRAMESETTER__
@@ -80,11 +88,12 @@ CTFramesetterRef CTFramesetterCreateWithAttributedString(
 
 	@param		path
 				A CGPath object that specifies the shape which the frame will
-				take on.
+				take on.  Currently accepts only rectangles.
 
 	@param		frameAttributes
 				Additional attributes that control the frame filling process
 				can be specified here, or NULL if there are no such attributes.
+				See CTFrame.h for available attributes.
 
 	@result		This function will return a reference to a new CTFrame object
 				if the call was successful. Otherwise, it will return NULL.
@@ -118,6 +127,51 @@ CTFrameRef CTFramesetterCreateFrame(
 
 CTTypesetterRef CTFramesetterGetTypesetter(
 	CTFramesetterRef framesetter ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* --------------------------------------------------------------------------- */
+/* Frame Sizing */
+/* --------------------------------------------------------------------------- */
+
+/*!
+	@function	CTFramesetterSuggestFrameSizeWithConstraints
+	@abstract	Determines the frame size needed for a string range.
+
+	@discussion	This function may be used to determine how much space is needed
+				to display a string, optionally by constraining the space along
+				either dimension.
+
+	@param		framesetter
+				The framesetter that will be used for measuring the frame size.
+
+	@param		stringRange
+				The string range to which the frame size will apply. The
+				string range is a range over the string that was used to
+				create the framesetter. If the length portion of the range
+				is set to 0, then the framesetter will continue to add lines
+				until it runs out of text or space.
+
+	@param		frameAttributes
+				Additional attributes that control the frame filling process
+				can be specified here, or NULL if there are no such attributes.
+
+	@param		constraints
+				The width and height to which the frame size will be constrained,
+				A value of CGFLOAT_MAX for either dimension indicates that it
+				should be treated as unconstrained.
+
+	@param		fitRange
+				The range of the string that actually fit in the constrained size.
+
+	@result		The actual dimensions for the given string range and constraints.
+*/
+
+CGSize CTFramesetterSuggestFrameSizeWithConstraints(
+	CTFramesetterRef framesetter,
+	CFRange stringRange,
+	CFDictionaryRef frameAttributes,
+	CGSize constraints,
+	CFRange* fitRange ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 #if defined(__cplusplus)

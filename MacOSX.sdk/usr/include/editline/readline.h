@@ -1,4 +1,4 @@
-/*	$NetBSD: readline.h,v 1.18 2006/08/21 12:45:30 christos Exp $	*/
+/*	$NetBSD: readline.h,v 1.23 2008/04/29 06:53:01 martin Exp $	*/
 
 /*-
  * Copyright (c) 1997 The NetBSD Foundation, Inc.
@@ -15,9 +15,6 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of The NetBSD Foundation nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
  * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
@@ -44,6 +41,7 @@ typedef void	  VFunction(void);
 typedef void	  VCPFunction(char *);
 typedef char	 *CPFunction(const char *, int);
 typedef char	**CPPFunction(const char *, int, int);
+typedef char	 *rl_compentry_func_t(const char *, int);
 typedef int	  rl_command_func_t (int, int);
 
 /* only supports length */
@@ -128,11 +126,13 @@ extern KEYMAP_ENTRY_ARRAY emacs_standard_keymap,
 			emacs_ctlx_keymap;
 extern int		rl_filename_completion_desired;
 extern int		rl_ignore_completion_duplicates;
-extern Function		*rl_getc_function;
+extern int		(*rl_getc_function)(FILE *);
 extern VFunction	*rl_redisplay_function;
 extern VFunction	*rl_completion_display_matches_hook;
 extern VFunction	*rl_prep_term_function;
 extern VFunction	*rl_deprep_term_function;
+extern int		readline_echoing_p;
+extern int		_rl_print_completions_horizontally;
 
 /* supported functions */
 char		*readline(const char *);
@@ -163,6 +163,7 @@ int		 history_expand(char *, char **);
 char	       **history_tokenize(const char *);
 const char	*get_history_event(const char *, int *, int);
 char		*history_arg_extract(int, int, const char *);
+HISTORY_STATE	*history_get_history_state(void);
 
 char		*tilde_expand(char *);
 char		*filename_completion_function(const char *, int);
@@ -189,12 +190,20 @@ int		 rl_parse_and_bind(const char *);
 int		 rl_variable_bind(const char *, const char *);
 void		 rl_stuff_char(int);
 int		 rl_add_defun(const char *, Function *, int);
-HISTORY_STATE	*history_get_history_state(void);
+void		 rl_get_screen_size(int *, int *);
+void		 rl_set_screen_size(int, int);
+char 		*rl_filename_completion_function (const char *, int);
+int		 _rl_abort_internal(void);
+int		 _rl_qsort_string_compare(char **, char **);
+char 	       **rl_completion_matches(const char *, rl_compentry_func_t *);
+void		 rl_forced_update_display(void);
 
 /*
  * The following are not implemented
  */
+int		 rl_kill_text(int, int);
 Keymap		 rl_get_keymap(void);
+void		 rl_set_keymap(Keymap);
 Keymap		 rl_make_bare_keymap(void);
 int		 rl_generic_bind(int, const char *, const char *, Keymap);
 int		 rl_bind_key_in_map(int, rl_command_func_t *, Keymap);

@@ -3,7 +3,7 @@
 // Purpose:     XML resource handler for wxMDI
 // Author:      David M. Falkinder & Vaclav Slavik
 // Created:     14/02/2005
-// RCS-ID:      $Id: xh_mdi.h,v 1.5 2006/10/03 14:53:31 VZ Exp $
+// RCS-ID:      $Id: xh_mdi.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2005 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@
 
 #if wxUSE_XRC && wxUSE_MDI
 
-class WXDLLIMPEXP_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 class WXDLLIMPEXP_XRC wxMdiXmlHandler : public wxXmlResourceHandler
 {

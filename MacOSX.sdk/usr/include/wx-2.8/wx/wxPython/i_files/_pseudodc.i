@@ -4,7 +4,7 @@
 // Author:      Paul Lanier 
 // Modified by:
 // Created:     05/25/06
-// RCS-ID:      $Id: _pseudodc.i,v 1.5 2006/12/22 23:57:34 RD Exp $
+// RCS-ID:      $Id: _pseudodc.i 44037 2006-12-22 23:57:34Z RD $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 /*	NSError.h
-	Copyright (c) 2003-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -26,6 +26,7 @@ FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey      AVAILABL
 FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
 FOUNDATION_EXPORT NSString *const NSLocalizedRecoveryOptionsErrorKey    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSArray of NSStrings
 FOUNDATION_EXPORT NSString *const NSRecoveryAttempterErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
+FOUNDATION_EXPORT NSString *const NSHelpAnchorErrorKey                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString containing a help anchor
 
 // Other standard keys in userInfo, for various error codes
 FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSNumber containing NSStringEncoding
@@ -77,6 +78,11 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 /* Return an object that conforms to the NSErrorRecoveryAttempting informal protocol. The recovery attempter must be an object that can correctly interpret an index into the array returned by -localizedRecoveryOptions. The default implementation of this method merely returns [[self userInfo] objectForKey:NSRecoveryAttempterErrorKey].
 */
 - (id)recoveryAttempter;
+
+/* Return the help anchor that can be used to create a help button to accompany the error when it's displayed to the user.  This is done automatically by +[NSAlert alertWithError:], which the presentError: variants in NSApplication go through. The default implementation of this method merely returns [[self userInfo] objectForKey:NSHelpAnchorErrorKey].
+*/
+- (NSString *)helpAnchor;
+
 
 #endif
 

@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2007, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2009, Apple Inc. All rights reserved.
  *
  */
  
@@ -30,22 +30,22 @@ enum {
     // Memory options are mutually exclusive
     
     // default is strong
-    NSPointerFunctionsStrongMemory = (0 << 0),       // use strong write-barrier to backing store; use GC memory on copyIn
-    NSPointerFunctionsZeroingWeakMemory = (1 << 0),  // use weak read and write barriers; use GC memory on copyIn 
-    NSPointerFunctionsOpaqueMemory = (2 << 0),
-    NSPointerFunctionsMallocMemory = (3 << 0),       // free() will be called on removal, calloc on copyIn
-    NSPointerFunctionsMachVirtualMemory = (4 << 0),
+    NSPointerFunctionsStrongMemory = (0UL << 0),       // use strong write-barrier to backing store; use GC memory on copyIn
+    NSPointerFunctionsZeroingWeakMemory = (1UL << 0),  // use weak read and write barriers; use GC memory on copyIn 
+    NSPointerFunctionsOpaqueMemory = (2UL << 0),
+    NSPointerFunctionsMallocMemory = (3UL << 0),       // free() will be called on removal, calloc on copyIn
+    NSPointerFunctionsMachVirtualMemory = (4UL << 0),
     
     // Personalities are mutually exclusive
     // default is object.  As a special case, 'strong' memory used for Objects will do retain/release under non-GC
-    NSPointerFunctionsObjectPersonality = (0 << 8),         // use -hash and -isEqual, object description
-    NSPointerFunctionsOpaquePersonality = (1 << 8),         // use shifted pointer hash and direct equality
-    NSPointerFunctionsObjectPointerPersonality = (2 << 8),  // use shifted pointer hash and direct equality, object description
-    NSPointerFunctionsCStringPersonality = (3 << 8),        // use a string hash and strcmp, description assumes UTF-8 contents; recommended for UTF-8 (or ASCII, which is a subset) only cstrings
-    NSPointerFunctionsStructPersonality = (4 << 8),         // use a memory hash and memcmp (using size function you must set)
-    NSPointerFunctionsIntegerPersonality = (5 << 8),        // use unshifted value as hash & equality
+    NSPointerFunctionsObjectPersonality = (0UL << 8),         // use -hash and -isEqual, object description
+    NSPointerFunctionsOpaquePersonality = (1UL << 8),         // use shifted pointer hash and direct equality
+    NSPointerFunctionsObjectPointerPersonality = (2UL << 8),  // use shifted pointer hash and direct equality, object description
+    NSPointerFunctionsCStringPersonality = (3UL << 8),        // use a string hash and strcmp, description assumes UTF-8 contents; recommended for UTF-8 (or ASCII, which is a subset) only cstrings
+    NSPointerFunctionsStructPersonality = (4UL << 8),         // use a memory hash and memcmp (using size function you must set)
+    NSPointerFunctionsIntegerPersonality = (5UL << 8),        // use unshifted value as hash & equality
 
-    NSPointerFunctionsCopyIn = (1 << 16),      // the memory acquire function will be asked to allocate and copy items on input
+    NSPointerFunctionsCopyIn = (1UL << 16),      // the memory acquire function will be asked to allocate and copy items on input
 };
 
 typedef NSUInteger NSPointerFunctionsOptions;

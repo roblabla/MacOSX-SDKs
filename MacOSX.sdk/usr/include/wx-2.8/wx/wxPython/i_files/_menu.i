@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     24-June-1997
-// RCS-ID:      $Id: _menu.i,v 1.28.2.1 2007/02/16 23:35:48 RD Exp $
+// RCS-ID:      $Id: _menu.i 53375 2008-04-27 03:59:28Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -15,6 +15,9 @@
 
 //---------------------------------------------------------------------------
 %newgroup
+
+wxLIST_WRAPPER(wxMenuItemList, wxMenuItem);
+
 
 
 MustHaveApp(wxMenu);
@@ -169,12 +172,7 @@ public:
 
     // get the items
     size_t GetMenuItemCount() const;
-    %extend {
-        PyObject* GetMenuItems() {
-            wxMenuItemList& list = self->GetMenuItems();
-            return wxPy_ConvertList(&list);
-        }
-    }
+    wxMenuItemList& GetMenuItems();
 
     // search
     int FindItem(const wxString& item) const;
@@ -233,6 +231,10 @@ public:
     // set/get the parent of this menu
     void SetParent(wxMenu *parent);
     wxMenu *GetParent() const;
+
+    
+    //  Returns the stripped label
+    wxString GetLabelText(int itemid) const;
 
     %property(EventHandler, GetEventHandler, SetEventHandler, doc="See `GetEventHandler` and `SetEventHandler`");
     %property(HelpString, GetHelpString, SetHelpString, doc="See `GetHelpString` and `SetHelpString`");
@@ -345,12 +347,28 @@ public:
 #ifdef __WXMAC__
     static void SetAutoWindowMenu( bool enable );
     static bool GetAutoWindowMenu();
+    static void MacSetCommonMenuBar(wxMenuBar* menubar);
 #else
     %extend {
         static void SetAutoWindowMenu( bool enable ) {}
         static bool GetAutoWindowMenu() { return false; }
+        static void MacSetCommonMenuBar(wxMenuBar* menubar) {}
     }
 #endif
+
+    // Gets the original label at the top-level of the menubar
+    wxString GetMenuLabel(size_t pos) const;
+
+    // Replacement for SetLabelTop
+    void SetMenuLabel(size_t pos, const wxString& label) { SetLabelTop(pos, label); }
+
+    // Gets the original label at the top-level of the menubar
+    // Implemented per port, since we can't have virtual functions in the stable branch.
+    // wxString GetMenuLabel(size_t pos) const;
+
+    // Get the text only, from the label at the top-level of the menubar
+    wxString GetMenuLabelText(size_t pos) const;
+
 
     %pythoncode {
         def GetMenus(self):
@@ -495,6 +513,20 @@ public:
     }
 #endif
 
+    // return the item label including any mnemonics and accelerators.
+    // This used to be called GetText.
+    wxString GetItemLabel() const;
+
+    // Sets the label. This function replaces SetText.
+    void SetItemLabel(const wxString& str);
+
+    // return just the text of the item label, without any mnemonics
+    // This used to be called GetLabel.
+    wxString GetItemLabelText() const;
+
+    // return just the text part of the given label. In 2.9 and up, this is implemented in
+    // platform-specific code, but is now implemented in terms of GetLabelFromText.
+    static wxString GetLabelText(const wxString& label);
     %property(Accel, GetAccel, SetAccel, doc="See `GetAccel` and `SetAccel`");
     %property(BackgroundColour, GetBackgroundColour, SetBackgroundColour, doc="See `GetBackgroundColour` and `SetBackgroundColour`");
     %property(Bitmap, GetBitmap, SetBitmap, doc="See `GetBitmap` and `SetBitmap`");
@@ -509,6 +541,7 @@ public:
     %property(SubMenu, GetSubMenu, SetSubMenu, doc="See `GetSubMenu` and `SetSubMenu`");
     %property(Text, GetText, SetText, doc="See `GetText` and `SetText`");
     %property(TextColour, GetTextColour, SetTextColour, doc="See `GetTextColour` and `SetTextColour`");
+    %property(ItemLabel, GetItemLabel);
     
 };
 

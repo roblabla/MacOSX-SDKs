@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-122~37
+     Version:    OSA-137~257
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -243,6 +243,37 @@ OSACopyScriptingDefinition(
   const FSRef *  ref,
   SInt32         modeFlags,
   CFDataRef *    sdef)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  OSACopyScriptingDefinitionFromURL()
+ *  
+ *  Discussion:
+ *    Gets the scripting definition of the specified URL.  See sdef(5)
+ *    for details of the sdef format.  If used with a file: URL, this
+ *    call is equivalent to OSACopyScriptingDefinition.
+ *  
+ *  Parameters:
+ *    
+ *    url:
+ *      The URL to look in; this should be a file: or eppc: URL.
+ *    
+ *    modeFlags:
+ *      There are no flags defined at this time; pass 0.
+ *    
+ *    sdef:
+ *      The resulting sdef as XML data.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSACopyScriptingDefinitionFromURL(
+  CFURLRef     url,
+  SInt32       modeFlags,
+  CFDataRef *  sdef)                                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 

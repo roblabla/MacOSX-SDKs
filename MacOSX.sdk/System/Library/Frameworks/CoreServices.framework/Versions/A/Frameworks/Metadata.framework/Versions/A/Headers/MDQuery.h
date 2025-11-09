@@ -69,8 +69,9 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFArray.h>
+#include <CoreFoundation/CFRunLoop.h>
 #include <Metadata/MDItem.h>
-
+#include <dispatch/dispatch.h>
 
 MD_BEGIN_C_DECLS
 
@@ -476,6 +477,19 @@ typedef const void *(*MDQueryCreateValueFunction)(MDQueryRef query, CFStringRef 
 MD_EXPORT void MDQuerySetCreateValueFunction(MDQueryRef query, MDQueryCreateValueFunction func, void *context, const CFArrayCallBacks *cb) MD_AVAIL;
 
 /*!
+	@function MDQuerySetDispatchQueue
+	Set the dispatch queue on which query results will be delivered
+				by MDQueryExecute. It is not advisable to change set 
+				dispatch queue after MDQueryExecute() has been called with
+				the query. Setting the dispatch queue for a synchronous 
+				query (kMDQuerySynchronous) has no effect.
+	@param query The query for which the dispatch queue should be set.
+	@param queue The dispatch queue on which results should be delivered.
+ */
+
+MD_EXPORT void MDQuerySetDispatchQueue(MDQueryRef query, dispatch_queue_t queue) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
         @function MDQueryExecute
         Run the query, and populate the query with the results. Queries
                 only gather results or process updates while the current
@@ -735,6 +749,31 @@ typedef CFComparisonResult (*MDQuerySortComparatorFunction)(const CFTypeRef attr
 */
 MD_EXPORT void MDQuerySetSortComparator(MDQueryRef query, MDQuerySortComparatorFunction comparator, void *context)  MD_AVAIL;
 
+/*!
+        @function MDQuerySetSortComparatorBlock
+        Sets the block used to sort the results of an MDQuery. You
+                may set the comparator block as many times as you
+                like, even while the query is executing. Whenever the
+                comparator block is set, all results are re-sorted
+                using the new comparator block before the function
+                returns. The block can be NULL to cancel
+                custom sorting and revert to the default sorting.
+                The default sort provided by MDQueryCreate()
+                is a assending sort strings are compared using
+                CFStringCompare() with the options kCFCompareNonliteral |
+                kCFCompareLocalized | kCFCompareNumerically. CFDataRefs are
+                compared by using memcmp() of the data pointers.
+        @param query The query to whose result sort block is to be set.
+        @param comparator The callback block the MDQuery will use to
+                sort its results. The comparator may be called on multiple threads in 
+                parallel, and must be reentrant. To take advantage of parallel 
+                sorting, it is best to avoid any locking in the comparator. 
+                The block may be NULL to cancel any custom comparator. 
+*/
+
+#ifdef __BLOCKS__
+MD_EXPORT void MDQuerySetSortComparatorBlock(MDQueryRef query, CFComparisonResult (^comparator)(const CFTypeRef attrs1[], const CFTypeRef attrs2[])) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
 
 /*!
         @constant kMDQueryProgressNotification
@@ -895,6 +934,29 @@ MD_EXPORT const CFStringRef kMDQueryScopeComputer MD_AVAIL;
 	that the search should include all user mounted remote volumes.
  */
 MD_EXPORT const CFStringRef kMDQueryScopeNetwork MD_AVAIL;
+
+/*!
+ @constant kMDQueryScopeAllIndexed
+ A constant, which can be passed in the scopeDirectories array, to specify
+ that the search should be restricted to indexed, locally mounted volumes and
+ indexed user mounted remote volumes, plus the user's home directory.
+ */
+MD_EXPORT const CFStringRef kMDQueryScopeAllIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ @constant kMDQueryScopeComputerIndexed
+ A constant, which can be passed in the scopeDirectories array, to specify
+ that the search should be restricted to indexed, locally mounted volumes, plus the user's
+ home directory (which may be on a remote volume).
+ */
+MD_EXPORT const CFStringRef kMDQueryScopeComputerIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ @constant kMDQueryScopeNetworkIndexed
+ A constant, which can be passed in the scopeDirectories array, to specify
+ that the search should include indexed user mounted remote volumes.
+ */
+MD_EXPORT const CFStringRef kMDQueryScopeNetworkIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
  @function MDQuerySetMaxCount

@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2009, Apple Inc. All rights reserved.
 */
 
 //
@@ -17,8 +17,7 @@ enum {
     NSUndoCloseGroupingRunLoopOrdering		= 350000
 };
 
-@interface NSUndoManager : NSObject
-{
+@interface NSUndoManager : NSObject {
     @private
     id 			_undoStack;
     id 			_redoStack;
@@ -32,12 +31,10 @@ enum {
         unsigned int groupsByEvent:1;
         unsigned int reserved:27;
     } _flags;
-
-    id 			_target;		// Temp for Invocation based
-
+    id 			_target;
+    id			_proxy;
     void		*_NSUndoManagerReserved1;
     void		*_NSUndoManagerReserved2;
-    void		*_NSUndoManagerReserved3;
 }
 
         /* Begin/End Grouping */

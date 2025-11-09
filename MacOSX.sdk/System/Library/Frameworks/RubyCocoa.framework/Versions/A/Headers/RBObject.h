@@ -1,5 +1,5 @@
 /* 
- * Copyright (c) 2006-2007, The RubyCocoa Project.
+ * Copyright (c) 2006-2008, The RubyCocoa Project.
  * Copyright (c) 2001-2006, FUJIMOTO Hisakuni.
  * All Rights Reserved.
  *
@@ -14,6 +14,7 @@
 {
   VALUE m_rbobj;
   BOOL m_rbobj_retained;
+  BOOL m_rbobj_retain_release_track;
   id oc_master;
 }
 

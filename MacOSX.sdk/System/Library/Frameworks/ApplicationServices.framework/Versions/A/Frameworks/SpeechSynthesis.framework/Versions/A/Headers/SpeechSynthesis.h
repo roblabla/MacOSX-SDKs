@@ -3,9 +3,9 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-3.6.59~90
+     Version:    SpeechSynthesis-3.10.35~266
  
-     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -88,7 +88,10 @@ enum {
   soWordCallBack                = 'wdcb', /* use with SpeechWordProcPtr*/
   soSynthExtension              = 'xtnd',
   soSoundOutput                 = 'sndo',
-  soOutputToFileWithCFURL       = 'opaf' /* Pass a CFURLRef to write to this file, NULL to generate sound.*/
+  soOutputToFileWithCFURL       = 'opaf', /* Pass a CFURLRef to write to this file, NULL to generate sound.*/
+  soOutputToExtAudioFile        = 'opax', /* Pass a ExtAudioFileRef to write to this file, NULL to generate sound. Available in 10.6 and later.*/
+  soOutputToAudioDevice         = 'opad', /* Pass an AudioDeviceID to play to this file, 0 to play to default output*/
+  soPhonemeOptions              = 'popt' /* Available in 10.6 and later*/
 };
 
 
@@ -114,6 +117,16 @@ enum {
 enum {
   soVoiceDescription            = 'info',
   soVoiceFile                   = 'fref'
+};
+
+/*------------------------------------------*/
+/* Flags for phoneme generation.            */
+/*------------------------------------------*/
+enum {
+  kSpeechGenerateTune           = 1,    /* Generate detailed "tune" instead of just phonemes  */
+  kSpeechRelativePitch          = 2,    /* Pitch relative to voice baseline             */
+  kSpeechRelativeDuration       = 4,    /* Duration relative to speech rate             */
+  kSpeechShowSyllables          = 8     /* Show all syllable marks                              */
 };
 
 /*------------------------------------------*/
@@ -372,6 +385,24 @@ extern CFStringRef kSpeechResetProperty                              AVAILABLE_M
  */
 extern CFStringRef kSpeechOutputToFileURLProperty                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /*
+ *  kSpeechOutputToExtAudioFileProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechOutputToExtAudioFileProperty               AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*
+ *  kSpeechOutputToAudioDeviceProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechOutputToAudioDeviceProperty                AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*
  *  kSpeechRefConProperty
  *  
  *  Availability:
@@ -434,6 +465,15 @@ extern CFStringRef kSpeechErrorCFCallBack                            AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef kSpeechWordCFCallBack                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeOptionsProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeOptionsProperty                     AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 /* Speaking Modes*/
 /*
  *  kSpeechModeText
@@ -1474,6 +1514,30 @@ SetSpeechProperty(
   CFStringRef     property,
   CFTypeRef       object)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
+
+/* Support loading and unloading synthesizers and voices from locations other than the standard directories.*/
+/*
+ *  SpeechSynthesisRegisterModuleURL()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+SpeechSynthesisRegisterModuleURL(CFURLRef url)                AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
+ *  SpeechSynthesisUnregisterModuleURL()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+SpeechSynthesisUnregisterModuleURL(CFURLRef url)              AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 

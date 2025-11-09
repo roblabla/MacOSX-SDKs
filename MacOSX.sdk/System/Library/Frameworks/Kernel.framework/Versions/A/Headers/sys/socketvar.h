@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -121,27 +121,7 @@ typedef	u_quad_t so_gen_t;
 
 #pragma pack(4)
 
-/*
- * Externalized form of struct socket used by the sysctl(3) interface.
- */
-struct	xsocket {
-	u_int32_t	xso_len;		/* length of this structure */
-	_XSOCKET_PTR(struct socket *) xso_so;	/* makes a convenient handle */
-	short		so_type;
-	short		so_options;
-	short		so_linger;
-	short		so_state;
-	_XSOCKET_PTR(caddr_t)	so_pcb;		/* another convenient handle */
-	int		xso_protocol;
-	int		xso_family;
-	short		so_qlen;
-	short		so_incqlen;
-	short		so_qlimit;
-	short		so_timeo;
-	u_short		so_error;
-	pid_t		so_pgid;
-	u_int32_t	so_oobmark;
-	struct	xsockbuf {
+struct xsockbuf {
 		u_int32_t	sb_cc;
 		u_int32_t	sb_hiwat;
 		u_int32_t	sb_mbcnt;
@@ -149,9 +129,58 @@ struct	xsocket {
 		int32_t		sb_lowat;
 		short		sb_flags;
 		short		sb_timeo;
-	} so_rcv, so_snd;
-	uid_t		so_uid;		/* XXX */
 };
+
+/*
+ * Externalized form of struct socket used by the sysctl(3) interface.
+ */
+struct	xsocket {
+	u_int32_t		xso_len;		/* length of this structure */
+	_XSOCKET_PTR(struct socket *) xso_so;	/* makes a convenient handle */
+	short			so_type;
+	short			so_options;
+	short			so_linger;
+	short			so_state;
+	_XSOCKET_PTR(caddr_t)	so_pcb;		/* another convenient handle */
+	int				xso_protocol;
+	int				xso_family;
+	short			so_qlen;
+	short			so_incqlen;
+	short			so_qlimit;
+	short			so_timeo;
+	u_short			so_error;
+	pid_t			so_pgid;
+	u_int32_t		so_oobmark;
+	struct xsockbuf	so_rcv;
+	struct xsockbuf	so_snd;
+	uid_t			so_uid;		/* XXX */
+};
+
+#if !CONFIG_EMBEDDED
+
+struct	xsocket64 {
+	u_int32_t		xso_len;		/* length of this structure */
+	u_int64_t		xso_so;	/* makes a convenient handle */
+	short			so_type;
+	short			so_options;
+	short			so_linger;
+	short			so_state;
+	u_int64_t		so_pcb;		/* another convenient handle */
+	int			xso_protocol;
+	int			xso_family;
+	short			so_qlen;
+	short			so_incqlen;
+	short			so_qlimit;
+	short			so_timeo;
+	u_short			so_error;
+	pid_t			so_pgid;
+	u_int32_t		so_oobmark;
+	struct xsockbuf		so_rcv;
+	struct xsockbuf		so_snd;
+	uid_t			so_uid;		/* XXX */
+};
+
+#endif /* !CONFIG_EMBEDDED */
 
 #pragma pack()
 

@@ -174,8 +174,8 @@ typedef struct {
 
 
 #if NPY_ALLOW_THREADS
-#define NPY_LOOP_BEGIN_THREADS if (!(loop->obj)) {_save = PyEval_SaveThread();}
-#define NPY_LOOP_END_THREADS   if (!(loop->obj)) {PyEval_RestoreThread(_save);}
+#define NPY_LOOP_BEGIN_THREADS do {if (!(loop->obj)) _save = PyEval_SaveThread();} while (0)
+#define NPY_LOOP_END_THREADS   do {if (!(loop->obj)) PyEval_RestoreThread(_save);} while (0)
 #else
 #define NPY_LOOP_BEGIN_THREADS
 #define NPY_LOOP_END_THREADS
@@ -213,15 +213,19 @@ typedef struct _loop1d_info {
 #define UFUNC_PYVALS_NAME "UFUNC_PYVALS"
 
 #define UFUNC_CHECK_ERROR(arg)                                          \
-	if (((arg)->obj && PyErr_Occurred()) ||                         \
+	do {if (((arg)->obj && PyErr_Occurred()) ||                         \
             ((arg)->errormask &&                                        \
              PyUFunc_checkfperr((arg)->errormask,                       \
                                 (arg)->errobj,                          \
                                 &(arg)->first)))                        \
-		goto fail
+		goto fail;} while (0)
 
 /* This code checks the IEEE status flags in a platform-dependent way */
 /* Adapted from Numarray  */
+
+#if (defined(__unix__) || defined(unix)) && !defined(USG)
+#include <sys/param.h>
+#endif
 
 /*  OSF/Alpha (Tru64)  ---------------------------------------------*/
 #if defined(__osf__) && defined(__alpha)
@@ -245,6 +249,11 @@ typedef struct _loop1d_info {
 
 #include <float.h>
 
+  /* Clear the floating point exception default of Borland C++ */
+#if defined(__BORLANDC__)
+#define UFUNC_NOFPE _control87(MCW_EM, MCW_EM);
+#endif
+
 #define UFUNC_CHECK_STATUS(ret) {		 \
 	int fpstatus = (int) _clearfp();			\
 									\
@@ -262,7 +271,7 @@ typedef struct _loop1d_info {
 /* Solaris --------------------------------------------------------*/
 /* --------ignoring SunOS ieee_flags approach, someone else can
 **         deal with that! */
-#elif defined(sun) || defined(__BSD__) || defined(__OpenBSD__) || defined(__FreeBSD__) || defined(__NetBSD__)
+#elif defined(sun) || defined(__BSD__) || defined(__OpenBSD__) || (defined(__FreeBSD__) && (__FreeBSD_version < 502114)) || defined(__NetBSD__)
 #include <ieeefp.h>
 
 #define UFUNC_CHECK_STATUS(ret) {				\
@@ -276,9 +285,9 @@ typedef struct _loop1d_info {
 	(void) fpsetsticky(0);						\
 	}
 
-#elif defined(linux) || defined(__APPLE__) || defined(__CYGWIN__) || defined(__MINGW32__)
+#elif defined(__GLIBC__) || defined(__APPLE__) || defined(__CYGWIN__) || defined(__MINGW32__) || (defined(__FreeBSD__) && (__FreeBSD_version >= 502114))
 
-#if defined(__GLIBC__) || defined(__APPLE__) || defined(__MINGW32__)
+#if defined(__GLIBC__) || defined(__APPLE__) || defined(__MINGW32__) || defined(__FreeBSD__)
 #include <fenv.h>
 #elif defined(__CYGWIN__)
 #include "fenv/fenv.c"
@@ -356,6 +365,11 @@ static void generate_overflow_error(void) {
         return;
 	return;
 }
+#endif
+
+  /* Make sure it gets defined if it isn't already */
+#ifndef UFUNC_NOFPE
+#define UFUNC_NOFPE
 #endif
 
 

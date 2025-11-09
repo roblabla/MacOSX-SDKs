@@ -3,9 +3,9 @@
  
      Contains:   Definitions of the button views provided by HIToolbox.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,6 +37,7 @@
 #define kControlPushButtonIconAlignmentTag  'cpia'
 #define kControlPushButtonAnimatingTag 	'anim'
 
+#define kControlPushButtonIsTexturedTag  'metl'
 #define kControlCheckBoxProc 			369
 #define kControlCheckBoxAutoToggleProc 	371
 #define kControlKindCheckBox 			'cbox'

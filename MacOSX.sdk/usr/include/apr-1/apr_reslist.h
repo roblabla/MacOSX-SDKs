@@ -1,9 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation or its licensors, as
- * applicable.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -34,6 +34,9 @@
  * @defgroup APR_Util_RL Resource List Routines
  * @ingroup APR_Util
  * @{
+ * @warning
+ * <strong><em>Resource list data types and routines are only available when
+ * threads are enabled (i.e. APR_HAS_THREADS is not zero).</em></strong>
  */
 
 #ifdef __cplusplus
@@ -65,20 +68,28 @@ typedef apr_status_t (*apr_reslist_destructor)(void *resource, void *params,
  * Create a new resource list with the following parameters:
  * @param reslist An address where the pointer to the new resource
  *                list will be stored.
- * @param pool The pool to use for local storage and management
  * @param min Allowed minimum number of available resources. Zero
  *            creates new resources only when needed.
  * @param smax Resources will be destroyed to meet this maximum
  *             restriction as they expire.
  * @param hmax Absolute maximum limit on the number of total resources.
- * @param ttl If non-zero, sets the maximum amount of time a resource
- *               may be available while exceeding the soft limit.
+ * @param ttl If non-zero, sets the maximum amount of time in microseconds a
+ *            resource may be available while exceeding the soft limit.
  * @param con Constructor routine that is called to create a new resource.
  * @param de Destructor routine that is called to destroy an expired resource.
  * @param params Passed to constructor and deconstructor
- * @param pool The pool from which to create this resoure list. Also the
+ * @param pool The pool from which to create this resource list. Also the
  *             same pool that is passed to the constructor and destructor
  *             routines.
+ * @warning If you're creating a sub-pool of the pool passed into this
+ *          function in your constructor, you will need to follow some rules
+ *          when it comes to destruction of that sub-pool, as calling
+ *          apr_pool_destroy() outright on it in your destructor may create
+ *          double free situations. That is because by the time destructor is
+ *          called, the sub-pool may have already been destroyed. This also
+ *          means that in the destructor, memory from the sub-pool should be
+ *          treated as invalid. For examples of how to do this correctly, see
+ *          mod_dbd of Apache 2.2 and memcache support in APR Util 1.3.
  */
 APU_DECLARE(apr_status_t) apr_reslist_create(apr_reslist_t **reslist,
                                              int min, int smax, int hmax,
@@ -119,10 +130,16 @@ APU_DECLARE(apr_status_t) apr_reslist_release(apr_reslist_t *reslist,
  * Set the timeout the acquire will wait for a free resource
  * when the maximum number of resources is exceeded.
  * @param reslist The resource list.
- * @param timeout Timeout to wait. The zero waits forewer.
+ * @param timeout Timeout to wait. The zero waits forever.
  */
 APU_DECLARE(void) apr_reslist_timeout_set(apr_reslist_t *reslist,
                                           apr_interval_time_t timeout);
+
+/**
+ * Return the number of outstanding resources.
+ * @param reslist The resource list.
+ */
+APU_DECLARE(apr_uint32_t) apr_reslist_acquired_count(apr_reslist_t *reslist);
 
 /**
  * Invalidate a resource in the pool - e.g. a database connection

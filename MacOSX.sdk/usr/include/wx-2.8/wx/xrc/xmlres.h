@@ -3,7 +3,7 @@
 // Purpose:     XML resources
 // Author:      Vaclav Slavik
 // Created:     2000/03/05
-// RCS-ID:      $Id: xmlres.h,v 1.60 2007/01/18 14:15:47 VZ Exp $
+// RCS-ID:      $Id: xmlres.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 2000 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -29,17 +29,17 @@
 
 #include "wx/xml/xml.h"
 
-class WXDLLEXPORT wxMenu;
-class WXDLLEXPORT wxMenuBar;
-class WXDLLEXPORT wxDialog;
-class WXDLLEXPORT wxPanel;
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxFrame;
-class WXDLLEXPORT wxToolBar;
+class WXDLLIMPEXP_FWD_CORE wxMenu;
+class WXDLLIMPEXP_FWD_CORE wxMenuBar;
+class WXDLLIMPEXP_FWD_CORE wxDialog;
+class WXDLLIMPEXP_FWD_CORE wxPanel;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxFrame;
+class WXDLLIMPEXP_FWD_CORE wxToolBar;
 
-class WXDLLIMPEXP_XRC wxXmlResourceHandler;
-class WXDLLIMPEXP_XRC wxXmlSubclassFactory;
-class WXDLLIMPEXP_XRC wxXmlSubclassFactoriesList;
+class WXDLLIMPEXP_FWD_XRC wxXmlResourceHandler;
+class WXDLLIMPEXP_FWD_XRC wxXmlSubclassFactory;
+class WXDLLIMPEXP_FWD_XRC wxXmlSubclassFactoriesList;
 class wxXmlResourceModule;
 
 

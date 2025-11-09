@@ -108,7 +108,7 @@
 
 /* Command to generate ps output, the final column must be the process
    name withOUT arguments */
-#define PSCMD "/bin/ps acx"
+#define PSCMD "/bin/ps -acx"
 
 /* Where is the uname command */
 #define UNAMEPROG "/usr/bin/uname"
@@ -118,7 +118,7 @@
 /* #undef PROC_NET_DEV_HAS_COMPRESSED */
 
 /* define rtentry to ortentry on SYSV machines (alphas) */
-#define RTENTRY struct ortentry
+#define RTENTRY struct rtentry
 
 /* Use BSD 4.4 routing table entries? */
 /* #undef RTENTRY_4_4 */
@@ -428,7 +428,7 @@
 /* #undef HAVE_KSTAT_H */
 
 /* Define to 1 if you have the `kvm_getprocs' function. */
-#define HAVE_KVM_GETPROCS 1
+/* #undef HAVE_KVM_GETPROCS */
 
 /* Define to 1 if you have the `kvm_getswapinfo' function. */
 /* #undef HAVE_KVM_GETSWAPINFO */
@@ -437,7 +437,7 @@
 /* #undef HAVE_KVM_H */
 
 /* Define to 1 if you have the `kvm_openfiles' function. */
-#define HAVE_KVM_OPENFILES 1
+/* #undef HAVE_KVM_OPENFILES */
 
 /* Define to 1 if you have the `crypto' library (-lcrypto). */
 #define HAVE_LIBCRYPTO 1
@@ -638,7 +638,7 @@
 #define HAVE_NET_ROUTE_H 1
 
 /* Define to 1 if you have the `nlist' function. */
-#define HAVE_NLIST 1
+/* #undef HAVE_NLIST */
 
 /* Define to 1 if you have the `nlist64' function. */
 /* #undef HAVE_NLIST64 */
@@ -1128,6 +1128,9 @@
 /* Define if SNMPv2c code should not be included */
 /* #undef NETSNMP_DISABLE_SNMPV2C */
 
+/* Pattern of temporary files */
+#define NETSNMP_TEMP_FILE_PATTERN "/tmp/snmpdXXXXXX"
+
 /* Define to the address where bug reports for this package should be sent. */
 #ifndef PACKAGE_BUGREPORT
 #define PACKAGE_BUGREPORT "net-snmp-coders@lists.sourceforge.net"
@@ -1140,7 +1143,7 @@
 
 /* Define to the full name and version of this package. */
 #ifndef PACKAGE_STRING
-#define PACKAGE_STRING "Net-SNMP 5.4.1"
+#define PACKAGE_STRING "Net-SNMP 5.4.2.1"
 #endif
 
 /* Define to the one symbol short name of this package. */
@@ -1150,7 +1153,7 @@
 
 /* Define to the version of this package. */
 #ifndef PACKAGE_VERSION
-#define PACKAGE_VERSION "5.4.1"
+#define PACKAGE_VERSION "5.4.2.1"
 #endif
 
 /* Define as the return type of signal handlers (`int' or `void'). */
@@ -1163,7 +1166,7 @@
 #define SIZEOF_INTMAX_T 8
 
 /* The size of a `long', as computed by sizeof. */
-#define SIZEOF_LONG 4
+#define SIZEOF_LONG 8
 
 /* The size of a `long long', as computed by sizeof. */
 #define SIZEOF_LONG_LONG 8
@@ -1362,7 +1365,7 @@
 #define NETSNMP_MAX_PERSISTENT_BACKUPS 10
 
 /* define the system type include file here */
-#define NETSNMP_SYSTEM_INCLUDE_FILE "net-snmp/system/darwin9.h"
+#define NETSNMP_SYSTEM_INCLUDE_FILE "net-snmp/system/darwin10.h"
 
 /* define the machine (cpu) type include file here */
 #define NETSNMP_MACHINE_INCLUDE_FILE "net-snmp/machine/generic.h"
@@ -1505,7 +1508,7 @@
 #ifdef WIN32
 #define NETSNMP_OSTYPE NETSNMP_WIN32ID
 #endif
-#if defined(aix3) || defined(aix4) || defined(aix5)
+#if defined(aix3) || defined(aix4) || defined(aix5) || defined(aix6)
 #define NETSNMP_OSTYPE NETSNMP_AIXID
 #endif
 #if defined(darwin) && (darwin >= 8)
@@ -1600,7 +1603,7 @@
 #define NETSNMP_LASTFIELD -1
 
 /* configure options specified */
-#define NETSNMP_CONFIGURE_OPTIONS "'--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/etc' '--with-install-prefix=/BinaryCache/net_snmp/net_snmp-112~107/Root' '--with-default-snmp-version=2' '--with-persistent-directory=/var/db/net-snmp' '--with-defaults' '--without-rpm' '--with-sys-contact=postmaster@example.com' '--with-mib-modules=host ucd-snmp/diskio ucd-snmp/loadave ucd-snmp/lmSensorsTables' '--disable-static' '--disable-embedded-perl' '--without-kmem-usage' 'CFLAGS=-arch i386 -arch ppc -g -Os -pipe -DBUILD=112 -DMACOSX_DEPLOYMENT_TARGET=10.5 -F/System/Library/PrivateFrameworks/ -F/System/Library/Frameworks/ -arch i386 -arch ppc -pipe' 'CXXFLAGS=-arch i386 -arch ppc -g -Os -pipe -DBUILD=112 -DMACOSX_DEPLOYMENT_TARGET=10.5 -F/System/Library/PrivateFrameworks/ -F/System/Library/Frameworks/ -arch i386 -arch ppc -pipe' 'LDFLAGS=-arch i386 -arch ppc            '"
+#define NETSNMP_CONFIGURE_OPTIONS "'--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/etc' '--with-install-prefix=/BinaryCache/net_snmp/net_snmp-127~132/Root' '--with-default-snmp-version=2' '--with-persistent-directory=/var/db/net-snmp' '--with-defaults' '--without-rpm' '--with-sys-contact=postmaster@example.com' '--with-mib-modules=host ucd-snmp/diskio ucd-snmp/loadave ucd-snmp/lmSensorsTables' '--disable-static' '--enable-ipv6' '--with-perl-modules' '--disable-embedded-perl' '--without-kmem-usage' 'CFLAGS=-arch x86_64 -arch i386 -arch ppc -g -Os -pipe -DBUILD=127 -DMACOSX_DEPLOYMENT_TARGET=10.6 -F/System/Library/PrivateFrameworks/ -F/System/Library/Frameworks/' 'CXXFLAGS=-arch x86_64 -arch i386 -arch ppc -g -Os -pipe -DBUILD=127 -DMACOSX_DEPLOYMENT_TARGET=10.6 -F/System/Library/PrivateFrameworks/ -F/System/Library/Frameworks/' 'LDFLAGS=-arch x86_64 -arch i386 -arch ppc            '"
 
 /*  Pluggable transports.  */
 
@@ -1630,11 +1633,11 @@
 
 /*  This is defined if support for the UDP/IPv6 transport domain is
     available.  */
-/* #undef NETSNMP_TRANSPORT_UDPIPV6_DOMAIN */
+#define NETSNMP_TRANSPORT_UDPIPV6_DOMAIN 1
 
 /*  This is defined if support for the TCP/IPv6 transport domain is
     available.  */
-/* #undef NETSNMP_TRANSPORT_TCPIPV6_DOMAIN */
+#define NETSNMP_TRANSPORT_TCPIPV6_DOMAIN 1
 
 /*  This is defined if support for the UDP/IP transport domain is
     available.   */
@@ -1732,7 +1735,7 @@
 #endif
 
 /* define if you want to enable IPv6 support */
-/* #undef NETSNMP_ENABLE_IPV6 */
+#define NETSNMP_ENABLE_IPV6 1
 
 /* define if you want to restrict SMUX connections to localhost by default */
 /* #undef NETSNMP_ENABLE_LOCAL_SMUX */

@@ -104,14 +104,6 @@ struct lockf {
 
 __BEGIN_DECLS
 
-int	lf_advlock(struct vnop_advlock_args *);
-int	lf_assert(struct vnop_advlock_args *, void **);
-void	lf_commit(void *, int);
-
-#ifdef LOCKF_DEBUG
-void	lf_print(char *, struct lockf *);
-void	lf_printlist(char *, struct lockf *);
-#endif
 
 __END_DECLS
 

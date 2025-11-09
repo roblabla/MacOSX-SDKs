@@ -4,7 +4,7 @@
 // Notes:       Based on htmlhelp.cpp, implementing a monolithic
 //              HTML Help controller class,  by Vaclav Slavik
 // Author:      Harm van der Heijden and Vaclav Slavik
-// RCS-ID:      $Id: helpfrm.h,v 1.52.4.1 2007/04/16 13:01:46 VZ Exp $
+// RCS-ID:      $Id: helpfrm.h 50202 2007-11-23 21:29:29Z VZ $
 // Copyright:   (c) Harm van der Heijden and Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -32,10 +32,10 @@
 #include "wx/html/helpwnd.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_CORE wxButton;
-class WXDLLIMPEXP_CORE wxTextCtrl;
-class WXDLLIMPEXP_CORE wxTreeEvent;
-class WXDLLIMPEXP_CORE wxTreeCtrl;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
+class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 
 
 // style flags for the Help Frame
@@ -62,9 +62,9 @@ class WXDLLIMPEXP_CORE wxTreeCtrl;
 struct wxHtmlHelpMergedIndexItem;
 class wxHtmlHelpMergedIndex;
 
-class WXDLLIMPEXP_CORE wxHelpControllerBase;
-class WXDLLIMPEXP_HTML wxHtmlHelpController;
-class WXDLLIMPEXP_CORE wxHtmlHelpWindow;
+class WXDLLIMPEXP_FWD_CORE wxHelpControllerBase;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpFrame : public wxFrame
 {

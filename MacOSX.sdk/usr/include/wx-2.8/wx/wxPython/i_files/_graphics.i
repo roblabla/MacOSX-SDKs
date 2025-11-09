@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     2-Oct-2006
-// RCS-ID:      $Id: _graphics.i,v 1.25.2.2 2007/03/01 22:00:29 RD Exp $
+// RCS-ID:      $Id: _graphics.i 50292 2007-11-28 00:42:01Z RD $
 // Copyright:   (c) 2006 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -327,6 +327,7 @@ public:
 
     wxGraphicsContext* GetGraphicsContext() { return NULL; }
     void SetGraphicsContext( wxGraphicsContext* ) {}
+    void Flush() {}
 };
 
 #endif
@@ -349,9 +350,6 @@ public:
 MustHaveApp(wxGraphicsPath);
 MustHaveApp(wxGraphicsContext);
 MustHaveApp(wxGCDC);
-
-typedef double wxDouble;
-
 
 //---------------------------------------------------------------------------
 
@@ -660,6 +658,7 @@ public:
     static wxGraphicsContext* Create( const wxWindowDC& dc);
     static wxGraphicsContext* Create( wxWindow* window ) ;
 
+    %pythonAppend Create "";
     DocDeclStrName(
         static wxGraphicsContext* , Create(),
         "Create a lightwieght context that can be used for measuring text only.", "",
@@ -741,13 +740,13 @@ on a stack", "");
 
     DocDeclStrName(
         virtual void , Clip( const wxRegion &region ),
-        "Clips drawings to the region, combined to current clipping region.", "",
+        "Clips drawings to the region intersected with the current clipping region.", "",
         ClipRegion);
 
     
     DocDeclStr(
         virtual void , Clip( wxDouble x, wxDouble y, wxDouble w, wxDouble h ),
-        "Clips drawings to the rectangle.", "");
+        "Clips drawings to the rectangle intersected with the current clipping region..", "");
 
 
     DocDeclStr(
@@ -1054,6 +1053,9 @@ public:
 
     wxGraphicsContext* GetGraphicsContext();
     virtual void SetGraphicsContext( wxGraphicsContext* ctx );
+
+    // flushing the content of this dc immediately onto screen
+    void Flush();
 
     %property(GraphicsContext, GetGraphicsContext, SetGraphicsContext);
 };

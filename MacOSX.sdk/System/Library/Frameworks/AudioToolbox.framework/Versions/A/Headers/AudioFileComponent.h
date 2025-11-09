@@ -3,10 +3,7 @@
 
      Contains:   API for implementing Audio File Components.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2004 - 2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,14 +20,14 @@
 //	Includes
 //==================================================================================================
 
+#include <Availability.h>
 #include <TargetConditionals.h>
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreServices/CoreServices.h>
-	#include <CoreAudio/CoreAudioTypes.h>
+	#include <AudioUnit/AudioComponent.h>
 	#include <AudioToolbox/AudioFile.h>
 #else
-	#include "Components.h"
+	#include "AudioComponent.h"
 	#include "CoreAudioTypes.h"
 	#include "AudioFile.h"
 #endif
@@ -61,7 +58,7 @@ extern "C"
     @typedef	AudioFileComponent
     @abstract		represents an instance of an AudioFileComponent.
 */
-typedef ComponentInstance	AudioFileComponent;
+typedef AudioComponentInstance	AudioFileComponent;
 /*!
     @typedef	AudioFileComponentPropertyID
     @abstract		a four char code for a property ID.
@@ -87,7 +84,7 @@ AudioFileComponentCreateURL (
 							AudioFileComponent					inComponent,
 							CFURLRef							inFileRef,
 							const AudioStreamBasicDescription	*inFormat,
-							UInt32								inFlags)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
     @function				AudioFileComponentOpenURL
@@ -95,7 +92,7 @@ AudioFileComponentCreateURL (
     @discussion				Open an existing audio file for reading or reading and writing.
     @param inComponent		an AudioFileComponent
     @param inFileRef		the CFURLRef of an existing audio file.
-    @param inPermissions	use the permission constants used by FSOpenFork().
+    @param inPermissions	use the permission constants
     @param inFileTypeHint	For files which have no filename extension and whose type cannot be easily or
 							uniquely determined from the data (ADTS,AC3), this hint can be used to indicate the file type. 
 							Otherwise you can pass zero for this. The hint is only used on OS versions 10.3.1 or greater.
@@ -107,64 +104,7 @@ AudioFileComponentOpenURL (
 					AudioFileComponent			inComponent,
 					CFURLRef					inFileRef, 
 					SInt8						inPermissions, 
-					int							inFileDescriptor)							AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-
-/*!
-    @function	AudioFileComponentCreate
-    @abstract   implements AudioFileCreate
-    @param inComponent		an AudioFileComponent
-    @param inParentRef		an FSRef to the directory where  the new file should be created.
-    @param inFileName		a CFStringRef containing the name of the file to be created.
-    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
-							added to the audio file.
-    @param inFlags			relevant flags for creating/opening the file. Currently zero.
-    @param outNewFileRef	if successful, the FSRef of the newly created file.
-    @result					returns noErr if successful.
-*/
-extern ComponentResult 
-AudioFileComponentCreate(
-								AudioFileComponent					inComponent,
-								const FSRef							*inParentRef, 
-                                CFStringRef							inFileName,
-                                const AudioStreamBasicDescription	*inFormat,
-                                UInt32								inFlags,
-                                FSRef								*outNewFileRef);
-                                
-
-/*!
-    @function	AudioFileComponentInitialize
-    @abstract   implements AudioFileInitialize
-    @param inComponent		an AudioFileComponent
-    @param inFileRef		the FSRef of an existing audio file.
-    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
-							added to the audio file.
-    @param inFlags			flags for creating/opening the file. Currently zero.
-    @result					returns noErr if successful.
-*/
-extern ComponentResult 
-AudioFileComponentInitialize(
-								AudioFileComponent					inComponent,
-								const FSRef							*inFileRef,
-								const AudioStreamBasicDescription	*inFormat,
-								UInt32								inFlags);
-							
-/*!
-    @function	AudioFileComponentOpenFile
-    @abstract   implements AudioFileOpen
-    @param inComponent		an AudioFileComponent
-    @param inFileRef		the FSRef of an existing audio file.
-    @param inPermissions	use the permission constants used by FSOpenFork().
-    @param inRefNum			the file refNum for the opened file. This avoids opening the file twice
-							- once to determine which file type to which to delegate and once to parse it.
-    @result					returns noErr if successful.
-*/
-extern ComponentResult 
-AudioFileComponentOpenFile(
-								AudioFileComponent					inComponent,
-								const FSRef							*inFileRef, 
-								SInt8  								inPermissions,
-								SInt16								inRefNum);
+					int							inFileDescriptor)				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentOpenWithCallbacks
@@ -177,14 +117,14 @@ AudioFileComponentOpenFile(
 	@param inSetSizeFunc	a function that will be called when AudioFile needs to set the file size.
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentOpenWithCallbacks(
 								AudioFileComponent					inComponent,
 								void								*inClientData, 
 								AudioFile_ReadProc					inReadFunc, 
 								AudioFile_WriteProc					inWriteFunc, 
 								AudioFile_GetSizeProc				inGetSizeFunc,
-								AudioFile_SetSizeProc				inSetSizeFunc);
+								AudioFile_SetSizeProc				inSetSizeFunc)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentInitializeWithCallbacks
@@ -201,7 +141,7 @@ AudioFileComponentOpenWithCallbacks(
     @param inFlags			relevant flags for creating/opening the file. Currently zero.
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentInitializeWithCallbacks(
 								AudioFileComponent					inComponent,
 								void								*inClientData, 
@@ -211,7 +151,7 @@ AudioFileComponentInitializeWithCallbacks(
 								AudioFile_SetSizeProc				inSetSizeFunc,
 								UInt32								inFileType,
 								const AudioStreamBasicDescription	*inFormat,
-								UInt32								inFlags);
+								UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -220,9 +160,9 @@ AudioFileComponentInitializeWithCallbacks(
     @param inComponent		an AudioFileComponent
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentCloseFile(
-								AudioFileComponent					inComponent);
+								AudioFileComponent					inComponent)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 				
 /*!
     @function	AudioFileComponentOptimize
@@ -230,9 +170,9 @@ AudioFileComponentCloseFile(
     @param inComponent		an AudioFileComponent
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentOptimize(
-								AudioFileComponent					inComponent);
+								AudioFileComponent					inComponent)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 				
 /*!
     @function	AudioFileComponentReadBytes
@@ -247,13 +187,13 @@ AudioFileComponentOptimize(
     @param outBuffer 		outBuffer should be a void * to user allocated memory large enough for the requested bytes. 
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentReadBytes(		
 								AudioFileComponent				inComponent,
 								Boolean							inUseCache,
 								SInt64							inStartingByte, 
 								UInt32							*ioNumBytes, 
-								void							*outBuffer);
+								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 						
 /*!
     @function				AudioFileComponentWriteBytes
@@ -266,13 +206,13 @@ AudioFileComponentReadBytes(
     @param inBuffer 		inBuffer should be a void * containing the bytes to be written 
     @result					returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentWriteBytes(		
 								AudioFileComponent				inComponent,
 								Boolean							inUseCache,
 								SInt64							inStartingByte, 
 								UInt32							*ioNumBytes, 
-								const void						*inBuffer);
+								const void						*inBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 						
 /*!
     @function	AudioFileComponentReadPackets
@@ -294,7 +234,7 @@ AudioFileComponentWriteBytes(
 									packet size.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentReadPackets(		
 								AudioFileComponent				inComponent,
 								Boolean							inUseCache,
@@ -302,7 +242,42 @@ AudioFileComponentReadPackets(
 								AudioStreamPacketDescription	*outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
-								void							*outBuffer);
+								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+									
+
+/*!
+    @function	AudioFileComponentReadPacketData
+    @abstract   implements AudioFileReadPacketData.
+    @discussion For all uncompressed formats, packets == frames.
+				If the byte size of the number packets requested is 
+				less than the buffer size, ioNumBytes will be reduced.
+				If the buffer is too small for the number of packets 
+				requested, ioNumPackets and ioNumBytes will be reduced 
+				to the number of packets that can be accommodated and their byte size.
+				Returns eofErr when read encounters end of file.
+
+    @param inComponent				an AudioFileComponent
+    @param inUseCache 				true if it is desired to cache the data upon read, else false
+    @param ioNumBytes				on input the size of outBuffer in bytes. 
+									on output, the number of bytes actually returned.
+    @param outPacketDescriptions 	on output, an array of packet descriptions describing
+									the packets being returned. NULL may be passed for this
+									parameter. Nothing will be returned for linear pcm data.   
+    @param inStartingPacket 		the packet index of the first packet desired to be returned
+    @param ioNumPackets 			on input, the number of packets to read, on output, the number of
+									packets actually read.
+    @param outBuffer 				outBuffer should be a pointer to user allocated memory.
+    @result							returns noErr if successful.
+*/
+extern OSStatus 
+AudioFileComponentReadPacketData(		
+								AudioFileComponent				inComponent,
+								Boolean							inUseCache,
+								UInt32							*ioNumBytes,
+								AudioStreamPacketDescription	*outPacketDescriptions,
+								SInt64							inStartingPacket, 
+								UInt32  						*ioNumPackets, 
+								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 									
 /*!
     @function	AudioFileComponentWritePackets
@@ -320,7 +295,7 @@ AudioFileComponentReadPackets(
     @param inBuffer 				a void * to user allocated memory containing the packets to write.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentWritePackets(	
 								AudioFileComponent					inComponent,
 								Boolean								inUseCache,
@@ -328,7 +303,7 @@ AudioFileComponentWritePackets(
 								const AudioStreamPacketDescription	*inPacketDescriptions,
 								SInt64								inStartingPacket, 
 								UInt32								*ioNumPackets, 
-								const void							*inBuffer);
+								const void							*inBuffer)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -341,12 +316,12 @@ AudioFileComponentWritePackets(
     @param      isWritable			will be set to 1 if writable, or 0 if read only.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetPropertyInfo(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							*outPropertySize,
-								UInt32							*outWritable);
+								UInt32							*outWritable)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -358,12 +333,12 @@ AudioFileComponentGetPropertyInfo(
     @param      outPropertyData		the buffer in which to write the property data.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetProperty(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							*ioPropertyDataSize,
-								void							*outPropertyData);
+								void							*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentSetProperty
@@ -374,12 +349,12 @@ AudioFileComponentGetProperty(
     @param      inPropertyData		the buffer containing the property data.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentSetProperty(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inPropertyDataSize,
-								const void						*inPropertyData);
+								const void						*inPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -393,11 +368,11 @@ AudioFileComponentSetProperty(
     @param outNumberItems			on output, if successful, number of chunks of this type in the file.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentCountUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
-								UInt32							*outNumberItems);
+								UInt32							*outNumberItems)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentGetUserDataSize
@@ -408,12 +383,12 @@ AudioFileComponentCountUserData(
     @param outUserDataSize			on output, if successful, the size of the user data chunk.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetUserDataSize(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
 								UInt32							inIndex,
-								UInt32							*outUserDataSize);
+								UInt32							*outUserDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileGetUserData
@@ -425,13 +400,13 @@ AudioFileComponentGetUserDataSize(
     @param      outUserData			a pointer to a buffer in which to copy the chunk data.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
 								UInt32							inIndex,
 								UInt32							*ioUserDataSize,
-								void							*outUserData);
+								void							*outUserData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentSetUserData
@@ -444,13 +419,13 @@ AudioFileComponentGetUserData(
 									(only the contents of the chunk, not including the chunk header).
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentSetUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
 								UInt32							inIndex,
 								UInt32							inUserDataSize,
-								const void						*inUserData);
+								const void						*inUserData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -461,11 +436,11 @@ AudioFileComponentSetUserData(
     @param      inIndex				an index specifying which chunk if there are more than one.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentRemoveUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
-								UInt32							inIndex)			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+								UInt32							inIndex)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //	The following calls are not made on AudioFile instances.
@@ -479,11 +454,11 @@ AudioFileComponentRemoveUserData(
     @param      outResult			on output, is set to 1 if the extension is recognized by this component, 0 if not.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentExtensionIsThisFormat(	
 								AudioFileComponent				inComponent,
 								CFStringRef 					inExtension,
-								UInt32							*outResult);
+								UInt32							*outResult)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -495,12 +470,12 @@ AudioFileComponentExtensionIsThisFormat(
     @param      outResult			on output, is set to 1 if the file is recognized by this component, 0 if not.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentFileDataIsThisFormat(	
 								AudioFileComponent				inComponent,
 								UInt32							inDataByteSize,
 								const void*						inData,
-								UInt32							*outResult);
+								UInt32							*outResult)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -515,11 +490,11 @@ AudioFileComponentFileDataIsThisFormat(
     @param      outResult			on output, is set to 1 if the file is recognized by this component, 0 if not.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentFileIsThisFormat(	
 								AudioFileComponent				inComponent,
 								SInt16							inFileRefNum,
-								UInt32							*outResult)			DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER; 
+								UInt32							*outResult)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA); 
 	
 /*!
     @function	AudioFileComponentDataIsThisFormat
@@ -533,7 +508,7 @@ AudioFileComponentFileIsThisFormat(
     @param      outResult			on output, is set to 1 if the file data is recognized by this component, 0 if not.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentDataIsThisFormat(	
 								AudioFileComponent				inComponent,
 								void							*inClientData, 
@@ -541,7 +516,7 @@ AudioFileComponentDataIsThisFormat(
 								AudioFile_WriteProc				inWriteFunc, 
 								AudioFile_GetSizeProc			inGetSizeFunc,
 								AudioFile_SetSizeProc			inSetSizeFunc,
-								UInt32							*outResult)			DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER; 
+								UInt32							*outResult)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA); 
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -560,13 +535,13 @@ AudioFileComponentDataIsThisFormat(
 									you will need a buffer of this size.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetGlobalInfoSize(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
 								const void						*inSpecifier,
-								UInt32							*outPropertySize);
+								UInt32							*outPropertySize)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentGetGlobalInfo
@@ -578,14 +553,14 @@ AudioFileComponentGetGlobalInfoSize(
     @param      outPropertyData		the buffer in which to write the property data.
     @result							returns noErr if successful.
 */
-extern ComponentResult 
+extern OSStatus 
 AudioFileComponentGetGlobalInfo(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
 								const void						*inSpecifier,
 								UInt32							*ioPropertyDataSize,
-								void							*outPropertyData);
+								void							*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //==================================================================================================
 //	Properties for AudioFileComponentGetGlobalInfo. 
@@ -661,10 +636,10 @@ enum
 	kAudioFileGetUserDataSelect					= 0x0016,
 	kAudioFileSetUserDataSelect					= 0x0017,
 	kAudioFileRemoveUserDataSelect				= 0x0018,
-#define __defined_kAudioFileRemoveUserDataSelect__ 1
 	kAudioFileCreateURLSelect					= 0x0019,
 	kAudioFileOpenURLSelect						= 0x001A,
 	kAudioFileFileDataIsThisFormatSelect		= 0x001B,
+	kAudioFileReadPacketDataSelect				= 0x001C,
 };
 
 
@@ -691,7 +666,15 @@ typedef OSStatus (*ReadPacketsFDF)(	void							*inComponentStorage,
 									SInt64							inStartingPacket, 
 									UInt32  						*ioNumPackets, 
 									void							*outBuffer);
-								
+
+typedef OSStatus (*ReadPacketDataFDF)(	void						*inComponentStorage,
+									Boolean							inUseCache,
+									UInt32							*ioNumBytes,
+									AudioStreamPacketDescription	*outPacketDescriptions,
+									SInt64							inStartingPacket, 
+									UInt32  						*ioNumPackets, 
+									void							*outBuffer);
+
 typedef OSStatus (*WritePacketsFDF)(	void								*inComponentStorage,
 										Boolean								inUseCache,
 										UInt32								inNumBytes,
@@ -759,6 +742,92 @@ typedef struct AudioFileFDFTable
 	GetUserDataFDF		mGetUserDataFDF;
 	SetUserDataFDF		mSetUserDataFDF;
 } AudioFileFDFTable;
+
+typedef struct AudioFileFDFTableExtended
+{
+	void				*mComponentStorage;
+	ReadBytesFDF 		mReadBytesFDF;
+	WriteBytesFDF 		mWriteBytesFDF;
+	ReadPacketsFDF		mReadPacketsFDF;
+	WritePacketsFDF		mWritePacketsFDF;
+
+	GetPropertyInfoFDF	mGetPropertyInfoFDF;
+	GetPropertyFDF		mGetPropertyFDF;
+	SetPropertyFDF		mSetPropertyFDF;
+	
+	CountUserDataFDF	mCountUserDataFDF;
+	GetUserDataSizeFDF  mGetUserDataSizeFDF;
+	GetUserDataFDF		mGetUserDataFDF;
+	SetUserDataFDF		mSetUserDataFDF;
+
+	ReadPacketDataFDF	mReadPacketDataFDF;
+} AudioFileFDFTableExtended;
+
+#pragma mark -
+#pragma mark Deprecated
+
+/*!
+	@functiongroup Deprecated AFComponent
+	@discussion		These API calls are no longer called on Snow Leopard, instead the URL versions are used.
+					They can be provided by the file component for compatability with Leopard and Tiger systems
+*/
+
+struct FSRef;
+/*!
+    @function	AudioFileComponentCreate
+    @abstract   implements AudioFileCreate
+    @param inComponent		an AudioFileComponent
+    @param inParentRef		an FSRef to the directory where  the new file should be created.
+    @param inFileName		a CFStringRef containing the name of the file to be created.
+    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
+							added to the audio file.
+    @param inFlags			relevant flags for creating/opening the file. Currently zero.
+    @param outNewFileRef	if successful, the FSRef of the newly created file.
+    @result					returns noErr if successful.
+*/
+extern OSStatus 
+AudioFileComponentCreate(
+								AudioFileComponent					inComponent,
+								const struct FSRef					*inParentRef, 
+								CFStringRef							inFileName,
+								const AudioStreamBasicDescription	*inFormat,
+								UInt32								inFlags,
+								struct FSRef						*outNewFileRef)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+                                
+
+/*!
+    @function	AudioFileComponentInitialize
+    @abstract   implements AudioFileInitialize
+    @param inComponent		an AudioFileComponent
+    @param inFileRef		the FSRef of an existing audio file.
+    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
+							added to the audio file.
+    @param inFlags			flags for creating/opening the file. Currently zero.
+    @result					returns noErr if successful.
+*/
+extern OSStatus 
+AudioFileComponentInitialize(
+								AudioFileComponent					inComponent,
+								const struct FSRef					*inFileRef,
+								const AudioStreamBasicDescription	*inFormat,
+								UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							
+/*!
+    @function	AudioFileComponentOpenFile
+    @abstract   implements AudioFileOpen
+    @param inComponent		an AudioFileComponent
+    @param inFileRef		the FSRef of an existing audio file.
+    @param inPermissions	use the permission constants
+    @param inRefNum			the file refNum for the opened file. This avoids opening the file twice
+							- once to determine which file type to which to delegate and once to parse it.
+    @result					returns noErr if successful.
+*/
+extern OSStatus 
+AudioFileComponentOpenFile(
+								AudioFileComponent					inComponent,
+								const struct FSRef					*inFileRef, 
+								SInt8  								inPermissions,
+								SInt16								inRefNum)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 

@@ -4,7 +4,7 @@
  *  Author:      Julian Smart and others
  *  Modified by: Ryan Norton (Converted to C)
  *  Created:     01/02/97
- *  RCS-ID:      $Id: defs.h,v 1.567.4.1 2007/03/29 14:04:49 VZ Exp $
+ *  RCS-ID:      $Id: defs.h 53370 2008-04-26 05:43:41Z KO $
  *  Copyright:   (c) Julian Smart
  *  Licence:     wxWindows licence
  */
@@ -793,18 +793,14 @@ typedef wxUint16 wxWord;
             #error "Unknown sizeof(int) value, what are you compiling for?"
         #endif
     #else /*  !defined(SIZEOF_INT) */
+        /*  assume default 32bit machine -- what else can we do? */
         wxCOMPILE_TIME_ASSERT( sizeof(int) == 4, IntMustBeExactly4Bytes);
         wxCOMPILE_TIME_ASSERT( sizeof(size_t) == 4, SizeTMustBeExactly4Bytes);
         wxCOMPILE_TIME_ASSERT( sizeof(void *) == 4, PtrMustBeExactly4Bytes);
 
         #define SIZEOF_INT 4
-#ifdef __LP64__
-        #define SIZEOF_SIZE_T 8
-        #define SIZEOF_VOID_P 8
-#else /* !__LP64__ */
         #define SIZEOF_SIZE_T 4
         #define SIZEOF_VOID_P 4
-#endif /* __LP64__ */
 
         typedef int wxInt32;
         typedef unsigned int wxUint32;
@@ -1039,11 +1035,7 @@ typedef float wxFloat32;
     typedef double wxFloat64;
 #endif
 
-#if defined( __WXMAC__ )
-    typedef long double wxDouble;
-#else
-    typedef double wxDouble;
-#endif
+typedef double wxDouble;
 
 /*
     Some (non standard) compilers typedef wchar_t as an existing type instead
@@ -1281,6 +1273,9 @@ enum wxStretch
     wxEXPAND                  = wxGROW,
     wxSHAPED                  = 0x4000,
     wxFIXED_MINSIZE           = 0x8000,
+#if wxABI_VERSION >= 20808
+    wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
+#endif
     wxTILE                    = 0xc000,
 
     /* for compatibility only, default now, don't use explicitly any more */
@@ -1303,7 +1298,8 @@ enum wxBorder
     wxBORDER_SIMPLE = 0x02000000,
     wxBORDER_RAISED = 0x04000000,
     wxBORDER_SUNKEN = 0x08000000,
-    wxBORDER_DOUBLE = 0x10000000,
+    wxBORDER_DOUBLE = 0x10000000, /* deprecated */
+    wxBORDER_THEME =  0x10000000,
 
     /*  a mask to extract border style from the combination of flags */
     wxBORDER_MASK   = 0x1f200000
@@ -2321,6 +2317,17 @@ enum wxUpdateUI
 };
 
 /*  ---------------------------------------------------------------------------- */
+/*  Notification Event flags - used for dock icon bouncing, etc. */
+/*  ---------------------------------------------------------------------------- */
+
+enum wxNotificationOptions
+{
+    wxNOTIFY_NONE           = 0x0000,
+    wxNOTIFY_ONCE           = 0x0001,
+    wxNOTIFY_REPEAT         = 0x0002
+};
+
+/*  ---------------------------------------------------------------------------- */
 /*  miscellaneous */
 /*  ---------------------------------------------------------------------------- */
 
@@ -2421,7 +2428,37 @@ typedef void*       WXDisplay;
 
 #endif
 
-#ifdef __WXCOCOA__
+#if defined( __WXCOCOA__ ) || ( defined(__WXMAC__) && defined(__DARWIN__) )
+
+/* Definitions of 32-bit/64-bit types
+ * These are typedef'd exactly the same way in newer OS X headers so
+ * redefinition when real headers are included should not be a problem.  If
+ * it is, the types are being defined wrongly here.
+ * The purpose of these types is so they can be used from public wx headers.
+ * and also because the older (pre-Leopard) headers don't define them.
+ */
+
+/* NOTE: We don't pollute namespace with CGFLOAT_MIN/MAX/IS_DOUBLE macros
+ * since they are unlikely to be needed in a public header.
+ */
+#if defined(__LP64__) && __LP64__
+	typedef double CGFloat;
+#else
+	typedef float CGFloat;
+#endif
+
+#if (defined(__LP64__) && __LP64__) || (defined(NS_BUILD_32_LIKE_64) && NS_BUILD_32_LIKE_64)
+typedef long NSInteger;
+typedef unsigned long NSUInteger;
+#else
+typedef int NSInteger;
+typedef unsigned int NSUInteger;
+#endif
+
+/* Objective-C type declarations.
+ * These are to be used in public headers in lieu of NSSomething* because
+ * Objective-C class names are not available in C/C++ code.
+ */
 
 /*  NOTE: This ought to work with other compilers too, but I'm being cautious */
 #if (defined(__GNUC__) && defined(__APPLE__)) || defined(__MWERKS__)
@@ -2486,8 +2523,14 @@ DECLARE_WXCOCOA_OBJC_CLASS(NSTextStorage);
 DECLARE_WXCOCOA_OBJC_CLASS(NSThread);
 DECLARE_WXCOCOA_OBJC_CLASS(NSWindow);
 DECLARE_WXCOCOA_OBJC_CLASS(NSView);
+#ifdef __WXMAC__
+// things added for __WXMAC__
+DECLARE_WXCOCOA_OBJC_CLASS(NSString);
+#else
+// things only for __WXCOCOA__
 typedef WX_NSView WXWidget; /*  wxWidgets BASE definition */
-#endif /*  __WXCOCOA__ */
+#endif
+#endif /*  __WXCOCOA__  || ( __WXMAC__ &__DARWIN__)*/
 
 #if defined(__WXPALMOS__)
 
@@ -2810,35 +2853,8 @@ typedef const void* WXWidget;
 /*  included before or after wxWidgets classes, and therefore must be */
 /*  disabled here before any significant wxWidgets headers are included. */
 #ifdef __WXMSW__
-#ifdef GetClassInfo
-#undef GetClassInfo
-#endif
-
-#ifdef GetClassName
-#undef GetClassName
-#endif
-
-#ifdef DrawText
-#undef DrawText
-#endif
-
-#ifdef GetCharWidth
-#undef GetCharWidth
-#endif
-
-#ifdef StartDoc
-#undef StartDoc
-#endif
-
-#ifdef FindWindow
-#undef FindWindow
-#endif
-
-#ifdef FindResource
-#undef FindResource
-#endif
-#endif
-  /*  __WXMSW__ */
+#include "wx/msw/winundef.h"
+#endif /*  __WXMSW__ */
 
 /*  --------------------------------------------------------------------------- */
 /*  macro to define a class without copy ctor nor assignment operator */

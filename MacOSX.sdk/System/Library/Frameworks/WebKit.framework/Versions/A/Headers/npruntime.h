@@ -72,12 +72,7 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
 #include "npapi.h"
-
-#if defined(XP_MACOSX) && defined(__LP64__)
-#error 64-bit Netscape plug-ins are not supported on Mac OS X
-#endif
 
 /*
     This API is used to facilitate binding code written in C to script
@@ -251,6 +246,7 @@ typedef bool (*NPGetPropertyFunctionPtr)(NPObject *obj, NPIdentifier name, NPVar
 typedef bool (*NPSetPropertyFunctionPtr)(NPObject *obj, NPIdentifier name, const NPVariant *value);
 typedef bool (*NPRemovePropertyFunctionPtr)(NPObject *npobj, NPIdentifier name);
 typedef bool (*NPEnumerationFunctionPtr)(NPObject *npobj, NPIdentifier **value, uint32_t *count);
+typedef bool (*NPConstructFunctionPtr)(NPObject *npobj, const NPVariant *args, uint32_t argCount, NPVariant *result);
 
 /*
     NPObjects returned by create have a reference count of one.  It is the caller's responsibility
@@ -287,12 +283,17 @@ struct NPClass
     NPSetPropertyFunctionPtr setProperty;
     NPRemovePropertyFunctionPtr removeProperty;
     NPEnumerationFunctionPtr enumerate;
+    NPConstructFunctionPtr construct;
 };
 
-#define NP_CLASS_STRUCT_VERSION      2
-#define NP_CLASS_STRUCT_VERSION_ENUM 2                           
+#define NP_CLASS_STRUCT_VERSION      3
+#define NP_CLASS_STRUCT_VERSION_ENUM 2
+#define NP_CLASS_STRUCT_VERSION_CTOR 3
+
 #define NP_CLASS_STRUCT_VERSION_HAS_ENUM(npclass)   \
     ((npclass)->structVersion >= NP_CLASS_STRUCT_VERSION_ENUM)
+#define NP_CLASS_STRUCT_VERSION_HAS_CTOR(npclass)   \
+    ((npclass)->structVersion >= NP_CLASS_STRUCT_VERSION_CTOR)
 
 struct NPObject {
     NPClass *_class;
@@ -340,6 +341,7 @@ bool NPN_RemoveProperty(NPP npp, NPObject *npobj, NPIdentifier propertyName);
 bool NPN_HasProperty(NPP npp, NPObject *npobj, NPIdentifier propertyName);
 bool NPN_HasMethod(NPP npp, NPObject *npobj, NPIdentifier methodName);
 bool NPN_Enumerate(NPP npp, NPObject *npobj, NPIdentifier **identifier, uint32_t *count);
+bool NPN_Construct(NPP npp, NPObject *npobj, const NPVariant *args, uint32_t argCount, NPVariant *result);
 
 /*
     NPN_SetException may be called to trigger a script exception upon return

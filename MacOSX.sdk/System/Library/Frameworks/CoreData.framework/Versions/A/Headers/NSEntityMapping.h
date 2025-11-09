@@ -1,15 +1,11 @@
 /*
     NSEntityMapping.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSArray.h>
-#import <Foundation/NSData.h>
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSExpression.h>
-#import <Foundation/NSString.h>
+#import <Foundation/Foundation.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 

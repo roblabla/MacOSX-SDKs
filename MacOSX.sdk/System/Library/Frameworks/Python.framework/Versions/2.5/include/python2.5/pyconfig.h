@@ -95,6 +95,10 @@
 /* Define if you have the 'resize_term' function. */
 #define HAVE_CURSES_RESIZE_TERM 1
 
+/* Define to 1 if you have the declaration of `tzname', and to 0 if you don't.
+   */
+/* #undef HAVE_DECL_TZNAME */
+
 /* Define to 1 if you have the device macros. */
 #define HAVE_DEVICE_MACROS 1
 
@@ -310,9 +314,6 @@
 /* Define to 1 if you have the `resolv' library (-lresolv). */
 /* #undef HAVE_LIBRESOLV */
 
-/* Define to 1 if you have the `termcap' library (-ltermcap). */
-/* #undef HAVE_LIBTERMCAP */
-
 /* Define to 1 if you have the <libutil.h> header file. */
 #define HAVE_LIBUTIL_H 1
 
@@ -363,6 +364,9 @@
 
 /* Define to 1 if you have the `openpty' function. */
 #define HAVE_OPENPTY 1
+
+/* Define is the (unsupported) OSADebug API's are present. */
+/* #undef HAVE_OSA_DEBUG */
 
 /* Define to 1 if you have the `pathconf' function. */
 #define HAVE_PATHCONF 1
@@ -422,7 +426,7 @@
 #define HAVE_RL_COMPLETION_APPEND_CHARACTER 1
 
 /* Define if you have readline 4.2 */
-/* #undef HAVE_RL_COMPLETION_MATCHES */
+#define HAVE_RL_COMPLETION_MATCHES 1
 
 /* Define if you have readline 4.0 */
 #define HAVE_RL_PRE_INPUT_HOOK 1
@@ -534,7 +538,7 @@
 /* #undef HAVE_STROPTS_H */
 
 /* Define to 1 if `st_birthtime' is member of `struct stat'. */
-/* #undef HAVE_STRUCT_STAT_ST_BIRTHTIME */
+#define HAVE_STRUCT_STAT_ST_BIRTHTIME 1
 
 /* Define to 1 if `st_blksize' is member of `struct stat'. */
 #define HAVE_STRUCT_STAT_ST_BLKSIZE 1
@@ -795,26 +799,26 @@
 /* Define if i>>j for signed int i does not extend the sign bit when i < 0 */
 /* #undef SIGNED_RIGHT_SHIFT_ZERO_FILLS */
 
-/* The size of a `double', as computed by sizeof. */
+/* The size of `double', as computed by sizeof. */
 #define SIZEOF_DOUBLE 8
 
-/* The size of a `float', as computed by sizeof. */
+/* The size of `float', as computed by sizeof. */
 #define SIZEOF_FLOAT 4
 
-/* The size of a `fpos_t', as computed by sizeof. */
+/* The size of `fpos_t', as computed by sizeof. */
 #define SIZEOF_FPOS_T 8
 
-/* The size of a `int', as computed by sizeof. */
+/* The size of `int', as computed by sizeof. */
 #define SIZEOF_INT 4
 
-/* The size of a `long', as computed by sizeof. */
+/* The size of `long', as computed by sizeof. */
 #ifdef __LP64__
 #define SIZEOF_LONG 8
 #else
 #define SIZEOF_LONG 4
 #endif
 
-/* The size of a `long long', as computed by sizeof. */
+/* The size of `long long', as computed by sizeof. */
 #define SIZEOF_LONG_LONG 8
 
 /* The number of bytes in an off_t. */
@@ -827,10 +831,10 @@
 #define SIZEOF_PTHREAD_T 4
 #endif
 
-/* The size of a `short', as computed by sizeof. */
+/* The size of `short', as computed by sizeof. */
 #define SIZEOF_SHORT 2
 
-/* The size of a `size_t', as computed by sizeof. */
+/* The size of `size_t', as computed by sizeof. */
 #ifdef __LP64__
 #define SIZEOF_SIZE_T 8
 #else
@@ -844,21 +848,21 @@
 #define SIZEOF_TIME_T 4
 #endif
 
-/* The size of a `uintptr_t', as computed by sizeof. */
+/* The size of `uintptr_t', as computed by sizeof. */
 #ifdef __LP64__
 #define SIZEOF_UINTPTR_T 8
 #else
 #define SIZEOF_UINTPTR_T 4
 #endif
 
-/* The size of a `void *', as computed by sizeof. */
+/* The size of `void *', as computed by sizeof. */
 #ifdef __LP64__
 #define SIZEOF_VOID_P 8
 #else
 #define SIZEOF_VOID_P 4
 #endif
 
-/* The size of a `wchar_t', as computed by sizeof. */
+/* The size of `wchar_t', as computed by sizeof. */
 #define SIZEOF_WCHAR_T 4
 
 /* Define to 1 if you have the ANSI C header files. */
@@ -888,7 +892,7 @@
 /* #undef WANT_WCTYPE_FUNCTIONS */
 
 /* Define if WINDOW in curses.h offers a field _flags. */
-#define WINDOW_HAS_FLAGS 1
+/* #undef WINDOW_HAS_FLAGS */
 
 /* Define if you want documentation strings in extension modules */
 #define WITH_DOC_STRINGS 1
@@ -939,6 +943,9 @@
 #ifndef _ALL_SOURCE
 /* # undef _ALL_SOURCE */
 #endif
+
+/* Define on OpenBSD to activate all library features */
+/* #undef _BSD_SOURCE */
 
 /* Define on Irix to enable u_int */
 #define _BSD_TYPES 1
@@ -999,7 +1006,7 @@
 /* Define to `int' if <sys/types.h> does not define. */
 /* #undef mode_t */
 
-/* Define to `long' if <sys/types.h> does not define. */
+/* Define to `long int' if <sys/types.h> does not define. */
 /* #undef off_t */
 
 /* Define to `int' if <sys/types.h> does not define. */
@@ -1008,7 +1015,7 @@
 /* Define to empty if the keyword does not work. */
 /* #undef signed */
 
-/* Define to `unsigned' if <sys/types.h> does not define. */
+/* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
 
 /* Define to `int' if <sys/socket.h> does not define. */

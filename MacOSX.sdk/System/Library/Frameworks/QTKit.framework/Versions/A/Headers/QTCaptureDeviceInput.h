@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureDeviceInput.h
 
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -18,9 +18,7 @@
 
 @interface QTCaptureDeviceInput : QTCaptureInput {
 @private;
-#if !__LP64__
 	QTCaptureDeviceInputInternal *_internal;
-#endif
 	long						_reserved4;
 	long						_reserved5;
 	long						_reserved6;

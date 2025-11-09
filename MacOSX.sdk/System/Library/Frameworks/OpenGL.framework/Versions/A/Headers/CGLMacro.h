@@ -1,5 +1,5 @@
 /*
-    Copyright:    (c) 1999 by Apple Computer, Inc., all rights reserved.
+    Copyright:  (c) 1999-2008 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLMACRO_H
@@ -33,8 +33,8 @@
 
 /* Use the following function macro to declare the local CGLMacro variables */
 #define CGL_MACRO_DECLARE_VARIABLES() \
-    CGL_MACRO_DECLARE_CONTEXT(); \
-    CGL_MACRO_DECLARE_RENDERER();
+	CGL_MACRO_DECLARE_CONTEXT(); \
+	CGL_MACRO_DECLARE_RENDERER();
 
 /* This is for converting old non-arb handle definitions to ARB handle definitions for 64 bit compiles */
 #define CGL_HANDLE_ARB(handle)	(GLhandleARB)((unsigned long)handle)
@@ -1749,7 +1749,7 @@
 	(*(CGL_MACRO_CONTEXT)->disp.get_programiv)(CGL_MACRO_CONTEXT_RENDERER, program, pname, params)
 
 #define glGetAttachedShaders(program, maxCount, count, shaders) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_attached_objects_ARB)(CGL_MACRO_CONTEXT_RENDERER, CGL_HANDLE_ARB(program), maxCount, count, (GLhandleARB *) shaders)
+	(*(CGL_MACRO_CONTEXT)->disp.get_attached_shaders)(CGL_MACRO_CONTEXT_RENDERER, program, maxCount, count, shaders)
 
 #define glGetShaderInfoLog(shader, bufSize, length, infoLog) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_shader_info_log)(CGL_MACRO_CONTEXT_RENDERER, shader, bufSize, length, infoLog)
@@ -1810,7 +1810,7 @@
 	(*(CGL_MACRO_CONTEXT)->disp.uniform_matrix3x4fv)(CGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
 
 #define glUniformMatrix4x3fv(location, count, transpose, value) \
-	(*(CGL_MACRO_CONTEXT)->disp.uniform_matrix3x4fv)(CGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
+	(*(CGL_MACRO_CONTEXT)->disp.uniform_matrix4x3fv)(CGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
 
 /********** ARB Extensions *************************************************/
 
@@ -2266,10 +2266,44 @@
 
 #define glGetAttribLocationARB(program, name) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_attrib_location_ARB)(CGL_MACRO_CONTEXT_RENDERER, program, name)
-	
+
 #define glDrawBuffersARB(n, bufs)\
 	(*(CGL_MACRO_CONTEXT)->disp.draw_buffers_ARB)(CGL_MACRO_CONTEXT_RENDERER, n, bufs)
+
+#define glClampColorARB(target, clamp)\
+	(*(CGL_MACRO_CONTEXT)->disp.clamp_color_ARB)(CGL_MACRO_CONTEXT_RENDERER, target, clamp)
 	
+/* GL_ARB_uniform_buffer_object */
+#define glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_uniform_indices)(CGL_MACRO_CONTEXT_RENDERER, program, uniformCount, uniformNames, uniformIndices)
+
+#define glGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_active_uniformsiv)(CGL_MACRO_CONTEXT_RENDERER, program, uniformCount, uniformIndices, pname, params)
+
+#define glGetActiveUniformName(program, uniformIndex, bufSize, length, uniformName) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_active_uniform_name)(CGL_MACRO_CONTEXT_RENDERER, program, uniformIndex, bufSize, length, uniformName)
+
+#define glGetUniformBlockIndex(program, uniformBlockName) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_uniform_block_index)(CGL_MACRO_CONTEXT_RENDERER, program, uniformBlockName)
+
+#define glGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_active_uniform_blockiv)(CGL_MACRO_CONTEXT_RENDERER, program, uniformBlockIndex, pname, params)
+
+#define glGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_active_uniform_block_name)(CGL_MACRO_CONTEXT_RENDERER, program, uniformBlockIndex, bufSize, length, uniformBlockName)
+
+#define glBindBufferRange(target, index, buffer, offset, size) \
+	(*(CGL_MACRO_CONTEXT)->disp.bind_buffer_range_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, buffer, offset, size)
+
+#define glBindBufferBase(target, index, buffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.bind_buffer_base_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, buffer)
+
+#define glGetIntegeri_v(pname, index, data) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_integer_indexedv_EXT)(CGL_MACRO_CONTEXT_RENDERER, pname, index, data)
+
+#define glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding) \
+	(*(CGL_MACRO_CONTEXT)->disp.uniform_block_binding)(CGL_MACRO_CONTEXT_RENDERER, program, uniformBlockIndex, uniformBlockBinding)
+
 /*********** EXT Extensions *************************************************/
 
 /* GL_EXT_compiled_vertex_array */
@@ -2412,13 +2446,74 @@
 #define glFramebufferTextureFaceEXT(target, attachment, texture, level, face) \
 	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_texture_face_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, texture, level, face)
 
+/* GL_ARB_framebuffer_object */
+#define glIsRenderbuffer(renderbuffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.is_renderbuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, renderbuffer)
+
+#define glBindRenderbuffer(target, renderbuffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.bind_renderbuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, renderbuffer)
+
+#define glDeleteRenderbuffers(n, renderbuffers) \
+	(*(CGL_MACRO_CONTEXT)->disp.delete_renderbuffers_EXT)(CGL_MACRO_CONTEXT_RENDERER, n, renderbuffers)
+
+#define glGenRenderbuffers(n, renderbuffers) \
+	(*(CGL_MACRO_CONTEXT)->disp.gen_renderbuffers_EXT)(CGL_MACRO_CONTEXT_RENDERER, n, renderbuffers)
+
+#define glRenderbufferStorage(target, internalformat, width, height) \
+	(*(CGL_MACRO_CONTEXT)->disp.renderbuffer_storage_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, height)
+
+#define glGetRenderbufferParameteriv(target, pname, params) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_renderbuffer_parameteriv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
+
+#define glIsFramebuffer(framebuffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.is_framebuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, framebuffer)
+
+#define glBindFramebuffer(target, framebuffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.bind_framebuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, framebuffer)
+
+#define glDeleteFramebuffers(n, framebuffers) \
+	(*(CGL_MACRO_CONTEXT)->disp.delete_framebuffers_EXT)(CGL_MACRO_CONTEXT_RENDERER, n, framebuffers)
+
+#define glGenFramebuffers(n, framebuffers) \
+	(*(CGL_MACRO_CONTEXT)->disp.gen_framebuffers_EXT)(CGL_MACRO_CONTEXT_RENDERER, n, framebuffers)
+
+#define glCheckFramebufferStatus(target) \
+	(*(CGL_MACRO_CONTEXT)->disp.check_framebuffer_status_EXT)(CGL_MACRO_CONTEXT_RENDERER, target)
+
+#define glFramebufferTexture1D(target, attachment, textarget, texture, level) \
+	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_texture1D_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level)
+
+#define glFramebufferTexture2D(target, attachment, textarget, texture, level) \
+	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_texture2D_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level)
+
+#define glFramebufferTexture3D(target, attachment, textarget, texture, level, zoffset) \
+	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_texture3D_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level, zoffset)
+
+#define glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) \
+	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_renderbuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, renderbuffertarget, renderbuffer)
+
+#define glGetFramebufferAttachmentParameteriv(target, attachment, pname, params) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_framebuffer_attachment_parameteriv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, pname, params)
+
+#define glGenerateMipmap(target) \
+	(*(CGL_MACRO_CONTEXT)->disp.generate_mipmap_EXT)(CGL_MACRO_CONTEXT_RENDERER, target)
+
+#define glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) \
+	(*(CGL_MACRO_CONTEXT)->disp.blit_framebuffer_EXT)(CGL_MACRO_CONTEXT_RENDERER, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter)
+
+#define glRenderbufferStorageMultisample(target, samples, internalformat, width, height) \
+	(*(CGL_MACRO_CONTEXT)->disp.renderbuffer_storage_multisample_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, samples, internalformat, width, height)
+
+#define glFramebufferTextureLayer(target, attachment, texture, level, layer) \
+	(*(CGL_MACRO_CONTEXT)->disp.framebuffer_texture_layer_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, attachment, texture, level, layer)
+
+
 /* GL_EXT_transform_feedback */
-#define glBindBufferRangeEXT(target, index, buffer, offset, size) \
-	(*(CGL_MACRO_CONTEXT)->disp.bind_buffer_range_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, buffer, offset, size)
+#define glBindBufferRangeEXT glBindBufferRange
+#define glBindBufferBaseEXT  glBindBufferBase
 #define glBindBufferOffsetEXT(target, index, buffer, offset) \
 	(*(CGL_MACRO_CONTEXT)->disp.bind_buffer_offset_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, buffer, offset)
-#define glBindBufferBaseEXT(target, index, buffer) \
-	(*(CGL_MACRO_CONTEXT)->disp.bind_buffer_base_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, buffer)
+
 #define glBeginTransformFeedbackEXT(primitiveMode) \
 	(*(CGL_MACRO_CONTEXT)->disp.begin_transform_feedback_EXT)(CGL_MACRO_CONTEXT_RENDERER, primitiveMode)
 #define glEndTransformFeedbackEXT() \
@@ -2427,6 +2522,8 @@
 	(*(CGL_MACRO_CONTEXT)->disp.transform_feedback_varyings_EXT)(CGL_MACRO_CONTEXT_RENDERER, program, count, varyings, bufferMode)
 #define glGetTransformFeedbackVaryingEXT(program, index, bufSize, length, size, type, name) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_transform_feedback_varying_EXT)(CGL_MACRO_CONTEXT_RENDERER, program, index, bufSize, length, size, type, name)
+
+/* GL_EXT_transform_feedback || GL_EXT_draw_buffers2 */
 #define glGetIntegerIndexedvEXT(param, index, values) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_integer_indexedv_EXT)(CGL_MACRO_CONTEXT_RENDERER, param, index, values)
 #define glGetBooleanIndexedvEXT(param, index, values) \
@@ -2441,18 +2538,18 @@
 	(*(CGL_MACRO_CONTEXT)->disp.get_uniform_buffer_offset_EXT)(CGL_MACRO_CONTEXT_RENDERER, program, location)
 
 /* GL_EXT_texture_integer */
-#define glClearColorIiEXT ( r, g, b, a ) \
+#define glClearColorIiEXT(r, g, b, a) \
 	(*(CGL_MACRO_CONTEXT)->disp.clear_colorIi_EXT)(CGL_MACRO_CONTEXT_RENDERER, r, g, b, a)
-#define glClearColorIuiEXT ( r, g, b, a ) \
+#define glClearColorIuiEXT(r, g, b, a) \
 	(*(CGL_MACRO_CONTEXT)->disp.clear_colorIui_EXT)(CGL_MACRO_CONTEXT_RENDERER, r, g, b, a)
-#define glTexParameterIivEXT( target, pname, params ) \
+#define glTexParameterIivEXT(target, pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.tex_parameterIiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
-#define glTexParameterIuivEXT( target, pname, params ) \
+#define glTexParameterIuivEXT(target, pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.tex_parameterIuiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
-#define glGetTexParameterIivEXT ( target, pname, params) \
+#define glGetTexParameterIivEXT(target, pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_tex_parameterIiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
-#define glGetTexParameterIiuvEXT ( target, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_tex_parameterIiuv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
+#define glGetTexParameterIuivEXT(target, pname, params) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_tex_parameterIuiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 /* GL_EXT_gpu_shader4 */
 #define glVertexAttribI1iEXT(index, x) \
@@ -2482,9 +2579,9 @@
 #define glVertexAttribI1uivEXT(index, v) \
 	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribI1uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
 #define glVertexAttribI2uivEXT(index, v) \
-	(* (CGL_MACRO_CONTEXT)->disp.vertex_attribI2uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
+	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribI2uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
 #define glVertexAttribI3uivEXT(index, v) \
-	(* (CGL_MACRO_CONTEXT)->disp.vertex_attribI3uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
+	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribI3uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
 #define glVertexAttribI4uivEXT(index, v) \
 	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribI4uiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, v)
 #define glVertexAttribI4bvEXT(index, v) \
@@ -2498,9 +2595,9 @@
 #define glVertexAttribIPointerEXT(index, size, type, stride, pointer) \
 	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribI_pointer_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, size, type, stride, pointer)
 #define glGetVertexAttribIivEXT(index, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribIiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, pname, params)
+	(*(CGL_MACRO_CONTEXT)->disp.get_vertex_attribIiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, pname, params)
 #define glGetVertexAttribIuivEXT(index, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.vertex_attribIuiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, pname, params)
+	(*(CGL_MACRO_CONTEXT)->disp.get_vertex_attribIuiv_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, pname, params)
 #define glUniform1uiEXT(location, v0) \
 	(*(CGL_MACRO_CONTEXT)->disp.uniform1ui_EXT)(CGL_MACRO_CONTEXT_RENDERER, location, v0)
 #define glUniform2uiEXT(location, v0, v1) \
@@ -2523,6 +2620,35 @@
 	(*(CGL_MACRO_CONTEXT)->disp.bind_frag_data_location_EXT)(CGL_MACRO_CONTEXT_RENDERER, program, colorNumber, name)
 #define glGetFragDataLocationEXT(program, name) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_frag_data_location_EXT)(CGL_MACRO_CONTEXT_RENDERER, program, name)
+
+/* GL_EXT_draw_buffers2 */
+#define glColorMaskIndexedEXT(index, r, g, b, a) \
+	(*(CGL_MACRO_CONTEXT)->disp.color_mask_indexed_EXT)(CGL_MACRO_CONTEXT_RENDERER, index, r, g, b, a)
+#define glEnableIndexedEXT(target, index) \
+	(*(CGL_MACRO_CONTEXT)->disp.enable_indexed_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index)
+#define glDisableIndexedEXT(target, index) \
+	(*(CGL_MACRO_CONTEXT)->disp.disable_indexed_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index)
+#define glIsEnabledIndexedEXT(target, index) \
+	(*(CGL_MACRO_CONTEXT)->disp.is_enabled_indexed_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index)
+
+/* GL_EXT_provoking_vertex */
+#define glProvokingVertexEXT(mode) \
+	(*(CGL_MACRO_CONTEXT)->disp.provoking_vertex_EXT)(CGL_MACRO_CONTEXT_RENDERER, mode)
+
+#if GL_ARB_instanced_arrays
+/* GL_ARB_instanced_arrays */
+#define glVertexAttribDivisorARB(index,divisor) \
+	(*(CGL_MACRO_CONTEXT)->disp.vertex_attrib_divisor)(CGL_MACRO_CONTEXT_RENDERER, index, divisor)
+#endif
+
+#if GL_ARB_instanced_arrays || GL_EXT_draw_instanced
+#define glDrawArraysInstancedARB(mode, first, count, primcount) \
+	(*(CGL_MACRO_CONTEXT)->disp.draw_arrays_instanced)(CGL_MACRO_CONTEXT_RENDERER, mode, first, count, primcount)
+
+#define glDrawElementsInstancedARB(mode, count, type, indices, primcount) \
+	(*(CGL_MACRO_CONTEXT)->disp.draw_elements_instanced)(CGL_MACRO_CONTEXT_RENDERER, mode, count, type, indices, primcount)
+
+#endif
 
 /*********** APPLE Extensions ***********************************************/
 
@@ -2638,13 +2764,21 @@
 
 /* GL_APPLE_object_purgeability */
 #define glObjectPurgeableAPPLE(objectType, name, option) \
-        (*(CGL_MACRO_CONTEXT)->disp.object_purgeable_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, option)
+	(*(CGL_MACRO_CONTEXT)->disp.object_purgeable_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, option)
 
 #define glObjectUnpurgeableAPPLE(objectType, name, option) \
-        (*(CGL_MACRO_CONTEXT)->disp.object_unpurgeable_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, option)
+	(*(CGL_MACRO_CONTEXT)->disp.object_unpurgeable_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, option)
 	
 #define glGetObjectParameterivAPPLE(objectType, name, pname, params) \
-        (*(CGL_MACRO_CONTEXT)->disp.get_object_parameteriv_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, pname, params)
+	(*(CGL_MACRO_CONTEXT)->disp.get_object_parameteriv_APPLE)(CGL_MACRO_CONTEXT_RENDERER, objectType, name, pname, params)
+
+#if GL_APPLE_vertex_point_size
+#define glPointSizePointerAPPLE(type, stride, pointer) \
+	(*(CGL_MACRO_CONTEXT)->disp.point_size_pointer)(CGL_MACRO_CONTEXT_RENDERER, type, stride, pointer)
+
+#define glVertexPointSizefAPPLEf(size) \
+	(*(CGL_MACRO_CONTEXT)->disp.vertex_point_sizef_APPLEf)(CGL_MACRO_CONTEXT_RENDERER, size)
+#endif
 
 /*********** ATI Extensions *************************************************/
 
@@ -2678,52 +2812,12 @@
 #define glPointParameterivNV(pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.point_parameteriv)(CGL_MACRO_CONTEXT_RENDERER, pname, params)
 
-/* GL_NV_register_combiners */
-#define glCombinerParameterfvNV(pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, pname, params)
+/* GL_NV_conditional_render */
+#define glBeginConditionalRenderNV(id, mode) \
+	(*(CGL_MACRO_CONTEXT)->disp.begin_conditional_render_NV)(CGL_MACRO_CONTEXT_RENDERER, id, mode)
 
-#define glCombinerParameterfNV(pname, param) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_parameterf_NV)(CGL_MACRO_CONTEXT_RENDERER, pname, param)
-
-#define glCombinerParameterivNV(pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_parameteriv_NV)(CGL_MACRO_CONTEXT_RENDERER, pname, params)
-
-#define glCombinerParameteriNV(pname, param) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_parameteri_NV)(CGL_MACRO_CONTEXT_RENDERER, pname, param)
-
-#define glCombinerInputNV(stage, portion, variable, input, mapping ,componentUsage) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_input_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, input, mapping ,componentUsage)
-
-#define glCombinerOutputNV(stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_output_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum)
-
-#define glFinalCombinerInputNV(variable, input, mapping, componentUsage) \
-	(*(CGL_MACRO_CONTEXT)->disp.final_combiner_input_NV)(CGL_MACRO_CONTEXT_RENDERER, variable, input, mapping, componentUsage)
-
-#define glGetCombinerInputParameterfvNV(stage, portion, variable, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_combiner_input_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, pname, params)
-
-#define glGetCombinerInputParameterivNV(stage, portion, variable, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_combiner_input_parameteriv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, pname, params)
-
-#define glGetCombinerOutputParameterfvNV(stage, portion, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_combiner_output_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, pname, params)
-
-#define glGetCombinerOutputParameterivNV(stage, portion, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_combiner_output_parameteriv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, portion, pname, params)
-
-#define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_final_combiner_input_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, variable, pname, params)
-
-#define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_final_combiner_input_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, variable, pname, params)
-
-/* GL_NV_register_combiners2 */
-#define glCombinerStageParameterfvNV(stage, pname, params) \
-	(*(CGL_MACRO_CONTEXT)->disp.combiner_stage_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, pname, params)
-
-#define glGetCombinerStageParameterfvNV(stage, pname, param) \
-	(*(CGL_MACRO_CONTEXT)->disp.get_combiner_stage_parameterfv_NV)(CGL_MACRO_CONTEXT_RENDERER, stage, pname, param)
+#define glEndConditionalRenderNV() \
+	(*(CGL_MACRO_CONTEXT)->disp.end_conditional_render_NV)(CGL_MACRO_CONTEXT_RENDERER)
 
 #endif /* _CGLMACRO_H */
 

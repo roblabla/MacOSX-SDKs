@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,6 +20,7 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+ 
 
 #ifndef _IOKIT_IOUSBMASSSTORAGECLASS_H
 #define _IOKIT_IOUSBMASSSTORAGECLASS_H
@@ -39,10 +40,11 @@
 // Headers for SCSI Protocol support definitions
 #include <IOKit/scsi/IOSCSIProtocolServices.h>
 
-// Flag to turn debugging for the USB Mass Storage class on and off
-#define USB_MASS_STORAGE_DEBUG	0
+// BSD includes
+#include <sys/sysctl.h>
 
 #define UNUSED(x) ((void)x)
+
 
 #pragma mark -
 #pragma mark Vendor Specific Device Support
@@ -50,10 +52,24 @@
 #define kIOUSBMassStoragePreferredSubclass		"Preferred Subclass"
 #define kIOUSBMassStoragePreferredProtocol		"Preferred Protocol"
 #define kIOUSBMassStorageResetOnResume			"Reset On Resume"
-#define kIOUSBMassStorageUseStandardUSBReset    "Use Standard USB Reset"
-#define kIOUSBKnownCSWTagIssues                 "Known CSW Tag Issues"
+#define kIOUSBMassStorageUseStandardUSBReset	"Use Standard USB Reset"
+#define kIOUSBKnownCSWTagIssues					"Known CSW Tag Issues"
 #define kIOUSBMassStorageMaxLogicalUnitNumber	"Max Logical Unit Number"
-#define kIOPropertyIOUnitKey                    "IOUnit"
+#define kIOPropertyIOUnitKey					"IOUnit"
+#define kIOUSBMassStorageDoNotMatch				"Do Not Match MSC"
+#define kIOUSBMassStorageDoNotOperate			"Do Not Operate"
+#define kIOUSBMassStorageEnableSuspendResumePM	"Enable Port Suspend-Resume PM"
+#define kIOUSBMassStoragePostResetCoolDown		"Reset Recovery Time"
+
+enum 
+{
+	kUSBDAddressLength = 10
+};
+
+enum 
+{
+	kIOUSBMassStorageReconfigurationTimeoutMS = 5000
+};
 
 #pragma mark -
 #pragma mark CBI Protocol Strutures
@@ -109,6 +125,7 @@ struct	BulkOnlyRequestBlock
 };
 
 typedef struct BulkOnlyRequestBlock		BulkOnlyRequestBlock;
+
 
 #pragma mark -
 #pragma mark IOUSBMassStorageClass definition
@@ -171,6 +188,16 @@ protected:
 		bool                    fWaitingForReconfigurationMessage;
 		bool					fTerminating;
         bool                    fKnownCSWTagMismatchIssues;
+        bool                    fPortSuspendResumeForPMEnabled;
+        bool                    fPortIsSuspended;
+		bool					fRequiresResetOnResume;
+		bool					fAutonomousSpinDownWorkAround;
+		UInt8					fConsecutiveResetCount;
+		bool					fClearStallInProgress;				/* OBSOLETE */
+		bool					fTerminationDeferred;
+		UInt32					fRequiredMaxBusStall;
+		bool					fBlockOnResetThread;
+		UInt32					fPostDeviceResetCoolDownInterval;
 	};
     ExpansionData *				reserved;
 	
@@ -186,6 +213,16 @@ protected:
 	#define fWaitingForReconfigurationMessage	reserved->fWaitingForReconfigurationMessage
 	#define fTerminating						reserved->fTerminating
     #define fKnownCSWTagMismatchIssues          reserved->fKnownCSWTagMismatchIssues
+    #define fPortSuspendResumeForPMEnabled      reserved->fPortSuspendResumeForPMEnabled
+    #define fPortIsSuspended                    reserved->fPortIsSuspended
+	#define fRequiresResetOnResume				reserved->fRequiresResetOnResume
+	#define fAutonomousSpinDownWorkAround		reserved->fAutonomousSpinDownWorkAround
+	#define fConsecutiveResetCount				reserved->fConsecutiveResetCount
+	#define fClearStallInProgress				reserved->fClearStallInProgress
+	#define fTerminationDeferred				reserved->fTerminationDeferred
+	#define fRequiredMaxBusStall				reserved->fRequiredMaxBusStall
+	#define fBlockOnResetThread					reserved->fBlockOnResetThread
+	#define fPostDeviceResetCoolDownInterval	reserved->fPostDeviceResetCoolDownInterval
 	
 	// Enumerated constants used to control various aspects of this
 	// driver.
@@ -333,7 +370,7 @@ protected:
 		kByteCountOfCBW					= 31,
 
 		// CBW LUN related definitions
-		kCBWLUNMask						= 0x07,
+		kCBWLUNMask						= 0x0F,
 
 		kCBWFlagsDataOut				= 0x00,
 		kCBWFlagsDataIn					= 0x80
@@ -423,27 +460,43 @@ protected:
 	static IOReturn		sWaitForReset( void * refcon );
 	IOReturn			GatedWaitForReset( void );
 	
-	static IOReturn		sWaitForTaskAbort( void * refcon );
-	IOReturn			GatedWaitForTaskAbort( void );
+	static IOReturn		sWaitForTaskAbort( void * refcon );			/* OBSOLETE */
+	IOReturn			GatedWaitForTaskAbort( void );				/* OBSOLETE */
 	
 	static void			sResetDevice( void * refcon );
-	static void			sAbortCurrentSCSITask( void * refcon );
+	
+	static void			sAbortCurrentSCSITask( void * refcon );		/* OBSOLETE */
 	
     OSMetaClassDeclareReservedUsed( IOUSBMassStorageClass, 1 );
-	virtual IOReturn	StartDeviceRecovery( void );
+	virtual IOReturn	StartDeviceRecovery( void );				/* OBSOLETE */
 
     OSMetaClassDeclareReservedUsed( IOUSBMassStorageClass, 2 );
-	virtual void		FinishDeviceRecovery( IOReturn	status );
+	virtual void		FinishDeviceRecovery( IOReturn	status );	/* OBSOLETE */
 
 	static void			DeviceRecoveryCompletionAction(
 		                	void *			target,
 		                	void *			parameter,
 		                	IOReturn		status,
-		                	UInt32			bufferSizeRemaining );
+		                	UInt32			bufferSizeRemaining );	/* OBSOLETE */
 
     void                ResetDeviceNow( bool waitForReset );
+	
 	void                AbortCurrentSCSITask( void );
-	 
+	
+	bool                IsPhysicalInterconnectLocationInternal ( void );
+	    
+	IOReturn            SuspendPort ( bool suspend );
+	
+private:
+	
+	void				ClearPipeStall ( void );
+	
+	IOReturn			AcceptSCSITask ( SCSITaskIdentifier scsiTask, bool * pAccepted );
+	
+	void				CheckDeferredTermination ( void );
+	
+	void				GatedCompleteSCSICommand ( SCSITaskIdentifier request, SCSIServiceResponse * serviceResponse, SCSITaskStatus * taskStatus );
+	
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 3 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 4 );
@@ -459,6 +512,8 @@ protected:
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 14 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 15 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 16 );
+	
 };
+
 
 #endif _IOKIT_IOUSBMASSSTORAGECLASS_H

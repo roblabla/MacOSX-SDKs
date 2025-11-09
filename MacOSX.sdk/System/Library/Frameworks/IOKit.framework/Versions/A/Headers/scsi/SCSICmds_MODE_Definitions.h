@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,11 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-// This file contains all definitions for the data returned from
-// the MODE_SENSE_6 and MODE_SENSE_10 commands.
-
 #ifndef _IOKIT_SCSI_CMDS_MODE_DEFINITIONS_H_
 #define _IOKIT_SCSI_CMDS_MODE_DEFINITIONS_H_
+
+
+//-----------------------------------------------------------------------------
+//	Includes
+//-----------------------------------------------------------------------------
 
 #if KERNEL
 #include <IOKit/IOTypes.h>
@@ -33,18 +35,35 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+
+/*! @header SCSI Request Sense Definitions
+	@discussion
+	This file contains all definitions for the data returned from
+	the MODE_SENSE_6 and MODE_SENSE_10 commands.
+*/
+
 #pragma pack(1)
 
-struct SPCModeParameterHeader6
+/*!
+@struct SPCModeParameterHeader6
+@discussion
+Mode Parameter Header for the MODE_SENSE_6 command.
+*/
+typedef struct SPCModeParameterHeader6
 {
 	UInt8		MODE_DATA_LENGTH;
 	UInt8		MEDIUM_TYPE;
 	UInt8		DEVICE_SPECIFIC_PARAMETER;
 	UInt8		BLOCK_DESCRIPTOR_LENGTH;
-};
-typedef struct SPCModeParameterHeader6 SPCModeParameterHeader6;
+} SPCModeParameterHeader6;
 
-struct SPCModeParameterHeader10
+
+/*!
+@struct SPCModeParameterHeader10
+@discussion
+Mode Parameter Header for the MODE_SENSE_10 command.
+*/
+typedef struct SPCModeParameterHeader10
 {
 	UInt16		MODE_DATA_LENGTH;
 	UInt8		MEDIUM_TYPE;
@@ -52,60 +71,113 @@ struct SPCModeParameterHeader10
 	UInt8		LONGLBA;
 	UInt8		RESERVED;
 	UInt16		BLOCK_DESCRIPTOR_LENGTH;
-};
-typedef struct SPCModeParameterHeader10 SPCModeParameterHeader10;
+} SPCModeParameterHeader10;
 
+
+/*!
+@enum Long LBA Bitfield definitions
+@discussion
+Long LBA Bitfield definitions for Mode Parameter Header
+for MODE_SENSE_10 command.
+@constant kModeSenseParameterHeader10_LongLBABit
+Bit to indicate Long LBA block descriptors follow.
+@constant kModeSenseParameterHeader10_LongLBAMask
+Mask to test for kModeSenseParameterHeader10_LongLBABit.
+*/
 enum
 {
 	kModeSenseParameterHeader10_LongLBABit	=  0,
 	kModeSenseParameterHeader10_LongLBAMask	=  (1 << kModeSenseParameterHeader10_LongLBABit),
 };
 
-// SBC definitions for Device Specific Parameter in the Mode Sense Header Block
+
+/*!
+@enum Device Specific Parameter Bitfield definitions
+@discussion
+SBC definitions for Device Specific Parameter in the
+Mode Sense Header Block.
+@constant kModeSenseSBCDeviceSpecific_DPOFUABit
+Bit to indicate DPO and FUA bits are accepted by the device server.
+@constant kModeSenseSBCDeviceSpecific_WriteProtectBit
+Bit to indicate medium is write protected.
+@constant kModeSenseSBCDeviceSpecific_DPOFUAMask
+Mask to test for kModeSenseSBCDeviceSpecific_DPOFUABit.
+@constant kModeSenseSBCDeviceSpecific_WriteProtectMask
+Mask to test for kModeSenseSBCDeviceSpecific_WriteProtectBit.
+*/
 enum
 {
-	kModeSenseSBCDeviceSpecific_WriteProtectBit	 =  7,
-	kModeSenseSBCDeviceSpecific_WriteProtectMask =  (1 << kModeSenseSBCDeviceSpecific_WriteProtectBit),
+	kModeSenseSBCDeviceSpecific_DPOFUABit	 		=  4,
+	kModeSenseSBCDeviceSpecific_WriteProtectBit	 	=  7,
+	kModeSenseSBCDeviceSpecific_DPOFUAMask 			=  (1 << kModeSenseSBCDeviceSpecific_DPOFUABit),
+	kModeSenseSBCDeviceSpecific_WriteProtectMask 	=  (1 << kModeSenseSBCDeviceSpecific_WriteProtectBit)
 };
 
-// General mode parameter block descriptor
-struct ModeParameterBlockDescriptor
+
+/*!
+@struct ModeParameterBlockDescriptor
+@discussion
+General mode parameter block descriptor.
+*/
+typedef struct ModeParameterBlockDescriptor
 {
 	UInt8		DENSITY_CODE;
 	UInt8		NUMBER_OF_BLOCKS[3];
 	UInt8		RESERVED;
 	UInt8		BLOCK_LENGTH[3];
-};
-typedef struct ModeParameterBlockDescriptor ModeParameterBlockDescriptor;
+} ModeParameterBlockDescriptor;
 
-// Direct Access Storage Device mode parameter block descriptor
-struct DASDModeParameterBlockDescriptor
+
+/*!
+@struct DASDModeParameterBlockDescriptor
+@discussion
+Direct Access Storage Device mode parameter block descriptor.
+*/
+typedef struct DASDModeParameterBlockDescriptor
 {
 	UInt32		NUMBER_OF_BLOCKS;
 	UInt8		DENSITY_CODE;
 	UInt8		BLOCK_LENGTH[3];
-};
-typedef struct DASDModeParameterBlockDescriptor DASDModeParameterBlockDescriptor;
+} DASDModeParameterBlockDescriptor;
 
-// Long LBA mode parameter block descriptor
-struct LongLBAModeParameterBlockDescriptor
+
+/*!
+@struct LongLBAModeParameterBlockDescriptor
+@discussion
+Long LBA mode parameter block descriptor.
+*/
+typedef struct LongLBAModeParameterBlockDescriptor
 {
 	UInt64		NUMBER_OF_BLOCKS;
 	UInt8		DENSITY_CODE;
 	UInt8		RESERVED[3];
 	UInt32		BLOCK_LENGTH;
-};
-typedef struct LongLBAModeParameterBlockDescriptor LongLBAModeParameterBlockDescriptor;
+} LongLBAModeParameterBlockDescriptor;
 
 
-// Mode Page format header
-struct ModePageFormatHeader
+/*!
+@struct ModePageFormatHeader
+@discussion
+Mode Page format header.
+*/
+typedef struct ModePageFormatHeader
 {
 	UInt8		PS_PAGE_CODE;
 	UInt8		PAGE_LENGTH;
-};
-typedef struct ModePageFormatHeader ModePageFormatHeader;
+} ModePageFormatHeader;
 
+
+/*!
+@enum Mode Page Format bit definitions
+@discussion
+Mode Page Format bit definitions.
+@constant kModePageFormat_PS_Bit
+Bit to indicate Parameters Saveable.
+@constant kModePageFormat_PAGE_CODE_Mask
+Mask to obtain the PAGE_CODE from the PS_PAGE_CODE field.
+@constant kModePageFormat_PS_Mask
+Mask to test for kModePageFormat_PS_Bit.
+*/
 enum
 {
 	kModePageFormat_PS_Bit			= 7,
@@ -121,22 +193,35 @@ enum
 #pragma mark -
 #endif
 
+
+/*!
+@enum SPC Mode Pages
+@discussion
+SPC Mode Page definitions.
+@constant kSPCModePagePowerConditionCode
+Power Conditions Mode Page value.
+@constant kSPCModePageAllPagesCode
+All Mode Pages value.
+*/
 enum
 {
 	kSPCModePagePowerConditionCode		= 0x1A,
 	kSPCModePageAllPagesCode			= 0x3F
 };
 
-// SPC PAGE_CODE 0x1A
-struct SPCModePagePowerCondition
+/*!
+@struct SPCModePagePowerCondition
+@discussion
+Power Conditions Mode Page (PAGE CODE 0x1A) format.
+*/
+typedef struct SPCModePagePowerCondition
 {
 	ModePageFormatHeader	header;
 	UInt8					RESERVED;
 	UInt8					IDLE_STANDBY;
 	UInt32					IDLE_CONDITION_TIMER;
 	UInt32					STANDBY_CONDITION_TIMER;
-};
-typedef struct SPCModePagePowerCondition SPCModePagePowerCondition;
+} SPCModePagePowerCondition;
 
 
 #if 0
@@ -145,6 +230,20 @@ typedef struct SPCModePagePowerCondition SPCModePagePowerCondition;
 #pragma mark -
 #endif
 
+
+/*!
+@enum SBC Mode Pages
+@discussion
+SBC Mode Page definitions.
+@constant kSBCModePageFormatDeviceCode
+Format Device Mode Page value.
+@constant kSBCModePageRigidDiskGeometryCode
+Rigid Disk Geometry Page value.
+@constant kSBCModePageFlexibleDiskCode
+Flexible Disk Page value.
+@constant kSBCModePageCachingCode
+Caching Page value.
+*/
 enum
 {
 	kSBCModePageFormatDeviceCode		= 0x03,
@@ -153,8 +252,13 @@ enum
 	kSBCModePageCachingCode				= 0x08
 };
 
-// SBC PAGE_CODE 0x03
-struct SBCModePageFormatDevice
+
+/*!
+@struct SBCModePageFormatDevice
+@discussion
+Format Device Mode Page (PAGE CODE 0x03) format.
+*/
+typedef struct SBCModePageFormatDevice
 {
 	ModePageFormatHeader	header;
 	UInt16					TRACKS_PER_ZONE;
@@ -168,11 +272,15 @@ struct SBCModePageFormatDevice
 	UInt16					CYLINDER_SKEW_FACTOR;
 	UInt8					SSEC_HSEC_RMB_SURF;
 	UInt8					RESERVED[3];
-};
-typedef struct SBCModePageFormatDevice SBCModePageFormatDevice;
+} SBCModePageFormatDevice;
 
-// SBC PAGE_CODE 0x04
-struct SBCModePageRigidDiskGeometry
+
+/*!
+@struct SBCModePageRigidDiskGeometry
+@discussion
+Rigid Disk Geometry Mode Page (PAGE CODE 0x04) format.
+*/
+typedef struct SBCModePageRigidDiskGeometry
 {
 	ModePageFormatHeader	header;
 	UInt8					NUMBER_OF_CYLINDERS[3];
@@ -186,16 +294,28 @@ struct SBCModePageRigidDiskGeometry
 	UInt8					RESERVED;
 	UInt16					MEDIUM_ROTATION_RATE;
 	UInt8					RESERVED1[2];
-};
-typedef struct SBCModePageRigidDiskGeometry SBCModePageRigidDiskGeometry;
+} SBCModePageRigidDiskGeometry;
 
+
+/*!
+@enum Rigid Disk Geometry bitfields
+@discussion
+Bit field masks for Rigid Disk Geometry structure fields.
+@constant kSBCModePageRigidDiskGeometry_RPL_Mask
+Mask for use with the RPL field.
+*/
 enum
 {
 	kSBCModePageRigidDiskGeometry_RPL_Mask	= 0x03
 };
 
-// SBC PAGE_CODE 0x05
-struct SBCModePageFlexibleDisk
+
+/*!
+@struct SBCModePageFlexibleDisk
+@discussion
+Flexible Disk Mode Page (PAGE CODE 0x05) format.
+*/
+typedef struct SBCModePageFlexibleDisk
 {
 	ModePageFormatHeader	header;
 	UInt16					TRANSFER_RATE;
@@ -219,39 +339,77 @@ struct SBCModePageFlexibleDisk
 	UInt8					PIN_4_PIN_1;
 	UInt16					MEDIUM_ROTATION_RATE;
 	UInt8					RESERVED[2];
-};
-typedef struct SBCModePageFlexibleDisk SBCModePageFlexibleDisk;
+} SBCModePageFlexibleDisk;
 
-// Byte 21
+
+/*!
+@enum TRDY_SSN_MO bitfields
+@discussion
+Bit field definitions and masks for Flexible Disk TRDY_SSN_MO field.
+@constant kSBCModePageFlexibleDisk_MO_Bit
+MO Bit definition.
+@constant kSBCModePageFlexibleDisk_SSN_Bit
+SSN Bit definition.
+@constant kSBCModePageFlexibleDisk_TRDY_Bit
+TRDY Bit definition.
+@constant kSBCModePageFlexibleDisk_MO_Mask
+Mask for use with TRDY_SSN_MO field.
+@constant kSBCModePageFlexibleDisk_SSN_Mask
+Mask for use with TRDY_SSN_MO field.
+@constant kSBCModePageFlexibleDisk_TRDY_Mask
+Mask for use with TRDY_SSN_MO field.
+*/
 enum
 {
 	// Bits 0:4 Reserved
 	kSBCModePageFlexibleDisk_MO_Bit		= 5,
 	kSBCModePageFlexibleDisk_SSN_Bit	= 6,
-	kSBCModePageFlexibleDisk_TRDY_Bit	= 7
-};
-
-enum
-{
+	kSBCModePageFlexibleDisk_TRDY_Bit	= 7,
+	
 	kSBCModePageFlexibleDisk_MO_Mask	= (1 << kSBCModePageFlexibleDisk_MO_Bit),
 	kSBCModePageFlexibleDisk_SSN_Mask	= (1 << kSBCModePageFlexibleDisk_SSN_Bit),
 	kSBCModePageFlexibleDisk_TRDY_Mask	= (1 << kSBCModePageFlexibleDisk_TRDY_Bit)
 };
 
-// Byte 22
+
+/*!
+@enum SPC bitfields
+@discussion
+Bit field definitions and masks for Flexible Disk SPC field.
+@constant kSBCModePageFlexibleDisk_SPC_Mask
+Mask for use with SPC field.
+*/
 enum
 {
 	kSBCModePageFlexibleDisk_SPC_Mask	= 0x0F
 };
 
-// Byte 26
+
+/*!
+@enum PIN_34_PIN_2 bitfields
+@discussion
+Bit field definitions and masks for Flexible Disk PIN_34_PIN_2 field.
+@constant kSBCModePageFlexibleDisk_PIN_2_Mask
+Mask for use with PIN_34_PIN_2 field.
+@constant kSBCModePageFlexibleDisk_PIN_34_Mask
+Mask for use with PIN_34_PIN_2 field.
+*/
 enum
 {
 	kSBCModePageFlexibleDisk_PIN_2_Mask		= 0x0F,
 	kSBCModePageFlexibleDisk_PIN_34_Mask	= 0xF0
 };
 
-// Byte 27
+
+/*!
+@enum PIN_4_PIN_1 bitfields
+@discussion
+Bit field definitions and masks for Flexible Disk PIN_4_PIN_1 field.
+@constant kSBCModePageFlexibleDisk_PIN_1_Mask
+Mask for use with PIN_4_PIN_1 field.
+@constant kSBCModePageFlexibleDisk_PIN_4_Mask
+Mask for use with PIN_4_PIN_1 field.
+*/
 enum
 {
 	kSBCModePageFlexibleDisk_PIN_1_Mask		= 0x0F,
@@ -259,8 +417,12 @@ enum
 };
 
 
-// SBC PAGE_CODE 0x08
-struct SBCModePageCaching
+/*!
+@struct SBCModePageCaching
+@discussion
+Caching Mode Page (PAGE CODE 0x08) format.
+*/
+typedef struct SBCModePageCaching
 {
 	ModePageFormatHeader	header;
 	UInt8					flags;
@@ -274,10 +436,46 @@ struct SBCModePageCaching
 	UInt16					CACHE_SEGMENT_SIZE;
 	UInt8					RESERVED;
 	UInt8					NON_CACHE_SEGMENT_SIZE[3];
-};
-typedef struct SBCModePageCaching SBCModePageCaching;
+} SBCModePageCaching;
 
-// flags field bits
+
+/*!
+@enum Caching flags bitfields
+@discussion
+Bit field definitions and masks for Caching flags field.
+@constant kSBCModePageCaching_RCD_Bit
+RCD Bit definition.
+@constant kSBCModePageCaching_MF_Bit
+MF Bit definition.
+@constant kSBCModePageCaching_WCE_Bit
+WCE Bit definition.
+@constant kSBCModePageCaching_SIZE_Bit
+SIZE Bit definition.
+@constant kSBCModePageCaching_DISC_Bit
+DISC Bit definition.
+@constant kSBCModePageCaching_CAP_Bit
+CAP Bit definition.
+@constant kSBCModePageCaching_ABPF_Bit
+ABPF Bit definition.
+@constant kSBCModePageCaching_IC_Bit
+IC Bit definition.
+@constant kSBCModePageCaching_RCD_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_MF_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_WCE_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_SIZE_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_DISC_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_CAP_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_ABPF_Mask
+Mask for use with flags field.
+@constant kSBCModePageCaching_IC_Mask
+Mask for use with flags field.
+*/
 enum
 {
 	kSBCModePageCaching_RCD_Bit		= 0,
@@ -287,11 +485,8 @@ enum
 	kSBCModePageCaching_DISC_Bit	= 4,
 	kSBCModePageCaching_CAP_Bit		= 5,
 	kSBCModePageCaching_ABPF_Bit	= 6,
-	kSBCModePageCaching_IC_Bit		= 7
-};
+	kSBCModePageCaching_IC_Bit		= 7,
 
-enum
-{
 	kSBCModePageCaching_RCD_Mask	= (1 << kSBCModePageCaching_RCD_Bit),
 	kSBCModePageCaching_MF_Mask		= (1 << kSBCModePageCaching_MF_Bit),
 	kSBCModePageCaching_WCE_Mask	= (1 << kSBCModePageCaching_WCE_Bit),
@@ -302,14 +497,47 @@ enum
 	kSBCModePageCaching_IC_Mask		= (1 << kSBCModePageCaching_IC_Bit)
 };
 
-// Demand Read/Write Retention masks
+
+/*!
+@enum Demand Read/Write Retention masks
+@discussion
+Demand Read/Write Retention masks.
+@constant kSBCModePageCaching_DEMAND_WRITE_Mask
+Mask for the DEMAND_READ_WRITE_RETENTION_PRIORITY field.
+@constant kSBCModePageCaching_DEMAND_READ_Mask
+Mask for the DEMAND_READ_WRITE_RETENTION_PRIORITY field.
+*/
 enum
 {
 	kSBCModePageCaching_DEMAND_WRITE_Mask	= 0x00FF,
 	kSBCModePageCaching_DEMAND_READ_Mask 	= 0xFF00
 };
 
-// flags2 field bits
+/*!
+@enum Caching flags2 bitfields
+@discussion
+Bit field definitions and masks for Caching flags2 field.
+@constant kSBCModePageCaching_VS1_Bit
+VS1 Bit definition.
+@constant kSBCModePageCaching_VS2_Bit
+VS2 Bit definition.
+@constant kSBCModePageCaching_DRA_Bit
+DRA Bit definition.
+@constant kSBCModePageCaching_LBCSS_Bit
+LBCSS Bit definition.
+@constant kSBCModePageCaching_FSW_Bit
+FSW Bit definition.
+@constant kSBCModePageCaching_VS1_Mask
+Mask for use with flags2 field.
+@constant kSBCModePageCaching_VS2_Mask
+Mask for use with flags2 field.
+@constant kSBCModePageCaching_DRA_Mask
+Mask for use with flags2 field.
+@constant kSBCModePageCaching_LBCSS_Mask
+Mask for use with flags2 field.
+@constant kSBCModePageCaching_FSW_Mask
+Mask for use with flags2 field.
+*/
 enum
 {
 	// Bits 0:2 Reserved
@@ -317,11 +545,8 @@ enum
 	kSBCModePageCaching_VS2_Bit		= 4,
 	kSBCModePageCaching_DRA_Bit		= 5,
 	kSBCModePageCaching_LBCSS_Bit	= 6,
-	kSBCModePageCaching_FSW_Bit		= 7
-};
+	kSBCModePageCaching_FSW_Bit		= 7,
 
-enum
-{
 	kSBCModePageCaching_VS1_Mask	= (1 << kSBCModePageCaching_VS1_Bit),
 	kSBCModePageCaching_VS2_Mask	= (1 << kSBCModePageCaching_VS2_Bit),
 	kSBCModePageCaching_DRA_Mask	= (1 << kSBCModePageCaching_DRA_Bit),

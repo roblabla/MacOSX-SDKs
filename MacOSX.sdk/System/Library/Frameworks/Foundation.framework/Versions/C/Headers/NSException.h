@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString * const NSOldStyleException;
 
 /***************	Exception object	***************/
 
-#if __LP64__ && OBJC_ZEROCOST_EXCEPTIONS
+#if __OBJC2__
 __attribute__((__objc_exception__))
 #endif
 @interface NSException : NSObject <NSCopying, NSCoding> {
@@ -50,6 +50,7 @@ __attribute__((__objc_exception__))
 - (NSDictionary *)userInfo;
 
 - (NSArray *)callStackReturnAddresses AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSArray *)callStackSymbols AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (void)raise;
 
@@ -57,8 +58,8 @@ __attribute__((__objc_exception__))
 
 @interface NSException (NSExceptionRaisingConveniences)
 
-+ (void)raise:(NSString *)name format:(NSString *)format, ...;
-+ (void)raise:(NSString *)name format:(NSString *)format arguments:(va_list)argList;
++ (void)raise:(NSString *)name format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
++ (void)raise:(NSString *)name format:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
 
 @end
 
@@ -75,9 +76,57 @@ typedef void NSUncaughtExceptionHandler(NSException *exception);
 FOUNDATION_EXPORT NSUncaughtExceptionHandler *NSGetUncaughtExceptionHandler(void);
 FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler *);
 
+
 @class NSAssertionHandler;
 
-/* Implementation of asserts (ignore) */
+#if !defined(NS_BLOCK_ASSERTIONS) && defined(__STDC_VERSION__) && (199901L <= __STDC_VERSION__) && (defined(__GNUC__) || 0)
+
+#if !defined(_NSAssertBody)
+
+#define NSAssert(condition, desc, ...) \
+    do {			\
+	if (!(condition)) {	\
+	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
+		object:self file:[NSString stringWithUTF8String:__FILE__] \
+	    	lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+	}			\
+    } while(0)
+
+#define NSAssert1(condition, desc, arg1) NSAssert((condition), (desc), (arg1))
+#define NSAssert2(condition, desc, arg1, arg2) NSAssert((condition), (desc), (arg1), (arg2))
+#define NSAssert3(condition, desc, arg1, arg2, arg3) NSAssert((condition), (desc), (arg1), (arg2), (arg3))
+#define NSAssert4(condition, desc, arg1, arg2, arg3, arg4) NSAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4))
+#define NSAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5) NSAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
+
+#define NSParameterAssert(condition) NSAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
+
+#endif
+
+#if !defined(_NSCAssertBody)
+
+#define NSCAssert(condition, desc, ...) \
+    do {			\
+	if (!(condition)) {	\
+	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
+		file:[NSString stringWithUTF8String:__FILE__] \
+	    	lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+	}			\
+    } while(0)
+
+#define NSCAssert1(condition, desc, arg1) NSCAssert((condition), (desc), (arg1))
+#define NSCAssert2(condition, desc, arg1, arg2) NSCAssert((condition), (desc), (arg1), (arg2))
+#define NSCAssert3(condition, desc, arg1, arg2, arg3) NSCAssert((condition), (desc), (arg1), (arg2), (arg3))
+#define NSCAssert4(condition, desc, arg1, arg2, arg3, arg4) NSCAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4))
+#define NSCAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5) NSCAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
+
+#define NSCParameterAssert(condition) NSCAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
+
+#endif
+
+#endif
+
+
+/* Non-vararg implementation of asserts (ignore) */
 #if !defined(NS_BLOCK_ASSERTIONS)
 #if !defined(_NSAssertBody)
 #define _NSAssertBody(condition, desc, arg1, arg2, arg3, arg4, arg5)	\
@@ -111,6 +160,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
  * Asserts to use in Objective-C method bodies
  */
  
+#if !defined(NSAssert)
 #define NSAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5)	\
     _NSAssertBody((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
 
@@ -128,11 +178,15 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 
 #define NSAssert(condition, desc)			\
     _NSAssertBody((condition), (desc), 0, 0, 0, 0, 0)
+#endif
 
-
+#if !defined(NSParameterAssert)
 #define NSParameterAssert(condition)			\
     _NSAssertBody((condition), @"Invalid parameter not satisfying: %s", #condition, 0, 0, 0, 0)
- 
+#endif
+
+
+#if !defined(NSCAssert)
 #define NSCAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5)	\
     _NSCAssertBody((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
 
@@ -150,11 +204,15 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 
 #define NSCAssert(condition, desc)			\
     _NSCAssertBody((condition), (desc), 0, 0, 0, 0, 0)
+#endif
 
-
+#if !defined(NSCParameterAssert)
 #define NSCParameterAssert(condition)			\
     _NSCAssertBody((condition), @"Invalid parameter not satisfying: %s", #condition, 0, 0, 0, 0)
+#endif
 
+
+extern NSString * const NSAssertionHandlerKey /* AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER */;
 
 @interface NSAssertionHandler : NSObject {
     @private

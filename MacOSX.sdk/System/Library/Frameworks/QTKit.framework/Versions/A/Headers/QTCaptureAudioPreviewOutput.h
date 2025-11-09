@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureAudioPreviewOutput.h
 
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -16,9 +16,7 @@
 
 @interface QTCaptureAudioPreviewOutput : QTCaptureOutput {
 @private
-#if !__LP64__
 	QTCaptureAudioPreviewOutputInternal	*_internal;
-#endif
 	long								_reserved4;
 	long								_reserved5;
 	long								_reserved6;

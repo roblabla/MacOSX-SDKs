@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,22 +26,26 @@
 
 #import <WebKit/DOMNode.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class NSString;
 
 @interface DOMCharacterData : DOMNode
 @property(copy) NSString *data;
 @property(readonly) unsigned length;
 
-- (NSString *)substringData:(unsigned)offset length:(unsigned)length;
+- (NSString *)substringData:(unsigned)offset length:(unsigned)length AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)appendData:(NSString *)data;
-- (void)insertData:(unsigned)offset data:(NSString *)data;
-- (void)deleteData:(unsigned)offset length:(unsigned)length;
-- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data;
+- (void)insertData:(unsigned)offset data:(NSString *)data AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)deleteData:(unsigned)offset length:(unsigned)length AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 
 @interface DOMCharacterData (DOMCharacterDataDeprecated)
-- (NSString *)substringData:(unsigned)offset :(unsigned)length DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)insertData:(unsigned)offset :(NSString *)data DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)deleteData:(unsigned)offset :(unsigned)length DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSString *)substringData:(unsigned)offset :(unsigned)length AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)insertData:(unsigned)offset :(NSString *)data AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)deleteData:(unsigned)offset :(unsigned)length AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

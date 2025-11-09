@@ -1,11 +1,13 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
+#import <Foundation/NSTextCheckingResult.h>
 
-@class NSArray;
+@class NSArray, NSOrthography;
+@protocol NSSpellServerDelegate;
 
 /*
 The server just handles all the checking in and IAC and delegates the real work to its delegate.  A single server can handle more than one language.  Services is used to rendezvous applications with servers.
@@ -35,8 +37,8 @@ The server just handles all the checking in and IAC and delegates the real work 
     void *_reservedSpellServer2;
 }
 
-- (void)setDelegate:(id)anObject;
-- (id)delegate;
+- (void)setDelegate:(id <NSSpellServerDelegate>)anObject;
+- (id <NSSpellServerDelegate>)delegate;
 
 /* Used to check in */
 - (BOOL)registerLanguage:(NSString *)language byVendor:(NSString *)vendor;
@@ -60,9 +62,13 @@ The sixth method permits those delegates that support it to provide grammar chec
 
 The value for the NSGrammarRange key should be an NSValue containing an NSRange, a subrange of the sentence range used as the return value, whose location should be an offset from the beginning of the sentence--so, for example, an NSGrammarRange for the first four characters of the overall sentence range should be {0, 4}.  The value for the NSGrammarUserDescription key should be an NSString containing descriptive text about that range, to be presented directly to the user; it is intended that the user description should provide enough information to allow the user to correct the problem.  A value may also be provided for the NSGrammarCorrections key, consisting of an NSArray of NSStrings representing potential substitutions to correct the problem, but it is expected that this may not be available in all cases.  It is recommended that NSGrammarUserDescription be supplied in all cases; in any event, either NSGrammarUserDescription or NSGrammarCorrections must be supplied in order for something to be presented to the user.  If NSGrammarRange is not present, it will be assumed to be equal to the overall sentence range.  Additional keys may be added in future releases.
 
+The seventh method is optional, but if implemented it will be called during the course of unified text checking via the NSSpellChecker checkString:... or requestCheckingOfString:... methods.  This allows spelling and grammar checking to be performed simultaneously, which can be significantly more efficient, and allows the delegate to return autocorrection results as well.  If this method is not implemented, then unified text checking will call the separate spelling and grammar checking methods described above instead.  
+
+The result should be an array of NSTextCheckingResult objects, of the spelling, grammar, or correction types, depending on the checkingTypes requested.  This method may be called repeatedly with strings representing different subranges of the string that was originally requested to be checked; the offset argument represents the offset of the portion passed in to this method within that original string, and should be added to the origin of the range in any NSTextCheckingResult returned.  The options dictionary corresponds to the options supplied to the NSSpellChecker checkString:... or requestCheckingOfString:... methods, and the orthography argument represents the identified orthography of the text being passed in.
 */
 
-@interface NSObject(NSSpellServerDelegate)
+@protocol NSSpellServerDelegate <NSObject>
+@optional
 
 - (NSRange)spellServer:(NSSpellServer *)sender findMisspelledWordInString:(NSString *)stringToCheck language:(NSString *)language wordCount:(NSInteger *)wordCount countOnly:(BOOL)countOnly;
 
@@ -72,11 +78,11 @@ The value for the NSGrammarRange key should be an NSValue containing an NSRange,
 
 - (void)spellServer:(NSSpellServer *)sender didForgetWord:(NSString *)word inLanguage:(NSString *)language;
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (NSArray *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
 #endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED 
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(NSString *)language details:(NSArray **)details;
 
 /* Keys for the dictionaries in the details array. */
@@ -85,5 +91,9 @@ FOUNDATION_EXPORT NSString *const NSGrammarUserDescription;
 FOUNDATION_EXPORT NSString *const NSGrammarCorrections;
 
 #endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSArray *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger *)wordCount;
+#endif /* MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 @end

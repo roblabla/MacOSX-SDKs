@@ -243,4 +243,4 @@ struct ip6_frag {
 #define IPV6_MMTU	1280	/* minimal MTU and reassembly. 1024 + 256 */
 #define IPV6_MAXPACKET	65535	/* ip6 max packet size without Jumbo payload*/
 
-#endif !_NETINET_IP6_H_
+#endif /* !_NETINET_IP6_H_ */

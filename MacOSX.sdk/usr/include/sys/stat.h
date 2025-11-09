@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -72,6 +72,7 @@
 
 #include <sys/_types.h>
 #include <sys/cdefs.h>
+#include <Availability.h>
 
 /* [XSI] The timespec structure may be defined as described in <time.h> */
 #define __need_struct_timespec
@@ -258,7 +259,11 @@ struct stat {
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 
+#if !__DARWIN_ONLY_64_BIT_INO_T
+
 struct stat64 __DARWIN_STRUCT_STAT64;
+
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
@@ -288,7 +293,6 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define	S_IFSOCK	0140000		/* [XSI] socket */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	S_IFWHT		0160000		/* whiteout */
-#define S_IFXATTR	0200000		/* extended attribute */
 #endif
 
 /* File mode */
@@ -326,16 +330,15 @@ struct stat64 __DARWIN_STRUCT_STAT64;
  * of st_mode from a stat structure.  The macro shall evaluate to a non-zero
  * value if the test is true; 0 if the test is false.
  */
-#define	S_ISBLK(m)	(((m) & 0170000) == 0060000)	/* block special */
-#define	S_ISCHR(m)	(((m) & 0170000) == 0020000)	/* char special */
-#define	S_ISDIR(m)	(((m) & 0170000) == 0040000)	/* directory */
-#define	S_ISFIFO(m)	(((m) & 0170000) == 0010000)	/* fifo or socket */
-#define	S_ISREG(m)	(((m) & 0170000) == 0100000)	/* regular file */
-#define	S_ISLNK(m)	(((m) & 0170000) == 0120000)	/* symbolic link */
-#define	S_ISSOCK(m)	(((m) & 0170000) == 0140000)	/* socket */
+#define	S_ISBLK(m)	(((m) & S_IFMT) == S_IFBLK)	/* block special */
+#define	S_ISCHR(m)	(((m) & S_IFMT) == S_IFCHR)	/* char special */
+#define	S_ISDIR(m)	(((m) & S_IFMT) == S_IFDIR)	/* directory */
+#define	S_ISFIFO(m)	(((m) & S_IFMT) == S_IFIFO)	/* fifo or socket */
+#define	S_ISREG(m)	(((m) & S_IFMT) == S_IFREG)	/* regular file */
+#define	S_ISLNK(m)	(((m) & S_IFMT) == S_IFLNK)	/* symbolic link */
+#define	S_ISSOCK(m)	(((m) & S_IFMT) == S_IFSOCK)	/* socket */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define	S_ISWHT(m)	(((m) & 0170000) == 0160000)	/* whiteout */
-#define S_ISXATTR(m)	(((m) & 0200000) == 0200000)	/* extended attribute */
+#define	S_ISWHT(m)	(((m) & S_IFMT) == S_IFWHT)	/* whiteout */
 #endif
 
 /*
@@ -398,7 +401,8 @@ struct stat64 __DARWIN_STRUCT_STAT64;
  * in Mac OS X.
  */
 /* #define UF_NOUNLINK	0x00000010 */	/* file may not be removed or renamed */
-/* Bits 0x0020 through 0x4000 are currently undefined. */
+#define UF_COMPRESSED	0x00000020	/* file is hfs-compressed */
+/* Bits 0x0040 through 0x4000 are currently undefined. */
 #define UF_HIDDEN	0x00008000	/* hint that this item should not be */
 					/* displayed in a GUI */
 /*
@@ -408,6 +412,7 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define	SF_ARCHIVED	0x00010000	/* file is archived */
 #define	SF_IMMUTABLE	0x00020000	/* file may not be changed */
 #define	SF_APPEND	0x00040000	/* writes to file may only append */
+
 /*
  * The following two bits are reserved for FreeBSD.  They are not
  * implemented in Mac OS X.
@@ -449,13 +454,16 @@ int	mkdirx_np(const char *, filesec_t);
 int	mkfifox_np(const char *, filesec_t);
 int	statx_np(const char *, struct stat *, filesec_t) __DARWIN_INODE64(statx_np);
 int	umaskx_np(filesec_t);
-/* The following are simillar  to stat and friends except provide struct stat64 instead of struct stat  */
-int	fstatx64_np(int, struct stat64 *, filesec_t);
-int	lstatx64_np(const char *, struct stat64 *, filesec_t);
-int	statx64_np(const char *, struct stat64 *, filesec_t);
-int	fstat64(int, struct stat64 *);
-int	lstat64(const char *, struct stat64 *);
-int	stat64(const char *, struct stat64 *);
+
+#if !__DARWIN_ONLY_64_BIT_INO_T
+/* The following deprecated routines are simillar to stat and friends except provide struct stat64 instead of struct stat  */
+int	fstatx64_np(int, struct stat64 *, filesec_t) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+int	lstatx64_np(const char *, struct stat64 *, filesec_t) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+int	statx64_np(const char *, struct stat64 *, filesec_t) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+int	fstat64(int, struct stat64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+int	lstat64(const char *, struct stat64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+int	stat64(const char *, struct stat64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 __END_DECLS

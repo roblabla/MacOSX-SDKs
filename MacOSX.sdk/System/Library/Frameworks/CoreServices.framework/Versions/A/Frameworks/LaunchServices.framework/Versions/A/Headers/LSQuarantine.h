@@ -3,9 +3,9 @@
  
      Contains:   File quarantine property keys
  
-     Version:    LaunchServices-283~12
+     Version:    LaunchServices-362.3~1
  
-     Copyright:  © 2006 by Apple Inc., all rights reserved.
+     Copyright:  © 2007-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

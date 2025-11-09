@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,6 +19,8 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+
+#if defined(__ppc__)
  
  
 #ifndef _DRV_MACIO_ATA_H
@@ -26,23 +28,14 @@
 
 #include <libkern/c++/OSObject.h>
 #include <IOKit/IOTypes.h>
-//#include <IOKit/ata/IOATAController.h>
 #include "IOATAController.h"
 #include <IOKit/ppc/IODBDMA.h>
 #include <IOKit/IOMemoryCursor.h>
 
 #include <IOKit/IOInterruptEventSource.h>
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
-
- *
- */ 
-#endif
 
 
-/*! @class MacIOATA : public IOATAController
+/*! @class MacIOATA
     @abstract The base class for MAC-IO ata controller family. .
     @discussion class defining the portions of MacIO ATA cells which are shared
 	in common between Heathrow and Key Largo ATA Cells.
@@ -53,11 +46,11 @@
 	by a specific driver subclass. As much common code as possible is 
 	presented in this superclass.
 
-*/    
+*/
 
 class MacIOATA : public IOATAController
 {
-    OSDeclareDefaultStructors(MacIOATA)
+    OSDeclareDefaultStructors(MacIOATA);
 
 public:
 
@@ -118,7 +111,7 @@ protected:
 	bool	_resyncInterrupts;
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
-    */    
+    */
     struct ExpansionData { };
 
 /*! @var reserved
@@ -227,3 +220,6 @@ private:
 };
 
 #endif // _DRV_MACIO_ATA_H
+
+
+#endif // defined(ppc)

@@ -1,10 +1,9 @@
 /*
 	File:		QTDataReference.h
 
-	Copyright:	(c)2004-2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2010 by Apple Inc., all rights reserved.
 
 */
-
 
 #import <Foundation/Foundation.h>
 #if !__LP64__
@@ -13,11 +12,11 @@
 #import <QTKit/QTKitDefines.h>
 
 // data handler types
-QTKIT_EXTERN NSString * const QTDataReferenceTypeFile						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-QTKIT_EXTERN NSString * const QTDataReferenceTypeHandle						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-QTKIT_EXTERN NSString * const QTDataReferenceTypePointer					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-QTKIT_EXTERN NSString * const QTDataReferenceTypeResource					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-QTKIT_EXTERN NSString * const QTDataReferenceTypeURL						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+QTKIT_EXTERN NSString * const QTDataReferenceTypeFile       AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTDataReferenceTypeHandle     AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTDataReferenceTypePointer    AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTDataReferenceTypeResource   AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTDataReferenceTypeURL        AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
 
 @interface QTDataReference : NSObject <NSCoding>
 {
@@ -69,4 +68,3 @@ QTKIT_EXTERN NSString * const QTDataReferenceTypeURL						AVAILABLE_MAC_OS_X_VER
 - (void)setDataRefType:(NSString *)type;
 
 @end
-

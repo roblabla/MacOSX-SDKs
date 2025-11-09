@@ -1,5 +1,5 @@
 /*
- * $RCSId: xc/lib/fontconfig/fontconfig/fontconfig.h,v 1.30 2002/09/26 00:17:27 keithp Exp $
+ * fontconfig/fontconfig/fontconfig.h
  *
  * Copyright © 2001 Keith Packard
  *
@@ -13,9 +13,9 @@
  * representations about the suitability of this software for any purpose.  It
  * is provided "as is" without express or implied warranty.
  *
- * KEITH PACKARD DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+ * THE AUTHOR(S) DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
  * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO
- * EVENT SHALL KEITH PACKARD BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+ * EVENT SHALL THE AUTHOR(S) BE LIABLE FOR ANY SPECIAL, INDIRECT OR
  * CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
  * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
@@ -52,8 +52,8 @@ typedef int		FcBool;
  */
 
 #define FC_MAJOR	2
-#define FC_MINOR	4
-#define FC_REVISION	2
+#define FC_MINOR	7
+#define FC_REVISION	3
 
 #define FC_VERSION	((FC_MAJOR * 10000) + (FC_MINOR * 100) + (FC_REVISION))
 
@@ -111,6 +111,7 @@ typedef int		FcBool;
 #define FC_EMBOLDEN	    "embolden"		/* Bool - true if emboldening needed*/
 #define FC_EMBEDDED_BITMAP  "embeddedbitmap"	/* Bool - true to enable embedded bitmaps */
 #define FC_DECORATIVE	    "decorative"	/* Bool - true if style is a decorative variant */
+#define FC_LCD_FILTER	    "lcdfilter"		/* Int */
 
 #define FC_CACHE_SUFFIX		    ".cache-"FC_CACHE_VERSION
 #define FC_DIR_CACHE_FILE	    "fonts.cache-"FC_CACHE_VERSION
@@ -136,6 +137,8 @@ typedef int		FcBool;
 #define FC_WEIGHT_ULTRABOLD	    FC_WEIGHT_EXTRABOLD
 #define FC_WEIGHT_BLACK		    210
 #define FC_WEIGHT_HEAVY		    FC_WEIGHT_BLACK
+#define FC_WEIGHT_EXTRABLACK	    215
+#define FC_WEIGHT_ULTRABLACK	    FC_WEIGHT_EXTRABLACK
 
 #define FC_SLANT_ROMAN		    0
 #define FC_SLANT_ITALIC		    100
@@ -169,7 +172,13 @@ typedef int		FcBool;
 #define FC_HINT_SLIGHT      1
 #define FC_HINT_MEDIUM      2
 #define FC_HINT_FULL        3
- 
+
+/* LCD filter */
+#define FC_LCD_NONE	    0
+#define FC_LCD_DEFAULT	    1
+#define FC_LCD_LIGHT	    2
+#define FC_LCD_LEGACY	    3
+
 typedef enum _FcType {
     FcTypeVoid, 
     FcTypeInteger, 
@@ -226,7 +235,6 @@ typedef struct _FcValue {
 	const FcMatrix	*m;
 	const FcCharSet	*c;
 	void		*f;
-	const FcPattern	*p;
 	const FcLangSet	*l;
     } u;
 } FcValue;
@@ -248,7 +256,10 @@ typedef enum _FcMatchKind {
 } FcMatchKind;
 
 typedef enum _FcLangResult {
-    FcLangEqual, FcLangDifferentCountry, FcLangDifferentLang
+    FcLangEqual = 0,
+    FcLangDifferentCountry = 1,
+    FcLangDifferentTerritory = 1,
+    FcLangDifferentLang = 2
 } FcLangResult;
 
 typedef enum _FcSetName {
@@ -331,6 +342,9 @@ FcConfigFilename (const FcChar8 *url);
 FcPublic FcConfig *
 FcConfigCreate (void);
 
+FcPublic FcConfig *
+FcConfigReference (FcConfig *config);
+
 FcPublic void
 FcConfigDestroy (FcConfig *config);
 
@@ -365,10 +379,10 @@ FcPublic FcStrList *
 FcConfigGetCacheDirs (FcConfig	*config);
 
 FcPublic int
-FcConfigGetRescanInverval (FcConfig *config);
+FcConfigGetRescanInterval (FcConfig *config);
 
 FcPublic FcBool
-FcConfigSetRescanInverval (FcConfig *config, int rescanInterval);
+FcConfigSetRescanInterval (FcConfig *config, int rescanInterval);
 
 FcPublic FcFontSet *
 FcConfigGetFonts (FcConfig	*config,
@@ -424,6 +438,9 @@ FcCharSetUnion (const FcCharSet *a, const FcCharSet *b);
 
 FcPublic FcCharSet*
 FcCharSetSubtract (const FcCharSet *a, const FcCharSet *b);
+
+FcPublic FcBool
+FcCharSetMerge (FcCharSet *a, const FcCharSet *b, FcBool *changed);
 
 FcPublic FcBool
 FcCharSetHasChar (const FcCharSet *fcs, FcChar32 ucs4);
@@ -547,6 +564,12 @@ FcPublic FcBool
 FcInitBringUptoDate (void);
 
 /* fclang.c */
+FcPublic FcStrSet *
+FcGetLangs (void);
+
+FcPublic const FcCharSet *
+FcLangGetCharSet (const FcChar8 *lang);
+
 FcPublic FcLangSet*
 FcLangSetCreate (void);
 
@@ -573,6 +596,9 @@ FcLangSetEqual (const FcLangSet *lsa, const FcLangSet *lsb);
 
 FcPublic FcChar32
 FcLangSetHash (const FcLangSet *ls);
+
+FcPublic FcStrSet *
+FcLangSetGetLangs (const FcLangSet *ls);
 
 /* fclist.c */
 FcPublic FcObjectSet *
@@ -723,6 +749,9 @@ FcPatternDuplicate (const FcPattern *p);
 FcPublic void
 FcPatternReference (FcPattern *p);
 
+FcPublic FcPattern *
+FcPatternFilter (FcPattern *p, const FcObjectSet *os);
+
 FcPublic void
 FcValueDestroy (FcValue v);
 
@@ -802,10 +831,13 @@ FcPublic FcResult
 FcPatternGetLangSet (const FcPattern *p, const char *object, int n, FcLangSet **ls);
 
 FcPublic FcPattern *
-FcPatternVaBuild (FcPattern *orig, va_list va);
+FcPatternVaBuild (FcPattern *p, va_list va);
     
 FcPublic FcPattern *
-FcPatternBuild (FcPattern *orig, ...) FC_ATTRIBUTE_SENTINEL(0);
+FcPatternBuild (FcPattern *p, ...) FC_ATTRIBUTE_SENTINEL(0);
+
+FcPublic FcChar8 *
+FcPatternFormat (FcPattern *pat, const FcChar8 *format);
 
 /* fcstr.c */
 
@@ -881,25 +913,25 @@ FcPublic FcStrSet *
 FcStrSetCreate (void);
 
 FcPublic FcBool
-FcStrSetMember (FcPublic FcStrSet *set, const FcChar8 *s);
+FcStrSetMember (FcStrSet *set, const FcChar8 *s);
 
 FcPublic FcBool
-FcStrSetEqual (FcPublic FcStrSet *sa, FcPublic FcStrSet *sb);
+FcStrSetEqual (FcStrSet *sa, FcStrSet *sb);
 
 FcPublic FcBool
-FcStrSetAdd (FcPublic FcStrSet *set, const FcChar8 *s);
+FcStrSetAdd (FcStrSet *set, const FcChar8 *s);
 
 FcPublic FcBool
-FcStrSetAddFilename (FcPublic FcStrSet *set, const FcChar8 *s);
+FcStrSetAddFilename (FcStrSet *set, const FcChar8 *s);
 
 FcPublic FcBool
-FcStrSetDel (FcPublic FcStrSet *set, const FcChar8 *s);
+FcStrSetDel (FcStrSet *set, const FcChar8 *s);
 
 FcPublic void
-FcStrSetDestroy (FcPublic FcStrSet *set);
+FcStrSetDestroy (FcStrSet *set);
 
 FcPublic FcStrList *
-FcStrListCreate (FcPublic FcStrSet *set);
+FcStrListCreate (FcStrSet *set);
 
 FcPublic FcChar8 *
 FcStrListNext (FcStrList *list);
@@ -914,5 +946,18 @@ FcConfigParseAndLoad (FcConfig *config, const FcChar8 *file, FcBool complain);
 _FCFUNCPROTOEND
 
 #undef FC_ATTRIBUTE_SENTINEL
+
+
+#ifndef _FCINT_H_
+
+/*
+ * Deprecated functions are placed here to help users fix their code without
+ * digging through documentation
+ */
+ 
+#define FcConfigGetRescanInverval   FcConfigGetRescanInverval_REPLACE_BY_FcConfigGetRescanInterval
+#define FcConfigSetRescanInverval   FcConfigSetRescanInverval_REPLACE_BY_FcConfigSetRescanInterval
+
+#endif
 
 #endif /* _FONTCONFIG_H_ */

@@ -2,10 +2,8 @@
      File:       MusicPlayer.h
  
      Contains:   MusicPlayer application interfaces
- 
-     Version:    Mac OS X
- 
-     Copyright:  (c) 2000-2004 by Apple Computer, Inc., all rights reserved.
+  
+     Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +15,7 @@
 #ifndef __MusicPlayer
 #define __MusicPlayer
 
-#include <AvailabilityMacros.h>
-#include <CoreServices/CoreServices.h>
+#include <Availability.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <AudioUnit/MusicDevice.h>
 #include <AudioToolbox/AUGraph.h>
@@ -441,7 +438,7 @@ typedef struct MusicTrackLoopInfo
 	@param		outPlayer	the newly created player
 */
 extern OSStatus
-NewMusicPlayer(			MusicPlayer		*outPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMusicPlayer(			MusicPlayer		*outPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	DisposeMusicPlayer
@@ -449,7 +446,7 @@ NewMusicPlayer(			MusicPlayer		*outPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_
 	@param		inPlayer	the player to dispose
 */
 extern OSStatus
-DisposeMusicPlayer(		MusicPlayer		inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMusicPlayer(		MusicPlayer		inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 
 /*!
@@ -462,7 +459,7 @@ DisposeMusicPlayer(		MusicPlayer		inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10
 */
 extern OSStatus
 MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
-						MusicSequence 	inSequence)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicSequence 	inSequence)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerGetSequence
@@ -473,7 +470,7 @@ MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
-						MusicSequence 	*outSequence)							AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+						MusicSequence 	*outSequence)							__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 								
 /*!
 	@function	MusicPlayerSetTime
@@ -487,7 +484,7 @@ MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerSetTime(		MusicPlayer 	inPlayer,
-						MusicTimeStamp 	inTime)									AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp 	inTime)									__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerGetTime
@@ -499,7 +496,7 @@ MusicPlayerSetTime(		MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerGetTime(		MusicPlayer 	inPlayer,
-						MusicTimeStamp	*outTime)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp	*outTime)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerGetHostTimeForBeats
@@ -517,7 +514,7 @@ MusicPlayerGetTime(		MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 								MusicTimeStamp	inBeats,
-								UInt64 *		outHostTime)					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								UInt64 *		outHostTime)					__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerGetHostTimeForBeats
@@ -535,7 +532,7 @@ MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetBeatsForHostTime(	MusicPlayer 	inPlayer,
 								UInt64			inHostTime,
-								MusicTimeStamp *outBeats)						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								MusicTimeStamp *outBeats)						__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerPreroll
@@ -545,7 +542,7 @@ MusicPlayerGetBeatsForHostTime(	MusicPlayer 	inPlayer,
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerPreroll(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicPlayerPreroll(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerStart
@@ -554,7 +551,7 @@ MusicPlayerPreroll(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerStart(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicPlayerStart(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerStop
@@ -562,7 +559,7 @@ MusicPlayerStart(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerStop(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicPlayerStop(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 // 
 /*!
@@ -577,7 +574,7 @@ MusicPlayerStop(		MusicPlayer 	inPlayer)								AVAILABLE_MAC_OS_X_VERSION_10_0_
 */
 extern OSStatus
 MusicPlayerIsPlaying(	MusicPlayer 	inPlayer,
-						Boolean *		outIsPlaying)							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+						Boolean *		outIsPlaying)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerSetPlayRateScalar
@@ -588,7 +585,7 @@ MusicPlayerIsPlaying(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerSetPlayRateScalar(	MusicPlayer		inPlayer,
-								Float64			inScaleRate)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+								Float64			inScaleRate)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 /*!
 	@function	MusicPlayerGetPlayRateScalar
@@ -598,7 +595,7 @@ MusicPlayerSetPlayRateScalar(	MusicPlayer		inPlayer,
 */
 extern OSStatus
 MusicPlayerGetPlayRateScalar(	MusicPlayer		inPlayer,
-								Float64 *		outScaleRate)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+								Float64 *		outScaleRate)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
 //=====================================================================================================================
@@ -623,7 +620,7 @@ MusicPlayerGetPlayRateScalar(	MusicPlayer		inPlayer,
 	@param		outSequence		the new sequence
 */
 extern OSStatus
-NewMusicSequence(			MusicSequence		*outSequence)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMusicSequence(			MusicSequence		*outSequence)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	DisposeMusicSequence
@@ -632,7 +629,7 @@ NewMusicSequence(			MusicSequence		*outSequence)					AVAILABLE_MAC_OS_X_VERSION_
 	@param		inSequence		the sequence
 */
 extern OSStatus
-DisposeMusicSequence(		MusicSequence		inSequence)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMusicSequence(		MusicSequence		inSequence)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceNewTrack
@@ -642,7 +639,7 @@ DisposeMusicSequence(		MusicSequence		inSequence)						AVAILABLE_MAC_OS_X_VERSIO
 */
 extern OSStatus
 MusicSequenceNewTrack(		MusicSequence 		inSequence,
-							MusicTrack 			*outTrack)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							MusicTrack 			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 													
 /*!
 	@function	MusicSequenceDisposeTrack
@@ -652,7 +649,7 @@ MusicSequenceNewTrack(		MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceDisposeTrack(	MusicSequence 		inSequence,
-							MusicTrack 			inTrack)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							MusicTrack 			inTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetTrackCount
@@ -663,7 +660,7 @@ MusicSequenceDisposeTrack(	MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
-							UInt32 				*outNumberOfTracks)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							UInt32 				*outNumberOfTracks)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 										
 /*!
 	@function	MusicSequenceGetIndTrack
@@ -677,7 +674,7 @@ MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
 extern OSStatus
 MusicSequenceGetIndTrack(	MusicSequence 		inSequence,
 							UInt32 				inTrackIndex,
-							MusicTrack 			*outTrack)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							MusicTrack 			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetTrackIndex
@@ -691,7 +688,7 @@ MusicSequenceGetIndTrack(	MusicSequence 		inSequence,
 extern OSStatus
 MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 							MusicTrack 			inTrack,
-							UInt32				*outTrackIndex)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							UInt32				*outTrackIndex)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetTempoTrack
@@ -704,7 +701,7 @@ MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
-							MusicTrack			*outTrack)						AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+							MusicTrack			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 
 /*!
@@ -721,7 +718,7 @@ MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
 */
 extern OSStatus
 MusicSequenceSetAUGraph(	MusicSequence 	inSequence,
-							AUGraph 		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							AUGraph 		inGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 
 /*!
@@ -737,7 +734,7 @@ MusicSequenceSetAUGraph(	MusicSequence 	inSequence,
 */
 extern OSStatus
 MusicSequenceGetAUGraph(	MusicSequence 	inSequence,
-							AUGraph 		*outGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							AUGraph 		*outGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceSetMIDIEndpoint
@@ -750,7 +747,7 @@ MusicSequenceGetAUGraph(	MusicSequence 	inSequence,
 */
 extern OSStatus
 MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
-								MIDIEndpointRef	inEndpoint)					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								MIDIEndpointRef	inEndpoint)						__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceSetSequenceType
@@ -779,7 +776,7 @@ MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
 */
 extern OSStatus
 MusicSequenceSetSequenceType(	MusicSequence		inSequence,
-							MusicSequenceType		inType)					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							MusicSequenceType		inType)						__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetSequenceType
@@ -790,7 +787,7 @@ MusicSequenceSetSequenceType(	MusicSequence		inSequence,
 */
 extern OSStatus
 MusicSequenceGetSequenceType(	MusicSequence		inSequence,
-							MusicSequenceType * 	outType)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							MusicSequenceType * 	outType)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 /*!
@@ -807,7 +804,7 @@ extern OSStatus
 MusicSequenceFileLoad (MusicSequence				inSequence,
 						CFURLRef					inFileRef,
 						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
-						MusicSequenceLoadFlags		inFlags)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+						MusicSequenceLoadFlags		inFlags)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceFileLoadData
@@ -824,7 +821,7 @@ extern OSStatus
 MusicSequenceFileLoadData (MusicSequence			inSequence,
 						CFDataRef					inData,
 						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
-						MusicSequenceLoadFlags		inFlags)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+						MusicSequenceLoadFlags		inFlags)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceSetSMPTEResolution
@@ -910,7 +907,7 @@ MusicSequenceFileCreate (MusicSequence				inSequence,
 						CFURLRef					inFileRef,
 						MusicSequenceFileTypeID		inFileType,
 						MusicSequenceFileFlags		inFlags,
-						SInt16						inResolution)			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+						SInt16						inResolution)				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceFileCreateData
@@ -929,7 +926,7 @@ MusicSequenceFileCreateData (MusicSequence			inSequence,
 						MusicSequenceFileTypeID		inFileType,
 						MusicSequenceFileFlags		inFlags,
 						SInt16						inResolution,
-						CFDataRef *					outData)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+						CFDataRef *					outData)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 /*!
@@ -938,7 +935,7 @@ MusicSequenceFileCreateData (MusicSequence			inSequence,
 	@param		inSequence		the sequence
 */
 extern OSStatus
-MusicSequenceReverse(		MusicSequence	inSequence)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicSequenceReverse(		MusicSequence	inSequence)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetSecondsForBeats
@@ -951,7 +948,7 @@ MusicSequenceReverse(		MusicSequence	inSequence)						AVAILABLE_MAC_OS_X_VERSION
 extern OSStatus
 MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 									MusicTimeStamp		inBeats,
-									Float64 *			outSeconds)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									Float64 *			outSeconds)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetBeatsForSeconds
@@ -964,7 +961,7 @@ MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 									Float64				inSeconds,
-									MusicTimeStamp *	outBeats)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									MusicTimeStamp *	outBeats)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceSetUserCallback
@@ -992,7 +989,7 @@ MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceSetUserCallback(	MusicSequence				inSequence,
 								MusicSequenceUserCallback	inCallback,
-								void*						inClientData)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+								void*						inClientData)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceBeatsToBarBeatTime
@@ -1009,8 +1006,7 @@ extern OSStatus
 MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 								MusicTimeStamp				inBeats,
 								UInt32						inSubbeatDivisor,
-								CABarBeatTime *				outBarBeatTime)
-																			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+								CABarBeatTime *				outBarBeatTime)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceBarBeatTimeToBeats
@@ -1025,8 +1021,7 @@ MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 extern OSStatus
 MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 								const CABarBeatTime *		inBarBeatTime,
-								MusicTimeStamp *			outBeats)		
-																			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+								MusicTimeStamp *			outBeats)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function	MusicSequenceGetInfoDictionary
@@ -1040,7 +1035,7 @@ MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 	@result		a CFDictionary or NULL if the call fails.
 */
 extern CFDictionaryRef
-MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 //=====================================================================================================================
 #pragma mark -
@@ -1059,7 +1054,7 @@ MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)		AVAILABLE_MAC_OS_X
 */
 extern OSStatus
 MusicTrackGetSequence(	MusicTrack 			inTrack,
-						MusicSequence		*outSequence)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicSequence		*outSequence)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackSetDestNode
@@ -1071,7 +1066,7 @@ MusicTrackGetSequence(	MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackSetDestNode(	MusicTrack 			inTrack,
-						AUNode				inNode)								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						AUNode				inNode)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackSetDestMIDIEndpoint
@@ -1082,7 +1077,7 @@ MusicTrackSetDestNode(	MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef		inEndpoint)					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								MIDIEndpointRef		inEndpoint)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackGetDestNode
@@ -1094,7 +1089,7 @@ MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
 */
 extern OSStatus
 MusicTrackGetDestNode(			MusicTrack 			inTrack,
-								AUNode *			outNode)					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								AUNode *			outNode)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackGetDestMIDIEndpoint
@@ -1106,7 +1101,7 @@ MusicTrackGetDestNode(			MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackGetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef	*	outEndpoint)				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								MIDIEndpointRef	*	outEndpoint)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackSetProperty
@@ -1121,7 +1116,7 @@ extern OSStatus
 MusicTrackSetProperty(	MusicTrack 			inTrack,
 						UInt32 				inPropertyID,
 						void				*inData,
-						UInt32				inLength)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						UInt32				inLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackGetProperty
@@ -1140,7 +1135,7 @@ extern OSStatus
 MusicTrackGetProperty(	MusicTrack 			inTrack,
 						UInt32 				inPropertyID,
 						void				*outData,
-						UInt32				*ioLength)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						UInt32				*ioLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1163,25 +1158,7 @@ extern OSStatus
 MusicTrackMoveEvents(	MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
 						MusicTimeStamp		inEndTime,
-						MusicTimeStamp		inMoveTime)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*!
-	@function	NewMusicTrackFrom
-	@abstract	Create a new track from events within the specified range
-	@discussion	The new track will belong to the same sequence as the track from which it is created.
-				
-				All time ranges are [starttime < endtime]
-				
-	@param		inSourceTrack		the source track for the events
-	@param		inSourceStartTime	the start time for the range of events
-	@param		inSourceEndTime		the end time up to which will form the range of the events to copy
-	@param		outNewTrack			the new track containing all events from the source track within the specified range of time.
-*/
-extern OSStatus
-NewMusicTrackFrom(		MusicTrack			inSourceTrack,
-						MusicTimeStamp		inSourceStartTime,
-						MusicTimeStamp		inSourceEndTime,
-						MusicTrack 			*outNewTrack)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp		inMoveTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackClear
@@ -1194,7 +1171,7 @@ NewMusicTrackFrom(		MusicTrack			inSourceTrack,
 extern OSStatus
 MusicTrackClear(		MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
-						MusicTimeStamp		inEndTime)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp		inEndTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackCut
@@ -1210,7 +1187,7 @@ MusicTrackClear(		MusicTrack 			inTrack,
 extern OSStatus
 MusicTrackCut(			MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
-						MusicTimeStamp		inEndTime)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp		inEndTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackCopyInsert
@@ -1232,7 +1209,7 @@ MusicTrackCopyInsert(	MusicTrack 			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack 			inDestTrack,
-						MusicTimeStamp		inDestInsertTime)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp		inDestInsertTime)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackCopyInsert
@@ -1253,7 +1230,7 @@ MusicTrackMerge(		MusicTrack 			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack 			inDestTrack,
-						MusicTimeStamp		inDestInsertTime)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MusicTimeStamp		inDestInsertTime)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 
 //=====================================================================================================================
@@ -1278,7 +1255,7 @@ MusicTrackMerge(		MusicTrack 			inSourceTrack,
 extern OSStatus
 MusicTrackNewMIDINoteEvent(			MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDINoteMessage *		inMessage)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const MIDINoteMessage *		inMessage)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackNewMIDIChannelEvent
@@ -1291,7 +1268,7 @@ MusicTrackNewMIDINoteEvent(			MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMIDIChannelEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIChannelMessage *	inMessage)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const MIDIChannelMessage *	inMessage)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackNewMIDIRawDataEvent
@@ -1304,7 +1281,7 @@ MusicTrackNewMIDIChannelEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMIDIRawDataEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIRawData *			inRawData)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const MIDIRawData *			inRawData)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackNewExtendedNoteEvent
@@ -1317,7 +1294,7 @@ MusicTrackNewMIDIRawDataEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewExtendedNoteEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const ExtendedNoteOnEvent	*inInfo)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const ExtendedNoteOnEvent	*inInfo)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 										
 /*!
 	@function	MusicTrackNewExtendedControlEvent
@@ -1330,7 +1307,7 @@ MusicTrackNewExtendedNoteEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const ExtendedControlEvent	*inInfo)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const ExtendedControlEvent	*inInfo)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackNewParameterEvent
@@ -1343,7 +1320,7 @@ MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewParameterEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const ParameterEvent *		inInfo)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									const ParameterEvent *		inInfo)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 										
 /*!
 	@function	MusicTrackNewExtendedTempoEvent
@@ -1356,7 +1333,7 @@ MusicTrackNewParameterEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewExtendedTempoEvent(	MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									Float64						inBPM)			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									Float64						inBPM)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 										
 /*!
 	@function	MusicTrackNewMetaEvent
@@ -1369,7 +1346,7 @@ MusicTrackNewExtendedTempoEvent(	MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMetaEvent(				MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIMetaEvent *		inMetaEvent)	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const MIDIMetaEvent *		inMetaEvent)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 										
 /*!
 	@function	MusicEventUserData
@@ -1382,7 +1359,7 @@ MusicTrackNewMetaEvent(				MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewUserEvent(				MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MusicEventUserData *	inUserData)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									const MusicEventUserData *	inUserData)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicTrackNewAUPresetEvent
@@ -1395,7 +1372,7 @@ MusicTrackNewUserEvent(				MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewAUPresetEvent(			MusicTrack 					inTrack,
 									MusicTimeStamp			 	inTimeStamp,
-									const AUPresetEvent *		inPresetEvent)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+									const AUPresetEvent *		inPresetEvent)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
 
@@ -1430,7 +1407,7 @@ MusicTrackNewAUPresetEvent(			MusicTrack 					inTrack,
 */
 extern OSStatus
 NewMusicEventIterator(				MusicTrack 			inTrack,
-									MusicEventIterator *outIterator)			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									MusicEventIterator *outIterator)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 													
 /*!
 	@function	DisposeMusicEventIterator
@@ -1438,7 +1415,7 @@ NewMusicEventIterator(				MusicTrack 			inTrack,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-DisposeMusicEventIterator(			MusicEventIterator	inIterator)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMusicEventIterator(			MusicEventIterator	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorSeek
@@ -1454,7 +1431,7 @@ DisposeMusicEventIterator(			MusicEventIterator	inIterator)				AVAILABLE_MAC_OS_
 */
 extern OSStatus
 MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
-									MusicTimeStamp 		inTimeStamp)			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									MusicTimeStamp 		inTimeStamp)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorNextEvent
@@ -1467,7 +1444,7 @@ MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorPreviousEvent
@@ -1479,7 +1456,7 @@ MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				AVAILABLE_MAC_O
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorGetEventInfo
@@ -1501,7 +1478,7 @@ MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 									MusicTimeStamp *		outTimeStamp,
 									MusicEventType *		outEventType,
 									const void **			outEventData,
-									UInt32 *				outEventDataSize)	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									UInt32 *				outEventDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 	
 /*!
 	@function	MusicEventIteratorSetEventInfo
@@ -1517,7 +1494,7 @@ MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 extern OSStatus
 MusicEventIteratorSetEventInfo(		MusicEventIterator 		inIterator,
 									MusicEventType			inEventType,
-									const void *			inEventData)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									const void *			inEventData)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorSetEventTime
@@ -1531,7 +1508,7 @@ MusicEventIteratorSetEventInfo(		MusicEventIterator 		inIterator,
 */
 extern OSStatus
 MusicEventIteratorSetEventTime(		MusicEventIterator 		inIterator,
-									MusicTimeStamp			inTimeStamp)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									MusicTimeStamp			inTimeStamp)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorDeleteEvent
@@ -1541,7 +1518,7 @@ MusicEventIteratorSetEventTime(		MusicEventIterator 		inIterator,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorHasNextEvent
@@ -1562,7 +1539,7 @@ MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			AVAILABLE_MAC
 */
 extern OSStatus
 MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
-									Boolean	*			outHasPrevEvent)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									Boolean	*			outHasPrevEvent)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorHasNextEvent
@@ -1583,7 +1560,7 @@ MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
-									Boolean	*			outHasNextEvent)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+									Boolean	*			outHasNextEvent)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
 	@function	MusicEventIteratorHasCurrentEvent
@@ -1593,33 +1570,35 @@ MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
-									Boolean	*			outHasCurEvent)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									Boolean	*			outHasCurEvent)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+
+
+
+
+//=====================================================================================================================
+#pragma mark -
 
 #pragma mark -- Deprecated
 // standard MIDI files (SMF, and RMF)
 
 // MusicSequenceLoadSMF() also intelligently parses an RMID file to extract SMF part
 #if !__LP64__
+struct FSSpec;
+
 extern OSStatus
 MusicSequenceLoadSMF(		MusicSequence 	inSequence,
-							const FSSpec	*inFileSpec)						
-																	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+							const struct FSSpec	*inFileSpec)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 extern OSStatus
 MusicSequenceLoadSMFData(	MusicSequence	inSequence,
-							CFDataRef		inData)								
-																	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+							CFDataRef		inData)					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 								
 // inResolution is relationship between "tick" and quarter note for saving to SMF
 //  - pass in zero to use default (480 PPQ, normally)
 extern OSStatus
 MusicSequenceSaveSMF(		MusicSequence 	inSequence,
-							const FSSpec	*inFileSpec,
-							UInt16			inResolution)						
-																	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+							const struct FSSpec	*inFileSpec,
+							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 #endif // !__LP64__
 
 
@@ -1630,33 +1609,40 @@ MusicSequenceSaveSMF(		MusicSequence 	inSequence,
 // will contain that data.
 extern OSStatus
 MusicSequenceLoadSMFWithFlags(		MusicSequence			inSequence,
-									const FSRef *			inFileRef,
-									MusicSequenceLoadFlags	inFlags)			
-																	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+									const struct FSRef *			inFileRef,
+									MusicSequenceLoadFlags	inFlags)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 extern OSStatus
 MusicSequenceLoadSMFDataWithFlags(	MusicSequence	inSequence,
 									CFDataRef				inData,
-									MusicSequenceLoadFlags	inFlags)			
-																	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+									MusicSequenceLoadFlags	inFlags)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 // inFlags must be zero
 extern OSStatus
 MusicSequenceSaveMIDIFile(	MusicSequence	inSequence,
-							const FSRef		*inParentDirectory,
+							const struct FSRef *inParentDirectory,
 							CFStringRef		inFileName,
 							UInt16			inResolution,
-							UInt32			inFlags)						
-																	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER 
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+							UInt32			inFlags)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 extern OSStatus
 MusicSequenceSaveSMFData(	MusicSequence	inSequence,
 							CFDataRef		*outData,
-							UInt16			inResolution)						
-																	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+
+/*!
+	@function	NewMusicTrackFrom
+	@abstract	Create a new track from events within the specified range
+	@discussion	This is deprecated as it has never worked correctly. The functionality it embodies can be done
+				by:
+					MusicSequenceNewTrack (seq, newTrack)
+					MusicTrackCopyInsert (srcTrack,...,newTrack,...);
+*/
+extern OSStatus
+NewMusicTrackFrom(		MusicTrack			inSourceTrack,
+						MusicTimeStamp		inSourceStartTime,
+						MusicTimeStamp		inSourceEndTime,
+						MusicTrack 			*outNewTrack)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+
 																								
 #if defined(__cplusplus)
 }

@@ -1,5 +1,5 @@
 /*
- *  Quick Look.h
+ *  QuickLook.h
  *  Quick Look
  *
  *  Copyright 2007 Apple Inc.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,44 +20,11 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1999-2001 Apple Computer, Inc.  All rights reserved. 
- *
  * IOATADevice.h
  *
  * This object implements a relay to an ATA Bus where a drive is attached.
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
- * $Log: IOATADevice.h,v $
- * Revision 1.7  2002/11/09 03:46:39  barras
- *
- * Bug #: 3083512, 3090979
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.6  2002/02/14 04:02:07  barras
- *
- * Adding API's for 48 bit lba
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.5  2001/05/04 01:50:37  barras
- *
- * Fix line endings to be all unix style in order to prevent CVS from corrupting source files.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- *
- */ 
-#endif
 
 #ifndef _IOATADEVICE_H
 #define _IOATADEVICE_H
@@ -80,7 +47,7 @@ class IOATAController;
 
 class IOATADevice : public IOService
 {
-    OSDeclareDefaultStructors(IOATADevice)
+    OSDeclareDefaultStructors(IOATADevice);
 
 public:
 
@@ -130,7 +97,7 @@ public:
 	@param command pointer to a valid IOATACommand with the command to be executed.
 	@result kIOSuccess (0) if the command was successfully queued in the controller. 
 	*/
-   virtual IOReturn		executeCommand(IOATACommand* command);
+	virtual IOReturn		executeCommand(IOATACommand* command);
  
 	// create and destroy IOATACommands
 	/*!
@@ -147,16 +114,17 @@ public:
 	*/
 	virtual void			freeCommand( IOATACommand* inCommand); 
 
-
 	// matching stuff for IOBSDInit and so on.	
 	/*!@function matchPropertyTable
 	@abstract matching stuff for IOBSDInit and so on.
 	*/
 	virtual bool matchPropertyTable(OSDictionary * table);
+	
 	/*!@function matchLocation
 	@abstract matching stuff for IOBSDInit and so on.
 	*/
 	virtual IOService* matchLocation(IOService * client);
+	
 	/*!@function matchPropertyTable
 	@abstract matching stuff for IOBSDInit and so on.	
 	*/
@@ -177,7 +145,7 @@ protected:
 protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
-    */    
+    */
     struct ExpansionData { };
 
 /*! @var reserved

@@ -1,7 +1,7 @@
 /* 
-	NSTextStorage.h
-	Copyright (c) 1994-2007, Apple Inc.
-	All rights reserved.
+        NSTextStorage.h
+        Copyright (c) 1994-2009, Apple Inc.
+        All rights reserved.
 
 NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives:
 
@@ -17,6 +17,7 @@ These primitives should perform the change then call edited:range:changeInLength
 
 @class NSLayoutManager;
 @class NSMutableArray;
+@protocol NSTextStorageDelegate;
 
 /* These values are or'ed together in notifications to indicate what got changed.
 */
@@ -30,9 +31,8 @@ enum {
     NSRange _editedRange;
     NSInteger _editedDelta;
     struct {
-	unsigned int editedMask:8;
-        unsigned int inFSC:1;
-        unsigned int :7;
+        unsigned int editedMask:8;
+        unsigned int :8;
         unsigned int disabled:16;
 #if __LP64__
         unsigned int :32;
@@ -74,15 +74,16 @@ enum {
 
 /* Set/get the delegate
 */
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
+- (void)setDelegate:(id <NSTextStorageDelegate>)delegate;
+- (id <NSTextStorageDelegate>)delegate;
 
 @end
 
 
 /****  NSTextStorage delegate methods ****/
 
-@interface NSObject (NSTextStorageDelegate)
+@protocol NSTextStorageDelegate <NSObject>
+@optional
 
 /* These methods are sent during processEditing:. The receiver can use the callback methods editedMask, editedRange, and changeInLength to see what has changed. Although these methods can change the contents of the text storage, it's best if only the delegate did this.
 */

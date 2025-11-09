@@ -1,7 +1,7 @@
 /*
 	File:		IOBluetoothOBEXSession.h
 	Contains:	Bluetooth Transport subclass of the OBEXSession object. 
-    Copyright:	© 2002-2003 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2002-2003 by Apple Computer, Inc. All rights reserved.
 	Writers:	Jason Giles
 */
 
@@ -27,7 +27,7 @@
 
 #pragma mark === IOBluetoothOBEXSession ===
 
-@interface IOBluetoothOBEXSession : OBEXSession
+@interface IOBluetoothOBEXSession : OBEXSession <IOBluetoothRFCOMMChannelDelegate>
 {
 	/* All instance variables are protected. Use accessors to get to them if you need to. */
 	

@@ -60,6 +60,21 @@ typedef __darwin_off_t	off_t;
 typedef	__darwin_ssize_t	ssize_t;
 #endif
 
+/*
+ * A aio_fsync() options that the calling thread is to continue execution
+ * while the lio_listio() operation is being performed, and no notification
+ * is given when the operation is complete
+ *
+ * [XSI] from <fcntl.h>
+ */
+#ifndef O_SYNC		/* allow simultaneous inclusion of <fcntl.h> */
+#define	O_SYNC			0x0080		/* synch I/O file integrity */
+#endif
+
+#ifndef O_DSYNC		/* allow simultaneous inclusion of <fcntl.h> */
+#define	O_DSYNC			0x400000	/* synch I/O data integrity */
+#endif
+
 
 struct aiocb {
 	int		aio_fildes;		/* File descriptor */
@@ -124,19 +139,6 @@ struct aiocb {
  */
 #define	AIO_LISTIO_MAX		16
 
-/*
- * A aio_fsync() options
- * that the calling thread is to continue execution while
- * the lio_listio() operation is being performed, and no
- * notification is given when the operation is complete
- */
-
-#ifndef O_SYNC	/* XXX investigate documentation error */
-#define	O_SYNC			0x0080 	/* queued IO is completed as if by fsync() */
-#endif
-#if 0 /* O_DSYNC - NOT SUPPORTED */
-#define	O_DSYNC			0x1		/* queued async IO is completed as if by fdatasync() */
-#endif
 
 /*
  * Prototypes

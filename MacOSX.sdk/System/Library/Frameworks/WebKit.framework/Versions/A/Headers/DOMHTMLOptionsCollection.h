@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,20 @@
 
 #import <WebKit/DOMObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
+@class DOMHTMLOptionElement;
 @class DOMNode;
 @class NSString;
 
 @interface DOMHTMLOptionsCollection : DOMObject
+@property int selectedIndex AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property unsigned length;
 
+- (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)remove:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMNode *)item:(unsigned)index;
 - (DOMNode *)namedItem:(NSString *)name;
 @end
+
+#endif

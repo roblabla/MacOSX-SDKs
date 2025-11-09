@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: dcmemory.h,v 1.20 2006/12/07 05:44:37 PC Exp $
+// RCS-ID:      $Id: dcmemory.h 43843 2006-12-07 05:44:44Z PC $
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 

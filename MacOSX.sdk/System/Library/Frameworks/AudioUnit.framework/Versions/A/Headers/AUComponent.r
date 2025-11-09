@@ -2,10 +2,8 @@
 	File:   AUComponent.r
  
 	Contains:   AudioUnit Interfaces
- 
-	Version:	Mac OS X
- 
-	Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved.
+  
+	Copyright:  © 2002-2008 by Apple Inc., all rights reserved.
  
 	Bugs?:		For bug reports, consult the following page on
                 the World Wide Web:

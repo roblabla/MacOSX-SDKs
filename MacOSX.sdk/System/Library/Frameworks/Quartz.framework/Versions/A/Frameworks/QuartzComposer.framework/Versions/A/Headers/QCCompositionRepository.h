@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
+	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
 #import <QuartzComposer/QCComposition.h>

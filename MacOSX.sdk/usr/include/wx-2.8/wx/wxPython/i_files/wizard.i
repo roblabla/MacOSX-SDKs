@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     16-Aug-2002
-// RCS-ID:      $Id: wizard.i,v 1.26 2006/11/14 22:03:41 RD Exp $
+// RCS-ID:      $Id: wizard.i 47076 2007-07-02 17:03:33Z RD $
 // Copyright:   (c) 2002 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -407,6 +407,9 @@ public:
     // page to GetPageAreaSizer and 5 if you don't.
     virtual void SetBorder(int border);
 
+    const wxBitmap& GetBitmap() const { return m_bitmap; }
+    void SetBitmap(const wxBitmap& bitmap);
+
     // is the wizard running?
     bool IsRunning() const;
 
@@ -417,7 +420,8 @@ public:
 
     bool HasNextPage(wxWizardPage* page);
     bool HasPrevPage(wxWizardPage* page);
-    
+
+    %property(Bitmap, GetBitmap, SetBitmap);
     %property(CurrentPage, GetCurrentPage, doc="See `GetCurrentPage`");
     %property(PageAreaSizer, GetPageAreaSizer, doc="See `GetPageAreaSizer`");
     %property(PageSize, GetPageSize, SetPageSize, doc="See `GetPageSize` and `SetPageSize`");

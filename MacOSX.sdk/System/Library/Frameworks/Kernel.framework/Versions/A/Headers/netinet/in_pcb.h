@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -210,6 +210,54 @@ struct	xinpcb {
 	u_quad_t	xi_alignment_hack;
 };
 
+#if !CONFIG_EMBEDDED
+
+struct inpcb64_list_entry {
+    u_int64_t   le_next;
+    u_int64_t   le_prev;
+};
+
+struct	xinpcb64 {
+	u_int64_t		xi_len;		/* length of this structure */
+	u_int64_t		xi_inpp;
+	u_short 		inp_fport;	/* foreign port */
+	u_short			inp_lport;	/* local port */
+	struct inpcb64_list_entry	
+				inp_list;	/* list for all PCBs of this proto */
+	u_int64_t		inp_ppcb;	/* pointer to per-protocol pcb */
+	u_int64_t		inp_pcbinfo;	/* PCB list info */
+	struct inpcb64_list_entry	
+				inp_portlist;	/* list for this PCB's local port */
+	u_int64_t		inp_phd;	/* head of this list */
+	inp_gen_t		inp_gencnt;	/* generation count of this instance */
+	int			inp_flags;	/* generic IP/datagram flags */
+	u_int32_t		inp_flow;
+	u_char			inp_vflag;
+	u_char			inp_ip_ttl;	/* time to live */
+	u_char			inp_ip_p;	/* protocol */
+        union {					/* foreign host table entry */
+                struct  in_addr_4in6	inp46_foreign;
+                struct  in6_addr	inp6_foreign;
+        }			inp_dependfaddr;
+        union {					/* local host table entry */
+                struct  in_addr_4in6	inp46_local;
+                struct  in6_addr	inp6_local;
+        }			inp_dependladdr;
+        struct {
+                u_char		inp4_ip_tos;	/* type of service */
+        }			inp_depend4;
+        struct {
+                u_int8_t        inp6_hlim;
+		int		inp6_cksum;
+                u_short		inp6_ifindex;
+                short   	inp6_hops;
+        }			inp_depend6;
+        struct  xsocket64       xi_socket;
+	u_quad_t		xi_alignment_hack;
+};
+
+#endif /* !CONFIG_EMBEDDED */
+
 struct	xinpgen {
 	u_int32_t xig_len;	/* length of this structure */
 	u_int	xig_count;	/* number of PCBs at this time */
@@ -243,7 +291,7 @@ struct	xinpgen {
 #define	in6p_moptions	inp_depend6.inp6_moptions
 #define	in6p_icmp6filt	inp_depend6.inp6_icmp6filt
 #define	in6p_cksum	inp_depend6.inp6_cksum
-#define	inp6_ifindex	inp_depend6.inp6_ifindex
+#define	in6p_ifindex	inp_depend6.inp6_ifindex
 #define	in6p_flags	inp_flags  /* for KAME src sync over BSD*'s */
 #define	in6p_socket	inp_socket  /* for KAME src sync over BSD*'s */
 #define	in6p_lport	inp_lport  /* for KAME src sync over BSD*'s */
@@ -271,6 +319,7 @@ struct	xinpgen {
 
 #define INP_RECVTTL		0x1000
 #define	INP_UDP_NOCKSUM		0x2000	/* Turn off outbound UDP checksum */
+#define	INP_BOUND_IF		0x4000	/* bind socket to an ifindex */
 
 #define IN6P_IPV6_V6ONLY	0x008000 /* restrict AF_INET6 socket for v6 */
 
@@ -278,9 +327,10 @@ struct	xinpgen {
 #define	IN6P_HOPLIMIT		0x020000 /* receive hoplimit */
 #define	IN6P_HOPOPTS		0x040000 /* receive hop-by-hop options */
 #define	IN6P_DSTOPTS		0x080000 /* receive dst options after rthdr */
-#define	IN6P_RTHDR		0x100000 /* receive routing header */
+#define	IN6P_RTHDR			0x100000 /* receive routing header */
 #define	IN6P_RTHDRDSTOPTS	0x200000 /* receive dstoptions before rthdr */
-#define IN6P_AUTOFLOWLABEL	0x800000 /* attach flowlabel automatically */
+#define	IN6P_TCLASS			0x400000 /* receive traffic class value */
+#define	IN6P_AUTOFLOWLABEL	0x800000 /* attach flowlabel automatically */
 #define	IN6P_BINDV6ONLY		0x10000000 /* do not grab IPv4 traffic */
 
 

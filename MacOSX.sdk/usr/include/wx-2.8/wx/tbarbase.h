@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: tbarbase.h,v 1.65.2.1 2007/04/16 13:01:05 VZ Exp $
+// RCS-ID:      $Id: tbarbase.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -24,9 +24,9 @@
 #include "wx/list.h"
 #include "wx/control.h"
 
-class WXDLLEXPORT wxToolBarBase;
-class WXDLLEXPORT wxToolBarToolBase;
-class WXDLLEXPORT wxImage;
+class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
+class WXDLLIMPEXP_FWD_CORE wxToolBarToolBase;
+class WXDLLIMPEXP_FWD_CORE wxImage;
 
 // ----------------------------------------------------------------------------
 // constants

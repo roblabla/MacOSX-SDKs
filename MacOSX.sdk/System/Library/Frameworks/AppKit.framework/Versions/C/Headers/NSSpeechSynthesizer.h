@@ -1,7 +1,7 @@
 /*
 	NSSpeechSynthesizer.h
 	Application Kit
-	Copyright (c) 2003-2007, Apple Inc.
+	Copyright (c) 2003-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 #import <Foundation/NSRange.h>
 
 @class NSArray, NSDictionary, NSString, NSURL, NSError;
-
+@protocol NSSpeechSynthesizerDelegate;
 
 APPKIT_EXTERN NSString *const NSVoiceName AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 APPKIT_EXTERN NSString *const NSVoiceIdentifier AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -59,8 +59,8 @@ typedef NSUInteger NSSpeechBoundary;
 - (void)continueSpeaking;
 #endif
 
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
+- (id <NSSpeechSynthesizerDelegate>)delegate;
+- (void)setDelegate:(id <NSSpeechSynthesizerDelegate>)anObject;
 - (NSString *)voice;
 - (BOOL)setVoice:(NSString *)voice;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
@@ -87,8 +87,8 @@ typedef NSUInteger NSSpeechBoundary;
 
 @end
 
-@interface NSObject (NSSpeechSynthesizerDelegate)
-
+@protocol NSSpeechSynthesizerDelegate <NSObject>
+@optional
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)finishedSpeaking;
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string;
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakPhoneme:(short)phonemeOpcode;
@@ -109,7 +109,7 @@ APPKIT_EXTERN NSString *const NSSpeechPitchBaseProperty AVAILABLE_MAC_OS_X_VERSI
 APPKIT_EXTERN NSString *const NSSpeechPitchModProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSNumber
 APPKIT_EXTERN NSString *const NSSpeechVolumeProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSNumber
 APPKIT_EXTERN NSString *const NSSpeechSynthesizerInfoProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSDictionary, see keys below
-APPKIT_EXTERN NSString *const NSSpeechRecentSyncProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSString
+APPKIT_EXTERN NSString *const NSSpeechRecentSyncProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSNumber
 APPKIT_EXTERN NSString *const NSSpeechPhonemeSymbolsProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSDictionary, see keys below
 APPKIT_EXTERN NSString *const NSSpeechCurrentVoiceProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSString
 APPKIT_EXTERN NSString *const NSSpeechCommandDelimiterProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;  // NSDictionary, see keys below

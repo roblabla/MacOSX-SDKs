@@ -35,7 +35,11 @@
 #include <stdint.h>
 struct UConverter;
 typedef struct UConverter UConverter;
+#ifdef _MSC_VER
+typedef wchar_t UChar;
+#else
 typedef uint16_t UChar;
+#endif
 #endif
 
 #ifdef __cplusplus
@@ -226,11 +230,13 @@ XMLPUBFUN int XMLCALL
 /*
  * Export a few useful functions
  */
+#ifdef LIBXML_OUTPUT_ENABLED
 XMLPUBFUN int XMLCALL	
 	UTF8Toisolat1			(unsigned char *out,
 					 int *outlen,
 					 const unsigned char *in,
 					 int *inlen);
+#endif /* LIBXML_OUTPUT_ENABLED */
 XMLPUBFUN int XMLCALL	
 	isolat1ToUTF8			(unsigned char *out,
 					 int *outlen,

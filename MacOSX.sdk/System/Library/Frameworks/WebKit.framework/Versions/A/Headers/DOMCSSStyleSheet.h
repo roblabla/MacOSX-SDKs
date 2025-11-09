@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
 
 #import <WebKit/DOMStyleSheet.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMCSSRule;
 @class DOMCSSRuleList;
@@ -34,11 +35,16 @@
 @interface DOMCSSStyleSheet : DOMStyleSheet
 @property(readonly, retain) DOMCSSRule *ownerRule;
 @property(readonly, retain) DOMCSSRuleList *cssRules;
+@property(readonly, retain) DOMCSSRuleList *rules AVAILABLE_IN_WEBKIT_VERSION_4_0;
 
-- (unsigned)insertRule:(NSString *)rule index:(unsigned)index;
+- (unsigned)insertRule:(NSString *)rule index:(unsigned)index AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)deleteRule:(unsigned)index;
+- (int)addRule:(NSString *)selector style:(NSString *)style index:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)removeRule:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
 
 @interface DOMCSSStyleSheet (DOMCSSStyleSheetDeprecated)
-- (unsigned)insertRule:(NSString *)rule :(unsigned)index DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (unsigned)insertRule:(NSString *)rule :(unsigned)index AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

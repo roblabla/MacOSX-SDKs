@@ -1,6 +1,6 @@
 /* 
     NSSimpleHorizontalTypesetter.h
-    Copyright (c) 1993-2007, Apple Inc.
+    Copyright (c) 1993-2009, Apple Inc.
     All rights reserved. 
  
     A concrete class to lay glyphs out in horizontal boxes.

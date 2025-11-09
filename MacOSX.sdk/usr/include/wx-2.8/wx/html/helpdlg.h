@@ -4,7 +4,7 @@
 // Notes:       Based on htmlhelp.cpp, implementing a monolithic
 //              HTML Help controller class,  by Vaclav Slavik
 // Author:      Harm van der Heijden, Vaclav Slavik, Julian Smart
-// RCS-ID:      $Id: helpdlg.h,v 1.5.4.1 2007/04/16 13:01:46 VZ Exp $
+// RCS-ID:      $Id: helpdlg.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Harm van der Heijden, Vaclav Slavik, Julian Smart
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -32,8 +32,8 @@
 #include "wx/html/helpwnd.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_HTML wxHtmlHelpController;
-class WXDLLIMPEXP_HTML wxHtmlHelpWindow;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpDialog : public wxDialog
 {

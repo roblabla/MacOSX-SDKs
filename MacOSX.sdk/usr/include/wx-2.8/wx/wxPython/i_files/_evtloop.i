@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     18-Sept-2004
-// RCS-ID:      $Id: _evtloop.i,v 1.3 2006/01/13 04:06:41 RD Exp $
+// RCS-ID:      $Id: _evtloop.i 53769 2008-05-26 20:50:38Z RD $
 // Copyright:   (c) 2004 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -85,4 +85,11 @@ public:
  
 
 
+
+class wxEventLoopGuarantor
+{
+public:
+    wxEventLoopGuarantor();
+    ~wxEventLoopGuarantor();
+};
 //---------------------------------------------------------------------------

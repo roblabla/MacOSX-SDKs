@@ -3,9 +3,9 @@
  
      Contains:   Macintosh Easy Open Translation Extension Interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -35,8 +35,16 @@
 + (NSDictionary *)metadataForPersistentStoreWithURL:(NSURL *)url error:(NSError **)error;    
 + (BOOL)setMetadata:(NSDictionary *)metadata forPersistentStoreWithURL:(NSURL*)url error:(NSError **)error;
 
+/* Returns the NSMigrationManager class optimized for this store class.  Subclasses of NSPersistentStore can override this to provide a custom migration manager subclass (eg to take advantage of store-specific functionality to improve migration performance).
+ */
++ (Class)migrationManagerClass AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 /* the designated initializer for object stores. */
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options ;
+
+/*  Store metadata must be accessible before -load: is called, but there is no way to return an error if the store is invalid 
+*/
+-(BOOL)loadMetadata:(NSError **)error; 
 
 /* the bridge between the control & access layers. */
 - (NSPersistentStoreCoordinator*) persistentStoreCoordinator;
@@ -62,7 +70,7 @@
 - (void)didAddToPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 // Gives the store a chance to do any non-dealloc teardown (for example, closing a network connection) 
-// before removal.  Default implementation just does nothing.
+// before removal.
 - (void)willRemoveFromPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator; 
 
 @end

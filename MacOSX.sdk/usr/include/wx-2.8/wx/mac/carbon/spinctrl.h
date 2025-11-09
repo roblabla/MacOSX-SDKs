@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     28.10.99
-// RCS-ID:      $Id: spinctrl.h,v 1.9 2006/10/11 09:18:29 SC Exp $
+// RCS-ID:      $Id: spinctrl.h 41936 2006-10-11 09:20:34Z SC $
 // Copyright:   (c) Vadim Zeitlin
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

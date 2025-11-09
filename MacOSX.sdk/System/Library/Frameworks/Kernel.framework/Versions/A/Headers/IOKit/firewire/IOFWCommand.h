@@ -488,6 +488,16 @@ class IOFWReadQuadCommand : public IOFWAsyncCommand
 protected:
 
     UInt32 *	fQuads;
+
+	typedef struct 
+	{ 
+		bool	fPingTime;
+	}
+	MemberVariables;
+	
+	bool createMemberVariables( void );
+	void destroyMemberVariables( void );
+	virtual void free( void );
 	
     virtual void 	gotPacket(int rcode, const void* data, int size);
 
@@ -510,7 +520,9 @@ public:
     virtual IOReturn	reinit(UInt32 generation, FWAddress devAddress, UInt32 *quads, int numQuads,
                                 FWDeviceCallback completion=NULL, void *refcon=NULL);
 
-    
+	void setPingTime( bool state ) 
+		{ ((MemberVariables*)fMembers->fSubclassMembers)->fPingTime = state; };    
+
 private:
     OSMetaClassDeclareReservedUnused(IOFWReadQuadCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWReadQuadCommand, 1);
@@ -806,6 +818,7 @@ public:
                                 int						speed,
                                 FWAsyncStreamCallback	completion,
                                 void 					* refcon);
+
 	virtual void free( void );
 
     virtual IOReturn	reinit(	UInt32 					generation, 
@@ -817,7 +830,7 @@ public:
                                 int						speed,
                                	FWAsyncStreamCallback	completion,
                                 void 					* refcon);
-
+								
     virtual void				gotAck(
     							int 					ackCode);
 	// Utility for setting generation on newly created command
@@ -831,13 +844,38 @@ public:
     
     bool		failOnReset() const
     { return fFailOnReset; }
-    
 
 private:
     OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 1);
-    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 2);
-    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 3);
+
+public:
+    virtual bool		initAll(
+    							IOFireWireController 	* control,
+                                UInt32 					generation, 
+                                UInt32 					channel,
+                                UInt32 					sync,
+                                UInt32 					tag,
+                                IOMemoryDescriptor 		* hostMem,
+                                UInt32					size,
+                                int						speed,
+                                FWAsyncStreamCallback	completion,
+                                void 					* refcon,
+								bool					failOnReset );
+								
+    
+	virtual IOReturn	reinit(
+								UInt32 					generation, 
+                                UInt32 					channel,
+                                UInt32 					sync,
+                                UInt32 					tag,
+                                IOMemoryDescriptor 		* hostMem,
+                                UInt32					size,
+                                int						speed,
+                                FWAsyncStreamCallback 	completion,
+                                void 					* refcon,
+								bool					failOnReset);
+	
 
 };
 

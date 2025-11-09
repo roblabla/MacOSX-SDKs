@@ -230,6 +230,12 @@ enum
 	CSSM_ALGID_SHA384WithRSA,	/* RSA signature on SHA384 digest */
 	CSSM_ALGID_SHA512WithRSA,	/* RSA signature on SHA512 digest */
 	CSSM_ALGID_OPENSSH1,		/* OpenSSH v1 RSA key wrapping */
+	CSSM_ALGID_SHA224WithECDSA,	/* ECDSA signature on SHA224 digest */
+	CSSM_ALGID_SHA256WithECDSA,	/* ECDSA signature on SHA256 digest */
+	CSSM_ALGID_SHA384WithECDSA,	/* ECDSA signature on SHA384 digest */
+	CSSM_ALGID_SHA512WithECDSA,	/* ECDSA signature on SHA512 digest */
+	CSSM_ALGID_ECDSA_SPECIFIED,	/* ECDSA with separate digest algorithm specifier */
+	CSSM_ALGID_ECDH_X963_KDF,	/* ECDH with X9.63 key derivation */
     CSSM_ALGID__FIRST_UNUSED
 };
 
@@ -401,7 +407,7 @@ enum
 /* Apple X509TP private error codes. */
 enum 
 {
-	/* mismatch between Cert's common name and app-specified host name */
+	/* Host name mismatch */
 	CSSMERR_APPLETP_HOSTNAME_MISMATCH =				CSSM_TP_PRIVATE_ERROR + 0,
 	/* Non-understood extension with Critical flag true */
 	CSSMERR_APPLETP_UNKNOWN_CRITICAL_EXTEN =		CSSM_TP_PRIVATE_ERROR + 1,
@@ -426,7 +432,7 @@ enum
 	/* CRL expired/not valid yet */
 	CSSMERR_APPLETP_CRL_EXPIRED =					CSSM_TP_PRIVATE_ERROR + 11,
 	CSSMERR_APPLETP_CRL_NOT_VALID_YET =				CSSM_TP_PRIVATE_ERROR + 12,
-	/* Can't find appropriate CRL */
+	/* Cannot find appropriate CRL */
 	CSSMERR_APPLETP_CRL_NOT_FOUND =					CSSM_TP_PRIVATE_ERROR + 13,
 	/* specified CRL server down */
 	CSSMERR_APPLETP_CRL_SERVER_DOWN =				CSSM_TP_PRIVATE_ERROR + 14,
@@ -514,7 +520,9 @@ enum
 	/* invalid empty SubjectName */
 	CSSMERR_APPLETP_INVALID_EMPTY_SUBJECT = 		CSSM_TP_PRIVATE_ERROR + 55,
 	/* unknown critical Qualified Cert Statement ID */
-	CSSMERR_APPLETP_UNKNOWN_QUAL_CERT_STATEMENT = 	CSSM_TP_PRIVATE_ERROR + 56
+	CSSMERR_APPLETP_UNKNOWN_QUAL_CERT_STATEMENT = 	CSSM_TP_PRIVATE_ERROR + 56,
+	/* Missing required extension */
+	CSSMERR_APPLETP_MISSING_REQUIRED_EXTENSION =    CSSM_TP_PRIVATE_ERROR + 57
 };
 
 /* Apple .mac TP private error codes. */
@@ -660,6 +668,7 @@ enum
 	CSSM_APPLE_PRIVATE_CSPDL_CODE_13 = 13,
 	CSSM_APPLE_PRIVATE_CSPDL_CODE_14 = 14,
 	CSSM_APPLE_PRIVATE_CSPDL_CODE_15 = 15,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_16 = 16,
 	
 	/* Given a CSSM_KEY_PTR in any format, obtain the SHA-1 hash of the 
 	 * associated key blob. 
@@ -782,7 +791,8 @@ enum {
 enum {
 	CSSM_FEE_CURVE_TYPE_DEFAULT = 0,	/* default per key size */
 	CSSM_FEE_CURVE_TYPE_MONTGOMERY,		/* a==1, b==0 */
-	CSSM_FEE_CURVE_TYPE_WEIERSTRASS		/* c==0. IEEE P1363 compliant. */
+	CSSM_FEE_CURVE_TYPE_WEIERSTRASS,	/* c==0. IEEE P1363 compliant. */
+	CSSM_FEE_CURVE_TYPE_ANSI_X9_62		/* ANSI X9.62 compatible */
 };
 
 /*

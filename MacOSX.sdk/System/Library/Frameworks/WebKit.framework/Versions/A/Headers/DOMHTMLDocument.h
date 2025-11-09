@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,30 +26,36 @@
 
 #import <WebKit/DOMDocument.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMElement;
 @class DOMHTMLCollection;
-@class DOMHTMLElement;
-@class DOMNodeList;
 @class NSString;
 
 @interface DOMHTMLDocument : DOMDocument
-@property(copy) NSString *title;
-@property(readonly, copy) NSString *referrer;
-@property(readonly, copy) NSString *domain;
-@property(readonly, copy) NSString *URL;
-@property(retain) DOMHTMLElement *body;
-@property(readonly, retain) DOMHTMLCollection *images;
-@property(readonly, retain) DOMHTMLCollection *applets;
-@property(readonly, retain) DOMHTMLCollection *links;
-@property(readonly, retain) DOMHTMLCollection *forms;
-@property(readonly, retain) DOMHTMLCollection *anchors;
-@property(copy) NSString *cookie;
+@property(readonly, retain) DOMHTMLCollection *embeds AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, retain) DOMHTMLCollection *plugins AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, retain) DOMHTMLCollection *scripts AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int width AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int height AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *dir AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *designMode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, copy) NSString *compatMode AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property(readonly, retain) DOMElement *activeElement AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property(copy) NSString *bgColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *fgColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *alinkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *linkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *vlinkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 
 - (void)open;
 - (void)close;
 - (void)write:(NSString *)text;
 - (void)writeln:(NSString *)text;
-- (DOMNodeList *)getElementsByName:(NSString *)elementName;
-- (DOMElement *)getElementById:(NSString *)elementId;
+- (void)clear AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)captureEvents AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)releaseEvents AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (BOOL)hasFocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
+
+#endif

@@ -1,11 +1,11 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2007, Apple Inc.
+        Copyright (c) 1994-2009, Apple Inc.
         All rights reserved.
 */
 
-// NSTextView is a NSText subclass that displays the glyphs laid out in one NSTextContainer.
+// NSTextView is an NSText subclass that displays the glyphs laid out in one NSTextContainer.
 
 #import <AppKit/NSText.h>
 #import <AppKit/NSInputManager.h>
@@ -14,6 +14,7 @@
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSTextInputClient.h>
+#import <Foundation/NSTextCheckingResult.h>
 
 @class NSTextContainer;
 @class NSTextStorage;
@@ -22,6 +23,8 @@
 @class NSRulerMarker;
 @class NSUndoManager;
 @class NSParagraphStyle;
+@class NSOrthography;
+@protocol NSTextViewDelegate;
 
 /* Values for NSSelectionGranularity */
 enum {
@@ -159,7 +162,6 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)changeAttributes:(id)sender;
 - (void)changeDocumentBackgroundColor:(id)sender;
-- (void)toggleBaseWritingDirection:(id)sender;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)orderFrontSpacingPanel:(id)sender;
@@ -413,6 +415,9 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)breakUndoCoalescing;
     // May be called to introduce a break in the coalescing of undo actions for user typing, for example at a save point.
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (BOOL)isCoalescingUndo;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (BOOL)allowsImageEditing;
@@ -425,8 +430,8 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 
 /*************************** NSText methods ***************************/
 
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
+- (id <NSTextViewDelegate>)delegate;
+- (void)setDelegate:(id <NSTextViewDelegate>)anObject;
 - (BOOL)isEditable;
 - (void)setEditable:(BOOL)flag;
 - (BOOL)isSelectable;
@@ -447,6 +452,18 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)setSelectedRange:(NSRange)charRange;
     // Other NSText methods are implemented in the base NSTextView implementation rather than in this category.  See NSText.h for declarations.
 
+/*************************** Input Source support ***************************/
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
+ */
+- (NSArray *)allowedInputSourceLocales;
+- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+
+@end
+
+@interface NSTextView (NSTextChecking)
+
 /*************************** Smart copy/paste/delete/substitution support ***************************/
 
 - (BOOL)smartInsertDeleteEnabled;
@@ -459,7 +476,6 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)smartInsertForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace beforeString:(NSString **)beforeString afterString:(NSString **)afterString;
 - (NSString *)smartInsertBeforeStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
 - (NSString *)smartInsertAfterStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
-    // Java note: The second and third methods are the primitives and are the methods exposed in Java.  The first method calls the other two.  All Objective-C code calls the first method.  In either Objective-C or Java any overriding should be done for the second and third methods, not the first method.  This will all work out correctly with the exception of existing code that overrides the first method.  Existing subclasses that do this will not have their implementations available to Java developers.  Isn't Java wonderful?
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (void)setAutomaticQuoteSubstitutionEnabled:(BOOL)flag;
@@ -470,18 +486,45 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)toggleAutomaticLinkDetection:(id)sender;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
-/*************************** Input Source support ***************************/
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-/* Returns an array of locale identifiers representing input sources allowed to be enabled when the receiver has the keyboard focus.
- */
-- (NSArray *)allowedInputSourceLocales;
-- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)setAutomaticDataDetectionEnabled:(BOOL)flag;
+- (BOOL)isAutomaticDataDetectionEnabled;
+- (void)toggleAutomaticDataDetection:(id)sender;
+- (void)setAutomaticDashSubstitutionEnabled:(BOOL)flag;
+- (BOOL)isAutomaticDashSubstitutionEnabled;
+- (void)toggleAutomaticDashSubstitution:(id)sender;
+- (void)setAutomaticTextReplacementEnabled:(BOOL)flag;
+- (BOOL)isAutomaticTextReplacementEnabled;
+- (void)toggleAutomaticTextReplacement:(id)sender;
+- (void)setAutomaticSpellingCorrectionEnabled:(BOOL)flag;
+- (BOOL)isAutomaticSpellingCorrectionEnabled;
+- (void)toggleAutomaticSpellingCorrection:(id)sender;
+
+- (NSTextCheckingTypes)enabledTextCheckingTypes;
+- (void)setEnabledTextCheckingTypes:(NSTextCheckingTypes)checkingTypes;
+    // These two are bulk methods for setting and getting many checking type settings at once.  They will call the individual methods as necessary.
+
+- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options;
+- (void)handleTextCheckingResults:(NSArray *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount;
+    // These two methods usually would not be called directly, since NSTextView itself will call them as needed, but they can be overridden.
+
+- (void)orderFrontSubstitutionsPanel:(id)sender;
+- (void)checkTextInSelection:(id)sender;
+- (void)checkTextInDocument:(id)sender;
+    // Ordinarily text checking will occur in the background, and results that replace text will be applied only for text that has been typed in by the user, but these last two methods cause the currently enabled text checking types to be applied immediately to the selection or the document, respectively, with results that replace text applied to all text whatever its origin.
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+
+@end
+
+@interface NSTextView (NSDeprecated)
+- (void)toggleBaseWritingDirection:(id)sender   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    // toggleBaseWritingDirection: will be deprecated in favor of the new NSResponder methods makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft:, which NSTextView now implements.
 @end
 
 // Note that all delegation messages come from the first textView
 
-@interface NSObject (NSTextViewDelegate)
+@protocol NSTextViewDelegate <NSTextDelegate>
+@optional
 
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link atIndex:(NSUInteger)charIndex;
     // Delegate only.
@@ -540,6 +583,13 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
     // Delegate only.  Allows delegate to control the context menu returned by menuForEvent:.  The menu parameter is the context menu NSTextView would otherwise return; charIndex is the index of the character that was right-clicked. 
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (NSDictionary *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary *)options types:(NSTextCheckingTypes *)checkingTypes;
+    // Delegate only.  Called by checkTextInRange:types:options:, this method allows control over text checking options (via the return value) or types (by modifying the flags pointed to by the inout parameter checkingTypes).
+
+- (NSArray *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options results:(NSArray *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount;
+    // Delegate only.  Called by handleTextCheckingResults:forRange:orthography:wordCount:, this method allows observation of text checking, or modification of the results (via the return value).
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link;
@@ -556,4 +606,4 @@ APPKIT_EXTERN NSString *NSTextViewWillChangeNotifyingTextViewNotification;
 APPKIT_EXTERN NSString *NSTextViewDidChangeSelectionNotification;
     // NSOldSelectedCharacterRange -> NSValue with old range.
 
-APPKIT_EXTERN NSString *NSTextViewDidChangeTypingAttributesNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *NSTextViewDidChangeTypingAttributesNotification AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

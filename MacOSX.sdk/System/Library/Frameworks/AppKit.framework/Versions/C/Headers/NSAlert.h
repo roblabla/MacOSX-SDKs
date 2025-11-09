@@ -1,17 +1,19 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <AppKit/NSGraphics.h>
 @class NSTextField, NSPanel, NSArray, NSWindow, NSImage, NSButton, NSError;
+@protocol NSAlertDelegate;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-// The default alert style is NSAlertWarningStyle.  NSAlertCriticalStyle should be reserved for critical alerts and will cause the icon to be badged with a caution icon.
+/* The default alert style is NSWarningAlertStyle.  NSCriticalAlertStyle should be reserved for critical alerts and will cause the icon to be badged with a caution icon.
+*/
 enum {
     NSWarningAlertStyle = 0,
     NSInformationalAlertStyle = 1,
@@ -63,7 +65,8 @@ typedef NSUInteger NSAlertStyle;
 
 #endif
 
-// the following class method is for use by apps migrating from the C-based API.  Note that this returns an NSAlert that is equivalent to the one created in NSRunAlertPanel, so the layout, button return values, and key equivalents are the same as for the C-based API.
+/* the following class method is for use by apps migrating from the C-based API.  Note that this returns an NSAlert that is equivalent to the one created in NSRunAlertPanel, so the layout, button return values, and key equivalents are the same as for the C-based API.  For return values, see NSAlertDefaultReturn, etc. in NSPanel.h
+*/
 + (NSAlert *)alertWithMessageText:(NSString *)message defaultButton:(NSString *)defaultButton alternateButton:(NSString *)alternateButton otherButton:(NSString *)otherButton informativeTextWithFormat:(NSString *)format, ...;
 
 - (void)setMessageText:(NSString *)messageText;
@@ -72,21 +75,26 @@ typedef NSUInteger NSAlertStyle;
 - (NSString *)messageText;
 - (NSString *)informativeText;
 
-// customize the icon.  By default uses the image named NSApplicationIcon
+/* customize the icon.  By default uses the image named NSApplicationIcon.
+*/
 - (void)setIcon:(NSImage *)icon;
 - (NSImage *)icon;
 
-// customize the buttons in the alert panel
-// buttons are added from right to left (for left to right languages)
+/* customize the buttons in the alert panel.  Buttons are added from right to left (for left to right languages).
+*/
 - (NSButton *)addButtonWithTitle:(NSString *)title;
-// get the buttons, where the rightmost button is at index 0
+/* get the buttons, where the rightmost button is at index 0.
+*/
 - (NSArray *)buttons;
 
-// by default, NSAlert return values are position dependent, with this mapping:
-// first (rightmost) button = NSAlertFirstButtonReturn
-// second button = NSAlertSecondButtonReturn
-// third button = NSAlertThirdButtonReturn
-// buttonPosition 3+x = NSAlertThirdButtonReturn + x
+/* by default, NSAlert return values are position dependent, with this mapping:
+       first (rightmost) button = NSAlertFirstButtonReturn
+       second button = NSAlertSecondButtonReturn
+       third button = NSAlertThirdButtonReturn
+       buttonPosition 3+x = NSAlertThirdButtonReturn + x
+       
+   Note that these return values do not apply to an NSAlert created via +alertWithMessageText:defaultButton:alernateButton:otherButton:informativeTextWithFormat:, which instead uses the same return values as NSRunAlertPanel.  See NSAlertDefaultReturn, etc. in NSPanel.h
+*/
 
 enum {
 	NSAlertFirstButtonReturn	= 1000,
@@ -94,15 +102,19 @@ enum {
 	NSAlertThirdButtonReturn	= 1002
 };
 
-// The following method can be used to customize return values for buttons
-// setTag:(NSInteger)tag;	setting a tag on a button will cause that tag to be the button's return value
-// Note that we reserve the use of the tag for this purpose.  We also reserve the use of the target and the action
-// by default, the first button has a key equivalent of return which implies a pulsing default button, the button named "Cancel", if any, has a key equivalent of escape, and the button named "Don't Save", if any, has a key equivalent of cmd-d.  The following methods can be used to customize key equivalents.
-// setKeyEquivalent:(NSString *)charCode:
-// setKeyEquivalentModifierMask:(NSUInt)mask;
+/* In order to customize a return value for a button:
+   setTag:(NSInteger)tag;	setting a tag on a button will cause that tag to be the button's return value
+   
+   Note that we reserve the use of the tag for this purpose.  We also reserve the use of the target and the action.
+   
+   By default, the first button has a key equivalent of return which implies a pulsing default button, the button named "Cancel", if any, has a key equivalent of escape, and the button named "Don't Save", if any, has a key equivalent of cmd-d.  The following methods can be used to customize key equivalents:
+   setKeyEquivalent:(NSString *)charCode:
+   setKeyEquivalentModifierMask:(NSUInt)mask;
+*/
 
 
-// -setShowsHelp:YES adds a help button to the alert panel. When the help button is pressed, the delegate is first consulted.  If the delegate does not implement alertShowHelp: or returns NO, then -[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor:, if any.  An exception will be raised if the delegate returns NO and there is no help anchor set.
+/* -setShowsHelp:YES adds a help button to the alert panel. When the help button is pressed, the delegate is first consulted.  If the delegate does not implement alertShowHelp: or returns NO, then -[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor:, if any.  An exception will be raised if the delegate returns NO and there is no help anchor set.
+*/
 - (void)setShowsHelp:(BOOL)showsHelp;
 - (BOOL)showsHelp;
 
@@ -112,8 +124,8 @@ enum {
 - (void)setAlertStyle:(NSAlertStyle)style;
 - (NSAlertStyle)alertStyle;
 
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
+- (void)setDelegate:(id <NSAlertDelegate>)delegate;
+- (id <NSAlertDelegate>)delegate;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* -setShowsSuppressionButton: indicates whether or not the alert should contain a suppression checkbox.  The default is NO.  This checkbox is typically used to give the user an option to not show this alert again.  If shown, the suppression button will have a default localized title similar to @"Do not show this message again".  You can customize this title using [[alert suppressionButton] setTitle:].  When the alert is dismissed, you can get the state of the suppression button, using [[alert suppressionButton] state] and store the result in user defaults, for example.  This setting can then be checked before showing the alert again.  By default, the suppression button is positioned below the informative text, and above the accessory view (if any) and the alert buttons, and left-aligned with the informative text.  However do not count on the placement of this button, since it might be moved if the alert panel user interface is changed in the future. If you need a checkbox for purposes other than suppression text, it is recommended you create your own using an accessory view.
@@ -137,21 +149,26 @@ enum {
 
 #endif
 
-// Run the alert as an application-modal panel and return the result
+/* Run the alert as an application-modal panel and return the result.
+*/
 - (NSInteger)runModal;
 
-// Run the alert as a sheet.  didEndSelector will be invoked after the return value is known but before the sheet is dismissed.  Callers that want to dismiss the sheet themselves before carrying out an action in response to the return value should do so by calling orderOut: on [alert window].  The didEndSelector should have the following signature:
-//- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+/* Run the alert as a sheet.  didEndSelector will be invoked after the return value is known but before the sheet is dismissed.  Callers that want to dismiss the sheet themselves before carrying out an action in response to the return value should do so by calling orderOut: on [alert window].  The didEndSelector should have the following signature:
 
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+*/
 - (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
 
-// return the application-modal panel or the document-modal sheet corresponding to this alert
+/* return the application-modal panel or the document-modal sheet corresponding to this alert.
+*/
 - (id)window;
 
 @end
 
-@interface NSObject(NSAlertDelegate)
-// the delegate should implement this if custom help behavior is required.
+@protocol NSAlertDelegate <NSObject>
+@optional
+/* the delegate should implement this if custom help behavior is required.
+*/
 - (BOOL)alertShowHelp:(NSAlert *)alert;
 @end
 

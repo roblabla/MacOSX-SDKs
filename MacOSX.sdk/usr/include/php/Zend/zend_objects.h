@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_objects.h,v 1.25.2.2.2.2 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_objects.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_OBJECTS_H
 #define ZEND_OBJECTS_H
@@ -29,7 +29,7 @@ ZEND_API void zend_object_std_init(zend_object *object, zend_class_entry *ce TSR
 ZEND_API void zend_object_std_dtor(zend_object *object TSRMLS_DC);
 ZEND_API zend_object_value zend_objects_new(zend_object **object, zend_class_entry *class_type TSRMLS_DC);
 ZEND_API void zend_objects_destroy_object(zend_object *object, zend_object_handle handle TSRMLS_DC);
-ZEND_API zend_object *zend_objects_get_address(zval *object TSRMLS_DC);
+ZEND_API zend_object *zend_objects_get_address(const zval *object TSRMLS_DC);
 ZEND_API void zend_objects_clone_members(zend_object *new_object, zend_object_value new_obj_val, zend_object *old_object, zend_object_handle handle TSRMLS_DC);
 ZEND_API zend_object_value zend_objects_clone_obj(zval *object TSRMLS_DC);
 ZEND_API void zend_objects_free_object_storage(zend_object *object TSRMLS_DC);

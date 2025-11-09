@@ -55,7 +55,7 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-@interface PDFView : NSView
+@interface PDFView : NSView <NSAnimationDelegate>
 {
 @private
     PDFViewPrivateVars *_pdfPriv;
@@ -311,6 +311,15 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 - (NSArray *) visiblePages;
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+// Turns on or off data detection. If enabled, page text will be scanned for URL's as the page becomes visible. Where 
+// URL's are found, Link annotations are created in place. These are temporary annotations and are not saved.
+- (void) setEnableDataDetectors: (BOOL) enable;
+- (BOOL) enableDataDetectors;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @end
 

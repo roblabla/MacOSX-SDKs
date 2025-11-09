@@ -295,7 +295,9 @@ ffi_prep_java_raw_closure(
 	void				(*fun)(ffi_cif*,void*,ffi_raw*,void*),
 	void*				user_data);
 
-#endif	// FFI_CLOSURES
+#elif
+#error FFI_CLOSURES not defined
+#endif
 
 /* ---- Public interface definition -------------------------------------- */
 

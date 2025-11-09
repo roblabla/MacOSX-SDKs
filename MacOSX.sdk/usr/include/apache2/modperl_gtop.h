@@ -1,8 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -42,7 +43,7 @@ typedef struct {
     char share[MP_GTOP_SSS];
     char rss[MP_GTOP_SSS];
 } modperl_gtop_proc_mem_ss;
-    
+
 typedef struct {
     glibtop_union before;
     glibtop_union after;
@@ -53,7 +54,7 @@ typedef struct {
 modperl_gtop_t *modperl_gtop_new(apr_pool_t *p);
 void modperl_gtop_get_proc_mem_before(modperl_gtop_t *gtop);
 void modperl_gtop_get_proc_mem_after(modperl_gtop_t *gtop);
-void modperl_gtop_report_proc_mem(modperl_gtop_t *gtop, 
+void modperl_gtop_report_proc_mem(modperl_gtop_t *gtop,
                                   char *when, const char *func, char *msg);
 void modperl_gtop_report_proc_mem_diff(modperl_gtop_t *gtop, const char* func, char *msg);
 void modperl_gtop_report_proc_mem_before(modperl_gtop_t *gtop, const char* func, char *msg);

@@ -12,10 +12,20 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <float.h>
-#include <AvailabilityMacros.h>
 
-#import <CoreFoundation/CoreFoundation.h>
-#import <ApplicationServices/ApplicationServices.h>
+#include <CoreFoundation/CoreFoundation.h>
+#include <ApplicationServices/ApplicationServices.h>
+
+#include <TargetConditionals.h>
+
+#ifdef CA_BUILDING_CA
+# undef __OSX_AVAILABLE_STARTING
+# undef __OSX_AVAILABLE_BUT_DEPRECATED
+#endif
+#ifndef __OSX_AVAILABLE_STARTING
+# define __OSX_AVAILABLE_STARTING(m,i)
+# define __OSX_AVAILABLE_BUT_DEPRECATED(m0,m1,i0,i1)
+#endif
 
 /* FIXME: Needed until everyone is on Leopard. */
 #ifndef CGFLOAT_DEFINED
@@ -24,9 +34,6 @@
 # define CGFLOAT_MAX FLT_MAX
 # define CGFLOAT_IS_DOUBLE 0
 # define CGFLOAT_DEFINED 1
-#endif
-#ifndef AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
 #endif
 
 #ifdef __cplusplus
@@ -48,19 +55,23 @@
 # define CA_EXTERN extern
 #endif
 
-#ifndef CA_PRIVATE_EXTERN
-# define CA_PRIVATE_EXTERN __private_extern__
-#endif
-
 #ifndef CA_INLINE
 # if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #  define CA_INLINE static inline
-# elif defined(__MWERKS__) || defined(__cplusplus)
+# elif defined (__MWERKS__) || defined (__cplusplus)
 #  define CA_INLINE static inline
 # elif CA_GNUC (3, 0)
 #  define CA_INLINE static __inline__ __attribute__ ((always_inline))
 # else
 #  define CA_INLINE static    
+# endif
+#endif
+
+#ifndef CA_HIDDEN
+# if CA_GNUC (4,0)
+#  define CA_HIDDEN __attribute__ ((visibility ("hidden")))
+# else
+#  define CA_HIDDEN /* no hidden */
 # endif
 #endif
 
@@ -121,7 +132,8 @@ CA_EXTERN_C_BEGIN
 /* Returns the current CoreAnimation absolute time. This is the result of
  * calling mach_absolute_time () and converting the units to seconds. */
 
-CA_EXTERN CFTimeInterval CACurrentMediaTime (void) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN CFTimeInterval CACurrentMediaTime (void)
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 CA_EXTERN_C_END
 

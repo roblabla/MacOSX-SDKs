@@ -1,6 +1,6 @@
 /*	
     OSALanguage.h
-    Copyright (C) 2005 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005, 2009 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -9,6 +9,7 @@
 #include <Carbon/Carbon.h>
 
 @class OSAScript;
+@class OSALanguageInstance;
 @class OSALanguagePrivate;
 
 // Language Options
@@ -39,6 +40,7 @@ typedef enum
 // Class Methods
 + (NSArray *)availableLanguages;
 + (OSALanguage *)languageForName:(NSString *)name;
++ (OSALanguage *)languageForScriptDataDescriptor:(NSAppleEventDescriptor *)descriptor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 + (OSALanguage *)defaultLanguage;
 + (void)setDefaultLanguage:(OSALanguage *)defaultLanguage;
 
@@ -46,6 +48,7 @@ typedef enum
 - (id)initWithComponent:(Component)component;
 
 // Accessors
+- (OSALanguageInstance *)sharedLanguageInstance AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (ComponentInstance)componentInstance;
 - (NSString *)name;
 - (NSString *)info;
@@ -54,5 +57,6 @@ typedef enum
 - (OSType)subType;
 - (OSType)manufacturer;
 - (OSALanguageFeatures)features;
+- (BOOL)isThreadSafe AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end

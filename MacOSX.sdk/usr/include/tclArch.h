@@ -1,1 +1,0 @@
-../../System/Library/Frameworks/Tcl.framework/Versions/8.4/Headers/tclArch.h

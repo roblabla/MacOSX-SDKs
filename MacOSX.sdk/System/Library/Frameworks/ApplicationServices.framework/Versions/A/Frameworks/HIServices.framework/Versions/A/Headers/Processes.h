@@ -3,9 +3,9 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-247.0.1~2
+     Version:    HIServices-311~1
  
-     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -134,7 +134,7 @@ enum {
 
 typedef UInt32 ProcessApplicationTransformState;
 enum {
-  kProcessTransformToForegroundApplication = 1L
+  kProcessTransformToForegroundApplication = 1
 };
 
 /*
@@ -279,7 +279,7 @@ enum {
    * Return all information known about the application in the
    * dictionary.
    */
-  kProcessDictionaryIncludeAllInformationMask = (long)0xFFFFFFFF
+  kProcessDictionaryIncludeAllInformationMask = (int)0xFFFFFFFF
 };
 
 /*
@@ -466,6 +466,13 @@ GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X
  *    
  *    On Mac OS X, the processSize and processFreeMem fields are
  *    returned with the value 0.
+ *    
+ *    On Mac OS X 10.6 and later, the processLaunchDate field is an
+ *    integer value with the same scale as CFAbsoluteTime.  Prior
+ *    releases used a value in 60th of a second with a random zero
+ *    time, making it difficult to use. Since most applications just
+ *    look at the comparison from this field to other launch dates this
+ *    change should not affect many applications.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
@@ -524,7 +531,7 @@ GetProcessInformation(
  *    loaded into an application's address space.  The assigned values
  *    at present are:  Mac OS Classic aplications have the value 0,
  *    Carbon applications have the value 2, Cocoa applications have the
- *    value 4. Other undocumented values may also be returned.
+ *    value 3. Other undocumented values may also be returned.
  *     "Attributes"                CFNumber, kCFNumberSInt32 
  *     "ParentPSN" *               CFNumber, kCFNumberLongLong 
  *     "FileType" *                CFString, file type 
@@ -580,7 +587,8 @@ enum {
    * window forward. If this option is not set, all process windows are
    * brought forward.
    */
-  kSetFrontProcessFrontWindowOnly = (1 << 0)
+  kSetFrontProcessFrontWindowOnly = (1 << 0),
+  kSetFrontProcessCausedByUser  = (1 << 1) /*    indicates that direct user activity is causing this SetFrontProcessWithOptions() call */
 };
 
 

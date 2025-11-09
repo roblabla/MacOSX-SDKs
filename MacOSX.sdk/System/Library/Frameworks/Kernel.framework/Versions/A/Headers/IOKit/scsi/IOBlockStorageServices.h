@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,9 +28,9 @@
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // IOKit includes
 #include <IOKit/IOTypes.h>
@@ -42,9 +42,9 @@
 #include <IOKit/scsi/IOSCSIBlockCommandsDevice.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOBlockStorageServices : public IOBlockStorageDevice
 {
@@ -65,6 +65,7 @@ protected:
 	
 	virtual bool		attach ( IOService * provider );
 	virtual void		detach ( IOService * provider );
+	virtual void		free ( void );
     virtual IOReturn	newUserClient (
     						   task_t			owningTask,
     						   void *			securityID,
@@ -84,16 +85,23 @@ public:
                                 				 IOReturn			status,
                                 				 UInt64 			actualByteCount );
 	
+	// Deprecated
 	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
 											UInt32					block,
 											UInt32					nblks,
 											IOStorageCompletion		completion );
-	
-    virtual IOReturn	doAsyncReadWrite(	IOMemoryDescriptor *	buffer,
-                                            UInt64 					block,
-                                            UInt64 					nblks,
-                                            IOStorageCompletion 	completion);
+											
+	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
+											UInt64					block,
+											UInt64					nblks,
+											IOStorageCompletion 	completion );
 
+	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
+											UInt64					block,
+											UInt64					nblks,
+											IOStorageAttributes *   attributes,
+											IOStorageCompletion *	completion );
+													
     virtual IOReturn	doEjectMedia ( void );
 	
     virtual IOReturn	doFormatMedia ( UInt64 byteCapacity );
@@ -123,13 +131,9 @@ public:
     
     virtual IOReturn	reportPollRequirements ( 	bool * pollIsRequired,
     												bool * pollIsExpensive );
-    
-    virtual IOReturn	reportMaxReadTransfer ( UInt64 blockSize, UInt64 * max );
-    
+        
     virtual IOReturn	reportMaxValidBlock ( UInt64 * maxBlock );
-    
-    virtual IOReturn	reportMaxWriteTransfer ( UInt64 blockSize, UInt64 * max );
-    
+        
     virtual IOReturn	reportRemovability ( bool * isRemovable );
     
     virtual IOReturn	reportWriteProtection ( bool * isWriteProtected );

@@ -3,9 +3,9 @@
  
      Contains:   Picture Utilities Interfaces.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 1990-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

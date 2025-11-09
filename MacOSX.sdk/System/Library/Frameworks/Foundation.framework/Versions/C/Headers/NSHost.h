@@ -1,5 +1,5 @@
 /*	NSHost.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,6 +29,8 @@
 
 - (NSString *)address;	// arbitrary choice
 - (NSArray *)addresses;	// unordered list of IPv6 and IPv4 addresses
+
+- (NSString *)localizedName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

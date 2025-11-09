@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2007, Apple Inc.
+	Copyright (c) 2004-2009, Apple Inc.
 	All rights reserved.
  */
 
@@ -44,9 +44,10 @@
 
 @end
 
-@interface NSPersistentDocument (NSPersistentDocumentDeprecated)
+@interface NSPersistentDocument (NSDeprecated)
 
-- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType error:(NSError **)error;    
+// This method is deprecated. Please use -configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error: instead
+- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 @end
 

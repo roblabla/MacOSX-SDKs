@@ -1,5 +1,5 @@
 /*	CFDate.h
-	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2009, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATE__)
@@ -60,12 +60,12 @@ typedef struct {
 } CFGregorianUnits;
 
 enum {
-    kCFGregorianUnitsYears = (1 << 0),
-    kCFGregorianUnitsMonths = (1 << 1),
-    kCFGregorianUnitsDays = (1 << 2),
-    kCFGregorianUnitsHours = (1 << 3),
-    kCFGregorianUnitsMinutes = (1 << 4),
-    kCFGregorianUnitsSeconds = (1 << 5),
+    kCFGregorianUnitsYears = (1UL << 0),
+    kCFGregorianUnitsMonths = (1UL << 1),
+    kCFGregorianUnitsDays = (1UL << 2),
+    kCFGregorianUnitsHours = (1UL << 3),
+    kCFGregorianUnitsMinutes = (1UL << 4),
+    kCFGregorianUnitsSeconds = (1UL << 5),
     kCFGregorianAllUnits = 0x00FFFFFF
 };
 typedef CFOptionFlags CFGregorianUnitFlags;

@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,21 +44,21 @@
 #define kAllWindowClasses 				0xFFFFFFFF
 
 #define kWindowNoAttributes 			0
-#define kWindowCloseBoxAttribute 		0x00000001
-#define kWindowHorizontalZoomAttribute 	0x00000002
-#define kWindowVerticalZoomAttribute 	0x00000004
-#define kWindowFullZoomAttribute 		0x00000006
-#define kWindowCollapseBoxAttribute 	0x00000008
-#define kWindowResizableAttribute 		0x00000010
-#define kWindowSideTitlebarAttribute 	0x00000020
-#define kWindowToolbarButtonAttribute 	0x00000040
-#define kWindowUnifiedTitleAndToolbarAttribute  0x00000080
-#define kWindowMetalAttribute 			0x00000100
-#define kWindowNoTitleBarAttribute 		0x00000200
-#define kWindowTexturedSquareCornersAttribute  0x00000400
-#define kWindowMetalNoContentSeparatorAttribute  0x00000800
-#define kWindowHasRoundBottomBarCornersAttribute  0x00001000
-#define kWindowDoesNotCycleAttribute 	0x00008000
+#define kWindowCloseBoxAttribute 		0x01
+#define kWindowHorizontalZoomAttribute 	0x02
+#define kWindowVerticalZoomAttribute 	0x04
+#define kWindowFullZoomAttribute 		0x06
+#define kWindowCollapseBoxAttribute 	0x08
+#define kWindowResizableAttribute 		0x10
+#define kWindowSideTitlebarAttribute 	0x20
+#define kWindowToolbarButtonAttribute 	0x40
+#define kWindowUnifiedTitleAndToolbarAttribute  0x80
+#define kWindowMetalAttribute 			0x0100
+#define kWindowNoTitleBarAttribute 		0x0200
+#define kWindowTexturedSquareCornersAttribute  0x0400
+#define kWindowMetalNoContentSeparatorAttribute  0x0800
+#define kWindowHasRoundBottomBarCornersAttribute  0x1000
+#define kWindowDoesNotCycleAttribute 	0x8000
 #define kWindowNoUpdatesAttribute 		0x00010000
 #define kWindowNoActivatesAttribute 	0x00020000
 #define kWindowOpaqueForEventsAttribute  0x00040000
@@ -73,8 +73,8 @@
 #define kWindowLiveResizeAttribute 		0x10000000
 #define kWindowIgnoreClicksAttribute 	0x20000000
 #define kWindowFrameworkScaledAttribute  0x00100000
-#define kWindowStandardDocumentAttributes  0x0000001F
-#define kWindowStandardFloatingAttributes  0x00000009
+#define kWindowStandardDocumentAttributes  0x1F
+#define kWindowStandardFloatingAttributes  0x09
 
 #define kWindowDefProcType 				'WDEF'
 #define kStandardWindowDefinition 		0					/*  for document windows and dialogs */

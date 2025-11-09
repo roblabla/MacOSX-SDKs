@@ -3,14 +3,22 @@
  
      Contains:   Scaler streaming data structures and constants for OFA 1.x
  
-     Version:    ATS-236~129
+     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:00 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                ScalerStreamTypes.i
+                     Revision:        1.5
+                     Dated:           2007/01/15 23:28:27
+                     Last change by:  kurita
+                     Last comment:    <rdar://problem/4916090> updated copyright.
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __SCALERSTREAMTYPES__
@@ -51,7 +59,7 @@ enum {
   eexecBinaryModifierStreamType = 0x00010000, /* encrypted portion of Type1Stream to be binary */
   unicodeMappingModifierStreamType = 0x00020000, /* include glyph ID to unicode mapping info for PDF */
   scalerSpecifcModifierMask     = 0x0000F000, /* for scaler's internal use */
-  streamTypeModifierMask        = (long)0xFFFFF000 /* 16 bits for Apple, 4 bits for scaler */
+  streamTypeModifierMask        = (int)0xFFFFF000 /* 16 bits for Apple, 4 bits for scaler */
 };
 
 /* Possible streamed font formats */
@@ -91,13 +99,13 @@ struct scalerStream {
     struct {
       const unsigned short * encoding;        /* <- Intention is * unsigned short[256] */
       SInt32 *            glyphBits;          /* <->    Bitvector: a bit for each glyph, 1 = desired/supplied */
-      char *              name;               /* <->    The printer font name to use/used (C string) */
+      const char *        name;               /* <->    The printer font name to use/used (C string) */
     }                       font;
 
                                               /* Used to obtain a list of prerequisites from the scaler*/
     struct {
       SInt32              size;               /* ->     Size of the prereq. list in bytes (0 indicates no prerequisites)*/
-      void *              list;               /* <- Pointer to client block to hold list (nil = list size query only) */
+      const void *        list;               /* <- Pointer to client block to hold list (nil = list size query only) */
     }                       prerequisiteQuery;
 
     SInt32              prerequisiteItem;     /* <-     Enumeration value for the prerequisite item to be streamed.*/

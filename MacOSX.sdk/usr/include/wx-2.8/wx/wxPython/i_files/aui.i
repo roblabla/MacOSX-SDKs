@@ -5,13 +5,13 @@
 // Author:      Robin Dunn
 //
 // Created:     5-July-2006
-// RCS-ID:      $Id: aui.i,v 1.22.2.5 2007/05/08 17:49:25 RD Exp $
+// RCS-ID:      $Id: aui.i 53576 2008-05-12 20:28:52Z RD $
 // Copyright:   (c) 2006 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
 
 %define DOCSTRING
-"The wx.aui moduleis an Advanced User Interface library that aims to
+"The wx.aui module is an Advanced User Interface library that aims to
 implement \"cutting-edge\" interface usability and design features so
 developers can quickly and easily create beautiful and usable
 application interfaces.
@@ -66,7 +66,8 @@ The following example shows a simple implementation that utilizes
     class MyFrame(wx.Frame):
 
         def __init__(self, parent, id=-1, title='wx.aui Test',
-                     size=(800, 600), style=wx.DEFAULT_FRAME_STYLE):
+                     pos=wx.DefaultPosition, size=(800, 600),
+                     style=wx.DEFAULT_FRAME_STYLE):
             wx.Frame.__init__(self, parent, id, title, pos, size, style)
 
             self._mgr = wx.aui.AuiManager(self)
@@ -142,6 +143,7 @@ The following example shows a simple implementation that utilizes
 #define wxABI_VERSION 99999
 
 #define WXDLLIMPEXP_AUI
+#define WXDLLIMPEXP_FWD_AUI
 #define unsigned
 #define wxDEPRECATED(decl)
 #define DECLARE_EVENT_TABLE()
@@ -189,6 +191,12 @@ The following example shows a simple implementation that utilizes
 %pythonAppend wxAuiNotebook::wxAuiNotebook()  "val._setOORInfo(val)";
 %ignore wxAuiiNotebook::~wxAuiNotebook;
 %rename(PreAuiNotebook) wxAuiNotebook::wxAuiNotebook();
+
+// NB: Since we can't target the use of a typemap to specific methods make
+// sure to check that the disown is only applied where it is expected...
+%disownarg( wxAuiDockArt* art_provider );
+%disownarg( wxAuiTabArt* art );
+
 
 // Link error...
 %ignore wxAuiDefaultTabArt::SetWindow;        

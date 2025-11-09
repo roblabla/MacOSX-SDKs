@@ -19,7 +19,7 @@
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * RCS: @(#) $Id: tclUnixPort.h,v 1.27.2.4 2004/05/17 14:26:50 kennykb Exp $
+ * RCS: @(#) $Id: tclUnixPort.h,v 1.27.2.19 2007/08/07 05:04:48 das Exp $
  */
 
 #ifndef _TCLUNIXPORT
@@ -60,11 +60,9 @@
 #ifdef HAVE_STRUCT_DIRENT64
 typedef struct dirent64	Tcl_DirEntry;
 #   define TclOSreaddir		readdir64
-#   define TclOSreaddir_r	readdir64_r
 #else
 typedef struct dirent	Tcl_DirEntry;
 #   define TclOSreaddir		readdir
-#   define TclOSreaddir_r	readdir_r
 #endif
 
 #ifdef HAVE_TYPE_OFF64_T
@@ -97,6 +95,14 @@ EXTERN Tcl_WideUInt	strtoull _ANSI_ARGS_((CONST char *string,
 #   include <sys/select.h>
 #endif
 #include <sys/stat.h>
+
+#ifdef __CYGWIN__
+#   define timezone _timezone
+    typedef long TIMEZONE_t;
+#else	/* !__CYGWIN__ */
+    typedef int TIMEZONE_t;
+#endif	/* !__CYGWIN__ */
+
 #if TIME_WITH_SYS_TIME
 #   include <sys/time.h>
 #   include <time.h>
@@ -491,7 +497,7 @@ extern int errno;
 #   define USE_PUTENV 1
 #else
 #   if defined(_sgi) || defined(__sgi)
-#	define environ _environ
+#       define environ _environ
 #   endif
 extern char **environ;
 #endif
@@ -511,6 +517,114 @@ extern double strtod();
  */
 
 #define TclpPanic ((Tcl_PanicProc *) NULL)
+
+/*
+ * Darwin specifc configure overrides.
+ */
+
+#ifdef __APPLE__
+/*
+ * Support for fat compiles: configure runs only once for multiple architectures
+ */
+#   if defined(__LP64__) && defined (NO_COREFOUNDATION_64)
+#       undef HAVE_COREFOUNDATION
+#    endif /* __LP64__ && NO_COREFOUNDATION_64 */
+#   include <sys/cdefs.h>
+#   ifdef __DARWIN_UNIX03
+#       if __DARWIN_UNIX03
+#           undef HAVE_PUTENV_THAT_COPIES
+#       else
+#           define HAVE_PUTENV_THAT_COPIES 1
+#       endif
+#   endif /* __DARWIN_UNIX03 */
+/*
+ * The termios configure test program relies on the configure script being run
+ * from a terminal, which is not the case e.g. when configuring from Xcode.
+ * Since termios is known to be present on all Mac OS X releases since 10.0,
+ * override the configure defines for serial API here. [Bug 497147]
+ */
+#   define USE_TERMIOS 1
+#   undef  USE_TERMIO
+#   undef  USE_SGTTY
+/*
+ * Include AvailabilityMacros.h here (when available) to ensure any symbolic
+ * MAC_OS_X_VERSION_* constants passed on the command line are translated.
+ */
+#   ifdef HAVE_AVAILABILITYMACROS_H
+#       include <AvailabilityMacros.h>
+#   endif
+/*
+ * Support for weak import.
+ */
+#   ifdef HAVE_WEAK_IMPORT
+#       if !defined(HAVE_AVAILABILITYMACROS_H) || !defined(MAC_OS_X_VERSION_MIN_REQUIRED)
+#           undef HAVE_WEAK_IMPORT
+#       else
+#           ifndef WEAK_IMPORT_ATTRIBUTE
+#               define WEAK_IMPORT_ATTRIBUTE __attribute__((weak_import))
+#           endif
+#       endif
+#   endif /* HAVE_WEAK_IMPORT */
+/*
+ * Support for MAC_OS_X_VERSION_MAX_ALLOWED define from AvailabilityMacros.h:
+ * only use API available in the indicated OS version or earlier.
+ */
+#   ifdef MAC_OS_X_VERSION_MAX_ALLOWED
+#       if MAC_OS_X_VERSION_MAX_ALLOWED < 1050 && defined(__LP64__)
+#           undef HAVE_COREFOUNDATION
+#       endif
+#       if MAC_OS_X_VERSION_MAX_ALLOWED < 1040
+#           undef HAVE_OSSPINLOCKLOCK
+#           undef HAVE_PTHREAD_ATFORK
+#           undef HAVE_COPYFILE
+#       endif
+#       if MAC_OS_X_VERSION_MAX_ALLOWED < 1030
+#           ifdef TCL_THREADS
+		/* prior to 10.3, realpath is not threadsafe, c.f. bug 711232 */
+#               define NO_REALPATH 1
+#           endif
+#           undef HAVE_LANGINFO
+#       endif
+#   endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
+#   if defined(HAVE_COREFOUNDATION) && defined(__LP64__) && \
+	    defined(HAVE_WEAK_IMPORT) && MAC_OS_X_VERSION_MIN_REQUIRED < 1050
+#       warning "Weak import of 64-bit CoreFoundation is not supported, will not run on Mac OS X < 10.5."
+#   endif
+/*
+ * At present, using vfork() instead of fork() causes execve() to fail
+ * intermittently on Darwin x86_64. rdar://4685553
+ */
+#   if defined(__x86_64__) && !defined(FIXED_RDAR_4685553)
+#       undef USE_VFORK
+#   endif /* __x86_64__ */
+#endif /* __APPLE__ */
+
+/*
+ * Darwin 8 copyfile API.
+ */
+
+#ifdef HAVE_COPYFILE
+#ifdef HAVE_COPYFILE_H
+#include <copyfile.h>
+#if defined(HAVE_WEAK_IMPORT) && MAC_OS_X_VERSION_MIN_REQUIRED < 1040
+/* Support for weakly importing copyfile. */
+#define WEAK_IMPORT_COPYFILE
+extern int copyfile(const char *from, const char *to, copyfile_state_t state,
+		    copyfile_flags_t flags) WEAK_IMPORT_ATTRIBUTE;
+#endif /* HAVE_WEAK_IMPORT */
+#else /* HAVE_COPYFILE_H */
+int copyfile(const char *from, const char *to, void *state, uint32_t flags);
+#define COPYFILE_ACL            (1<<0)
+#define COPYFILE_XATTR          (1<<2)
+#define COPYFILE_NOFOLLOW_SRC   (1<<18)
+#if defined(HAVE_WEAK_IMPORT) && MAC_OS_X_VERSION_MIN_REQUIRED < 1040
+/* Support for weakly importing copyfile. */
+#define WEAK_IMPORT_COPYFILE
+extern int copyfile(const char *from, const char *to, void *state,
+                    uint32_t flags) WEAK_IMPORT_ATTRIBUTE;
+#endif /* HAVE_WEAK_IMPORT */
+#endif /* HAVE_COPYFILE_H */
+#endif /* HAVE_COPYFILE */
 
 /*
  *---------------------------------------------------------------------------
@@ -571,29 +685,38 @@ EXTERN void	TclpMutexLock _ANSI_ARGS_((TclpMutex *mPtr));
 EXTERN void	TclpMutexUnlock _ANSI_ARGS_((TclpMutex *mPtr));
 EXTERN Tcl_DirEntry * 	TclpReaddir(DIR *);
 #ifndef TclpLocaltime
-EXTERN struct tm *     	TclpLocaltime(CONST TclpTime_t);
+EXTERN struct tm *     	TclpLocaltime(TclpTime_t_CONST);
 #endif
 #ifndef TclpGmtime
-EXTERN struct tm *     	TclpGmtime(CONST TclpTime_t);
+EXTERN struct tm *     	TclpGmtime(TclpTime_t_CONST);
 #endif
 EXTERN char *          	TclpInetNtoa(struct in_addr);
-#define readdir(x)	TclpReaddir(x)
 #define inet_ntoa(x)	TclpInetNtoa(x)
-#undef TclOSreaddir
-#define TclOSreaddir(x) TclpReaddir(x)
-#ifdef MAC_OSX_TCL
-/* 
- * On Mac OS X, realpath is currently not
- * thread safe, c.f. SF bug # 711232.
- */
-#define NO_REALPATH
-#endif
 #else
 typedef int TclpMutex;
 #define	TclpMutexInit(a)
 #define	TclpMutexLock(a)
 #define	TclpMutexUnlock(a)
 #endif /* TCL_THREADS */
+
+
+/*
+ * Set of MT-safe implementations of some
+ * known-to-be-MT-unsafe library calls.
+ * Instead of returning pointers to the
+ * static storage, those return pointers
+ * to the TSD data. 
+ */
+
+#include <pwd.h>
+#include <grp.h>
+
+EXTERN struct passwd*  TclpGetPwNam(const char *name);
+EXTERN struct group*   TclpGetGrNam(const char *name);
+EXTERN struct passwd*  TclpGetPwUid(uid_t uid);
+EXTERN struct group*   TclpGetGrGid(gid_t gid);
+EXTERN struct hostent* TclpGetHostByName(const char *name);
+EXTERN struct hostent* TclpGetHostByAddr(const char *addr, int length, int type);
 
 #include "tclPlatDecls.h"
 #include "tclIntPlatDecls.h"

@@ -1,9 +1,11 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
+
+#import <Foundation/NSObject.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
@@ -24,13 +26,16 @@
     NSStringAttributeType = 700,
     NSBooleanAttributeType = 800,
     NSDateAttributeType = 900,
-    NSBinaryDataAttributeType = 1000,
+    NSBinaryDataAttributeType = 1000
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-    // If your attribute is of NSTransformableAttributeType, the attributeValueClassName must be set
-    // The attribute value class must implement NSCopying.
-    NSTransformableAttributeType = 1800    
+    // If your attribute is of NSTransformableAttributeType, the attributeValueClassName 
+    // must be set or attribute value class must implement NSCopying.
+    , NSTransformableAttributeType = 1800    
 #endif
-};
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+	 , NSObjectIDAttributeType = 2000    
+#endif
+ };
 
 typedef NSUInteger NSAttributeType;
 

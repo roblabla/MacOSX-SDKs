@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000, 2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000, 2007, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -64,7 +64,7 @@
 #include <stdio.h>
 #include <pwd.h>
 #include <termios.h>
-#include <available.h>
+#include <Availability.h>
 
 #define	PIDLOCK_NONBLOCK	1
 #define PIDLOCK_USEHOSTNAME	2
@@ -86,10 +86,10 @@
 
 __BEGIN_DECLS
 struct utmp; /* forward reference to /usr/include/utmp.h */
-void	login(struct utmp *)		__DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+void	login(struct utmp *)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 int	login_tty(int);
-int	logout(const char *)		__DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-void	logwtmp(const char *, const char *, const char *) __DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+int	logout(const char *)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
+void	logwtmp(const char *, const char *, const char *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
 int	opendev(char *, int, int, char **);
 int	openpty(int *, int *, char *, struct termios *,
 		     struct winsize *);

@@ -3,10 +3,7 @@
  
     Contains:   Routines for creating MIDI play-through connections.
  
-    Version:    Technology: Mac OS X
-                Release:    Mac OS X
- 
-    Copyright:  (c) 2002-2005 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
@@ -19,7 +16,6 @@
 #define __MIDIThruConnection_h__
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>  // for basic types
 #include <CoreMIDI/MIDIServices.h>
 
 //  -----------------------------------------------------------------------------
@@ -282,7 +278,7 @@ unmodified thru connection.
 extern void
 MIDIThruConnectionParamsInitialize(
                             MIDIThruConnectionParams *      inConnectionParams )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
     @function   MIDIThruConnectionCreate
@@ -294,7 +290,7 @@ MIDIThruConnectionParamsInitialize(
     @param      inConnectionParams
                     A MIDIThruConnectionParams contained in a CFDataRef.
     @param      outConnection
-                    On successful return, a reference to the newly-create connection.
+                    On successful return, a reference to the newly-created connection.
     @result     An OSStatus result code.
     @discussion
 */
@@ -302,7 +298,7 @@ extern OSStatus
 MIDIThruConnectionCreate(   CFStringRef                     inPersistentOwnerID,
                             CFDataRef                       inConnectionParams,
                             MIDIThruConnectionRef *         outConnection )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
     @function   MIDIThruConnectionDispose
@@ -314,7 +310,7 @@ MIDIThruConnectionCreate(   CFStringRef                     inPersistentOwnerID,
 */
 extern OSStatus
 MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
     @function   MIDIThruConnectionGetParams
@@ -331,7 +327,7 @@ MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
 extern OSStatus
 MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
                             CFDataRef *                     outConnectionParams )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
     @function   MIDIThruConnectionSetParams
@@ -346,7 +342,7 @@ MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
 extern OSStatus
 MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
                             CFDataRef                       inConnectionParams )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
     @function   MIDIThruConnectionFind
@@ -361,7 +357,7 @@ MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
 extern OSStatus
 MIDIThruConnectionFind(     CFStringRef                     inPersistentOwnerID,
                             CFDataRef *                     outConnectionList )
-                                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 #ifdef __cplusplus
 }

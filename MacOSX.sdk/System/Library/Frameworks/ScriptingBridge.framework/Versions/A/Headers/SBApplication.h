@@ -7,6 +7,8 @@
 #import <ScriptingBridge/SBObject.h>
 
 
+@protocol SBApplicationDelegate;
+
 @interface SBApplication : SBObject <NSCoding>
 
 - (id) initWithBundleIdentifier:(NSString *)ident;
@@ -36,47 +38,29 @@
 - (void) activate;
 	// Bring the application to the foreground.
 
-- (id) delegate;
-- (void) setDelegate:(id)delegate;
+- (id <SBApplicationDelegate>) delegate;
+- (void) setDelegate:(id <SBApplicationDelegate>) delegate;
 	// Delegate for event handling; see the SBApplicationDelegate protocol.
 
 - (LSLaunchFlags) launchFlags;
-- (void) setLaunchFlags:(LSLaunchFlags)flags;
+- (void) setLaunchFlags:(LSLaunchFlags) flags;
 	// Mode flags for launching applications; see LSOpenApplication for parameter details.
 
 - (AESendMode) sendMode;
-- (void) setSendMode:(AESendMode)sendMode;
+- (void) setSendMode:(AESendMode) sendMode;
 	// Mode flags for sending events; see AESendMessage for parameter details.
 
 - (long) timeout;
-- (void) setTimeout:(long)timeout;
+- (void) setTimeout:(long) timeout;
 	// How long to wait for an event reply, in ticks; see AESendMessage.
 
 @end
 
 
-@interface NSObject (SBApplicationDelegate)
+@protocol SBApplicationDelegate
 
 - (id) eventDidFail:(const AppleEvent *)event withError:(NSError *)error;
 	// The target application failed to handle the event.  If you return a result,
 	// it will become the result of the -sendEvent that failed.
-
-@end
-
-
-@interface SBApplication (SBGlueInterface)
-// These methods, while public, are primarily intended for use by sdp-generated glue
-// code.  You are not expected to use them directly, but you may, for example, to control
-// a generic application without glue.
-
-- (NSDictionary *) classNamesForCodes;
-	// Returns a dictionary mapping from 4-byte codes (as NSNumbers) to class names (as
-	// NSStrings).  This allows other methods that return SBObjects to return a particular
-	// subclass of SBObject.
-
-- (NSDictionary *) codesForPropertyNames;
-	// Returns a dictionary mapping from property names to 4-byte codes (as NSNumbers).
-	// This allows -[SBElementArray filteredArrayUsingPredicate:] to construct an object
-	// specifier from the predicate.
 
 @end

@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -435,6 +435,10 @@ enum {
 
 enum {
   kClassicPreferencesFolderType = 'cprf' /* "Classic" folder in ~/Library/ for redirected preference files. */
+};
+
+enum {
+  kQuickLookFolderType          = 'qlck' /* The QuickLook folder, supported in Mac OS X SnowLeopard and later. */
 };
 
 enum {

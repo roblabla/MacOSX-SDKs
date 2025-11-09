@@ -92,19 +92,23 @@
 
 #define BYTE_SIZE		8		/* byte size in bits */
 
-#define I386_PGBYTES	4096	/* bytes per 80386 page */
-#define I386_PGSHIFT	12		/* number of bits to shift for pages */
+#define I386_PGBYTES		4096		/* bytes per 80386 page */
+#define I386_PGSHIFT		12		/* bitshift for pages */
 
 #define	PAGE_SIZE		I386_PGBYTES
 #define	PAGE_SHIFT		I386_PGSHIFT
 #define	PAGE_MASK		(PAGE_SIZE - 1)
+
+#define I386_LPGBYTES		2*1024*1024	/* bytes per large page */
+#define I386_LPGSHIFT		21		/* bitshift for large pages */
+#define I386_LPGMASK		(I386_LPGBYTES-1)
 
 /*
  *	Convert bytes to pages and convert pages to bytes.
  *	No rounding is used.
  */
 
-#define i386_btop(x)		(((pmap_paddr_t)(x)) >> I386_PGSHIFT)
+#define i386_btop(x)		((ppnum_t)((x) >> I386_PGSHIFT))
 #define machine_btop(x)		i386_btop(x)
 #define i386_ptob(x)		(((pmap_paddr_t)(x)) << I386_PGSHIFT)
 

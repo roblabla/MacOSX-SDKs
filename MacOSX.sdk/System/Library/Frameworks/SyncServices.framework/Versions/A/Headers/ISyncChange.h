@@ -11,6 +11,7 @@
 
 typedef int ISyncChangeType;
 enum __ISyncChangeType {
+    ISyncChangeTypeNone = 0,    
     ISyncChangeTypeAdd = 1,
     ISyncChangeTypeModify,
     ISyncChangeTypeDelete
@@ -44,7 +45,8 @@ enum __ISyncChangeType {
 
 
 SYNCSERVICES_EXPORT NSString * const ISyncChangePropertyActionKey;
-SYNCSERVICES_EXPORT NSString * const     ISyncChangePropertySet;
-SYNCSERVICES_EXPORT NSString * const     ISyncChangePropertyClear;
+SYNCSERVICES_EXPORT NSString * const ISyncChangePropertySet;
+SYNCSERVICES_EXPORT NSString * const ISyncChangePropertyClear;
 SYNCSERVICES_EXPORT NSString * const ISyncChangePropertyNameKey;
 SYNCSERVICES_EXPORT NSString * const ISyncChangePropertyValueKey;
+SYNCSERVICES_EXPORT NSString * const ISyncChangePropertyValueIsDefaultKey;

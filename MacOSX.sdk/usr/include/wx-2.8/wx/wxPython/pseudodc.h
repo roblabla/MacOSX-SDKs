@@ -4,7 +4,7 @@
 // Author:      Paul Lanier
 // Modified by:
 // Created:     05/25/06
-// RCS-ID:      $Id: pseudodc.h,v 1.5 2006/10/11 04:01:29 RD Exp $
+// RCS-ID:      $Id: pseudodc.h 49047 2007-10-05 18:08:39Z RD $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -552,6 +552,15 @@ class pdcObject
 class pdcObjectList;
 WX_DECLARE_LIST(pdcObject, pdcObjectList);
 
+//Declare a hashmap that maps from ids to nodes in the object list.
+WX_DECLARE_HASH_MAP(
+    int,
+    pdcObject *,
+    wxIntegerHash,
+    wxIntegerEqual,
+    pdcObjectHash
+);
+
 
 // ----------------------------------------------------------------------------
 // wxPseudoDC class
@@ -566,7 +575,7 @@ class wxPseudoDC : public wxObject
 {
 public:
     wxPseudoDC() 
-        {m_currId=-1; m_lastObjNode=NULL; m_objectlist.DeleteContents(true);}
+        {m_currId=-1; m_lastObject=NULL; m_objectlist.DeleteContents(true);m_objectIndex.clear();}
     ~wxPseudoDC();
     // ------------------------------------------------------------------------
     // List managment methods
@@ -800,14 +809,16 @@ protected:
     // ------------------------------------------------------------------------
     // protected helper methods
     void AddToList(pdcOp *newOp);
-    pdcObjectList::Node *FindObjNode(int id, bool create=false);
+    pdcObject *FindObject(int id, bool create=false);
     
     // ------------------------------------------------------------------------
     // Data members
     // 
     int m_currId; // id to use for operations done on the PseudoDC
-    pdcObjectList::Node *m_lastObjNode; // used to find last used object quickly
+    pdcObject *m_lastObject; // used to find last used object quickly
     pdcObjectList m_objectlist; // list of objects
+    pdcObjectHash m_objectIndex; //id->object lookup index
+    
 };
 
 #endif

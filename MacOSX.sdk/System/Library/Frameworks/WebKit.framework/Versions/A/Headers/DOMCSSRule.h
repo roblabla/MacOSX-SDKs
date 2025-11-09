@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,8 @@
 
 #import <WebKit/DOMObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMCSSRule;
 @class DOMCSSStyleSheet;
 @class NSString;
@@ -37,7 +39,10 @@ enum {
     DOM_IMPORT_RULE = 3,
     DOM_MEDIA_RULE = 4,
     DOM_FONT_FACE_RULE = 5,
-    DOM_PAGE_RULE = 6
+    DOM_PAGE_RULE = 6,
+    DOM_VARIABLES_RULE = 7,
+    DOM_WEBKIT_KEYFRAMES_RULE = 8,
+    DOM_WEBKIT_KEYFRAME_RULE = 9
 };
 
 @interface DOMCSSRule : DOMObject
@@ -46,3 +51,5 @@ enum {
 @property(readonly, retain) DOMCSSStyleSheet *parentStyleSheet;
 @property(readonly, retain) DOMCSSRule *parentRule;
 @end
+
+#endif

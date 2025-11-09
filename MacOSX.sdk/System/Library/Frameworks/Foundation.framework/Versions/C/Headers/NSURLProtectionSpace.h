@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,61 +8,104 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
+#import <Security/Security.h>
 
 @class NSString;
+@class NSArray;
+
+/*!
+   @const NSURLProtectionSpaceHTTP
+   @abstract The protocol for HTTP
+*/
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTP AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+   @const NSURLProtectionSpaceHTTPS
+   @abstract The protocol for HTTPS
+*/
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+   @const NSURLProtectionSpaceFTP
+   @abstract The protocol for FTP
+*/
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
     @const NSURLProtectionSpaceHTTPProxy
     @abstract The proxy type for http proxies
 */
-extern NSString * const NSURLProtectionSpaceHTTPProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPProxy;
 
 /*!
     @const NSURLProtectionSpaceHTTPSProxy
     @abstract The proxy type for https proxies
 */
-extern NSString * const NSURLProtectionSpaceHTTPSProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPSProxy;
 
 /*!
     @const NSURLProtectionSpaceFTPProxy
     @abstract The proxy type for ftp proxies
 */
-extern NSString * const NSURLProtectionSpaceFTPProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTPProxy;
 
 /*!
     @const NSURLProtectionSpaceSOCKSProxy
     @abstract The proxy type for SOCKS proxies
 */
-extern NSString * const NSURLProtectionSpaceSOCKSProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceSOCKSProxy;
 
 /*!
     @const NSURLAuthenticationMethodDefault
     @abstract The default authentication method for a protocol
 */
-extern NSString * const NSURLAuthenticationMethodDefault;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodDefault;
 
 /*!
     @const NSURLAuthenticationMethodHTTPBasic
     @abstract HTTP basic authentication. Equivalent to
     NSURLAuthenticationMethodDefault for http.
 */
-extern NSString * const NSURLAuthenticationMethodHTTPBasic;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPBasic;
 
 /*!
     @const NSURLAuthenticationMethodHTTPDigest
     @abstract HTTP digest authentication.
 */
-extern NSString * const NSURLAuthenticationMethodHTTPDigest;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPDigest;
 
 /*!
     @const NSURLAuthenticationMethodHTMLForm
     @abstract HTML form authentication. Applies to any protocol.
 */
-extern NSString * const NSURLAuthenticationMethodHTMLForm;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTMLForm;
 
+/*!
+   @const NSURLAuthenticationMethodNTLM
+   @abstract NTLM authentication.
+*/
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNTLM AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+   @const NSURLAuthenticationMethodNegotiate
+   @abstract Negotiate authentication.
+*/
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNegotiate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+    @const NSURLAuthenticationMethodClientCertificate
+    @abstract SSL Client certificate.  Applies to any protocol.
+ */
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodClientCertificate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+    @const NSURLAuthenticationMethodServerTrust
+    @abstract SecTrustRef validation required.  Applies to any protocol.
+ */
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @class NSURLProtectionSpaceInternal;
 
@@ -167,6 +210,36 @@ extern NSString * const NSURLAuthenticationMethodHTMLForm;
     @result The authentication method
 */
 - (NSString *)authenticationMethod;
+
+@end
+
+/*!
+    @class NSURLProtectionSpace(NSClientCertificateSpace)
+    @discussion This category supplies additional information for use when a client certificate is required by the server in order to complete authentication.
+ */
+@interface NSURLProtectionSpace(NSClientCertificateSpace)
+
+/*!
+    @method distinguishedNames
+    @abstract Returns an array of acceptable certificate issuing authorities for client certification authentication. Issuers are identified by their distinguished name and returned as a DER encoded data.
+    @result An array of NSData objects.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodClientCertificate)
+ */
+- (NSArray *)distinguishedNames;
+
+@end
+
+/*!
+    @class NSURLProtectionSpace(NSServerTrustValidationSpace)
+    @discussion This category supplies additional information for use by the client to evaluate whether to trust a given server during a security handshake.
+ */
+@interface NSURLProtectionSpace(NSServerTrustValidationSpace)
+
+/*!
+    @method serverTrust
+    @abstract Returns a SecTrustRef which represents the state of the servers SSL transaction state
+    @result A SecTrustRef from Security.framework.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodServerTrust)
+ */
+- (SecTrustRef)serverTrust;
 
 @end
 

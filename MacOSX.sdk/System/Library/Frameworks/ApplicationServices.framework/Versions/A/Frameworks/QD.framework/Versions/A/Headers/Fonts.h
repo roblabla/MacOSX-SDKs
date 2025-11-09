@@ -3,9 +3,9 @@
  
      Contains:   Public interface to the Font Manager.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 1985-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 1985-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -191,15 +191,15 @@ enum {
 };
 
 enum {
-  propFont                      = 36864L,
-  prpFntH                       = 36865L,
-  prpFntW                       = 36866L,
-  prpFntHW                      = 36867L,
-  fixedFont                     = 45056L,
-  fxdFntH                       = 45057L,
-  fxdFntW                       = 45058L,
-  fxdFntHW                      = 45059L,
-  fontWid                       = 44208L
+  propFont                      = 36864,
+  prpFntH                       = 36865,
+  prpFntW                       = 36866,
+  prpFntHW                      = 36867,
+  fixedFont                     = 45056,
+  fxdFntH                       = 45057,
+  fxdFntW                       = 45058,
+  fxdFntHW                      = 45059,
+  fontWid                       = 44208
 };
 
 struct FMInput {

@@ -3,9 +3,9 @@
  
      Contains:   Processor Exception Handling Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -249,17 +249,26 @@ struct RegisterInformationIntel {
 typedef struct RegisterInformationIntel RegisterInformationIntel;
 
 typedef unsigned char                   FPRegIntel[10];
+
+   /* Because Xlib.h does a #define Status int, this struct fails to compile if Xlib.h is #include before CarbonCore.h
+    So, hack around it for them. */
+
 struct FPUInformationIntel {
-  FPRegIntel          Registers[8];
-  unsigned short      Control;
-  unsigned short      Status;
-  unsigned short      Tag;
-  unsigned short      Opcode;
-  unsigned int        EIP;
-  unsigned int        DP;
-  unsigned int        DS;
+FPRegIntel          Registers[8];
+unsigned short      Control;
+#ifdef Status
+unsigned short      StatusReg;
+#else
+unsigned short      Status;
+#endif
+unsigned short      Tag;
+unsigned short      Opcode;
+unsigned int        EIP;
+unsigned int        DP;
+unsigned int        DS;
 };
 typedef struct FPUInformationIntel      FPUInformationIntel;
+
 struct VectorInformationIntel {
   Vector128Intel      Registers[8];
 };

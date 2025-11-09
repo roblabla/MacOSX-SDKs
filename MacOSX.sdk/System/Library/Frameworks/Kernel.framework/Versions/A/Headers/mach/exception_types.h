@@ -141,7 +141,6 @@
 			 EXC_MASK_SYSCALL |			\
 			 EXC_MASK_MACH_SYSCALL |		\
 			 EXC_MASK_RPC_ALERT |			\
-			 EXC_MASK_CRASH |			\
 			 EXC_MASK_MACHINE)
 
 

@@ -2,8 +2,8 @@
 #ifdef _MULTIARRAYMODULE
 
 typedef struct {
-	PyObject_HEAD
-	npy_bool obval;
+        PyObject_HEAD
+        npy_bool obval;
 } PyBoolScalarObject;
 
 
@@ -381,6 +381,12 @@ static int PyArray_DescrAlignConverter2 \
        (PyObject *, PyArray_Descr **);
 static int PyArray_SearchsideConverter \
        (PyObject *, void *);
+static PyObject * PyArray_CheckAxis \
+       (PyArrayObject *, int *, int);
+static npy_intp PyArray_OverflowMultiplyList \
+       (register npy_intp *, register int);
+static int PyArray_CompareString \
+       (char *, char *, size_t);
 
 #else
 
@@ -937,6 +943,15 @@ static void **PyArray_API=NULL;
 #define PyArray_SearchsideConverter \
         (*(int (*)(PyObject *, void *)) \
          PyArray_API[205])
+#define PyArray_CheckAxis \
+        (*(PyObject * (*)(PyArrayObject *, int *, int)) \
+         PyArray_API[206])
+#define PyArray_OverflowMultiplyList \
+        (*(npy_intp (*)(register npy_intp *, register int)) \
+         PyArray_API[207])
+#define PyArray_CompareString \
+        (*(int (*)(char *, char *, size_t)) \
+         PyArray_API[208])
 
 #if !defined(NO_IMPORT_ARRAY) && !defined(NO_IMPORT)
 static int

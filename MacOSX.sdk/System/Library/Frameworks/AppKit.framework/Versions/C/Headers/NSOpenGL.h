@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2007, Apple Inc.
+        Copyright (c) 2000-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -82,9 +82,11 @@ enum {
 	NSOpenGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	NSOpenGLPFAScreenMask         =  84,	/* bit mask of supported physical screens       */
 	NSOpenGLPFAPixelBuffer        =  90,	/* can be used to render to a pbuffer           */
+	NSOpenGLPFARemotePixelBuffer  =  91,	/* can be used to render offline to a pbuffer   */
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 	NSOpenGLPFAAllowOfflineRenderers = 96,  /* allow use of offline renderers               */
 #endif
+	NSOpenGLPFAAcceleratedCompute =  97,	/* choose a hardware accelerated compute device */
 	NSOpenGLPFAVirtualScreenCount = 128	/* number of virtual screens in this format     */
 };
 typedef  uint32_t NSOpenGLPixelFormatAttribute;
@@ -107,6 +109,7 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 
 - (id)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
 - (id)initWithData:(NSData*)attribs;
+- (id)initWithCGLPixelFormatObj:(void *)format AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (NSData*)attributes;
 - (void)setAttributes:(NSData*)attribs;
@@ -142,6 +145,8 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 ** TEXTURE_RECTANGLE targets.
 */
 - (id)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh;
+- (id)initWithCGLPBufferObj:(void *)pbuffer AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void *)CGLPBufferObj AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (GLsizei)pixelsWide;
 - (GLsizei)pixelsHigh;
 - (GLenum)textureTarget;
@@ -162,7 +167,7 @@ typedef enum {
 	NSOpenGLCPSwapRectangle       = 200,	/* Set or get the swap rectangle {x, y, w, h}       */
 	NSOpenGLCPSwapRectangleEnable = 201,	/* Enable or disable the swap rectangle             */
 	NSOpenGLCPRasterizationEnable = 221,	/* Enable or disable all rasterization              */
-	NSOpenGLCPSwapInterval        = 222,	/* 0 -> Don't sync, n -> Sync every n retrace       */
+	NSOpenGLCPSwapInterval        = 222,	/* 0 -> Don't sync, 1 -> Sync to vertical retrace   */
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 	NSOpenGLCPSurfaceOrder        = 235,	/* 1 -> Above Window (default), -1 -> Below Window  */
 	NSOpenGLCPSurfaceOpacity      = 236,	/* 1-> Surface is opaque (default), 0 -> non-opaque */
@@ -185,6 +190,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 
 /* Context creation */
 - (id)initWithFormat:(NSOpenGLPixelFormat *)format shareContext:(NSOpenGLContext *)share;
+- (id)initWithCGLContextObj:(void *)context AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Drawable management */
 - (void)setView:(NSView *)view;

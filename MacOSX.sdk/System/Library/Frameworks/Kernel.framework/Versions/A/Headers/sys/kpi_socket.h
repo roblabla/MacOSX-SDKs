@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -62,7 +62,7 @@ struct timeval;
 	@param cookie The cookie passed in when the socket was created.
 	@param waitf Indicates whether or not it's safe to block.
 */
-typedef void (*sock_upcall)(socket_t so, void* cookie, int waitf);
+typedef void (*sock_upcall)(socket_t so, void *cookie, int waitf);
 
 /*!
 	@function sock_accept
@@ -85,8 +85,8 @@ typedef void (*sock_upcall)(socket_t so, void* cookie, int waitf);
 		socket for tracking the connection.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_accept(socket_t so, struct sockaddr *from, int fromlen,
-    int flags, sock_upcall callback, void* cookie, socket_t *new_so);
+extern errno_t sock_accept(socket_t so, struct sockaddr *from, int fromlen,
+    int flags, sock_upcall callback, void *cookie, socket_t *new_so);
 
 /*!
 	@function sock_bind
@@ -96,7 +96,7 @@ errno_t sock_accept(socket_t so, struct sockaddr *from, int fromlen,
 	@param to The local address the socket should be bound to.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_bind(socket_t so, const struct sockaddr *to);
+extern errno_t sock_bind(socket_t so, const struct sockaddr *to);
 
 /*!
 	@function sock_connect
@@ -112,7 +112,7 @@ errno_t sock_bind(socket_t so, const struct sockaddr *to);
 	@result 0 on success, EINPROGRESS for a non-blocking connect that
 		has not completed, otherwise the errno error.
  */
-errno_t sock_connect(socket_t so, const struct sockaddr *to, int flags);
+extern errno_t sock_connect(socket_t so, const struct sockaddr *to, int flags);
 
 
 /*!
@@ -124,7 +124,7 @@ errno_t sock_connect(socket_t so, const struct sockaddr *to, int flags);
 	@param peernamelen Length of storage for the peer name.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getpeername(socket_t so, struct sockaddr *peername,
+extern errno_t sock_getpeername(socket_t so, struct sockaddr *peername,
     int peernamelen);
 
 /*!
@@ -136,7 +136,7 @@ errno_t sock_getpeername(socket_t so, struct sockaddr *peername,
 	@param socknamelen Length of storage for the socket name.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getsockname(socket_t so, struct sockaddr *sockname,
+extern errno_t sock_getsockname(socket_t so, struct sockaddr *sockname,
     int socknamelen);
 
 /*!
@@ -149,8 +149,8 @@ errno_t sock_getsockname(socket_t so, struct sockaddr *sockname,
 	@param optlen The length of optval, returns the actual length.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getsockopt(socket_t so, int level, int optname, void *optval,
-    int *optlen);
+extern errno_t sock_getsockopt(socket_t so, int level, int optname,
+    void *optval, int *optlen);
 
 /*!
 	@function sock_ioctl
@@ -160,7 +160,7 @@ errno_t sock_getsockopt(socket_t so, int level, int optname, void *optval,
 	@param argp The argument.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_ioctl(socket_t so, unsigned long request, void *argp);
+extern errno_t sock_ioctl(socket_t so, unsigned long request, void *argp);
 
 /*!
 	@function sock_setsockopt
@@ -172,8 +172,9 @@ errno_t sock_ioctl(socket_t so, unsigned long request, void *argp);
 	@param optlen The length of optval.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_setsockopt(socket_t so, int level, int optname, const void *optval,
-    int optlen);
+extern errno_t sock_setsockopt(socket_t so, int level, int optname,
+    const void *optval, int optlen);
+
 
 /*!
 	@function sock_listen
@@ -183,7 +184,7 @@ errno_t sock_setsockopt(socket_t so, int level, int optname, const void *optval,
 	@param backlog The maximum length of the queue of pending connections.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_listen(socket_t so, int backlog);
+extern errno_t sock_listen(socket_t so, int backlog);
 
 /*!
 	@function sock_receive
@@ -197,7 +198,7 @@ errno_t sock_listen(socket_t so, int backlog);
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_receive(socket_t so, struct msghdr *msg, int flags,
+extern errno_t sock_receive(socket_t so, struct msghdr *msg, int flags,
     size_t *recvdlen);
 
 /*!
@@ -218,7 +219,7 @@ errno_t sock_receive(socket_t so, struct msghdr *msg, int flags,
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data,
+extern errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data,
     int flags, size_t *recvlen);
 
 /*!
@@ -233,7 +234,7 @@ errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data,
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_send(socket_t so, const struct msghdr *msg, int flags,
+extern errno_t sock_send(socket_t so, const struct msghdr *msg, int flags,
     size_t *sentlen);
 
 /*!
@@ -250,7 +251,7 @@ errno_t sock_send(socket_t so, const struct msghdr *msg, int flags,
 		would cause the thread to block, otherwise the errno error.
 		Regardless of return value, the mbuf chain 'data' will be freed.
  */
-errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data,
+extern errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data,
     int flags, size_t *sentlen);
 
 /*!
@@ -258,10 +259,12 @@ errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data,
 	@discussion Shutdown one or both directions of a connection. See
 		'man 2 shutdown' for more information.
 	@param so The socket.
-	@param how SHUT_RD - shutdown receive. SHUT_WR - shutdown send. SHUT_RDWR - shutdown both.
+	@param how SHUT_RD - shutdown receive.
+		SHUT_WR - shutdown send.
+		SHUT_RDWR - shutdown both.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_shutdown(socket_t so, int how);
+extern errno_t sock_shutdown(socket_t so, int how);
 
 /*!
 	@function sock_socket
@@ -277,18 +280,18 @@ errno_t sock_shutdown(socket_t so, int how);
 	@param new_so Upon success, a reference to the new socket.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_socket(int domain, int type, int protocol, sock_upcall callback,
-    void* cookie, socket_t *new_so);
+extern errno_t sock_socket(int domain, int type, int protocol,
+    sock_upcall callback, void *cookie, socket_t *new_so);
 
 /*!
 	@function sock_close
 	@discussion Close the socket.
 	@param so The socket to close. This should only ever be a socket
 		created with sock_socket. Closing a socket created in user space
-		using sock_close may leave a file descriptor pointing to the closed
-		socket, resulting in undefined behavior.
+		using sock_close may leave a file descriptor pointing to the
+		closed socket, resulting in undefined behavior.
  */
-void	sock_close(socket_t so);
+extern void sock_close(socket_t so);
 
 
 /*!
@@ -299,7 +302,7 @@ void	sock_close(socket_t so);
 	@param on Indicate whether or not the SS_PRIV flag should be set.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_setpriv(socket_t so, int on);
+extern errno_t sock_setpriv(socket_t so, int on);
 
 /*!
 	@function sock_isconnected
@@ -307,7 +310,7 @@ errno_t sock_setpriv(socket_t so, int on);
 	@param so The socket to check.
 	@result 0 - socket is not connected. 1 - socket is connected.
  */
-int sock_isconnected(socket_t so);
+extern int sock_isconnected(socket_t so);
 
 /*!
 	@function sock_isnonblocking
@@ -320,7 +323,7 @@ int sock_isconnected(socket_t so);
 		If the parameter is non-zero, the socket will not block.
 	@result 0 - socket will block. 1 - socket will not block.
  */
-int sock_isnonblocking(socket_t so);
+extern int sock_isnonblocking(socket_t so);
 
 /*!
 	@function sock_gettype
@@ -329,12 +332,12 @@ int sock_isnonblocking(socket_t so);
 		parameters following so are NULL, that information is not
 		retrieved.
 	@param so The socket to check.
-	@param domain The domain of the socket (PF_INET, etc...). May be NULL.
-	@param type The socket type (SOCK_STREAM, SOCK_DGRAM, etc...). May be NULL.
+	@param domain The domain of the socket (PF_INET, ...). May be NULL.
+	@param type The socket type (SOCK_STREAM, SOCK_DGRAM, ...). May be NULL.
 	@param protocol The socket protocol. May be NULL.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_gettype(socket_t so, int *domain, int *type, int *protocol);
+extern errno_t sock_gettype(socket_t so, int *domain, int *type, int *protocol);
 
 
 __END_DECLS

@@ -3,9 +3,9 @@
  
      Contains:   Open Transport client interface file.
  
-     Version:    OpenTransport-107~183
+     Version:    OpenTransport-110~618
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1015,7 +1015,7 @@ enum {
 enum {
   T_YES                         = 1,
   T_NO                          = 0,
-  T_UNUSED                      = (unsigned long)(-1),
+  T_UNUSED                      = (unsigned int)(-1),
   kT_NULL                       = 0,
   T_ABSREQ                      = 0x8000
 };

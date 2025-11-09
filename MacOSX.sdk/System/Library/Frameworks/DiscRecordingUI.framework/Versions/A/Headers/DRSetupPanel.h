@@ -27,19 +27,6 @@
 
 
 
-#if !NSINTEGER_DEFINED
-	#if __LP64__ || NS_BUILD_32_LIKE_64
-		typedef long NSInteger;
-		typedef unsigned long NSUInteger;
-	#else
-		typedef int NSInteger;
-		typedef unsigned int NSUInteger;
-	#endif
-	#define NSINTEGER_DEFINED 1
-#endif
-
-
-
 /*!
 	@class		DRSetupPanel
 	@discussion	This class is the base class for setup panels in the DiscRecordingUI
@@ -212,6 +199,20 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 	@result		<i>YES</i> if the device is acceptable, <i>NO</i> if not.
 */
 - (BOOL) setupPanel:(DRSetupPanel*)aPanel deviceCouldBeTarget:(DRDevice*)device;
+
+/*!
+ @method		setupPanel:determineBestDeviceOfA:orB:
+ @abstract	Allows the delegate to specify which device is its preferred.
+ @discussion	When the setup panel is first displayed and again,
+ 				each time a new device appears, the setup panel will ask the delegate
+ 				to compare two devices to determine which is most suitable for their
+ 				content to burn. 
+ @param		aPanel		The panel.
+ @param		deviceA		A candidate device. May be nil.
+ @param		deviceA		A candidate device. May be nil.
+ @result		One of the two device objects passed in.
+ */
+- (DRDevice*) setupPanel:(DRSetupPanel*)aPanel determineBestDeviceOfA:(DRDevice*)deviceA orB:(DRDevice*)device;
 
 /*!
 	@method		setupPanelDeviceSelectionChanged:

@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2007 Apple Inc. All rights reserved.
+* Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 *
 * @APPLE_LICENSE_HEADER_START@
 * 
@@ -24,6 +24,7 @@
 #define _IOKIT_IOUSBCONTROLLERV3_H
 
 #include <IOKit/pci/IOPCIDevice.h>
+#include <IOKit/pwr_mgt/RootDomain.h>
 
 #include <IOKit/usb/IOUSBControllerV2.h>
 #include <IOKit/usb/IOUSBHubDevice.h>
@@ -57,7 +58,10 @@ typedef struct IOUSBRootHubInterruptTransaction
     IOUSBCompletion				completion;
 } IOUSBRootHubInterruptTransaction;
 
-#define kIOUSBMaxRootHubTransactions 4
+enum 
+{
+	  kIOUSBMaxRootHubTransactions  = 2
+};
 
 
 
@@ -81,7 +85,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		UInt8							_myBusState;					// kUSBBusStateReset, kUSBBusStateSuspended, kUSBBusStateRunning
 		bool							_wakingFromHibernation;			// True while the Hibernation Wake thread is active
 		bool							_needToAckPowerDown;			// True while we are changing power state due to shutdown/restart
-		bool							_onCardBus;						// true if this controller is on an ejectable bus
+		bool							_onCardBus;						// OBSOLETE
 		bool							_controllerAvailable;			// true if we can talk to the controller
 		SInt32							_powerStateChangingTo;			// a power state that we are in the process of changing to, or -1 if we are stable
 		bool							_poweringDown;					// true is the controller is powering down because of a systemWillPowerDown message
@@ -93,14 +97,19 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		IOPCIDevice						*_device;						// my PCI device
 
 		// root hub support
-	    IOTimerEventSource					*_rootHubTimer;										// timer which fires at the rate of the root hub interrupt endpoint
-		UInt8								_rootHubPollingRate;								// probably 32 ms
-		UInt8								_rootHubNumPorts;									// number of root hub ports - should be 15 or fewer!
-		UInt16								_rootHubStatusChangedBitmap;						// support up to 15 ports for status changes
-		bool								_rootHubTimerActive;								// true when we have set the timer
-		IOUSBRootHubInterruptTransaction	_outstandingRHTrans[kIOUSBMaxRootHubTransactions];	// transactions for the root hub, which will get completed in the timer thread
+	    IOTimerEventSource					*_rootHubTimer;				// timer which fires at the rate of the root hub interrupt endpoint
+		UInt8								_rootHubPollingRate;		// Obsolete -- we need to have it be a uint32_t
+		UInt8								_rootHubNumPorts;			// number of root hub ports - should be 15 or fewer!
+		UInt16								_rootHubStatusChangedBitmap;	// support up to 15 ports for status changes
+		bool								_rootHubTimerActive;		// UNUSED
+		IOUSBRootHubInterruptTransaction	_outstandingRHTrans[4];		// Transactions for the Root Hub.  We need 2, one for the current transaction and one for the next.  This is declared as 4 for binary compatibility
 
 		struct V3ExpansionData { 
+			uint32_t				_rootHubPollingRate32;
+			bool					_rootHubTransactionWasAborted;
+			IOPMDriverAssertionID	_externalUSBDeviceAssertionID;		// power manager assertion that we have an external USB device
+			SInt32					_externalDeviceCount;				// the count of external devices in this controller - changed through the WL gate
+			UInt32					_inCheckPowerModeSleeping;			// The CheckPowerModeGated
 		};
 		V3ExpansionData *_v3ExpansionData;
 
@@ -115,7 +124,9 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn				powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
 		virtual void					powerChangeDone ( unsigned long fromState);
 		virtual void					systemWillShutdown( IOOptionBits specifier );
-		virtual void					PM_idle_timer_expiration ( void );
+		virtual bool					willTerminate(IOService * provider, IOOptionBits options);
+		virtual bool					didTerminate( IOService * provider, IOOptionBits options, bool * defer );
+
 		virtual void					free(void);
 	
 		// IOUSBController methods
@@ -133,6 +144,9 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn		IsocIO(IOMemoryDescriptor *buffer, UInt64 frameStart, UInt32 numFrames, IOUSBIsocFrame *frameList, USBDeviceAddress address, Endpoint *endpoint, IOUSBIsocCompletion *completion );
 		virtual IOReturn		IsocIO(IOMemoryDescriptor *buffer, UInt64 frameStart, UInt32 numFrames, IOUSBLowLatencyIsocFrame *frameList, USBDeviceAddress address, Endpoint *endpoint, IOUSBLowLatencyIsocCompletion *completion, UInt32 updateFrequency );	
 
+		// we override this one to add some stuff which requires the _device iVar
+		virtual UInt32			GetErrataBits(UInt16 vendorID, UInt16 deviceID, UInt16 revisionID );    
+	
 		// IOUSBControllerV2 methods
 		// we override these to deal with methods attempting to go through the workloop while we are in sleep
 		virtual IOReturn 		OpenPipe(USBDeviceAddress address, UInt8 speed, Endpoint *endpoint);
@@ -147,6 +161,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		static IOReturn					DoEnableAddressEndpoints(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
 		static IOReturn					DoEnableAllEndpoints(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
 		static IOReturn					GatedPowerChange(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
+		static IOReturn					ChangeExternalDeviceCount(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
 
 		// also on the workloop
 	    static void						RootHubTimerFired(OSObject *owner, IOTimerEventSource *sender);
@@ -162,7 +177,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn				CheckForRootHubChanges(void);
 		virtual IOReturn				RootHubQueueInterruptRead(IOMemoryDescriptor *buf, UInt32 bufLen, IOUSBCompletion completion);
 		virtual IOReturn				RootHubAbortInterruptRead(void);
-		virtual IOReturn				RootHubStartTimer(UInt8 pollingRate);
+		virtual IOReturn				RootHubStartTimer(UInt8 pollingRate);			// Obsolete see RootHubStartTimer32
 		virtual IOReturn				RootHubStopTimer(void);
 	
 		// these methods have a default implementation using some of the virtual methods below
@@ -189,11 +204,15 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn				EnableAddressEndpoints(USBDeviceAddress address, bool enable);
 		virtual bool					IsControllerAvailable(void);
 		virtual IOReturn				HandlePowerChange(unsigned long powerStateOrdinal);
-		virtual	UInt32					AllocateExtraRootHubPortPower(UInt32 extraPowerRequested);
-		virtual	void					ReturnExtraRootHubPortPower(UInt32 extraPowerReturned);
+		virtual	UInt32					AllocateExtraRootHubPortPower(UInt32 extraPowerRequested);		// DEPRECATED
+		virtual	void					ReturnExtraRootHubPortPower(UInt32 extraPowerReturned);			// DEPRECATED
 	
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  0);
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  1);
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  0);
+	virtual IOReturn				RootHubStartTimer32(uint32_t pollingRate);
+	
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  1);
+	virtual IOReturn				CheckPMAssertions(IOUSBDevice *forDevice, bool deviceBeingAdded);
+	
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  2);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  3);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  4);

@@ -124,6 +124,9 @@ extern const NSString* IMKTextOrientationName;
                If the client does not support TSMDocumentAccess the returned string will be created from data obtained by sending the client application a kEventTextInputGetSelectedText Carbon event.
 
 				The returned NSAttributedString is an autoreleased object.  Do not release this object unless you retain it first.
+				
+				Note it is possible that the returned string will be longer or shorter than the specified range.  This can be caused when there surrogate unicodes in a document, and the range's location or length splits a surrogate pair.
+				You can test for this by comparing the string's length against the range you included as the range parameter.
 */
 - (NSAttributedString*)attributedSubstringFromRange:(NSRange)range;
 
@@ -218,6 +221,14 @@ extern const NSString* IMKTextOrientationName;
     However, many input method developers have built there own candidate display system, and this method is here for their use.  In order to display a candidate window at the correct level use this method to obtain the client window level, increment the returned level, and then apply that level to any candidate windows.
 */
 -(CGWindowLevel)windowLevel;
+
+/*!
+    @method     
+    @abstract   Check if the current client input session supports a given TSM property.
+    @discussion This method is available to provide compatibilty for input methods that need to check TSMDocument properties.
+*/
+-(BOOL)supportsProperty:(TSMDocumentPropertyTag)property;
+
 
 @end
 

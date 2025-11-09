@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,21 +19,9 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved. 
- *
- * IONetworkController.h
- *
- * Network controller driver superclass.
- *
- * HISTORY
- * 9-Dec-1998       Joe Liu (jliu) created.
- *
- */
 
 #ifndef _IONETWORKCONTROLLER_H
 #define _IONETWORKCONTROLLER_H
-
 
 /*! @defined kIONetworkControllerClass
     @abstract The name of the IONetworkController class. */
@@ -222,13 +210,19 @@ enum {
 	IOMbufNaturalMemoryCursor with the getPhysicalSegmentsWithCoalesce
 	interfaces and enumerate the list of vectors should set this flag
 	for possible gain in performance during bulk data transfer.
+    @constant kIONetworkFeatureTSOIPv4 Set this bit to advertise support
+        for TCP/IPv4 segmentation offload.
+    @constant kIONetworkFeatureTSOIPv6 Set this bit to advertise support
+        for TCP/IPv6 segmentation offload.
 */
 
 enum {
-    kIONetworkFeatureNoBSDWait = 0x01,
+    kIONetworkFeatureNoBSDWait    = 0x01,
 	kIONetworkFeatureHardwareVlan = 0x02,
-	kIONetworkFeatureSoftwareVlan = 0x4,
-	kIONetworkFeatureMultiPages = 0x8
+	kIONetworkFeatureSoftwareVlan = 0x04,
+	kIONetworkFeatureMultiPages   = 0x08,
+	kIONetworkFeatureTSOIPv4      = 0x10,
+	kIONetworkFeatureTSOIPv6      = 0x20
 };
 
 /*
@@ -851,8 +845,8 @@ public:
 */
 
     virtual mbuf_t replaceOrCopyPacket(mbuf_t * mp,
-                                              UInt32         length,
-                                              bool *         replaced);
+                                       UInt32   length,
+                                       bool *   replaced);
 
     enum {
         kDelayFree = 0x01
@@ -966,12 +960,12 @@ public:
     encoded with the checksum result provided, false otherwise. 
 */
 
-    virtual bool setChecksumResult( mbuf_t packet,
-                                    UInt32        checksumFamily,
-                                    UInt32        resultMask,
-                                    UInt32        validMask,
-                                    UInt32        param0 = 0,
-                                    UInt32        param1 = 0 );
+    virtual bool setChecksumResult( mbuf_t  packet,
+                                    UInt32  checksumFamily,
+                                    UInt32  resultMask,
+                                    UInt32  validMask,
+                                    UInt32  param0 = 0,
+                                    UInt32  param1 = 0 );
 
 /*! @function getChecksumDemand
     @abstract Fetches the demand for hardware checksum computation and insertion
@@ -989,10 +983,10 @@ public:
 */
 
     virtual void getChecksumDemand( const mbuf_t packet,
-                                    UInt32              checksumFamily,
-                                    UInt32 *            demandMask,
-                                    void *              param0 = 0,
-                                    void *              param1 = 0 );
+                                    UInt32       checksumFamily,
+                                    UInt32 *     demandMask,
+                                    void *       param0 = 0,
+                                    void *       param1 = 0 );
 
 /*! @function publishMediumDictionary
     @abstract Publishes a dictionary of IONetworkMedium objects to
@@ -1064,6 +1058,23 @@ public:
                            const IONetworkMedium * activeMedium = 0,
                            UInt64                  speed        = 0,
                            OSData *                data         = 0);
+
+/*! @function systemWillShutdown
+    @abstract Handles system shutdown and restart notifications.
+    @discussion Overrides <code>IOService::systemWillShutdown</code> in order
+    to notify network clients that the power-managed controller should be disabled.
+    As a result, drivers can expect their <code>disable</code> method to be called
+    before system shutdown or restart. This implementation is synchronous and can
+    block before calling <code>IOService::systemWillShutdown</code> and return.
+    @param See <code>IOService::systemWillShutdown</code>.
+*/
+
+    virtual void systemWillShutdown( IOOptionBits specifier );
+
+    /* Override IOService::setAggressiveness() */
+
+    virtual IOReturn setAggressiveness(
+            unsigned long type, unsigned long newLevel );
 
 protected:
 

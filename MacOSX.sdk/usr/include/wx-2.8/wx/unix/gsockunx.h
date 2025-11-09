@@ -4,7 +4,7 @@
  * Copyright:   (c) Guilhem Lavaux
  * Licence:     wxWindows Licence
  * Purpose:     GSocket Unix header
- * CVSID:       $Id: gsockunx.h,v 1.21 2005/05/04 18:53:05 JS Exp $
+ * CVSID:       $Id: gsockunx.h 33948 2005-05-04 18:57:50Z JS $
  * -------------------------------------------------------------------------
  */
 

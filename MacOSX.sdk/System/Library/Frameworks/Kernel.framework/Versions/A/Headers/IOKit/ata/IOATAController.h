@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,76 +19,13 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
- * $Log: IOATAController.h,v $
- * Revision 1.11  2002/11/09 03:46:39  barras
- *
- * Bug #: 3083512, 3090979
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.10  2002/08/28 01:14:33  barras
- *
- * Bug #: 2876109
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.9  2002/02/18 23:20:18  barras
- *
- * Fixing a i386 build failure due to a type mismatch in an extend lba call.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.8  2002/02/15 03:06:44  barras
- *
- * More 48bit tweeking.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.7  2002/02/14 04:02:06  barras
- *
- * Adding API's for 48 bit lba
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.6  2001/07/24 00:07:41  barras
- *
- * Bringing TOT CVS in line with Puma builds.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.5.2.1  2001/06/13 03:04:07  barras
- * Fix versioning string conflicts so kext loader is happy. Close Radar 2692663 which allows porting to other platforms.
- *
- * Revision 1.5  2001/05/04 01:50:37  barras
- *
- * Fix line endings to be all unix style in order to prevent CVS from corrupting source files.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- *
- */ 
-#endif
  
  
 #ifndef _IOATACONTROLLER_H
 #define _IOATACONTROLLER_H
 
 #include <IOKit/IOTypes.h>
+#include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/IOService.h>
 #include <IOKit/IOWorkLoop.h>
@@ -99,7 +36,7 @@ class IOATABusCommand;
 class IOATABusInfo;
 class IOATADevConfig;
 
-/*! @class IOATAController : public IOService
+/*! @class IOATAController
     @abstract The base class for ata controller family. Provides the interface common to all ata bus controllers.
     @discussion Subclasses of IOATAController implement drivers for specific bus hardware. Disk devices are clients of 
     IOATAController and communicate via the IOATABusNub instantiated for each device discovered by the specific IOATAController
@@ -110,13 +47,13 @@ class IOATADevConfig;
     
     @discussion The header doc for this class is incomplete. The source however is heavily commented and should be consulted until 
     such time as complete header doc is available.
-*/    
+*/
 
 
 
 class IOATAController : public IOService
 {
-    OSDeclareDefaultStructors(IOATAController)
+    OSDeclareDefaultStructors(IOATAController);
 
 public:
 
@@ -144,10 +81,6 @@ public:
 
 	virtual IOService* probe( IOService* provider,	SInt32*	score );
     virtual bool start( IOService* provider );
-	
-//    virtual IOWorkLoop*	getWorkLoop() const;
-//	virtual IOCommandGate * getCommandGate() const;
-
 
 
 protected:
@@ -225,9 +158,7 @@ protected:
 /*! @function handleCommand
     @abstract Called by executeCommand() to handle the client command
     from the workloop context.
-    @param client The client object.
     @param command The command code.
-    @param param0 Command parameter.
     @param param1 Command parameter.
     @param param2 Command parameter.
     @param param3 Command parameter.
@@ -241,15 +172,15 @@ protected:
 
 /*! @function busCanDispatch
     @abstract answers whether the bus is in state such that the next command 
-    @can be dispatched.
+    can be dispatched.
 	@result true - bus is free to issue commands. false - bus cannot issue
-	@commands at this time. */
+	commands at this time. */
 	virtual bool busCanDispatch( void );
 
 
 /*! @function dispatchNext
-    @Causes the command at the front of the queue to dequeue, made the 
-    @current command and begin execution.
+    @abstract Causes the command at the front of the queue to dequeue, made the 
+    current command and begin execution.
 	@result  noErr indicates successful dispatch.  */
 	virtual IOReturn dispatchNext( void );
 
@@ -346,9 +277,12 @@ private:
 
 protected:
 /*! @struct ExpansionData
-    @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
-    */    
-    struct ExpansionData { };
+    @discussion This structure will be used to expand the capablilties of the IOATAController in the future.
+    */
+    typedef struct ExpansionData
+    {
+    	IOBufferMemoryDescriptor*	_doubleBufferDesc;
+    } ExpansionData;
 
 /*! @var reserved
     Reserved for future use.  (Internal use only)  */

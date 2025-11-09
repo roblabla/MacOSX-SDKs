@@ -3,9 +3,9 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-122~37
+     Version:    OSA-137~257
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -289,10 +289,7 @@ enum {
 enum {
   kOSASelectScriptingComponentName = 0x0102,
   kOSASelectCompile             = 0x0103,
-  kOSASelectCopyID              = 0x0104
-};
-
-enum {
+  kOSASelectCopyID              = 0x0104,
   kOSASelectCopyScript          = 0x0105
 };
 
@@ -713,7 +710,7 @@ OSAScriptError(
         These error numbers may be either system error numbers, or error numbers
         that are scripting component specific.
         Required desiredTypes:  
-            typeSInt16
+            typeSInt32
     */
 enum {
   kOSAErrorNumber               = keyErrorNumber
@@ -1106,10 +1103,15 @@ OSACopyID(
  *  OSACopyScript()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
  */
+extern OSAError 
+OSACopyScript(
+  ComponentInstance   scriptingComponent,
+  OSAID               fromID,
+  OSAID *             toID)                                   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -1934,6 +1936,71 @@ OSAMakeContext(
 /**************************************************************************
     OSA Script File Interface
 **************************************************************************/
+/*
+ *  OSAGetScriptDataFromURL()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSAGetScriptDataFromURL(
+  CFURLRef   scriptURL,
+  Boolean *  storable,                  /* can be NULL */
+  SInt32     modeFlags,
+  AEDesc *   resultingScriptData)                             AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
+        This routine reads script data from a URL into a descriptor. The
+        URL may refer to a compiled script, script application, or source
+        text file. If "scriptURL" refers to a text file, the resulting data
+        is the source text. If "storable" is non-NULL, it will be set to
+        indicate whether a script can be stored into the script file using
+        OSAStoreFile().
+     
+        You may use OSALoadScriptData() with the resulting descriptor to
+        load the script into a component instance. Doing this in two steps
+        affords the opportunity to examine the script data with
+        OSAGetStorageType() and select a component instance.
+    
+        Errors:
+            errOSASystemError
+            File system errors.
+            
+        ModeFlags:
+            No mode flags are supported at this time.
+    */
+/*
+ *  OSALoadScriptData()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSALoadScriptData(
+  ComponentInstance   scriptingComponent,
+  const AEDesc *      scriptData,
+  CFURLRef            fromURL,                  /* can be NULL */
+  SInt32              modeFlags,
+  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
+        This routine loads script data from a descriptor into the specified
+        scripting component. If "scriptData" is source, it will be compiled.
+        If "fromURL" is non-NULL, it indicates the file from which the data
+        was read.
+    
+        Errors:
+            See OSALoad() and OSACompile().
+            
+        ModeFlags:
+            See OSALoad() and OSACompile().
+    */
 /*
  *  OSALoadFile()
  *  

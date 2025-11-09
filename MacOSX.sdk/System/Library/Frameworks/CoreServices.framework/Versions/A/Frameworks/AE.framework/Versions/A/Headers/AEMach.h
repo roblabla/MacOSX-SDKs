@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent over mach_msg interfaces
  
-     Version:    AppleEvents-402~78
+     Version:    AppleEvents-496.5~1
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

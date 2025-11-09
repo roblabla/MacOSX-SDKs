@@ -1,7 +1,7 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2007, Apple Inc.
+        Copyright (c) 1997-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -19,10 +19,10 @@
 @interface NSStatusBar : NSObject
 {
  @private
-    NSMutableArray* _actions;
+    id             _items;
     void           *_fReserved1;
     void           *_fReserved2;
-    void           *_fReserved3;
+    NSInteger      _registeredForNote;
 }
 
 + (NSStatusBar*)systemStatusBar;

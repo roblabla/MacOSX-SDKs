@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -104,5 +104,5 @@ typedef NSUInteger NSScrollerArrow;
 @interface NSScroller(NSDeprecated)
 /* A method that was deprecated in Mac OS 10.5. To maintain binary compatibility, AppKit will continue to invoke overrides of this method. Code that targets Mac OS 10.5 and later should use -setDoubleValue: and -setKnobProportion: instead, and eliminate any overrides of -setFloatValue:knobProportion:. Code that needs to remain compatible with Mac OS 10.4 and earlier should continue to use -setFloatValue:knobProportion:. 
 */
-- (void)setFloatValue:(float)aFloat knobProportion:(CGFloat)proportion;
+- (void)setFloatValue:(float)aFloat knobProportion:(CGFloat)proportion DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 @end

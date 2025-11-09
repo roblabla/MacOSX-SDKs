@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     29.06.2003
-// RCS-ID:      $Id: init.h,v 1.9 2006/10/19 07:43:24 MR Exp $
+// RCS-ID:      $Id: init.h 42109 2006-10-19 07:43:24Z MR $
 // Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

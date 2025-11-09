@@ -2,9 +2,17 @@
  *	CTParagraphStyle.h
  *	CoreText
  *
- *	Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
  *
  */
+
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
 
 #ifndef __CTPARAGRAPHSTYLE__
 #define __CTPARAGRAPHSTYLE__

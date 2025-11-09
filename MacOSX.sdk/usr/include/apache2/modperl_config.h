@@ -1,8 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -26,6 +27,8 @@ modperl_config_dir_t *modperl_config_dir_new(apr_pool_t *p);
 
 modperl_config_req_t *modperl_config_req_new(request_rec *r);
 
+modperl_config_con_t *modperl_config_con_new(conn_rec *c);
+
 void *modperl_config_srv_create(apr_pool_t *p, server_rec *s);
 
 void *modperl_config_srv_merge(apr_pool_t *p, void *basev, void *addv);
@@ -39,9 +42,15 @@ apr_status_t modperl_config_request_cleanup(pTHX_ request_rec *r);
 
 apr_status_t modperl_config_req_cleanup(void *data);
 
+/* use a subpool here to ensure that a PerlCleanupHandler is run before
+ * any other pool cleanup - suppools are destroyed first. Particularly a
+ * PerlCleanupHandler must run before request pnotes are dropped.
+ */
 #define modperl_config_req_cleanup_register(r, rcfg)           \
     if (r && !MpReqCLEANUP_REGISTERED(rcfg)) {                 \
-        apr_pool_cleanup_register(r->pool,                     \
+        apr_pool_t *p;                           \
+        apr_pool_create(&p, r->pool);                   \
+        apr_pool_cleanup_register(p,                   \
                                   (void*)r,                    \
                                   modperl_config_req_cleanup,  \
                                   apr_pool_cleanup_null);      \
@@ -77,6 +86,19 @@ void modperl_set_perl_module_config(ap_conf_vector_t *cv, void *cfg);
 
 #define MP_dRCFG \
     modperl_config_req_t *rcfg = modperl_config_req_get(r)
+
+#define modperl_config_con_init(c, ccfg)                 \
+    if (!ccfg) {                                         \
+        ccfg = modperl_config_con_new(c);                \
+        modperl_set_module_config(c->conn_config, ccfg); \
+    }
+
+#define modperl_config_con_get(c)                               \
+    (c ? (modperl_config_con_t *)                               \
+     modperl_get_module_config(c->conn_config) : NULL)
+
+#define MP_dCCFG \
+    modperl_config_con_t *ccfg = modperl_config_con_get(c)
 
 #define modperl_config_dir_get(r)                               \
     (r ? (modperl_config_dir_t *)                               \
@@ -131,10 +153,11 @@ const char *modperl_config_insert(pTHX_ server_rec *s,
                                   apr_pool_t *ptmp,
                                   int override,
                                   char *path,
+                                  int override_options,
                                   ap_conf_vector_t *conf,
                                   SV *lines);
 
-const char *modperl_config_insert_parms(pTHX_ cmd_parms *parms, 
+const char *modperl_config_insert_parms(pTHX_ cmd_parms *parms,
                                         SV *lines);
 
 const char *modperl_config_insert_server(pTHX_ server_rec *s, SV *lines);
@@ -142,7 +165,9 @@ const char *modperl_config_insert_server(pTHX_ server_rec *s, SV *lines);
 const char *modperl_config_insert_request(pTHX_
                                           request_rec *r,
                                           SV *lines,
-                                          int override);
+                                          int override,
+                                          char *path,
+                                          int override_options);
 
 int modperl_config_is_perl_option_enabled(pTHX_ request_rec *r,
                                           server_rec *s, const char *name);

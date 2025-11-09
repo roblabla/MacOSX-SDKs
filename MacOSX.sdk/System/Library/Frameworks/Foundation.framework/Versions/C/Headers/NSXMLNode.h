@@ -1,5 +1,5 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -150,7 +150,9 @@ typedef NSUInteger NSXMLNodeKind;
 */
 + (id)DTDNodeWithXMLString:(NSString *)string;
 
+#if 0
 #pragma mark --- Properties ---
+#endif
 
 /*!
     @method kind:
@@ -200,7 +202,9 @@ typedef NSUInteger NSXMLNodeKind;
 */
 - (NSString *)stringValue; //primitive
 
+#if 0
 #pragma mark --- Tree Navigation ---
+#endif
 
 /*!
     @method index
@@ -280,7 +284,9 @@ typedef NSUInteger NSXMLNodeKind;
 */
 - (NSString *)XPath;
 
+#if 0
 #pragma mark --- QNames ---
+#endif
 
 /*!
 	@method localName
@@ -325,7 +331,9 @@ typedef NSUInteger NSXMLNodeKind;
 */
 + (NSXMLNode *)predefinedNamespaceForPrefix:(NSString *)name;
 
+#if 0
 #pragma mark --- Output ---
+#endif
 
 /*!
     @method description
@@ -351,7 +359,9 @@ typedef NSUInteger NSXMLNodeKind;
 */
 - (NSString *)canonicalXMLStringPreservingComments:(BOOL)comments;
 
+#if 0
 #pragma mark --- XPath/XQuery ---
+#endif
 
 /*!
     @method nodesForXPath:error:

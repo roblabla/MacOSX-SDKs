@@ -84,8 +84,11 @@
 #define BLUETOOTH_VERSION_1_6_3 10603
 #define BLUETOOTH_VERSION_2_0	20000
 #define BLUETOOTH_VERSION_2_0_0 BLUETOOTH_VERSION_2_0
+#define BLUETOOTH_VERSION_2_1	20100
+#define BLUETOOTH_VERSION_2_1_0 BLUETOOTH_VERSION_2_1
+#define BLUETOOTH_VERSION_2_1_1 20101
 
-#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_2_0_0
+#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_2_1_1
 
 #ifdef BLUETOOTH_VERSION_USE_CURRENT
 	#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_CURRENT
@@ -116,8 +119,14 @@
 			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_1
 		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_5
 			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_2
-		#else 
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_7
 			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_3_1
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5_0
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_0
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5_4
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_1_1
+		#else 
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_1_1
 		#endif
 	#endif
 #endif
@@ -250,15 +259,24 @@
 #endif
 
 
-
 //===========================================================================================================================
 // only certain compilers support __attribute((deprecated))__
 //===========================================================================================================================
 
-#if defined( DEPRECATED_ATTRIBUTE ) && defined( MAC_OS_X_VERSION_10_5 )
-    #define DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER DEPRECATED_ATTRIBUTE
+#if defined( DEPRECATED_ATTRIBUTE ) && defined( MAC_OS_X_VERSION_10_6 )
+		
+    #define DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER DEPRECATED_ATTRIBUTE
+	#define DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER DEPRECATED_ATTRIBUTE
+
+#elif defined( DEPRECATED_ATTRIBUTE ) && defined( MAC_OS_X_VERSION_10_5 )
+		
+	#define DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER DEPRECATED_ATTRIBUTE
+		
 #else
-    #define DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER
+		
+	#define DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER
+	#define DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER
+		
 #endif
 
 //===========================================================================================================================
@@ -304,11 +322,16 @@ typedef unsigned long								IOBluetoothObjectID;
                 the caller.  Unless otherwise documented, the other functions do not return an object that must
                 be released.  However, if the caller wants to keep a reference to the returned object outside
                 of the caller's scope, that object must be retained.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		bluetoothObject The target IOBluetoothObjectRef
 	@result		Returns the IOBluetoothObjectRef passed in with one more ref count.
 */
 
-extern IOBluetoothObjectRef IOBluetoothObjectRetain( IOBluetoothObjectRef bluetoothObject );
+extern IOBluetoothObjectRef IOBluetoothObjectRetain( IOBluetoothObjectRef bluetoothObject )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -316,10 +339,15 @@ extern IOBluetoothObjectRef IOBluetoothObjectRetain( IOBluetoothObjectRef blueto
 	@abstract	Decrements the ref count on the target object.
 	@discussion	The ref counting scheme allows the IOBluetoothObjectRefs to be freed when they are no longer used.
                 When the ref count reaches zero, the target object will be freed.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		bluetoothObject The target IOBluetoothObjectRef
 */
 
-extern void IOBluetoothObjectRelease( IOBluetoothObjectRef bluetoothObject );
+extern void IOBluetoothObjectRelease( IOBluetoothObjectRef bluetoothObject )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -331,13 +359,18 @@ extern void IOBluetoothObjectRelease( IOBluetoothObjectRef bluetoothObject );
 				to this function.  The returned BluetoothObjectID can then be used to find the appropriate
 				IOBluetoothL2CAPChannel or IOBluetoothRFCOMMChannel depending on the type of service (using 
 				IOBluetoothL2CAPChannelCreateFromObjectID() or IOBluetoothRFCOMMChannelCreateFromObjectID.)
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		argc The argc parameter passed to main()
 	@param		argv The argv parameter passed to main()
 	@result		Returns the BluetoothObjectID passed in the given arguments.  If no ID is present,
 				kIOBluetoothObjectIDNULL is returned.
 */
 
-extern IOBluetoothObjectID IOBluetoothGetObjectIDFromArguments( int argc, const char *argv[] );
+extern IOBluetoothObjectID IOBluetoothGetObjectIDFromArguments( int argc, const char *argv[] )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
     @typedef IOBluetoothRemoteNameRequestCallback
@@ -389,11 +422,16 @@ typedef void (*IOBluetoothSDPQueryCallback)						( void * userRefCon, IOBluetoot
 	@discussion	Within a single application, there will be only one IOBluetoothDeviceRef for a
                 given remote device address.  This function will return that shared device object.  The
                 IOBluetoothDeviceRef MUST be released by the caller (by calling IOBluetoothObjectRelease()).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@param		bdAddr	Pointer to a BluetoothDeviceAddress for which an IOBluetoothDeviceRef is desired
 	@result		Returns the IOBluetoothDeviceRef for the given BluetoothDeviceAddress.
 */
 
-extern IOBluetoothDeviceRef IOBluetoothDeviceCreateWithAddress(BluetoothDeviceAddress *bdAddr);
+extern IOBluetoothDeviceRef IOBluetoothDeviceCreateWithAddress(BluetoothDeviceAddress *bdAddr)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -403,6 +441,11 @@ extern IOBluetoothDeviceRef IOBluetoothDeviceCreateWithAddress(BluetoothDeviceAd
                 operation is performed asynchronously and the callback called when the connection complete
                 event is received.  If no callback is specified, the operation is synchronous and the 
                 function will not return until the connection complete event is received.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
     @param		callback The function to be called when the connection has been established (or the
                 create connection has failed).
@@ -412,7 +455,7 @@ extern IOBluetoothDeviceRef IOBluetoothDeviceCreateWithAddress(BluetoothDeviceAd
                 is not received in the asynchronous case, the callback will not be called.
 */
 
-extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon);
+extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -424,6 +467,11 @@ extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, I
                 function will not return until the connection complete event is received.
 				
 				NOTE: This function is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
     @param		callback The function to be called when the connection has been established (or the
                 create connection has failed).
@@ -435,7 +483,7 @@ extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, I
                 is not received in the asynchronous case, the callback will not be called.
 */
 
-extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon, BluetoothHCIPageTimeout inPageTimeout, Boolean inAuthenticationRequired) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon, BluetoothHCIPageTimeout inPageTimeout, Boolean inAuthenticationRequired) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -443,11 +491,16 @@ extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef 
 	@abstract	Close down the baseband connection to the device.
 	@discussion	This method is synchronous and will not return until the connection has been closed (or the 
                 command failed).  In the future this API will be changed to allow asynchronous operation.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
     @result		Returns kIOReturnSuccess if the connection has successfully been closed.
 */
 
-extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice);
+extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -457,6 +510,11 @@ extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice);
                 command, the callback will be called with the given refCon.
                 If no target is specified, the request is made synchronously and won't return until the request is 
                 complete.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		inDeviceRef The target IOBluetoothDeviceRef
     @param		inCallback The callback to call when the remote name request is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
@@ -468,7 +526,7 @@ extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice);
 extern IOReturn IOBluetoothDeviceRemoteNameRequest(	IOBluetoothDeviceRef						inDeviceRef,
 													IOBluetoothRemoteNameRequestCallback		inCallback,
 													void *										inUserRefCon,
-													BluetoothDeviceName							outDeviceName );	
+													BluetoothDeviceName							outDeviceName )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;	
                                                     
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -480,6 +538,11 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequest(	IOBluetoothDeviceRef						in
                 complete.
 				
 				NOTE: This function is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		inDeviceRef The target IOBluetoothDeviceRef
     @param		inCallback The callback to call when the remote name request is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
@@ -492,7 +555,7 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequestWithTimeout(	IOBluetoothDevice
 																IOBluetoothRemoteNameRequestCallback		inCallback,
 																void *										inUserRefCon,
 																BluetoothDeviceName							outDeviceName,
-																BluetoothHCIPageTimeout						inTimeout ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+																BluetoothHCIPageTimeout						inTimeout ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDevicePerformSDPQuery
@@ -506,6 +569,11 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequestWithTimeout(	IOBluetoothDevice
 				an error is encountered), the callback will be called with the given refCon.  If no target is specified, 
 				the request is still asynchronous, but no callback will be made.  That can be useful if the client has
 				registered for SDP service changed notifications.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@param		inDeviceRef The target IOBluetoothDeviceRef
     @param		inCallback The callback to call when the SDP query is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
@@ -514,7 +582,7 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequestWithTimeout(	IOBluetoothDevice
 
 extern IOReturn IOBluetoothDevicePerformSDPQuery(	IOBluetoothDeviceRef						inDeviceRef,
                                                     IOBluetoothSDPQueryCallback					inCallback,
-                                                    void *										inUserRefCon );
+                                                    void *										inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //===========================================================================================================================
 // Device attributes
@@ -532,11 +600,16 @@ extern IOReturn IOBluetoothDevicePerformSDPQuery(	IOBluetoothDeviceRef						inDe
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the class of device for the remote device.
 */
 
-extern BluetoothClassOfDevice IOBluetoothDeviceGetClassOfDevice(IOBluetoothDeviceRef device);
+extern BluetoothClassOfDevice IOBluetoothDeviceGetClassOfDevice(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -545,11 +618,16 @@ extern BluetoothClassOfDevice IOBluetoothDeviceGetClassOfDevice(IOBluetoothDevic
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the major service class of the device.
 */
 
-extern BluetoothServiceClassMajor IOBluetoothDeviceGetServiceClassMajor(IOBluetoothDeviceRef device);
+extern BluetoothServiceClassMajor IOBluetoothDeviceGetServiceClassMajor(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -558,11 +636,16 @@ extern BluetoothServiceClassMajor IOBluetoothDeviceGetServiceClassMajor(IOBlueto
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the major device class of the remote device.
 */
 
-extern BluetoothDeviceClassMajor IOBluetoothDeviceGetDeviceClassMajor(IOBluetoothDeviceRef device);
+extern BluetoothDeviceClassMajor IOBluetoothDeviceGetDeviceClassMajor(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -571,11 +654,16 @@ extern BluetoothDeviceClassMajor IOBluetoothDeviceGetDeviceClassMajor(IOBluetoot
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the minor device class of the remote device.
 */
 
-extern BluetoothDeviceClassMinor IOBluetoothDeviceGetDeviceClassMinor(IOBluetoothDeviceRef device);
+extern BluetoothDeviceClassMinor IOBluetoothDeviceGetDeviceClassMinor(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -586,13 +674,18 @@ extern BluetoothDeviceClassMinor IOBluetoothDeviceGetDeviceClassMinor(IOBluetoot
                 name request, call IOBluetoothDeviceRemoteNameRequest().  If a remote name request has been 
                 successfully completed, the function IOBluetoothDeviceGetLastNameUpdate() will return the 
                 date/time of the last successful request.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the name of the remote device name.  This value is a CFStringRef generated from the UTF-8
                 format of the most recent remote name request.  The returned string does NOT need to be released
                 by the caller.
 */
 
-extern CFStringRef IOBluetoothDeviceGetName(IOBluetoothDeviceRef device);
+extern CFStringRef IOBluetoothDeviceGetName(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -603,12 +696,17 @@ extern CFStringRef IOBluetoothDeviceGetName(IOBluetoothDeviceRef device);
                 a string containg the device address in the format of "XX-XX-XX-XX-XX-XX" will be returned.  Because this
                 function may have to create a new string object, the resulting string must be released by the caller
                 (by calling CFRelease()).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
     @result		Returns the device's name or a string containing the device's address.  The returned string MUST be released
                 by the caller by calling CFRelease().
 */
 
-extern CFStringRef IOBluetoothDeviceGetNameOrAddress(IOBluetoothDeviceRef device);
+extern CFStringRef IOBluetoothDeviceGetNameOrAddress(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -618,9 +716,14 @@ extern CFStringRef IOBluetoothDeviceGetNameOrAddress(IOBluetoothDeviceRef device
 	@result		Returns the date/time of the last successful remote name request.  If no remote name request has been
                 completed on the target device, NULL is returned.  The returned CFDateRef does NOT need to be released by 
                 the caller.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 */
 
-extern CFDateRef IOBluetoothDeviceGetLastNameUpdate(IOBluetoothDeviceRef device);
+extern CFDateRef IOBluetoothDeviceGetLastNameUpdate(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -628,9 +731,13 @@ extern CFDateRef IOBluetoothDeviceGetLastNameUpdate(IOBluetoothDeviceRef device)
 	@abstract	Get the Bluetooth device address for the target device.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns a pointer to the Bluetooth device address of the target device.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern const BluetoothDeviceAddress *IOBluetoothDeviceGetAddress(IOBluetoothDeviceRef device);
+extern const BluetoothDeviceAddress *IOBluetoothDeviceGetAddress(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -640,12 +747,17 @@ extern const BluetoothDeviceAddress *IOBluetoothDeviceGetAddress(IOBluetoothDevi
 				string must be released by the caller (by calling CFRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns a pointer to a CFStringRef containing the Bluetooth device address of the target device.
 				The returned string MUST be released by the caller by calling CFRelease().
 */
 
-extern CFStringRef IOBluetoothDeviceGetAddressString(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern CFStringRef IOBluetoothDeviceGetAddressString(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -654,11 +766,16 @@ extern CFStringRef IOBluetoothDeviceGetAddressString(IOBluetoothDeviceRef device
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the page scan repetition mode value for this device.
 */
 
-extern BluetoothPageScanRepetitionMode IOBluetoothDeviceGetPageScanRepetitionMode(IOBluetoothDeviceRef device);
+extern BluetoothPageScanRepetitionMode IOBluetoothDeviceGetPageScanRepetitionMode(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -667,11 +784,16 @@ extern BluetoothPageScanRepetitionMode IOBluetoothDeviceGetPageScanRepetitionMod
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns page scan period mode value for the device.
 */
 
-extern BluetoothPageScanPeriodMode IOBluetoothDeviceGetPageScanPeriodMode(IOBluetoothDeviceRef device);
+extern BluetoothPageScanPeriodMode IOBluetoothDeviceGetPageScanPeriodMode(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -680,11 +802,16 @@ extern BluetoothPageScanPeriodMode IOBluetoothDeviceGetPageScanPeriodMode(IOBlue
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the value for the page scan mode for the device.
 */
 
-extern BluetoothPageScanMode IOBluetoothDeviceGetPageScanMode(IOBluetoothDeviceRef device);
+extern BluetoothPageScanMode IOBluetoothDeviceGetPageScanMode(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -693,33 +820,48 @@ extern BluetoothPageScanMode IOBluetoothDeviceGetPageScanMode(IOBluetoothDeviceR
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of IOBluetoothDeviceGetLastInquiryUpdate().  If NULL is returned, then the 
                 device hasn't been seen.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the clock offset value for the device.
 */
 
-extern BluetoothClockOffset IOBluetoothDeviceGetClockOffset(IOBluetoothDeviceRef device);
+extern BluetoothClockOffset IOBluetoothDeviceGetClockOffset(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceGetLastInquiryUpdate
 	@abstract	Get the date/time of the last time the device was returned during an inquiry.
     @param		device The target IOBluetoothDeviceRef
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
 	@result		Returns the date/time of the last time the device was seen during an inquiry.
                 If the device has never been seen during an inquiry, NULL is returned.  The returned CFDateRef
                 does NOT need to be released by the caller.
 */
 
-extern CFDateRef IOBluetoothDeviceGetLastInquiryUpdate(IOBluetoothDeviceRef device);
+extern CFDateRef IOBluetoothDeviceGetLastInquiryUpdate(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceIsConnected
 	@abstract	Indicates whether a baseband connection to the device exists.
+	discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns YES if a baseband connection to the device exists.
 */
 
-extern Boolean IOBluetoothDeviceIsConnected(IOBluetoothDeviceRef device);
+extern Boolean IOBluetoothDeviceIsConnected(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -729,12 +871,17 @@ extern Boolean IOBluetoothDeviceIsConnected(IOBluetoothDeviceRef device);
                 the pairing process.  This call will synchronously initiate the pairing process with the target device
                 and not return until the authentication process is complete.  This API will be updated to allow
                 for asynchronous operation.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
     @param		device The target IOBluetoothDeviceRef
     @result		Returns kIOReturnSuccess if the connection has been successfully been authenticated.  Returns an error
                 if authentication fails or no baseband connection exists.
 */
 
-extern IOReturn IOBluetoothDeviceRequestAuthentication(IOBluetoothDeviceRef device);
+extern IOReturn IOBluetoothDeviceRequestAuthentication(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -742,12 +889,17 @@ extern IOReturn IOBluetoothDeviceRequestAuthentication(IOBluetoothDeviceRef devi
 	@abstract	Get the connection handle for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present
                 (IOBluetoothDeviceIsConnected() returns TRUE).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the connection handle for the baseband connection.  If no baseband connection is present,
                 kBluetoothConnectionHandleNone is returned.
 */
 
-extern BluetoothConnectionHandle IOBluetoothDeviceGetConnectionHandle(IOBluetoothDeviceRef device);
+extern BluetoothConnectionHandle IOBluetoothDeviceGetConnectionHandle(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -755,12 +907,17 @@ extern BluetoothConnectionHandle IOBluetoothDeviceGetConnectionHandle(IOBluetoot
 	@abstract	Get the link type for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present
                 (IOBluetoothDeviceIsConnected() returns TRUE).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the link type for the baseband connection.  If no baseband connection is present,
                 kBluetoothLinkTypeNone is returned.
 */
 
-extern BluetoothLinkType IOBluetoothDeviceGetLinkType(IOBluetoothDeviceRef device);
+extern BluetoothLinkType IOBluetoothDeviceGetLinkType(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -768,12 +925,17 @@ extern BluetoothLinkType IOBluetoothDeviceGetLinkType(IOBluetoothDeviceRef devic
 	@abstract	Get the encryption mode for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present
                 (IOBluetoothDeviceIsConnected() returns TRUE).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the encryption mode for the baseband connection.  If no baseband connection is present,
                 kEncryptionDisabled is returned.
 */
 
-extern BluetoothHCIEncryptionMode IOBluetoothDeviceGetEncryptionMode(IOBluetoothDeviceRef device);
+extern BluetoothHCIEncryptionMode IOBluetoothDeviceGetEncryptionMode(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -786,13 +948,18 @@ extern BluetoothHCIEncryptionMode IOBluetoothDeviceGetEncryptionMode(IOBluetooth
                 
                 Instead of allowing individual clients to query for different services and service attributes,
                 the system request all of the device's services and service attributes.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns an array of service records (IOBluetoothDeviceRefs) for the device if an SDP query has 
                 been performed.  If no SDP query has been performed, NULL is returned.  The resulting CFArrayRef
                 does NOT need to be released by the caller.
 */
 
-extern CFArrayRef IOBluetoothDeviceGetServices(IOBluetoothDeviceRef device);
+extern CFArrayRef IOBluetoothDeviceGetServices(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -801,9 +968,13 @@ extern CFArrayRef IOBluetoothDeviceGetServices(IOBluetoothDeviceRef device);
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns the date/time of the last SDP query.  If an SDP query has never been performed on the
                 device, NULL is returned.  The resulting CFDateRef does NOT need to be released by the caller.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern CFDateRef IOBluetoothDeviceGetLastServicesUpdate(IOBluetoothDeviceRef device);
+extern CFDateRef IOBluetoothDeviceGetLastServicesUpdate(IOBluetoothDeviceRef device)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -813,6 +984,11 @@ extern CFDateRef IOBluetoothDeviceGetLastServicesUpdate(IOBluetoothDeviceRef dev
                 UUID.  Only the first service record will be returned.  This method only operates on services
                 that have already been queried.  It will not initiate a new query.  This method should probably 
                 be updated to return an array of service records if more than one contains the UUID.  
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
     @param		sdpUUID UUID value to search for.  
 	@result		Returns the first service record that contains the given uuid.  If no service record is found,
@@ -820,7 +996,7 @@ extern CFDateRef IOBluetoothDeviceGetLastServicesUpdate(IOBluetoothDeviceRef dev
                 the caller.
 */
 
-extern IOBluetoothSDPServiceRecordRef IOBluetoothDeviceGetServiceRecordForUUID(IOBluetoothDeviceRef device, IOBluetoothSDPUUIDRef uuidRef);
+extern IOBluetoothSDPServiceRecordRef IOBluetoothDeviceGetServiceRecordForUUID(IOBluetoothDeviceRef device, IOBluetoothSDPUUIDRef uuidRef)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -829,46 +1005,66 @@ extern IOBluetoothSDPServiceRecordRef IOBluetoothDeviceGetServiceRecordForUUID(I
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
 	@result		Returns a CFArray of IOBluetoothDeviceRef objects.  The resulting CFArrayRef must be released by
 				the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothFavoriteDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern CFArrayRef IOBluetoothFavoriteDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceIsFavorite
 	@abstract	Indicates whether the target device is a favorite.
 	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns TRUE if the device is one of the user's favorites.
 */
 
-extern Boolean IOBluetoothDeviceIsFavorite(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern Boolean IOBluetoothDeviceIsFavorite(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceAddToFavorites
 	@abstract	Adds the target device to the user's list of favorite devices.
 	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns kIOReturnSuccess if the device was successfully added to the user's list of
 				favorite devices.
 */
 
-extern IOReturn IOBluetoothDeviceAddToFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothDeviceAddToFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceRemoveFromFavorites
 	@abstract	Removes the target device from the user's list of favorite devices.
 	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns kIOReturnSuccess if the device was successfully removed from the user's list of
 				favorite devices or if the device was not in the list at all.
 */
 
-extern IOReturn IOBluetoothDeviceRemoveFromFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothDeviceRemoveFromFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -877,13 +1073,18 @@ extern IOReturn IOBluetoothDeviceRemoveFromFavorites(IOBluetoothDeviceRef device
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@param		numDevices	The number of recent devices to return.  If numDevices is zero, all devices accessed
 							by the user will be returned.
 	@result		Returns a CFArray of the most recently accessed IOBluetoothDeviceRef objects.  The resulting CFArrayRef 
 				must be released by the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothRecentDevices(unsigned long numDevices) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern CFArrayRef IOBluetoothRecentDevices(unsigned long numDevices) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -892,12 +1093,17 @@ extern CFArrayRef IOBluetoothRecentDevices(unsigned long numDevices) AVAILABLE_B
 	@discussion	The CFDateRef returned by this function must be released by calling CFRelease().
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns a CFDateRef representing the last date/time that the user accessed the
 				target device.  The resulting CFDateRef must be released by the caller by calling CFRelease().
 */
 
-extern CFDateRef IOBluetoothDeviceGetRecentAccessDate(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern CFDateRef IOBluetoothDeviceGetRecentAccessDate(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -906,34 +1112,51 @@ extern CFDateRef IOBluetoothDeviceGetRecentAccessDate(IOBluetoothDeviceRef devic
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@result		Returns a CFArray of IOBluetoothDeviceRef objects.  The resulting CFArrayRef must be released by
 				the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothPairedDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern CFArrayRef IOBluetoothPairedDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceIsPaired
 	@abstract	Indicates whether the target device is paired.
 	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns TRUE if the device is paired.
 */
 
-extern Boolean IOBluetoothDeviceIsPaired(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern Boolean IOBluetoothDeviceIsPaired(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothSetSupervisionTimeout
 	@abstract	Sets the connection supervision timeout.
 	@discussion	NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		device The target IOBluetoothDeviceRef
-    @param		timeout A client-supplied link supervision timeout value to use to monitor the connection.
+	@param		timeout A client-supplied link supervision timeout value to use to monitor the connection. The timeout
+				value should be specified in slots, so you can use the BluetoothGetSlotsFromSeconds macro to get the proper
+				value. e.g. BluetoothGetSlotsFromSeconds( 5.0 ) will give yield the proper number of slots (8000) for 5 seconds.
 	@result		Returns kIOReturnSuccess if it was possible to set the connection supervision timeout.
 */
 
-extern IOReturn IOBluetoothSetSupervisionTimeout(IOBluetoothDeviceRef device, UInt16 timeout) AVAILABLE_BLUETOOTH_VERSION_2_0_AND_LATER;
+extern IOReturn IOBluetoothSetSupervisionTimeout(IOBluetoothDeviceRef device, UInt16 timeout) AVAILABLE_BLUETOOTH_VERSION_2_0_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //===========================================================================================================================
 // Device searching.
@@ -1034,7 +1257,7 @@ typedef void (*IOBluetoothReadPageScanModeCallback)				( void * userRefCon, Blue
 	@result		A Boolean value. TRUE if a Bluetooth device is connected to the local machine, FALSE otherwise.
 	@discussion	Determines if a bluetooth device is available on a local machine or not.
 */
-extern Boolean	IOBluetoothLocalDeviceAvailable();
+extern Boolean	IOBluetoothLocalDeviceAvailable()	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceGetDiscoverable
@@ -1043,7 +1266,7 @@ extern Boolean	IOBluetoothLocalDeviceAvailable();
 	@result		An error code value. 0 if successful.
 	@discussion	Returns the discoverability state of the local device. 
 */
-extern IOReturn IOBluetoothLocalDeviceGetDiscoverable(Boolean* discoverableStatus);
+extern IOReturn IOBluetoothLocalDeviceGetDiscoverable(Boolean* discoverableStatus)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceGetPowerState
@@ -1053,209 +1276,228 @@ extern IOReturn IOBluetoothLocalDeviceGetDiscoverable(Boolean* discoverableStatu
 				NOTE: This function is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		An error code value. 0 if successful.
 */
-extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState* powerState) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;
+extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState* powerState) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadVersionInformation
-	@abstract	
+	@abstract	Reads the local Bluetoot Host Controller's version information, including LMP and HCI versions, as well
+				as the hardware manufacturer.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadVersionInformation(	BluetoothHCIVersionInfo *						outResults,
 																IOBluetoothReadLocalVersionInformationCallback	inCallback,
 																void *											inUserRefCon,
-																void *											reserved	 );
+																void *											reserved	 )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadSupportedFeatures
-	@abstract	
+	@abstract	Allows reading the local device's supported features, consisting of 8 bytes of data.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	You can use the BluetoothFeatureBits defined in Bluetooth.h to determine if a particular feature of
+				interest is set in the data. These supported features are visible to other in-range devices and
+				are often used to determine if a device has a feature of interest.
 */
 														
 extern IOReturn IOBluetoothLocalDeviceReadSupportedFeatures(	BluetoothHCISupportedFeatures *					outResults,
 																IOBluetoothReadLocalSupportedFeaturesCallback	inCallback,
 																void *											inUserRefCon,
-																void *											reserved	 );
+																void *											reserved	 )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadAddress
-	@abstract	
+	@abstract	Reads the local Bluetooth Host Controller's device address, e.g. 00-11-22-33-44-55
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	This is the same identifying address that can seen by other in-range devices, although it is usually
+				hidden in preference for a "friendlier" name, obtained from IOBluetoothLocalDeviceReadName() below.
 */
 															
 extern IOReturn IOBluetoothLocalDeviceReadAddress(	BluetoothDeviceAddress *		outResults,
 													IOBluetoothReadAddressCallback	inCallback,
 													void *							inUserRefCon,
-													void *							reserved	 );
+													void *							reserved	 )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadName
-	@abstract	
+	@abstract	Reads the local Bluetooth Host Controller's device name.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	This is the same name that can seen by other in-range devices.
 */
 											
 extern IOReturn IOBluetoothLocalDeviceReadName(	BluetoothDeviceName			outResults,
 												IOBluetoothReadNameCallback	inCallback,
 												void *						inUserRefCon,
-												void *						reserved	 );
+												void *						reserved	 )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadConnectionAcceptTimeout
-	@abstract	
+	@abstract	Reads the connection accept timeout value of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadConnectionAcceptTimeout(	BluetoothHCIConnectionAcceptTimeout	*			outResults,
 																	IOBluetoothReadConnectionAcceptTimeoutCallback	inCallback,
 																	void *											inUserRefCon,
-																	void *											reserved );
+																	void *											reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadPageTimeout
-	@abstract	
+	@abstract	Reads the page timeout value of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadPageTimeout(	BluetoothHCIPageTimeout	*			outResults,
 														IOBluetoothReadPageTimeoutCallback	inCallback,
 														void *								inUserRefCon,
-														void *								reserved );
+														void *								reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadScanEnable
-	@abstract	
+	@abstract	Reads the current scan mode of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadScanEnable(	BluetoothHCIPageScanMode	*			outResults,
 														IOBluetoothReadPageScanEnableCallback	inCallback,
 														void *									inUserRefCon,
-														void *									reserved );
+														void *									reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadAuthenticationEnable
-	@abstract	
+	@abstract	Reads the current authentication state of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadAuthenticationEnable(	BluetoothHCIAuthenticationEnable	*		outResults,
 																IOBluetoothReadAuthenticationEnableCallback	inCallback,
 																void *										inUserRefCon,
-																void *										reserved );
+																void *										reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadEncryptionMode
-	@abstract	
+	@abstract	Reads the current encryption mode of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadEncryptionMode(	BluetoothHCIEncryptionMode *			outResults,
 															IOBluetoothReadEncryptionModeCallback	inCallback,
 															void *									inUserRefCon,
-															void *									reserved );
+															void *									reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadClassOfDevice
-	@abstract	
+	@abstract	Reads the current class of device of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	This value is set automatically by the Bluetooth Software. It is re-written each system restart, so if
+				it has been changed by an API, the value will not be persistent across restarts.
 */
 									
 extern IOReturn IOBluetoothLocalDeviceReadClassOfDevice(	BluetoothClassOfDevice *				outResults,
 															IOBluetoothReadClassOfDeviceCallback	inCallback,
 															void *									inUserRefCon,
-															void *									reserved );
+															void *									reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadPageScanPeriodMode
-	@abstract	
+	@abstract	Reads the current page scan period mode of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 
 extern IOReturn IOBluetoothLocalDeviceReadPageScanPeriodMode(	BluetoothHCIPageScanPeriodMode *			outResults,
 																IOBluetoothReadPageScanPeriodModeCallback	inCallback,
 																void *										inUserRefCon,
-																void *										reserved );
+																void *										reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadPageScanMode
-	@abstract	
+	@abstract	Reads the current page scan mode of the Host Controller.
 	@param		outResults				
 	@param		inCallback			
 	@param		inUserRefCon	
 	@param		reserved			Pass NULL here.
 	@result		An error code value. 0 if successful.
-	@discussion	
+	@discussion	See Bluetooth.h for possible values.
 */
 																														
 extern IOReturn IOBluetoothLocalDeviceReadPageScanMode(	BluetoothHCIPageScanMode *			outResults,
 														IOBluetoothReadPageScanModeCallback	inCallback,
 														void *								inUserRefCon,
-														void *								reserved );
+														void *								reserved )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
-//===========================================================================================================================
-// L2CAP channel user client stuff.
-//===========================================================================================================================
- 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothIgnoreHIDDevice
+	@abstract	Hints that the Mac OS X Bluetooth software should ignore a HID device that connects up.
+	@param		device	A Bluetooth Device to ignore.
+*/
+
+extern	void	IOBluetoothIgnoreHIDDevice( IOBluetoothDeviceRef	device );
+
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothRemoveIgnoredHIDDevice
+	@abstract	The counterpart to the above IOBluetoothIgnoreHIDDevice() API.
+	@param		device	A Bluetooth Device to "un"ignore.
+*/
+
+extern	void	IOBluetoothRemoveIgnoredHIDDevice( IOBluetoothDeviceRef	device );
+
+#endif // BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+
 #if 0
 #pragma mark -
 #pragma mark === L2CAP ===
 #endif
-
 
  //===========================================================================================================================
 // L2CAP channel events
@@ -1399,6 +1641,11 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
                 Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
                 (by calling IOBluetoothObjectRelease()).
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice 		The target IOBluetoothDeviceRef
 	@param		psm				The L2CAP PSM value for the new channel.
 	@param		findExisting	This value should be set to TRUE if it should look for an existing channel 
@@ -1422,13 +1669,18 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannel(IOBluetoothDeviceRef btDevice,
                 In the future, this method will also open the connection if necessary.  The API will be updated
                 to allow the client to be informed when the echo response has been received (both synchronously
                 and asynchronously).
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		data	(void *) - Pointer to buffer to send.
 	@param		length	(UInt16) - Length of the buffer to send
 	@result		Returns kIOReturnSuccess if the echo request was able to be sent.
 */
 
-extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDevice, void *data, UInt16 length);
+extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDevice, void *data, UInt16 length) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1446,6 +1698,11 @@ extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDev
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+ 
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+ 
     @param		btDevice 		The target IOBluetoothDeviceRef
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannelRef to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
@@ -1458,7 +1715,7 @@ extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDev
                 L2CAP channel was found). 
 */
 
-extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1476,6 +1733,11 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDe
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+ 
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+ 
     @param		btDevice 		The target IOBluetoothDeviceRef
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannelRef to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
@@ -1488,7 +1750,7 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDe
                 L2CAP channel was found). 
 */
 
-extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -1501,13 +1763,18 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDev
 	@abstract	Returns the IOBluetoothL2CAPChannelRef with the given IOBluetoothObjectID.
     @discussion	The IOBluetoothObjectID can be used as a global reference for a given IOBluetoothL2CAPChannelRef.  It allows
 				two separate applications to refer to the same IOBluetoothL2CAPChannelRef.
+ 
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+ 
     @param		objectID	IOBluetoothObjectID of the desired IOBluetoothL2CAPChannelRef
 	@result		Returns the IOBluetoothL2CAPChannelRef that matches the given IOBluetoothObjectID if one exists.  The 
 				resulting IOBluetoothL2CAPChannelRef must be released by the caller by calling IOBluetoothObjectRelease.
 				If no matching L2CAP channel exists, NULL is returned.
 */
 
-extern IOBluetoothL2CAPChannelRef IOBluetoothL2CAPChannelCreateFromObjectID( IOBluetoothObjectID objectID );
+extern IOBluetoothL2CAPChannelRef IOBluetoothL2CAPChannelCreateFromObjectID( IOBluetoothObjectID objectID ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1515,11 +1782,16 @@ extern IOBluetoothL2CAPChannelRef IOBluetoothL2CAPChannelCreateFromObjectID( IOB
 	@abstract	Returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannelRef.
     @discussion	The IOBluetoothObjectID can be used as a global reference for a given IOBluetoothL2CAPChannelRef.  It allows
 				two separate applications to refer to the same IOBluetoothL2CAPChannelRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target IOBluetoothL2CAPChannelRef
 	@result		Returns the IOBluetoothObjectID of the given IOBluetoothl2CAPChannelRef.
 */
 
-extern IOBluetoothObjectID IOBluetoothL2CAPChannelGetObjectID( IOBluetoothL2CAPChannelRef l2capChannel );
+extern IOBluetoothObjectID IOBluetoothL2CAPChannelGetObjectID( IOBluetoothL2CAPChannelRef l2capChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1528,11 +1800,16 @@ extern IOBluetoothObjectID IOBluetoothL2CAPChannelGetObjectID( IOBluetoothL2CAPC
     @discussion	This method may only be called by the client that opened the channel in the first place.  In the future
                 asynchronous and synchronous versions will be provided that let the client know when the close process
                 has been finished.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns kIOReturnSuccess on success.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelCloseChannel(IOBluetoothL2CAPChannelRef l2capChannel);
+extern IOReturn IOBluetoothL2CAPChannelCloseChannel(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1541,18 +1818,28 @@ extern IOReturn IOBluetoothL2CAPChannelCloseChannel(IOBluetoothL2CAPChannelRef l
     @discussion	Currently, this API does not give an indication that the re-config process has completed.  In
                 the future additional API will be available to provide that information both synchronously and
                 asynchronously.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
     @param		remoteMTU		The desired outgoing MTU. 
 	@result		Returns kIOReturnSuccess if the channel re-configure process was successfully initiated.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelRequestRemoteMTU( IOBluetoothL2CAPChannelRef l2capChannel, BluetoothL2CAPMTU remoteMTU );
+extern IOReturn IOBluetoothL2CAPChannelRequestRemoteMTU( IOBluetoothL2CAPChannelRef l2capChannel, BluetoothL2CAPMTU remoteMTU ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelWrite
 	@abstract	Writes the given data over the target L2CAP channel to the remote device.
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
     @param		data	Pointer to the buffer containing the data to send.
     @param		length	The length of the given data buffer.
@@ -1568,6 +1855,11 @@ extern IOReturn IOBluetoothL2CAPChannelWrite(IOBluetoothL2CAPChannelRef l2capCha
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@param		l2capChannel	Target L2CAP channel ref
     @param		data	Pointer to the buffer containing the data to send.
     @param		length	The length of the given data buffer.
@@ -1575,7 +1867,7 @@ extern IOReturn IOBluetoothL2CAPChannelWrite(IOBluetoothL2CAPChannelRef l2capCha
 	@result		Returns kIOReturnSuccess if the data was buffered successfully.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelWriteAsync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothL2CAPChannelWriteAsync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1584,13 +1876,18 @@ extern IOReturn IOBluetoothL2CAPChannelWriteAsync(IOBluetoothL2CAPChannelRef l2c
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU. This method may block if previous writes have not been delivered.
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
     @param		data	Pointer to the buffer containing the data to send.
     @param		length	The length of the given data buffer.
 	@result		Returns kIOReturnSuccess if the data was buffered successfully.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelWriteSync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn IOBluetoothL2CAPChannelWriteSync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1599,20 +1896,30 @@ extern IOReturn IOBluetoothL2CAPChannelWriteSync(IOBluetoothL2CAPChannelRef l2ca
     @discussion A newly opened L2CAP channel will not complete its configuration process until the client
                 that opened it registers an incoming data listener.  This prevents that case where incoming
                 data is received before the client is ready.  
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
     @param		listener	Callback function that gets called when new incoming data is received.
     @param		refCon 		Client-supplied reference that gets passed to the listener function.
 	@result		Returns kIOReturnSuccess if the listener is successfully registered.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelRegisterIncomingDataListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingDataListener listener, void *refCon);
+extern IOReturn IOBluetoothL2CAPChannelRegisterIncomingDataListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingDataListener listener, void *refCon) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothL2CAPChannelRegisterIncomingEventListener
-        @abstract Registers a callback for events. 
-        @discussion Registers a callback for events generated by the L2CAP channel. The form for the callback is:
+	@abstract	Registers a callback for events. 
+	@discussion Registers a callback for events generated by the L2CAP channel. The form for the callback is:
 
-					NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
         @param		l2capChannel (IOBluetoothRFCOMMChannelRef) The channel reference
         @param 		listener is the callback function.
         @param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as second parameter of
@@ -1620,81 +1927,113 @@ extern IOReturn IOBluetoothL2CAPChannelRegisterIncomingDataListener(IOBluetoothL
         @result An error code value. 0 if successful. 
 */
 
-extern IOReturn	IOBluetoothL2CAPChannelRegisterIncomingEventListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingEventListener listener, void *refCon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn	IOBluetoothL2CAPChannelRegisterIncomingEventListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingEventListener listener, void *refCon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetOutgoingMTU
 	@abstract	Returns the current outgoing MTU for the L2CAP channel.
     @discussion	The outgoing MTU represents the maximum L2CAP packet size for packets being sent to the remote device.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the current outgoing MTU for the L2CAP channel.
 */
 
-extern BluetoothL2CAPMTU IOBluetoothL2CAPChannelGetOutgoingMTU(IOBluetoothL2CAPChannelRef l2capChannel);
+extern BluetoothL2CAPMTU IOBluetoothL2CAPChannelGetOutgoingMTU(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetIncomingMTU
 	@abstract	Returns the current incoming MTU for the L2CAP channel.
     @discussion	The incoming MTU represents the maximum L2CAP packet size for packets being sent by the remote device.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the current incoming MTU for the L2CAP channel.
 */
 
-extern BluetoothL2CAPMTU IOBluetoothL2CAPChannelGetIncomingMTU(IOBluetoothL2CAPChannelRef l2capChannel);
+extern BluetoothL2CAPMTU IOBluetoothL2CAPChannelGetIncomingMTU(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetDevice
 	@abstract	Returns the IOBluetoothDevice to which the target L2CAP channel is open.
+    @discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the IOBluetoothDevice to which the target L2CAP channel is open.  The caller
                 does NOT need to release the returned IOBluetoothDeviceRef.
 */
 
-extern IOBluetoothDeviceRef IOBluetoothL2CAPChannelGetDevice(IOBluetoothL2CAPChannelRef l2capChannel);
+extern IOBluetoothDeviceRef IOBluetoothL2CAPChannelGetDevice(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetPSM
 	@abstract	Returns the PSM for the target L2CAP channel.
+    @discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the PSM for the target L2CAP channel.
 */
 
-extern BluetoothL2CAPPSM IOBluetoothL2CAPChannelGetPSM(IOBluetoothL2CAPChannelRef l2capChannel);
+extern BluetoothL2CAPPSM IOBluetoothL2CAPChannelGetPSM(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetLocalChannelID
 	@abstract	Returns the local L2CAP channel ID for the target L2CAP channel.
+    @discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the local L2CAP channel ID for the target L2CAP channel.
 */
 
-extern BluetoothL2CAPChannelID IOBluetoothL2CAPChannelGetLocalChannelID(IOBluetoothL2CAPChannelRef l2capChannel);
+extern BluetoothL2CAPChannelID IOBluetoothL2CAPChannelGetLocalChannelID(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelGetRemoteChannelID
 	@abstract	Returns the remote L2CAP channel ID for the target L2CAP channel.
+    @discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns the remote L2CAP channel ID for the target L2CAP channel.
 */
 
-extern BluetoothL2CAPChannelID IOBluetoothL2CAPChannelGetRemoteChannelID(IOBluetoothL2CAPChannelRef l2capChannel);
+extern BluetoothL2CAPChannelID IOBluetoothL2CAPChannelGetRemoteChannelID(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelIsIncoming
 	@abstract	Returns TRUE if the channel is an incoming channel.
     @discussion	An incoming channel is one that was initiated by a remote device.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		l2capChannel	Target L2CAP channel ref
 	@result		Returns TRUE if the channel is an incoming channel.
 */
 
-extern Boolean IOBluetoothL2CAPChannelIsIncoming(IOBluetoothL2CAPChannelRef l2capChannel);
+extern Boolean IOBluetoothL2CAPChannelIsIncoming(IOBluetoothL2CAPChannelRef l2capChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //===========================================================================================================================
 // RFCOMM channel user client routines
@@ -1903,6 +2242,11 @@ typedef void (*IOBluetoothRFCOMMChannelIncomingEventListener)(IOBluetoothRFCOMMC
                 Because a new IOBluetoothRFCOMMChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothRFCOMMChannelRef
                 (by calling IOBluetoothObjectRelease()).
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		channelID		The RFCOMM channel ID for the new channel.
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
@@ -1928,6 +2272,11 @@ extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
@@ -1939,7 +2288,7 @@ extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice
 	@result		Returns kIOReturnSuccess if the open process was successfully started .
 */
 
-IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1955,6 +2304,11 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, 
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
@@ -1966,7 +2320,7 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, 
 	@result		Returns kIOReturnSuccess if the open process was successfully started .
 */
 
-IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 #if 0
@@ -1980,13 +2334,18 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, I
 	@abstract	Returns the IOBluetoothRFCOMMChannelRef with the given IOBluetoothObjectID.
     @discussion	The IOBluetoothObjectID can be used as a global reference for a given IOBluetoothRFCOMMChannelRef.  It allows
 				two separate applications to refer to the same IOBluetoothRFCOMMChannelRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		objectID	IOBluetoothObjectID of the desired IOBluetoothRFCOMMChannelRef
 	@result		Returns the IOBluetoothRFCOMMChannelRef that matches the given IOBluetoothObjectID if one exists.  The 
 				resulting IOBluetoothRFCOMMChannelRef must be released by the caller by calling IOBluetoothObjectRelease.
 				If no matching RFCOMM channel exists, NULL is returned.
 */
 
-extern IOBluetoothRFCOMMChannelRef IOBluetoothRFCOMMChannelCreateFromObjectID( IOBluetoothObjectID objectID );
+extern IOBluetoothRFCOMMChannelRef IOBluetoothRFCOMMChannelCreateFromObjectID( IOBluetoothObjectID objectID ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1994,20 +2353,28 @@ extern IOBluetoothRFCOMMChannelRef IOBluetoothRFCOMMChannelCreateFromObjectID( I
 	@abstract	Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannelRef.
     @discussion	The IOBluetoothObjectID can be used as a global reference for a given IOBluetoothRFCOMMChannelRef.  It allows
 				two separate applications to refer to the same IOBluetoothRFCOMMChannelRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
     @param		rfcommChannel	Target IOBluetoothRFCOMMChannelRef
 	@result		Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannelRef.
 */
 
-extern IOBluetoothObjectID IOBluetoothRFCOMMChannelGetObjectID( IOBluetoothRFCOMMChannelRef rfcommChannel );
+extern IOBluetoothObjectID IOBluetoothRFCOMMChannelGetObjectID( IOBluetoothRFCOMMChannelRef rfcommChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelCloseChannel
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
 	@result		An error code value. 0 if successful.
 	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn	IOBluetoothRFCOMMChannelCloseChannel(IOBluetoothRFCOMMChannelRef rfcommChannel);
+extern IOReturn	IOBluetoothRFCOMMChannelCloseChannel(IOBluetoothRFCOMMChannelRef rfcommChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelIsOpen
@@ -2015,21 +2382,29 @@ extern IOReturn	IOBluetoothRFCOMMChannelCloseChannel(IOBluetoothRFCOMMChannelRef
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
 	@result		true if the channel is open false if the channel is not open.
 	@discussion	note that "not open" means closed, opening and closing
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern Boolean IOBluetoothRFCOMMChannelIsOpen(IOBluetoothRFCOMMChannelRef rfcommChannel);
+extern Boolean IOBluetoothRFCOMMChannelIsOpen(IOBluetoothRFCOMMChannelRef rfcommChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelGetMTU
 	@abstract	
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
 	@result		Channel MTU size.
-        @discussion Returns the length of the largest chunk of data that this channel can carry. If the
-        caller wishes to use the write:length:sleep: api the length of the data can not be bigger than
-        the channel MTU (maximum transfer unit).	
+	@discussion Returns the length of the largest chunk of data that this channel can carry. If the
+				caller wishes to use the write:length:sleep: api the length of the data can not be bigger than
+				the channel MTU (maximum transfer unit).	
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern BluetoothRFCOMMMTU IOBluetoothRFCOMMChannelGetMTU( IOBluetoothRFCOMMChannelRef rfcommChannel );
+extern BluetoothRFCOMMMTU IOBluetoothRFCOMMChannelGetMTU( IOBluetoothRFCOMMChannelRef rfcommChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //-------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelIsTransmissionPaused
@@ -2039,9 +2414,13 @@ extern BluetoothRFCOMMMTU IOBluetoothRFCOMMChannelGetMTU( IOBluetoothRFCOMMChann
 	@discussion Returns true if the remote device flow control is stopping out transmission. This is
                 useful because we do not buffer data, we stop the transmitting actor. With this method
                 the transmitter can check if sending data is going to be successful or is going to block. 
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern Boolean IOBluetoothRFCOMMChannelIsTransmissionPaused( IOBluetoothRFCOMMChannelRef rfcommChannel ); 
+extern Boolean IOBluetoothRFCOMMChannelIsTransmissionPaused( IOBluetoothRFCOMMChannelRef rfcommChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER; 
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelGetChannelID
@@ -2049,22 +2428,29 @@ extern Boolean IOBluetoothRFCOMMChannelIsTransmissionPaused( IOBluetoothRFCOMMCh
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
 	@result		the RFCOMM channel number for this channel.
 	@discussion	Returns the RFCOMM channel number for a given IOBluetoothRFCOMMChannelRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern BluetoothRFCOMMChannelID IOBluetoothRFCOMMChannelGetChannelID( IOBluetoothRFCOMMChannelRef rfcommChannel );
+extern BluetoothRFCOMMChannelID IOBluetoothRFCOMMChannelGetChannelID( IOBluetoothRFCOMMChannelRef rfcommChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWrite
 	@abstract	Write data to a RFCOMM channel synchronusly.
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-        @param 		data is a pointer to the data buffer to be sent.
-        @param 		length the length of the buffer to be sent (in bytes).
-        @param 		sleepFlag is a boolean if set to TRUE the call will wait until it is possible to send data.
-                        If set to FALSE and it is not possible to send data the method will return immediately with an
-                        error
+	@param 		data is a pointer to the data buffer to be sent.
+	@param 		length the length of the buffer to be sent (in bytes).
+	@param 		sleepFlag is a boolean if set to TRUE the call will wait until it is possible to send data.
+				If set to FALSE and it is not possible to send data the method will return immediately with an error
 	@result		An error code value. 0 if successful.
-        @discussion Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
-        If the return value is an error condition none of the data was sent.
+	@discussion Sends data through the channel. The number of bytes to be sent must not exceed the channel MTU. 
+				If the return value is an error condition none of the data was sent.
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn	IOBluetoothRFCOMMChannelWrite(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, Boolean sleepFlag) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
@@ -2077,13 +2463,17 @@ extern IOReturn	IOBluetoothRFCOMMChannelWrite(IOBluetoothRFCOMMChannelRef rfcomm
 	@param 		length the length of the buffer to be sent (in bytes).
 	@param		refcon a NON NULL value that will be contained in the return event (once the data is sent).
 	@result		An error code value. 0 if successful.
-	@discussion	Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
+	@discussion	Sends data through the channel. The number of bytes to be sent must not exceed the channel MTU. 
 				If the return value is an error condition none of the data was sent.
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWriteSync
@@ -2093,26 +2483,34 @@ extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef r
 	@param 		length the length of the buffer to be sent (in bytes).
 	@param		refcon a NON NULL value that will be contained in the return event (once the data is sent).
 	@result		An error code value. 0 if successful.
-	@discussion	Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
+	@discussion	Sends data through the channel. The number of bytes to be sent must not exceed the channel MTU. 
 				If the return value is an error condition none of the data was sent.
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn	IOBluetoothRFCOMMChannelWriteSync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
+extern IOReturn	IOBluetoothRFCOMMChannelWriteSync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWriteSimple
 	@abstract	
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-        @param data a pointer to the data buffer to be sent.
-        @param length the length of the buffer to be sent (in bytes).
-        @param sleepFlag a boolean if set to true the call will wait until it is possible to send all the data.
-        @param a UInt32 pointer in which the caller received the nuber of bytes sent.
-        If set to FALSE and it is not possible to send part of the data the method will return immediately.
-        @result An error code value. 0 if successful.
-        @discussion Sends data tough the channel. The number of bytes to be sent is arbitrary. The caller
-        does not have to worry about the MTU. 
+	@param		data a pointer to the data buffer to be sent.
+	@param		length the length of the buffer to be sent (in bytes).
+	@param		sleepFlag a boolean if set to true the call will wait until it is possible to send all the data.
+	@param		a UInt32 pointer in which the caller received the nuber of bytes sent.
+				If set to FALSE and it is not possible to send part of the data the method will return immediately.
+	@result		An error code value. 0 if successful.
+	@discussion	Sends data through the channel. The number of bytes to be sent is arbitrary. The caller
+				does not have to worry about the MTU. 
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn IOBluetoothRFCOMMChannelWriteSimple(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, Boolean sleepFlag, UInt32 *numBytesSent) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
@@ -2126,20 +2524,28 @@ extern IOReturn IOBluetoothRFCOMMChannelWriteSimple(IOBluetoothRFCOMMChannelRef 
 	@param		parity	
 	@param		bitStop			
 	@result		An error code value. 0 if successful.	
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn IOBluetoothRFCOMMSetSerialParameters(IOBluetoothRFCOMMChannelRef rfcommChannel, UInt32 speed, UInt8 nBits, BluetoothRFCOMMParityType parity, UInt8 bitStop);
+extern IOReturn IOBluetoothRFCOMMSetSerialParameters(IOBluetoothRFCOMMChannelRef rfcommChannel, UInt32 speed, UInt8 nBits, BluetoothRFCOMMParityType parity, UInt8 bitStop) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelGetDevice
 	@abstract	
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-        @result		A reference to the device where this RFCOMM channel was open. 0 if unsuccessful.  The caller does NOT
-                    need to release the returned IOBluetoothDeviceRef.
+	@result		A reference to the device where this RFCOMM channel was open. 0 if unsuccessful.  The caller does NOT
+				need to release the returned IOBluetoothDeviceRef.
 	@discussion	
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothDeviceRef IOBluetoothRFCOMMChannelGetDevice(IOBluetoothRFCOMMChannelRef rfcommChannel);
+extern IOBluetoothDeviceRef IOBluetoothRFCOMMChannelGetDevice(IOBluetoothRFCOMMChannelRef rfcommChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -2148,68 +2554,87 @@ extern IOBluetoothDeviceRef IOBluetoothRFCOMMChannelGetDevice(IOBluetoothRFCOMMC
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
 	@param 		lineStatus the error type. The error code can be NoError, OverrunError, ParityError or FramingError.							
 	@result		An error code value. 0 if successful.	
+	@discussion	
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn IOBluetoothRFCOMMSendRemoteLineStatus( IOBluetoothRFCOMMChannelRef rfcommChannel , BluetoothRFCOMMLineStatus lineStatus);
+extern IOReturn IOBluetoothRFCOMMSendRemoteLineStatus( IOBluetoothRFCOMMChannelRef rfcommChannel , BluetoothRFCOMMLineStatus lineStatus) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelRegisterIncomingDataListener
 	@abstract	
-        @discussion Registers a callback for the incoming data. The form for the callback is:
-        
-        <br>void function(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refCon)<br>
-        
-        where rfcommChannel is the refernce to the channel that received data, data is a buffer with the received data, length is the buffer length
-        (in bytes) and refCon is a user defined void* (maybe the reference to the object to call back ?).
-        
+	@discussion Registers a callback for the incoming data. The form for the callback is:
+	
+				<br>void function(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refCon)<br>
+	
+				where rfcommChannel is the refernce to the channel that received data, data is a buffer with the received data, length is the buffer length
+				(in bytes) and refCon is a user defined void* (maybe the reference to the object to call back ?).
+
+				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-        @param 		listener is the callback function.
-        @param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as last parameter of
-                        the callback function.
-        @result An error code value. 0 if successful. 	
+	@param 		listener is the callback function.
+	@param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as last parameter of
+				the callback function.
+	@result		An error code value. 0 if successful. 	
 */
 
 extern IOReturn	IOBluetoothRFCOMMChannelRegisterIncomingDataListener(IOBluetoothRFCOMMChannelRef rfcommChannel, IOBluetoothRFCOMMChannelIncomingDataListener listener, void *refCon) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelRegisterIncomingEventListener
-        @abstract Registers a callback for events. 
-        @discussion Registers a callback for events generated by the RFCOMM channel. The form for the callback is:
-        
-        <br>void function(IOBluetoothRFCOMMChannelRef rfcommChannel, void *refCon, IOBluetoothRFCOMMChannelEvent *event)<br>
-        
-        where rfcommChannel is the refernce to the channel that generated the event, refCon is a user defined void* (maybe the reference to the object to
-        call back ?) and event is the generated event. There are three types of events available:
-    
-        <br>
-        kIOBluetoothRFCOMMNewDataEvent when new data is received.<br>
-        kIOBluetoothRFCOMMFlowControlChangedEvent change of flow control.<br>
-        kIOBluetoothRFCOMMChannelTerminatedEvent when the rfcomm channel is no more valid.<br>
-        <br>
-        
-        Note that the kIOBluetoothRFCOMMNewDataEvent provides the same functionality
-        of the data listener callback. This means that if the developer has both an event callback and a datalistener callback both
-        functions will be called when new data arrives. It is up to the developer to properly filter the events (or better to use only
-        one callback). For a better descriptions of the events and the event structure see IOBluetoothUserLib.h.
-        @param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference
-        @param 		listener is the callback function.
-        @param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as second parameter of
-                        the callback function.
-        @result An error code value. 0 if successful. 
+	@abstract	Registers a callback for events. 
+	@discussion	Registers a callback for events generated by the RFCOMM channel. The form for the callback is:
+	
+				<br>void function(IOBluetoothRFCOMMChannelRef rfcommChannel, void *refCon, IOBluetoothRFCOMMChannelEvent *event)<br>
+				
+				where rfcommChannel is the refernce to the channel that generated the event, refCon is a user defined void* (maybe the reference to the object to
+				call back ?) and event is the generated event. There are three types of events available:
+
+				<br>
+				kIOBluetoothRFCOMMNewDataEvent when new data is received.<br>
+				kIOBluetoothRFCOMMFlowControlChangedEvent change of flow control.<br>
+				kIOBluetoothRFCOMMChannelTerminatedEvent when the rfcomm channel is no more valid.<br>
+				<br>
+				
+				Note that the kIOBluetoothRFCOMMNewDataEvent provides the same functionality
+				of the data listener callback. This means that if the developer has both an event callback and a datalistener callback both
+				functions will be called when new data arrives. It is up to the developer to properly filter the events (or better to use only
+				one callback). For a better descriptions of the events and the event structure see IOBluetoothUserLib.h.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
+	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference
+	@param 		listener is the callback function.
+	@param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as second parameter of
+				the callback function.
+	@result		An error code value. 0 if successful. 
 */
 
 
-extern IOReturn	IOBluetoothRFCOMMChannelRegisterIncomingEventListener(IOBluetoothRFCOMMChannelRef rfcommChannel, IOBluetoothRFCOMMChannelIncomingEventListener listener, void *refCon);
+extern IOReturn	IOBluetoothRFCOMMChannelRegisterIncomingEventListener(IOBluetoothRFCOMMChannelRef rfcommChannel, IOBluetoothRFCOMMChannelIncomingEventListener listener, void *refCon) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelIsIncoming
-        @abstract 	Returns the direction of the channel.  An incoming channel is one that was opened by the remote
-                    device.
-        @param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-        @result 	Returns TRUE if the channel was opened by the remote device, FALSE if the channel was opened by this object.
+	@abstract 	Returns the direction of the channel.  An incoming channel is one that was opened by the remote
+				device.
+	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
+	@result 	Returns TRUE if the channel was opened by the remote device, FALSE if the channel was opened by this object.
+	@discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
 */
 
-extern Boolean IOBluetoothRFCOMMChannelIsIncoming(IOBluetoothRFCOMMChannelRef rfcommChannel);
+extern Boolean IOBluetoothRFCOMMChannelIsIncoming(IOBluetoothRFCOMMChannelRef rfcommChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -2287,69 +2712,95 @@ extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRec
 #endif
 
 /*!
-    @function IOBluetoothSDPUUIDCreateWithBytes
-    @abstract Creates a new IOBluetoothSDPUUIDRef  with the given bytes of the given length.
+    @function	IOBluetoothSDPUUIDCreateWithBytes
+    @abstract	Creates a new IOBluetoothSDPUUIDRef  with the given bytes of the given length.
     @discussion If the length is invalid for a UUID, NULL is returned.
-    @param bytes An array of bytes representing the UUID.
-    @param length The length of the array of bytes.
-    @result Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
-            IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
+    @param		bytes An array of bytes representing the UUID.
+    @param		length The length of the array of bytes.
+    @result		Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
+				IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateWithBytes(const void *bytes, UInt8 length);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateWithBytes(const void *bytes, UInt8 length)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDCreateWithData
-    @abstract Creates a new IOBluetoothSDPUUIDRef from the given CFDataRef.
-    @discussion If the length of the CFDataRef is invalid for a UUID, NULL is returned.
-    @param data The CFDataRef containing the UUID bytes.
-    @result Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
-            IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+    @function	IOBluetoothSDPUUIDCreateWithData
+    @abstract	Creates a new IOBluetoothSDPUUIDRef from the given CFDataRef.
+    @discussion	If the length of the CFDataRef is invalid for a UUID, NULL is returned.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
+    @param		data The CFDataRef containing the UUID bytes.
+    @result		Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
+				IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateWithData(CFDataRef data);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateWithData(CFDataRef data)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDCreateUUID16
-    @abstract Creates a new 16-bit IOBluetoothSDPUUIDRef with the given UUID16
-    @param uuid16 A scalar representing a 16-bit UUID
-    @result Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
-            IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+    @function	IOBluetoothSDPUUIDCreateUUID16
+    @abstract	Creates a new 16-bit IOBluetoothSDPUUIDRef with the given UUID16
+    @param		uuid16 A scalar representing a 16-bit UUID
+    @result		Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
+				IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateUUID16(BluetoothSDPUUID16 uuid16);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateUUID16(BluetoothSDPUUID16 uuid16)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDCreateUUID32
-    @abstract Creates a new 32-bit IOBluetoothSDPUUIDRef with the given UUID32
-    @param uuid32 A scalar representing a 32-bit UUID
-    @result Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
-            IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+    @function	IOBluetoothSDPUUIDCreateUUID32
+    @abstract	Creates a new 32-bit IOBluetoothSDPUUIDRef with the given UUID32
+    @param		uuid32 A scalar representing a 32-bit UUID
+    @result		Returns the new IOBluetoothSDPUUIDRef or NULL on failure.  The caller MUST release the returned
+				IOBluetoothSDPUUIDRef by calling IOBluetoothObjectRelease().
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateUUID32(BluetoothSDPUUID32 uuid32);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDCreateUUID32(BluetoothSDPUUID32 uuid32)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDGetBytes
-    @abstract Returns a pointer to the array of UUID bytes.
-    @param uuid The target IOBluetoothSDPUUIDRef
-    @result Returns a pointer to the array of UUID bytes.
+    @function	IOBluetoothSDPUUIDGetBytes
+    @abstract	Returns a pointer to the array of UUID bytes.
+    @param		uuid The target IOBluetoothSDPUUIDRef
+    @result		Returns a pointer to the array of UUID bytes.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern const void *IOBluetoothSDPUUIDGetBytes(IOBluetoothSDPUUIDRef uuid);
+extern const void *IOBluetoothSDPUUIDGetBytes(IOBluetoothSDPUUIDRef uuid)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDGetLength
-    @abstract Returns the length (in bytes) of the UUID.
-    @param uuid The target IOBluetoothSDPUUIDRef
-    @result Returns the length (in bytes) of the UUID.
+    @function	IOBluetoothSDPUUIDGetLength
+    @abstract	Returns the length (in bytes) of the UUID.
+    @param		uuid The target IOBluetoothSDPUUIDRef
+    @result		Returns the length (in bytes) of the UUID.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern UInt8 IOBluetoothSDPUUIDGetLength(IOBluetoothSDPUUIDRef uuid);
+extern UInt8 IOBluetoothSDPUUIDGetLength(IOBluetoothSDPUUIDRef uuid)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDGetUUIDWithLength
-    @abstract Returns an IOBluetoothSDPUUIDRef matching the target UUID, but with the given number of bytes.
+    @function	IOBluetoothSDPUUIDGetUUIDWithLength
+    @abstract	Returns an IOBluetoothSDPUUIDRef matching the target UUID, but with the given number of bytes.
     @discussion If the target IOBluetoothSDPUUIDRef is the same length as newLength, it returns the
                 IOBluetoothSDPUUIDRef itself.  If newLength is greater it creates a new IOBluetoothSDPUUIDRef 
                 with the correct value for the given length.  If newLength is smaller, it will attempt to create 
@@ -2358,25 +2809,35 @@ extern UInt8 IOBluetoothSDPUUIDGetLength(IOBluetoothSDPUUIDRef uuid);
                 
                 Because this function creates a new IOBluetoothSDPUUIDRef to be returned, the caller is
                 responsible for calling IOBluetoothObjectRelease() on the returned IOBluetoothSDPUUIDRef.
-    @param uuid The target IOBluetoothSDPUUIDRef
-    @param newLength The desired length for the UUID. 
-    @result Returns an IOBluetoothSDPUUIDRef with the same data as the target but with the given length if it
-            is possible to do so.  Otherwise, NULL is returned.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		uuid The target IOBluetoothSDPUUIDRef
+    @param		newLength The desired length for the UUID. 
+    @result		Returns an IOBluetoothSDPUUIDRef with the same data as the target but with the given length if it
+				is possible to do so.  Otherwise, NULL is returned.
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDGetUUIDWithLength(IOBluetoothSDPUUIDRef uuid, UInt8 newLength);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPUUIDGetUUIDWithLength(IOBluetoothSDPUUIDRef uuid, UInt8 newLength)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPUUIDIsEqualToUUID
-    @abstract Compares the two IOBluetoothSDPUUIDRefs.
+    @function	IOBluetoothSDPUUIDIsEqualToUUID
+    @abstract	Compares the two IOBluetoothSDPUUIDRefs.
     @discussion This function will compare the two UUID values independent of their length.
-    @param uuid1 The first IOBluetoothSDPUUIDRef to be compared.
-    @param uuid2 The second IOBluetoothSDPUUIDRef to be compared.
-    @result Returns TRUE if the UUID values of each IOBluetoothSDPUUIDRef are equal.  This includes the case 
-            where the sizes are different but the data itself is the same when the Bluetooth UUID base is applied.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		uuid1 The first IOBluetoothSDPUUIDRef to be compared.
+    @param		uuid2 The second IOBluetoothSDPUUIDRef to be compared.
+    @result		Returns TRUE if the UUID values of each IOBluetoothSDPUUIDRef are equal.  This includes the case 
+				where the sizes are different but the data itself is the same when the Bluetooth UUID base is applied.
 */
 
-extern Boolean IOBluetoothSDPUUIDIsEqualToUUID(IOBluetoothSDPUUIDRef uuid1, IOBluetoothSDPUUIDRef uuid2);
+extern Boolean IOBluetoothSDPUUIDIsEqualToUUID(IOBluetoothSDPUUIDRef uuid1, IOBluetoothSDPUUIDRef uuid2)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -2384,115 +2845,157 @@ extern Boolean IOBluetoothSDPUUIDIsEqualToUUID(IOBluetoothSDPUUIDRef uuid1, IOBl
 #endif
 
 /*!
-    @function IOBluetoothSDPDataElementGetTypeDescriptor
-    @abstract Returns the SDP spec defined data element type descriptor for the target data element.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns the type descriptor for the target data element.
+    @function	IOBluetoothSDPDataElementGetTypeDescriptor
+    @abstract	Returns the SDP spec defined data element type descriptor for the target data element.
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @result		Returns the type descriptor for the target data element.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern BluetoothSDPDataElementTypeDescriptor IOBluetoothSDPDataElementGetTypeDescriptor(IOBluetoothSDPDataElementRef dataElement);
+extern BluetoothSDPDataElementTypeDescriptor IOBluetoothSDPDataElementGetTypeDescriptor(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
     @function IOBluetoothSDPDataElementGetSizeDescriptor
     @abstract Returns the SDP spec defined data element size descriptor for the target data element.
     @param	dataElement The target IOBluetoothSDPDataElementRef.
     @result Returns the size descriptor for the target data element.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern BluetoothSDPDataElementSizeDescriptor IOBluetoothSDPDataElementGetSizeDescriptor(IOBluetoothSDPDataElementRef dataElement);
+extern BluetoothSDPDataElementSizeDescriptor IOBluetoothSDPDataElementGetSizeDescriptor(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetSize
-    @abstract Returns the size in bytes of the target data element.
+    @function	IOBluetoothSDPDataElementGetSize
+    @abstract	Returns the size in bytes of the target data element.
     @discussion The size is valid whether the data element has a fixed or variable size descriptor.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns the size in bytes of the target data element.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @result		Returns the size in bytes of the target data element.
 */
 
-extern UInt32 IOBluetoothSDPDataElementGetSize(IOBluetoothSDPDataElementRef dataElement);
+extern UInt32 IOBluetoothSDPDataElementGetSize(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetNumberValue
-    @abstract If the data element is represented by a number, it returns the value as an CFNumberRef.
+    @function	IOBluetoothSDPDataElementGetNumberValue
+    @abstract	If the data element is represented by a number, it returns the value as an CFNumberRef.
     @discussion The data types represented by a number are 1 (unsigned int), 2 (signed int) and 5 (boolean) 
                 except for 128-bit versions of 1 and 2.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns an CFNumberRef representation of the data element if it is a numeric type.  The caller is
-            NOT responsible for releasing the returned CFNumberRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+	
+    @result		Returns an CFNumberRef representation of the data element if it is a numeric type.  The caller is
+				NOT responsible for releasing the returned CFNumberRef.
 */
 
-extern CFNumberRef IOBluetoothSDPDataElementGetNumberValue(IOBluetoothSDPDataElementRef dataElement);
+extern CFNumberRef IOBluetoothSDPDataElementGetNumberValue(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetDataValue
-    @abstract If the data element is represented by a data object, it returns the value as an CFDataRef.
+    @function	IOBluetoothSDPDataElementGetDataValue
+    @abstract	If the data element is represented by a data object, it returns the value as an CFDataRef.
     @discussion The data types represented by a data object are 128-bit versions of 1 (unsigned int) and 
                 2 (signed int).
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns an CFDataRef representation of the data element if it is a 128-bit number.  The caller is
-            NOT responsible for releasing the returned IOBluetoothSDPDataElementRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+	
+    @result		Returns an CFDataRef representation of the data element if it is a 128-bit number.  The caller is
+				NOT responsible for releasing the returned IOBluetoothSDPDataElementRef.
 */
 
-extern CFDataRef IOBluetoothSDPDataElementGetDataValue(IOBluetoothSDPDataElementRef dataElement);
+extern CFDataRef IOBluetoothSDPDataElementGetDataValue(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetStringValue
-    @abstract If the data element is represented by a string object, it returns the value as a CFStringRef.
+    @function	IOBluetoothSDPDataElementGetStringValue
+    @abstract	If the data element is represented by a string object, it returns the value as a CFStringRef.
     @discussion The data types represented by a string object are 4 (text string) and 8 (URL).
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns a CFStringRef representation of the data element if it is a text or URL type.  The caller is
-            NOT responsible for releasing the returned CFStringRef.
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @result		Returns a CFStringRef representation of the data element if it is a text or URL type.  The caller is
+				NOT responsible for releasing the returned CFStringRef.
 */
 
-extern CFStringRef IOBluetoothSDPDataElementGetStringValue(IOBluetoothSDPDataElementRef dataElement);
+extern CFStringRef IOBluetoothSDPDataElementGetStringValue(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetArrayValue
-    @abstract If the data element is represented by an array object, it returns the value as a CFArrayRef.
+    @function	IOBluetoothSDPDataElementGetArrayValue
+    @abstract	If the data element is represented by an array object, it returns the value as a CFArrayRef.
     @discussion The data types represented by an array object are 6 (data element sequence) and 7 (data
                 element alternative).
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns a CFArrayRef representation of the data element if it is a sequence type.  The caller is
-            NOT responsible for releasing the returned CFArrayRef.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @result		Returns a CFArrayRef representation of the data element if it is a sequence type.  The caller is
+				NOT responsible for releasing the returned CFArrayRef.
 */
 
-extern CFArrayRef IOBluetoothSDPDataElementGetArrayValue(IOBluetoothSDPDataElementRef dataElement);
+extern CFArrayRef IOBluetoothSDPDataElementGetArrayValue(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementGetUUIDValue
-    @abstract If the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUIDRef.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @result Returns an IOBluetoothSDPUUIDRef representation of the data element if it is a UUID.  The caller is
-            NOT responsible for releasing the returned IOBluetoothSDPUUIDRef.
+    @function	IOBluetoothSDPDataElementGetUUIDValue
+    @abstract	If the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUIDRef.
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @result		Returns an IOBluetoothSDPUUIDRef representation of the data element if it is a UUID.  The caller is
+				NOT responsible for releasing the returned IOBluetoothSDPUUIDRef.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothSDPUUIDRef IOBluetoothSDPDataElementGetUUIDValue(IOBluetoothSDPDataElementRef dataElement);
+extern IOBluetoothSDPUUIDRef IOBluetoothSDPDataElementGetUUIDValue(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementContainsDataElement
-    @abstract Checks to see if the target data element is the same as the dataElement parameter or if it contains
+    @function	IOBluetoothSDPDataElementContainsDataElement
+    @abstract	Checks to see if the target data element is the same as the dataElement parameter or if it contains
                 the dataElement parameter (if its a sequence type).
     @discussion If the target data element is not a sequence type, this method simply compares the two data elements.  If
                 it is a sequence type, it will search through the sequence (and sub-sequences) for the dataElement
                 parameter.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @param	subDataElement The data element to compare with (and search for). 
-    @result Returns TRUE if the target either matches the given data element or if it contains the given data element.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+   @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @param		subDataElement The data element to compare with (and search for). 
+    @result		Returns TRUE if the target either matches the given data element or if it contains the given data element.
 */
 
-extern Boolean IOBluetoothSDPDataElementContainsDataElement(IOBluetoothSDPDataElementRef dataElement, IOBluetoothSDPDataElementRef subDataElement);
+extern Boolean IOBluetoothSDPDataElementContainsDataElement(IOBluetoothSDPDataElementRef dataElement, IOBluetoothSDPDataElementRef subDataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPDataElementIsEqualToDataElement
-    @abstract Compares the target data element with the given object.
+    @function	IOBluetoothSDPDataElementIsEqualToDataElement
+    @abstract	Compares the target data element with the given object.
     @discussion This method will compare a data element with either another data element or a data element value.
-    @param	dataElement The target IOBluetoothSDPDataElementRef.
-    @param	dataElement2 The IOBluetoothSDPDataElementRef to compare the target to.
-    @result Returns TRUE if the target data element is the same as the given object or if it's value matches the
-            given object.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		dataElement The target IOBluetoothSDPDataElementRef.
+    @param		dataElement2 The IOBluetoothSDPDataElementRef to compare the target to.
+    @result		Returns TRUE if the target data element is the same as the given object or if it's value matches the
+				given object.
 */
 
-extern Boolean IOBluetoothSDPDataElementIsEqualToDataElement(IOBluetoothSDPDataElementRef dataElement, IOBluetoothSDPDataElementRef dataElement2);
+extern Boolean IOBluetoothSDPDataElementIsEqualToDataElement(IOBluetoothSDPDataElementRef dataElement, IOBluetoothSDPDataElementRef dataElement2)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -2500,107 +3003,146 @@ extern Boolean IOBluetoothSDPDataElementIsEqualToDataElement(IOBluetoothSDPDataE
 #endif
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetDevice
-    @abstract Returns the IOBluetoothDeviceRef that the target service belongs to.
+    @function	IOBluetoothSDPServiceRecordGetDevice
+    @abstract	Returns the IOBluetoothDeviceRef that the target service belongs to.
     @discussion If the service is a local service (i.e. one the current host is vending out), then NULL is returned.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @result Returns the IOBluetoothDeviceRef that the target service belongs to.  If the service is one the local host
-            is vending, then NULL is returned.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @result		Returns the IOBluetoothDeviceRef that the target service belongs to.  If the service is one the local host
+				is vending, then NULL is returned.
 */
 
-extern IOBluetoothDeviceRef IOBluetoothSDPServiceRecordGetDevice(IOBluetoothSDPServiceRecordRef serviceRecord);
+extern IOBluetoothDeviceRef IOBluetoothSDPServiceRecordGetDevice(IOBluetoothSDPServiceRecordRef serviceRecord)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetAttributes
-    @abstract Returns a CFDictionaryRef containing the attributes for the service.
+    @function	IOBluetoothSDPServiceRecordGetAttributes
+    @abstract	Returns a CFDictionaryRef containing the attributes for the service.
     @discussion The attribute dictionary is keyed off of the attribute id represented as a CFNumberRef.  The values
                 in the CFDictionaryRef are IOBluetoothSDPDataElementRefs representing the data element for the
                 given attribute.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @result Returns a CFDictionaryRef containing the attributes for the target service.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @result		Returns a CFDictionaryRef containing the attributes for the target service.
 */
 
-extern CFDictionaryRef IOBluetoothSDPServiceRecordGetAttributes(IOBluetoothSDPServiceRecordRef serviceRecord);
+extern CFDictionaryRef IOBluetoothSDPServiceRecordGetAttributes(IOBluetoothSDPServiceRecordRef serviceRecord)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetAttributeDataElement
-    @abstract Returns the data element for the given attribute ID in the target service.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @param	attributeID The attribute ID of the desired attribute.	 
-    @result Returns the data element for the given attribute ID in the target service.  If the service does not
-            contain an attribute with the given ID, then NULL is returned.
+    @function	IOBluetoothSDPServiceRecordGetAttributeDataElement
+    @abstract	Returns the data element for the given attribute ID in the target service.
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @param		attributeID The attribute ID of the desired attribute.	 
+    @result		Returns the data element for the given attribute ID in the target service.  If the service does not
+				contain an attribute with the given ID, then NULL is returned.
+    @discussion
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothSDPDataElementRef IOBluetoothSDPServiceRecordGetAttributeDataElement(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothSDPServiceAttributeID attributeID);
+extern IOBluetoothSDPDataElementRef IOBluetoothSDPServiceRecordGetAttributeDataElement(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothSDPServiceAttributeID attributeID)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetServiceName
-    @abstract Returns the name of the service.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @function	IOBluetoothSDPServiceRecordGetServiceName
+    @abstract	Returns the name of the service.
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
     @discussion This is currently implemented to simply return the attribute with an id of 0x0100.  In
                 the future, it will be extended to allow name localization based on the user's chosen
                 language or other languages.
-    @result Returns the name of the target service.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @result		Returns the name of the target service.
 */
 
-extern CFStringRef IOBluetoothSDPServiceRecordGetServiceName(IOBluetoothSDPServiceRecordRef serviceRecord);
+extern CFStringRef IOBluetoothSDPServiceRecordGetServiceName(IOBluetoothSDPServiceRecordRef serviceRecord)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetRFCOMMChannelID
-    @abstract Allows the discovery of the RFCOMM channel ID assigned to the service.
+    @function	IOBluetoothSDPServiceRecordGetRFCOMMChannelID
+    @abstract	Allows the discovery of the RFCOMM channel ID assigned to the service.
     @discussion This function will search through the ProtoclDescriptorList attribute to find an entry
                 with the RFCOMM UUID (UUID16: 0x0003).  If one is found, it gets the second element of
                 the data element sequence and sets the rfcommChannelID pointer to it.  The channel ID
                 only gets set when kIOReturnSuccess is returned.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @param	rfcommChannelID A pointer to the location that will get the found RFCOMM channel ID.
-    @result Returns kIOReturnSuccess if the channel ID is found.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @param		rfcommChannelID A pointer to the location that will get the found RFCOMM channel ID.
+    @result		Returns kIOReturnSuccess if the channel ID is found.
 */
 
-extern IOReturn IOBluetoothSDPServiceRecordGetRFCOMMChannelID(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothRFCOMMChannelID *channelID);
+extern IOReturn IOBluetoothSDPServiceRecordGetRFCOMMChannelID(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothRFCOMMChannelID *channelID)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetL2CAPPSM
-    @abstract Allows the discovery of the L2CAP PSM assigned to the service.
+    @function	IOBluetoothSDPServiceRecordGetL2CAPPSM
+    @abstract	Allows the discovery of the L2CAP PSM assigned to the service.
     @discussion This function will search through the ProtoclDescriptorList attribute to find an entry
                 with the L2CAP UUID (UUID16: 0x0100).  If one is found, it gets the second element of
                 the data element sequence and sets the outPSM pointer to it.  The PSM value
                 only gets set when kIOReturnSuccess is returned.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @param	outPSM A pointer to the location that will get the found L2CAP PSM.
-    @result Returns kIOReturnSuccess if the PSM is found.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+				
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @param		outPSM A pointer to the location that will get the found L2CAP PSM.
+    @result		Returns kIOReturnSuccess if the PSM is found.
 */
 
-extern IOReturn IOBluetoothSDPServiceRecordGetL2CAPPSM(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothL2CAPPSM *psm);
+extern IOReturn IOBluetoothSDPServiceRecordGetL2CAPPSM(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothL2CAPPSM *psm)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordGetServiceRecordHandle
-    @abstract Allows the discovery of the service record handle assigned to the service.
+    @function	IOBluetoothSDPServiceRecordGetServiceRecordHandle
+    @abstract	Allows the discovery of the service record handle assigned to the service.
     @discussion This method will search through the attributes to find the one representing the 
                 service record handle.  If one is found the outServiceRecordHandle param is set
                 with the value.  The outServiceRecordHandle value only gets set when kIOReturnSuccess 
                 is returned.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @param	outServiceRecordHandle A pointer to the location that will get the found service record handle.
-    @result	Returns kIOReturnSuccess if the service record handle is found.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @param		outServiceRecordHandle A pointer to the location that will get the found service record handle.
+    @result		Returns kIOReturnSuccess if the service record handle is found.
 */
 
-extern IOReturn IOBluetoothSDPServiceRecordGetServiceRecordHandle(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothSDPServiceRecordHandle *serviceRecordHandle);
+extern IOReturn IOBluetoothSDPServiceRecordGetServiceRecordHandle(IOBluetoothSDPServiceRecordRef serviceRecord, BluetoothSDPServiceRecordHandle *serviceRecordHandle)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
-    @function IOBluetoothSDPServiceRecordHasServiceFromArray
-    @abstract Returns TRUE if any one of the UUIDs in the given array is found in the target service.
+    @function	IOBluetoothSDPServiceRecordHasServiceFromArray
+    @abstract	Returns TRUE if any one of the UUIDs in the given array is found in the target service.
     @discussion The given array should contain IOBluetoothSDPUUIDRefs.  It is currently implemented
                 such that it returns TRUE if any of the UUIDs are found.  However in the future, it is likely
                 that this will change to more closely match the functionality in the SDP spec so that it only
                 returns TRUE if all of the given UUIDs are present.  That way, both AND and OR comparisons
                 can be implemented.  Please make a note of this potential change.
-    @param	serviceRecord The target IOBluetoothSDPServiceRecordRef
-    @param array An NSArray of IOBluetoothSDPUUIDRefs to search for in the target service.	 
-    @result Returns TRUE if any of the given UUIDs are present in the service.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
+
+    @param		serviceRecord The target IOBluetoothSDPServiceRecordRef
+    @param		array An NSArray of IOBluetoothSDPUUIDRefs to search for in the target service.	 
+    @result		Returns TRUE if any of the given UUIDs are present in the service.
 */
 
-extern Boolean IOBluetoothSDPServiceRecordHasServiceFromArray(IOBluetoothSDPServiceRecordRef serviceRecord, CFArrayRef array);
+extern Boolean IOBluetoothSDPServiceRecordHasServiceFromArray(IOBluetoothSDPServiceRecordRef serviceRecord, CFArrayRef array)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 #if 0
@@ -2887,9 +3429,13 @@ typedef void (*IOBluetoothDeviceInquiryCompleteCallback)( 	void * 						userRefC
 	@abstract	Returns a new inquiry object.
 	@param		inUserRefCon	Client-supplied refCon to be passed to the callback.
 	@result		Returns whether the inquiry was successfully created.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOBluetoothDeviceInquiryRef IOBluetoothDeviceInquiryCreateWithCallbackRefCon( void *		inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern IOBluetoothDeviceInquiryRef IOBluetoothDeviceInquiryCreateWithCallbackRefCon( void *		inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -2897,96 +3443,136 @@ extern IOBluetoothDeviceInquiryRef IOBluetoothDeviceInquiryCreateWithCallbackRef
 	@abstract	Frees the IOBluetoothDeviceInquiryRef. You do not need to do anything further with the inquiry after this.
 	@param		inRefCon	Client-supplied refCon to be passed to the callback.
 	@result		Returns whether the inquiry was successfully deleted.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn		IOBluetoothDeviceInquiryDelete( IOBluetoothDeviceInquiryRef inquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern IOReturn		IOBluetoothDeviceInquiryDelete( IOBluetoothDeviceInquiryRef inquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquiryStart
 	@abstract	Starts the inquiry using the IOBluetoothDeviceInquiryRef.
 	@result		Returns whether the inquiry was started with or without error.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern IOReturn		IOBluetoothDeviceInquiryStart( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern IOReturn		IOBluetoothDeviceInquiryStart( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquiryStop
 	@abstract	Stops the inquiry using the IOBluetoothDeviceInquiryRef.
 	@result		Returns whether the inquiry was stopped with or without error.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern	IOReturn	IOBluetoothDeviceInquiryStop( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern	IOReturn	IOBluetoothDeviceInquiryStop( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetStartedCallback
 	@abstract	Set the function callback that is invoked when the inquiry is started.
 	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryStartedCallback.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetStartedCallback(	IOBluetoothDeviceInquiryRef				inInquiryRef,
-																IOBluetoothDeviceInquiryStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																IOBluetoothDeviceInquiryStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetDeviceFoundCallback
 	@abstract	Set the function callback that is invoked when the inquiry finds a new device.
 	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryDeviceFoundCallback.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetDeviceFoundCallback(	IOBluetoothDeviceInquiryRef				inInquiryRef,
-																	IOBluetoothDeviceInquiryDeviceFoundCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																	IOBluetoothDeviceInquiryDeviceFoundCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetUpdatingNamesStartedCallback
 	@abstract	Set the function callback that is invoked when the inquiry begins to update device names (using remote name requests).
 	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryUpdatingNamesStartedCallback.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetUpdatingNamesStartedCallback(	IOBluetoothDeviceInquiryRef								inInquiryRef,
-																				IOBluetoothDeviceInquiryUpdatingNamesStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																				IOBluetoothDeviceInquiryUpdatingNamesStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetDeviceNameUpdatedCallback
 	@abstract	Set the function callback that is invoked when the inquiry updates a device name.
 	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryDeviceNameUpdatedCallback.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetDeviceNameUpdatedCallback(	IOBluetoothDeviceInquiryRef								inInquiryRef,
-																			IOBluetoothDeviceInquiryDeviceNameUpdatedCallback		callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																			IOBluetoothDeviceInquiryDeviceNameUpdatedCallback		callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetCompleteCallback
 	@abstract	Set the function callback that is invoked when the inquiry is complete.
 	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryCompleteCallback.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetCompleteCallback(	IOBluetoothDeviceInquiryRef					inInquiryRef,
-																	IOBluetoothDeviceInquiryCompleteCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																	IOBluetoothDeviceInquiryCompleteCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetUserRefCon
 	@abstract	Set the user reference constant that is provided to the callbacks when they are called.
 	@param		void *	A ptr to an object.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetUserRefCon(	IOBluetoothDeviceInquiryRef	inInquiryRef,
-															void * 						inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+															void * 						inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquiryGetUserRefCon
 	@abstract	Get the user reference constant.
 	@result		void *	A ptr to an object that was previously supplied with IOBluetoothDeviceInquirySetUserRefCon.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern void  *	IOBluetoothDeviceInquiryGetUserRefCon(	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern void  *	IOBluetoothDeviceInquiryGetUserRefCon(	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -3000,19 +3586,27 @@ extern void  *	IOBluetoothDeviceInquiryGetUserRefCon(	IOBluetoothDeviceInquiryRe
 				
 				Also note that this length value is only the amount of time the hardware spends "discovering" devices. The
 				total inquiry might take longer, however, if it is also updating device names.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetInquiryLength(	IOBluetoothDeviceInquiryRef	inInquiryRef,
-																int8_t						inSeconds )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																int8_t						inSeconds )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquiryGetInquiryLength
 	@abstract   Returns the number of seconds the search will be performed.
 	@result		Number of seconds the search will be performed.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern uint8_t IOBluetoothDeviceInquiryGetInquiryLength( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern uint8_t IOBluetoothDeviceInquiryGetInquiryLength( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -3020,35 +3614,51 @@ extern uint8_t IOBluetoothDeviceInquiryGetInquiryLength( 	IOBluetoothDeviceInqui
 	@abstract   Sets whether or not the inquiry object will retrieve the names of devices found during the search.
 	@param		inUpdateNames		Pass TRUE if names are to be updated, otherwise pass FALSE.
 	@discussion The default value for the inquiry object is TRUE, unless this method is used to change it.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern IOReturn 	IOBluetoothDeviceInquirySetUpdateNewDeviceNames( 	IOBluetoothDeviceInquiryRef	inInquiryRef,
-																		Boolean						inUpdateNames )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																		Boolean						inUpdateNames )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceInquirySetUpdateNewDeviceNames
 	@abstract	Returns whether or the inquiry object will perform remote name requests on found devices. 
 	@result		TRUE if the inquiry will get device name for found objects, FALSE if not.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern Boolean 	IOBluetoothDeviceInquiryGetUpdateNewDeviceNames( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern Boolean 	IOBluetoothDeviceInquiryGetUpdateNewDeviceNames( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothDeviceInquiryGetFoundDevices
 	@abstract   Returns found IOBluetoothDeviceRef objects as an array.
 	@result		Returns an CFArrayRef of IOBluetoothDeviceRef objects.
 	@discussion Will not return nil. If there are no devices found, returns an array with length of 0.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern	CFArrayRef	IOBluetoothDeviceInquiryGetFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern	CFArrayRef	IOBluetoothDeviceInquiryGetFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothDeviceInquiryClearFoundDevices
 	@abstract   Removes all found devices from the inquiry object.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-extern	IOReturn	IOBluetoothDeviceInquiryClearFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+extern	IOReturn	IOBluetoothDeviceInquiryClearFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothDeviceInquirySetSearchCriteria
@@ -3065,12 +3675,16 @@ extern	IOReturn	IOBluetoothDeviceInquiryClearFoundDevices( 	IOBluetoothDeviceInq
 										
 				However, we recommend only using this if you are certain of the device class you are looking for, as some
 				devices may report a different/unexpected device class, and the search may miss the device you are interested in.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 extern	IOReturn	IOBluetoothDeviceInquirySetSearchCriteria(	IOBluetoothDeviceInquiryRef		inInquiryRef,
 																BluetoothServiceClassMajor		inServiceClassMajor,
 																BluetoothDeviceClassMajor		inMajorDeviceClass,
-																BluetoothDeviceClassMinor		inMinorDeviceClass	)	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+																BluetoothDeviceClassMinor		inMinorDeviceClass	)	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 #if 0

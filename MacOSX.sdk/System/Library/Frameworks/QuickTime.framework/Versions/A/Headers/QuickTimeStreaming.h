@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1334,6 +1334,38 @@ QTSPresGetPicture(
   PicHandle *       outPicture)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  QTSPresSetVisualContext()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
+ *    Windows:          in QTSClient.lib 4.0 and later
+ */
+extern OSErr 
+QTSPresSetVisualContext(
+  QTSPresentation      inPresentation,
+  QTSStream            inStream,
+  QTVisualContextRef   inVisualContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QTSPresGetVisualContext()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
+ *    Windows:          in QTSClient.lib 4.0 and later
+ */
+extern OSErr 
+QTSPresGetVisualContext(
+  QTSPresentation       inPresentation,
+  QTSStream             inStream,
+  QTVisualContextRef *  outVisualContext)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
 /*-----------------------------------------
     Stream Sound Functions
 -----------------------------------------*/
@@ -1570,7 +1602,7 @@ struct QTSStatHelperRecord {
 typedef struct QTSStatHelperRecord      QTSStatHelperRecord;
 typedef QTSStatHelperRecord *           QTSStatHelper;
 enum {
-  kQTSInvalidStatHelper         = 0L
+  kQTSInvalidStatHelper         = 0
 };
 
 /* flags for QTSStatHelperNextParams */

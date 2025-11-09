@@ -75,11 +75,15 @@
 
 /* `fillMode' options. */
 
-CA_EXTERN NSString * const kCAFillModeForwards AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAFillModeBackwards AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAFillModeBoth AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAFillModeRemoved AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAFillModeForwards
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAFillModeBackwards
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAFillModeBoth
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAFillModeRemoved
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
-/* This will be removed before 10.5 ships. Replaced by kCAFillModeForwards. */
+/* Replaced by kCAFillModeForwards before 10.5 shipped. */
 
-CA_EXTERN NSString * const kCAFillModeFrozen AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER CA_DEPRECATED;
+CA_EXTERN NSString * const kCAFillModeFrozen CA_DEPRECATED;

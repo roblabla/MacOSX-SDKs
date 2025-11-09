@@ -26,6 +26,8 @@
 extern "C" {
 #endif
 
+extern const CFStringRef kICUTTypeRaw                                                 AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 //------------------------------------------------------------------------------------------------------------------------------
 
 ICAError        ICDAddImageInfoToNotificationDictionary( CFMutableDictionaryRef dict, UInt32 width, UInt32 height, UInt32 bytesPerRow, UInt32 dataStartRow, UInt32 dataNumberOfRows, UInt32 dataSize, void* dataBuffer );

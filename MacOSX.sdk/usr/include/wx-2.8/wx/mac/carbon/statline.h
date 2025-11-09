@@ -3,7 +3,7 @@
 // Purpose:     a generic wxStaticLine class used for mac before adaptation
 // Author:      Vadim Zeitlin
 // Created:     28.06.99
-// Version:     $Id: statline.h,v 1.7 2006/12/09 14:52:45 VZ Exp $
+// Version:     $Id: statline.h 43874 2006-12-09 14:52:59Z VZ $
 // Copyright:   (c) 1998 Vadim Zeitlin
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

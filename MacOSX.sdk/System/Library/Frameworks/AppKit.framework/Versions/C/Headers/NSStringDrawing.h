@@ -1,6 +1,6 @@
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2007, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2009, Apple Inc.  All rights reserved.
 
         Methods to deal with NSString drawing, measuring
    
@@ -43,7 +43,7 @@ typedef NSInteger NSStringDrawingOptions;
 */
 - (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(NSDictionary *)attributes;
 
- /* Calculates and returns bounding rect for the recceiver. The rect origin returned from this method is the first glyph origin.
+ /* Calculates and returns bounding rect for the receiver. The rect origin returned from this method is the first glyph origin.
 */
 - (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(NSDictionary *)attributes;
 @end

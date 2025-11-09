@@ -4,7 +4,7 @@
 // Author:      Ryan Norton
 // Modified by:
 // Created:     04/16/2005
-// RCS-ID:      $Id: mimetype.h,v 1.8 2006/10/17 14:44:32 ABX Exp $
+// RCS-ID:      $Id: mimetype.h 42077 2006-10-17 14:44:52Z ABX $
 // Copyright:   (c) 2005 Ryan Norton (<wxprojects@comcast.net>)
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

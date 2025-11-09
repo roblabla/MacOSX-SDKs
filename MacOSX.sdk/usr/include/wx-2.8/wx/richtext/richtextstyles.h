@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     2005-09-30
-// RCS-ID:      $Id: richtextstyles.h,v 1.17 2006/11/26 12:47:49 JS Exp $
+// RCS-ID:      $Id: richtextstyles.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -36,8 +36,8 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCtrl;
-class WXDLLIMPEXP_RICHTEXT wxRichTextBuffer;
+class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCtrl;
+class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextBuffer;
 
 /*!
  * wxRichTextStyleDefinition class declaration
@@ -253,6 +253,7 @@ public:
     wxRichTextStyleSheet(const wxRichTextStyleSheet& sheet)
     : wxObject()
     {
+		Init();
         Copy(sheet);
     }
     wxRichTextStyleSheet() { Init(); }

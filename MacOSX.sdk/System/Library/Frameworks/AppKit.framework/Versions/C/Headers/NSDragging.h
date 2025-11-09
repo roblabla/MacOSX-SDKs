@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -81,7 +81,9 @@ enum {
 - (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 - (void)draggedImage:(NSImage *)image movedTo:(NSPoint)screenPoint;
 - (BOOL)ignoreModifierKeysWhileDragging;
+@end
 
-// -draggedImage:endedAt:deposited: is deprecated.  Sources should instead implement -draggedImage:endedAt:operation:
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag;
+@interface NSObject(NSDraggingSourceDeprecated)
+// -draggedImage:endedAt:deposited: was deprecated in Mac OS 10.1.  Sources should instead implement -draggedImage:endedAt:operation:
+- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_1_AND_LATER;
 @end

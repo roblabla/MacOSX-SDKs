@@ -2,7 +2,7 @@
 	DictionaryServices.h
 	DictionaryServices framework
      
-	Copyright (c) 2007 Apple, Inc. All rights reserved.
+	Copyright (c) 2007 Apple Inc. All rights reserved.
 */
 
 #ifndef __DICTIONARYSERVICES__
@@ -10,6 +10,9 @@
 
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
+#endif
+#ifndef __AVAILABILITYMACROS__
+#include <AvailabilityMacros.h>
 #endif
 
 #ifdef __cplusplus
@@ -37,7 +40,8 @@ typedef const struct __DCSDictionary*	DCSDictionaryRef;
 				The result range can be used as an input parameter of DCSCopyTextDefinition()
 				and HIDictionaryWindowShow() in Carbon framework.
 */
-extern CFRange DCSGetTermRangeInString( DCSDictionaryRef dictionary, CFStringRef textString, CFIndex offset );
+extern CFRange DCSGetTermRangeInString( DCSDictionaryRef dictionary, CFStringRef textString, CFIndex offset )
+ AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
 	@function	DCSCopyTextDefinition
@@ -50,7 +54,8 @@ extern CFRange DCSGetTermRangeInString( DCSDictionaryRef dictionary, CFStringRef
 				Range of the target word or phrase in textString
 	@result		Returns a definition of the specified term in range in plain text
 */
-extern CFStringRef DCSCopyTextDefinition( DCSDictionaryRef dictionary, CFStringRef textString, CFRange range );
+extern CFStringRef DCSCopyTextDefinition( DCSDictionaryRef dictionary, CFStringRef textString, CFRange range )
+ AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #ifdef __cplusplus
 }

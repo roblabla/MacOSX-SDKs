@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: brush.h,v 1.14 2006/10/30 19:25:57 VZ Exp $
+// RCS-ID:      $Id: brush.h 42752 2006-10-30 19:26:48Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

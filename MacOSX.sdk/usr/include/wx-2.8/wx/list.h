@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by: VZ at 16/11/98: WX_DECLARE_LIST() and typesafe lists added
 // Created:     29/01/98
-// RCS-ID:      $Id: list.h,v 1.111 2006/12/15 01:47:26 VZ Exp $
+// RCS-ID:      $Id: list.h 53135 2008-04-12 02:31:04Z VZ $
 // Copyright:   (c) 1998 Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ extern "C"
 typedef int (* LINKAGEMODE wxSortCompareFunction)(const void *elem1, const void *elem2);
 }
 
-class WXDLLIMPEXP_BASE wxObjectListNode;
+class WXDLLIMPEXP_FWD_BASE wxObjectListNode;
 typedef wxObjectListNode wxNode;
 
 //
@@ -437,7 +437,7 @@ private:
 
 extern WXDLLIMPEXP_DATA_BASE(wxListKey) wxDefaultListKey;
 
-class WXDLLIMPEXP_BASE wxListBase;
+class WXDLLIMPEXP_FWD_BASE wxListBase;
 
 class WXDLLIMPEXP_BASE wxNodeBase
 {
@@ -499,11 +499,11 @@ private:
 // a double-linked list class
 // -----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxList;
+class WXDLLIMPEXP_FWD_BASE wxList;
 
 class WXDLLIMPEXP_BASE wxListBase : public wxObject
 {
-friend class WXDLLIMPEXP_BASE wxNodeBase; // should be able to call DetachNode()
+friend class WXDLLIMPEXP_FWD_BASE wxNodeBase; // should be able to call DetachNode()
 friend class wxHashTableBase;   // should be able to call untyped Find()
 
 public:

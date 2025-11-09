@@ -3,9 +3,9 @@
  
      Contains:   PEF Types and Macros
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1175,7 +1175,7 @@ struct XLibContainerHeader {
 };
 typedef struct XLibContainerHeader      XLibContainerHeader;
 enum {
-  kXLibTag1                     = (long)0xF04D6163/*'ðMac' */, /* For non-Apple compilers: 0xF04D6163.*/
+  kXLibTag1                     = (int)0xF04D6163/*'ðMac' */, /* For non-Apple compilers: 0xF04D6163.*/
   kVLibTag2                     = 'VLib', /* For non-Apple compilers: 0x564C6962.*/
   kBLibTag2                     = 'BLib', /* For non-Apple compilers: 0x424C6962.*/
   kXLibVersion                  = 0x00000001

@@ -3,9 +3,9 @@
  
      Contains:   Navigation Services Interfaces
  
-     Version:    NavigationServices-160~98
+     Version:    NavigationServices-182~65
  
-     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -833,11 +833,12 @@ struct NavReplyRecord {
   char                reserved[225];
 };
 typedef struct NavReplyRecord           NavReplyRecord;
+#if !__LP64__
 /*
  *  NavCompleteSave()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -851,7 +852,7 @@ NavCompleteSave(
  *  NavCustomControl()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -862,7 +863,6 @@ NavCustomControl(
   void *                    parms)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#if !__LP64__
 /*
  *  NavCreatePreview()   *** DEPRECATED ***
  *  
@@ -879,19 +879,19 @@ NavCreatePreview(
   Size          previewDataSize)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-#endif  /* !__LP64__ */
-
 /*
  *  NavDisposeReply()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
 extern OSErr 
 NavDisposeReply(NavReplyRecord * reply)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /* Carbon API */
 /* Includes support for Unicode and long file names (where available). */
@@ -1018,6 +1018,7 @@ struct NavDialogCreationOptions {
   char                reserved[16];
 };
 typedef struct NavDialogCreationOptions NavDialogCreationOptions;
+#if !__LP64__
 /*
  *  NavGetDefaultDialogCreationOptions()
  *  
@@ -1038,7 +1039,7 @@ typedef struct NavDialogCreationOptions NavDialogCreationOptions;
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1092,7 +1093,7 @@ NavGetDefaultDialogCreationOptions(NavDialogCreationOptions * outOptions) AVAILA
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1151,7 +1152,7 @@ NavCreateGetFileDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1214,7 +1215,7 @@ NavCreatePutFileDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1268,7 +1269,7 @@ NavCreateAskReviewDocumentsDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1317,7 +1318,7 @@ NavCreateAskSaveChangesDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1376,7 +1377,7 @@ NavCreateAskDiscardChangesDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1429,7 +1430,7 @@ NavCreateChooseFileDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1480,7 +1481,7 @@ NavCreateChooseFolderDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1536,7 +1537,7 @@ NavCreateChooseVolumeDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1586,7 +1587,7 @@ NavCreateChooseObjectDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1633,7 +1634,7 @@ NavCreateNewFolderDialog(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1661,7 +1662,7 @@ NavDialogRun(NavDialogRef inDialog)                           AVAILABLE_MAC_OS_X
  *      The dialog to dispose
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1690,7 +1691,7 @@ NavDialogDispose(NavDialogRef inDialog)                       AVAILABLE_MAC_OS_X
  *    The window reference
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1729,7 +1730,7 @@ NavDialogGetWindow(NavDialogRef inDialog)                     AVAILABLE_MAC_OS_X
  *    The user action
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1765,7 +1766,7 @@ NavDialogGetUserAction(NavDialogRef inDialog)                 AVAILABLE_MAC_OS_X
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1803,7 +1804,7 @@ NavDialogGetReply(
  *    semantics).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1839,7 +1840,7 @@ NavDialogGetSaveFileName(NavDialogRef inPutFileDialog)        AVAILABLE_MAC_OS_X
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1870,7 +1871,7 @@ NavDialogSetSaveFileName(
  *    visible or there is no extension.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1903,7 +1904,7 @@ NavDialogGetSaveFileExtensionHidden(NavDialogRef inPutFileDialog) AVAILABLE_MAC_
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1941,7 +1942,7 @@ NavDialogSetSaveFileExtensionHidden(
  *    A status code
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1959,6 +1960,8 @@ NavDialogSetFilterTypeIdentifiers(
 /*  but are not the most modern nor most efficient solution to a problem), or they are  */
 /*  completely unavailable on Mac OS X.                                                 */
 /*--------------------------------------------------------------------------------------*/
+#endif  /* !__LP64__ */
+
 enum {
   kNavDialogOptionsVersion      = 0
 };
@@ -1978,6 +1981,7 @@ struct NavDialogOptions {
   char                reserved[494];
 };
 typedef struct NavDialogOptions         NavDialogOptions;
+#if !__LP64__
 /*
  *  NavLoad()   *** DEPRECATED ***
  *  
@@ -1985,7 +1989,7 @@ typedef struct NavDialogOptions         NavDialogOptions;
  *    Not available in Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         not available but deprecated in 10.5
+ *    Mac OS X:         not available [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2000,7 +2004,7 @@ NavLoad(void);
  *    Not available in Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         not available but deprecated in 10.5
+ *    Mac OS X:         not available [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2015,7 +2019,7 @@ NavUnload(void);
  *    Test against the system version instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2030,7 +2034,7 @@ NavLibraryVersion(void)                                       AVAILABLE_MAC_OS_X
  *    Use NavGetDefaultDialogCreationOptions instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2046,7 +2050,7 @@ NavGetDefaultDialogOptions(NavDialogOptions * dialogOptions)  AVAILABLE_MAC_OS_X
  *    Use NavCreateGetFileDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2069,7 +2073,7 @@ NavGetFile(
  *    Use NavCreatePutFileDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2091,7 +2095,7 @@ NavPutFile(
  *    Use NavCreateAskSaveChangesDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2111,7 +2115,7 @@ NavAskSaveChanges(
  *    Use NavCreateAskSaveChangesDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2130,7 +2134,7 @@ NavCustomAskSaveChanges(
  *    Use NavCreateAskDiscardChangesDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2149,7 +2153,7 @@ NavAskDiscardChanges(
  *    Use NavCreateChooseFileDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2172,7 +2176,7 @@ NavChooseFile(
  *    Use NavCreateChooseFolderDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2193,7 +2197,7 @@ NavChooseFolder(
  *    Use NavCreateChooseVolumeDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2214,7 +2218,7 @@ NavChooseVolume(
  *    Use NavCreateChooseObjectDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2235,7 +2239,7 @@ NavChooseObject(
  *    Use NavCreateNewFolderDialog instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2256,7 +2260,7 @@ NavNewFolder(
  *    on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2273,7 +2277,7 @@ NavTranslateFile(
  *    Navigation Services can always run on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         not available but deprecated in 10.5
+ *    Mac OS X:         not available [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
@@ -2281,6 +2285,8 @@ extern Boolean
 NavServicesCanRun(void);
 
 
+
+#endif  /* !__LP64__ */
 
 #if TARGET_RT_MAC_CFM
 #ifdef __cplusplus

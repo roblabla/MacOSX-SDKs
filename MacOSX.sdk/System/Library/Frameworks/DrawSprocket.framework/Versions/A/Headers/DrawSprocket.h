@@ -3,9 +3,9 @@
  
      Contains:   Games Sprockets: DrawSprocket interfaces
  
-     Version:    DrawSprocket-2.0.82~660
+     Version:    DrawSprocket-2.0.85~359
  
-     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -63,16 +63,16 @@ enum DSpDepthMask {
 typedef enum DSpDepthMask DSpDepthMask;
 
 enum DSpColorNeeds {
-  kDSpColorNeeds_DontCare       = 0L,
-  kDSpColorNeeds_Request        = 1L,
-  kDSpColorNeeds_Require        = 2L
+  kDSpColorNeeds_DontCare       = 0,
+  kDSpColorNeeds_Request        = 1,
+  kDSpColorNeeds_Require        = 2
 };
 typedef enum DSpColorNeeds DSpColorNeeds;
 
 enum DSpContextState {
-  kDSpContextState_Active       = 0L,
-  kDSpContextState_Paused       = 1L,
-  kDSpContextState_Inactive     = 2L
+  kDSpContextState_Active       = 0,
+  kDSpContextState_Paused       = 1,
+  kDSpContextState_Inactive     = 2
 };
 typedef enum DSpContextState DSpContextState;
 

@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     18-June-1999
-// RCS-ID:      $Id: _log.i,v 1.18 2006/11/14 22:03:44 RD Exp $
+// RCS-ID:      $Id: _log.i 46662 2007-06-23 05:30:56Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -214,7 +214,8 @@ public:
     void PassMessages(bool bDoPass);
     bool IsPassingMessages();
     wxLog *GetOldLog();
-
+    void DetachOldLog();
+    
     %property(OldLog, GetOldLog, doc="See `GetOldLog`");    
 };
 

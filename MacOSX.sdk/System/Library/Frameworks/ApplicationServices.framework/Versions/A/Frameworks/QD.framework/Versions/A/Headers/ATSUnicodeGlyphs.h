@@ -3,9 +3,9 @@
  
      Contains:   ATSUI glyph handling functions.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,7 +37,13 @@ extern "C" {
 
 #if !__LP64__
 /*
- *  ATSUGlyphGetIdealMetrics()
+ *  ATSUGlyphGetIdealMetrics()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontGetGlyphWithName,
+ *    CTFontGetVerticalTranslationsForGlyphs,
+ *    CTFontGetBoundingRectsForGlyphs, or CTFontGetAdvancesForGlyphs
+ *    instead.
  *  
  *  Summary:
  *    Obtains resolution-independent font metric information for glyphs
@@ -91,7 +97,7 @@ extern "C" {
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -101,11 +107,16 @@ ATSUGlyphGetIdealMetrics(
   ItemCount              iNumOfGlyphs,
   GlyphID                iGlyphIDs[],
   ByteOffset             iInputOffset,
-  ATSGlyphIdealMetrics   oIdealMetrics[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSGlyphIdealMetrics   oIdealMetrics[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGlyphGetScreenMetrics()
+ *  ATSUGlyphGetScreenMetrics()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontGetBoundingBox, CTFontGetUnderlinePosition,
+ *    CTFontGetUnderlineThickness, CTFontGetSlantAngle,
+ *    CTFontGetCapHeight, or CTFontGetXHeight iinstead.
  *  
  *  Summary:
  *    Obtains device-adjusted font metric information for glyphs
@@ -159,7 +170,7 @@ ATSUGlyphGetIdealMetrics(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -171,14 +182,17 @@ ATSUGlyphGetScreenMetrics(
   ByteOffset              iInputOffset,
   Boolean                 iForcingAntiAlias,
   Boolean                 iAntiAliasSwitch,
-  ATSGlyphScreenMetrics   oScreenMetrics[])                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSGlyphScreenMetrics   oScreenMetrics[])                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /* ATSUI glyph curve access functions and callbacks                             */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUGetNativeCurveType()
+ *  ATSUGetNativeCurveType()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreatePathForGlyph instead.
  *  
  *  Summary:
  *    Returns the native curve format for a specific font.
@@ -209,14 +223,14 @@ ATSUGlyphGetScreenMetrics(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
 extern OSStatus 
 ATSUGetNativeCurveType(
   ATSUStyle       iATSUStyle,
-  ATSCurveType *  oCurveType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSCurveType *  oCurveType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
@@ -254,7 +268,7 @@ typedef STACK_UPP_TYPE(ATSQuadraticNewPathProcPtr)              ATSQuadraticNewP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSQuadraticNewPathUPP
-NewATSQuadraticNewPathUPP(ATSQuadraticNewPathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSQuadraticNewPathUPP(ATSQuadraticNewPathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSQuadraticNewPathUPP()
@@ -265,7 +279,7 @@ NewATSQuadraticNewPathUPP(ATSQuadraticNewPathProcPtr userRoutine) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSQuadraticNewPathUPP(ATSQuadraticNewPathUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSQuadraticNewPathUPP(ATSQuadraticNewPathUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSQuadraticNewPathUPP()
@@ -278,7 +292,7 @@ DisposeATSQuadraticNewPathUPP(ATSQuadraticNewPathUPP userUPP) AVAILABLE_MAC_OS_X
 extern OSStatus
 InvokeATSQuadraticNewPathUPP(
   void *                  callBackDataPtr,
-  ATSQuadraticNewPathUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSQuadraticNewPathUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -331,7 +345,7 @@ typedef STACK_UPP_TYPE(ATSQuadraticLineProcPtr)                 ATSQuadraticLine
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSQuadraticLineUPP
-NewATSQuadraticLineUPP(ATSQuadraticLineProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSQuadraticLineUPP(ATSQuadraticLineProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSQuadraticLineUPP()
@@ -342,7 +356,7 @@ NewATSQuadraticLineUPP(ATSQuadraticLineProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSQuadraticLineUPP(ATSQuadraticLineUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSQuadraticLineUPP(ATSQuadraticLineUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSQuadraticLineUPP()
@@ -357,7 +371,7 @@ InvokeATSQuadraticLineUPP(
   const Float32Point *  pt1,
   const Float32Point *  pt2,
   void *                callBackDataPtr,
-  ATSQuadraticLineUPP   userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSQuadraticLineUPP   userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -415,7 +429,7 @@ typedef STACK_UPP_TYPE(ATSQuadraticCurveProcPtr)                ATSQuadraticCurv
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSQuadraticCurveUPP
-NewATSQuadraticCurveUPP(ATSQuadraticCurveProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSQuadraticCurveUPP(ATSQuadraticCurveProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSQuadraticCurveUPP()
@@ -426,7 +440,7 @@ NewATSQuadraticCurveUPP(ATSQuadraticCurveProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSQuadraticCurveUPP(ATSQuadraticCurveUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSQuadraticCurveUPP(ATSQuadraticCurveUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSQuadraticCurveUPP()
@@ -442,7 +456,7 @@ InvokeATSQuadraticCurveUPP(
   const Float32Point *  controlPt,
   const Float32Point *  pt2,
   void *                callBackDataPtr,
-  ATSQuadraticCurveUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSQuadraticCurveUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -489,7 +503,7 @@ typedef STACK_UPP_TYPE(ATSQuadraticClosePathProcPtr)            ATSQuadraticClos
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSQuadraticClosePathUPP
-NewATSQuadraticClosePathUPP(ATSQuadraticClosePathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSQuadraticClosePathUPP(ATSQuadraticClosePathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSQuadraticClosePathUPP()
@@ -500,7 +514,7 @@ NewATSQuadraticClosePathUPP(ATSQuadraticClosePathProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSQuadraticClosePathUPP(ATSQuadraticClosePathUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSQuadraticClosePathUPP(ATSQuadraticClosePathUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSQuadraticClosePathUPP()
@@ -513,7 +527,7 @@ DisposeATSQuadraticClosePathUPP(ATSQuadraticClosePathUPP userUPP) AVAILABLE_MAC_
 extern OSStatus
 InvokeATSQuadraticClosePathUPP(
   void *                    callBackDataPtr,
-  ATSQuadraticClosePathUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSQuadraticClosePathUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -529,7 +543,10 @@ InvokeATSQuadraticClosePathUPP(
 
 #if !__LP64__
 /*
- *  ATSUGlyphGetQuadraticPaths()
+ *  ATSUGlyphGetQuadraticPaths()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreatePathForGlyph instead.
  *  
  *  Summary:
  *    Uses a callback mechanism to obtain a set of Quadratic outlines
@@ -598,7 +615,7 @@ InvokeATSQuadraticClosePathUPP(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -611,7 +628,7 @@ ATSUGlyphGetQuadraticPaths(
   ATSQuadraticCurveUPP       iCurveProc,
   ATSQuadraticClosePathUPP   iClosePathProc,
   void *                     iCallbackDataPtr,
-  OSStatus *                 oCallbackResult)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSStatus *                 oCallbackResult)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
@@ -652,7 +669,7 @@ typedef STACK_UPP_TYPE(ATSCubicMoveToProcPtr)                   ATSCubicMoveToUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSCubicMoveToUPP
-NewATSCubicMoveToUPP(ATSCubicMoveToProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSCubicMoveToUPP(ATSCubicMoveToProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSCubicMoveToUPP()
@@ -663,7 +680,7 @@ NewATSCubicMoveToUPP(ATSCubicMoveToProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSCubicMoveToUPP(ATSCubicMoveToUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSCubicMoveToUPP(ATSCubicMoveToUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSCubicMoveToUPP()
@@ -677,7 +694,7 @@ extern OSStatus
 InvokeATSCubicMoveToUPP(
   const Float32Point *  pt,
   void *                callBackDataPtr,
-  ATSCubicMoveToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSCubicMoveToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -728,7 +745,7 @@ typedef STACK_UPP_TYPE(ATSCubicLineToProcPtr)                   ATSCubicLineToUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSCubicLineToUPP
-NewATSCubicLineToUPP(ATSCubicLineToProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSCubicLineToUPP(ATSCubicLineToProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSCubicLineToUPP()
@@ -739,7 +756,7 @@ NewATSCubicLineToUPP(ATSCubicLineToProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSCubicLineToUPP(ATSCubicLineToUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSCubicLineToUPP(ATSCubicLineToUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSCubicLineToUPP()
@@ -753,7 +770,7 @@ extern OSStatus
 InvokeATSCubicLineToUPP(
   const Float32Point *  pt,
   void *                callBackDataPtr,
-  ATSCubicLineToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSCubicLineToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -811,7 +828,7 @@ typedef STACK_UPP_TYPE(ATSCubicCurveToProcPtr)                  ATSCubicCurveToU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSCubicCurveToUPP
-NewATSCubicCurveToUPP(ATSCubicCurveToProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSCubicCurveToUPP(ATSCubicCurveToProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSCubicCurveToUPP()
@@ -822,7 +839,7 @@ NewATSCubicCurveToUPP(ATSCubicCurveToProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSCubicCurveToUPP(ATSCubicCurveToUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSCubicCurveToUPP(ATSCubicCurveToUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSCubicCurveToUPP()
@@ -838,7 +855,7 @@ InvokeATSCubicCurveToUPP(
   const Float32Point *  pt2,
   const Float32Point *  pt3,
   void *                callBackDataPtr,
-  ATSCubicCurveToUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSCubicCurveToUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -885,7 +902,7 @@ typedef STACK_UPP_TYPE(ATSCubicClosePathProcPtr)                ATSCubicClosePat
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSCubicClosePathUPP
-NewATSCubicClosePathUPP(ATSCubicClosePathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewATSCubicClosePathUPP(ATSCubicClosePathProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeATSCubicClosePathUPP()
@@ -896,7 +913,7 @@ NewATSCubicClosePathUPP(ATSCubicClosePathProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSCubicClosePathUPP(ATSCubicClosePathUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeATSCubicClosePathUPP(ATSCubicClosePathUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeATSCubicClosePathUPP()
@@ -909,7 +926,7 @@ DisposeATSCubicClosePathUPP(ATSCubicClosePathUPP userUPP)     AVAILABLE_MAC_OS_X
 extern OSStatus
 InvokeATSCubicClosePathUPP(
   void *                callBackDataPtr,
-  ATSCubicClosePathUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSCubicClosePathUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -925,7 +942,10 @@ InvokeATSCubicClosePathUPP(
 
 #if !__LP64__
 /*
- *  ATSUGlyphGetCubicPaths()
+ *  ATSUGlyphGetCubicPaths()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreatePathForGlyph instead.
  *  
  *  Summary:
  *    Uses a callback mechanism to obtain a set of Cubic outlines for a
@@ -994,7 +1014,7 @@ InvokeATSCubicClosePathUPP(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -1007,11 +1027,14 @@ ATSUGlyphGetCubicPaths(
   ATSCubicCurveToUPP     iCurveToProc,
   ATSCubicClosePathUPP   iClosePathProc,
   void *                 iCallbackDataPtr,       /* can be NULL */
-  OSStatus *             oCallbackResult)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSStatus *             oCallbackResult)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGlyphGetCurvePaths()
+ *  ATSUGlyphGetCurvePaths()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreatePathForGlyph instead.
  *  
  *  Summary:
  *    Obtains glyph curve data without the use of callbacks.
@@ -1060,7 +1083,7 @@ ATSUGlyphGetCubicPaths(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -1069,7 +1092,7 @@ ATSUGlyphGetCurvePaths(
   ATSUStyle         iATSUStyle,
   GlyphID           iGlyphID,
   ByteCount *       ioBufferSize,
-  ATSUCurvePaths *  oPaths)             /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUCurvePaths *  oPaths)             /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Functions listed beyond this point are either deprecated or not recommended */
@@ -1081,7 +1104,9 @@ ATSUGlyphGetCurvePaths(
  *  ATSUGetGlyphInfo()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUnicodeDirectAccess.h functions instead.
+ *    Use CTRunGetGlyphsPtr,CTRunGetGlyphs, CTRunGetPositionsPtr,
+ *    CTRunGetPositions, CTRunGetStringIndicesPtr,
+ *    CTRunGetStringIndices, CTRunGetStringRange instead.
  *  
  *  Summary:
  *    Obtains a copy of the style and layout information for each glyph
@@ -1108,7 +1133,9 @@ ATSUGetGlyphInfo(
  *  ATSUDrawGlyphInfo()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUnicodeDirectAccess.h functions instead.
+ *    Use CTRunGetGlyphsPtr,CTRunGetGlyphs, CTRunGetPositionsPtr,
+ *    CTRunGetPositions, CTRunGetStringIndicesPtr,
+ *    CTRunGetStringIndices, CTRunGetStringRange instead.
  *  
  *  Summary:
  *    Draws glyphs at the specified location, based on style and layout

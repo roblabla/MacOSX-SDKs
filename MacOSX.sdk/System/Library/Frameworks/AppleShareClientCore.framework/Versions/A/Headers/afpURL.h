@@ -1,8 +1,12 @@
 /*
- *  afpURL.h
- *  AppleShareClientLib
- *
- */
+	File:		afpURL.h
+
+	Contains:	URL functions in the AppleShare Client
+
+	Version:	AppleShare X
+
+	Copyright:	© 2000 - 2007 by Apple Inc., all rights reserved.	
+*/
 
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>

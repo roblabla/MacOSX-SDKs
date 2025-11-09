@@ -3,10 +3,7 @@
 
      Contains:   API for finding things out about audio formats.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +19,7 @@
 //=============================================================================
 
 //	System Includes
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
 #else
@@ -240,6 +237,9 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					described by the specifier.
 					The specifier is an AudioFormatInfo struct. At a minimum formatID member of the ASBD struct must filled in. Other fields
 					may be filled in. If there is no magic cookie, then the number of channels and sample rate should be filled in. 
+	@constant	kAudioFormatProperty_FirstPlayableFormatFromList
+					The specifier is a list of 1 or more AudioFormatListItem. Generally it is the list of these items returned from kAudioFormatProperty_FormatList. The property value retrieved is an UInt32 that specifies an index into that list. The list that the caller provides is generally sorted with the first item as the best format (most number of channels, highest sample rate), and the returned index represents the first item in that list that can be played by the system. 
+					Thus, the property is typically used to determine the best playable format for a given (layered) audio stream
 	@constant   kAudioFormatProperty_ChannelLayoutForTag
 					Returns the channel descriptions for a standard channel layout.
 					The specifier is a AudioChannelLayoutTag (the mChannelLayoutTag field 
@@ -325,50 +325,68 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					the return value is an array of Float32 values of the number of channels
 						represented by this specified channel layout.  
 					The volume values will typically be presented within a 0->1 range (where 1 is unity gain)
+    @constant   kAudioFormatProperty_ID3TagSize
+					Returns a UInt32 indicating the ID3 tag size. 
+					The specifier must begin with the ID3 tag header and be at least 10 bytes in length
+    @constant   kAudioFormatProperty_ID3TagToDictionary
+					Returns a CFDictionary containing key/value pairs for the frames in the ID3 tag
+					The specifier is the entire ID3 tag
+					Caller must call CFRelease for the returned dictionary
+					
+					
+					
+					
+					
 */
 enum
 {
-
 //=============================================================================
 //	The following properties are concerned with the AudioStreamBasicDescription
 //=============================================================================
 	kAudioFormatProperty_FormatInfo						= 'fmti',
-	kAudioFormatProperty_FormatIsVBR					= 'fvbr',	
-	kAudioFormatProperty_FormatIsExternallyFramed		= 'fexf',
+	kAudioFormatProperty_FormatName						= 'fnam',
 	kAudioFormatProperty_EncodeFormatIDs				= 'acof',
 	kAudioFormatProperty_DecodeFormatIDs				= 'acif',
+	kAudioFormatProperty_FormatList						= 'flst',
+    kAudioFormatProperty_ASBDFromESDS                   = 'essd',
+    kAudioFormatProperty_ChannelLayoutFromESDS          = 'escl',
+	kAudioFormatProperty_OutputFormatList				= 'ofls',
+	kAudioFormatProperty_FirstPlayableFormatFromList	= 'fpfl',
+	kAudioFormatProperty_FormatIsVBR					= 'fvbr',	
+	kAudioFormatProperty_FormatIsExternallyFramed		= 'fexf',
 	kAudioFormatProperty_Encoders						= 'aven',	
 	kAudioFormatProperty_Decoders						= 'avde',
 	kAudioFormatProperty_AvailableEncodeBitRates		= 'aebr',
 	kAudioFormatProperty_AvailableEncodeSampleRates		= 'aesr',
 	kAudioFormatProperty_AvailableEncodeChannelLayoutTags = 'aecl',
 	kAudioFormatProperty_AvailableEncodeNumberChannels		= 'avnc',
-	kAudioFormatProperty_FormatName						= 'fnam',
-    kAudioFormatProperty_ASBDFromESDS                   = 'essd',
-    kAudioFormatProperty_ChannelLayoutFromESDS          = 'escl',
 	kAudioFormatProperty_ASBDFromMPEGPacket				= 'admp',
-	kAudioFormatProperty_FormatList						= 'flst',
-	kAudioFormatProperty_OutputFormatList				= 'ofls',
 
 
 //=============================================================================
 //	The following properties concern the AudioChannelLayout struct (speaker layouts)
 //=============================================================================
-	
-	kAudioFormatProperty_ChannelLayoutForTag			= 'cmpl',
-	kAudioFormatProperty_TagForChannelLayout			= 'cmpt',
-	kAudioFormatProperty_ChannelLayoutForBitmap			= 'cmpb',
 	kAudioFormatProperty_BitmapForLayoutTag				= 'bmtg',
-	kAudioFormatProperty_ChannelLayoutName				= 'lonm',
-	kAudioFormatProperty_ChannelName					= 'cnam',
-	kAudioFormatProperty_ChannelShortName				= 'csnm',
 	kAudioFormatProperty_MatrixMixMap					= 'mmap',
     kAudioFormatProperty_ChannelMap						= 'chmp',
 	kAudioFormatProperty_NumberOfChannelsForLayout		= 'nchm',
+	kAudioFormatProperty_ChannelLayoutForTag			= 'cmpl',
+	kAudioFormatProperty_TagForChannelLayout			= 'cmpt',
+	kAudioFormatProperty_ChannelLayoutName				= 'lonm',
+	kAudioFormatProperty_ChannelLayoutForBitmap			= 'cmpb',
+	kAudioFormatProperty_ChannelName					= 'cnam',
+	kAudioFormatProperty_ChannelShortName				= 'csnm',
+
 	kAudioFormatProperty_TagsForNumberOfChannels		= 'tagc',				
 	kAudioFormatProperty_PanningMatrix					= 'panm',
-	kAudioFormatProperty_BalanceFade					= 'balf'
-				
+	kAudioFormatProperty_BalanceFade					= 'balf',
+
+//=============================================================================
+//	The following properties concern the ID3 Tags
+//=============================================================================
+
+	kAudioFormatProperty_ID3TagSize						= 'id3s',
+	kAudioFormatProperty_ID3TagToDictionary				= 'id3d'
 };
 
 //=============================================================================
@@ -389,7 +407,7 @@ extern OSStatus
 AudioFormatGetPropertyInfo(	AudioFormatPropertyID	inPropertyID,
 							UInt32					inSpecifierSize,
 							const void*				inSpecifier,
-							UInt32*					outPropertyDataSize)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+							UInt32*					outPropertyDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 /*!
     @function	AudioFormatGetProperty
@@ -407,7 +425,7 @@ AudioFormatGetProperty(	AudioFormatPropertyID	inPropertyID,
 						UInt32					inSpecifierSize,
 						const void*				inSpecifier,
 						UInt32*					ioPropertyDataSize,
-						void*					outPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+						void*					outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 
 //-----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -214,7 +214,7 @@ struct fs {
 	ufs_daddr_t fs_dblkno;		/* offset of first data after cg */
 	int32_t	 fs_cgoffset;		/* cylinder group offset in cylinder */
 	int32_t	 fs_cgmask;		/* used to calc mod fs_ntrak */
-	time_t 	 fs_time;		/* last time written */
+	u_int32_t 	 fs_time;		/* last time written */
 	int32_t	 fs_size;		/* number of blocks in fs */
 	int32_t	 fs_dsize;		/* number of data blocks in fs */
 	int32_t	 fs_ncg;		/* number of cylinder groups */
@@ -297,7 +297,7 @@ struct fs {
 	int32_t	 fs_magic;		/* magic number */
 	u_int8_t fs_space[1];		/* list of blocks for each rotation */
 /* actually longer */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * Filesystem identification
@@ -360,7 +360,7 @@ struct fs {
 struct cg {
 	int32_t	 cg_firstfield;		/* historic cyl groups linked list */
 	int32_t	 cg_magic;		/* magic number */
-	time_t	 cg_time;		/* time last written */
+	u_int32_t	 cg_time;		/* time last written */
 	int32_t	 cg_cgx;		/* we are the cgx'th cylinder group */
 	int16_t	 cg_ncyl;		/* number of cyl's this cg */
 	int16_t	 cg_niblk;		/* number of inode blocks this cg */
@@ -381,7 +381,7 @@ struct cg {
 	int32_t	 cg_sparecon[13];	/* reserved for future use */
 	u_int8_t cg_space[1];		/* space for cylinder group maps */
 /* actually longer */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * Macros for access to cylinder group array structures
@@ -417,7 +417,7 @@ struct cg {
 struct ocg {
 	int32_t	 cg_firstfield;		/* historic linked list of cyl groups */
 	int32_t	 cg_unused_1;		/*     used for incore cyl groups */
-	time_t	 cg_time;		/* time last written */
+	u_int32_t	 cg_time;		/* time last written */
 	int32_t	 cg_cgx;		/* we are the cgx'th cylinder group */
 	int16_t	 cg_ncyl;		/* number of cyl's this cg */
 	int16_t	 cg_niblk;		/* number of inode blocks this cg */
@@ -433,7 +433,7 @@ struct ocg {
 	int32_t	 cg_magic;		/* magic number */
 	u_int8_t cg_free[1];		/* free block map */
 /* actually longer */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * Turn file system block numbers into disk block addresses.
@@ -580,14 +580,14 @@ extern u_char *fragtbl[];
 struct ufslabel {
     u_int32_t		ul_magic;
     u_int16_t		ul_checksum;	/* checksum over entire label*/
-    u_int32_t		ul_version;	/* label version */
+    u_int32_t		ul_version __attribute__((aligned(4))); /* label version */
     u_int32_t		ul_time;	/* creation time */
     u_int16_t		ul_namelen;	/* filesystem name length */
     u_char		ul_name[UFS_MAX_LABEL_NAME]; /* filesystem name */
-    u_int64_t		ul_uuid;	/* filesystem uuid */
+    u_int64_t		ul_uuid __attribute__((aligned(4)));	/* filesystem uuid */
     u_char		ul_reserved[24];/* reserved for future use */
     u_char		ul_unused[460];	/* pad out to 1K */
-};
+} __attribute__((packed,aligned(4)));
 
 #endif /* __APPLE_API_UNSTABLE */
 #endif /* ! _FFS_FS_H_ */

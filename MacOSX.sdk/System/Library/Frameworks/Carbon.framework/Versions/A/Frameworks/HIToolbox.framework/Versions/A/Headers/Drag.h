@@ -3,9 +3,9 @@
  
      Contains:   Drag and Drop Interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -67,9 +67,9 @@ typedef OSType                          FlavorType;
 */
 typedef OptionBits DragAttributes;
 enum {
-  kDragHasLeftSenderWindow      = (1L << 0), /* drag has left the source window since TrackDrag*/
-  kDragInsideSenderApplication  = (1L << 1), /* drag is occurring within the sender application*/
-  kDragInsideSenderWindow       = (1L << 2) /* drag is occurring within the sender window*/
+  kDragHasLeftSenderWindow      = (1 << 0), /* drag has left the source window since TrackDrag*/
+  kDragInsideSenderApplication  = (1 << 1), /* drag is occurring within the sender application*/
+  kDragInsideSenderWindow       = (1 << 2) /* drag is occurring within the sender window*/
 };
 
 /*
@@ -82,7 +82,7 @@ enum {
 typedef OptionBits DragBehaviors;
 enum {
   kDragBehaviorNone             = 0,
-  kDragBehaviorZoomBackAnimation = (1L << 0) /* do zoomback animation for failed drags (normally enabled).*/
+  kDragBehaviorZoomBackAnimation = (1 << 0) /* do zoomback animation for failed drags (normally enabled).*/
 };
 
 /*
@@ -128,10 +128,10 @@ enum {
 */
 
 enum {
-  kDragStandardTranslucency     = 0L,   /* 65% image translucency (standard)*/
-  kDragDarkTranslucency         = 1L,   /* 50% image translucency*/
-  kDragDarkerTranslucency       = 2L,   /* 25% image translucency*/
-  kDragOpaqueTranslucency       = 3L    /* 0% image translucency (opaque)*/
+  kDragStandardTranslucency     = 0,    /* 65% image translucency (standard)*/
+  kDragDarkTranslucency         = 1,    /* 50% image translucency*/
+  kDragDarkerTranslucency       = 2,    /* 25% image translucency*/
+  kDragOpaqueTranslucency       = 3     /* 0% image translucency (opaque)*/
 };
 
 /*
@@ -195,39 +195,39 @@ enum {
    * set as an allowable action for remote drags, the drag will not be
    * sent to apps other than the sender.
    */
-  kDragActionNothing            = 0L,
+  kDragActionNothing            = 0,
 
   /*
    * Suggests the data contained within the drag can be/was copied.
    */
-  kDragActionCopy               = 1L,
+  kDragActionCopy               = 1,
 
   /*
    * Suggests the data contained within the drag can be/is shared.
    */
-  kDragActionAlias              = (1L << 1),
+  kDragActionAlias              = (1 << 1),
 
   /*
    * Suggests the drag action is can be defined by the drag destination
    * or was not defined by the drag destination.
    */
-  kDragActionGeneric            = (1L << 2),
+  kDragActionGeneric            = (1 << 2),
 
   /*
    * Suggests the drag action should be negotiated privately between
    * the drag source and destination.
    */
-  kDragActionPrivate            = (1L << 3),
+  kDragActionPrivate            = (1 << 3),
 
   /*
    * Description forthcoming.
    */
-  kDragActionMove               = (1L << 4),
+  kDragActionMove               = (1 << 4),
 
   /*
    * Description forthcoming.
    */
-  kDragActionDelete             = (1L << 5),
+  kDragActionDelete             = (1 << 5),
 
   /*
    * All of the above drag actions are allowed.
@@ -1575,7 +1575,7 @@ CountDragItems(
 extern OSErr 
 GetDragItemReferenceNumber(
   DragRef        theDrag,
-  UInt16         index,
+  UInt16         theIndex,
   DragItemRef *  theItemRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
@@ -1620,7 +1620,7 @@ extern OSErr
 GetFlavorType(
   DragRef       theDrag,
   DragItemRef   theItemRef,
-  UInt16        index,
+  UInt16        theIndex,
   FlavorType *  theType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 

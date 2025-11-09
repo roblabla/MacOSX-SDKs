@@ -56,6 +56,7 @@ public :
     virtual int GetLineLength(long lineNo) const ;
     virtual wxString GetLineText(long lineNo) const ;
     virtual void CheckSpelling(bool check) { }
+    virtual void SetFont( const wxFont & font , const wxColour& foreground , long windowStyle );    
 
 #ifndef __WXMAC_OSX__
     virtual void            MacControlUserPaneDrawProc(wxInt16 part) = 0 ;
@@ -102,10 +103,6 @@ protected :
 
     // contains the tag for the content (is different for password and non-password controls)
     OSType m_valueTag ;
-
-    // as the selection tag only works correctly when the control has the focus we have to mirror the
-    // intended value
-    EventHandlerRef m_focusHandlerRef ;
 public :
     ControlEditTextSelectionRec m_selection ;
 };

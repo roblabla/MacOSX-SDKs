@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: dcprint.h,v 1.12 2006/11/04 07:45:23 SC Exp $
+// RCS-ID:      $Id: dcprint.h 43012 2006-11-04 07:50:06Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

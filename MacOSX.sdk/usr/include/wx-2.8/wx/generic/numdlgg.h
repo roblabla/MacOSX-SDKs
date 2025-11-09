@@ -4,7 +4,7 @@
 // Author:      John Labenski
 // Modified by:
 // Created:     07.02.04 (extracted from textdlgg.cpp)
-// RCS-ID:      $Id: numdlgg.h,v 1.6 2006/01/26 15:33:27 ABX Exp $
+// RCS-ID:      $Id: numdlgg.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,9 +19,9 @@
 #include "wx/dialog.h"
 
 #if wxUSE_SPINCTRL
-    class WXDLLEXPORT wxSpinCtrl;
+    class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 #else
-    class WXDLLEXPORT wxTextCtrl;
+    class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 #endif // wxUSE_SPINCTRL
 
 // ----------------------------------------------------------------------------

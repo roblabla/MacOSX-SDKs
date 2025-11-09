@@ -3,9 +3,9 @@
  
      Contains:   Memory Manager Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1776,29 +1776,24 @@ PtrToHand(
  *  HandAndHand()
  *  
  *  Summary:
- *    Copies all of the data from one relocatable block to a new
- *    relocatable block.
+ *    Use the HandAndHand function to concatenate two relocatable
+ *    blocks.
  *  
  *  Discussion:
- *    The HandToHand function attempts to copy the information in the
- *    relocatable block to which theHndl is a handle; if successful,
- *    HandToHand sets theHndlto a handle pointing to the new
- *    relocatable block.
+ *    The HandAndHand function concatenates the information from the
+ *    relocatable block to which aHndl is a handle onto the end of the
+ *    relocatable block to which bHndl is a handle. The aHndl variable
+ *    remains unchanged.
  *    
- *    If successful in creating a new relocatable block, the HandToHand
- *    function does not duplicate the properties of the original block.
- *    The new block is unlocked, unpurgeable, and not a resource. Call
- *    HLock or HPurge to adjust the properties of the new
- *    block.
+ *    WARNING
  *    
- *    To copy only part of a relocatable block into a new relocatable
- *    block, use the PtrToHand function. Before calling PtrToHand, lock
- *    and dereference the handle pointing to the relocatable block you
- *    want to copy.
- *    
- *    Because HandToHand replaces its parameter with the new handle,
- *    you should retain the original parameter value somewhere else,
- *    otherwise you will not be able to access it.
+ *    The HandAndHand function dereferences the handle aHndl. You must
+ *    call the HLock procedure to lock the block before calling
+ *    HandAndHand. Afterward, you can call the HUnlock procedure to
+ *    unlock it. Alternatively, you can save the block's original state
+ *    by calling the HGetState function, lock the block by calling
+ *    HLock, and then restore the original settings by calling
+ *    HSetState.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
@@ -1806,14 +1801,14 @@ PtrToHand(
  *  Parameters:
  *    
  *    hand1:
- *      a handle to the relocatable block whose data HandToHand will
- *      copy. On return, theHndl contains a handle to a new relocatable
- *      block whose data duplicates the original.
+ *      A handle to the first relocatable block, whose contents do not
+ *      change but are concatenated to the end of the second
+ *      relocatable block.
  *    
  *    hand2:
- *      a handle to the second relocatable block, whose size the Memory
+ *      A handle to the second relocatable block, whose size the Memory
  *      Manager expands so that it can concatenate the information from
- *      handl to the end of the contents of this block.
+ *      aHndl to the end of the contents of this block.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework

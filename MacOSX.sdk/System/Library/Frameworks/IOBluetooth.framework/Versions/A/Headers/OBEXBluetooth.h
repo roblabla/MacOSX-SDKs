@@ -34,10 +34,14 @@
 	@result		An error code value. 0 if successful.
 	@discussion	You will use a session reference to do all OBEX interaction to a specific device. This method DOES NOT
 				create a connection to the device of any kind.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(	IOBluetoothSDPServiceRecordRef	inSDPServiceRef,
-																			OBEXSessionRef *				outSessionRef );
+																			OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber
@@ -50,11 +54,15 @@ OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(	IOBlue
 	@result		An error code value. 0 if successful.
 	@discussion	You will use a session reference to do all OBEX interaction to a specific device. This method DOES NOT
 				create a connection to the device of any kind.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(	IOBluetoothDeviceRef 		inDeviceRef,
 																					BluetoothRFCOMMChannelID	inChannelID,
-																					OBEXSessionRef *			outSessionRef );
+																					OBEXSessionRef *			outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -68,13 +76,17 @@ OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(	
 										session if return value is kOBEXSuccess.
 	@result		An error code value. 0 if successful.
 	@discussion	This assumes that the RFCOMM channel you have passed it is already open and ready to transmit data
-				to the session. THIS API WILL CHANGE.
+				to the session.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel(	IOBluetoothRFCOMMChannelRef		inRFCOMMChannelRef,
 																				OBEXSessionEventCallback		inCallback,
 																				void *							inUserRefCon,
-																				OBEXSessionRef *				outSessionRef );
+																				OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 typedef	void	(*IOBluetoothOBEXSessionOpenConnectionCallback) ( OBEXSessionRef session, OBEXError status, void * refCon );
@@ -92,11 +104,15 @@ typedef	void	(*IOBluetoothOBEXSessionOpenConnectionCallback) ( OBEXSessionRef se
 				connection will either be opened or have failed with a status code. That status code will most likely have
 				originated from the transport layer being used, so you may receive a Bluetooth error, an IOKit error, etc,
 				but a 0 status should indicate success in all cases.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */ 
 
 OBEXError	IOBluetoothOBEXSessionOpenTransportConnection(	OBEXSessionRef									inSessionRef,
 															IOBluetoothOBEXSessionOpenConnectionCallback	inCallback,
-															void *											inUserRefCon	);
+															void *											inUserRefCon	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #ifdef	__cplusplus
 	}

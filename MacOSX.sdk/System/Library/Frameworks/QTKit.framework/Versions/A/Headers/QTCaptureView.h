@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureView.h
 
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -19,10 +19,6 @@
 
 @interface QTCaptureView : NSView {
 @private
-#if __LP64__
-	int32_t							_proxy;
-	int32_t							_delegateProxy;
-#endif
 	QTCaptureViewInternal			*_internal;
 
 	long							_reserved1;
@@ -50,7 +46,7 @@
 
 @end
 
-@interface NSObject (QTCaptureViewDelegate)
+@interface NSObject (QTCaptureView_Delegate)
 - (CIImage *)view:(QTCaptureView *)view willDisplayImage:(CIImage *)image;
 @end
 

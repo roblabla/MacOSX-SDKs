@@ -1,7 +1,7 @@
 /*
         NSShadow.m
         Application Kit
-	Copyright (c) 2002-2007, Apple Inc.
+	Copyright (c) 2002-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -24,7 +24,7 @@
     void *_reserved;
 }
 
-- (id)init;     // designated initializer
+- (id)init;     // designated initializer, returns a default shadow with zero offset, zero blur radius, and default color
 
 - (NSSize)shadowOffset;  // offset in user space of the shadow from the original drawing, in default user space units, where positive values are up and to the right
 - (void)setShadowOffset:(NSSize)offset;

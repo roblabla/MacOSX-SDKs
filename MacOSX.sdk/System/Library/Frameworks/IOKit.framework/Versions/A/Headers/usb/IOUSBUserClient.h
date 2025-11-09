@@ -42,6 +42,10 @@ enum {
     kUSBDeviceUserClientGetMicroFrameNumber,
     kUSBDeviceUserClientGetFrameNumberWithTime,
     kUSBDeviceUserClientSetAsyncPort,
+	kUSBDeviceUserClientGetDeviceInformation,
+	kUSBDeviceUserClientRequestExtraPower,
+	kUSBDeviceUserClientReturnExtraPower,
+	kUSBDeviceUserClientGetExtraPowerAllocated,
     kIOUSBLibDeviceUserClientNumCommands
     };
 
@@ -95,7 +99,7 @@ struct IOUSBUserClientAsyncParamBlock
 {
     OSAsyncReference64			fAsyncRef;
     uint32_t					fAsyncCount;
-    UInt32						fMax;
+    uint32_t					fMax;
     IOMemoryDescriptor *		fMem;
     IOUSBDevRequestDesc			req;
 };
@@ -105,11 +109,11 @@ struct IOUSBInterfaceUserClientISOAsyncParamBlock
 {
     OSAsyncReference64			fAsyncRef;
 	uint32_t					fAsyncCount;
-    int							frameLen;	// In bytes
-    void *                      frameBase;	// In user task
+    mach_vm_size_t				frameLen;	// In bytes
+    mach_vm_address_t           frameBase;	// In user task
     IOMemoryDescriptor *        dataMem;
     IOMemoryDescriptor *        countMem;
-	UInt32						numFrames;
+	uint64_t					numFrames;
     IOUSBIsocFrame              frames[0];  // Must be the last one
 };
 

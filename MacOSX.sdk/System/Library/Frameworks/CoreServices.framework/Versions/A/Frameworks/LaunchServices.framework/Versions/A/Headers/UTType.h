@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for Uniform Type Identification
  
-     Version:    LaunchServices-283~12
+     Version:    LaunchServices-362.3~1
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -120,7 +120,7 @@ extern "C" {
     document type declaration should only be exported by the application
     which controls the document format.
 
-    An imported declatation is for applications which depend on the
+    An imported declaration is for applications which depend on the
     existence of someone else's type declaration. If application A can
     open application B's document format, then application A makes
     an imported declaration of application B's document type so that
@@ -463,8 +463,7 @@ UTTypeCreateAllIdentifiersForTag(
  *      the class of tags to return
  *  
  *  Result:
- *    an array of tags (as CFStrings), or NULL if there are no tags
- *    with the specified class.
+ *    the tag string, or NULL if there is no tag of the specified class.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
@@ -644,8 +643,8 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               AVAILABLE_MAC_OS_X
  *      the OSType value to encode
  *  
  *  Result:
- *    a new CFString representing the OSType, or NULL if the argument
- *    is 0 or '????'
+ *    a new CFString representing the OSType. Returns the empty string
+ *    when the argument is 0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework

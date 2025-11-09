@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2007, Apple Inc.
+        Copyright (c) 1997-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -32,7 +32,8 @@ typedef NSUInteger NSPopUpArrowPosition;
         unsigned int arrowPosition:2;
         unsigned int ignoreMenuLayout:1;
         unsigned int drawing:1;
-        unsigned int RESERVED:20;
+        unsigned int menuShouldBeUniquedAgainstMain:1;
+        unsigned int RESERVED:19;
     } _pbcFlags;
 #if __LP64__
     id _popupReserved;

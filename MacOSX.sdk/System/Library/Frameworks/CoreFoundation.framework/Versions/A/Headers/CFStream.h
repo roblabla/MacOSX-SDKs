@@ -1,5 +1,5 @@
 /*	CFStream.h
-	Copyright (c) 2000-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2000-2009, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)

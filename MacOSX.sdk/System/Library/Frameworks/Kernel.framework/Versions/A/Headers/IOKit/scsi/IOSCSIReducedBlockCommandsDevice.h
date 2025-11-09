@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,9 +28,9 @@
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // General IOKit headers
 #include <IOKit/IOLib.h>
@@ -43,9 +43,9 @@
 #include <IOKit/scsi/IOSCSIPrimaryCommandsDevice.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Constants
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 
 // RBC power states as defined in T10:1240D SCSI Reduced Block Commands (RBC)
@@ -72,9 +72,9 @@ enum
 // IOSCSIReducedBlockCommandsDevice class.
 class SCSIReducedBlockCommands;
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
@@ -83,8 +83,12 @@ class IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 	
+#ifndef __LP64__
+	
     SCSIReducedBlockCommands *		fSCSIReducedBlockCommandObject;
     SCSIReducedBlockCommands *		GetSCSIReducedBlockCommandObject ( void );
+	
+#endif	/* !__LP64__ */
 	
 	static void			AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
@@ -97,13 +101,15 @@ protected:
         bool			fMediumRemovalPrevented;
         bool			fKnownManualEject;
         UInt32			fPollingMode;
+		bool			fProtocolSpecificPowerControl;
 	};
     IOSCSIReducedBlockCommandsDeviceExpansionData * fIOSCSIReducedBlockCommandsDeviceReserved;
 	
-	#define fPowerDownNotifier		fIOSCSIReducedBlockCommandsDeviceReserved->fPowerDownNotifier
-	#define fMediumRemovalPrevented	fIOSCSIReducedBlockCommandsDeviceReserved->fMediumRemovalPrevented
-	#define fKnownManualEject		fIOSCSIReducedBlockCommandsDeviceReserved->fKnownManualEject
-	#define fPollingMode			fIOSCSIReducedBlockCommandsDeviceReserved->fPollingMode
+	#define fPowerDownNotifier				fIOSCSIReducedBlockCommandsDeviceReserved->fPowerDownNotifier
+	#define fMediumRemovalPrevented			fIOSCSIReducedBlockCommandsDeviceReserved->fMediumRemovalPrevented
+	#define fKnownManualEject				fIOSCSIReducedBlockCommandsDeviceReserved->fKnownManualEject
+	#define fPollingMode					fIOSCSIReducedBlockCommandsDeviceReserved->fPollingMode
+	#define fProtocolSpecificPowerControl	fIOSCSIReducedBlockCommandsDeviceReserved->fProtocolSpecificPowerControl
 	
 	bool				fMediaChanged;
 	bool				fMediaPresent;
@@ -154,11 +160,15 @@ protected:
 									 UInt64					startBlock,
 									 UInt64					blockCount,
 									 void *					clientData );
+
+#ifndef __LP64__
 	
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the subclasses base command set object.
 	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
+
+#endif	/* !__LP64__ */
 	
 	// ----- Power Management Support ------
 		
@@ -204,8 +214,15 @@ protected:
 	virtual void		ResumeDeviceSupport ( void );
 	virtual void		StopDeviceSupport ( void );
 	virtual void		TerminateDeviceSupport ( void );
+	
+	virtual void 		free ( void );
+	
+#ifndef __LP64__
+	
 	virtual bool		CreateCommandSetObjects ( void );
 	virtual void		FreeCommandSetObjects ( void );
+
+#endif	/* !__LP64__ */
 	
 public:
 	

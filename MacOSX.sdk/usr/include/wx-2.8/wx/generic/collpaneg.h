@@ -4,7 +4,7 @@
 // Author:      Francesco Montorsi
 // Modified by:
 // Created:     8/10/2006
-// RCS-ID:      $Id: collpaneg.h,v 1.10 2007/01/07 17:26:19 VZ Exp $
+// RCS-ID:      $Id: collpaneg.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Francesco Montorsi
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -13,8 +13,8 @@
 #define _WX_COLLAPSABLE_PANE_H_GENERIC_
 
 // forward declared
-class WXDLLEXPORT wxButton;
-class WXDLLEXPORT wxStaticLine;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxStaticLine;
 
 // class name
 extern WXDLLIMPEXP_DATA_CORE(const wxChar) wxCollapsiblePaneNameStr[];

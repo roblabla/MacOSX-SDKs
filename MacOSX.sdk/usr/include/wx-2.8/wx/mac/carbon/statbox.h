@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: statbox.h,v 1.7 2006/01/16 14:59:33 MR Exp $
+// RCS-ID:      $Id: statbox.h 49110 2007-10-09 16:03:38Z RD $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -44,6 +44,10 @@ class WXDLLEXPORT wxStaticBox: public wxControl
     virtual void ProcessCommand(wxCommandEvent& WXUNUSED(event)) {};
 
     virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
+    
+#if wxABI_VERSION >= 20807
+    virtual bool AcceptsFocus() const { return false; }
+#endif
 };
 
 #endif

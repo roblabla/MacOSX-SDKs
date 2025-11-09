@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -79,13 +79,15 @@ typedef struct __BCFlags {
     unsigned int        transparent:1;
     unsigned int        inset:2;
     unsigned int        doesNotDimImage:1;
-    unsigned int        gradientType:3;
+    unsigned int        suppressAXValueChangeNote:1;
+    unsigned int        reserved:2;
     unsigned int        useButtonImageSource:1;
     unsigned int        alternateMnemonicLocation:8;
 #else
     unsigned int        alternateMnemonicLocation:8;
     unsigned int        useButtonImageSource:1;
-    unsigned int        gradientType:3;
+    unsigned int        reserved:2;
+    unsigned int        suppressAXValueChangeNote:1;
     unsigned int        doesNotDimImage:1;
     unsigned int        inset:2;
     unsigned int        transparent:1;

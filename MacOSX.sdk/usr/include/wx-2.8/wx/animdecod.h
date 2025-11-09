@@ -2,7 +2,7 @@
 // Name:        wx/animdecod.h
 // Purpose:     wxAnimationDecoder
 // Author:      Francesco Montorsi
-// CVS-ID:      $Id: animdecod.h,v 1.6 2006/12/10 14:18:34 VZ Exp $
+// CVS-ID:      $Id: animdecod.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 2006 Francesco Montorsi
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,8 +17,8 @@
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
 
-class WXDLLIMPEXP_BASE wxInputStream;
-class WXDLLIMPEXP_CORE wxImage;
+class WXDLLIMPEXP_FWD_BASE wxInputStream;
+class WXDLLIMPEXP_FWD_CORE wxImage;
 
 /*
 

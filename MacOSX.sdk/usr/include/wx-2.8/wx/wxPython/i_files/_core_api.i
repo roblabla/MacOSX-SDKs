@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     13-Sept-2003
-// RCS-ID:      $Id: _core_api.i,v 1.19 2006/10/27 06:06:14 RD Exp $
+// RCS-ID:      $Id: _core_api.i 51090 2008-01-08 04:36:23Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -186,7 +186,7 @@ static wxPyCoreAPI API = {
     wxPyBeginBlockThreads,
     wxPyEndBlockThreads,
                                              
-    wxPy_ConvertList,
+    NULL,
                                              
     wxString_in_helper,
     Py2wxString,
@@ -241,6 +241,8 @@ static wxPyCoreAPI API = {
     wxPoint2D_LIST_helper,
     wxRect2D_helper,
 
+    wxPyCBOutputStream_create,
+    wxPyCBOutputStream_copy,
 };
 
 #endif

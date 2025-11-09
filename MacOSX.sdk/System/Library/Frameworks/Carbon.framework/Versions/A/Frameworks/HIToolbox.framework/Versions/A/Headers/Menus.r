@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -102,6 +102,10 @@
 #define kMenuEjectGlyph 				0x8C				/*  Eject key (available on Mac OS X 10.2 and later) */
 #define kMenuEisuGlyph 					0x8D				/*  Japanese eisu key (available in Mac OS X 10.4 and later) */
 #define kMenuKanaGlyph 					0x8E				/*  Japanese kana key (available in Mac OS X 10.4 and later) */
+#define kMenuF16Glyph 					0x8F				/*  F16 key (available in SnowLeopard and later) */
+#define kMenuF17Glyph 					0x90				/*  F17 key (available in SnowLeopard and later) */
+#define kMenuF18Glyph 					0x91				/*  F18 key (available in SnowLeopard and later) */
+#define kMenuF19Glyph 					0x92				/*  F19 key (available in SnowLeopard and later) */
 
 #define kMenuAttrExcludesMarkColumn 	0x01
 #define kMenuAttrAutoDisable 			0x04

@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: glcanvas.h,v 1.11 2006/11/06 00:57:38 VZ Exp $
+// RCS-ID:      $Id: glcanvas.h 43097 2006-11-06 00:57:46Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

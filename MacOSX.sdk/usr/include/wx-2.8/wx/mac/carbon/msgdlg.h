@@ -5,7 +5,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: msgdlg.h,v 1.9 2006/02/08 21:46:11 VZ Exp $
+// RCS-ID:      $Id: msgdlg.h 37393 2006-02-08 21:47:09Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

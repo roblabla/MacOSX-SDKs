@@ -1,8 +1,8 @@
 /*
- *	Message  --  MessageExport.h
+ *    Message  --  MessageExport.h
  *
- *	Copyright (c) 1999, Apple Computer, Inc.
- *	All rights reserved.
+ *    Copyright (c) 1999, Apple Computer, Inc.
+ *    All rights reserved.
  *
  */
 

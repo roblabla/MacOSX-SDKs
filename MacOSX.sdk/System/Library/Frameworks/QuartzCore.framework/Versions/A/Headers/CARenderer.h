@@ -11,14 +11,14 @@
  * The contract between CARenderer and the provided OpenGL context is
  * as follows:
  *
- * 1. the context should have an orthographic projection matrix, such
- *    that (0,0) is in the bottom left corner, and Z position 0 will
- *    not be clipped.
+ * 1. the context should have an orthographic projection matrix and an
+ *    identity model-view matrix, such that vertex position (0,0) is in
+ *    the bottom left corner. (That is, window coordinates must match
+ *    vertex coordinates.)
  *
- * 2. all OpenGL state apart from the viewport, projection and modelview
- *    matrices must have their default values when -render is called.
- *    On return from the -render method, the default values will be
- *    preserved.
+ * 2. all OpenGL state apart from the viewport and projection matrices
+ *    must have their default values when -render is called. On return
+ *    from the -render method, the default values will be preserved.
  *
  * Sample code to initialize the OpenGL context for a window of width W
  * and height H could be:
@@ -30,7 +30,7 @@
  */
 
 #import <QuartzCore/CABase.h>
-#import <QuartzCore/CVBase.h>
+#import <CoreVideo/CVBase.h>
 #import <Foundation/NSObject.h>
 
 @class NSDictionary, CALayer, CIContext;

@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>

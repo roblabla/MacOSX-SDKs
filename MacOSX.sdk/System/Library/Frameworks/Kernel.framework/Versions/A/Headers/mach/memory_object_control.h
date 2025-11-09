@@ -21,7 +21,7 @@ typedef struct {
         char            *name;
         function_ptr_t  function;
 } function_table_entry;
-typedef function_table_entry 	*function_table_t;
+typedef function_table_entry   *function_table_t;
 #endif /* FUNCTION_PTR_T */
 #endif /* AUTOTEST */
 
@@ -80,7 +80,7 @@ kern_return_t memory_object_synchronize_completed
 (
 	memory_object_control_t memory_control,
 	memory_object_offset_t offset,
-	vm_offset_t length
+	memory_object_size_t length
 );
 
 /* Routine memory_object_lock_request */
@@ -123,7 +123,7 @@ kern_return_t memory_object_upl_request
 (
 	memory_object_control_t memory_control,
 	memory_object_offset_t offset,
-	vm_size_t size,
+	upl_size_t size,
 	upl_t *upl,
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t *page_listCnt,
@@ -140,8 +140,8 @@ kern_return_t memory_object_super_upl_request
 (
 	memory_object_control_t memory_control,
 	memory_object_offset_t offset,
-	vm_size_t size,
-	vm_size_t super_size,
+	upl_size_t size,
+	upl_size_t super_size,
 	upl_t *upl,
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t *page_listCnt,
@@ -159,6 +159,7 @@ kern_return_t memory_object_cluster_size
 	memory_object_control_t control,
 	memory_object_offset_t *start,
 	vm_size_t *length,
+	uint32_t *io_streaming,
 	memory_object_fault_info_t fault_info
 );
 
@@ -268,7 +269,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
-		vm_offset_t length;
+		memory_object_size_t length;
 	} __Request__memory_object_synchronize_completed_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -309,7 +310,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
-		vm_size_t size;
+		upl_size_t size;
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
 	} __Request__memory_object_upl_request_t;
@@ -324,8 +325,8 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
-		vm_size_t size;
-		vm_size_t super_size;
+		upl_size_t size;
+		upl_size_t super_size;
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
 	} __Request__memory_object_super_upl_request_t;
@@ -528,6 +529,7 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 		memory_object_offset_t start;
 		vm_size_t length;
+		uint32_t io_streaming;
 	} __Reply__memory_object_cluster_size_t;
 #ifdef  __MigPackStructs
 #pragma pack()

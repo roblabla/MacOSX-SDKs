@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Package Interfaces.
  
-     Version:    AppleEvents-402~78
+     Version:    AppleEvents-496.5~1
  
-     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -71,7 +71,7 @@ enum {
   kAEOpenDocuments              = 'odoc',
   kAEPrintDocuments             = 'pdoc',
   kAEOpenContents               = 'ocon',
-  kAEQuitApplication            = 'quit',
+  kAEQuitApplication            = 'quit', /* may include a property kAEQuitReason indicating what lead to the quit being sent. */
   kAEAnswer                     = 'ansr',
   kAEApplicationDied            = 'obit',
   kAEShowPreferences            = 'pref' /* sent by Mac OS X when the user chooses the Preferences item */
@@ -85,9 +85,6 @@ enum {
   kAENotifyStopRecording        = 'rec0', /* available only in vers 1.0.1 and greater */
   kAENotifyRecording            = 'recr' /* available only in vers 1.0.1 and greater */
 };
-
-
-
 
 
 /*

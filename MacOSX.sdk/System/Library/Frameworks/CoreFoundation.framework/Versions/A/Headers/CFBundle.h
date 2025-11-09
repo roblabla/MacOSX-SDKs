@@ -1,5 +1,5 @@
 /*	CFBundle.h
-	Copyright (c) 1999-2007, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2009, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBUNDLE__)
@@ -58,7 +58,8 @@ CFBundleRef CFBundleGetBundleWithIdentifier(CFStringRef bundleID);
 
 CF_EXPORT
 CFArrayRef CFBundleGetAllBundles(void);
-    /* This is potentially expensive.  Use with care. */
+    /* This is potentially expensive, and not thread-safe.  Use with care. */
+    /* Best used for debuggging or other diagnostic purposes. */
 
 /* ===================== Creating Bundles ===================== */
 
@@ -143,7 +144,7 @@ CF_EXPORT
 CFArrayRef CFBundleCopyResourceURLsOfType(CFBundleRef bundle, CFStringRef resourceType, CFStringRef subDirName);
 
 CF_EXPORT
-CFStringRef CFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName);
+CFStringRef CFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName) CF_FORMAT_ARGUMENT(2);
 
 #define CFCopyLocalizedString(key, comment) \
             CFBundleCopyLocalizedString(CFBundleGetMainBundle(), (key), (key), NULL)
@@ -237,14 +238,14 @@ CFArrayRef CFBundleCopyExecutableArchitecturesForURL(CFURLRef url) AVAILABLE_MAC
 CF_EXPORT
 CFURLRef CFBundleCopyExecutableURL(CFBundleRef bundle);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 enum {
     kCFBundleExecutableArchitectureI386     = 0x00000007,
     kCFBundleExecutableArchitecturePPC      = 0x00000012,
     kCFBundleExecutableArchitectureX86_64   = 0x01000007,
     kCFBundleExecutableArchitecturePPC64    = 0x01000012
 };
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+#endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 CF_EXPORT
 CFArrayRef CFBundleCopyExecutableArchitectures(CFBundleRef bundle) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;

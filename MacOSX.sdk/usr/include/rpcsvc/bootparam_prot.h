@@ -10,10 +10,11 @@
 
 #include <rpc/rpc.h>
 
-#include <sys/param.h>
 #include <rpc/types.h>
 #include <sys/time.h>
 #include <sys/errno.h>
+#include <sys/param.h>
+#include <sys/syslimits.h>
 #include <sys/ucred.h>
 #define MAX_MACHINE_NAME 255
 #define MAX_PATH_LEN 1024

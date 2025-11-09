@@ -3,14 +3,22 @@
  
      Contains:   Master include for ATS private framework
  
-     Version:    ATS-236~129
+     Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1999-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:01 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                ATS.i
+                     Revision:        1.2
+                     Dated:           2007/01/15 23:28:25
+                     Last change by:  kurita
+                     Last comment:    <rdar://problem/4916090> updated copyright.
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 

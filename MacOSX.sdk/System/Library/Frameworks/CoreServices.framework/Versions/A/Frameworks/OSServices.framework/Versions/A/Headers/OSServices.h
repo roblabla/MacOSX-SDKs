@@ -3,9 +3,9 @@
  
      Contains:   Master include for OSServices private framework
  
-     Version:    OSServices-208~152
+     Version:    OSServices-359.2~2
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,9 +25,6 @@
 #endif
 
 
-#ifndef __APPLEDISKPARTITIONS__
-#include <OSServices/AppleDiskPartitions.h>
-#endif
 
 #ifndef __CSIDENTITYAUTHORITY__
 #include <OSServices/CSIdentityAuthority.h>
@@ -61,12 +58,12 @@
 #include <OSServices/WSProtocolHandler.h>
 #endif
 
-
-#if !__LP64__
 #ifndef __POWER__
 #include <OSServices/Power.h>
 #endif
 
+
+#if !__LP64__
 #ifndef __SCSI__
 #include <OSServices/SCSI.h>
 #endif

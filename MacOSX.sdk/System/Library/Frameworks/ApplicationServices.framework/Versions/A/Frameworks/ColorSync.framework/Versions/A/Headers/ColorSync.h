@@ -1,49 +1,17 @@
 /*
-     File:       ColorSync/ColorSync.h
- 
-     Contains:   Master include for ColorSync private framework
- 
-     Copyright:  2000-2005 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult http://developer.apple.com/bugreporter/
- 
-*/
-#ifndef __COLORSYNC__
-#define __COLORSYNC__
+ * ColorSync- ColorSync.h
+ * Copyright (c)  2008 Apple Inc.
+ * All rights reserved.
+ */
 
-#ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
-#endif
+#ifndef __COLORSYNC_MAIN_HEADER__
+#define __COLORSYNC_MAIN_HEADER__
 
+#include <ColorSync/ColorSyncBase.h>
+#include <ColorSync/ColorSyncProfile.h>
+#include <ColorSync/ColorSyncTransform.h>
+#include <ColorSync/ColorSyncCMM.h>
+#include <ColorSync/ColorSyncDevice.h>
 
-#ifndef __CMTYPES__
-#include <ColorSync/CMTypes.h>
-#endif
-
-#ifndef __CMAPPLICATION__
-#include <ColorSync/CMApplication.h>
-#endif
-
-#ifndef __CMFLOATBITMAP__
-#include <ColorSync/CMFloatBitmap.h>
-#endif
-
-#ifndef __CMICCPROFILE__
-#include <ColorSync/CMICCProfile.h>
-#endif
-
-#ifndef __CMDEVICEINTEGRATION__
-#include <ColorSync/CMDeviceIntegration.h>
-#endif
-
-#ifndef __CMMCOMPONENT__
-#include <ColorSync/CMMComponent.h>
-#endif
-
-#ifndef __CMSCRIPTINGPLUGIN__
-#include <ColorSync/CMScriptingPlugin.h>
-#endif
-
-
-#endif /* __COLORSYNC__ */
+#endif /* __COLORSYNC_MAIN_HEADER__ */
 

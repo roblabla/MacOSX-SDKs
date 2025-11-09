@@ -19,7 +19,7 @@
 #include "tcl.h"
 
 #if defined(__WIN32__)
-#   include "../win/tclWinPort.h"
+#   include "tclWinPort.h"
 #else
 #   if defined(MAC_TCL)
 #      include "tclMacPort.h"

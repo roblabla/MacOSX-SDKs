@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -37,6 +37,8 @@
 @class NSString;
 @class NSUndoManager;
 
+// Notifications immediately before and immediately after the context saves.  The user info dictionary contains information about the objects that changed and what changed
+COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification;
 
 // Notification when objects in a context changed:  the user info dictionary contains information about the objects that changed and what changed
@@ -87,7 +89,9 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
       unsigned int _isDirty:1;
       unsigned int _ignoreUndoCheckpoints:1;
 	  unsigned int _propagatingDeletes:1;
-      unsigned int _reservedFlags:19;
+	  unsigned int _isNSEditorEditing:1;
+      unsigned int _isMainThreadBlessed:1;
+      unsigned int _reservedFlags:17;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -109,17 +113,14 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
   long _ignoreChangeNotification;
   id _mergePolicy;
   int32_t _cd_rc;
-  struct _managedObjectContextEditorFlags {
-      unsigned int _isEditing:1;
-      unsigned int _reservedManagedObjectContext:31;
-  } _managedObjectContextEditorFlags;
+  int32_t _reserved3;
   id _editors;
-  id*   _debuggingRecords;
+  id* _debuggingRecords;
   void *_reserved1;
   void *_reserved2;
 }
 
-// coordinator which provides model and handles persistency (multiple contexts can share a coordinator)
+/* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
 - (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
@@ -127,21 +128,20 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
 - (NSUndoManager *)undoManager;
 - (BOOL)hasChanges;
 
-// returns the object for the specified ID if it is registered in the context already or nil
+/* returns the object for the specified ID if it is registered in the context already or nil. It never performs I/O. */
 - (NSManagedObject *)objectRegisteredForID:(NSManagedObjectID *)objectID;    
 
-// returns the object for the specified ID (the object does not already need to be registered in the context, it might be fetched or returned as a fault) - the object is assumed to exist as described by the ID
+/* returns the object for the specified ID if it is already registered, otherwise it creates a fault corresponding to that objectID.  It never returns nil, and never performs I/O.  The object specified by objectID is assumed to exist, and if that assumption is wrong the fault may throw an exception when used. */
 - (NSManagedObject *)objectWithID:(NSManagedObjectID *)objectID;    
+
+/* returns the object for the specified ID if it is already registered in the context, or faults the object into the context.  It might perform I/O if the data is uncached.  If the object cannot be fetched, or does not exist, or cannot be faulted, it returns nil.  Unlike -objectWithID: it never returns a fault.  */
+- (NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSPredicateModifierDirect type:NSEqualToPredicateOperatorType options:0]
 - (NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error;    
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 
-- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error;    
-
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;    
 
 - (void)insertObject:(NSManagedObject *)object;
 - (void)deleteObject:(NSManagedObject *)object;
@@ -191,18 +191,13 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
 - (void)setMergePolicy:(id)mergePolicy;  // acceptable merge policies are listed above as id constants
 - (id)mergePolicy;    // default: NSErrorMergePolicy
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 /* Converts the object IDs of the specified objects to permanent IDs.  This implementation will convert the object ID of each managed object in the specified array to a permanent ID.  Any object in the target array with a permanent ID will be ignored;  additionally, any managed object in the array not already assigned to a store will be assigned, based on the same rules Core Data uses for assignment during a save operation (first writable store supporting the entity, and appropriate for the instance and its related items.)  Although the object will have a permanent ID, it will still respond positively to -isInserted until it is saved.  If an error is encountered obtaining an identifier, the return value will be NO.
 */
-- (BOOL)obtainPermanentIDsForObjects:(NSArray *)objects error:(NSError **)error;
+- (BOOL)obtainPermanentIDsForObjects:(NSArray *)objects error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-
-/* Merges the changes specified in the NSManagedObjectContextDidSaveNotification into the context.  This method will refresh any objects which have been updated in the other context, fault in any newly inserted objects, and invoke deleteObject: on those which have been deleted.
+/* Merges the changes specified in notification object received from another context's NSManagedObjectContextDidSaveNotification into the receiver.  This method will refresh any objects which have been updated in the other context, fault in any newly inserted objects, and invoke deleteObject: on those which have been deleted.  The developer is only responsible for the thread safety of the receiver.
 */
-- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification;
-
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

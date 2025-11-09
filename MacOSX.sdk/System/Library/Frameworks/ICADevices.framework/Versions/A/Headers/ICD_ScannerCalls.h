@@ -65,44 +65,6 @@ typedef struct ScannerObjectInfo
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-struct ICD_ScannerGetPropertyDataPB {
-    ICDHeader                       header;
-
-    ICAObject                       parentObject;               /* <-- */
-    ICAObjectInfo                   parentObjectInfo;           /* <-- */
-    ICAConnectionID            	  	connectionID;               /* <-- */
-    ICAProperty                     property;                   /* <-- */
-    ICAPropertyInfo               	propertyInfo;               /* <-- */
-    UInt32                          startByte;                  /* <-- */
-    UInt32                          requestedSize;              /* <-- */
-
-    void *                          dataPtr;                    /* <-> */
-
-    UInt32                          actualSize;                 /* --> */
-    OSType                          dataType;                   /* --> */
-};
-typedef struct ICD_ScannerGetPropertyDataPB    ICD_ScannerGetPropertyDataPB;
-
-//------------------------------------------------------------------------------------------------------------------------------
-
-struct ICD_ScannerSetPropertyDataPB {
-    ICDHeader                       header;
-
-    ICAObject                       parentObject;               /* <-- */
-    ICAObjectInfo                   parentObjectInfo;           /* <-- */
-    ICAConnectionID            	  	connectionID;               /* <-- */
-    ICAProperty                     property;                   /* <-- */
-    ICAPropertyInfo               	propertyInfo;               /* <-- */
-    UInt32                          startByte;                  /* <-- */
-    void *                          dataPtr;                    /* <-- */
-    UInt32                          dataSize;                   /* <-- */
-    UInt32                          totalDataSize;              /* <-- */
-    OSType                          dataType;                   /* <-- */
-};
-typedef struct ICD_ScannerSetPropertyDataPB    ICD_ScannerSetPropertyDataPB;
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 struct ICD_ScannerObjectSendMessagePB {
     ICDHeader                       header;
 
@@ -215,6 +177,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenBluetoothDevice)
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenTCPIPDevice)
                                     (CFDictionaryRef params, ScannerObjectInfo* objectInfo);
 
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenMassStorageDevice)
+                                    (CFStringRef diskBSDName, DASessionRef daSession, ScannerObjectInfo* objectInfo);
+
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerCloseDevice)
                                     (ScannerObjectInfo* objectInfo);
 
@@ -229,10 +194,10 @@ typedef CALLBACK_API_C(ICAError, __ICD_ScannerCleanup)
                                     (ScannerObjectInfo* objectInfo);
 
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerGetPropertyData)
-                                    (const ScannerObjectInfo* objectInfo, ICD_ScannerGetPropertyDataPB* pb);
+                                    (const ScannerObjectInfo* objectInfo, void* pb);
 
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerSetPropertyData)
-                                    (const ScannerObjectInfo* objectInfo, const ICD_ScannerSetPropertyDataPB* pb);
+                                    (const ScannerObjectInfo* objectInfo, const void* pb);
 
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerReadFileData)
                                     (const ScannerObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
@@ -270,6 +235,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_ScannerStart)
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFile)
                                       (const ScannerObjectInfo* objectInfo, FILE* file, UInt32 offset, long* length);
 
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFileDescriptor)
+                                      (const ScannerObjectInfo* objectInfo, int fd, UInt32 offset, long* length);
+
 //------------------------------------------------------------------------------------------------------------------------------
 
 // callback functions
@@ -300,6 +268,8 @@ typedef struct ICD_Scannerscanner_callback_functions
     __ICD_ScannerOpenBluetoothDevice                f_ICD_ScannerOpenBluetoothDevice;
     __ICD_ScannerOpenTCPIPDevice                    f_ICD_ScannerOpenTCPIPDevice;
     __ICD_ScannerWriteDataToFile                    f_ICD_ScannerWriteDataToFile;
+    __ICD_ScannerOpenMassStorageDevice              f_ICD_ScannerOpenMassStorageDevice;
+    __ICD_ScannerWriteDataToFileDescriptor          f_ICD_ScannerWriteDataToFileDescriptor;
 } ICD_scanner_callback_functions;
 extern ICD_scanner_callback_functions gICDScannerCallbackFunctions;
 
@@ -309,7 +279,7 @@ extern ICD_scanner_callback_functions gICDScannerCallbackFunctions;
 // scanner related callBacks into the ICADevices.framework:
 int ICD_ScannerMain (int argc, const char* argv[]);
 
-ICAError ICDScannerGetStandardPropertyData(const ScannerObjectInfo* objectInfo, ICD_ScannerGetPropertyDataPB* pb);
+ICAError ICDScannerGetStandardPropertyData(const ScannerObjectInfo* objectInfo, void* pb);
 
 ICAError ICDScannerNewObjectInfoCreated(const ScannerObjectInfo* parentInfo, UInt32 index, ICAObject* newICAObject);
 
@@ -317,14 +287,14 @@ ICAError ICDScannerCopyDeviceInfoDictionary(const char*		deviceName,		// name of
                                          CFDictionaryRef*	theDict);		// this CFDictionaryRef contains information about the camera, e.g. the icon file,...
 
 ICAError ICDScannerCreateICAThumbnailFromICNS(const char*		fileName,		// filename for .icns icon file
-                                           ICAThumbnail*	thumbnail);		// pointer to ICAThumbnail
+                                                    void*	thumbnail);		// pointer to ICAThumbnail
                                                                       // NOTE: you have to allocate and prefill the ICAThumbnail
                                                                       //       malloc(sizeof(ICAThumbnail)+9215);
                                                                       //         width & height -> 48
                                                                       //		 dataSize       -> 9216  (= 48*48*4)
 
 
-ICAError ICDScannerInitiateNotificationCallback(const ICAExtendedRegisterEventNotificationPB* pb);
+ICAError ICDScannerInitiateNotificationCallback(const void* pb);
 
 ICAError ICDScannerCreateEventDataCookie(const ICAObject object, ICAEventDataCookie* cookie);
 

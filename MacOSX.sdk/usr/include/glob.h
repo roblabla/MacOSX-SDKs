@@ -58,7 +58,14 @@ typedef struct {
 	int gl_flags;		/* Copy of flags parameter to glob. */
 	char **gl_pathv;	/* List of paths matching pattern. */
 				/* Copy of errfunc parameter to glob. */
-	int (*gl_errfunc)(const char *, int);
+#ifdef __BLOCKS__
+	union {
+#endif /* __BLOCKS__ */
+		int (*gl_errfunc)(const char *, int);
+#ifdef __BLOCKS__
+		int (^gl_errblk)(const char *, int);
+	};
+#endif /* __BLOCKS__ */
 
 	/*
 	 * Alternate filesystem access methods for glob; replacement
@@ -103,6 +110,9 @@ typedef struct {
 #define	GLOB_QUOTE	0x0400	/* Quote special chars with \. */
 #define	GLOB_TILDE	0x0800	/* Expand tilde names from the passwd file. */
 #define	GLOB_LIMIT	0x1000	/* limit number of returned paths */
+#ifdef __BLOCKS__
+#define	_GLOB_ERR_BLOCK	0x80000000 /* (internal) error callback is a block */
+#endif /* __BLOCKS__ */
 
 /* source compatibility, these are the old names */
 #define GLOB_MAXPATH	GLOB_LIMIT
@@ -111,6 +121,10 @@ typedef struct {
 __BEGIN_DECLS
 int	glob(const char * __restrict, int, int (*)(const char *, int), 
 	     glob_t * __restrict) __DARWIN_INODE64(glob);
+#ifdef __BLOCKS__
+int	glob_b(const char * __restrict, int, int (^)(const char *, int), 
+	     glob_t * __restrict) __DARWIN_INODE64(glob_b);
+#endif /* __BLOCKS__ */
 void	globfree(glob_t *);
 __END_DECLS
 

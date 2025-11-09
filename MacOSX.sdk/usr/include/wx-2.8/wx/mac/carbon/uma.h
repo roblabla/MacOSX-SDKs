@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     03/02/99
-// RCS-ID:      $Id: uma.h,v 1.6 2006/10/16 09:29:48 ABX Exp $
+// RCS-ID:      $Id: uma.h 46352 2007-06-07 06:57:22Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -102,11 +102,12 @@ OSStatus UMAGetHelpMenu(
 
 OSStatus UMADrawThemePlacard( const Rect *inRect , ThemeDrawState inState ) ;
 
-// Clipboard support
-
-OSStatus UMAPutScrap( Size size , OSType type , void *data ) ;
-
 #define GetWindowUpdateRgn( inWindow , updateRgn ) GetWindowRegion( inWindow , kWindowUpdateRgn, updateRgn )
+
+// Quartz 
+
+CGDataProviderRef UMACGDataProviderCreateWithCFData( CFDataRef data );
+CGDataConsumerRef UMACGDataConsumerCreateWithCFData( CFMutableDataRef data );
 
 #endif // wxUSE_GUI
 

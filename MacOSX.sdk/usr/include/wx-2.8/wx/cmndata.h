@@ -4,7 +4,7 @@
 // Author:      Julian Smart and others
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: cmndata.h,v 1.61.4.1 2007/04/16 13:00:58 VZ Exp $
+// RCS-ID:      $Id: cmndata.h 53135 2008-04-12 02:31:04Z VZ $
 // Copyright:   (c)
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@
 #endif
 
 
-class WXDLLEXPORT wxPrintNativeDataBase;
+class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
 
 
 class WXDLLEXPORT wxColourData: public wxObject

@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
+	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -376,6 +376,11 @@ Returning NO indicates a fatal error occured and prevents the Quartz Composer en
 Override this execution method if the plug-in needs to know when the Quartz Composer engine stops using it.
 */
 - (void) enableExecution:(id<QCPlugInContext>)context;
+
+/*
+Override this execution method in order to describe when a time dependent plug-in should be executed next.
+*/
+- (NSTimeInterval) executionTimeForContext:(id<QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments;
 
 /*
 Override this execution method to perform the actual processing or rendering: read from the input ports and update the output ports or render to the plug-in context.

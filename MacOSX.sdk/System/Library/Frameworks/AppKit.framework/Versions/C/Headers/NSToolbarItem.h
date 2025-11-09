@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2007, Apple Inc.
+	Copyright (c) 2000-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -46,14 +46,14 @@
         unsigned int isCustomItemType:1;
 	unsigned int hasValidatedAutoModeConfiguration:1;
 	unsigned int useAutoModeConfiguration:1;
-        unsigned int hasNonDefaultPrioritySetting:1;
+        unsigned int RESERVED2:1;
         unsigned int autovalidationDisabled:1;
         unsigned int tagHasBeenSet:1;
 	unsigned int sizeHasBeenSet:1;
         unsigned int stateWasDisabledBeforeSheet:1;
 	unsigned int RESERVED:8;
     } _tbiFlags;
-    NSArray *		_allPossibleLabelsToFit;
+    id                  _tbiReserved;
         
     id			_itemViewer;
     NSView *		_view;

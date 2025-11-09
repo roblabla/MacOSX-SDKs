@@ -4,10 +4,7 @@
      Contains:   API for the CFBundle an IOAudio driver can specify for the HAL to use
                  to provide implemenation for device specific properties.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

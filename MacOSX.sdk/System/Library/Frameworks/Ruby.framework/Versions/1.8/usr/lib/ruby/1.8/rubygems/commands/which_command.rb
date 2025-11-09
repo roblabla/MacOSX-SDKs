@@ -3,10 +3,10 @@ require 'rubygems/gem_path_searcher'
 
 class Gem::Commands::WhichCommand < Gem::Command
 
-  EXT = %w[.rb .rbw .so .dll] # HACK
+  EXT = %w[.rb .rbw .so .dll .bundle] # HACK
 
   def initialize
-    super 'which', 'Find the location of a library',
+    super 'which', 'Find the location of a library file you can require',
           :search_gems_first => false, :show_all => false
 
     add_option '-a', '--[no-]all', 'show all matching files' do |show_all, options|
@@ -46,13 +46,13 @@ class Gem::Commands::WhichCommand < Gem::Command
         end
 
         say "(checking gem #{spec.full_name} for #{arg})" if
-          Gem.configuration.verbose
+          Gem.configuration.verbose and $stdout.tty?
       end
 
       paths = find_paths arg, dirs
 
       if paths.empty? then
-        say "Can't find #{arg}"
+        say "Can't find ruby library file or shared library #{arg}"
       else
         say paths
       end
@@ -84,3 +84,4 @@ class Gem::Commands::WhichCommand < Gem::Command
   end
 
 end
+

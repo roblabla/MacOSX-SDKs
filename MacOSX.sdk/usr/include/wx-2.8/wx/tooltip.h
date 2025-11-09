@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Robert Roebling
-// RCS-ID:      $Id: tooltip.h,v 1.10 2006/01/23 03:27:34 MR Exp $
+// RCS-ID:      $Id: tooltip.h 37066 2006-01-23 03:27:34Z MR $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.23.2.1.2.3 2007/12/31 07:20:06 sebastian Exp $ */
+/* $Id: xml_common.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
@@ -35,14 +35,19 @@ typedef struct _dom_object {
 } dom_object;
 
 #ifdef PHP_WIN32
-#ifdef PHPAPI
-#undef PHPAPI
-#endif
-#ifdef DOM_EXPORTS
-#define PHPAPI __declspec(dllexport)
-#else
-#define PHPAPI __declspec(dllimport)
-#endif /* DOM_EXPORTS */
+#	ifdef PHPAPI
+#		undef PHPAPI
+#	endif
+#	ifdef DOM_EXPORTS
+#		define PHPAPI __declspec(dllexport)
+#	else
+#		define PHPAPI __declspec(dllimport)
+#	endif /* DOM_EXPORTS */
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	ifdef PHPAPI
+#		undef PHPAPI
+#	endif
+#	define PHPAPI __attribute__ ((visibility("default")))
 #endif /* PHP_WIN32 */
 
 #define PHP_DOM_EXPORT PHPAPI
@@ -90,3 +95,12 @@ PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj);
 	DOM_GET_OBJ(__ptr, __id, __prtype, __intern);
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

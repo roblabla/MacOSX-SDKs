@@ -3,10 +3,7 @@
  
  	Contains:   Umbrella header for the CoreMIDI framework.
  
- 	Version:	Technology: Mac OS X
- 				Release:	Mac OS X
- 
- 	Copyright:  (c) 2000-2001 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -21,5 +18,6 @@
 #include <CoreMIDI/MIDIServices.h>
 #include <CoreMIDI/MIDISetup.h>
 #include <CoreMIDI/MIDIThruConnection.h>
+#include <CoreMIDI/MIDIDriver.h>
 
 #endif

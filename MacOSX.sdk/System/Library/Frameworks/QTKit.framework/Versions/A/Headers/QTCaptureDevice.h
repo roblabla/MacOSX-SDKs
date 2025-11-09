@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureDevice.h
  
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
  */
 
@@ -13,15 +13,15 @@
 //==================================================================================================
 // Notifications
 //==================================================================================================
-QTKIT_EXTERN NSString * const QTCaptureDeviceWasConnectedNotification					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-QTKIT_EXTERN NSString * const QTCaptureDeviceWasDisconnectedNotification				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-QTKIT_EXTERN NSString * const QTCaptureDeviceFormatDescriptionsWillChangeNotification	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-QTKIT_EXTERN NSString * const QTCaptureDeviceFormatDescriptionsDidChangeNotification	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-QTKIT_EXTERN NSString * const QTCaptureDeviceAttributeWillChangeNotification			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-QTKIT_EXTERN NSString * const QTCaptureDeviceAttributeDidChangeNotification				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceWasConnectedNotification					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceWasDisconnectedNotification				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceFormatDescriptionsWillChangeNotification	AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceFormatDescriptionsDidChangeNotification	AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceAttributeWillChangeNotification			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceAttributeDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
 
 // userInfo key for QTCaptureDeviceAttributeWillChangeNotification and QTCaptureDeviceAttributeDidChangeNotification - returns the key of the attribute that changed
-QTKIT_EXTERN NSString * const QTCaptureDeviceChangedAttributeKey						AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+QTKIT_EXTERN NSString * const QTCaptureDeviceChangedAttributeKey						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
 
 //==================================================================================================
 // Attributes
@@ -29,41 +29,41 @@ QTKIT_EXTERN NSString * const QTCaptureDeviceChangedAttributeKey						AVAILABLE_
 
 // This attribute returns whether or not data capture on the device is suspended due to a feature on the device.
 // For example, this attribute is YES for the external iSight when its privacy iris is closed, or for the internal iSight on a notebook when the notebook's display is closed.
-QTKIT_EXTERN NSString * const QTCaptureDeviceSuspendedAttribute							AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSNumber interpreted as a BOOL
+QTKIT_EXTERN NSString * const QTCaptureDeviceSuspendedAttribute							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber interpreted as a BOOL
                                                                                                                                     // Read Only. KVC key name: @"suspended"
 
 // This attribute returns an array of QTCaptureDevice objects that, although they are separate devices on the system, are a part of the same physical device as the receiver.
 // For example, for the external iSight camera, this attribute returns an array containing a QTCaptureDevice for the external iSight microphone.
-QTKIT_EXTERN NSString * const QTCaptureDeviceLinkedDevicesAttribute						AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSArray of QTCaptureDevice objects
+QTKIT_EXTERN NSString * const QTCaptureDeviceLinkedDevicesAttribute						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSArray of QTCaptureDevice objects
                                                                                                                                     // Read Only. KVC key name: @"linkedDevices"
 
 // Some devices can capture data from one of multiple data sources (different input jacks on the same audio device, for example).
 // For devices with multiple possible data sources these attributes can be used to get and set which data source the device is currently using.
-QTKIT_EXTERN NSString * const QTCaptureDeviceAvailableInputSourcesAttribute             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSArray of NSDictionary objects containing keys and values described below
+QTKIT_EXTERN NSString * const QTCaptureDeviceAvailableInputSourcesAttribute             AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSArray of NSDictionary objects containing keys and values described below
                                                                                                                                     // Read Only. KVC key name: @"availableInputSources"
-QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceIdentifierAttribute             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// An object returned by the QTCaptureDeviceInputSourceIdentifierKey key in one of the dictionaries returned by QTCaptureDeviceAvailableInputSourcesAttribute
+QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceIdentifierAttribute             AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // An object returned by the QTCaptureDeviceInputSourceIdentifierKey key in one of the dictionaries returned by QTCaptureDeviceAvailableInputSourcesAttribute
                                                                                                                                     // Read/Write. KVC key name: @"inputSourceIdentifier"
 
 // keys for the dictionaries returned by QTCaptureDeviceAvailableInputSourcesAttribute:
-QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceIdentifierKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// An object representing a unique ID for the input source. This ID is not guaranteed to persist between device connections or changes in device configuration.
+QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceIdentifierKey                   AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // An object representing a unique ID for the input source. This ID is not guaranteed to persist between device connections or changes in device configuration.
                                                                                                                                     // KVC key name: @"identifier"
-QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceLocalizedDisplayNameKey         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSString containing a name for the data source suitable for display in a user interface
+QTKIT_EXTERN NSString * const QTCaptureDeviceInputSourceLocalizedDisplayNameKey         AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSString containing a name for the data source suitable for display in a user interface
                                                                                                                                     // KVC key name: @"localizedDisplayName"
 
 // If a device was intialized using a legacy Sequence Grabber component, this attribute returns the component instance responsible for capturing from the device
 #if !__LP64__
-QTKIT_EXTERN NSString * const QTCaptureDeviceLegacySequenceGrabberAttribute				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSValue interpreted as a Sequence Grabber ComponentInstance
+QTKIT_EXTERN NSString * const QTCaptureDeviceLegacySequenceGrabberAttribute				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSValue interpreted as a Sequence Grabber ComponentInstance
                                                                                                                                     // Read Only. KVC key name: @"legacySequenceGrabber"
 #endif
 
 // For AVC devices with transport controls, such as tape-based camcorders, this attribute can be used to control the media on the device
-QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsAttribute				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSDictionary containing keys and values described below
+QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsAttribute				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSDictionary containing keys and values described below
                                                                                                                                     // Read/Write. KVC key name: @"AVCTransportControls"
 
 // keys for the dictionary passed to QTCaptureDeviceAVCTransportControlsAttribute
-QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsPlaybackModeKey		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSNumber interpreted as a  QTCaptureDeviceAVCTransportControlsPlaybackMode
+QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsPlaybackModeKey		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber interpreted as a  QTCaptureDeviceAVCTransportControlsPlaybackMode
                                                                                                                                     // KVC key name: @"playbackMode"
-QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsSpeedKey				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// NSNumber interpreted as a QTCaptureDeviceAVCTransportControlsSpeed
+QTKIT_EXTERN NSString * const QTCaptureDeviceAVCTransportControlsSpeedKey				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber interpreted as a QTCaptureDeviceAVCTransportControlsSpeed
                                                                                                                                     // KVC key name: @"speed"
 
 // values for the dictionary passed to QTCaptureDeviceAVCTransportControlsAttribute
@@ -100,11 +100,7 @@ typedef NSInteger QTCaptureDeviceAVCTransportControlsSpeed;
 
 @interface QTCaptureDevice : NSObject <NSCoding> {
 @private
-#if __LP64__
-	int32_t					_proxy;
-#else
 	QTCaptureDeviceInternal	*_internal;
-#endif
 	long					_reserved1;
 	long					_reserved2;
 	long					_reserved3;

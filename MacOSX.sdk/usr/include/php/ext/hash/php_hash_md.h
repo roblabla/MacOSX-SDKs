@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_md.h,v 1.2.2.4.2.3 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: php_hash_md.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_HASH_MD_H
 #define PHP_HASH_MD_H
@@ -81,7 +81,7 @@ typedef struct {
 	unsigned char buffer[64];
 } PHP_MD4_CTX;
 
-#define PHP_MD4Init			PHP_MD5Init
+PHP_HASH_API void PHP_MD4Init(PHP_MD4_CTX *);
 PHP_HASH_API void PHP_MD4Update(PHP_MD4_CTX *context, const unsigned char *, unsigned int);
 PHP_HASH_API void PHP_MD4Final(unsigned char[16], PHP_MD4_CTX *);
 

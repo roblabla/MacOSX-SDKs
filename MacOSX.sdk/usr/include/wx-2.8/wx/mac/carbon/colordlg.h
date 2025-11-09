@@ -5,7 +5,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: colordlg.h,v 1.6 2006/01/26 17:20:22 ABX Exp $
+// RCS-ID:      $Id: colordlg.h 37164 2006-01-26 17:20:50Z ABX $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

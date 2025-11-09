@@ -26,13 +26,13 @@
 - (void)setUsesScriptAssistant:(BOOL)usesScriptAssistant;
 - (BOOL)usesTabs;
 - (void)setUsesTabs:(BOOL)usesTabs;
-- (int)tabWidth;
-- (void)setTabWidth:(int)tabWidth;
+- (NSUInteger)tabWidth;
+- (void)setTabWidth:(NSUInteger)tabWidth;
 - (BOOL)wrapsLines;
 - (void)setWrapsLines:(BOOL)wrapsLines;
 - (BOOL)indentsWrappedLines;
 - (void)setIndentsWrappedLines:(BOOL)indentsWrappedLines;
-- (int)indentWidth;
-- (void)setIndentWidth:(int)indentWidth;
+- (NSUInteger)indentWidth;
+- (void)setIndentWidth:(NSUInteger)indentWidth;
 
 @end

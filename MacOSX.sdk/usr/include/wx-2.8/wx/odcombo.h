@@ -4,7 +4,7 @@
 // Author:      Jaakko Salli
 // Modified by:
 // Created:     Apr-30-2006
-// RCS-ID:      $Id: odcombo.h,v 1.17 2006/09/19 17:16:37 RR Exp $
+// RCS-ID:      $Id: odcombo.h 41305 2006-09-19 17:16:50Z RR $
 // Copyright:   (c) Jaakko Salli
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from record.xml by c-client.xsl using XSLT.
+ * This file generated automatically from record.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,6 +13,10 @@
 #define __RECORD_H
 
 #include "xcb.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_RECORD_MAJOR_VERSION 1
 #define XCB_RECORD_MINOR_VERSION 13
@@ -117,9 +121,9 @@ typedef struct xcb_record_element_header_iterator_t {
 } xcb_record_element_header_iterator_t;
 
 typedef enum xcb_record_h_type_t {
-    XCB_RECORD_H_TYPE_FROM_SERVER_TIME = 0x01,
-    XCB_RECORD_H_TYPE_FROM_CLIENT_TIME = 0x02,
-    XCB_RECORD_H_TYPE_FROM_CLIENT_SEQUENCE = 0x04
+    XCB_RECORD_H_TYPE_FROM_SERVER_TIME = 1,
+    XCB_RECORD_H_TYPE_FROM_CLIENT_TIME = 2,
+    XCB_RECORD_H_TYPE_FROM_CLIENT_SEQUENCE = 4
 } xcb_record_h_type_t;
 
 typedef uint32_t xcb_record_client_spec_t;
@@ -794,6 +798,8 @@ xcb_record_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_record_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1093,6 +1099,8 @@ xcb_record_get_context_intercepted_clients_iterator (const xcb_record_get_contex
  * The parameter @p e supplied to this function must be NULL if
  * xcb_record_get_context_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1210,6 +1218,8 @@ xcb_record_enable_context_data_end (const xcb_record_enable_context_reply_t *R  
  * The parameter @p e supplied to this function must be NULL if
  * xcb_record_enable_context_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1326,6 +1336,10 @@ xcb_void_cookie_t
 xcb_record_free_context (xcb_connection_t     *c  /**< */,
                          xcb_record_context_t  context  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,9 @@
 
 #import <WebKit/DOMUIEvent.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_3_0
 
+@class DOMAbstractView;
 @class NSString;
 
 enum {
@@ -43,8 +45,13 @@ enum {
 @property(readonly) BOOL shiftKey;
 @property(readonly) BOOL altKey;
 @property(readonly) BOOL metaKey;
+@property(readonly) BOOL altGraphKey AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly) int keyCode;
 @property(readonly) int charCode;
 
 - (BOOL)getModifierState:(NSString *)keyIdentifierArg;
+- (void)initKeyboardEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view keyIdentifier:(NSString *)keyIdentifier keyLocation:(unsigned)keyLocation ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey altGraphKey:(BOOL)altGraphKey AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initKeyboardEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view keyIdentifier:(NSString *)keyIdentifier keyLocation:(unsigned)keyLocation ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001, 2004, 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2001, 2004, 2005, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _DHCPCLIENTPREFERENCES_H
 #define _DHCPCLIENTPREFERENCES_H
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <CoreFoundation/CFString.h>
 
@@ -50,9 +51,9 @@ __BEGIN_DECLS
  */
 
 Boolean
-DHCPClientPreferencesSetApplicationOptions(CFStringRef applicationID,
-					   UInt8 * options,
-					   CFIndex count);
+DHCPClientPreferencesSetApplicationOptions	(CFStringRef	applicationID,
+						 UInt8		*options,
+						 CFIndex	count)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function DHCPClientPreferencesCopyApplicationOptions
@@ -68,9 +69,9 @@ DHCPClientPreferencesSetApplicationOptions(CFStringRef applicationID,
  */
 
 UInt8 *
-DHCPClientPreferencesCopyApplicationOptions(CFStringRef applicationID,
-					    CFIndex * count);
+DHCPClientPreferencesCopyApplicationOptions	(CFStringRef	applicationID,
+						 CFIndex	*count)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
 
-#endif /* _DHCPCLIENTPREFERENCES_H */
+#endif	/* _DHCPCLIENTPREFERENCES_H */

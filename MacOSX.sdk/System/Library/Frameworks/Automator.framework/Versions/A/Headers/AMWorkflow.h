@@ -5,6 +5,8 @@
     Public header file.
 */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 #import <Foundation/Foundation.h>
 
 @class AMAction;
@@ -51,6 +53,8 @@
 - (id)input;
 - (void)setInput:(id)input;
 
+- (id)output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (BOOL)setValue:(id)value forVariableWithName:(NSString *)variableName;
 - (id)valueForVariableWithName:(NSString *)variableName;
 
@@ -60,3 +64,5 @@
 - (void)moveActionAtIndex:(NSUInteger)startIndex toIndex:(NSUInteger)endIndex;
 
 @end
+
+#endif

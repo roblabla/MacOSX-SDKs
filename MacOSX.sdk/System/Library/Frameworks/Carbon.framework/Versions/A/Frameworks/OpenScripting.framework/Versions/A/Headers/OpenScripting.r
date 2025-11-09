@@ -3,9 +3,9 @@
  
      Contains:   Master include for OpenScripting private framework
  
-     Version:    OSA-122~37
+     Version:    OSA-137~257
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

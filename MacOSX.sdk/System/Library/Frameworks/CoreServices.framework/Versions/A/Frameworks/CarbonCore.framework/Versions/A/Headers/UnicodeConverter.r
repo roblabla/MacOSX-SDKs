@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2008 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,7 +38,7 @@
 															/*     input UTF-16 (and UTF-32) is assumed to be in big endian  */
 															/*     unless it begins with a byte-order-mark,  */
 															/*     and output UTF-16 (and UTF-32) will be in big endian.  */
-#define kUnicodeUseExternalEncodingFormBit  13
+#define kUnicodeUseExternalEncodingFormBit  13				/*     Bits 16-17 are defined in TextEncodingConverter.h for TECSetBasicOptions  */
 
 #define kUnicodeUseFallbacksMask 		0x00000001
 #define kUnicodeKeepInfoMask 			0x00000002

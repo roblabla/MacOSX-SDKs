@@ -9,9 +9,9 @@
 
 typedef struct CGImageDestination *CGImageDestinationRef;
 
+#include <CoreGraphics/CoreGraphics.h>
 #include <ImageIO/CGImageSource.h>
 
-CG_EXTERN_C_BEGIN
 
 
 /** Properties which may be passed to "CGImageDestinationAddImage"
@@ -26,7 +26,7 @@ CG_EXTERN_C_BEGIN
  * A value of 0.0 implies that that maximum compression is 
  * desired. */
 
-CG_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /* The desired background color to composite against when writing 
@@ -35,17 +35,17 @@ CG_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  AVAILABL
  * any alpha component of its own.  If not present a white color
  * will be used if needed. */
 
-CG_EXTERN const CFStringRef kCGImageDestinationBackgroundColor  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImageDestinationBackgroundColor  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
 /* Return the CFTypeID for CGImageDestinations. */
 
-CG_EXTERN CFTypeID CGImageDestinationGetTypeID(void)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFTypeID CGImageDestinationGetTypeID(void)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return an array of supported type identifiers. */
 
-CG_EXTERN CFArrayRef CGImageDestinationCopyTypeIdentifiers(void)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFArrayRef CGImageDestinationCopyTypeIdentifiers(void)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Create an image destination writing to the data consumer `consumer'.
  * The parameter `type' specifies the type identifier of the resulting
@@ -54,7 +54,7 @@ CG_EXTERN CFArrayRef CGImageDestinationCopyTypeIdentifiers(void)  AVAILABLE_MAC_
  * dictionary is reserved for future use; currently, you should pass NULL
  * for this parameter. */
 
-CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithDataConsumer(CGDataConsumerRef consumer, CFStringRef type, size_t count, CFDictionaryRef options)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithDataConsumer(CGDataConsumerRef consumer, CFStringRef type, size_t count, CFDictionaryRef options)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Create an image destination writing to `data'. The parameter `type'
  * specifies the type identifier of the resulting image file.  The
@@ -62,7 +62,7 @@ CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithDataConsumer(CGDataC
  * that the image file will contain. The `options' dictionary is reserved
  * for future use; currently, you should pass NULL for this parameter. */
 
-CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithData(CFMutableDataRef data, CFStringRef type, size_t count, CFDictionaryRef options)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithData(CFMutableDataRef data, CFStringRef type, size_t count, CFDictionaryRef options)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Create an image destination writing to `url'. The parameter `type'
  * specifies the type identifier of the resulting image file.  The
@@ -71,19 +71,19 @@ CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithData(CFMutableDataRe
  * for future use; currently, you should pass NULL for this parameter.
  * Note that if `url' already exists, it will be overwritten. */
 
-CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithURL(CFURLRef url, CFStringRef type, size_t count, CFDictionaryRef options)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGImageDestinationRef CGImageDestinationCreateWithURL(CFURLRef url, CFStringRef type, size_t count, CFDictionaryRef options)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Specify the dictionary `properties' of properties which apply to all
  * images in the image destination `idst'. */
 
-CG_EXTERN void CGImageDestinationSetProperties(CGImageDestinationRef idst, CFDictionaryRef properties)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN void CGImageDestinationSetProperties(CGImageDestinationRef idst, CFDictionaryRef properties)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the next image in the image destination `idst' to be `image' with
  * optional properties specified in `properties'.  An error is logged if
  * more images are added than specified in the original count of the image
  * destination. */
 
-CG_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef idst, CGImageRef image, CFDictionaryRef properties)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef idst, CGImageRef image, CFDictionaryRef properties)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the next image in the image destination `idst' to be the image at
  * `index' in the image source `isrc'.  The index is zero-based. The
@@ -92,7 +92,7 @@ CG_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef idst, CGImageRef
  * the value kCFNull, the corresponding property in the destination will be
  * removed. */
 
-CG_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef idst, CGImageSourceRef isrc, size_t index, CFDictionaryRef properties)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef idst, CGImageSourceRef isrc, size_t index, CFDictionaryRef properties)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Write everything to the destination data, url or consumer of the image
  * destination `idst'.  You must call this function or the image
@@ -100,9 +100,8 @@ CG_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef idst, 
  * additional data will be written to the image destination.  Return true
  * if the image was successfully written; false otherwise. */
 
-CG_EXTERN bool CGImageDestinationFinalize(CGImageDestinationRef idst)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN bool CGImageDestinationFinalize(CGImageDestinationRef idst)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
-CG_EXTERN_C_END
 
 #endif /* CGIMAGEDESTINATION_H_ */

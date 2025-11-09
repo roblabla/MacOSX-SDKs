@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.98.2.1.2.8 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_globals.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -150,17 +150,26 @@ struct _php_core_globals {
 	char *last_error_message;
 	char *last_error_file;
 	int  last_error_lineno;
-	error_handling_t  error_handling;
-	zend_class_entry *exception_class;
 
 	char *disable_functions;
 	char *disable_classes;
 	zend_bool allow_url_include;
+	zend_bool exit_on_timeout;
 #ifdef PHP_WIN32
 	zend_bool com_initialized;
 #endif
 	long max_input_nesting_level;
 	zend_bool in_user_include;
+
+	char *user_ini_filename;
+	long user_ini_cache_ttl;
+
+	char *request_order;
+
+	zend_bool mail_x_header;
+	char *mail_log;
+
+	zend_bool in_error_log;
 };
 
 

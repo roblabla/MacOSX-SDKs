@@ -1758,7 +1758,7 @@
 	(*(AGL_MACRO_CONTEXT)->disp.get_programiv)(AGL_MACRO_CONTEXT_RENDERER, program, pname, params)
 
 #define glGetAttachedShaders(program, maxCount, count, shaders) \
-	(*(AGL_MACRO_CONTEXT)->disp.get_attached_objects_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, maxCount, count, (GLhandleARB *) shaders)
+	(*(AGL_MACRO_CONTEXT)->disp.get_attached_shaders)(AGL_MACRO_CONTEXT_RENDERER, program, maxCount, count, shaders)
 
 #define glGetShaderInfoLog(shader, bufSize, length, infoLog) \
 	(*(AGL_MACRO_CONTEXT)->disp.get_shader_info_log)(AGL_MACRO_CONTEXT_RENDERER, shader, bufSize, length, infoLog)

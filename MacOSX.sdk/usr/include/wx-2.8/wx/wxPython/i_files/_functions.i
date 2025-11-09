@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     3-July-1997
-// RCS-ID:      $Id: _functions.i,v 1.35 2006/09/06 04:20:38 RD Exp $
+// RCS-ID:      $Id: _functions.i 46360 2007-06-07 18:45:06Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -449,7 +449,7 @@ public:
 };
 
 
-MustHaveApp(wxThread);
+MustHaveApp(wxThread_IsMain);
 %inline %{
     bool wxThread_IsMain() {
 #ifdef WXP_WITH_THREAD

@@ -114,49 +114,54 @@
      T_DEFAULT = 330,
      T_BREAK = 331,
      T_CONTINUE = 332,
-     T_FUNCTION = 333,
-     T_CONST = 334,
-     T_RETURN = 335,
-     T_TRY = 336,
-     T_CATCH = 337,
-     T_THROW = 338,
-     T_USE = 339,
-     T_GLOBAL = 340,
-     T_PUBLIC = 341,
-     T_PROTECTED = 342,
-     T_PRIVATE = 343,
-     T_FINAL = 344,
-     T_ABSTRACT = 345,
-     T_STATIC = 346,
-     T_VAR = 347,
-     T_UNSET = 348,
-     T_ISSET = 349,
-     T_EMPTY = 350,
-     T_HALT_COMPILER = 351,
-     T_CLASS = 352,
-     T_INTERFACE = 353,
-     T_EXTENDS = 354,
-     T_IMPLEMENTS = 355,
-     T_OBJECT_OPERATOR = 356,
-     T_DOUBLE_ARROW = 357,
-     T_LIST = 358,
-     T_ARRAY = 359,
-     T_CLASS_C = 360,
-     T_METHOD_C = 361,
-     T_FUNC_C = 362,
-     T_LINE = 363,
-     T_FILE = 364,
-     T_COMMENT = 365,
-     T_DOC_COMMENT = 366,
-     T_OPEN_TAG = 367,
-     T_OPEN_TAG_WITH_ECHO = 368,
-     T_CLOSE_TAG = 369,
-     T_WHITESPACE = 370,
-     T_START_HEREDOC = 371,
-     T_END_HEREDOC = 372,
-     T_DOLLAR_OPEN_CURLY_BRACES = 373,
-     T_CURLY_OPEN = 374,
-     T_PAAMAYIM_NEKUDOTAYIM = 375
+     T_GOTO = 333,
+     T_FUNCTION = 334,
+     T_CONST = 335,
+     T_RETURN = 336,
+     T_TRY = 337,
+     T_CATCH = 338,
+     T_THROW = 339,
+     T_USE = 340,
+     T_GLOBAL = 341,
+     T_PUBLIC = 342,
+     T_PROTECTED = 343,
+     T_PRIVATE = 344,
+     T_FINAL = 345,
+     T_ABSTRACT = 346,
+     T_STATIC = 347,
+     T_VAR = 348,
+     T_UNSET = 349,
+     T_ISSET = 350,
+     T_EMPTY = 351,
+     T_HALT_COMPILER = 352,
+     T_CLASS = 353,
+     T_INTERFACE = 354,
+     T_EXTENDS = 355,
+     T_IMPLEMENTS = 356,
+     T_OBJECT_OPERATOR = 357,
+     T_DOUBLE_ARROW = 358,
+     T_LIST = 359,
+     T_ARRAY = 360,
+     T_CLASS_C = 361,
+     T_METHOD_C = 362,
+     T_FUNC_C = 363,
+     T_LINE = 364,
+     T_FILE = 365,
+     T_COMMENT = 366,
+     T_DOC_COMMENT = 367,
+     T_OPEN_TAG = 368,
+     T_OPEN_TAG_WITH_ECHO = 369,
+     T_CLOSE_TAG = 370,
+     T_WHITESPACE = 371,
+     T_START_HEREDOC = 372,
+     T_END_HEREDOC = 373,
+     T_DOLLAR_OPEN_CURLY_BRACES = 374,
+     T_CURLY_OPEN = 375,
+     T_PAAMAYIM_NEKUDOTAYIM = 376,
+     T_NAMESPACE = 377,
+     T_NS_C = 378,
+     T_DIR = 379,
+     T_NS_SEPARATOR = 380
    };
 #endif
 /* Tokens.  */
@@ -235,49 +240,54 @@
 #define T_DEFAULT 330
 #define T_BREAK 331
 #define T_CONTINUE 332
-#define T_FUNCTION 333
-#define T_CONST 334
-#define T_RETURN 335
-#define T_TRY 336
-#define T_CATCH 337
-#define T_THROW 338
-#define T_USE 339
-#define T_GLOBAL 340
-#define T_PUBLIC 341
-#define T_PROTECTED 342
-#define T_PRIVATE 343
-#define T_FINAL 344
-#define T_ABSTRACT 345
-#define T_STATIC 346
-#define T_VAR 347
-#define T_UNSET 348
-#define T_ISSET 349
-#define T_EMPTY 350
-#define T_HALT_COMPILER 351
-#define T_CLASS 352
-#define T_INTERFACE 353
-#define T_EXTENDS 354
-#define T_IMPLEMENTS 355
-#define T_OBJECT_OPERATOR 356
-#define T_DOUBLE_ARROW 357
-#define T_LIST 358
-#define T_ARRAY 359
-#define T_CLASS_C 360
-#define T_METHOD_C 361
-#define T_FUNC_C 362
-#define T_LINE 363
-#define T_FILE 364
-#define T_COMMENT 365
-#define T_DOC_COMMENT 366
-#define T_OPEN_TAG 367
-#define T_OPEN_TAG_WITH_ECHO 368
-#define T_CLOSE_TAG 369
-#define T_WHITESPACE 370
-#define T_START_HEREDOC 371
-#define T_END_HEREDOC 372
-#define T_DOLLAR_OPEN_CURLY_BRACES 373
-#define T_CURLY_OPEN 374
-#define T_PAAMAYIM_NEKUDOTAYIM 375
+#define T_GOTO 333
+#define T_FUNCTION 334
+#define T_CONST 335
+#define T_RETURN 336
+#define T_TRY 337
+#define T_CATCH 338
+#define T_THROW 339
+#define T_USE 340
+#define T_GLOBAL 341
+#define T_PUBLIC 342
+#define T_PROTECTED 343
+#define T_PRIVATE 344
+#define T_FINAL 345
+#define T_ABSTRACT 346
+#define T_STATIC 347
+#define T_VAR 348
+#define T_UNSET 349
+#define T_ISSET 350
+#define T_EMPTY 351
+#define T_HALT_COMPILER 352
+#define T_CLASS 353
+#define T_INTERFACE 354
+#define T_EXTENDS 355
+#define T_IMPLEMENTS 356
+#define T_OBJECT_OPERATOR 357
+#define T_DOUBLE_ARROW 358
+#define T_LIST 359
+#define T_ARRAY 360
+#define T_CLASS_C 361
+#define T_METHOD_C 362
+#define T_FUNC_C 363
+#define T_LINE 364
+#define T_FILE 365
+#define T_COMMENT 366
+#define T_DOC_COMMENT 367
+#define T_OPEN_TAG 368
+#define T_OPEN_TAG_WITH_ECHO 369
+#define T_CLOSE_TAG 370
+#define T_WHITESPACE 371
+#define T_START_HEREDOC 372
+#define T_END_HEREDOC 373
+#define T_DOLLAR_OPEN_CURLY_BRACES 374
+#define T_CURLY_OPEN 375
+#define T_PAAMAYIM_NEKUDOTAYIM 376
+#define T_NAMESPACE 377
+#define T_NS_C 378
+#define T_DIR 379
+#define T_NS_SEPARATOR 380
 
 
 

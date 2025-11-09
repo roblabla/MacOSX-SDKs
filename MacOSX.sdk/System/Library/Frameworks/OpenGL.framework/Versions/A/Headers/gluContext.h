@@ -1,11 +1,12 @@
 /*
-	Copyright:	(c) 1999 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c) 1999-2008 Apple Inc. All rights reserved.
 */
 
 #ifndef _GLUCONTEXT_H
 #define _GLUCONTEXT_H
 
 #include <OpenGL/glu.h>
+#include <OpenGL/CGLTypes.h>
 
 #ifdef __cplusplus
 extern "C" {

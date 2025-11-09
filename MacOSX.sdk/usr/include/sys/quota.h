@@ -148,9 +148,9 @@ struct dqfilehdr {
 	u_int32_t dqh_maxentries;	/* must be a power of 2 */
 	u_int32_t dqh_entrycnt;		/* count of active entries */
 	u_int32_t dqh_flags;		/* reserved for now (0) */
-	time_t	  dqh_chktime;		/* time of last quota check */
-	time_t	  dqh_btime;		/* time limit for excessive disk use */
-	time_t	  dqh_itime;		/* time limit for excessive files */
+	u_int32_t dqh_chktime;		/* time of last quota check */
+	u_int32_t dqh_btime;		/* time limit for excessive disk use */
+	u_int32_t dqh_itime;		/* time limit for excessive files */
 	char      dqh_string[16];	/* tag string */
 	u_int32_t dqh_spare[4];		/* pad struct to power of 2 */
 };
@@ -162,8 +162,8 @@ struct dqblk {
 	u_int32_t dqb_ihardlimit;	/* maximum # allocated inodes + 1 */
 	u_int32_t dqb_isoftlimit;	/* preferred inode limit */
 	u_int32_t dqb_curinodes;	/* current # allocated inodes */
-	time_t	  dqb_btime;		/* time limit for excessive disk use */
-	time_t	  dqb_itime;		/* time limit for excessive files */
+	u_int32_t dqb_btime;		/* time limit for excessive disk use */
+	u_int32_t dqb_itime;		/* time limit for excessive files */
 	u_int32_t dqb_id;		/* identifier (0 for empty entries) */
 	u_int32_t dqb_spare[4];		/* pad struct to power of 2 */
 };
@@ -192,7 +192,7 @@ struct dqblk {
  * golden ratio to the machine's word size.
  */
 #define dqhash1(id, shift, mask)  \
-	((((id) * 2654435761UL) >> (shift)) & (mask))
+	((((id) * 2654435761U) >> (shift)) & (mask))
 
 #define dqhash2(id, mask)  \
 	(dqhash1((id), 11, (mask)>>1) | 1)
@@ -206,10 +206,10 @@ struct dqblk {
  * Compute the hash shift value.
  * It is the word size, in bits, minus the hash table size, in bits.
  */
-static __inline int dqhashshift(u_long);
+static __inline int dqhashshift(u_int32_t);
 
 static __inline int
-dqhashshift(u_long size)
+dqhashshift(u_int32_t size)
 {
 	int shift;
 

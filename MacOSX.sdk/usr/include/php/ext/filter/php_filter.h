@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.10.2.3 2007/12/31 07:20:06 sebastian Exp $ */
+/* $Id: php_filter.h 297245 2010-03-31 22:59:09Z rasmus $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -28,16 +28,11 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
+#include "ext/standard/html.h"
 #include "php_variables.h"
 
 extern zend_module_entry filter_module_entry;
 #define phpext_filter_ptr &filter_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_FILTER_API __declspec(dllexport)
-#else
-#define PHP_FILTER_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"
@@ -87,6 +82,7 @@ void php_filter_validate_ip(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_encoded(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_special_chars(PHP_INPUT_FILTER_PARAM_DECL);
+void php_filter_full_special_chars(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_unsafe_raw(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_email(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_url(PHP_INPUT_FILTER_PARAM_DECL);

@@ -67,25 +67,37 @@
 #define EVFILT_PROC		(-5)	/* attached to struct proc */
 #define EVFILT_SIGNAL		(-6)	/* attached to struct proc */
 #define EVFILT_TIMER		(-7)	/* timers */
-#define EVFILT_MACHPORT		(-8)	/* Mach ports */
+#define EVFILT_MACHPORT         (-8)	/* Mach portsets */
 #define EVFILT_FS		(-9)	/* Filesystem events */
+#define EVFILT_USER             (-10)   /* User events */
+#define	EVFILT_SESSION		(-11)	/* Audit session events */
 
-#define EVFILT_SYSCOUNT		9
+#define EVFILT_SYSCOUNT		11
 #define EVFILT_THREADMARKER	EVFILT_SYSCOUNT /* Internal use only */
 
 #pragma pack(4)
 
 struct kevent {
 	uintptr_t	ident;		/* identifier for this event */
-	short		filter;		/* filter for event */
-	unsigned short	flags;		/* general flags */
-	unsigned int	fflags;		/* filter-specific flags */
+	int16_t		filter;		/* filter for event */
+	uint16_t	flags;		/* general flags */
+	uint32_t	fflags;		/* filter-specific flags */
 	intptr_t	data;		/* filter-specific data */
 	void		*udata;		/* opaque user data identifier */
 };
 
 
 #pragma pack()
+
+struct kevent64_s {
+	uint64_t	ident;		/* identifier for this event */
+	int16_t		filter;		/* filter for event */
+	uint16_t	flags;		/* general flags */
+	uint32_t	fflags;		/* filter-specific flags */
+	int64_t		data;		/* filter-specific data */
+	uint64_t	udata;		/* opaque user data identifier */
+	uint64_t	ext[2];		/* filter-specific extensions */
+};
 
 #define EV_SET(kevp, a, b, c, d, e, f) do {	\
 	struct kevent *__kevp__ = (kevp);	\
@@ -95,6 +107,18 @@ struct kevent {
 	__kevp__->fflags = (d);			\
 	__kevp__->data = (e);			\
 	__kevp__->udata = (f);			\
+} while(0)
+
+#define EV_SET64(kevp, a, b, c, d, e, f, g, h) do {	\
+	struct kevent64_s *__kevp__ = (kevp);		\
+	__kevp__->ident = (a);				\
+	__kevp__->filter = (b);				\
+	__kevp__->flags = (c);				\
+	__kevp__->fflags = (d);				\
+	__kevp__->data = (e);				\
+	__kevp__->udata = (f);				\
+	__kevp__->ext[0] = (g);				\
+	__kevp__->ext[1] = (h);				\
 } while(0)
 
 /* actions */
@@ -107,6 +131,7 @@ struct kevent {
 /* flags */
 #define EV_ONESHOT	0x0010		/* only report one occurrence */
 #define EV_CLEAR	0x0020		/* clear event state after reporting */
+#define EV_DISPATCH     0x0080          /* disable event after reporting */
 
 #define EV_SYSFLAGS	0xF000		/* reserved by system */
 #define EV_FLAG0	0x1000		/* filter-specific flag */
@@ -138,6 +163,30 @@ struct kevent {
 #define EV_OOBAND	EV_FLAG1
 
 /*
+ * data/hint fflags for EVFILT_USER, shared with userspace
+ */
+
+/*
+ * On input, NOTE_TRIGGER causes the event to be triggered for output.
+ */
+#define NOTE_TRIGGER	0x01000000
+#define EV_TRIGGER      0x0100 /*deprecated--for backwards compatibility only*/
+
+/*
+ * On input, the top two bits of fflags specifies how the lower twenty four 
+ * bits should be applied to the stored value of fflags.
+ *
+ * On output, the top two bits will always be set to NOTE_FFNOP and the
+ * remaining twenty four bits will contain the stored fflags value.
+ */
+#define NOTE_FFNOP      0x00000000              /* ignore input fflags */
+#define NOTE_FFAND      0x40000000              /* and fflags */
+#define NOTE_FFOR       0x80000000              /* or fflags */
+#define NOTE_FFCOPY     0xc0000000              /* copy fflags */
+#define NOTE_FFCTRLMASK 0xc0000000              /* mask for operations */
+#define NOTE_FFLAGSMASK	0x00ffffff 
+
+/*
  * data/hint fflags for EVFILT_{READ|WRITE}, shared with userspace
  *
  * The default behavior for EVFILT_READ is to make the determination
@@ -154,6 +203,7 @@ struct kevent {
 #define	NOTE_LINK	0x00000010		/* link count changed */
 #define	NOTE_RENAME	0x00000020		/* vnode was renamed */
 #define	NOTE_REVOKE	0x00000040		/* vnode access was revoked */
+#define NOTE_NONE	0x00000080		/* No specific vnode event: to test for EVFILT_READ activation*/
 
 /*
  * data/hint fflags for EVFILT_PROC, shared with userspace
@@ -184,7 +234,49 @@ struct kevent {
 #define NOTE_NSECONDS	0x00000004		/* data is nanoseconds     */
 #define NOTE_ABSOLUTE	0x00000008		/* absolute timeout        */
 						/* ... implicit EV_ONESHOT */
- 
+/*
+ * data/hint fflags for EVFILT_MACHPORT, shared with userspace.
+ *
+ * Only portsets are support at this time.
+ *
+ * The fflags field can optionally contain the MACH_RCV_MSG, MACH_RCV_LARGE,
+ * and related trailer receive options as defined in <mach/message.h>.
+ * The presence of these flags directs the kevent64() call to attempt to receive
+ * the message during kevent delivery, rather than just indicate that a message exists.
+ * On setup, The ext[0] field contains the receive buffer pointer and ext[1] contains
+ * the receive buffer length.  Upon event delivery, the actual received message size
+ * is returned in ext[1].  As with mach_msg(), the buffer must be large enough to
+ * receive the message and the requested (or default) message trailers.  In addition,
+ * the fflags field contains the return code normally returned by mach_msg().
+ *
+ * If no message receipt options were provided in the fflags field on setup, no
+ * message is received by this call. Instead, on output, the data field simply
+ * contains the name of the actual port detected with a message waiting.
+ */
+
+/*
+ * data/hint fflags for EVFILT_SESSION, shared with userspace.
+ *
+ * The kevent ident field should be set to AU_SESSION_ANY_ASID if interested
+ * in events for any session.
+ *
+ * NOTE_AS_UPDATE may be going away since struct auditinfo_addr may become 
+ * immutable once initially set.
+ */
+#define	NOTE_AS_START	0x00000001		/* start of new session */
+#define	NOTE_AS_END	0x00000002		/* start of new session */
+#define	NOTE_AS_ERR	0x00000004		/* error tracking new session */
+#define	NOTE_AS_CLOSE	0x00000008		/* currently unsupported */
+#define	NOTE_AS_UPDATE	0x00000010		/* session data updated */
+
+/*
+ * Kevent ident value for any session.
+ */
+#define	AS_ANY_ASID	0xFFFFFFFF
+
+struct au_sentry;	/* Audit session entry */
+
+
 /*
  * DEPRECATED!!!!!!!!!
  * NOTE_TRACK, NOTE_TRACKERR, and NOTE_CHILD are no longer supported as of 10.5

@@ -2,7 +2,7 @@
  *	CTStringAttributes.h
  *	CoreText
  *
- *	Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
  *
  */
 
@@ -35,6 +35,24 @@ extern "C" {
 */
 
 extern const CFStringRef kCTFontAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@const		kCTForegroundColorFromContextAttributeName
+	@abstract	Never set a foreground color in the CGContext; use what is set as
+				the context's fill color.
+
+	@discussion Value must be a CFBooleanRef. Default is false. The reason
+				why this exists is because an NSAttributedString defaults to a
+				black color if no color attribute is set. This forces CoreText to
+				set the color in the context. This will allow developers to
+				sidestep this, making CoreText set nothing but font information
+				in the CGContext. If set, this attribute also determines the
+				color used by kCTUnderlineStyleAttributeName, in which case it
+				overrides the foreground color.
+*/
+
+extern const CFStringRef kCTForegroundColorFromContextAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*!
@@ -79,7 +97,7 @@ extern const CFStringRef kCTLigatureAttributeName AVAILABLE_MAC_OS_X_VERSION_10_
 	@const		kCTForegroundColorAttributeName
 	@abstract	The foreground color.
 
-	@discussion Value must be a CGColorRef. Default value is black
+	@discussion Value must be a CGColorRef. Default value is black.
 */
 
 extern const CFStringRef kCTForegroundColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -99,6 +117,30 @@ extern const CFStringRef kCTParagraphStyleAttributeName AVAILABLE_MAC_OS_X_VERSI
 
 
 /*!
+	@const		kCTStrokeWidthAttributeName
+	@abstract	The stroke width.
+
+	@discussion Value must be a CFNumberRef. Default value is 0.0, or no stroke.
+				This attribute, interpreted as a percentage of font point size,
+				controls the text drawing mode: positive values effect drawing
+				with stroke only; negative values are for stroke and fill. A
+				typical value for outlined text is 3.0.
+*/
+
+extern const CFStringRef kCTStrokeWidthAttributeName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*!
+	@const		kCTStrokeColorAttributeName
+	@abstract	The stroke color.
+
+	@discussion Value must be a CGColorRef. Default is the foreground color.
+*/
+
+extern const CFStringRef kCTStrokeColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*!
 	@const		kCTUnderlineStyleAttributeName
 	@abstract	Allows the setting of an underline to be applied at render
 				time.
@@ -111,6 +153,28 @@ extern const CFStringRef kCTParagraphStyleAttributeName AVAILABLE_MAC_OS_X_VERSI
 */
 
 extern const CFStringRef kCTUnderlineStyleAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@const		kCTSuperscriptAttributeName
+	@abstract	Controls vertical text positioning.
+
+	@discussion Value must be a CFNumberRef. Default is int value 0. If supported
+				by the specified font, a value of 1 enables superscripting and a
+				value of -1 enables subscripting.
+*/
+
+extern const CFStringRef kCTSuperscriptAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@const		kCTUnderlineColorAttributeName
+	@abstract	The underline color.
+
+	@discussion Value must be a CGColorRef. Default is the foreground color.
+*/
+
+extern const CFStringRef kCTUnderlineColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*!
@@ -137,6 +201,20 @@ extern const CFStringRef kCTVerticalFormsAttributeName AVAILABLE_MAC_OS_X_VERSIO
 */
 
 extern const CFStringRef kCTGlyphInfoAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*!
+	@const		kCTCharacterShapeAttributeName
+	@abstract	Controls glyph selection.
+
+	@discussion	Value must be a CFNumberRef. Default is value is 0 (disabled).
+				A non-zero value is interpreted as Apple Type Services
+				kCharacterShapeType selector + 1; see <ATS/SFNTLayoutTypes.h>
+				for selectors. For example, an attribute value of 1 corresponds
+				to kTraditionalCharactersSelector.
+*/
+
+extern const CFStringRef kCTCharacterShapeAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*!

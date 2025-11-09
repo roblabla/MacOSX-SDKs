@@ -3,10 +3,7 @@
  
      Contains:   Specification of Protocol for Cocoa based UI Views for AudioUnits
  
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
- 
-     Copyright:  (c) 2003 by Apple, Inc., all rights reserved.
+     Copyright:  (c) 2003 - 2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,6 +11,8 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+#if __OBJC__
 
 #import <Cocoa/Cocoa.h>
 #include <AudioUnit/AudioUnit.h>
@@ -58,3 +57,5 @@
 - (NSView *)uiViewForAudioUnit:(AudioUnit)inAudioUnit withSize:(NSSize)inPreferredSize;
 
 @end
+
+#endif

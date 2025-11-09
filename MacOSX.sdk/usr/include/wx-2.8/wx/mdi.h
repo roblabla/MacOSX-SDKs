@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: mdi.h,v 1.19 2006/01/23 03:27:32 MR Exp $
+// RCS-ID:      $Id: mdi.h 37066 2006-01-23 03:27:34Z MR $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

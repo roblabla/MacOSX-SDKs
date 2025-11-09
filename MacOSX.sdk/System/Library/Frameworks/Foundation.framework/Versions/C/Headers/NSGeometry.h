@@ -1,15 +1,22 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
 #import <Foundation/NSValue.h>
 #import <Foundation/NSCoder.h>
 
+#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#import <CoreGraphics/CGBase.h>
+#import <CoreGraphics/CGGeometry.h>
+#elif TARGET_OS_WIN32
+#import <CGCompat.h>
+#elif TARGET_OS_MAC
 #import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGBase.h>
 #import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGGeometry.h>
+#endif
 
-#if __LP64__ || NS_BUILD_32_LIKE_64
+#if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 
 typedef CGPoint NSPoint;
 
@@ -131,7 +138,7 @@ NS_INLINE CGFloat NSHeight(NSRect aRect) {
     return (aRect.size.height);
 }
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 NS_INLINE NSRect NSRectFromCGRect(CGRect cgrect) {
     union _ {NSRect ns; CGRect cg;};
@@ -213,4 +220,15 @@ FOUNDATION_EXPORT NSRect NSRectFromString(NSString *aString);
 
 @end
 
+@interface NSCoder (NSGeometryKeyedCoding)
+
+- (void)encodePoint:(NSPoint)point forKey:(NSString *)key;
+- (void)encodeSize:(NSSize)size forKey:(NSString *)key;
+- (void)encodeRect:(NSRect)rect forKey:(NSString *)key;
+
+- (NSPoint)decodePointForKey:(NSString *)key;
+- (NSSize)decodeSizeForKey:(NSString *)key;
+- (NSRect)decodeRectForKey:(NSString *)key;
+
+@end
 

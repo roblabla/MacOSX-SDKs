@@ -76,44 +76,6 @@ typedef struct ObjectInfo
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-struct ICD_GetPropertyDataPB {
-    ICDHeader                       header;
-
-    ICAObject                       parentObject;               /* <-- */
-    ICAObjectInfo                   parentObjectInfo;           /* <-- */
-    ICAConnectionID            	  	connectionID;               /* <-- */
-    ICAProperty                     property;                   /* <-- */
-    ICAPropertyInfo               	propertyInfo;               /* <-- */
-    UInt32                          startByte;                  /* <-- */
-    UInt32                          requestedSize;              /* <-- */
-
-    void *                          dataPtr;                    /* <-> */
-
-    UInt32                          actualSize;                 /* --> */
-    OSType                          dataType;                   /* --> */
-};
-typedef struct ICD_GetPropertyDataPB    ICD_GetPropertyDataPB;
-
-//------------------------------------------------------------------------------------------------------------------------------
-
-struct ICD_SetPropertyDataPB {
-    ICDHeader                       header;
-
-    ICAObject                       parentObject;               /* <-- */
-    ICAObjectInfo                   parentObjectInfo;           /* <-- */
-    ICAConnectionID            	  	connectionID;               /* <-- */
-    ICAProperty                     property;                   /* <-- */
-    ICAPropertyInfo               	propertyInfo;               /* <-- */
-    UInt32                          startByte;                  /* <-- */
-    void *                          dataPtr;                    /* <-- */
-    UInt32                          dataSize;                   /* <-- */
-    UInt32                          totalDataSize;              /* <-- */
-    OSType                          dataType;                   /* <-- */
-};
-typedef struct ICD_SetPropertyDataPB    ICD_SetPropertyDataPB;
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 struct ICD_ObjectSendMessagePB {
     ICDHeader                       header;
 
@@ -146,6 +108,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_OpenBluetoothDevice)
 typedef CALLBACK_API_C(ICAError, __ICD_OpenTCPIPDevice)
                                     (CFDictionaryRef params, ObjectInfo* objectInfo);
 
+typedef CALLBACK_API_C(ICAError, __ICD_OpenMassStorageDevice)
+                                    (CFStringRef diskBSDName, DASessionRef daSession, ObjectInfo* objectInfo);
+
 typedef CALLBACK_API_C(ICAError, __ICD_CloseDevice)
                                     (ObjectInfo* objectInfo);
         
@@ -160,10 +125,10 @@ typedef CALLBACK_API_C(ICAError, __ICD_Cleanup)
                                     (ObjectInfo* objectInfo);
                                 
 typedef CALLBACK_API_C(ICAError, __ICD_GetPropertyData)
-                                    (const ObjectInfo* objectInfo, ICD_GetPropertyDataPB* pb);
+                                    (const ObjectInfo* objectInfo, void* pb);
                             
 typedef CALLBACK_API_C(ICAError, __ICD_SetPropertyData)
-                                    (const ObjectInfo* objectInfo, const ICD_SetPropertyDataPB* pb);
+                                    (const ObjectInfo* objectInfo, const void* pb);
                             
 typedef CALLBACK_API_C(ICAError, __ICD_ReadFileData)
                                     (const ObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
@@ -180,11 +145,14 @@ typedef CALLBACK_API_C(ICAError, __ICD_AddPropertiesToCFDictionary)
 typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFile)
                                     (const ObjectInfo* objectInfo, FILE* file, UInt32 offset, long* length);
 
+typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFileDescriptor)
+                                    (const ObjectInfo* objectInfo, int fd, UInt32 offset, long* length);
+
 // camera related callBacks into the ICADevices.framework:
 
 int ICD_main (int argc, const char* argv[]);
 
-ICAError ICDGetStandardPropertyData(const ObjectInfo* objectInfo, ICD_GetPropertyDataPB* pb);
+ICAError ICDGetStandardPropertyData(const ObjectInfo* objectInfo, void* pb);
 ICAError ICDNewObjectInfoCreated(const ObjectInfo* parentInfo, UInt32 index, ICAObject* newICAObject);
 
 typedef CALLBACK_API_C( void , ICDNewObjectCreatedCompletion )(const ObjectInfo* info);
@@ -198,14 +166,14 @@ ICAError ICDCopyDeviceInfoDictionary( const char* deviceName, CFDictionaryRef* t
 
 
 ICAError ICDCreateICAThumbnailFromICNS(const char* fileName,		// filename for .icns icon file
-                                    ICAThumbnail* thumbnail);		// pointer to ICAThumbnail
+                                             void* thumbnail);		// pointer to ICAThumbnail
                                                                     // NOTE: you have to allocate and prefill the ICAThumbnail
                                                                     //       malloc(sizeof(ICAThumbnail)+9215);
                                                                     //         width & height -> 48
                                                                     //		   dataSize       -> 9216  (= 48*48*4)
 
-ICAError ICDCreateICAThumbnailFromIconRef( const IconRef iconRef, ICAThumbnail* thumbnail );
-ICAError ICDInitiateNotificationCallback(const ICAExtendedRegisterEventNotificationPB* pb);
+ICAError ICDCreateICAThumbnailFromIconRef( const IconRef iconRef, void* thumbnail );
+ICAError ICDInitiateNotificationCallback(const void* pb);
 
 
 ICAError ICDCreateEventDataCookie(const ICAObject object, ICAEventDataCookie* cookie);
@@ -263,6 +231,8 @@ typedef struct ICD_callback_functions
     __ICD_OpenBluetoothDevice               f_ICD_OpenBluetoothDevice;
     __ICD_OpenTCPIPDevice                   f_ICD_OpenTCPIPDevice;
     __ICD_WriteDataToFile                   f_ICD_WriteDataToFile;
+    __ICD_OpenMassStorageDevice             f_ICD_OpenMassStorageDevice;
+    __ICD_WriteDataToFileDescriptor         f_ICD_WriteDataToFileDescriptor;
 } ICD_callback_functions;
 extern ICD_callback_functions gICDCallbackFunctions;
 

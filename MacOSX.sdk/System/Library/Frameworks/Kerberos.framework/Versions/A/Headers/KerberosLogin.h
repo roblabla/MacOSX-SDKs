@@ -1,32 +1,26 @@
 /*
- * Copyright 1998-2004 Massachusetts Institute of Technology.
- * All Rights Reserved.
- *
- * Export of this software from the United States of America may
- * require a specific license from the United States Government.
- * It is the responsibility of any person or organization contemplating
- * export to obtain such a license before exporting.
- * 
- * WITHIN THAT CONSTRAINT, permission to use, copy, modify, and
- * distribute this software and its documentation for any purpose and
- * without fee is hereby granted, provided that the above copyright
- * notice appear in all copies and that both that copyright notice and
- * this permission notice appear in supporting documentation, and that
- * the name of M.I.T. not be used in advertising or publicity pertaining
- * to distribution of the software without specific, written prior
- * permission.  Furthermore if you modify this software you must label
- * your software as modified software and not distribute it in such a
- * fashion that it might be confused with the original M.I.T. software.
- * M.I.T. makes no representations about the suitability of
- * this software for any purpose.  It is provided "as is" without express
- * or implied warranty.
- */
-
-/*
- * KerberosLogin.h
- *
- * $Header$
- */
+* Copyright 2008 Massachusetts Institute of Technology.
+* All Rights Reserved.
+*
+* Export of this software from the United States of America may
+* require a specific license from the United States Government.
+* It is the responsibility of any person or organization contemplating
+* export to obtain such a license before exporting.
+* 
+* WITHIN THAT CONSTRAINT, permission to use, copy, modify, and
+* distribute this software and its documentation for any purpose and
+* without fee is hereby granted, provided that the above copyright
+* notice appear in all copies and that both that copyright notice and
+* this permission notice appear in supporting documentation, and that
+* the name of M.I.T. not be used in advertising or publicity pertaining
+* to distribution of the software without specific, written prior
+* permission.  Furthermore if you modify this software you must label
+* your software as modified software and not distribute it in such a
+* fashion that it might be confused with the original M.I.T. software.
+* M.I.T. makes no representations about the suitability of
+* this software for any purpose.  It is provided "as is" without express
+* or implied warranty.
+*/
 
 #ifndef __KERBEROSLOGIN__
 #define __KERBEROSLOGIN__
@@ -38,9 +32,14 @@
 #    endif
 #endif
 
+#if (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) >= 30203
+# define KERBEROSLOGIN_DEPRECATED __attribute__((deprecated))
+#else
+# define KERBEROSLOGIN_DEPRECATED
+#endif
+
 #include <sys/types.h>
 #include <Kerberos/krb5.h>
-#include <Kerberos/krb.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,7 +49,7 @@ extern "C" {
 #    pragma pack(push,2)
 #endif
 
-    /* 
+/* 
  * Kerberos version constants
  */
 enum {
@@ -82,25 +81,22 @@ enum {
     /* Initial values and ranges */
     loginOption_LoginName                  = 'name',
     loginOption_LoginInstance              = 'inst',
-
-    loginOption_ShowOptions                = 'sopt',
-    loginOption_RememberShowOptions        = 'ropt',
+    
     loginOption_RememberPrincipal          = 'prin',
     loginOption_RememberExtras             = 'extr',
-
+    
     loginOption_MinimalTicketLifetime      = '-lif',
     loginOption_MaximalTicketLifetime      = '+lif',
     loginOption_DefaultTicketLifetime      = '0lif',
-    loginOption_LongTicketLifetimeDisplay  = 'hms ',
-
+    
     loginOption_DefaultRenewableTicket     = '0rtx',
     loginOption_MinimalRenewableLifetime   = '-rlf',
     loginOption_MaximalRenewableLifetime   = '+rlf',
     loginOption_DefaultRenewableLifetime   = '0rlf',
-
+    
     loginOption_DefaultForwardableTicket   = '0fwd',
     loginOption_DefaultProxiableTicket     = '0prx',
-    loginOption_DefaultAddresslessTicket   = '0adr'
+    loginOption_DefaultAddresslessTicket   = '0adr'    
 };
 typedef int32_t KLEDefaultLoginOptions;
 
@@ -123,7 +119,7 @@ typedef int32_t KLERealmListIndexes;
 enum {
     klNoErr                             = 0,
     
-    /* parameter errors */
+    /* Parameter errors */
     klParameterErr                      = 19276,
     klBadPrincipalErr,
     klBadPasswordErr,
@@ -160,26 +156,18 @@ enum {
     klInsecurePasswordErr,
     klPasswordChangeFailedErr,
     
-    /* Dialog errors */
-    klDialogDoesNotExistErr             = 19676,
-    klDialogAlreadyExistsErr,
-    klNotInForegroundErr,
-    klNoAppearanceErr,
-    klFatalDialogErr,
-    klCarbonUnavailableErr,
-    
     /* Login IPC errors */
     klCantContactServerErr              = 19776,
     klCantDisplayUIErr,
     klServerInsecureErr
-
+    
 };
 typedef int32_t KLEStatus;
 
 /*
  * Types
  */
- 
+
 typedef	int32_t   KLStatus;               /* one of KLEStatus */
 typedef	u_int32_t KLKerberosVersion;      /* one of KLEKerberosVersion */
 typedef	u_int32_t KLDefaultLoginOption;   /* one of KLEDefaultLoginOptions */
@@ -197,59 +185,48 @@ typedef	int16_t   KLSInt16;               /* used for Darwin-compat for KLApplic
 typedef void (*KLIdleCallback) (KLRefCon appData);
 #define CallKLIdleCallback(userRoutine, appData) ((userRoutine) (appData))
 
-#ifdef KERBEROSLOGIN_DEPRECATED
-
-/* Application options */
-typedef struct {
-    void *   deprecatedEventFilter;
-    KLRefCon deprecatedEventFilterAppData;
-    KLSInt16 deprecatedRealmsPopupMenuID;
-    KLSInt16 deprecatedLoginModeMenuID;
-} KLApplicationOptions;
-
-#endif
-
 /* Principal information */
-struct OpaqueKLPrincipal;
-typedef struct OpaqueKLPrincipal * KLPrincipal;
+typedef struct kim_identity_opaque *KLPrincipal;
 
 /* Login Options */
-struct OpaqueKLLoginOptions;
-typedef struct OpaqueKLLoginOptions * KLLoginOptions;
-
+typedef struct kim_options_opaque *KLLoginOptions;
 
 /*
  *
  * Functions
  *
  */
- 
+
 /* Deprecated functions -- provided for compatibility with KfM 4.0 */
-#ifdef KERBEROSLOGIN_DEPRECATED
 
 KLStatus KLAcquireTickets (KLPrincipal   inPrincipal,
                            KLPrincipal  *outPrincipal,
-                           char        **outCredCacheName);
+                           char        **outCredCacheName) 
+    KERBEROSLOGIN_DEPRECATED;
 
 KLStatus KLAcquireNewTickets (KLPrincipal  inPrincipal,
                               KLPrincipal  *outPrincipal,
-                              char        **outCredCacheName);
-        
+                              char        **outCredCacheName) 
+    KERBEROSLOGIN_DEPRECATED;
+
 KLStatus KLAcquireTicketsWithPassword (KLPrincipal      inPrincipal,
                                        KLLoginOptions   inLoginOptions,
                                        const char      *inPassword,
-                                       char           **outCredCacheName);
+                                       char           **outCredCacheName) 
+    KERBEROSLOGIN_DEPRECATED;
 
 KLStatus KLAcquireNewTicketsWithPassword (KLPrincipal      inPrincipal,
                                           KLLoginOptions   inLoginOptions,
                                           const char      *inPassword,
-                                          char           **outCredCacheName);
+                                          char           **outCredCacheName) 
+    KERBEROSLOGIN_DEPRECATED;
 
-KLStatus KLSetApplicationOptions (const KLApplicationOptions *inAppOptions);
-        
-KLStatus KLGetApplicationOptions (KLApplicationOptions *outAppOptions);
+KLStatus KLSetApplicationOptions (const void *inAppOptions) 
+    KERBEROSLOGIN_DEPRECATED;
 
-#endif
+KLStatus KLGetApplicationOptions (void *outAppOptions) 
+    KERBEROSLOGIN_DEPRECATED;
+
 
 /* Kerberos Login high-level API */
 KLStatus KLAcquireInitialTickets (KLPrincipal      inPrincipal,
@@ -285,20 +262,20 @@ KLStatus KLAcquireNewInitialTicketCredentialsWithPassword (KLPrincipal      inPr
                                                            krb5_context     inV5Context,
                                                            KLBoolean       *outGotV4Credentials,
                                                            KLBoolean       *outGotV5Credentials,
-                                                           CREDENTIALS     *outV4Credentials,
+                                                           void            *outV4Credentials,
                                                            krb5_creds      *outV5Credentials);
 
 KLStatus KLStoreNewInitialTicketCredentials (KLPrincipal     inPrincipal,
                                              krb5_context    inV5Context,
-                                             CREDENTIALS    *inV4Credentials,
+                                             void           *inV4Credentials,
                                              krb5_creds     *inV5Credentials,
                                              char          **outCredCacheName);
 
 KLStatus KLVerifyInitialTickets (KLPrincipal   inPrincipal,
                                  KLBoolean     inFailIfNoHostKey,
                                  char        **outCredCacheName);
-        
-KLStatus KLVerifyInitialTicketCredentials (CREDENTIALS *inV4Credentials,
+
+KLStatus KLVerifyInitialTicketCredentials (void        *inV4Credentials,
                                            krb5_creds  *inV5Credentials,
                                            KLBoolean    inFailIfNoHostKey);
 
@@ -306,7 +283,7 @@ KLStatus KLAcquireNewInitialTicketsWithKeytab (KLPrincipal      inPrincipal,
                                                KLLoginOptions   inLoginOptions,
                                                const char      *inKeytabName,
                                                char           **outCredCacheName);
-        
+
 KLStatus KLRenewInitialTickets (KLPrincipal      inPrincipal,
                                 KLLoginOptions   inLoginOptions,
                                 KLPrincipal     *outPrincipal,
@@ -315,7 +292,7 @@ KLStatus KLRenewInitialTickets (KLPrincipal      inPrincipal,
 KLStatus KLValidateInitialTickets (KLPrincipal      inPrincipal,
                                    KLLoginOptions   inLoginOptions,
                                    char           **outCredCacheName);
-        
+
 KLStatus KLLastChangedTime (KLTime *outLastChangedTime);
 
 KLStatus KLCacheHasValidTickets (KLPrincipal         inPrincipal,
@@ -331,7 +308,7 @@ KLStatus KLTicketStartTime (KLPrincipal        inPrincipal,
 KLStatus KLTicketExpirationTime (KLPrincipal        inPrincipal,
                                  KLKerberosVersion  inKerberosVersion,
                                  KLTime            *outExpirationTime);
-     
+
 KLStatus KLSetSystemDefaultCache (KLPrincipal inPrincipal);
 
 KLStatus KLHandleError (KLStatus           inError,
@@ -385,17 +362,17 @@ KLStatus KLRemoveKerberosRealm (KLIndex inIndex);
 
 KLStatus KLInsertKerberosRealm (KLIndex     inInsertBeforeIndex,
                                 const char *inRealmName);
-		
+
 KLStatus KLRemoveAllKerberosRealms (void);
-		
+
 KLSize KLCountKerberosRealms (void);
-        
+
 KLStatus KLGetKerberosDefaultRealm(KLIndex *outIndex);
-     
+
 KLStatus KLGetKerberosDefaultRealmByName (char **outRealmName);
-        
+
 KLStatus KLSetKerberosDefaultRealm (KLIndex inIndex);
-        
+
 KLStatus KLSetKerberosDefaultRealmByName (const char *inRealm);
 
 /* KLPrincipal functions */
@@ -408,7 +385,7 @@ KLStatus KLCreatePrincipalFromTriplet (const char  *inName,
 KLStatus KLCreatePrincipalFromString (const char        *inFullPrincipal,
                                       KLKerberosVersion  inKerberosVersion,
                                       KLPrincipal       *outPrincipal);
-    
+
 KLStatus KLCreatePrincipalFromKerberos5Principal (krb5_principal  inKerberos5Principal,
                                                   KLPrincipal    *outPrincipal);
 
@@ -443,22 +420,22 @@ KLStatus KLLoginOptionsSetTicketLifetime (KLLoginOptions ioOptions,
 
 KLStatus KLLoginOptionsSetForwardable (KLLoginOptions ioOptions,
                                        KLBoolean      inForwardable);
-		
+
 KLStatus KLLoginOptionsSetProxiable (KLLoginOptions ioOptions,
                                      KLBoolean      inProxiable);
-		
+
 KLStatus KLLoginOptionsSetRenewableLifetime (KLLoginOptions ioOptions,
                                              KLLifetime     inRenewableLifetime);
 
 KLStatus KLLoginOptionsSetAddressless (KLLoginOptions ioOptions,
                                        KLBoolean      inAddressless);
-        
+
 KLStatus KLLoginOptionsSetTicketStartTime (KLLoginOptions ioOptions,
                                            KLTime         inStartTime);
 
 KLStatus KLLoginOptionsSetServiceName (KLLoginOptions  ioOptions,
                                        const char     *inServiceName);
-        
+
 KLStatus KLDisposeLoginOptions(KLLoginOptions ioOptions);
 
 
@@ -475,4 +452,3 @@ KLStatus KLDisposeString (char *inStringToDispose);
 #endif
 
 #endif /* __KERBEROSLOGIN__ */
-

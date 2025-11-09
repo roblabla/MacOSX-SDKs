@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,19 +19,9 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved. 
- *
- * IOOutputQueue.h
- *
- * HISTORY
- * 2-Feb-1999       Joe Liu (jliu) created.
- *
- */
 
 #ifndef _IOOUTPUTQUEUE_H
 #define _IOOUTPUTQUEUE_H
-
 
 #include <IOKit/network/IONetworkInterface.h>
 

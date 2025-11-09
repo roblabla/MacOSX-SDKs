@@ -4,7 +4,7 @@
 // Author:      Guilhem Lavaux
 // Modified by:
 // Created:     11/07/98
-// RCS-ID:      $Id: wfstream.h,v 1.31 2006/12/19 13:46:02 SC Exp $
+// RCS-ID:      $Id: wfstream.h 44013 2006-12-19 13:49:26Z SC $
 // Copyright:   (c) Guilhem Lavaux
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

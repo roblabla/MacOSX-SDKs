@@ -1,6 +1,6 @@
 /*	
     NSURLConnection.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,7 +8,7 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -20,6 +20,8 @@
 @class NSURLRequest;
 @class NSURLResponse;
 @class NSRunLoop;
+@class NSInputStream;
+@class NSURLProtectionSpace;
 
 /*!
     @class NSURLConnection
@@ -143,7 +145,7 @@
 
 /* Scheduling APIs
     NSURLConnection sends its delegate messages via the run loop; these methods
-    determine which runlopes and which modes the messages will be sent on.  At creation,
+    determine which runloops and which modes the messages will be sent on.  At creation,
     a connection is scheduled on the current thread (the one where the creation takes place)
     in the default mode.  That can be changed to add or remove runloop + mode pairs
     using the following methods.  It is permissible to be scheduled on multiple run loops and modes,
@@ -252,6 +254,43 @@
 */
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response;
 
+/*! 
+    @method connection:needNewBodyStream:  
+    @abstract This method is called whenever an NSURLConnection
+    determines that it the client needs to provide a new, unopened
+    body stream.  This can occur if the request had a body stream
+    set on it and requires retransmission.
+    @discussion This method gives the delegate an opportunity to
+    attach a new, unopened body stream to the connection to handle
+    situations where the stream data needs to be retransmitted.  In the
+    past on Mac OS X the stream data was spooled to disk in case retransmission
+    was required, which may not be desirable for large data sets.  By
+    implementing this delegate method the client is opting in to no longer
+    having the data spooled to disk - for each retransmission a new stream
+    needs to be provided.  Returning NULL from this delegate method will cause
+    the connection to fail.
+    @param connection an NSURLConnection that has determined that it
+    required a new body stream to continue.
+    @param request The current NSURLRequest object associated with the connection.
+    @result The new unopened body stream to use (see setHTTPBodyStream).
+*/
+- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request;
+
+/*!
+    @method connection:canAuthenticateAgainstProtectionSpace:
+    @abstract This method gives the delegate an opportunity to inspect an NSURLProtectionSpace before an authentication attempt is made.
+    @discussion If implemented, will be called before connection:didReceiveAuthenticationChallenge 
+    to give the delegate a chance to inspect the protection space that will be authenticated against.  Delegates should determine
+    if they are prepared to respond to the authentication method of the protection space and if so, return YES, or NO to
+    allow default processing to handle the authentication.  If this delegate is not implemented, then default 
+    processing will occur (typically, consulting
+    the user's keychain and/or failing the connection attempt.
+    @param connection an NSURLConnection that has an NSURLProtectionSpace ready for inspection
+    @param protectionSpace an NSURLProtectionSpace that will be used to generate an authentication challenge
+    @result a boolean value that indicates the willingness of the delegate to handle the authentication
+ */
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+
 /*!
     @method connection:didReceiveAuthenticationChallenge:
     @abstract Start authentication for a given challenge
@@ -270,6 +309,22 @@
     @param challenge The NSURLAuthenticationChallenge for which to cancel authentication
 */
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+/*! 
+    @method connectionShouldUseCredentialStorage   
+    @abstract This method allows the delegate to inform the url loader that it
+				should not consult the credential storage for the connection.
+    @discussion This method will be called before any attempt to authenticate is
+		attempted on a connection.  By returning NO the delegate is telling the
+		connection to not consult the credential storage and taking responsiblity
+		for providing any credentials for authentication challenges.  Not implementing
+		this method is the same as returing YES.  The delegate is free to consult the
+		credential storage itself when it receives a didReceiveAuthenticationChallenge
+		message.
+    @param connection  the NSURLConnection object asking if it should consult the credential storage.
+    @result NO if the connection should not consult the credential storage, Yes if it should.
+*/
+- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
 
 /*! 
     @method connection:didReceiveResponse:   
@@ -307,6 +362,25 @@
     @param data A chunk of URL load data.
 */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
+
+/*! 
+    @method connection:didSendBodyData:   
+    @abstract This method is called to deliver progress information
+	    for a url upload.  The bytes refer to bytes of the body
+	    associated with the url request.
+    @discussion This method is called as the body (message data) of a request 
+    is transmitted (as during an http POST).  It provides the number of bytes 
+    written for the latest write, the total number of bytes written and the 
+    total number of bytes the connection expects to write (for HTTP this is 
+    based on the content length). The total number of expected bytes may change
+    if the request needs to be retransmitted (underlying connection lost, authentication
+    challenge from the server, etc.).
+    @param connection  NSURLConnection that has written data.
+    @param bytesWritten number of bytes written 
+    @param totalBytesWritten total number of bytes written for this connection
+    @param totalBytesExpectedToWrite the number of bytes the connection expects to write (can change due to retransmission of body content)
+*/
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
 
 /*! 
     @method connectionDidFinishLoading:   

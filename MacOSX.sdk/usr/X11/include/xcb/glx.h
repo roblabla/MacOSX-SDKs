@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from glx.xml by c-client.xsl using XSLT.
+ * This file generated automatically from glx.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_GLX_MAJOR_VERSION 1
 #define XCB_GLX_MINOR_VERSION 3
@@ -219,8 +223,9 @@ typedef xcb_glx_generic_error_t xcb_glx_bad_window_error_t;
  **/
 typedef struct xcb_glx_pbuffer_clobber_event_t {
     uint8_t            response_type; /**<  */
-    uint16_t           event_type; /**<  */
+    uint8_t            pad0; /**<  */
     uint16_t           sequence; /**<  */
+    uint16_t           event_type; /**<  */
     uint16_t           draw_type; /**<  */
     xcb_glx_drawable_t drawable; /**<  */
     uint32_t           b_mask; /**<  */
@@ -230,17 +235,17 @@ typedef struct xcb_glx_pbuffer_clobber_event_t {
     uint16_t           width; /**<  */
     uint16_t           height; /**<  */
     uint16_t           count; /**<  */
-    uint8_t            pad0[4]; /**<  */
+    uint8_t            pad1[4]; /**<  */
 } xcb_glx_pbuffer_clobber_event_t;
 
 typedef enum xcb_glx_pbcet_t {
-    XCB_GLX_PBCET_DAMAGED = 0x8017,
-    XCB_GLX_PBCET_SAVED = 0x8018
+    XCB_GLX_PBCET_DAMAGED = 32791,
+    XCB_GLX_PBCET_SAVED = 32792
 } xcb_glx_pbcet_t;
 
 typedef enum xcb_glx_pbcdt_t {
-    XCB_GLX_PBCDT_WINDOW = 0x8019,
-    XCB_GLX_PBCDT_PBUFFER = 0x801A
+    XCB_GLX_PBCDT_WINDOW = 32793,
+    XCB_GLX_PBCDT_PBUFFER = 32794
 } xcb_glx_pbcdt_t;
 
 /** Opcode for xcb_glx_render. */
@@ -446,27 +451,27 @@ typedef struct xcb_glx_copy_context_request_t {
 } xcb_glx_copy_context_request_t;
 
 typedef enum xcb_glx_gc_t {
-    XCB_GLX_GC_GL_CURRENT_BIT = 0x00000001,
-    XCB_GLX_GC_GL_POINT_BIT = 0x00000002,
-    XCB_GLX_GC_GL_LINE_BIT = 0x00000004,
-    XCB_GLX_GC_GL_POLYGON_BIT = 0x00000008,
-    XCB_GLX_GC_GL_POLYGON_STIPPLE_BIT = 0x00000010,
-    XCB_GLX_GC_GL_PIXEL_MODE_BIT = 0x00000020,
-    XCB_GLX_GC_GL_LIGHTING_BIT = 0x00000040,
-    XCB_GLX_GC_GL_FOG_BIT = 0x00000080,
-    XCB_GLX_GC_GL_DEPTH_BUFFER_BIT = 0x00000100,
-    XCB_GLX_GC_GL_ACCUM_BUFFER_BIT = 0x00000200,
-    XCB_GLX_GC_GL_STENCIL_BUFFER_BIT = 0x00000400,
-    XCB_GLX_GC_GL_VIEWPORT_BIT = 0x00000800,
-    XCB_GLX_GC_GL_TRANSFORM_BIT = 0x00001000,
-    XCB_GLX_GC_GL_ENABLE_BIT = 0x00002000,
-    XCB_GLX_GC_GL_COLOR_BUFFER_BIT = 0x00004000,
-    XCB_GLX_GC_GL_HINT_BIT = 0x00008000,
-    XCB_GLX_GC_GL_EVAL_BIT = 0x00010000,
-    XCB_GLX_GC_GL_LIST_BIT = 0x00020000,
-    XCB_GLX_GC_GL_TEXTURE_BIT = 0x00040000,
-    XCB_GLX_GC_GL_SCISSOR_BIT = 0x00080000,
-    XCB_GLX_GC_GL_ALL_ATTRIB_BITS = 0x000ffffff
+    XCB_GLX_GC_GL_CURRENT_BIT = 1,
+    XCB_GLX_GC_GL_POINT_BIT = 2,
+    XCB_GLX_GC_GL_LINE_BIT = 4,
+    XCB_GLX_GC_GL_POLYGON_BIT = 8,
+    XCB_GLX_GC_GL_POLYGON_STIPPLE_BIT = 16,
+    XCB_GLX_GC_GL_PIXEL_MODE_BIT = 32,
+    XCB_GLX_GC_GL_LIGHTING_BIT = 64,
+    XCB_GLX_GC_GL_FOG_BIT = 128,
+    XCB_GLX_GC_GL_DEPTH_BUFFER_BIT = 256,
+    XCB_GLX_GC_GL_ACCUM_BUFFER_BIT = 512,
+    XCB_GLX_GC_GL_STENCIL_BUFFER_BIT = 1024,
+    XCB_GLX_GC_GL_VIEWPORT_BIT = 2048,
+    XCB_GLX_GC_GL_TRANSFORM_BIT = 4096,
+    XCB_GLX_GC_GL_ENABLE_BIT = 8192,
+    XCB_GLX_GC_GL_COLOR_BUFFER_BIT = 16384,
+    XCB_GLX_GC_GL_HINT_BIT = 32768,
+    XCB_GLX_GC_GL_EVAL_BIT = 65536,
+    XCB_GLX_GC_GL_LIST_BIT = 131072,
+    XCB_GLX_GC_GL_TEXTURE_BIT = 262144,
+    XCB_GLX_GC_GL_SCISSOR_BIT = 524288,
+    XCB_GLX_GC_GL_ALL_ATTRIB_BITS = 16777215
 } xcb_glx_gc_t;
 
 /** Opcode for xcb_glx_swap_buffers. */
@@ -1086,9 +1091,9 @@ typedef struct xcb_glx_render_mode_reply_t {
 } xcb_glx_render_mode_reply_t;
 
 typedef enum xcb_glx_rm_t {
-    XCB_GLX_RM_GL_RENDER = 0x1C00,
-    XCB_GLX_RM_GL_FEEDBACK = 0x1C01,
-    XCB_GLX_RM_GL_SELECT = 0x1C02
+    XCB_GLX_RM_GL_RENDER = 7168,
+    XCB_GLX_RM_GL_FEEDBACK = 7169,
+    XCB_GLX_RM_GL_SELECT = 7170
 } xcb_glx_rm_t;
 
 /**
@@ -3768,6 +3773,8 @@ xcb_glx_make_current_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_make_current_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3846,6 +3853,8 @@ xcb_glx_is_direct_unchecked (xcb_connection_t  *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_is_direct_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3928,6 +3937,8 @@ xcb_glx_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -4383,6 +4394,8 @@ xcb_glx_get_visual_configs_property_list_end (const xcb_glx_get_visual_configs_r
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_visual_configs_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -4622,6 +4635,8 @@ xcb_glx_vendor_private_with_reply_data_2_end (const xcb_glx_vendor_private_with_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_vendor_private_with_reply_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -4700,6 +4715,8 @@ xcb_glx_query_extensions_string_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_query_extensions_string_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -4774,14 +4791,14 @@ xcb_glx_query_server_string_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_glx_query_server_string_string
+ ** char * xcb_glx_query_server_string_string
  ** 
  ** @param const xcb_glx_query_server_string_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_glx_query_server_string_string (const xcb_glx_query_server_string_reply_t *R  /**< */);
 
 
@@ -4821,6 +4838,8 @@ xcb_glx_query_server_string_string_end (const xcb_glx_query_server_string_reply_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_query_server_string_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -4859,7 +4878,7 @@ xcb_glx_query_server_string_reply (xcb_connection_t                      *c  /**
  ** @param uint32_t          major_version
  ** @param uint32_t          minor_version
  ** @param uint32_t          str_len
- ** @param const uint8_t    *string
+ ** @param const char       *string
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -4869,7 +4888,7 @@ xcb_glx_client_info_checked (xcb_connection_t *c  /**< */,
                              uint32_t          major_version  /**< */,
                              uint32_t          minor_version  /**< */,
                              uint32_t          str_len  /**< */,
-                             const uint8_t    *string  /**< */);
+                             const char       *string  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -4888,7 +4907,7 @@ xcb_glx_client_info_checked (xcb_connection_t *c  /**< */,
  ** @param uint32_t          major_version
  ** @param uint32_t          minor_version
  ** @param uint32_t          str_len
- ** @param const uint8_t    *string
+ ** @param const char       *string
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -4898,7 +4917,7 @@ xcb_glx_client_info (xcb_connection_t *c  /**< */,
                      uint32_t          major_version  /**< */,
                      uint32_t          minor_version  /**< */,
                      uint32_t          str_len  /**< */,
-                     const uint8_t    *string  /**< */);
+                     const char       *string  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -4999,6 +5018,8 @@ xcb_glx_get_fb_configs_property_list_end (const xcb_glx_get_fb_configs_reply_t *
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_fb_configs_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -5311,6 +5332,8 @@ xcb_glx_query_context_attribs_end (const xcb_glx_query_context_reply_t *R  /**< 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_query_context_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -5401,6 +5424,8 @@ xcb_glx_make_context_current_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_make_context_current_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -5632,6 +5657,8 @@ xcb_glx_get_drawable_attributes_attribs_end (const xcb_glx_get_drawable_attribut
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_drawable_attributes_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6052,6 +6079,8 @@ xcb_glx_gen_lists_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_gen_lists_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6283,6 +6312,8 @@ xcb_glx_render_mode_data_end (const xcb_glx_render_mode_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_render_mode_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6361,6 +6392,8 @@ xcb_glx_finish_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_finish_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6624,6 +6657,8 @@ xcb_glx_read_pixels_data_end (const xcb_glx_read_pixels_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_read_pixels_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6745,6 +6780,8 @@ xcb_glx_get_booleanv_data_end (const xcb_glx_get_booleanv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_booleanv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6845,15 +6882,15 @@ xcb_glx_get_clip_plane_data_length (const xcb_glx_get_clip_plane_reply_t *R  /**
 
 /*****************************************************************************
  **
- ** xcb_glx_float64_iterator_t xcb_glx_get_clip_plane_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_clip_plane_data_end
  ** 
  ** @param const xcb_glx_get_clip_plane_reply_t *R
- ** @returns xcb_glx_float64_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float64_iterator_t
-xcb_glx_get_clip_plane_data_iterator (const xcb_glx_get_clip_plane_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_clip_plane_data_end (const xcb_glx_get_clip_plane_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -6866,6 +6903,8 @@ xcb_glx_get_clip_plane_data_iterator (const xcb_glx_get_clip_plane_reply_t *R  /
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_clip_plane_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -6966,15 +7005,15 @@ xcb_glx_get_doublev_data_length (const xcb_glx_get_doublev_reply_t *R  /**< */);
 
 /*****************************************************************************
  **
- ** xcb_glx_float64_iterator_t xcb_glx_get_doublev_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_doublev_data_end
  ** 
  ** @param const xcb_glx_get_doublev_reply_t *R
- ** @returns xcb_glx_float64_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float64_iterator_t
-xcb_glx_get_doublev_data_iterator (const xcb_glx_get_doublev_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_doublev_data_end (const xcb_glx_get_doublev_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -6987,6 +7026,8 @@ xcb_glx_get_doublev_data_iterator (const xcb_glx_get_doublev_reply_t *R  /**< */
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_doublev_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7065,6 +7106,8 @@ xcb_glx_get_error_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_error_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7165,15 +7208,15 @@ xcb_glx_get_floatv_data_length (const xcb_glx_get_floatv_reply_t *R  /**< */);
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_floatv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_floatv_data_end
  ** 
  ** @param const xcb_glx_get_floatv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_floatv_data_iterator (const xcb_glx_get_floatv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_floatv_data_end (const xcb_glx_get_floatv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -7186,6 +7229,8 @@ xcb_glx_get_floatv_data_iterator (const xcb_glx_get_floatv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_floatv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7307,6 +7352,8 @@ xcb_glx_get_integerv_data_end (const xcb_glx_get_integerv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_integerv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7411,15 +7458,15 @@ xcb_glx_get_lightfv_data_length (const xcb_glx_get_lightfv_reply_t *R  /**< */);
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_lightfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_lightfv_data_end
  ** 
  ** @param const xcb_glx_get_lightfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_lightfv_data_iterator (const xcb_glx_get_lightfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_lightfv_data_end (const xcb_glx_get_lightfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -7432,6 +7479,8 @@ xcb_glx_get_lightfv_data_iterator (const xcb_glx_get_lightfv_reply_t *R  /**< */
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_lightfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7557,6 +7606,8 @@ xcb_glx_get_lightiv_data_end (const xcb_glx_get_lightiv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_lightiv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7661,15 +7712,15 @@ xcb_glx_get_mapdv_data_length (const xcb_glx_get_mapdv_reply_t *R  /**< */);
 
 /*****************************************************************************
  **
- ** xcb_glx_float64_iterator_t xcb_glx_get_mapdv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_mapdv_data_end
  ** 
  ** @param const xcb_glx_get_mapdv_reply_t *R
- ** @returns xcb_glx_float64_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float64_iterator_t
-xcb_glx_get_mapdv_data_iterator (const xcb_glx_get_mapdv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_mapdv_data_end (const xcb_glx_get_mapdv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -7682,6 +7733,8 @@ xcb_glx_get_mapdv_data_iterator (const xcb_glx_get_mapdv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_mapdv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7786,15 +7839,15 @@ xcb_glx_get_mapfv_data_length (const xcb_glx_get_mapfv_reply_t *R  /**< */);
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_mapfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_mapfv_data_end
  ** 
  ** @param const xcb_glx_get_mapfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_mapfv_data_iterator (const xcb_glx_get_mapfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_mapfv_data_end (const xcb_glx_get_mapfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -7807,6 +7860,8 @@ xcb_glx_get_mapfv_data_iterator (const xcb_glx_get_mapfv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_mapfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -7932,6 +7987,8 @@ xcb_glx_get_mapiv_data_end (const xcb_glx_get_mapiv_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_mapiv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8036,15 +8093,15 @@ xcb_glx_get_materialfv_data_length (const xcb_glx_get_materialfv_reply_t *R  /**
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_materialfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_materialfv_data_end
  ** 
  ** @param const xcb_glx_get_materialfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_materialfv_data_iterator (const xcb_glx_get_materialfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_materialfv_data_end (const xcb_glx_get_materialfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -8057,6 +8114,8 @@ xcb_glx_get_materialfv_data_iterator (const xcb_glx_get_materialfv_reply_t *R  /
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_materialfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8182,6 +8241,8 @@ xcb_glx_get_materialiv_data_end (const xcb_glx_get_materialiv_reply_t *R  /**< *
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_materialiv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8282,15 +8343,15 @@ xcb_glx_get_pixel_mapfv_data_length (const xcb_glx_get_pixel_mapfv_reply_t *R  /
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_pixel_mapfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_pixel_mapfv_data_end
  ** 
  ** @param const xcb_glx_get_pixel_mapfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_pixel_mapfv_data_iterator (const xcb_glx_get_pixel_mapfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_pixel_mapfv_data_end (const xcb_glx_get_pixel_mapfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -8303,6 +8364,8 @@ xcb_glx_get_pixel_mapfv_data_iterator (const xcb_glx_get_pixel_mapfv_reply_t *R 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_pixel_mapfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8424,6 +8487,8 @@ xcb_glx_get_pixel_mapuiv_data_end (const xcb_glx_get_pixel_mapuiv_reply_t *R  /*
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_pixel_mapuiv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8545,6 +8610,8 @@ xcb_glx_get_pixel_mapusv_data_end (const xcb_glx_get_pixel_mapusv_reply_t *R  /*
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_pixel_mapusv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8666,6 +8733,8 @@ xcb_glx_get_polygon_stipple_data_end (const xcb_glx_get_polygon_stipple_reply_t 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_polygon_stipple_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8740,14 +8809,14 @@ xcb_glx_get_string_unchecked (xcb_connection_t      *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_glx_get_string_string
+ ** char * xcb_glx_get_string_string
  ** 
  ** @param const xcb_glx_get_string_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_glx_get_string_string (const xcb_glx_get_string_reply_t *R  /**< */);
 
 
@@ -8787,6 +8856,8 @@ xcb_glx_get_string_string_end (const xcb_glx_get_string_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_string_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -8891,15 +8962,15 @@ xcb_glx_get_tex_envfv_data_length (const xcb_glx_get_tex_envfv_reply_t *R  /**< 
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_tex_envfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_tex_envfv_data_end
  ** 
  ** @param const xcb_glx_get_tex_envfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_tex_envfv_data_iterator (const xcb_glx_get_tex_envfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_tex_envfv_data_end (const xcb_glx_get_tex_envfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -8912,6 +8983,8 @@ xcb_glx_get_tex_envfv_data_iterator (const xcb_glx_get_tex_envfv_reply_t *R  /**
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_envfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9037,6 +9110,8 @@ xcb_glx_get_tex_enviv_data_end (const xcb_glx_get_tex_enviv_reply_t *R  /**< */)
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_enviv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9141,15 +9216,15 @@ xcb_glx_get_tex_gendv_data_length (const xcb_glx_get_tex_gendv_reply_t *R  /**< 
 
 /*****************************************************************************
  **
- ** xcb_glx_float64_iterator_t xcb_glx_get_tex_gendv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_tex_gendv_data_end
  ** 
  ** @param const xcb_glx_get_tex_gendv_reply_t *R
- ** @returns xcb_glx_float64_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float64_iterator_t
-xcb_glx_get_tex_gendv_data_iterator (const xcb_glx_get_tex_gendv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_tex_gendv_data_end (const xcb_glx_get_tex_gendv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -9162,6 +9237,8 @@ xcb_glx_get_tex_gendv_data_iterator (const xcb_glx_get_tex_gendv_reply_t *R  /**
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_gendv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9266,15 +9343,15 @@ xcb_glx_get_tex_genfv_data_length (const xcb_glx_get_tex_genfv_reply_t *R  /**< 
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_tex_genfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_tex_genfv_data_end
  ** 
  ** @param const xcb_glx_get_tex_genfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_tex_genfv_data_iterator (const xcb_glx_get_tex_genfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_tex_genfv_data_end (const xcb_glx_get_tex_genfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -9287,6 +9364,8 @@ xcb_glx_get_tex_genfv_data_iterator (const xcb_glx_get_tex_genfv_reply_t *R  /**
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_genfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9412,6 +9491,8 @@ xcb_glx_get_tex_geniv_data_end (const xcb_glx_get_tex_geniv_reply_t *R  /**< */)
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_geniv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9549,6 +9630,8 @@ xcb_glx_get_tex_image_data_end (const xcb_glx_get_tex_image_reply_t *R  /**< */)
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_image_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9653,15 +9736,15 @@ xcb_glx_get_tex_parameterfv_data_length (const xcb_glx_get_tex_parameterfv_reply
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_tex_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_tex_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_tex_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_tex_parameterfv_data_iterator (const xcb_glx_get_tex_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_tex_parameterfv_data_end (const xcb_glx_get_tex_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -9674,6 +9757,8 @@ xcb_glx_get_tex_parameterfv_data_iterator (const xcb_glx_get_tex_parameterfv_rep
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9799,6 +9884,8 @@ xcb_glx_get_tex_parameteriv_data_end (const xcb_glx_get_tex_parameteriv_reply_t 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -9907,15 +9994,15 @@ xcb_glx_get_tex_level_parameterfv_data_length (const xcb_glx_get_tex_level_param
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_tex_level_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_tex_level_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_tex_level_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_tex_level_parameterfv_data_iterator (const xcb_glx_get_tex_level_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_tex_level_parameterfv_data_end (const xcb_glx_get_tex_level_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -9928,6 +10015,8 @@ xcb_glx_get_tex_level_parameterfv_data_iterator (const xcb_glx_get_tex_level_par
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_level_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10057,6 +10146,8 @@ xcb_glx_get_tex_level_parameteriv_data_end (const xcb_glx_get_tex_level_paramete
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_tex_level_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10139,6 +10230,8 @@ xcb_glx_is_list_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_is_list_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10313,6 +10406,8 @@ xcb_glx_are_textures_resident_data_end (const xcb_glx_are_textures_resident_repl
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_are_textures_resident_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10491,6 +10586,8 @@ xcb_glx_gen_textures_data_end (const xcb_glx_gen_textures_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_gen_textures_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10573,6 +10670,8 @@ xcb_glx_is_texture_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_is_texture_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10706,6 +10805,8 @@ xcb_glx_get_color_table_data_end (const xcb_glx_get_color_table_reply_t *R  /**<
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_color_table_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10810,15 +10911,15 @@ xcb_glx_get_color_table_parameterfv_data_length (const xcb_glx_get_color_table_p
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_color_table_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_color_table_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_color_table_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_color_table_parameterfv_data_iterator (const xcb_glx_get_color_table_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_color_table_parameterfv_data_end (const xcb_glx_get_color_table_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -10831,6 +10932,8 @@ xcb_glx_get_color_table_parameterfv_data_iterator (const xcb_glx_get_color_table
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_color_table_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -10956,6 +11059,8 @@ xcb_glx_get_color_table_parameteriv_data_end (const xcb_glx_get_color_table_para
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_color_table_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11089,6 +11194,8 @@ xcb_glx_get_convolution_filter_data_end (const xcb_glx_get_convolution_filter_re
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_convolution_filter_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11193,15 +11300,15 @@ xcb_glx_get_convolution_parameterfv_data_length (const xcb_glx_get_convolution_p
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_convolution_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_convolution_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_convolution_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_convolution_parameterfv_data_iterator (const xcb_glx_get_convolution_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_convolution_parameterfv_data_end (const xcb_glx_get_convolution_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -11214,6 +11321,8 @@ xcb_glx_get_convolution_parameterfv_data_iterator (const xcb_glx_get_convolution
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_convolution_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11339,6 +11448,8 @@ xcb_glx_get_convolution_parameteriv_data_end (const xcb_glx_get_convolution_para
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_convolution_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11472,6 +11583,8 @@ xcb_glx_get_separable_filter_rows_and_cols_end (const xcb_glx_get_separable_filt
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_separable_filter_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11609,6 +11722,8 @@ xcb_glx_get_histogram_data_end (const xcb_glx_get_histogram_reply_t *R  /**< */)
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_histogram_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11713,15 +11828,15 @@ xcb_glx_get_histogram_parameterfv_data_length (const xcb_glx_get_histogram_param
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_histogram_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_histogram_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_histogram_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_histogram_parameterfv_data_iterator (const xcb_glx_get_histogram_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_histogram_parameterfv_data_end (const xcb_glx_get_histogram_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -11734,6 +11849,8 @@ xcb_glx_get_histogram_parameterfv_data_iterator (const xcb_glx_get_histogram_par
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_histogram_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11859,6 +11976,8 @@ xcb_glx_get_histogram_parameteriv_data_end (const xcb_glx_get_histogram_paramete
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_histogram_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -11996,6 +12115,8 @@ xcb_glx_get_minmax_data_end (const xcb_glx_get_minmax_reply_t *R  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_minmax_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12100,15 +12221,15 @@ xcb_glx_get_minmax_parameterfv_data_length (const xcb_glx_get_minmax_parameterfv
 
 /*****************************************************************************
  **
- ** xcb_glx_float32_iterator_t xcb_glx_get_minmax_parameterfv_data_iterator
+ ** xcb_generic_iterator_t xcb_glx_get_minmax_parameterfv_data_end
  ** 
  ** @param const xcb_glx_get_minmax_parameterfv_reply_t *R
- ** @returns xcb_glx_float32_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_glx_float32_iterator_t
-xcb_glx_get_minmax_parameterfv_data_iterator (const xcb_glx_get_minmax_parameterfv_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_glx_get_minmax_parameterfv_data_end (const xcb_glx_get_minmax_parameterfv_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -12121,6 +12242,8 @@ xcb_glx_get_minmax_parameterfv_data_iterator (const xcb_glx_get_minmax_parameter
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_minmax_parameterfv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12246,6 +12369,8 @@ xcb_glx_get_minmax_parameteriv_data_end (const xcb_glx_get_minmax_parameteriv_re
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_minmax_parameteriv_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12371,6 +12496,8 @@ xcb_glx_get_compressed_tex_image_arb_data_end (const xcb_glx_get_compressed_tex_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_compressed_tex_image_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12549,6 +12676,8 @@ xcb_glx_gen_queries_arb_data_end (const xcb_glx_gen_queries_arb_reply_t *R  /**<
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_gen_queries_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12631,6 +12760,8 @@ xcb_glx_is_query_arb_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_is_query_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12756,6 +12887,8 @@ xcb_glx_get_queryiv_arb_data_end (const xcb_glx_get_queryiv_arb_reply_t *R  /**<
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_queryiv_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -12881,6 +13014,8 @@ xcb_glx_get_query_objectiv_arb_data_end (const xcb_glx_get_query_objectiv_arb_re
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_query_objectiv_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -13006,6 +13141,8 @@ xcb_glx_get_query_objectuiv_arb_data_end (const xcb_glx_get_query_objectuiv_arb_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_glx_get_query_objectuiv_arb_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -13024,6 +13161,10 @@ xcb_glx_get_query_objectuiv_arb_reply (xcb_connection_t                         
                                        xcb_glx_get_query_objectuiv_arb_cookie_t   cookie  /**< */,
                                        xcb_generic_error_t                      **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

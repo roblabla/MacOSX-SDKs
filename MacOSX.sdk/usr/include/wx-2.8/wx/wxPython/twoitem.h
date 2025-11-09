@@ -7,7 +7,7 @@
 // Author:      Robin Dunn
 //
 // Created:     25-April-2006
-// RCS-ID:      $Id: twoitem.h,v 1.1 2006/05/04 01:59:14 RD Exp $
+// RCS-ID:      $Id: twoitem.h 39008 2006-05-04 02:03:39Z RD $
 // Copyright:   (c) 2006 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////

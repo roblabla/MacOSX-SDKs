@@ -3,9 +3,9 @@
  
      Contains:   Text Encoding Conversion Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2008 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -102,6 +102,17 @@ enum {
 /* Special values for MIB enums */
 enum {
   kTEC_MIBEnumDontCare          = -1
+};
+
+/* Additional control flags for TECSetBasicOptions */
+enum {
+  kTECDisableFallbacksBit       = 16,
+  kTECDisableLooseMappingsBit   = 17
+};
+
+enum {
+  kTECDisableFallbacksMask      = 1L << kTECDisableFallbacksBit,
+  kTECDisableLooseMappingsMask  = 1L << kTECDisableLooseMappingsBit
 };
 
 
@@ -531,7 +542,7 @@ TECGetAvailableSniffers(
 extern OSStatus 
 TECCreateSniffer(
   TECSnifferObjectRef *  encodingSniffer,
-  TextEncoding           testEncodings[],
+  const TextEncoding     testEncodings[],
   ItemCount              numTextEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -582,6 +593,40 @@ TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) AVAILABLE_MAC_OS
 
 /*
  *  TECSetBasicOptions()
+ *  
+ *  Summary:
+ *    Sets encodingConverter options affecting
+ *    TECConvertText[ToMultipleEncodings].
+ *  
+ *  Parameters:
+ *    
+ *    encodingConverter:
+ *      The high-level encoding converter object created by
+ *      TECCreateConverter or TECCreateOneToManyConverter whose
+ *      behavior is to be modified by the options specified in
+ *      controlFlags.
+ *    
+ *    controlFlags:
+ *      A bit mask specifying the desired options. The following mask
+ *      constants are valid for this parameter; multiple mask constants
+ *      may be ORed together to set multiple options; passing 0 for
+ *      this parameter clears all options: 
+ *      
+ *      kUnicodeForceASCIIRangeMask, kUnicodeNoHalfwidthCharsMask
+ *      (defined in UnicodeConverter.h) 
+ *      
+ *      kTECDisableFallbacksMask, kTECDisableLooseMappingsMask (defined
+ *      above) - loose and fallback mappings are both enabled by
+ *      default for the TextEncodingConverter.h conversion APIs
+ *      (TECConvertText, TECConvertTextToMultipleEncodings), unlike the
+ *      behavior of the conversion APIs in UnicodeConverter.h. These
+ *      options may be used to disable loose and/or fallback mappings
+ *      for the TextEncodingConverter.h conversion APIs.
+ *  
+ *  Result:
+ *    The function returns paramErr for invalid masks,
+ *    kTECCorruptConverterErr for an invalid encodingConverter, noErr
+ *    otherwise.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in CoreServices.framework

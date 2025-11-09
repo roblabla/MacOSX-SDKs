@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Thread Safe Resource Manager                                         |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1999-2008, Andi Gutmans, Sascha Schumann, Zeev Suraski |
+   | Copyright (c) 1999-2010, Andi Gutmans, Sascha Schumann, Zeev Suraski |
    | This source file is subject to the TSRM license, that is bundled     |
    | with this package in the file LICENSE                                |
    +----------------------------------------------------------------------+
@@ -22,10 +22,12 @@
 
 #ifdef TSRM_WIN32
 #	ifdef TSRM_EXPORTS
-#	define TSRM_API __declspec(dllexport)
+#		define TSRM_API __declspec(dllexport)
 #	else
-#	define TSRM_API __declspec(dllimport)
+#		define TSRM_API __declspec(dllimport)
 #	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define TSRM_API __attribute__ ((visibility("default")))
 #else
 #	define TSRM_API
 #endif

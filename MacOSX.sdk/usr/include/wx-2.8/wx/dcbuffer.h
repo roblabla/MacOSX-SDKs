@@ -4,7 +4,7 @@
 // Author:      Ron Lee <ron@debian.org>
 // Modified by: Vadim Zeitlin (refactored, added bg preservation)
 // Created:     16/03/02
-// RCS-ID:      $Id: dcbuffer.h,v 1.34.4.1 2007/03/05 08:58:09 VZ Exp $
+// RCS-ID:      $Id: dcbuffer.h 44609 2007-03-05 08:58:09Z VZ $
 // Copyright:   (c) Ron Lee
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

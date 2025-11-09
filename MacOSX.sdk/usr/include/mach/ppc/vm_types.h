@@ -70,7 +70,7 @@
 #ifndef	ASSEMBLER
 
 #include <ppc/_types.h>
-#include <ppc/vmparam.h>
+#include <mach/ppc/vm_param.h>
 #include <stdint.h>
 
 /*

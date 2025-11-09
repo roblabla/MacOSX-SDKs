@@ -12,7 +12,7 @@
 {
 	AEDesc _specifier;
 	SBAppContext *_ctx;
-	void *_reserved;
+	id _reserved;
 }
 
 - (id) init;
@@ -26,6 +26,9 @@
 	// the object points to, the result may be a Foundation object such as an NSString
 	// (for most properties), an NSAppleEventDescriptor (for properties of a type with
 	// no Foundation equivalent), or another SBObject (for most elements).
+
+- (NSError *) lastError;
+	// Return the error from the last event this object sent, or nil if it succeeded.
 
 @end
 

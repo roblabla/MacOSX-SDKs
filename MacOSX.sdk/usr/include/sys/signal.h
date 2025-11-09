@@ -184,9 +184,9 @@ union sigval {
 	void	*sival_ptr;
 };
 
-#define	SIGEV_NONE	0		/* No async notification */
-#define	SIGEV_SIGNAL	1		/* aio - completion notification */
-#define SIGEV_THREAD	3		/* A notification function will be called to perform notification */
+#define	SIGEV_NONE	0	/* No async notification */
+#define	SIGEV_SIGNAL	1	/* aio - completion notification */
+#define	SIGEV_THREAD	3	/* [NOTIMP] [RTS] call notification function */
 
 struct sigevent {
 	int				sigev_notify;				/* Notification type */
@@ -247,8 +247,8 @@ typedef struct __siginfo {
 #define FPE_FLTRES	4	/* [XSI] floating point inexact result */
 #define FPE_FLTINV	5	/* [XSI] invalid floating point operation */
 #define	FPE_FLTSUB	6	/* [XSI] subscript out of range -NOTIMP */
-#define	FPE_INTDIV	7	/* [XSI] integer divide by zero -NOTIMP */
-#define	FPE_INTOVF	8	/* [XSI] integer overflow -NOTIMP */
+#define	FPE_INTDIV	7	/* [XSI] integer divide by zero */
+#define	FPE_INTOVF	8	/* [XSI] integer overflow */
 
 /* Codes for SIGSEGV */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)

@@ -1,13 +1,14 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2007, Apple Inc.
+	Copyright (c) 1996-2009, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSTextFieldCell.h>
 
 @class NSButtonCell, NSTableView, NSMutableArray;
+@protocol NSComboBoxCellDataSource;
 
 @interface NSComboBoxCell : NSTextFieldCell   {
     /*All instance variables are private*/
@@ -21,8 +22,7 @@
 	unsigned int filteringEvents:1;
         unsigned int drawing:1;
         unsigned int synchronizingSelection:1;
-        unsigned int subclassOverridesBoundsForButtonCell:1;
-        unsigned int reserved:8;
+        unsigned int reserved:9;
 	unsigned int visibleItems:16;
     } _cbcFlags;
     NSButtonCell *_buttonCell;
@@ -67,8 +67,8 @@
 - (NSString *)completedString:(NSString *)string;
 
 /* These two methods can only be used when usesDataSource is YES */
-- (id)dataSource;
-- (void)setDataSource:(id)aSource; 
+- (id <NSComboBoxCellDataSource>)dataSource;
+- (void)setDataSource:(id <NSComboBoxCellDataSource>)aSource; 
 
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
@@ -85,9 +85,12 @@
 
 @end
 
-@interface NSObject (NSComboBoxCellDataSource)
+@protocol NSComboBoxCellDataSource <NSObject>
+@optional
+/* These two methods are required when not using bindings */
 - (NSInteger)numberOfItemsInComboBoxCell:(NSComboBoxCell *)comboBoxCell;
 - (id)comboBoxCell:(NSComboBoxCell *)aComboBoxCell objectValueForItemAtIndex:(NSInteger)index;
+
 - (NSUInteger)comboBoxCell:(NSComboBoxCell *)aComboBoxCell indexOfItemWithStringValue:(NSString *)string;
 - (NSString *)comboBoxCell:(NSComboBoxCell *)aComboBoxCell completedString:(NSString *)uncompletedString; 
 @end

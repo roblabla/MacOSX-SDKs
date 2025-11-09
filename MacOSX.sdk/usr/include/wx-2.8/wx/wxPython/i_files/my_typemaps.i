@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     7/3/97
-// RCS-ID:      $Id: my_typemaps.i,v 1.65 2006/11/07 22:36:55 RD Exp $
+// RCS-ID:      $Id: my_typemaps.i 46283 2007-06-02 23:46:09Z RD $
 // Copyright:   (c) 1998 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -171,6 +171,9 @@ MAKE_INT_ARRAY_TYPEMAPS(styles, styles_field)
 %typemap(typecheck, precedence=SWIG_TYPECHECK_POINTER) wxRect& {
     $1 = wxPySimple_typecheck($input, wxT("wxRect"), 4);
 }
+
+%apply wxRect& { wxRect* };
+
 
 
 %typemap(in) wxPoint2D& (wxPoint2D temp) {

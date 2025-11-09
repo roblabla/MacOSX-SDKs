@@ -10,30 +10,29 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreGraphics/CGBase.h>
 
-CG_EXTERN_C_BEGIN
 
 /* Properties that, if returned by CGImageSourceCopyProperties or 
  * CGImageSourceCopyPropertiesAtIndex, contain a dictionary of file-format 
  * or metadata-format specific key-values. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGIFDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyRawDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyCIFFDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGIFDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyRawDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyCIFFDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 CG_EXTERN const CFStringRef kCGImagePropertyMakerCanonDictionary;
 CG_EXTERN const CFStringRef kCGImagePropertyMakerNikonDictionary;
-CG_EXTERN const CFStringRef kCGImagePropertyMakerMinoltaDictionary  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyMakerFujiDictionary  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyMakerOlympusDictionary  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyMakerPentaxDictionary  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImageProperty8BIMDictionary  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyMakerMinoltaDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyMakerFujiDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyMakerOlympusDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyMakerPentaxDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImageProperty8BIMDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 CG_EXTERN const CFStringRef kCGImagePropertyDNGDictionary;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxDictionary  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxDictionary  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /** Properties which may be returned by "CGImageSourceCopyProperties".  The
@@ -43,7 +42,7 @@ CG_EXTERN const CFStringRef kCGImagePropertyExifAuxDictionary  AVAILABLE_MAC_OS_
 /* The size of the image file in bytes, if known. If present, the value of
  * this key is a CFNumberRef. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyFileSize  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyFileSize  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /** Properties which may be returned by "CGImageSourceCopyPropertiesAtIndex".
@@ -52,19 +51,19 @@ CG_EXTERN const CFStringRef kCGImagePropertyFileSize  AVAILABLE_MAC_OS_X_VERSION
 /* The number of pixels in the x- and y-dimensions. The value of these keys 
  * is a CFNumberRef. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyPixelHeight  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPixelWidth  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyPixelHeight  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPixelWidth  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The DPI in the x- and y-dimensions, if known. If present, the value of
  * these keys is a CFNumberRef. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyDPIHeight  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyDPIWidth  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyDPIHeight  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyDPIWidth  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The number of bits in each color sample of each pixel. The value of this 
  * key is a CFNumberRef. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyDepth  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyDepth  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The intended display orientation of the image. If present, the value 
  * of this key is a CFNumberRef with the same value as defined by the 
@@ -79,243 +78,258 @@ CG_EXTERN const CFStringRef kCGImagePropertyDepth  AVAILABLE_MAC_OS_X_VERSION_10
  *   8  =  0th row is on the left, and 0th column is the bottom.  
  * If not present, a value of 1 is assumed. */ 
  
-CG_EXTERN const CFStringRef kCGImagePropertyOrientation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyOrientation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The value of this key is kCFBooleanTrue if the image contains floating- 
  * point pixel samples */ 
  
-CG_EXTERN const CFStringRef kCGImagePropertyIsFloat  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyIsFloat  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The value of this key is kCFBooleanTrue if the image contains indexed 
  * (a.k.a. paletted) pixel samples */ 
  
-CG_EXTERN const CFStringRef kCGImagePropertyIsIndexed  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyIsIndexed  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The value of this key is kCFBooleanTrue if the image contains an alpha 
  * (a.k.a. coverage) channel */ 
  
-CG_EXTERN const CFStringRef kCGImagePropertyHasAlpha  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyHasAlpha  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The color model of the image such as "RGB", "CMYK", "Gray", or "Lab".
  * The value of this key is CFStringRef. */ 
 
-CG_EXTERN const CFStringRef kCGImagePropertyColorModel  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyColorModel  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The name of the optional ICC profile embedded in the image, if known.  
  * If present, the value of this key is a CFStringRef. */
 
-CG_EXTERN const CFStringRef kCGImagePropertyProfileName  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyProfileName  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /* Possible values for kCGImagePropertyColorModel property */
 
-CG_EXTERN const CFStringRef kCGImagePropertyColorModelRGB  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyColorModelGray  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyColorModelCMYK  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyColorModelLab  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyColorModelRGB  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyColorModelGray  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyColorModelCMYK  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyColorModelLab  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /* Possible keys for kCGImagePropertyTIFFDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFCompression  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFPhotometricInterpretation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFDocumentName  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFImageDescription  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFMake  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFModel  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFOrientation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFXResolution  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFYResolution  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFResolutionUnit  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFSoftware  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFTransferFunction  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFDateTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFArtist  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFHostComputer  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFCopyright  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFWhitePoint  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyTIFFPrimaryChromaticities  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFCompression  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFPhotometricInterpretation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFDocumentName  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFImageDescription  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFMake  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFModel  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFOrientation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFXResolution  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFYResolution  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFResolutionUnit  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFSoftware  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFTransferFunction  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFDateTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFArtist  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFHostComputer  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFCopyright  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFWhitePoint  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyTIFFPrimaryChromaticities  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyJFIFDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFVersion  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFXDensity  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFYDensity  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFDensityUnit  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyJFIFIsProgressive  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFVersion  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFXDensity  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFYDensity  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFDensityUnit  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyJFIFIsProgressive  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /* Possible keys for kCGImagePropertyExifDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyExifExposureTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFNumber  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifExposureProgram  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSpectralSensitivity  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifISOSpeedRatings  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifOECF  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifVersion  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifDateTimeOriginal  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifDateTimeDigitized  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifComponentsConfiguration  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifCompressedBitsPerPixel  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifShutterSpeedValue  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifApertureValue  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifBrightnessValue  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifExposureBiasValue  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifMaxApertureValue  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectDistance  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifMeteringMode  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifLightSource  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFlash  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFocalLength  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectArea  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifMakerNote  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifUserComment  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeOrginal  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeDigitized  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFlashPixVersion  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifPixelXDimension  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifPixelYDimension  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifRelatedSoundFile  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFlashEnergy  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSpatialFrequencyResponse  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneXResolution  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneYResolution  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneResolutionUnit  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectLocation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifExposureIndex  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSensingMethod  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFileSource  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSceneType  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifCFAPattern  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifCustomRendered  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifExposureMode  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifWhiteBalance  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifDigitalZoomRatio  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifFocalLenIn35mmFilm  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSceneCaptureType  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifGainControl  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifContrast  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSaturation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSharpness  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifDeviceSettingDescription  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectDistRange  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifImageUniqueID  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifGamma  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyExifExposureTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFNumber  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifExposureProgram  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSpectralSensitivity  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifISOSpeedRatings  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifOECF  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifVersion  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifDateTimeOriginal  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifDateTimeDigitized  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifComponentsConfiguration  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifCompressedBitsPerPixel  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifShutterSpeedValue  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifApertureValue  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifBrightnessValue  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifExposureBiasValue  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifMaxApertureValue  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectDistance  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifMeteringMode  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifLightSource  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFlash  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFocalLength  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectArea  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifMakerNote  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifUserComment  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeOrginal  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeDigitized  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFlashPixVersion  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifColorSpace  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifPixelXDimension  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifPixelYDimension  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifRelatedSoundFile  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFlashEnergy  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSpatialFrequencyResponse  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneXResolution  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneYResolution  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFocalPlaneResolutionUnit  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectLocation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifExposureIndex  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSensingMethod  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFileSource  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSceneType  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifCFAPattern  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifCustomRendered  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifExposureMode  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifWhiteBalance  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifDigitalZoomRatio  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifFocalLenIn35mmFilm  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSceneCaptureType  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifGainControl  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifContrast  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSaturation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSharpness  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifDeviceSettingDescription  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifSubjectDistRange  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifImageUniqueID  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifGamma  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyExifAuxDictionary */
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensInfo	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensModel  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxSerialNumber	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensID	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensSerialNumber	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxImageNumber	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxFlashCompensation	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxOwnerName	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyExifAuxFirmware	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensInfo	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensModel  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxSerialNumber	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensID	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxLensSerialNumber	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxImageNumber	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxFlashCompensation	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxOwnerName	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyExifAuxFirmware	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyGIFDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyGIFLoopCount  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGIFDelayTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGIFImageColorMap  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGIFHasGlobalColorMap  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyGIFLoopCount  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGIFDelayTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGIFImageColorMap  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGIFHasGlobalColorMap  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGIFUnclampedDelayTime  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyPNGDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyPNGGamma  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGInterlaceType  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGXPixelsPerMeter  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGYPixelsPerMeter  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGsRGBIntent  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyPNGChromaticities  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyPNGGamma  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGInterlaceType  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGXPixelsPerMeter  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGYPixelsPerMeter  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGsRGBIntent  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyPNGChromaticities  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyGPSDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyGPSVersion  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSLatitudeRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSLatitude  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSLongitudeRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSLongitude  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSAltitudeRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSAltitude  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSTimeStamp  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSSatellites  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSStatus  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSMeasureMode  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDOP  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSSpeedRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSSpeed  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSTrackRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSTrack  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSImgDirectionRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSImgDirection  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSMapDatum  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLatitudeRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLatitude  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLongitudeRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLongitude  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestBearingRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestBearing  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestDistanceRef  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDestDistance  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSProcessingMethod  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSAreaInformation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDateStamp  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyGPSDifferental  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyGPSVersion  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSLatitudeRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSLatitude  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSLongitudeRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSLongitude  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSAltitudeRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSAltitude  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSTimeStamp  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSSatellites  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSStatus  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSMeasureMode  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDOP  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSSpeedRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSSpeed  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSTrackRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSTrack  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSImgDirectionRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSImgDirection  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSMapDatum  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLatitudeRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLatitude  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLongitudeRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestLongitude  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestBearingRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestBearing  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestDistanceRef  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDestDistance  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSProcessingMethod  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSAreaInformation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDateStamp  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyGPSDifferental  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Possible keys for kCGImagePropertyIPTCDictionary */
 
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectTypeReference  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectAttributeReference  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectName  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCEditStatus  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCEditorialUpdate  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCUrgency  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCSubjectReference  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCategory  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCSupplementalCategory  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCFixtureIdentifier  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCKeywords  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCContentLocationCode  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCContentLocationName  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCReleaseDate  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCReleaseTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCExpirationDate  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCExpirationTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCSpecialInstructions  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCActionAdvised  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceService  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceDate  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceNumber  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCDateCreated  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCTimeCreated  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCDigitalCreationDate  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCDigitalCreationTime  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCOriginatingProgram  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCProgramVersion  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectCycle  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCByline  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCBylineTitle  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCity  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCSubLocation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCProvinceState  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCountryPrimaryLocationCode  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCountryPrimaryLocationName  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCOriginalTransmissionReference  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCHeadline  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCredit  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCSource  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCopyrightNotice  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCContact  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCCaptionAbstract  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCWriterEditor  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCImageType  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCImageOrientation  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCLanguageIdentifier  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN const CFStringRef kCGImagePropertyIPTCStarRating  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectTypeReference  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectAttributeReference  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectName  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCEditStatus  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCEditorialUpdate  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCUrgency  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCSubjectReference  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCategory  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCSupplementalCategory  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCFixtureIdentifier  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCKeywords  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContentLocationCode  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContentLocationName  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCReleaseDate  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCReleaseTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCExpirationDate  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCExpirationTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCSpecialInstructions  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCActionAdvised  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceService  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceDate  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCReferenceNumber  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCDateCreated  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCTimeCreated  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCDigitalCreationDate  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCDigitalCreationTime  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCOriginatingProgram  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCProgramVersion  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCObjectCycle  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCByline  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCBylineTitle  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCity  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCSubLocation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCProvinceState  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCountryPrimaryLocationCode  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCountryPrimaryLocationName  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCOriginalTransmissionReference  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCHeadline  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCredit  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCSource  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCopyrightNotice  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContact  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCaptionAbstract  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCWriterEditor  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCImageType  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCImageOrientation  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCLanguageIdentifier  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCStarRating  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCCreatorContactInfo  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);	// IPTC Core
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCRightsUsageTerms  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);	// IPTC Core
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCScene  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);				// IPTC Core
+
+/* Possible keys for kCGImagePropertyIPTCCreatorContactInfo dictionary (part of IPTC Core - above) */
+
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoCity  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoCountry  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoAddress  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoPostalCode  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoStateProvince  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoEmails  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoPhones  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN const CFStringRef kCGImagePropertyIPTCContactInfoWebURLs  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Possible keys for kCGImageProperty8BIMDictionary */
 
@@ -386,9 +400,8 @@ CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonImageSerialNumber;
 CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonFlashExposureComp;
 CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonContinuousDrive;
 CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonLensModel;
-CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonFirmware	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonAspectRatioInfo	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonFirmware	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGImagePropertyMakerCanonAspectRatioInfo	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
-CG_EXTERN_C_END
 
 #endif	/* __CGIMAGEPROPERTIES__ */

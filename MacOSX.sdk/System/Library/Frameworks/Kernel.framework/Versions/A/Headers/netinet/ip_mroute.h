@@ -105,7 +105,7 @@
 /*
  * Types and macros for handling bitmaps with one bit per virtual interface.
  */
-typedef u_long vifbitmap_t;
+typedef u_int32_t vifbitmap_t;
 typedef u_short vifi_t;		/* type of a vif index */
 #define ALL_VIFS (vifi_t)-1
 
@@ -196,9 +196,9 @@ struct mfc {
     struct in_addr  mfc_mcastgrp;  		/* multicast group associated*/
     vifi_t	    mfc_parent; 		/* incoming vif              */
     u_char	    mfc_ttls[CONFIG_MAXVIFS]; 		/* forwarding ttls on vifs   */
-    u_long	    mfc_pkt_cnt;		/* pkt count for src-grp     */
-    u_long	    mfc_byte_cnt;		/* byte count for src-grp    */
-    u_long	    mfc_wrong_if;		/* wrong if for src-grp	     */
+    u_int32_t	    mfc_pkt_cnt;		/* pkt count for src-grp     */
+    u_int32_t	    mfc_byte_cnt;		/* byte count for src-grp    */
+    u_int32_t	    mfc_wrong_if;		/* wrong if for src-grp	     */
     int		    mfc_expire;			/* time to clean entry up    */
     struct timeval  mfc_last_assert;		/* last time I sent an assert*/
     struct rtdetq  *mfc_stall;			/* q of packets awaiting mfc */

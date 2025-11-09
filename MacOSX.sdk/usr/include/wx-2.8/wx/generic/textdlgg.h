@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: textdlgg.h,v 1.32 2006/01/16 14:59:21 MR Exp $
+// RCS-ID:      $Id: textdlgg.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@
 #include "wx/valtext.h"
 #endif
 
-class WXDLLEXPORT wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
 extern WXDLLEXPORT_DATA(const wxChar) wxGetTextFromUserPromptStr[];
 extern WXDLLEXPORT_DATA(const wxChar) wxGetPasswordFromUserPromptStr[];

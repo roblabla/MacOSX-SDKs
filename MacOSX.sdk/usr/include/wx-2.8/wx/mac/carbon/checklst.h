@@ -5,7 +5,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: checklst.h,v 1.9 2006/05/18 00:52:48 VZ Exp $
+// RCS-ID:      $Id: checklst.h 39196 2006-05-18 00:52:48Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

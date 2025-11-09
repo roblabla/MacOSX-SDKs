@@ -83,6 +83,28 @@ __BEGIN_DECLS
 
 
 
+extern kern_return_t macx_swapon(
+				uint64_t filename,
+				int flags,
+				int size,
+				int priority);
+
+extern kern_return_t macx_swapoff(
+				uint64_t filename,
+				int flags);
+
+extern kern_return_t macx_triggers(
+				int hi_water,
+				int low_water,
+				int flags,
+				mach_port_t alert_port);
+
+extern kern_return_t macx_backing_store_suspend(
+				boolean_t suspend);
+
+extern kern_return_t macx_backing_store_recovery(
+				int pid);
+
 extern boolean_t swtch_pri(int pri);
 
 extern boolean_t swtch(void);

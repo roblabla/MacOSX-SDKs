@@ -77,7 +77,6 @@ protected:
     #define _watchdogUSBTimer					_expansionData->watchdogUSBTimer
     #define _controllerTerminating				_expansionData->_terminating
     #define _watchdogTimerActive				_expansionData->_watchdogTimerActive
-    #define _pcCardEjected						_expansionData->_pcCardEjected
     #define _busNumber							_expansionData->_busNumber
     #define _currentSizeOfCommandPool			_expansionData->_currentSizeOfCommandPool
     #define _currentSizeOfIsocCommandPool		_expansionData->_currentSizeOfIsocCommandPool
@@ -330,6 +329,9 @@ public:
 
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  18);
     virtual IOUSBControllerIsochListElement		*GetTDfromDoneQueue(IOUSBControllerIsochEndpoint* pED);
+	
+	// 7185026 - this is to make this call from behind the gate
+    static IOReturn		GatedGetTDfromDoneQueue(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
 	
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  19);
     virtual void								ReturnIsochDoneQueue(IOUSBControllerIsochEndpoint*);

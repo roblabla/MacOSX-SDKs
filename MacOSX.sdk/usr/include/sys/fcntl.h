@@ -126,7 +126,9 @@ typedef __darwin_pid_t	pid_t;
 #endif
 #define	O_NONBLOCK	0x0004		/* no delay */
 #define	O_APPEND	0x0008		/* set append mode */
-#define	O_SYNC		0x0080		/* synchronous writes */
+#ifndef O_SYNC		/* allow simultaneous inclusion of <aio.h> */
+#define	O_SYNC		0x0080		/* synch I/O file integrity */
+#endif
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	O_SHLOCK	0x0010		/* open with shared file lock */
 #define	O_EXLOCK	0x0020		/* open with exclusive file lock */
@@ -150,7 +152,9 @@ typedef __darwin_pid_t	pid_t;
 #define O_SYMLINK	0x200000	/* allow open of a symlink */
 #endif
 
-//#define	O_SYNC  /* ??? POSIX: Write according to synchronized I/O file integrity completion */
+#ifndef O_DSYNC		/* allow simultaneous inclusion of <aio.h> */
+#define		O_DSYNC	0x400000	/* synch I/O data integrity */
+#endif
 
 
 /*
@@ -162,6 +166,7 @@ typedef __darwin_pid_t	pid_t;
 #define	FAPPEND		O_APPEND	/* kernel/compat */
 #define	FASYNC		O_ASYNC		/* kernel/compat */
 #define	FFSYNC		O_FSYNC		/* kernel */
+#define	FFDSYNC		O_DSYNC		/* kernel */
 #define	FNONBLOCK	O_NONBLOCK	/* kernel */
 #define	FNDELAY		O_NONBLOCK	/* compat */
 #define	O_NDELAY	O_NONBLOCK	/* compat */
@@ -214,6 +219,11 @@ typedef __darwin_pid_t	pid_t;
 
 #define F_MARKDEPENDENCY 60             /* this process hosts the device supporting the fs backing this fd */
 
+#define F_ADDFILESIGS	61		/* add signature from same file (used by dyld for shared libs) */
+
+#define F_GETPROTECTIONCLASS	62		/* Get the protection class of a file from the EA, returns int */
+#define F_SETPROTECTIONCLASS	63		/* Set the protection class of a file for the EA, requires int */
+
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up
 #define FCNTL_FS_SPECIFIC_BASE  0x00010000
 
@@ -253,7 +263,6 @@ typedef __darwin_pid_t	pid_t;
 #define	S_IFSOCK	0140000		/* [XSI] socket */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	S_IFWHT		0160000		/* whiteout */
-#define S_IFXATTR	0200000		/* extended attribute */
 #endif
 
 /* File mode */
@@ -316,15 +325,19 @@ struct flock {
  * advisory file read data type -
  * information passed by user to system
  */
+
+
 struct radvisory {
        off_t   ra_offset;
        int     ra_count;
 };
 
+
 /*
  * detached code signatures data type -
- * information passed by user to system
- * used by F_ADDSIGS
+ * information passed by user to system used by F_ADDSIGS and F_ADDFILESIGS.
+ * F_ADDFILESIGS is a shortcut for files that contain their own signature and
+ * doesn't require mapping of the file in order to load the signature.
  */
 typedef struct fsignatures {
 	off_t		fs_file_start;
@@ -355,7 +368,6 @@ typedef struct fbootstraptransfer {
   size_t fbt_length;          /* IN: number of bytes to transfer */
   void *fbt_buffer;             /* IN: buffer to be read/written */
 } fbootstraptransfer_t;
-
 
 
 /*
@@ -419,14 +431,16 @@ int	open(const char *, int, ...) __DARWIN_ALIAS_C(open);
 int	creat(const char *, mode_t) __DARWIN_ALIAS_C(creat);
 int	fcntl(int, int, ...) __DARWIN_ALIAS_C(fcntl);
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+
 int	openx_np(const char *, int, filesec_t);
 int	flock(int, int);
 filesec_t filesec_init(void);
 filesec_t filesec_dup(filesec_t);
 void	filesec_free(filesec_t);
 int	filesec_get_property(filesec_t, filesec_property_t, void *);
-int	filesec_set_property(filesec_t, filesec_property_t, const void *);
 int	filesec_query_property(filesec_t, filesec_property_t, int *);
+int	filesec_set_property(filesec_t, filesec_property_t, const void *);
+int	filesec_unset_property(filesec_t, filesec_property_t);
 #define _FILESEC_UNSET_PROPERTY	((void *)0)
 #define _FILESEC_REMOVE_ACL	((void *)1)
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */

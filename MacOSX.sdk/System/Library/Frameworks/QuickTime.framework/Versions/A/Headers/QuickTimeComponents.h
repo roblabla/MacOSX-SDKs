@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,6 +31,7 @@
 #ifndef __QUICKTIMEMUSIC__
 #include <QuickTime/QuickTimeMusic.h>
 #endif
+
 
 
 
@@ -1764,14 +1765,20 @@ enum {
   tcCounter                     = 1 << 3
 };
 
+
+#endif // !__LP64__
+
 struct TimeCodeDef {
-  long                flags;                  /* drop-frame, etc.*/
+  SInt32              flags;                  /* drop-frame, etc.*/
   TimeScale           fTimeScale;             /* time scale of frameDuration (eg. 2997)*/
   TimeValue           frameDuration;          /* duration of each frame (eg. 100)*/
   UInt8               numFrames;              /* frames/sec for timecode (eg. 30) OR frames/tick for counter mode*/
   UInt8               padding;                /* unused padding byte*/
 };
 typedef struct TimeCodeDef              TimeCodeDef;
+
+#if !__LP64__
+
 enum {
   tctNegFlag                    = 0x80  /* negative bit is in minutes*/
 };
@@ -1792,19 +1799,25 @@ union TimeCodeRecord {
   TimeCodeCounter     c;
 };
 typedef union TimeCodeRecord            TimeCodeRecord;
+
+#endif // !__LP64__
+
 struct TimeCodeDescription {
-  long                descSize;               /* standard sample description header*/
-  long                dataFormat;
-  long                resvd1;
-  short               resvd2;
-  short               dataRefIndex;
-  long                flags;                  /* timecode specific stuff*/
+  SInt32              descSize;               /* standard sample description header*/
+  SInt32              dataFormat;
+  SInt32              resvd1;
+  SInt16              resvd2;
+  SInt16              dataRefIndex;
+  SInt32              flags;                  /* timecode specific stuff*/
   TimeCodeDef         timeCodeDef;
-  long                srcRef[1];
+  SInt32              srcRef[1];
 };
 typedef struct TimeCodeDescription      TimeCodeDescription;
 typedef TimeCodeDescription *           TimeCodeDescriptionPtr;
 typedef TimeCodeDescriptionPtr *        TimeCodeDescriptionHandle;
+
+#if !__LP64__
+
 enum {
   tcdfShowTimeCode              = 1 << 0
 };
@@ -7490,7 +7503,7 @@ enum {
 
 enum {
   xmlIdentifierInvalid          = 0,
-  xmlIdentifierUnrecognized     = (long)0xFFFFFFFF,
+  xmlIdentifierUnrecognized     = (int)0xFFFFFFFF,
   xmlContentTypeInvalid         = 0,
   xmlContentTypeElement         = 1,
   xmlContentTypeCharData        = 2

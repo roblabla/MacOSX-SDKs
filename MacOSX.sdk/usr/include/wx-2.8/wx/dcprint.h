@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: dcprint.h,v 1.9 2006/09/15 16:45:48 PC Exp $
+// RCS-ID:      $Id: dcprint.h 41240 2006-09-15 16:45:48Z PC $
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 

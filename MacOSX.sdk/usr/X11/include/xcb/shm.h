@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from shm.xml by c-client.xsl using XSLT.
+ * This file generated automatically from shm.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_SHM_MAJOR_VERSION 1
 #define XCB_SHM_MINOR_VERSION 1
@@ -86,6 +90,7 @@ typedef struct xcb_shm_query_version_reply_t {
     uint16_t uid; /**<  */
     uint16_t gid; /**<  */
     uint8_t  pixmap_format; /**<  */
+    uint8_t  pad0[15]; /**<  */
 } xcb_shm_query_version_reply_t;
 
 /** Opcode for xcb_shm_attach. */
@@ -101,6 +106,7 @@ typedef struct xcb_shm_attach_request_t {
     xcb_shm_seg_t shmseg; /**<  */
     uint32_t      shmid; /**<  */
     uint8_t       read_only; /**<  */
+    uint8_t       pad0[3]; /**<  */
 } xcb_shm_attach_request_t;
 
 /** Opcode for xcb_shm_detach. */
@@ -304,6 +310,8 @@ xcb_shm_query_version_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shm_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -625,6 +633,8 @@ xcb_shm_get_image_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_shm_get_image_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -716,6 +726,10 @@ xcb_shm_create_pixmap (xcb_connection_t *c  /**< */,
                        xcb_shm_seg_t     shmseg  /**< */,
                        uint32_t          offset  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -60,7 +60,9 @@ typedef	kern_return_t		IOReturn;
 #define sub_iokit_ahci                    err_sub(12)
 #define sub_iokit_powermanagement         err_sub(13)
 //#define sub_iokit_hidsystem             err_sub(14)
+#define sub_iokit_scsi                    err_sub(16)
 //#define sub_iokit_pccard                err_sub(21)
+#define sub_iokit_thunderbolt             err_sub(29)
 
 #define sub_iokit_vendor_specific         err_sub(-2)
 #define sub_iokit_reserved                err_sub(-1)

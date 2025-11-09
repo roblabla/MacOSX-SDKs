@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: radiobut.h,v 1.9 2006/09/05 20:45:52 VZ Exp $
+// RCS-ID:      $Id: radiobut.h 41020 2006-09-05 20:47:48Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

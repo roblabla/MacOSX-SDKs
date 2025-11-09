@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -145,65 +145,79 @@
 /*
  * CR4
  */
-#define CR4_VMXE 0x00002000	/* Enable VMX operation */
-#define CR4_FXS 0x00000200    	/* SSE/SSE2 OS supports FXSave */
-#define CR4_XMM 0x00000400    	/* SSE/SSE2 instructions supported in OS */
-#define CR4_PGE 0x00000080    	/* p6:   Page Global Enable */
-#define	CR4_MCE	0x00000040	/* p5:   Machine Check Exceptions */
-#define CR4_PAE 0x00000020      /* p5:   Physical Address Extensions */
-#define	CR4_PSE	0x00000010	/* p5:   Page Size Extensions */
-#define	CR4_DE	0x00000008	/* p5:   Debugging Extensions */
-#define	CR4_TSD	0x00000004	/* p5:   Time Stamp Disable */
-#define	CR4_PVI	0x00000002	/* p5:   Protected-mode Virtual Interrupts */
-#define	CR4_VME	0x00000001	/* p5:   Virtual-8086 Mode Extensions */
+#define CR4_OSXSAVE 0x00040000	/* OS supports XSAVE */
+#define CR4_SMXE    0x00004000	/* Enable SMX operation */
+#define CR4_VMXE    0x00002000	/* Enable VMX operation */
+#define CR4_OSXMM   0x00000400  /* SSE/SSE2 exceptions supported in OS */
+#define CR4_OSFXS   0x00000200  /* SSE/SSE2 OS supports FXSave */
+#define CR4_PCE     0x00000100  /* Performance-Monitor Count Enable */
+#define CR4_PGE     0x00000080  /* Page Global Enable */
+#define	CR4_MCE     0x00000040	/* Machine Check Exceptions */
+#define CR4_PAE     0x00000020  /* Physical Address Extensions */
+#define	CR4_PSE     0x00000010	/* Page Size Extensions */
+#define	CR4_DE      0x00000008	/* Debugging Extensions */
+#define	CR4_TSD     0x00000004	/* Time Stamp Disable */
+#define	CR4_PVI     0x00000002	/* Protected-mode Virtual Interrupts */
+#define	CR4_VME     0x00000001	/* Virtual-8086 Mode Extensions */
 
+/*
+ * XCR0 - XFEATURE_ENABLED_MASK (a.k.a. XFEM) register
+ */
+#define	XCR0_YMM 0x0000000000000004ULL /* YMM state available */
+#define	XFEM_YMM XCR0_YMM
+#define XCR0_SSE 0x0000000000000002ULL	/* SSE supported by XSAVE/XRESTORE */
+#define XCR0_X87 0x0000000000000001ULL	/* x87, FPU/MMX (always set) */
+#define XFEM_SSE XCR0_SSE
+#define XFEM_X87 XCR0_X87
+#define XCR0 (0)
 #ifndef	ASSEMBLER
 
 #include <sys/cdefs.h>
+#include <stdint.h>
+
 __BEGIN_DECLS
 
-#define	set_ts() \
-	set_cr0(get_cr0() | CR0_TS)
+#define	set_ts() set_cr0(get_cr0() | CR0_TS)
 
-static inline unsigned int get_cr0(void)
+static inline uintptr_t get_cr0(void)
 {
-	register unsigned int cr0; 
+	uintptr_t cr0; 
 	__asm__ volatile("mov %%cr0, %0" : "=r" (cr0));
 	return(cr0);
 }
 
-static inline void set_cr0(unsigned int value)
+static inline void set_cr0(uintptr_t value)
 {
 	__asm__ volatile("mov %0, %%cr0" : : "r" (value));
 }
 
-static inline unsigned int get_cr2(void)
+static inline uintptr_t get_cr2(void)
 {
-	register unsigned int cr2;
+	uintptr_t cr2;
 	__asm__ volatile("mov %%cr2, %0" : "=r" (cr2));
 	return(cr2);
 }
 
-static inline unsigned int get_cr3(void)
+static inline uintptr_t get_cr3(void)
 {
-	register unsigned int cr3;
+	register uintptr_t cr3;
 	__asm__ volatile("mov %%cr3, %0" : "=r" (cr3));
 	return(cr3);
 }
 
-static inline void set_cr3(unsigned int value)
+static inline void set_cr3(uintptr_t value)
 {
 	__asm__ volatile("mov %0, %%cr3" : : "r" (value));
 }
 
-static inline uint32_t get_cr4(void)
+static inline uintptr_t get_cr4(void)
 {
-	uint32_t cr4;
+	uintptr_t cr4;
 	__asm__ volatile("mov %%cr4, %0" : "=r" (cr4));
 	return(cr4);
 }
 
-static inline void set_cr4(uint32_t value)
+static inline void set_cr4(uintptr_t value)
 {
 	__asm__ volatile("mov %0, %%cr4" : : "r" (value));
 }
@@ -237,13 +251,28 @@ static inline void lldt(unsigned int seg)
 	__asm__ volatile("lldt %0" : : "rm" ((unsigned short)(seg)));
 }
 
+static inline void lgdt(uintptr_t *desc)
+{
+	__asm__ volatile("lgdt %0" : : "m" (*desc));
+}
+
+static inline void lidt(uintptr_t *desc)
+{
+	__asm__ volatile("lidt %0" : : "m" (*desc));
+}
+
+static inline void swapgs(void)
+{
+	__asm__ volatile("swapgs");
+}
+
 
 static inline void wbinvd(void)
 {
 	__asm__ volatile("wbinvd");
 }
 
-static inline void invlpg(unsigned long addr)
+static inline void invlpg(uintptr_t addr)
 {
 	__asm__  volatile("invlpg (%0)" :: "r" (addr) : "memory");
 }
@@ -261,12 +290,14 @@ static inline void invlpg(unsigned long addr)
 	__asm__ volatile("wrmsr" : : "c" (msr), "a" (lo), "d" (hi))
 
 #define rdtsc(lo,hi) \
-	__asm__ volatile("rdtsc" : "=a" (lo), "=d" (hi))
+	__asm__ volatile("lfence; rdtsc; lfence" : "=a" (lo), "=d" (hi))
 
 #define write_tsc(lo,hi) wrmsr(0x10, lo, hi)
 
 #define rdpmc(counter,lo,hi) \
 	__asm__ volatile("rdpmc" : "=a" (lo), "=d" (hi) : "c" (counter))
+
+#ifdef __i386__
 
 static inline uint64_t rdmsr64(uint32_t msr)
 {
@@ -283,9 +314,54 @@ static inline void wrmsr64(uint32_t msr, uint64_t val)
 static inline uint64_t rdtsc64(void)
 {
 	uint64_t ret;
-	__asm__ volatile("rdtsc" : "=A" (ret));
+	__asm__ volatile("lfence; rdtsc; lfence" : "=A" (ret));
 	return ret;
 }
+
+static inline uint64_t rdtscp64(uint32_t *aux)
+{
+	uint64_t ret;
+	__asm__ volatile("rdtscp; mov %%ecx, %1"
+				: "=A" (ret), "=m" (*aux)
+				:
+				: "ecx");
+	return ret;
+}
+
+#elif defined(__x86_64__)
+
+static inline uint64_t rdmsr64(uint32_t msr)
+{
+	uint32_t lo=0, hi=0;
+	rdmsr(msr, lo, hi);
+	return (((uint64_t)hi) << 32) | ((uint64_t)lo);
+}
+
+static inline void wrmsr64(uint32_t msr, uint64_t val)
+{
+	wrmsr(msr, (val & 0xFFFFFFFFUL), ((val >> 32) & 0xFFFFFFFFUL));
+}
+
+static inline uint64_t rdtsc64(void)
+{
+	uint32_t lo, hi;
+	rdtsc(lo, hi);
+	return (((uint64_t)hi) << 32) | ((uint64_t)lo);
+}
+
+static inline uint64_t rdtscp64(uint32_t *aux)
+{
+	uint32_t lo, hi;
+	__asm__ volatile("rdtscp; mov %%ecx, %1"
+					 : "=a" (lo), "=d" (hi), "=m" (*aux)
+					 :
+					 : "ecx");
+	return (((uint64_t)hi) << 32) | ((uint64_t)lo);
+}
+
+#else
+#error Unsupported architecture
+#endif
 
 /*
  * rdmsr_carefully() returns 0 when the MSR has been read successfully,
@@ -298,102 +374,124 @@ __END_DECLS
 
 #endif	/* ASSEMBLER */
 
-#define MSR_IA32_P5_MC_ADDR		0
-#define MSR_IA32_P5_MC_TYPE		1
-#define MSR_IA32_PLATFORM_ID		0x17
-#define MSR_IA32_EBL_CR_POWERON		0x2a
+#define MSR_IA32_P5_MC_ADDR			0
+#define MSR_IA32_P5_MC_TYPE			1
+#define MSR_IA32_PLATFORM_ID			0x17
+#define MSR_IA32_EBL_CR_POWERON			0x2a
 
-#define MSR_IA32_APIC_BASE		0x1b
-#define MSR_IA32_APIC_BASE_BSP		(1<<8)
-#define MSR_IA32_APIC_BASE_ENABLE	(1<<11)
-#define MSR_IA32_APIC_BASE_BASE		(0xfffff<<12)
+#define MSR_IA32_APIC_BASE			0x1b
+#define     MSR_IA32_APIC_BASE_BSP		    (1<<8)
+#define     MSR_IA32_APIC_BASE_EXTENDED		    (1<<10)
+#define     MSR_IA32_APIC_BASE_ENABLE		    (1<<11)
+#define     MSR_IA32_APIC_BASE_BASE		    (0xfffff<<12)
 
-#define MSR_IA32_FEATURE_CONTROL	0x3a
-#define MSR_IA32_FEATCTL_LOCK		(1<<0)
-#define MSR_IA32_FEATCTL_VMXON_SMX	(1<<1)
-#define MSR_IA32_FEATCTL_VMXON		(1<<2)
-#define MSR_IA32_FEATCTL_CSTATE_SMI	(1<<16)
+#define MSR_CORE_THREAD_COUNT			0x35
 
-#define MSR_IA32_UCODE_WRITE		0x79
-#define MSR_IA32_UCODE_REV		0x8b
+#define MSR_IA32_FEATURE_CONTROL		0x3a
+#define     MSR_IA32_FEATCTL_LOCK		    (1<<0)
+#define     MSR_IA32_FEATCTL_VMXON_SMX		    (1<<1)
+#define     MSR_IA32_FEATCTL_VMXON		    (1<<2)
+#define     MSR_IA32_FEATCTL_CSTATE_SMI		    (1<<16)
 
-#define MSR_IA32_PERFCTR0		0xc1
-#define MSR_IA32_PERFCTR1		0xc2
+#define MSR_IA32_UPDT_TRIG			0x79
+#define MSR_IA32_BIOS_SIGN_ID			0x8b
+#define MSR_IA32_UCODE_WRITE			MSR_IA32_UPDT_TRIG
+#define MSR_IA32_UCODE_REV			MSR_IA32_BIOS_SIGN_ID
 
-#define MSR_PMG_CST_CONFIG_CONTROL	0xe2
+#define MSR_IA32_PERFCTR0			0xc1
+#define MSR_IA32_PERFCTR1			0xc2
 
-#define MSR_IA32_BBL_CR_CTL		0x119
+#define MSR_PLATFORM_INFO			0xce
 
-#define MSR_IA32_SYSENTER_CS		0x174
-#define MSR_IA32_SYSENTER_ESP		0x175
-#define MSR_IA32_SYSENTER_EIP		0x176
+#define MSR_PMG_CST_CONFIG_CONTROL		0xe2
 
-#define MSR_IA32_MCG_CAP		0x179
-#define MSR_IA32_MCG_STATUS		0x17a
-#define MSR_IA32_MCG_CTL		0x17b
+#define MSR_IA32_BBL_CR_CTL			0x119
 
-#define MSR_IA32_EVNTSEL0		0x186
-#define MSR_IA32_EVNTSEL1		0x187
+#define MSR_IA32_SYSENTER_CS			0x174
+#define MSR_IA32_SYSENTER_ESP			0x175
+#define MSR_IA32_SYSENTER_EIP			0x176
 
-#define MSR_IA32_PERF_STS		0x198
-#define MSR_IA32_PERF_CTL		0x199
+#define MSR_IA32_MCG_CAP			0x179
+#define MSR_IA32_MCG_STATUS			0x17a
+#define MSR_IA32_MCG_CTL			0x17b
 
-#define MSR_IA32_MISC_ENABLE		0x1a0
+#define MSR_IA32_EVNTSEL0			0x186
+#define MSR_IA32_EVNTSEL1			0x187
 
-#define MSR_IA32_DEBUGCTLMSR		0x1d9
-#define MSR_IA32_LASTBRANCHFROMIP	0x1db
-#define MSR_IA32_LASTBRANCHTOIP		0x1dc
-#define MSR_IA32_LASTINTFROMIP		0x1dd
-#define MSR_IA32_LASTINTTOIP		0x1de
+#define MSR_FLEX_RATIO				0x194
+#define MSR_IA32_PERF_STS			0x198
+#define MSR_IA32_PERF_CTL			0x199
+#define MSR_IA32_CLOCK_MODULATION		0x19a
 
-#define MSR_IA32_CR_PAT 		0x277	
+#define MSR_IA32_MISC_ENABLE			0x1a0
 
-#define MSR_IA32_MC0_CTL		0x400
-#define MSR_IA32_MC0_STATUS		0x401
-#define MSR_IA32_MC0_ADDR		0x402
-#define MSR_IA32_MC0_MISC		0x403
+#define MSR_IA32_ENERGY_PERFORMANCE_BIAS	0x1b0
+#define MSR_IA32_PACKAGE_THERM_STATUS		0x1b1
+#define MSR_IA32_PACKAGE_THERM_INTERRUPT	0x1b2
 
-#define MSR_IA32_MTRRCAP		0xfe
-#define MSR_IA32_MTRR_DEF_TYPE		0x2ff
-#define MSR_IA32_MTRR_PHYSBASE(n)	(0x200 + 2*(n))
-#define MSR_IA32_MTRR_PHYSMASK(n)	(0x200 + 2*(n) + 1)
-#define MSR_IA32_MTRR_FIX64K_00000	0x250
-#define MSR_IA32_MTRR_FIX16K_80000	0x258
-#define MSR_IA32_MTRR_FIX16K_A0000	0x259
-#define MSR_IA32_MTRR_FIX4K_C0000	0x268
-#define MSR_IA32_MTRR_FIX4K_C8000	0x269
-#define MSR_IA32_MTRR_FIX4K_D0000	0x26a
-#define MSR_IA32_MTRR_FIX4K_D8000	0x26b
-#define MSR_IA32_MTRR_FIX4K_E0000	0x26c
-#define MSR_IA32_MTRR_FIX4K_E8000	0x26d
-#define MSR_IA32_MTRR_FIX4K_F0000	0x26e
-#define MSR_IA32_MTRR_FIX4K_F8000	0x26f
+#define MSR_IA32_DEBUGCTLMSR			0x1d9
+#define MSR_IA32_LASTBRANCHFROMIP		0x1db
+#define MSR_IA32_LASTBRANCHTOIP			0x1dc
+#define MSR_IA32_LASTINTFROMIP			0x1dd
+#define MSR_IA32_LASTINTTOIP			0x1de
 
-#define MSR_IA32_VMX_BASE		0x480
-#define MSR_IA32_VMX_BASIC		MSR_IA32_VMX_BASE
+#define MSR_IA32_CR_PAT 			0x277	
+
+#define MSR_IA32_MTRRCAP			0xfe
+#define MSR_IA32_MTRR_DEF_TYPE			0x2ff
+#define MSR_IA32_MTRR_PHYSBASE(n)		(0x200 + 2*(n))
+#define MSR_IA32_MTRR_PHYSMASK(n)		(0x200 + 2*(n) + 1)
+#define MSR_IA32_MTRR_FIX64K_00000		0x250
+#define MSR_IA32_MTRR_FIX16K_80000		0x258
+#define MSR_IA32_MTRR_FIX16K_A0000		0x259
+#define MSR_IA32_MTRR_FIX4K_C0000		0x268
+#define MSR_IA32_MTRR_FIX4K_C8000		0x269
+#define MSR_IA32_MTRR_FIX4K_D0000		0x26a
+#define MSR_IA32_MTRR_FIX4K_D8000		0x26b
+#define MSR_IA32_MTRR_FIX4K_E0000		0x26c
+#define MSR_IA32_MTRR_FIX4K_E8000		0x26d
+#define MSR_IA32_MTRR_FIX4K_F0000		0x26e
+#define MSR_IA32_MTRR_FIX4K_F8000		0x26f
+
+#define MSR_IA32_MC0_CTL			0x400
+#define MSR_IA32_MC0_STATUS			0x401
+#define MSR_IA32_MC0_ADDR			0x402
+#define MSR_IA32_MC0_MISC			0x403
+
+#define MSR_IA32_VMX_BASE			0x480
+#define MSR_IA32_VMX_BASIC			MSR_IA32_VMX_BASE
 #define MSR_IA32_VMXPINBASED_CTLS		MSR_IA32_VMX_BASE+1
-#define MSR_IA32_PROCBASED_CTLS		MSR_IA32_VMX_BASE+2
-#define MSR_IA32_VMX_EXIT_CTLS		MSR_IA32_VMX_BASE+3
-#define MSR_IA32_VMX_ENTRY_CTLS		MSR_IA32_VMX_BASE+4
-#define MSR_IA32_VMX_MISC		MSR_IA32_VMX_BASE+5
-#define MSR_IA32_VMX_CR0_FIXED0		MSR_IA32_VMX_BASE+6
-#define MSR_IA32_VMX_CR0_FIXED1		MSR_IA32_VMX_BASE+7
-#define MSR_IA32_VMX_CR4_FIXED0		MSR_IA32_VMX_BASE+8
-#define MSR_IA32_VMX_CR4_FIXED1		MSR_IA32_VMX_BASE+9
+#define MSR_IA32_PROCBASED_CTLS			MSR_IA32_VMX_BASE+2
+#define MSR_IA32_VMX_EXIT_CTLS			MSR_IA32_VMX_BASE+3
+#define MSR_IA32_VMX_ENTRY_CTLS			MSR_IA32_VMX_BASE+4
+#define MSR_IA32_VMX_MISC			MSR_IA32_VMX_BASE+5
+#define MSR_IA32_VMX_CR0_FIXED0			MSR_IA32_VMX_BASE+6
+#define MSR_IA32_VMX_CR0_FIXED1			MSR_IA32_VMX_BASE+7
+#define MSR_IA32_VMX_CR4_FIXED0			MSR_IA32_VMX_BASE+8
+#define MSR_IA32_VMX_CR4_FIXED1			MSR_IA32_VMX_BASE+9
 
-#define	MSR_IA32_EFER		0xC0000080
-#define	MSR_IA32_EFER_SCE	0x00000001
-#define	MSR_IA32_EFER_LME	0x00000100
-#define	MSR_IA32_EFER_LMA	0x00000400
-#define	MSR_IA32_EFER_NXE	0x00000800
+#define MSR_IA32_DS_AREA			0x600
 
-#define	MSR_IA32_STAR		0xC0000081
-#define	MSR_IA32_LSTAR		0xC0000082
-#define	MSR_IA32_CSTAR		0xC0000083
-#define	MSR_IA32_FMASK		0xC0000084
+#define MSR_IA32_PACKAGE_POWER_SKU_UNIT		0x606
+#define MSR_IA32_PACKAGE_ENERY_STATUS		0x611
+#define MSR_IA32_PRIMARY_PLANE_ENERY_STATUS	0x639
+#define MSR_IA32_SECONDARY_PLANE_ENERY_STATUS	0x641
+#define MSR_IA32_TSC_DEADLINE			0x6e0
 
-#define MSR_IA32_FS_BASE	0xC0000100
-#define MSR_IA32_GS_BASE	0xC0000101
-#define MSR_IA32_KERNEL_GS_BASE	0xC0000102
+#define	MSR_IA32_EFER				0xC0000080
+#define	    MSR_IA32_EFER_SCE			    0x00000001
+#define	    MSR_IA32_EFER_LME			    0x00000100
+#define	    MSR_IA32_EFER_LMA			    0x00000400
+#define     MSR_IA32_EFER_NXE			    0x00000800
+
+#define	MSR_IA32_STAR				0xC0000081
+#define	MSR_IA32_LSTAR				0xC0000082
+#define	MSR_IA32_CSTAR				0xC0000083
+#define	MSR_IA32_FMASK				0xC0000084
+
+#define MSR_IA32_FS_BASE			0xC0000100
+#define MSR_IA32_GS_BASE			0xC0000101
+#define MSR_IA32_KERNEL_GS_BASE			0xC0000102
+#define MSR_IA32_TSC_AUX			0xC0000103
 
 #endif	/* _I386_PROC_REG_H_ */

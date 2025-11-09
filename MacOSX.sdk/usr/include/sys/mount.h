@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -78,6 +78,7 @@
 #include <stdint.h>
 #include <sys/ucred.h>
 #include <sys/queue.h>		/* XXX needed for user builds */
+#include <Availability.h>
 
 typedef struct fsid { int32_t val[2]; } fsid_t;	/* file system id type */
 
@@ -87,7 +88,12 @@ typedef struct fsid { int32_t val[2]; } fsid_t;	/* file system id type */
 
 #define	MFSNAMELEN	15	/* length of fs type name, not inc. null */
 #define	MFSTYPENAMELEN	16	/* length of fs type name including null */
-#define	MNAMELEN	90	/* length of buffer for returned name */
+
+#if __DARWIN_64_BIT_INO_T
+#define	MNAMELEN	MAXPATHLEN	/* length of buffer for returned name */
+#else /* ! __DARWIN_64_BIT_INO_T */
+#define	MNAMELEN	90		/* length of buffer for returned name */
+#endif /* __DARWIN_64_BIT_INO_T */
 
 #define __DARWIN_STRUCT_STATFS64 { \
 	uint32_t	f_bsize;	/* fundamental file system block size */ \
@@ -108,7 +114,11 @@ typedef struct fsid { int32_t val[2]; } fsid_t;	/* file system id type */
 	uint32_t	f_reserved[8];	/* For future use */ \
 }
 
+#if !__DARWIN_ONLY_64_BIT_INO_T
+
 struct statfs64 __DARWIN_STRUCT_STATFS64;
+
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 
 #if __DARWIN_64_BIT_INO_T
 
@@ -138,13 +148,8 @@ struct statfs {
 	char	f_fstypename[MFSNAMELEN]; /* fs type name */
 	char	f_mntonname[MNAMELEN];	/* directory on which mounted */
 	char	f_mntfromname[MNAMELEN];/* mounted filesystem */
-#if COMPAT_GETFSSTAT
-	char	f_reserved3[0];	/* For alignment */
-	long	f_reserved4[0];	/* For future use */
-#else
 	char	f_reserved3;	/* For alignment */
 	long	f_reserved4[4];	/* For future use */
-#endif
 };
 
 #endif /* __DARWIN_64_BIT_INO_T */
@@ -185,6 +190,7 @@ struct vfsstatfs {
 #define	MNT_NODEV	0x00000010	/* don't interpret special files */
 #define	MNT_UNION	0x00000020	/* union with underlying filesystem */
 #define	MNT_ASYNC	0x00000040	/* file system written asynchronously */
+#define	MNT_CPROTECT	0x00000080	/* file system supports content protection */
 
 /*
  * NFS export related mount flags.
@@ -228,7 +234,7 @@ struct vfsstatfs {
 			MNT_LOCAL	| MNT_QUOTA | \
 			MNT_ROOTFS	| MNT_DOVOLFS	| MNT_DONTBROWSE | \
 			MNT_IGNORE_OWNERSHIP | MNT_AUTOMOUNTED | MNT_JOURNALED | \
-			MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | MNT_NOATIME)
+			MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | MNT_NOATIME | MNT_CPROTECT )
 /*
  * External filesystem command modifier flags.
  * Unmount can use the MNT_FORCE flag.
@@ -265,8 +271,9 @@ struct vfsstatfs {
  *
  * waitfor flags to vfs_sync() and getfsstat()
  */
-#define MNT_WAIT	1	/* synchronously wait for I/O to complete */
+#define MNT_WAIT	1	/* synchronized I/O file integrity completion */
 #define MNT_NOWAIT	2	/* start all I/O, but do not wait for it */
+#define	MNT_DWAIT	4	/* synchronized I/O data integrity completion */
 
 
 struct mount;
@@ -274,14 +281,15 @@ typedef struct mount * mount_t;
 struct vnode;
 typedef struct vnode * vnode_t;
 
+/* Reserved fields preserve binary compatibility */
 struct vfsconf {
-	struct	vfsops *vfc_vfsops;	/* filesystem operations vector */
+	uint32_t vfc_reserved1;		/* opaque */
 	char	vfc_name[MFSNAMELEN];	/* filesystem type name */
 	int	vfc_typenum;		/* historic filesystem type number */
 	int	vfc_refcount;		/* number mounted of this type */
 	int	vfc_flags;		/* permanent flags */
-	int	(*vfc_mountroot)(mount_t, vnode_t);	/* if != NULL, routine to mount root */
-	struct	vfsconf *vfc_next;	/* next in list */
+	uint32_t vfc_reserved2;		/* opaque */
+	uint32_t vfc_reserved3;		/* opaque */
 };
 
 struct vfsidctl {
@@ -323,8 +331,8 @@ struct vfsquery {
 #define VQ_ASSIST	0x0040	/* filesystem needs assistance from external program */
 #define VQ_NOTRESPLOCK	0x0080	/* server lockd down */
 #define VQ_UPDATE	0x0100	/* filesystem information has changed */
-#define VQ_FLAG0200	0x0200	/* placeholder */
-#define VQ_FLAG0400	0x0400	/* placeholder */
+#define VQ_VERYLOWDISK	0x0200	/* file system has *very* little disk space left */
+#define VQ_SYNCEVENT	0x0400	/* a sync just happened */
 #define VQ_FLAG0800	0x0800	/* placeholder */
 #define VQ_FLAG1000	0x1000	/* placeholder */
 #define VQ_FLAG2000	0x2000	/* placeholder */
@@ -351,15 +359,23 @@ typedef struct fhandle	fhandle_t;
 __BEGIN_DECLS
 int	fhopen(const struct fhandle *, int);
 int	fstatfs(int, struct statfs *) __DARWIN_INODE64(fstatfs);
-int	fstatfs64(int, struct statfs64 *);
+#if !__DARWIN_ONLY_64_BIT_INO_T
+int	fstatfs64(int, struct statfs64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	getfh(const char *, fhandle_t *);
 int	getfsstat(struct statfs *, int, int) __DARWIN_INODE64(getfsstat);
-int	getfsstat64(struct statfs64 *, int, int);
+#if !__DARWIN_ONLY_64_BIT_INO_T
+int	getfsstat64(struct statfs64 *, int, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	getmntinfo(struct statfs **, int) __DARWIN_INODE64(getmntinfo);
-int	getmntinfo64(struct statfs64 **, int);
+#if !__DARWIN_ONLY_64_BIT_INO_T
+int	getmntinfo64(struct statfs64 **, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	mount(const char *, const char *, int, void *);
 int	statfs(const char *, struct statfs *) __DARWIN_INODE64(statfs);
-int	statfs64(const char *, struct statfs64 *);
+#if !__DARWIN_ONLY_64_BIT_INO_T
+int	statfs64(const char *, struct statfs64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+#endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	unmount(const char *, int);
 int	getvfsbyname(const char *, struct vfsconf *);
 __END_DECLS

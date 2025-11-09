@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.7.2.4 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: php_hash.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -33,11 +33,13 @@
 typedef void (*php_hash_init_func_t)(void *context);
 typedef void (*php_hash_update_func_t)(void *context, const unsigned char *buf, unsigned int count);
 typedef void (*php_hash_final_func_t)(unsigned char *digest, void *context);
+typedef int  (*php_hash_copy_func_t)(const void *ops, void *orig_context, void *dest_context);
 
 typedef struct _php_hash_ops {
 	php_hash_init_func_t hash_init;
 	php_hash_update_func_t hash_update;
 	php_hash_final_func_t hash_final;
+	php_hash_copy_func_t hash_copy;
 
 	int digest_size;
 	int block_size;
@@ -56,6 +58,7 @@ extern const php_hash_ops php_hash_md2_ops;
 extern const php_hash_ops php_hash_md4_ops;
 extern const php_hash_ops php_hash_md5_ops;
 extern const php_hash_ops php_hash_sha1_ops;
+extern const php_hash_ops php_hash_sha224_ops;
 extern const php_hash_ops php_hash_sha256_ops;
 extern const php_hash_ops php_hash_sha384_ops;
 extern const php_hash_ops php_hash_sha512_ops;
@@ -75,6 +78,8 @@ extern const php_hash_ops php_hash_gost_ops;
 extern const php_hash_ops php_hash_adler32_ops;
 extern const php_hash_ops php_hash_crc32_ops;
 extern const php_hash_ops php_hash_crc32b_ops;
+extern const php_hash_ops php_hash_salsa10_ops;
+extern const php_hash_ops php_hash_salsa20_ops;
 
 #define PHP_HASH_HAVAL_OPS(p,b)	extern const php_hash_ops php_hash_##p##haval##b##_ops;
 
@@ -100,9 +105,11 @@ extern zend_module_entry hash_module_entry;
 #define phpext_hash_ptr &hash_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_HASH_API __declspec(dllexport)
+#	define PHP_HASH_API __declspec(dllexport)
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PHP_HASH_API __attribute__ ((visibility("default")))
 #else
-#define PHP_HASH_API
+#	define PHP_HASH_API
 #endif
 
 #ifdef ZTS
@@ -122,6 +129,7 @@ PHP_FUNCTION(hash_algos);
 
 PHP_HASH_API const php_hash_ops *php_hash_fetch_ops(const char *algo, int algo_len);
 PHP_HASH_API void php_hash_register_algo(const char *algo, const php_hash_ops *ops);
+PHP_HASH_API int php_hash_copy(const void *ops, void *orig_context, void *dest_context);
 
 static inline void php_hash_bin2hex(char *out, const unsigned char *in, int in_len)
 {

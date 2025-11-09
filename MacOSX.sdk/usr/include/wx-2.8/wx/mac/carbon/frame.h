@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: frame.h,v 1.11 2006/09/14 19:35:55 SC Exp $
+// RCS-ID:      $Id: frame.h 41228 2006-09-14 19:37:19Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

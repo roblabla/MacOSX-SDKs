@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,18 +19,9 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved. 
- *
- * IOBasicOutputQueue.h
- * 
- * HISTORY
- *
- */
 
 #ifndef _IOBASICOUTPUTQUEUE_H
 #define _IOBASICOUTPUTQUEUE_H
-
 
 #include <IOKit/IOLocks.h>
 #include <IOKit/network/IOOutputQueue.h>

@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2007, Apple Inc.
+	Copyright (c) 1997-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -107,7 +107,7 @@
 
 /* A method that was deprecated in Mac OS 10.5. You should use -hasWritablePropertyForKey: instead.
 */
-- (BOOL)isReadOnlyKey:(NSString *)key;
+- (BOOL)isReadOnlyKey:(NSString *)key DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

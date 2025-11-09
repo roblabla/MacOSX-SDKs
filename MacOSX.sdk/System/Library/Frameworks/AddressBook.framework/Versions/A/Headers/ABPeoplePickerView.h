@@ -1,8 +1,9 @@
 //
 //  ABPeoplePickerView.h
-//  AddressBook Framework
+//  ABNG
 //
-//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
+//  Created by Colter Reed on 7/17/08.
+//  Copyright 2008 Apple, Inc. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -17,45 +18,42 @@ typedef enum {
 
 @class ABRecord, ABPerson, ABGroup;
 
-@interface ABPeoplePickerView : NSView
-{
+
+@interface ABPeoplePickerView : NSView {
 @private
-    id                  _accessoryView;
-    id                  _loader;
-    id                  _uiController;
-    id                  _target;
-    void               *_carbonDelegate;
-    SEL                 _groupsDoubleAction;
-    SEL                 _peopleDoubleAction;
-    NSMutableArray     *_columns;
-    NSString           *_autosaveName;
-    void               *_flags;
+    void  *_reserved1;
+    void  *_reserved2;
+    void  *_reserved3;
+    void  *_reserved4;
+    void  *_reserved5;
+    SEL    _reserved6;
+    SEL    _reserved7;
+    void  *_reserved8;
+    void  *_reserved9;
+    void  *_reserved10;
 }
+
 /*
  * Look and Feel
  */
 
-// The accessory view is placed to the left of the search field. Passing nil removes the view.
-- (void)setAccessoryView:(NSView *)accessory;
-- (NSView *)accessoryView;
-
+// The accessory view is placed to the left of the search field. Setting to nil removes the view.
+@property (nonatomic, retain) NSView* accessoryView;
 
 // Modifies the selection behavior. Defaults to ABSingleValueSelection.
 //
 // ABNoValueSelection will not allow the user to select individual values.
 // ABSingleValueSelection will allow the user to choose a single value for a person.
 // ABMultipleValueSelection will allow the user to choose multiple values for a person.
-- (void)setValueSelectionBehavior:(ABPeoplePickerSelectionBehavior)behavior;
-- (ABPeoplePickerSelectionBehavior)valueSelectionBehavior;
+@property (nonatomic, assign) ABPeoplePickerSelectionBehavior valueSelectionBehavior;
 
 // Allow the user to select entire groups in the group column. If false, at least one
 // person in the group will be selected. Defaults to NO.
-- (void)setAllowsGroupSelection:(BOOL)flag;
-- (BOOL)allowsGroupSelection;
+@property (nonatomic, assign) BOOL allowsGroupSelection;
 
 // Allow the user to select more than one group/record/value at a time. Defaults to NO.
-- (void)setAllowsMultipleSelection:(BOOL)flag;
-- (BOOL)allowsMultipleSelection;
+@property (nonatomic, assign) BOOL allowsMultipleSelection;
+
 
 /*
  * Value column
@@ -73,16 +71,14 @@ typedef enum {
 - (NSString *)columnTitleForProperty:(NSString *)property;
 
 // Display one of the properties added above.
-- (void)setDisplayedProperty:(NSString *)property;
-- (NSString *)displayedProperty;
+@property (nonatomic, retain) NSString* displayedProperty;
 
 /*
  * Persistence
  */
 
-// Persistence Methods. Saves column positions and filter selection.
-- (void)setAutosaveName:(NSString *)name;
-- (NSString *)autosaveName;
+// Saves column positions and filter selection.
+@property (nonatomic, retain) NSString* autosaveName;
 
 /*
  * Selection
@@ -90,10 +86,10 @@ typedef enum {
 
 // Returns group column selection as an array of ABGroup objects. An empty array will be
 // returned if the All group is selected.
-- (NSArray *)selectedGroups;
+@property (readonly) NSArray* selectedGroups;
 
 // Returns names column selection as an array of ABGroup or ABPerson objects.
-- (NSArray *)selectedRecords;
+@property (readonly) NSArray* selectedRecords;
 
 // This method returns an array of selected multi-value identifiers. Returns nil if the displayed
 // property is a single value type.
@@ -120,22 +116,15 @@ typedef enum {
 - (void)clearSearchField:(id)sender;
 
 // Set target for various double click actions
-- (void)setTarget:(id)target;
-- (id)target;
+@property (nonatomic, assign) id target;
 
 // Provide an action to be invoked when the user double clicks on an item in the group column.
-- (void)setGroupDoubleAction:(SEL)action;
-- (SEL)groupDoubleAction;
+@property (nonatomic, assign) SEL groupDoubleAction;
 
 // Provide an action to be invoked when the user double clicks on an item in the names column.
-- (void)setNameDoubleAction:(SEL)action;
-- (SEL)nameDoubleAction;
+@property (nonatomic, assign) SEL nameDoubleAction;
 
 @end
-
-/*
- * Notifications
- */
 
 extern NSString * const ABPeoplePickerGroupSelectionDidChangeNotification    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern NSString * const ABPeoplePickerNameSelectionDidChangeNotification     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

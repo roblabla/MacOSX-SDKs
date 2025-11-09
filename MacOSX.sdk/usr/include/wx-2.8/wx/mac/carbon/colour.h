@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: colour.h,v 1.17 2006/12/19 05:39:12 SC Exp $
+// RCS-ID:      $Id: colour.h 44007 2006-12-19 05:43:19Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

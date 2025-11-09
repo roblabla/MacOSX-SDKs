@@ -1,5 +1,5 @@
 /*	NSXMLNodeOptions.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -39,35 +39,35 @@ enum {
     NSXMLNodeOptionsNone = 0,
     
     // Init
-    NSXMLNodeIsCDATA = 1 << 0,
-    NSXMLNodeExpandEmptyElement = 1 << 1, // <a></a>
-    NSXMLNodeCompactEmptyElement =  1 << 2, // <a/>
-    NSXMLNodeUseSingleQuotes = 1 << 3,
-    NSXMLNodeUseDoubleQuotes = 1 << 4,
+    NSXMLNodeIsCDATA = 1UL << 0,
+    NSXMLNodeExpandEmptyElement = 1UL << 1, // <a></a>
+    NSXMLNodeCompactEmptyElement =  1UL << 2, // <a/>
+    NSXMLNodeUseSingleQuotes = 1UL << 3,
+    NSXMLNodeUseDoubleQuotes = 1UL << 4,
     
     // Tidy
-    NSXMLDocumentTidyHTML = 1 << 9,
-    NSXMLDocumentTidyXML = 1 << 10,
+    NSXMLDocumentTidyHTML = 1UL << 9,
+    NSXMLDocumentTidyXML = 1UL << 10,
     
     // Validate
-    NSXMLDocumentValidate = 1 << 13,
+    NSXMLDocumentValidate = 1UL << 13,
 
     // Parse
-    NSXMLDocumentXInclude = 1 << 16,
+    NSXMLDocumentXInclude = 1UL << 16,
     
     // Output
-    NSXMLNodePrettyPrint = 1 << 17,
-    NSXMLDocumentIncludeContentTypeDeclaration = 1 << 18,
+    NSXMLNodePrettyPrint = 1UL << 17,
+    NSXMLDocumentIncludeContentTypeDeclaration = 1UL << 18,
     
     // Fidelity
-    NSXMLNodePreserveNamespaceOrder = 1 << 20,
-    NSXMLNodePreserveAttributeOrder = 1 << 21,
-    NSXMLNodePreserveEntities = 1 << 22,
-    NSXMLNodePreservePrefixes = 1 << 23,
-    NSXMLNodePreserveCDATA = 1 << 24,
-    NSXMLNodePreserveWhitespace = 1 << 25,
-    NSXMLNodePreserveDTD = 1 << 26,
-    NSXMLNodePreserveCharacterReferences = 1 << 27,    
+    NSXMLNodePreserveNamespaceOrder = 1UL << 20,
+    NSXMLNodePreserveAttributeOrder = 1UL << 21,
+    NSXMLNodePreserveEntities = 1UL << 22,
+    NSXMLNodePreservePrefixes = 1UL << 23,
+    NSXMLNodePreserveCDATA = 1UL << 24,
+    NSXMLNodePreserveWhitespace = 1UL << 25,
+    NSXMLNodePreserveDTD = 1UL << 26,
+    NSXMLNodePreserveCharacterReferences = 1UL << 27,    
     NSXMLNodePreserveEmptyElements = 
             (NSXMLNodeExpandEmptyElement | NSXMLNodeCompactEmptyElement),
     NSXMLNodePreserveQuotes = 

@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by: Wlodzimierz ABX Skiba from wx/listbook.h
 // Created:     15.09.04
-// RCS-ID:      $Id: choicebk.h,v 1.13 2006/10/20 09:16:41 VZ Exp $
+// RCS-ID:      $Id: choicebk.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Vadim Zeitlin, Wlodzimierz Skiba
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@
 #include "wx/bookctrl.h"
 #include "wx/choice.h"
 
-class WXDLLEXPORT wxChoice;
+class WXDLLIMPEXP_FWD_CORE wxChoice;
 
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED;
 extern WXDLLIMPEXP_CORE const wxEventType wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING;

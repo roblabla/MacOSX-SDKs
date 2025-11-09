@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     13-Sept-2003
-// RCS-ID:      $Id: _gdicmn.i,v 1.36.4.1 2007/01/25 23:07:21 RD Exp $
+// RCS-ID:      $Id: _gdicmn.i 50095 2007-11-20 03:49:13Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -488,6 +488,9 @@ DocStr(wxRect,
 width and height properties.  In wxPython most palces that expect a
 wx.Rect can also accept a (x,y,width,height) tuple.", "");
 
+
+%typemap(in) wxRect*;
+
 class wxRect
 {
 public:
@@ -619,7 +622,7 @@ that means:
 
     
     DocDeclStr(
-        wxRect&, Deflate(wxCoord dx, wxCoord dy),
+        wxRect, Deflate(wxCoord dx, wxCoord dy),
         "Decrease the rectangle size. This method is the opposite of `Inflate`
 in that Deflate(a,b) is equivalent to Inflate(-a,-b).  Please refer to
 `Inflate` for a full description.", "");
@@ -776,6 +779,9 @@ usually, but not necessarily, the larger one.", "");
 
     %property(Empty, IsEmpty, doc="See `IsEmpty`");
 };
+
+%apply wxRect& { wxRect* };
+
 
 
 MustHaveApp(wxIntersectRect);

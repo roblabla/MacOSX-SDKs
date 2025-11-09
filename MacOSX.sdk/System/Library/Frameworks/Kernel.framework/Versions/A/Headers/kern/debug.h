@@ -32,10 +32,56 @@
 #include <sys/cdefs.h>
 #include <stdint.h>
 
+#ifdef __APPLE_API_PRIVATE
+#ifdef __APPLE_API_UNSTABLE
+
+struct thread_snapshot {
+	uint32_t 		snapshot_magic;
+	uint32_t 		nkern_frames;
+	uint32_t 		nuser_frames;
+	uint64_t 		wait_event;
+	uint64_t	 	continuation;
+	uint64_t 		thread_id;
+	int32_t  		state;
+	char			ss_flags;
+} __attribute__ ((packed));
+
+struct task_snapshot {
+	uint32_t		snapshot_magic;
+	int32_t			pid;
+	uint32_t		nloadinfos;
+	char			ss_flags;
+	/* We restrict ourselves to a statically defined
+	 * (current as of 2009) length for the
+	 * p_comm string, due to scoping issues (osfmk/bsd and user/kernel
+	 * binary compatibility).
+	 */
+	char			p_comm[17];
+} __attribute__ ((packed));
+
+enum {
+	kUser64_p = 0x1,
+	kKernel64_p = 0x2,
+	kHasDispatchSerial = 0x4
+};
+
+enum {
+    STACKSHOT_GET_DQ = 0x1,
+    STACKSHOT_SAVE_LOADINFO = 0x2
+};
+
+#define STACKSHOT_THREAD_SNAPSHOT_MAGIC 0xfeedface
+#define STACKSHOT_TASK_SNAPSHOT_MAGIC 0xdecafbad
+
+#endif /* __APPLE_API_UNSTABLE */
+#endif /* __APPLE_API_PRIVATE */
+
 
 __BEGIN_DECLS
 
 extern void panic(const char *string, ...) __printflike(1,2);
+
+
 #if CONFIG_NO_PANIC_STRINGS
 #define panic_plain(...) (panic)((char *)0)
 #define panic(...)  (panic)((char *)0)

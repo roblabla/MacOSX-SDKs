@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,7 +19,6 @@
 @interface NSCoder (NSExtendedCoder)
     
 - (void)encodeObject:(id)object;
-- (void)encodePropertyList:(id)aPropertyList;
 - (void)encodeRootObject:(id)rootObject;
 - (void)encodeBycopyObject:(id)anObject;
 - (void)encodeByrefObject:(id)anObject;
@@ -29,10 +28,14 @@
 - (void)encodeBytes:(const void *)byteaddr length:(NSUInteger)length;
 
 - (id)decodeObject;
-- (id)decodePropertyList;
 - (void)decodeValuesOfObjCTypes:(const char *)types, ...;
 - (void)decodeArrayOfObjCType:(const char *)itemType count:(NSUInteger)count at:(void *)array;
 - (void *)decodeBytesWithReturnedLength:(NSUInteger *)lengthp;
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+- (void)encodePropertyList:(id)aPropertyList;
+- (id)decodePropertyList;
+#endif
 
 - (void)setObjectZone:(NSZone *)zone;
 - (NSZone *)objectZone;
@@ -70,6 +73,7 @@
 
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* Given an NSCoder, returns an object previously written with
    NXWriteNSObject(). The returned object is autoreleased. */
@@ -94,4 +98,5 @@ FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) DEPRECATED
    returned object is autoreleased. */
 
 @end
+#endif
 

@@ -4,7 +4,7 @@
 // Author:      wxWidgets team
 // Modified by:
 // Created:     13.01.00
-// RCS-ID:      $Id: metafile.h,v 1.15 2006/06/26 14:36:46 VZ Exp $
+// RCS-ID:      $Id: metafile.h 39841 2006-06-26 14:37:34Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

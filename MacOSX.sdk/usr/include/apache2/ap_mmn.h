@@ -15,7 +15,7 @@
  */
 
 /**
- * @file  ap_mpm.h
+ * @file  ap_mmn.h
  * @brief Module Magic Number
  *
  * @defgroup APACHE_CORE_MMN Module Magic Number
@@ -36,7 +36,7 @@
  * Minor API changes that do not cause binary compatibility problems.
  * Should be reset to 0 when upgrading MODULE_MAGIC_NUMBER_MAJOR.
  *
- * See the MODULE_MAGIC_AT_LEAST macro below for an example.
+ * See the AP_MODULE_MAGIC_AT_LEAST macro below for an example.
  */
 
 /*
@@ -114,7 +114,32 @@
  * 20051115.4 (2.2.4)  Added ap_get_server_banner() and
  *                         ap_get_server_description() (minor)
  * 20051115.5 (2.2.5)  Added ap_mpm_safe_kill() (minor)
- *
+ * 20051115.6 (2.2.7)  Added retry_set to proxy_worker (minor)
+ * 20051115.7 (2.2.7)  Added conn_rec::clogging_input_filters (minor)
+ * 20051115.8 (2.2.7)  Added flags to proxy_alias (minor)
+ * 20051115.9 (2.2.7)  Add ap_send_interim_response API
+ * 20051115.10 (2.2.7)  Added ap_mod_status_reqtail (minor)
+ * 20051115.11 (2.2.7)  Add *ftp_directory_charset to proxy_dir_conf
+ * 20051115.12 (2.2.8)  Add optional function ap_logio_add_bytes_in() to mog_logio
+ * 20051115.13 (2.2.9)  Add disablereuse and disablereuse_set
+ *                      to proxy_worker struct (minor)
+ * 20051115.14 (2.2.9)  Add ap_proxy_ssl_connection_cleanup and
+ *                      add *scpool, *r and need_flush to proxy_conn_rec
+ *                      structure
+ * 20051115.15 (2.2.9)  Add interpolate_env to proxy_dir_conf and
+ *                      introduce proxy_req_conf.
+ * 20051115.16 (2.2.9)  Add conn_timeout and conn_timeout_set to
+ *                      proxy_worker struct.
+ * 20051115.17 (2.2.10) Add scolonsep to proxy_balancer
+ * 20051115.18 (2.2.10) Add chroot support to unixd_config
+ * 20051115.19 (2.2.11) Added ap_timeout_parameter_parse to util.c / httpd.h
+ * 20051115.20 (2.2.11) Add ap_proxy_buckets_lifetime_transform to mod_proxy.h
+ * 20051115.21 (2.2.11) Export mod_rewrite.h in the public API
+ * 20051115.22 (2.2.12) Add ap_escape_html2 API, with additional option
+ * 20051115.23 (2.2.12) Add ap_open_piped_log_ex API, with cmdtype option,
+ *                      and conditional cmdtype member of piped_log struct
+ * 20051115.24 (2.2.15) Add forward member to proxy_conn_rec
+ * 20051115.25 (2.2.17) Add errstatuses member to proxy_balancer
  */
 
 #define MODULE_MAGIC_COOKIE 0x41503232UL /* "AP22" */
@@ -122,7 +147,7 @@
 #ifndef MODULE_MAGIC_NUMBER_MAJOR
 #define MODULE_MAGIC_NUMBER_MAJOR 20051115
 #endif
-#define MODULE_MAGIC_NUMBER_MINOR 5                     /* 0...n */
+#define MODULE_MAGIC_NUMBER_MINOR 25                    /* 0...n */
 
 /**
  * Determine if the server's current MODULE_MAGIC_NUMBER is at least a

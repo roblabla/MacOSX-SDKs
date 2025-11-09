@@ -6,7 +6,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     8/7/2000
-// RCS-ID:      $Id: splittree.h,v 1.13 2005/09/23 12:47:00 MR Exp $
+// RCS-ID:      $Id: splittree.h 51347 2008-01-23 13:03:22Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -79,6 +79,18 @@ public:
 
     // In case we're using the generic tree control.
     virtual int GetScrollPos(int orient) const;
+
+#if wxABI_VERSION >= 20808
+    // Override to suppress vertical scrollbar
+    virtual void SetScrollbar(int orient,
+                               int pos,
+                               int thumbVisible,
+                               int range,
+                               bool update);
+
+    // Override to get scroll values from companion window
+    virtual void DoCalcScrolledPosition(int x, int y, int *xx, int *yy) const;
+#endif
 
 //// Helpers
     void HideVScrollbar();

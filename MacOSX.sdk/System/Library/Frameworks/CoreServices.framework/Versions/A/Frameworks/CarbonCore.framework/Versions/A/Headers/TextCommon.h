@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2008 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -75,7 +75,7 @@ enum {
 typedef UInt32                          TextEncodingBase;
 enum {
                                         /* Mac OS encodings*/
-  kTextEncodingMacRoman         = 0L,
+  kTextEncodingMacRoman         = 0,
   kTextEncodingMacJapanese      = 1,
   kTextEncodingMacChineseTrad   = 2,
   kTextEncodingMacKorean        = 3,
@@ -168,7 +168,8 @@ enum {
   kTextEncodingUnicodeV3_1      = 0x0105, /* Adds characters requiring surrogate pairs in UTF-16*/
   kTextEncodingUnicodeV3_2      = 0x0106,
   kTextEncodingUnicodeV4_0      = 0x0108,
-  kTextEncodingUnicodeV5_0      = 0x010A
+  kTextEncodingUnicodeV5_0      = 0x010A,
+  kTextEncodingUnicodeV5_1      = 0x010B
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
@@ -286,7 +287,7 @@ enum {
 
 /* EBCDIC & IBM host encodings begin at 0xC00*/
 enum {
-  kTextEncodingEBCDIC_US        = 0x0C01, /* basic EBCDIC-US*/
+  kTextEncodingEBCDIC_LatinCore = 0x0C01, /* Common base subset of EBCDIC Latin encodings*/
   kTextEncodingEBCDIC_CP037     = 0x0C02 /* code page 037, extended EBCDIC (Latin-1 set) for US,Canada...*/
 };
 
@@ -294,6 +295,11 @@ enum {
 enum {
   kTextEncodingMultiRun         = 0x0FFF, /* Multi-encoding text with external run info*/
   kTextEncodingUnknown          = 0xFFFF /* Unknown or unspecified                  */
+};
+
+/* The following are older names for backward compatibility*/
+enum {
+  kTextEncodingEBCDIC_US        = 0x0C01
 };
 
 

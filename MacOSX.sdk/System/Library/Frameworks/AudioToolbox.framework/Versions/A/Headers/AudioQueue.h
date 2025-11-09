@@ -3,9 +3,7 @@
 
     Contains:   AudioQueue Interfaces for the AudioToolbox
 
-    Version:    Mac OS X
-
-    Copyright:  © 2006-2007 by Apple Inc., all rights reserved.
+    Copyright:  © 2006-2008 by Apple Inc., all rights reserved.
 
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
@@ -59,13 +57,17 @@
     Services for Mac OS X v10.5.
 */
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
     #include <CoreAudio/CoreAudioTypes.h>
     #include <CoreFoundation/CoreFoundation.h>
 #else
     #include <CoreAudioTypes.h>
     #include <CoreFoundation.h>
+#endif
+
+#ifdef __BLOCKS__
+    #include <dispatch/dispatch.h>
 #endif
 
 #ifdef __cplusplus
@@ -93,6 +95,8 @@ extern "C" {
     @constant   kAudioQueueErr_InvalidParameter     The specified parameter ID is invalid.
     @constant   kAudioQueueErr_CannotStart          The audio queue has encountered a problem and
                                                     cannot start.
+    @constant   kAudioQueueErr_InvalidDevice        The device assigned to the queue could not
+                                                    be located.
     @constant   kAudioQueueErr_BufferInQueue        The buffer cannot be disposed of when it is
                                                     enqueued.
     @constant   kAudioQueueErr_InvalidRunState      The queue is running but the function can
@@ -100,6 +104,12 @@ extern "C" {
                                                     or vice versa.
     @constant   kAudioQueueErr_InvalidQueueType     The queue is an input queue but the function can
                                                     only operate on an output queue, or vice versa.
+    @constant   kAudioQueueErr_Permissions          You do not have the required permissions to call 
+                                                    the function
+    @constant   kAudioQueueErr_InvalidPropertyValue The specified property value is invalid.
+    @constant   kAudioQueueErr_PrimeTimedOut        During Prime, the queue's AudioConverter failed to
+                                                    convert the requested number of sample frames.
+    @constant   kAudioQueueErr_EnqueueDuringReset   During Reset, Stop, or Dispose, it is not permitted to enqueue buffers.
 */
 enum {
     kAudioQueueErr_InvalidBuffer        = -66687,
@@ -112,7 +122,12 @@ enum {
     kAudioQueueErr_InvalidDevice        = -66680,
     kAudioQueueErr_BufferInQueue        = -66679,
     kAudioQueueErr_InvalidRunState      = -66678,
-    kAudioQueueErr_InvalidQueueType     = -66677
+    kAudioQueueErr_InvalidQueueType     = -66677,
+    kAudioQueueErr_Permissions          = -66676,
+    kAudioQueueErr_InvalidPropertyValue = -66675,
+    kAudioQueueErr_PrimeTimedOut        = -66674,
+	kAudioQueueErr_CodecNotFound		= -66673,
+    kAudioQueueErr_EnqueueDuringReset   = -66632
 };
 
 
@@ -124,10 +139,10 @@ enum {
         A read-only property whose value is a UInt32 that indicates whether or not the queue is
         running. A notification is sent when the audio device starts or stops, which is not
         necessarily when the start or stop function is called.
-    @constant   kAudioQueueProperty_Device_SampleRate
+    @constant   kAudioQueueDeviceProperty_SampleRate
         A read-only property whose value is a Float64 that indicates the sampling rate of the
         associated audio device.
-    @constant   kAudioQueueProperty_Device_NumberChannels
+    @constant   kAudioQueueDeviceProperty_NumberChannels
         A read-only property whose value is a UInt32 that indicates the number of channels in
         the associated audio device.
     @constant   kAudioQueueProperty_CurrentDevice
@@ -136,6 +151,14 @@ enum {
     @constant   kAudioQueueProperty_MagicCookie
         A read/write property whose value is an audio format magic cookie. If the audio format
         requires a magic cookie, you must set this property before enqueuing any buffers.
+    @constant   kAudioQueueProperty_MaximumOutputPacketSize
+        A read-only UInt32 that indicates the size in bytes of the largest single packet of
+        data in the output format. This is mostly useful for recording/encoding variable bit rate
+        compressed data.
+    @constant   kAudioQueueProperty_StreamDescription
+        A read-only AudioStreamBasicDescription that indicates the queue's recording format.
+        This is useful when recording, where you may specify a sample rate of 0 during
+        construction, 
     @constant   kAudioQueueProperty_ChannelLayout
         A read/write property whose value is an audio channel layout structure that describes
         the audio queue's channel layout. The number of channels must match the format of the
@@ -153,6 +176,24 @@ enum {
         A read-only property whose value is an array of AudioQueueLevelMeter structures, one
         array element per audio channel. The values in the AudioQueueLevelMeters are in
         decibels.
+    @constant   kAudioQueueProperty_DecodeBufferSizeFrames
+        A read/write property whose value is a UInt32 that is the size of the buffer into which
+        an output audio queue decodes buffers. A large buffer provides more reliability and
+        better long-term performance at the expense of memory and decreased responsiveness
+        in some situations.
+    @constant   kAudioQueueProperty_EnableTimePitch
+        A read/write property whose value is a UInt32 describing whether there is an AUTimePitch
+        inserted into the queue's audio signal chain. This property may only be set while
+        the queue is stopped.
+    @constant   kAudioQueueProperty_TimePitchAlgorithm
+        A read/write property whose value is a UInt32 describing the time/pitch algorithm in use.
+        Valid values are kAudioQueueTimePitchAlgorithm_Spectral (expensive but high-quality),
+        and kAudioQueueTimePitchAlgorithm_TimeDomain (less expensive and lower quality).
+        This property is only valid while a time/pitch has been inserted, and may only be changed
+        when the queue is not running.
+    @constant   kAudioQueueProperty_TimePitchBypass
+        A read/write property whose value is a UInt32 describing whether the time/pitch unit
+        has been bypassed (1=bypassed, 0=not bypassed).
 */
 enum { // typedef UInt32 AudioQueuePropertyID
     kAudioQueueProperty_IsRunning               = 'aqrn',       // value is UInt32
@@ -162,19 +203,38 @@ enum { // typedef UInt32 AudioQueuePropertyID
     kAudioQueueProperty_CurrentDevice           = 'aqcd',       // value is CFStringRef
     
     kAudioQueueProperty_MagicCookie             = 'aqmc',       // value is void*
-        
+    kAudioQueueProperty_MaximumOutputPacketSize = 'xops',       // value is UInt32
+    kAudioQueueProperty_StreamDescription       = 'aqft',       // value is AudioStreamBasicDescription
+       
     kAudioQueueProperty_ChannelLayout           = 'aqcl',       // value is AudioChannelLayout
     kAudioQueueProperty_EnableLevelMetering     = 'aqme',       // value is UInt32
     kAudioQueueProperty_CurrentLevelMeter       = 'aqmv',       // value is array of AudioQueueLevelMeterState, 1 per channel
     kAudioQueueProperty_CurrentLevelMeterDB     = 'aqmd',       // value is array of AudioQueueLevelMeterState, 1 per channel
+
+    kAudioQueueProperty_DecodeBufferSizeFrames  = 'dcbf',       // value is UInt32
+
+#if !TARGET_OS_IPHONE
+    kAudioQueueProperty_EnableTimePitch         = 'q_tp',       // value is UInt32, 0/1
+    kAudioQueueProperty_TimePitchAlgorithm      = 'qtpa',       // value is UInt32. See values below.
+    kAudioQueueProperty_TimePitchBypass         = 'qtpb',       // value is UInt32, 1=bypassed
+#endif
 };
 
+#if !TARGET_OS_IPHONE
+/*!
+    @enum       Time/Pitch algorithms
+    @abstract   Constants that identify values of kAudioQueueProperty_TimePitchAlgorithm
+*/
+enum {
+    kAudioQueueTimePitchAlgorithm_Spectral      = 'spec',
+    kAudioQueueTimePitchAlgorithm_TimeDomain    = 'tido',
+};
+#endif
 
 /*!
     @enum       AudioQueueParameterID
     @abstract   Constants that identify the parameters for audio queues.
     @discussion
-        In Mac OS X v10.5, audio queues have one parameter available: kAudioQueueParam_Volume.
         You can set a parameter in one of two ways:
         
         <ul>
@@ -190,11 +250,22 @@ enum { // typedef UInt32 AudioQueuePropertyID
     @constant   kAudioQueueParam_Volume
         A value from 0.0 to 1.0 indicating the linearly scaled gain for the queue. A value of
         1.0 (the default) indicates unity gain. A value of 0.0 indicates zero gain, or silence.
+    @constant   kAudioQueueParam_PlayRate
+        A value from 0.5 to 2.0 indicating the rate at which the queue is to play. A value of
+        1.0 (the default) indicates that the queue should play at its normal rate. Only
+        applicable when the time/pitch processor has been enabled and on Mac OS X 10.6 and higher.
+    @constant   kAudioQueueParam_Pitch
+        A value from -2400 to 2400 indicating the number of cents to pitch-shift the queues
+        playback. (1200 cents is one octave.) Only applicable when the time/pitch processor has 
+        been enabled  and on Mac OS X 10.6 and higher.
 */
 enum    // typedef UInt32 AudioQueueParameterID;
 {
-    kAudioQueueParam_Volume     = 1
-
+    kAudioQueueParam_Volume     = 1,
+#if !TARGET_OS_IPHONE
+    kAudioQueueParam_PlayRate   = 2,
+    kAudioQueueParam_Pitch      = 3,
+#endif
 };
 
 
@@ -252,6 +323,11 @@ typedef struct OpaqueAudioQueueTimeline *   AudioQueueTimelineRef;
         queue allocate buffers using the AudioQueueAllocateBuffer function and dispose of them
         using the AudioQueueFreeBuffer function.
         
+        You may also use AudioQueueAllocateBufferWithPacketDescriptions to allocate buffers
+        with space for AudioPacketDescriptions, as used in VBR formats. The 
+        mPacketDescriptionCapacity, mmPacketDescriptions, and mPacketDescriptionCount
+        fields may only be used with buffers allocated with this function.
+        
     @field      mAudioDataBytesCapacity
         The size of the buffer, in bytes. This size is set when the buffer is allocated and
         cannot be changed.
@@ -265,6 +341,14 @@ typedef struct OpaqueAudioQueueTimeline *   AudioQueueTimelineRef;
     @field      mUserData
         A value you may specify to identify the buffer when it is passed back in recording or
         playback callback functions.
+    @field      mPacketDescriptionCapacity
+        The maximum number of packet descriptions that can be stored in mPacketDescriptions.
+    @field      mPacketDescriptions
+        An array of AudioStreamPacketDescriptions associated with the buffer.
+    @field      mPacketDescriptionCount
+        The number of valid packet descriptions in the buffer. You set this value when providing
+        buffers for playback; the audio queue sets this value when returning buffers from
+        a recording queue.
 */
 
 typedef struct AudioQueueBuffer {
@@ -272,6 +356,13 @@ typedef struct AudioQueueBuffer {
     void * const                    mAudioData;
     UInt32                          mAudioDataByteSize;
     void *                          mUserData;
+
+    const UInt32                    mPacketDescriptionCapacity;
+    AudioStreamPacketDescription * const mPacketDescriptions;
+    UInt32                          mPacketDescriptionCount;
+#ifdef __cplusplus
+    AudioQueueBuffer() : mAudioDataBytesCapacity(0), mAudioData(0), mPacketDescriptionCapacity(0), mPacketDescriptions(0) { }
+#endif
 } AudioQueueBuffer;
 
 /*!
@@ -333,6 +424,57 @@ typedef struct AudioQueueLevelMeterState {
 //  CALLBACKS
 //==================================================================================================
 
+#ifdef __BLOCKS__
+/*!
+    @typedef    AudioQueueOutputCallbackBlock
+    @abstract   Defines a pointer to a block that is called when a playback audio
+                queue has finished taking data from a buffer.
+
+    @discussion
+        A playback buffer callback is invoked when the audio queue has finished with the data to
+        be played and the buffer is available to your application for reuse. Your application
+        might want to immediately refill and re-enqueue the completed buffer at this time.
+    @param      inAQ
+        The audio queue that invoked the callback.
+    @param      inBuffer
+        The audio queue buffer made available by the audio queue.
+*/
+typedef void (^AudioQueueOutputCallbackBlock)(
+                                    AudioQueueRef                   inAQ,
+                                    AudioQueueBufferRef             inBuffer);
+
+/*!
+    @typedef    AudioQueueInputCallbackBlock
+    @abstract   Defines a pointer to a block that is called when a recording audio
+                queue has finished filling a buffer.
+    @discussion
+        You specify a recording buffer callback when calling AudioQueueNewInput. Your callback
+        is invoked each time the recording audio queue has filled a buffer with input data.
+        Typically, your callback should write the audio queue buffer's data to a file or other
+        buffer, and then re-queue the audio queue buffer to receive more data.
+        
+    @param      inAQ
+        The audio queue that invoked the callback.
+    @param      inBuffer
+        An audio queue buffer, newly filled by the audio queue, containing the new audio data
+        your callback needs to write.
+    @param      inStartTime
+        A pointer to an audio time stamp structure corresponding to the first sample contained
+        in the buffer. This contains the sample time of the first sample in the buffer.
+    @param      inNumberPacketDescriptions
+        The number of audio packets contained in the data provided to the callback
+    @param      inPacketDescs
+        For compressed formats which require packet descriptions, the packet descriptions
+        produced by the encoder for the incoming buffer.
+*/
+typedef void (^AudioQueueInputCallbackBlock)(
+                                    AudioQueueRef                   inAQ,
+                                    AudioQueueBufferRef             inBuffer,
+                                    const AudioTimeStamp *          inStartTime,
+                                    UInt32                          inNumberPacketDescriptions,
+                                    const AudioStreamPacketDescription *inPacketDescs);
+#endif // __BLOCKS__
+
 /*!
     @typedef    AudioQueueOutputCallback
     @abstract   Defines a pointer to a callback function that is called when a playback audio
@@ -374,8 +516,7 @@ typedef void (*AudioQueueOutputCallback)(
         your callback needs to write.
     @param      inStartTime
         A pointer to an audio time stamp structure corresponding to the first sample contained
-        in the buffer. This contains the sample time of the first sample in the buffer. This
-        parameter is not used in basic recording.
+        in the buffer. This contains the sample time of the first sample in the buffer.
     @param      inNumberPacketDescriptions
         The number of audio packets contained in the data provided to the callback
     @param      inPacketDescs
@@ -444,9 +585,10 @@ typedef void (*AudioQueuePropertyListenerProc)(
         callback is called on one of the audio queue's internal threads.
     @param      inCallbackRunLoopMode
         The run loop mode in which to call the callback. Typically, you pass
-        kCFRunLoopCommonModes. Other possibilities are implementation specific. You can choose
-        to create your own thread with your own run loops. For more information on run loops,
-        see Run Loops or CFRunLoop Reference.
+        kCFRunLoopCommonModes. (NULL also specifies kCFRunLoopCommonModes). Other
+        possibilities are implementation specific. You can choose to create your own thread with
+        your own run loops. For more information on run loops, see Run Loops or CFRunLoop
+        Reference.
     @param      inFlags
         Reserved for future use. Pass 0.
     @param      outAQ
@@ -461,7 +603,7 @@ AudioQueueNewOutput(                const AudioStreamBasicDescription *inFormat,
                                     CFRunLoopRef                    inCallbackRunLoop,
                                     CFStringRef                     inCallbackRunLoopMode,
                                     UInt32                          inFlags,
-                                    AudioQueueRef *                 outAQ)          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueRef *                 outAQ)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 /*!
@@ -489,9 +631,10 @@ AudioQueueNewOutput(                const AudioStreamBasicDescription *inFormat,
         callback is called on one of the audio queue's internal threads.
     @param      inCallbackRunLoopMode
         The run loop mode in which to call the callback. Typically, you pass
-        kCFRunLoopCommonModes. Other possibilities are implementation specific. You can choose
-        to create your own thread with your own run loops. For more information on run loops,
-        see Run Loops or CFRunLoop Reference.
+        kCFRunLoopCommonModes. (NULL also specifies kCFRunLoopCommonModes). Other
+        possibilities are implementation specific. You can choose to create your own thread with
+        your own run loops. For more information on run loops, see Run Loops or CFRunLoop
+        Reference.
     @param      inFlags
         Reserved for future use. Pass 0.
     @param      outAQ
@@ -506,7 +649,74 @@ AudioQueueNewInput(                 const AudioStreamBasicDescription *inFormat,
                                     CFRunLoopRef                    inCallbackRunLoop,
                                     CFStringRef                     inCallbackRunLoopMode,
                                     UInt32                          inFlags,
-                                    AudioQueueRef *                 outAQ)          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueRef *                 outAQ)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+
+#ifdef __BLOCKS__
+/*!
+    @function   AudioQueueNewOutputWithDispatchQueue
+    @abstract   Creates a new audio queue for playing audio data.
+    @discussion
+        To create an playback audio queue, you allocate buffers, then queue buffers (using
+        AudioQueueEnqueueBuffer). The callback receives buffers and typically queues them again.
+        To schedule a buffer for playback, providing parameter and start time information, call
+        AudioQueueEnqueueBufferWithParameters.
+       
+    @param      outAQ
+        On return, this variable contains a pointer to the newly created playback audio queue
+        object.
+    @param      inFormat
+        A pointer to a structure describing the format of the audio data to be played. For
+        linear PCM, only interleaved formats are supported. Compressed formats are supported.
+    @param      inFlags
+        Reserved for future use. Pass 0.
+    @param      inCallbackDispatchQueue
+        The dispatch queue from which inCallbackBlock is to be called.
+    @param      inCallbackBlock
+        A pointer to a callback block to be called when the audio queue has finished playing
+        a buffer.
+    @result     An OSStatus result code.
+*/
+extern OSStatus             
+AudioQueueNewOutputWithDispatchQueue(AudioQueueRef *                 outAQ,
+                                    const AudioStreamBasicDescription *inFormat,
+                                    UInt32                          inFlags,
+                                    dispatch_queue_t                inCallbackDispatchQueue,
+                                    AudioQueueOutputCallbackBlock   inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+
+/*!
+    @function   AudioQueueNewInputWithDispatchQueue
+    @abstract   Creates a new audio queue for recording audio data.
+    @discussion
+        
+        Outline of how to use the queue for input:
+        
+        - create input queue
+        - allocate buffers
+        - enqueue buffers (AudioQueueEnqueueBuffer, not with parameters, no packet descriptions)
+        - the callback receives buffers and re-enqueues them
+        
+    @param      outAQ
+        On return, this variable contains a pointer to the newly created recording audio queue
+        object.
+    @param      inFormat
+        A pointer to a structure describing the format of the audio data to be recorded. For
+        linear PCM, only interleaved formats are supported. Compressed formats are supported.
+    @param      inFlags
+        Reserved for future use. Pass 0.
+    @param      inCallbackDispatchQueue
+        The dispatch queue from which inCallbackBlock is to be called.
+    @param      inCallbackBlock
+        A pointer to a callback block to be called when the audio queue has finished filling
+        a buffer.
+    @result     An OSStatus result code.
+*/
+extern OSStatus             
+AudioQueueNewInputWithDispatchQueue(AudioQueueRef *                 outAQ,
+                                    const AudioStreamBasicDescription *inFormat,
+                                    UInt32                          inFlags,
+                                    dispatch_queue_t                inCallbackDispatchQueue,
+                                    AudioQueueInputCallbackBlock    inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+#endif // __BLOCKS__
 
 /*!
     @function   AudioQueueDispose
@@ -525,7 +735,7 @@ AudioQueueNewInput(                 const AudioStreamBasicDescription *inFormat,
 */
 extern OSStatus
 AudioQueueDispose(                  AudioQueueRef           inAQ, 
-                                    Boolean                 inImmediate)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    Boolean                 inImmediate)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark Buffer Management
@@ -554,7 +764,34 @@ AudioQueueDispose(                  AudioQueueRef           inAQ,
 extern OSStatus
 AudioQueueAllocateBuffer(           AudioQueueRef           inAQ,
                                     UInt32                  inBufferByteSize,
-                                    AudioQueueBufferRef *   outBuffer)              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueBufferRef *   outBuffer)              __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+
+/*!
+    @function   AudioQueueAllocateBuffer
+    @abstract   Asks an audio queue to allocate a buffer.
+    @discussion
+        Once allocated, the pointer to the buffer and the buffer's size are fixed and cannot be
+        changed. The mAudioDataByteSize field in the audio queue buffer structure,
+        AudioQueueBuffer, is initially set to 0.
+        
+    @param      inAQ
+        The audio queue you want to allocate a buffer.
+    @param      inBufferByteSize
+        The desired size of the new buffer, in bytes. An appropriate buffer size depends on the
+        processing you will perform on the data as well as on the audio data format.
+    @param      inNumberPacketDescriptions
+        The desired capacity of the packet description array in the new buffer.
+    @param      outBuffer
+        On return, points to the newly created audio buffer. The mAudioDataByteSize field in the
+        audio queue buffer structure, AudioQueueBuffer, is initially set to 0.
+    @result     An OSStatus result code.
+*/
+extern OSStatus
+AudioQueueAllocateBufferWithPacketDescriptions(
+                                    AudioQueueRef           inAQ,
+                                    UInt32                  inBufferByteSize,
+                                    UInt32                  inNumberPacketDescriptions,
+                                    AudioQueueBufferRef *   outBuffer)              __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueFreeBuffer
@@ -573,7 +810,7 @@ AudioQueueAllocateBuffer(           AudioQueueRef           inAQ,
 */
 extern OSStatus
 AudioQueueFreeBuffer(               AudioQueueRef           inAQ,
-                                    AudioQueueBufferRef     inBuffer)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueBufferRef     inBuffer)           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 
@@ -581,6 +818,13 @@ AudioQueueFreeBuffer(               AudioQueueRef           inAQ,
     @function   AudioQueueEnqueueBuffer
     @abstract   Assigns a buffer to an audio queue for recording or playback.
     @discussion
+        If the buffer was allocated with AudioQueueAllocateBufferWithPacketDescriptions,
+        the client should provide packet descriptions in the buffer's mPacketDescriptions
+        and mPacketDescriptionCount fields rather than in inNumPacketDescs and
+        inNumPacketDescs, which should be NULL and 0, respectively, in this case.
+		
+		For an input queue, pass 0 and NULL for inNumPacketDescs and inPacketDescs,
+		respectively. Your callback will receive packet descriptions owned by the audio queue.
 
     @param      inAQ
         The audio queue you are assigning the buffer to.
@@ -600,7 +844,7 @@ extern OSStatus
 AudioQueueEnqueueBuffer(            AudioQueueRef                       inAQ,
                                     AudioQueueBufferRef                 inBuffer,
                                     UInt32                              inNumPacketDescs,
-                                    const AudioStreamPacketDescription *inPacketDescs)      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    const AudioStreamPacketDescription *inPacketDescs)      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueEnqueueBufferWithParameters
@@ -616,6 +860,11 @@ AudioQueueEnqueueBuffer(            AudioQueueRef                       inAQ,
         might require trimming), and have a different way to handle timing. When queued for
         playback, the buffer must contain the audio data to be played back. See
         AudioQueueEnqueueBuffer for details on queuing a buffer for recording.
+
+        If the buffer was allocated with AudioQueueAllocateBufferWithPacketDescriptions,
+        the client should provide packet descriptions in the buffer's mPacketDescriptions
+        and mPacketDescriptionCount fields rather than in inNumPacketDescs and
+        inNumPacketDescs, which should be NULL and 0, respectively, in this case.
     @param      inAQ
         The audio queue associated with the buffer.
     @param      inBuffer
@@ -664,7 +913,7 @@ AudioQueueEnqueueBufferWithParameters(
                                     UInt32                                  inNumParamValues,
                                     const AudioQueueParameterEvent *        inParamValues,
                                     const AudioTimeStamp *                  inStartTime,
-                                    AudioTimeStamp *                        outActualStartTime)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioTimeStamp *                        outActualStartTime)     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark Queue Control
@@ -687,7 +936,7 @@ AudioQueueEnqueueBufferWithParameters(
 */
 extern OSStatus
 AudioQueueStart(                    AudioQueueRef                   inAQ,
-                                    const AudioTimeStamp *          inStartTime)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    const AudioTimeStamp *          inStartTime)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueuePrime
@@ -695,7 +944,7 @@ AudioQueueStart(                    AudioQueueRef                   inAQ,
     @discussion
         This function begins decoding buffers in preparation for playback. It returns when at
         least the number of audio sample frames are decoded and ready to play or when all
-        encoded buffers have been completely decoded. To ensure that a buffer has been decoded
+        enqueued buffers have been completely decoded. To ensure that a buffer has been decoded
         and is completely ready for playback, before playback:
             1.  Call AudioQueueEnqueueBuffer.
             2.  Call AudioQueuePrime, which waits if you pass 0 to have a default number of
@@ -713,7 +962,7 @@ AudioQueueStart(                    AudioQueueRef                   inAQ,
 extern OSStatus
 AudioQueuePrime(                    AudioQueueRef           inAQ,
                                     UInt32                  inNumberOfFramesToPrepare,
-                                    UInt32 *                outNumberOfFramesPrepared)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    UInt32 *                outNumberOfFramesPrepared)  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueStop
@@ -737,7 +986,7 @@ AudioQueuePrime(                    AudioQueueRef           inAQ,
 */
 extern OSStatus
 AudioQueueStop(                     AudioQueueRef           inAQ,
-                                    Boolean                 inImmediate)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    Boolean                 inImmediate)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueuePause
@@ -750,7 +999,7 @@ AudioQueueStop(                     AudioQueueRef           inAQ,
     @result     An OSStatus result code.
 */
 extern OSStatus
-AudioQueuePause(                    AudioQueueRef           inAQ)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+AudioQueuePause(                    AudioQueueRef           inAQ)       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueFlush
@@ -759,6 +1008,9 @@ AudioQueuePause(                    AudioQueueRef           inAQ)       AVAILABL
         After all queued buffers have been played, the function cleans up all decoder state
         information. You must call this function following a sequence of buffers of encoded
         audio; otherwise, some of the audio might not play in the next set of queued buffers.
+        The only time it is not necessary to call AudioQueueFlush is following AudioQueueStop
+        with inImmediate=false. (This action internally calls AudioQueueFlush.)
+        
         Also, you might wish to call this function before calling AudioQueueStop depending on
         whether you want to stop immediately regardless of what has played or whether you want
         to ensure that all buffered data and all data that is in the middle of processing gets
@@ -770,7 +1022,7 @@ AudioQueuePause(                    AudioQueueRef           inAQ)       AVAILABL
     @result     An OSStatus result code.
 */
 extern OSStatus
-AudioQueueFlush(                    AudioQueueRef           inAQ)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+AudioQueueFlush(                    AudioQueueRef           inAQ)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueReset
@@ -789,7 +1041,7 @@ AudioQueueFlush(                    AudioQueueRef           inAQ)            AVA
     @result     An OSStatus result code.
 */
 extern OSStatus
-AudioQueueReset(                    AudioQueueRef           inAQ)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+AudioQueueReset(                    AudioQueueRef           inAQ)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark Parameter Management
@@ -817,7 +1069,7 @@ AudioQueueReset(                    AudioQueueRef           inAQ)            AVA
 extern OSStatus
 AudioQueueGetParameter(             AudioQueueRef               inAQ,
                                     AudioQueueParameterID       inParamID,
-                                    AudioQueueParameterValue *  outValue)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueParameterValue *  outValue)       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueSetParameter
@@ -835,7 +1087,7 @@ AudioQueueGetParameter(             AudioQueueRef               inAQ,
 extern OSStatus
 AudioQueueSetParameter(             AudioQueueRef               inAQ,
                                     AudioQueueParameterID       inParamID,
-                                    AudioQueueParameterValue    inValue)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueParameterValue    inValue)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
                                                                         
 #pragma mark -
@@ -864,7 +1116,7 @@ extern OSStatus
 AudioQueueGetProperty(              AudioQueueRef           inAQ,
                                     AudioQueuePropertyID    inID,
                                     void *                  outData,
-                                    UInt32 *                ioDataSize)             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    UInt32 *                ioDataSize)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueSetProperty
@@ -886,7 +1138,7 @@ extern OSStatus
 AudioQueueSetProperty(              AudioQueueRef           inAQ,
                                     AudioQueuePropertyID    inID,
                                     const void *            inData,
-                                    UInt32                  inDataSize)             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    UInt32                  inDataSize)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 /*!
@@ -906,7 +1158,7 @@ AudioQueueSetProperty(              AudioQueueRef           inAQ,
 extern OSStatus
 AudioQueueGetPropertySize(          AudioQueueRef           inAQ,
                                     AudioQueuePropertyID    inID,
-                                    UInt32 *                outDataSize)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    UInt32 *                outDataSize)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueAddPropertyListener
@@ -931,7 +1183,7 @@ extern OSStatus
 AudioQueueAddPropertyListener(      AudioQueueRef                   inAQ,
                                     AudioQueuePropertyID            inID,
                                     AudioQueuePropertyListenerProc  inProc,
-                                    void *                          inUserData)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    void *                          inUserData)     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueRemovePropertyListener
@@ -952,7 +1204,7 @@ extern OSStatus
 AudioQueueRemovePropertyListener(   AudioQueueRef                   inAQ,
                                     AudioQueuePropertyID            inID,
                                     AudioQueuePropertyListenerProc  inProc,
-                                    void *                          inUserData)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    void *                          inUserData)     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
                                     
 
@@ -977,7 +1229,7 @@ AudioQueueRemovePropertyListener(   AudioQueueRef                   inAQ,
 */
 extern OSStatus
 AudioQueueCreateTimeline(           AudioQueueRef           inAQ,
-                                    AudioQueueTimelineRef * outTimeline)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueTimelineRef * outTimeline)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueDisposeTimeline
@@ -995,7 +1247,7 @@ AudioQueueCreateTimeline(           AudioQueueRef           inAQ,
 */
 extern OSStatus
 AudioQueueDisposeTimeline(          AudioQueueRef           inAQ,
-                                    AudioQueueTimelineRef   inTimeline)             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioQueueTimelineRef   inTimeline)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueGetCurrentTime
@@ -1026,7 +1278,7 @@ extern OSStatus
 AudioQueueGetCurrentTime(           AudioQueueRef           inAQ,
                                     AudioQueueTimelineRef   inTimeline,
                                     AudioTimeStamp *        outTimeStamp,
-                                    Boolean *               outTimelineDiscontinuity)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    Boolean *               outTimelineDiscontinuity)       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueDeviceGetCurrentTime
@@ -1046,7 +1298,7 @@ AudioQueueGetCurrentTime(           AudioQueueRef           inAQ,
 */
 extern OSStatus
 AudioQueueDeviceGetCurrentTime(     AudioQueueRef           inAQ,
-                                    AudioTimeStamp          *outTimeStamp)      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioTimeStamp          *outTimeStamp)      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueDeviceTranslateTime
@@ -1079,7 +1331,7 @@ AudioQueueDeviceGetCurrentTime(     AudioQueueRef           inAQ,
 extern OSStatus
 AudioQueueDeviceTranslateTime(      AudioQueueRef           inAQ,
                                     const AudioTimeStamp *  inTime,
-                                    AudioTimeStamp *        outTime)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    AudioTimeStamp *        outTime)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function   AudioQueueDeviceGetNearestStartTime
@@ -1097,7 +1349,7 @@ AudioQueueDeviceTranslateTime(      AudioQueueRef           inAQ,
 extern OSStatus
 AudioQueueDeviceGetNearestStartTime(AudioQueueRef           inAQ,
                                     AudioTimeStamp *        ioRequestedStartTime,
-                                    UInt32                  inFlags)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+                                    UInt32                  inFlags)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark Offline Rendering
@@ -1149,7 +1401,7 @@ extern OSStatus
 AudioQueueOfflineRender(            AudioQueueRef           inAQ,
                                     const AudioTimeStamp *  inTimestamp,
                                     AudioQueueBufferRef     ioBuffer,
-                                    UInt32                  inNumberFrames);
+                                    UInt32                  inNumberFrames)     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 #ifdef __cplusplus
 }

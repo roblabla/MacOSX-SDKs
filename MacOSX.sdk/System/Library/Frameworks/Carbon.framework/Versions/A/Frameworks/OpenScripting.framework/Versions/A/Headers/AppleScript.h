@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Specific Interfaces.
  
-     Version:    OSA-122~37
+     Version:    OSA-137~257
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -273,8 +273,19 @@ enum {
   kASSourceStyleComment         = 4,
   kASSourceStyleLiteral         = 5,
   kASSourceStyleUserSymbol      = 6,
-  kASSourceStyleObjectSpecifier = 7,
-  kASNumberOfSourceStyles       = 8
+  kASSourceStyleObjectSpecifier = 7,    /* Obsolete. Has been reused for strings. */
+  kASSourceStyleString          = 7,    /* This and after were added in Mac OS X 10.6. */
+  kASSourceStyleEventName       = 8,
+  kASSourceStyleParameterName   = 9,
+  kASSourceStyleClass           = 10,
+  kASSourceStyleProperty        = 11,
+  kASSourceStyleEnumValue       = 12,
+  kASSourceStyleDynamicEventName = 13,
+  kASSourceStyleDynamicParameterName = 14,
+  kASSourceStyleDynamicClass    = 15,
+  kASSourceStyleDynamicProperty = 16,
+  kASSourceStyleDynamicEnumValue = 17,
+  kASNumberOfSourceStyles       = 18    /* Deprecated. Don't assume the array length is fixed, and don't assume all indices are in the array. Always get its size at runtime. */
 };
 
 

@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -49,7 +49,6 @@
 - (void)setContinuous:(BOOL)flag;
 - (BOOL)isEnabled;
 - (void)setEnabled:(BOOL)flag;
-- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits;
 - (NSTextAlignment)alignment;
 - (void)setAlignment:(NSTextAlignment)mode;
 - (NSFont *)font;
@@ -113,7 +112,8 @@
 
 
 
-@interface NSObject(NSControlSubclassDelegate)
+@protocol NSControlTextEditingDelegate <NSObject>
+@optional
 
 // These delegate and notification methods are sent from NSControl subclasses that allow text editing such as NSTextField and NSMatrix.  The classes that need to send these have delegates.  NSControl does not.
 
@@ -138,3 +138,11 @@ APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 - (NSAttributedString *)attributedStringValue;
 - (void)setAttributedStringValue:(NSAttributedString *)obj;
 @end
+
+@interface NSControl (NSDeprecated)
+
+// Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
+- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+@end
+

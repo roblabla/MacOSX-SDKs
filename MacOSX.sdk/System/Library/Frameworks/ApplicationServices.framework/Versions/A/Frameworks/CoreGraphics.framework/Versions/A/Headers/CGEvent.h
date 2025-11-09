@@ -1,353 +1,354 @@
-/*
- *  CGEvent.h
- *  CoreGraphics
- *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
- *
- */
-#ifndef __CGEVENT_H__
-#define __CGEVENT_H__ 1
+/* CoreGraphics - CGEvent.h
+ * Copyright (c) 2004-2008 Apple Inc.
+ * All rights reserved. */
 
-#include <CoreGraphics/CGBase.h>
-#include <CoreGraphics/CGGeometry.h>
-#include <CoreGraphics/CGError.h>
-#include <CoreGraphics/CGRemoteOperation.h>
-#include <CoreGraphics/CGEventSource.h>
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>
+#ifndef CGEVENT_H_
+#define CGEVENT_H_
+
 #include <CoreGraphics/CGEventTypes.h>
 
-CG_EXTERN_C_BEGIN
+/* Return the type identifier for the opaque type `CGEventRef'. */
 
-/* Return the CFTypeID for CGEventRefs. */
-CG_EXTERN CFTypeID CGEventGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFTypeID CGEventGetTypeID(void)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* 
- * APIs provide the ability to create a NULL event, or to create specialized
- * events reflecting a state specified as parameters to the creation functions.
- */
+/* Return a new event using the event source `source'. If `source' is NULL,
+   the default source is used. */
 
-/* Create a NULL event to be filled in.  'source' may be NULL. */
-CG_EXTERN CGEventRef CGEventCreate(CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGEventRef CGEventCreate(CGEventSourceRef source)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * Functions to flatten and reconstruct a CGEventRef for network transport.
- * These may be useful in remote control and helpdesk applications.
- *
- * Returns a CGEventRef built from the flattened data representation, or NULL
- * if the eventData is invalid.
- */
-CG_EXTERN CGEventRef CGEventCreateFromData(CFAllocatorRef allocator, CFDataRef eventData)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return a "flattened" data representation of an event. */
 
-/*
- * Returns a CFDataRef containing  the flattened data representation of the event,
- * or NULL if the eventData is invalid.
- */
-CG_EXTERN CFDataRef CGEventCreateData(CFAllocatorRef allocator, CGEventRef event)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFDataRef CGEventCreateData(CFAllocatorRef allocator,
+  CGEventRef event)  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * Create mouse events.
- *
- * The event source may be taken from another event, or may be NULL.
- * mouseType should be one of the mouse event types.
- * mouseCursorPosition should be the global coordinates the mouse is at for the event.
- * For kCGEventOtherMouseDown, kCGEventOtherMouseDragged, and
- * kCGEventOtherMouseUp  events, the mouseButton parameter should
- * indicate which button is changing state.
- * 
- * The current implemementation of the event system supports a maximum of thirty-two buttons.
- * Mouse button 0 is the primary button on the mouse. Mouse button 1 is the secondary
- * mouse button (right). Mouse button 2 is the center button, and the remaining
- * buttons would be in USB device order.
- */
-CG_EXTERN CGEventRef CGEventCreateMouseEvent( CGEventSourceRef source,
-                                              CGEventType mouseType,
-                                              CGPoint mouseCursorPosition,
-                                              CGMouseButton mouseButton) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return an event created from a "flattened" data representation of the
+   event. */
 
+CG_EXTERN CGEventRef CGEventCreateFromData(CFAllocatorRef allocator,
+  CFDataRef data) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * Create keyboard events.
- *
- * The event source may be taken from another event, or may be NULL.
- * Based on the virtual key code values entered,
- * the appropriate key down, key up, or flags changed events are generated.
- *
- * All keystrokes needed to generate a character must be entered, including
- * SHIFT, CONTROL, OPTION, and COMMAND keys.  For example, to produce a 'Z',
- * the SHIFT key must be down, the 'z' key must go down, and then the SHIFT
- * and 'z' key must be released:
- *	CGEventCreateKeyboardEvent( source, (CGKeyCode)56, true ); // shift down
- *	CGEventCreateKeyboardEvent( source, (CGKeyCode)6, true ); // 'z' down
- *	CGEventCreateKeyboardEvent( source, (CGKeyCode)6, false ); // 'z' up
- *	CGEventCreateKeyboardEvent( source, (CGKeyCode)56, false ); // 'shift up
- */
-CG_EXTERN CGEventRef CGEventCreateKeyboardEvent( CGEventSourceRef source,
-                                                 CGKeyCode virtualKey,
-                                                 bool keyDown ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return a new mouse event.
+
+   The event source may be taken from another event, or may be NULL.
+   `mouseType' should be one of the mouse event types. `mouseCursorPosition'
+   should be the position of the mouse cursor in global coordinates.
+   `mouseButton' should be the button that's changing state; `mouseButton'
+   is ignored unless `mouseType' is one of `kCGEventOtherMouseDown',
+   `kCGEventOtherMouseDragged', or `kCGEventOtherMouseUp'.
+
+   The current implemementation of the event system supports a maximum of
+   thirty-two buttons. Mouse button 0 is the primary button on the mouse.
+   Mouse button 1 is the secondary mouse button (right). Mouse button 2 is
+   the center button, and the remaining buttons are in USB device order. */
+
+CG_EXTERN CGEventRef CGEventCreateMouseEvent(CGEventSourceRef source,
+  CGEventType mouseType, CGPoint mouseCursorPosition,
+  CGMouseButton mouseButton) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return a new keyboard event.
+
+   The event source may be taken from another event, or may be NULL. Based
+   on the virtual key code values entered, the appropriate key down, key up,
+   or flags changed events are generated.
+
+   All keystrokes needed to generate a character must be entered, including
+   SHIFT, CONTROL, OPTION, and COMMAND keys. For example, to produce a 'Z',
+   the SHIFT key must be down, the 'z' key must go down, and then the SHIFT
+   and 'z' key must be released:
+
+     CGEventCreateKeyboardEvent(source, (CGKeyCode)56, true);  // shift down
+     CGEventCreateKeyboardEvent(source, (CGKeyCode) 6, true);  // 'z' down
+     CGEventCreateKeyboardEvent(source, (CGKeyCode) 6, false); // 'z' up
+     CGEventCreateKeyboardEvent(source, (CGKeyCode)56, false); // 'shift up */
+
+CG_EXTERN CGEventRef CGEventCreateKeyboardEvent(CGEventSourceRef source,
+  CGKeyCode virtualKey, bool keyDown)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
                                                  
-/*
- * Create scrollwheel events
- *
- * The event source may be taken from another event, or may be NULL.
- *
- * The scrolling units may be specified in lines using kCGScrollEventUnitLine, or in
- * pixels using kCGScrollEventUnitPixel. kCGScrollEventUnitPixel will produce an
- * event that most applications interpret as a smooth scrolling event.
- *
- * One or more wheels must be specified.  The current implementation supports up to
- * three wheels.
- *
- * Every scrollwheel event can be interpreted to be scrolling by pixel or by line.
- * The scale between the two is about 10 pixels per line by default.  The scale can be
- * altered by setting a custom value for the event source, using CGEventSourceSetPixelsPerLine().
- */
+/* Return a new scrollwheel event.
+
+   The event source may be taken from another event, or may be NULL. The
+   scrolling units may be specified in lines using `kCGScrollEventUnitLine'
+   or in pixels using `kCGScrollEventUnitPixel'. `kCGScrollEventUnitPixel'
+   will produce an event that most applications interpret as a smooth
+   scrolling event.
+
+   One or more wheels must be specified. The current implementation supports
+   up to three wheels.
+
+   Every scrollwheel event can be interpreted to be scrolling by pixel or by
+   line. The scale between the two is about 10 pixels per line by default.
+   The scale can be altered by setting a custom value for the event source,
+   using `CGEventSourceSetPixelsPerLine'. */
  
-CG_EXTERN CGEventRef CGEventCreateScrollWheelEvent (CGEventSourceRef source,
-                                                   CGScrollEventUnit units,
-                                                   CGWheelCount wheelCount,
-                                                   int32_t wheel1,
-                                                   ... ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CG_EXTERN CGEventRef CGEventCreateScrollWheelEvent(CGEventSourceRef source,
+  CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1,
+  ...) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
-CG_EXTERN CGEventRef CGEventCreateCopy(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/* 
- * CFRetain() and CFRelease() may be used to retain and release CGEventRefs.
- */
+/* Return a copy of `event'. */
 
-/*
- * These functions provide access to the event source for an event.
- * Event filters may use these to generate events that are compatible
- * with an event being filtered.
- *
- * Note that CGEventCreateSourceFromEvent may return NULL if the event
- * was generated with a private CGEventSourceStateID owned by another
- * process.  Such events should be filtered based on the public state.
- */
-CG_EXTERN CGEventSourceRef CGEventCreateSourceFromEvent(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSetSource(CGEventRef event, CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGEventRef CGEventCreateCopy(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * The following functions will provide high level access to selected event data.
- */
-CG_EXTERN CGEventType CGEventGetType(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSetType(CGEventRef event, CGEventType type) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return an event source created from an existing event.
 
-CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSetTimestamp(CGEventRef event, CGEventTimestamp timestamp) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   Event filters may use the event source to generate events that are
+   compatible with an event being filtered.
 
-CG_EXTERN CGPoint CGEventGetLocation(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CG_EXTERN void CGEventSetLocation(CGEventRef event, CGPoint location) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   Note that `CGEventCreateSourceFromEvent' may return NULL if the event
+   was generated with a private CGEventSourceStateID owned by another
+   process.  Such events should be filtered based on the public state. */
 
-CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSetFlags(CGEventRef event, CGEventFlags flags) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGEventSourceRef CGEventCreateSourceFromEvent(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * Access to UniChar data in keyboard events.
- *
- * There are no runtime errors associated with these functions.
- * Use on non-keyboard events leaves the event unchanged.
- * Note that many frameworks use a fixed length representation
- * of a CGEvent, and so are limited to a maximum string length
- * of 20 Unicode characters.  The CGEventRef itself is limited to 65535
- * characters.
- *
- * Calling CGEventKeyboardGetUnicodeString() with a NULL unicodeString
- * or zero maxStringLength will still return the actual count of
- * UniCode characters in the event data.
- */
+/* Set the event source of an event. */
+
+CG_EXTERN void CGEventSetSource(CGEventRef event, CGEventSourceRef source)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the event type of an event (left mouse down, for example). */
+
+CG_EXTERN CGEventType CGEventGetType(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the event type of an event. */
+
+CG_EXTERN void CGEventSetType(CGEventRef event, CGEventType type)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the timestamp of an event. */
+
+CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the timestamp of an event. */
+
+CG_EXTERN void CGEventSetTimestamp(CGEventRef event,
+  CGEventTimestamp timestamp) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the location of an event in global display coordinates. */
+
+CG_EXTERN CGPoint CGEventGetLocation(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the location of an event relative to the lower-left corner of the
+   main display. */
+
+CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+
+/* Set the location of an event in global display coordinates. */
+
+CG_EXTERN void CGEventSetLocation(CGEventRef event, CGPoint location)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the event flags of an event. */
+
+CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the event flags of an event. */
+
+CG_EXTERN void CGEventSetFlags(CGEventRef event, CGEventFlags flags)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the Unicode string associated with a keyboard event.
+
+   When you call this function with a NULL string or a maximum string length
+   of 0, the function still returns the actual count of Unicode characters
+   in the event. */
+
 CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef event,
-                                               UniCharCount maxStringLength,
-                                               UniCharCount * actualStringLength,
-                                               UniChar unicodeString[]) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UniCharCount maxStringLength, UniCharCount *actualStringLength,
+  UniChar unicodeString[]) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the Unicode string associated with a keyboard event.
+
+   By default, the system translates the virtual key code in a keyboard
+   event into a Unicode string based on the keyboard ID in the event source.
+   This function allows you to manually override this string. Note that
+   application frameworks may ignore the Unicode string in a keyboard event
+   and do their own translation based on the virtual keycode and perceived
+   event state. */
 
 CG_EXTERN void CGEventKeyboardSetUnicodeString(CGEventRef event,
-                                               UniCharCount stringLength,
-                                               const UniChar unicodeString[]) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UniCharCount stringLength, const UniChar unicodeString[])
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
+/* Return the integer value of a field in an event. */
 
-/*
- * Additional low level functions provide access to specialized fields of the events
- */
+CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef event,
+  CGEventField field) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * The CGEventGetDoubleValueField and CGEventSetDoubleValueField
- * Functions renormalize certain fixed point and integer values
- * to an appropriate floating point range.  Keys this is done for
- * are:
- *
- * kCGMouseEventPressure	pressure value in the range 0-255
- * 				scaled to [0.0-1.0]
- * kCGTabletEventPointPressure	scaled pressure value; MAX=(2^16)-1, MIN=0
- * kCGTabletEventTiltX	tilt range is -((2^15)-1) to (2^15)-1 (-32767 to 32767)
- * kCGTabletEventTiltY	scaled to [0.0-1.0]
- * kCGTabletEventTangentialPressure	Same range as tilt
- * kCGTabletEventRotation	Fixed-point representation of device
- *				rotation in a 10.6 format
- */
+/* Set the integer value of a field in an event.
 
-CG_EXTERN int64_t  CGEventGetIntegerValueField(CGEventRef event, CGEventField field) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN double CGEventGetDoubleValueField(CGEventRef event, CGEventField field) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   Before calling this function, the event type must be set using a typed
+   event creation function such as `CGEventCreateMouseEvent', or by calling
+   `CGEventSetType'.
 
-/*
- * Before using the Set functions, the event type must be set
- * properly by using the appropriate type creation function or by calling
- * CGEventSetType().
- *
- * If this is to be a mouse event generated by a tablet, call
- * CGEventSetIntegerValueField(event, kCGMouseEventSubtype) with a value of
- * kCGEventMouseSubtypeTabletPoint or kCGEventMouseSubtypeTabletProximity
- * before setting other parameters.
- *
- * The correct type and subtype must be set so that the internal
- * event-specific data structures may be properly filled in.
- */
-CG_EXTERN void CGEventSetIntegerValueField(CGEventRef event, CGEventField field, int64_t value) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event, CGEventField field, double  value) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   If you are creating a mouse event generated by a tablet, call this
+   function and specify the field `kCGMouseEventSubtype' with a value of
+   `kCGEventMouseSubtypeTabletPoint' or `kCGEventMouseSubtypeTabletProximity'
+   before setting other parameters. */
 
+CG_EXTERN void CGEventSetIntegerValueField(CGEventRef event,
+  CGEventField field, int64_t value)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* 
- * Registering an Event Tap
- * 
- * A function registers an event tap, taking a pointer to the
- * program's tap function and an arbitrary reference to be passed
- * to the tap function, and returning a CFMachPortRef the program
- * can add to the appropriate run loop by creating a surce and
- * using  CFRunLoopAddSource().
- * 
- * Taps may be placed at the point where HIDSystem events enter
- * the server, at the point where HIDSystem and remote control
- * events enter a session, at the point where events have been
- * annotated to flow to a specific application, or at the point
- * where events are delivered to the application.  Taps may be
- * inserted at a specified point at the head of pre-existing filters,
- * or appended after any pre-existing filters.
- * 
- * Taps may be passive event listeners, or active filters.
- * An active filter may pass an event through unmodified, modify
- * an event, or discard an event.  When a tap is registered, it
- * identifies the set of events to be observed with a mask, and
- * indicates if it is a passive or active event filter.  Multiple
- * event type bitmasks may be ORed together.
- *
- * Taps may only be placed at kCGHIDEventTap by a process running
- * as the root user.  NULL is returned for other users.
- *
- * Taps placed at kCGHIDEventTap, kCGSessionEventTap,
- * kCGAnnotatedSessionEventTap, or on a specific process may
- * only receive key up and down events if access for assistive
- * devices is enabled (Preferences Universal Access panel,
- * Keyboard view) or the caller is enabled for assistive device access,
- * as by AXMakeProcessTrusted(). If the tap is not permitted to monitor
- * these when the tap is being created, then the appropriate bits
- * in the mask are cleared.  If that results in an empty mask,
- * then NULL is returned.
- *
- * Releasing the CFMachPortRef will release the tap.
- * 
- * The CGEventTapProxy is an opaque reference to state within
- * the client application associated with the tap.  The tap
- * function may pass this reference to other functions, such as
- * the event-posting routines.
- *
- * The event tap callback runs from the CFRunLoop to which the
- * tap CFMachPort is added as a source. The thread safety is defined
- * by the CFRunLoop and it's environment.
- */
+/* Return the floating-point value of a field in an event.
 
-/* Return the a CFMachPortRef  for the event tap. */
+   In cases where the field value is represented within the event by a fixed
+   point number or an integer, the result is scaled to the appropriate range
+   as part of creating the floating-point representation. */
+
+CG_EXTERN double CGEventGetDoubleValueField(CGEventRef event,
+  CGEventField field) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the floating-point value of a field in an event.
+
+   Before calling this function, the event type must be set using a typed
+   event creation function such as `CGEventCreateMouseEvent', or by calling
+   `CGEventSetType'.
+
+   In cases where the field’s value is represented within the event by a
+   fixed point number or integer, the value parameter is scaled as needed
+   and converted to the appropriate type. */
+
+CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
+  CGEventField field, double value)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Event taps.
+
+   A function registers an event tap, taking a pointer to the program's tap
+   function and an arbitrary reference to be passed to the tap function, and
+   returning a `CFMachPortRef' the program can add to the appropriate run
+   loop by creating a surce and using `CFRunLoopAddSource'.
+
+   Taps may be placed at the point where HIDSystem events enter the server,
+   at the point where HIDSystem and remote control events enter a session,
+   at the point where events have been annotated to flow to a specific
+   application, or at the point where events are delivered to the
+   application. Taps may be inserted at a specified point at the head of
+   pre-existing filters, or appended after any pre-existing filters.
+
+   Taps may be passive event listeners, or active filters. An active filter
+   may pass an event through unmodified, modify an event, or discard an
+   event. When a tap is registered, it identifies the set of events to be
+   observed with a mask, and indicates if it is a passive or active event
+   filter. Multiple event type bitmasks may be "OR"ed together.
+
+   Taps may only be placed at `kCGHIDEventTap' by a process running as the
+   root user. NULL is returned for other users.
+
+   Taps placed at `kCGHIDEventTap', `kCGSessionEventTap',
+   `kCGAnnotatedSessionEventTap', or on a specific process may only receive
+   key up and down events if access for assistive devices is enabled
+   (Preferences Universal Access panel, Keyboard view) or the caller is
+   enabled for assistive device access, as by `AXMakeProcessTrusted'. If the
+   tap is not permitted to monitor these events when the tap is created,
+   then the appropriate bits in the mask are cleared. If that results in an
+   empty mask, then NULL is returned.
+
+   Releasing the CFMachPortRef will release the tap.
+
+   A `CGEventTapProxy' is an opaque reference to state within the client
+   application associated with the tap. The tap function may pass this
+   reference to other functions, such as the event-posting routines.
+
+   The event tap callback runs from the CFRunLoop to which the tap
+   CFMachPort is added as a source. Thread safety is defined by the
+   CFRunLoop and its environment. */
+
+/* Create an event tap. */
+
 CG_EXTERN CFMachPortRef CGEventTapCreate(CGEventTapLocation tap,
-                                         CGEventTapPlacement place,
-                                         CGEventTapOptions options,
-                                         CGEventMask eventsOfInterest,
-                                         CGEventTapCallBack callback,
-                                         void * refcon ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CGEventTapPlacement place, CGEventTapOptions options,
+  CGEventMask eventsOfInterest, CGEventTapCallBack callback,
+  void *userInfo) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* 
- * Events being routed to individual applications may be tapped
- * using another function.  CGEventTapCreateForPSN() will report
- * all events being routed to the specified application.
- */
+/* Create an event tap for a specified process.
 
-/* Return the a CFMachPortRef  for an event tap for the specified process. */
-CG_EXTERN CFMachPortRef CGEventTapCreateForPSN(void *processSerialNumber, /* Temp type, til def moves to CoreServices */
-                                               CGEventTapPlacement place,
-                                               CGEventTapOptions options,
-                                               CGEventMask eventsOfInterest,
-                                               CGEventTapCallBack callback,
-                                               void * refcon ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   Events routed to individual applications may be tapped using another
+   function. `CGEventTapCreateForPSN' will report all events routed to the
+   specified application. */
 
-/*
- * Enable or disable an event tap.
- *
- * The taps are normally enabled when created.
- * If a tap becomes unresponsive, or a user requests taps be disabled,
- * then an appropriate kCGEventTapDisabled... event is passed to the
- * registered CGEventTapCallBack function.
- *
- * Event taps may be re-enabled by calling this function.
- */
-CG_EXTERN void CGEventTapEnable(CFMachPortRef myTap, bool enable) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef myTap) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFMachPortRef CGEventTapCreateForPSN(void *processSerialNumber,
+  CGEventTapPlacement place, CGEventTapOptions options,
+  CGEventMask eventsOfInterest, CGEventTapCallBack callback,
+  void *userInfo) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * A function to post events from a tap is provided.  The events
- * are posted to the same points that an event returned from an
- * event tap would be posted to.  If an event tap posts new events,
- * the new events enter the system before the event returned by
- * the tap enters the system.  This order may be changed by
- * explicitly posting the filtered event along with new events
- * in the desired order, and then setting the returned event
- * *pEventOut to NULL.
- *
- * Events posted into the system will be seen by all taps placed
- * after the tap posting the event.
- */
+/* Enable or disable an event tap.
 
-/* Post an event from the event tap into the event stream. */
-CG_EXTERN void CGEventTapPostEvent( CGEventTapProxy proxy,
-                                    CGEventRef event ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   Taps are normally enabled when created. If a tap becomes unresponsive or
+   a user requests taps be disabled, an appropriate `kCGEventTapDisabled...'
+   event is passed to the registered CGEventTapCallBack function. An event
+   tap may be re-enabled by calling this function. */
 
+CG_EXTERN void CGEventTapEnable(CFMachPortRef tap, bool enable)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* 
- * Functions to post events into the system at various points
- * are also provided.  Each event posted by these functions
- * enters the system at a point immediately before any taps
- * instantiated for that point, and will pass through any such taps.
- *
- * This mechanism permits an external process to establish an
- * event routing policy, for example, by tapping events at the
- * kCGAnnotatedSessionEventTap and then posting the events to
- * the desired PSN.
- */
+/* Return true if `tap' is enabled; false otherwise. */
 
-/* Post an event into the event stream. */
-CG_EXTERN void CGEventPost( CGEventTapLocation tap,
-                            CGEventRef event ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef tap)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* Post an event into the event stream for a specific application. */
-CG_EXTERN void CGEventPostToPSN( void *processSerialNumber, /* Temp type, til def moves to CoreServices */
-                                 CGEventRef event ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Post an event from an event tap into the event stream.
 
-/*
- * Mechanism used to list event taps.
- * An array length (maxNumberOfTaps) and array of CGEventTapInformation structures
- * are passed in.
- * Up to maxNumberOfTaps elements of the array are filled in with event tap information.
- * The actual number of elements filled in is returned in eventTapCount.
- *
- * The call resets the accumulated minUsecLatency and maxUsecLatency fields.  Values
- * reported in these fields reflect the min and max values seen since the preceding call,
- * or the instantiation of the tap.
- *
- * If the CGEventTapInformation array is NULL, maxNumberOfTaps is ignored, and *eventTapCount
- * is filled in with the number of event taps that are currently installed.
- */
-CG_EXTERN CGError CGGetEventTapList( CGTableCount maxNumberOfTaps,
-                                     CGEventTapInformation tapList[],
-                                     CGTableCount *eventTapCount ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   You can use this function to post a new event at the same point to which
+   an event returned from an event tap callback function would be posted.
+   The new event enters the system before the event returned by the callback
+   enters the system. Events posted into the system will be seen by all taps
+   placed after the tap posting the event. */
 
+CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy proxy, CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-CG_EXTERN_C_END
+/* Post an event into the event stream at a specified location.
 
-#endif /* __CGEVENT_H__ */
+   This function posts the specified event immediately before any event taps
+   instantiated for that location, and the event passes through any such
+   taps. */
+
+CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Post an event into the event stream for a specific application.
+
+   This function makes it possible for an application to establish
+   an event routing policy, for example, by tapping events at the
+   `kCGAnnotatedSessionEventTap' location and then posting the events
+   to another desired process.
+
+   This function posts the specified event immediately before any event taps
+   instantiated for the specified process, and the event passes through any
+   such taps. */
+
+CG_EXTERN void CGEventPostToPSN(void *processSerialNumber, CGEventRef event)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Gets a list of currently installed event taps.
+
+   `tapList' is an array of event tap information structures of length
+   `maxNumberOfTaps'. You are responsible for allocating storage for this
+   array. On return, your array contains a list of currently installed event
+   taps. On return, the number of event taps that are currently installed is
+   stored in `eventTapCount'. If you pass NULL in this parameter, the
+   `maxNumberOfTaps' parameter is ignored, and the number of event taps that
+   are currently installed is stored in `eventTapCount'.
+
+   Each call to this function has the side effect of resetting the minimum
+   and maximum latencies in the `tapList' parameter to the corresponding
+   average values. Values reported in these fields reflect the minimum and
+   maximum values seen since the preceding call, or the instantiation of the
+   tap. This allows a monitoring tool to evaluate the best and worst case
+   latency over time and under various operating conditions. */
+
+CG_EXTERN CGError CGGetEventTapList(uint32_t maxNumberOfTaps,
+  CGEventTapInformation tapList[], uint32_t *eventTapCount)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+#endif /* CGEVENT_H_ */

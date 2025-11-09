@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -92,7 +92,7 @@
 + (IMP)instanceMethodForSelector:(SEL)aSelector;
 - (void)doesNotRecognizeSelector:(SEL)aSelector;
 
-// - (id)forwardingTargetForSelector:(SEL)aSelector;
+- (id)forwardingTargetForSelector:(SEL)aSelector;
 - (void)forwardInvocation:(NSInvocation *)anInvocation;
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
 
@@ -117,11 +117,36 @@
 
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @interface NSObject (NSDeprecatedMethods)
 
-+ (void)poseAsClass:(Class)aClass DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (void)poseAsClass:(Class)aClass DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
+#if __OBJC2__
+UNAVAILABLE_ATTRIBUTE
+#endif
+;
 
 @end
+#endif
+
+
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/***********	Discardable Content		***********/
+
+@protocol NSDiscardableContent
+@required
+- (BOOL)beginContentAccess;
+- (void)endContentAccess;
+- (void)discardContentIfPossible;
+- (BOOL)isContentDiscarded;
+@end
+
+@interface NSObject (NSDiscardableContentProxy)
+- (id)autoContentAccessingProxy AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@end
+
+#endif
 
 /***********	Object Allocation / Deallocation		*******/
     

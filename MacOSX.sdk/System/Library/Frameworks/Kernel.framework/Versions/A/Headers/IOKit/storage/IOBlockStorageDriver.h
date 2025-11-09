@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -340,19 +340,25 @@ public:
 
 protected:
 
+    struct Context;
+
     struct ExpansionData
     {
-        bool         mediaDirtied;
-        UInt64       maxReadBlockTransfer;
-        UInt64       maxWriteBlockTransfer;
-        IONotifier * powerEventNotifier;
-        UInt32       deblockRequestWriteLockCount;
-        UInt64       maxReadSegmentTransfer;
-        UInt64       maxWriteSegmentTransfer;
-        UInt64       maxReadSegmentByteTransfer;
-        UInt64       maxWriteSegmentByteTransfer;
-        UInt64       minSegmentAlignmentByteTransfer;
-        UInt64       maxSegmentWidthByteTransfer;
+        bool           mediaDirtied;
+        UInt64         maxReadBlockTransfer;
+        UInt64         maxWriteBlockTransfer;
+        IONotifier *   powerEventNotifier;
+        UInt32         deblockRequestWriteLockCount;
+        UInt64         maxReadSegmentTransfer;
+        UInt64         maxWriteSegmentTransfer;
+        UInt64         maxReadSegmentByteTransfer;
+        UInt64         maxWriteSegmentByteTransfer;
+        UInt64         minSegmentAlignmentByteTransfer;
+        UInt64         maxSegmentWidthByteTransfer;
+        Context *      contexts;
+        IOSimpleLock * contextsLock;
+        UInt32         contextsCount;
+        UInt32         contextsMaxCount;
     };
     ExpansionData * _expansionData;
 
@@ -378,6 +384,14 @@ protected:
               IOBlockStorageDriver::_expansionData->minSegmentAlignmentByteTransfer
     #define _maxSegmentWidthByteTransfer     \
               IOBlockStorageDriver::_expansionData->maxSegmentWidthByteTransfer
+    #define _contexts                        \
+              IOBlockStorageDriver::_expansionData->contexts
+    #define _contextsLock                    \
+              IOBlockStorageDriver::_expansionData->contextsLock
+    #define _contextsCount                   \
+              IOBlockStorageDriver::_expansionData->contextsCount
+    #define _contextsMaxCount                \
+              IOBlockStorageDriver::_expansionData->contextsMaxCount
 
     OSSet *         _openClients;
     OSNumber *      _statistics[kStatisticsCount];
@@ -397,17 +411,42 @@ protected:
      * @field block.typeSub
      * Block sub-type for the operation.  It's definition depends on block.type.
      * Unused in IOBlockStorageDriver.
-     * @field original.byteStart
+     * @field request.byteStart
      * Starting byte offset for the data transfer.
-     * @param original.buffer
+     * @param request.buffer
      * Buffer for the data transfer.  The size of the buffer implies the size of
      * the data transfer.
-     * @param original.completion
+     * @param request.attributes
+     * Attributes of the data transfer.  See IOStorageAttributes.
+     * @param request.completion
      * Completion routine to call once the data transfer is complete.
      */
 
     struct Context
     {
+#ifdef __LP64__
+        struct
+        {
+            UInt64               byteStart;
+            IOMemoryDescriptor * buffer;
+            IOStorageAttributes  attributes;
+            IOStorageCompletion  completion;
+        } request;
+
+        struct
+        {
+            UInt32               size;
+            UInt8                type;
+            UInt8                typeSub[3];
+        } block;
+
+        AbsoluteTime timeStart;
+
+        UInt64 reserved0704;
+        UInt64 reserved0768;
+        UInt64 reserved0832;
+        UInt64 reserved0896;
+#else /* !__LP64__ */
         struct
         {
             UInt32               size;
@@ -429,7 +468,10 @@ protected:
             IOStorageAttributes  attributes;
         } request;
 
-        UInt32 reserved[2];
+        UInt32 reserved0448;
+#endif /* !__LP64__ */
+
+        Context * next;
     };
 
     static const UInt8 kBlockTypeStandard = 0x00;
@@ -568,9 +610,11 @@ protected:
 
     virtual void deleteContext(Context * context);
 
+#ifndef __LP64__
     virtual void prepareRequest(UInt64               byteStart,
                                 IOMemoryDescriptor * buffer,
-                                IOStorageCompletion  completion); /* DEPRECATED */
+                                IOStorageCompletion  completion) __attribute__ ((deprecated));
+#endif /* !__LP64__ */
 
     /*!
      * @function deblockRequest
@@ -594,16 +638,30 @@ protected:
      * @param buffer
      * Buffer for the data transfer.  The size of the buffer implies the size of
      * the data transfer.
+     * @param attributes
+     * Attributes of the data transfer.  See IOStorageAttributes.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param completion
-     * Completion routine to call once the data transfer is complete.
+     * Completion routine to call once the data transfer is complete.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param context
      * Additional context information for the data transfer (e.g. block size).
      */
 
-    virtual void deblockRequest(UInt64               byteStart,
-                                IOMemoryDescriptor * buffer,
-                                IOStorageCompletion  completion,
-                                Context *            context);
+#ifdef __LP64__
+    virtual void deblockRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageAttributes * attributes,
+                                IOStorageCompletion * completion,
+                                Context *             context);
+#else /* !__LP64__ */
+    virtual void deblockRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageCompletion   completion,
+                                Context *             context);
+#endif /* !__LP64__ */
 
     /*!
      * @function executeRequest
@@ -623,16 +681,30 @@ protected:
      * @param buffer
      * Buffer for the data transfer.  The size of the buffer implies the size of
      * the data transfer.
+     * @param attributes
+     * Attributes of the data transfer.  See IOStorageAttributes.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param completion
-     * Completion routine to call once the data transfer is complete.
+     * Completion routine to call once the data transfer is complete.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param context
      * Additional context information for the data transfer (e.g. block size).
      */
 
-    virtual void executeRequest(UInt64               byteStart,
-                                IOMemoryDescriptor * buffer,
-                                IOStorageCompletion  completion,
-                                Context *            context);
+#ifdef __LP64__
+    virtual void executeRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageAttributes * attributes,
+                                IOStorageCompletion * completion,
+                                Context *             context);
+#else /* !__LP64__ */
+    virtual void executeRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageCompletion   completion,
+                                Context *             context);
+#endif /* !__LP64__ */
 
     /*!
      * @function handleStart
@@ -817,6 +889,27 @@ public:
     virtual IOReturn synchronizeCache(IOService * client);
 
     /*!
+     * @function unmap
+     * @discussion
+     * Delete unused data from the storage object at the specified byte offsets,
+     * synchronously.
+     * @param client
+     * Client requesting the operation.
+     * @param extents
+     * List of extents.  See IOStorageExtent.  It is legal for the callee to
+     * overwrite the contents of this buffer in order to satisfy the request.
+     * @param extentsCount
+     * Number of extents.
+     * @result
+     * Returns the status of the operation.
+     */
+
+    virtual IOReturn unmap(IOService *       client,
+                           IOStorageExtent * extents,
+                           UInt32            extentsCount,
+                           UInt32            options = 0);
+
+    /*!
      * @function ejectMedia
      * @discussion
      * Eject the media from the device.  The driver is responsible for tearing
@@ -876,6 +969,18 @@ public:
      */
 
     virtual bool isMediaEjectable() const;
+
+#ifdef __LP64__
+    /*!
+     * @function isMediaRemovable
+     * @discussion
+     * Ask the driver whether the media is ejectable.
+     * @result
+     * Returns true if the media is ejectable, false otherwise.
+     */
+
+    virtual bool isMediaRemovable() const;
+#endif /* __LP64__ */
 
     /*!
      * @function isMediaPollExpensive
@@ -1233,8 +1338,7 @@ protected:
      * @discussion
      * This method obtains media-related parameters via calls to the
      * Transport Driver's reportBlockSize, reportMaxValidBlock,
-     * reportMaxReadTransfer, reportMaxWriteTransfer, and reportWriteProtection
-     * methods.
+     * and reportWriteProtection methods.
      */
     virtual IOReturn	recordMediaParameters(void);
 
@@ -1351,18 +1455,30 @@ protected:
      * @param buffer
      * Buffer for the data transfer.  The size of the buffer implies the size of
      * the data transfer.
+     * @param attributes
+     * Attributes of the data transfer.  See IOStorageAttributes.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param completion
-     * Completion routine to call once the data transfer is complete.
+     * Completion routine to call once the data transfer is complete.  It is the
+     * responsibility of the callee to maintain the information for the duration
+     * of the data transfer, as necessary.
      * @param context
      * Additional context information for the data transfer (e.g. block size).
      */
 
-    virtual void breakUpRequest(UInt64               byteStart,
-                                IOMemoryDescriptor * buffer,
-                                IOStorageCompletion  completion,
-                                Context *            context);
-
-    OSMetaClassDeclareReservedUsed(IOBlockStorageDriver, 0); /* 10.1.2 */
+#ifdef __LP64__
+    virtual void breakUpRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageAttributes * attributes,
+                                IOStorageCompletion * completion,
+                                Context *             context);
+#else /* !__LP64__ */
+    virtual void breakUpRequest(UInt64                byteStart,
+                                IOMemoryDescriptor *  buffer,
+                                IOStorageCompletion   completion,
+                                Context *             context); /* 10.1.2 */
+#endif /* !__LP64__ */
 
     /*!
      * @function prepareRequest
@@ -1396,11 +1512,31 @@ protected:
     virtual void prepareRequest(UInt64                byteStart,
                                 IOMemoryDescriptor *  buffer,
                                 IOStorageAttributes * attributes,
-                                IOStorageCompletion * completion);
+                                IOStorageCompletion * completion); /* 10.5.0 */
 
-    OSMetaClassDeclareReservedUsed(IOBlockStorageDriver, 1); /* 10.5.0 */
+public:
 
+    /*!
+     * @function requestIdle
+     * @abstract
+     * Request that the device enter an idle state.
+     * @discussion
+     * Request that the device enter an idle state.  The device will exit this state on the
+     * next read or write request, or as it sees necessary.  One example is for a DVD drive
+     * to spin down when it enters such an idle state, and spin up on the next read request
+     * from the system.
+     */
+    virtual IOReturn	requestIdle(void); /* 10.6.0 */
+
+#ifdef __LP64__
+    OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  0);
+    OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  1);
     OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  2);
+#else /* !__LP64__ */
+    OSMetaClassDeclareReservedUsed(IOBlockStorageDriver,  0);
+    OSMetaClassDeclareReservedUsed(IOBlockStorageDriver,  1);
+    OSMetaClassDeclareReservedUsed(IOBlockStorageDriver,  2);
+#endif /* !__LP64__ */
     OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  3);
     OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  4);
     OSMetaClassDeclareReservedUnused(IOBlockStorageDriver,  5);

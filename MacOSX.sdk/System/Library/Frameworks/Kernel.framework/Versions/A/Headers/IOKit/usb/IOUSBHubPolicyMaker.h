@@ -25,6 +25,30 @@
 /*
  *
  *	$Log: IOUSBHubPolicyMaker.h,v $
+ *	Revision 1.10.686.1  2011/04/05 14:51:08  nano
+ *	Fixes from 424.4.0 QL for 9190658 9190542 9195789 9121386 8979458 9121378
+ *
+ *	Revision 1.10  2009/05/07 19:43:09  nano
+ *	Move our SnowLeopard branch to TOT
+ *
+ *	Revision 1.7.72.3  2008/07/23 17:43:32  nano
+ *	<rdar://problem/5939357> IOUSBHIDDriver, IOHIDEventService missing HeaderDoc class declarations
+ *	
+ *	Revision 1.7.72.2  2008/04/22 22:38:01  nano
+ *	Bring in changes from Foxhound-320.2.9
+ *	
+ *	Revision 1.9  2008/04/17 16:56:57  nano
+ *	Bring in branches for rdar://5867990 & rdar://5768343
+ *	
+ *	Revision 1.8.4.1  2008/04/16 20:26:15  nano
+ *	<rdar://problem/5867990> Add API to allocate sleep current, as well as making sure that we return any extra power if our client dies or our device is terminated without returning it
+ *	
+ *	Revision 1.8  2008/04/14 16:08:38  nano
+ *	Add new APIs for high power and for GetDeviceInformation.
+ *	
+ *	Revision 1.7.114.1  2008/04/11 22:25:44  nano
+ *	Initial work on new user-client APIs and new IOUSBDevice APIs to return port state information and manage extra power requests, as well as groundwork for calling the policy maker directly from the IOUSBDevice
+ *	
  *	Revision 1.7  2007/08/17 22:41:11  nano
  *	Bring in branch that fixes <rdar://problem/5414582> USB not honoring Resume recovery time (hub driver) and adds extra time for iPods
  *	
@@ -112,6 +136,10 @@ enum {
 
 #define kIOUSBHubPowerStateStable	-1
 
+/*!
+ @class IOUSBHubPolicyMaker
+ @abstract Super class for Hub drivers to incorporate common Power Management code.
+ */
 class IOUSBHubPolicyMaker : public IOService
 {
 	OSDeclareAbstractStructors(IOUSBHubPolicyMaker)
@@ -126,8 +154,8 @@ protected:
 	bool								_dontAllowSleepPower;		// If true, we will not allow extra sleep power for a self powered hub.
 	SInt32								_powerStateChangingTo;		// a power state if we are changing to one, or -1 if we are stable
 	unsigned long						_myPowerState;				// my current state (since getPowerState doesn't always change in time)
-	UInt32								_extraPower;				// how much extra power we might be able to get from our parent hub
-	UInt32								_extraPowerRemaining;		// how many milliamps we can still give to any one port
+	UInt32								_extraPower;				// DEPRECATED
+	UInt32								_extraPowerRemaining;		// DEPRECATED
 	UInt32								_hubResumeRecoveryTime;		// # of ms that we will wait before issuing any transactions on our port (nominally 10ms)
     struct ExpansionData 
 	{ 
@@ -136,32 +164,44 @@ protected:
 
 public:
 	// IOService methods
-    virtual bool			start(IOService * provider);
-	virtual IOReturn		powerStateWillChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
-	virtual unsigned long	powerStateForDomainState ( IOPMPowerFlags domainState );
-	virtual IOReturn		setPowerState ( unsigned long powerStateOrdinal, IOService* whatDevice );
-	virtual IOReturn		powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
-	virtual unsigned long	maxCapabilityForDomainState ( IOPMPowerFlags domainState );
-	virtual void			powerChangeDone ( unsigned long fromState );
+    virtual bool						start(IOService * provider);
+	virtual IOReturn					powerStateWillChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
+	virtual unsigned long				powerStateForDomainState ( IOPMPowerFlags domainState );
+	virtual IOReturn					setPowerState ( unsigned long powerStateOrdinal, IOService* whatDevice );
+	virtual IOReturn					powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
+	virtual unsigned long				maxCapabilityForDomainState ( IOPMPowerFlags domainState );
+	virtual void						powerChangeDone ( unsigned long fromState );
 
 	// public methods which MAY be implemented in subclass
-	virtual IOReturn				EnsureUsability(void);
-
-	// new power stuff
-	void				AllocateExtraPower();
-	IOReturn			GetExtraPortPower(UInt32 portNum, UInt32 *extraPower);
-	IOReturn			ReturnExtraPortPower(UInt32 portNum, UInt32 extraPower);
+	virtual IOReturn					EnsureUsability(void);
+		
+	// Extra Port Power calls
+	void								AllocateExtraPower();
+	IOReturn							GetExtraPortPower(UInt32 portNum, UInt32 *extraPower);
+	IOReturn							ReturnExtraPortPower(UInt32 portNum, UInt32 extraPower);
     
 	// virtual methods to be implemented in the controlling driver subclass
-	virtual bool			ConfigureHubDriver(void) = 0;
-	virtual IOReturn		HubPowerChange(unsigned long powerStateOrdinal) = 0;
+	virtual bool						ConfigureHubDriver(void) = 0;
+	virtual IOReturn					HubPowerChange(unsigned long powerStateOrdinal) = 0;
 
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  0);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  1);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  2);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  3);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  4);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  5);
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  0);
+	virtual	IOReturn					GetPortInformation(UInt32 portNum, UInt32 *info);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  1);
+	virtual	IOReturn					ResetPort(UInt32 portNum);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  2);
+	virtual	IOReturn					SuspendPort(UInt32 portNum, bool suspend);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  3);
+	virtual	IOReturn					ReEnumeratePort(UInt32 portNum, UInt32 options);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  4);
+	virtual UInt32						RequestExtraPower(UInt32 portNum, UInt32 type, UInt32 requestedPower);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  5);
+	virtual IOReturn					ReturnExtraPower(UInt32 portNum, UInt32 type, UInt32 returnedPower);
+
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  6);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  7);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  8);

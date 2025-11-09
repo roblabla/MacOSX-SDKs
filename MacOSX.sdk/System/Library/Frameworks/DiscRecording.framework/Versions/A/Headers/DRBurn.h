@@ -469,13 +469,6 @@ extern NSString* const DRBurnStrategyCDTAO			AVAILABLE_MAC_OS_X_VERSION_10_3_AND
 extern NSString* const DRBurnStrategyCDSAO			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
-	@const			DRBurnStrategyCDRaw
-	@discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the raw mode
-					burn strategy for CD.  Raw mode is sometimes incorrectly called DAO (disc-at-once).
-*/
-extern NSString* const DRBurnStrategyCDRaw			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
 	@const			DRBurnStrategyDVDDAO
 	@discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the DAO (disc-at-once)
 					burn strategy for DVD.  This strategy applies <b>only</b> to DVDs; it is

@@ -6,7 +6,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: minifram.h,v 1.7 2006/11/01 12:26:09 RR Exp $
+// RCS-ID:      $Id: minifram.h 42902 2006-11-01 12:26:12Z RR $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

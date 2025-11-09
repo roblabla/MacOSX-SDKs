@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: font.h,v 1.10 2006/10/26 00:22:54 KO Exp $
+// RCS-ID:      $Id: font.h 46054 2007-05-15 20:47:56Z SC $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,10 @@ public:
     bool Create(const wxNativeFontInfo& info);
 
     bool MacCreateThemeFont( wxUint16 themeFontID ) ;
-    
+#ifdef __LP64__
+	bool MacCreateUIFont( wxUint32 coreTextFontType );
+#endif
+
     virtual ~wxFont();
 
     // implement base class pure virtuals
@@ -84,19 +87,24 @@ public:
 
     // Mac-specific, risks to change, don't use in portable code
     
+#ifndef __LP64__    
     // 'old' Quickdraw accessors
-    
     short MacGetFontNum() const;
     short MacGetFontSize() const;
     wxByte  MacGetFontStyle() const;
-    
+
     // 'new' ATSUI accessors
-    
     wxUint32 MacGetATSUFontID() const;
     wxUint32 MacGetATSUAdditionalQDStyles() const;
     wxUint16 MacGetThemeFontID() const ;
+
     // Returns an ATSUStyle not ATSUStyle*
     void* MacGetATSUStyle() const ; 
+#else
+    const void * MacGetCTFont() const;
+    // soon to be removed for 64bit, Returns an ATSUStyle not ATSUStyle*
+    void* MacGetATSUStyle() const ; 
+#endif
     
 protected:
     void Unshare();

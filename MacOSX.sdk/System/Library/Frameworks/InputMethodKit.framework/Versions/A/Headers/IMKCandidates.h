@@ -54,6 +54,15 @@ typedef NSUInteger	IMKCandidatesLocationHint;
 */
 extern const NSString* IMKCandidatesOpacityAttributeName;
 
+/*! 
+	@const		IMKCandidatesSendServerKeyEventFirst
+	@abstract	Control when key events are sent to a candidate window.
+	
+	@discussion	Value is a NSNumber with a boolean value of NO (keyevents are sent to the candidate window first) or YES (keyevents are sent to the IMKInputController first). Note this is only applicable when a candidate window is displayed.  The default behavior is to send the key event to the candidate window first.  Then if it is not processed there to send it on to the input controller.
+*/
+extern const NSString*	IMKCandidatesSendServerKeyEventFirst;
+
+
 
 @class IMKServer;
 @class IMKCandidatesPrivate;
@@ -125,6 +134,7 @@ extern const NSString* IMKCandidatesOpacityAttributeName;
 -(void)showAnnotation:(NSAttributedString*)annotationString;
 
 
+
 #pragma mark __Appearance__
 
 
@@ -177,7 +187,7 @@ extern const NSString* IMKCandidatesOpacityAttributeName;
    
    NSBackgroundColorDocumentAttribute (value = NSColor).  Set the background color that is drawn behind the candidate text.
    
-   
+   IMKCandidatesSendServerKeyEventFirst (value = NSNumber).  NO (default) gives the candidate window first chance at key events.  YES causes events to first be routed to the current IMKInputController.  In that case, if the event is not handled it will then be sent to the candidate window.
 */
 -(void)setAttributes:(NSDictionary*)attributes;
 

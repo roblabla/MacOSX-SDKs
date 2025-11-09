@@ -3,10 +3,7 @@
 
      Contains:   Routines for accessing the host's time base
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -29,7 +26,7 @@
 //==================================================================================================
 #pragma mark    Includes
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
     #include <CoreAudio/CoreAudioTypes.h>
 #else
@@ -60,7 +57,7 @@ extern "C"
     @result         A UInt64 containing the current host time.
 */
 extern UInt64
-AudioGetCurrentHostTime()                                                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AudioGetCurrentHostTime()                                                                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockFrequency
@@ -68,7 +65,7 @@ AudioGetCurrentHostTime()                                                       
     @result         A Float64 containing the number of ticks per second in the host time base.
 */
 extern Float64
-AudioGetHostClockFrequency()                                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AudioGetHostClockFrequency()                                                                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockMinimumTimeDelta
@@ -78,7 +75,7 @@ AudioGetHostClockFrequency()                                                    
                     ever differ.
 */
 extern UInt32
-AudioGetHostClockMinimumTimeDelta()                                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AudioGetHostClockMinimumTimeDelta()                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioConvertHostTimeToNanos
@@ -88,7 +85,7 @@ AudioGetHostClockMinimumTimeDelta()                                             
     @result         A UInt64 containining the converted host time.
 */
 extern UInt64
-AudioConvertHostTimeToNanos(UInt64 inHostTime)                                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AudioConvertHostTimeToNanos(UInt64 inHostTime)                                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioConvertNanosToHostTime
@@ -98,7 +95,7 @@ AudioConvertHostTimeToNanos(UInt64 inHostTime)                                  
     @result         A UInt64 containining the converted nanosecond time.
 */
 extern UInt64
-AudioConvertNanosToHostTime(UInt64 inNanos)                                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AudioConvertNanosToHostTime(UInt64 inNanos)                                                         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 //==================================================================================================
 

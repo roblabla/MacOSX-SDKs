@@ -3,9 +3,9 @@
  
      Contains:   Nib support for Carbon
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -111,11 +111,6 @@ DisposeNibReference(IBNibRef inNibRef)                        AVAILABLE_MAC_OS_X
  *  
  *  Summary:
  *    Creates a window from a description stored in a nib file.
- *  
- *  Discussion:
- *    Note that in 64-bit mode, all windows must be compositing. If you
- *    attempt to create a non-compositing window from a nib file, this
- *    API returns errUnsupportedWindowAttributesForClass.
  *  
  *  Mac OS X threading:
  *    Not thread safe

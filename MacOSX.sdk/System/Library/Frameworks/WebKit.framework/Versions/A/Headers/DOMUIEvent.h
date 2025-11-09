@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
 
 #import <WebKit/DOMEvent.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMAbstractView;
 @class NSString;
@@ -33,10 +34,19 @@
 @interface DOMUIEvent : DOMEvent
 @property(readonly, retain) DOMAbstractView *view;
 @property(readonly) int detail;
+@property(readonly) int keyCode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int charCode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int layerX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int layerY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int pageX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int pageY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int which AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 
-- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail;
+- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 
 @interface DOMUIEvent (DOMUIEventDeprecated)
-- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

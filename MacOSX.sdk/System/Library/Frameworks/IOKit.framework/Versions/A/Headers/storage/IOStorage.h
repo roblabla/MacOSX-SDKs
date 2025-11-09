@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -68,6 +68,18 @@
  */
 
 #define kIOStorageFeaturesKey "IOStorageFeatures"
+
+/*!
+ * @defined kIOStorageFeatureUnmap
+ * @abstract
+ * Describes the presence of the Unmap feature.
+ * @discussion
+ * This property describes the ability of the storage stack to delete unused
+ * data from the media.  It is one of the feature entries listed under the top-
+ * level kIOStorageFeaturesKey property table.  It has an OSBoolean value.
+ */
+
+#define kIOStorageFeatureUnmap "Unmap"
 
 /*!
  * @defined kIOStorageFeatureForceUnitAccess

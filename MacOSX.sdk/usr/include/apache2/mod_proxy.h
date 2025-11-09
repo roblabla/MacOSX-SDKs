@@ -94,7 +94,10 @@ enum enctype {
 #endif /*APR_CHARSET_EBCDIC*/
 
 /* default Max-Forwards header setting */
-#define DEFAULT_MAX_FORWARDS    10
+/* Set this to -1, which complies with RFC2616 by not setting
+ * max-forwards if the client didn't send it to us.
+ */
+#define DEFAULT_MAX_FORWARDS    -1
 
 /* static information about a remote proxy */
 struct proxy_remote {
@@ -106,10 +109,13 @@ struct proxy_remote {
     int use_regex;          /* simple boolean. True if we have a regex pattern */
 };
 
+#define PROXYPASS_NOCANON 0x01
+#define PROXYPASS_INTERPOLATE 0x02
 struct proxy_alias {
     const char  *real;
     const char  *fake;
     ap_regex_t  *regex;
+    unsigned int flags;
 };
 
 struct dirconn_entry {
@@ -207,14 +213,25 @@ typedef struct {
     apr_array_header_t* cookie_domains;
     const apr_strmatch_pattern* cookie_path_str;
     const apr_strmatch_pattern* cookie_domain_str;
+    const char *ftp_directory_charset;
+    int interpolate_env;
 } proxy_dir_conf;
+
+/* if we interpolate env vars per-request, we'll need a per-request
+ * copy of the reverse proxy config
+ */
+typedef struct {
+    apr_array_header_t *raliases;
+    apr_array_header_t* cookie_paths;
+    apr_array_header_t* cookie_domains;
+} proxy_req_conf;
 
 typedef struct {
     conn_rec     *connection;
     const char   *hostname;
     apr_port_t   port;
     int          is_ssl;
-    apr_pool_t   *pool;     /* Subpool used for creating socket */
+    apr_pool_t   *pool;     /* Subpool for hostname and addr data */
     apr_socket_t *sock;     /* Connection socket */
     apr_sockaddr_t *addr;   /* Preparsed remote address info */
     apr_uint32_t flags;     /* Conection flags */
@@ -225,6 +242,12 @@ typedef struct {
 #if APR_HAS_THREADS
     int          inreslist; /* connection in apr_reslist? */
 #endif
+    apr_pool_t   *scpool;   /* Subpool used for socket and connection data */
+    request_rec  *r;        /* Request record of the frontend request
+                             * which the backend currently answers. */
+    int          need_flush;/* Flag to decide whether we need to flush the
+                             * filter chain or not */
+    void         *forward;  /* opaque forward proxy data */
 } proxy_conn_rec;
 
 typedef struct {
@@ -254,14 +277,16 @@ struct proxy_conn_pool {
 #define PROXY_WORKER_NOT_USABLE_BITMAP ( PROXY_WORKER_IN_SHUTDOWN | \
 PROXY_WORKER_DISABLED | PROXY_WORKER_STOPPED | PROXY_WORKER_IN_ERROR )
 
-#define PROXY_WORKER_IS_INITIALIZED(f)   ( (f)->s->status & \
-  PROXY_WORKER_INITIALIZED )
+/* NOTE: these check the shared status */
+#define PROXY_WORKER_IS_INITIALIZED(f)   ( (f)->s && \
+  ( (f)->s->status &  PROXY_WORKER_INITIALIZED ) )
 
-#define PROXY_WORKER_IS_STANDBY(f)   ( (f)->s->status & \
-  PROXY_WORKER_HOT_STANDBY )
+#define PROXY_WORKER_IS_STANDBY(f)   ( (f)->s && \
+  ( (f)->s->status &  PROXY_WORKER_HOT_STANDBY ) )
 
-#define PROXY_WORKER_IS_USABLE(f)   ( !((f)->s->status & \
-  (PROXY_WORKER_NOT_USABLE_BITMAP)) && PROXY_WORKER_IS_INITIALIZED(f) )
+#define PROXY_WORKER_IS_USABLE(f)   ( (f)->s && \
+  ( !( (f)->s->status & PROXY_WORKER_NOT_USABLE_BITMAP) ) && \
+  PROXY_WORKER_IS_INITIALIZED(f) )
 
 /* default worker retry timeout in seconds */
 #define PROXY_WORKER_DEFAULT_RETRY  60
@@ -328,6 +353,11 @@ struct proxy_worker {
     int             lbset;      /* load balancer cluster set */
     apr_interval_time_t ping_timeout;
     char ping_timeout_set;
+    char            retry_set;
+    char            disablereuse;
+    char            disablereuse_set;
+    apr_interval_time_t conn_timeout;
+    char            conn_timeout_set;
 };
 
 /*
@@ -355,6 +385,9 @@ struct proxy_balancer {
     apr_thread_mutex_t  *mutex;  /* Thread lock for updating lb params */
 #endif
     void            *context;   /* general purpose storage */
+    int             scolonsep;  /* true if ';' seps sticky session paths */
+
+    apr_array_header_t *errstatuses; /* statuses to force members into error */
 };
 
 struct proxy_balancer_method {
@@ -464,6 +497,8 @@ PROXY_DECLARE(apr_status_t) ap_proxy_string_read(conn_rec *c, apr_bucket_brigade
 PROXY_DECLARE(void) ap_proxy_table_unmerge(apr_pool_t *p, apr_table_t *t, char *key);
 /* DEPRECATED (will be replaced with ap_proxy_connect_backend */
 PROXY_DECLARE(int) ap_proxy_connect_to_backend(apr_socket_t **, const char *, apr_sockaddr_t *, const char *, proxy_server_conf *, server_rec *, apr_pool_t *);
+PROXY_DECLARE(apr_status_t) ap_proxy_ssl_connection_cleanup(proxy_conn_rec *conn,
+                                                            request_rec *r);
 PROXY_DECLARE(int) ap_proxy_ssl_enable(conn_rec *c);
 PROXY_DECLARE(int) ap_proxy_ssl_disable(conn_rec *c);
 PROXY_DECLARE(int) ap_proxy_conn_is_https(conn_rec *c);
@@ -717,6 +752,29 @@ PROXY_DECLARE(void) ap_proxy_backend_broke(request_rec *r,
 #else
 #define PROXY_HAS_SCOREBOARD 0
 #endif
+
+/**
+ * Transform buckets from one bucket allocator to another one by creating a
+ * transient bucket for each data bucket and let it use the data read from
+ * the old bucket. Metabuckets are transformed by just recreating them.
+ * Attention: Currently only the following bucket types are handled:
+ *
+ * All data buckets
+ * FLUSH
+ * EOS
+ *
+ * If an other bucket type is found its type is logged as a debug message
+ * and APR_EGENERAL is returned.
+ * @param r    current request record of client request. Only used for logging
+ *             purposes
+ * @param from the brigade that contains the buckets to transform
+ * @param to   the brigade that will receive the transformed buckets
+ * @return     APR_SUCCESS if all buckets could be transformed APR_EGENERAL
+ *             otherwise
+ */
+PROXY_DECLARE(apr_status_t)
+ap_proxy_buckets_lifetime_transform(request_rec *r, apr_bucket_brigade *from,
+                                        apr_bucket_brigade *to);
 
 #define PROXY_LBMETHOD "proxylbmethod"
 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,11 +17,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.32.2.3.2.6 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: snprintf.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 /*
 
-Comparing: sprintf, snprintf, slprintf, spprintf 
+Comparing: sprintf, snprintf, slprintf, spprintf
 
 sprintf  offers the ability to make a lot of failures since it does not know
          the size of the buffer it uses. Therefore usage of sprintf often
@@ -34,19 +34,19 @@ snprintf knows the buffers size and will not write behind it. But you will
          before beeing able to call the function. In other words you must
          be sure that you really know the maximum size of the buffer required.
          A bad thing is having a big maximum while in most cases you would
-         only need a small buffer. If the size of the resulting string is 
+         only need a small buffer. If the size of the resulting string is
          longer or equal to the buffer size than the buffer is not terminated.
-         The function also returns the number of chars not including the 
+         The function also returns the number of chars not including the
          terminating \0 that were needed to fully comply to the print request.
 
-slprintf same as snprintf with the difference that it actually returns the 
+slprintf same as snprintf with the difference that it actually returns the
          length printed not including the terminating \0.
 
 spprintf is the dynamical version of snprintf. It allocates the buffer in size
          as needed and allows a maximum setting as snprintf (turn this feature
          off by setting max_len to 0). spprintf is a little bit slower than
-         snprintf and offers possible memory leakes if you miss freeing the 
-         buffer allocated by the function. Therfore this function should be 
+         snprintf and offers possible memory leakes if you miss freeing the
+         buffer allocated by the function. Therfore this function should be
          used where either no maximum is known or the maximum is much bigger
          than normal size required. spprintf allways terminates the buffer.
 
@@ -61,8 +61,8 @@ Example:
                                |                                | if (!buffer)
                                |                                |   return OUT_OF_MEMORY
  // sprintf allways terminates | // manual termination of       | // spprintf allays terminates buffer
- // buffer                     | // buffer *IS* required        |   
-                               | buffer[MAX-1] = 0;             | 
+ // buffer                     | // buffer *IS* required        |
+                               | buffer[MAX-1] = 0;             |
  action_with_buffer(buffer);   | action_with_buffer(buffer);    | action_with_buffer(buffer);
                                |                                | efree(buffer);
 */
@@ -82,6 +82,8 @@ PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...);
 PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap);
 PHPAPI int ap_php_snprintf(char *, size_t, const char *, ...);
 PHPAPI int ap_php_vsnprintf(char *, size_t, const char *, va_list ap);
+PHPAPI int ap_php_vasprintf(char **buf, const char *format, va_list ap);
+PHPAPI int ap_php_asprintf(char **buf, const char *format, ...);
 PHPAPI int php_sprintf (char* s, const char* format, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);
 PHPAPI char * php_gcvt(double value, int ndigit, char dec_point, char exponent, char *buf);
 PHPAPI char * php_conv_fp(register char format, register double num,
@@ -108,6 +110,14 @@ END_EXTERN_C()
 #undef vsnprintf
 #endif
 #define vsnprintf ap_php_vsnprintf
+
+#ifndef HAVE_VASPRINTF
+#define vasprintf ap_php_vasprintf
+#endif
+
+#ifndef HAVE_ASPRINTF
+#define asprintf ap_php_asprintf
+#endif
 
 #ifdef sprintf
 #undef sprintf

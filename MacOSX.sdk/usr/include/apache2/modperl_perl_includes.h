@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -52,7 +53,6 @@
 #   define uid_t perl_uid_t
 #   define gid_t perl_gid_t
 #   ifdef exit
-#      define perl_exit exit
 #      undef exit
 #   endif
 #endif
@@ -67,25 +67,11 @@
 
 #if defined(WIN32) && defined(USE_LARGE_FILES)
 #   ifdef malloc
-#      define perl_malloc malloc
 #      undef malloc
 #   endif
 #   ifdef free
-#      define perl_free free
 #      undef free
 #   endif
-#endif
-
-#if (PERL_REVISION == 5) && (PERL_VERSION == 6)
-#   define MP_PERL_5_6_x
-#endif
-
-#if defined(MP_PERL_5_6_x) && (PERL_SUBVERSION == 0)
-#   define MP_PERL_5_6_0
-#endif
-
-#if defined(MP_PERL_5_6_x) && (PERL_SUBVERSION == 1)
-#   define MP_PERL_5_6_1
 #endif
 
 #include "modperl_perl_unembed.h"

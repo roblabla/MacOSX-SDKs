@@ -4,7 +4,7 @@
 // Author:      Arthur Seaton, Julian Smart
 // Modified by:
 // Created:     29/01/98
-// RCS-ID:      $Id: memory.h,v 1.49 2006/06/08 12:50:37 ABX Exp $
+// RCS-ID:      $Id: memory.h 39634 2006-06-08 12:51:01Z ABX $
 // Copyright:   (c) 1998 Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

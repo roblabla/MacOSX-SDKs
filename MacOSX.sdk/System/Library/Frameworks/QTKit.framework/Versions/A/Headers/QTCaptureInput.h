@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureInput.h
 
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -14,11 +14,7 @@
 
 @interface QTCaptureInput : NSObject {
 @private
-#if __LP64__
-	int32_t						_proxy;
-#else
 	QTCaptureSession * __weak	_session;
-#endif
 	long						_reserved1;
 	long						_reserved2;
 	long						_reserved3;

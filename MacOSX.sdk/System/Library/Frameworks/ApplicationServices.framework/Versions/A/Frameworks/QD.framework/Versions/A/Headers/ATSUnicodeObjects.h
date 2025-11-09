@@ -3,9 +3,9 @@
  
      Contains:   ATSUI object manipulation functions.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,15 @@ extern "C" {
 #endif
 
 /*
- *  ATSUCreateStyle()
+ *  ATSUCreateStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyGraphicsFont, CTFontCreateWithGraphicsFont,
+ *    CTFontCreateWithPlatformFont, CTFontCreateWithQuickdrawInstance,
+ *    CTFontCreateUIFontForLanguage, CTFontCreateCopyWithAttributes,
+ *    CTFontCreateCopyWithSymbolicTraits, CTFontCreateCopyWithFamily,
+ *    CTFontCreateForString, CTFontCreateWithName, or
+ *    CTFontCreateWithFontDescriptor instead.
  *  
  *  Summary:
  *    Creates an ATSUStyle object with default settings.
@@ -67,17 +75,25 @@ extern "C" {
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUCreateStyle(ATSUStyle * oStyle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUCreateStyle(ATSUStyle * oStyle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUCreateAndCopyStyle()
+ *  ATSUCreateAndCopyStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyGraphicsFont, CTFontCreateWithGraphicsFont,
+ *    CTFontCreateWithPlatformFont, CTFontCreateWithQuickdrawInstance,
+ *    CTFontCreateUIFontForLanguage, CTFontCreateCopyWithAttributes,
+ *    CTFontCreateCopyWithSymbolicTraits, CTFontCreateCopyWithFamily,
+ *    CTFontCreateForString, CTFontCreateWithName, or
+ *    CTFontCreateWithFontDescriptor instead.
  *  
  *  Summary:
  *    Creates a new ATSUStyle object with the same attributes, font
@@ -105,20 +121,23 @@ ATSUCreateStyle(ATSUStyle * oStyle)                           AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCreateAndCopyStyle(
   ATSUStyle    iStyle,
-  ATSUStyle *  oStyle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyle *  oStyle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUDisposeStyle()
+ *  ATSUDisposeStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Disposes of the memory associated with a style object.
@@ -146,17 +165,20 @@ ATSUCreateAndCopyStyle(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUDisposeStyle(ATSUStyle iStyle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUDisposeStyle(ATSUStyle iStyle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUSetStyleRefCon()
+ *  ATSUSetStyleRefCon()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttributes instead.
  *  
  *  Summary:
  *    Sets a reference constant for an ATSUStyle object.
@@ -184,18 +206,21 @@ ATSUDisposeStyle(ATSUStyle iStyle)                            AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUSetStyleRefCon(
   ATSUStyle   iStyle,
-  URefCon     iRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon     iRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetStyleRefCon()
+ *  ATSUGetStyleRefCon()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttributes instead.
  *  
  *  Summary:
  *    Returns the reference constant for an ATSUStyle object.
@@ -221,21 +246,24 @@ ATSUSetStyleRefCon(
  *    error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUGetStyleRefCon(
   ATSUStyle   iStyle,
-  URefCon *   oRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon *   oRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI style comparison                                                      */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCompareStyles()
+ *  ATSUCompareStyles()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateMatchingFontDescriptor instead.
  *  
  *  Summary:
  *    Compares two ATSUStyleObjects.
@@ -269,7 +297,7 @@ ATSUGetStyleRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -277,14 +305,17 @@ extern OSStatus
 ATSUCompareStyles(
   ATSUStyle              iFirstStyle,
   ATSUStyle              iSecondStyle,
-  ATSUStyleComparison *  oComparison)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyleComparison *  oComparison)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI style attribute manipulation                                          */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCopyAttributes()
+ *  ATSUCopyAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Copies attributes from one style to another.
@@ -309,18 +340,21 @@ ATSUCompareStyles(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCopyAttributes(
   ATSUStyle   iSourceStyle,
-  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUOverwriteAttributes()
+ *  ATSUOverwriteAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Copies to a destination style object the nondefault style
@@ -361,18 +395,21 @@ ATSUCopyAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUOverwriteAttributes(
   ATSUStyle   iSourceStyle,
-  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUUnderwriteAttributes()
+ *  ATSUUnderwriteAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Copies to a destination style object only those nondefault style
@@ -414,21 +451,24 @@ ATSUOverwriteAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUUnderwriteAttributes(
   ATSUStyle   iSourceStyle,
-  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyle   iDestinationStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Empty ATSUI styles                                                          */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUClearStyle()
+ *  ATSUClearStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Restores default values to a style object.
@@ -452,16 +492,19 @@ ATSUUnderwriteAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUClearStyle(ATSUStyle iStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUClearStyle(ATSUStyle iStyle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUStyleIsEmpty()
+ *  ATSUStyleIsEmpty()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Indicates whether a style object contains only default values.
@@ -490,21 +533,24 @@ ATSUClearStyle(ATSUStyle iStyle)                              AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUStyleIsEmpty(
   ATSUStyle   iStyle,
-  Boolean *   oIsClear)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *   oIsClear)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI style attribute getters and setters                                   */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCalculateBaselineDeltas()
+ *  ATSUCalculateBaselineDeltas()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Obtains the optimal baseline positions for glyphs in a style run.
@@ -556,7 +602,7 @@ ATSUStyleIsEmpty(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -564,13 +610,18 @@ extern OSStatus
 ATSUCalculateBaselineDeltas(
   ATSUStyle            iStyle,
   BslnBaselineClass    iBaselineClass,
-  BslnBaselineRecord   oBaselineDeltas)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  BslnBaselineRecord   oBaselineDeltas)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUSetAttributes()
+ *  ATSUSetAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateWithNameAndSize,
+ *    CTFontDescriptorCreateWithAttributes, or
+ *    CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Sets style attribute values in a style object.
@@ -623,7 +674,7 @@ ATSUCalculateBaselineDeltas(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -633,12 +684,15 @@ ATSUSetAttributes(
   ItemCount                     iAttributeCount,
   const ATSUAttributeTag        iTag[],
   const ByteCount               iValueSize[],
-  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetAttribute()
+ *  ATSUGetAttribute()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttribute instead.
  *  
  *  Summary:
  *    Obtains a single attribute value for a style object.
@@ -680,7 +734,7 @@ ATSUSetAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -690,11 +744,14 @@ ATSUGetAttribute(
   ATSUAttributeTag        iTag,
   ByteCount               iExpectedValueSize,
   ATSUAttributeValuePtr   oValue,                   /* can be NULL */
-  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetAllAttributes()
+ *  ATSUGetAllAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttributes instead.
  *  
  *  Summary:
  *    Obtains an array of style attribute tags and value sizes for a
@@ -746,7 +803,7 @@ ATSUGetAttribute(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -755,11 +812,14 @@ ATSUGetAllAttributes(
   ATSUStyle           iStyle,
   ATSUAttributeInfo   oAttributeInfoArray[],        /* can be NULL */
   ItemCount           iTagValuePairArraySize,
-  ItemCount *         oTagValuePairCount)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *         oTagValuePairCount)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearAttributes()
+ *  ATSUClearAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Restores default values to the specified style attributes of a
@@ -796,7 +856,7 @@ ATSUGetAllAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -804,14 +864,20 @@ extern OSStatus
 ATSUClearAttributes(
   ATSUStyle                iStyle,
   ItemCount                iTagCount,
-  const ATSUAttributeTag   iTag[])          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeTag   iTag[])          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI basic text layout functions                                           */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCreateTextLayout()
+ *  ATSUCreateTextLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterCreateWithAttributedString,
+ *    CTTypesetterCreateWithAttributedStringAndOptions,
+ *    CTLineCreateWithAttributedString, CTLineCreateTruncatedLine, or
+ *    CTLineCreateJustifiedLine instead.
  *  
  *  Summary:
  *    Creates an opaque text layout object containing only default text
@@ -846,16 +912,22 @@ ATSUClearAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUCreateTextLayout(ATSUTextLayout * oTextLayout)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUCreateTextLayout(ATSUTextLayout * oTextLayout)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUCreateAndCopyTextLayout()
+ *  ATSUCreateAndCopyTextLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterCreateWithAttributedString,
+ *    CTTypesetterCreateWithAttributedStringAndOptions,
+ *    CTLineCreateWithAttributedString, CTLineCreateTruncatedLine, or
+ *    CTLineCreateJustifiedLine instead.
  *  
  *  Summary:
  *    Creates a copy of a text layout object.
@@ -884,20 +956,26 @@ ATSUCreateTextLayout(ATSUTextLayout * oTextLayout)            AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
 extern OSStatus 
 ATSUCreateAndCopyTextLayout(
   ATSUTextLayout    iTextLayout,
-  ATSUTextLayout *  oTextLayout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextLayout *  oTextLayout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUCreateTextLayoutWithTextPtr()
+ *  ATSUCreateTextLayoutWithTextPtr()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterCreateWithAttributedString,
+ *    CTTypesetterCreateWithAttributedStringAndOptions,
+ *    CTLineCreateWithAttributedString, CTLineCreateTruncatedLine, or
+ *    CTLineCreateJustifiedLine instead.
  *  
  *  Summary:
  *    Creates an opaque text layout object containing default text
@@ -993,7 +1071,7 @@ ATSUCreateAndCopyTextLayout(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1006,11 +1084,14 @@ ATSUCreateTextLayoutWithTextPtr(
   ItemCount              iNumberOfRuns,
   const UniCharCount     iRunLengths[],
   ATSUStyle              iStyles[],
-  ATSUTextLayout *       oTextLayout)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextLayout *       oTextLayout)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearLayoutCache()
+ *  ATSUClearLayoutCache()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Clears the layout cache of a line or an entire text layout object.
@@ -1059,18 +1140,21 @@ ATSUCreateTextLayoutWithTextPtr(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
 extern OSStatus 
 ATSUClearLayoutCache(
   ATSUTextLayout       iTextLayout,
-  UniCharArrayOffset   iLineStart)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset   iLineStart)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUDisposeTextLayout()
+ *  ATSUDisposeTextLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Disposes of the memory associated with a text layout object.
@@ -1100,16 +1184,19 @@ ATSUClearLayoutCache(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUDisposeTextLayout(ATSUTextLayout iTextLayout)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUDisposeTextLayout(ATSUTextLayout iTextLayout)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUSetTextLayoutRefCon()
+ *  ATSUSetTextLayoutRefCon()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Sets application-specific data for a text layout object.
@@ -1140,19 +1227,22 @@ ATSUDisposeTextLayout(ATSUTextLayout iTextLayout)             AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUSetTextLayoutRefCon(
   ATSUTextLayout   iTextLayout,
-  URefCon          iRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon          iRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetTextLayoutRefCon()
+ *  ATSUGetTextLayoutRefCon()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Obtains application-specific data for a text layout object.
@@ -1176,21 +1266,24 @@ ATSUSetTextLayoutRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUGetTextLayoutRefCon(
   ATSUTextLayout   iTextLayout,
-  URefCon *        oRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon *        oRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI text buffer manipulation                                              */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUSetTextPointerLocation()
+ *  ATSUSetTextPointerLocation()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Associates a text buffer with a text layout object or updates
@@ -1267,7 +1360,7 @@ ATSUGetTextLayoutRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1277,11 +1370,14 @@ ATSUSetTextPointerLocation(
   ConstUniCharArrayPtr   iText,
   UniCharArrayOffset     iTextOffset,
   UniCharCount           iTextLength,
-  UniCharCount           iTextTotalLength)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount           iTextTotalLength)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetTextLocation()
+ *  ATSUGetTextLocation()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Returns information about the Unicode text buffer associated with
@@ -1332,7 +1428,7 @@ ATSUSetTextPointerLocation(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1343,11 +1439,14 @@ ATSUGetTextLocation(
   Boolean *             oTextIsStoredInHandle,       /* can be NULL */
   UniCharArrayOffset *  oOffset,                     /* can be NULL */
   UniCharCount *        oTextLength,                 /* can be NULL */
-  UniCharCount *        oTextTotalLength)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount *        oTextTotalLength)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUTextDeleted()
+ *  ATSUTextDeleted()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Informs ATSUI of the location and length of a text deletion.
@@ -1397,7 +1496,7 @@ ATSUGetTextLocation(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1405,11 +1504,14 @@ extern OSStatus
 ATSUTextDeleted(
   ATSUTextLayout       iTextLayout,
   UniCharArrayOffset   iDeletedRangeStart,
-  UniCharCount         iDeletedRangeLength)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount         iDeletedRangeLength)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUTextInserted()
+ *  ATSUTextInserted()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Informs ATSUI of the location and length of a text insertion.
@@ -1448,7 +1550,7 @@ ATSUTextDeleted(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1456,13 +1558,16 @@ extern OSStatus
 ATSUTextInserted(
   ATSUTextLayout       iTextLayout,
   UniCharArrayOffset   iInsertionLocation,
-  UniCharCount         iInsertionLength)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount         iInsertionLength)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUTextMoved()
+ *  ATSUTextMoved()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Informs ATSUI of the new memory location of relocated text.
@@ -1487,14 +1592,14 @@ ATSUTextInserted(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUTextMoved(
   ATSUTextLayout         iTextLayout,
-  ConstUniCharArrayPtr   iNewLocation)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstUniCharArrayPtr   iNewLocation)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -1502,7 +1607,10 @@ ATSUTextMoved(
 /* ---------------------------------------------------------------------------- */
 #if !__LP64__
 /*
- *  ATSUCopyLayoutControls()
+ *  ATSUCopyLayoutControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTParagraphStyleCreate or CTLineGetPenOffsetForFlush instead.
  *  
  *  Summary:
  *    Copies all layout control attribute settings from a source text
@@ -1533,20 +1641,23 @@ ATSUTextMoved(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCopyLayoutControls(
   ATSUTextLayout   iSourceTextLayout,
-  ATSUTextLayout   iDestTextLayout)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextLayout   iDestTextLayout)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUSetLayoutControls()
+ *  ATSUSetLayoutControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Sets layout control attribute values in a text layout object.
@@ -1601,7 +1712,7 @@ ATSUCopyLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1611,12 +1722,15 @@ ATSUSetLayoutControls(
   ItemCount                     iAttributeCount,
   const ATSUAttributeTag        iTag[],
   const ByteCount               iValueSize[],
-  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetLayoutControl()
+ *  ATSUGetLayoutControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringGetAttributes instead.
  *  
  *  Summary:
  *    Obtains a single layout control attribute value for a text layout
@@ -1672,7 +1786,7 @@ ATSUSetLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1682,11 +1796,14 @@ ATSUGetLayoutControl(
   ATSUAttributeTag        iTag,
   ByteCount               iExpectedValueSize,
   ATSUAttributeValuePtr   oValue,                   /* can be NULL */
-  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetAllLayoutControls()
+ *  ATSUGetAllLayoutControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringGetAttributes instead.
  *  
  *  Summary:
  *    Obtains an array of non-default layout control attribute tags and
@@ -1742,7 +1859,7 @@ ATSUGetLayoutControl(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1751,11 +1868,14 @@ ATSUGetAllLayoutControls(
   ATSUTextLayout      iTextLayout,
   ATSUAttributeInfo   oAttributeInfoArray[],
   ItemCount           iTagValuePairArraySize,
-  ItemCount *         oTagValuePairCount)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *         oTagValuePairCount)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearLayoutControls()
+ *  ATSUClearLayoutControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Restores default values to the specified layout control
@@ -1792,7 +1912,7 @@ ATSUGetAllLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1800,14 +1920,17 @@ extern OSStatus
 ATSUClearLayoutControls(
   ATSUTextLayout           iTextLayout,
   ItemCount                iTagCount,
-  const ATSUAttributeTag   iTag[])            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeTag   iTag[])            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI line controls                                                         */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCopyLineControls()
+ *  ATSUCopyLineControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Copies line control attribute settings from a line in a source
@@ -1849,7 +1972,7 @@ ATSUClearLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1858,11 +1981,14 @@ ATSUCopyLineControls(
   ATSUTextLayout       iSourceTextLayout,
   UniCharArrayOffset   iSourceLineStart,
   ATSUTextLayout       iDestTextLayout,
-  UniCharArrayOffset   iDestLineStart)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset   iDestLineStart)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUSetLineControls()
+ *  ATSUSetLineControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Sets one or more line control values for a specified line in a
@@ -1927,7 +2053,7 @@ ATSUCopyLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1938,11 +2064,14 @@ ATSUSetLineControls(
   ItemCount                     iAttributeCount,
   const ATSUAttributeTag        iTag[],
   const ByteCount               iValueSize[],
-  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetLineControl()
+ *  ATSUGetLineControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Obtains a single line control attribute value for a line in a
@@ -1996,7 +2125,7 @@ ATSUSetLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2007,11 +2136,14 @@ ATSUGetLineControl(
   ATSUAttributeTag        iTag,
   ByteCount               iExpectedValueSize,
   ATSUAttributeValuePtr   oValue,                   /* can be NULL */
-  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *             oActualValueSize)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetAllLineControls()
+ *  ATSUGetAllLineControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringGetAttributes instead.
  *  
  *  Summary:
  *    Obtains an array of line control attribute tags and value sizes
@@ -2071,7 +2203,7 @@ ATSUGetLineControl(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2081,11 +2213,14 @@ ATSUGetAllLineControls(
   UniCharArrayOffset   iLineStart,
   ATSUAttributeInfo    oAttributeInfoArray[],        /* can be NULL */
   ItemCount            iTagValuePairArraySize,
-  ItemCount *          oTagValuePairCount)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *          oTagValuePairCount)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearLineControls()
+ *  ATSUClearLineControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Restores default values to the specified line control attributes
@@ -2124,7 +2259,7 @@ ATSUGetAllLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2133,7 +2268,7 @@ ATSUClearLineControls(
   ATSUTextLayout           iTextLayout,
   UniCharArrayOffset       iLineStart,
   ItemCount                iTagCount,
-  const ATSUAttributeTag   iTag[])            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUAttributeTag   iTag[])            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -2142,7 +2277,10 @@ ATSUClearLineControls(
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUSetRunStyle()
+ *  ATSUSetRunStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Summary:
  *    Defines a style run by associating style information with a run
@@ -2197,7 +2335,7 @@ ATSUClearLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2206,12 +2344,15 @@ ATSUSetRunStyle(
   ATSUTextLayout       iTextLayout,
   ATSUStyle            iStyle,
   UniCharArrayOffset   iRunStart,
-  UniCharCount         iRunLength)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount         iRunLength)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetRunStyle()
+ *  ATSUGetRunStyle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetGlyphRuns instead.
  *  
  *  Summary:
  *    Obtains style run information for a character offset in a run of
@@ -2264,7 +2405,7 @@ ATSUSetRunStyle(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2274,11 +2415,14 @@ ATSUGetRunStyle(
   UniCharArrayOffset    iOffset,
   ATSUStyle *           oStyle,
   UniCharArrayOffset *  oRunStart,
-  UniCharCount *        oRunLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount *        oRunLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetContinuousAttributes()
+ *  ATSUGetContinuousAttributes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTParagraphStyleCreate instead.
  *  
  *  Summary:
  *    Obtains the style attribute values that are continuous over a
@@ -2317,7 +2461,7 @@ ATSUGetRunStyle(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2326,14 +2470,17 @@ ATSUGetContinuousAttributes(
   ATSUTextLayout       iTextLayout,
   UniCharArrayOffset   iOffset,
   UniCharCount         iLength,
-  ATSUStyle            oStyle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUStyle            oStyle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI tab support                                                           */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUSetTabArray()
+ *  ATSUSetTabArray()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTParagraphStyleCreate instead.
  *  
  *  Summary:
  *    Sets a tab ruler for a text layout object.
@@ -2364,7 +2511,7 @@ ATSUGetContinuousAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2372,11 +2519,14 @@ extern OSStatus
 ATSUSetTabArray(
   ATSUTextLayout   iTextLayout,
   const ATSUTab    iTabs[],
-  ItemCount        iTabCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount        iTabCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetTabArray()
+ *  ATSUGetTabArray()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTParagraphStyleCreate instead.
  *  
  *  Summary:
  *    Retrieves the tab ruler associated with a text layout object.
@@ -2419,7 +2569,7 @@ ATSUSetTabArray(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2428,14 +2578,17 @@ ATSUGetTabArray(
   ATSUTextLayout   iTextLayout,
   ItemCount        iMaxTabCount,
   ATSUTab          oTabs[],            /* can be NULL */
-  ItemCount *      oTabCount)          /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount *      oTabCount)          /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /* ATSUI font fallback object functions                                         */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCreateFontFallbacks()
+ *  ATSUCreateFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Creates an opaque object that can be set to contain a font list
@@ -2462,16 +2615,19 @@ ATSUGetTabArray(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSUCreateFontFallbacks(ATSUFontFallbacks * oFontFallback)    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+ATSUCreateFontFallbacks(ATSUFontFallbacks * oFontFallback)    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUDisposeFontFallbacks()
+ *  ATSUDisposeFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Disposes of an ATSUDisposeFontFallbacks object.
@@ -2492,16 +2648,19 @@ ATSUCreateFontFallbacks(ATSUFontFallbacks * oFontFallback)    AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSUDisposeFontFallbacks(ATSUFontFallbacks iFontFallbacks)    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+ATSUDisposeFontFallbacks(ATSUFontFallbacks iFontFallbacks)    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUSetObjFontFallbacks()
+ *  ATSUSetObjFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Assigns a font-search method and a font list to a font fallback
@@ -2547,7 +2706,7 @@ ATSUDisposeFontFallbacks(ATSUFontFallbacks iFontFallbacks)    AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2556,11 +2715,14 @@ ATSUSetObjFontFallbacks(
   ATSUFontFallbacks        iFontFallbacks,
   ItemCount                iFontFallbacksCount,
   const ATSUFontID         iFonts[],                  /* can be NULL */
-  ATSUFontFallbackMethod   iFontFallbackMethod)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ATSUFontFallbackMethod   iFontFallbackMethod)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetObjFontFallbacks()
+ *  ATSUGetObjFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithAttributes instead.
  *  
  *  Summary:
  *    Returns information about the current settings in an
@@ -2602,7 +2764,7 @@ ATSUSetObjFontFallbacks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2612,7 +2774,7 @@ ATSUGetObjFontFallbacks(
   ItemCount                 iMaxFontFallbacksCount,
   ATSUFontID                oFonts[],                     /* can be NULL */
   ATSUFontFallbackMethod *  oFontFallbackMethod,
-  ItemCount *               oActualFallbacksCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ItemCount *               oActualFallbacksCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -2621,7 +2783,10 @@ ATSUGetObjFontFallbacks(
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUMatchFontsToText()
+ *  ATSUMatchFontsToText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreateForString instead.
  *  
  *  Summary:
  *    Examines a text range for characters that cannot be drawn with
@@ -2701,7 +2866,7 @@ ATSUGetObjFontFallbacks(
  *    MacErrors.h for other possible error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2712,11 +2877,14 @@ ATSUMatchFontsToText(
   UniCharCount          iTextLength,
   ATSUFontID *          oFontID,
   UniCharArrayOffset *  oChangedOffset,
-  UniCharCount *        oChangedLength)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount *        oChangedLength)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUSetTransientFontMatching()
+ *  ATSUSetTransientFontMatching()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Sets the current transient font matching state for a given layout.
@@ -2744,19 +2912,22 @@ ATSUMatchFontsToText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUSetTransientFontMatching(
   ATSUTextLayout   iTextLayout,
-  Boolean          iTransientFontMatching)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          iTransientFontMatching)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetTransientFontMatching()
+ *  ATSUGetTransientFontMatching()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Obtains the current transient font matching state for a given
@@ -2785,14 +2956,14 @@ ATSUSetTransientFontMatching(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUGetTransientFontMatching(
   ATSUTextLayout   iTextLayout,
-  Boolean *        oTransientFontMatching)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *        oTransientFontMatching)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Functions listed beyond this point are either deprecated or not recommended */
@@ -2804,7 +2975,7 @@ ATSUGetTransientFontMatching(
  *  ATSUSetFontFallbacks()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUSetObjFontFallbacks object API instead.
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Sets font fallback behavior on a global basis.
@@ -2837,7 +3008,7 @@ ATSUSetFontFallbacks(
  *  ATSUGetFontFallbacks()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUGetObjFontFallbacks object API instead.
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Gets the current global font fallback behavior.
@@ -2874,7 +3045,10 @@ ATSUGetFontFallbacks(
  *  ATSUCreateTextLayoutWithTextHandle()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUCreateTextLayoutWithTextPtr instead.
+ *    Use CTTypesetterCreateWithAttributedString,
+ *    CTTypesetterCreateWithAttributedStringAndOptions,
+ *    CTLineCreateWithAttributedString, CTLineCreateTruncatedLine, or
+ *    CTLineCreateJustifiedLine instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
@@ -2901,7 +3075,7 @@ ATSUCreateTextLayoutWithTextHandle(
  *  ATSUSetTextHandleLocation()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUSetTextPointerLocation instead.
+ *    Use CoreText API and CFAttributedStringSetAttributes instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use

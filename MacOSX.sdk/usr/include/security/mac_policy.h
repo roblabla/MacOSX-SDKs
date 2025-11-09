@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2007-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -528,6 +528,10 @@ typedef int mpo_cred_label_internalize_t(
   The final label, execlabel, corresponds to a label supplied by a
   user space application through the use of the mac_execve system call.
 
+  If non-NULL, the value pointed to by disjointp will be set to 0 to
+  indicate that the old and new credentials are not disjoint, or 1 to
+  indicate that they are.
+
   The vnode lock is held during this operation.  No changes should be
   made to the old credential structure.
 */
@@ -537,7 +541,8 @@ typedef void mpo_cred_label_update_execve_t(
 	struct vnode *vp,
 	struct label *vnodelabel,
 	struct label *scriptvnodelabel,
-	struct label *execlabel
+	struct label *execlabel,
+	int *disjointp
 );
 /**
   @brief Update a credential label
@@ -2956,6 +2961,23 @@ typedef int mpo_proc_check_fork_t(
 	struct proc *proc
 );
 /**
+  @brief Access control over pid_suspend and pid_resume
+  @param cred Subject credential
+  @param proc Subject process trying to run pid_suspend or pid_resume 
+  @param sr Call is suspend (0) or resume (1)
+
+  Determine whether the subject identified is allowed to suspend or resume
+  other processes.
+
+  @return Return 0 if access is granted, otherwise an appropriate value for
+  errno should be returned.
+*/
+typedef int mpo_proc_check_suspend_resume_t(
+	kauth_cred_t cred,
+	struct proc *proc,
+	int sr
+);
+/**
   @brief Access control check for retrieving audit information
   @param cred Subject credential
 
@@ -3054,7 +3076,7 @@ typedef int mpo_proc_check_sched_t(
 */
 typedef int mpo_proc_check_setaudit_t(
 	kauth_cred_t cred,
-	struct auditinfo *ai
+	struct auditinfo_addr *ai
 );
 /**
   @brief Access control check for setting audit user ID
@@ -4408,6 +4430,21 @@ typedef int mpo_proc_check_get_task_t(
 	struct proc *p
 );
 /**
+ @brief Privilege check for a process to run invalid
+ @param proc Object process
+ 
+ Determine whether the process may execute even though the system determined
+ that it is untrusted (eg unidentified / modified code).
+ 
+ @return Return 0 if access is granted, otherwise an appropriate value for
+ errno should be returned.
+ */
+typedef int mac_proc_check_run_cs_invalid_t(
+	struct proc *p
+);
+
+
+/**
   @brief Assign a label to a new kernelspace Mach task
   @param kproc New task
   @param tasklabel Label for new task
@@ -4714,6 +4751,13 @@ typedef int mpo_vnode_check_exec_t(
 	struct componentname *cnp,
 	u_int *csflags
 );
+/**
+  @brief Access control check after determining the code directory hash
+ */
+typedef int mpo_vnode_check_signature_t(struct vnode *vp,  struct label *label, 
+					unsigned char *sha1, void *signature, 
+					int size);
+
 /**
   @brief Access control check for retrieving file attributes
   @param cred Subject credential
@@ -5249,6 +5293,47 @@ typedef int mpo_vnode_check_truncate_t(
 	struct label *label
 );
 /**
+  @brief Access control check for binding UNIX domain socket
+  @param cred Subject credential
+  @param dvp Directory vnode
+  @param dlabel Policy label for dvp
+  @param cnp Component name for dvp
+  @param vap vnode attributes for vap
+
+  Determine whether the subject identified by the credential can perform a
+  bind operation on a UNIX domain socket with the passed parent directory,
+  passed name information, and passed attribute information.
+
+  @return Return 0 if access is granted, otherwise an appropriate value for
+  errno should be returned. Suggested failure: EACCES for label mismatch or
+  EPERM for lack of privilege.
+*/
+typedef int mpo_vnode_check_uipc_bind_t(
+	kauth_cred_t cred,
+	struct vnode *dvp,
+	struct label *dlabel,
+	struct componentname *cnp,
+	struct vnode_attr *vap
+);
+/**
+  @brief Access control check for connecting UNIX domain socket
+  @param cred Subject credential
+  @param vp Object vnode
+  @param label Policy label associated with vp
+
+  Determine whether the subject identified by the credential can perform a
+  connect operation on the passed UNIX domain socket vnode.
+
+  @return Return 0 if access is granted, otherwise an appropriate value for
+  errno should be returned. Suggested failure: EACCES for label mismatch or
+  EPERM for lack of privilege.
+*/
+typedef int mpo_vnode_check_uipc_connect_t(
+	kauth_cred_t cred,
+	struct vnode *vp,
+	struct label *label
+);
+/**
   @brief Access control check for deleting vnode
   @param cred Subject credential
   @param dvp Parent directory vnode
@@ -5698,6 +5783,7 @@ typedef void mpo_reserved_hook_t(void);
 /*!
   \struct mac_policy_ops
 */
+#define MAC_POLICY_OPS_VERSION 2 /* inc when new reserved slots are taken */
 struct mac_policy_ops {
 	mpo_audit_check_postselect_t		*mpo_audit_check_postselect;
 	mpo_audit_check_preselect_t		*mpo_audit_check_preselect;
@@ -6003,11 +6089,11 @@ struct mac_policy_ops {
 	mpo_vnode_label_update_extattr_t	*mpo_vnode_label_update_extattr;
 	mpo_vnode_label_update_t		*mpo_vnode_label_update;
 	mpo_vnode_notify_create_t		*mpo_vnode_notify_create;
-	mpo_reserved_hook_t			*mpo_reserved0;
-	mpo_reserved_hook_t			*mpo_reserved1;
-	mpo_reserved_hook_t			*mpo_reserved2;
-	mpo_reserved_hook_t			*mpo_reserved3;
-	mpo_reserved_hook_t			*mpo_reserved4;
+	mpo_vnode_check_signature_t		*mpo_vnode_check_signature;
+	mpo_vnode_check_uipc_bind_t		*mpo_vnode_check_uipc_bind;
+	mpo_vnode_check_uipc_connect_t		*mpo_vnode_check_uipc_connect;
+	mac_proc_check_run_cs_invalid_t		*mpo_proc_check_run_cs_invalid;
+	mpo_proc_check_suspend_resume_t		*mpo_proc_check_suspend_resume;
 	mpo_reserved_hook_t			*mpo_reserved5;
 	mpo_reserved_hook_t			*mpo_reserved6;
 	mpo_reserved_hook_t			*mpo_reserved7;
@@ -6216,6 +6302,14 @@ int	mac_vnop_removexattr(struct vnode *, const char *);
 
 
 #define	LABEL_TO_SLOT(l, s)	(l)->l_perpolicy[s]
+
+/*
+ * Policy interface to map a struct label pointer to per-policy data.
+ * Typically, policies wrap this in their own accessor macro that casts an
+ * intptr_t to a policy-specific data type.
+ */
+intptr_t        mac_label_get(struct label *l, int slot);
+void            mac_label_set(struct label *l, int slot, intptr_t v);
 
 #define	mac_get_mpc(h)		(mac_policy_list.entries[h].mpc)
 

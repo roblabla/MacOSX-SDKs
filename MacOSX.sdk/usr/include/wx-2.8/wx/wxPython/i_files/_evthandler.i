@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     9-Aug-2003
-// RCS-ID:      $Id: _evthandler.i,v 1.15 2006/11/22 01:57:44 RD Exp $
+// RCS-ID:      $Id: _evthandler.i 51607 2008-02-08 19:21:48Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -121,7 +121,7 @@ public:
 
         def Unbind(self, event, source=None, id=wx.ID_ANY, id2=wx.ID_ANY):
             """
-            Disconencts the event handler binding for event from self.
+            Disconnects the event handler binding for event from self.
             Returns True if successful.
             """
             if source is not None:
@@ -133,6 +133,64 @@ public:
     %property(NextHandler, GetNextHandler, SetNextHandler, doc="See `GetNextHandler` and `SetNextHandler`");
     %property(PreviousHandler, GetPreviousHandler, SetPreviousHandler, doc="See `GetPreviousHandler` and `SetPreviousHandler`");
     
+};
+
+//---------------------------------------------------------------------------
+// A class derived from wxEvtHandler that allows the ProcessEvent method to be
+// overridden in Python.
+
+%{ // The Python-aware C++ class
+class wxPyEvtHandler : public wxEvtHandler
+{
+    DECLARE_DYNAMIC_CLASS(wxPyEvtHandler)
+public:
+    wxPyEvtHandler() : wxEvtHandler() {}
+
+    virtual bool ProcessEvent(wxEvent& event)
+    {
+        bool found;
+        bool rval;
+        wxString className = event.GetClassInfo()->GetClassName();
+
+        wxPyBlock_t blocked = wxPyBeginBlockThreads();
+        if ((found = wxPyCBH_findCallback(m_myInst, "ProcessEvent"))) {
+            PyObject* arg = wxPyConstructObject((void*)&event, className);
+            rval = wxPyCBH_callCallback(m_myInst, Py_BuildValue("(O)",arg));
+            Py_DECREF(arg);
+        }
+        wxPyEndBlockThreads(blocked);        
+        if (! found)
+            rval = wxEvtHandler::ProcessEvent(event);
+        return rval;
+    }
+    
+    PYPRIVATE;
+};
+
+IMPLEMENT_DYNAMIC_CLASS(wxPyEvtHandler, wxEvtHandler)
+%}
+
+
+
+// Let SWIG see this class too
+DocStr(wxPyEvtHandler,
+"The wx.PyEvtHandler class can be used to intercept calls to the
+`ProcessEvent` method.  Simply derive a new class from this one,
+override ProcessEvent, and then push an instance of the class onto the
+event handler chain for a window using `wx.Window.PushEventHandler`.", "");
+class wxPyEvtHandler : public wxEvtHandler
+{
+public:
+    %pythonAppend wxPyEvtHandler   "self._setOORInfo(self);" setCallbackInfo(PyEvtHandler)
+    wxPyEvtHandler();
+
+    void _setCallbackInfo(PyObject* self, PyObject* _class);    
+    
+    DocDeclStr(
+        virtual bool , ProcessEvent(wxEvent& event),
+        "Override this method to intercept the events being sent to the window.
+The default implementation searches the event tables and calls event
+handler functions if matching event bindings are found.", "");
 };
 
 //---------------------------------------------------------------------------

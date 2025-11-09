@@ -3,7 +3,7 @@
 // Purpose:     wxXmlDocument - XML parser & data holder class
 // Author:      Vaclav Slavik
 // Created:     2000/03/05
-// RCS-ID:      $Id: xml.h,v 1.9 2006/09/11 11:08:45 VS Exp $
+// RCS-ID:      $Id: xml.h 52976 2008-04-02 10:06:54Z VS $
 // Copyright:   (c) 2000 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,12 +28,12 @@
     #define WXDLLIMPEXP_XML
 #endif
 
-class WXDLLIMPEXP_XML wxXmlNode;
-class WXDLLIMPEXP_XML wxXmlProperty;
-class WXDLLIMPEXP_XML wxXmlDocument;
-class WXDLLIMPEXP_XML wxXmlIOHandler;
-class WXDLLIMPEXP_BASE wxInputStream;
-class WXDLLIMPEXP_BASE wxOutputStream;
+class WXDLLIMPEXP_FWD_XML wxXmlNode;
+class WXDLLIMPEXP_FWD_XML wxXmlProperty;
+class WXDLLIMPEXP_FWD_XML wxXmlDocument;
+class WXDLLIMPEXP_FWD_XML wxXmlIOHandler;
+class WXDLLIMPEXP_FWD_BASE wxInputStream;
+class WXDLLIMPEXP_FWD_BASE wxOutputStream;
 
 
 // Represents XML node type.
@@ -115,7 +115,10 @@ public:
     wxXmlNode(wxXmlNodeType type, const wxString& name,
               const wxString& content = wxEmptyString);
     virtual void AddChild(wxXmlNode *child);
-    virtual bool InsertChild(wxXmlNode *child, wxXmlNode *before_node);
+    virtual bool InsertChild(wxXmlNode *child, wxXmlNode *followingNode);
+#if wxABI_VERSION >= 20808
+    bool InsertChildAfter(wxXmlNode *child, wxXmlNode *precedingNode);
+#endif
     virtual bool RemoveChild(wxXmlNode *child);
     virtual void AddProperty(const wxString& name, const wxString& value);
     virtual bool DeleteProperty(const wxString& name);

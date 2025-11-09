@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     03/02/99
-// RCS-ID:      $Id: print.h,v 1.7 2006/10/16 09:29:50 ABX Exp $
+// RCS-ID:      $Id: print.h 42046 2006-10-16 09:30:01Z ABX $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

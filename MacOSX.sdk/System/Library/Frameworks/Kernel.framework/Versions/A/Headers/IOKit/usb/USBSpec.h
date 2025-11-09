@@ -147,7 +147,8 @@ enum {
     kUSB100mA           = 50,
     kUSBAtrBusPowered   = 0x80,
     kUSBAtrSelfPowered  = 0x40,
-    kUSBAtrRemoteWakeup = 0x20
+    kUSBAtrRemoteWakeup = 0x20,
+	kUSB2MaxPowerPerPort = 500
 };
 
     /*!
@@ -209,12 +210,13 @@ enum {
 enum {
     kUSBCompositeClass          	= 0,
     kUSBCommClass               	= 2,		// Deprecated
-    kUSBCommunicationClass		= 2,	
+    kUSBCommunicationClass			= 2,	
     kUSBHubClass                	= 9,
     kUSBDataClass               	= 10,
-    kUSBDiagnosticClass			= 220,
+	kUSBPersonalHealthcareClass		= 15,
+    kUSBDiagnosticClass				= 220,
     kUSBWirelessControllerClass 	= 224,
-    kUSBMiscellaneousClass		= 239,
+    kUSBMiscellaneousClass			= 239,
     kUSBApplicationSpecificClass 	= 254,
     kUSBVendorSpecificClass     	= 255
 };
@@ -224,30 +226,32 @@ enum {
  @discussion Constants for Interface classes (bInterfaceClass).
  */
 enum {
-    kUSBAudioClass             			= 1,		// Deprecated
-    kUSBAudioInterfaceClass			= 1,
+    kUSBAudioClass							= 1,		// Deprecated
+    kUSBAudioInterfaceClass					= 1,
 
     kUSBCommunicationControlInterfaceClass	= 2,
     kUSBCommunicationDataInterfaceClass		= 10,
 
-    kUSBHIDClass                		= 3,
-    kUSBHIDInterfaceClass			= 3,
+    kUSBHIDClass							= 3,
+    kUSBHIDInterfaceClass					= 3,
 
-    kUSBPhysicalInterfaceClass			= 5,
+    kUSBPhysicalInterfaceClass				= 5,
 
-    kUSBImageInterfaceClass			= 6,
+    kUSBImageInterfaceClass					= 6,
 
-    kUSBPrintingClass           		= 7,		// Deprecated
-    kUSBPrintingInterfaceClass			= 7,
+    kUSBPrintingClass						= 7,		// Deprecated
+    kUSBPrintingInterfaceClass				= 7,
 
-    kUSBMassStorageClass        		= 8,		// Deprecated
-    kUSBMassStorageInterfaceClass		= 8,
+    kUSBMassStorageClass					= 8,		// Deprecated
+    kUSBMassStorageInterfaceClass			= 8,
 
-    kUSBChipSmartCardInterfaceClass		= 11,
+    kUSBChipSmartCardInterfaceClass			= 11,
     
-    kUSBContentSecurityInterfaceClass 		= 12,
+    kUSBContentSecurityInterfaceClass 		= 13,
     
-    kUSBVideoInterfaceClass			= 14,
+    kUSBVideoInterfaceClass					= 14,
+	
+	kUSBPersonalHealthcareInterfaceClass	= 15,
     
     kUSBDiagnosticDeviceInterfaceClass 		= 220,
 
@@ -368,6 +372,16 @@ enum {
 };
 
 /*!
+ @enum Printer Class Requests
+ @discussion The bRequest parameter for Printing Class Sepcific Requests
+ */
+enum {
+	kUSPrintingClassGetDeviceID		= 0,
+	kUSPrintingClassGePortStatus	= 1,
+	kUSPrintingClassSoftReset		= 2
+};
+
+	/*!
 @enum Endpoint Descriptor bits
  @discussion Bit definitions for endpoint descriptor fields
  */
@@ -384,10 +398,37 @@ enum {
     kUSBEndpointbmAttributesUsageTypeShift		= 4
 };
 
-    /*!
-    @enum Property Names
-    @discussion USB property names taken from the field names in various descriptors
-*/
+	/*!
+	 @defineblock USB Descriptor and IORegistry constants
+	 @discussion 	Various constants used to describe the fields in the various USB Device Descriptors and IORegistry names used for some of those fields 
+	 
+	 @define	kUSBDeviceClass				The field in the USB Device Descriptor corresponding to the device class
+	 @define	kUSBDeviceSubClass			The field in the USB Device Descriptor corresponding to the device sub class
+	 @define	kUSBDeviceProtocol			The field in the USB Device Descriptor corresponding to the device protocol
+	 @define	kUSBDeviceMaxPacketSize		The field in the USB Device Descriptor corresponding to the maximum packet size for endpoint 0
+	 @define	kUSBVendorID				The field in the USB Device Descriptor corresponding to the device USB Vendor ID
+	 @define	kUSBVendorName				Deprecated.  Use kUSBVendorID 
+	 @define	kUSBProductID				The field in the USB Device Descriptor corresponding to the device USB Product ID
+	 @define	kUSBProductName				Deprecated.  Use kUSBProductID
+	 @define	kUSBDeviceReleaseNumber		The field in the USB Device Descriptor corresponding to the device release version
+	 @define	kUSBManufacturerStringIndex	The field in the USB Device Descriptor corresponding to the index for the manufacturer's string
+	 @define	kUSBProductStringIndex		The field in the USB Device Descriptor corresponding to the index for the product name's string
+	 @define	kUSBSerialNumberStringIndex	The field in the USB Device Descriptor corresponding to the index for the serial number's string
+	 @define	kUSBDeviceNumConfigs		The field in the USB Configuration Descriptor corresponding to the number of configurations
+	 @define	kUSBInterfaceNumber			The field in the USB Configuration Descriptor corresponding to the number of configurations
+	 @define	kUSBAlternateSetting		The field in the USB Configuration Descriptor corresponding to the number of configurations
+	 @define	kUSBNumEndpoints			The field in the USB Configuration Descriptor corresponding to the number of configurations
+	 @define	kUSBInterfaceClass			The field in the USB Interface Descriptor corresponding to the interface class
+	 @define	kUSBInterfaceSubClass		The field in the USB Interface Descriptor corresponding to the interface sub class
+	 @define	kUSBInterfaceProtocol		The field in the USB Interface Descriptor corresponding to the interface protocol
+	 @define	kUSBInterfaceStringIndex	The field in the USB Interface Descriptor corresponding to the index for the interface name's string
+	 @define	kUSBConfigurationValue		The field in the USB Interface Descriptor corresponding to the configuration
+	 @define	kUSBProductString			IORegistry key for the device's USB Product string
+	 @define	kUSBVendorString			IORegistry key for the device's USB manufacturer string
+	 @define	kUSBSerialNumberString		IORegistry key for the device's USB serial number string
+	 @define	kUSB1284DeviceID			IORegistry key for the 1284 Device ID of a printer
+	 
+	 */
 #define kUSBDeviceClass             "bDeviceClass"
 #define kUSBDeviceSubClass          "bDeviceSubClass"
 #define kUSBDeviceProtocol          "bDeviceProtocol"
@@ -409,7 +450,20 @@ enum {
 #define kUSBInterfaceProtocol       "bInterfaceProtocol"
 #define kUSBInterfaceStringIndex    "iInterface"
 #define kUSBConfigurationValue      "bConfigurationValue"
-
+#define kUSBProductString			"USB Product Name"	
+#define kUSBVendorString			"USB Vendor Name"
+#define kUSBSerialNumberString		"USB Serial Number"
+#define kUSB1284DeviceID			"1284 Device ID"
+ /*! @/defineblock */
+	
+	/*!
+    @enum Apple USB Vendor ID
+    @discussion Apple's vendor ID, assigned by the USB-IF
+*/
+enum {
+	kAppleVendorID      = 0x05AC
+};
+	
 #ifdef __cplusplus
 }       
 #endif

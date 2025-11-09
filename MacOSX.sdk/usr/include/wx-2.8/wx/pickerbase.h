@@ -5,7 +5,7 @@
 // Modified by:
 // Created:     14/4/2006
 // Copyright:   (c) Vadim Zeitlin, Francesco Montorsi
-// RCS-ID:      $Id: pickerbase.h,v 1.12 2007/01/10 13:45:00 VZ Exp $
+// RCS-ID:      $Id: pickerbase.h 49804 2007-11-10 01:09:42Z VZ $
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -16,8 +16,8 @@
 #include "wx/sizer.h"
 #include "wx/containr.h"
 
-class WXDLLIMPEXP_CORE wxTextCtrl;
-class WXDLLEXPORT wxToolTip;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
 extern WXDLLEXPORT_DATA(const wxChar) wxButtonNameStr[];
 

@@ -2,7 +2,7 @@
 // Name:        wx/image.h
 // Purpose:     wxImage class
 // Author:      Robert Roebling
-// RCS-ID:      $Id: image.h,v 1.123 2006/10/30 19:26:17 VZ Exp $
+// RCS-ID:      $Id: image.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Robert Roebling
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -61,9 +61,9 @@ const unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxImageHandler;
-class WXDLLEXPORT wxImage;
-class WXDLLEXPORT wxPalette;
+class WXDLLIMPEXP_FWD_CORE wxImageHandler;
+class WXDLLIMPEXP_FWD_CORE wxImage;
+class WXDLLIMPEXP_FWD_CORE wxPalette;
 
 //-----------------------------------------------------------------------------
 // wxVariant support
@@ -423,7 +423,7 @@ protected:
     virtual wxObjectRefData* CloneRefData(const wxObjectRefData* data) const;
 
 private:
-    friend class WXDLLEXPORT wxImageHandler;
+    friend class WXDLLIMPEXP_FWD_CORE wxImageHandler;
 
     DECLARE_DYNAMIC_CLASS(wxImage)
 };

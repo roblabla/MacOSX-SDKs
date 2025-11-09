@@ -3,9 +3,9 @@
  
      Contains:   ATSUI font handling functions.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,11 @@ extern "C" {
 #endif
 
 /*
- *  ATSUSetFontFeatures()
+ *  ATSUSetFontFeatures()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithFeature,
+ *    CTFontDescriptorCreateWithAttributes instead.
  *  
  *  Summary:
  *    Sets font features in a style object.
@@ -83,7 +87,7 @@ extern "C" {
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -92,12 +96,15 @@ ATSUSetFontFeatures(
   ATSUStyle                       iStyle,
   ItemCount                       iFeatureCount,
   const ATSUFontFeatureType       iType[],
-  const ATSUFontFeatureSelector   iSelector[])                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUFontFeatureSelector   iSelector[])                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetFontFeature()
+ *  ATSUGetFontFeature()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttribute instead.
  *  
  *  Summary:
  *    Obtains the font feature corresponding to an index into an array
@@ -144,7 +151,7 @@ ATSUSetFontFeatures(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -153,11 +160,14 @@ ATSUGetFontFeature(
   ATSUStyle                  iStyle,
   ItemCount                  iFeatureIndex,
   ATSUFontFeatureType *      oFeatureType,
-  ATSUFontFeatureSelector *  oFeatureSelector)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUFontFeatureSelector *  oFeatureSelector)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetAllFontFeatures()
+ *  ATSUGetAllFontFeatures()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttribute instead.
  *  
  *  Summary:
  *    Obtains the font features of a style object that are not at
@@ -222,7 +232,7 @@ ATSUGetFontFeature(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -232,11 +242,14 @@ ATSUGetAllFontFeatures(
   ItemCount                 iMaximumFeatureCount,
   ATSUFontFeatureType       oFeatureType[],             /* can be NULL */
   ATSUFontFeatureSelector   oFeatureSelector[],         /* can be NULL */
-  ItemCount *               oActualFeatureCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *               oActualFeatureCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearFontFeatures()
+ *  ATSUClearFontFeatures()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Restores default settings to the specified font features of a
@@ -290,7 +303,7 @@ ATSUGetAllFontFeatures(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -299,14 +312,18 @@ ATSUClearFontFeatures(
   ATSUStyle                       iStyle,
   ItemCount                       iFeatureCount,
   const ATSUFontFeatureType       iType[],             /* can be NULL */
-  const ATSUFontFeatureSelector   iSelector[])         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUFontFeatureSelector   iSelector[])         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font variations                                                             */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUSetVariations()
+ *  ATSUSetVariations()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCreateCopyWithVariation,
+ *    CTFontDescriptorCreateWithAttributes instead.
  *  
  *  Summary:
  *    Sets font variation axes and values in a style object.
@@ -355,7 +372,7 @@ ATSUClearFontFeatures(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -364,11 +381,14 @@ ATSUSetVariations(
   ATSUStyle                      iStyle,
   ItemCount                      iVariationCount,
   const ATSUFontVariationAxis    iAxes[],
-  const ATSUFontVariationValue   iValue[])                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUFontVariationValue   iValue[])                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontVariationValue()
+ *  ATSUGetFontVariationValue()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttribute instead.
  *  
  *  Summary:
  *    Obtains the current value for a single font variation axis in a
@@ -408,7 +428,7 @@ ATSUSetVariations(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -416,11 +436,14 @@ extern OSStatus
 ATSUGetFontVariationValue(
   ATSUStyle                 iStyle,
   ATSUFontVariationAxis     iFontVariationAxis,
-  ATSUFontVariationValue *  oFontVariationValue)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUFontVariationValue *  oFontVariationValue)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetAllFontVariations()
+ *  ATSUGetAllFontVariations()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontDescriptorCopyAttribute instead.
  *  
  *  Summary:
  *    Obtains a style object's font variation values that are not at
@@ -481,7 +504,7 @@ ATSUGetFontVariationValue(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -491,11 +514,14 @@ ATSUGetAllFontVariations(
   ItemCount                iVariationCount,
   ATSUFontVariationAxis    oVariationAxes[],            /* can be NULL */
   ATSUFontVariationValue   oFontVariationValues[],      /* can be NULL */
-  ItemCount *              oActualVariationCount)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *              oActualVariationCount)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearFontVariations()
+ *  ATSUClearFontVariations()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API and CFRelease instead.
  *  
  *  Summary:
  *    Restores default values to the specified font variation axes of a
@@ -539,7 +565,7 @@ ATSUGetAllFontVariations(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -547,14 +573,17 @@ extern OSStatus
 ATSUClearFontVariations(
   ATSUStyle                     iStyle,
   ItemCount                     iAxisCount,
-  const ATSUFontVariationAxis   iAxis[])          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUFontVariationAxis   iAxis[])          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font ID's                                                                   */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUFontCount()
+ *  ATSUFontCount()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCollectionCreateFromAvailableFonts instead.
  *  
  *  Summary:
  *    Obtains the number of ATSUI-compatible fonts installed on a
@@ -592,16 +621,21 @@ ATSUClearFontVariations(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUFontCount(ItemCount * oFontCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUFontCount(ItemCount * oFontCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontIDs()
+ *  ATSUGetFontIDs()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCollectionCreateFromAvailableFonts
+ *    CTFontCollectionCreateWithFontDescriptors, or
+ *    CTFontCollectionCreateCopyWithFontDescriptors instead.
  *  
  *  Summary:
  *    Obtains a list of all the ATSUI-compatible fonts installed on the
@@ -636,7 +670,7 @@ ATSUFontCount(ItemCount * oFontCount)                         AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -644,11 +678,14 @@ extern OSStatus
 ATSUGetFontIDs(
   ATSUFontID   oFontIDs[],
   ItemCount    iArraySize,
-  ItemCount *  oFontCount)       /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  oFontCount)       /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUFONDtoFontID()
+ *  ATSUFONDtoFontID()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Finds the ATSUI font ID that corresponds to a font family number,
@@ -663,7 +700,7 @@ ATSUGetFontIDs(
  *    non-deprecated parts of ATS and ATSUI.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -671,11 +708,14 @@ extern OSStatus
 ATSUFONDtoFontID(
   short         iFONDNumber,
   Style         iFONDStyle,
-  ATSUFontID *  oFontID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUFontID *  oFontID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUFontIDtoFOND()
+ *  ATSUFontIDtoFOND()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Finds the font family number and style that correspond to an
@@ -690,7 +730,7 @@ ATSUFONDtoFontID(
  *    non-deprecated parts of ATS and ATSUI.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -698,14 +738,19 @@ extern OSStatus
 ATSUFontIDtoFOND(
   ATSUFontID   iFontID,
   short *      oFONDNumber,
-  Style *      oFONDStyle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Style *      oFONDStyle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font names                                                                  */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCountFontNames()
+ *  ATSUCountFontNames()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyPostScriptName, CTFontCopyFamilyName,
+ *    CTFontCopyFullName, CTFontCopyDisplayName, CTFontCopyName, or
+ *    CTFontCopyLocalizedName instead.
  *  
  *  Summary:
  *    Obtains the number of font names that correspond to a given ATSUI
@@ -736,18 +781,23 @@ ATSUFontIDtoFOND(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCountFontNames(
   ATSUFontID   iFontID,
-  ItemCount *  oFontNameCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  oFontNameCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetIndFontName()
+ *  ATSUGetIndFontName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyPostScriptName, CTFontCopyFamilyName,
+ *    CTFontCopyFullName, CTFontCopyDisplayName, CTFontCopyName, or
+ *    CTFontCopyLocalizedName instead.
  *  
  *  Summary:
  *    Obtains a name string, name code, platform, script, and language
@@ -827,7 +877,7 @@ ATSUCountFontNames(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -841,11 +891,16 @@ ATSUGetIndFontName(
   FontNameCode *      oFontNameCode,            /* can be NULL */
   FontPlatformCode *  oFontNamePlatform,        /* can be NULL */
   FontScriptCode *    oFontNameScript,          /* can be NULL */
-  FontLanguageCode *  oFontNameLanguage)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontLanguageCode *  oFontNameLanguage)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUFindFontName()
+ *  ATSUFindFontName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyPostScriptName, CTFontCopyFamilyName,
+ *    CTFontCopyFullName, CTFontCopyDisplayName, CTFontCopyName, or
+ *    CTFontCopyLocalizedName instead.
  *  
  *  Summary:
  *    Obtains a name string and index value for the first font in a
@@ -932,7 +987,7 @@ ATSUGetIndFontName(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -946,11 +1001,14 @@ ATSUFindFontName(
   ByteCount          iMaximumNameLength,
   Ptr                oName,                    /* can be NULL */
   ByteCount *        oActualNameLength,        /* can be NULL */
-  ItemCount *        oFontNameIndex)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *        oFontNameIndex)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUFindFontFromName()
+ *  ATSUFindFontFromName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCreateWithName instead.
  *  
  *  Summary:
  *    Obtains an ATSUI font ID for the first font in a name table that
@@ -1008,7 +1066,7 @@ ATSUFindFontName(
  *    possible error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1020,14 +1078,17 @@ ATSUFindFontFromName(
   FontPlatformCode   iFontNamePlatform,
   FontScriptCode     iFontNameScript,
   FontLanguageCode   iFontNameLanguage,
-  ATSUFontID *       oFontID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUFontID *       oFontID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font features                                                               */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCountFontFeatureTypes()
+ *  ATSUCountFontFeatureTypes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyFeatures, CTFontCopyFeatureSettings instead.
  *  
  *  Summary:
  *    Obtains the number of available feature types in a font.
@@ -1053,18 +1114,21 @@ ATSUFindFontFromName(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCountFontFeatureTypes(
   ATSUFontID   iFontID,
-  ItemCount *  oTypeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  oTypeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUCountFontFeatureSelectors()
+ *  ATSUCountFontFeatureSelectors()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyFeatures, CTFontCopyFeatureSettings instead.
  *  
  *  Summary:
  *    Obtains the number of available feature selectors for a given
@@ -1096,7 +1160,7 @@ ATSUCountFontFeatureTypes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1104,11 +1168,14 @@ extern OSStatus
 ATSUCountFontFeatureSelectors(
   ATSUFontID            iFontID,
   ATSUFontFeatureType   iType,
-  ItemCount *           oSelectorCount)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *           oSelectorCount)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontFeatureTypes()
+ *  ATSUGetFontFeatureTypes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyFeatures, CTFontCopyFeatureSettings instead.
  *  
  *  Summary:
  *    Obtains the available feature types of a font.
@@ -1158,7 +1225,7 @@ ATSUCountFontFeatureSelectors(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1167,11 +1234,14 @@ ATSUGetFontFeatureTypes(
   ATSUFontID            iFontID,
   ItemCount             iMaximumTypes,
   ATSUFontFeatureType   oTypes[],               /* can be NULL */
-  ItemCount *           oActualTypeCount)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *           oActualTypeCount)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontFeatureSelectors()
+ *  ATSUGetFontFeatureSelectors()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyFeatures, CTFontCopyFeatureSettings instead.
  *  
  *  Summary:
  *    Obtains the available feature selectors for a given feature type
@@ -1248,7 +1318,7 @@ ATSUGetFontFeatureTypes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1260,11 +1330,14 @@ ATSUGetFontFeatureSelectors(
   ATSUFontFeatureSelector   oSelectors[],                 /* can be NULL */
   Boolean                   oSelectorIsOnByDefault[],     /* can be NULL */
   ItemCount *               oActualSelectorCount,         /* can be NULL */
-  Boolean *                 oIsMutuallyExclusive)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                 oIsMutuallyExclusive)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontFeatureNameCode()
+ *  ATSUGetFontFeatureNameCode()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyFeatures, CTFontCopyFeatureSettings instead.
  *  
  *  Summary:
  *    btains the name code for a font's feature type or selector that
@@ -1311,7 +1384,7 @@ ATSUGetFontFeatureSelectors(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1320,14 +1393,17 @@ ATSUGetFontFeatureNameCode(
   ATSUFontID                iFontID,
   ATSUFontFeatureType       iType,
   ATSUFontFeatureSelector   iSelector,
-  FontNameCode *            oNameCode)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontNameCode *            oNameCode)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font tracking value & names                                                 */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCountFontTracking()
+ *  ATSUCountFontTracking()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyTable instead.
  *  
  *  Summary:
  *    Obtains the number of entries in the font tracking table that
@@ -1359,7 +1435,7 @@ ATSUGetFontFeatureNameCode(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1367,11 +1443,14 @@ extern OSStatus
 ATSUCountFontTracking(
   ATSUFontID                  iFontID,
   ATSUVerticalCharacterType   iCharacterOrientation,
-  ItemCount *                 oTrackingCount)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *                 oTrackingCount)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetIndFontTracking()
+ *  ATSUGetIndFontTracking()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyTable instead.
  *  
  *  Summary:
  *    Obtains the name code and tracking value for the font tracking
@@ -1416,7 +1495,7 @@ ATSUCountFontTracking(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1426,14 +1505,17 @@ ATSUGetIndFontTracking(
   ATSUVerticalCharacterType   iCharacterOrientation,
   ItemCount                   iTrackIndex,
   Fixed *                     oFontTrackingValue,
-  FontNameCode *              oNameCode)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontNameCode *              oNameCode)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font variations                                                             */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCountFontVariations()
+ *  ATSUCountFontVariations()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains the number of defined variation axes in a font.
@@ -1458,18 +1540,21 @@ ATSUGetIndFontTracking(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCountFontVariations(
   ATSUFontID   iFontID,
-  ItemCount *  oVariationCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  oVariationCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetIndFontVariation()
+ *  ATSUGetIndFontVariation()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains a variation axis and its value range for a font.
@@ -1514,7 +1599,7 @@ ATSUCountFontVariations(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1525,11 +1610,14 @@ ATSUGetIndFontVariation(
   ATSUFontVariationAxis *   oATSUFontVariationAxis,       /* can be NULL */
   ATSUFontVariationValue *  oMinimumValue,                /* can be NULL */
   ATSUFontVariationValue *  oMaximumValue,                /* can be NULL */
-  ATSUFontVariationValue *  oDefaultValue)                /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUFontVariationValue *  oDefaultValue)                /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontVariationNameCode()
+ *  ATSUGetFontVariationNameCode()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains the name code for the font variation that matches an
@@ -1563,7 +1651,7 @@ ATSUGetIndFontVariation(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1571,14 +1659,17 @@ extern OSStatus
 ATSUGetFontVariationNameCode(
   ATSUFontID              iFontID,
   ATSUFontVariationAxis   iAxis,
-  FontNameCode *          oNameCode)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontNameCode *          oNameCode)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  Font Instances                                                              */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCountFontInstances()
+ *  ATSUCountFontInstances()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains the number of defined font instances in a font.
@@ -1603,18 +1694,21 @@ ATSUGetFontVariationNameCode(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCountFontInstances(
   ATSUFontID   iFontID,
-  ItemCount *  oInstances)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  oInstances)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontInstance()
+ *  ATSUGetFontInstance()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains the font variation axis values for a font instance.
@@ -1683,7 +1777,7 @@ ATSUCountFontInstances(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1694,11 +1788,14 @@ ATSUGetFontInstance(
   ItemCount                iMaximumVariations,
   ATSUFontVariationAxis    oAxes[],                     /* can be NULL */
   ATSUFontVariationValue   oValues[],                   /* can be NULL */
-  ItemCount *              oActualVariationCount)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *              oActualVariationCount)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetFontInstanceNameCode()
+ *  ATSUGetFontInstanceNameCode()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFontCopyVariationAxes, CTFontCopyVariation instead.
  *  
  *  Summary:
  *    Obtains the name code for the font instance that matches an ASTUI
@@ -1735,7 +1832,7 @@ ATSUGetFontInstance(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1743,7 +1840,7 @@ extern OSStatus
 ATSUGetFontInstanceNameCode(
   ATSUFontID      iFontID,
   ItemCount       iInstanceIndex,
-  FontNameCode *  oNameCode)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontNameCode *  oNameCode)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */

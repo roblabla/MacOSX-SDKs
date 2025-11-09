@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: fontdlgg.h,v 1.24 2006/05/23 11:16:47 JS Exp $
+// RCS-ID:      $Id: fontdlgg.h 39286 2006-05-23 11:16:47Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

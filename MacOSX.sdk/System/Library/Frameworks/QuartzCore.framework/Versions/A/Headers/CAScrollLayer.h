@@ -43,7 +43,11 @@
 
 /* `scrollMode' values. */
 
-CA_EXTERN NSString * const kCAScrollNone AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAScrollVertically AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAScrollHorizontally AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAScrollBoth AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAScrollNone
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAScrollVertically
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAScrollHorizontally
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAScrollBoth
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);

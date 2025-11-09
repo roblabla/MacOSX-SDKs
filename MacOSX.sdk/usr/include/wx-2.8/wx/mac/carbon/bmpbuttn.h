@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: bmpbuttn.h,v 1.6 2006/01/16 14:59:31 MR Exp $
+// RCS-ID:      $Id: bmpbuttn.h 36891 2006-01-16 14:59:55Z MR $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

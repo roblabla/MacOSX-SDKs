@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2006-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,9 +28,9 @@
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // IOKit includes
 #include <IOKit/IOTypes.h>
@@ -44,9 +44,9 @@
 
 class IOMemoryDescriptor;
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOBDServices : public IOBDBlockStorageDevice
 {
@@ -70,10 +70,22 @@ public:
 		                          				 IOReturn		status,
 		                      					 UInt64 		actualByteCount );
 	
+	// Deprecated
 	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
 											UInt32					block,
 											UInt32					nblks,
 											IOStorageCompletion		completion );
+
+	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
+											UInt64					block,
+											UInt64					nblks,
+											IOStorageCompletion		completion );
+											
+	virtual IOReturn	doAsyncReadWrite ( 	IOMemoryDescriptor *	buffer,
+											UInt64					block,
+											UInt64					nblks,
+											IOStorageAttributes *   attributes,
+											IOStorageCompletion *	completion );
 
     virtual IOReturn	doEjectMedia ( void );
 
@@ -85,6 +97,10 @@ public:
     virtual IOReturn	doLockUnlockMedia ( bool doLock );
 
     virtual IOReturn	doSynchronizeCache ( void );
+	
+	virtual IOReturn	getWriteCacheState ( bool * enabled );
+	
+	virtual IOReturn	setWriteCacheState ( bool enabled );
         
     virtual char *		getVendorString ( void );
     
@@ -105,12 +121,8 @@ public:
     virtual IOReturn	reportPollRequirements ( 	bool * pollIsRequired,
     												bool * pollIsExpensive );
     
-    virtual IOReturn	reportMaxReadTransfer ( UInt64 blockSize, UInt64 * max );
-    
     virtual IOReturn	reportMaxValidBlock ( UInt64 * maxBlock );
-    
-    virtual IOReturn	reportMaxWriteTransfer ( UInt64 blockSize, UInt64 * max );
-    
+        
     virtual IOReturn	reportRemovability ( bool * isRemovable );
     
     virtual IOReturn	reportWriteProtection ( bool * isWriteProtected );
@@ -175,6 +187,9 @@ public:
 													UInt8                agid,
 													UInt8                mediaType );
 
+	/* 10.6.0 */
+    virtual IOReturn		requestIdle ( void );
+	
 	/* System Specific */
 	virtual IOReturn 	message ( UInt32 type, IOService * provider, void * argument );
     virtual IOReturn	setProperties ( OSObject * properties );

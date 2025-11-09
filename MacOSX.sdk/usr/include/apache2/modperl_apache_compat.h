@@ -1,8 +1,9 @@
-/* Copyright 2003-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -35,9 +36,39 @@ typedef void * apr_thread_mutex_t;
  * which httpd release allows us to remove the compat code
  */
 
+/* pre-APACHE_2.2.4 */
+#if ! AP_MODULE_MAGIC_AT_LEAST(20051115,4)
+
+/* added in APACHE_2.2.4 */
+AP_DECLARE(const char *) ap_get_server_description(void);
+AP_DECLARE(const char *) ap_get_server_banner(void);
+
+#endif /* pre-APACHE_2.2.4 */
+
+/* since-APACHE-2.3.0 */
+#if AP_MODULE_MAGIC_AT_LEAST(20060905,0)
+
+/* removed in APACHE-2.3.0 */
+AP_DECLARE(const char *) ap_get_server_version(void);
+
+#endif /* since-APACHE-2.3.0 */
+
 /* ap_http_scheme is called ap_http_method in httpd 2.0 */
 #ifndef ap_http_scheme
 #define ap_http_scheme(r) ap_http_method(r)
 #endif
+
+#if AP_SERVER_MAJORVERSION_NUMBER>2 || AP_SERVER_MINORVERSION_NUMBER>=2
+#define MP_HTTPD_HAS_OVERRIDE_OPTS
+#endif
+
+#define MP_HTTPD_OVERRIDE_HTACCESS (OR_LIMIT|OR_OPTIONS|OR_FILEINFO|OR_AUTHCFG|OR_INDEXES)
+
+#define MP_HTTPD_OVERRIDE_OPTS_UNSET (-1)
+#define MP_HTTPD_OVERRIDE_OPTS_DEFAULT (OPT_UNSET | \
+                                        OPT_ALL | \
+                                        OPT_INCNOEXEC | \
+                                        OPT_SYM_OWNER | \
+                                        OPT_MULTI)
 
 #endif /* MODPERL_APACHE_COMPAT_H */

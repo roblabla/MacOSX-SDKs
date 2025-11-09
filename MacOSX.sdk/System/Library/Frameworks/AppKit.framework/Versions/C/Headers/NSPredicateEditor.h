@@ -1,7 +1,7 @@
 /*
         NSPredicateEditor.h
 	Application Kit
-	Copyright (c) 2006-2007, Apple Inc.
+	Copyright (c) 2006-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,18 +13,14 @@
 
 @interface NSPredicateEditor : NSRuleEditor {
     id _allTemplates;
-    
-    NSArray *_rootItems;
-    NSArray *_rootHeaderItems;
-    
+    NSArray *_rootTrees;
+    NSArray *_rootHeaderTrees;
     id _predicateTarget;
     SEL _predicateAction;
-    
     struct {
-	unsigned settingValue:1;
-	unsigned reserved:31;
+	unsigned suppressAction:4;
+	unsigned reserved:28;
     } _peFlags;
-    
     id _predicateEditorReserved[3];
 }
 

@@ -1,7 +1,7 @@
 /*
 	NSPanel.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,9 +21,9 @@ APPKIT_EXTERN NSInteger NSRunCriticalAlertPanel(NSString *title, NSString *msgFo
 ** The NSRunAlertPanelRelativeToWindow variants are deprecated.  
 ** Please use the corresponding NSBeginAlertSheet() function instead.
 */
-APPKIT_EXTERN NSInteger NSRunAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...);
-APPKIT_EXTERN NSInteger NSRunInformationalAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...);
-APPKIT_EXTERN NSInteger NSRunCriticalAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...);
+APPKIT_EXTERN NSInteger NSRunAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...) DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+APPKIT_EXTERN NSInteger NSRunInformationalAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...) DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+APPKIT_EXTERN NSInteger NSRunCriticalAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...) DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
 **  Present a sheet alert on the given window.  When the modal session is ended, but before the sheet is dismissed,

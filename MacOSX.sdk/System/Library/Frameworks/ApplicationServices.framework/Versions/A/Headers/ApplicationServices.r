@@ -3,9 +3,9 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-34~89
+     Version:    ApplicationServices-38~262
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -1,7 +1,7 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c)1997-2005, Apple Inc.
+        Copyright (c) 1997-2009, Apple Inc.  All rights reserved.
         All rights reserved.
 */
 
@@ -31,9 +31,10 @@
 	unsigned int hasAlternateImage:1;
 	unsigned int hidden:1;
 	unsigned int backgroundStyle:4;
-	unsigned int reserved:24;
+	unsigned int inAdjustLength:1;
+	unsigned int reserved:23;
     }	 _fFlags;
-    id		 _fReserved1;
+    id		 _statusItemMenu;
     id		 _fReserved2;
     id		 _fReserved3;
     id		 _fReserved4;

@@ -63,8 +63,8 @@ typedef enum IOBluetoothHandsFreeFeatures
 */
 @interface IOBluetoothHandsFreeGateway : IOBluetoothRFCOMMAudioController {
 	
-	UInt32		mDeviceSupportedFeatures;
-	UInt32		mGatewaySupportedFeatures;		
+	uint32_t		mDeviceSupportedFeatures;
+	uint32_t		mGatewaySupportedFeatures;		
 }
 
 

@@ -126,13 +126,13 @@ min(u_int a, u_int b)
 {
 	return (a < b ? a : b);
 }
-static inline u_long
-ulmax(u_long a, u_long b)
+static inline u_int32_t
+ulmax(u_int32_t a, u_int32_t b)
 {
 	return (a > b ? a : b);
 }
-static inline u_long
-ulmin(u_long a, u_long b)
+static inline u_int32_t
+ulmin(u_int32_t a, u_int32_t b)
 {
 	return (a < b ? a : b);
 }
@@ -142,7 +142,7 @@ ulmin(u_long a, u_long b)
 /* Prototypes for non-quad routines. */
 extern int	ffs(int);
 extern int	locc(int, char *, u_int);
-extern u_long	random(void);
+extern u_int32_t	random(void);
 extern char	*rindex(const char *, int);
 extern int	scanc(u_int, u_char *, const u_char *, int);
 extern int	skpc(int, int, char *);
@@ -158,6 +158,7 @@ int	snprintf(char *, size_t, const char *, ...) __printflike(3,4);
 int	sprintf(char *bufp, const char *, ...) __deprecated;
 int	sscanf(const char *, char const *, ...) __scanflike(2,3);
 int	printf(const char *, ...) __printflike(1,2);
+
 
 #if CONFIG_NO_PRINTF_STRINGS
 #define printf(x, ...)  do {} while (0)

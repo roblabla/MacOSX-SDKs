@@ -4,7 +4,7 @@
 * Author:      John Labenski and others
 * Modified by:
 * Created:     02/02/03
-* RCS-ID:      $Id: math.h,v 1.17.4.1 2007/03/08 04:31:24 PC Exp $
+* RCS-ID:      $Id: math.h 44690 2007-03-08 04:31:24Z PC $
 * Copyright:   (c) John Labenski
 * Licence:     wxWindows licence
 */

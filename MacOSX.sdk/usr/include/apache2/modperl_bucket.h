@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,7 +17,7 @@
 #ifndef MODPERL_BUCKET_H
 #define MODPERL_BUCKET_H
 
-apr_bucket *modperl_bucket_sv_create(pTHX_ apr_bucket_alloc_t *list, SV *sv, 
+apr_bucket *modperl_bucket_sv_create(pTHX_ apr_bucket_alloc_t *list, SV *sv,
                                      apr_off_t offset, apr_size_t len);
 
 #endif /* MODPERL_BUCKET_H */

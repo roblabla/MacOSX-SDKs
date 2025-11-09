@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -43,7 +44,7 @@
         double stime = \
              (double)(end_time.tms_stime - start_time.tms_stime)/MP_HZ; \
         if (utime || stime) { \
-            MP_TRACE_t(MP_FUNC, "%s %5.2f user %5.2f sys\n", \
+            MP_TRACE_t(MP_FUNC, "%s %5.2f user %5.2f sys", \
                        label, utime, stime); \
         } \
     })

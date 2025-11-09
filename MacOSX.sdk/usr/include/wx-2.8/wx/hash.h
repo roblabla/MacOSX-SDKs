@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by: VZ at 25.02.00: type safe hashes with WX_DECLARE_HASH()
 // Created:     01/02/97
-// RCS-ID:      $Id: hash.h,v 1.45.4.1 2007/04/16 13:01:03 VZ Exp $
+// RCS-ID:      $Id: hash.h 53135 2008-04-12 02:31:04Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -109,12 +109,12 @@ union wxHashKeyValue
 
 // for some compilers (AIX xlC), defining it as friend inside the class is not
 // enough, so provide a real forward declaration
-class WXDLLIMPEXP_BASE wxHashTableBase;
+class WXDLLIMPEXP_FWD_BASE wxHashTableBase;
 
 class WXDLLIMPEXP_BASE wxHashTableBase_Node
 {
-    friend class WXDLLIMPEXP_BASE wxHashTableBase;
-    typedef class WXDLLIMPEXP_BASE wxHashTableBase_Node _Node;
+    friend class WXDLLIMPEXP_FWD_BASE wxHashTableBase;
+    typedef class WXDLLIMPEXP_FWD_BASE wxHashTableBase_Node _Node;
 public:
     wxHashTableBase_Node( long key, void* value,
                           wxHashTableBase* table );
@@ -154,7 +154,7 @@ class WXDLLIMPEXP_BASE wxHashTableBase
     : public wxObject
 #endif
 {
-    friend class WXDLLIMPEXP_BASE wxHashTableBase_Node;
+    friend class WXDLLIMPEXP_FWD_BASE wxHashTableBase_Node;
 public:
     typedef wxHashTableBase_Node Node;
 
@@ -312,7 +312,7 @@ private:
 
 class WXDLLIMPEXP_BASE wxHashTable_Node : public wxHashTableBase_Node
 {
-    friend class WXDLLIMPEXP_BASE wxHashTable;
+    friend class WXDLLIMPEXP_FWD_BASE wxHashTable;
 public:
     wxHashTable_Node( long key, void* value,
                       wxHashTableBase* table )

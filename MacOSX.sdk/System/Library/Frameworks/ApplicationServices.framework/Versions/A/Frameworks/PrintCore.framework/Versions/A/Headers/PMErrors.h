@@ -3,7 +3,7 @@
  
      Contains:   Mac OS X Printing Manager Error Codes.
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
+     Copyright (c) 2001-2006,2008 Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -153,6 +153,7 @@ enum {
 	kPMFontNameTooLong				= -9704,		/* font name too long */
 	kPMGeneralCGError				= -9705,		/* CoreGraphics returned error */
 	kPMInvalidState					= -9706,		/* Invalid converter state */
+	kPMUnexpectedImagingError		= -9707,		/* An unexpected imaging error occurred */
 	
 	/* Printer Modules (-9740 to -9779) */
 

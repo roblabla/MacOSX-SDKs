@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -72,7 +73,7 @@
 
 #define mpxs_sv_object_deref(sv, type)                  \
     (mpxs_sv_is_object(sv) ?                            \
-        INT2PTR(type *, SvIVX((SV*)SvRV(sv))) : NULL) 
+        INT2PTR(type *, SvIVX((SV*)SvRV(sv))) : NULL)
 
 #define mpxs_sv2_obj(obj, sv)                   \
     (obj = mp_xs_sv2_##obj(sv))

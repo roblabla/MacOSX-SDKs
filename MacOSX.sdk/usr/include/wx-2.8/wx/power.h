@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     2006-05-27
-// RCS-ID:      $Id: power.h,v 1.3 2006/05/29 07:36:41 ABX Exp $
+// RCS-ID:      $Id: power.h 48811 2007-09-19 23:11:28Z RD $
 // Copyright:   (c) 2006 Vadim Zeitlin <vadim@wxwindows.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,6 +66,10 @@ public:
 
 private:
     bool m_veto;
+
+#if wxABI_VERSION >= 20806
+    DECLARE_ABSTRACT_CLASS(wxPowerEvent)
+#endif
 };
 
 BEGIN_DECLARE_EVENT_TYPES()

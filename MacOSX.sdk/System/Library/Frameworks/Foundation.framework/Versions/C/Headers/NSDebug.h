@@ -1,5 +1,5 @@
 /*	NSDebug.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 /**************************************************************************
@@ -118,95 +118,51 @@ FOUNDATION_EXPORT NSUInteger NSCountFrames(void);
 /****************	Autorelease pool debugging	****************/
 
 // Functions used as interesting breakpoints in a debugger
-FOUNDATION_EXPORT void _NSAutoreleaseNoPool(void *object);
+// void __NSAutoreleaseNoPool(void *object);
 	// Called to log the "Object X of class Y autoreleased with no
-	// pool in place - just leaking" message.
+	// pool in place - just leaking" message.  If an environment
+	// variable named "NSAutoreleaseHaltOnNoPool" is set with string
+	// value "YES", the function will automatically break in the
+	// debugger (or terminate the process).
 
-FOUNDATION_EXPORT void _NSAutoreleaseFreedObject(void *freedObject);
+// void __NSAutoreleaseFreedObject(void *freedObject);
 	// Called when a previously freed object would be released
-	// by an autorelease pool. See +enableFreedObjectCheck: below.
+	// by an autorelease pool.  If an environment variable named
+	// "NSAutoreleaseHaltOnFreedObject" is set with string value
+	// "YES", the function will automatically break in the debugger
+	// (or terminate the process).
 
-FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(NSUInteger count);
-	// Called whenever a high water mark is reached by a pool.
-	// See +setPoolCountHighWaterMark: below.
 
 @interface NSAutoreleasePool (NSAutoreleasePoolDebugging)
-
-+ (void)enableRelease:(BOOL)enable;
-	// Enables or disables autorelease pools; that is, whether or
-	// not the autorelease pools send the -release message to their
-	// objects when each pool is released. This message affects only
-	// the pools of the autorelease pool stack of the current thread
-	// (and any future pools in that thread). The "default default"
-	// value can be set in the initial environment when a program
-	// is launched with the NSEnableAutoreleasePool environment
-	// variable (see notes at the top of this file) -- as thread
-	// pool-stacks are created, they take their initial enabled
-	// state from that environment variable.
 
 + (void)showPools;
 	// Displays to stderr the state of the current thread's
 	// autorelease pool stack.
 
-+ (void)resetTotalAutoreleasedObjects;
-+ (NSUInteger)totalAutoreleasedObjects;
-	// Returns the number of objects autoreleased (in ALL threads,
-	// currently) since the counter was last reset to zero with
-	// +resetTotalAutoreleasedObjects.
++ (void)enableFreedObjectCheck:(BOOL)enable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+	// This behavior is now always on.
 
-+ (void)enableFreedObjectCheck:(BOOL)enable;
-	// Enables or disables freed-object checking for the pool stack
-	// of the current thread (and any future pools in that thread).
-	// When enabled, an autorelease pool will call the function
-	// _NSAutoreleaseFreedObject() when it is about to attempt to
-	// release an object that the runtime has marked as freed (and
-	// then it doesn't attempt to send -release to the freed storage).
-	// The pointer to the freed storage is passed to that function.
-	// The "default default" value can be set in the initial
-	// environment when a program is launched with the
-	// NSAutoreleaseFreedObjectCheckEnabled environment variable
-	// (see notes at the top of this file) -- as thread pool-stacks
-	// are created, they take their initial freed-object-check state
-	// from that environment variable.
++ (void)enableRelease:(BOOL)enable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (void)resetTotalAutoreleasedObjects DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSUInteger)totalAutoreleasedObjects DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSUInteger)autoreleasedObjectCount DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSUInteger)topAutoreleasePoolCount DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSUInteger)poolCountHighWaterMark DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (void)setPoolCountHighWaterMark:(NSUInteger)count DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSUInteger)poolCountHighWaterResolution DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (void)setPoolCountHighWaterResolution:(NSUInteger)res DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+	// There is no longer any way to do what these used to do.
 
-+ (NSUInteger)autoreleasedObjectCount;
-	// Returns the total number of autoreleased objects in all pools
-	// in the current thread's pool stack.
-
-+ (NSUInteger)topAutoreleasePoolCount;
-	// Returns the number of autoreleased objects in top pool of
-	// the current thread's pool stack.
-
-+ (NSUInteger)poolCountHighWaterMark;
-+ (void)setPoolCountHighWaterMark:(NSUInteger)count;
-	// Sets the pool count high water mark for the pool stack of
-	// the current thread (and any future pools in that thread). When
-	// 'count' objects have accumulated in the top autorelease pool,
-	// the pool will call _NSAutoreleaseHighWaterLog(), which
-	// generates a message to stderr. The number of objects in the
-	// top pool is passed as the parameter to that function. The
-	// default high water mark is 0, which disables pool count
-	// monitoring. The "default default" value can be set in the
-	// initial environment when a program is launched with the
-	// NSAutoreleaseHighWaterMark environment variable (see notes at
-	// the top of this file) -- as thread pool-stacks are created,
-	// they take their initial high water mark value from that
-	// environment variable. See also +setPoolCountHighWaterResolution:.
-
-+ (NSUInteger)poolCountHighWaterResolution;
-+ (void)setPoolCountHighWaterResolution:(NSUInteger)res;
-	// Sets the pool count high water resolution for the pool stack of
-	// the current thread (and any future pools in that thread). A
-	// call to _NSAutoreleaseHighWaterLog() is generated every multiple
-	// of 'res' objects above the high water mark. If 'res' is zero
-	// (the default), only one call to _NSAutoreleaseHighWaterLog() is
-	// made, when the high water mark is reached. The "default default"
-	// value can be set in the initial environment when a program is
-	// launched with the NSAutoreleaseHighWaterResolution environment
-	// variable (see notes at the top of this file) -- as thread
-	// pool-stacks are created, they take their initial high water
-	// resolution value from that environment variable. See also
-	// +setPoolCountHighWaterMark:.
+/* DTrace static probes for autorelease pool performance analysis and debugging
+    provider Cocoa_Autorelease {
+       probe pool_push(unsigned long value);		// arg is a token representing pool
+       probe pool_pop_start(unsigned long value);	// arg is a token representing pool
+       probe pool_pop_end(unsigned long value);		// arg is a token representing pool
+       probe autorelease(unsigned long value);		// arg is object pointer
+       probe error_no_pool(unsigned long value);	// arg is object pointer
+       probe error_freed_object(unsigned long value);	// arg is object pointer
+    };
+*/
 
 @end
 

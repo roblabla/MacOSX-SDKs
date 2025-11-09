@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -26,7 +27,7 @@ void modperl_handler_anon_init(pTHX_ apr_pool_t *p);
 MP_INLINE modperl_mgv_t *modperl_handler_anon_next(pTHX_ apr_pool_t *p);
 MP_INLINE void modperl_handler_anon_add(pTHX_ modperl_mgv_t *anon, CV *cv);
 MP_INLINE CV *modperl_handler_anon_get(pTHX_ modperl_mgv_t *anon);
-    
+
 #define modperl_handler_array_new(p) \
 apr_array_make(p, 1, sizeof(modperl_handler_t *))
 
@@ -44,7 +45,7 @@ modperl_handler_t *modperl_handler_new(apr_pool_t *p, const char *name);
 modperl_handler_t *modperl_handler_new_from_sv(pTHX_ apr_pool_t *p, SV *sv);
 
 MP_INLINE const char *modperl_handler_name(modperl_handler_t *handler);
-    
+
 int modperl_handler_resolve(pTHX_ modperl_handler_t **handp,
                             apr_pool_t *p, server_rec *s);
 
@@ -65,7 +66,7 @@ MpAV **modperl_handler_lookup_handlers(modperl_config_dir_t *dcfg,
                                        modperl_handler_action_e action,
                                        const char **desc);
 
-MpAV **modperl_handler_get_handlers(request_rec *r, conn_rec *c,server_rec *s, 
+MpAV **modperl_handler_get_handlers(request_rec *r, conn_rec *c,server_rec *s,
                                     apr_pool_t *p, const char *name,
                                     modperl_handler_action_e action);
 

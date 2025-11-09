@@ -5,7 +5,7 @@
 // Modified by:
 // Created:     14/4/2006
 // Copyright:   (c) Francesco Montorsi
-// RCS-ID:      $Id: filepicker.h,v 1.10 2006/09/05 21:02:27 VZ Exp $
+// RCS-ID:      $Id: filepicker.h 49804 2007-11-10 01:09:42Z VZ $
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,8 +18,8 @@
 
 #include "wx/pickerbase.h"
 
-class WXDLLIMPEXP_CORE wxDialog;
-class WXDLLIMPEXP_CORE wxFileDirPickerEvent;
+class WXDLLIMPEXP_FWD_CORE wxDialog;
+class WXDLLIMPEXP_FWD_CORE wxFileDirPickerEvent;
 
 extern WXDLLEXPORT_DATA(const wxChar) wxFilePickerWidgetLabel[];
 extern WXDLLEXPORT_DATA(const wxChar) wxFilePickerWidgetNameStr[];

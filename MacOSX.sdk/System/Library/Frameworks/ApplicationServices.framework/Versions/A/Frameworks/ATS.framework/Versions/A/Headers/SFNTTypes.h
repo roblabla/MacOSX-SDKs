@@ -3,14 +3,22 @@
  
      Contains:   Font file structures.
  
-     Version:    ATS-236~129
+     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:00 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                SFNTTypes.i
+                     Revision:        1.4
+                     Dated:           2006/09/13 22:38:46
+                     Last change by:  ntaylor
+                     Last comment:    Fix last checkin comment.
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __SFNTTYPES__
@@ -66,7 +74,10 @@ enum {
 enum {
   kFontUnicodeDefaultSemantics  = 0,
   kFontUnicodeV1_1Semantics     = 1,
-  kFontISO10646_1993Semantics   = 2
+  kFontISO10646_1993Semantics   = 2,
+  kFontUnicodeV2_0BMPOnlySemantics = 3,
+  kFontUnicodeV2_0FullCoverageSemantics = 4,
+  kFontUnicodeV4_0VariationSequenceSemantics = 5
 };
 
 enum {
@@ -386,9 +397,9 @@ struct sfntVariationHeader {
   UInt16              axisSize;
   UInt16              instanceCount;
   UInt16              instanceSize;
-                                              /* Éother <count,size> pairs */
+                                              /* â€¦other <count,size> pairs */
   sfntVariationAxis   axis[1];                /* [axisCount] */
-  sfntInstance        instance[1];            /* [instanceCount]  Éother arrays of data */
+  sfntInstance        instance[1];            /* [instanceCount]  â€¦other arrays of data */
 };
 typedef struct sfntVariationHeader      sfntVariationHeader;
 enum {
@@ -455,7 +466,7 @@ enum {
 
 /*  Special invalid glyph ID value, useful as a sentinel value, for example */
 enum {
-  nonGlyphID                    = 65535L
+  nonGlyphID                    = 65535
 };
 
 

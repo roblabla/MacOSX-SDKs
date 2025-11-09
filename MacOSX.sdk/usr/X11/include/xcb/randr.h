@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from randr.xml by c-client.xsl using XSLT.
+ * This file generated automatically from randr.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -15,10 +15,47 @@
 #include "xcb.h"
 #include "xproto.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define XCB_RANDR_MAJOR_VERSION 1
 #define XCB_RANDR_MINOR_VERSION 2
   
 extern xcb_extension_t xcb_randr_id;
+
+typedef uint32_t xcb_randr_mode_t;
+
+/**
+ * @brief xcb_randr_mode_iterator_t
+ **/
+typedef struct xcb_randr_mode_iterator_t {
+    xcb_randr_mode_t *data; /**<  */
+    int               rem; /**<  */
+    int               index; /**<  */
+} xcb_randr_mode_iterator_t;
+
+typedef uint32_t xcb_randr_crtc_t;
+
+/**
+ * @brief xcb_randr_crtc_iterator_t
+ **/
+typedef struct xcb_randr_crtc_iterator_t {
+    xcb_randr_crtc_t *data; /**<  */
+    int               rem; /**<  */
+    int               index; /**<  */
+} xcb_randr_crtc_iterator_t;
+
+typedef uint32_t xcb_randr_output_t;
+
+/**
+ * @brief xcb_randr_output_iterator_t
+ **/
+typedef struct xcb_randr_output_iterator_t {
+    xcb_randr_output_t *data; /**<  */
+    int                 rem; /**<  */
+    int                 index; /**<  */
+} xcb_randr_output_iterator_t;
 
 /** Opcode for xcb_randr_bad_output. */
 #define XCB_RANDR_BAD_OUTPUT 0
@@ -57,22 +94,22 @@ typedef struct xcb_randr_bad_mode_error_t {
 } xcb_randr_bad_mode_error_t;
 
 typedef enum xcb_randr_rotation_t {
-    XCB_RANDR_ROTATION_ROTATE_0 = (1 << 0),
-    XCB_RANDR_ROTATION_ROTATE_90 = (1 << 1),
-    XCB_RANDR_ROTATION_ROTATE_180 = (1 << 2),
-    XCB_RANDR_ROTATION_ROTATE_270 = (1 << 3),
-    XCB_RANDR_ROTATION_REFLECT_X = (1 << 4),
-    XCB_RANDR_ROTATION_REFLECT_Y = (1 << 5)
+    XCB_RANDR_ROTATION_ROTATE_0 = 1,
+    XCB_RANDR_ROTATION_ROTATE_90 = 2,
+    XCB_RANDR_ROTATION_ROTATE_180 = 4,
+    XCB_RANDR_ROTATION_ROTATE_270 = 8,
+    XCB_RANDR_ROTATION_REFLECT_X = 16,
+    XCB_RANDR_ROTATION_REFLECT_Y = 32
 } xcb_randr_rotation_t;
 
 /**
  * @brief xcb_randr_screen_size_t
  **/
 typedef struct xcb_randr_screen_size_t {
-    int16_t width; /**<  */
-    int16_t height; /**<  */
-    int16_t mwidth; /**<  */
-    int16_t mheight; /**<  */
+    uint16_t width; /**<  */
+    uint16_t height; /**<  */
+    uint16_t mwidth; /**<  */
+    uint16_t mheight; /**<  */
 } xcb_randr_screen_size_t;
 
 /**
@@ -151,11 +188,11 @@ typedef struct xcb_randr_set_screen_config_request_t {
     uint8_t         major_opcode; /**<  */
     uint8_t         minor_opcode; /**<  */
     uint16_t        length; /**<  */
-    xcb_drawable_t  drawable; /**<  */
+    xcb_window_t    window; /**<  */
     xcb_timestamp_t timestamp; /**<  */
     xcb_timestamp_t config_timestamp; /**<  */
     uint16_t        sizeID; /**<  */
-    int16_t         rotation; /**<  */
+    uint16_t        rotation; /**<  */
     uint16_t        rate; /**<  */
     uint8_t         pad0[2]; /**<  */
 } xcb_randr_set_screen_config_request_t;
@@ -230,7 +267,7 @@ typedef struct xcb_randr_get_screen_info_reply_t {
     xcb_timestamp_t config_timestamp; /**<  */
     uint16_t        nSizes; /**<  */
     uint16_t        sizeID; /**<  */
-    int16_t         rotation; /**<  */
+    uint16_t        rotation; /**<  */
     uint16_t        rate; /**<  */
     uint16_t        nInfo; /**<  */
     uint8_t         pad0[2]; /**<  */
@@ -268,6 +305,7 @@ typedef struct xcb_randr_get_screen_size_range_reply_t {
     uint16_t min_height; /**<  */
     uint16_t max_width; /**<  */
     uint16_t max_height; /**<  */
+    uint8_t  pad1[16]; /**<  */
 } xcb_randr_get_screen_size_range_reply_t;
 
 /** Opcode for xcb_randr_set_screen_size. */
@@ -288,20 +326,20 @@ typedef struct xcb_randr_set_screen_size_request_t {
 } xcb_randr_set_screen_size_request_t;
 
 typedef enum xcb_randr_mode_flag_t {
-    XCB_RANDR_MODE_FLAG_HSYNC_POSITIVE = (1 << 0),
-    XCB_RANDR_MODE_FLAG_HSYNC_NEGATIVE = (1 << 1),
-    XCB_RANDR_MODE_FLAG_VSYNC_POSITIVE = (1 << 2),
-    XCB_RANDR_MODE_FLAG_VSYNC_NEGATIVE = (1 << 3),
-    XCB_RANDR_MODE_FLAG_INTERLACE = (1 << 4),
-    XCB_RANDR_MODE_FLAG_DOUBLE_SCAN = (1 << 5),
-    XCB_RANDR_MODE_FLAG_CSYNC = (1 << 6),
-    XCB_RANDR_MODE_FLAG_CSYNC_POSITIVE = (1 << 7),
-    XCB_RANDR_MODE_FLAG_CSYNC_NEGATIVE = (1 << 8),
-    XCB_RANDR_MODE_FLAG_HSKEW_PRESENT = (1 << 9),
-    XCB_RANDR_MODE_FLAG_BCAST = (1 << 10),
-    XCB_RANDR_MODE_FLAG_PIXEL_MULTIPLEX = (1 << 11),
-    XCB_RANDR_MODE_FLAG_DOUBLE_CLOCK = (1 << 12),
-    XCB_RANDR_MODE_FLAG_HALVE_CLOCK = (1 << 13)
+    XCB_RANDR_MODE_FLAG_HSYNC_POSITIVE = 1,
+    XCB_RANDR_MODE_FLAG_HSYNC_NEGATIVE = 2,
+    XCB_RANDR_MODE_FLAG_VSYNC_POSITIVE = 4,
+    XCB_RANDR_MODE_FLAG_VSYNC_NEGATIVE = 8,
+    XCB_RANDR_MODE_FLAG_INTERLACE = 16,
+    XCB_RANDR_MODE_FLAG_DOUBLE_SCAN = 32,
+    XCB_RANDR_MODE_FLAG_CSYNC = 64,
+    XCB_RANDR_MODE_FLAG_CSYNC_POSITIVE = 128,
+    XCB_RANDR_MODE_FLAG_CSYNC_NEGATIVE = 256,
+    XCB_RANDR_MODE_FLAG_HSKEW_PRESENT = 512,
+    XCB_RANDR_MODE_FLAG_BCAST = 1024,
+    XCB_RANDR_MODE_FLAG_PIXEL_MULTIPLEX = 2048,
+    XCB_RANDR_MODE_FLAG_DOUBLE_CLOCK = 4096,
+    XCB_RANDR_MODE_FLAG_HALVE_CLOCK = 8192
 } xcb_randr_mode_flag_t;
 
 /**
@@ -389,32 +427,32 @@ typedef struct xcb_randr_get_output_info_cookie_t {
  * @brief xcb_randr_get_output_info_request_t
  **/
 typedef struct xcb_randr_get_output_info_request_t {
-    uint8_t         major_opcode; /**<  */
-    uint8_t         minor_opcode; /**<  */
-    uint16_t        length; /**<  */
-    uint32_t        output; /**<  */
-    xcb_timestamp_t config_timestamp; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_timestamp_t    config_timestamp; /**<  */
 } xcb_randr_get_output_info_request_t;
 
 /**
  * @brief xcb_randr_get_output_info_reply_t
  **/
 typedef struct xcb_randr_get_output_info_reply_t {
-    uint8_t         response_type; /**<  */
-    uint8_t         status; /**<  */
-    uint16_t        sequence; /**<  */
-    uint32_t        length; /**<  */
-    xcb_timestamp_t timestamp; /**<  */
-    uint32_t        crtc; /**<  */
-    uint32_t        mm_width; /**<  */
-    uint32_t        mm_height; /**<  */
-    uint8_t         connection; /**<  */
-    uint8_t         subpixel_order; /**<  */
-    uint16_t        num_crtcs; /**<  */
-    uint16_t        num_modes; /**<  */
-    uint16_t        num_preferred; /**<  */
-    uint16_t        num_clones; /**<  */
-    uint16_t        name_len; /**<  */
+    uint8_t          response_type; /**<  */
+    uint8_t          status; /**<  */
+    uint16_t         sequence; /**<  */
+    uint32_t         length; /**<  */
+    xcb_timestamp_t  timestamp; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
+    uint32_t         mm_width; /**<  */
+    uint32_t         mm_height; /**<  */
+    uint8_t          connection; /**<  */
+    uint8_t          subpixel_order; /**<  */
+    uint16_t         num_crtcs; /**<  */
+    uint16_t         num_modes; /**<  */
+    uint16_t         num_preferred; /**<  */
+    uint16_t         num_clones; /**<  */
+    uint16_t         name_len; /**<  */
 } xcb_randr_get_output_info_reply_t;
 
 /**
@@ -431,10 +469,10 @@ typedef struct xcb_randr_list_output_properties_cookie_t {
  * @brief xcb_randr_list_output_properties_request_t
  **/
 typedef struct xcb_randr_list_output_properties_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t output; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
 } xcb_randr_list_output_properties_request_t;
 
 /**
@@ -463,11 +501,11 @@ typedef struct xcb_randr_query_output_property_cookie_t {
  * @brief xcb_randr_query_output_property_request_t
  **/
 typedef struct xcb_randr_query_output_property_request_t {
-    uint8_t    major_opcode; /**<  */
-    uint8_t    minor_opcode; /**<  */
-    uint16_t   length; /**<  */
-    uint32_t   output; /**<  */
-    xcb_atom_t property; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         property; /**<  */
 } xcb_randr_query_output_property_request_t;
 
 /**
@@ -491,14 +529,14 @@ typedef struct xcb_randr_query_output_property_reply_t {
  * @brief xcb_randr_configure_output_property_request_t
  **/
 typedef struct xcb_randr_configure_output_property_request_t {
-    uint8_t    major_opcode; /**<  */
-    uint8_t    minor_opcode; /**<  */
-    uint16_t   length; /**<  */
-    uint32_t   output; /**<  */
-    xcb_atom_t property; /**<  */
-    uint8_t    pending; /**<  */
-    uint8_t    range; /**<  */
-    uint8_t    pad0[2]; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         property; /**<  */
+    uint8_t            pending; /**<  */
+    uint8_t            range; /**<  */
+    uint8_t            pad0[2]; /**<  */
 } xcb_randr_configure_output_property_request_t;
 
 /** Opcode for xcb_randr_change_output_property. */
@@ -508,16 +546,16 @@ typedef struct xcb_randr_configure_output_property_request_t {
  * @brief xcb_randr_change_output_property_request_t
  **/
 typedef struct xcb_randr_change_output_property_request_t {
-    uint8_t    major_opcode; /**<  */
-    uint8_t    minor_opcode; /**<  */
-    uint16_t   length; /**<  */
-    uint32_t   output; /**<  */
-    xcb_atom_t property; /**<  */
-    xcb_atom_t type; /**<  */
-    uint8_t    format; /**<  */
-    uint8_t    mode; /**<  */
-    uint8_t    pad0[2]; /**<  */
-    uint32_t   num_units; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         property; /**<  */
+    xcb_atom_t         type; /**<  */
+    uint8_t            format; /**<  */
+    uint8_t            mode; /**<  */
+    uint8_t            pad0[2]; /**<  */
+    uint32_t           num_units; /**<  */
 } xcb_randr_change_output_property_request_t;
 
 /** Opcode for xcb_randr_delete_output_property. */
@@ -527,11 +565,11 @@ typedef struct xcb_randr_change_output_property_request_t {
  * @brief xcb_randr_delete_output_property_request_t
  **/
 typedef struct xcb_randr_delete_output_property_request_t {
-    uint8_t    major_opcode; /**<  */
-    uint8_t    minor_opcode; /**<  */
-    uint16_t   length; /**<  */
-    uint32_t   output; /**<  */
-    xcb_atom_t property; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         property; /**<  */
 } xcb_randr_delete_output_property_request_t;
 
 /**
@@ -548,16 +586,17 @@ typedef struct xcb_randr_get_output_property_cookie_t {
  * @brief xcb_randr_get_output_property_request_t
  **/
 typedef struct xcb_randr_get_output_property_request_t {
-    uint8_t    major_opcode; /**<  */
-    uint8_t    minor_opcode; /**<  */
-    uint16_t   length; /**<  */
-    uint32_t   output; /**<  */
-    xcb_atom_t property; /**<  */
-    xcb_atom_t type; /**<  */
-    uint32_t   long_offset; /**<  */
-    uint32_t   long_length; /**<  */
-    uint8_t    _delete; /**<  */
-    uint8_t    pending; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         property; /**<  */
+    xcb_atom_t         type; /**<  */
+    uint32_t           long_offset; /**<  */
+    uint32_t           long_length; /**<  */
+    uint8_t            _delete; /**<  */
+    uint8_t            pending; /**<  */
+    uint8_t            pad0[2]; /**<  */
 } xcb_randr_get_output_property_request_t;
 
 /**
@@ -599,11 +638,12 @@ typedef struct xcb_randr_create_mode_request_t {
  * @brief xcb_randr_create_mode_reply_t
  **/
 typedef struct xcb_randr_create_mode_reply_t {
-    uint8_t  response_type; /**<  */
-    uint8_t  status; /**<  */
-    uint16_t sequence; /**<  */
-    uint32_t length; /**<  */
-    uint32_t mode; /**<  */
+    uint8_t          response_type; /**<  */
+    uint8_t          pad0; /**<  */
+    uint16_t         sequence; /**<  */
+    uint32_t         length; /**<  */
+    xcb_randr_mode_t mode; /**<  */
+    uint8_t          pad1[20]; /**<  */
 } xcb_randr_create_mode_reply_t;
 
 /** Opcode for xcb_randr_destroy_mode. */
@@ -613,10 +653,10 @@ typedef struct xcb_randr_create_mode_reply_t {
  * @brief xcb_randr_destroy_mode_request_t
  **/
 typedef struct xcb_randr_destroy_mode_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t mode; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_mode_t mode; /**<  */
 } xcb_randr_destroy_mode_request_t;
 
 /** Opcode for xcb_randr_add_output_mode. */
@@ -626,11 +666,11 @@ typedef struct xcb_randr_destroy_mode_request_t {
  * @brief xcb_randr_add_output_mode_request_t
  **/
 typedef struct xcb_randr_add_output_mode_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t output; /**<  */
-    uint32_t mode; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_randr_mode_t   mode; /**<  */
 } xcb_randr_add_output_mode_request_t;
 
 /** Opcode for xcb_randr_delete_output_mode. */
@@ -640,11 +680,11 @@ typedef struct xcb_randr_add_output_mode_request_t {
  * @brief xcb_randr_delete_output_mode_request_t
  **/
 typedef struct xcb_randr_delete_output_mode_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t output; /**<  */
-    uint32_t mode; /**<  */
+    uint8_t            major_opcode; /**<  */
+    uint8_t            minor_opcode; /**<  */
+    uint16_t           length; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_randr_mode_t   mode; /**<  */
 } xcb_randr_delete_output_mode_request_t;
 
 /**
@@ -661,32 +701,31 @@ typedef struct xcb_randr_get_crtc_info_cookie_t {
  * @brief xcb_randr_get_crtc_info_request_t
  **/
 typedef struct xcb_randr_get_crtc_info_request_t {
-    uint8_t         major_opcode; /**<  */
-    uint8_t         minor_opcode; /**<  */
-    uint16_t        length; /**<  */
-    uint32_t        crtc; /**<  */
-    xcb_timestamp_t config_timestamp; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
+    xcb_timestamp_t  config_timestamp; /**<  */
 } xcb_randr_get_crtc_info_request_t;
 
 /**
  * @brief xcb_randr_get_crtc_info_reply_t
  **/
 typedef struct xcb_randr_get_crtc_info_reply_t {
-    uint8_t         response_type; /**<  */
-    uint8_t         status; /**<  */
-    uint16_t        sequence; /**<  */
-    uint32_t        length; /**<  */
-    xcb_timestamp_t timestamp; /**<  */
-    uint32_t        crtc; /**<  */
-    int16_t         x; /**<  */
-    int16_t         y; /**<  */
-    uint16_t        width; /**<  */
-    uint16_t        height; /**<  */
-    uint32_t        mode; /**<  */
-    uint16_t        rotation; /**<  */
-    uint16_t        rotations; /**<  */
-    uint16_t        num_outputs; /**<  */
-    uint16_t        num_possible_outputs; /**<  */
+    uint8_t          response_type; /**<  */
+    uint8_t          status; /**<  */
+    uint16_t         sequence; /**<  */
+    uint32_t         length; /**<  */
+    xcb_timestamp_t  timestamp; /**<  */
+    int16_t          x; /**<  */
+    int16_t          y; /**<  */
+    uint16_t         width; /**<  */
+    uint16_t         height; /**<  */
+    xcb_randr_mode_t mode; /**<  */
+    uint16_t         rotation; /**<  */
+    uint16_t         rotations; /**<  */
+    uint16_t         num_outputs; /**<  */
+    uint16_t         num_possible_outputs; /**<  */
 } xcb_randr_get_crtc_info_reply_t;
 
 /**
@@ -703,16 +742,17 @@ typedef struct xcb_randr_set_crtc_config_cookie_t {
  * @brief xcb_randr_set_crtc_config_request_t
  **/
 typedef struct xcb_randr_set_crtc_config_request_t {
-    uint8_t         major_opcode; /**<  */
-    uint8_t         minor_opcode; /**<  */
-    uint16_t        length; /**<  */
-    uint32_t        crtc; /**<  */
-    xcb_timestamp_t timestamp; /**<  */
-    xcb_timestamp_t config_timestamp; /**<  */
-    int16_t         x; /**<  */
-    int16_t         y; /**<  */
-    uint32_t        mode; /**<  */
-    uint16_t        rotation; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
+    xcb_timestamp_t  timestamp; /**<  */
+    xcb_timestamp_t  config_timestamp; /**<  */
+    int16_t          x; /**<  */
+    int16_t          y; /**<  */
+    xcb_randr_mode_t mode; /**<  */
+    uint16_t         rotation; /**<  */
+    uint8_t          pad0[2]; /**<  */
 } xcb_randr_set_crtc_config_request_t;
 
 /**
@@ -724,6 +764,7 @@ typedef struct xcb_randr_set_crtc_config_reply_t {
     uint16_t        sequence; /**<  */
     uint32_t        length; /**<  */
     xcb_timestamp_t timestamp; /**<  */
+    uint8_t         pad0[20]; /**<  */
 } xcb_randr_set_crtc_config_reply_t;
 
 /**
@@ -740,10 +781,10 @@ typedef struct xcb_randr_get_crtc_gamma_size_cookie_t {
  * @brief xcb_randr_get_crtc_gamma_size_request_t
  **/
 typedef struct xcb_randr_get_crtc_gamma_size_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t crtc; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
 } xcb_randr_get_crtc_gamma_size_request_t;
 
 /**
@@ -751,10 +792,11 @@ typedef struct xcb_randr_get_crtc_gamma_size_request_t {
  **/
 typedef struct xcb_randr_get_crtc_gamma_size_reply_t {
     uint8_t  response_type; /**<  */
-    uint8_t  status; /**<  */
+    uint8_t  pad0; /**<  */
     uint16_t sequence; /**<  */
     uint32_t length; /**<  */
     uint16_t size; /**<  */
+    uint8_t  pad1[22]; /**<  */
 } xcb_randr_get_crtc_gamma_size_reply_t;
 
 /**
@@ -771,10 +813,10 @@ typedef struct xcb_randr_get_crtc_gamma_cookie_t {
  * @brief xcb_randr_get_crtc_gamma_request_t
  **/
 typedef struct xcb_randr_get_crtc_gamma_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t crtc; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
 } xcb_randr_get_crtc_gamma_request_t;
 
 /**
@@ -782,11 +824,11 @@ typedef struct xcb_randr_get_crtc_gamma_request_t {
  **/
 typedef struct xcb_randr_get_crtc_gamma_reply_t {
     uint8_t  response_type; /**<  */
-    uint8_t  status; /**<  */
+    uint8_t  pad0; /**<  */
     uint16_t sequence; /**<  */
     uint32_t length; /**<  */
     uint16_t size; /**<  */
-    uint8_t  pad0[22]; /**<  */
+    uint8_t  pad1[22]; /**<  */
 } xcb_randr_get_crtc_gamma_reply_t;
 
 /** Opcode for xcb_randr_set_crtc_gamma. */
@@ -796,19 +838,19 @@ typedef struct xcb_randr_get_crtc_gamma_reply_t {
  * @brief xcb_randr_set_crtc_gamma_request_t
  **/
 typedef struct xcb_randr_set_crtc_gamma_request_t {
-    uint8_t  major_opcode; /**<  */
-    uint8_t  minor_opcode; /**<  */
-    uint16_t length; /**<  */
-    uint32_t crtc; /**<  */
-    uint16_t size; /**<  */
-    uint8_t  pad0[2]; /**<  */
+    uint8_t          major_opcode; /**<  */
+    uint8_t          minor_opcode; /**<  */
+    uint16_t         length; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
+    uint16_t         size; /**<  */
+    uint8_t          pad0[2]; /**<  */
 } xcb_randr_set_crtc_gamma_request_t;
 
 typedef enum xcb_randr_notify_mask_t {
-    XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE = (1 << 0),
-    XCB_RANDR_NOTIFY_MASK_CRTC_CHANGE = (1 << 1),
-    XCB_RANDR_NOTIFY_MASK_OUTPUT_CHANGE = (1 << 2),
-    XCB_RANDR_NOTIFY_MASK_OUTPUT_PROPERTY = (1 << 3)
+    XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE = 1,
+    XCB_RANDR_NOTIFY_MASK_CRTC_CHANGE = 2,
+    XCB_RANDR_NOTIFY_MASK_OUTPUT_CHANGE = 4,
+    XCB_RANDR_NOTIFY_MASK_OUTPUT_PROPERTY = 8
 } xcb_randr_notify_mask_t;
 
 /** Opcode for xcb_randr_screen_change_notify. */
@@ -843,16 +885,16 @@ typedef enum xcb_randr_notify_t {
  * @brief xcb_randr_crtc_change_t
  **/
 typedef struct xcb_randr_crtc_change_t {
-    xcb_timestamp_t timestamp; /**<  */
-    xcb_window_t    window; /**<  */
-    uint32_t        crtc; /**<  */
-    uint32_t        mode; /**<  */
-    uint16_t        rotation; /**<  */
-    uint8_t         pad0[2]; /**<  */
-    int16_t         x; /**<  */
-    int16_t         y; /**<  */
-    uint16_t        width; /**<  */
-    uint16_t        height; /**<  */
+    xcb_timestamp_t  timestamp; /**<  */
+    xcb_window_t     window; /**<  */
+    xcb_randr_crtc_t crtc; /**<  */
+    xcb_randr_mode_t mode; /**<  */
+    uint16_t         rotation; /**<  */
+    uint8_t          pad0[2]; /**<  */
+    int16_t          x; /**<  */
+    int16_t          y; /**<  */
+    uint16_t         width; /**<  */
+    uint16_t         height; /**<  */
 } xcb_randr_crtc_change_t;
 
 /**
@@ -868,15 +910,15 @@ typedef struct xcb_randr_crtc_change_iterator_t {
  * @brief xcb_randr_output_change_t
  **/
 typedef struct xcb_randr_output_change_t {
-    xcb_timestamp_t timestamp; /**<  */
-    xcb_timestamp_t config_timestamp; /**<  */
-    xcb_window_t    window; /**<  */
-    uint32_t        output; /**<  */
-    uint32_t        crtc; /**<  */
-    uint32_t        mode; /**<  */
-    uint16_t        rotation; /**<  */
-    uint8_t         connection; /**<  */
-    uint8_t         subpixel_order; /**<  */
+    xcb_timestamp_t    timestamp; /**<  */
+    xcb_timestamp_t    config_timestamp; /**<  */
+    xcb_window_t       window; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_randr_crtc_t   crtc; /**<  */
+    xcb_randr_mode_t   mode; /**<  */
+    uint16_t           rotation; /**<  */
+    uint8_t            connection; /**<  */
+    uint8_t            subpixel_order; /**<  */
 } xcb_randr_output_change_t;
 
 /**
@@ -892,12 +934,12 @@ typedef struct xcb_randr_output_change_iterator_t {
  * @brief xcb_randr_output_property_t
  **/
 typedef struct xcb_randr_output_property_t {
-    xcb_window_t    window; /**<  */
-    uint32_t        output; /**<  */
-    xcb_atom_t      atom; /**<  */
-    xcb_timestamp_t timestamp; /**<  */
-    uint8_t         status; /**<  */
-    uint8_t         pad0[11]; /**<  */
+    xcb_window_t       window; /**<  */
+    xcb_randr_output_t output; /**<  */
+    xcb_atom_t         atom; /**<  */
+    xcb_timestamp_t    timestamp; /**<  */
+    uint8_t            status; /**<  */
+    uint8_t            pad0[11]; /**<  */
 } xcb_randr_output_property_t;
 
 /**
@@ -939,6 +981,135 @@ typedef struct xcb_randr_notify_event_t {
     uint16_t                sequence; /**<  */
     xcb_randr_notify_data_t u; /**<  */
 } xcb_randr_notify_event_t;
+
+/**
+ * Get the next element of the iterator
+ * @param i Pointer to a xcb_randr_mode_iterator_t
+ *
+ * Get the next element in the iterator. The member rem is
+ * decreased by one. The member data points to the next
+ * element. The member index is increased by sizeof(xcb_randr_mode_t)
+ */
+
+/*****************************************************************************
+ **
+ ** void xcb_randr_mode_next
+ ** 
+ ** @param xcb_randr_mode_iterator_t *i
+ ** @returns void
+ **
+ *****************************************************************************/
+ 
+void
+xcb_randr_mode_next (xcb_randr_mode_iterator_t *i  /**< */);
+
+/**
+ * Return the iterator pointing to the last element
+ * @param i An xcb_randr_mode_iterator_t
+ * @return  The iterator pointing to the last element
+ *
+ * Set the current element in the iterator to the last element.
+ * The member rem is set to 0. The member data points to the
+ * last element.
+ */
+
+/*****************************************************************************
+ **
+ ** xcb_generic_iterator_t xcb_randr_mode_end
+ ** 
+ ** @param xcb_randr_mode_iterator_t i
+ ** @returns xcb_generic_iterator_t
+ **
+ *****************************************************************************/
+ 
+xcb_generic_iterator_t
+xcb_randr_mode_end (xcb_randr_mode_iterator_t i  /**< */);
+
+/**
+ * Get the next element of the iterator
+ * @param i Pointer to a xcb_randr_crtc_iterator_t
+ *
+ * Get the next element in the iterator. The member rem is
+ * decreased by one. The member data points to the next
+ * element. The member index is increased by sizeof(xcb_randr_crtc_t)
+ */
+
+/*****************************************************************************
+ **
+ ** void xcb_randr_crtc_next
+ ** 
+ ** @param xcb_randr_crtc_iterator_t *i
+ ** @returns void
+ **
+ *****************************************************************************/
+ 
+void
+xcb_randr_crtc_next (xcb_randr_crtc_iterator_t *i  /**< */);
+
+/**
+ * Return the iterator pointing to the last element
+ * @param i An xcb_randr_crtc_iterator_t
+ * @return  The iterator pointing to the last element
+ *
+ * Set the current element in the iterator to the last element.
+ * The member rem is set to 0. The member data points to the
+ * last element.
+ */
+
+/*****************************************************************************
+ **
+ ** xcb_generic_iterator_t xcb_randr_crtc_end
+ ** 
+ ** @param xcb_randr_crtc_iterator_t i
+ ** @returns xcb_generic_iterator_t
+ **
+ *****************************************************************************/
+ 
+xcb_generic_iterator_t
+xcb_randr_crtc_end (xcb_randr_crtc_iterator_t i  /**< */);
+
+/**
+ * Get the next element of the iterator
+ * @param i Pointer to a xcb_randr_output_iterator_t
+ *
+ * Get the next element in the iterator. The member rem is
+ * decreased by one. The member data points to the next
+ * element. The member index is increased by sizeof(xcb_randr_output_t)
+ */
+
+/*****************************************************************************
+ **
+ ** void xcb_randr_output_next
+ ** 
+ ** @param xcb_randr_output_iterator_t *i
+ ** @returns void
+ **
+ *****************************************************************************/
+ 
+void
+xcb_randr_output_next (xcb_randr_output_iterator_t *i  /**< */);
+
+/**
+ * Return the iterator pointing to the last element
+ * @param i An xcb_randr_output_iterator_t
+ * @return  The iterator pointing to the last element
+ *
+ * Set the current element in the iterator to the last element.
+ * The member rem is set to 0. The member data points to the
+ * last element.
+ */
+
+/*****************************************************************************
+ **
+ ** xcb_generic_iterator_t xcb_randr_output_end
+ ** 
+ ** @param xcb_randr_output_iterator_t i
+ ** @returns xcb_generic_iterator_t
+ **
+ *****************************************************************************/
+ 
+xcb_generic_iterator_t
+xcb_randr_output_end (xcb_randr_output_iterator_t i  /**< */);
 
 /**
  * Get the next element of the iterator
@@ -1129,6 +1300,8 @@ xcb_randr_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1161,11 +1334,11 @@ xcb_randr_query_version_reply (xcb_connection_t                  *c  /**< */,
  ** xcb_randr_set_screen_config_cookie_t xcb_randr_set_screen_config
  ** 
  ** @param xcb_connection_t *c
- ** @param xcb_drawable_t    drawable
+ ** @param xcb_window_t      window
  ** @param xcb_timestamp_t   timestamp
  ** @param xcb_timestamp_t   config_timestamp
  ** @param uint16_t          sizeID
- ** @param int16_t           rotation
+ ** @param uint16_t          rotation
  ** @param uint16_t          rate
  ** @returns xcb_randr_set_screen_config_cookie_t
  **
@@ -1173,11 +1346,11 @@ xcb_randr_query_version_reply (xcb_connection_t                  *c  /**< */,
  
 xcb_randr_set_screen_config_cookie_t
 xcb_randr_set_screen_config (xcb_connection_t *c  /**< */,
-                             xcb_drawable_t    drawable  /**< */,
+                             xcb_window_t      window  /**< */,
                              xcb_timestamp_t   timestamp  /**< */,
                              xcb_timestamp_t   config_timestamp  /**< */,
                              uint16_t          sizeID  /**< */,
-                             int16_t           rotation  /**< */,
+                             uint16_t          rotation  /**< */,
                              uint16_t          rate  /**< */);
 
 /**
@@ -1197,11 +1370,11 @@ xcb_randr_set_screen_config (xcb_connection_t *c  /**< */,
  ** xcb_randr_set_screen_config_cookie_t xcb_randr_set_screen_config_unchecked
  ** 
  ** @param xcb_connection_t *c
- ** @param xcb_drawable_t    drawable
+ ** @param xcb_window_t      window
  ** @param xcb_timestamp_t   timestamp
  ** @param xcb_timestamp_t   config_timestamp
  ** @param uint16_t          sizeID
- ** @param int16_t           rotation
+ ** @param uint16_t          rotation
  ** @param uint16_t          rate
  ** @returns xcb_randr_set_screen_config_cookie_t
  **
@@ -1209,11 +1382,11 @@ xcb_randr_set_screen_config (xcb_connection_t *c  /**< */,
  
 xcb_randr_set_screen_config_cookie_t
 xcb_randr_set_screen_config_unchecked (xcb_connection_t *c  /**< */,
-                                       xcb_drawable_t    drawable  /**< */,
+                                       xcb_window_t      window  /**< */,
                                        xcb_timestamp_t   timestamp  /**< */,
                                        xcb_timestamp_t   config_timestamp  /**< */,
                                        uint16_t          sizeID  /**< */,
-                                       int16_t           rotation  /**< */,
+                                       uint16_t          rotation  /**< */,
                                        uint16_t          rate  /**< */);
 
 /**
@@ -1227,6 +1400,8 @@ xcb_randr_set_screen_config_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_set_screen_config_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1423,6 +1598,8 @@ xcb_randr_get_screen_info_rates_iterator (const xcb_randr_get_screen_info_reply_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_screen_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1501,6 +1678,8 @@ xcb_randr_get_screen_size_range_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_screen_size_range_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1679,14 +1858,14 @@ xcb_randr_get_screen_resources_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_screen_resources_crtcs
+ ** xcb_randr_crtc_t * xcb_randr_get_screen_resources_crtcs
  ** 
  ** @param const xcb_randr_get_screen_resources_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_crtc_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_crtc_t *
 xcb_randr_get_screen_resources_crtcs (const xcb_randr_get_screen_resources_reply_t *R  /**< */);
 
 
@@ -1718,14 +1897,14 @@ xcb_randr_get_screen_resources_crtcs_end (const xcb_randr_get_screen_resources_r
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_screen_resources_outputs
+ ** xcb_randr_output_t * xcb_randr_get_screen_resources_outputs
  ** 
  ** @param const xcb_randr_get_screen_resources_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_output_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_output_t *
 xcb_randr_get_screen_resources_outputs (const xcb_randr_get_screen_resources_reply_t *R  /**< */);
 
 
@@ -1843,6 +2022,8 @@ xcb_randr_get_screen_resources_names_end (const xcb_randr_get_screen_resources_r
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_screen_resources_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1874,17 +2055,17 @@ xcb_randr_get_screen_resources_reply (xcb_connection_t                         *
  **
  ** xcb_randr_get_output_info_cookie_t xcb_randr_get_output_info
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_timestamp_t   config_timestamp
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_timestamp_t     config_timestamp
  ** @returns xcb_randr_get_output_info_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_output_info_cookie_t
-xcb_randr_get_output_info (xcb_connection_t *c  /**< */,
-                           uint32_t          output  /**< */,
-                           xcb_timestamp_t   config_timestamp  /**< */);
+xcb_randr_get_output_info (xcb_connection_t   *c  /**< */,
+                           xcb_randr_output_t  output  /**< */,
+                           xcb_timestamp_t     config_timestamp  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -1902,29 +2083,29 @@ xcb_randr_get_output_info (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_get_output_info_cookie_t xcb_randr_get_output_info_unchecked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_timestamp_t   config_timestamp
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_timestamp_t     config_timestamp
  ** @returns xcb_randr_get_output_info_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_output_info_cookie_t
-xcb_randr_get_output_info_unchecked (xcb_connection_t *c  /**< */,
-                                     uint32_t          output  /**< */,
-                                     xcb_timestamp_t   config_timestamp  /**< */);
+xcb_randr_get_output_info_unchecked (xcb_connection_t   *c  /**< */,
+                                     xcb_randr_output_t  output  /**< */,
+                                     xcb_timestamp_t     config_timestamp  /**< */);
 
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_output_info_crtcs
+ ** xcb_randr_crtc_t * xcb_randr_get_output_info_crtcs
  ** 
  ** @param const xcb_randr_get_output_info_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_crtc_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_crtc_t *
 xcb_randr_get_output_info_crtcs (const xcb_randr_get_output_info_reply_t *R  /**< */);
 
 
@@ -1956,14 +2137,14 @@ xcb_randr_get_output_info_crtcs_end (const xcb_randr_get_output_info_reply_t *R 
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_output_info_modes
+ ** xcb_randr_mode_t * xcb_randr_get_output_info_modes
  ** 
  ** @param const xcb_randr_get_output_info_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_mode_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_mode_t *
 xcb_randr_get_output_info_modes (const xcb_randr_get_output_info_reply_t *R  /**< */);
 
 
@@ -1995,14 +2176,14 @@ xcb_randr_get_output_info_modes_end (const xcb_randr_get_output_info_reply_t *R 
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_output_info_clones
+ ** xcb_randr_output_t * xcb_randr_get_output_info_clones
  ** 
  ** @param const xcb_randr_get_output_info_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_output_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_output_t *
 xcb_randr_get_output_info_clones (const xcb_randr_get_output_info_reply_t *R  /**< */);
 
 
@@ -2081,6 +2262,8 @@ xcb_randr_get_output_info_name_end (const xcb_randr_get_output_info_reply_t *R  
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_output_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2112,15 +2295,15 @@ xcb_randr_get_output_info_reply (xcb_connection_t                    *c  /**< */
  **
  ** xcb_randr_list_output_properties_cookie_t xcb_randr_list_output_properties
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
  ** @returns xcb_randr_list_output_properties_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_list_output_properties_cookie_t
-xcb_randr_list_output_properties (xcb_connection_t *c  /**< */,
-                                  uint32_t          output  /**< */);
+xcb_randr_list_output_properties (xcb_connection_t   *c  /**< */,
+                                  xcb_randr_output_t  output  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2138,15 +2321,15 @@ xcb_randr_list_output_properties (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_list_output_properties_cookie_t xcb_randr_list_output_properties_unchecked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
  ** @returns xcb_randr_list_output_properties_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_list_output_properties_cookie_t
-xcb_randr_list_output_properties_unchecked (xcb_connection_t *c  /**< */,
-                                            uint32_t          output  /**< */);
+xcb_randr_list_output_properties_unchecked (xcb_connection_t   *c  /**< */,
+                                            xcb_randr_output_t  output  /**< */);
 
 
 /*****************************************************************************
@@ -2177,15 +2360,15 @@ xcb_randr_list_output_properties_atoms_length (const xcb_randr_list_output_prope
 
 /*****************************************************************************
  **
- ** xcb_atom_iterator_t xcb_randr_list_output_properties_atoms_iterator
+ ** xcb_generic_iterator_t xcb_randr_list_output_properties_atoms_end
  ** 
  ** @param const xcb_randr_list_output_properties_reply_t *R
- ** @returns xcb_atom_iterator_t
+ ** @returns xcb_generic_iterator_t
  **
  *****************************************************************************/
  
-xcb_atom_iterator_t
-xcb_randr_list_output_properties_atoms_iterator (const xcb_randr_list_output_properties_reply_t *R  /**< */);
+xcb_generic_iterator_t
+xcb_randr_list_output_properties_atoms_end (const xcb_randr_list_output_properties_reply_t *R  /**< */);
 
 /**
  * Return the reply
@@ -2198,6 +2381,8 @@ xcb_randr_list_output_properties_atoms_iterator (const xcb_randr_list_output_pro
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_list_output_properties_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2229,17 +2414,17 @@ xcb_randr_list_output_properties_reply (xcb_connection_t                        
  **
  ** xcb_randr_query_output_property_cookie_t xcb_randr_query_output_property
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
  ** @returns xcb_randr_query_output_property_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_query_output_property_cookie_t
-xcb_randr_query_output_property (xcb_connection_t *c  /**< */,
-                                 uint32_t          output  /**< */,
-                                 xcb_atom_t        property  /**< */);
+xcb_randr_query_output_property (xcb_connection_t   *c  /**< */,
+                                 xcb_randr_output_t  output  /**< */,
+                                 xcb_atom_t          property  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2257,17 +2442,17 @@ xcb_randr_query_output_property (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_query_output_property_cookie_t xcb_randr_query_output_property_unchecked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
  ** @returns xcb_randr_query_output_property_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_query_output_property_cookie_t
-xcb_randr_query_output_property_unchecked (xcb_connection_t *c  /**< */,
-                                           uint32_t          output  /**< */,
-                                           xcb_atom_t        property  /**< */);
+xcb_randr_query_output_property_unchecked (xcb_connection_t   *c  /**< */,
+                                           xcb_randr_output_t  output  /**< */,
+                                           xcb_atom_t          property  /**< */);
 
 
 /*****************************************************************************
@@ -2319,6 +2504,8 @@ xcb_randr_query_output_property_valid_values_end (const xcb_randr_query_output_p
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_query_output_property_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2353,21 +2540,25 @@ xcb_randr_query_output_property_reply (xcb_connection_t                         
  **
  ** xcb_void_cookie_t xcb_randr_configure_output_property_checked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param uint8_t           pending
- ** @param uint8_t           range
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param uint8_t             pending
+ ** @param uint8_t             range
+ ** @param uint32_t            values_len
+ ** @param const int32_t      *values
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_configure_output_property_checked (xcb_connection_t *c  /**< */,
-                                             uint32_t          output  /**< */,
-                                             xcb_atom_t        property  /**< */,
-                                             uint8_t           pending  /**< */,
-                                             uint8_t           range  /**< */);
+xcb_randr_configure_output_property_checked (xcb_connection_t   *c  /**< */,
+                                             xcb_randr_output_t  output  /**< */,
+                                             xcb_atom_t          property  /**< */,
+                                             uint8_t             pending  /**< */,
+                                             uint8_t             range  /**< */,
+                                             uint32_t            values_len  /**< */,
+                                             const int32_t      *values  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2382,21 +2573,25 @@ xcb_randr_configure_output_property_checked (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_configure_output_property
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param uint8_t           pending
- ** @param uint8_t           range
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param uint8_t             pending
+ ** @param uint8_t             range
+ ** @param uint32_t            values_len
+ ** @param const int32_t      *values
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_configure_output_property (xcb_connection_t *c  /**< */,
-                                     uint32_t          output  /**< */,
-                                     xcb_atom_t        property  /**< */,
-                                     uint8_t           pending  /**< */,
-                                     uint8_t           range  /**< */);
+xcb_randr_configure_output_property (xcb_connection_t   *c  /**< */,
+                                     xcb_randr_output_t  output  /**< */,
+                                     xcb_atom_t          property  /**< */,
+                                     uint8_t             pending  /**< */,
+                                     uint8_t             range  /**< */,
+                                     uint32_t            values_len  /**< */,
+                                     const int32_t      *values  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2414,25 +2609,27 @@ xcb_randr_configure_output_property (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_change_output_property_checked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param xcb_atom_t        type
- ** @param uint8_t           format
- ** @param uint8_t           mode
- ** @param uint32_t          num_units
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param xcb_atom_t          type
+ ** @param uint8_t             format
+ ** @param uint8_t             mode
+ ** @param uint32_t            num_units
+ ** @param const void         *data
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_change_output_property_checked (xcb_connection_t *c  /**< */,
-                                          uint32_t          output  /**< */,
-                                          xcb_atom_t        property  /**< */,
-                                          xcb_atom_t        type  /**< */,
-                                          uint8_t           format  /**< */,
-                                          uint8_t           mode  /**< */,
-                                          uint32_t          num_units  /**< */);
+xcb_randr_change_output_property_checked (xcb_connection_t   *c  /**< */,
+                                          xcb_randr_output_t  output  /**< */,
+                                          xcb_atom_t          property  /**< */,
+                                          xcb_atom_t          type  /**< */,
+                                          uint8_t             format  /**< */,
+                                          uint8_t             mode  /**< */,
+                                          uint32_t            num_units  /**< */,
+                                          const void         *data  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2447,25 +2644,27 @@ xcb_randr_change_output_property_checked (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_change_output_property
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param xcb_atom_t        type
- ** @param uint8_t           format
- ** @param uint8_t           mode
- ** @param uint32_t          num_units
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param xcb_atom_t          type
+ ** @param uint8_t             format
+ ** @param uint8_t             mode
+ ** @param uint32_t            num_units
+ ** @param const void         *data
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_change_output_property (xcb_connection_t *c  /**< */,
-                                  uint32_t          output  /**< */,
-                                  xcb_atom_t        property  /**< */,
-                                  xcb_atom_t        type  /**< */,
-                                  uint8_t           format  /**< */,
-                                  uint8_t           mode  /**< */,
-                                  uint32_t          num_units  /**< */);
+xcb_randr_change_output_property (xcb_connection_t   *c  /**< */,
+                                  xcb_randr_output_t  output  /**< */,
+                                  xcb_atom_t          property  /**< */,
+                                  xcb_atom_t          type  /**< */,
+                                  uint8_t             format  /**< */,
+                                  uint8_t             mode  /**< */,
+                                  uint32_t            num_units  /**< */,
+                                  const void         *data  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2483,17 +2682,17 @@ xcb_randr_change_output_property (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_delete_output_property_checked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_delete_output_property_checked (xcb_connection_t *c  /**< */,
-                                          uint32_t          output  /**< */,
-                                          xcb_atom_t        property  /**< */);
+xcb_randr_delete_output_property_checked (xcb_connection_t   *c  /**< */,
+                                          xcb_randr_output_t  output  /**< */,
+                                          xcb_atom_t          property  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2508,17 +2707,17 @@ xcb_randr_delete_output_property_checked (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_delete_output_property
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_delete_output_property (xcb_connection_t *c  /**< */,
-                                  uint32_t          output  /**< */,
-                                  xcb_atom_t        property  /**< */);
+xcb_randr_delete_output_property (xcb_connection_t   *c  /**< */,
+                                  xcb_randr_output_t  output  /**< */,
+                                  xcb_atom_t          property  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2533,27 +2732,27 @@ xcb_randr_delete_output_property (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_get_output_property_cookie_t xcb_randr_get_output_property
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param xcb_atom_t        type
- ** @param uint32_t          long_offset
- ** @param uint32_t          long_length
- ** @param uint8_t           _delete
- ** @param uint8_t           pending
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param xcb_atom_t          type
+ ** @param uint32_t            long_offset
+ ** @param uint32_t            long_length
+ ** @param uint8_t             _delete
+ ** @param uint8_t             pending
  ** @returns xcb_randr_get_output_property_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_output_property_cookie_t
-xcb_randr_get_output_property (xcb_connection_t *c  /**< */,
-                               uint32_t          output  /**< */,
-                               xcb_atom_t        property  /**< */,
-                               xcb_atom_t        type  /**< */,
-                               uint32_t          long_offset  /**< */,
-                               uint32_t          long_length  /**< */,
-                               uint8_t           _delete  /**< */,
-                               uint8_t           pending  /**< */);
+xcb_randr_get_output_property (xcb_connection_t   *c  /**< */,
+                               xcb_randr_output_t  output  /**< */,
+                               xcb_atom_t          property  /**< */,
+                               xcb_atom_t          type  /**< */,
+                               uint32_t            long_offset  /**< */,
+                               uint32_t            long_length  /**< */,
+                               uint8_t             _delete  /**< */,
+                               uint8_t             pending  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2571,27 +2770,27 @@ xcb_randr_get_output_property (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_get_output_property_cookie_t xcb_randr_get_output_property_unchecked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param xcb_atom_t        property
- ** @param xcb_atom_t        type
- ** @param uint32_t          long_offset
- ** @param uint32_t          long_length
- ** @param uint8_t           _delete
- ** @param uint8_t           pending
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_atom_t          property
+ ** @param xcb_atom_t          type
+ ** @param uint32_t            long_offset
+ ** @param uint32_t            long_length
+ ** @param uint8_t             _delete
+ ** @param uint8_t             pending
  ** @returns xcb_randr_get_output_property_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_output_property_cookie_t
-xcb_randr_get_output_property_unchecked (xcb_connection_t *c  /**< */,
-                                         uint32_t          output  /**< */,
-                                         xcb_atom_t        property  /**< */,
-                                         xcb_atom_t        type  /**< */,
-                                         uint32_t          long_offset  /**< */,
-                                         uint32_t          long_length  /**< */,
-                                         uint8_t           _delete  /**< */,
-                                         uint8_t           pending  /**< */);
+xcb_randr_get_output_property_unchecked (xcb_connection_t   *c  /**< */,
+                                         xcb_randr_output_t  output  /**< */,
+                                         xcb_atom_t          property  /**< */,
+                                         xcb_atom_t          type  /**< */,
+                                         uint32_t            long_offset  /**< */,
+                                         uint32_t            long_length  /**< */,
+                                         uint8_t             _delete  /**< */,
+                                         uint8_t             pending  /**< */);
 
 
 /*****************************************************************************
@@ -2643,6 +2842,8 @@ xcb_randr_get_output_property_data_end (const xcb_randr_get_output_property_repl
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_output_property_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2677,6 +2878,8 @@ xcb_randr_get_output_property_reply (xcb_connection_t                        *c 
  ** @param xcb_connection_t      *c
  ** @param xcb_window_t           window
  ** @param xcb_randr_mode_info_t  mode_info
+ ** @param uint32_t               name_len
+ ** @param const char            *name
  ** @returns xcb_randr_create_mode_cookie_t
  **
  *****************************************************************************/
@@ -2684,7 +2887,9 @@ xcb_randr_get_output_property_reply (xcb_connection_t                        *c 
 xcb_randr_create_mode_cookie_t
 xcb_randr_create_mode (xcb_connection_t      *c  /**< */,
                        xcb_window_t           window  /**< */,
-                       xcb_randr_mode_info_t  mode_info  /**< */);
+                       xcb_randr_mode_info_t  mode_info  /**< */,
+                       uint32_t               name_len  /**< */,
+                       const char            *name  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2705,6 +2910,8 @@ xcb_randr_create_mode (xcb_connection_t      *c  /**< */,
  ** @param xcb_connection_t      *c
  ** @param xcb_window_t           window
  ** @param xcb_randr_mode_info_t  mode_info
+ ** @param uint32_t               name_len
+ ** @param const char            *name
  ** @returns xcb_randr_create_mode_cookie_t
  **
  *****************************************************************************/
@@ -2712,7 +2919,9 @@ xcb_randr_create_mode (xcb_connection_t      *c  /**< */,
 xcb_randr_create_mode_cookie_t
 xcb_randr_create_mode_unchecked (xcb_connection_t      *c  /**< */,
                                  xcb_window_t           window  /**< */,
-                                 xcb_randr_mode_info_t  mode_info  /**< */);
+                                 xcb_randr_mode_info_t  mode_info  /**< */,
+                                 uint32_t               name_len  /**< */,
+                                 const char            *name  /**< */);
 
 /**
  * Return the reply
@@ -2725,6 +2934,8 @@ xcb_randr_create_mode_unchecked (xcb_connection_t      *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_create_mode_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2760,14 +2971,14 @@ xcb_randr_create_mode_reply (xcb_connection_t                *c  /**< */,
  ** xcb_void_cookie_t xcb_randr_destroy_mode_checked
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          mode
+ ** @param xcb_randr_mode_t  mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
 xcb_randr_destroy_mode_checked (xcb_connection_t *c  /**< */,
-                                uint32_t          mode  /**< */);
+                                xcb_randr_mode_t  mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2783,14 +2994,14 @@ xcb_randr_destroy_mode_checked (xcb_connection_t *c  /**< */,
  ** xcb_void_cookie_t xcb_randr_destroy_mode
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          mode
+ ** @param xcb_randr_mode_t  mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
 xcb_randr_destroy_mode (xcb_connection_t *c  /**< */,
-                        uint32_t          mode  /**< */);
+                        xcb_randr_mode_t  mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2808,17 +3019,17 @@ xcb_randr_destroy_mode (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_add_output_mode_checked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param uint32_t          mode
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_randr_mode_t    mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_add_output_mode_checked (xcb_connection_t *c  /**< */,
-                                   uint32_t          output  /**< */,
-                                   uint32_t          mode  /**< */);
+xcb_randr_add_output_mode_checked (xcb_connection_t   *c  /**< */,
+                                   xcb_randr_output_t  output  /**< */,
+                                   xcb_randr_mode_t    mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2833,17 +3044,17 @@ xcb_randr_add_output_mode_checked (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_add_output_mode
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param uint32_t          mode
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_randr_mode_t    mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_add_output_mode (xcb_connection_t *c  /**< */,
-                           uint32_t          output  /**< */,
-                           uint32_t          mode  /**< */);
+xcb_randr_add_output_mode (xcb_connection_t   *c  /**< */,
+                           xcb_randr_output_t  output  /**< */,
+                           xcb_randr_mode_t    mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2861,17 +3072,17 @@ xcb_randr_add_output_mode (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_delete_output_mode_checked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param uint32_t          mode
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_randr_mode_t    mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_delete_output_mode_checked (xcb_connection_t *c  /**< */,
-                                      uint32_t          output  /**< */,
-                                      uint32_t          mode  /**< */);
+xcb_randr_delete_output_mode_checked (xcb_connection_t   *c  /**< */,
+                                      xcb_randr_output_t  output  /**< */,
+                                      xcb_randr_mode_t    mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2886,17 +3097,17 @@ xcb_randr_delete_output_mode_checked (xcb_connection_t *c  /**< */,
  **
  ** xcb_void_cookie_t xcb_randr_delete_output_mode
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          output
- ** @param uint32_t          mode
+ ** @param xcb_connection_t   *c
+ ** @param xcb_randr_output_t  output
+ ** @param xcb_randr_mode_t    mode
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
  
 xcb_void_cookie_t
-xcb_randr_delete_output_mode (xcb_connection_t *c  /**< */,
-                              uint32_t          output  /**< */,
-                              uint32_t          mode  /**< */);
+xcb_randr_delete_output_mode (xcb_connection_t   *c  /**< */,
+                              xcb_randr_output_t  output  /**< */,
+                              xcb_randr_mode_t    mode  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2912,7 +3123,7 @@ xcb_randr_delete_output_mode (xcb_connection_t *c  /**< */,
  ** xcb_randr_get_crtc_info_cookie_t xcb_randr_get_crtc_info
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @param xcb_timestamp_t   config_timestamp
  ** @returns xcb_randr_get_crtc_info_cookie_t
  **
@@ -2920,7 +3131,7 @@ xcb_randr_delete_output_mode (xcb_connection_t *c  /**< */,
  
 xcb_randr_get_crtc_info_cookie_t
 xcb_randr_get_crtc_info (xcb_connection_t *c  /**< */,
-                         uint32_t          crtc  /**< */,
+                         xcb_randr_crtc_t  crtc  /**< */,
                          xcb_timestamp_t   config_timestamp  /**< */);
 
 /**
@@ -2940,7 +3151,7 @@ xcb_randr_get_crtc_info (xcb_connection_t *c  /**< */,
  ** xcb_randr_get_crtc_info_cookie_t xcb_randr_get_crtc_info_unchecked
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @param xcb_timestamp_t   config_timestamp
  ** @returns xcb_randr_get_crtc_info_cookie_t
  **
@@ -2948,20 +3159,20 @@ xcb_randr_get_crtc_info (xcb_connection_t *c  /**< */,
  
 xcb_randr_get_crtc_info_cookie_t
 xcb_randr_get_crtc_info_unchecked (xcb_connection_t *c  /**< */,
-                                   uint32_t          crtc  /**< */,
+                                   xcb_randr_crtc_t  crtc  /**< */,
                                    xcb_timestamp_t   config_timestamp  /**< */);
 
 
 /*****************************************************************************
  **
- ** uint32_t * xcb_randr_get_crtc_info_outputs
+ ** xcb_randr_output_t * xcb_randr_get_crtc_info_outputs
  ** 
  ** @param const xcb_randr_get_crtc_info_reply_t *R
- ** @returns uint32_t *
+ ** @returns xcb_randr_output_t *
  **
  *****************************************************************************/
  
-uint32_t *
+xcb_randr_output_t *
 xcb_randr_get_crtc_info_outputs (const xcb_randr_get_crtc_info_reply_t *R  /**< */);
 
 
@@ -2990,6 +3201,45 @@ xcb_randr_get_crtc_info_outputs_length (const xcb_randr_get_crtc_info_reply_t *R
 xcb_generic_iterator_t
 xcb_randr_get_crtc_info_outputs_end (const xcb_randr_get_crtc_info_reply_t *R  /**< */);
 
+
+/*****************************************************************************
+ **
+ ** xcb_randr_output_t * xcb_randr_get_crtc_info_possible
+ ** 
+ ** @param const xcb_randr_get_crtc_info_reply_t *R
+ ** @returns xcb_randr_output_t *
+ **
+ *****************************************************************************/
+ 
+xcb_randr_output_t *
+xcb_randr_get_crtc_info_possible (const xcb_randr_get_crtc_info_reply_t *R  /**< */);
+
+
+/*****************************************************************************
+ **
+ ** int xcb_randr_get_crtc_info_possible_length
+ ** 
+ ** @param const xcb_randr_get_crtc_info_reply_t *R
+ ** @returns int
+ **
+ *****************************************************************************/
+ 
+int
+xcb_randr_get_crtc_info_possible_length (const xcb_randr_get_crtc_info_reply_t *R  /**< */);
+
+
+/*****************************************************************************
+ **
+ ** xcb_generic_iterator_t xcb_randr_get_crtc_info_possible_end
+ ** 
+ ** @param const xcb_randr_get_crtc_info_reply_t *R
+ ** @returns xcb_generic_iterator_t
+ **
+ *****************************************************************************/
+ 
+xcb_generic_iterator_t
+xcb_randr_get_crtc_info_possible_end (const xcb_randr_get_crtc_info_reply_t *R  /**< */);
+
 /**
  * Return the reply
  * @param c      The connection
@@ -3001,6 +3251,8 @@ xcb_randr_get_crtc_info_outputs_end (const xcb_randr_get_crtc_info_reply_t *R  /
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_crtc_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3032,27 +3284,31 @@ xcb_randr_get_crtc_info_reply (xcb_connection_t                  *c  /**< */,
  **
  ** xcb_randr_set_crtc_config_cookie_t xcb_randr_set_crtc_config
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
- ** @param xcb_timestamp_t   timestamp
- ** @param xcb_timestamp_t   config_timestamp
- ** @param int16_t           x
- ** @param int16_t           y
- ** @param uint32_t          mode
- ** @param uint16_t          rotation
+ ** @param xcb_connection_t         *c
+ ** @param xcb_randr_crtc_t          crtc
+ ** @param xcb_timestamp_t           timestamp
+ ** @param xcb_timestamp_t           config_timestamp
+ ** @param int16_t                   x
+ ** @param int16_t                   y
+ ** @param xcb_randr_mode_t          mode
+ ** @param uint16_t                  rotation
+ ** @param uint32_t                  outputs_len
+ ** @param const xcb_randr_output_t *outputs
  ** @returns xcb_randr_set_crtc_config_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_set_crtc_config_cookie_t
-xcb_randr_set_crtc_config (xcb_connection_t *c  /**< */,
-                           uint32_t          crtc  /**< */,
-                           xcb_timestamp_t   timestamp  /**< */,
-                           xcb_timestamp_t   config_timestamp  /**< */,
-                           int16_t           x  /**< */,
-                           int16_t           y  /**< */,
-                           uint32_t          mode  /**< */,
-                           uint16_t          rotation  /**< */);
+xcb_randr_set_crtc_config (xcb_connection_t         *c  /**< */,
+                           xcb_randr_crtc_t          crtc  /**< */,
+                           xcb_timestamp_t           timestamp  /**< */,
+                           xcb_timestamp_t           config_timestamp  /**< */,
+                           int16_t                   x  /**< */,
+                           int16_t                   y  /**< */,
+                           xcb_randr_mode_t          mode  /**< */,
+                           uint16_t                  rotation  /**< */,
+                           uint32_t                  outputs_len  /**< */,
+                           const xcb_randr_output_t *outputs  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -3070,27 +3326,31 @@ xcb_randr_set_crtc_config (xcb_connection_t *c  /**< */,
  **
  ** xcb_randr_set_crtc_config_cookie_t xcb_randr_set_crtc_config_unchecked
  ** 
- ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
- ** @param xcb_timestamp_t   timestamp
- ** @param xcb_timestamp_t   config_timestamp
- ** @param int16_t           x
- ** @param int16_t           y
- ** @param uint32_t          mode
- ** @param uint16_t          rotation
+ ** @param xcb_connection_t         *c
+ ** @param xcb_randr_crtc_t          crtc
+ ** @param xcb_timestamp_t           timestamp
+ ** @param xcb_timestamp_t           config_timestamp
+ ** @param int16_t                   x
+ ** @param int16_t                   y
+ ** @param xcb_randr_mode_t          mode
+ ** @param uint16_t                  rotation
+ ** @param uint32_t                  outputs_len
+ ** @param const xcb_randr_output_t *outputs
  ** @returns xcb_randr_set_crtc_config_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_set_crtc_config_cookie_t
-xcb_randr_set_crtc_config_unchecked (xcb_connection_t *c  /**< */,
-                                     uint32_t          crtc  /**< */,
-                                     xcb_timestamp_t   timestamp  /**< */,
-                                     xcb_timestamp_t   config_timestamp  /**< */,
-                                     int16_t           x  /**< */,
-                                     int16_t           y  /**< */,
-                                     uint32_t          mode  /**< */,
-                                     uint16_t          rotation  /**< */);
+xcb_randr_set_crtc_config_unchecked (xcb_connection_t         *c  /**< */,
+                                     xcb_randr_crtc_t          crtc  /**< */,
+                                     xcb_timestamp_t           timestamp  /**< */,
+                                     xcb_timestamp_t           config_timestamp  /**< */,
+                                     int16_t                   x  /**< */,
+                                     int16_t                   y  /**< */,
+                                     xcb_randr_mode_t          mode  /**< */,
+                                     uint16_t                  rotation  /**< */,
+                                     uint32_t                  outputs_len  /**< */,
+                                     const xcb_randr_output_t *outputs  /**< */);
 
 /**
  * Return the reply
@@ -3103,6 +3363,8 @@ xcb_randr_set_crtc_config_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_set_crtc_config_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3135,14 +3397,14 @@ xcb_randr_set_crtc_config_reply (xcb_connection_t                    *c  /**< */
  ** xcb_randr_get_crtc_gamma_size_cookie_t xcb_randr_get_crtc_gamma_size
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @returns xcb_randr_get_crtc_gamma_size_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_crtc_gamma_size_cookie_t
 xcb_randr_get_crtc_gamma_size (xcb_connection_t *c  /**< */,
-                               uint32_t          crtc  /**< */);
+                               xcb_randr_crtc_t  crtc  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -3161,14 +3423,14 @@ xcb_randr_get_crtc_gamma_size (xcb_connection_t *c  /**< */,
  ** xcb_randr_get_crtc_gamma_size_cookie_t xcb_randr_get_crtc_gamma_size_unchecked
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @returns xcb_randr_get_crtc_gamma_size_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_crtc_gamma_size_cookie_t
 xcb_randr_get_crtc_gamma_size_unchecked (xcb_connection_t *c  /**< */,
-                                         uint32_t          crtc  /**< */);
+                                         xcb_randr_crtc_t  crtc  /**< */);
 
 /**
  * Return the reply
@@ -3181,6 +3443,8 @@ xcb_randr_get_crtc_gamma_size_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_crtc_gamma_size_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3213,14 +3477,14 @@ xcb_randr_get_crtc_gamma_size_reply (xcb_connection_t                        *c 
  ** xcb_randr_get_crtc_gamma_cookie_t xcb_randr_get_crtc_gamma
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @returns xcb_randr_get_crtc_gamma_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_crtc_gamma_cookie_t
 xcb_randr_get_crtc_gamma (xcb_connection_t *c  /**< */,
-                          uint32_t          crtc  /**< */);
+                          xcb_randr_crtc_t  crtc  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -3239,14 +3503,14 @@ xcb_randr_get_crtc_gamma (xcb_connection_t *c  /**< */,
  ** xcb_randr_get_crtc_gamma_cookie_t xcb_randr_get_crtc_gamma_unchecked
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @returns xcb_randr_get_crtc_gamma_cookie_t
  **
  *****************************************************************************/
  
 xcb_randr_get_crtc_gamma_cookie_t
 xcb_randr_get_crtc_gamma_unchecked (xcb_connection_t *c  /**< */,
-                                    uint32_t          crtc  /**< */);
+                                    xcb_randr_crtc_t  crtc  /**< */);
 
 
 /*****************************************************************************
@@ -3376,6 +3640,8 @@ xcb_randr_get_crtc_gamma_blue_end (const xcb_randr_get_crtc_gamma_reply_t *R  /*
  * The parameter @p e supplied to this function must be NULL if
  * xcb_randr_get_crtc_gamma_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3411,7 +3677,7 @@ xcb_randr_get_crtc_gamma_reply (xcb_connection_t                   *c  /**< */,
  ** xcb_void_cookie_t xcb_randr_set_crtc_gamma_checked
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @param uint16_t          size
  ** @param const uint16_t   *red
  ** @param const uint16_t   *green
@@ -3422,7 +3688,7 @@ xcb_randr_get_crtc_gamma_reply (xcb_connection_t                   *c  /**< */,
  
 xcb_void_cookie_t
 xcb_randr_set_crtc_gamma_checked (xcb_connection_t *c  /**< */,
-                                  uint32_t          crtc  /**< */,
+                                  xcb_randr_crtc_t  crtc  /**< */,
                                   uint16_t          size  /**< */,
                                   const uint16_t   *red  /**< */,
                                   const uint16_t   *green  /**< */,
@@ -3442,7 +3708,7 @@ xcb_randr_set_crtc_gamma_checked (xcb_connection_t *c  /**< */,
  ** xcb_void_cookie_t xcb_randr_set_crtc_gamma
  ** 
  ** @param xcb_connection_t *c
- ** @param uint32_t          crtc
+ ** @param xcb_randr_crtc_t  crtc
  ** @param uint16_t          size
  ** @param const uint16_t   *red
  ** @param const uint16_t   *green
@@ -3453,7 +3719,7 @@ xcb_randr_set_crtc_gamma_checked (xcb_connection_t *c  /**< */,
  
 xcb_void_cookie_t
 xcb_randr_set_crtc_gamma (xcb_connection_t *c  /**< */,
-                          uint32_t          crtc  /**< */,
+                          xcb_randr_crtc_t  crtc  /**< */,
                           uint16_t          size  /**< */,
                           const uint16_t   *red  /**< */,
                           const uint16_t   *green  /**< */,
@@ -3631,6 +3897,10 @@ xcb_randr_notify_data_next (xcb_randr_notify_data_iterator_t *i  /**< */);
 xcb_generic_iterator_t
 xcb_randr_notify_data_end (xcb_randr_notify_data_iterator_t i  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

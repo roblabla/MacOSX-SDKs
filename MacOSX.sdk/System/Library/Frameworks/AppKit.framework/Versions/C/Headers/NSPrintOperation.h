@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -136,16 +136,15 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* Methods that were deprecated in Mac OS 10.5. You can merely get the NSPrintPanel of the operation and invoke these methods on the result instead of invoking them on the operation. In Mac OS 10.5 -setAccessoryView:/-accessoryView are deprecated in NSPageLayout and NSPrintPanel too. You should consider using those class' support for NSViewControllers instead.
 */
-- (void)setAccessoryView:(NSView *)view;
-- (NSView *)accessoryView;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-- (void)setJobStyleHint:(NSString *)hint;
-- (NSString *)jobStyleHint;
-#endif
+- (void)setAccessoryView:(NSView *)view DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (void)setJobStyleHint:(NSString *)hint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+- (NSString *)jobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* Methods that were deprecated in Mac OS 10.4. Use the new -setShowsPrintPanel:/-showsPrintPanel and -setShowsProgressPanel:/-showsProgressPanel methods instead.
 */
-- (void)setShowPanels:(BOOL)flag;
-- (BOOL)showPanels;
+- (void)setShowPanels:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)showPanels DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 @end

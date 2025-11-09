@@ -3,9 +3,7 @@
  
      Contains:   AudioOutputUnit Interfaces
  
-     Version:    Mac OS X
- 
-     Copyright:  © 2000-2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,7 +14,7 @@
 #ifndef __AUDIOOUTPUTUNIT__
 #define __AUDIOOUTPUTUNIT__
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AUComponent.h>
 #else
@@ -48,11 +46,11 @@ extern "C" {
 //-----------------------------------------------------------------------------
 //	Start/stop methods for output units
 //-----------------------------------------------------------------------------
-extern ComponentResult
-AudioOutputUnitStart(	AudioUnit	ci)											AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus
+AudioOutputUnitStart(	AudioUnit	ci)											__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
-extern ComponentResult
-AudioOutputUnitStop(	AudioUnit	ci)											AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus
+AudioOutputUnitStop(	AudioUnit	ci)											__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 //	Selectors for component calls

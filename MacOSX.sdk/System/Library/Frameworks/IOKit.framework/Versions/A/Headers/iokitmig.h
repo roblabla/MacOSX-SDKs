@@ -23,12 +23,12 @@ typedef struct {
         char            *name;
         function_ptr_t  function;
 } function_table_entry;
-typedef function_table_entry 	*function_table_t;
+typedef function_table_entry   *function_table_t;
 #endif /* FUNCTION_PTR_T */
 #endif /* AUTOTEST */
 
 #ifndef	iokit_MSG_COUNT
-#define	iokit_MSG_COUNT	67
+#define	iokit_MSG_COUNT	72
 #endif	/* iokit_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -825,7 +825,9 @@ extern
 kern_return_t io_service_get_state
 (
 	mach_port_t service,
-	uint64_t *state
+	uint64_t *state,
+	uint32_t *busy_state,
+	uint64_t *accumulated_busy_time
 );
 
 /* Routine io_service_get_matching_services_ool */
@@ -1000,6 +1002,18 @@ kern_return_t io_connect_async_method
 	mach_msg_type_number_t *inband_outputCnt,
 	mach_vm_address_t ool_output,
 	mach_vm_size_t *ool_output_size
+);
+
+/* Routine io_registry_entry_get_registry_entry_id */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_registry_entry_get_registry_entry_id
+(
+	mach_port_t registry_entry,
+	uint64_t *entry_id
 );
 
 __END_DECLS
@@ -2011,6 +2025,16 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_entry_get_registry_entry_id_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__iokit_subsystem__defined */
 
 /* union of all requests */
@@ -2085,6 +2109,7 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_connect_unmap_memory_from_task_t Request_io_connect_unmap_memory_from_task;
 	__Request__io_connect_method_t Request_io_connect_method;
 	__Request__io_connect_async_method_t Request_io_connect_async_method;
+	__Request__io_registry_entry_get_registry_entry_id_t Request_io_registry_entry_get_registry_entry_id;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 /* typedefs for all replies */
@@ -2858,6 +2883,8 @@ union __RequestUnion__iokit_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		uint64_t state;
+		uint32_t busy_state;
+		uint64_t accumulated_busy_time;
 	} __Reply__io_service_get_state_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -3014,6 +3041,19 @@ union __RequestUnion__iokit_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		uint64_t entry_id;
+	} __Reply__io_registry_entry_get_registry_entry_id_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__iokit_subsystem__defined */
 
 /* union of all replies */
@@ -3088,6 +3128,7 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_connect_unmap_memory_from_task_t Reply_io_connect_unmap_memory_from_task;
 	__Reply__io_connect_method_t Reply_io_connect_method;
 	__Reply__io_connect_async_method_t Reply_io_connect_async_method;
+	__Reply__io_registry_entry_get_registry_entry_id_t Reply_io_registry_entry_get_registry_entry_id;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 
@@ -3159,7 +3200,8 @@ union __ReplyUnion__iokit_subsystem {
     { "io_connect_map_memory_into_task", 2863 },\
     { "io_connect_unmap_memory_from_task", 2864 },\
     { "io_connect_method", 2865 },\
-    { "io_connect_async_method", 2866 }
+    { "io_connect_async_method", 2866 },\
+    { "io_registry_entry_get_registry_entry_id", 2871 }
 #endif
 
 #ifdef __AfterMigUserHeader

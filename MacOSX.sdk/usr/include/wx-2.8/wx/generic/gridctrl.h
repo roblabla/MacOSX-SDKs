@@ -4,7 +4,7 @@
 // Author:      Paul Gammans, Roger Gammans
 // Modified by:
 // Created:     11/04/2001
-// RCS-ID:      $Id: gridctrl.h,v 1.18 2006/10/03 14:28:31 PC Exp $
+// RCS-ID:      $Id: gridctrl.h 48089 2007-08-15 11:46:57Z VZ $
 // Copyright:   (c) The Computer Surgery (paul@compsurg.co.uk)
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,8 @@
 #define wxGRID_VALUE_DATETIME     _T("datetime")
 
 #if wxUSE_DATETIME
+
+#include "wx/datetime.h"
 
 // the default renderer for the cells containing Time and dates..
 class WXDLLIMPEXP_ADV wxGridCellDateTimeRenderer : public wxGridCellStringRenderer

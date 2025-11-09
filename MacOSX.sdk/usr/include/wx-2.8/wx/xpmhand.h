@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:
-// RCS-ID:      $Id: xpmhand.h,v 1.4 2005/05/04 18:52:07 JS Exp $
+// RCS-ID:      $Id: xpmhand.h 33948 2005-05-04 18:57:50Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

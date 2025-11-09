@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     29/01/98
-// RCS-ID:      $Id: layout.h,v 1.26 2006/09/05 20:45:03 VZ Exp $
+// RCS-ID:      $Id: layout.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 1998 Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -32,8 +32,8 @@
 // forward declrations
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxWindowBase;
-class WXDLLEXPORT wxLayoutConstraints;
+class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class WXDLLIMPEXP_FWD_CORE wxLayoutConstraints;
 
 // ----------------------------------------------------------------------------
 // constants

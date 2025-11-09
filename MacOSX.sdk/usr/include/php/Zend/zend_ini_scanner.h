@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,18 +17,22 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_ini_scanner.h,v 1.14.2.1.2.3 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_ini_scanner.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef _ZEND_INI_SCANNER_H
 #define _ZEND_INI_SCANNER_H
 
+/* Scanner modes */
+#define ZEND_INI_SCANNER_NORMAL 0 /* Normal mode. [DEFAULT] */
+#define ZEND_INI_SCANNER_RAW    1 /* Raw mode. Option values are not parsed */
+
 BEGIN_EXTERN_C()
 int zend_ini_scanner_get_lineno(TSRMLS_D);
 char *zend_ini_scanner_get_filename(TSRMLS_D);
-int zend_ini_open_file_for_scanning(zend_file_handle *fh TSRMLS_DC);
-int zend_ini_prepare_string_for_scanning(char *str TSRMLS_DC);
-void zend_ini_close_file(zend_file_handle *fh TSRMLS_DC);
+int zend_ini_open_file_for_scanning(zend_file_handle *fh, int scanner_mode TSRMLS_DC);
+int zend_ini_prepare_string_for_scanning(char *str, int scanner_mode TSRMLS_DC);
 int ini_lex(zval *ini_lval TSRMLS_DC);
+void shutdown_ini_scanner(TSRMLS_D);
 END_EXTERN_C()
 
 #endif /* _ZEND_INI_SCANNER_H */

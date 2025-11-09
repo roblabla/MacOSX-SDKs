@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
+	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -22,7 +22,9 @@ extern NSString* const QCCompositionAttributeHasConsumersKey; //NSNumber - Boole
 extern NSString* const QCCompositionAttributeCategoryKey; //NSString
 #endif
 
+
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+
 
 /* Standard composition categories */
 extern NSString* const QCCompositionCategoryDistortion;
@@ -47,10 +49,16 @@ extern NSString* const QCCompositionInputTrackSignalKey; //Boolean port
 extern NSString* const QCCompositionInputPrimaryColorKey; //Color port
 extern NSString* const QCCompositionInputSecondaryColorKey; //Color port
 extern NSString* const QCCompositionInputPaceKey; //Number port (in [0,1] range)
+#ifdef __QUARTZCOMPOSER_CORE3D__
+extern NSString* const QCCompositionInputMeshKey; //Mesh port
+#endif
 
 /* Standard composition output port keys */
 extern NSString* const QCCompositionOutputImageKey; //Image port
 extern NSString* const QCCompositionOutputWebPageURLKey; //String port
+#ifdef __QUARTZCOMPOSER_CORE3D__
+extern NSString* const QCCompositionOutputMeshKey; //Mesh port
+#endif
 
 /* Composition graphic animation protocol (the composition renders a generic graphical animation):
 - QCCompositionInputPrimaryColorKey (optional): The primary color of the animation
@@ -98,6 +106,14 @@ extern NSString* const QCCompositionProtocolRSSVisualizer;
 - QCCompositionInputTrackSignalKey (optional): Indicates a new track has started playing
 */
 extern NSString* const QCCompositionProtocolMusicVisualizer;
+
+#ifdef __QUARTZCOMPOSER_CORE3D__
+/* Composition mesh filter protocol (the composition applies an effect to a source image):
+- QCCompositionInputMeshKey: Source image
+- QCCompositionOutputMeshKey: New image with the applied effect
+*/
+extern NSString* const QCCompositionProtocolMeshFilter;
+#endif
 
 /* Opaque composition object */
 @interface QCComposition : NSObject <NSCopying>

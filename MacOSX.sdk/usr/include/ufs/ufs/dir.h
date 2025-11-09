@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -118,7 +118,7 @@ struct	direct {
 	u_int8_t  d_type; 		/* file type, see below */
 	u_int8_t  d_namlen;		/* length of string in d_name */
 	char	  d_name[UFSMAXNAMLEN + 1];/* name with length <= UFSMAXNAMLEN */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * File types
@@ -172,7 +172,7 @@ struct dirtemplate {
 	u_int8_t	dotdot_type;
 	u_int8_t	dotdot_namlen;
 	char		dotdot_name[4];	/* ditto */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * This is the old format of directories, sanz type element.
@@ -186,6 +186,7 @@ struct odirtemplate {
 	int16_t		dotdot_reclen;
 	u_int16_t	dotdot_namlen;
 	char		dotdot_name[4];	/* ditto */
-};
+} __attribute__((packed,aligned(4)));
+
 #endif /* __APPLE_API_UNSTABLE */
 #endif /* !_DIR_H_ */

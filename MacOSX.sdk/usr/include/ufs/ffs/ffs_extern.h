@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -113,7 +113,9 @@ int	ffs_alloc(struct inode *,
 	    ufs_daddr_t, ufs_daddr_t, int, kauth_cred_t, ufs_daddr_t *);
 int	ffs_balloc(struct inode *,
 	    ufs_daddr_t, int, kauth_cred_t, struct buf **, int, int *);
-void	ffs_blkfree(struct inode *, ufs_daddr_t, long);
+int ffs_blkalloc(struct inode *ip, ufs_daddr_t lbn,int size,
+	kauth_cred_t cred, int flags);
+void	ffs_blkfree(struct inode *, ufs_daddr_t, int32_t);
 ufs_daddr_t ffs_blkpref(struct inode *, ufs_daddr_t, int, ufs_daddr_t *);
 void	ffs_clrblock(struct fs *, u_char *, ufs_daddr_t);
 int	ffs_fhtovp(struct mount *, int, unsigned char *, struct vnode **, vfs_context_t);

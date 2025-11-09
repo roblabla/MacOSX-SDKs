@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     9-June-2005
-// RCS-ID:      $Id: _renderer.i,v 1.11 2006/11/30 23:44:27 RD Exp $
+// RCS-ID:      $Id: _renderer.i 53769 2008-05-26 20:50:38Z RD $
 // Copyright:   (c) 2005 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -279,6 +279,26 @@ The flags parameter may be:
     
 
 
+    %extend {
+        void DrawChoice(wxWindow *win, wxDC& dc, const wxRect& rect, int flags=0)
+        {
+            wxRenderer_DrawChoice(win, dc, rect, flags);
+        }
+        void DrawComboBox(wxWindow *win, wxDC& dc, const wxRect& rect, int flags=0)
+        {
+            wxRenderer_DrawComboBox(win, dc, rect, flags);
+        }
+        void DrawTextCtrl(wxWindow *win, wxDC& dc, const wxRect& rect, int flags=0)
+        {
+            wxRenderer_DrawTextCtrl(win, dc, rect, flags);
+        }
+        void DrawRadioButton(wxWindow *win, wxDC& dc, const wxRect& rect, int flags=0)
+        {
+            wxRenderer_DrawRadioButton(win, dc, rect, flags);
+        }
+    }
+    
+
     MustHaveApp(Get);
     DocDeclStr(
         static wxRendererNative& , Get(),
@@ -329,4 +349,23 @@ compatibility of dynamically loaded renderers.", "");
 };
 
 
+
 //---------------------------------------------------------------------------
+
+#if defined(__WXMSW__) || defined(__WXMAC__)
+
+void wxRenderer_DrawChoice(wxWindow* win, wxDC& dc,
+                             const wxRect& rect, int flags=0);
+
+void wxRenderer_DrawComboBox(wxWindow* win, wxDC& dc,
+                             const wxRect& rect, int flags=0);
+
+void wxRenderer_DrawTextCtrl(wxWindow* win, wxDC& dc,
+                             const wxRect& rect, int flags=0);
+
+void wxRenderer_DrawRadioButton(wxWindow* win, wxDC& dc,
+                                const wxRect& rect, int flags=0);
+#endif
+
+//---------------------------------------------------------------------------
+

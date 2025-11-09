@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -19,12 +19,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_exceptions.h,v 1.21.2.1.2.3 2007/12/31 07:20:02 sebastian Exp $ */
+/* $Id: zend_exceptions.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_EXCEPTIONS_H
 #define ZEND_EXCEPTIONS_H
 
 BEGIN_EXTERN_C()
+
+ZEND_API void zend_exception_set_previous(zval *exception, zval *add_previous TSRMLS_DC);
+ZEND_API void zend_exception_save(TSRMLS_D);
+ZEND_API void zend_exception_restore(TSRMLS_D);
 
 void zend_throw_exception_internal(zval *exception TSRMLS_DC);
 
@@ -45,8 +49,8 @@ ZEND_API zval * zend_throw_error_exception(zend_class_entry *exception_ce, char 
 
 extern ZEND_API void (*zend_throw_exception_hook)(zval *ex TSRMLS_DC);
 
-/* show an exception using zend_error(E_ERROR,...) */
-ZEND_API void zend_exception_error(zval *exception TSRMLS_DC);
+/* show an exception using zend_error(severity,...), severity should be E_ERROR */
+ZEND_API void zend_exception_error(zval *exception, int severity TSRMLS_DC);
 
 /* do not export, in php it's available thru spprintf directly */
 int zend_spprintf(char **message, int max_len, char *format, ...);

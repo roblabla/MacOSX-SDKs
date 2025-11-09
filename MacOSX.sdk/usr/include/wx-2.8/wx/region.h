@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:
-// RCS-ID:      $Id: region.h,v 1.23 2006/10/10 17:33:41 PC Exp $
+// RCS-ID:      $Id: region.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,9 +15,9 @@
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
 
-class WXDLLIMPEXP_CORE wxBitmap;
-class WXDLLEXPORT wxColour;
-class WXDLLEXPORT wxRegion;
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class WXDLLIMPEXP_FWD_CORE wxColour;
+class WXDLLIMPEXP_FWD_CORE wxRegion;
 
 // ----------------------------------------------------------------------------
 // constants

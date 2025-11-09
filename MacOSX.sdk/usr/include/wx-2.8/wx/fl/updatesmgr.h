@@ -4,7 +4,7 @@
 // Author:      Aleksandras Gluchovas (@Lithuania)
 // Modified by:
 // Created:     19/10/98
-// RCS-ID:      $Id: updatesmgr.h,v 1.7 2005/09/23 12:46:58 MR Exp $
+// RCS-ID:      $Id: updatesmgr.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) Aleksandras Gluchovas
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,7 +50,7 @@ typedef NSUInteger NSFontRenderingMode;
     /* All instance variables are private */
     NSString *_name;
     CGFloat _size;
-    void *_reservedFont1;
+    NSInteger _retainCount;
     struct __fFlags {
         unsigned int _isScreenFont:1;
         unsigned int _systemFontType:8;

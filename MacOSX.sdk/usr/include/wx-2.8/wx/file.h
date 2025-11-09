@@ -5,7 +5,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     29/01/98
-// RCS-ID:      $Id: file.h,v 1.49 2006/04/05 14:37:37 VZ Exp $
+// RCS-ID:      $Id: file.h 46331 2007-06-05 13:16:11Z JS $
 // Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -100,6 +100,8 @@ public:
   bool Write(const wxString& s, const wxMBConv& conv = wxConvUTF8)
   {
       const wxWX2MBbuf buf = s.mb_str(conv);
+      if (!buf)
+          return false;
       size_t size = strlen(buf);
       return Write((const char *) buf, size) == size;
   }

@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,21 +16,29 @@ enum {
 
     /* Whether the print panel has separate controls (not in any accessory view) that allow the user to change the number of copies to print, which pages to print, paper size, orientation, and scaling, respectively.
     */
-    NSPrintPanelShowsCopies = 0x01,
-    NSPrintPanelShowsPageRange = 0x02,
-    NSPrintPanelShowsPaperSize = 0x04,
-    NSPrintPanelShowsOrientation = 0x08,
-    NSPrintPanelShowsScaling = 0x10,
+    NSPrintPanelShowsCopies = 1 << 0,
+    NSPrintPanelShowsPageRange = 1 << 1,
+    NSPrintPanelShowsPaperSize = 1 << 2,
+    NSPrintPanelShowsOrientation = 1 << 3,
+    NSPrintPanelShowsScaling = 1 << 4,
+    
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+    /* Whether the print panel has an additional "Selection" option for the paper range.
+    */
+    NSPrintPanelShowsPrintSelection = 1 << 5,
+    
+#endif
 
     /* Whether the print panel has a page setup accessory view with controls that allow the user to change paper size, orientation, and scaling. Any control that appear in the main part of the panel because one of the previous options is used does not also appear in the page setup accessory view.
     */
-    NSPrintPanelShowsPageSetupAccessory = 0x100,
+    NSPrintPanelShowsPageSetupAccessory = 1 << 8,
 
     /* Whether the print panel has a built-in preview. Setting this option in a print panel that's not being presented by an NSPrintOperation is not useful. Two things you need to be aware of when this option is set:
      1) the NSPrintInfo passed into -beginSheetWithPrintInfo:modalForWindow:delegate:didEndSelector:contextInfo: or -runModalWithPrintInfo: will be retained instead of copied. This is so that the NSPrintOperation that is presenting the panel can respond to -printInfo messages by returning the NSPrintInfo that the user is actually looking at and manipulating, which is the most useful thing for it to return. The result is that the passed-in NSPrintInfo can be mutated even when the user cancels the print panel, but that's OK; the factory methods that you use to create NSPrintOperations do the copying that's appropriate in that case.
      2) The presenting NSPrintOperation will send the printing view more messages that it would otherwise, so that it can do pagination right away, draw the preview on screen, etc.
     */
-    NSPrintPanelShowsPreview = 0x20000
+    NSPrintPanelShowsPreview = 1 << 17
 
 };
 typedef NSInteger NSPrintPanelOptions;
@@ -39,12 +47,14 @@ typedef NSInteger NSPrintPanelOptions;
 
 /* Valid values for passing into -[NSPrintPanel setJobStyleHint:].
 */
-APPKIT_EXTERN NSString *NSPrintPhotoJobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintPhotoJobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintAllPresetsJobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintNoPresetsJobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* The keys of the entries that must be in the dictionaries returned by NSPrintPanelAccessorizing's -localizedSummaryItems method.
 */
-APPKIT_EXTERN NSString *NSPrintPanelAccessorySummaryItemNameKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSPrintPanelAccessorySummaryItemDescriptionKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemNameKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
@@ -117,7 +127,7 @@ APPKIT_EXTERN NSString *NSPrintPanelAccessorySummaryItemDescriptionKey AVAILABLE
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
-// Set or get a string that provides a hint about the type of print job in which this print panel is being used.  This controls the set of items that appear in the Presets menu.  The string must be one of the job style hint strings declared above, or nil to provide no hint.
+// Set or get a string that provides a hint about the type of print job in which this print panel is being used. This controls the set of items that appear in the Presets menu. The string must be one of the job style hint strings declared above, or nil to show general presets.
 - (void)setJobStyleHint:(NSString *)hint;
 - (NSString *)jobStyleHint;
 
@@ -150,12 +160,12 @@ APPKIT_EXTERN NSString *NSPrintPanelAccessorySummaryItemDescriptionKey AVAILABLE
 
 /* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(NSView *)accessoryView;
-- (NSView *)accessoryView;
+- (void)setAccessoryView:(NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Methods that were also deprecated in Mac OS 10.5.
 */
-- (void)updateFromPrintInfo;
-- (void)finalWritePrintInfo;
+- (void)updateFromPrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)finalWritePrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end

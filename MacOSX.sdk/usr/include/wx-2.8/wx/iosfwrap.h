@@ -4,7 +4,7 @@
 // Author:      Jan van Dijk <jan@etpmod.phys.tue.nl>
 // Modified by:
 // Created:     18.12.2002
-// RCS-ID:      $Id: iosfwrap.h,v 1.7 2005/04/12 21:06:03 ABX Exp $
+// RCS-ID:      $Id: iosfwrap.h 33555 2005-04-12 21:06:03Z ABX $
 // Copyright:   wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

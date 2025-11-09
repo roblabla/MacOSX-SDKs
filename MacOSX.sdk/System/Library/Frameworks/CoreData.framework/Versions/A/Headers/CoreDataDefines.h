@@ -1,14 +1,14 @@
 /*
 	CoreDataDefines.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
 	All rights reserved.
 */
 #ifndef _COREDATADEFINES_H
 #define _COREDATADEFINES_H
 
 #import <AvailabilityMacros.h>
-
+#import <Availability.h>
 
 //
 //  Platform specific defs for externs
@@ -72,5 +72,7 @@ COREDATA_EXTERN double NSCoreDataVersionNumber;
 
 #define NSCoreDataVersionNumber10_4       46.0
 #define NSCoreDataVersionNumber10_4_3     77.0
+#define NSCoreDataVersionNumber10_5       185.0
+#define NSCoreDataVersionNumber10_5_3     186.0
 
 #endif // _COREDATADEFINES_H

@@ -4,7 +4,7 @@
 // Author:      Ryan Norton
 // Modified by:
 // Created:     04/04/2003
-// RCS-ID:      $Id: taskbarosx.h,v 1.12 2005/12/03 17:55:29 vell Exp $
+// RCS-ID:      $Id: taskbarosx.h 36336 2005-12-03 17:55:33Z vell $
 // Copyright:   (c) Ryan Norton, 2003
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////

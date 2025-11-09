@@ -36,8 +36,26 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define APPLEWMNAME "Apple-WM"
 
 #define APPLE_WM_MAJOR_VERSION	1	/* current version numbers */
-#define APPLE_WM_MINOR_VERSION	1
-#define APPLE_WM_PATCH_VERSION	1
+#define APPLE_WM_MINOR_VERSION	3
+#define APPLE_WM_PATCH_VERSION	0
+
+/* For the purpose of the structure definitions in this file,
+we must redefine the following types in terms of Xmd.h's types, which may
+include bit fields.  All of these are #undef'd at the end of this file,
+restoring the definitions in X.h.  */
+
+#define Window CARD32
+#define Drawable CARD32
+#define Font CARD32
+#define Pixmap CARD32
+#define Cursor CARD32
+#define Colormap CARD32
+#define GContext CARD32
+#define Atom CARD32
+#define VisualID CARD32
+#define Time CARD32
+#define KeyCode CARD8
+#define KeySym CARD32
 
 typedef struct _AppleWMQueryVersion {
     CARD8	reqType;		/* always WMReqCode */
@@ -93,8 +111,11 @@ typedef struct _AppleWMNotify {
 	CARD16	pad1 B16;
 	CARD32	arg B32;
 	CARD32	pad3 B32;
+	CARD32  pad4 B32;
+	CARD32  pad5 B32;
+	CARD32  pad6 B32;
 } xAppleWMNotifyEvent;
-#define sz_xAppleWMNotifyEvent	20
+#define sz_xAppleWMNotifyEvent	32
 
 typedef struct _AppleWMSetWindowMenu {
     CARD8	reqType;		/* always WMReqCode */
@@ -128,6 +149,24 @@ typedef struct _AppleWMSetWindowLevel {
     CARD32	level;
 } xAppleWMSetWindowLevelReq;
 #define sz_xAppleWMSetWindowLevelReq 12
+
+typedef struct _AppleWMSendPSN {
+    CARD8	reqType;		/* always WMReqCode */
+    CARD8	wmReqType;		/* always X_AppleWMSendPSN */
+    CARD16	length B16;
+    CARD32	psn_hi;
+    CARD32	psn_lo;
+} xAppleWMSendPSNReq;
+#define sz_xAppleWMSendPSNReq 12
+
+typedef struct _AppleWMAttachTransient {
+    CARD8	reqType;		/* always WMReqCode */
+    CARD8	wmReqType;		/* always X_AppleWMAttachTransient */
+    CARD16	length B16;
+    CARD32	child;
+    CARD32	parent;
+} xAppleWMAttachTransientReq;
+#define sz_xAppleWMAttachTransientReq 12
 
 typedef struct _AppleWMSetCanQuit {
     CARD8	reqType;		/* always WMReqCode */
@@ -222,5 +261,19 @@ typedef struct _AppleWMFrameDraw {
     CARD32	title_length B32;
 } xAppleWMFrameDrawReq;
 #define sz_xAppleWMFrameDrawReq	36
+
+/* restore these definitions back to the typedefs in X.h */
+#undef Window
+#undef Drawable
+#undef Font
+#undef Pixmap
+#undef Cursor
+#undef Colormap
+#undef GContext
+#undef Atom
+#undef VisualID
+#undef Time
+#undef KeyCode
+#undef KeySym
 
 #endif /* _APPLEWMSTR_H_ */

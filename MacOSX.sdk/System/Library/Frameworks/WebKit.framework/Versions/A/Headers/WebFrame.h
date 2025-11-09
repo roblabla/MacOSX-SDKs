@@ -165,8 +165,15 @@
 
 /*!
     @method reload
+    @discussion Performs HTTP/1.1 end-to-end revalidation using cache-validating conditionals if possible.
 */
 - (void)reload;
+
+/*!
+    @method reloadFromOrigin
+    @discussion Performs HTTP/1.1 end-to-end reload.
+*/
+- (void)reloadFromOrigin;
 
 /*!
     @method findFrameNamed:
@@ -206,5 +213,4 @@
     bridge between the WebKit and JavaScriptCore APIs.
 */
 - (JSGlobalContextRef)globalContext;
-
 @end

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -122,7 +122,7 @@ struct dinode {
 	u_int32_t	di_uid;		/* 112: File owner. */
 	u_int32_t	di_gid;		/* 116: File group. */
 	int32_t		di_spare[2];	/* 120: Reserved; currently unused */
-};
+} __attribute__((packed,aligned(4)));
 
 /*
  * The di_db fields may be overlaid with other information for

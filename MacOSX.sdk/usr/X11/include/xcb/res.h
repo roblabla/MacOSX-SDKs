@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from res.xml by c-client.xsl using XSLT.
+ * This file generated automatically from res.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,6 +13,11 @@
 #define __RES_H
 
 #include "xcb.h"
+#include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_RES_MAJOR_VERSION 1
 #define XCB_RES_MINOR_VERSION 0
@@ -40,8 +45,8 @@ typedef struct xcb_res_client_iterator_t {
  * @brief xcb_res_type_t
  **/
 typedef struct xcb_res_type_t {
-    uint32_t resource_type; /**<  */
-    uint32_t count; /**<  */
+    xcb_atom_t resource_type; /**<  */
+    uint32_t   count; /**<  */
 } xcb_res_type_t;
 
 /**
@@ -331,6 +336,8 @@ xcb_res_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_res_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -444,6 +451,8 @@ xcb_res_query_clients_clients_iterator (const xcb_res_query_clients_reply_t *R  
  * The parameter @p e supplied to this function must be NULL if
  * xcb_res_query_clients_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -561,6 +570,8 @@ xcb_res_query_client_resources_types_iterator (const xcb_res_query_client_resour
  * The parameter @p e supplied to this function must be NULL if
  * xcb_res_query_client_resources_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -639,6 +650,8 @@ xcb_res_query_client_pixmap_bytes_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_res_query_client_pixmap_bytes_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -657,6 +670,10 @@ xcb_res_query_client_pixmap_bytes_reply (xcb_connection_t                       
                                          xcb_res_query_client_pixmap_bytes_cookie_t   cookie  /**< */,
                                          xcb_generic_error_t                        **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

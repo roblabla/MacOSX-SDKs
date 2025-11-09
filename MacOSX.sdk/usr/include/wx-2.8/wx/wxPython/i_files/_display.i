@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     9-Mar-2004
-// RCS-ID:      $Id: _display.i,v 1.17 2006/11/03 07:41:46 RD Exp $
+// RCS-ID:      $Id: _display.i 54625 2008-07-14 22:20:10Z RD $
 // Copyright:   (c) 2004 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -94,6 +94,10 @@ const wxVideoMode     wxDefaultVideoMode;
 //---------------------------------------------------------------------------
 
 
+MustHaveApp(wxDisplay);
+MustHaveApp(wxDisplay::GetCount);
+MustHaveApp(wxDisplay::GetFromPoint);
+MustHaveApp(wxDisplay::GetFromWindow);
 
 DocStr(wxDisplay,
        "Represents a display/monitor attached to the system", "");

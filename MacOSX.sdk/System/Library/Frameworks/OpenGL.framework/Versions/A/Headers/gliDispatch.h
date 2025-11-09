@@ -1,5 +1,5 @@
 /*
-	Copyright:  (c) 1999 by Apple Computer, Inc., all rights reserved.
+	Copyright:  (c) 1999-2008 Apple Inc. All rights reserved.
 */
 
 #ifndef _GLIDISPATCH_H
@@ -133,7 +133,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*get_pixel_mapfv)(GLIContext ctx, GLenum map, GLfloat *values);
 	void (*get_pixel_mapuiv)(GLIContext ctx, GLenum map, GLuint *values);
 	void (*get_pixel_mapusv)(GLIContext ctx, GLenum map, GLushort *values);
-	void (*get_pointerv)(GLIContext ctx, GLenum pname, GLvoid* *params);
+	void (*get_pointerv)(GLIContext ctx, GLenum pname, GLvoid **params);
 	void (*get_polygon_stipple)(GLIContext ctx, GLubyte *mask);
 	const GLubyte* (*get_string)(GLIContext ctx, GLenum name);
 	void (*get_tex_envfv)(GLIContext ctx, GLenum target, GLenum pname, GLfloat *params);
@@ -459,13 +459,13 @@ typedef struct __GLIFunctionDispatchRec
 	void (*tex_image3D)(GLIContext ctx, GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
 	void (*tex_sub_image3D)(GLIContext ctx, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels);
 	void (*copy_tex_sub_image3D)(GLIContext ctx, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-	void (*combiner_parameterfv_NV)(GLIContext ctx, GLenum pname, const GLfloat *params);
-	void (*combiner_parameterf_NV)(GLIContext ctx, GLenum pname, GLfloat param);
-	void (*combiner_parameteriv_NV)(GLIContext ctx, GLenum pname, const GLint *params);
-	void (*combiner_parameteri_NV)(GLIContext ctx, GLenum pname, GLint param);
-	void (*combiner_input_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
-	void (*combiner_output_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum);
-	void (*final_combiner_input_NV)(GLIContext ctx, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
+    void (* get_uniform_indices) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLchar** uniformNames, GLuint* uniformIndices);
+    void (* get_active_uniformsiv) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params);
+    void (* get_active_uniform_name) (GLIContext ctx, GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformName);
+    GLuint (* get_uniform_block_index) (GLIContext ctx, GLuint program, const GLchar* uniformBlockName);
+    void (* get_active_uniform_blockiv) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params);
+    void (* get_active_uniform_block_name) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName);
+    void (* uniform_block_binding) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 	void (*get_combiner_input_parameterfv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat *params);
 	void (*get_combiner_input_parameteriv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint *params);
 	void (*get_combiner_output_parameterfv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum pname, GLfloat *params);
@@ -651,7 +651,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*bind_attrib_location_ARB) (GLIContext ctx, GLhandleARB programObj, GLuint index, const GLcharARB *name);
 	void (*get_active_attrib_ARB) (GLIContext ctx, GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
 	GLint (*get_attrib_location_ARB) (GLIContext ctx, GLhandleARB programObj, const GLcharARB *name);
-	void (*pad) (GLIContext ctx);
+	void (*clamp_color_ARB) (GLIContext ctx, GLenum target, GLenum clamp);
 	void (*gen_queries) (GLIContext ctx, GLsizei n, GLuint *ids);
 	void (*delete_queries) (GLIContext ctx, GLsizei n, const GLuint *ids);
 	GLboolean (*is_query) (GLIContext ctx, GLuint id);
@@ -744,9 +744,9 @@ typedef struct __GLIFunctionDispatchRec
 	void (*tex_parameterIiv_EXT)(GLIContext ctx, GLenum target, GLenum pname, GLint *params );
 	void (*tex_parameterIuiv_EXT)(GLIContext ctx, GLenum target, GLenum pname, GLuint *params );
 	void (*get_tex_parameterIiv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLint *params);
-	void (*get_tex_parameterIiuv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLuint *params);
+	void (*get_tex_parameterIuiv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLuint *params);
 
-	/* gpu_shader4 */
+	/* gpu shader4 */
 	void (*vertex_attribI1i_EXT)(GLIContext ctx, GLuint index, GLint x);
 	void (*vertex_attribI2i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y);
 	void (*vertex_attribI3i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y, GLint z);
@@ -782,11 +782,11 @@ typedef struct __GLIFunctionDispatchRec
 	void (*bind_frag_data_location_EXT)(GLIContext ctx, GLuint program, GLuint colorNumber, const GLchar *name);
 	GLint (*get_frag_data_location_EXT)(GLIContext ctx, GLuint program, const GLchar *name);
 
-	/* introduced by OpenGL ES 2.0 */
-	void (*shader_binary_OES)(GLIContext ctx, GLint n, GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLint length);
-	void (*get_shader_precision_format_OES)(GLIContext ctx, GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision);
-	void (*release_shader_compiler_OES)(GLIContext ctx);
-	void (*get_renderbuffer_storage_formatsiv_OES)(GLIContext ctx, GLenum target, GLint n, GLint *listofformats, GLint *numsupportedformats);
+	/* EXT_draw_buffers2 */
+	void (*color_mask_indexed_EXT) (GLIContext ctx, GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
+	void (*enable_indexed_EXT) (GLIContext ctx, GLenum target, GLuint index);
+	void (*disable_indexed_EXT) (GLIContext ctx, GLenum target, GLuint index);
+	GLboolean (*is_enabled_indexed_EXT) (GLIContext ctx, GLenum target, GLuint index);
 
 	/* OpenGL 2.1 */
 	void (*uniform_matrix2x3fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
@@ -799,9 +799,22 @@ typedef struct __GLIFunctionDispatchRec
 	/* EXT_framebuffer_blit and EXT_framebuffer_multisample */
 	void (*blit_framebuffer_EXT) (GLIContext ctx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
 	void (*renderbuffer_storage_multisample_EXT) (GLIContext ctx, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+
+	/* NV_conditional_render */
+	void (*begin_conditional_render_NV)(GLIContext ctx, GLuint id, GLenum mode);
+	void (*end_conditional_render_NV)(GLIContext ctx);
+
+	void (*get_attached_shaders) (GLIContext ctx, GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders);
 	
-	void (*depth_rangef)(GLIContext ctx, GLclampf zNear, GLclampf zFar);
-	void (*clear_depthf)(GLIContext ctx, GLclampf depth);
+	/* EXT_provoking_vertex */
+	void (*provoking_vertex_EXT) (GLIContext ctx, GLenum mode);
+	
+	/* ARB_instanced_arrays */
+	void (*vertex_attrib_divisor) (GLIContext ctx, GLuint index, GLuint divisor);
+	/* ARB_instanced_arrays and EXT_draw_instances */
+	void (*draw_arrays_instanced)(GLIContext ctx, GLenum mode, GLint first, GLsizei count, GLsizei primcount);
+	void (*draw_elements_instanced)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
+
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus

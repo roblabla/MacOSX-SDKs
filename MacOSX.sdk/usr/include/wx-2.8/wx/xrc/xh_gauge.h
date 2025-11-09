@@ -3,7 +3,7 @@
 // Purpose:     XML resource handler for wxGauge
 // Author:      Bob Mitchell
 // Created:     2000/03/21
-// RCS-ID:      $Id: xh_gauge.h,v 1.9 2006/10/03 14:53:31 VZ Exp $
+// RCS-ID:      $Id: xh_gauge.h 41590 2006-10-03 14:53:40Z VZ $
 // Copyright:   (c) 2000 Bob Mitchell and Verant Interactive
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

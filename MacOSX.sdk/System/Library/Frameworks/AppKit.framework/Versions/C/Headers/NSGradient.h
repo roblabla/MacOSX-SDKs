@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2007, Apple Inc.
+	Copyright (c) 2006-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -75,7 +75,7 @@ An NSGradient has a color space.  When initialized, all colors provided are conv
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations: [NSColor blackColor], 0.0, [NSColor blueColor], 0.33, [NSColor cyanColor], 0.45, [NSColor orangeColor], 0.72, [NSColor redColor], 1.0, nil];
 
 */
-- (id)initWithColorsAndLocations:(NSColor *)firstColor, ...;
+- (id)initWithColorsAndLocations:(NSColor *)firstColor, ... NS_REQUIRES_NIL_TERMINATION;
 
 
 /* Initializes a gradient by pairing the colors provided in the color array with the locations provided in the locations array.    Each location should be a CGFloat between 0.0 and 1.0.  The color array and location array should not be empty, and should contain the same number of items.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  This is the designated initializer.

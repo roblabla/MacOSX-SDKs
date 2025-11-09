@@ -43,7 +43,7 @@
 /* Options that may be supplied to image providers through the
  * dictionary. */
 
-/* Either a single NSNumber of an NSArray containing two NSNumbers.
+/* Either a single NSNumber or an NSArray containing two NSNumbers.
  * These values define the dimensions of the image tiles that will be
  * requested from the provider object. */
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -100,7 +100,6 @@ struct inode {
 	} inode_u;
 #define	i_fs	inode_u.fs
 
-	struct	 klist i_knotes;	/* knotes attached to this vnode */
 	struct	 dquot *i_dquot[MAXQUOTAS]; /* Dquot structures. */
 	u_quad_t i_modrev;	/* Revision level for NFS lease. */
 	void	 *i_lockf;	/* DEPRECATED */

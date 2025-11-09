@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright (c) 1996-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
@@ -41,8 +41,8 @@ typedef NSUInteger NSNotificationSuspensionBehavior;
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 enum {
-    NSNotificationDeliverImmediately = (1 << 0),
-    NSNotificationPostToAllSessions = (1 << 1)
+    NSNotificationDeliverImmediately = (1UL << 0),
+    NSNotificationPostToAllSessions = (1UL << 1)
 };
 
 - (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo options:(NSUInteger)options;

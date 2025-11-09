@@ -3,9 +3,9 @@
  
      Contains:   SCSI Family Interfaces.
  
-     Version:    OSServices-208~152
+     Version:    OSServices-359.2~2
  
-     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -774,10 +774,10 @@ enum {
 
 /* Defines for the bit masks of the scsiFlags field */
 enum {
-  scsiDirectionMask             = (long)0xC0000000, /* Data direction mask                 */
-  scsiDirectionNone             = (long)0xC0000000, /* Data direction (11: no data)          */
+  scsiDirectionMask             = (int)0xC0000000, /* Data direction mask                 */
+  scsiDirectionNone             = (int)0xC0000000, /* Data direction (11: no data)          */
   scsiDirectionReserved         = 0x00000000, /* Data direction (00: reserved)       */
-  scsiDirectionOut              = (long)0x80000000, /* Data direction (10: DATA OUT)       */
+  scsiDirectionOut              = (int)0x80000000, /* Data direction (10: DATA OUT)       */
   scsiDirectionIn               = 0x40000000, /* Data direction (01: DATA IN)          */
   scsiDisableAutosense          = 0x20000000, /* Disable auto sense feature          */
   scsiFlagReservedA             = 0x10000000, /*                           */
@@ -845,7 +845,7 @@ enum {
   scsiBusDataBuffer             = (1 << scsiDataBuffer), /* single contiguous buffer supplied      */
   scsiBusDataSG                 = (1 << scsiDataSG), /* scatter/gather list supplied        */
   scsiBusDataIOTable            = (1 << scsiDataIOTable), /* (2/6/95) Prepare Memory for IO*/
-  scsiBusDataReserved           = (long)0x80000000 /*                            */
+  scsiBusDataReserved           = (int)0x80000000 /*                            */
 };
 
 /* scsiScanFlags field bits */

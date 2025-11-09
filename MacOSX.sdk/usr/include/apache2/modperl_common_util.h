@@ -1,9 +1,9 @@
-
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -77,13 +77,25 @@
 #define MP_magical_tie(sv, mg_flags) \
     SvFLAGS((SV*)sv) |= mg_flags
 
+/* some wrapper macros to detect perl versions
+ * and prevent code clutter */
+#define MP_PERL_VERSION_AT_LEAST(r, v, s)                                \
+    (PERL_REVISION == r &&                                               \
+    ((PERL_VERSION == v && PERL_SUBVERSION > s-1) || PERL_VERSION > v))
+
+#define MP_PERL_VERSION_AT_MOST(r, v, s)                                 \
+   (PERL_REVISION == r &&                                                \
+   (PERL_VERSION < v || (PERL_VERSION == v && PERL_SUBVERSION < s+1)))
+
+#define MP_PERL_VERSION(r, v, s)                                         \
+  (PERL_REVISION == r && PERL_VERSION == v && PERL_SUBVERSION == s)
 
 /* tie %hash */
 MP_INLINE SV *modperl_hash_tie(pTHX_ const char *classname,
                                SV *tsv, void *p);
 
 /* tied %hash */
-MP_INLINE SV *modperl_hash_tied_object_rv(pTHX_ 
+MP_INLINE SV *modperl_hash_tied_object_rv(pTHX_
                                           const char *classname,
                                           SV *tsv);
 /* tied %hash */
@@ -98,4 +110,3 @@ MP_INLINE modperl_uri_t *modperl_uri_new(apr_pool_t *p);
 SV *modperl_perl_gensym(pTHX_ char *pack);
 
 #endif /* MODPERL_COMMON_UTIL_H */
-

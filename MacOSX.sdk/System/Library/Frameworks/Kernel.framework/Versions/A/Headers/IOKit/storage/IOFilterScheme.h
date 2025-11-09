@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -222,6 +222,27 @@ public:
      */
 
     virtual IOReturn synchronizeCache(IOService * client);
+
+    /*!
+     * @function unmap
+     * @discussion
+     * Delete unused data from the storage object at the specified byte offsets,
+     * synchronously.
+     * @param client
+     * Client requesting the operation.
+     * @param extents
+     * List of extents.  See IOStorageExtent.  It is legal for the callee to
+     * overwrite the contents of this buffer in order to satisfy the request.
+     * @param extentsCount
+     * Number of extents.
+     * @result
+     * Returns the status of the operation.
+     */
+
+    virtual IOReturn unmap(IOService *       client,
+                           IOStorageExtent * extents,
+                           UInt32            extentsCount,
+                           UInt32            options = 0);
 
     /*
      * Obtain this object's provider.  We override the superclass's method

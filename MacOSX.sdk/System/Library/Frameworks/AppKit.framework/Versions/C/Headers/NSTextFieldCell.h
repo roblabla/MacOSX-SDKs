@@ -1,7 +1,7 @@
 /*
 	NSTextFieldCell.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -59,7 +59,7 @@ typedef NSUInteger NSTextFieldBezelStyle;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (void)setWantsNotificationForMarkedText:(BOOL)flag;
 
-/* Returns an array of locale identifiers representing input sources allowed to be enabled when the receiver has the keyboard focus.
+/* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
 - (NSArray *)allowedInputSourceLocales;
 - (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers;

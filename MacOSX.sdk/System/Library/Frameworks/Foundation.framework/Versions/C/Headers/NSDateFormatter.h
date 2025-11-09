@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -14,25 +14,17 @@
     NSUInteger _counter;
 }
 
-- (id)init;
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+// - (id)init; // designated initializer
 
 // Report the used range of the string and an NSError, in addition to the usual stuff from NSFormatter
 
-- (BOOL)getObjectValue:(id *)obj forString:(NSString *)string range:(inout NSRange *)rangep error:(NSError **)error;
+- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string range:(inout NSRange *)rangep error:(out NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 // Even though NSDateFormatter responds to the usual NSFormatter methods,
 //   here are some convenience methods which are a little more obvious.
 
-- (NSString *)stringFromDate:(NSDate *)date;
-- (NSDate *)dateFromString:(NSString *)string;
-
-#endif
-
-// Attributes of an NSDateFormatter
-
-- (NSString *)dateFormat;
+- (NSString *)stringFromDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDate *)dateFromString:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
@@ -45,70 +37,81 @@ enum {    // date and time format styles
 };
 typedef NSUInteger NSDateFormatterStyle;
 
-- (NSDateFormatterStyle)dateStyle;
-- (void)setDateStyle:(NSDateFormatterStyle)style;
-
-- (NSDateFormatterStyle)timeStyle;
-- (void)setTimeStyle:(NSDateFormatterStyle)style;
-
-- (NSLocale *)locale;
-- (void)setLocale:(NSLocale *)locale;
-
-- (BOOL)generatesCalendarDates;
-- (void)setGeneratesCalendarDates:(BOOL)b;
-
 enum {
     NSDateFormatterBehaviorDefault = 0,
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
     NSDateFormatterBehavior10_0 = 1000,
+#endif
     NSDateFormatterBehavior10_4 = 1040,
 };
 typedef NSUInteger NSDateFormatterBehavior;
 
-- (NSDateFormatterBehavior)formatterBehavior;
-- (void)setFormatterBehavior:(NSDateFormatterBehavior)behavior;
-
-+ (NSDateFormatterBehavior)defaultFormatterBehavior;
-+ (void)setDefaultFormatterBehavior:(NSDateFormatterBehavior)behavior;
-
-- (void)setDateFormat:(NSString *)string;
-
-- (NSTimeZone *)timeZone;
-- (void)setTimeZone:(NSTimeZone *)tz;
-
-- (NSCalendar *)calendar;
-- (void)setCalendar:(NSCalendar *)calendar;
-
-- (BOOL)isLenient;
-- (void)setLenient:(BOOL)b;
-
-- (NSDate *)twoDigitStartDate;
-- (void)setTwoDigitStartDate:(NSDate *)date;
-
-- (NSDate *)defaultDate;
-- (void)setDefaultDate:(NSDate *)date;
-
-- (NSArray *)eraSymbols;
-- (void)setEraSymbols:(NSArray *)array;
-
-- (NSArray *)monthSymbols;
-- (void)setMonthSymbols:(NSArray *)array;
-
-- (NSArray *)shortMonthSymbols;
-- (void)setShortMonthSymbols:(NSArray *)array;
-
-- (NSArray *)weekdaySymbols;
-- (void)setWeekdaySymbols:(NSArray *)array;
-
-- (NSArray *)shortWeekdaySymbols;
-- (void)setShortWeekdaySymbols:(NSArray *)array;
-
-- (NSString *)AMSymbol;
-- (void)setAMSymbol:(NSString *)string;
-
-- (NSString *)PMSymbol;
-- (void)setPMSymbol:(NSString *)string;
-
 #endif
+
++ (NSString *)localizedStringFromDate:(NSDate *)date dateStyle:(NSDateFormatterStyle)dstyle timeStyle:(NSDateFormatterStyle)tstyle AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
++ (NSString *)dateFormatFromTemplate:(NSString *)tmplate options:(NSUInteger)opts locale:(NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+	// no options defined, pass 0 for now
+
+// Attributes of an NSDateFormatter
+
+- (NSString *)dateFormat;
+
+- (NSDateFormatterStyle)dateStyle AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setDateStyle:(NSDateFormatterStyle)style AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSDateFormatterStyle)timeStyle AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setTimeStyle:(NSDateFormatterStyle)style AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setLocale:(NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (BOOL)generatesCalendarDates AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setGeneratesCalendarDates:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSDateFormatterBehavior)formatterBehavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setFormatterBehavior:(NSDateFormatterBehavior)behavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
++ (NSDateFormatterBehavior)defaultFormatterBehavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (void)setDefaultFormatterBehavior:(NSDateFormatterBehavior)behavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (void)setDateFormat:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSTimeZone *)timeZone AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setTimeZone:(NSTimeZone *)tz AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSCalendar *)calendar AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setCalendar:(NSCalendar *)calendar AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (BOOL)isLenient AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setLenient:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSDate *)twoDigitStartDate AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setTwoDigitStartDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSDate *)defaultDate AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setDefaultDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSArray *)eraSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setEraSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSArray *)monthSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSArray *)shortMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setShortMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSArray *)weekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSArray *)shortWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setShortWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSString *)AMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setAMSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSString *)PMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setPMSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 - (NSArray *)longEraSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (void)setLongEraSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -152,12 +155,17 @@ typedef NSUInteger NSDateFormatterBehavior;
 - (NSDate *)gregorianStartDate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (void)setGregorianStartDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
+- (BOOL)doesRelativeDateFormatting AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setDoesRelativeDateFormatting:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @interface NSDateFormatter (NSDateFormatterCompatibility)
 
 - (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag;
 - (BOOL)allowsNaturalLanguage;
 
 @end
+#endif
 

@@ -3,9 +3,9 @@
  
      Contains:   QuickTime VR interfaces
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1997-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 1997-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -77,8 +77,8 @@ enum {
 /* Special Values for nodeID in QTVRGoToNodeID*/
 enum {
   kQTVRCurrentNode              = 0,
-  kQTVRPreviousNode             = (long)0x80000000,
-  kQTVRDefaultNode              = (long)0x80000001
+  kQTVRPreviousNode             = (int)0x80000000,
+  kQTVRDefaultNode              = (int)0x80000001
 };
 
 /* Panorama correction modes used for the kQTVRImagingCorrection imaging property*/
@@ -107,7 +107,7 @@ enum {
 
 /* OR the above with kImagingDefaultValue to get/set the default value*/
 enum {
-  kImagingDefaultValue          = (long)0x80000000
+  kImagingDefaultValue          = (int)0x80000000
 };
 
 /* Transition Types used by QTVRSetTransitionProperty, QTVREnableTransition*/
@@ -123,7 +123,7 @@ enum {
 
 /* Constraint values used to construct value returned by GetConstraintStatus*/
 enum {
-  kQTVRUnconstrained            = 0L,
+  kQTVRUnconstrained            = 0,
   kQTVRCantPanLeft              = 1L << 0,
   kQTVRCantPanRight             = 1L << 1,
   kQTVRCantPanUp                = 1L << 2,
@@ -158,7 +158,7 @@ enum {
 
 /* OR the above with kQTVRInteractionDefaultValue to get/set the default value*/
 enum {
-  kQTVRInteractionDefaultValue  = (long)0x80000000
+  kQTVRInteractionDefaultValue  = (int)0x80000000
 };
 
 

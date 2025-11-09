@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,7 +8,7 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -51,10 +51,18 @@ typedef NSUInteger NSHTTPCookieAcceptPolicy;
 
 /*!
     @method sharedHTTPCookieStorage
-    @abstract Get the shared singleton cookie storage
+    @abstract Get the shared cookie storage in the default location.
     @result The shared cookie storage
 */
 + (NSHTTPCookieStorage *)sharedHTTPCookieStorage;
+
+/*!
+    @method initWithStorageLocation
+    @abstract initialize an NSHTTPCookieStorage to use the given storage location as the disk backing.
+    @param storageFileURL a file:// URL pointing at the desired filename for the resulting cookie storage.
+    @result A cookie storage object that will persist to the given file url.
+ */
+- (id)initWithStorageLocation:(NSURL*)storageFileURL;
 
 /*!
     @method cookies

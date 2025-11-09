@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,22 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.h,v 1.14.2.1.2.2 2007/12/31 07:20:10 sebastian Exp $ */
+/* $Id: mod_user.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef MOD_USER_H
 #define MOD_USER_H
-
-typedef union {
-	zval *names[6];
-	struct {
-		zval *ps_open;
-		zval *ps_close;
-		zval *ps_read;
-		zval *ps_write;
-		zval *ps_destroy;
-		zval *ps_gc;
-	} name;
-} ps_user;
 
 extern ps_module ps_mod_user;
 #define ps_user_ptr &ps_mod_user

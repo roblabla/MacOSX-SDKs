@@ -1,7 +1,7 @@
 /*
 	NSInputManager.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
  */
 
@@ -11,6 +11,8 @@
 
 @class NSArray, NSAttributedString, NSEvent, NSInputServer, NSImage;
 
+/* NSTextInput is deprecated in Mac OS X 10.6. Use NSTextInputClient instead.
+ */
 @protocol NSTextInput
 
 - (void) insertText:(id)aString; // instead of keyDown: aString can be NSString or NSAttributedString
@@ -48,6 +50,8 @@
 
 @end
 
+/* NSInputManager is deprecated in Mac OS X 10.6. Use NSTextInputContext instead. 
+ */
 @interface NSInputManager : NSObject <NSTextInput> {
 /*All instance variables are private*/
 @private
@@ -77,9 +81,9 @@
 + (void)cycleToNextInputLanguage:(id)sender;
 + (void)cycleToNextInputServerInLanguage:(id)sender;
 
-- (NSInputManager *) initWithName:(NSString *)inputServerName host:(NSString *)hostName;
+- (NSInputManager *) initWithName:(NSString *)inputServerName host:(NSString *)hostName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (NSString *) localizedInputManagerName;
+- (NSString *) localizedInputManagerName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* These messages are sent by Views that conform to the NSTextInput protocol TO the Current Input Manager when things happen via user or programmatic action.  E.g., when the mouse moves outside the marked range, send markedTextWillBeAbandoned:.  If the user selects some new text or moves the mouse within the marked region, send markedTextSelectionChanged:.  Not all input manager/server combinations will allow all changes, but abandoning of the marked region cannot be aborted.
 */ 
@@ -89,13 +93,13 @@
 
 /* This corresponds to a server method for input managers that demand to do their own interepretation of command keys as long as they're active.  This will typically be called by a key binder to find out whether it shouldn't just pass along strings.
 */
-- (BOOL) wantsToInterpretAllKeystrokes;
+- (BOOL) wantsToInterpretAllKeystrokes DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (NSString*) language;
+- (NSString*) language DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (NSImage *) image;
+- (NSImage *) image DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (NSInputServer *) server;
+- (NSInputServer *) server DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* If corresponding input server wants to handle mouse events within marked region, this should return YES.  In that case, handleMouseEvent is sent. Otherwiese, mouse events are handled by first responder.
 */
@@ -105,5 +109,5 @@
 
 /* This should return YES when the input method (language) prefers to delay text change notification 'till the input is actually committed.
 */
-- (BOOL) wantsToDelayTextChangeNotifications;
+- (BOOL) wantsToDelayTextChangeNotifications DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 @end

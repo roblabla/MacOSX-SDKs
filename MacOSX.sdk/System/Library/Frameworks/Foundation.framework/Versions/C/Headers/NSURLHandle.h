@@ -1,5 +1,5 @@
 /*	NSURLHandle.h
-	Copyright (c) 1997-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2009, Apple Inc. All rights reserved.
 */
  
 #import <Foundation/NSObject.h>

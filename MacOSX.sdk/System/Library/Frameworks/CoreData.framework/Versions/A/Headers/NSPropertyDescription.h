@@ -1,7 +1,7 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -32,9 +32,11 @@
         unsigned int _isOptional:1;
         unsigned int _isIndexed:1;
         unsigned int _skipValidation:1;
-        unsigned int _reservedPropertyDescription:27;
+        unsigned int _isIndexedBySpotlight:1;
+        unsigned int _isStoredInExternalRecord:1;
+        unsigned int _reservedPropertyDescription:25;
     } _propertyDescriptionFlags;    
-    NSMutableDictionary *_mappings;
+    __strong void *_extraIvars;
     NSMutableDictionary *_userInfo;
 	long _entitysReferenceIDForProperty;
 }
@@ -60,23 +62,32 @@
 - (NSDictionary *)userInfo;
 - (void)setUserInfo:(NSDictionary *)dictionary;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 /* Returns a boolean value indicating if the property is important for searching.  NSPersistentStores can optionally utilize this information upon store creation for operations like defining indexes.
 */
-- (BOOL)isIndexed;
-- (void)setIndexed:(BOOL)flag;
+- (BOOL)isIndexed AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setIndexed:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Returns the version hash for the property.  The version hash is used to uniquely identify a property based on its configuration.  The version hash uses only values which affect the persistence of data and the user-defined versionHashModifier value.  (The values which affect persistence are the name of the property, the flags for isOptional, isTransient, and isReadOnly).  This value is stored as part of the version information in the metadata for stores, as well as a definition of a property involved in an NSPropertyMapping.
 */
-- (NSData *)versionHash;
+- (NSData *)versionHash AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Returns/sets the version hash modifier for the property.  This value is included in the version hash for the property, allowing developers to mark/denote a property as being a different "version" than another, even if all of the values which affects persistence are equal.  (Such a difference is important in cases where the design of a property is unchanged, but the format or content of data has changed.)
 */
-- (NSString *)versionHashModifier;
-- (void)setVersionHashModifier:(NSString *)modifierString;
+- (NSString *)versionHashModifier AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVersionHashModifier:(NSString *)modifierString AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+/* Returns a boolean value indicating if the property should be indexed by Spotlight.
+*/
+- (BOOL)isIndexedBySpotlight AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setIndexedBySpotlight:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Returns a boolean value indicating if the property data should be written out to the external record file.
+*/
+- (BOOL)isStoredInExternalRecord AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setStoredInExternalRecord:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+- (NSString *)renamingIdentifier AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setRenamingIdentifier:(NSString *)value AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

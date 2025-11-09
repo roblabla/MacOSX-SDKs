@@ -3,10 +3,7 @@
  
  	Contains:   Specialized configuration-editing routines for CoreMIDI.
  
- 	Version:	Technology: Mac OS X
- 				Release:	Mac OS X
- 
- 	Copyright:  (c) 2000-2005 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -82,7 +79,7 @@ extern "C" {
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupCreate(	MIDISetupRef *outSetup )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDISetupCreate(	MIDISetupRef *outSetup )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 //  -----------------------------------------------------------------------------
@@ -100,7 +97,7 @@ MIDISetupCreate(	MIDISetupRef *outSetup )					AVAILABLE_MAC_OS_X_VERSION_10_0_AN
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupDispose(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDISetupDispose(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -124,7 +121,7 @@ MIDISetupDispose(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupInstall(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDISetupInstall(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 //  -----------------------------------------------------------------------------
@@ -145,7 +142,7 @@ MIDISetupInstall(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupGetCurrent(	MIDISetupRef *outSetup )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDISetupGetCurrent(	MIDISetupRef *outSetup )				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 //  -----------------------------------------------------------------------------
@@ -169,7 +166,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup )				AVAILABLE_MAC_OS_X_VERSION_10_0
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef *		outData )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					CFDataRef *		outData )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -192,7 +189,7 @@ MIDISetupToData(	MIDISetupRef	setup,
 */
 extern OSStatus
 MIDISetupFromData(	CFDataRef 		data, 
-					MIDISetupRef *	outSetup)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					MIDISetupRef *	outSetup)					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -224,7 +221,7 @@ extern OSStatus
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -243,7 +240,7 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 */
 extern OSStatus
 MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
-																AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -264,7 +261,7 @@ MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
 */
 extern OSStatus
 MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+					ItemCount numDestinationEndpoints)			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -281,7 +278,7 @@ MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoint
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddDevice(		MIDIDeviceRef device )					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -303,7 +300,7 @@ MIDISetupAddDevice(		MIDIDeviceRef device )					AVAILABLE_MAC_OS_X_VERSION_10_1_
 						The device to be added.
 */
 extern OSStatus
-MIDISetupRemoveDevice(	MIDIDeviceRef device )				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -317,7 +314,7 @@ MIDISetupRemoveDevice(	MIDIDeviceRef device )				AVAILABLE_MAC_OS_X_VERSION_10_1
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddExternalDevice(	MIDIDeviceRef device )			AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -331,8 +328,7 @@ MIDISetupAddExternalDevice(	MIDIDeviceRef device )			AVAILABLE_MAC_OS_X_VERSION_
 						The device to be removed.
 */
 extern OSStatus
-MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
-
+MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -362,7 +358,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		AVAILABLE_MAC_OS_X_VERSIO
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef *		outDriverName )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+						CFStringRef *		outDriverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -385,7 +381,7 @@ MIDIGetSerialPortOwner(	CFStringRef			portName,
 */
 extern OSStatus
 MIDISetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef			driverName )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+						CFStringRef			driverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -407,7 +403,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -434,7 +430,7 @@ MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	AVAILABLE_MAC_OS_X_VERSIO
 extern OSStatus		
 MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-															AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 #ifdef __cplusplus

@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: listctrl.h,v 1.25.2.1 2007/05/10 02:02:00 VZ Exp $
+// RCS-ID:      $Id: listctrl.h 53275 2008-04-20 22:10:04Z VS $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -365,6 +365,17 @@ class WXDLLEXPORT wxListCtrl: public wxControl
   void MacSetDrawingContext(void* context) { m_cgContext = context; }
   void* MacGetDrawingContext() { return m_cgContext; }
 
+
+#if wxABI_VERSION >= 20808
+  virtual wxVisualAttributes GetDefaultAttributes() const
+  {
+      return GetClassDefaultAttributes(GetWindowVariant());
+  }
+
+  static wxVisualAttributes
+  GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+#endif // wxABI_VERSION >= 20808
+
 protected:
 
   // protected overrides needed for pimpl approach
@@ -408,6 +419,9 @@ protected:
                                   // keep track of inserted/deleted columns
 
   int               m_count; // for virtual lists, store item count
+
+private:
+  int CalcColumnAutoWidth(int col) const;
   
 private: 
   DECLARE_EVENT_TABLE()

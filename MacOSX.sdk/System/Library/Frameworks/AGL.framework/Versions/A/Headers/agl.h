@@ -18,22 +18,9 @@
 #ifndef _AGL_H
 #define _AGL_H
 
-#if defined (__MACH__)
-	#include <AvailabilityMacros.h>
-	#include <Carbon/Carbon.h>
-	#include <OpenGL/gl.h>
-#else
-	#define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER 
-	#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER 
-	#define AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER 
-	#include <Carbon.h>
-	#include <gl.h>
-#endif
-
-/*
-** Certain functions are deprecated for Leopard applications, these are marked as unavailable.
-*/
-#define DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER	DEPRECATED_ATTRIBUTE
+#include <AvailabilityMacros.h>
+#include <Carbon/Carbon.h>
+#include <OpenGL/gl.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,7 +37,7 @@ extern "C" {
 *  Note:
 *	AGLDevice is a QuickDraw type it has been deprecated, use CGDirectDisplayID
 */
-typedef GDHandle AGLDevice	DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+typedef GDHandle AGLDevice	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Macintosh drawable type.
@@ -58,7 +45,7 @@ typedef GDHandle AGLDevice	DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 *  Note:
 *	AGLDrawable is a QuickDraw type it has been deprecated. use WindowRef or HIViewRef
 */
-typedef CGrafPtr AGLDrawable	DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+typedef CGrafPtr AGLDrawable	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** AGL opaque data.
@@ -166,7 +153,7 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_COLORMAP_TRACKING    210  /* Enable or disable colormap tracking           */
 #define AGL_COLORMAP_ENTRY       212  /* Set a colormap entry to {index, r, g, b}      */
 #define AGL_RASTERIZATION        220  /* Enable or disable all rasterization           */
-#define AGL_SWAP_INTERVAL        222  /* 0 -> Don't sync, n -> Sync every n retrace    */
+#define AGL_SWAP_INTERVAL        222  /* 0 -> Don't sync, 1 -> Sync to vertical retrace */
 #define AGL_STATE_VALIDATION     230  /* Validate state for multi-screen functionality */
 #define AGL_BUFFER_NAME          231  /* Set the buffer name. Allows for multi ctx to share a buffer */
 #define AGL_ORDER_CONTEXT_TO_FRONT  232  /* Order the current context in front of all the other contexts. */
@@ -174,7 +161,11 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_CONTEXT_DISPLAY_ID   234  /* aglGetInteger only - returns the display ID(s) of all displays touched by the context, up to a maximum of 32 displays */
 #define AGL_SURFACE_ORDER        235  /* Position of OpenGL surface relative to window: 1 -> Above window, -1 -> Below Window */
 #define AGL_SURFACE_OPACITY      236  /* Opacity of OpenGL surface: 1 -> Surface is opaque (default), 0 -> non-opaque */
+
+/* NOTE: AGL_CLIP_REGION is DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER	*/
+/* It will only work on drawable types for binary compatibility				*/
 #define AGL_CLIP_REGION          254  /* Enable or set the drawable clipping region */
+
 #define AGL_FS_CAPTURE_SINGLE    255  /* Enable the capture of only a single display for aglFullScreen, normally disabled */
 #define AGL_SURFACE_BACKING_SIZE 304  /* 2 params.   Width/height of surface backing size     */
 #define AGL_ENABLE_SURFACE_BACKING_SIZE  305  /* Enable or disable surface backing size override */
@@ -284,7 +275,7 @@ extern void aglDestroyPixelFormat(AGLPixelFormat pix);
 extern AGLPixelFormat aglNextPixelFormat(AGLPixelFormat pix);
 extern GLboolean aglDescribePixelFormat(AGLPixelFormat pix, GLint attrib, GLint *value);
 extern CGDirectDisplayID *aglDisplaysOfPixelFormat(AGLPixelFormat pix, GLint *ndevs);
-extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Renderer information functions
@@ -296,7 +287,7 @@ extern AGLRendererInfo aglQueryRendererInfoForCGDirectDisplayIDs(const CGDirectD
 extern void aglDestroyRendererInfo(AGLRendererInfo rend);
 extern AGLRendererInfo aglNextRendererInfo(AGLRendererInfo rend);
 extern GLboolean aglDescribeRenderer(AGLRendererInfo rend, GLint prop, GLint *value);
-extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -319,8 +310,8 @@ extern AGLContext aglGetCurrentContext(void);
 *  Note:
 *	aglSetDrawable / aglGetDrawable have been deprecated use aglGetWindowRef or aglSetHIViewRef
 */ 
-extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern AGLDrawable aglGetDrawable(AGLContext ctx) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern AGLDrawable aglGetDrawable(AGLContext ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** WindowRef Functions
@@ -380,7 +371,7 @@ extern GLboolean aglGetInteger(AGLContext ctx, GLenum pname, GLint *params);
 *  Note:
 *	aglUseFont has been deprecated, no replacement available
 */
-extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Error functions
@@ -397,9 +388,9 @@ extern void aglResetLibrary(void);
 ** Surface texture function
 *
 *  Note:
-*	aglSurfaceTexture has been deprecated, no replacement available
+*	aglSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object or PBuffers instead
 */
-extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** PBuffer functions

@@ -4,7 +4,7 @@
 // Author:      Julian Smart, Vadim Zeitlin
 // Modified by:
 // Created:     23.07.99
-// RCS-ID:      $Id: spinbutt.h,v 1.36 2006/01/23 03:27:33 MR Exp $
+// RCS-ID:      $Id: spinbutt.h 37066 2006-01-23 03:27:34Z MR $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

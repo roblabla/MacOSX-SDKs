@@ -1,5 +1,5 @@
 /*	NSLock.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -59,6 +59,9 @@
 
 @end
 
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
 @interface NSCondition : NSObject <NSLocking> {
 @private
     void *_priv;
@@ -73,4 +76,6 @@
 - (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
+
+#endif
 

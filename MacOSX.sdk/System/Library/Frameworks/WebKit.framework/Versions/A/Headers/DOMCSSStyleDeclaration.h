@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,8 @@
 
 #import <WebKit/DOMObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMCSSRule;
 @class DOMCSSValue;
 @class NSString;
@@ -39,12 +41,14 @@
 - (DOMCSSValue *)getPropertyCSSValue:(NSString *)propertyName;
 - (NSString *)removeProperty:(NSString *)propertyName;
 - (NSString *)getPropertyPriority:(NSString *)propertyName;
-- (void)setProperty:(NSString *)propertyName value:(NSString *)value priority:(NSString *)priority;
+- (void)setProperty:(NSString *)propertyName value:(NSString *)value priority:(NSString *)priority AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (NSString *)item:(unsigned)index;
-- (NSString *)getPropertyShorthand:(NSString *)propertyName;
-- (BOOL)isPropertyImplicit:(NSString *)propertyName;
+- (NSString *)getPropertyShorthand:(NSString *)propertyName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (BOOL)isPropertyImplicit:(NSString *)propertyName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 
 @interface DOMCSSStyleDeclaration (DOMCSSStyleDeclarationDeprecated)
-- (void)setProperty:(NSString *)propertyName :(NSString *)value :(NSString *)priority DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setProperty:(NSString *)propertyName :(NSString *)value :(NSString *)priority AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -24,9 +25,9 @@
 
 #define MP_FILTER_CONNECTION_HANDLER 0x01
 #define MP_FILTER_REQUEST_HANDLER    0x02
-#define MP_FILTER_HAS_INIT_HANDLER   0x04 
-#define MP_FILTER_INIT_HANDLER       0x08 
-#define MP_FILTER_HTTPD_HANDLER      0x10 
+#define MP_FILTER_HAS_INIT_HANDLER   0x04
+#define MP_FILTER_INIT_HANDLER       0x08
+#define MP_FILTER_HTTPD_HANDLER      0x10
 
 typedef ap_filter_t * MP_FUNC_T(modperl_filter_add_t) (const char *, void *,
                                                        request_rec *,
@@ -100,7 +101,7 @@ MP_INLINE apr_size_t modperl_input_filter_read(pTHX_
                                                modperl_filter_t *filter,
                                                SV *buffer,
                                                apr_size_t wanted);
-    
+
 MP_INLINE apr_status_t modperl_input_filter_write(pTHX_
                                                   modperl_filter_t *filter,
                                                   const char *buf,

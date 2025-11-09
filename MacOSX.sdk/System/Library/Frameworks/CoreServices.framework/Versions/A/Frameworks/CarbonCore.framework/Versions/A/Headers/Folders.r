@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -152,6 +152,7 @@
 #define kScriptingAdditionsFolderType 	'Äscr'				/*  at root of system folder  */
 
 #define kClassicPreferencesFolderType 	'cprf'				/*  "Classic" folder in ~/Library/ for redirected preference files.  */
+#define kQuickLookFolderType 			'qlck'				/*  The QuickLook folder, supported in Mac OS X SnowLeopard and later.  */
 															/*     The following selectors really only make sense when used within the Classic environment on Mac OS X. */
 #define kSystemFolderType 				'macs'				/*  the system folder  */
 #define kSystemDesktopFolderType 		'sdsk'				/*  the desktop folder at the root of the hard drive, never the redirected user desktop folder  */

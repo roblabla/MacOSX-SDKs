@@ -3,9 +3,9 @@
  
      Contains:   API and type definitions related to HISegmentedView.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -208,15 +208,15 @@ enum {
 
   /*
    * Like a check box. When clicked, it toggles back and forth between
-   * checked and unchecked states. This behavior is available in Mac OS
-   * X 10.5 and later.
+   * checked and unchecked states. This behavior is not implemented in
+   * any version of Mac OS X, and this constant is deprecated.
    */
   kHISegmentBehaviorToggles     = 3,
 
   /*
    * After being pressed, this type of segment stays pressed until you
-   * programatically unpress it. This behavior is available in Mac OS X
-   * 10.5 and later.
+   * programatically unpress it. This behavior is not implemented in
+   * any version of Mac OS X, and this constant is deprecated.
    */
   kHISegmentBehaviorSticky      = 4
 };

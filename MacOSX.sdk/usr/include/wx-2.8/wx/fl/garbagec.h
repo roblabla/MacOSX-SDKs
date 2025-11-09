@@ -4,7 +4,7 @@
 // Author:      Aleksandras Gluchovas (@Lithuania)
 // Modified by:
 // Created:     ??/10/98
-// RCS-ID:      $Id: garbagec.h,v 1.8 2005/09/23 12:46:57 MR Exp $
+// RCS-ID:      $Id: garbagec.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) Aleksandras Gluchovas
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

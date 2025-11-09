@@ -1,8 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -54,7 +55,7 @@ extern module AP_MODULE_DECLARE_DATA perl_module;
 
 /* apr largefile support is enabled, perl support is disabled */
 #if (!defined(USE_LARGE_FILES)) && APR_HAS_LARGE_FILES
-#define MP_LARGE_FILES_APR_ONLY   
+#define MP_LARGE_FILES_APR_ONLY
 #endif
 
 /* conflict due to not have either both perl and apr
@@ -102,7 +103,7 @@ int modperl_post_post_config_phase(void);
         Perl_croak(aTHX_ "Can't run '%s' in the threaded "      \
                    "environment after server startup", what);   \
     }
-  
+
 #define MP_CROAK_IF_THREADED_MPM(what)                          \
     if (modperl_threaded_mpm()) {                               \
         Perl_croak(aTHX_ "Can't run '%s' in a threaded mpm",    \
@@ -121,7 +122,7 @@ void modperl_init(server_rec *s, apr_pool_t *p);
 void modperl_init_globals(server_rec *s, apr_pool_t *pconf);
 int modperl_run(void);
 int modperl_is_running(void);
-int modperl_hook_init(apr_pool_t *pconf, apr_pool_t *plog, 
+int modperl_hook_init(apr_pool_t *pconf, apr_pool_t *plog,
                       apr_pool_t *ptemp, server_rec *s);
 int modperl_hook_pre_config(apr_pool_t *p, apr_pool_t *plog,
                             apr_pool_t *ptemp);
@@ -137,11 +138,6 @@ apr_status_t modperl_response_finish(request_rec *r);
 int modperl_response_handler(request_rec *r);
 int modperl_response_handler_cgi(request_rec *r);
 
-/* betting on Perl*Handlers not using CvXSUBANY
- * mod_perl reuses this field for handler attributes
- */
-#define MP_CODE_ATTRS(cv) (CvXSUBANY((CV*)cv).any_i32)
-
 #define MgTypeExt(mg) (mg->mg_type == '~')
 
 typedef void MP_FUNC_NONSTD_T(modperl_var_modify_t) (apr_table_t *,
@@ -152,7 +148,10 @@ typedef void MP_FUNC_NONSTD_T(modperl_var_modify_t) (apr_table_t *,
 /* we need to hook a few internal things before APR_HOOK_REALLY_FIRST */
 #define MODPERL_HOOK_REALLY_REALLY_FIRST (-20)
 
+#ifdef USE_ITHREADS
 APR_DECLARE_OPTIONAL_FN(apr_status_t,modperl_interp_unselect,(void *));
+APR_DECLARE_OPTIONAL_FN(modperl_interp_t *,modperl_thx_interp_get,(PerlInterpreter *));
+#endif
 
 /*
  * perl context overriding and restoration is required when

@@ -126,6 +126,14 @@ enum __ISyncStatus {
 - (BOOL)isEnabledForEntityName:(NSString *)entityName;
 - (void)setEnabled:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames;
 
+/* Some clients might accept records and specify a format dictionary that changes some of the relationships
+ * that were pulled.  In 10.6 we make the assumption that clients will not do this. If a client needs
+ * to format relationships they can indicate this by invoking setFormatsRelationships:. They can also
+ * indicate this by using the FormatsRelationships keyword in their client description plist.
+ */
+- (BOOL)formatsRelationships AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setFormatsRelationships: (BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 /* Tell the engine the client wants to pull the Truth.  The engine will not let the client push any
    changes.  The client is expected to erase its data store at the start of the pull phase, before
    pulling any changes.

@@ -1,5 +1,5 @@
 /*	CFStringTokenizer.h
-	Copyright (c) 2006-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2009, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -49,7 +49,7 @@ CF_EXTERN_C_BEGIN
 		characters are required to reliably guess the language of a string.
 */
 CF_EXPORT
-CFStringRef CFStringTokenizerCopyBestStringLanguage(CFStringRef string, CFRange range);
+CFStringRef CFStringTokenizerCopyBestStringLanguage(CFStringRef string, CFRange range) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ===================================================================
@@ -89,10 +89,10 @@ enum {
 	*/	
     /* Latin Transcription. Used with kCFStringTokenizerUnitWord or
         kCFStringTokenizerUnitWordBoundary */
-    kCFStringTokenizerAttributeLatinTranscription        = 1L << 16,
+    kCFStringTokenizerAttributeLatinTranscription        = 1UL << 16,
     /* Language in BCP 47 string. Used with kCFStringTokenizerUnitSentence
 	   or kCFStringTokenizerUnitParagraph. */
-    kCFStringTokenizerAttributeLanguage                  = 1L << 17
+    kCFStringTokenizerAttributeLanguage                  = 1UL << 17
 };
 
 /*!
@@ -105,24 +105,24 @@ enum {
     kCFStringTokenizerTokenNone                                      = 0,
     
 	/* Normal token */
-    kCFStringTokenizerTokenNormal                                    = 1,
+    kCFStringTokenizerTokenNormal                                    = 1UL << 0,
     
 	/*!
     Compound token which may contain subtokens but with no derived subtokens.
     Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
     */
-    kCFStringTokenizerTokenHasSubTokensMask                          = 1L << 1,
+    kCFStringTokenizerTokenHasSubTokensMask                          = 1UL << 1,
     
 	/*!
     Compound token which may contain derived subtokens. 
     Its subtokens and derived subtokens can be obtained by calling
     CFStringTokenizerGetCurrentSubTokens.
     */
-    kCFStringTokenizerTokenHasDerivedSubTokensMask                   = 1L << 2,
+    kCFStringTokenizerTokenHasDerivedSubTokensMask                   = 1UL << 2,
     
-    kCFStringTokenizerTokenHasHasNumbersMask                         = 1L << 3,
-    kCFStringTokenizerTokenHasNonLettersMask                         = 1L << 4,
-    kCFStringTokenizerTokenIsCJWordMask                              = 1L << 5
+    kCFStringTokenizerTokenHasHasNumbersMask                         = 1UL << 3,
+    kCFStringTokenizerTokenHasNonLettersMask                         = 1UL << 4,
+    kCFStringTokenizerTokenIsCJWordMask                              = 1UL << 5
 };
 typedef CFOptionFlags CFStringTokenizerTokenType;
 
@@ -132,7 +132,7 @@ typedef CFOptionFlags CFStringTokenizerTokenType;
 	@result the type identifier of all CFStringTokenizer instances.
 */
 CF_EXPORT
-CFTypeID CFStringTokenizerGetTypeID(void);
+CFTypeID CFStringTokenizerGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 																				
 /*!
 	@function CFStringTokenizerCreate
@@ -154,7 +154,7 @@ CFTypeID CFStringTokenizerGetTypeID(void);
 	@result A reference to the new CFStringTokenizer.
 */
 CF_EXPORT
-CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef string, CFRange range, CFOptionFlags options, CFLocaleRef locale);
+CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef string, CFRange range, CFOptionFlags options, CFLocaleRef locale) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
 	@function CFStringTokenizerSetString
@@ -166,7 +166,7 @@ CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef s
 		specified range must not exceed the length of the string.
 */
 CF_EXPORT
-void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef string, CFRange range);
+void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef string, CFRange range) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 																		
 /*!
 	@function CFStringTokenizerGoToTokenAtIndex
@@ -184,7 +184,7 @@ void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef stri
 		(or) derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens. 
 */
 CF_EXPORT
-CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRef tokenizer, CFIndex index);
+CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRef tokenizer, CFIndex index) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
 	@function CFStringTokenizerAdvanceToNextToken
@@ -208,7 +208,7 @@ CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRe
 		(or) derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens. 
 */
 CF_EXPORT
-CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizerRef tokenizer);
+CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizerRef tokenizer) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
 	@function CFStringTokenizerGetCurrentTokenRange
@@ -218,7 +218,7 @@ CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizer
 	@result Range of current token, or {kCFNotFound,0} if there is no current token.
 */
 CF_EXPORT 
-CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer);
+CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 																				
 /*!
 	@function CFStringTokenizerCopyCurrentTokenAttribute
@@ -232,7 +232,7 @@ CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer);
 		attribute or if there is no current token.
 */
 CF_EXPORT
-CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokenizer, CFOptionFlags attribute);
+CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokenizer, CFOptionFlags attribute) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
 	@function CFStringTokenizerGetCurrentSubTokens
@@ -259,7 +259,7 @@ CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokeni
 		the ordinary non-derived subtokens are added to the derivedSubTokens array. 
 */
 CF_EXPORT
-CFIndex CFStringTokenizerGetCurrentSubTokens(CFStringTokenizerRef tokenizer, CFRange *ranges, CFIndex maxRangeLength, CFMutableArrayRef derivedSubTokens);
+CFIndex CFStringTokenizerGetCurrentSubTokens(CFStringTokenizerRef tokenizer, CFRange *ranges, CFIndex maxRangeLength, CFMutableArrayRef derivedSubTokens) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 CF_EXTERN_C_END
 

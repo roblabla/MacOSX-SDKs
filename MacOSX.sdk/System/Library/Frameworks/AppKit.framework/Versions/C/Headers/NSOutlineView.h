@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2007, Apple Inc.
+    Copyright (c) 1997-2009, Apple Inc.
     All rights reserved.
 */
 
@@ -16,6 +16,7 @@
 @class NSMouseTracker;
 @class NSNotification;
 @class NSString;
+@protocol NSOutlineViewDelegate, NSOutlineViewDataSource;
 
 typedef struct __OvFlags {
 #ifdef __BIG_ENDIAN__
@@ -33,21 +34,39 @@ typedef struct __OvFlags {
     unsigned int	removeChildInProgress:1;
     unsigned int 	selectionAdjustmentDisabled:1;
     unsigned int	autoExpandFlashState:1;
-    unsigned int	compatCollapseForceClearsExpandState:1;
+    unsigned int	_unused:1;
     unsigned int        delegateHeightOfRowByItem:1;
     unsigned int        delayRowEntryFreeDisabled:1;
     unsigned int        numberOfRowsDataExpandEntered:1;
     unsigned int        validDataSourceMethods:1;
     unsigned int        reloadingData:1;
-    unsigned int	_reserved:12;
+    unsigned int        dataSourceDraggingEndedAt:1;
+    unsigned int        dataSourceDraggedImageMovedTo:1;
+    unsigned int        delegateShouldShowOutlineCellForItem:1;
+    unsigned int        delegateAutoExpandItem:1;
+    unsigned int        delegateAutoCollapseItem:1;
+    unsigned int        delegateShouldAutoExpandItem:1;
+    unsigned int        flashingEntireRow:1;
+    unsigned int        flashingOutlineCell:1;
+    unsigned int        dontRedisplayOnFrameChange:1;
+    unsigned int	_reserved:3;
 #else
-    unsigned int	_reserved:12;
+    unsigned int	_reserved:3;
+    unsigned int        dontRedisplayOnFrameChange:1;
+    unsigned int        flashingOutlineCell:1;
+    unsigned int        flashingEntireRow:1;
+    unsigned int        delegateShouldAutoExpandItem:1;
+    unsigned int        delegateAutoCollapseItem:1;
+    unsigned int        delegateAutoExpandItem:1;
+    unsigned int        delegateShouldShowOutlineCellForItem:1;
+    unsigned int        dataSourceDraggedImageMovedTo:1;
+    unsigned int        dataSourceDraggingEndedAt:1;
     unsigned int        reloadingData:1;
     unsigned int        validDataSourceMethods:1;
     unsigned int        numberOfRowsDataExpandEntered:1;
     unsigned int        delayRowEntryFreeDisabled:1;
     unsigned int        delegateHeightOfRowByItem:1;
-    unsigned int	compatCollapseForceClearsExpandState:1;
+    unsigned int	_unused:1;
     unsigned int	autoExpandFlashState:1;
     unsigned int 	selectionAdjustmentDisabled:1;
     unsigned int	removeChildInProgress:1;
@@ -87,7 +106,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     id 			 _unused4;
     _OVFlags		 _ovFlags;
     id			 _ovLock;
-    long       		*_indentArray;
+    __strong long       *_indentArray;
     long		 _originalWidth;
     id			 _expandSet;
     id			 _expandSetToExpandItemsInto;
@@ -97,7 +116,13 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     id                   _ovReserved;
 }
 
-/* The 'outlineTableColumn' is the column that displays data in a hierarchical fashion, indented one identationlevel per level, decorated with indentation marker (disclosure triangle) on rows that are expandable. On MacOS 10.5, this value is saved in encodeWithCoder: and restored in initWithCoder:;
+- (void)setDelegate:(id <NSOutlineViewDelegate>)anObject;
+- (id <NSOutlineViewDelegate>)delegate;
+
+- (void)setDataSource:(id <NSOutlineViewDataSource>)aSource;
+- (id <NSOutlineViewDataSource>)dataSource;
+
+/* The 'outlineTableColumn' is the column that displays data in a hierarchical fashion, indented one identationlevel per level, decorated with indentation marker (disclosure triangle) on rows that are expandable. A nil 'outlineTableColumn' is silently ignored. On 10.5 and higher, this value is saved in encodeWithCoder: and restored in initWithCoder:.
 */
 - (void)setOutlineTableColumn:(NSTableColumn *)outlineTableColumn;
 - (NSTableColumn *)outlineTableColumn;
@@ -130,13 +155,9 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 */
 - (void)reloadItem:(id)item;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
-/* Returns the parent for 'item', or nil, if the parent is the root. 
+/* Returns the parent for 'item', or nil, if the parent is the root. Available in 10.4 and higher.
 */
-- (id)parentForItem:(id)item; 
-
-#endif
+- (id)parentForItem:(id)item AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Item/Row translation
 */
@@ -149,7 +170,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (NSInteger)levelForRow:(NSInteger)row;
 - (BOOL)isItemExpanded:(id)item;
 
-/* The indentation amount per level defaults to 16.0.
+/* Controls the amount of indentation per level. Negative values are ignored, and only integral values are accepted. The default value is 16.0.
 */
 - (void)setIndentationPerLevel:(CGFloat)indentationPerLevel;
 - (CGFloat)indentationPerLevel;
@@ -162,13 +183,9 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (void)setAutoresizesOutlineColumn:(BOOL)resize;
 - (BOOL)autoresizesOutlineColumn;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 /* Returns the frame of the outline cell for a particular row, considering the current indentation and indentationMarkerFollowsCell value. If 'row' is not an expandable row, it will return NSZeroRect. This method can be overridden by subclassers to return a custom frame for the outline button cell. If an empty rect is returned, no outline cell will be drawn for that row.
 */
-- (NSRect)frameOfOutlineCellAtRow:(NSInteger)row;
-
-#endif
+- (NSRect)frameOfOutlineCellAtRow:(NSInteger)row AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
 
 /* Drag and Drop
 */
@@ -190,7 +207,8 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Data Source Note: Specifying nil as the item will refer to the "root" item(s).
 */
-@interface NSObject(NSOutlineViewDataSource)
+@protocol NSOutlineViewDataSource <NSObject>
+@optional
 
 /* Required methods
 */
@@ -205,14 +223,10 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (id)outlineView:(NSOutlineView *)outlineView itemForPersistentObject:(id)object;
 - (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-
 /* Optional - Sorting Support
     This is the indication that sorting needs to be done. Typically the data source will sort its data, reload, and adjust selections.
 */
-- (void)outlineView:(NSOutlineView *)outlineView sortDescriptorsDidChange:(NSArray *)oldDescriptors;
-
-#endif
+- (void)outlineView:(NSOutlineView *)outlineView sortDescriptorsDidChange:(NSArray *)oldDescriptors AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Optional - Drag and Drop support
 */
@@ -229,17 +243,14 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 */
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 /* NSOutlineView data source objects can support file promised drags via by adding  NSFilesPromisePboardType to the pasteboard in outlineView:writeItems:toPasteboard:.  NSOutlineView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:.
 */
-- (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items;
-
-#endif
+- (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 @end
 
-@interface NSObject(NSOutlineViewDelegate)
+@protocol NSOutlineViewDelegate <NSControlTextEditingDelegate>
+@optional
 
 /* NSOutlineView replacements for NSTableView delegate methods.
 */
@@ -251,85 +262,93 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 */
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 /* Optional - Return a set of new indexes to select when the user changes the selection with the keyboard or mouse. If implemented, this method will be called instead of outlineView:shouldSelectItem:. This method may be called multiple times with one new index added to the existing selection to find out if a particular index can be selected when the user is extending the selection with the keyboard or mouse. Note that 'proposedSelectionIndexes' will contain the entire newly suggested selection, and you can return the exsiting selection to avoid changing the selection.
 */
-- (NSIndexSet *)outlineView:(NSOutlineView *)outlineView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes;
-
-#endif
+- (NSIndexSet *)outlineView:(NSOutlineView *)outlineView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-
-- (void)outlineView:(NSOutlineView *)outlineView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn;
-- (void)outlineView:(NSOutlineView *)outlineView didClickTableColumn:(NSTableColumn *)tableColumn;
-- (void)outlineView:(NSOutlineView *)outlineView didDragTableColumn:(NSTableColumn *)tableColumn;
-
-#endif
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)outlineView:(NSOutlineView *)outlineView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+- (void)outlineView:(NSOutlineView *)outlineView didClickTableColumn:(NSTableColumn *)tableColumn AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+- (void)outlineView:(NSOutlineView *)outlineView didDragTableColumn:(NSTableColumn *)tableColumn AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Optional - Tool Tip support
     When the user pauses over a cell, the value returned from this method will be displayed in a tooltip.  'point' represents the current mouse location in view coordinates.  If you don't want a tooltip at that location, return nil or the empty string.  On entry, 'rect' represents the proposed active area of the tooltip.  By default, rect is computed as [cell drawingRectForBounds:cellFrame].  To control the default active area, you can modify the 'rect' parameter.
 */
-- (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation;
+- (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Optional - Variable Row Heights
-    Implement this method to support an outline view with varying row heights.  The height returned by this method should not include intercell spacing and must be >0.  Performance Considerations: For large tables in particular, you should make sure that this method is efficient.  NSTableView may cache the values this method returns.  So if you would like to change a row's height make sure to invalidate the row height by calling -noteHeightOfRowsWithIndexesChanged:.  NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
-*/
-- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item;
-
-#endif
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing and must be greater than zero. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
+ */
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Optional - Type select support
     Implement this method if you want to control the string that is used for type selection. You may want to change what is searched for based on what is displayed, or simply return nil for that row and/or column to not be searched. By default, all cells with text in them are searched. The default value when this delegate method is not implemented is [[outlineView preparedCellForColumn:tableColumn row:[outlineView rowForItem:item]] stringValue], and this value can be returned from the delegate method if desired.
 */
-- (NSString *)outlineView:(NSOutlineView *)outlineView typeSelectStringForTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+- (NSString *)outlineView:(NSOutlineView *)outlineView typeSelectStringForTableColumn:(NSTableColumn *)tableColumn item:(id)item AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Optional - Type select support
     Implement this method if you want to control how type selection works. Return the first item that matches the searchString from within the range of startItem to endItem. It is possible for endItem to be less than startItem if the search will wrap. Return nil when there is no match. Include startItem as a possible match, but do not include endItem. It is not necessary to implement this method in order to support type select.
 */
-- (id)outlineView:(NSOutlineView *)outlineView nextTypeSelectMatchFromItem:(id)startItem toItem:(id)endItem forString:(NSString *)searchString;
+- (id)outlineView:(NSOutlineView *)outlineView nextTypeSelectMatchFromItem:(id)startItem toItem:(id)endItem forString:(NSString *)searchString AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Optional - Type select support
     Implement this method if you would like to prevent a type select from happening based on the current event and current search string. Generally, this will be called from keyDown: and the event will be a key event. The search string will be nil if no type select has began. 
 */
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(NSString *)searchString;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(NSString *)searchString AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Optional - Expansion ToolTip support
     Implement this method and return NO to prevent an expansion tooltip from appearing for a particular cell at 'item' in 'tableColumn'. See NSCell.h for more information on expansion tool tips. 
 */
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn item:(id)item AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*  Optional - Custom tracking support
     It is possible to control the ability to track a cell or not. Normally, only selectable or selected cells can be tracked. If you implement this method, cells which are not selectable or selected can be tracked, and vice-versa. For instance, this allows you to have an NSButtonCell in a table which does not change the selection, but can still be clicked on and tracked.
 */
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldTrackCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldTrackCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*  Optional - Different cells for each row
     A different data cell can be returned for any particular tableColumn and item, or a cell that will be used for the entire row (a full width cell). The returned cell should properly implement copyWithZone:, since the cell may be copied by NSTableView. If the tableColumn is non-nil, you should return a cell, and generally you will want to default to returning the result from [tableColumn dataCellForRow:row].
 
     When each row (identified by the item) is being drawn, this method will first be called with a nil tableColumn. At this time, you can return a cell that will be used to draw the entire row, acting like a group. If you do return a cell for the 'nil' tableColumn, be prepared to have the other corresponding datasource and delegate methods to be called with a 'nil' tableColumn value. If don't return a cell, the method will be called once for each tableColumn in the tableView, as usual.
 */
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Optional - Group rows. 
     Implement this method and return YES to indicate a particular row should have the "group row" style drawn for that row. If the cell in that row is an NSTextFieldCell and contains only a stringValue, the "group row" style attributes will automatically be applied for that cell. 
 */
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-#endif
-
-
-/* NSOutlineView specific 
+/* Optional - Controlling expanding/collapsing of items.
+    Called when the outlineView is about to expand 'item'. Implementations of this method should be fast. This method may be called multiple times if a given 'item' has children that are also being expanded. If NO is returned, 'item' will not be expanded, nor will its children (even if -[outlineView expandItem:item expandChildren:YES] is called).
 */
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item;
+
+/* Optional - Controlling expanding/collapsing of items.
+    Called when the outlineView is about to collapse 'item'. Implementations of this method should be fast. If NO is returned, 'item' will not be collapsed, nor will its children (even if -[outlineView collapseItem:item collapseChildren:YES] is called).
+*/
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item;
+
+/* Optional - OutlineCell (disclosure triangle button cell)
+    Implement this method to customize the "outline cell" used for the disclosure triangle button. customization of the "outline cell" used for the disclosure triangle button. For instance, you can cause the button cell to always use a "dark" triangle by changing the cell's backgroundStyle with: [cell setBackgroundStyle:NSBackgroundStyleLight]
+*/
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayOutlineCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+
+/* Optional - Autosizing table columns
+ Implement this method if you want to control how wide a column is made when the user double clicks on the resize divider. By default, NSTableView iterates every row in the table, accesses a cell via preparedCellAtRow:column:, and requests the "cellSize" to find the appropriate largest width to use. For large row counts, a monte carlo simulation is done instead of interating every row. For accurate performance, it is recommended that this method is implemented when using large tables. 
+*/
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView sizeToFitWidthOfColumn:(NSInteger)column AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*  Optional - Control of column reordering.
+ Specifies if the column can be reordered to a new location, or not. 'columnIndex' is the column that is being dragged. The actual NSTableColumn instance can be retrieved from the [tableView tableColumns] array. 'newColumnIndex' is the new proposed target location for 'columnIndex'. When a column is initially dragged by the user, the delegate is first called with a 'newColumnIndex' of -1. Returning NO will disallow that column from being reordered at all. Returning YES allows it to be reordered, and the delegate will be called again when the column reaches a new location. If this method is not implemented, all columns are considered reorderable. 
+ */
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldReorderColumn:(NSInteger)columnIndex toColumn:(NSInteger)newColumnIndex AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Optional - Hiding the outline cell (disclosure triangle)
+ Allows the delegate to decide if the outline cell (disclosure triangle) for 'item' should be displayed or not. This method will only be called for expandable rows. If 'NO' is returned,  -[outlineView frameOfOutlineCellAtRow:] will return NSZeroRect, causing the outline cell to be hidden. In addition, if 'NO' is returned, the row will not be collapsable by keyboard shortcuts.
+ */
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 
@@ -351,6 +370,7 @@ APPKIT_EXTERN NSString *NSOutlineViewItemWillCollapseNotification;
 APPKIT_EXTERN NSString *NSOutlineViewItemDidCollapseNotification;
 
 @interface NSObject(NSOutlineViewNotifications)
+
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification;
 - (void)outlineViewColumnDidMove:(NSNotification *)notification;
 - (void)outlineViewColumnDidResize:(NSNotification *)notification;
@@ -359,5 +379,6 @@ APPKIT_EXTERN NSString *NSOutlineViewItemDidCollapseNotification;
 - (void)outlineViewItemDidExpand:(NSNotification *)notification;
 - (void)outlineViewItemWillCollapse:(NSNotification *)notification;
 - (void)outlineViewItemDidCollapse:(NSNotification *)notification;
+
 @end
 

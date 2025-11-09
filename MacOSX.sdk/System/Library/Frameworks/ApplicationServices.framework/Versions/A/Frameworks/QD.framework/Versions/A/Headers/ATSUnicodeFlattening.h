@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for Apple Type Services for Unicode Imaging
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2002-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2002-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -80,8 +80,8 @@ enum {
    to return the style run info to the caller. 
 */
 struct ATSUStyleRunInfo {
-  UniCharCount        runLength;
-  ItemCount           styleObjectIndex;
+  UInt32              runLength;
+  UInt32              styleObjectIndex;
 };
 typedef struct ATSUStyleRunInfo         ATSUStyleRunInfo;
 /* ---------------------------------------------------------------------------- */
@@ -127,19 +127,19 @@ struct ATSFlatDataMainHeaderBlock {
 
                                               /* the total size of the stream in bytes, including the four bytes in*/
                                               /* the version above*/
-  ByteCount           sizeOfDataBlock;
+  UInt32              sizeOfDataBlock;
 
                                               /* offset from the beginning of the stream to the flattened text layout data.*/
                                               /* This can be set to 0 if there are no text layouts stored in the stream.*/
-  ByteCount           offsetToTextLayouts;
+  UInt32              offsetToTextLayouts;
 
                                               /* offset from the beginning of the stream to the flattened style run data. */
                                               /* This can be set to 0 if there is no flattened style run data in the stream*/
-  ByteCount           offsetToStyleRuns;
+  UInt32              offsetToStyleRuns;
 
                                               /* offset to the flattened style list data. This can be set to 0 if there*/
                                               /* is no flattened style list data*/
-  ByteCount           offsetToStyleList;
+  UInt32              offsetToStyleList;
 };
 typedef struct ATSFlatDataMainHeaderBlock ATSFlatDataMainHeaderBlock;
 /* ------------------ */
@@ -160,20 +160,20 @@ struct ATSFlatDataTextLayoutDataHeader {
 
                                               /* the total size of this particular flattened text layout, including any*/
                                               /* padding bytes and such. */
-  ByteCount           sizeOfLayoutData;
+  UInt32              sizeOfLayoutData;
 
                                               /* the number of characters covered by this flattened text layout*/
-  ByteCount           textLayoutLength;
+  UInt32              textLayoutLength;
 
                                               /* the byte offset relative to the start of this structure to the flattened*/
                                               /* layout control data. This can be set to zero if there are no layout*/
                                               /* controls.*/
-  ByteCount           offsetToLayoutControls;
+  UInt32              offsetToLayoutControls;
 
                                               /* the byte offset, relative to the start of this structure to the*/
                                               /* flattened line info. This can be set to zero if there is no line info */
                                               /* in this layout.*/
-  ByteCount           offsetToLineInfo;
+  UInt32              offsetToLineInfo;
 
                                               /* if the offsetToLayoutControls is non-zero, then following this block*/
                                               /* there will be a ATSFlattenedLayoutDataFlattenedLayoutControlsHeader*/
@@ -193,7 +193,7 @@ struct ATSFlatDataTextLayoutHeader {
                                               /* the total number of flattened text layouts stored in this block.*/
                                               /* This must be non-zero, as if there were no flattened text layouts, the*/
                                               /* entire block 2 would not exist*/
-  ItemCount           numFlattenedTextLayouts;
+  UInt32              numFlattenedTextLayouts;
 
                                               /* first of possibly many flattened text layouts. There should be one of*/
                                               /* these for each flattened text layout as determined by the*/
@@ -210,7 +210,7 @@ struct ATSFlatDataLayoutControlsDataHeader {
 
                                               /* the number of flattened layout controls. It is suggested that there be*/
                                               /* at least one layout control to output the line direction for the layout*/
-  ItemCount           numberOfLayoutControls;
+  UInt32              numberOfLayoutControls;
 
                                               /* first of possibly many flattened layout controls. There should be one */
                                               /* of these for each layout control as determined by the*/
@@ -225,11 +225,11 @@ typedef struct ATSFlatDataLayoutControlsDataHeader ATSFlatDataLayoutControlsData
 struct ATSFlatDataLineInfoData {
 
                                               /* the length of this particular line in UniChars*/
-  UniCharCount        lineLength;
+  UInt32              lineLength;
 
                                               /* the number of line controls applied to this line. This can be set*/
                                               /* to zero if there are no special line controls applied to this line.*/
-  ItemCount           numberOfLineControls;
+  UInt32              numberOfLineControls;
 
                                               /* the numberOfLineControls is non-zero, then following this structure*/
                                               /* must be an array of ATSUAttributeInfo structures. There must be one*/
@@ -247,7 +247,7 @@ struct ATSFlatDataLineInfoHeader {
                                               /* block. This value should really be equal to the number of soft line*/
                                               /* breaks in the layout + 1. Of course if numberOfLines is zero, then*/
                                               /* this structure shouldn't even be used.*/
-  ItemCount           numberOfLines;
+  UInt32              numberOfLines;
 
                                               /* the first in a array of ATSFlatDataLineInfoData structures. There*/
                                               /* needs to be a ATSFlatDataLineInfoData for each numberOfLines*/
@@ -273,7 +273,7 @@ typedef struct ATSFlatDataLineInfoHeader ATSFlatDataLineInfoHeader;
 struct ATSFlatDataStyleRunDataHeader {
 
                                               /* the number of style run data structures stored in this block*/
-  ItemCount           numberOfStyleRuns;
+  UInt32              numberOfStyleRuns;
 
                                               /* the first in an array of ATSUStyleRunInfo structures. There needs to*/
                                               /* be a ATSUStyleRunInfo structure for each numberOfStyleRuns specified*/
@@ -299,20 +299,20 @@ struct ATSFlatDataStyleListStyleDataHeader {
                                               /* the size of this flattened style object, including these four bytes and*/
                                               /* any padding bytes at the end of the structure. Basically, this can be*/
                                               /* used to determine where the next structure in the array begins.*/
-  ByteCount           sizeOfStyleInfo;
+  UInt32              sizeOfStyleInfo;
 
                                               /* the number of attributes set in this flattened style object. This should */
                                               /* be at least one for the font data, although it can be 0 if this is to be*/
                                               /* unspecfied.*/
-  ItemCount           numberOfSetAttributes;
+  UInt32              numberOfSetAttributes;
 
                                               /* the number of font features set in the flattened style object. This can*/
                                               /* be set to 0 if there are no font features set in the style object. */
-  ItemCount           numberOfSetFeatures;
+  UInt32              numberOfSetFeatures;
 
                                               /* the number of font variations set in the flattened style object. This*/
                                               /* can be set to 0 if there are no font variations set in the style object.*/
-  ItemCount           numberOfSetVariations;
+  UInt32              numberOfSetVariations;
 
                                               /* after this structure header, there is the following data in this block:*/
 
@@ -345,7 +345,7 @@ typedef struct ATSFlatDataStyleListStyleDataHeader ATSFlatDataStyleListStyleData
 struct ATSFlatDataStyleListHeader {
 
                                               /* the total number of flattened style objects stored in this block*/
-  ItemCount           numberOfStyles;
+  UInt32              numberOfStyles;
 
                                               /* the first in an array of flattned style entries. The data stored*/
                                               /* in them is variably sized, so a simply array access won't do for*/
@@ -419,7 +419,7 @@ struct ATSFlatDataFontNameDataHeader {
                                               /* any padding bytes that may be necessary to achive the four byte */
                                               /* alignment of the data, unless they are specified as part of structure, */
                                               /* such as with the ATSFlatDataFontSpecRawNameData structure.*/
-  ByteCount           nameSpecifierSize;
+  UInt32              nameSpecifierSize;
 
                                               /* after this header comes the flattened font name data which matches*/
                                               /* the type specified by the nameSpecifierType above. For instance, if */
@@ -460,7 +460,7 @@ struct ATSFlatDataFontSpecRawNameData {
 
                                               /* the length of the font name in bytes, not including any padding bytes*/
                                               /* added to maintain the four byte alignment*/
-  ByteCount           fontNameLength;
+  UInt32              fontNameLength;
 
                                               /* after the name length comes the actual font name data itself, plus any*/
                                               /* padding bytes needed to maintain the four byte alignment.*/
@@ -482,7 +482,7 @@ struct ATSFlatDataFontSpecRawNameDataHeader {
 
                                               /* the number of flattened font names. There must be at least one flattened */
                                               /* font name, otherwise the structure is malformed.*/
-  ItemCount           numberOfFlattenedNames;
+  UInt32              numberOfFlattenedNames;
 
                                               /* the first in an array of possibly many font name specifiers - depending*/
                                               /* on how specific the caller wants this. There must be one */
@@ -497,7 +497,10 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
 /* ---------------------------------------------------------------------------- */
 #if !__LP64__
 /*
- *  ATSUFlattenStyleRunsToStream()
+ *  ATSUFlattenStyleRunsToStream()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreFoundation flattening API instead.
  *  
  *  Summary:
  *    Converts a series of ATSUStyle objects and associated run info to
@@ -515,7 +518,7 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
  *    iFlattenOptions, iNumberOfRunInfo, iRunInfoArray,
  *    iNumberOfStyleObjects, and iStyleArray parameters. Set
  *    iStreamBufferSize to 0, oStreamBuffer to NULL, and pass a valid
- *    reference to a ByteCount variable in the oActualStreamBufferSize
+ *    reference to a UInt32 variable in the oActualStreamBufferSize
  *    parameter. Call the function ATSUFlattenStyleRunsToStream. On
  *    return, oActualStreamBufferSize points to the size needed for the
  *    buffer. (2) Allocate an appropriately-sized buffer for the
@@ -585,7 +588,7 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -599,11 +602,14 @@ ATSUFlattenStyleRunsToStream(
   const ATSUStyle                 iStyleArray[],
   ByteCount                       iStreamBufferSize,
   void *                          oStreamBuffer,
-  ByteCount *                     oActualStreamBufferSize)    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ByteCount *                     oActualStreamBufferSize)    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUUnflattenStyleRunsFromStream()
+ *  ATSUUnflattenStyleRunsFromStream()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreFoundation flattening API instead.
  *  
  *  Summary:
  *    Creates a series of ATSUStyle objects and associated run
@@ -702,7 +708,7 @@ ATSUFlattenStyleRunsToStream(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -717,7 +723,7 @@ ATSUUnflattenStyleRunsFromStream(
   ATSUStyleRunInfo                oRunInfoArray[],
   ATSUStyle                       oStyleArray[],
   ItemCount *                     oActualNumberOfRunInfo,
-  ItemCount *                     oActualNumberOfStyleObjects) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount *                     oActualNumberOfStyleObjects) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Functions listed beyond this point are either deprecated or not recommended */
@@ -726,7 +732,7 @@ ATSUUnflattenStyleRunsFromStream(
  *  ATSUCopyToHandle()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUFlattenStyleRunsToStream instead.
+ *    Use CoreFoundation flattening API instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
@@ -747,7 +753,7 @@ ATSUCopyToHandle(
  *  ATSUPasteFromHandle()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use ATSUUnflattenStyleRunsFromStream instead.
+ *    Use CoreFoundation flattening API instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use

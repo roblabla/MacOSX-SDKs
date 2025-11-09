@@ -1,9 +1,14 @@
 /*
 	File:		QTMovieLayer.h
 
-	Copyright:	(c)2005-2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2005-2010 by Apple Inc., all rights reserved.
 
 */
+
+/* Note: do not attempt to directly modify the `contents' property of
+ * an QTMovieLayer object - doing so will effectively turn it into a
+ * regular CALayer. */
+
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
@@ -13,11 +18,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 @class QTMovie;
+@class QTMovieLayerPrivate;
+@class QTInfoLayer;
 
 @interface QTMovieLayer : CALayer								// QTMovieLayer is a layer that renders a QTMovie within a layer hierarchy
 {
-@private
-	struct QTMovieLayerPrivate *	_movieLayerPriv;
+	@private
+	QTMovieLayerPrivate *	_movieLayerPriv;
 }
 
 + (id)layerWithMovie:(QTMovie *)movie;

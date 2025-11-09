@@ -3,9 +3,9 @@
  
      Contains:   Definitions of text-display and text-editing views provided by HIToolbox.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -690,7 +690,7 @@ enum {
   kControlEditTextKeyFilterTag  = kControlKeyFilterTag,
   kControlEditTextSelectionTag  = 'sele', /* ControlEditTextSelectionRec*/
   kControlEditTextPasswordTag   = 'pass', /* The clear text password text*/
-  kControlEditTextCharCount     = 'chrc' /* Count of characters in the control's text*/
+  kControlEditTextCharCount     = 'chrc' /* [UInt32] Count of characters in the control's text*/
 };
 
 /* tags available with Appearance 1.1 or later */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -157,6 +157,7 @@ struct ombstat {
  */
 #define	MAX_MBUF_CNAME	15
 
+
 typedef struct mb_class_stat {
 	char		mbcl_cname[MAX_MBUF_CNAME + 1]; /* class name */
 	u_int32_t	mbcl_size;	/* buffer size */
@@ -164,6 +165,9 @@ typedef struct mb_class_stat {
 	u_int32_t	mbcl_active;	/* # of active buffers */
 	u_int32_t	mbcl_infree;	/* # of available buffers */
 	u_int32_t	mbcl_slab_cnt;	/* # of available slabs */
+#if defined(KERNEL) || defined(__LP64__)
+	u_int32_t	mbcl_pad;	/* padding */
+#endif /* KERNEL || __LP64__ */
 	u_int64_t	mbcl_alloc_cnt;	/* # of times alloc is called */
 	u_int64_t	mbcl_free_cnt;	/* # of times free is called */
 	u_int64_t	mbcl_notified;	/* # of notified wakeups */
@@ -186,8 +190,12 @@ typedef struct mb_class_stat {
 #define	MCS_PURGING	2	/* cache is being purged */
 #define	MCS_OFFLINE	3	/* cache is offline (resizing) */
 
+
 typedef struct mb_stat {
 	u_int32_t	mbs_cnt;	/* number of classes */
+#if defined(KERNEL) || defined(__LP64__)
+	u_int32_t	mbs_pad;	/* padding */
+#endif /* KERNEL || __LP64__ */
 	mb_class_stat_t	mbs_class[1];	/* class array */
 } mb_stat_t;
 

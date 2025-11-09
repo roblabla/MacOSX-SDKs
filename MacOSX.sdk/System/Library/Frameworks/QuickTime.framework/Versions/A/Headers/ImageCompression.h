@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Image Compression Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -60,6 +60,9 @@ extern "C" {
 /* QuickTime is not available to 64-bit clients */
 
 #if !__LP64__
+
+
+#endif // !__LP64__
 
 struct MatrixRecord {
   Fixed               matrix[3][3];
@@ -140,6 +143,8 @@ enum {
   kH264CodecType                = 'avc1'
 };
 
+
+#if !__LP64__
 
 /* one source effects */
 enum {
@@ -290,7 +295,7 @@ enum {
 
 enum {
                                         /* The minimum data size for spooling in or out data */
-  codecMinimumDataSize          = 32768L
+  codecMinimumDataSize          = 32768
 };
 
 
@@ -307,9 +312,15 @@ typedef Component                       CodecComponent;
 #define bestSpeedCodec          ((CodecComponent)-1)
 #define bestFidelityCodec       ((CodecComponent)-2)
 #define bestCompressionCodec    ((CodecComponent)-3)
+
+#endif // !__LP64__
+
 typedef OSType                          CodecType;
-typedef unsigned short                  CodecFlags;
-typedef unsigned long                   CodecQ;
+typedef UInt16                          CodecFlags;
+typedef UInt32                          CodecQ;
+
+#if !__LP64__
+
 enum {
   codecLosslessQuality          = 0x00000400,
   codecMaxQuality               = 0x000003FF,
@@ -407,30 +418,37 @@ struct DataRateParams {
 };
 typedef struct DataRateParams           DataRateParams;
 typedef DataRateParams *                DataRateParamsPtr;
+
+#endif // !__LP64__
+
 struct ImageDescription {
-  long                idSize;                 /* total size of ImageDescription including extra data ( CLUTs and other per sequence data ) */
+  SInt32              idSize;                 /* total size of ImageDescription including extra data ( CLUTs and other per sequence data ) */
   CodecType           cType;                  /* what kind of codec compressed this data */
-  long                resvd1;                 /* reserved for Apple use */
-  short               resvd2;                 /* reserved for Apple use */
-  short               dataRefIndex;           /* set to zero  */
-  short               version;                /* which version is this data */
-  short               revisionLevel;          /* what version of that codec did this */
-  long                vendor;                 /* whose  codec compressed this data */
+  SInt32              resvd1;                 /* reserved for Apple use */
+  SInt16              resvd2;                 /* reserved for Apple use */
+  SInt16              dataRefIndex;           /* set to zero  */
+  SInt16              version;                /* which version is this data */
+  SInt16              revisionLevel;          /* what version of that codec did this */
+  SInt32              vendor;                 /* whose  codec compressed this data */
   CodecQ              temporalQuality;        /* what was the temporal quality factor  */
   CodecQ              spatialQuality;         /* what was the spatial quality factor */
-  short               width;                  /* how many pixels wide is this data */
-  short               height;                 /* how many pixels high is this data */
+  SInt16              width;                  /* how many pixels wide is this data */
+  SInt16              height;                 /* how many pixels high is this data */
   Fixed               hRes;                   /* horizontal resolution */
   Fixed               vRes;                   /* vertical resolution */
-  long                dataSize;               /* if known, the size of data for this image descriptor */
-  short               frameCount;             /* number of frames this description applies to */
+  SInt32              dataSize;               /* if known, the size of data for this image descriptor */
+  SInt16              frameCount;             /* number of frames this description applies to */
   Str31               name;                   /* name of codec ( in case not installed )  */
-  short               depth;                  /* what depth is this data (1-32) or ( 33-40 grayscale ) */
-  short               clutID;                 /* clut id or if 0 clut follows  or -1 if no clut */
+  SInt16              depth;                  /* what depth is this data (1-32) or ( 33-40 grayscale ) */
+  SInt16              clutID;                 /* clut id or if 0 clut follows  or -1 if no clut */
 };
 typedef struct ImageDescription         ImageDescription;
 typedef ImageDescription *              ImageDescriptionPtr;
 typedef ImageDescriptionPtr *           ImageDescriptionHandle;
+
+#if !__LP64__
+
+
 struct CodecInfo {
   Str31               typeName;               /* name of the codec type i.e.: 'Apple Image Compression' */
   short               version;                /* version of the codec data that this codec knows about */
@@ -544,8 +562,15 @@ typedef struct QTUUID                   QTUUID;
 typedef QTUUID                          QTMediaContextID;
 #endif  /* !defined(__QTUUID__) */
 
+
+#endif // !__LP64__
+
 /* See Movies.h for the flags themselves. */
 typedef UInt32                          MediaSampleFlags;
+
+#if !__LP64__
+
+
 /*
  *  NewICMDataUPP()
  *  
@@ -4103,7 +4128,7 @@ enum {
   kQTPhotoshopLayerOpacity      = 'lopa', /* UInt8, 0 = transparent .. 255 = opaque */
   kQTPhotoshopLayerClipping     = 'lclp', /* UInt8, 0 = base, 1 = non-base */
   kQTPhotoshopLayerFlags        = 'lflg', /* UInt8 */
-  kQTPhotoshopLayerName         = (long)0xA96C6E6D/*'©lnm' */, /* Text */
+  kQTPhotoshopLayerName         = (int)0xA96C6E6D/*'©lnm' */, /* Text */
   kQTPhotoshopLayerUnicodeName  = 'luni' /* Unicode characters, not terminated */
 };
 
@@ -5425,7 +5450,7 @@ enum {
 enum {
   kQTTIFFCompressionMethod      = 'tifc', /* UInt32*/
   kQTTIFFCompression_None       = 1,
-  kQTTIFFCompression_PackBits   = 32773L,
+  kQTTIFFCompression_PackBits   = 32773,
   kQTTIFFLittleEndian           = 'tife' /* UInt8 (boolean)*/
 };
 

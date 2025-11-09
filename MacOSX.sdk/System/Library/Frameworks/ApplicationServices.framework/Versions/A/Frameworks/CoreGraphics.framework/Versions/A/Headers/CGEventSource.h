@@ -1,236 +1,223 @@
-/*
-*  CGEventSource.h
-*  CoreGraphics
-*
-*  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
-*
-*/
-#ifndef __CGEVENTSOURCE_H__
-#define __CGEVENTSOURCE_H__ 1
+/* CoreGraphics - CGEventSource.h
+   Copyright (c) 2004-2008 Apple Inc.
+   All rights reserved. */
+
+#ifndef CGEVENTSOURCE_H_
+#define CGEVENTSOURCE_H_
 
 #include <CoreGraphics/CGRemoteOperation.h>
 #include <CoreGraphics/CGEventTypes.h>
 
+/* An event source contains accumulated state related to event generation
+   and event posting, allowing for customized event generation and
+   processing.
 
-CG_EXTERN_C_BEGIN
+   A source state, represented by a `CGEventSourceStateID', refers to a
+   global event state table. These tables contain accumulated information on
+   modifier flag state, keyboard key state, mouse button state, and related
+   internal parameters placed in effect by posting events with associated
+   sources.
+
+   Two pre-existing event state tables are defined:
+
+     The `kCGEventSourceStateCombinedSessionState' table reflects the
+     combined state of all event sources posting to the current user login
+     session. If your program is posting events from within a login session,
+     you should use this source state when you create an event source.
+
+     The `kCGEventSourceStateHIDSystemState' table reflects the combined
+     state of all hardware event sources posting from the HID system. If
+     your program is a daemon or a user space device driver interpreting
+     hardware state and generating events, you should use this source state
+     when you create an event source.
+
+   Very specialized applications such as remote control programs may want to
+   generate and track event source state independent of other processes.
+   These programs should use the `kCGEventSourceStatePrivate' value in
+   creating their event source. An independent state table and unique source
+   state ID (`CGEventSourceStateID') are created to track the event source's
+   state. This independent sate table is owned by the creating event source
+   and released with it. */
 
 /* Return the CFTypeID for CGEventSourceRefs. */
-CG_EXTERN CFTypeID CGEventSourceGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-/*
- * Create a new CGEventSource
- *
- * The event source contains accumulated state related to event
- * generation and event posting, allowing for customized event
- * generation and processing.
- *
- * The CGEventSourceStateID refers to a global event state table.
- * These tables contain accumulated information on modifier flag state,
- * keyboard key state, mouse button state, and related internal parameters
- * placed in effect by posting events with associated sources.
- *
- * Two pre-existing tables are defined.
- *
- * The kCGEventSourceStateCombinedSessionState table reflects the combined state
- * of all event sources posting to this user login session. Mouse button,
- * keyboard state, and modifier flag state (derived from keyboard state)
- * are logically ORed together in this state table.
- *
- * The kCGEventSourceStateHIDSystemState table reflects the combined state
- * of all hardware event sources posting from the HID system. Mouse button,
- * keyboard state, and modifier flag state (derived from keyboard state)
- * for the hardware devices are logically ORed together in this state table.
- *
- * A program, or application posting from within a login session should use
- * the kCGEventSourceStateCombinedSessionState.
- *
- * A user space device driver interpreting hardware state and generating events
- * should use the kCGEventSourceStateHIDSystemState.
- *
- * Very specialized applications such as remote control programs may want to
- * generate and track event source state independent of other processes.
- * These programs should use the kCGEventSourceStatePrivate value in creating
- * their event source. An independent state table and unique CGEventSourceStateID
- * are created to track the event source's state.  The independent sate table is owned
- * by the creating event source and released with it.
- *
- * If the CGEventSourceStateID from another CGEventSourceRef
- * is released while being used in a second CGEventSourceRef, the second source
- * will behave as if all keys and buttons on input devices are up in generating
- * new events from this source.
- *
- * Default behavior without an event source, that is, passing NULL to
- * CGEvent creation functions, is identical to using an unmodified
- * CGEventSource created with the kCGEventSourceStateCombinedSystemState
- * source state ID, if running within a login session, or using
- * kCGEventSourceStateHIDSystemState if running outside of a login session,
- * as in a daemon or user space device driver.
- *
- * Returns NULL if the specified event source is not a valid CGEventSourceStateID,
- * or is a private event source owned by another process,
- * or is not a member of the following enumeration.
- *
- * The returned object should be released with CFRelease when no longer needed.
- */
-CG_EXTERN CGEventSourceRef CGEventSourceCreate(CGEventSourceStateID sourceState) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CFTypeID CGEventSourceGetTypeID(void)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * Set and get the keyboard type to be used with this source
- * The value will be used with UCKeyTranslate() to drive keyboard translation
- */
-CG_EXTERN CGEventSourceKeyboardType CGEventSourceGetKeyboardType(CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef source, CGEventSourceKeyboardType keyboardType) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return a Quartz event source created with a specified source state. */
 
-/*
- * Set and get the scale used to interpret between scrollwheel events that
- * scroll by line and by pixel.
- *
- * Every scrollwheel event can be interpreted to be scrolling by pixel or by line.
- * The scale between the two is about 10 pixels per line by default.  The scale can be
- * altered by setting a custom value for the event source
- */
-CG_EXTERN void CGEventSourceSetPixelsPerLine( CGEventSourceRef source, double pixelsPerLine );
-CG_EXTERN double CGEventSourceGetPixelsPerLine( CGEventSourceRef source );
+CG_EXTERN CGEventSourceRef CGEventSourceCreate(CGEventSourceStateID stateID)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
+/* Return the keyboard type to be used with a Quartz event source. */
 
-/*
- * Return the event source state ID associated with the event source.
- * For event sources created with the kCGEventSourceStatePrivate
- * CGEventSourceStateID, this returns the actual CGEventSourceStateID
- * created for the CGEventSourceRef.
- *
- * The value returned may be passed to CGEventSourceCreate() to create a
- * second event source sharing the same state table.  This may be useful,
- * for example, in creating seperate mouse and keyboard sources which share
- * a common private state.
- *
- * If the CGEventSourceStateID from another CGEventSourceRef
- * is released while being used in a second CGEventSourceRef, the second source
- * will behave as if all keys and buttons on input devices are up in generating
- * new events from this source.
- */
-CG_EXTERN CGEventSourceStateID CGEventSourceGetSourceStateID(CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGEventSourceKeyboardType CGEventSourceGetKeyboardType(
+  CGEventSourceRef source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/*
- * The state of an event source may be queried for specialized event processing
- * purposes.
- */
-CG_EXTERN bool CGEventSourceButtonState( CGEventSourceStateID sourceState, CGMouseButton button )  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN bool CGEventSourceKeyState( CGEventSourceStateID sourceState, CGKeyCode key )  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN CGEventFlags CGEventSourceFlagsState( CGEventSourceStateID sourceState )  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Set the keyboard type to be used with a Quartz event source. */
 
-/*
- * Time since last event for an event source.
- *
- * The kCGAnyInputEventType eventType will report the last timestamp for any
- * input event, keyboard, mouse, or tablet.  The various system and app
- * defined events do not contribute to this event type's time.
- *
- * Again, a program or application posting from within a login session should use
- * the kCGEventSourceStateCombinedSessionState.
- *
- * A user space device driver interpreting hardware state and generating events
- * should use the kCGEventSourceStateHIDSystemState.
- */
+CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef source,
+  CGEventSourceKeyboardType keyboardType)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType( CGEventSourceStateID source, CGEventType eventType )  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return the scale of pixels per line in a scrolling event source.
 
-/*
- * Returns a count of events of different types seen since the window server started.
- *
- * Note that modifier keys produce kCGEventFlagsChanged events, not kCGEventKeyDown
- * events, and do so both on press and release.
- *
- * Please note that some keys on the keyboard are not implemented as keys,
- * but instead are USB button devices.  We account for the ones we can see as
- * kCGEventKeyDown events. Where we don't get a different event for key-up, we
- * record both a key down and a key up.
- *
- * There is no guarantee that the number of key down and key up events will match
- * when all keyboard keys are up, due to the inconsistent nature of the USB button device keys.
- *
- * Key autorepeat events are not counted.
- *
- * Synthetic events posted into the system may also produce assymetric 'down' and 'up' event counts.
- *
- * Again, a program or application posting from within a login session should use
- * the kCGEventSourceStateCombinedSessionState.
- *
- * A user space device driver interpreting hardware state and generating events
- * should use the kCGEventSourceStateHIDSystemState.
- *
- */
-CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID source, CGEventType evType) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   This function returns the scale of pixels per line in the specified event
+   source. For example, if the scale in the event source is 10.5 pixels per
+   line, this function would return 10.5. Every scrolling event can be
+   interpreted to be scrolling by pixel or by line. By default, the scale is
+   about ten pixels per line. */
 
-/*
- * Each event carries a payload of 64 bits of user specified data.
- * The values may be individually set per event using the
- * CGEventSetIntegerValueField() API, or may be set for all events
- * created by this event source using this API.
- * This mechanism is more convenient for uses such as vendor hardware IDs.
- */
-CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef source, int64_t userData) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN double CGEventSourceGetPixelsPerLine(CGEventSourceRef source)
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
-/*
- * The CGRemoteOperation APIs (CoreGraphics/CGRemoteOperation.h) use an implicit event
- * source to affect system behavior on event posting.  Here we expose the same mechanism
- * on a per event source basis.  Default values are different than the remote operation API
- * exposes, based on developer feedback.
- */
+/* Set the scale of pixels per line in a scrolling event source.
 
-/*
- * The system may optionally suppress local hardware events
- * from the keyboard and mouse during a short interval after
- * a program posts an event (see CGSetLocalEventsSuppressionInterval())
- * or while your program has a left mouse button down (mouse drag) in effect.
- *
- * Some classes of applications may want to disable events from some of the local hardware.
- * For example, an app may want to post only mouse events, and so may wish to permit local
- * keyboard hardware events to pass through while blocking local mouse events.
- * Set the event source to permit keyboard events
- * prior to creating the mouse event after which you want to get keyboard events.
- *
- * This interface lets an app specify a state (event suppression interval, or mouse drag), and
- * a mask of event categories to be passed through. The new filter state takes effect
- * with the next event your app posts that is created with this event source.
- *
- * The kCGEventSuppressionStateSuppressionInterval state allows one to set a filter that
- * permits local hardware mouse events, local keyboard events, both, or neither during the
- * specified short interval of time after your process posts an event created with this source.
- *
- * The kCGEventSuppressionStateRemoteMouseDrag state allows one to set a filter that
- * permits local hardware mouse events, local keyboard events, both, or neither during
- * the time that your event source has a left mouse button down (mouse drag) in effect.
- *
- * The default state for a CGEventSourceRef is to have all filtering off, so that local
- * hardware events are unaffected.
- *
- * When a user enters the 'Force Quit' keyboard attention sequence, Command-Option-Escape,
- * all local event supression filters in effect are disabled, and all local hardware
- * events are delivered as normal.  This allows for recovery from unfortunate programming
- * errors.
- */
+   This function sets the scale of pixels per line in the specified event
+   source. For example, if you pass the value 12 as the `pixelsPerLine'
+   parameter, the scale of pixels per line in the event source would be
+   changed to 12. Every scrolling event can be interpreted to be scrolling
+   by pixel or by line. By default, the scale is about ten pixels per
+   line. */
 
-CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(CGEventSourceRef source,
-                                                                       CGEventFilterMask filter,
-                                                                       CGEventSuppressionState state)AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef source,
+  double pixelsPerLine) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
-CG_EXTERN CGEventFilterMask CGEventSourceGetLocalEventsFilterDuringSuppressionState(CGEventSourceRef source,
-                                                                                    CGEventSuppressionState state)AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/* Return the source state associated with a Quartz event source.
 
-/*
- * Set the period of time in seconds that specified local hardware events (keyboard or mouse)
- * may suppressed after posting a CGEventRef created with this source, if the event
- * source is set to apply the kCGEventSuppressionStateSuppressionInterval.
- *
- * Defaults to 0.25 second.
- */
-CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(CGEventSourceRef source, CFTimeInterval seconds)AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CG_EXTERN CFTimeInterval CGEventSourceGetLocalEventsSuppressionInterval(CGEventSourceRef source)AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+   For event sources created with the `kCGEventSourceStatePrivate' source
+   state, this function returns the ID of the private source state table
+   created for the event source. This unique ID may be passed to the
+   `CGEventSourceCreate' function to create a second event source sharing
+   the same state table. This may be useful, for example, in creating
+   separate mouse and keyboard sources which share a common private state. */
+
+CG_EXTERN CGEventSourceStateID CGEventSourceGetSourceStateID(CGEventSourceRef
+  source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return a Boolean value indicating the current button state of a Quartz
+   event source. If true, the button is down; if false, the button is up. */
+
+CG_EXTERN bool CGEventSourceButtonState(CGEventSourceStateID stateID,
+  CGMouseButton button) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return a Boolean value indicating the current keyboard state of a Quartz
+   event source. If true, the key is down; if false, the key is up. */
+
+CG_EXTERN bool CGEventSourceKeyState(CGEventSourceStateID stateID,
+  CGKeyCode key) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the current flags of a Quartz event source. If true, the key is
+   down; if false, the key is up. */
+
+CG_EXTERN CGEventFlags CGEventSourceFlagsState(CGEventSourceStateID stateID)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the elapsed time since the last event for a Quartz event source.
+
+   To get the elapsed time since the previous input event --- keyboard,
+   mouse, or tablet --- specify `kCGAnyInputEventType'. */
+
+CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(
+  CGEventSourceStateID stateID, CGEventType eventType)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return a count of events of a given type seen since the Window Server
+   started.
+
+   Modifier keys produce `kCGEventFlagsChanged' events, not `kCGEventKeyDown'
+   events, and do so both on press and release. The volume, brightness, and
+   CD eject keys on some keyboards (both desktop and laptop) do not generate
+   key up or key down events.
+
+   For various reasons, the number of key up and key down events may not be
+   the same when all keyboard keys are up. As a result, a mismatch does not
+   necessarily indicate that some keys are down.
+
+   Key autorepeat events are not counted. */
+
+CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID
+  stateID, CGEventType eventType)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the 64-bit user-specified data for a Quartz event source.
+
+   Each input event includes 64 bits of user-specified data. This function
+   sets the user-specified data for all events created by the specified
+   event source. This data may also be set per event using the
+   `CGEventGetIntegerValueField' function. */
+
+CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef source,
+  int64_t userData) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the 64-bit user-specified data for a Quartz event source.
+
+   Each input event includes 64 bits of user-specified data. This function
+   gets the user-specified data for all events created by the specified
+   event source. This data may also be obtained per event using the
+   `CGEventGetIntegerValueField' function. */
+
+CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef source)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the mask that indicates which classes of local hardware events are
+   enabled during event suppression.
+
+   By default, the system does not suppress local hardware events from the
+   keyboard or mouse during a short interval after a Quartz event is posted
+   --- see `CGEventSourceSetLocalEventsSuppressionInterval' --- and during a
+   synthetic mouse drag (mouse movement with the left or only mouse button
+   down).
+
+   Some applications may want to disable events from some of the local
+   hardware during this interval. For example, if you post mouse events
+   only, you may wish to suppress local mouse events and permit local
+   keyboard events to pass through. This function lets you specify an event
+   source, a suppression state (event suppression interval or mouse drag),
+   and a filter mask of event classes to be passed through. The new local
+   events filter takes effect with the next Quartz event you post using this
+   event source. */
+
+CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(
+  CGEventSourceRef source, CGEventFilterMask filter,
+  CGEventSuppressionState state)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
-CG_EXTERN_C_END
+/* Return the mask that indicates which classes of local hardware events are
+   enabled during event suppression.
 
-#endif /* __CGEVENTSOURCE_H__ */
+   You can configure the system to suppress local hardware events from the
+   keyboard or mouse during a short interval after a Quartz event is posted
+   or during a synthetic mouse drag (mouse movement with the left or only
+   mouse button down). For information about setting this local events
+   filter, see `CGEventSourceSetLocalEventsFilterDuringSuppressionState'.
 
+   This function lets you specify an event source and a suppression state
+   (event suppression interval or mouse drag), and returns a filter mask of
+   event categories to be passed through during suppression. */
+
+CG_EXTERN CGEventFilterMask
+  CGEventSourceGetLocalEventsFilterDuringSuppressionState(CGEventSourceRef
+    source, CGEventSuppressionState state)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Set the interval that local hardware events may be suppressed following
+   the posting of a Quartz event.
+
+   This function sets the period of time in seconds that local hardware
+   events may be suppressed after posting a Quartz event created with the
+   specified event source. The default suppression interval is 0.25
+   seconds. */
+
+CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(CGEventSourceRef
+  source, CFTimeInterval seconds)
+  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+/* Return the interval that local hardware events may be suppressed
+   following the posting of a Quartz event. */
+
+CG_EXTERN CFTimeInterval CGEventSourceGetLocalEventsSuppressionInterval(
+  CGEventSourceRef source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+#endif /* CGEVENTSOURCE_H_ */

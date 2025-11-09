@@ -5,7 +5,7 @@
 /*                                                                         */
 /*    UNIX-specific configuration file (specification only).               */
 /*                                                                         */
-/*  Copyright 1996-2001, 2002, 2003, 2004, 2006, 2007 by                   */
+/*  Copyright 1996-2001, 2002, 2003, 2004, 2006, 2007, 2008, 2009 by       */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */
@@ -60,15 +60,58 @@ FT_BEGIN_HEADER
 
 #define HAVE_UNISTD_H 1
 #define HAVE_FCNTL_H 1
-
-#define SIZEOF_INT 4
-#define SIZEOF_LONG 8
+#define HAVE_STDINT_H 1
 
 
-#define FT_SIZEOF_INT   SIZEOF_INT
-#define FT_SIZEOF_LONG  SIZEOF_LONG
+  /* There are systems (like the Texas Instruments 'C54x) where a `char' */
+  /* has 16 bits.  ANSI C says that sizeof(char) is always 1.  Since an  */
+  /* `int' has 16 bits also for this system, sizeof(int) gives 1 which   */
+  /* is probably unexpected.                                             */
+  /*                                                                     */
+  /* `CHAR_BIT' (defined in limits.h) gives the number of bits in a      */
+  /* `char' type.                                                        */
 
+#ifndef FT_CHAR_BIT
 #define FT_CHAR_BIT  CHAR_BIT
+#endif
+
+
+/* #undef FT_USE_AUTOCONF_SIZEOF_TYPES */
+#ifdef FT_USE_AUTOCONF_SIZEOF_TYPES
+
+#else /* !FT_USE_AUTOCONF_SIZEOF_TYPES */
+
+  /* Following cpp computation of the bit length of int and long */
+  /* is copied from default include/freetype/config/ftconfig.h.  */
+  /* If any improvement is required for this file, it should be  */
+  /* applied to the original header file for the builders that   */
+  /* does not use configure script.                              */
+
+  /* The size of an `int' type.  */
+#if                                 FT_UINT_MAX == 0xFFFFUL
+#define FT_SIZEOF_INT  (16 / FT_CHAR_BIT)
+#elif                               FT_UINT_MAX == 0xFFFFFFFFUL
+#define FT_SIZEOF_INT  (32 / FT_CHAR_BIT)
+#elif FT_UINT_MAX > 0xFFFFFFFFUL && FT_UINT_MAX == 0xFFFFFFFFFFFFFFFFUL
+#define FT_SIZEOF_INT  (64 / FT_CHAR_BIT)
+#else
+#error "Unsupported size of `int' type!"
+#endif
+
+  /* The size of a `long' type.  A five-byte `long' (as used e.g. on the */
+  /* DM642) is recognized but avoided.                                   */
+#if                                  FT_ULONG_MAX == 0xFFFFFFFFUL
+#define FT_SIZEOF_LONG  (32 / FT_CHAR_BIT)
+#elif FT_ULONG_MAX > 0xFFFFFFFFUL && FT_ULONG_MAX == 0xFFFFFFFFFFUL
+#define FT_SIZEOF_LONG  (32 / FT_CHAR_BIT)
+#elif FT_ULONG_MAX > 0xFFFFFFFFUL && FT_ULONG_MAX == 0xFFFFFFFFFFFFFFFFUL
+#define FT_SIZEOF_LONG  (64 / FT_CHAR_BIT)
+#else
+#error "Unsupported size of `long' type!"
+#endif
+
+#endif /* !FT_USE_AUTOCONF_SIZEOF_TYPES */
+
 
   /* Preferred alignment of data */
 #define FT_ALIGNMENT  8
@@ -109,6 +152,14 @@ FT_BEGIN_HEADER
 #else
 #define FT_MACINTOSH 1
 #endif
+
+#elif defined( __SC__ ) || defined( __MRC__ )
+  /* Classic MacOS compilers */
+#include "ConditionalMacros.h"
+#if TARGET_OS_MAC
+#define FT_MACINTOSH 1
+#endif
+
 #endif
 
 
@@ -126,77 +177,19 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*   Used to guarantee the size of some specific integers.               */
   /*                                                                       */
-  typedef signed short    FT_Int16;
-  typedef unsigned short  FT_UInt16;
 
-#if FT_SIZEOF_INT == 4
-
-  typedef signed int      FT_Int32;
-  typedef unsigned int    FT_UInt32;
-
-#elif FT_SIZEOF_LONG == 4
-
-  typedef signed long     FT_Int32;
-  typedef unsigned long   FT_UInt32;
-
-#else
-#error "no 32bit type found -- please check your configuration files"
-#endif
-
-
-  /* look up an integer type that is at least 32 bits */
-#if FT_SIZEOF_INT >= 4
-
-  typedef int            FT_Fast;
-  typedef unsigned int   FT_UFast;
-
-#elif FT_SIZEOF_LONG >= 4
-
-  typedef long           FT_Fast;
-  typedef unsigned long  FT_UFast;
-
-#endif
-
-
-  /* determine whether we have a 64-bit int type for platforms without */
-  /* Autoconf                                                          */
-#if FT_SIZEOF_LONG == 8
-
-  /* FT_LONG64 must be defined if a 64-bit type is available */
+#include <stdint.h>
+  
+typedef int16_t   FT_Int16;
+typedef uint16_t  FT_UInt16;
+typedef int32_t   FT_Int32;
+typedef uint32_t  FT_UInt32;
+  
+typedef int32_t   FT_Fast;
+typedef uint32_t  FT_UFast;
+  
 #define FT_LONG64
-#define FT_INT64  long
-
-#elif defined( _MSC_VER ) && _MSC_VER >= 900  /* Visual C++ (and Intel C++) */
-
-  /* this compiler provides the __int64 type */
-#define FT_LONG64
-#define FT_INT64  __int64
-
-#elif defined( __BORLANDC__ )  /* Borland C++ */
-
-  /* XXXX: We should probably check the value of __BORLANDC__ in order */
-  /*       to test the compiler version.                               */
-
-  /* this compiler provides the __int64 type */
-#define FT_LONG64
-#define FT_INT64  __int64
-
-#elif defined( __WATCOMC__ )   /* Watcom C++ */
-
-  /* Watcom doesn't provide 64-bit data types */
-
-#elif defined( __MWERKS__ )    /* Metrowerks CodeWarrior */
-
-#define FT_LONG64
-#define FT_INT64  long long int
-
-#elif defined( __GNUC__ )
-
-  /* GCC provides the `long long' type */
-#define FT_LONG64
-#define FT_INT64  long long int
-
-#endif /* FT_SIZEOF_LONG == 8 */
+#define FT_INT64  int64_t
 
 
 #define FT_BEGIN_STMNT  do {
@@ -204,27 +197,75 @@ FT_BEGIN_HEADER
 #define FT_DUMMY_STMNT  FT_BEGIN_STMNT FT_END_STMNT
 
 
-  /*************************************************************************/
-  /*                                                                       */
-  /* A 64-bit data type will create compilation problems if you compile    */
-  /* in strict ANSI mode.  To avoid them, we disable their use if          */
-  /* __STDC__ is defined.  You can however ignore this rule by             */
-  /* defining the FT_CONFIG_OPTION_FORCE_INT64 configuration macro.        */
-  /*                                                                       */
-#if defined( FT_LONG64 ) && !defined( FT_CONFIG_OPTION_FORCE_INT64 )
+#ifndef  FT_CONFIG_OPTION_NO_ASSEMBLER
+  /* Provide assembler fragments for performance-critical functions. */
+  /* These must be defined `static __inline__' with GCC.             */
 
-#ifdef __STDC__
+#ifdef __GNUC__
 
-  /* Undefine the 64-bit macros in strict ANSI compilation mode.  */
-  /* Since `#undef' doesn't survive in configuration header files */
-  /* we use the postprocessing facility of AC_CONFIG_HEADERS to   */
-  /* replace the leading `/' with `#'.                            */
-#undef FT_LONG64
-#undef FT_INT64
+#if defined( __arm__ ) && !defined( __thumb__ )
+#define FT_MULFIX_ASSEMBLER  FT_MulFix_arm
 
-#endif /* __STDC__ */
+  static __inline__ FT_Int32
+  FT_MulFix_arm( FT_Int32  a,
+                 FT_Int32  b )
+  {
+    register FT_Int32  t, t2;
 
-#endif /* FT_LONG64 && !FT_CONFIG_OPTION_FORCE_INT64 */
+
+    __asm__ __volatile__ (
+      "smull  %1, %2, %4, %3\n\t"       /* (lo=%1,hi=%2) = a*b */
+      "mov    %0, %2, asr #31\n\t"      /* %0  = (hi >> 31) */
+      "add    %0, %0, #0x8000\n\t"      /* %0 += 0x8000 */
+      "adds   %1, %1, %0\n\t"           /* %1 += %0 */
+      "adc    %2, %2, #0\n\t"           /* %2 += carry */
+      "mov    %0, %1, lsr #16\n\t"      /* %0  = %1 >> 16 */
+      "orr    %0, %0, %2, lsl #16\n\t"  /* %0 |= %2 << 16 */
+      : "=r"(a), "=&r"(t2), "=&r"(t)
+      : "r"(a), "r"(b) );
+    return a;
+  }
+
+#endif /* __arm__ && !__thumb__ */
+
+#if defined( __i386__ )
+#define FT_MULFIX_ASSEMBLER  FT_MulFix_i386
+
+  static __inline__ FT_Int32
+  FT_MulFix_i386( FT_Int32  a,
+                  FT_Int32  b )
+  {
+    register FT_Int32  result;
+
+
+    __asm__ __volatile__ (
+      "imul  %%edx\n"
+      "movl  %%edx, %%ecx\n"
+      "sarl  $31, %%ecx\n"
+      "addl  $0x8000, %%ecx\n"
+      "addl  %%ecx, %%eax\n"
+      "adcl  $0, %%edx\n"
+      "shrl  $16, %%eax\n"
+      "shll  $16, %%edx\n"
+      "addl  %%edx, %%eax\n"
+      : "=a"(result), "+d"(b)
+      : "a"(a)
+      : "%ecx" );
+    return result;
+  }
+
+#endif /* i386 */
+
+#endif /* __GNUC__ */
+
+#endif /* !FT_CONFIG_OPTION_NO_ASSEMBLER */
+
+
+#ifdef FT_CONFIG_OPTION_INLINE_MULFIX
+#ifdef FT_MULFIX_ASSEMBLER
+#define FT_MULFIX_INLINED  FT_MULFIX_ASSEMBLER
+#endif
+#endif
 
 
 #ifdef FT_MAKE_OPTION_SINGLE_OBJECT

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,46 +20,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
- * $Log: IOATABusInfo.h,v $
- * Revision 1.8  2002/11/09 03:46:38  barras
- *
- * Bug #: 3083512, 3090979
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.7  2002/02/18 23:20:17  barras
- *
- * Fixing a i386 build failure due to a type mismatch in an extend lba call.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.6  2002/02/14 04:02:06  barras
- *
- * Adding API's for 48 bit lba
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.5  2001/05/04 01:50:37  barras
- *
- * Fix line endings to be all unix style in order to prevent CVS from corrupting source files.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- *
- */ 
-#endif
-
 
 #ifndef _IOATABUSINFO_H
 #define _IOATABUSINFO_H
@@ -75,7 +35,7 @@
 
 class IOATABusInfo : public OSObject
 {
-	OSDeclareDefaultStructors( IOATABusInfo )
+	OSDeclareDefaultStructors( IOATABusInfo );
 	
 	public:
 	
@@ -103,22 +63,23 @@ class IOATABusInfo : public OSObject
 	Used by clients of ATAControllers to find out about the bus.
 	*/
 	UInt8 getPIOModes( void );
+	
 	/*!@function getDMAModes
 	@abstract bit-significant map of DMA mode(s) supported on the bus. 
 	Used by clients of ATAControllers to find out about the bus.
 	*/
 	UInt8 getDMAModes( void );
+	
 	/*!@function getUltraModes
 	@abstract bit-significant map of Ultra mode(s) supported on the bus. 
 	Used by clients of ATAControllers to find out about the bus.
 	*/
-	
 	UInt8 getUltraModes( void );
 	
 	/*!@function getUnits
 	@abstract How many devices are present on bus. 
 	Used by clients of ATAControllers to find out about the bus.
-	*/	
+	*/
 	UInt8 getUnits( void );	 
 
 	/*!@function supportsDMA
@@ -137,7 +98,7 @@ class IOATABusInfo : public OSObject
 	@abstract The maximum number of 512-byte blocks this controller supports
 	in a single Extended LBA transfer. Some controllers may be limited to less than 
 	the maximum sector count allowed under extended LBA protocol. 
-	*/  
+	*/
 	UInt16 maxBlocksExtended(void);
 	
 	/*!@function supportsOverlapped
@@ -185,7 +146,7 @@ class IOATABusInfo : public OSObject
 	// Optional bus protocols some busses may support
 	/*!@function setExtendedLBA
 	@abstract Set true for supports 48-bit LBA. Set by ATAControllers.
-	*/	
+	*/
 	void setExtendedLBA( bool	inState ); 	
 	
 	/*!function setMaxBlocksExtended 
@@ -221,7 +182,7 @@ class IOATABusInfo : public OSObject
 	protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
-    */    
+    */
     struct ExpansionData { };
 
 /*! @var reserved
@@ -253,10 +214,6 @@ private:
     OSMetaClassDeclareReservedUnused(IOATABusInfo, 19);
     OSMetaClassDeclareReservedUnused(IOATABusInfo, 20);
 };
-
-
-
-
 
 
 #endif /* !_IOATABUSINFO_H */

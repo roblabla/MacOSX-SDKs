@@ -4,7 +4,7 @@
 // Author:       Chris Breeze, Julian Smart
 // Modified by:  Klaas Holwerda
 // Created:      01/02/97
-// RCS-ID:       $Id: matrix.h,v 1.17.8.1 2007/04/16 13:01:04 VZ Exp $
+// RCS-ID:       $Id: matrix.h 45498 2007-04-16 13:03:05Z VZ $
 // Copyright:    (c) Julian Smart, Chris Breeze
 // Licence:      wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

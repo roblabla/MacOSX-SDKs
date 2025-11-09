@@ -7,6 +7,15 @@
 #import <ApplicationServices/ApplicationServices.h>
 #import <QuartzCore/CVImageBuffer.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+#import <IOSurface/IOSurface.h>
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_6
+# define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER	WEAK_IMPORT_ATTRIBUTE
+# define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6
+#endif
+
 @class NSData, NSURL, NSDictionary, CIContext, CIFilterShape, CIColor;
 
 @interface CIImage : NSObject <NSCoding, NSCopying>
@@ -69,6 +78,13 @@ extern NSString *kCIImageColorSpace AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 + (CIImage *)imageWithCVImageBuffer:(CVImageBufferRef)imageBuffer
     options:(NSDictionary *)dict;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+/* Creates a new image from the contents of an IOSurface. */
+
++ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
 /* Return or initialize a new image with an infinite amount of the color
  * 'color'. */
 
@@ -97,6 +113,11 @@ extern NSString *kCIImageColorSpace AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 - (id)initWithContentsOfURL: (NSURL *)url;
 - (id)initWithContentsOfURL: (NSURL *)url options:(NSDictionary *)d;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+- (id)initWithIOSurface:(IOSurfaceRef)surface AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer;
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer
     options:(NSDictionary *)dict;
@@ -120,4 +141,19 @@ extern NSString *kCIImageColorSpace AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 - (CIFilterShape *)definition;
 
+/* Returns the URL of the image when the image was created using the imageWithContentsOfURL APIs. 
+ * This method will return nil, if the URL cannot be determined. */
+
+- (NSURL *)url;
+
+/* Returns if possible the color space of the image it was defined in. 
+ * This method will return nil, if the color space cannot be determined. */
+
+- (CGColorSpaceRef)colorSpace;
+
 @end
+
+#ifndef MAC_OS_X_VERSION_10_6
+# undef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+# undef AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6
+#endif

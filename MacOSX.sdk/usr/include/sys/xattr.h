@@ -44,6 +44,9 @@
 /* Set this to bypass the default extended attribute file (dot-underscore file) */
 #define XATTR_NODEFAULT  0x0010
 
+/* option for f/getxattr() and f/listxattr() to expose the HFS Compression extended attributes */
+#define XATTR_SHOWCOMPRESSION 0x0020
+
 #define	XATTR_MAXNAMELEN   127
 
 #define	XATTR_FINDERINFO_NAME	  "com.apple.FinderInfo"

@@ -3,9 +3,9 @@
  
      Contains:   URL Access Interfaces.
  
-     Version:    SecurityHI-30817~522
+     Version:    SecurityHI-36638~1292
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -55,7 +55,7 @@ enum {
   kURLResumeDownloadFlag        = 1 << 13, /* The passed in file is partially downloaded, attempt to resume*/
                                         /* it.  Currently works for HTTP only.  If no FSSpec passed in,*/
                                         /* this flag will be ignored. Overriden by kURLReplaceExistingFlag. */
-  kURLReservedFlag              = (unsigned long)(1 << 31) /* reserved for Apple internal use*/
+  kURLReservedFlag              = (unsigned int)(1 << 31) /* reserved for Apple internal use*/
 };
 
 typedef UInt32 URLState;
@@ -108,7 +108,7 @@ enum {
   kURLPropertyChangedEventMask  = 1 << (kURLPropertyChangedEvent - 1),
   kURLAllBufferEventsMask       = kURLDataAvailableEventMask + kURLTransactionCompleteEventMask,
   kURLAllNonBufferEventsMask    = kURLInitiatedEventMask + kURLDownloadingMask + kURLUploadingMask + kURLAbortInitiatedMask + kURLCompletedEventMask + kURLErrorOccurredEventMask + kURLPercentEventMask + kURLPeriodicEventMask + kURLPropertyChangedEventMask,
-  kURLAllEventsMask             = (long)0xFFFFFFFF
+  kURLAllEventsMask             = (int)0xFFFFFFFF
 };
 
 
@@ -152,8 +152,7 @@ enum {
 #define kURLHTTPRedirectedURL           "URLHTTPRedirectedURL"
 #define kURLSSLCipherSuite              "URLSSLCipherSuite"
 
-
-
+#if !__LP64__
 
 /*
  *  URLGetURLAccessVersion()   *** DEPRECATED ***
@@ -190,6 +189,8 @@ URLGetURLAccessVersion(UInt32 * returnVers)                   AVAILABLE_MAC_OS_X
     #define URLAccessAvailable()    (true)
 #endif
 #endif  /*  */
+
+#endif  /* !__LP64__ */
 
 typedef CALLBACK_API( OSStatus , URLNotifyProcPtr )(void *userContext, URLEvent event, URLCallbackInfo *callbackInfo);
 typedef CALLBACK_API( OSStatus , URLSystemEventProcPtr )(void *userContext, EventRecord *event);
@@ -286,6 +287,7 @@ InvokeURLSystemEventUPP(
   #endif
 #endif
 
+#if !__LP64__
 /*
  *  URLSimpleDownload()   *** DEPRECATED ***
  *  
@@ -556,6 +558,8 @@ URLGetFileInfo(
   OSType *    fType,
   OSType *    fCreator)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 
 #pragma pack(pop)

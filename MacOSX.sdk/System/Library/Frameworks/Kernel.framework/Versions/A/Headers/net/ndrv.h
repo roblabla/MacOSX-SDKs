@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -107,17 +107,17 @@ struct ndrv_demux_desc
  *   Used to "bind" an NDRV socket so that packets that match
  *   given protocol demux descriptions can be received:
  * Field:
- *		version			:	must be NDRV_PROTOCOL_DESC_VERS
- *		protocol_family	:	unique identifier for this protocol
- *		demux_count		:	number of demux_list descriptors in demux_list
- *		demux_list		:	pointer to array of demux descriptors
+ *	version		:	must be NDRV_PROTOCOL_DESC_VERS
+ *	protocol_family	:	unique identifier for this protocol
+ *	demux_count	:	number of demux_list descriptors in demux_list
+ *	demux_list	:	pointer to array of demux descriptors
  */
 struct ndrv_protocol_desc
 {
     u_int32_t				version;
     u_int32_t				protocol_family;
     u_int32_t				demux_count;
-    struct ndrv_demux_desc*	demux_list;
+    struct ndrv_demux_desc		*demux_list;
 };
 
 

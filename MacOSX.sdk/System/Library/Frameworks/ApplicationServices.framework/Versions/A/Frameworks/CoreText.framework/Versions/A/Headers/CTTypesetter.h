@@ -2,9 +2,17 @@
  *	CTTypesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2008 Apple Inc. All rights reserved.
  *
  */
+
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
 
 #ifndef __CTTYPESETTER__
 #define __CTTYPESETTER__
@@ -44,7 +52,18 @@ CFTypeID CTTypesetterGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
 				performed and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing;
+extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+	@const		kCTTypesetterOptionForcedEmbeddingLevel
+	@abstract	Specifies the embedding level.
+	@discussion	Value must be a CFNumberRef. Default is unset. Normally,
+				typesetting applies the Unicode Bidirectional Algorithm as
+				described in UAX #9. If present, this specifies the embedding
+				level and any directional control characters are ignored.
+*/
+
+extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /* --------------------------------------------------------------------------- */

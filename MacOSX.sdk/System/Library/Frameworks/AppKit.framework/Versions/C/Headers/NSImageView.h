@@ -1,7 +1,7 @@
 /*
 	NSImageView.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,9 +12,10 @@
 {
     /*All instance variables are private*/
     struct __IVFlags {
-        unsigned int _unused:27;
+        unsigned int _unused:26;
+        unsigned int _rejectsMultiFileDrops:1;
         unsigned int _compatibleScalingAndAlignment:1;
-        unsigned int _compatibleImage:1;
+        unsigned int _reserved:1;
         unsigned int _overridesDrawing:1;
         unsigned int _allowsCutCopyPaste:1;
         unsigned int _editable:1;

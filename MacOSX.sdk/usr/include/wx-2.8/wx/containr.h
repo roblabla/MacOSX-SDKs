@@ -5,7 +5,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     06.08.01
-// RCS-ID:      $Id: containr.h,v 1.19 2006/07/25 01:30:53 VZ Exp $
+// RCS-ID:      $Id: containr.h 50863 2007-12-20 18:32:55Z VS $
 // Copyright:   (c) 2001 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,10 +13,10 @@
 #ifndef _WX_CONTAINR_H_
 #define _WX_CONTAINR_H_
 
-class WXDLLEXPORT wxFocusEvent;
-class WXDLLEXPORT wxNavigationKeyEvent;
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxWindowBase;
+class WXDLLIMPEXP_FWD_CORE wxFocusEvent;
+class WXDLLIMPEXP_FWD_CORE wxNavigationKeyEvent;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 
 /*
    Implementation note: wxControlContainer is not a real mix-in but rather
@@ -126,6 +126,7 @@ void classname::SetFocusIgnoringChildren() \
 void classname::OnChildFocus(wxChildFocusEvent& event) \
 { \
     m_container.SetLastFocus(event.GetWindow()); \
+    event.Skip(); \
 } \
  \
 void classname::OnFocus(wxFocusEvent& event) \

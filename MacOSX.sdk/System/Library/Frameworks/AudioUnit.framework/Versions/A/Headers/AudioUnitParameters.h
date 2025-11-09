@@ -3,10 +3,7 @@
  
      Contains:   Parameter constants for Apple AudioUnits
  
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
- 
-     Copyright:  (c) 2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2002-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,6 +17,7 @@
 
 #pragma mark General Declarations
 
+#if !TARGET_OS_IPHONE
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following specifies the equivalent parameterID's for the Group scope for standard
 MIDI Controllers. This list is not exhaustive. It represents the parameters, and their corresponding 
@@ -77,11 +75,93 @@ enum {
 	kPannerParam_CoordScale = 4,	// 0.01 .. 1000 meters
 	kPannerParam_RefDistance = 5,	// 0.01 .. 1000 meters
 };
+#endif // !TARGET_OS_IPHONE
 
 
 
 #pragma mark Apple Specific
 
+// Parameters for the AUMixer3D unit
+// only some of these parameters are available in the embedded implementation of this AU
+enum {
+        // Input, Degrees, -180->180, 0
+    k3DMixerParam_Azimuth		= 0,
+        
+		// Input, Degrees, -90->90, 0
+    k3DMixerParam_Elevation		= 1,
+        
+		// Input, Metres, 0->10000, 1
+    k3DMixerParam_Distance		= 2,
+        
+		// Input/Output, dB, -120->20, 0
+    k3DMixerParam_Gain			= 3,
+	
+		// Input, rate scaler	0.5 -> 2.0
+    k3DMixerParam_PlaybackRate	= 4
+	
+};
+
+// Parameters for the AUMultiChannelMixer unit
+enum {
+	kMultiChannelMixerParam_Volume 	= 0,
+	kMultiChannelMixerParam_Enable 	= 1,
+
+		// read-only
+	// these report level in dB, as do the other mixers
+	kMultiChannelMixerParam_PreAveragePower		= 1000,
+	kMultiChannelMixerParam_PrePeakHoldLevel	= 2000,
+	kMultiChannelMixerParam_PostAveragePower	= 3000,
+	kMultiChannelMixerParam_PostPeakHoldLevel	= 4000
+};
+
+// Output Units
+// Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
+enum {
+		// Global, LinearGain, 0->1, 1
+	kHALOutputParam_Volume 		= 14 
+};
+
+// Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
+enum {
+	kTimePitchParam_Rate						= 0,
+#if !TARGET_OS_IPHONE
+	kTimePitchParam_Pitch						= 1,
+	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
+#endif
+};
+
+#if !TARGET_OS_IPHONE
+enum {
+		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
+    k3DMixerParam_ReverbBlend		= 5,
+
+		// Global, dB,		-40.0 -> +40.0
+    k3DMixerParam_GlobalReverbGain	= 6,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
+    k3DMixerParam_OcclusionAttenuation	= 7,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
+    k3DMixerParam_ObstructionAttenuation = 8,
+	
+		// read-only
+		//
+		// For each of the following, use the parameter ID plus the channel number
+		// to get the specific parameter ID for a given channel.
+		// For example, k3DMixerParam_PostAveragePower indicates the left channel
+		// while k3DMixerParam_PostAveragePower + 1 indicates the right channel.
+	k3DMixerParam_PreAveragePower	= 1000,
+	k3DMixerParam_PrePeakHoldLevel	= 2000,
+	k3DMixerParam_PostAveragePower	= 3000,
+	k3DMixerParam_PostPeakHoldLevel	= 4000
+};
+#endif
+
+#pragma mark Apple Specific - Desktop
+
+#if !TARGET_OS_IPHONE
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following sections specify the parameter IDs for the audio units included in Mac OS X.
 Host applications can use these IDs to directly address these parameters without first discovering 
@@ -271,7 +351,9 @@ enum {
 	kDynamicsProcessorParam_MasterGain 			= 6,
 	
 		// Global, dB, read-only parameter
-	kDynamicsProcessorParam_CompressionAmount 	= 1000
+	kDynamicsProcessorParam_CompressionAmount 	= 1000,
+	kDynamicsProcessorParam_InputAmplitude		= 2000,
+	kDynamicsProcessorParam_OutputAmplitude 	= 3000
 };
 
 
@@ -301,20 +383,23 @@ enum {
 	kMultibandCompressorParam_CompressionAmount1 = 1000,
 	kMultibandCompressorParam_CompressionAmount2 = 2000,
 	kMultibandCompressorParam_CompressionAmount3 = 3000,
-	kMultibandCompressorParam_CompressionAmount4 = 4000
+	kMultibandCompressorParam_CompressionAmount4 = 4000,
+
+	kMultibandCompressorParam_InputAmplitude1 = 5000,
+	kMultibandCompressorParam_InputAmplitude2 = 6000,
+	kMultibandCompressorParam_InputAmplitude3 = 7000,
+	kMultibandCompressorParam_InputAmplitude4 = 8000,
+
+	kMultibandCompressorParam_OutputAmplitude1 = 9000,
+	kMultibandCompressorParam_OutputAmplitude2 = 10000,
+	kMultibandCompressorParam_OutputAmplitude3 = 11000,
+	kMultibandCompressorParam_OutputAmplitude4 = 12000
 };
 
 // Parameters for the AUVarispeed unit
 enum {
 	kVarispeedParam_PlaybackRate				= 0,
 	kVarispeedParam_PlaybackCents				= 1
-};
-
-// Parameters for the AUTimePitch, AUTimePitch (offline), and AUPitch units
-enum {
-	kTimePitchParam_Rate						= 0,
-	kTimePitchParam_Pitch						= 1,
-	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
 };
 
 // Parameters for the AUFilter unit
@@ -342,48 +427,6 @@ enum
 };
 
 // Mixer Units
-// Parameters for the AUMixer3D unit
-enum {
-        // Input, Degrees, -180->180, 0
-    k3DMixerParam_Azimuth		= 0,
-        
-		// Input, Degrees, -90->90, 0
-    k3DMixerParam_Elevation		= 1,
-        
-		// Input, Metres, 0->10000, 1
-    k3DMixerParam_Distance		= 2,
-        
-		// Input/Output, dB, -120->20, 0
-    k3DMixerParam_Gain			= 3,
-	
-		// Input, rate scaler	0.5 -> 2.0
-    k3DMixerParam_PlaybackRate	= 4,
-	
-		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
-    k3DMixerParam_ReverbBlend		= 5,
-	
-		// Global, dB,		-40.0 -> +40.0
-    k3DMixerParam_GlobalReverbGain	= 6,
-	
-		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
-		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
-    k3DMixerParam_OcclusionAttenuation	= 7,
-	
-		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
-		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
-    k3DMixerParam_ObstructionAttenuation = 8,
-	
-		// read-only
-		//
-		// For each of the following, use the parameter ID plus the channel number
-		// to get the specific parameter ID for a given channel.
-		// For example, k3DMixerParam_PostAveragePower indicates the left channel
-		// while k3DMixerParam_PostAveragePower + 1 indicates the right channel.
-	k3DMixerParam_PreAveragePower	= 1000,
-	k3DMixerParam_PrePeakHoldLevel	= 2000,
-	k3DMixerParam_PostAveragePower	= 3000,
-	k3DMixerParam_PostPeakHoldLevel	= 4000
-};
 
 // Parameters for the Stereo Mixer unit
 enum {
@@ -423,21 +466,6 @@ enum {
 	kMatrixMixerParam_PostAveragePowerLinear		= 7000,
 	kMatrixMixerParam_PostPeakHoldLevelLinear		= 8000
 };
-
-
-// Parameters for the AUMultiChannelMixer unit
-enum {
-	kMultiChannelMixerParam_Volume 	= 0,
-	kMultiChannelMixerParam_Enable 	= 1,
-
-		// read-only
-	// these report level in dB, as do the other mixers
-	kMultiChannelMixerParam_PreAveragePower		= 1000,
-	kMultiChannelMixerParam_PrePeakHoldLevel	= 2000,
-	kMultiChannelMixerParam_PostAveragePower	= 3000,
-	kMultiChannelMixerParam_PostPeakHoldLevel	= 4000
-};
-
 
 // Parameters for the AUNetReceive unit
 enum {
@@ -499,14 +527,6 @@ enum {
 	kRogerBeepParam_RogerGain = 6
 };
 
-
-// Output Units
-// Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
-enum {
-		// Global, LinearGain, 0->1, 1
-	kHALOutputParam_Volume 		= 14 
-};
-
 // Music Device
 // Parameters for the DLSMusicDevice unit - defined and reported in the global scope
 enum {
@@ -544,4 +564,6 @@ enum {
 	
 // See the MusicDevice.h header file for more about using the extended control semantics 
 // of this API.	
+
+#endif // !TARGET_OS_IPHONE
 #endif //__AudioUnitParameters

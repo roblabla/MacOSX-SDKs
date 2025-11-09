@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_istdiostream.h,v 1.6.2.1.2.2 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_istdiostream.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef _ZEND_STDIOSTREAM
 #define _ZEND_STDIOSTREAM

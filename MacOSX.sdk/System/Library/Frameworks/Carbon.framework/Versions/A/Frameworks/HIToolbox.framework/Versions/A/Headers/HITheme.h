@@ -3,9 +3,9 @@
  
      Contains:   HIToolbox HITheme interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -193,7 +193,25 @@ enum {
    * The default sized square text field (like Edit Text).
    */
   kHIThemeFrameTextFieldSquare  = 0,
-  kHIThemeFrameListBox          = 1
+  kHIThemeFrameListBox          = 1,
+
+  /*
+   * The standard sized round text field, as typically used for search
+   * fields. Available on Mac OS X 10.3 and later.
+   */
+  kHIThemeFrameTextFieldRound   = 1000,
+
+  /*
+   * The small size round text field, as typically used for search
+   * fields. Available on Mac OS X 10.3 and later.
+   */
+  kHIThemeFrameTextFieldRoundSmall = 1001,
+
+  /*
+   * The mini size round text field, as typically used for search
+   * fields. Available on Mac OS X 10.3 and later.
+   */
+  kHIThemeFrameTextFieldRoundMini = 1002
 };
 
 typedef UInt32                          HIThemeFrameKind;
@@ -697,7 +715,79 @@ struct HIThemeTabPaneDrawInfoVersionZero {
 typedef struct HIThemeTabPaneDrawInfoVersionZero HIThemeTabPaneDrawInfoVersionZero;
 
 /*
+ */
+enum {
+
+  /*
+   * Available in Mac OS X 10.3 and later. Valid fields for this
+   * version are version and menuType.
+   */
+  kHIThemeMenuDrawInfoVersionZero = 0,
+
+  /*
+   * Available in Mac OS X 10.5 and later. Valid fields for this
+   * version are all those in the zero version as well as the
+   * menuDirection field.
+   */
+  kHIThemeMenuDrawInfoVersionOne = 1001
+};
+
+
+/*
  *  HIThemeMenuDrawInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to menu drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    New in Mac OS X 10.3; revised in Mac OS X 10.5.
+ */
+struct HIThemeMenuDrawInfo {
+
+  /*
+   * The version of this data structure. Use
+   * kHIThemeMenuDrawInfoVersionZero or kHIThemeMenuDrawInfoVersionOne.
+   */
+  UInt32              version;
+
+  /*
+   * A ThemeMenuType indicating which type of menu is to be drawn.
+   */
+  ThemeMenuType       menuType;
+
+  /*
+   * Must be zero.
+   */
+  unsigned long       reserved1;
+
+  /*
+   * Must be zero.
+   */
+  CGFloat             reserved2;
+
+  /*
+   * kHIMenuRightDirection or kHIMenuLeftDirection as declared in
+   * <CarbonEvents.h>. Only interpreted if the version is
+   * kHIThemeMenuDrawInfoVersionOne and the menu type is hierarchical.
+   */
+  UInt32              menuDirection;
+
+  /*
+   * Must be zero.
+   */
+  CGFloat             reserved3;
+
+  /*
+   * Must be zero.
+   */
+  CGFloat             reserved4;
+};
+typedef struct HIThemeMenuDrawInfo      HIThemeMenuDrawInfo;
+typedef HIThemeMenuDrawInfo *           HIThemeMenuDrawInfoPtr;
+
+/*
+ *  HIThemeMenuDrawInfoVersionZero
  *  
  *  Summary:
  *    Drawing parameters passed to menu drawing and measuring theme
@@ -706,10 +796,10 @@ typedef struct HIThemeTabPaneDrawInfoVersionZero HIThemeTabPaneDrawInfoVersionZe
  *  Discussion:
  *    New in Mac OS X 10.3.
  */
-struct HIThemeMenuDrawInfo {
+struct HIThemeMenuDrawInfoVersionZero {
 
   /*
-   * The version of this data structure.  Currently, it is always 0.
+   * The version of this data structure. Always 0.
    */
   UInt32              version;
 
@@ -718,8 +808,8 @@ struct HIThemeMenuDrawInfo {
    */
   ThemeMenuType       menuType;
 };
-typedef struct HIThemeMenuDrawInfo      HIThemeMenuDrawInfo;
-typedef HIThemeMenuDrawInfo *           HIThemeMenuDrawInfoPtr;
+typedef struct HIThemeMenuDrawInfoVersionZero HIThemeMenuDrawInfoVersionZero;
+typedef HIThemeMenuDrawInfoVersionZero * HIThemeMenuDrawInfoVersionZeroPtr;
 
 /*
  *  HIThemeMenuItemDrawInfo
@@ -1835,20 +1925,27 @@ typedef UInt32                          HIThemeSegmentPosition;
 
 /*
  *  Summary:
- *    Available values for HIThemeSegmentKind.
+ *    Available values for HIThemeSegmentKind available on Mac OS X
+ *    10.4 a later.
  */
 enum {
 
   /*
-   * The outset looking segment. Do not use on metal or metal-like
+   * The segment to use on non-textured windows. Do not use on textured
    * windows.
    */
   kHIThemeSegmentKindNormal     = 0,
 
   /*
-   * The inset segment. Use on metal or metal-like windows.
+   * The textured segment. Use on textured windows.
    */
-  kHIThemeSegmentKindInset      = 1
+  kHIThemeSegmentKindTextured   = 1,
+
+  /*
+   * This is a synonym for kHIThemeSegmentKindTextured for code
+   * compatibility. Please use kHIThemeSegmentKindTextured instead.
+   */
+  kHIThemeSegmentKindInset      = kHIThemeSegmentKindTextured
 };
 
 typedef UInt32                          HIThemeSegmentKind;
@@ -1865,12 +1962,12 @@ enum {
   kHIThemeSegmentSizeNormal     = 0,
 
   /*
-   * The small segment. Not available with as inset.
+   * The small segment. Not available as textured.
    */
   kHIThemeSegmentSizeSmall      = 1,
 
   /*
-   * The mini segment. Not available with as inset.
+   * The mini segment. Not available as textured.
    */
   kHIThemeSegmentSizeMini       = 3
 };
@@ -2327,6 +2424,11 @@ typedef UInt32                          HIThemeTextVerticalFlush;
  */
 enum {
   kHIThemeTextBoxOptionNone     = 0,
+
+  /*
+   * Is the text strongly vertical? This option bit is not correctly
+   * respected and will have no effect if used.
+   */
   kHIThemeTextBoxOptionStronglyVertical = (1 << 1),
 
   /*
@@ -2334,7 +2436,17 @@ enum {
    * OS X 10.5 dark window backgrounds or on the bodies of some
    * controls.
    */
-  kHIThemeTextBoxOptionEngraved = (1 << 2)
+  kHIThemeTextBoxOptionEngraved = (1 << 2),
+
+  /*
+   * By default, HIThemeDrawTextBox will clip the text to the rectangle
+   * specified by the inBounds parameter. With some fonts or styles,
+   * text may draw outside of the drawing rectangle and will be
+   * clipped. If this bit is set, HIThemeDrawTextBox will not clip
+   * drawing to its inBounds parameter. Available in Mac OS X 10.4 and
+   * later.
+   */
+  kHIThemeTextBoxOptionDontClip = (1 << 18)
 };
 
 typedef OptionBits                      HIThemeTextBoxOptions;
@@ -4231,6 +4343,727 @@ HIThemeGetTextColorForThemeBrush(
   Boolean           inWindowIsActive,
   ThemeTextColor *  outColor)                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
+
+/* The following routines were in Appearance.h prior to 10.6 */
+/*
+ *  GetThemeMenuSeparatorHeight()
+ *  
+ *  Summary:
+ *    Returns the height of a menu item separator, in points.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outHeight:
+ *      On exit, contains the height of a menu item separator, in
+ *      points.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern OSStatus 
+GetThemeMenuSeparatorHeight(SInt16 * outHeight)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetThemeMenuItemExtra()
+ *  
+ *  Summary:
+ *    Returns the extra width and height required for a menu item
+ *    beyond the height of the text.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inItemType:
+ *      The type of menu item. These are defined in Appearance.h.
+ *    
+ *    outHeight:
+ *      Extra height, in points, for this item type.
+ *    
+ *    outWidth:
+ *      Extra width, in points, for this item type.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern OSStatus 
+GetThemeMenuItemExtra(
+  ThemeMenuItemType   inItemType,
+  SInt16 *            outHeight,
+  SInt16 *            outWidth)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetThemeMenuTitleExtra()
+ *  
+ *  Summary:
+ *    Returns the extra width for a menu title, in points.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outWidth:
+ *      On exit, contains the extra menu title width, in points.
+ *    
+ *    inIsSquished:
+ *      Indicates whether the menu title is being drawn with a
+ *      condensed appearance.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern OSStatus 
+GetThemeMenuTitleExtra(
+  SInt16 *  outWidth,
+  Boolean   inIsSquished)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/* The ThemeMetric values are defined in Appearance.h */
+
+/*
+ *  Summary:
+ *    Theme metrics allow you to find out sizes of things in the
+ *    current environment, such as how wide a scroll bar is, etc.
+ *  
+ *  Discussion:
+ *    ThemeMetrics
+ */
+enum {
+
+  /*
+   * The width (or height if horizontal) of a scroll bar.
+   */
+  kThemeMetricScrollBarWidth    = 0,
+
+  /*
+   * The width (or height if horizontal) of a small scroll bar.
+   */
+  kThemeMetricSmallScrollBarWidth = 1,
+
+  /*
+   * The height of the non-label part of a check box control.
+   */
+  kThemeMetricCheckBoxHeight    = 2,
+
+  /*
+   * The height of the non-label part of a radio button control.
+   */
+  kThemeMetricRadioButtonHeight = 3,
+
+  /*
+   * The amount of white space surrounding the text Rect of the text
+   * inside of an Edit Text control.  If you select all of the text in
+   * an Edit Text control, you can see the white space. The metric is
+   * the number of pixels, per side, that the text Rect is outset to
+   * create the whitespace Rect.
+   */
+  kThemeMetricEditTextWhitespace = 4,
+
+  /*
+   * The thickness of the Edit Text frame that surrounds the whitespace
+   * Rect (that is surrounding the text Rect). The metric is the number
+   * of pixels, per side, that the frame Rect is outset from the
+   * whitespace Rect.
+   */
+  kThemeMetricEditTextFrameOutset = 5,
+
+  /*
+   * The number of pixels that the list box frame is outset from the
+   * content of the list box.
+   */
+  kThemeMetricListBoxFrameOutset = 6,
+
+  /*
+   * Describes how far outside of the input rect DrawThemeFocusRect and
+   * HIThemeDrawFocusRect APIs will draw the focus.
+   */
+  kThemeMetricFocusRectOutset   = 7,
+
+  /*
+   * The thickness of the frame drawn by DrawThemeGenericWell.
+   */
+  kThemeMetricImageWellThickness = 8,
+
+  /*
+   * The number of pixels a scrollbar should overlap (actually
+   * underlap) any bounding box which surrounds it and scrollable
+   * content. This also includes the window frame when a scrolbar is
+   * along an edge of the window.
+   */
+  kThemeMetricScrollBarOverlap  = 9,
+
+  /*
+   * The height of the large tab of a tab control.
+   */
+  kThemeMetricLargeTabHeight    = 10,
+
+  /*
+   * The width of the caps (end pieces) of the large tabs of a tab
+   * control.
+   */
+  kThemeMetricLargeTabCapsWidth = 11,
+
+  /*
+   * The amount to add to the tab height (kThemeMetricLargeTabHeight)
+   * to find out the rectangle height to use with the various Tab
+   * drawing primitives. This amount is also the amount that each tab
+   * overlaps the tab pane.
+   */
+  kThemeMetricTabFrameOverlap   = 12,
+
+  /*
+   * If less than zero, this indicates that the text should be centered
+   * on each tab. If greater than zero, the text should be justified
+   * (according to the system script direction) and the amount is the
+   * offset from the appropriate edge at which the text should start
+   * drawing.
+   */
+  kThemeMetricTabIndentOrStyle  = 13,
+
+  /*
+   * The amount of space that every tab's drawing rectangle overlaps
+   * the one on either side of it.
+   */
+  kThemeMetricTabOverlap        = 14,
+
+  /*
+   * The height of the small tab of a tab control.  This includes the
+   * pixels that overlap the tab pane and/or tab pane bar.
+   */
+  kThemeMetricSmallTabHeight    = 15,
+
+  /*
+   * The width of the caps (end pieces) of the small tabs of a tab
+   * control.
+   */
+  kThemeMetricSmallTabCapsWidth = 16,
+
+  /*
+   * The height of the push button control.
+   */
+  kThemeMetricPushButtonHeight  = 19,
+
+  /*
+   * The height of the list header field of the data browser control.
+   */
+  kThemeMetricListHeaderHeight  = 20,
+
+  /*
+   * The height of a disclosure triangle control.  This triangle is the
+   * not the center of the disclosure button, but its own control.
+   */
+  kThemeMetricDisclosureTriangleHeight = 25,
+
+  /*
+   * The width of a disclosure triangle control.
+   */
+  kThemeMetricDisclosureTriangleWidth = 26,
+
+  /*
+   * The height of a little arrows control.
+   */
+  kThemeMetricLittleArrowsHeight = 27,
+
+  /*
+   * The width of a little arrows control.
+   */
+  kThemeMetricLittleArrowsWidth = 28,
+
+  /*
+   * The height of a popup button control.
+   */
+  kThemeMetricPopupButtonHeight = 30,
+
+  /*
+   * The height of a small popup button control.
+   */
+  kThemeMetricSmallPopupButtonHeight = 31,
+
+  /*
+   * The height of the large progress bar, not including its shadow.
+   */
+  kThemeMetricLargeProgressBarThickness = 32,
+
+  /*
+   * This metric is not used.
+   */
+  kThemeMetricPullDownHeight    = 33,
+
+  /*
+   * This metric is not used.
+   */
+  kThemeMetricSmallPullDownHeight = 34,
+
+  /*
+   * The height of the window grow box control.
+   */
+  kThemeMetricResizeControlHeight = 38,
+
+  /*
+   * The height of the small grow box control, such as on utility
+   * windows.
+   */
+  kThemeMetricSmallResizeControlHeight = 39,
+
+  /*
+   * The height of the horizontal slider control.
+   */
+  kThemeMetricHSliderHeight     = 41,
+
+  /*
+   * The height of the tick marks for a horizontal slider control.
+   */
+  kThemeMetricHSliderTickHeight = 42,
+
+  /*
+   * The width of the vertical slider control.
+   */
+  kThemeMetricVSliderWidth      = 45,
+
+  /*
+   * The width of the tick marks for a vertical slider control.
+   */
+  kThemeMetricVSliderTickWidth  = 46,
+
+  /*
+   * The height of the title bar widgets (grow, close, and zoom boxes)
+   * for a document window.
+   */
+  kThemeMetricTitleBarControlsHeight = 49,
+
+  /*
+   * The width of the non-label part of a check box control.
+   */
+  kThemeMetricCheckBoxWidth     = 50,
+
+  /*
+   * The width of the non-label part of a radio button control.
+   */
+  kThemeMetricRadioButtonWidth  = 52,
+
+  /*
+   * The height of the normal bar, not including its shadow.
+   */
+  kThemeMetricNormalProgressBarThickness = 58,
+
+  /*
+   * The number of pixels of shadow depth drawn below the progress bar.
+   */
+  kThemeMetricProgressBarShadowOutset = 59,
+
+  /*
+   * The number of pixels of shadow depth drawn below the small
+   * progress bar.
+   */
+  kThemeMetricSmallProgressBarShadowOutset = 60,
+
+  /*
+   * The number of pixels that the content of a primary group box is
+   * from the bounds of the control.
+   */
+  kThemeMetricPrimaryGroupBoxContentInset = 61,
+
+  /*
+   * The number of pixels that the content of a secondary group box is
+   * from the bounds of the control.
+   */
+  kThemeMetricSecondaryGroupBoxContentInset = 62,
+
+  /*
+   * Width allocated to draw the mark character in a menu.
+   */
+  kThemeMetricMenuMarkColumnWidth = 63,
+
+  /*
+   * Width allocated for the mark character in a menu item when the
+   * menu has kMenuAttrExcludesMarkColumn.
+   */
+  kThemeMetricMenuExcludedMarkColumnWidth = 64,
+
+  /*
+   * Indent into the interior of the mark column at which the mark
+   * character is drawn.
+   */
+  kThemeMetricMenuMarkIndent    = 65,
+
+  /*
+   * Whitespace at the leading edge of menu item text.
+   */
+  kThemeMetricMenuTextLeadingEdgeMargin = 66,
+
+  /*
+   * Whitespace at the trailing edge of menu item text.
+   */
+  kThemeMetricMenuTextTrailingEdgeMargin = 67,
+
+  /*
+   * Width per indent level (set by SetMenuItemIndent) of a menu item.
+   */
+  kThemeMetricMenuIndentWidth   = 68,
+
+  /*
+   * Whitespace at the trailing edge of a menu icon (if the item also
+   * has text).
+   */
+  kThemeMetricMenuIconTrailingEdgeMargin = 69
+};
+
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in OS X.
+ */
+enum {
+
+  /*
+   * The height of a disclosure button.
+   */
+  kThemeMetricDisclosureButtonHeight = 17,
+
+  /*
+   * The height and the width of the round button control.
+   */
+  kThemeMetricRoundButtonSize   = 18,
+
+  /*
+   * The height of the non-label part of a small check box control.
+   */
+  kThemeMetricSmallCheckBoxHeight = 21,
+
+  /*
+   * The width of a disclosure button.
+   */
+  kThemeMetricDisclosureButtonWidth = 22,
+
+  /*
+   * The height of a small disclosure button.
+   */
+  kThemeMetricSmallDisclosureButtonHeight = 23,
+
+  /*
+   * The width of a small disclosure button.
+   */
+  kThemeMetricSmallDisclosureButtonWidth = 24,
+
+  /*
+   * The height (or width if vertical) of a pane splitter.
+   */
+  kThemeMetricPaneSplitterHeight = 29,
+
+  /*
+   * The height of the small push button control.
+   */
+  kThemeMetricSmallPushButtonHeight = 35,
+
+  /*
+   * The height of the non-label part of a small radio button control.
+   */
+  kThemeMetricSmallRadioButtonHeight = 36,
+
+  /*
+   * The height of the relevance indicator control.
+   */
+  kThemeMetricRelevanceIndicatorHeight = 37,
+
+  /*
+   * The height and the width of the large round button control.
+   */
+  kThemeMetricLargeRoundButtonSize = 40,
+
+  /*
+   * The height of the small, horizontal slider control.
+   */
+  kThemeMetricSmallHSliderHeight = 43,
+
+  /*
+   * The height of the tick marks for a small, horizontal slider
+   * control.
+   */
+  kThemeMetricSmallHSliderTickHeight = 44,
+
+  /*
+   * The width of the small, vertical slider control.
+   */
+  kThemeMetricSmallVSliderWidth = 47,
+
+  /*
+   * The width of the tick marks for a small, vertical slider control.
+   */
+  kThemeMetricSmallVSliderTickWidth = 48,
+
+  /*
+   * The width of the non-label part of a small check box control.
+   */
+  kThemeMetricSmallCheckBoxWidth = 51,
+
+  /*
+   * The width of the non-label part of a small radio button control.
+   */
+  kThemeMetricSmallRadioButtonWidth = 53,
+
+  /*
+   * The minimum width of the thumb of a small, horizontal slider
+   * control.
+   */
+  kThemeMetricSmallHSliderMinThumbWidth = 54,
+
+  /*
+   * The minimum width of the thumb of a small, vertical slider control.
+   */
+  kThemeMetricSmallVSliderMinThumbHeight = 55,
+
+  /*
+   * The offset of the tick marks from the appropriate side of a small
+   * horizontal slider control.
+   */
+  kThemeMetricSmallHSliderTickOffset = 56,
+
+  /*
+   * The offset of the tick marks from the appropriate side of a small
+   * vertical slider control.
+   */
+  kThemeMetricSmallVSliderTickOffset = 57
+};
+
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.3 and
+ *    later.
+ */
+enum {
+  kThemeMetricComboBoxLargeBottomShadowOffset = 70,
+  kThemeMetricComboBoxLargeRightShadowOffset = 71,
+  kThemeMetricComboBoxSmallBottomShadowOffset = 72,
+  kThemeMetricComboBoxSmallRightShadowOffset = 73,
+  kThemeMetricComboBoxLargeDisclosureWidth = 74,
+  kThemeMetricComboBoxSmallDisclosureWidth = 75,
+  kThemeMetricRoundTextFieldContentInsetLeft = 76,
+  kThemeMetricRoundTextFieldContentInsetRight = 77,
+  kThemeMetricRoundTextFieldContentInsetBottom = 78,
+  kThemeMetricRoundTextFieldContentInsetTop = 79,
+  kThemeMetricRoundTextFieldContentHeight = 80,
+  kThemeMetricComboBoxMiniBottomShadowOffset = 81,
+  kThemeMetricComboBoxMiniDisclosureWidth = 82,
+  kThemeMetricComboBoxMiniRightShadowOffset = 83,
+  kThemeMetricLittleArrowsMiniHeight = 84,
+  kThemeMetricLittleArrowsMiniWidth = 85,
+  kThemeMetricLittleArrowsSmallHeight = 86,
+  kThemeMetricLittleArrowsSmallWidth = 87,
+  kThemeMetricMiniCheckBoxHeight = 88,
+  kThemeMetricMiniCheckBoxWidth = 89,
+  kThemeMetricMiniDisclosureButtonHeight = 90,
+  kThemeMetricMiniDisclosureButtonWidth = 91,
+  kThemeMetricMiniHSliderHeight = 92,
+  kThemeMetricMiniHSliderMinThumbWidth = 93,
+  kThemeMetricMiniHSliderTickHeight = 94,
+  kThemeMetricMiniHSliderTickOffset = 95,
+  kThemeMetricMiniPopupButtonHeight = 96,
+  kThemeMetricMiniPullDownHeight = 97,
+  kThemeMetricMiniPushButtonHeight = 98,
+  kThemeMetricMiniRadioButtonHeight = 99,
+  kThemeMetricMiniRadioButtonWidth = 100,
+  kThemeMetricMiniTabCapsWidth  = 101,
+  kThemeMetricMiniTabFrameOverlap = 102,
+  kThemeMetricMiniTabHeight     = 103,
+  kThemeMetricMiniTabOverlap    = 104,
+  kThemeMetricMiniVSliderMinThumbHeight = 105,
+  kThemeMetricMiniVSliderTickOffset = 106,
+  kThemeMetricMiniVSliderTickWidth = 107,
+  kThemeMetricMiniVSliderWidth  = 108,
+  kThemeMetricRoundTextFieldContentInsetWithIconLeft = 109,
+  kThemeMetricRoundTextFieldContentInsetWithIconRight = 110,
+  kThemeMetricRoundTextFieldMiniContentHeight = 111,
+  kThemeMetricRoundTextFieldMiniContentInsetBottom = 112,
+  kThemeMetricRoundTextFieldMiniContentInsetLeft = 113,
+  kThemeMetricRoundTextFieldMiniContentInsetRight = 114,
+  kThemeMetricRoundTextFieldMiniContentInsetTop = 115,
+  kThemeMetricRoundTextFieldMiniContentInsetWithIconLeft = 116,
+  kThemeMetricRoundTextFieldMiniContentInsetWithIconRight = 117,
+  kThemeMetricRoundTextFieldSmallContentHeight = 118,
+  kThemeMetricRoundTextFieldSmallContentInsetBottom = 119,
+  kThemeMetricRoundTextFieldSmallContentInsetLeft = 120,
+  kThemeMetricRoundTextFieldSmallContentInsetRight = 121,
+  kThemeMetricRoundTextFieldSmallContentInsetTop = 122,
+  kThemeMetricRoundTextFieldSmallContentInsetWithIconLeft = 123,
+  kThemeMetricRoundTextFieldSmallContentInsetWithIconRight = 124,
+  kThemeMetricSmallTabFrameOverlap = 125,
+  kThemeMetricSmallTabOverlap   = 126,
+
+  /*
+   * The height of a small pane splitter. Should only be used in a
+   * window with thick borders, like a metal window.
+   */
+  kThemeMetricSmallPaneSplitterHeight = 127
+};
+
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.4 and
+ *    later.
+ */
+enum {
+
+  /*
+   * The horizontal start offset for the first tick mark on a
+   * horizontal slider.
+   */
+  kThemeMetricHSliderTickOffset = 128,
+
+  /*
+   * The vertical start offset for the first tick mark on a vertical
+   * slider.
+   */
+  kThemeMetricVSliderTickOffset = 129,
+
+  /*
+   * The minimum thumb height for a thumb on a slider.
+   */
+  kThemeMetricSliderMinThumbHeight = 130,
+  kThemeMetricSliderMinThumbWidth = 131,
+
+  /*
+   * The minimum thumb height for a thumb on a scroll bar.
+   */
+  kThemeMetricScrollBarMinThumbHeight = 132,
+
+  /*
+   * The minimum thumb width for a thumb on a scroll bar.
+   */
+  kThemeMetricScrollBarMinThumbWidth = 133,
+
+  /*
+   * The minimum thumb height for a thumb on a small scroll bar.
+   */
+  kThemeMetricSmallScrollBarMinThumbHeight = 134,
+
+  /*
+   * The minimum thumb width for a thumb on a small scroll bar.
+   */
+  kThemeMetricSmallScrollBarMinThumbWidth = 135,
+
+  /*
+   * The height of the round-ended button. (For example, the Kind
+   * button in a Finder Search query.)
+   */
+  kThemeMetricButtonRoundedHeight = 136,
+
+  /*
+   * The height of the inset round-ended button. (For example, the
+   * Servers button in a Finder Search query.)
+   */
+  kThemeMetricButtonRoundedRecessedHeight = 137
+};
+
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.5 and
+ *    later.
+ */
+enum {
+
+  /*
+   * This metric refers to the appearance of the separator control.
+   * That separator is drawn with the HIThemeDrawSeparator theme
+   * primitive. This metric is the height of a horizontal separator or
+   * the width of a vertical separator.
+   */
+  kThemeMetricSeparatorSize     = 138,
+
+  /*
+   * The height of the push button control variant that is designed to
+   * be used in a textured window.
+   */
+  kThemeMetricTexturedPushButtonHeight = 139,
+
+  /*
+   * The height of the small push button control variant that is
+   * designed to be used in a textured window.
+   */
+  kThemeMetricTexturedSmallPushButtonHeight = 140
+};
+
+typedef UInt32                          ThemeMetric;
+/*
+ *  GetThemeMetric()
+ *  
+ *  Summary:
+ *    Returns a measurement in points for a specified type of user
+ *    interface element.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMetric:
+ *      The metric to retrieve.
+ *    
+ *    outMetric:
+ *      The size of the specified user interface element, in points.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetThemeMetric(
+  ThemeMetric   inMetric,
+  SInt32 *      outMetric)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  CopyThemeIdentifier()
+ *  
+ *  Summary:
+ *    Retrieves a string identifying the current theme variant, which
+ *    may be Aqua or Graphite.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outIdentifier:
+ *      On exit, contains the theme variant identifier. This string
+ *      must be released by the caller.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CopyThemeIdentifier(CFStringRef * outIdentifier)              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* Obsolete symbolic names                                                                          */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+enum {
+  kThemeMetricCheckBoxGlyphHeight = kThemeMetricCheckBoxHeight,
+  kThemeMetricRadioButtonGlyphHeight = kThemeMetricRadioButtonHeight,
+  kThemeMetricDisclosureButtonSize = kThemeMetricDisclosureButtonHeight,
+  kThemeMetricBestListHeaderHeight = kThemeMetricListHeaderHeight,
+  kThemeMetricSmallProgressBarThickness = kThemeMetricNormalProgressBarThickness, /* obsolete */
+  kThemeMetricProgressBarThickness = kThemeMetricLargeProgressBarThickness /* obsolete */
+};
 
 
 #pragma pack(pop)

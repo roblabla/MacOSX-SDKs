@@ -5,7 +5,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: helpxxxx.h,v 1.6 2006/09/05 20:45:50 VZ Exp $
+// RCS-ID:      $Id: helpxxxx.h 41020 2006-09-05 20:47:48Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

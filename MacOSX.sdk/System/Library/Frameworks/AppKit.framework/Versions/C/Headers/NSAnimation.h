@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2007, Apple Inc.
+    Copyright (c) 2004-2009, Apple Inc.
     All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSArray, NSGraphicsContext, NSMutableArray, NSString, NSTimer;
+@protocol NSAnimationDelegate;
 
 enum {
     NSAnimationEaseInOut,       // default
@@ -59,7 +60,7 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 	unsigned int animationBlockingMode:2;
 	unsigned int reserved:22;
     } _aSettings;
-    NSInteger _reserved1;
+    NSRunLoop *_scheduledRunLoop;
     NSInteger _reserved2;
     NSInteger _reserved3;
     NSInteger _reserved4;
@@ -88,8 +89,8 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 
 - (float)currentValue;
 
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
+- (void)setDelegate:(id <NSAnimationDelegate>)delegate;
+- (id <NSAnimationDelegate>)delegate;
 
 - (NSArray*)progressMarks;
 - (void)setProgressMarks:(NSArray*)progressMarks;
@@ -107,7 +108,8 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 
 @end
 
-@interface NSObject (NSAnimationDelegate)
+@protocol NSAnimationDelegate <NSObject>
+@optional
 - (BOOL)animationShouldStart:(NSAnimation*)animation;
 - (void)animationDidStop:(NSAnimation*)animation;
 - (void)animationDidEnd:(NSAnimation*)animation;

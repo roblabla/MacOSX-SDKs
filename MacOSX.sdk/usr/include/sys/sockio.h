@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -77,11 +77,6 @@
 #define	SIOCSPGRP	 _IOW('s',  8, int)		/* set process group */
 #define	SIOCGPGRP	 _IOR('s',  9, int)		/* get process group */
 
-#if 0
-#define        SIOCADDRT        _IOW('r', 10, struct ortentry) /* add route */
-#define        SIOCDELRT        _IOW('r', 11, struct ortentry) /* delete route */
-#endif
-
 /*
  * OSIOCGIF* ioctls are deprecated; they are kept for binary compatibility.
  */
@@ -140,6 +135,12 @@
 #define SIOCGIFBOND	_IOWR('i', 71, struct ifreq)	/* get bond if config */
 #define	SIOCIFCREATE	_IOWR('i', 120, struct ifreq)	/* create clone if */
 #define	SIOCIFDESTROY	 _IOW('i', 121, struct ifreq)	/* destroy clone if */
+#define SIOCIFCREATE2   _IOWR('i', 122, struct ifreq)   /* create clone if with data */
+
+#define SIOCSDRVSPEC    _IOW('i', 123, struct ifdrv)    /* set driver-specific
+                                                                  parameters */
+#define SIOCGDRVSPEC    _IOWR('i', 123, struct ifdrv)   /* get driver-specific
+                                                                  parameters */
 #define	SIOCSIFVLAN	 _IOW('i', 126, struct ifreq)	/* set VLAN config */
 #define	SIOCGIFVLAN	_IOWR('i', 127, struct ifreq)	/* get VLAN config */
 #define	SIOCSETVLAN	SIOCSIFVLAN
@@ -155,5 +156,9 @@
 #define SIOCSIFMAC	_IOW('i', 131, struct ifreq)	/* set IF MAC label */
 #define	SIOCSIFKPI	_IOW('i', 134, struct ifreq) /* set interface kext param - root only */
 #define	SIOCGIFKPI	_IOWR('i', 135, struct ifreq) /* get interface kext param */
+
+#define	SIOCGIFWAKEFLAGS _IOWR('i', 136, struct ifreq) /* get interface wake property flags */
+
+
 
 #endif /* !_SYS_SOCKIO_H_ */

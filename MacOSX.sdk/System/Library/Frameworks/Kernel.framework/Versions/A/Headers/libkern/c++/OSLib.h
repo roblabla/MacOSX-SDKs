@@ -30,7 +30,7 @@
 
 #include <libkern/OSBase.h>
 
-#define MACH_ASSERT	1
+#define MACH_ASSERT 1
 
 __BEGIN_DECLS
 

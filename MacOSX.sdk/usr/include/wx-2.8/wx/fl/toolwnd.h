@@ -5,7 +5,7 @@
 // Author:      Aleksandras Gluchovas
 // Modified by:
 // Created:     06/09/98
-// RCS-ID:      $Id: toolwnd.h,v 1.11 2005/09/23 12:46:58 MR Exp $
+// RCS-ID:      $Id: toolwnd.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) Aleksandras Gluchovas
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

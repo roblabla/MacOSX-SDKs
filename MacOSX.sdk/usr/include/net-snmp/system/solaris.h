@@ -23,6 +23,7 @@
 
 #define UDP_ADDRESSES_IN_HOST_ORDER 1
 #define UDP_PORTS_IN_HOST_ORDER 1
+#define TCP_PORTS_IN_HOST_ORDER 1
 
 /* get some required prototypes (strtok_r) from include files */
 #define __EXTENSIONS__
@@ -38,3 +39,10 @@
 
 /* Solaris 7+ */
 #define NETSNMP_DONT_USE_NLIST 1
+
+/*
+ * NEW_MIB_COMPLIANT is a define used in Solaris 10U4+ to enable additional
+ * MIB information (it affects the structs in <inet/mib2.h>)
+ */
+
+#define NEW_MIB_COMPLIANT

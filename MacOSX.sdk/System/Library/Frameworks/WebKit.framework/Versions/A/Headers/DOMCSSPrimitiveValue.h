@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,6 +25,8 @@
  */
 
 #import <WebKit/DOMCSSValue.h>
+
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMCounter;
 @class DOMRGBColor;
@@ -63,9 +65,9 @@ enum {
 @interface DOMCSSPrimitiveValue : DOMCSSValue
 @property(readonly) unsigned short primitiveType;
 
-- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue;
+- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (float)getFloatValue:(unsigned short)unitType;
-- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue;
+- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (NSString *)getStringValue;
 - (DOMCounter *)getCounterValue;
 - (DOMRect *)getRectValue;
@@ -73,6 +75,8 @@ enum {
 @end
 
 @interface DOMCSSPrimitiveValue (DOMCSSPrimitiveValueDeprecated)
-- (void)setFloatValue:(unsigned short)unitType :(float)floatValue DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setFloatValue:(unsigned short)unitType :(float)floatValue AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

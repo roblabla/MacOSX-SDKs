@@ -1,7 +1,7 @@
 /*
 	CoreDataErrors.h
 	Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
 	All rights reserved.
  */
 
@@ -74,6 +74,10 @@ enum {
     NSSQLiteError                                    = 134180  // general SQLite error 
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+    , NSInferredMappingModelError                      = 134190 // inferred mapping model creation error
+    , NSExternalRecordImportError                      = 134200 // general error encountered while importing external records
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
 };
 
 #endif

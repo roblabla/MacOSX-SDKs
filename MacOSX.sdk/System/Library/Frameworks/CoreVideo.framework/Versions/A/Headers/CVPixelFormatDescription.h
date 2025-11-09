@@ -65,6 +65,11 @@ CV_EXPORT const CFStringRef kCVPixelFormatBitsPerBlock AVAILABLE_MAC_OS_X_VERSIO
 CV_EXPORT const CFStringRef kCVPixelFormatBlockHorizontalAlignment AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 CV_EXPORT const CFStringRef kCVPixelFormatBlockVerticalAlignment AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+/* CFData containing the bit pattern for a block of black pixels.  If absent, black is assumed to be all zeros.
+   If present, this should be bitsPerPixel bits long -- if bitsPerPixel is less than a byte, repeat the bit pattern 
+   for the full byte.  */
+CV_EXPORT const CFStringRef kCVPixelFormatBlackBlock AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 /* Subsampling information for this plane.  Assumed to be '1' if not present. */
 CV_EXPORT const CFStringRef kCVPixelFormatHorizontalSubsampling AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 CV_EXPORT const CFStringRef kCVPixelFormatVerticalSubsampling AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;

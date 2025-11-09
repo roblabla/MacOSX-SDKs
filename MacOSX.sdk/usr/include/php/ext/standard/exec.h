@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: exec.h,v 1.24.2.3.2.2 2007/12/31 07:20:12 sebastian Exp $ */
+/* $Id: exec.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef EXEC_H
 #define EXEC_H
@@ -36,6 +36,6 @@ PHP_MINIT_FUNCTION(proc_open);
 
 PHPAPI char *php_escape_shell_cmd(char *);
 PHPAPI char *php_escape_shell_arg(char *);
-int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC);
+PHPAPI int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC);
 
 #endif /* EXEC_H */

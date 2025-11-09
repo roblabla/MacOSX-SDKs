@@ -125,6 +125,22 @@ vImage_Error	vImageAffineWarp_PlanarF( const vImage_Buffer *src, const vImage_Bu
 vImage_Error	vImageAffineWarp_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageAffineWarp_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+#if VIMAGE_AFFINETRANSFORM_DOUBLE_IS_AVAILABLE
+    /* A single precision transformation matrix is often not enough. This one uses double precision. */
+    vImage_Error	vImageAffineWarpD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
+#if VIMAGE_CGAFFINETRANSFORM_IS_AVAILABLE
+    /* Convenience Interfaces for working directly with CGAffineTransform, which changes size depending on whether we are LP64 or not. */
+    vImage_Error	vImageAffineWarpCG_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpCG_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpCG_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpCG_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
 /*
  *	For the Affine Transform function the coordinate space places the origin at the bottom left corner
  * 	of the image. Positive movement in the X and Y direction moves you right and up. Both source and destination
@@ -216,6 +232,17 @@ vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage
 vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/* Versions of shear functions that take coordinates in double precision */
+vImage_Error	vImageHorizontalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageHorizontalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageHorizontalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageHorizontalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+vImage_Error	vImageVerticalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageVerticalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageVerticalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageVerticalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
  
 /*

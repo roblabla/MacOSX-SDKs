@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     18-June-1999
-// RCS-ID:      $Id: _mimetype.i,v 1.11 2006/09/06 04:20:38 RD Exp $
+// RCS-ID:      $Id: _mimetype.i 54679 2008-07-18 03:29:02Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -45,10 +45,18 @@ public:
                    const wxString& printCmd,
                    const wxString& desc);
 
+    ~wxFileTypeInfo();
 
     // the array elements correspond to the parameters of the ctor above in
     // the same order
-    %Rename(FileTypeInfoSequence,, wxFileTypeInfo(const wxArrayString& sArray));
+    %extend {
+        %Rename(FileTypeInfoSequence,, wxFileTypeInfo(const wxArrayString& sArray))
+         {
+             wxCHECK_MSG( sArray.GetCount() >= 4, NULL,
+                          wxT("Sequence must have at least 4 items."));
+             return new wxFileTypeInfo(sArray);
+         }
+    }
 
     // invalid item - use this to terminate the array passed to
     // wxMimeTypesManager::AddFallbacks

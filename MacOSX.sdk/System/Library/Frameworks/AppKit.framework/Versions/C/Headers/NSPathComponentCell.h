@@ -1,7 +1,7 @@
 /*
     NSPathComponentCell.h
     Application Kit
-    Copyright (c) 2006-2007, Apple Inc.
+    Copyright (c) 2006-2009, Apple Inc.
     All rights reserved.
 */
 
@@ -31,7 +31,8 @@
         unsigned int drawsAsNavigationBar:1;
         unsigned int isFirstItem:1;
         unsigned int isLastItem:1;
-        unsigned int reserved:28;
+        unsigned int isDropTarget:1;
+        unsigned int reserved:27;
     } _flags; 
     id _aux;
 }

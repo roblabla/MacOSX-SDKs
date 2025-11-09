@@ -22,7 +22,7 @@
     NSDate *_occurrence;
 }
 
-//  The calendar property must be set before calling saveTask on a new task
+//  The calendar property must be set before calling saveEvent on a new event
 + (id)event;
 
 @property BOOL isAllDay;

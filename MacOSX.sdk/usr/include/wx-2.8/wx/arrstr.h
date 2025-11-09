@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon and Vadim Zeitlin
 // Modified by:
 // Created:     07/07/03
-// RCS-ID:      $Id: arrstr.h,v 1.20 2005/04/26 19:24:04 MBN Exp $
+// RCS-ID:      $Id: arrstr.h 33888 2005-04-26 19:24:12Z MBN $
 // Copyright:   (c) 2003 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
 // Author:      Ryan Norton, Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: sound.h,v 1.8 2006/09/05 20:45:52 VZ Exp $
+// RCS-ID:      $Id: sound.h 41020 2006-09-05 20:47:48Z VZ $
 // Copyright:   (c) Ryan Norton, Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

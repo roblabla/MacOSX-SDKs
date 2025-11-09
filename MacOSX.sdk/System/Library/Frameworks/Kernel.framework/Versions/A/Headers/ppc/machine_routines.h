@@ -37,6 +37,11 @@
 #include <kern/kern_types.h>
 #include <pexpert/pexpert.h>
 
+#include <sys/cdefs.h>
+#include <sys/appleapiopts.h>
+
+__BEGIN_DECLS
+
 /* Get Interrupts Enabled */
 extern boolean_t	ml_get_interrupts_enabled(
 						void);
@@ -51,5 +56,7 @@ extern boolean_t	ml_at_interrupt_context(
 
 
 
+
+__END_DECLS
 
 #endif /* _PPC_MACHINE_ROUTINES_H_ */

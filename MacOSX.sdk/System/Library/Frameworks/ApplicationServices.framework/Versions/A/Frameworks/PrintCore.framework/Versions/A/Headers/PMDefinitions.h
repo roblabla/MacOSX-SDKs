@@ -3,7 +3,7 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
+     Copyright (c) 1998-2006,2008 by Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -160,6 +160,23 @@ enum {
   kPMBorderDoubleThickline      = 4
 };
 
+/* 
+ Options for which items to show inline in the print dialog
+ This is only meant to be used in Carbon environment
+ */
+typedef OptionBits PMPrintDialogOptionFlags;
+enum {                   
+	kPMHideInlineItems					= (0L << 0), /* show nothing in the inline portion of print dialog */
+	kPMShowDefaultInlineItems			= (1L << 15), /* show the default set of items (copies & pages) in the inline portion of print dialog */
+	kPMShowInlineCopies					= (1L << 0), /* show Copies edit text, Collate check box and Two Sided check box (if printer supports it) in top portion of print dialog */
+	kPMShowInlinePageRange				= (1L << 1), /* show Paper Range buttons and From & To Page edit text items in top portion of print dialog */
+	kPMShowInlinePageRangeWithSelection	= (1L << 6), /* show Paper Range buttons with the addition of a Selection button and the From & To Page edit text items in top portion of print dialog */
+	kPMShowInlinePaperSize				= (1L << 2), /* show Paper Size popup menu in top portion of print dialog */
+	kPMShowInlineOrientation			= (1L << 3), /* show Orientation buttons in top portion of print dialog */
+	kPMShowInlineScale					= (1L << 7), /* show Scaling edit text in top portion of print dialog */
+	kPMShowPageAttributesPDE			= (1L << 8), /* add a PDE to the print dialog that contains the Page Setup information (paper size, orientation and scale) */
+};
+
 typedef UInt16 PMPPDDomain;
 enum {
   kAllPPDDomains                = 1,
@@ -266,6 +283,32 @@ enum PMDataFormat {
   kPMDataFormatXMLCompressed			= 2
 };
 typedef enum PMDataFormat PMDataFormat;
+
+/* PMPreset related */
+/*
+	kPMPresetGraphicsTypeKey is a PMPreset attribute that specifies the graphics type of a given preset
+*/
+#define kPMPresetGraphicsTypeKey		CFSTR("com.apple.print.preset.graphicsType")
+
+/*
+	kPMPresetGraphicsTypePhoto is the graphics type of presets appropriate for printing photos.
+*/
+#define kPMPresetGraphicsTypePhoto 		CFSTR("Photo")
+
+/*
+	kPMPresetGraphicsTypeAll includes all graphics types.
+*/
+#define kPMPresetGraphicsTypeAll 		CFSTR("All")
+/*
+	kPMPresetGraphicsTypeGeneral is a graphics type that is not specific to any type of document printing.
+*/
+#define kPMPresetGraphicsTypeGeneral 	CFSTR("General")
+/*
+	kPMPresetGraphicsTypeNone excludes all graphics types.
+*/
+#define kPMPresetGraphicsTypeNone 		CFSTR("None")
+
+
 
 #if !__LP64__
 #pragma options align=reset

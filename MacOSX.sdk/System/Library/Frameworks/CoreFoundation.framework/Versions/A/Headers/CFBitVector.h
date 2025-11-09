@@ -1,5 +1,5 @@
 /*	CFBitVector.h
-	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2009, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBITVECTOR__)

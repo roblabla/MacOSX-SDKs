@@ -24,6 +24,8 @@
  * is blocked) it may be necessary to use explicit transactions to get
  * timely render tree updates. */
 
+@class CAMediaTimingFunction;
+
 @interface CATransaction : NSObject
 
 /* Begin a new transaction for the current thread; nests. */
@@ -40,19 +42,64 @@
 
 + (void)flush;
 
-/* Associate arbitratry keyed-data with the current transaction.
+/* Methods to lock and unlock the global lock. Layer methods automatically
+ * obtain this while modifying shared state, but callers may need to lock
+ * around multiple operations to ensure consistency. The lock is a
+ * recursive spin-lock (i.e shouldn't be held for extended periods.) */
+
++ (void)lock;
++ (void)unlock;
+
+/* Accessors for the "animationDuration" per-thread transaction
+ * property. Defines the default duration of animations added to
+ * layers. Defaults to 1/4s. */
+
++ (CFTimeInterval)animationDuration;
++ (void)setAnimationDuration:(CFTimeInterval)dur;
+
+/* Accessors for the "animationTimingFunction" per-thread transaction
+ * property. The default value is nil, when set to a non-nil value any
+ * animations added to layers will have this value set as their
+ * "timingFunction" property. Added in Mac OS X 10.6. */
+
++ (CAMediaTimingFunction *)animationTimingFunction;
++ (void)setAnimationTimingFunction:(CAMediaTimingFunction *)function;
+
+/* Accessors for the "disableActions" per-thread transaction property.
+ * Defines whether or not the layer's -actionForKey: method is used to
+ * find an action (aka. implicit animation) for each layer property
+ * change. Defaults to NO, i.e. implicit animations enabled. */
+
++ (BOOL)disableActions;
++ (void)setDisableActions:(BOOL)flag;
+
+/* Accessors for the "completionBlock" per-thread transaction property.
+ * Once set to a non-nil value the block is guaranteed to be called (on
+ * the main thread) as soon as all animations subsequently added by
+ * this transaction group have completed (or been removed.) If no
+ * animations are added before the current transaction group is
+ * committed (or the completion block is set to a different value,) the
+ * block will be invoked immediately. Added in Mac OS X 10.6. */
+
+#if __BLOCKS__
++ (void (^)(void))completionBlock;
++ (void)setCompletionBlock:(void (^)(void))block;
+#endif
+
+/* Associate arbitrary keyed-data with the current transaction (i.e.
+ * with the current thread.)
  *
  * Nested transactions have nested data scope, i.e. reading a key
  * searches for the innermost scope that has set it, setting a key
  * always sets it in the innermost scope.
  *
  * Currently supported transaction properties include:
+ * "animationDuration", "animationTimingFunction", "completionBlock",
+ * "disableActions". See method declarations above for descriptions of
+ * each property.
  *
- * `animationDuration': default duration in seconds for animations
- * added to layers.
- *
- * `disableActions': when true, implicit actions for property changes
- * are suppressed. */
+ * Attempting to set a property to a type other than its document type
+ * has an undefined result. */
 
 + (id)valueForKey:(NSString *)key;
 + (void)setValue:(id)anObject forKey:(NSString *)key;
@@ -61,5 +108,11 @@
 
 /** Transaction property ids. **/
 
-CA_EXTERN NSString * const kCATransactionAnimationDuration AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransactionDisableActions AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCATransactionAnimationDuration
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransactionDisableActions
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransactionAnimationTimingFunction
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+CA_EXTERN NSString * const kCATransactionCompletionBlock
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);

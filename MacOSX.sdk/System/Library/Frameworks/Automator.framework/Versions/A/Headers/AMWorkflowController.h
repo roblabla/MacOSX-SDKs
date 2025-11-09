@@ -5,6 +5,8 @@
     Public header file.
 */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 #import <Foundation/Foundation.h>
 
 @class AMAction;
@@ -42,10 +44,11 @@
         NSUInteger workflowControllerWillRunAction:1;
         NSUInteger workflowControllerDidRunAction:1;
 		NSUInteger workflowControllerDidError:1;
-		NSUInteger workflowControllerDidLogMessageOfType:1;
+		NSUInteger workflowControllerDidLogMessageOfTypeFromAction:1;
 		NSUInteger workflowControllerWillRunConversion:1;
 		NSUInteger workflowControllerDidRunConversion:1;
-        NSUInteger reserved:20;
+		NSUInteger workflowControllerDidResumeWithAction:1;
+        NSUInteger reserved:19;
     } _delegateRespondTo;
 	
 	id _future;
@@ -82,3 +85,5 @@
 - (void)workflowController:(AMWorkflowController *)controller didRunAction:(AMAction *)action;
 - (void)workflowController:(AMWorkflowController *)controller didError:(NSError *)error;
 @end
+
+#endif

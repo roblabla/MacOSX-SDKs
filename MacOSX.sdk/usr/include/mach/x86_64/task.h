@@ -21,12 +21,12 @@ typedef struct {
         char            *name;
         function_ptr_t  function;
 } function_table_entry;
-typedef function_table_entry 	*function_table_t;
+typedef function_table_entry   *function_table_t;
 #endif /* FUNCTION_PTR_T */
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	33
+#define	task_MSG_COUNT	35
 #endif	/* task_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -480,6 +480,34 @@ kern_return_t task_set_policy
 	boolean_t change
 );
 
+/* Routine task_get_state */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_get_state
+(
+	task_t task,
+	thread_state_flavor_t flavor,
+	thread_state_t old_state,
+	mach_msg_type_number_t *old_stateCnt
+);
+
+/* Routine task_set_state */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_set_state
+(
+	task_t task,
+	thread_state_flavor_t flavor,
+	thread_state_t new_state,
+	mach_msg_type_number_t new_stateCnt
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -931,6 +959,33 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		thread_state_flavor_t flavor;
+		mach_msg_type_number_t old_stateCnt;
+	} __Request__task_get_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		thread_state_flavor_t flavor;
+		mach_msg_type_number_t new_stateCnt;
+		natural_t new_state[144];
+	} __Request__task_set_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -970,6 +1025,8 @@ union __RequestUnion__task_subsystem {
 	__Request__task_assign_default_t Request_task_assign_default;
 	__Request__task_get_assignment_t Request_task_get_assignment;
 	__Request__task_set_policy_t Request_task_set_policy;
+	__Request__task_get_state_t Request_task_get_state;
+	__Request__task_set_state_t Request_task_set_state;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -1406,6 +1463,32 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t old_stateCnt;
+		natural_t old_state[144];
+	} __Reply__task_get_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_set_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -1445,6 +1528,8 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_assign_default_t Reply_task_assign_default;
 	__Reply__task_get_assignment_t Reply_task_get_assignment;
 	__Reply__task_set_policy_t Reply_task_set_policy;
+	__Reply__task_get_state_t Reply_task_get_state;
+	__Reply__task_set_state_t Reply_task_set_state;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -1481,7 +1566,9 @@ union __ReplyUnion__task_subsystem {
     { "task_assign", 3429 },\
     { "task_assign_default", 3430 },\
     { "task_get_assignment", 3431 },\
-    { "task_set_policy", 3432 }
+    { "task_set_policy", 3432 },\
+    { "task_get_state", 3433 },\
+    { "task_set_state", 3434 }
 #endif
 
 #ifdef __AfterMigUserHeader

@@ -34,6 +34,8 @@
 #ifndef XPLUGIN_H
 #define XPLUGIN_H 1
 
+#define XPLUGIN_VERSION 3
+
 #include <stdint.h>
 
 /* By default we use the X server definition of BoxRec to define xp_box,
@@ -57,7 +59,6 @@ typedef unsigned int xp_client_id;
 typedef unsigned int xp_request_type;
 typedef int xp_error;
 typedef int xp_bool;
-
 
 /* Error codes that the functions declared here may return. They all
    numerically match their X equivalents, i.e. the XP_ can be dropped
@@ -177,6 +178,7 @@ enum xp_window_changes_enum {
     XP_DEPTH			= 1 << 4,
     XP_COLORMAP			= 1 << 5,
     XP_WINDOW_LEVEL		= 1 << 6,
+    XP_ATTACH_TRANSIENT		= 1 << 7,
 };
 
 struct xp_window_changes_struct {
@@ -205,6 +207,9 @@ struct xp_window_changes_struct {
 
     /* XP_WINDOW_LEVEL, window-only */
     int window_level;
+
+    /* XP_ATTACH_TRANSIENT, window-only */
+    xp_window_id transient_for;
 };
 
 typedef struct xp_window_changes_struct xp_window_changes;
@@ -588,5 +593,22 @@ extern void xp_copy_bytes (unsigned int width, unsigned int height,
 extern unsigned int xp_fill_bytes_threshold, xp_copy_bytes_threshold,
     xp_composite_area_threshold, xp_scroll_area_threshold;
 
+/* e is an EventRef.  This returns true if the passed event corresponds to a
+ * hotkey that the user has enabled.
+ */
+extern xp_bool xp_is_symbolic_hotkey_event(const void *e);
+
+/* Set the state for disabled hotkeys */
+extern xp_error xp_disable_hot_keys(xp_bool state);
+
+/* Set the ProcessSerialNumber for the application that is going to be our dock
+ * proxy.  This is probably quartz-wm.
+ * 
+ * The hi/lo values passed are the corresponding hi and low bits of
+ * the ProcessSerialNumber, but we pass it as hi/lo values to avoid
+ * namespace polution in the server.
+ *
+ */
+extern xp_error xp_set_dock_proxy(uint32_t hi, uint32_t lo);
 
 #endif /* XPLUGIN_H */

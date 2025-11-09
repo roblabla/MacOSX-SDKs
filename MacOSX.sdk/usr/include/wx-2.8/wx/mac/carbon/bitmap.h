@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: bitmap.h,v 1.17 2006/11/01 03:23:35 RD Exp $
+// RCS-ID:      $Id: bitmap.h 42890 2006-11-01 03:23:35Z RD $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
 // Author:      Robin Dunn / Kevin Ollivier
 //
 // Created:     18-Oct-2004
-// RCS-ID:      $Id: webkit.i,v 1.12 2006/10/19 23:11:49 RD Exp $
+// RCS-ID:      $Id: webkit.i 53938 2008-06-02 19:35:15Z RD $
 // Copyright:   (c) 2004 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -43,8 +43,6 @@
 // Put some wx default wxChar* values into wxStrings.
 MAKE_CONST_WXSTRING_NOSWIG(EmptyString);
 MAKE_CONST_WXSTRING2(WebKitNameStr, wxT("webkitctrl"))
-
-
 
     
 %{
@@ -116,7 +114,8 @@ enum {
     wxWEBKIT_STATE_FAILED = 0,
 
     wxEVT_WEBKIT_STATE_CHANGED = 0,
-    wxEVT_WEBKIT_BEFORE_LOAD = 0
+    wxEVT_WEBKIT_BEFORE_LOAD = 0,
+    wxEVT_WEBKIT_NEW_WINDOW = 0
 };
 
 enum {
@@ -153,7 +152,20 @@ public:
 
     wxWebKitBeforeLoadEvent( wxWindow* win = (wxWindow*) NULL ) { wxPyRaiseNotImplemented(); }
 };
- 
+
+
+class wxWebKitNewWindowEvent : public wxCommandEvent
+{
+public:
+    wxString GetURL() const { return wxEmptyString; }
+    void SetURL(const wxString& ) { }
+    wxString GetTargetName() const { return wxEmptyString; }
+    void SetTargetName(const wxString&) { }
+
+    wxWebKitNewWindowEvent( wxWindow* win = (wxWindow*)(NULL)) { wxPyRaiseNotImplemented(); }
+};
+
+
 #endif
 %}
 
@@ -250,6 +262,7 @@ enum {
 
 %constant wxEventType wxEVT_WEBKIT_STATE_CHANGED;
 %constant wxEventType wxEVT_WEBKIT_BEFORE_LOAD;
+%constant wxEventType wxEVT_WEBKIT_NEW_WINDOW;
 
 class wxWebKitBeforeLoadEvent : public wxCommandEvent
 {    
@@ -283,9 +296,27 @@ public:
 };
 
 
+class wxWebKitNewWindowEvent : public wxCommandEvent
+{
+public:
+    wxString GetURL() const;
+    void SetURL(const wxString& url);
+    wxString GetTargetName() const;
+    void SetTargetName(const wxString& name);
+
+    wxWebKitNewWindowEvent( wxWindow* win = NULL);
+
+    %property(URL, GetURL, SetURL, doc="See `GetURL` and `SetURL`");
+    %property(TargetName, GetTargetName, SetTargetName);    
+};
+
+
+
+
 %pythoncode %{
     EVT_WEBKIT_STATE_CHANGED = wx.PyEventBinder(wxEVT_WEBKIT_STATE_CHANGED)
     EVT_WEBKIT_BEFORE_LOAD = wx.PyEventBinder(wxEVT_WEBKIT_BEFORE_LOAD)
+    EVT_WEBKIT_NEW_WINDOW = wx.PyEventBinder(wxEVT_WEBKIT_NEW_WINDOW)
 %}
 
 

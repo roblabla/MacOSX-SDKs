@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2007, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,6 +8,7 @@
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSData, NSDictionary, NSInputStream, NSOutputStream, NSRunLoop, NSString;
+@protocol NSNetServiceDelegate, NSNetServiceBrowserDelegate;
 
 #pragma mark Error constants
 
@@ -44,7 +45,7 @@ enum {
 */
     NSNetServicesInvalidError = -72006,
     
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     
 /* Resolution of an NSNetService instance failed because the timeout was reached.
 */
@@ -59,7 +60,7 @@ typedef NSInteger NSNetServicesError;
 enum {
 /* When passed to -publishWithOptions, this suppresses the auto-renaming of an NSNetService in the event of a name collision. The collision is reported to the instance's delegate on the netService:didNotPublish: method.
 */
-    NSNetServiceNoAutoRename = 1 << 0
+    NSNetServiceNoAutoRename = 1UL << 0
 };
 typedef NSUInteger NSNetServiceOptions;
 
@@ -83,8 +84,8 @@ If publish: is called on an NSNetService instance initialized with this method, 
 */
 - (id)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name;
 
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id <NSNetServiceDelegate>)delegate;
+- (void)setDelegate:(id <NSNetServiceDelegate>)delegate;
 
 /* NSNetService instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServices in other threads. NSNetServices are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
@@ -107,7 +108,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 */
 - (NSArray *)addresses;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* The port of a resolved service. This returns -1 if the service has not been resolved. */
 - (NSInteger)port;
@@ -120,7 +121,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 */
 - (void)publish;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Advertises a given service on the network. This method returns immediately. Success or failure is indicated by callbacks to the NSNetService instance's delegate.
  
@@ -132,13 +133,13 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Attempts to determine at least one address for the NSNetService instance. For applications linked on or after Mac OS X 10.4 "Tiger", this method calls -resolveWithTimeout: with a value of 5.0. Applications linked prior to Mac OS X 10.4 "Tiger" must call -stop on the instance after an appropriate (short) amount of time to avoid causing unnecessary network traffic.
 */
-- (void)resolve;
+- (void)resolve DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Halts a service which is either publishing or resolving.
 */
 - (void)stop;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Returns an NSDictionary created from the provided NSData. The keys will be UTF8-encoded NSStrings. The values are NSDatas. The caller is responsible for interpreting these as types appropriate to the keys. If the NSData cannot be converted into an appropriate NSDictionary, this method will return nil. For applications linked on or after Mac OS X 10.5, this method will throw an NSInvalidException if it is passed nil as the argument.
 */
@@ -191,15 +192,15 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 - (id)init;
 
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id <NSNetServiceBrowserDelegate>)delegate;
+- (void)setDelegate:(id <NSNetServiceBrowserDelegate>)delegate;
 
 /* NSNetServiceBrowser instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServiceBrowsers in other threads. NSNetServiceBrowsers are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
 - (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 - (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Starts a search for domains that are browsable via Bonjour and the computer's network configuration. Discovered domains are reported to the delegate's -netServiceBrowser:didFindDomain:moreComing: method. There may be more than one browsable domain.
 */
@@ -223,13 +224,14 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
-@interface NSObject (NSNetServiceDelegateMethods)
+@protocol NSNetServiceDelegate <NSObject>
+@optional
 
 /* Sent to the NSNetService instance's delegate prior to advertising the service on the network. If for some reason the service cannot be published, the delegate will not receive this message, and an error will be delivered to the delegate via the delegate's -netService:didNotPublish: method.
 */
 - (void)netServiceWillPublish:(NSNetService *)sender;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Sent to the NSNetService instance's delegate when the publication of the instance is complete and successful.
 */
@@ -257,7 +259,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 */
 - (void)netServiceDidStop:(NSNetService *)sender;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Sent to the NSNetService instance's delegate when the instance is being monitored and the instance's TXT record has been updated. The new record is contained in the data parameter.
 */
@@ -269,7 +271,8 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
-@interface NSObject (NSNetServiceBrowserDelegateMethods)
+@protocol NSNetServiceBrowserDelegate <NSObject>
+@optional
 
 /* Sent to the NSNetServiceBrowser instance's delegate before the instance begins a search. The delegate will not receive this message if the instance is unable to begin a search. Instead, the delegate will receive the -netServiceBrowser:didNotSearch: message.
 */
@@ -304,6 +307,8 @@ If publish: is called on an NSNetService instance initialized with this method, 
 #pragma mark -
 #pragma mark Deprecated API
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_ASPEN))
+
 /* Methods in these categories are provided for binary compatibility only.
 */
 
@@ -313,13 +318,13 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -TXTRecordData instead.
 */
-- (NSString *)protocolSpecificInformation;
+- (NSString *)protocolSpecificInformation DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Sets the TXT record of the NSNetService instance to be the provided string. It is the caller's responsibility to ensure the string is of the appropriate format with the correct encoding.
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -setTXTRecordData: instead.
 */
-- (void)setProtocolSpecificInformation:(NSString *)specificInformation;
+- (void)setProtocolSpecificInformation:(NSString *)specificInformation DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 @end
 
@@ -329,8 +334,10 @@ This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -setTXTRecordD
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -searchForBrowsableDomains or -searchForRegistrationDomains instead.
 */
-- (void)searchForAllDomains;
+- (void)searchForAllDomains DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 @end
+
+#endif
 
 #endif

@@ -3,9 +3,9 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Version:    SpeechRecognition-3.7.24~110
+     Version:    SpeechRecognition-3.11.1~16
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -229,6 +229,7 @@ enum {
   kSRWantsAutoFBGestures        = 'dfbr', /* Boolean: Default is true. If true, client needn't call SRProcessBegin/End to get default feedback behavior */
   kSRSoundInVolume              = 'volu', /* short in [0..100] log scaled sound input power. Can't set this property */
   kSRReadAudioFSSpec            = 'aurd', /* *FSSpec: Specify FSSpec where raw audio is to be read (AIFF format) using kSRCanned22kHzSpeechSource. Reads until EOF */
+  kSRReadAudioURL               = 'aurl', /* CFURLRef: Specify CFURLRef where raw audio is to be read (AIFF format) using kSRCanned22kHzSpeechSource. Reads until EOF */
   kSRCancelOnSoundOut           = 'caso', /* Boolean: Default is true.  If any sound is played out during utterance, recognition is aborted. */
   kSRSpeedVsAccuracyParam       = 'sped' /* SRSpeedSetting between 0 and 100 */
 };

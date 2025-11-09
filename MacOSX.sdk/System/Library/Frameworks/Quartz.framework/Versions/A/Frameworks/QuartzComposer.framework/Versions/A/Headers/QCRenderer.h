@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
+	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -131,6 +131,7 @@ This mutable dictionary is the same as the one available on the plug-in executio
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
+
 /*
 Create a new renderer with a QCComposition object and an RGB colorspace (non-device).
 The composition must be a pure processing composition i.e. it does not contain any consumer patches.
@@ -152,6 +153,7 @@ Create a new offline renderer of a given size with an RGB colorspace (non-device
 If any error occurs during loading of the composition, nil will be returned.
 */
 - (id) initOffScreenWithSize:(NSSize)size colorSpace:(CGColorSpaceRef)colorSpace composition:(QCComposition*)composition;
+
 
 #endif
 
@@ -175,12 +177,20 @@ The "arguments" parameters is used to passed optional arguments to the patches o
 */
 - (BOOL) renderAtTime:(NSTimeInterval)time arguments:(NSDictionary*)arguments;
 
+/*
+	Returns the time at which the renderer will next actually draw new content.
+	Calling renderAtTime before that time will unecessarily redraw the same content.
+	This needs to be reevaluated whenever port values are manually set or when the arguments change.
+*/
+- (NSTimeInterval) renderingTimeForTime:(NSTimeInterval)time arguments:(NSDictionary*)arguments;
+
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
 /*
 Returns the QCComposition from the QCRenderer.
 */
 - (QCComposition*) composition;
+
 
 /*
 Returns a snapshot of the current image in the QCRenderer's OpenGL context.
@@ -193,6 +203,7 @@ The following image types are supported: NSBitmapImageRep, NSImage, CIImage, CGI
 The caller is responsible for releasing the returned object.
 */
 - (id) createSnapshotImageOfType:(NSString*)type;
+
 
 #endif
 

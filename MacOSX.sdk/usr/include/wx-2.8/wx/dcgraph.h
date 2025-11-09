@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Stefan Csomor
-// RCS-ID:      $Id: dcgraph.h,v 1.6 2006/12/03 15:18:24 SC Exp $
+// RCS-ID:      $Id: dcgraph.h 53390 2008-04-28 04:19:15Z KO $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -50,11 +50,15 @@ public:
 
     virtual void Clear();
 
-    virtual bool StartDoc( const wxString& WXUNUSED(message) ) { return true; }
-    virtual void EndDoc(void) {}
+    virtual bool StartDoc( const wxString& message );
+    virtual void EndDoc();
 
-    virtual void StartPage(void) {}
-    virtual void EndPage(void) {}
+    virtual void StartPage();
+    virtual void EndPage();
+    
+    // to be virtualized on next major
+    // flushing the content of this dc immediately onto screen
+    void Flush();
 
     virtual void SetFont(const wxFont& font);
     virtual void SetPen(const wxPen& pen);

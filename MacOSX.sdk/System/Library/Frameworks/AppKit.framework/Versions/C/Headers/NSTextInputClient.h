@@ -1,15 +1,15 @@
 /*
 	NSTextInputClient.h
 	Application Kit
-	Copyright (c) 2006-2007, Apple Inc.
+	Copyright (c) 2006-2009, Apple Inc.
 	All rights reserved.
  */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSGeometry.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 @class NSArray;
 @class NSAttributedString;
 
@@ -75,5 +75,9 @@
 /* Returns the window level of the receiver. An NSTextInputClient can implement this interface to specify its window level if it is higher than NSFloatingWindowLevel.
 */
 - (NSInteger)windowLevel;
+
+/* Returns if the marked text is in vertical layout.
+ */
+- (BOOL)drawsVerticallyForCharacterAtIndex:(NSUInteger)charIndex AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 @end
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */

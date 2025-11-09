@@ -6,7 +6,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: metafile.h,v 1.12 2006/10/30 19:25:57 VZ Exp $
+// RCS-ID:      $Id: metafile.h 49032 2007-10-04 07:29:24Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -57,6 +57,10 @@ public:
     // Implementation
     WXHMETAFILE GetHMETAFILE() const ;
     void SetHMETAFILE(WXHMETAFILE mf) ;
+    // Since the native metafile format is PDF for Quartz
+    // we need a call that allows setting PICT content for
+    // backwards compatibility
+    void SetPICT(void* pictHandle) ;
 };
 
 class WXDLLEXPORT wxMetafileDC: public wxDC

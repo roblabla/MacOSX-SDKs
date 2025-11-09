@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,7 +8,7 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -19,6 +19,7 @@
 @class NSURLDownloadInternal;
 @class NSURLRequest;
 @class NSURLResponse;
+@class NSURLProtectionSpace;
 
 /*!
     @class NSURLDownload
@@ -146,6 +147,22 @@
 */
 - (NSURLRequest *)download:(NSURLDownload *)download willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
 
+
+/*!
+    @method download:canAuthenticateAgainstProtectionSpace:
+    @abstract This method gives the delegate an opportunity to inspect an NSURLProtectionSpace before an authentication attempt is made.
+    @discussion If implemented, will be called before connection:didReceiveAuthenticationChallenge 
+    to give the delegate a chance to inspect the protection space that will be authenticated against.  Delegates should determine
+    if they are prepared to respond to the authentication method of the protection space and if so, return YES, or NO to
+    allow default processing to handle the authentication.  If this delegate is not implemented, then default 
+    processing will occur (typically, consulting
+    the user's keychain and/or failing the connection attempt.
+    @param connection an NSURLConnection that has an NSURLProtectionSpace ready for inspection
+    @param protectionSpace an NSURLProtectionSpace that will be used to generate an authentication challenge
+    @result a boolean value that indicates the willingness of the delegate to handle the authentication
+ */
+- (BOOL)download:(NSURLDownload *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+
 /*!
     @method download:didReceiveAuthenticationChallenge:
     @abstract Start authentication for a given challenge
@@ -164,6 +181,22 @@
     @param challenge The NSURLAuthenticationChallenge to cancel authentication for
 */
 - (void)download:(NSURLDownload *)download didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+/*! 
+    @method downloadShouldUseCredentialStorage   
+    @abstract This method allows the delegate to inform the url loader that it
+				should not consult the credential storage for the download.
+    @discussion This method will be called before any attempt to authenticate is
+		attempted on a download.  By returning NO the delegate is telling the
+		download to not consult the credential storage and taking responsiblity
+		for providing any credentials for authentication challenges.  Not implementing
+		this method is the same as returing YES.  The delegate is free to consult the
+		credential storage itself when it receives a didReceiveAuthenticationChallenge
+		message.
+    @param download  the NSURLDownload object asking if it should consult the credential storage.
+    @result NO if the download should not consult the credential storage, Yes if it should.
+*/
+- (BOOL)downloadShouldUseCredentialStorage:(NSURLDownload *)download;
 
 /*!
     @method download:didReceiveResponse:

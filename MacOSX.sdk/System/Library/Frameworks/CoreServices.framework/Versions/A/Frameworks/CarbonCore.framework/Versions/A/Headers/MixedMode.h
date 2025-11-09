@@ -3,9 +3,9 @@
  
      Contains:   Mixed Mode Manager Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -271,7 +271,7 @@ enum {
   kResultSizeMask               = 0x30, /* Parameter offsets & widths */
   kStackParameterWidth          = 2,
   kStackParameterPhase          = (kCallingConventionWidth + kResultSizeWidth),
-  kStackParameterMask           = (long)0xFFFFFFC0, /* Register Result Location offsets & widths */
+  kStackParameterMask           = (int)0xFFFFFFC0, /* Register Result Location offsets & widths */
   kRegisterResultLocationWidth  = 5,
   kRegisterResultLocationPhase  = (kCallingConventionWidth + kResultSizeWidth), /* Register Parameter offsets & widths */
   kRegisterParameterWidth       = 5,

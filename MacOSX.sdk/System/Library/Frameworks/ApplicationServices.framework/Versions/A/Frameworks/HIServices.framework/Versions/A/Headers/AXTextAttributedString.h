@@ -15,29 +15,29 @@ extern "C" {
 
 #include <CoreFoundation/CoreFoundation.h>
 
-extern CFStringRef kAXFontTextAttribute;		// CFDictionaryRef - see kAXFontTextAttribute keys below
-extern CFStringRef kAXForegroundColorTextAttribute;	// CGColorRef
-extern CFStringRef kAXBackgroundColorTextAttribute;	// CGColorRef
-extern CFStringRef kAXUnderlineColorTextAttribute;	// CGColorRef
-extern CFStringRef kAXStrikethroughColorTextAttribute;	// CGColorRef
-extern CFStringRef kAXUnderlineTextAttribute;		// CFNumberRef - AXUnderlineStyle
-extern CFStringRef kAXSuperscriptTextAttribute;		// CFNumberRef = + number for superscript - for subscript
-extern CFStringRef kAXStrikethroughTextAttribute;	// CFBooleanRef
-extern CFStringRef kAXShadowTextAttribute;		// CFBooleanRef
+extern CFStringRef kAXFontTextAttribute					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFDictionaryRef - see kAXFontTextAttribute keys below
+extern CFStringRef kAXForegroundColorTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
+extern CFStringRef kAXBackgroundColorTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
+extern CFStringRef kAXUnderlineColorTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
+extern CFStringRef kAXStrikethroughColorTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
+extern CFStringRef kAXUnderlineTextAttribute			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFNumberRef - AXUnderlineStyle
+extern CFStringRef kAXSuperscriptTextAttribute			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFNumberRef = + number for superscript - for subscript
+extern CFStringRef kAXStrikethroughTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFBooleanRef
+extern CFStringRef kAXShadowTextAttribute				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFBooleanRef
 
-extern CFStringRef kAXAttachmentTextAttribute;		// AXUIElementRef
-extern CFStringRef kAXLinkTextAttribute;		// AXUIElementRef
+extern CFStringRef kAXAttachmentTextAttribute			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// AXUIElementRef
+extern CFStringRef kAXLinkTextAttribute					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// AXUIElementRef
 
-extern CFStringRef kAXNaturalLanguageTextAttribute;	// CFStringRef - the spoken language of the text
-extern CFStringRef kAXReplacementStringTextAttribute;	// CFStringRef
+extern CFStringRef kAXNaturalLanguageTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFStringRef - the spoken language of the text
+extern CFStringRef kAXReplacementStringTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFStringRef
 
-extern CFStringRef kAXMisspelledTextAttribute;		// AXUIElementRef
+extern CFStringRef kAXMisspelledTextAttribute			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// AXUIElementRef
 
 // kAXFontTextAttribute keys
-extern CFStringRef kAXFontNameKey;		// CFStringRef - required
-extern CFStringRef kAXFontFamilyKey;		// CFStringRef - not required
-extern CFStringRef kAXVisibleNameKey;		// CFStringRef - not required
-extern CFStringRef kAXFontSizeKey;		// CFNumberRef - required
+extern CFStringRef kAXFontNameKey						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFStringRef - required
+extern CFStringRef kAXFontFamilyKey						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFStringRef - not required
+extern CFStringRef kAXVisibleNameKey					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFStringRef - not required
+extern CFStringRef kAXFontSizeKey						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFNumberRef - required
 
 enum {
     kAXUnderlineStyleNone	= 0x0,
@@ -49,7 +49,7 @@ typedef UInt32 AXUnderlineStyle;
 
 
 // DO NOT USE. This is an old, misspelled version of one of the above constants.
-extern CFStringRef kAXForegoundColorTextAttribute;	// CGColorRef
+extern CFStringRef kAXForegoundColorTextAttribute		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
 
 #ifdef __cplusplus
 }

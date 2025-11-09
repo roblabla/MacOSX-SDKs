@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-218~113
+     Version:    SearchKit-312~320
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,29 +33,6 @@
 #pragma once
 #endif
 
-/*
- *  kSKLanguageTypes
- *  
- *  Summary:
- *    An array of string objects that specify the languages to use for
- *    indexing.
- *  
- *  Discussion:
- *    The kSKLanguageTypes constant is an optional key in the text
- *    analysis properties dictionary whose corresponding value is an
- *    array of string objects that together specify the languages to
- *    use for indexing. Each string should be a two character ISO 639-1
- *    code indicating a language to use. For example, 'en' for English,
- *    'ja' for Japanese, and so on. If this key is not present,
- *    SearchKit uses the Mac OS X preferences system to determine the
- *    primary language from the user's locale.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kSKLanguageTypes                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 /*
  *  kSKMinTermLength
  *  
@@ -205,6 +182,29 @@ extern const CFStringRef kSKStartTermChars                           AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern const CFStringRef kSKEndTermChars                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kSKLanguageTypes   *** DEPRECATED ***
+ *  
+ *  Summary:
+ *    An array of string objects that specify the languages to use for
+ *    indexing.
+ *  
+ *  Discussion:
+ *    The kSKLanguageTypes constant is an optional key in the text
+ *    analysis properties dictionary whose corresponding value is an
+ *    array of string objects that together specify the languages to
+ *    use for indexing. Each string should be a two character ISO 639-1
+ *    code indicating a language to use. For example, 'en' for English,
+ *    'ja' for Japanese, and so on. If this key is not present,
+ *    SearchKit uses the Mac OS X preferences system to determine the
+ *    primary language from the user's locale.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.4
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kSKLanguageTypes                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 #endif /* __SKANALYSIS__ */

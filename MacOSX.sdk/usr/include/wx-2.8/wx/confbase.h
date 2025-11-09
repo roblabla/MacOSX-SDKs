@@ -2,11 +2,11 @@
 // Name:        confbase.h
 // Purpose:     declaration of the base class of all config implementations
 //              (see also: fileconf.h and msw/regconf.h and iniconf.h)
-// Author:      Karsten Ballüder & Vadim Zeitlin
+// Author:      Karsten Ballueder & Vadim Zeitlin
 // Modified by:
 // Created:     07.04.98 (adapted from appconf.h)
-// RCS-ID:      $Id: confbase.h,v 1.57 2007/01/18 22:38:18 VZ Exp $
-// Copyright:   (c) 1997 Karsten Ballüder   Ballueder@usa.net
+// RCS-ID:      $Id: confbase.h 50711 2007-12-15 02:57:58Z VZ $
+// Copyright:   (c) 1997 Karsten Ballueder   Ballueder@usa.net
 //                       Vadim Zeitlin      <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -17,7 +17,7 @@
 #include "wx/defs.h"
 #include "wx/string.h"
 
-class WXDLLIMPEXP_BASE wxArrayString;
+class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
 // ----------------------------------------------------------------------------
 // constants

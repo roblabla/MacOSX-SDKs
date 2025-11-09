@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from dpms.xml by c-client.xsl using XSLT.
+ * This file generated automatically from dpms.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,6 +13,10 @@
 #define __DPMS_H
 
 #include "xcb.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_DPMS_MAJOR_VERSION 0
 #define XCB_DPMS_MINOR_VERSION 0
@@ -80,6 +84,7 @@ typedef struct xcb_dpms_capable_reply_t {
     uint16_t sequence; /**<  */
     uint32_t length; /**<  */
     uint8_t  capable; /**<  */
+    uint8_t  pad1[23]; /**<  */
 } xcb_dpms_capable_reply_t;
 
 /**
@@ -112,6 +117,7 @@ typedef struct xcb_dpms_get_timeouts_reply_t {
     uint16_t standby_timeout; /**<  */
     uint16_t suspend_timeout; /**<  */
     uint16_t off_timeout; /**<  */
+    uint8_t  pad1[18]; /**<  */
 } xcb_dpms_get_timeouts_reply_t;
 
 /** Opcode for xcb_dpms_set_timeouts. */
@@ -195,6 +201,7 @@ typedef struct xcb_dpms_info_reply_t {
     uint32_t length; /**<  */
     uint16_t power_level; /**<  */
     uint8_t  state; /**<  */
+    uint8_t  pad1[21]; /**<  */
 } xcb_dpms_info_reply_t;
 
 /**
@@ -261,6 +268,8 @@ xcb_dpms_get_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_dpms_get_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -335,6 +344,8 @@ xcb_dpms_capable_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_dpms_capable_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -409,6 +420,8 @@ xcb_dpms_get_timeouts_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_dpms_get_timeouts_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -679,6 +692,8 @@ xcb_dpms_info_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_dpms_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -697,6 +712,10 @@ xcb_dpms_info_reply (xcb_connection_t        *c  /**< */,
                      xcb_dpms_info_cookie_t   cookie  /**< */,
                      xcb_generic_error_t    **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

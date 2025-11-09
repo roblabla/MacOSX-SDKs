@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     04.06.02 (extracted from src/*/thread.cpp files)
-// RCS-ID:      $Id: thrimpl.cpp,v 1.10 2006/10/21 16:06:11 VZ Exp $
+// RCS-ID:      $Id: thrimpl.cpp 42206 2006-10-21 16:06:11Z VZ $
 // Copyright:   (c) Vadim Zeitlin (2002)
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

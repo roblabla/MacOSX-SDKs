@@ -3,9 +3,7 @@
  
      Contains:   AudioUnitCarbonView Interfaces
  
-     Version:    Mac OS X
- 
-     Copyright:  © 2002-2004 by Apple, Inc., all rights reserved.
+     Copyright:  © 2002-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -143,14 +141,14 @@ typedef void
 	@param		outControl
 					The Carbon control which contains the entire user interface for the view.
 */
-extern ComponentResult
+extern OSStatus
 AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 							  AudioUnit             inAudioUnit,
 							  WindowRef             inWindow,
 							  ControlRef            inParentControl,
 							  const Float32Point *  inLocation,
 							  const Float32Point *  inSize,
-							  ControlRef *          outControl)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							  ControlRef *          outControl)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
 	@function	AudioUnitCarbonViewSetEventListener
@@ -166,11 +164,11 @@ AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 					A user data pointer passed to the callback.
 */
 #ifndef __LP64__
-extern ComponentResult
+extern OSStatus
 AudioUnitCarbonViewSetEventListener(	AudioUnitCarbonView                inView,
 										AudioUnitCarbonViewEventListener   inCallback,
 										void *                             inUserData)
-																			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+																			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 #endif
 
 /*!

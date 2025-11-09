@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-402~78
+     Version:    AppleEvents-496.5~1
  
-     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -605,6 +605,10 @@ enum {
 enum {
   typeHIMenu                    = 'mobj',
   typeHIWindow                  = 'wobj'
+};
+
+enum {
+  kAEQuitReason                 = 'why?' /* in a kAEQuitApplication event, this property if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
 };
 
 enum {

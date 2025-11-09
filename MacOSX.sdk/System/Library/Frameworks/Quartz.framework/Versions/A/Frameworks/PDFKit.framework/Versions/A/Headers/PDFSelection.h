@@ -7,7 +7,7 @@
 #import <PDFKit/PDFPage.h>
 
 
-@class PDFPage, PDFDestination, PDFSelectionPrivateVars;
+@class PDFPage, PDFSelectionPrivateVars;
 
 
 @interface PDFSelection : NSObject <NSCopying>

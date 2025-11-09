@@ -3,9 +3,9 @@
  
      Contains:   Interface to API for using the NSL User Interface
  
-     Version:    CommonPanels-87~138
+     Version:    CommonPanels-91~741
  
-     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

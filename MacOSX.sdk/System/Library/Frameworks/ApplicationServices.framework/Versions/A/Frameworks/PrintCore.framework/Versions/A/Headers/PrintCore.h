@@ -3,7 +3,7 @@
  
      Contains:   Printing functions that have no UI
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+	Copyright (c) 2000-2006,2008 Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +44,14 @@
 
 #ifndef __PMPrintAETypes__
 #include <PrintCore/PMPrintAETypes.h>
+#endif
+
+#ifndef __PMPRINTSETTINGSKEYS__
+#include <PrintCore/PMPrintSettingsKeys.h>
+#endif
+
+#ifndef __PMERRORS__
+#include <PrintCore/PMErrors.h>
 #endif
 
 #endif /* __PRINTCORE__ */

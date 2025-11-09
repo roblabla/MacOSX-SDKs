@@ -1,5 +1,5 @@
 /*	FoundationErrors.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,6 +29,9 @@ enum {
     NSFileWriteInapplicableStringEncodingError = 517,       // Write error (string encoding not applicable) also NSStringEncodingErrorKey
     NSFileWriteUnsupportedSchemeError = 518,		    // Write error (unsupported URL scheme)
     NSFileWriteOutOfSpaceError = 640,                       // Write error (out of disk space)
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSFileWriteVolumeReadOnlyError = 642,		    // Write error (readonly volume)
+#endif
 
     // Other errors
     NSKeyValueValidationError = 1024,                       // KVC validation error
@@ -57,7 +60,18 @@ enum {
 #endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
     NSFormattingErrorMinimum = 2048,
-    NSFormattingErrorMaximum = 2559
+    NSFormattingErrorMaximum = 2559,
+    
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSPropertyListReadCorruptError = 3840,                  // Error parsing a property list
+    NSPropertyListReadUnknownVersionError = 3841,           // The version number in the property list is unknown
+    NSPropertyListReadStreamError = 3842,                   // Stream error reading a property list
+    NSPropertyListWriteStreamError = 3851,                  // Stream error writing a property list
+
+    NSPropertyListErrorMinimum = 3840,
+    NSPropertyListErrorMaximum = 4095
+#endif /* MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+    
 };
 
 #endif /* MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED */

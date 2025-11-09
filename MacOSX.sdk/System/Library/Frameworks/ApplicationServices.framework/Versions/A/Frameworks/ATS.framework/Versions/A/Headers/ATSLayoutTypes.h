@@ -3,14 +3,22 @@
  
      Contains:   Apple Type Services layout public structures and constants.
  
-     Version:    ATS-236~129
+     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:00 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                ATSLayoutTypes.i
+                     Revision:        1.5
+                     Dated:           2007/01/15 23:28:25
+                     Last change by:  kurita
+                     Last comment:    <rdar://problem/4916090> updated copyright.
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __ATSLAYOUTTYPES__
@@ -50,7 +58,7 @@ extern "C" {
 enum {
   kATSUseGlyphAdvance           = 0x7FFFFFFF, /* assignment to use natural glyph advance value */
   kATSUseLineHeight             = 0x7FFFFFFF, /* assignment to use natural line ascent/descent values */
-  kATSNoTracking                = (long)0x80000000 /* negativeInfinity */
+  kATSNoTracking                = (int)0x80000000 /* negativeInfinity */
 };
 
 /* --------------------------------------------------------------------------- */

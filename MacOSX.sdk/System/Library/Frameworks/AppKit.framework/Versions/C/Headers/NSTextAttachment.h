@@ -1,13 +1,13 @@
 /* 
-	NSTextAttachment.h
-	Copyright (c) 1994-2007, Apple Inc.
-	All rights reserved.
+        NSTextAttachment.h
+        Copyright (c) 1994-2009, Apple Inc.
+        All rights reserved.
 
-	Classes to represent text attachments.
+        Classes to represent text attachments.
 
-	NSTextAttachment is used to represent text attachments. When inline, text attachments appear as the value of the NSAttachmentAttributeName attached to the special character NSAttachmentCharacter.
+        NSTextAttachment is used to represent text attachments. When inline, text attachments appear as the value of the NSAttachmentAttributeName attached to the special character NSAttachmentCharacter.
 
-	NSTextAttachment uses an object obeying the NSTextAttachmentCell protocol to get input from the user and to display an image.
+        NSTextAttachment uses an object obeying the NSTextAttachmentCell protocol to get input from the user and to display an image.
 
         NSTextAttachmentCell is a simple subclass of NSCell which provides the NSTextAttachment protocol.
 */
@@ -60,7 +60,8 @@ enum {
     id <NSTextAttachmentCell>_cell;
     struct {
         unsigned int cellWasExplicitlySet:1;
-        unsigned int :31;
+        unsigned int ignoresOrientation:1;
+        unsigned int :30;
     } _flags;
 }
 

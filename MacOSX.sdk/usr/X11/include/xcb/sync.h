@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from sync.xml by c-client.xsl using XSLT.
+ * This file generated automatically from sync.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_SYNC_MAJOR_VERSION 3
 #define XCB_SYNC_MINOR_VERSION 0
@@ -61,12 +65,12 @@ typedef enum xcb_sync_valuetype_t {
 } xcb_sync_valuetype_t;
 
 typedef enum xcb_sync_ca_t {
-    XCB_SYNC_CA_COUNTER = (1 << 0),
-    XCB_SYNC_CA_VALUE_TYPE = (1 << 1),
-    XCB_SYNC_CA_VALUE = (1 << 2),
-    XCB_SYNC_CA_TEST_TYPE = (1 << 3),
-    XCB_SYNC_CA_DELTA = (1 << 4),
-    XCB_SYNC_CA_EVENTS = (1 << 5)
+    XCB_SYNC_CA_COUNTER = 1,
+    XCB_SYNC_CA_VALUE_TYPE = 2,
+    XCB_SYNC_CA_VALUE = 4,
+    XCB_SYNC_CA_TEST_TYPE = 8,
+    XCB_SYNC_CA_DELTA = 16,
+    XCB_SYNC_CA_EVENTS = 32
 } xcb_sync_ca_t;
 
 /**
@@ -108,10 +112,10 @@ typedef struct xcb_sync_systemcounter_iterator_t {
  * @brief xcb_sync_trigger_t
  **/
 typedef struct xcb_sync_trigger_t {
-    xcb_sync_counter_t   counter; /**<  */
-    xcb_sync_valuetype_t wait_type; /**<  */
-    xcb_sync_int64_t     wait_value; /**<  */
-    xcb_sync_testtype_t  test_type; /**<  */
+    xcb_sync_counter_t counter; /**<  */
+    uint32_t           wait_type; /**<  */
+    xcb_sync_int64_t   wait_value; /**<  */
+    uint32_t           test_type; /**<  */
 } xcb_sync_trigger_t;
 
 /**
@@ -201,6 +205,7 @@ typedef struct xcb_sync_initialize_reply_t {
     uint32_t length; /**<  */
     uint8_t  major_version; /**<  */
     uint8_t  minor_version; /**<  */
+    uint8_t  pad1[22]; /**<  */
 } xcb_sync_initialize_reply_t;
 
 /**
@@ -397,14 +402,15 @@ typedef struct xcb_sync_query_alarm_request_t {
  * @brief xcb_sync_query_alarm_reply_t
  **/
 typedef struct xcb_sync_query_alarm_reply_t {
-    uint8_t               response_type; /**<  */
-    uint8_t               pad0; /**<  */
-    uint16_t              sequence; /**<  */
-    uint32_t              length; /**<  */
-    xcb_sync_trigger_t    trigger; /**<  */
-    xcb_sync_int64_t      delta; /**<  */
-    uint8_t               events; /**<  */
-    xcb_sync_alarmstate_t state; /**<  */
+    uint8_t            response_type; /**<  */
+    uint8_t            pad0; /**<  */
+    uint16_t           sequence; /**<  */
+    uint32_t           length; /**<  */
+    xcb_sync_trigger_t trigger; /**<  */
+    xcb_sync_int64_t   delta; /**<  */
+    uint8_t            events; /**<  */
+    uint8_t            state; /**<  */
+    uint8_t            pad1[2]; /**<  */
 } xcb_sync_query_alarm_reply_t;
 
 /** Opcode for xcb_sync_set_priority. */
@@ -468,6 +474,7 @@ typedef struct xcb_sync_counter_notify_event_t {
     xcb_timestamp_t    timestamp; /**<  */
     uint16_t           count; /**<  */
     uint8_t            destroyed; /**<  */
+    uint8_t            pad0; /**<  */
 } xcb_sync_counter_notify_event_t;
 
 /** Opcode for xcb_sync_alarm_notify. */
@@ -618,14 +625,14 @@ xcb_sync_int64_end (xcb_sync_int64_iterator_t i  /**< */);
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_sync_systemcounter_name
+ ** char * xcb_sync_systemcounter_name
  ** 
  ** @param const xcb_sync_systemcounter_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_sync_systemcounter_name (const xcb_sync_systemcounter_t *R  /**< */);
 
 
@@ -847,6 +854,8 @@ xcb_sync_initialize_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_sync_initialize_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -947,6 +956,8 @@ xcb_sync_list_system_counters_counters_iterator (const xcb_sync_list_system_coun
  * The parameter @p e supplied to this function must be NULL if
  * xcb_sync_list_system_counters_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1127,6 +1138,8 @@ xcb_sync_query_counter_unchecked (xcb_connection_t   *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_sync_query_counter_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1527,6 +1540,8 @@ xcb_sync_query_alarm_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_sync_query_alarm_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1658,6 +1673,8 @@ xcb_sync_get_priority_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_sync_get_priority_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1676,6 +1693,10 @@ xcb_sync_get_priority_reply (xcb_connection_t                *c  /**< */,
                              xcb_sync_get_priority_cookie_t   cookie  /**< */,
                              xcb_generic_error_t            **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

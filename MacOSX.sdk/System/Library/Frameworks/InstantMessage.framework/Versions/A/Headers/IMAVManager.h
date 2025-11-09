@@ -5,7 +5,7 @@
 //
 
 /*! @header
-    @discussion The IMAVManager API allows clients to share audio and video content through confenences
+    @discussion The IMAVManager API allows clients to share audio and video content through conferences
                 with other buddies in iChat AV.
 */
 
@@ -13,6 +13,7 @@
 #import <CoreVideo/CVPixelBuffer.h>
 #import <CoreVideo/CVOpenGLBuffer.h>
 #import <InstantMessage/IMService.h>
+#import <InstantMessage/IMAVControl.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
@@ -173,6 +174,17 @@ typedef NSUInteger IMVideoOptimizationOptions;
  @result An array of NSNumbers identifying the channels to use. If two channels were requested, they correspond to the left and right channels, in that order.
 */
 - (NSArray *) audioDeviceChannels;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+/*! 
+ @method controlBar
+ @abstract The control bar configured for use with an IMAVManager.
+ @result The control bar.
+ */
+- (IMAVControlBar *) controlBar;
+
+#endif
 
 /*! 
     @method start

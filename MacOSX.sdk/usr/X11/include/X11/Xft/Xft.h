@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Copyright © 2000 Keith Packard
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
@@ -33,7 +31,7 @@
 
 #define XFT_MAJOR	2
 #define XFT_MINOR	1
-#define XFT_REVISION	12
+#define XFT_REVISION	13
 #define XFT_VERSION	((XFT_MAJOR * 10000) + (XFT_MINOR * 100) + (XFT_REVISION))
 #define XftVersion	XFT_VERSION
 

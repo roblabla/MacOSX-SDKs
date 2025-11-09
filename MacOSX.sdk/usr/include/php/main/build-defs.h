@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: build-defs.h.in,v 1.15.2.2.2.2 2007/07/15 15:10:04 jani Exp $ */
+/* $Id: build-defs.h.in 292156 2009-12-15 11:17:47Z jani $ */
 
-#define CONFIGURE_COMMAND " '/SourceCache/apache_mod_php/apache_mod_php-44.1/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--with-apxs2=/usr/sbin/apxs' '--with-ldap=/usr' '--with-kerberos=/usr' '--enable-cli' '--with-zlib-dir=/usr' '--enable-trans-sid' '--with-xml' '--enable-exif' '--enable-ftp' '--enable-mbstring' '--enable-mbregex' '--enable-dbx' '--enable-sockets' '--with-iodbc=/usr' '--with-curl=/usr' '--with-config-file-path=/etc' '--sysconfdir=/private/etc' '--with-mysql-sock=/var/mysql' '--with-mysqli=/usr/bin/mysql_config' '--with-mysql=/usr' '--with-openssl' '--with-xmlrpc' '--with-xsl=/usr' '--without-pear'"
+#define CONFIGURE_COMMAND " '/var/tmp/apache_mod_php/apache_mod_php-53.4~2/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/private/etc' '--with-apxs2=/usr/sbin/apxs' '--enable-cli' '--with-config-file-path=/etc' '--with-libxml-dir=/usr' '--with-openssl=/usr' '--with-kerberos=/usr' '--with-zlib=/usr' '--enable-bcmath' '--with-bz2=/usr' '--enable-calendar' '--with-curl=/usr' '--enable-exif' '--enable-ftp' '--with-gd' '--with-jpeg-dir=/usr/local' '--with-png-dir=/usr/local' '--enable-gd-native-ttf' '--with-ldap=/usr' '--with-ldap-sasl=/usr' '--enable-mbstring' '--enable-mbregex' '--with-mysql=mysqlnd' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/mysql/mysql.sock' '--with-iodbc=/usr' '--enable-shmop' '--with-snmp=/usr' '--enable-soap' '--enable-sockets' '--enable-sysvmsg' '--enable-sysvsem' '--enable-sysvshm' '--enable-wddx' '--with-xmlrpc' '--with-iconv-dir=/usr' '--with-xsl=/usr' '--enable-zend-multibyte' '--enable-zip' '--with-pcre-regex=/usr'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
@@ -44,16 +44,16 @@
 #define PHP_MSQL_INCLUDE	""
 #define PHP_MSQL_LFLAGS		""
 #define PHP_MSQL_LIBS		""
-#define PHP_MYSQL_INCLUDE	"-I/usr/include/mysql"
-#define PHP_MYSQL_LIBS		"-L/usr/lib/mysql -lmysqlclient "
-#define PHP_MYSQL_TYPE		"external"
+#define PHP_MYSQL_INCLUDE	""
+#define PHP_MYSQL_LIBS		""
+#define PHP_MYSQL_TYPE		""
 #define PHP_ODBC_INCLUDE	"-I/usr/include"
 #define PHP_ODBC_LFLAGS		"-L/usr/lib"
 #define PHP_ODBC_LIBS		"-liodbc"
 #define PHP_ODBC_TYPE		"iodbc"
 #define PHP_OCI8_SHARED_LIBADD 	""
 #define PHP_OCI8_DIR			""
-#define PHP_OCI8_VERSION		""
+#define PHP_OCI8_ORACLE_VERSION		""
 #define PHP_ORACLE_SHARED_LIBADD 	"@ORACLE_SHARED_LIBADD@"
 #define PHP_ORACLE_DIR				"@ORACLE_DIR@"
 #define PHP_ORACLE_VERSION			"@ORACLE_VERSION@"
@@ -75,11 +75,12 @@
 #define PHP_LDAP_LIBS		""
 #define PHP_BIRDSTEP_INCLUDE     ""
 #define PHP_BIRDSTEP_LIBS        ""
-#define PEAR_INSTALLDIR         ""
-#define PHP_INCLUDE_PATH	".:"
-#define PHP_EXTENSION_DIR       "/usr/lib/php/extensions/no-debug-non-zts-20060613"
+#define PEAR_INSTALLDIR         "/usr/lib/php"
+#define PHP_INCLUDE_PATH	".:/usr/lib/php"
+#define PHP_EXTENSION_DIR       "/usr/lib/php/extensions/no-debug-non-zts-20090626"
 #define PHP_PREFIX              "/usr"
 #define PHP_BINDIR              "/usr/bin"
+#define PHP_SBINDIR             "/usr/sbin"
 #define PHP_LIBDIR              "/usr/lib/php"
 #define PHP_DATADIR             "/usr/share/php"
 #define PHP_SYSCONFDIR          "/private/etc"

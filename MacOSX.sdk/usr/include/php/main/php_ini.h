@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ini.h,v 1.45.2.3.2.4 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_ini.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_INI_H
 #define PHP_INI_H
@@ -24,13 +24,21 @@
 #include "zend_ini.h"
 
 BEGIN_EXTERN_C()
+PHPAPI void config_zval_dtor(zval *zvalue);
 int php_init_config(TSRMLS_D);
 int php_shutdown_config(void);
 void php_ini_register_extensions(TSRMLS_D);
-PHPAPI zval *cfg_get_entry(char *name, uint name_length);
-PHPAPI int cfg_get_long(char *varname, long *result);
-PHPAPI int cfg_get_double(char *varname, double *result);
-PHPAPI int cfg_get_string(char *varname, char **result);
+PHPAPI zval *cfg_get_entry(const char *name, uint name_length);
+PHPAPI int cfg_get_long(const char *varname, long *result);
+PHPAPI int cfg_get_double(const char *varname, double *result);
+PHPAPI int cfg_get_string(const char *varname, char **result);
+PHPAPI int php_parse_user_ini_file(const char *dirname, char *ini_filename, HashTable *target_hash TSRMLS_DC);
+PHPAPI void php_ini_activate_config(HashTable *source_hash, int modify_type, int stage TSRMLS_DC);
+PHPAPI int php_ini_has_per_dir_config(void);
+PHPAPI int php_ini_has_per_host_config(void);
+PHPAPI void php_ini_activate_per_dir_config(char *path, uint path_len TSRMLS_DC);
+PHPAPI void php_ini_activate_per_host_config(const char *host, uint host_len TSRMLS_DC);
+PHPAPI HashTable* php_ini_get_configuration_hash(void);
 END_EXTERN_C()
 
 #define PHP_INI_USER	ZEND_INI_USER

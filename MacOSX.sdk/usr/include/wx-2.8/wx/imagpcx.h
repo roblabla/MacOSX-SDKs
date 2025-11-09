@@ -2,7 +2,7 @@
 // Name:        imagpcx.h
 // Purpose:     wxImage PCX handler
 // Author:      Guillermo Rodriguez Garcia <guille@iies.es>
-// RCS-ID:      $Id: imagpcx.h,v 1.10 2006/02/08 21:44:23 VZ Exp $
+// RCS-ID:      $Id: imagpcx.h 37393 2006-02-08 21:47:09Z VZ $
 // Copyright:   (c) 1999 Guillermo Rodriguez Garcia
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

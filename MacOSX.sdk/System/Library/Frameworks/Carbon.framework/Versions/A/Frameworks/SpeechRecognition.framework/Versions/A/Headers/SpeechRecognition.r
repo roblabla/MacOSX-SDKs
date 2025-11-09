@@ -3,9 +3,9 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Version:    SpeechRecognition-3.7.24~110
+     Version:    SpeechRecognition-3.11.1~16
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

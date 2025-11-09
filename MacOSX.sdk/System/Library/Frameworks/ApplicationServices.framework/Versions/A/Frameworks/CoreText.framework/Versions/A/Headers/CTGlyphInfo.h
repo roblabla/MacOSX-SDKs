@@ -2,9 +2,17 @@
  *	CTGlyphInfo.h
  *	CoreText
  *
- *	Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2008 Apple Inc. All rights reserved.
  *
  */
+
+/*!
+    @header
+
+    Thread Safety Information
+
+    All functions in this header are thread safe unless otherwise specified.
+*/
 
 #ifndef __CTGLYPHINFO__
 #define __CTGLYPHINFO__
@@ -108,8 +116,8 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 	@discussion This function creates an immutable glyph info object for a glyph
 				index and a specified font.
 
-	@param		glyphName
-				The name of the glyph.
+	@param		glyph
+				The glyph identifier.
 
 	@param		font
 				The font to be associated with the returned CTGlyphInfo object.

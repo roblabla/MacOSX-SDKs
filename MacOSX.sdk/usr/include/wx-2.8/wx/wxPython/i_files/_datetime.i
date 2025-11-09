@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     25-Nov-1998
-// RCS-ID:      $Id: _datetime.i,v 1.29.2.1 2007/04/24 20:42:17 RD Exp $
+// RCS-ID:      $Id: _datetime.i 49752 2007-11-09 17:05:51Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -347,9 +347,10 @@ public:
 
         // returns the number of days in this year (356 or 355 for Gregorian
         // calendar usually :-)
-    %Rename(GetNumberOfDaysinYear, 
+    %Rename(GetNumberOfDaysInYear, 
         static wxDateTime_t, GetNumberOfDays(int year, Calendar cal = Gregorian));
-
+    %pythoncode { GetNumberOfDaysinYear = GetNumberOfDaysInYear # for compatibility }
+    
         // get the number of the days in the given month (default value for
         // the year means the current one)
     %Rename(GetNumberOfDaysInMonth, 

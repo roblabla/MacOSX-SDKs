@@ -3,7 +3,7 @@
 // Purpose:     XML resource handler for wxBoxSizer
 // Author:      Vaclav Slavik
 // Created:     2000/04/24
-// RCS-ID:      $Id: xh_sizer.h,v 1.12 2007/01/18 18:27:51 VS Exp $
+// RCS-ID:      $Id: xh_sizer.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2000 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@
 #include "wx/sizer.h"
 #include "wx/gbsizer.h"
 
-class WXDLLEXPORT wxSizer;
+class WXDLLIMPEXP_FWD_CORE wxSizer;
 
 class WXDLLIMPEXP_XRC wxSizerXmlHandler : public wxXmlResourceHandler
 {

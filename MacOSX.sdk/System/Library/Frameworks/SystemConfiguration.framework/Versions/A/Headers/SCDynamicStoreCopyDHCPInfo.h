@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001, 2002, 2004, 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2001, 2002, 2004, 2005, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _SCDYNAMICSTORECOPYDHCPINFO_H
 #define _SCDYNAMICSTORECOPYDHCPINFO_H
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SCDynamicStore.h>
@@ -56,7 +57,8 @@ __BEGIN_DECLS
 		A non-NULL return value must be released using CFRelease().
  */
 CFDictionaryRef
-SCDynamicStoreCopyDHCPInfo(SCDynamicStoreRef store, CFStringRef serviceID);
+SCDynamicStoreCopyDHCPInfo	(SCDynamicStoreRef	store,
+				 CFStringRef		serviceID)	__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function DHCPInfoGetOptionData
@@ -72,7 +74,8 @@ SCDynamicStoreCopyDHCPInfo(SCDynamicStoreRef store, CFStringRef serviceID);
 		The return value must NOT be released.
  */
 CFDataRef
-DHCPInfoGetOptionData(CFDictionaryRef info, UInt8 code);
+DHCPInfoGetOptionData		(CFDictionaryRef	info,
+				 UInt8			code)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function DHCPInfoGetLeaseStartTime
@@ -87,8 +90,8 @@ DHCPInfoGetOptionData(CFDictionaryRef info, UInt8 code);
 		The return value must NOT be released.
  */
 CFDateRef
-DHCPInfoGetLeaseStartTime(CFDictionaryRef info);
+DHCPInfoGetLeaseStartTime	(CFDictionaryRef	info)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
 
-#endif /* _SCDYNAMICSTORECOPYDHCPINFO_H */
+#endif	/* _SCDYNAMICSTORECOPYDHCPINFO_H */

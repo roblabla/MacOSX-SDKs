@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     17.07.02
-// RCS-ID:      $Id: msgout.h,v 1.17 2005/09/25 20:23:21 VZ Exp $
+// RCS-ID:      $Id: msgout.h 35690 2005-09-25 20:23:30Z VZ $
 // Copyright:   (c) Mattia Barbon
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

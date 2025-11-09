@@ -4,7 +4,7 @@
  * Author:      Joel Farley, Ove Kåven
  * Modified by: Vadim Zeitlin, Robert Roebling, Ron Lee
  * Created:     1998/06/12
- * RCS-ID:      $Id: wxchar.h,v 1.207.2.1 2007/04/13 14:13:47 VZ Exp $
+ * RCS-ID:      $Id: wxchar.h 50987 2008-01-02 16:31:38Z VZ $
  * Copyright:   (c) 1998-2006 wxWidgets dev team
  * Licence:     wxWindows licence
  */
@@ -251,6 +251,9 @@
 /* and _() in wxWidgets sources */
 #define wxT(x)       _T(x)
 
+/* this macro exists only for forward compatibility with wx 3.0 */
+#define wxS(x)       _T(x)
+
 /* a helper macro allowing to make another macro Unicode-friendly, see below */
 #define wxAPPLY_T(x) _T(x)
 
@@ -369,6 +372,14 @@
             int wxSprintf (wchar_t * __RESTRICT s, const wchar_t * __RESTRICT format, ... ) ;
         #else
             /* and there is a bug in D Mars tchar.h prior to 8.39.4n, so define as sprintf */
+            #define wxSprintf sprintf
+        #endif
+    #elif defined(__MINGW32__) && ( defined(_STLPORT_VERSION) && _STLPORT_VERSION >= 0x510 )
+        #if wxUSE_UNICODE
+            /* MinGW with STLPort 5.1 adds count to swprintf (C99) so prototype conversion see wxchar.cpp */
+            int wxSprintf (wchar_t*, const wchar_t*, ...);
+        #else
+            /* MinGW with STLPort 5.1 has clashing defines for _stprintf so use sprintf */
             #define wxSprintf sprintf
         #endif
     #else
@@ -887,9 +898,10 @@ WXDLLIMPEXP_BASE bool wxOKlibc(); /* for internal use */
 
 /*
    MinGW MSVCRT has non-standard vswprintf() (for MSVC compatibility
-   presumably) and normally _vsnwprintf() is used instead
+   presumably) and normally _vsnwprintf() is used instead (but as
+   STLPort 5.1 defines standard vswprintf(), don't do this for it)
  */
-#if defined(HAVE_VSWPRINTF) && defined(__MINGW32__)
+#if defined(HAVE_VSWPRINTF) && defined(__MINGW32__) && !( defined(_STLPORT_VERSION) && _STLPORT_VERSION >= 0x510 )
     #undef HAVE_VSWPRINTF
 #endif
 
@@ -1218,10 +1230,22 @@ WXDLLIMPEXP_BASE wxWCharBuffer wxSetlocale(int category, const wxChar *locale);
 WXDLLIMPEXP_BASE double   wxAtof(const wxChar *psz);
 #endif
 
+/*
+   mingw32 doesn't provide _tsystem() even though it does provide all the other
+   stdlib.h functions wrappers so check for it separately:
+ */
+#if defined(__MINGW32__) && wxUSE_UNICODE && !defined(_tsystem)
+    #define wxNEED_WXSYSTEM
+#endif
+
 #ifdef wxNEED_WX_STDLIB_H
 WXDLLIMPEXP_BASE int      wxAtoi(const wxChar *psz);
 WXDLLIMPEXP_BASE long     wxAtol(const wxChar *psz);
 WXDLLIMPEXP_BASE wxChar * wxGetenv(const wxChar *name);
+#define wxNEED_WXSYSTEM
+#endif
+
+#ifdef wxNEED_WXSYSTEM
 WXDLLIMPEXP_BASE int      wxSystem(const wxChar *psz);
 #endif
 
@@ -1296,9 +1320,8 @@ WXDLLIMPEXP_BASE void *calloc( size_t num, size_t size );
     //  (including even MSC) inline them just like we do right in their
     //  headers.
     //
+    #include <string.h>
     #if wxUSE_UNICODE
-        #include <string.h> //for mem funcs
-
         //implement our own wmem variants
         inline wxChar* wxTmemchr(const wxChar* s, wxChar c, size_t l)
         {
@@ -1338,13 +1361,29 @@ WXDLLIMPEXP_BASE void *calloc( size_t num, size_t size );
 
             return szRet;
         }
-
     #else /* !wxUSE_UNICODE */
-    #   define wxTmemchr memchr
-    #   define wxTmemcmp memcmp
-    #   define wxTmemcpy memcpy
-    #   define wxTmemmove memmove
-    #   define wxTmemset memset
+        #if wxABI_VERSION >= 20805
+            // for compatibility with earlier versions, these functions take
+            // "void *" but in the next wx version they will take "char *" so
+            // don't use them with void pointers (use the standard memxxx()
+            // with them)
+            inline char* wxTmemchr(const void* s, int c, size_t len)
+                { return (char*)memchr(s, c, len); }
+            inline int wxTmemcmp(const void* sz1, const void* sz2, size_t len)
+                { return memcmp(sz1, sz2, len); }
+            inline char* wxTmemcpy(void* szOut, const void* szIn, size_t len)
+                { return (char*)memcpy(szOut, szIn, len); }
+            inline char* wxTmemmove(void* szOut, const void* szIn, size_t len)
+                { return (char*)memmove(szOut, szIn, len); }
+            inline char* wxTmemset(void* szOut, int c, size_t len)
+                { return (char*)memset(szOut, c, len); }
+        #else
+        #   define wxTmemchr memchr
+        #   define wxTmemcmp memcmp
+        #   define wxTmemcpy memcpy
+        #   define wxTmemmove memmove
+        #   define wxTmemset memset
+        #endif
     #endif /* wxUSE_UNICODE/!wxUSE_UNICODE */
 
 #endif /*__cplusplus*/

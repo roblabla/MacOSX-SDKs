@@ -71,7 +71,6 @@
 #include <sys/resource.h>
 #include <sys/ucred.h>
 #include <sys/uio.h>
-#include <sys/resourcevar.h>
 #include <sys/vm.h>		/* XXX */
 #include <sys/sysctl.h>
  

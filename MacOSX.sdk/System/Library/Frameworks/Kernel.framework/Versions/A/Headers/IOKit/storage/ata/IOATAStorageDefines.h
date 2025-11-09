@@ -24,7 +24,12 @@
 #ifndef _IOKIT_IO_ATA_STORAGE_DEFINES_H_
 #define _IOKIT_IO_ATA_STORAGE_DEFINES_H_
 
+#include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
 /*
  * Important word offsets in device identify data as
  * defined in ATA-5 standard
@@ -291,9 +296,7 @@ enum
 };
 
 
-#if defined(KERNEL) && defined(__cplusplus)
-
-typedef UInt32	ATAOperationType;
+typedef uint32_t	ATAOperationType;
 enum
 {
 	kATAOperationTypeRead				= 0,
@@ -305,9 +308,14 @@ enum
 	kATAOperationTypeSMS				= 6
 };
 
+#if defined(KERNEL)
+
 typedef struct __ATAIORequest *	ATARequestIdentifier;
 
-
-#endif	/* defined(KERNEL) && defined(__cplusplus) */
+#endif	// defined(KERNEL)
+	
+#ifdef __cplusplus
+}
+#endif
 
 #endif	/* _IOKIT_IO_ATA_STORAGE_DEFINES_H_ */

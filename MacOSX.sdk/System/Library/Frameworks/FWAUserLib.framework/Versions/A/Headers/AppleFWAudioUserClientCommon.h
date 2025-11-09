@@ -139,7 +139,7 @@ typedef void (*FWAStreamNotificationProc)(UInt32 isochStreamRef, void* refCon);
 
 // Moved to AppleFWAudioUserLib.cpp
 // update this with the version of the driver in xxxx.xxxx
-extern const UInt32 kFWADeviceStatusCurrentVersion;
+#define  kFWADeviceStatusCurrentVersion (CURRENT_DEVICE_STATUS_VERSION)
 
 typedef struct FWADeviceStatus
 {

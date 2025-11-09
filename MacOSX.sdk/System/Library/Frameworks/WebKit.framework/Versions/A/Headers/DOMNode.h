@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,9 +25,12 @@
  */
 
 #import <WebKit/DOMObject.h>
+#import <WebKit/DOMEventTarget.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMDocument;
+@class DOMElement;
 @class DOMNamedNodeMap;
 @class DOMNode;
 @class DOMNodeList;
@@ -45,10 +48,16 @@ enum {
     DOM_DOCUMENT_NODE = 9,
     DOM_DOCUMENT_TYPE_NODE = 10,
     DOM_DOCUMENT_FRAGMENT_NODE = 11,
-    DOM_NOTATION_NODE = 12
+    DOM_NOTATION_NODE = 12,
+    DOM_DOCUMENT_POSITION_DISCONNECTED = 0x01,
+    DOM_DOCUMENT_POSITION_PRECEDING = 0x02,
+    DOM_DOCUMENT_POSITION_FOLLOWING = 0x04,
+    DOM_DOCUMENT_POSITION_CONTAINS = 0x08,
+    DOM_DOCUMENT_POSITION_CONTAINED_BY = 0x10,
+    DOM_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20
 };
 
-@interface DOMNode : DOMObject
+@interface DOMNode : DOMObject <DOMEventTarget>
 @property(readonly, copy) NSString *nodeName;
 @property(copy) NSString *nodeValue;
 @property(readonly) unsigned short nodeType;
@@ -63,23 +72,32 @@ enum {
 @property(readonly, copy) NSString *namespaceURI;
 @property(copy) NSString *prefix;
 @property(readonly, copy) NSString *localName;
-@property(copy) NSString *textContent;
+@property(readonly, copy) NSString *baseURI AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *textContent AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly, retain) DOMElement *parentElement AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) BOOL isContentEditable AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 
-- (DOMNode *)insertBefore:(DOMNode *)newChild refChild:(DOMNode *)refChild;
-- (DOMNode *)replaceChild:(DOMNode *)newChild oldChild:(DOMNode *)oldChild;
+- (DOMNode *)insertBefore:(DOMNode *)newChild refChild:(DOMNode *)refChild AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (DOMNode *)replaceChild:(DOMNode *)newChild oldChild:(DOMNode *)oldChild AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (DOMNode *)removeChild:(DOMNode *)oldChild;
 - (DOMNode *)appendChild:(DOMNode *)newChild;
 - (BOOL)hasChildNodes;
 - (DOMNode *)cloneNode:(BOOL)deep;
 - (void)normalize;
-- (BOOL)isSupported:(NSString *)feature version:(NSString *)version;
+- (BOOL)isSupported:(NSString *)feature version:(NSString *)version AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (BOOL)hasAttributes;
-- (BOOL)isSameNode:(DOMNode *)other;
-- (BOOL)isEqualNode:(DOMNode *)other;
+- (BOOL)isSameNode:(DOMNode *)other AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (BOOL)isEqualNode:(DOMNode *)other AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (NSString *)lookupPrefix:(NSString *)namespaceURI AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (BOOL)isDefaultNamespace:(NSString *)namespaceURI AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (NSString *)lookupNamespaceURI:(NSString *)prefix AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (unsigned short)compareDocumentPosition:(DOMNode *)other AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
 
 @interface DOMNode (DOMNodeDeprecated)
-- (DOMNode *)insertBefore:(DOMNode *)newChild :(DOMNode *)refChild DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (DOMNode *)replaceChild:(DOMNode *)newChild :(DOMNode *)oldChild DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)isSupported:(NSString *)feature :(NSString *)version DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (DOMNode *)insertBefore:(DOMNode *)newChild :(DOMNode *)refChild AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (DOMNode *)replaceChild:(DOMNode *)newChild :(DOMNode *)oldChild AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (BOOL)isSupported:(NSString *)feature :(NSString *)version AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

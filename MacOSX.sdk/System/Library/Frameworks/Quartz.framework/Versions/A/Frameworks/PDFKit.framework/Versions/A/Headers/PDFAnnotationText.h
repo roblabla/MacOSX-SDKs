@@ -40,4 +40,3 @@ enum
 - (PDFTextAnnotationIconType) iconType;
 - (void) setIconType: (PDFTextAnnotationIconType) type;
 @end
-

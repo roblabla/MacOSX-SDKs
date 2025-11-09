@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     11-Nov-2006
-// RCS-ID:      $Id: combo.i,v 1.5 2006/11/21 03:34:44 RD Exp $
+// RCS-ID:      $Id: combo.i 46284 2007-06-02 23:46:36Z RD $
 // Copyright:   (c) 2006 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -705,6 +705,7 @@ Nearly all of the methods of this class are overridable in Python.", "");
 
 MustHaveApp(wxPyComboPopup);
 %rename(ComboPopup) wxPyComboPopup;
+%typemap(out) wxPyComboCtrl*  { $result = wxPyMake_wxObject($1, (bool)$owner); }
 
 class wxPyComboPopup
 {
@@ -842,7 +843,6 @@ implementation returns ``False``.", "");
 is associated with.", "");
 
 };
-
 
 
 //---------------------------------------------------------------------------

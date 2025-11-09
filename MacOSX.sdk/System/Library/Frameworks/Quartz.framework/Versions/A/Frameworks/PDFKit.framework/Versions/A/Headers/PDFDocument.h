@@ -18,6 +18,15 @@ enum
     kPDFPrintPageScaleDownToFit = 2
 };
 
+// Document permissions status. For encrypted PDF's, supplying the owner password will enable owner permission status.
+typedef NSInteger PDFDocumentPermissions;
+enum
+{
+	kPDFDocumentPermissionsNone = 0, 
+	kPDFDocumentPermissionsUser = 1, 
+	kPDFDocumentPermissionsOwner = 2
+};
+
 
 // Notifications.
 extern NSString *PDFDocumentDidUnlockNotification;			// The notification object is self.
@@ -71,6 +80,10 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // May return NULL if the document was created from NSData.
 - (NSURL *) documentURL;
 
+// This is the CGPDFDocument associated with the PDFDocument object.  With this object you can call many CoreGraphics 
+// API. May return NULL if the document was not created from an existing PDF file or data.
+- (CGPDFDocumentRef) documentRef;
+
 // Returns a dictionary with PDF metadata. Metadata is optional for PDF's and so some of the keys may be missing or the 
 // entire dictionary may be empty.  See attributes above for keys.
 - (NSDictionary *) documentAttributes;
@@ -98,6 +111,15 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 - (BOOL) allowsPrinting;
 - (BOOL) allowsCopying;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+// Returns the permissions status of the PDF document. You have kPDFDocumentPermissionsNone status for an encrypted 
+// document that you have not supplied either a valid user or owner password. For a document with no encryption, you 
+// automatically have kPDFDocumentPermissionsOwner status.
+- (PDFDocumentPermissions) permissionsStatus;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
 // Convenience method. Returns a string representing the entire document (each page's string concatenated with line 
 // feeds between pages).
 - (NSString *) string;
@@ -109,7 +131,12 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 
 // Methods to record the current state of the PDFDocument as data or a file.  Passing a QuartzFilter object in the 
 // options dictionary with the key @"QuartzFilter" will allow you to have the filter applied when saving the PDF.
+// NOTE: Versions of PDFKit before SnowLeopard did not return autorelease data for -[dataRepresentation]. You had to 
+// release the data yourself.  Beginning with apps compiled on SnowLeopard the data returned is autoreleased.
 - (NSData *) dataRepresentation;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (NSData *) dataRepresentationWithOptions: (NSDictionary *) options;
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 - (BOOL) writeToFile: (NSString *) path;
 - (BOOL) writeToFile: (NSString *) path withOptions: (NSDictionary *) options;
 - (BOOL) writeToURL: (NSURL *) url;
@@ -232,4 +259,17 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // If implemented by the delegate, called for every search instance found during a find. PDFDocument's implementation 
 // accumulates each PDFSelection (instance) in an NSArray.
 - (void) didMatchString: (PDFSelection *) instance;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+// If implemented by the delegate, will be called when a PDFPage is instantiated. PDFDocument's implementation calls
+// -[PDFDocument pageClass] (see above). 
+- (Class) classForPage;
+
+// If implemented by the delegate, will be called when a PDFAnnotation is instantiated by a page. PDFPage by default 
+// will instantiate object of class. This allows you to instead return your own PDFAnnotationXxxx subclass.
+- (Class) classForAnnotationClass: (Class) annotationClass;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
 @end

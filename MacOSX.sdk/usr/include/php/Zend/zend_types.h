@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_types.h,v 1.6.2.2.2.4 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_types.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_TYPES_H
 #define ZEND_TYPES_H
@@ -27,6 +27,20 @@ typedef unsigned char zend_uchar;
 typedef unsigned int zend_uint;
 typedef unsigned long zend_ulong;
 typedef unsigned short zend_ushort;
+
+#define HAVE_ZEND_LONG64
+#ifdef ZEND_WIN32
+typedef __int64 zend_long64;
+typedef unsigned __int64 zend_ulong64;
+#elif SIZEOF_LONG_LONG_INT == 8
+typedef long long int zend_long64;
+typedef unsigned long long int zend_ulong64;
+#elif SIZEOF_LONG_LONG == 8
+typedef long long zend_long64;
+typedef unsigned long long zend_ulong64;
+#else
+# undef HAVE_ZEND_LONG64
+#endif
 
 #ifdef _WIN64
 typedef __int64 zend_intptr_t;

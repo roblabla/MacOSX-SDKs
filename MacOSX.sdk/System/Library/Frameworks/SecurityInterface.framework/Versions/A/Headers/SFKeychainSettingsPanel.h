@@ -32,6 +32,7 @@
     IBOutlet NSButton *_cancelButton;	
     IBOutlet NSButton *_saveButton;	
     IBOutlet NSWindow *_panel;
+    IBOutlet NSTextField *_syncStateMessage;
     NSString *_keychainNameStr;
     NSWindow *_parentWindowForSheet;	
     SEL _clientDidEndSelector;

@@ -1,60 +1,57 @@
-/*
- *  CGSession.h
- *  CoreGraphics
- *
- *  Copyright (c) 2003 Apple Computer, Inc. All rights reserved.
- *
- */
-#ifndef __CGSESSION_H__
-#define __CGSESSION_H__ 1
+/* CoreGraphics - CGSession.h
+   Copyright (c) 2003-2008 Apple Inc.
+   All rights reserved. */
+
+#ifndef CGSESSION_H_
+#define CGSESSION_H_
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CoreFoundation.h>
 
-CG_EXTERN_C_BEGIN
+/* Return a window server session dictionary, or NULL if the caller is not
+   running within a Quartz GUI session or the window server is disabled. You
+   should release the dictionary when you are finished using it. */
 
-/*
- * Fetch the current session's dictionary
- * Returns NULL if the caller is not within a GUI session, as when the caller is a UNIX daemon,
- * or if a system is configured to not run a Quartz GUI (window server disabled)
- */
-CG_EXTERN CFDictionaryRef CGSessionCopyCurrentDictionary(void)  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CFDictionaryRef CGSessionCopyCurrentDictionary(void)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
-/*
- * Predefined keys for the Session dictionaries
- * Values are provided as CFSTR() macros rather than extern C data for PEF/CFM support.
- * Constant values will remain unchanged in future releases for PEF/CFM compatibility.
- *
- * These keys are guaranteed by the system to be present in a session dictionary
- * once a user is logged in.  Prior to login only the kCGSessionLoginDoneKey,
- * kCGSessionOnConsoleKey, and kCGSessionConsoleSetKey will be present.
- * Additional keys and values may be defined and added to the dictionary by
- * other system components as needed.
- */
+/* Keys for window server session dictionaries. */
+
+/* The user ID for the session's current user, specified as a CFNumber
+   32-bit unsigned integer value. */
+
 #define kCGSessionUserIDKey		CFSTR("kCGSSessionUserIDKey")
-        /* value is a CFNumber encoding a uid_t for the session's current user. */
+
+/* The session's short user name as set by the login operation, specified as
+   a CFString value. */
 
 #define kCGSessionUserNameKey		CFSTR("kCGSSessionUserNameKey")
-        /* value is a CFString encoding the session's short user name as set by loginwindow */
+
+/* The set of hardware composing a console, specified as a CFNumber 32-bit
+   unsigned integer value. */
 
 #define kCGSessionConsoleSetKey		CFSTR("kCGSSessionConsoleSetKey")
-        /* value is a CFNumber encoding a 32 bit unsigned  integer value representing a set of hardware composing a console */
+
+/* An indication of whether the session is on a console, specified as a
+   CFBoolean value. */
 
 #define kCGSessionOnConsoleKey		CFSTR("kCGSSessionOnConsoleKey")
-        /* value is a CFBoolean, kCFBooleanTrue if the session is on a console, otherwise kCFBooleanFalse */
+
+/* An indication of whether the login operation has been done, specified as
+   a CFBoolean value. */
 
 #define kCGSessionLoginDoneKey		CFSTR("kCGSessionLoginDoneKey")
-        /* value is a CFBoolean, kCFBooleanTrue if login operation has been done, otherwise kCFBooleanFalse */
 
-/*
- * When the GUI session on a console changes, a notification
- * is posted via the notify_post() API.  See notify (3) and
- * notify.h for details.
- */
-#define kCGNotifyGUIConsoleSessionChanged		"com.apple.coregraphics.GUIConsoleSessionChanged"
-/* When a user logs in or out of a session we post a notification via notify_post() */
-#define kCGNotifyGUISessionUserChanged			"com.apple.coregraphics.GUISessionUserChanged"
+/* When the GUI session on a console changes, this notification is posted
+   via `notify_post'. */
 
-CG_EXTERN_C_END
+#define kCGNotifyGUIConsoleSessionChanged				\
+  "com.apple.coregraphics.GUIConsoleSessionChanged"
 
-#endif /* __CGSESSION_H__ */
+/* When a user logs in or out of a session, this notification is posted via
+   `notify_post'. */
+
+#define kCGNotifyGUISessionUserChanged					\
+  "com.apple.coregraphics.GUISessionUserChanged"
+
+#endif /* CGSESSION_H_ */

@@ -13,7 +13,7 @@
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * RCS: @(#) $Id: tcl.h,v 1.153.2.13 2004/07/13 19:21:17 hobbs Exp $
+ * RCS: @(#) $Id: tcl.h,v 1.153.2.35 2008/04/11 16:57:38 dgp Exp $
  */
 
 #ifndef _TCL
@@ -26,7 +26,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 /*
  * The following defines are used to indicate the various release levels.
  */
@@ -46,7 +46,8 @@ extern "C" {
  * win/makefile.vc	(not patchlevel) 2 LOC
  * README		(sections 0 and 2)
  * mac/README		(2 LOC, not patchlevel)
- * macosx/Tcl.pbproj/project.pbxproj (not patchlevel) 2 LOC
+ * macosx/Tcl.pbproj/project.pbxproj (not patchlevel) 1 LOC
+ * macosx/Tcl.pbproj/default.pbxuser (not patchlevel) 1 LOC
  * win/README.binary	(sections 0-4)
  * win/README		(not patchlevel) (sections 0 and 2)
  * unix/tcl.spec	(2 LOC Major/Minor, 1 LOC patch)
@@ -58,10 +59,10 @@ extern "C" {
 #define TCL_MAJOR_VERSION   8
 #define TCL_MINOR_VERSION   4
 #define TCL_RELEASE_LEVEL   TCL_FINAL_RELEASE
-#define TCL_RELEASE_SERIAL  7
+#define TCL_RELEASE_SERIAL  19
 
 #define TCL_VERSION	    "8.4"
-#define TCL_PATCH_LEVEL	    "8.4.7"
+#define TCL_PATCH_LEVEL	    "8.4.19"
 
 /*
  * The following definitions set up the proper options for Windows
@@ -314,9 +315,6 @@ typedef long LONG;
 /*
  * Miscellaneous declarations.
  */
-#ifndef NULL
-#   define NULL 0
-#endif
 
 #ifndef _CLIENTDATA
 #   ifndef NO_VOID
@@ -341,6 +339,7 @@ typedef long LONG;
 #	undef TCL_WIDE_INT_IS_LONG
 #    endif /* __LP64__ */
 #    undef HAVE_STRUCT_STAT64
+#    include <mach/mach.h>
 #endif /* __APPLE__ */
 
 /*
@@ -385,7 +384,11 @@ typedef struct stati64 Tcl_StatBuf;
 #         define TCL_LL_MODIFIER	"L"
 #         define TCL_LL_MODIFIER_SIZE	1
 #      else /* __BORLANDC__ */
+#         if _MSC_VER < 1400 || !defined(_M_IX86)
 typedef struct _stati64	Tcl_StatBuf;
+#         else
+typedef struct _stat64 Tcl_StatBuf;
+#         endif /* _MSC_VER < 1400 */
 #         define TCL_LL_MODIFIER	"I64"
 #         define TCL_LL_MODIFIER_SIZE	3
 #      endif /* __BORLANDC__ */
@@ -824,8 +827,12 @@ int		Tcl_IsShared _ANSI_ARGS_((Tcl_Obj *objPtr));
 #else
 #   define Tcl_IncrRefCount(objPtr) \
 	++(objPtr)->refCount
+    /*
+     * Use do/while0 idiom for optimum correctness without compiler warnings
+     * http://c2.com/cgi/wiki?TrivialDoWhileLoop
+     */
 #   define Tcl_DecrRefCount(objPtr) \
-	if (--(objPtr)->refCount <= 0) TclFreeObj(objPtr)
+	do { if (--(objPtr)->refCount <= 0) TclFreeObj(objPtr); } while(0)
 #   define Tcl_IsShared(objPtr) \
 	((objPtr)->refCount > 1)
 #endif
@@ -1426,7 +1433,7 @@ typedef int (Tcl_WaitForEventProc) _ANSI_ARGS_((Tcl_Time *timePtr));
  * Bits passed to Tcl_DriverClose2Proc to indicate which side of a channel
  * should be closed.
  */
-#define TCL_CLOSE_READ		(1<<1)
+#define TCL_CLOSE_READ	(1<<1)
 #define TCL_CLOSE_WRITE	(1<<2)
 
 /*
@@ -1441,6 +1448,14 @@ typedef int (Tcl_WaitForEventProc) _ANSI_ARGS_((Tcl_Time *timePtr));
 #define TCL_CHANNEL_VERSION_1	((Tcl_ChannelTypeVersion) 0x1)
 #define TCL_CHANNEL_VERSION_2	((Tcl_ChannelTypeVersion) 0x2)
 #define TCL_CHANNEL_VERSION_3	((Tcl_ChannelTypeVersion) 0x3)
+#define TCL_CHANNEL_VERSION_4	((Tcl_ChannelTypeVersion) 0x4)
+
+/*
+ * TIP #218: Channel Actions, Ids for Tcl_DriverThreadActionProc
+ */
+
+#define TCL_CHANNEL_THREAD_INSERT (0)
+#define TCL_CHANNEL_THREAD_REMOVE (1)
 
 /*
  * Typedefs for the various operations in a channel type:
@@ -1476,6 +1491,9 @@ typedef Tcl_WideInt (Tcl_DriverWideSeekProc) _ANSI_ARGS_((
 		    ClientData instanceData, Tcl_WideInt offset,
 		    int mode, int *errorCodePtr));
 
+  /* TIP #218, Channel Thread Actions */
+typedef void     (Tcl_DriverThreadActionProc) _ANSI_ARGS_ ((
+		    ClientData instanceData, int action));
 
 /*
  * The following declarations either map ckalloc and ckfree to
@@ -1566,6 +1584,16 @@ typedef struct Tcl_ChannelType {
 					 * handle 64-bit offsets. May be
 					 * NULL, and must be NULL if
 					 * seekProc is NULL. */
+
+     /*
+      * Only valid in TCL_CHANNEL_VERSION_4 channels or later
+      * TIP #218, Channel Thread Actions
+      */
+     Tcl_DriverThreadActionProc *threadActionProc;
+ 					/* Procedure to call to notify
+ 					 * the driver of thread specific
+ 					 * activity for a channel.
+					 * May be NULL. */
 } Tcl_ChannelType;
 
 /*
@@ -1573,8 +1601,8 @@ typedef struct Tcl_ChannelType {
  * set the channel into blocking or nonblocking mode. They are passed
  * as arguments to the blockModeProc procedure in the above structure.
  */
-#define TCL_MODE_BLOCKING 0		/* Put channel into blocking mode. */
-#define TCL_MODE_NONBLOCKING 1		/* Put channel into nonblocking
+#define TCL_MODE_BLOCKING	0	/* Put channel into blocking mode. */
+#define TCL_MODE_NONBLOCKING	1	/* Put channel into nonblocking
 					 * mode. */
 
 /*
@@ -2212,7 +2240,11 @@ typedef struct Tcl_Parse {
     /*
      * unsigned int isn't 100% accurate as it should be a strict 4-byte
      * value (perhaps wchar_t).  64-bit systems may have troubles.  The
-     * size of this value must be reflected correctly in regcustom.h.
+     * size of this value must be reflected correctly in regcustom.h and
+     * in tclEncoding.c.
+     * XXX: Tcl is currently UCS-2 and planning UTF-16 for the Unicode
+     * XXX: string rep that Tcl_UniChar represents.  Changing the size
+     * XXX: of Tcl_UniChar is /not/ supported.
      */
 typedef unsigned int Tcl_UniChar;
 #else

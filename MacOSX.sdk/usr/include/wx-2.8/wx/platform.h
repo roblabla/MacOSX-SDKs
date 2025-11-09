@@ -4,7 +4,7 @@
 * Author:      Vadim Zeitlin
 * Modified by:
 * Created:     29.10.01 (extracted from wx/defs.h)
-* RCS-ID:      $Id: platform.h,v 1.97 2006/11/01 01:15:43 SN Exp $
+* RCS-ID:      $Id: platform.h 53877 2008-05-31 12:43:44Z SN $
 * Copyright:   (c) 1997-2001 Vadim Zeitlin
 * Licence:     wxWindows licence
 */
@@ -212,7 +212,7 @@
     #endif
 #endif /* ia64 */
 
-#if defined(_M_MPPC) || defined(__PPC__)
+#if defined(_M_MPPC) || defined(__PPC__) || defined(__ppc__)
     #ifndef __POWERPC__
         #define __POWERPC__
     #endif
@@ -256,6 +256,20 @@
 #undef UNICODE
 #endif
 
+/*
+   Notice that Turbo Explorer (BCC 5.82) is available for free at
+   http://www.turboexplorer.com/downloads, you can get it if you have trouble
+   compiling wxWidgets with your current Borland compiler.
+*/
+#if defined(__BORLANDC__) && (__BORLANDC__ < 0x540)
+#   error "wxWidgets requires a newer version of Borland, we recommend upgrading to 5.82 (Turbo Explorer). You may at your own risk remove this line and try building but be prepared to get build errors."
+#endif /* __BORLANDC__ */
+
+#if defined(__BORLANDC__) && (__BORLANDC__ < 0x582) && (__BORLANDC__ > 0x559)
+#   ifndef _USE_OLD_RW_STL
+#       error "wxWidgets is incompatible with default Borland C++ 5.6 STL library, please add -D_USE_OLD_RW_STL to your bcc32.cfg to use RogueWave STL implementation."
+#   endif
+#endif /* __BORLANDC__ */
 
 /*
    This macro can be used to test the Open Watcom version.
@@ -331,11 +345,12 @@
 /*
    OS: then test for generic Unix defines, then for particular flavours and
        finally for Unix-like systems
+       Mac OS X matches this case (__MACH__), prior Mac OS do not.
  */
 #elif defined(__UNIX__) || defined(__unix) || defined(__unix__) || \
       defined(____SVR4____) || defined(__LINUX__) || defined(__sgi) || \
       defined(__hpux) || defined(sun) || defined(__SUN__) || defined(_AIX) || \
-      defined(__EMX__) || defined(__VMS) || defined(__BEOS__)
+      defined(__EMX__) || defined(__VMS) || defined(__BEOS__) || defined(__MACH__)
 
 #    define __UNIX_LIKE__
 
@@ -379,6 +394,35 @@
 #            define wxSIZE_T_IS_UINT
 #        endif
 #    endif
+
+    /*  All of these should already be defined by including configure-
+        generated setup.h but we wish to support Xcode compilation without
+        requiring the user to define these himself.
+     */
+#    if defined(__APPLE__) && defined(__MACH__)
+#        ifndef __UNIX__
+#            define __UNIX__ 1
+#        endif
+#        ifndef __BSD__
+#            define __BSD__ 1
+#        endif
+        /*  __DARWIN__ is our own define to mean OS X or pure Darwin */
+#        ifndef __DARWIN__
+#            define __DARWIN__ 1
+#        endif
+        /*  NOTE: TARGET_CARBON is actually a 0/1 and must be 1 for OS X */
+#        ifndef TARGET_CARBON
+#            define TARGET_CARBON 1
+#        endif
+        /* OS X uses unsigned long size_t for both ILP32 and LP64 modes. */
+#        if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG)
+#            define wxSIZE_T_IS_ULONG
+#        endif
+#    endif
+
+/*
+   OS: Classic Mac OS
+ */
 #elif defined(applec) || \
       defined(THINK_C) || \
       (defined(__MWERKS__) && !defined(__INTEL__))
@@ -386,38 +430,10 @@
 #    if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG)
 #        define wxSIZE_T_IS_ULONG
 #    endif
-#elif defined(__WXMAC__) && defined(__APPLE__)
-    /* Mac OS X */
-#    define __UNIX_LIKE__
 
-    /*
-      These defines are needed when compiling using Project Builder
-      with a non generated setup0.h
-    */
-#    ifndef __UNIX__
-#        define __UNIX__ 1
-#    endif
-#    ifndef __BSD__
-#        define __BSD__ 1
-#    endif
-#    ifndef __DARWIN__
-#        define __DARWIN__ 1
-#    endif
-#    ifndef __POWERPC__
-#        define __POWERPC__ 1
-#    endif
-#    ifndef TARGET_CARBON
-#        define TARGET_CARBON 1
-#    endif
-
-#    if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG)
-#        define wxSIZE_T_IS_ULONG
-#    endif
-    /*
-       Some code has been added to workaround defects(?) in the
-       bundled gcc compiler. These corrections are identified by
-       __DARWIN__ for Darwin related corrections (wxMac, wxMotif)
-     */
+/*
+   OS: OS/2
+ */
 #elif defined(__OS2__)
 
     /* wxOS2 vs. non wxOS2 ports on OS2 platform */
@@ -438,6 +454,9 @@
 #    endif
 #    define wxSIZE_T_IS_UINT
 
+/*
+   OS: Palm OS
+ */
 #elif defined(__PALMOS__)
 #    ifdef __WIN32__
 #        error "__WIN32__ should not be defined for PalmOS"
@@ -449,6 +468,9 @@
 #        error "__WXMSW__ should not be defined for PalmOS"
 #    endif
 
+/*
+   OS: Otherwise it must be Windows
+ */
 #else   /* Windows */
 #    ifndef __WINDOWS__
 #        define __WINDOWS__
@@ -474,7 +496,7 @@
 
     /* size_t is the same as unsigned int for all Windows compilers we know, */
     /* so define it if it hadn't been done by configure yet */
-#    if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG)
+#    if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG) && !defined(__WIN64__)
 #        define wxSIZE_T_IS_UINT
 #    endif
 #endif  /* OS */
@@ -563,13 +585,35 @@
 #        define wxHAVE_RAW_BITMAP
 #    endif
 #endif
+#if defined(__WXGTK20__) || defined(__WXMAC__)
+#    define wxHAVE_RAW_BITMAP
+#endif
 
-#if defined (__WXMAC__)
-#    if ( !defined(__MACH__) || ( defined(__BIG_ENDIAN__) && __BIG_ENDIAN__ ) )
-#        define WORDS_BIGENDIAN 1
-#    else
-#        undef WORDS_BIGENDIAN
-#    endif
+/*
+    Handle Darwin gcc universal compilation.  Don't do this in an Apple-
+    specific case since no sane compiler should be defining either
+    __BIG_ENDIAN__ or __LITTLE_ENDIAN__ unless it really is generating
+    code that will be hosted on a machine with the appropriate endianness.
+    If a compiler defines neither, assume the user or configure set
+    WORDS_BIGENDIAN appropriately.
+ */
+#if defined(__BIG_ENDIAN__)
+#    undef WORDS_BIGENDIAN
+#    define WORDS_BIGENDIAN 1
+#elif defined(__LITTLE_ENDIAN__)
+#    undef WORDS_BIGENDIAN
+#elif defined(__WXMAC__) && !defined(WORDS_BIGENDIAN)
+/*  According to Stefan even ancient Mac compilers defined __BIG_ENDIAN__ */
+#    warning "Compiling wxMac with probably wrong endianness"
+#endif
+
+#ifdef __VMS
+#define XtDisplay XTDISPLAY
+#ifdef __WXMOTIF__
+#define XtParent XTPARENT
+#define XtScreen XTSCREEN
+#define XtWindow XTWINDOW
+#endif
 #endif
 
 /* Choose which method we will use for updating menus

@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -60,13 +60,13 @@
 
 /* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(NSView *)accessoryView;
-- (NSView *)accessoryView;
+- (void)setAccessoryView:(NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Methods that were deprecated in Mac OS 10.5.
 */
-- (void)readPrintInfo;
-- (void)writePrintInfo;
+- (void)readPrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)writePrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

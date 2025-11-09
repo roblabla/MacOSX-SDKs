@@ -25,6 +25,72 @@
 /*
  *
  *	$Log: IOUSBHubDevice.h,v $
+ *	Revision 1.13  2010/09/03 18:55:56  nano
+ *	Bring in fix for 8001699 to TOT
+ *
+ *	Revision 1.12.86.2  2010/09/01 15:03:52  nano
+ *	Renamed a method to be more generic
+ *
+ *	Revision 1.12.86.1  2010/08/31 22:37:53  nano
+ *	Implement messages that allow us to send general interest notifications for devices to release and reclaim extra current
+ *
+ *	Revision 1.12.4.1  2010/06/01 16:51:29  nano
+ *	Safekeeping of some work to send extra current messages
+ *
+ *	Revision 1.12  2010/05/20 17:44:23  nano
+ *	Bring in fixes from PR-7481369 to TOT
+ *
+ *	Revision 1.11.214.4  2010/05/14 21:48:44  nano
+ *	finish work with allocating/deallocating power thru gate
+ *
+ *	Revision 1.11.214.3  2010/05/14 20:52:31  nano
+ *	Allocate/release the extra current through the gate
+ *
+ *	Revision 1.11.214.2  2010/05/10 19:56:57  nano
+ *	Continue with implementation of sleep current budgeting
+ *
+ *	Revision 1.11.214.1  2010/05/08 03:35:48  nano
+ *	Initial work on budgeting sleep current
+ *
+ *	Revision 1.11  2009/09/12 03:42:16  rhoads
+ *	merge in the changes for the 390.3.4b QL
+ *
+ *	Revision 1.10.52.1  2009/09/10 18:50:52  nano
+ *	<rdar://problem/7134800> Task: Extra Current support for Ibex Peak RMHs -- look for a property that tells us to ask our USB plane parent for the extra current.  This will allow the RMH to pass on the request to it's parent.
+ *	
+ *	Revision 1.10  2009/05/07 19:43:09  nano
+ *	Move our SnowLeopard branch to TOT
+ *	
+ *	Revision 1.6.102.3  2008/06/16 22:02:16  nano
+ *	Bring in changes from Foxound 320.2.19
+ *	
+
+ *	Revision 1.6.102.2  2008/04/22 22:38:01  nano
+ *	Bring in changes from Foxhound-320.2.9
+ *	
+ *	Revision 1.8.62.2  2008/06/06 21:08:44  nano
+ *	Enable dynamic allocation of power for M89, so we don't reserve it if there isn't a high power device attached
+ *	
+ *	Revision 1.8.62.1  2008/06/06 04:14:32  nano
+ *	Fix SleepCurrent allocation so it will work with hub devices and root hub devices as well as consolidating it across all controllers
+ *	
+ *	Revision 1.8  2008/04/17 16:56:57  nano
+ *	Bring in branches for rdar://5867990 & rdar://5768343
+ *	
+ *	Revision 1.7.4.1  2008/04/17 15:54:07  nano
+ *	Merged PR-5768343 into this branch and fixed a couple of issues
+ *	
+ *	Revision 1.7.2.1  2008/04/16 00:48:49  ferg
+ *	Bug #: 5768343
+ *	Add support for hubs with high-power downstream port capability.  This is
+ *	controlled by the properties "AAPL,current-available" and "AAPL,current-extra".
+ *	
+ *	Revision 1.7  2008/04/14 16:08:38  nano
+ *	Add new APIs for high power and for GetDeviceInformation.
+ *	
+ *	Revision 1.6.144.1  2008/04/11 22:25:44  nano
+ *	Initial work on new user-client APIs and new IOUSBDevice APIs to return port state information and manage extra power requests, as well as groundwork for calling the policy maker directly from the IOUSBDevice
+ *	
  *	Revision 1.6  2007/08/01 16:10:18  rhoads
  *	roll in extra power changes
  *	
@@ -85,8 +151,6 @@ enum {
 	kIOUSBHubDeviceCanSleep				=	0x0004
 };
 
-#define kAppleExtraPowerInSleep			"AAPL,current-in-sleep"
-
 /*!
     @class IOUSBHubDevice
     @abstract New in MAC OS X 10.5. The IOKit object representing a hub device on the USB bus. It is a subclass of IOUSBDevice.
@@ -110,6 +174,17 @@ private:
 
     struct ExpansionData 
 	{ 
+		UInt32					_maxPortCurrent;				// maximum current in milliamps per downstream port
+		UInt32					_totalExtraCurrent;				// total amount of current above the spec'ed current per port available (during normal operation)
+		UInt32					_totalSleepCurrent;				// total amount of current that can be drawn during sleep
+		UInt32					_canRequestExtraPower;			// If 0, this hub does not support requesting extra power from its parent, non-zero:  how much power we need to request in order to give out _extraPowerForPorts
+		UInt32					_extraPowerForPorts;			// Of the power requested from our parent, how much can we parcel out -- the rest is consumed by voltage drop thru the cable
+		UInt32					_extraPowerAllocated;			// Amount of power that we actually got from our parent
+		bool					_requestFromParent;				// True if we are to request the extra power from our parent, without modifying the request.  Used for RMHs
+		UInt32					_maxPortSleepCurrent;			// Maximum current per port during sleep
+		UInt32					_extraSleepPowerAllocated;		// Amount of sleep power that we actually got from our parent
+		UInt32					_canRequestExtraSleepPower;		// If 0, this hub does not support requesting extra sleep power from its parent, non-zero:  how much power we need to request in order to give out _extraPowerForPorts
+		UInt32					_standardPortSleepCurrent;		// Standard current that can be drawn in sleep -- usually 1 USB load
 	};
     ExpansionData			*_expansionData;
 	
@@ -118,19 +193,34 @@ protected:
 	virtual	void			SetPolicyMaker(IOUSBHubPolicyMaker *policyMaker);
 	virtual void			SetHubCharacteristics(UInt32);
 	virtual bool			InitializeCharacteristics(void);					// used at start
+	
+	// these are called through the workloop
+	static IOReturn			GatedRequestExtraPower(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn			GatedReturnExtraPower(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn			GatedRequestSleepPower(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn			GatedReturnSleepPower(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+
+	// a non static but non-virtual function
+	IOReturn				RequestExtraPower(uint64_t requestedPower, uint64_t *powerAllocated);
+	IOReturn				RequestSleepPower(uint64_t requestedPower, uint64_t *powerAllocated);
+	IOReturn				ReturnExtraPower(uint64_t returnedPower);
+	IOReturn				ReturnSleepPower(uint64_t returnedPower);
 
 public:
 	// static constructor
     static IOUSBHubDevice	*NewHubDevice(void);
 
 	// IOKit methods
-    virtual bool 	init();
-	virtual bool 	start( IOService * provider );
-    virtual void 	stop( IOService *provider );
-    virtual void	free();
+    virtual bool			init();
+	virtual bool			start( IOService * provider );
+    virtual void			stop( IOService *provider );
+    virtual void			free();
 	
 	// public IOUSBHubDevice methods
 
+	void					SetTotalSleepCurrent(UInt32 sleepCurrent);
+	UInt32					GetTotalSleepCurrent();
+	
     /*!
 	 @function GetPolicyMaker
 	 returns a pointer to the policy maker for the hub, which can be used as the power plane parent.
@@ -164,15 +254,32 @@ public:
 	virtual UInt32			RequestProvidedPower(UInt32 requestedPower);
 
 	virtual UInt32			RequestExtraPower(UInt32 requestedPower);
+
 	virtual void			ReturnExtraPower(UInt32 returnedPower);
 	
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  0);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  1);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  2);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  3);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  4);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  5);
-    OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  6);
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  0);
+	
+	virtual void			InitializeExtraPower(UInt32 maxPortCurrent, UInt32 totalExtraCurrent);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  1);
+	virtual UInt32			RequestSleepPower(UInt32 requestedPower);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  2);
+	virtual void			ReturnSleepPower(UInt32 returnedPower);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  3);
+	virtual void			SetSleepCurrent(UInt32 sleepCurrent);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  4);
+	virtual	UInt32			GetSleepCurrent();
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  5);
+	
+	virtual void			InitializeExtraPower(UInt32 maxPortCurrent, UInt32 totalExtraCurrent, UInt32 maxPortCurrentInSleep, UInt32 totalExtraCurrentInSleep);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBHubDevice,  6);
+	virtual void			SendExtraPowerMessage(UInt32 type, UInt32 returnedPower);
+
     OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  7);
     OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  8);
     OSMetaClassDeclareReservedUnused(IOUSBHubDevice,  9);

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.114.2.1.2.4 2007/12/31 07:20:14 sebastian Exp $ */
+/* $Id: SAPI.h 296362 2010-03-18 22:37:25Z andrei $ */
 
 #ifndef SAPI_H
 #define SAPI_H
 
 #include "zend.h"
+#include "zend_API.h"
 #include "zend_llist.h"
 #include "zend_operators.h"
 #ifdef PHP_WIN32
@@ -35,12 +36,14 @@
 
 #ifdef PHP_WIN32
 #	ifdef SAPI_EXPORTS
-#	define SAPI_API __declspec(dllexport) 
+#		define SAPI_API __declspec(dllexport) 
 #	else
-#	define SAPI_API __declspec(dllimport) 
+#		define SAPI_API __declspec(dllimport) 
 #	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define SAPI_API __attribute__ ((visibility("default")))
 #else
-#define SAPI_API
+#	define SAPI_API
 #endif
 
 #undef shutdown
@@ -48,7 +51,6 @@
 typedef struct {
 	char *header;
 	uint header_len;
-	zend_bool replace;
 } sapi_header_struct;
 
 
@@ -168,6 +170,8 @@ typedef struct {
 typedef enum {					/* Parameter: 			*/
 	SAPI_HEADER_REPLACE,		/* sapi_header_line* 	*/
 	SAPI_HEADER_ADD,			/* sapi_header_line* 	*/
+	SAPI_HEADER_DELETE,			/* sapi_header_line* 	*/
+	SAPI_HEADER_DELETE_ALL,		/* void					*/
 	SAPI_HEADER_SET_STATUS		/* int 					*/
 } sapi_header_op_enum;
 
@@ -188,7 +192,7 @@ SAPI_API int sapi_register_post_entry(sapi_post_entry *post_entry TSRMLS_DC);
 SAPI_API void sapi_unregister_post_entry(sapi_post_entry *post_entry TSRMLS_DC);
 SAPI_API int sapi_register_default_post_reader(void (*default_post_reader)(TSRMLS_D));
 SAPI_API int sapi_register_treat_data(void (*treat_data)(int arg, char *str, zval *destArray TSRMLS_DC));
-SAPI_API int sapi_register_input_filter(unsigned int (*input_filter)(int arg, char *var, char **val, unsigned int val_len, unsigned int *new_val_len TSRMLS_DC));
+SAPI_API int sapi_register_input_filter(unsigned int (*input_filter)(int arg, char *var, char **val, unsigned int val_len, unsigned int *new_val_len TSRMLS_DC), unsigned int (*input_filter_init)(TSRMLS_D));
 
 SAPI_API int sapi_flush(TSRMLS_D);
 SAPI_API struct stat *sapi_get_stat(TSRMLS_D);
@@ -205,6 +209,7 @@ SAPI_API int sapi_force_http_10(TSRMLS_D);
 SAPI_API int sapi_get_target_uid(uid_t * TSRMLS_DC);
 SAPI_API int sapi_get_target_gid(gid_t * TSRMLS_DC);
 SAPI_API time_t sapi_get_request_time(TSRMLS_D);
+SAPI_API void sapi_terminate_process(TSRMLS_D);
 END_EXTERN_C()
 
 struct _sapi_module_struct {
@@ -224,7 +229,7 @@ struct _sapi_module_struct {
 
 	void (*sapi_error)(int type, const char *error_msg, ...);
 
-	int (*header_handler)(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC);
+	int (*header_handler)(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC);
 	int (*send_headers)(sapi_headers_struct *sapi_headers TSRMLS_DC);
 	void (*send_header)(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC);
 
@@ -234,6 +239,7 @@ struct _sapi_module_struct {
 	void (*register_server_variables)(zval *track_vars_array TSRMLS_DC);
 	void (*log_message)(char *message);
 	time_t (*get_request_time)(TSRMLS_D);
+	void (*terminate_process)(TSRMLS_D);
 
 	char *php_ini_path_override;
 
@@ -259,6 +265,8 @@ struct _sapi_module_struct {
 	int phpinfo_as_text;
 
 	char *ini_entries;
+	const zend_function_entry *additional_functions;
+	unsigned int (*input_filter_init)(TSRMLS_D);
 };
 
 
@@ -271,8 +279,6 @@ struct _sapi_post_entry {
 
 /* header_handler() constants */
 #define SAPI_HEADER_ADD			(1<<0)
-#define SAPI_HEADER_DELETE_ALL	(1<<1)
-#define SAPI_HEADER_SEND_NOW	(1<<2)
 
 
 #define SAPI_HEADER_SENT_SUCCESSFULLY	1

@@ -7,7 +7,7 @@
 
 #if __OBJC__
 
-	// Objective C API (Preferred for IOBluetooth.framework use)
+	// Objective C API
 
 	#if defined(__cplusplus)
 	extern "C" {
@@ -37,7 +37,6 @@
 
 		// Core - SDP
 
-		#import <IOBluetooth/objc/IOBluetoothSDPDataElement.h>
 		#import <IOBluetooth/objc/IOBluetoothSDPDataElement.h>
 		#import <IOBluetooth/objc/IOBluetoothSDPServiceAttribute.h>
 		#import <IOBluetooth/objc/IOBluetoothSDPServiceRecord.h>

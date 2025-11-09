@@ -1,10 +1,21 @@
 /*	NSTask.h
-	Copyright (c) 1996-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString, NSArray, NSDictionary;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+enum {
+    NSTaskTerminationReasonExit = 1,
+    NSTaskTerminationReasonUncaughtSignal = 2
+};
+
+#endif
+
+typedef NSInteger NSTaskTerminationReason;
 
 @interface NSTask : NSObject
 
@@ -56,6 +67,7 @@
 - (BOOL)isRunning;
 
 - (int)terminationStatus;
+- (NSTaskTerminationReason)terminationReason AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

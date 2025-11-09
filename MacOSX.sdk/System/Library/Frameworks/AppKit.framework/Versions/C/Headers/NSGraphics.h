@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -65,23 +65,50 @@ enum {
 typedef NSUInteger NSFocusRingType;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+enum {
+    NSColorRenderingIntentDefault, //  = kCGRenderingIntentDefault,
+    NSColorRenderingIntentAbsoluteColorimetric, //  = kCGRenderingIntentAbsoluteColorimetric,
+    NSColorRenderingIntentRelativeColorimetric, //  = kCGRenderingIntentRelativeColorimetric,
+    NSColorRenderingIntentPerceptual, // = kCGRenderingIntentPerceptual,
+    NSColorRenderingIntentSaturation // = kCGRenderingIntentSaturation
+};
+typedef NSInteger NSColorRenderingIntent;  // values interchangeable with CGColorRenderingIntent values
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+
 /* Predefined colorspace names.
 */
 APPKIT_EXTERN NSString *NSCalibratedWhiteColorSpace;	/* 1.0 == white */
-APPKIT_EXTERN NSString *NSCalibratedBlackColorSpace;	/* 1.0 == black */
 APPKIT_EXTERN NSString *NSCalibratedRGBColorSpace;
 APPKIT_EXTERN NSString *NSDeviceWhiteColorSpace;	/* 1.0 == white */
-APPKIT_EXTERN NSString *NSDeviceBlackColorSpace;	/* 1.0 == black */
 APPKIT_EXTERN NSString *NSDeviceRGBColorSpace;
 APPKIT_EXTERN NSString *NSDeviceCMYKColorSpace;
 APPKIT_EXTERN NSString *NSNamedColorSpace;		/* Used for "catalog" colors */
 APPKIT_EXTERN NSString *NSPatternColorSpace;
 APPKIT_EXTERN NSString *NSCustomColorSpace;		/* Used to indicate a custom gstate in images */
 
+/* Prefer colorspaces where 1.0 means white.
+ */
+APPKIT_EXTERN NSString *NSCalibratedBlackColorSpace     /* 1.0 == black */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;	
+APPKIT_EXTERN NSString *NSDeviceBlackColorSpace 	/* 1.0 == black */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
-/* NSWindowDepth defines the values used in setting window depth limits. "0" indicates default depth. Window depths should not be made persistent as they will not be the same across systems. Use the functions NSBPSFromDepth(), NSColorSpaceFromDepth(), NSBitsPerPixelFromDepth(), and NSPlanarFromDepth() to extract info from an NSWindowDepth. Use NSBestDepth() to compute window depths. NSBestDepth() will try to accomodate all the parameters (match or better); if there are multiple matches, it gives the closest, with matching colorSpace first, then bps, then planar, then bpp. bpp is "bits per pixel"; 0 indicates default (same as the number of bits per plane, either bps or bps * NSNumberOfColorComponents()); other values maybe used as hints to provide backing stores of different configuration; for instance, 8 bit color. exactMatch is optional and indicates whether all the parameters matched exactly.
+
+/* NSWindowDepth defines the values used in setting window depth limits. "0" indicates default depth. Window depths should not be made persistent as they will not be the same across systems. Use the functions NSBitsPerSampleFromDepth(), NSColorSpaceFromDepth(), NSBitsPerPixelFromDepth(), and NSPlanarFromDepth() to extract info from an NSWindowDepth 
+
+On Mac OS X 10.5 and earlier, use NSBestDepth() to compute window depths. NSBestDepth() will try to accomodate all the parameters (match or better); if there are multiple matches, it gives the closest, with matching colorSpace first, then bps, then planar, then bpp. bpp is "bits per pixel"; 0 indicates default (same as the number of bits per plane, either bps or bps * NSNumberOfColorComponents()); other values maybe used as hints to provide backing stores of different configuration; for instance, 8 bit color. exactMatch is optional and indicates whether all the parameters matched exactly.
+
+On Mac OS X 10.6 and later, you can pass one of the explicit bit depths below to -[NSWindow setDepthLimit:].  NSWindowDepthTwentyfourBitRGB is the default.
 */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+enum {
+    NSWindowDepthTwentyfourBitRGB = 0x208,
+    NSWindowDepthSixtyfourBitRGB = 0x210,
+    NSWindowDepthOnehundredtwentyeightBitRGB = 0x220
+};
+#endif
+
 typedef int NSWindowDepth;
+
 APPKIT_EXTERN NSWindowDepth NSBestDepth (NSString *colorSpace, NSInteger bps, NSInteger bpp, BOOL planar, BOOL *exactMatch);
 APPKIT_EXTERN BOOL NSPlanarFromDepth (NSWindowDepth depth);
 APPKIT_EXTERN NSString *NSColorSpaceFromDepth (NSWindowDepth depth);
@@ -134,10 +161,6 @@ APPKIT_EXTERN void NSDrawBitmap(NSRect rect, NSInteger width, NSInteger height, 
 APPKIT_EXTERN void NSCopyBits(NSInteger srcGState, NSRect srcRect, NSPoint destPoint);
 APPKIT_EXTERN void NSHighlightRect(NSRect aRect);
 APPKIT_EXTERN void NSBeep(void);
-APPKIT_EXTERN void NSCountWindows(NSInteger *count);
-APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[]);
-APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count);
-APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[]);
 
 /* gets performance stats about window server memory usage */
 APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory, NSString **windowDumpString);
@@ -188,3 +211,10 @@ typedef NSUInteger NSAnimationEffect;
 APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, id animationDelegate, SEL didEndSelector, void *contextInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 #endif
+
+/* NSCountWindows, NSWindowList, NSCountWindowsForContext, and NSWindowListForContext are deprecated on Mac OS 10.6 and later.  Use +[NSWindow windowNumbersWithOptions:] instead */
+APPKIT_EXTERN void NSCountWindows(NSInteger *count);
+APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[]);
+APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count);
+APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[]);
+

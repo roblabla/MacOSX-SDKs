@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-Nov-2004
-// RCS-ID:      $Id: _stdpaths.i,v 1.7 2006/11/16 23:31:00 RD Exp $
+// RCS-ID:      $Id: _stdpaths.i 46277 2007-06-02 23:36:20Z RD $
 // Copyright:   (c) 2004 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ given for the Unix, Windows and Mac OS X systems, however please note
 that these are just  examples and the actual values may differ. For
 example, under Windows the system administrator may change the
 standard directories locations, i.e. the Windows directory may be
-named W:\Win2003 instead of the default C:\Windows.
+named W:/Win2003 instead of the default C:/Windows.
 
 The strings appname and username should be replaced with the value
 returned by `wx.App.GetAppName` and the name of the currently logged
@@ -85,14 +85,14 @@ absolute path whenever possible.", "");
     DocDeclStr(
         virtual wxString , GetConfigDir() const,
         "Return the directory with system config files: /etc under Unix,
-'c:\\Documents and Settings\\All Users\\Application Data' under Windows,
+'c:/Documents and Settings/All Users/Application Data' under Windows,
 /Library/Preferences for Mac", "");
 
     
     DocDeclStr(
         virtual wxString , GetUserConfigDir() const,
         "Return the directory for the user config files: $HOME under Unix,
-'c:\\Documents and Settings\\username' under Windows, and 
+'c:/Documents and Settings/username' under Windows, and 
 ~/Library/Preferences under Mac
     
 Only use this if you have a single file to put there, otherwise
@@ -103,7 +103,7 @@ Only use this if you have a single file to put there, otherwise
         virtual wxString , GetDataDir() const,
         "Return the location of the application's global, (i.e. not
 user-specific,) data files: prefix/share/appname under Unix,
-'c:\\Program Files\\appname' under Windows,
+'c:/Program Files/appname' under Windows,
 appname.app/Contents/SharedSupport app bundle directory under Mac.", "");
 
     
@@ -117,8 +117,8 @@ host-specific.  Same as `GetDataDir` except under Unix where it is
     DocDeclStr(
         virtual wxString , GetUserDataDir() const,
         "Return the directory for the user-dependent application data files:
-$HOME/.appname under Unix, c:\\Documents and
-Settings\\username\\Application Data\\appname under Windows and
+$HOME/.appname under Unix, c:/Documents and
+Settings/username/Application Data/appname under Windows and
 ~/Library/Application Support/appname under Mac", "");
     
 
@@ -128,7 +128,7 @@ Settings\\username\\Application Data\\appname under Windows and
 with the other machines
 
 Same as `GetUserDataDir` for all platforms except Windows where it is
-the 'Local Settings\\Application Data\\appname' directory.", "");
+the 'Local Settings/Application Data/appname' directory.", "");
 
 
     DocDeclStr(
@@ -168,7 +168,7 @@ standard prefix/share/locale/lang/LC_MESSAGES.)", "");
         virtual wxString , GetDocumentsDir() const,
         "Return the Documents directory for the current user.
 
-C:\Documents and Settings\username\Documents under Windows,
+C:/Documents and Settings/username/Documents under Windows,
 $HOME under Unix and ~/Documents under Mac", "");
     
     DocDeclStr(

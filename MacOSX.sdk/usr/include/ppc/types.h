@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -28,7 +28,7 @@
 /*
  * Copyright 1995 NeXT Computer, Inc. All rights reserved.
  */
-/*-
+/*
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -94,7 +94,7 @@ typedef	long long		int64_t;
 #endif
 typedef	unsigned long long	u_int64_t;
 
-#if defined(__ppc64__)
+#if __LP64__
 typedef int64_t			register_t;
 #else
 typedef int32_t			register_t;
@@ -110,22 +110,22 @@ typedef unsigned long		uintptr_t;
 #endif
 
 #if !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
-/* with LP64 support pointers and longs from user address space may vary */
-/* in size depending on the type of process (currently 32 or 64-bit, but */
-/* may change in the future).  These types are used for reserving the largest */
-/* possible size. */
-typedef u_int64_t	user_addr_t;	
-typedef u_int64_t	user_size_t;	
-typedef int64_t		user_ssize_t;	
-typedef int64_t		user_long_t;
-typedef u_int64_t	user_ulong_t;
-typedef int64_t		user_time_t;
+/* These types are used for reserving the largest possible size. */
+typedef u_int64_t		user_addr_t;	
+typedef u_int64_t		user_size_t;	
+typedef int64_t			user_ssize_t;
+typedef int64_t			user_long_t;
+typedef u_int64_t		user_ulong_t;
+typedef int64_t			user_time_t;
+typedef int64_t			user_off_t;
 #define USER_ADDR_NULL	((user_addr_t) 0)
 #define CAST_USER_ADDR_T(a_ptr)   ((user_addr_t)((uintptr_t)(a_ptr)))
+
+
 #endif /* !_ANSI_SOURCE && (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /* This defines the size of syscall arguments after copying into the kernel: */
-typedef u_int64_t	syscall_arg_t;
+typedef u_int64_t		syscall_arg_t;
 
 #ifndef __offsetof
 #define __offsetof(type, field) ((size_t)(&((type *)0)->field))

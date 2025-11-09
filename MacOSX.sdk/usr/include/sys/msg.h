@@ -96,12 +96,9 @@ typedef	__darwin_ssize_t	ssize_t;
 
 /* [XSI] Used for the number of messages in the message queue */
 typedef unsigned long		msgqnum_t;
-typedef unsigned long long	user_msgqnum_t;
 
 /* [XSI] Used for the number of bytes allowed in a message queue */
 typedef unsigned long		msglen_t;
-typedef unsigned long long	user_msglen_t;
-
 
 /*
  * Possible values for the fifth parameter to msgrcv(), in addition to the

@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     31-October-1999
-// RCS-ID:      $Id: _dataobj.i,v 1.31 2007/01/21 07:07:07 RD Exp $
+// RCS-ID:      $Id: _dataobj.i 51607 2008-02-08 19:21:48Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -513,7 +513,7 @@ public:
 
 DocStr(wxDataObjectComposite,
 "wx.DataObjectComposite is the simplest `wx.DataObject` derivation
-which may be sued to support multiple formats. It contains several
+which may be used to support multiple formats. It contains several
 'wx.DataObjectSimple` objects and supports any format supported by at
 least one of them. Only one of these data objects is *preferred* (the
 first one if not explicitly changed by using the second parameter of

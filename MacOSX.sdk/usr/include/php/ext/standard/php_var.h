@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.30.2.1.2.7 2007/12/31 07:20:13 sebastian Exp $ */
+/* $Id: php_var.h 301144 2010-07-09 21:19:27Z scottmac $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
@@ -33,6 +33,8 @@ PHP_FUNCTION(memory_get_peak_usage);
 
 PHPAPI void php_var_dump(zval **struc, int level TSRMLS_DC);
 PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC);
+PHPAPI void php_var_export_ex(zval **struc, int level, smart_str *buf TSRMLS_DC);
+
 PHPAPI void php_debug_zval_dump(zval **struc, int level TSRMLS_DC);
 
 /* typdef HashTable php_serialize_data_t; */
@@ -60,6 +62,7 @@ PHPAPI int php_var_unserialize(zval **rval, const unsigned char **p, const unsig
 	var_destroy(&(var_hash))
 
 PHPAPI void var_replace(php_unserialize_data_t *var_hash, zval *ozval, zval **nzval);
+PHPAPI void var_push_dtor(php_unserialize_data_t *var_hash, zval **val);
 PHPAPI void var_destroy(php_unserialize_data_t *var_hash);
 
 #define PHP_VAR_UNSERIALIZE_ZVAL_CHANGED(var_hash, ozval, nzval) \
@@ -69,21 +72,21 @@ PHPAPI zend_class_entry *php_create_empty_class(char *class_name, int len);
 
 static inline int php_varname_check(char *name, int name_len, zend_bool silent TSRMLS_DC) /* {{{ */
 {
-    if (name_len == sizeof("GLOBALS") && !memcmp(name, "GLOBALS", sizeof("GLOBALS"))) {
+    if (name_len == sizeof("GLOBALS") - 1 && !memcmp(name, "GLOBALS", sizeof("GLOBALS") - 1)) {
 		if (!silent) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attempted GLOBALS variable overwrite");
 		}
         return FAILURE;
     } else if (name[0] == '_' &&
             (
-             (name_len == sizeof("_GET") && !memcmp(name, "_GET", sizeof("_GET"))) ||
-             (name_len == sizeof("_POST") && !memcmp(name, "_POST", sizeof("_POST"))) ||
-             (name_len == sizeof("_COOKIE") && !memcmp(name, "_COOKIE", sizeof("_COOKIE"))) ||
-             (name_len == sizeof("_ENV") && !memcmp(name, "_ENV", sizeof("_ENV"))) ||
-             (name_len == sizeof("_SERVER") && !memcmp(name, "_SERVER", sizeof("_SERVER"))) ||
-             (name_len == sizeof("_SESSION") && !memcmp(name, "_SESSION", sizeof("_SESSION"))) ||
-             (name_len == sizeof("_FILES") && !memcmp(name, "_FILES", sizeof("_FILES"))) ||
-             (name_len == sizeof("_REQUEST") && !memcmp(name, "_REQUEST", sizeof("_REQUEST")))
+             (name_len == sizeof("_GET") - 1 && !memcmp(name, "_GET", sizeof("_GET") - 1)) ||
+             (name_len == sizeof("_POST") - 1 && !memcmp(name, "_POST", sizeof("_POST") - 1)) ||
+             (name_len == sizeof("_COOKIE") - 1 && !memcmp(name, "_COOKIE", sizeof("_COOKIE") - 1)) ||
+             (name_len == sizeof("_ENV") - 1 && !memcmp(name, "_ENV", sizeof("_ENV") - 1)) ||
+             (name_len == sizeof("_SERVER") - 1 && !memcmp(name, "_SERVER", sizeof("_SERVER") - 1)) ||
+             (name_len == sizeof("_SESSION") - 1 && !memcmp(name, "_SESSION", sizeof("_SESSION") - 1)) ||
+             (name_len == sizeof("_FILES") - 1  && !memcmp(name, "_FILES", sizeof("_FILES") - 1)) ||
+             (name_len == sizeof("_REQUEST") -1 && !memcmp(name, "_REQUEST", sizeof("_REQUEST") - 1))
             )
             ) {
 		if (!silent) {
@@ -92,14 +95,14 @@ static inline int php_varname_check(char *name, int name_len, zend_bool silent T
         return FAILURE;
     } else if (name[0] == 'H' &&
             (
-             (name_len == sizeof("HTTP_POST_VARS") && !memcmp(name, "HTTP_POST_VARS", sizeof("HTTP_POST_VARS"))) ||
-             (name_len == sizeof("HTTP_GET_VARS") && !memcmp(name, "HTTP_GET_VARS", sizeof("HTTP_GET_VARS"))) ||
-             (name_len == sizeof("HTTP_COOKIE_VARS") && !memcmp(name, "HTTP_COOKIE_VARS", sizeof("HTTP_COOKIE_VARS"))) ||
-             (name_len == sizeof("HTTP_ENV_VARS") && !memcmp(name, "HTTP_ENV_VARS", sizeof("HTTP_ENV_VARS"))) ||
-             (name_len == sizeof("HTTP_SERVER_VARS") && !memcmp(name, "HTTP_SERVER_VARS", sizeof("HTTP_SERVER_VARS"))) ||
-             (name_len == sizeof("HTTP_SESSION_VARS") && !memcmp(name, "HTTP_SESSION_VARS", sizeof("HTTP_SESSION_VARS"))) ||
-             (name_len == sizeof("HTTP_RAW_POST_DATA") && !memcmp(name, "HTTP_RAW_POST_DATA", sizeof("HTTP_RAW_POST_DATA"))) ||
-             (name_len == sizeof("HTTP_POST_FILES") && !memcmp(name, "HTTP_POST_FILES", sizeof("HTTP_POST_FILES")))
+             (name_len == sizeof("HTTP_POST_VARS") - 1 && !memcmp(name, "HTTP_POST_VARS", sizeof("HTTP_POST_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_GET_VARS") - 1 && !memcmp(name, "HTTP_GET_VARS", sizeof("HTTP_GET_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_COOKIE_VARS") - 1 && !memcmp(name, "HTTP_COOKIE_VARS", sizeof("HTTP_COOKIE_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_ENV_VARS") - 1 && !memcmp(name, "HTTP_ENV_VARS", sizeof("HTTP_ENV_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_SERVER_VARS") - 1 && !memcmp(name, "HTTP_SERVER_VARS", sizeof("HTTP_SERVER_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_SESSION_VARS") - 1 && !memcmp(name, "HTTP_SESSION_VARS", sizeof("HTTP_SESSION_VARS") - 1)) ||
+             (name_len == sizeof("HTTP_RAW_POST_DATA") - 1 && !memcmp(name, "HTTP_RAW_POST_DATA", sizeof("HTTP_RAW_POST_DATA") - 1)) ||
+             (name_len == sizeof("HTTP_POST_FILES") - 1 && !memcmp(name, "HTTP_POST_FILES", sizeof("HTTP_POST_FILES") - 1))
             )
             ) {
 		if (!silent) {

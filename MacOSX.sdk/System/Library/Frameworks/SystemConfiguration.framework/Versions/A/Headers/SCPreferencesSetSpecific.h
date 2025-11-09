@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002, 2004, 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2002, 2004, 2005, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _SCPREFERENCESSETSPECIFIC_H
 #define _SCPREFERENCESSETSPECIFIC_H
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SCPreferences.h>
@@ -61,7 +62,7 @@ SCPreferencesSetComputerName		(
 					SCPreferencesRef	prefs,
 					CFStringRef		name,
 					CFStringEncoding	nameEncoding
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesSetLocalHostName
@@ -82,7 +83,7 @@ Boolean
 SCPreferencesSetLocalHostName		(
 					SCPreferencesRef	prefs,
 					CFStringRef		name
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 __END_DECLS
 

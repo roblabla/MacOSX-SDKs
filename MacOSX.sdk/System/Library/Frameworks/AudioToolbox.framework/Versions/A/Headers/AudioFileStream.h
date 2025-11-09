@@ -3,10 +3,7 @@
 
      Contains:   API for parsing streamed audio file data.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,7 +18,7 @@
 //	Includes
 //=============================================================================
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
 	#include <AudioToolbox/AudioFile.h>
@@ -217,10 +214,22 @@ enum
     @constant   kAudioFileStreamProperty_FrameToPacket 
 					pass a AudioFramePacketTranslation with mFrame filled out and get mPacket and 
 					mFrameOffsetInPacket back.
+	@constant	kAudioFileStreamProperty_PacketToByte
+					pass an AudioBytePacketTranslation struct with mPacket filled out and get mByte back.
+					mByteOffsetInPacket is ignored. If the mByte value is an estimate then 
+					kBytePacketTranslationFlag_IsEstimate will be set in the mFlags field.
+	@constant	kAudioFileStreamProperty_ByteToPacket
+					pass an AudioBytePacketTranslation struct with mByte filled out and get mPacket and
+					mByteOffsetInPacket back. If the mPacket value is an estimate then 
+					kBytePacketTranslationFlag_IsEstimate will be set in the mFlags field.
     @constant   kAudioFileStreamProperty_PacketTableInfo 
 					Gets the AudioFilePacketTableInfo struct for the file types that support it.
 	@constant	kAudioFileStreamProperty_PacketSizeUpperBound
 					a UInt32 for the theoretical maximum packet size in the file.
+	@constant	kAudioFileStreamProperty_AverageBytesPerPacket
+					a Float64 of giving the average bytes per packet seen. 
+					For CBR and files with packet tables, this number will be exact. Otherwise, it is a
+					running average of packets parsed.
 	@constant	kAudioFileStreamProperty_BitRate
 					a UInt32 of the bit rate in bits per second.
 */
@@ -238,12 +247,13 @@ enum
 	kAudioFileStreamProperty_ChannelLayout					=	'cmap',
 	kAudioFileStreamProperty_PacketToFrame					=	'pkfr',
 	kAudioFileStreamProperty_FrameToPacket					=	'frpk',
+	kAudioFileStreamProperty_PacketToByte					=	'pkby',
+	kAudioFileStreamProperty_ByteToPacket					=	'bypk',
 	kAudioFileStreamProperty_PacketTableInfo				=	'pnfo',
 	kAudioFileStreamProperty_PacketSizeUpperBound  			=	'pkub',
+	kAudioFileStreamProperty_AverageBytesPerPacket			=	'abpp',
 	kAudioFileStreamProperty_BitRate						=	'brat'
 };
-
-
 
 //=============================================================================
 //	AudioFileStream Functions
@@ -288,7 +298,7 @@ AudioFileStreamOpen (
 							AudioFileStream_PacketsProc				inPacketsProc,
                 			AudioFileTypeID							inFileTypeHint,
                 			AudioFileStreamID *						outAudioFileStream)
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 /*!
@@ -313,7 +323,7 @@ AudioFileStreamParseBytes(
 								UInt32							inDataByteSize,
 								const void*						inData,
 								UInt32							inFlags)
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
 	@function		AudioFileStreamSeek
@@ -327,21 +337,22 @@ AudioFileStreamParseBytes(
 
 	@param			inAudioFileStream 
 						The file stream ID
-	@param			inAbsolutePacketOffset 
+	@param			inPacketOffset 
 						The offset from the beginning of the file of the packet to which to seek.
-	@param			outAbsoluteByteOffset 
-						The absolute byte offset is returned. 
+	@param			outDataByteOffset 
+						The byte offset of the data from the file's data offset returned. 
+						You need to add the value of kAudioFileStreamProperty_DataOffset to get an absolute byte offset in the file.
 	@param			ioFlags
-						If outAbsoluteByteOffset is an estimate, then kAudioFileStreamSeekFlag_OffsetIsEstimated will be set on output.
+						If outDataByteOffset is an estimate, then kAudioFileStreamSeekFlag_OffsetIsEstimated will be set on output.
 						There are currently no flags defined for passing into this call.
 */
 extern OSStatus
 AudioFileStreamSeek(	
 								AudioFileStreamID				inAudioFileStream,
-								SInt64							inAbsolutePacketOffset,
-								SInt64 *						outAbsoluteByteOffset,
+								SInt64							inPacketOffset,
+								SInt64 *						outDataByteOffset,
 								UInt32 *						ioFlags)
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
 	@function		AudioFileStreamGetPropertyInfo
@@ -366,7 +377,7 @@ AudioFileStreamGetPropertyInfo(
 								AudioFileStreamPropertyID		inPropertyID,
 								UInt32 *						outPropertyDataSize,
 								Boolean *						outWritable)		
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 /*!
@@ -392,7 +403,7 @@ AudioFileStreamGetProperty(
 							AudioFileStreamPropertyID			inPropertyID,
 							UInt32 *							ioPropertyDataSize,
 							void *								outPropertyData)		
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
 	@function		AudioFileStreamSetProperty
@@ -416,7 +427,7 @@ AudioFileStreamSetProperty(
 							AudioFileStreamPropertyID			inPropertyID,
 							UInt32								inPropertyDataSize,
 							const void *						inPropertyData)		
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
 	@function		AudioFileStreamClose
@@ -428,7 +439,7 @@ AudioFileStreamSetProperty(
 */
 extern OSStatus
 AudioFileStreamClose(			AudioFileStreamID				inAudioFileStream)										
-																		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 #if defined(__cplusplus)

@@ -3,9 +3,9 @@
  
      Contains:   Set up for compiler independent conditionals
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -114,7 +114,11 @@
   #define TYPE_EXTENDED               0
 
   #ifdef __ppc__
-    #define TYPE_LONGDOUBLE_IS_DOUBLE 1
+  #ifdef __LONG_DOUBLE_128__
+     #define TYPE_LONGDOUBLE_IS_DOUBLE 0
+    #else
+      #define TYPE_LONGDOUBLE_IS_DOUBLE 1
+    #endif
   #else
     #define TYPE_LONGDOUBLE_IS_DOUBLE 0
   #endif
@@ -131,7 +135,7 @@
   #define FUNCTION_WIN32CC            0 
   
   #ifdef __MACOS_CLASSIC__
-    #ifndef TARGET_API_MAC_CARBON            /* gcc cfm cross compiler assumes you're building Carbon code */
+    #ifndef TARGET_API_MAC_CARBON           /* gcc cfm cross compiler assumes you're building Carbon code */
        #define TARGET_API_MAC_CARBON 1
     #endif
   #endif

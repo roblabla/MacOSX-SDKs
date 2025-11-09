@@ -1,7 +1,7 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2007, Apple Inc.
+	Copyright (c) 2003-2009, Apple Inc.
 	All rights reserved.
  */
 
@@ -33,7 +33,8 @@
         unsigned int _mutatingNodes:1;
         unsigned int _performingFetch:1;
         unsigned int _skipSortingAfterFetch:1;
-        unsigned int _reservedTreeController:21;
+	unsigned int _usesIdenticalComparisonOfModelObjects:1;
+        unsigned int _reservedTreeController:20;
     } _treeControllerFlags;
     NSArray *_selectedObjects;
     NSString *_childrenKeyPath;

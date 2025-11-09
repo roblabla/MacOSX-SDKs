@@ -1,19 +1,23 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 
 @class NSNotification;
+@protocol NSSplitViewDelegate;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 enum {
     NSSplitViewDividerStyleThick = 1,
-    NSSplitViewDividerStyleThin
+    NSSplitViewDividerStyleThin = 2,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAX_OS_X_VERSION_10_6
+    NSSplitViewDividerStylePaneSplitter = 3,
+#endif
 };
 typedef NSInteger NSSplitViewDividerStyle;
 
@@ -45,8 +49,8 @@ typedef NSInteger NSSplitViewDividerStyle;
 
 /* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds.
 */
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
+- (void)setDelegate:(id <NSSplitViewDelegate>)delegate;
+- (id <NSSplitViewDelegate>)delegate;
 
 /* Draw the divider between two of the split view's subviews. The rectangle describes the entire divider rectangle in the receiver's coordinates. You can override this method to change the appearance of dividers.
 */
@@ -54,7 +58,7 @@ typedef NSInteger NSSplitViewDividerStyle;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-/* Return the color of the dividers that the split view is drawing between subviews. The default implementation of this method returns [NSColor clearColor] for the thick divider style, or a color that looks good between two white panes for the thin divider style. You can override this method to change the color of dividers.
+/* Return the color of the dividers that the split view is drawing between subviews. The default implementation of this method returns [NSColor clearColor] for the thick divider style. It will also return [NSColor clearColor] for the thin divider style when the split view is in a textured window. All other thin dividers are drawn with a color that looks good between two white panes. You can override this method to change the color of dividers.
 */
 - (NSColor *)dividerColor;
 
@@ -77,7 +81,7 @@ typedef NSInteger NSSplitViewDividerStyle;
 /* Divider indices are zero-based, with the topmost (in horizontal split views) or leftmost (vertical) divider having an index of 0.
 */
 
-/* Get the minimum or maximum possible position of a divider. The position is "possible" in that it is dictated by the bounds of this view and the current position of other dividers. ("Allowable" positions are those that result from letting the delegate apply constraints to the possible positions.) You can invoke these methods to determine the range of values that can be usefully passed to -setPosition:ofDividerAtIndex:. You can also invoke it from delegate methods like -splitView:constrainSplitPosition:ofSubviewAt: to implement relatively complex behaviors that depend on the current state of the split view. The results of invoking these methods when -adjustSubviews has not been invoked recently enough for the subview frames to be valid are undefined.
+/* Get the minimum or maximum possible position of a divider. The position is "possible" in that it is dictated by the bounds of this view and the current position of other dividers. ("Allowable" positions are those that result from letting the delegate apply constraints to the possible positions.) You can invoke these methods to determine the range of values that can be usefully passed to -setPosition:ofDividerAtIndex:. You can also invoke them from delegate methods like -splitView:constrainSplitPosition:ofSubviewAt: to implement relatively complex behaviors that depend on the current state of the split view. The results of invoking these methods when -adjustSubviews has not been invoked recently enough for the subview frames to be valid are undefined.
 */
 - (CGFloat)minPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex;
 - (CGFloat)maxPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex;
@@ -88,14 +92,10 @@ typedef NSInteger NSSplitViewDividerStyle;
 
 #endif
 
-/* Set or get whether the split view is a "pane splitter" (YES) or "grabber" (NO) split view. In Mac OS 10.5 the value of this property has no effect.
-*/
-- (void)setIsPaneSplitter:(BOOL)flag;
-- (BOOL)isPaneSplitter;
-
 @end
 
-@interface NSObject(NSSplitViewDelegate)
+@protocol NSSplitViewDelegate <NSObject>
+@optional
 
 /* Divider indices are zero-based, with the topmost (in horizontal split views) or leftmost (vertical) divider having an index of 0.
 */
@@ -134,6 +134,14 @@ Delegates that respond to this message should adjust the frames of the uncollaps
 */
 - (void)splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+/* Given that a split view has been resized and is adjusting its subviews to accomodate the new size, return YES if -adjustSubviews can change the size of the indexed subview, NO otherwise. -adjustSubviews may change the origin of the indexed subview regardless of what this method returns. -adjustSubviews may also resize otherwise nonresizable subviews to prevent an invalid subview layout. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that returns YES when sent this message.
+ */
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view;
+
+#endif
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* Given that a split view has been resized and is adjusting its subviews to accomodate the new size, or that the user is dragging a divider, return YES to allow the divider to be dragged or adjusted off the edge of the split view where it will not be visible. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that returns NO when sent this message.
@@ -164,3 +172,13 @@ APPKIT_EXTERN NSString *NSSplitViewWillResizeSubviewsNotification;
 /* A notification that is posted to the default notification center by NSSplitView when a split view has just resized its subviews either as a result of its own resizing or during the dragging of one of its dividers by the user. Starting in Mac OS 10.5, if the notification is being sent because the user is dragging a divider, the notification's user info dictionary contains an entry whose key is @"NSSplitViewDividerIndex" and whose value is an NSInteger-wrapping NSNumber that is the index of the divider being dragged.
 */
 APPKIT_EXTERN NSString *NSSplitViewDidResizeSubviewsNotification;
+
+
+@interface NSSplitView (NSDeprecated)
+
+/* Set or get whether the split view is a "pane splitter" (YES) or "grabber" (NO) split view. In Mac OS 10.5 the value of this property has no effect. These methods are deprecated in Mac OS 10.6.
+ */
+- (void)setIsPaneSplitter:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)isPaneSplitter DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+@end

@@ -3,9 +3,9 @@
  
      Contains:   Apple Help
  
-     Version:    Help-36~94
+     Version:    Help-36~232
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -213,6 +213,10 @@ AHLookupAnchor(
  */
 extern OSStatus 
 AHRegisterHelpBook(const FSRef * appBundleRef)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+extern OSStatus
+AHRegisterHelpBookWithURL(const CFURLRef applicationURL)	 AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 

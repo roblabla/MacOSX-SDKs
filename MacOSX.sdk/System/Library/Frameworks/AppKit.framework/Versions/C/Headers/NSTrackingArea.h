@@ -1,7 +1,7 @@
 /*
         NSTrackingArea.h
         Application Kit
-        Copyright (c) 2006-2007, Apple Inc.
+        Copyright (c) 2006-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -47,7 +47,7 @@ typedef NSUInteger NSTrackingAreaOptions;
     NSInteger _privateFlags;
     void *_reserved;
 }
-- (NSTrackingArea *)initWithRect:(NSRect)rect options:(NSTrackingAreaOptions)options owner:(id)owner userInfo:(NSDictionary *)userInfo;
+- (id)initWithRect:(NSRect)rect options:(NSTrackingAreaOptions)options owner:(id)owner userInfo:(NSDictionary *)userInfo;
 - (NSRect)rect;
 - (NSTrackingAreaOptions)options;
 - (id)owner;

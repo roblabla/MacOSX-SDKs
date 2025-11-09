@@ -1,7 +1,7 @@
 /*
 	File:		QTKit.h
 
-	Copyright:	(c)2004-2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2010 by Apple Inc., all rights reserved.
 
 */
 
@@ -32,8 +32,8 @@
 #import <QTKit/QTCaptureVideoPreviewOutput.h>
 #import <QTKit/QTCaptureAudioPreviewOutput.h>
 #import <QTKit/QTCaptureDecompressedVideoOutput.h>
+#import <QTKit/QTCaptureDecompressedAudioOutput.h>
 #import <QTKit/QTFormatDescription.h>
 #import <QTKit/QTSampleBuffer.h>
 #import <QTKit/QTCompressionOptions.h>
 #import <QTKit/QTCaptureLayer.h>
-

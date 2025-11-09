@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_sha.h,v 1.3.2.3.2.2 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: php_hash_sha.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_HASH_SHA_H
 #define PHP_HASH_SHA_H
@@ -49,6 +49,17 @@ PHP_FUNCTION(sha1);
 PHP_FUNCTION(sha1_file);
 
 #endif /* PHP_HASH_SHA1_NOT_IN_CORE */
+
+/* SHA224 context. */
+typedef struct {
+	php_hash_uint32 state[8];		/* state */
+	php_hash_uint32 count[2];		/* number of bits, modulo 2^64 */
+	unsigned char buffer[64];	/* input buffer */
+} PHP_SHA224_CTX;
+
+PHP_HASH_API void PHP_SHA224Init(PHP_SHA224_CTX *);
+PHP_HASH_API void PHP_SHA224Update(PHP_SHA224_CTX *, const unsigned char *, unsigned int);
+PHP_HASH_API void PHP_SHA224Final(unsigned char[28], PHP_SHA224_CTX *);
 
 /* SHA256 context. */
 typedef struct {

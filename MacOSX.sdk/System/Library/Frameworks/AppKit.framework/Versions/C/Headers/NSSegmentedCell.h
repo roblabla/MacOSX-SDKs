@@ -1,7 +1,7 @@
 /*
 	NSSegmentedCell.h
 	Application Kit
-	Copyright (c) 2003-2007, Apple Inc.
+	Copyright (c) 2003-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,12 +34,12 @@ typedef NSUInteger NSSegmentSwitchTracking;
 	unsigned int recalcToolTips:1;
         unsigned int usesWindowsStyle:1;
         unsigned int dontShowSelectedAndPressedAppearance:1;
-	unsigned int reserved0:1;
+        unsigned int menuShouldBeUniquedAgainstMain:1;
 	unsigned int style:8;
 	unsigned int reserved:13;
     } _seFlags;
     id		    _segmentTrackingInfo;
-    NSInteger	    _reserved2;
+    id		    _menuUniquer;
     NSInteger	    _reserved3;
     NSInteger	    _reserved4;
 }

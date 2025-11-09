@@ -4,7 +4,7 @@
 // Author:      Ryan Norton
 // Modified by:
 // Created:     11/11/2003
-// RCS-ID:      $Id: hid.h,v 1.9 2006/10/17 14:44:39 ABX Exp $
+// RCS-ID:      $Id: hid.h 42077 2006-10-17 14:44:52Z ABX $
 // Copyright:   (c) Ryan Norton
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

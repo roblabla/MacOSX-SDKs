@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -42,17 +42,34 @@ __BEGIN_DECLS
 
 typedef void *cpu_id_t;
 
+#ifdef __arm__
+#endif
 
 void PE_enter_debugger(
-	char *cause);
+	const char *cause);
 
 void PE_init_platform(
 	boolean_t vm_initialized, 
 	void *args);
 
 #ifdef	__arm__
-void PE_init_platform_from_sleep(
-	uint64_t *timebase_ref);
+uint32_t PE_get_security_epoch(
+	void);
+#endif
+
+#ifdef __arm__
+uint32_t PE_i_can_has_debugger(
+	uint32_t *);
+#endif
+
+#ifdef __arm__
+/*
+ * If invoked with NULL first argument, return the max buffer size that can
+ * be saved in the second argument
+ */
+void PE_save_buffer_to_vram(
+	unsigned char *,
+	unsigned int *);
 #endif
 
 void PE_init_kprintf(
@@ -124,6 +141,7 @@ void PE_install_interrupt_handler(
 void kprintf(const char *fmt, ...) __printflike(1,2);
 #endif
 
+
 #if CONFIG_NO_KPRINTF_STRINGS
 #define kprintf(x, ...) do {} while (0)
 #endif
@@ -169,12 +187,21 @@ struct PE_Video {
 	char		v_pixelFormat[64];
 	unsigned long	v_offset;	/* offset into video memory to start at */
 	unsigned long	v_length;	/* length of video memory (0 for v_rowBytes * v_height) */
-	long		v_resv[ 2 ];
+	unsigned char	v_rotate;	/* Rotation: 0:normal, 1:right 90, 2:left 180, 3:left 90 */
+	unsigned char	v_scale;	/* Scale Factor for both X & Y */
+	char		reserved1[2];
+#ifdef __LP64__
+	long		reserved2;
+#else
+	long		v_baseAddrHigh;
+#endif
 };
 
 typedef struct PE_Video       PE_Video;
 
 extern void initialize_screen(PE_Video *, unsigned int);
+
+extern void dim_screen(void);
 
 extern int PE_current_console(
 	PE_Video *info);
@@ -193,18 +220,27 @@ extern int PE_initialize_console(
 #define kPEReleaseScreen	5
 #define kPEEnableScreen	 	6
 #define kPEDisableScreen	7
+#define kPEBaseAddressChange	8
 
 extern void PE_display_icon( unsigned int flags,
 			     const char * name );
+
+#if !CONFIG_EMBEDDED
+
+extern void
+vc_enable_progressmeter(int new_value);
+extern void
+vc_set_progressmeter(int new_value);
+extern int vc_progress_meter_enable;
+extern int vc_progress_meter_value;
+
+#endif /* !CONFIG_EMBEDDED */
 
 typedef struct PE_state {
 	boolean_t	initialized;
 	PE_Video	video;
 	void		*deviceTreeHead;
 	void		*bootArgs;
-#if defined(i386) || defined(arm)
-	void		*fakePPCBootArgs;
-#endif
 } PE_state_t;
 
 extern PE_state_t PE_state;
@@ -212,9 +248,11 @@ extern PE_state_t PE_state;
 extern char * PE_boot_args(
 	void);
 
+#if !defined(__LP64__) && !defined(__arm__)
 extern boolean_t PE_parse_boot_arg(
 	const char	*arg_string,
-	void    	*arg_ptr);
+	void    	*arg_ptr) __deprecated;
+#endif
 
 extern boolean_t PE_parse_boot_argn(
 	const char	*arg_string,
@@ -252,11 +290,14 @@ extern void PE_cpu_machine_quiesce(
 
 extern void pe_init_debug(void);
 
+extern boolean_t PE_imgsrc_mount_supported(void);
+
 #ifdef __arm__
 typedef void (*perfmon_interrupt_handler_func)(cpu_id_t source);
 extern kern_return_t PE_cpu_perfmon_interrupt_install_handler(perfmon_interrupt_handler_func handler);
 extern void PE_cpu_perfmon_interrupt_enable(cpu_id_t target, boolean_t enable);
 #endif
+
 
 __END_DECLS
 

@@ -22,7 +22,8 @@
 
 /* A convenience method for creating common timing functions. The
  * currently supported names are `linear', `easeIn', `easeOut' and
- * `easeInEaseOut'. */
+ * `easeInEaseOut' and `default' (the curve used by implicit animations
+ * created by Core Animation.) */
 
 + (id)functionWithName:(NSString *)name;
 
@@ -43,7 +44,13 @@
 
 /** Timing function names. **/
 
-CA_EXTERN NSString * const kCAMediaTimingFunctionLinear AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseIn AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseOut AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseInEaseOut AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAMediaTimingFunctionLinear
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAMediaTimingFunctionEaseIn
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAMediaTimingFunctionEaseOut
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAMediaTimingFunctionEaseInEaseOut
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAMediaTimingFunctionDefault
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);

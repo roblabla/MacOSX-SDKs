@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     24-June-1997
-// RCS-ID:      $Id: _window.i,v 1.90.2.4 2007/05/08 02:42:20 RD Exp $
+// RCS-ID:      $Id: _window.i 54193 2008-06-13 17:22:54Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -22,6 +22,9 @@ MAKE_CONST_WXSTRING(PanelNameStr);
 
 //---------------------------------------------------------------------------
 %newgroup
+
+
+wxLIST_WRAPPER(wxWindowList, wxWindow);
 
 
 DocStr(wxVisualAttributes,
@@ -124,9 +127,14 @@ Styles
                                    deactivate it.
                                    
     wx.VSCROLL                     Use this style to enable a vertical scrollbar.
+                                   Notice that this style cannot be used with
+                                   native controls which don't support scrollbars
+                                   nor with top-level windows in most ports.
                                    
     wx.HSCROLL                     Use this style to enable a horizontal scrollbar.
-                                   
+                                   The same limitations as for wx.VSCROLL apply to
+                                   this style.
+
     wx.ALWAYS_SHOW_SB              If a window has scrollbars, disable them
                                    instead of hiding them when they are
                                    not needed (i.e. when the size of the
@@ -425,7 +433,7 @@ equal to -1.
     ========================  ======================================
     wx.SIZE_AUTO              A -1 indicates that a class-specific
                               default should be used.
-    wx.SIZE_USE_EXISTING      Axisting dimensions should be used if
+    wx.SIZE_USE_EXISTING      Existing dimensions should be used if
                               -1 values are supplied.
     wxSIZE_ALLOW_MINUS_ONE    Allow dimensions of -1 and less to be
                               interpreted as real dimensions, not
@@ -556,12 +564,16 @@ the borders, scrollbars, other decorations...)", "");
         "Get the client area position and size as a `wx.Rect` object.", "");
     
 
+    // client<->window size conversion
+    wxSize ClientToWindowSize(const wxSize& size) const;
+    wxSize WindowToClientSize(const wxSize& size) const;
+
     
     DocStr(GetBestSize,
            "This function returns the best acceptable minimal size for the
 window, if applicable. For example, for a static text control, it will
 be the minimal size such that the control label is not truncated. For
-windows containing subwindows (suzh aswx.Panel), the size returned by
+windows containing subwindows (such as wx.Panel), the size returned by
 this function will be the same as the size the window would have had
 after calling Fit.", "");
     wxSize GetBestSize() const;
@@ -603,7 +615,7 @@ the results.
     DocDeclStr(
         void , Center( int direction = wxBOTH ),
         "Centers the window.  The parameter specifies the direction for
-cetering, and may be wx.HORIZONTAL, wx.VERTICAL or wx.BOTH. It may
+centering, and may be wx.HORIZONTAL, wx.VERTICAL or wx.BOTH. It may
 also include wx.CENTER_ON_SCREEN flag if you want to center the window
 on the entire screen and not on its parent window.  If it is a
 top-level window and has no parent then it will always be centered
@@ -956,26 +968,20 @@ before win instead of putting it right after it.", "");
 
     
 
-
-
-
-
     // parent/children relations
     // -------------------------
 
 
-    //wxWindowList& GetChildren();  // TODO: Do a typemap or a wrapper for wxWindowList
-    %extend {
         DocStr(GetChildren,
-               "Returns a list of the window's children.  NOTE: Currently this is a
-copy of the child window list maintained by the window, so the return
-value of this function is only valid as long as the window's children
-do not change.", "");
-        PyObject* GetChildren() {
-            wxWindowList& list = self->GetChildren();
-            return wxPy_ConvertList(&list);
-        }
-    }
+               "Returns an object containing a list of the window's children.  The
+object provides a Python sequence-like interface over the internal
+list maintained by the window..", "");
+    wxWindowList& GetChildren(); 
+
+#if 0 // we'll add these later so wxPython 2.8.7.1 can still be built with wxWidgets 2.8.7.0
+    wxWindow *GetPrevSibling() const;
+    wxWindow *GetNextSibling() const;
+#endif
 
     DocDeclStr(
         wxWindow *, GetParent() const,
@@ -1026,23 +1032,12 @@ deletion functions so should not be required by the application
 programmer.", "");
 
 
-    DocStr(SetDoubleBuffered,
-           "Currently wxGTK2 only.", "");
-#ifdef __WXGTK__
-    void SetDoubleBuffered(bool on);
-#else
-    %extend {
-        void SetDoubleBuffered(bool on) {}
-    }
-#endif
-
-
     // looking for windows
     // -------------------
 
     DocDeclStrName(
         wxWindow *, FindWindow( long winid ),
-        "Find a chld of this window by window ID", "",
+        "Find a child of this window by window ID", "",
         FindWindowById);
     
     DocDeclStrName(
@@ -1051,6 +1046,14 @@ programmer.", "");
         FindWindowByName);
     
 
+    %extend {
+        DocDeclStr(
+            wxWindow*, FindWindowByLabel( const wxString& label ),
+            "Find a child of this window by label", "")
+            {
+                return wxWindow::FindWindowByLabel(label, self);
+            }
+    }
 
     // event handler stuff
     // -------------------
@@ -1360,6 +1363,17 @@ scroll position.", "");
 system, i.e. if any drawing done on the window is really done on a
 temporary backing surface and transferred to the screen all at once
 later.", "");
+
+    DocStr(SetDoubleBuffered,
+           "Put the native window into double buffered or composited mode.", "");
+    %extend {
+        void SetDoubleBuffered(bool on)
+        {
+        %#if defined(__WXGTK20__) || defined(__WXMSW__)
+            self->SetDoubleBuffered(on);
+        %#endif
+        }
+    }
     
 
     DocDeclStr(
@@ -1700,8 +1714,8 @@ mouse cursor will be used.", "");
     %extend {
         DocStr(GetHandle,
                "Returns the platform-specific handle (as a long integer) of the
-physical window.  Currently on wxMac it returns the handle of the
-toplevel parent of the window.", "");
+physical window.  On wxMSW this is the win32 window handle, on wxGTK
+it is the XWindow ID, and on wxMac it is the ControlRef.", "");
         long GetHandle() {
             return wxPyGetWinHandle(self);
         }
@@ -1720,7 +1734,20 @@ toplevel parent of the window.", "");
     DocDeclStr(
         virtual void , DissociateHandle(),
         "Dissociate the current native handle from the window", "");
+
     
+    %extend {
+        DocStr(GetGtkWidget,
+               "On wxGTK returns a pointer to the GtkWidget for this window as a long
+integer.  On the other platforms this method returns zero.","");
+        long GetGtkWidget() {
+#ifdef __WXGTK__
+            return (long)self->GetHandle();
+#else
+            return 0;
+#endif
+        }
+    }
 
     
 #ifdef __WXMSW__
@@ -2167,7 +2194,8 @@ opaque.", "");
     %property(Shown, IsShown, Show, doc="See `IsShown` and `Show`");
     %property(Enabled, IsEnabled, Enable, doc="See `IsEnabled` and `Enable`");
     %property(TopLevel, IsTopLevel, doc="See `IsTopLevel`");
-    
+
+    %property(GtkWidget, GetGtkWidget);
 };
 
 
@@ -2251,6 +2279,7 @@ wxWindow* wxFindWindowByLabel( const wxString& label,
 
 
 
+
 %{
 #ifdef __WXMSW__
 #include <wx/msw/private.h>  // to get wxGetWindowId
@@ -2259,17 +2288,19 @@ wxWindow* wxFindWindowByLabel( const wxString& label,
 
 MustHaveApp(wxWindow_FromHWND);
 
+// Note this is similar to another function in _axbase.i, keep them in sync.
+
 %inline %{
     wxWindow* wxWindow_FromHWND(wxWindow* parent, unsigned long _hWnd) {
 #ifdef __WXMSW__
         WXHWND hWnd = (WXHWND)_hWnd;
-        long id = wxGetWindowId(hWnd);
+        //long id = wxGetWindowId(hWnd);
         wxWindow* win = new wxWindow;
         if (parent)
             parent->AddChild(win);
         win->SetEventHandler(win);
         win->SetHWND(hWnd);
-        win->SetId(id);
+        //win->SetId(id);
         win->SubclassWin(hWnd);
         win->AdoptAttributesFromHWND();
         win->SetupColours();
@@ -2284,17 +2315,13 @@ MustHaveApp(wxWindow_FromHWND);
 //---------------------------------------------------------------------------
 
 DocStr(GetTopLevelWindows,
-"Returns a list of the the application's top-level windows, (frames,
-dialogs, etc.)  NOTE: Currently this is a copy of the list maintained
-by wxWidgets, and so it is only valid as long as no top-level windows
-are closed or new top-level windows are created.
-", "");
+"Returns a list-like object of the the application's top-level windows, (frames,
+dialogs, etc.)", "");
 %inline %{
-    PyObject* GetTopLevelWindows() {
-        return wxPy_ConvertList(&wxTopLevelWindows);
+    wxWindowList& GetTopLevelWindows() {
+        return wxTopLevelWindows;
     }
 %}
 
-//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 

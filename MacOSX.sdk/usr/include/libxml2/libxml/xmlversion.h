@@ -29,21 +29,21 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * the version string like "1.2.3"
  */
-#define LIBXML_DOTTED_VERSION "2.6.16"
+#define LIBXML_DOTTED_VERSION "2.7.3"
 
 /**
  * LIBXML_VERSION:
  *
- * the version number: 1.2.3 value is 1002003
+ * the version number: 1.2.3 value is 10203
  */
-#define LIBXML_VERSION 20616
+#define LIBXML_VERSION 20703
 
 /**
  * LIBXML_VERSION_STRING:
  *
- * the version number string, 1.2.3 value is "1002003"
+ * the version number string, 1.2.3 value is "10203"
  */
-#define LIBXML_VERSION_STRING "20616"
+#define LIBXML_VERSION_STRING "20703"
 
 /**
  * LIBXML_VERSION_EXTRA:
@@ -58,7 +58,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Macro to check that the libxml version in use is compatible with
  * the version the software has been compiled against
  */
-#define LIBXML_TEST_VERSION xmlCheckVersion(20616);
+#define LIBXML_TEST_VERSION xmlCheckVersion(20703);
 
 #ifndef VMS
 #if 0
@@ -91,7 +91,8 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Whether the thread support is configured in
  */
 #if 1
-#if defined(_REENTRANT) || defined(__MT__) || (defined(_POSIX_C_SOURCE) && (_POSIX_C_SOURCE - 0 >= 199506L))
+#if defined(_REENTRANT) || defined(__MT__) || \
+    (defined(_POSIX_C_SOURCE) && (_POSIX_C_SOURCE - 0 >= 199506L))
 #define LIBXML_THREAD_ENABLED
 #endif
 #endif
@@ -340,6 +341,15 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #endif
 
 /**
+ * LIBXML_EXPR_ENABLED:
+ *
+ * Whether the formal expressions interfaces are compiled in
+ */
+#if 1
+#define LIBXML_EXPR_ENABLED
+#endif
+
+/**
  * LIBXML_SCHEMAS_ENABLED:
  *
  * Whether the Schemas validation interfaces are compiled in
@@ -349,20 +359,105 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #endif
 
 /**
- * ATTRIBUTE_UNUSED:
+ * LIBXML_SCHEMATRON_ENABLED:
  *
- * Macro used to signal to GCC unused function parameters
+ * Whether the Schematron validation interfaces are compiled in
  */
+#if 1
+#define LIBXML_SCHEMATRON_ENABLED
+#endif
+
+/**
+ * LIBXML_MODULES_ENABLED:
+ *
+ * Whether the module interfaces are compiled in
+ */
+#if 1
+#define LIBXML_MODULES_ENABLED
+/**
+ * LIBXML_MODULE_EXTENSION:
+ *
+ * the string suffix used by dynamic modules (usually shared libraries)
+ */
+#define LIBXML_MODULE_EXTENSION ".so" 
+#endif
+
+/**
+ * LIBXML_ZLIB_ENABLED:
+ *
+ * Whether the Zlib support is compiled in
+ */
+#if 1
+#define LIBXML_ZLIB_ENABLED
+#endif
+
 #ifdef __GNUC__
 #ifdef HAVE_ANSIDECL_H
 #include <ansidecl.h>
 #endif
+
+/**
+ * ATTRIBUTE_UNUSED:
+ *
+ * Macro used to signal to GCC unused function parameters
+ */
+
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__((unused))
 #endif
+
+/**
+ * ATTRIBUTE_ALLOC_SIZE:
+ *
+ * Macro used to indicate to GCC this is an allocator function
+ */
+
+#ifndef ATTRIBUTE_ALLOC_SIZE
+# if ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3)))
+#  define ATTRIBUTE_ALLOC_SIZE(x) __attribute__((alloc_size(x)))
+# else
+#  define ATTRIBUTE_ALLOC_SIZE(x)
+# endif
 #else
-#define ATTRIBUTE_UNUSED
+# define ATTRIBUTE_ALLOC_SIZE(x)
 #endif
+
+/**
+ * ATTRIBUTE_PRINTF:
+ *
+ * Macro used to indicate to GCC the parameter are printf like
+ */
+
+#ifndef ATTRIBUTE_PRINTF
+# if ((__GNUC__ > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 3)))
+#  define ATTRIBUTE_PRINTF(fmt,args) __attribute__((__format__(__printf__,fmt,args)))
+# else
+#  define ATTRIBUTE_PRINTF(fmt,args)
+# endif
+#else
+# define ATTRIBUTE_PRINTF(fmt,args)
+#endif
+
+#else /* ! __GNUC__ */
+/**
+ * ATTRIBUTE_UNUSED:
+ *
+ * Macro used to signal to GCC unused function parameters
+ */
+#define ATTRIBUTE_UNUSED
+/**
+ * ATTRIBUTE_ALLOC_SIZE:
+ *
+ * Macro used to indicate to GCC this is an allocator function
+ */
+#define ATTRIBUTE_ALLOC_SIZE(x)
+/**
+ * ATTRIBUTE_PRINTF:
+ *
+ * Macro used to indicate to GCC the parameter are printf like
+ */
+#define ATTRIBUTE_PRINTF(fmt,args)
+#endif /* __GNUC__ */
 
 #ifdef __cplusplus
 }

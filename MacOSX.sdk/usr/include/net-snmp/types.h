@@ -64,10 +64,12 @@ typedef u_int in_addr_t;
 #endif
 
 #ifndef HAVE_SSIZE_T
+#ifndef _SSIZE_T
 #if defined(__INT_MAX__) && __INT_MAX__ == 2147483647
 typedef int ssize_t;
 #else
 typedef long ssize_t;
+#endif
 #endif
 #endif
 

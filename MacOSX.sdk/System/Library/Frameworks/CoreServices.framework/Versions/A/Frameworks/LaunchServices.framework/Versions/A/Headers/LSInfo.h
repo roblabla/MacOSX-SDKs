@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-283~12
+     Version:    LaunchServices-362.3~1
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -46,6 +46,8 @@ enum {
   kLSExecutableIncorrectFormat  = -10661, /* No compatible executable was found*/
   kLSAttributeNotFoundErr       = -10662, /* An item attribute value could not be found with the specified name*/
   kLSAttributeNotSettableErr    = -10663, /* The attribute is not settable*/
+  kLSIncompatibleApplicationVersionErr = -10664, /* The app is incompatible with the current OS*/
+  kLSNoRosettaEnvironmentErr    = -10665, /* The Rosetta environment was required not available*/
   kLSUnknownErr                 = -10810, /* Unexpected internal error*/
   kLSNotAnApplicationErr        = -10811, /* Item needs to be an application, but is not*/
   kLSNotInitializedErr          = -10812, /* Not used in 10.2 and later*/

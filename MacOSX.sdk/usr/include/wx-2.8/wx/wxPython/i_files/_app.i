@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     9-Aug-2003
-// RCS-ID:      $Id: _app.i,v 1.24 2006/11/18 00:29:40 RD Exp $
+// RCS-ID:      $Id: _app.i 53375 2008-04-27 03:59:28Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ DocStr(wxPyApp,
 class wxPyApp : public wxEvtHandler {
 public:
 
-    %pythonAppend wxPyApp    "self._setOORInfo(self, False);" setCallbackInfo(PyApp)
+    %pythonAppend wxPyApp    "self._setOORInfo(self, False);" setCallbackInfo(PyApp) ";self.this.own(True)"
     %typemap(out) wxPyApp*;    // turn off this typemap
 
     DocStr(wxPyApp,
@@ -264,6 +264,24 @@ systems where more than one is available, (Sun, SGI, XFree86 4, etc.)", "");
         int,  GetAssertMode(),
         "Get the current OnAssert behaviour setting.", "");
 
+    DocStr(MacHideApp,
+           "Hide all application windows just as the user can do with the system
+Hide command.  Mac only.", "");
+#ifdef __WXMAC__
+    void MacHideApp();
+#else
+    %extend {
+        void MacHideApp() {}
+    }
+#endif
+
+#ifdef __WXMAC__
+    void MacRequestUserAttention(wxNotificationOptions);
+#else
+    %extend {
+        void MacRequestUserAttention(wxNotificationOptions) { }
+    }
+#endif
 
     static bool GetMacSupportPCMenuShortcuts();  // TODO, deprecate this
     static long GetMacAboutMenuItemId();

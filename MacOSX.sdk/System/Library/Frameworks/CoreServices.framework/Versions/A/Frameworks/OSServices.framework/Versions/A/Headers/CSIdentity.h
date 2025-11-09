@@ -3,9 +3,9 @@
  
      Contains:   CSIdentity APIs
  
-     Version:    OSServices-208~152
+     Version:    OSServices-359.2~2
  
-     Copyright:  © 2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,17 +20,18 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+
+#ifndef __CSIDENTITYAUTHORITY__
+#include <OSServices/CSIdentityAuthority.h>
+#endif
+
+
 #ifndef __SECBASE__
 #include <Security/SecBase.h>
 #endif
 
 #ifndef __AUTHORIZATION__
 #include <Security/Authorization.h>
-#endif
-
-
-#ifndef __CSIDENTITYAUTHORITY__
-#include <OSServices/CSIdentityAuthority.h>
 #endif
 
 

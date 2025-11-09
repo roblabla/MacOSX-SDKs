@@ -1,7 +1,7 @@
 /*
 	File:		IOBluetoothHCIRequest.h
 	Contains:	Bluetooth Host Controller request object.
-	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+	Copyright:	(c) 2001-2008 by Apple, all rights reserved.
 */
 
 #pragma once
@@ -31,7 +31,7 @@ enum
 typedef UInt8	BluetoothHCIRequestState;
 enum BluetoothHCIRequestStates
 {
-	kHCIRequestStateIdle		= 0,		// Doing nothing - neither waiting nor busy.
+	kHCIRequestStateIdle		= 0,		// Doing nothing - neither waiting nor busy. usually waiting for deletion.
 	kHCIRequestStateWaiting		= 1,		// On the wait queue - request has not been processed in any way.
 	kHCIRequestStateBusy		= 2,		// On the busy queue - request is sent and is currently processing
 };
@@ -79,6 +79,8 @@ public:
 	UInt32								mTimeout;									// Timeout for request to complete, in milliseconds.
 	UInt32								mControlFlags;
 	int									mPID;										// Creating Task
+	bool								mHCIRequestDeleteWasCalled;					// Fixed rdar://problem/7044168
+	
 	
 public:
 
@@ -128,6 +130,8 @@ public:
 	void						SetTimeout( UInt32 inTimeout ) { mTimeout = inTimeout; }	// in milliseconds
 	UInt32						GetTimeout() { return( mTimeout ); }
     
+	void						StartTimer();
+	
     static void 				timerFired( OSObject *owner, IOTimerEventSource *sender );
     void						handleTimeout();
 	
@@ -139,7 +143,7 @@ public:
 	UInt8 *						GetResultsBuffer();
 	IOByteCount					GetResultsBufferSize();
 	
-	void *						GetNotificationRefCon() { return( mCallbackInfo.asyncIDRefCon ); }
+	mach_vm_address_t			GetNotificationRefCon() { return( mCallbackInfo.asyncIDRefCon ); }
 	
 	void						SetDoAsyncNotify( bool inAsyncNotify ) { mAsyncNotify = inAsyncNotify; }
 	Boolean						IsSynchronous() { return !mAsyncNotify; }

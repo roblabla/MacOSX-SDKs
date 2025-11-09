@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSColor, NSMutableArray;
+@protocol NSMatrixDelegate;
 
 /* Matrix Constants */
 
@@ -48,9 +49,13 @@ typedef struct __MFlags {
     unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
     unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
     unsigned int        browserOptimizationsEnabled:1;
-    unsigned int	reservedMatrix:6;
+    unsigned int        drawingContextMenuHighlight:1;
+    unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
+    unsigned int	reservedMatrix:4;
 #else
-    unsigned int	reservedMatrix:6;
+    unsigned int	reservedMatrix:4;
+    unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
+    unsigned int        drawingContextMenuHighlight:1;
     unsigned int        browserOptimizationsEnabled:1;
     unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
     unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
@@ -186,8 +191,8 @@ typedef struct __MFlags {
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)sendAction;
 - (void)sendDoubleAction;
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
+- (id <NSMatrixDelegate>)delegate;
+- (void)setDelegate:(id <NSMatrixDelegate>)anObject;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
@@ -208,4 +213,5 @@ typedef struct __MFlags {
 - (id)keyCell;
 @end
 
+@protocol NSMatrixDelegate <NSControlTextEditingDelegate> @end
 

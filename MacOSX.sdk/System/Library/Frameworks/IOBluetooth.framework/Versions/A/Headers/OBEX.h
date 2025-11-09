@@ -1,7 +1,7 @@
 /*
 	File:		OBEX.h
 	Contains:	Technology interfaces for OBEX.
-	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+	Copyright:	© 2002-2008 by Apple Inc. All rights reserved.
 */
 
 #pragma once
@@ -10,6 +10,7 @@
 #import <stdint.h>
 
 #import <CoreServices/CoreServices.h>
+#import <IOBluetooth/IOBluetoothUserLib.h>
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@header		OBEX
@@ -59,13 +60,15 @@ enum OBEXErrorCodes
 	kOBEXSuccess						= 0,			// Success at whatever you were attempting.
 	kOBEXGeneralError					= -21850,		// Catch all for misc. errors.
 	kOBEXNoResourcesError				= -21851,		// An allocation failed, etc.
-	kOBEXUnsupportedError				= -21852,		// We don't currently handle whatever you are trying to do.
+	kOBEXUnsupportedError				= -21852,		// operation or item is not supported.
 	kOBEXInternalError					= -21853,		// A problem has occurred in our internal code.
 	kOBEXBadArgumentError				= -21854,		// A bad argument was passed to an OBEX function.
 	kOBEXTimeoutError					= -21855,		// timeout error
 	kOBEXBadRequestError				= -21856,		// bad request error
 	kOBEXCancelledError					= -21857,
-	
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+	kOBEXForbiddenError					= -21858,		// operation was not allowed on remote device (wrong permissions, etc.).
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 	
 	kOBEXSessionBusyError				= -21875,		// Session is busy with a command already.
 	kOBEXSessionNotConnectedError		= -21876,		// Session does not have an open connection.
@@ -136,6 +139,11 @@ enum OBEXErrorCodes
 	@constant	kOBEXHeaderIDLength						The length of the object in bytes. 4 byte unsigned integer value.
 	@constant	kOBEXHeaderIDTime4Byte					Date/time stamp - 4 byte version for compat. only. Seconds since Jan 1, 1970.
 	@constant	kOBEXHeaderIDConnectionID				An identifier used for OBEX connection multiplexing.
+	@constant	kOBEXHeaderIDOBEX13WANUUID					Used to provide state information when layering OBEX over stateless networks. 16byte UUID.
+	@constant	kOBEXHeaderIDOBEX13ObjectClass				Used to reference the object class and properties. Byte Sequence.
+	@constant	kOBEXHeaderIDOBEX13SessionParameters		Byte sequence required for CreateSession, CloseSession and other OBEX commands.
+	@constant	kOBEXHeaderIDOBEX13SessionSequenceNumber	1-byte quantitied containing the current sequence number.
+	@constant	kOBEXHeaderIDOBEX13CreatorID				4-byte unsigned integer that identifies the creator of the object.
 */
 
 enum OBEXHeaderIdentifiers
@@ -158,12 +166,27 @@ enum OBEXHeaderIdentifiers
 	kOBEXHeaderIDAppParameters					= 0x4C,
 	kOBEXHeaderIDAuthorizationChallenge			= 0x4D,
 	kOBEXHeaderIDAuthorizationResponse			= 0x4E,
-	kOBEXHeaderIDObjectClass					= 0x4F,
-	
+	kOBEXHeaderIDObjectClass					= 0x4F, /* OBEX 1.2 and prior specification only; note that there is another Object Class defined below; this is removed in the 1.3 specification */
+
 	kOBEXHeaderIDCount							= 0xC0,
 	kOBEXHeaderIDLength							= 0xC3,
 	kOBEXHeaderIDTime4Byte						= 0xC4,
 	kOBEXHeaderIDConnectionID					= 0xCB,
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+
+	/* OBEX 1.3 and later specification */
+	
+	kOBEXHeaderIDOBEX13WANUUID					= 0x50, 
+	kOBEXHeaderIDOBEX13ObjectClass				= 0x51,
+	kOBEXHeaderIDOBEX13SessionParameters		= 0x52,
+	kOBEXHeaderIDOBEX13SessionSequenceNumber	= 0x93,
+	kOBEXHeaderIDOBEX13CreatorID				= 0xCF,
+	
+	/* End OBEX 1.3 and later specification */
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
+	
 };
 
 //===========================================================================================================================
@@ -301,7 +324,6 @@ enum OBEXOpCodeCommandValues
 	kOBEXOpCodeUserDefinedEnd			= 0x1F,
 };
 
-
 //===========================================================================================================================
 //	OBEXConnectFlags
 //===========================================================================================================================
@@ -335,12 +357,13 @@ enum OBEXConnectFlagValues
 //===========================================================================================================================
 
 #if 0
-#pragma mark ======= OBEXPutFlags =======
+#pragma mark ======= OBEXSetPathFlags =======
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@enum		OBEXPutFlags
-	@abstract	Flags for Put command.
+/*!	@enum		OBEXSetPathFlags
+	@abstract	Flags for SetPath command. Not that these are called "PutFlags". That is a mistake, they are not used
+				with a Put command. We are not changing the names to maintain backwards compatibility.
 */
 
 enum OBEXPutFlagValues
@@ -415,6 +438,58 @@ enum OBEXRealmValues
 	kOBEXRealmUNICODE								= 0xFF,
 };
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+
+//===========================================================================================================================
+//	OBEXOpCodeSessionValues
+//===========================================================================================================================
+
+#if 0
+#pragma mark ======= OBEXOpCodeSessionValues =======
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@enum		OBEXOpCodeSessionValues
+	@abstract	Operation OpCode values for sessions. From the OBEX 1.3 specification.
+*/
+
+enum OBEXOpCodeSessionValues
+{
+	kOBEXOpCodeCreateSession			= 0x00,
+	kOBEXOpCodeCloseSession				= 0x01,
+	kOBEXOpCodeSuspendSession			= 0x02,
+	kOBEXOpCodeResumeSession			= 0x03,
+	kOBEXOpCodeSetTimeout				= 0x04
+	
+	/* 0x05-0xFF are reserved */
+};
+
+//===========================================================================================================================
+//	OBEXPutTags
+//===========================================================================================================================
+
+#if 0
+#pragma mark ======= OBEXSessionTags =======
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@enum		OBEXSessionParameterTags
+	@abstract	Tags for SessionParameters.
+*/
+
+enum OBEXSessionParameterTags
+{
+	kOBEXSessionParameterTagDeviceAddress					= 0x00,
+	kOBEXSessionParameterTagNonce							= 0x01,
+	kOBEXSessionParameterTagSessionID						= 0x02,
+	kOBEXSessionParameterTagNextSequenceNumber				= 0x03,
+	kOBEXSessionParameterTagTimeout							= 0x04,
+	kOBEXSessionParameterTagSessionOpcode					= 0x05
+
+};
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
+
 //===========================================================================================================================
 //	OBEXVersions
 //===========================================================================================================================
@@ -425,7 +500,7 @@ enum OBEXRealmValues
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@enum		OBEXVersions
-	@abstract	The available/supported OBEX versions. Currently there is only one!
+	@abstract	The available/supported OBEX versions.
 */
 
 enum OBEXVersions
@@ -760,9 +835,13 @@ typedef	void	(*OBEXSessionEventCallback)	( const OBEXSessionEvent * inEvent );
 	@abstract	Destroy an OBEX session. If connections are open, they will (eventually) be terminated for you.
 	@param		inSessionRef	A valid service reference.
 	@result		An error code value. 0 if successful.
+	@discussion	
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef );
+OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionHasOpenOBEXConnection
@@ -773,10 +852,14 @@ OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef );
 	@result		An error code value. 0 if successful.
 	@discussion	This method will return true only if (a) you are transport-connected to another OBEX target and
 				(b) an OBEX Connect command has been issued and received successfully.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionHasOpenOBEXConnection(	OBEXSessionRef	inSessionRef,
-												Boolean *		outIsConnected );
+												Boolean *		outIsConnected )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetMaxPacketLength
@@ -786,9 +869,13 @@ OBEXError	OBEXSessionHasOpenOBEXConnection(	OBEXSessionRef	inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	This value *could* change before and after a connect command has been sent or a connect
 				command response has been received, since the recipient could negotiate a lower max packet size.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPacketLength * outLength );
+OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetAvailableCommandPayloadLength
@@ -804,9 +891,13 @@ OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPac
 				before you send the command, allowing you to properly chop up your headers before sending them. This will
 				guarantee that (a) you use up all the available space in a packet and (b) that you do not get an error
 				trying to send too much information at once.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength );
+OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetAvailableCommandPayloadLength
@@ -824,9 +915,13 @@ OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionR
 				before you send the command, allowing you to properly chop up your headers before sending them. This will
 				guarantee that (a) you use up all the available space in a packet and (b) that you do not get an error
 				trying to send too much information at once.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength );
+OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -855,6 +950,10 @@ OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef in
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback parameter will
 				result in an error. If you have already established an OBEX connection and you call this again you will
 				get an 'kOBEXSessionAlreadyConnectedError' as a result.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionConnect(	OBEXSessionRef	inSessionRef,
@@ -863,7 +962,7 @@ OBEXError	OBEXSessionConnect(	OBEXSessionRef	inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefCon );
+								void *						inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionDisconnect
@@ -878,13 +977,17 @@ OBEXError	OBEXSessionConnect(	OBEXSessionRef	inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionDisconnect(	OBEXSessionRef					inSessionRef,
 									void*	 						inOptionalHeaders,
 									size_t							inOptionalHeadersLength,
 									OBEXSessionEventCallback		inCallback,
-									void *							inUserRefCon );
+									void *							inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionPut
@@ -903,6 +1006,10 @@ OBEXError	OBEXSessionDisconnect(	OBEXSessionRef					inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionPut(	OBEXSessionRef					inSessionRef,
@@ -912,7 +1019,7 @@ OBEXError	OBEXSessionPut(	OBEXSessionRef					inSessionRef,
 							void* 							inBodyData,
 							size_t							inBodyDataLength,
 							OBEXSessionEventCallback		inCallback,
-							void *							inUserRefCon );
+							void *							inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 										
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGet
@@ -927,6 +1034,10 @@ OBEXError	OBEXSessionPut(	OBEXSessionRef					inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionGet(	OBEXSessionRef				inSessionRef,
@@ -934,7 +1045,7 @@ OBEXError	OBEXSessionGet(	OBEXSessionRef				inSessionRef,
 							void* 						inHeadersData,
 							size_t						inHeadersDataLength,
 							OBEXSessionEventCallback	inCallback,
-							void*						inUserRefCon );
+							void*						inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 										
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionAbort
@@ -949,13 +1060,17 @@ OBEXError	OBEXSessionGet(	OBEXSessionRef				inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionAbort(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefcon );
+								void *						inUserRefcon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetPath
@@ -972,6 +1087,10 @@ OBEXError	OBEXSessionAbort(	OBEXSessionRef				inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
@@ -980,7 +1099,7 @@ OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void*						inUserRefcon );
+								void*						inUserRefcon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -1009,6 +1128,10 @@ OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionConnectResponse(	OBEXSessionRef						inSessionRef,
@@ -1018,7 +1141,7 @@ OBEXError	OBEXSessionConnectResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon );
+										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionDisconnectResponse
@@ -1034,6 +1157,10 @@ OBEXError	OBEXSessionConnectResponse(	OBEXSessionRef						inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 										
 OBEXError	OBEXSessionDisconnectResponse(	OBEXSessionRef							inSessionRef,
@@ -1041,7 +1168,7 @@ OBEXError	OBEXSessionDisconnectResponse(	OBEXSessionRef							inSessionRef,
 											void* 									inOptionalHeaders,
 											size_t									inOptionalHeadersLength,
 											OBEXSessionEventCallback				inCallback,
-											void *									inUserRefCon );
+											void *									inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetResponse
@@ -1057,6 +1184,10 @@ OBEXError	OBEXSessionDisconnectResponse(	OBEXSessionRef							inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 	
 OBEXError	OBEXSessionGetResponse(	OBEXSessionRef						inSessionRef,
@@ -1064,7 +1195,7 @@ OBEXError	OBEXSessionGetResponse(	OBEXSessionRef						inSessionRef,
 									void* 								inOptionalHeaders,
 									size_t								inOptionalHeadersLength,
 									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon );
+									void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionPutResponse
@@ -1080,6 +1211,10 @@ OBEXError	OBEXSessionGetResponse(	OBEXSessionRef						inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 	
 OBEXError	OBEXSessionPutResponse(	OBEXSessionRef						inSessionRef,
@@ -1087,7 +1222,7 @@ OBEXError	OBEXSessionPutResponse(	OBEXSessionRef						inSessionRef,
 									void* 								inOptionalHeaders,
 									size_t								inOptionalHeadersLength,
 									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon );
+									void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionAbortResponse
@@ -1103,6 +1238,10 @@ OBEXError	OBEXSessionPutResponse(	OBEXSessionRef						inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionAbortResponse(	OBEXSessionRef						inSessionRef,
@@ -1110,7 +1249,7 @@ OBEXError	OBEXSessionAbortResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon );		
+										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;		
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetPathResponse
@@ -1126,6 +1265,10 @@ OBEXError	OBEXSessionAbortResponse(	OBEXSessionRef						inSessionRef,
 	@result		An error code value. 0 if successful.
 	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
 				result in an error.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
@@ -1133,7 +1276,7 @@ OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon );
+										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetServerCallback
@@ -1146,11 +1289,15 @@ OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
 	@discussion	Sets callback to be used when an event occurs on an OBEXSession. This is important for OBEX servers, as you
 				will need a way to be called back when the first command is sent to you. So, be sure to set yourself
 				up to listen for events when you are ready to receive them.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
 											OBEXSessionEventCallback			inCallback,
-											void *								inUserRefCon	);
+											void *								inUserRefCon	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 #if 0
@@ -1203,6 +1350,10 @@ OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
 	@param		inOrganizationCharsetLength		Length of data for the Title charset.
 	@result		An CFDataRef containing the compiled data. nil if we failed.
 	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
@@ -1232,7 +1383,7 @@ CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
 							const void *	inTitle,
 							uint32_t		inTitleLength,
 							const void *	inTitleCharset,
-							uint32_t		inTitleCharsetLength	);
+							uint32_t		inTitleCharsetLength	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXCreateVEvent
@@ -1260,6 +1411,10 @@ CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
 	@result		A valid CFDataRef - nil if we failed.
 	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
 				Be aware that certain devices such as Ericsson phones MUST have certain fields, such as a start and end date.
+
+				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
+				***		You should transition your code to Objective-C equivalents.
+				***		This API may be removed any time in the future.
 */
 
 CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
@@ -1279,7 +1434,7 @@ CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
 								const char *	inLocation,
 								uint32_t		inLocationLength,
 								const char *	inXIRMCLUID,
-								uint32_t		inXIRMCLUIDLength			);
+								uint32_t		inXIRMCLUIDLength			)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 
 

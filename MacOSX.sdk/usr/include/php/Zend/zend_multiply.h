@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_multiply.h,v 1.10.2.1.2.3 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_multiply.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #if defined(__i386__) && defined(__GNUC__)
 
@@ -29,6 +29,19 @@
 			: "0"(a), "r"(b), "1"(0));								\
 	if (usedval) (dval) = (double) (a) * (double) (b);				\
 	else (lval) = __tmpvar;											\
+} while (0)
+
+#elif SIZEOF_LONG == 4 && defined(HAVE_ZEND_LONG64)
+
+#define ZEND_SIGNED_MULTIPLY_LONG(a, b, lval, dval, usedval) do {	\
+	zend_long64 __result = (zend_long64) (a) * (zend_long64) (b);	\
+	if (__result > LONG_MAX || __result < LONG_MIN) {				\
+		(dval) = (double) __result;									\
+		(usedval) = 1;												\
+	} else {														\
+		(lval) = (long) __result;									\
+		(usedval) = 0;												\
+	}																\
 } while (0)
 
 #else

@@ -3,9 +3,9 @@
  
      Contains:   Base object for HIToolbox
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -90,15 +90,16 @@ extern "C" {
  *    kEventHIObjectConstruct event. When called like this, you are not
  *    really being called in the context of a handler stack, so you
  *    cannot do things like CallNextEventHandler. The userData
- *    parameter is what you specified when you registered the class.
- *    Typically, during construction you will allocate memory yourself
- *    to store your own instance data; this allocation might be as
- *    simple as calling malloc or NewPtr, or it might involve creating
- *    your own C++ object. In the construct event, you are passed the
- *    base HIObjectRef of the object being created. Typically you would
- *    store this HIObjectRef in your own instance data for later use.
- *    When handling this construct event, you should be sure to use
- *    SetEventParameter to set the kEventParamHIObjectInstance
+ *    parameter is what you specified as the inConstructData parameter
+ *    to HIObjectRegisterSubclass. Typically, during construction you
+ *    will allocate memory yourself to store your own instance data;
+ *    this allocation might be as simple as calling malloc or NewPtr,
+ *    or it might involve creating your own C++ object. In the
+ *    construct event, the base HIObject of the object being created is
+ *    passed as the kEventParamHIObjectInstance parameter. Typically
+ *    you would store this HIObjectRef in your own instance data for
+ *    later use. When handling this construct event, you should be sure
+ *    to use SetEventParameter to set the kEventParamHIObjectInstance
  *    parameter in the construction event with your own instance data.
  *    You must use typeVoidPtr as the type. 
  *    

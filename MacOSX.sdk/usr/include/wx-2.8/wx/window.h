@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by: Ron Lee
 // Created:     01/02/97
-// RCS-ID:      $Id: window.h,v 1.234.4.1 2007/04/16 13:01:06 VZ Exp $
+// RCS-ID:      $Id: window.h 52330 2008-03-05 14:19:38Z VS $
 // Copyright:   (c) Vadim Zeitlin
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,22 +53,22 @@
 // forward declarations
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxCaret;
-class WXDLLEXPORT wxControl;
-class WXDLLEXPORT wxCursor;
-class WXDLLEXPORT wxDC;
-class WXDLLEXPORT wxDropTarget;
-class WXDLLEXPORT wxItemResource;
-class WXDLLEXPORT wxLayoutConstraints;
-class WXDLLEXPORT wxResourceTable;
-class WXDLLEXPORT wxSizer;
-class WXDLLEXPORT wxToolTip;
-class WXDLLEXPORT wxWindowBase;
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxScrollHelper;
+class WXDLLIMPEXP_FWD_CORE wxCaret;
+class WXDLLIMPEXP_FWD_CORE wxControl;
+class WXDLLIMPEXP_FWD_CORE wxCursor;
+class WXDLLIMPEXP_FWD_CORE wxDC;
+class WXDLLIMPEXP_FWD_CORE wxDropTarget;
+class WXDLLIMPEXP_FWD_CORE wxItemResource;
+class WXDLLIMPEXP_FWD_CORE wxLayoutConstraints;
+class WXDLLIMPEXP_FWD_CORE wxResourceTable;
+class WXDLLIMPEXP_FWD_CORE wxSizer;
+class WXDLLIMPEXP_FWD_CORE wxToolTip;
+class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxScrollHelper;
 
 #if wxUSE_ACCESSIBILITY
-class WXDLLEXPORT wxAccessible;
+class WXDLLIMPEXP_FWD_CORE wxAccessible;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -326,6 +326,12 @@ public:
         return wxRect(GetClientAreaOrigin(), GetClientSize());
     }
 
+#if wxABI_VERSION >= 20808
+    // client<->window size conversion
+    wxSize ClientToWindowSize(const wxSize& size) const;
+    wxSize WindowToClientSize(const wxSize& size) const;
+#endif
+
         // get the size best suited for the window (in fact, minimal
         // acceptable size using which it will still look "nice" in
         // most situations)
@@ -572,6 +578,13 @@ public:
 
     // needed just for extended runtime
     const wxWindowList& GetWindowChildren() const { return GetChildren() ; }
+
+#if wxABI_VERSION >= 20808
+        // get the window before/after this one in the parents children list,
+        // returns NULL if this is the first/last window
+    wxWindow *GetPrevSibling() const { return DoGetSibling(MoveBefore); }
+    wxWindow *GetNextSibling() const { return DoGetSibling(MoveAfter); }
+#endif // wx 2.8.8+
 
         // get the parent or the parent of the parent
     wxWindow *GetParent() const { return m_parent; }
@@ -1141,12 +1154,18 @@ protected:
     virtual bool TryValidator(wxEvent& event);
     virtual bool TryParent(wxEvent& event);
 
-    // common part of MoveBefore/AfterInTabOrder()
     enum MoveKind
     {
         MoveBefore,     // insert before the given window
         MoveAfter       // insert after the given window
     };
+
+#if wxABI_VERSION >= 20808
+    // common part of GetPrev/NextSibling()
+    wxWindow *DoGetSibling(MoveKind order) const;
+#endif // wx 2.8.8+
+
+    // common part of MoveBefore/AfterInTabOrder()
     virtual void DoMoveInTabOrder(wxWindow *win, MoveKind move);
 
 #if wxUSE_CONSTRAINTS
@@ -1387,7 +1406,7 @@ private:
     static int ms_lastControlId;
 
     // the stack of windows which have captured the mouse
-    static struct WXDLLEXPORT wxWindowNext *ms_winCaptureNext;
+    static struct WXDLLIMPEXP_FWD_CORE wxWindowNext *ms_winCaptureNext;
     // the window that currently has mouse capture
     static wxWindow *ms_winCaptureCurrent;
     // indicates if execution is inside CaptureMouse/ReleaseMouse

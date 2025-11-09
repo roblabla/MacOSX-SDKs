@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _SCDYNAMICSTORECOPYSPECIFIC_H
 #define _SCDYNAMICSTORECOPYSPECIFIC_H
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
 #include <CoreFoundation/CoreFoundation.h>
@@ -58,7 +59,7 @@ CFStringRef
 SCDynamicStoreCopyComputerName		(
 					SCDynamicStoreRef	store,
 					CFStringEncoding	*nameEncoding
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyConsoleUser
@@ -87,7 +88,7 @@ SCDynamicStoreCopyConsoleUser		(
 					SCDynamicStoreRef	store,
 					uid_t			*uid,
 					gid_t			*gid
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyLocalHostName
@@ -102,7 +103,7 @@ SCDynamicStoreCopyConsoleUser		(
 CFStringRef
 SCDynamicStoreCopyLocalHostName		(
 					SCDynamicStoreRef	store
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyLocation
@@ -118,7 +119,7 @@ SCDynamicStoreCopyLocalHostName		(
 CFStringRef
 SCDynamicStoreCopyLocation		(
 					SCDynamicStoreRef	store
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyProxies
@@ -203,8 +204,8 @@ SCDynamicStoreCopyLocation		(
 CFDictionaryRef
 SCDynamicStoreCopyProxies		(
 					SCDynamicStoreRef	store
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
 
-#endif /* _SCDYNAMICSTORECOPYSPECIFIC_H */
+#endif	/* _SCDYNAMICSTORECOPYSPECIFIC_H */

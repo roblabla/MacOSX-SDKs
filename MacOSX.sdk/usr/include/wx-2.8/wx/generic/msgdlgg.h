@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: msgdlgg.h,v 1.22 2006/01/26 17:20:07 ABX Exp $
+// RCS-ID:      $Id: msgdlgg.h 49765 2007-11-09 18:32:38Z DE $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ private:
     DECLARE_EVENT_TABLE()
 };
 
-#if (!defined( __WXMSW__ ) && !defined( __WXMAC__) && !defined(__WXPM__)) || defined(__WXUNIVERSAL__)
+#if (!defined( __WXMSW__ ) && !defined( __WXMAC__) && !defined(__WXPM__) && !defined(__WXCOCOA__)) || defined(__WXUNIVERSAL__)
 #define wxMessageDialog wxGenericMessageDialog
 #endif
 

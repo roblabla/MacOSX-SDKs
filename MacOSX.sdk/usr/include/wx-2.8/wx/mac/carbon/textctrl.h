@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: textctrl.h,v 1.24 2006/12/11 06:18:54 RD Exp $
+// RCS-ID:      $Id: textctrl.h 46466 2007-06-14 21:59:28Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,6 +18,9 @@
     // has more features (backgrounds etc.), but may show redraw artefacts and other
     // problems depending on your usage; hence, the default is 'false'.
     #define wxMAC_TEXTCONTROL_USE_MLTE wxT("mac.textcontrol-use-mlte")
+    // set this to 'true' if you want editable text controls to have spell checking turned
+    // on by default, you can change this setting individually on a control using MacCheckSpelling
+    #define wxMAC_TEXTCONTROL_USE_SPELL_CHECKER wxT("mac.textcontrol-use-spell-checker")
 #endif
 
 #include "wx/control.h"

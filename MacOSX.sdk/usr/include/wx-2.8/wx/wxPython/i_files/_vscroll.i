@@ -6,7 +6,7 @@
 // Author:      Robin Dunn
 //
 // Created:     14-Aug-2003
-// RCS-ID:      $Id: _vscroll.i,v 1.25 2006/11/14 22:03:43 RD Exp $
+// RCS-ID:      $Id: _vscroll.i 52945 2008-03-31 18:00:23Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -561,7 +561,7 @@ void wxPyHtmlListBox::OnLinkClicked(size_t n,
     }
     wxPyEndBlockThreads(blocked);
     if (! found)
-        wxPyHtmlListBox::OnLinkClicked(n, link);
+        wxHtmlListBox::OnLinkClicked(n, link);
 }
  
 %}
@@ -655,6 +655,13 @@ public:
                 long style = wxHLB_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxPySimpleHtmlListBoxNameStr);
+
+    %extend {
+        void _Clear() {
+            self->Clear();
+        }
+    }
+    %pythoncode { Clear = _Clear }
 };
 
 //---------------------------------------------------------------------------

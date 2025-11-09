@@ -1,7 +1,7 @@
 /*
 	NSColorSpace.h
 	Application Kit
-	Copyright (c) 2004-2007, Apple Inc.
+	Copyright (c) 2004-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 #import <AppKit/AppKitDefines.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-@class NSData;
+@class NSData, NSArray;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
@@ -49,15 +49,13 @@ typedef NSInteger NSColorSpaceModel;
 - (id)initWithColorSyncProfile:(void * /* CMProfileRef */)prof;
 - (void * /* CMProfileRef */)colorSyncProfile;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* Create NSColorSpace from a CGColorSpace.  Might return nil if the CGColorSpace is one not supported by NSColorSpace. Internally the NSColorSpace might retain or create a new copy of the provided CGColorSpace; do not rely on pointer equality of the CGColorSpace provided to this function, when later queried. Archiving, for instance, might not persist the pointer equality/identity of the CGColorSpace.
 */
-- (id)initWithCGColorSpace:(CGColorSpaceRef)cgColorSpace;
+- (id)initWithCGColorSpace:(CGColorSpaceRef)cgColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Might return NULL if the NSColorSpace space cannot be represented as a CGColorSpace.
 */
-- (CGColorSpaceRef)CGColorSpace;
-#endif
+- (CGColorSpaceRef)CGColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (NSInteger)numberOfColorComponents;		// Does not include alpha
 - (NSColorSpaceModel)colorSpaceModel;
@@ -70,10 +68,14 @@ typedef NSInteger NSColorSpaceModel;
 + (NSColorSpace *)deviceGrayColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceWhiteColorSpace
 + (NSColorSpace *)deviceCMYKColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceCMYKColorSpace
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-+ (NSColorSpace *)sRGBColorSpace;
-+ (NSColorSpace *)adobeRGB1998ColorSpace;
-#endif
++ (NSColorSpace *)sRGBColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (NSColorSpace *)genericGamma22GrayColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;  // The "generic" color space with gamma 2.2.
+
++ (NSColorSpace *)adobeRGB1998ColorSpace  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Return the list of color spaces available on the system that are displayed by the color panel, in the order they are displayed in the color panel. Doesn't return arbitrary color spaces which may have been created on the fly, or spaces without user displayable names. Pass model==NSUnknownColorSpaceModel to get all color spaces. Empty array is returned if no color spaces are available for the specified model. 
+*/
++ (NSArray *)availableColorSpacesWithModel:(NSColorSpaceModel)model  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	
 
 @end
 

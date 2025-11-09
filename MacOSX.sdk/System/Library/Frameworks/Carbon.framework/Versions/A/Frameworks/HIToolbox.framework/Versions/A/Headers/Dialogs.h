@@ -3,9 +3,9 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -384,8 +384,7 @@ enum {
   /*
    * Requests the Dialog Manager to set the dialog box’s background
    * color or pattern, and to use Appearance Manager APIs to draw the
-   * dialog frame. In 64-bit mode, this flag is set automatically for
-   * all dialogs.
+   * dialog frame.
    */
   kDialogFlagsUseThemeBackground = (1 << 0),
 
@@ -393,7 +392,6 @@ enum {
    * Requests the Dialog Manager to create a root control in the dialog
    * window and establish a control embedding hierarchy. Any dialog
    * items become controls once the embedding hierarchy is established.
-   * In 64-bit mode, this flag is set automatically for all dialogs.
    */
   kDialogFlagsUseControlHierarchy = (1 << 1),
 
@@ -416,9 +414,8 @@ enum {
   /*
    * Requests the Dialog Manager to create a compositing window to
    * contain the dialog items. The window will also use the standard
-   * window event handler and will have live resize enabled. In 64-bit
-   * mode, this flag is set automatically for all dialogs. Available in
-   * Mac OS X 10.5 and later.
+   * window event handler and will have live resize enabled. Available
+   * in Mac OS X 10.5 and later.
    */
   kDialogFlagsUseCompositing    = (1 << 8)
 };
@@ -436,8 +433,7 @@ enum {
   /*
    * Requests the Dialog Manager to set the alert’s background color or
    * pattern, and to use Appearance Manager APIs to draw the alert
-   * frame. In 64-bit mode, this flag is set automatically for all
-   * alerts.
+   * frame.
    */
   kAlertFlagsUseThemeBackground = (1 << 0),
 
@@ -445,7 +441,6 @@ enum {
    * Requests the Dialog Manager to create a root control in the alert
    * window and establish a control embedding hierarchy. Any alert
    * items become controls once the embedding hierarchy is established.
-   * In 64-bit mode, this flag is set automatically for all alerts.
    */
   kAlertFlagsUseControlHierarchy = (1 << 1),
 
@@ -468,8 +463,7 @@ enum {
   /*
    * Requests the Dialog Manager to create a compositing window to
    * contain the alert items. The window will also use the standard
-   * window event handler. In 64-bit mode, this flag is set
-   * automatically for all alerts. Available in Mac OS X 10.5 and later.
+   * window event handler. Available in Mac OS X 10.5 and later.
    */
   kAlertFlagsUseCompositing     = (1 << 8)
 };

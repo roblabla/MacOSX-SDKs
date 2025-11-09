@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,7 +8,7 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
@@ -375,7 +375,7 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (NSData *)HTTPBody;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*!
     @method HTTPBodyStream
     @abstract Returns the request body stream of the receiver
@@ -471,7 +471,7 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (void)setHTTPBody:(NSData *)data;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*!
     @method setHTTPBodyStream:
     @abstract Sets the request body to be the contents of the given stream. 

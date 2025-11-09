@@ -3,10 +3,7 @@
 
      Contains:   A component API for encoding/decoding audio data.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -81,13 +78,14 @@
 //=============================================================================
 
 #include <TargetConditionals.h>
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreServices/CoreServices.h>
 	#include <CoreAudio/CoreAudioTypes.h>
+	#include <AudioUnit/AudioComponent.h>
 #else
 	#include "Components.h"
+	#include "AudioComponent.h"
 	#include "CoreAudioTypes.h"
 #endif
 
@@ -102,8 +100,8 @@ extern "C"
 //=============================================================================
 
 
-typedef ComponentInstance	AudioCodec;
-typedef UInt32				AudioCodecPropertyID;
+typedef AudioComponentInstance	AudioCodec;
+typedef UInt32					AudioCodecPropertyID;
 
 /*!
     @struct AudioCodecMagicCookieInfo
@@ -278,7 +276,9 @@ enum
 					
 					These properties may have different values depending on whether the
 					codec is initialized or not. All properties can be read at any time
-					the codec is open.
+					the codec is open. However, to ensure the codec is in a valid 
+					operational state and therefore the property value is valid the codec
+					must be initialized at the time the property is read.
 					
 					Properties that are writable are only writable when the codec
 					is not initialized.
@@ -340,9 +340,10 @@ enum
 						else means the codec is initialized. This should never be settable directly.
 						Must be set by AudioCodecInitialize and AudioCodecUnitialize.
 	@constant		kAudioCodecPropertyCurrentTargetBitRate
-						A UInt32 containing the number of bits per second to aim for when encoding 
-						data. This property is usually only relevant to encoders, but if a decoder 
+						A UInt32 containing the number of bits per second to aim for when encoding
+						data. This property is usually only relevant to encoders, but if a decoder
 						can know what bit rate it's set to it may report it.
+						This property is irrelevant if the encoder is configured as kAudioCodecBitRateControlMode_Variable.
 						Writable on encoders if supported.
 	@constant		kAudioCodecPropertyCurrentInputSampleRate
 						A Float64 containing the current input sample rate in Hz. No Default.
@@ -424,8 +425,11 @@ enum
 						handling the enhancement layers. For example, a High Efficiency AAC bitstream which contains 
 						an AAC Low Complexity base layer can be decoded by any AAC decoder.
 	@constant		kAudioCodecPropertySoundQualityForVBR
-						A UInt32 that sets a target sound quality level, which is required by an encoder configured
-						at kAudioCodecBitRateControlMode_Variable. The property value is between [0 - 0x7F].
+						A UInt32 that sets a target sound quality level.
+						Unlike kAudioCodecPropertyQualitySetting which is relevant to all BitRate Control Modes,
+						this property only needs to be set by an encoder configured at kAudioCodecBitRateControlMode_Variable.
+						The property value is between [0 - 0x7F].
+						See also kAudioCodecPropertyQualitySetting
 						Writable if supported.
 	@constant		kAudioCodecPropertyMinimumDelayMode
 						A UInt32 equal 1 sets the encoder, where applicable, in it's lowest possible delay mode. An encoder
@@ -536,8 +540,9 @@ enum
 						the variation of the bit rate.
 	@constant		kAudioCodecBitRateControlMode_Variable
 						Similar to the VBR constrained mode, however the packet size is virtually unconstrained.
-						The coding process targets constant sound quality. This mode usually provides 
-						the best tradeoff between quality and bit rate.
+						The coding process targets constant sound quality, and the sound quality level is 
+						set by kAudioCodecPropertySoundQualityForVBR.
+						This mode usually provides the best tradeoff between quality and bit rate.
 */
 enum
 {
@@ -734,13 +739,13 @@ enum
 	@param			outWritable
 						Flag indicating wether the underlying property can be modified or not 
  
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecGetPropertyInfo(	AudioCodec				inCodec,
 							AudioCodecPropertyID	inPropertyID,
 							UInt32*					outSize,
-							Boolean*				outWritable)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							Boolean*				outWritable)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -759,13 +764,13 @@ AudioCodecGetPropertyInfo(	AudioCodec				inCodec,
 	@param			outPropertyData
 						Pointer to the property data buffer
 
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecGetProperty(	AudioCodec				inCodec,
 						AudioCodecPropertyID	inPropertyID,
 						UInt32*					ioPropertyDataSize,
-						void*					outPropertyData)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+						void*					outPropertyData)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -782,13 +787,13 @@ AudioCodecGetProperty(	AudioCodec				inCodec,
 	@param			inPropertyData
 						Pointer to the property data buffer
  
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecSetProperty(	AudioCodec				inCodec,
 						AudioCodecPropertyID	inPropertyID,
 						UInt32					inPropertyDataSize,
-						const void*				inPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+						const void*				inPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 //=============================================================================
@@ -815,15 +820,15 @@ AudioCodecSetProperty(	AudioCodec				inCodec,
 	@param			inMagicCookieByteSize
 						Size in bytes of the magic cookie
   
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecInitialize(	AudioCodec							inCodec,
 						const AudioStreamBasicDescription*	inInputFormat,
 						const AudioStreamBasicDescription*	inOutputFormat,
 						const void*							inMagicCookie,
 						UInt32								inMagicCookieByteSize)
-																		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -836,10 +841,10 @@ AudioCodecInitialize(	AudioCodec							inCodec,
 	@param			inCodec
 						An AudioCodec instance
  
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
-AudioCodecUninitialize(AudioCodec inCodec)								AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus
+AudioCodecUninitialize(AudioCodec inCodec)								__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -868,15 +873,15 @@ AudioCodecUninitialize(AudioCodec inCodec)								AVAILABLE_MAC_OS_X_VERSION_10_
 	@param			inPacketDescription
 						The packet description pointer
  
-	@result			The ComponentResult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecAppendInputData(	AudioCodec							inCodec,
 							const void*							inInputData,
 							UInt32*								ioInputDataByteSize,
 							UInt32*								ioNumberPackets,
 							const AudioStreamPacketDescription*	inPacketDescription)
-																		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -906,16 +911,16 @@ AudioCodecAppendInputData(	AudioCodec							inCodec,
 						A pointer to the size
 	@param			ioNumberPackets
 						number of input/output packets
-	@result			The Componentresult value
+	@result			The OSStatus value
 */
-extern ComponentResult
+extern OSStatus
 AudioCodecProduceOutputPackets(	AudioCodec						inCodec,
 								void*							outOutputData,
 								UInt32*							ioOutputDataByteSize,
 								UInt32*							ioNumberPackets,
 								AudioStreamPacketDescription*	outPacketDescription,
 								UInt32*							outStatus)
-																		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
 	@function		AudioCodecReset
@@ -926,10 +931,10 @@ AudioCodecProduceOutputPackets(	AudioCodec						inCodec,
  
 	@param			inCodec The audio codec descriptor
  
-	@result			the ComponentResult value
+	@result			the OSStatus value
 */
-extern ComponentResult
-AudioCodecReset(AudioCodec inCodec)										AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus
+AudioCodecReset(AudioCodec inCodec)										__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 //=====================================================================================================================

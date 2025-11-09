@@ -26,45 +26,63 @@
 #include <IOKit/IOService.h>
 #include <IOKit/graphics/IOFramebuffer.h>
 
-extern const OSSymbol *	gIODisplayParametersKey;
-extern const OSSymbol *	gIODisplayGUIDKey;
+extern const OSSymbol * gIODisplayParametersKey;
+extern const OSSymbol * gIODisplayGUIDKey;
 
-extern const OSSymbol *	gIODisplayValueKey;
-extern const OSSymbol *	gIODisplayMinValueKey;
-extern const OSSymbol *	gIODisplayMaxValueKey;
+extern const OSSymbol * gIODisplayValueKey;
+extern const OSSymbol * gIODisplayMinValueKey;
+extern const OSSymbol * gIODisplayMaxValueKey;
 
-extern const OSSymbol *	gIODisplayContrastKey;
-extern const OSSymbol *	gIODisplayBrightnessKey;
-extern const OSSymbol *	gIODisplayHorizontalPositionKey;
+extern const OSSymbol * gIODisplayContrastKey;
+extern const OSSymbol * gIODisplayBrightnessKey;
+extern const OSSymbol * gIODisplayLinearBrightnessKey;
+extern const OSSymbol * gIODisplayUsableLinearBrightnessKey;
+extern const OSSymbol * gIODisplayHorizontalPositionKey;
 extern const OSSymbol * gIODisplayHorizontalSizeKey;
-extern const OSSymbol *	gIODisplayVerticalPositionKey;
-extern const OSSymbol *	gIODisplayVerticalSizeKey;
-extern const OSSymbol *	gIODisplayTrapezoidKey;
-extern const OSSymbol *	gIODisplayPincushionKey;
-extern const OSSymbol *	gIODisplayParallelogramKey;
-extern const OSSymbol *	gIODisplayRotationKey;
+extern const OSSymbol * gIODisplayVerticalPositionKey;
+extern const OSSymbol * gIODisplayVerticalSizeKey;
+extern const OSSymbol * gIODisplayTrapezoidKey;
+extern const OSSymbol * gIODisplayPincushionKey;
+extern const OSSymbol * gIODisplayParallelogramKey;
+extern const OSSymbol * gIODisplayRotationKey;
 extern const OSSymbol * gIODisplayOverscanKey;
 extern const OSSymbol * gIODisplayVideoBestKey;
+extern const OSSymbol * gIODisplaySelectedColorModeKey;
+
+extern const OSSymbol * gIODisplayRedGammaScaleKey;
+extern const OSSymbol * gIODisplayGreenGammaScaleKey;
+extern const OSSymbol * gIODisplayBlueGammaScaleKey;
 
 extern const OSSymbol * gIODisplayParametersTheatreModeKey;
 extern const OSSymbol * gIODisplayParametersTheatreModeWindowKey;
 
-extern const OSSymbol *	gIODisplayParametersCommitKey;
-extern const OSSymbol *	gIODisplayParametersDefaultKey;
+extern const OSSymbol * gIODisplayMCCSVersionKey;
+extern const OSSymbol * gIODisplayTechnologyTypeKey;
+extern const OSSymbol * gIODisplayUsageTimeKey;
+extern const OSSymbol * gIODisplayFirmwareLevelKey;
+
+extern const OSSymbol * gIODisplaySpeakerVolumeKey;
+extern const OSSymbol * gIODisplaySpeakerSelectKey;
+extern const OSSymbol * gIODisplayMicrophoneVolumeKey;
+extern const OSSymbol * gIODisplayAmbientLightSensorKey;
+extern const OSSymbol * gIODisplayAudioMuteAndScreenBlankKey;
+extern const OSSymbol * gIODisplayAudioTrebleKey;
+extern const OSSymbol * gIODisplayAudioBassKey;
+extern const OSSymbol * gIODisplayAudioBalanceLRKey;
+extern const OSSymbol * gIODisplayAudioProcessorModeKey;
+extern const OSSymbol * gIODisplayPowerModeKey;
+extern const OSSymbol * gIODisplayManufacturerSpecificKey;
+
+extern const OSSymbol * gIODisplayPowerStateKey;
+extern const OSSymbol * gIODisplayControllerIDKey;
+
+extern const OSSymbol * gIODisplayParametersCommitKey;
+extern const OSSymbol * gIODisplayParametersDefaultKey;
+extern const OSSymbol * gIODisplayParametersFlushKey;
 
 enum {
     kIODisplayNumPowerStates = 4,
     kIODisplayMaxPowerState  = kIODisplayNumPowerStates - 1
-};
-
-// these are the private instance variables for power management
-struct DisplayPMVars
-{
-    UInt32		currentState;
-    // highest state number normally, lowest usable state in emergency
-    unsigned long	maxState;
-    // true if the display has had power lowered due to user inactivity
-    bool 		displayIdle;
 };
 
 class IODisplayConnect : public IOService
@@ -72,7 +90,7 @@ class IODisplayConnect : public IOService
     OSDeclareDefaultStructors(IODisplayConnect)
 
 private:
-    IOIndex	connection;
+    IOIndex     connection;
 
 protected:
 /*! @struct ExpansionData
@@ -88,8 +106,8 @@ public:
     virtual bool initWithConnection( IOIndex connection );
     virtual IOFramebuffer * getFramebuffer( void );
     virtual IOIndex getConnection( void );
-    virtual IOReturn getAttributeForConnection( IOSelect selector, UInt32 * value );
-    virtual IOReturn setAttributeForConnection( IOSelect selector, UInt32 value );
+    virtual IOReturn getAttributeForConnection( IOSelect selector, uintptr_t * value );
+    virtual IOReturn setAttributeForConnection( IOSelect selector, uintptr_t value );
     virtual void joinPMtree ( IOService * driver );
 };
 
@@ -102,20 +120,20 @@ public:
 
 protected:
     // used to query the framebuffer controller
-    IODisplayConnect *			fConnection;
-    class IODisplayParameterHandler *	fParameterHandler;
-    OSDictionary *  			fDisplayParams;
-    IONotifier *			fNotifier;
+    IODisplayConnect *                  fConnection;
+    class IODisplayParameterHandler *   fParameterHandler;
+    void *                      __resv;
+    IONotifier *                        fNotifier;
 
     // pointer to protected instance variables for power management
-    struct DisplayPMVars *		fDisplayPMVars;
+    struct IODisplayPMVars *              fDisplayPMVars;
 
     // reserved for future expansion
-    void * 				_IODisplay_reserved[32];
+    void *                              _IODisplay_reserved[32];
 
 public:
-    virtual IOService * probe(	IOService * 	provider,
-				SInt32 *	score );
+    virtual IOService * probe(  IOService *     provider,
+                                SInt32 *        score );
 
     virtual bool start( IOService * provider );
     virtual void stop( IOService * provider );
@@ -124,11 +142,11 @@ public:
     virtual IODisplayConnect * getConnection( void );
 
     virtual IOReturn getConnectFlagsForDisplayMode(
-		IODisplayModeID mode, UInt32 * flags );
+                IODisplayModeID mode, UInt32 * flags );
 
     virtual IOReturn getGammaTableByIndex(
-	UInt32 * channelCount, UInt32 * dataCount,
-    	UInt32 * dataWidth, void ** data );
+        UInt32 * channelCount, UInt32 * dataCount,
+        UInt32 * dataWidth, void ** data );
 
     virtual IOReturn readFramebufferEDID( void );
 
@@ -154,6 +172,7 @@ public:
 
     // power management methods
     virtual IOReturn setPowerState( unsigned long, IOService * );
+    void setDisplayPowerState(unsigned long state);
     virtual unsigned long maxCapabilityForDomainState( IOPMPowerFlags );
     virtual unsigned long initialPowerStateForDomainState( IOPMPowerFlags );
     virtual unsigned long powerStateForDomainState( IOPMPowerFlags );
@@ -199,39 +218,6 @@ private:
 class IOBacklightDisplay : public IODisplay
 {
     OSDeclareDefaultStructors(IOBacklightDisplay)
-
-protected:
-    // User preferred brightness level
-    SInt32	fCurrentUserBrightness;
-    SInt32	fCurrentBrightness;
-    UInt32	fCurrentPowerState;
-    SInt32	fMinBrightness;
-    SInt32	fMaxBrightness;
-    UInt16	fMaxBrightnessLevel[kIODisplayNumPowerStates];
-    
-    OSSymbol    *fDisplaySleepUsesDimSettingKey;
-    OSObject    *fPMSettingNotificationHandle;
-
-public:
-    virtual IOService * probe( IOService *, SInt32 * );
-    virtual void stop( IOService * provider );
-    virtual IOReturn setPowerState( unsigned long, IOService * );
-    virtual unsigned long maxCapabilityForDomainState( IOPMPowerFlags );
-    virtual unsigned long initialPowerStateForDomainState( IOPMPowerFlags );
-    virtual unsigned long powerStateForDomainState( IOPMPowerFlags );
-    virtual IOReturn setAggressiveness( unsigned long type, unsigned long newLevel );
-    virtual IOReturn getAggressiveness( unsigned long type, unsigned long * currentLevel );
-
-    // 
-    virtual void initPowerManagement( IOService * );
-
-public:
-    virtual bool doIntegerSet( OSDictionary * params,
-                               const OSSymbol * paramName, UInt32 value );
-    virtual bool setBrightness( SInt32 value );
-
-private:
-    void handlePMSettingCallback(const OSSymbol *, OSObject *, uintptr_t);
 
     OSMetaClassDeclareReservedUnused(IOBacklightDisplay, 0);
     OSMetaClassDeclareReservedUnused(IOBacklightDisplay, 1);

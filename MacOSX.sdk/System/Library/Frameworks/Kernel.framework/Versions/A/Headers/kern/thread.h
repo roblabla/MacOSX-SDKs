@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -114,6 +114,15 @@ __END_DECLS
 
 __BEGIN_DECLS
 
+
+/*! @function kernel_thread_start
+    @abstract Create a kernel thread.
+    @discussion This function takes three input parameters, namely reference to the function that the thread should execute, caller specified data and a reference which is used to return the newly created kernel thread. The function returns KERN_SUCCESS on success or an appropriate kernel code type indicating the error. It may be noted that the caller is responsible for explicitly releasing the reference to the created thread when no longer needed. This should be done by calling thread_deallocate(new_thread).
+    @param continuation A C-function pointer where the thread will begin execution.
+    @param parameter Caller specified data to be passed to the new thread.
+    @param new_thread Reference to the new thread is returned in this parameter.
+    @result Returns KERN_SUCCESS on success or an appropriate kernel code type.
+*/
 
 extern kern_return_t	kernel_thread_start(
 							thread_continue_t	continuation,

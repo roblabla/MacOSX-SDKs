@@ -3,7 +3,7 @@
 // Purpose:     wxNotebook class (a.k.a. property sheet, tabbed dialog)
 // Author:      Julian Smart
 // Modified by:
-// RCS-ID:      $Id: notebook.h,v 1.23 2006/10/08 17:36:44 VZ Exp $
+// RCS-ID:      $Id: notebook.h 41738 2006-10-08 17:37:23Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

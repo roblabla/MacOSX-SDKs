@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -305,10 +305,9 @@ enum {
    * alpha channel of any pixels that it touches to 1.0. 
    * 
    * Overlay windows support compositing mode on Mac OS X 10.3 and
-   * later. In 64-bit mode, you should draw into an overlay window by
-   * adding a standard or custom HIView and implementing the
-   * kEventControlDraw event for your view; do not use
-   * kEventWindowPaint. 
+   * later. You should draw into a compositing overlay window by adding
+   * a standard or custom HIView and implementing the kEventControlDraw
+   * event for your view; do not use kEventWindowPaint. 
    * 
    * You can also use the standard window event handler together with
    * regular controls in an overlay window. When using the standard
@@ -447,8 +446,8 @@ enum {
    * kDocumentWindowClass, kFloatingWindowClass, and
    * kUtilityWindowClass. For Floating and Utility window classes on
    * Mac OS X, this attribute must be added to the window using
-   * ChangeWindows after the window is created; it may not be added to
-   * the window at creation time.
+   * ChangeWindowAttributes after the window is created; it may not be
+   * added to the window at creation time.
    */
   kHIWindowBitCollapseBox       = 4,
 
@@ -478,10 +477,10 @@ enum {
    * may not have both kHIWindowBitUnifiedTitleAndToolbar and
    * kHIWindowBitTextured. If a window already has the Textured
    * attribute, attempting to set the Unified attribute will cause
-   * ChangeWindows to return an error, and vice versa. This constant
-   * was not added to this header file until Mac OS X 10.5, but it is
-   * actually available at runtime on Mac OS X 10.4 and later for
-   * windows of kDocumentWindowClass. However, on Mac OS X 10.5 and
+   * ChangeWindowAttributes to return an error, and vice versa. This
+   * constant was not added to this header file until Mac OS X 10.5,
+   * but it is actually available at runtime on Mac OS X 10.4 and later
+   * for windows of kDocumentWindowClass. However, on Mac OS X 10.5 and
    * later, kHIWindowBitUnifiedTitleAndToolbar no longer has any
    * effect, since all windows with toolbars now have a unified look.
    */
@@ -569,10 +568,8 @@ enum {
    * This window uses composited drawing. This means that the entire
    * window is comprised of HIViews, and can be treated thusly. This
    * attribute must be specified at window creation, and cannot be
-   * changed later with ChangeWindows. In 64-bit mode, all windows must
-   * be compositing, and you must always specify this attribute when
-   * creating a window from code or designing a window in Interface
-   * Builder. Available on Mac OS X 10.2 and later.
+   * changed later with ChangeWindowAttributes. Available on Mac OS X
+   * 10.2 and later.
    */
   kHIWindowBitCompositing       = 20,
 
@@ -686,7 +683,18 @@ enum {
    * (and calling that API will now set this attribute). Available for
    * all windows in Mac OS X 10.5 and later.
    */
-  kHIWindowBitAutoViewDragTracking = 34
+  kHIWindowBitAutoViewDragTracking = 34,
+
+  /*
+   * Indicates that this window automatically updates its ColorSync
+   * profile to the profile of the display containing the greatest area
+   * of the window. After the profile is set,
+   * kEventWindowColorSpaceChanged is sent to the window. The standard
+   * window handler's response is to repaint the entire window.
+   * Available for all windows in Mac OS X 10.6 and later. This
+   * attribute is automatically given to all compositing windows.
+   */
+  kHIWindowBitAutoCalibration   = 36
 };
 
 
@@ -706,22 +714,22 @@ enum {
   /*
    * A constant with value zero; the lack of any attributes.
    */
-  kWindowNoAttributes           = 0L,
+  kWindowNoAttributes           = 0,
 
   /*
    * See kHIWindowBitCloseBox.
    */
-  kWindowCloseBoxAttribute      = (1L << (kHIWindowBitCloseBox - 1)),
+  kWindowCloseBoxAttribute      = (1 << (kHIWindowBitCloseBox - 1)),
 
   /*
    * See kHIWindowBitZoomBox.
    */
-  kWindowHorizontalZoomAttribute = (1L << (kHIWindowBitZoomBox - 1)),
+  kWindowHorizontalZoomAttribute = (1 << (kHIWindowBitZoomBox - 1)),
 
   /*
    * See kHIWindowBitZoomBox.
    */
-  kWindowVerticalZoomAttribute  = (1L << kHIWindowBitZoomBox),
+  kWindowVerticalZoomAttribute  = (1 << kHIWindowBitZoomBox),
 
   /*
    * See kHIWindowBitZoomBox.
@@ -731,123 +739,123 @@ enum {
   /*
    * See kHIWindowBitCollapseBox.
    */
-  kWindowCollapseBoxAttribute   = (1L << (kHIWindowBitCollapseBox - 1)),
+  kWindowCollapseBoxAttribute   = (1 << (kHIWindowBitCollapseBox - 1)),
 
   /*
    * See kHIWindowBitResizable.
    */
-  kWindowResizableAttribute     = (1L << (kHIWindowBitResizable - 1)),
+  kWindowResizableAttribute     = (1 << (kHIWindowBitResizable - 1)),
 
   /*
    * See kHIWindowBitSideTitlebar.
    */
-  kWindowSideTitlebarAttribute  = (1L << (kHIWindowBitSideTitlebar - 1)),
+  kWindowSideTitlebarAttribute  = (1 << (kHIWindowBitSideTitlebar - 1)),
 
   /*
    * See kHIWindowBitToolbarButton.
    */
-  kWindowToolbarButtonAttribute = (1L << (kHIWindowBitToolbarButton - 1)),
+  kWindowToolbarButtonAttribute = (1 << (kHIWindowBitToolbarButton - 1)),
 
   /*
    * See kHIWindowBitUnifiedTitleAndToolbar.
    */
-  kWindowUnifiedTitleAndToolbarAttribute = (1L << (kHIWindowBitUnifiedTitleAndToolbar - 1)),
+  kWindowUnifiedTitleAndToolbarAttribute = (1 << (kHIWindowBitUnifiedTitleAndToolbar - 1)),
 
   /*
    * See kHIWindowBitTextured.
    */
-  kWindowMetalAttribute         = (1L << (kHIWindowBitTextured - 1)),
+  kWindowMetalAttribute         = (1 << (kHIWindowBitTextured - 1)),
 
   /*
    * See kHIWindowBitNoTitleBar.
    */
-  kWindowNoTitleBarAttribute    = (1L << (kHIWindowBitNoTitleBar - 1)),
+  kWindowNoTitleBarAttribute    = (1 << (kHIWindowBitNoTitleBar - 1)),
 
   /*
    * See kHIWindowBitTexturedSquareCorners.
    */
-  kWindowTexturedSquareCornersAttribute = (1L << (kHIWindowBitTexturedSquareCorners - 1)),
+  kWindowTexturedSquareCornersAttribute = (1 << (kHIWindowBitTexturedSquareCorners - 1)),
 
   /*
    * See kHIWindowBitNoTexturedContentSeparator.
    */
-  kWindowMetalNoContentSeparatorAttribute = (1L << (kHIWindowBitNoTexturedContentSeparator - 1)),
-  kWindowHasRoundBottomBarCornersAttribute = (1L << (kHIWindowBitRoundBottomBarCorners - 1)),
+  kWindowMetalNoContentSeparatorAttribute = (1 << (kHIWindowBitNoTexturedContentSeparator - 1)),
+  kWindowHasRoundBottomBarCornersAttribute = (1 << (kHIWindowBitRoundBottomBarCorners - 1)),
 
   /*
    * See kHIWindowBitDoesNotCycle.
    */
-  kWindowDoesNotCycleAttribute  = (1L << (kHIWindowBitDoesNotCycle - 1)),
+  kWindowDoesNotCycleAttribute  = (1 << (kHIWindowBitDoesNotCycle - 1)),
 
   /*
    * See kHIWindowBitNoUpdates.
    */
-  kWindowNoUpdatesAttribute     = (1L << (kHIWindowBitNoUpdates - 1)),
+  kWindowNoUpdatesAttribute     = (1 << (kHIWindowBitNoUpdates - 1)),
 
   /*
    * See kHIWindowBitNoActivates.
    */
-  kWindowNoActivatesAttribute   = (1L << (kHIWindowBitNoActivates - 1)),
+  kWindowNoActivatesAttribute   = (1 << (kHIWindowBitNoActivates - 1)),
 
   /*
    * See kHIWindowBitOpaqueForEvents.
    */
-  kWindowOpaqueForEventsAttribute = (1L << (kHIWindowBitOpaqueForEvents - 1)),
+  kWindowOpaqueForEventsAttribute = (1 << (kHIWindowBitOpaqueForEvents - 1)),
 
   /*
    * See kHIWindowBitCompositing.
    */
-  kWindowCompositingAttribute   = (1L << (kHIWindowBitCompositing - 1)),
+  kWindowCompositingAttribute   = (1 << (kHIWindowBitCompositing - 1)),
 
   /*
    * See kHIWindowBitNoShadow.
    */
-  kWindowNoShadowAttribute      = (1L << (kHIWindowBitNoShadow - 1)),
+  kWindowNoShadowAttribute      = (1 << (kHIWindowBitNoShadow - 1)),
 
   /*
    * See kHIWindowBitCanBeVisibleWithoutLogin.
    */
-  kWindowCanBeVisibleWithoutLoginAttribute = (1L << (kHIWindowBitCanBeVisibleWithoutLogin - 1)),
+  kWindowCanBeVisibleWithoutLoginAttribute = (1 << (kHIWindowBitCanBeVisibleWithoutLogin - 1)),
 
   /*
    * See kHIWindowBitHideOnSuspend.
    */
-  kWindowHideOnSuspendAttribute = (1L << (kHIWindowBitHideOnSuspend - 1)),
+  kWindowHideOnSuspendAttribute = (1 << (kHIWindowBitHideOnSuspend - 1)),
 
   /*
    * See kHIWindowBitAsyncDrag.
    */
-  kWindowAsyncDragAttribute     = (1L << (kHIWindowBitAsyncDrag - 1)),
+  kWindowAsyncDragAttribute     = (1 << (kHIWindowBitAsyncDrag - 1)),
 
   /*
    * See kHIWindowBitStandardHandler.
    */
-  kWindowStandardHandlerAttribute = (1L << (kHIWindowBitStandardHandler - 1)),
+  kWindowStandardHandlerAttribute = (1 << (kHIWindowBitStandardHandler - 1)),
 
   /*
    * See kHIWindowBitHideOnFullScreen.
    */
-  kWindowHideOnFullScreenAttribute = (1L << (kHIWindowBitHideOnFullScreen - 1)),
+  kWindowHideOnFullScreenAttribute = (1 << (kHIWindowBitHideOnFullScreen - 1)),
 
   /*
    * See kHIWindowBitInWindowMenu.
    */
-  kWindowInWindowMenuAttribute  = (1L << (kHIWindowBitInWindowMenu - 1)),
+  kWindowInWindowMenuAttribute  = (1 << (kHIWindowBitInWindowMenu - 1)),
 
   /*
    * See kHIWindowBitLiveResize.
    */
-  kWindowLiveResizeAttribute    = (1L << (kHIWindowBitLiveResize - 1)),
+  kWindowLiveResizeAttribute    = (1 << (kHIWindowBitLiveResize - 1)),
 
   /*
    * See kHIWindowBitIgnoreClicks.
    */
-  kWindowIgnoreClicksAttribute  = (1L << (kHIWindowBitIgnoreClicks - 1)),
+  kWindowIgnoreClicksAttribute  = (1 << (kHIWindowBitIgnoreClicks - 1)),
 
   /*
    * See kHIWindowBitFrameworkScaled.
    */
-  kWindowFrameworkScaledAttribute = (1L << (kHIWindowBitFrameworkScaled - 1)),
+  kWindowFrameworkScaledAttribute = (1 << (kHIWindowBitFrameworkScaled - 1)),
 
   /*
    * The minimum set of window attributes commonly used by document
@@ -1358,7 +1366,7 @@ enum {
 /*  ¥ Region Dragging Constants                                                         */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 enum {
-  kMouseUpOutOfSlop             = (long)0x80008000
+  kMouseUpOutOfSlop             = (int)0x80008000
 };
 
 
@@ -2346,12 +2354,21 @@ typedef UInt32                          HIWindowSharingType;
  *    buffer contents.
  *  
  *  Discussion:
- *    In Mac OS X 10.5, a window's backing buffer may be inspected by
- *    iChat and other screen-sharing software. Some windows may have
- *    content that should not be accessible by other applications, due
- *    to security concerns. Your application can use this API to
- *    control how visible a window's backing buffer should be to other
+ *    In Mac OS X 10.5, a window's backing buffer may be retrieved
+ *    using the CGWindowListCreateImage and
+ *    CGWindowListCreateImageFromArray APIs. Some windows may have
+ *    content that should not be accessible via these APIs, due to
+ *    security concerns. Your application can use this API to control
+ *    how visible a window's backing buffer should be to other
  *    processes. 
+ *    
+ *    Note that it is also possible to read the entire contents of a
+ *    display using OpenGL; setting a window's sharing type with this
+ *    API does not prevent OpenGL from being able to read the window's
+ *    content. For example, the built-in screen-sharing software in Mac
+ *    OS X Mac OS X 10.5 uses OpenGL and a window's content will still
+ *    be visible via screen-sharing even if its sharing type has been
+ *    set to None. 
  *    
  *    A window's default sharing state on creation is
  *    kHIWindowSharingReadOnly.
@@ -2650,7 +2667,9 @@ enum {
   /*
    * The positions of the contents of this group with respect to each
    * other cannot be changed. When one item moves, all other items are
-   * moved simultaneously.
+   * moved simultaneously. Note that when one window in the group is
+   * moved, the bounds of the other windows in the group may be updated
+   * asynchronously.
    */
   kWindowGroupAttrMoveTogether  = 1 << 1,
 
@@ -3054,6 +3073,23 @@ ChangeWindowGroupAttributes(
  *  
  *  Summary:
  *    Sets the CoreGraphics window group level of windows in a group.
+ *    
+ *    PLEASE NOTE: Apple does not recommend using this API for most
+ *    window-ordering purposes. Rather than explicitly setting the
+ *    level of a window group, it is preferable to position the group
+ *    in the window group hierarchy so that it is between two standard
+ *    groups that bracket the desired window level. Doing so will cause
+ *    your group to automatically adopt the window level of the
+ *    standard group beneath it. Your code will be more compatible with
+ *    future versions of Mac OS X if you avoid setting the window level
+ *    of your groups explicitly. 
+ *    
+ *    The most common case where it is appropriate to explicitly set a
+ *    window level for your group is when your group's windows need to
+ *    be positioned above or below all windows in the standard window
+ *    groups. In these cases, you should position your group in the
+ *    group hierarchy above or below all standard groups, and then set
+ *    the window group level explicitly, if necessary.
  *  
  *  Discussion:
  *    CoreGraphics windows (used to implement all windows in Carbon and
@@ -3189,6 +3225,24 @@ enum {
  *  
  *  Summary:
  *    Sets a CoreGraphics window group level of a window group.
+ *    
+ *    
+ *    PLEASE NOTE: Apple does not recommend using this API for most
+ *    window-ordering purposes. Rather than explicitly setting the
+ *    level of a window group, it is preferable to position the group
+ *    in the window group hierarchy so that it is between two standard
+ *    groups that bracket the desired window level. Doing so will cause
+ *    your group to automatically adopt the window level of the
+ *    standard group beneath it. Your code will be more compatible with
+ *    future versions of Mac OS X if you avoid setting the window level
+ *    of your groups explicitly. 
+ *    
+ *    The most common case where it is appropriate to explicitly set a
+ *    window level for your group is when your group's windows need to
+ *    be positioned above or below all windows in the standard window
+ *    groups. In these cases, you should position your group in the
+ *    group hierarchy above or below all standard groups, and then set
+ *    the window group level explicitly, if necessary.
  *  
  *  Discussion:
  *    See the SetWindowGroupLevel API for a general discussion of
@@ -4290,6 +4344,185 @@ SetWindowContentPattern(
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* ¥ Colorspace and Depth                                                               */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+ *  HIWindowSetColorSpace()
+ *  
+ *  Summary:
+ *    Sets the colorspace used for window content that is drawn by the
+ *    application with no other specified colorspace.
+ *  
+ *  Discussion:
+ *    Typically this API should be used immediately after a window is
+ *    created, before the window is made visible. If the window
+ *    colorspace is changed while the window is visible, the window
+ *    will be redrawn. 
+ *    
+ *    Note that setting a colorspace on a window with the
+ *    kHIWindowBitAutoCalibration attribute prevents the window from
+ *    receiving automatic color space updates. Clearing the colorspace
+ *    by passing NULL restores the kHIWindowBitAutoCalibration
+ *    functionality.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose colorspace to change.
+ *    
+ *    inColorSpace:
+ *      The window's new colorspace. The colorspace will be retained or
+ *      copied by the window. Pass NULL to clear any previously-set
+ *      colorspace.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowSetColorSpace(
+  WindowRef         inWindow,
+  CGColorSpaceRef   inColorSpace)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
+ *  HIWindowCopyColorSpace()
+ *  
+ *  Summary:
+ *    Retrieves the colorspace for a window.
+ *  
+ *  Discussion:
+ *    If this API is called before a color space has been explicitly
+ *    assigned to a window, the window's default colorspace is returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose colorspace to retrieve.
+ *  
+ *  Result:
+ *    The window's colorspace, or NULL if an error occurs. The
+ *    colorspace has been retained and should be released by the caller
+ *    when the caller is done with it.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CGColorSpaceRef 
+HIWindowCopyColorSpace(WindowRef inWindow)                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+#endif  /* !__LP64__ */
+
+
+/*
+ *  Summary:
+ *    Window backing store depth types.
+ */
+enum {
+
+  /*
+   * The window is invalid or its backing store pixel size is unknown.
+   */
+  kHIWindowDepthInvalid         = 0,
+
+  /*
+   * The window's backing store pixel size should be 32 bits.
+   */
+  kHIWindowDepth32Bit           = 1,
+
+  /*
+   * The window's backing store pixel size should be 64 bits.
+   */
+  kHIWindowDepth64Bit           = 2,
+
+  /*
+   * The window's backing store pixel size should be the size of a
+   * float.
+   */
+  kHIWindowDepthFloat           = 3
+};
+
+typedef UInt32                          HIWindowDepth;
+#if !__LP64__
+/*
+ *  HIWindowSetDepth()
+ *  
+ *  Summary:
+ *    Sets the depth of a window's backing store.
+ *  
+ *  Discussion:
+ *    Typically this API should be used immediately after a window is
+ *    created, before the window is made visible. If the window depth
+ *    is changed while the window is visible, the window will be
+ *    redrawn.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose backing store depth to change.
+ *    
+ *    inDepth:
+ *      The new window depth type. This must be one of
+ *      kHIWindowDepth32Bit, 64Bit, or Float.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowSetDepth(
+  WindowRef       inWindow,
+  HIWindowDepth   inDepth)                                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
+ *  HIWindowGetDepth()
+ *  
+ *  Summary:
+ *    Returns the current depth of the backing store of a window.
+ *  
+ *  Discussion:
+ *    This API returns an HIWindowDepth value corresponding to the
+ *    actual depth of the backing store. It will return one of
+ *    kHIWindowDepth32Bit, 64Bit, or Float.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose backing store depth to return.
+ *  
+ *  Result:
+ *    The window's backing store depth type (one of
+ *    kHIWindowDepth32Bit, 64Bit, or Float), or kHIWindowDepthInvalid
+ *    if an error occurs.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HIWindowDepth 
+HIWindowGetDepth(WindowRef inWindow)                          AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Scrolling Routines                                                                 */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 #endif  /* !__LP64__ */
@@ -4297,8 +4530,8 @@ SetWindowContentPattern(
 typedef UInt32 ScrollWindowOptions;
 enum {
   kScrollWindowNoOptions        = 0,
-  kScrollWindowInvalidate       = (1L << 0), /* add the exposed area to the windowÕs update region*/
-  kScrollWindowEraseToPortBackground = (1L << 1) /* erase the exposed area using the background color/pattern of the windowÕs grafport*/
+  kScrollWindowInvalidate       = (1 << 0), /* add the exposed area to the windowÕs update region*/
+  kScrollWindowEraseToPortBackground = (1 << 1) /* erase the exposed area using the background color/pattern of the windowÕs grafport*/
 };
 
 
@@ -6354,12 +6587,12 @@ typedef struct TransitionWindowOptions  TransitionWindowOptions;
  */
 extern OSStatus 
 TransitionWindowWithOptions(
-  WindowRef                  inWindow,
-  WindowTransitionEffect     inEffect,
-  WindowTransitionAction     inAction,
-  const HIRect *             inBounds,        /* can be NULL */
-  Boolean                    inAsync,
-  TransitionWindowOptions *  inOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  WindowRef                        inWindow,
+  WindowTransitionEffect           inEffect,
+  WindowTransitionAction           inAction,
+  const HIRect *                   inBounds,        /* can be NULL */
+  Boolean                          inAsync,
+  const TransitionWindowOptions *  inOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -7678,30 +7911,30 @@ enum {
   /*
    * The window may be resized if necessary to make it fit onscreen.
    */
-  kWindowConstrainMayResize     = (1L << 0),
+  kWindowConstrainMayResize     = (1 << 0),
 
   /*
    * The window will be moved even if it doesn't fit entirely onscreen.
    */
-  kWindowConstrainMoveRegardlessOfFit = (1L << 1),
+  kWindowConstrainMoveRegardlessOfFit = (1 << 1),
 
   /*
    * Allow partial intersection of the specified window region with the
    * screen, instead of requiring total intersection.
    */
-  kWindowConstrainAllowPartial  = (1L << 2),
+  kWindowConstrainAllowPartial  = (1 << 2),
 
   /*
    * Only calculate the new window bounds; don't actually move the
    * window.
    */
-  kWindowConstrainCalcOnly      = (1L << 3),
+  kWindowConstrainCalcOnly      = (1 << 3),
 
   /*
    * Use TransitionWindow with kWindowSlideTransitionEffect to move
    * windows onscreen. Available in Mac OS X 10.2.
    */
-  kWindowConstrainUseTransitionWindow = (1L << 4),
+  kWindowConstrainUseTransitionWindow = (1 << 4),
 
   /*
    * Requests that the window be moved the minimum amount necessary to
@@ -7713,7 +7946,7 @@ enum {
    * be visible by passing the desired dimensions in the inMinimumSize
    * parameter to HIWindowConstrain.
    */
-  kWindowConstrainMoveMinimum   = (1L << 6),
+  kWindowConstrainMoveMinimum   = (1 << 6),
 
   /*
    * Requests that when determining the bounds of the window region to
@@ -7726,7 +7959,7 @@ enum {
    * advance before moving the window whether the window would be
    * offscreen at that location, you can use this option.
    */
-  kWindowConstrainUseSpecifiedBounds = (1L << 8),
+  kWindowConstrainUseSpecifiedBounds = (1 << 8),
 
   /*
    * The most common options: don't resize the window, move the window
@@ -8102,6 +8335,47 @@ MacIsWindowVisible(WindowRef window)                          AVAILABLE_MAC_OS_X
 
 
 /*
+ *  HIWindowIsOnActiveSpace()
+ *  
+ *  Summary:
+ *    Returns whether a window is attached to the currently active
+ *    space.
+ *  
+ *  Discussion:
+ *    For visible windows, this API indicates whether the window is
+ *    currently visible on the active space; for invisible windows, it
+ *    indicates whether the window would be visible on the active space
+ *    if it were visible at this moment. The window's visible state
+ *    still controls whether the window is actually visible or not.
+ *    
+ *    
+ *    Windows that have availability attributes of either
+ *    kHIWindowCanJoinAllSpaces or kHIWindowMoveToActiveSpace will
+ *    always return true from this API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to examine.
+ *  
+ *  Result:
+ *    True if the window is attached to the current space or to all
+ *    spaces, or false if the window is attached solely to some other
+ *    space.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIWindowIsOnActiveSpace(WindowRef inWindow)                   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+/*
   ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     ¥ÊLatent window visibility
   ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -8229,10 +8503,21 @@ enum {
 
   /*
    * This window is hidden during ExposŽÕs ÒAll windowsÓ and
-   * ÒApplication windowsÓ modes. If this bit is not set, the window is
-   * visible during these modes.
+   * ÒApplication windowsÓ modes, and during the Spaces overview mode.
+   * It moves to the current space automatically after a space switch,
+   * and does not trigger a space switch when dragged to a space
+   * boundary. If this bit is not set, the window is visible during
+   * ExposŽ and Spaces.
    */
-  kHIWindowExposeHidden         = 1 << 0,
+  kHIWindowBehaviorTransient    = 1 << 0,
+
+  /*
+   * This window is visible during ExposŽÕs ÒAll windowsÓ and
+   * ÒApplication windowsÓ modes, and does not move. It remains in its
+   * original position and, when clicked in "Show desktop" mode,
+   * receives the mouse event.
+   */
+  kHIWindowBehaviorStationary   = 1 << 1,
 
   /*
    * This window is visible in all window sets managed by Spaces. If
@@ -8254,9 +8539,14 @@ enum {
   kHIWindowMoveToActiveSpace    = 1 << 9,
 
   /*
+   * The original name for the constant kHIWindowBehaviorTransient.
+   * Please do not use this name.
+   */
+  kHIWindowExposeHidden         = kHIWindowBehaviorTransient,
+
+  /*
    * The original name for the constant kHIWindowCanJoinAllSpaces.
-   * Please do not use this name. It will be removed before Mac OS X
-   * 10.5 GM.
+   * Please do not use this name.
    */
   kHIWindowVisibleInAllSpaces   = kHIWindowCanJoinAllSpaces
 };
@@ -8879,6 +9169,16 @@ GetDrawerParent(WindowRef inDrawerWindow)                     AVAILABLE_MAC_OS_X
  *  
  *  Summary:
  *    Sets the parent window of a drawer.
+ *  
+ *  Discussion:
+ *    In Mac OS X 10.4 and 10.5, this API incorrectly increments the
+ *    refcount of the drawer window, and you must either destroy the
+ *    drawer parent window or use SetDrawerParent( drawer, NULL ) on
+ *    the drawer window before destroying the drawer. This extra step
+ *    is not required in Mac OS X 10.2, 10.3, or 10.6 and later; in
+ *    those versions you may simply release the drawer window when
+ *    you're done with it and it will be automatically removed from the
+ *    parent.
  *  
  *  Mac OS X threading:
  *    Not thread safe

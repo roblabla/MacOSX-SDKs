@@ -1,3 +1,31 @@
+/*
+ * Copyright (c) 2008 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ * 
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
 /*	$FreeBSD: src/sys/netinet6/in6.h,v 1.7.2.4 2001/07/04 09:45:23 ume Exp $	*/
 /*	$KAME: in6.h,v 1.89 2001/05/27 13:28:35 itojun Exp $	*/
 
@@ -171,7 +199,6 @@ struct sockaddr_in6 {
 			    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff }}}
 
 
-
 /*
  * Macros started with IPV6_ADDR is KAME local
  */
@@ -280,6 +307,7 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
  */
 
 #define IPV6_ADDR_SCOPE_NODELOCAL	0x01
+#define	IPV6_ADDR_SCOPE_INTFACELOCAL	0x01
 #define IPV6_ADDR_SCOPE_LINKLOCAL	0x02
 #define IPV6_ADDR_SCOPE_SITELOCAL	0x05
 #define IPV6_ADDR_SCOPE_ORGLOCAL	0x08	/* just used in this file */
@@ -307,6 +335,9 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IN6_IS_ADDR_MC_NODELOCAL(a)	\
 	(IN6_IS_ADDR_MULTICAST(a) &&	\
 	 (IPV6_ADDR_MC_SCOPE(a) == IPV6_ADDR_SCOPE_NODELOCAL))
+#define	IN6_IS_ADDR_MC_INTFACELOCAL(a)	\
+	(IN6_IS_ADDR_MULTICAST(a) &&	\
+	(IPV6_ADDR_MC_SCOPE(a) == IPV6_ADDR_SCOPE_INTFACELOCAL))
 #define IN6_IS_ADDR_MC_LINKLOCAL(a)	\
 	(IN6_IS_ADDR_MULTICAST(a) &&	\
 	 (IPV6_ADDR_MC_SCOPE(a) == IPV6_ADDR_SCOPE_LINKLOCAL))
@@ -326,6 +357,11 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IN6_IS_SCOPE_LINKLOCAL(a)	\
 	((IN6_IS_ADDR_LINKLOCAL(a)) ||	\
 	 (IN6_IS_ADDR_MC_LINKLOCAL(a)))
+
+#define IN6_IS_SCOPE_EMBED(a)			\
+	((IN6_IS_ADDR_LINKLOCAL(a)) ||		\
+	(IN6_IS_ADDR_MC_LINKLOCAL(a)) ||	\
+	(IN6_IS_ADDR_MC_INTFACELOCAL(a)))
 
 #define IFA6_IS_DEPRECATED(a) \
 	((a)->ia6_lifetime.ia6t_preferred != 0 && \
@@ -392,6 +428,9 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_FW_ZERO		33 /* clear single/all firewall counter(s) */
 #define IPV6_FW_GET		34 /* get entire firewall rule chain */
 #endif /* 1 */
+
+#define IPV6_RECVTCLASS         35 /* bool; recv traffic class values */
+#define IPV6_TCLASS             36 /* int; send traffic class value */
 
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 
@@ -480,9 +519,14 @@ struct in6_pktinfo {
 
 #define IPV6CTL_MAXFRAGS        41      /* max fragments */
 
+#define IPV6CTL_NEIGHBORGCTHRESH 46
+#define IPV6CTL_MAXIFPREFIXES	47
+#define IPV6CTL_MAXIFDEFROUTERS 48
+#define IPV6CTL_MAXDYNROUTES	49
+
 /* New entries should be added here from current IPV6CTL_MAXID value. */
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
-#define IPV6CTL_MAXID		42
+#define IPV6CTL_MAXID		50
 
 
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */

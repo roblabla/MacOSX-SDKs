@@ -5,7 +5,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     04.01.00
-// RCS-ID:      $Id: cmdline.h,v 1.27 2005/09/23 12:48:32 MR Exp $
+// RCS-ID:      $Id: cmdline.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 2000 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@
 
 #if wxUSE_CMDLINE_PARSER
 
-class WXDLLIMPEXP_BASE wxDateTime;
+class WXDLLIMPEXP_FWD_BASE wxDateTime;
 
 // ----------------------------------------------------------------------------
 // constants

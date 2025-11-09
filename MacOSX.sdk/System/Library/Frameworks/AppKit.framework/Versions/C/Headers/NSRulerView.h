@@ -1,7 +1,7 @@
 /*
         NSRulerView.h
         Application Kit
-        Copyright (c) 1994-2007, Apple Inc.
+        Copyright (c) 1994-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -53,7 +53,7 @@ typedef NSUInteger NSRulerOrientation;
 /**************************** Initialization ****************************/
 
 - (id)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
-    // The designated initializer.  A ruler's size is controlled by its NSScrollView. initWithFrame: is overridden to call this.  The view is initialized with an unrealisticly small default frame which will be reset in due time by the NSScrollView.
+    // The designated initializer.  A ruler's size is controlled by its NSScrollView. initWithFrame: is overridden to call this.  The view is initialized with an unrealistically small default frame which will be reset in due time by the NSScrollView.
 
 /**************************** Basic setup ****************************/
 

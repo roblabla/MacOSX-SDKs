@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -137,7 +137,7 @@ struct bpf_version {
 #define BPF_TIMEVAL timeval32
 #else
 #define BPF_TIMEVAL timeval
-#endif
+#endif /* __LP64__ */
 /* Current version number of filter architecture. */
 #define BPF_MAJOR_VERSION 1
 #define BPF_MINOR_VERSION 1
@@ -196,7 +196,6 @@ struct bpf_hdr {
 #define DLT_FDDI	10	/* FDDI */
 #define DLT_ATM_RFC1483	11	/* LLC/SNAP encapsulated atm */
 #define DLT_RAW		12	/* raw IP */
-#define DLT_APPLE_IP_OVER_IEEE1394      138
 
 /*
  * These are values from BSD/OS's "bpf.h".
@@ -214,6 +213,7 @@ struct bpf_hdr {
 #define DLT_SLIP_BSDOS	15	/* BSD/OS Serial Line IP */
 #define DLT_PPP_BSDOS	16	/* BSD/OS Point-to-point Protocol */
 
+#define	DLT_PFSYNC	18	/* Packet filter state syncing */
 #define DLT_ATM_CLIP	19	/* Linux Classical-IP over ATM */
 
 /*
@@ -279,6 +279,50 @@ struct bpf_hdr {
  * This is for Linux cooked sockets.
  */
 #define DLT_LINUX_SLL	113
+
+/*
+ * For use in capture-file headers as a link-layer type corresponding
+ * to OpenBSD PF (Packet Filter) log.
+ */
+#define	DLT_PFLOG	117
+
+/*
+ * BSD header for 802.11 plus a number of bits of link-layer information
+ * including radio information.
+ */
+#ifndef DLT_IEEE802_11_RADIO
+#define DLT_IEEE802_11_RADIO	127
+#endif
+
+/*
+ * Apple IP-over-IEEE 1394, as per a request from Dieter Siegmund
+ * <dieter@apple.com>.  The header that's presented is an Ethernet-like
+ * header:
+ *
+ *	#define FIREWIRE_EUI64_LEN	8
+ *	struct firewire_header {
+ *		u_char  firewire_dhost[FIREWIRE_EUI64_LEN];
+ *		u_char  firewire_shost[FIREWIRE_EUI64_LEN];
+ *		u_short firewire_type;
+ *	};
+ *
+ * with "firewire_type" being an Ethernet type value, rather than,
+ * for example, raw GASP frames being handed up.
+ */
+#define DLT_APPLE_IP_OVER_IEEE1394	138
+
+/*
+ * For future use with 802.11 captures - defined by AbsoluteValue
+ * Systems to store a number of bits of link-layer information
+ * including radio information:
+ *
+ *	http://www.shaftnet.org/~pizza/software/capturefrm.txt
+ *
+ * but it might be used by some non-AVS drivers now or in the
+ * future.
+ */
+#define DLT_IEEE802_11_RADIO_AVS 163	/* 802.11 plus AVS radio header */
+
 
 /*
  * The instruction encodings.
@@ -358,9 +402,9 @@ struct bpf_insn {
  * Structure to retrieve available DLTs for the interface.
  */
 struct bpf_dltlist {
-	u_int32_t	bfl_len;        /* number of bfd_list array */
+	u_int32_t		bfl_len;	/* number of bfd_list array */
 	union {
-		u_int32_t   *bflu_list;      /* array of DLTs */
+		u_int32_t	*bflu_list;	/* array of DLTs */
 		u_int64_t	bflu_pad;
 	} bfl_u;
 };
@@ -375,4 +419,4 @@ struct bpf_dltlist {
  */
 #define BPF_MEMWORDS 16
 
-#endif
+#endif /* _NET_BPF_H_ */

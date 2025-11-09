@@ -32,7 +32,7 @@
 #ifndef CCAPI_V2_H
 #define CCAPI_V2_H
  
-#include <CredentialsCache.h>
+#include <Kerberos/CredentialsCache.h>
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
 #include <TargetConditionals.h>

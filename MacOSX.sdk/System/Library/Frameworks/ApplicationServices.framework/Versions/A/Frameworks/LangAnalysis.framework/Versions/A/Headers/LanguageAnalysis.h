@@ -3,9 +3,9 @@
  
      Contains:   Language Analysis Manager Interfaces
  
-     Version:    LanguageAnalysis-194~74
+     Version:    LanguageAnalysis-214.2~4
  
-     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -29,6 +29,7 @@
 #endif
 
 
+/*#pragma pack (4)*/
 
 #include <AvailabilityMacros.h>
 
@@ -42,7 +43,6 @@ extern "C" {
 
 #pragma options align=power
 
-#if !__LP64__
 typedef struct OpaqueLAEnvironmentRef*  LAEnvironmentRef;
 typedef struct OpaqueLAContextRef*      LAContextRef;
 typedef AEKeyword                       LAPropertyKey;
@@ -51,17 +51,17 @@ typedef DescType                        LAPropertyType;
     Data structure for high level API
 */
 struct LAMorphemeRec {
-  ByteCount           sourceTextLength;
+  UInt32              sourceTextLength;
   LogicalAddress      sourceTextPtr;
-  ByteCount           morphemeTextLength;
+  UInt32              morphemeTextLength;
   LogicalAddress      morphemeTextPtr;
   UInt32              partOfSpeech;
 };
 typedef struct LAMorphemeRec            LAMorphemeRec;
 struct LAMorphemesArray {
   ItemCount           morphemesCount;
-  ByteCount           processedTextLength;
-  ByteCount           morphemesTextLength;
+  UInt32              processedTextLength;
+  UInt32              morphemesTextLength;
   LAMorphemeRec       morphemes[1];
 };
 typedef struct LAMorphemesArray         LAMorphemesArray;
@@ -133,7 +133,7 @@ enum {
   kLAAllMorphemes               = 0
 };
 
-
+#if !__LP64__
 /*
     Library version
 */
@@ -495,11 +495,13 @@ extern OSStatus
 LAResetAnalysis(LAContextRef context)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+#endif  /* !__LP64__ */
+
+#endif  /* !__LP64__ */
+
 /*
     Check Language Analysis Manager availability
 */
-#endif  /* !__LP64__ */
-
 #if TARGET_RT_MAC_CFM
 #ifdef __cplusplus
     inline pascal Boolean LALanguageAnalysisAvailable() { return (LALibraryVersion != (void*)kUnresolvedCFragSymbolAddress); }
@@ -655,8 +657,6 @@ enum {
   kLASpeechKatsuyouMeirei       = 0x00000007
 };
 
-
-#endif  /* !__LP64__ */
 
 
 #pragma options align=reset

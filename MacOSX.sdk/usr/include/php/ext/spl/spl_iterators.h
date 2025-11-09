@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.14 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: spl_iterators.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -35,6 +35,7 @@
 
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIteratorIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveTreeIterator;
 extern PHPAPI zend_class_entry *spl_ce_FilterIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveFilterIterator;
 extern PHPAPI zend_class_entry *spl_ce_ParentIterator;
@@ -76,6 +77,13 @@ typedef enum {
 #endif
 	DIT_Unknown = ~0
 } dual_it_type;
+
+typedef enum {
+	RIT_Default = 0,
+	RIT_RecursiveIteratorIterator = RIT_Default,
+	RIT_RecursiveTreeIterator,
+	RIT_Unknow = ~0
+} recursive_it_it_type;
 
 enum {
 	/* public */

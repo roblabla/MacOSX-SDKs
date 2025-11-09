@@ -3,9 +3,9 @@
  
      Contains:   File Manager Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1985-2006 Apple, Inc. All rights reserved
+     Copyright:  © 1985-2008 Apple, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1102,7 +1102,7 @@ enum {
   kFSCatInfoAllDates            = 0x000003E0,
   kFSCatInfoGettableInfo        = 0x0003FFFF,
   kFSCatInfoSettableInfo        = 0x00001FE3, /* flags, dates, permissions, Finder info, text encoding */
-  kFSCatInfoReserved            = (long)0xFFFC0000 /* bits that are currently reserved */
+  kFSCatInfoReserved            = (int)0xFFFC0000 /* bits that are currently reserved */
 };
 
 /*  Constants for nodeFlags field of FSCatalogInfo */
@@ -1353,7 +1353,7 @@ enum {
   kFSIterateFlat                = 0,    /* Immediate children of container only */
   kFSIterateSubtree             = 1,    /* Entire subtree rooted at container */
   kFSIterateDelete              = 2,
-  kFSIterateReserved            = (long)0xFFFFFFFC
+  kFSIterateReserved            = (int)0xFFFFFFFC
 };
 
 typedef OptionBits                      FSIteratorFlags;
@@ -1432,8 +1432,9 @@ struct FSForkIOParam {
 };
 typedef struct FSForkIOParam            FSForkIOParam;
 typedef FSForkIOParam *                 FSForkIOParamPtr;
+typedef UInt8                           FSForkInfoFlags;
 struct FSForkInfo {
-  SInt8               flags;                  /* copy of FCB flags */
+  FSForkInfoFlags     flags;                  /* copy of FCB flags */
   SInt8               permissions;
   FSVolumeRefNum      volume;
   UInt32              reserved2;
@@ -2303,6 +2304,9 @@ extern void  PBExchangeObjectsAsync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X
     
     FSReplaceObject may not be atomic -- it may issue multiple system calls to
     accurately replace and preserve the metadata of a file system object.
+    
+    FSReplaceObject may fail if the source or destination files are open or
+    the source or destination objects are directories which contain open files.
 */
 
 /*
@@ -6137,7 +6141,7 @@ extern OSStatus  FSFileOperationUnscheduleFromRunLoop(FSFileOperationRef fileOp,
  *  
  *  Discussion:
  *    This routine will start an asynchronous copy of the object
- *    speficied by source to the directory specified by destDir.  If
+ *    specified by source to the directory specified by destDir.  If
  *    destName is provided then the new object will be renamed to
  *    destName.  If destName is not provided then the name of the
  *    source object will be used.  Status callbacks will occur on one
@@ -6190,7 +6194,7 @@ extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *  
  *  Discussion:
  *    This routine will start an asynchronous move of the object
- *    speficied by source to the directory specified by destDir.  If
+ *    specified by source to the directory specified by destDir.  If
  *    destName is provided then the new object will be renamed to
  *    destName.  If destName is not provided then the name of the
  *    source object will be used.  Status callbacks will occur on one
@@ -6246,7 +6250,7 @@ extern OSStatus  FSMoveObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *  
  *  Discussion:
  *    This routine will start an asynchronous move of the object
- *    speficied by source to the trash.  If the volume the source
+ *    specified by source to the trash.  If the volume the source
  *    object resides on does not support a trash folder then the
  *    operation will return an error (this is the same circumstance
  *    that triggers the delete immediately behavior in the Finder).
@@ -6295,7 +6299,7 @@ extern OSStatus  FSMoveObjectToTrashAsync(FSFileOperationRef fileOp, const FSRef
  *  
  *  Discussion:
  *    This routine will start an asynchronous copy of the object
- *    speficied by source to the directory specified by destDir.  If
+ *    specified by source to the directory specified by destDir.  If
  *    destName is provided then the new object will be renamed to
  *    destName.  If destName is not provided then the name of the
  *    source object will be used.  Status callbacks will occur on one
@@ -6348,7 +6352,7 @@ extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *so
  *  
  *  Discussion:
  *    This routine will start an asynchronous move of the object
- *    speficied by source to the directory specified by destDir.  If
+ *    specified by source to the directory specified by destDir.  If
  *    destName is provided then the new object will be renamed to
  *    destName.  If destName is not provided then the name of the
  *    source object will be used.  Status callbacks will occur on one
@@ -6404,7 +6408,7 @@ extern OSStatus  FSPathMoveObjectAsync(FSFileOperationRef fileOp, const char *so
  *  
  *  Discussion:
  *    This routine will start an asynchronous move of the object
- *    speficied by source to the trash.  If the volume the source
+ *    specified by source to the trash.  If the volume the source
  *    object resides on does not support a trash folder then this call
  *    will return an error (this is the same circumstance that triggers
  *    the delete immediately behavior in the Finder). Status callbacks
@@ -7110,11 +7114,9 @@ enum {
 };
 
 /* ioFCBFlags bits returned by PBGetFCBInfo */
-/* IMPORTANT: These constants are for the SInt16 FCBPBRec.ioFCBFlags field returned */
-/* by PBGetFCBInfoSync and PBGetFCBInfoAsync. To use them with the SInt8 FSForkInfo.flags */
-/* field returned by the FSGetForkCBInfo, PBGetForkCBInfoSync and PBGetForkCBInfoAsync */
-/* functions, 8 must be subtracted from the bit constants and the mask constants */
-/* must be shifted right by 8. */
+/* IMPORTANT: These ioFCBFlags bit constants are for the SInt16 FCBPBRec.ioFCBFlags field returned */
+/* by PBGetFCBInfoSync and PBGetFCBInfoAsync. Do not use them with the FSForkInfo.flags */
+/* field returned by the FSGetForkCBInfo, PBGetForkCBInfoSync and PBGetForkCBInfoAsyn functions. */
 enum {
   kioFCBWriteBit                = 8,    /* Data can be written to this file */
   kioFCBWriteMask               = 0x0100,
@@ -7134,6 +7136,28 @@ enum {
   kioFCBModifiedMask            = 0x8000
 };
 
+/* IMPORTANT: These FSForkInfoFlags constants are for use with the FSForkInfo.flags */
+/* field returned by the FSGetForkCBInfo, PBGetForkCBInfoSync and PBGetForkCBInfoAsyn functions. */
+/* Do not use them with the FCBPBRec.ioFCBFlags field returned by PBGetFCBInfoSync and PBGetFCBInfoAsync. */
+enum {
+  kForkInfoFlagsWriteBit        = (kioFCBWriteBit - 8), /* Data can be written to this file */
+  kForkInfoFlagsWriteMask       = (1 << kForkInfoFlagsWriteBit),
+  kForkInfoFlagsResourceBit     = (kioFCBResourceBit - 8), /* This file is a resource fork */
+  kForkInfoFlagsResourceMask    = (1 << kForkInfoFlagsResourceBit),
+  kForkInfoFlagsWriteLockedBit  = (kioFCBWriteLockedBit - 8), /* File has a locked byte range */
+  kForkInfoFlagsWriteLockedMask = (1 << kForkInfoFlagsWriteLockedBit),
+  kForkInfoFlagsLargeFileBit    = (kioFCBLargeFileBit - 8), /* File may grow beyond 2GB; cache uses file blocks, not bytes */
+  kForkInfoFlagsLargeFileMask   = (1 << kForkInfoFlagsLargeFileBit),
+  kForkInfoFlagsSharedWriteBit  = (kioFCBSharedWriteBit - 8), /* File is open for shared write access */
+  kForkInfoFlagsSharedWriteMask = (1 << kForkInfoFlagsSharedWriteBit),
+  kForkInfoFlagsFileLockedBit   = (kioFCBFileLockedBit - 8), /* File is locked (write-protected) */
+  kForkInfoFlagsFileLockedMask  = (1 << kForkInfoFlagsFileLockedBit),
+  kForkInfoFlagsOwnClumpBit     = (kioFCBOwnClumpBit - 8), /* File has clump size specified in FCB */
+  kForkInfoFlagsOwnClumpMask    = (1 << kForkInfoFlagsOwnClumpBit),
+  kForkInfoFlagsModifiedBit     = (kioFCBModifiedBit - 8), /* File has changed since it was last flushed */
+  kForkInfoFlagsModifiedMask    = (1 << kForkInfoFlagsModifiedBit)
+};
+
 /* ioACUser bits returned by PBGetCatInfo */
 /* Note: you must clear ioACUser before calling PBGetCatInfo because some file systems do not use this field */
 enum {
@@ -7150,7 +7174,7 @@ enum {
 /* Folder and File values of access privileges in ioACAccess */
 enum {
   kioACAccessOwnerBit           = 31,   /* User is owner of directory */
-  kioACAccessOwnerMask          = (long)0x80000000,
+  kioACAccessOwnerMask          = (int)0x80000000,
   kioACAccessBlankAccessBit     = 28,   /* Directory has blank access privileges */
   kioACAccessBlankAccessMask    = 0x10000000,
   kioACAccessUserWriteBit       = 26,   /* User has write privileges */

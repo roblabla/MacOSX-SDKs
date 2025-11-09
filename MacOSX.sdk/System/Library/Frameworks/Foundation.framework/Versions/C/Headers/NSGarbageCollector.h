@@ -1,5 +1,5 @@
 /*	NSGarbageCollector.h
-	Copyright (c) 2006-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -23,7 +23,7 @@
 + (id)defaultCollector;
 
 
-- (BOOL)isCollecting;  // is there a collection in progress
+- (BOOL)isCollecting DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (void)disable;  // temporarily disable collections
 - (void)enable; // reenable disabled collections (must be called once per call to disableCollector)

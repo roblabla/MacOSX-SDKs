@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,12 @@
 
 #import <WebKit/DOMObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMNode;
 @protocol DOMNodeFilter;
 
 @interface DOMTreeWalker : DOMObject
-{
-    id <DOMNodeFilter> m_filter;
-}
 @property(readonly, retain) DOMNode *root;
 @property(readonly) unsigned whatToShow;
 @property(readonly, retain) id <DOMNodeFilter> filter;
@@ -47,3 +46,5 @@
 - (DOMNode *)previousNode;
 - (DOMNode *)nextNode;
 @end
+
+#endif

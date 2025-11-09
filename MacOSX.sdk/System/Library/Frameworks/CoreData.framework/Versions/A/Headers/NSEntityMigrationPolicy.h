@@ -1,7 +1,7 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -18,6 +18,7 @@ COREDATA_EXTERN NSString * const NSMigrationSourceObjectKey AVAILABLE_MAC_OS_X_V
 COREDATA_EXTERN NSString * const NSMigrationDestinationObjectKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 COREDATA_EXTERN NSString * const NSMigrationEntityMappingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 COREDATA_EXTERN NSString * const NSMigrationPropertyMappingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @class NSManagedObject;
 @class NSEntityMapping;

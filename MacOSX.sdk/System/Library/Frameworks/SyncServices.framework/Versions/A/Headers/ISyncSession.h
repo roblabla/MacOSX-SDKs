@@ -5,8 +5,8 @@
 
 #import <SyncServices/ISyncCommon.h>
 
-@class ISyncChange, ISyncClient, ISyncRecordSnapshot;
 
+@class ISyncChange, ISyncClient, ISyncRecordSnapshot;
 
 
 @interface ISyncSession : NSObject
@@ -53,7 +53,10 @@
    lastAnchors argument.
 */
 + (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 + (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+// + (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors: (NSDictionary *)anchors hasChanges:(BOOL)flag error: (NSError **)error;
 
 /* The default is to assume that a client will be fast syncing all the entities specified when the
    session was created.  Telling the engine that a client was reset is tantamount to saying "forget
@@ -199,6 +202,12 @@
    for the client are prepared (when -prepareToPullChangesForEntityNames:beforeDate: is called).
    Compare to the method on ISyncManager. */
 - (ISyncRecordSnapshot *)snapshotOfRecordsInTruth;
+
+/* Clients can call this method to inform the server that they are still alive
+   but doing something that keeps them busy and prevents them from talking to the server
+   process. This will prevent the server from timing them out on the watchdog. */ 
+- (void)ping AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 @end
 
 
@@ -216,8 +225,8 @@
 
    If a sync is cancelled during the mingle phase (ie. the exception is thrown from
    -prepareToPullChangesForEntityNames:beforeDate:), the changes that have been accepted from the
-   client will be discarded.  If a client cannot provide those changes on a subsequent sync, it must
-   force a slow sync.  The client cannot proceed to the pull phase.
+   client will still be applied.  On the next sync the client should only supply new changes.
+   The client cannot proceed to the pull phase.
 
    If a sync is cancelled during the pull phase, the changes that have not been accepted or rejected by
    the client and explicitly committed (using -clientCommittedAcceptedChanges) will be given to the
@@ -250,6 +259,12 @@ SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordsKey; // a dictionary,
 SYNCSERVICES_EXPORT NSString * const ISyncInvalidEntityException;
 SYNCSERVICES_EXPORT NSString * const ISyncUnsupportedEntityException;
 
+/* Other exceptions that can be generated on 10.6 include
+ * ISyncInvalidSchemaException and ISyncInvalidArgumentsException.  These are
+ * declared in SyncServicesErrors.h. On 10.5.6 NSInternalInconsistencyException
+ * or NSInvalidArgumentsException exceptions when raised indicate an internal
+ * problem that was encountered either because of some sort of data corruption,
+ * an internal bug, or an unhandled condition. */
 
 
 /* Every record passed to the sync engine (and every record received from the sync engine) must be

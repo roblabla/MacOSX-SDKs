@@ -3,9 +3,9 @@
  
      Contains:   Color Picker package Interfaces.
  
-     Version:    CommonPanels-87~138
+     Version:    CommonPanels-91~741
  
-     Copyright:  © 1987-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

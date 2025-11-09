@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2007 Apple Inc. All rights reserved. 
+ * Copyright (c) 2001-2009 Apple Inc. All rights reserved. 
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -185,7 +185,7 @@ typedef void ( *SCSITaskCallbackFunction ) ( SCSIServiceResponse 	serviceRespons
 											 void *					refCon );
 
 /*! 
-	@struct SCSITaskInterface
+	@class SCSITaskInterface
     @abstract Basic interface for a SCSITask.  
     @discussion After rendezvous with a SCSITask Device in the IORegistry you can create
     an instance of this interface using the CreateSCSITask method in the
@@ -193,12 +193,15 @@ typedef void ( *SCSITaskCallbackFunction ) ( SCSIServiceResponse 	serviceRespons
     you can manipulate SCSITasks to send to the device.
 */
 
-// Interface for sending raw SCSITasks
 typedef struct SCSITaskInterface
 {
+
 	IUNKNOWN_C_GUTS;
 	
+	/*! Interface version */
 	UInt16	version;
+	
+	/*! Interface revision */
 	UInt16	revision;
 	
 	/*! @function IsTaskActive
@@ -249,7 +252,7 @@ typedef struct SCSITaskInterface
 
 	/*! @function GetCommandDescriptorBlockSize
     @abstract Method to get the task's SCSICommandDescriptorBlock size.
-    @discussion This method can be used to get the size of the SCSITask’s
+    @discussion This method can be used to get the size of the SCSITask's
     SCSICommandDescriptorBlock.
     @param task Pointer to an instance of an SCSITaskInterface.
     @result UInt8 which is the size of the SCSICommandDescriptorBlock. Valid values
@@ -311,7 +314,6 @@ typedef struct SCSITaskInterface
     @discussion This method can be used to get the timeout duration for the SCSITask.
     The timeout duration is counted in milliseconds.
     @param task Pointer to an instance of an SCSITaskInterface.
-	@param inTimeoutDurationMS UInt32 representing the timeout in milliseconds.
     @result Returns a value between zero and ULONG_MAX.  
 	*/
 	
@@ -411,7 +413,6 @@ typedef struct SCSITaskInterface
     @discussion This method can be used to get the actual transfer count in bytes
     from the SCSITask.
     @param task Pointer to an instance of an SCSITaskInterface.
-	@param outStatus Pointer to an SCSITaskStatus.
     @result Returns a UInt64 value of bytes transferred.
 	*/
 
@@ -447,15 +448,22 @@ typedef struct SCSITaskInterface
 											  SCSI_Sense_Data * senseDataBuffer,
 											  UInt8				senseDataLength );
 	
+	/* Added in 10.6 */
+	
+	/*! @function ResetForNewTask
+    @abstract Method to reset the SCSITask to defaults.
+    @discussion This method can be used to reset the SCSITask to defaults.
+    @param task Pointer to an instance of an SCSITaskInterface.
+    @result Returns kIOReturnSuccess if reset was successful, otherwise kIOReturnError.
+	*/
+	
+	IOReturn	( *ResetForNewTask ) ( void * task );
+	
 } SCSITaskInterface;
 
 
-// Interface for talking to a device which allows raw
-// SCSITask access. Use this interface to create tasks, release tasks,
-// get exclusive access to the device, create ports for async notifications, etc.
-
 /*! 
-	@struct SCSITaskDeviceInterface
+	@class SCSITaskDeviceInterface
     @abstract Basic interface for a SCSITask Device.  
     @discussion After rendezvous with a SCSITask Device in the IORegistry you can create
     an instance of this interface as a proxy to the IOService. Once you have this interface,
@@ -465,9 +473,13 @@ typedef struct SCSITaskInterface
 
 typedef struct SCSITaskDeviceInterface
 {
+
 	IUNKNOWN_C_GUTS;
 
+	/*! Interface version */
 	UInt16	version;
+	
+	/*! Interface revision */
 	UInt16	revision;
 	
 	/*! @function IsExclusiveAccessAvailable
@@ -553,7 +565,7 @@ typedef struct SCSITaskDeviceInterface
 
 
 /*! 
-	@struct MMCDeviceInterface
+	@class MMCDeviceInterface
     @abstract Basic interface for an MMC-2 Compliant Device.  
     @discussion After rendezvous with a MMC-2 Compliant Device in the IORegistry
     you can create an instance of this interface as a proxy to the IOService. Once
@@ -563,9 +575,13 @@ typedef struct SCSITaskDeviceInterface
 
 typedef struct MMCDeviceInterface
 {
+
 	IUNKNOWN_C_GUTS;
 
+	/*! Interface version */
 	UInt16	version;
+	
+	/*! Interface revision */
 	UInt16	revision;
 	
 	/*! @function Inquiry
@@ -869,7 +885,7 @@ typedef struct MMCDeviceInterface
     @param self Pointer to an MMCDeviceInterface for one IOService.
 	@param ADDRESS The ADDRESS field as defined in MMC-2.
     @param LAYER_NUMBER The LAYER_NUMBER field as defined in MMC-2.
-    @param format The FORMAT field as defined in MMC-2.
+    @param FORMAT The FORMAT field as defined in MMC-2.
 	@param buffer Pointer to the buffer to be used for this function.
 	@param bufferSize The size of the data transfer requested.
 	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask
@@ -966,6 +982,7 @@ typedef struct MMCDeviceInterface
 								SCSITaskStatus *	taskStatus,
 								SCSI_Sense_Data *	senseDataBuffer );
 	
+	
 	/* Added in Mac OS X 10.3 */
 	
 	/*! @function ReadFormatCapacities
@@ -1000,7 +1017,7 @@ typedef struct MMCDeviceInterface
 	@param MEDIA_TYPE The MEDIA_TYPE field as defined in MMC-5.
 	@param ADDRESS The ADDRESS field as defined in MMC-5.
     @param LAYER_NUMBER The LAYER_NUMBER field as defined in MMC-5.
-    @param format The FORMAT field as defined in MMC-5.
+    @param FORMAT The FORMAT field as defined in MMC-5.
 	@param buffer Pointer to the buffer to be used for this function.
 	@param bufferSize The size of the data transfer requested.
 	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask
@@ -1081,6 +1098,35 @@ typedef struct MMCDeviceInterface
 											SCSICmdField2Byte	bufferSize,
 											SCSITaskStatus *	taskStatus,
 											SCSI_Sense_Data *	senseDataBuffer );
+	
+	/* Added in 10.6 */
+	
+	/*! @function SetStreaming
+    @abstract Issues a SET_STREAMING command to the device as defined in MMC-5.
+    @discussion Once an MMCDeviceInterface is opened the client may send this command to
+    change streaming attributes. Clients should check for the Real-time Streaming Feature
+    (107h) before using this command.
+    @param self Pointer to an MMCDeviceInterface for one IOService.
+    @param TYPE The TYPE field as defined in MMC-5.
+	@param buffer Pointer to the buffer to be used for this function.
+	@param bufferSize The size of the data transfer requested.
+	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask which
+	was executed. Valid SCSITaskStatus values are defined in SCSITask.h
+    @param senseDataBuffer Pointer to a buffer the size of the SCSI_Sense_Data struct found
+    in SCSICmds_REQUEST_SENSE_Defs.h. The sense data is only valid
+    if the SCSITaskStatus is kSCSITaskStatus_CHECK_CONDITION.
+    @result Returns kIOReturnSuccess if successful, kIOReturnNoDevice if there is no
+    connection to an IOService, kIOReturnNoMemory if a SCSITask couldn't be created,
+	or kIOReturnExclusiveAccess if the device is already opened for exclusive access
+	by another client.
+	*/
+	
+	IOReturn ( *SetStreaming ) (	void *				self,
+									SCSICmdField1Byte	TYPE,
+									void *				buffer,
+									SCSICmdField2Byte	bufferSize,
+									SCSITaskStatus *	taskStatus,
+									SCSI_Sense_Data *	senseDataBuffer );
 	
 } MMCDeviceInterface;
 	

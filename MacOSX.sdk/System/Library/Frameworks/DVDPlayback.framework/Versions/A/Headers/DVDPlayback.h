@@ -78,7 +78,8 @@ enum {
 	kDVDErrorInvalidBookmarkVersion		= -70030,	//	invalid bookmark version
 	kDVDErrorInvalidBookmarkSize		= -70031,	//	invalid bookmark size
 	kDVDErrorInvalidBookmarkForMedia	= -70032,	//	invalid bookmark for media
-	kDVDErrorNoValidBookmarkForLastPlay	= -70033	//	no valid last play bookmark
+	kDVDErrorNoValidBookmarkForLastPlay	= -70033,	//	no valid last play bookmark
+	kDVDErrorDisplayAuthentification	= -70034	//	invalid display authentication: e.g. HDCP failure, ...
 
 };
 typedef	OSStatus	DVDErrorCode;
@@ -598,21 +599,27 @@ extern	OSStatus	DVDDispose()																				AVAILABLE_MAC_OS_X_VERSION_10_3_
 //
 //	These calls allow opening media from disc (DVDOpenMediaVolume) or from a VIDEO_TS
 //	folder (DVDOpenMediaFile).  You must close any currently open disc or file before opening
-//	a new one.  For both Open calls you must provide an FSRef to the VIDEO_TS folder.
+//	a new one.  For both Open calls you must provide an CFURLRef - FSRef now deprecated -  to the VIDEO_TS folder.
 //	
-//	DVDIsValidMediaRef	- 	Returns true if the FSRef points to a valid media layout.
-//	DVDHasMedia 		- 	Returns true if the playback framework has media to play and
-//							the framework had recveived an Open call on the media.
-//	DVDOpenMediaFile	- 	Opens a VIDEO_TS folder (can be on a hard drive or a dvd disc).
-//	DVDCloseMediaFile	- 	Closes a previously opened VIDEO_TS folder.
-//	DVDOpenMediaVolume	- 	Opens a DVD disc for playback.
-//	DVDCloseMediaVolume	-	Closes a previously opened DVD disc.
+//	DVDIsValidMediaRef			- 	Returns true if the FSRef points to a valid media layout.
+//	DVDIsValidMediaURL			- 	Returns true if the CFURLRef points to a valid media layout.
+//	DVDHasMedia					- 	Returns true if the playback framework has media to play and
+//									the framework had recveived an Open call on the media.
+//	DVDOpenMediaFile			- 	Opens a VIDEO_TS folder (can be on a hard drive or a dvd disc).
+//	DVDOpenMediaFileWithURL		- 	Opens a VIDEO_TS folder with a CFURLRef (can be on a hard drive or a dvd disc).
+//	DVDCloseMediaFile			- 	Closes a previously opened VIDEO_TS folder.
+//	DVDOpenMediaVolume			- 	Opens a DVD disc for playback.
+//	DVDOpenMediaVolumeWithURL	- 	Opens a DVD disc for playback with a CFURLRef.
+//	DVDCloseMediaVolume			-	Closes a previously opened DVD disc.
 //-----------------------------------------------------
 extern	OSStatus	DVDIsValidMediaRef(FSRef *inRef,Boolean *outIsValid)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDIsValidMediaURL(CFURLRef inRef,Boolean *outIsValid)										AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern	OSStatus	DVDHasMedia(Boolean *outHasMedia)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDOpenMediaFile(FSRef *inFile)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDOpenMediaFileWithURL(CFURLRef inFile)													AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern	OSStatus	DVDCloseMediaFile()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDOpenMediaVolume(FSRef *inVolume)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDOpenMediaVolumeWithURL(CFURLRef inVolume)												AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern	OSStatus	DVDCloseMediaVolume()																		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -44,36 +44,37 @@
 
 #include <sys/cdefs.h>
 
+#ifdef	__LP64__
+
+typedef unsigned long		clock_sec_t;
+typedef unsigned int		clock_usec_t, clock_nsec_t;
+
+#else	/* __LP64__ */
+
+typedef uint32_t			clock_sec_t;
+typedef uint32_t			clock_usec_t, clock_nsec_t;
+
+#endif	/* __LP64__ */
+
 
 __BEGIN_DECLS
 
 
 extern void			clock_get_calendar_microtime(
-						uint32_t			*secs,
-						uint32_t			*microsecs);
+						clock_sec_t			*secs,
+						clock_usec_t		*microsecs);
 
 extern void			clock_get_calendar_nanotime(
-						uint32_t			*secs,
-						uint32_t			*nanosecs);
-
-/*
- * Gah! This file is included everywhere. The other domains do not correctly
- * include config_dtrace headers, so this isn't being defined. The last test
- * I ran stopped with a build failure in pexpert/i386/kd.c
- */
-#if CONFIG_DTRACE
-extern void			clock_get_calendar_nanotime_nowait(
-						uint32_t			*secs,
-						uint32_t			*nanosecs);
-#endif /* CONFIG_DTRACE */
+						clock_sec_t			*secs,
+						clock_nsec_t		*nanosecs);
 
 extern void			clock_get_system_microtime(
-						uint32_t			*secs,
-						uint32_t			*microsecs);
+						clock_sec_t			*secs,
+						clock_usec_t		*microsecs);
 
 extern void			clock_get_system_nanotime(
-						uint32_t			*secs,
-						uint32_t			*nanosecs);
+						clock_sec_t			*secs,
+						clock_nsec_t		*nanosecs);
 
 extern void				clock_timebase_info(
 							mach_timebase_info_t	info);

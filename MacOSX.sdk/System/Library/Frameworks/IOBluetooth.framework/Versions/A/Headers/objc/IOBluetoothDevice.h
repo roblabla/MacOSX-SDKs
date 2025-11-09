@@ -1,13 +1,13 @@
 /*
     File:		IOBluetoothDevice.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2008 by Apple Computer, Inc. All rights reserved.
 */
  
-#import <IOBluetooth/objc/IOBluetoothObject.h>
-
 #import <IOKit/IOKitLib.h>
+
 #import <IOBluetooth/Bluetooth.h>
 #import <IOBluetooth/IOBluetoothUserLib.h>
+#import <IOBluetooth/objc/IOBluetoothObject.h>
 #import <IOBluetooth/objc/IOBluetoothUserNotification.h>
 
 /*!	@header		IOBluetoothDevice.h
@@ -71,7 +71,7 @@
 //	IOBluetoothDevice
 //====================================================================================================================
 
-@interface IOBluetoothDevice : IOBluetoothObject
+@interface IOBluetoothDevice : IOBluetoothObject <NSCoding>
 {
     id									mServerDevice;
     
@@ -175,15 +175,6 @@
 
 - (IOBluetoothDeviceRef)getDeviceRef;
 
-/*!
-    @method		isEqual:
-	@abstract	Compares two IOBluetoothDevice objects.
-    @param		cmpObject	The object to compare to the target IOBluetoothDevice object
-	@result		Returns TRUE if the cmpObject represents the same remote device as the target.
-*/
-
-- (BOOL)isEqual:(id)cmpObject;
-
 // L2CAP channel.
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
@@ -206,7 +197,7 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
 				of the protocol IOBluetoothL2CAPChannelDelegate.
 				
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
@@ -233,7 +224,7 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
 				of the protocol IOBluetoothL2CAPChannelDelegate.
 				
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
@@ -306,9 +297,18 @@
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
                 channel open process will not complete until the client has registered an incoming data 
-                listener on the new channel.
+                listener on the new channel. The RFCOMM channel object is already retained when this function returns success;
+				the channel must be released when the caller is done with it.
 
-				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+				You should verify that the channel you wish to open exists on the remote device before attempting to open it,
+				by performing an SDP query. This is recommended because the service might have been removed from the,
+				remote device or the channel assignments for the service could have changed (this is rare, but it does happen
+				frequently on some devices). This also works around a bug that existed in early Leopard versions in certain
+				situations where the method would return an error; in these instances, the desired RFCOMM channel could not
+				be opened again until the calling app was restarted.
+
+				NOTE:	This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+						
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannel object to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
@@ -318,11 +318,11 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the rfcomm uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IObluetoothRFCOMMChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h" in the definition
 				of the protocol IOBluetoothRFCOMMChannelDelegate.
 
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                RFCOMM channel was found). 
+                RFCOMM channel was found). The channel must be released when the caller is done with it.
 */
 
 - (IOReturn)openRFCOMMChannelSync:(IOBluetoothRFCOMMChannel **)rfcommChannel withChannelID:(BluetoothRFCOMMChannelID)channelID delegate:(id)channelDelegate;
@@ -333,9 +333,18 @@
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
                 channel open process will not complete until the client has registered an incoming data 
-                listener on the new channel.
+                listener on the new channel. The RFCOMM channel object is already retained when this function returns success;
+				the channel must be released when the caller is done with it.
 					
+				You should verify that the channel you wish to open exists on the remote device before attempting to open it,
+				by performing an SDP query. This is recommended because the service might have been removed from the,
+				remote device or the channel assignments for the service could have changed (this is rare, but it does happen
+				frequently on some devices). This also works around a bug that existed in early Leopard versions in certain
+				situations where the method would return an error; in these instances, the desired RFCOMM channel could not
+				be opened again until the calling app was restarted.
+
 				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+				
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannel object to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
@@ -345,11 +354,11 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the rfcomm uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h" in the definition
 				of the protocol IOBluetoothRFCOMMChannelDelegate.
 
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                RFCOMM channel was found). 
+                RFCOMM channel was found). The channel must be released when the caller is done with it.
 */
 
 - (IOReturn)openRFCOMMChannelAsync:(IOBluetoothRFCOMMChannel **)rfcommChannel withChannelID:(BluetoothRFCOMMChannelID)channelID delegate:(id)channelDelegate;
@@ -413,7 +422,8 @@
                 format of the most recent remote name request.
 */
 
-- (NSString *)getName;
+@property(readonly) NSString *name;
+- (NSString *)getName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		getNameOrAddress
@@ -424,7 +434,8 @@
     @result		Returns the device's name or a string containing the device's address.
 */
 
-- (NSString *)getNameOrAddress;
+@property(readonly) NSString *nameOrAddress;
+- (NSString *)getNameOrAddress DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		getLastNameUpdate
@@ -685,7 +696,7 @@
 				services on the device.  The results essentially encompass all services on the device.
 				This function is always asynchronous.  If a target is specified, when the SDP query is complete (or
 				an error is encountered), the method -sdpQueryComplete:status: will be called on the given target.  If no target 
-				is specified, the request is still synchronous, but no callback will be made.  That can be useful if the client 
+				is specified, the request is still asynchronous, but no callback will be made.  That can be useful if the client 
 				has	registered for SDP service changed notifications.
 	@param		target The target to message when the SDP query is complete
     @result		Returns kIOReturnSuccess if the SDP query was successfully started.
@@ -838,7 +849,9 @@
     @method		setSupervisionTimeout
 	@abstract	Sets the connection supervision timeout.
 	@discussion	NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
-	@param		timeout A client-supplied link supervision timeout value to use to monitor the connection.
+	@param		timeout A client-supplied link supervision timeout value to use to monitor the connection. The timeout
+				value should be specified in slots, so you can use the BluetoothGetSlotsFromSeconds macro to get the proper
+				value. e.g. BluetoothGetSlotsFromSeconds( 5.0 ) will give yield the proper number of slots (8000) for 5 seconds.
 	@result		Returns kIOReturnSuccess if it was possible to set the connection supervision timeout.
 */
 
@@ -852,7 +865,8 @@
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.  This prevents a situation where the channel succeeds
                 in being configured and opened and receives data before the client is listening and
-                is ready for it.
+                is ready for it. The L2CAP channel object is already retained when this function returns success;
+				the channel must be released when the caller is done with it.
 
 				NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
@@ -864,11 +878,11 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
 				of the protocol IOBluetoothL2CAPChannelDelegate.
 			
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                L2CAP channel was found). 
+                L2CAP channel was found). The channel must be released when the caller is done with it.
 */
 
 - (IOReturn)openL2CAPChannelSync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm withConfiguration:(NSDictionary*)channelConfiguration delegate:(id)channelDelegate;
@@ -881,7 +895,8 @@
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.  This prevents a situation where the channel succeeds
                 in being configured and opened and receives data before the client is listening and
-                is ready for it.
+                is ready for it. The L2CAP channel object is already retained when this function returns success;
+				the channel must be released when the caller is done with it.
 
 				NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
@@ -893,20 +908,17 @@
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
 				of the protocol IOBluetoothL2CAPChannelDelegate.
 				
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                L2CAP channel was found). 
+                L2CAP channel was found). The channel must be released when the caller is done with it.
 */
 
 - (IOReturn)openL2CAPChannelAsync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm withConfiguration:(NSDictionary*)channelConfiguration delegate:(id)channelDelegate;
 
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
-- (NSString *)description;
-- (id)initWithCoder:(NSCoder *)coder;
-- (void)encodeWithCoder:(NSCoder *)coder;
 - (id)awakeAfterUsingCoder:(NSCoder *)coder;
 
 @end

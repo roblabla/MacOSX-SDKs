@@ -5,7 +5,7 @@
 // Modified by:
 // Created:     14/4/2006
 // Copyright:   (c) Francesco Montorsi
-// RCS-ID:      $Id: filepickerg.h,v 1.8 2006/07/15 15:13:03 VS Exp $
+// RCS-ID:      $Id: filepickerg.h 40100 2006-07-15 15:13:04Z VS $
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 

@@ -133,6 +133,7 @@ typedef __int32_t	__darwin_suseconds_t;	/* [???] microseconds */
 typedef __uint32_t	__darwin_uid_t;		/* [???] user IDs */
 typedef __uint32_t	__darwin_useconds_t;	/* [???] microseconds */
 typedef	unsigned char	__darwin_uuid_t[16];
+typedef	char	__darwin_uuid_string_t[37];
 
 #ifndef offsetof
 #define offsetof(type, member)	((size_t)(&((type *)0)->member))

@@ -11,7 +11,7 @@
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * RCS: @(#) $Id: tclIntDecls.h,v 1.49.2.5 2004/06/10 17:17:43 andreas_kupries Exp $
+ * RCS: @(#) $Id: tclIntDecls.h,v 1.49.2.9 2007/04/21 19:52:14 kennykb Exp $
  */
 
 #ifndef _TCLINTDECLS
@@ -115,8 +115,8 @@ EXTERN int		TclFormatInt _ANSI_ARGS_((char * buffer, long n));
 EXTERN void		TclFreePackageInfo _ANSI_ARGS_((Interp * iPtr));
 /* Slot 26 is reserved */
 /* 27 */
-EXTERN int		TclGetDate _ANSI_ARGS_((char * p, unsigned long now, 
-				long zone, unsigned long * timePtr));
+EXTERN int		TclGetDate _ANSI_ARGS_((char * p, Tcl_WideInt now, 
+				long zone, Tcl_WideInt * timePtr));
 /* 28 */
 EXTERN Tcl_Channel	TclpGetDefaultStdChannel _ANSI_ARGS_((int type));
 /* Slot 29 is reserved */
@@ -241,7 +241,7 @@ EXTERN unsigned long	TclpGetSeconds _ANSI_ARGS_((void));
 /* 77 */
 EXTERN void		TclpGetTime _ANSI_ARGS_((Tcl_Time * time));
 /* 78 */
-EXTERN int		TclpGetTimeZone _ANSI_ARGS_((unsigned long time));
+EXTERN int		TclpGetTimeZone _ANSI_ARGS_((Tcl_WideInt time));
 /* Slot 79 is reserved */
 /* Slot 80 is reserved */
 /* 81 */
@@ -512,9 +512,26 @@ EXTERN int		TclUniCharMatch _ANSI_ARGS_((
 /* Slot 180 is reserved */
 /* Slot 181 is reserved */
 /* 182 */
-EXTERN struct tm *	TclpLocaltime _ANSI_ARGS_((TclpTime_t clock));
+EXTERN struct tm *	TclpLocaltime _ANSI_ARGS_((TclpTime_t_CONST clock));
 /* 183 */
-EXTERN struct tm *	TclpGmtime _ANSI_ARGS_((TclpTime_t clock));
+EXTERN struct tm *	TclpGmtime _ANSI_ARGS_((TclpTime_t_CONST clock));
+/* Slot 184 is reserved */
+/* Slot 185 is reserved */
+/* Slot 186 is reserved */
+/* Slot 187 is reserved */
+/* Slot 188 is reserved */
+/* Slot 189 is reserved */
+/* Slot 190 is reserved */
+/* Slot 191 is reserved */
+/* Slot 192 is reserved */
+/* Slot 193 is reserved */
+/* Slot 194 is reserved */
+/* Slot 195 is reserved */
+/* Slot 196 is reserved */
+/* Slot 197 is reserved */
+/* Slot 198 is reserved */
+/* 199 */
+EXTERN int		TclMatchIsTrivial _ANSI_ARGS_((CONST char * pattern));
 
 typedef struct TclIntStubs {
     int magic;
@@ -563,7 +580,7 @@ typedef struct TclIntStubs {
     int (*tclFormatInt) _ANSI_ARGS_((char * buffer, long n)); /* 24 */
     void (*tclFreePackageInfo) _ANSI_ARGS_((Interp * iPtr)); /* 25 */
     void *reserved26;
-    int (*tclGetDate) _ANSI_ARGS_((char * p, unsigned long now, long zone, unsigned long * timePtr)); /* 27 */
+    int (*tclGetDate) _ANSI_ARGS_((char * p, Tcl_WideInt now, long zone, Tcl_WideInt * timePtr)); /* 27 */
     Tcl_Channel (*tclpGetDefaultStdChannel) _ANSI_ARGS_((int type)); /* 28 */
     void *reserved29;
     void *reserved30;
@@ -614,7 +631,7 @@ typedef struct TclIntStubs {
     unsigned long (*tclpGetClicks) _ANSI_ARGS_((void)); /* 75 */
     unsigned long (*tclpGetSeconds) _ANSI_ARGS_((void)); /* 76 */
     void (*tclpGetTime) _ANSI_ARGS_((Tcl_Time * time)); /* 77 */
-    int (*tclpGetTimeZone) _ANSI_ARGS_((unsigned long time)); /* 78 */
+    int (*tclpGetTimeZone) _ANSI_ARGS_((Tcl_WideInt time)); /* 78 */
     void *reserved79;
     void *reserved80;
     char * (*tclpRealloc) _ANSI_ARGS_((char * ptr, unsigned int size)); /* 81 */
@@ -726,8 +743,24 @@ typedef struct TclIntStubs {
     void *reserved179;
     void *reserved180;
     void *reserved181;
-    struct tm * (*tclpLocaltime) _ANSI_ARGS_((TclpTime_t clock)); /* 182 */
-    struct tm * (*tclpGmtime) _ANSI_ARGS_((TclpTime_t clock)); /* 183 */
+    struct tm * (*tclpLocaltime) _ANSI_ARGS_((TclpTime_t_CONST clock)); /* 182 */
+    struct tm * (*tclpGmtime) _ANSI_ARGS_((TclpTime_t_CONST clock)); /* 183 */
+    void *reserved184;
+    void *reserved185;
+    void *reserved186;
+    void *reserved187;
+    void *reserved188;
+    void *reserved189;
+    void *reserved190;
+    void *reserved191;
+    void *reserved192;
+    void *reserved193;
+    void *reserved194;
+    void *reserved195;
+    void *reserved196;
+    void *reserved197;
+    void *reserved198;
+    int (*tclMatchIsTrivial) _ANSI_ARGS_((CONST char * pattern)); /* 199 */
 } TclIntStubs;
 
 #ifdef __cplusplus
@@ -1353,6 +1386,25 @@ extern TclIntStubs *tclIntStubsPtr;
 #ifndef TclpGmtime
 #define TclpGmtime \
 	(tclIntStubsPtr->tclpGmtime) /* 183 */
+#endif
+/* Slot 184 is reserved */
+/* Slot 185 is reserved */
+/* Slot 186 is reserved */
+/* Slot 187 is reserved */
+/* Slot 188 is reserved */
+/* Slot 189 is reserved */
+/* Slot 190 is reserved */
+/* Slot 191 is reserved */
+/* Slot 192 is reserved */
+/* Slot 193 is reserved */
+/* Slot 194 is reserved */
+/* Slot 195 is reserved */
+/* Slot 196 is reserved */
+/* Slot 197 is reserved */
+/* Slot 198 is reserved */
+#ifndef TclMatchIsTrivial
+#define TclMatchIsTrivial \
+	(tclIntStubsPtr->tclMatchIsTrivial) /* 199 */
 #endif
 
 #endif /* defined(USE_TCL_STUBS) && !defined(USE_TCL_STUB_PROCS) */

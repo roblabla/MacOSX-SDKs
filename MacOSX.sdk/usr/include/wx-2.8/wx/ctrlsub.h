@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     22.10.99
-// RCS-ID:      $Id: ctrlsub.h,v 1.38 2006/10/31 08:50:05 RD Exp $
+// RCS-ID:      $Id: ctrlsub.h 42816 2006-10-31 08:50:17Z RD $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

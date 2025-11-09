@@ -4,7 +4,7 @@
 // Author:      Vaclav Slavik
 // Modified by:
 // Created:     22.04.01
-// RCS-ID:      $Id: bitmap.h,v 1.40 2006/10/30 19:26:17 VZ Exp $
+// RCS-ID:      $Id: bitmap.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,12 +20,12 @@
 #include "wx/gdicmn.h"  // for wxBitmapType
 #include "wx/colour.h"
 
-class WXDLLEXPORT wxBitmap;
-class WXDLLEXPORT wxBitmapHandler;
-class WXDLLEXPORT wxIcon;
-class WXDLLEXPORT wxImage;
-class WXDLLEXPORT wxMask;
-class WXDLLEXPORT wxPalette;
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class WXDLLIMPEXP_FWD_CORE wxBitmapHandler;
+class WXDLLIMPEXP_FWD_CORE wxIcon;
+class WXDLLIMPEXP_FWD_CORE wxImage;
+class WXDLLIMPEXP_FWD_CORE wxMask;
+class WXDLLIMPEXP_FWD_CORE wxPalette;
 
 // ----------------------------------------------------------------------------
 // wxVariant support

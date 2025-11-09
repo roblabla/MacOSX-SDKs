@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,19 +19,9 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1998 Apple Computer, Inc.  All rights reserved. 
- *
- * IOPacketQueue.h
- *
- * HISTORY
- * 9-Dec-1998       Joe Liu (jliu) created.
- *
- */
 
 #ifndef _IOPACKETQUEUE_H
 #define _IOPACKETQUEUE_H
-
 
 #include <libkern/c++/OSObject.h>
 #include <IOKit/IOLocks.h>

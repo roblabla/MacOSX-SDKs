@@ -1,18 +1,20 @@
 /*
     NSEvent.h
     Application Kit
-    Copyright (c) 1994-2007, Apple Inc.
+    Copyright (c) 1994-2009, Apple Inc.
     All rights reserved.
 */
 
+#import <AppKit/NSTouch.h>
 #import <ApplicationServices/ApplicationServices.h>
+#import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 #import <Foundation/NSGeometry.h>
 #import <IOKit/hidsystem/IOLLEvent.h>
 #import <limits.h>
 
-@class NSGraphicsContext, NSWindow, NSTrackingArea;
+@class NSGraphicsContext, NSWindow, NSTrackingArea, NSSet;
 
 enum {        /* various types of events */
     NSLeftMouseDown             = 1,            
@@ -39,9 +41,21 @@ enum {        /* various types of events */
 #endif
     NSOtherMouseDown            = 25,
     NSOtherMouseUp              = 26,
-    NSOtherMouseDragged         = 27
+    NSOtherMouseDragged         = 27,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    /* The following event types are available on some hardware on 10.5.2 and later */
+    NSEventTypeGesture          = 29,
+    NSEventTypeMagnify          = 30,
+    NSEventTypeSwipe            = 31,
+    NSEventTypeRotate           = 18,
+    NSEventTypeBeginGesture     = 19,
+    NSEventTypeEndGesture       = 20
+#endif
 };
 typedef NSUInteger NSEventType;
+
+// For APIs introduced in Mac OS X 10.6 and later, this type is used with NS*Mask constants to indicate the events of interest.
+typedef unsigned long long NSEventMask;
 
 enum {                    /* masks for the types of events */
     NSLeftMouseDownMask         = 1 << NSLeftMouseDown,
@@ -69,6 +83,15 @@ enum {                    /* masks for the types of events */
     NSOtherMouseDownMask        = 1 << NSOtherMouseDown,
     NSOtherMouseUpMask          = 1 << NSOtherMouseUp,
     NSOtherMouseDraggedMask     = 1 << NSOtherMouseDragged,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    /* The following event masks are available on some hardware on 10.5.2 and later */
+    NSEventMaskGesture          = 1 << NSEventTypeGesture,
+    NSEventMaskMagnify          = 1 << NSEventTypeMagnify,
+    NSEventMaskSwipe            = 1U << NSEventTypeSwipe,
+    NSEventMaskRotate           = 1 << NSEventTypeRotate,
+    NSEventMaskBeginGesture     = 1 << NSEventTypeBeginGesture,
+    NSEventMaskEndGesture       = 1 << NSEventTypeEndGesture,
+#endif
     NSAnyEventMask              = NSUIntegerMax
 };
 
@@ -112,7 +135,7 @@ enum {
     NSEventType _type;
     NSPoint _location;
     unsigned int _modifierFlags;
-    NSInteger _WSTimestamp;
+    id _WSTimestamp;
     NSTimeInterval _timestamp;
     NSInteger _windowNumber;
     NSWindow *_window;
@@ -137,7 +160,8 @@ enum {
             unsigned short keyCode;
             BOOL isARepeat;
 #if __LP64__
-            int reserved[6];
+            int eventFlags;
+            int reserved[5];
 #endif
         } key;
         struct {
@@ -158,6 +182,26 @@ enum {
             int reserved2[6];
 #endif
         } scrollWheel;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+        struct {
+            CGFloat deltaX;
+            CGFloat deltaY;
+            CGFloat deltaZ; 
+#if __LP64__
+            int reserved[7];
+#endif
+        } axisGesture;
+        struct {
+            short subtype;
+            BOOL gestureEnded;
+            BOOL reserved;
+            int value;
+            float percentage;
+#if __LP64__
+            int reserved2[7];
+#endif
+        } miscGesture;
+#endif
         struct {
             int subtype;
             NSInteger data1;
@@ -193,12 +237,12 @@ enum {
 /* these messages are valid for all mouse down/up/drag and enter/exit events */
 - (NSInteger)eventNumber;
 
-/* These messages are valid for all mouse down/up/drag events */
-/* These messages are also valid for NSTabletPoint events on 10.4 or later */
+/* -pressure is valid for all mouse down/up/drag events, and is also valid for NSTabletPoint events on 10.4 or later */
 - (float)pressure;
+/* -locationInWindow is valid for all mouse-related events */
 - (NSPoint)locationInWindow;
 
-/* these messages are valid for scroll wheel events and mouse move/drag events */
+/* these messages are valid for scroll wheel events and mouse move/drag events.  As of 10.5.2, deltaX and deltaY are also valid for swipe events.  A non-0 deltaX will represent a horizontal swipe, -1 for swipe right and 1 for swipe left.  A non-0 deltaY will represent a vertical swipe, -1 for swipe down and 1 for swipe up. */
 - (CGFloat)deltaX;    
 - (CGFloat)deltaY;    
 - (CGFloat)deltaZ;    // 0 for most scroll wheel and mouse events
@@ -252,9 +296,15 @@ enum {
 
 #endif
 
+/* This message is valid for events of type NSEventTypeMagnify, on 10.5.2 or later */
+- (CGFloat)magnification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;       // change in magnification.   This value should be added to the current scaling of an item to get the new scale factor.
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* this message is valid for mouse events with subtype NSTabletPointEventSubtype or NSTabletProximityEventSubtype, and for NSTabletPoint and NSTabletProximity events */
 - (NSUInteger)deviceID;
+
+/* this message is valid for valid for mouse events with subtype NSTabletPointEventSubtype, and for NSTabletPoint events.  On 10.5.2 or later, it is also valid for NSEventTypeRotate events. */
+- (float)rotation;       // In degrees.  For NSTabletPoint, this is rotation of the pen.  For NSEventTypeRotate, it is rotation on the track pad.
 
 /* these messages are valid for mouse events with subtype NSTabletPointEventSubtype, and for NSTabletPoint events */
 /* absolute x coordinate in tablet space at full tablet resolution */
@@ -267,8 +317,6 @@ enum {
 - (NSUInteger)buttonMask;  
 /* range is -1 to 1 for both axes */
 - (NSPoint)tilt;     
-/* device rotation in degrees */
-- (float)rotation;       
 /* tangential pressure on the device; range is -1 to 1 */
 - (float)tangentialPressure;  
 /* NSArray of 3 vendor defined shorts */
@@ -298,6 +346,8 @@ enum {
 
 #endif
 
+- (NSSet *)touchesMatchingPhase:(NSTouchPhase)phase inView:(NSView*)view AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 /* used for initial delay and periodic behavior in tracking loops */
 + (void)startPeriodicEventsAfterDelay:(NSTimeInterval)delay withPeriod:(NSTimeInterval)period;
 + (void)stopPeriodicEvents;
@@ -310,6 +360,34 @@ enum {
 
 // global mouse coordinates
 + (NSPoint)mouseLocation;
+
+/* modifier keys currently down.  This returns the state of devices combined with synthesized events at the moment, independent of which events have been delivered via the event stream. */
++ (NSUInteger)modifierFlags AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* mouse buttons currently down.  Returns indices of the mouse buttons currently down.  1 << 0 corresponds to leftMouse, 1 << 1 to rightMouse, and 1 << n, n >= 2 to other mouse buttons.  This returns the state of devices combined with synthesized events at the moment, independent of which events have been delivered via the event stream, so this method is not suitable for tracking. */
++ (NSUInteger)pressedMouseButtons AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* the time in which a second click must occur in order to be considered a doubleClick.  This is a system value so overrides will have no effect. */
++ (NSTimeInterval)doubleClickInterval   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/* the time for which a key must be held down in order to generate the first key repeat event.  This is a system value so overrides will have no effect. */
++ (NSTimeInterval)keyRepeatDelay        AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/* the time between subsequent key repeat events.  This is a system value so overrides will have no effect. */
++ (NSTimeInterval)keyRepeatInterval     AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*
+   API for monitoring events in other processes, or in your own process. For either +addGlobal or +addLocal, pass an event mask specifying which events you wish to monitor, and a block that will be called with the event to monitor.
+
+   Use +addGlobal to install an event monitor that receives copies of events posted to other applications. Events are delivered asynchronously to your app and you can only observe the event; you cannot modify or otherwise prevent the event from being delivered to its original target application. Key-related events may only be monitored if accessibility is enabled or if your application is trusted for accessibility access (see AXIsProcessTrusted in AXUIElement.h). Note that your handler will not be called for events that are sent to your own application.
+
+   Use +addLocal to install an event monitor that receives events before they are dispatched by -[NSApplication sendEvent:]. In this case, your block should either return a valid NSEvent (which may be the same as the incoming NSEvent, or may be a newly created NSEvent) to cause the event to be dispatched, or it may return nil to stop dispatching of the event. Note that your handler will not be called for events that are consumed by nested event-tracking loops such as control tracking, menu tracking, or window dragging; only events that are dispatched through -[NSApplication sendEvent:] will be passed to your handler.
+
+   In either case, the return value of the API is a retained NSObject. To remove the event monitor, pass the return value from the +add API to +removeMonitor. You typically do not need to retain and release the event monitor yourself, since the implementation will retain it while needed.
+*/
+#if NS_BLOCKS_AVAILABLE
++ (id)addGlobalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(void (^)(NSEvent*))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (id)addLocalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(NSEvent* (^)(NSEvent*))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (void)removeMonitor:(id)eventMonitor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
 
 @end
 
@@ -409,7 +487,10 @@ enum {        /* event subtypes for NSSystemDefined events */
 enum {        /* event subtypes for mouse events */
     NSMouseEventSubtype             = NX_SUBTYPE_DEFAULT,
     NSTabletPointEventSubtype       = NX_SUBTYPE_TABLET_POINT,
-    NSTabletProximityEventSubtype   = NX_SUBTYPE_TABLET_PROXIMITY
+    NSTabletProximityEventSubtype   = NX_SUBTYPE_TABLET_PROXIMITY,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+    NSTouchEventSubtype             = NX_SUBTYPE_MOUSE_TOUCH
+#endif
 };
 #endif
 

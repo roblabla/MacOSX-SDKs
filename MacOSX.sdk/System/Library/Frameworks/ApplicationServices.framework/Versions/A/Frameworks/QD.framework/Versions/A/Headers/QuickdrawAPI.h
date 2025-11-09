@@ -3,9 +3,9 @@
  
      Contains:   API Prototypes from the former Quickdraw.i
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2005-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2005-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,9 +33,9 @@
 #include <QD/QuickdrawText.h>
 #endif
 
-#ifndef __CMTYPES__
-#include <ColorSync/CMTypes.h>
-#endif
+
+
+#include <ColorSync/ColorSyncDeprecated.h>
 
 
 #include <AvailabilityMacros.h>
@@ -49,6 +49,75 @@ extern "C" {
 #endif
 
 #pragma pack(push, 2)
+
+
+#if !CMBITMAPCALLBACKPROCPTR_DEFINED
+
+/* Caller-supplied progress function for Bitmap & PixMap matching routines */
+typedef CALLBACK_API( Boolean , CMBitmapCallBackProcPtr )(long progress, void *refCon);
+typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr)                 CMBitmapCallBackUPP;
+/*
+ *  NewCMBitmapCallBackUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern CMBitmapCallBackUPP
+NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine);
+
+/*
+ *  DisposeCMBitmapCallBackUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern void
+DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP);
+
+/*
+ *  InvokeCMBitmapCallBackUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern Boolean
+InvokeCMBitmapCallBackUPP(
+  long                 progress,
+  void *               refCon,
+  CMBitmapCallBackUPP  userUPP);
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline CMBitmapCallBackUPP                                  NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP) { }
+    inline Boolean                                              InvokeCMBitmapCallBackUPP(long progress, void * refCon, CMBitmapCallBackUPP userUPP) { return (*userUPP)(progress, refCon); }
+  #else
+    #define NewCMBitmapCallBackUPP(userRoutine)                 ((CMBitmapCallBackUPP)userRoutine)
+    #define DisposeCMBitmapCallBackUPP(userUPP)
+    #define InvokeCMBitmapCallBackUPP(progress, refCon, userUPP) (*userUPP)(progress, refCon)
+  #endif
+#endif
+
+
+#endif /* CMBITMAPCALLBACKPROCPTR_DEFINED */
+
+
+/**********************************************************************************
+// NOTE: Quickdraw has been deprecated for deployment targets 10.4 and later.
+// The replacement API is Quartz (CoreGraphics).
+// Because of the fundamental differences in the imaging models and design
+// goals between Quickdraw and Quartz, there is no direct correspondence
+// possible (or even desirable) between Quickdraw and Quartz APIs and concepts.
+// For certain purposes, some Quickdraw functions may even still be needed during
+// a transition period; nevertheless, they have all been tagged as deprecated
+// to express the overriding goal of eliminating all Quickdraw usage in the future.
+ |*********************************************************************************/
 
 
 /*
@@ -2181,6 +2250,7 @@ extern void
 GlobalToLocal(Point * pt)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+/* For a replacement, read the man pages of rand, random, arc4random in <stdlib.h> */
 /*
  *  Random()   *** DEPRECATED ***
  *  
@@ -6425,7 +6495,7 @@ enum {
   kQDUseCGTextRendering         = (1 << 1), /* bit 1*/
   kQDUseCGTextMetrics           = (1 << 2), /* bit 2*/
   kQDSupportedFlags             = kQDUseTrueTypeScalerGlyphs | kQDUseCGTextRendering | kQDUseCGTextMetrics,
-  kQDDontChangeFlags            = (long)0xFFFFFFFF /* to request the current state, without changing anything*/
+  kQDDontChangeFlags            = (int)0xFFFFFFFF /* to request the current state, without changing anything*/
 };
 
 

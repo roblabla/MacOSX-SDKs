@@ -3,7 +3,7 @@
 // Purpose:     XRC resource handler for wxStaticPicture
 // Author:      David A. Norris
 // Created:     2005/03/13
-// RCS-ID:      $Id: xh_statpict.h,v 1.5 2005/09/23 12:47:00 MR Exp $
+// RCS-ID:      $Id: xh_statpict.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   David A. Norris
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////

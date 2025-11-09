@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2007, Apple Inc.
+        Copyright (c) 1996-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -13,9 +13,6 @@
 @class NSMenu;
 @class NSImage, NSAttributedString, NSView;
 
-// This protocol is deprecated.  Use the NSMenuItem class in your code.
-@protocol NSMenuItem;
-
 @interface NSMenuItem : NSObject <NSCopying, NSCoding, NSValidatedUserInterfaceItem>
 {
     /*All instance variables are private*/
@@ -24,12 +21,12 @@
     NSString *_title;
     NSString *_keyEquivalent;
     NSUInteger _keyEquivalentModifierMask;
-    NSInteger _mnemonicLocation;
+    NSInteger _userKEGenerationCount;
     NSInteger _state;
     NSImage *_image;
-    NSImage *_onStateImage;
-    NSImage *_offStateImage;
-    NSImage *_mixedStateImage;
+    NSMenu *_submenu;
+    NSString *_uiid;
+    id _repObject;
     id _target;
     SEL _action;
     NSInteger _tag;
@@ -40,10 +37,16 @@
         unsigned int hidden:1;
         unsigned int alternate:1;
         unsigned int indent:4;
-	unsigned int changed:16;
-	unsigned int highlighted:1;
+        unsigned int keShareMode:3;
+        unsigned int RESERVED1:13;
+        unsigned int highlighted:1;
         unsigned int limitedView:1;
-	unsigned int RESERVED:6;
+        unsigned int nextItemIsAlternate:1;
+        unsigned int blockKE:1;
+        unsigned int ignoredForAccessibility:1;
+        unsigned int hiddenActiveKE:1;
+        unsigned int noRepeatKEs:1;
+        unsigned int RESERVED:1;
     } _miFlags;
 }
 
@@ -63,6 +66,10 @@
 - (void)setSubmenu:(NSMenu *)submenu;
 - (NSMenu *)submenu;
 
+/* Returns the NSMenuItem whose submenu contains the receiver, or nil if the receiver does not have a parent item.
+*/
+- (NSMenuItem *)parentItem AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (void)setTitle:(NSString *)aString;
 - (NSString *)title;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
@@ -79,9 +86,6 @@
 
 - (NSString *)userKeyEquivalent;
 
-- (void)setMnemonicLocation:(NSUInteger)location;
-- (NSUInteger)mnemonicLocation;
-- (NSString *)mnemonic;
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 
 - (void)setImage:(NSImage *)menuImage;
@@ -101,11 +105,11 @@
 
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-- (void) setAlternate:(BOOL)isAlternate;
-- (BOOL) isAlternate;
+- (void)setAlternate:(BOOL)isAlternate;
+- (BOOL)isAlternate;
 
-- (void) setIndentationLevel:(NSInteger)indentationLevel;
-- (NSInteger) indentationLevel;
+- (void)setIndentationLevel:(NSInteger)indentationLevel;
+- (NSInteger)indentationLevel;
 #endif
 
 - (void)setTarget:(id)anObject;
@@ -153,3 +157,18 @@ When a menu item is copied via NSCopying, any attached view is copied via archiv
 - (NSMenuItem *)enclosingMenuItem;
 @end
 #endif
+
+// The NSMenuItem protocol is deprecated.  Use the NSMenuItem class in your code.
+#if defined(__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 2)
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER
+#endif
+@protocol NSMenuItem;
+
+/* The following methods are deprecated.  They have never done anything useful in Mac OS X. */
+@interface NSMenuItem (NSDeprecated)
+
+- (void)setMnemonicLocation:(NSUInteger)location DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSUInteger)mnemonicLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *)mnemonic DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+@end

@@ -1,8 +1,9 @@
-/* Copyright 2001-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -24,7 +25,7 @@
 #define MODPERL_FILTER_ERROR   APR_OS_START_USERERR + 1
 
 /**
- * return the string representation of the error code 
+ * return the string representation of the error code
  * @param rc   error code
  * @return     the error string
  *
@@ -33,7 +34,7 @@
  * called again (which could happen indirectly). If unsure, copy.
  */
 char *modperl_error_strerror(pTHX_ apr_status_t rc);
-        
+
 void modperl_croak(pTHX_ apr_status_t rc, const char* func);
 
 #define MP_RUN_CROAK(rc_run, func) STMT_START                \

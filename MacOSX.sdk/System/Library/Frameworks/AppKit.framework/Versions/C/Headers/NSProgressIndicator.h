@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2007, Apple Inc.
+        Copyright (c) 1997-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -61,10 +61,10 @@ typedef NSUInteger NSProgressIndicatorStyle;
 
     id			_timer;
 
-    id			_animationThreadLock;
-    
-    id		_cachedImage;
-    id		_cachedImageLock;
+    CGFloat     _drawingWidth;
+
+    id		_roundColor;
+    id          _reserved;
 
     volatile struct __progressIndicatorFlags {
         unsigned int isSpinning:1;
@@ -77,7 +77,11 @@ typedef NSUInteger NSProgressIndicatorStyle;
         unsigned int _orderOutForResize:1;
  	unsigned int hideWhenStopped:1;
         unsigned int revive:1;
-        unsigned int RESERVED:19;
+        unsigned int _temporarilyBlockHeartBeating:1;
+        unsigned int _isHidden:1;
+        unsigned int _isHeartBeatInstalled:1;
+        unsigned int _lastFrame:8;
+        unsigned int RESERVED:8;
     } _progressIndicatorFlags;
 
     /* For future use */
@@ -110,18 +114,13 @@ typedef NSUInteger NSProgressIndicatorStyle;
 - (void)setMinValue:(double)newMinimum;
 - (void)setMaxValue:(double)newMaximum;
 
-	/* Indeterminate progress indicator */
-
-- (NSTimeInterval)animationDelay;			// in seconds
-- (void)setAnimationDelay:(NSTimeInterval)delay;	// in seconds
+/* Indeterminate progress indicator */
 
 - (BOOL)usesThreadedAnimation;				// returns YES if the PI uses a thread instead of a timer (default in NO)
 - (void)setUsesThreadedAnimation:(BOOL)threadedAnimation;
 
 - (void)startAnimation:(id)sender;
 - (void)stopAnimation:(id)sender;
-
-- (void)animate:(id)sender;				// manual animation
 
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
@@ -136,4 +135,10 @@ typedef NSUInteger NSProgressIndicatorStyle;
 - (void) setDisplayedWhenStopped: (BOOL) isDisplayed;
 #endif
 
+@end
+
+@interface NSProgressIndicator (NSProgressIndicatorDeprecated)
+- (NSTimeInterval)animationDelay AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+- (void)setAnimationDelay:(NSTimeInterval)delay AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+- (void)animate:(id)sender AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 @end

@@ -83,15 +83,6 @@
 /* Define to 1 if you have the `killpg' function. */
 #define HAVE_KILLPG 1
 
-/* Define to 1 if you have the `crypto' library (-lcrypto). */
-#define HAVE_LIBCRYPTO 1
-
-/* Define to 1 if you have the `ssl' library (-lssl). */
-#define HAVE_LIBSSL 1
-
-/* Define to 1 if you have the `sslc' library (-lsslc). */
-/* #undef HAVE_LIBSSLC */
-
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
@@ -127,6 +118,15 @@
 
 /* Define to 1 if you have the <sslc.h> header file. */
 /* #undef HAVE_SSLC_H */
+
+/* Define to 1 if you have the `SSLC_library_version' function. */
+/* #undef HAVE_SSLC_LIBRARY_VERSION */
+
+/* Define to 1 if you have the `SSLeay_version' function. */
+#define HAVE_SSLEAY_VERSION 1
+
+/* Define to 1 if you have the `SSL_CTX_new' function. */
+#define HAVE_SSL_CTX_NEW 1
 
 /* Define to 1 if you have the `SSL_set_cert_store' function. */
 /* #undef HAVE_SSL_SET_CERT_STORE */
@@ -221,12 +221,27 @@
 /* Path to suexec binary */
 /* #undef SUEXEC_BIN */
 
-/* Define to 1 if on AIX 3.
-   System headers sometimes define this.
-   We just want to avoid a redefinition error message.  */
+/* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
-/* # undef _ALL_SOURCE */
+# define _ALL_SOURCE 1
 #endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# define _GNU_SOURCE 1
+#endif
+/* Enable threading extensions on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# define _POSIX_PTHREAD_SEMANTICS 1
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# define _TANDEM_SOURCE 1
+#endif
+/* Enable general extensions on Solaris.  */
+#ifndef __EXTENSIONS__
+# define __EXTENSIONS__ 1
+#endif
+
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */

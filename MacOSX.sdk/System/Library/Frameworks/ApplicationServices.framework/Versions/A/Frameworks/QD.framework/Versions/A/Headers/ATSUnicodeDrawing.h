@@ -3,9 +3,9 @@
  
      Contains:   ATSUI drawing, measuring, and highlighting functions.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,10 @@ extern "C" {
 #endif
 
 /*
- *  ATSUDrawText()
+ *  ATSUDrawText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTFrameDraw, CTLiineDraw, or CTRunDraw instead.
  *  
  *  Summary:
  *    Draws a specified range of text in a QuickDraw graphics port or
@@ -114,7 +117,7 @@ extern "C" {
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -124,12 +127,16 @@ ATSUDrawText(
   UniCharArrayOffset    iLineOffset,
   UniCharCount          iLineLength,
   ATSUTextMeasurement   iLocationX,
-  ATSUTextMeasurement   iLocationY)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextMeasurement   iLocationY)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUGetUnjustifiedBounds()
+ *  ATSUGetUnjustifiedBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetTypographicBounds or
+ *    CTLineGetTrailingWhitespaceWidth instead.
  *  
  *  Summary:
  *    Obtains the typographic bounding rectangle for a line of text
@@ -204,7 +211,7 @@ ATSUDrawText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -216,11 +223,14 @@ ATSUGetUnjustifiedBounds(
   ATSUTextMeasurement *  oTextBefore,
   ATSUTextMeasurement *  oTextAfter,
   ATSUTextMeasurement *  oAscent,
-  ATSUTextMeasurement *  oDescent)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ATSUTextMeasurement *  oDescent)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUMeasureTextImage()
+ *  ATSUMeasureTextImage()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetImageBounds or CTRunGetImageBounds instead.
  *  
  *  Summary:
  *    Obtains the image bounding rectangle for a line of text after
@@ -290,7 +300,7 @@ ATSUGetUnjustifiedBounds(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -301,13 +311,18 @@ ATSUMeasureTextImage(
   UniCharCount          iLineLength,
   ATSUTextMeasurement   iLocationX,
   ATSUTextMeasurement   iLocationY,
-  Rect *                oTextImageRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                oTextImageRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUGetGlyphBounds()
+ *  ATSUGetGlyphBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTRunGetTypographicBounds, CTLineGetTypographicBounds,
+ *    CTFontGetAscent, CTFontGetDescent, CTFontGetLeading, or
+ *    CTFontGetUnitsPerEm instead.
  *  
  *  Summary:
  *    Obtains the typographic bounds of a line of glyphs after final
@@ -424,7 +439,7 @@ ATSUMeasureTextImage(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -438,7 +453,7 @@ ATSUGetGlyphBounds(
   UInt16                iTypeOfBounds,
   ItemCount             iMaxNumberOfBounds,
   ATSTrapezoid          oGlyphBounds[],              /* can be NULL */
-  ItemCount *           oActualNumberOfBounds)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *           oActualNumberOfBounds)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -446,7 +461,12 @@ ATSUGetGlyphBounds(
 /* ---------------------------------------------------------------------------- */
 #if !__LP64__
 /*
- *  ATSUBatchBreakLines()
+ *  ATSUBatchBreakLines()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterSuggestLineBreak,
+ *    CTTypesetterSuggestClusterBreak, or CTTypesetterCreateLine
+ *    instead.
  *  
  *  Summary:
  *    Soft wraps a range of text in a layout to a constant line width.
@@ -489,7 +509,7 @@ ATSUGetGlyphBounds(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -499,11 +519,16 @@ ATSUBatchBreakLines(
   UniCharArrayOffset    iRangeStart,
   UniCharCount          iRangeLength,
   ATSUTextMeasurement   iLineWidth,
-  ItemCount *           oBreakCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount *           oBreakCount)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUBreakLine()
+ *  ATSUBreakLine()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterSuggestLineBreak,
+ *    CTTypesetterSuggestClusterBreak, or CTTypesetterCreateLine
+ *    instead.
  *  
  *  Summary:
  *    Soft wraps a single line of text within a layout.
@@ -567,7 +592,7 @@ ATSUBatchBreakLines(
  *    for other possible error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -577,11 +602,16 @@ ATSUBreakLine(
   UniCharArrayOffset    iLineStart,
   ATSUTextMeasurement   iLineWidth,
   Boolean               iUseAsSoftLineBreak,
-  UniCharArrayOffset *  oLineBreak)                /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *  oLineBreak)                /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUSetSoftLineBreak()
+ *  ATSUSetSoftLineBreak()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterSuggestLineBreak,
+ *    CTTypesetterSuggestClusterBreak, or CTTypesetterCreateLine
+ *    instead.
  *  
  *  Summary:
  *    Sets a soft line break at the specified point in a text layout.
@@ -610,18 +640,23 @@ ATSUBreakLine(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUSetSoftLineBreak(
   ATSUTextLayout       iTextLayout,
-  UniCharArrayOffset   iLineBreak)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset   iLineBreak)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetSoftLineBreaks()
+ *  ATSUGetSoftLineBreaks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterSuggestLineBreak,
+ *    CTTypesetterSuggestClusterBreak, or CTTypesetterCreateLine
+ *    instead.
  *  
  *  Summary:
  *    Obtains the soft line breaks that are currently set in a given
@@ -681,7 +716,7 @@ ATSUSetSoftLineBreak(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -692,11 +727,16 @@ ATSUGetSoftLineBreaks(
   UniCharCount         iRangeLength,
   ItemCount            iMaximumBreaks,
   UniCharArrayOffset   oBreaks[],            /* can be NULL */
-  ItemCount *          oBreakCount)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *          oBreakCount)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUClearSoftLineBreaks()
+ *  ATSUClearSoftLineBreaks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTTypesetterSuggestLineBreak,
+ *    CTTypesetterSuggestClusterBreak, or CTTypesetterCreateLine
+ *    instead.
  *  
  *  Summary:
  *    Unsets any currently set soft breaks in a range of text.
@@ -729,7 +769,7 @@ ATSUGetSoftLineBreaks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -737,14 +777,18 @@ extern OSStatus
 ATSUClearSoftLineBreaks(
   ATSUTextLayout       iTextLayout,
   UniCharArrayOffset   iRangeStart,
-  UniCharCount         iRangeLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount         iRangeLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI highlighting                                                          */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUSetHighlightingMethod()
+ *  ATSUSetHighlightingMethod()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Specifies the methods ATSUI will use for highlighting and
@@ -815,7 +859,7 @@ ATSUClearSoftLineBreaks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -823,11 +867,15 @@ extern OSStatus
 ATSUSetHighlightingMethod(
   ATSUTextLayout               iTextLayout,
   ATSUHighlightMethod          iMethod,
-  const ATSUUnhighlightData *  iUnhighlightData)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ATSUUnhighlightData *  iUnhighlightData)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUHighlightText()
+ *  ATSUHighlightText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Renders a highlighted range of text at a specified location in a
@@ -889,7 +937,7 @@ ATSUSetHighlightingMethod(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -899,11 +947,15 @@ ATSUHighlightText(
   ATSUTextMeasurement   iTextBasePointX,
   ATSUTextMeasurement   iTextBasePointY,
   UniCharArrayOffset    iHighlightStart,
-  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUUnhighlightText()
+ *  ATSUUnhighlightText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Renders a previously highlighted range of text in an
@@ -964,7 +1016,7 @@ ATSUHighlightText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -974,11 +1026,15 @@ ATSUUnhighlightText(
   ATSUTextMeasurement   iTextBasePointX,
   ATSUTextMeasurement   iTextBasePointY,
   UniCharArrayOffset    iHighlightStart,
-  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUGetTextHighlight()
+ *  ATSUGetTextHighlight()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the highlight region for a range of text.
@@ -1037,7 +1093,7 @@ ATSUUnhighlightText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1048,11 +1104,15 @@ ATSUGetTextHighlight(
   ATSUTextMeasurement   iTextBasePointY,
   UniCharArrayOffset    iHighlightStart,
   UniCharCount          iHighlightLength,
-  RgnHandle             oHighlightRegion)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle             oHighlightRegion)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUHighlightInactiveText()
+ *  ATSUHighlightInactiveText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition  instead.
  *  
  *  Summary:
  *    Highlights text using the standard Mac OS X UI convention for an
@@ -1104,7 +1164,7 @@ ATSUGetTextHighlight(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1114,7 +1174,7 @@ ATSUHighlightInactiveText(
   ATSUTextMeasurement   iTextBasePointX,
   ATSUTextMeasurement   iTextBasePointY,
   UniCharArrayOffset    iHighlightStart,
-  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UniCharCount          iHighlightLength)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -1123,7 +1183,10 @@ ATSUHighlightInactiveText(
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUPositionToOffset()
+ *  ATSUPositionToOffset()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the glyph edge nearest a mouse-down
@@ -1229,7 +1292,7 @@ ATSUHighlightInactiveText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1240,12 +1303,15 @@ ATSUPositionToOffset(
   ATSUTextMeasurement   iLocationY,
   UniCharArrayOffset *  ioPrimaryOffset,
   Boolean *             oIsLeading,
-  UniCharArrayOffset *  oSecondaryOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *  oSecondaryOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
 /*
- *  ATSUOffsetToPosition()
+ *  ATSUOffsetToPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the caret position(s) corresponding to a memory offset.
@@ -1325,7 +1391,7 @@ ATSUPositionToOffset(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1336,11 +1402,14 @@ ATSUOffsetToPosition(
   Boolean              iIsLeading,
   ATSUCaret *          oMainCaret,
   ATSUCaret *          oSecondCaret,
-  Boolean *            oCaretIsSplit)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            oCaretIsSplit)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUPositionToCursorOffset()
+ *  ATSUPositionToCursorOffset()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the glyph edge nearest a mouse-down
@@ -1412,7 +1481,7 @@ ATSUOffsetToPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.2.2 and later
  */
@@ -1424,11 +1493,15 @@ ATSUPositionToCursorOffset(
   ATSUCursorMovementType   iMovementType,
   UniCharArrayOffset *     ioPrimaryOffset,
   Boolean *                oIsLeading,
-  UniCharArrayOffset *     oSecondaryOffset)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *     oSecondaryOffset)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUOffsetToCursorPosition()
+ *  ATSUOffsetToCursorPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the caret position(s) corresponding to a memory offset,
@@ -1492,7 +1565,7 @@ ATSUPositionToCursorOffset(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.2.2 and later
  */
@@ -1504,14 +1577,18 @@ ATSUOffsetToCursorPosition(
   ATSUCursorMovementType   iMovementType,
   ATSUCaret *              oMainCaret,
   ATSUCaret *              oSecondCaret,
-  Boolean *                oCaretIsSplit)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                oCaretIsSplit)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI cursor movement                                                       */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUNextCursorPosition()
+ *  ATSUNextCursorPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the insertion point that follows
@@ -1547,7 +1624,7 @@ ATSUOffsetToCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1556,11 +1633,15 @@ ATSUNextCursorPosition(
   ATSUTextLayout           iTextLayout,
   UniCharArrayOffset       iOldOffset,
   ATSUCursorMovementType   iMovementType,
-  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSUPreviousCursorPosition()
+ *  ATSUPreviousCursorPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the insertion point that preceeds
@@ -1596,7 +1677,7 @@ ATSUNextCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1605,11 +1686,15 @@ ATSUPreviousCursorPosition(
   ATSUTextLayout           iTextLayout,
   UniCharArrayOffset       iOldOffset,
   ATSUCursorMovementType   iMovementType,
-  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSURightwardCursorPosition()
+ *  ATSURightwardCursorPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the insertion point that is to the
@@ -1652,7 +1737,7 @@ ATSUPreviousCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1661,11 +1746,15 @@ ATSURightwardCursorPosition(
   ATSUTextLayout           iTextLayout,
   UniCharArrayOffset       iOldOffset,
   ATSUCursorMovementType   iMovementType,
-  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  ATSULeftwardCursorPosition()
+ *  ATSULeftwardCursorPosition()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTLineGetOffsetForStringIndex,
+ *    CTLineGetStringIndexForPosition instead.
  *  
  *  Summary:
  *    Obtains the memory offset for the insertion point that is to the
@@ -1708,7 +1797,7 @@ ATSURightwardCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1717,7 +1806,7 @@ ATSULeftwardCursorPosition(
   ATSUTextLayout           iTextLayout,
   UniCharArrayOffset       iOldOffset,
   ATSUCursorMovementType   iMovementType,
-  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharArrayOffset *     oNewOffset)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* Functions listed beyond this point are either deprecated or not recommended */

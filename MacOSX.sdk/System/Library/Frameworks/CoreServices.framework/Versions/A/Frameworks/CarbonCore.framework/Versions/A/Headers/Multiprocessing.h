@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1995-2006 DayStar Digital, Inc.
+     Copyright:  © 1995-2008 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +44,14 @@ extern "C" {
 
 #pragma options align=power
 
+
+/*
+   ======================================= NOTICE ============================================
+   As of Mac OS X v10.6, the APIs in this header file are discouraged. These APIs are slated
+   for deprecation in the next major release of OS X. The new dispatch APIs (see dispatch(3))
+   replace the Multiprocessing APIs and the pthread threading APIs.
+   ===========================================================================================
+*/
 
 /*
    ===========================================================================================
@@ -250,7 +258,7 @@ typedef UInt32                          MPTaskStateKind;
 typedef UInt32                          MPPageSizeClass;
 
 enum {
-  kDurationImmediate            = 0L,
+  kDurationImmediate            = 0,
   kDurationForever              = 0x7FFFFFFF,
   kDurationMillisecond          = 1,
   kDurationMicrosecond          = -1
@@ -1828,9 +1836,7 @@ _MPIsFullyInitialized(void)                                   AVAILABLE_MAC_OS_X
 
 typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
 #define kMPUnresolvedCFragSymbolAddress 0
-#define MPLibraryIsLoaded()     \
-            ( ( (UInt32)_MPIsFullyInitialized != (UInt32)kMPUnresolvedCFragSymbolAddress ) &&   \
-              ( _MPIsFullyInitialized () ) )
+#define MPLibraryIsLoaded()     (true)
 /*
    ¤
    ===========================================================================================

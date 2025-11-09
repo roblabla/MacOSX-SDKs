@@ -6,7 +6,7 @@
 //              Bart Jourquin
 //              Mark Johnson
 // Created:     9.96
-// RCS-ID:      $Id: dbtable.h,v 1.48 2005/09/23 12:48:36 MR Exp $
+// RCS-ID:      $Id: dbtable.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) 1996 Remstar International, Inc.
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

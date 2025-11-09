@@ -1,7 +1,6 @@
 /* CoreGraphics - CGPDFOperatorTable.h
- * Copyright (c) 2004 Apple Computer, Inc.
- * All rights reserved.
- */
+ * Copyright (c) 2004-2008 Apple Inc.
+ * All rights reserved. */
 
 #ifndef CGPDFOPERATORTABLE_H_
 #define CGPDFOPERATORTABLE_H_
@@ -12,24 +11,25 @@ typedef struct CGPDFOperatorTable *CGPDFOperatorTableRef;
 
 typedef void (*CGPDFOperatorCallback)(CGPDFScannerRef scanner, void *info);
 
-CG_EXTERN_C_BEGIN
-
 /* Return an empty operator table. */
 
-CG_EXTERN CGPDFOperatorTableRef CGPDFOperatorTableCreate(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGPDFOperatorTableRef CGPDFOperatorTableCreate(void)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Increment the retain count of `table'. */
 
-CG_EXTERN CGPDFOperatorTableRef CGPDFOperatorTableRetain(CGPDFOperatorTableRef table) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGPDFOperatorTableRef CGPDFOperatorTableRetain(CGPDFOperatorTableRef
+    table) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Decrement the retain count of `table'. */
 
-CG_EXTERN void CGPDFOperatorTableRelease(CGPDFOperatorTableRef table) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN void CGPDFOperatorTableRelease(CGPDFOperatorTableRef table)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Set the callback for the operator named `name' to `callback' */
 
-CG_EXTERN void CGPDFOperatorTableSetCallback(CGPDFOperatorTableRef table, const char *name, CGPDFOperatorCallback callback) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-CG_EXTERN_C_END
+CG_EXTERN void CGPDFOperatorTableSetCallback(CGPDFOperatorTableRef table,
+    const char *name, CGPDFOperatorCallback callback)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 #endif	/* CGPDFOPERATORTABLE_H_ */

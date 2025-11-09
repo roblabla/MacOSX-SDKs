@@ -3,9 +3,9 @@
  
      Contains:   Interfaces for Multilingual Text Engine (MLTE)
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1996-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -98,8 +98,8 @@ enum {
 
 typedef OptionBits TXNFeatureBits;
 enum {
-  kTXNWillDefaultToATSUIMask    = 1L << kTXNWillDefaultToATSUIBit,
-  kTXNWillDefaultToCarbonEventMask = 1L << kTXNWillDefaultToCarbonEventBit
+  kTXNWillDefaultToATSUIMask    = 1 << kTXNWillDefaultToATSUIBit,
+  kTXNWillDefaultToCarbonEventMask = 1 << kTXNWillDefaultToCarbonEventBit
 };
 
 #if !__LP64__
@@ -118,11 +118,11 @@ enum {
 
 typedef OptionBits TXNInitOptions;
 enum {
-  kTXNWantMoviesMask            = 1L << kTXNWantMoviesBit,
-  kTXNWantSoundMask             = 1L << kTXNWantSoundBit,
-  kTXNWantGraphicsMask          = 1L << kTXNWantGraphicsBit,
-  kTXNAlwaysUseQuickDrawTextMask = 1L << kTXNAlwaysUseQuickDrawTextBit,
-  kTXNUseTemporaryMemoryMask    = 1L << kTXNUseTemporaryMemoryBit
+  kTXNWantMoviesMask            = 1 << kTXNWantMoviesBit,
+  kTXNWantSoundMask             = 1 << kTXNWantSoundBit,
+  kTXNWantGraphicsMask          = 1 << kTXNWantGraphicsBit,
+  kTXNAlwaysUseQuickDrawTextMask = 1 << kTXNAlwaysUseQuickDrawTextBit,
+  kTXNUseTemporaryMemoryMask    = 1 << kTXNUseTemporaryMemoryBit
 };
 
 /* Default constants*/
@@ -179,7 +179,7 @@ enum {
   /*
    * Indicates that the frame will have a size box.
    */
-  kTXNDrawGrowIconMask          = 1L << kTXNDrawGrowIconBit,
+  kTXNDrawGrowIconMask          = 1 << kTXNDrawGrowIconBit,
 
   /*
    * Indicates that the window associated with the text object will be
@@ -187,7 +187,7 @@ enum {
    * needs to call the ShowWindow function from the Window Manager;
    * MLTE will do this for you.
    */
-  kTXNShowWindowMask            = 1L << kTXNShowWindowBit,
+  kTXNShowWindowMask            = 1 << kTXNShowWindowBit,
 
   /*
    * Indicates that the frame will have a horizontal scrollbar. The
@@ -196,7 +196,7 @@ enum {
    * explicitly disable the scrollbars for those inactive MLTE objects.
    *  Use TXNSetScrollbarState to deactivate the scrollbar.
    */
-  kTXNWantHScrollBarMask        = 1L << kTXNWantHScrollBarBit,
+  kTXNWantHScrollBarMask        = 1 << kTXNWantHScrollBarBit,
 
   /*
    * Indicates that the frame will have a vertical scrollbar. The
@@ -205,7 +205,7 @@ enum {
    * explicitly disable the scrollbars for those inactive MLTE objects.
    *  Use TXNSetScrollbarState to deactivate the scrollbar.
    */
-  kTXNWantVScrollBarMask        = 1L << kTXNWantVScrollBarBit,
+  kTXNWantVScrollBarMask        = 1 << kTXNWantVScrollBarBit,
 
   /*
    * Indicates that the text object will be read-only.  It is
@@ -214,13 +214,13 @@ enum {
    * individual API to determine if the API will still work in NoUserIO
    * mode.
    */
-  kTXNReadOnlyMask              = 1L << kTXNReadOnlyBit,
+  kTXNReadOnlyMask              = 1 << kTXNReadOnlyBit,
 
   /*
    * Indicates that the user shouldn't be able to set the insertion
    * point or make a selection.
    */
-  kTXNNoSelectionMask           = 1L << kTXNNoSelectionBit,
+  kTXNNoSelectionMask           = 1 << kTXNNoSelectionBit,
 
   /*
    * Indicates that the text style will be saved as a
@@ -236,30 +236,30 @@ enum {
    * kTXNSingleStylePerTextDocumentResType resource, their output is
    * similar to those output by CodeWarrior, BBEdit, and MPW.
    */
-  kTXNSaveStylesAsSTYLResourceMask = 1L << kTXNSaveStylesAsSTYLResourceBit,
+  kTXNSaveStylesAsSTYLResourceMask = 1 << kTXNSaveStylesAsSTYLResourceBit,
 
   /*
    * Indicates that plain text will be saved as Unicode.
    */
-  kOutputTextInUnicodeEncodingMask = 1L << kOutputTextInUnicodeEncodingBit,
+  kOutputTextInUnicodeEncodingMask = 1 << kOutputTextInUnicodeEncodingBit,
 
   /*
    * Indicates that MLTE will not install its own drag handler for the
    * text object.  This can be used if the client wants to install
    * their own handler.
    */
-  kTXNDoNotInstallDragProcsMask = 1L << kTXNDoNotInstallDragProcsBit,
+  kTXNDoNotInstallDragProcsMask = 1 << kTXNDoNotInstallDragProcsBit,
 
   /*
    * Indicates that lines will wrap at the edge of the view rectangle.
    */
-  kTXNAlwaysWrapAtViewEdgeMask  = 1L << kTXNAlwaysWrapAtViewEdgeBit,
+  kTXNAlwaysWrapAtViewEdgeMask  = 1 << kTXNAlwaysWrapAtViewEdgeBit,
 
   /*
    * Indicates that the selection (if one) shouldn't be drawn when the
    * text object doesn't have focus.
    */
-  kTXNDontDrawSelectionWhenInactiveMask = 1L << kTXNDontDrawSelectionWhenInactiveBit,
+  kTXNDontDrawSelectionWhenInactiveMask = 1 << kTXNDontDrawSelectionWhenInactiveBit,
 
   /*
    * Indicates that the text object will not scroll vertically,
@@ -267,31 +267,31 @@ enum {
    * (plus any right margin), and there will be no limit to the width
    * of the text.
    */
-  kTXNSingleLineOnlyMask        = 1L << kTXNSingleLineOnlyBit,
+  kTXNSingleLineOnlyMask        = 1 << kTXNSingleLineOnlyBit,
 
   /*
    * Indicates that drag and drop will not be allowed in the text
    * object.
    */
-  kTXNDisableDragAndDropMask    = 1L << kTXNDisableDragAndDropBit,
+  kTXNDisableDragAndDropMask    = 1 << kTXNDisableDragAndDropBit,
 
   /*
    * Indicates that the text object will keep in single style no matter
    * what kind of changes made to the object.  Mac OS X only.
    */
-  kTXNMonostyledTextMask        = 1L << kTXNMonostyledTextBit,
+  kTXNMonostyledTextMask        = 1 << kTXNMonostyledTextBit,
 
   /*
    * Indicates that ATSUI font substitution will be used.  Mac OS X
    * only.
    */
-  kTXNDoFontSubstitutionMask    = 1L << kTXNDoFontSubstitutionBit
+  kTXNDoFontSubstitutionMask    = 1 << kTXNDoFontSubstitutionBit
 };
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ TextBox Option Bits                                                                               */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/*  Useful for TXNDrawUnicodeTextBox and TXNDrawCFStringTextBox APIs.   32 bit only                     */
+/*  Useful for TXNDrawUnicodeTextBox and TXNDrawCFStringTextBox APIs. 32 bit only                       */
 #if !__LP64__
 enum {
   kTXNSetFlushnessBit           = 0,
@@ -328,7 +328,7 @@ enum {
    * Indicates that the text will be flush according to the line
    * direction.
    */
-  kTXNSetFlushnessMask          = 1L << kTXNSetFlushnessBit,
+  kTXNSetFlushnessMask          = 1 << kTXNSetFlushnessBit,
 
   /*
    * Indicates that the text will be justified in the direction that
@@ -336,13 +336,13 @@ enum {
    * horizontally, but not vertically.  Vertical text will be justified
    * vertically, but not horizontally.
    */
-  kTXNSetJustificationMask      = 1L << kTXNSetJustificationBit,
+  kTXNSetJustificationMask      = 1 << kTXNSetJustificationBit,
 
   /*
    * Indicates that ATSUI font substitution (that searches for a font
    * that has a matching character) will be used.
    */
-  kTXNUseFontFallBackMask       = 1L << kTXNUseFontFallBackBit,
+  kTXNUseFontFallBackMask       = 1 << kTXNUseFontFallBackBit,
 
   /*
    * Indicates that the text will be rotated.  The amount of rotation
@@ -350,13 +350,13 @@ enum {
    * structure and is in units of degrees (negative values indicate
    * clockwise rotation).
    */
-  kTXNRotateTextMask            = 1L << kTXNRotateTextBit,
+  kTXNRotateTextMask            = 1 << kTXNRotateTextBit,
 
   /*
    * Indicates that the text will be displayed vertically from top to
    * bottom.
    */
-  kTXNUseVerticalTextMask       = 1L << kTXNUseVerticalTextBit,
+  kTXNUseVerticalTextMask       = 1 << kTXNUseVerticalTextBit,
 
   /*
    * Indicates that the specified rectangle will not be updated.  If
@@ -365,13 +365,13 @@ enum {
    * if kTXNUseVerticalTextMask is used) of the specified rectangle to
    * accommodate the longest line for text.
    */
-  kTXNDontUpdateBoxRectMask     = 1L << kTXNDontUpdateBoxRectBit,
+  kTXNDontUpdateBoxRectMask     = 1 << kTXNDontUpdateBoxRectBit,
 
   /*
    * Indicates that the size of the text will be returned but the text
    * box will not be drawn.
    */
-  kTXNDontDrawTextMask          = 1L << kTXNDontDrawTextBit,
+  kTXNDontDrawTextMask          = 1 << kTXNDontDrawTextBit,
 
   /*
    * Indicates that the client has provided a CGContext to be used for
@@ -379,12 +379,12 @@ enum {
    * options field of the TXNTextBoxOptionsData structure.  Mac OS X
    * only.
    */
-  kTXNUseCGContextRefMask       = 1L << kTXNUseCGContextRefBit,
+  kTXNUseCGContextRefMask       = 1 << kTXNUseCGContextRefBit,
 
   /*
    * Indicates that text should not be wrapped.  Mac OS X only.
    */
-  kTXNDontWrapTextMask          = 1L << kTXNDontWrapTextBit
+  kTXNDontWrapTextMask          = 1 << kTXNDontWrapTextBit
 };
 
 #endif  /* !__LP64__ */
@@ -875,7 +875,7 @@ enum {
 
 enum {
   kTXNClearThisControl          = -1,   /* To clear an object control setting */
-  kTXNClearTheseFontFeatures    = (long)0x80000000 /* To clear ATSUI font feature(s) */
+  kTXNClearTheseFontFeatures    = (int)0x80000000 /* To clear ATSUI font feature(s) */
 };
 
 /* kTXNIOPrivilegesTag*/
@@ -1083,7 +1083,7 @@ enum {
   kTXNDontCareTypeSize          = -1,
   kTXNDontCareTypeStyle         = 0xFF,
   kTXNIncrementTypeSize         = 0x00000001,
-  kTXNDecrementTypeSize         = (long)0x80000000,
+  kTXNDecrementTypeSize         = (int)0x80000000,
   kTXNUseScriptDefaultValue     = -1,
 
   /*
@@ -1109,11 +1109,11 @@ enum {
 
 typedef OptionBits TXNContinuousFlags;
 enum {
-  kTXNFontContinuousMask        = 1L << kTXNFontContinuousBit,
-  kTXNSizeContinuousMask        = 1L << kTXNSizeContinuousBit,
-  kTXNStyleContinuousMask       = 1L << kTXNStyleContinuousBit,
-  kTXNColorContinuousMask       = 1L << kTXNColorContinuousBit,
-  kTXNATSUIStyleContinuousMask  = 1L << kTXNATSUIStyleContinuousBit
+  kTXNFontContinuousMask        = 1 << kTXNFontContinuousBit,
+  kTXNSizeContinuousMask        = 1 << kTXNSizeContinuousBit,
+  kTXNStyleContinuousMask       = 1 << kTXNStyleContinuousBit,
+  kTXNColorContinuousMask       = 1 << kTXNColorContinuousBit,
+  kTXNATSUIStyleContinuousMask  = 1 << kTXNATSUIStyleContinuousBit
 };
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1129,9 +1129,9 @@ enum {
 
 typedef OptionBits TXNMatchOptions;
 enum {
-  kTXNIgnoreCaseMask            = 1L << kTXNIgnoreCaseBit,
-  kTXNEntireWordMask            = 1L << kTXNEntireWordBit,
-  kTXNUseEncodingWordRulesMask  = (unsigned long)(1L << kTXNUseEncodingWordRulesBit)
+  kTXNIgnoreCaseMask            = 1 << kTXNIgnoreCaseBit,
+  kTXNEntireWordMask            = 1 << kTXNEntireWordBit,
+  kTXNUseEncodingWordRulesMask  = (unsigned int)(1 << kTXNUseEncodingWordRulesBit)
 };
 
 struct TXNMatchTextRecord {
@@ -1312,10 +1312,10 @@ enum {
 
 typedef OptionBits TXNDrawItems;
 enum {
-  kTXNDrawItemScrollbarsMask    = 1L << kTXNDrawItemScrollbarsBit,
-  kTXNDrawItemTextMask          = 1L << kTXNDrawItemTextBit,
-  kTXNDrawItemTextAndSelectionMask = 1L << kTXNDrawItemTextAndSelectionBit,
-  kTXNDrawItemAllMask           = (unsigned long)(-1)
+  kTXNDrawItemScrollbarsMask    = 1 << kTXNDrawItemScrollbarsBit,
+  kTXNDrawItemTextMask          = 1 << kTXNDrawItemTextBit,
+  kTXNDrawItemTextAndSelectionMask = 1 << kTXNDrawItemTextAndSelectionBit,
+  kTXNDrawItemAllMask           = (unsigned int)(-1)
 };
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4206,7 +4206,11 @@ TXNFind(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
- *  TXNDrawUnicodeTextBox()
+ *  TXNDrawUnicodeTextBox()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIThemeDrawTextBox, CoreText (CTLineDraw,..) or Cocoa
+ *    (NSStringDrawing,..)
  *  
  *  Summary:
  *    Draws a Unicode string in the specified rectangle.
@@ -4244,7 +4248,7 @@ TXNFind(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
@@ -4254,12 +4258,16 @@ TXNDrawUnicodeTextBox(
   UniCharCount                   iLen,
   Rect *                         ioBox,
   ATSUStyle                      iStyle,         /* can be NULL */
-  const TXNTextBoxOptionsData *  iOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TXNTextBoxOptionsData *  iOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 
 /*
- *  TXNDrawCFStringTextBox()
+ *  TXNDrawCFStringTextBox()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIThemeDrawTextBox, CoreText (CTLineDraw,..) or Cocoa
+ *    (NSStringDrawing,..)
  *  
  *  Summary:
  *    Draws a CFString in the specified rectangle.
@@ -4294,7 +4302,7 @@ TXNDrawUnicodeTextBox(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4303,7 +4311,7 @@ TXNDrawCFStringTextBox(
   CFStringRef                    iText,
   Rect *                         ioBox,
   ATSUStyle                      iStyle,         /* can be NULL */
-  const TXNTextBoxOptionsData *  iOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TXNTextBoxOptionsData *  iOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 
@@ -5663,7 +5671,7 @@ enum {
 };
 
 enum {
-  kTXNNoKeyboardSyncMask        = 1L << kTXNNoKeyboardSyncBit
+  kTXNNoKeyboardSyncMask        = 1 << kTXNNoKeyboardSyncBit
 };
 
 #endif  /* !__LP64__ */
@@ -5753,7 +5761,7 @@ enum {
 };
 
 enum {
-  kTXNUseQDforImagingMask       = 1L << kTXNUseQDforImagingBit
+  kTXNUseQDforImagingMask       = 1 << kTXNUseQDforImagingBit
 };
 
 enum {
@@ -5761,7 +5769,7 @@ enum {
 };
 
 enum {
-  kTXNImageWithQDMask           = 1L << kTXNImageWithQDBit
+  kTXNImageWithQDMask           = 1 << kTXNImageWithQDBit
 };
 
 
@@ -5784,7 +5792,7 @@ enum {
 };
 
 enum {
-  kTXNDontDrawCaretWhenInactiveMask = 1L << kTXNDontDrawCaretWhenInactiveBit
+  kTXNDontDrawCaretWhenInactiveMask = 1 << kTXNDontDrawCaretWhenInactiveBit
 };
 
 
@@ -5799,7 +5807,7 @@ enum {
 };
 
 enum {
-  kTXNNoTSMEverMask             = 1L << kTXNNoTSMEverBit
+  kTXNNoTSMEverMask             = 1 << kTXNNoTSMEverBit
 };
 
 
@@ -5919,8 +5927,8 @@ enum {
  */
 typedef OptionBits TXNCountOptions;
 enum {
-  kTXNTextInputCountMask        = 1L << kTXNTextInputCountBit,
-  kTXNRunCountMask              = 1L << kTXNRunCountBit,
+  kTXNTextInputCountMask        = 1 << kTXNTextInputCountBit,
+  kTXNRunCountMask              = 1 << kTXNRunCountBit,
   kTXNAllCountMask              = kTXNTextInputCountMask | kTXNRunCountMask
 };
 

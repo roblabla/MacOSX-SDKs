@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2007, Apple Inc.
+	Copyright (c) 1996-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,6 +11,8 @@ APPKIT_EXTERN NSString *NSComboBoxWillPopUpNotification;
 APPKIT_EXTERN NSString *NSComboBoxWillDismissNotification;
 APPKIT_EXTERN NSString *NSComboBoxSelectionDidChangeNotification;
 APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
+
+@protocol NSComboBoxDelegate, NSComboBoxDataSource;
 
 @interface NSComboBox : NSTextField {
     /*All instance variables are private*/
@@ -48,9 +50,12 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (BOOL)completes;
 - (void)setCompletes:(BOOL)completes;
 
+- (id <NSComboBoxDelegate>)delegate;
+- (void)setDelegate:(id <NSComboBoxDelegate>)anObject;
+
 /* These two methods can only be used when usesDataSource is YES */
-- (id)dataSource;
-- (void)setDataSource:(id)aSource;
+- (id <NSComboBoxDataSource>)dataSource;
+- (void)setDataSource:(id <NSComboBoxDataSource>)aSource;
 
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
@@ -67,16 +72,23 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 
 @end
 
-@interface NSObject (NSComboBoxDataSource)
+@protocol NSComboBoxDataSource <NSObject>
+@optional
+/* These two methods are required when not using bindings */
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
+
 - (NSUInteger)comboBox:(NSComboBox *)aComboBox indexOfItemWithStringValue:(NSString *)string;
 - (NSString *)comboBox:(NSComboBox *)aComboBox completedString:(NSString *)string;
 @end
 
-@interface NSObject (NSComboBoxNotifications)
+@protocol NSComboBoxDelegate <NSTextFieldDelegate>
+@optional
+
+/* Notifications */
 - (void)comboBoxWillPopUp:(NSNotification *)notification;
 - (void)comboBoxWillDismiss:(NSNotification *)notification;
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification;
 - (void)comboBoxSelectionIsChanging:(NSNotification *)notification;
+
 @end

@@ -115,4 +115,5 @@ enum vtagtype	{
 #define	VNOVAL	(-1)
 
 
+
 #endif /* !_VNODE_H_ */

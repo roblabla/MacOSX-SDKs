@@ -115,6 +115,7 @@
 # implementation, see SimpleDelegator.
 #
 class Delegator
+  IgnoreBacktracePat = %r"\A#{Regexp.quote(__FILE__)}:\d+:in `"
 
   #
   # Pass in the _obj_ to delegate method calls to.  All methods supported by
@@ -133,14 +134,12 @@ class Delegator
     for method in obj.methods
       next if preserved.include? method
       begin
-	eval <<-EOS
+	eval <<-EOS, nil, __FILE__, __LINE__+1
 	  def self.#{method}(*args, &block)
 	    begin
 	      __getobj__.__send__(:#{method}, *args, &block)
-	    rescue Exception
-	      $@.delete_if{|s| /:in `__getobj__'$/ =~ s} #`
-	      $@.delete_if{|s| /^\\(eval\\):/ =~ s}
-	      Kernel::raise
+	    ensure
+	      $@.delete_if{|s|IgnoreBacktracePat=~s} if $@
 	    end
 	  end
 	EOS
@@ -164,9 +163,9 @@ class Delegator
   # Checks for a method provided by this the delegate object by fowarding the 
   # call through \_\_getobj\_\_.
   # 
-  def respond_to?(m)
+  def respond_to?(m, include_private = false)
     return true if super
-    return self.__getobj__.respond_to?(m)
+    return self.__getobj__.respond_to?(m, include_private)
   end
 
   #
@@ -228,13 +227,15 @@ class SimpleDelegator<Delegator
 
   # Clone support for the object returned by \_\_getobj\_\_.
   def clone
-    super
-    __setobj__(__getobj__.clone)
+    new = super
+    new.__setobj__(__getobj__.clone)
+    new
   end
   # Duplication support for the object returned by \_\_getobj\_\_.
-  def dup(obj)
-    super
-    __setobj__(__getobj__.dup)
+  def dup
+    new = super
+    new.__setobj__(__getobj__.clone)
+    new
   end
 end
 
@@ -249,7 +250,7 @@ SimpleDelegater = SimpleDelegator
 # your class.
 #
 #   class MyClass < DelegateClass( ClassToDelegateTo )    # Step 1
-#     def initiaize
+#     def initialize
 #       super(obj_of_ClassToDelegateTo)                   # Step 2
 #     end
 #   end
@@ -269,9 +270,9 @@ def DelegateClass(superclass)
       end
       @_dc_obj.__send__(m, *args)
     end
-    def respond_to?(m)  # :nodoc:
+    def respond_to?(m, include_private = false)  # :nodoc:
       return true if super
-      return @_dc_obj.respond_to?(m)
+      return @_dc_obj.respond_to?(m, include_private)
     end
     def __getobj__  # :nodoc:
       @_dc_obj
@@ -281,23 +282,24 @@ def DelegateClass(superclass)
       @_dc_obj = obj
     end
     def clone  # :nodoc:
-      super
-      __setobj__(__getobj__.clone)
+      new = super
+      new.__setobj__(__getobj__.clone)
+      new
     end
     def dup  # :nodoc:
-      super
-      __setobj__(__getobj__.dup)
+      new = super
+      new.__setobj__(__getobj__.clone)
+      new
     end
   }
   for method in methods
     begin
-      klass.module_eval <<-EOS
+      klass.module_eval <<-EOS, __FILE__, __LINE__+1
         def #{method}(*args, &block)
 	  begin
 	    @_dc_obj.__send__(:#{method}, *args, &block)
-	  rescue
-	    $@[0,2] = nil
-	    raise
+	  ensure
+	    $@.delete_if{|s| ::Delegator::IgnoreBacktracePat =~ s} if $@
 	  end
 	end
       EOS

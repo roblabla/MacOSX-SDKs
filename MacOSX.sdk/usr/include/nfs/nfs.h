@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc.  All rights reserved.
+ * Copyright (c) 2000-2009 Apple Inc.  All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -97,7 +97,7 @@ __private_extern__ int nfs_ticks;
 #define	NFS_RSIZE	NFS_RWSIZE	/* Def. read data size <= 32K */
 #define	NFS_DGRAM_WSIZE	8192		/* UDP Def. write data size <= 8K */
 #define	NFS_DGRAM_RSIZE	8192		/* UDP Def. read data size <= 8K */
-#define NFS_READDIRSIZE	8192		/* Def. readdir size */
+#define NFS_READDIRSIZE	32768		/* Def. readdir size */
 #define	NFS_DEFRAHEAD	16		/* Def. read ahead # blocks */
 #define	NFS_MAXRAHEAD	128		/* Max. read ahead # blocks */
 #define	NFS_DEFMAXASYNCWRITES 	128	/* Def. max # concurrent async write RPCs */
@@ -111,7 +111,7 @@ __private_extern__ int nfs_ticks;
 #ifndef NFSRV_WGATHERDELAY
 #define NFSRV_WGATHERDELAY	1	/* Default write gather delay (msec) */
 #endif
-#define	NFS_DIRBLKSIZ	4096		/* Must be a multiple of DIRBLKSIZ */
+#define	NFS_DIRBLKSIZ	4096		/* size of NFS directory buffers */
 #if defined(KERNEL) && !defined(DIRBLKSIZ)
 #define	DIRBLKSIZ	512		/* XXX we used to use ufs's DIRBLKSIZ */
  					/* can't be larger than NFS_FABLKSIZE */
@@ -126,9 +126,9 @@ __private_extern__ int nfs_ticks;
  */
 #define NFS_CMPFH(n, f, s) \
 	((n)->n_fhsize == (s) && !bcmp((caddr_t)(n)->n_fhp, (caddr_t)(f), (s)))
-#define NFS_SRVMAXDATA(n) \
+#define NFSRV_NDMAXDATA(n) \
 		(((n)->nd_vers == NFS_VER3) ? (((n)->nd_nam2) ? \
-		 NFS_MAXDGRAMDATA : NFS_MAXDATA) : NFS_V2MAXDATA)
+		 NFS_MAXDGRAMDATA : NFSRV_MAXDATA) : NFS_V2MAXDATA)
 
 /*
  * The IO_METASYNC flag should be implemented for local file systems.
@@ -148,15 +148,44 @@ __private_extern__ int nfs_ticks;
  *  becomes bunk!).
  * Note that some of these structures come out of there own nfs zones.
 */
-#define NFS_NODEALLOC	512
-#define NFS_MNTALLOC	512
-#define NFS_SVCALLOC	256
+#define NFS_NODEALLOC	1024
+#define NFS_MNTALLOC	1024
+#define NFS_SVCALLOC	512
 
 /*
  * Arguments to mount NFS
  */
-#define NFS_ARGSVERSION	5		/* change when nfs_args changes */
+#define NFS_ARGSVERSION	6		/* change when nfs_args changes */
 struct nfs_args {
+	int		version;	/* args structure version number */
+	struct sockaddr	*addr;		/* file server address */
+	int		addrlen;	/* length of address */
+	int		sotype;		/* Socket type */
+	int		proto;		/* and Protocol */
+	u_char		*fh;		/* File handle to be mounted */
+	int		fhsize;		/* Size, in bytes, of fh */
+	int		flags;		/* flags */
+	int		wsize;		/* write size in bytes */
+	int		rsize;		/* read size in bytes */
+	int		readdirsize;	/* readdir size in bytes */
+	int		timeo;		/* initial timeout in .1 secs */
+	int		retrans;	/* times to retry send */
+	int		maxgrouplist;	/* Max. size of group list */
+	int		readahead;	/* # of blocks to readahead */
+	int		leaseterm;	/* obsolete: Term (sec) of lease */
+	int		deadthresh;	/* obsolete: Retrans threshold */
+	char		*hostname;	/* server's name */
+	/* NFS_ARGSVERSION 3 ends here */
+	int		acregmin;	/* reg file min attr cache timeout */
+	int		acregmax;	/* reg file max attr cache timeout */
+	int		acdirmin;	/* dir min attr cache timeout */
+	int		acdirmax;	/* dir max attr cache timeout */
+	/* NFS_ARGSVERSION 4 ends here */
+	uint32_t	auth;		/* security mechanism flavor */
+	/* NFS_ARGSVERSION 5 ends here */
+	uint32_t	deadtimeout;	/* secs until unresponsive mount considered dead */
+};
+struct nfs_args5 {
 	int		version;	/* args structure version number */
 	struct sockaddr	*addr;		/* file server address */
 	int		addrlen;	/* length of address */
@@ -246,9 +275,9 @@ struct nfs_args3 {
 #define	NFSMNT_NFSV3		0x00000200  /* Use NFS Version 3 protocol */
 #define	NFSMNT_NFSV4		0x00000400  /* Use NFS Version 4 protocol */
 #define	NFSMNT_DUMBTIMR		0x00000800  /* Don't estimate rtt dynamically */
-// #define	NFSMNT_UNUSED	0x00001000  /* unused */
+#define	NFSMNT_DEADTIMEOUT	0x00001000  /* unmount after a period of unresponsiveness */
 #define	NFSMNT_READAHEAD	0x00002000  /* set read ahead */
-// #define	NFSMNT_UNUSED	0x00004000  /* unused */
+#define	NFSMNT_CALLUMNT		0x00004000  /* call MOUNTPROC_UMNT on unmount */
 #define	NFSMNT_RESVPORT		0x00008000  /* Allocate a reserved port */
 #define	NFSMNT_RDIRPLUS		0x00010000  /* Use Readdirplus for V3 */
 #define	NFSMNT_READDIRSIZE	0x00020000  /* Set readdir size */
@@ -259,7 +288,8 @@ struct nfs_args3 {
 #define	NFSMNT_ACDIRMIN		0x00400000  /* dir min attr cache timeout */
 #define	NFSMNT_ACDIRMAX		0x00800000  /* dir max attr cache timeout */
 #define	NFSMNT_SECFLAVOR	0x01000000  /* Use security flavor */
-#define	NFSMNT_SECGIVEN		0x02000000  /* A sec= mount option was given */
+#define	NFSMNT_SECSYSOK		0x02000000  /* Server can support auth sys */
+#define	NFSMNT_MUTEJUKEBOX	0x04000000  /* don't treat jukebox errors as unresponsive */
 
 /*
  * Structures for the nfssvc(2) syscall. Not that anyone but nfsd
@@ -341,6 +371,7 @@ struct nfs_export_args {
 #define NXA_REPLACE		0x0003	/* delete and add the specified export(s) */
 #define NXA_DELETE_ALL		0x0004	/* delete all exports */
 #define NXA_OFFLINE		0x0008	/* export is offline */
+#define NXA_CHECK		0x0010	/* check if exportable */
 
 /* export option flags */
 #define NX_READONLY		0x0001	/* exported read-only */

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.h,v 1.2.2.2.2.2 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: spl_observer.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef SPL_OBSERVER_H
 #define SPL_OBSERVER_H
@@ -27,6 +27,7 @@
 extern PHPAPI zend_class_entry *spl_ce_SplObserver;
 extern PHPAPI zend_class_entry *spl_ce_SplSubject;
 extern PHPAPI zend_class_entry *spl_ce_SplObjectStorage;
+extern PHPAPI zend_class_entry *spl_ce_MultipleIterator;
 
 PHP_MINIT_FUNCTION(spl_observer);
 

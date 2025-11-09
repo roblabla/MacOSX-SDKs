@@ -17,8 +17,8 @@ extern "C" {
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 
-extern Boolean AXAPIEnabled ();
-extern Boolean AXIsProcessTrusted  () AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern Boolean AXAPIEnabled (void);
+extern Boolean AXIsProcessTrusted  (void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 // must be called with root privs
 extern AXError AXMakeProcessTrusted (CFStringRef executablePath) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 

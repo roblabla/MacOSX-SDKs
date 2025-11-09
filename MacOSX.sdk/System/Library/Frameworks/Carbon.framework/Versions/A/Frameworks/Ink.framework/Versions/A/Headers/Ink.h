@@ -3,9 +3,9 @@
  
      Contains:   Ink Manager
  
-     Version:    InkFramework-86~103
+     Version:    InkFramework-107~12
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

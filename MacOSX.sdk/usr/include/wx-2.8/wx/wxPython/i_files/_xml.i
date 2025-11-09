@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     4-June-2001
-// RCS-ID:      $Id: _xml.i,v 1.5 2006/09/26 00:26:18 RD Exp $
+// RCS-ID:      $Id: _xml.i 53182 2008-04-15 20:25:35Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -94,6 +94,7 @@ public:
 
     void AddChild(wxXmlNode *child);
     bool InsertChild(wxXmlNode *child, wxXmlNode *before_node);
+    bool InsertChildAfter(wxXmlNode *child, wxXmlNode *precedingNode);
     bool RemoveChild(wxXmlNode *child);
     void AddProperty(wxXmlProperty *prop);
     %Rename(AddPropertyName,  void,  AddProperty(const wxString& name, const wxString& value));

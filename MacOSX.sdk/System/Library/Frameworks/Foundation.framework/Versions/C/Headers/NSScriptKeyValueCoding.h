@@ -1,6 +1,6 @@
 /*
 	NSScriptKeyValueCoding.h
-	Copyright (c) 1997-2007, Apple Inc.
+	Copyright (c) 1997-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,7 +16,7 @@ extern NSString *NSOperationNotSupportedForKeyException;
 */
 - (id)valueAtIndex:(NSUInteger)index inPropertyWithKey:(NSString *)key;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Return the named object in the value of the to-many relationship identified by the key. The default implementation of this method searches the class of the receiver for a method whose name matches the pattern -valueIn<Key>WithName: and invokes it if one is found. The declared type of the method's parameter must be NSString *. If no such method is found an exception is thrown. Cocoa's scripting support uses this method during the evaluation of NSNameSpecifiers if it's overridden or a -valueIn<Key>WithName: method is implemented for the key in question. You can take advantage of this to optimize the evaluation of name specifiers. (Doing this is less frequently useful than doing the equivalent thing for unique IDs.) If you don't then Cocoa does a linear search of all of the related objects.
 */
@@ -34,7 +34,7 @@ extern NSString *NSOperationNotSupportedForKeyException;
 - (void)removeValueAtIndex:(NSUInteger)index fromPropertyWithKey:(NSString *)key;
 - (void)replaceValueAtIndex:(NSUInteger)index inPropertyWithKey:(NSString *)key withValue:(id)value;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Insert the object into the value of the to-many relationship identified by the key, at a location that makes sense for a scripted Make command with no "at" parameter (either the beginning or the end, typically). The default implementation of this method searches the class of the receiver for a method whose name matches the pattern -insertIn<Key>: and invokes it if one is found. In an application with .scriptSuite/.scriptTerminology-declared scriptability, NSCreateCommand may invoke this method if the to-many relationship's .scriptSuite declaration has a LocationRequiredToCreate = NO entry, and its default implementation throws an exception if no -insertIn<Key>: method is found. In an application with .sdef-declared scriptability, NSCreateCommand may invoke this method for any to-many relationship, and (starting in Mac OS 10.5) its default implementation never throws an exception. It inserts the new object at either the beginning or the end of the relationship, depending on the value of the "insert-at-beginning" attribute of the <cocoa> subelement of the declaring <element> element.
 */

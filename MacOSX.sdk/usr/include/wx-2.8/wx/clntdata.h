@@ -4,7 +4,7 @@
 // Author:      Robin Dunn
 // Modified by:
 // Created:     9-Oct-2001
-// RCS-ID:      $Id: clntdata.h,v 1.26 2006/01/18 16:45:24 JS Exp $
+// RCS-ID:      $Id: clntdata.h 36973 2006-01-18 16:45:41Z JS $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

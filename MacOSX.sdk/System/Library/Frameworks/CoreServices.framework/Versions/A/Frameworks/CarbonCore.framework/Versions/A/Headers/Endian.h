@@ -3,9 +3,9 @@
  
      Contains:   Endian swapping utilties
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -248,6 +248,10 @@ Endian64_Swap(UInt64 value)                                   AVAILABLE_MAC_OS_X
 
 
 #if TARGET_RT_LITTLE_ENDIAN
+struct BigEndianUInt32 {
+  UInt32              bigEndianValue;
+};
+typedef struct BigEndianUInt32          BigEndianUInt32;
 struct BigEndianLong {
   long                bigEndianValue;
 };
@@ -278,6 +282,7 @@ struct BigEndianOSType {
 typedef struct BigEndianOSType          BigEndianOSType;
 #else
 
+typedef UInt32                          BigEndianUInt32;
 typedef long                            BigEndianLong;
 typedef unsigned long                   BigEndianUnsignedLong;
 typedef short                           BigEndianShort;

@@ -23,6 +23,14 @@ extern "C" {
 typedef __darwin_ptrdiff_t ptrdiff_t;
 
 
+void vDSP_deq22(
+	float A[], 
+	ptrdiff_t AStride, 
+	float B[], 
+	float C[], 
+	ptrdiff_t CStride,
+	size_t N);
+
 void vDSP_conv(
 	const float	vDSP_signal[],
 	ptrdiff_t	vDSP_signalStride,

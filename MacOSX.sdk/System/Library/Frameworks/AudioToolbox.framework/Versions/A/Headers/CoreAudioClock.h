@@ -3,10 +3,7 @@
 
      Contains:   Core Audio Clock APIs
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 2004-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2004-2008 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,6 +29,7 @@
 
 //==================================================================================================
 
+#include <Availability.h>
 #include <CoreAudio/CoreAudioTypes.h>
 
 //==================================================================================================
@@ -64,10 +62,12 @@
 					00:00:00:00, corresponding to a timeline position of 0 seconds.
 	@constant	kCAClockProperty_MIDIClockDestinations
 					Type: array of MIDIEndpointRef. When non-empty, the clock will transmit
-					MIDI beat clock to the MIDI endpoints in this list.
+					MIDI beat clock to the MIDI endpoints in this list. (As of MacOS X 10.6,
+					the endpoints may be virtual sources. Previously, they had to be destinations.)
 	@constant	kCAClockProperty_MTCDestinations
 					Type: array of MIDIEndpointRef. When non-empty, the clock will transmit
-					MIDI Time Code to the MIDI endpoints in this list.
+					MIDI Time Code to the MIDI endpoints in this list. (As of MacOS X 10.6,
+					the endpoints may be virtual sources. Previously, they had to be destinations.)
 	@constant	kCAClockProperty_MTCFreewheelTime
 					Type: CAClockSeconds. When the sync mode is MIDI Time Code, this controls
 					how long the reader will keep running after the last MTC message is received
@@ -86,6 +86,10 @@
 					property, the clock retains a reference to the string. When a client gets
 					the property, it receives a borrowed reference (i.e. the client must not
 					release the string).
+	@constant	kCAClockProperty_SendMIDISPP
+					Type: UInt32. Specifies whether MIDI Song Position Pointer messages are
+					sent to the clock's MIDI clock destinations (if any). Available starting
+					in MacOS X 10.6.
 */
 enum {	// typedef UInt32 CAClockPropertyID;
 	kCAClockProperty_InternalTimebase   = 'intb',
@@ -99,7 +103,8 @@ enum {	// typedef UInt32 CAClockPropertyID;
 	kCAClockProperty_MTCFreewheelTime   = 'mtfw',
 	kCAClockProperty_TempoMap			= 'tmpo',
 	kCAClockProperty_MeterTrack			= 'metr',
-	kCAClockProperty_Name				= 'name'
+	kCAClockProperty_Name				= 'name',
+	kCAClockProperty_SendMIDISPP		= 'mspp'
 };
 typedef UInt32					CAClockPropertyID;
 
@@ -280,6 +285,8 @@ typedef Float64					CAClockSamples;
 */
 typedef Float64					CAClockSeconds;
 
+struct MIDIPacketList;
+
 //==================================================================================================
 
 /*!
@@ -421,7 +428,7 @@ extern "C" {
 */
 extern OSStatus
 CAClockNew(					UInt32 				inReservedFlags, 
-							CAClockRef *		outCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockRef *		outCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -437,7 +444,7 @@ CAClockNew(					UInt32 				inReservedFlags,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockDispose(				CAClockRef 			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CAClockDispose(				CAClockRef 			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -467,7 +474,7 @@ extern OSStatus
 CAClockGetPropertyInfo(		CAClockRef			inCAClock,
 							CAClockPropertyID	inPropertyID,
 							UInt32 *			outSize,
-							Boolean *			outWritable)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							Boolean *			outWritable)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -499,7 +506,7 @@ extern OSStatus
 CAClockGetProperty(			CAClockRef			inCAClock,
 							CAClockPropertyID	inPropertyID,
 							UInt32 *			ioPropertyDataSize,
-							void *				outPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							void *				outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -527,7 +534,7 @@ extern OSStatus
 CAClockSetProperty(			CAClockRef			inCAClock,
 							CAClockPropertyID	inPropertyID,
 							UInt32				inPropertyDataSize,
-							const void *		inPropertyData)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							const void *		inPropertyData)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -555,7 +562,7 @@ CAClockSetProperty(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockAddListener(			CAClockRef			inCAClock,
 							CAClockListenerProc inListenerProc,
-							void *				inUserData)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							void *				inUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 	
 //  -----------------------------------------------------------------------------
 /*!
@@ -582,7 +589,7 @@ CAClockAddListener(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockRemoveListener(		CAClockRef			inCAClock,
 							CAClockListenerProc inListenerProc,
-							void *				inUserData)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							void *				inUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -605,7 +612,7 @@ CAClockRemoveListener(		CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockSetCurrentTime(		CAClockRef			inCAClock,
-							const CAClockTime *	inTime)						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							const CAClockTime *	inTime)						__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -629,7 +636,7 @@ CAClockSetCurrentTime(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetCurrentTime(		CAClockRef			inCAClock,
 							CAClockTimeFormat	inTimeFormat,
-							CAClockTime *		outTime)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -654,7 +661,7 @@ CAClockGetCurrentTime(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetStartTime(		CAClockRef			inCAClock,
 							CAClockTimeFormat	inTimeFormat,
-							CAClockTime *		outTime)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -683,7 +690,7 @@ extern OSStatus
 CAClockTranslateTime(		CAClockRef			inCAClock,
 							const CAClockTime *	inTime,
 							CAClockTimeFormat	inOutputTimeFormat,
-							CAClockTime *		outTime)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -699,7 +706,7 @@ CAClockTranslateTime(		CAClockRef			inCAClock,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockStart(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CAClockStart(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -715,7 +722,7 @@ CAClockStart(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockStop(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CAClockStop(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -737,7 +744,7 @@ CAClockStop(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockArm(					CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CAClockArm(					CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -753,7 +760,7 @@ CAClockArm(					CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockDisarm(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CAClockDisarm(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -775,7 +782,7 @@ CAClockDisarm(				CAClockRef			inCAClock)					AVAILABLE_MAC_OS_X_VERSION_10_4_AN
 */
 extern OSStatus
 CAClockSetPlayRate(			CAClockRef			inCAClock,
-							Float64				inPlayRate)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							Float64				inPlayRate)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -800,7 +807,7 @@ CAClockSetPlayRate(			CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockGetPlayRate(			CAClockRef			inCAClock,
-							Float64 *			outPlayRate)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							Float64 *			outPlayRate)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -831,7 +838,7 @@ CAClockGetPlayRate(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetCurrentTempo(		CAClockRef			inCAClock,
 							CAClockTempo *		outTempo,
-							CAClockTime *		outTimestamp)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockTime *		outTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -860,7 +867,7 @@ CAClockGetCurrentTempo(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockSetCurrentTempo(		CAClockRef			inCAClock,
 							CAClockTempo		inTempo,
-							const CAClockTime * inTimestamp)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							const CAClockTime * inTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -890,7 +897,7 @@ extern OSStatus
 CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 							CAClockSeconds		inSeconds,
 							UInt16				inSubframeDivisor,
-							SMPTETime *			outSMPTETime)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							SMPTETime *			outSMPTETime)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -916,7 +923,7 @@ CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockSMPTETimeToSeconds(	CAClockRef			inCAClock,
 							const SMPTETime *   inSMPTETime,
-							CAClockSeconds *	outSeconds)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockSeconds *	outSeconds)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -956,7 +963,7 @@ extern OSStatus
 CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 							CAClockBeats		inBeats,
 							UInt16				inSubbeatDivisor,
-							CABarBeatTime *		outBarBeatTime)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CABarBeatTime *		outBarBeatTime)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -982,7 +989,7 @@ CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 							const CABarBeatTime *inBarBeatTime,
-							CAClockBeats *		outBeats)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							CAClockBeats *		outBeats)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -1006,7 +1013,7 @@ CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockParseMIDI(			CAClockRef			inCAClock,
-							const struct MIDIPacketList *inMIDIPacketList)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							const struct MIDIPacketList *inMIDIPacketList)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 #ifdef __cplusplus
 }

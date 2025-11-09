@@ -100,14 +100,14 @@ extern NSString * const kCIInputNeutralLocationKey  AVAILABLE_MAC_OS_X_VERSION_1
 /*!
  @const      kCIInputScaleFactorKey
  @abstract   kCIInputScaleFactorKey
- @discussion NSNumber (float) : The desired scale factor at which the image will be eventually drawn. Setting this value can greatly improve the drawing performance. A value of 1 would mean identity. Changing the Scale Factor with enabled Draft Mode may also reduce performance.
+ @discussion NSNumber (float) : The desired scale factor at which the image will be eventually drawn. Setting this value can greatly improve the drawing performance. A value of 1 would mean identity, values smaller than 1 will result in a smaller output image. Changing the Scale Factor with enabled Draft Mode may also improve performance.
  */
 extern NSString * const kCIInputScaleFactorKey  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
  @const      kCIInputAllowDraftModeKey
  @abstract   kCIInputAllowDraftModeKey
- @discussion NSNumber (BOOL) : If the optional scale factor is smaller than a certain factor, additionally setting Draft Mode can improve image decoding speed without any perceivable loss of quality. Setting this argument to YES will not have any effect if the Scale Factor isn't below a threshold where it would be of benefit. Switching of this value from YES to NO is an expensive operation, and it's not recommended to use Draft Mode if the same image will need to be drawn without Draft Mode at a later time.
+ @discussion NSNumber (BOOL) : If the optional scale factor is smaller than a certain factor, additionally setting Draft Mode to YES can improve image decoding speed without any perceivable loss of quality. Setting this argument to YES will not have any effect if the Scale Factor isn't below a threshold where it would be of benefit. Switching of this value from YES to NO is an expensive operation, and it's not recommended to use Draft Mode if the same image will need to be drawn without Draft Mode at a later time.
  */
 extern NSString * const kCIInputAllowDraftModeKey  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
@@ -154,5 +154,12 @@ extern NSString * const kCIInputBoostShadowAmountKey  AVAILABLE_MAC_OS_X_VERSION
  @discussion NSNumber (float) : Simple bias to be used in conjunction with exposure adjustment (kCIInputEVKey). Has no effect if the image used for initialization was not RAW.
  */
 extern NSString * const kCIInputBiasKey  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+ @const      kCIOutputNativeSizeKey
+ @abstract   kCIOutputNativeSizeKey
+ @discussion CIVector containing the full native size of the unscaled image. The vector's X value is the width, Y is the height. This is not affected by changing either kCIInputIgnoreImageOrientationKey or kCIInputImageOrientationKey.
+ */
+extern NSString * const kCIOutputNativeSizeKey  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end

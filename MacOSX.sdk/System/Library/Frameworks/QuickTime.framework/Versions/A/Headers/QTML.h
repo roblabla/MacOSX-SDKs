@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Cross-platform specific interfaces
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1997-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 1997-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

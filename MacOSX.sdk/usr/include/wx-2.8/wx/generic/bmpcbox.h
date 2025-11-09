@@ -4,7 +4,7 @@
 // Author:      Jaakko Salli
 // Modified by:
 // Created:     Aug-30-2006
-// RCS-ID:      $Id: bmpcbox.h,v 1.4 2006/10/16 09:29:47 ABX Exp $
+// RCS-ID:      $Id: bmpcbox.h 42046 2006-10-16 09:30:01Z ABX $
 // Copyright:   (c) Jaakko Salli
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:
-// RCS-ID:      $Id: msgdlg.h,v 1.24 2006/01/23 03:27:33 MR Exp $
+// RCS-ID:      $Id: msgdlg.h 49765 2007-11-09 18:32:38Z DE $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ private:
 #elif defined(__WXMAC__)
 #include "wx/mac/msgdlg.h"
 #elif defined(__WXCOCOA__)
-#include "wx/generic/msgdlgg.h"
+#include "wx/cocoa/msgdlg.h"
 #elif defined(__WXPM__)
 #include "wx/os2/msgdlg.h"
 #endif

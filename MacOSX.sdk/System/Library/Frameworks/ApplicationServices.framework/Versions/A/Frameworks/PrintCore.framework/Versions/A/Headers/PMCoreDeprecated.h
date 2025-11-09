@@ -3,7 +3,7 @@
  
      Contains:   Deprecated Carbon Printing Manager Interfaces.
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
+     Copyright (c) 1998-2006,2008 by Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,9 +22,7 @@
 #include <QD/Quickdraw.h>
 #endif
 
-#ifndef __CMAPPLICATION__
-#include <ColorSync/CMApplication.h>
-#endif
+#include <ColorSync/ColorSyncDeprecated.h>
 
 #ifndef __PMDEFINITIONS__
 #include <PrintCore/PMDefinitions.h>
@@ -245,6 +243,41 @@ PMUnflattenPrintSettingsWithURL(
   CFURLRef           flattenFileURL,
   PMPrintSettings *  printSettings)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
   
+/*
+ *  PMGetPrintSettingsExtendedData()	*** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMPrintSettingsGetValue instead.
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetPrintSettingsExtendedData(
+  PMPrintSettings   printSettings,
+  OSType            dataID,
+  UInt32 *          size,
+  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+
+/*
+ *  PMSetPrintSettingsExtendedData()	*** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMPrintSettingsSetValue instead.
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetPrintSettingsExtendedData(
+  PMPrintSettings   printSettings,
+  OSType            dataID,
+  UInt32            size,
+  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if !__LP64__
 

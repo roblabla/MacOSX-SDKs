@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     29/01/98
-// RCS-ID:      $Id: filefn.h,v 1.158 2006/12/13 12:32:08 MW Exp $
+// RCS-ID:      $Id: filefn.h 53877 2008-05-31 12:43:44Z SN $
 // Copyright:   (c) 1998 Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ enum wxFileKind
     #define   wxRmDir      _wrmdir
     #define   wxStat       _wstat
     #define   wxStructStat struct _stat
-#elif defined(__WXMSW__) && !defined(__WXPALMOS__) && \
+#elif (defined(__WXMSW__) || defined(__OS2__)) && !defined(__WXPALMOS__) && \
       ( \
         defined(__VISUALC__) || \
         (defined(__MINGW32__) && !defined(__WINE__) && \
@@ -197,7 +197,7 @@ enum wxFileKind
     // to avoid using them as they're not present in earlier versions and
     // always using the native functions spelling is easier than testing for
     // the versions
-    #if defined(__BORLANDC__) || defined(__DMC__) || defined(__WATCOMC__)
+    #if defined(__BORLANDC__) || defined(__DMC__) || defined(__WATCOMC__) || defined(__MINGW64__)
         #define wxPOSIX_IDENT(func)    ::func
     #else // by default assume MSVC-compatible names
         #define wxPOSIX_IDENT(func)    _ ## func
@@ -232,9 +232,16 @@ enum wxFileKind
     #endif
 
     #ifdef wxHAS_HUGE_FILES
-        #define   wxSeek       wxPOSIX_IDENT(lseeki64)
-        #define   wxLseek      wxPOSIX_IDENT(lseeki64)
-        #define   wxTell       wxPOSIX_IDENT(telli64)
+        #ifndef __MINGW64__
+            #define   wxSeek       wxPOSIX_IDENT(lseeki64)
+            #define   wxLseek      wxPOSIX_IDENT(lseeki64)
+            #define   wxTell       wxPOSIX_IDENT(telli64)
+        #else
+            // unfortunately, mingw-W64 is somewhat inconsistent...
+            #define   wxSeek       _lseeki64
+            #define   wxLseek      _lseeki64
+            #define   wxTell       _telli64
+        #endif
     #else // !wxHAS_HUGE_FILES
         #define   wxSeek       wxPOSIX_IDENT(lseek)
         #define   wxLseek      wxPOSIX_IDENT(lseek)
@@ -242,12 +249,15 @@ enum wxFileKind
     #endif // wxHAS_HUGE_FILES/!wxHAS_HUGE_FILES
 
     #ifndef __WATCOMC__
-        #if !defined(__BORLANDC__) || (__BORLANDC__ > 0x540)
-           // NB: this one is not POSIX and always has the underscore
-           #define   wxFsync      _commit
+         #if !defined(__BORLANDC__) || (__BORLANDC__ > 0x540)
+             // NB: this one is not POSIX and always has the underscore
+             #define   wxFsync      _commit
 
-           #define HAVE_FSYNC
-       #endif // BORLANDC
+             // could be already defined by configure (Cygwin)
+             #ifndef HAVE_FSYNC
+                 #define HAVE_FSYNC
+             #endif
+        #endif // BORLANDC
     #endif
 
     #define   wxEof        wxPOSIX_IDENT(eof)
@@ -322,7 +332,16 @@ enum wxFileKind
         #ifdef wxHAS_HUGE_FILES
             #define   wxStat       wxPOSIX_IDENT(stati64)
         #else
-            #define   wxStat       wxPOSIX_IDENT(stat)
+            // Unfortunately Watcom is not consistent, so:-
+            #if defined(__OS2__) && defined(__WATCOMC__)
+                #define   wxStat       _stat
+            #else
+                #if defined (__BORLANDC__)
+                    #define   wxStat       _stat //wxPOSIX_IDENT(stat)
+                #else
+                    #define   wxStat       wxPOSIX_IDENT(stat)
+                #endif // !borland
+            #endif // !watcom
         #endif
     #endif // wxUSE_UNICODE/!wxUSE_UNICODE
 

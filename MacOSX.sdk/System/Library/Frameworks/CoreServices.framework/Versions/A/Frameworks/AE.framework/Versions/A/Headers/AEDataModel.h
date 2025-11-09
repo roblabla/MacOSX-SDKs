@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-402~78
+     Version:    AppleEvents-496.5~1
  
-     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -129,6 +129,7 @@ enum {
   typeProperty                  = 'prop',
   typeFSRef                     = 'fsrf', /* FSRef */
   typeFileURL                   = 'furl',
+  typeBookmarkData              = 'bmrk',
   typeKeyword                   = 'keyw', /* OSType */
   typeSectionH                  = 'sect',
   typeWildCard                  = '****',
@@ -191,7 +192,12 @@ enum {
   keyMissedKeywordAttr          = 'miss', /* this attribute is read only */
   keyOriginalAddressAttr        = 'from', /* new in 1.0.1 */
   keyAcceptTimeoutAttr          = 'actm', /* new for Mac OS X */
-  keyReplyRequestedAttr         = 'repq' /* Was a reply requested for this event - returned as typeBoolean */
+  keyReplyRequestedAttr         = 'repq', /* Was a reply requested for this event - returned as typeBoolean */
+  keySenderEUIDAttr             = 'seid', /* read only, returned as typeSInt32.  Will be the euid of the sender of this event. */
+  keySenderEGIDAttr             = 'sgid', /* read only, returned as typeSInt32.  Will be the egid of the sender of this event. */
+  keySenderUIDAttr              = 'uids', /* read only, returned as typeSInt32.  Will be the uid of the sender of this event. */
+  keySenderGIDAttr              = 'gids', /* read only, returned as typeSInt32.  Will be the gid of the sender of this event. */
+  keySenderPIDAttr              = 'spid' /* read only, returned as typeSInt32.  Will be the pid of the sender of this event. */
 };
 
 /* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */
@@ -200,7 +206,7 @@ enum {
   kAEDebugReplyHeader           = (1 << 1), /* headers returned by the server */
   kAEDebugXMLRequest            = (1 << 2), /* the XML request we sent */
   kAEDebugXMLResponse           = (1 << 3), /* the XML reply from the server */
-  kAEDebugXMLDebugAll           = (long)0xFFFFFFFF /* everything! */
+  kAEDebugXMLDebugAll           = (int)0xFFFFFFFF /* everything! */
 };
 
 /* These values can be added as a parameter to the direct object of a
@@ -1211,52 +1217,70 @@ AEPutDesc(
   const AEDesc *  theAEDesc)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AEGetNthPtr
-    @discussion Gets a copy of the data from a descriptor at a specified
-                position in a descriptor list; typically used when your application
-                needs to work with the extracted data directly.
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      index           A one-based positive integer indicating the
-                                position in the descriptor list of the descriptor to get the data
-                                from. AEGetNthPtr returns an error if you pass
-                                zero, a negative number, or a value that is out of range.
-                                Currently the upper limit on index is 2^31
-                                items.
-    @param      desiredType     The desired descriptor type for the copied
-                                data. For a list of AppleScript's predefined descriptor types.
-                                If the descriptor specified by the index
-                                parameter is not of the desired type, AEGetNthPtr attempts to coerce
-                                the data to this type. If you pass a value of
-                                typeWildCard, no coercion is performed, and the descriptor type
-                                of the copied data is the same as the descriptor
-                                type of the original descriptor.
-    @param      theAEKeyword    A pointer to a keyword or NULL. On return, the
-                                keyword for the specified descriptor, if you are getting data from a list of
-                                keyword-specified descriptors; otherwise, AEGetNthPtr returns the value
-                                typeWildCard.
-    @param      typeCode        A pointer to a descriptor type or NULL. On
-                                return, specifies the descriptor type of the data pointed to by dataPtr.
-    @param      dataPtr         A pointer to a buffer, local variable, or
-                                other storage location created and disposed of by your application. The size in
-                                bytes must be at least as large as the value you pass in the maximumSize
-                                parameter. On return, contains the data from the descriptor at the position in
-                                the descriptor list specified by the index parameter.
-    @param      maximumSize     The maximum length, in bytes, of the
-                                expected data. The AEGetNthPtr function will not return more data than you
-                                specify in this parameter.
-    @param      actualSize      A pointer to a size variable or NULL. On
-                                return, the length, in bytes, of the data for the specified descriptor. If this
-                                value is larger than the value of the maximumSize parameter, the buffer pointed
-                                to by dataPtr was not large enough to contain all of the data for the
-                                descriptor, though AEGetNthPtr does not write beyond the end of the buffer. If
-                                the buffer was too small, you can resize it and call AEGetNthPtr again.
-*/
 /*
  *  AEGetNthPtr()
  *  
+ *  Discussion:
+ *    Gets a copy of the data from a descriptor at a specified position
+ *    in a descriptor list; typically used when your application needs
+ *    to work with the extracted data directly.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    index:
+ *      A one-based positive integer indicating the position in the
+ *      descriptor list of the descriptor to get the data from.
+ *      AEGetNthPtr returns an error if you pass zero, a negative
+ *      number, or a value that is out of range. Currently the upper
+ *      limit on index is 2^31 items.
+ *    
+ *    desiredType:
+ *      The desired descriptor type for the copied data. For a list of
+ *      AppleScript's predefined descriptor types. If the descriptor
+ *      specified by the index parameter is not of the desired type,
+ *      AEGetNthPtr attempts to coerce the data to this type. If you
+ *      pass a value of typeWildCard, no coercion is performed, and the
+ *      descriptor type of the copied data is the same as the
+ *      descriptor type of the original descriptor.
+ *    
+ *    theAEKeyword:
+ *      A pointer to a keyword or NULL. On return, the keyword for the
+ *      specified descriptor, if you are getting data from a list of
+ *      keyword-specified descriptors; otherwise, AEGetNthPtr returns
+ *      the value typeWildCard.
+ *    
+ *    typeCode:
+ *      A pointer to a descriptor type or NULL. On return, specifies
+ *      the descriptor type of the data pointed to by dataPtr.
+ *    
+ *    dataPtr:
+ *      A pointer to a buffer, local variable, or other storage
+ *      location created and disposed of by your application. The size
+ *      in bytes must be at least as large as the value you pass in the
+ *      maximumSize parameter. On return, contains the data from the
+ *      descriptor at the position in the descriptor list specified by
+ *      the index parameter.
+ *    
+ *    maximumSize:
+ *      The maximum length, in bytes, of the expected data. The
+ *      AEGetNthPtr function will not return more data than you specify
+ *      in this parameter.
+ *    
+ *    actualSize:
+ *      A pointer to a size variable or NULL. On return, the length, in
+ *      bytes, of the data for the specified descriptor. If this value
+ *      is larger than the value of the maximumSize parameter, the
+ *      buffer pointed to by dataPtr was not large enough to contain
+ *      all of the data for the descriptor, though AEGetNthPtr does not
+ *      write beyond the end of the buffer. If the buffer was too
+ *      small, you can resize it and call AEGetNthPtr again.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1275,39 +1299,54 @@ AEGetNthPtr(
   Size *              actualSize)          /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AEGetNthDesc
-    @discussion Copies a descriptor from a specified position in a descriptor
-                                list into a specified descriptor; typically used when your application needs to
-                                pass the extracted data to another function as a descriptor.
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      index           A one-based positive integer indicating the
-                                position in the descriptor list of the descriptor to get the data from.
-                                AEGetNthDesc returns an error if you pass zero, a negative number, or a value
-                                that is out of range.
-                                Currently the upper limit on index is 2^31 items.
-    @param      desiredType     The desired descriptor type for the copied
-                                data. For a list of AppleScript's predefined descriptor types.  If the
-                                descriptor specified by the index parameter is not of the desired type,
-                                AEGetNthDesc attempts to coerce the data to this type. If you pass a value of
-                                typeWildCard, no coercion is performed, and the descriptor type of the copied
-                                data is the same as the descriptor type of the original descriptor.
-    @param      theAEKeyword    A pointer to a keyword or NULL. On return, the
-                                keyword for the specified descriptor, if you are getting data from a list of
-                                keyword-specified descriptors; otherwise, AEGetNthDesc returns the value
-                                typeWildCard.
-    @param      result          A pointer to a descriptor. On successful
-                                return, a copy of the descriptor specified by the index parameter, coerced, if
-                                necessary, to the descriptor type specified by the desiredType parameter. On
-                                error, a null descriptor. If the function returns successfully, your application
-                                should call the AEDisposeDesc function to dispose of the resulting descriptor
-                                after it has finished using it.
-*/
 /*
  *  AEGetNthDesc()
  *  
+ *  Discussion:
+ *    Copies a descriptor from a specified position in a descriptor
+ *    list into a specified descriptor; typically used when your
+ *    application needs to pass the extracted data to another function
+ *    as a descriptor.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    index:
+ *      A one-based positive integer indicating the position in the
+ *      descriptor list of the descriptor to get the data from.
+ *      AEGetNthDesc returns an error if you pass zero, a negative
+ *      number, or a value that is out of range. Currently the upper
+ *      limit on index is 2^31 items.
+ *    
+ *    desiredType:
+ *      The desired descriptor type for the copied data. For a list of
+ *      AppleScript's predefined descriptor types.  If the descriptor
+ *      specified by the index parameter is not of the desired type,
+ *      AEGetNthDesc attempts to coerce the data to this type. If you
+ *      pass a value of typeWildCard, no coercion is performed, and the
+ *      descriptor type of the copied data is the same as the
+ *      descriptor type of the original descriptor.
+ *    
+ *    theAEKeyword:
+ *      A pointer to a keyword or NULL. On return, the keyword for the
+ *      specified descriptor, if you are getting data from a list of
+ *      keyword-specified descriptors; otherwise, AEGetNthDesc returns
+ *      the value typeWildCard.
+ *    
+ *    result:
+ *      A pointer to a descriptor. On successful return, a copy of the
+ *      descriptor specified by the index parameter, coerced, if
+ *      necessary, to the descriptor type specified by the desiredType
+ *      parameter. On error, a null descriptor. If the function returns
+ *      successfully, your application should call the AEDisposeDesc
+ *      function to dispose of the resulting descriptor after it has
+ *      finished using it.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1323,26 +1362,36 @@ AEGetNthDesc(
   AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AESizeOfNthItem
-    @discussion Gets the data size and descriptor type of the descriptor at a
-                specified position in a descriptor list.
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      index           A one-based positive integer indicating the
-                                position in the descriptor list of the descriptor to get the data from.
-                                AESizeOfNthItem returns an error if you pass zero, a negative number, or a value
-                                that is out of range.
-                                Currently the upper limit on index is 2^31 items.
-    @param      typeCode        A pointer to a descriptor type or NULL. On
-                                return, specifies the descriptor type of the descriptor.
-    @param      dataSize        A pointer to a size variable or NULL. On
-                                return, the length (in bytes) of the data in the descriptor.
-*/
 /*
  *  AESizeOfNthItem()
  *  
+ *  Discussion:
+ *    Gets the data size and descriptor type of the descriptor at a
+ *    specified position in a descriptor list.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    index:
+ *      A one-based positive integer indicating the position in the
+ *      descriptor list of the descriptor to get the data from.
+ *      AESizeOfNthItem returns an error if you pass zero, a negative
+ *      number, or a value that is out of range. Currently the upper
+ *      limit on index is 2^31 items.
+ *    
+ *    typeCode:
+ *      A pointer to a descriptor type or NULL. On return, specifies
+ *      the descriptor type of the descriptor.
+ *    
+ *    dataSize:
+ *      A pointer to a size variable or NULL. On return, the length (in
+ *      bytes) of the data in the descriptor.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1357,41 +1406,60 @@ AESizeOfNthItem(
   Size *              dataSize)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AEGetArray
-    @discussion Extracts data from an Apple event array created with the
-                AEPutArray function and stores it as a standard array of fixed size items in the
-                specified buffer. 
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      arrayType       The Apple event array type to convert. Pass
-                                one of the constants:  kAEDataArray, kAEPackedArray, kAEDescArray,
-                                kAEKeyDescArray
-    @param      arrayPtr        A pointer to a buffer, allocated and disposed
-                                of by your application, for storing the array. The size in bytes must be at
-                                least as large as the value you pass in the maximumSize parameter. On return,
-                                the buffer contains the array of fixed-size items.
-    @param      maximumSize     The maximum length, in bytes, of the
-                                expected data. The AEGetArray function will not return more data than you
-                                specify in this parameter.
-    @param      itemType        A pointer to a descriptor type. On return, for
-                                arrays of type kAEDataArray, kAEPackedArray, or kAEHandleArray, the descriptor
-                                type of the items in the returned array. The AEGetArray function doesn't supply
-                                a value in itemType for arrays of type kAEDescArray and kAEKeyDescArray because
-                                they may contain descriptors of different types. 
-    @param      itemSize        A pointer to a size variable. On return, for
-                                arrays of type kAEDataArray or kAEPackedArray, the size (in bytes) of each item
-                                in the returned array. You don't get an item size for arrays of type
-                                kAEDescArray, kAEKeyDescArray, or kAEHandleArray because descriptors and handles
-                                (though not the data they point to) have a known size.
-    @param      itemCount       A pointer to a size variable. On return, the
-                                number of items in the returned array.  Currently the upper limit on the size of
-                                an array is 2^31 items.
-*/
 /*
  *  AEGetArray()
  *  
+ *  Discussion:
+ *    Extracts data from an Apple event array created with the
+ *    AEPutArray function and stores it as a standard array of fixed
+ *    size items in the specified buffer.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    arrayType:
+ *      The Apple event array type to convert. Pass one of the
+ *      constants:  kAEDataArray, kAEPackedArray, kAEDescArray,
+ *      kAEKeyDescArray
+ *    
+ *    arrayPtr:
+ *      A pointer to a buffer, allocated and disposed of by your
+ *      application, for storing the array. The size in bytes must be
+ *      at least as large as the value you pass in the maximumSize
+ *      parameter. On return, the buffer contains the array of
+ *      fixed-size items.
+ *    
+ *    maximumSize:
+ *      The maximum length, in bytes, of the expected data. The
+ *      AEGetArray function will not return more data than you specify
+ *      in this parameter.
+ *    
+ *    itemType:
+ *      A pointer to a descriptor type. On return, for arrays of type
+ *      kAEDataArray, kAEPackedArray, or kAEHandleArray, the descriptor
+ *      type of the items in the returned array. The AEGetArray
+ *      function doesn't supply a value in itemType for arrays of type
+ *      kAEDescArray and kAEKeyDescArray because they may contain
+ *      descriptors of different types.
+ *    
+ *    itemSize:
+ *      A pointer to a size variable. On return, for arrays of type
+ *      kAEDataArray or kAEPackedArray, the size (in bytes) of each
+ *      item in the returned array. You don't get an item size for
+ *      arrays of type kAEDescArray, kAEKeyDescArray, or kAEHandleArray
+ *      because descriptors and handles (though not the data they point
+ *      to) have a known size.
+ *    
+ *    itemCount:
+ *      A pointer to a size variable. On return, the number of items in
+ *      the returned array.  Currently the upper limit on the size of
+ *      an array is 2^31 items.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1409,37 +1477,52 @@ AEGetArray(
   long *               itemCount)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AEPutArray
-    @discussion Extracts data from an Apple event array created with the
-                AEPutArray function and stores it as a standard array of fixed size items in the
-                specified buffer. 
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      arrayType       The Apple event array type to convert. Pass
-                                one of the constants:  kAEDataArray, kAEPackedArray, kAEDescArray,
-                                kAEKeyDescArray
-    @param      arrayPtr        A pointer to a buffer, local variable, or
-                                other storage location, created and disposed of by your application, that
-                                contains the array to put into the descriptor list.
-    @param      itemType        For arrays of type kAEDataArray,
-                                kAEPackedArray, or kAEHandleArray, the descriptor type of the array items to
-                                create. Use one of the constants such as typeLongInteger. You don't need to
-                                specify an item type for arrays of type kAEDescArray or kAEKeyDescArray because
-                                the data is already stored in descriptors which contain a descriptor type.
-    @param      itemSize        For arrays of type kAEDataArray or
-                                kAEPackedArray, the size (in bytes) of the array items to create. You don't need
-                                to specify an item size for arrays of type kAEDescArray, kAEKeyDescArray, or
-                                kAEHandleArray because their descriptors (though not the data they point to)
-                                have a known size.
-    @param      itemCount       A pointer to a size variable. On return, the
-                                number of items in the returned array.  Currently the upper limit on the size of
-                                an array is 2^31 items.
-*/
 /*
  *  AEPutArray()
  *  
+ *  Discussion:
+ *    Extracts data from an Apple event array created with the
+ *    AEPutArray function and stores it as a standard array of fixed
+ *    size items in the specified buffer.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    arrayType:
+ *      The Apple event array type to convert. Pass one of the
+ *      constants:  kAEDataArray, kAEPackedArray, kAEDescArray,
+ *      kAEKeyDescArray
+ *    
+ *    arrayPtr:
+ *      A pointer to a buffer, local variable, or other storage
+ *      location, created and disposed of by your application, that
+ *      contains the array to put into the descriptor list.
+ *    
+ *    itemType:
+ *      For arrays of type kAEDataArray, kAEPackedArray, or
+ *      kAEHandleArray, the descriptor type of the array items to
+ *      create. Use one of the constants such as typeLongInteger. You
+ *      don't need to specify an item type for arrays of type
+ *      kAEDescArray or kAEKeyDescArray because the data is already
+ *      stored in descriptors which contain a descriptor type.
+ *    
+ *    itemSize:
+ *      For arrays of type kAEDataArray or kAEPackedArray, the size (in
+ *      bytes) of the array items to create. You don't need to specify
+ *      an item size for arrays of type kAEDescArray, kAEKeyDescArray,
+ *      or kAEHandleArray because their descriptors (though not the
+ *      data they point to) have a known size.
+ *    
+ *    itemCount:
+ *      A pointer to a size variable. On return, the number of items in
+ *      the returned array.  Currently the upper limit on the size of
+ *      an array is 2^31 items.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1456,22 +1539,28 @@ AEPutArray(
   long                 itemCount)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*    @function   AEDeleteItem
-    @discussion Deletes a descriptor from a descriptor list, causing all
-                subsequent descriptors to move up one place. 
-    @param      theAEDescList   A pointer to the descriptor list to add a
-                                descriptor to. See AEDescList.
-    @param      index           A one-based positive integer indicating the
-                                position in the descriptor list of the descriptor to delete. AEDeleteItem
-                                returns an error if you pass zero, a negative number, or a value that is out of
-                                range.
-                                Currently the upper limit on index is 2^31 items.
-*/
 /*
  *  AEDeleteItem()
  *  
+ *  Discussion:
+ *    Deletes a descriptor from a descriptor list, causing all
+ *    subsequent descriptors to move up one place.
+ *  
  *  Mac OS X threading:
  *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    theAEDescList:
+ *      A pointer to the descriptor list to add a descriptor to. See
+ *      AEDescList.
+ *    
+ *    index:
+ *      A one-based positive integer indicating the position in the
+ *      descriptor list of the descriptor to delete. AEDeleteItem
+ *      returns an error if you pass zero, a negative number, or a
+ *      value that is out of range. Currently the upper limit on index
+ *      is 2^31 items.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

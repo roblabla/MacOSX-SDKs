@@ -1,5 +1,5 @@
 /*	CFCharacterSet.h
-	Copyright (c) 1999-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1999-2009, Apple Inc. All rights reserved.
 */
 
 /*!

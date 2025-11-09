@@ -97,4 +97,11 @@ typedef int CAConstraintAttribute;
     relativeTo:(NSString *)srcId attribute:(CAConstraintAttribute)srcAttr
     scale:(CGFloat)m offset:(CGFloat)c;
 
+/* Accessors. */
+
+@property(readonly) CAConstraintAttribute attribute;
+@property(readonly) NSString *sourceName;
+@property(readonly) CAConstraintAttribute sourceAttribute;
+@property(readonly) CGFloat scale, offset;
+
 @end

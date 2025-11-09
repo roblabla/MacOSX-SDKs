@@ -5,7 +5,7 @@
  
      Contains:   Deprecated Carbon Printing Manager Interfaces.
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
+     Copyright (c) 1998-2006,2008 Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

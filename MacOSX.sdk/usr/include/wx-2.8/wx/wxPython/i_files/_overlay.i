@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-Oct-2006
-// RCS-ID:      $Id: _overlay.i,v 1.2 2006/10/24 22:20:45 RD Exp $
+// RCS-ID:      $Id: _overlay.i 50927 2007-12-27 18:55:23Z RD $
 // Copyright:   (c) 2006 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -35,6 +35,8 @@ class wxDCOverlay
 public:
 
     %nokwargs wxDCOverlay;
+    %pythonAppend wxDCOverlay
+        "self.__dc = args[1] # save a ref so the dc will not be deleted before self";
     
     // connects this overlay to the corresponding drawing dc, if the overlay is not initialized yet
     // this call will do so

@@ -1,12 +1,13 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2007, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @interface NSIndexPath : NSObject <NSCopying, NSCoding> {
+	@private
 	NSUInteger *_indexes;
 	NSUInteger _hash;
 	NSUInteger _length;

@@ -3,9 +3,9 @@
  
      Contains:   Pascal string manipulation routines that parallel ANSI C string.h
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -47,7 +47,7 @@ extern "C" {
  *    string, or 0 if the two strings are identical, or a value > 0 if
  *    the first string is lexicographically greater than the second.
  *    This function should be deprecated since pascal strings are
- *    obsolate on MacOSX and CFString should be used instead.
+ *    obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -96,7 +96,7 @@ PLstrcmp(
  *    string, even if their lengths are greater than num.  Two strings
  *    whose first num characters are identical will return 0 when
  *    compared. This function should be deprecated since pascal strings
- *    are obsolate on MacOSX and CFString should be used instead.
+ *    are obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -142,10 +142,10 @@ PLstrncmp(
  *  
  *  Discussion:
  *    This function copies the string source to dest (including the
- *    initial length byte ). The caller must insure that neither source
+ *    initial length byte ). The caller must ensure that neither source
  *    or dest are NULL, and that dest is large enough to hold the
- *    entire contents of sourc. This function should be deprecated
- *    since pascal strings are obsolate on MacOSX and CFString should
+ *    entire contents of source. This function should be deprecated
+ *    since pascal strings are obsolete on MacOSX and CFString should
  *    be used instead.
  *  
  *  Mac OS X threading:
@@ -187,10 +187,11 @@ PLstrcpy(
  *    initial length byte ), provided the length of source is <= num. 
  *    If the length of source is > num, then the first num characters
  *    of source are copied into dest, and the length of dest is set to
- *    num.  The caller must insure that neither source or dest are
+ *    num.  The caller must ensure that neither source or dest are
  *    NULL, and that dest is large enough to hold the entire contents
- *    of sourc. This function should be deprecated since pascal strings
- *    are obsolate on MacOSX and CFString should be used instead.
+ *    of source. This function should be deprecated since pascal
+ *    strings are obsolete on MacOSX and CFString should be used
+ *    instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -237,10 +238,10 @@ PLstrncpy(
  *    length of append is greater than 255 ( the maximum size of a
  *    pascal string ) then only enough characters are copied to str to
  *    reach the 255 character limit, and the length of str is set to
- *    255.  The caller must insure that neither str nor append are
+ *    255.  The caller must ensure that neither str nor append are
  *    NULL, and that str is large enough to hold the entire contents of
  *    append. This function should be deprecated since pascal strings
- *    are obsolate on MacOSX and CFString should be used instead.
+ *    are obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -283,10 +284,10 @@ PLstrcat(
  *    of str plus the length of append is greater than 255 ( the
  *    maximum size of a pascal string ) then only enough characters are
  *    copied to str to reach the 255 character limit, and the length of
- *    str is set to 255.  The caller must insure that neither str nor
+ *    str is set to 255.  The caller must ensure that neither str nor
  *    append are NULL, and that str is large enough to hold the entire
  *    contents of append. This function should be deprecated since
- *    pascal strings are obsolate on MacOSX and CFString should be used
+ *    pascal strings are obsolete on MacOSX and CFString should be used
  *    instead.
  *  
  *  Mac OS X threading:
@@ -332,7 +333,7 @@ PLstrncat(
  *    The PLstrrchr() function locates the first occurrence of ch1
  *    (converted to an unsigned char) in the string s.  If ch1 does not
  *    occur in the string, this returns NULL. This function should be
- *    deprecated since pascal strings are obsolate on MacOSX and
+ *    deprecated since pascal strings are obsolete on MacOSX and
  *    CFString should be used instead.
  *  
  *  Mac OS X threading:
@@ -374,7 +375,7 @@ PLstrchr(
  *    The PLstrrchr() function locates the last occurrence of ch1
  *    (converted to an unsigned char) in the string s.  If ch1 does not
  *    occur in the string, this returns NULL. This function should be
- *    deprecated since pascal strings are obsolate on MacOSX and
+ *    deprecated since pascal strings are obsolete on MacOSX and
  *    CFString should be used instead.
  *  
  *  Mac OS X threading:
@@ -418,7 +419,7 @@ PLstrrchr(
  *    occurrence in str of any character in searchStr.  If none of the
  *    characters in searchStr can be found in str, then NULL is
  *    returned. This function should be deprecated since pascal strings
- *    are obsolate on MacOSX and CFString should be used instead.
+ *    are obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -463,7 +464,7 @@ PLstrpbrk(
  *    charset. In effect, this returns a count of the number of
  *    characters at the beginning of the pascal string str1 which are
  *    in charset. This function should be deprecated since pascal
- *    strings are obsolate on MacOSX and CFString should be used
+ *    strings are obsolete on MacOSX and CFString should be used
  *    instead.
  *  
  *  Mac OS X threading:
@@ -507,7 +508,7 @@ PLstrspn(
  *    The PLstrstr() function returns a pointer to the first occurrence
  *    of searchStr in str1, or NULL if searchStr does not exist in
  *    str1. This function should be deprecated since pascal strings are
- *    obsolate on MacOSX and CFString should be used instead.
+ *    obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -549,7 +550,7 @@ PLstrstr(
  *  Discussion:
  *    The PLstrlen() function returns the length of the pascal string
  *    str. This function should be deprecated since pascal strings are
- *    obsolate on MacOSX and CFString should be used instead.
+ *    obsolete on MacOSX and CFString should be used instead.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -586,7 +587,7 @@ PLstrlen(ConstStr255Param str)                                AVAILABLE_MAC_OS_X
  *    in str1, or 0 if searchStr does not occur in str1.  For example,
  *    if str1 is "\pHello World" and searchStr is "\pWorld", then this
  *    function will return the value 7. This function should be
- *    deprecated since pascal strings are obsolate on MacOSX and
+ *    deprecated since pascal strings are obsolete on MacOSX and
  *    CFString should be used instead.
  *  
  *  Mac OS X threading:

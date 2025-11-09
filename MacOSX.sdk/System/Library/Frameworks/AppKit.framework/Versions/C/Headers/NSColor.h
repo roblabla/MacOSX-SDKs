@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -29,17 +29,23 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h>
+#import <AppKit/NSPasteboard.h>
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 #import <QuartzCore/CIColor.h>
 #endif
 
-@class NSDictionary, NSPasteboard, NSImage, NSColorSpace;
+@class NSDictionary, NSImage, NSColorSpace;
 
 #define NSAppKitVersionNumberWithPatternColorLeakFix 641.0
 
 
 
-@interface NSColor : NSObject <NSCopying, NSCoding>
+@interface NSColor : NSObject
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+<NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
+#else
+<NSCopying, NSCoding>
+#endif
 
 /* Create NSCalibratedWhiteColorSpace colors.
 */

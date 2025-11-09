@@ -178,6 +178,10 @@ typedef __darwin_size_t	size_t;
 #define	MADV_WILLNEED		POSIX_MADV_WILLNEED
 #define	MADV_DONTNEED		POSIX_MADV_DONTNEED
 #define	MADV_FREE		5	/* pages unneeded, discard contents */
+#define	MADV_ZERO_WIRED_PAGES	6	/* zero the wired pages that have not been unwired before the entry is deleted */
+#define MADV_FREE_REUSABLE	7	/* pages can be reused (by anyone) */
+#define MADV_FREE_REUSE		8	/* caller wants to reuse those pages */
+#define MADV_CAN_REUSE		9
 
 /*
  * Return bits from mincore

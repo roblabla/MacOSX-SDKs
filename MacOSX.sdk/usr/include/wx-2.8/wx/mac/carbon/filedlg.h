@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: filedlg.h,v 1.7 2006/05/29 20:31:03 RD Exp $
+// RCS-ID:      $Id: filedlg.h 39456 2006-05-29 20:31:03Z RD $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

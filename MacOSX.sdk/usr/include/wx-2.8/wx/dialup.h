@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     07.07.99
-// RCS-ID:      $Id: dialup.h,v 1.28 2005/09/23 12:48:36 MR Exp $
+// RCS-ID:      $Id: dialup.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Vadim Zeitlin
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@
 // misc
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxArrayString;
+class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
 #define WXDIALUP_MANAGER_DEFAULT_BEACONHOST  wxT("www.yahoo.com")
 

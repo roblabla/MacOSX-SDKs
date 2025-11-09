@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     08.12.99
-// RCS-ID:      $Id: dir.h,v 1.23 2006/08/19 08:40:59 JS Exp $
+// RCS-ID:      $Id: dir.h 53135 2008-04-12 02:31:04Z VZ $
 // Copyright:   (c) 1999 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@
 #include "wx/longlong.h"
 #include "wx/string.h"
 
-class WXDLLIMPEXP_BASE wxArrayString;
+class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -78,7 +78,7 @@ public:
 // wxDir: portable equivalent of {open/read/close}dir functions
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDirData;
+class WXDLLIMPEXP_FWD_BASE wxDirData;
 
 class WXDLLIMPEXP_BASE wxDir
 {

@@ -18,8 +18,8 @@
 #define FSCALE  (1<<FSHIFT)
 
 #endif /* ndef FSCALE */
-#define CPUSTATES 4
-#define DK_NDRIVE 4
+#define RSTAT_CPUSTATES 4
+#define RSTAT_DK_NDRIVE 4
 
 struct rstat_timeval {
 	u_int tv_sec;
@@ -36,8 +36,8 @@ bool_t xdr_rstat_timeval();
 
 
 struct statstime {
-	int cp_time[CPUSTATES];
-	int dk_xfer[DK_NDRIVE];
+	int cp_time[RSTAT_CPUSTATES];
+	int dk_xfer[RSTAT_DK_NDRIVE];
 	u_int v_pgpgin;
 	u_int v_pgpgout;
 	u_int v_pswpin;
@@ -64,8 +64,8 @@ bool_t xdr_statstime();
 
 
 struct statsswtch {
-	int cp_time[CPUSTATES];
-	int dk_xfer[DK_NDRIVE];
+	int cp_time[RSTAT_CPUSTATES];
+	int dk_xfer[RSTAT_DK_NDRIVE];
 	u_int v_pgpgin;
 	u_int v_pgpgout;
 	u_int v_pswpin;
@@ -91,8 +91,8 @@ bool_t xdr_statsswtch();
 
 
 struct stats {
-	int cp_time[CPUSTATES];
-	int dk_xfer[DK_NDRIVE];
+	int cp_time[RSTAT_CPUSTATES];
+	int dk_xfer[RSTAT_DK_NDRIVE];
 	u_int v_pgpgin;
 	u_int v_pgpgout;
 	u_int v_pswpin;
@@ -112,6 +112,10 @@ extern  bool_t xdr_stats(XDR *, stats*);
 #else /* Old Style C */
 bool_t xdr_stats();
 #endif /* Old Style C */
+
+
+enum clnt_stat rstat(char *, struct statstime *);
+int havedisk(char *);
 
 
 #define RSTATPROG ((rpc_uint)100001)

@@ -132,7 +132,7 @@ module WEBrick
         end
       end
 
-      # Determin the message length (RFC2616 -- 4.4 Message Length)
+      # Determine the message length (RFC2616 -- 4.4 Message Length)
       if @status == 304 || @status == 204 || HTTPStatus::info?(@status)
         @header.delete('content-length')
         @body = ""
@@ -209,7 +209,7 @@ module WEBrick
         @keep_alive = false
         self.status = HTTPStatus::RC_INTERNAL_SERVER_ERROR
       end
-      @header['content-type'] = "text/html"
+      @header['content-type'] = "text/html; charset=utf-8"
 
       if respond_to?(:create_error_page)
         create_error_page()

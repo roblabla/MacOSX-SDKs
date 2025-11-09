@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from composite.xml by c-client.xsl using XSLT.
+ * This file generated automatically from composite.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,7 +14,13 @@
 
 #include "xcb.h"
 #include "xproto.h"
+#include "render.h"
+#include "shape.h"
 #include "xfixes.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_COMPOSITE_MAJOR_VERSION 0
 #define XCB_COMPOSITE_MINOR_VERSION 3
@@ -257,6 +263,8 @@ xcb_composite_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_composite_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -653,6 +661,8 @@ xcb_composite_get_overlay_window_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_composite_get_overlay_window_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -720,6 +730,10 @@ xcb_void_cookie_t
 xcb_composite_release_overlay_window (xcb_connection_t *c  /**< */,
                                       xcb_window_t      window  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

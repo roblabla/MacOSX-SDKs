@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,7 +8,7 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -357,10 +357,28 @@ extern NSString * const NSHTTPCookiePort;
     @method isSecure
     @abstract Returns whether the receiver should be sent only over
     secure channels
+    @discussion Cookies may be marked secure by a server (or by a javascript).
+    Cookies marked as such must only be sent via an encrypted connection to 
+    trusted servers (i.e. via SSL or TLS), and should not be delievered to any
+    javascript applications to prevent cross-site scripting vulnerabilities.
     @result YES if this cookie should be sent only over secure channels,
     NO otherwise.
 */
 - (BOOL)isSecure;
+
+/*!
+    @method isHTTPOnly
+    @abstract Returns whether the receiver should only be sent to HTTP servers
+    per RFC 2965
+    @discussion Cookies may be marked as HTTPOnly by a server (or by a javascript).
+    Cookies marked as such must only be sent via HTTP Headers in HTTP Requests
+    for URL's that match both the path and domain of the respective Cookies.
+    Specifically these cookies should not be delivered to any javascript 
+    applications to prevent cross-site scripting vulnerabilities.
+    @result YES if this cookie should only be sent via HTTP headers,
+    NO otherwise.
+*/
+- (BOOL)isHTTPOnly;
 
 /*!
     @method comment

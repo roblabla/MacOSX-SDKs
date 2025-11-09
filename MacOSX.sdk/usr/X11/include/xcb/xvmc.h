@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xvmc.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xvmc.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,7 +13,13 @@
 #define __XVMC_H
 
 #include "xcb.h"
+#include "xproto.h"
+#include "shm.h"
 #include "xv.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XVMC_MAJOR_VERSION 1
 #define XCB_XVMC_MINOR_VERSION 1
@@ -551,6 +557,8 @@ xcb_xvmc_query_version_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -668,6 +676,8 @@ xcb_xvmc_list_surface_types_surfaces_iterator (const xcb_xvmc_list_surface_types
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_list_surface_types_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -805,6 +815,8 @@ xcb_xvmc_create_context_priv_data_end (const xcb_xvmc_create_context_reply_t *R 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_create_context_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -975,6 +987,8 @@ xcb_xvmc_create_surface_priv_data_end (const xcb_xvmc_create_surface_reply_t *R 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_create_surface_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1157,6 +1171,8 @@ xcb_xvmc_create_subpicture_priv_data_end (const xcb_xvmc_create_subpicture_reply
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_create_subpicture_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1327,6 +1343,8 @@ xcb_xvmc_list_subpicture_types_types_iterator (const xcb_xvmc_list_subpicture_ty
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xvmc_list_subpicture_types_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1345,6 +1363,10 @@ xcb_xvmc_list_subpicture_types_reply (xcb_connection_t                         *
                                       xcb_xvmc_list_subpicture_types_cookie_t   cookie  /**< */,
                                       xcb_generic_error_t                     **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

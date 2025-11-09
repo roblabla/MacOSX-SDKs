@@ -78,11 +78,11 @@ struct pstats {
 	struct uprof {			/* profile arguments */
 		struct uprof *pr_next;  /* multiple prof buffers allowed */
 		caddr_t	pr_base;	/* buffer base */
-		u_long	pr_size;	/* buffer size */
-		u_long	pr_off;		/* pc offset */
-		u_long	pr_scale;	/* pc scaling */
-		u_long	pr_addr;	/* temp storage for addr until AST */
-		u_long	pr_ticks;	/* temp storage for ticks until AST */
+		u_int32_t	pr_size;	/* buffer size */
+		u_int32_t	pr_off;		/* pc offset */
+		u_int32_t	pr_scale;	/* pc scaling */
+		u_int32_t	pr_addr;	/* temp storage for addr until AST */
+		u_int32_t	pr_ticks;	/* temp storage for ticks until AST */
 	} p_prof;
 #define	pstat_endzero	p_start
 

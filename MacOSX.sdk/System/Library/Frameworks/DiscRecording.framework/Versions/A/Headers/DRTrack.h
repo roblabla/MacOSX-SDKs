@@ -55,7 +55,7 @@
 	</ul>
 	
 	The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) 
-	specification for CD/DVD devices. It's up to you to understand the possble values
+	specification for CD/DVD devices. It's up to you to understand the possible values
 	and meanings of each.
 	
 	All other keys contained in the properties dictionary are optional and can be omitted.
@@ -111,7 +111,7 @@
 	</ul>
 		
 	The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) 
-	specification for CD/DVD devices. It's up to you to understand the possble values
+	specification for CD/DVD devices. It's up to you to understand the possible values
 	and meanings of each. 
 	
 	All other keys contained in the properties dictionary are optional and can be omitted.

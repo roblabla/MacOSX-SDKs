@@ -40,6 +40,7 @@
 #endif
 
 #ifdef HAVE_NCURSES_H
+#define NCURSES_OPAQUE 0
 #include <ncurses.h>
 #else
 #include <curses.h>

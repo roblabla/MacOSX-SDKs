@@ -1,9 +1,10 @@
 /*
 	File:		QTCaptureLayer.h
  
-	Copyright:	(c)2007 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
  
 */
+
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
 
@@ -12,11 +13,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 @class QTCaptureSession;
+@class QTCaptureLayerPrivate;
 
 @interface QTCaptureLayer : CALayer								// QTCaptureLayer is a layer that renders a capture session within a layer hierarchy
 {
 @private
-	struct QTCaptureLayerPrivate *	_captureLayerPriv;
+	QTCaptureLayerPrivate	*_captureLayerPriv;
 }
 
 + (id)layerWithSession:(QTCaptureSession *)session;

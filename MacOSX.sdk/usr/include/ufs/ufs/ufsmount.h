@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -64,7 +64,6 @@
 #define _UFS_UFSMOUNT_H_
 
 #include <sys/appleapiopts.h>
-
 #include <sys/quota.h>
 
 #ifdef __APPLE_API_UNSTABLE
@@ -84,7 +83,7 @@ struct ufs_args {
 struct mfs_args {
 	char	*fspec;			/* name to export for statfs */
 	caddr_t	base;			/* base of file system in memory */
-	u_long	size;			/* size of file system */
+	uint32_t	size;			/* size of file system */
 };
 #endif /* MFS */
 #endif /* __APPLE_API_OBSOLETE */

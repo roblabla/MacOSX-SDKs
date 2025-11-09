@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_scandir.h,v 1.12.2.1.2.2 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_scandir.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_SCANDIR_H
 #define PHP_SCANDIR_H
@@ -42,13 +42,13 @@
 #ifdef HAVE_SCANDIR
 #define php_scandir		scandir
 #else
-int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector) (const struct dirent *entry), int (*compare) (const struct dirent **a, const struct dirent **b));
+PHPAPI int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector) (const struct dirent *entry), int (*compare) (const struct dirent **a, const struct dirent **b));
 #endif
 
 #ifdef HAVE_ALPHASORT
 #define php_alphasort	alphasort
 #else
-int php_alphasort(const struct dirent **a, const struct dirent **b);
+PHPAPI int php_alphasort(const struct dirent **a, const struct dirent **b);
 #endif
 
 #endif /* PHP_SCANDIR_H */

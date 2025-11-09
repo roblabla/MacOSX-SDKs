@@ -7,7 +7,7 @@
 #import <QuartzCore/CATransform3D.h>
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSDictionary, NSEnumerator, CAAnimation;
+@class NSArray, NSDictionary, NSEnumerator, CAAnimation, CALayerArray;
 @protocol CAAction;
 
 /* Bit definitions for `autoresizingMask' property. */
@@ -42,12 +42,12 @@ enum CAEdgeAntialiasingMask
     int32_t refcount;
     uint32_t flags;
     uintptr_t parent;
-    CFMutableArrayRef sublayers;
+    CALayerArray *sublayers;
     CALayer *mask;
     struct _CALayerState *state;
     struct _CALayerState *previous_state;
     struct _CALayerAnimation *animations;
-    struct _CALayerTransaction *slots[3];
+    uintptr_t slots[3];
 #if defined (__LP64__) && __LP64__
     uint32_t reserved;
 #endif
@@ -88,9 +88,10 @@ enum CAEdgeAntialiasingMask
 - (id)presentationLayer;
 
 /* When called on the result of the -presentationLayer method, returns
- * the underlying layer with the current model values. The result of
- * calling this method after the transaction that produced the
- * presentation layer has completed is undefined. */
+ * the underlying layer with the current model values. When called on a
+ * non-presentation layer, returns the receiver. The result of calling
+ * this method after the transaction that produced the presentation
+ * layer has completed is undefined. */
 
 - (id)modelLayer;
 
@@ -120,6 +121,13 @@ enum CAEdgeAntialiasingMask
 
 + (id)defaultValueForKey:(NSString *)key;
 
+/* Method for subclasses to override. Returning true for a given
+ * property causes the layer's contents to be redrawn when the property
+ * is changed (including when changed by an animation attached to the
+ * layer). The default implementation returns false. */
+
++ (BOOL)needsDisplayForKey:(NSString *)key;
+
 /* Called by the object's implementation of -encodeWithCoder:, returns
  * false if the named property should not be archived. The base
  * implementation returns true. Subclasses should call super for
@@ -144,11 +152,16 @@ enum CAEdgeAntialiasingMask
 @property CGFloat zPosition;
 
 /* Defines the anchor point of the layer's bounds rect, as a point in
- * the unit coordinate space - '(0, 0)' is the bottom left corner of
+ * normalized layer coordinates - '(0, 0)' is the bottom left corner of
  * the bounds rect, '(1, 1)' is the top right corner. Defaults to
  * '(0.5, 0.5)', i.e. the center of the bounds rect. Animatable. */
 
 @property CGPoint anchorPoint;
+
+/* The Z component of the layer's anchor point (i.e. reference point for
+ * position and transform). Defaults to zero. Animatable. */
+
+@property CGFloat anchorPointZ;
 
 /* A transform applied to the layer relative to the anchor point of its
  * bounds rect. Defaults to the identity transform. Animatable. */
@@ -177,6 +190,27 @@ enum CAEdgeAntialiasingMask
  * Defaults to true. Animatable. */
 
 @property(getter=isDoubleSided) BOOL doubleSided;
+
+/* Whether or not the geometry of the layer (and its sublayers) is
+ * flipped vertically. Defaults to false. Note that even when geometry
+ * is flipped, image orientation remains the same (i.e. a CGImageRef
+ * stored in the `contents' property will display the same with both
+ * flipped=false and flipped=true, assuming no transform on the layer.)
+ * Added in Mac OS X 10.6. */
+
+@property(getter=isGeometryFlipped) BOOL geometryFlipped;
+
+/* Returns true if the contents of the contents property of the layer
+ * will be implicitly flipped when rendered in relation to the local
+ * coordinate space (e.g. if there are an odd number of layers with
+ * flippedGeometry=YES from the receiver up to and including the
+ * implicit container of the root layer.) Subclasses should not attempt
+ * to redefine this method. When this method returns true the
+ * CGContextRef object passed to -drawInContext: by the default
+ * -display method will have been y- flipped (and rectangles passed to
+ * -setNeedsDisplayInRect: will be similarly flipped.) */
+
+- (BOOL)contentsAreFlipped;
 
 /* The receiver's superlayer object. Implicitly changed to match the
  * hierarchy described by the `sublayers' properties. */
@@ -258,8 +292,10 @@ enum CAEdgeAntialiasingMask
 /** Hit testing methods. **/
 
 /* Returns the farthest descendant of the layer containing point 'p'.
- * Siblings are searched in top-to-bottom order. 'p' is in the
- * coordinate system of the receiver's superview. */
+ * Siblings are searched in top-to-bottom order. 'p' is defined to be
+ * in the coordinate space of the receiver's nearest ancestor that
+ * isn't a CATransformLayer (transform layers don't have a 2D
+ * coordinate space in which the point could be specified.) */
 
 - (CALayer *)hitTest:(CGPoint)p;
 
@@ -270,16 +306,18 @@ enum CAEdgeAntialiasingMask
 /** Layer content properties and methods. **/
 
 /* An object providing the contents of the layer, typically a CGImageRef,
- * but may be something else. Default value is nil. Animatable. */
+ * but may be something else. (For example, NSImage objects are
+ * supported on Mac OS X 10.6 and later.) Default value is nil.
+ * Animatable. */
 
 @property(retain) id contents;
 
-/* A rectangle in the unit coordinate space defining the subrectangle
- * of the `contents' property that will be drawn into the layer. If
- * pixels outside the unit rectangles are requested, the edge pixels of
- * the contents image will be extended outwards. If an empty rectangle
- * is provided, the results are undefined. Defaults to the unit
- * rectangle [0 0 1 1]. Animatable. */
+/* A rectangle in normalized image coordinates defining the
+ * subrectangle of the `contents' property that will be drawn into the
+ * layer. If pixels outside the unit rectangles are requested, the edge
+ * pixels of the contents image will be extended outwards. If an empty
+ * rectangle is provided, the results are undefined. Defaults to the
+ * unit rectangle [0 0 1 1]. Animatable. */
 
 @property CGRect contentsRect;
 
@@ -291,6 +329,27 @@ enum CAEdgeAntialiasingMask
 
 @property(copy) NSString *contentsGravity;
 
+/* A rectangle in normalized image coordinates defining the scaled
+ * center part of the `contents' image.
+ *
+ * When an image is resized due to its `contentsGravity' property its
+ * center part implicitly defines the 3x3 grid that controls how the
+ * image is scaled to its drawn size. The center part is stretched in
+ * both dimensions; the top and bottom parts are only stretched
+ * horizontally; the left and right parts are only stretched
+ * vertically; the four corner parts are not stretched at all. (This is
+ * often called "9-slice scaling".)
+ *
+ * The rectangle is interpreted after the effects of the `contentsRect'
+ * property have been applied. It defaults to the unit rectangle [0 0 1
+ * 1] meaning that the entire image is scaled. As a special case, if
+ * the width or height is zero, it is implicitly adjusted to the width
+ * or height of a single source pixel centered at that position. If the
+ * rectangle extends outside the [0 0 1 1] unit rectangle the result is
+ * undefined. Animatable. */
+
+@property CGRect contentsCenter;
+
 /* The filter types to use when rendering the `contents' property of
  * the layer. The minification filter is used when to reduce the size
  * of image data, the magnification filter to increase the size of
@@ -298,6 +357,11 @@ enum CAEdgeAntialiasingMask
  * Both properties default to `linear'. */
 
 @property(copy) NSString *minificationFilter, *magnificationFilter;
+
+/* The bias factor added when determining which levels of detail to use
+ * when minifying using trilinear filtering. The default value is 0. */
+
+@property float minificationFilterBias;
 
 /* A hint marking that the layer contents provided by -drawInContext:
  * is completely opaque. Defaults to false. Note that this does not affect
@@ -317,6 +381,14 @@ enum CAEdgeAntialiasingMask
 
 - (void)setNeedsDisplay;
 - (void)setNeedsDisplayInRect:(CGRect)r;
+
+/* Returns true when the layer is marked as needing redrawing. */
+
+- (BOOL)needsDisplay;
+
+/* Call -display if receiver is marked as needing redrawing. */
+
+- (void)displayIfNeeded;
 
 /* When true -setNeedsDisplay will automatically be called when the
  * bounds of the layer changes. Default value is false. */
@@ -379,7 +451,7 @@ enum CAEdgeAntialiasingMask
 
 @property float opacity;
 
-/* A CoreImage filter used to composite the layer with its (possibly
+/* A filter object used to composite the layer with its (possibly
  * filtered) background. Default value is nil, which implies source-
  * over compositing. Animatable.
  *
@@ -392,13 +464,13 @@ enum CAEdgeAntialiasingMask
 
 @property(retain) id compositingFilter;
 
-/* An array of CoreImage filters that will be applied to the contents of
- * the layer and its sublayers. Defaults to nil. Animatable. */
+/* An array of filters that will be applied to the contents of the
+ * layer and its sublayers. Defaults to nil. Animatable. */
 
 @property(copy) NSArray *filters;
 
-/* An array of CoreImage filters that are applied to the background of the
- * layer. The root layer ignores this property. Animatable. */
+/* An array of filters that are applied to the background of the layer.
+ * The root layer ignores this property. Animatable. */
 
 @property(copy) NSArray *backgroundFilters;
 
@@ -457,6 +529,10 @@ enum CAEdgeAntialiasingMask
  * method. */
 
 - (void)setNeedsLayout;
+
+/* Returns true when the receiver is marked as needing layout. */
+
+- (BOOL)needsLayout;
 
 /* Traverse upwards from the layer while the superlayer requires layout.
  * Then layout the entire tree beneath that ancestor. */
@@ -565,6 +641,12 @@ enum CAEdgeAntialiasingMask
 
 - (void)removeAnimationForKey:(NSString *)key;
 
+/* Returns an array containing the keys of all animations currently
+ * attached to the receiver. The order of the array matches the order
+ * in which animations will be applied. */
+
+- (NSArray *)animationKeys;
+
 /* Returns the animation added to the layer with identifier 'key', or nil
  * if no such animation exists. Attempting to modify any properties of
  * the returned object will result in undefined behavior. */
@@ -648,6 +730,12 @@ enum CAEdgeAntialiasingMask
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
 
+/* Called by the default -layoutSublayers implementation before the layout
+ * manager is checked. Note that if the delegate method is invoked, the
+ * layout manager will be ignored. */
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer;
+
 /* If defined, called by the default implementation of the
  * -actionForKey: method. Should return an object implementating the
  * CAAction protocol. May return 'nil' if the delegate doesn't specify
@@ -661,29 +749,54 @@ enum CAEdgeAntialiasingMask
 
 /** Layer `contentsGravity' values. **/
 
-CA_EXTERN NSString * const kCAGravityCenter AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityTop AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityBottom AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityRight AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityTopLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityTopRight AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityBottomLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityBottomRight AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityResize AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityResizeAspect AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAGravityResizeAspectFill AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAGravityCenter
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityTop
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityBottom
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityLeft
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityRight
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityTopLeft
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityTopRight
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityBottomLeft
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityBottomRight
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityResize
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityResizeAspect
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAGravityResizeAspectFill
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 /** Contents filter names. **/
 
-CA_EXTERN NSString * const kCAFilterLinear AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAFilterNearest AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAFilterNearest
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAFilterLinear
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+
+/* Trilinear minification filter. Enables mipmap generation. Some
+ * renderers may ignore this, or impose additional restrictions, such
+ * as source images requiring power-of-two dimensions. */
+
+CA_EXTERN NSString * const kCAFilterTrilinear
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+
 
 /** Layer event names. **/
 
-CA_EXTERN NSString * const kCAOnOrderIn AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAOnOrderOut AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAOnOrderIn
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAOnOrderOut
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 /** The animation key used for transitions. **/
 
-CA_EXTERN NSString * const kCATransition AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCATransition
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_ptr_stack.h,v 1.22.2.2.2.2 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_ptr_stack.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_PTR_STACK_H
 #define ZEND_PTR_STACK_H
@@ -26,6 +26,7 @@ typedef struct _zend_ptr_stack {
 	int top, max;
 	void **elements;
 	void **top_element;
+	zend_bool persistent;
 } zend_ptr_stack;
 
 
@@ -33,6 +34,7 @@ typedef struct _zend_ptr_stack {
 
 BEGIN_EXTERN_C()
 ZEND_API void zend_ptr_stack_init(zend_ptr_stack *stack);
+ZEND_API void zend_ptr_stack_init_ex(zend_ptr_stack *stack, zend_bool persistent);
 ZEND_API void zend_ptr_stack_n_push(zend_ptr_stack *stack, int count, ...);
 ZEND_API void zend_ptr_stack_n_pop(zend_ptr_stack *stack, int count, ...);
 ZEND_API void zend_ptr_stack_destroy(zend_ptr_stack *stack);
@@ -46,7 +48,7 @@ END_EXTERN_C()
 		/* we need to allocate more memory */				\
 		stack->max *= 2;									\
 		stack->max += count;								\
-		stack->elements = (void **) erealloc(stack->elements, (sizeof(void *) * (stack->max)));	\
+		stack->elements = (void **) perealloc(stack->elements, (sizeof(void *) * (stack->max)), stack->persistent);	\
 		stack->top_element = stack->elements+stack->top;	\
 	}
 

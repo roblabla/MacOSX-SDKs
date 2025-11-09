@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-June-1998
-// RCS-ID:      $Id: _combobox.i,v 1.24.4.1 2007/01/25 23:05:55 RD Exp $
+// RCS-ID:      $Id: _combobox.i 44314 2007-01-25 23:05:55Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////

@@ -3,10 +3,7 @@
 
      Contains:   API for translating between audio data formats.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,7 +41,7 @@
 //	Includes
 //=============================================================================
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
 #else
@@ -87,7 +84,7 @@ typedef UInt32							AudioConverterPropertyID;
 					AudioConverterConvertBuffer
 	@constant	kAudioConverterPropertyMinimumOutputBufferSize
 					a UInt32 that indicates the size in bytes of the smallest buffer of output
-					data that can be supplied to AudioConverterFillBuffer or as the output to
+					data that can be supplied to AudioConverterFillComplexBuffer or as the output to
 					AudioConverterConvertBuffer
 	@constant	kAudioConverterPropertyMaximumInputBufferSize
 					DEPRECATED. The AudioConverter input proc may be passed any number of packets of data.
@@ -202,11 +199,12 @@ typedef UInt32							AudioConverterPropertyID;
 	@constant	kAudioConverterPropertySettings
 					Returns the a CFArray of property settings for converters.
 	@constant	kAudioConverterPropertyBitDepthHint
-					A UInt32 of the source bit depth to preserve. This is a hint to some
+					An SInt32 of the source bit depth to preserve. This is a hint to some
 					encoders like lossless about how many bits to preserve in the input. The
 					converter usually tries to preserve as many as possible, but a lossless
 					encoder will do poorly if more bits are supplied than are desired in the
-					output.
+					output. The bit depth is expressed as a negative number if the source was floating point,
+					e.g. -32 for float, -64 for double.
 	@constant	kAudioConverterPropertyFormatList
 					An array of AudioFormatListItem structs describing all the data formats produced by the
 					encoder end of the AudioConverter. If the ioPropertyDataSize parameter indicates that
@@ -284,8 +282,8 @@ enum
 */
 enum {
 	kAudioConverterSampleRateConverterComplexity_Linear				= 'line',	// linear interpolation
-	kAudioConverterSampleRateConverterComplexity_Normal				= 'norm',	// the default
-	kAudioConverterSampleRateConverterComplexity_Mastering			= 'bats'	// higher quality, more expensive
+	kAudioConverterSampleRateConverterComplexity_Normal				= 'norm',	// normal quality range, the default
+	kAudioConverterSampleRateConverterComplexity_Mastering			= 'bats',	// higher quality range, more expensive
 };
 
 
@@ -333,16 +331,16 @@ enum
 		(silent) trailing frames will be synthesized for the client.
 			
 	@discussion
-		When using AudioConverterFillBuffer() (either a single call or a series of calls), some
+		When using AudioConverterFillComplexBuffer() (either a single call or a series of calls), some
 		conversions, particularly involving sample-rate conversion, ideally require a certain
 		number of input frames previous to the normal start input frame and beyond the end of
 		the last expected input frame in order to yield high-quality results.
 		
 		These are expressed in the leadingFrames and trailingFrames members of the structure.
 		
-		The very first call to AudioConverterFillBuffer(), or first call after
+		The very first call to AudioConverterFillComplexBuffer(), or first call after
 		AudioConverterReset(), will request additional input frames beyond those normally
-		expected in the input proc callback to fulfill this first AudioConverterFillBuffer()
+		expected in the input proc callback to fulfill this first AudioConverterFillComplexBuffer()
 		request. The number of additional frames requested, depending on the prime method, will
 		be approximately:
 
@@ -436,7 +434,7 @@ enum
 extern OSStatus
 AudioConverterNew(		const AudioStreamBasicDescription*	inSourceFormat,
 						const AudioStreamBasicDescription*	inDestinationFormat,
-						AudioConverterRef*					outAudioConverter)	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+						AudioConverterRef*					outAudioConverter)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 
 //-----------------------------------------------------------------------------
@@ -466,7 +464,7 @@ AudioConverterNewSpecific(	const AudioStreamBasicDescription*	inSourceFormat,
 							UInt32								inNumberClassDescriptions,
 							AudioClassDescription*				inClassDescriptions,
 							AudioConverterRef*					outAudioConverter)
-																				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+																				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -478,7 +476,7 @@ AudioConverterNewSpecific(	const AudioStreamBasicDescription*	inSourceFormat,
 	@result		An OSStatus result code.
 */
 extern OSStatus
-AudioConverterDispose(	AudioConverterRef	inAudioConverter)					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+AudioConverterDispose(	AudioConverterRef	inAudioConverter)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -496,7 +494,7 @@ AudioConverterDispose(	AudioConverterRef	inAudioConverter)					AVAILABLE_MAC_OS_
 */
 
 extern OSStatus
-AudioConverterReset(	AudioConverterRef	inAudioConverter)					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+AudioConverterReset(	AudioConverterRef	inAudioConverter)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -517,7 +515,7 @@ extern OSStatus
 AudioConverterGetPropertyInfo(	AudioConverterRef			inAudioConverter,
 								AudioConverterPropertyID	inPropertyID,
 								UInt32*						outSize,
-								Boolean*					outWritable)		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								Boolean*					outWritable)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -539,7 +537,7 @@ extern OSStatus
 AudioConverterGetProperty(	AudioConverterRef			inAudioConverter,
 							AudioConverterPropertyID	inPropertyID,
 							UInt32*						ioPropertyDataSize,
-							void*						outPropertyData)		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+							void*						outPropertyData)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -560,7 +558,7 @@ extern OSStatus
 AudioConverterSetProperty(	AudioConverterRef			inAudioConverter,
 							AudioConverterPropertyID	inPropertyID,
 							UInt32						inPropertyDataSize,
-							const void*					inPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+							const void*					inPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 
 //-----------------------------------------------------------------------------
@@ -583,6 +581,9 @@ AudioConverterSetProperty(	AudioConverterRef			inAudioConverter,
 	@result		An OSStatus result code.
 	
 	@discussion
+				<b>NOTE:</b> This API is now deprecated, 
+				use AudioConverterFillComplexBuffer instead.
+
 				This callback function supplies input to AudioConverterFillBuffer.
 				
 				The AudioConverter requests a minimum amount of data (*ioDataSize). The callback
@@ -623,12 +624,13 @@ typedef OSStatus
 	@result		An OSStatus result code.
 	
 	@discussion
-				Produces a buffer of output data from an AudioConverter. The supplied input
-				callback function is called whenever necessary.
-				
 				<b>NOTE:</b> This API is now deprecated, 
 				use AudioConverterFillComplexBuffer instead.
+
+				Produces a buffer of output data from an AudioConverter. The supplied input
+				callback function is called whenever necessary.				
 */
+#if !TARGET_OS_IPHONE
 extern OSStatus
 AudioConverterFillBuffer(	AudioConverterRef				inAudioConverter,
 							AudioConverterInputDataProc		inInputDataProc,
@@ -636,7 +638,8 @@ AudioConverterFillBuffer(	AudioConverterRef				inAudioConverter,
 							UInt32*							ioOutputDataSize,
 							void*							outOutputData)
 							
-						AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+								__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+#endif // !TARGET_OS_IPHONE
 
 //-----------------------------------------------------------------------------
 /*!
@@ -661,7 +664,7 @@ AudioConverterFillBuffer(	AudioConverterRef				inAudioConverter,
 				<b>WARNING:</b> this function will fail for any conversion where there is a
 				variable relationship between the input and output data buffer sizes. This
 				includes sample rate conversions and most compressed formats. In these cases,
-				use AudioConverterFillBuffer. Generally this function is only appropriate for
+				use AudioConverterFillComplexBuffer. Generally this function is only appropriate for
 				PCM-to-PCM conversions where there is no sample rate conversion.
 */
 extern OSStatus
@@ -669,7 +672,7 @@ AudioConverterConvertBuffer(	AudioConverterRef				inAudioConverter,
 								UInt32							inInputDataSize,
 								const void*						inInputData,
 								UInt32*							ioOutputDataSize,
-								void*							outOutputData)	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								void*							outOutputData)	__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
 /*!
@@ -690,14 +693,14 @@ AudioConverterConvertBuffer(	AudioConverterRef				inAudioConverter,
 					If non-null, on exit, the callback is expected to fill this in with
 					an AudioStreamPacketDescription for each packet of input data being provided.
 	@param		inUserData
-					The inInputDataProcUserData parameter passed to AudioConverterFillBuffer().
+					The inInputDataProcUserData parameter passed to AudioConverterFillComplexBuffer().
 	@result		An OSStatus result code.
 	
 	@discussion
 				This callback function supplies input to AudioConverterFillComplexBuffer.
 				
 				The AudioConverter requests a minimum number of packets (*ioNumberDataPackets).
-				The callback may return one or more packets. If this is less than than the minimum,
+				The callback may return one or more packets. If this is less than the minimum,
 				the callback will simply be called again in the near future.
 
 				The callback manipulates the members of ioData to point to one or more buffers
@@ -755,7 +758,7 @@ AudioConverterFillComplexBuffer(	AudioConverterRef					inAudioConverter,
 									UInt32*								ioOutputDataPacketSize,
 									AudioBufferList*					outOutputData,
 									AudioStreamPacketDescription*		outPacketDescription)
-																				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+																				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 #if defined(__cplusplus)
 }

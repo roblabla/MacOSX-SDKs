@@ -317,92 +317,6 @@ enum
     kICAFlagReadAccess                    = 1L << 1
 };
 
-//---------------------------------------------------------------------------------------------------- Image Capture event types
-/*!
-    @enum Image Capture event types
-    @discussion
-        Image Capture event types (Refer to section 12.4 of PTP spec for PTP-specific events).
-        These are deprecated in 10.5.
-    @constant kICAEventCancelTransaction
-        Cancel transaction.
-    @constant kICAEventObjectAdded
-        A new object has been added.
-    @constant kICAEventObjectRemoved
-        An object has been removed.
-    @constant kICAEventStoreAdded
-        A new storage has been added.
-    @constant kICAEventStoreRemoved
-        A storage has been removed.
-    @constant kICAEventDeviceAdded
-        A new device has been added.
-    @constant kICAEventDeviceRemoved
-        A device has been removed.
-    @constant kICAEventDevicePropChanged
-        Device property has changed.
-    @constant kICAEventObjectInfoChanged
-        Object information has changed.
-    @constant kICAEventDeviceInfoChanged
-        Device information has changed.
-    @constant kICAEventRequestObjectTransfer
-        Requesting transfer of an object.
-    @constant kICAEventStoreFull
-        Store is full.
-    @constant kICAEventDeviceReset
-        Device has been reset.
-    @constant kICAEventStorageInfoChanged
-        Storage information has changed.
-    @constant kICAEventCaptureComplete
-        Image capture has been completed.
-    @constant kICAEventUnreportedStatus
-        Unreported status.
-    @constant kExtendedNotificationPB
-        Indicates the event notification uses extended notification parameter block.
-*/
-enum
-{
-    kICAEventCancelTransaction            = 'ecnt',
-    kICAEventObjectAdded                  = 'eoba',
-    kICAEventObjectRemoved                = 'eobr',
-    kICAEventStoreAdded                   = 'esta',
-    kICAEventStoreRemoved                 = 'estr',
-    kICAEventDeviceAdded                  = 'edea',
-    kICAEventDeviceRemoved                = 'eder',
-    kICAEventDevicePropChanged            = 'edpc',
-    kICAEventObjectInfoChanged            = 'eoic',
-    kICAEventDeviceInfoChanged            = 'edic',
-    kICAEventRequestObjectTransfer        = 'erot',
-    kICAEventStoreFull                    = 'estf',
-    kICAEventDeviceReset                  = 'edvr',
-    kICAEventStorageInfoChanged           = 'esic',
-    kICAEventCaptureComplete              = 'ecpc',
-    kICAEventUnreportedStatus             = 'eurs',
-    kICAExtendedNotificationPB            = 'extd',
-    kExtendedNotificationPB               = 'extd'
-};
-
-//-------------------------------------------------------------------------------------------------- Image Capture event classes
-/*!
-    @enum Event class returned in extended event notifications
-    @discussion
-        Event class returned in extended event notifications.
-        Deprecated in 10.5
-    @constant kICAEventClassPTPStandard
-        PTP standard event.
-    @constant kICAEventClassPTPVendor
-        PTP vendor-specific event.
-    @constant kEventClassPTPStandard
-        PTP standard event. Deprecated in 10.5. Use kICAEventClassPTPStandard instead.
-    @constant kEventClassPTPVendor
-        PTP vendor-specific event. Deprecated in 10.5. Use kICAEventClassPTPVendor instead.
-*/
-enum
-{
-    kICAEventClassPTPStandard             = 'PTPs',
-    kICAEventClassPTPVendor               = 'PTPv',
-    kEventClassPTPStandard                = 'PTPs',
-    kEventClassPTPVendor                  = 'PTPv'
-};
-
 //----------------------------------------------------------------------------------------------------------------- Button types
 /*!
     @enum Button types
@@ -560,7 +474,6 @@ extern const CFStringRef kICASCSITransportType                      AVAILABLE_MA
 extern const CFStringRef kICATWAINTransportType                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Keys used for paramDictionary in ICALoadDeviceModulePB*/
-extern const CFStringRef kICAManualConnectDeviceRefKey              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 extern const CFStringRef kICADeviceBrowserDeviceRefKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern const CFStringRef kICADeviceModulePathKey                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 extern const CFStringRef kICADeviceIconPathKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -574,6 +487,16 @@ extern const CFStringRef kICAIPPortKey                              AVAILABLE_MA
 extern const CFStringRef kICAIPNameKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 extern const CFStringRef kICAIPGUIDKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 extern const CFStringRef kICATWAINDSPathKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+    @const
+        kICAUserAssignedDeviceNameKey
+    @abstract 
+        This key may be present in the property dictionary of a device if the device has a user-assigned name.
+    @discussion
+        Value is of type CFStringRef.
+*/
+extern const CFStringRef  kICAUserAssignedDeviceNameKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //-------------------------------------------------------------------------------------------------------------------- ICAHeader
 /*!
@@ -613,6 +536,18 @@ typedef UInt32        ICAEventDataCookie;
 #pragma mark General APIs
 //--------------------------------------------------------------------------------------------------------------- ICAImportImage
 /*!
+    @struct ICAObjectInfo
+    @field objectType
+        An object type, e.g., kICAFile.
+    @field objectSubtype
+        An object subtype, e.g., kICAFileImage.
+*/
+typedef struct ICAObjectInfo {
+    OSType              objectType;
+    OSType              objectSubtype;
+} ICAObjectInfo;
+
+/*!
     @enum ImportImage flags.
     @discussion
         Flag values that can be used in ICAImportImagePB parameter block.
@@ -640,7 +575,7 @@ enum
     @field filterProc
         Specify a filter proc to that will be called for each file before it is displayed in the user interface. <--
     @field importedImages
-        Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. -->
+        Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. The caller should provide a pointer to a CFArrayRef object initialized to NULL. The caller is responsible for released the array returned by this function. -->
 */
 typedef struct ICAImportImagePB {
     ICAHeader           header;
@@ -665,11 +600,13 @@ typedef struct ICAImportImagePB {
         void ImportImage()
         {
             OSErr             err;
+            CFArrayRef        imagesArray = NULL;
             ICAImportImagePB  pb = {};
 
             pb.deviceObject       = 0;
             pb.flags              = 0;
             pb.supportedFileTypes = (CFArrayRef)[NSArray arrayWithObjects: @"tif", @"tiff", @"jpg", NULL];
+            pb.importedImages     = &imagesArray;
             
             err = ICAImportImage(&pb, NULL);
 
@@ -721,8 +658,10 @@ ICAShowDeviceBrowser(
 )                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //---------------------------------------------------------------------------------------------- ICARegisterForEventNotification
-/* Function prototype for an Image Capture notification callback proc
-   This function will be called with a notificationDictionary that may
+// Function prototype for an Image Capture notification callback proc
+typedef CALLBACK_API_C( void , ICANotification )(CFStringRef notificationType, CFDictionaryRef notificationDictionary);
+
+/* The Image Capture notification callabck function will be called with a notificationDictionary that may
    contain one or more key-value pairs as defined below:
    
     Key                                 Value Type        Comments
@@ -750,71 +689,82 @@ ICAShowDeviceBrowser(
     kICANotificationImageStartRowKey      CFNumberRef     Starting row number of the image.
     kICANotificationImageNumberOfRowsKey  CFNumberRef     Number of rows of image data sent in this notification.
 */
-typedef CALLBACK_API_C( void , ICANotification )(CFStringRef notificationType, CFDictionaryRef notificationDictionary);
 
 // Possible values for kICANotificationTypeKey:
 
-extern const CFStringRef  kICANotificationTypeObjectAdded               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeObjectRemoved             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeObjectInfoChanged         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeObjectAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeObjectRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeObjectInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeStoreAdded                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreRemoved              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreFull                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreInfoChanged          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeStoreAdded                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeStoreRemoved                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeStoreFull                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeStoreInfoChanged                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeDeviceAdded               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceRemoved             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeDeviceInfoChanged         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDevicePropertyChanged     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceWasReset            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDevicePropertyChanged                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceWasReset                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceStatusInfo                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceStatusError                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeCaptureComplete           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeRequestObjectTransfer     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeTransactionCanceled       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeCaptureComplete                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeRequestObjectTransfer                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeTransactionCanceled                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeUnreportedStatus          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeProprietary               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeUnreportedStatus                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeProprietary                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationTypeDeviceConnectionProgress  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDownloadProgressStatus    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScanProgressStatus        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerSessionClosed      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerScanDone           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerPageDone           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerButtonPressed      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDeviceConnectionProgress                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeDownloadProgressStatus                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeScanProgressStatus                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeScannerSessionClosed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeScannerScanDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeScannerPageDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeScannerButtonPressed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+extern const CFStringRef  kICANotificationTypeScannerOverviewOverlayAvailable         AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Possible keys in the notification dictionary:
 
-extern const CFStringRef  kICAErrorKey                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICARefconKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICAErrorKey                                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICARefconKey                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationICAObjectKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDeviceICAObjectKey            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDeviceListICAObjectKey        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationClassKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeKey                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationRawEventKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataKey                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataSizeKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataCookieKey                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationICAObjectKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDeviceICAObjectKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDeviceListICAObjectKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationClassKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationTypeKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationRawEventKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDataKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDataSizeKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDataCookieKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationImageKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageWidthKey                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageHeightKey                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageBytesPerRowKey           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageStartRowKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageNumberOfRowsKey          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageDataKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageDataSizeKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataIsBigEndianKey            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageWidthKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageHeightKey                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageBytesPerRowKey                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageStartRowKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageNumberOfRowsKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageDataKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationImageDataSizeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationDataIsBigEndianKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-extern const CFStringRef  kICANotificationScannerDocumentNameKey        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationScannerButtonTypeKey          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationScannerDocumentNameKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationScannerButtonTypeKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 extern const CFStringRef  kICANotificationNumerOfImagesRemainingKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern const CFStringRef  kICANotificationPercentDownloadedKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+extern const CFStringRef  kICANotificationSubTypeKey                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationSubTypeWarmUpStarted                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationSubTypeWarmUpDone                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationVendorErrorCodeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef  kICANotificationSubTypePerformOverviewScan                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef  kICANotificationSubTypeDocumentLoaded                       AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef  kICANotificationSubTypeDocumentNotLoaded                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Possible values in the notification dictionary:
 // ...
@@ -1041,8 +991,6 @@ ICACopyObjectPropertyDictionary(
     @enum Thumbnail formats.
     @discussion
         Format alues that can be used in ICACopyObjectThumbnailPB parameter block.
-    @constant kICAThumbnailFormatICA
-        Use this constant to receive a thumbnail in ICAThumbnail structure.  Deprecated in 10.5.
     @constant kICAThumbnailFormatJPEG
         Use this constant to receive a thumbnail in JPEG format.
     @constant kICAThumbnailFormatTIFF
@@ -1052,7 +1000,6 @@ ICACopyObjectPropertyDictionary(
 */
 enum 
 {
-    kICAThumbnailFormatICA                = 'ica ',
     kICAThumbnailFormatJPEG               = 'jpeg',
     kICAThumbnailFormatTIFF               = 'tiff',
     kICAThumbnailFormatPNG                = 'png '
@@ -1206,23 +1153,21 @@ typedef struct ICAMessage {
         Get last button pressed on the device (scanner).
     @constant kICAMessageGetEventData
         Get data associated with an event.
-    @constant kMessageGetEventData
-        Get data associated with an event. This is deprecated in favor of kICAMessageGetEventData.
     @constant kICAMessageDeviceYield
         Yield device. Image Capture framework yields a device so that the sender of the message can directly communicate with the device.
 */
 enum
 {
-    kICAMessageConnect                    = 'open',
-    kICAMessageDisconnect                 = 'clos',	
-    kICAMessageReset                      = 'rese',	
-    kICAMessageCheckDevice                = 'chkd',
-    kICAMessageCameraReadClock            = 'rclk',
-    kICAMessageGetLastButtonPressed       = 'btn?',
-    kMessageGetEventData                  = 'mged',       // Deprecated in 10.5
-    kICAMessageGetEventData               = 'mged',
-    kICAMessageDeviceYield                = 'yiel',
-    kICAMessageCameraPassThrough          = 'pass'
+    kICAMessageConnect                          = 'open',
+    kICAMessageDisconnect                       = 'clos',	
+    kICAMessageReset                            = 'rese',	
+    kICAMessageCheckDevice                      = 'chkd',
+    kICAMessageCameraReadClock                  = 'rclk',
+    kICAMessageGetLastButtonPressed             = 'btn?',
+    kICAMessageGetEventData                     = 'mged',
+    kICAMessageDeviceYield                      = 'yiel',
+    kICAMessageCameraPassThrough                = 'pass',
+    kICAMessageScannerOverviewSelectionChanged  = 'area'
 };
 
 /*!
@@ -1842,846 +1787,6 @@ ICAScannerStart(
     ICAScannerStartPB*  pb,
     ICACompletion       completion
 )                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-#pragma mark -
-#pragma mark Deprecated APIs
-//----------------------------------------------------------------------------------------------------------------- ICAThumbnail
-/*!
-    @struct ICAThumbnail
-    @discussion
-        This type is deprecated. Use ICACopyObjectThumbnail call to receive thumbnail in JPG, TIFF or PNG format.
-    @field width
-        Thumbnail width in pixels.
-    @field height
-        Thumbnail height in pixels.
-    @field dataSize
-        Thumbnail size in bytes. This should be 3*height*width for thumbnails without alpha channel and should be 4*height*width for thumbnails with alpha channel.
-        The alpha channel is always stored at the end of the buffer. 
-    @field data
-        Thumbnail buffer of 8-bit RGB data (RGBRGBRGB...)
-*/
-typedef struct ICAThumbnail {
-    UInt32              width;
-    UInt32              height;
-    UInt32              dataSize;
-    UInt8               data[1];
-} ICAThumbnail                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------------------- ICAGetChildCount
-/*!
-    @struct ICAGetChildCountPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose number of children is being requested by calling ICAGetChildCount. <--
-    @field count
-        Number of children returned by ICAGetChildCount, if successful. Should check err field in header before using the value returned in count. -->
-*/
-typedef struct ICAGetChildCountPB {
-    ICAHeader           header;
-    ICAObject           object;
-    UInt32              count;
-} ICAGetChildCountPB                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetChildCount
-    @abstract
-        Fetches the number of children of an object. This API is deprecated in 10.5.
-    @discussion
-        Image Capture framework presents cameras and scanners, their contents and their capabilities as a heirarchy of objects and their properties. The <code><b>ICAGetChildCount</b></code> function fetches the number of children of the object specified in the <code><b>object</b></code> field of paramter <code><b>pb</b></code>.
-
-<pre>
-@textblock
-        Example:
-        
-        UInt32 GetNumberOfDevices ()
-        {
-            ICAGetChildCountPB getChildCountPB;
-            OSErr              err;
-            
-            memset(&getChildCountPB, 0, sizeof(ICAGetChildCountPB));
-            getChildCountPB.object = GetDeviceList();
-            err = ICAGetChildCount(&getChildCountPB, nil);
-            
-            return getChildCountPB.count;
-        }
-@/textblock
-</pre>
-
-    @param pb
-        A pointer to an <code><b>ICAGetChildCountPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetChildCount</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetChildCount(
-    ICAGetChildCountPB* pb,
-    ICACompletion       completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------------------- ICAGetChildCount
-/*!
-    @struct ICAObjectInfo
-    @field objectType
-        An object type, e.g., kICAFile.
-    @field objectSubtype
-        An object subtype, e.g., kICAFileImage.
-*/
-typedef struct ICAObjectInfo {
-    OSType              objectType;
-    OSType              objectSubtype;
-} ICAObjectInfo;
-
-/*!
-    @struct ICAGetNthChildPB
-    @field header
-        See description for ICAHeader. <-->
-    @field parentObject
-        An object whose child is being accessed. <--
-    @field index
-        A zero based index in to the children of 'parentObject'. <--
-    @field childObject
-        Child object, if ICAGetNthChild returns successfully. -->
-    @field childInfo
-        Object information for 'childObject', if ICAGetNthChild returns successfully. -->
-*/
-typedef struct ICAGetNthChildPB {
-    ICAHeader           header;
-    ICAObject           parentObject;
-    UInt32              index;
-    ICAObject           childObject;
-    ICAObjectInfo       childInfo;
-} ICAGetNthChildPB                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetNthChild
-    @abstract
-        Fetches the child of a given object at a given index. This API is deprecated in 10.5.
-    @discussion
-        Image Capture framework presents cameras and scanners, their contents and their capabilities as a heirarchy of objects and their properties. The <code><b>ICAGetNthChild</b></code> function fetches the child object of an object specifed in the <code><b>parentObject</b></code> field of the parameter <code><b>pb</b></code> at the index specified in the <code><b>index</b></code> field of the parameter <code><b>pb</b></code>. The index is zero-based. The function also returns the ICAObjectInfo for the child object in the <code><b>childInfo</b></code> field of the parameter <code><b>pb</b></code>.
-
-<pre>
-@textblock
-        Example:
-        
-        ICAObject GetFirstDevice () {
-            ICAGetNthChildPB getNthChildPB;
-            ICAObject        firstDevice = NULL;
-            OSErr            err;
-            UInt32           count;
-            
-            count = GetNumberOfDevices();
-            if (count > 0)
-            {
-                memset(&getNthChildPB, 0, sizeof(ICAGetNthChildPB));
-                getNthChildPB.parentObject = Get_Device_List();
-                getNthChildPB.index = 0;
-                err = ICAGetNthChild (&getNthChildPB, nil);
-                if (noErr == err)
-                {
-                    firstDevice = getNthChildPB.childObject;
-                }
-            }
-            return firstDevice;
-        }
-@/textblock
-</pre>
-
-    @param pb
-        A pointer to an <code><b>ICAGetNthChildPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetNthChild</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetNthChild(
-    ICAGetNthChildPB* pb,
-    ICACompletion     completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------------------- ICAGetObjectInfo
-/*!
-    @struct ICAGetObjectInfoPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose information is being requested by calling ICAGetObjectInfo. <--
-    @field objectInfo
-        Object information for 'object', if ICAGetObjectInfo returns successfully. -->
-*/
-typedef struct ICAGetObjectInfoPB {
-    ICAHeader           header;
-    ICAObject           object;
-    ICAObjectInfo       objectInfo;
-} ICAGetObjectInfoPB                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetObjectInfo
-    @abstract
-        Use this API to get information about an object. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get information about an object. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetObjectInfoPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetObjectInfo</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetObjectInfo(
-    ICAGetObjectInfoPB* pb,
-    ICACompletion       completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//--------------------------------------------------------------------------------------------------------- ICAGetParentOfObject
-/*!
-    @struct ICAGetParentOfObjectPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose parent is being accessed by calling ICAGetParentOfObject. <--
-    @field parentObject
-        Parent object, if ICAGetParentOfObject returns successfully. -->
-    @field parentInfo
-        Object information for the parent object, if ICAGetParentOfObject returns successfully. -->
-*/
-typedef struct ICAGetParentOfObjectPB {
-    ICAHeader           header;
-    ICAObject           object;
-    ICAObject           parentObject;
-    ICAObjectInfo       parentInfo;
-} ICAGetParentOfObjectPB                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetParentOfObject
-    @abstract
-        Use this API to get an object's parent object and its information. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an object's parent object and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetParentOfObjectPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetParentOfObject</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetParentOfObject(
-    ICAGetParentOfObjectPB* pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICAGetRootOfObject
-/*!
-    @struct ICAGetRootOfObjectPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose parent is being accessed by calling ICAGetRootOfObject. <--
-    @field rootObject
-        Root object of the object hierarchy, if ICAGetRootOfObject returns successfully. -->
-    @field rootInfo
-        Object information for the root object, if ICAGetRootOfObject returns successfully. -->
-*/
-typedef struct ICAGetRootOfObjectPB {
-    ICAHeader           header;
-    ICAObject           object;
-    ICAObject           rootObject;
-    ICAObjectInfo       rootInfo;
-} ICAGetRootOfObjectPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetRootOfObject
-    @abstract
-        Use this API to get an object's root object (in the object hierarchy) and its information. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an object's root object (in the object hierarchy) and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetRootOfObjectPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetRootOfObject</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetRootOfObject(
-    ICAGetRootOfObjectPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICAGetObjectRefCon
-/*!
-    @struct ICAGetObjectRefConPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose associated refcon value is being accessed by calling ICAGetObjectRefCon. <--
-    @field objectRefCon
-        The refcon value. -->
-*/
-typedef struct ICAGetObjectRefConPB {
-    ICAHeader           header;
-    ICAObject           object;
-    unsigned long       objectRefCon;
-} ICAGetObjectRefConPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetObjectRefCon
-    @abstract
-        Use this API to get an arbitrary refcon associated with an object. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an arbitrary refcon associated with an object. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetObjectRefConPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetObjectRefCon</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetObjectRefCon(
-    ICAGetObjectRefConPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICASetObjectRefCon
-/*!
-    @struct ICASetObjectRefConPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose associated refcon value is being set by calling ICASetObjectRefCon. <--
-    @field objectRefCon
-        The refcon value. <--
-*/
-typedef struct ICASetObjectRefConPB {
-    ICAHeader           header;
-    ICAObject           object;
-    unsigned long       objectRefCon;
-} ICASetObjectRefConPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICASetObjectRefCon
-    @abstract
-        Use this API to set an arbitrary refcon for an object. This API is deprecated in 10.5.
-    @discussion
-        Use this API to set an arbitrary refcon for an object. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICASetObjectRefConPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICASetObjectRefCon</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICASetObjectRefCon(
-    ICASetObjectRefConPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//---------------------------------------------------------------------------------------------------------- ICAGetPropertyCount
-/*!
-    @struct ICAGetPropertyCountPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose number of properties is being requested by calling ICAGetPropertyCount. <--
-    @field count
-        Number of properties returned by ICAGetPropertyCount, if successful. Should check err field in header before using the value returned in count. -->
-*/
-typedef struct ICAGetPropertyCountPB {
-    ICAHeader           header;
-    ICAObject           object;
-    UInt32              count;
-} ICAGetPropertyCountPB                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetPropertyCount
-    @abstract
-        Use this API to get the number of properties an object has. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get the number of properties an object has. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetPropertyCountPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetPropertyCount</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetPropertyCount(
-    ICAGetPropertyCountPB*  pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------------------ ICAGetNthProperty
-/*!
-    @struct ICAPropertyInfo
-    @field propertyType
-        A property type.
-    @field dataType
-        A property subtype.
-    @field dataSize
-        Size of data associated with the property.
-    @field dataFlags
-        Reserved.
-*/
-typedef struct ICAPropertyInfo {
-    OSType              propertyType;
-    OSType              dataType;
-    UInt32              dataSize;
-    UInt32              dataFlags;
-} ICAPropertyInfo;
-
-/*!
-    @struct ICAGetNthPropertyPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose property is being fetched. <--
-    @field index
-        A zero based index in to the properties of 'object'. <--
-    @field property
-        Property, if ICAGetNthProperty returns successfully. -->
-    @field propertyInfo
-        Property information for 'property', if ICAGetNthProperty returns successfully. -->
-*/
-typedef struct ICAGetNthPropertyPB {
-      ICAHeader           header;
-      ICAObject           object;
-      UInt32              index;
-      ICAProperty         property;
-      ICAPropertyInfo     propertyInfo;
-} ICAGetNthPropertyPB                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetNthProperty
-    @abstract
-        Use this API to get an object's specific property and its information. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an object's specific property and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetNthPropertyPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetNthProperty</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetNthProperty(
-    ICAGetNthPropertyPB*  pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//--------------------------------------------------------------------------------------------------------- ICAGetPropertyByType
-/*!
-    @struct ICAGetPropertyByTypePB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object whose property is being fetched. <--
-    @field propertyType
-        The type of property being fetched. <--
-    @field property
-        Property, if ICAGetPropertyByType returns successfully. -->
-    @field propertyInfo
-        Property information for 'property', if ICAGetPropertyByType returns successfully. -->
-*/
-typedef struct ICAGetPropertyByTypePB {
-    ICAHeader           header;
-    ICAObject           object;
-    OSType              propertyType;
-    ICAProperty         property;
-    ICAPropertyInfo     propertyInfo;
-} ICAGetPropertyByTypePB                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetPropertyByType
-    @abstract
-        Use this API to get an object's property by type and its information. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an object's property by type and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetPropertyByTypePB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetPropertyByType</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetPropertyByType(
-    ICAGetPropertyByTypePB* pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICAGetPropertyInfo
-/*!
-    @struct ICAGetPropertyInfoPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        Property whose information is being fetched. <--
-    @field propertyInfo
-        Property information for 'property', if ICAGetPropertyInfo returns successfully. -->
-*/
-typedef struct ICAGetPropertyInfoPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    ICAPropertyInfo     propertyInfo;
-} ICAGetPropertyInfoPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetPropertyInfo
-    @abstract
-        Use this API to get information about a property. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get information about a property. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetPropertyInfoPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetPropertyInfo</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetPropertyInfo(
-    ICAGetPropertyInfoPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------------- ICAGetParentOfProperty
-/*!
-    @struct ICAGetParentOfPropertyPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        A property whose parent is being fetched. <--
-    @field parentObject
-        Parent object, if ICAGetParentOfProperty returns successfully. -->
-    @field parentInfo
-        Information about 'parentObject', if ICAGetParentOfProperty returns successfully. -->
-*/
-typedef struct ICAGetParentOfPropertyPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    ICAObject           parentObject;
-    ICAObjectInfo       parentInfo;
-} ICAGetParentOfPropertyPB                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetParentOfProperty
-    @abstract
-        Uset this API to get a property's parent object and its information. This API is deprecated in 10.5.
-    @discussion
-        Uset this API to get a property's parent object and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetParentOfPropertyPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetParentOfProperty</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetParentOfProperty(
-    ICAGetParentOfPropertyPB* pb,
-    ICACompletion             completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//--------------------------------------------------------------------------------------------------------- ICAGetRootOfProperty
-/*!
-    @struct ICAGetRootOfPropertyPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        A property whose parent is being fetched. <--
-    @field rootObject
-        Root object of the hierarchy in which the parent object of property is found, if ICAGetRootOfProperty returns successfully. -->
-    @field rootInfo
-        Information about 'rootObject', if ICAGetRootOfProperty returns successfully. -->
-*/
-typedef struct ICAGetRootOfPropertyPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    ICAObject           rootObject;
-    ICAObjectInfo       rootInfo;
-} ICAGetRootOfPropertyPB                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetRootOfProperty
-    @abstract
-        Uset this API to get a property's root object (in the object hierarchy) and its information. This API is deprecated in 10.5.
-    @discussion
-        Uset this API to get a property's root object (in the object hierarchy) and its information. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetRootOfPropertyPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetRootOfProperty</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetRootOfProperty(
-    ICAGetRootOfPropertyPB* pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICAGetPropertyData
-/*!
-    @enum Flag for reading property data
-    @discussion
-        Use one of these values when reading property data using partial reads.
-    @constant kICAStartAtBeginning
-        Start reading from the beginning.
-    @constant kICAEntireLength
-        Read all data.
-*/
-enum
-{
-    kICAStartAtBeginning                  = 0,
-    kICAEntireLength                      = -1						   
-};
-
-/*!
-    @struct ICAGetPropertyDataPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        Property whose data is being fetched. <--
-    @field startByte
-        Offset into 'dataPtr' from where the fetched data should be written. <--
-    @field requestedSize
-        Requested size of data in bytes. <--
-    @field dataPtr
-        A buffer to receive the data. <--
-    @field actualSize
-        Actual size of data written to dataPtr. -->
-    @field dataType
-        Type of data fetched. -->
-*/
-typedef struct ICAGetPropertyDataPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    UInt32              startByte;
-    UInt32              requestedSize;
-    void *              dataPtr;
-    UInt32              actualSize;
-    OSType              dataType;
-} ICAGetPropertyDataPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetPropertyData
-    @abstract
-        Use this API to get data associated with a property. This API is deprecated in 10.5. Use one of the ICACopy* APIs instead.
-    @discussion
-        Use this API to get data associated with a property. This API is deprecated in 10.5. Use one of the ICACopy* APIs instead.
-    @param pb
-        A pointer to an <code><b>ICAGetPropertyDataPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetPropertyData</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetPropertyData(
-    ICAGetPropertyDataPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//----------------------------------------------------------------------------------------------------------- ICASetPropertyData
-/*!
-    @struct ICASetPropertyDataPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        Property whose data is being fetched. <--
-    @field startByte
-        Offset into 'dataPtr' from where the data being sent is found. <--
-    @field dataPtr
-        A buffer holding data being sent. <--
-    @field dataSize
-        Size of data sent in dataPtr. <--
-    @field dataType
-        Type of data sent. <--
-*/
-typedef struct ICASetPropertyDataPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    UInt32              startByte;
-    void *              dataPtr;
-    UInt32              dataSize;
-    OSType              dataType;
-} ICASetPropertyDataPB                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICASetPropertyData
-    @abstract
-        Use this API to set data for a property. This API is deprecated in 10.5.
-    @discussion
-        Use this API to set data for a property. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICASetPropertyDataPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICASetPropertyData</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICASetPropertyData(
-    ICASetPropertyDataPB* pb,
-    ICACompletion         completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//--------------------------------------------------------------------------------------------------------- ICAGetPropertyRefCon
-/*!
-    @struct ICAGetPropertyRefConPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        A property whos associated refcon value is being fetched. <--
-    @field propertyRefCon
-        The refcon value, if ICAGetPropertyRefCon returns successfully. -->
-*/
-typedef struct ICAGetPropertyRefConPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    UInt32              propertyRefCon;
-} ICAGetPropertyRefConPB                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICAGetPropertyRefCon
-    @abstract
-        Use this API to get an arbitrary refcon associated with a property. This API is deprecated in 10.5.
-    @discussion
-        Use this API to get an arbitrary refcon associated with a property. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICAGetPropertyRefConPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAGetPropertyRefCon</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICAGetPropertyRefCon(
-    ICAGetPropertyRefConPB* pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//--------------------------------------------------------------------------------------------------------- ICASetPropertyRefCon
-/*!
-    @struct ICASetPropertyRefConPB
-    @field header
-        See description for ICAHeader. <-->
-    @field property
-        A property whos associated refcon value is being set. <--
-    @field propertyRefCon
-        The refcon value. <--
-*/
-typedef struct ICASetPropertyRefConPB {
-    ICAHeader           header;
-    ICAProperty         property;
-    UInt32              propertyRefCon;
-} ICASetPropertyRefConPB                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICASetPropertyRefCon
-    @abstract
-        Use this API to set an arbitrary refcon for a property. This API is deprecated in 10.5.
-    @discussion
-        Use this API to set an arbitrary refcon for a property. This API is deprecated in 10.5.
-    @param pb
-        A pointer to an <code><b>ICASetPropertyRefConPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICASetPropertyRefCon</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICASetPropertyRefCon(
-    ICASetPropertyRefConPB* pb,
-    ICACompletion           completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-//------------------------------------------------------------------------------------------------- ICARegisterEventNotification
-/*!
-    @struct ICARegisterEventNotificationPB
-    @discussion
-        Use this parameter block to receive basic notifications.
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        An object about which notifications are requested. <->
-    @field notifyType
-        Notification type of interest. <->
-    @field notifyProc
-        A callback function to receive the notifications. <--
-*/
-typedef struct ICARegisterEventNotificationPB {
-    ICAHeader           header;
-    ICAObject           object;
-    OSType              notifyType;
-    ICACompletion       notifyProc;
-} ICARegisterEventNotificationPB              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
-    @function ICARegisterEventNotification
-    @abstract
-        This API is deprecated in 10.5. Use ICARegisterForEventNotification API instead.
-    @discussion
-        This API is deprecated in 10.5. Use ICARegisterForEventNotification API instead.
-    @param pb
-        A pointer to an <code><b>ICARegisterEventNotificationPB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICARegisterEventNotification</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
-*/
-extern ICAError 
-ICARegisterEventNotification(
-    ICARegisterEventNotificationPB* pb,
-    ICACompletion                   completion
-)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
- 
-/*!
-    @struct ICAExtendedRegisterEventNotificationPB
-    @discussion
-        Use this parameter block with the 'extd' field set to kExtendedNotificationPB to receive detailed (extended) notifications. This parameter block is passed back with event notifications to the callback function. 
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        An object about which notifications are requested. <->
-    @field extd
-        Set this to kExtendedNotificationPB. 
-    @field notifyProc
-        A callback function to receive the notifications. <--
-    @field rawEventType
-        Type of event that occurred. This could be vendor-specific.
-    @field eventType
-        Type of ImageCapture supported event that occurred. Refer to "Image Capture event types". <->
-    @field eventClass
-        Set to one of the following: 'kICAEventClassPTPStandard', 'kICAEventClassPTPStandard or any vendor-specific value. -->
-    @field eventDataSize
-        This is non-zero if there is additional data associated with this event. Additional event data can be fetched by calling ICAObjectSendMessage with messageType set to 'kICAMessageGetEventData', dataType set to value of eventDataCookie and dataSize set to value of eventDataSize. -->
-    @field eventDataCookie
-        A token identifying the additional data associated with this event. Additional event data can be fetched by calling ICAObjectSendMessage with messageType set to 'kICAMessageGetEventData', dataType set to value of eventDataCookie and dataSize set to value of eventDataSize. -->
-    @field deviceObject
-        Device object associated with the event. -->
-*/
-typedef struct ICAExtendedRegisterEventNotificationPB {
-    ICAHeader           header;
-    ICAObject           object;
-    OSType              extd;
-    ICACompletion       notifyProc;
-    UInt32              rawEventType;
-    OSType              eventType;
-    OSType              eventClass;
-    UInt32              eventDataSize;
-    ICAEventDataCookie  eventDataCookie;
-    ICAObject           deviceObject;
-} ICAExtendedRegisterEventNotificationPB      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 //------------------------------------------------------------------------------------------------------------------------------
 

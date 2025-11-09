@@ -9,7 +9,12 @@
 
 @class IOBluetoothDevice;
 
-@interface IOBluetoothObjectPushUIController : NSWindowController {
+/*!
+	An NSWindowController subclass that supports the creation of an IOBluetoothObjectPushUIController object.
+ */
+
+@interface IOBluetoothObjectPushUIController : NSWindowController
+{
 
 }
 

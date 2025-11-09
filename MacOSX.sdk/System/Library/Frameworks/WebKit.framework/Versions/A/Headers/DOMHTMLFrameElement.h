@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,9 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
+@class DOMAbstractView;
 @class DOMDocument;
 @class NSString;
 
@@ -40,4 +42,10 @@
 @property(copy) NSString *scrolling;
 @property(copy) NSString *src;
 @property(readonly, retain) DOMDocument *contentDocument;
+@property(readonly, retain) DOMAbstractView *contentWindow AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *location AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int width AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int height AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

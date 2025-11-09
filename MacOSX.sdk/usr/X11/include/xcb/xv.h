@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xv.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xv.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -15,6 +15,10 @@
 #include "xcb.h"
 #include "xproto.h"
 #include "shm.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XV_MAJOR_VERSION 2
 #define XCB_XV_MINOR_VERSION 2
@@ -44,11 +48,11 @@ typedef struct xcb_xv_encoding_iterator_t {
 } xcb_xv_encoding_iterator_t;
 
 typedef enum xcb_xv_type_t {
-    XCB_XV_TYPE_INPUT_MASK = 0x00000001,
-    XCB_XV_TYPE_OUTPUT_MASK = 0x00000002,
-    XCB_XV_TYPE_VIDEO_MASK = 0x00000004,
-    XCB_XV_TYPE_STILL_MASK = 0x00000008,
-    XCB_XV_TYPE_IMAGE_MASK = 0x00000010
+    XCB_XV_TYPE_INPUT_MASK = 1,
+    XCB_XV_TYPE_OUTPUT_MASK = 2,
+    XCB_XV_TYPE_VIDEO_MASK = 4,
+    XCB_XV_TYPE_STILL_MASK = 8,
+    XCB_XV_TYPE_IMAGE_MASK = 16
 } xcb_xv_type_t;
 
 typedef enum xcb_xv_image_format_info_type_t {
@@ -62,8 +66,8 @@ typedef enum xcb_xv_image_format_info_format_t {
 } xcb_xv_image_format_info_format_t;
 
 typedef enum xcb_xv_attribute_flag_t {
-    XCB_XV_ATTRIBUTE_FLAG_GETTABLE = 0x01,
-    XCB_XV_ATTRIBUTE_FLAG_SETTABLE = 0x02
+    XCB_XV_ATTRIBUTE_FLAG_GETTABLE = 1,
+    XCB_XV_ATTRIBUTE_FLAG_SETTABLE = 2
 } xcb_xv_attribute_flag_t;
 
 /**
@@ -84,6 +88,24 @@ typedef struct xcb_xv_rational_iterator_t {
 } xcb_xv_rational_iterator_t;
 
 /**
+ * @brief xcb_xv_format_t
+ **/
+typedef struct xcb_xv_format_t {
+    xcb_visualid_t visual; /**<  */
+    uint8_t        depth; /**<  */
+    uint8_t        pad0[3]; /**<  */
+} xcb_xv_format_t;
+
+/**
+ * @brief xcb_xv_format_iterator_t
+ **/
+typedef struct xcb_xv_format_iterator_t {
+    xcb_xv_format_t *data; /**<  */
+    int              rem; /**<  */
+    int              index; /**<  */
+} xcb_xv_format_iterator_t;
+
+/**
  * @brief xcb_xv_adaptor_info_t
  **/
 typedef struct xcb_xv_adaptor_info_t {
@@ -92,7 +114,7 @@ typedef struct xcb_xv_adaptor_info_t {
     uint16_t      num_ports; /**<  */
     uint16_t      num_formats; /**<  */
     uint8_t       type; /**<  */
-    uint8_t       pad; /**<  */
+    uint8_t       pad0; /**<  */
 } xcb_xv_adaptor_info_t;
 
 /**
@@ -112,6 +134,7 @@ typedef struct xcb_xv_encoding_info_t {
     uint16_t          name_size; /**<  */
     uint16_t          width; /**<  */
     uint16_t          height; /**<  */
+    uint8_t           pad0[2]; /**<  */
     xcb_xv_rational_t rate; /**<  */
 } xcb_xv_encoding_info_t;
 
@@ -123,23 +146,6 @@ typedef struct xcb_xv_encoding_info_iterator_t {
     int                     rem; /**<  */
     int                     index; /**<  */
 } xcb_xv_encoding_info_iterator_t;
-
-/**
- * @brief xcb_xv_format_t
- **/
-typedef struct xcb_xv_format_t {
-    xcb_visualid_t visual; /**<  */
-    uint8_t        depth; /**<  */
-} xcb_xv_format_t;
-
-/**
- * @brief xcb_xv_format_iterator_t
- **/
-typedef struct xcb_xv_format_iterator_t {
-    xcb_xv_format_t *data; /**<  */
-    int              rem; /**<  */
-    int              index; /**<  */
-} xcb_xv_format_iterator_t;
 
 /**
  * @brief xcb_xv_image_t
@@ -187,20 +193,18 @@ typedef struct xcb_xv_image_format_info_t {
     uint32_t id; /**<  */
     uint8_t  type; /**<  */
     uint8_t  byte_order; /**<  */
-    uint16_t pad1; /**<  */
+    uint8_t  pad0[2]; /**<  */
     uint8_t  guid[16]; /**<  */
     uint8_t  bpp; /**<  */
     uint8_t  num_planes; /**<  */
-    uint16_t pad2; /**<  */
+    uint8_t  pad1[2]; /**<  */
     uint8_t  depth; /**<  */
-    uint8_t  pad3; /**<  */
-    uint16_t pad4; /**<  */
+    uint8_t  pad2[3]; /**<  */
     uint32_t red_mask; /**<  */
     uint32_t green_mask; /**<  */
     uint32_t blue_mask; /**<  */
     uint8_t  format; /**<  */
-    uint8_t  pad5; /**<  */
-    uint16_t pad6; /**<  */
+    uint8_t  pad3[3]; /**<  */
     uint32_t y_sample_bits; /**<  */
     uint32_t u_sample_bits; /**<  */
     uint32_t v_sample_bits; /**<  */
@@ -212,10 +216,7 @@ typedef struct xcb_xv_image_format_info_t {
     uint32_t vvert_v_period; /**<  */
     uint8_t  vcomp_order[32]; /**<  */
     uint8_t  vscanline_order; /**<  */
-    uint8_t  vpad7; /**<  */
-    uint16_t vpad8; /**<  */
-    uint32_t vpad9; /**<  */
-    uint32_t vpad10; /**<  */
+    uint8_t  pad4[11]; /**<  */
 } xcb_xv_image_format_info_t;
 
 /**
@@ -552,6 +553,7 @@ typedef struct xcb_xv_select_video_notify_request_t {
     uint16_t       length; /**<  */
     xcb_drawable_t drawable; /**<  */
     uint8_t        onoff; /**<  */
+    uint8_t        pad0[3]; /**<  */
 } xcb_xv_select_video_notify_request_t;
 
 /** Opcode for xcb_xv_select_port_notify. */
@@ -561,11 +563,12 @@ typedef struct xcb_xv_select_video_notify_request_t {
  * @brief xcb_xv_select_port_notify_request_t
  **/
 typedef struct xcb_xv_select_port_notify_request_t {
-    uint8_t        major_opcode; /**<  */
-    uint8_t        minor_opcode; /**<  */
-    uint16_t       length; /**<  */
-    xcb_drawable_t drawable; /**<  */
-    uint8_t        onoff; /**<  */
+    uint8_t       major_opcode; /**<  */
+    uint8_t       minor_opcode; /**<  */
+    uint16_t      length; /**<  */
+    xcb_xv_port_t port; /**<  */
+    uint8_t       onoff; /**<  */
+    uint8_t       pad0[3]; /**<  */
 } xcb_xv_select_port_notify_request_t;
 
 /**
@@ -591,6 +594,7 @@ typedef struct xcb_xv_query_best_size_request_t {
     uint16_t      drw_w; /**<  */
     uint16_t      drw_h; /**<  */
     uint8_t       motion; /**<  */
+    uint8_t       pad0[3]; /**<  */
 } xcb_xv_query_best_size_request_t;
 
 /**
@@ -808,6 +812,7 @@ typedef struct xcb_xv_shm_put_image_request_t {
     uint16_t       width; /**<  */
     uint16_t       height; /**<  */
     uint8_t        send_event; /**<  */
+    uint8_t        pad0[3]; /**<  */
 } xcb_xv_shm_put_image_request_t;
 
 /**
@@ -938,6 +943,49 @@ xcb_xv_rational_next (xcb_xv_rational_iterator_t *i  /**< */);
  
 xcb_generic_iterator_t
 xcb_xv_rational_end (xcb_xv_rational_iterator_t i  /**< */);
+
+/**
+ * Get the next element of the iterator
+ * @param i Pointer to a xcb_xv_format_iterator_t
+ *
+ * Get the next element in the iterator. The member rem is
+ * decreased by one. The member data points to the next
+ * element. The member index is increased by sizeof(xcb_xv_format_t)
+ */
+
+/*****************************************************************************
+ **
+ ** void xcb_xv_format_next
+ ** 
+ ** @param xcb_xv_format_iterator_t *i
+ ** @returns void
+ **
+ *****************************************************************************/
+ 
+void
+xcb_xv_format_next (xcb_xv_format_iterator_t *i  /**< */);
+
+/**
+ * Return the iterator pointing to the last element
+ * @param i An xcb_xv_format_iterator_t
+ * @return  The iterator pointing to the last element
+ *
+ * Set the current element in the iterator to the last element.
+ * The member rem is set to 0. The member data points to the
+ * last element.
+ */
+
+/*****************************************************************************
+ **
+ ** xcb_generic_iterator_t xcb_xv_format_end
+ ** 
+ ** @param xcb_xv_format_iterator_t i
+ ** @returns xcb_generic_iterator_t
+ **
+ *****************************************************************************/
+ 
+xcb_generic_iterator_t
+xcb_xv_format_end (xcb_xv_format_iterator_t i  /**< */);
 
 
 /*****************************************************************************
@@ -1141,49 +1189,6 @@ xcb_xv_encoding_info_next (xcb_xv_encoding_info_iterator_t *i  /**< */);
  
 xcb_generic_iterator_t
 xcb_xv_encoding_info_end (xcb_xv_encoding_info_iterator_t i  /**< */);
-
-/**
- * Get the next element of the iterator
- * @param i Pointer to a xcb_xv_format_iterator_t
- *
- * Get the next element in the iterator. The member rem is
- * decreased by one. The member data points to the next
- * element. The member index is increased by sizeof(xcb_xv_format_t)
- */
-
-/*****************************************************************************
- **
- ** void xcb_xv_format_next
- ** 
- ** @param xcb_xv_format_iterator_t *i
- ** @returns void
- **
- *****************************************************************************/
- 
-void
-xcb_xv_format_next (xcb_xv_format_iterator_t *i  /**< */);
-
-/**
- * Return the iterator pointing to the last element
- * @param i An xcb_xv_format_iterator_t
- * @return  The iterator pointing to the last element
- *
- * Set the current element in the iterator to the last element.
- * The member rem is set to 0. The member data points to the
- * last element.
- */
-
-/*****************************************************************************
- **
- ** xcb_generic_iterator_t xcb_xv_format_end
- ** 
- ** @param xcb_xv_format_iterator_t i
- ** @returns xcb_generic_iterator_t
- **
- *****************************************************************************/
- 
-xcb_generic_iterator_t
-xcb_xv_format_end (xcb_xv_format_iterator_t i  /**< */);
 
 
 /*****************************************************************************
@@ -1526,6 +1531,8 @@ xcb_xv_query_extension_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_extension_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1630,6 +1637,8 @@ xcb_xv_query_adaptors_info_iterator (const xcb_xv_query_adaptors_reply_t *R  /**
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_adaptors_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1734,6 +1743,8 @@ xcb_xv_query_encodings_info_iterator (const xcb_xv_query_encodings_reply_t *R  /
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_encodings_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1816,6 +1827,8 @@ xcb_xv_grab_port_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_grab_port_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2366,7 +2379,7 @@ xcb_xv_select_video_notify (xcb_connection_t *c  /**< */,
  ** xcb_void_cookie_t xcb_xv_select_port_notify_checked
  ** 
  ** @param xcb_connection_t *c
- ** @param xcb_drawable_t    drawable
+ ** @param xcb_xv_port_t     port
  ** @param uint8_t           onoff
  ** @returns xcb_void_cookie_t
  **
@@ -2374,7 +2387,7 @@ xcb_xv_select_video_notify (xcb_connection_t *c  /**< */,
  
 xcb_void_cookie_t
 xcb_xv_select_port_notify_checked (xcb_connection_t *c  /**< */,
-                                   xcb_drawable_t    drawable  /**< */,
+                                   xcb_xv_port_t     port  /**< */,
                                    uint8_t           onoff  /**< */);
 
 /**
@@ -2391,7 +2404,7 @@ xcb_xv_select_port_notify_checked (xcb_connection_t *c  /**< */,
  ** xcb_void_cookie_t xcb_xv_select_port_notify
  ** 
  ** @param xcb_connection_t *c
- ** @param xcb_drawable_t    drawable
+ ** @param xcb_xv_port_t     port
  ** @param uint8_t           onoff
  ** @returns xcb_void_cookie_t
  **
@@ -2399,7 +2412,7 @@ xcb_xv_select_port_notify_checked (xcb_connection_t *c  /**< */,
  
 xcb_void_cookie_t
 xcb_xv_select_port_notify (xcb_connection_t *c  /**< */,
-                           xcb_drawable_t    drawable  /**< */,
+                           xcb_xv_port_t     port  /**< */,
                            uint8_t           onoff  /**< */);
 
 /**
@@ -2482,6 +2495,8 @@ xcb_xv_query_best_size_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_best_size_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2621,6 +2636,8 @@ xcb_xv_get_port_attribute_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_get_port_attribute_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2725,6 +2742,8 @@ xcb_xv_query_port_attributes_attributes_iterator (const xcb_xv_query_port_attrib
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_port_attributes_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2795,6 +2814,19 @@ xcb_xv_list_image_formats_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
+ ** xcb_xv_image_format_info_t * xcb_xv_list_image_formats_format
+ ** 
+ ** @param const xcb_xv_list_image_formats_reply_t *R
+ ** @returns xcb_xv_image_format_info_t *
+ **
+ *****************************************************************************/
+ 
+xcb_xv_image_format_info_t *
+xcb_xv_list_image_formats_format (const xcb_xv_list_image_formats_reply_t *R  /**< */);
+
+
+/*****************************************************************************
+ **
  ** int xcb_xv_list_image_formats_format_length
  ** 
  ** @param const xcb_xv_list_image_formats_reply_t *R
@@ -2829,6 +2861,8 @@ xcb_xv_list_image_formats_format_iterator (const xcb_xv_list_image_formats_reply
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_list_image_formats_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2997,6 +3031,8 @@ xcb_xv_query_image_attributes_offsets_end (const xcb_xv_query_image_attributes_r
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xv_query_image_attributes_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -3237,6 +3273,10 @@ xcb_xv_shm_put_image (xcb_connection_t *c  /**< */,
                       uint16_t          height  /**< */,
                       uint8_t           send_event  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

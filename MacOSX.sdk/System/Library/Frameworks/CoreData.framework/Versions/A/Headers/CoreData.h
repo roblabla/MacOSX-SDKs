@@ -1,7 +1,7 @@
 /*
 	CoreData.h
 	Core Data
-    Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+    Copyright (c) 2004-2009 Apple Inc.
 	All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 #import <CoreData/NSEntityDescription.h>
 #import <CoreData/NSFetchedPropertyDescription.h>
 #import <CoreData/NSPropertyDescription.h>
+#import <CoreData/NSExpressionDescription.h>
 #import <CoreData/NSRelationshipDescription.h>
 #import <CoreData/NSFetchRequest.h>
 #import <CoreData/NSFetchRequestExpression.h>

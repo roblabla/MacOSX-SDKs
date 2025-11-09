@@ -55,4 +55,4 @@ errno_t	ether_check_multi(ifnet_t ifp, const struct sockaddr *multicast);
 
 __END_DECLS
 
-#endif _NET_IF_ETHER_H
+#endif /* _NET_IF_ETHER_H */

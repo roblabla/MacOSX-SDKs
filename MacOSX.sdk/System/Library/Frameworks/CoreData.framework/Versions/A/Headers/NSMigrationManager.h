@@ -1,7 +1,7 @@
 /*
     NSMigrationManager.h
     Core Data
-    Copyright (c) 2004-2007 Apple Inc.
+    Copyright (c) 2004-2009 Apple Inc.
     All rights reserved.
 */
 
@@ -85,7 +85,7 @@ implementation of NSEntityMigrationPolicy's createDestinationInstancesForSourceI
 
 /* Returns the managed object instances created in the destination store for the given entity mapping for the specified source instances.
 */
- - (NSArray *)destinationInstancesForEntityMappingNamed:(NSString *)mappingName sourceInstances:(NSArray*)sourceInstances;
+- (NSArray *)destinationInstancesForEntityMappingNamed:(NSString *)mappingName sourceInstances:(NSArray*)sourceInstances;
  
 /* Returns the managed object instances in the source store used to create the specified destination instances for the given entity mapping.
 */

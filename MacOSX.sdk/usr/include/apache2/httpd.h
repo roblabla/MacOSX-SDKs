@@ -233,6 +233,14 @@ extern "C" {
 #define DEFAULT_CONTENT_TYPE "text/plain"
 #endif
 
+/**
+ * NO_CONTENT_TYPE is an alternative DefaultType value that suppresses
+ * setting any default type when there's no information (e.g. a proxy).
+ */
+#ifndef NO_CONTENT_TYPE
+#define NO_CONTENT_TYPE "none"
+#endif
+
 /** The name of the MIME types file */
 #ifndef AP_TYPES_CONFIG_FILE
 #define AP_TYPES_CONFIG_FILE "conf/mime.types"
@@ -658,6 +666,8 @@ struct ap_method_list_t {
 #define LF '\n'
 #define CRLF "\r\n"
 #endif /* APR_CHARSET_EBCDIC */                                   
+/** Useful for common code with either platform charset. */
+#define CRLF_ASCII "\015\012"
 
 /**
  * @defgroup values_request_rec_body Possible values for request_rec.read_body 
@@ -930,7 +940,7 @@ struct request_rec {
 
     /** The URI without any parsing performed */
     char *unparsed_uri;	
-    /** The path portion of the URI */
+    /** The path portion of the URI, or "/" if no path provided */
     char *uri;
     /** The filename on disk corresponding to this response */
     char *filename;
@@ -1088,6 +1098,11 @@ struct conn_rec {
     conn_state_t *cs;
     /** Is there data pending in the input filters? */ 
     int data_in_input_filters;
+    
+    /** Are there any filters that clogg/buffer the input stream, breaking
+     *  the event mpm.
+     */
+    int clogging_input_filters;
 };
 
 /** 
@@ -1480,6 +1495,14 @@ AP_DECLARE(char *) ap_os_escape_path(apr_pool_t *p, const char *path, int partia
  * @return The escaped string
  */
 AP_DECLARE(char *) ap_escape_html(apr_pool_t *p, const char *s);
+/**
+ * Escape an html string
+ * @param p The pool to allocate from
+ * @param s The html to escape
+ * @param toasc Whether to escape all non-ASCII chars to &#nnn;
+ * @return The escaped string
+ */
+AP_DECLARE(char *) ap_escape_html2(apr_pool_t *p, const char *s, int toasc);
 
 /**
  * Escape a string for logging
@@ -1718,6 +1741,29 @@ AP_DECLARE(char *) ap_escape_quotes(apr_pool_t *p, const char *instring);
  */
 AP_DECLARE(char *) ap_append_pid(apr_pool_t *p, const char *string,
                                  const char *delim);
+
+/**
+ * Parse a given timeout parameter string into an apr_interval_time_t value.
+ * The unit of the time interval is given as postfix string to the numeric
+ * string. Currently the following units are understood:
+ *
+ * ms    : milliseconds
+ * s     : seconds
+ * mi[n] : minutes
+ * h     : hours
+ *
+ * If no unit is contained in the given timeout parameter the default_time_unit
+ * will be used instead.
+ * @param timeout_parameter The string containing the timeout parameter.
+ * @param timeout The timeout value to be returned.
+ * @param default_time_unit The default time unit to use if none is specified
+ * in timeout_parameter.
+ * @return Status value indicating whether the parsing was successful or not.
+ */
+AP_DECLARE(apr_status_t) ap_timeout_parameter_parse(
+                                               const char *timeout_parameter,
+                                               apr_interval_time_t *timeout,
+                                               const char *default_time_unit);
 
 /* Misc system hackery */
 /**

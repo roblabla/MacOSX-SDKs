@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     31-October-1999
-// RCS-ID:      $Id: _clipbrd.i,v 1.13 2007/01/21 07:05:30 RD Exp $
+// RCS-ID:      $Id: _clipbrd.i 54625 2008-07-14 22:20:10Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -18,6 +18,9 @@
 
 %{
 %}
+
+MustHaveApp(wxClipboard);
+MustHaveApp(wxClipboard::Get);
 
 DocStr(wxClipboard,
 "wx.Clipboard represents the system clipboard and provides methods to

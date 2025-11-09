@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 
 @class CIImage;
 @class NSColor;
+@class NSColorSpace;
 
 enum {
     NSTIFFCompressionNone		= 1,
@@ -77,10 +78,11 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  AVAILABLE_MAC_OS_X_VERSI
         unsigned int bitsPerPixel:8;	
 	unsigned int isPlanar:1;
 	unsigned int explicitPlanes:1;
-	unsigned int isUnpacked:1;
+	unsigned int imageSourceIsIndexed:1;
 	unsigned int dataLoaded:1;
-        unsigned int numColors:4;	/* Cache */
-        unsigned int memory:2;
+        unsigned int colorModel:4;
+        unsigned int tierTwoInfoIsLoaded:1;
+        unsigned int respectO:1;
         unsigned int compressionFactor:14;
         unsigned int imageNumber:8;
         unsigned int bitmapFormat:3;
@@ -88,16 +90,16 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  AVAILABLE_MAC_OS_X_VERSI
 	unsigned int compression:20;
     } _moreRepFlags;
     unsigned int _bytesPerRow;
-    unsigned char *_data;
+    volatile id _dataObj;
     NSData *_tiffData;
     id _properties;
 }
 
 - (id)initWithFocusedViewRect:(NSRect)rect;
 
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits; 
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits; 
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
 #endif
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (id)initWithCGImage:(CGImageRef)cgImage;
@@ -156,6 +158,13 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (CGImageRef)CGImage;
 #endif
+
+
+- (NSColorSpace *)colorSpace AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+- (NSBitmapImageRep *)bitmapImageRepByConvertingToColorSpace:(NSColorSpace *)targetSpace renderingIntent:(NSColorRenderingIntent)renderingIntent AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSBitmapImageRep *)bitmapImageRepByRetaggingWithColorSpace:(NSColorSpace *)newSpace AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 @end
 
 

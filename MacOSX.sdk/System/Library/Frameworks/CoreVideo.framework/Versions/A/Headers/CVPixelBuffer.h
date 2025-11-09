@@ -21,6 +21,9 @@
 #include <CoreVideo/CVImageBuffer.h>
 #include <CoreFoundation/CFArray.h>
 
+#if COREVIDEO_SUPPORTS_IOSURFACE
+#include <IOSurface/IOSurface.h>
+#endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 #if defined(__cplusplus)
 extern "C" {
@@ -65,6 +68,20 @@ enum {
   kCVPixelFormatType_422YpCbCr_4A_8BiPlanar = 'a2vy', /* First plane: Video-range Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1; second plane: alpha 8-bit 0-255 */
 };
 
+	
+/*!
+	@enum Pixel Buffer Locking Flags
+	@discussion Flags to pass to CVPixelBufferLockBaseAddress() / CVPixelBufferUnlockBaseAddress()
+	@constant kCVPixelBufferLock_ReadOnly
+		If you are not going to modify the data while you hold the lock, you should set this flag
+		to avoid potentially invalidating any existing caches of the buffer contents.  This flag
+		should be passed both to the lock and unlock functions.  Non-symmetrical usage of this
+		flag will result in undefined behavior.
+*/
+enum CVPixelBufferLockFlags {
+	kCVPixelBufferLock_ReadOnly = 0x00000001,
+};
+
 /*
 Planar pixel buffers have the following descriptor at their base address.  
 Clients should generally use CVPixelBufferGetBaseAddressOfPlane, 
@@ -99,7 +116,15 @@ CV_EXPORT const CFStringRef kCVPixelBufferBytesPerRowAlignmentKey AVAILABLE_MAC_
 CV_EXPORT const CFStringRef kCVPixelBufferCGBitmapContextCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // CFBoolean
 CV_EXPORT const CFStringRef kCVPixelBufferCGImageCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
 CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey; // AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;		    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;		    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfacePropertiesKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;     // CFDictionary; presence requests buffer allocation via IOSurface
+// Ensures that CGLTexImageIOSurface2D() will succeed in creating a valid texture object from the CVPixelBuffer's IOSurface.
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
+// Ensures that CGLTexImageIOSurface2D() will succeed in creating a valid texture object from the CVPixelBuffer's IOSurface AND that the resulting texture may be used as a color buffer attachment to a OpenGL frame buffer object.
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
+// Ensures that the CVPixelBuffer's IOSurfaceRef can be displayed in an CoreAnimation CALayer.
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
+
 
 /*!
     @typedef	CVPixelBufferRef
@@ -225,20 +250,20 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(CFAllocatorRef allocator,
 
 
 /*!
-    @function   CVPixelBufferLockBaseAddress
-    @abstract   Description Locks the BaseAddress of the PixelBuffer to ensure that the is available.
-    @param      pixelBuffer Target PixelBuffer.
-    @param      lockFlags No options currently defined, pass 0.
-    @result     kCVReturnSuccess if the lock succeeded, or error code on failure
+	@function   CVPixelBufferLockBaseAddress
+	@abstract   Description Locks the BaseAddress of the PixelBuffer to ensure that the memory is accessible.
+	@param      pixelBuffer Target PixelBuffer.
+	@param      lockFlags See CVPixelBufferLockFlags.
+	@result     kCVReturnSuccess if the lock succeeded, or error code on failure
 */
 CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags lockFlags) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
-    @function   CVPixelBufferUnlockBaseAddress
-    @abstract   Description Unlocks the BaseAddress of the PixelBuffer.
-    @param      pixelBuffer Target PixelBuffer.
-    @param      unlockFlags No options currently defined, pass 0.
-    @result     kCVReturnSuccess if the unlock succeeded, or error code on failure
+	@function   CVPixelBufferUnlockBaseAddress
+	@abstract   Description Unlocks the BaseAddress of the PixelBuffer.
+	@param      pixelBuffer Target PixelBuffer.
+	@param      unlockFlags See CVPixelBufferLockFlags.
+	@result     kCVReturnSuccess if the unlock succeeded, or error code on failure
 */
 CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags unlockFlags) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -370,6 +395,38 @@ CV_EXPORT void CVPixelBufferGetExtendedPixels(CVPixelBufferRef pixelBuffer,
     @param      pixelBuffer Target PixelBuffer.
 */
 CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+#if COREVIDEO_SUPPORTS_IOSURFACE
+
+/*!
+	@function   CVPixelBufferGetIOSurface
+	@abstract   Returns the IOSurface backing the pixel buffer, or NULL if it is not backed by an IOSurface.
+	@param      pixelBuffer Target PixelBuffer.
+*/
+CV_EXPORT IOSurfaceRef CVPixelBufferGetIOSurface(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+    @function   CVPixelBufferCreateWithIOSurface
+    @abstract   Call to create a single CVPixelBuffer for a passed-in IOSurface.
+    @discussion The CVPixelBuffer will retain the IOSurface.
+    	IMPORTANT NOTE: If you are using IOSurface to share CVPixelBuffers between processes
+    	and those CVPixelBuffers are allocated via a CVPixelBufferPool, it is important
+    	that the CVPixelBufferPool does not reuse CVPixelBuffers whose IOSurfaces are still
+    	in use in other processes.  
+    	CoreVideo and IOSurface will take care of this for if you use IOSurfaceCreateMachPort 
+    	and IOSurfaceLookupFromMachPort, but NOT if you pass IOSurfaceIDs.
+    @param      surface		            The IOSurface to wrap.
+    @param      pixelBufferAttributes   A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
+    @param      pixelBufferOut          The new pixel buffer will be returned here
+    @result     returns kCVReturnSuccess on success.
+*/
+CV_EXPORT CVReturn CVPixelBufferCreateWithIOSurface(
+		CFAllocatorRef allocator,
+		IOSurfaceRef surface,
+		CFDictionaryRef pixelBufferAttributes,
+		CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+#endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 #if defined(__cplusplus)
 }

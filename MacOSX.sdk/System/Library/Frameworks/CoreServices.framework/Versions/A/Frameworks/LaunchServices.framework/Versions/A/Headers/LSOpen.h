@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-283~12
+     Version:    LaunchServices-362.3~1
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

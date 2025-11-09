@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 1986-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1986-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -603,7 +603,7 @@ enum {
 
 enum {
                                         /* TransliterateText source mask - general */
-  smMaskAll                     = (long)0xFFFFFFFF, /*Convert all text*/
+  smMaskAll                     = (int)0xFFFFFFFF, /*Convert all text*/
                                         /* TransliterateText source masks */
   smMaskAscii                   = 0x00000001, /*2^smTransAscii*/
   smMaskNative                  = 0x00000002, /*2^smTransNative*/
@@ -1214,12 +1214,27 @@ SetScriptVariable(
  *  GetSysDirection()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use AppleTextDirection in CFPreference instead.
+ *    The preferred replacement is +[NSParagraphStyle
+ *    defaultWritingDirectionForLanguage:]. If you cannot use that, you
+ *    may instead call CFLocaleGetLanguageCharacterDirection for the UI
+ *    language in which the application is running. See discussion.
  *  
  *  Discussion:
- *    We need to make sure we want to make this preference public
- *    first. Note that it may be absent in which case LTR should be
- *    assumed
+ *    Although GetSysDirection ostensibly provided an overall system
+ *    direction, it was patched by the Language Manager in Classic Mac
+ *    OS to provide a direction appropriate for the application that
+ *    was running. This is similar to the desired behavior in Mac OS X,
+ *    in which an application is normally interested in the text
+ *    direction associated with the user-interface language in which it
+ *    is running (e.g. the first language in the array returned by
+ *    CFBundleCopyPreferredLocalizationsFromArray when given the
+ *    application's bundle localizations). 
+ *    
+ *    Calling +[NSParagraphStyle defaultWritingDirectionForLanguage:]
+ *    is the preferred way to determine this. If that is not possible
+ *    for your application, then an alternative is to call
+ *    CFLocaleGetLanguageCharacterDirection for the application's
+ *    user-interface language (determined as described above).
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4

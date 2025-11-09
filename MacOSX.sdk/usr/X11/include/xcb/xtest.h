@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xtest.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xtest.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,6 +14,10 @@
 
 #include "xcb.h"
 #include "xproto.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_TEST_MAJOR_VERSION 2
 #define XCB_TEST_MINOR_VERSION 1
@@ -189,6 +193,8 @@ xcb_test_get_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_test_get_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -271,6 +277,8 @@ xcb_test_compare_cursor_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_test_compare_cursor_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -411,6 +419,10 @@ xcb_void_cookie_t
 xcb_test_grab_control (xcb_connection_t *c  /**< */,
                        uint8_t           impervious  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

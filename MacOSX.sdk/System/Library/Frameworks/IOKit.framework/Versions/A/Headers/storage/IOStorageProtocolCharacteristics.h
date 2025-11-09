@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -144,7 +144,7 @@ Example:
 @discussion This key is the SCSI Logical Unit Number for the device server
 controlled by the driver.
 
-Requirement: Mandatory for SCSI Parallel Interface and Fibre Channel Interface.
+Requirement: Mandatory for SCSI Parallel Interface, SAS, and Fibre Channel Interface.
 
 Example:
 <pre>
@@ -874,6 +874,31 @@ Example:
 </pre>
 */
 #define kIOPropertyPhysicalInterconnectTypeFireWire			"FireWire"
+
+
+/*!
+ @defined kIOPropertyPhysicalInterconnectTypeSecureDigital
+ @discussion This key defines the value of Secure Digital for the key
+ kIOPropertyPhysicalInterconnectTypeSecureDigital. If the device is a
+ connected to a Secure Digital port and follows the Secure Digital 
+ specification, this key should be set. 
+ 
+ Example:
+ <pre>
+ @textblock
+ <dict>
+    <key>Protocol Characteristics</key>
+    <dict>
+        <key>Physical Interconnect</key>
+        <string>Secure Digital</string>
+        <key>Physical Interconnect Location</key>
+        <string>Internal</string>
+    </dict>
+ </dict>
+ @/textblock
+ </pre>
+ */
+#define kIOPropertyPhysicalInterconnectTypeSecureDigital	"Secure Digital"
 
 
 /*!

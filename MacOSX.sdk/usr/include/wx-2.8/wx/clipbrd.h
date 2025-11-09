@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     19.10.99
-// RCS-ID:      $Id: clipbrd.h,v 1.25 2006/01/23 03:27:30 MR Exp $
+// RCS-ID:      $Id: clipbrd.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) wxWidgets Team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,9 +20,9 @@
 #include "wx/object.h"
 #include "wx/wxchar.h"
 
-class WXDLLEXPORT wxDataFormat;
-class WXDLLEXPORT wxDataObject;
-class WXDLLEXPORT wxClipboard;
+class WXDLLIMPEXP_FWD_CORE wxDataFormat;
+class WXDLLIMPEXP_FWD_CORE wxDataObject;
+class WXDLLIMPEXP_FWD_CORE wxClipboard;
 
 // ----------------------------------------------------------------------------
 // wxClipboard represents the system clipboard. Normally, you should use

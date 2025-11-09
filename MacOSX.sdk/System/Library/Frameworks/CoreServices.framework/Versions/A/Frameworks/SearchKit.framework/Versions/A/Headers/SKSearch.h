@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-218~113
+     Version:    SearchKit-312~320
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,7 +39,7 @@
 
 
 /*
- *  CFTypes for use with SearchKit
+ * Asynchronous search
  */
 
 #include <AvailabilityMacros.h>
@@ -58,6 +58,260 @@ extern "C" {
 
 
 /*
+ *  SKSearchRef
+ *  
+ *  Summary:
+ *    An opaque data type representing an asynchronous search.
+ */
+typedef struct __SKSearch*              SKSearchRef;
+/*
+ *  SKSearchGetTypeID()
+ *  
+ *  Summary:
+ *    Returns the type identifier for the SKSearch type.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFTypeID 
+SKSearchGetTypeID(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  SKSearchOptions
+ *  
+ *  Summary:
+ *    The various search options you can use with
+ *    <tt>SKSearchCreate</tt>.
+ */
+typedef UInt32                          SKSearchOptions;
+enum {
+  kSKSearchOptionDefault        = 0,
+  kSKSearchOptionNoRelevanceScores = 1L << 0, /* Save time by not computing relevance scores. */
+  kSKSearchOptionSpaceMeansOR   = 1L << 1, /* Space in a query means OR instead of AND. */
+  kSKSearchOptionFindSimilar    = 1L << 2 /* Find documents similar to given text string */
+};
+
+/*
+ *  SKSearchCreate()
+ *  
+ *  Summary:
+ *    Create an asynchronous search request.
+ *  
+ *  Discussion:
+ *    A call to this function must be balanced with a call at a later
+ *    time to <tt>CFRelease</tt>.
+ *  
+ *  Parameters:
+ *    
+ *    inIndex:
+ *      A reference to the index to be searched.
+ *    
+ *    inQuery:
+ *      The query string to search for.
+ *    
+ *    inSearchOptions:
+ *      The search options. See the <tt>SKSearchOptions</tt>
+ *      enumeration for options.
+ *  
+ *  Result:
+ *    SKSearchRef         A reference to a SKSearch opaque type.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern SKSearchRef 
+SKSearchCreate(
+  SKIndexRef        inIndex,
+  CFStringRef       inQuery,
+  SKSearchOptions   inSearchOptions)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  SKSearchCancel()
+ *  
+ *  Summary:
+ *    Cancel the search request.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+SKSearchCancel(SKSearchRef inSearch)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  SKSearchFindMatches()
+ *  
+ *  Summary:
+ *    Search for up to maximumTime seconds or until inMaximumCount (or
+ *    all) items are found.
+ *  
+ *  Discussion:
+ *    Returns TRUE if more to search, FALSE when the search is
+ *    exhausted. Returns number of entries actually found in
+ *    *outFoundCount. The maximumTime of 0 means return quickly, so may
+ *    return TRUE, and 0 outFoundCount. The relevance score is not
+ *    normalized, so it can be very large.
+ *  
+ *  Parameters:
+ *    
+ *    inSearch:
+ *      A reference to the SKSearch opaque type.
+ *    
+ *    inMaximumCount:
+ *      The maximum number of found items to return.
+ *    
+ *    outDocumentIDsArray:
+ *      An array of found document IDs. Must be inMaximumCount in size.
+ *    
+ *    outScoresArray:
+ *      An array of relevance scores for found items. May be
+ *      <tt>NULL</tt>.
+ *    
+ *    maximumTime:
+ *      The maximum seconds before return.
+ *    
+ *    outFoundCount:
+ *      The number of items actually found.
+ *  
+ *  Result:
+ *    Boolean             Returns TRUE if more to search, FALSE when
+ *    the search is exhausted.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+SKSearchFindMatches(
+  SKSearchRef      inSearch,
+  CFIndex          inMaximumCount,
+  SKDocumentID *   outDocumentIDsArray,
+  float *          outScoresArray,
+  CFTimeInterval   maximumTime,
+  CFIndex *        outFoundCount)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  SKIndexCopyInfoForDocumentIDs()
+ *  
+ *  Summary:
+ *    Copies document names and parent ids by way of document IDs in an
+ *    index.
+ *  
+ *  Parameters:
+ *    
+ *    inIndex:
+ *      A reference to the index.
+ *    
+ *    inCount:
+ *      The number of inDocumentIDsArray.
+ *    
+ *    inDocumentIDsArray:
+ *      An array of document IDs.
+ *    
+ *    outNamesArray:
+ *      An array of names for the specified document IDs. May be
+ *      <tt>NULL</tt>.
+ *    
+ *    outParentIDsArray:
+ *      An array of parent ids for the specified document IDs. May be
+ *      <tt>NULL</tt>.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+SKIndexCopyInfoForDocumentIDs(
+  SKIndexRef      inIndex,
+  CFIndex         inCount,
+  SKDocumentID *  inDocumentIDsArray,
+  CFStringRef *   outNamesArray,
+  SKDocumentID *  outParentIDsArray)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  SKIndexCopyDocumentRefsForDocumentIDs()
+ *  
+ *  Summary:
+ *    Copies document references by way of document IDs in an index.
+ *  
+ *  Parameters:
+ *    
+ *    inIndex:
+ *      A reference to the index.
+ *    
+ *    inCount:
+ *      The number of inDocumentIDsArray.
+ *    
+ *    inDocumentIDsArray:
+ *      An array of document IDs.
+ *    
+ *    outDocumentRefsArray:
+ *      An array of document references for the specified document IDs.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+SKIndexCopyDocumentRefsForDocumentIDs(
+  SKIndexRef       inIndex,
+  CFIndex          inCount,
+  SKDocumentID *   inDocumentIDsArray,
+  SKDocumentRef *  outDocumentRefsArray)                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  SKIndexCopyDocumentURLsForDocumentIDs()
+ *  
+ *  Summary:
+ *    Copies document URLs by way of document IDs in an index.
+ *  
+ *  Parameters:
+ *    
+ *    inIndex:
+ *      A reference to the index.
+ *    
+ *    inCount:
+ *      The number of inDocumentIDsArray.
+ *    
+ *    inDocumentIDsArray:
+ *      An array of document IDs.
+ *    
+ *    outDocumentURLsArray:
+ *      An array of CFURLs for the specified document IDs.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+SKIndexCopyDocumentURLsForDocumentIDs(
+  SKIndexRef      inIndex,
+  CFIndex         inCount,
+  SKDocumentID *  inDocumentIDsArray,
+  CFURLRef *      outDocumentURLsArray)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ * Synchronous search
+ */
+
+/*
  *  SKSearchGroupRef
  *  
  *  Summary:
@@ -68,18 +322,18 @@ extern "C" {
  */
 typedef struct __SKSearchGroup*         SKSearchGroupRef;
 /*
- *  SKSearchGroupGetTypeID()
+ *  SKSearchGroupGetTypeID()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the type identifier for the SKSearchGroup type.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSearchGroupGetTypeID(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKSearchGroupGetTypeID(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -91,18 +345,18 @@ SKSearchGroupGetTypeID(void)                                  AVAILABLE_MAC_OS_X
  */
 typedef struct __SKSearchResults*       SKSearchResultsRef;
 /*
- *  SKSearchResultsGetTypeID()
+ *  SKSearchResultsGetTypeID()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the type identifier for the SKSearchResults object.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSearchResultsGetTypeID(void)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKSearchResultsGetTypeID(void)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -396,260 +650,6 @@ extern CFArrayRef
 SKSearchResultsCopyMatchingTerms(
   SKSearchResultsRef   inSearchResults,
   CFIndex              inItem)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
-/*
- * Asynchronous search
- */
-
-/*
- *  SKSearchRef
- *  
- *  Summary:
- *    An opaque data type representing an asynchronous search.
- */
-typedef struct __SKSearch*              SKSearchRef;
-/*
- *  SKSearchGetTypeID()
- *  
- *  Summary:
- *    Returns the type identifier for the SKSearch type.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern CFTypeID 
-SKSearchGetTypeID(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-
-/*
- *  SKSearchOptions
- *  
- *  Summary:
- *    The various search options you can use with
- *    <tt>SKSearchCreate</tt>.
- */
-typedef UInt32                          SKSearchOptions;
-enum {
-  kSKSearchOptionDefault        = 0,
-  kSKSearchOptionNoRelevanceScores = 1L << 0, /* Save time by not computing relevance scores. */
-  kSKSearchOptionSpaceMeansOR   = 1L << 1, /* Space in a query means OR instead of AND. */
-  kSKSearchOptionFindSimilar    = 1L << 2 /* Find documents similar to given text string */
-};
-
-/*
- *  SKSearchCreate()
- *  
- *  Summary:
- *    Create an asynchronous search request.
- *  
- *  Discussion:
- *    A call to this function must be balanced with a call at a later
- *    time to <tt>CFRelease</tt>.
- *  
- *  Parameters:
- *    
- *    inIndex:
- *      A reference to the index to be searched.
- *    
- *    inQuery:
- *      The query string to search for.
- *    
- *    inSearchOptions:
- *      The search options. See the <tt>SKSearchOptions</tt>
- *      enumeration for options.
- *  
- *  Result:
- *    SKSearchRef         A reference to a SKSearch opaque type.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern SKSearchRef 
-SKSearchCreate(
-  SKIndexRef        inIndex,
-  CFStringRef       inQuery,
-  SKSearchOptions   inSearchOptions)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-/*
- *  SKSearchCancel()
- *  
- *  Summary:
- *    Cancel the search request.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern void 
-SKSearchCancel(SKSearchRef inSearch)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-/*
- *  SKSearchFindMatches()
- *  
- *  Summary:
- *    Search for up to maximumTime seconds or until inMaximumCount (or
- *    all) items are found.
- *  
- *  Discussion:
- *    Returns TRUE if more to search, FALSE when the search is
- *    exhausted. Returns number of entries actually found in
- *    *outFoundCount. The maximumTime of 0 means return quickly, so may
- *    return TRUE, and 0 outFoundCount. The relevance score is not
- *    normalized, so it can be very large.
- *  
- *  Parameters:
- *    
- *    inSearch:
- *      A reference to the SKSearch opaque type.
- *    
- *    inMaximumCount:
- *      The maximum number of found items to return.
- *    
- *    outDocumentIDsArray:
- *      An array of found document IDs. Must be inMaximumCount in size.
- *    
- *    outScoresArray:
- *      An array of relevance scores for found items. May be
- *      <tt>NULL</tt>.
- *    
- *    maximumTime:
- *      The maximum seconds before return.
- *    
- *    outFoundCount:
- *      The number of items actually found.
- *  
- *  Result:
- *    Boolean             Returns TRUE if more to search, FALSE when
- *    the search is exhausted.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern Boolean 
-SKSearchFindMatches(
-  SKSearchRef      inSearch,
-  CFIndex          inMaximumCount,
-  SKDocumentID *   outDocumentIDsArray,
-  float *          outScoresArray,
-  CFTimeInterval   maximumTime,
-  CFIndex *        outFoundCount)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-/*
- *  SKIndexCopyInfoForDocumentIDs()
- *  
- *  Summary:
- *    Copies document names and parent ids by way of document IDs in an
- *    index.
- *  
- *  Parameters:
- *    
- *    inIndex:
- *      A reference to the index.
- *    
- *    inCount:
- *      The number of inDocumentIDsArray.
- *    
- *    inDocumentIDsArray:
- *      An array of document IDs.
- *    
- *    outNamesArray:
- *      An array of names for the specified document IDs. May be
- *      <tt>NULL</tt>.
- *    
- *    outParentIDsArray:
- *      An array of parent ids for the specified document IDs. May be
- *      <tt>NULL</tt>.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern void 
-SKIndexCopyInfoForDocumentIDs(
-  SKIndexRef      inIndex,
-  CFIndex         inCount,
-  SKDocumentID *  inDocumentIDsArray,
-  CFStringRef *   outNamesArray,
-  SKDocumentID *  outParentIDsArray)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-/*
- *  SKIndexCopyDocumentRefsForDocumentIDs()
- *  
- *  Summary:
- *    Copies document references by way of document IDs in an index.
- *  
- *  Parameters:
- *    
- *    inIndex:
- *      A reference to the index.
- *    
- *    inCount:
- *      The number of inDocumentIDsArray.
- *    
- *    inDocumentIDsArray:
- *      An array of document IDs.
- *    
- *    outDocumentRefsArray:
- *      An array of document references for the specified document IDs.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern void 
-SKIndexCopyDocumentRefsForDocumentIDs(
-  SKIndexRef       inIndex,
-  CFIndex          inCount,
-  SKDocumentID *   inDocumentIDsArray,
-  SKDocumentRef *  outDocumentRefsArray)                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-/*
- *  SKIndexCopyDocumentURLsForDocumentIDs()
- *  
- *  Summary:
- *    Copies document URLs by way of document IDs in an index.
- *  
- *  Parameters:
- *    
- *    inIndex:
- *      A reference to the index.
- *    
- *    inCount:
- *      The number of inDocumentIDsArray.
- *    
- *    inDocumentIDsArray:
- *      An array of document IDs.
- *    
- *    outDocumentURLsArray:
- *      An array of CFURLs for the specified document IDs.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern void 
-SKIndexCopyDocumentURLsForDocumentIDs(
-  SKIndexRef      inIndex,
-  CFIndex         inCount,
-  SKDocumentID *  inDocumentIDsArray,
-  CFURLRef *      outDocumentURLsArray)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

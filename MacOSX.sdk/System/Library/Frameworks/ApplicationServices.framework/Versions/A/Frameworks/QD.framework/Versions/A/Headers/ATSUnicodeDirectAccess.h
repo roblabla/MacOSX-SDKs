@@ -3,9 +3,9 @@
  
      Contains:   Public Interfaces/Types for Low Level ATSUI
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2002-2006 by Apple Inc. all rights reserved.
+     Copyright:  © 2002-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -56,7 +56,7 @@ enum {
    * had not been previously allocated it will be allocated and
    * zero-filled when iCreate is set to true.
    */
-  kATSUDirectDataAdvanceDeltaFixedArray = 0L,
+  kATSUDirectDataAdvanceDeltaFixedArray = 0,
 
   /*
    * Returns the parallel baseline delta (delta Y) array. (Array Type):
@@ -67,7 +67,7 @@ enum {
    * had not been previously allocated it will be allocated and
    * zero-filled when iCreate is set to true.
    */
-  kATSUDirectDataBaselineDeltaFixedArray = 1L,
+  kATSUDirectDataBaselineDeltaFixedArray = 1,
 
   /*
    * Returns the parallel device delta array for device- specific
@@ -82,7 +82,7 @@ enum {
    * previously allocated it will be allocated and zero-filled when
    * iCreate is set to true.
    */
-  kATSUDirectDataDeviceDeltaSInt16Array = 2L,
+  kATSUDirectDataDeviceDeltaSInt16Array = 2,
 
   /*
    * Returns the parallel style index array. The indexes setting in the
@@ -97,7 +97,7 @@ enum {
    * previously allocated it will be allocated and zero-filled when
    * iCreate is set to true.
    */
-  kATSUDirectDataStyleIndexUInt16Array = 3L,
+  kATSUDirectDataStyleIndexUInt16Array = 3,
 
   /*
    * Returns the style setting ref array. (Array Type):
@@ -106,7 +106,7 @@ enum {
    * present if the layout has any text assigned to it at all. Setting
    * iCreate has no effect.
    */
-  kATSUDirectDataStyleSettingATSUStyleSettingRefArray = 4L,
+  kATSUDirectDataStyleSettingATSUStyleSettingRefArray = 4,
 
   /*
    * Returns the ATSLayoutRecord, version 1 array. This should not be
@@ -122,7 +122,7 @@ enum {
    * array is always present if the layout has any text assigned to it
    * at all. Setting iCreate has no effect
    */
-  kATSUDirectDataLayoutRecordATSLayoutRecordVersion1 = 100L,
+  kATSUDirectDataLayoutRecordATSLayoutRecordVersion1 = 100,
 
   /*
    * Returns the ATSLayoutRecord. This will return the most current
@@ -154,7 +154,10 @@ typedef struct LLCStyleInfo*            ATSUStyleSettingRef;
 /* Direct Accessors                                                             */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUDirectGetLayoutDataArrayPtrFromLineRef()
+ *  ATSUDirectGetLayoutDataArrayPtrFromLineRef()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTRunGetGlyphsPtr or CTRunGetPositionsPtr instead.
  *  
  *  Summary:
  *    Returns the data pointer specified by iDataSelector and
@@ -218,7 +221,7 @@ typedef struct LLCStyleInfo*            ATSUStyleSettingRef;
  *      the entries in the array returned in oLayoutDataArray.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -228,13 +231,16 @@ ATSUDirectGetLayoutDataArrayPtrFromLineRef(
   ATSUDirectDataSelector   iDataSelector,
   Boolean                  iCreate,
   void *                   oLayoutDataArrayPtr[],     /* can be NULL */
-  ItemCount *              oLayoutDataCount)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount *              oLayoutDataCount)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 #if !__LP64__
 /*
- *  ATSUDirectGetLayoutDataArrayPtrFromTextLayout()
+ *  ATSUDirectGetLayoutDataArrayPtrFromTextLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTRunGetGlyphs or CTRunGetPositions instead.
  *  
  *  Summary:
  *    Returns the data pointer specified by iDataSelector and
@@ -300,7 +306,7 @@ ATSUDirectGetLayoutDataArrayPtrFromLineRef(
  *      the entries in the array returned in oLayoutDataArray.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -310,14 +316,17 @@ ATSUDirectGetLayoutDataArrayPtrFromTextLayout(
   UniCharArrayOffset       iLineOffset,
   ATSUDirectDataSelector   iDataSelector,
   void *                   oLayoutDataArrayPtr[],     /* can be NULL */
-  ItemCount *              oLayoutDataCount)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ItemCount *              oLayoutDataCount)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 #endif  /* !__LP64__ */
 
 /*
- *  ATSUDirectReleaseLayoutDataArrayPtr()
+ *  ATSUDirectReleaseLayoutDataArrayPtr()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CoreText API instead.
  *  
  *  Summary:
  *    Properly releases of an array pointer returned by
@@ -346,7 +355,7 @@ ATSUDirectGetLayoutDataArrayPtrFromTextLayout(
  *      A pointer to the layout data array which is to be disposed of.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -354,13 +363,16 @@ extern OSStatus
 ATSUDirectReleaseLayoutDataArrayPtr(
   ATSULineRef              iLineRef,                  /* can be NULL */
   ATSUDirectDataSelector   iDataSelector,
-  void *                   iLayoutDataArrayPtr[])             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  void *                   iLayoutDataArrayPtr[])             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /* ---------------------------------------------------------------------------- */
 #if !__LP64__
 /*
- *  ATSUDirectAddStyleSettingRef()
+ *  ATSUDirectAddStyleSettingRef()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CTRunGetGlyphsPtr or CTRunGetGlyphs instead.
  *  
  *  Summary:
  *    This function will fetch a style index for the
@@ -398,7 +410,7 @@ ATSUDirectReleaseLayoutDataArrayPtr(
  *      new index will be returned here.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -406,7 +418,7 @@ extern OSStatus
 ATSUDirectAddStyleSettingRef(
   ATSULineRef           iLineRef,
   ATSUStyleSettingRef   iStyleSettingRef,
-  UInt16 *              oStyleIndex)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt16 *              oStyleIndex)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */

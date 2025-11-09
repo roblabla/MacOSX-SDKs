@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Package Interfaces.
  
-     Version:    AppleEvents-402~78
+     Version:    AppleEvents-496.5~1
  
-     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -40,7 +40,7 @@
 #define kAEOpenDocuments 				'odoc'
 #define kAEPrintDocuments 				'pdoc'
 #define kAEOpenContents 				'ocon'
-#define kAEQuitApplication 				'quit'
+#define kAEQuitApplication 				'quit'				/*  may include a property kAEQuitReason indicating what lead to the quit being sent.  */
 #define kAEAnswer 						'ansr'
 #define kAEApplicationDied 				'obit'
 #define kAEShowPreferences 				'pref'				/*  sent by Mac OS X when the user chooses the Preferences item  */
@@ -51,9 +51,6 @@
 #define kAENotifyStartRecording 		'rec1'				/*  available only in vers 1.0.1 and greater  */
 #define kAENotifyStopRecording 			'rec0'				/*  available only in vers 1.0.1 and greater  */
 #define kAENotifyRecording 				'recr'				/*  available only in vers 1.0.1 and greater  */
-
-
-
 
 /*--------------------------aedt - Apple Events Template---------------------------------*/
 /* Resource definition used for associating a value with an apple event */

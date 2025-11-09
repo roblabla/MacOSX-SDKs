@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: combobox.h,v 1.23 2006/10/30 16:04:24 VZ Exp $
+// RCS-ID:      $Id: combobox.h 42727 2006-10-30 16:04:27Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

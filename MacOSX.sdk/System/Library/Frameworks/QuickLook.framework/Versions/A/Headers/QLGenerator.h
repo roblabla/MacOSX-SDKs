@@ -37,6 +37,12 @@ QL_EXTERN_C_BEGIN
  *
  */
 
+#pragma mark Common return code for generator's callback
+
+#define kQLReturnMask 0xaf00
+#define kQLReturnNoError noErr
+#define kQLReturnHasMore (kQLReturnMask | 10)
+
 #pragma mark Thumbnail generator callback
 
 /*!
@@ -91,11 +97,29 @@ QL_EXPORT CGSize QLThumbnailRequestGetMaximumSize(QLThumbnailRequestRef thumbnai
 QL_EXPORT CFBundleRef QLThumbnailRequestGetGeneratorBundle(QLThumbnailRequestRef thumbnail);
 
 /*!
+ *      @function QLThumbnailRequestSetDocumentObject
+ *      @abstract Store some object in thumbnail request.
+ *      @param thumbnail The thumbnail request.
+ *      @param object The object representing the document
+ *      @param callbacks Callbacks to retain/release/etc. the object.
+ *      @discussion You can only call this function once per request.
+ */
+QL_EXPORT void QLThumbnailRequestSetDocumentObject(QLThumbnailRequestRef thumbnail, const void* object, const CFArrayCallBacks* callbacks) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ *      @function QLThumbnailRequestGetDocumentObject
+ *      @abstract Get the object previously stored with QLThumbnailRequestSetDocumentObject.
+ *      @param thumbnail The thumbnail request.
+ *      @result The object representing the document
+ */
+QL_EXPORT const void* QLThumbnailRequestGetDocumentObject(QLThumbnailRequestRef thumbnail) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
  *      @function QLThumbnailRequestSetImage
  *      @abstract Sets the thumbnail request response to image.
  *      @param thumbnail The thumbnail request.
  *      @param image The thumbnail image response.
- *      @param properties Currently unused.
+ *      @param properties See possible properties below.
  */
 QL_EXPORT void QLThumbnailRequestSetImage(QLThumbnailRequestRef thumbnail, CGImageRef image, CFDictionaryRef properties);
 
@@ -104,7 +128,7 @@ QL_EXPORT void QLThumbnailRequestSetImage(QLThumbnailRequestRef thumbnail, CGIma
  *      @abstract Sets the thumbnail request response to image data.
  *      @param thumbnail The thumbnail request.
  *      @param data The thumbnail image response as data. The image format should be supported by ImageIO
- *      @param properties Only supported property for now is kCGImageSourceTypeIdentifierHint (see ImageIO documentation).
+ *      @param properties See possible properties below. Additional useful properties: kCGImageSourceTypeIdentifierHint (see ImageIO documentation).
  */
 QL_EXPORT void QLThumbnailRequestSetImageWithData(QLThumbnailRequestRef thumbnail, CFDataRef data, CFDictionaryRef properties);
 
@@ -114,7 +138,7 @@ QL_EXPORT void QLThumbnailRequestSetImageWithData(QLThumbnailRequestRef thumbnai
  *      @param thumbnail The thumbnail request.
  *      @param size Size in points of the context for the thumbnail response.
  *      @param isBitmap True if thumbnail contents is based on bitmap. size will then be interpreted as pixels, not points.
- *      @param properties Currently unused.
+ *      @param properties See possible properties below.
  *      @result A graphic context to draw to.
  *      @discussion Once the thumbnail is fully drawn, you should call QLThumbnailRequestFlushContext().
  */
@@ -129,6 +153,38 @@ QL_EXPORT CGContextRef QLThumbnailRequestCreateContext(QLThumbnailRequestRef thu
 QL_EXPORT void QLThumbnailRequestFlushContext(QLThumbnailRequestRef thumbnail, CGContextRef context);
 
 /*!
+ *      @function QLThumbnailRequestSetImageAtURL
+ *      @abstract Sets the thumbnail request response to the image contained at url.
+ *      @param thumbnail The thumbnail request.
+ *      @param url The url to the thumbnail image response.
+ *      @param properties Currently unused.
+ */
+QL_EXPORT void QLThumbnailRequestSetImageAtURL(QLThumbnailRequestRef thumbnail, CFURLRef url, CFDictionaryRef properties);
+
+/*!
+ *      @function QLThumbnailRequestSetThumbnailWithDataRepresentation
+ *      @abstract Sets the thumbnail request response to the image produced by the equivalent preview representation.
+ *      @param thumbnail The thumbnail request.
+ *      @param data The content data.
+ *      @param contentTypeUTI The contentTypeUTI for the preview representation.
+ *      @param previewProperties Additional properties for the preview response.
+ *      @param properties Currently unused.
+ *      @discussion Currently supported UTIs are: none. This call only works if your gemeratpr is set to be run in the main thread
+ */
+QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailRequestRef thumbnail, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ *      @function QLThumbnailRequestSetThumbnailWithURLRepresentation
+ *      @abstract Sets the thumbnail request response to the image produced by the equivalent preview representation.
+ *      @param thumbnail The thumbnail request.
+ *      @param url The url to the preview response.
+ *      @param contentTypeUTI The contentTypeUTI for the preview representation.
+ *      @param properties Additional properties for the preview response.
+ *      @discussion Currently supported UTIs are: none. This call only works if your gemeratpr is set to be run in the main thread
+ */
+QL_EXPORT void QLThumbnailRequestSetThumbnailWithURLRepresentation(QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
  *      @function QLThumbnailRequestIsCancelled
  *      @abstract Returns wether the thumbnail request was cancelled or not.
  *      @param thumbnail The thumbnail request.
@@ -136,10 +192,25 @@ QL_EXPORT void QLThumbnailRequestFlushContext(QLThumbnailRequestRef thumbnail, C
  */
 QL_EXPORT Boolean QLThumbnailRequestIsCancelled(QLThumbnailRequestRef thumbnail);
 
+/*!
+ *      @constant kQLThumbnailPropertyExtensionKey
+ *      @abstract Value should be a CFString. The extension is used as a badge when producing an icon.
+ */
+QL_EXPORT const CFStringRef kQLThumbnailPropertyExtensionKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
+/*!
+ *      @constant kQLThumbnailPropertyExtensionKey
+ *      @abstract Value should be a CGImage. The badge is used when producing an icon.
+ */
+QL_EXPORT const CFStringRef kQLThumbnailPropertyBadgeImageKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-
-
+/*!
+ *      @constant kQLThumbnailPropertyExtensionKey
+ *      @abstract Extends the security scope where Quick Look will accept to look at a file. Value is a path as CFString.
+ *      @discussion Only useful when using QLThumbnailRequestSetImageAtURL() or QLThumbnailRequestSetThumbnailWithURLRepresentation().
+ *                  By default, Quick Look will only accept files within the current document bundle.
+ */
+QL_EXPORT const CFStringRef kQLThumbnailPropertyBaseBundlePathKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #pragma mark Preview generator callback
 
@@ -174,10 +245,44 @@ QL_EXPORT const CFStringRef kQLPreviewPropertyWidthKey;
 QL_EXPORT const CFStringRef kQLPreviewPropertyHeightKey;
 
 /*!
+ *      @constant kQLPreviewPropertyBaseBundlePathKey
+ *      @abstract Extends the security scope where Quick Look will accept to look at a file. Value is a path as CFString.
+ *      @discussion Only useful when using QLPreviewRequestSetURLRepresentation().
+ *                  By default, Quick Look will only accept files within the current document bundle.
+ */
+QL_EXPORT const CFStringRef kQLPreviewPropertyBaseBundlePathKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
  *      @constant kQLPreviewPropertyStringEncodingKey
  *      @abstract Gives the CFStringEncoding of the preview data if the preview type is plain text. Value is a CFNumber.
  */
 QL_EXPORT const CFStringRef kQLPreviewPropertyStringEncodingKey;
+
+typedef enum {
+    kQLPreviewPDFStandardStyle						= 0,
+    kQLPreviewPDFPagesWithThumbnailsOnRightStyle	= 3,
+    kQLPreviewPDFPagesWithThumbnailsOnLeftStyle		= 4,
+} QLPreviewPDFStyle;
+
+/*!
+ *      @constant kQLPreviewPropertyPDFStyleKey
+ *      @abstract Specify the preferred way to display PDF content. Value is a CFNumber using QLPreviewPDFStyle values.
+ */
+QL_EXPORT const CFStringRef kQLPreviewPropertyPDFStyleKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ *      @constant kQLPreviewOptionCursorKey
+ *      @abstract Value is the same CFNumber passed by potential previous calls to generator's preview callback for the same document with kQLPreviewPropertyCursorKey.
+ *      @discussion Use this value to provide more of the preview content.
+ */
+QL_EXPORT const CFStringRef kQLPreviewOptionCursorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ *      @constant kQLPreviewPropertyCursorKey
+ *      @abstract Value should be a CFNumber. This value will be used to get more of the document's preview if necessary
+ *                (and if the preview genererator returns kQLReturnHasMore)
+ */
+QL_EXPORT const CFStringRef kQLPreviewPropertyCursorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
  *      @function QLPreviewRequestCopyURL
@@ -211,6 +316,24 @@ QL_EXPORT CFStringRef QLPreviewRequestCopyContentUTI(QLPreviewRequestRef preview
 QL_EXPORT CFBundleRef QLPreviewRequestGetGeneratorBundle(QLPreviewRequestRef preview);
 
 /*!
+ *      @function QLPreviewRequestSetDocumentObject
+ *      @abstract Store some object in preview request.
+ *      @param thumbnail The preview request.
+ *      @param object The object representing the document
+ *      @param callbacks Callbacks to retain/release/etc. the object.
+ *      @discussion You can only call this function once per request.
+ */
+QL_EXPORT void QLPreviewRequestSetDocumentObject(QLPreviewRequestRef preview, const void* object, const CFArrayCallBacks* callbacks) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ *      @function QLPreviewRequestGetDocumentObject
+ *      @abstract Get the object previously stored with QLPreviewRequestSetDocumentObject.
+ *      @param preview The preview request.
+ *      @result The object representing the document
+ */
+QL_EXPORT const void* QLPreviewRequestGetDocumentObject(QLPreviewRequestRef preview) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
  *      @function QLPreviewRequestIsCancelled
  *      @abstract Returns wether the preview request was cancelled or not.
  *      @param preview The preview request.
@@ -231,6 +354,17 @@ QL_EXPORT Boolean QLPreviewRequestIsCancelled(QLPreviewRequestRef preview);
  *             kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeMovie, kUTTypeAudio
  */
 QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef properties);
+
+/*!
+ *      @function QLPreviewRequestSetURLRepresentation
+ *      @abstract Sets the preview request response with contents at url.
+ *      @param preview The preview request.
+ *      @param url The url to the preview response.
+ *      @param contentTypeUTI The contentTypeUTI for the preview representation.
+ *      @param properties Additional properties for the preview response.
+ *      @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML, kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeRTFD, kUTTypeMovie, kUTTypeAudio
+ */
+QL_EXPORT void QLPreviewRequestSetURLRepresentation(QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef properties);
 
 #pragma mark Draw preview in a context
 
@@ -263,7 +397,6 @@ QL_EXPORT CGContextRef QLPreviewRequestCreatePDFContext(QLPreviewRequestRef prev
  */
 
 QL_EXPORT void QLPreviewRequestFlushContext(QLPreviewRequestRef preview, CGContextRef context);
-
 
 #pragma mark Provide preview as Web content using QLPreviewRequestSetDataRepresentation
 
@@ -299,16 +432,6 @@ QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentsKey;
  *      @abstract Is the "cid" URL scheme.
  */
 QL_EXPORT const CFStringRef kQLPreviewContentIDScheme;
-
-/*!
- *      @function QLPreviewRequestSetWebContent
- *      @abstract Sets the preview response to web content to be displayed in a WebView.
- *      @param preview The preview request.
- *      @param data The content data, usually HTML.
- *      @param properties Additional properties for the preview response. See constants for proper keys.
- *      @discussion This function is deprecated. Use QLPreviewRequestSetDataRepresentation with kUTTypeHTML as content type.
- */
-QL_EXPORT void QLPreviewRequestSetWebContent(QLPreviewRequestRef preview, CFDataRef data, CFDictionaryRef properties) QL_DEPRECATED;
 
 #pragma mark
 

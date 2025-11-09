@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -65,6 +65,7 @@
 #define	_NET_IF_VAR_H_
 
 #include <sys/appleapiopts.h>
+#include <stdint.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/queue.h>		/* get TAILQ macros */

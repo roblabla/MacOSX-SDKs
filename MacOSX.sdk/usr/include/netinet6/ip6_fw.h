@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -43,6 +43,8 @@
 #ifndef _IP6_FW_H
 #define _IP6_FW_H
 
+#include <sys/appleapiopts.h>
+
 /*
  * Define IPv6 Firewall event subclass, and associated events.
  */
@@ -77,11 +79,6 @@
 */
 #define KEV_IP6FW_ENABLE	4
 
-
-
-#if !__LP64__
-
-#include <sys/appleapiopts.h>
 
 #include <net/if.h>
 
@@ -119,12 +116,13 @@ union ip6_fw_if {
  * Warning: setsockopt() will fail if sizeof(struct ip_fw) > MLEN (108)
  */
 
+
 struct ip6_fw {
 	u_int32_t version;		/* Version of this structure.  Should always be */
 							/* set to IP6_FW_CURRENT_API_VERSION by clients. */
 	void *context;			/* Context that is usable by user processes to */
 							/* identify this rule. */
-    u_long fw_pcnt,fw_bcnt;		/* Packet and byte counters */
+    u_int32_t fw_pcnt,fw_bcnt;		/* Packet and byte counters */
     struct in6_addr fw_src, fw_dst;	/* Source and destination IPv6 addr */
     struct in6_addr fw_smsk, fw_dmsk;	/* Mask for src and dest IPv6 addr */
     u_short fw_number;			/* Rule number */
@@ -149,6 +147,7 @@ struct ip6_fw {
 					/* src ports; max of 10 ports in all; */
 					/* count of 0 means match all ports) */
 };
+
 
 #define IPV6_FW_GETNSRCP(rule)		((rule)->fw_nports & 0x0f)
 #define IPV6_FW_SETNSRCP(rule, n)		do {				\
@@ -253,5 +252,4 @@ struct ip6_fw_chain {
  * Main firewall chains definitions and global var's definitions.
  */
 
-#endif /* !__LP64__ */
 #endif /* _IP6_FW_H */

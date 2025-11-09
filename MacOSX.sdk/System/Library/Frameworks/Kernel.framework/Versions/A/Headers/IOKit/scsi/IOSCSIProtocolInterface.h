@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -25,59 +25,119 @@
 #define _IOKIT_IO_SCSI_PROTOCOL_INTERFACE_H_
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+/*! @header SCSI Protocol Interface
+	@discussion
+	This file contains definitions for the IOSCSIProtocolInterface class,
+	SCSI Protocol Features used by this interface, and additional constants
+	used by this interface.
+*/
+
+
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Constants
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
-//	SCSI Device Characteristics - 	Defined between SCSI Application Layer and
-//									SCSI Protocol Layer only.
+/*
+SCSI Device Characteristics - Defined between SCSI Application Layer and
+							  SCSI Protocol Layer only.
+*/
 
-// This key is used to define SCSI Device Characteristics for a particular device.
-// It is the key for the dictionary containing the keys of characteristics. These keys
-// are only defined between the SCSI Protocol Layer and the SCSI Applicaiton Layer. Some
-// properties may be copied from this dictionary to the more generic Device Characteristics
-// or Protocol Characteristics dictionaries.
+/*!
+@constant kIOPropertySCSIDeviceCharacteristicsKey
+@discussion
+This key is used to define SCSI Device Characteristics for a particular device.
+It is the key for the dictionary containing the keys of characteristics. These keys
+are only defined between the SCSI Protocol Layer and the SCSI Applicaiton Layer. Some
+properties may be copied from this dictionary to the more generic Device Characteristics
+or Protocol Characteristics dictionaries.
+*/
 #define kIOPropertySCSIDeviceCharacteristicsKey		"SCSI Device Characteristics"
 
-// This key is used to define a default INQUIRY length to issue to the device. The
-// value is a UInt32 corresponding to the number of bytes to request in the INQUIRY
-// command.
+/*!
+@constant kIOPropertySCSIInquiryLengthKey
+@discussion
+This key is used to define a default INQUIRY length to issue to the device. The
+value is a UInt32 corresponding to the number of bytes to request in the INQUIRY
+command.
+*/
 #define kIOPropertySCSIInquiryLengthKey				"Inquiry Length"
 
-// This key is used to indicate that the device is known to be a manual ejectable media
-// device.  This property overrides all of the driver checks for determining this capability.
-// This property is a string, although if it exists it should always be true.
+/*!
+@constant kIOPropertySCSIManualEjectKey
+@discussion
+This key is used to indicate that the device is known to be a manual ejectable media
+device.  This property overrides all of the driver checks for determining this capability.
+This property is a string, although if it exists it should always be true.
+*/
 #define kIOPropertySCSIManualEjectKey				"Manual Eject"
 
-// This key is used to define the Read Time Out for a particular device
-// This property overrides all of the protocol defaults
-// This Property is a value, in miliseconds
+/*!
+@constant kIOPropertyReadTimeOutDurationKey
+@discussion
+This key is used to define the Read Time Out for a particular device.
+This property overrides all of the protocol defaults.
+This property is a value, in milliseconds.
+*/
 #define kIOPropertyReadTimeOutDurationKey			"Read Time Out Duration"
 
-// This key is used to define the Maximum Write Time Out for a particular protocol
-// This property overrides all of the protocol defaults
-// This Property is a value, in miliseconds
+/*!
+@constant kIOPropertyWriteTimeOutDurationKey
+@discussion
+This key is used to define the Write Time Out for a particular device.
+This property overrides all of the protocol defaults.
+This property is a value, in milliseconds.
+*/
 #define kIOPropertyWriteTimeOutDurationKey			"Write Time Out Duration"
 
-// This key is used to define the number of Read/Write retries for a particular device
-// This property overrides all of the protocol defaults
-// The value is a UInt32 corresponding to the number of retries
+/*!
+@constant kIOPropertyRetryCountKey
+@discussion
+This key is used to define the number of Read/Write retries for a particular device.
+This property overrides all of the protocol defaults.
+The value is a UInt32 corresponding to the number of retries.
+*/
 #define kIOPropertyRetryCountKey					"Retry Count"
 
+/*!
+ @constant kIOPropertyAutonomousSpinDownKey
+ @discussion
+ This key is used to indicate that the device is known to have its own internal logic
+ for idle disk spin down. This key is used to mark device which respon poorly to our
+ efforts to manually spin down or spin up the device when it is already in the desired 
+ state. 
+ */
+#define kIOPropertyAutonomousSpinDownKey			"Autonomous Spin Down"
+
+/*!
+ @constant kIOPropertyEjectRequireStartStopUnitKey
+ @discussion
+ This key is used to indicate that while the device may have failed PREVENT_ALLOW_MEDIUM
+ REMOVAL it still requires a START_STOP_UNIT to eject/unload media. 
+ */
+#define kIOPropertyEjectRequireStartStopUnitKey		"Eject Requires START_STOP_UNIT"
 
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-// This key is used as the CFBundleIdentifier key for the
-// IOSCSIArchitectureModelFamily proper
+/*!
+@constant kCFBundleIdentifierKey
+@discussion
+Property key for CFBundleIdentifier.
+*/
 #define kCFBundleIdentifierKey					"CFBundleIdentifier"
+
+/*!
+@constant kIOSCSIArchitectureBundleIdentifierKey
+@discussion
+IOSCSIArchitectureModelFamily's CFBundle identifier.
+*/
 #define kIOSCSIArchitectureBundleIdentifierKey	"com.apple.iokit.IOSCSIArchitectureModelFamily"
 
 
@@ -94,7 +154,23 @@
 #include <IOKit/scsi/SCSITask.h>
 
 
-// SCSI Protocol Interface Device Notification values
+/*!
+@enum SCSI Protocol Interface Device Notification values
+@discussion
+Message values for SCSI Protocol Interface Device Notifications.
+@constant kSCSIProtocolNotification_DeviceRemoved
+Private message sent between a SCSI protocol service provider and
+SCSI application layer driver to indicate device removal.
+@constant kSCSIProtocolNotification_VerifyDeviceState
+Private message sent between a SCSI protocol service provider and
+SCSI application layer driver to indicate device state may have
+changed and the device state should be re-verified by the SCSI
+Application Layer driver. An example would be a bus reset which clears
+the tray locking state of an ATAPI device.
+@constant kSCSIServicesNotification_ExclusivityChanged
+Message sent when a change in exclusivity state occurs. Usually in
+response to acquiring/releasing exclusive access to a device via a user client.
+*/
 enum
 {
 	kSCSIProtocolNotification_DeviceRemoved			= 0x69000010,
@@ -103,92 +179,185 @@ enum
 };
 
 
+/*!
+@typedef SCSIProtocolFeature
+@discussion
+Typedef for SCSIProtocolFeature, a 32-bit quantity.
+*/
 typedef UInt32 SCSIProtocolFeature;
-// SCSI Protocol Features
+
+/*!
+@enum SCSI Protocol Features
+@discussion
+The list of SCSI Protocol Features currently supported.
+*/
 enum
 {
 	
-	// kSCSIProtocolFeature_ACA:
-	// Not yet used.
+	/*!
+	@constant kSCSIProtocolFeature_ACA Not yet used.
+	*/
 	kSCSIProtocolFeature_ACA								= 1,
 	
-	// kSCSIProtocolFeature_CPUInDiskMode:
-	// Used to determine if the SCSI Protocol Services Driver supports
-	// a CPU which is in target disk mode.
+	/*!
+	@constant kSCSIProtocolFeature_CPUInDiskMode Used to determine
+	if the SCSI Protocol Services Driver supports a CPU which is in
+	target disk mode.
+	*/
 	kSCSIProtocolFeature_CPUInDiskMode						= 2,
 	
-	// kSCSIProtocolFeature_ProtocolSpecificPolling:
-	// Used to determine if the SCSI Protocol Services Driver supports
-	// protocol specific polling for media. This is used for low-power
-	// polling specifically for ATAPI devices on ATA buses.
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolSpecificPolling Used
+	to determine if the SCSI Protocol Services Driver supports
+	protocol specific polling for media. This is used for low-power
+	polling specifically for ATAPI devices on ATA buses
+	*/
 	kSCSIProtocolFeature_ProtocolSpecificPolling			= 3,
 	
-	// kSCSIProtocolFeature_ProtocolSpecificSleepCommand:
-	// Used to determine if the SCSI Protocol Services Driver supports
-	// protocol specific sleep commands to a drive. This is used for
-	// sleeping drives specifically ATAPI devices on ATA buses.
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolSpecificSleepCommand Used
+	to determine if the SCSI Protocol Services Driver supports
+	protocol specific sleep commands to a drive. This is used for
+	sleeping drives specifically ATAPI devices on ATA buses.
+	*/
 	kSCSIProtocolFeature_ProtocolSpecificSleepCommand		= 4,
 	
-	// kSCSIProtocolFeature_GetMaximumLogicalUnitNumber:
-	// If the SCSI Protocol Services Driver supports logical units, it will
-	// report the maximum addressable ID that it supports in the UInt32 pointer
-	// that is passed in as the serviceValue. If only one unit is supported,
-	// the driver should return false for this query. 
+	/*!
+	@constant kSCSIProtocolFeature_GetMaximumLogicalUnitNumber If
+	the SCSI Protocol Services Driver supports logical units, it will
+	report the maximum addressable ID that it supports in the UInt32 pointer
+	that is passed in as the serviceValue. If only one unit is supported,
+	the driver should return false for this query.
+	*/
 	kSCSIProtocolFeature_GetMaximumLogicalUnitNumber		= 5,
 	
-	// kSCSIProtocolFeature_MaximumReadBlockTransferCount and 
-	// kSCSIProtocolFeature_MaximumWriteBlockTransferCount: 
-	// If the SCSI Protocol Services Driver has a maximum number of
-	// blocks that can be transfered in either a read or write request,
-	// it will return true to appropriate query and return the block count 
-	// in the UInt32 pointer that is passed in as the serviceValue. 
+	/*!
+	@constant kSCSIProtocolFeature_MaximumReadBlockTransferCount If
+	the SCSI Protocol Services Driver has a maximum number of
+	blocks that can be transfered in a read request, it will return
+	true to this query and return the block count in the UInt32 pointer
+	that is passed in as the serviceValue.
+	*/
 	kSCSIProtocolFeature_MaximumReadBlockTransferCount		= 6,
+
+	/*!
+	@constant kSCSIProtocolFeature_MaximumWriteBlockTransferCount If
+	the SCSI Protocol Services Driver has a maximum number of
+	blocks that can be transferred in a write request, it will return
+	true to this query and return the block count in the UInt32 pointer
+	that is passed in as the serviceValue.
+	*/
 	kSCSIProtocolFeature_MaximumWriteBlockTransferCount		= 7,
 
-	// kSCSIProtocolFeature_MaximumReadTransferByteCount and 
-	// kSCSIProtocolFeature_MaximumWriteTransferByteCount: 
-	// If the SCSI Protocol Services Driver has a maximum byte
-	// count that can be transferred in either a read or write request,
-	// it will return true to appropriate query and return the byte count 
-	// in the UInt64 pointer that is passed in as the serviceValue. 
+	/*!
+	@constant kSCSIProtocolFeature_MaximumReadTransferByteCount If
+	the SCSI Protocol Services Driver has a maximum byte count
+	that can be transferred in a read request, it will return
+	true to this query and return the byte count in the UInt64 pointer
+	that is passed in as the serviceValue.
+	*/
 	kSCSIProtocolFeature_MaximumReadTransferByteCount		= 8,
+
+	/*!
+	@constant kSCSIProtocolFeature_MaximumWriteTransferByteCount If
+	the SCSI Protocol Services Driver has a maximum byte count
+	that can be transferred in a write request, it will return
+	true to this query and return the byte count in the UInt64 pointer
+	that is passed in as the serviceValue.
+	*/
 	kSCSIProtocolFeature_MaximumWriteTransferByteCount		= 9,
 	
-	// kSCSIProtocolFeature_SubmitDefaultInquiryData: 
-	// If the SCSI Protocol Services driver needs any extra information to 
-	// make any negotiation settings from the standard INQUIRY data, this 
-	// will be called to set that appropriately. The serviceValue will
-	// point to a SCSICmd_INQUIRY_StandardData buffer. The size
-	// of the buffer depends on the SCSI Device Characteristics
-	// dictionary for the device or bus. If there is no
-	// kIOPropertySCSIInquiryLengthKey value set in the dictionary
-	// or if it doesn't exist, then the size of the data will be
-	// the size of the full amount of Inquiry retrieved from the device.
+	/*!
+	@constant kSCSIProtocolFeature_SubmitDefaultInquiryData If
+	the SCSI Protocol Services Driver needs any extra information to
+	make any negotiation settings from the standard INQUIRY data, this 
+	will be called to set that appropriately. The serviceValue will
+	point to a SCSICmd_INQUIRY_StandardData buffer. The size
+	of the buffer depends on the SCSI Device Characteristics
+	dictionary for the device or bus. If there is no
+	kIOPropertySCSIInquiryLengthKey value set in the dictionary
+	or if it doesn't exist, then the size of the data will be
+	the size of the full amount of Inquiry retrieved from the device.
+	*/
 	kSCSIProtocolFeature_SubmitDefaultInquiryData			= 10,
 	
-	// kSCSIProtocolFeature_ProtocolAlwaysReportsAutosenseData:
-	// If the SCSI Protocol Services driver always reports available
-	// autosense data when a kSCSITaskStatus_CHECK_CONDITION is set,
-	// then the protocol layer should return true. E.g. FireWire
-	// transport drivers should respond true to this.
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolAlwaysReportsAutosenseData If
+	the SCSI Protocol Services Driver always reports available
+	autosense data when a kSCSITaskStatus_CHECK_CONDITION is set,
+	then the protocol layer should return true. E.g. FireWire
+	transport drivers should respond true to this.
+	*/
 	kSCSIProtocolFeature_ProtocolAlwaysReportsAutosenseData	= 11,
 	
-	// kSCSIProtocolFeature_ProtocolSpecificPowerOff:
-	// Used to determine if the SCSI Protocol Services Driver supports
-	// removing the power to the drive. This is used for aggressive
-	// power management, specifically for ATAPI devices on ATA buses.
-	kSCSIProtocolFeature_ProtocolSpecificPowerOff			= 12
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolSpecificPowerOff If
+	the SCSI Protocol Services Driver supports removing the power
+	to the drive, then the protocol layer should return true. This is
+	used for aggressive power management, specifically for ATAPI
+	devices on ATA buses.
+	*/
+	kSCSIProtocolFeature_ProtocolSpecificPowerOff			= 12,
+	
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolSpecificPowerControl
+	Used to determine if the SCSI Protocol Services Driver supports
+	switching the power to the drive on and off. This is used for aggressive
+	power management, specifically for SATAPI devices on AHCI buses.
+	*/
+	kSCSIProtocolFeature_ProtocolSpecificPowerControl		= 13,
+	
+	/*!
+	@constant kSCSIProtocolFeature_ProtocolSpecificAsyncNotification
+	Used to determine if the SCSI Protocol Services Driver supports
+	asynchronous notifications from the drive. This is used to prevent
+	polling for media, specifically for SATAPI devices on AHCI buses.
+	*/
+	kSCSIProtocolFeature_ProtocolSpecificAsyncNotification	= 14
 	
 };
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-//	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+/*!
+@typedef SCSIProtocolPowerState
+@discussion
+Typedef for SCSIProtocolPowerState, a 32-bit quantity.
+*/
+typedef UInt32 SCSIProtocolPowerState;
 
-// This class defines the public SCSI Protocol Layer API for any class that
-// provides Protocol services or needs to provide the Protocol Service API
-// for passing service requests to a Protocol Service driver. 
+/*!
+@enum SCSI Protocol Power States
+@discussion
+The list of SCSI Protocol Power States.
+*/
+enum
+{
+	/*!
+	@constant kSCSIProtocolPowerStateOff
+	Off power state.
+	*/
+	kSCSIProtocolPowerStateOff			= 0,
+
+	/*!
+	@constant kSCSIProtocolPowerStateOn
+	On power state.
+	*/
+	kSCSIProtocolPowerStateOn			= 1
+};
+
+
+//-----------------------------------------------------------------------------
+//	Class Declaration
+//-----------------------------------------------------------------------------
+
+/*!
+@class IOSCSIProtocolInterface
+@superclass IOService
+@discussion
+This class defines the public SCSI Protocol Layer API for any class that
+provides Protocol services or needs to provide the Protocol Service API
+for passing service requests to a Protocol Service driver.
+*/
 class IOSCSIProtocolInterface : public IOService
 {
 	
@@ -196,65 +365,142 @@ class IOSCSIProtocolInterface : public IOService
 	
 public:
 	
-	virtual bool	start 	( IOService * provider );
-	virtual void	free 	( void );
-	virtual bool    willTerminate   ( IOService * provider, IOOptionBits options );
+	/*!
+	@function start
+	@abstract During an IOService object's instantiation, starts the IOService object that has been selected to run on the provider.
+	@discussion See IOService.h for details.
+	@result <code>true</code> if the start was successful; <code>false</code> otherwise (which will cause the instance to be detached and usually freed).
+	*/
+	virtual bool	start ( IOService * provider );
 	
-	// ------ User Client Support ------
+	/*!
+	@function free
+	@abstract Called to release all resources held by the object.
+	@discussion Release all resources held by the object, then call super::free().  
+	*/	
+	virtual void	free ( void );
+
+	/*!
+	@function willTerminate
+	@abstract Passes a termination up the stack.
+	@discussion Notification that a provider has been terminated, sent before recursing up the stack, in root-to-leaf order.
+	@param provider The terminated provider of this object.
+	@param options Options originally passed to terminate().
+	@result <code>true</code>.
+	*/
+	virtual bool	willTerminate ( IOService * provider, IOOptionBits options );
 	
-	// The GetUserClientExclusivityState method is called by the user client
-	// to determine if any user client is holding exclusive access at the
-	// current time.
+	/*!
+	@function GetUserClientExclusivityState
+	@abstract Gets the current exclusivity state of the user client.
+	@discussion The GetUserClientExclusivityState() method is called by the SCSITaskUserClient
+	to determine if any user client is holding exclusive access at the current time. This is simply
+	a preflight check and a return value of <code>false</code> does not guarantee that a subsequent
+	call to SetUserClientExclusivityState() will return successfully.
+	@result <code>true</code> if a user client is in exclusive control of the device, <code>false</code> otherwise.
+	*/
 	virtual bool 		GetUserClientExclusivityState ( void );
 	
-	// The SetUserClientExclusivityState method is called by the user client
-	// to set the exclusive access mode.
+	/*!
+	@function SetUserClientExclusivityState
+	@abstract Sets the current exclusivity state of the user client.
+	@discussion The SetUserClientExclusivityState() method is called by the SCSITaskUserClient
+	to set the exclusive access mode.
+	@param userClient The instance of SCSITaskUserClient for which to change exclusivity state.
+	@param state Exclusivity state. <code>true</code> means exclusive access is desired, <code>false</code>
+	means exclusive access is being released.
+	@result A valid IOReturn code indicating success or the type of failure.
+	*/
 	virtual IOReturn	SetUserClientExclusivityState ( IOService * userClient, bool state );
 	
-	// ------ Power Management Support ------
 	
-	// The initialPowerStateForDomainState() method is called by the power manager
-	// to ask us what state we should be in based on the power flags of our parent
-	// in the power tree.
-	virtual UInt32		initialPowerStateForDomainState ( IOPMPowerFlags flags );
+	/*!
+	@function initialPowerStateForDomainState
+	@abstract Determines which power state a device is in, given the current power domain state.
+	@discussion Power management calls this method once, when the driver is initializing power management.
+	Subclasses should not need to override this method.
+	@param flags Flags that describe the character of "domain power"; they represent the <code>outputPowerCharacter</code> field of a state in the power domain's power state array. 
+	@result A state number. 
+	*/
+	virtual unsigned long	initialPowerStateForDomainState ( IOPMPowerFlags flags );
 	
-	// The setPowerState method is called by the power manager to tell us
-	// to transition to a different power state denoted as powerStateOrdinal.
-	// The whichDevice field is not pertinent to us since the driver is both
-	// the "policy maker" for the drive, and the "policy implementor" for the
-	// drive.
-	virtual IOReturn 	setPowerState ( UInt32 powerStateOrdinal, IOService * whichDevice );
+	/*!
+	@function setPowerState
+	@abstract Requests a power managed driver to change the power state of its device.
+	@discussion Requests a power managed driver to change the power state of its device. Most subclasses
+	of IOSCSIProtocolInterface have class-specific mechanisms and should not override this routine.
+	See IOSCSIProtocolServices.h, IOSCSIBlockCommandsDevice.h, IOSCSIReducedBlockCommandsDevice.h, and
+	IOSCSIMultimediaCommandsDevice.h for more information about power management changes.
+	Subclasses should not need to override this method.
+	@param powerStateOrdinal The number in the power state array to which the drive is being instructed to change.
+	@param whichDevice A pointer to the power management object which registered to manage power for this device.
+	The whichDevice field is not pertinent to us since the driver is both the "policy maker" for the device,
+	and the "policy implementor" for the device.
+	@result See IOService.h for details.
+	*/
+	virtual IOReturn 	setPowerState ( unsigned long powerStateOrdinal, IOService * whichDevice );
 	
-	// The IsPowerManagementIntialized method can be called to determine whether or not
-	// power management has been successfully initialized.
+	/*!
+	@function IsPowerManagementIntialized
+	@abstract Called to determine if power management is initialized.
+	@discussion Called to determine if power management is initialized.
+	Subclasses should not need to override this method.
+	@result <code>true</code> if power management has been initialized, <code>false</code> otherwise.
+	*/
 	virtual bool		IsPowerManagementIntialized ( void );
 	
-	// The CheckPowerState method is called by clients of the object before
-	// issuing an I/O request. If the device is not ready to handle such
-	// requests, it gives the driver a chance to block the thread until the
-	// device is ready.
+	/*!
+	@function CheckPowerState
+	@abstract Called by clients to ensure device is in correct power state before issuing I/O.
+	@discussion Called by clients to ensure device is in correct power state before issuing I/O.
+	If the device is not ready to handle such requests, it gives the driver a chance to block the
+	thread until the device is ready. Subclasses should not need to override this method.
+	*/
 	virtual void 		CheckPowerState ( void );
 	
-	// -- Functionality available to the SCSI Application Layer	--
-	// The ExecuteCommand method will take a SCSI Task and transport
-	// it across the physical wire(s) to the device
+	/*!
+	@function ExecuteCommand
+	@abstract Called to send a SCSITask and transport it across the physical wire(s) to the device.
+	@discussion Called to send a SCSITask and transport it across the physical wire(s) to the device.
+	Subclasses internal to IOSCSIArchitectureModelFamily will need to override this method. Third
+	party subclasses should not need to override this method.
+	@param request A valid SCSITaskIdentifier representing the task to transport across the wire(s).
+	*/
 	virtual void		ExecuteCommand ( SCSITaskIdentifier request ) = 0;
 	
-	// ************* Obsoleted Member Routine ****************
-	// The AbortCommand method is replaced by the AbortTask Management function and
-	// should no longer be called.
+	/*!
+	@function AbortCommand
+	@abstract Obsolete. Do not use this method.
+	@discussion Obsolete. Do not use this method.
+	*/
 	virtual SCSIServiceResponse		AbortCommand ( SCSITaskIdentifier request ) = 0;
 	
-	// The IsProtocolServiceSupported will return true if the specified
-	// feature is supported by the protocol layer.  If the service has a value that must be
-	// returned, it will be returned in the serviceValue output parameter.
+	/*!
+	@function IsProtocolServiceSupported
+	@abstract This method is called to query for support of a protocol specific service feature.
+	@discussion This method is called to query for support of a protocol specific service feature.
+	Subclasses of IOSCSIProtocolServices should override this method.
+	@param feature A valid SCSIProtocolFeature. See enums for SCSIProtocolFeature.
+	@param serviceValue A pointer to a structure/value that is used in conjunction with the feature
+	requested. See enums for SCSIProtocolFeature. NB: This parameter may be NULL for certain
+	feature requests.
+	@result <code>true</code> if the feature is supported, <code>false</code> otherwise.
+	*/
 	virtual bool		IsProtocolServiceSupported ( 
 								SCSIProtocolFeature 	feature, 
 								void * 					serviceValue ) = 0;
 	
-	// The HandleProtocolServiceFeature will return true if the specified feature could
-	// be handled properly by the protocol layer.  If the feature has a value that must be
-	// sent as a parameter, it will be sent in the serviceValue parameter.
+	/*!
+	@function HandleProtocolServiceFeature
+	@abstract This method is called to enact support of a protocol specific service feature.
+	@discussion This method is called to enact support of a protocol specific service feature.
+	Subclasses of IOSCSIProtocolServices should override this method.
+	@param feature A valid SCSIProtocolFeature. See enums for SCSIProtocolFeature.
+	@param serviceValue A pointer to a structure/value that is used in conjunction with the feature
+	requested. See enums for SCSIProtocolFeature. NB: This parameter may be NULL for certain
+	feature requests.
+	@result <code>true</code> if the service feature request succeeded, <code>false</code> otherwise.
+	*/
 	virtual bool		HandleProtocolServiceFeature ( 
 								SCSIProtocolFeature 	feature, 
 								void * 					serviceValue ) = 0;
@@ -277,77 +523,179 @@ protected:
 	bool				fPowerTransitionInProgress;
 	bool				fPowerAckInProgress;
 	bool				fPowerManagementInitialized;
-		
-	// The InitializePowerManagement method is called to initialize power management.
-	// The default implementation calls PMinit() and joinPMtree but doesn't register
-	// the device for power managment. That is left to other layers to do.	
+	
+	/*!
+	@function GetCommandGate
+	@abstract Accessor method to obtain the IOCommandGate.
+	@discussion Accessor method to obtain the IOCommandGate.
+	@result The IOCommandGate for this instance. May return NULL.
+	*/
+	IOCommandGate *		GetCommandGate ( void );
+	
+	/*!
+	@function InitializePowerManagement
+	@abstract This method is called to initialize power management.
+	@discussion This method is called to initialize power management. It will call PMinit(), joinPMTree(),
+	setIdleTimerPeriod(), and makeUsable(). This method does not call registerPowerDriver().
+	Subclasses may override this method to change the behavior (such as the number of power states).
+	@param provider The power management provider (i.e. the provider to attach to in the PowerManagement
+	tree). This may be a device that is not in the PM Tree itself, in which case, the IOService plane
+	is traversed towards the root node in an effort to find a node in the PM Tree.
+	*/
 	virtual void		InitializePowerManagement ( IOService * provider );
 	
-	// The GetInitialPowerState method is called once, right after InitializePowerManagement()
-	// in order to determine what state the device is initially in at startup time (usually
-	// the highest power mode).
+	/*!
+	@function GetInitialPowerState
+	@abstract This method is called to obtain the initial power state of the device (usually the highest).
+	@discussion This method is called to obtain the initial power state of the device (usually the highest).
+	Subclasses must override this method.
+	@result A power state ordinal.
+	*/
 	virtual UInt32		GetInitialPowerState ( void ) = 0;
 	
-	// The current implementation of the Power Manager requires that leaf nodes
-	// are PMstop'ed first. Moreover, if you call PMstop on a parent node first
-	// it will result in a kernel panic. We use finalize to call PMstop so we get
-	// "top down" ordering. However, the termination thread also needs to be
-	// synced with the power thread so we have to wait for any outstanding power
-	// transitions to complete before processing the finalize.
+	/*!
+	@function finalize
+	@abstract Finalizes the destruction of an IOService object.
+	@discussion See IOService.h
+	Subclasses may override this method, but should call super::finalize().
+    @result <code>true</code>.
+	*/
 	virtual bool		finalize ( IOOptionBits options );
 	
-	// The sHandleSetPowerState method is a static function used as C->C++ glue
-	// for going behind the command gate.
+	/*!
+	@function sHandleSetPowerState
+	@abstract The sHandleSetPowerState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@discussion The sHandleSetPowerState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@param self The 'this' pointer for the class.
+	@param powerStateOrdinal The power state to which device shall be changed.
+    @result A valid IOReturn code indicating success or failure.
+	*/
 	static IOReturn 	sHandleSetPowerState ( IOSCSIProtocolInterface * self, UInt32 powerStateOrdinal );
 	
-	// The sGetPowerTransistionInProgress method is a static function used as
-	// C->C++ glue for getting the command gate.
+	/*!
+	@function sGetPowerTransistionInProgress
+	@abstract The sGetPowerTransistionInProgress method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@discussion The sGetPowerTransistionInProgress method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@param self The 'this' pointer for the class.
+    @result <code>true</code> if a power state is in progress, otherwise <code>false</code>.
+	*/
 	static bool sGetPowerTransistionInProgress ( IOSCSIProtocolInterface * 	self );
 	
-	// The HandleSetPowerState method is called by the glue code and is on the
-	// serialized side of the command gate. This allows us to touch any member
-	// variables as necessary without any multi-threading issues.
+	/*!
+	@function HandleSetPowerState
+	@abstract The HandleSetPowerState method is called by the glue code and is on the
+	serialized side of the command gate.
+	@discussion The HandleSetPowerState method is called by the glue code and is on the
+	serialized side of the command gate. This allows us to touch any member
+	variables as necessary without any multi-threading issues.
+	Subclasses may override this method to change behavior. Third party subclasses
+	should not need to override this method, but may.
+	@param powerStateOrdinal The power state to which device shall be changed.
+	*/
 	virtual void		HandleSetPowerState ( UInt32 powerStateOrdinal );
 	
-	// The sPowerManagement method is a static C-function which is called using
-	// mach's thread_call API. It guarantees us a thread of execution which is
-	// different than the power management thread and the workloop thread on which
-	// we can issue commands to the device synchronously or asynchronously without
-	// worrying about deadlocks. It calls through to HandlePowerChange, which is
-	// a state machine used to direct power management.
+	/*!
+	@function sPowerManagement
+	@abstract The sPowerManagement method is a static C-function which is called using
+	mach's thread_call API. It guarantees us a thread of execution which is
+	different than the power management thread and the workloop thread on which
+	we can issue commands to the device synchronously or asynchronously without
+	worrying about deadlocks. It calls through to HandlePowerChange, which is
+	a state machine used to direct power management.
+	@discussion The sPowerManagement method is a static C-function which is called using
+	mach's thread_call API. It guarantees us a thread of execution which is
+	different than the power management thread and the workloop thread on which
+	we can issue commands to the device synchronously or asynchronously without
+	worrying about deadlocks. It calls through to HandlePowerChange, which is
+	a state machine used to direct power management.
+	@param whichDevice The 'this' pointer.
+	*/
 	static void			sPowerManagement ( thread_call_param_t whichDevice );
 	
-	// The HandlePowerChange method is pure virtual and is left to each protocol or
-	// application layer driver to implement. It is guaranteed to be called on its
-	// own thread of execution and can make synchronous or asynchronous calls.
+	/*!
+	@function HandlePowerChange
+	@abstract The HandlePowerChange method is pure virtual and is left to each protocol or
+	application layer driver to implement. It is guaranteed to be called on its
+	own thread of execution and can make synchronous or asynchronous calls.
+	@discussion The HandlePowerChange method is pure virtual and is left to each protocol or
+	application layer driver to implement. It is guaranteed to be called on its
+	own thread of execution and can make synchronous or asynchronous calls.
+	Subclasses must override this method. Third party subclasses shouldn't need to override
+	this method but can to alter the default behavior.
+	*/
 	virtual void		HandlePowerChange ( void ) = 0;
 		
-	// The sHandleCheckPowerState method is a static function used as C->C++ glue
-	// for going behind the command gate.
+	/*!
+	@function sHandleCheckPowerState
+	@abstract The sHandleCheckPowerState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@discussion The sHandleCheckPowerState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@param self The 'this' pointer for the class.
+	*/
 	static void			sHandleCheckPowerState ( IOSCSIProtocolInterface * self );
 	
-	// The HandleCheckPowerState (void) method is on the serialized side of the command
-	// gate and can change member variables safely without multi-threading issues.
-	// It's main purpose is to call the superclass' HandleCheckPowerState ( UInt32 maxPowerState )
-	// with the max power state the class registered with.
+	/*!
+	@function HandleCheckPowerState(void)
+	@abstract The HandleCheckPowerState (void) method is on the serialized side of the command
+	gate and can change member variables safely without multi-threading issues.
+	It's main purpose is to call the superclass' HandleCheckPowerState ( UInt32 maxPowerState )
+	with the max power state the class registered with.
+	@discussion The HandleCheckPowerState (void) method is on the serialized side of the command
+	gate and can change member variables safely without multi-threading issues.
+	It's main purpose is to call the superclass' HandleCheckPowerState ( UInt32 maxPowerState )
+	with the max power state the class registered with.
+	Subclasses must override this method. Third party subclasses shouldn't need to override
+	this method but can to alter the default behavior.
+	*/
 	virtual void		HandleCheckPowerState ( void ) = 0;
 	
-	// The HandleCheckPowerState ( UInt32 maxPowerState ) method is called by
-	// the subclasses and is passed the maxPowerState number given to the power
-	// manager at initialization time. This guarantees the threads block until that
-	// power state has been achieved.
+	/*!
+	@function HandleCheckPowerState(UInt32 maxPowerState)
+	@abstract The HandleCheckPowerState(UInt32 maxPowerState) method is called by
+	the subclasses and is passed the maxPowerState number given to the power
+	manager at initialization time. This guarantees the threads block until that
+	power state has been achieved.
+	@discussion The HandleCheckPowerState(UInt32 maxPowerState) method is called by
+	the subclasses and is passed the maxPowerState number given to the power
+	manager at initialization time. This guarantees the threads block until that
+	power state has been achieved.
+	@param maxPowerState The maximum power state in the power state array.
+	*/
 	void 				HandleCheckPowerState ( UInt32 maxPowerState );
 	
-	// The TicklePowerManager ( void ) method is called by CheckPowerState and
-	// sends an activity tickle to the power manager so that the idle timer is
-	// reset.
+	/*!
+	@function TicklePowerManager(void)
+	@abstract The TicklePowerManager(void) method is called by CheckPowerState and
+	sends an activity tickle to the power manager so that the idle timer is
+	reset.
+	@discussion The TicklePowerManager(void) method is called by CheckPowerState and
+	sends an activity tickle to the power manager so that the idle timer is
+	reset.
+	Subclasses must override this method. Third party subclasses shouldn't need to override
+	this method but can to alter the default behavior.
+	*/
 	virtual void		TicklePowerManager ( void ) = 0;
 	
-	// The TicklePowerManager ( UInt32 maxPowerState ) method is a convenience
-	// function which can be called by subclasses in TicklePowerManager (void)
-	// in order to tell the power manager to reset idle timer or bring the device
-	// into the requested state. It returns whatever is returned by activityTickle
-	// (true if device is in the requested state, false if it is not).
+	/*!
+	@function TicklePowerManager(UInt32 maxPowerState)
+	@abstract The TicklePowerManager(UInt32 maxPowerState) method is a convenience
+	function which can be called by subclasses in TicklePowerManager (void)
+	in order to tell the power manager to reset idle timer or bring the device
+	into the requested state. It returns whatever is returned by activityTickle
+	(true if device is in the requested state, false if it is not).
+	@discussion The TicklePowerManager(UInt32 maxPowerState) method is a convenience
+	function which can be called by subclasses in TicklePowerManager(void)
+	in order to tell the power manager to reset idle timer or bring the device
+	into the requested state. It returns whatever is returned by activityTickle
+	(true if device is in the requested state, false if it is not).
+	@param maxPowerState The maximum power state in the power state array.
+	@result The result of the call to activityTickle(). See IOService.h for details.
+	*/
 	bool				TicklePowerManager ( UInt32 maxPowerState );
 	
 	// ------ User Client Support ------
@@ -355,37 +703,134 @@ protected:
 	bool				fUserClientExclusiveControlled;
 	IOService *			fUserClient;
 	
-	// The sGetUserClientExclusivityState method is a static function used as C->C++ glue
-	// for going behind the command gate.
-	static void 		sGetUserClientExclusivityState ( IOSCSIProtocolInterface * self, bool * state );
-	static void		 	sSetUserClientExclusivityState ( IOSCSIProtocolInterface * self, IOReturn * result, IOService * userClient, bool state );
+	/*!
+	@function sGetUserClientExclusivityState
+	@abstract The sGetUserClientExclusivityState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@discussion The sGetUserClientExclusivityState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@param self The 'this' pointer for the class.
+	@param state A pointer to a bool in which the state should be set.
+	*/
+	static void 	sGetUserClientExclusivityState ( IOSCSIProtocolInterface * self, bool * state );
 	
-	virtual bool 		HandleGetUserClientExclusivityState ( void );
-	virtual IOReturn 	HandleSetUserClientExclusivityState ( IOService * userClient, bool state );
+	/*!
+	@function sSetUserClientExclusivityState
+	@abstract The sSetUserClientExclusivityState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@discussion The sSetUserClientExclusivityState method is a static function used as C->C++ glue
+	for going behind the command gate.
+	@param self The 'this' pointer for the class.
+	@param result A pointer to an IOReturn for the resulting status.
+	@param userClient The instance of SCSITaskUserClient for which to change exclusivity state.
+	@param state A bool indicating the desired state to set.
+	*/
+	static void		sSetUserClientExclusivityState ( IOSCSIProtocolInterface * self, IOReturn * result, IOService * userClient, bool state );
+
+	/*!
+	@function HandleGetUserClientExclusivityState
+	@abstract Gets the current exclusivity state of the user client.
+	@discussion The HandleGetUserClientExclusivityState() method is called on the serialized side
+	of the command gate to determine if any user client is holding exclusive access at the current
+	time. See discussion for GetUserClientExclusivityState().
+	Subclasses may override this method to alter default behavior. Third party subclasses should
+	not need to override this method.
+	@result <code>true</code> if a user client is in exclusive control of the device, <code>false</code> otherwise.
+	*/
+	virtual bool	HandleGetUserClientExclusivityState ( void );
+
+	/*!
+	@function HandleSetUserClientExclusivityState
+	@abstract Sets the current exclusivity state of the user client.
+	@discussion The HandleSetUserClientExclusivityState() method is called on the serialized side
+	of the command gate to set the exclusive access mode.
+	@param userClient The instance of SCSITaskUserClient for which to change exclusivity state.
+	@param state Exclusivity state. <code>true</code> means exclusive access is desired, <code>false</code>
+	means exclusive access is being released.
+	@result A valid IOReturn code indicating success or the type of failure.
+	*/
+	virtual IOReturn	HandleSetUserClientExclusivityState ( IOService * userClient, bool state );
 	
 public:
 	
 	// ------- SCSI Architecture Model Task Management Functions ------
+
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 1 );
-	// The ABORT TASK function allows an SCSI Application Layer client to request 
+	/*!
+	@function AbortTask
+	@abstract Aborts a task based on the Logical Unit and tagged task identifier.
+	@discussion Aborts a task based on the Logical Unit and tagged task identifier.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@param theLogicalUnit This value should be zero unless the device driver is
+	more complex and managing multiple Logical Units.
+	@param theTag A valid SCSITaggedTaskIdentifier representing an outstanding SCSITask.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		AbortTask ( UInt8 theLogicalUnit, SCSITaggedTaskIdentifier theTag ) = 0;
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 2 );
+	/*!
+	@function AbortTaskSet
+	@abstract Aborts a task set based on the Logical Unit.
+	@discussion Aborts a task set based on the Logical Unit.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@param theLogicalUnit This value should be zero unless the device driver is
+	more complex and managing multiple Logical Units.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		AbortTaskSet ( UInt8 theLogicalUnit ) = 0;
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 3 );
+	/*!
+	@function ClearACA
+	@abstract Clears an Auto-Contingent Allegiance (ACA) for the specified Logical Unit.
+	@discussion Clears an Auto-Contingent Allegiance (ACA) for the specified Logical Unit.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@param theLogicalUnit This value should be zero unless the device driver is
+	more complex and managing multiple Logical Units.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		ClearACA ( UInt8 theLogicalUnit ) = 0;
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 4 );
+	/*!
+	@function ClearTaskSet
+	@abstract Clears a task set for the specified Logical Unit.
+	@discussion Clears a task set for the specified Logical Unit.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@param theLogicalUnit This value should be zero unless the device driver is
+	more complex and managing multiple Logical Units.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		ClearTaskSet ( UInt8 theLogicalUnit ) = 0;
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 5 );
+	/*!
+	@function LogicalUnitReset
+	@abstract Resets the specified Logical Unit.
+	@discussion Resets the specified Logical Unit.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@param theLogicalUnit This value should be zero unless the device driver is
+	more complex and managing multiple Logical Units.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		LogicalUnitReset ( UInt8 theLogicalUnit ) = 0;
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIProtocolInterface, 6 );
 	
-	// The TARGET RESET management function will cause the Protocol Services Driver
-	// to perform the reset
+	/*!
+	@function TargetReset
+	@abstract Resets the target device.
+	@discussion Resets the target device.
+	Subclasses must override this method. Third party subclasses should not need to override
+	this method.
+	@result A valid SCSIServiceResponse code.
+	*/
 	virtual SCSIServiceResponse		TargetReset ( void ) = 0;
 	
 private:

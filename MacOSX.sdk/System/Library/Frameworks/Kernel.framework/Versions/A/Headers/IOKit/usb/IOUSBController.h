@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -45,6 +45,8 @@
 #include <IOKit/usb/IOUSBCommand.h>
 #include <IOKit/usb/IOUSBWorkLoop.h>
 
+#include <IOKit/acpi/IOACPIPlatformDevice.h>
+
 
 //================================================================================================
 //
@@ -54,22 +56,31 @@
 //
 enum
 {
-    kErrataCMDDisableTestMode		= (1 << 0),		// turn off UHCI test mode
-    kErrataOnlySinglePageTransfers	= (1 << 1),		// Don't cross page boundaries in a single transfer
-    kErrataRetryBufferUnderruns		= (1 << 2),		// Don't cross page boundaries in a single transfer
-    kErrataLSHSOpti					= (1 << 3),		// Don't cross page boundaries in a single transfer
-    kErrataDisableOvercurrent		= (1 << 4),		// Always set the NOCP bit in rhDescriptorA register
-    kErrataLucentSuspendResume		= (1 << 5),		// Don't allow port suspend at the root hub
-    kErrataNeedsWatchdogTimer		= (1 << 6),		// Use Watchdog timer to reset confused controllers
-    kErrataNeedsPortPowerOff		= (1 << 7),		// Power off the ports and back on again to clear weird status.
-    kErrataAgereEHCIAsyncSched		= (1 << 8),		// needs workaround for Async Sched bug
-    kErrataNECOHCIIsochWraparound	= (1 << 9),		// needs workaround for NEC isoch buffer wraparound problem
-	kErrataNECIncompleteWrite		= (1 << 10),	// needs workaround for NEC bits not sticking (errata IBB-2UE-00030 Jun 23 2005)
-	kErrataICH6PowerSequencing		= (1 << 11),	// needs special power sequencing for early Transition machines
-	kErrataICH7ISTBuffer			= (1 << 12),	// buffer for Isochronous Scheduling Threshold
-	kErrataUHCISupportsOvercurrent	= (1 << 13),	// UHCI controller supports overcurrent detection
-	kErrataNeedsOvercurrentDebounce = (1 << 14),	// The overcurrent indicator should be debounced by 10ms
-	kErrataSupportsPortResumeEnable = (1 << 15)		// UHCI has resume enable bits at config address 0xC4
+    kErrataCMDDisableTestMode					= (1 << 0),		// turn off UHCI test mode
+    kErrataOnlySinglePageTransfers				= (1 << 1),		// Don't cross page boundaries in a single transfer
+    kErrataRetryBufferUnderruns					= (1 << 2),		// Don't cross page boundaries in a single transfer
+    kErrataLSHSOpti								= (1 << 3),		// Don't cross page boundaries in a single transfer
+    kErrataDisableOvercurrent					= (1 << 4),		// Always set the NOCP bit in rhDescriptorA register
+    kErrataLucentSuspendResume					= (1 << 5),		// Don't allow port suspend at the root hub
+    kErrataNeedsWatchdogTimer					= (1 << 6),		// Use Watchdog timer to reset confused controllers
+    kErrataNeedsPortPowerOff					= (1 << 7),		// Power off the ports and back on again to clear weird status.
+    kErrataAgereEHCIAsyncSched					= (1 << 8),		// needs workaround for Async Sched bug
+    kErrataNECOHCIIsochWraparound				= (1 << 9),		// needs workaround for NEC isoch buffer wraparound problem
+	kErrataNECIncompleteWrite					= (1 << 10),	// needs workaround for NEC bits not sticking (errata IBB-2UE-00030 Jun 23 2005)
+	kErrataICH6PowerSequencing					= (1 << 11),	// needs special power sequencing for early Transition machines
+	kErrataICH7ISTBuffer						= (1 << 12),	// buffer for Isochronous Scheduling Threshold
+	kErrataUHCISupportsOvercurrent				= (1 << 13),	// UHCI controller supports overcurrent detection
+	kErrataNeedsOvercurrentDebounce				= (1 << 14),	// The overcurrent indicator should be debounced by 10ms
+	kErrataSupportsPortResumeEnable				= (1 << 15),	// UHCI has resume enable bits at config address 0xC4
+	kErrataNoCSonSplitIsoch						= (1 << 16),	// MCP79 - split iscoh is a little different
+	kErrataOHCINoGlobalSuspendOnSleep			= (1 << 17),	// when sleeping, do not put the OHCI controller in SUSPEND state. just leave it Operational with suspended downstream ports
+	kErrataMissingPortChangeInt					= (1 << 18),	// sometimes the port change interrupt may be missing
+	kErrataMCP79IgnoreDisconnect				= (1 << 19),	// MCP79 - need to ignore a connect/disconnect on wake
+	kErrataUse32bitEHCI							= (1 << 20),	// MCP79 - EHCI should only run with 32 bit DMA addresses
+	kErrataUHCISupportsResumeDetectOnConnect	= (1 << 21),	// UHCI controller will generate a ResumeDetect interrupt while in Global Suspend if a device is plugged in
+	kErrataDontUseCompanionController			= (1 << 22),	// For systems which will end up being EHCI only
+	kErrataIgnoreRootHubPowerClearFeature		= (1 << 23),	// MCP89 - don't power off the root hub ports
+	kErrataDisableAsynchronousParkMode			= (1 << 24)		// some controllers which default to using Async Park Mode don't quite work with it
 };
 
 enum
@@ -103,6 +114,18 @@ struct ErrataListEntryStruct
 typedef struct ErrataListEntryStruct  ErrataListEntry, *ErrataListEntryPtr;
 
 
+struct SleepCurrentPerModelStruct
+{
+    char				model[14];
+	UInt32				totalExtraWakeCurrent;			// Above the 500mA available to each port
+    UInt32				maxWakeCurrentPerPort;			// Any one port can not exceed this
+    UInt32 				totalExtraSleepCurrent;			// Above the 500mA available to each port
+    UInt32				maxSleepCurrentPerPort;			// Any one port can not exceed this
+};
+
+typedef struct SleepCurrentPerModelStruct  SleepCurrentPerModel, *SleepCurrentPerModelPtr;
+
+
 //================================================================================================
 //
 //   Routines used to implement synchronous I/O
@@ -125,7 +148,7 @@ class IOUSBLog;
 class IOUSBHubDevice;
 class IOUSBRootHubDevice;
 class IOMemoryDescriptor;
-
+class AppleUSBHubPort;
 
 //================================================================================================
 //
@@ -149,6 +172,7 @@ class IOUSBController : public IOUSBBus
     OSDeclareAbstractStructors(IOUSBController)
     friend class IOUSBControllerV2;
     friend class IOUSBControllerV3;
+    friend class AppleUSBHub;
 
 protected:
 
@@ -158,7 +182,8 @@ protected:
     UInt32					_devZeroLock;
     static UInt32			_busCount;
     static bool				gUsedBusIDs[256];
-    
+	static UInt32			gExtraCurrentPropertiesInitialized;
+   
     struct ExpansionData 
     {
 		IOCommandPool		*freeUSBCommandPool;
@@ -166,16 +191,18 @@ protected:
         IOTimerEventSource	*watchdogUSBTimer;
         bool				_terminating;
         bool				_watchdogTimerActive;
-        bool				_pcCardEjected;
+        bool				_pcCardEjected;						// Obsolete
         UInt32				_busNumber;
         UInt32				_currentSizeOfCommandPool;
         UInt32				_currentSizeOfIsocCommandPool;
         UInt8				_controllerSpeed;					// Controller speed, passed down for splits
-        thread_call_t		_terminatePCCardThread;
+        thread_call_t		_terminatePCCardThread;				// Obsolete
         bool				_addressPending[128];
 		SInt32				_activeIsochTransfers;				// isochronous transfers in the queue
 		IOService			*_provider;							// common name for our provider
 		bool				_controllerCanSleep;				// true iff the controller is able to support sleep/wake
+		bool				_needToClose;
+		UInt32				_isochMaxBusStall;					// value (in ns) of the maximum PCI bus stall allowed for Isoch.
     };
     ExpansionData *_expansionData;
 	
@@ -188,6 +215,7 @@ public:
     virtual void 		stop( IOService * provider );
     virtual bool 		finalize(IOOptionBits options);
     virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
+    virtual bool		didTerminate( IOService * provider, IOOptionBits options, bool * defer );
 	
 protected:
 		
@@ -286,6 +314,7 @@ protected:
                                                     
     static void			WatchdogTimer(OSObject *target, IOTimerEventSource *sender);
 
+	// Obsolete
     static void 		TerminatePCCard(OSObject *target);
 
     static IOReturn		ProtectedDevZeroLock(OSObject *target, void* lock, void *, void *, void*);
@@ -528,7 +557,6 @@ protected:
 public:
 
     static IOUSBLog		*_log;
-	static const char *		USBErrorToString(IOReturn status);
 	
     IOCommandGate *		GetCommandGate(void);
 
@@ -792,7 +820,7 @@ public:
 
    /*!
 	@function GetBandwidthAvailable
-        Returns the available bandwidth (in bytes) per frame for
+        Returns the available bandwidth (in bytes) per frame or microframe for
 	isochronous transfers.
 	@result maximum number of bytes that a new iso pipe could transfer
 	per frame given current allocations.
@@ -1048,7 +1076,8 @@ public:
 	 */
     OSMetaClassDeclareReservedUsed(IOUSBController,  18);
 	virtual IOReturn UIMCreateIsochTransfer(IOUSBIsocCommand *command);
-											
+	
+	// do not use this slot without first checking bug rdar://6022420
     OSMetaClassDeclareReservedUnused(IOUSBController,  19);
     
 protected:
@@ -1056,6 +1085,32 @@ protected:
     void 	IncreaseCommandPool();
     void	ParsePCILocation(const char *str, int *deviceNum, int *functionNum);
     int		ValueOfHexDigit(char c);
+	
+	UInt32							ExpressCardPort( IORegistryEntry * provider );
+	IOACPIPlatformDevice *			CopyACPIDevice( IORegistryEntry * device );
+	bool							DumpUSBACPI( IORegistryEntry * acpiDevice );
+	bool							IsPortInternal( IORegistryEntry * provider, UInt32 portnum, UInt32 locationID );
+	
+private:
+	bool							HasExpressCard( IORegistryEntry * acpiDevice, UInt32 * portnum );
+	bool							CheckACPIUPCTable( IORegistryEntry * acpiDevice, UInt32 portnum, UInt32 locationID );
+};
+
+//================================================================================================
+//
+//   IOUSBController_ExtraCurrentIOLockClass
+//
+//	 Used for locking access to shared resources between all EHCI controllers
+//
+//================================================================================================
+//
+class IOUSBController_ExtraCurrentIOLockClass
+{
+public:
+	IOUSBController_ExtraCurrentIOLockClass(void);								// Constructor
+	virtual ~IOUSBController_ExtraCurrentIOLockClass(void);						// Destructor
+	
+	IOLock *lock;
 };
 
 #endif /* ! _IOKIT_IOUSBCONTROLLER_H */

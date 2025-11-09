@@ -6,7 +6,7 @@ class AppGenerator < Rails::Generator::Base
 
   DATABASES = %w(mysql oracle postgresql sqlite2 sqlite3 frontbase)
 
-  default_options   :db => "sqlite3", :shebang => DEFAULT_SHEBANG, :freeze => false
+  default_options   :db => "mysql", :shebang => DEFAULT_SHEBANG, :freeze => false
   mandatory_options :source => "#{File.dirname(__FILE__)}/../../../../.."
 
   def initialize(runtime_args, runtime_options = {})
@@ -101,7 +101,7 @@ class AppGenerator < Rails::Generator::Base
 
       opt.on("-d", "--database=name", String,
             "Preconfigure for selected database (options: mysql/oracle/postgresql/sqlite2/sqlite3).",
-            "Default: sqlite3") { |v| options[:db] = v }
+            "Default: mysql") { |v| options[:db] = v }
 
       opt.on("-f", "--freeze",
             "Freeze Rails in vendor/rails from the gems generating the skeleton",

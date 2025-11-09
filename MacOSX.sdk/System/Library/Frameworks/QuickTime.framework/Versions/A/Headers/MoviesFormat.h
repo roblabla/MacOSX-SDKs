@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,10 +34,6 @@
 
 #pragma pack(push, 2)
 
-/* QuickTime is not available to 64-bit clients */
-
-#if !__LP64__
-
 enum {
   kMovieVersion                 = 0     /* version number of the format here described */
 };
@@ -51,14 +47,14 @@ enum {
 ****************************************/
 /* MoviesUserData is the type used for user data in movie and track directories */
 struct MoviesUserData {
-  long                size;                   /* size of this user data */
-  long                udType;                 /* type of user data */
+  SInt32              size;                   /* size of this user data */
+  SInt32              udType;                 /* type of user data */
   char                data[1];                /* the user data */
 };
 typedef struct MoviesUserData           MoviesUserData;
 struct UserDataAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
   MoviesUserData      userData[1];
 };
 typedef struct UserDataAtom             UserDataAtom;
@@ -74,100 +70,100 @@ typedef struct UserDataAtom             UserDataAtom;
 ****************************************/
 /* SampleDescription is in Movies.h */
 struct SampleDescriptionAtom {
-  long                size;
-  long                atomType;               /* = 'stsd' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'stsd' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   SampleDescription   sampleDescTable[1];
 };
 typedef struct SampleDescriptionAtom    SampleDescriptionAtom;
 /* TimeToSampleNum maps physical sample time to physical sample number. */
 struct TimeToSampleNum {
-  long                sampleCount;
+  SInt32              sampleCount;
   TimeValue           sampleDuration;
 };
 typedef struct TimeToSampleNum          TimeToSampleNum;
 struct TimeToSampleNumAtom {
-  long                size;
-  long                atomType;               /* = 'stts' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'stts' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   TimeToSampleNum     timeToSampleNumTable[1];
 };
 typedef struct TimeToSampleNumAtom      TimeToSampleNumAtom;
 /* SyncSamples is a list of the physical samples which are self contained. */
 struct SyncSampleAtom {
-  long                size;
-  long                atomType;               /* = 'stss' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
-  long                syncSampleTable[1];
+  SInt32              size;
+  SInt32              atomType;               /* = 'stss' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
+  SInt32              syncSampleTable[1];
 };
 typedef struct SyncSampleAtom           SyncSampleAtom;
 /* SampleToChunk maps physical sample number to chunk number. */
 /* same as SampleToChunk, but redundant first sample is removed */
 struct SampleToChunk {
-  long                firstChunk;
-  long                samplesPerChunk;
-  long                sampleDescriptionID;
+  SInt32              firstChunk;
+  SInt32              samplesPerChunk;
+  SInt32              sampleDescriptionID;
 };
 typedef struct SampleToChunk            SampleToChunk;
 struct SampleToChunkAtom {
-  long                size;
-  long                atomType;               /* = 'stsc' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'stsc' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   SampleToChunk       sampleToChunkTable[1];
 };
 typedef struct SampleToChunkAtom        SampleToChunkAtom;
 struct ChunkOffsetAtom {
-  long                size;
-  long                atomType;               /* = 'stco' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
-  long                chunkOffsetTable[1];
+  SInt32              size;
+  SInt32              atomType;               /* = 'stco' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
+  SInt32              chunkOffsetTable[1];
 };
 typedef struct ChunkOffsetAtom          ChunkOffsetAtom;
 struct SampleSizeAtom {
-  long                size;
-  long                atomType;               /* = 'stsz' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                sampleSize;
-  long                numEntries;
-  long                sampleSizeTable[1];
+  SInt32              size;
+  SInt32              atomType;               /* = 'stsz' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              sampleSize;
+  SInt32              numEntries;
+  SInt32              sampleSizeTable[1];
 };
 typedef struct SampleSizeAtom           SampleSizeAtom;
 struct ShadowSync {
-  long                fdSampleNum;
-  long                syncSampleNum;
+  SInt32              fdSampleNum;
+  SInt32              syncSampleNum;
 };
 typedef struct ShadowSync               ShadowSync;
 struct ShadowSyncAtom {
-  long                size;
-  long                atomType;               /* = 'stsz' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'stsz' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   ShadowSync          shadowSyncTable[1];
 };
 typedef struct ShadowSyncAtom           ShadowSyncAtom;
 /* CompositionOffsetEntry maps sample numbers to composition offsets. */
 struct CompositionOffsetEntry {
-  long                sampleCount;
+  SInt32              sampleCount;
   TimeValue           displayOffset;
 };
 typedef struct CompositionOffsetEntry   CompositionOffsetEntry;
 struct CompositionOffsetAtom {
-  long                size;
-  long                atomType;               /* = 'ctts' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'ctts' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   CompositionOffsetEntry  compositionOffsetTable[1];
 };
 typedef struct CompositionOffsetAtom    CompositionOffsetAtom;
 struct SampleDependencyAtom {
-  long                size;
-  long                atomType;               /* = 'sdtp' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              size;
+  SInt32              atomType;               /* = 'sdtp' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
   UInt8               sampleDependencyTable[1];
 };
 typedef struct SampleDependencyAtom     SampleDependencyAtom;
@@ -198,9 +194,9 @@ enum {
 };
 
 struct CompositionShiftLeastGreatestAtom {
-  long                size;
-  long                atomType;               /* = 'cslg' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              size;
+  SInt32              atomType;               /* = 'cslg' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
   SInt32              compositionOffsetToDTDDeltaShift;
   SInt32              leastDecodeToDisplayDelta;
   SInt32              greatestDecodeToDisplayDelta;
@@ -209,16 +205,16 @@ struct CompositionShiftLeastGreatestAtom {
 };
 typedef struct CompositionShiftLeastGreatestAtom CompositionShiftLeastGreatestAtom;
 struct PartialSyncSampleAtom {
-  long                size;
-  long                atomType;               /* = 'stps' */
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
-  long                numEntries;
+  SInt32              size;
+  SInt32              atomType;               /* = 'stps' */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              numEntries;
   UInt32              partialSyncSampleTable[1];
 };
 typedef struct PartialSyncSampleAtom    PartialSyncSampleAtom;
 struct SampleTableAtom {
-  long                size;
-  long                atomType;               /* = 'stbl' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'stbl' */
 
   SampleDescriptionAtom  sampleDescription;
   TimeToSampleNumAtom  timeToSampleNum;
@@ -230,47 +226,47 @@ struct SampleTableAtom {
 };
 typedef struct SampleTableAtom          SampleTableAtom;
 struct PublicHandlerInfo {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                componentType;
-  long                componentSubType;
-  long                componentManufacturer;
-  long                componentFlags;
-  long                componentFlagsMask;
+  SInt32              componentType;
+  SInt32              componentSubType;
+  SInt32              componentManufacturer;
+  SInt32              componentFlags;
+  SInt32              componentFlagsMask;
   char                componentName[1];
 };
 typedef struct PublicHandlerInfo        PublicHandlerInfo;
 struct HandlerAtom {
-  long                size;
-  long                atomType;               /* = 'hdlr' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'hdlr' */
 
   PublicHandlerInfo   hInfo;
 };
 typedef struct HandlerAtom              HandlerAtom;
 /* a data reference is a private structure */
 
-typedef long                            DataRefAtom;
+typedef SInt32                          DataRefAtom;
 struct DataInfoAtom {
-  long                size;
-  long                atomType;               /* = 'dinf' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'dinf' */
 
   DataRefAtom         dataRef;
 };
 typedef struct DataInfoAtom             DataInfoAtom;
 struct RgnAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 
-  short               rgnSize;
+  SInt16              rgnSize;
   Rect                rgnBBox;
   char                data[1];
 };
 typedef struct RgnAtom                  RgnAtom;
 struct MatteCompressedAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
   ImageDescription    matteImageDescription;
 
@@ -278,15 +274,15 @@ struct MatteCompressedAtom {
 };
 typedef struct MatteCompressedAtom      MatteCompressedAtom;
 struct MatteAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 
   MatteCompressedAtom  aCompressedMatte;
 };
 typedef struct MatteAtom                MatteAtom;
 struct ClippingAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 
   RgnAtom             aRgnClip;
 };
@@ -296,23 +292,23 @@ typedef struct ClippingAtom             ClippingAtom;
 ***********************/
 
 struct VideoMediaInfoHeader {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  short               graphicsMode;           /* for QD - transfer mode */
-  short               opColorRed;             /* opcolor for transfer mode */
-  short               opColorGreen;
-  short               opColorBlue;
+  SInt16              graphicsMode;           /* for QD - transfer mode */
+  SInt16              opColorRed;             /* opcolor for transfer mode */
+  SInt16              opColorGreen;
+  SInt16              opColorBlue;
 };
 typedef struct VideoMediaInfoHeader     VideoMediaInfoHeader;
 struct VideoMediaInfoHeaderAtom {
-  long                size;                   /* size of Media info */
-  long                atomType;               /* = 'vmhd' */
+  SInt32              size;                   /* size of Media info */
+  SInt32              atomType;               /* = 'vmhd' */
   VideoMediaInfoHeader  vmiHeader;
 };
 typedef struct VideoMediaInfoHeaderAtom VideoMediaInfoHeaderAtom;
 struct VideoMediaInfo {
-  long                size;                   /* size of Media info */
-  long                atomType;               /* = 'minf' */
+  SInt32              size;                   /* size of Media info */
+  SInt32              atomType;               /* = 'minf' */
 
   VideoMediaInfoHeaderAtom  header;
 
@@ -324,22 +320,22 @@ struct VideoMediaInfo {
 };
 typedef struct VideoMediaInfo           VideoMediaInfo;
 struct SoundMediaInfoHeader {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  short               balance;
-  short               rsrvd;
+  SInt16              balance;
+  SInt16              rsrvd;
 };
 typedef struct SoundMediaInfoHeader     SoundMediaInfoHeader;
 struct SoundMediaInfoHeaderAtom {
-  long                size;                   /* size of Media info */
-  long                atomType;               /* = 'vmhd' */
+  SInt32              size;                   /* size of Media info */
+  SInt32              atomType;               /* = 'vmhd' */
 
   SoundMediaInfoHeader  smiHeader;
 };
 typedef struct SoundMediaInfoHeaderAtom SoundMediaInfoHeaderAtom;
 struct SoundMediaInfo {
-  long                size;                   /* size of Media info */
-  long                atomType;               /* = 'minf' */
+  SInt32              size;                   /* size of Media info */
+  SInt32              atomType;               /* = 'minf' */
 
   SoundMediaInfoHeaderAtom  header;
 
@@ -352,36 +348,36 @@ struct SoundMediaInfo {
 typedef struct SoundMediaInfo           SoundMediaInfo;
 /* whatever data the media handler needs goes after the atomType */
 struct MediaInfo {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 };
 typedef struct MediaInfo                MediaInfo;
 /***********************
 * Media Directory Structures
 ***********************/
 struct MediaHeader {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                creationTime;           /* seconds since Jan 1904 when directory was created */
-  long                modificationTime;       /* seconds since Jan 1904 when directory was appended */
+  SInt32              creationTime;           /* seconds since Jan 1904 when directory was created */
+  SInt32              modificationTime;       /* seconds since Jan 1904 when directory was appended */
 
   TimeValue           timeScale;              /* start time for Media (Media time) */
   TimeValue           duration;               /* length of Media (Media time) */
 
-  short               language;
-  short               quality;
+  SInt16              language;
+  SInt16              quality;
 };
 typedef struct MediaHeader              MediaHeader;
 struct MediaHeaderAtom {
-  long                size;
-  long                atomType;
+  SInt32              size;
+  SInt32              atomType;
 
   MediaHeader         header;
 };
 typedef struct MediaHeaderAtom          MediaHeaderAtom;
 struct MediaDirectory {
-  long                size;
-  long                atomType;               /* = 'mdia' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'mdia' */
 
   MediaHeaderAtom     mediaHeader;            /* standard Media information */
 
@@ -401,25 +397,25 @@ enum {
 };
 
 struct TrackHeader {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                creationTime;           /* seconds since Jan 1904 when directory was created */
-  long                modificationTime;       /* seconds since Jan 1904 when directory was appended */
+  SInt32              creationTime;           /* seconds since Jan 1904 when directory was created */
+  SInt32              modificationTime;       /* seconds since Jan 1904 when directory was appended */
 
-  long                trackID;
+  SInt32              trackID;
 
-  long                reserved1;
+  SInt32              reserved1;
 
   TimeValue           duration;               /* length of track (track time) */
 
-  long                reserved2;
-  long                reserved3;
+  SInt32              reserved2;
+  SInt32              reserved3;
 
-  short               layer;
-  short               alternateGroup;
+  SInt16              layer;
+  SInt16              alternateGroup;
 
-  short               volume;
-  short               reserved4;
+  SInt16              volume;
+  SInt16              reserved4;
 
   MatrixRecord        matrix;
   Fixed               trackWidth;
@@ -427,8 +423,8 @@ struct TrackHeader {
 };
 typedef struct TrackHeader              TrackHeader;
 struct TrackHeaderAtom {
-  long                size;                   /* size of track header */
-  long                atomType;               /* = 'tkhd' */
+  SInt32              size;                   /* size of track header */
+  SInt32              atomType;               /* = 'tkhd' */
 
   TrackHeader         header;
 };
@@ -440,18 +436,18 @@ struct EditListType {
 };
 typedef struct EditListType             EditListType;
 struct EditListAtom {
-  long                size;
-  long                atomType;               /* = elst */
+  SInt32              size;
+  SInt32              atomType;               /* = elst */
 
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                numEntries;
+  SInt32              numEntries;
   EditListType        editListTable[1];
 };
 typedef struct EditListAtom             EditListAtom;
 struct EditsAtom {
-  long                size;
-  long                atomType;               /* = edts */
+  SInt32              size;
+  SInt32              atomType;               /* = edts */
 
   EditListAtom        editList;
 };
@@ -459,56 +455,56 @@ typedef struct EditsAtom                EditsAtom;
 struct TrackLoadSettings {
   TimeValue           preloadStartTime;
   TimeValue           preloadDuration;
-  long                preloadFlags;
-  long                defaultHints;
+  SInt32              preloadFlags;
+  SInt32              defaultHints;
 };
 typedef struct TrackLoadSettings        TrackLoadSettings;
 struct TrackLoadSettingsAtom {
-  long                size;
-  long                atomType;               /* = load */
+  SInt32              size;
+  SInt32              atomType;               /* = load */
 
   TrackLoadSettings   settings;
 };
 typedef struct TrackLoadSettingsAtom    TrackLoadSettingsAtom;
 struct TrackCleanApertureDimensions {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
   FixedPoint          cleanApertureDimensions;
 };
 typedef struct TrackCleanApertureDimensions TrackCleanApertureDimensions;
 struct TrackCleanApertureDimensionsAtom {
-  long                size;
-  long                atomType;               /* = 'tapt' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'tapt' */
 
   TrackCleanApertureDimensions  cleanApertureDimensions;
 };
 typedef struct TrackCleanApertureDimensionsAtom TrackCleanApertureDimensionsAtom;
 struct TrackProductionApertureDimensions {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
   FixedPoint          productionApertureDimensions;
 };
 typedef struct TrackProductionApertureDimensions TrackProductionApertureDimensions;
 struct TrackProductionApertureDimensionsAtom {
-  long                size;
-  long                atomType;               /* = 'prof' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'prof' */
 
   TrackProductionApertureDimensions  productionApertureDimensions;
 };
 typedef struct TrackProductionApertureDimensionsAtom TrackProductionApertureDimensionsAtom;
 struct TrackEncodedPixelsDimensions {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
   FixedPoint          encodedPixelsDimensions;
 };
 typedef struct TrackEncodedPixelsDimensions TrackEncodedPixelsDimensions;
 struct TrackEncodedPixelsDimensionsAtom {
-  long                size;
-  long                atomType;               /* = 'enof' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'enof' */
 
   TrackEncodedPixelsDimensions  encodedPixelsDimensions;
 };
 typedef struct TrackEncodedPixelsDimensionsAtom TrackEncodedPixelsDimensionsAtom;
 struct TrackDirectory {
-  long                size;
-  long                atomType;               /* = 'trak' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'trak' */
 
   TrackHeaderAtom     trackHeader;            /* standard track information */
 
@@ -530,20 +526,20 @@ typedef struct TrackDirectory           TrackDirectory;
 *
 ****************************************/
 struct MovieHeader {
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                creationTime;           /* seconds since Jan 1904 when directory was created */
-  long                modificationTime;       /* seconds since Jan 1904 when directory was appended */
+  SInt32              creationTime;           /* seconds since Jan 1904 when directory was created */
+  SInt32              modificationTime;       /* seconds since Jan 1904 when directory was appended */
 
   TimeValue           timeScale;              /* Time specifications */
   TimeValue           duration;
   Fixed               preferredRate;          /* rate at which to play this movie */
 
-  short               preferredVolume;        /* volume to play movie at */
-  short               reserved1;
+  SInt16              preferredVolume;        /* volume to play movie at */
+  SInt16              reserved1;
 
-  long                preferredLong1;
-  long                preferredLong2;
+  SInt32              preferredLong1;
+  SInt32              preferredLong2;
 
   MatrixRecord        matrix;
 
@@ -556,12 +552,12 @@ struct MovieHeader {
   TimeValue           selectionDuration;      /* time in track the proxy begins (track time) */
   TimeValue           currentTime;            /* time in track the proxy begins (track time) */
 
-  long                nextTrackID;            /* next value to use for a TrackID */
+  SInt32              nextTrackID;            /* next value to use for a TrackID */
 };
 typedef struct MovieHeader              MovieHeader;
 struct MovieHeaderAtom {
-  long                size;
-  long                atomType;               /* = 'mvhd' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'mvhd' */
 
   MovieHeader         header;
 };
@@ -571,8 +567,8 @@ struct TrackDirectoryEntry {
 };
 typedef struct TrackDirectoryEntry      TrackDirectoryEntry;
 struct MovieDirectory {
-  long                size;
-  long                atomType;               /* = 'moov' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'moov' */
 
   MovieHeaderAtom     header;
 
@@ -687,26 +683,26 @@ enum {
 /* Text ATOM definitions*/
 
 struct TextBoxAtom {
-  long                size;
-  long                atomType;               /* = 'tbox' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'tbox' */
   Rect                textBox;                /* New text box (overrides defaultTextBox)*/
 };
 typedef struct TextBoxAtom              TextBoxAtom;
 struct HiliteAtom {
-  long                size;
-  long                atomType;               /* = 'hlit' */
-  long                selStart;               /* hilite selection start character*/
-  long                selEnd;                 /* hilite selection end character*/
+  SInt32              size;
+  SInt32              atomType;               /* = 'hlit' */
+  SInt32              selStart;               /* hilite selection start character*/
+  SInt32              selEnd;                 /* hilite selection end character*/
 };
 typedef struct HiliteAtom               HiliteAtom;
 struct KaraokeRec {
   TimeValue           timeVal;
-  short               beginHilite;
-  short               endHilite;
+  SInt16              beginHilite;
+  SInt16              endHilite;
 };
 typedef struct KaraokeRec               KaraokeRec;
 struct KaraokeAtom {
-  long                numEntries;
+  SInt32              numEntries;
   KaraokeRec          karaokeEntries[1];
 };
 typedef struct KaraokeAtom              KaraokeAtom;
@@ -716,9 +712,9 @@ enum {
 };
 
 struct ReferenceMovieDataRefRecord {
-  long                flags;
+  SInt32              flags;
   OSType              dataRefType;
-  long                dataRefSize;
+  SInt32              dataRefSize;
   char                dataRef[1];
 };
 typedef struct ReferenceMovieDataRefRecord ReferenceMovieDataRefRecord;
@@ -729,43 +725,43 @@ enum {
 };
 
 struct QTAltVersionCheckRecord {
-  long                flags;                  /* currently always 0*/
+  SInt32              flags;                  /* currently always 0*/
   OSType              gestaltTag;
   UInt32              val1;
   UInt32              val2;
-  short               checkType;
+  SInt16              checkType;
 };
 typedef struct QTAltVersionCheckRecord  QTAltVersionCheckRecord;
 /* some helpful constants for DataRateRecord.dataRate */
 enum {
-  kDataRate144ModemRate         = 1400L,
-  kDataRate288ModemRate         = 2800L,
-  kDataRateISDNRate             = 5600L,
-  kDataRateDualISDNRate         = 11200L,
-  kDataRate256kbpsRate          = 25600L,
-  kDataRate384kbpsRate          = 38400L,
-  kDataRate512kbpsRate          = 51200L,
-  kDataRate768kbpsRate          = 76800L,
-  kDataRate1MbpsRate            = 100000L,
-  kDataRateT1Rate               = 150000L,
+  kDataRate144ModemRate         = 1400,
+  kDataRate288ModemRate         = 2800,
+  kDataRateISDNRate             = 5600,
+  kDataRateDualISDNRate         = 11200,
+  kDataRate256kbpsRate          = 25600,
+  kDataRate384kbpsRate          = 38400,
+  kDataRate512kbpsRate          = 51200,
+  kDataRate768kbpsRate          = 76800,
+  kDataRate1MbpsRate            = 100000,
+  kDataRateT1Rate               = 150000,
   kDataRateInfiniteRate         = 0x7FFFFFFF,
-  kDataRateDefaultIfNotSet      = kDataRate384kbpsRate
+  kDataRateDefaultIfNotSet      = kDataRate512kbpsRate
 };
 
 struct QTAltDataRateRecord {
-  long                flags;                  /* currently always 0*/
-  long                dataRate;
+  SInt32              flags;                  /* currently always 0*/
+  SInt32              dataRate;
 };
 typedef struct QTAltDataRateRecord      QTAltDataRateRecord;
 struct QTAltComponentCheckRecord {
-  long                flags;                  /* currently always 0 */
+  SInt32              flags;                  /* currently always 0 */
   ComponentDescription  cd;
-  unsigned long       minVersion;
+  UInt32              minVersion;
 };
 typedef struct QTAltComponentCheckRecord QTAltComponentCheckRecord;
 struct QTAltLanguageRecord {
-  long                flags;                  /* currently always 0*/
-  short               language;
+  SInt32              flags;                  /* currently always 0*/
+  SInt16              language;
 };
 typedef struct QTAltLanguageRecord      QTAltLanguageRecord;
 
@@ -785,27 +781,27 @@ typedef struct QTAltCPURatingRecord     QTAltCPURatingRecord;
 struct ReferenceMovieNetworkStatusRecord {
   UInt32              flags;                  /* currently always 0*/
   UInt32              valueCount;             /* how many status values are in array*/
-  long                netStatusValues[1];     /* a value from kQTNetworkStatus... constants*/
+  SInt32              netStatusValues[1];     /* a value from kQTNetworkStatus... constants*/
 };
 typedef struct ReferenceMovieNetworkStatusRecord ReferenceMovieNetworkStatusRecord;
 struct CloneRecord {
-  long                flags;
-  long                masterTrackID;          /* track ID of the track we're cloning */
+  SInt32              flags;
+  SInt32              masterTrackID;          /* track ID of the track we're cloning */
 };
 typedef struct CloneRecord              CloneRecord;
 struct CloneAtom {
-  long                size;
-  long                atomType;               /* = clon */
+  SInt32              size;
+  SInt32              atomType;               /* = clon */
 
   CloneRecord         cloneInfo;
 };
 typedef struct CloneAtom                CloneAtom;
 struct FileTypeAtom {
-  long                size;
-  long                atomType;               /* = 'ftyp' */
-  long                majorBrand;             /* best use brand */
-  long                minorVersion;
-  long                compatibleBrands[4];    /* 1 or greater */
+  SInt32              size;
+  SInt32              atomType;               /* = 'ftyp' */
+  SInt32              majorBrand;             /* best use brand */
+  SInt32              minorVersion;
+  SInt32              compatibleBrands[4];    /* 1 or greater */
 };
 typedef struct FileTypeAtom             FileTypeAtom;
 enum {
@@ -816,29 +812,26 @@ enum {
 };
 
 struct SecureContentInfoAtom {
-  long                size;
-  long                atomType;               /* = 'sinf' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'sinf' */
 };
 typedef struct SecureContentInfoAtom    SecureContentInfoAtom;
 struct SecureContentSchemeTypeAtom {
-  long                size;
-  long                atomType;               /* = 'schm' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'schm' */
 
-  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+  SInt32              flags;                  /* 1 byte of version / 3 bytes of flags */
 
-  long                schemeType;
+  SInt32              schemeType;
   UInt32              schemeVersion;
                                               /* if flags & 1, C string holding URL for security component server*/
 };
 typedef struct SecureContentSchemeTypeAtom SecureContentSchemeTypeAtom;
 struct SecureContentSchemeInfoAtom {
-  long                size;
-  long                atomType;               /* = 'schi' */
+  SInt32              size;
+  SInt32              atomType;               /* = 'schi' */
 };
 typedef struct SecureContentSchemeInfoAtom SecureContentSchemeInfoAtom;
-
-#endif // !__LP64__
-
 
 #pragma pack(pop)
 

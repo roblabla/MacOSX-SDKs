@@ -3,10 +3,7 @@
  
      Contains:   AUGraph application interfaces
  
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X Public Beta
- 
-     Copyright:  (c) 2000 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000 - 2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,14 +15,12 @@
 #ifndef __AUGraph
 #define __AUGraph
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
-	#include <CoreServices/CoreServices.h>
 	#include <AudioUnit/AudioUnit.h>
 #else
 	#include <CoreAudioTypes.h>
-	#include <CoreServices.h>
 	#include <AudioUnit.h>
 #endif
 
@@ -121,16 +116,16 @@ enum
     @param		outGraph		the new AUGraph object
 */
 extern OSStatus
-NewAUGraph(			AUGraph			*outGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewAUGraph(			AUGraph			*outGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
     @function	DisposeAUGraph
     @abstract   dispose an AUGraph
-    @discussion	creates an AUGraph
+    @discussion	deallocates the AUGraph along with its nodes and their resources.
     @param		inGraph		the AUGraph object to be disposed
 */
 extern OSStatus
-DisposeAUGraph(		AUGraph			inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAUGraph(		AUGraph			inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 
 #pragma mark -
@@ -143,15 +138,15 @@ DisposeAUGraph(		AUGraph			inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LAT
     @function	AUGraphAddNode
     @abstract   Add a node to an AUGraph
     @discussion	This creates a node in the graph that is an AudioUnit, using the supplied
-				ComponentDescription to find and open that unit.
+				AudioComponentDescription to find and open that unit.
     @param		inGraph			the AUGraph object
-    @param		inDescription	the ComponentDescription used to find and open the AudioUnit
+    @param		inDescription	the AudioComponentDescription used to find and open the AudioUnit
     @param		outNode			the newly added node
 */
 extern OSStatus
-AUGraphAddNode(		AUGraph							inGraph,
-					const ComponentDescription	*	inDescription,
-					AUNode						*	outNode)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+AUGraphAddNode(		AUGraph							  inGraph,
+					const AudioComponentDescription	* inDescription,
+					AUNode						*	  outNode)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function	AUGraphRemoveNode
@@ -163,7 +158,7 @@ AUGraphAddNode(		AUGraph							inGraph,
 */
 extern OSStatus
 AUGraphRemoveNode(  AUGraph			inGraph,
-					AUNode			inNode)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					AUNode			inNode)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
     @function	AUGraphGetNodeCount
@@ -174,7 +169,7 @@ AUGraphRemoveNode(  AUGraph			inGraph,
 */
 extern OSStatus
 AUGraphGetNodeCount(AUGraph			inGraph,
-					UInt32 			*outNumberOfNodes)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					UInt32 			*outNumberOfNodes)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
     @function	AUGraphGetIndNode
@@ -188,7 +183,7 @@ AUGraphGetNodeCount(AUGraph			inGraph,
 extern OSStatus
 AUGraphGetIndNode(  AUGraph			inGraph,
 					UInt32 			inIndex,
-					AUNode			*outNode)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					AUNode			*outNode)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
     @function	AUGraphNodeInfo
@@ -201,12 +196,13 @@ AUGraphGetIndNode(  AUGraph			inGraph,
 	@param		outAudioUnit		the AudioUnit of this node
 */
 extern OSStatus
-AUGraphNodeInfo(	AUGraph					inGraph,
-					AUNode					inNode,
-					ComponentDescription *	outDescription,
-					AudioUnit *				outAudioUnit)			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+AUGraphNodeInfo(	AUGraph						inGraph,
+					AUNode						inNode,
+					AudioComponentDescription *	outDescription,
+					AudioUnit *					outAudioUnit)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 			
 
+#if !TARGET_OS_IPHONE
 #pragma mark -
 #pragma mark Sub Graphs
 /*! 
@@ -226,7 +222,7 @@ AUGraphNodeInfo(	AUGraph					inGraph,
 */
 extern OSStatus
 AUGraphNewNodeSubGraph( AUGraph				inGraph,
-						AUNode				*outNode)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+						AUNode				*outNode)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
     @function	AUGraphGetNodeInfoSubGraph
@@ -239,7 +235,7 @@ AUGraphNewNodeSubGraph( AUGraph				inGraph,
 extern OSStatus
 AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 							AUNode				inNode,
-							AUGraph				*outSubGraph)	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							AUGraph				*outSubGraph)	__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 								
 /*!
     @function	AUGraphIsNodeSubGraph
@@ -252,7 +248,9 @@ AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 extern OSStatus
 AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 							AUNode				inNode,
-							Boolean*			outFlag)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							Boolean*			outFlag)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+
+#endif // !TARGET_OS_IPHONE
 
 #pragma mark -
 #pragma mark Node Interactions
@@ -357,7 +355,7 @@ AUGraphConnectNodeInput(	AUGraph			inGraph,
 							AUNode			inSourceNode,
 							UInt32			inSourceOutputNumber,
 							AUNode			inDestNode,
-							UInt32			inDestInputNumber)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							UInt32			inDestInputNumber)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphSetNodeInputCallback
@@ -372,7 +370,7 @@ AUGraphSetNodeInputCallback (AUGraph						inGraph,
 							AUNode							inDestNode,
 							UInt32							inDestInputNumber,
 							const AURenderCallbackStruct *	inInputCallback) 
-																	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+																	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphDisconnectNodeInput
@@ -386,7 +384,7 @@ AUGraphSetNodeInputCallback (AUGraph						inGraph,
 extern OSStatus
 AUGraphDisconnectNodeInput(	AUGraph			inGraph,
 							AUNode			inDestNode,
-							UInt32			inDestInputNumber)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							UInt32			inDestInputNumber)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphClearConnections
@@ -395,7 +393,7 @@ AUGraphDisconnectNodeInput(	AUGraph			inGraph,
 	@param		inGraph
 */
 extern OSStatus
-AUGraphClearConnections(	AUGraph			inGraph)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphClearConnections(	AUGraph			inGraph)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphGetNumberOfInteractions
@@ -406,7 +404,7 @@ AUGraphClearConnections(	AUGraph			inGraph)				AVAILABLE_MAC_OS_X_VERSION_10_0_A
 */
 extern OSStatus
 AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
-								UInt32 *			outNumInteractions)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+								UInt32 *			outNumInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphGetInteractionInfo
@@ -424,7 +422,7 @@ AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
 extern OSStatus
 AUGraphGetInteractionInfo(	AUGraph					inGraph,
 							UInt32					inInteractionIndex,
-							AUNodeInteraction *		outInteraction)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							AUNodeInteraction *		outInteraction)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphGetInteractionInfo
@@ -437,7 +435,7 @@ AUGraphGetInteractionInfo(	AUGraph					inGraph,
 extern OSStatus
 AUGraphCountNodeInteractions(	AUGraph				inGraph,
 								AUNode				inNode,
-								UInt32 *			outNumInteractions)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+								UInt32 *			outNumInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*! 
 	@function	AUGraphGetNodeInteractions
@@ -454,7 +452,7 @@ extern OSStatus
 AUGraphGetNodeInteractions(	AUGraph					inGraph,
 							AUNode					inNode,
 							UInt32 *				ioNumInteractions,
-							AUNodeInteraction *		outInteractions)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+							AUNodeInteraction *		outInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 
@@ -505,7 +503,7 @@ AUGraphGetNodeInteractions(	AUGraph					inGraph,
 */
 extern OSStatus
 AUGraphUpdate(		AUGraph			inGraph,
-					Boolean			*outIsUpdated)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					Boolean			*outIsUpdated)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark State Management
@@ -519,7 +517,7 @@ AUGraphUpdate(		AUGraph			inGraph,
 	@param		inGraph
 */
 extern OSStatus
-AUGraphOpen(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphOpen(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphClose
@@ -528,7 +526,7 @@ AUGraphOpen(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 	@param		inGraph
 */
 extern OSStatus
-AUGraphClose(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphClose(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphInitialize
@@ -542,7 +540,7 @@ AUGraphClose(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
 	@param		inGraph
 */
 extern OSStatus
-AUGraphInitialize(		AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphInitialize(		AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphUninitialize
@@ -551,7 +549,7 @@ AUGraphInitialize(		AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_L
 	@param		inGraph
 */
 extern OSStatus
-AUGraphUninitialize(	AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphUninitialize(	AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphStart
@@ -562,7 +560,7 @@ AUGraphUninitialize(	AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
 	@param		inGraph
 */
 extern OSStatus
-AUGraphStart(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphStart(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphStop
@@ -571,7 +569,7 @@ AUGraphStart(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
 	@param		inGraph
 */
 extern OSStatus
-AUGraphStop(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AUGraphStop(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 
 /*!
@@ -581,7 +579,7 @@ AUGraphStop(			AUGraph		inGraph)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 */
 extern OSStatus
 AUGraphIsOpen(			AUGraph		inGraph,
-						Boolean		*outIsOpen)						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						Boolean		*outIsOpen)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 							
 /*!
 	@function	AUGraphIsInitialized
@@ -590,7 +588,7 @@ AUGraphIsOpen(			AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphIsInitialized(	AUGraph		inGraph,
-						Boolean		*outIsInitialized)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						Boolean		*outIsInitialized)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 							
 /*!
 	@function	AUGraphIsRunning
@@ -599,7 +597,7 @@ AUGraphIsInitialized(	AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphIsRunning(		AUGraph		inGraph,
-						Boolean		*outIsRunning)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						Boolean		*outIsRunning)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 						
 #pragma mark -
 #pragma mark Utilities
@@ -615,7 +613,7 @@ AUGraphIsRunning(		AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphGetCPULoad(		AUGraph		inGraph,
-						Float32		*outAverageCPULoad)				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+						Float32		*outAverageCPULoad)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphGetMaxCPULoad
@@ -626,7 +624,7 @@ AUGraphGetCPULoad(		AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphGetMaxCPULoad(	AUGraph		inGraph,
-						Float32		*outMaxLoad)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+						Float32		*outMaxLoad)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphAddRenderNotify
@@ -641,7 +639,7 @@ AUGraphGetMaxCPULoad(	AUGraph		inGraph,
 extern OSStatus
 AUGraphAddRenderNotify(			AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void 					*inRefCon)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								void 					*inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphRemoveRenderNotify
@@ -655,23 +653,24 @@ AUGraphAddRenderNotify(			AUGraph					inGraph,
 extern OSStatus
 AUGraphRemoveRenderNotify(		AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void 					*inRefCon)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								void 					*inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark Deprecated
 
+#if !TARGET_OS_IPHONE
+struct ComponentDescription;
 /*!
 	@function			AUGraphNewNode
 	@discussion		ClassInfo data should not be used with new nodes
 	@deprecated	in 10.5, see AUGraphAddNode
 */
 extern OSStatus
-AUGraphNewNode(	AUGraph						inGraph,
-				const ComponentDescription	*inDescription,
-				UInt32						inClassDataSize,// reserved: must be zero
-				const void					*inClassData,
-				AUNode						*outNode)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+AUGraphNewNode(	AUGraph								inGraph,
+				const struct ComponentDescription	*inDescription,
+				UInt32								inClassDataSize,// reserved: must be zero
+				const void							*inClassData,
+				AUNode								*outNode)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*!
@@ -680,54 +679,12 @@ AUGraphNewNode(	AUGraph						inGraph,
 	@deprecated	in 10.5, see AUGraphNodeInfo
 */
 extern OSStatus
-AUGraphGetNodeInfo(	AUGraph				inGraph,
-					AUNode				inNode,
-					ComponentDescription *outDescription,
-					UInt32				*outClassDataSize,
-					void				**outClassData,
-					AudioUnit			*outAudioUnit)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-#if !__LP64__
-
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioUnit/AUNTComponent.h>
-#else
-	#include <AUNTComponent.h>
-#endif
-
-/*!
-	@function			AUGraphSetRenderNotification
-	@discussion		
-					These calls are used for an AUGraph that has AudioUnits of 'aunt' type
-					see <AudioUnit/AUNTComponent.h> (V1)
-	
-					These API are deprecated (as is the V1 AU) and developers should only be using the V2
-					based AU's (and their supporting API)...
-	@deprecated	in 10.3, see AUGraphAddRenderNotify
-*/
-extern OSStatus
-AUGraphSetRenderNotification(		AUGraph					inGraph,
-									AudioUnitRenderCallback inCallback,
-									void 					*inRefCon)	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER 
-																		DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-/*!
-	@function			AUGraphRemoveRenderNotification
-	@discussion		
-					These calls are used for an AUGraph that has AudioUnits of 'aunt' type
-					see <AudioUnit/AUNTComponent.h> (V1)
-	
-					These API are deprecated (as is the V1 AU) and developers should only be using the V2
-					based AU's (and their supporting API)...
-	@deprecated	in 10.3, see AUGraphRemoveRenderNotify
-*/
-extern OSStatus
-AUGraphRemoveRenderNotification(	AUGraph					inGraph,
-									AudioUnitRenderCallback inCallback,
-									void 					*inRefCon)	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER 
-																		DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
-#endif
+AUGraphGetNodeInfo(	AUGraph						inGraph,
+					AUNode						inNode,
+					struct ComponentDescription *outDescription,
+					UInt32						*outClassDataSize,
+					void						**outClassData,
+					AudioUnit					*outAudioUnit)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function			AUGraphGetNumberOfConnections
@@ -735,8 +692,7 @@ AUGraphRemoveRenderNotification(	AUGraph					inGraph,
 */
 extern OSStatus
 AUGraphGetNumberOfConnections(	AUGraph		inGraph,
-								UInt32		*outNumConnections)		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+								UInt32		*outNumConnections)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function			AUGraphGetConnectionInfo
@@ -748,8 +704,7 @@ AUGraphGetConnectionInfo(	AUGraph		inGraph,
 							AUNode		*outSourceNode,
 							UInt32		*outSourceOutputNumber,
 							AUNode		*outDestNode,
-							UInt32		*outDestInputNumber)		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+							UInt32		*outDestInputNumber)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function			AUGraphCountNodeConnections
@@ -758,8 +713,7 @@ AUGraphGetConnectionInfo(	AUGraph		inGraph,
 extern OSStatus
 AUGraphCountNodeConnections(	AUGraph 	inGraph,
 								AUNode 		inNode,
-								UInt32 		*outNumConnections)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+								UInt32 		*outNumConnections)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function			AUGraphGetNodeConnections
@@ -770,8 +724,9 @@ AUGraphGetNodeConnections(		AUGraph						inGraph,
 								AUNode						inNode,
 								AudioUnitNodeConnection		*outConnections,
 								UInt32						*ioNumConnections)	
-																	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
-																	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+
+#endif //!TARGET_OS_IPHONE
 
 #if defined(__cplusplus)
 }

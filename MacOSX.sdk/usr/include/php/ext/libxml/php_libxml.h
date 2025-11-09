@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15.2.2.2.7 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: php_libxml.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -27,9 +27,11 @@ extern zend_module_entry libxml_module_entry;
 #define libxml_module_ptr &libxml_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_LIBXML_API __declspec(dllexport)
+#	define PHP_LIBXML_API __declspec(dllexport)
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PHP_LIBXML_API __attribute__ ((visibility("default")))
 #else
-#define PHP_LIBXML_API
+#	define PHP_LIBXML_API
 #endif
 
 #include "ext/standard/php_smart_str.h"
@@ -82,12 +84,12 @@ PHP_LIBXML_API int php_libxml_decrement_doc_ref(php_libxml_node_object *object T
 PHP_LIBXML_API xmlNodePtr php_libxml_import_node(zval *object TSRMLS_DC);
 PHP_LIBXML_API int php_libxml_register_export(zend_class_entry *ce, php_libxml_export_node export_function);
 /* When an explicit freeing of node and children is required */
-void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC);
+PHP_LIBXML_API void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC);
 /* When object dtor is called as node may still be referenced */
-void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC);
+PHP_LIBXML_API void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC);
 PHP_LIBXML_API void php_libxml_error_handler(void *ctx, const char *msg, ...);
-void php_libxml_ctx_warning(void *ctx, const char *msg, ...);
-void php_libxml_ctx_error(void *ctx, const char *msg, ...);
+PHP_LIBXML_API void php_libxml_ctx_warning(void *ctx, const char *msg, ...);
+PHP_LIBXML_API void php_libxml_ctx_error(void *ctx, const char *msg, ...);
 PHP_LIBXML_API int php_libxml_xmlCheckUTF8(const unsigned char *s);
 PHP_LIBXML_API zval *php_libxml_switch_context(zval *context TSRMLS_DC);
 PHP_LIBXML_API void php_libxml_issue_error(int level, const char *msg TSRMLS_DC);

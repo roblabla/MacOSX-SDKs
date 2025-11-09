@@ -110,6 +110,10 @@ struct winsize {
 #define	TIOCSETA	_IOW('t', 20, struct termios) /* set termios struct */
 #define	TIOCSETAW	_IOW('t', 21, struct termios) /* drain output, set */
 #define	TIOCSETAF	_IOW('t', 22, struct termios) /* drn out, fls in, set */
+#define	TIOCGETA_32	_IOR('t', 19, struct termios32) /* get termios struct */
+#define	TIOCSETA_32	_IOW('t', 20, struct termios32) /* set termios struct */
+#define	TIOCSETAW_32	_IOW('t', 21, struct termios32) /* drain output, set */
+#define	TIOCSETAF_32	_IOW('t', 22, struct termios32) /* drn out, fls in, set */
 #define	TIOCGETA_64	_IOR('t', 19, struct user_termios)
 #define	TIOCSETA_64	_IOW('t', 20, struct user_termios)
 #define	TIOCSETAW_64	_IOW('t', 21, struct user_termios)
@@ -162,8 +166,10 @@ struct winsize {
 						 * of last input event */
 #define	TIOCDCDTIMESTAMP _IOR('t', 88, struct timeval)	/* enable/get timestamp
 						 * of last DCd rise */
-#define	TIOCTIMESTAMP_64	_IOR('t', 89, struct user_timeval)
-#define	TIOCDCDTIMESTAMP_64	_IOR('t', 88, struct user_timeval)
+#define	TIOCTIMESTAMP_32	_IOR('t', 89, struct user32_timeval)
+#define	TIOCDCDTIMESTAMP_32	_IOR('t', 88, struct user32_timeval)
+#define	TIOCTIMESTAMP_64	_IOR('t', 89, struct user64_timeval)
+#define	TIOCDCDTIMESTAMP_64	_IOR('t', 88, struct user64_timeval)
 #define	TIOCSDRAINWAIT	_IOW('t', 87, int)	/* set ttywait timeout */
 #define	TIOCGDRAINWAIT	_IOR('t', 86, int)	/* get ttywait timeout */
 #define	TIOCDSIMICROCODE _IO('t', 85)		/* download microcode to

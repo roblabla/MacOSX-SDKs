@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
+	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
 #import <AppKit/AppKit.h>
@@ -52,6 +52,7 @@ Unloads the compositon from the view. Indirectly calls -stopRendering if necessa
 
 #endif
 
+
 /*
 Sets / Checks if the view automatically starts rendering when put on screen.
 */
@@ -85,6 +86,7 @@ The mask should be a combination of the masks corresponding to the above events 
 */
 - (void) setEventForwardingMask:(NSUInteger)mask;
 - (NSUInteger) eventForwardingMask;
+
 
 /*
 Sets / Retrieves the maximum rendering framerate (pass 0.0 to specify no limit).
@@ -146,6 +148,7 @@ Returns YES if the view is currently rendering.
 */
 - (BOOL) isRendering;
 
+
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
 /*
@@ -174,7 +177,9 @@ Consider this pixel format as a read-only object and do not attempt to change an
 
 #endif
 
+
 @end
+
 
 @interface QCView (IBExtensions)
 
@@ -198,3 +203,4 @@ IBAction that starts rendering if not already rendering, pauses if already rende
 #endif
 
 @end
+

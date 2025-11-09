@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_transport.h,v 1.10.2.1.2.5 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_stream_transport.h 293036 2010-01-03 09:23:27Z sebastian $ */
+#ifdef PHP_WIN32
+#include "config.w32.h"
+#include <Ws2tcpip.h>
+#endif
 
 #if HAVE_SYS_SOCKET_H
 # include <sys/socket.h>

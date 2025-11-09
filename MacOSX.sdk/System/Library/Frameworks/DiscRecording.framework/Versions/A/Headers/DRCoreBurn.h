@@ -488,18 +488,6 @@ extern const CFStringRef kDRBurnStrategyCDSAO
 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
-	@const		kDRBurnStrategyCDRaw
-	@abstract	A CFString object representing the CD raw mode burn strategy used for CD.
-	
-	@discussion	A raw mode burn writes client-defined lead-in, program area, and lead-out data to CD media 
-				in a single pass. It supports options such as single-pass writing of a multisession 
-				disc. The Multi-Media Command Set (MMC) standard name for this strategy is "raw" but it 
-				is often called disc-at-once (DAO).
-*/
-extern const CFStringRef kDRBurnStrategyCDRaw
-AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-
-/*!
 	@const		kDRBurnStrategyDVDDAO
 	@abstract	A CFString object representing the disc-at-once (DAO) burn strategy for DVD.
 	

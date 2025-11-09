@@ -3,9 +3,9 @@
  
      Contains:   Master include for SecurityHI private framework
  
-     Version:    SecurityHI-30817~522
+     Version:    SecurityHI-36638~1292
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -3,7 +3,7 @@
 // Purpose:     wxDisplay class
 // Author:      Royce Mitchell III, Vadim Zeitlin
 // Created:     06/21/02
-// RCS-ID:      $Id: display.h,v 1.26 2006/10/02 05:37:56 PC Exp $
+// RCS-ID:      $Id: display.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2002-2006 wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -25,13 +25,13 @@
     extern WXDLLEXPORT_DATA(const wxVideoMode) wxDefaultVideoMode;
 #endif // wxUSE_DISPLAY
 
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxPoint;
-class WXDLLEXPORT wxRect;
-class WXDLLIMPEXP_BASE wxString;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxPoint;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+class WXDLLIMPEXP_FWD_BASE wxString;
 
-class WXDLLEXPORT wxDisplayFactory;
-class WXDLLEXPORT wxDisplayImpl;
+class WXDLLIMPEXP_FWD_CORE wxDisplayFactory;
+class WXDLLIMPEXP_FWD_CORE wxDisplayImpl;
 
 // ----------------------------------------------------------------------------
 // wxDisplay: represents a display/monitor attached to the system

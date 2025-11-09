@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_modules.h,v 1.67.2.3.2.5 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_modules.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef MODULES_H
 #define MODULES_H
 
 #include "zend.h"
 #include "zend_compile.h"
+#include "zend_build.h"
 
 #define INIT_FUNC_ARGS		int type, int module_number TSRMLS_DC
 #define INIT_FUNC_ARGS_PASSTHRU	type, module_number TSRMLS_CC
@@ -32,14 +33,7 @@
 #define ZEND_MODULE_INFO_FUNC_ARGS zend_module_entry *zend_module TSRMLS_DC
 #define ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU zend_module TSRMLS_CC
 
-extern struct _zend_arg_info first_arg_force_ref[2];
-extern struct _zend_arg_info second_arg_force_ref[3];
-extern struct _zend_arg_info third_arg_force_ref[4];
-extern struct _zend_arg_info fourth_arg_force_ref[5];
-extern struct _zend_arg_info fifth_arg_force_ref[6];
-extern struct _zend_arg_info all_args_by_ref[1];
-
-#define ZEND_MODULE_API_NO 20060613
+#define ZEND_MODULE_API_NO 20090626
 #ifdef ZTS
 #define USING_ZTS 1
 #else
@@ -52,7 +46,9 @@ extern struct _zend_arg_info all_args_by_ref[1];
 #define ZE2_STANDARD_MODULE_HEADER \
 	STANDARD_MODULE_HEADER_EX, ini_entries, NULL
 
-#define STANDARD_MODULE_PROPERTIES_EX 0, 0, NULL, 0
+#define ZEND_MODULE_BUILD_ID "API" ZEND_TOSTR(ZEND_MODULE_API_NO) ZEND_BUILD_TS ZEND_BUILD_DEBUG ZEND_BUILD_SYSTEM ZEND_BUILD_EXTRA
+
+#define STANDARD_MODULE_PROPERTIES_EX 0, 0, NULL, 0, ZEND_MODULE_BUILD_ID
 
 #define NO_MODULE_GLOBALS 0, NULL, NULL, NULL
 
@@ -79,16 +75,16 @@ struct _zend_module_entry {
 	unsigned int zend_api;
 	unsigned char zend_debug;
 	unsigned char zts;
-	struct _zend_ini_entry *ini_entry;
-	struct _zend_module_dep *deps;
-	char *name;
-	struct _zend_function_entry *functions;
+	const struct _zend_ini_entry *ini_entry;
+	const struct _zend_module_dep *deps;
+	const char *name;
+	const struct _zend_function_entry *functions;
 	int (*module_startup_func)(INIT_FUNC_ARGS);
 	int (*module_shutdown_func)(SHUTDOWN_FUNC_ARGS);
 	int (*request_startup_func)(INIT_FUNC_ARGS);
 	int (*request_shutdown_func)(SHUTDOWN_FUNC_ARGS);
 	void (*info_func)(ZEND_MODULE_INFO_FUNC_ARGS);
-	char *version;
+	const char *version;
 	size_t globals_size;
 #ifdef ZTS
 	ts_rsrc_id* globals_id_ptr;
@@ -102,6 +98,7 @@ struct _zend_module_entry {
 	unsigned char type;
 	void *handle;
 	int module_number;
+	char *build_id;
 };
 
 #define MODULE_DEP_REQUIRED		1
@@ -117,10 +114,10 @@ struct _zend_module_entry {
 #define ZEND_MOD_OPTIONAL(name)		ZEND_MOD_OPTIONAL_EX(name, NULL, NULL)
 
 struct _zend_module_dep {
-	char *name;			/* module name */
-	char *rel;			/* version relationship: NULL (exists), lt|le|eq|ge|gt (to given version) */
-	char *version;		/* version */
-	unsigned char type;	/* dependency type */
+	const char *name;		/* module name */
+	const char *rel;		/* version relationship: NULL (exists), lt|le|eq|ge|gt (to given version) */
+	const char *version;	/* version */
+	unsigned char type;		/* dependency type */
 };
 
 extern ZEND_API HashTable module_registry;
@@ -128,7 +125,7 @@ extern ZEND_API HashTable module_registry;
 void module_destructor(zend_module_entry *module);
 int module_registry_cleanup(zend_module_entry *module TSRMLS_DC);
 int module_registry_request_startup(zend_module_entry *module TSRMLS_DC);
-int module_registry_unload_temp(zend_module_entry *module TSRMLS_DC);
+int module_registry_unload_temp(const zend_module_entry *module TSRMLS_DC);
 
 #define ZEND_MODULE_DTOR (void (*)(void *)) module_destructor
 #endif

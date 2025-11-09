@@ -3,9 +3,9 @@
  
      Contains:   Application-level APIs
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 2000-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -72,6 +72,14 @@ extern const float kHIToolboxVersionNumber                           AVAILABLE_M
 #define kHIToolboxVersionNumber10_4_6         (225)
 #define kHIToolboxVersionNumber10_4_7         (226)
 #define kHIToolboxVersionNumber10_4_9         (227)
+#define kHIToolboxVersionNumber10_5               (343)
+#define kHIToolboxVersionNumber10_5_1         (343)
+#define kHIToolboxVersionNumber10_5_2         (352)
+#define kHIToolboxVersionNumber10_5_3         (352)
+#define kHIToolboxVersionNumber10_5_4         (352)
+#define kHIToolboxVersionNumber10_5_5         (352)
+#define kHIToolboxVersionNumber10_5_6         (353)
+#define kHIToolboxVersionNumber10_5_7         (353)
 
 
 /*
@@ -200,9 +208,12 @@ enum {
    * Provides the ability to specify whether the menu bar will disable
    * its adaptive transparency. Note this should be used in conjunction
    * with a full-screen window using kUIModeContentSuppressed or
-   * kUIModeContentHidden
+   * kUIModeContentHidden. Available in Mac OS X 10.6 and later. This
+   * constant was published in the Mac OS X 10.5 version of
+   * MacApplication.h, but had the wrong value (7) and should not be
+   * used in Mac OS X 10.5.
    */
-  kUIOptionDisableMenuBarTransparency = 1 << 7
+  kUIOptionDisableMenuBarTransparency = 1 << 9
 };
 
 typedef OptionBits                      SystemUIOptions;
@@ -239,7 +250,9 @@ typedef OptionBits                      SystemUIOptions;
  *      The new mode.
  *    
  *    inOptions:
- *      Options controlling how the new mode behaves.
+ *      Options controlling how the new mode behaves. Not all options
+ *      are valid for all modes. Options that are invalid for the
+ *      specified mode are silently ignored.
  *  
  *  Result:
  *    An operating system result code.

@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     29.06.99
-// RCS-ID:      $Id: dialog.h,v 1.52 2006/10/09 21:06:47 VZ Exp $
+// RCS-ID:      $Id: dialog.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Vadim Zeitlin
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,8 +16,8 @@
 #include "wx/containr.h"
 #include "wx/toplevel.h"
 
-class WXDLLEXPORT wxSizer;
-class WXDLLEXPORT wxStdDialogButtonSizer;
+class WXDLLIMPEXP_FWD_CORE wxSizer;
+class WXDLLIMPEXP_FWD_CORE wxStdDialogButtonSizer;
 
 #define wxDIALOG_NO_PARENT      0x0001  // Don't make owned by apps top window
 

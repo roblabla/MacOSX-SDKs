@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2010 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: url_scanner_ex.h,v 1.26.2.1.2.2 2007/12/31 07:20:13 sebastian Exp $ */
+/* $Id: url_scanner_ex.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef URL_SCANNER_EX_H
 #define URL_SCANNER_EX_H
@@ -27,13 +27,9 @@ PHP_MSHUTDOWN_FUNCTION(url_scanner_ex);
 PHP_RINIT_FUNCTION(url_scanner_ex);
 PHP_RSHUTDOWN_FUNCTION(url_scanner_ex);
 
-char *php_url_scanner_adapt_single_url(const char *url, size_t urllen, const char *name, const char *value, size_t *newlen TSRMLS_DC);
-
-int php_url_scanner_add_var(char *name, int name_len, char *value, int value_len, int urlencode TSRMLS_DC);
-int php_url_scanner_reset_vars(TSRMLS_D);
-
-int php_url_scanner_ex_activate(TSRMLS_D);
-int php_url_scanner_ex_deactivate(TSRMLS_D);
+PHPAPI char *php_url_scanner_adapt_single_url(const char *url, size_t urllen, const char *name, const char *value, size_t *newlen TSRMLS_DC);
+PHPAPI int php_url_scanner_add_var(char *name, int name_len, char *value, int value_len, int urlencode TSRMLS_DC);
+PHPAPI int php_url_scanner_reset_vars(TSRMLS_D);
 
 #include "php_smart_str_public.h"
 
@@ -58,10 +54,5 @@ typedef struct {
 	/* Everything above is zeroed in RINIT */
 	HashTable *tags;
 } url_adapt_state_ex_t;
-
-typedef struct {
-	smart_str var;
-	smart_str val;
-} url_adapt_var_t;
 
 #endif

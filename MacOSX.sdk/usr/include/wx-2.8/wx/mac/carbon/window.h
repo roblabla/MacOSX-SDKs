@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: window.h,v 1.32 2006/10/17 19:50:03 RD Exp $
+// RCS-ID:      $Id: window.h 49296 2007-10-21 18:03:35Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ public:
 
     void MacOnScroll( wxScrollEvent&event );
 
-    bool AcceptsFocus() const;
+    virtual bool AcceptsFocus() const;
 
     virtual bool IsDoubleBuffered() const { return true; }
 
@@ -166,6 +166,7 @@ public:
     // because it is called from its destructor via DeleteChildren
     virtual void        RemoveChild( wxWindowBase *child );
     virtual void        MacPaintBorders( int left , int top ) ;
+    void                MacPaintGrowBox();
 
     // invalidates the borders and focus area around the control;
     // must not be virtual as it will be called during destruction
@@ -310,6 +311,7 @@ protected:
 
     virtual bool        MacIsChildOfClientArea( const wxWindow* child ) const ;
 
+    bool                MacHasScrollBarCorner() const;
     void                MacCreateScrollBars( long style ) ;
     void                MacRepositionScrollBars() ;
     void                MacUpdateControlFont() ;

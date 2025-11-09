@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004, 2006, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,8 @@
 #import <WebKit/DOMException.h>
 #import <WebKit/WebScriptObject.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMStyleSheet;
 
 typedef unsigned long long DOMTimeStamp;
@@ -35,6 +37,7 @@ typedef struct DOMObjectInternal DOMObjectInternal;
 
 @interface DOMObject : WebScriptObject <NSCopying>
 {
+@private
     DOMObjectInternal *_internal;
 }
 @end
@@ -42,3 +45,5 @@ typedef struct DOMObjectInternal DOMObjectInternal;
 @interface DOMObject (DOMLinkStyle)
 @property(readonly, retain) DOMStyleSheet *sheet;
 @end
+
+#endif

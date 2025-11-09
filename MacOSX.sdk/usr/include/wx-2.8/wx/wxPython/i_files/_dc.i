@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     7-July-1997
-// RCS-ID:      $Id: _dc.i,v 1.53 2006/11/21 03:32:49 RD Exp $
+// RCS-ID:      $Id: _dc.i 54626 2008-07-14 22:20:30Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -1837,6 +1837,37 @@ public:
     wxPrinterDC(const wxPrintData& printData);
 };
 #endif
+
+
+
+#ifdef __WXGTK__
+%{
+#if wxUSE_LIBGNOMEPRINT
+    #include <wx/gtk/gnome/gprint.h>
+#else
+    class wxGnomePrintDC: public wxClientDC
+    {
+    public:
+        wxGnomePrintDC( const wxPrintData& ) { wxPyRaiseNotImplemented(); } 
+
+        static void SetResolution(int) {  wxPyRaiseNotImplemented(); } 
+        static int GetResolution() {  wxPyRaiseNotImplemented();  return -1; }
+    };
+#endif
+%}
+
+class wxGnomePrintDC: public wxDC
+{
+public:
+    wxGnomePrintDC( const wxPrintData& data );
+
+    static void SetResolution(int ppi);
+    static int GetResolution();
+};
+#endif
+
+
+
 
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

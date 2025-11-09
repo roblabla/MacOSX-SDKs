@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -28,7 +28,7 @@
 /*
  * Copyright 1995 NeXT Computer, Inc. All rights reserved.
  */
-/*-
+/*
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -106,7 +106,7 @@ typedef __darwin_intptr_t	intptr_t;
 #endif
 #ifndef _UINTPTR_T
 #define _UINTPTR_T
-typedef unsigned long int	uintptr_t;
+typedef unsigned long		uintptr_t;
 #endif
 
 #if !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
@@ -117,8 +117,11 @@ typedef int64_t			user_ssize_t;
 typedef int64_t			user_long_t;
 typedef u_int64_t		user_ulong_t;
 typedef int64_t			user_time_t;
+typedef int64_t			user_off_t;
 #define USER_ADDR_NULL	((user_addr_t) 0)
 #define CAST_USER_ADDR_T(a_ptr)   ((user_addr_t)((uintptr_t)(a_ptr)))
+
+
 #endif /* !_ANSI_SOURCE && (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /* This defines the size of syscall arguments after copying into the kernel: */

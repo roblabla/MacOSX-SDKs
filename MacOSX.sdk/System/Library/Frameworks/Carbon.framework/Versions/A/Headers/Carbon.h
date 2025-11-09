@@ -3,9 +3,9 @@
  
      Contains:   Master include for all of Carbon
  
-     Version:    Carbon-136~534
+     Version:    Carbon-152~3507
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,9 +44,12 @@
 #include <Print/Print.h>
 #endif
 
+#if !__LP64__
 #ifndef __NAVIGATIONSERVICES__
 #include <NavigationServices/NavigationServices.h>
 #endif
+
+#endif  /* !__LP64__ */
 
 #ifndef __COMMONPANELS__
 #include <CommonPanels/CommonPanels.h>

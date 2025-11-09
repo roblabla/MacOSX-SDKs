@@ -1,7 +1,7 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2007, Apple Inc.
+	Copyright (c) 2004-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -73,8 +73,8 @@
 
 #pragma mark *** Delegate ***
 
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
+- (id <NSDatePickerCellDelegate>)delegate;
+- (void)setDelegate:(id <NSDatePickerCellDelegate>)anObject;
 
 @end
 

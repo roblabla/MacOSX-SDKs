@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-June-1998
-// RCS-ID:      $Id: _dirctrl.i,v 1.12 2006/10/24 01:07:11 RD Exp $
+// RCS-ID:      $Id: _dirctrl.i 50317 2007-11-28 22:47:38Z RD $
 // Copyright:   (c) 2002 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -37,21 +37,21 @@ enum
 
 
 
-#if 0
+
 class wxDirItemData : public wxObject // wxTreeItemData
 {
 public:
-  wxDirItemData(const wxString& path, const wxString& name, bool isDir);
-//  ~wxDirItemDataEx();
-  void SetNewDirName( wxString path );
-  wxString m_path, m_name;
-  bool m_isHidden;
-  bool m_isExpanded;
-  bool m_isDir;
+    // We only allow this to be returned from GetDirItemData, not created from
+    // Python, so no need to wrap the ctor/dtor    
+    //wxDirItemData(const wxString& path, const wxString& name, bool isDir);
+    //~wxDirItemDataEx();
+    
+    void SetNewDirName( wxString path );
+    wxString m_path, m_name;
+    bool m_isHidden;
+    bool m_isExpanded;
+    bool m_isDir;
 };
-#endif
-
-
 
 
 MustHaveApp(wxGenericDirCtrl);
@@ -114,6 +114,12 @@ public:
     virtual wxPyTreeCtrl* GetTreeCtrl() const;
     virtual wxDirFilterListCtrl* GetFilterListCtrl() const;
 
+    %extend {
+        wxDirItemData *GetDirItemData(const wxTreeItemId& id) const
+        {
+            return (wxDirItemData*)self->GetTreeCtrl()->GetItemData(id);
+        }
+    }
     
     // Parse the filter into an array of filters and an array of descriptions
 //     virtual int ParseFilter(const wxString& filterStr, wxArrayString& filters, wxArrayString& descriptions);

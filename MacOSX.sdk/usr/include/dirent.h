@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000, 2002-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -59,11 +59,11 @@
 #define _DIRENT_H_
 
 /*
- * The kernel defines the format of directory entries returned by 
- * the getdirentries(2) system call.
+ * The kernel defines the format of directory entries
  */
 #include <_types.h>
 #include <sys/dirent.h>
+#include <Availability.h>
 
 struct _telldir;		/* forward reference */
 
@@ -71,10 +71,10 @@ struct _telldir;		/* forward reference */
 typedef struct {
 	int	__dd_fd;	/* file descriptor associated with directory */
 	long	__dd_loc;	/* offset in current buffer */
-	long	__dd_size;	/* amount of data returned by getdirentries */
+	long	__dd_size;	/* amount of data returned */
 	char	*__dd_buf;	/* data buffer */
 	int	__dd_len;	/* size of data buffer */
-	long	__dd_seek;	/* magic cookie returned by getdirentries */
+	long	__dd_seek;	/* magic cookie returned */
 	long	__dd_rewind;	/* magic cookie for rewinding */
 	int	__dd_flags;	/* flags for readdir */
 	__darwin_pthread_mutex_t __dd_lock; /* for thread locking */
@@ -105,7 +105,17 @@ int alphasort(const void *, const void *) __DARWIN_INODE64(alphasort);
 #endif /* not POSIX */
 int closedir(DIR *) __DARWIN_ALIAS(closedir);
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-int getdirentries(int, char *, int, long *);
+int getdirentries(int, char *, int, long *)
+#if __DARWIN_64_BIT_INO_T
+/*
+ * getdirentries() doesn't work when 64-bit inodes is in effect, so we
+ * generate a link error.
+ */
+						__asm("_getdirentries_is_not_available_when_64_bit_inodes_are_in_effect")
+#else /* !__DARWIN_64_BIT_INO_T */
+						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6,__IPHONE_2_0,__IPHONE_2_0)
+#endif /* __DARWIN_64_BIT_INO_T */
+;
 #endif /* not POSIX */
 DIR *opendir(const char *) __DARWIN_ALIAS_I(opendir);
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -117,6 +127,10 @@ void rewinddir(DIR *) __DARWIN_ALIAS_I(rewinddir);
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 int scandir(const char *, struct dirent ***,
     int (*)(struct dirent *), int (*)(const void *, const void *)) __DARWIN_INODE64(scandir);
+#ifdef __BLOCKS__
+int scandir_b(const char *, struct dirent ***,
+    int (^)(struct dirent *), int (^)(const void *, const void *)) __DARWIN_INODE64(scandir_b);
+#endif /* __BLOCKS__ */
 #endif /* not POSIX */
 void seekdir(DIR *, long) __DARWIN_ALIAS_I(seekdir);
 long telldir(DIR *) __DARWIN_ALIAS_I(telldir);

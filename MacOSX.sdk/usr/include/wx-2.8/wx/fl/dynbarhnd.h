@@ -4,7 +4,7 @@
 // Author:      Aleksandras Gluchovas
 // Modified by:
 // Created:     23/01/99
-// RCS-ID:      $Id: dynbarhnd.h,v 1.4 2005/09/23 12:46:56 MR Exp $
+// RCS-ID:      $Id: dynbarhnd.h 35650 2005-09-23 12:56:45Z MR $
 // Copyright:   (c) Aleksandras Gluchovas
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-June-1998
-// RCS-ID:      $Id: _gauge.i,v 1.11 2006/09/09 19:36:27 RD Exp $
+// RCS-ID:      $Id: _gauge.i 41109 2006-09-09 19:36:27Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////

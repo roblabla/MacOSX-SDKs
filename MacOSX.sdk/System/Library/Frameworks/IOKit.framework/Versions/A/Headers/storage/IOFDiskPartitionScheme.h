@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -96,6 +96,7 @@ struct disk_blk0
 #define FDISK_PARTITION_TYPE_A8 "Apple_UFS"
 #define FDISK_PARTITION_TYPE_A9 "NetBSD"
 #define FDISK_PARTITION_TYPE_AB "Apple_Boot"
+#define FDISK_PARTITION_TYPE_AE "Apple_Encrypted"
 #define FDISK_PARTITION_TYPE_AF "Apple_HFS"
 #define FDISK_PARTITION_TYPE_FD "Linux_RAID"
 

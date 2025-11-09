@@ -6,6 +6,11 @@
 #import <QuartzCore/CIImage.h>
 #import <OpenGL/CGLTypes.h>
 
+#ifndef MAC_OS_X_VERSION_10_6
+# define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+# define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6
+#endif
+
 @class CIFilter;
 
 @interface CIContext: NSObject
@@ -33,10 +38,20 @@ extern NSString *kCIContextUseSoftwareRenderer AVAILABLE_MAC_OS_X_VERSION_10_4_A
 /* Create a new CoreImage context object, all output will be drawn
  * into the surface attached to the OpenGL context 'ctx'. If 'pf' is
  * non-null it should be the pixel format object used to create 'ctx';
- * it's required to be valid for the lifetime of the CIContext. */
+ * it's required to be valid for the lifetime of the CIContext. 
+ * The colorspace should be set to the colorspace of your target otherwise
+ * CI will take the colorspace from the CGLContext if available. */
 
 + (CIContext *)contextWithCGLContext:(CGLContextObj)ctx
-   pixelFormat:(CGLPixelFormatObj)pf options:(NSDictionary *)dict;
+   pixelFormat:(CGLPixelFormatObj)pf colorSpace:(CGColorSpaceRef)cs options:(NSDictionary *)dict AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+ /* DEPRECATED, please use the method above or if you need this
+ * for backward capability, make sure that you specify the colorspace
+ * in the options dictionary */
+
+
++ (CIContext *)contextWithCGLContext:(CGLContextObj)ctx
+   pixelFormat:(CGLPixelFormatObj)pf options:(NSDictionary *)dict AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /* Create a new CoreImage context object, all output will be drawn
  * into the CG context 'ctx'. */
@@ -80,6 +95,13 @@ extern NSString *kCIContextUseSoftwareRenderer AVAILABLE_MAC_OS_X_VERSION_10_4_A
 - (void)render:(CIImage *)im toBitmap:(void *)data rowBytes:(ptrdiff_t)rb
     bounds:(CGRect)r format:(CIFormat)f colorSpace:(CGColorSpaceRef)cs;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+/* Render to the given IOSurface. */
+
+- (void)render:(CIImage *)im toIOSurface:(IOSurfaceRef)surface
+    bounds:(CGRect)r colorSpace:(CGColorSpaceRef)cs AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
+
 /* Runs the context's garbage collector to reclaim any resources that
  * are no longer required (e.g. removes textures from the texture cache
  * that reference deleted images.) This method is called automatically
@@ -93,3 +115,8 @@ extern NSString *kCIContextUseSoftwareRenderer AVAILABLE_MAC_OS_X_VERSION_10_4_A
 - (void)clearCaches;
 
 @end
+
+#ifndef MAC_OS_X_VERSION_10_6
+# undef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+# undef AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6
+#endif

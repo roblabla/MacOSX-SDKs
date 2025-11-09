@@ -33,6 +33,8 @@
 #include <mach/ppc/thread_act.h>
 #elif defined(__ppc64__)
 #include <mach/ppc64/thread_act.h>
+#elif defined(__arm__)
+#include <mach/arm/thread_act.h>
 #else
 #error unknown architecture
 #endif 

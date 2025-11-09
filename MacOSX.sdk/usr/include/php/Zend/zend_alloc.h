@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_alloc.h,v 1.63.2.2.2.13 2007/12/31 07:20:02 sebastian Exp $ */
+/* $Id: zend_alloc.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_ALLOC_H
 #define ZEND_ALLOC_H
@@ -26,6 +26,20 @@
 
 #include "../TSRM/TSRM.h"
 #include "zend.h"
+
+#ifndef ZEND_MM_ALIGNMENT
+# define ZEND_MM_ALIGNMENT 8
+# define ZEND_MM_ALIGNMENT_LOG2 3
+#elif ZEND_MM_ALIGNMENT < 4
+# undef ZEND_MM_ALIGNMENT
+# undef ZEND_MM_ALIGNMENT_LOG2
+# define ZEND_MM_ALIGNMENT 4
+# define ZEND_MM_ALIGNMENT_LOG2 2
+#endif
+
+#define ZEND_MM_ALIGNMENT_MASK ~(ZEND_MM_ALIGNMENT-1)
+
+#define ZEND_MM_ALIGNED_SIZE(size)	(((size) + ZEND_MM_ALIGNMENT - 1) & ZEND_MM_ALIGNMENT_MASK)
 
 typedef struct _zend_leak_info {
 	void *addr;
@@ -78,29 +92,29 @@ ZEND_API size_t _zend_mem_block_size(void *ptr TSRMLS_DC ZEND_FILE_LINE_DC ZEND_
 
 inline static void * __zend_malloc(size_t len)
 {
-  void *tmp = malloc(len);
-  if (tmp) {
-    return tmp;
-  }  
-  fprintf(stderr, "Out of memory\n");
-  exit(1);
+	void *tmp = malloc(len);
+	if (tmp) {
+		return tmp;
+	}
+	fprintf(stderr, "Out of memory\n");
+	exit(1);
 }
 
 inline static void * __zend_calloc(size_t nmemb, size_t len)
 {
-  void *tmp = _safe_malloc(nmemb, len, 0);
-  memset(tmp, 0, len);
-  return tmp;
+	void *tmp = _safe_malloc(nmemb, len, 0);
+	memset(tmp, 0, nmemb * len);
+	return tmp;
 }
 
 inline static void * __zend_realloc(void *p, size_t len)
 {
-  p = realloc(p, len);
-  if (p) {
-    return p;
-  }  
-  fprintf(stderr, "Out of memory\n");
-  exit(1);
+	p = realloc(p, len);
+	if (p) {
+		return p;
+	}
+	fprintf(stderr, "Out of memory\n");
+	exit(1);
 }
 
 
@@ -113,6 +127,7 @@ inline static void * __zend_realloc(void *p, size_t len)
 #define safe_perealloc(ptr, nmemb, size, offset, persistent)	((persistent)?_safe_realloc((ptr), (nmemb), (size), (offset)):safe_erealloc((ptr), (nmemb), (size), (offset)))
 #define perealloc_recoverable(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc_recoverable((ptr), (size)))
 #define pestrdup(s, persistent) ((persistent)?strdup(s):estrdup(s))
+#define pestrndup(s, length, persistent) ((persistent)?zend_strndup((s),(length)):estrndup((s),(length)))
 
 #define pemalloc_rel(size, persistent) ((persistent)?__zend_malloc(size):emalloc_rel(size))
 #define pefree_rel(ptr, persistent)	((persistent)?free(ptr):efree_rel(ptr))
@@ -190,7 +205,7 @@ END_EXTERN_C()
 typedef struct _zend_mm_heap zend_mm_heap;
 
 ZEND_API zend_mm_heap *zend_mm_startup(void);
-ZEND_API void zend_mm_shutdown(zend_mm_heap *heap, int full_shutdown, int silent);
+ZEND_API void zend_mm_shutdown(zend_mm_heap *heap, int full_shutdown, int silent TSRMLS_DC);
 ZEND_API void *_zend_mm_alloc(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) ZEND_ATTRIBUTE_MALLOC;
 ZEND_API void _zend_mm_free(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
 ZEND_API void *_zend_mm_realloc(zend_mm_heap *heap, void *p, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
@@ -199,12 +214,12 @@ ZEND_API size_t _zend_mm_block_size(zend_mm_heap *heap, void *p ZEND_FILE_LINE_D
 #define zend_mm_alloc(heap, size)			_zend_mm_alloc((heap), (size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
 #define zend_mm_free(heap, p)				_zend_mm_free((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
 #define zend_mm_realloc(heap, p, size)		_zend_mm_realloc((heap), (p), (size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
-#define zend_mm_block_size(heap, p)			_zend_mm_block_size((heap), (p), ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
+#define zend_mm_block_size(heap, p)			_zend_mm_block_size((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
 
 #define zend_mm_alloc_rel(heap, size)		_zend_mm_alloc((heap), (size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)
 #define zend_mm_free_rel(heap, p)			_zend_mm_free((heap), (p) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)
 #define zend_mm_realloc_rel(heap, p, size)	_zend_mm_realloc((heap), (p), (size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)
-#define zend_mm_block_size_rel(heap, p)		_zend_mm_block_size((heap), (p), ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
+#define zend_mm_block_size_rel(heap, p)		_zend_mm_block_size((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)
 
 /* Heaps with user defined storage */
 typedef struct _zend_mm_storage zend_mm_storage;
@@ -218,6 +233,7 @@ typedef struct _zend_mm_mem_handlers {
 	const char *name;
 	zend_mm_storage* (*init)(void *params);
 	void (*dtor)(zend_mm_storage *storage);
+	void (*compact)(zend_mm_storage *storage);
 	zend_mm_segment* (*_alloc)(zend_mm_storage *storage, size_t size);
 	zend_mm_segment* (*_realloc)(zend_mm_storage *storage, zend_mm_segment *ptr, size_t size);
 	void (*_free)(zend_mm_storage *storage, zend_mm_segment *ptr);
@@ -231,6 +247,11 @@ struct _zend_mm_storage {
 ZEND_API zend_mm_heap *zend_mm_startup_ex(const zend_mm_mem_handlers *handlers, size_t block_size, size_t reserve_size, int internal, void *params);
 ZEND_API zend_mm_heap *zend_mm_set_heap(zend_mm_heap *new_heap TSRMLS_DC);
 ZEND_API zend_mm_storage *zend_mm_get_storage(zend_mm_heap *heap);
+
+ZEND_API void zend_mm_set_custom_handlers(zend_mm_heap *heap,
+                                          void* (*_malloc)(size_t),
+                                          void  (*_free)(void*),
+                                          void* (*_realloc)(void*, size_t));
 
 #endif
 

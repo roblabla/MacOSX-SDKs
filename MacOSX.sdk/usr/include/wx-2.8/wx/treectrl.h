@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Karsten Ballueder
-// RCS-ID:      $Id: treectrl.h,v 1.46 2007/01/07 15:53:03 VZ Exp $
+// RCS-ID:      $Id: treectrl.h 49563 2007-10-31 20:46:21Z VZ $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -24,7 +24,7 @@
 #include "wx/treebase.h"
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through CLASSINFO macro
 
-class WXDLLEXPORT wxImageList;
+class WXDLLIMPEXP_FWD_CORE wxImageList;
 
 // ----------------------------------------------------------------------------
 // wxTreeCtrlBase

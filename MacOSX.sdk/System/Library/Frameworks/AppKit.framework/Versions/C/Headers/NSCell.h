@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,8 +9,9 @@
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSParagraphStyle.h>
+#import <AppKit/NSApplication.h>
 
-@class NSAttributedString, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSView;
+@class NSAttributedString, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSView, NSTextView;
 
 enum {
     NSAnyType				= 0,
@@ -60,12 +61,6 @@ enum {
     NSImageOverlaps			= 6
 };
 typedef NSUInteger NSCellImagePosition;
-
-enum {
-    NSScaleProportionally = 0, // Deprecated. Use NSScaleProportionallyDown
-    NSScaleToFit,              // Deprecated. Use NSScaleAxesIndependently
-    NSScaleNone                // Deprecated. Use NSImageScaleNone
-};
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 enum {
@@ -131,8 +126,8 @@ typedef struct __CFlags {
     unsigned int        invalidObjectValue:1;
     unsigned int        invalidFont:1;
     NSLineBreakMode     lineBreakMode:3;
-    unsigned int        backgroundStyle:2;
-    unsigned int        reserved1:1;
+    unsigned int        cellReserved1:2;
+    unsigned int        singleLineMode:1;
     unsigned int        actOnMouseDragged:1;
     unsigned int        isLoaded:1;
     unsigned int        truncateLastLine:1;
@@ -146,7 +141,9 @@ typedef struct __CFlags {
     unsigned int        allowsEditingTextAttributes:1;
     unsigned int        importsGraphics:1;
     NSTextAlignment     alignment:3;
-    unsigned int        reserved:8;
+    unsigned int        layoutDirectionRTL:1;
+    unsigned int        backgroundStyle:3;
+    unsigned int        cellReserved2:4;
     unsigned int        refusesFirstResponder:1;
     unsigned int        needsHighlightedText:1;
     unsigned int        dontAllowsUndo:1;
@@ -223,10 +220,7 @@ typedef struct __CFlags {
 - (void)setWraps:(BOOL)flag;	/* If YES, sets scrollable to NO */
 - (NSFont *)font;
 - (void)setFont:(NSFont *)fontObj;
-- (NSInteger)entryType;
-- (void)setEntryType:(NSInteger)aType;
 - (BOOL)isEntryAcceptable:(NSString *)aString;
-- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits;
 - (NSString *)keyEquivalent;
 - (void)setFormatter:(NSFormatter *)newFormatter;
 - (id)formatter;
@@ -308,6 +302,20 @@ typedef struct __CFlags {
  */
 - (BOOL)truncatesLastVisibleLine AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (void)setTruncatesLastVisibleLine:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Bi-directional User Interface. It specifies the general UI layout flow directions.
+*/
+- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)layoutDirection AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Returns a custom field editor for editing inside aControlView. This is an override point for NSCell subclasses designed to work with its own custom field editor. This message is sent to the selected cell of aControlView in -[NSWindow fieldEditor:forObject:]. Returning non-nil from this method indicates skipping the standard field editor querying processes including -windowWillReturnFieldEditor:toObject: delegation. The default NSCell implementation returns nil. The field editor returned from this method should have isFieldEditor == YES.
+ */
+- (NSTextView *)fieldEditorForView:(NSView *)aControlView AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* Tells the text cell to layout/render its content in single-line. If YES, the cell ignores the return value from -wraps, interprets NSLineBreakByWordWrapping and NSLineBreakByCharWrapping from -lineBreakMode as NSLineBreakByClipping, and configures the field editor to ignore key binding commands that insert paragraph/line separators. Also, the field editor bound to a single line cell filters paragraph/line separator insertion from user actions. Cells in the single line mode use the fixed baseline layout. The text baseline position is determined solely by the control size regardless of content font style/size.
+ */
+- (BOOL)usesSingleLineMode AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setUsesSingleLineMode:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 @end
 
 @interface NSCell(NSKeyboardUI)
@@ -422,6 +430,22 @@ typedef NSInteger NSBackgroundStyle;
 @end
 
 #endif
+
+@interface NSCell (NSDeprecated)
+
+enum {
+    NSScaleProportionally = 0, // Deprecated. Use NSScaleProportionallyDown
+    NSScaleToFit,              // Deprecated. Use NSScaleAxesIndependently
+    NSScaleNone                // Deprecated. Use NSImageScaleNone
+};
+
+// Use formatters instead.  See -[NSCell formatter] and -[NSCell setFormatter:].
+- (NSInteger)entryType DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (void)setEntryType:(NSInteger)aType DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+@end
+
 
 /* Draw an image from two end caps and a fill.  The end caps are scaled proportionally to match the thickness of the destination frame.  In the horizontal case, the startCap is drawn into the left part of the destination, the endCap is drawn into the right part of the destination, and the fill is tiled over the remaining area.  The caps and the fill should all be the same height.  The vertical case is similar.  
  

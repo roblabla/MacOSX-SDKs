@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from screensaver.xml by c-client.xsl using XSLT.
+ * This file generated automatically from screensaver.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -15,6 +15,10 @@
 #include "xcb.h"
 #include "xproto.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define XCB_SCREENSAVER_MAJOR_VERSION 1
 #define XCB_SCREENSAVER_MINOR_VERSION 1
   
@@ -27,8 +31,8 @@ typedef enum xcb_screensaver_kind_t {
 } xcb_screensaver_kind_t;
 
 typedef enum xcb_screensaver_event_t {
-    XCB_SCREENSAVER_EVENT_NOTIFY_MASK = (1 << 0),
-    XCB_SCREENSAVER_EVENT_CYCLE_MASK = (1 << 1)
+    XCB_SCREENSAVER_EVENT_NOTIFY_MASK = 1,
+    XCB_SCREENSAVER_EVENT_CYCLE_MASK = 2
 } xcb_screensaver_event_t;
 
 typedef enum xcb_screensaver_state_t {
@@ -183,13 +187,14 @@ typedef struct xcb_screensaver_notify_event_t {
     uint8_t         code; /**<  */
     uint16_t        sequence; /**<  */
     uint8_t         state; /**<  */
+    uint8_t         pad0; /**<  */
     uint16_t        sequence_number; /**<  */
     xcb_timestamp_t time; /**<  */
     xcb_window_t    root; /**<  */
     xcb_window_t    window; /**<  */
     uint8_t         kind; /**<  */
     uint8_t         forced; /**<  */
-    uint8_t         pad0[14]; /**<  */
+    uint8_t         pad1[14]; /**<  */
 } xcb_screensaver_notify_event_t;
 
 /**
@@ -256,6 +261,8 @@ xcb_screensaver_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_screensaver_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -334,6 +341,8 @@ xcb_screensaver_query_info_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_screensaver_query_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -592,6 +601,10 @@ xcb_void_cookie_t
 xcb_screensaver_suspend (xcb_connection_t *c  /**< */,
                          uint8_t           suspend  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -44,8 +44,9 @@ extern NSString * const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATE
 extern NSString * const kABCalendarURIsProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // Calendar URIs - kABMultiStringProperty
 
 extern NSString * const kABEmailProperty;                 // Email(s) - kABMultiStringProperty
-        extern NSString * const kABEmailWorkLabel;        // Home email
-        extern NSString * const kABEmailHomeLabel;        // Work email
+        extern NSString * const kABEmailWorkLabel;        // Work email
+        extern NSString * const kABEmailHomeLabel;        // Home email
+        extern NSString * const kABEmailMobileMeLabel;    // MobileMe email
 
 extern NSString * const kABAddressProperty;                // Street Addresses - kABMultiDictionaryProperty
     extern NSString * const kABAddressStreetKey;           // Street
@@ -147,6 +148,8 @@ extern NSString * const kABPersonFlags             AVAILABLE_MAC_OS_X_VERSION_10
     #define kABShowAsMask                           000007
     #define kABShowAsPerson                         000000
     #define kABShowAsCompany                        000001
+	#define kABShowAsResource                       000002
+	#define kABShowAsRoom                           000003
 
     #define kABNameOrderingMask                     000070
     #define kABDefaultNameOrdering                  000000
@@ -156,7 +159,8 @@ extern NSString * const kABPersonFlags             AVAILABLE_MAC_OS_X_VERSION_10
 extern NSString * const kABPhoneProperty;                  // Generic phone number - kABMultiStringProperty
         extern NSString * const kABPhoneWorkLabel;         // Work phone
         extern NSString * const kABPhoneHomeLabel;         // Home phone
-        extern NSString * const kABPhoneMobileLabel;       // Cell phone
+		extern NSString * const kABPhoneiPhoneLabel;       // iPhone
+		extern NSString * const kABPhoneMobileLabel;       // Cell phone
         extern NSString * const kABPhoneMainLabel;         // Main phone
         extern NSString * const kABPhoneHomeFAXLabel;      // FAX number
         extern NSString * const kABPhoneWorkFAXLabel;      // FAX number
@@ -165,6 +169,7 @@ extern NSString * const kABPhoneProperty;                  // Generic phone numb
 extern NSString * const kABAIMInstantProperty;             // AIM Instant Messaging - kABMultiStringProperty
         extern NSString * const kABAIMWorkLabel;
         extern NSString * const kABAIMHomeLabel;
+        extern NSString * const kABAIMMobileMeLabel;
 
 extern NSString * const kABJabberInstantProperty;          // Jabber Instant Messaging - kABMultiStringProperty
         extern NSString * const kABJabberWorkLabel;
@@ -235,3 +240,4 @@ extern NSString * const kABDeletedRecords           AVAILABLE_MAC_OS_X_VERSION_1
     // Returns the localized version of built in properties, labels or keys
     // Returns propertyOrLabel if not found (e.g. if not built in)
 NSString *ABLocalizedPropertyOrLabel(NSString *propertyOrLabel);
+

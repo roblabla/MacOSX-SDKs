@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -182,6 +182,7 @@ struct tcpcb {
 	u_int32_t t_badrxtwin;		/* window for retransmit recovery */
 };
 
+
 /*
  * TCP statistics.
  * Many of these should be kept per connection,
@@ -296,13 +297,97 @@ struct	tcpstat {
  * Evil hack: declare only if in_pcb.h and sys/socketvar.h have been
  * included.  Not all of our clients do.
  */
-struct	xtcpcb {
-	u_int32_t	xt_len;
-	struct	inpcb	xt_inp;
-	struct  tcpcb   xt_tp;
-	struct	xsocket	xt_socket;
-	u_quad_t	xt_alignment_hack;
+
+struct  xtcpcb {
+        u_int32_t       xt_len;
+        struct  inpcb   xt_inp;
+        struct  tcpcb   xt_tp;
+        struct  xsocket xt_socket;
+        u_quad_t        xt_alignment_hack;
 };
+
+#if !CONFIG_EMBEDDED
+
+struct  xtcpcb64 {
+        u_int32_t      		xt_len;
+        struct xinpcb64		xt_inpcb;
+
+        u_int64_t t_segq;
+        int     t_dupacks;              /* consecutive dup acks recd */
+
+        int     t_timer[TCPT_NTIMERS];  /* tcp timers */
+
+        int     t_state;                /* state of this connection */
+        u_int   t_flags;
+
+        int     t_force;                /* 1 if forcing out a byte */
+
+        tcp_seq snd_una;                /* send unacknowledged */
+        tcp_seq snd_max;                /* highest sequence number sent;
+                                         * used to recognize retransmits
+                                         */
+        tcp_seq snd_nxt;                /* send next */
+        tcp_seq snd_up;                 /* send urgent pointer */
+
+        tcp_seq snd_wl1;                /* window update seg seq number */
+        tcp_seq snd_wl2;                /* window update seg ack number */
+        tcp_seq iss;                    /* initial send sequence number */
+        tcp_seq irs;                    /* initial receive sequence number */
+
+        tcp_seq rcv_nxt;                /* receive next */
+        tcp_seq rcv_adv;                /* advertised window */
+        u_int32_t rcv_wnd;              /* receive window */
+        tcp_seq rcv_up;                 /* receive urgent pointer */
+
+        u_int32_t snd_wnd;              /* send window */
+        u_int32_t snd_cwnd;             /* congestion-controlled window */
+        u_int32_t snd_ssthresh;         /* snd_cwnd size threshold for
+                                         * for slow start exponential to
+                                         * linear switch
+                                         */
+        u_int   t_maxopd;               /* mss plus options */
+
+        u_int32_t t_rcvtime;            /* inactivity time */
+        u_int32_t t_starttime;          /* time connection was established */
+        int     t_rtttime;              /* round trip time */
+        tcp_seq t_rtseq;                /* sequence number being timed */
+
+        int     t_rxtcur;               /* current retransmit value (ticks) */
+        u_int   t_maxseg;               /* maximum segment size */
+        int     t_srtt;                 /* smoothed round-trip time */
+        int     t_rttvar;               /* variance in round-trip time */
+
+        int     t_rxtshift;             /* log(2) of rexmt exp. backoff */
+        u_int   t_rttmin;               /* minimum rtt allowed */
+        u_int32_t t_rttupdated;         /* number of times rtt sampled */
+        u_int32_t max_sndwnd;           /* largest window peer has offered */
+
+        int     t_softerror;            /* possible error not yet reported */
+/* out-of-band data */
+        char    t_oobflags;             /* have some */
+        char    t_iobc;                 /* input character */
+/* RFC 1323 variables */
+        u_char  snd_scale;              /* window scaling for send window */
+        u_char  rcv_scale;              /* window scaling for recv window */
+        u_char  request_r_scale;        /* pending window scaling */
+        u_char  requested_s_scale;
+        u_int32_t ts_recent;            /* timestamp echo data */
+
+        u_int32_t ts_recent_age;        /* when last updated */
+        tcp_seq last_ack_sent;
+/* RFC 1644 variables */
+        tcp_cc  cc_send;                /* send connection count */
+        tcp_cc  cc_recv;                /* receive connection count */
+        tcp_seq snd_recover;            /* for use in fast recovery */
+/* experimental */
+        u_int32_t snd_cwnd_prev;        /* cwnd prior to retransmit */
+        u_int32_t snd_ssthresh_prev;    /* ssthresh prior to retransmit */
+        u_int32_t t_badrxtwin;          /* window for retransmit recovery */
+
+        u_quad_t		xt_alignment_hack;
+};
+
+#endif /* !CONFIG_EMBEDDED */
 
 #pragma pack()
 

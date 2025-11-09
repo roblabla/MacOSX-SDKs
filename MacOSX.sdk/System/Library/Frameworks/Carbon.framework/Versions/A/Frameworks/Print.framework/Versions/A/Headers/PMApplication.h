@@ -3,7 +3,7 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Copyright:  © 1998-2007 by Apple Computer, Inc., all rights reserved
+     Copyright  (c) 1998-2008 Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -212,20 +212,6 @@ PMSessionUseSheets(
   PMPrintSession   printSession,
   WindowRef        documentWindow,
   PMSheetDoneUPP   sheetDoneProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/* options for which items to show inline in the print dialog */
-typedef OptionBits PMPrintDialogOptionFlags;
-enum {                   
-    kPMHideInlineItems					= (0L << 0), /* show nothing in the inline portion of print dialog */
-    kPMShowDefaultInlineItems			= (1L << 15), /* show the default set of items (copies & pages) in the inline portion of print dialog */
-    kPMShowInlineCopies					= (1L << 0), /* show Copies edit text, Collate check box and Two Sided check box (if printer supports it) in top portion of print dialog */
-    kPMShowInlinePageRange				= (1L << 1), /* show Paper Range buttons and From & To Page edit text items in top portion of print dialog */
-    kPMShowInlinePageRangeWithSelection	= (1L << 6), /* show Paper Range buttons with the addition of a Selection button and the From & To Page edit text items in top portion of print dialog */
-    kPMShowInlinePaperSize				= (1L << 2), /* show Paper Size popup menu in top portion of print dialog */
-    kPMShowInlineOrientation			= (1L << 3), /* show Orientation buttons in top portion of print dialog */
-    kPMShowInlineScale					= (1L << 7), /* show Scaling edit text in top portion of print dialog */
-    kPMShowPageAttributesPDE			= (1L << 8), /* add a PDE to the print dialog that contains the Page Setup information (paper size, orientation and scale) */
-};
 
 /*
  *  PMShowPageSetupDialogAsSheet()

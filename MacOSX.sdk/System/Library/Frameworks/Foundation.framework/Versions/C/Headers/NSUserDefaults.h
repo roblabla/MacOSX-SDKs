@@ -1,10 +1,10 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSData, NSDictionary, NSMutableDictionary, NSString;
+@class NSArray, NSData, NSDictionary, NSMutableDictionary, NSString, NSURL;
 
 FOUNDATION_EXPORT NSString * const NSGlobalDomain;
 FOUNDATION_EXPORT NSString * const NSArgumentDomain;
@@ -35,11 +35,13 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (float)floatForKey:(NSString *)defaultName;
 - (double)doubleForKey:(NSString *)defaultName;
 - (BOOL)boolForKey:(NSString *)defaultName;
+- (NSURL *)URLForKey:(NSString *)defaultName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
 - (void)setFloat:(float)value forKey:(NSString *)defaultName;
 - (void)setDouble:(double)value forKey:(NSString *)defaultName;
 - (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
+- (void)setURL:(NSURL *)url forKey:(NSString *)defaultName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (void)registerDefaults:(NSDictionary *)registrationDictionary;
 
@@ -70,6 +72,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 
 FOUNDATION_EXPORT NSString * const NSUserDefaultsDidChangeNotification;
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 /* The following keys and their values are deprecated in Mac OS X 10.5 "Leopard". Developers should use NSLocale, NSDateFormatter and NSNumberFormatter to retrieve the values formerly returned by these keys.
  */
 FOUNDATION_EXPORT NSString * const NSWeekDayNameArray DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -98,4 +101,5 @@ FOUNDATION_EXPORT NSString * const NSInternationalCurrencyString DEPRECATED_IN_M
 FOUNDATION_EXPORT NSString * const NSShortDateFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif
 

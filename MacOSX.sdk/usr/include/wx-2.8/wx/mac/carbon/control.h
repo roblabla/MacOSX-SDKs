@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: control.h,v 1.7 2006/04/19 06:39:43 SC Exp $
+// RCS-ID:      $Id: control.h 38829 2006-04-19 06:39:43Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

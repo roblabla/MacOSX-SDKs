@@ -131,7 +131,6 @@ struct	itimerval {
 #define	FD_COPY(f, t)	__DARWIN_FD_COPY(f, t)
 #endif	/* FD_COPY */
 
-
 #define	TIMEVAL_TO_TIMESPEC(tv, ts) {					\
 	(ts)->tv_sec = (tv)->tv_sec;					\
 	(ts)->tv_nsec = (tv)->tv_usec * 1000;				\

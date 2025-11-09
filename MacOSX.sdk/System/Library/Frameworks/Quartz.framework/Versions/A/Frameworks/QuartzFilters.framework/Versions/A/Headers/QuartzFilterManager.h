@@ -16,7 +16,7 @@
 
 @interface QuartzFilterManager : NSObject
 {
-    void* _privateData;
+    id _privateData;
 }
 
 + (QuartzFilterManager*) filterManager;

@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -42,6 +42,7 @@
 @end
 
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5
 
 enum _NSObjCValueType {
@@ -86,5 +87,6 @@ typedef struct {
     } value DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 } NSObjCValue DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
+#endif
 #endif
 

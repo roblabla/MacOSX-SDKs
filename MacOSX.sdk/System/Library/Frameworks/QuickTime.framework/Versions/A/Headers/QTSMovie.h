@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -67,11 +67,11 @@ typedef struct QTSSampleDescription     QTSSampleDescription;
 typedef QTSSampleDescription *          QTSSampleDescriptionPtr;
 typedef QTSSampleDescriptionPtr *       QTSSampleDescriptionHandle;
 enum {
-  kQTSSampleDescriptionVersion1 = 1L
+  kQTSSampleDescriptionVersion1 = 1
 };
 
 enum {
-  kQTSDefaultMediaTimeScale     = 600L
+  kQTSDefaultMediaTimeScale     = 600
 };
 
 /* sample description flags*/

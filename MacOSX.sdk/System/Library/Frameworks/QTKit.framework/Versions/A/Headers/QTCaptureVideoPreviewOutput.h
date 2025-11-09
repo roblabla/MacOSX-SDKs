@@ -1,7 +1,7 @@
 /*
 	File:		QTCaptureVideoPreviewOutput.h
  
-	Copyright:	(c)2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2007-2010 by Apple Inc., all rights reserved.
 
  */
 
@@ -12,8 +12,9 @@
 
 #import <QTKit/QTCaptureOutput.h>
 #if !__LP64__
-#include <QuickTime/QuickTime.h>
+	#include <QuickTime/QuickTime.h>
 #endif
+#import <QuartzCore/QuartzCore.h>
 
 @class QTCaptureVideoPreviewOutputInternal;
 
@@ -22,12 +23,8 @@
 
 @interface QTCaptureVideoPreviewOutput : QTCaptureOutput {
 @private
-#if __LP64__
-	int32_t								_delegateProxy;
-#else
 	QTCaptureVideoPreviewOutputInternal	*_internal;
-#endif
-	id									_delegate;
+	__weak id							_delegate;
 
 	long								_reserved4;
 }
@@ -43,14 +40,12 @@
 - (id)delegate;
 - (void)setDelegate:(id)delegate;
 
-#if !__LP64__
 // To be overridden by subclasses - do not invoke directly
 - (void)outputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
-#endif
 
 @end
 
-@interface NSObject	(QTCaptureVideoPreviewOutputDelegate)
+@interface NSObject	(QTCaptureVideoPreviewOutput_Delegate)
 
 - (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
 

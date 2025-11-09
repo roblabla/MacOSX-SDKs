@@ -229,7 +229,6 @@ module OpenURI
     if target.class == URI::HTTPS
       require 'net/https'
       http.use_ssl = true
-      http.enable_post_connection_check = true
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
       store = OpenSSL::X509::Store.new
       store.set_default_paths
@@ -568,7 +567,7 @@ module URI
             proxy_uri = nil
           end
         else # http_proxy is safe to use because ENV is case sensitive.
-          proxy_uri = ENV[name]
+          proxy_uri = ENV.to_hash[name]
         end
         if !proxy_uri
           # Use CGI_HTTP_PROXY.  cf. libwww-perl.

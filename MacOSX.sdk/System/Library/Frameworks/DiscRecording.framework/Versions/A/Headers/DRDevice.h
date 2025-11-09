@@ -21,10 +21,10 @@
 	@abstract	Obtain information about CD/DVD burners connected to the computer.
 	@discussion	
 				<h3>About Devices</h3>
-				A @link //apple_ref/occ/cl/DRDevice DRDevice @/link represents a physical CD/DVD drive connected to the computer. 
+				A DRDevice represents a physical CD/DVD drive connected to the computer. 
 	
 				<h3>Obtaining Device instances</h3>
-				The programmer cannot directly create @link //apple_ref/occ/cl/DRDevice DRDevices @/link. Devices are managed by the burn engine
+				The programmer cannot directly create DRDevices. Devices are managed by the burn engine
 				and are asked for by client code. The preferred way of obtaining an instance is
 				by registering with the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link and listening for the 
 				@link DRDeviceAppearedNotification DRDeviceAppearedNotification @/link. This notification is sent to all
@@ -430,7 +430,7 @@ extern const float	DRDeviceBurnSpeedDVD1x		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 extern const float	DRDeviceBurnSpeedBD1x		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
-@const	DRDeviceBurnSpeedHDDVD1x	4496.0 KB/sec.
+@const	DRDeviceBurnSpeedHDDVD1x	4568.0 KB/sec.
  */
 extern const float	DRDeviceBurnSpeedHDDVD1x		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 

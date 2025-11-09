@@ -1,7 +1,7 @@
 /*
   MeCab -- Yet Another Part-of-Speech and Morphological Analyzer
 
-  $Id: mecab.h,v 1.2 2007/04/08 11:08:40 guo1 Exp $;
+  $Id: mecab.h,v 1.4 2009/01/09 01:58:05 guo1 Exp $;
 
   Copyright(C) 2001-2006 Taku Kudo <taku@chasen.org>
   Copyright(C) 2004-2006 Nippon Telegraph and Telephone Corporation
@@ -39,6 +39,15 @@ struct mecab_learner_path_t {
   const int                     *fvector;
 };
 
+struct mecab_token_t {
+  unsigned short lcAttr;
+  unsigned short rcAttr;
+  unsigned short posid;
+  short wcost;
+  unsigned int   feature;
+  unsigned int   compound;  /* reserved for noun compound */
+};
+
 struct mecab_node_t {
   struct mecab_node_t  *prev;
   struct mecab_node_t  *next;
@@ -65,6 +74,7 @@ struct mecab_node_t {
   float                 prob;
   short                 wcost;
   long                  cost;
+  struct mecab_token_t  *token;
 };
 
 /* almost the same as mecab_node_t.
@@ -94,6 +104,7 @@ struct mecab_learner_node_t {
   double                       wcost;
   double                       cost;
   const int                    *fvector;
+  struct mecab_token_t         *token;
 };
 
 #define MECAB_NOR_NODE  0
@@ -135,15 +146,27 @@ extern "C" {
   typedef struct mecab_learner_node_t    mecab_learner_node_t;
   typedef struct mecab_path_t            mecab_path_t;
   typedef struct mecab_learner_path_t    mecab_learner_path_t;
+  typedef struct mecab_token_t           mecab_token_t;
 
 #ifndef SWIG
   /* C interface */
   MECAB_DLL_EXTERN int           mecab_do (int argc, char **argv);
+
   MECAB_DLL_EXTERN mecab_t*      mecab_new(int argc, char **argv);
   MECAB_DLL_EXTERN mecab_t*      mecab_new2(const char *arg);
   MECAB_DLL_EXTERN const char*   mecab_version();
   MECAB_DLL_EXTERN const char*   mecab_strerror(mecab_t *mecab);
   MECAB_DLL_EXTERN void          mecab_destroy(mecab_t *mecab);
+
+  MECAB_DLL_EXTERN int           mecab_get_partial(mecab_t *mecab);
+  MECAB_DLL_EXTERN void          mecab_set_partial(mecab_t *mecab, int partial);
+  MECAB_DLL_EXTERN float         mecab_get_theta(mecab_t *mecab);
+  MECAB_DLL_EXTERN void          mecab_set_theta(mecab_t *mecab, float theta);
+  MECAB_DLL_EXTERN int           mecab_get_lattice_level(mecab_t *mecab);
+  MECAB_DLL_EXTERN void          mecab_set_lattice_level(mecab_t *mecab, int level);
+  MECAB_DLL_EXTERN int           mecab_get_all_morphs(mecab_t *mecab);
+  MECAB_DLL_EXTERN void          mecab_set_all_morphs(mecab_t *mecab, int all_morphs);
+
   MECAB_DLL_EXTERN const char*   mecab_sparse_tostr(mecab_t *mecab, const char *str);
   MECAB_DLL_EXTERN const char*   mecab_sparse_tostr2(mecab_t *mecab, const char *str, size_t len);
   MECAB_DLL_EXTERN char*         mecab_sparse_tostr3(mecab_t *mecab, const char *str, size_t len,
@@ -183,6 +206,7 @@ namespace MeCab {
   typedef struct mecab_node_t            Node;
   typedef struct mecab_learner_path_t    LearnerPath;
   typedef struct mecab_learner_node_t    LearnerNode;
+  typedef struct mecab_token_t           Token;
 
   class Tagger {
   public:
@@ -202,6 +226,16 @@ namespace MeCab {
     virtual const Node* nextNode()                            = 0;
     virtual const char* next()                                = 0;
     virtual const char* formatNode(const Node *node)          = 0;
+
+    // configuration
+    virtual bool  partial() const                             = 0;
+    virtual void  set_partial(bool partial)                   = 0;
+    virtual float theta() const                               = 0;
+    virtual void  set_theta(float theta)                      = 0;
+    virtual int   lattice_level() const                       = 0;
+    virtual void  set_lattice_level(int level)                = 0;
+    virtual bool  all_morphs() const                          = 0;
+    virtual void  set_all_morphs(bool all_morphs)             = 0;
 
 #ifndef SWIG
     virtual const char* next(char *ostr , size_t olen)                        = 0;

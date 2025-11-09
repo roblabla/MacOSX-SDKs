@@ -5,12 +5,8 @@
     Public header file.
 */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import <Automator/AMAction.h>
-
-#ifndef IBOutlet
-#define IBOutlet
-#endif
 
 @class NSView;
 

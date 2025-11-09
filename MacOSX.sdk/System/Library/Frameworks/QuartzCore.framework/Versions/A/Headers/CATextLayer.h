@@ -12,7 +12,7 @@
 @interface CATextLayer : CALayer
 {
 @private
-  CFTypeRef _state;
+  struct CATextLayerPrivate *_state;
 }
 
 /* The text to be rendered, should be either an NSString or an
@@ -28,12 +28,13 @@
 @property CFTypeRef font;
 
 /* The font size. Defaults to 36. Only used when the `string' property
- * is not an NSAttributedString. */
+ * is not an NSAttributedString. Animatable (Mac OS X 10.6 and later.) */
 
 @property CGFloat fontSize;
 
 /* The color object used to draw the text. Defaults to opaque white.
- * Only used when the `string' property is not an NSAttributedString. */
+ * Only used when the `string' property is not an NSAttributedString.
+ * Animatable (Mac OS X 10.6 and later.) */
 
 @property CGColorRef foregroundColor;
 
@@ -58,15 +59,24 @@
 
 /* Truncation modes. */
 
-CA_EXTERN NSString * const kCATruncationNone AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATruncationStart AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATruncationEnd AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATruncationMiddle AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCATruncationNone
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCATruncationStart
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCATruncationEnd
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCATruncationMiddle
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
 
 /* Alignment modes. */
 
-CA_EXTERN NSString * const kCAAlignmentNatural AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAlignmentLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAlignmentRight AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAlignmentCenter AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAlignmentJustified AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAAlignmentNatural
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCAAlignmentLeft
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCAAlignmentRight
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCAAlignmentCenter
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);
+CA_EXTERN NSString * const kCAAlignmentJustified
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_NA);

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/01/2002
-// RCS-ID:      $Id: hashmap.h,v 1.63.4.1 2007/04/16 13:01:03 VZ Exp $
+// RCS-ID:      $Id: hashmap.h 45498 2007-04-16 13:03:05Z VZ $
 // Copyright:   (c) Mattia Barbon
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

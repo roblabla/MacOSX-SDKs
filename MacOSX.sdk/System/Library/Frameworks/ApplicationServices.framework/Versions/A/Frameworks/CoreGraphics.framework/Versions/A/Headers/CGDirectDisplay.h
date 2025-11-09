@@ -1,144 +1,432 @@
-/*
- *  CGDirectDisplay.h
- *  CoreGraphics
- *
- *  Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
- *
- */
-#ifndef __CGDIRECT_DISPLAY_H__
-#define __CGDIRECT_DISPLAY_H__ 1
+/* CoreGraphics - CGDirectDisplay.h
+   Copyright (c) 2000-2009 Apple Inc.
+   All rights reserved. */
 
-#include <CoreGraphics/CGBase.h>
-#include <CoreGraphics/CGGeometry.h>
-#include <CoreGraphics/CGError.h>
+#ifndef CGDIRECTDISPLAY_H_
+#define CGDIRECTDISPLAY_H_
+
 #include <CoreGraphics/CGContext.h>
-#include <CoreFoundation/CoreFoundation.h>
-#include <stdint.h>
-#include <AvailabilityMacros.h>
-/*
- * The following construct is present to avoid problems with some Apple tools.
- * API in this module is not available in Mac OS Classic variations!
- */
-#ifndef __MACOS_CLASSIC__
+#include <CoreGraphics/CGError.h>
+#include <CoreGraphics/CGGeometry.h>
 #include <mach/boolean.h>
-#else
-typedef int boolean_t;
-#endif
-
-CG_EXTERN_C_BEGIN
 
 typedef uint32_t CGDirectDisplayID;
-typedef struct _CGDirectPaletteRef * CGDirectPaletteRef;
-typedef uint32_t CGDisplayCount;
-typedef uint32_t CGTableCount;
-typedef int32_t	CGDisplayCoord;
-typedef uint8_t CGByteValue;
 typedef uint32_t CGOpenGLDisplayMask;
-typedef uint32_t CGBeamPosition;
-typedef int32_t CGMouseDelta;
 typedef double CGRefreshRate;
-typedef uint32_t CGCaptureOptions;
 
-typedef CGError CGDisplayErr;
-#define CGDisplayNoErr kCGErrorSuccess
-
+typedef struct _CGDirectPaletteRef *CGDirectPaletteRef;
+typedef struct CGDisplayMode *CGDisplayModeRef;
 
 #define kCGNullDirectDisplay ((CGDirectDisplayID)0)
-
-/* Returns the display ID of the current main display */
-CG_EXTERN CGDirectDisplayID CGMainDisplayID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
 #define kCGDirectMainDisplay CGMainDisplayID()
 
-/*
- * Mechanisms used to find screen IDs
- * An array length (maxDisplays) and array of CGDirectDisplayIDs are passed in.
- * Up to maxDisplays of the array are filled in with the displays meeting the
- * specified criteria.  The actual number of displays filled in is returned in
- * dspyCnt.
- *
- * If the dspys array is NULL, maxDisplays is ignored, and *dspyCnt is filled
- * in with the number of displays meeting the function's requirements.
- */
-CG_EXTERN CGDisplayErr CGGetDisplaysWithPoint(CGPoint point,
-                             CGDisplayCount maxDisplays,
-                             CGDirectDisplayID * dspys,
-                             CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Return the display ID of the current main display. */
 
-CG_EXTERN CGDisplayErr CGGetDisplaysWithRect(CGRect rect,
-                            CGDisplayCount maxDisplays,
-                            CGDirectDisplayID * dspys,
-                            CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN CGDirectDisplayID CGMainDisplayID(void)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-CG_EXTERN CGDisplayErr CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
-                            CGDisplayCount maxDisplays,
-                            CGDirectDisplayID * dspys,
-                            CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Mechanisms used to find screen IDs.
+
+   The following functions take an array length (`maxDisplays') and array of
+   pointers to CGDirectDisplayIDs (`displays'). The array is filled in with
+   the displays meeting the specified criteria; no more than `maxDisplays'.
+   will be stored in `displays'. The number of displays meeting the criteria
+   is returned in `matchingDisplayCount'.
+
+   If the `displays' array is NULL, only the number of displays meeting the
+   specified criteria is returned in `matchingDisplayCount'. */
+
+CG_EXTERN CGError CGGetDisplaysWithPoint(CGPoint point, uint32_t maxDisplays,
+  CGDirectDisplayID *displays, uint32_t *matchingDisplayCount)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+CG_EXTERN CGError CGGetDisplaysWithRect(CGRect rect, uint32_t maxDisplays,
+  CGDirectDisplayID *displays, uint32_t *matchingDisplayCount)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+CG_EXTERN CGError CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
+  uint32_t maxDisplays, CGDirectDisplayID *displays,
+  uint32_t *matchingDisplayCount)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
                             
-/*
- * Get lists of displays.  Use this to determine display IDs
- *
- * If the activeDspys array is NULL, maxDisplays is ignored, and *dspyCnt is filled
- * in with the number of displays meeting the function's requirements.
- *
- * The first display returned in the list is the main display,
- * the one with the menu bar.
- * When mirroring, this will be the largest drawable display in the mirror,
- * set, or if all are the same size, the one with the deepest pixel depth.
- */
-CG_EXTERN CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
-                             CGDirectDisplayID * activeDspys,
-                             CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Return a list of active displays.
 
-/*
- * With hardware mirroring, a display may be on-line,
- * but not necessarily active, or drawable.
- * Programs which manipulate display settings such as the
- * palette or gamma tables need access to all displays in use,
- * including hardware mirrors which are not drawable.
- */
-CG_EXTERN CGDisplayErr CGGetOnlineDisplayList(CGDisplayCount maxDisplays,
-                                    CGDirectDisplayID * onlineDspys,
-                                    CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+   If `activeDisplays' is NULL, then `maxDisplays' is ignored, and
+   `displayCount' is set to the number of displays. Otherwise, the list of
+   active displays is stored in `activeDisplays'; no more than `maxDisplays'
+   will be stored in `activeDisplays'.
 
-/* Map a display to an OpenGL display mask; returns 0 on invalid display */
-CG_EXTERN CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+   The first display returned in the list is the main display (the one with
+   the menu bar). When mirroring, this will be the largest drawable display
+   in the mirror set, or, if all displays are the same size, the one with
+   the deepest pixel depth. */
 
-/*
- * Map an OpenGL display mask to a display.
- * Returns kCGNullDirectDisplay if a bit doesn't
- * match a display.
- * Passing in multiple bits results in an arbitrary match. 
- */
-CG_EXTERN CGDirectDisplayID  CGOpenGLDisplayMaskToDisplayID(CGOpenGLDisplayMask mask) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGError CGGetActiveDisplayList(uint32_t maxDisplays,
+  CGDirectDisplayID *activeDisplays, uint32_t *displayCount)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
-/* Return screen size and origin in global coords; Empty rect if display is invalid */
-CG_EXTERN CGRect CGDisplayBounds(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Return a list of online displays.
 
-CG_EXTERN size_t CGDisplayPixelsWide(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN size_t CGDisplayPixelsHigh(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+   If `onlineDisplays' is NULL, then `maxDisplays' is ignored, and
+   `displayCount' is set to the number of displays. Otherwise, the list of
+   online displays is stored in `onlineDisplays'; no more than `maxDisplays'
+   will be stored in `onlineDisplays'.
 
-/*
- * Display mode selection
- * Display modes are represented as CFDictionaries
- * All dictionaries and arrays returned via these mechanisms are
- * owned by the framework and should not be released.  The framework
- * will not release them out from under your application.
- *
- * Values associated with the following keys are CFNumber types.
- * With CFNumberGetValue(), use kCFNumberLongType for best results.
- * kCGDisplayRefreshRate encodes a double value, so to get the fractional
- * refresh rate use kCFNumberDoubleType.
- */
- 
-/*
- * Keys used in mode dictionaries.  Source C strings shown won't change.
- * Some CFM environments cannot import data variables, and so
- * the definitions are provided directly.
- *
- * These keys are used only within the scope of the mode dictionaries,
- * so further uniquing, as by prefix, of the source string is not needed.
- */
+   With hardware mirroring, a display may be online but not necessarily
+   active or drawable. Programs which manipulate display settings such as
+   the palette or gamma tables need access to all displays in use, including
+   hardware mirrors which are not drawable. */
+
+CG_EXTERN CGError CGGetOnlineDisplayList(uint32_t maxDisplays,
+  CGDirectDisplayID *onlineDisplays, uint32_t *displayCount)
+  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the OpenGL display mask for `display', or 0 is `display' is an
+   invalid display. */
+
+CG_EXTERN CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(
+  CGDirectDisplayID display) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the display for the OpenGL display mask `mask', or
+   `kCGNullDirectDisplay' if the bits set dont't match a display. A mask
+   with multiple bits set returns an arbitrary match. */
+
+CG_EXTERN CGDirectDisplayID CGOpenGLDisplayMaskToDisplayID(
+  CGOpenGLDisplayMask mask) CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+
+/* Return the screen size and screen origin of `display' in global
+   coordinates, or `CGRectZero' if `display' is invalid. */
+
+CG_EXTERN CGRect CGDisplayBounds(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the width in pixels of `display'. */
+
+CG_EXTERN size_t CGDisplayPixelsWide(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the height in pixels of `display'. */
+
+CG_EXTERN size_t CGDisplayPixelsHigh(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return an array of all modes for the specified display, or NULL if
+   `display' is invalid. The "options" field is reserved for future
+   expansion; pass NULL for now. */
+  
+CG_EXTERN CFArrayRef CGDisplayCopyAllDisplayModes(CGDirectDisplayID display,
+  CFDictionaryRef options) CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the current mode of the specified display, or NULL if `display'
+   is invalid. */
+   
+CG_EXTERN CGDisplayModeRef CGDisplayCopyDisplayMode(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Switch the display mode of `display' to `mode'. The "options" field is
+   reserved for future expansion; pass NULL for now.
+
+   The selected display mode persists for the life of the program, and
+   automatically reverts to the permanent setting when the program
+   terminates.
+
+   When changing display modes of displays in a mirroring set, other
+   displays in the mirroring set will be set to a display mode capable of
+   mirroring the bounds of the largest display being explicitly set.
+
+   Note that after switching, display parameters and addresses may change. */
+
+CG_EXTERN CGError CGDisplaySetDisplayMode(CGDirectDisplayID display,
+  CGDisplayModeRef mode, CFDictionaryRef options)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the width in pixels of the specified display mode. */
+
+CG_EXTERN size_t CGDisplayModeGetWidth(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the height in pixels of the specified display mode. */
+
+CG_EXTERN size_t CGDisplayModeGetHeight(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return a string representing the pixel encoding of the specified display
+   mode, expressed as a CFString containing an IOKit graphics mode. */
+
+CG_EXTERN CFStringRef CGDisplayModeCopyPixelEncoding(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the refresh rate of the specified display mode. */
+
+CG_EXTERN double CGDisplayModeGetRefreshRate(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the IOKit flags of the specified display mode. */
+
+CG_EXTERN uint32_t CGDisplayModeGetIOFlags(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the IOKit display mode ID of the specified display mode. */
+
+CG_EXTERN int32_t CGDisplayModeGetIODisplayModeID(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return true if the specified mode is usable for displaying the
+   desktop GUI; false otherwise. */
+
+CG_EXTERN bool CGDisplayModeIsUsableForDesktopGUI(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the CFTypeID for CGDisplayModeRefs. */
+
+CG_EXTERN CFTypeID CGDisplayModeGetTypeID(void)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Equivalent to `CFRetain(mode)', except it doesn't crash (as CFRetain
+   does) if `mode' is NULL. */
+
+CG_EXTERN CGDisplayModeRef CGDisplayModeRetain(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Equivalent to `CFRelease(mode)', except it doesn't crash (as CFRelease
+   does) if `mode' is NULL. */
+
+CG_EXTERN void CGDisplayModeRelease(CGDisplayModeRef mode)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Set the gamma function for `display' by specifying the coefficients of
+   the gamma transfer function.
+
+   Gamma values must be greater than 0. Minimum values must be in the
+   interval [0, 1). Maximum values must be in the interval (0, 1]. Out of
+   range values or maximum values greater than or equal to minimum values
+   return `kCGErrorRangeCheck'.
+
+   Values are computed by sampling a function for a range of indexes from 0
+   to 1:
+     value = Min + ((Max - Min) * pow(index, Gamma))
+   The resulting values are converted to a machine-specific format and
+   loaded into display hardware. */
+
+typedef float CGGammaValue;
+                                              
+CG_EXTERN CGError CGSetDisplayTransferByFormula(CGDirectDisplayID display,
+  CGGammaValue redMin, CGGammaValue redMax, CGGammaValue redGamma,
+  CGGammaValue greenMin, CGGammaValue greenMax, CGGammaValue greenGamma,
+  CGGammaValue blueMin, CGGammaValue blueMax, CGGammaValue blueGamma)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the coefficients of the gamma transfer function for `display'. */
+
+CG_EXTERN CGError CGGetDisplayTransferByFormula(CGDirectDisplayID display,
+  CGGammaValue *redMin, CGGammaValue *redMax, CGGammaValue *redGamma,
+  CGGammaValue *greenMin, CGGammaValue *greenMax, CGGammaValue *greenGamma,
+  CGGammaValue *blueMin, CGGammaValue *blueMax, CGGammaValue *blueGamma)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the capacity, or number of entries, in the gamma table for
+   `display', or 0 if 'display' is invalid. */
+
+CG_EXTERN uint32_t CGDisplayGammaTableCapacity(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+/* Set the gamma function for `display' by specifying the values in the RGB
+   gamma tables.
+
+   Values within each table should be in the interval [0, 1] The same table
+   may be passed in for red, green, and blue channels. The number of entries
+   in the tables is specified by `tableSize'. The tables are interpolated as
+   needed to generate the number of samples needed by the display hardware. */
+
+CG_EXTERN CGError CGSetDisplayTransferByTable(CGDirectDisplayID display,
+  uint32_t tableSize, const CGGammaValue *redTable,
+  const CGGammaValue *greenTable, const CGGammaValue *blueTable)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the RGB gamma table values for `display'.
+
+   The number of entries in each array is specified by `capacity'; no more
+   than `capacity' entries will be written to each table. The number of
+   entries written is stored in `sampleCount'. */
+
+CG_EXTERN CGError CGGetDisplayTransferByTable(CGDirectDisplayID display,
+  uint32_t capacity, CGGammaValue *redTable, CGGammaValue *greenTable,
+  CGGammaValue *blueTable, uint32_t *sampleCount)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Set the gamma function for `display' by specifying the values in the RGB
+   gamma tables as bytes.
+
+   Values within each table should be in the interval [0, 255] The same
+   table may be passed in for red, green, and blue channels. The number of
+   entries in the tables is specified by `tableSize'. The tables are
+   interpolated as needed to generate the number of samples needed by the
+   display hardware. */
+
+CG_EXTERN CGError CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
+  uint32_t tableSize, const uint8_t *redTable, const uint8_t *greenTable,
+  const uint8_t *blueTable) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Restore the gamma tables of all system displays to the values in the
+   user's ColorSync display profile. */
+
+CG_EXTERN void CGDisplayRestoreColorSyncSettings(void)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Options used with `CGDisplayCaptureWithOptions' and
+   `CGCaptureAllDisplaysWithOptions'. */
+
+enum {
+  kCGCaptureNoOptions = 0,	/* Default behavior. */
+  kCGCaptureNoFill = (1 << 0)	/* Disables fill with black on capture. */
+};
+typedef uint32_t CGCaptureOptions;
+
+/* Return true if `display' is captured; false otherwise. */
+
+CG_EXTERN boolean_t CGDisplayIsCaptured(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Capture `display' for exclusive use by an application. */
+
+CG_EXTERN CGError CGDisplayCapture(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Capture `display' for exclusive use by an application, using the options
+   specified by `options'. */
+
+CG_EXTERN CGError CGDisplayCaptureWithOptions(CGDirectDisplayID display,
+  CGCaptureOptions options) CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+/* Release the captured display `display'. */
+
+CG_EXTERN CGError CGDisplayRelease(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Capture all displays. This operation provides an immersive environment
+   for an appplication, and prevents other applications from trying to
+   adjust to display changes. */
+
+CG_EXTERN CGError CGCaptureAllDisplays(void)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Capture all displays, using the options specified by `options'. This
+   operation provides an immersive environment for an appplication, and
+   prevents other applications from trying to adjust to display changes. */
+
+CG_EXTERN CGError CGCaptureAllDisplaysWithOptions(CGCaptureOptions options)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+/* Release all captured displays and restore the display modes to the user's
+   preferences. May be used in conjunction with `CGDisplayCapture' or
+   `CGCaptureAllDisplays'. */
+
+CG_EXTERN CGError CGReleaseAllDisplays(void)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Returns window ID of the shield window for the captured display `display',
+   or NULL if the display is not not shielded. */
+
+CG_EXTERN uint32_t CGShieldingWindowID(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Returns the window level of the shield window for the captured display
+   `display'. */
+
+CG_EXTERN int32_t CGShieldingWindowLevel(void)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return an image containing the contents of the display identified by
+   `displayID'. */
+
+CG_EXTERN CGImageRef CGDisplayCreateImage(CGDirectDisplayID displayID)
+  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return an image containing the contents of the rectangle `rect',
+   specified in display space, of the display identified by `displayID'. The
+   actual rectangle used is the rectangle returned from
+   `CGRectIntegral(rect)'. */
+
+CG_EXTERN CGImageRef CGDisplayCreateImageForRect(CGDirectDisplayID display,
+  CGRect rect) CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Hide the mouse cursor and increment the hide cursor count. The `display'
+   parameter is ignored. */
+
+CG_EXTERN CGError CGDisplayHideCursor(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Decrement the hide cursor count; show the cursor if the hide cursor count
+   is zero. The `display' parameter is ignored. */
+
+CG_EXTERN CGError CGDisplayShowCursor(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Move the mouse cursor to the specified point relative to the origin (the
+   upper-left corner) of `display'. No events are generated as a result of
+   the move. Points that lie outside the desktop are clipped to the
+   desktop. */
+
+CG_EXTERN CGError CGDisplayMoveCursorToPoint(CGDirectDisplayID display,
+  CGPoint point) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the mouse position change since with the last mouse move event
+   received by the application. */
+
+CG_EXTERN void CGGetLastMouseDelta(int32_t *deltaX, int32_t *deltaY)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return true if the current display mode of `display' supports palettes,
+   false otherwise. */
+
+CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Set the palette for `display' to `palette'. */
+
+CG_EXTERN CGError CGDisplaySetPalette(CGDirectDisplayID display,
+  CGDirectPaletteRef palette) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Wait until the beam position moves outside the region specified by
+   `upperScanLine' and `lowerScanLine' of `display'. If `upperScanLine' is
+   greater than `lowerScanLine' or if `upperScanLine' and `lowerScanLine'
+   encompass the entire display height, return an error.
+
+   Some display systems may not use conventional video vertical and
+   horizontal sweep. These displays report a `kCGDisplayRefreshRate' of 0 in
+   the dictionary returned by `CGDisplayCurrentMode'. On such displays, this
+   function returns at once. Also, some display device drivers may not
+   implement support for this mechanism. On such displays, this function
+   returns at once. */
+
+CG_EXTERN CGError CGDisplayWaitForBeamPositionOutsideLines(CGDirectDisplayID
+  display, uint32_t upperScanLine, uint32_t lowerScanLine)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return the current beam position of `display', or 0 if `display' is
+   invalid, if `display' does not implement conventional video vertical and
+   horizontal sweep, or if the display device driver does not implement this
+   functionality. */
+
+CG_EXTERN uint32_t CGDisplayBeamPosition(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+
+/* Return a CGContext suitable for drawing to the captured display
+   `display', or NULL if `display' has not been captured. The context is
+   owned by the device and should not be released by the caller.
+
+   The context remains valid while the display is captured and while the
+   display configuration is unchanged. Releasing the captured display or
+   reconfiguring the display invalidates the drawing context.
+
+   The determine when the display configuration is changing, use
+   `CGRegisterDisplayRegisterReconfigurationCallback'. */
+
+CG_EXTERN CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display)
+  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+/* These are deprecated; don't use them. */
+
 #define kCGDisplayWidth				CFSTR("Width")
 #define kCGDisplayHeight			CFSTR("Height")
 #define kCGDisplayMode				CFSTR("Mode")
@@ -149,322 +437,93 @@ CG_EXTERN size_t CGDisplayPixelsHigh(CGDirectDisplayID display) AVAILABLE_MAC_OS
 #define kCGDisplayModeUsableForDesktopGUI	CFSTR("UsableForDesktopGUI")
 #define kCGDisplayIOFlags			CFSTR("IOFlags")
 #define kCGDisplayBytesPerRow			CFSTR("kCGDisplayBytesPerRow")
-#define kCGIODisplayModeID          CFSTR("IODisplayModeID")
+#define kCGIODisplayModeID			CFSTR("IODisplayModeID")
 
-/*
- * Keys to describe optional properties of display modes.
- *
- * The key will only be present if the property applies,
- * and will be associated with a value of kCFBooleanTrue.
- * Keys not relevant to a particular display mode will not
- * appear in the mode dictionary.
- *
- * These strings must remain unchanged in future releases, of course.
- */
+#define kCGDisplayModeIsSafeForHardware					\
+  CFSTR("kCGDisplayModeIsSafeForHardware")
+#define kCGDisplayModeIsInterlaced					\
+  CFSTR("kCGDisplayModeIsInterlaced") 
+#define kCGDisplayModeIsStretched					\
+  CFSTR("kCGDisplayModeIsStretched")
+#define kCGDisplayModeIsTelevisionOutput				\
+  CFSTR("kCGDisplayModeIsTelevisionOutput")
 
-/* Set if display mode doesn't need a confirmation dialog to be set */
-#define kCGDisplayModeIsSafeForHardware		CFSTR("kCGDisplayModeIsSafeForHardware")
+/* These types are deprecated; don't use them. */
 
-/* The following keys reflect interesting bits of the IOKit display mode flags */
-#define kCGDisplayModeIsInterlaced		CFSTR("kCGDisplayModeIsInterlaced") 
-#define kCGDisplayModeIsStretched		CFSTR("kCGDisplayModeIsStretched")
-#define kCGDisplayModeIsTelevisionOutput	CFSTR("kCGDisplayModeIsTelevisionOutput" )
+typedef uint32_t CGDisplayCount;
+typedef CGError CGDisplayErr;
+typedef uint32_t CGBeamPosition CG_OBSOLETE;
+typedef uint8_t CGByteValue CG_OBSOLETE;
+typedef int32_t	CGDisplayCoord CG_OBSOLETE;
+typedef int32_t CGMouseDelta CG_OBSOLETE;
+typedef uint32_t CGTableCount CG_OBSOLETE;
+#define CGDisplayNoErr kCGErrorSuccess
 
+/* These functions are deprecated; do not use them. */
 
-/*
- * Return a CFArray of CFDictionaries describing all display modes.
- * Returns NULL if the display is invalid.
- */
-CG_EXTERN CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-/*
- * Try to find a display mode of specified depth with dimensions equal or greater than
- * specified.
- * If no depth match is found, try for the next larger depth with dimensions equal or greater
- * than specified.  If no luck, then just return the current mode.
- *
- * exactmatch, if not NULL, is set to 'true' if an exact match in width, height, and depth is found,
- * and 'false' otherwise.
- *
- * CGDisplayBestModeForParametersAndRefreshRateWithProperty searches the list, looking for
- * display modes with the specified property.  The property should be one of:
- *	kCGDisplayModeIsSafeForHardware;
- *	kCGDisplayModeIsInterlaced;
- *	kCGDisplayModeIsStretched;
- *	kCGDisplayModeIsTelevisionOutput
- *	
- * Returns NULL if display is invalid.
- */
-CG_EXTERN CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use `CGDisplayCreateImage' instead. */
+CG_EXTERN void *CGDisplayBaseAddress(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use `CGDisplayCreateImageForRect' instead. */
+CG_EXTERN void *CGDisplayAddressForPosition(CGDirectDisplayID display,
+  int32_t x, int32_t y) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, CFStringRef property, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+/* Use `CGDisplayCreateImage' or `CGDisplayCreateImageForRect' instead. */
+CG_EXTERN size_t CGDisplayBytesPerRow(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Return a CFDictionary describing the current display mode.
- * Returns NULL if display is invalid.
- */
-CG_EXTERN CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-/*
- * Switch display mode.  Note that after switching, 
- * display parameters and addresses may change.
- * The selected display mode persists for the life of the program, and automatically
- * reverts to the permanent setting made by Preferences when the program terminates.
- * The mode dictionary passed in must be a dictionary vended by other CGDirectDisplay
- * APIs such as CGDisplayBestModeForParameters() and CGDisplayAvailableModes().
- *
- * The mode dictionary passed in must be a dictionary vended by other CGDirectDisplay
- * APIs such as CGDisplayBestModeForParameters() and CGDisplayAvailableModes().
- *
- * When changing display modes of displays in a mirroring set, other displays in
- * the mirroring set will be set to a display mode capable of mirroring the bounds
- * of the largest display being explicitly set. 
- */
-CG_EXTERN CGDisplayErr CGDisplaySwitchToMode(CGDirectDisplayID display, CFDictionaryRef mode) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/* Query parameters for current mode */
-CG_EXTERN size_t CGDisplayBitsPerPixel(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN size_t CGDisplayBitsPerSample(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN size_t CGDisplaySamplesPerPixel(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN size_t CGDisplayBytesPerRow(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID
+  display, size_t bitsPerPixel, size_t width, size_t height,
+  boolean_t *exactMatch) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Set a display gamma/transfer function from a formula specifying
- * min and max values and a gamma for each channel.
- * Gamma values must be greater than 0.0.
- * To get an antigamma of 1.6, one would specify a value of (1.0 / 1.6)
- * Min values must be greater than or equal to 0.0 and less than 1.0.
- * Max values must be greater than 0.0 and less than or equal to 1.0.
- * Out of range values, or Max greater than or equal to Min result
- * in a kCGSRangeCheck error.
- *
- * Values are computed by sampling a function for a range of indices from 0 through 1:
- *	value = Min + ((Max - Min) * pow(index, Gamma))
- * The resulting values are converted to a machine specific format
- * and loaded into hardware.
- */
-typedef float CGGammaValue;
-                                              
-CG_EXTERN CGDisplayErr CGSetDisplayTransferByFormula(CGDirectDisplayID display,
-                                    CGGammaValue redMin,
-                                    CGGammaValue redMax,
-                                    CGGammaValue redGamma,
-                                    CGGammaValue greenMin,
-                                    CGGammaValue greenMax,
-                                    CGGammaValue greenGamma,
-                                    CGGammaValue blueMin,
-                                    CGGammaValue blueMax,
-                                    CGGammaValue blueGamma) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-                                              
-CG_EXTERN CGDisplayErr CGGetDisplayTransferByFormula(CGDirectDisplayID display,
-                                    CGGammaValue *redMin,
-                                    CGGammaValue *redMax,
-                                    CGGammaValue *redGamma,
-                                    CGGammaValue *greenMin,
-                                    CGGammaValue *greenMax,
-                                    CGGammaValue *greenGamma,
-                                    CGGammaValue *blueMin,
-                                    CGGammaValue *blueMax,
-                                    CGGammaValue *blueGamma) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-/*
- * Returns the capacity, or nunber of entries, in the camma table for the specified
- * display.  If 'display' is invalid, returns 0.
- */
-CG_EXTERN CGTableCount CGDisplayGammaTableCapacity(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(
+  CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height,
+  CGRefreshRate refreshRate, boolean_t *exactMatch)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Set a display gamma/transfer function using tables of data for each channel.
- * Values within each table should have values in the range of 0.0 through 1.0.
- * The same table may be passed in for red, green, and blue channels. 'tableSize'
- * indicates the number of entries in each table.
- * The tables are interpolated as needed to generate the number of samples needed
- * by hardware.
- */
-CG_EXTERN CGDisplayErr CGSetDisplayTransferByTable(CGDirectDisplayID display,
-                                  CGTableCount tableSize,
-                                  const CGGammaValue  *redTable,
-                                  const CGGammaValue  *greenTable,
-                                  const CGGammaValue  *blueTable) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CFDictionaryRef
+  CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID
+    display, size_t bitsPerPixel, size_t width, size_t height,
+    CGRefreshRate refreshRate, CFStringRef property, boolean_t *exactMatch)
+    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_6,
+      __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Get transfer tables.  Capacity should contain the number of samples each
- * array can hold, and *sampleCount is filled in with the number of samples
- * actually copied in.
- */
-CG_EXTERN CGDisplayErr CGGetDisplayTransferByTable(CGDirectDisplayID display,
-                                  CGTableCount capacity,
-                                  CGGammaValue  *redTable,
-                                  CGGammaValue  *greenTable,
-                                  CGGammaValue  *blueTable,
-                                  CGTableCount *sampleCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/* As a convenience, allow setting of the gamma table by byte values */
-CG_EXTERN CGDisplayErr CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
-                                      CGTableCount tableSize,
-                                      const CGByteValue  *redTable,
-                                      const CGByteValue  *greenTable,
-                                      const CGByteValue  *blueTable) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN CGError CGDisplaySwitchToMode(CGDirectDisplayID display,
+  CFDictionaryRef mode) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/* Restore gamma tables of system displays to the user's ColorSync specified values */
-CG_EXTERN void CGDisplayRestoreColorSyncSettings(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN size_t CGDisplayBitsPerPixel(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Options used with CGDisplayCaptureWithOptions and CGCaptureAllDisplaysWithOptions
- */
-enum {
-    kCGCaptureNoOptions = 0,	/* Default behavior */
-    kCGCaptureNoFill = (1 << 0)	/* Disables fill with black on display capture */
-};
+/* Use the CGDisplayMode APIs instead. */
+CG_EXTERN size_t CGDisplayBitsPerSample(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/* Display capture and release */
-CG_EXTERN boolean_t CGDisplayIsCaptured(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN CGDisplayErr CGDisplayCapture(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN CGDisplayErr CGDisplayCaptureWithOptions(CGDirectDisplayID display, CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-CG_EXTERN CGDisplayErr CGDisplayRelease(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN size_t CGDisplaySamplesPerPixel(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+    __IPHONE_NA, __IPHONE_NA);
 
-/*
- * Capture all displays; this has the nice effect of providing an immersive
- * environment, and preventing other apps from trying to adjust themselves
- * to display changes only needed by your app.
- */
-CG_EXTERN CGDisplayErr CGCaptureAllDisplays(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-CG_EXTERN CGDisplayErr CGCaptureAllDisplaysWithOptions(CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-/*
- * Release all captured displays, and restore the display modes to the
- * user's preferences.  May be used in conjunction with CGDisplayCapture()
- * or CGCaptureAllDisplays().
- */
-CG_EXTERN CGDisplayErr CGReleaseAllDisplays(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Returns CoreGraphics raw shield window ID or NULL if not shielded
- * This value may be used with drawing surface APIs.
- */
-CG_EXTERN uint32_t CGShieldingWindowID(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Returns the window level used for the shield window.
- * This value may be used with Cocoa windows to position the
- * Cocoa window in the same window level as the shield window.
- */
-CG_EXTERN int32_t CGShieldingWindowLevel(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Returns base address of display or NULL for an invalid display.
- * If the display has not been captured, the returned address may refer
- * to read-only memory.
- */
-CG_EXTERN void * CGDisplayBaseAddress(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-/*
- * return address for X,Y in global coordinates;
- *	(0,0) represents the upper left corner of the main display.
- * returns NULL for an invalid display or out of bounds coordinates
- * If the display has not been captured, the returned address may refer
- * to read-only memory.
- */
-CG_EXTERN void * CGDisplayAddressForPosition(CGDirectDisplayID display, CGDisplayCoord x, CGDisplayCoord y) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
-
-
-/* Mouse Cursor controls */
-CG_EXTERN CGDisplayErr CGDisplayHideCursor(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;	/* increments hide cursor count */
-CG_EXTERN CGDisplayErr CGDisplayShowCursor(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;	/* decrements hide cursor count  */
-
-/*
- * Move the cursor to the specified point relative to the display origin
- * (the upper left corner of the display).  Returns CGDisplayNoErr on success.
- * No events are generated as a result of this move.
- * Points that would lie outside the desktop are clipped to the desktop.
- */
-CG_EXTERN CGDisplayErr CGDisplayMoveCursorToPoint(CGDirectDisplayID display, CGPoint point) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Report the mouse position change associated with the last mouse move event
- * recieved by this application.
- */
-CG_EXTERN void CGGetLastMouseDelta( CGMouseDelta * deltaX, CGMouseDelta * deltaY ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/* Palette controls (8 bit pseudocolor only) */
-
-/*
- * Returns TRUE if the current display mode supports palettes.
- * Display must not be a hardware mirror of another, and should
- * have a depth of 8 bits per pixel for this to return TRUE.
- */
-CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Set a palette.  The current gamma function is applied to the palette
- * elements before being loaded into hardware.  The display must not be
- * a hardware mirror of another, and should have a depth of 8 bits per pixel.
- * Setting the palette on the active, or primary display in a hardware
- * mirroring set affects all displays in that set.
- */
-CG_EXTERN CGDisplayErr CGDisplaySetPalette(CGDirectDisplayID display, const CGDirectPaletteRef palette) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Wait until the beam position is outside the range specified by upperScanLine and lowerScanLine.
- * Note that if upperScanLine and lowerScanLine encompass the entire display height,
- * the function returns an error.
- * lowerScanLine must be greater than or equal to upperScanLine.
- *
- * Some display systems may not conventional video vertical and horizontal sweep in painting.
- * These displays report a kCGDisplayRefreshRate of 0 in the CFDictionaryRef returned by
- * CGDisplayCurrentMode().  On such displays, this function returns at once.
- *
- * Some drivers may not implement support for this mechanism.
- * On such displays, this function returns at once.
- *
- * Returns CGDisplayNoErr on success, and an error if display or upperScanLine and
- * lowerScanLine are invalid.
- *
- * The app should set the values of upperScanLine and lowerScanLine to allow enough lead time
- * for the drawing operation to complete.  A common strategy is to wait for the beam to pass
- * the bottom of the drawing area, allowing almost a full vertical sweep period to perform drawing.
- * To do this, set upperScanLine to 0, and set lowerScanLine to the bottom of the bounding box:
- *	lowerScanLine = (CGBeamPosition)(cgrect.origin.y + cgrect.size.height);
- *
- * IOKit may implement this as a spin-loop on the beam position call used for CGDisplayBeamPosition().
- * On such system the function is CPU bound, and subject to all the usual scheduling pre-emption.
- * In particular, attempting to wait for the beam to hit a specific scanline may be an exercise in frustration.
- *
- * These functions are advisary in nature, and depend on IOKit and hardware specific drivers to implement
- * support. If you need extremely precise timing, or access to vertical blanking interrupts,
- * you should consider writing a device driver to tie into hardware-specific capabilities.
- */
-CG_EXTERN CGDisplayErr CGDisplayWaitForBeamPositionOutsideLines( CGDirectDisplayID display,
-                                                       CGBeamPosition upperScanLine,
-                                                       CGBeamPosition lowerScanLine ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Returns the current beam position on the display.  If display is invalid,
- * or the display does not implement conventional video vertical and horizontal
- * sweep in painting, or the driver does not implement this functionality, 0 is returned.
- */
-CG_EXTERN CGBeamPosition CGDisplayBeamPosition( CGDirectDisplayID display ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- * Obtain a CGContextRef suitable for drawing to a captured display.
- *
- * Returns a drawing context suitable for use on the display device.
- * The context is owned by the device, and should not be released by
- * the caller.
- *
- * The context remains valid while the display is captured, and the
- * display configuration is unchanged.  Releasing the captured display
- * or reconfiguring the display invalidates the drawing context.
- *
- * An application may register a display reconfiguration callback to determine
- * when the display configuration is changing via CGRegisterDisplayReconfigurationProc().
- * 
- * After a display configuration change, or on capturing a display, call this
- * function to obtain a current drawing context.
- *
- * If the display has not been captured, this function returns NULL.
- */
-CG_EXTERN CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-CG_EXTERN_C_END
-
-#endif /* __CGDIRECT_DISPLAY_H__ */
+#endif /* CGDIRECTDISPLAY_H_ */

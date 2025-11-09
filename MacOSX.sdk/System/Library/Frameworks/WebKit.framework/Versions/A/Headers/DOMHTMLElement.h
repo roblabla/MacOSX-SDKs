@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,8 @@
 
 #import <WebKit/DOMElement.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMHTMLCollection;
 @class NSString;
 
@@ -35,6 +37,7 @@
 @property(copy) NSString *lang;
 @property(copy) NSString *dir;
 @property(copy) NSString *className;
+@property int tabIndex;
 @property(copy) NSString *innerHTML;
 @property(copy) NSString *innerText;
 @property(copy) NSString *outerHTML;
@@ -42,5 +45,7 @@
 @property(readonly, retain) DOMHTMLCollection *children;
 @property(copy) NSString *contentEditable;
 @property(readonly) BOOL isContentEditable;
-@property(readonly, copy) NSString *titleDisplayString;
+@property(readonly, copy) NSString *titleDisplayString AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

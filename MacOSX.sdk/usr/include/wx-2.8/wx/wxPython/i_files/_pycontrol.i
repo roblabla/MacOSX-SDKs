@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     2-June-1998
-// RCS-ID:      $Id: _pycontrol.i,v 1.18 2006/11/14 22:03:44 RD Exp $
+// RCS-ID:      $Id: _pycontrol.i 54192 2008-06-13 17:21:58Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -53,6 +53,7 @@ public:
     DEC_PYCALLBACK_VOID_INTPINTP_const(DoGetSize);
     DEC_PYCALLBACK_VOID_INTPINTP_const(DoGetClientSize);
     DEC_PYCALLBACK_VOID_INTPINTP_const(DoGetPosition);
+    DEC_PYCALLBACK_POINT_const(GetClientAreaOrigin);
 
     DEC_PYCALLBACK_SIZE_const(DoGetVirtualSize);
     DEC_PYCALLBACK_SIZE_const(DoGetBestSize);
@@ -89,6 +90,7 @@ IMP_PYCALLBACK_VOID_INTINT(wxPyControl, wxControl, DoSetVirtualSize);
 IMP_PYCALLBACK_VOID_INTPINTP_const(wxPyControl, wxControl, DoGetSize);
 IMP_PYCALLBACK_VOID_INTPINTP_const(wxPyControl, wxControl, DoGetClientSize);
 IMP_PYCALLBACK_VOID_INTPINTP_const(wxPyControl, wxControl, DoGetPosition);
+IMP_PYCALLBACK_POINT_const(wxPyControl, wxControl, GetClientAreaOrigin);
 
 IMP_PYCALLBACK_SIZE_const(wxPyControl, wxControl, DoGetVirtualSize);
 IMP_PYCALLBACK_SIZE_const(wxPyControl, wxControl, DoGetBestSize);
@@ -111,6 +113,7 @@ IMP_PYCALLBACK_VIZATTR_(wxPyControl, wxControl, GetDefaultAttributes);
 IMP_PYCALLBACK_BOOL_(wxPyControl, wxControl, HasTransparentBackground);
 
 IMP_PYCALLBACK_VOID_(wxPyControl, wxControl, OnInternalIdle);
+
 %}
 
 // And now the one for SWIG to see
@@ -171,27 +174,27 @@ public:
 
     void OnInternalIdle();
 
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoMoveWindow);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoSetSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoSetClientSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoSetVirtualSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoGetSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoGetClientSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoGetPosition);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoGetVirtualSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, DoGetBestSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, InitDialog);
-    %MAKE_BASE_FUNC(PyScrolledWindow, TransferDataToWindow);
-    %MAKE_BASE_FUNC(PyScrolledWindow, TransferDataFromWindow);
-    %MAKE_BASE_FUNC(PyScrolledWindow, Validate);
-    %MAKE_BASE_FUNC(PyScrolledWindow, AcceptsFocus);
-    %MAKE_BASE_FUNC(PyScrolledWindow, AcceptsFocusFromKeyboard);
-    %MAKE_BASE_FUNC(PyScrolledWindow, GetMaxSize);
-    %MAKE_BASE_FUNC(PyScrolledWindow, AddChild);
-    %MAKE_BASE_FUNC(PyScrolledWindow, RemoveChild);
-    %MAKE_BASE_FUNC(PyScrolledWindow, ShouldInheritColours);
-    %MAKE_BASE_FUNC(PyScrolledWindow, GetDefaultAttributes);
-    %MAKE_BASE_FUNC(PyScrolledWindow, OnInternalIdle);
+    %MAKE_BASE_FUNC(PyControl, DoMoveWindow);
+    %MAKE_BASE_FUNC(PyControl, DoSetSize);
+    %MAKE_BASE_FUNC(PyControl, DoSetClientSize);
+    %MAKE_BASE_FUNC(PyControl, DoSetVirtualSize);
+    %MAKE_BASE_FUNC(PyControl, DoGetSize);
+    %MAKE_BASE_FUNC(PyControl, DoGetClientSize);
+    %MAKE_BASE_FUNC(PyControl, DoGetPosition);
+    %MAKE_BASE_FUNC(PyControl, DoGetVirtualSize);
+    %MAKE_BASE_FUNC(PyControl, DoGetBestSize);
+    %MAKE_BASE_FUNC(PyControl, InitDialog);
+    %MAKE_BASE_FUNC(PyControl, TransferDataToWindow);
+    %MAKE_BASE_FUNC(PyControl, TransferDataFromWindow);
+    %MAKE_BASE_FUNC(PyControl, Validate);
+    %MAKE_BASE_FUNC(PyControl, AcceptsFocus);
+    %MAKE_BASE_FUNC(PyControl, AcceptsFocusFromKeyboard);
+    %MAKE_BASE_FUNC(PyControl, GetMaxSize);
+    %MAKE_BASE_FUNC(PyControl, AddChild);
+    %MAKE_BASE_FUNC(PyControl, RemoveChild);
+    %MAKE_BASE_FUNC(PyControl, ShouldInheritColours);
+    %MAKE_BASE_FUNC(PyControl, GetDefaultAttributes);
+    %MAKE_BASE_FUNC(PyControl, OnInternalIdle);
 
 };
 

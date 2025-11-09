@@ -3,9 +3,9 @@
  
      Contains:   Event Manager Interfaces.
  
-     Version:    HIToolbox-343.0.1~2
+     Version:    HIToolbox-463~1
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -370,7 +370,7 @@ typedef STACK_UPP_TYPE(FKEYProcPtr)                             FKEYUPP;
  *  GetMouse()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use HIGetMousePosition instead
+ *    Use HIGetMousePosition instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -387,18 +387,21 @@ GetMouse(Point * mouseLoc)                                    AVAILABLE_MAC_OS_X
 #endif  /* !__LP64__ */
 
 /*
- *  Button()
+ *  Button()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use GetCurrentButtonState or GetCurrentEventButtonState instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-Button(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Button(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if !__LP64__
@@ -433,13 +436,16 @@ WaitMouseUp(void)                                             AVAILABLE_MAC_OS_X
 
 
 /*
- *  KeyTranslate()
+ *  KeyTranslate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UCKeyTranslate instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -447,7 +453,7 @@ extern UInt32
 KeyTranslate(
   const void *  transData,
   UInt16        keycode,
-  UInt32 *      state)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *      state)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
@@ -478,7 +484,7 @@ GetCaretTime(void)                                            AVAILABLE_MAC_OS_X
 
 typedef UInt32                          KeyMap[4];
 #else
-typedef BigEndianLong                   KeyMap[4];
+typedef BigEndianUInt32                 KeyMap[4];
 #endif  /* TARGET_API_MAC_OS8 */
 
 typedef UInt8                           KeyMapByteArray[16];
@@ -558,8 +564,22 @@ typedef GetNextEventFilterUPP           GNEFilterUPP;
 /*
  *  GetDblTime()
  *  
+ *  Summary:
+ *    Returns the maximum time (in units of 1/60th of a second) allowed
+ *    between two consecutive mouse-down events in order for the second
+ *    click to be considered a double-click.
+ *  
+ *  Discussion:
+ *    In 64-bit applications, you may replace calls to this API with
+ *    calls to NXClickTime (declared in
+ *    <IOKit/hidsystem/event_status_driver.h>) or with +[NSEvent
+ *    doubleClickInterval] (available in Mac OS X 10.6 and later).
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Result:
+ *    The maximum time between mouse-downs allowed for a double-click.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
@@ -586,30 +606,36 @@ SetEventMask(EventMask value)                                 AVAILABLE_MAC_OS_X
 
 
 /*
- *  GetNextEvent()
+ *  GetNextEvent()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ReceiveNextEvent instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
 GetNextEvent(
   EventMask      eventMask,
-  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  WaitNextEvent()
+ *  WaitNextEvent()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ReceiveNextEvent instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -618,60 +644,70 @@ WaitNextEvent(
   EventMask      eventMask,
   EventRecord *  theEvent,
   UInt32         sleep,
-  RgnHandle      mouseRgn)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle      mouseRgn)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  EventAvail()
+ *  EventAvail()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use FindSpecificEventInQueue instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
 EventAvail(
   EventMask      eventMask,
-  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 /*
- *  PostEvent()
+ *  PostEvent()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use PostEventToQueue or CGEventPost instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 PostEvent(
   EventKind   eventNum,
-  UInt32      eventMsg)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32      eventMsg)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #endif  /* !__LP64__ */
 
 /*
- *  FlushEvents()
+ *  FlushEvents()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use FlushEventsMatchingListFromQueue,
+ *    FlushSpecificEventsFromQueue, or FlushEventQueue instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 FlushEvents(
   EventMask   whichMask,
-  EventMask   stopMask)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EventMask   stopMask)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 #if OLDROUTINENAMES
@@ -706,20 +742,23 @@ KeyScript(short code)                                         AVAILABLE_MAC_OS_X
 #endif  /* !__LP64__ */
 
 /*
- *  IsCmdChar()
+ *  IsCmdChar()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use IsUserCancelEventRef or CheckEventQueueForUserCancel instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.6
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
 IsCmdChar(
   const EventRecord *  event,
-  short                test)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                test)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 
 

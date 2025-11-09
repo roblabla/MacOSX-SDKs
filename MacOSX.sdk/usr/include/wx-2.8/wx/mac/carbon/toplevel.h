@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     20.09.01
-// RCS-ID:      $Id: toplevel.h,v 1.17 2006/08/11 04:01:55 SC Exp $
+// RCS-ID:      $Id: toplevel.h 48801 2007-09-19 14:38:55Z SC $
 // Copyright:   (c) 2001 Stefan Csomor
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,9 @@ public:
     virtual void Iconize(bool iconize = true);
     virtual bool IsIconized() const;
     virtual void SetIcon(const wxIcon& icon);
+#ifndef __WXUNIVERSAL__
     virtual void SetIcons(const wxIconBundle& icons) { SetIcon( icons.GetIcon( -1 ) ); }
+#endif
     virtual void Restore();
 
     virtual bool SetShape(const wxRegion& region);
@@ -102,6 +104,7 @@ public:
     virtual void MacInstallTopLevelWindowEventHandler() ;
 
     bool MacGetMetalAppearance() const ;
+    bool MacGetUnifiedAppearance() const ;
 
     void MacChangeWindowAttributes( wxUint32 attributesToSet , wxUint32 attributesToClear ) ;
     wxUint32 MacGetWindowAttributes() const ;
@@ -118,6 +121,7 @@ protected:
     virtual void DoGetSize( int *width, int *height ) const;
     virtual void DoMoveWindow(int x, int y, int width, int height);
     virtual void DoGetClientSize(int *width, int *height) const;
+    virtual void DoCentre(int dir);
 
     // is the frame currently iconized?
     bool m_iconized;
@@ -138,6 +142,13 @@ private :
     // This is because the ExtraStyle flags get out of sync with the metal appearance and the metal
     // logic & checks cease to work as expected. To set the metal appearance, use SetExtraStyle.
     void MacSetMetalAppearance( bool on ) ;
+    void MacSetUnifiedAppearance( bool on ) ;
+    // binary compatible workaround
+    void DoMacCreateRealWindow( wxWindow *parent, const wxString& title,
+                                      const wxPoint& pos,
+                                      const wxSize& size,
+                                      long style,
+                                      const wxString& name );
 
     WXEVENTHANDLERREF    m_macEventHandler ;
 

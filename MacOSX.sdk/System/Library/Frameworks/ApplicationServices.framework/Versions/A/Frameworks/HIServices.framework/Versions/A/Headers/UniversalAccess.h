@@ -3,9 +3,9 @@
  
      Contains:   Universal Access Interfaces.
  
-     Version:    HIServices-247.0.1~2
+     Version:    HIServices-311~1
  
-     Copyright:  © 2005-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2005-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -1,6 +1,6 @@
 /*
 	File:		BluetoothAssignedNumbers.h
-	Copyright:	© 2002-2006 by Apple Computer, Inc. All rights reserved.
+	Copyright:	(c) 2002-2008 by Apple Computer, Inc. All rights reserved.
 */
 
 #pragma once
@@ -8,6 +8,99 @@
 #ifdef	__cplusplus
 	extern "C" {
 #endif
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+#pragma mark -
+#pragma mark === General ===
+
+enum BluetoothCompanyIdentifers
+{
+	kBluetoothCompanyIdentiferEricssonTechnologyLicensing						=	0,
+	kBluetoothCompanyIdentiferNokiaMobilePhones									=	1,
+	kBluetoothCompanyIdentiferIntel												=	2,
+	kBluetoothCompanyIdentiferIBM												=	3,
+	kBluetoothCompanyIdentiferToshiba											=	4,
+	kBluetoothCompanyIdentifer3Com												=	5,
+	kBluetoothCompanyIdentiferMicrosoft											=	6,
+	kBluetoothCompanyIdentiferLucent											=	7,
+	kBluetoothCompanyIdentiferMotorola											=	8,
+	kBluetoothCompanyIdentiferInfineonTechnologiesAG							=	9,
+	kBluetoothCompanyIdentiferCambridgeSiliconRadio								=	10,
+	kBluetoothCompanyIdentiferSiliconWave										=	11,
+	kBluetoothCompanyIdentiferDigianswerAS										=	12,
+	kBluetoothCompanyIdentiferTexasInstruments									=	13,
+	kBluetoothCompanyIdentiferParthusTechnologies								=	14,
+	kBluetoothCompanyIdentiferBroadcom											=	15,
+	kBluetoothCompanyIdentiferMitelSemiconductor								=	16,
+	kBluetoothCompanyIdentiferWidcomm											=	17,
+	kBluetoothCompanyIdentiferZeevo												=	18,
+	kBluetoothCompanyIdentiferAtmel												=	19,
+	kBluetoothCompanyIdentiferMistubishiElectric								=	20,
+	kBluetoothCompanyIdentiferRTXTelecom										=	21,
+	kBluetoothCompanyIdentiferKCTechnology										=	22,
+	kBluetoothCompanyIdentiferNewlogic											=	23,
+	kBluetoothCompanyIdentiferTransilica										=	24,
+	kBluetoothCompanyIdentiferRohdeandSchwarz									=	25,
+	kBluetoothCompanyIdentiferTTPCom											=	26,
+	kBluetoothCompanyIdentiferSigniaTechnologies								=	27,
+	kBluetoothCompanyIdentiferConexantSystems									=	28,
+	kBluetoothCompanyIdentiferQualcomm											=	29,
+	kBluetoothCompanyIdentiferInventel											=	30,
+	kBluetoothCompanyIdentiferAVMBerlin											=	31,
+	kBluetoothCompanyIdentiferBandspeed											=	32,
+	kBluetoothCompanyIdentiferMansella											=	33,
+	kBluetoothCompanyIdentiferNEC												=	34,
+	kBluetoothCompanyIdentiferWavePlusTechnology								=	35,
+	kBluetoothCompanyIdentiferAlcatel											=	36,
+	kBluetoothCompanyIdentiferPhilipsSemiconductor								=	37,
+	kBluetoothCompanyIdentiferCTechnologies										=	38,
+	kBluetoothCompanyIdentiferOpenInterface										=	39,
+	kBluetoothCompanyIdentiferRFCMicroDevices									=	40,
+	kBluetoothCompanyIdentiferHitachi											=	41,
+	kBluetoothCompanyIdentiferSymbolTechnologies								=	42,
+	kBluetoothCompanyIdentiferTenovis											=	43,
+	kBluetoothCompanyIdentiferMacronixInternational								=	44,
+	kBluetoothCompanyIdentiferGCTSemiconductor									=	45,
+	kBluetoothCompanyIdentiferNorwoodSystems									=	46,
+	kBluetoothCompanyIdentiferMewTelTechnology									=	47,
+	kBluetoothCompanyIdentiferSTMicroelectronics								=	48,
+	kBluetoothCompanyIdentiferSynopsys											=	49,
+	kBluetoothCompanyIdentiferRedMCommunications								=	50,
+	kBluetoothCompanyIdentiferCommil											=	51,
+	kBluetoothCompanyIdentiferCATC												=	52,
+	kBluetoothCompanyIdentiferEclipse											=	53,
+	kBluetoothCompanyIdentiferRenesasTechnology									=	54,
+	kBluetoothCompanyIdentiferMobilian											=	55,
+	kBluetoothCompanyIdentiferTerax												=	56,
+	kBluetoothCompanyIdentiferIntegratedSystemSolution							=	57,
+	kBluetoothCompanyIdentiferMatsushitaElectricIndustrial						=	58,
+	kBluetoothCompanyIdentiferGennum											=	59,
+	kBluetoothCompanyIdentiferResearchInMotion									=	60,
+	kBluetoothCompanyIdentiferIPextreme											=	61,
+	kBluetoothCompanyIdentiferSystemsAndChips									=	62,
+	kBluetoothCompanyIdentiferBluetoothSIG										=	63,
+	kBluetoothCompanyIdentiferSeikoEpson										=	64,
+	kBluetoothCompanyIdentiferIntegratedSiliconSolution							=	65,
+	kBluetoothCompanyIdentiferCONWISETechnology									=	66,
+	kBluetoothCompanyIdentiferParrotSA											=	67,
+	kBluetoothCompanyIdentiferSocketCommunications								=	68,
+	kBluetoothCompanyIdentiferAtherosCommunications								=	69,
+	kBluetoothCompanyIdentiferMediaTek											=	70,
+	kBluetoothCompanyIdentiferBluegiga											=	71,
+	kBluetoothCompanyIdentiferMarvellTechnologyGroup							=	72,
+	kBluetoothCompanyIdentifer3DSP												=	73,
+	kBluetoothCompanyIdentiferAccelSemiconductor								=	74,
+	kBluetoothCompanyIdentiferContinentialAutomotiveSystems						=	75,
+	kBluetoothCompanyIdentiferApple												=	76,
+	kBluetoothCompanyIdentiferStaccatoCommunications							=	77,
+	kBluetoothCompanyIdentiferAvagoTechnologies									=	78,
+	kBluetoothCompanyIdentiferAPT												=	79,
+
+	kBluetoothCompanyIdentiferInteropIdentifier									=	65535
+};
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 #pragma mark -
 #pragma mark === Baseband ===
@@ -150,7 +243,11 @@ enum
     kBluetoothDeviceClassMinorPeripheral2Gamepad			= 0x02,		// [XX0010] Gamepad
     kBluetoothDeviceClassMinorPeripheral2RemoteControl		= 0x03,		// [XX0011] Remote control
     kBluetoothDeviceClassMinorPeripheral2SensingDevice		= 0x04,		// [XX0100] Sensing device
+    kBluetoothDeviceClassMinorPeripheral2DigitizerTablet	= 0x05,		// [XX0101] Digitizer Tablet	
+    kBluetoothDeviceClassMinorPeripheral2CardReader			= 0x06,		// [XX0110] Card Reader
     
+	kBluetoothDeviceClassMinorPeripheral2AnyPointing		= 'poin',	// Anything under MinorPeripheral1Pointing
+	
     // Range 0x05 to 0x0f reserved for future use
 	
     
@@ -181,7 +278,14 @@ enum
 	
 	kBluetoothDeviceClassMinorEnd
 };
-
+		
+		
+// Peripheral devices bits 7 & 6
+#define BluetoothCoDMinorPeripheral1(minorClass) (minorClass & 0x30)
+		
+// Peripheral devices bits 5 - 2
+#define BluetoothCoDMinorPeripheral2(minorClass) (minorClass & 0x0f)	
+		
 #pragma mark -
 #pragma mark === L2CAP ===
 
@@ -208,6 +312,7 @@ enum
     
 	// Range 0x1001-0xFFFF dynamically assigned.
     kBluetoothL2CAPPSMDynamicStart				= 0x1001,
+	kBluetoothL2CAPPSMD2D						= 0x100F,
     kBluetoothL2CAPPSMDynamicEnd				= 0xFFFF,
     
     kBluetoothL2CAPPSMNone						= 0x0000
@@ -287,8 +392,8 @@ enum SDPServiceClasses
     kBluetoothSDPUUID16ServiceClassImagingResponder							= 0x111B,
     kBluetoothSDPUUID16ServiceClassImagingAutomaticArchive					= 0x111C,
     kBluetoothSDPUUID16ServiceClassImagingReferencedObjects					= 0x111D,
-    kBluetoothSDPUUID16ServiceClassHandsfree								= 0x111E,
-    kBluetoothSDPUUID16ServiceClassHandsfreeAudioGateway					= 0x111F,
+    kBluetoothSDPUUID16ServiceClassHandsFree								= 0x111E,
+    kBluetoothSDPUUID16ServiceClassHandsFreeAudioGateway					= 0x111F,
     kBluetoothSDPUUID16ServiceClassDirectPrintingReferenceObjectsService	= 0x1120,
     kBluetoothSDPUUID16ServiceClassReflectedUI								= 0x1121,
     kBluetoothSDPUUID16ServiceClassBasicPrinting							= 0x1122,
@@ -301,6 +406,15 @@ enum SDPServiceClasses
     kBluetoothSDPUUID16ServiceClassVideoConferencingGW						= 0x1129,
     kBluetoothSDPUUID16ServiceClassUDI_MT									= 0x112A,
     kBluetoothSDPUUID16ServiceClassUDI_TA									= 0x112B,
+    kBluetoothSDPUUID16ServiceClassAudioVideo								= 0x112C,
+    kBluetoothSDPUUID16ServiceClassSIM_Access								= 0x112D,
+    kBluetoothSDPUUID16ServiceClassPhonebookAccess_PCE						= 0x112E,
+    kBluetoothSDPUUID16ServiceClassPhonebookAccess_PSE						= 0x112F,
+    kBluetoothSDPUUID16ServiceClassPhonebookAccess							= 0x1130,
+    kBluetoothSDPUUID16ServiceClassHeadset_HS								= 0x1131,
+    kBluetoothSDPUUID16ServiceClassMessageAccessServer						= 0x1132,
+    kBluetoothSDPUUID16ServiceClassMessageNotificationServer				= 0x1133,
+    kBluetoothSDPUUID16ServiceClassMessageAccessProfile						= 0x1134,
 	kBluetoothSDPUUID16ServiceClassPnPInformation							= 0x1200,	// 00001200-0000-1000-8000-00805f9b34fb
 	kBluetoothSDPUUID16ServiceClassGenericNetworking						= 0x1201,	// 00001201-0000-1000-8000-00805f9b34fb
 	kBluetoothSDPUUID16ServiceClassGenericFileTransfer						= 0x1202,	// 00001202-0000-1000-8000-00805f9b34fb
@@ -334,6 +448,27 @@ enum SDPAttributeIdentifierCodes
     
     // PAN
     kBluetoothSDPAttributeIdentifierIPSubnet							= 0x0200,
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
+
+    // HID																			Required		Type		Section		Notes
+    kBluetoothSDPAttributeIdentifierHIDReleaseNumber					= 0x0200,	// O			uint16		7.11.1
+    kBluetoothSDPAttributeIdentifierHIDParserVersion					= 0x0201,	// M			uint16		-
+    kBluetoothSDPAttributeIdentifierHIDDeviceSubclass					= 0x0202,	// M			uint8		7.11.2		Should match the low order 8 bits of CoD unless a combo device
+    kBluetoothSDPAttributeIdentifierHIDCountryCode						= 0x0203,	// M			uint8		7.11.3
+    kBluetoothSDPAttributeIdentifierHIDVirtualCable						= 0x0204,	// M			bool		7.11.4
+    kBluetoothSDPAttributeIdentifierHIDReconnectInitiate				= 0x0205,	// M			bool		7.11.5
+    kBluetoothSDPAttributeIdentifierHIDDescriptorList					= 0x0206,	// M			sequence	7.11.6		Layout is defined in Section 6.2 of the HID Specification
+    kBluetoothSDPAttributeIdentifierHIDLangIDBaseList					= 0x0207,	// M			sequence	7.11.7
+    kBluetoothSDPAttributeIdentifierHIDSDPDisable						= 0x0208,	// O			bool		7.11.8
+    kBluetoothSDPAttributeIdentifierHIDBatteryPower						= 0x0209,	// O			bool		7.11.9
+    kBluetoothSDPAttributeIdentifierHIDRemoteWake						= 0x020A,	// O			bool		7.11.10
+    kBluetoothSDPAttributeIdentifierHIDProfileVersion					= 0x020B,	// M			uint16		7.11.14
+    kBluetoothSDPAttributeIdentifierHIDSupervisionTimeout				= 0x020C,	// O			uint16		7.11.12		Default to 5 seconds or longer if not defined
+    kBluetoothSDPAttributeIdentifierHIDNormallyConnectable				= 0x020D,	// O			bool		7.11.13
+    kBluetoothSDPAttributeIdentifierHIDBootDevice						= 0x020E,	// M			bool		7.11.11		Only defined for mice and keyboards as of HID 1.0
+
+#endif
     
 	kBluetoothSDPAttributeIdentifierServiceVersion						= 0x0300,
 	kBluetoothSDPAttributeIdentifierExternalNetwork						= 0x0301,	// Cordless telephony
@@ -405,6 +540,7 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
 	kBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsCompleteList			=	0x07,
 	kBluetoothHCIExtendedInquiryResponseDataTypeShortenedLocalName							=	0x08,
 	kBluetoothHCIExtendedInquiryResponseDataTypeCompleteLocalName							=	0x09,
+	kBluetoothHCIExtendedInquiryResponseDataTypeDeviceID									=	0x10,
 	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF
 };
 

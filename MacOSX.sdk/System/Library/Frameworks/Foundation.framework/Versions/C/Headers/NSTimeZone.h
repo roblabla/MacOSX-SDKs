@@ -1,5 +1,5 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,6 +33,9 @@
 + (NSArray *)knownTimeZoneNames;
 
 + (NSDictionary *)abbreviationDictionary;
++ (void)setAbbreviationDictionary:(NSDictionary *)dict AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
++ (NSString *)timeZoneDataVersion AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (NSInteger)secondsFromGMT;
 - (NSString *)abbreviation;
@@ -45,10 +48,12 @@
 - (BOOL)isEqualToTimeZone:(NSTimeZone *)aTimeZone;
 
 enum {
-	NSTimeZoneNameStyleStandard,
-	NSTimeZoneNameStyleShortStandard,
-	NSTimeZoneNameStyleDaylightSaving,
-	NSTimeZoneNameStyleShortDaylightSaving
+	NSTimeZoneNameStyleStandard,		// Central Standard Time
+	NSTimeZoneNameStyleShortStandard,	// CST
+	NSTimeZoneNameStyleDaylightSaving,	// Central Daylight Time
+	NSTimeZoneNameStyleShortDaylightSaving,	// CDT
+	NSTimeZoneNameStyleGeneric,		// Central Time
+	NSTimeZoneNameStyleShortGeneric		// CT
 };
 typedef NSInteger NSTimeZoneNameStyle;
 

@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: menu.h,v 1.10 2006/02/08 21:46:11 VZ Exp $
+// RCS-ID:      $Id: menu.h 49614 2007-11-04 10:26:36Z SC $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ public:
     // implementation only from now on
     // -------------------------------
 
-      int    MacGetIndexFromId( int id ) ; 
+      int    MacGetIndexFromId( int id ) ;
       int    MacGetIndexFromItem( wxMenuItem *pItem ) ;
       void MacEnableMenu( bool bDoEnable ) ;
       // MacOS needs to know about submenus somewhere within this menu
@@ -60,6 +60,9 @@ public:
     WXHMENU GetHMenu() const { return m_hMenu; }
 
     short MacGetMenuId() { return m_macMenuId ; }
+    
+    wxInt32 MacHandleCommandProcess( wxMenuItem* item, int id, wxWindow* targetWindow = NULL );
+    wxInt32 MacHandleCommandUpdateStatus( wxMenuItem* item, int id, wxWindow* targetWindow = NULL);
 
 protected:
     virtual wxMenuItem* DoAppend(wxMenuItem *item);
@@ -174,6 +177,13 @@ private:
   static wxMenuBar*            s_macCommonMenuBar ;
 
     DECLARE_DYNAMIC_CLASS(wxMenuBar)
+
+public:
+
+#if wxABI_VERSION >= 20805
+    // Gets the original label at the top-level of the menubar
+    wxString GetMenuLabel(size_t pos) const;
+#endif
 };
 
 #endif // _WX_MENU_H_

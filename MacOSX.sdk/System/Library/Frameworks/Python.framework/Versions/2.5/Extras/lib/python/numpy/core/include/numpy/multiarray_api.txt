@@ -2,9 +2,6 @@
 ===========
 Numpy C-API
 ===========
-
-Object API
-==========
 ::
 
   int
@@ -239,16 +236,51 @@ as input.
 ::
 
   PyObject *
-  PyArray_FromFile(FILE *fp, PyArray_Descr *typecode, intp num, char
-                   *sep)
+  PyArray_FromFile(FILE *fp, PyArray_Descr *dtype, intp num, char *sep)
 
+
+Given a ``FILE *`` pointer ``fp``, and a ``PyArray_Descr``, return an
+array corresponding to the data encoded in that file.
+
+If the dtype is NULL, the default array type is used (double).
+If non-null, the reference is stolen.
+
+The number of elements to read is given as ``num``; if it is < 0, then
+then as many as possible are read.
+
+If ``sep`` is NULL or empty, then binary data is assumed, else
+text data, with ``sep`` as the separator between elements. Whitespace in
+the separator matches any length of whitespace in the text, and a match
+for whitespace around the separator is added.
+
+For memory-mapped files, use the buffer interface. No more data than
+necessary is read by this routine.
 
 ::
 
   PyObject *
   PyArray_FromString(char *data, intp slen, PyArray_Descr *dtype, intp
-                     n, char *sep)
+                     num, char *sep)
 
+
+Given a pointer to a string ``data``, a string length ``slen``, and
+a ``PyArray_Descr``, return an array corresponding to the data
+encoded in that string.
+
+If the dtype is NULL, the default array type is used (double).
+If non-null, the reference is stolen.
+
+If ``slen`` is < 0, then the end of string is used for text data.
+It is an error for ``slen`` to be < 0 for binary data (since embedded NULLs
+would be the norm).
+
+The number of elements to read is given as ``num``; if it is < 0, then
+then as many as possible are read.
+
+If ``sep`` is NULL or empty, then binary data is assumed, else
+text data, with ``sep`` as the separator between elements. Whitespace in
+the separator matches any length of whitespace in the text, and a match
+for whitespace around the separator is added.
 
 ::
 
@@ -595,10 +627,6 @@ A -1 is returned if multi->nd == 0.
 
 Return the tuple of ordered field names from a dictionary.
 
-
-
-Multiarray API
-==============
 ::
 
   PyObject *
@@ -1205,4 +1233,24 @@ None goes to NULL.
   PyArray_SearchsideConverter(PyObject *obj, void *addr)
 
 Convert object to searchsorted side
+
+::
+
+  PyObject *
+  PyArray_CheckAxis(PyArrayObject *arr, int *axis, int flags)
+
+PyArray_CheckAxis
+
+::
+
+  npy_intp
+  PyArray_OverflowMultiplyList(register intp *l1, register int n)
+
+Multiply a List of Non-negative numbers with over-flow detection.
+
+::
+
+  int
+  PyArray_CompareString(char *s1, char *s2, size_t len)
+
 

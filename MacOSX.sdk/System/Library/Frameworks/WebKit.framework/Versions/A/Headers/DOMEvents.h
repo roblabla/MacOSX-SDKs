@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004, 2006, 2008 Apple Computer, Inc.  All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,3 @@
 #import <WebKit/DOMOverflowEvent.h>
 #import <WebKit/DOMUIEvent.h>
 #import <WebKit/DOMWheelEvent.h>
-
-@interface DOMNode (DOMEventTarget) <DOMEventTarget>
-@end

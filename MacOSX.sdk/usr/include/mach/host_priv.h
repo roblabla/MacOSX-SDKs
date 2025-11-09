@@ -21,12 +21,12 @@ typedef struct {
         char            *name;
         function_ptr_t  function;
 } function_table_entry;
-typedef function_table_entry 	*function_table_t;
+typedef function_table_entry   *function_table_t;
 #endif /* FUNCTION_PTR_T */
 #endif /* AUTOTEST */
 
 #ifndef	host_priv_MSG_COUNT
-#define	host_priv_MSG_COUNT	25
+#define	host_priv_MSG_COUNT	26
 #endif	/* host_priv_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -91,7 +91,7 @@ kern_return_t host_default_memory_manager
 (
 	host_priv_t host_priv,
 	memory_object_default_t *default_manager,
-	vm_size_t cluster_size
+	memory_object_cluster_size_t cluster_size
 );
 
 /* Routine vm_wire */
@@ -134,7 +134,7 @@ kern_return_t vm_allocate_cpm
 	vm_map_t task,
 	vm_address_t *address,
 	vm_size_t size,
-	boolean_t anywhere
+	int flags
 );
 
 /* Routine host_processors */
@@ -386,6 +386,25 @@ kern_return_t host_get_UNDServer
 	UNDServerRef *server
 );
 
+/* Routine kext_request */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t kext_request
+(
+	host_priv_t host_priv,
+	uint32_t user_log_flags,
+	vm_offset_t request_data,
+	mach_msg_type_number_t request_dataCnt,
+	vm_offset_t *response_data,
+	mach_msg_type_number_t *response_dataCnt,
+	vm_offset_t *log_data,
+	mach_msg_type_number_t *log_dataCnt,
+	kern_return_t *op_result
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -449,7 +468,7 @@ __END_DECLS
 		mach_msg_port_descriptor_t default_manager;
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
-		vm_size_t cluster_size;
+		memory_object_cluster_size_t cluster_size;
 	} __Request__host_default_memory_manager_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -501,7 +520,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		vm_address_t address;
 		vm_size_t size;
-		boolean_t anywhere;
+		int flags;
 	} __Request__vm_allocate_cpm_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -757,6 +776,23 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t request_data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		uint32_t user_log_flags;
+		mach_msg_type_number_t request_dataCnt;
+	} __Request__kext_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__host_priv_subsystem__defined */
 
 /* union of all requests */
@@ -789,6 +825,7 @@ union __RequestUnion__host_priv_subsystem {
 	__Request__get_dp_control_port_t Request_get_dp_control_port;
 	__Request__host_set_UNDServer_t Request_host_set_UNDServer;
 	__Request__host_get_UNDServer_t Request_host_get_UNDServer;
+	__Request__kext_request_t Request_kext_request;
 };
 #endif /* !__RequestUnion__host_priv_subsystem__defined */
 /* typedefs for all replies */
@@ -1140,6 +1177,25 @@ union __RequestUnion__host_priv_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t response_data;
+		mach_msg_ool_descriptor_t log_data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t response_dataCnt;
+		mach_msg_type_number_t log_dataCnt;
+		kern_return_t op_result;
+	} __Reply__kext_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__host_priv_subsystem__defined */
 
 /* union of all replies */
@@ -1172,6 +1228,7 @@ union __ReplyUnion__host_priv_subsystem {
 	__Reply__get_dp_control_port_t Reply_get_dp_control_port;
 	__Reply__host_set_UNDServer_t Reply_host_set_UNDServer;
 	__Reply__host_get_UNDServer_t Reply_host_get_UNDServer;
+	__Reply__kext_request_t Reply_kext_request;
 };
 #endif /* !__RequestUnion__host_priv_subsystem__defined */
 
@@ -1201,7 +1258,8 @@ union __ReplyUnion__host_priv_subsystem {
     { "set_dp_control_port", 421 },\
     { "get_dp_control_port", 422 },\
     { "host_set_UNDServer", 423 },\
-    { "host_get_UNDServer", 424 }
+    { "host_get_UNDServer", 424 },\
+    { "kext_request", 425 }
 #endif
 
 #ifdef __AfterMigUserHeader

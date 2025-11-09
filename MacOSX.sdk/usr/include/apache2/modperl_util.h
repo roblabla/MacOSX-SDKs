@@ -1,8 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -26,7 +27,7 @@
     }
 
 /* turn off cgi header parsing. in case we are already inside
- *     modperl_callback_per_dir(MP_RESPONSE_HANDLER, r, MP_HOOK_RUN_FIRST); 
+ *     modperl_callback_per_dir(MP_RESPONSE_HANDLER, r, MP_HOOK_RUN_FIRST);
  * but haven't sent any data yet, it's too late to change
  * MpReqPARSE_HEADERS, so change the wbucket's private flag directly
  */
@@ -34,7 +35,7 @@
     MpReqPARSE_HEADERS_Off(rcfg); \
     if (rcfg->wbucket) { \
         rcfg->wbucket->header_parse = 0; \
-    } 
+    }
 
 MP_INLINE server_rec *modperl_sv2server_rec(pTHX_ SV *sv);
 MP_INLINE request_rec *modperl_sv2request_rec(pTHX_ SV *sv);
@@ -80,7 +81,7 @@ void modperl_perl_exit(pTHX_ int status);
 
 MP_INLINE SV *modperl_dir_config(pTHX_ request_rec *r, server_rec *s,
                                  char *key, SV *sv_val);
-    
+
 SV *modperl_table_get_set(pTHX_ apr_table_t *table, char *key,
                           SV *sv_val, int do_taint);
 
@@ -144,5 +145,10 @@ void modperl_package_unload(pTHX_ const char *package);
  * first 1, and on on restart 2 */
 void modperl_restart_count_inc(server_rec *base_server);
 int  modperl_restart_count(void);
+
+SV *modperl_pnotes(pTHX_ HV **pnotes, SV *key, SV *val,
+                   request_rec *r, conn_rec *c);
+
+U16 *modperl_code_attrs(pTHX_ CV *cv);
 
 #endif /* MODPERL_UTIL_H */

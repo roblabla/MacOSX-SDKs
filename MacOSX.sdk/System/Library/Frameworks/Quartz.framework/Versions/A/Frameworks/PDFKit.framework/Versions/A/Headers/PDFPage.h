@@ -46,6 +46,11 @@ enum
 // The PDFDocument the page is associated with.
 - (PDFDocument *) document;
 
+// This is the CGPDFPage associated with the PDFPage object.  With this object you can call many CoreGraphics API.
+// May return NULL if the owning document was not created from an existing PDF file or data or if the page itself was 
+// created independently.
+- (CGPDFPageRef) pageRef;
+
 // The page label.  Usually "1" for the first page, "2" for the second, etc.
 - (NSString *) label;
 
@@ -134,8 +139,10 @@ enum
 
 // -------- misc
 
-// Returns PDF data (a proper PDF document) consisting of a single page (this page).  Note, external page links are not 
-// preserved.
+// Returns PDF data (a proper PDF document) consisting of a single page (this page).
+// NOTE: External page links are not preserved.
+// NOTE: Versions of PDFKit before SnowLeopard did not return autorelease data for -[dataRepresentation]. You had to 
+// release the data yourself.  Beginning with apps compiled on SnowLeopard the data returned is autoreleased.
 - (NSData *) dataRepresentation;
 
 @end

@@ -4,7 +4,7 @@
 // Notes:       Based on htmlhelp.cpp, implementing a monolithic
 //              HTML Help controller class,  by Vaclav Slavik
 // Author:      Harm van der Heijden and Vaclav Slavik
-// RCS-ID:      $Id: helpctrl.h,v 1.36 2006/01/11 09:08:31 JS Exp $
+// RCS-ID:      $Id: helpctrl.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Harm van der Heijden and Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@
 // Make the dialog modal when displaying help.
 #define wxHF_MODAL                   0x00040000
 
-class WXDLLIMPEXP_HTML wxHtmlHelpDialog;
-class WXDLLIMPEXP_HTML wxHtmlHelpWindow;
-class WXDLLIMPEXP_HTML wxHtmlHelpFrame;
-class WXDLLIMPEXP_HTML wxHtmlHelpDialog;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpDialog;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpFrame;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpDialog;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpController : public wxHelpControllerBase // wxEvtHandler
 {

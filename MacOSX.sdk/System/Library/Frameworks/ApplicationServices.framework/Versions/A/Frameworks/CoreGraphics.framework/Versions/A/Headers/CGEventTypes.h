@@ -1,441 +1,444 @@
-/*
-*  CGEventTypes.h
-*  CoreGraphics
-*
-*  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
-*
-*/
-#ifndef __CGEVENTTYPES_H__
-#define __CGEVENTTYPES_H__ 1
+/* CoreGraphics - CGEventTypes.h
+   Copyright (c) 2004-2008 Apple Inc.
+   All rights reserved. */
 
-#include <CoreGraphics/CGRemoteOperation.h>
+#ifndef CGEVENTTYPES_H_
+#define CGEVENTTYPES_H_
+
 #include <CoreGraphics/CGBase.h>
+#include <CoreGraphics/CGRemoteOperation.h>
 #include <IOKit/hidsystem/IOLLEvent.h>
-#include <AvailabilityMacros.h>
 
-CG_EXTERN_C_BEGIN
+/* An opaque type that represents a low-level hardware event.
 
-/*
- * The CGEventRef object may be created or copied, retained, released, and
- * modified.  The object provides an opaque representation of one low level
- * hardware event.
- */
+   Low-level hardware events of this type are referred to as Quartz events.
+   A typical event in Mac OS X originates when the user manipulates an input
+   device such as a mouse or a keyboard. The device driver associated with
+   that device, through the I/O Kit, creates a low-level event, puts it in
+   the window server’s event queue, and notifies the window server. The
+   window server creates a Quartz event, annotates the event, and dispatches
+   the event to the appropriate run-loop port of the target process. There
+   the event is picked up by the Carbon Event Manager and forwarded to the
+   event-handling mechanism appropriate to the application environment. You
+   can use event taps to gain access to Quartz events at several different
+   steps in this process.
+
+   This opaque type is derived from `CFType' and inherits the properties
+   that all Core Foundation types have in common. */
+
 typedef struct __CGEvent *CGEventRef;
 
-/*
- * Types common to both CGEvent.h and CGEventSource.h
- */
-enum _CGMouseButton
-{
-    kCGMouseButtonLeft = 0,
-    kCGMouseButtonRight = 1,
-    kCGMouseButtonCenter = 2
+/* Constants that specify buttons on a one, two, or three-button mouse. */
+enum {
+  kCGMouseButtonLeft = 0,
+  kCGMouseButtonRight = 1,
+  kCGMouseButtonCenter = 2
 };
 typedef uint32_t CGMouseButton;
 
-
+/* Constants that specify the unit of measurement for a scrolling event. */
 enum {
-    kCGScrollEventUnitPixel = 0,
-    kCGScrollEventUnitLine = 1,
+  kCGScrollEventUnitPixel = 0,
+  kCGScrollEventUnitLine = 1,
 };
 typedef uint32_t CGScrollEventUnit;
 
-/*
- * The flags field includes both modifier key state at the time the event was created,
- * as well as other event related state.
- *
- * Note that any bits not specified are reserved.
- */
-enum _CGEventFlags	/* Masks for the bits in event flags */
-{
-    /* device-independent modifier key bits */
-    kCGEventFlagMaskAlphaShift =	NX_ALPHASHIFTMASK,
-    kCGEventFlagMaskShift =		NX_SHIFTMASK,
-    kCGEventFlagMaskControl =		NX_CONTROLMASK,
-    kCGEventFlagMaskAlternate =		NX_ALTERNATEMASK,
-    kCGEventFlagMaskCommand =		NX_COMMANDMASK,
+/* Constants that indicate the modifier key state at the time an event is
+   created, as well as other event-related states.
 
-    /* Special key identifiers */
-    kCGEventFlagMaskHelp =		NX_HELPMASK,
-    kCGEventFlagMaskSecondaryFn =	NX_SECONDARYFNMASK,
+   Any bits not specified are reserved for future use. */
+enum {
+  /* Device-independent modifier key bits. */
+  kCGEventFlagMaskAlphaShift =		NX_ALPHASHIFTMASK,
+  kCGEventFlagMaskShift =		NX_SHIFTMASK,
+  kCGEventFlagMaskControl =		NX_CONTROLMASK,
+  kCGEventFlagMaskAlternate =		NX_ALTERNATEMASK,
+  kCGEventFlagMaskCommand =		NX_COMMANDMASK,
 
-    /* Identifies key events from numeric keypad area on extended keyboards */
-    kCGEventFlagMaskNumericPad =	NX_NUMERICPADMASK,
+  /* Special key identifiers. */
+  kCGEventFlagMaskHelp =		NX_HELPMASK,
+  kCGEventFlagMaskSecondaryFn =		NX_SECONDARYFNMASK,
 
-    /* Indicates if mouse/pen movement events are not being coalesced */
-    kCGEventFlagMaskNonCoalesced = 	NX_NONCOALSESCEDMASK
+  /* Identifies key events from numeric keypad area on extended keyboards. */
+  kCGEventFlagMaskNumericPad =		NX_NUMERICPADMASK,
+
+  /* Indicates if mouse/pen movement events are not being coalesced */
+  kCGEventFlagMaskNonCoalesced =	NX_NONCOALSESCEDMASK
 };
 typedef uint64_t CGEventFlags;	    /* Flags for events */
 
+/* Constants that specify the different types of input events. */
+enum {
+  /* The null event. */
+  kCGEventNull = NX_NULLEVENT,
 
-/*
- *
- * The following enumeration describes all event types currently presented
- * in this API.  Apple reserves the right to extend or create new event
- * types at any time.
- *
- * Notes:
- *	Tablet devices may generate mice events with embedded tablet
- *	data, or tablet pointer and proximity events.  The tablet
- *	events as mouse events allow tablets to be used with programs
- *	which are not tablet-aware.
- */
+  /* Mouse events. */
+  kCGEventLeftMouseDown = NX_LMOUSEDOWN,
+  kCGEventLeftMouseUp = NX_LMOUSEUP,
+  kCGEventRightMouseDown = NX_RMOUSEDOWN,
+  kCGEventRightMouseUp = NX_RMOUSEUP,
+  kCGEventMouseMoved = NX_MOUSEMOVED,
+  kCGEventLeftMouseDragged = NX_LMOUSEDRAGGED,
+  kCGEventRightMouseDragged = NX_RMOUSEDRAGGED,
 
-/* Event types */
-enum _CGEventType {
-    kCGEventNull = NX_NULLEVENT,			/* Placeholder; the Null Event */
-    /* mouse events */
-    kCGEventLeftMouseDown = NX_LMOUSEDOWN,		/* left mouse-down event */
-    kCGEventLeftMouseUp = NX_LMOUSEUP,			/* left mouse-up event */
-    kCGEventRightMouseDown = NX_RMOUSEDOWN,		/* right mouse-down event */
-    kCGEventRightMouseUp = NX_RMOUSEUP,			/* right mouse-up event */
-    kCGEventMouseMoved = NX_MOUSEMOVED,			/* mouse-moved event */
-    kCGEventLeftMouseDragged = NX_LMOUSEDRAGGED,	/* left mouse-dragged event */
-    kCGEventRightMouseDragged = NX_RMOUSEDRAGGED,	/* right mouse-dragged event */
+  /* Keyboard events. */
+  kCGEventKeyDown = NX_KEYDOWN,
+  kCGEventKeyUp = NX_KEYUP,
+  kCGEventFlagsChanged = NX_FLAGSCHANGED,
 
-    /* keyboard events */
-    kCGEventKeyDown = NX_KEYDOWN,			/* key-down event */
-    kCGEventKeyUp = NX_KEYUP,				/* key-up event */
-    kCGEventFlagsChanged = NX_FLAGSCHANGED,		/* flags-changed (modifier keys and status) event */
+  /* Specialized control devices. */
+  kCGEventScrollWheel = NX_SCROLLWHEELMOVED,
+  kCGEventTabletPointer = NX_TABLETPOINTER,
+  kCGEventTabletProximity = NX_TABLETPROXIMITY,
+  kCGEventOtherMouseDown = NX_OMOUSEDOWN,
+  kCGEventOtherMouseUp = NX_OMOUSEUP,
+  kCGEventOtherMouseDragged = NX_OMOUSEDRAGGED,
 
-    /* Specialized control devices */
-    kCGEventScrollWheel = NX_SCROLLWHEELMOVED,		/* Scroll wheel input device */
-    kCGEventTabletPointer = NX_TABLETPOINTER,		/* specialized tablet pointer event, in addition to tablet mouse event */
-    kCGEventTabletProximity = NX_TABLETPROXIMITY,	/* specialized tablet proximity event, in addition to tablet mouse event */
-    kCGEventOtherMouseDown = NX_OMOUSEDOWN,		/* Mouse button 2-31 down */
-    kCGEventOtherMouseUp = NX_OMOUSEUP,			/* Mouse button 2-31 up */
-    kCGEventOtherMouseDragged = NX_OMOUSEDRAGGED,	/* Drag with mouse button 2-31 down */
-
-    /*
-     * Out of band types, delivered for unusual conditions
-     * These are delivered to the event tap callback to notify of unusual
-     * conditions that disable the event tap.
-     */
-    kCGEventTapDisabledByTimeout = 0xFFFFFFFE,
-    kCGEventTapDisabledByUserInput = 0xFFFFFFFF
+  /* Out of band event types. These are delivered to the event tap callback
+     to notify it of unusual conditions that disable the event tap. */
+  kCGEventTapDisabledByTimeout = 0xFFFFFFFE,
+  kCGEventTapDisabledByUserInput = 0xFFFFFFFF
 };
 typedef uint32_t CGEventType;
 
+/* Event timestamp; roughly, nanoseconds since startup. */
+typedef uint64_t CGEventTimestamp;
 
-typedef uint64_t CGEventTimestamp;  /* Event timestamp, roughly, nanoseconds since startup */
+/* Constants used as keys to access specialized fields in low-level events. */
+enum {
+  /* Key to access an integer field that contains the mouse button event
+     number. Matching mouse-down and mouse-up events will have the same
+     event number. */
+  kCGMouseEventNumber = 0,
 
-/*
- * Low level functions provide access to specialized fields of the events
- * The fields are identified by tokens defined in this enumeration.
- */
-enum _CGEventField {
-    /* Additional keys and values found in mouse events, including the OtherMouse events: */
+  /* Key to access an integer field that contains the mouse button click
+  state. A click state of 1 represents a single click. A click state of 2
+  represents a double-click. A click state of 3 represents a
+  triple-click. */
+  kCGMouseEventClickState = 1,
 
-    kCGMouseEventNumber = 0,
-    /* Key associated with an integer encoding the mouse button event number as an integer.  Matching mouse-down and mouse-up events will have the same event number. */
+  /* Key to access a double field that contains the mouse button pressure.
+     The pressure value may range from 0 to 1, with 0 representing the mouse
+     being up. This value is commonly set by tablet pens mimicking a
+     mouse. */
+  kCGMouseEventPressure = 2,
 
-    kCGMouseEventClickState = 1,
-    /* Key associated with an integer encoding the mouse button clickState as an integer.  A clickState of 1 represents a single click.  A clickState of 2 represents a double-click.  A clickState of 3 represents a triple-click. */
+  /* Key to access an integer field that contains the mouse button
+     number. */
+  kCGMouseEventButtonNumber = 3,
 
-    kCGMouseEventPressure = 2,
-    /* Key associated with a double encoding the mouse button pressurr.  The pressure value may range from 0 to 1.0, with 0 representing the mouse being up.  This value is commonly set by tablet pens mimicing a mouse. */
+  /* Key to access an integer field that contains the horizontal mouse delta
+     since the last mouse movement event. */
+  kCGMouseEventDeltaX = 4,
 
-    kCGMouseEventButtonNumber = 3,
-    /* Key associated with an integer representing the mouse button number.  The left mouse button reports as button 0.  A right mouse button reports as button 1.  A middle button reports as button 2, and additional buttons report as the appropriate USB button. */
+  /* Key to access an integer field that contains the vertical mouse delta
+     since the last mouse movement event. */
+  kCGMouseEventDeltaY = 5,
 
-    kCGMouseEventDeltaX = 4,
-    kCGMouseEventDeltaY = 5,
-    /* Key associated with an integer encoding the mouse delta since the last mouse movement event. */
+  /* Key to access an integer field. The value is non-zero if the event
+     should be ignored by the Inkwell subsystem. */
+  kCGMouseEventInstantMouser = 6,
 
-    kCGMouseEventInstantMouser = 6,
-    /* Key associated with an integer value, non-zero if the event should be ignored by the Inkwell subsystem. */
+  /* Key to access an integer field that encodes the mouse event subtype as
+     a `kCFNumberIntType'. */
+  kCGMouseEventSubtype = 7,
 
-    kCGMouseEventSubtype = 7,
-    /*
-     * Key associated with an integer encoding the mouse event subtype as a kCFNumberIntType.
-     *
-     * Tablets may generate specially annotated mouse events,
-     * which will contain additional keys and values.
-     *
-     * Mouse events of subtype kCGEventMouseSubtypeTabletPoint may also use the tablet  accessor keys.
-     * Mouse events of subtype kCGEventMouseSubtypeTabletProximity may also use the tablet  proximity accessor keys.
-     */
+  /* Key to access an integer field, non-zero when this is an autorepeat of
+     a key-down, and zero otherwise. */
+  kCGKeyboardEventAutorepeat = 8,
 
-    /* Additional keys and values found in keyboard events:	*/
+  /* Key to access an integer field that contains the virtual keycode of the
+     key-down or key-up event. */
+  kCGKeyboardEventKeycode = 9,
 
-    kCGKeyboardEventAutorepeat = 8,
-    /* Key associated with an integer, non-zero when when this is an autorepeat of a key-down, and zero otherwise. */
+  /* Key to access an integer field that contains the keyboard type
+     identifier. */
+  kCGKeyboardEventKeyboardType = 10,
 
-    kCGKeyboardEventKeycode = 9,
-    /* Key associated with the integer virtual keycode of the key-down or key-up event. */
+  /* Key to access an integer field that contains scrolling data. This field
+     typically contains the change in vertical position since the last
+     scrolling event from a Mighty Mouse scroller or a single-wheel mouse
+     scroller. */
+  kCGScrollWheelEventDeltaAxis1 = 11,
 
-    kCGKeyboardEventKeyboardType = 10,
-    /* Key associated with the integer representing the keyboard type identifier. */
+  /* Key to access an integer field that contains scrolling data. This field
+     typically contains the change in horizontal position since the last
+     scrolling event from a Mighty Mouse scroller. */
+  kCGScrollWheelEventDeltaAxis2 = 12,
 
+  /* This field is not used. */
+  kCGScrollWheelEventDeltaAxis3 = 13,
 
-    /* Additional keys and values found in scroll wheel events:	*/
-    /* Fields reflecting line-based scrolling */
-    kCGScrollWheelEventDeltaAxis1 = 11,
-    kCGScrollWheelEventDeltaAxis2 = 12,
-    kCGScrollWheelEventDeltaAxis3 = 13,
-    /* Fields reflecting line-based scrolling, as 16.16 format integers,
-     * or as doubles via CGEventGetDoubleValueField with scaling applied*/
-    kCGScrollWheelEventFixedPtDeltaAxis1 = 93,
-    kCGScrollWheelEventFixedPtDeltaAxis2 = 94,
-    kCGScrollWheelEventFixedPtDeltaAxis3 = 95,
-    /* Fields reflecting pixel-based scrolling */
-    kCGScrollWheelEventPointDeltaAxis1 = 96,
-    kCGScrollWheelEventPointDeltaAxis2 = 97,
-    kCGScrollWheelEventPointDeltaAxis3 = 98,
+  /* Key to access a field that contains scrolling data. The scrolling data
+     represents a line-based or pixel-based change in vertical position
+     since the last scrolling event from a Mighty Mouse scroller or a
+     single-wheel mouse scroller. The scrolling data uses a fixed-point
+     16.16 signed integer format. If this key is passed to
+     `CGEventGetDoubleValueField', the fixed-point value is converted to a
+     double value. */
+  kCGScrollWheelEventFixedPtDeltaAxis1 = 93,
 
-    /* Key associated with an integer value representing a change in scrollwheel position. */
+  /* Key to access a field that contains scrolling data. The scrolling data
+     represents a line-based or pixel-based change in horizontal position
+     since the last scrolling event from a Mighty Mouse scroller. The
+     scrolling data uses a fixed-point 16.16 signed integer format. If this
+     key is passed to `CGEventGetDoubleValueField', the fixed-point value is
+     converted to a double value. */
+  kCGScrollWheelEventFixedPtDeltaAxis2 = 94,
 
-    kCGScrollWheelEventInstantMouser = 14,
-    /* Key associated with an integer value, non-zero if the event should be ignored by the Inkwell subsystem. */
+  /* This field is not used. */
+  kCGScrollWheelEventFixedPtDeltaAxis3 = 95,
 
+  /* Key to access an integer field that contains pixel-based scrolling
+     data. The scrolling data represents the change in vertical position
+     since the last scrolling event from a Mighty Mouse scroller or a
+     single-wheel mouse scroller. */
+  kCGScrollWheelEventPointDeltaAxis1 = 96,
 
-    /*
-     * Additional keys and values found in tablet pointer events,
-     * and in mouse events containing embedded tablet event data:
-     */
+  /* Key to access an integer field that contains pixel-based scrolling
+     data. The scrolling data represents the change in horizontal position
+     since the last scrolling event from a Mighty Mouse scroller. */
+  kCGScrollWheelEventPointDeltaAxis2 = 97,
 
-    kCGTabletEventPointX = 15,
-    kCGTabletEventPointY = 16,
-    kCGTabletEventPointZ = 17,
-    /* Key associated with an integer encoding the absolute X, Y, or Z tablet coordinate in tablet space at full tablet resolution. */
+  /* This field is not used. */
+  kCGScrollWheelEventPointDeltaAxis3 = 98,
 
-    kCGTabletEventPointButtons = 18,
-    /* Key associated with an integer encoding the tablet button state. Bit 0 is the first button, and a set bit represents a closed or pressed button. Up to 16 buttons are supported. */
+  /* Key to access an integer field that indicates whether the event should
+     be ignored by the Inkwell subsystem. If the value is non-zero, the
+     event should be ignored. */
+  kCGScrollWheelEventInstantMouser = 14,
 
-    kCGTabletEventPointPressure = 19,
-    /* Key associated with a double encoding the tablet pen pressure.  0 represents no pressure, and 1.0 represents maximum pressure. */
+  /* Key to access an integer field that contains the absolute X coordinate
+     in tablet space at full tablet resolution. */
+  kCGTabletEventPointX = 15,
 
-    kCGTabletEventTiltX	= 20,
-    kCGTabletEventTiltY = 21,
-    /* Key associated with a double encoding the tablet pen tilt.  0 represents no tilt, and 1.0 represents maximum tilt. */ 
+  /* Key to access an integer field that contains the absolute Y coordinate
+     in tablet space at full tablet resolution. */
+  kCGTabletEventPointY = 16,
 
-    kCGTabletEventRotation = 22,
-    /* Key associated with a double encoding the tablet pen rotation. */
+  /* Key to access an integer field that contains the absolute Z coordinate
+     in tablet space at full tablet resolution. */
+  kCGTabletEventPointZ = 17,
 
-    kCGTabletEventTangentialPressure = 23,
-    /* Key associated with a double encoding the tangential pressure on the device. 0 represents no pressure, and 1.0 represents maximum pressure.  */
+  /* Key to access an integer field that contains the tablet button state.
+     Bit 0 is the first button, and a set bit represents a closed or pressed
+     button. Up to 16 buttons are supported. */
+  kCGTabletEventPointButtons = 18,
 
-    kCGTabletEventDeviceID = 24,
-    /* Key associated with an integer encoding the system-assigned unique device ID. */
+  /* Key to access a double field that contains the tablet pen pressure. A
+     value of 0.0 represents no pressure, and 1.0 represents maximum
+     pressure. */
+  kCGTabletEventPointPressure = 19,
 
-    kCGTabletEventVendor1 = 25,
-    kCGTabletEventVendor2 = 26,
-    kCGTabletEventVendor3 = 27,
-    /* Key associated with an integer containing vendor-specified values.*/
+  /* Key to access a double field that contains the horizontal tablet pen
+     tilt. A value of 0 represents no tilt, and 1 represents maximum tilt. */
+  kCGTabletEventTiltX = 20,
 
+  /* Key to access a double field that contains the vertical tablet pen
+     tilt. A value of 0 represents no tilt, and 1 represents maximum tilt. */
+  kCGTabletEventTiltY = 21,
 
-    /*
-     * Additional keys and values found in tablet proximity events,
-     * and in mouse events containing embedded tablet proximity data:
-     */
+  /* Key to access a double field that contains the tablet pen rotation. */
+  kCGTabletEventRotation = 22,
 
-    kCGTabletProximityEventVendorID = 28,
-    /* Key associated with an integer encoding the vendor-defined ID, typically the USB vendor ID. */
+  /* Key to access a double field that contains the tangential pressure on
+     the device. A value of 0.0 represents no pressure, and 1.0 represents
+     maximum pressure. */
+  kCGTabletEventTangentialPressure = 23,
 
-    kCGTabletProximityEventTabletID = 29,
-    /* Key associated with an integer encoding the vendor-defined tablet ID, typically the USB product ID. */
+  /* Key to access an integer field that contains the system-assigned unique
+     device ID. */
+  kCGTabletEventDeviceID = 24,
 
-    kCGTabletProximityEventPointerID = 30,
-    /* Key associated with an integer encoding the vendor-defined ID of the pointing device. */
+  /* Key to access an integer field that contains a vendor-specified value. */
+  kCGTabletEventVendor1 = 25,
 
-    kCGTabletProximityEventDeviceID = 31,
-    /* Key associated with an integer encoding the system-assigned device ID. */
+  /* Key to access an integer field that contains a vendor-specified value. */
+  kCGTabletEventVendor2 = 26,
 
-    kCGTabletProximityEventSystemTabletID = 32,
-    /* Key associated with an integer encoding the system-assigned unique tablet ID. */
+  /* Key to access an integer field that contains a vendor-specified value. */
+  kCGTabletEventVendor3 = 27,
 
-    kCGTabletProximityEventVendorPointerType = 33,
-    /* Key associated with an integer encoding the vendor-assigned pointer type. */
+  /* Key to access an integer field that contains the vendor-defined ID,
+     typically the USB vendor ID. */
+  kCGTabletProximityEventVendorID = 28,
 
-    kCGTabletProximityEventVendorPointerSerialNumber = 34,
-    /* Key associated with an integer encoding the vendor-defined pointer serial number. */
+  /* Key to access an integer field that contains the vendor-defined tablet
+     ID, typically the USB product ID. */
+  kCGTabletProximityEventTabletID = 29,
 
-    kCGTabletProximityEventVendorUniqueID = 35,
-    /* Key associated with an integer encoding the vendor-defined unique ID. */
+  /* Key to access an integer field that contains the vendor-defined ID of
+     the pointing device. */
+  kCGTabletProximityEventPointerID = 30,
 
-    kCGTabletProximityEventCapabilityMask = 36,
-    /* Key associated with an integer encoding the device capabilities mask. */
+  /* Key to access an integer field that contains the system-assigned device
+     ID. */
+  kCGTabletProximityEventDeviceID = 31,
 
-    kCGTabletProximityEventPointerType = 37,
-    /* Key associated with an integer encoding the pointer type. */
+  /* Key to access an integer field that contains the system-assigned unique
+     tablet ID. */
+  kCGTabletProximityEventSystemTabletID = 32,
 
-    kCGTabletProximityEventEnterProximity = 38,
-    /* Key associated with an integer, non-zero when pen is in proximity to the tablet, and zero when leaving the tablet. */
+  /* Key to access an integer field that contains the vendor-assigned
+     pointer type. */
+  kCGTabletProximityEventVendorPointerType = 33,
 
-    kCGEventTargetProcessSerialNumber = 39,
-    /* Key for the event target process serial number as a 64 bit longword. */
+  /* Key to access an integer field that contains the vendor-defined pointer
+     serial number. */
+  kCGTabletProximityEventVendorPointerSerialNumber = 34,
 
-    kCGEventTargetUnixProcessID = 40,
-    /* Key for the event target Unix process ID */
+  /* Key to access an integer field that contains the vendor-defined unique
+     ID. */
+  kCGTabletProximityEventVendorUniqueID = 35,
 
-    kCGEventSourceUnixProcessID = 41,
-    /* Key for the event source, or poster's Unix process ID */
+  /* Key to access an integer field that contains the device capabilities
+     mask. */
+  kCGTabletProximityEventCapabilityMask = 36,
 
-    kCGEventSourceUserData = 42,
-    /* Key for the event source user-supplied data, up to 64 bits */
+  /* Key to access an integer field that contains the pointer type. */
+  kCGTabletProximityEventPointerType = 37,
 
-    kCGEventSourceUserID = 43,
-    /* Key for the event source Unix effective UID */
+  /* Key to access an integer field that indicates whether the pen is in
+     proximity to the tablet. The value is non-zero if the pen is in
+     proximity to the tablet and zero when leaving the tablet. */
+  kCGTabletProximityEventEnterProximity = 38,
 
-    kCGEventSourceGroupID = 44,
-    /* Key for the event source Unix effective GID */
+  /* Key to access a field that contains the event target process serial
+     number. The value is a 64-bit value. */
+  kCGEventTargetProcessSerialNumber = 39,
+
+  /* Key to access a field that contains the event target Unix process ID. */
+  kCGEventTargetUnixProcessID = 40,
+
+  /* Key to access a field that contains the event source Unix process ID. */
+  kCGEventSourceUnixProcessID = 41,
+
+  /* Key to access a field that contains the event source user-supplied
+     data, up to 64 bits. */
+  kCGEventSourceUserData = 42,
+
+  /* Key to access a field that contains the event source Unix effective
+     UID. */
+  kCGEventSourceUserID = 43,
+
+  /* Key to access a field that contains the event source Unix effective
+     GID. */
+  kCGEventSourceGroupID = 44,
+
+  /* Key to access a field that contains the event source state ID used to
+     create this event. */
+  kCGEventSourceStateID = 45,
     
-    kCGEventSourceStateID = 45,
-    /* Key for the event source state ID used to create this event */
-    
-    /* New for 10.5 */
-    /* Scrollwheel isContinuous; will become public for Chablis */
-    kCGScrollWheelEventIsContinuous = 88
-
+  /* Key to access an integer field that indicates whether a scrolling event
+     contains continuous, pixel-based scrolling data. The value is non-zero
+     when the scrolling data is pixel-based and zero when the scrolling data
+     is line-based. */
+  kCGScrollWheelEventIsContinuous = 88    
 };
 typedef uint32_t CGEventField;
 
-/* Values used with the kCGMouseEventSubtype */
-enum _CGEventMouseSubtype {
-    kCGEventMouseSubtypeDefault		= 0,
-    kCGEventMouseSubtypeTabletPoint	= 1,
-    kCGEventMouseSubtypeTabletProximity	= 2
+/* Constants used with the `kCGMouseEventSubtype' event field. */
+enum {
+  kCGEventMouseSubtypeDefault		= 0,
+  kCGEventMouseSubtypeTabletPoint	= 1,
+  kCGEventMouseSubtypeTabletProximity	= 2
 };
 typedef uint32_t CGEventMouseSubtype;
 
-/*
- * Event Taps
- *
- * Taps may be placed at the point where HIDSystem events enter
- * the server, at the point where HIDSystem and remote control
- * events enter a session, at the point where events have been
- * annotated to flow to a specific application, or at the point
- * where events are delivered to the application.  Taps may be
- * inserted at a specified point at the head of pre-existing filters,
- * or appended after any pre-existing filters.
- *
- * Taps may be passive event listeners, or active filters.
- * An active filter may pass an event through unmodified, modify
- * an event, or discard an event.  When a tap is registered, it
- * identifies the set of events to be observed with a mask, and
- * indicates if it is a passive or active event filter.  Multiple
- * event type bitmasks may be ORed together.
- *
- * Taps may only be placed at kCGHIDEventTap by a process running
- * as the root user.  NULL is returned for other users.
- *
- * Taps placed at kCGHIDEventTap, kCGSessionEventTap,
- * kCGAnnotatedSessionEventTap, or on a specific process may
- * only receive key up and down events if access for assistive
- * devices is enabled (Preferences Universal Access panel,
- * Keyboard view). If the tap is not permitted to monitor these
- * when the tap is being created, then the appropriate bits
- * in the mask are cleared.  If that results in an empty mask,
- * then NULL is returned.
- *
- * The CGEventTapProxy is an opaque reference to state within
- * the client application associated with the tap.  The tap
- * function may pass this reference to other functions, such as
- * the event-posting routines.
- *
- */
-/* Possible tapping points for events */
-enum _CGEventTapLocation {
-    kCGHIDEventTap = 0,
-    kCGSessionEventTap,
-    kCGAnnotatedSessionEventTap
+/* Constants that specify possible tapping points for events. */
+enum {
+  kCGHIDEventTap = 0,
+  kCGSessionEventTap,
+  kCGAnnotatedSessionEventTap
 };
 typedef uint32_t CGEventTapLocation;
 
-/*
- * Taps may be inserted at a specified point at the
- * head of pre-existing filters,
- * or appended after any pre-existing filters.
- */
-
-enum _CGEventTapPlacement {
-    kCGHeadInsertEventTap = 0,
-    kCGTailAppendEventTap
+/* Constants that specify where a new event tap is inserted into the list of
+   active event taps. */
+enum {
+  kCGHeadInsertEventTap = 0,
+  kCGTailAppendEventTap
 };
 typedef uint32_t CGEventTapPlacement;
 
-/*
- * Taps may be passive event listeners, or active filters.
- * An active filter may pass an event through unmodified, modify
- * an event, or discard an event.  When a tap is registered, it
- * identifies the set of events to be observed with a mask, and
- * indicates if it is a passive or active event filter.  Multiple
- * event type bitmasks may be ORed together.
- */
-enum _CGEventTapOptions {
-    kCGEventTapOptionDefault = 0x00000000,
-    kCGEventTapOptionListenOnly = 0x00000001
+/* Constants that specify whether a new event tap is an active filter or a
+   passive listener. */
+enum {
+  kCGEventTapOptionDefault = 0x00000000,
+  kCGEventTapOptionListenOnly = 0x00000001
 };
 typedef uint32_t CGEventTapOptions;
 
-
-
+/* A mask that identifies the set of Quartz events to be observed in an
+   event tap. */
 typedef uint64_t CGEventMask;
+
+/* Generate an event mask for a single type of event. */
 #define CGEventMaskBit(eventType)	((CGEventMask)1 << (eventType))
+
+/* An event mask that represents all event types. */
 #define kCGEventMaskForAllEvents	(~(CGEventMask)0)
 
-typedef struct __CGEventTapProxy * CGEventTapProxy;
+/* An opaque type that represents state within the client application that’s
+   associated with an event tap. */
+typedef struct __CGEventTapProxy *CGEventTapProxy;
 
-/*
- * The callback is passed a proxy for the tap, the event type, the incoming event,
- * and the refcon the callback was registered with.
- * The function should return the (possibly modified) passed in event,
- * a newly constructed event, or NULL if the event is to be deleted.
- *
- * The CGEventRef passed into the callback is retained by the calling code, and is
- * released after the callback returns and the data is passed back to the event
- * system.  If a different event is returned by the callback function, then that
- * event will be released by the calling code along with the original event, after
- * the event data has been passed back to the event system.
- */
-typedef CGEventRef (*CGEventTapCallBack)(CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon);
+/* A client-supplied callback function that’s invoked whenever an associated
+   event tap receives a Quartz event.
 
+   The callback is passed a proxy for the tap, the event type, the incoming
+   event, and the user-defined data specified when the event tap was
+   created. The function should return the (possibly modified) passed-in
+   event, a newly constructed event, or NULL if the event is to be deleted.
 
-/*
- * When an event tap is installed or released, a notification
- * is posted via the notify_post() API.  See notify (3) and
- * notify.h for details.
- */
-#define kCGNotifyEventTapAdded		"com.apple.coregraphics.eventTapAdded"
-#define kCGNotifyEventTapRemoved	"com.apple.coregraphics.eventTapRemoved"
+   The event passed to the callback is retained by the calling code, and is
+   released after the callback returns and the data is passed back to the
+   event system. If a different event is returned by the callback function,
+   then that event will be released by the calling code along with the
+   original event, after the event data has been passed back to the event
+   system. */
 
-/*
- * Structure used to report information on event taps
- */
-typedef struct CGEventTapInformation
-{
-    uint32_t		eventTapID;
-    CGEventTapLocation	tapPoint;		/* HID, session, annotated session */
-    CGEventTapOptions	options;		/* Listener, Filter */
-    CGEventMask		eventsOfInterest;	/* Mask of events being tapped */
-    pid_t		tappingProcess;		/* Process that is tapping events */
-    pid_t		processBeingTapped;	/* Zero if not a per-process tap */
-    bool		enabled;		/* True if tap is enabled */
-    float		minUsecLatency;		/* Minimum latency in microseconds */
-    float		avgUsecLatency;		/* Average latency in microseconds */
-    float		maxUsecLatency;		/* Maximum latency in microseconds */
-} CGEventTapInformation;
+typedef CGEventRef (*CGEventTapCallBack)(CGEventTapProxy proxy,
+  CGEventType type, CGEventRef event, void *userInfo);
 
+/* When an event tap is installed or released, a notification is posted. See
+   notify(3) and notify.h for details. */
 
-/*
- * The CGEventSourceRef is an opaque representation of the source of an event.
- *
- * API is provided to obtain the CGEventSource from an event, and to create
- * a new event with a CGEventSourceRef.
- */
-typedef struct __CGEventSource * CGEventSourceRef;
+#define kCGNotifyEventTapAdded	 "com.apple.coregraphics.eventTapAdded"
+#define kCGNotifyEventTapRemoved "com.apple.coregraphics.eventTapRemoved"
 
-typedef uint32_t CGEventSourceStateID;
-enum {
-    kCGEventSourceStatePrivate = -1,
-    kCGEventSourceStateCombinedSessionState = 0,
-    kCGEventSourceStateHIDSystemState = 1
+/* The structure used to report information about event taps. */
+
+struct __CGEventTapInformation {
+  uint32_t eventTapID;
+  CGEventTapLocation tapPoint;		/* HID, session, annotated session */
+  CGEventTapOptions options;		/* Listener, filter */
+  CGEventMask eventsOfInterest;		/* Mask of events being tapped */
+  pid_t tappingProcess;			/* Process that is tapping events */
+  pid_t processBeingTapped;		/* Zero if not a per-process tap */
+  bool enabled;				/* True if tap is enabled */
+  float minUsecLatency;			/* Minimum latency in microseconds */
+  float avgUsecLatency;			/* Average latency in microseconds */
+  float maxUsecLatency;			/* Maximum latency in microseconds */
 };
+typedef struct __CGEventTapInformation CGEventTapInformation;
 
+/* An opaque type that represents the source of a Quartz event. */
+typedef struct __CGEventSource *CGEventSourceRef;
+
+/* Constants that specify the possible source states of an event source. */
+enum {
+  kCGEventSourceStatePrivate = -1,
+  kCGEventSourceStateCombinedSessionState = 0,
+  kCGEventSourceStateHIDSystemState = 1
+};
+typedef uint32_t CGEventSourceStateID;
+
+/* A code that represents the type of keyboard used with a specified event
+   source. */
 typedef uint32_t CGEventSourceKeyboardType;
 
+/* A constant specifying any input event type */
 #define kCGAnyInputEventType ((CGEventType)(~0))
 
-CG_EXTERN_C_END
-
-#endif /*__CGEVENTTYPES_H__ */
+#endif /* CGEVENTTYPES_H_ */

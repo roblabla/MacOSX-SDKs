@@ -3,14 +3,22 @@
  
      Contains:   SFNT file layout structures and constants.
  
-     Version:    ATS-236~129
+     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     BuildInfo:  Built by:            root
+                 On:                  Mon May 16 10:08:00 2011
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                SFNTLayoutTypes.i
+                     Revision:        1.3
+                     Dated:           2007/01/15 23:28:27
+                     Last change by:  kurita
+                     Last comment:    <rdar://problem/4916090> updated copyright.
  
-                     http://developer.apple.com/bugreporter/
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __SFNTLAYOUTTYPES__
@@ -882,7 +890,7 @@ enum {
   kMORTLigatureType             = 2,
   kMORTSwashType                = 4,
   kMORTInsertionType            = 5,    /* Ligature subtable constants */
-  kMORTLigLastAction            = (long)0x80000000,
+  kMORTLigLastAction            = (int)0x80000000,
   kMORTLigStoreLigature         = 0x40000000,
   kMORTLigFormOffsetMask        = 0x3FFFFFFF,
   kMORTLigFormOffsetShift       = 2,    /* Rearrangement subtable actions */
@@ -992,7 +1000,7 @@ enum {
   kMORXTag                      = 0x6D6F7278, /* 'morx' */
   kMORXCurrentVersion           = 0x00020000, /* version number for current 'morx' table */
                                         /* Coverage masks */
-  kMORXCoverVertical            = (long)0x80000000,
+  kMORXCoverVertical            = (int)0x80000000,
   kMORXCoverDescending          = 0x40000000,
   kMORXCoverIgnoreVertical      = 0x20000000,
   kMORXCoverTypeMask            = 0x000000FF
@@ -1405,6 +1413,46 @@ struct BslnTable {
 };
 typedef struct BslnTable                BslnTable;
 typedef BslnTable *                     BslnTablePtr;
+/* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE: 'ALMX' */
+/* TYPES */
+struct ALMXHeader {
+  Fixed               Version;                /* 16.16 format 1.0 by default */
+  UInt16              Flags;
+  UInt16              NMasters;
+  UInt16              FirstGlyph;
+  UInt16              LastGlyph;
+
+  SFNTLookupTable     lookup;                 /* lookup table */
+};
+typedef struct ALMXHeader               ALMXHeader;
+struct ALMXGlyphEntry {                       /* lookup data for ALMX table */
+  SInt16              GlyphIndexOffset;
+  SInt16              HorizontalAdvance;
+  SInt16              XOffsetToHOrigin;
+  SInt16              VerticalAdvance;
+  SInt16              YOffsetToVOrigin;
+};
+typedef struct ALMXGlyphEntry           ALMXGlyphEntry;
+/* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE: 'ROTA' */
+/* TYPES */
+struct ROTAHeader {
+  Fixed               Version;                /* 16.16 format 1.0 by default */
+  UInt16              Flags;
+  UInt16              NMasters;
+  UInt16              FirstGlyph;
+  UInt16              LastGlyph;
+
+  SFNTLookupTable     lookup;                 /* lookup table */
+};
+typedef struct ROTAHeader               ROTAHeader;
+struct ROTAGlyphEntry {                       /* lookup data for ROTA table */
+  SInt16              GlyphIndexOffset;
+  SInt16              HBaselineOffset;        /* y offset to the rotated horizontal baseline */
+  SInt16              VBaselineOffset;        /* x offset to the rotated vertical baseline */
+};
+typedef struct ROTAGlyphEntry           ROTAGlyphEntry;
 /* --------------------------------------------------------------------------- */
 
 #pragma pack(pop)

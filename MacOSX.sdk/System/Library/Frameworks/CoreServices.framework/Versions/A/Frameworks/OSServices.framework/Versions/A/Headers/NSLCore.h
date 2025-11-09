@@ -3,9 +3,9 @@
  
      Contains:   Interface to API for using the NSL Manager
  
-     Version:    NSLCore-142~130
+     Version:    NSLCore-145~629
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: gdicmn.h,v 1.122 2007/01/05 13:36:49 VZ Exp $
+// RCS-ID:      $Id: gdicmn.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,16 +27,16 @@
 // forward declarations
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmap;
-class WXDLLIMPEXP_CORE wxBrush;
-class WXDLLIMPEXP_CORE wxColour;
-class WXDLLIMPEXP_CORE wxCursor;
-class WXDLLIMPEXP_CORE wxFont;
-class WXDLLIMPEXP_CORE wxIcon;
-class WXDLLIMPEXP_CORE wxPalette;
-class WXDLLIMPEXP_CORE wxPen;
-class WXDLLIMPEXP_CORE wxRegion;
-class WXDLLIMPEXP_BASE wxString;
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class WXDLLIMPEXP_FWD_CORE wxBrush;
+class WXDLLIMPEXP_FWD_CORE wxColour;
+class WXDLLIMPEXP_FWD_CORE wxCursor;
+class WXDLLIMPEXP_FWD_CORE wxFont;
+class WXDLLIMPEXP_FWD_CORE wxIcon;
+class WXDLLIMPEXP_FWD_CORE wxPalette;
+class WXDLLIMPEXP_FWD_CORE wxPen;
+class WXDLLIMPEXP_FWD_CORE wxRegion;
+class WXDLLIMPEXP_FWD_BASE wxString;
 
 // ---------------------------------------------------------------------------
 // constants

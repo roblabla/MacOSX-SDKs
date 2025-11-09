@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     26.10.99
-// RCS-ID:      $Id: menu.h,v 1.48 2006/09/03 12:22:35 RR Exp $
+// RCS-ID:      $Id: menu.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,10 +27,10 @@
 // included wx/menu.h
 #include "wx/menuitem.h"
 
-class WXDLLEXPORT wxMenu;
-class WXDLLEXPORT wxMenuBarBase;
-class WXDLLEXPORT wxMenuBar;
-class WXDLLEXPORT wxMenuItem;
+class WXDLLIMPEXP_FWD_CORE wxMenu;
+class WXDLLIMPEXP_FWD_CORE wxMenuBarBase;
+class WXDLLIMPEXP_FWD_CORE wxMenuBar;
+class WXDLLIMPEXP_FWD_CORE wxMenuItem;
 
 // pseudo template list classes
 WX_DECLARE_EXPORTED_LIST(wxMenu, wxMenuList);
@@ -375,6 +375,14 @@ protected:
     static bool      ms_locked;
 
     DECLARE_NO_COPY_CLASS(wxMenuBase)
+
+public:
+
+#if wxABI_VERSION >= 20805
+    //  Returns the stripped label
+    wxString GetLabelText(int itemid) const { return wxMenuItem::GetLabelFromText(GetLabel(itemid)); }
+#endif
+
 };
 
 // ----------------------------------------------------------------------------
@@ -496,6 +504,21 @@ protected:
     wxFrame *m_menuBarFrame;
 
     DECLARE_NO_COPY_CLASS(wxMenuBarBase)
+
+public:
+
+#if wxABI_VERSION >= 20805
+    // Replacement for SetLabelTop
+    void SetMenuLabel(size_t pos, const wxString& label) { SetLabelTop(pos, label); }
+
+    // Gets the original label at the top-level of the menubar
+    // Implemented per port, since we can't have virtual functions in the stable branch.
+    // wxString GetMenuLabel(size_t pos) const;
+
+    // Get the text only, from the label at the top-level of the menubar
+    wxString GetMenuLabelText(size_t pos) const;
+#endif
+
 };
 
 // ----------------------------------------------------------------------------

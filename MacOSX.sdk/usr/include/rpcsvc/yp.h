@@ -403,7 +403,171 @@ bool_t xdr_ypbind_setdom();
 #endif /* Old Style C */
 
 
+enum ypreqtype {
+	YPREQ_KEY = 1,
+	YPREQ_NOKEY = 2,
+	YPREQ_MAP_PARMS = 3,
+};
+typedef enum ypreqtype ypreqtype;
+#ifdef __cplusplus
+extern "C" bool_t xdr_ypreqtype(XDR *, ypreqtype*);
+#elif __STDC__
+extern  bool_t xdr_ypreqtype(XDR *, ypreqtype*);
+#else /* Old Style C */
+bool_t xdr_ypreqtype();
+#endif /* Old Style C */
+
+
+enum ypresptype {
+	YPRESP_VAL = 1,
+	YPRESP_KEY_VAL = 2,
+	YPRESP_MAP_PARMS = 3,
+};
+typedef enum ypresptype ypresptype;
+#ifdef __cplusplus
+extern "C" bool_t xdr_ypresptype(XDR *, ypresptype*);
+#elif __STDC__
+extern  bool_t xdr_ypresptype(XDR *, ypresptype*);
+#else /* Old Style C */
+bool_t xdr_ypresptype();
+#endif /* Old Style C */
+
+
+struct yprequest {
+	ypreqtype yp_reqtype;
+	union {
+		ypreq_key yp_req_keytype;
+		ypreq_nokey yp_req_nokeytype;
+		ypmap_parms yp_req_map_parmstype;
+	} yprequest_u;
+};
+typedef struct yprequest yprequest;
+#ifdef __cplusplus
+extern "C" bool_t xdr_yprequest(XDR *, yprequest*);
+#elif __STDC__
+extern  bool_t xdr_yprequest(XDR *, yprequest*);
+#else /* Old Style C */
+bool_t xdr_yprequest();
+#endif /* Old Style C */
+
+
+struct ypresponse {
+	ypresptype yp_resptype;
+	union {
+		ypresp_val yp_resp_valtype;
+		ypresp_key_val yp_resp_key_valtype;
+		ypmap_parms yp_resp_map_parmstype;
+	} ypresponse_u;
+};
+typedef struct ypresponse ypresponse;
+#ifdef __cplusplus
+extern "C" bool_t xdr_ypresponse(XDR *, ypresponse*);
+#elif __STDC__
+extern  bool_t xdr_ypresponse(XDR *, ypresponse*);
+#else /* Old Style C */
+bool_t xdr_ypresponse();
+#endif /* Old Style C */
+
+
 #define YPPROG ((rpc_uint)100004)
+#define YPOLDVERS ((rpc_uint)1)
+
+#ifdef __cplusplus
+#define YPOLDPROC_NULL ((rpc_uint)0)
+extern "C" void * ypoldproc_null_1(void *, CLIENT *);
+extern "C" void * ypoldproc_null_1_svc(void *, struct svc_req *);
+#define YPOLDPROC_DOMAIN ((rpc_uint)1)
+extern "C" bool_t * ypoldproc_domain_1(domainname *, CLIENT *);
+extern "C" bool_t * ypoldproc_domain_1_svc(domainname *, struct svc_req *);
+#define YPOLDPROC_DOMAIN_NONACK ((rpc_uint)2)
+extern "C" bool_t * ypoldproc_domain_nonack_1(domainname *, CLIENT *);
+extern "C" bool_t * ypoldproc_domain_nonack_1_svc(domainname *, struct svc_req *);
+#define YPOLDPROC_MATCH ((rpc_uint)3)
+extern "C" ypresponse * ypoldproc_match_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_match_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_FIRST ((rpc_uint)4)
+extern "C" ypresponse * ypoldproc_first_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_first_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_NEXT ((rpc_uint)5)
+extern "C" ypresponse * ypoldproc_next_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_next_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_POLL ((rpc_uint)6)
+extern "C" ypresponse * ypoldproc_poll_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_poll_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_PUSH ((rpc_uint)7)
+extern "C" ypresponse * ypoldproc_push_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_push_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_PULL ((rpc_uint)8)
+extern "C" ypresponse * ypoldproc_pull_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_pull_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_GET ((rpc_uint)9)
+extern "C" ypresponse * ypoldproc_get_1(yprequest *, CLIENT *);
+extern "C" ypresponse * ypoldproc_get_1_svc(yprequest *, struct svc_req *);
+
+#elif __STDC__
+#define YPOLDPROC_NULL ((rpc_uint)0)
+extern  void * ypoldproc_null_1(void *, CLIENT *);
+extern  void * ypoldproc_null_1_svc(void *, struct svc_req *);
+#define YPOLDPROC_DOMAIN ((rpc_uint)1)
+extern  bool_t * ypoldproc_domain_1(domainname *, CLIENT *);
+extern  bool_t * ypoldproc_domain_1_svc(domainname *, struct svc_req *);
+#define YPOLDPROC_DOMAIN_NONACK ((rpc_uint)2)
+extern  bool_t * ypoldproc_domain_nonack_1(domainname *, CLIENT *);
+extern  bool_t * ypoldproc_domain_nonack_1_svc(domainname *, struct svc_req *);
+#define YPOLDPROC_MATCH ((rpc_uint)3)
+extern  ypresponse * ypoldproc_match_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_match_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_FIRST ((rpc_uint)4)
+extern  ypresponse * ypoldproc_first_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_first_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_NEXT ((rpc_uint)5)
+extern  ypresponse * ypoldproc_next_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_next_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_POLL ((rpc_uint)6)
+extern  ypresponse * ypoldproc_poll_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_poll_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_PUSH ((rpc_uint)7)
+extern  ypresponse * ypoldproc_push_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_push_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_PULL ((rpc_uint)8)
+extern  ypresponse * ypoldproc_pull_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_pull_1_svc(yprequest *, struct svc_req *);
+#define YPOLDPROC_GET ((rpc_uint)9)
+extern  ypresponse * ypoldproc_get_1(yprequest *, CLIENT *);
+extern  ypresponse * ypoldproc_get_1_svc(yprequest *, struct svc_req *);
+
+#else /* Old Style C */
+#define YPOLDPROC_NULL ((rpc_uint)0)
+extern  void * ypoldproc_null_1();
+extern  void * ypoldproc_null_1_svc();
+#define YPOLDPROC_DOMAIN ((rpc_uint)1)
+extern  bool_t * ypoldproc_domain_1();
+extern  bool_t * ypoldproc_domain_1_svc();
+#define YPOLDPROC_DOMAIN_NONACK ((rpc_uint)2)
+extern  bool_t * ypoldproc_domain_nonack_1();
+extern  bool_t * ypoldproc_domain_nonack_1_svc();
+#define YPOLDPROC_MATCH ((rpc_uint)3)
+extern  ypresponse * ypoldproc_match_1();
+extern  ypresponse * ypoldproc_match_1_svc();
+#define YPOLDPROC_FIRST ((rpc_uint)4)
+extern  ypresponse * ypoldproc_first_1();
+extern  ypresponse * ypoldproc_first_1_svc();
+#define YPOLDPROC_NEXT ((rpc_uint)5)
+extern  ypresponse * ypoldproc_next_1();
+extern  ypresponse * ypoldproc_next_1_svc();
+#define YPOLDPROC_POLL ((rpc_uint)6)
+extern  ypresponse * ypoldproc_poll_1();
+extern  ypresponse * ypoldproc_poll_1_svc();
+#define YPOLDPROC_PUSH ((rpc_uint)7)
+extern  ypresponse * ypoldproc_push_1();
+extern  ypresponse * ypoldproc_push_1_svc();
+#define YPOLDPROC_PULL ((rpc_uint)8)
+extern  ypresponse * ypoldproc_pull_1();
+extern  ypresponse * ypoldproc_pull_1_svc();
+#define YPOLDPROC_GET ((rpc_uint)9)
+extern  ypresponse * ypoldproc_get_1();
+extern  ypresponse * ypoldproc_get_1_svc();
+#endif /* Old Style C */
 #define YPVERS ((rpc_uint)2)
 
 #ifdef __cplusplus

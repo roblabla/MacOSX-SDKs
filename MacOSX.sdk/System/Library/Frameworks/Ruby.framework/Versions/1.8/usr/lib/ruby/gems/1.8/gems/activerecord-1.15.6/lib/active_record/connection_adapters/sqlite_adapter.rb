@@ -109,11 +109,6 @@ module ActiveRecord
       def supports_count_distinct? #:nodoc:
         false
       end
- 
-      def disconnect!
-        super
-        @connection.close rescue nil
-      end
 
       def native_database_types #:nodoc:
         {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000,2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000,2008 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -132,6 +132,10 @@ struct icmp6_hdr {
 #define ICMP6_MEMBERSHIP_REDUCTION	132	/* group membership termination */
 #define MLD6_LISTENER_DONE		132	/* multicast listener done */
 
+#define	MLD_LISTENER_QUERY		MLD6_LISTENER_QUERY
+#define	MLD_LISTENER_REPORT		MLD6_LISTENER_REPORT
+#define	MLD_LISTENER_DONE		MLD6_LISTENER_DONE
+
 #define ND_ROUTER_SOLICIT		133	/* router solicitation */
 #define ND_ROUTER_ADVERT		134	/* router advertisment */
 #define ND_NEIGHBOR_SOLICIT		135	/* neighbor solicitation */
@@ -150,6 +154,9 @@ struct icmp6_hdr {
 /* The definitions below are experimental. TBA */
 #define MLD6_MTRACE_RESP		200	/* mtrace response(to sender) */
 #define MLD6_MTRACE			201	/* mtrace messages */
+
+#define	MLD_MTRACE_RESP			MLD6_MTRACE_RESP
+#define	MLD_MTRACE			MLD6_MTRACE
 
 #define ICMP6_HADISCOV_REQUEST		202	/* XXX To be defined */
 #define ICMP6_HADISCOV_REPLY		203	/* XXX To be defined */

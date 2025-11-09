@@ -3,9 +3,9 @@
  
      Contains:   ATSUI types and constants.
  
-     Version:    Quickdraw-242~94
+     Version:    Quickdraw-264.3~1
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -187,39 +187,39 @@ enum {
    * (Type: ATSUTextMeasurement) (Default value: 0) Must not be less
    * than zero. May be set as a line or layout control.
    */
-  kATSULineWidthTag             = 1L,
+  kATSULineWidthTag             = 1,
 
   /*
    * (Type: Fixed) (Default value: 0) Angle is specified in degrees in
    * right-handed coordinate system. May be set as a line control.
    */
-  kATSULineRotationTag          = 2L,
+  kATSULineRotationTag          = 2,
 
   /*
    * (Type: Boolean) (Default value: GetSysDirection()) Must be 0 or 1.
    * See below for convenience constants. May be set as a layout
    * control.
    */
-  kATSULineDirectionTag         = 3L,
+  kATSULineDirectionTag         = 3,
 
   /*
    * (Type: Fract) (Default value: kATSUNoJustification) May be set as
    * a line or layout control.
    */
-  kATSULineJustificationFactorTag = 4L,
+  kATSULineJustificationFactorTag = 4,
 
   /*
    * (Type: Fract) (Default value: kATSUStartAlignment) May be set as a
    * line or layout control.
    */
-  kATSULineFlushFactorTag       = 5L,
+  kATSULineFlushFactorTag       = 5,
 
   /*
    * (Type: BslnBaselineRecord) (Default value: all zeros) Calculated
    * from other style attributes (e.g., font and point size). May be
    * set as a line or layout control.
    */
-  kATSULineBaselineValuesTag    = 6L,
+  kATSULineBaselineValuesTag    = 6,
 
   /*
    * (Type: ATSLineLayoutOptions) (Default value: all zeros) See
@@ -227,7 +227,7 @@ enum {
    * and a list of possible values. May be set as a line or layout
    * control.
    */
-  kATSULineLayoutOptionsTag     = 7L,
+  kATSULineLayoutOptionsTag     = 7,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: determined by font(s))
@@ -236,7 +236,7 @@ enum {
    * not explicitly set it. This makes it easy to calculate line
    * height. May be set as a line or layout control.
    */
-  kATSULineAscentTag            = 8L,
+  kATSULineAscentTag            = 8,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: determined by font(s))
@@ -245,28 +245,28 @@ enum {
    * explicitly set it. This makes it easy to calculate line height.
    * May be set as a line or layout control.
    */
-  kATSULineDescentTag           = 9L,
+  kATSULineDescentTag           = 9,
 
   /*
    * (Type: RegionCode) (Default value: kTextRegionDontCare) See
    * Script.h for possible values. May be set as a line or layout
    * control.
    */
-  kATSULineLangRegionTag        = 10L,
+  kATSULineLangRegionTag        = 10,
 
   /*
    * (Type: TextBreakLocatorRef) (Default value: NULL) See
    * UnicodeUtilities.h for more information on creating a
    * TextBreakLocator. May be set as a line or layout control.
    */
-  kATSULineTextLocatorTag       = 11L,
+  kATSULineTextLocatorTag       = 11,
 
   /*
    * (Type: ATSULineTruncation) (Default value: kATSUTruncateNone) See
    * the definition of ATSULineTruncation for possible values. May be
    * set as a line or layout control.
    */
-  kATSULineTruncationTag        = 12L,
+  kATSULineTruncationTag        = 12,
 
   /*
    * (Type: ATSUFontFallbacks) (Default value: current global fallback
@@ -279,7 +279,7 @@ enum {
    * ATSUFontFallbacks for more information. May be set as a layout
    * control.
    */
-  kATSULineFontFallbacksTag     = 13L,
+  kATSULineFontFallbacksTag     = 13,
 
   /*
    * (Type: CFStringRef) (Default value: user setting in System
@@ -287,7 +287,7 @@ enum {
    * This affects the behavior of decimal tabs. May be set as a line or
    * layout control.
    */
-  kATSULineDecimalTabCharacterTag = 14L,
+  kATSULineDecimalTabCharacterTag = 14,
 
   /*
    * (Type: ATSULayoutOperationOverrideSpecifier) (Default value: NULL)
@@ -295,25 +295,25 @@ enum {
    * ATSULayoutOperationOverrideSpecifier structure. May be set as a
    * layout control.
    */
-  kATSULayoutOperationOverrideTag = 15L,
+  kATSULayoutOperationOverrideTag = 15,
 
   /*
    * (Type: CGColorRef) (Default value: user setting in System
    * Preferences) Indicates current setting for the highlight color.
    * May be set as a line or layout control.
    */
-  kATSULineHighlightCGColorTag  = 17L,
+  kATSULineHighlightCGColorTag  = 17,
 
   /*
    * This is just for convenience. It is the upper limit of the line
    * and layout tags.
    */
-  kATSUMaxLineTag               = 18L,
+  kATSUMaxLineTag               = 18,
 
   /*
    * This tag is obsolete. Please use kATSULineLangRegionTag instead.
    */
-  kATSULineLanguageTag          = 10L,
+  kATSULineLanguageTag          = 10,
 
   /*
    * (Type: CGContextRef) (Default value: NULL) Use this tag to produce
@@ -322,7 +322,7 @@ enum {
    * information about creating a CGContext from a graphics port. May
    * be set as a layout control.
    */
-  kATSUCGContextTag             = 32767L,
+  kATSUCGContextTag             = 32767,
 
   /*
    * (Type: Boolean) (Default value: false) For compatability purposes
@@ -330,7 +330,7 @@ enum {
    * Note this tag will produce a synthetic style for fonts that do not
    * have a typographic style. May be set as a style attribute.
    */
-  kATSUQDBoldfaceTag            = 256L,
+  kATSUQDBoldfaceTag            = 256,
 
   /*
    * (Type: Boolean) (Default value: false) For compatability purposes
@@ -338,50 +338,50 @@ enum {
    * Note this tag will produce a synthetic style for fonts that do not
    * have a typographic style. May be set as a style attribute.
    */
-  kATSUQDItalicTag              = 257L,
+  kATSUQDItalicTag              = 257,
 
   /*
    * (Type: Boolean) (Default value: false) For compatability purposes
    * only. May be set as a style attribute.
    */
-  kATSUQDUnderlineTag           = 258L,
+  kATSUQDUnderlineTag           = 258,
 
   /*
    * (Type: Boolean) (Default value: false) For compatability purposes
    * only. May be set as a style attribute.
    */
-  kATSUQDCondensedTag           = 259L,
+  kATSUQDCondensedTag           = 259,
 
   /*
    * (Type: Boolean) (Default value: false) For compatability purposes
    * only. May be set as a style attribute.
    */
-  kATSUQDExtendedTag            = 260L,
+  kATSUQDExtendedTag            = 260,
 
   /*
    * (Type: ATSUFontID) (Default value: LMGetApFontID() or if not
    * valid, LMGetSysFontFam()) May be set as a style attribute.
    */
-  kATSUFontTag                  = 261L,
+  kATSUFontTag                  = 261,
 
   /*
    * (Type: Fixed) (Default value: Long2Fix(LMGetSysFontSize())) May be
    * set as a style attribute.
    */
-  kATSUSizeTag                  = 262L,
+  kATSUSizeTag                  = 262,
 
   /*
    * (Type: RGBColor) (Default value: (0, 0, 0)) May be set as a style
    * attribute.
    */
-  kATSUColorTag                 = 263L,
+  kATSUColorTag                 = 263,
 
   /*
    * (Type: RegionCode) (Default value:
    * GetScriptManagerVariable(smRegionCode)) See Script.h for a list of
    * possible values. May be set as a style attribute.
    */
-  kATSULangRegionTag            = 264L,
+  kATSULangRegionTag            = 264,
 
   /*
    * (Type: ATSUVerticalCharacterType) (Default value:
@@ -389,50 +389,50 @@ enum {
    * ATSUVerticalCharacterType for a list of possible values. May be
    * set as a style attribute.
    */
-  kATSUVerticalCharacterTag     = 265L,
+  kATSUVerticalCharacterTag     = 265,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: kATSUseGlyphAdvance)
    * Must not be less than zero. May be set as a style attribute.
    */
-  kATSUImposeWidthTag           = 266L,
+  kATSUImposeWidthTag           = 266,
 
   /*
    * (Type: Fixed) (Default value: 0) May be set as a style attribute.
    */
-  kATSUBeforeWithStreamShiftTag = 267L,
+  kATSUBeforeWithStreamShiftTag = 267,
 
   /*
    * (Type: Fixed) (Default value: 0) May be set as a style attribute.
    */
-  kATSUAfterWithStreamShiftTag  = 268L,
+  kATSUAfterWithStreamShiftTag  = 268,
 
   /*
    * (Type: Fixed) (Default value: 0) May be set as a style attribute.
    */
-  kATSUCrossStreamShiftTag      = 269L,
+  kATSUCrossStreamShiftTag      = 269,
 
   /*
    * (Type: Fixed) (Default value: kATSNoTracking) May be set as a
    * style attribute.
    */
-  kATSUTrackingTag              = 270L,
+  kATSUTrackingTag              = 270,
 
   /*
    * (Type: Fract) (Default value: 0) May be set as a style attribute.
    */
-  kATSUHangingInhibitFactorTag  = 271L,
+  kATSUHangingInhibitFactorTag  = 271,
 
   /*
    * (Type: Fract) (Default value: 0) May be set as a style attribute.
    */
-  kATSUKerningInhibitFactorTag  = 272L,
+  kATSUKerningInhibitFactorTag  = 272,
 
   /*
    * (Type: Fixed) (Default value: 0) Must be between -1.0 and 1.0. May
    * be set as a style attribute.
    */
-  kATSUDecompositionFactorTag   = 273L,
+  kATSUDecompositionFactorTag   = 273,
 
   /*
    * (Type: BslnBaselineClass) (Default value: kBSLNRomanBaseline) See
@@ -440,63 +440,63 @@ enum {
    * kBSLNNoBaselineOverride to use intrinsic baselines. May be set as
    * a style attribute.
    */
-  kATSUBaselineClassTag         = 274L,
+  kATSUBaselineClassTag         = 274,
 
   /*
    * (Type: ATSJustPriorityWidthDeltaOverrides) (Default value: all
    * zeros) See ATSLayoutTypes.h for more information. May be set as a
    * style attribute.
    */
-  kATSUPriorityJustOverrideTag  = 275L,
+  kATSUPriorityJustOverrideTag  = 275,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ligatures
    * and compound characters will not have divisable components. May be
    * set as a style attribute.
    */
-  kATSUNoLigatureSplitTag       = 276L,
+  kATSUNoLigatureSplitTag       = 276,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ATSUI
    * will not use a glyph's angularity to determine its boundaries. May
    * be set as a style attribute.
    */
-  kATSUNoCaretAngleTag          = 277L,
+  kATSUNoCaretAngleTag          = 277,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ATSUI
    * will suppress automatic cross kerning (defined by font). May be
    * set as a style attribute.
    */
-  kATSUSuppressCrossKerningTag  = 278L,
+  kATSUSuppressCrossKerningTag  = 278,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ATSUI
    * will suppress glyphs' automatic optical positional alignment. May
    * be set as a style attribute.
    */
-  kATSUNoOpticalAlignmentTag    = 279L,
+  kATSUNoOpticalAlignmentTag    = 279,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ATSUI
    * will force glyphs to hang beyond the line boundaries. May be set
    * as a style attribute.
    */
-  kATSUForceHangingTag          = 280L,
+  kATSUForceHangingTag          = 280,
 
   /*
    * (Type: Boolean) (Default value: false) When set to true, ATSUI
    * will not perform post-compensation justification if needed. May be
    * set as a style attribute.
    */
-  kATSUNoSpecialJustificationTag = 281L,
+  kATSUNoSpecialJustificationTag = 281,
 
   /*
    * (Type: TextBreakLocatorRef) (Default value: NULL) See
    * UnicodeUtilities.h for more information about creating a
    * TextBreakLocator. May be set as a style attribute.
    */
-  kATSUStyleTextLocatorTag      = 282L,
+  kATSUStyleTextLocatorTag      = 282,
 
   /*
    * (Type: ATSStyleRenderingOptions) (Default value:
@@ -504,7 +504,7 @@ enum {
    * ATSStyleRenderingOptions and a list of possible values. May be set
    * as a style attribute.
    */
-  kATSUStyleRenderingOptionsTag = 283L,
+  kATSUStyleRenderingOptionsTag = 283,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: determined by font)
@@ -513,7 +513,7 @@ enum {
    * explicitly set it. This can make calculating line height easier.
    * May be set as a style attribute.
    */
-  kATSUAscentTag                = 284L,
+  kATSUAscentTag                = 284,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: determined by font)
@@ -522,7 +522,7 @@ enum {
    * explicitly set it. This can make calculating line height easier.
    * May be set as a style attribute.
    */
-  kATSUDescentTag               = 285L,
+  kATSUDescentTag               = 285,
 
   /*
    * (Type: ATSUTextMeasurement) (Default value: determined by font)
@@ -531,21 +531,21 @@ enum {
    * explicitly set it. This can make calculating line height easier.
    * May be set as a style attribute.
    */
-  kATSULeadingTag               = 286L,
+  kATSULeadingTag               = 286,
 
   /*
    * (Type: ATSUGlyphSelector) (Default value: 0) See the definition of
    * ATSUGlyphSelector for more information and a list of possible
    * values. May be set as a style attribute.
    */
-  kATSUGlyphSelectorTag         = 287L,
+  kATSUGlyphSelectorTag         = 287,
 
   /*
    * (Type: ATSURGBAlphaColor) (Default value: (0, 0, 0, 1)) See the
    * definition of ATSURGBAlphaColor for more information. May be set
    * as a style attribute.
    */
-  kATSURGBAlphaColorTag         = 288L,
+  kATSURGBAlphaColorTag         = 288,
 
   /*
    * (Type: CGAffineTransform) (Default value:
@@ -553,81 +553,81 @@ enum {
    * in CGAffineTransform.h for more information. May be set as a style
    * attribute.
    */
-  kATSUFontMatrixTag            = 289L,
+  kATSUFontMatrixTag            = 289,
 
   /*
    * (Type: ATSUStyleLineCountType) (Default value:
    * kATSUStyleSingleLineCount) Used to specify the number of strokes
    * to be drawn for an underline. May be set as a style attribute.
    */
-  kATSUStyleUnderlineCountOptionTag = 290L,
+  kATSUStyleUnderlineCountOptionTag = 290,
 
   /*
    * (Type: CGColorRef) (Default value: NULL) Used to specify the color
    * of the strokes to draw for an underlined run of text. If NULL, the
    * text color is used. May be set as a style attribute.
    */
-  kATSUStyleUnderlineColorOptionTag = 291L,
+  kATSUStyleUnderlineColorOptionTag = 291,
 
   /*
    * (Type: Boolean) (Default value: false) Used to specify
    * strikethrough style. May be set as a style attribute.
    */
-  kATSUStyleStrikeThroughTag    = 292L,
+  kATSUStyleStrikeThroughTag    = 292,
 
   /*
    * (Type: ATSUStyleLineCountType) (Default value:
    * kATSUStyleSingleLineCount) Used to specify the number of strokes
    * to be drawn for a strikethrough. May be set as a style attribute.
    */
-  kATSUStyleStrikeThroughCountOptionTag = 293L,
+  kATSUStyleStrikeThroughCountOptionTag = 293,
 
   /*
    * (Type: CGColorRef) (Default value: NULL) Used to specify the color
    * of the strokes to draw for a strikethrough style. If NULL, the
    * text color is used. May be set as a style attribute.
    */
-  kATSUStyleStrikeThroughColorOptionTag = 294L,
+  kATSUStyleStrikeThroughColorOptionTag = 294,
 
   /*
    * (Type: Boolean) (Default value: false) Used to specify if text
    * should be drawn with a drop shadow. Only takes effect if a
    * CGContext is used for drawing. May be set as a style attribute.
    */
-  kATSUStyleDropShadowTag       = 295L,
+  kATSUStyleDropShadowTag       = 295,
 
   /*
    * (Type: float) (Default value: 0.0) Used to specify the amount of
    * blur for a dropshadow. May be set as a style attribute.
    */
-  kATSUStyleDropShadowBlurOptionTag = 296L,
+  kATSUStyleDropShadowBlurOptionTag = 296,
 
   /*
    * (Type: CGSize) (Default value: (3.0, -3.0)) Used to specify the
    * amount of offset from the text to be used when drawing a
    * dropshadow. May be set as a style attribute.
    */
-  kATSUStyleDropShadowOffsetOptionTag = 297L,
+  kATSUStyleDropShadowOffsetOptionTag = 297,
 
   /*
    * (Type: CGColorRef) (Default value: NULL) Used to specify the color
    * of the dropshadow. May be set as a style attribute.
    */
-  kATSUStyleDropShadowColorOptionTag = 298L,
+  kATSUStyleDropShadowColorOptionTag = 298,
 
   /*
    * This is just for convenience. It is the upper limit of the style
    * tags.
    */
-  kATSUMaxStyleTag              = 299L,
+  kATSUMaxStyleTag              = 299,
 
   /*
    * This tag is obsolete. Please use kATSULangRegionTag instead. This
    * is the maximum Apple ATSUI reserved tag value.  Client defined
    * tags must be larger.
    */
-  kATSULanguageTag              = 264L,
-  kATSUMaxATSUITagValue         = 65535L
+  kATSULanguageTag              = 264,
+  kATSUMaxATSUITagValue         = 65535
 };
 
 
@@ -1118,7 +1118,7 @@ typedef STACK_UPP_TYPE(RedrawBackgroundProcPtr)                 RedrawBackground
  *    Non-Carbon CFM:   not available
  */
 extern RedrawBackgroundUPP
-NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  DisposeRedrawBackgroundUPP()
@@ -1129,7 +1129,7 @@ NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeRedrawBackgroundUPP(RedrawBackgroundUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeRedrawBackgroundUPP(RedrawBackgroundUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 /*
  *  InvokeRedrawBackgroundUPP()
@@ -1146,7 +1146,7 @@ InvokeRedrawBackgroundUPP(
   UniCharCount         iTextLength,
   ATSTrapezoid         iUnhighlightArea[],
   ItemCount            iTrapezoidCount,
-  RedrawBackgroundUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RedrawBackgroundUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
 #if __MACH__
   #ifdef __cplusplus

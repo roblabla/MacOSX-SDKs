@@ -44,24 +44,23 @@ class IOUSBPipe : public OSObject
     OSDeclareDefaultStructors(IOUSBPipe)
 		
 protected:
-		
-		const IOUSBEndpointDescriptor *	_descriptor;
+	
+	const IOUSBEndpointDescriptor *	_descriptor;
     IOUSBController::Endpoint		_endpoint;	// tidied up version of descriptor
-    IOUSBController *			_controller;
-    USBDeviceAddress			_address;
-    UInt8 				_status;	// no longer used
+    IOUSBController *				_controller;
+    USBDeviceAddress				_address;
+    UInt8							_status;	// was previously used for status.  Now used to detect whether a property exists or not
 	
     struct ExpansionData
     {
-        IOReturn	_correctStatus;		
-		IOUSBDevice *	_device;	// Remember containing device for clearing TTs
-		UInt8			_speed;
-		IOUSBInterface	* _interface;
-		bool			_crossEndianCompatible;
+        IOReturn					_correctStatus;		
+		IOUSBDevice *				_device;	// Remember containing device for clearing TTs
+		UInt8						_speed;
+		IOUSBInterface	*			_interface;
+		bool						_crossEndianCompatible;
+		UInt32						_locationID;
     };
     ExpansionData * _expansionData;
-    
-#define	_correctStatus	_expansionData->_correctStatus
     
     virtual void free();
     
@@ -371,7 +370,10 @@ public:
                           IOUSBCompletionWithTimeStamp *	completion = 0,
                           IOByteCount *				bytesRead = 0);
 	
-    OSMetaClassDeclareReservedUnused(IOUSBPipe,  12);
+    OSMetaClassDeclareReservedUsed(IOUSBPipe,  12);
+	virtual bool InitToEndpoint(const IOUSBEndpointDescriptor *endpoint, UInt8 speed,
+								USBDeviceAddress address, IOUSBController * controller, IOUSBDevice * device, IOUSBInterface * interface);
+
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  13);
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  14);
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  15);

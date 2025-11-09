@@ -1,3 +1,31 @@
+/*
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ * 
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
 /*	$FreeBSD: src/sys/netinet6/in6_var.h,v 1.3.2.2 2001/07/03 11:01:52 ume Exp $	*/
 /*	$KAME: in6_var.h,v 1.56 2001/03/29 05:34:31 itojun Exp $	*/
 
@@ -74,13 +102,6 @@
 #endif
 
 /*
- * Interface address, Internet version.  One of these structures
- * is allocated for each interface with an Internet address.
- * The ifaddr structure contains the protocol-independent part
- * of the structure and is assumed to be first.
- */
-
-/*
  * pltime/vltime are just for future reference (required to implements 2
  * hour rule for hosts).  they should never be modified by nd6_timeout or
  * anywhere else.
@@ -94,6 +115,7 @@ struct in6_addrlifetime {
 	u_int32_t ia6t_vltime;	/* valid lifetime */
 	u_int32_t ia6t_pltime;	/* prefix lifetime */
 };
+
 
 /*
  * IPv6 interface statistics, as defined in RFC2465 Ipv6IfStatsEntry (p12).
@@ -239,6 +261,7 @@ struct	in6_aliasreq {
 	struct in6_addrlifetime ifra_lifetime;
 };
 
+
 /* prefix type macro */
 #define IN6_PREFIX_ND	1
 #define IN6_PREFIX_RR	2
@@ -326,6 +349,13 @@ struct	in6_rrenumreq {
  * Event data, internet6 style.
  */
 
+struct kev_in6_addrlifetime {
+        u_int32_t ia6t_expire;
+        u_int32_t ia6t_preferred;
+        u_int32_t ia6t_vltime;
+        u_int32_t ia6t_pltime;
+};
+
 struct kev_in6_data {
         struct net_event_data   link_data;
 	struct	sockaddr_in6 ia_addr;	/* interface address */
@@ -334,9 +364,8 @@ struct kev_in6_data {
 	struct	sockaddr_in6 ia_prefixmask; /* prefix mask */
 	u_int32_t ia_plen;		/* prefix length */
 	u_int32_t ia6_flags;		/* address flags from in6_ifaddr */
-	struct in6_addrlifetime ia_lifetime; /* address life info */
+	struct kev_in6_addrlifetime ia_lifetime; /* address life info */
 };
-
 
 /*
  * Define inet6 event subclass and specific inet6 events.
@@ -435,6 +464,5 @@ struct kev_in6_data {
 
 #define IN6_ARE_SCOPE_CMP(a,b) ((a)-(b))
 #define IN6_ARE_SCOPE_EQUAL(a,b) ((a)==(b))
-
 
 #endif /* _NETINET6_IN6_VAR_H_ */

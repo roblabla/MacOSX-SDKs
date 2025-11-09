@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     19.06.2003
-// RCS-ID:      $Id: apptrait.h,v 1.43 2006/11/24 10:55:25 RR Exp $
+// RCS-ID:      $Id: apptrait.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -15,15 +15,15 @@
 #include "wx/string.h"
 #include "wx/platinfo.h"
 
-class WXDLLIMPEXP_BASE wxObject;
-class WXDLLEXPORT wxAppTraits;
+class WXDLLIMPEXP_FWD_BASE wxObject;
+class WXDLLIMPEXP_FWD_BASE wxAppTraits;
 #if wxUSE_FONTMAP
-    class WXDLLEXPORT wxFontMapper;
+    class WXDLLIMPEXP_FWD_CORE wxFontMapper;
 #endif // wxUSE_FONTMAP
-class WXDLLIMPEXP_BASE wxLog;
-class WXDLLIMPEXP_BASE wxMessageOutput;
-class WXDLLEXPORT wxRendererNative;
-class WXDLLIMPEXP_BASE wxString;
+class WXDLLIMPEXP_FWD_BASE wxLog;
+class WXDLLIMPEXP_FWD_BASE wxMessageOutput;
+class WXDLLIMPEXP_FWD_CORE wxRendererNative;
+class WXDLLIMPEXP_FWD_BASE wxString;
 
 class GSocketGUIFunctionsTable;
 
@@ -32,7 +32,7 @@ class GSocketGUIFunctionsTable;
 // wxAppTraits: this class defines various configurable aspects of wxApp
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStandardPathsBase;
+class WXDLLIMPEXP_FWD_BASE wxStandardPathsBase;
 
 class WXDLLIMPEXP_BASE wxAppTraitsBase
 {

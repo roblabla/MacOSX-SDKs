@@ -1,5 +1,5 @@
 /*	NSCalendar.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -23,6 +23,9 @@ enum {
 	NSWeekCalendarUnit = kCFCalendarUnitWeek,
 	NSWeekdayCalendarUnit = kCFCalendarUnitWeekday,
 	NSWeekdayOrdinalCalendarUnit = kCFCalendarUnitWeekdayOrdinal,
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+	NSQuarterCalendarUnit = kCFCalendarUnitQuarter,
+#endif
 };
 typedef NSUInteger NSCalendarUnit;
 
@@ -93,6 +96,7 @@ enum {
 };
 
 @interface NSDateComponents : NSObject <NSCopying, NSCoding>
+
 - (NSInteger)era;
 - (NSInteger)year;
 - (NSInteger)month;
@@ -103,6 +107,9 @@ enum {
 - (NSInteger)week;
 - (NSInteger)weekday;
 - (NSInteger)weekdayOrdinal;
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSInteger)quarter;
+#endif
 
 - (void)setEra:(NSInteger)v;
 - (void)setYear:(NSInteger)v;
@@ -114,6 +121,10 @@ enum {
 - (void)setWeek:(NSInteger)v;
 - (void)setWeekday:(NSInteger)v;
 - (void)setWeekdayOrdinal:(NSInteger)v;
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)setQuarter:(NSInteger)v;
+#endif
+
 @end
 
 #endif

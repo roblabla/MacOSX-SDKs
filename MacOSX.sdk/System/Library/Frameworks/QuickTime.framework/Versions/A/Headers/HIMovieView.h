@@ -3,9 +3,9 @@
  
      Contains:   HIView-based movie playback
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 2004-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 2004-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -95,7 +95,7 @@ enum {
   /*
    * No attributes
    */
-  kHIMovieViewNoAttributes      = 0L,
+  kHIMovieViewNoAttributes      = 0,
 
   /*
    * Movie controller bar is visible below visual content

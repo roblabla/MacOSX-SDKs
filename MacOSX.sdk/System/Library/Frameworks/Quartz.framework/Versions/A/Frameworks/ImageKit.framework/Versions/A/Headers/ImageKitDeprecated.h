@@ -40,3 +40,10 @@
 
 extern NSString *const IKPictureTakerShowAddressBookPicture;
 extern NSString *const IKPictureTakerShowEmptyPicture;
+
+
+/* old types for layerForType: */
+extern NSString *const IKImageBrowserCellLayerTypeBackground;
+extern NSString *const IKImageBrowserCellLayerTypeForeground;
+extern NSString *const IKImageBrowserCellLayerTypeSelection;
+extern NSString *const IKImageBrowserCellLayerTypePlaceHolder;

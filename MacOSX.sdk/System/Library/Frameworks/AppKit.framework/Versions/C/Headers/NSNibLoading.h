@@ -1,7 +1,7 @@
 /*
 	NSNibLoading.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,4 +24,5 @@
 
 @interface NSObject (NSNibAwaking)
 - (void)awakeFromNib;
+    /* On Mac OS X 10.6 and later, NSObject provides an implementation of awakeFromNib. This means that you can safely call through to [super awakeFromNib] in an overridden implementation when running on Mac OS X 10.6 and later. */
 @end

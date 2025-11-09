@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:
-// RCS-ID:      $Id: panel.h,v 1.3 2005/05/04 18:52:01 JS Exp $
+// RCS-ID:      $Id: panel.h 33948 2005-05-04 18:57:50Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////

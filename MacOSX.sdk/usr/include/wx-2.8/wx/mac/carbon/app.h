@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: app.h,v 1.18 2006/12/10 13:07:01 SC Exp $
+// RCS-ID:      $Id: app.h 53370 2008-04-26 05:43:41Z KO $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -74,10 +74,13 @@ public:
     WXEVENTHANDLERREF    MacGetCurrentEventHandlerCallRef() { return m_macCurrentEventHandlerCallRef ; }
     void MacSetCurrentEvent( WXEVENTREF event , WXEVENTHANDLERCALLREF handler )
     { m_macCurrentEvent = event ; m_macCurrentEventHandlerCallRef = handler ; }
+    
+    void MacRequestUserAttention(wxNotificationOptions options);
 
     // adding a CFType object to be released only at the end of the current event cycle (increases the
     // refcount of the object passed), needed in case we are in the middle of an event concering an object
     // we want to delete and cannot do it immediately
+    // TODO change semantics to be in line with cocoa (make autrelease NOT increase the count)
     void                  MacAddToAutorelease( void* cfrefobj );
 public:
     static wxWindow*      s_captureWindow ;
@@ -100,6 +103,7 @@ public:
     static long           s_macPreferencesMenuItemId ;
     static long           s_macExitMenuItemId ;
     static wxString       s_macHelpMenuTitleName ;
+    static void*          s_macNotificationRecord ;
 
     WXEVENTREF            MacGetCurrentEvent() { return m_macCurrentEvent ; }
     void                  MacHandleOneEvent( WXEVENTREF ev ) ;
@@ -125,6 +129,11 @@ public:
     virtual void         MacNewFile() ;
     // in response of a reopen-application apple event
     virtual void         MacReopenApp() ;
+
+#if wxABI_VERSION >= 20808   
+    // Hide the application windows the same as the system hide command would do it.
+    void MacHideApp();
+#endif
 
     DECLARE_EVENT_TABLE()
 };

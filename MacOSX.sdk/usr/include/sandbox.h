@@ -118,4 +118,22 @@ extern const char kSBXProfilePureComputation[];
  */
 void sandbox_free_error(char *errorbuf);
 
+
+#ifdef __APPLE_API_PRIVATE
+
+/* The following defintiions are reserved for Mac OS X.  Developers should not
+ * depend on their availability.
+ */
+
+enum sandbox_filter_type {
+	SANDBOX_FILTER_NONE,
+	SANDBOX_FILTER_PATH,
+	SANDBOX_FILTER_GLOBAL_NAME,
+	SANDBOX_FILTER_LOCAL_NAME
+};
+
+int sandbox_check(pid_t pid, const char *operation, enum sandbox_filter_type type, ...);
+
+#endif /* __APPLE_API_PRIVATE */
+
 #endif /* _SANDBOX_H_ */

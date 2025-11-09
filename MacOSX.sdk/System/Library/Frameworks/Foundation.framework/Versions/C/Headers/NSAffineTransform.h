@@ -1,10 +1,15 @@
 /*	NSAffineTransform.h
-        Copyright (c) 1997-2007, Apple Inc. All rights reserved.
+        Copyright (c) 1997-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#import <CoreGraphics/CGAffineTransform.h>
+#elif TARGET_OS_MAC
 #import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGAffineTransform.h>
+#endif
+
 
 typedef struct {
     CGFloat m11, m12, m21, m22;

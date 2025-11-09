@@ -3,9 +3,9 @@
  
      Contains:   FSEventStream API
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 2006 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 2006-2008 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,6 +25,8 @@
 #endif
 
 
+#include <Block.h>
+#include <dispatch/dispatch.h>
 #include <sys/types.h>
 
 
@@ -249,7 +251,8 @@ enum {
    * before creating the stream so that you have a file descriptor for
    * it and can issue an F_GETPATH fcntl() to find the current path.
    */
-  kFSEventStreamCreateFlagWatchRoot = 0x00000004
+  kFSEventStreamCreateFlagWatchRoot = 0x00000004,
+  kFSEventStreamCreateFlagIgnoreSelf = 0x00000008
 };
 
 
@@ -318,7 +321,7 @@ enum {
    * Denotes a sentinel event sent to mark the end of the "historical"
    * events sent as a result of specifying a sinceWhen value in the
    * FSEventStreamCreate...() call that created this event stream. (It
-   * will not be sent if FSEventStreamEventIdSinceNow was passed for
+   * will not be sent if kFSEventStreamEventIdSinceNow was passed for
    * sinceWhen.) After invoking the client's callback with all the
    * "historical" events that occurred before now, the client's
    * callback will be invoked with an event where the
@@ -341,28 +344,30 @@ enum {
   kFSEventStreamEventFlagRootChanged = 0x00000020,
 
   /*
-   * Denotes a special event sent when a volume is mounted. The path in
-   * the event is the path to the newly-mounted volume. You will
-   * receive one of these notifications for every volume mount event
-   * inside the kernel (independent of DiskArbitration). Beware that a
-   * newly-mounted volume could contain an arbitrarily large directory
-   * hierarchy. Avoid pitfalls like triggering a recursive scan of a
-   * non-local filesystem, which you can detect by checking for the
-   * absence of the MNT_LOCAL flag in the f_flags returned by statfs().
-   * Also be aware of the MNT_DONTBROWSE flag that is set for volumes
-   * which should not be displayed by user interface elements.
+   * Denotes a special event sent when a volume is mounted underneath
+   * one of the paths being monitored. The path in the event is the
+   * path to the newly-mounted volume. You will receive one of these
+   * notifications for every volume mount event inside the kernel
+   * (independent of DiskArbitration). Beware that a newly-mounted
+   * volume could contain an arbitrarily large directory hierarchy.
+   * Avoid pitfalls like triggering a recursive scan of a non-local
+   * filesystem, which you can detect by checking for the absence of
+   * the MNT_LOCAL flag in the f_flags returned by statfs(). Also be
+   * aware of the MNT_DONTBROWSE flag that is set for volumes which
+   * should not be displayed by user interface elements.
    */
   kFSEventStreamEventFlagMount  = 0x00000040,
 
   /*
-   * Denotes a special event sent when a volume is unmounted. The path
-   * in the event is the path to the directory from which the volume
-   * was unmounted. You will receive one of these notifications for
-   * every volume unmount event inside the kernel. This is not a
-   * substitute for the notifications provided by the DiskArbitration
-   * framework; you only get notified after the unmount has occurred.
-   * Beware that unmounting a volume could uncover an arbitrarily large
-   * directory hierarchy, although Mac OS X never does that.
+   * Denotes a special event sent when a volume is unmounted underneath
+   * one of the paths being monitored. The path in the event is the
+   * path to the directory from which the volume was unmounted. You
+   * will receive one of these notifications for every volume unmount
+   * event inside the kernel. This is not a substitute for the
+   * notifications provided by the DiskArbitration framework; you only
+   * get notified after the unmount has occurred. Beware that
+   * unmounting a volume could uncover an arbitrarily large directory
+   * hierarchy, although Mac OS X never does that.
    */
   kFSEventStreamEventFlagUnmount = 0x00000080
 };
@@ -545,7 +550,7 @@ typedef CALLBACK_API_C( void , FSEventStreamCallback )(ConstFSEventStreamRef str
  *    sinceWhen:
  *      The service will supply events that have happened after the
  *      given event ID. To ask for events "since now" pass the constant
- *      FSEventStreamEventIdSinceNow. Often, clients will supply the
+ *      kFSEventStreamEventIdSinceNow. Often, clients will supply the
  *      highest-numbered FSEventStreamEventId they have received in a
  *      callback, which they can obtain via the
  *      FSEventStreamGetLatestEventId() accessor. Do not pass zero for
@@ -628,7 +633,7 @@ FSEventStreamCreate(
  *    sinceWhen:
  *      The service will supply events that have happened after the
  *      given event ID. To ask for events "since now" pass the constant
- *      FSEventStreamEventIdSinceNow. Often, clients will supply the
+ *      kFSEventStreamEventIdSinceNow. Often, clients will supply the
  *      highest-numbered FSEventStreamEventId they have received in a
  *      callback, which they can obtain via the
  *      FSEventStreamGetLatestEventId() accessor. Do not pass zero for
@@ -822,7 +827,8 @@ FSEventsCopyUUIDForDevice(dev_t dev)                          AVAILABLE_MAC_OS_X
  *      The dev_t of the device.
  *    
  *    time:
- *      The time as a CFAbsoluteTime.
+ *      The time as a CFAbsoluteTime whose value is the number of
+ *      seconds since Jan 1, 1970 (i.e. a posix style time_t).
  *  
  *  Result:
  *    The last event ID for the given device that was returned before
@@ -983,15 +989,57 @@ FSEventStreamUnscheduleFromRunLoop(
   CFStringRef        runLoopMode)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
+
+/*
+ *  FSEventStreamSetDispatchQueue()
+ *  
+ *  Discussion:
+ *    This function schedules the stream on the specified dispatch
+ *    queue. The caller is responsible for ensuring that the stream is
+ *    scheduled on a dispatch queue and that the queue is started. If
+ *    there is a problem scheduling the stream on the queue an error
+ *    will be returned when you try to Start the stream. To start
+ *    receiving events on the stream, call FSEventStreamStart(). To
+ *    remove the stream from the queue on which it was scheduled, call
+ *    FSEventStreamSetDispatchQueue() with a NULL queue parameter or
+ *    call FSEventStreamInvalidate() which will do the same thing. 
+ *    Note: you must eventually call FSEventStreamInvalidate() and it
+ *    is an error to call FSEventStreamInvalidate() without having the
+ *    stream either scheduled on a runloop or a dispatch queue, so do
+ *    not set the dispatch queue to NULL before calling
+ *    FSEventStreamInvalidate().
+ *  
+ *  Parameters:
+ *    
+ *    streamRef:
+ *      A valid stream.
+ *    
+ *    q:
+ *      The dispatch queue to use to receive events (or NULL to to stop
+ *      receiving events from the stream).
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+FSEventStreamSetDispatchQueue(
+  FSEventStreamRef   streamRef,
+  dispatch_queue_t   q)                                       AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+
+
 /*
  *  FSEventStreamInvalidate()
  *  
  *  Discussion:
  *    Invalidates the stream, like CFRunLoopSourceInvalidate() does for
  *    a CFRunLoopSourceRef.  It will be unscheduled from any runloops
- *    upon which it had been scheduled. FSEventStreamInvalidate() can
- *    only be called after the stream has been scheduled on at least
- *    one runloop, via FSEventStreamSchedueWithRunLoop().
+ *    or dispatch queues upon which it had been scheduled.
+ *    FSEventStreamInvalidate() can only be called on the stream after
+ *    you have called FSEventStreamScheduleWithRunLoop() or
+ *    FSEventStreamSetDispatchQueue().
  *  
  *  Parameters:
  *    

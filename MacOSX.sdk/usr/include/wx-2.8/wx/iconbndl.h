@@ -4,7 +4,7 @@
 // Author:      Mattia barbon
 // Modified by:
 // Created:     23.03.02
-// RCS-ID:      $Id: iconbndl.h,v 1.10 2005/09/23 12:48:41 MR Exp $
+// RCS-ID:      $Id: iconbndl.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Mattia Barbon
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,8 +16,8 @@
 // for wxSize
 #include "wx/gdicmn.h"
 
-class WXDLLIMPEXP_CORE wxIcon;
-class WXDLLIMPEXP_BASE wxString;
+class WXDLLIMPEXP_FWD_CORE wxIcon;
+class WXDLLIMPEXP_FWD_BASE wxString;
 
 WX_DECLARE_EXPORTED_OBJARRAY( wxIcon, wxIconArray );
 

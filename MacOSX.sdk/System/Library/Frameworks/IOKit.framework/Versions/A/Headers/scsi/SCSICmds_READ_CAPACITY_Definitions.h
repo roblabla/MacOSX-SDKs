@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _IOKIT_SCSI_CMDS_READ_CAPACITY_H_
 #define _IOKIT_SCSI_CMDS_READ_CAPACITY_H_
 
+
 #if KERNEL
 #include <IOKit/IOTypes.h>
 #else
@@ -31,46 +32,83 @@
 #endif
 
 
-#pragma mark About this file
-/* This file contains all the definitions for the data returned from
- * the READ CAPACITY 10 (0x25) and READ CAPACITY 16 (0x9E).
- */
+/*! @header SCSI Request Sense Definitions
+	@discussion
+	This file contains all definitions for the data returned from
+	the READ CAPACITY 10 (0x25) and READ CAPACITY 16 (0x9E) commands.
+*/
 
+/*!
+@enum READ CAPACITY Payload Sizes
+@discussion
+Sizes of the payload for the READ CAPACITY 10 and
+READ CAPACITY 16 commands.
+@constant kREPORT_CAPACITY_DataSize
+Data size for a READ_CAPACITY command.
+@constant kREPORT_CAPACITY_16_DataSize
+Data size for a READ_CAPACITY_16 command.
+*/
 enum
 {
 	kREPORT_CAPACITY_DataSize		= 8,
 	kREPORT_CAPACITY_16_DataSize	= 32
 };
 
-/* NB: These are #defines instead of enums since
- * enums greater than 32 bits in size are not well-defined
- * by C99.
- */
+
+/*!
+@constant kREPORT_CAPACITY_MaximumLBA
+@discussion
+Maximum LBA supported via READ CAPACITY 10 command.
+*/
 #define 	kREPORT_CAPACITY_MaximumLBA			0xFFFFFFFFUL
+
+
+/*!
+@constant kREPORT_CAPACITY_16_MaximumLBA
+@discussion
+Maximum LBA supported via READ CAPACITY 16 command.
+*/
 #define 	kREPORT_CAPACITY_16_MaximumLBA		0xFFFFFFFFFFFFFFFFULL
 
 
-/* Capacity return structure for READ CAPACITY 10 */
-struct SCSI_Capacity_Data
+/*!
+@struct SCSI_Capacity_Data
+@discussion
+Capacity return structure for READ CAPACITY 10 command.
+*/
+typedef struct SCSI_Capacity_Data
 {
 	UInt32		RETURNED_LOGICAL_BLOCK_ADDRESS;
 	UInt32		BLOCK_LENGTH_IN_BYTES;
-};
-typedef struct SCSI_Capacity_Data SCSI_Capacity_Data;
+} SCSI_Capacity_Data;
 
-/* Capacity return structure for READ CAPACITY 16 */
-struct SCSI_Capacity_Data_Long
+
+/*!
+@struct SCSI_Capacity_Data_Long
+@discussion
+Capacity return structure for READ CAPACITY 16 command.
+*/
+typedef struct SCSI_Capacity_Data_Long
 {
 	UInt64		RETURNED_LOGICAL_BLOCK_ADDRESS;
 	UInt32		BLOCK_LENGTH_IN_BYTES;
 	UInt8		RTO_EN_PROT_EN;
 	UInt8		Reserved[19];
-};
-typedef struct SCSI_Capacity_Data_Long SCSI_Capacity_Data_Long;
+} SCSI_Capacity_Data_Long;
 
-/* Values for the REFERENCE TAG OWN (RTO_EN) bit in the READ CAPACITY
- * Long Data structure.
- */
+
+/*!
+@enum RTO_EN definitions
+@discussion
+Values for the REFERENCE TAG OWN (RTO_EN) bit in the
+READ CAPACITY Long Data structure.
+@constant kREAD_CAPACITY_RTO_Enabled
+Reference Tag Own enabled.
+@constant kREAD_CAPACITY_RTO_Disabled
+Reference Tag Own disabled.
+@constant kREAD_CAPACITY_RTO_Mask
+Mask to use when checking the RTO_EN_PROT_EN field.
+*/
 enum
 {
 	kREAD_CAPACITY_RTO_Enabled								= 0x02,
@@ -78,14 +116,26 @@ enum
 	kREAD_CAPACITY_RTO_Mask									= 0x02
 };
 
-/* Values for the PROTECTION INFORMATION (RTO_EN) bit in the READ CAPACITY
- * Long Data structure.
- */
+
+/*!
+@enum PROTECTION INFORMATION definitions
+@discussion
+Values for the PROTECTION INFORMATION (PROT_EN) bit in the
+READ CAPACITY Long Data structure.
+@constant kREAD_CAPACITY_PROT_Enabled
+Protection Information enabled.
+@constant kREAD_CAPACITY_PROT_Disabled
+Protection Information disabled.
+@constant kREAD_CAPACITY_PROT_Mask
+Mask to use when checking the RTO_EN_PROT_EN field.
+*/
+
 enum
 {
 	kREAD_CAPACITY_PROT_Enabled								= 0x01,
 	kREAD_CAPACITY_PROT_Disabled							= 0x00,
 	kREAD_CAPACITY_PROT_Mask								= 0x01
 };
+
 
 #endif	/* _IOKIT_SCSI_CMDS_READ_CAPACITY_H_ */

@@ -1,9 +1,9 @@
 /*
- * "$Id: raster.h 6649 2007-07-11 21:46:42Z mike $"
+ * "$Id: raster.h 2560 2010-08-31 18:08:43Z msweet $"
  *
- *   Raster file definitions for the Common UNIX Printing System (CUPS).
+ *   Raster file definitions for CUPS.
  *
- *   Copyright 2007 by Apple Inc.
+ *   Copyright 2007-2010 by Apple Inc.
  *   Copyright 1997-2006 by Easy Software Products.
  *
  *   This file is part of the CUPS Imaging library.
@@ -84,42 +84,60 @@ typedef enum cups_bool_e		/**** Boolean type ****/
 
 typedef enum cups_cspace_e		/**** cupsColorSpace attribute values ****/
 {
-  CUPS_CSPACE_W = 0,			/* Luminance */
-  CUPS_CSPACE_RGB = 1,			/* Red, green, blue */
-  CUPS_CSPACE_RGBA = 2,			/* Red, green, blue, alpha */
-  CUPS_CSPACE_K = 3,			/* Black */
-  CUPS_CSPACE_CMY = 4,			/* Cyan, magenta, yellow */
-  CUPS_CSPACE_YMC = 5,			/* Yellow, magenta, cyan */
-  CUPS_CSPACE_CMYK = 6,			/* Cyan, magenta, yellow, black */
-  CUPS_CSPACE_YMCK = 7,			/* Yellow, magenta, cyan, black */
-  CUPS_CSPACE_KCMY = 8,			/* Black, cyan, magenta, yellow */
-  CUPS_CSPACE_KCMYcm = 9,		/* Black, cyan, magenta, yellow, *
-					 * light-cyan, light-magenta     */
-  CUPS_CSPACE_GMCK = 10,		/* Gold, magenta, yellow, black */
-  CUPS_CSPACE_GMCS = 11,		/* Gold, magenta, yellow, silver */
-  CUPS_CSPACE_WHITE = 12,		/* White ink (as black) */
-  CUPS_CSPACE_GOLD = 13,		/* Gold foil */
-  CUPS_CSPACE_SILVER = 14,		/* Silver foil */
+  CUPS_CSPACE_W = 0,			/* Luminance (DeviceGray, gamma 2.2 by default) */
+  CUPS_CSPACE_RGB = 1,			/* Red, green, blue (DeviceRGB, sRGB by default) */
+  CUPS_CSPACE_RGBA = 2,			/* Red, green, blue, alpha (DeviceRGB, sRGB by default) */
+  CUPS_CSPACE_K = 3,			/* Black (DeviceK) */
+  CUPS_CSPACE_CMY = 4,			/* Cyan, magenta, yellow (DeviceCMY) */
+  CUPS_CSPACE_YMC = 5,			/* Yellow, magenta, cyan @deprecated@ */
+  CUPS_CSPACE_CMYK = 6,			/* Cyan, magenta, yellow, black (DeviceCMYK) */
+  CUPS_CSPACE_YMCK = 7,			/* Yellow, magenta, cyan, black @deprecated@ */
+  CUPS_CSPACE_KCMY = 8,			/* Black, cyan, magenta, yellow @deprecated@ */
+  CUPS_CSPACE_KCMYcm = 9,		/* Black, cyan, magenta, yellow, light-cyan, light-magenta @deprecated@ */
+  CUPS_CSPACE_GMCK = 10,		/* Gold, magenta, yellow, black @deprecated@ */
+  CUPS_CSPACE_GMCS = 11,		/* Gold, magenta, yellow, silver @deprecated@ */
+  CUPS_CSPACE_WHITE = 12,		/* White ink (as black) @deprecated@ */
+  CUPS_CSPACE_GOLD = 13,		/* Gold foil @deprecated@ */
+  CUPS_CSPACE_SILVER = 14,		/* Silver foil @deprecated@ */
 
-  CUPS_CSPACE_CIEXYZ = 15,		/* CIE XYZ @since CUPS 1.1.19@ */
-  CUPS_CSPACE_CIELab = 16,		/* CIE Lab @since CUPS 1.1.19@ */
-  CUPS_CSPACE_RGBW = 17,		/* Red, green, blue, white @since CUPS 1.2@ */
+  CUPS_CSPACE_CIEXYZ = 15,		/* CIE XYZ @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_CIELab = 16,		/* CIE Lab @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_RGBW = 17,		/* Red, green, blue, white (DeviceRGB, sRGB by default) @since CUPS 1.2/Mac OS X 10.5@ */
+  CUPS_CSPACE_SW = 18,			/* Luminance (gamma 2.2) @since CUPS 1.4.5@ */
+  CUPS_CSPACE_SRGB = 19,		/* Red, green, blue (sRGB) @since CUPS 1.4.5@ */
+  CUPS_CSPACE_ADOBERGB = 20,		/* Red, green, blue (Adobe RGB) @since CUPS 1.4.5@ */
 
-  CUPS_CSPACE_ICC1 = 32,		/* ICC-based, 1 color @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC2 = 33,		/* ICC-based, 2 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC3 = 34,		/* ICC-based, 3 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC4 = 35,		/* ICC-based, 4 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC5 = 36,		/* ICC-based, 5 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC6 = 37,		/* ICC-based, 6 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC7 = 38,		/* ICC-based, 7 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC8 = 39,		/* ICC-based, 8 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICC9 = 40,		/* ICC-based, 9 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCA = 41,		/* ICC-based, 10 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCB = 42,		/* ICC-based, 11 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCC = 43,		/* ICC-based, 12 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCD = 44,		/* ICC-based, 13 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCE = 45,		/* ICC-based, 14 colors @since CUPS 1.1.19@ */
-  CUPS_CSPACE_ICCF = 46			/* ICC-based, 15 colors @since CUPS 1.1.19@ */
+  CUPS_CSPACE_ICC1 = 32,		/* ICC-based, 1 color @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC2 = 33,		/* ICC-based, 2 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC3 = 34,		/* ICC-based, 3 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC4 = 35,		/* ICC-based, 4 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC5 = 36,		/* ICC-based, 5 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC6 = 37,		/* ICC-based, 6 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC7 = 38,		/* ICC-based, 7 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC8 = 39,		/* ICC-based, 8 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICC9 = 40,		/* ICC-based, 9 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCA = 41,		/* ICC-based, 10 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCB = 42,		/* ICC-based, 11 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCC = 43,		/* ICC-based, 12 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCD = 44,		/* ICC-based, 13 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCE = 45,		/* ICC-based, 14 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+  CUPS_CSPACE_ICCF = 46,		/* ICC-based, 15 colors @since CUPS 1.1.19/Mac OS X 10.3@ */
+
+  CUPS_CSPACE_DEVICE1 = 48,		/* DeviceN, 1 color @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE2 = 49,		/* DeviceN, 2 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE3 = 50,		/* DeviceN, 3 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE4 = 51,		/* DeviceN, 4 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE5 = 52,		/* DeviceN, 5 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE6 = 53,		/* DeviceN, 6 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE7 = 54,		/* DeviceN, 7 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE8 = 55,		/* DeviceN, 8 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICE9 = 56,		/* DeviceN, 9 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICEA = 57,		/* DeviceN, 10 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICEB = 58,		/* DeviceN, 11 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICEC = 59,		/* DeviceN, 12 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICED = 60,		/* DeviceN, 13 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICEE = 61,		/* DeviceN, 14 colors @since CUPS 1.4.5@ */
+  CUPS_CSPACE_DEVICEF = 62		/* DeviceN, 15 colors @since CUPS 1.4.5@ */
 } cups_cspace_t;
 
 typedef enum cups_cut_e			/**** CutMedia attribute values ****/
@@ -147,12 +165,14 @@ typedef enum cups_jog_e			/**** Jog attribute values ****/
   CUPS_JOG_SET = 3			/* Move pages after this set */
 } cups_jog_t;
 
-typedef enum cups_mode_e		/**** Raster modes ****/
+enum cups_mode_e			/**** cupsRasterOpen modes ****/
 {
   CUPS_RASTER_READ = 0,			/* Open stream for reading */
   CUPS_RASTER_WRITE = 1,		/* Open stream for writing */
-  CUPS_RASTER_WRITE_COMPRESSED = 2	/* Open stream for compressed writing @since CUPS 1.3@ */
-} cups_mode_t;
+  CUPS_RASTER_WRITE_COMPRESSED = 2	/* Open stream for compressed writing @since CUPS 1.3/Mac OS X 10.5@ */
+};
+
+typedef enum cups_mode_e cups_mode_t;	/**** cupsRasterOpen modes ****/
 
 typedef enum cups_order_e		/**** cupsColorOrder attribute values ****/
 {
@@ -179,7 +199,7 @@ typedef enum cups_orient_e		/**** Orientation attribute values ****/
  * (from CUPS 1.2 and higher) page header, for binary compatibility.
  */
 
-typedef struct cups_page_header_s	/**** Version 1 Page Header ****/
+typedef struct cups_page_header_s	/**** Version 1 page header @deprecated@ ****/
 {
   /**** Standard Page Device Dictionary String Values ****/
   char		MediaClass[64];		/* MediaClass string */
@@ -189,15 +209,15 @@ typedef struct cups_page_header_s	/**** Version 1 Page Header ****/
 
   /**** Standard Page Device Dictionary Integer Values ****/
   unsigned	AdvanceDistance;	/* AdvanceDistance value in points */
-  cups_adv_t	AdvanceMedia;		/* AdvanceMedia value (see above) */
+  cups_adv_t	AdvanceMedia;		/* AdvanceMedia value (@link cups_adv_t@) */
   cups_bool_t	Collate;		/* Collated copies value */
-  cups_cut_t	CutMedia;		/* CutMedia value (see above) */
+  cups_cut_t	CutMedia;		/* CutMedia value (@link cups_cut_t@) */
   cups_bool_t	Duplex;			/* Duplexed (double-sided) value */
   unsigned	HWResolution[2];	/* Resolution in dots-per-inch */
-  unsigned	ImagingBoundingBox[4];	/* Pixel region that is painted (points) */
+  unsigned	ImagingBoundingBox[4];	/* Pixel region that is painted (points, left, bottom, right, top) */
   cups_bool_t	InsertSheet;		/* InsertSheet value */
-  cups_jog_t	Jog;			/* Jog value (see above) */
-  cups_edge_t	LeadingEdge;		/* LeadingEdge value (see above) */
+  cups_jog_t	Jog;			/* Jog value (@link cups_jog_t@) */
+  cups_edge_t	LeadingEdge;		/* LeadingEdge value (@link cups_edge_t@) */
   unsigned	Margins[2];		/* Lower-lefthand margins in points */
   cups_bool_t	ManualFeed;		/* ManualFeed value */
   unsigned	MediaPosition;		/* MediaPosition value */
@@ -205,7 +225,7 @@ typedef struct cups_page_header_s	/**** Version 1 Page Header ****/
   cups_bool_t	MirrorPrint;		/* MirrorPrint value */
   cups_bool_t	NegativePrint;		/* NegativePrint value */
   unsigned	NumCopies;		/* Number of copies to produce */
-  cups_orient_t	Orientation;		/* Orientation value (see above) */
+  cups_orient_t	Orientation;		/* Orientation value (@link cups_orient_t@) */
   cups_bool_t	OutputFaceUp;		/* OutputFaceUp value */
   unsigned	PageSize[2];		/* Width and length of page in points */
   cups_bool_t	Separations;		/* Separations value */
@@ -228,7 +248,7 @@ typedef struct cups_page_header_s	/**** Version 1 Page Header ****/
 } cups_page_header_t;
 
 /**** New in CUPS 1.2 ****/
-typedef struct cups_page_header2_s	/**** Version 2 Page Header @since CUPS 1.2@ ****/
+typedef struct cups_page_header2_s	/**** Version 2 page header @since CUPS 1.2/Mac OS X 10.5@ ****/
 {
   /**** Standard Page Device Dictionary String Values ****/
   char		MediaClass[64];		/* MediaClass string */
@@ -238,15 +258,15 @@ typedef struct cups_page_header2_s	/**** Version 2 Page Header @since CUPS 1.2@ 
 
   /**** Standard Page Device Dictionary Integer Values ****/
   unsigned	AdvanceDistance;	/* AdvanceDistance value in points */
-  cups_adv_t	AdvanceMedia;		/* AdvanceMedia value (see above) */
+  cups_adv_t	AdvanceMedia;		/* AdvanceMedia value (@link cups_adv_t@) */
   cups_bool_t	Collate;		/* Collated copies value */
-  cups_cut_t	CutMedia;		/* CutMedia value (see above) */
+  cups_cut_t	CutMedia;		/* CutMedia value (@link cups_cut_t@) */
   cups_bool_t	Duplex;			/* Duplexed (double-sided) value */
   unsigned	HWResolution[2];	/* Resolution in dots-per-inch */
-  unsigned	ImagingBoundingBox[4];	/* Pixel region that is painted (points) */
+  unsigned	ImagingBoundingBox[4];	/* Pixel region that is painted (points, left, bottom, right, top) */
   cups_bool_t	InsertSheet;		/* InsertSheet value */
-  cups_jog_t	Jog;			/* Jog value (see above) */
-  cups_edge_t	LeadingEdge;		/* LeadingEdge value (see above) */
+  cups_jog_t	Jog;			/* Jog value (@link cups_jog_t@) */
+  cups_edge_t	LeadingEdge;		/* LeadingEdge value (@link cups_edge_t@) */
   unsigned	Margins[2];		/* Lower-lefthand margins in points */
   cups_bool_t	ManualFeed;		/* ManualFeed value */
   unsigned	MediaPosition;		/* MediaPosition value */
@@ -254,7 +274,7 @@ typedef struct cups_page_header2_s	/**** Version 2 Page Header @since CUPS 1.2@ 
   cups_bool_t	MirrorPrint;		/* MirrorPrint value */
   cups_bool_t	NegativePrint;		/* NegativePrint value */
   unsigned	NumCopies;		/* Number of copies to produce */
-  cups_orient_t	Orientation;		/* Orientation value (see above) */
+  cups_orient_t	Orientation;		/* Orientation value (@link cups_orient_t@) */
   cups_bool_t	OutputFaceUp;		/* OutputFaceUp value */
   unsigned	PageSize[2];		/* Width and length of page in points */
   cups_bool_t	Separations;		/* Separations value */
@@ -276,25 +296,38 @@ typedef struct cups_page_header2_s	/**** Version 2 Page Header @since CUPS 1.2@ 
   unsigned	cupsRowStep;		/* Spacing between lines */
 
   /**** Version 2 Dictionary Values ****/
-  unsigned	cupsNumColors;		/* Number of colors @since CUPS 1.2@ */
+  unsigned	cupsNumColors;		/* Number of color compoents @since CUPS 1.2/Mac OS X 10.5@ */
   float		cupsBorderlessScalingFactor;
-					/* Scaling that was applied to page data @since CUPS 1.2@ */
+					/* Scaling that was applied to page data @since CUPS 1.2/Mac OS X 10.5@ */
   float		cupsPageSize[2];	/* Floating point PageSize (scaling *
-  					 * factor not applied) @since CUPS 1.2@ */
-  float		cupsImagingBBox[4];	/* Floating point ImagingBoundingBox *
-					 * (scaling factor not applied) @since CUPS 1.2@ */
-  unsigned	cupsInteger[16];	/* User-defined integer values @since CUPS 1.2@ */
-  float		cupsReal[16];		/* User-defined floating-point values @since CUPS 1.2@ */
-  char		cupsString[16][64];	/* User-defined string values @since CUPS 1.2@ */
-  char		cupsMarkerType[64];	/* Ink/toner type @since CUPS 1.2@ */
-  char		cupsRenderingIntent[64];/* Color rendering intent @since CUPS 1.2@ */
-  char		cupsPageSizeName[64];	/* PageSize name @since CUPS 1.2@ */
+  					 * factor not applied) @since CUPS 1.2/Mac OS X 10.5@ */
+  float		cupsImagingBBox[4];	/* Floating point ImagingBoundingBox
+					 * (scaling factor not applied, left,
+					 * bottom, right, top) @since CUPS 1.2/Mac OS X 10.5@ */
+  unsigned	cupsInteger[16];	/* User-defined integer values @since CUPS 1.2/Mac OS X 10.5@ */
+  float		cupsReal[16];		/* User-defined floating-point values @since CUPS 1.2/Mac OS X 10.5@ */
+  char		cupsString[16][64];	/* User-defined string values @since CUPS 1.2/Mac OS X 10.5@ */
+  char		cupsMarkerType[64];	/* Ink/toner type @since CUPS 1.2/Mac OS X 10.5@ */
+  char		cupsRenderingIntent[64];/* Color rendering intent @since CUPS 1.2/Mac OS X 10.5@ */
+  char		cupsPageSizeName[64];	/* PageSize name @since CUPS 1.2/Mac OS X 10.5@ */
 } cups_page_header2_t;
 
 typedef struct _cups_raster_s cups_raster_t;
 					/**** Raster stream data ****/
 
 typedef int (*cups_interpret_cb_t)(cups_page_header2_t *header, int preferred_bits);
+					/**** cupsRasterInterpretPPD callback function
+					 *
+					 * This function is called by
+					 * @link cupsRasterInterpretPPD@ to
+					 * validate (and update, as needed)
+					 * the page header attributes. The
+					 * "preferred_bits" argument provides
+					 * the value of the
+					 * @code cupsPreferredBitsPerColor@
+					 * key from the PostScript page device
+					 * dictionary and is 0 if undefined.
+					 ****/
 
 
 /*
@@ -304,11 +337,11 @@ typedef int (*cups_interpret_cb_t)(cups_page_header2_t *header, int preferred_bi
 extern void		cupsRasterClose(cups_raster_t *r);
 extern cups_raster_t	*cupsRasterOpen(int fd, cups_mode_t mode);
 extern unsigned		cupsRasterReadHeader(cups_raster_t *r,
-			                     cups_page_header_t *h);
+			                     cups_page_header_t *h) _CUPS_DEPRECATED;
 extern unsigned		cupsRasterReadPixels(cups_raster_t *r,
 			                     unsigned char *p, unsigned len);
 extern unsigned		cupsRasterWriteHeader(cups_raster_t *r,
-			                      cups_page_header_t *h);
+			                      cups_page_header_t *h) _CUPS_DEPRECATED;
 extern unsigned		cupsRasterWritePixels(cups_raster_t *r,
 			                      unsigned char *p, unsigned len);
 
@@ -317,14 +350,14 @@ extern int		cupsRasterInterpretPPD(cups_page_header2_t *h,
 			                       ppd_file_t *ppd,
 					       int num_options,
 					       cups_option_t *options,
-					       cups_interpret_cb_t func);
+					       cups_interpret_cb_t func) _CUPS_API_1_2;
 extern unsigned		cupsRasterReadHeader2(cups_raster_t *r,
-			                      cups_page_header2_t *h);
+			                      cups_page_header2_t *h) _CUPS_API_1_2;
 extern unsigned		cupsRasterWriteHeader2(cups_raster_t *r,
-			                       cups_page_header2_t *h);
+			                       cups_page_header2_t *h) _CUPS_API_1_2;
 
 /**** New in CUPS 1.3 ****/
-extern const char	*cupsRasterErrorString(void);
+extern const char	*cupsRasterErrorString(void) _CUPS_API_1_3;
 
 #  ifdef __cplusplus
 }
@@ -333,5 +366,5 @@ extern const char	*cupsRasterErrorString(void);
 #endif /* !_CUPS_RASTER_H_ */
 
 /*
- * End of "$Id: raster.h 6649 2007-07-11 21:46:42Z mike $".
+ * End of "$Id: raster.h 2560 2010-08-31 18:08:43Z msweet $".
  */

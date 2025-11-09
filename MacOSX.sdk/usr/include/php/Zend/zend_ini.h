@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_ini.h,v 1.34.2.1.2.7 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_ini.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_INI_H
 #define ZEND_INI_H
@@ -77,6 +77,7 @@ struct _zend_ini_entry {
 
 	char *orig_value;
 	uint orig_value_length;
+	int orig_modifiable;
 	int modified;
 
 	void (*displayer)(zend_ini_entry *ini_entry, int type);
@@ -92,17 +93,18 @@ ZEND_API int zend_copy_ini_directives(TSRMLS_D);
 
 ZEND_API void zend_ini_sort_entries(TSRMLS_D);
 
-ZEND_API int zend_register_ini_entries(zend_ini_entry *ini_entry, int module_number TSRMLS_DC);
+ZEND_API int zend_register_ini_entries(const zend_ini_entry *ini_entry, int module_number TSRMLS_DC);
 ZEND_API void zend_unregister_ini_entries(int module_number TSRMLS_DC);
 ZEND_API void zend_ini_refresh_caches(int stage TSRMLS_DC);
 ZEND_API int zend_alter_ini_entry(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage);
-ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage, int force_change);
+ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage, int force_change TSRMLS_DC);
 ZEND_API int zend_restore_ini_entry(char *name, uint name_length, int stage);
 ZEND_API void display_ini_entries(zend_module_entry *module);
 
 ZEND_API long zend_ini_long(char *name, uint name_length, int orig);
 ZEND_API double zend_ini_double(char *name, uint name_length, int orig);
 ZEND_API char *zend_ini_string(char *name, uint name_length, int orig);
+ZEND_API char *zend_ini_string_ex(char *name, uint name_length, int orig, zend_bool *exists);
 
 ZEND_API int zend_ini_register_displayer(char *name, uint name_length, void (*displayer)(zend_ini_entry *ini_entry, int type));
 
@@ -111,11 +113,11 @@ ZEND_API ZEND_INI_DISP(zend_ini_color_displayer_cb);
 ZEND_API ZEND_INI_DISP(display_link_numbers);
 END_EXTERN_C()
 
-#define ZEND_INI_BEGIN()		static zend_ini_entry ini_entries[] = {
-#define ZEND_INI_END()		{ 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, 0, NULL } };
+#define ZEND_INI_BEGIN()		static const zend_ini_entry ini_entries[] = {
+#define ZEND_INI_END()		{ 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, 0, 0, NULL } };
 
 #define ZEND_INI_ENTRY3_EX(name, default_value, modifiable, on_modify, arg1, arg2, arg3, displayer) \
-	{ 0, modifiable, name, sizeof(name), on_modify, arg1, arg2, arg3, default_value, sizeof(default_value)-1, NULL, 0, 0, displayer },
+	{ 0, modifiable, name, sizeof(name), on_modify, arg1, arg2, arg3, default_value, sizeof(default_value)-1, NULL, 0, 0, 0, displayer },
 
 #define ZEND_INI_ENTRY3(name, default_value, modifiable, on_modify, arg1, arg2, arg3) \
 	ZEND_INI_ENTRY3_EX(name, default_value, modifiable, on_modify, arg1, arg2, arg3, NULL)
@@ -156,14 +158,13 @@ END_EXTERN_C()
 
 #define INI_INT(name) zend_ini_long((name), sizeof(name), 0)
 #define INI_FLT(name) zend_ini_double((name), sizeof(name), 0)
-#define INI_STR(name) zend_ini_string((name), sizeof(name), 0)
+#define INI_STR(name) zend_ini_string_ex((name), sizeof(name), 0, NULL)
 #define INI_BOOL(name) ((zend_bool) INI_INT(name))
 
 #define INI_ORIG_INT(name)	zend_ini_long((name), sizeof(name), 1)
 #define INI_ORIG_FLT(name)	zend_ini_double((name), sizeof(name), 1)
 #define INI_ORIG_STR(name)	zend_ini_string((name), sizeof(name), 1)
 #define INI_ORIG_BOOL(name) ((zend_bool) INI_ORIG_INT(name))
-
 
 #define REGISTER_INI_ENTRIES() zend_register_ini_entries(ini_entries, module_number TSRMLS_CC)
 #define UNREGISTER_INI_ENTRIES() zend_unregister_ini_entries(module_number TSRMLS_CC)
@@ -193,15 +194,16 @@ END_EXTERN_C()
 #define ZEND_INI_STAGE_HTACCESS		(1<<5)
 
 /* INI parsing engine */
-typedef void (*zend_ini_parser_cb_t)(zval *arg1, zval *arg2, int callback_type, void *arg);
+typedef void (*zend_ini_parser_cb_t)(zval *arg1, zval *arg2, zval *arg3, int callback_type, void *arg TSRMLS_DC);
 BEGIN_EXTERN_C()
-ZEND_API int zend_parse_ini_file(zend_file_handle *fh, zend_bool unbuffered_errors, zend_ini_parser_cb_t ini_parser_cb, void *arg);
-ZEND_API int zend_parse_ini_string(char *str, zend_bool unbuffered_errors, zend_ini_parser_cb_t ini_parser_cb, void *arg);
+ZEND_API int zend_parse_ini_file(zend_file_handle *fh, zend_bool unbuffered_errors, int scanner_mode, zend_ini_parser_cb_t ini_parser_cb, void *arg TSRMLS_DC);
+ZEND_API int zend_parse_ini_string(char *str, zend_bool unbuffered_errors, int scanner_mode, zend_ini_parser_cb_t ini_parser_cb, void *arg TSRMLS_DC);
 END_EXTERN_C()
 
-#define ZEND_INI_PARSER_ENTRY	1
-#define ZEND_INI_PARSER_SECTION	2
-#define ZEND_INI_PARSER_POP_ENTRY	3
+/* INI entries */
+#define ZEND_INI_PARSER_ENTRY     1 /* Normal entry: foo = bar */
+#define ZEND_INI_PARSER_SECTION	  2 /* Section: [foobar] */
+#define ZEND_INI_PARSER_POP_ENTRY 3 /* Offset entry: foo[] = bar */
 
 typedef struct _zend_ini_parser_param {
 	zend_ini_parser_cb_t ini_parser_cb;

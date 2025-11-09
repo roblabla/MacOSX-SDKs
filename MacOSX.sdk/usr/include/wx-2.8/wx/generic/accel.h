@@ -2,7 +2,7 @@
 // Name:        wx/generic/accel.h
 // Purpose:     wxAcceleratorTable class
 // Author:      Robert Roebling
-// RCS-ID:      $Id: accel.h,v 1.14 2006/10/30 19:25:54 VZ Exp $
+// RCS-ID:      $Id: accel.h 42752 2006-10-30 19:26:48Z VZ $
 // Copyright:   (c) Robert Roebling
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

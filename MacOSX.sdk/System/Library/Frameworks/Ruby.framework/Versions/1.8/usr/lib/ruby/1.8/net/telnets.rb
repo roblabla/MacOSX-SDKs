@@ -11,7 +11,7 @@
   (See the file 'LICENCE'.)
 
 = Version
-  $Id: telnets.rb 11708 2007-02-12 23:01:19Z shyouhei $
+  $Id: telnets.rb 13657 2007-10-08 11:16:54Z gotoyuzo $
   
   2001/11/06: Contiributed to Ruby/OpenSSL project.
 
@@ -134,6 +134,9 @@ module Net
             @sock.verify_callback = @options['VerifyCallback']
             @sock.verify_depth    = @options['VerifyDepth']
             @sock.connect
+            if @options['VerifyMode'] != OpenSSL::SSL::VERIFY_NONE
+              @sock.post_connection_check(@options['Host'])
+            end
             @ssl = true
           end
           ''

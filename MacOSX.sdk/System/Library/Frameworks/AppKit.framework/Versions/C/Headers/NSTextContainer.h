@@ -1,11 +1,11 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2007, Apple Inc.
+        Copyright (c) 1994-2009, Apple Inc.
         All rights reserved.
 */
 
-// An NSTextContainer defines a region in which to lay out text.  It's main responsibility is to calculate line fragments which fall within the region it represents.  Containers have a line fragment padding which is used by the typesetter to inset text from the edges of line fragments along the sweep direction.
+// An NSTextContainer defines a region in which to lay out text.  Its main responsibility is to calculate line fragments which fall within the region it represents.  Containers have a line fragment padding which is used by the typesetter to inset text from the edges of line fragments along the sweep direction.
 // The container can enforce any other geometric constraints as well.  When drawing the text that has been laid in a container, a NSTextView will clip to the interior of the container (it clips to the container's rectagular area only, however, not to the arbitrary shape the container may define for text flow).
 
 #import <Foundation/NSObject.h>
@@ -72,13 +72,13 @@ typedef NSUInteger NSLineMovementDirection;
 - (BOOL)widthTracksTextView;
 - (void)setHeightTracksTextView:(BOOL)flag;
 - (BOOL)heightTracksTextView;
-    // If a container tracks the size of it's view in one or both of these dimensions then those dimensions will be kept in synch with with the view's frame (taking into account the views textContainerInset).
+    // If a container tracks the size of it's view in one or both of these dimensions then those dimensions will be kept in synch with with the view's frame (taking into account the view's textContainerInset).
 
 /************************* Container size and padding *************************/
 
 - (void)setContainerSize:(NSSize)size;
 - (NSSize)containerSize;
-    // Sets/Returns the current size of the container.  This size has nothing to do with how much text is in the container and how much space it takes up (which the container is not in a position to know).  It is basically the maximum flowable area of the container.  The NSTextView's size will not generally have much connection to this size.  The NSTextView will generally want to be big enough to display all the text which has been laid in the container at the moment and no bigger.  The NSLayoutManager will generally be in charge of telling the view what size it should be.
+    // Sets/returns the current size of the container.  This size has nothing to do with how much text is in the container and how much space it takes up (which the container is not in a position to know).  It is basically the maximum flowable area of the container.  The NSTextView's size will not generally have much connection to this size.  The NSTextView will generally want to be big enough to display all the text which has been laid in the container at the moment and no bigger.  The NSLayoutManager will generally be in charge of telling the view what size it should be.
 
 - (void)setLineFragmentPadding:(CGFloat)pad;
 - (CGFloat)lineFragmentPadding;

@@ -1,14 +1,13 @@
 /*
 	File:		QTKitDefines.h
 
-	Copyright:	(c)2004-2007 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2010 by Apple Inc., all rights reserved.
 
 */
 
-
-#ifndef _QTKITDEFINES_H
-#define _QTKITDEFINES_H
-
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER       WEAK_IMPORT_ATTRIBUTE
+#endif
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
 #define AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER       WEAK_IMPORT_ATTRIBUTE
 #endif
@@ -27,6 +26,9 @@
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5
 #define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
 #endif
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6
+#define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
+#endif
 
 #ifndef MAC_OS_X_VERSION_10_4
 #define MAC_OS_X_VERSION_10_4		1040
@@ -42,13 +44,20 @@
 #define MAC_OS_X_VERSION_10_5		1050
 #endif
 
+#ifndef MAC_OS_X_VERSION_10_6
+#define MAC_OS_X_VERSION_10_6		1060
+#else
+#undef MAC_OS_X_VERSION_10_6
+#define MAC_OS_X_VERSION_10_6		1060
+#endif
+
 /*
  QTKit Availability Macros
  
  These macros allow applications to target specific versions of QTKit independently
  of the OS on which the application is built. To target one or more versions of
  QTKit, you can use the QTKIT_VERSION_MIN_REQUIRED and the QTKIT_VERSION_MAX_ALLOWED
- macros in a a way that is analagous to MAC_OS_X_VERSION_MIN_REQUIRED and
+ macros in a way that is analagous to MAC_OS_X_VERSION_MIN_REQUIRED and
  MAC_OS_X_VERSION_MAX_ALLOWED as described in /usr/include/AvailabilityMacros.h. By
  default, the macros are configured to weak-link to symbols as necessary for the
  application to run on all target versions of Max OS X.
@@ -62,25 +71,27 @@
  of QTKit in which an API is supported. For example, applications targeting APIs
  introduced for QTKit 7.2 should make sure they are running against QuickTime 7.2.1
  or later, which is the first release for which the QuickTime 7.2 SDK is supported.
- One way to check the QuickTime version is use the Gestalt API. For example, to use
- an API that first became supported in QTKit 7.2, an application would do the
- following:
  
- OSErr err;
- UInt32 qtVersion;
+ One way to check the QuickTime version is use the NSBundle API. For example, to
+ ensure that an application is running on a version of QTKit that targetVersion
+ or later, it can call
  
- err = Gestalt(gestaltQuickTimeVersion, &qtVersion);
- if ((err == noErr) && (qtVersion >= 0x07210000)) {
-     // Use API introduced in QTKit 7.2.1
- }
+ if ([[[[NSBundle bundleWithIdentifier:@"com.apple.QTKit"] infoDictionary]
+	 objectForKey:(NSString *)kCFBundleVersionKey] doubleValue] >= targetVersion) {
+     // Do something only available on targetVersion or later
+ } 
  
  */
 
 #define QTKIT_VERSION_7_0           70000
 #define QTKIT_VERSION_7_2           70200
+#define QTKIT_VERSION_7_6_3         70603
+#define QTKIT_VERSION_7_6_6         70606
 
 #ifndef QTKIT_VERSION_MIN_REQUIRED
-    #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
+    #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_6
+        #define QTKIT_VERSION_MIN_REQUIRED QTKIT_VERSION_7_6_3
+    #elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
         #define QTKIT_VERSION_MIN_REQUIRED QTKIT_VERSION_7_2
     #else
         #define QTKIT_VERSION_MIN_REQUIRED QTKIT_VERSION_7_0
@@ -88,7 +99,7 @@
 #endif
 
 #ifndef QTKIT_VERSION_MAX_ALLOWED
-    #define QTKIT_VERSION_MAX_ALLOWED QTKIT_VERSION_7_2
+    #define QTKIT_VERSION_MAX_ALLOWED QTKIT_VERSION_7_6_6
 #endif
 
 // error on bad values
@@ -97,6 +108,95 @@
 #endif
 #if QTKIT_VERSION_MIN_REQUIRED < QTKIT_VERSION_7_0
     #error QTKIT_VERSION_MIN_REQUIRED must be >= QTKIT_VERSION_7_0
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_0_AND_LATER
+ * 
+ * Used on declarations introduced in QTKit 7.0 
+ */
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4
+	/* QTKit 7.0 or later is not installed on all versions of Mac OS prior to 10.4 */
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_2_AND_LATER
+ * 
+ * Used on declarations introduced in QTKit 7.2
+ */
+#if QTKIT_VERSION_MAX_ALLOWED < QTKIT_VERSION_7_2
+	#define AVAILABLE_QTKIT_VERSION_7_2_AND_LATER UNAVAILABLE_ATTRIBUTE
+#elif (QTKIT_VERSION_MIN_REQUIRED < QTKIT_VERSION_7_2) || (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5)
+	/* QTKit 7.2 or later is not installed on all versions of Mac OS prior to 10.5 */
+	#define AVAILABLE_QTKIT_VERSION_7_2_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_2_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_2
+ * 
+ * Used on declarations introduced in QTKit 7.0, 
+ * but later deprecated in QTKit 7.2
+ */
+#if QTKIT_VERSION_MIN_REQUIRED >= QTKIT_VERSION_7_2
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_2 DEPRECATED_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_2 AVAILABLE_QTKIT_VERSION_7_0_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER
+ * 
+ * Used on declarations introduced in QTKit 7.5.7
+ */
+#if QTKIT_VERSION_MAX_ALLOWED < QTKIT_VERSION_7_6_3
+	#define AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER UNAVAILABLE_ATTRIBUTE
+#elif (QTKIT_VERSION_MIN_REQUIRED < QTKIT_VERSION_7_6_3) || (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_6)
+	/* QTKit 7.5.7 or later is not installed on all versions of Mac OS prior to 10.6 */
+	#define AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_6_6_AND_LATER
+ * 
+ * Used on declarations introduced in QTKit 7.6.6
+ */
+#if QTKIT_VERSION_MAX_ALLOWED < QTKIT_VERSION_7_6_6
+	#define AVAILABLE_QTKIT_VERSION_7_6_6_AND_LATER UNAVAILABLE_ATTRIBUTE
+#elif (QTKIT_VERSION_MIN_REQUIRED < QTKIT_VERSION_7_6_6) || (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_6)
+	#define AVAILABLE_QTKIT_VERSION_7_6_6_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_6_6_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3
+ * 
+ * Used on declarations introduced in QTKit 7.2, 
+ * but later deprecated in QTKit 7.5.7
+ */
+#if QTKIT_VERSION_MIN_REQUIRED >= QTKIT_VERSION_7_6_3
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3 DEPRECATED_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3 AVAILABLE_QTKIT_VERSION_7_0_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3
+ * 
+ * Used on declarations introduced in QTKit 7.2, 
+ * but later deprecated in QTKit 7.5.7
+ */
+#if QTKIT_VERSION_MIN_REQUIRED >= QTKIT_VERSION_7_6_3
+	#define AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3 DEPRECATED_ATTRIBUTE
+#else
+	#define AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3 AVAILABLE_QTKIT_VERSION_7_2_AND_LATER
 #endif
 
 #ifdef __cplusplus
@@ -128,31 +228,6 @@ typedef unsigned int NSUInteger;
 
 #if __LP64__
 // constants and data types defined in the 32-bit QuickTime headers that may be required for some QTKit APIs
-	// from Movies.h
-enum {
-	VideoMediaType						= 'vide',
-	SoundMediaType						= 'soun',
-	TextMediaType						= 'text',
-	BaseMediaType						= 'gnrc',
-	MPEGMediaType						= 'MPEG',
-	MusicMediaType						= 'musi',
-	TimeCodeMediaType					= 'tmcd',
-	SpriteMediaType						= 'sprt',
-	FlashMediaType						= 'flsh',
-	MovieMediaType						= 'moov',
-	TweenMediaType						= 'twen',
-	ThreeDeeMediaType					= 'qd3d',
-	SkinMediaType						= 'skin',
-	HandleDataHandlerSubType			= 'hndl',
-	PointerDataHandlerSubType			= 'ptr ',
-	NullDataHandlerSubType				= 'null',
-	ResourceDataHandlerSubType			= 'rsrc',
-	URLDataHandlerSubType				= 'url ',
-	AliasDataHandlerSubType				= 'alis',
-	WiredActionHandlerType				= 'wire',
-	kQTQuartzComposerMediaType			= 'qtz ',
-	TimeCode64MediaType					= 'tc64'
-};
 
 	// from QuickTimeComponents.h
 enum {
@@ -207,80 +282,6 @@ enum {
 };
 
 enum {
-	kRawCodecType						= 'raw ',
-	kCinepakCodecType 					= 'cvid',
-	kGraphicsCodecType					= 'smc ',
-	kAnimationCodecType 				= 'rle ',
-	kVideoCodecType 					= 'rpza',
-	kComponentVideoCodecType			= 'yuv2',
-	kJPEGCodecType						= 'jpeg',
-	kMotionJPEGACodecType 				= 'mjpa',
-	kMotionJPEGBCodecType 				= 'mjpb',
-	kSGICodecType 						= '.SGI',
-	kPlanarRGBCodecType 				= '8BPS',
-	kMacPaintCodecType					= 'PNTG',
-	kGIFCodecType 						= 'gif ',
-	kPhotoCDCodecType 					= 'kpcd',
-	kQuickDrawGXCodecType 				= 'qdgx',
-	kAVRJPEGCodecType 					= 'avr ',
-	kOpenDMLJPEGCodecType 				= 'dmb1',
-	kBMPCodecType 						= 'WRLE',
-	kWindowsRawCodecType				= 'WRAW',
-	kVectorCodecType					= 'path',
-	kQuickDrawCodecType 				= 'qdrw',
-	kWaterRippleCodecType 				= 'ripl',
-	kFireCodecType						= 'fire',
-	kCloudCodecType 					= 'clou',
-	kH261CodecType						= 'h261',
-	kH263CodecType						= 'h263',
-	kDVCNTSCCodecType					= 'dvc ',	/* DV - NTSC and DVCPRO NTSC (available in QuickTime 6.0 or later)*/
-													/* NOTE: kDVCProNTSCCodecType is deprecated.	*/
-													/* Use kDVCNTSCCodecType instead -- as far as the codecs are concerned, */
-													/* the two data formats are identical.*/
-	kDVCPALCodecType					= 'dvcp',
-	kDVCProPALCodecType 				= 'dvpp',	/* available in QuickTime 6.0 or later*/
-	kDVCPro50NTSCCodecType				= 'dv5n',
-	kDVCPro50PALCodecType 				= 'dv5p',
-	kDVCPro100NTSCCodecType 			= 'dv1n',
-	kDVCPro100PALCodecType				= 'dv1p',
-	kDVCPROHD720pCodecType				= 'dvhp',
-	kDVCPROHD1080i60CodecType			= 'dvh6',
-	kDVCPROHD1080i50CodecType			= 'dvh5',
-	kBaseCodecType						= 'base',
-	kFLCCodecType 						= 'flic',
-	kTargaCodecType 					= 'tga ',
-	kPNGCodecType 						= 'png ',
-	kTIFFCodecType						= 'tiff',	/* NOTE: despite what might seem obvious from the two constants*/
-													/* below and their names, they really are correct. 'yuvu' really */
-													/* does mean signed, and 'yuvs' really does mean unsigned. Really. */
-	kComponentVideoSigned 				= 'yuvu',
-	kComponentVideoUnsigned 			= 'yuvs',
-	kCMYKCodecType						= 'cmyk',
-	kMicrosoftVideo1CodecType			= 'msvc',
-	kSorensonCodecType					= 'SVQ1',
-	kSorenson3CodecType 				= 'SVQ3',	/* available in QuickTime 5 and later*/
-	kIndeo4CodecType					= 'IV41',
-	kMPEG4VisualCodecType 				= 'mp4v',
-	k64ARGBCodecType					= 'b64a',
-	k48RGBCodecType 					= 'b48r',
-	k32AlphaGrayCodecType 				= 'b32a',
-	k16GrayCodecType					= 'b16g',
-	kMpegYUV420CodecType				= 'myuv',
-	kYUV420CodecType					= 'y420',
-	kSorensonYUV9CodecType				= 'syv9',
-	k422YpCbCr8CodecType				= '2vuy',	/* Component Y'CbCr 8-bit 4:2:2	*/
-	k444YpCbCr8CodecType				= 'v308',	/* Component Y'CbCr 8-bit 4:4:4	*/
-	k4444YpCbCrA8CodecType				= 'v408',	/* Component Y'CbCrA 8-bit 4:4:4:4 */
-	k422YpCbCr16CodecType 				= 'v216',	/* Component Y'CbCr 10,12,14,16-bit 4:2:2*/
-	k422YpCbCr10CodecType 				= 'v210',	/* Component Y'CbCr 10-bit 4:2:2 */
-	k444YpCbCr10CodecType 				= 'v410',	/* Component Y'CbCr 10-bit 4:4:4 */
-	k4444YpCbCrA8RCodecType 			= 'r408',	/* Component Y'CbCrA 8-bit 4:4:4:4, rendering format. full range alpha, zero biased yuv*/
-	kJPEG2000CodecType					= 'mjp2',
-	kPixletCodecType					= 'pxlt',
-	kH264CodecType						= 'avc1'
-};
-
-enum {
 	graphicsModeStraightAlpha			= 256,
 	graphicsModePreWhiteAlpha			= 257,
 	graphicsModePreBlackAlpha			= 258,
@@ -291,6 +292,3 @@ enum {
 };
 
 #endif	/* __LP64__ */
-
-
-#endif	/* _QTKITDEFINES_H */

@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <SyncServices/ISyncCommon.h>
 @protocol ISyncSessionDriverDataSource;
@@ -51,7 +51,7 @@ typedef enum {
    Sample usage case:
    ISyncSessionDriver *sessionDriver = [[ISyncSessionDriver sessionDriverWithDataSource:myDataSource] retain];
    BOOL success = [sessionDriver sync];
-   if (!success) myError = [sessionDriver error]; */
+   if (!success) myError = [sessionDriver lastError]; */
 + (ISyncSessionDriver *)sessionDriverWithDataSource:(id <ISyncSessionDriverDataSource>)dataSource;
 
 /* Initiate a sync.
@@ -273,6 +273,8 @@ typedef enum {
    (except sessionDriverWillCancelSession:, sessionDriverDidCancelSession:, and sessionDriverDidFinishSession:)
    any existing sync session will be cancelled. */
 - (BOOL)sessionDriver:(ISyncSessionDriver *)sender didRegisterClientAndReturnError:(NSError **)outError;
+- (BOOL)sessionDriver:(ISyncSessionDriver *)sender willNegotiateAndReturnError:(NSError **)outError;
+- (BOOL)sessionDriver:(ISyncSessionDriver *)sender didNegotiateAndReturnError:(NSError **)outError;
 - (BOOL)sessionDriver:(ISyncSessionDriver *)sender willPushAndReturnError:(NSError **)outError;
 - (BOOL)sessionDriver:(ISyncSessionDriver *)sender didPushAndReturnError:(NSError **)outError;
 - (BOOL)sessionDriver:(ISyncSessionDriver *)sender willPullAndReturnError:(NSError **)outError;
@@ -289,6 +291,11 @@ typedef enum {
 - (void)sessionDriverDidFinishSession:(ISyncSessionDriver *)sender;
 - (void)sessionDriverWillCancelSession:(ISyncSessionDriver *)sender;
 - (void)sessionDriverDidCancelSession:(ISyncSessionDriver *)sender;
+
+/* This delegate method is called when the session driver receives a sync alert.  It allows a client to do any setup before the
+   session driver calls its sync: method. If this method is implemented in a client, a failure to establish a session during a
+   sync alert will cause the sessionDriver to call the sessionDriverDidCancelSession: delegate. */
+- (BOOL)sessionDriver:(ISyncSessionDriver *)sender didReceiveSyncAlertAndReturnError:(NSError **)outError;
 
 @end
 

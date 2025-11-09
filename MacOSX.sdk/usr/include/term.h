@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 1998-2001,2003 Free Software Foundation, Inc.              *
+ * Copyright (c) 1998-2007,2008 Free Software Foundation, Inc.              *
  *                                                                          *
  * Permission is hereby granted, free of charge, to any person obtaining a  *
  * copy of this software and associated documentation files (the            *
@@ -29,10 +29,10 @@
 /****************************************************************************/
 /* Author: Zeyd M. Ben-Halim <zmbenhal@netcom.com> 1992,1995                */
 /*    and: Eric S. Raymond <esr@snark.thyrsus.com>                          */
-/*    and: Thomas E. Dickey                        1995-2003                */
+/*    and: Thomas E. Dickey                        1995-on                  */
 /****************************************************************************/
 
-/* $Id: MKterm.h.awk.in,v 1.42 2003/12/27 19:09:16 tom Exp $ */
+/* $Id: MKterm.h.awk.in,v 1.50 2008/05/24 23:13:59 tom Exp $ */
 
 /*
 **	term.h -- Definition of struct term
@@ -42,7 +42,7 @@
 #define NCURSES_TERM_H_incl 1
 
 #undef  NCURSES_VERSION
-#define NCURSES_VERSION "5.5"
+#define NCURSES_VERSION "5.7"
 
 #include <ncurses_dll.h>
 
@@ -54,14 +54,11 @@ extern "C" {
  * definition (based on the system for which this was configured).
  */
 
-#undef  HAVE_TERMIOS_H
-#define HAVE_TERMIOS_H 1
-
-#undef  HAVE_TCGETATTR
-#define HAVE_TCGETATTR 1
-
 #undef  NCURSES_CONST
 #define NCURSES_CONST /*nothing*/
+
+#undef  NCURSES_SBOOL
+#define NCURSES_SBOOL char
 
 #undef  NCURSES_XNAMES
 #define NCURSES_XNAMES 1
@@ -74,7 +71,8 @@ extern "C" {
 #undef  GET_TTY
 
 /* Assume POSIX termio if we have the header and function */
-#if HAVE_TERMIOS_H && HAVE_TCGETATTR
+/* #if HAVE_TERMIOS_H && HAVE_TCGETATTR */
+#if 1 && 1
 
 #undef  TERMIOS
 #define TERMIOS 1
@@ -84,7 +82,8 @@ extern "C" {
 
 #else /* !HAVE_TERMIOS_H */
 
-#if 0 /* HAVE_TERMIO_H */
+/* #if HAVE_TERMIO_H */
+#if 0
 
 #undef  TERMIOS
 #define TERMIOS 1
@@ -674,7 +673,7 @@ extern "C" {
 typedef struct termtype {	/* in-core form of terminfo data */
     char  *term_names;		/* str_table offset of term names */
     char  *str_table;		/* pointer to string table */
-    char  *Booleans;		/* array of boolean values */
+    NCURSES_SBOOL  *Booleans;	/* array of boolean values */
     short *Numbers;		/* array of integer values */
     char  **Strings;		/* array of string offsets */
 
@@ -702,30 +701,32 @@ typedef struct term {		/* describe an actual terminal */
     char *      _termname;      /* used for termname() */
 } TERMINAL;
 
-extern NCURSES_EXPORT_VAR(TERMINAL *) cur_term;
+#if 0 || 0
+NCURSES_WRAPPED_VAR(TERMINAL *, cur_term);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, boolnames);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, boolcodes);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, boolfnames);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, numnames);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, numcodes);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, numfnames);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, strnames);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, strcodes);
+NCURSES_WRAPPED_VAR(NCURSES_CONST char * const *, strfnames);
 
-#if 0 /* BROKEN_LINKER */
-#define boolnames  _nc_boolnames()
-#define boolcodes  _nc_boolcodes()
-#define boolfnames _nc_boolfnames()
-#define numnames   _nc_numnames()
-#define numcodes   _nc_numcodes()
-#define numfnames  _nc_numfnames()
-#define strnames   _nc_strnames()
-#define strcodes   _nc_strcodes()
-#define strfnames  _nc_strfnames()
-
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_boolnames (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_boolcodes (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_boolfnames (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_numnames (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_numcodes (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_numfnames (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_strnames (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_strcodes (void);
-extern NCURSES_EXPORT(NCURSES_CONST char * const *) _nc_strfnames (void);
+#define cur_term   NCURSES_PUBLIC_VAR(cur_term())
+#define boolnames  NCURSES_PUBLIC_VAR(boolnames())
+#define boolcodes  NCURSES_PUBLIC_VAR(boolcodes())
+#define boolfnames NCURSES_PUBLIC_VAR(boolfnames())
+#define numnames   NCURSES_PUBLIC_VAR(numnames())
+#define numcodes   NCURSES_PUBLIC_VAR(numcodes())
+#define numfnames  NCURSES_PUBLIC_VAR(numfnames())
+#define strnames   NCURSES_PUBLIC_VAR(strnames())
+#define strcodes   NCURSES_PUBLIC_VAR(strcodes())
+#define strfnames  NCURSES_PUBLIC_VAR(strfnames())
 
 #else
+
+extern NCURSES_EXPORT_VAR(TERMINAL *) cur_term;
 
 extern NCURSES_EXPORT_VAR(NCURSES_CONST char * const ) boolnames[];
 extern NCURSES_EXPORT_VAR(NCURSES_CONST char * const ) boolcodes[];
@@ -744,9 +745,9 @@ extern NCURSES_EXPORT(int) _nc_set_tty_mode (TTY *buf);
 extern NCURSES_EXPORT(int) _nc_get_tty_mode (TTY *buf);
 extern NCURSES_EXPORT(int) _nc_read_entry (const char * const, char * const, TERMTYPE *const);
 extern NCURSES_EXPORT(int) _nc_read_file_entry (const char *const, TERMTYPE *);
+extern NCURSES_EXPORT(int) _nc_read_termtype (TERMTYPE *, char *, int);
 extern NCURSES_EXPORT(char *) _nc_first_name (const char *const);
 extern NCURSES_EXPORT(int) _nc_name_match (const char *const, const char *const, const char *const);
-extern NCURSES_EXPORT(int) _nc_read_termcap_entry (const char *const, TERMTYPE *const);
 extern NCURSES_EXPORT(const TERMTYPE *) _nc_fallback (const char *);
 
 /* entry points */
@@ -760,11 +761,18 @@ extern NCURSES_EXPORT(int) setupterm (NCURSES_CONST char *,int,int *);
 /* terminfo entry points, also declared in curses.h */
 #if !defined(__NCURSES_H)
 extern NCURSES_EXPORT(char *) tigetstr (NCURSES_CONST char *);
-extern NCURSES_EXPORT(char *) tparm (NCURSES_CONST char *, ...);
 extern NCURSES_EXPORT_VAR(char) ttytype[];
 extern NCURSES_EXPORT(int) putp (const char *);
 extern NCURSES_EXPORT(int) tigetflag (NCURSES_CONST char *);
 extern NCURSES_EXPORT(int) tigetnum (NCURSES_CONST char *);
+
+#if 1 /* NCURSES_TPARM_VARARGS */
+extern NCURSES_EXPORT(char *) tparm (NCURSES_CONST char *, ...);	/* special */
+#else
+extern NCURSES_EXPORT(char *) tparm (NCURSES_CONST char *, long,long,long,long,long,long,long,long,long);	/* special */
+extern NCURSES_EXPORT(char *) tparm_varargs (NCURSES_CONST char *, ...);	/* special */
+#endif
+
 #endif /* __NCURSES_H */
 
 /* termcap database emulation (XPG4 uses const only for 2nd param of tgetent) */

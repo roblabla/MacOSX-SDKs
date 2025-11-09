@@ -1,14 +1,14 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2007, Apple Inc.
+	Copyright (c) 2003-2009, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
 
 As such, a nib that is used repeatedly can be loaded from the disk only once, and can then perform countless instantiations, thereby reducing hits to the disk (at the expense of added memory for keeping the unarchived nib data around).
 
-NSNib implemenents NSCoding protocol.  For example, using NSNib, the entire contents of a nib can be archived and sent to another system for unarchiving.  The target system need not save the nib locally to open it (a shortcoming of the current NSBundle nib loading API).  NSNib's implementation encodes all sound and image resources contained locally within the nib bundle.  Note, it DOES NOT encode resources that are referenced outside of the nib bundle.
+NSNib implements NSCoding protocol.  For example, using NSNib, the entire contents of a nib can be archived and sent to another system for unarchiving.  The target system need not save the nib locally to open it (a shortcoming of the current NSBundle nib loading API).  NSNib's implementation encodes all sound and image resources contained locally within the nib bundle.  Note, it DOES NOT encode resources that are referenced outside of the nib bundle.
 
 As are all NSObjects, instantiated nib objects are allocated in a memory zone (NSZone).  If an NSNibOwner is provided for instantiation, then the objects will be allocated in the owner's zone.  If no NSNibOwner is provided, the resulting objects will be allocated in the default zone.
 */
@@ -31,7 +31,7 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
         unsigned int _isKeyed:1;
         unsigned int _reserved:31;
     } _flags;
-    id reserved1;
+    NSString *_path;
     id reserved2;
 
 }

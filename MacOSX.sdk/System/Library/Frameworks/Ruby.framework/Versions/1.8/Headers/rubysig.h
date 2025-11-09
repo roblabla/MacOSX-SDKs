@@ -1,1 +1,1 @@
-../usr/lib/ruby/1.8//universal-darwin9.0/rubysig.h
+../usr/lib/ruby/1.8//universal-darwin10.0/rubysig.h

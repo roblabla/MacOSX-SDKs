@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.13.2.1.2.3 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_stream_filter_api.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -125,7 +125,9 @@ struct _php_stream_filter {
 /* stack filter onto a stream */
 BEGIN_EXTERN_C()
 PHPAPI void _php_stream_filter_prepend(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
+PHPAPI int php_stream_filter_prepend_ex(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
 PHPAPI void _php_stream_filter_append(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
+PHPAPI int php_stream_filter_append_ex(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
 PHPAPI int _php_stream_filter_flush(php_stream_filter *filter, int finish TSRMLS_DC);
 PHPAPI php_stream_filter *php_stream_filter_remove(php_stream_filter *filter, int call_dtor TSRMLS_DC);
 PHPAPI void php_stream_filter_free(php_stream_filter *filter TSRMLS_DC);

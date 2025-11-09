@@ -269,25 +269,37 @@ __END_DECLS
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_STRING|access, \
 		arg, len, sysctl_handle_string, "A", descr)
 
+#define SYSCTL_COMPAT_INT(parent, nbr, name, access, ptr, val, descr) \
+	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
+               ptr, val, sysctl_handle_int, "I", descr)
+
+#define SYSCTL_COMPAT_UINT(parent, nbr, name, access, ptr, val, descr) \
+	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
+		ptr, val, sysctl_handle_int, "IU", descr)
+
 /* Oid for an int.  If ptr is NULL, val is returned. */
 #define SYSCTL_INT(parent, nbr, name, access, ptr, val, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
-		ptr, val, sysctl_handle_int, "I", descr)
+               ptr, val, sysctl_handle_int, "I", descr); \
+	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(int)) ? 0 : -1];
 
 /* Oid for an unsigned int.  If ptr is NULL, val is returned. */
 #define SYSCTL_UINT(parent, nbr, name, access, ptr, val, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
-		ptr, val, sysctl_handle_int, "IU", descr)
+		ptr, val, sysctl_handle_int, "IU", descr); \
+	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(unsigned int)) ? 0 : -1];
 
 /* Oid for a long.  The pointer must be non NULL. */
 #define SYSCTL_LONG(parent, nbr, name, access, ptr, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
-		ptr, 0, sysctl_handle_long, "L", descr)
+		ptr, 0, sysctl_handle_long, "L", descr); \
+	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(long)) ? 0 : -1];
 
 /* Oid for a quad.  The pointer must be non NULL. */
 #define SYSCTL_QUAD(parent, nbr, name, access, ptr, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_QUAD|access, \
-		ptr, 0, sysctl_handle_quad, "Q", descr)
+		ptr, 0, sysctl_handle_quad, "Q", descr); \
+	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(long long)) ? 0 : -1];
 
 /* Oid for an opaque object.  Specified by a pointer and a length. */
 #define SYSCTL_OPAQUE(parent, nbr, name, access, ptr, len, fmt, descr) \
@@ -408,7 +420,7 @@ SYSCTL_DECL(_user);
 #define	KERN_SUGID_COREDUMP	52	/* int: whether to dump SUGID cores */
 #define	KERN_PROCDELAYTERM	53	/* int: set/reset current proc for delayed termination during shutdown */
 #define KERN_SHREG_PRIVATIZABLE	54	/* int: can shared regions be privatized ? */
-#define	KERN_PROC_LOW_PRI_IO	55	/* int: set/reset current proc for low priority I/O */
+                             /* 55 was KERN_PROC_LOW_PRI_IO... now deprecated */
 #define	KERN_LOW_PRI_WINDOW	56	/* int: set/reset throttle window - milliseconds */
 #define	KERN_LOW_PRI_DELAY	57	/* int: set/reset throttle delay - milliseconds */
 #define	KERN_POSIX		58	/* node: posix tunables */
@@ -424,7 +436,8 @@ SYSCTL_DECL(_user);
 #define KERN_RAGEVNODE		68
 #define KERN_TTY		69	/* node: tty settings */
 #define KERN_CHECKOPENEVT       70      /* spi: check the VOPENEVT flag on vnodes at open time */
-#define	KERN_MAXID		71	/* number of valid kern ids */
+#define	KERN_THREADNAME		71	/* set/get thread name */
+#define	KERN_MAXID		72	/* number of valid kern ids */
 /*
  * Don't add any more sysctls like this.  Instead, use the SYSCTL_*() macros
  * and OID_AUTO. This will have the added benefit of not having to recompile
@@ -552,7 +565,8 @@ SYSCTL_DECL(_user);
 	{ "lctx", CTLTYPE_NODE }, \
 	{ "rage_vnode", CTLTYPE_INT }, \
 	{ "tty", CTLTYPE_NODE },	\
-	{ "check_openevt", CTLTYPE_INT } \
+	{ "check_openevt", CTLTYPE_INT }, \
+	{ "thread_name", CTLTYPE_STRING } \
 }
 
 /*
@@ -580,69 +594,8 @@ SYSCTL_DECL(_user);
 #define	KERN_LCTX_ALL		0	/* everything */
 #define	KERN_LCTX_LCID		1	/* by login context id */
 
-/* 
- * KERN_PROC subtype ops return arrays of augmented proc structures:
- */
-#ifdef __APPLE_API_UNSTABLE
-
-struct _pcred {
-	char	pc_lock[72];		/* opaque content */
-	struct	ucred *pc_ucred;	/* Current credentials. */
-	uid_t	p_ruid;			/* Real user id. */
-	uid_t	p_svuid;		/* Saved effective user id. */
-	gid_t	p_rgid;			/* Real group id. */
-	gid_t	p_svgid;		/* Saved effective group id. */
-	int	p_refcnt;		/* Number of references. */
-};
-
-struct _ucred {
-	int32_t	cr_ref;			/* reference count */
-	uid_t	cr_uid;			/* effective user id */
-	short	cr_ngroups;		/* number of groups */
-	gid_t	cr_groups[NGROUPS];	/* groups */
-};
-
-struct kinfo_proc {
-	struct	extern_proc kp_proc;			/* proc structure */
-	struct	eproc {
-		struct	proc *e_paddr;		/* address of proc */
-		struct	session *e_sess;	/* session pointer */
-		struct	_pcred e_pcred;		/* process credentials */
-		struct	_ucred e_ucred;		/* current credentials */
-		struct	 vmspace e_vm;		/* address space */
-		pid_t	e_ppid;			/* parent process id */
-		pid_t	e_pgid;			/* process group id */
-		short	e_jobc;			/* job control counter */
-		dev_t	e_tdev;			/* controlling tty dev */
-		pid_t	e_tpgid;		/* tty process group id */
-		struct	session *e_tsess;	/* tty session pointer */
-#define	WMESGLEN	7
-		char	e_wmesg[WMESGLEN+1];	/* wchan message */
-		segsz_t e_xsize;		/* text size */
-		short	e_xrssize;		/* text rss */
-		short	e_xccount;		/* text references */
-		short	e_xswrss;
-		int32_t	e_flag;
-#define	EPROC_CTTY	0x01	/* controlling tty vnode active */
-#define	EPROC_SLEADER	0x02	/* session leader */
-#define	COMAPT_MAXLOGNAME	12
-		char	e_login[COMAPT_MAXLOGNAME];	/* short setlogin() name */
-#if CONFIG_LCTX
-		pid_t	e_lcid;
-		int32_t	e_spare[3];
-#else
-		int32_t	e_spare[4];
-#endif
-	} kp_eproc;
-};
-
-struct kinfo_lctx {
-	pid_t	id;	/* Login Context ID */
-	int	mc;	/* Member Count */
-};
 
 
-#endif /* __APPLE_API_UNSTABLE */
 
 /*
  * KERN_IPC identifiers
@@ -906,12 +859,12 @@ extern struct loadavg averunnable;
 #define	CTL_DEBUG_MAXID		20
 
 
-#if (CTL_MAXID != 9) || (KERN_MAXID != 71) || (VM_MAXID != 6) || (HW_MAXID != 26) || (USER_MAXID != 21) || (CTL_DEBUG_MAXID != 20)
+#if (CTL_MAXID != 9) || (KERN_MAXID != 72) || (VM_MAXID != 6) || (HW_MAXID != 26) || (USER_MAXID != 21) || (CTL_DEBUG_MAXID != 20)
 #error Use the SYSCTL_*() macros and OID_AUTO instead!
 #endif
 
 
-#ifdef DEBUG
+#if DEBUG
 /*
  * CTL_DEBUG variables.
  *

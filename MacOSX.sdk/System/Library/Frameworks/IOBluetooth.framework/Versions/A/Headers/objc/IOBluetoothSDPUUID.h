@@ -132,7 +132,7 @@
     @result Returns the length (in bytes) of the UUID.
 */
 
-- (unsigned)length;
+- (NSUInteger)length;
 
 /*!
     @method getUUIDWithLength:
@@ -171,8 +171,6 @@
 
 - (BOOL)isEqualToUUID:(IOBluetoothSDPUUID *)otherUUID;
 
-- (id)initWithCoder:(NSCoder *)coder;
-- (void)encodeWithCoder:(NSCoder *)coder;
 - (Class)classForCoder;
 - (Class)classForArchiver;
 - (Class)classForPortCoder;

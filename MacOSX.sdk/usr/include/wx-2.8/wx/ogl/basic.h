@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     12/07/98
-// RCS-ID:      $Id: basic.h,v 1.22 2006/04/26 02:24:42 PC Exp $
+// RCS-ID:      $Id: basic.h 38918 2006-04-26 02:24:42Z PC $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

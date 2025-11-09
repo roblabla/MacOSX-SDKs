@@ -3,9 +3,9 @@
  
      Contains:   The Apple disk partition scheme as defined in Inside Macintosh: Volume V.
  
-     Version:    OSServices-208~152
+     Version:    OSServices-359.2~2
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#warning AppleDiskPartitions.h is no longer maintained.  You should switch to IOApplePartitionScheme.h
 
 #include <AvailabilityMacros.h>
 
@@ -110,7 +111,7 @@ enum {
   kPartitionAUXIsBootCodePositionIndependent = 0x00000040,
   kPartitionIsWriteable         = 0x00000020,
   kPartitionIsMountedAtStartup  = 0x40000000,
-  kPartitionIsStartup           = (long)0x80000000,
+  kPartitionIsStartup           = (int)0x80000000,
   kPartitionIsChainCompatible   = 0x00000100,
   kPartitionIsRealDeviceDriver  = 0x00000200,
   kPartitionCanChainToNext      = 0x00000400

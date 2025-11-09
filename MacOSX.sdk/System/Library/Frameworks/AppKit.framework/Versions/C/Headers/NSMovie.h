@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2007, Apple Inc.
+        Copyright (c) 2000-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -34,16 +34,16 @@
 
 #if !__LP64__
 
-- (id) initWithMovie:(void* /*Movie*/)movie;			// When archived, saves contents
-- (id) initWithURL:(NSURL*)url byReference:(BOOL)byRef;	// When archived, saves ref or contents
-- (id) initWithPasteboard:(NSPasteboard*)pasteboard;
+- (id) initWithMovie:(void* /*Movie*/)movie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;			// When archived, saves contents
+- (id) initWithURL:(NSURL*)url byReference:(BOOL)byRef DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;	// When archived, saves ref or contents
+- (id) initWithPasteboard:(NSPasteboard*)pasteboard DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-- (void*/*Movie*/)QTMovie;
-- (NSURL*)URL;
+- (void*/*Movie*/)QTMovie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSURL*)URL DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-+ (NSArray*) movieUnfilteredFileTypes;
-+ (NSArray*) movieUnfilteredPasteboardTypes;
-+ (BOOL) canInitWithPasteboard:(NSPasteboard*)pasteboard;
++ (NSArray*) movieUnfilteredFileTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (NSArray*) movieUnfilteredPasteboardTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (BOOL) canInitWithPasteboard:(NSPasteboard*)pasteboard DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #else
 

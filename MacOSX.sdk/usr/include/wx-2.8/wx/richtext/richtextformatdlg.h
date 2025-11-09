@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     2006-10-01
-// RCS-ID:      $Id: richtextformatdlg.h,v 1.10 2006/11/25 13:52:12 MBN Exp $
+// RCS-ID:      $Id: richtextformatdlg.h 49946 2007-11-14 14:22:56Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@
 #include "wx/richtext/richtextbuffer.h"
 #include "wx/richtext/richtextstyles.h"
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialog;
-class WXDLLIMPEXP_CORE wxImageList;
+class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextFormattingDialog;
+class WXDLLIMPEXP_FWD_CORE wxImageList;
 
 /*!
  * Flags determining the pages and buttons to be created in the dialog
@@ -218,9 +218,16 @@ DECLARE_EVENT_TABLE()
 class WXDLLIMPEXP_RICHTEXT wxRichTextFontPreviewCtrl : public wxWindow
 {
 public:
-    wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = 0) :
-        wxWindow(parent, id, pos, sz, style)
+    wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = 0)
     {
+        if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
+#ifdef __WXMSW__
+            style |= GetThemedBorderStyle();
+#else
+            style |= wxBORDER_SUNKEN;
+#endif
+        wxWindow::Create(parent, id, pos, sz, style);
+
         SetBackgroundColour(*wxWHITE);
         m_textEffects = 0;
     }

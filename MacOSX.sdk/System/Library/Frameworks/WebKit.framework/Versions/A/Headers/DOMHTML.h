@@ -26,6 +26,9 @@
 
 #import <WebKit/DOMCore.h>
 
+#import <WebKit/DOMBlob.h>
+#import <WebKit/DOMFile.h>
+#import <WebKit/DOMFileList.h>
 #import <WebKit/DOMHTMLAnchorElement.h>
 #import <WebKit/DOMHTMLAppletElement.h>
 #import <WebKit/DOMHTMLAreaElement.h>

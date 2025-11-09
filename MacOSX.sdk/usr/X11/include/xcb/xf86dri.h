@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xf86dri.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xf86dri.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,6 +13,10 @@
 #define __XF86DRI_H
 
 #include "xcb.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XF86DRI_MAJOR_VERSION 4
 #define XCB_XF86DRI_MINOR_VERSION 1
@@ -484,6 +488,8 @@ xcb_xf86dri_query_version_unchecked (xcb_connection_t *c  /**< */);
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -562,6 +568,8 @@ xcb_xf86dri_query_direct_rendering_capable_unchecked (xcb_connection_t *c  /**< 
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_query_direct_rendering_capable_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -632,14 +640,14 @@ xcb_xf86dri_open_connection_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_xf86dri_open_connection_bus_id
+ ** char * xcb_xf86dri_open_connection_bus_id
  ** 
  ** @param const xcb_xf86dri_open_connection_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_xf86dri_open_connection_bus_id (const xcb_xf86dri_open_connection_reply_t *R  /**< */);
 
 
@@ -679,6 +687,8 @@ xcb_xf86dri_open_connection_bus_id_end (const xcb_xf86dri_open_connection_reply_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_open_connection_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -798,14 +808,14 @@ xcb_xf86dri_get_client_driver_name_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_xf86dri_get_client_driver_name_client_driver_name
+ ** char * xcb_xf86dri_get_client_driver_name_client_driver_name
  ** 
  ** @param const xcb_xf86dri_get_client_driver_name_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_xf86dri_get_client_driver_name_client_driver_name (const xcb_xf86dri_get_client_driver_name_reply_t *R  /**< */);
 
 
@@ -845,6 +855,8 @@ xcb_xf86dri_get_client_driver_name_client_driver_name_end (const xcb_xf86dri_get
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_get_client_driver_name_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -931,6 +943,8 @@ xcb_xf86dri_create_context_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_create_context_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1066,6 +1080,8 @@ xcb_xf86dri_create_drawable_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_create_drawable_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1240,6 +1256,8 @@ xcb_xf86dri_get_drawable_info_clip_rects_iterator (const xcb_xf86dri_get_drawabl
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_get_drawable_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1357,6 +1375,8 @@ xcb_xf86dri_get_device_info_device_private_end (const xcb_xf86dri_get_device_inf
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_get_device_info_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1439,6 +1459,8 @@ xcb_xf86dri_auth_connection_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xf86dri_auth_connection_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1457,6 +1479,10 @@ xcb_xf86dri_auth_connection_reply (xcb_connection_t                      *c  /**
                                    xcb_xf86dri_auth_connection_cookie_t   cookie  /**< */,
                                    xcb_generic_error_t                  **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -5,6 +5,8 @@
     Public header file.
 */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 #import <Cocoa/Cocoa.h>
 
 @class AMWorkflow;
@@ -25,16 +27,15 @@
 		BOOL editingEnabled:1;
         NSUInteger reserved:30;
     } _flags;
-	NSInteger _draggingIndex;
+	NSUInteger _draggingIndex;
 	NSRect _selectionRect;
 	
-	id _future;
-	id _future2;
-	id _future3;
-	id _future4;
+	id _future[4];
 }
 
 - (BOOL)isEditable;
 - (void)setEditable:(BOOL)flag;
 
 @end
+
+#endif

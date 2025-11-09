@@ -1,11 +1,12 @@
 /*
  * SyncServices -- ISyncManager.h
- * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 2003 - 2008 Apple Computer, Inc.  All rights reserved.
  */
 
 #import <SyncServices/ISyncCommon.h>
 
 @class ISyncClient, ISyncRecordSnapshot;
+
 
 
 /* ISyncManager is the starting point for clients looking to manage clients and syncs.  It
@@ -18,6 +19,17 @@
 
 /* Check if the Sync Engine is enabled and available for syncing. */
 - (BOOL)isEnabled;
+
+/* After calling isEnabled, this method will return an NSError with one of the codes enumerated below. The returned NSError will have
+   an info dictionary with an entry for the NSLocalizedDescriptionKey. The value of this key will be a string describing the disabled reason
+   that is suitable for display. The error codes are declared in SyncServicesErrors.h.
+   ISyncServerDisabledReasonNone,               Returned when isEnabled has returned YES.
+   ISyncServerDisabledReasonByPreference,       Returned if syncing has been disabled with a preference
+   ISyncServerDisabledReasonSharedNetworkHome,  Returned if another sync server is running against a network home directory.
+   ISyncServerDisabledReasonUnresponsive,	    Returned if isEnabled has timed out messaging to the Sync Server  
+   ISyncServerDisabledReasonUnknown,            Returned if the Sync Server fails to respond because of an unexpected error.
+*/
+- (NSError *)syncDisabledReason;
 
 - (ISyncClient *)clientWithIdentifier:(NSString *)clientId;
 
@@ -52,9 +64,11 @@
       client will only push changes to the engine but for which it will never pull changes from
       the engine.
 
-      NeverFormatsRelationships - a Boolean that indicates that this client will never format
-      a relationship that it pulls. If yes then the sync services frameworks can make certain
-      optimizations for this client.
+      NeverFormatsRelationships - This is deprecated on 10.6, see FormatsRelationships.
+
+      FormatsRelationships - a Boolean that indicates that this client MIGHT format
+      a relationship that it pulls. On 10.6 we have changed the default sense for clients
+      and assume that they DO NOT format relationships.
       
       SyncsWith - a dictionary specifying the kinds of clients this client wants to sync
       with.  See -setShouldSynchronize:withClientsOfType: for details.  The dictionary contains the
@@ -62,9 +76,15 @@
 
          SyncAlertTypes - an array of the client types this client wants to sync with.
 
-         SyncAlertToolPath - the path of a tool the engine will invoke when a client of the
-         specified type starts syncing.  The tool with be passed two arguments on the command
-         line: "--sync" and the client's client id.
+         SyncAlertToolPath - the path of a tool the engine will invoke when a client of
+         the specified type starts syncing.  The tool can be passed multiple arguments on
+         the command line.  At a minimum it will be passed "--sync" followed by the
+         client's client id. It may also be passed "--entitynames" followed by a comma
+         delimited list of entity names being synced. Any other arguments on the command
+         line should be ignored. In particular, tools should be prepared to handle options
+         on the command line that are not followed by a value. Options are always prefixed
+         by --. Options and values are always delimited by spaces. In 10.6 one no value
+         option that is sometimes passed to an alert tool is --oneshot.
 
    It is perfectly valid to call this method for a client that has already been registered to update
    the registration info.  Doing so is not required, however.  The engine will periodically stat the
@@ -97,7 +117,20 @@
       you should never change the schema name.  Doing so will orphan the old schema definition and
       you will have to manually remove it.  We recommend using the reverse-DNS naming scheme,
 	  e.g., "com.apple.Contacts".
-	
+
+    * MajorVersion an integer value numbered representing the major version of this schema. Schemas with different major
+      numbers are used to indicate a major incompatible change. Including version information is optional
+      but recommended. In future releases this information may be used for validation and to assist with schema migration.
+
+    * MinorVersion an integer value number representing the minor version of this schema. Schemas with different minor
+      numbers are used to indicate compatible schema changes. (Optional)
+
+    * BaseName the name of a schema that this schema is extending. (Optional, used with BaseMajorVersion and BaseMinorVersion.)
+
+    * BaseMajorVersion an integer value representing the major version of the schema that this schema is extending. (Optional. See BaseName.)
+
+    * BaseMinorVersion an integer value representing the minor version of the schema that this schema is extending. (Optional. See BaseName.)
+
 	* StrictParsing - a bool that allows opting in / out of the new strict validation of schemas in Leopard. This is a top level key in a schema.
 	  If this value is true, Leopard strict validation will be used.
 	  If this value is false, the same checking as under Tiger will be used.
@@ -139,17 +172,29 @@
          Attributes - an array containing the description of all attributes in the extension.
          Each attribute description is a dictionary containing the following sub-keys.
 
-             Name - the name of the attribute. The name can be localized using the strings from Schema.strings in
-             the .syncschema bundle. The key for the localized name of an attribute is "$entity/$attribute_name",
-             for example the key for the attribute with the Name "title" in the entity with the name "com.apple.things.Thing"
-             would be "com.apple.things.Thing/title".
+            Name - the name of the attribute. The name can be localized using the strings from Schema.strings in
+            the .syncschema bundle. The key for the localized name of an attribute is "$entity/$attribute_name",
+            for example the key for the attribute with the Name "title" in the entity with the name
+            "com.apple.things.Thing" would be "com.apple.things.Thing/title".
 
             Type - the type of the attribute.  Must be one of the valid attribute
-            types, such as string, number, etc.
+            types, such as string, number, etc. On 10.6 set is also a supported type.
             
             ExcludeFromDataChangeAlert - <true/> or <false/>.  Defaults to false if omitted.  If this flag is set then
             a change to this attribute will not count towards the number of changed attributes for the purpose
             of displaying the data change alert.
+
+            AutomaticConflictResolutionPolicy - A dictionary with one or two entries with the keys
+            "PreferredClientTypes" and "PreferredRecord". The use of this keyword can help prevent conflicts.
+            The value for the PreferredClientType entry is an array comprised of the client type strings e.g.,
+            "app", "device", "server" and "peer".  The value for the PreferredRecord key is one of "Truth", "Client", or
+            "LastModified". This property is per attribute and cannot be declared as a property of the
+            Entity. One of the more common uses is to specify that the last modified value should alway be
+            chosen. In this case, the PreferredClientTypes entry should be omitted. If both keys are specified,
+            then they must be consistent with each other. In other words, if a client specifies a value for
+            PreferredClientTypes of [app] and a PreferredRecord of LastModified, then the client that pushed the
+            conflicting change that last modified the attribute must be of type app or a conflict will be
+            generated.
 
          Relationships - an array containing the description of all relationships in the
          extension.  Each relationship description is a dictionary containing the following keys.
@@ -183,15 +228,23 @@
             of displaying the data change alert.
 
 
-         IdentityProperties - an array specifying the set of properties that are used to match a new
+         IdentityProperties - an array specifying the set of property names that are used to match a new
          record from a Sync client with an existing record. If the target of a one to one relationship
          is to be used, the name of the relationship is specified. 
+
+         CompoundIdentityProperties - an array of array of property names. If a schema specifies both this
+         and the IdentityProperties key, this key is preferred. When a record is pushed, a match is
+         searched by using the identity keys declared in each of the sub-arraya in the order that they
+         appear. This means that the arrays should not have property names in common. For example, the
+         Contacts schema now declares its identity keys as [[first name, middle name, last name],
+         [company name]]. This allows a contact pushed without a company name to match a record that
+         was previously pushed with the same first and last name along with a company name.
 
          PropertyDependencies - an array specifying the set of dependencies between the
          properties.  A dependent property is one which must be pushed to a client if any of its
          dependencies are changed.  Each entry in the array is itself an array of strings, specifying
-         the names of the co-dependent properties.  Entries may be an attribute name or a relationship
-         name.
+         the names of the co-dependent properties.  Entries may only include attribute names. Relationship
+         names are disallowed.
 
          Parent - the name of a relationship back to the parent for this entity. A parent is an enclosing
          entity type which is used to bill changes for data change alerts and to house child records in the
@@ -268,6 +321,17 @@
 
 - (void)unregisterSchemaWithName:(NSString *)schemaName;
 
+/* This API is for sync clients that will only sync when another client, not of type application, is syncing
+ * the same entities. This is NOT the preferred way that clients should sync their changes. However, for
+ * various reasons, sometimes it is the only viable option. This API has been introduced in In 10.6, because
+ * some clients, such as MobileMe, may no longer sync if they determine they have no changes to push or pull.
+ * This API allows clients to indicate that they have changes to sync without the overhead of creating a sync
+ * session. Clients that use this API, will always be alerted to sync whenever a client they sync with
+ * requests a sync session, even if the requesting client would otherwise have no changes to push or
+ * pull. Clients that trickle sync or push their changes periodically on their own should not call this
+ * method.
+ */
+- (void)clientWithIdentifier:(NSString *)clientId needsSyncing:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Return a snapshot of the records in the Truth.  The Truth stores a copy of all synchronized records
    and contains the amalgamation of all properties from all clients.
@@ -294,14 +358,16 @@
 
 @end
 
-/* Distributed notification posted by the server when availability/enablement changes.
-   If isEnabled returns NO, and a client wants to sync when syncing becomes enabled
-   again, the client should register for this notification. 
+/* Distributed notification and task specific notification posted by the server when availability/enablement changes.
+   If isEnabled returns NO, and a client wants to sync when syncing becomes enabled again, the client should register
+   for this notification. 
 
    This notification is sent both in the case where syncing is enabled, and when it is disabled.
    When this notification is sent, the object of the notification is an NSString with the value @"YES"
    if syncing is enabled, and @"NO" if disabled. After receiving this notification, the client should
-   still call -isEnabled to be absolutely sure of the state of syncing. 
+   still call -isEnabled to be absolutely sure of the state of syncing.
+
+   For clients that use an ISyncManager they should register with the NSNotificationCenter not the NSDistributedNotificationCenter.
 */
 SYNCSERVICES_EXPORT NSString * const ISyncAvailabilityChangedNotification;
 
@@ -309,3 +375,5 @@ SYNCSERVICES_EXPORT NSString * const ISyncAvailabilityChangedNotification;
    the name, reason, and user info from the originating exception.
 */
 SYNCSERVICES_EXPORT NSString * const ISyncServerUnavailableException;
+
+

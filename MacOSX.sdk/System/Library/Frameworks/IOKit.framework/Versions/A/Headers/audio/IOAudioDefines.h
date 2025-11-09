@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -165,6 +165,30 @@
 #define	kIOAudioEngineFullChannelNameKeyOutputFormat	"OutputChannel%u"
 
 #define kIOAudioEngineFlavorKey							"IOAudioEngineFlavor"
+
+#define	kIOAudioEngineAlwaysLoadCoreAudioPlugInKey		"IOAudioEngineAlwaysLoadCoreAudioPlugIn"
+
+/*!
+ * @defined kIOAudioEngineInputChannelLayoutKey
+ * @abstract The key in the IORegistry for the IOAudioEngine's dictionary describes an array of OSNumber data that describe the spatial position of each channel.  See IOAudioTypes.h.
+ * @discussion
+ */
+
+#ifndef __OPEN_SOURCE__
+//	<rdar://6868206>
+#endif
+#define kIOAudioEngineInputChannelLayoutKey				"IOAudioEngineInputChannelLayout"
+
+/*!
+ * @defined kIOAudioEngineOutputChannelLayoutKey
+ * @abstract The key in the IORegistry for the IOAudioEngine's dictionary describes an array of OSNumber data that describe the spatial position of each channel.  See IOAudioTypes.h.
+ * @discussion
+ */
+
+#ifndef __OPEN_SOURCE__
+//	<rdar://6868206>
+#endif
+#define kIOAudioEngineOutputChannelLayoutKey			"IOAudioEngineOutputChannelLayout"
 
 /*****
  *
@@ -340,6 +364,42 @@
 #define kIOAudioControlChannelNameSub		"Sub"
 
 /*!
+ * @defined kIOAudioControlChannelNameFrontLeftCenter
+ * @abstract The value for the kIOAudioControlChannelNameKey in the IORegistry representing
+ *  the channel name for the FrontLeftCenter channel.
+ */
+#define kIOAudioControlChannelNameFrontLeftCenter		"FrontLeftCenter"
+
+/*!
+ * @defined kIOAudioControlChannelNameFrontRightCenter
+ * @abstract The value for the kIOAudioControlChannelNameKey in the IORegistry representing
+ *  the channel name for the FrontRightCenter channel.
+ */
+#define kIOAudioControlChannelNameFrontRightCenter		"FrontRightCenter"
+
+/*!
+ * @defined kIOAudioControlChannelNameRearCenter
+ * @abstract The value for the kIOAudioControlChannelNameKey in the IORegistry representing
+ *  the channel name for the RearCenter channel.
+ */
+#define kIOAudioControlChannelNameRearCenter		"RearCenter"
+
+/*!
+ * @defined kIOAudioControlChannelNameSurroundLeft
+ * @abstract The value for the kIOAudioControlChannelNameKey in the IORegistry representing
+ *  the channel name for the SurroundLeft channel.
+ */
+#define kIOAudioControlChannelNameSurroundLeft		"SurroundLeft"
+
+/*!
+ * @defined kIOAudioControlChannelNameSurroundRight
+ * @abstract The value for the kIOAudioControlChannelNameKey in the IORegistry representing
+ *  the channel name for the SurroundRight channel.
+ */
+#define kIOAudioControlChannelNameSurroundRight		"SurroundRight"
+
+
+/*!
  * @defined kIOAudioControlValueKey
  * @abstract The key in the IORegistry for the IOAudioControl value attribute.
  * @discussion The value returned by this key is a 32-bit integer representing the current value of the IOAudioControl.
@@ -399,6 +459,7 @@
 #define kIOAudioSelectorControlAvailableSelectionsKey	"IOAudioSelectorControlAvailableSelections"
 #define kIOAudioSelectorControlSelectionValueKey		"IOAudioSelectorControlSelectionValue"
 #define kIOAudioSelectorControlSelectionDescriptionKey	"IOAudioSelectorControlSelectionDescriptionKey"
+#define kIOAudioSelectorControlTransportValueKey		"IOAudioSelectorControlTransportValue"					// <rdar://8202424>
 
 #define kIOAudioSelectorControlClockSourceKey				"IOAudioSelectorControlClockSourceKey"
 

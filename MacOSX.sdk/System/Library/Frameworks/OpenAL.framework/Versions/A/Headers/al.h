@@ -1,26 +1,6 @@
 #ifndef AL_AL_H
 #define AL_AL_H
 
-/**
- * OpenAL cross platform audio library
- * Copyright (C) 1999-2000 by authors.
- * This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the
- *  Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- *  Boston, MA  02111-1307, USA.
- * Or go to http://www.gnu.org/copyleft/lgpl.html
- */
-
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -33,7 +13,11 @@ extern "C" {
   #define AL_API __declspec(dllimport)
  #endif
 #else
- #define AL_API extern
+ #if defined(AL_BUILD_LIBRARY) && defined(HAVE_GCC_VISIBILITY)
+  #define AL_API __attribute__((visibility("default")))
+ #else
+  #define AL_API extern
+ #endif
 #endif
 
 #if defined(_WIN32)
@@ -42,12 +26,21 @@ extern "C" {
  #define AL_APIENTRY
 #endif
 
-#if TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
  #pragma export on
 #endif
 
-/* The OPENAL macro is deprecated and will vanish in the next OpenAL version. */
+/*
+ * The OPENAL, ALAPI, ALAPIENTRY, AL_INVALID, AL_ILLEGAL_ENUM, and
+ * AL_ILLEGAL_COMMAND macros are deprecated, but are included for
+ * applications porting code from AL 1.0
+ */
 #define OPENAL
+#define ALAPI AL_API
+#define ALAPIENTRY AL_APIENTRY
+#define AL_INVALID                                (-1)
+#define AL_ILLEGAL_ENUM                           AL_INVALID_ENUM
+#define AL_ILLEGAL_COMMAND                        AL_INVALID_OPERATION
 
 #define AL_VERSION_1_0
 #define AL_VERSION_1_1
@@ -95,9 +88,7 @@ typedef void ALvoid;
 
 /* Enumerant values begin at column 50. No tabs. */
 
-/* bad value */
-#define AL_INVALID                                -1
-
+/* "no distance model" or "no buffer" */
 #define AL_NONE                                   0
 
 /* Boolean False. */
@@ -203,14 +194,6 @@ typedef void ALvoid;
  * at/up 
  */
 #define AL_ORIENTATION                            0x100F
-
-/**
- * Specify the channel mask. (Creative)
- * Type: ALuint
- * Range: [0 - 255]
- */
-#define AL_CHANNEL_MASK                           0x3000
-
 
 /**
  * Source state information.
@@ -320,7 +303,6 @@ typedef void ALvoid;
 /** 
  * Invalid parameter passed to AL call.
  */
-#define AL_ILLEGAL_ENUM                           0xA002
 #define AL_INVALID_ENUM                           0xA002
 
 /** 
@@ -331,7 +313,6 @@ typedef void ALvoid;
 /** 
  * Illegal call.
  */
-#define AL_ILLEGAL_COMMAND                        0xA004
 #define AL_INVALID_OPERATION                      0xA004
 
   
@@ -378,9 +359,6 @@ typedef void ALvoid;
 #define AL_LINEAR_DISTANCE_CLAMPED                0xD004
 #define AL_EXPONENT_DISTANCE                      0xD005
 #define AL_EXPONENT_DISTANCE_CLAMPED              0xD006
-
-
-#if !defined(AL_NO_PROTOTYPES)
 
 /*
  * Renderer State management
@@ -658,84 +636,9 @@ AL_API void AL_APIENTRY alSpeedOfSound( ALfloat value );
 
 AL_API void AL_APIENTRY alDistanceModel( ALenum distanceModel );
 
-#else /* AL_NO_PROTOTYPES */
-
-void          (AL_APIENTRY *alEnable)( ALenum capability );
-void          (AL_APIENTRY *alDisable)( ALenum capability ); 
-ALboolean     (AL_APIENTRY *alIsEnabled)( ALenum capability ); 
-const ALchar* (AL_APIENTRY *alGetString)( ALenum param );
-void          (AL_APIENTRY *alGetBooleanv)( ALenum param, ALboolean* data );
-void          (AL_APIENTRY *alGetIntegerv)( ALenum param, ALint* data );
-void          (AL_APIENTRY *alGetFloatv)( ALenum param, ALfloat* data );
-void          (AL_APIENTRY *alGetDoublev)( ALenum param, ALdouble* data );
-ALboolean     (AL_APIENTRY *alGetBoolean)( ALenum param );
-ALint         (AL_APIENTRY *alGetInteger)( ALenum param );
-ALfloat       (AL_APIENTRY *alGetFloat)( ALenum param );
-ALdouble      (AL_APIENTRY *alGetDouble)( ALenum param );
-ALenum        (AL_APIENTRY *alGetError)( void );
-ALboolean     (AL_APIENTRY *alIsExtensionPresent)(const ALchar* extname );
-void*         (AL_APIENTRY *alGetProcAddress)( const ALchar* fname );
-ALenum        (AL_APIENTRY *alGetEnumValue)( const ALchar* ename );
-void          (AL_APIENTRY *alListenerf)( ALenum param, ALfloat value );
-void          (AL_APIENTRY *alListener3f)( ALenum param, ALfloat value1, ALfloat value2, ALfloat value3 );
-void          (AL_APIENTRY *alListenerfv)( ALenum param, const ALfloat* values );
-void          (AL_APIENTRY *alListeneri)( ALenum param, ALint value );
-void          (AL_APIENTRY *alListener3i)( ALenum param, ALint value1, ALint value2, ALint value3 );
-void          (AL_APIENTRY *alListeneriv)( ALenum param, const ALint* values );
-void          (AL_APIENTRY *alGetListenerf)( ALenum param, ALfloat* value );
-void          (AL_APIENTRY *alGetListener3f)( ALenum param, ALfloat *value1, ALfloat *value2, ALfloat *value3 );
-void          (AL_APIENTRY *alGetListenerfv)( ALenum param, ALfloat* values );
-void          (AL_APIENTRY *alGetListeneri)( ALenum param, ALint* value );
-void          (AL_APIENTRY *alGetListener3i)( ALenum param, ALint *value1, ALint *value2, ALint *value3 );
-void          (AL_APIENTRY *alGetListeneriv)( ALenum param, ALint* values );
-void          (AL_APIENTRY *alGenSources)( ALsizei n, ALuint* sources );
-void          (AL_APIENTRY *alDeleteSources)( ALsizei n, const ALuint* sources );
-ALboolean     (AL_APIENTRY *alIsSource)( ALuint sid ); 
-void          (AL_APIENTRY *alSourcef)( ALuint sid, ALenum param, ALfloat value);
-void          (AL_APIENTRY *alSource3f)( ALuint sid, ALenum param, ALfloat value1, ALfloat value2, ALfloat value3 );
-void          (AL_APIENTRY *alSourcefv)( ALuint sid, ALenum param, const ALfloat* values );
-void          (AL_APIENTRY *alSourcei)( ALuint sid, ALenum param, ALint value);
-void          (AL_APIENTRY *alSource3i)( ALuint sid, ALenum param, ALint value1, ALint value2, ALint value3 );
-void          (AL_APIENTRY *alSourceiv)( ALuint sid, ALenum param, const ALint* values );
-void          (AL_APIENTRY *alGetSourcef)( ALuint sid, ALenum param, ALfloat* value );
-void          (AL_APIENTRY *alGetSource3f)( ALuint sid, ALenum param, ALfloat* value1, ALfloat* value2, ALfloat* value3);
-void          (AL_APIENTRY *alGetSourcefv)( ALuint sid, ALenum param, ALfloat* values );
-void          (AL_APIENTRY *alGetSourcei)( ALuint sid, ALenum param, ALint* value );
-void          (AL_APIENTRY *alGetSource3i)( ALuint sid, ALenum param, ALint* value1, ALint* value2, ALint* value3);
-void          (AL_APIENTRY *alGetSourceiv)( ALuint sid, ALenum param, ALint* values );
-void          (AL_APIENTRY *alSourcePlayv)( ALsizei ns, const ALuint *sids );
-void          (AL_APIENTRY *alSourceStopv)( ALsizei ns, const ALuint *sids );
-void          (AL_APIENTRY *alSourceRewindv)( ALsizei ns, const ALuint *sids );
-void          (AL_APIENTRY *alSourcePausev)( ALsizei ns, const ALuint *sids );
-void          (AL_APIENTRY *alSourcePlay)( ALuint sid );
-void          (AL_APIENTRY *alSourceStop)( ALuint sid );
-void          (AL_APIENTRY *alSourceRewind)( ALuint sid );
-void          (AL_APIENTRY *alSourcePause)( ALuint sid );
-void          (AL_APIENTRY *alSourceQueueBuffers)( ALuint sid, ALsizei numEntries, const ALuint *bids );
-void          (AL_APIENTRY *alSourceUnqueueBuffers)( ALuint sid, ALsizei numEntries, ALuint *bids );
-void          (AL_APIENTRY *alGenBuffers)( ALsizei n, ALuint* buffers );
-void          (AL_APIENTRY *alDeleteBuffers)( ALsizei n, const ALuint* buffers );
-ALboolean     (AL_APIENTRY *alIsBuffer)( ALuint bid );
-void          (AL_APIENTRY *alBufferData)( ALuint bid, ALenum format, const ALvoid* data, ALsizei size, ALsizei freq );
-void          (AL_APIENTRY *alBufferf)( ALuint bid, ALenum param, ALfloat value);
-void          (AL_APIENTRY *alBuffer3f)( ALuint bid, ALenum param, ALfloat value1, ALfloat value2, ALfloat value3 );
-void          (AL_APIENTRY *alBufferfv)( ALuint bid, ALenum param, const ALfloat* values );
-void          (AL_APIENTRY *alBufferi)( ALuint bid, ALenum param, ALint value);
-void          (AL_APIENTRY *alBuffer3i)( ALuint bid, ALenum param, ALint value1, ALint value2, ALint value3 );
-void          (AL_APIENTRY *alBufferiv)( ALuint bid, ALenum param, const ALint* values );
-void          (AL_APIENTRY *alGetBufferf)( ALuint bid, ALenum param, ALfloat* value );
-void          (AL_APIENTRY *alGetBuffer3f)( ALuint bid, ALenum param, ALfloat* value1, ALfloat* value2, ALfloat* value3);
-void          (AL_APIENTRY *alGetBufferfv)( ALuint bid, ALenum param, ALfloat* values );
-void          (AL_APIENTRY *alGetBufferi)( ALuint bid, ALenum param, ALint* value );
-void          (AL_APIENTRY *alGetBuffer3i)( ALuint bid, ALenum param, ALint* value1, ALint* value2, ALint* value3);
-void          (AL_APIENTRY *alGetBufferiv)( ALuint bid, ALenum param, ALint* values );
-void          (AL_APIENTRY *alDopplerFactor)( ALfloat value );
-void          (AL_APIENTRY *alDopplerVelocity)( ALfloat value );
-void          (AL_APIENTRY *alSpeedOfSound)( ALfloat value );
-void          (AL_APIENTRY *alDistanceModel)( ALenum distanceModel );
-
-/* Type Definitions */
-
+/*
+ * Pointer-to-function types, useful for dynamically getting AL entry points.
+ */
 typedef void           (AL_APIENTRY *LPALENABLE)( ALenum capability );
 typedef void           (AL_APIENTRY *LPALDISABLE)( ALenum capability ); 
 typedef ALboolean      (AL_APIENTRY *LPALISENABLED)( ALenum capability ); 
@@ -810,9 +713,7 @@ typedef void           (AL_APIENTRY *LPALDOPPLERVELOCITY)( ALfloat value );
 typedef void           (AL_APIENTRY *LPALSPEEDOFSOUND)( ALfloat value );
 typedef void           (AL_APIENTRY *LPALDISTANCEMODEL)( ALenum distanceModel );
 
-#endif /* AL_NO_PROTOTYPES */
-
-#if TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
  #pragma export off
 #endif
 

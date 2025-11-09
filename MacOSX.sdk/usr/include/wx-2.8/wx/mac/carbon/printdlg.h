@@ -6,7 +6,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     1998-01-01
-// RCS-ID:      $Id: printdlg.h,v 1.13 2006/10/30 04:36:44 KH Exp $
+// RCS-ID:      $Id: printdlg.h 42697 2006-10-30 04:36:44Z KH $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

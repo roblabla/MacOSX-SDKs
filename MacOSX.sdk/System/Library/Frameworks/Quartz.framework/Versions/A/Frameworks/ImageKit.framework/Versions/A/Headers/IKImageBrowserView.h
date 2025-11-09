@@ -12,14 +12,46 @@
 
 #import <AppKit/AppKit.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class IKImageBrowserView;
+@class IKImageBrowserCell;
 
+
+/*
+ Mask for cells appearance style bitfield
+ */
+enum{
+	IKCellsStyleNone              =0,
+	IKCellsStyleShadowed          =1,
+	IKCellsStyleOutlined          =2,
+	IKCellsStyleTitled            =4,
+	IKCellsStyleSubtitled         =8
+};
+
+/*
+ enum for group style attibute (see below)
+ */
+enum{
+	IKGroupBezelStyle=0,
+	IKGroupDisclosureStyle,
+};
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/*
+ enum for dropOperation
+ */
+typedef enum
+{
+	IKImageBrowserDropOn=0,
+	IKImageBrowserDropBefore=1,
+}IKImageBrowserDropOperation;
+#endif
 
 
 /*!
   @category NSObject (IKImageBrowserDataSource)
-  @abstract The IKImageBrowserDataSource informal protocol declares the methods that an instance of IKImageView uses to access the contents of its data source object.
+  @abstract The IKImageBrowserDataSource informal protocol declares the methods that an instance of IKImageBrowserView uses to access the contents of its data source object.
 */
 @interface NSObject (IKImageBrowserDataSource)
 
@@ -34,7 +66,7 @@
 /*! 
   @method imageBrowser:itemAtIndex:
   @abstract Returns an object for the record in aBrowser corresponding to index <i>index</i> (required).
-  @discussion The returned object must implement the required methods of <i>IKImageBrowserCell</i>. 
+  @discussion The returned object must implement the required methods of <i>IKImageBrowserItem</i>. 
 */
 - (id /*IKImageBrowserItem*/) imageBrowser:(IKImageBrowserView *) aBrowser itemAtIndex:(NSUInteger)index;
 
@@ -225,6 +257,52 @@
 */
 - (BOOL) constrainsToOriginalSize;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/*! 
+ @method setBackgroundLayer:
+ @abstract Specifies the receiver’s background layer.
+ */
+- (void) setBackgroundLayer:(CALayer *) aLayer;
+
+/*! 
+ @method backgroundLayer
+ @abstract Provides the receiver’s background layer.
+ */
+- (CALayer *) backgroundLayer;
+
+
+/*! 
+ @method setForegroundLayer:
+ @abstract Specifies the receiver’s foreground layer.
+ */
+- (void) setForegroundLayer:(CALayer *) aLayer;
+
+/*! 
+ @method foregroundLayer
+ @abstract Provides the receiver’s foreground layer.
+ */
+- (CALayer *) foregroundLayer;
+
+
+/*! 
+ @method newCellForRepresentedItem:
+ @abstract Returns the cell to use for the specified item. The returned cell should not be autoreleased.
+ @param The item that the returned cell will represent.
+ @discussion Subclasses can override this method to customize the appearance of the cell that will represent "anItem".
+ */
+- (IKImageBrowserCell *) newCellForRepresentedItem:(id /* <IKImageBrowserItem> */) anItem;
+
+
+/*! 
+ @method cellForItemAtIndex:
+ @abstract Returns the cell at the specified index.
+ @discussion Subclasses must not override this method.
+ */
+- (IKImageBrowserCell *) cellForItemAtIndex:(NSUInteger) index;
+
+#endif
+
+
 @end
 
 
@@ -277,6 +355,21 @@
 */
 - (NSSize) cellSize;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/*! 
+ @method intercellSpacing
+ @abstract Returns the spacing between cells in the image browser.
+ */
+- (NSSize) intercellSpacing;
+
+/*! 
+ @method setIntercellSpacing:
+ @abstract Sets the spacing between cells in the matrix.
+ @param aSize The vertical and horizontal spacing to use between cells in the receiver. By default, both values are 10.0 in the receiver’s coordinate system.
+ */
+- (void)setIntercellSpacing:(NSSize)aSize;
+#endif
+
 /*!
   @method indexOfItemAtPoint:
   @abstract Returns the item at the specified location or NSNotFound if no item at this location.
@@ -289,6 +382,68 @@
 */
 - (NSRect) itemFrameAtIndex: (NSInteger)index;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/*! 
+ @method visibleItemIndexes
+ @abstract Returns indexes of the receiver’s currently visible items.
+ */
+- (NSIndexSet *) visibleItemIndexes;
+
+
+/*! 
+ @method rowIndexesInRect:
+ @abstract Returns the indexes of the receiver’s rows that intersect the specified rectangle.
+ */
+- (NSIndexSet *) rowIndexesInRect:(NSRect) rect;
+
+/*! 
+ @method columnIndexesInRect:
+ @abstract Returns the indexes of the receiver’s columns that intersect the specified rectangle.
+ */
+- (NSIndexSet *) columnIndexesInRect:(NSRect) rect;
+
+/*! 
+ @method rectOfColumn:
+ @abstract Returns the rectangle containing the column at a given index.
+ @param columnIndex The index of a column in the receiver.
+ */
+- (NSRect) rectOfColumn:(NSUInteger) columnIndex;
+
+/*! 
+ @method rectOfRow:
+ @abstract Returns the rectangle containing the row at a given index.
+ @param rowIndex The index of a row in the receiver.
+ */
+- (NSRect) rectOfRow:(NSUInteger) rowIndex;
+
+/*! 
+ @method numberOfRows
+ @abstract Returns the number of rows in the receiver.
+ */
+- (NSUInteger)numberOfRows;
+
+/*! 
+ @method numberOfColumns
+ @abstract Returns the number of columns in the receiver.
+ */
+- (NSUInteger)numberOfColumns;
+
+
+/*! 
+ @method setCanControlQuickLookPanel:
+ @abstract Sets whether the receiver can automatically take control of the Quick Look panel.
+ @param flag if YES, KImageBrowser can take control of the Quick Look panel automatically whenever it becomes first responder. This means that it provides the spacebar key store to open/close Quick Look panel and sets itself as the panel's datasource and delegate.
+ @discussion default value is NO. IKImageBrowserView's datasource items should provide file paths or URLs as their representation (see IKImageBrowserItem protocol).
+ */
+- (void) setCanControlQuickLookPanel:(BOOL)flag;
+
+/*! 
+ @method canControlQuickLookPanel
+ @abstract Returns a Boolean value that indicates whether the receiver can automatically take control of the Quick Look panel.
+ */
+- (BOOL) canControlQuickLookPanel;
+
+#endif
 
 @end
 
@@ -396,6 +551,41 @@
 */
 - (NSUInteger) indexAtLocationOfDroppedItem; 
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+/*!
+ @method dropOperation
+ @abstract Returns the current dropOperation. The returned value is valid when a drop occurred and until next drop.
+ @discussion Returns IKImageBrowserDropOn if the drop occurs on an item. Returns IKImageBrowserDropBefore otherwise.
+ In drag and drop, used to specify a dropOperation.  For example, given a browser with N cells (numbered with cell 0 at the top left visually), a cell of N-1 and operation of IKImageBrowserDropOn would specify a drop on the last cell.  To specify a drop after the last cell, one would use an index of N and IKImageBrowserDropBefore for the operation.
+ */
+
+- (IKImageBrowserDropOperation) dropOperation;
+
+
+/*! 
+ @method setAllowsDroppingOnItems:
+ @abstract Controls whether the user can drop on items. Default is NO. 
+ */  
+- (void) setAllowsDroppingOnItems: (BOOL) flag;
+
+/*! 
+ @method allowsDroppingOnItems
+ @abstract Returns YES if the receiver allows the user to drop on items, NO otherwise. 
+ */ 
+- (BOOL) allowsDroppingOnItems;
+
+
+/*! 
+ @method setDropIndex:dropOperation:
+ @abstract Used if you wish to “retarget” the proposed drop.
+ @discussion To specify a drop on the second item, one would specify index as 1, and operation as IKImageBrowserDropOn. To specify a drop after the last item, one would specify index as the number of items and operation as IKImageBrowserDropBefore. Passing a value of –1 for index, and IKImageBrowserDropOn as the operation causes the entire browser view to be highlighted rather than a specific item. This is useful if the data displayed by the receiver does not allow the user to drop items at a specific item location.
+ */
+- (void) setDropIndex:(NSInteger)index dropOperation:(IKImageBrowserDropOperation)operation;
+
+#endif
+
+
 @end
 
 
@@ -436,25 +626,6 @@
 
 
 /*
-	Mask for cells appearance style bitfield
-*/
-enum{
-	IKCellsStyleNone              =0,
-	IKCellsStyleShadowed          =1,
-	IKCellsStyleOutlined          =2,
-	IKCellsStyleTitled            =4,
-	IKCellsStyleSubtitled         =8
-};
-
-/*
-	enum for group style attibute (see below)
-*/
-enum{
-	IKGroupBezelStyle,
-	IKGroupDisclosureStyle,
-};
-
-/*
 	Image representation types for - (NSString *) imageRepresentationType; defined by the IKImageBrowserItem protocol
 */
 extern NSString * const IKImageBrowserPathRepresentationType;				/* NSString */
@@ -472,6 +643,11 @@ extern NSString * const IKImageBrowserQuickLookPathRepresentationType;		/* NSStr
 extern NSString * const IKImageBrowserIconRefPathRepresentationType;		/* NSString */
 extern NSString * const IKImageBrowserIconRefRepresentationType;			/* IconRef */
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+extern NSString * const IKImageBrowserPDFPageRepresentationType;            /* PDFPage or CGPDFPageRef */ 
+#endif
+
+ 
 /*
 	IKImageBrowserView key for setValue:forKey and valueForKey:
 */
@@ -489,3 +665,9 @@ extern NSString * const IKImageBrowserGroupRangeKey;						/*NSValue (NSRange val
 extern NSString * const IKImageBrowserGroupBackgroundColorKey;				/*NSColor (for bezel style only)*/
 extern NSString * const IKImageBrowserGroupTitleKey;						/*NSString (for diclosure style only) */
 extern NSString * const IKImageBrowserGroupStyleKey;						/*NSNumber (see enum above) */
+extern NSString * const IKImageBrowserGroupHeaderLayer;		                /* CALayer */				
+extern NSString * const IKImageBrowserGroupFooterLayer;	                    /* CALayer */
+
+
+
+#endif //MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5

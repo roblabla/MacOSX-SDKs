@@ -1,5 +1,5 @@
 /*	NSSet.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -34,6 +34,14 @@
 - (NSSet *)setByAddingObject:(id)anObject AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (NSSet *)setByAddingObjectsFromSet:(NSSet *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (NSSet *)setByAddingObjectsFromArray:(NSArray *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+#if NS_BLOCKS_AVAILABLE
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+- (NSSet *)objectsPassingTest:(BOOL (^)(id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSSet *)objectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#endif
 
 @end
 

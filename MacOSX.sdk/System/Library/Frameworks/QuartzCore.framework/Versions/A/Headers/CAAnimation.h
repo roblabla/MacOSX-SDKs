@@ -6,7 +6,7 @@
 #import <QuartzCore/CALayer.h>
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSString, CAMediaTimingFunction;
+@class NSArray, NSString, CAMediaTimingFunction, CAValueFunction;
 
 /** The base animation class. **/
 
@@ -92,6 +92,12 @@
 
 @property(getter=isCumulative) BOOL cumulative;
 
+/* If non-nil a function that is applied to interpolated values
+ * before they are set as the new presentation value of the animation's
+ * target property. Defaults to nil. */
+
+@property(retain) CAValueFunction *valueFunction;
+
 @end
 
 
@@ -102,7 +108,7 @@
 /* The objects defining the property values being interpolated between.
  * All are optional, and no more than two should be non-nil. The object
  * type should match the type of the property being animated (using the
- * standard rules described in CAObject.h.) The supported modes of
+ * standard rules described in CALayer.h.) The supported modes of
  * animation are:
  *
  * - both `fromValue' and `toValue' non-nil. Interpolates between
@@ -121,11 +127,7 @@
  * of the property in the render tree and `toValue'.
  *
  * - `byValue' non-nil. Interpolates between the layer's current value
- * of the property in the render tree and that plus `byValue'.
- *
- * - all nil. Interpolates between the previous value of the property
- * in the render tree and the current presentation value of the
- * property. */
+ * of the property in the render tree and that plus `byValue'. */
 
 @property(retain) id fromValue, toValue, byValue;
 
@@ -183,14 +185,19 @@
 
 /* `calculationMode' strings. */
 
-CA_EXTERN NSString * const kCAAnimationLinear AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAnimationDiscrete AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCAAnimationPaced AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCAAnimationLinear
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAAnimationDiscrete
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAAnimationPaced
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 /* `rotationMode' strings. */
 
-CA_EXTERN NSString * const kCAAnimationRotateAuto;
-CA_EXTERN NSString * const kCAAnimationRotateAutoReverse;
+CA_EXTERN NSString * const kCAAnimationRotateAuto
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 /** Transition animation subclass. **/
 
@@ -215,12 +222,12 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse;
 
 @property float startProgress, endProgress;
 
-/* An optional CoreImage filter object implementing the transition.
- * When set the `type' and `subtype' properties are ignored. The filter
- * must implement `inputImage' and `inputTargetImage' input keys, and
- * the `outputImage' output key. Optionally it may support the
- * `inputExtent' key, which will be set to a rectangle describing the
- * region in which the transition should run. Defaults to nil. */
+/* An optional filter object implementing the transition. When set the
+ * `type' and `subtype' properties are ignored. The filter must
+ * implement `inputImage', `inputTargetImage' and `inputTime' input
+ * keys, and the `outputImage' output key. Optionally it may support
+ * the `inputExtent' key, which will be set to a rectangle describing
+ * the region in which the transition should run. Defaults to nil. */
 
 @property(retain) id filter;
 
@@ -228,17 +235,25 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse;
 
 /* Common transition types. */
 
-CA_EXTERN NSString * const kCATransitionFade AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionMoveIn AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionPush AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionReveal AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCATransitionFade
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionMoveIn
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionPush
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionReveal
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 /* Common transition subtypes. */
 
-CA_EXTERN NSString * const kCATransitionFromRight AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionFromLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionFromTop AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CA_EXTERN NSString * const kCATransitionFromBottom AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CA_EXTERN NSString * const kCATransitionFromRight
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionFromLeft
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionFromTop
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCATransitionFromBottom
+    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
 
 /** Animation subclass for grouped animations. **/

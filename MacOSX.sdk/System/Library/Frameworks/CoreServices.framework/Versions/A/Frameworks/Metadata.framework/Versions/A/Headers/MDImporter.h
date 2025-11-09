@@ -35,11 +35,16 @@ extern "C" {
 
         @constant kMDExporterInterfaceID Exporters can optionaly also implement this
         Interface - B41C6074-7DFB-4057-969D-31C8E861A8D4
+
+        @constant kMDImporterURLInterfaceID Importers can optionaly also implement this
+        Interface - B41C6074-7DFB-4057-969D-31C8E861A8D4
 */
 
 #define kMDImporterTypeID      CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0x8B,0x08,0xC4,0xBF,0x41,0x5B,0x11,0xD8,0xB3,0xF9,0x00,0x03,0x93,0x67,0x26,0xFC)
 #define kMDImporterInterfaceID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0x6E,0xBC,0x27,0xC4,0x89,0x9C,0x11,0xD8,0x84,0xAE,0x00,0x03,0x93,0x67,0x26,0xFC)
 #define kMDExporterInterfaceID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0xB4,0x1C,0x60,0x74,0x7D,0xFB,0x40,0x57,0x96,0x9D,0x31,0xC8,0xE8,0x61,0xA8,0xD4)
+
+#define kMDImporterURLInterfaceID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault, 0x13,0xF6,0x0F,0x02,0x36,0x22,0x4F,0x35,0x98,0x91,0xEC,0x10,0xE6,0xCD,0x08,0xF8)
 
 /*!
         @typedef MDImporterInterfaceStruct
@@ -95,6 +100,11 @@ typedef struct {
     IUNKNOWN_C_GUTS;
     Boolean    (*ImporterExportData)(void *thisInterface,CFDictionaryRef attributes,CFStringRef contentTypeUTI,CFStringRef pathToFile);
 } MDExporterInterfaceStruct;
+
+typedef struct {
+    IUNKNOWN_C_GUTS;
+    Boolean    (*ImporterImportURLData)(void *thisInterface,CFMutableDictionaryRef attributes,CFStringRef contentTypeUTI,CFURLRef urlForFile);
+} MDImporterURLInterfaceStruct;
 #endif
 
 #if defined(__cplusplus)

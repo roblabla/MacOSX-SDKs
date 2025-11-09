@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -29,14 +29,14 @@
 	@header kpi_mbuf.h
 	This header defines an API for interacting with mbufs. mbufs are the
 	primary method of storing packets in the networking stack.
-	
+
 	mbufs are used to store various items in the networking stack. The
 	most common usage of an mbuf is to store a packet or data on a
 	socket waiting to be sent or received. The mbuf is a contiguous
 	structure with some header followed by some data. To store more data
 	than would fit in an mbuf, external data is used. Most mbufs with
 	external data use clusters to store the external data.
-	
+
 	mbufs can be chained, contiguous data in a packet can be found by
 	following the m_next chain. Packets may be bundled together using
 	m_nextpacket. Many parts of the stack do not properly handle chains
@@ -69,13 +69,13 @@
 		being passed to any interface filters.
 */
 enum {
-	MBUF_EXT		= 0x0001,	/* has associated external storage */
-	MBUF_PKTHDR		= 0x0002,	/* start of record */
-	MBUF_EOR		= 0x0004,	/* end of record */
-	
-	MBUF_BCAST		= 0x0100,	/* send/received as link-level broadcast */
-	MBUF_MCAST		= 0x0200,	/* send/received as link-level multicast */
-	MBUF_FRAG		= 0x0400,	/* packet is a fragment of a larger packet */
+	MBUF_EXT	= 0x0001,	/* has associated external storage */
+	MBUF_PKTHDR	= 0x0002,	/* start of record */
+	MBUF_EOR	= 0x0004,	/* end of record */
+
+	MBUF_BCAST	= 0x0100,	/* send/received as link-level broadcast */
+	MBUF_MCAST	= 0x0200,	/* send/received as link-level multicast */
+	MBUF_FRAG	= 0x0400,	/* packet is a fragment of a larger packet */
 	MBUF_FIRSTFRAG	= 0x0800,	/* packet is first fragment */
 	MBUF_LASTFRAG	= 0x1000,	/* packet is last fragment */
 	MBUF_PROMISC	= 0x2000	/* packet is promiscuous */
@@ -119,7 +119,7 @@ enum {
 	MBUF_TYPE_PCB		= 4,	/* protocol control block */
 	MBUF_TYPE_RTABLE	= 5,	/* routing tables */
 	MBUF_TYPE_HTABLE	= 6,	/* IMP host tables */
-	MBUF_TYPE_ATABLE	= 7,	/* address resolution tables */ 
+	MBUF_TYPE_ATABLE	= 7,	/* address resolution tables */
 	MBUF_TYPE_SONAME	= 8,	/* socket name */
 	MBUF_TYPE_SOOPTS	= 10,	/* socket options */
 	MBUF_TYPE_FTABLE	= 11,	/* fragment reassembly header */
@@ -146,6 +146,12 @@ typedef u_int32_t mbuf_type_t;
 	@constant MBUF_CSUM_REQ_UDP Indicates the UDP checksum has not been
 		calculated yet.
 */
+enum {
+	MBUF_TSO_IPV4		= 0x100000,
+	MBUF_TSO_IPV6		= 0x200000
+};
+typedef u_int32_t mbuf_tso_request_flags_t;
+
 enum {
 	MBUF_CSUM_REQ_IP	= 0x0001,
 	MBUF_CSUM_REQ_TCP	= 0x0002,
@@ -177,9 +183,9 @@ typedef u_int32_t mbuf_csum_request_flags_t;
 		is only valid when MBUF_CSUM_DID_DATA is set.
 */
 enum {
-	MBUF_CSUM_DID_IP		= 0x0100,
-	MBUF_CSUM_IP_GOOD		= 0x0200,
-	MBUF_CSUM_DID_DATA		= 0x0400,
+	MBUF_CSUM_DID_IP	= 0x0100,
+	MBUF_CSUM_IP_GOOD	= 0x0200,
+	MBUF_CSUM_DID_DATA	= 0x0400,
 	MBUF_CSUM_PSEUDO_HDR	= 0x0800
 };
 typedef u_int32_t mbuf_csum_performed_flags_t;
@@ -198,8 +204,8 @@ typedef u_int32_t mbuf_csum_performed_flags_t;
 		block, if blocking is necessary fail and return immediately.
 */
 enum {
-	MBUF_WAITOK		= 0,	/* Ok to block to get memory */
-	MBUF_DONTWAIT	= 1		/* Don't block, fail if blocking would be required */
+	MBUF_WAITOK	= 0,	/* Ok to block to get memory */
+	MBUF_DONTWAIT	= 1	/* Don't block, fail if blocking would be required */
 };
 typedef u_int32_t mbuf_how_t;
 
@@ -229,23 +235,23 @@ typedef	u_int16_t mbuf_tag_type_t;
 	@field bigmclbytes Length of a big mbuf cluster.
 */
 struct mbuf_stat {
-	u_long	mbufs;			/* mbufs obtained from page pool */
-	u_long	clusters;		/* clusters obtained from page pool */
-	u_long	clfree;			/* free clusters */
-	u_long	drops;			/* times failed to find space */
-	u_long	wait;			/* times waited for space */
-	u_long	drain;			/* times drained protocols for space */
-	u_short	mtypes[256];	/* type specific mbuf allocations */
-	u_long	mcfail;			/* times m_copym failed */
-	u_long	mpfail;			/* times m_pullup failed */
-	u_long	msize;			/* length of an mbuf */
-	u_long	mclbytes;		/* length of an mbuf cluster */
-	u_long	minclsize;		/* min length of data to allocate a cluster */
-	u_long	mlen;			/* length of data in an mbuf */
-	u_long	mhlen;			/* length of data in a header mbuf */
-	u_long	bigclusters;	/* number of big clusters */
-	u_long	bigclfree;		/* number of big clustser free */
-	u_long	bigmclbytes;	/* length of data in a big cluster */
+	u_int32_t	mbufs;		/* mbufs obtained from page pool */
+	u_int32_t	clusters;	/* clusters obtained from page pool */
+	u_int32_t	clfree;		/* free clusters */
+	u_int32_t	drops;		/* times failed to find space */
+	u_int32_t	wait;		/* times waited for space */
+	u_int32_t	drain;		/* times drained protocols for space */
+	u_short		mtypes[256];	/* type specific mbuf allocations */
+	u_int32_t	mcfail;		/* times m_copym failed */
+	u_int32_t	mpfail;		/* times m_pullup failed */
+	u_int32_t	msize;		/* length of an mbuf */
+	u_int32_t	mclbytes;	/* length of an mbuf cluster */
+	u_int32_t	minclsize;	/* min length of data to allocate a cluster */
+	u_int32_t	mlen;		/* length of data in an mbuf */
+	u_int32_t	mhlen;		/* length of data in a header mbuf */
+	u_int32_t	bigclusters;	/* number of big clusters */
+	u_int32_t	bigclfree;	/* number of big clustser free */
+	u_int32_t	bigmclbytes;	/* length of data in a big cluster */
 };
 
 /* Parameter for m_copym to copy all bytes */
@@ -271,7 +277,7 @@ __BEGIN_DECLS
 	@param mbuf The mbuf.
 	@result A pointer to the data in the mbuf.
  */
-void*		mbuf_data(mbuf_t mbuf);
+extern void *mbuf_data(mbuf_t mbuf);
 
 /*!
 	@function mbuf_datastart
@@ -279,12 +285,12 @@ void*		mbuf_data(mbuf_t mbuf);
 		data in an mbuf. An mbuf's data may come from a cluster or be
 		embedded in the mbuf structure itself. The data pointer
 		retrieved by mbuf_data may not be at the start of the data
-		(mbuf_leadingspace will be non-zero). This function will return to
-		you a pointer that matches mbuf_data() - mbuf_leadingspace().
+		(mbuf_leadingspace will be non-zero). This function will return
+		a pointer that matches mbuf_data() - mbuf_leadingspace().
 	@param mbuf The mbuf.
 	@result A pointer to smallest possible value for data.
  */
-void*		mbuf_datastart(mbuf_t mbuf);
+extern void *mbuf_datastart(mbuf_t mbuf);
 
 /*!
 	@function mbuf_setdata
@@ -300,7 +306,7 @@ void*		mbuf_datastart(mbuf_t mbuf);
 	@param len The new length of data in the mbuf.
 	@result 0 on success, errno error on failure.
  */
-errno_t		mbuf_setdata(mbuf_t mbuf, void *data, size_t len);
+extern errno_t mbuf_setdata(mbuf_t mbuf, void *data, size_t len);
 
 /*!
 	@function mbuf_align_32
@@ -313,7 +319,7 @@ errno_t		mbuf_setdata(mbuf_t mbuf, void *data, size_t len);
 		data location.
 	@result 0 on success, errno error on failure.
  */
-errno_t		mbuf_align_32(mbuf_t mbuf, size_t len);
+extern errno_t mbuf_align_32(mbuf_t mbuf, size_t len);
 
 /*!
 	@function mbuf_data_to_physical
@@ -332,7 +338,7 @@ errno_t		mbuf_align_32(mbuf_t mbuf, size_t len);
 	@result The 64 bit physical address of the mbuf data or NULL if ptr
 		does not point to data stored in an mbuf.
  */
-addr64_t	mbuf_data_to_physical(void* ptr);
+extern addr64_t mbuf_data_to_physical(void *ptr);
 
 
 /* Allocation */
@@ -345,7 +351,7 @@ addr64_t	mbuf_data_to_physical(void* ptr);
 	@param mbuf The mbuf.
 	@result 0 on success, errno error on failure.
  */
-errno_t		mbuf_get(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
+extern errno_t mbuf_get(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf);
 
 /*!
 	@function mbuf_gethdr
@@ -357,7 +363,7 @@ errno_t		mbuf_get(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
 	@param mbuf The mbuf.
 	@result 0 on success, errno error on failure.
  */
-errno_t		mbuf_gethdr(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
+extern errno_t mbuf_gethdr(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf);
 
 /*!
 	@function mbuf_attachcluster
@@ -385,9 +391,8 @@ errno_t		mbuf_gethdr(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
 		EINVAL - Invalid parameter
 		ENOMEM - Not enough memory available
  */
-errno_t
-mbuf_attachcluster(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf,
-    caddr_t extbuf, void (*extfree)(caddr_t , u_int, caddr_t),
+extern errno_t mbuf_attachcluster(mbuf_how_t how, mbuf_type_t type,
+    mbuf_t *mbuf, caddr_t extbuf, void (*extfree)(caddr_t , u_int, caddr_t),
     size_t extsize, caddr_t extarg);
 
 /*!
@@ -413,7 +418,7 @@ mbuf_attachcluster(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf,
 		In this case, the caller is advised to use 4096 bytes or
 		smaller during subseqent requests.
  */
-errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, caddr_t *addr);
+extern errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, caddr_t *addr);
 
 /*!
 	@function mbuf_freecluster
@@ -424,7 +429,7 @@ errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, caddr_t *addr);
 	@param addr The address of the cluster.
 	@param size The actual size of the cluster.
  */
-void mbuf_freecluster(caddr_t addr, size_t size);
+extern void mbuf_freecluster(caddr_t addr, size_t size);
 
 /*!
 	@function mbuf_getcluster
@@ -453,7 +458,8 @@ void mbuf_freecluster(caddr_t addr, size_t size);
 		    In this case, the caller is advised to use 4096 bytes or
 		    smaller during subsequent requests.
  */
-errno_t		mbuf_getcluster(mbuf_how_t how, mbuf_type_t type, size_t size, mbuf_t* mbuf);
+extern errno_t mbuf_getcluster(mbuf_how_t how, mbuf_type_t type, size_t size,
+    mbuf_t *mbuf);
 
 /*!
 	@function mbuf_mclget
@@ -470,7 +476,7 @@ errno_t		mbuf_getcluster(mbuf_how_t how, mbuf_type_t type, size_t size, mbuf_t* 
 		will be freed. If you specify an mbuf value in *mbuf,
 		mbuf_mclget will not free it.
  */
-errno_t		mbuf_mclget(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
+extern errno_t mbuf_mclget(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf);
 
 /*!
 	@function mbuf_allocpacket
@@ -507,7 +513,8 @@ errno_t		mbuf_mclget(mbuf_how_t how, mbuf_type_t type, mbuf_t* mbuf);
 		ENOBUFS - Buffers not big enough for the maximum number of
 		    chunks requested
 */
-errno_t	mbuf_allocpacket(mbuf_how_t how, size_t packetlen, unsigned int * maxchunks, mbuf_t *mbuf);
+extern errno_t mbuf_allocpacket(mbuf_how_t how, size_t packetlen,
+    unsigned int * maxchunks, mbuf_t *mbuf);
 
 /*!
 	@function mbuf_allocpacket_list
@@ -545,7 +552,8 @@ errno_t	mbuf_allocpacket(mbuf_how_t how, size_t packetlen, unsigned int * maxchu
 		ENOBUFS - Buffers not big enough for the maximum number of
 		    chunks requested
 */
-errno_t	mbuf_allocpacket_list(unsigned int numpkts, mbuf_how_t how, size_t packetlen, unsigned int * maxchunks, mbuf_t *mbuf);
+extern errno_t mbuf_allocpacket_list(unsigned int numpkts, mbuf_how_t how,
+    size_t packetlen, unsigned int * maxchunks, mbuf_t *mbuf);
 
 
 /*!
@@ -556,7 +564,7 @@ errno_t	mbuf_allocpacket_list(unsigned int numpkts, mbuf_how_t how, size_t packe
 	@param mbuf Upon success, *mbuf will be a reference to the new mbuf.
 	@result 0 on success, errno error on failure.
  */
-errno_t		mbuf_getpacket(mbuf_how_t how, mbuf_t* mbuf);
+extern errno_t mbuf_getpacket(mbuf_how_t how, mbuf_t *mbuf);
 
 /*!
 	@function mbuf_free
@@ -565,14 +573,14 @@ errno_t		mbuf_getpacket(mbuf_how_t how, mbuf_t* mbuf);
 	@param mbuf The mbuf to free.
 	@result The next mbuf in the chain.
  */
-mbuf_t		mbuf_free(mbuf_t mbuf);
+extern mbuf_t mbuf_free(mbuf_t mbuf);
 
 /*!
 	@function mbuf_freem
 	@discussion Frees a chain of mbufs link through mnext.
 	@param mbuf The first mbuf in the chain to free.
  */
-void		mbuf_freem(mbuf_t mbuf);
+extern void mbuf_freem(mbuf_t mbuf);
 
 /*!
 	@function mbuf_freem_list
@@ -581,7 +589,7 @@ void		mbuf_freem(mbuf_t mbuf);
 	@param mbuf The first mbuf in the linked list to free.
 	@result The number of mbufs freed.
  */
-int			mbuf_freem_list(mbuf_t mbuf);
+extern int mbuf_freem_list(mbuf_t mbuf);
 
 /*!
 	@function mbuf_leadingspace
@@ -590,7 +598,7 @@ int			mbuf_freem_list(mbuf_t mbuf);
 	@param mbuf The mbuf.
 	@result The number of unused bytes at the start of the mbuf.
  */
-size_t		mbuf_leadingspace(const mbuf_t mbuf);
+extern size_t mbuf_leadingspace(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_trailingspace
@@ -599,7 +607,7 @@ size_t		mbuf_leadingspace(const mbuf_t mbuf);
 	@param mbuf The mbuf.
 	@result The number of unused bytes following the current data.
  */
-size_t		mbuf_trailingspace(const mbuf_t mbuf);
+extern size_t mbuf_trailingspace(const mbuf_t mbuf);
 
 /* Manipulation */
 
@@ -617,8 +625,8 @@ size_t		mbuf_trailingspace(const mbuf_t mbuf);
 	@param new_mbuf Upon success, the newly allocated mbuf.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_copym(const mbuf_t src, size_t offset, size_t len,
-						mbuf_how_t how, mbuf_t* new_mbuf);
+extern errno_t mbuf_copym(const mbuf_t src, size_t offset, size_t len,
+    mbuf_how_t how, mbuf_t *new_mbuf);
 
 /*!
 	@function mbuf_dup
@@ -631,7 +639,7 @@ errno_t		mbuf_copym(const mbuf_t src, size_t offset, size_t len,
 	@param new_mbuf Upon success, the newly allocated mbuf.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_dup(const mbuf_t src, mbuf_how_t how, mbuf_t* new_mbuf);
+extern errno_t mbuf_dup(const mbuf_t src, mbuf_how_t how, mbuf_t *new_mbuf);
 
 /*!
 	@function mbuf_prepend
@@ -646,7 +654,7 @@ errno_t		mbuf_dup(const mbuf_t src, mbuf_how_t how, mbuf_t* new_mbuf);
 	@param how Blocking or non-blocking.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_prepend(mbuf_t* mbuf, size_t len, mbuf_how_t how);
+extern errno_t mbuf_prepend(mbuf_t *mbuf, size_t len, mbuf_how_t how);
 
 /*!
 	@function mbuf_split
@@ -661,8 +669,8 @@ errno_t		mbuf_prepend(mbuf_t* mbuf, size_t len, mbuf_how_t how);
 		failure, the original mbuf chain passed in to src will be
 		preserved.
  */
-errno_t		mbuf_split(mbuf_t src, size_t offset,
-						mbuf_how_t how, mbuf_t* new_mbuf);
+extern errno_t mbuf_split(mbuf_t src, size_t offset, mbuf_how_t how,
+    mbuf_t *new_mbuf);
 
 /*!
 	@function mbuf_pullup
@@ -675,7 +683,7 @@ errno_t		mbuf_split(mbuf_t src, size_t offset,
 	@result 0 upon success otherwise the errno error. In the case of an
 		error, the mbuf chain has been freed.
  */
-errno_t		mbuf_pullup(mbuf_t* mbuf, size_t len);
+extern errno_t mbuf_pullup(mbuf_t *mbuf, size_t len);
 
 /*!
 	@function mbuf_pulldown
@@ -695,7 +703,8 @@ errno_t		mbuf_pullup(mbuf_t* mbuf, size_t len);
 		in.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_pulldown(mbuf_t src, size_t *offset, size_t length, mbuf_t *location);
+extern errno_t mbuf_pulldown(mbuf_t src, size_t *offset, size_t length,
+    mbuf_t *location);
 
 /*!
 	@function mbuf_adj
@@ -706,7 +715,7 @@ errno_t		mbuf_pulldown(mbuf_t src, size_t *offset, size_t length, mbuf_t *locati
 	@param mbuf The mbuf chain to trim.
 	@param len The number of bytes to trim from the mbuf chain.
  */
-void		mbuf_adj(mbuf_t mbuf, int len);
+extern void mbuf_adj(mbuf_t mbuf, int len);
 
 /*!
 	@function mbuf_adjustlen
@@ -719,7 +728,26 @@ void		mbuf_adj(mbuf_t mbuf, int len);
 	@param amount The number of bytes increment the length by.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_adjustlen(mbuf_t mbuf, int amount);
+extern errno_t mbuf_adjustlen(mbuf_t mbuf, int amount);
+
+/*!
+	@function mbuf_concatenate
+	@discussion Concatenate mbuf chain src to dst using m_next and return
+		a chain which represents the concatenated chain.  The routine
+		does not prevent two chains of different mbuf types to be
+		concatenated, nor does it modify any packet header in the
+		destination chain.  Therefore, it's the responsibility of the
+		caller to ensure that the resulted concatenated mbuf chain is
+		correct for further usages.
+	@param dst The destination mbuf chain.
+	@param src The source mbuf chain.
+	@result A pointer to the head of the concatenated mbuf chain.  This
+		should be treated as the updated destination mbuf chain; the
+		caller must no longer refer to the original src or dst mbuf
+		chain.  Otherwise it returns NULL if the original dst mbuf
+		chain is NULL.
+ */
+extern mbuf_t mbuf_concatenate(mbuf_t dst, mbuf_t src);
 
 /*!
 	@function mbuf_copydata
@@ -733,18 +761,19 @@ errno_t		mbuf_adjustlen(mbuf_t mbuf, int amount);
 		copied.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_copydata(const mbuf_t mbuf, size_t offset, size_t length, void* out_data);
+extern errno_t mbuf_copydata(const mbuf_t mbuf, size_t offset, size_t length,
+    void *out_data);
 
 /*!
 	@function mbuf_copyback
 	@discussion Copies data from a buffer to an mbuf chain.
 		mbuf_copyback will grow the chain to fit the specified buffer.
-		
+
 		If mbuf_copydata is unable to allocate enough mbufs to grow the
 		chain, ENOBUFS will be returned. The mbuf chain will be shorter
 		than expected but all of the data up to the end of the mbuf
 		chain will be valid.
-		
+
 		If an offset is specified, mbuf_copyback will skip that many
 		bytes in the mbuf chain before starting to write the buffer in
 		to the chain. If the mbuf chain does not contain this many
@@ -757,8 +786,8 @@ errno_t		mbuf_copydata(const mbuf_t mbuf, size_t offset, size_t length, void* ou
 	@param how Blocking or non-blocking.
 	@result 0 upon success, EINVAL or ENOBUFS upon failure.
  */
-errno_t		mbuf_copyback(mbuf_t mbuf, size_t offset, size_t length,
-						  const void *data, mbuf_how_t how);
+extern errno_t mbuf_copyback(mbuf_t mbuf, size_t offset, size_t length,
+    const void *data, mbuf_how_t how);
 
 /*!
 	@function mbuf_mclhasreference
@@ -768,7 +797,7 @@ errno_t		mbuf_copyback(mbuf_t mbuf, size_t offset, size_t length,
 	@param mbuf The mbuf with the cluster to test.
 	@result 0 if there is no reference by another mbuf, 1 otherwise.
  */
-int			mbuf_mclhasreference(mbuf_t mbuf);
+extern int mbuf_mclhasreference(mbuf_t mbuf);
 
 
 /* mbuf header */
@@ -779,7 +808,7 @@ int			mbuf_mclhasreference(mbuf_t mbuf);
 	@param mbuf The mbuf.
 	@result The next mbuf in the chain.
  */
-mbuf_t		mbuf_next(const mbuf_t mbuf);
+extern mbuf_t mbuf_next(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_setnext
@@ -788,7 +817,7 @@ mbuf_t		mbuf_next(const mbuf_t mbuf);
 	@param next The new next mbuf.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_setnext(mbuf_t mbuf, mbuf_t next);
+extern errno_t mbuf_setnext(mbuf_t mbuf, mbuf_t next);
 
 /*!
 	@function mbuf_nextpkt
@@ -796,7 +825,7 @@ errno_t		mbuf_setnext(mbuf_t mbuf, mbuf_t next);
 	@param mbuf The mbuf.
 	@result The nextpkt.
  */
-mbuf_t		mbuf_nextpkt(const mbuf_t mbuf);
+extern mbuf_t mbuf_nextpkt(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_setnextpkt
@@ -804,7 +833,7 @@ mbuf_t		mbuf_nextpkt(const mbuf_t mbuf);
 	@param mbuf The mbuf.
 	@param nextpkt The new next packet.
  */
-void		mbuf_setnextpkt(mbuf_t mbuf, mbuf_t nextpkt);
+extern void mbuf_setnextpkt(mbuf_t mbuf, mbuf_t nextpkt);
 
 /*!
 	@function mbuf_len
@@ -812,7 +841,7 @@ void		mbuf_setnextpkt(mbuf_t mbuf, mbuf_t nextpkt);
 	@param mbuf The mbuf.
 	@result The length.
  */
-size_t		mbuf_len(const mbuf_t mbuf);
+extern size_t mbuf_len(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_setlen
@@ -822,7 +851,7 @@ size_t		mbuf_len(const mbuf_t mbuf);
 	@param len The new length.
 	@result 0 upon success otherwise the errno error.
  */
-void		mbuf_setlen(mbuf_t mbuf, size_t len);
+extern void mbuf_setlen(mbuf_t mbuf, size_t len);
 
 /*!
 	@function mbuf_maxlen
@@ -833,7 +862,7 @@ void		mbuf_setlen(mbuf_t mbuf, size_t len);
 	@param mbuf The mbuf.
 	@result The maximum lenght of data for this mbuf.
  */
-size_t		mbuf_maxlen(const mbuf_t mbuf);
+extern size_t mbuf_maxlen(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_type
@@ -841,7 +870,7 @@ size_t		mbuf_maxlen(const mbuf_t mbuf);
 	@param mbuf The mbuf.
 	@result The type.
  */
-mbuf_type_t	mbuf_type(const mbuf_t mbuf);
+extern mbuf_type_t mbuf_type(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_settype
@@ -850,7 +879,7 @@ mbuf_type_t	mbuf_type(const mbuf_t mbuf);
 	@param new_type The new type.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_settype(mbuf_t mbuf, mbuf_type_t new_type);
+extern errno_t mbuf_settype(mbuf_t mbuf, mbuf_type_t new_type);
 
 /*!
 	@function mbuf_flags
@@ -858,7 +887,7 @@ errno_t		mbuf_settype(mbuf_t mbuf, mbuf_type_t new_type);
 	@param mbuf The mbuf.
 	@result The flags.
  */
-mbuf_flags_t	mbuf_flags(const mbuf_t mbuf);
+extern mbuf_flags_t mbuf_flags(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_setflags
@@ -867,7 +896,7 @@ mbuf_flags_t	mbuf_flags(const mbuf_t mbuf);
 	@param flags The flags that should be set, all other flags will be cleared.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_setflags(mbuf_t mbuf, mbuf_flags_t flags);
+extern errno_t mbuf_setflags(mbuf_t mbuf, mbuf_flags_t flags);
 
 /*!
 	@function mbuf_setflags_mask
@@ -878,8 +907,8 @@ errno_t		mbuf_setflags(mbuf_t mbuf, mbuf_flags_t flags);
 	@param mask The mask controlling which flags will be modified.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_setflags_mask(mbuf_t mbuf, mbuf_flags_t flags,
-							   mbuf_flags_t mask);
+extern errno_t mbuf_setflags_mask(mbuf_t mbuf, mbuf_flags_t flags,
+    mbuf_flags_t mask);
 
 /*!
 	@function mbuf_copy_pkthdr
@@ -888,7 +917,7 @@ errno_t		mbuf_setflags_mask(mbuf_t mbuf, mbuf_flags_t flags,
 	@param mbuf The mbuf to which the packet header will be copied.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_copy_pkthdr(mbuf_t dest, const mbuf_t src);
+extern errno_t mbuf_copy_pkthdr(mbuf_t dest, const mbuf_t src);
 
 /*!
 	@function mbuf_pkthdr_len
@@ -897,7 +926,7 @@ errno_t		mbuf_copy_pkthdr(mbuf_t dest, const mbuf_t src);
 		be changed.
 	@result The length, in bytes, of the packet.
  */
-size_t		mbuf_pkthdr_len(const mbuf_t mbuf);
+extern size_t mbuf_pkthdr_len(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_pkthdr_setlen
@@ -905,7 +934,7 @@ size_t		mbuf_pkthdr_len(const mbuf_t mbuf);
 	@param mbuf The mbuf containing the packet header.
 	@param len The new length of the packet.
  */
-void		mbuf_pkthdr_setlen(mbuf_t mbuf, size_t len);
+extern void mbuf_pkthdr_setlen(mbuf_t mbuf, size_t len);
 
 /*!
 	@function mbuf_pkthdr_adjustlen
@@ -914,7 +943,7 @@ void		mbuf_pkthdr_setlen(mbuf_t mbuf, size_t len);
 	@param amount The number of bytes to adjust the packet header length
 		field by.
  */
-void		mbuf_pkthdr_adjustlen(mbuf_t mbuf, int amount);
+extern void mbuf_pkthdr_adjustlen(mbuf_t mbuf, int amount);
 
 /*!
 	@function mbuf_pkthdr_rcvif
@@ -928,7 +957,7 @@ void		mbuf_pkthdr_adjustlen(mbuf_t mbuf, int amount);
 	@param mbuf The mbuf containing the packet header.
 	@result A reference to the interface.
  */
-ifnet_t		mbuf_pkthdr_rcvif(const mbuf_t mbuf);
+extern ifnet_t mbuf_pkthdr_rcvif(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_pkthdr_setrcvif
@@ -937,7 +966,7 @@ ifnet_t		mbuf_pkthdr_rcvif(const mbuf_t mbuf);
 	@param ifnet A reference to an interface.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_pkthdr_setrcvif(mbuf_t mbuf, ifnet_t ifp);
+extern errno_t mbuf_pkthdr_setrcvif(mbuf_t mbuf, ifnet_t ifp);
 
 /*!
 	@function mbuf_pkthdr_header
@@ -945,7 +974,7 @@ errno_t		mbuf_pkthdr_setrcvif(mbuf_t mbuf, ifnet_t ifp);
 	@param mbuf The mbuf containing the packet header.
 	@result A pointer to the packet header.
  */
-void*		mbuf_pkthdr_header(const mbuf_t mbuf);
+extern void *mbuf_pkthdr_header(const mbuf_t mbuf);
 
 /*!
 	@function mbuf_pkthdr_setheader
@@ -954,7 +983,7 @@ void*		mbuf_pkthdr_header(const mbuf_t mbuf);
 	@param ifnet A pointer to the header.
 	@result 0 upon success otherwise the errno error.
  */
-void		mbuf_pkthdr_setheader(mbuf_t mbuf, void* header);
+extern void mbuf_pkthdr_setheader(mbuf_t mbuf, void *header);
 
 /* Checksums */
 
@@ -971,13 +1000,13 @@ void		mbuf_pkthdr_setheader(mbuf_t mbuf, void* header);
 		original checksum was valid.
 	@param mbuf The mbuf that has been modified.
  */
-void		mbuf_inbound_modified(mbuf_t mbuf);
+extern void mbuf_inbound_modified(mbuf_t mbuf);
 
 /*!
 	@function mbuf_outbound_finalize
 	@discussion This function will "finalize" the packet allowing your
 		code to inspect the final packet.
-		
+
 		There are a number of operations that are performed in hardware,
 		such as calculating checksums. This function will perform in
 		software the various opterations that were scheduled to be done
@@ -991,10 +1020,10 @@ void		mbuf_inbound_modified(mbuf_t mbuf);
 		hardware, you must call this function to get an aproximate final
 		packet. If you plan to modify the packet in any way, you should
 		call this function.
-		
+
 		This function should be called before modifying any outbound
 		packets.
-		
+
 		This function may be called at various levels, in some cases
 		additional headers may have already been prepended, such as the
 		case of a packet seen by an interface filter. To handle this,
@@ -1008,8 +1037,8 @@ void		mbuf_inbound_modified(mbuf_t mbuf);
 		protocol header. For an IP packet with an ethernet header, this
 		would be the length of an ethernet header.
  */
-void		mbuf_outbound_finalize(mbuf_t mbuf, u_long protocol_family,
-				size_t protocol_offset);
+extern void mbuf_outbound_finalize(mbuf_t mbuf, u_int32_t protocol_family,
+    size_t protocol_offset);
 
 /*!
 	@function mbuf_set_vlan_tag
@@ -1020,7 +1049,7 @@ void		mbuf_outbound_finalize(mbuf_t mbuf, u_long protocol_family,
 	@param vlan The protocol family of the aux data to add.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_set_vlan_tag(mbuf_t mbuf, u_int16_t vlan);
+extern errno_t mbuf_set_vlan_tag(mbuf_t mbuf, u_int16_t vlan);
 
 /*!
 	@function mbuf_get_vlan_tag
@@ -1034,7 +1063,7 @@ errno_t		mbuf_set_vlan_tag(mbuf_t mbuf, u_int16_t vlan);
 	@result 0 upon success otherwise the errno error. ENXIO indicates
 		that the vlan tag is not set.
  */
-errno_t		mbuf_get_vlan_tag(mbuf_t mbuf, u_int16_t *vlan);
+extern errno_t mbuf_get_vlan_tag(mbuf_t mbuf, u_int16_t *vlan);
 
 /*!
 	@function mbuf_clear_vlan_tag
@@ -1043,7 +1072,7 @@ errno_t		mbuf_get_vlan_tag(mbuf_t mbuf, u_int16_t *vlan);
 	@param mbuf The mbuf containing the packet.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_clear_vlan_tag(mbuf_t mbuf);
+extern errno_t mbuf_clear_vlan_tag(mbuf_t mbuf);
 
 
 /*!
@@ -1056,8 +1085,21 @@ errno_t		mbuf_clear_vlan_tag(mbuf_t mbuf);
 	@param value This parameter is currently unsupported.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_get_csum_requested(mbuf_t mbuf,
-				mbuf_csum_request_flags_t *request, u_int32_t *value);
+extern errno_t mbuf_get_csum_requested(mbuf_t mbuf,
+    mbuf_csum_request_flags_t *request, u_int32_t *value);
+
+/*!
+	@function mbuf_get_tso_requested
+	@discussion This function is used by the driver to determine which
+		checksum operations should be performed in hardware.
+	@param mbuf The mbuf containing the packet.
+	@param request Flags indicating which values are being requested
+		for this packet.
+	@param value The requested value.
+	@result 0 upon success otherwise the errno error.
+ */
+extern errno_t mbuf_get_tso_requested(mbuf_t mbuf,
+    mbuf_tso_request_flags_t *request, u_int32_t *value);
 
 /*!
 	@function mbuf_clear_csum_requested
@@ -1065,7 +1107,7 @@ errno_t		mbuf_get_csum_requested(mbuf_t mbuf,
 	@param mbuf The mbuf containing the packet.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_clear_csum_requested(mbuf_t mbuf);
+extern errno_t mbuf_clear_csum_requested(mbuf_t mbuf);
 
 /*!
 	@function mbuf_set_csum_performed
@@ -1079,9 +1121,27 @@ errno_t		mbuf_clear_csum_requested(mbuf_t mbuf);
 		hardware.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_set_csum_performed(mbuf_t mbuf,
-				mbuf_csum_performed_flags_t flags, u_int32_t value);
+extern errno_t mbuf_set_csum_performed(mbuf_t mbuf,
+    mbuf_csum_performed_flags_t flags, u_int32_t value);
 
+
+/*!
+	@function mbuf_get_mlen
+	@discussion This routine returns the number of data bytes in a normal
+		mbuf, i.e. an mbuf that is not a packet header, nor one with
+		an external cluster attached to it.  This is equivalent to the
+		legacy MLEN macro.
+	@result	The number of bytes of available data.
+ */
+extern u_int32_t mbuf_get_mlen(void);
+
+/*!
+	@function mbuf_get_mhlen
+	@discussion This routine returns the number of data bytes in a packet
+		header mbuf.  This is equivalent to the legacy MHLEN macro.
+	@result	The number of bytes of available data.
+ */
+extern u_int32_t mbuf_get_mhlen(void);
 
 /*!
 	@function mbuf_clear_csum_performed
@@ -1089,7 +1149,7 @@ errno_t		mbuf_set_csum_performed(mbuf_t mbuf,
 	@param mbuf The mbuf containing the packet.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_clear_csum_performed(mbuf_t mbuf);
+extern errno_t mbuf_clear_csum_performed(mbuf_t mbuf);
 
 /*!
 	@function mbuf_inet_cksum
@@ -1117,8 +1177,8 @@ errno_t		mbuf_clear_csum_performed(mbuf_t mbuf);
 		this variable.  The caller must set it to a non-NULL value.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_inet_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
-		    u_int32_t length, u_int16_t *csum);
+extern errno_t mbuf_inet_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
+    u_int32_t length, u_int16_t *csum);
 
 /*!
 	@function mbuf_inet6_cksum
@@ -1146,8 +1206,8 @@ errno_t		mbuf_inet_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
 		this variable.  The caller must set it to a non-NULL value.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_inet6_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
-		    u_int32_t length, u_int16_t *csum);
+extern errno_t mbuf_inet6_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
+    u_int32_t length, u_int16_t *csum);
 
 /* mbuf tags */
 
@@ -1156,12 +1216,12 @@ errno_t		mbuf_inet6_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
 	@discussion Lookup the module id for a string. If there is no module
 		id assigned to this string, a new module id will be assigned.
 		The string should be the bundle id of the kext. In the case of a
-		tag that will be shared across multiple kexts, a common bundle id
-		style string should be used.
-		
+		tag that will be shared across multiple kexts, a common bundle
+		id style string should be used.
+
 		The lookup operation is not optimized. A module should call this
-		function once during startup and chache the module id. The module id
-		will not be resassigned until the machine reboots.
+		function once during startup and chache the module id. The
+		module id will not be resassigned until the machine reboots.
 	@param module_string A unique string identifying your module.
 		Example: com.apple.nke.SharedIP.
 	@param module_id Upon return, a unique identifier for use with
@@ -1169,16 +1229,16 @@ errno_t		mbuf_inet6_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
 		is rebooted.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_tag_id_find(const char *module_string,
-							 mbuf_tag_id_t *module_id);
+extern errno_t mbuf_tag_id_find(const char *module_string,
+    mbuf_tag_id_t *module_id);
 
 /*!
 	@function mbuf_tag_allocate
 	@discussion Allocate an mbuf tag. Mbuf tags allow various portions
 		of the stack to tag mbufs with data that will travel with the
 		mbuf through the stack.
-		
-		Tags may only be added to mbufs with packet headers 
+
+		Tags may only be added to mbufs with packet headers
 		(MBUF_PKTHDR flag is set). Mbuf tags are freed when the mbuf is
 		freed or when mbuf_tag_free is called.
 	@param mbuf The mbuf to attach this tag to.
@@ -1193,9 +1253,8 @@ errno_t		mbuf_tag_id_find(const char *module_string,
 		buffer allocated for the mtag.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_tag_allocate(mbuf_t mbuf, mbuf_tag_id_t module_id,
-							  mbuf_tag_type_t type, size_t length,
-							  mbuf_how_t how, void** data_p);
+extern errno_t mbuf_tag_allocate(mbuf_t mbuf, mbuf_tag_id_t module_id,
+    mbuf_tag_type_t type, size_t length, mbuf_how_t how, void **data_p);
 
 /*!
 	@function mbuf_tag_find
@@ -1209,8 +1268,8 @@ errno_t		mbuf_tag_allocate(mbuf_t mbuf, mbuf_tag_id_t module_id,
 		buffer allocated for the mtag.
 	@result 0 upon success otherwise the errno error.
  */
-errno_t		mbuf_tag_find(mbuf_t mbuf, mbuf_tag_id_t module_id,
-						  mbuf_tag_type_t type, size_t *length, void** data_p);
+extern errno_t mbuf_tag_find(mbuf_t mbuf, mbuf_tag_id_t module_id,
+    mbuf_tag_type_t type, size_t *length, void **data_p);
 
 /*!
 	@function mbuf_tag_free
@@ -1219,8 +1278,8 @@ errno_t		mbuf_tag_find(mbuf_t mbuf, mbuf_tag_id_t module_id,
 	@param module_id The ID of the tag to free.
 	@param type The type of the tag to free.
  */
-void		mbuf_tag_free(mbuf_t mbuf, mbuf_tag_id_t module_id,
-						  mbuf_tag_type_t type);
+extern void mbuf_tag_free(mbuf_t mbuf, mbuf_tag_id_t module_id,
+    mbuf_tag_type_t type);
 
 /* mbuf stats */
 
@@ -1229,37 +1288,38 @@ void		mbuf_tag_free(mbuf_t mbuf, mbuf_tag_id_t module_id,
 	@discussion Get the mbuf statistics.
 	@param stats Storage to copy the stats in to.
  */
-void		mbuf_stats(struct mbuf_stat* stats);
-
+extern void mbuf_stats(struct mbuf_stat *stats);
 
 
 /* IF_QUEUE interaction */
 
-#define IF_ENQUEUE_MBUF(ifq, m) { \
-	mbuf_setnextpkt((m), 0); \
-	if ((ifq)->ifq_tail == 0) \
-		(ifq)->ifq_head = (m); \
-	else \
-		mbuf_setnextpkt((mbuf_t)(ifq)->ifq_tail, (m)); \
-	(ifq)->ifq_tail = (m); \
-	(ifq)->ifq_len++; \
+#define IF_ENQUEUE_MBUF(ifq, m) {					\
+	mbuf_setnextpkt((m), 0);					\
+	if ((ifq)->ifq_tail == 0)					\
+		(ifq)->ifq_head = (m);					\
+	else								\
+		mbuf_setnextpkt((mbuf_t)(ifq)->ifq_tail, (m));		\
+	(ifq)->ifq_tail = (m);						\
+	(ifq)->ifq_len++;						\
 }
-#define	IF_PREPEND_MBUF(ifq, m) { \
-	mbuf_setnextpkt((m), (ifq)->ifq_head); \
-	if ((ifq)->ifq_tail == 0) \
-		(ifq)->ifq_tail = (m); \
-	(ifq)->ifq_head = (m); \
-	(ifq)->ifq_len++; \
+
+#define	IF_PREPEND_MBUF(ifq, m) {					\
+	mbuf_setnextpkt((m), (ifq)->ifq_head);				\
+	if ((ifq)->ifq_tail == 0)					\
+		(ifq)->ifq_tail = (m);					\
+	(ifq)->ifq_head = (m);						\
+	(ifq)->ifq_len++;						\
 }
-#define	IF_DEQUEUE_MBUF(ifq, m) { \
-	(m) = (ifq)->ifq_head; \
-	if (m) { \
-		if (((ifq)->ifq_head = mbuf_nextpkt((m))) == 0) \
-			(ifq)->ifq_tail = 0; \
-		mbuf_setnextpkt((m), 0); \
-		(ifq)->ifq_len--; \
-	} \
+
+#define	IF_DEQUEUE_MBUF(ifq, m) {					\
+	(m) = (ifq)->ifq_head;						\
+	if (m) {							\
+		if (((ifq)->ifq_head = mbuf_nextpkt((m))) == 0)		\
+			(ifq)->ifq_tail = 0;				\
+		mbuf_setnextpkt((m), 0);				\
+		(ifq)->ifq_len--;					\
+	}								\
 }
 
 __END_DECLS
-#endif
+#endif /* __KPI_MBUF__ */

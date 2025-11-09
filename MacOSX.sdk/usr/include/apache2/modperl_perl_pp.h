@@ -1,8 +1,9 @@
-/* Copyright 2002-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,7 +17,10 @@
 #ifndef MODPERL_PERL_PP_H
 #define MODPERL_PERL_PP_H
 
-#if defined(USE_ITHREADS) && defined(MP_PERL_5_6_x)
+#define MP_PERL_BRANCH(r, v)                                             \
+    (PERL_REVISION == r && PERL_VERSION == v)
+
+#if defined(USE_ITHREADS) && MP_PERL_BRANCH(5, 6)
 #   define MP_REFGEN_FIXUP
 #endif
 

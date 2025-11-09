@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Apple, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -25,85 +25,8 @@
 #define _IOATATYPES_H
 
 #include <IOKit/IOTypes.h>
-#ifndef __OPEN_SOURCE__
-/*
- * Revision History
- *
- * $Log: IOATATypes.h,v $
- * Revision 1.11  2005/12/31 01:36:25  barras
- * Bug #: 4367541 Power off ODD feature definitions
- * Submitted by: Larry Barras
- * Reviewed by:
- *  	IOATATypes.h IOATAFamily.xcodeproj/nuke.pbxuser
- *  	IOATAFamily.xcodeproj/project.pbxproj
- *
- * Revision 1.10  2003/03/14 23:57:11  barras
- *
- * Bug #: 3187923
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.9  2002/11/09 03:46:39  barras
- *
- * Bug #: 3083512, 3090979
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.8  2002/05/24 23:59:46  barras
- *
- * Bug #: 2931508 and 2876150
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.7  2002/02/27 02:30:33  barras
- *
- * Bug #: 2869416
- *
- * Add requested constants for extended LBA commands from mass storage, set the return type of IOExtendedLBA getCommand to 8 bit, bump to version 1.5.1d3
- *
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.6  2002/02/14 04:02:07  barras
- *
- * Adding API's for 48 bit lba
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.5  2001/11/07 22:12:48  jliu
- * Swap the strings in the identify data for little endian machines.
- * Defined x86 specific IOATAReg classes to access I/O space registers.
- * Bug #: 2787594
- *
- * Revision 1.4  2001/07/24 00:07:41  barras
- *
- * Bringing TOT CVS in line with Puma builds.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- * Revision 1.3.2.1  2001/06/13 03:04:07  barras
- * Fix versioning string conflicts so kext loader is happy. Close Radar 2692663 which allows porting to other platforms.
- *
- * Revision 1.3  2001/05/04 01:50:37  barras
- *
- * Fix line endings to be all unix style in order to prevent CVS from corrupting source files.
- *
- * Bug #:
- * Submitted by:
- * Reviewed by:
- *
- *
- */ 
-#endif
 
-//#ifdef DEBUG
-//#define ATA_DEBUG 1
-//#endif
+
 /*!
 
 @header IOATAtypes.h
@@ -142,7 +65,7 @@
 #define IOATARegPtr16 volatile UInt16*
 #define IOATARegPtr32 volatile UInt32*
 #define IOATARegPtr8Cast(x) ((IOATARegPtr8)(x))
-#elif defined( __i386__ )
+#elif defined( __i386__ ) || defined( __x86_64__ )
 #include <IOKit/ata/IOATARegI386.h>
 #else
 #error Unknown machine architecture
@@ -196,7 +119,7 @@ enum {
 	kATADefaultSectorSize = 512
 };
 
-/* Task file definition еее Error Register еее*/
+/* Task file definition *** Error Register *** */
 enum {
 	bATABadBlock				= 7,							/* bit number of bad block error bit*/
 	bATAUncorrectable			= 6,							/* bit number of uncorrectable error bit*/
@@ -216,13 +139,13 @@ enum {
 	mATAAddressNotFound			= 1 << bATAAddressNotFound		/* Address Mark Not Found*/
 };
 
-/* Task file definition еее Features register еее*/
+/* Task file definition *** Features register *** */
 enum {
 	bATAPIuseDMA				= 0,							/* bit number of useDMA bit (ATAPI)*/
 	mATAPIuseDMA				= 1 << bATAPIuseDMA
 };
 
-/* Task file definition еее ataTFSDH Register еее*/
+/* Task file definition *** ataTFSDH Register *** */
 enum {
 	mATAHeadNumber				= 0x0F,							/* Head Number (bits 0-3) */
 	mATASectorSize				= 0xA0,							/* bit 7=1; bit 5 = 01 (512 sector size) <DP4>*/
@@ -230,7 +153,7 @@ enum {
 	mATALBASelect				= 0x40							/* LBA mode bit (0 = chs, 1 = LBA)*/
 };
 
-/* Task file definition еее Status Register еее*/
+/* Task file definition *** Status Register *** */
 enum {
 	bATABusy					= 7,							/* bit number of BSY bit*/
 	bATADriveReady				= 6,							/* bit number of drive ready bit*/
@@ -250,7 +173,7 @@ enum {
 	mATAError					= 1 << bATAError				/* Error condition - see error register*/
 };
 
-/* Task file definition еее Device Control Register еее*/
+/* Task file definition *** Device Control Register *** */
 enum {
 	bATADCROne					= 3,							/* bit number of always one bit*/
 	bATADCRReset				= 2,							/* bit number of reset bit*/
@@ -333,7 +256,7 @@ enum ataOpcode {
 } ;
 
 
-/* The ATA Event codes╔*/
+/* The ATA Event codes */
 /* sent when calling the device driver's event handler*/
 enum ataEventCode {
 	kATANullEvent				= 0x00,							/* Just kidding -- nothing happened*/
@@ -344,6 +267,7 @@ enum ataEventCode {
 	kATAOfflineRequest			= 0x05,							/* Someone requesting to offline the drive*/
 	kATAEjectRequest			= 0x06,							/* Someone requesting to eject the drive*/
 	kATAPIResetEvent			= 0x07,							/* Someone gave a ATAPI reset to the drive*/
+	kATAReservedEvent			= 0x80							/* RESERVED*/
 };
 
 

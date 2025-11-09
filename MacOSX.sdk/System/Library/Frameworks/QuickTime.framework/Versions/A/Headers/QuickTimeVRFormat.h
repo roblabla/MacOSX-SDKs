@@ -3,9 +3,9 @@
  
      Contains:   QuickTime VR interfaces
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1997-2006 by Apple Inc., all rights reserved.
+     Copyright:  © 1997-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -132,6 +132,8 @@ enum {
 };
 
 
+#endif // !__LP64__
+
 /* Header for QTVR track's Sample Description record (vrWorld atom container is appended)*/
 struct QTVRSampleDescription {
   UInt32              descSize;               /* total size of the QTVRSampleDescription*/
@@ -147,6 +149,9 @@ struct QTVRSampleDescription {
 typedef struct QTVRSampleDescription    QTVRSampleDescription;
 typedef QTVRSampleDescription *         QTVRSampleDescriptionPtr;
 typedef QTVRSampleDescriptionPtr *      QTVRSampleDescriptionHandle;
+
+#if !__LP64__
+
 /*
   =================================================================================================
    Definitions and structures used in the VRWorld QTAtomContainer

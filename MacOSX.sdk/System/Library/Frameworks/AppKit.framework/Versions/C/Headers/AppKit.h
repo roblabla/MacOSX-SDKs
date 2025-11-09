@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -72,6 +72,7 @@
 #import <AppKit/NSPageLayout.h>
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/NSPasteboardItem.h>
 #import <AppKit/NSPopUpButton.h>
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSPrintOperation.h>
@@ -98,6 +99,7 @@
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSWindowController.h>
 #import <AppKit/NSWorkspace.h>
+#import <AppKit/NSRunningApplication.h>
 #import <AppKit/NSComboBox.h>
 #import <AppKit/NSComboBoxCell.h>
 #import <AppKit/NSTableColumn.h>
@@ -138,6 +140,7 @@
 #import <AppKit/NSQuickDrawView.h>
 #import <AppKit/NSDrawer.h>
 #import <AppKit/NSOpenGL.h>
+#import <AppKit/NSOpenGLLayer.h>
 #import <AppKit/NSOpenGLView.h>
 #import <AppKit/NSApplicationScripting.h>
 #import <AppKit/NSDocumentScripting.h>
@@ -178,3 +181,6 @@
 #import <AppKit/NSPathComponentCell.h>
 #import <AppKit/NSCollectionView.h>
 #import <AppKit/NSTextInputClient.h>
+#import <AppKit/NSTextInputContext.h>
+#import <AppKit/NSUserInterfaceItemSearching.h>
+#import <AppKit/NSTouch.h>

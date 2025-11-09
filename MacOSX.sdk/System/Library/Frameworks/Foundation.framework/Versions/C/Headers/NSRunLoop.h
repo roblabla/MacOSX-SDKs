@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -16,7 +16,9 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes AVAILABLE_MAC_OS_X_VERSI
     id          _rl;
     id          _dperf;
     id          _perft;
-    void	*_reserved[8];
+    id          _info;
+    id		_ports;
+    void	*_reserved[6];
 }
 
 + (NSRunLoop *)currentRunLoop;
@@ -41,7 +43,9 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes AVAILABLE_MAC_OS_X_VERSI
 - (void)runUntilDate:(NSDate *)limitDate;
 - (BOOL)runMode:(NSString *)mode beforeDate:(NSDate *)limitDate;
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 - (void)configureAsServer DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif
 
 @end
 

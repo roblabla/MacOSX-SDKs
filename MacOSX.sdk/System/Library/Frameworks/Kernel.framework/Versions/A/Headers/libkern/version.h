@@ -34,13 +34,13 @@ extern "C" {
 /* VERSION_MAJOR, version_major is an integer that represents that major version
  * of the kernel
  */
-#define VERSION_MAJOR		9
+#define VERSION_MAJOR		10
 extern const int version_major;
 
 /* VERSION_MINOR, version_minor is an integer that represents the minor version
  * of the kernel
  */
-#define VERSION_MINOR		0
+#define VERSION_MINOR		8
 extern const int version_minor;
 
 /* VERSION_VARIANT, version_variant is a string that contains the revision,
@@ -74,7 +74,7 @@ extern const int version_prerelease_level;
 extern const char ostype[];
 
 /* OSRELEASE, osrelease, is a string as returned by uname -r */
-#define OSRELEASE	"9.0.0"
+#define OSRELEASE	"10.8.0"
 extern const char osrelease[];
 
 /* osbuilder is a string as returned by uname -r */

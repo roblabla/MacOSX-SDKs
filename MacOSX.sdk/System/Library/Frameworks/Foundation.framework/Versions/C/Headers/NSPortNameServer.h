@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,7 +19,7 @@
 
 @end
 
-#if defined(__MACH__)
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_IPHONE_SIMULATOR
 
 @interface NSMachBootstrapServer : NSPortNameServer
 	// This port name server actually takes and

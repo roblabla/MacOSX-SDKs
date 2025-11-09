@@ -4,7 +4,7 @@
 // Author:      Vaclav Slavik
 // Modified by:
 // Created:     2004/02/01
-// RCS-ID:      $Id: wave.h,v 1.15 2005/03/16 16:18:21 ABX Exp $
+// RCS-ID:      $Id: wave.h 32852 2005-03-16 16:18:31Z ABX $
 // Copyright:   (c) 2004, Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

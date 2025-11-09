@@ -3,10 +3,7 @@
  
  	Contains:   API for communicating with MIDI hardware
  
- 	Version:	Technology: Mac OS X
- 				Release:	Mac OS X
- 
- 	Copyright:  (c) 2000-2005 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -46,9 +43,7 @@
 	The client API is implemented as the CoreMIDI framework, which uses IPC to communicate with
 	a server process, MIDIServer.
 
-	The server process loads, and manages all communication with, MIDI drivers. Most of its
-	implementation is in the CoreMIDIServer framework, which drivers may import in order to
-	access the API.
+	The server process loads, and manages all communication with, MIDI drivers.
 
 	"Drivers" are not I/O Kit drivers.  They are bundles containing CFPlugins.
 
@@ -70,7 +65,7 @@
 //=============================================================================
 #pragma mark    Includes
 
-#include <CoreServices/CoreServices.h>
+#include <Availability.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <stddef.h>
 
@@ -1169,7 +1164,7 @@ extern OSStatus
 MIDIClientCreate(	CFStringRef		name, 
 					MIDINotifyProc	notifyProc, 
 					void *			notifyRefCon, 
-					MIDIClientRef *	outClient )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					MIDIClientRef *	outClient )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1186,7 +1181,7 @@ MIDIClientCreate(	CFStringRef		name,
 		dispose all MIDIClients when an application terminates.
 */
 extern OSStatus
-MIDIClientDispose(	MIDIClientRef client )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIClientDispose(	MIDIClientRef client )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	Ports
@@ -1225,7 +1220,7 @@ MIDIInputPortCreate(	MIDIClientRef	client,
 						CFStringRef		portName, 
 						MIDIReadProc	readProc, 
 						void *			refCon, 
-						MIDIPortRef *	outPort )			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIOutputPortCreate
@@ -1253,7 +1248,7 @@ MIDIInputPortCreate(	MIDIClientRef	client,
 extern OSStatus
 MIDIOutputPortCreate(	MIDIClientRef	client, 
 						CFStringRef		portName, 
-						MIDIPortRef *	outPort )			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIPortDispose
@@ -1270,7 +1265,7 @@ MIDIOutputPortCreate(	MIDIClientRef	client,
 		client's ports are automatically disposed at that time.
 */
 extern OSStatus
-MIDIPortDispose(	MIDIPortRef port )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1293,7 +1288,7 @@ MIDIPortDispose(	MIDIPortRef port )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LAT
 extern OSStatus
 MIDIPortConnectSource(	MIDIPortRef		port, 
 						MIDIEndpointRef	source, 
-						void *			connRefCon )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						void *			connRefCon )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1313,7 +1308,7 @@ MIDIPortConnectSource(	MIDIPortRef		port,
 */
 extern OSStatus
 MIDIPortDisconnectSource(	MIDIPortRef		port, 
-							MIDIEndpointRef	source )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							MIDIEndpointRef	source )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 //==================================================================================================
@@ -1331,7 +1326,7 @@ MIDIPortDisconnectSource(	MIDIPortRef		port,
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfDevices()									AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetNumberOfDevices()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1361,7 +1356,7 @@ MIDIGetNumberOfDevices()									AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 		entities to locate endpoints.
 */
 extern MIDIDeviceRef
-MIDIGetDevice(	ItemCount deviceIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetDevice(	ItemCount deviceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIDeviceGetNumberOfEntities
@@ -1375,7 +1370,7 @@ MIDIGetDevice(	ItemCount deviceIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
 					error occurred.
 */
 extern ItemCount 
-MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIDeviceGetEntity
@@ -1392,7 +1387,7 @@ MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		AVAILABLE_MAC_OS_X_VERSIO
 */
 extern MIDIEntityRef
 MIDIDeviceGetEntity(	MIDIDeviceRef	device,
-						ItemCount		entityIndex0 )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						ItemCount		entityIndex0 )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	Entities
@@ -1412,7 +1407,7 @@ MIDIDeviceGetEntity(	MIDIDeviceRef	device,
 					error occurred.
 */
 extern ItemCount
-MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIEntityGetSource
@@ -1429,7 +1424,7 @@ MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		AVAILABLE_MAC_OS_X_VERSION
 */
 extern MIDIEndpointRef
 MIDIEntityGetSource(	MIDIEntityRef entity, 
-						ItemCount sourceIndex0 )			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						ItemCount sourceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIEntityGetNumberOfDestinations
@@ -1443,7 +1438,7 @@ MIDIEntityGetSource(	MIDIEntityRef entity,
 					if an error occurred.
 */
 extern ItemCount
-MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIEntityGetDestination
@@ -1460,7 +1455,7 @@ MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	AVAILABLE_MAC_OS_X_VER
 */
 extern MIDIEndpointRef
 MIDIEntityGetDestination(	MIDIEntityRef	entity,
-							ItemCount		destIndex0 )	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+							ItemCount		destIndex0 )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIEntityGetDevice
@@ -1474,7 +1469,7 @@ MIDIEntityGetDestination(	MIDIEntityRef	entity,
 */
 extern OSStatus
 MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
-							MIDIDeviceRef *		outDevice)	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							MIDIDeviceRef *		outDevice)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	Endpoints
@@ -1491,7 +1486,7 @@ MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfSources()									AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetNumberOfSources()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1505,7 +1500,7 @@ MIDIGetNumberOfSources()									AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 	@result			A reference to a source, or NULL if an error occurred.
 */
 extern MIDIEndpointRef
-MIDIGetSource(	ItemCount sourceIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetSource(	ItemCount sourceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1517,7 +1512,7 @@ MIDIGetSource(	ItemCount sourceIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfDestinations()								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetNumberOfDestinations()								__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1531,7 +1526,7 @@ MIDIGetNumberOfDestinations()								AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 	@result			A reference to a destination, or NULL if an error occurred.
 */
 extern MIDIEndpointRef
-MIDIGetDestination(	ItemCount destIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIGetDestination(	ItemCount destIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIEndpointGetEntity
@@ -1548,7 +1543,7 @@ MIDIGetDestination(	ItemCount destIndex0 )					AVAILABLE_MAC_OS_X_VERSION_10_0_A
 */
 extern OSStatus
 MIDIEndpointGetEntity(		MIDIEndpointRef		inEndpoint,
-							MIDIEntityRef *		outEntity)	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+							MIDIEntityRef *		outEntity)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@function		MIDIDestinationCreate
@@ -1589,7 +1584,7 @@ MIDIDestinationCreate(	MIDIClientRef 		client,
 						CFStringRef 		name, 
 						MIDIReadProc 		readProc, 
 						void *				refCon,
-						MIDIEndpointRef *	outDest )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+						MIDIEndpointRef *	outDest )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1621,7 +1616,7 @@ MIDIDestinationCreate(	MIDIClientRef 		client,
 extern OSStatus
 MIDISourceCreate(	MIDIClientRef 		client, 
 					CFStringRef 		name, 
-					MIDIEndpointRef *	outSrc )			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					MIDIEndpointRef *	outSrc )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -1635,7 +1630,7 @@ MIDISourceCreate(	MIDIClientRef 		client,
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIEndpointDispose(	MIDIEndpointRef endpt )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIEndpointDispose(	MIDIEndpointRef endpt )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 //==================================================================================================
@@ -1657,7 +1652,7 @@ MIDIEndpointDispose(	MIDIEndpointRef endpt )				AVAILABLE_MAC_OS_X_VERSION_10_0_
 		adds them.
 */
 extern ItemCount
-MIDIGetNumberOfExternalDevices()							AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDIGetNumberOfExternalDevices()							__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 /*!
 	@function		MIDIGetExternalDevice
@@ -1673,7 +1668,7 @@ MIDIGetNumberOfExternalDevices()							AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
 		Use this to enumerate the external devices in the system.
 */
 extern MIDIDeviceRef
-MIDIGetExternalDevice(	ItemCount deviceIndex0 )			AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDIGetExternalDevice(	ItemCount deviceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	Objects and Properties
@@ -1700,7 +1695,7 @@ MIDIGetExternalDevice(	ItemCount deviceIndex0 )			AVAILABLE_MAC_OS_X_VERSION_10_
 extern OSStatus
 MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								SInt32 *		outValue )	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								SInt32 *		outValue )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectSetIntegerProperty
@@ -1721,7 +1716,7 @@ MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								SInt32			value )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								SInt32			value )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectGetStringProperty
@@ -1742,7 +1737,7 @@ MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetStringProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFStringRef *	str )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								CFStringRef *	str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectSetStringProperty
@@ -1763,7 +1758,7 @@ MIDIObjectGetStringProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetStringProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID,
-								CFStringRef		str )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								CFStringRef		str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectGetDataProperty
@@ -1785,7 +1780,7 @@ MIDIObjectSetStringProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetDataProperty(		MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDataRef *		outData )	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								CFDataRef *		outData )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectSetDataProperty
@@ -1806,7 +1801,7 @@ MIDIObjectGetDataProperty(		MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetDataProperty(		MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDataRef		data )		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+								CFDataRef		data )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectGetDictionaryProperty
@@ -1828,7 +1823,7 @@ extern OSStatus
 MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj, 
 									CFStringRef			propertyID, 
 									CFDictionaryRef *	outDict )
-															AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectSetDictionaryProperty
@@ -1849,7 +1844,7 @@ MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj,
 extern OSStatus
 MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDictionaryRef	data )		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								CFDictionaryRef	data )		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectGetProperties
@@ -1875,7 +1870,7 @@ MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetProperties(		MIDIObjectRef 		obj, 
 								CFPropertyListRef *	outProperties,
-								Boolean				deep )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+								Boolean				deep )	__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectRemoveProperty
@@ -1893,7 +1888,7 @@ MIDIObjectGetProperties(		MIDIObjectRef 		obj,
 extern OSStatus
 MIDIObjectRemoveProperty(		MIDIObjectRef 		obj, 
 								CFStringRef			propertyID )
-															AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@function		MIDIObjectFindByUniqueID
@@ -1922,7 +1917,7 @@ MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
 							MIDIObjectRef *		outObject,
 							MIDIObjectType *	outObjectType)
 							
-															AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	MIDI I/O
@@ -1950,7 +1945,7 @@ MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
 extern OSStatus
 MIDISend(	MIDIPortRef 			port, 
 			MIDIEndpointRef 		dest, 
-			const MIDIPacketList *	pktlist )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+			const MIDIPacketList *	pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 				
 /*!
 	@function		MIDISendSysex
@@ -1965,7 +1960,7 @@ MIDISend(	MIDIPortRef 			port,
 		request->data must point to a single MIDI system-exclusive message, or portion thereof.
 */
 extern OSStatus 
-MIDISendSysex(	MIDISysexSendRequest *request )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDISendSysex(	MIDISysexSendRequest *request )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIReceived
@@ -1990,7 +1985,7 @@ MIDISendSysex(	MIDISysexSendRequest *request )				AVAILABLE_MAC_OS_X_VERSION_10_
 */
 extern OSStatus 
 MIDIReceived(	MIDIEndpointRef			src, 
-				const MIDIPacketList *	pktlist )			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+				const MIDIPacketList *	pktlist )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@function		MIDIFlushOutput
@@ -2007,7 +2002,7 @@ MIDIReceived(	MIDIEndpointRef			src,
 		scheduled for future delivery.
 */
 extern OSStatus
-MIDIFlushOutput(	MIDIEndpointRef		dest )				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDIFlushOutput(	MIDIEndpointRef		dest )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 /*!
 	@function		MIDIRestart
@@ -2020,7 +2015,7 @@ MIDIFlushOutput(	MIDIEndpointRef		dest )				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIRestart()												AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+MIDIRestart()												__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 
@@ -2064,7 +2059,7 @@ MIDIPacketNext(	MIDIPacket *pkt );
 	@result			A pointer to the first MIDIPacket in the packet list.
 */
 extern MIDIPacket *
-MIDIPacketListInit(	MIDIPacketList *pktlist )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MIDIPacketListInit(	MIDIPacketList *pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -2101,7 +2096,7 @@ MIDIPacketListAdd(	MIDIPacketList *	pktlist,
 					MIDIPacket *		curPacket,
 					MIDITimeStamp		time,
 					ByteCount			nData,
-					const Byte *		data)			AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+					const Byte *		data)			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #ifdef __cplusplus

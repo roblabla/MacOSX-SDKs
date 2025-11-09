@@ -4,7 +4,7 @@
 // Author:      Evgeniy Tarassov, Vadim Zeitlin
 // Modified by:
 // Created:     2005-09-15
-// RCS-ID:      $Id: treebook.h,v 1.9 2007/01/07 19:27:33 VZ Exp $
+// RCS-ID:      $Id: treebook.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) 2005 Vadim Zeitlin <vadim@wxwidgets.org>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@
 
 typedef wxWindow wxTreebookPage;
 
-class WXDLLEXPORT wxTreeEvent;
+class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
 
 // ----------------------------------------------------------------------------
 // wxTreebook

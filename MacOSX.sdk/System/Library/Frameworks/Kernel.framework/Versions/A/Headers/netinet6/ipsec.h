@@ -36,6 +36,7 @@
 
 #ifndef _NETINET6_IPSEC_H_
 #define _NETINET6_IPSEC_H_
+#include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
 
 #include <net/pfkeyv2.h>

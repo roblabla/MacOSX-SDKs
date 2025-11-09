@@ -418,7 +418,7 @@ enum
 #define FF_FALSE                           S_FALSE
 
 /*!
-    @defined FF_DOWNLOADSKIPPED
+ *  @defined FF_DOWNLOADSKIPPED
  *  @discussion 
  *  The parameters of the effect were successfully updated by
  *  FFEffectSetParameters, but the effect was not
@@ -427,7 +427,7 @@ enum
 #define FF_DOWNLOADSKIPPED              ((HRESULT)0x00000003L)
 
 /*!
-    @defined FF_EFFECTRESTARTED
+ *  @defined FF_EFFECTRESTARTED
  *  @discussion 
  *  The parameters of the effect were successfully updated by
  *  FFEffectSetParameters, but in order to change
@@ -436,7 +436,7 @@ enum
 #define FF_EFFECTRESTARTED              ((HRESULT)0x00000004L)
 
 /*!
-    @defined FF_TRUNCATED
+ *  @defined FF_TRUNCATED
  *  @discussion 
  *  The parameters of the effect were successfully updated by
  *  FFEffectSetParameters, but some of them were
@@ -445,21 +445,21 @@ enum
 #define FF_TRUNCATED                    ((HRESULT)0x00000008L)
 
 /*!
-    @defined FF_TRUNCATEDANDRESTARTED
+ *  @defined FF_TRUNCATEDANDRESTARTED
  *  @discussion 
  *  Equal to FF_EFFECTRESTARTED | FF_TRUNCATED.
  */
 #define FF_TRUNCATEDANDRESTARTED        ((HRESULT)0x0000000CL)
 
 /*!
-    @defined FFERR_DEVICENOTREG
+ *  @defined FFERR_DEVICENOTREG
  *  @discussion 
  * The device or device instance or effect is not registered.
  */
 #define FFERR_DEVICENOTREG              REGDB_E_CLASSNOTREG
 
 /*!
-    @defined FFERR_INVALIDPARAM
+ *  @defined FFERR_INVALIDPARAM
  *  @discussion 
  * An invalid parameter was passed to the returning function,
  * or the object was not in a state that admitted the function
@@ -468,28 +468,28 @@ enum
 #define FFERR_INVALIDPARAM              E_INVALIDARG
 
 /*!
-    @defined FFERR_NOINTERFACE
+ *  @defined FFERR_NOINTERFACE
  *  @discussion 
  * The specified interface is not supported by the object
  */
 #define FFERR_NOINTERFACE               E_NOINTERFACE
 
 /*!
-    @defined FFERR_GENERIC
+ *  @defined FFERR_GENERIC
  *  @discussion 
  * An undetermined error occurred.
  */
 #define FFERR_GENERIC                   E_FAIL
 
 /*!
-    @defined FFERR_OUTOFMEMORY
+ *  @defined FFERR_OUTOFMEMORY
  *  @discussion 
  * Couldn't allocate sufficient memory to complete the caller's request.
  */
 #define FFERR_OUTOFMEMORY               E_OUTOFMEMORY
 
 /*!
-    @defined FFERR_UNSUPPORTED
+ *  @defined FFERR_UNSUPPORTED
  *  @discussion 
  * The function called is not supported at this time
  */
@@ -497,7 +497,7 @@ enum
 
 #ifndef E_PENDING
 /*!
-    @defined E_PENDING
+ *  @defined E_PENDING
  *  @discussion 
  * Data is not yet available.
  */
@@ -505,28 +505,28 @@ enum
 #endif
 
 /*!
-    @defined FFERR_DEVICEFULL
+ *  @defined FFERR_DEVICEFULL
  *  @discussion 
  * The device is full.
  */
 #define FFERR_DEVICEFULL                0x80040201L
 
 /*!
-    @defined FFERR_MOREDATA
+ *  @defined FFERR_MOREDATA
  *  @discussion 
  * Not all the requested information fit into the buffer.
  */
 #define FFERR_MOREDATA                  0x80040202L
 
 /*!
-    @defined FFERR_NOTDOWNLOADED
+ *  @defined FFERR_NOTDOWNLOADED
  *  @discussion 
  * The effect is not downloaded.
  */
 #define FFERR_NOTDOWNLOADED             0x80040203L
 
 /*!
-    @defined FFERR_HASEFFECTS
+ *  @defined FFERR_HASEFFECTS
  *  @discussion 
  *  The device cannot be reinitialized because there are still effects
  *  attached to it.
@@ -534,7 +534,7 @@ enum
 #define FFERR_HASEFFECTS                0x80040204L
 
 /*!
-    @defined FFERR_INCOMPLETEEFFECT
+ *  @defined FFERR_INCOMPLETEEFFECT
  *  @discussion 
  *  The effect could not be downloaded because essential information
  *  is missing.  For example, no axes have been associated with the
@@ -543,7 +543,7 @@ enum
 #define FFERR_INCOMPLETEEFFECT          0x80040206L
 
 /*!
-    @defined FFERR_EFFECTPLAYING
+ *  @defined FFERR_EFFECTPLAYING
  *  @discussion 
  *  An attempt was made to modify parameters of an effect while it is
  *  playing.  Not all hardware devices support altering the parameters
@@ -552,7 +552,7 @@ enum
 #define FFERR_EFFECTPLAYING             0x80040208L
 
 /*!
-    @defined FFERR_UNPLUGGED
+ *  @defined FFERR_UNPLUGGED
  *  @discussion 
  *  The operation could not be completed because the device is not
  *  plugged in.
@@ -565,7 +565,7 @@ enum
 //
 
 /*!
-    @defined FFERR_INVALIDDOWNLOADID
+ *  @defined FFERR_INVALIDDOWNLOADID
  *  @discussion 
  * The effect index provided by the API in downloadID is not recognized by the
  * IOForceFeedbackLib driver.
@@ -573,7 +573,7 @@ enum
 #define FFERR_INVALIDDOWNLOADID         0x80040300L
  
 /*!
-    @defined FFERR_DEVICEPAUSED
+ *  @defined FFERR_DEVICEPAUSED
  *  @discussion 
  * When the device is paused via a call to FFDeviceSendForceFeedbackCommand(),
  * other operations such as modifying existing effect parameters and creating 
@@ -582,7 +582,7 @@ enum
 #define FFERR_DEVICEPAUSED              0x80040301L
 
 /*!
-    @defined FFERR_INTERNAL
+ *  @defined FFERR_INTERNAL
  *  @discussion 
  * The IOForceFededbackLib driver has detected an internal fault.  Often this
  * occurs because of an unexpected internal code path.
@@ -590,7 +590,7 @@ enum
 #define FFERR_INTERNAL                  0x80040302L
 
 /*!
-    @defined FFERR_EFFECTTYPEMISMATCH
+ *  @defined FFERR_EFFECTTYPEMISMATCH
  *  @discussion 
  * The IOForceFededbackLib driver has received an effect modification request
  * whose basic type does not match the defined effect type for the given effect.
@@ -598,28 +598,28 @@ enum
 #define FFERR_EFFECTTYPEMISMATCH        0x80040303L
 
 /*!
-    @defined FFERR_UNSUPPORTEDAXIS
+ *  @defined FFERR_UNSUPPORTEDAXIS
  *  @discussion 
  * The effect includes one or more axes that the device does not support.
  */
 #define FFERR_UNSUPPORTEDAXIS           0x80040304L
 
 /*!
-    @defined FFERR_NOTINITIALIZED
+ *  @defined FFERR_NOTINITIALIZED
  *  @discussion 
  * This object has not been initialized
  */
 #define FFERR_NOTINITIALIZED            0x80040305L
 
 /*!
-    @defined FFERR_EFFECTTYPENOTSUPPORTED
+ *  @defined FFERR_EFFECTTYPENOTSUPPORTED
  *  @discussion 
  * The effect type requested is not explicitly supported by the particular device.
  */
 #define FFERR_EFFECTTYPENOTSUPPORTED    0x80040306L
 
 /*!
-    @defined FFERR_DEVICERELEASED
+ *  @defined FFERR_DEVICERELEASED
  *  @discussion 
  * The device has been released.
  */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -42,9 +42,9 @@
 
 __BEGIN_DECLS
 
-/****************************************************************************/
-/* Protocol input/inject													*/
-/****************************************************************************/
+/******************************************************************************/
+/* Protocol input/inject                                                      */
+/******************************************************************************/
 
 
 /*!
@@ -56,7 +56,7 @@ __BEGIN_DECLS
 	@result A errno error on failure. Unless proto_input returns zero,
 		the caller is responsible for freeing the mbuf.
  */
-errno_t	proto_input(protocol_family_t protocol, mbuf_t packet);
+extern errno_t proto_input(protocol_family_t protocol, mbuf_t packet);
 
 /*!
 	@function proto_inject
@@ -68,12 +68,12 @@ errno_t	proto_input(protocol_family_t protocol, mbuf_t packet);
 	@result A errno error on failure. Unless proto_inject returns zero,
 		the caller is responsible for freeing the mbuf.
  */
-errno_t	proto_inject(protocol_family_t protocol, mbuf_t packet);
+extern errno_t proto_inject(protocol_family_t protocol, mbuf_t packet);
 
 
-/****************************************************************************/
-/* Protocol plumbing														*/
-/****************************************************************************/
+/******************************************************************************/
+/* Protocol plumbing                                                          */
+/******************************************************************************/
 
 /*!
 	@typedef proto_plumb_handler
@@ -101,9 +101,9 @@ typedef void (*proto_unplumb_handler)(ifnet_t ifp, protocol_family_t protocol);
 
 /*!
 	@function proto_register_plumber
-	@discussion Allows the caller to specify the functions called when a protocol
-		is attached to an interface belonging to the specified family and when
-		that protocol is detached.
+	@discussion Allows the caller to specify the functions called when a
+		protocol is attached to an interface belonging to the specified
+		family and when that protocol is detached.
 	@param proto_fam The protocol family these plumbing functions will
 		handle.
 	@param if_fam The interface family these plumbing functions will
@@ -115,8 +115,9 @@ typedef void (*proto_unplumb_handler)(ifnet_t ifp, protocol_family_t protocol);
 		be used to detach the protocol.
 	@result A non-zero value of the attach failed.
  */
-errno_t	proto_register_plumber(protocol_family_t proto_fam, ifnet_family_t if_fam,
-							   proto_plumb_handler plumb, proto_unplumb_handler unplumb);
+extern errno_t proto_register_plumber(protocol_family_t proto_fam,
+    ifnet_family_t if_fam, proto_plumb_handler plumb,
+    proto_unplumb_handler unplumb);
 
 /*!
 	@function proto_unregister_plumber
@@ -125,8 +126,9 @@ errno_t	proto_register_plumber(protocol_family_t proto_fam, ifnet_family_t if_fa
 		handle.
 	@param if_fam The interface family these plumbing functions handle.
  */
-void	proto_unregister_plumber(protocol_family_t proto_fam, ifnet_family_t if_fam);
+extern void proto_unregister_plumber(protocol_family_t proto_fam,
+    ifnet_family_t if_fam);
 
 __END_DECLS
 
-#endif
+#endif /* __KPI_PROTOCOL__ */

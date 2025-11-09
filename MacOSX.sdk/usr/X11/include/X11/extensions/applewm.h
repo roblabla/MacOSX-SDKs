@@ -43,6 +43,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define X_AppleWMSetWindowLevel		9
 #define X_AppleWMSetCanQuit		10
 #define X_AppleWMSetWindowMenu		11
+#define X_AppleWMSendPSN		12
+#define X_AppleWMAttachTransient	13
 
 /* Events */
 #define AppleWMControllerNotify		0
@@ -156,6 +158,10 @@ Bool XAppleWMSetWindowMenuCheck (Display *dpy, int index);
 Bool XAppleWMSetFrontProcess (Display *dpy);
 
 Bool XAppleWMSetWindowLevel (Display *dpy, Window id, int level);
+
+Bool XAppleWMSendPSN(Display *dpy);
+
+Bool XAppleWMAttachTransient(Display *dpy, Window child, Window parent);
 
 Bool XAppleWMSetCanQuit (Display *dpy, Bool state);
 

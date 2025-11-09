@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000, 2001, 2004, 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000, 2001, 2004, 2005, 2008 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,6 +24,7 @@
 #ifndef _SCPREFERENCESPATH_H
 #define _SCPREFERENCESPATH_H
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SCPreferences.h>
@@ -90,7 +91,7 @@ CFStringRef
 SCPreferencesPathCreateUniqueChild	(
 					SCPreferencesRef	prefs,
 					CFStringRef		prefix
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesPathGetValue
@@ -105,7 +106,7 @@ CFDictionaryRef
 SCPreferencesPathGetValue		(
 					SCPreferencesRef	prefs,
 					CFStringRef		path
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesPathGetLink
@@ -120,7 +121,7 @@ CFStringRef
 SCPreferencesPathGetLink		(
 					SCPreferencesRef	prefs,
 					CFStringRef		path
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesPathSetValue
@@ -136,7 +137,7 @@ SCPreferencesPathSetValue		(
 					SCPreferencesRef	prefs,
 					CFStringRef		path,
 					CFDictionaryRef		value
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesPathSetLink
@@ -153,7 +154,7 @@ SCPreferencesPathSetLink		(
 					SCPreferencesRef	prefs,
 					CFStringRef		path,
 					CFStringRef		link
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCPreferencesPathRemoveValue
@@ -166,7 +167,7 @@ Boolean
 SCPreferencesPathRemoveValue		(
 					SCPreferencesRef	prefs,
 					CFStringRef		path
-					);
+					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
 

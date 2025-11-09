@@ -1,33 +1,35 @@
-module Gem
-  module Commands
-    class ListCommand < QueryCommand
-      include CommandAids
+require 'rubygems/command'
+require 'rubygems/commands/query_command'
 
-      def initialize
-        super(
-          'list',
-          'Display all gems whose name starts with STRING'
-        )
-        remove_option('--name-matches')
-      end
+##
+# An alternate to Gem::Commands::QueryCommand that searches for gems starting
+# with the the supplied argument.
 
-      def defaults_str
-        "--local --no-details"
-      end
+class Gem::Commands::ListCommand < Gem::Commands::QueryCommand
 
-      def usage
-        "#{program_name} [STRING]"
-      end
+  def initialize
+    super 'list', 'Display gems whose name starts with STRING'
 
-      def arguments
-        "STRING   start of gem name to look for"
-      end
-
-      def execute
-        string = get_one_optional_argument || ''
-        options[:name] = /^#{string}/i
-        super
-      end
-    end
+    remove_option('--name-matches')
   end
+
+  def arguments # :nodoc:
+    "STRING        start of gem name to look for"
+  end
+
+  def defaults_str # :nodoc:
+    "--local --no-details"
+  end
+
+  def usage # :nodoc:
+    "#{program_name} [STRING]"
+  end
+
+  def execute
+    string = get_one_optional_argument || ''
+    options[:name] = /^#{string}/i
+    super
+  end
+
 end
+

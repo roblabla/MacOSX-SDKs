@@ -5,7 +5,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: prntdlgg.h,v 1.30 2006/10/08 21:55:26 VZ Exp $
+// RCS-ID:      $Id: prntdlgg.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,13 +27,13 @@
     #include "wx/dcps.h"
 #endif
 
-class WXDLLEXPORT wxTextCtrl;
-class WXDLLEXPORT wxButton;
-class WXDLLEXPORT wxCheckBox;
-class WXDLLEXPORT wxComboBox;
-class WXDLLEXPORT wxStaticText;
-class WXDLLEXPORT wxRadioBox;
-class WXDLLEXPORT wxPageSetupData;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class WXDLLIMPEXP_FWD_CORE wxComboBox;
+class WXDLLIMPEXP_FWD_CORE wxStaticText;
+class WXDLLIMPEXP_FWD_CORE wxRadioBox;
+class WXDLLIMPEXP_FWD_CORE wxPageSetupData;
 
 // ----------------------------------------------------------------------------
 // constants

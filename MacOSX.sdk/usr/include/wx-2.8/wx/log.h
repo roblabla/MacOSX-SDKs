@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     29/01/98
-// RCS-ID:      $Id: log.h,v 1.114 2006/09/09 13:45:06 VZ Exp $
+// RCS-ID:      $Id: log.h 50993 2008-01-02 21:18:15Z VZ $
 // Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -69,10 +69,10 @@ typedef unsigned long wxLogLevel;
 // ----------------------------------------------------------------------------
 
 #if wxUSE_GUI
-    class WXDLLIMPEXP_CORE wxTextCtrl;
-    class WXDLLIMPEXP_CORE wxLogFrame;
-    class WXDLLIMPEXP_CORE wxFrame;
-    class WXDLLIMPEXP_CORE wxWindow;
+    class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+    class WXDLLIMPEXP_FWD_CORE wxLogFrame;
+    class WXDLLIMPEXP_FWD_CORE wxFrame;
+    class WXDLLIMPEXP_FWD_CORE wxWindow;
 #endif // wxUSE_GUI
 
 // ----------------------------------------------------------------------------
@@ -176,9 +176,14 @@ public:
     // Set log level.  Log messages with level > logLevel will not be logged.
     static void SetLogLevel(wxLogLevel logLevel) { ms_logLevel = logLevel; }
 
+#if wxABI_VERSION >= 20805 /* 2.8.5+ only */
     // should GetActiveTarget() try to create a new log object if the
     // current is NULL?
     static void DontCreateOnDemand();
+#endif
+
+    // Make GetActiveTarget() create a new log object again.
+    static void DoCreateOnDemand();
 
     // log the count of repeating messages instead of logging the messages
     // multiple times
@@ -258,8 +263,7 @@ protected:
     virtual void DoLogString(const wxChar *szString, time_t t);
 
     // log a line containing the number of times the previous message was
-    // repeated
-    // returns: the number
+    // repeated and returns this number (which can be 0)
     static unsigned DoLogNumberOfRepeats();
 
 private:
@@ -289,6 +293,15 @@ private:
 
     static wxTraceMask ms_ulTraceMask;   // controls wxLogTrace behaviour
     static wxArrayString ms_aTraceMasks; // more powerful filter for wxLogTrace
+
+
+    // this is the replacement of DoLogNumberOfRepeats() (which has to be kept
+    // to avoid breaking ABI in this version)
+    unsigned LogLastRepeatIfNeeded();
+
+    // implementation of the function above which supposes that the caller had
+    // already locked gs_prevCS
+    unsigned LogLastRepeatIfNeededUnlocked();
 };
 
 // ----------------------------------------------------------------------------
@@ -415,6 +428,11 @@ public:
     // override base class version to flush the old logger as well
     virtual void Flush();
 
+    // call to avoid destroying the old log target
+#if wxABI_VERSION >= 20805 /* 2.8.5+ only */
+    void DetachOldLog() { m_logOld = NULL; }
+#endif
+
 protected:
     // pass the chain to the old logger if needed
     virtual void DoLog(wxLogLevel level, const wxChar *szString, time_t t);
@@ -535,7 +553,7 @@ DECLARE_LOG_FUNCTION(Status);
 
 #if wxUSE_GUI
     // this one is the same as previous except that it allows to explicitly
-    class WXDLLEXPORT wxFrame;
+    class WXDLLIMPEXP_FWD_CORE wxFrame;
     // specify the frame to which the output should go
     DECLARE_LOG_FUNCTION2_EXP(Status, wxFrame *, pFrame, WXDLLIMPEXP_CORE);
 #endif // wxUSE_GUI

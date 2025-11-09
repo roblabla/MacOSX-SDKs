@@ -3,9 +3,7 @@
  
      Contains:  Umbrella include for AudioUnit definitions
  
-     Version:   Mac OS X
- 
-     Copyright: (c) 2002-2004 by Apple Computer, Inc., all rights reserved.
+     Copyright: (c) 2002-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,19 +14,23 @@
 #ifndef __AUDIOUNIT__
 #define __AUDIOUNIT__
 
-// This is the main AudioUnit specification
+#include <TargetConditionals.h>
+#define AUDIO_UNIT_VERSION 1060
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <AudioUnit/AudioComponent.h>
 	#include <AudioUnit/AUComponent.h>
 	#include <AudioUnit/AudioOutputUnit.h>
-	#include <AudioUnit/MusicDevice.h>
-	
 	#include <AudioUnit/AudioUnitProperties.h>
 	#include <AudioUnit/AudioUnitParameters.h>
-		
-	#include <AudioUnit/AudioCodec.h>
+
+	#if !TARGET_OS_IPHONE	
+		#include <AudioUnit/MusicDevice.h>
+		#include <AudioUnit/AudioCodec.h>
+	#endif
 
 #else
+	#include <AudioComponent.h>
 	#include <AUComponent.h>
 	#include <AudioOutputUnit.h>
 	#include <AudioUnitProperties.h>

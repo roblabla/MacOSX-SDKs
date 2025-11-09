@@ -1,6 +1,6 @@
 /*	
     NSURLCredential.h
-    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
+    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,18 +8,20 @@
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
+#import <Security/Security.h>
 
 @class NSString;
+@class NSArray;
 
 /*!
     @enum NSURLCredentialPersistence
     @abstract Constants defining how long a credential will be kept around
     @constant NSURLCredentialPersistenceNone This credential won't be saved.
     @constant NSURLCredentialPersistenceForSession This credential will only be stored for this session.
-    @constant NSURLCredentialPersistencePermanent This credential will be stored permanently and shared with other applications.
+    @constant NSURLCredentialPersistencePermanent This credential will be stored permanently. Note: Whereas in Mac OS X any application can access any credential provided the user gives permission, in iPhone OS an application can access only its own credentials.
 */
 
 enum {
@@ -33,15 +35,29 @@ typedef NSUInteger NSURLCredentialPersistence;
 
 /*!
     @class NSURLCredential
-    @discussion This class is an immutable object representing an
-    authentication credential - a user and a password.
+    @discussion This class is an immutable object representing an authentication credential.  The actual type of the credential is determined by the constructor called in the categories declared below.
 */
 
 @interface NSURLCredential : NSObject <NSCopying>
 {
     @private
-    NSURLCredentialInternal *_internal;
+    __strong NSURLCredentialInternal *_internal;
 }
+
+/*!
+    @method persistence
+    @abstract Determine whether this credential is or should be stored persistently
+    @result A value indicating whether this credential is stored permanently, per session or not at all.
+ */
+- (NSURLCredentialPersistence)persistence;
+
+@end
+
+/*!
+    @class NSURLCredential(NSInternetPassword)
+    @discussion This category defines the methods available to an NSURLCredential created to represent an internet password credential.  These are most commonly used for resources that require a username and password combination.
+ */
+@interface NSURLCredential(NSInternetPassword)
 
 /*!
     @method initWithUser:password:persistence:
@@ -91,13 +107,67 @@ typedef NSUInteger NSURLCredentialPersistence;
 */
 - (BOOL)hasPassword;
 
+@end
+
 /*!
-    @method persistence
-    @abstract Determine whether this credential is or should be stored persistently
-    @result A value indicating whether this credential is stored permanently, per session or not at all.
+    @class NSURLCredential(NSClientCertificate)
+    @discussion This category defines the methods available to an NSURLCredential created to represent a client certificate credential.  Client certificates are commonly stored on the users computer in the keychain and must be presented to the server during a handshake.
 */
-- (NSURLCredentialPersistence)persistence;
+@interface NSURLCredential(NSClientCertificate)
+
+/*!
+    @method initWithIdentity:certificateArray:persistence:
+    @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
+    @param identity a SecIdentityRef object
+    @param certArray an array containing at least one SecCertificateRef objects
+    @param persistence enum that says to store per session, permanently or not at all
+    @result the Initialized NSURLCredential
+ */
+- (id)initWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence) persistence;
+
+/*!
+    @method credentialWithCertificateArray:password:persistence:
+    @abstract Create a new NSURLCredential with an identity and certificate array
+    @param identity a SecIdentityRef object
+    @param certArray an array containing at least one SecCertificateRef objects
+    @param persistence enum that says to store per session, permanently or not at all
+    @result The new autoreleased NSURLCredential
+ */
++ (NSURLCredential *)credentialWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence;
+
+/*!
+    @method identity
+    @abstract Returns the SecIdentityRef of this credential, if it was created with a certificate and identity
+    @result A SecIdentityRef or NULL if this is a username/password credential
+ */
+- (SecIdentityRef)identity;
+
+/*!
+    @method certificateArray
+    @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
+    @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
+ */
+- (NSArray *)certificates;
 
 @end
+
+@interface NSURLCredential(NSServerTrust)
+
+/*!
+    @method initWithTrust:(SecTrustRef) trust
+    @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted.
+    @result the Initialized NSURLCredential
+ */
+- (id)initWithTrust:(SecTrustRef)trust;
+
+/*!
+    @method continueWithHandshakeCredential
+    @abstract Create a new NSURLCredential which specifies that a handshake has been trusted.
+    @result The new autoreleased NSURLCredential
+ */
++ (NSURLCredential *)credentialForTrust:(SecTrustRef)trust;
+
+@end
+
 
 #endif

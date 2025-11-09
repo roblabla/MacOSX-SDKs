@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,7 +34,8 @@
         unsigned int        viewBoundsChangedOverridden:1;
         unsigned int        viewFrameChangedOverridden:1;
         unsigned int        documentViewAlignment:4;
-        unsigned int        RESERVED:14;
+        unsigned int        redrawnWhileScrolling:1;
+        unsigned int        RESERVED:13;
     } _cvFlags;
 }
 

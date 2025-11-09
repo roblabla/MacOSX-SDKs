@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: taskbar.h,v 1.27 2007/01/07 19:44:12 VZ Exp $
+// RCS-ID:      $Id: taskbar.h 53135 2008-04-12 02:31:04Z VZ $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,7 +18,7 @@
 
 #include "wx/event.h"
 
-class WXDLLIMPEXP_ADV wxTaskBarIconEvent;
+class WXDLLIMPEXP_FWD_ADV wxTaskBarIconEvent;
 
 // ----------------------------------------------------------------------------
 // wxTaskBarIconBase: define wxTaskBarIcon interface

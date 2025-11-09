@@ -12,7 +12,6 @@
 @class ABPerson;
 @class ABGroup;
 @class ABSearchElement;
-@class ABConverter;
 
 // ================================================================
 //      OpenURL support
@@ -37,7 +36,7 @@
 @interface ABAddressBook : NSObject
 {
 @private
-    NSMutableDictionary *_masterCache;
+    id                  *_reserved8;
     
     void                *_reserved2;
     void                *_reserved3;
@@ -62,12 +61,14 @@
         unsigned int     importTips:1;
         unsigned int     restoreFromMetaData:1;
         unsigned int     prefsNeedSync:1;
-        unsigned int     _reserved:24;
+        unsigned int     waitingForReset:1;
+        unsigned int     _reserved:23;
     } _flags;
 }
 
 + (ABAddressBook *)sharedAddressBook;
     // Returns the unique shared instance of ABAddressBook
+    // Returns nil if the address book database cannot be initialized 
 
 #if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 

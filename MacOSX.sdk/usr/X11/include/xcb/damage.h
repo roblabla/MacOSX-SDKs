@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from damage.xml by c-client.xsl using XSLT.
+ * This file generated automatically from damage.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -14,7 +14,13 @@
 
 #include "xcb.h"
 #include "xproto.h"
+#include "render.h"
+#include "shape.h"
 #include "xfixes.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_DAMAGE_MAJOR_VERSION 1
 #define XCB_DAMAGE_MINOR_VERSION 1
@@ -267,6 +273,8 @@ xcb_damage_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_damage_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -501,6 +509,10 @@ xcb_damage_add (xcb_connection_t    *c  /**< */,
                 xcb_drawable_t       drawable  /**< */,
                 xcb_xfixes_region_t  region  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

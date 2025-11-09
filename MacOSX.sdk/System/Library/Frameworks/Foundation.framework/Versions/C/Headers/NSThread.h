@@ -1,5 +1,5 @@
 /*	NSThread.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -26,14 +26,16 @@
 
 + (void)exit;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-+ (double)threadPriority;
-+ (BOOL)setThreadPriority:(double)p;
-#endif
++ (double)threadPriority AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
++ (BOOL)setThreadPriority:(double)p AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 #if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
+- (double)threadPriority AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setThreadPriority:(double)p AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 + (NSArray *)callStackReturnAddresses;
++ (NSArray *)callStackSymbols AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (void)setName:(NSString *)n;
 - (NSString *)name;

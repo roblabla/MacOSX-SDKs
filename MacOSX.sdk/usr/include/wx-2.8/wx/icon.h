@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: icon.h,v 1.21 2006/09/30 20:45:13 RR Exp $
+// RCS-ID:      $Id: icon.h 41538 2006-09-30 20:45:15Z RR $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

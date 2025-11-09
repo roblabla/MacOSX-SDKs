@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     10-June-1998
-// RCS-ID:      $Id: _listctrl.i,v 1.38 2007/01/12 18:39:04 RD Exp $
+// RCS-ID:      $Id: _listctrl.i 49160 2007-10-15 20:02:03Z RD $
 // Copyright:   (c) 2002 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -612,11 +612,9 @@ public:
 
     // get the horizontal and vertical components of the item spacing
     wxSize GetItemSpacing() const;
-    %pythoncode { GetItemSpacing = wx._deprecated(GetItemSpacing) }
 
 #ifndef __WXMSW__
     void SetItemSpacing( int spacing, bool isSmall = false );
-    %pythoncode { SetItemSpacing = wx._deprecated(SetItemSpacing) }
 #endif
 
     // Gets the number of selected items in the list control

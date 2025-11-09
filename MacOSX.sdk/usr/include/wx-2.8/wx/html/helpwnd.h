@@ -4,7 +4,7 @@
 // Notes:       Based on htmlhelp.cpp, implementing a monolithic
 //              HTML Help controller class,  by Vaclav Slavik
 // Author:      Harm van der Heijden and Vaclav Slavik
-// RCS-ID:      $Id: helpwnd.h,v 1.7 2006/10/29 20:22:33 VS Exp $
+// RCS-ID:      $Id: helpwnd.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) Harm van der Heijden and Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -31,10 +31,10 @@
 #include "wx/html/htmlwin.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_CORE wxButton;
-class WXDLLIMPEXP_CORE wxTextCtrl;
-class WXDLLIMPEXP_CORE wxTreeEvent;
-class WXDLLIMPEXP_CORE wxTreeCtrl;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
+class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 
 // style flags for the Help Frame
 #define wxHF_TOOLBAR                0x0001
@@ -67,8 +67,8 @@ struct wxHtmlHelpFrameCfg
 struct wxHtmlHelpMergedIndexItem;
 class wxHtmlHelpMergedIndex;
 
-class WXDLLIMPEXP_CORE wxHelpControllerBase;
-class WXDLLIMPEXP_HTML wxHtmlHelpController;
+class WXDLLIMPEXP_FWD_CORE wxHelpControllerBase;
+class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
 
 /*!
  * Help window

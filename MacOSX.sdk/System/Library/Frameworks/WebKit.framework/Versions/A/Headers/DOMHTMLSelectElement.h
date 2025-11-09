@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,10 +26,12 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMHTMLElement;
 @class DOMHTMLFormElement;
 @class DOMHTMLOptionsCollection;
+@class DOMNode;
 @class NSString;
 
 @interface DOMHTMLSelectElement : DOMHTMLElement
@@ -38,19 +40,22 @@
 @property(copy) NSString *value;
 @property(readonly) int length;
 @property(readonly, retain) DOMHTMLFormElement *form;
+@property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property(readonly, retain) DOMHTMLOptionsCollection *options;
 @property BOOL disabled;
+@property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property BOOL multiple;
 @property(copy) NSString *name;
 @property int size;
-@property int tabIndex;
 
-- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before;
+- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)remove:(int)index;
-- (void)blur;
-- (void)focus;
+- (DOMNode *)item:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (DOMNode *)namedItem:(NSString *)name AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
 
 @interface DOMHTMLSelectElement (DOMHTMLSelectElementDeprecated)
-- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
 @end
+
+#endif

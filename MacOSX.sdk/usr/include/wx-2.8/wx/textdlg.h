@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: textdlg.h,v 1.8 2004/05/23 20:50:25 JS Exp $
+// RCS-ID:      $Id: textdlg.h 27408 2004-05-23 20:53:33Z JS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

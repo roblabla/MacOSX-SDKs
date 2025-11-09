@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     04.12.99
-// RCS-ID:      $Id: listbase.h,v 1.25 2006/10/02 17:37:49 PC Exp $
+// RCS-ID:      $Id: listbase.h 46313 2007-06-03 22:38:28Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -336,7 +336,7 @@ protected:
         m_col = 0;
         m_state = 0;
         m_stateMask = 0;
-        m_image = 0;
+        m_image = -1;
         m_data = 0;
 
         m_format = wxLIST_FORMAT_CENTRE;

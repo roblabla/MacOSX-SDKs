@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000, 2001, 2003-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000, 2001, 2003-2005, 2008, 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,9 +24,14 @@
 #ifndef _SCDYNAMICSTORE_H
 #define _SCDYNAMICSTORE_H
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
+#include <TargetConditionals.h>
 #include <sys/cdefs.h>
+#if	!TARGET_OS_IPHONE
+#include <dispatch/dispatch.h>
+#endif	// !TARGET_OS_IPHONE
 #include <CoreFoundation/CoreFoundation.h>
+
 
 /*!
 	@header SCDynamicStore
@@ -103,7 +108,7 @@ __BEGIN_DECLS
 	@discussion Returns the type identifier of all SCDynamicStore instances.
  */
 CFTypeID
-SCDynamicStoreGetTypeID			(void);
+SCDynamicStoreGetTypeID			(void)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 
 /*!
@@ -131,9 +136,7 @@ SCDynamicStoreCreate			(
 					CFStringRef			name,
 					SCDynamicStoreCallBack		callout,
 					SCDynamicStoreContext		*context
-					);
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1040
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCreateWithOptions
@@ -179,11 +182,9 @@ SCDynamicStoreCreateWithOptions		(
 					CFDictionaryRef			storeOptions,
 					SCDynamicStoreCallBack		callout,
 					SCDynamicStoreContext		*context
-					)				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
-extern const CFStringRef	kSCDynamicStoreUseSessionKeys		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	/* CFBoolean */
-
-#endif	/* MAC_OS_X_VERSION_MAX_ALLOWED >= 1040 */
+extern const CFStringRef	kSCDynamicStoreUseSessionKeys		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);	/* CFBoolean */
 
 /*!
 	@function SCDynamicStoreCreateRunLoopSource
@@ -213,7 +214,25 @@ SCDynamicStoreCreateRunLoopSource	(
 					CFAllocatorRef			allocator,
 					SCDynamicStoreRef		store,
 					CFIndex				order
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+
+#if	!TARGET_OS_IPHONE
+/*!
+	@function SCDynamicStoreSetDispatchQueue
+	@discussion Initiates notifications for the Notification
+		Keys in store to the callback contained in store.
+	@param store A reference to the dynamic store session.
+	@param queue The dispatch queue to run the callback function on.
+		Pass NULL to disable notifications, and release the queue.
+	@result Returns TRUE on success, FALSE on failure.
+
+ */
+Boolean
+SCDynamicStoreSetDispatchQueue		(
+					SCDynamicStoreRef		store,
+					dispatch_queue_t		queue
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+#endif	// !TARGET_OS_IPHONE
 
 /*!
 	@function SCDynamicStoreCopyKeyList
@@ -230,7 +249,7 @@ CFArrayRef
 SCDynamicStoreCopyKeyList		(
 					SCDynamicStoreRef		store,
 					CFStringRef			pattern
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreAddValue
@@ -247,7 +266,7 @@ SCDynamicStoreAddValue			(
 					SCDynamicStoreRef		store,
 					CFStringRef			key,
 					CFPropertyListRef		value
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreAddTemporaryValue
@@ -266,7 +285,7 @@ SCDynamicStoreAddTemporaryValue		(
 					SCDynamicStoreRef		store,
 					CFStringRef			key,
 					CFPropertyListRef		value
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyValue
@@ -281,7 +300,7 @@ CFPropertyListRef
 SCDynamicStoreCopyValue			(
 					SCDynamicStoreRef		store,
 					CFStringRef			key
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyMultiple
@@ -301,7 +320,7 @@ SCDynamicStoreCopyMultiple		(
 					SCDynamicStoreRef		store,
 					CFArrayRef			keys,
 					CFArrayRef			patterns
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreSetValue
@@ -317,7 +336,7 @@ SCDynamicStoreSetValue			(
 					SCDynamicStoreRef		store,
 					CFStringRef			key,
 					CFPropertyListRef		value
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreSetMultiple
@@ -334,7 +353,7 @@ SCDynamicStoreSetMultiple		(
 					CFDictionaryRef			keysToSet,
 					CFArrayRef			keysToRemove,
 					CFArrayRef			keysToNotify
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreRemoveValue
@@ -349,7 +368,7 @@ Boolean
 SCDynamicStoreRemoveValue		(
 					SCDynamicStoreRef		store,
 					CFStringRef			key
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreNotifyValue
@@ -365,7 +384,7 @@ Boolean
 SCDynamicStoreNotifyValue		(
 					SCDynamicStoreRef		store,
 					CFStringRef			key
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreSetNotificationKeys
@@ -384,7 +403,7 @@ SCDynamicStoreSetNotificationKeys	(
 					SCDynamicStoreRef		store,
 					CFArrayRef			keys,
 					CFArrayRef			patterns
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function SCDynamicStoreCopyNotifiedKeys
@@ -401,8 +420,8 @@ SCDynamicStoreSetNotificationKeys	(
 CFArrayRef
 SCDynamicStoreCopyNotifiedKeys		(
 					SCDynamicStoreRef		store
-					);
+					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
 
-#endif /* _SCDYNAMICSTORE_H */
+#endif	/* _SCDYNAMICSTORE_H */

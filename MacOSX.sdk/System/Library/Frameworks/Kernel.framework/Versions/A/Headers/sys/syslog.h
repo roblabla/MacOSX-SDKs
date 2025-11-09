@@ -292,10 +292,8 @@ struct reg_desc {
 
 #include <stdarg.h>
 __BEGIN_DECLS
-void	logpri(int);
 void	log(int, const char *, ...);
-int	vaddlog(const char *, va_list);
-void	logtime(time_t);
+
 __END_DECLS
 
 #endif /* !_SYS_SYSLOG_H_ */

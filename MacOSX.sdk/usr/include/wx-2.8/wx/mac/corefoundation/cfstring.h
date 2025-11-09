@@ -4,7 +4,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     2004-10-29 (from code in wx/mac/carbon/private.h)
-// RCS-ID:      $Id: cfstring.h,v 1.8 2006/07/24 18:01:33 VZ Exp $
+// RCS-ID:      $Id: cfstring.h 40283 2006-07-24 18:01:39Z VZ $
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.2.1
+     Version:    QuickTime 7.6.6
  
-     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
+     Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -73,10 +73,6 @@ extern "C" {
 #endif
 
 #pragma pack(push, 2)
-
-/* QuickTime is not available to 64-bit clients */
-
-#if !__LP64__
 
 /* This sets the user defined exportset name i.e. fw_QuickTime_XManchego, available on 10.5 or later, and comment [4486184] */
 /* NOTE:  Requires Interfacer-35 or later */
@@ -151,38 +147,39 @@ enum {
 enum {
   kUserDataMovieControllerType  = 'ctyp',
   kUserDataName                 = 'name',
-  kUserDataTextAlbum            = (long)0xA9616C62/*'©alb' */,
-  kUserDataTextArtist           = (long)0xA9415254,
-  kUserDataTextAuthor           = (long)0xA9617574/*'©aut' */,
-  kUserDataTextChapter          = (long)0xA9636870/*'©chp' */,
-  kUserDataTextComment          = (long)0xA9636D74/*'©cmt' */,
-  kUserDataTextComposer         = (long)0xA9636F6D/*'©com' */,
-  kUserDataTextCopyright        = (long)0xA9637079/*'©cpy' */,
-  kUserDataTextCreationDate     = (long)0xA9646179/*'©day' */,
-  kUserDataTextDescription      = (long)0xA9646573/*'©des' */,
-  kUserDataTextDirector         = (long)0xA9646972/*'©dir' */,
-  kUserDataTextDisclaimer       = (long)0xA9646973/*'©dis' */,
-  kUserDataTextEncodedBy        = (long)0xA9656E63/*'©enc' */,
-  kUserDataTextFullName         = (long)0xA96E616D/*'©nam' */,
-  kUserDataTextGenre            = (long)0xA967656E/*'©gen' */,
-  kUserDataTextHostComputer     = (long)0xA9687374/*'©hst' */,
-  kUserDataTextInformation      = (long)0xA9696E66/*'©inf' */,
-  kUserDataTextKeywords         = (long)0xA96B6579/*'©key' */,
-  kUserDataTextMake             = (long)0xA96D616B/*'©mak' */,
-  kUserDataTextModel            = (long)0xA96D6F64/*'©mod' */,
-  kUserDataTextOriginalArtist   = (long)0xA96F7065/*'©ope' */,
-  kUserDataTextOriginalFormat   = (long)0xA9666D74/*'©fmt' */,
-  kUserDataTextOriginalSource   = (long)0xA9737263/*'©src' */,
-  kUserDataTextPerformers       = (long)0xA9707266/*'©prf' */,
-  kUserDataTextProducer         = (long)0xA9707264/*'©prd' */,
-  kUserDataTextProduct          = (long)0xA9505244,
-  kUserDataTextSoftware         = (long)0xA9737772/*'©swr' */,
-  kUserDataTextSpecialPlaybackRequirements = (long)0xA9726571/*'©req' */,
-  kUserDataTextTrack            = (long)0xA974726B/*'©trk' */,
-  kUserDataTextWarning          = (long)0xA977726E/*'©wrn' */,
-  kUserDataTextWriter           = (long)0xA9777274/*'©wrt' */,
-  kUserDataTextURLLink          = (long)0xA975726C/*'©url' */,
-  kUserDataTextEditDate1        = (long)0xA9656431/*'©ed1' */,
+  kUserDataTextAlbum            = (int)0xA9616C62/*'©alb' */,
+  kUserDataTextArtist           = (int)0xA9415254,
+  kUserDataTextAuthor           = (int)0xA9617574/*'©aut' */,
+  kUserDataTextChapter          = (int)0xA9636870/*'©chp' */,
+  kUserDataTextComment          = (int)0xA9636D74/*'©cmt' */,
+  kUserDataTextComposer         = (int)0xA9636F6D/*'©com' */,
+  kUserDataTextCopyright        = (int)0xA9637079/*'©cpy' */,
+  kUserDataTextCreationDate     = (int)0xA9646179/*'©day' */,
+  kUserDataTextDescription      = (int)0xA9646573/*'©des' */,
+  kUserDataTextDirector         = (int)0xA9646972/*'©dir' */,
+  kUserDataTextDisclaimer       = (int)0xA9646973/*'©dis' */,
+  kUserDataTextEncodedBy        = (int)0xA9656E63/*'©enc' */,
+  kUserDataTextFullName         = (int)0xA96E616D/*'©nam' */,
+  kUserDataTextGenre            = (int)0xA967656E/*'©gen' */,
+  kUserDataTextHostComputer     = (int)0xA9687374/*'©hst' */,
+  kUserDataTextInformation      = (int)0xA9696E66/*'©inf' */,
+  kUserDataTextKeywords         = (int)0xA96B6579/*'©key' */,
+  kUserDataTextMake             = (int)0xA96D616B/*'©mak' */,
+  kUserDataTextModel            = (int)0xA96D6F64/*'©mod' */,
+  kUserDataTextOriginalArtist   = (int)0xA96F7065/*'©ope' */,
+  kUserDataTextOriginalFormat   = (int)0xA9666D74/*'©fmt' */,
+  kUserDataTextOriginalSource   = (int)0xA9737263/*'©src' */,
+  kUserDataTextPerformers       = (int)0xA9707266/*'©prf' */,
+  kUserDataTextProducer         = (int)0xA9707264/*'©prd' */,
+  kUserDataTextPublisher        = (int)0xA9707562/*'©pub' */,
+  kUserDataTextProduct          = (int)0xA9505244,
+  kUserDataTextSoftware         = (int)0xA9737772/*'©swr' */,
+  kUserDataTextSpecialPlaybackRequirements = (int)0xA9726571/*'©req' */,
+  kUserDataTextTrack            = (int)0xA974726B/*'©trk' */,
+  kUserDataTextWarning          = (int)0xA977726E/*'©wrn' */,
+  kUserDataTextWriter           = (int)0xA9777274/*'©wrt' */,
+  kUserDataTextURLLink          = (int)0xA975726C/*'©url' */,
+  kUserDataTextEditDate1        = (int)0xA9656431/*'©ed1' */,
   kUserDataAnimatedGIFLoopCount = 'gifc', /* data is big-endian UInt16 */
   kQTAnimatedGIFLoopCountInfinite = 0,
   kUserDataAnimatedGIFBufferingSize = 'gifb' /* data is big-endian UInt32 */
@@ -195,6 +192,9 @@ enum {
 enum {
   DoTheRightThing               = 0
 };
+
+
+#if !__LP64__
 
 /* property types*/
 typedef OSType                          QTPropertyClass;
@@ -213,16 +213,22 @@ typedef struct QTRestrictionSetRecord**  QTRestrictionSet;
 typedef struct SpriteWorldRecord*       SpriteWorld;
 typedef struct SpriteRecord*            Sprite;
 typedef struct QTTweenerRecord*         QTTweener;
+
+#endif // !__LP64__
+
 struct SampleDescription {
-  long                descSize;
-  long                dataFormat;
-  long                resvd1;
-  short               resvd2;
-  short               dataRefIndex;
+  SInt32              descSize;
+  SInt32              dataFormat;
+  SInt32              resvd1;
+  SInt16              resvd2;
+  SInt16              dataRefIndex;
 };
 typedef struct SampleDescription        SampleDescription;
 typedef SampleDescription *             SampleDescriptionPtr;
 typedef SampleDescriptionPtr *          SampleDescriptionHandle;
+
+#if !__LP64__
+
 enum {
   kQTNetworkStatusNoNetwork     = -2,
   kQTNetworkStatusUncertain     = -1,
@@ -238,22 +244,25 @@ typedef long                            QTAtomID;
 typedef Float64                         QTFloatDouble;
 /* QTFloatSingle is the 32-bit IEEE-754 standard*/
 typedef Float32                         QTFloatSingle;
+
+#endif // !__LP64__
+
 /*************************
  * SoundDescription
  *************************/
 struct SoundDescription {
-  long                descSize;               /* total size of SoundDescription including extra data */
-  long                dataFormat;             /* sound format */
-  long                resvd1;                 /* reserved for apple use. set to zero */
-  short               resvd2;                 /* reserved for apple use. set to zero */
-  short               dataRefIndex;
-  short               version;                /* which version is this data */
-  short               revlevel;               /* what version of that codec did this */
-  long                vendor;                 /* whose  codec compressed this data */
-  short               numChannels;            /* number of channels of sound */
-  short               sampleSize;             /* number of bits per sample */
-  short               compressionID;          /* unused. set to zero. */
-  short               packetSize;             /* unused. set to zero. */
+  SInt32              descSize;               /* total size of SoundDescription including extra data */
+  SInt32              dataFormat;             /* sound format */
+  SInt32              resvd1;                 /* reserved for apple use. set to zero */
+  SInt16              resvd2;                 /* reserved for apple use. set to zero */
+  SInt16              dataRefIndex;
+  SInt16              version;                /* which version is this data */
+  SInt16              revlevel;               /* what version of that codec did this */
+  SInt32              vendor;                 /* whose  codec compressed this data */
+  SInt16              numChannels;            /* number of channels of sound */
+  SInt16              sampleSize;             /* number of bits per sample */
+  SInt16              compressionID;          /* unused. set to zero. */
+  SInt16              packetSize;             /* unused. set to zero. */
   UnsignedFixed       sampleRate;             /* sample rate sound is captured at */
 };
 typedef struct SoundDescription         SoundDescription;
@@ -264,10 +273,10 @@ struct SoundDescriptionV1 {
                                               /* original fields*/
   SoundDescription    desc;
                                               /* fixed compression ratio information*/
-  unsigned long       samplesPerPacket;
-  unsigned long       bytesPerPacket;
-  unsigned long       bytesPerFrame;
-  unsigned long       bytesPerSample;
+  UInt32              samplesPerPacket;
+  UInt32              bytesPerPacket;
+  UInt32              bytesPerFrame;
+  UInt32              bytesPerSample;
                                               /* additional atom based fields ([long size, long type, some data], repeat)*/
 };
 typedef struct SoundDescriptionV1       SoundDescriptionV1;
@@ -315,6 +324,9 @@ struct SoundDescriptionV2 {
 typedef struct SoundDescriptionV2       SoundDescriptionV2;
 typedef SoundDescriptionV2 *            SoundDescriptionV2Ptr;
 typedef SoundDescriptionV2Ptr *         SoundDescriptionV2Handle;
+
+#if !__LP64__
+
 enum {
   kQTSoundDescriptionKind_Movie_Version1 = 'mvv1',
   kQTSoundDescriptionKind_Movie_Version2 = 'mvv2',
@@ -651,6 +663,8 @@ RemoveSoundDescriptionExtension(
 
 
 
+#endif // !__LP64__
+
 
 enum {
   kTx3gSampleType               = 'tx3g',
@@ -659,52 +673,52 @@ enum {
 };
 
 struct Tx3gRGBAColor {
-  unsigned char       red;
-  unsigned char       green;
-  unsigned char       blue;
-  unsigned char       transparency;
+  UInt8               red;
+  UInt8               green;
+  UInt8               blue;
+  UInt8               transparency;
 };
 typedef struct Tx3gRGBAColor            Tx3gRGBAColor;
 struct Tx3gStyleRecord {
-  unsigned short      startChar;
-  unsigned short      endChar;
-  unsigned short      fontID;
-  unsigned char       fontFace;
-  unsigned char       fontSize;
+  UInt16              startChar;
+  UInt16              endChar;
+  UInt16              fontID;
+  UInt8               fontFace;
+  UInt8               fontSize;
   Tx3gRGBAColor       fontColor;
 };
 typedef struct Tx3gStyleRecord          Tx3gStyleRecord;
 typedef Tx3gStyleRecord *               Tx3gStylePtr;
 typedef Tx3gStylePtr *                  Tx3gStyleHandle;
 struct Tx3gStyleTableRecord {
-  unsigned short      count;
+  UInt16              count;
   Tx3gStyleRecord     table[1];
 };
 typedef struct Tx3gStyleTableRecord     Tx3gStyleTableRecord;
 typedef Tx3gStyleTableRecord *          Tx3gStyleTablePtr;
 typedef Tx3gStyleTablePtr *             Tx3gStyleTableHandle;
 struct Tx3gFontRecord {
-  unsigned short      fontID;
+  UInt16              fontID;
   unsigned char       nameLength;
   unsigned char       name[1];
 };
 typedef struct Tx3gFontRecord           Tx3gFontRecord;
 typedef Tx3gFontRecord *                Tx3gFontRecordPtr;
 struct Tx3gFontTableRecord {
-  unsigned short      entryCount;
+  UInt16              entryCount;
   Tx3gFontRecord      fontEntries[1];
 };
 typedef struct Tx3gFontTableRecord      Tx3gFontTableRecord;
 typedef Tx3gFontTableRecord *           Tx3gFontTablePtr;
 typedef Tx3gFontTablePtr *              Tx3gFontTableHandle;
 struct Tx3gDescription {
-  long                descSize;
-  long                dataFormat;
-  long                resvd1;
-  short               resvd2;
-  short               dataRefIndex;
+  SInt32              descSize;
+  SInt32              dataFormat;
+  SInt32              resvd1;
+  SInt16              resvd2;
+  SInt16              dataRefIndex;
 
-  unsigned long       displayFlags;
+  UInt32              displayFlags;
   char                horizontalJustification;
   char                verticalJustification;
   Tx3gRGBAColor       backgroundColor;
@@ -714,19 +728,44 @@ struct Tx3gDescription {
 typedef struct Tx3gDescription          Tx3gDescription;
 typedef Tx3gDescription *               Tx3gDescriptionPtr;
 typedef Tx3gDescriptionPtr *            Tx3gDescriptionHandle;
+
+#if __LP64__
+
+/* QuickDraw legacy */
+struct QTRGBColor {
+  UInt16              red;                    /* magnitude of red component*/
+  UInt16              green;                  /* magnitude of green component*/
+  UInt16              blue;                   /* magnitude of blue component*/
+};
+typedef struct QTRGBColor               QTRGBColor;
+
+#endif // __LP64__
+
 struct TextDescription {
-  long                descSize;               /* Total size of TextDescription*/
-  long                dataFormat;             /* 'text'*/
+  SInt32              descSize;               /* Total size of TextDescription*/
+  SInt32              dataFormat;             /* 'text'*/
 
-  long                resvd1;
-  short               resvd2;
-  short               dataRefIndex;
+  SInt32              resvd1;
+  SInt16              resvd2;
+  SInt16              dataRefIndex;
 
-  long                displayFlags;           /* see enum below for flag values*/
+  SInt32              displayFlags;           /* see enum below for flag values*/
 
-  long                textJustification;      /* Can be: teCenter,teFlush -Default,-Right,-Left*/
+  SInt32              textJustification;      /* Can be: teCenter,teFlush -Default,-Right,-Left*/
+
+
+#if __LP64__
+
+
+  QTRGBColor          bgColor;                /* Background color*/
+
+#else
+
 
   RGBColor            bgColor;                /* Background color*/
+
+#endif // __LP64__
+
 
   Rect                defaultTextBox;         /* Location to place the text within the track bounds*/
   ScrpSTElement       defaultStyle;           /* Default style (struct defined in TextEdit.h)*/
@@ -735,6 +774,9 @@ struct TextDescription {
 typedef struct TextDescription          TextDescription;
 typedef TextDescription *               TextDescriptionPtr;
 typedef TextDescriptionPtr *            TextDescriptionHandle;
+
+#if !__LP64__
+
 struct SpriteDescription {
   long                descSize;               /* total size of SpriteDescription including extra data */
   long                dataFormat;             /*  */
@@ -1497,6 +1539,9 @@ enum {
   trackUsageInPoster            = 1 << 3
 };
 
+
+#endif // !__LP64__
+
 /* Add/GetMediaSample flags */
 enum {
   mediaSampleNotSync            = 1 << 0, /* sample is not a sync sample (eg. is frame differenced */
@@ -1511,6 +1556,9 @@ enum {
   mediaSampleDoesNotDependOnOthers = 1 << 29, /* sample's decode does not depend upon decode of other samples */
   mediaSampleEarlierDisplayTimesAllowed = 1 << 30 /* samples later in decode order may have earlier display times */
 };
+
+
+#if !__LP64__
 
 /*
 MediaSampleFlags is defined in ImageCompression.h:
@@ -8022,7 +8070,7 @@ enum {
   kMovieLoadStateLoaded         = 2000,
   kMovieLoadStatePlayable       = 10000,
   kMovieLoadStatePlaythroughOK  = 20000,
-  kMovieLoadStateComplete       = 100000L
+  kMovieLoadStateComplete       = 100000
 };
 
 /*

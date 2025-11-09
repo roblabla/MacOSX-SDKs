@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved.
  * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,8 @@
 
 #import <WebKit/DOMNode.h>
 
+#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+
 @class DOMCSSStyleDeclaration;
 @class DOMElement;
 @class NSString;
@@ -35,5 +37,7 @@
 @property(readonly) BOOL specified;
 @property(copy) NSString *value;
 @property(readonly, retain) DOMElement *ownerElement;
-@property(readonly, retain) DOMCSSStyleDeclaration *style;
+@property(readonly, retain) DOMCSSStyleDeclaration *style AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
+
+#endif

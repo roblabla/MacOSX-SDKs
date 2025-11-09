@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////
 // Name:        progdlgg.h
 // Purpose:     wxProgressDialog class
-// Author:      Karsten Ballüder
+// Author:      Karsten Ballueder
 // Modified by:
 // Created:     09.05.1999
-// RCS-ID:      $Id: progdlgg.h,v 1.41 2006/10/22 21:07:59 VZ Exp $
-// Copyright:   (c) Karsten Ballüder
+// RCS-ID:      $Id: progdlgg.h 50711 2007-12-15 02:57:58Z VZ $
+// Copyright:   (c) Karsten Ballueder
 // Licence:     wxWindows licence
 ////////////////////////////////////////////////////
 
@@ -19,9 +19,9 @@
 
 #include "wx/dialog.h"
 
-class WXDLLEXPORT wxButton;
-class WXDLLEXPORT wxGauge;
-class WXDLLEXPORT wxStaticText;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxGauge;
+class WXDLLIMPEXP_FWD_CORE wxStaticText;
 
 /* Progress dialog which shows a moving progress bar.
     Taken from the Mahogany project.*/
@@ -161,7 +161,7 @@ private:
 #endif // __WXMSW__
 
     // for wxPD_APP_MODAL case
-    class WXDLLEXPORT wxWindowDisabler *m_winDisabler;
+    class WXDLLIMPEXP_FWD_CORE wxWindowDisabler *m_winDisabler;
 
     DECLARE_EVENT_TABLE()
     DECLARE_NO_COPY_CLASS(wxProgressDialog)

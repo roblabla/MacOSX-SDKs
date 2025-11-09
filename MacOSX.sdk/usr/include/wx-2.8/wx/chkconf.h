@@ -4,7 +4,7 @@
  * Author:      Vadim Zeitlin
  * Modified by:
  * Created:     09.08.00
- * RCS-ID:      $Id: chkconf.h,v 1.141.2.1 2007/05/08 20:05:06 VZ Exp $
+ * RCS-ID:      $Id: chkconf.h 48113 2007-08-15 17:43:50Z DE $
  * Copyright:   (c) 2000 Vadim Zeitlin <vadim@wxwidgets.org>
  * Licence:     wxWindows licence
  */
@@ -55,6 +55,11 @@
 #if !defined(wxUSE_GUI)
 #   define wxUSE_GUI 1
 #endif /* !defined(wxUSE_GUI) */
+
+/* Turn off wxUSE_ABI_INCOMPATIBLE_FEATURES if not specified. */
+#if !defined(wxUSE_ABI_INCOMPATIBLE_FEATURES)
+#   define wxUSE_ABI_INCOMPATIBLE_FEATURES 0
+#endif /* !defined(wxUSE_ABI_INCOMPATIBLE_FEATURES) */
 
 /*
     If we're compiling without support for threads/exceptions we have to

@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     25-Nov-1998
-// RCS-ID:      $Id: _config.i,v 1.14 2006/09/02 19:46:43 RD Exp $
+// RCS-ID:      $Id: _config.i 54625 2008-07-14 22:20:10Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -45,6 +45,10 @@ enum
     wxCONFIG_USE_NO_ESCAPE_CHARACTERS
 };
 
+
+
+MustHaveApp(wxConfigBase::Get);
+MustHaveApp(wxConfigBase::Create);
 
 
 DocStr(wxConfigBase,
@@ -387,6 +391,8 @@ time)", "");
 
 //---------------------------------------------------------------------------
 
+MustHaveApp(wxConfig);
+
 DocStr(wxConfig,
 "This ConfigBase-derived class will use the registry on Windows,
 and will be a wx.FileConfig on other platforms.", "");
@@ -406,6 +412,8 @@ public:
 
 
 
+
+MustHaveApp(wxFileConfig);
 
 DocStr(wxFileConfig,
        "This config class will use a file for storage on all platforms.", "");

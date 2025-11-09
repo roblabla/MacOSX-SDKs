@@ -5,7 +5,7 @@
 // Author:      Stefan Csomor
 // Modified by:
 // Created:     08.02.01
-// RCS-ID:      $Id: tglbtn.h,v 1.6 2006/01/16 14:59:34 MR Exp $
+// RCS-ID:      $Id: tglbtn.h 36891 2006-01-16 14:59:55Z MR $
 // Copyright:   (c) 2004 Stefan Csomor
 // License:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

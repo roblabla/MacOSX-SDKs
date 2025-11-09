@@ -3,9 +3,9 @@
  
      Contains:   Backup low level Interfaces.
  
-     Version:    CarbonCore-783~134
+     Version:    CarbonCore-861.39~1
  
-     Copyright:  © 2006 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 2006-2008 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

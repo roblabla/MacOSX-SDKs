@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     23.05.99
-// RCS-ID:      $Id: caret.h,v 1.23 2006/10/30 11:56:10 ABX Exp $
+// RCS-ID:      $Id: caret.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,8 +20,8 @@
 // forward declarations
 // ---------------------------------------------------------------------------
 
-class WXDLLEXPORT wxWindow;
-class WXDLLEXPORT wxWindowBase;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 
 // ----------------------------------------------------------------------------
 // headers we have to include

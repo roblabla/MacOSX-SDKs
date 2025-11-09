@@ -5,7 +5,7 @@
 // Author:      Robin Dunn
 //
 // Created:     25-Nov-1998
-// RCS-ID:      $Id: html.i,v 1.93 2006/11/14 22:03:41 RD Exp $
+// RCS-ID:      $Id: html.i 54628 2008-07-14 22:23:04Z RD $
 // Copyright:   (c) 2003 by Total Control Software
 // Licence:     wxWindows license
 /////////////////////////////////////////////////////////////////////////////
@@ -110,6 +110,7 @@ enum wxHtmlURLType
 class wxHtmlLinkInfo : public wxObject {
 public:
     wxHtmlLinkInfo(const wxString& href, const wxString& target = wxPyEmptyString);
+    ~wxHtmlLinkInfo();
     wxString GetHref();
     wxString GetTarget();
     wxMouseEvent* GetEvent();
@@ -1315,9 +1316,13 @@ public:
                           const wxString& normal_face = wxPyEmptyString,
                           const wxString& fixed_face = wxPyEmptyString);
 
-    wxPrintData *GetPrintData() {return m_PrintData;}
-    wxPageSetupDialogData *GetPageSetupData() {return m_PageSetupData;}
+    wxPrintData *GetPrintData();
+    wxPageSetupDialogData *GetPageSetupData();
 
+    wxWindow* GetParentWindow() const;
+    void SetParentWindow(wxWindow* window);
+
+    
     %property(PageSetupData, GetPageSetupData, doc="See `GetPageSetupData`");
     %property(PrintData, GetPrintData, doc="See `GetPrintData`");
 };
@@ -1779,9 +1784,11 @@ public:
 
     /// Obtains the latest settings used by the help frame and the help
     /// frame.
-    virtual wxFrame *GetFrameParameters(wxSize *size = NULL,
-                                        wxPoint *pos = NULL,
-                                        bool *newFrameEachTime = NULL);
+
+    // TODO: return a tuple of values    
+//     virtual wxFrame *GetFrameParameters(wxSize *size = NULL,
+//                                         wxPoint *pos = NULL,
+//                                         bool *newFrameEachTime = NULL);
 
     virtual bool Quit() /* = 0 */;
 

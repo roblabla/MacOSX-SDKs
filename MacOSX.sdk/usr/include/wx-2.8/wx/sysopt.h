@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     2001-07-10
-// RCS-ID:      $Id: sysopt.h,v 1.8 2005/03/23 20:48:47 VZ Exp $
+// RCS-ID:      $Id: sysopt.h 33004 2005-03-23 20:48:50Z VZ $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

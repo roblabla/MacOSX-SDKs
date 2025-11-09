@@ -4,7 +4,7 @@
 // Author:      Ryan Norton <wxprojects@comcast.net>
 // Modified by:
 // Created:     11/07/04
-// RCS-ID:      $Id: mediactrl.h,v 1.31 2006/09/05 20:45:04 VZ Exp $
+// RCS-ID:      $Id: mediactrl.h 41020 2006-09-05 20:47:48Z VZ $
 // Copyright:   (c) Ryan Norton
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////

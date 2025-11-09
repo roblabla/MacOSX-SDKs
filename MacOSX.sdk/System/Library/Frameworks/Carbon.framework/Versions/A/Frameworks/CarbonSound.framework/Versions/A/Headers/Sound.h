@@ -3,9 +3,9 @@
  
      Contains:   Sound Manager Interfaces.
  
-     Version:    CarbonSound-106.5~87
+     Version:    CarbonSound-109.2~530
  
-     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -96,8 +96,8 @@ enum {
 };
 
 enum {
-  rate48khz                     = (long)0xBB800000, /*48000.00000 in fixed-point*/
-  rate44khz                     = (long)0xAC440000, /*44100.00000 in fixed-point*/
+  rate48khz                     = (int)0xBB800000, /*48000.00000 in fixed-point*/
+  rate44khz                     = (int)0xAC440000, /*44100.00000 in fixed-point*/
   rate32khz                     = 0x7D000000, /*32000.00000 in fixed-point*/
   rate22050hz                   = 0x56220000, /*22050.00000 in fixed-point*/
   rate22khz                     = 0x56EE8BA3, /*22254.54545 in fixed-point*/
@@ -398,7 +398,7 @@ enum {
 
 /* input source Types*/
 enum {
-  kInvalidSource                = (long)0xFFFFFFFF, /*this source may be returned from GetInfo if no other source is the monitored source*/
+  kInvalidSource                = (int)0xFFFFFFFF, /*this source may be returned from GetInfo if no other source is the monitored source*/
   kNoSource                     = 'none', /*no source selection*/
   kCDSource                     = 'cd  ', /*internal CD player input*/
   kExtMicSource                 = 'emic', /*external mic input*/

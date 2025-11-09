@@ -3,7 +3,7 @@
 // Purpose:     includes all xh_*.h files
 // Author:      Vaclav Slavik
 // Created:     2000/03/05
-// RCS-ID:      $Id: xh_all.h,v 1.22 2006/11/09 10:40:38 JS Exp $
+// RCS-ID:      $Id: xh_all.h 48045 2007-08-13 12:05:18Z JS $
 // Copyright:   (c) 2000 Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -67,5 +67,8 @@
 #include "wx/xrc/xh_bmpcbox.h"
 #include "wx/xrc/xh_animatctrl.h"
 #include "wx/xrc/xh_collpane.h"
+#if wxABI_VERSION >= 20805
+#include "wx/xrc/xh_propdlg.h"
+#endif
 
 #endif // _WX_XH_ALL_H_

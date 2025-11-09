@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by:
 // Created:     15.11.99
-// RCS-ID:      $Id: frame.h,v 1.61 2006/08/01 12:01:16 VS Exp $
+// RCS-ID:      $Id: frame.h 49804 2007-11-10 01:09:42Z VZ $
 // Copyright:   (c) wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,10 +22,10 @@
 extern WXDLLEXPORT_DATA(const wxChar) wxStatusLineNameStr[];
 extern WXDLLEXPORT_DATA(const wxChar) wxToolBarNameStr[];
 
-class WXDLLEXPORT wxFrame;
-class WXDLLEXPORT wxMenuBar;
-class WXDLLEXPORT wxStatusBar;
-class WXDLLEXPORT wxToolBar;
+class WXDLLIMPEXP_FWD_CORE wxFrame;
+class WXDLLIMPEXP_FWD_CORE wxMenuBar;
+class WXDLLIMPEXP_FWD_CORE wxStatusBar;
+class WXDLLIMPEXP_FWD_CORE wxToolBar;
 
 // ----------------------------------------------------------------------------
 // constants

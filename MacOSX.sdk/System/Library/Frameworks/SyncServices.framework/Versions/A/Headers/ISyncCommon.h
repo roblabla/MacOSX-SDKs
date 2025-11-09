@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 #if defined(__cplusplus)
     #define SYNCSERVICES_EXPORT extern "C"
 #else

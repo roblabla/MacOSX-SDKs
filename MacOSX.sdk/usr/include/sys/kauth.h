@@ -38,6 +38,7 @@
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 #include <mach/boolean.h>
+#include <sys/_types.h>		/* __offsetof() */
 
 #ifdef __APPLE_API_EVOLVING
 
@@ -105,6 +106,12 @@ struct kauth_identity_extlookup {
 #define KAUTH_EXTLOOKUP_WANT_MEMBERSHIP	(1<<12)
 #define KAUTH_EXTLOOKUP_VALID_MEMBERSHIP (1<<13)
 #define KAUTH_EXTLOOKUP_ISMEMBER	(1<<14)
+
+	__darwin_pid_t	el_info_pid;		/* request on behalf of PID */
+	u_int32_t	el_info_reserved_1;	/* reserved (APPLE) */
+	u_int32_t	el_info_reserved_2;	/* reserved (APPLE) */
+	u_int32_t	el_info_reserved_3;	/* reserved (APPLE) */
+
 	uid_t		el_uid;		/* user ID */
 	guid_t		el_uguid;	/* user GUID */
 	u_int32_t	el_uguid_valid;	/* TTL on translation result (seconds) */
@@ -121,6 +128,7 @@ struct kauth_identity_extlookup {
 #define KAUTH_EXTLOOKUP_REGISTER	(0)
 #define KAUTH_EXTLOOKUP_RESULT		(1<<0)
 #define KAUTH_EXTLOOKUP_WORKER		(1<<1)
+#define	KAUTH_EXTLOOKUP_DEREGISTER	(1<<2)
 
 
 
@@ -173,7 +181,7 @@ struct kauth_acl {
 	u_int32_t	acl_entrycount;
 	u_int32_t	acl_flags;
 	
-	struct kauth_ace acl_ace[];
+	struct kauth_ace acl_ace[1];
 };
 
 /*
@@ -208,7 +216,7 @@ struct kauth_acl {
  * entry (Windows treats this as "deny all") from one that merely indicates a
  * file group and/or owner guid values.
  */
-#define KAUTH_ACL_SIZE(c)	(sizeof(struct kauth_acl) + ((u_int32_t)(c) != KAUTH_FILESEC_NOACL ? ((c) * sizeof(struct kauth_ace)) : 0))
+#define KAUTH_ACL_SIZE(c)	(__offsetof(struct kauth_acl, acl_ace) + ((u_int32_t)(c) != KAUTH_FILESEC_NOACL ? ((c) * sizeof(struct kauth_ace)) : 0))
 #define KAUTH_ACL_COPYSIZE(p)	KAUTH_ACL_SIZE((p)->acl_entrycount)
 
 
@@ -248,10 +256,10 @@ struct kauth_filesec {
 typedef struct kauth_filesec *kauth_filesec_t;
 #endif
 
-#define KAUTH_FILESEC_SIZE(c)		(sizeof(struct kauth_filesec) + (c) * sizeof(struct kauth_ace))
+#define KAUTH_FILESEC_SIZE(c)		(__offsetof(struct kauth_filesec, fsec_acl) + __offsetof(struct kauth_acl, acl_ace) + (c) * sizeof(struct kauth_ace))
 #define KAUTH_FILESEC_COPYSIZE(p)	KAUTH_FILESEC_SIZE(((p)->fsec_entrycount == KAUTH_FILESEC_NOACL) ? 0 : (p)->fsec_entrycount)
-#define KAUTH_FILESEC_COUNT(s)		((s  - sizeof(struct kauth_filesec)) / sizeof(struct kauth_ace))
-#define KAUTH_FILESEC_VALID(s)		((s) >= sizeof(struct kauth_filesec) && (((s) - sizeof(struct kauth_filesec)) % sizeof(struct kauth_ace)) == 0)
+#define KAUTH_FILESEC_COUNT(s)		(((s)  - KAUTH_FILESEC_SIZE(0)) / sizeof(struct kauth_ace))
+#define KAUTH_FILESEC_VALID(s)		((s) >= KAUTH_FILESEC_SIZE(0) && (((s) - KAUTH_FILESEC_SIZE(0)) % sizeof(struct kauth_ace)) == 0)
 
 #define KAUTH_FILESEC_XATTR	"com.apple.system.Security"
 

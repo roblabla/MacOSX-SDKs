@@ -4,7 +4,7 @@
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
-#import <QuartzCore/CVBase.h>
+#import <CoreVideo/CVBase.h>
 #import <OpenGL/OpenGL.h>
 
 @interface CAOpenGLLayer : CALayer
@@ -32,8 +32,9 @@
 /* Called when a new frame needs to be generated for layer time 't'.
  * 'ctx' is attached to the rendering destination. It's state is
  * otherwise undefined. When non-null 'ts'  describes the display
- * timestamp associated with layer time 't'. The default implementation
- * of the method flushes the context. */
+ * timestamp associated with layer time 't'. Subclasses should call
+ * the superclass implementation of the method to flush the context
+ * after rendering. */
 
 - (void)drawInCGLContext:(CGLContextObj)ctx pixelFormat:(CGLPixelFormatObj)pf
     forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts;

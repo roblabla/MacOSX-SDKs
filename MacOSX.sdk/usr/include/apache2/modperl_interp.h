@@ -1,8 +1,9 @@
-/* Copyright 2000-2005 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/* Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -23,32 +24,8 @@ apr_status_t modperl_interp_cleanup(void *data);
 
 #ifdef USE_ITHREADS
 
-/*
- * HvPMROOT will never be used by Perl with PL_modglobal.
- * so we have stolen it as a quick way to stash the interp
- * pointer.
- *
- * However in 5.9.3 HvPMROOT was completely removed, so we have moved
- * to use another struct member that's hopefully won't be used by
- * anybody else. But if we can find a better place to store the
- * pointer to the current mod_perl interpreter object it'd be a much
- * cleaner solution. of course it must be really fast.
- */
-#ifndef HvPMROOT
-#define MP_THX_INTERP_GET(thx)                                  \
-    (modperl_interp_t *) ((XPVMG*)SvANY(*Perl_Imodglobal_ptr(thx)))->xmg_magic
-#else
-#define MP_THX_INTERP_GET(thx) \
-    (modperl_interp_t *)HvPMROOT(*Perl_Imodglobal_ptr(thx))
-#endif
-
-#ifndef HvPMROOT
-#define MP_THX_INTERP_SET(thx, interp)                          \
-    ((XPVMG*)SvANY(*Perl_Imodglobal_ptr(thx)))->xmg_magic = (MAGIC*)interp
-#else
-#define MP_THX_INTERP_SET(thx, interp)                          \
-    HvPMROOT(*Perl_Imodglobal_ptr(thx)) = (PMOP*)interp
-#endif
+modperl_interp_t *modperl_thx_interp_get(PerlInterpreter *thx);
+void modperl_thx_interp_set(PerlInterpreter *thx, modperl_interp_t *interp);
 
 const char *modperl_interp_scope_desc(modperl_interp_scope_e scope);
 
@@ -90,7 +67,7 @@ modperl_interp_t *modperl_interp_select(request_rec *r, conn_rec *c,
 
 apr_status_t modperl_interp_pool_destroy(void *data);
 
-typedef apr_status_t (*modperl_interp_mip_walker_t)(pTHX_ 
+typedef apr_status_t (*modperl_interp_mip_walker_t)(pTHX_
                                                     modperl_interp_pool_t *mip,
                                                     void *data);
 

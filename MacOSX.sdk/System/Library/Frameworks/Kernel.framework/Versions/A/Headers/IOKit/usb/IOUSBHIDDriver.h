@@ -88,6 +88,11 @@ enum
 };
 
 
+/*!
+ @class IOUSBHIDDriver
+ @abstract Driver that matches to USB HID devices.
+ @discussion This class can be overriden to provide for specific behaviors.
+ */
 class IOUSBHIDDriver : public IOHIDDevice
 {
     OSDeclareDefaultStructors(IOUSBHIDDriver)
@@ -134,6 +139,8 @@ class IOUSBHIDDriver : public IOHIDDevice
 		bool							_powerStateChanging;
 		unsigned long					_myPowerState;
 		bool							_pendingRead;
+		UInt32							_deviceDeadCheckLock;			// "Lock" to prevent us from executing the device dead check while in progress
+		uint64_t						_handleReportTimeStamp;
     };
     IOUSBHIDDriverExpansionData *_usbHIDExpansionData;
     
@@ -207,9 +214,7 @@ public:
     virtual IOReturn 	setReport( IOMemoryDescriptor * report,
                                 IOHIDReportType      reportType,
                                 IOOptionBits         options = 0 );
-	
-	virtual OSNumber * newReportIntervalNumber() const;
-			
+
     // HID driver methods
     //
     virtual OSString * 	newIndexedString(UInt8 index) const;

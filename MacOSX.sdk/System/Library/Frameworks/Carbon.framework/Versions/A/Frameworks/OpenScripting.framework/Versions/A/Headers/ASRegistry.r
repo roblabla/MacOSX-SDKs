@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Registry constants.
  
-     Version:    OSA-122~37
+     Version:    OSA-137~257
  
-     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

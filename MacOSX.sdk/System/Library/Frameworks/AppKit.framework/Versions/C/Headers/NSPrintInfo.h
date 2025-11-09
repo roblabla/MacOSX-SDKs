@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,50 +30,52 @@ typedef NSUInteger NSPrintingPaginationMode;
 
 /* Valid values for the NSPrintJobDisposition attribute.
 */
-APPKIT_EXTERN NSString *NSPrintSpoolJob;
-APPKIT_EXTERN NSString *NSPrintPreviewJob;
-APPKIT_EXTERN NSString *NSPrintSaveJob;
-APPKIT_EXTERN NSString *NSPrintCancelJob;
+APPKIT_EXTERN NSString *const NSPrintSpoolJob;
+APPKIT_EXTERN NSString *const NSPrintPreviewJob;
+APPKIT_EXTERN NSString *const NSPrintSaveJob;
+APPKIT_EXTERN NSString *const NSPrintCancelJob;
 
 /* Keys for page setup attributes that are recognized by NSPrintInfo.
 */
-APPKIT_EXTERN NSString *NSPrintPaperName; // an NSString
-APPKIT_EXTERN NSString *NSPrintPaperSize; // an NSValue containing an NSSize, in points
-APPKIT_EXTERN NSString *NSPrintOrientation; // an NSNumber containing NSPortraitOrientation or NSLandscapeOrientation
-APPKIT_EXTERN NSString *NSPrintScalingFactor; // an NSNumber containing a floating-point percentage
+APPKIT_EXTERN NSString *const NSPrintPaperName; // an NSString
+APPKIT_EXTERN NSString *const NSPrintPaperSize; // an NSValue containing an NSSize, in points
+APPKIT_EXTERN NSString *const NSPrintOrientation; // an NSNumber containing NSPortraitOrientation or NSLandscapeOrientation
+APPKIT_EXTERN NSString *const NSPrintScalingFactor; // an NSNumber containing a floating-point percentage
 
 /* Keys for pagination attributes that are recognized by NSPrintInfo.
 */
-APPKIT_EXTERN NSString *NSPrintLeftMargin; // an NSNumber containing a measurement in floating-point points
-APPKIT_EXTERN NSString *NSPrintRightMargin; // an NSNumber containing a measurement in floating-point points
-APPKIT_EXTERN NSString *NSPrintTopMargin; // an NSNumber containing a measurement in floating-point points
-APPKIT_EXTERN NSString *NSPrintBottomMargin; // an NSNumber containing a measurement in floating-point points
-APPKIT_EXTERN NSString *NSPrintHorizontallyCentered; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintVerticallyCentered; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintHorizontalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
-APPKIT_EXTERN NSString *NSPrintVerticalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
+APPKIT_EXTERN NSString *const NSPrintLeftMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *const NSPrintRightMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *const NSPrintTopMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *const NSPrintBottomMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *const NSPrintHorizontallyCentered; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintVerticallyCentered; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintHorizontalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
+APPKIT_EXTERN NSString *const NSPrintVerticalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
 
 /* Keys for print job attributes that are recognized by NSPrintInfo.
 */
-APPKIT_EXTERN NSString *NSPrintPrinter;	// an NSPrinter
-APPKIT_EXTERN NSString *NSPrintCopies; // an NSNumber containing the number of copies of the print job to be printed
-APPKIT_EXTERN NSString *NSPrintAllPages; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintFirstPage; // an NSNumber containing the one-based index of the first job in the page to print
-APPKIT_EXTERN NSString *NSPrintLastPage; // an NSNumber containing the one-based index of the last job in the page to print
-APPKIT_EXTERN NSString *NSPrintMustCollate; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintReversePageOrder; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintJobDisposition; // an NSString equal to NSPrintSpoolJob, NSPrintPreviewJob, NSPrintSaveJob, or NSPrintCancelJob
-APPKIT_EXTERN NSString *NSPrintSavePath; // an NSString containing a path to which the job file will be saved, for NSPrintSaveJob
-APPKIT_EXTERN NSString *NSPrintPagesAcross AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed across a physical sheet
-APPKIT_EXTERN NSString *NSPrintPagesDown AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed down a physical sheet
-APPKIT_EXTERN NSString *NSPrintTime AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSDate containing the time at which printing should begin
-APPKIT_EXTERN NSString *NSPrintDetailedErrorReporting AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *NSPrintFaxNumber AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing a fax number
-APPKIT_EXTERN NSString *NSPrintPrinterName AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing the name of a printer
+APPKIT_EXTERN NSString *const NSPrintPrinter;	// an NSPrinter
+APPKIT_EXTERN NSString *const NSPrintCopies; // an NSNumber containing the number of copies of the print job to be printed
+APPKIT_EXTERN NSString *const NSPrintAllPages; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintFirstPage; // an NSNumber containing the one-based index of the first job in the page to print
+APPKIT_EXTERN NSString *const NSPrintLastPage; // an NSNumber containing the one-based index of the last job in the page to print
+APPKIT_EXTERN NSString *const NSPrintMustCollate; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintReversePageOrder; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintJobDisposition; // an NSString equal to NSPrintSpoolJob, NSPrintPreviewJob, NSPrintSaveJob, or NSPrintCancelJob
+APPKIT_EXTERN NSString *const NSPrintPagesAcross AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed across a physical sheet
+APPKIT_EXTERN NSString *const NSPrintPagesDown AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed down a physical sheet
+APPKIT_EXTERN NSString *const NSPrintTime AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSDate containing the time at which printing should begin
+APPKIT_EXTERN NSString *const NSPrintDetailedErrorReporting AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintFaxNumber AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing a fax number
+APPKIT_EXTERN NSString *const NSPrintPrinterName AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing the name of a printer
+APPKIT_EXTERN NSString *const NSPrintSelectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintJobSavingURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // an NSURL containing the location to which the job file will be saved, for NSPrintSaveJob
+APPKIT_EXTERN NSString *const NSPrintJobSavingFileNameExtensionHidden AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // A boolean NSNumber for whether the job file's name extension should be hidden, for NSPrintSaveJob
 
 /* Keys for page adornment attributes that are recognized by NSPrintInfo.
 */
-APPKIT_EXTERN NSString *NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // a boolean NSNumber for whether the results of -[NSView pageHeader] and -[NSView pageFooter] should be drawn on pages
 
 @interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
     @private
@@ -99,9 +101,11 @@ APPKIT_EXTERN NSString *NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_A
 - (void)setPaperName:(NSString *)name;
 - (void)setPaperSize:(NSSize)size;
 - (void)setOrientation:(NSPrintingOrientation)orientation;
+- (void)setScalingFactor:(CGFloat)scalingFactor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (NSString *)paperName;
 - (NSSize)paperSize;
 - (NSPrintingOrientation)orientation;
+- (CGFloat)scalingFactor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Set or get the values of the pagination attributes.
 */
@@ -175,40 +179,34 @@ APPKIT_EXTERN NSString *NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_A
 
 #endif
 
+
+/* Set or get whether only the selected content should be printed.
+*/
+- (void)setSelectionOnly:(BOOL)selectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)isSelectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 @end
 
 @interface NSPrintInfo(NSDeprecated)
 
 /* A method that was deprecated in Mac OS 10.2. +[NSPrintInfo setDefaultPrinter:] does nothing.
 */
-+ (void)setDefaultPrinter:(NSPrinter *)printer;
++ (void)setDefaultPrinter:(NSPrinter *)printer DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* A method that was deprecated in Mac OS 10.2. NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account. You should use -[NSPrinter pageSizeForPaper:] instead.
 */
-+ (NSSize)sizeForPaperName:(NSString *)name;
++ (NSSize)sizeForPaperName:(NSString *)name DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 @end
 
 /* Keys for attributes that were deprecated in Mac OS 10.2. NSPrintInfo does not recognizes these attributes. For backward binary compatibility, -[NSPrintInfo setUpPrintOperationDefaultValues] does however set default values for the NSPrintJobFeatures (an empty dictionary) and NSPrintPagesPerSheet (1) attributes.
 */
-APPKIT_EXTERN NSString *NSPrintFormName;
-APPKIT_EXTERN NSString *NSPrintJobFeatures;
-APPKIT_EXTERN NSString *NSPrintManualFeed;
-APPKIT_EXTERN NSString *NSPrintPagesPerSheet;
-APPKIT_EXTERN NSString *NSPrintPaperFeed;
+APPKIT_EXTERN NSString *const NSPrintFormName DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintJobFeatures DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintManualFeed DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintPagesPerSheet DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintPaperFeed DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/* Keys for attributes that were deprecated in Mac OS X Public Beta. NSPrintInfo does not recognizes these attributes.
+/* A key for an attribute that was deprecated in Mac OS 10.6. You can use NSPrintJobSavingURL instead.
 */
-APPKIT_EXTERN NSString *NSPrintFaxCoverSheetName;
-APPKIT_EXTERN NSString *NSPrintFaxHighResolution;
-APPKIT_EXTERN NSString *NSPrintFaxModem;
-APPKIT_EXTERN NSString *NSPrintFaxReceiverNames;
-APPKIT_EXTERN NSString *NSPrintFaxReceiverNumbers;
-APPKIT_EXTERN NSString *NSPrintFaxReturnReceipt;
-APPKIT_EXTERN NSString *NSPrintFaxSendTime;
-APPKIT_EXTERN NSString *NSPrintFaxTrimPageEnds;
-APPKIT_EXTERN NSString *NSPrintFaxUseCoverSheet;
-
-/* A job disposition that was deprecated in Mac OS X Public Beta. NSPrintInfo treats this job disposition as synonymous with NSPrintSpoolJob.
-*/
-APPKIT_EXTERN NSString *NSPrintFaxJob;
+APPKIT_EXTERN NSString *const NSPrintSavePath;

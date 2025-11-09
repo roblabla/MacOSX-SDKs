@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2010 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.50.2.2.2.4 2007/12/31 07:20:13 sebastian Exp $ */
+/* $Id: php_array.h 293036 2010-01-03 09:23:27Z sebastian $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -66,6 +66,8 @@ PHP_FUNCTION(array_splice);
 PHP_FUNCTION(array_slice);
 PHP_FUNCTION(array_merge);
 PHP_FUNCTION(array_merge_recursive);
+PHP_FUNCTION(array_replace);
+PHP_FUNCTION(array_replace_recursive);
 PHP_FUNCTION(array_keys);
 PHP_FUNCTION(array_values);
 PHP_FUNCTION(array_count_values);
@@ -100,9 +102,17 @@ PHP_FUNCTION(array_key_exists);
 PHP_FUNCTION(array_chunk);
 PHP_FUNCTION(array_combine);
 
-HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
+PHPAPI HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
 PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS_DC);
-int multisort_compare(const void *a, const void *b TSRMLS_DC);
+PHPAPI int php_array_replace_recursive(HashTable *dest, HashTable *src TSRMLS_DC);
+PHPAPI int php_multisort_compare(const void *a, const void *b TSRMLS_DC);
+
+#define PHP_SORT_REGULAR            0
+#define PHP_SORT_NUMERIC            1
+#define PHP_SORT_STRING             2
+#define PHP_SORT_DESC               3
+#define PHP_SORT_ASC                4
+#define PHP_SORT_LOCALE_STRING      5
 
 ZEND_BEGIN_MODULE_GLOBALS(array) 
 	int *multisort_flags[2];

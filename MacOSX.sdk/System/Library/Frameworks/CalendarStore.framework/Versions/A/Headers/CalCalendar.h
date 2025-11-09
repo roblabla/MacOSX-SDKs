@@ -14,6 +14,7 @@ extern NSString * const CalCalendarTypeCalDAV;
 extern NSString * const CalCalendarTypeLocal;
 extern NSString * const CalCalendarTypeSubscription;
 extern NSString * const CalCalendarTypeIMAP;
+extern NSString * const CalCalendarTypeExchange AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @interface CalCalendar : NSObject <NSCopying>
 {

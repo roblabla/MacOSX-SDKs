@@ -2,10 +2,8 @@
      File:      AUGenericView.h
  
      Contains:  Class definition for Generic Cocoa based view for any Audio Unit
- 
-     Version:   Mac OS X
- 
-     Copyright: (c) 2004 by Apple Computer, Inc., all rights reserved.
+  
+     Copyright: (c) 2004-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,6 +12,8 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import <CoreAudioKit/AUCustomViewPersistentData.h>
+
 #include <AudioUnit/AudioUnit.h>
 
 enum {
@@ -26,7 +26,7 @@ enum {
 @class AUGenericView
 @abstract  An AUGenericView object retrieves and instantiates a generic user interface view for the given audio unit
 */
-@interface AUGenericView : NSView {
+@interface AUGenericView : NSView <AUCustomViewPersistentData> {
 	__strong void *		_reserved[32];
 }
 

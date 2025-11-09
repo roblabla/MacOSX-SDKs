@@ -86,6 +86,8 @@ typedef unsigned long long	memory_object_size_t;
 typedef natural_t		memory_object_cluster_size_t;
 typedef natural_t *		memory_object_fault_info_t;
 
+typedef unsigned long long 	vm_object_id_t;
+
 
 /*
  * Temporary until real EMMI version gets re-implemented
@@ -173,6 +175,7 @@ typedef	int		memory_object_return_t;
 #define		MEMORY_OBJECT_COPY_SYNC		0x8
 #define		MEMORY_OBJECT_DATA_SYNC		0x10
 #define         MEMORY_OBJECT_IO_SYNC           0x20
+#define		MEMORY_OBJECT_DATA_FLUSH_ALL	0x40
 
 /*
  *	Types for the memory object flavor interfaces
@@ -318,9 +321,12 @@ typedef uint32_t	upl_size_t;	/* page-aligned byte size */
 #define UPL_WILL_MODIFY		0x00800000 /* caller will modify the pages */
 
 #define UPL_NEED_32BIT_ADDR	0x01000000
+#define UPL_UBC_MSYNC		0x02000000
+#define UPL_UBC_PAGEOUT		0x04000000
+#define UPL_UBC_PAGEIN		0x08000000
 
 /* UPL flags known by this kernel */
-#define UPL_VALID_FLAGS		0x01FFFFFF
+#define UPL_VALID_FLAGS		0x0FFFFFFF
 
 
 /* upl abort error flags */
@@ -330,7 +336,7 @@ typedef uint32_t	upl_size_t;	/* page-aligned byte size */
 #define UPL_ABORT_FREE_ON_EMPTY	0x8  /* only implemented in wrappers */
 #define UPL_ABORT_DUMP_PAGES	0x10
 #define UPL_ABORT_NOTIFY_EMPTY	0x20
-#define UPL_ABORT_ALLOW_ACCESS	0x40
+/* deprecated: #define UPL_ABORT_ALLOW_ACCESS	0x40 */
 #define UPL_ABORT_REFERENCE	0x80
 
 /* upl pages check flags */
@@ -390,8 +396,16 @@ typedef uint32_t	upl_size_t;	/* page-aligned byte size */
  * pageout will reenter the FS for the same file currently
  * being handled in this context.
  */
-
 #define UPL_NESTED_PAGEOUT	0x80
+
+/*
+ * we've detected a sequential access pattern and
+ * we are speculatively and aggressively pulling
+ * pages in... do not count these as real PAGEINs
+ * w/r to our hard throttle maintenance
+ */
+#define UPL_IOSTREAMING		0x100
+
 
 
 
@@ -401,7 +415,13 @@ typedef uint32_t	upl_size_t;	/* page-aligned byte size */
 #define UPL_COMMIT_SET_DIRTY		0x4
 #define UPL_COMMIT_INACTIVATE		0x8
 #define UPL_COMMIT_NOTIFY_EMPTY		0x10
-#define UPL_COMMIT_ALLOW_ACCESS		0x20
+/* deprecated: #define UPL_COMMIT_ALLOW_ACCESS		0x20 */
+#define UPL_COMMIT_CS_VALIDATED		0x40
+#define UPL_COMMIT_CLEAR_PRECIOUS	0x80
+#define UPL_COMMIT_SPECULATE		0x100
+#define UPL_COMMIT_FREE_ABSENT		0x200
+
+#define UPL_COMMIT_KERNEL_ONLY_FLAGS	(UPL_COMMIT_CS_VALIDATED | UPL_COMMIT_FREE_ABSENT)
 
 /* flags for return of state from vm_map_get_upl,  vm_upl address space */
 /* based call */

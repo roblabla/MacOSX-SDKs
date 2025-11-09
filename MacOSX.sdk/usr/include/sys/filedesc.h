@@ -66,7 +66,6 @@
 
 #include <sys/appleapiopts.h>
 
-#ifdef __APPLE_API_UNSTABLE
 /*
  * This structure is used for the management of descriptors.  It may be
  * shared by multiple processes.
@@ -84,47 +83,5 @@
 #define NDFILE		25		/* 125 bytes */
 #define NDEXTENT	50		/* 250 bytes in 256-byte alloc. */ 
 
-struct klist;
-
-struct filedesc {
-	struct	fileproc **fd_ofiles;	/* file structures for open files */
-	char	*fd_ofileflags;		/* per-process open file flags */
-	struct	vnode *fd_cdir;		/* current directory */
-	struct	vnode *fd_rdir;		/* root directory */
-	int	fd_nfiles;		/* number of open files allocated */
-	int	fd_lastfile;		/* high-water mark of fd_ofiles */
-	int	fd_freefile;		/* approx. next free file */
-	u_short	fd_cmask;		/* mask for file creation */
-	u_long	fd_refcnt;		/* reference count */
-
-	int     fd_knlistsize;          /* size of knlist */
-	struct  klist *fd_knlist;       /* list of attached knotes */
-	u_long  fd_knhashmask;          /* size of knhash */
-	struct  klist *fd_knhash;       /* hash table for attached knotes */
-        int	fd_flags;
-};
-
-/*
- * definitions for fd_flags;
- */
-#define	FD_CHROOT	0x01	/* process was chrooted... keep track even */
-                                /* if we're force unmounted and unable to */
-                                /* take a vnode_ref on fd_rdir during a fork */
-
-/*
- * Per-process open flags.
- */
-#define	UF_EXCLOSE 	0x01		/* auto-close on exec */
-#define UF_RESERVED	0x04		/* open pending / in progress */
-#define UF_CLOSING	0x08		/* close in progress */
-
-
-/*
- * Storage required per open file descriptor.
- */
-#define OFILESIZE (sizeof(struct file *) + sizeof(char))
-
-
-#endif /* __APPLE_API_UNSTABLE */
 
 #endif /* !_SYS_FILEDESC_H_ */

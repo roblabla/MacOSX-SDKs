@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2007, Apple Inc.
+	Copyright (c) 1994-2009, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSSpellProtocol.h>
 
 @class NSColor, NSFont, NSNotification;
+@protocol NSTextDelegate;
 
 /* Various important Unicode code points */
 enum {
@@ -43,6 +44,12 @@ enum {
     NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
 };
 typedef NSInteger NSWritingDirection;
+
+/* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */
+enum {
+    NSTextWritingDirectionEmbedding     = (0 << 1),
+    NSTextWritingDirectionOverride      = (1 << 1)
+};
 
 /* Movement codes for movement between fields; these codes are the integer values of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
 */
@@ -80,8 +87,8 @@ enum {
 - (BOOL)writeRTFDToFile:(NSString *)path atomically:(BOOL)flag;
 - (BOOL)readRTFDFromFile:(NSString *)path;
 
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
+- (id <NSTextDelegate>)delegate;
+- (void)setDelegate:(id <NSTextDelegate>)anObject;
 
 - (BOOL)isEditable;
 - (void)setEditable:(BOOL)flag;
@@ -156,7 +163,8 @@ enum {
 
 @end
 
-@interface NSObject(NSTextDelegate)
+@protocol NSTextDelegate <NSObject>
+@optional
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;        // YES means do it
 - (BOOL)textShouldEndEditing:(NSText *)textObject;          // YES means do it
 - (void)textDidBeginEditing:(NSNotification *)notification;

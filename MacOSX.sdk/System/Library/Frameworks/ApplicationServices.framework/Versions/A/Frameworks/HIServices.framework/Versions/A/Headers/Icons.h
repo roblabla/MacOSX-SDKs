@@ -3,9 +3,9 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-247.0.1~2
+     Version:    HIServices-311~1
  
-     Copyright:  © 1990-2006 by Apple Computer, Inc. All rights reserved
+     Copyright:  © 1990-2008 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -936,7 +936,7 @@ enum {
   /*
    * Draw the icon image and alpha channel.
    */
-  kPlotIconRefNormalFlags       = 0L,
+  kPlotIconRefNormalFlags       = 0,
 
   /*
    * Only draw the alpha channel.

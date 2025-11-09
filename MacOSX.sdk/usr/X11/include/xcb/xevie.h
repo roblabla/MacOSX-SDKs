@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xevie.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xevie.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -13,6 +13,10 @@
 #define __XEVIE_H
 
 #include "xcb.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XEVIE_MAJOR_VERSION 1
 #define XCB_XEVIE_MINOR_VERSION 0
@@ -264,6 +268,8 @@ xcb_xevie_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xevie_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -342,6 +348,8 @@ xcb_xevie_start_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xevie_start_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -420,6 +428,8 @@ xcb_xevie_end_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xevie_end_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -545,6 +555,8 @@ xcb_xevie_send_unchecked (xcb_connection_t  *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xevie_send_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -623,6 +635,8 @@ xcb_xevie_select_input_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xevie_select_input_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -641,6 +655,10 @@ xcb_xevie_select_input_reply (xcb_connection_t                 *c  /**< */,
                               xcb_xevie_select_input_cookie_t   cookie  /**< */,
                               xcb_generic_error_t             **e  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -3,9 +3,9 @@
  
      Contains:   Dictionary Manager Interfaces
  
-     Version:    LanguageAnalysis-194~74
+     Version:    LanguageAnalysis-214.2~4
  
-     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,7 +38,6 @@ extern "C" {
 
 #pragma options align=power
 
-#if !__LP64__
 /*
 =============================================================================================
  Modern Dictionary Manager
@@ -88,7 +87,7 @@ enum {
   kDCMRequiredFieldMask         = 0x00000002,
   kDCMIdentifyFieldMask         = 0x00000004,
   kDCMFixedSizeFieldMask        = 0x00000008,
-  kDCMHiddenFieldMask           = (long)0x80000000
+  kDCMHiddenFieldMask           = (int)0x80000000
 };
 
 typedef OptionBits                      DCMFieldAttributes;
@@ -182,7 +181,7 @@ typedef DescType                        DCMFieldType;
 struct DCMDictionaryHeader {
   FourCharCode        headerSignature;
   UInt32              headerVersion;
-  ByteCount           headerSize;
+  UInt32              headerSize;
   Str63               accessMethod;
 };
 typedef struct DCMDictionaryHeader      DCMDictionaryHeader;
@@ -218,6 +217,7 @@ typedef STACK_UPP_TYPE(DCMProgressFilterProcPtr)                DCMProgressFilte
  *    Non-Carbon CFM:   available as macro/inline
  */
 
+#if !__LP64__
 /*
     Library version
 */
@@ -1099,11 +1099,13 @@ DCMGetFieldFindMethods(
   ItemCount *     actualNumberOfFindMethods)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+#endif  /* !__LP64__ */
+
+#endif  /* !__LP64__ */
+
 /*
     Check Dictionary Manager availability
 */
-#endif  /* !__LP64__ */
-
 #if TARGET_RT_MAC_CFM
 #ifdef __cplusplus
     inline pascal Boolean DCMDictionaryManagerAvailable() { return (DCMLibraryVersion != (void*)kUnresolvedCFragSymbolAddress); }
@@ -1161,152 +1163,6 @@ enum {
   kDCMJapaneseFukugouInfoType   = 'fuku'
 };
 
-#endif  /* !__LP64__ */
-
-/*
-=============================================================================================
- System 7 Dictionary Manager
-=============================================================================================
-*/
-
-#pragma options align=reset
-#pragma options align=mac68k
-
-#if !__LP64__
-enum {
-                                        /* Dictionary data insertion modes */
-  kInsert                       = 0,    /* Only insert the input entry if there is nothing in the dictionary that matches the key. */
-  kReplace                      = 1,    /* Only replace the entries which match the key with the input entry. */
-  kInsertOrReplace              = 2     /* Insert the entry if there is nothing in the dictionary which matches the key, otherwise replaces the existing matched entries with the input entry. */
-};
-
-/* This Was InsertMode */
-
-typedef short                           DictionaryDataInsertMode;
-enum {
-                                        /* Key attribute constants */
-  kIsCaseSensitive              = 0x10, /* case sensitive = 16       */
-  kIsNotDiacriticalSensitive    = 0x20  /* diac not sensitive = 32    */
-};
-
-enum {
-                                        /* Registered attribute type constants.   */
-  kNoun                         = -1,
-  kVerb                         = -2,
-  kAdjective                    = -3,
-  kAdverb                       = -4
-};
-
-/* This Was AttributeType */
-typedef SInt8                           DictionaryEntryAttribute;
-/* Dictionary information record */
-struct DictionaryInformation {
-  FSSpec              dictionaryFSSpec;
-  SInt32              numberOfRecords;
-  SInt32              currentGarbageSize;
-  ScriptCode          script;
-  SInt16              maximumKeyLength;
-  SInt8               keyAttributes;
-};
-typedef struct DictionaryInformation    DictionaryInformation;
-struct DictionaryAttributeTable {
-  UInt8               datSize;
-  DictionaryEntryAttribute  datTable[1];
-};
-typedef struct DictionaryAttributeTable DictionaryAttributeTable;
-typedef DictionaryAttributeTable *      DictionaryAttributeTablePtr;
-/*
- *  InitializeDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  OpenDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CloseDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  InsertRecordToDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  DeleteRecordFromDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  FindRecordInDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  FindRecordByIndexInDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  GetDictionaryInformation()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CompactDictionary()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-
-#endif  /* !__LP64__ */
 
 
 #pragma options align=reset

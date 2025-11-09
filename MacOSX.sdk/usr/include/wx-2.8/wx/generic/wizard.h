@@ -4,7 +4,7 @@
 // Author:      Vadim Zeitlin
 // Modified by: Robert Vazan (sizers)
 // Created:     28.09.99
-// RCS-ID:      $Id: wizard.h,v 1.26.8.1 2007/04/30 19:47:42 VZ Exp $
+// RCS-ID:      $Id: wizard.h 49563 2007-10-31 20:46:21Z VZ $
 // Copyright:   (c) 1999 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,11 +16,11 @@
 // wxWizard
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxButton;
-class WXDLLEXPORT wxStaticBitmap;
-class WXDLLIMPEXP_ADV wxWizardEvent;
-class WXDLLEXPORT wxBoxSizer;
-class WXDLLIMPEXP_ADV wxWizardSizer;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxStaticBitmap;
+class WXDLLIMPEXP_FWD_ADV wxWizardEvent;
+class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
+class WXDLLIMPEXP_FWD_ADV wxWizardSizer;
 
 class WXDLLIMPEXP_ADV wxWizard : public wxWizardBase
 {
@@ -57,6 +57,12 @@ public:
     virtual void FitToPage(const wxWizardPage *firstPage);
     virtual wxSizer *GetPageAreaSizer() const;
     virtual void SetBorder(int border);
+
+    /// set/get bitmap
+#if wxABI_VERSION >= 20805
+    const wxBitmap& GetBitmap() const { return m_bitmap; }
+    void SetBitmap(const wxBitmap& bitmap);
+#endif
 
     // implementation only from now on
     // -------------------------------

@@ -38,8 +38,8 @@ extern NSString* const	DRStatusStateKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 /*!
 	@const DRStatusPercentCompleteKey
 	@discussion	A key for the status dictionaries. 
-				NSNumber containing the precent complete of the operation expressed as
-				a foating point number from 0 to 1.
+				NSNumber containing the percent complete of the operation expressed as
+				a floating point number from 0 to 1.
 */
 extern NSString* const	DRStatusPercentCompleteKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

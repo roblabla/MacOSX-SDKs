@@ -78,7 +78,7 @@ usage()
 {
 	cat <<EOF
 iODBC Configuration Script
-iODBC Driver Manager 3.52.5
+iODBC Driver Manager 3.52.6
 Copyright (C) 1996-2004 OpenLink Software
 Please report all bugs to <iodbc@openlinksw.com>
 
@@ -132,7 +132,7 @@ while test $# -gt 0; do
       echo_exec_prefix=yes
       ;;
     --version)
-      echo 3.52.5
+      echo 3.52.6
       exit 0
       ;;
     --cflags)
@@ -196,7 +196,7 @@ if test "$echo_libs" = "yes"; then
 	if test "$lib_iodbc" = "yes"; then
 		libs="$libs -liodbc -liodbcinst"
 	fi
-	echo "$libs"
+	echo "-L${exec_prefix}/lib $libs"
 fi
 if test "$echo_staticlibs" = "yes"; then
 	libs=""

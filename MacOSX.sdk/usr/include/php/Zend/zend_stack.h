@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2008 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_stack.h,v 1.19.2.1.2.2 2007/12/31 07:20:03 sebastian Exp $ */
+/* $Id: zend_stack.h 293155 2010-01-05 20:46:53Z sebastian $ */
 
 #ifndef ZEND_STACK_H
 #define ZEND_STACK_H
@@ -32,14 +32,14 @@ typedef struct _zend_stack {
 
 BEGIN_EXTERN_C()
 ZEND_API int zend_stack_init(zend_stack *stack);
-ZEND_API int zend_stack_push(zend_stack *stack, void *element, int size);
-ZEND_API int zend_stack_top(zend_stack *stack, void **element);
+ZEND_API int zend_stack_push(zend_stack *stack, const void *element, int size);
+ZEND_API int zend_stack_top(const zend_stack *stack, void **element);
 ZEND_API int zend_stack_del_top(zend_stack *stack);
-ZEND_API int zend_stack_int_top(zend_stack *stack);
-ZEND_API int zend_stack_is_empty(zend_stack *stack);
+ZEND_API int zend_stack_int_top(const zend_stack *stack);
+ZEND_API int zend_stack_is_empty(const zend_stack *stack);
 ZEND_API int zend_stack_destroy(zend_stack *stack);
-ZEND_API void **zend_stack_base(zend_stack *stack);
-ZEND_API int zend_stack_count(zend_stack *stack);
+ZEND_API void **zend_stack_base(const zend_stack *stack);
+ZEND_API int zend_stack_count(const zend_stack *stack);
 ZEND_API void zend_stack_apply(zend_stack *stack, int type, int (*apply_function)(void *element));
 ZEND_API void zend_stack_apply_with_argument(zend_stack *stack, int type, int (*apply_function)(void *element, void *arg), void *arg);
 END_EXTERN_C()

@@ -178,7 +178,7 @@ _STRUCT_UCONTEXT64
 #endif /* FD_SETSIZE */
 #define	__DARWIN_NBBY		8				/* bits in a byte */
 #define __DARWIN_NFDBITS	(sizeof(__int32_t) * __DARWIN_NBBY) /* bits per mask */
-#define	__DARWIN_howmany(x, y) (((x) + ((y) - 1)) / (y))	/* # y's == x bits? */
+#define	__DARWIN_howmany(x, y)	((((x) % (y)) == 0) ? ((x) / (y)) : (((x) / (y)) + 1)) /* # y's == x bits? */
 
 __BEGIN_DECLS
 typedef	struct fd_set {
@@ -188,7 +188,7 @@ __END_DECLS
 
 /* This inline avoids argument side-effect issues with FD_ISSET() */
 static __inline int
-__darwin_fd_isset(int _n, struct fd_set *_p)
+__darwin_fd_isset(int _n, const struct fd_set *_p)
 {
 	return (_p->fds_bits[_n/__DARWIN_NFDBITS] & (1<<(_n % __DARWIN_NFDBITS)));
 }

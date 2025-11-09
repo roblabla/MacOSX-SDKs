@@ -1,5 +1,5 @@
 /*
- * This file generated automatically from xfixes.xml by c-client.xsl using XSLT.
+ * This file generated automatically from xfixes.xml by c_client.py.
  * Edit at your peril.
  */
 
@@ -16,6 +16,10 @@
 #include "xproto.h"
 #include "render.h"
 #include "shape.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define XCB_XFIXES_MAJOR_VERSION 4
 #define XCB_XFIXES_MINOR_VERSION 0
@@ -95,9 +99,9 @@ typedef enum xcb_xfixes_selection_event_t {
 } xcb_xfixes_selection_event_t;
 
 typedef enum xcb_xfixes_selection_event_mask_t {
-    XCB_XFIXES_SELECTION_EVENT_MASK_SET_SELECTION_OWNER = (1 << 0),
-    XCB_XFIXES_SELECTION_EVENT_MASK_SELECTION_WINDOW_DESTROY = (1 << 1),
-    XCB_XFIXES_SELECTION_EVENT_MASK_SELECTION_CLIENT_CLOSE = (1 << 2)
+    XCB_XFIXES_SELECTION_EVENT_MASK_SET_SELECTION_OWNER = 1,
+    XCB_XFIXES_SELECTION_EVENT_MASK_SELECTION_WINDOW_DESTROY = 2,
+    XCB_XFIXES_SELECTION_EVENT_MASK_SELECTION_CLIENT_CLOSE = 4
 } xcb_xfixes_selection_event_mask_t;
 
 /** Opcode for xcb_xfixes_selection_notify. */
@@ -138,7 +142,7 @@ typedef enum xcb_xfixes_cursor_notify_t {
 } xcb_xfixes_cursor_notify_t;
 
 typedef enum xcb_xfixes_cursor_notify_mask_t {
-    XCB_XFIXES_CURSOR_NOTIFY_MASK_DISPLAY_CURSOR = (1 << 0)
+    XCB_XFIXES_CURSOR_NOTIFY_MASK_DISPLAY_CURSOR = 1
 } xcb_xfixes_cursor_notify_mask_t;
 
 /** Opcode for xcb_xfixes_cursor_notify. */
@@ -738,6 +742,8 @@ xcb_xfixes_query_version_unchecked (xcb_connection_t *c  /**< */,
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xfixes_query_version_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1022,6 +1028,8 @@ xcb_xfixes_get_cursor_image_cursor_image_end (const xcb_xfixes_get_cursor_image_
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xfixes_get_cursor_image_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -1952,6 +1960,8 @@ xcb_xfixes_fetch_region_rectangles_iterator (const xcb_xfixes_fetch_region_reply
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xfixes_fetch_region_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2176,7 +2186,7 @@ xcb_xfixes_set_picture_clip_region (xcb_connection_t     *c  /**< */,
  ** @param xcb_connection_t *c
  ** @param xcb_cursor_t      cursor
  ** @param uint16_t          nbytes
- ** @param const uint8_t    *name
+ ** @param const char       *name
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -2185,7 +2195,7 @@ xcb_void_cookie_t
 xcb_xfixes_set_cursor_name_checked (xcb_connection_t *c  /**< */,
                                     xcb_cursor_t      cursor  /**< */,
                                     uint16_t          nbytes  /**< */,
-                                    const uint8_t    *name  /**< */);
+                                    const char       *name  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2203,7 +2213,7 @@ xcb_xfixes_set_cursor_name_checked (xcb_connection_t *c  /**< */,
  ** @param xcb_connection_t *c
  ** @param xcb_cursor_t      cursor
  ** @param uint16_t          nbytes
- ** @param const uint8_t    *name
+ ** @param const char       *name
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -2212,7 +2222,7 @@ xcb_void_cookie_t
 xcb_xfixes_set_cursor_name (xcb_connection_t *c  /**< */,
                             xcb_cursor_t      cursor  /**< */,
                             uint16_t          nbytes  /**< */,
-                            const uint8_t    *name  /**< */);
+                            const char       *name  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2266,14 +2276,14 @@ xcb_xfixes_get_cursor_name_unchecked (xcb_connection_t *c  /**< */,
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_xfixes_get_cursor_name_name
+ ** char * xcb_xfixes_get_cursor_name_name
  ** 
  ** @param const xcb_xfixes_get_cursor_name_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_xfixes_get_cursor_name_name (const xcb_xfixes_get_cursor_name_reply_t *R  /**< */);
 
 
@@ -2313,6 +2323,8 @@ xcb_xfixes_get_cursor_name_name_end (const xcb_xfixes_get_cursor_name_reply_t *R
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xfixes_get_cursor_name_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2379,14 +2391,14 @@ xcb_xfixes_get_cursor_image_and_name_unchecked (xcb_connection_t *c  /**< */);
 
 /*****************************************************************************
  **
- ** uint8_t * xcb_xfixes_get_cursor_image_and_name_name
+ ** char * xcb_xfixes_get_cursor_image_and_name_name
  ** 
  ** @param const xcb_xfixes_get_cursor_image_and_name_reply_t *R
- ** @returns uint8_t *
+ ** @returns char *
  **
  *****************************************************************************/
  
-uint8_t *
+char *
 xcb_xfixes_get_cursor_image_and_name_name (const xcb_xfixes_get_cursor_image_and_name_reply_t *R  /**< */);
 
 
@@ -2465,6 +2477,8 @@ xcb_xfixes_get_cursor_image_and_name_cursor_image_end (const xcb_xfixes_get_curs
  * The parameter @p e supplied to this function must be NULL if
  * xcb_xfixes_get_cursor_image_and_name_unchecked(). is used.
  * Otherwise, it stores the error if any.
+ *
+ * The returned value must be freed by the caller using free().
  */
 
 /*****************************************************************************
@@ -2555,7 +2569,7 @@ xcb_xfixes_change_cursor (xcb_connection_t *c  /**< */,
  ** @param xcb_connection_t *c
  ** @param xcb_cursor_t      src
  ** @param uint16_t          nbytes
- ** @param const uint8_t    *name
+ ** @param const char       *name
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -2564,7 +2578,7 @@ xcb_void_cookie_t
 xcb_xfixes_change_cursor_by_name_checked (xcb_connection_t *c  /**< */,
                                           xcb_cursor_t      src  /**< */,
                                           uint16_t          nbytes  /**< */,
-                                          const uint8_t    *name  /**< */);
+                                          const char       *name  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2582,7 +2596,7 @@ xcb_xfixes_change_cursor_by_name_checked (xcb_connection_t *c  /**< */,
  ** @param xcb_connection_t *c
  ** @param xcb_cursor_t      src
  ** @param uint16_t          nbytes
- ** @param const uint8_t    *name
+ ** @param const char       *name
  ** @returns xcb_void_cookie_t
  **
  *****************************************************************************/
@@ -2591,7 +2605,7 @@ xcb_void_cookie_t
 xcb_xfixes_change_cursor_by_name (xcb_connection_t *c  /**< */,
                                   xcb_cursor_t      src  /**< */,
                                   uint16_t          nbytes  /**< */,
-                                  const uint8_t    *name  /**< */);
+                                  const char       *name  /**< */);
 
 /**
  * Delivers a request to the X server
@@ -2760,6 +2774,10 @@ xcb_void_cookie_t
 xcb_xfixes_show_cursor (xcb_connection_t *c  /**< */,
                         xcb_window_t      window  /**< */);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

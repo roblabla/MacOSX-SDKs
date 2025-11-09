@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,6 +9,7 @@ typedef int NSSocketNativeHandle;
 @class NSRunLoop, NSMutableArray, NSDate;
 @class NSConnection, NSPortMessage;
 @class NSData;
+@protocol NSPortDelegate, NSMachPortDelegate;
 
 FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 
@@ -26,8 +27,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 - (void)invalidate;
 - (BOOL)isValid;
 
-- (void)setDelegate:(id)anId;
-- (id)delegate;
+- (void)setDelegate:(id <NSPortDelegate>)anObject;
+- (id <NSPortDelegate>)delegate;
 
 // These two methods should be implemented by subclasses
 // to setup monitoring of the port when added to a run loop,
@@ -51,16 +52,19 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 	// receives this message.  If multiple DO transports are
 	// being used in the same program, this requires some care.
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 - (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 - (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 	// The default implementation of these two methods is to
 	// simply add the receiving port to the run loop in the
 	// given mode.  Subclassers need not override these methods,
 	// but can if they need to do extra work.
+#endif
 
 @end
 
-@interface NSObject (NSPortDelegateMethods)
+@protocol NSPortDelegate <NSObject>
+@optional
 
 - (void)handlePortMessage:(NSPortMessage *)message;
 	// This is the delegate method that subclasses should send
@@ -68,7 +72,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 	// more specific that it wants to try to send first
 @end
 
-#if defined(__MACH__)
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
 @interface NSMachPort : NSPort {
     @private
@@ -81,11 +85,14 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 + (NSPort *)portWithMachPort:(uint32_t)machPort;
 - (id)initWithMachPort:(uint32_t)machPort;	// designated initializer
 
+- (void)setDelegate:(id <NSMachPortDelegate>)anObject;
+- (id <NSMachPortDelegate>)delegate;
+
 #if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 enum {
     NSMachPortDeallocateNone = 0,
-    NSMachPortDeallocateSendRight = (1 << 0),
-    NSMachPortDeallocateReceiveRight = (1 << 1)
+    NSMachPortDeallocateSendRight = (1UL << 0),
+    NSMachPortDeallocateReceiveRight = (1UL << 1)
 };
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -102,7 +109,8 @@ enum {
 
 @end
 
-@interface NSObject (NSMachPortDelegateMethods)
+@protocol NSMachPortDelegate <NSPortDelegate>
+@optional
 
 // Delegates are sent this if they respond, otherwise they
 // are sent handlePortMessage:; argument is the raw Mach message
@@ -110,7 +118,7 @@ enum {
 
 @end
 
-#endif /* __MACH__ */
+#endif
 
 // A subclass of NSPort which can be used for local
 // message sending on all platforms.
@@ -122,20 +130,22 @@ enum {
 
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32 || TARGET_IPHONE_SIMULATOR
+
 // A subclass of NSPort which can be used for remote
 // message sending on all platforms.
 
 @interface NSSocketPort : NSPort {
     @private
-    void *_receiver;
-    void *_connectors;
-    void *_loops;
-    void *_data;
+    void * __strong _receiver;
+    void * __strong _connectors;
+    void * __strong _loops;
+    void * __strong _data;
     id _signature;
     id _delegate;
     id _lock;
     NSUInteger _maxSize;
-    NSUInteger _maxSockets;
+    NSUInteger _useCount;
     NSUInteger _reserved;
 }
 
@@ -152,4 +162,6 @@ enum {
 - (NSSocketNativeHandle)socket;
 
 @end
+
+#endif
 

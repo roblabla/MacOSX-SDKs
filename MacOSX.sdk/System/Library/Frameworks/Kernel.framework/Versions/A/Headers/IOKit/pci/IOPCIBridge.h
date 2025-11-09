@@ -35,31 +35,6 @@
 #include <IOKit/IOFilterInterruptEventSource.h>
 #include <IOKit/pci/IOAGPDevice.h>
 
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-typedef uint64_t IOPCIScalar;
-
-struct IOPCIRange
-{
-    IOPCIScalar         start;
-    IOPCIScalar         size;
-    IOPCIScalar         alignment;
-    UInt32              type;
-    UInt32              flags;
-    struct IOPCIRange * next;
-    struct IOPCIRange * nextSubRange;
-    struct IOPCIRange * subRange;
-};
-
-enum {
-    kIOPCIResourceTypeMemory = 0,
-    kIOPCIResourceTypePrefetchMemory,
-    kIOPCIResourceTypeIO,
-    kIOPCIResourceTypeBusNumber,
-    kIOPCIResourceTypeCount
-};
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*!
     @class IOPCIBridge
@@ -67,6 +42,15 @@ enum {
 */
 class IOPCIConfigurator;
 class IOPCIDevice;
+
+enum {
+    kIOPCIResourceTypeMemory         = 0,
+    kIOPCIResourceTypePrefetchMemory = 1,
+    kIOPCIResourceTypeIO             = 2,
+    kIOPCIResourceTypeBusNumber      = 3,
+    kIOPCIResourceTypeCount          = 4,
+};
+
 
 class IOPCIBridge : public IOService
 {
@@ -89,20 +73,20 @@ private:
 
 protected:
     static void nvLocation( IORegistryEntry * entry,
-			    UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
+                            UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
     static SInt32 compareAddressCell( UInt32 cellCount, UInt32 cleft[], UInt32 cright[] );
+    IOReturn setDeviceASPMBits(IOPCIDevice * device, IOOptionBits state);
+    static IOReturn configOp(IOService * device, uintptr_t op, void * result);
 
-    IORangeAllocator *	bridgeMemoryRanges;
-    IORangeAllocator *	bridgeIORanges;
+    void * __reserved1;
+    void * __reserved2;
 
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOPCIBridge in the future.
 */    
     struct ExpansionData
     {
-	friend class IOPCIConfigurator;
-        IORangeAllocator * cardBusMemoryRanges;
-	IOPCIRange *       rangeLists[kIOPCIResourceTypeCount];
+        struct IOPCIRange * rangeLists[kIOPCIResourceTypeCount];
     };
 
 /*! @var reserved
@@ -118,7 +102,7 @@ public:
     virtual UInt8 lastBusNum( void );
 
     virtual void spaceFromProperties( OSDictionary * propTable,
-					IOPCIAddressSpace * space );
+                                        IOPCIAddressSpace * space );
     virtual OSDictionary * constructProperties( IOPCIAddressSpace space );
 
     virtual IOPCIDevice * createNub( OSDictionary * from );
@@ -128,26 +112,28 @@ public:
     virtual bool publishNub( IOPCIDevice * nub, UInt32 index );
 
     virtual bool addBridgeMemoryRange( IOPhysicalAddress start,
-				 	IOPhysicalLength length, bool host );
+                                        IOPhysicalLength length, bool host );
 
     virtual bool addBridgeIORange( IOByteCount start, IOByteCount length );
 
+
+private:
     virtual bool constructRange( IOPCIAddressSpace * flags,
-                                 IOPhysicalAddress phys, IOPhysicalLength len,
+                                 IOPhysicalAddress64 phys, IOPhysicalLength64 len,
                                  OSArray * array );
 
     virtual bool matchNubWithPropertyTable( IOService * nub,
-					    OSDictionary * propertyTable,
+                                            OSDictionary * propertyTable,
                                             SInt32 * score );
 
     virtual bool compareNubName( const IOService * nub, OSString * name,
-				 OSString ** matched = 0 ) const;
+                                 OSString ** matched = 0 ) const;
 
     virtual bool pciMatchNub( IOPCIDevice * nub,
                                 OSDictionary * table, SInt32 * score);
 
     virtual bool matchKeys( IOPCIDevice * nub, const char * keys,
-				UInt32 defaultMask, UInt8 regNum );
+                                UInt32 defaultMask, UInt8 regNum );
 
     virtual IOReturn getNubResources( IOService * nub );
 
@@ -170,13 +156,13 @@ public:
 
     virtual UInt32 configRead32( IOPCIAddressSpace space, UInt8 offset ) = 0;
     virtual void configWrite32( IOPCIAddressSpace space,
-					UInt8 offset, UInt32 data ) = 0;
+                                        UInt8 offset, UInt32 data ) = 0;
     virtual UInt16 configRead16( IOPCIAddressSpace space, UInt8 offset ) = 0;
     virtual void configWrite16( IOPCIAddressSpace space,
-					UInt8 offset, UInt16 data ) = 0;
+                                        UInt8 offset, UInt16 data ) = 0;
     virtual UInt8 configRead8( IOPCIAddressSpace space, UInt8 offset ) = 0;
     virtual void configWrite8( IOPCIAddressSpace space,
-					UInt8 offset, UInt8 data ) = 0;
+                                        UInt8 offset, UInt8 data ) = 0;
 
     virtual IOPCIAddressSpace getBridgeSpace( void ) = 0;
 
@@ -193,46 +179,56 @@ public:
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     virtual IOReturn createAGPSpace( IOAGPDevice * master,
-				     IOOptionBits options,
-				     IOPhysicalAddress * address, 
-				     IOPhysicalLength * length );
+                                     IOOptionBits options,
+                                     IOPhysicalAddress * address, 
+                                     IOPhysicalLength * length );
 
     virtual IOReturn destroyAGPSpace( IOAGPDevice * master );
 
     virtual IORangeAllocator * getAGPRangeAllocator( IOAGPDevice * master );
 
     virtual IOOptionBits getAGPStatus( IOAGPDevice * master,
-				       IOOptionBits options = 0 );
+                                       IOOptionBits options = 0 );
     virtual IOReturn resetAGPDevice( IOAGPDevice * master,
                                      IOOptionBits options = 0 );
 
     virtual IOReturn getAGPSpace( IOAGPDevice * master,
                                   IOPhysicalAddress * address, 
-				  IOPhysicalLength * length );
+                                  IOPhysicalLength * length );
 
     virtual IOReturn commitAGPMemory( IOAGPDevice * master, 
-				      IOMemoryDescriptor * memory,
-				      IOByteCount agpOffset,
-				      IOOptionBits options );
+                                      IOMemoryDescriptor * memory,
+                                      IOByteCount agpOffset,
+                                      IOOptionBits options );
 
     virtual IOReturn releaseAGPMemory(  IOAGPDevice * master, 
-				      	IOMemoryDescriptor * memory, 
-					IOByteCount agpOffset,
-					IOOptionBits options );
+                                        IOMemoryDescriptor * memory, 
+                                        IOByteCount agpOffset,
+                                        IOOptionBits options );
 
 protected:
     OSMetaClassDeclareReservedUsed(IOPCIBridge, 0);
+private:
     virtual bool addBridgePrefetchableMemoryRange( IOPhysicalAddress start,
                                                    IOPhysicalLength length,
                                                    bool host );
+protected:
+    bool addBridgePrefetchableMemoryRange( addr64_t start, addr64_t length );
+    IOReturn kernelRequestProbe(IOPCIDevice * device, uint32_t options);
+    IOReturn protectDevice(IOPCIDevice * device, uint32_t space, uint32_t prot);
 
     OSMetaClassDeclareReservedUsed(IOPCIBridge, 1);
     virtual UInt32 extendedFindPCICapability( IOPCIAddressSpace space,
-					      UInt32 capabilityID, IOByteCount * offset = 0 );
+                                              UInt32 capabilityID, IOByteCount * offset = 0 );
+
+    OSMetaClassDeclareReservedUsed(IOPCIBridge, 2);
+    virtual IOReturn setDeviceASPMState(IOPCIDevice * device,
+                                IOService * client, IOOptionBits state);
+
+    OSMetaClassDeclareReservedUsed(IOPCIBridge, 3);
+	virtual IOReturn checkLink(uint32_t options = 0);
 
     // Unused Padding
-    OSMetaClassDeclareReservedUnused(IOPCIBridge,  2);
-    OSMetaClassDeclareReservedUnused(IOPCIBridge,  3);
     OSMetaClassDeclareReservedUnused(IOPCIBridge,  4);
     OSMetaClassDeclareReservedUnused(IOPCIBridge,  5);
     OSMetaClassDeclareReservedUnused(IOPCIBridge,  6);
@@ -261,9 +257,6 @@ protected:
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 29);
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 30);
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 31);
-
-
-
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -285,21 +278,27 @@ private:
 
 protected:
 /*! @struct ExpansionData
-    @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
+    @discussion This structure will be used to expand the capablilties of the class in the future.
     */    
     struct ExpansionData
     {
-    // /hotp
-	IOByteCount		    xpressCapability;
-	IOFilterInterruptEventSource *    bridgeInterruptSource;
-	IOWorkLoop *		    workLoop;
-	uint32_t		    hotplugCount;
-	uint8_t			    presence;
-	uint8_t			    waitingLinkEnable;
-	uint8_t			    linkChangeOnly;
-	uint8_t			    interruptEnablePending;
-	uint8_t			    __reserved[4];
-    // hotp/
+        IOByteCount                 xpressCapability;
+        IOByteCount                 pwrMgtCapability;
+        IOFilterInterruptEventSource * bridgeInterruptSource;
+		IOTimerEventSource *	    timerProbeES;
+		IOWorkLoop *                workLoop;
+        uint32_t                    hotplugCount;
+        uint8_t                     presence;
+        uint8_t                     waitingLinkEnable;
+        uint8_t                     linkChangeOnly;
+        uint8_t                     interruptEnablePending;
+        uint8_t                     needProbe;
+        uint8_t                     presenceInt;
+		uint8_t						bridgeMSI;
+		uint8_t						noDevice;
+		uint8_t						linkControlWithPM;
+		uint8_t						powerState;
+		char						logName[32];
     };
 
 /*! @var reserved
@@ -315,8 +314,8 @@ public:
 
     virtual bool serializeProperties( OSSerialize * serialize ) const;
 
-    virtual IOService * probe(	IOService * 	provider,
-                                SInt32 *	score );
+    virtual IOService * probe(  IOService *     provider,
+                                SInt32 *        score );
 
     virtual bool start( IOService * provider );
 
@@ -333,7 +332,12 @@ public:
     virtual void restoreBridgeState( void );
 
     IOReturn setPowerState( unsigned long powerState,
-			    IOService * whatDevice );
+                            IOService * whatDevice );
+
+	void adjustPowerState(unsigned long state);
+
+    virtual IOReturn saveDeviceState( IOPCIDevice * device,
+                                      IOOptionBits options = 0 );
 
     virtual bool publishNub( IOPCIDevice * nub, UInt32 index );
 
@@ -343,13 +347,18 @@ public:
 
     virtual UInt32 configRead32( IOPCIAddressSpace space, UInt8 offset );
     virtual void configWrite32( IOPCIAddressSpace space,
-					UInt8 offset, UInt32 data );
+                                        UInt8 offset, UInt32 data );
     virtual UInt16 configRead16( IOPCIAddressSpace space, UInt8 offset );
     virtual void configWrite16( IOPCIAddressSpace space,
-					UInt8 offset, UInt16 data );
+                                        UInt8 offset, UInt16 data );
     virtual UInt8 configRead8( IOPCIAddressSpace space, UInt8 offset );
     virtual void configWrite8( IOPCIAddressSpace space,
-					UInt8 offset, UInt8 data );
+                                        UInt8 offset, UInt8 data );
+
+    virtual IOReturn setDeviceASPMState(IOPCIDevice * device,
+                                IOService * client, IOOptionBits state);
+
+	virtual IOReturn checkLink(uint32_t options = 0);
 
     // Unused Padding
     OSMetaClassDeclareReservedUnused(IOPCI2PCIBridge,  0);
@@ -363,11 +372,16 @@ public:
     OSMetaClassDeclareReservedUnused(IOPCI2PCIBridge,  8);
 
 protected:
-    bool filterInterrupt( IOFilterInterruptEventSource * source);
-			    
-    void handleInterrupt( IOInterruptEventSource * source,
-			     int                      count );
+	void startHotPlug(IOService * provider);
 
+public:
+	void startBootDefer(IOService * provider);
+
+    bool filterInterrupt( IOFilterInterruptEventSource * source);
+                            
+    void handleInterrupt( IOInterruptEventSource * source,
+                             int                      count );
+	void timerProbe(IOTimerEventSource * es);
 };
 
 #endif /* ! _IOKIT_IOPCIBRIDGE_H */

@@ -4,7 +4,7 @@
 // Author:      Julian Smart
 // Modified by:
 // Created:     01/02/97
-// RCS-ID:      $Id: prntbase.h,v 1.53 2006/10/30 11:56:11 ABX Exp $
+// RCS-ID:      $Id: prntbase.h 54404 2008-06-28 15:32:52Z VS $
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
@@ -23,21 +23,21 @@
 #include "wx/dialog.h"
 #include "wx/frame.h"
 
-class WXDLLEXPORT wxDC;
-class WXDLLEXPORT wxButton;
-class WXDLLEXPORT wxChoice;
-class WXDLLEXPORT wxPrintout;
-class WXDLLEXPORT wxPrinterBase;
-class WXDLLEXPORT wxPrintDialogBase;
-class WXDLLEXPORT wxPrintDialog;
-class WXDLLEXPORT wxPageSetupDialogBase;
-class WXDLLEXPORT wxPageSetupDialog;
-class WXDLLEXPORT wxPrintPreviewBase;
-class WXDLLEXPORT wxPreviewCanvas;
-class WXDLLEXPORT wxPreviewControlBar;
-class WXDLLEXPORT wxPreviewFrame;
-class WXDLLEXPORT wxPrintFactory;
-class WXDLLEXPORT wxPrintNativeDataBase;
+class WXDLLIMPEXP_FWD_CORE wxDC;
+class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxChoice;
+class WXDLLIMPEXP_FWD_CORE wxPrintout;
+class WXDLLIMPEXP_FWD_CORE wxPrinterBase;
+class WXDLLIMPEXP_FWD_CORE wxPrintDialogBase;
+class WXDLLIMPEXP_FWD_CORE wxPrintDialog;
+class WXDLLIMPEXP_FWD_CORE wxPageSetupDialogBase;
+class WXDLLIMPEXP_FWD_CORE wxPageSetupDialog;
+class WXDLLIMPEXP_FWD_CORE wxPrintPreviewBase;
+class WXDLLIMPEXP_FWD_CORE wxPreviewCanvas;
+class WXDLLIMPEXP_FWD_CORE wxPreviewControlBar;
+class WXDLLIMPEXP_FWD_CORE wxPreviewFrame;
+class WXDLLIMPEXP_FWD_CORE wxPrintFactory;
+class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
 
 //----------------------------------------------------------------------------
 // error consts
@@ -574,6 +574,10 @@ protected:
 
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
+
+    // helpers for RenderPage():
+    bool RenderPageIntoDC(wxDC& dc, int pageNum);
+    bool RenderPageIntoBitmap(wxBitmap& bmp, int pageNum);
 
     DECLARE_NO_COPY_CLASS(wxPrintPreviewBase)
     DECLARE_CLASS(wxPrintPreviewBase)

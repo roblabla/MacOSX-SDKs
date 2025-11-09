@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -70,6 +70,7 @@ struct ifmibdata {
 	unsigned int		ifmd_filler[4];	/* for future expansion */
 	struct if_data64	ifmd_data; /* generic information and statistics */
 };
+
 
 /*
  * sysctl MIB tags at the net.link.generic level
@@ -198,4 +199,16 @@ enum {
  * Put other types of interface MIBs here, or in interface-specific
  * header files if convenient ones already exist.
  */
+
+/*
+ * Structure for interface family ID table
+ */
+
+struct if_family_id {
+	u_int32_t		iffmid_len;
+	u_int32_t		iffmid_id;
+	char			iffmid_str[1];	/* variable length string */
+};
+
+
 #endif /* _NET_IF_MIB_H */

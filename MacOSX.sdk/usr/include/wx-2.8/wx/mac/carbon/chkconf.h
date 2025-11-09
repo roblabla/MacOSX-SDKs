@@ -4,7 +4,7 @@
  * Author:      Julian Smart
  * Modified by:
  * Created:     01/02/97
- * RCS-ID:      $Id: chkconf.h,v 1.12 2006/10/19 15:04:32 SC Exp $
+ * RCS-ID:      $Id: chkconf.h 48804 2007-09-19 14:50:20Z SC $
  * Copyright:   (c) Julian Smart
  * Licence:     wxWindows licence
  */
@@ -56,6 +56,14 @@
 
 #ifndef wxMAC_USE_NATIVE_TOOLBAR
     #define wxMAC_USE_NATIVE_TOOLBAR 1
+#endif
+
+/*
+ * using mixins of cocoa functionality
+ */
+ 
+#ifndef wxMAC_USE_COCOA
+    #define wxMAC_USE_COCOA 0
 #endif
 
 #endif

@@ -1,10 +1,10 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 // Flags(s) that can be passed to the factory to indicate that a operator operating on strings should do so in a case insensitive fashion.
 enum {
@@ -35,9 +35,9 @@ enum {
     NSEndsWithPredicateOperatorType,
     NSInPredicateOperatorType, // rhs contains lhs returns true
     NSCustomSelectorPredicateOperatorType
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
     ,
-    NSContainsPredicateOperatorType = 99,
+    NSContainsPredicateOperatorType = 99, // lhs contains rhs returns true
     NSBetweenPredicateOperatorType
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 };

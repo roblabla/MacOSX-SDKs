@@ -3,10 +3,7 @@
 
      Contains:   API for manipulating Audio Files.
 
-     Version:    Technology: Mac OS X
-                 Release:    Mac OS X
-
-     Copyright:  (c) 1985-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985 - 2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,7 +18,7 @@
 //	Includes
 //=============================================================================
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
 	#include <CoreFoundation/CoreFoundation.h>
@@ -106,7 +103,7 @@ typedef UInt32			AudioFileTypeID;
     @constant   kAudioFileBadPropertySizeError 
 		The size of the property data was not correct.
     @constant   kAudioFilePermissionsError 
-		The operation violated the file permissions. For example, trying to write to a file opened with fsRdPerm.
+		The operation violated the file permissions. For example, trying to write to a file opened with kAudioFileReadPermission.
     @constant   kAudioFileNotOptimizedError 
 		There are chunks following the audio data chunk that prevent extending the audio data chunk. 
 		The file must be optimized in order to write more audio data.
@@ -146,14 +143,20 @@ enum {
 		If set, then the CreateURL call will erase the contents of an existing file
 		If not set, then the CreateURL call will fail if the file already exists
     @constant   kAudioFileFlags_DontPageAlignAudioData 
-		If set, then the CreateURL call will erase the contents of an existing file
-		If not set, then the CreateURL call will fail if the file already exists
+		Normally, newly created and optimized files will have padding added in order to page align 
+		the data to 4KB boundaries. This makes reading the data more efficient. 
+		When disk space is a concern, this flag can be set so that the padding will not be added.
 */
 enum {
 	kAudioFileFlags_EraseFile = 1,
 	kAudioFileFlags_DontPageAlignAudioData = 2
 };
 
+enum {
+	kAudioFileReadPermission      = 0x01,
+	kAudioFileWritePermission     = 0x02,
+	kAudioFileReadWritePermission = 0x03
+};
 
 //=============================================================================
 //	Types specific to the Audio File API
@@ -260,7 +263,7 @@ struct AudioFileMarkerList
 {
 	UInt32				mSMPTE_TimeType;
 	UInt32				mNumberMarkers;
-	AudioFileMarker		mMarkers[kVariableLengthArray];
+	AudioFileMarker		mMarkers[1]; // this is a variable length array of mNumberMarkers elements
 };
 typedef struct AudioFileMarkerList AudioFileMarkerList;
 
@@ -273,7 +276,8 @@ typedef struct AudioFileMarkerList AudioFileMarkerList;
 					a number of bytes.
     @result     the number of AudioFileMarkers that can be contained in that number of bytes.
 */
-#define NumBytesToNumAudioFileMarkers(inNumBytes) ((inNumBytes)<offsetof(AudioFileMarkerList, mMarkers[0])?0:((inNumBytes) - offsetof(AudioFileMarkerList, mMarkers[0])) / sizeof(AudioFileMarker))
+#define NumBytesToNumAudioFileMarkers(inNumBytes) \
+	((inNumBytes)<offsetof(AudioFileMarkerList, mMarkers[0])?0:((inNumBytes) - offsetof(AudioFileMarkerList, mMarkers[0])) / sizeof(AudioFileMarker))
 /*!
     @function	NumAudioFileMarkersToNumBytes
     @abstract   Converts a number of AudioFileMarkers to a size in bytes.
@@ -283,7 +287,8 @@ typedef struct AudioFileMarkerList AudioFileMarkerList;
 					a number of AudioFileMarkers.
     @result     the size in bytes required to contain that number of AudioFileMarkers.
 */
-#define NumAudioFileMarkersToNumBytes(inNumMarkers) (offsetof(AudioFileMarkerList, mMarkers) + (inNumMarkers) * sizeof(AudioFileMarker))
+#define NumAudioFileMarkersToNumBytes(inNumMarkers) \
+	(offsetof(AudioFileMarkerList, mMarkers) + (inNumMarkers) * sizeof(AudioFileMarker))
 
 /*!
     @enum		AudioFileRegionFlags
@@ -326,7 +331,7 @@ struct AudioFileRegion
 	CFStringRef			mName;
 	UInt32				mFlags;
 	UInt32				mNumberMarkers;
-	AudioFileMarker		mMarkers[kVariableLengthArray];
+	AudioFileMarker		mMarkers[1]; // this is a variable length array of mNumberMarkers elements
 };
 typedef struct AudioFileRegion AudioFileRegion;
 
@@ -347,7 +352,7 @@ struct AudioFileRegionList
 {
 	UInt32				mSMPTE_TimeType;
 	UInt32				mNumberRegions;
-	AudioFileRegion		mRegions[kVariableLengthArray];
+	AudioFileRegion		mRegions[1]; // this is a variable length array of mNumberRegions elements
 };
 typedef struct AudioFileRegionList AudioFileRegionList;
 
@@ -379,6 +384,38 @@ struct AudioFramePacketTranslation
 	UInt32 mFrameOffsetInPacket;
 };
 typedef struct AudioFramePacketTranslation AudioFramePacketTranslation;
+
+
+/*!
+    @enum		AudioBytePacketTranslation Flags
+	
+    @abstract   flags for the AudioBytePacketTranslation mFlags field
+    @discussion		There is currently only one flag.
+					
+    @constant   kBytePacketTranslationFlag_IsEstimate
+					If the set then the result value is an estimate.
+*/
+enum {
+	kBytePacketTranslationFlag_IsEstimate = 1
+};
+
+/*!
+    @struct		AudioBytePacketTranslation
+    @abstract   used for properties kAudioFileByteToPacket and kAudioFilePacketToByte
+    @discussion See description of kAudioFileByteToPacket and kAudioFilePacketToByte
+    @field      mByte		a byte number.
+    @field      mPacket		a packet number.
+    @field      mByteOffsetInPacket		a byte offset in a packet.
+    @field      mFlags		if kBytePacketTranslationFlag_IsEstimate is set, then the value is an estimate.
+*/
+struct AudioBytePacketTranslation
+{
+	SInt64 mByte;
+	SInt64 mPacket;
+	UInt32 mByteOffsetInPacket;
+	UInt32 mFlags;
+};
+typedef struct AudioBytePacketTranslation AudioBytePacketTranslation;
 
 
 /*!
@@ -428,6 +465,7 @@ typedef struct AudioFilePacketTableInfo AudioFilePacketTableInfo;
 #define kAFInfoDictionary_NominalBitRate                "nominal bit rate"
 #define kAFInfoDictionary_ChannelLayout					"channel layout"
 #define kAFInfoDictionary_ApproximateDurationInSeconds  "approximate duration in seconds"
+#define kAFInfoDictionary_SourceBitDepth				"source bit depth"
 
 //=============================================================================
 //	Routines
@@ -454,61 +492,14 @@ AudioFileCreateWithURL (CFURLRef				inFileRef,
                     AudioFileTypeID						inFileType,
                     const AudioStreamBasicDescription	*inFormat,
                     UInt32								inFlags,
-                    AudioFileID							*outAudioFile)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-struct FSRef;
-/*!
-    @function	AudioFileCreate
-    @abstract   creates a new audio file
-    @discussion	creates a new audio file located in the parent directory 
-                      provided. Upon success, an AudioFileID is returned which can
-                      be used for subsequent calls to the AudioFile APIs.
-    @param inParentRef		an FSRef to the directory where  the new file should be created.
-    @param inFileName		a CFStringRef containing the name of the file to be created.
-    @param inFileType		an AudioFileTypeID indicating the type of audio file to create.
-    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
-							added to the audio file.
-    @param inFlags			relevant flags for creating/opening the file. 
-    @param outNewFileRef	if successful, the FSRef of the newly created file.
-    @param outAudioFile		if successful, an AudioFileID that can be used for subsequent AudioFile calls.
-    @result					returns noErr if successful.
-*/
-extern OSStatus	
-AudioFileCreate (	const struct FSRef					*inParentRef, 
-                    CFStringRef							inFileName,
-                    AudioFileTypeID						inFileType,
-                    const AudioStreamBasicDescription	*inFormat,
-                    UInt32								inFlags,
-                    struct FSRef						*outNewFileRef,
-                    AudioFileID							*outAudioFile)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-/*!
-    @function				AudioFileInitialize
-    @abstract				Write over an existing audio file.
-    @discussion				Use AudioFileInitialize to wipe clean an existing audio file
-							and prepare it to be populated with new data.
-    @param inFileRef		the FSRef of an existing audio file.
-    @param inFileType		an AudioFileTypeID indicating the type of audio file to initialize the file to. 
-    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
-							added to the audio file.
-    @param inFlags			flags for creating/opening the file. Currently zero.
-    @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
-							AudioFile calls.
-    @result					returns noErr if successful.
-*/
-extern OSStatus	
-AudioFileInitialize (	const struct FSRef					*inFileRef,
-                        AudioFileTypeID						inFileType,
-                        const AudioStreamBasicDescription	*inFormat,
-                        UInt32								inFlags,
-                        AudioFileID							*outAudioFile)	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                    AudioFileID							*outAudioFile)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function				AudioFileOpenURL
     @abstract				Open an existing audio file.
     @discussion				Open an existing audio file for reading or reading and writing.
     @param inFileRef		the CFURLRef of an existing audio file.
-    @param inPermissions	use the permission constants used by FSOpenFork().
+    @param inPermissions	use the permission constants
     @param inFileTypeHint	For files which have no filename extension and whose type cannot be easily or
 							uniquely determined from the data (ADTS,AC3), this hint can be used to indicate the file type. 
 							Otherwise you can pass zero for this. The hint is only used on OS versions 10.3.1 or greater.
@@ -521,29 +512,7 @@ extern OSStatus
 AudioFileOpenURL (	CFURLRef		inFileRef, 
 					SInt8  			inPermissions, 
 					AudioFileTypeID	inFileTypeHint,
-					AudioFileID		*outAudioFile)							AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-/*!
-    @function				AudioFileOpen
-    @abstract				Open an existing audio file.
-    @discussion				Open an existing audio file for reading or reading and writing.
-    @param inFileRef		the FSRef of an existing audio file.
-    @param inPermissions	use the permission constants used by FSOpenFork().
-    @param inFileTypeHint	For files which have no filename extension and whose type cannot be easily or
-							uniquely determined from the data (ADTS,AC3), this hint can be used to indicate the file type. 
-							Otherwise you can pass zero for this. The hint is only used on OS versions 10.3.1 or greater.
-							For OS versions prior to that, opening files of the above description will fail.
-    @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
-							AudioFile calls.
-    @result					returns noErr if successful.
-*/
-extern OSStatus	
-AudioFileOpen (	const struct FSRef	*inFileRef, 
-                SInt8				inPermissions, 
-                AudioFileTypeID		inFileTypeHint,
-                AudioFileID			*outAudioFile)								AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
+					AudioFileID		*outAudioFile)							__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @typedef	AudioFile_ReadProc
@@ -632,7 +601,7 @@ AudioFileInitializeWithCallbacks (
                         AudioFileTypeID						inFileType,
                         const AudioStreamBasicDescription	*inFormat,
                         UInt32								inFlags,
-                        AudioFileID							*outAudioFile)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                        AudioFileID							*outAudioFile)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 
 /*!
@@ -661,7 +630,7 @@ AudioFileOpenWithCallbacks (
 				AudioFile_GetSizeProc	inGetSizeFunc,
 				AudioFile_SetSizeProc	inSetSizeFunc,
                 AudioFileTypeID			inFileTypeHint,
-                AudioFileID				*outAudioFile)						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                AudioFileID				*outAudioFile)						__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 				
 
 /*!
@@ -671,7 +640,7 @@ AudioFileOpenWithCallbacks (
     @result						returns noErr if successful.
 */
 extern OSStatus
-AudioFileClose	(AudioFileID		inAudioFile)							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+AudioFileClose	(AudioFileID		inAudioFile)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
     @function	AudioFileOptimize
@@ -687,7 +656,7 @@ AudioFileClose	(AudioFileID		inAudioFile)							AVAILABLE_MAC_OS_X_VERSION_10_2_
     @result						returns noErr if successful.
 */
 extern OSStatus	
-AudioFileOptimize (AudioFileID  	inAudioFile)							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+AudioFileOptimize (AudioFileID  	inAudioFile)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
     @function	AudioFileReadBytes
@@ -707,7 +676,7 @@ AudioFileReadBytes (	AudioFileID  	inAudioFile,
                         Boolean			inUseCache,
                         SInt64			inStartingByte, 
                         UInt32			*ioNumBytes, 
-                        void			*outBuffer)							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        void			*outBuffer)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
     @function				AudioFileWriteBytes
@@ -725,7 +694,42 @@ AudioFileWriteBytes (	AudioFileID  	inAudioFile,
                         Boolean			inUseCache,
                         SInt64			inStartingByte, 
                         UInt32			*ioNumBytes, 
-                        const void		*inBuffer)							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        const void		*inBuffer)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+
+/*!
+    @function	AudioFileReadPacketData
+    @abstract   Read packets of audio data from the audio file.
+    @discussion For all uncompressed formats, packets == frames.
+				If the byte size of the number packets requested is 
+				less than the buffer size, ioNumBytes will be reduced.
+				If the buffer is too small for the number of packets 
+				requested, ioNumPackets and ioNumBytes will be reduced 
+				to the number of packets that can be accommodated and their byte size.
+				Returns eofErr when read encounters end of file.
+
+    @param inAudioFile				an AudioFileID.
+    @param inUseCache 				true if it is desired to cache the data upon read, else false
+    @param ioNumBytes				on input the size of outBuffer in bytes. 
+									on output, the number of bytes actually returned.
+    @param outPacketDescriptions 	An array of packet descriptions describing the packets being returned. 
+									The size of the array must be greater or equal to the number of packets requested. 
+									On return the packet description will be filled out with the packet offsets and sizes.
+									Packet descriptions are ignored for CBR data.   
+    @param inStartingPacket 		The packet index of the first packet desired to be returned
+    @param ioNumPackets 			on input, the number of packets to read, on output, the number of
+									packets actually read.
+    @param outBuffer 				outBuffer should be a pointer to user allocated memory.
+    @result							returns noErr if successful.
+*/
+extern OSStatus	
+AudioFileReadPacketData (	AudioFileID  					inAudioFile, 
+                       		Boolean							inUseCache,
+                       		UInt32							*ioNumBytes,
+                       		AudioStreamPacketDescription	*outPacketDescriptions,
+                       		SInt64							inStartingPacket, 
+                       		UInt32  						*ioNumPackets, 
+                       		void							*outBuffer)			__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_2);
+
 
 /*!
     @function	AudioFileReadPackets
@@ -754,7 +758,7 @@ AudioFileReadPackets (	AudioFileID  					inAudioFile,
                         AudioStreamPacketDescription	*outPacketDescriptions,
                         SInt64							inStartingPacket, 
                         UInt32  						*ioNumPackets, 
-                        void							*outBuffer)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        void							*outBuffer)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
     @function	AudioFileWritePackets
@@ -779,7 +783,7 @@ AudioFileWritePackets (	AudioFileID							inAudioFile,
                         const AudioStreamPacketDescription	*inPacketDescriptions,
                         SInt64								inStartingPacket, 
                         UInt32								*ioNumPackets, 
-                        const void							*inBuffer)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        const void							*inBuffer)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -796,7 +800,7 @@ AudioFileWritePackets (	AudioFileID							inAudioFile,
 extern OSStatus	
 AudioFileCountUserData (	AudioFileID			inAudioFile, 
 							UInt32				inUserDataID, 
-							UInt32				*outNumberItems)			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							UInt32				*outNumberItems)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 /*!
     @function	AudioFileGetUserDataSize
@@ -811,7 +815,7 @@ extern OSStatus
 AudioFileGetUserDataSize (	AudioFileID			inAudioFile, 
 							UInt32				inUserDataID, 
 							UInt32				inIndex, 
-							UInt32				*outUserDataSize)			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							UInt32				*outUserDataSize)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 /*!
     @function	AudioFileGetUserData
@@ -828,7 +832,7 @@ AudioFileGetUserData (	AudioFileID			inAudioFile,
 						UInt32				inUserDataID, 
 						UInt32				inIndex, 
 						UInt32				*ioUserDataSize, 
-						void				*outUserData)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+						void				*outUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 /*!
     @function	AudioFileSetUserData
@@ -846,7 +850,7 @@ AudioFileSetUserData ( AudioFileID			inAudioFile,
 						UInt32				inUserDataID, 
 						UInt32				inIndex, 
 						UInt32				inUserDataSize, 
-						const void			*inUserData)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+						const void			*inUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 
 /*!
@@ -861,7 +865,7 @@ AudioFileSetUserData ( AudioFileID			inAudioFile,
 extern OSStatus	
 AudioFileRemoveUserData ( AudioFileID			inAudioFile, 
 						UInt32				inUserDataID, 
-						UInt32				inIndex)					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+						UInt32				inIndex)						__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
 //=============================================================================
@@ -919,10 +923,20 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 					pass a AudioFramePacketTranslation with mPacket filled out and get mFrame back. mFrameOffsetInPacket is ignored.
     @constant   kAudioFilePropertyFrameToPacket 
 					pass a AudioFramePacketTranslation with mFrame filled out and get mPacket and mFrameOffsetInPacket back.
+					
+	@constant	kAudioFilePropertyPacketToByte
+					pass an AudioBytePacketTranslation struct with mPacket filled out and get mByte back.
+					mByteOffsetInPacket is ignored. If the mByte value is an estimate then 
+					kBytePacketTranslationFlag_IsEstimate will be set in the mFlags field.
+	@constant	kAudioFilePropertyByteToPacket
+					pass an AudioBytePacketTranslation struct with mByte filled out and get mPacket and
+					mByteOffsetInPacket back. If the mPacket value is an estimate then 
+					kBytePacketTranslationFlag_IsEstimate will be set in the mFlags field.
+					
     @constant   kAudioFilePropertyChunkIDs 
 					returns an array of OSType four char codes for each kind of chunk in the file.
     @constant   kAudioFilePropertyInfoDictionary 
-					returns a CFDictionary filled with information about the data contined in the file. 
+					returns a CFDictionary filled with information about the data contained in the file. 
 					See dictionary key constants already defined for info string types. 
 					AudioFileComponents are free to add keys to the dictionaries that they return for this property...
 					caller is responsible for releasing the CFObject
@@ -933,7 +947,7 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 					the property and make sure the sum of the three values you set has the same sum as the three values you got.
 	@constant	kAudioFilePropertyPacketSizeUpperBound
 					a UInt32 for the theoretical maximum packet size in the file (without actually scanning
-					the whole file to find the largest packet, as may happen wwith kAudioFilePropertyMaximumPacketSize).
+					the whole file to find the largest packet, as may happen with kAudioFilePropertyMaximumPacketSize).
 	@constant	kAudioFilePropertyReserveDuration
 					The value is a Float64 of the duration in seconds of data that is expected to be written.
 					Setting this property before any data has been written reserves space in the file header for a packet table 
@@ -944,6 +958,13 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 					or all the audio data packets have been scanned, the value will accurately reflect the duration of the audio data. 
 	@constant	kAudioFilePropertyBitRate
 					Returns the bit rate for the audio data as a UInt32. For some formats this will be approximate.
+	@constant	kAudioFilePropertyID3Tag
+					A void * pointing to memory set up by the caller to contain a fully formatted ID3 tag (get/set v2.2, v2.3, or v2.4, v1 get only).
+					The ID3 tag is not manipulated in anyway either for read or write. 
+					When setting, this property must be called before calling AudioFileWritePackets.
+	@constant	kAudioFilePropertySourceBitDepth
+					For encoded data this property returns the bit depth of the source as an SInt32, if known.
+					The bit depth is expressed as a negative number if the source was floating point, e.g. -32 for float, -64 for double.
 */
 enum
 {
@@ -962,6 +983,8 @@ enum
 	kAudioFilePropertyRegionList			=	'rgls',
 	kAudioFilePropertyPacketToFrame			=	'pkfr',
 	kAudioFilePropertyFrameToPacket			=	'frpk',
+	kAudioFilePropertyPacketToByte			=	'pkby',
+	kAudioFilePropertyByteToPacket			=	'bypk',
 	kAudioFilePropertyChunkIDs				=	'chid',
 	kAudioFilePropertyInfoDictionary        =	'info',
 	kAudioFilePropertyPacketTableInfo		=	'pnfo',
@@ -969,7 +992,9 @@ enum
 	kAudioFilePropertyPacketSizeUpperBound  =	'pkub',
 	kAudioFilePropertyReserveDuration		=	'rsrv',
 	kAudioFilePropertyEstimatedDuration		=	'edur',
-	kAudioFilePropertyBitRate				=	'brat'
+	kAudioFilePropertyBitRate				=	'brat',
+	kAudioFilePropertyID3Tag				=	'id3t',
+	kAudioFilePropertySourceBitDepth		=	'sbtd'
 };
 
 
@@ -987,7 +1012,7 @@ extern OSStatus
 AudioFileGetPropertyInfo(		AudioFileID				inAudioFile,
                                 AudioFilePropertyID		inPropertyID,
                                 UInt32					*outDataSize,
-                                UInt32					*isWritable)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                                UInt32					*isWritable)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
                                 
 /*!
     @function	AudioFileGetProperty
@@ -1002,7 +1027,7 @@ extern OSStatus
 AudioFileGetProperty(	AudioFileID				inAudioFile,
                         AudioFilePropertyID		inPropertyID,
                         UInt32					*ioDataSize,
-                        void					*outPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        void					*outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
                         
 /*!
     @function	AudioFileSetProperty
@@ -1017,7 +1042,7 @@ extern OSStatus
 AudioFileSetProperty(	AudioFileID				inAudioFile,
                         AudioFilePropertyID		inPropertyID,
                         UInt32					inDataSize,
-                        const void				*inPropertyData)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+                        const void				*inPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 
@@ -1171,7 +1196,7 @@ extern OSStatus
 AudioFileGetGlobalInfoSize(		AudioFilePropertyID		inPropertyID,
                                 UInt32					inSpecifierSize,
                                 void					*inSpecifier,
-                                UInt32					*outDataSize)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                UInt32					*outDataSize)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
                                 
 /*!
     @function	AudioFileGetGlobalInfo
@@ -1188,8 +1213,82 @@ AudioFileGetGlobalInfo(			AudioFilePropertyID		inPropertyID,
 								UInt32					inSpecifierSize,
 								void					*inSpecifier,
                     		    UInt32					*ioDataSize,
-                    		    void					*outPropertyData)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                    		    void					*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
                         
+#pragma mark - Deprecated
+
+#if !TARGET_OS_IPHONE
+struct FSRef;
+/*!
+    @function	AudioFileCreate
+    @abstract   creates a new audio file
+    @discussion	creates a new audio file located in the parent directory 
+                      provided. Upon success, an AudioFileID is returned which can
+                      be used for subsequent calls to the AudioFile APIs.
+    @param inParentRef		an FSRef to the directory where  the new file should be created.
+    @param inFileName		a CFStringRef containing the name of the file to be created.
+    @param inFileType		an AudioFileTypeID indicating the type of audio file to create.
+    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
+							added to the audio file.
+    @param inFlags			relevant flags for creating/opening the file. 
+    @param outNewFileRef	if successful, the FSRef of the newly created file.
+    @param outAudioFile		if successful, an AudioFileID that can be used for subsequent AudioFile calls.
+    @result					returns noErr if successful.
+	@deprecated				in Mac OS X 10.6, see AudioFileCreateWithURL
+*/
+extern OSStatus	
+AudioFileCreate (	const struct FSRef					*inParentRef, 
+                    CFStringRef							inFileName,
+                    AudioFileTypeID						inFileType,
+                    const AudioStreamBasicDescription	*inFormat,
+                    UInt32								inFlags,
+                    struct FSRef						*outNewFileRef,
+                    AudioFileID							*outAudioFile)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+
+/*!
+    @function				AudioFileInitialize
+    @abstract				Write over an existing audio file.
+    @discussion				Use AudioFileInitialize to wipe clean an existing audio file
+							and prepare it to be populated with new data.
+    @param inFileRef		the FSRef of an existing audio file.
+    @param inFileType		an AudioFileTypeID indicating the type of audio file to initialize the file to. 
+    @param inFormat			an AudioStreamBasicDescription describing the data format that will be
+							added to the audio file.
+    @param inFlags			flags for creating/opening the file. Currently zero.
+    @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
+							AudioFile calls.
+    @result					returns noErr if successful.
+	@deprecated				in Mac OS X 10.6, see AudioFileCreateWithURL
+*/
+extern OSStatus	
+AudioFileInitialize (	const struct FSRef					*inFileRef,
+                        AudioFileTypeID						inFileType,
+                        const AudioStreamBasicDescription	*inFormat,
+                        UInt32								inFlags,
+                        AudioFileID							*outAudioFile)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+
+/*!
+    @function				AudioFileOpen
+    @abstract				Open an existing audio file.
+    @discussion				Open an existing audio file for reading or reading and writing.
+    @param inFileRef		the FSRef of an existing audio file.
+    @param inPermissions	use the permission constants
+    @param inFileTypeHint	For files which have no filename extension and whose type cannot be easily or
+							uniquely determined from the data (ADTS,AC3), this hint can be used to indicate the file type. 
+							Otherwise you can pass zero for this. The hint is only used on OS versions 10.3.1 or greater.
+							For OS versions prior to that, opening files of the above description will fail.
+    @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
+							AudioFile calls.
+    @result					returns noErr if successful.
+	@deprecated				in Mac OS X 10.6, see AudioFileOpenURL
+*/
+extern OSStatus	
+AudioFileOpen (	const struct FSRef	*inFileRef, 
+                SInt8				inPermissions, 
+                AudioFileTypeID		inFileTypeHint,
+                AudioFileID			*outAudioFile)							__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+
+#endif
 
 
 #if defined(__cplusplus)

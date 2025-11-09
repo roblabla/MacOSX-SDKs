@@ -86,6 +86,8 @@ typedef unsigned long long	memory_object_size_t;
 typedef natural_t		memory_object_cluster_size_t;
 typedef natural_t *		memory_object_fault_info_t;
 
+typedef unsigned long long 	vm_object_id_t;
+
 
 /*
  * Temporary until real EMMI version gets re-implemented
@@ -173,6 +175,7 @@ typedef	int		memory_object_return_t;
 #define		MEMORY_OBJECT_COPY_SYNC		0x8
 #define		MEMORY_OBJECT_DATA_SYNC		0x10
 #define         MEMORY_OBJECT_IO_SYNC           0x20
+#define		MEMORY_OBJECT_DATA_FLUSH_ALL	0x40
 
 /*
  *	Types for the memory object flavor interfaces

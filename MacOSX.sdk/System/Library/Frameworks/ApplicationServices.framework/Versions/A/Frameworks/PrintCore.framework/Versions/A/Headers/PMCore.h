@@ -3,7 +3,7 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright (c) 1998-2006,2008 Apple Inc. All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1215,22 +1215,6 @@ PMGetPageRange(
   UInt32 *          minPage,
   UInt32 *          maxPage)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-/*
- *  PMGetPrintSettingsExtendedData()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetPrintSettingsExtendedData(
-  PMPrintSettings   printSettings,
-  OSType            dataID,
-  UInt32 *          size,
-  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
 /*
  *  PMPrintSettingsGetJobName()
  *  
@@ -1243,7 +1227,6 @@ extern OSStatus
 PMPrintSettingsGetJobName(
   PMPrintSettings   printSettings,
   CFStringRef *     name)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
 
 /*
  *  PMPrintSettingsGetValue()
@@ -1366,21 +1349,6 @@ PMSetPageRange(
   PMPrintSettings   printSettings,
   UInt32            minPage,
   UInt32            maxPage)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  PMSetPrintSettingsExtendedData()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSetPrintSettingsExtendedData(
-  PMPrintSettings   printSettings,
-  OSType            dataID,
-  UInt32            size,
-  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2865,6 +2833,7 @@ PMPrinterWritePostScriptToURL(
 	  CFURLRef          	destinationFileURL)					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
+
 /*
  *  PMPrintSettingsToOptions()
  *  
@@ -2931,6 +2900,111 @@ PMPrintSettingsToOptionsWithPrinterAndPageFormat(
   PMPrinter         printer,
   PMPageFormat	    pageFormat, 
   char **           options)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+#pragma mark
+#pragma mark PrinterCommandSupport
+#pragma mark
+
+
+/*
+*  PMPrinterSendCommand()
+*
+*  Summary:
+*    Submit a command file containing the specified string data to a print queue.
+*
+*  Parameters:
+*
+*    printer:
+*      The destination print queue.
+*
+*    commandString:
+*      The contents of the command file as a CFStringRef.
+*
+*    jobTitle:
+*      The title of the job associated with the command file. If NULL,
+*      a job title will be automatically generated but it may not be
+*      meaningful to a user.
+*
+*    options:
+*      A dictionary containing options that apply to the job.
+*      This parameter should be NULL; it is reserved for future expansion.
+*
+*  Availability:
+*    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+*    CarbonLib:        not available
+*/
+extern OSStatus
+PMPrinterSendCommand(
+  PMPrinter       printer,
+  CFStringRef     commandString,
+  CFStringRef     jobTitle,
+  CFDictionaryRef options) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*
+*  PMPrinterCopyState()
+*
+*  Summary:
+*    Copies the current "marker-change-time", "marker-colors",
+*    "marker-high-levels", "marker-levels", "marker-low-levels",
+*    "marker-message", "marker-names", "marker-types", "printer-state",
+*    "printer-state-change-time", "printer-state-message", and
+*    "printer-state-reasons" values for a print queue.  These attributes are
+*    defined in the "CUPS Implementation of IPP" specification at:
+*
+*        http://www.cups.org/documentation.php/spec-ipp.html
+*        http://localhost:631/help/spec-ipp.html
+*
+*    Each attribute is returned using the corresponding CoreFoundation
+*    data type:
+*
+*        Attribute                    Type
+*        ---------------------------  ------------------------
+*        "marker-change-time"         CFDateRef
+*        "marker-colors"              CFArrayRef + CFStringRef
+*        "marker-high-levels"         CFArrayRef + CFNumberRef
+*        "marker-levels"              CFArrayRef + CFNumberRef
+*        "marker-low-levels"          CFArrayRef + CFNumberRef
+*        "marker-message"             CFStringRef
+*        "marker-names"               CFArrayRef + CFStringRef
+*        "marker-types"               CFArrayRef + CFStringRef
+*        "printer-state"              CFNumberRef
+*        "printer-state-change-time"  CFDateRef
+*        "printer-state-message"      CFStringRef
+*        "printer-state-reasons"      CFArrayRef + CFStringRef
+*
+*  Localization Considerations:
+*
+*    The "marker-message" and "printer-state-message" attributes may be
+*    localized by the printer driver using the language of the last processed
+*    print job.
+*
+*    The "marker-names" and "printer-state-reasons" attributes are typically
+*    English-language keywords that may be localized using the printer's PPD
+*    file and CUPS ppdLocalizeMarkerName and ppdLocalizeIPPReason APIs,
+*    respectively.
+*
+*    All other attributes are predefined keywords or values that are not
+*    localized.
+*
+*  Parameters:
+*
+*    printer:
+*      The destination print queue.
+*
+*    stateDict:
+*      A pointer to a CFDictionaryRef variable to hold the values.
+*      You must release the dictionary when you are done using it.
+*      The dictionary returned is not mutable.
+*
+*  Availability:
+*    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+*    CarbonLib:        not available
+*/
+
+extern OSStatus
+PMPrinterCopyState(
+  PMPrinter       printer,
+  CFDictionaryRef *stateDict) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #pragma mark

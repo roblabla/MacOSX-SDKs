@@ -5,7 +5,7 @@
 // Modified by:
 // Created:
 // Copyright:   (c) Julian Smart
-// RCS-ID:      $Id: tabctrl.h,v 1.10 2006/04/28 10:14:27 ABX Exp $
+// RCS-ID:      $Id: tabctrl.h 38943 2006-04-28 10:14:27Z ABX $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 

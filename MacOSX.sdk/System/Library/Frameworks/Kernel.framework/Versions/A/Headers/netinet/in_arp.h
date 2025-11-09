@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -30,6 +30,7 @@
 #define	_NETINET_IN_ARP_H_
 #include <sys/kernel_types.h>
 
+struct sockaddr;
 struct sockaddr_dl;
 struct sockaddr_in;
 
@@ -58,9 +59,9 @@ struct sockaddr_in;
 		value is returned, the caller is responsible for disposing of
 		the packet.
  */
-errno_t inet_arp_lookup(ifnet_t interface, const struct sockaddr_in *ip_dest,
-			struct sockaddr_dl *ll_dest, size_t ll_dest_len, route_t hint,
-			mbuf_t packet);
+extern errno_t inet_arp_lookup(ifnet_t interface,
+    const struct sockaddr_in *ip_dest, struct sockaddr_dl *ll_dest,
+    size_t ll_dest_len, route_t hint, mbuf_t packet);
 
 /*!
 	@function inet_arp_handle_input
@@ -79,7 +80,7 @@ errno_t inet_arp_lookup(ifnet_t interface, const struct sockaddr_in *ip_dest,
 	@param target_ip The target IP address from the arp payload.
 	@result 0 on success or an errno error value on failure.
  */
-errno_t inet_arp_handle_input(ifnet_t ifp, u_int16_t arpop,
+extern errno_t inet_arp_handle_input(ifnet_t ifp, u_int16_t arpop,
 			const struct sockaddr_dl *sender_hw,
 			const struct sockaddr_in *sender_ip,
 			const struct sockaddr_in *target_ip);
@@ -106,6 +107,6 @@ errno_t inet_arp_handle_input(ifnet_t ifp, u_int16_t arpop,
 	@param interface The interface the packet was received on.
 	@param ipaddr The ip interface address.
  */
-void	inet_arp_init_ifaddr(ifnet_t interface, ifaddr_t ipaddr);
+extern void inet_arp_init_ifaddr(ifnet_t interface, ifaddr_t ipaddr);
 
-#endif _NETINET_IN_ARP_H_
+#endif /* _NETINET_IN_ARP_H_ */

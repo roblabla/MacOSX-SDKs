@@ -4,7 +4,7 @@
 // Author:      Ryan Norton
 // Modified by:
 // Created:     2004-09-25
-// RCS-ID:      $Id: fontdlg.h,v 1.13 2006/11/12 23:34:38 VZ Exp $
+// RCS-ID:      $Id: fontdlg.h 43384 2006-11-12 23:34:38Z VZ $
 // Copyright:   (c) Ryan Norton
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////

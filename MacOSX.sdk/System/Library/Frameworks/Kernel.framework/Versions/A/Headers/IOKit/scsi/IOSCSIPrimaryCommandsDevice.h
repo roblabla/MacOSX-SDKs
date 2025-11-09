@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,9 +28,9 @@
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // General IOKit headers
 #include <IOKit/IOLib.h>
@@ -46,9 +46,9 @@
 #include <IOKit/scsi/IOSCSIProtocolInterface.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Constants
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 // Notification messages
 enum
@@ -63,7 +63,8 @@ enum
 {
 	kOneSecondTimeoutInMS 		= 1000,
 	kTenSecondTimeoutInMS 		= 10 * kOneSecondTimeoutInMS,
-	kThirtySecondTimeoutInMS	= 30 * kOneSecondTimeoutInMS
+	kThirtySecondTimeoutInMS	= 30 * kOneSecondTimeoutInMS,
+    kFortyFiveSecondTimeoutInMS	= 45 * kOneSecondTimeoutInMS
 };
 
 // Mode page values for page control field
@@ -83,18 +84,23 @@ enum
 class SCSIPrimaryCommands;
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 //	Class Declaration
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//-----------------------------------------------------------------------------
 
 class IOSCSIPrimaryCommandsDevice : public IOSCSIProtocolInterface
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIPrimaryCommandsDevice )
 	
+	friend class SCSITaskUserClient;
+	
 private:
 	
+#ifndef __LP64__
 	SCSIPrimaryCommands *			fSCSIPrimaryCommandObject;
+#endif
+
 	IOSCSIProtocolInterface *		fProtocolDriver;
 	
 	// The fProtocolAccessEnabled member variable indicates whether
@@ -134,7 +140,6 @@ protected:
 		SCSITaggedTaskIdentifier	fTaskID;
 		IOSimpleLock *				fTaskIDLock;
 		UInt32						fRetryCount;
-
 	};
 	IOSCSIPrimaryCommandsDeviceExpansionData * fIOSCSIPrimaryCommandsDeviceReserved;
 	
@@ -168,11 +173,13 @@ protected:
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the base command set object of the subclass.
+
+#ifndef __LP64__
 	
 	// ------ DEPRECATED API ----------
 	// This should no longer be called by subclasses as the command builder
 	// objects will be removed in a later release.
-	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
+	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );	
 	
 	// This method is called by the start method to create all the command
 	// objects needed by the class.  For subclasses, this will be overridden
@@ -183,6 +190,9 @@ protected:
 	// objects needed by the class.  For subclasses, this will be overridden
 	// to free its needed command set objects.
 	virtual void					FreeCommandSetObjects ( void );
+
+#endif
+	
 	
 	// This method is called by the start method to obtain information from
 	// the device with regards to whether it supports the power conditions mode page.
@@ -393,7 +403,7 @@ public:
 	// to notify us of certain power management settings. We override
 	// this method in order to catch the kPMMinutesToSpinDown message
 	// in order to set our idle timer.
-	virtual IOReturn 	setAggressiveness ( UInt32 type, UInt32 minutes );
+	virtual IOReturn 	setAggressiveness ( unsigned long type, unsigned long minutes );
 	
 	// Methods for getting device information strings
 	virtual char *		GetVendorString ( void );
@@ -476,6 +486,8 @@ public:
 	bool 				IsMemoryDescriptorValid (
 							IOMemoryDescriptor * 		dataBuffer,
 							UInt64						requiredSize );
+
+#ifndef __LP64__
 	
 	// SCSI Primary command implementations
 	virtual bool		CHANGE_DEFINITION (
@@ -513,6 +525,8 @@ public:
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField4Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+
+#endif	/* !__LP64__ */
 	
 	virtual bool		INQUIRY (
 							SCSITaskIdentifier			request,
@@ -542,7 +556,7 @@ public:
 							SCSICmdField2Byte 			PARAMETER_POINTER,
 							SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );  
-
+	
 	virtual bool		MODE_SELECT_6 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -625,6 +639,8 @@ public:
 							SCSITaskIdentifier			request,
 							SCSICmdField1Byte 			CONTROL );
 
+#ifndef __LP64__
+
 	virtual bool		RELEASE_6 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -632,6 +648,8 @@ public:
 							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
 							SCSICmdField1Byte 			CONTROL );
 
+#endif	/* !__LP64__ */
+	
 	virtual bool		RELEASE_10 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -640,6 +658,8 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+
+#ifndef __LP64__
 
 	virtual bool		RELEASE_10 (
 							SCSITaskIdentifier			request,
@@ -652,6 +672,8 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
+#endif	/* !__LP64__ */
+	
 	virtual bool		REPORT_DEVICE_IDENTIFIER ( 
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -675,6 +697,8 @@ public:
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField1Byte 			CONTROL );
 
+#ifndef __LP64__
+
  	virtual bool		RESERVE_6 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -683,6 +707,8 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
+#endif	/* !__LP64__ */
+	
 	virtual bool		RESERVE_10 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -691,6 +717,8 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+
+#ifndef __LP64__
 
 	virtual bool		RESERVE_10 (
 							SCSITaskIdentifier			request,
@@ -703,6 +731,8 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
+#endif	/* !__LP64__ */
+	
 	virtual bool		SEND (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,

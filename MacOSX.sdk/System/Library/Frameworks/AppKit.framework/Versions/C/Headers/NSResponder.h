@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2007, Apple Inc.
+        Copyright (c) 1994-2009, Apple Inc.
         All rights reserved.
 */
 
@@ -39,10 +39,35 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)tabletPoint:(NSEvent *)theEvent;
 - (void)tabletProximity:(NSEvent *)theEvent;
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 - (void)cursorUpdate:(NSEvent *)event;
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+/* The following *WithEvent methods are available on 10.5.2 or later, and will be sent only on hardware capable of generating the corresponding NSEvent types 
+*/
+- (void)magnifyWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)rotateWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)swipeWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)beginGestureWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)endGestureWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* A new set of touches has been recognized. To get the set of touches that began for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseBegan inView:self]; Note: this is not always the point of contact with the touch device. A touch that transitions from resting to active may be part of a Began set.
+*/
+- (void)touchesBeganWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* One or more touches has moved. To get the set of touches that moved for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseMoved inView:self];
+*/ 
+- (void)touchesMovedWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* A set of touches have been removed. To get the set of touches that ended for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseEnded inView:self]; Note: this is not always the point of removal with the touch device. A touch that transitions from active to resting may be part of an Ended set.
+*/
+- (void)touchesEndedWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/* The System has cancelled the tracking of touches for any reason.
+*/
+- (void)touchesCancelledWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 - (void)noResponderFor:(SEL)eventSelector;
 - (BOOL)acceptsFirstResponder;
 - (BOOL)becomeFirstResponder;
@@ -60,7 +85,7 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (BOOL)shouldBeTreatedAsInkEvent:(NSEvent *)theEvent;
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2 */
 @end
 
 @interface NSResponder(NSKeyboardUI)
@@ -108,6 +133,17 @@
 - (void)moveUpAndModifySelection:(id)sender;
 - (void)moveDownAndModifySelection:(id)sender;
 
+- (void)moveToBeginningOfLineAndModifySelection:(id)sender;
+- (void)moveToEndOfLineAndModifySelection:(id)sender;
+- (void)moveToBeginningOfParagraphAndModifySelection:(id)sender;
+- (void)moveToEndOfParagraphAndModifySelection:(id)sender;
+- (void)moveToEndOfDocumentAndModifySelection:(id)sender;
+- (void)moveToBeginningOfDocumentAndModifySelection:(id)sender;
+- (void)pageDownAndModifySelection:(id)sender;
+- (void)pageUpAndModifySelection:(id)sender;
+- (void)moveParagraphForwardAndModifySelection:(id)sender;
+- (void)moveParagraphBackwardAndModifySelection:(id)sender;
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)moveWordRight:(id)sender;
 - (void)moveWordLeft:(id)sender;
@@ -115,12 +151,22 @@
 - (void)moveLeftAndModifySelection:(id)sender;
 - (void)moveWordRightAndModifySelection:(id)sender;
 - (void)moveWordLeftAndModifySelection:(id)sender;
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)moveToLeftEndOfLine:(id)sender;
+- (void)moveToRightEndOfLine:(id)sender;
+- (void)moveToLeftEndOfLineAndModifySelection:(id)sender;
+- (void)moveToRightEndOfLineAndModifySelection:(id)sender;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
 
 - (void)scrollPageUp:(id)sender;
 - (void)scrollPageDown:(id)sender;
 - (void)scrollLineUp:(id)sender;
 - (void)scrollLineDown:(id)sender;
+
+- (void)scrollToBeginningOfDocument:(id)sender;
+- (void)scrollToEndOfDocument:(id)sender;
 
     /* Graphical Element transposition */
 
@@ -147,6 +193,10 @@
 - (void)insertLineBreak:(id)sender;
 - (void)insertContainerBreak:(id)sender;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)insertSingleQuoteIgnoringSubstitution:(id)sender;
+- (void)insertDoubleQuoteIgnoringSubstitution:(id)sender;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
     /* Case changes */
 
@@ -187,6 +237,19 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)cancelOperation:(id)sender;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
+
+    /* Writing Direction */
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)makeBaseWritingDirectionNatural:(id)sender;
+- (void)makeBaseWritingDirectionLeftToRight:(id)sender;
+- (void)makeBaseWritingDirectionRightToLeft:(id)sender;
+
+- (void)makeTextWritingDirectionNatural:(id)sender;
+- (void)makeTextWritingDirectionLeftToRight:(id)sender;
+- (void)makeTextWritingDirectionRightToLeft:(id)sender;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+
 @end
 
 @interface NSResponder(NSUndoSupport)

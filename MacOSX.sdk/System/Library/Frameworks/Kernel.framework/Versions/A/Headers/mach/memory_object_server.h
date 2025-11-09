@@ -21,12 +21,12 @@ typedef struct {
         char            *name;
         function_ptr_t  function;
 } function_table_entry;
-typedef function_table_entry 	*function_table_t;
+typedef function_table_entry   *function_table_t;
 #endif /* FUNCTION_PTR_T */
 #endif /* AUTOTEST */
 
 #ifndef	memory_object_MSG_COUNT
-#define	memory_object_MSG_COUNT	8
+#define	memory_object_MSG_COUNT	9
 #endif	/* memory_object_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -119,7 +119,7 @@ kern_return_t memory_object_data_unlock
 (
 	memory_object_t memory_object,
 	memory_object_offset_t offset,
-	memory_object_cluster_size_t size,
+	memory_object_size_t size,
 	vm_prot_t desired_access
 );
 
@@ -133,17 +133,29 @@ kern_return_t memory_object_synchronize
 (
 	memory_object_t memory_object,
 	memory_object_offset_t offset,
-	memory_object_cluster_size_t size,
+	memory_object_size_t size,
 	vm_sync_t sync_flags
 );
 
-/* Routine memory_object_unmap */
+/* Routine memory_object_map */
 #ifdef	mig_external
 mig_external
 #else
 extern
 #endif	/* mig_external */
-kern_return_t memory_object_unmap
+kern_return_t memory_object_map
+(
+	memory_object_t memory_object,
+	vm_prot_t prot
+);
+
+/* Routine memory_object_last_unmap */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t memory_object_last_unmap
 (
 	memory_object_t memory_object
 );
@@ -164,7 +176,7 @@ extern const struct memory_object_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
-		routine[8];
+		routine[9];
 } memory_object_subsystem;
 
 /* typedefs for all requests */
@@ -249,7 +261,7 @@ extern const struct memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
-		memory_object_cluster_size_t size;
+		memory_object_size_t size;
 		vm_prot_t desired_access;
 	} __Request__memory_object_data_unlock_t;
 #ifdef  __MigPackStructs
@@ -263,7 +275,7 @@ extern const struct memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
-		memory_object_cluster_size_t size;
+		memory_object_size_t size;
 		vm_sync_t sync_flags;
 	} __Request__memory_object_synchronize_t;
 #ifdef  __MigPackStructs
@@ -275,7 +287,19 @@ extern const struct memory_object_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__memory_object_unmap_t;
+		NDR_record_t NDR;
+		vm_prot_t prot;
+	} __Request__memory_object_map_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__memory_object_last_unmap_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -294,7 +318,8 @@ union __RequestUnion__memory_object_subsystem {
 	__Request__memory_object_data_initialize_t Request_memory_object_data_initialize;
 	__Request__memory_object_data_unlock_t Request_memory_object_data_unlock;
 	__Request__memory_object_synchronize_t Request_memory_object_synchronize;
-	__Request__memory_object_unmap_t Request_memory_object_unmap;
+	__Request__memory_object_map_t Request_memory_object_map;
+	__Request__memory_object_last_unmap_t Request_memory_object_last_unmap;
 };
 #endif /* __RequestUnion__memory_object_subsystem__defined */
 /* typedefs for all replies */
@@ -395,7 +420,19 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_unmap_t;
+	} __Reply__memory_object_map_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_last_unmap_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -414,7 +451,8 @@ union __ReplyUnion__memory_object_subsystem {
 	__Reply__memory_object_data_initialize_t Reply_memory_object_data_initialize;
 	__Reply__memory_object_data_unlock_t Reply_memory_object_data_unlock;
 	__Reply__memory_object_synchronize_t Reply_memory_object_synchronize;
-	__Reply__memory_object_unmap_t Reply_memory_object_unmap;
+	__Reply__memory_object_map_t Reply_memory_object_map;
+	__Reply__memory_object_last_unmap_t Reply_memory_object_last_unmap;
 };
 #endif /* __RequestUnion__memory_object_subsystem__defined */
 
@@ -427,7 +465,8 @@ union __ReplyUnion__memory_object_subsystem {
     { "memory_object_data_initialize", 2204 },\
     { "memory_object_data_unlock", 2205 },\
     { "memory_object_synchronize", 2206 },\
-    { "memory_object_unmap", 2207 }
+    { "memory_object_map", 2207 },\
+    { "memory_object_last_unmap", 2208 }
 #endif
 
 #ifdef __AfterMigServerHeader

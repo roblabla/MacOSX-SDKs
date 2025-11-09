@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2007, Apple Inc.. All rights reserved.
+ *  Copyright (c) 2005-2009, Apple Inc. All rights reserved.
  *
  */
  
@@ -19,8 +19,8 @@
    Also unlike traditional arrays, the 'count' of the array may be set directly.
    Under Garbage Collection and using a zeroingWeakMemory configuration, NULLs will appear when elements are collected.
 
-  Fast enumeration, copying, and archiving protocols are applicable only when NSPointerArray is configured for Object uses.
-  Since the array may contain NULLs, fast enumeration (for..in) will yield NULLs.  As a convenience, fast enumeration will also enumerate other types of pointers.  Copying and coding are undefined for non-object uses.
+   The copying and archiving protocols are applicable only when NSPointerArray is configured for Object uses.
+   The fast enumeration protocol (supporting the for..in statement) will yield NULLs if present.  It is defined for all types of pointers although the language syntax doesn't directly support this.
 */
 
 @interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSCoding>
