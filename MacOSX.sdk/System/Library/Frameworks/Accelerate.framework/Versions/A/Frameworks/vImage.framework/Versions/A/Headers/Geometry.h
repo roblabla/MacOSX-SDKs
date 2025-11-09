@@ -186,10 +186,10 @@ vImage_Error	vImageVerticalReflect_ARGBFFFF( const vImage_Buffer *src, const vIm
  *			the input image does not completely cover the output image. 
  */
 
-vImage_Error	vImageRotate90_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, u_int8_t rotationConstant, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int8_t rotationConstant, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, u_int8_t rotationConstant, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int8_t rotationConstant, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate90_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate90_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate90_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
  
 /*
  *	The Shearing functions use resampling to rescale a image and offset it to fractional pixel offsets. 
@@ -200,15 +200,15 @@ vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buf
  *	smaller in one dimension) is done by adjusting the resampling kernel.
  */
 
-vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, u_int32_t srcOffsetToROI_X, u_int32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
  
 /*

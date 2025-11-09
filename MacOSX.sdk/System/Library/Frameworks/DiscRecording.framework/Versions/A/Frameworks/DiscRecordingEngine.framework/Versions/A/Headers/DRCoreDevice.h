@@ -14,6 +14,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*!	@header 	
+	@abstract		Device interfaces for Disc Recording.
+
+	@discussion		
+*/
+
 #ifndef _H_DRCoreDevice
 #define _H_DRCoreDevice
 
@@ -69,7 +76,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				
 				Since device connections are dynamic, a better option than this function is to 
 				maintain a list of attached devices by listening for 
-				<tt>kDRDeviceAppearedNotification</tt> and <tt>kDRDeviceDisappearedNotification</tt>
+				@link kDRDeviceAppearedNotification kDRDeviceAppearedNotification @/link and @link kDRDeviceDisappearedNotification kDRDeviceDisappearedNotification @/link
 				notifications. This function is most useful for initially populating a list of 
 				devices.
 	@result		A CFArray containing the devices attached to the system at the time the
@@ -140,7 +147,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract	Commands a device to unmount and eject media.
 	@discussion	If media is present but cannot be unmounted, this function will fail and return
 				an error.  If there is no media in the device, this function is
-				equivalent to DRDeviceOpenTray.
+				equivalent to @link DRDeviceOpenTray DRDeviceOpenTray @/link.
 	@param		device		Device to eject.
 	@result		An error code indicating whether the media could be ejected.
 */
@@ -156,12 +163,12 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				interest to reserve blank media does not guarantee acquisition--there may be
 				other applications that have indicated an interest in the same media.
 				
-				Your application will receive a <tt>kDRDeviceStatusChangedNotification</tt> 
-				notification with a value of <tt>true</tt> for the <tt>kDRDeviceMediaIsReservedKey</tt>
+				Your application will receive a @link kDRDeviceStatusChangedNotification kDRDeviceStatusChangedNotification @/link 
+				notification with a value of <tt>true</tt> for the @link kDRDeviceMediaIsReservedKey kDRDeviceMediaIsReservedKey @/link
 				when a blank media reservation has been acquired.
 				
 				This function may be called multiple times. Each time it is called, a call to
-				<tt>DRDeviceReleaseMediaReservation</tt> must be made at a later time or the
+				@link DRDeviceReleaseMediaReservation DRDeviceReleaseMediaReservation @/link must be made at a later time or the
 				process will never fully rescind its interest in the blank media reservation.
 	@param		device	The device reference for which to indicate an interest.
 */
@@ -190,7 +197,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				not be unmounted.
 				
 				Your application may call this function multiple times. Each time,
-				a call to DRDeviceReleaseExclusiveAccess must be made at a later time
+				a call to @link DRDeviceReleaseExclusiveAccess DRDeviceReleaseExclusiveAccess @/link must be made at a later time
 				or the process will never release its exclusive access.
 	@param		device	The device reference for which to acquire exclusive access.
 	@result		An error code indicating whether exclusive access could be acquired.
@@ -204,7 +211,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract	Release exclusive access to a device.
 	@discussion	This function will release one request for exclusive access made by a process
 				that called DRDeviceAcquireExclusiveAccess. A call to this function must be
-				made for every call to DRDeviceAcquireExclusiveAccess, otherwise the process
+				made for every call to @link DRDeviceAcquireExclusiveAccess DRDeviceAcquireExclusiveAccess @/link, otherwise the process
 				will never release its exclusive access.
 	@param		device	The device reference for which to release exclusive access.
 */
@@ -265,7 +272,7 @@ extern const CFStringRef kDRDeviceDisappearedNotification			AVAILABLE_MAC_OS_X_V
 	@discussion	Notification sent when a device's status changes, usually because a disc
 				has been inserted or removed.  The value of the info parameter for your notification 
 				callback is equivalent to the dictionary object reference returned from a call to 
-				DRDeviceCopyStatus.
+				@link DRDeviceCopyStatus DRDeviceCopyStatus @/link.
 */
 extern const CFStringRef kDRDeviceStatusChangedNotification			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -273,56 +280,56 @@ extern const CFStringRef kDRDeviceStatusChangedNotification			AVAILABLE_MAC_OS_X
 /*	Keys for the dictionary returned by DRDeviceCopyInfo. */
 /*!
 	@const kDRDeviceSupportLevelKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object indicating how well the engine supports the device.
 */
 extern const CFStringRef kDRDeviceSupportLevelKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceIORegistryEntryPathKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object containing a copy of the path to the device entry in the IORegistry.
 */
 extern const CFStringRef kDRDeviceIORegistryEntryPathKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceVendorNameKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object containing the vendor name extracted from the device.
 */
 extern const CFStringRef kDRDeviceVendorNameKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceProductNameKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object containing the product name extracted from the device.
 */
 extern const CFStringRef kDRDeviceProductNameKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceFirmwareRevisionKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object containing the firmware revision extracted from the device.
 */
 extern const CFStringRef kDRDeviceFirmwareRevisionKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDevicePhysicalInterconnectKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object containing the type of the bus the device is on.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDevicePhysicalInterconnectLocationKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this
 				key is a reference to a CFString object containing the physical interconnect location.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectLocationKey	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceWriteCapabilitiesKey
-	@discussion	A key for the dictionary object  returned by DRDeviceCopyInfo. The value of this key is 
+	@discussion	A key for the dictionary object  returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key is 
 				a reference to a CFString object describing the capabilities the drive has for writing to different 
 				media.
 */
@@ -330,28 +337,28 @@ extern const CFStringRef kDRDeviceWriteCapabilitiesKey				AVAILABLE_MAC_OS_X_VER
 
 /*!
 	@const kDRDeviceLoadingMechanismCanEjectKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key
 				is a reference to a CFBoolean object that indicates if the loading mechanism of the drive can eject.
 */
 extern const CFStringRef kDRDeviceLoadingMechanismCanEjectKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceLoadingMechanismCanInjectKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key
 				is a reference to a CFBoolean object that indicates if the loading mechanism of the drive can inject.
 */
 extern const CFStringRef kDRDeviceLoadingMechanismCanInjectKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceLoadingMechanismCanOpenKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key
 				is a reference to a CFBoolean object that indicates if the loading mechanism of the drive can open.
 */
 extern const CFStringRef kDRDeviceLoadingMechanismCanOpenKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceWriteBufferSizeKey
-	@discussion	A key for the dictionary object returned by DRDeviceCopyInfo. The value of this key
+	@discussion	A key for the dictionary object returned by @link DRDeviceCopyInfo DRDeviceCopyInfo @/link. The value of this key
 				is a reference to a CFNumber object containing the size of the write buffer of the device.
 */
 extern const CFStringRef kDRDeviceWriteBufferSizeKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -360,35 +367,35 @@ extern const CFStringRef kDRDeviceWriteBufferSizeKey				AVAILABLE_MAC_OS_X_VERSI
 /* Support levels */
 /*!
 	@const kDRDeviceSupportLevelNone
-	@discussion	One value for the kDRDeviceSupportLevelKey dictionary key. This value indicates
+	@discussion	One value for the @link kDRDeviceSupportLevelKey kDRDeviceSupportLevelKey @/link dictionary key. This value indicates
 				the engine does not support the device and it cannot be used.
 */
 extern const CFStringRef kDRDeviceSupportLevelNone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceSupportLevelUnsupported
-	@discussion	One value for the kDRDeviceSupportLevelKey dictionary key. This value indicates
+	@discussion	One value for the @link kDRDeviceSupportLevelKey kDRDeviceSupportLevelKey @/link dictionary key. This value indicates
 				the device is unsupported but the Disc Recording engine will try to use it anyway.
 */
 extern const CFStringRef kDRDeviceSupportLevelUnsupported			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceSupportLevelVendorSupported
-	@discussion	One value for the kDRDeviceSupportLevelKey dictionary key. This value
+	@discussion	One value for the @link kDRDeviceSupportLevelKey kDRDeviceSupportLevelKey @/link dictionary key. This value
 				indicates the device vendor has provided support for the device.
 */
 extern const CFStringRef kDRDeviceSupportLevelVendorSupported		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceSupportLevelAppleSupported
-	@discussion	One value for the kDRDeviceSupportLevelKey dictionary key. This value
+	@discussion	One value for the @link kDRDeviceSupportLevelKey kDRDeviceSupportLevelKey @/link dictionary key. This value
 				indicates that Apple has provided support for the device.
 */
 extern const CFStringRef kDRDeviceSupportLevelAppleSupported		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceSupportLevelAppleShipping
-	@discussion	One value for the kDRDeviceSupportLevelKey dictionary key. This value indicates that Apple
+	@discussion	One value for the @link kDRDeviceSupportLevelKey kDRDeviceSupportLevelKey @/link dictionary key. This value indicates that Apple
 				has provided support for the device and it has shipped in a machine made by Apple.
 */
 extern const CFStringRef kDRDeviceSupportLevelAppleShipping			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -397,35 +404,35 @@ extern const CFStringRef kDRDeviceSupportLevelAppleShipping			AVAILABLE_MAC_OS_X
 /* Types of physical interconnect */
 /*!
 	@const	kDRDevicePhysicalInterconnectATAPI
-	@discussion	One value for the kDRDevicePhysicalInterconnectKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectKey kDRDevicePhysicalInterconnectKey @/link dictionary key. This value indicates that the
 				device is connected by an ATAPI interface.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectATAPI			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectFibreChannel
-	@discussion	One value for the kDRDevicePhysicalInterconnectKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectKey kDRDevicePhysicalInterconnectKey @/link dictionary key. This value indicates that the
 				device is connected by a Fibre Channel interface.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectFibreChannel	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectFireWire
-	@discussion	One value for the kDRDevicePhysicalInterconnectKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectKey kDRDevicePhysicalInterconnectKey @/link dictionary key. This value indicates that the
 				device is connected by a FireWire interface.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectFireWire		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectUSB
-	@discussion	One value for the kDRDevicePhysicalInterconnectKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectKey kDRDevicePhysicalInterconnectKey @/link dictionary key. This value indicates that the
 				device is connected by a USB interface.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectUSB			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectSCSI
-	@discussion	One value for the kDRDevicePhysicalInterconnectKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectKey kDRDevicePhysicalInterconnectKey @/link dictionary key. This value indicates that the
 				device is connected by a SCSI interface.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectSCSI			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -434,21 +441,21 @@ extern const CFStringRef kDRDevicePhysicalInterconnectSCSI			AVAILABLE_MAC_OS_X_
 /* Physical interconnect locations */
 /*!
 	@const	kDRDevicePhysicalInterconnectLocationInternal
-	@discussion	One value for the kDRDevicePhysicalInterconnectLocationKey dictionary key.
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectLocationKey kDRDevicePhysicalInterconnectLocationKey @/link dictionary key.
 				This value indicates that the device is on an internal bus.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectLocationInternal	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectLocationExternal
-	@discussion	One value for the kDRDevicePhysicalInterconnectLocationKey dictionary key.
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectLocationKey kDRDevicePhysicalInterconnectLocationKey @/link dictionary key.
 				This value indicates that the device is on an external bus.
 */
 extern const CFStringRef kDRDevicePhysicalInterconnectLocationExternal	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDevicePhysicalInterconnectLocationUnknown
-	@discussion	One value for the kDRDevicePhysicalInterconnectLocationKey dictionary key.
+	@discussion	One value for the @link kDRDevicePhysicalInterconnectLocationKey kDRDevicePhysicalInterconnectLocationKey @/link dictionary key.
 				This value indicates that the software cannot determine whether the device is
 				on an internal or external bus.
 */
@@ -459,84 +466,84 @@ extern const CFStringRef kDRDevicePhysicalInterconnectLocationUnknown	AVAILABLE_
 	kDRDeviceWriteCapabilitiesKey, in the dictionary returned by DRDeviceCopyInfo. */
 /*!
 	@const kDRDeviceCanWriteKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to any type of media.
 */
 extern const CFStringRef kDRDeviceCanWriteKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteCDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to some type of CD-based media.
 */
 extern const CFStringRef kDRDeviceCanWriteCDKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteCDRKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to CD-R media.
 */
 extern const CFStringRef kDRDeviceCanWriteCDRKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteCDRWKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to CD-RW media.
 */
 extern const CFStringRef kDRDeviceCanWriteCDRWKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to some type of DVD-based media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDRKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD-R media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDRKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDRWKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD-RW media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDRWKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDRAMKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD-RAM media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDRAMKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDPlusRKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD+R media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDPlusRKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteDVDPlusRWKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD+RW media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDPlusRWKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteIndexPointsKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write index points to CD media.
 */
 extern const CFStringRef kDRDeviceCanWriteIndexPointsKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteISRCKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write International
 				Standard Recording Code (ISRC) to CD media.
 */
@@ -544,7 +551,7 @@ extern const CFStringRef kDRDeviceCanWriteISRCKey					AVAILABLE_MAC_OS_X_VERSION
 
 /*!
 	@const kDRDeviceCanWriteCDTAOKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device supports a track-at-once (TAO)
 				burn strategy for CD.
 */
@@ -552,7 +559,7 @@ extern const CFStringRef kDRDeviceCanWriteCDTAOKey					AVAILABLE_MAC_OS_X_VERSIO
 
 /*!
 	@const kDRDeviceCanWriteCDSAOKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device supports a session-at-once (SAO)
 				burn strategy for CD.
 */
@@ -560,7 +567,7 @@ extern const CFStringRef kDRDeviceCanWriteCDSAOKey					AVAILABLE_MAC_OS_X_VERSIO
 
 /*!
 	@const kDRDeviceCanWriteCDRawKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device supports a raw mode 
 				burn strategy for CD.
 
@@ -573,7 +580,7 @@ extern const CFStringRef kDRDeviceCanWriteCDRawKey					AVAILABLE_MAC_OS_X_VERSIO
 
 /*!
 	@const kDRDeviceCanWriteDVDDAOKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device supports a disc-at-once (DAO)
 				burn strategy on DVD media. This burn strategy does not apply to CD media.
 */
@@ -581,21 +588,21 @@ extern const CFStringRef kDRDeviceCanWriteDVDDAOKey					AVAILABLE_MAC_OS_X_VERSI
 
 /*!
 	@const kDRDeviceCanTestWriteCDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can perform a test write to CD media.
 */
 extern const CFStringRef kDRDeviceCanTestWriteCDKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanTestWriteDVDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can perform a test write to DVD media.
 */
 extern const CFStringRef kDRDeviceCanTestWriteDVDKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanUnderrunProtectCDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device has burn underrun protection when
 				writing to CD media.
 */
@@ -603,7 +610,7 @@ extern const CFStringRef kDRDeviceCanUnderrunProtectCDKey			AVAILABLE_MAC_OS_X_V
 
 /*!
 	@const kDRDeviceCanUnderrunProtectDVDKey
-	@discussion	A key for the write capabilities dictionary in the device info dictionary.  The value
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device has burn underrun protection when
 				writing to DVD media.
 */
@@ -614,49 +621,49 @@ extern const CFStringRef kDRDeviceCanUnderrunProtectDVDKey			AVAILABLE_MAC_OS_X_
 /*	Keys for the dictionary returned by DRDeviceCopyStatus. */
 /*!
 	@const kDRDeviceIsBusyKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFBoolean object indicating if the device is busy.
 */
 extern const CFStringRef kDRDeviceIsBusyKey							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceIsTrayOpenKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFBoolean object indicating if the device's tray is open.
 */
 extern const CFStringRef kDRDeviceIsTrayOpenKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMaximumWriteSpeedKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFNumber object containing the maximum write speed in KB/s, where 1KB = 1000 bytes.
 */
 extern const CFStringRef kDRDeviceMaximumWriteSpeedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCurrentWriteSpeedKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFNumber object containing the current write speed in KB/s, where 1KB = 1000 bytes.
 */
 extern const CFStringRef kDRDeviceCurrentWriteSpeedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaStateKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFString object containing information about the state of the media.
 */
 extern const CFStringRef kDRDeviceMediaStateKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@constant kDRDeviceMediaInfoKey
-	@discussion A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFDictionary object containing information about the media in the drive.
 */
 extern const CFStringRef kDRDeviceMediaInfoKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceBurnSpeedsKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyStatus. The value of this key 
+	@discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key 
 				is a reference to a CFArray object containing the available burn speeds. This key may not
 				be accessible if there is no disc in the drive.
 */
@@ -664,7 +671,7 @@ extern const CFStringRef kDRDeviceBurnSpeedsKey						AVAILABLE_MAC_OS_X_VERSION_
 
 /*!
 	@constant kDRDeviceTrackRefsKey
-	@discussion A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFArray object containing a list of DRTrack objects describing any tracks that
 				are already on the disc.
 */
@@ -672,7 +679,7 @@ extern const CFStringRef kDRDeviceTrackRefsKey						AVAILABLE_MAC_OS_X_VERSION_1
 
 /*!
 	@constant kDRDeviceTrackInfoKey
-	@discussion A key for the dictionary returned by DRDeviceCopyStatus. The value of this key is 
+	@discussion A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is 
 				a reference to a CFDictionary object containing dictionaries describing on-disc tracks.  DRTrackRef
 				dictionaries from the kDRDeviceTrackRefsKey constant are used as keys into this dictionary.
 */
@@ -682,7 +689,7 @@ extern const CFStringRef kDRDeviceTrackInfoKey						AVAILABLE_MAC_OS_X_VERSION_1
 /*	Media states */
 /*!
 	@const	kDRDeviceMediaStateMediaPresent
-	@discussion	One value for the kDRDeviceMediaStateKey dictionary key. This value indicates that some
+	@discussion	One value for the @link kDRDeviceMediaStateKey kDRDeviceMediaStateKey @/link dictionary key. This value indicates that some
 				kind of media is present in the drive.  Check the value of the kDRDeviceMediaInfoKey dictionary key
 				for specific media information.
 */
@@ -690,7 +697,7 @@ extern const CFStringRef kDRDeviceMediaStateMediaPresent			AVAILABLE_MAC_OS_X_VE
 
 /*!
 	@const	kDRDeviceMediaStateInTransition
-	@discussion	One value for the kDRDeviceMediaStateKey dictionary key. This value indicates that the
+	@discussion	One value for the @link kDRDeviceMediaStateKey kDRDeviceMediaStateKey @/link dictionary key. This value indicates that the
 				media is in transition, typically spinning up after being inserted or
 				spinning down in preparation for ejecting.
 */
@@ -698,7 +705,7 @@ extern const CFStringRef kDRDeviceMediaStateInTransition			AVAILABLE_MAC_OS_X_VE
 
 /*!
 	@const	kDRDeviceMediaStateNone
-	@discussion	One value for the kDRDeviceMediaStateKey dictionary key. This value indicates that there is
+	@discussion	One value for the @link kDRDeviceMediaStateKey kDRDeviceMediaStateKey @/link dictionary key. This value indicates that there is
 				no disc present in the drive.
 */
 extern const CFStringRef kDRDeviceMediaStateNone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -709,91 +716,91 @@ extern const CFStringRef kDRDeviceMediaStateNone					AVAILABLE_MAC_OS_X_VERSION_
 	in the dictionary returned by DRDeviceCopyStatus. */
 /*!
 	@const kDRDeviceMediaBSDNameKey
-	@discussion	A key in the media info dictionary. The value of this key 
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key 
 				is a reference to a CFString object containing the BSD name assigned to the device.
 */
 extern const CFStringRef kDRDeviceMediaBSDNameKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaIsBlankKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFBoolean
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFBoolean
 				object indicating whether the media is blank and has no data on it.
 */
 extern const CFStringRef kDRDeviceMediaIsBlankKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaIsAppendableKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFBoolean
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFBoolean
 				object indicating whether the disc is appendable -- in other words, whether new sessions can be written.
 */
 extern const CFStringRef kDRDeviceMediaIsAppendableKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaIsOverwritableKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFBoolean
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFBoolean
 				object indicating whether the disc is writable -- in other words, whether it can be fully (re)written.
 */
 extern const CFStringRef kDRDeviceMediaIsOverwritableKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaIsErasableKey
-	@discussion	A key in the media info dictionary. The value of this key 
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key 
 				is a reference to a CFBoolean object indicating whether the disc can be erased.
 */
 extern const CFStringRef kDRDeviceMediaIsErasableKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaIsReservedKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFBoolean
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFBoolean
 				object indicating whether the disc is reserved for exclusive use by the current process.
 */
 extern const CFStringRef kDRDeviceMediaIsReservedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaBlocksOverwritableKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFNumber
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the number of writable blocks on the disc.
 */
 extern const CFStringRef kDRDeviceMediaBlocksOverwritableKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaBlocksFreeKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFNumber
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the number of free blocks on the disc.
 */
 extern const CFStringRef kDRDeviceMediaBlocksFreeKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	
 /*!
 	@const kDRDeviceMediaBlocksUsedKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFNumber
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the number of blocks used by data on the disc.
 */
 extern const CFStringRef kDRDeviceMediaBlocksUsedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaTrackCountKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFNumber
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the total number of tracks on the disc in all sessions.
 */
 extern const CFStringRef kDRDeviceMediaTrackCountKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	
 /*!
 	@const kDRDeviceMediaSessionCountKey
-	@discussion	A key in the media info dictionary. The value of this key is a reference to a CFNumber
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the number of sessions on the disc.
 */
 extern const CFStringRef kDRDeviceMediaSessionCountKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaClassKey
-	@discussion	A key for the media info dictionary. The value of this key 
+	@discussion	A key for the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key 
 				is a reference to a CFString object indicating the class of media present in the drive.
 */
 extern const CFStringRef kDRDeviceMediaClassKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceMediaTypeKey
-	@discussion	A key in the media info dictionary. The value of this key 
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key 
 				is a reference to a CFString object indicating the type of media present in the drive.
 */
 extern const CFStringRef kDRDeviceMediaTypeKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -802,21 +809,21 @@ extern const CFStringRef kDRDeviceMediaTypeKey						AVAILABLE_MAC_OS_X_VERSION_1
 /* Media classes */
 /*!
 	@const	kDRDeviceMediaClassCD
-	@discussion	One value for the kDRDeviceMediaClassKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaClassKey kDRDeviceMediaClassKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is CD-based.
 */
 extern const CFStringRef kDRDeviceMediaClassCD						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaClassDVD
-	@discussion	One value for the kDRDeviceMediaClassKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaClassKey kDRDeviceMediaClassKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is DVD-based.
 */
 extern const CFStringRef kDRDeviceMediaClassDVD						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaClassUnknown
-	@discussion	One value for the kDRDeviceMediaClassKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaClassKey kDRDeviceMediaClassKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the media class is unknown.
 */
 extern const CFStringRef kDRDeviceMediaClassUnknown					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -825,70 +832,70 @@ extern const CFStringRef kDRDeviceMediaClassUnknown					AVAILABLE_MAC_OS_X_VERSI
 /* Media types */
 /*!
 	@const	kDRDeviceMediaTypeCDROM
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a CD-ROM.
 */
 extern const CFStringRef kDRDeviceMediaTypeCDROM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeCDR
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a CD-R.
 */
 extern const CFStringRef kDRDeviceMediaTypeCDR						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeCDRW
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a CD-RW.
 */
 extern const CFStringRef kDRDeviceMediaTypeCDRW						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDROM
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD-ROM.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDROM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDRAM
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD-RAM.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDRAM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDR
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD-R.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDR						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDRW
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD-RW.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDRW					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDPlusR
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD+R.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDPlusR					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDPlusRW
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc is a DVD+RW.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDPlusRW				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeUnknown
-	@discussion	One value for the kDRDeviceMediaTypeKey dictionary key in the media info dictionary.
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary.
 				This value indicates that the disc type is unknown.
 */
 extern const CFStringRef kDRDeviceMediaTypeUnknown					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

@@ -53,7 +53,7 @@ class IOBlockStorageServices : public IOBlockStorageDevice
 	
 private:
 	
-	bool							fMediaChanged;	/* DEPRECATED */
+	bool							fMediaChanged;  /* DEPRECATED */
 	bool							fMediaPresent;
 	
 protected:
@@ -83,6 +83,11 @@ public:
 											UInt32					nblks,
 											IOStorageCompletion		completion );
 	
+    virtual IOReturn	doAsyncReadWrite(	IOMemoryDescriptor *	buffer,
+                                            UInt64 					block,
+                                            UInt64 					nblks,
+                                            IOStorageCompletion 	completion);
+
     virtual IOReturn	doEjectMedia ( void );
 	
     virtual IOReturn	doFormatMedia ( UInt64 byteCapacity );

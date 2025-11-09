@@ -123,11 +123,22 @@ struct tcphdr {
 
 /*
  * Default maximum segment size for TCP.
- * With an IP MSS of 576, this is 536,
+ * With an IP MTU of 576, this is 536,
  * but 512 is probably more convenient.
  * This should be defined as MIN(512, IP_MSS - sizeof (struct tcpiphdr)).
  */
 #define	TCP_MSS	512
+
+/*
+ * TCP_MINMSS is defined to be 216 which is fine for the smallest
+ * link MTU (256 bytes, SLIP interface) in the Internet.
+ * However it is very unlikely to come across such low MTU interfaces
+ * these days (anno dato 2004).
+ * Probably it can be set to 512 without ill effects. But we play safe.
+ * See tcp_subr.c tcp_minmss SYSCTL declaration for more comments.
+ * Setting this to "0" disables the minmss check.
+ */
+#define	TCP_MINMSS 216
 
 /*
  * Default maximum segment size for TCP6.

@@ -142,6 +142,17 @@ extern NSString *WebPreferencesChangedNotification;
 - (void)setMinimumFontSize:(int)size;
 
 /*!
+    @method minimumLogicalFontSize
+*/
+- (int)minimumLogicalFontSize;
+
+/*!
+    @method setMinimumLogicalFontSize:
+    @param size
+*/
+- (void)setMinimumLogicalFontSize:(int)size;
+
+/*!
     @method defaultTextEncodingName
 */
 - (NSString *)defaultTextEncodingName;
@@ -265,5 +276,44 @@ extern NSString *WebPreferencesChangedNotification;
     @result The value of the autosave preferences flag.
 */
 - (BOOL)autosaves;
+
+/*!
+    @method setShouldPrintBackgrounds:
+    @param flag
+*/
+- (void)setShouldPrintBackgrounds:(BOOL)flag;
+
+/*!
+    @method shouldPrintBackgrounds
+    @result The value of the shouldPrintBackgrounds preferences flag
+*/
+- (BOOL)shouldPrintBackgrounds;
+
+/*!
+    @method setPrivateBrowsingEnabled:
+    @param flag 
+    @abstract If private browsing is enabled, WebKit will not store information
+    about sites the user visits.
+ */
+- (void)setPrivateBrowsingEnabled:(BOOL)flag;
+
+/*!
+    @method privateBrowsingEnabled
+ */
+- (BOOL)privateBrowsingEnabled;
+
+/*!
+    @method setTabsToLinks:
+    @param flag 
+    @abstract If tabsToLinks is YES, the tab key will focus links and form controls. 
+    The option key temporarily reverses this preference.
+*/
+- (void)setTabsToLinks:(BOOL)flag;
+
+/*!
+    @method tabsToLinks
+*/
+- (BOOL)tabsToLinks;
+
 
 @end

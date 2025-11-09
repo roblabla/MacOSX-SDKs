@@ -92,8 +92,14 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_SAMPLE_BUFFERS_ARB    55  /* number of multi sample buffers               */
 #define AGL_SAMPLES_ARB	          56  /* number of samples per multi sample buffer    */
 #define AGL_AUX_DEPTH_STENCIL	  57  /* independent depth and/or stencil buffers for the aux buffer */
+#define AGL_COLOR_FLOAT     	  58  /* color buffers store floating point pixels    */
+#define AGL_MULTISAMPLE     	  59  /* choose multisample                           */
+#define AGL_SUPERSAMPLE     	  60  /* choose supersample                           */
+#define AGL_SAMPLE_ALPHA     	  61  /* request alpha filtering                      */
 
-/* Renderer management */
+/*
+** Renderer management
+*/
 #define AGL_RENDERER_ID           70  /* request renderer by ID                       */
 #define AGL_SINGLE_RENDERER       71  /* choose a single renderer for all screens     */
 #define AGL_NO_RECOVERY           72  /* disable all failure recovery systems         */
@@ -103,13 +109,13 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_BACKING_STORE         76  /* back buffer contents are valid after swap    */
 #define AGL_MP_SAFE               78  /* renderer is multi-processor safe             */
 
-/*
-** Only for aglDescribePixelFormat
-*/
-#define AGL_WINDOW                80  /* can be used to render to an onscreen window  */
+#define AGL_WINDOW                80  /* can be used to render to a window            */
 #define AGL_MULTISCREEN           81  /* single window can span multiple screens      */
 #define AGL_VIRTUAL_SCREEN        82  /* virtual screen number                        */
 #define AGL_COMPLIANT             83  /* renderer is opengl compliant                 */
+
+#define AGL_PBUFFER               90  /* can be used to render to a pbuffer           */
+#define AGL_REMOTE_PBUFFER        91, /* can be used to render offline to a pbuffer	  */
 
 /*
 ** Property names for aglDescribeRenderer
@@ -124,6 +130,7 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 /* #define AGL_WINDOW             80 */
 /* #define AGL_MULTISCREEN        81 */
 /* #define AGL_COMPLIANT          83 */
+/* #define AGL_PBUFFER            90 */
 #define AGL_BUFFER_MODES         100
 #define AGL_MIN_LEVEL            101
 #define AGL_MAX_LEVEL            102
@@ -134,6 +141,7 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_MAX_AUX_BUFFERS      107
 #define AGL_VIDEO_MEMORY         120
 #define AGL_TEXTURE_MEMORY       121
+#define AGL_RENDERER_COUNT       128
 
 /*
 ** Integer parameter names
@@ -212,8 +220,14 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_ARGB12121212_BIT     0x00200000  /* 48 argb bit/pixel,   A=47:36, R=35:24, G=23:12, B=11:0 */
 #define AGL_RGB161616_BIT        0x00400000  /* 64 rgb bit/pixel,    R=47:32, G=31:16, B=15:0          */
 #define AGL_ARGB16161616_BIT     0x00800000  /* 64 argb bit/pixel,   A=63:48, R=47:32, G=31:16, B=15:0 */
-#define AGL_INDEX8_BIT           0x20000000  /* 8 bit color look up table                              */
-#define AGL_INDEX16_BIT          0x40000000  /* 16 bit color look up table                             */
+#define AGL_INDEX8_BIT           0x20000000  /* 8 bit color look up table (deprecated)                 */
+#define AGL_INDEX16_BIT          0x40000000  /* 16 bit color look up table (deprecated)				   */
+#define AGL_RGBFLOAT64_BIT       0x01000000  /* 64 rgb bit/pixel,    half float                        */
+#define AGL_RGBAFLOAT64_BIT      0x02000000  /* 64 argb bit/pixel,   half float                        */
+#define AGL_RGBFLOAT128_BIT      0x04000000  /* 128 rgb bit/pixel,   ieee float                        */
+#define AGL_RGBAFLOAT128_BIT     0x08000000  /* 128 argb bit/pixel,  ieee float                        */
+#define AGL_RGBFLOAT256_BIT      0x10000000  /* 256 rgb bit/pixel,   ieee double                       */
+#define AGL_RGBAFLOAT256_BIT     0x20000000  /* 256 argb bit/pixel,  ieee double                       */
 
 /*
 ** Error return values from aglGetError.
@@ -237,6 +251,7 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_BAD_POINTER          10014 /* invalid pointer                 */
 #define AGL_BAD_MODULE           10015 /* invalid code module             */
 #define AGL_BAD_ALLOC            10016 /* memory allocation failure       */
+#define AGL_BAD_CONNECTION       10017 /* invalid CoreGraphics connection */
 
 /************************************************************************/
 

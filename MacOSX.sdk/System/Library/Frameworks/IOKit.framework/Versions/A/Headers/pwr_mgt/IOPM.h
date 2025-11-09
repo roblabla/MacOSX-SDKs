@@ -296,6 +296,7 @@ enum {
     kIOBatteryChargerConnect	= (1 << 0)
 };
 
+
 // Private power management message indicating battery data has changed
 // Indicates new data resides in the IORegistry
 #define kIOPMMessageBatteryStatusHasChanged         iokit_family_msg(sub_iokit_pmu, 0x100)

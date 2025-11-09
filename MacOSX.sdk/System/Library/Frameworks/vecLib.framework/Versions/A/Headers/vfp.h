@@ -3,7 +3,7 @@
  
      Contains:   MathLib style functions for vectors
  
-     Version:    vecLib-151~21
+     Version:    vecLib-153.2~2
  
      Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  

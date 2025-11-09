@@ -237,6 +237,8 @@
 #define parm	0x01000000
 #define sten	7
 #define stenm	0x01000000
+#define dnap	7
+#define dnapm	0x01000000
 #define doze	8
 #define dozem	0x00800000
 #define nap		9
@@ -268,6 +270,8 @@
 #define dcfim	0x00000400
 #define spd		22
 #define spdm	0x00000200
+#define hdice	23
+#define hdicem	0x00000100
 #define sge		24
 #define sgem	0x00000080
 #define dcfa	25
@@ -290,6 +294,10 @@
 ;	hid1 bits
 #define hid1pcem	0xF8000000
 #define hid1prem	0x06000000
+#define hid1dfs0	8
+#define hid1dfs0m	0x00800000
+#define hid1dfs1	9
+#define hid1dfs1m	0x00400000
 #define hid1pi0		14
 #define hid1pi0m	0x00020000
 #define hid1FCPErr	14
@@ -440,12 +448,24 @@
 #define CoreSolid 2
 #define CorePulse 3
 
+;	L2 FIR
+#define l2FIR 0x0400
+#define l2FIRrst 0x0410
+
+;	Bus FIR
+#define busFIR 0x0A00
+#define busFIRrst 0x0A10
+
 ;	GUS Mode Register
 #define GUSModeReg 0x0430
 #define GUSMdmapen 0x00008000
 #define GUSMstgtdis 0x00000080
 #define GUSMstgttim 0x00000038
 #define GUSMstgttoff 0x00000004
+
+; PowerTune
+#define PowerTuneControlReg	0x0AA001
+#define PowerTuneStatusReg	0x408001
 
 ;	HID4
 #define hid4RMCI 23

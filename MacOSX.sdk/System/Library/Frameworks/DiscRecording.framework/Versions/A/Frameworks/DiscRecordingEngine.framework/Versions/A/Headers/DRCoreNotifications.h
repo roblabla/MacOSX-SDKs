@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header 	
+	@abstract		Disc Recording notification interfaces.
+
+	@discussion		
+*/
+
 #ifndef _H_DRCoreNotifications
 #define _H_DRCoreNotifications
 

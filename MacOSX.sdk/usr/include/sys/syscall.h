@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -326,14 +326,14 @@
 
 #define SYS_audit		350	/* submit user space audit records */
 #define SYS_auditon		351	/* audit subsystem control */
-#define SYS_auditsvc		352	/* audit file control */
+					/* 352 is unused; used to be auditsvc */
 #define SYS_getauid		353
 #define SYS_setauid		354
 #define SYS_getaudit		355
 #define SYS_setaudit		356
 #define SYS_getaudit_addr	357
 #define SYS_setaudit_addr	358
-#define SYS_auditctl		359	/* audit control */
+#define SYS_auditctl		359	/* audit file control */
 
 #define SYS_kqueue    362
 #define SYS_kevent    363

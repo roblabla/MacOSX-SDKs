@@ -259,7 +259,7 @@ IOThread IOCreateThread(IOThreadFunc function, void *argument);
     @abstract Terminate exceution of current thread.
     @discussion This function destroys the currently running thread, and does not return. */
 
-volatile void IOExitThread();
+void IOExitThread(void) __dead2;
 
 /*! @function IOSleep
     @abstract Sleep the calling thread for a number of milliseconds.

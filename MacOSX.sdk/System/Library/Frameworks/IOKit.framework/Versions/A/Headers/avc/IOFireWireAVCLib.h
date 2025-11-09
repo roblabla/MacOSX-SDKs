@@ -42,6 +42,11 @@
 #define kIOFireWireAVCLibUnitInterfaceID CFUUIDGetConstantUUIDWithBytes(NULL, 	\
 0xFC, 0x65, 0xC0, 0x30, 0xD4, 0x98, 0x11, 0xD5, 0x87, 0x8D, 0x00, 0x03, 0x93, 0x4B, 0x81, 0xA0)
 
+// kIOFireWireAVCLibUnitInterfaceID_v2 UUID - No Throttling of AVC Commands
+/* 85B5E954-0AEF-11D8-8D19-000393914ABA */
+#define kIOFireWireAVCLibUnitInterfaceID_v2  CFUUIDGetConstantUUIDWithBytes(NULL, 	\
+0x85, 0xB5, 0xE9, 0x54, 0x0A, 0xEF, 0x11, 0xD8, 0x8D, 0x19, 0x00, 0x03, 0x93, 0x91, 0x4A, 0xBA)
+
 // Protocol type UUID
 /* B54BC8F8-D53B-11D5-A1A1-0003934B81A0 */
 #define kIOFireWireAVCLibProtocolTypeID CFUUIDGetConstantUUIDWithBytes(NULL,		\

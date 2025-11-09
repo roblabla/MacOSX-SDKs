@@ -24,9 +24,41 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBInterface.h,v 1.19 2003/08/20 19:41:40 nano Exp $
- *
  *	$Log: IOUSBInterface.h,v $
+ *	Revision 1.19.36.3  2004/10/25 15:38:06  nano
+ *	Call close with gate held if indicated by property.
+ *	
+ *	Revision 1.19.36.2.8.1  2004/10/20 15:27:38  nano
+ *	Potential submissions to Sandbox -- create their own branch
+ *	
+ *	Bug #:
+ *	<rdar://problem/3826068> USB devices on a P30 attached to Q88 do not function after restart
+ *	<rdar://problem/3779852> Q16B EVT Build run in fail Checkconfig Bluetooth *2
+ *	<rdar://problem/3816739>IOUSBFamily needs to support polling interval for High Speed devices
+ *	<rdar://problem/3816743> Low latency for hi-speed API do not fill frTimeStamp.hi and low in completion.
+ *	<rdar://problem/3816749> Low latency for hi-speed API incorrectly treats buffer striding across mem-page
+ *	
+ *	Submitted by:
+ *	Reviewed by:
+ *	
+ *	Revision 1.19.36.1.22.1  2004/10/19 16:49:50  nano
+ *	rdar://3779852:  Call interface close with the gate held to avoid a deadlock
+ *	
+ *	Revision 1.19.36.1  2003/12/21 22:42:46  nano
+ *	Merge branch:  New methods to implement fix for rdar://3479244.
+ *
+ *	Revision 1.21.44.1  2004/08/26 19:32:31  nano
+ *	IOUSBUserClient needs to call ClosePipes()
+ *	
+ *	Revision 1.21  2004/02/03 22:09:49  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.20  2003/10/14 22:05:30  nano
+ *	New methods to support calling super::open thru runAction.
+ *	
+ *	Revision 1.19.4.1  2003/08/22 21:13:12  nano
+ *	Add the gate to IOUSBInterface and call super::open through it
+ *	
  *	Revision 1.19  2003/08/20 19:41:40  nano
  *	
  *	Bug #:
@@ -62,6 +94,8 @@
 */
 class IOUSBInterface : public IOUSBNub
 {
+    friend class IOUSBInterfaceUserClient;
+    
     OSDeclareDefaultStructors(IOUSBInterface)
 
 protected:
@@ -79,7 +113,10 @@ protected:
     UInt8				_bInterfaceProtocol;
     UInt8				_iInterface;
 
-    struct ExpansionData { /* */ };
+    struct ExpansionData {
+        IOCommandGate	*		_gate;
+        IOWorkLoop	*		_workLoop;
+    };
     ExpansionData * _expansionData;
 
     // private methods
@@ -89,6 +126,9 @@ protected:
 
 public:
     static IOUSBInterface *withDescriptors(const IOUSBConfigurationDescriptor *cfDesc, const IOUSBInterfaceDescriptor *ifDesc);
+    static IOReturn	CallSuperOpen(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+    static IOReturn     CallSuperClose(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+    
     virtual bool 	init(	const IOUSBConfigurationDescriptor *cfDesc,
                                 const IOUSBInterfaceDescriptor *ifDesc);
     virtual bool 	attach(IOService *provider);
@@ -96,6 +136,7 @@ public:
     virtual bool 	finalize(IOOptionBits options);
     virtual void 	stop(IOService *  provider);
     virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
+    virtual void 	free();	
 
     /*!
         @function FindNextAltInterface
@@ -144,9 +185,12 @@ public:
                                 void *		   arg = 0 );
 
     virtual bool open( 	IOService *	   forClient,
-                                IOOptionBits	   options = 0,
-                                void *		   arg = 0 );
-
+			IOOptionBits	   options = 0,
+			void *		   arg = 0 );
+    
+    virtual void close( 	IOService *	   forClient,
+			IOOptionBits	   options = 0  );
+    
     virtual void handleClose(  	IOService *	   forClient,
                                 IOOptionBits	   options = 0 );
 

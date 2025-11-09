@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2002-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,21 +19,5 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-#include <stdint.h>
-
-#include <CHUD/chudCtrl.h>
-#include <CHUD/chudHotkeys.h>
-#include <CHUD/chudInfo.h>
-#include <CHUD/chudPMCs.h>
-#include <CHUD/chudPMI.h>
-#include <CHUD/chudRemote.h>
-#include <CHUD/chudSample.h>
-#include <CHUD/chudSPRs.h>
-#include <CHUD/chudTimeBase.h>
-#include <CHUD/chudTimer.h>
-#include <CHUD/chudUtil.h>
-
-/*
- * chudShortcuts.h no longer included here due to its dependence on CoreFoundation headers
- */
-//#include <CHUD/chudShortcuts.h>
+ 
+#include <CHUD/CHUDCore.h>

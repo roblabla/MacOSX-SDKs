@@ -141,6 +141,9 @@ public:
 protected:
 	
 	virtual IOFireWireNubAux * createAuxiliary( void );
+
+public:
+	void setMaxSpeed( IOFWSpeed speed );
 	    
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 0);

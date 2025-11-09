@@ -14,6 +14,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*!	@header 	
+	@abstract		Interface to folder objects used in filesystem creation.
+
+	@discussion		
+*/
+
 #ifndef _H_DRContentFolder
 #define _H_DRContentFolder
 
@@ -54,7 +61,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					folder on disk.  The content of the folder object corresponds to the
 					actual on-disk content of the folder.  Items cannot be programatically added
 					to or removed from a real folder object without making it virtual first --
-					see <tt>DRFolderConvertRealToVirtual</tt>.  
+					see @link DRFolderConvertRealToVirtual DRFolderConvertRealToVirtual @/link.  
 	@param	fsRef				A file-system reference to an on-disk folder.
 	@result			Returns a reference to the newly-created folder object, or <tt>NULL</tt>.
 */
@@ -71,7 +78,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					folder on disk.  The contents of the folder object corresponds to the
 					actual on-disk contents of the folder.  Items cannot be programatically added
 					to or removed from a real folder object without making it virtual first --
-					see <tt>DRFolderConvertRealToVirtual</tt>.    
+					see @link DRFolderConvertRealToVirtual DRFolderConvertRealToVirtual @/link.    
 	@param	urlRef	A URL reference to an on-disk folder.
 	@result			Returns a reference to the newly-created folder object, or <tt>NULL</tt>.
 */
@@ -90,8 +97,8 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 						using Disc Recording's 'content' functions -- see the documentation for 
 						DRContentObject.h.
 	@param	baseName	The base name to assign to the new virtual folder. For information on base
-						names and how Disc Recording works with them, see <tt>DRFSObjectSetBaseName</tt>
-						and <tt>DRFSObjectSetSpecificName</tt>.
+						names and how Disc Recording works with them, see @link //apple_ref/c/func/DRFSObjectSetBaseName DRFSObjectSetBaseName @/link
+						and @link //apple_ref/c/func/DRFSObjectSetSpecificName DRFSObjectSetSpecificName @/link.
 	@result				Returns a reference to the newly-created virtual folder object, or <tt>NULL</tt>.
 */
 extern DRFolderRef

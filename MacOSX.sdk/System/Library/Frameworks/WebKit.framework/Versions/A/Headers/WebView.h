@@ -7,38 +7,44 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DOMCSSStyleDeclaration;
+@class DOMDocument;
+@class DOMElement;
+@class DOMNode;
+@class DOMRange;
+
+@class WebArchive;
 @class WebBackForwardList;
-@class WebHistoryItem;
-@class WebViewPrivate;
 @class WebDataSource;
 @class WebFrame;
-@class WebPreferences;
 @class WebFrameView;
+@class WebHistoryItem;
+@class WebPreferences;
+@class WebScriptObject;
+@class WebViewPrivate;
 
-
-// These strings are keys into the element dictionary provided in
-// the WebContextMenuDelegate's contextMenuItemsForElement and the WebwebViewPolicyDelegate's clickPolicyForElement.
-
+// Element dictionary keys
+extern NSString *WebElementDOMNodeKey;          // DOMNode of the element
 extern NSString *WebElementFrameKey;		// WebFrame of the element
 extern NSString *WebElementImageAltStringKey;	// NSString of the ALT attribute of the image element
 extern NSString *WebElementImageKey;		// NSImage of the image element
 extern NSString *WebElementImageRectKey;	// NSValue of an NSRect, the rect of the image element
 extern NSString *WebElementImageURLKey;		// NSURL of the image element
-extern NSString *WebElementIsSelectedKey; 	// NSNumber of BOOL indicating whether the element is selected text or not 
+extern NSString *WebElementIsSelectedKey; 	// NSNumber of BOOL indicating whether the element is selected or not 
 extern NSString *WebElementLinkURLKey;		// NSURL of the link if the element is within an anchor
 extern NSString *WebElementLinkTargetFrameKey;	// NSString of the target of the anchor
 extern NSString *WebElementLinkTitleKey;	// NSString of the title of the anchor
 extern NSString *WebElementLinkLabelKey;	// NSString of the text within the anchor
 
 /*
- @discussion Notifications sent by WebView to mark the progress of loads.
- @constant WebViewProgressStartedNotification Posted whenever a load begins in the WebView, including
- a load that is initiated in a subframe.  After receiving this notification zero or more
- WebViewProgressEstimateChangedNotifications will be sent.  The userInfo will be nil.
- @constant WebViewProgressEstimateChangedNotification Posted whenever the value of
- estimatedProgress changes.  The userInfo will be nil.
- @constant WebViewProgressFinishedNotification Posted when the load for a WebView has finished.
- The userInfo will be nil.
+    @discussion Notifications sent by WebView to mark the progress of loads.
+    @constant WebViewProgressStartedNotification Posted whenever a load begins in the WebView, including
+    a load that is initiated in a subframe.  After receiving this notification zero or more
+    WebViewProgressEstimateChangedNotifications will be sent.  The userInfo will be nil.
+    @constant WebViewProgressEstimateChangedNotification Posted whenever the value of
+    estimatedProgress changes.  The userInfo will be nil.
+    @constant WebViewProgressFinishedNotification Posted when the load for a WebView has finished.
+    The userInfo will be nil.
 */
 extern NSString *WebViewProgressStartedNotification;
 extern NSString *WebViewProgressEstimateChangedNotification;
@@ -100,6 +106,42 @@ extern NSString *WebViewProgressFinishedNotification;
      @result YES if the MIMEtype in an HTML type.
 */
 + (BOOL)canShowMIMETypeAsHTML:(NSString *)MIMEType;
+
+/*!
+    @method MIMETypesShownAsHTML
+    @result Returns an array of NSStrings that describe the MIME types
+    WebKit will attempt to render as HTML.
+*/
++ (NSArray *)MIMETypesShownAsHTML;
+
+/*!
+    @method setMIMETypesShownAsHTML:
+    @discussion Sets the array of NSString MIME types that WebKit will
+    attempt to render as HTML.  Typically you will retrieve the built-in
+    array using MIMETypesShownAsHTML and add additional MIME types to that
+    array.
+*/
++ (void)setMIMETypesShownAsHTML:(NSArray *)MIMETypes;
+
+/*!
+    @method URLFromPasteboard:
+    @abstract Returns a URL from a pasteboard
+    @param pasteboard The pasteboard with a URL
+    @result A URL if the pasteboard has one. Nil if it does not.
+    @discussion This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types
+    including NSURLPboardType to find a URL on the pasteboard.
+*/
++ (NSURL *)URLFromPasteboard:(NSPasteboard *)pasteboard;
+
+/*!
+    @method URLTitleFromPasteboard:
+    @abstract Returns a URL title from a pasteboard
+    @param pasteboard The pasteboard with a URL title
+    @result A URL title if the pasteboard has one. Nil if it does not.
+    @discussion This method returns a title that refers a URL on the pasteboard. An example of this is the link label
+    which is the text inside the anchor tag.
+*/
++ (NSString *)URLTitleFromPasteboard:(NSPasteboard *)pasteboard;
 
 /*!
     @method initWithFrame:frameName:groupName:
@@ -309,11 +351,34 @@ extern NSString *WebViewProgressFinishedNotification;
 - (NSString *)customTextEncodingName;
 
 /*!
+    @method setMediaStyle:
+    @discussion Set the media style for the WebView.  The mediaStyle will override the normal value
+    of the CSS media property.  Setting the value to nil will restore the normal value.
+    @param mediaStyle The value to use for the CSS media property.
+*/
+- (void)setMediaStyle:(NSString *)mediaStyle;
+
+/*!
+    @method mediaStyle
+    @result mediaStyle The value to use for the CSS media property, as set by setMediaStyle:.  It
+    will be nil unless set by that method.
+*/
+- (NSString *)mediaStyle;
+
+/*!
     @method stringByEvaluatingJavaScriptFromString:
     @param script The text of the JavaScript.
     @result The result of the script, converted to a string, or nil for failure.
 */
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script;
+
+/*!
+    @method windowScriptObject
+    @discussion windowScriptObject return a WebScriptObject that represents the
+    window object from the script environment.
+    @result Returns the window object from the script environment.
+*/
+- (WebScriptObject *)windowScriptObject;
 
 /*!
     @method setPreferences:
@@ -412,6 +477,57 @@ extern NSString *WebViewProgressFinishedNotification;
 */
 - (double)estimatedProgress;
 
+/*!
+    @method elementAtPoint:
+    @param point A point in the coordinates of the WebView
+    @result An element dictionary describing the point
+*/
+- (NSDictionary *)elementAtPoint:(NSPoint)point;
+
+/*!
+    @method pasteboardTypesForSelection
+    @abstract Returns the pasteboard types that WebView can use for the current selection
+*/
+- (NSArray *)pasteboardTypesForSelection;
+
+/*!
+    @method writeSelectionWithPasteboardTypes:toPasteboard:
+    @abstract Writes the current selection to the pasteboard
+    @param types The types that WebView will write to the pasteboard
+    @param pasteboard The pasteboard to write to
+*/
+- (void)writeSelectionWithPasteboardTypes:(NSArray *)types toPasteboard:(NSPasteboard *)pasteboard;
+
+/*!
+    @method pasteboardTypesForElement:
+    @abstract Returns the pasteboard types that WebView can use for an element
+    @param element The element
+*/
+- (NSArray *)pasteboardTypesForElement:(NSDictionary *)element;
+
+/*!
+    @method writeElement:withPasteboardTypes:toPasteboard:
+    @abstract Writes an element to the pasteboard
+    @param element The element to write to the pasteboard
+    @param types The types that WebView will write to the pasteboard
+    @param pasteboard The pasteboard to write to
+*/
+- (void)writeElement:(NSDictionary *)element withPasteboardTypes:(NSArray *)types toPasteboard:(NSPasteboard *)pasteboard;
+
+/*!
+    @method moveDragCaretToPoint:
+    @param point A point in the coordinates of the WebView
+    @discussion This method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll
+    to make the new position of the drag caret visible.
+*/
+- (void)moveDragCaretToPoint:(NSPoint)point;
+
+/*!
+    @method removeDragCaret
+    @abstract Removes the drag caret from the WebView
+*/
+- (void)removeDragCaret;
+
 @end
 
 
@@ -427,4 +543,145 @@ extern NSString *WebViewProgressFinishedNotification;
 - (IBAction)makeTextLarger:(id)sender;
 - (BOOL)canMakeTextSmaller;
 - (IBAction)makeTextSmaller:(id)sender;
+@end
+
+
+// WebView editing support
+
+extern NSString * const WebViewDidBeginEditingNotification;
+extern NSString * const WebViewDidChangeNotification;
+extern NSString * const WebViewDidEndEditingNotification;
+extern NSString * const WebViewDidChangeTypingStyleNotification;
+extern NSString * const WebViewDidChangeSelectionNotification;
+
+@interface WebView (WebViewCSS)
+- (DOMCSSStyleDeclaration *)computedStyleForElement:(DOMElement *)element pseudoElement:(NSString *)pseudoElement;
+@end
+
+@interface WebView (WebViewEditing)
+- (DOMRange *)editableDOMRangeForPoint:(NSPoint)point;
+- (void)setSelectedDOMRange:(DOMRange *)range affinity:(NSSelectionAffinity)selectionAffinity;
+- (DOMRange *)selectedDOMRange;
+- (NSSelectionAffinity)selectionAffinity;
+- (void)setEditable:(BOOL)flag;
+- (BOOL)isEditable;
+- (void)setTypingStyle:(DOMCSSStyleDeclaration *)style;
+- (DOMCSSStyleDeclaration *)typingStyle;
+- (void)setSmartInsertDeleteEnabled:(BOOL)flag;
+- (BOOL)smartInsertDeleteEnabled;
+- (void)setContinuousSpellCheckingEnabled:(BOOL)flag;
+- (BOOL)isContinuousSpellCheckingEnabled;
+- (int)spellCheckerDocumentTag;
+- (NSUndoManager *)undoManager;
+- (void)setEditingDelegate:(id)delegate;
+- (id)editingDelegate;
+- (DOMCSSStyleDeclaration *)styleDeclarationWithText:(NSString *)text;
+@end
+
+@interface WebView (WebViewUndoableEditing)
+- (void)replaceSelectionWithNode:(DOMNode *)node; 
+- (void)replaceSelectionWithText:(NSString *)text;    
+- (void)replaceSelectionWithMarkupString:(NSString *)markupString;
+- (void)replaceSelectionWithArchive:(WebArchive *)archive;
+- (void)deleteSelection;    
+- (void)applyStyle:(DOMCSSStyleDeclaration *)style;
+@end
+
+@interface WebView (WebViewEditingActions)
+
+- (void)copy:(id)sender;
+- (void)cut:(id)sender;
+- (void)paste:(id)sender;
+- (void)copyFont:(id)sender;
+- (void)pasteFont:(id)sender;
+- (void)delete:(id)sender;
+- (void)pasteAsPlainText:(id)sender;
+- (void)pasteAsRichText:(id)sender;
+
+- (void)changeFont:(id)sender;
+- (void)changeAttributes:(id)sender;
+- (void)changeDocumentBackgroundColor:(id)sender;
+- (void)changeColor:(id)sender;
+
+- (void)alignCenter:(id)sender;
+- (void)alignJustified:(id)sender;
+- (void)alignLeft:(id)sender;
+- (void)alignRight:(id)sender;
+
+- (void)checkSpelling:(id)sender;
+- (void)showGuessPanel:(id)sender;
+- (void)performFindPanelAction:(id)sender;
+
+- (void)startSpeaking:(id)sender;
+- (void)stopSpeaking:(id)sender;
+
+/* 
+The following methods are declared in NSResponder.h.
+WebView overrides each method in this list, providing
+a custom implementation for each.
+    
+- (void)capitalizeWord:(id)sender;
+- (void)centerSelectionInVisibleArea:(id)sender;
+- (void)changeCaseOfLetter:(id)sender;
+- (void)complete:(id)sender;
+- (void)deleteBackward:(id)sender;
+- (void)deleteBackwardByDecomposingPreviousCharacter:(id)sender;
+- (void)deleteForward:(id)sender;
+- (void)deleteToBeginningOfLine:(id)sender;
+- (void)deleteToBeginningOfParagraph:(id)sender;
+- (void)deleteToEndOfLine:(id)sender;
+- (void)deleteToEndOfParagraph:(id)sender;
+- (void)deleteWordBackward:(id)sender;
+- (void)deleteWordForward:(id)sender;
+- (void)indent:(id)sender;
+- (void)insertBacktab:(id)sender;
+- (void)insertNewline:(id)sender;
+- (void)insertParagraphSeparator:(id)sender;
+- (void)insertTab:(id)sender;
+- (void)lowercaseWord:(id)sender;
+- (void)moveBackward:(id)sender;
+- (void)moveBackwardAndModifySelection:(id)sender;
+- (void)moveDown:(id)sender;
+- (void)moveDownAndModifySelection:(id)sender;
+- (void)moveForward:(id)sender;
+- (void)moveForwardAndModifySelection:(id)sender;
+- (void)moveLeft:(id)sender;
+- (void)moveLeftAndModifySelection:(id)sender;
+- (void)moveRight:(id)sender;
+- (void)moveRightAndModifySelection:(id)sender;
+- (void)moveToBeginningOfDocument:(id)sender;
+- (void)moveToBeginningOfDocumentAndModifySelection:(id)sender;
+- (void)moveToBeginningOfLine:(id)sender;
+- (void)moveToBeginningOfLineAndModifySelection:(id)sender;
+- (void)moveToBeginningOfParagraph:(id)sender;
+- (void)moveToBeginningOfParagraphAndModifySelection:(id)sender;
+- (void)moveToEndOfDocument:(id)sender;
+- (void)moveToEndOfDocumentAndModifySelection:(id)sender;
+- (void)moveToEndOfLine:(id)sender;
+- (void)moveToEndOfLineAndModifySelection:(id)sender;
+- (void)moveToEndOfParagraph:(id)sender;
+- (void)moveToEndOfParagraphAndModifySelection:(id)sender;
+- (void)moveUp:(id)sender;
+- (void)moveUpAndModifySelection:(id)sender;
+- (void)moveWordBackward:(id)sender;
+- (void)moveWordBackwardAndModifySelection:(id)sender;
+- (void)moveWordForward:(id)sender;
+- (void)moveWordForwardAndModifySelection:(id)sender;
+- (void)moveWordLeft:(id)sender;
+- (void)moveWordLeftAndModifySelection:(id)sender;
+- (void)moveWordRight:(id)sender;
+- (void)moveWordRightAndModifySelection:(id)sender;
+- (void)pageDown:(id)sender;
+- (void)pageUp:(id)sender;
+- (void)scrollLineDown:(id)sender;
+- (void)scrollLineUp:(id)sender;
+- (void)scrollPageDown:(id)sender;
+- (void)scrollPageUp:(id)sender;
+- (void)selectAll:(id)sender;
+- (void)selectLine:(id)sender;
+- (void)selectParagraph:(id)sender;
+- (void)selectWord:(id)sender;
+- (void)uppercaseWord:(id)sender;
+*/
+ 
 @end

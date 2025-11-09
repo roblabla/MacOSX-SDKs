@@ -123,6 +123,7 @@ public:
 	
 	virtual IOReturn	sendSMARTCommand ( IOATACommand * command );
 	
+	
 	// Binary Compatibility reserved method space
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDevice, 2 );
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDevice, 3 );

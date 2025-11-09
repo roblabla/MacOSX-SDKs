@@ -14,16 +14,43 @@
 #ifndef _AppleFWAudioUserClientCommon_H
 #define _AppleFWAudioUserClientCommon_H
 
-#define kMIDIInputClientBufferSize 		(4 * 32)
-#define kMIDIOutputClientBufferSize 	(4 * 32)
-#define kMIDIInputRingBufferSize 		(1 * 1024)
-#define kMIDIOutputRingBufferSize		(1 * 1024) 
+#define kNumInputClientBuffers			1
+#define kMIDIInputClientBufferSize 		(2 * 32)
+#define kMIDIInputRingBufferSize 		(8 * kMIDIInputClientBufferSize * kNumInputClientBuffers )
+
+#define kNumOutputClientBuffers			1
+#define kMIDIOutputClientBufferSize 	(2 * 32)
+#define kMIDIOutputRingBufferSize		(8 * kMIDIOutputClientBufferSize *  kNumOutputClientBuffers)
+
+#define kFWAStreamIdentSize 			(36)
+#define kFWAStreamEndpointIndentifier "kFWAudioStreamEndpointIdentifier"
+
+enum {
+	kCurrentEraseHeadMeterArrayOffset = 0,
+	kNumSamplesFramesInBufferMeterArrayOffset = 1,
+	kCurrentInputDMASampleFrameMeterArrayOffset = 2,
+	kCurrentOutputDMASampleFrameMeterArrayOffset = 3,
+	kGetBadHeaderCountMeterArrayOffset = 4,
+	kGetFixedHeaderCountMeterArrayOffset = 5,
+	kGetBigPacketCountMeterArrayOffset = 6,
+	kLastTimeStampMeterArrayOffset = 7,
+};
+
 
 enum 
 {
 	kMIDIStreamOut = 0,
 	kMIDIStreamIn = 1
 };
+
+enum FWAStreamDirection
+{
+	kFWAStreamOut		= 0x00000000UL,
+	kFWAStreamIn		= 0x00000001UL
+};
+
+typedef enum FWAStreamDirection FWAStreamDirection;
+
 
 typedef struct FWAMIDIReadBuffer
 {
@@ -32,19 +59,76 @@ typedef struct FWAMIDIReadBuffer
 
 } FWAMIDIReadBuf;
 
+enum FWAudioType
+{
+	kIEC60958		= 0x00,
+	kRawAudio		= 0x40,
+	kMIDI			= 0x80
+};
+typedef enum FWAudioType FWAudioType, *FWAudioTypePtr;
 
-const unsigned long kFWADeviceStatusCurrentVersion = 0x00010000;
+enum FWAMIDIDataInfo 
+{
+    kFWAMIDIPlugName		= 'mnam',
+	kFWAMIDIPlugIdent		= 'midn',
+	kFWAMIDIGetIndexedPlug 	= 0xFFFFFFFF,
+};
+
+enum FWAStreamState 
+{
+    kFWAStreamStopped	= 0,
+    kFWAStreamRunning	= 1,
+    kFWAStreamPaused	= 2,
+    kFWAStreamResumed	= 3
+};
+
+typedef enum FWAStreamState FWAStreamState;
+typedef void (*FWAStreamNotificationProc)( unsigned long isochStreamRef, void*  refCon);
+
+
+// update this with the version of the driver in xxxx.xxxx
+const unsigned long kFWADeviceStatusCurrentVersion = 0x00010900;
 
 typedef struct FWADeviceStatus
 {
-	unsigned long				version;	
-	unsigned long				sampleCounter;
-	unsigned long				inputSampleFrame;
-	unsigned long				outputSampleFrame;
-	unsigned long				inputClipSampleFrame;
-	unsigned long				outputClipSampleFrame;
-	unsigned long 			meterData[1];	//numInputChannels + numInputChannels
+	unsigned long	version;	
+	unsigned long	sampleCounter;
+	unsigned long	inputSampleFrame;
+	unsigned long	outputSampleFrame;
+	unsigned long	inputClipSampleFrame;
+	unsigned long	outputClipSampleFrame;
+	unsigned long	meterData[1];	//numInputChannels + numInputChannels
 } FWADeviceStatusRec, *FWADeviceStatusRecPtr;
+
+typedef struct FWACreateStreamRec
+{
+	unsigned long 	owningIsochStreamRef;
+	unsigned long 	channelNumber;
+	unsigned long 	direction;
+	unsigned long 	numAudioChannels;
+    char			streamName[64];
+	unsigned char	streamIdent[kFWAStreamIdentSize];
+	bool			streamIdentIsNull;
+	
+} FWACreateStreamRec, *FWACreateStreamRecPtr;
+
+typedef struct FWACreateMIDIPlugRec
+{
+	unsigned long 	owningMIDIStreamRef;
+	unsigned long 	mpxID;
+    char			plugName[64];
+	unsigned char	plugIdent[kFWAStreamIdentSize];
+	bool			plugIdentIsNull;
+} FWACreateMIDIPlugRec, *FWACreateMIDIPlugRecPtr;
+
+
+typedef struct FWACreateDeviceRec
+{
+	unsigned long 	vendorID;
+    char			deviceName[64];
+	char			guidStr[64];
+
+} FWACreateDeviceRec, *FWACreateDeviceRecPtr;
 
 enum
 {
@@ -95,8 +179,8 @@ enum
 	kGetNumAudioOutputPlugsInParamCount = 0,
 	kGetNumAudioOutputPlugsOutParamCount = 1,
 
-	kCreateAudioStreamInParamCount = 1,
-	kCreateAudioStreamOutParamCount = 2,	
+	kCreateAudioStreamInParamCount = 0xFFFFFFFF,
+	kCreateAudioStreamOutParamCount = 0xFFFFFFFF,	
 	
 	kDisposeAudioStreamInParamCount = 1,
 	kDisposeAudioStreamOutParamCount = 0,	
@@ -112,9 +196,117 @@ enum
 	
 	kGetDeviceStreamInfoInParamCount = 1,
 	kGetDeviceStreamInfoOutParamCount = 4,
-	
+
+// v4	
 	kSetDeviceStreamInfoInParamCount = 6,
 	kSetDeviceStreamInfoOutParamCount = 0,
+
+// v5	
+
+	kSyncUpDeviceInParamCount 						= 0,
+	kSyncUpDeviceOutParamCount 						= 0,
+
+	kGetCurrentStreamRefsInParamCount				= 1,	 
+	kGetCurrentStreamRefsOutParamCount				= 0xFFFFFFFF,
+
+	kGetStreamStateInParamCount						= 1,
+	kGetStreamStateOutParamCount					= 1,
+
+	kGetIsochStreamDirectionInParamCount			= 1,
+	kGetIsochStreamDirectionOutParamCount			= 1,
+
+	kGetIsochStreamChannelIDInParamCount			= 1,
+	kGetIsochStreamChannelIDOutParamCount			= 1,
+
+	kSetIsochStreamChannelIDInParamCount			= 2,
+	kSetIsochStreamChannelIDOutParamCount			= 0,
+	
+	kGetStreamSampleRateInParamCount				= 1,
+	kGetStreamSampleRateOutParamCount				= 1,
+
+	kSetStreamSampleRateInParamCount				= 2,
+	kSetStreamSampleRateOutParamCount				= 0,
+
+	kGetStreamOutputSpeedInParamCount				= 1,
+	kGetStreamOutputSpeedOutParamCount				= 1,
+
+	kSetStreamOutputSpeedInParamCount				= 2,
+	kSetStreamOutputSpeedOutParamCount				= 0,	
+
+	kGetStreamAudioTypeInParamCount					= 1,
+	kGetStreamAudioTypeOutParamCount				= 1,
+
+	kSetStreamAudioTypeInParamCount					= 2, 
+	kSetStreamAudioTypeOutParamCount				= 0,
+
+	kSetStreamCallbackFunctionInParamCount			= 3,
+	kSetStreamCallbackFunctionOutParamCount			= 0,
+
+	kCreateIsochStreamInParamCount					= 4, 
+	kCreateIsochStreamOutParamCount					= 1,
+
+	kDisposeIsochStreamInParamCount					= 1,
+	kDisposeIsochStreamOutParamCount				= 0,
+
+	kStartIsochStreamInParamCount					= 1,
+	kStartIsochStreamOutParamCount					= 0,
+
+	kStopIsochStreamInParamCount 					= 1,
+	kStopIsochStreamOutParamCount  					= 0,
+
+	kGetIsochStreamAudioChannelCountInParamCount 	= 1,
+	kGetIsochStreamAudioChannelCountOutParamCount 	= 1,
+
+	kSetIsochStreamAudioChannelCountInParamCount 	= 2,
+	kSetIsochStreamAudioChannelCountOutParamCount 	= 0,
+
+	kGetIsochStreamMIDIChannelCountInParamCount 	= 1,
+	kGetIsochStreamMIDIChannelCountOutParamCount 	= 1,
+
+	kSetIsochStreamMIDIChannelCountInParamCount 	= 2,
+	kSetIsochStreamMIDIChannelCountOutParamCount 	= 0,
+	
+	kCreateFWAudioDeviceInParamCount 				= 0xFFFFFFFF,
+	kCreateFWAudioDeviceOutParamCount 				= 0xFFFFFFFF,
+											
+	kStartFWAudioDeviceInParamCount					= 1, 
+	kStartFWAudioDeviceOutParamCount				= 0,
+
+	kStopFWAudioDeviceInParamCount					= 1, 
+	kStopFWAudioDeviceOutParamCount					= 0,
+
+	kDisposeFWAudioDeviceInParamCount 				= 1,
+	kDisposeFWAudioDeviceOutParamCount 				= 0,
+
+	kCreateFWAudioEngineInParamCount 				= 3,
+	kCreateFWAudioEngineOutParamCount 				= 1,
+
+	kDisposeFWAudioEngineInParamCount 				= 1,
+	kDisposeFWAudioEngineOutParamCount 				= 0,
+
+	kCreateFWAudioStreamInParamCount 				= 0xFFFFFFFF,
+	kCreateFWAudioStreamOutParamCount 				= 0xFFFFFFFF,
+
+	kDisposeFWAudioStreamInParamCount 				= 1,
+	kDisposeFWAudioStreamOutParamCount 				= 0,
+	
+	kCreateFWAudioMIDIStreamInParamCount			= 3,
+	kCreateFWAudioMIDIStreamOutParamCount			= 1,
+	
+	kDisposeFWAudioMIDIStreamInParamCount			= 1,
+	kDisposeFWAudioMIDIStreamOutParamCount			= 0,
+
+	kCreateFWAudioMIDIPlugInParamCount 				= 0xFFFFFFFF,
+	kCreateFWAudioMIDIPlugOutParamCount 			= 0xFFFFFFFF,
+	
+	kDisposeFWAudioMIDIPlugInParamCount				= 1,
+	kDisposeFWAudioMIDIPlugOutParamCount			= 0,
+
+	kGetClockSourceInParamCount 					= 0,
+	kGetClockSourceOutParamCount 					= 2,
+	
+	kSetClockSourceInParamCount 					= 2,
+	kSetClockSourceOutParamCount 					= 0
 };
 
 // Index into our API
@@ -156,8 +348,48 @@ enum
 
 	kFWASetDeviceStreamInfo,
 
-	//  -----------------------
-	kFWANumberFWAMethods			// Keep kFWANumberFWAMethods last!!
+// V5   -----------------------
+
+	kFWASyncUpDevice,
+	kFWAGetCurrentStreamRefs,	 
+	kFWAGetStreamState,
+	kFWAGetIsochStreamDirection,
+	kFWAGetIsochStreamChannelID,
+	kFWASetIsochStreamChannelID,
+	kFWAGetStreamSampleRate,
+	kFWASetStreamSampleRate,
+	kFWAGetStreamOutputSpeed,
+	kFWASetStreamOutputSpeed,
+	kFWAGetStreamAudioType,
+	kFWASetStreamAudioType, 
+	kFWASetStreamCallbackFunction,
+	kFWACreateIsochStream, 
+	kFWADisposeIsochStream,
+	kFWAStartIsochStream,
+	kFWAStopIsochStream,
+	kFWAGetIsochStreamAudioChannelCount,
+	kFWASetIsochStreamAudioChannelCount,
+	kFWAGetIsochStreamMIDIChannelCount,
+	kFWASetIsochStreamMIDIChannelCount,
+	kFWACreateFWAudioDevice,
+	kFWADisposeFWAudioDevice,
+	kFWAStartFWAudioDevice,
+	kFWAStopFWAudioDevice, 
+	kFWACreateFWAudioEngine,
+	kFWADisposeFWAudioEngine,
+	kFWACreateFWAudioStream,
+	kFWADisposeFWAudioStream,
+	kFWAGetClockSource,
+	kFWASetClockSource,
+	kFWACreateFWAudioMIDIStream,
+	kFWADisposeFWAudioMIDIStream,
+	kFWACreateFWAudioMIDIPlug,
+	kFWADisposeFWAudioMIDIPlug,
+
+
+//  -----------------------
+	
+	kFWANumberFWAMethods			// Keep kFWANumberFWAMethods last!! (current count )
 };
 
 // Index into our Async API

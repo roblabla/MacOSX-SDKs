@@ -15,6 +15,14 @@
  
 */
 
+/*!	@header 	DRFile.h
+	@abstract	File objects used in filesystem creation.
+	@discussion	A @link DRFile DRFile @/link object is a subclass of @link //apple_ref/occ/cl/DRFSObject DRFSObject @/link and represents a file on the 
+				finished disc. A file can be either a pointer to an exiting file (residing on a hard drive for example)
+				or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of "virtual"
+				@link //apple_ref/occ/cl/DRFolder DRFolder @/link objects.
+*/
+
 #import <Foundation/Foundation.h>
 #import <DiscRecordingContent/DRFSObject.h>
 #import <AvailabilityMacros.h>
@@ -22,10 +30,9 @@
 /*!
 	@class		DRFile
 	@abstract	Represents a file to be created on the disc.
-	@discussion
-				A file can be either a pointer to a real file or can be created at burn time from data passed 
-				into the burn engine as requested. DRFile's can only exist inside of "virtual"
-				DRFolder objects.
+	@discussion A file can be either a pointer to an exiting file (residing on a hard drive for example)
+				or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of "virtual"
+				@link //apple_ref/occ/cl/DRFolder DRFolder @/link objects.
 */
 @interface DRFile : DRFSObject
 { }
@@ -52,8 +59,11 @@
 
 @end
 
-/*" This category on DRFile implements methods that allow the
-	file to be specified using data passed in at creation time. "*/
+/*! 
+   	@category		DRFile (VirtualFiles)
+   	@discussion 	This category on DRFile defines methods that allow the file to 
+   					be specified using data passed in at creation time.
+*/
 @interface DRFile (VirtualFiles)
 
 /*! 
@@ -102,9 +112,12 @@
 
 @end
 
-/*" This category on DRFile implements methods that allow various
-	link/alias files to be created on the resulting disc which may not
-	exist in the source. "*/
+/*! 
+	@category		DRFile (VirtualLinks)
+   	@discussion		This category on DRFile defines methods that allow various
+					link/alias files to be created on the resulting disc which may not
+					exist in the source.
+*/
 @interface DRFile (VirtualLinks)
 
 /*! 
@@ -117,7 +130,7 @@
 + (DRFile*) hardLinkPointingTo:(DRFile*)original inFilesystem:(NSString*)filesystem;
 
 /*! 
-   	@method 		hardLinkPointingTo:inFilesystem:
+   	@method 		symLinkPointingTo:inFilesystem:
    	@abstract		Creates a symbolic link to another file on the output disc.
    	@param 			original	The file to point he hard link to
    	@param			filesystem	The filesystem this link will exist on.
@@ -172,21 +185,22 @@ extern NSString* const DRLinkTypeFinderAlias		AVAILABLE_MAC_OS_X_VERSION_10_2_AN
 */
 typedef UInt32 DRFileFork;
 
+/*!
+	@enum File Fork Types
+	@discussion	Enumerated constants used to select the type of file fork.
+	@constant DRFileForkData		The data fork contains the primary
+									information for the file and is the fork used for files such as
+									JPEGs, text files, etc.
+									
+	@constant DRFileForkResource	The resource fork contains secondary
+									meta-data, which is not important to the primary content of the file
+									and may safely be ignored when the file is sent to a filesystem or
+									OS which does not support multiple forks.  See Inside Macintosh:
+									Resources for more information on the format of a resource fork.
+*/
 enum
 {
-	/*!	@constant	DRFileForkData
-		@abstract	Typically, the data fork contains the primary information for the file and
-					is the fork used for files such as JPEGs, text files, etc.
-	*/
 	DRFileForkData		= 0,
-	
-	/*!	@constant	DRFileForkResource
-		@abstract	Typically, the resource fork contains secondary meta-data, which is not
-					important to the primary content of the file and may safely be ignored
-					when the file is sent to a filesystem or OS which does not support
-					multiple forks.  See Inside Macintosh: Resources for more information on
-					the format of a resource fork.
-	*/
 	DRFileForkResource	= 1
 };
 
@@ -230,7 +244,7 @@ enum
 					hierarchy is completely in place and can be queried if needed. 
 									
 					After this call, the burn's content is locked down, and you should be
-					able to respond to the <b>calculateSizeOfFile:fork:estimating:</b> messages with exact values.
+					able to respond to the @link //apple_ref/occ/intfm/DRFileDataProduction/calculateSizeOfFile%58fork%58estimating%58 calculateSizeOfFile:fork:estimating: @/link messages with exact values.
    	@param 			file	The file object.
     @result  		<i>YES</i> if the burn should proceed.
 */
@@ -239,7 +253,7 @@ enum
 /*! 
    	@method 		produceFile:fork:intoBuffer:length:atAddress:blockSize:
    	@abstract		Calculates the size of a file's fork.
-   	@discussion		Sent during the burn (after the <b>prepareFileForBurn</b> message) requesting that the receiver
+   	@discussion		Sent during the burn (after the @link //apple_ref/occ/intfm/DRFileDataProduction/prepareFileForBurn prepareFileForBurn @/link message) requesting that the receiver
 					produce the data fork contents. 
 									
 					The recevier should fill up the buffer passed in as full as possible 
@@ -262,10 +276,10 @@ enum
 /*! 
    	@method 		prepareFileForVerification:
    	@abstract		Prepare the file object for verification.
-   	@discussion		Sent during the burn (after production, before the <b>cleanupFileAfterBurn</b> message) to 
+   	@discussion		Sent during the burn (after production, before the @link //apple_ref/occ/intfm/DRFileDataProduction/cleanupFileAfterBurn cleanupFileAfterBurn @/link message) to 
    					indicate that verification is about to begin. Now would be a good
 					time to rewind to the start of the file, reset state machines, or do whatever else 
-					is needed to prepare to produce again. .
+					is needed to prepare to produce again.
    	@param 			file	The file object.
 	@result			<i>YES</i> to indicate that the verification should proceed and <i>NO</i> to indicate a failure occurred.
 */

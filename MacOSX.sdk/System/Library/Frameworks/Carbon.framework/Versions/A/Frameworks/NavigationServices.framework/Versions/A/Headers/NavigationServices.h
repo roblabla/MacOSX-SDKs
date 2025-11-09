@@ -3,7 +3,7 @@
  
      Contains:   Master include for NavigationServices private framework
  
-     Version:    NavigationServices-97.5~1
+     Version:    NavigationServices-101.3~1
  
      Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  

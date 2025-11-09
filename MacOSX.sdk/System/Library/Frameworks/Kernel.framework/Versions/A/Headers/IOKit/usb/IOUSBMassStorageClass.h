@@ -42,6 +42,8 @@
 // Flag to turn debugging for the USB Mass Storage class on and off
 #define USB_MASS_STORAGE_DEBUG	0
 
+#define UNUSED(x) ((void)x)
+
 #pragma mark -
 #pragma mark Vendor Specific Device Support
 #define kIOUSBMassStorageCharacteristics		"USB Mass Storage Characteristics"
@@ -302,7 +304,7 @@ protected:
 	enum
 	{
 		// CBW general struture definitions
-		kCommandBlockWrapperSignature	= 'USBC',
+		kCommandBlockWrapperSignature	= OSSwapHostToBigConstInt32 ( 'USBC' ),
 		kByteCountOfCBW					= 31,
 
 		// CBW LUN related definitions
@@ -317,7 +319,7 @@ protected:
 	enum
 	{
 		// CSW general struture definitions
-		kCommandStatusWrapperSingature	= 'USBS',
+		kCommandStatusWrapperSingature	= OSSwapHostToBigConstInt32 ( 'USBS' ),
 		kByteCountOfCSW					= 13,
 
 		// CSW status definitions

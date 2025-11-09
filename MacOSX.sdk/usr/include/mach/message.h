@@ -303,6 +303,15 @@ typedef struct
   security_token_t		msgh_sender;
 } mach_msg_security_trailer_t;
 
+/*
+ * The audit token is an opaque token which identifies
+ * Mach tasks and senders of Mach messages as subjects
+ * to the BSM audit system.  Only the appropriate BSM
+ * library routines should be used to interpret the
+ * contents of the audit token as the representation
+ * of the subject identity within the token may change
+ * over time.
+ */
 typedef struct
 {
   unsigned int			val[8];

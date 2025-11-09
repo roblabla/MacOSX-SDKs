@@ -3,7 +3,7 @@
  
      Contains:   Display Manager Interfaces.
  
-     Version:    Quickdraw-150~1
+     Version:    Quickdraw-150.7~2
  
      Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved.
  

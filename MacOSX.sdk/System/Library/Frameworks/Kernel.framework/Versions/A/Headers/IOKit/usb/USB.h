@@ -24,9 +24,41 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: USB.h,v 1.44 2003/09/10 19:07:17 nano Exp $
- *
  *	$Log: USB.h,v $
+ *	Revision 1.44.8.3  2005/01/11 23:29:22  rhoads
+ *	commit the Tiger EHCI driver to the update
+ *	
+ *	Revision 1.44.8.2  2004/10/25 15:38:06  nano
+ *	Call close with gate held if indicated by property.
+ *	
+ *	Revision 1.44.8.1.28.1  2004/10/20 15:27:38  nano
+ *	Potential submissions to Sandbox -- create their own branch
+ *	
+ *	Bug #:
+ *	<rdar://problem/3826068> USB devices on a P30 attached to Q88 do not function after restart
+ *	<rdar://problem/3779852> Q16B EVT Build run in fail Checkconfig Bluetooth *2
+ *	<rdar://problem/3816739>IOUSBFamily needs to support polling interval for High Speed devices
+ *	<rdar://problem/3816743> Low latency for hi-speed API do not fill frTimeStamp.hi and low in completion.
+ *	<rdar://problem/3816749> Low latency for hi-speed API incorrectly treats buffer striding across mem-page
+ *	
+ *	Submitted by:
+ *	Reviewed by:
+ *	
+ *	Revision 1.44.8.1  2003/12/21 22:38:01  nano
+ *	Add couple of defines to munge packet size and to key  the loading of the interface drivers with the gate held.
+ *	
+ *	Revision 1.45.16.3  2003/12/04 20:39:25  rhoads
+ *	bug fix to the mungeMaxPacketSize macro
+ *	
+ *	Revision 1.45.16.2  2003/11/20 20:29:46  barryt
+ *	Fix off by one error in shift
+ *	
+ *	Revision 1.45.16.1  2003/11/20 19:52:34  barryt
+ *	Munge high-speed, high-bandwidth endpoint sizes to be correct.
+ *	
+ *	Revision 1.45  2003/10/14 22:06:18  nano
+ *	Ådded kCallInterfaceOpenWithGate.
+ *	
  *	Revision 1.44  2003/09/10 19:07:17  nano
  *	Merge in branches to fix #3406994 (make SuspendDevice synchronous)
  *	
@@ -153,7 +185,9 @@ enum {
 @discussion Maximum size in bytes allowed for one Isochronous frame
 */
 enum {
-    kUSBMaxIsocFrameReqCount = 1023 // max size (bytes) of any one Isoc frame
+    kUSBMaxFSIsocEndpointReqCount = 1023,	// max size (bytes) of any one Isoc frame for 1 FS endpoint
+	kUSBMaxHSIsocEndpointReqCount = 3072,	// max size (bytes) of any one Isoc frame for 1 HS endpoint
+	kUSBMaxHSIsocFrameCount = 7168			// max size (bytes) of all Isoc transfers in a HS frame
 };
 
 /*!
@@ -219,6 +253,18 @@ enum {
     kSyncFrame              = EncodeRequest(kUSBRqSyncFrame,     kUSBIn,  kUSBStandard, kUSBEndpoint),
 };
 
+/*!
+@defined kCallInterfaceOpenWithGate
+ @discussion If the USB Device Nub has this property, drivers for any of its interfaces will have their handleOpen method called while holding the workloop gate.
+ */
+#define kCallInterfaceOpenWithGate	"kCallInterfaceOpenWithGate"
+
+/*!
+@defined kCallInterfaceCloseWithGate
+ @discussion If the USB Device Nub has this property, drivers for any of its interfaces will have their handleclose method called while holding the workloop gate.
+ */
+#define kCallInterfaceCloseWithGate	"kCallInterfaceCloseWithGate"
+
 // TYPES
 
 typedef UInt16 USBDeviceAddress;
@@ -270,6 +316,22 @@ typedef void (*IOUSBCompletionAction)(
                 UInt32			bufferSizeRemaining);
 
 /*!
+@typedef IOUSBCompletionActionWithTimeStamp
+ @discussion Function called when USB I/O completes.
+ @param target The target specified in the IOUSBCompletion struct.
+ @param parameter The parameter specified in the IOUSBCompletion struct.
+ @param status Completion status.
+ @param bufferSizeRemaining Bytes left to be transferred.
+ @param timeStamp Time at which the transaction was processed.
+ */
+typedef void (*IOUSBCompletionActionWithTimeStamp)(
+                                      void *		target,
+                                      void *		parameter,
+                                      IOReturn		status,
+                                      UInt32		bufferSizeRemaining,
+                                      AbsoluteTime	timeStamp);
+
+/*!
     @typedef IOUSBIsocCompletionAction
     @discussion Function called when Isochronous USB I/O completes.
     @param target The target specified in the IOUSBIsocCompletionn struct.
@@ -309,6 +371,19 @@ typedef struct IOUSBCompletion {
     IOUSBCompletionAction	action;
     void *			parameter;
 } IOUSBCompletion;
+
+/*!
+@typedef IOUSBCompletionWithTimeStamp
+ @discussion Struct specifying action to perform when a USB I/O completes.
+ @param target The target to pass to the action function.
+ @param action The function to call.
+ @param parameter The parameter to pass to the action function.
+ */
+typedef struct IOUSBCompletionWithTimeStamp {
+    void * 				target;
+    IOUSBCompletionActionWithTimeStamp	action;
+    void *				parameter;
+} IOUSBCompletionWithTimeStamp;
 
 /*!
     @typedef IOUSBIsocCompletion
@@ -356,6 +431,7 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 #define kIOUSBLowLatencyBufferNotPreviouslyAllocated        iokit_usb_err(77)  // 0xe000404d  Attempted to use user land low latency isoc calls w/out calling PrepareBuffer (on the data buffer) first 
 #define kIOUSBLowLatencyFrameListNotPreviouslyAllocated     iokit_usb_err(76)  // 0xe000404c  Attempted to use user land low latency isoc calls w/out calling PrepareBuffer (on the frame list) first
 #define kIOUSBHighSpeedSplitError     iokit_usb_err(75) // 0xe000404b Error to hub on high speed bus trying to do split transaction
+#define kIOUSBSyncRequestOnWLThread	iokit_usb_err(74)	// 0xe000404a  A synchronous USB request was made on the workloop thread (from a callback?).  Only async requests are permitted in that case
 
 /*!
 @defined IOUSBFamily hardware error codes
@@ -399,6 +475,7 @@ Completion Code         Error Returned              Description
 #define kIOUSBMessagePortHasBeenResumed     iokit_usb_msg(11)  // 0xe0000400b  Message sent to a device indicating that the port it is attached to has been resumed
 #define kIOUSBMessageHubPortClearTT         iokit_usb_msg(12)  // 0xe0000400c  Message sent to a hub to clear the transaction translator
 #define kIOUSBMessagePortHasBeenSuspended   iokit_usb_msg(13)  // 0xe0000400d  Message sent to a device indicating that the port it is attached to has been suspended
+#define kIOUSBMessageFromThirdParty         iokit_usb_msg(14)  // 0xe0000400d  Message send from a third party.  Uses IOUSBThirdPartyParam to encode the sender's ID
 
 // Obsolete
 //
@@ -524,6 +601,9 @@ struct IOUSBEndpointDescriptor {
 };
 typedef struct IOUSBEndpointDescriptor	IOUSBEndpointDescriptor;
 typedef IOUSBEndpointDescriptor *	IOUSBEndpointDescriptorPtr;
+
+enum{addPacketShift = 11};  // Bits for additional packets in maxPacketField. (Table 9-13)
+#define mungeMaxPacketSize(w) ((w>1024)?(((w>>(addPacketShift))+1)*(w&((1<<addPacketShift)-1))):w)
 
 /*!
     @typedef IOUSBHIDDescriptor
@@ -953,6 +1033,17 @@ enum {
 #define kUSBDevicePropertyBusPowerAvailable     "Bus Power Available"
 #define kUSBDevicePropertyAddress               "USB Address"
 #define kUSBDevicePropertyLocationID            "locationID"
+
+/*!
+@enum USBReEnumerateOptions
+ @discussion Options used when calling ReEnumerateDevice. 
+ @constant	kUSBAddExtraResetTimeBit	Setting this bit will cause the Hub driver to wait 100ms before addressing the device after the reset following the re-enumeration.
+ */
+typedef enum {
+    kUSBAddExtraResetTimeBit 		= 31,
+    kUSBAddExtraResetTimeMask		= ( 1 << kUSBAddExtraResetTimeBit)
+} USBReEnumerateOptions;
+
 
 #ifdef __cplusplus
 }       

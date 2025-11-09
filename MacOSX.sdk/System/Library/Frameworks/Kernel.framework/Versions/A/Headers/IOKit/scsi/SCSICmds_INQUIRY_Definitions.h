@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,18 +24,35 @@
 #ifndef _IOKIT_SCSI_CMDS_INQUIRY_H_
 #define _IOKIT_SCSI_CMDS_INQUIRY_H_
 
+
 // This file contains all the definitions for the data returned from
 // the INQUIRY (0x12) command.
 
+
+//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+//	Includes
+//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+
+#if KERNEL
+#include <IOKit/IOTypes.h>
+#else
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
+
 #if 0
-#pragma mark -
-#pragma mark ¥¥¥ INQUIRY Default Page 0 Definitions ¥¥¥
+#pragma mark ¥ INQUIRY Default Page 0 Definitions
 #pragma mark -
 #endif
 
-//
+// Definitions for sizes related to the INQUIRY data
+enum
+{
+	kINQUIRY_StandardDataHeaderSize			= 5,
+	kINQUIRY_MaximumDataSize				= 255	
+};
+
 // Sizes for some of the inquiry data fields
-//
 enum
 {
 	kINQUIRY_VENDOR_IDENTIFICATION_Length	= 8,
@@ -46,29 +63,28 @@ enum
 // This structure defines the format of the required standard data that is 
 // returned for the INQUIRY command.  This is the data that is required to
 // be returned from all devices.
-struct SCSICmd_INQUIRY_StandardData
+typedef struct SCSICmd_INQUIRY_StandardData
 {
 	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
 	UInt8		RMB;								// 7 = removable
 	UInt8		VERSION;							// 7/6 = ISO/IEC, 5-3 = ECMA, 2-0 = ANSI.
-	UInt8		RESPONSE_DATA_FORMAT;				// 7 = AERC, 6 = Obsolete, 5 = NormACA, 4 = HiSup 3-0 = Response data format.
+	UInt8		RESPONSE_DATA_FORMAT;				// 7 = AERC, 6 = Obsolete, 5 = NormACA, 4 = HiSup 3-0 = Response data format. (SPC-3 obsoletes AERC)
 													// If ANSI Version = 0, this is ATAPI and bits 7-4 = ATAPI version.
 	UInt8		ADDITIONAL_LENGTH;					// Number of additional bytes available in inquiry data
-	UInt8		SCCSReserved;						// SCC-2 device flag and reserved fields
-	UInt8		flags1;								// First byte of support flags
-	UInt8		flags2;								// Second byte of support flags (Byte 7)
+	UInt8		SCCSReserved;						// SCC-2 device flag and reserved fields (SPC-3 adds PROTECT 3PC TPGS, and ACC)
+	UInt8		flags1;								// First byte of support flags (See SPC-3 section 6.4.2)
+	UInt8		flags2;								// Second byte of support flags (Byte 7) (See SPC-3 section 6.4.2)
 	char		VENDOR_IDENTIFICATION[kINQUIRY_VENDOR_IDENTIFICATION_Length];
 	char		PRODUCT_IDENTIFICATION[kINQUIRY_PRODUCT_IDENTIFICATION_Length];
 	char		PRODUCT_REVISION_LEVEL[kINQUIRY_PRODUCT_REVISION_LEVEL_Length];
-};
-typedef struct SCSICmd_INQUIRY_StandardData SCSICmd_INQUIRY_StandardData;
-typedef SCSICmd_INQUIRY_StandardData* SCSICmd_INQUIRY_StandardDataPtr;
+} SCSICmd_INQUIRY_StandardData;
+typedef SCSICmd_INQUIRY_StandardData * SCSICmd_INQUIRY_StandardDataPtr;
 
 
 // This structure defines the all of the fields that can be returned in
 // repsonse to the INQUIRy request for the standard data.  There is no
 // requirement as to how much of the additional data must be returned by a device.
-struct SCSICmd_INQUIRY_StandardDataAll
+typedef struct SCSICmd_INQUIRY_StandardDataAll
 {
 	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
 	UInt8		RMB;								// 7 = removable
@@ -90,9 +106,7 @@ struct SCSICmd_INQUIRY_StandardDataAll
 	UInt16		VERSION_DESCRIPTOR[8];
 	UInt8		Reserved2[22];
 	UInt8		VendorSpecific2[160];
-};
-typedef struct SCSICmd_INQUIRY_StandardDataAll SCSICmd_INQUIRY_StandardDataAll;
-
+} SCSICmd_INQUIRY_StandardDataAll;
 
 #if 0
 #pragma mark -
@@ -128,7 +142,11 @@ enum
 	kINQUIRY_PERIPHERAL_TYPE_SimplifiedDirectAccessRBCDevice	= 0x0E,
 	kINQUIRY_PERIPHERAL_TYPE_OpticalCardReaderOCRWDevice		= 0x0F,
 	/* 0x10 - 0x1E Reserved Device Types */
+	kINQUIRY_PERIPHERAL_TYPE_ObjectBasedStorageDevice			= 0x11,
+	kINQUIRY_PERIPHERAL_TYPE_AutomationDriveInterface			= 0x12,
+	kINQUIRY_PERIPHERAL_TYPE_WellKnownLogicalUnit				= 0x1E,
 	kINQUIRY_PERIPHERAL_TYPE_UnknownOrNoDeviceType				= 0x1F,
+	
 	
 	kINQUIRY_PERIPHERAL_TYPE_Mask								= 0x1F
 };
@@ -175,6 +193,7 @@ enum
 	kINQUIRY_ANSI_VERSION_SCSI_2_Compliant						= 0x02,
 	kINQUIRY_ANSI_VERSION_SCSI_SPC_Compliant					= 0x03,
 	kINQUIRY_ANSI_VERSION_SCSI_SPC_2_Compliant					= 0x04,
+	kINQUIRY_ANSI_VERSION_SCSI_SPC_3_Compliant					= 0x05,
 	kINQUIRY_ANSI_VERSION_Mask									= 0x07
 };
 
@@ -200,6 +219,32 @@ enum
 	kINQUIRY_Byte3_NORMACA_Mask				= (1 << kINQUIRY_Byte3_NORMACA_Bit),
 	// Bit 6 is Obsolete
 	kINQUIRY_Byte3_AERC_Mask				= (1 << kINQUIRY_Byte3_AERC_Bit)
+};
+
+
+#if 0
+#pragma mark -
+#pragma mark ¥ INQUIRY Byte 5 Definitions
+#pragma mark -
+#endif
+
+enum
+{
+	// Bit definitions
+	kINQUIRY_Byte5_SCCS_Bit					= 7,
+	kINQUIRY_Byte5_ACC_Bit					= 6,
+	// Bits 4-5: TPGS
+	kINQUIRY_Byte5_3PC_Bit					= 3,
+	// Bits 1-2: Reserved
+	kINQUIRY_Byte5_PROTECT_Bit				= 0,
+	
+	// Masks
+	kINQUIRY_Byte5_SCCS_Mask				= (1 << kINQUIRY_Byte5_SCCS_Bit),
+	kINQUIRY_Byte5_ACC_Mask					= (1 << kINQUIRY_Byte5_ACC_Bit),
+	kINQUIRY_Byte5_TPGS_Mask				= 0x18,
+	kINQUIRY_Byte5_3PC_Mask					= (1 << kINQUIRY_Byte5_3PC_Bit),
+	// Bits 1-2: Reserved
+	kINQUIRY_Byte5_PROTECT_Mask				= (1 << kINQUIRY_Byte5_PROTECT_Bit)
 };
 
 
@@ -302,11 +347,11 @@ enum
 	kINQUIRY_Byte56_CLOCKING_ST_AND_DT		= 0x0C
 };
 
-
 // IORegistry property names for information derived from the Inquiry data.
 // The Peripheral Device Type is the only property that the 
 // generic Logical Unit Drivers will use to match.
 #define kIOPropertySCSIPeripheralDeviceType		"Peripheral Device Type"
+
 // The bit size of the property
 #define kIOPropertySCSIPeripheralDeviceTypeSize	8
 
@@ -316,56 +361,83 @@ enum
 #define kIOPropertySCSIProductRevisionLevel		"Product Revision Level"
 
 
+// Interesting page codes for INQUIRY command
+enum
+{
+	kINQUIRY_Page00_PageCode				= 0x00,
+	kINQUIRY_Page80_PageCode				= 0x80,
+	kINQUIRY_Page83_PageCode				= 0x83
+};	
+
+
 #if 0
 #pragma mark -
-#pragma mark ¥¥¥ INQUIRY Supported Vital Products Page 00 Definitions ¥¥¥
+#pragma mark ¥ INQUIRY Supported Vital Products Page 00 Definitions
 #pragma mark -
 #endif
 
 // This section contians all structures and definitions used by the INQUIRY
 // command in response to a request for page 83h - Device Identification Page 
-struct SCSICmd_INQUIRY_Page00_Header
+typedef struct SCSICmd_INQUIRY_Page00_Header
 {
 	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
 	UInt8		PAGE_CODE;							// Must be equal to 00h
 	UInt8		RESERVED;							// reserved field
 	UInt8		PAGE_LENGTH;						// n-3 bytes
-};
-typedef struct SCSICmd_INQUIRY_Page00_Header SCSICmd_INQUIRY_Page00_Header;
+} SCSICmd_INQUIRY_Page00_Header;
+
+#if 0
+#pragma mark -
+#pragma mark ¥ INQUIRY Device ID Page 80 Definitions
+#pragma mark -
+#endif
+
+
+typedef struct SCSICmd_INQUIRY_Page80_Header
+{
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;							// Must be equal to 80h
+	UInt8		RESERVED;							// reserved field
+	UInt8		PAGE_LENGTH;						// n-3 bytes
+	UInt8		PRODUCT_SERIAL_NUMBER;				// 4-n
+} SCSICmd_INQUIRY_Page80_Header;
+
+
+#define kIOPropertySCSIINQUIRYUnitSerialNumber		"INQUIRY Unit Serial Number"
 
 
 #if 0
 #pragma mark -
-#pragma mark ¥¥¥ INQUIRY Device ID Page 83 Definitions ¥¥¥
+#pragma mark ¥ INQUIRY Device ID Page 83 Definitions
 #pragma mark -
 #endif
 
 // This section contians all structures and definitions used by the INQUIRY
 // command in response to a request for page 83h - Device Identification Page 
 
-enum
-{
-	kINQUIRY_Page83_PageCode				= 0x83
-};	
-
-struct SCSICmd_INQUIRY_Page83_Header
+typedef struct SCSICmd_INQUIRY_Page83_Header
 {
 	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
 	UInt8		PAGE_CODE;							// Must be equal to 83h
 	UInt8		RESERVED;							// reserved field
 	UInt8		PAGE_LENGTH;						// n-3 bytes
-};
-typedef struct SCSICmd_INQUIRY_Page83_Header SCSICmd_INQUIRY_Page83_Header;
+} SCSICmd_INQUIRY_Page83_Header;
 
-struct SCSICmd_INQUIRY_Page83_Identification_Descriptor
+typedef struct SCSICmd_INQUIRY_Page83_Header_SPC_16
 {
-	UInt8		CODE_SET;							
-	UInt8		IDENTIFIER_TYPE;					
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;							// Must be equal to 83h
+	UInt16		PAGE_LENGTH;						// n-3 bytes
+} SCSICmd_INQUIRY_Page83_Header_SPC_16;
+
+typedef struct SCSICmd_INQUIRY_Page83_Identification_Descriptor
+{
+	UInt8		CODE_SET;							// 7-4 = Protocol Identifier. 3-0 = Code Set
+	UInt8		IDENTIFIER_TYPE;					// 7 = PIV 5-4 = ASSOCIATION 3-0 = Identifier
 	UInt8		RESERVED;							
 	UInt8		IDENTIFIER_LENGTH;
 	UInt8		IDENTIFIER;
-};
-typedef struct SCSICmd_INQUIRY_Page83_Identification_Descriptor SCSICmd_INQUIRY_Page83_Identification_Descriptor;
+} SCSICmd_INQUIRY_Page83_Identification_Descriptor;
 
 // Definitions for the Code Set field
 enum
@@ -373,6 +445,7 @@ enum
 	kINQUIRY_Page83_CodeSetReserved			= 0x0,
 	kINQUIRY_Page83_CodeSetBinaryData		= 0x1,
 	kINQUIRY_Page83_CodeSetASCIIData		= 0x2,
+	kINQUIRY_Page83_CodeSetUTF8Data			= 0x3,
 	// 0x3 - 0xF
 
 	kINQUIRY_Page83_CodeSetMask				= 0xF
@@ -381,9 +454,19 @@ enum
 // Definitions for the Association field
 enum
 {
-	kINQUIRY_Page83_AssociationDevice		= 0x00,
-	kINQUIRY_Page83_AssociationPort			= 0x10,
-	// 0x20 - 0x30
+	// Association is related to a target or logical unit
+	kINQUIRY_Page83_AssociationDevice 		= 0x00,
+	
+	// SPC-3 - Association is changed to be specific to 
+	// Logical Units
+	kINQUIRY_Page83_AssociationLogicalUnit	= 0x00,
+	
+	// Assocition is related to a Target Port
+	kINQUIRY_Page83_AssociationTargetPort	= 0x10,
+	
+	// SPC-3 - Added as specific association to
+	// a Target device.
+	kINQUIRY_Page83_AssociationTargetDevice	= 0x20,
 
 	kINQUIRY_Page83_AssociationMask			= 0x30
 };	
@@ -396,6 +479,10 @@ enum
 	kINQUIRY_Page83_IdentifierTypeIEEE_EUI64				= 0x2,
 	kINQUIRY_Page83_IdentifierTypeFCNameIdentifier			= 0x3,
 	kINQUIRY_Page83_IdentifierTypeRelativePortIdentifier	= 0x4,
+	kINQUIRY_Page83_IdentifierTypeTargetPortGroup			= 0x5,
+	kINQUIRY_Page83_IdentifierTypeLogicalUnitGroup			= 0x6,
+	kINQUIRY_Page83_IdentifierTypeMD5LogicalUnitIdentifier  = 0x7,
+	kINQUIRY_Page83_IdentifierTypeSCSINameString			= 0x8,
 	// 0x5 - 0xF
 
 	kINQUIRY_Page83_IdentifierTypeMask						= 0xF
@@ -407,4 +494,5 @@ enum
 #define kIOPropertySCSIINQUIRYDeviceIdAssociation		"Association"
 #define kIOPropertySCSIINQUIRYDeviceIdentifier			"Identifier"
 		
+
 #endif	/* _IOKIT_SCSI_CMDS_INQUIRY_H_ */

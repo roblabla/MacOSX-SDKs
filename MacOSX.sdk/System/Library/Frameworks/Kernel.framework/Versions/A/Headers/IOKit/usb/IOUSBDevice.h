@@ -23,9 +23,15 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBDevice.h,v 1.39 2003/09/10 19:07:17 nano Exp $
+ *	$Id: IOUSBDevice.h,v 1.39.8.1 2004/04/07 22:45:22 nano Exp $
  *
  *	$Log: IOUSBDevice.h,v $
+ *	Revision 1.39.8.1  2004/04/07 22:45:22  nano
+ *	Fix rdar://3612850 Bluetooth module randomly disappears
+ *	
+ *	Revision 1.39.44.1  2004/04/06 18:11:23  nano
+ *	Add _addExtraResetTime field
+ *	
  *	Revision 1.39  2003/09/10 19:07:17  nano
  *	Merge in branches to fix #3406994 (make SuspendDevice synchronous)
  *	
@@ -126,6 +132,7 @@ protected:
         UInt32			_notificationType;
         bool			_suspendInProgress;
         bool			_portHasBeenSuspended;
+        bool			_addExtraResetTime;
     };
     ExpansionData * _expansionData;
 

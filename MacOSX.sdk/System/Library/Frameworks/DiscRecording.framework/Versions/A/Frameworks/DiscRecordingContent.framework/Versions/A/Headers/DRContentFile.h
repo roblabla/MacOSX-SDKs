@@ -12,8 +12,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
+
 */
+
+/*!	@header 	
+	@abstract		File objects used in filesystem creation.
+
+	@discussion
+*/
+
 #ifndef _H_DRContentFile
 #define _H_DRContentFile
 
@@ -51,20 +58,20 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@typedef	DRLinkType
-	@abstract	Link types available for the <tt>DRFileCreateVirtualLink</tt> function.
+	@abstract	Link types available for the @link DRFileCreateVirtualLink DRFileCreateVirtualLink @/link function.
 */
 typedef UInt32 DRLinkType;
-enum {
-	/*! @constant kDRLinkTypeHardLink
-		@abstract	Link type for hard links. */
-	kDRLinkTypeHardLink		= 1,
 
-	/*! @constant kDRLinkTypeSymbolicLink
-		@abstract	Link type for symbolic links. */
+/*!
+	@enum		DRLinkType contants
+	@discussion	Link type constants used by the @link DRFileCreateVirtualLink DRFileCreateVirtualLink @/link function.
+	@constant kDRLinkTypeHardLink	Link type for hard links.
+	@constant kDRLinkTypeSymbolicLink Link type for symbolic links.
+	@constant kDRLinkTypeFinderAlias Link type for Finder aliases.
+*/
+enum {
+	kDRLinkTypeHardLink		= 1,
 	kDRLinkTypeSymbolicLink	= 2,
-	
-	/*! @constant kDRLinkTypeFinderAlias
-		@abstract	Link type for Finder aliases. */
 	kDRLinkTypeFinderAlias	= 3
 };
 
@@ -73,98 +80,89 @@ enum {
 
 /*!
 	@typedef	DRFileMessage
-	@abstract	Messages sent to the <tt>DRFileProc</tt> callback during a burn.
+	@abstract	Messages sent to the @link DRFileProc DRFileProc @/link callback during a burn.
 */
 typedef UInt32	DRFileMessage;
 
-enum {
-	/*!	@constant	kDRFileMessageForkSize
-		@abstract	Indicates a request for your <tt>DRFileProc</tt> callback to 
-					supply a file track size.
-		
-		@discussion	Your <tt>DRFileProc</tt> callback should respond to this 
+/*!
+	@enum		DRFileMessage constants
+	@discussion	Messages sent to the @link DRFileProc DRFileProc @/link callback during a burn.
+	@constant	kDRFileMessageForkSize	
+					Indicates a request for your @link DRFileProc DRFileProc @/link callback to supply a file track size.
+					
+					Your @link DRFileProc DRFileProc @/link callback should respond to this 
 					message by placing the requested file fork size into the 
-					<tt>DRFileForkSizeInfo</tt> structure, which is pointed to 
+					@link DRFileForkSizeInfo DRFileForkSizeInfo @/link structure, which is pointed to 
 					by the callback's <tt>ioParam</tt> parameter. Your callback 
 					may receive this message at any time after the file object 
 					has been created.
 					
 					On input, the structure's <tt>fork</tt> field indicates which fork 
-					you are being asked about, as defined in the <tt>DRFileForkIndex</tt> 
+					you are being asked about, as defined in the @link DRFileForkIndex DRFileForkIndex @/link 
 					enumeration.
 					
 					Also on input, the structure's <tt>query</tt> field indicates 
 					whether you are being asked for an estimated or actual fork size, as
-					defined in the <tt>DRFileForkSizeQuery</tt> enumeration.
+					defined in the @link DRFileForkSizeQuery DRFileForkSizeQuery @/link enumeration.
 		
-					When the <tt>query</tt> field is <tt>kDRFileForkSizeEstimate</tt>, you are 
+					When the <tt>query</tt> field is @link DRFileForkSizeQuery DRFileForkSizeQuery @/link, you are 
 					being asked for an estimate of the final fork size, perhaps for the
 					burn engine to estimate the track size. You do not have to be exact,
 					but your estimate should err on the high side. This call may be made 
 					at any time.
 					
-					When the <tt>query</tt> field is <tt>kDRFileForkSizeActual</tt>, you 
+					When the <tt>query</tt> field is @link kDRFileForkSizeActual kDRFileForkSizeActual @/link, you 
 					are being asked for the actual fork size to be used in the burn.  This 
 					call is made only in the burn phase.
-	*/
-	kDRFileMessageForkSize = 'fsiz',
-	
-	/*!	@constant	kDRFileMessagePreBurn
-		@abstract	Indicates that your application should perform all necessary preparation
-					for the burn.
-		
-		@discussion	Your <tt>DRFileProc</tt> callback should respond to this message
+					
+	@constant	kDRFileMessagePreBurn 
+					Indicates that your application should perform all necessary preparation for the burn.
+					
+					Your @link DRFileProc DRFileProc @/link callback should respond to this message
 					by telling your application to open files, or to do any other pre-burn
 					preparation work needed. The burn engine sends this message before the
 					burn but after the disc's entire hierarchy is completely in place. You
 					can query the hierarchy
 					
 					After this call, the burn's content is locked down, and you should be
-					able to respond to the <tt>kDRFileMessageForkSize</tt> message with exact values.
+					able to respond to the @link kDRFileMessageForkSize kDRFileMessageForkSize @/link message with exact values.
 					
 					Sent before the burn.
 					The callback's <tt>ioParam</tt> parameter is ignored.
-	*/
-	kDRFileMessagePreBurn = 'pre ',
-	
-	/*!	@constant	kDRFileMessageProduceData
-		@abstract	Sent during the burn (after the pre-burn call).
-					The callback's <tt>ioParam</tt> parameter points to a <tt>DRFileProductionInfo</tt>
-					structure.
 					
-					Speed is critical during this call.  You should produce the data as fast
-					as possible, and try not to perform any time-consuming tasks.
-		@discussion	You may be asked to produce twice, once during the actual burn
+	@constant	kDRFileMessageProduceData 
+					Sent during the burn (after the pre-burn call). The callback's <tt>ioParam</tt> parameter points to a @link DRFileProductionInfo DRFileProductionInfo @/link structure. Speed is critical during this call.  You should produce the data as fast as possible, and try not to perform any time-consuming tasks.
+					
+					You may be asked to produce twice, once during the actual burn
 					and once during verification. 
-	*/
-	kDRFileMessageProduceData = 'prod',
-	
-	/*!	@constant	kDRFileMessageVerificationStarting
-		@abstract	Sent during the burn (after the pre-burn call, after production, before the
-					post-burn call) to indicate that verification is about to begin.
-					The callback's <tt>ioParam</tt> parameter is ignored.
-		@discussion	This would be an appropriate place to seek back to the beginning of
+					
+	@constant	kDRFileMessageVerificationStarting	
+					Sent during the burn (after the pre-burn call, after production, before the post-burn call) to indicate that verification is about to begin. The callback's <tt>ioParam</tt> parameter is ignored.
+					
+					This would be an appropriate place to seek back to the beginning of
 					files, reset state machines, or do whatever else is needed to prepare to
 					produce again.
-	*/
-	kDRFileMessageVerificationStarting = 'vrfy',
-	
-	/*!	@constant	kDRFileMessagePostBurn
-		@abstract	Sent at the end of the burn.
-					The callback's <tt>ioParam</tt> parameter is ignored.
-		@discussion	This would be an appropriate place to close files, or do any other
+					
+	@constant	kDRFileMessagePostBurn 
+					Sent at the end of the burn. The callback's <tt>ioParam</tt> parameter is ignored.
+
+					This would be an appropriate place to close files, or do any other
 					teardown work needed.  This call will always be made regardless of
 					whether the burn succeeded or failed.
-	*/
-	kDRFileMessagePostBurn = 'post',
-	
-	/*!	@constant	kDRFileMessageRelease
-		@abstract	Sent when the DRFileRef is released.
-					The callback's <tt>ioParam</tt> parameter is ignored.
-		@discussion	No further messages will be sent for this object.  This would be an
+					
+	@constant	kDRFileMessageRelease 
+					Sent when the @link //apple_ref/c/tdef/DRFileRef DRFileRef @/link is released. The callback's <tt>ioParam</tt> parameter is ignored.
+					
+					No further messages will be sent for this object.  This would be an
 					appropriate time to release any memory allocated by the object (whether
 					in the refCon or anywhere else).
-	*/
+*/
+enum {
+	kDRFileMessageForkSize = 'fsiz',
+	kDRFileMessagePreBurn = 'pre ',
+	kDRFileMessageProduceData = 'prod',
+	kDRFileMessageVerificationStarting = 'vrfy',
+	kDRFileMessagePostBurn = 'post',
 	kDRFileMessageRelease = 'bye '
 };
 
@@ -178,21 +176,19 @@ enum {
 */
 typedef UInt32 DRFileForkIndex;
 
-enum
-{
-	/*!	@constant	kDRFileForkData
-		@abstract	Typically, the data fork contains the primary information for the file and
-					is the fork used for files such as JPEGs, text files, etc.
-	*/
-	kDRFileForkData		= 0,
-	
-	/*!	@constant	kDRFileForkResource
-		@discussion	Typically, the resource fork contains secondary meta-data, which is not
+/*!
+	@enum		DRFileFork indicies
+	@discussion	Index used for accessing the forks of a file.
+	@constant	kDRFileForkData Typically, the data fork contains the primary information for the file and is the fork used for files such as JPEGs, text files, etc.
+	@constant	kDRFileForkResource Typically, the resource fork contains secondary meta-data, which is not
 					important to the primary content of the file and may safely be ignored
 					when the file is sent to a filesystem or OS which does not support
 					multiple forks.  See Inside Macintosh: Resources for more information on
 					the format of a resource fork.
-	*/
+*/
+enum
+{
+	kDRFileForkData		= 0,
 	kDRFileForkResource	= 1
 };
 
@@ -203,18 +199,15 @@ enum
 */
 typedef UInt32	DRFileForkSizeQuery;
 
+/*!
+	@enum		DRFileForkSizeQuery contants
+	@discussion	Type used to define queries on the fork size.
+	@constant	kDRFileForkSizeActual Indicates a request for actual size.
+	@constant	kDRFileForkSizeEstimate Indicates a request for estimated size.
+*/
 enum
 {
-	/*!
-		@constant	kDRFileForkSizeActual
-		@abstract	Indicates a request for actual size.
-	*/
 	kDRFileForkSizeActual		= 0,
-
-	/*!
-		@constant	kDRFileForkSizeEstimate
-		@abstract	Indicates a request for estimated size.
-	*/
 	kDRFileForkSizeEstimate		= 1
 };
 
@@ -235,7 +228,7 @@ typedef struct DRFileForkSizeInfo DRFileForkSizeInfo;
 
 /*!
 	@struct		DRFileProductionInfo
-	@abstract	Structure used by the <tt>DRFileProc</tt> callback during production of a track.
+	@abstract	Structure used by the @link DRFileProc DRFileProc @/link callback during production of a track.
 	@field		requestedAddress		(out) byte address that the burn engine is requesting
 	@field		buffer					(out) buffer to produce into
 	@field		reqCount				(out) number of bytes requested
@@ -259,7 +252,7 @@ typedef struct DRFileProductionInfo DRFileProductionInfo;
 	@abstract	Callback function to produce and manage a file for recording a track.
 	@discussion	Your application needs to implement a callback to create files representing
 				tracks to burn, and to interact with those tracks by responding to the 
-				messages in the <tt>DRFileMessage</tt> enumeration.
+				messages in the @link DRFileMessage DRFileMessage @/link enumeration.
 	
 				If you name your function <tt>MyDRFileCallback</tt>, you would
 				declare it like this:
@@ -276,18 +269,18 @@ typedef struct DRFileProductionInfo DRFileProductionInfo;
 				Your callback places the requested data
 				
 				If your callback does not support a given function, it should return
-				<tt>kDRFunctionNotSupportedErr</tt>.
+				@link //apple_ref/c/econst/kDRFunctionNotSupportedErr kDRFunctionNotSupportedErr @/link.
 				
 	@param	refCon		Reference context for your use, established when
 						the callback is registered.
 	@param	file		The file object being produced.
 	@param	message		Sent by the Disc Recording engine to indicate the 
 						type of data it needs your application to supply. The 
-						various messages are defined in the <tt>DRFileMessage</tt> 
+						various messages are defined in the @link DRFileMessage DRFileMessage @/link 
 						enumeration.
-	@param	ioParam		Parameters are message-specific. See the <tt>DRFileMessage</tt>
+	@param	ioParam		Parameters are message-specific. See the @link DRFileMessage DRFileMessage @/link 
 						enumeration.
-	@result				Your application should return <tt>kDRFunctionNotSupportedErr</tt>
+	@result				Your application should return @link //apple_ref/c/econst/kDRFunctionNotSupportedErr kDRFunctionNotSupportedErr @/link
 						when a message was passed that it doesn't respond to.
 */
 
@@ -370,8 +363,8 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 						The Disc Recording framework may invoke the callback at any time, and the 
 						calls may be made in any order, until the file object has been disposed.
 	@param	baseName	The base name to assign to the new virtual file. For information on base
-						names and how Disc Recording works with them, see <tt>DRFSObjectSetBaseName</tt>
-						and <tt>DRFSObjectSetSpecificName</tt>.
+						names and how Disc Recording works with them, see @link //apple_ref/c/func/DRFSObjectSetBaseName DRFSObjectSetBaseName @/link
+						and @link //apple_ref/c/func/DRFSObjectSetSpecificName DRFSObjectSetSpecificName @/link.
 	@param	fileProc	Your application-implemented callback function to generate file data.
 	@param	fileProcRefCon	An optional reference context for the callback to use.
 	@result				Returns a reference to the newly-created virtual file object, or <tt>NULL</tt>.
@@ -397,7 +390,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 						mask on the newly-created link will automatically be set to ensure the file 
 						appears only in that file system.
 	@param	original	The file or folder to link to.
-	@param	linkType	The type of link to create. See the <tt>DRLinkType</tt> enumeration.
+	@param	linkType	The type of link to create. See the @link DRLinkType DRLinkType @/link enumeration.
 	@param	fsKey		The target file system for the link. The various keys are defined in
 						DRContentProperties.h.
 	@result				A reference to the newly-created virtual file or folder object.

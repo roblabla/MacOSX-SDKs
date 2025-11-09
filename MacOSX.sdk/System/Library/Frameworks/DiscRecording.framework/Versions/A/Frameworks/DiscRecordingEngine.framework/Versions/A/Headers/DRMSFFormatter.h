@@ -15,6 +15,13 @@
  
 */
 
+/*!	@header 	DRMSFFormatter.h
+	@abstract	NSFormatter subclass to format DRMSF objects.
+	@discussion	Instances of DRMSFFormatter format the textual representation of cells that contain 
+				MSF objects and convert textual representations of msf values into MSF objects.
+				DRMSFFormatters are typically instantiated in IB.
+*/
+
 #import <Foundation/Foundation.h>
 
 /*!
@@ -22,7 +29,7 @@
 	@abstract	NSFormatter subclass
 	@discussion Instances of DRMSFFormatter format the textual representation of cells that contain 
 				MSF objects and convert textual representations of msf values into MSF objects.
-				DRMSFFormatters are typically instantiated in IB.
+				DRMSFFormatters are typically instantiated in IB using the DiscReording Interface builder palette.
 */
 @interface DRMSFFormatter : NSFormatter
 {
@@ -39,7 +46,7 @@
 - (id) initWithFormat:(NSString*)format;
 
 /*!
-	@method 	format:
+	@method 	format
 	@abstract	Returns the format string to the caller
 */
 - (NSString*) format;

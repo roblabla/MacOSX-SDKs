@@ -420,6 +420,8 @@ SC_SCHEMA_DECLARATION(kSCPropNetProxiesRTSPProxy);              /* CFString     
 SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSEnable);            /* CFNumber (0 or 1) "SOCKSEnable"                  */
 SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSPort);              /* CFNumber          "SOCKSPort"                    */
 SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSProxy);             /* CFString          "SOCKSProxy"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesProxyAutoConfigEnable);  /* CFNumber (0 or 1) "ProxyAutoConfigEnable"        */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesProxyAutoConfigURLString); /* CFString          "ProxyAutoConfigURLString"     */
 
 /*
  kSCCompUsers Entity Keys

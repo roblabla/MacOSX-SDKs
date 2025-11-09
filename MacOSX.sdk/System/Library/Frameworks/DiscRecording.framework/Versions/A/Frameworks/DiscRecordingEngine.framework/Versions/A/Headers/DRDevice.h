@@ -16,6 +16,47 @@
  
 */
 
+/*!
+	@header 	DRDevice.h
+	@abstract	Obtain information about cd/dvd burners connected to the computer.
+	@discussion	
+				<h3>About Devices</h3>
+				A @link DRDevice DRDevice @/link represents a physical CD/DVD drive connected to the computer. 
+	
+				<h3>Obtaining Device instances</h3>
+				The programmer cannot directly create @link DRDevice DRDevices @/link. Devices are managed by the burn engine
+				and are asked for by client code. The preferred way of obtaining an instance is
+				by registering with the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link and listening for the 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotification @/link. This notification is sent to all
+				observers when a device is first detected by the burn engine (such as when a device
+				is plugged in or turned on). A registered  observer is guaranteed to receive all 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotifications @/link. When a client registers for the 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotification @/link, the engine will ensure that
+				the client gets notified of all devices currently connected to the machine. When a device
+				is removed, registed observers will receive a @link DRDeviceDisappearedNotification DRDeviceDisappearedNotification @/link.
+				
+				It's also possible to obtain a device instance from its IORegistry path 
+				(@link //apple_ref/occ/clm/DRDevice/deviceForIORegistryEntryPath%58 deviceForIORegistryEntryPath: @/link) 
+				or the BSD /dev node name (@link //apple_ref/occ/clm/DRDevice/deviceForBSDName%58 deviceForBSDName: @/link).
+				If you have a reference to a device instance, you can determine if the physical device
+				is still valid and connected by sending the @link //apple_ref/occ/instm/DRDevice/isValid isValid @/link method to the instance.
+				
+				<h3>Device Control</h3>
+				There is a limited set of operations that can be performed on a device. The most
+				important of these is <i>media reservation</i>. Reserving media is a process by which
+				applications arbitrate for blank media. An application registers interest in 
+				obtaining a media reservation by caling @link //apple_ref/occ/instm/DRDevice/acquireMediaReservation acquireMediaReservation @/linkand gives up
+				its interest by calling @link //apple_ref/occ/instm/DRDevice/releaseMediaReservation releaseMediaReservation @/link. Asking to acquire a reservation does
+				not mean you will get it! Another application may already have the reservation and 
+				will refuse to give it up to you. In this case, the only thing to do is to play fair and
+				wait until the @link DRDeviceMediaIsReservedKey DRDeviceMediaIsReservedKey @/link indicates that your app has obtained 
+				the reservation.
+				
+				The device tray can be opened (@link //apple_ref/occ/instm/DRDevice/openTray openTray @/link) or 
+				closed (@link //apple_ref/occ/instm/DRDevice/closeTray closeTray @/link) and media 
+				can be ejected (@link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link).
+*/
+
 #import <Foundation/Foundation.h>
 
 #import <DiscRecordingEngine/DRCoreDevice.h>
@@ -28,45 +69,48 @@
 	@abstract	Represents a CD or DVD burner connected to the computer.
 	@discussion	
 				<h3>About Devices</h3>
-				A DRDevice represents a physical CD/DVD drive connected to the computer. This class is 
+				A DRDevice DRDevice represents a physical CD/DVD drive connected to the computer. This class is 
 				mainly for informational purposes since the device is configured by the burn 
 				engine before beginning to optimally handle the burn. The basis for obtaining the
-				device information is through two methods <b>info</b> and <b>status</b>. <b>info</b> returns 
+				device information is through two methods @link //apple_ref/occ/instm/DRDevice/info info @/link 
+				and @link //apple_ref/occ/instm/DRDevice/status status @/link. @link //apple_ref/occ/instm/DRDevice/info info @/link returns 
 				information pertaining to the drive as a whole and is not affected by the state 
-				of any media in the drive. <b>status</b> returns information about the media in the drive as
+				of any media in the drive. @link //apple_ref/occ/instm/DRDevice/status status @/link returns information about the media in the drive as
 				well as those bits of information directly affected by the media (maximum burn speed,
 				BSD dev node name, etc.)
 	
 				<h3>Obtaining Device instances</h3>
-				DRDevices cannot be created by the programmer. Devices are managed by the burn engine
+				The programmer cannot directly create DRDevices. Devices are managed by the burn engine
 				and are asked for by client code. The preferred way of obtaining an instance is
-				by registering with the <b>DRNotificationCenter</b> and listening for the 
-				<i>DRDeviceAppearedNotification</i>. This notification is sent to all
+				by registering with the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link and listening for the 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotification @/link. This notification is sent to all
 				observers when a device is first detected by the burn engine (such as when a device
-				is plugged in or turned on). A client is guaranteed to receive all 
-				DRDeviceAppearedNotifications. When a client registers for the 
-				DRDeviceAppearedNotification, the engine will ensure that
+				is plugged in or turned on). A registered  observer is guaranteed to receive all 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotifications @/link. When a client registers for the 
+				@link DRDeviceAppearedNotification DRDeviceAppearedNotification @/link, the engine will ensure that
 				the client gets notified of all devices currently connected to the machine. When a device
-				is removed, registed observers will receive a DRDeviceDisappearedNotification.
+				is removed, registed observers will receive a @link DRDeviceDisappearedNotification DRDeviceDisappearedNotification @/link.
 				
 				It's also possible to obtain a device instance from its IORegistry path 
-				(<b>deviceForIORegistryEntryPath:</b>) or the BSD /dev node name (<b>deviceForBSDName:</b>).
+				(@link //apple_ref/occ/clm/DRDevice/deviceForIORegistryEntryPath%58 deviceForIORegistryEntryPath: @/link) 
+				or the BSD /dev node name (@link //apple_ref/occ/clm/DRDevice/deviceForBSDName%58 deviceForBSDName: @/link).
 				If you have a reference to a device instance, you can determine if the physical device
-				is still valid and connected by sending the <b>isValid</b> method to the instance.
+				is still valid and connected by sending the @link //apple_ref/occ/instm/DRDevice/isValid isValid @/link method to the instance.
 				
 				<h3>Device Control</h3>
 				There is a limited set of operations that can be performed on a device. The most
 				important of these is <i>media reservation</i>. Reserving media is a process by which
 				applications arbitrate for blank media. An application registers interest in 
-				obtaining a media reservation by caling <b>acquireMediaReservation</b> and gives up
-				its interest by calling releaseMediaReservation. asking to acquire a reservation does
+				obtaining a media reservation by caling @link //apple_ref/occ/instm/DRDevice/acquireMediaReservation acquireMediaReservation @/link and gives up
+				its interest by calling @link //apple_ref/occ/instm/DRDevice/releaseMediaReservation releaseMediaReservation @/link. Asking to acquire a reservation does
 				not mean you will get it! Another application may already have the reservation and 
 				will refuse to give it up to you. In this case, the only thing to do is to play fair and
-				wait until the DRDeviceMediaIsReservedKey indicates that your app has obtained 
+				wait until the @link DRDeviceMediaIsReservedKey DRDeviceMediaIsReservedKey @/link indicates that your app has obtained 
 				the reservation.
 				
-				The device tray can be opened (<b>openTray</b>) or closed (<b>closeTray</b>) and media 
-				can be ejected (<b>ejectMedia</b>).
+				The device tray can be opened (@link //apple_ref/occ/instm/DRDevice/openTray openTray @/link) or 
+				closed (@link //apple_ref/occ/instm/DRDevice/closeTray closeTray @/link) and media 
+				can be ejected (@link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link).
 */
 @interface DRDevice : NSObject 
 { 
@@ -135,7 +179,7 @@
 	@abstract		Commands the device to open it's tray.
 	@discussion		Does nothing if the device does not have a tray (slotload). If there is media in
 					the drive this method will do nothing and return false. In this case use 
-					<b>ejectMedia</b> to eject the media and open the tray. 
+					@link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link to eject the media and open the tray. 
 	@result			Returns <i>YES</i> if the tray could be opened and <i>NO</i> if not.
 */
 - (BOOL) openTray;
@@ -168,7 +212,7 @@
 					before exclusive access can be granted. 
 	
 					Exclusive access can be acquired multiple times. Each time this method
-					is called, a call to <b>releaseExclusiveAccess</b> must be made at a later time,
+					is called, a call to @link //apple_ref/occ/instm/DRDevice/releaseExclusiveAccess releaseExclusiveAccess @/link> must be made at a later time,
 					otherwise the process will never release its exclusive access.
 	@result			Returns <i>YES</i> if the exclusinve access is acquired and <i>NO</i> if not.
 */
@@ -177,7 +221,7 @@
 /*!
 	@method			releaseExclusiveAccess
 	@abstract		Releases the latest exclusive access request for the device.
-	@discussion		A call to this method must be made for every call to <b>acquireExclusiveAccess</b>, 
+	@discussion		A call to this method must be made for every call to @link //apple_ref/occ/instm/DRDevice/acquireExclusiveAccess acquireExclusiveAccess @/link, 
 					otherwise the process will never release its exclusive access.
 */
 - (void) releaseExclusiveAccess;
@@ -189,11 +233,11 @@
 					their claim on blank media to other applications.  Indicating an interest in the reservation
 					isn't enough to assume its been acquired, as there are likely to be other applications in
 					the system whom have also indicated an interest in the blank media reservation.  You will
-					receive a DRDeviceStatusChangedNotification with a value of <tt>TRUE</tt> for the
-					DRDeviceMediaIsReservedKey when the blank media reservation has been acquired.
+					receive a @link DRDeviceStatusChangedNotification DRDeviceStatusChangedNotification @/link with a value of <tt>TRUE</tt> for the
+					@link DRDeviceMediaIsReservedKey DRDeviceMediaIsReservedKey @/link when the blank media reservation has been acquired.
 					
 					This function may be called multiple times. Each time it is called, a call to
-					<b>releaseMediaReservation</b> must be made at a later time, otherwise the process will
+					@link //apple_ref/occ/instm/DRDevice/releaseMediaReservation releaseMediaReservation @/link must be made at a later time, otherwise the process will
 					never fully rescind its interest in the blank media reservation.
 */
 - (void) acquireMediaReservation;
@@ -223,6 +267,11 @@
 	of this information it's much more efficient to call <b>info</b> yourself and
 	then extract the needed values from the dictionary. "*/
 	
+/*! 
+	@category		DRDevice (InfoConvenience)
+   	@discussion		This category on DRDevice defines methods that make retrieving
+   					the more commonly accessed DRDevice information dictionary properties easier.
+*/
 @interface DRDevice (InfoConvenience)
 
 /*!
@@ -259,6 +308,11 @@
 	of this information it's much more efficient to get status yourself 
 	and then extract the needed values from the dictionary. "*/
 
+/*! 
+	@category		DRDevice (StatusConvenience)
+   	@discussion		This category on DRDevice defines methods that make retrieving
+   					the more commonly accessed DRDevice status dictionary properties easier.
+*/
 @interface DRDevice (StatusConvenience)
 
 
@@ -383,29 +437,29 @@ extern const float	DRDeviceBurnSpeedMax		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LAT
 
 /*!
 	@const	 	DRDeviceAppearedNotification
-	@discussion	Posted by a DRNotificationCenter when a device is added to the system.
+	@discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when a device is added to the system.
 
 				This notification is registered for only by name. 
 				
 				The object associated with this notification
 				is the the device that has appeared. The userInfo is the same dictionary 
-				returned by <b>info</b> for that device. 
+				returned by @link //apple_ref/occ/instm/DRDevice/info info @/link for that device. 
 */
 extern NSString* const DRDeviceAppearedNotification	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceDisappearedNotification
-	@discussion	Posted by a DRNotificationCenter when a device is removed from the system.
+	@discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when a device is removed from the system.
 	
 				The object associated with this notification
 				is the the device that has disappeared. The userInfo is the same dictionary 
-				returned by <b>info</b> for that device. 
+				returned by @link //apple_ref/occ/instm/DRDevice/info info @/link for that device. 
 */
 extern NSString* const DRDeviceDisappearedNotification	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	 	DRDeviceStatusChangedNotification
-	@discussion	Posted by a DRNotificationCenter when the media
+	@discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when the media
 				in a device changes state. This can include being ejected, inserted, becoming busy, 
 				etc. 
 				
@@ -423,85 +477,85 @@ extern NSString* const DRDeviceStatusChangedNotification	AVAILABLE_MAC_OS_X_VERS
 
 /*!
 	@const		DRDeviceSupportLevelKey	
-	@discussion	The info key whose value is an NSString describing the support level 
-				the device enjoys from the engine.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSString describing the support level the device enjoys from the engine.
 */
 extern NSString* const DRDeviceSupportLevelKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceIORegistryEntryPathKey
-	@discussion	The info key whose value is an NString containing the path 
-				of the device in the IO Registry.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString containing the path of the device in the IO Registry.
 */
 extern NSString* const DRDeviceIORegistryEntryPathKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceWriteCapabilitiesKey
-	@discussion	The info key whose value is an NSDictionary containing 
-				the capabilities of the device for writing different kinds of media.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSDictionary containing the capabilities of the device for writing different kinds of media.
 */
 extern NSString* const DRDeviceWriteCapabilitiesKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceVendorNameKey
-	@discussion	The info key whose value is an NString containing the vendor name 
-				extracted from the device.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString containing the vendor name extracted from the device.
 */
 extern NSString* const DRDeviceVendorNameKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceProductNameKey
-	@discussion	The info key whose value is an NString containing the product name 
-				extracted from the device.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString containing the product name extracted from the device.
 */
 extern NSString* const DRDeviceProductNameKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceFirmwareRevisionKey
-	@discussion	The info key whose value is an NString containing the firmeware revision 
-				extracted from the device.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString containing the firmeware revision extracted from the device.
 */
 extern NSString* const DRDeviceFirmwareRevisionKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectKey
-	@discussion	The info key whose value is an NString describing the connection 
-				of the device to the computer.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString describing the connection of the device to the computer.
 */
 extern NSString* const DRDevicePhysicalInterconnectKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectLocationKey
-	@discussion	The info key whose value is an NString describing the location 
-				of the device (internal/external/unknown).
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NString describing the location of the device (internal/external/unknown).
 */
 extern NSString* const DRDevicePhysicalInterconnectLocationKey	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRDeviceLoadingMechanismCanEjectKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyInfo. The value of this key
-				is an NSNumber describing if the loading mechanism of the drive can eject.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSNumber describing if the loading mechanism of the drive can eject.
 */
 extern NSString* const DRDeviceLoadingMechanismCanEjectKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const DRDeviceLoadingMechanismCanInjectKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyInfo. The value of this key
-				is an NSNumber describing if the loading mechanism of the drive can inject.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSNumber describing if the loading mechanism of the drive can inject.
 */
 extern NSString* const DRDeviceLoadingMechanismCanInjectKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const DRDeviceLoadingMechanismCanOpenKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyInfo. The value of this key
-				is an NSNumber describing if the loading mechanism of the drive can open.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSNumber describing if the loading mechanism of the drive can open.
 */
 extern NSString* const DRDeviceLoadingMechanismCanOpenKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const DRDeviceWriteBufferSizeKey
-	@discussion	A key for the dictionary returned by DRDeviceCopyInfo. The value of this key
-				is an NSNumber containing the size of the write buffer of the device.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method.
+				NSNumber containing the size of the write buffer of the device.
 */
 extern NSString* const DRDeviceWriteBufferSizeKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -509,35 +563,35 @@ extern NSString* const DRDeviceWriteBufferSizeKey				AVAILABLE_MAC_OS_X_VERSION_
 /* Support levels */
 /*!
 	@const		DRDeviceSupportLevelNone
-	@discussion	The value of DRDeviceSupportLevelKey that indicates 
+	@discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates 
 				this device is not supported.
 */
 extern NSString* const DRDeviceSupportLevelNone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRDeviceSupportLevelUnsupported
-	@discussion	One of the values for DRDeviceSupportLevelKey. This value indicates
+	@discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates
 				the device is unsupported, but the engine will try to use it anyway.
 */
 extern NSString* const DRDeviceSupportLevelUnsupported			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceSupportLevelVendorSupported
-	@discussion	The value of DRDeviceSupportLevelKey that indicates 
+	@discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates 
 				this device has been tested by a third party for support.
 */
 extern NSString* const DRDeviceSupportLevelVendorSupported		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceSupportLevelAppleSupported
-	@discussion	The value of DRDeviceSupportLevelKey that indicates 
+	@discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates 
 				this device has been tested by Apple for support.
 */
 extern NSString* const DRDeviceSupportLevelAppleSupported		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceSupportLevelAppleShipping
-	@discussion	The value of DRDeviceSupportLevelKey that indicates 
+	@discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates 
 				this device is shipping in some Apple machine.
 */
 extern NSString* const DRDeviceSupportLevelAppleShipping		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -546,35 +600,35 @@ extern NSString* const DRDeviceSupportLevelAppleShipping		AVAILABLE_MAC_OS_X_VER
 /* Types of physical interconnect */
 /*!
 	@const		DRDevicePhysicalInterconnectATAPI
-	@discussion	One of the possible values of the DRDevicePhysicalInterconnectKey.
+	@discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link.
 				Device is connected on an ATAPI interface.
 */
 extern NSString* const DRDevicePhysicalInterconnectATAPI		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectFibreChannel
-	@discussion	One of the possible values of the DRDevicePhysicalInterconnectKey.
+	@discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link.
 				Device is connected through a Fibre Channel interface.
 */
 extern NSString* const DRDevicePhysicalInterconnectFibreChannel	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectFireWire
-	@discussion	One of the possible values of the DRDevicePhysicalInterconnectKey.
+	@discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link.
 				Device is connected through a Firewire interface.
 */
 extern NSString* const DRDevicePhysicalInterconnectFireWire		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectSCSI
-	@discussion	One of the possible values of the DRDevicePhysicalInterconnectKey.
+	@discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link.
 				Device is connected on a SCSI interface.
 */
 extern NSString* const DRDevicePhysicalInterconnectSCSI			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDevicePhysicalInterconnectUSB
-	@discussion	One of the possible values of the DRDevicePhysicalInterconnectKey.
+	@discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link.
 				Device is connected through a USB interface.
 */
 extern NSString* const DRDevicePhysicalInterconnectUSB			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -607,91 +661,91 @@ extern NSString* const DRDevicePhysicalInterconnectLocationUnknown		AVAILABLE_MA
 	DRDeviceWriteCapabilitiesKey, in the dictionary returned by -[DRDevice info]. */
 /*!
 	@const 		DRDeviceCanWriteKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to some type of media.
 */
 extern NSString* const DRDeviceCanWriteKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteCDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to some type of CD based media.
 */
 extern NSString* const DRDeviceCanWriteCDKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteCDRKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to CD-R media.
 */
 extern NSString* const DRDeviceCanWriteCDRKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteCDRWKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to CD-RW media.
 */
 extern NSString* const DRDeviceCanWriteCDRWKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to some type of DVD based media.
 */
 extern NSString* const DRDeviceCanWriteDVDKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDRKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to DVD-R media.
 */
 extern NSString* const DRDeviceCanWriteDVDRKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDRWKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to DVD-RW media.
 */
 extern NSString* const DRDeviceCanWriteDVDRWKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDRAMKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to DVD-RAM media.
 */
 extern NSString* const DRDeviceCanWriteDVDRAMKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDPlusRKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to DVD+R media.
 */
 extern NSString* const DRDeviceCanWriteDVDPlusRKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteDVDPlusRWKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write to DVD+RW media.
 */
 extern NSString* const DRDeviceCanWriteDVDPlusRWKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteIndexPointsKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write index points to CD media.
 */
 extern NSString* const DRDeviceCanWriteIndexPointsKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceCanWriteISRCKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can write ISRC to CD media.
 */
 extern NSString* const DRDeviceCanWriteISRCKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
-	@const		DRDeviceCanWriteCDRawKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@const		DRDeviceCanWriteCDTAOKey
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports a TAO (track-at-once)
 				burn strategy for CD.
 */
@@ -699,7 +753,7 @@ extern NSString* const DRDeviceCanWriteCDTAOKey					AVAILABLE_MAC_OS_X_VERSION_1
 
 /*!
 	@const		DRDeviceCanWriteCDSAOKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports a SAO (session-at-once)
 				burn strategy for CD.
 */
@@ -707,7 +761,7 @@ extern NSString* const DRDeviceCanWriteCDSAOKey					AVAILABLE_MAC_OS_X_VERSION_1
 
 /*!
 	@const		DRDeviceCanWriteCDRawKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports a raw mode burn strategy for CD.
 				Raw mode is sometimes incorrectly referred to as DAO (disc-at-once).
 */
@@ -715,7 +769,7 @@ extern NSString* const DRDeviceCanWriteCDRawKey					AVAILABLE_MAC_OS_X_VERSION_1
 
 /*!
 	@const		DRDeviceCanWriteDVDDAOKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports a DAO (disc-at-once)
 				burn strategy on DVD media.
 */
@@ -723,28 +777,28 @@ extern NSString* const DRDeviceCanWriteDVDDAOKey				AVAILABLE_MAC_OS_X_VERSION_1
 
 /*!
 	@const		DRDeviceCanTestWriteCDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can perform a test burn to CD media.
 */
 extern NSString* const DRDeviceCanTestWriteCDKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanTestWriteDVDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device can perform a test burn to DVD media.
 */
 extern NSString* const DRDeviceCanTestWriteDVDKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanUnderrunProtectCDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports burn underrun protection when writing to CD media.
 */
 extern NSString* const DRDeviceCanUnderrunProtectCDKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCanUnderrunProtectDVDKey
-	@discussion	One of the keys in the dictionary associated with DRDeviceWriteCapabilitiesKey.
+	@discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary.
 				NSNumber indicating whether the device supports burn underrun protection when writing to DVD media.
 */
 extern NSString* const DRDeviceCanUnderrunProtectDVDKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -757,42 +811,42 @@ extern NSString* const DRDeviceCanUnderrunProtectDVDKey			AVAILABLE_MAC_OS_X_VER
 
 /*!
 	@const		DRDeviceIsBusyKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSNumber indicating whether the device is busy or not.
 */
 extern NSString* const DRDeviceIsBusyKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceIsTrayOpenKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSNumber indicating whether the device's tray is open or not.
 */
 extern NSString* const DRDeviceIsTrayOpenKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMaximumWriteSpeedKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSNumber containing the maximum burning speed of this device.
 */
 extern NSString* const DRDeviceMaximumWriteSpeedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceCurrentWriteSpeedKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSNumber containing the current burning speed of this device.
 */
 extern NSString* const DRDeviceCurrentWriteSpeedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaStateKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSString describing the state of the media.
 */
 extern NSString* const DRDeviceMediaStateKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaInfoKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSDictionary of information describing the media currently in the device. 
 				This key may not be present if no media is inserted.
 */
@@ -800,7 +854,7 @@ extern NSString* const DRDeviceMediaInfoKey						AVAILABLE_MAC_OS_X_VERSION_10_2
 
 /*!
 	@const		DRDeviceBurnSpeedsKey
-	@discussion	One of the keys in the dictionary returned by the status method.
+	@discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSArray containing the possible burn speeds available to use.
 				This key may not be present if no media is inserted.
 */
@@ -808,7 +862,7 @@ extern NSString* const DRDeviceBurnSpeedsKey					AVAILABLE_MAC_OS_X_VERSION_10_2
 
 /*!
 	@const		DRDeviceTrackRefsKey
-	@discussion One of the keys in the dictionary returned by the status method.
+	@discussion One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSArray containing a list of DRTrack objects describing any tracks that
 				are already on the disc.
 */
@@ -816,7 +870,7 @@ extern NSString* const DRDeviceTrackRefsKey						AVAILABLE_MAC_OS_X_VERSION_10_3
 
 /*!
 	@const		DRDeviceTrackInfoKey
-	@discussion One of the keys in the dictionary returned by the status method.
+	@discussion One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method.
 				NSDictionary containing NSDictionaries describing the tracks.  DRTracks
 				from the DRDeviceTrackRefsKey are used as keys into this dictionary.
 */
@@ -826,21 +880,21 @@ extern NSString* const DRDeviceTrackInfoKey						AVAILABLE_MAC_OS_X_VERSION_10_3
 /*	Media states */
 /*!
 	@const		DRDeviceMediaStateMediaPresent
-	@discussion	One of the possible values for the DRDeviceMediaStateKey.
+	@discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link.
 				Device contains media of some type.
 */
 extern NSString* const DRDeviceMediaStateMediaPresent			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaStateInTransition
-	@discussion	One of the possible values for the DRDeviceMediaStateKey.
+	@discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link.
 				The media is transitioning from one state to another (i.e., being spun up/down).
 */
 extern NSString* const DRDeviceMediaStateInTransition			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaStateNone
-	@discussion	One of the possible values for the DRDeviceMediaStateKey.
+	@discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link.
 				No media is present in the device.
 */
 extern NSString* const DRDeviceMediaStateNone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -850,42 +904,42 @@ extern NSString* const DRDeviceMediaStateNone					AVAILABLE_MAC_OS_X_VERSION_10_
 	in the dictionary returned by -[DRDevice status]. */
 /*!
 	@const		DRDeviceMediaBSDNameKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSString containing the BSD /dev node name assigned to the media in the device.
 */
 extern NSString* const DRDeviceMediaBSDNameKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaIsBlankKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber indicating whether data bas previously been written to the media.
 */
 extern NSString* const DRDeviceMediaIsBlankKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaIsAppendableKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber indicating that data can be appended to the exisiting data (if any).
 */
 extern NSString* const DRDeviceMediaIsAppendableKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaIsOverwritableKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber indicating that data can be appended to the exisiting data (if any).
 */
 extern NSString* const DRDeviceMediaIsOverwritableKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaIsErasableKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber indicating whether this media can be erased.
 */
 extern NSString* const DRDeviceMediaIsErasableKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaIsReservedKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber indicating whether the media is reserved for exclusive use by 
 				the current process.
 */
@@ -893,70 +947,70 @@ extern NSString* const DRDeviceMediaIsReservedKey				AVAILABLE_MAC_OS_X_VERSION_
 
 /*!
 	@const		DRDeviceMediaOverwritableSpaceKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				MSF value of the amount of writable space available on the media to be written to.
 */
 extern NSString* const DRDeviceMediaOverwritableSpaceKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaFreeSpaceKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				MSF value of the amount of space available on the media to be written to.
 */
 extern NSString* const DRDeviceMediaFreeSpaceKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaUsedSpaceKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				MSF value of the amount of space currently used for exising data.
 */
 extern NSString* const DRDeviceMediaUsedSpaceKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaBlocksOverwritableKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber containing the amount of writable space available (in blocks) on the media to be written to.
 */
 extern NSString* const DRDeviceMediaBlocksOverwritableKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaBlocksFreeKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber containing the amount of space available (in blocks) on the media to be written to.
 */
 extern NSString* const DRDeviceMediaBlocksFreeKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaBlocksUsedKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber containing the amount of space currently used (in blocks) for exising data.
 */
 extern NSString* const DRDeviceMediaBlocksUsedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTrackCountKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber containing the number of tracks present on the media.
 */
 extern NSString* const DRDeviceMediaTrackCountKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaSessionCountKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSNumber containing the sessions of tracks present on the media.
 */
 extern NSString* const DRDeviceMediaSessionCountKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRDeviceMediaClassKey
-	@discussion	A key for the dictionary for DRDeviceMediaInfoKey. The value of this key 
-				is a NSString containing the class of media present in the drive.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. 
+				NSString containing the class of media present in the drive.
 */
 extern NSString* const DRDeviceMediaClassKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeKey
-	@discussion	One of the keys in the dictionary for DRDeviceMediaInfoKey.
+	@discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary.
 				NSString containing the type of media inserted in the device.
 */
 extern NSString* const DRDeviceMediaTypeKey						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -965,21 +1019,21 @@ extern NSString* const DRDeviceMediaTypeKey						AVAILABLE_MAC_OS_X_VERSION_10_2
 /* Media classes */
 /*!
 	@const	DRDeviceMediaClassCD
-	@discussion	One possible value of the DRDeviceMediaClassKey. Indicates the media
+	@discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media
 				is some type of CD based media.
 */
 extern NSString* const DRDeviceMediaClassCD						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	DRDeviceMediaClassDVD
-	@discussion	One possible value of the DRDeviceMediaClassKey. Indicates the media
+	@discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media
 				is some type of DVD based media.
 */
 extern NSString* const DRDeviceMediaClassDVD						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const	DRDeviceMediaClassUnknown
-	@discussion	One possible value of the DRDeviceMediaClassKey.  Indicates the media
+	@discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link.  Indicates the media
 				class is unknown.
 */
 extern NSString* const DRDeviceMediaClassUnknown					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -988,70 +1042,70 @@ extern NSString* const DRDeviceMediaClassUnknown					AVAILABLE_MAC_OS_X_VERSION_
 /* Media types */
 /*!
 	@const		DRDeviceMediaTypeCDROM
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a CD-ROM.
 */
 extern NSString* const DRDeviceMediaTypeCDROM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeCDR
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a CD-R.
 */
 extern NSString* const DRDeviceMediaTypeCDR						AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeCDRW
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a CD-RW.
 */
 extern NSString* const DRDeviceMediaTypeCDRW					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDROM
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD-ROM.
 */
 extern NSString* const DRDeviceMediaTypeDVDROM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDRAM
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD-RAM.
 */
 extern NSString* const DRDeviceMediaTypeDVDRAM					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDR
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD-R.
 */
 extern NSString* const DRDeviceMediaTypeDVDR					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDRW
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD-RW.
 */
 extern NSString* const DRDeviceMediaTypeDVDRW					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDPlusR
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD+R.
 */
 extern NSString* const DRDeviceMediaTypeDVDPlusR				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeDVDPlusRW
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				Media is a DVD+RW.
 */
 extern NSString* const DRDeviceMediaTypeDVDPlusRW				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRDeviceMediaTypeUnknown
-	@discussion	One of the possible values of the DRDeviceMediaTypeKey.
+	@discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link.
 				The type of the media cannot be determined.
 */
 extern NSString* const DRDeviceMediaTypeUnknown					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

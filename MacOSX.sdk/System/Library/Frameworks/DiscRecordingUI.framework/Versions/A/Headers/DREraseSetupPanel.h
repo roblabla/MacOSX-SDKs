@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header			DREraseSetupPanel.h
+	@abstract		Panel to create and configure a DRErase object.
+	@discussion		The @link //apple_ref/occ/cl/DREraseSetupPanel DREraseSetupPanel @/link supports choosing the 
+					device to use and what sort of erase to perform.
+*/
+
 #import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
 
@@ -33,7 +39,7 @@
 					means that if the erase object obtained from the
 					panel is not used to do an erase, the device will
 					remain unavailable to other applications until the
-					esclusive access is released.
+					exclusive access is released.
 */
 @interface DREraseSetupPanel : DRSetupPanel
 {
@@ -58,15 +64,16 @@
 /* Getting the configured erase object */
 
 /*! 
-   @method 			eraseObject
-   @abstract 		Returns a configured DRErase object which is ready 
-   					to the disc in the currently selected device.
-   @discussion		Do not invoke this method within a modal session
-					(<b>runSetupPanel</b> or
-					<b>setupPanelForWindow:modalDelegate:didEndSelector:contextInfo:</b>) 
-					because the erase object information is
-					only updated just before the modal session ends.
-   @result  		A DRErase object.
+	@method 	eraseObject
+	@abstract	Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device.
+	@discussion	The new DRErase object is configured based on the settings in the setup panel
+				when the user clicks the OK button.
+				
+				Do not invoke this method within a modal session (@link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or
+				@link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow%58modalDelegate%58didEndSelector%58contextInfo%58 beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link)
+				because the erase object information is only updated just before the
+				modal session ends.
+	@result  	A new DRErase object.
 */
 - (DRErase*) eraseObject;
 

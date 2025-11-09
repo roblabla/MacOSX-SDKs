@@ -85,8 +85,11 @@ protected:
     } LUNInfo;
 	
     // reserved for future use
-    struct ExpansionData { };
-    ExpansionData *reserved; 
+    struct ExpansionData 
+	{
+		bool				fStarted;
+	};
+    ExpansionData * fExpansionData; 
     
 	/////////////////////////////////////////
 	// private fields

@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header 	
+	@abstract		Status dictionary content keys.
+
+	@discussion
+*/
+
 #import <Foundation/Foundation.h>
 #import <AvailabilityMacros.h>
 
@@ -24,15 +30,15 @@
 #endif
 /*!
 	@const DRStatusStateKey
-	@discussion	A key for the status dictionaries. The value of this key is a CFString indicating 
-				the current state of the operation.
+	@discussion	A key for the status dictionaries. 
+				NSString indicating the current state of the operation.
 */
 extern NSString* const	DRStatusStateKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusPercentCompleteKey
-	@discussion	A key for the status dictionaries. The value of this key is 
-				a CFNumber containing the precent complete of the operation expressed as
+	@discussion	A key for the status dictionaries. 
+				NSNumber containing the precent complete of the operation expressed as
 				a foating point number from 0 to 1.
 */
 extern NSString* const	DRStatusPercentCompleteKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -45,36 +51,36 @@ extern NSString* const	DRStatusPercentCompleteKey		AVAILABLE_MAC_OS_X_VERSION_10
 #endif
 /*!
 	@const DRStatusCurrentSessionKey
-	@discussion	A key for the burn status dictionary. The value of this key is 
-				a CFNumber indicating the current session being burned.
+	@discussion	A key for the burn status dictionary. 
+				NSNumber indicating the current session being burned.
 */
 extern NSString* const	DRStatusCurrentSessionKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusCurrentTrackKey
-	@discussion	A key for the status dictionaries. The value of this key is 
-				a CFNumber indicating the current track being burned.
+	@discussion	A key for the status dictionaries. 
+				NSNumber indicating the current track being burned.
 */
 extern NSString* const	DRStatusCurrentTrackKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusTotalSessionsKey
-	@discussion	A key for the status dictionaries. The value of this key is 
-				a CFNumber indicating the total number of sessions being burned.
+	@discussion	A key for the status dictionaries. 
+				NSNumber indicating the total number of sessions being burned.
 */
 extern NSString* const	DRStatusTotalSessionsKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusTotalTracksKey
-	@discussion	A key for the status dictionaries. The value of this key is 
-				a CFNumber indicating the total number of tracks in the current session being burned.
+	@discussion	A key for the status dictionaries. 
+				NSNumber indicating the total number of tracks in the current session being burned.
 */
 extern NSString* const	DRStatusTotalTracksKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusCurrentSpeedKey
-	@discussion	A key for the burn status dictionary. The value of this key is 
-				an NSNumber indicating the current burn speed.
+	@discussion	A key for the burn status dictionary. 
+				NSNumber indicating the current burn speed.
 */
 extern NSString* const	DRStatusCurrentSpeedKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -85,8 +91,8 @@ extern NSString* const	DRStatusCurrentSpeedKey		AVAILABLE_MAC_OS_X_VERSION_10_2_
 #endif
 /*!
 	@const DRStatusEraseTypeKey
-	@discussion	A key for the erase status dictionary. The value of this key is 
-				a CFString indicating the type of erase operation.
+	@discussion	A key for the erase status dictionary. 	
+				NSString indicating the type of erase operation.
 */
 extern NSString* const DRStatusEraseTypeKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -98,35 +104,35 @@ extern NSString* const DRStatusEraseTypeKey				AVAILABLE_MAC_OS_X_VERSION_10_2_A
 #endif
 /*!
 	@const DRStatusStateNone
-	@discussion	One possible value for DRStatusStateKey. Indicates the
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the
 				operation has not yet begun.
 */
 extern NSString* const DRStatusStateNone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
-	@const DRStatusStatePreparingKey
-	@discussion	One possible value for DRStatusStateKey. Indicates the
+	@const DRStatusStatePreparing
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the
 				operation is preparing to begin.
 */
 extern NSString* const DRStatusStatePreparing			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusStateVerifying
-	@discussion	One possible value for DRStatusStateKey. Indicates the
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the
 				operation is verifying what it did.
 */
 extern NSString* const	DRStatusStateVerifying			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
-	@const DRStatusStateDoneKey
-	@discussion	One possible value for DRStatusStateKey. Indicates the
+	@const DRStatusStateDone
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the
 				operation is finished and it succeeded.
 */
 extern NSString* const DRStatusStateDone					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
-	@const DRStatusStateFailedKey
-	@discussion	One possible value for DRStatusStateKey. Indicates the
+	@const DRStatusStateFailed
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the
 				operation is finished and it failed.
 */
 extern NSString* const DRStatusStateFailed				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -139,47 +145,47 @@ extern NSString* const DRStatusStateFailed				AVAILABLE_MAC_OS_X_VERSION_10_2_AN
 #endif
 /*!
 	@const DRStatusStateSessionOpen
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is opening a session on disc. The exact session being opened
-				is contained in DRStatusCurrentSessionKey.
+				is contained in @link DRStatusCurrentSessionKey DRStatusCurrentSessionKey @/link.
 */
 extern NSString* const	DRStatusStateSessionOpen		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusStateTrackOpen
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is opening a track on disc. The exact track being opened
-				is contained in DRStatusCurrentTrackKey.
+				is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
 */
 extern NSString* const	DRStatusStateTrackOpen			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusStateTrackWrite
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is writing a track on disc. The exact track being written
-				is contained in DRStatusCurrentTrackKey.
+				is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
 */
 extern NSString* const	DRStatusStateTrackWrite		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusStateTrackClose
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is closing a track on disc. The exact track being closed
-				is contained in DRStatusCurrentTrackKey.
+				is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
 */
 extern NSString* const	DRStatusStateTrackClose		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
-	@const DRStatusStateSessionOpen
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@const DRStatusStateSessionClose
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is closing a session on disc. The exact session being closing
-				is contained in DRStatusCurrentSessionKey.
+				is contained in @link DRStatusCurrentSessionKey DRStatusCurrentSessionKey @/link.
 */
 extern NSString* const	DRStatusStateSessionClose		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const DRStatusStateFinishing
-	@discussion	One possible value for DRStatusStateKey in the burn status dictionary. 
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. 
 				Indicates the burn is finishing up (closing the last session, writing the TOC, etc).
 */
 extern NSString* const	DRStatusStateFinishing			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -191,8 +197,8 @@ extern NSString* const	DRStatusStateFinishing			AVAILABLE_MAC_OS_X_VERSION_10_2_
 #pragma mark Erase dictionary values for DRStatusStateKey
 #endif
 /*!
-	@const DRStatusStateErasingKey
-	@discussion	One possible value for DRStatusStateKey in the erase status dictionary. 
+	@const DRStatusStateErasing
+	@discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the erase status dictionary. 
 				Indicates the erase is currently in progress.
 */
 extern NSString* const DRStatusStateErasing				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

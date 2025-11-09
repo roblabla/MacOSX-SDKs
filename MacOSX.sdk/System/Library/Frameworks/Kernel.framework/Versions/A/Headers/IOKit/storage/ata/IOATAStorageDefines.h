@@ -191,8 +191,7 @@ enum
 	kATASupports48BitAddressingBit			= 10,
 	
 	kATASupportsFlushCacheBit				= 12,
-	kATASupportsFlushCacheExtendedBit		= 13,
-	
+	kATASupportsFlushCacheExtendedBit		= 13
 };
 
 /* Masks for features published in Word 83 of device identify data */
@@ -231,7 +230,7 @@ enum
 	kIOATAFeatureAdvancedPowerManagement 	= 0x04,
 	kIOATAFeatureCompactFlash				= 0x08,
 	kIOATAFeature48BitLBA					= 0x10,
-	kIOATAFeatureSMART						= 0x20,
+	kIOATAFeatureSMART						= 0x20
 };
 
 /* ATA Advanced Power Management settings (valid settings range from 1-254),
@@ -260,7 +259,7 @@ enum
 {
 	kATAEnableUltraDMAModeMask 		= 0x40,
 	kATAEnableMultiWordDMAModeMask	= 0x20,
-	kATAEnablePIOModeMask			= 0x08,
+	kATAEnablePIOModeMask			= 0x08
 };
 
 

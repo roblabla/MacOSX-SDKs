@@ -16,6 +16,27 @@
  
 */
 
+/*!	@header 	DRNotificationCenter.h
+	@abstract	Register to receive notifications from Disc Recording.
+	@discussion	A @link DRNotificationCenter DRNotificationCenter @/link object (or simply, notification center) is
+				essentially a notification dispatch table. It notifies all observers of
+				notifications meeting specific criteria. This information is encapsulated in
+				NSNotification objects, also known as notifications. Client objects register
+				themselves with the notification center as observers of specific notifications
+				posted by DiscRecording. When an event occurs, Disc Recording posts an appropriate
+				notification to the notification center. The notification center dispatches a
+				message to each registered observer, passing the notification as the sole
+				argument.
+				
+				There are two main differences between a @link DRNotificationCenter DRNotificationCenter @/link and the
+				NSNotificationCenter from Foundation. First is that only DiscRecording
+				posts notifications received through this mechanism. You use this to 
+				obtain device plug/unplug events, burn status, etc. Second, there can be
+				multple notification centers active at once. Each run loop of your application
+				will have it's own notification center and notifications from that notification
+				center will be posted to the runloop it was created on.
+*/
+
 #import <Foundation/Foundation.h>
 
 #import <DiscRecordingEngine/DRCoreNotifications.h>
@@ -33,7 +54,7 @@
 				argument.
 				
 				There are two main differences between a DRNotificationCenter and the
-				NSNotificationCenter from Foundation. First is that only DiscRecording
+				NSNotificationCenter from Foundation. First is that only Disc Recording
 				posts notifications received through this mechanism. You use this to 
 				obtain device plug/unplug events, burn status, etc. Second, there can be
 				multple notification centers active at once. Each run loop of your application
@@ -49,7 +70,7 @@
 /*!
 	@method			currentRunLoopCenter
 	@abstract		Creates an initializes a DRNotificationCenter
-	@discussion		The instance returned sends DiscRecording notifications only
+	@discussion		The instance returned sends Disc Recording notifications only
 					to the current run loop. If you want to receive notifications 
 					on another run loop, this method must be called from that runloop.
 	@result			A shared DRNotificationCenter object.
@@ -69,7 +90,7 @@
 					notifies the observer of all notifications with the name notificationName.
 					
 					The notification center does not retain anObserver or anObject. Therefore, you
-					should always send <b>removeObserver:name:object:</b> to the notification center 
+					should always send @link //apple_ref/occ/instm/DRNotificationCenter/removeObserver%58name%58object%58 removeObserver:name:object: @/link to the notification center 
 					before releasing these objects.
 	@param			observer	The observer to send notifications to.
 	@param			aSelector	The selector to call
@@ -84,7 +105,7 @@
 	@discussion		Removes anObserver as the observer of notifications with the name
 					notificationName and object anObject from the receiver. Be sure to invoke this
 					method before deallocating the observer object or any object specified in 
-					<b>addObserver:selector:name:object:</b>.
+					@link //apple_ref/occ/instm/DRNotificationCenter/addObserver%58selector%58name%58object%58 addObserver:selector:name:object: @/link.
 	@param			observer	The observer to remove
 	@param			aName		The notification the remove the observer from.
 	@param			anObject	The object the observer was listening for.

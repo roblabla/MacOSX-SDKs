@@ -136,6 +136,7 @@ private:
     int syncSIOCSIFLLADDR(IONetworkController * ctr, const char * lladdr, int len);
 
     static int performGatedCommand(void *, void *, void *, void *, void *);
+	static IOReturn enableFilter_Wrapper(IOEthernetInterface *, IONetworkController *, const OSSymbol *, UInt32 , IOOptionBits);
 
 public:
 

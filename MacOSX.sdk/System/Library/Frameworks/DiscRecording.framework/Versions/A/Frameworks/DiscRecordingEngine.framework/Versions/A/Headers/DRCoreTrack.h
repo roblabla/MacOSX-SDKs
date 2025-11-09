@@ -16,6 +16,12 @@
  
 */
 
+/*!	@header 	
+	@abstract		Track object interfaces for Disc Recording.
+
+	@discussion		
+*/
+
 #ifndef _H_DRCoreTrack
 #define _H_DRCoreTrack
 
@@ -59,7 +65,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@typedef	DRTrackMessage
-	@abstract	Messages sent to the DRTrackCallbackProc callback.
+	@abstract	Messages sent to the @link DRTrackCallbackProc DRTrackCallbackProc @/link callback.
 */
 typedef UInt32	DRTrackMessage;
 
@@ -67,12 +73,12 @@ typedef UInt32	DRTrackMessage;
     @typedef 	DRTrackCallbackProc
     @abstract	Callback defined in the client to produce track data for recording.
 	@discussion	If your callback does not support a given function, it should return
-				a value of kDRFunctionNotSupportedErr. 
+				a value of @link //apple_ref/c/econst/kDRFunctionNotSupportedErr kDRFunctionNotSupportedErr @/link. 
     @param 		track		The track with this callback is associated.
     @param		message		Indicates the type of data requested as one of the constants
     						in the Track Messages enumeration.
  	@param		ioParam		Parameters are message-specific.
-    @result 	Error code.  Your client application should return a value of kDRFunctionNotSupportedErr
+    @result 	Error code.  Your client application should return a value of @link //apple_ref/c/econst/kDRFunctionNotSupportedErr kDRFunctionNotSupportedErr @/link
 				when a message is received that you don't respond to, and a value of noErr when
 				the message is handled successfully.  Any other error will cause
 				the burn to immediately fail with the value you return as the error code.
@@ -89,7 +95,7 @@ typedef struct DRTrackProductionInfo DRTrackProductionInfo;
 	@abstract	Creates a new track object.
 	@param		properties	A CFDictionary object containing the track properties. If this
 							parameter is not a valid CFDictionary object the behavior is undefined.
-	@param		callbacks	A pointer to a DRTrackCallbackProc callback. If this callback is NULL
+	@param		callbacks	A pointer to a @link DRTrackCallbackProc DRTrackCallbackProc @/link callback. If this callback is NULL
 							the behavior is undefined.
 	@result		A reference to the new DRTrack object.
 */
@@ -130,7 +136,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				Use this function to verify that the produceData callback can produce data fast 
 				enough to satisfy the data throughput requirements of the burn.
 				
-				This function will automatically set a value for the kDRMaxBurnSpeedKey key in the track's
+				This function will automatically set a value for the @link kDRMaxBurnSpeedKey kDRMaxBurnSpeedKey @/link key in the track's
 				properties dictionary, with a value equal to the return result.
 	@param		track			The track to test. 
 	@param		howManyMilliseconds	The maximum duration for the test production cycle. The 
@@ -151,11 +157,11 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@function	DRTrackEstimateLength
 	@abstract	Asks the track producer for a block size estimate.
 	@discussion	This function calls the track producer to ask it to estimate the block size
-				needed for its data.  This call is passed through to the DRTrackCallbackProc
-				track production callback as kDRTrackMessageEstimateLength.
+				needed for its data.  This call is passed through to the @link DRTrackCallbackProc DRTrackCallbackProc @/link
+				track production callback as @link kDRTrackMessageEstimateLength kDRTrackMessageEstimateLength @/link.
 				
 				For some types of tracks, this call may be very expensive.  For example,
-				a file system track (DRFilesystemTrack) may need to iterate through folders 
+				a file system track (@link DRFilesystemTrackRef DRFilesystemTrack @/link) may need to iterate through folders 
 				on disk to provide an accurate estimate. If a large number of files and folders 
 				are involved, this call may take 30 seconds or more.  Since your
 				main thread should not block for this long, you may wish to call this
@@ -185,7 +191,7 @@ extern const CFStringRef kDRTrackLengthKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND
 /*!
 	@const		kDRBlockSizeKey
 	@discussion	Required key. This key corresponds to a CFNumber object containing the size
-				of each block of the track. Common values are defined in the Block Sizes
+				of each block of the track. Common values are defined in the @link //apple_ref/c/tag/Block%32Sizes Block Sizes @/link
 				enumeration.
 */
 extern const CFStringRef kDRBlockSizeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -193,7 +199,7 @@ extern const CFStringRef kDRBlockSizeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 /*!
 	@const		kDRBlockTypeKey
 	@discussion	Required key. This key corresponds to a CFNumber object containing the type
-				of each block of the track. Common values are defined in the Block Types
+				of each block of the track. Common values are defined in the @link //apple_ref/c/tag/Block%32Types Block Types @/link
 				enumeration.
 */
 extern const CFStringRef kDRBlockTypeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -201,7 +207,7 @@ extern const CFStringRef kDRBlockTypeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 /*!
 	@const		kDRDataFormKey
 	@discussion	Required key. This key corresponds to a CFNumber object containing the data format
-				of each block of the track. Common values are defined in the Data Forms
+				of each block of the track. Common values are defined in the @link //apple_ref/c/tag/Data%32Forms Data Forms @/link
 				enumeration.
 */
 extern const CFStringRef kDRDataFormKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -209,14 +215,14 @@ extern const CFStringRef kDRDataFormKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 /*!
 	@const		kDRSessionFormatKey
 	@discussion	Required key. This key corresponds to a CFNumber object containing the session format
-				of the track. Common values are defined in the Session Mode enumeration.
+				of the track. Common values are defined in the @link //apple_ref/c/tag/Session%32Mode Session Mode @/link enumeration.
 */
 extern const CFStringRef kDRSessionFormatKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		kDRTrackModeKey
 	@discussion	Required key. This key corresponds to a CFNumber object containing the track mode
-				of the track. Common values are defined in the Track Modes enumeration.
+				of the track. Common values are defined in the @link //apple_ref/c/tag/Track%32Modes Track Modes @/link enumeration.
 */
 extern const CFStringRef kDRTrackModeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -266,15 +272,15 @@ extern const CFStringRef kDRBufferZone1DataKey		AVAILABLE_MAC_OS_X_VERSION_10_2_
 				the maximum sustained rate at which your application will request data from the 
 				track callback, in units of kilobytes per second where 1 kilobyte = 1,000 bytes.
 				
-				The value for kDRMaxBurnSpeedKey must be greater than the drive's minimum burn 
+				The value for @link kDRMaxBurnSpeedKey kDRMaxBurnSpeedKey @/link must be greater than the drive's minimum burn 
 				speed. It is usually safe to specify the appropriate flavor of 1x 
-				(kDRDeviceBurnSpeedCD1x or kDRDeviceBurnSpeedDVD1x), but some drives cannot slow  
+				(@link kDRDeviceBurnSpeedCD1x kDRDeviceBurnSpeedCD1x @/link or @link kDRDeviceBurnSpeedDVD1x kDRDeviceBurnSpeedDVD1x @/link), but some drives cannot slow  
 				all the way down to 1x.
 				
 				Given the capabilities of the drive, the bus, and the recordable disc, the burn speed used 
 				when writing a layout will generally be the highest data rate possible that is less 
-				than or equal to the value of kDRMaxBurnSpeedKey for every track, as well as less
-				than or equal to the value of the kDRBurnRequestSpeedKey key for the burn object.
+				than or equal to the value of @link kDRMaxBurnSpeedKey kDRMaxBurnSpeedKey @/link for every track, as well as less
+				than or equal to the value of the @link kDRBurnRequestedSpeedKey kDRBurnRequestedSpeedKey @/link key for the burn object.
 				
 				When this key is not present, the requested maximum sustained data rate defaults
 				to a value of infinity. In this case, the Disc Recording engine assumes that your 
@@ -298,11 +304,11 @@ extern const CFStringRef kDRPreGapLengthKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AN
 				no ISRC data is written.
 				
 				The use of this value should conform to the specifications of the IFPI.  See
-				http://www.ifpi.org/isrc for details on the ISRC standard.
+				<a href="http://www.ifpi.org/isrc">http://www.ifpi.org/isrc</a> for details on the ISRC standard.
 				
 				Not all drives can write ISRC data. If this key is present in any track and 
 				the drive cannot write ISRC data, the burn will fail with a return value of 
-				kDRDeviceCantWriteISRCErr.
+				@link //apple_ref/c/econst/kDRDeviceCantWriteISRCErr kDRDeviceCantWriteISRCErr @/link.
 */
 extern const CFStringRef kDRTrackISRCKey						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -316,7 +322,7 @@ extern const CFStringRef kDRTrackISRCKey						AVAILABLE_MAC_OS_X_VERSION_10_3_AN
 				
 				Not all drives can write index points, and not all consumer CD players report or 
 				use them.  If this key is present in any track and the drive cannot write index 
-				points, the burn will fail with a return value of kDRDeviceCantWriteIndexPointsErr.
+				points, the burn will fail with a return value of @link //apple_ref/c/econst/kDRDeviceCantWriteIndexPointsErr kDRDeviceCantWriteIndexPointsErr @/link.
 */
 extern const CFStringRef kDRIndexPointsKey						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -355,7 +361,7 @@ extern const CFStringRef kDRAudioFourChannelKey					AVAILABLE_MAC_OS_X_VERSION_1
 				
 				Not all drives are capable of writing SCMS data.  If this key is present in any
 				track and the drive cannot write SCMS, the burn will fail with a return value
-				of kDRDeviceCantWriteSCMSErr.
+				of @link //apple_ref/c/econst/kDRDeviceCantWriteSCMSErr kDRDeviceCantWriteSCMSErr @/link.
 */
 extern const CFStringRef kDRSerialCopyManagementStateKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -363,14 +369,14 @@ extern const CFStringRef kDRSerialCopyManagementStateKey		AVAILABLE_MAC_OS_X_VER
 /* Verification types */
 /*!
 	@const		kDRVerificationTypeNone
-	@discussion	One value for the kDRVerificationTypeKey dictionary key. This value indicates
+	@discussion	One value for the @link kDRVerificationTypeKey kDRVerificationTypeKey @/link dictionary key. This value indicates
 				the engine will not do any sort of verification on the track data.
 */
 extern const CFStringRef kDRVerificationTypeNone				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		kDRVerificationTypeProduceAgain
-	@discussion	One value for the kDRVerificationTypeKey dictionary key. This value indicates
+	@discussion	One value for the @link kDRVerificationTypeKey kDRVerificationTypeKey @/link dictionary key. This value indicates
 				the engine will start another production cycle and the client 
 				simply produces data again from the start.
 				
@@ -380,7 +386,7 @@ extern const CFStringRef kDRVerificationTypeProduceAgain		AVAILABLE_MAC_OS_X_VER
 
 /*!
 	@const		kDRVerificationTypeReceiveData
-	@discussion	One value for the kDRVerificationTypeKey dictionary key. This value indicates
+	@discussion	One value for the @link kDRVerificationTypeKey kDRVerificationTypeKey @/link dictionary key. This value indicates
 				the engine will read data from the disc and send it to the client
 				through a series of calls to the callback.
 */
@@ -390,7 +396,7 @@ extern const CFStringRef kDRVerificationTypeReceiveData			AVAILABLE_MAC_OS_X_VER
 /* SCMS states */
 /*!
 	@const		kDRSCMSCopyrightFree
-	@discussion	One value for the kDRSerialCopyManagementStateKey dictionary key. This value indicates that
+	@discussion	One value for the @link kDRSerialCopyManagementStateKey kDRSerialCopyManagementStateKey @/link dictionary key. This value indicates that
 				the track has no copying restrictions.  Copies of this track should also be
 				copyright free.
 */
@@ -398,7 +404,7 @@ extern const CFStringRef kDRSCMSCopyrightFree					AVAILABLE_MAC_OS_X_VERSION_10_
 
 /*!
 	@const		kDRSCMSCopyrightProtectedOriginal
-	@discussion	One value for the kDRSerialCopyManagementStateKey dictionary key. This value indicates that
+	@discussion	One value for the @link kDRSerialCopyManagementStateKey kDRSerialCopyManagementStateKey @/link dictionary key. This value indicates that
 				the track is an original subject to copyright protection.  Digital copying of
 				this track should be allowed, but copies should be marked with appropriate Serial Copy 
 				Management System (SCMS) data.
@@ -407,7 +413,7 @@ extern const CFStringRef kDRSCMSCopyrightProtectedOriginal		AVAILABLE_MAC_OS_X_V
 
 /*!
 	@const		kDRSCMSCopyrightProtectedCopy
-	@discussion	One value for the kDRSerialCopyManagementStateKey dictionary key. This value indicates that
+	@discussion	One value for the @link kDRSerialCopyManagementStateKey kDRSerialCopyManagementStateKey @/link dictionary key. This value indicates that
 				the track is a first-generation copy of an original that was subject to copy
 				protection.  No further digital copying should be allowed.
 */
@@ -454,7 +460,8 @@ extern const CFStringRef kDRSessionNumberKey				AVAILABLE_MAC_OS_X_VERSION_10_3_
 /*!
 	@const		kDRTrackTypeKey
 	@discussion	This key corresponds to a CFString object indicating the type of track. Possible values are 
-				kDRTrackTypeInvisible, kDRTrackTypeIncomplete, kDRTrackTypeReserved, or kDRTrackTypeClosed.
+				@link kDRTrackTypeInvisible kDRTrackTypeInvisible @/link, @link kDRTrackTypeIncomplete kDRTrackTypeIncomplete @/link, 
+				@link kDRTrackTypeReserved kDRTrackTypeReserved @/link , or @link kDRTrackTypeClosed kDRTrackTypeClosed @/link.
 */
 extern const CFStringRef kDRTrackTypeKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -482,7 +489,7 @@ extern const CFStringRef kDRTrackPacketSizeKey				AVAILABLE_MAC_OS_X_VERSION_10_
 /* Track types */
 /*!
 	@const		kDRTrackTypeInvisible
-	@discussion	One value for the kDRTrackTypeKey dictionary key. This value indicates the track is 
+	@discussion	One value for the @link kDRTrackTypeKey kDRTrackTypeKey @/link dictionary key. This value indicates the track is 
 				invisible and available for writing. If it is packet written and not closed, 
 				the kDRTrackPacketType key will be present along with the kDRTrackPacketSize keys.
 */
@@ -490,21 +497,21 @@ extern const CFStringRef kDRTrackTypeInvisible				AVAILABLE_MAC_OS_X_VERSION_10_
 
 /*!
 	@const		kDRTrackTypeIncomplete
-	@discussion	One value for the kDRTrackTypeKey dictionary key. This value indicates the track is 
+	@discussion	One value for the @link kDRTrackTypeKey kDRTrackTypeKey @/link dictionary key. This value indicates the track is 
 				not invisible or reserved and is available for writing.
 */
 extern const CFStringRef kDRTrackTypeIncomplete				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		kDRTrackTypeReserved
-	@discussion	One value for the kDRTrackTypeKey dictionary key. This value indicates the track is 
+	@discussion	One value for the @link kDRTrackTypeKey kDRTrackTypeKey @/link dictionary key. This value indicates the track is 
 				reserved for writing.
 */
 extern const CFStringRef kDRTrackTypeReserved				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		kDRTrackTypeClosed
-	@discussion	One value for the kDRTrackTypeKey dictionary key. This value indicates the track has been
+	@discussion	One value for the @link kDRTrackTypeKey kDRTrackTypeKey @/link dictionary key. This value indicates the track has been
 				written and is closed.
 */
 extern const CFStringRef kDRTrackTypeClosed					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -513,7 +520,7 @@ extern const CFStringRef kDRTrackTypeClosed					AVAILABLE_MAC_OS_X_VERSION_10_3_
 /* Packet types */
 /*!
 	@const		kDRTrackPacketTypeFixed
-	@discussion	One value for the kDRTrackPacketTypeKey dictionary key. This value indicates the disc is 
+	@discussion	One value for the @link kDRTrackPacketTypeKey kDRTrackPacketTypeKey @/link dictionary key. This value indicates the disc is 
 				writen with fixed sized packets.  When this value is present the kDRPacketSizeKey 
 				dictionary key will also be present.
 */
@@ -521,7 +528,7 @@ extern const CFStringRef kDRTrackPacketTypeFixed			AVAILABLE_MAC_OS_X_VERSION_10
 
 /*!
 	@const		kDRTrackPacketTypeVariable
-	@discussion	One value for the kDRTrackPacketTypeKey dictionary key. This value indicates the disc is 
+	@discussion	One value for the @link kDRTrackPacketTypeKey kDRTrackPacketTypeKey @/link dictionary key. This value indicates the disc is 
 				written with sequential, variable-sized packets.  When this key is present, the 
 				kDRPacketSizeKey dictionary key will not be.
 */
@@ -543,7 +550,7 @@ extern const CFStringRef kDRBurnKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATE
 #pragma mark - Block Sizes
 /*!
 	@enum 		Block Sizes
-	@abstract	Common block sizes for different types of track data.
+	@discussion Common block sizes for different types of track data.
 	@constant	kDRBlockSizeAudio		Audio data.
 	@constant	kDRBlockSizeMode1Data	Mode 1 data.
 	@constant	kDRBlockSizeMode2Data	Mode 2 data. Photo CD and CD-i use this.
@@ -560,7 +567,7 @@ enum
 #pragma mark - Block Types
 /*!
 	@enum 		Block Types
-	@abstract	Common block type values for types of track data.
+	@discussion Common block type values for types of track data.
 	@constant	kDRBlockTypeAudio		Audio data.
 	@constant	kDRBlockTypeMode1Data	Mode 1 data.
 	@constant	kDRBlockTypeMode2Data	Mode 2 data. Photo CD and CD-i use this.
@@ -577,7 +584,7 @@ enum
 #pragma mark - Data Forms
 /*!
 	@enum 		Data Forms
-	@abstract	Common data form values for types of track data.
+	@discussion	Common data form values for types of track data.
 	@constant	kDRDataFormAudio		Audio data.
 	@constant	kDRDataFormMode1Data	Mode 1 data.
 	@constant	kDRDataFormMode2Data	Mode 2 data. Photo CD and CD-i use this.
@@ -594,7 +601,7 @@ enum
 #pragma mark - Track Modes
 /*!
 	@enum 		Track Modes
-	@abstract	Common track mode values for types of track data.
+	@discussion	Common track mode values for types of track data.
 	@constant	kDRTrackModeAudio		Audio data.
 	@constant	kDRTrackMode1Data		Mode 1 data.
 	@constant	kDRTrackMode2Data		Mode 2 data. Photo CD and CD-i use this.
@@ -611,7 +618,7 @@ enum
 #pragma mark - Session Format
 /*!
 	@enum 		Session Format
-	@abstract	Common session format values for types of track data.
+	@discussion	Common session format values for types of track data.
 	@constant	kDRSessionFormatAudio		Audio data.
 	@constant	kDRSessionFormatMode1Data	Mode 1 data.
 	@constant	kDRSessionFormatCDI			CD-I disc.
@@ -641,12 +648,13 @@ enum
 #pragma mark - Track Messages
 /*!
 	@enum	Track Messages
+	@discussion Messages sent to the @link DRTrackCallbackProc DRTrackCallbackProc @/link callback during a burn.
 	@constant kDRTrackMessagePreBurn				Message sent to the track production callback indicating a burn is about to begin.
 													Clients should open any files needed to produce data and get ready to 
 													start sending data.
 													
 													The ioParam parameter contains a CFDictionary object with information about 
-													the burn. It currently holds kDRBurnKey and kDRDeviceMediaInfoKey dictionary keys, 
+													the burn. It currently holds @link kDRBurnKey kDRBurnKey @/link and @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary keys, 
 													but may be extended to hold other properties in the future.
 
 	@constant kDRTrackMessageProduceData			Message sent to the track production callback requesting that the client 
@@ -660,9 +668,9 @@ enum
 													ioParam is not used and is NULL.
 																										
 	@constant kDRTrackMessageVerifyData				Message sent to the track production callback when the client has chosen
-													the kDRVerificationTypeReceiveData option. 
+													the @link kDRVerificationTypeReceiveData kDRVerificationTypeReceiveData @/link option. 
 													
-													The ioParam parameter is a pointer to a DRTrackProductionInfo structure describing 
+													The ioParam parameter is a pointer to a @link DRTrackProductionInfo DRTrackProductionInfo @/link structure describing 
     												the data passed to the callback.
     												
 	@constant kDRTrackMessageVerificationDone		Message sent to the track production callback when verification is complete.
@@ -675,7 +683,7 @@ enum
 
 	@constant kDRTrackMessageEstimateLength			Message sent to the track production callback asking it to estimate
 													the length of the track.  This message is sent outside of a burn
-													cycle, when the DRTrackEstimateSize function is called.  
+													cycle, when the @link DRTrackEstimateLength DRTrackEstimateLength @/link function is called.  
 													
 													The ioParam parameter is a pointer to a UInt64 value, which the callback fills 
 													in with an estimated number of blocks for the track.  The estimate should
@@ -685,7 +693,7 @@ enum
 	@constant kDRTrackMessageProducePreGap			Message sent to the track production callback requesting that the client
 													produce the next chunk of the pregap.
 													
-													The ioParam parameter is a pointer to a DRTrackProductionInfo structure.
+													The ioParam parameter is a pointer to a @link DRTrackProductionInfo DRTrackProductionInfo @/link structure.
 */
 enum
 {

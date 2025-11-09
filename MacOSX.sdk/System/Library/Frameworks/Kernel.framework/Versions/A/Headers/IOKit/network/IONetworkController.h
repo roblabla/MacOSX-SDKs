@@ -206,13 +206,24 @@ enum {
     kIOPacketFilterPromiscuousAll  = 0x200
 };
 
-/*! @enum Feature flags returned by the getFeatures() method.
-    @constant kIONetworkFeatureNoBSDWait Set this bit in the value
-        returned by getFeatures() to disable the automatic wait for
-        "IOBSD" resource by the IONetworkController::start() method. */
+/*!	@enum Feature flags returned by the getFeatures() method.
+@constant kIONetworkFeatureNoBSDWait Set this bit in the value
+returned by getFeatures() to disable the automatic wait for
+"IOBSD" resource by the IONetworkController::start() method. 
+@constant kIONetworkFeaturesHardwareVlan Set this bit in the value
+returned by getFeatures() to indicate the controller supports hardware
+stripping and stuffing of 802.1q vlan tags.  If the controller supports
+this feature it must enable it when initializing so that all received
+packets delivered to higher layers have the tag stripped.  The controller
+should use setVlanTag() to provide the tag information out of band.
+@constant kIONetworkFeaturesSoftwareVlan Set this bit in the value
+returned by getFeatures() to indicate that the controller can support software
+based vlan by transmitting and receiving packets 4 bytes longer that normal. */
 
 enum {
-    kIONetworkFeatureNoBSDWait = 0x01
+    kIONetworkFeatureNoBSDWait = 0x01,
+	kIONetworkFeatureHardwareVlan = 0x02,
+	kIONetworkFeatureSoftwareVlan = 0x4
 };
 
 /*

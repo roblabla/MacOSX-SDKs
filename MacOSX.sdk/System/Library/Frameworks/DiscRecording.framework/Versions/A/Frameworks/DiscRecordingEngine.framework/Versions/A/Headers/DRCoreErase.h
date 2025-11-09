@@ -14,6 +14,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*!	@header 	
+	@abstract		Erase object interfaces for Disc Recording.
+
+	@discussion		
+*/
+
 #ifndef _H_DRCoreErase
 #define _H_DRCoreErase
 
@@ -81,7 +88,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract	Obtains the status of the erase process.
 	@discussion	This function obtains a reference to a CFDictionary object containing the status of the erase process, including the 
 				percentage complete and any errors reported. The reference is implicitly retained 
-				by the caller. This is the same dictionary sent to observers of kDREraseStatusChangedNotification.
+				by the caller. This is the same dictionary sent to observers of @link kDREraseStatusChangedNotification kDREraseStatusChangedNotification @/link.
 	@result		Returns a reference to a CFDictionary object. 
 */
 extern
@@ -134,7 +141,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 /*!
 	@const kDREraseTypeKey
 	@discussion	This key points to a CFString object describing the type of erase to be performed.
-				If this key is not present, a kDREraseTypeQuick erase type is assumed.
+				If this key is not present, a @link kDREraseTypeQuick kDREraseTypeQuick @/link erase type is assumed.
 */
 extern const CFStringRef kDREraseTypeKey
 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

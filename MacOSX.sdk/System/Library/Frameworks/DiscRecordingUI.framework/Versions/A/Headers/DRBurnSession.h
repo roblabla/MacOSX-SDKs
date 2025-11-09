@@ -16,6 +16,12 @@
  
 */
 
+/*!	
+	@header		DRBurnSession.h
+	@abstract	Burn configuration and progress user interface for Carbon applications
+	@discussion	
+*/
+
 #ifndef _H_DRBurnSession
 #define _H_DRBurnSession
 
@@ -64,9 +70,9 @@ DRBurnSessionCreate()										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	@function	DRBurnSessionSetBurn
 	@abstract	Sets the burn object for this session.
 	@param		burnSession	The burn session. If this parameter is not a valid
-							DRBurnSessionRef, the behavior is undefined. 
+							@link DRBurnSessionRef DRBurnSessionRef @/link, the behavior is undefined. 
 	@param		burn		The burn to use for the session. If this parameter is not a valid
-							DRBurnRef, the behavior is undefined. 
+							@link //apple_ref/c/tdef/DRBurnRef DRBurnRef @/link, the behavior is undefined. 
 */
 extern void
 DRBurnSessionSetBurn(
@@ -77,9 +83,9 @@ DRBurnSessionSetBurn(
 	@function	DRBurnSessionGetBurn
 	@abstract	Returns the burn object for this session.
 	@param		burnSession	The burn session. If this parameter is not a valid
-							DRBurnSessionRef, the behavior is undefined. 
+							@link DRBurnSessionRef DRBurnSessionRef @/link, the behavior is undefined. 
 	@result		A reference to the burn object for the session. If the setup dialog has not been run or
-				a burn object has not been set with DRBurnSessionSetBurn, this function returns NULL.
+				a burn object has not been set with @link DRBurnSessionSetBurn DRBurnSessionSetBurn @/link, this function returns <i>NULL</i>.
 */
 extern DRBurnRef
 DRBurnSessionGetBurn(
@@ -106,6 +112,7 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DRBurnSessionSetupDialogOptions struct version
+	@discussion	
 */
 enum {
 	kBurnSessionSetupDialogOptionsCurrentVersion      = 1
@@ -113,9 +120,10 @@ enum {
 
 /*!
 	@enum		Burn Setup Dialog Option Flags
+	@discussion	Flags used to configure the burn setup dialog behavior
 	@constant	kBurnSessionSetupDialogDefaultOptions	Use defaults for all the options
 	@constant	kBurnSessionSetupDialogForceClosedDiscs	Force discs to be closed (not appendable)
-	@constant	kBurnSessionSetupDialogDontHandleReservations	Session does not handle media reservations. Application handles them itself
+	@constant	kBurnSessionSetupDialogDontHandleReservations	Burn session does not handle media reservations. Application handles them itself
 	@constant	kBurnSessionSetupDialogAllowTestBurns Allow the user to perform a test burn
 */
 enum {
@@ -136,10 +144,10 @@ typedef UInt32 DRBurnSessionSetupDialogOptionFlags;
 	@struct 	DRBurnSessionSetupDialogOptions
 	@abstract	Options passed into the setup dialog to configure it.
 	@field		version				Identifies the version of this structure.
-	@field		dialogOptionFlags	One of several constants defined by the DRBurnSessionSetupDialogOptionFlags 
-									data type as described in “Burn Setup Dialog Option Flags”.
+	@field		dialogOptionFlags	One of several constants defined by the @link DRBurnSessionSetupDialogOptionFlags DRBurnSessionSetupDialogOptionFlags @/link 
+									data type as described in @link //apple_ref/c/tag/Burn%32Setup%32Dialog%32Option%32Flags Burn Setup Dialog Option Flags @/link.
 	@field		defaultButtonTitle	A CFStringRef that defines a custom title to be used for the dialog's default button.
-									If you do not provide this string (passing NULL), the normal button title is used.
+									If you do not provide this string (passing <i>NULL</i>), the normal button title is used.
 */
 struct DRBurnSessionSetupDialogOptions {
 	UInt32									version;
@@ -154,6 +162,7 @@ typedef struct DRBurnSessionSetupDialogOptions	DRBurnSessionSetupDialogOptions;
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DRBurnSessionSetupCallbacks struct version
+	@discussion	
 */
 enum {
 	kDRBurnSessionSetupCallbacksCurrentVersion	= 1
@@ -164,7 +173,7 @@ enum {
 	@abstract	Callback used for checking the suitability of a device.
 	@discussion This callback is called whenever a new device appears. It's purpose is to allow the
 				application to filter out devices which do not support the operation to be performed. for
-				example, a device may filter our CD-R/W's if it is a DVD creation appliacation.
+				example, a device may filter our CD-R/Ws if it is a DVD creation appliacation.
 	@param		burnSession	The burn session object.
 	@param		device		The device to examine.
 	@result		A Boolean value indicating the suitability of the device.
@@ -197,9 +206,9 @@ typedef CALLBACK_API( void , DRBurnSessionDeviceSelectionNotificationProcPtr )(D
 	@struct		DRBurnSessionSetupCallbacks
 	@abstract	Callback functions passed to the setup dialog.
 	@field		version					Identifies the version of this structure.
-	@field		deviceShouldBeTarget	Pointer to a DRBurnSessionDeviceCheckProcPtr. The value of this field may be NULL.
-	@field		containsSuitableMedia	Pointer to a DRBurnSessionMediaCheckProcPtr. The value of this field may be NULL.
-	@field		deviceSelectionChanged	Pointer to a DRBurnSessionDeviceSelectionNotificationProcPtr. The value of this field may be NULL.
+	@field		deviceShouldBeTarget	Pointer to a DRBurnSessionDeviceCheckProcPtr. The value of this field may be <i>NULL</i>.
+	@field		containsSuitableMedia	Pointer to a DRBurnSessionMediaCheckProcPtr. The value of this field may be <i>NULL</i>.
+	@field		deviceSelectionChanged	Pointer to a DRBurnSessionDeviceSelectionNotificationProcPtr. The value of this field may be <i>NULL</i>.
 */
 struct DRBurnSessionSetupCallbacks {
 	UInt32											version;
@@ -217,12 +226,12 @@ typedef struct DRBurnSessionSetupCallbacks	DRBurnSessionSetupCallbacks;
 				settings. These include: the device to use, whether or not to eject the media when finished, the burn speed
 				and others. The function does not return until the user dismissed the dialog.
 	@param		burnSession	The burn session object
-	@param		options		A pointer to a structure of type DRBurnSessionSetupDialogOptions. 
-							This pointer may be NULL if no custom configuration is required.
-	@param		setupCallbacks	A pointer to a structure of type DRBurnSessionSetupCallbacks. 
-								This pointer may be NULL if no custom behavior is desired.
+	@param		options		A pointer to a structure of type @link DRBurnSessionSetupDialogOptions DRBurnSessionSetupDialogOptions @/link. 
+							This pointer may be <i>NULL</i> if no custom configuration is required.
+	@param		setupCallbacks	A pointer to a structure of type @link DRBurnSessionSetupCallbacks DRBurnSessionSetupCallbacks @/link. 
+								This pointer may be <i>NULL</i> if no custom behavior is desired.
 	@param		resultCode	A pointer to a SInt8 to hold the result code for the setup dialog. 
-							May be one of the constants defined by "Burn Session Dialog Result Codes".
+							May be one of the constants defined by @link //apple_ref/c/tag/Burn%32Session%32Dialog%32Result%32Codes Burn Session Dialog Result Codes @/link.
 */
 extern SInt8
 DRBurnSessionSetupDialog(
@@ -236,6 +245,7 @@ DRBurnSessionSetupDialog(
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		kDRBurnProgressSetupCallbacksCurrentVersion struct version
+	@discussion	
 */
 enum {
 	kDRBurnProgressSetupCallbacksCurrentVersion	= 1
@@ -253,7 +263,7 @@ typedef CALLBACK_API( void , DRBurnSessionProgressBeginNotificationProcPtr )(DRB
 
 /*!
 	@typedef	DRBurnSessionProgressFinishNotificationProcPtr
-	@abstract	Callback notifying the application the burn progress is has finished.
+	@abstract	Callback notifying the application the burn progress has finished.
 	@discussion	This callback is called when the burn progress has been removed from view. This allows the application
 				to do things such as re-enable the quit menu item, or the close menu for a document window.
 	@param		burnSession	The burn session object.
@@ -261,8 +271,8 @@ typedef CALLBACK_API( void , DRBurnSessionProgressBeginNotificationProcPtr )(DRB
 typedef CALLBACK_API( void , DRBurnSessionProgressFinishNotificationProcPtr )(DRBurnSessionRef burnSession);
 
 /*!
-	@typedef	DRBurnSessionProgressFinishNotificationProcPtr
-	@abstract	Callback notifying the application the burn progress is has finished.
+	@typedef	DRBurnSessionBurnCompleteProcPtr
+	@abstract	Callback notifying the application the burn has finished.
 	@discussion	This callback is called when the burn operation completes, either successfully or with an error.
 				This function can be used by the application to present it's own custom end-of-burn handling. 
 				Return a false return value to prevent the burn session from presenting it's own notification.
@@ -276,9 +286,9 @@ typedef CALLBACK_API( Boolean , DRBurnSessionBurnCompleteProcPtr )(DRBurnSession
 	@struct		DRBurnSessionProgressCallbacks
 	@abstract	Callback functions passed to the progress dialog.
 	@field		version					Identifies the version of this structure.
-	@field		deviceShouldBeTarget	Pointer to a DRBurnSessionProgressBeginNotificationProcPtr. The value of this field may be NULL.
-	@field		containsSuitableMedia	Pointer to a DRBurnSessionProgressFinishNotificationProcPtr. The value of this field may be NULL.
-	@field		deviceSelectionChanged	Pointer to a DRBurnSessionBurnCompleteProcPtr. The value of this field may be NULL.
+	@field		deviceShouldBeTarget	Pointer to a DRBurnSessionProgressBeginNotificationProcPtr. The value of this field may be <i>NULL</i>.
+	@field		containsSuitableMedia	Pointer to a DRBurnSessionProgressFinishNotificationProcPtr. The value of this field may be <i>NULL</i>.
+	@field		deviceSelectionChanged	Pointer to a DRBurnSessionBurnCompleteProcPtr. The value of this field may be <i>NULL</i>.
 */
 struct DRBurnSessionProgressCallbacks {
 	UInt32											version;
@@ -294,6 +304,7 @@ typedef struct DRBurnSessionProgressCallbacks	DRBurnSessionProgressCallbacks;
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DRBurnSessionProgressDialogOptions struct version
+	@discussion	
 */
 enum {
 	kBurnSessionProgressDialogOptionsCurrentVersion      = 1
@@ -301,6 +312,7 @@ enum {
 
 /*!
 	@enum		Burn Progress Dialog Option Flags
+	@discussion	Flags used to configure the burn progress dialog behavior
 	@constant	kBurnSessionProgressDialogDefaultOptions	Use defaults for all the options
 	@constant	kBurnSessionProgressDialogDisplayVerboseProgress	Report all status changes in detail
 */
@@ -319,10 +331,10 @@ typedef UInt32 DRBurnSessionProgressDialogOptionFlags;
 	@struct 	DRBurnSessionProgressDialogOptions
 	@abstract	Options passed into the progress dialog to configure it.
 	@field		version				Identifies the version of this structure.
-	@field		dialogOptionFlags	One of several constants defined by the DRBurnSessionProgressDialogOptionFlags 
-									data type as described in “Burn Progress Dialog Option Flags”.
+	@field		dialogOptionFlags	One of several constants defined by the @link DRBurnSessionProgressDialogOptionFlags DRBurnSessionProgressDialogOptionFlags @/link 
+									data type as described in @link //apple_ref/c/tag/Burn%32Progress%32Dialog%32Option%32Flags Burn Progress Dialog Option Flags @/link.
 	@field		description			A CFStringRef that defines a custom description to be used for the dialog.
-									If you do not provide this string (passing NULL), the normal description is used.
+									If you do not provide this string (passing <i>NULL</i>), the normal description is used.
 */
 struct DRBurnSessionProgressDialogOptions {
 	UInt32									version;
@@ -338,9 +350,9 @@ typedef struct DRBurnSessionProgressDialogOptions	DRBurnSessionProgressDialogOpt
 	@discussion	This function present the user with a non-modal dialog that shows the burn progress.
 	@param		burnSession	The burn session object
 	@param		layout		The track layout to be used for the burn.
-	@param		options		A pointer to a structure of type DRBurnSessionSetupDialogOptions. 
-	@param		progressCallbacks	A pointer to a structure of type DRBurnSessionProgressCallbacks. 
-									This pointer may be NULL if no custom behavior is desired.
+	@param		options		A pointer to a structure of type @link DRBurnSessionSetupDialogOptions DRBurnSessionSetupDialogOptions @/link. 
+	@param		progressCallbacks	A pointer to a structure of type @link DRBurnSessionProgressCallbacks DRBurnSessionProgressCallbacks @/link. 
+									This pointer may be <i>NULL</i> if no custom behavior is desired.
 */
 extern void
 DRBurnSessionBeginProgressDialog(

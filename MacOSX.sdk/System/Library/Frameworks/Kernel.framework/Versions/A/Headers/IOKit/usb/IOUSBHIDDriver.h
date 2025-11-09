@@ -23,9 +23,51 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBHIDDriver.h,v 1.28 2003/08/20 19:41:44 nano Exp $
+ *	$Id: IOUSBHIDDriver.h,v 1.28.36.1 2004/06/01 04:57:30 nano Exp $
  *
- *	$Log: IOUSBHIDDriver.h,v $
+ *	Revision 1.35.2.1  2004/05/28 02:48:34  nano
+ *	Implement newCountryCodeNumber
+ *	
+ *	Revision 1.35  2004/05/21 16:57:47  nano
+ *	Merged branches
+ *	
+ *	Revision 1.34.2.1  2004/05/20 22:32:10  nano
+ *	If we get an unsupported error from our new read (with time stamp), issue the old read.
+ *	
+ *	Revision 1.34  2004/05/17 21:42:47  nano
+ *	Use new Read() that includes a timestamp.
+ *	
+ *	Revision 1.33.6.1  2004/05/17 15:57:28  nano
+ *	API Changes for Tiger
+ *	
+ *	Revision 1.33  2004/03/29 18:41:21  nano
+ *	Fix for rdar://3602420 by calling handleReport on a callout thread
+ *	
+ *	Revision 1.32.4.1  2004/03/26 22:53:48  nano
+ *	Fix rdar://3602420 by calling handleReport on a callout thread so that we don't block the USB workloop if somebody (HID System) blocks us
+ *	
+ *	Revision 1.32  2004/03/03 21:57:18  nano
+ *	Fix to rdar://3544116: 8A44:mouse sometimes frozen on wake from sleep by reverting to the previous behavior of clearing a stall on a callout thread.
+ *	
+ *	Revision 1.31.8.1  2004/03/01 17:06:01  nano
+ *	Clear pipe stalls on a callout thread, as we did before.
+ *	
+ *	Revision 1.31  2004/02/03 22:09:51  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.30  2003/12/02 16:32:59  nano
+ *	3437485  7B81 Panic in IOUSBHIDDriver after loading mouse on boot
+ *	3496814  Merlot: Credit Card swiper stopped working in Panther
+ *	
+ *	Revision 1.29.6.1  2003/11/11 17:54:18  nano
+ *	Fix #3437485 by assigning our command gate to a local variable until we are ready to exit the start() method.  This will avoid a race where we would assume that the gate was already added as an event source before it actually was
+ *	
+ *	Revision 1.29  2003/10/14 21:09:33  nano
+ *	Add personality for FlashGate device (#3249559).  Add personality to test fix to make interface open call thru runAction (for US Internal USB Modem).
+ *	
+ *	Revision 1.28.40.1  2003/09/25 19:44:25  nano
+ *	Remove separate threads to clear endpoint as we now can do it on the calling thread.
+ *	
  *	Revision 1.28  2003/08/20 19:41:44  nano
  *	
  *	Bug #:
@@ -170,6 +212,8 @@ public:
     virtual OSString * newSerialNumberString() const;
 
     virtual OSNumber * newLocationIDNumber() const;
+
+    virtual OSNumber * 	newCountryCodeNumber() const;
 
     virtual IOReturn	getReport( IOMemoryDescriptor * report,
                                 IOHIDReportType      reportType,

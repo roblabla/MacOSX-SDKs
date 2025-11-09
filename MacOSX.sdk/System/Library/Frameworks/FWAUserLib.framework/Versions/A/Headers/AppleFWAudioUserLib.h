@@ -11,16 +11,24 @@
 //
 //--------------------------------------------------------------------------------
 
-#include	<Carbon/Carbon.h>
+//#include	<Carbon/Carbon.h>
 #include 	<IOKit/firewire/IOFireWireFamilyCommon.h>
 #include 	<FWAUserLib/AppleFWAudioUserClientCommon.h>
 
+typedef void (*FWAStreamNotificationProc)(	UInt32 audioStreamRef,void*  refCon);
 
-typedef struct OpaqueRef	*FWARef;
+typedef struct OpaqueFWARef				*FWARef;
+typedef struct OpaqueFWAIsochStreamRef	*FWAIsochStreamRef;
+typedef struct OpaqueFWADeviceRef		*FWADeviceRef;
+typedef struct OpaqueFWAEngineRef		*FWAEngineRef;
+typedef struct OpaqueFWAAudioStreamRef	*FWAAudioStreamRef;
+typedef struct OpaqueFWAMIDIStreamRef	*FWAMIDIStreamRef;
+typedef struct OpaqueFWAMIDIPlugRef		*FWAMIDIPlugRef;
 
 #if __cplusplus
 extern "C" {
 #endif
+
 	// Device identification
 	typedef UInt32 FWADeviceID;			
 	
@@ -29,6 +37,8 @@ extern "C" {
 	// API
 	OSStatus 	FWACountDevices( UInt16* deviceNodeIDArray,UInt16* deviceCount );
 	OSStatus	FWAOpen(UInt32 nodeID, FWARef* outRef );
+	OSStatus	FWAOpenLocal( FWARef* outRef );
+
 	OSStatus	FWAClose( FWARef 	inRef );
 	OSStatus	FWARead( FWARef inRef, UInt8 inAddress, UInt8 inSubAddress, ByteCount	 inDataSize, void * inDataPtr );
 	OSStatus	FWAWrite( FWARef inRef, UInt8 inAddress, UInt8	 inSubAddress, ByteCount inDataSize,  const void *	inDataPtr );
@@ -87,7 +97,67 @@ extern "C" {
 	
 	OSStatus FWASetDeviceStreamInfo(FWARef inRef, UInt32 audioStreamRef, UInt32 numInput,UInt32 inputIsochChan, UInt32 numOutput,UInt32 outputIsochChan,bool update);
 	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// V5
+	
+	OSStatus FWASyncUpDevice(FWARef inRef);
+	
+	OSStatus FWAGetMaxSpeed(FWARef inRef,IOFWSpeed* speed);
+	OSStatus FWAGetMaxIsochChannels(FWARef inRef, UInt32* inChannels, UInt32* outChannels);
+	OSStatus FWAGetMaxSequences(FWARef inRef, UInt32* numSequences);
+	OSStatus FWAGetSupportedSampleRates(FWARef inRef, UInt32* sampleRates, UInt32* count);
+	OSStatus FWAGetSupportedAudioTypes(FWARef inRef, FWAudioType* audioTypes, UInt32* count);
+	
+	OSStatus FWAGetCurrentIsochStreamRefs(FWARef inRef, FWAIsochStreamRef* isochStreamRef, UInt32* count);
+	OSStatus FWAGetIsochStreamState(FWARef inRef, FWAIsochStreamRef isochStreamRef,FWAStreamState* state);
+	OSStatus FWAGetIsochStreamDirection(FWARef inRef, FWAIsochStreamRef isochStreamRef,FWAStreamDirection* direction);
+	OSStatus FWAGetIsochStreamChannelID(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32* channelID);
+	OSStatus FWASetIsochStreamChannelID(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32 channelID);
 
+	OSStatus FWAGetIsochStreamSampleRate(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32* rate);
+	OSStatus FWASetIsochStreamSampleRate(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32 rate);
+	
+	OSStatus FWAGetIsochStreamOutputSpeed(FWARef inRef, FWAIsochStreamRef isochStreamRef,IOFWSpeed* speed);
+	OSStatus FWASetIsochStreamOutputSpeed(FWARef inRef, FWAIsochStreamRef isochStreamRef,IOFWSpeed speed);
+	
+	OSStatus FWAGetIsochStreamAudioType(FWARef inRef, FWAIsochStreamRef isochStreamRef, FWAudioType* type);
+	OSStatus FWASetIsochStreamAudioType(FWARef inRef, FWAIsochStreamRef isochStreamRef, FWAudioType type);
+	
+//	OSStatus FWASetIsochStreamCallbackFunction(FWARef inRef, FWAIsochStreamRef isochStreamRef, FWAStreamNotificationProc proc, void* refCon);
+	
+	OSStatus FWACreateIsochStream(FWARef inRef, UInt32 channelNumber,FWAStreamDirection direction,UInt32 numAudioChannels,UInt32 numMIDIChannels, FWAIsochStreamRef* isochStreamRef );
+	OSStatus FWADisposeIsochStream(FWARef inRef,FWAIsochStreamRef isochStreamRef );
+	
+	OSStatus FWAStartIsochStream(FWARef inRef, FWAIsochStreamRef isochStreamRef);
+	OSStatus FWAStopIsochStream(FWARef inRef,FWAIsochStreamRef isochStreamRef );
+
+	OSStatus FWAGetIsochStreamAudioSequenceCount(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32* numAudioSequence);
+	OSStatus FWASetIsochStreamAudioSequenceCount(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32 numAudioSequence);
+
+	OSStatus FWAGetIsochStreamMIDISequenceCount(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32* numMIDISequence);
+	OSStatus FWASetIsochStreamMIDISequenceCount(FWARef inRef, FWAIsochStreamRef isochStreamRef,UInt32 numMIDISequence);
+	
+	OSStatus FWACreateFWAudioDevice(FWARef inRef,const char * deviceName, UInt32 vendorID,const char* guid, FWADeviceRef* device);
+	OSStatus FWADisposeFWAudioDevice(FWARef inRef,FWADeviceRef device);
+	OSStatus FWAStartFWAudioDevice(FWARef inRef,FWADeviceRef device);
+	OSStatus FWAStopFWAudioDevice(FWARef inRef,FWADeviceRef device);
+		
+	OSStatus FWACreateFWAudioEngine(FWARef inRef, FWADeviceRef owningDevice, bool hasInput, bool hasOutput, FWAEngineRef* engine);
+	OSStatus FWADisposeFWAudioEngine(FWARef inRef, FWAEngineRef engine);
+	
+	OSStatus FWACreateFWAudioStream(FWARef inRef, FWAIsochStreamRef owningIsochStreamRef, UInt32 channelNumber,UInt32 direction,UInt32 numAudioChannels,char* streamName,UInt8* streamIdent, FWAAudioStreamRef* streamRef);
+	OSStatus FWADisposeFWAudioStream(FWARef inRef, FWAAudioStreamRef streamRef );
+
+	OSStatus FWACreateFWAudioMIDIStream(FWARef inRef, FWAIsochStreamRef owningIsochStreamRef, UInt32 sequenceNumber,UInt32 direction, FWAMIDIStreamRef* streamRef);
+	OSStatus FWADisposeFWAudioMIDIStream(FWARef inRef, FWAMIDIStreamRef streamRef );
+
+	OSStatus FWACreateFWAudioMIDIPlug(FWARef inRef, FWAMIDIStreamRef owningMIDIStreamRef,UInt8 mpxID,char* plugName, UInt8* plugIdent, FWAMIDIPlugRef* streamRef);
+	OSStatus FWADisposeFWAudioMIDIPlug(FWARef inRef, FWAMIDIPlugRef plugRef );
+
+	OSStatus FWAGetClockSource(FWARef inRef, FWAIsochStreamRef *streamRef, UInt32 *sequence);
+	OSStatus FWASetClockSource(FWARef inRef, FWAIsochStreamRef streamRef,UInt32 sequence);
+
+	
 #if __cplusplus
 }
 #endif

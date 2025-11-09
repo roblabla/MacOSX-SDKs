@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: build-defs.h.in,v 1.1.1.4 2003/03/11 01:09:35 zarzycki Exp $ */
+/* $Id: build-defs.h.in,v 1.11 2002/10/04 04:47:34 rasmus Exp $ */
 
-#define CONFIGURE_COMMAND " '/SourceCache/apache_mod_php/apache_mod_php-12/php/configure' '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--with-apxs' '--with-ldap=/usr' '--with-kerberos=/usr' '--enable-cli' '--with-zlib-dir=/usr' '--enable-trans-sid' '--with-xml' '--enable-exif' '--enable-ftp' '--enable-mbstring' '--enable-dbx' '--enable-sockets' '--with-iodbc=/usr' '--with-curl=/usr' '--with-config-file-path=/etc'"
+#define CONFIGURE_COMMAND " '/SourceCache/apache_mod_php/apache_mod_php-17.5/php/configure' '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--with-apxs' '--with-ldap=/usr' '--with-kerberos=/usr' '--enable-cli' '--with-zlib-dir=/usr' '--enable-trans-sid' '--with-xml' '--enable-exif' '--enable-ftp' '--enable-mbstring' '--enable-mbregex' '--enable-dbx' '--enable-sockets' '--with-iodbc=/usr' '--with-curl=/usr' '--with-config-file-path=/etc' '--sysconfdir=/private/etc'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
@@ -84,7 +84,7 @@
 #define PHP_BINDIR              "/usr/bin"
 #define PHP_LIBDIR              "/usr/lib/php"
 #define PHP_DATADIR             "/usr/share/php"
-#define PHP_SYSCONFDIR          "/usr/etc"
+#define PHP_SYSCONFDIR          "/private/etc"
 #define PHP_LOCALSTATEDIR       "/usr/var"
 #define PHP_CONFIG_FILE_PATH    "/etc"
 #define PHP_CONFIG_FILE_SCAN_DIR    ""

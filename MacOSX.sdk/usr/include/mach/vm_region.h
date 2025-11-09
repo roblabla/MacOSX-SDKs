@@ -229,6 +229,28 @@ typedef struct vm_region_submap_info_64		 vm_region_submap_info_data_64_t;
 	(sizeof(vm_region_submap_info_data_64_t)/sizeof(int))
 
 
+#define VM_REGION_OBJECT_INFO_64	13
+
+struct vm_region_object_info_64 {
+	vm_prot_t		protection;
+	vm_prot_t		max_protection;
+	vm_inherit_t		inheritance;
+	boolean_t		shared;
+	boolean_t		is_sub_map;
+	vm_object_offset_t	offset;
+	vm_behavior_t		behavior;
+	unsigned short		user_wired_count;
+	vm_offset_t		object_id;
+};
+
+typedef struct vm_region_object_info_64		*vm_region_object_info_64_t;
+typedef struct vm_region_object_info_64		 vm_region_object_info_data_64_t;
+
+#define VM_REGION_OBJECT_INFO_COUNT_64		\
+	(sizeof(vm_region_object_info_data_64_t)/sizeof(int))
+
+
+
 struct vm_read_entry {
 	vm_address_t	address;
 	vm_size_t	size;

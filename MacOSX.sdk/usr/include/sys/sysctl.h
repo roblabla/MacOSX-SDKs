@@ -326,9 +326,12 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 #define	KERN_AIOPROCMAX		47	/* int: max aio requests per process */
 #define	KERN_AIOTHREADS		48	/* int: max aio worker threads */
 #ifdef __APPLE_API_UNSTABLE
-#define	KERN_PROCARGS2			49	/* number of valid kern ids */
+#define	KERN_PROCARGS2		49
 #endif /* __APPLE_API_UNSTABLE */
-#define	KERN_MAXID			50	/* number of valid kern ids */
+#define KERN_COREFILE		50	/* string: corefile format string */
+#define KERN_COREDUMP		51	/* int: whether to coredump at all */
+#define	KERN_SUGID_COREDUMP	52	/* int: whether to dump SUGID cores */
+#define	KERN_MAXID		53	/* number of valid kern ids */
 
 
 /* KERN_KDEBUG types */
@@ -429,7 +432,10 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 	{ "aiomax", CTLTYPE_INT }, \
 	{ "aioprocmax", CTLTYPE_INT }, \
 	{ "aiothreads", CTLTYPE_INT }, \
-	{ "procargs2",CTLTYPE_STRUCT } \
+	{ "procargs2",CTLTYPE_STRUCT }, \
+	{ "corefile",CTLTYPE_STRING }, \
+	{ "coredump", CTLTYPE_INT }, \
+	{ "sugid_coredump", CTLTYPE_INT } \
 }
 
 /*

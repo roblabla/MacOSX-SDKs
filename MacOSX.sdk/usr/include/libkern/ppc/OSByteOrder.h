@@ -33,7 +33,13 @@
 #include <stdint.h>
 
 #if !defined(OS_INLINE)
+# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #        define OS_INLINE static inline
+# elif defined(__MWERKS__) || defined(__cplusplus)
+#        define OS_INLINE static inline
+# else
+#        define OS_INLINE static __inline__
+# endif
 #endif
 
 /* Functions for byte reversed loads. */
@@ -41,7 +47,7 @@
 OS_INLINE
 uint16_t
 OSReadSwapInt16(
-    volatile void               * base,
+    const volatile void               * base,
     uintptr_t                          offset
 )
 {
@@ -56,7 +62,7 @@ OSReadSwapInt16(
 OS_INLINE
 uint32_t
 OSReadSwapInt32(
-    volatile void               * base,
+    const volatile void               * base,
     uintptr_t                          offset
 )
 {
@@ -71,17 +77,17 @@ OSReadSwapInt32(
 OS_INLINE
 uint64_t
 OSReadSwapInt64(
-    volatile void               * base,
+    const volatile void               * base,
     uintptr_t                          offset
 )
 {
-    uint64_t * inp;
+    const volatile uint64_t * inp;
     union ullc {
         uint64_t     ull;
         uint32_t     ul[2];
     } outv;
 
-    inp = (uint64_t *)base;
+    inp = (const volatile uint64_t *)base;
     outv.ul[0] = OSReadSwapInt32(inp, offset + 4);
     outv.ul[1] = OSReadSwapInt32(inp, offset);
     return outv.ull;
@@ -125,14 +131,14 @@ OSWriteSwapInt64(
     uint64_t                        data
 )
 {
-    uint64_t * outp;
-    union ullc {
+    volatile uint64_t * outp;
+    volatile union ullc {
         uint64_t     ull;
         uint32_t     ul[2];
     } *inp;
 
-    outp = (uint64_t *)base;
-    inp  = (union ullc *)&data;
+    outp = (volatile uint64_t *)base;
+    inp  = (volatile union ullc *)&data;
     OSWriteSwapInt32(outp, offset, inp->ul[1]);
     OSWriteSwapInt32(outp, offset + 4, inp->ul[0]);
 }

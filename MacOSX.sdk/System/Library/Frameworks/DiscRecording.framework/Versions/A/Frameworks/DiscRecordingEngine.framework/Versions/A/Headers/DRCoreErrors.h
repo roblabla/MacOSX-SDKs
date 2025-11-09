@@ -14,15 +14,15 @@
                      http://developer.apple.com/bugreporter/
  
 */
-/*!
-	@header	DRCoreErrors
-	
-	This header contains all of the error codes Disc Recording defines. 
-	
-	In addition Disc Recording provides functions to map OS errors it defines and sense information
-	returned from device command errors	to localized string representations.
-*/
 
+/*!
+	@header
+	@abstract		Disc Recording error codes and descriptions.
+
+	@discussion		Disc Recording provides functions to map OS errors it defines
+					and sense information returned from device command errors to
+					localized string representations.
+*/
 
 #ifndef _H_DRCoreErrors
 #define _H_DRCoreErrors
@@ -43,44 +43,77 @@
 extern "C" {
 #endif
 
+/*! 
+	@enum DiscRecording Errors
+	@discussion	Errors returned from the Disc Recording framework. All errors returned by 
+				the Disc Recording framework will fall into the range of 0x80020000 -> 0x8002FFFF.
+	@constant kDRInternalErr  Internal Disc Recording error. 
+	@constant kDRDeviceAccessErr  Device is not accessible, hardware is disconnected, etc. 
+	@constant kDRDeviceBusyErr  Device is in use by another process 
+	@constant kDRDeviceCommunicationErr  Device failed to respond properly, unable to recover or retry. 
+	@constant kDRDeviceInvalidErr  Attempt was made to use an invalid DRDeviceRef. 
+	@constant kDRDeviceNotReadyErr  Device is unable to respond now, please try again later. 
+	@constant kDRDeviceNotSupportedErr  Device is not supported for the requested burn operation. 
+	@constant kDRMediaBusyErr  Disc is busy, usually indicating the volume is unmountable. 
+	@constant kDRMediaNotPresentErr  Disc isn't present, and needs to be. 
+	@constant kDRMediaNotWritableErr  Disc isn't writable, and needs to be. 
+	@constant kDRMediaNotSupportedErr  Disc isn't supported for the requested burn operation. 
+	@constant kDRMediaNotBlankErr  Disc isn't blank, and the requested operation needs it to be. 
+	@constant kDRMediaNotErasableErr  Disc isn't erasable, and the requested operation needs it to be. 
+	@constant kDRBurnUnderrunErr  Device drained buffer without burn underrun protection. 
+	@constant kDRBurnNotAllowedErr  User is not allowed to burn to this device on this system. 
+	@constant kDRDataProductionErr  Error while producing data for the burn 
+	@constant kDRVerificationFailedErr  Data verification failed 
+	@constant kDRTooManyTracksForDVDErr  DVD discs can contain only one track 
+	@constant kDRBadLayoutErr  Too many tracks or sessions 
+	@constant kDRUserCanceledErr  User canceled the burn 
+	@constant kDRFunctionNotSupportedErr  Track producer cannot perform requested function 
+	@constant kDRFileModifiedDuringBurnErr  File changed during flatten or burn 
+	@constant kDRFileLocationConflictErr  Conflicting locations specified for two files 
+	@constant kDRTooManyNameConflictsErr  Too many filename conflicts to resolve (10,000,000 or more) 
+	@constant kDRDeviceBurnStrategyNotAvailableErr  Device does not support the required burn strategy for this burn 
+	@constant kDRDeviceCantWriteIndexPointsErr  Device does not support writing index points 
+	@constant kDRDeviceCantWriteISRCErr  Device does not support writing ISRC 
+	@constant kDRDeviceCantWriteSCMSErr  Device does not support writing SCMS 
+*/
 enum
 {
 	kDRFirstErr						= 0x80020000,
-	kDRInternalErr					= kDRFirstErr,		/* Internal Disc Recording error. */
+	kDRInternalErr					= kDRFirstErr,
 	
-	kDRDeviceAccessErr				= 0x80020020,		/* Device is not accessible, hardware is disconnected, etc. */
-	kDRDeviceBusyErr				= 0x80020021,		/* Device is in use by another process */
-	kDRDeviceCommunicationErr		= 0x80020022,		/* Device failed to respond properly, unable to recover or retry. */
-	kDRDeviceInvalidErr				= 0x80020023,		/* Attempt was made to use an invalid DRDeviceRef. */
-	kDRDeviceNotReadyErr			= 0x80020024,		/* Device is unable to respond now, please try again later. */
-	kDRDeviceNotSupportedErr		= 0x80020025,		/* Device is not supported for the requested burn operation. */
+	kDRDeviceAccessErr				= 0x80020020,
+	kDRDeviceBusyErr				= 0x80020021,
+	kDRDeviceCommunicationErr		= 0x80020022,
+	kDRDeviceInvalidErr				= 0x80020023,
+	kDRDeviceNotReadyErr			= 0x80020024,
+	kDRDeviceNotSupportedErr		= 0x80020025,
 	
-	kDRMediaBusyErr					= 0x80020040,		/* Disc is busy, usually indicating the volume is unmountable. */
-	kDRMediaNotPresentErr			= 0x80020041,		/* Disc isn't present, and needs to be. */
-	kDRMediaNotWritableErr			= 0x80020042,		/* Disc isn't writable, and needs to be. */
-	kDRMediaNotSupportedErr			= 0x80020043,		/* Disc isn't supported for the requested burn operation. */
-	kDRMediaNotBlankErr				= 0x80020044,		/* Disc isn't blank, and the requested operation needs it to be. */
-	kDRMediaNotErasableErr			= 0x80020045,		/* Disc isn't erasable, and the requested operation needs it to be. */
+	kDRMediaBusyErr					= 0x80020040,
+	kDRMediaNotPresentErr			= 0x80020041,
+	kDRMediaNotWritableErr			= 0x80020042,
+	kDRMediaNotSupportedErr			= 0x80020043,
+	kDRMediaNotBlankErr				= 0x80020044,
+	kDRMediaNotErasableErr			= 0x80020045,
 	
-	kDRBurnUnderrunErr				= 0x80020060,		/* Device drained buffer without burn underrun protection. */
-	kDRBurnNotAllowedErr			= 0x80020061,		/* User is not allowed to burn to this device on this system. */
-	kDRDataProductionErr			= 0x80020062,		/* Error while producing data for the burn */
-	kDRVerificationFailedErr		= 0x80020063,		/* Data verification failed */
-	kDRTooManyTracksForDVDErr		= 0x80020064,		/* DVD discs can contain only one track */
-	kDRBadLayoutErr					= 0x80020065,		/* Too many tracks or sessions */
-	kDRUserCanceledErr				= 0x80020066,		/* User canceled the burn */
-	kDRFunctionNotSupportedErr		= 0x80020067,		/* Track producer cannot perform requested function */
+	kDRBurnUnderrunErr				= 0x80020060,
+	kDRBurnNotAllowedErr			= 0x80020061,
+	kDRDataProductionErr			= 0x80020062,
+	kDRVerificationFailedErr		= 0x80020063,
+	kDRTooManyTracksForDVDErr		= 0x80020064,
+	kDRBadLayoutErr					= 0x80020065,
+	kDRUserCanceledErr				= 0x80020066,
+	kDRFunctionNotSupportedErr		= 0x80020067,
 	
 	/* content errors */
-	kDRFileModifiedDuringBurnErr	= 0x80020100,		/* File changed during flatten or burn */
-	kDRFileLocationConflictErr		= 0x80020101,		/* Conflicting locations specified for two files */
-	kDRTooManyNameConflictsErr		= 0x80020102,		/* Too many filename conflicts to resolve (10,000,000 or more) */
+	kDRFileModifiedDuringBurnErr	= 0x80020100,
+	kDRFileLocationConflictErr		= 0x80020101,
+	kDRTooManyNameConflictsErr		= 0x80020102,
 	
 	/* drive feature errors */
-	kDRDeviceBurnStrategyNotAvailableErr	= 0x80020200,	/* Device does not support the required burn strategy for this burn */
-	kDRDeviceCantWriteIndexPointsErr		= 0x80020202,	/* Device does not support writing index points */
-	kDRDeviceCantWriteISRCErr				= 0x80020203,	/* Device does not support writing ISRC */
-	kDRDeviceCantWriteSCMSErr				= 0x80020204	/* Device does not support writing SCMS */
+	kDRDeviceBurnStrategyNotAvailableErr	= 0x80020200,
+	kDRDeviceCantWriteIndexPointsErr		= 0x80020202,
+	kDRDeviceCantWriteISRCErr				= 0x80020203,
+	kDRDeviceCantWriteSCMSErr				= 0x80020204
 };
 
 /*!
@@ -99,12 +132,6 @@ CFStringRef DRCopyLocalizedStringForDiscRecordingError(OSStatus osError);
 	@abstract 	Maps a SCSI sense code to a localized string.
 	@discussion This function takes a sense code and finds the corresponding localized string. 
 				If a localized string cannot be found, it returns the sense code as a string.
-				
-				This function uses two files to perform its job. The <tt>SenseKey.plist</tt> file
-				contains mappings from sense codes to the keys for the strings file. The
-				<tt>SenseKey.strings</tt> file is a localized resource which contains language specific
-				translations for the sense codes. The <tt>SenseKey.plist</tt> file will probably 
-				never be modified unless more sense codes are added to the specification.
 	@param 		senseCode 	A sense code generated by a device conforming to the SCSI standard.
 	@result 	A value of type CFStringRef containing the localized string. 
 				This reference is implicitly retained by the caller. 
@@ -119,12 +146,6 @@ CFStringRef DRCopyLocalizedStringForSenseCode(UInt8 senseCode);
 				If neither of those can be found, it will determine if the pair is reserved or is a vendor specific pair and will
 				return a string indicating that. If a localized string cannot be found, it will return the ASC and ASCQ codes 
 				as a string.
-				
-				This function uses two files to perform its job. The <tt>SenseKey.plist</tt> file
-				contains mappings from sense codes to the keys for the strings file. The
-				<tt>SenseKey.strings</tt> file is a localized resource which contains language specific
-				translations for the sense codes. The <tt>SenseKey.plist</tt> file will probably 
-				never be modified unless more sense codes are added to the specification.
 	@param 		ASC 	The Additional Sense Code generated by a device conforming the SCSI standard.
 	@param 		ASCQ 	The Additional Sense Code Qualifier generated by a device conforming to the SCSI standard.
 	@result 	A value of type CFStringRef containing the localized string. 
@@ -134,8 +155,8 @@ CFStringRef DRCopyLocalizedStringForAdditionalSense(UInt8 ASC, UInt8 ASCQ);
 
 /*!
 	@const kDRErrorStatusKey
-	@discussion	A key for the DRErrorStatus dictionary, returned by any of the DRxxxCopyStatus calls or
-				kDRxxxStatusChangedNotifications, to describe a failure.  The value of this key is a
+	@discussion	A key for the DRErrorStatus dictionary, returned by any of the <tt>DRxxxCopyStatus</tt> calls or
+				<tt>kDRxxxStatusChangedNotifications</tt>, to describe a failure.  The value of this key is a
 				CFDictionary object containing error code and device sense information.
 */
 extern const CFStringRef kDRErrorStatusKey							AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

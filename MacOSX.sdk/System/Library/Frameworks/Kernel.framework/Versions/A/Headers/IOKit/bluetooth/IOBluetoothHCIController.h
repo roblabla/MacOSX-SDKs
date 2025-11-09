@@ -19,7 +19,6 @@
 #include <IOKit/pwr_mgt/RootDomain.h>
 
 #import <IOKit/bluetooth/Bluetooth.h>
-#import <IOKit/bluetooth/support/IOBluetoothMemoryBlock.h>
 
 #import <IOKit/bluetooth/IOBluetoothTypes.h>
 #import <IOKit/bluetooth/IOBluetoothInternal.h>
@@ -35,6 +34,7 @@ class IOWorkQueue;
 class IOBluetoothDevice;
 class IOBluetoothHCIRequest;
 class IOBluetoothHCIController;
+class IOBluetoothACLMemoryDescriptor;
 
 //====================================================================================================
 // defines, typdefs, etc.
@@ -47,7 +47,7 @@ enum HCIDataHandlerTypes
 {
 	kTransportDataTypeHCIEvents,
 	kTransportDataTypeACL,
-	kTransportDataTypeIsoch
+	kTransportDataTypeSCO
 };
 
 typedef IOReturn (*IOBluetoothIncomingDataAction) ( IOBluetoothHCIController *hciController,  UInt8 *inDataPtr, UInt32 inDataSize, UInt32 inSequenceNumber );
@@ -128,8 +128,8 @@ protected:
 	size_t							mHCIEventDataHandlerListSize;
 	HCIDataHandler*					mACLDataHandlerList;
 	size_t							mACLDataHandlerListSize;
-	HCIDataHandler*					mIsochDataHandlerList;
-	size_t							mIsochDataHandlerListSize;
+	HCIDataHandler*					mSCODataHandlerList;
+	size_t							mSCODataHandlerListSize;
 	
 	IOBluetoothHCIRequest *	 		mBusyQueueHead;
 	IOBluetoothHCIRequest *	 		mWaitQueueHead;
@@ -339,7 +339,7 @@ public:
 	virtual	IOReturn	SendHCIRequest(	UInt8 * 					buffer,
 										IOByteCount					bufferSize  );
 
-	static	IOReturn	SendACLCompletedAction ( OSObject *owner, void *arg1, void *arg2, void *arg3, void *arg4 );
+	static	IOReturn	SendACLCompletedAction ( OSObject *owner, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5, void *arg6 );
 	
 	virtual	void		SendACLCompleted(	SendDataContext	*contextPtr);
 		
@@ -347,6 +347,8 @@ public:
 										SendDataContext *						contextPtr  );
 
 	virtual	IOReturn	GetTransportInfo( BluetoothTransportInfo *	infoStruct );
+	
+	static	IOReturn	SendSCOCompletedAction ( OSObject *owner, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5, void *arg6 );
 	
 	// Override to do something custom with the data. Otherwise, the registered data handler
 	// will get a peek at it.
@@ -358,13 +360,13 @@ public:
 		
 	virtual	void	 	ProcessACLData( UInt8 * data, UInt32 dataSize );
 	
-	virtual	void	 	ProcessIsochData( UInt8 * data, UInt32 dataSize );
+	virtual	void	 	ProcessSCOData( UInt8 * data, UInt32 dataSize, UInt32 inMissingData, AbsoluteTime inTimestamp, Boolean copyData );
     
 	virtual	void	 	ProcessEventDataWL( UInt8 * inDataPtr, UInt32 inDataSize, UInt32 sequenceNumber );
 		
 	virtual	void	 	ProcessACLDataWL( UInt8 * data, UInt32 dataSize, UInt32 sequenceNumber );
 	
-	virtual	void	 	ProcessIsochDataWL( UInt8 * data, UInt32 dataSize, UInt32 sequenceNumber );
+	virtual	void	 	ProcessSCODataWL( UInt8 * data, UInt32 dataSize, UInt32 inMissingData, AbsoluteTime inTimestamp, Boolean copyData );
     
 	static	IOReturn	ProcessEventDataAction( IOBluetoothHCIController *	hciController,
 												UInt8 *						incomingDataPtr,
@@ -376,10 +378,13 @@ public:
 												UInt32						inDataSize,
 												UInt32						inSequenceNumber );
 	
-	static	IOReturn	ProcessIsochDataAction( IOBluetoothHCIController *	hciController,
+	static	IOReturn	ProcessSCODataAction( IOBluetoothHCIController *	hciController,
 												UInt8 *						incomingDataPtr,
 												UInt32						inDataSize,
-												UInt32						inSequenceNumber );
+												UInt32						inMissingData,
+												UInt32						inTimestampHi,
+												UInt32						inTimestampLo,
+												Boolean						inCopyData );
 
 	// Data processing helpers.
 
@@ -952,6 +957,7 @@ protected:
 		UInt8				mNumConfiguredHIDDevices;
 		UInt8				mControllerSleepFlags;
 		IONotifier*			mSleepWakeNotifier;
+
 		// AFH support:
 		// the mask for the channels to use:
 		UInt8				mMaskByte[10];
@@ -962,24 +968,38 @@ protected:
 		Boolean						mProcessingConnectionRequest;
 		Boolean						mWaitingForCompletedACLPacketsToSleep;
 
+        // SCO Support
+		UInt8				mNumSCOConnections;
+		UInt8				*mSCOPacketBuffer;
+		UInt16				mNumBufferedSCOBytes;
+		AbsoluteTime		mBufferedSCOPacketTimestamp;
 	} ExpansionData;
 
 	ExpansionData*		mExpansionData;
 	
-#define	mNumConfiguredHIDDevices				IOBluetoothHCIController::mExpansionData->mNumConfiguredHIDDevices
-#define mControllerSleepFlags					IOBluetoothHCIController::mExpansionData->mControllerSleepFlags
-#define mSleepWakeNotifier						IOBluetoothHCIController::mExpansionData->mSleepWakeNotifier
+#define mCommandQueueHead					IOBluetoothHCIController::mExpansionData->mCommandQueueHead
+#define mCommandQueueTail					IOBluetoothHCIController::mExpansionData->mCommandQueueTail
+#define mNumberOfCommandsAllowedByHardware	IOBluetoothHCIController::mExpansionData->mNumberOfCommandsAllowedByHardware
+#define	mNumConfiguredHIDDevices		IOBluetoothHCIController::mExpansionData->mNumConfiguredHIDDevices
+#define mControllerSleepFlags			IOBluetoothHCIController::mExpansionData->mControllerSleepFlags
+#define mSleepWakeNotifier				IOBluetoothHCIController::mExpansionData->mSleepWakeNotifier
 
-#define mMaskByte								IOBluetoothHCIController::mExpansionData->mMaskByte
-#define mAirPortDriver							IOBluetoothHCIController::mExpansionData->mAirPortDriver
-#define mAirPortPCI								IOBluetoothHCIController::mExpansionData->mAirPortPCI
-#define mProcessingConnectionRequest			IOBluetoothHCIController::mExpansionData->mProcessingConnectionRequest
-#define mWaitingForCompletedACLPacketsToSleep	IOBluetoothHCIController::mExpansionData->mWaitingForCompletedACLPacketsToSleep
+#define mMaskByte						IOBluetoothHCIController::mExpansionData->mMaskByte
+#define mAirPortDriver					IOBluetoothHCIController::mExpansionData->mAirPortDriver
+#define mAirPortPCI					IOBluetoothHCIController::mExpansionData->mAirPortPCI
+#define mProcessingConnectionRequest                    IOBluetoothHCIController::mExpansionData->mProcessingConnectionRequest
+#define mWaitingForCompletedACLPacketsToSleep   IOBluetoothHCIController::mExpansionData->mWaitingForCompletedACLPacketsToSleep
+
+#define	mNumSCOConnections					IOBluetoothHCIController::mExpansionData->mNumSCOConnections
+#define mSCOPacketBuffer					IOBluetoothHCIController::mExpansionData->mSCOPacketBuffer
+#define mNumBufferedSCOBytes				IOBluetoothHCIController::mExpansionData->mNumBufferedSCOBytes
+#define mBufferedSCOPacketTimestamp				IOBluetoothHCIController::mExpansionData->mBufferedSCOPacketTimestamp
 
 	enum {
 		kIOBluetoothHCIControllerSleepFlagInquiryScanWasEnabled	= 0x01
 	};
 
+	
 private:
 
 	// Command Packet Queue:
@@ -1018,17 +1038,36 @@ private:
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  3 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  4 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  5 );
+
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  6 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  7 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  8 );
 
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  9 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  10 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  11 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  12 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  13 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  14 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  15 );
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  9 );
+	virtual void SetNumSCOConnections( UInt8 numSCOConnections );
+	
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  10 );
+	virtual void UpdateSCOConnections( UInt8 numSCOConnections );
+	
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  11 );
+	virtual IOBluetoothDevice *FindDeviceWithSCOHandle( BluetoothConnectionHandle inConnectionHandle );
+	
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  12 );
+	virtual IOReturn SendSCOData(	IOMemoryDescriptor	*scoDataDescriptor,
+									SendDataContext		*scoDataContext );
+
+protected:
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  13 );
+	virtual	void	SendSCOCompleted( SendDataContext *contextPtr, AbsoluteTime timestamp );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  14 );
+	virtual IOReturn DispatchIncomingSCOData( UInt8 *inDataPtr, UInt32 inDataSize, UInt32 inMissingData, AbsoluteTime inTimestamp );
+        
+        OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  15 );
+        virtual bool willTerminateWL( IOService * provider, IOOptionBits options );
+
+private:
+
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  16 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  17 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  18 );

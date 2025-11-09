@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -198,6 +198,9 @@ struct nfs_args {
 #define	NFSMNT_READDIRSIZE	0x00020000  /* Set readdir size */
 #define	NFSMNT_NOLOCKS		0x00040000  /* don't support file locking */
 
+#define NFSSTA_LOCKTIMEO	0x00002000  /* experienced a lock req timeout */
+#define	NFSSTA_MOUNTED		0x00004000  /* completely mounted */
+#define NFSSTA_LOCKSWORK	0x00008000  /* lock ops have worked. */   
 #define NFSSTA_TIMEO		0x00010000  /* experienced a timeout. */
 #define NFSSTA_FORCE		0x00020000  /* doing a forced unmount. */
 #define NFSSTA_HASWRITEVERF	0x00040000  /* Has write verifier for V3 */
@@ -682,6 +685,7 @@ int	nfsrv_getcache __P((struct nfsrv_descript *, struct nfssvc_sock *,
 			    struct mbuf **));
 void	nfsrv_updatecache __P((struct nfsrv_descript *, int, struct mbuf *));
 void	nfsrv_cleancache __P((void));
+int	nfs_bind_resv_thread_wake __P((void));
 int	nfs_connect __P((struct nfsmount *, struct nfsreq *));
 void	nfs_disconnect __P((struct nfsmount *));
 int	nfs_getattrcache __P((struct vnode *, struct vattr *));
@@ -767,6 +771,11 @@ int	nfsrv_write __P((struct nfsrv_descript *nfsd, struct nfssvc_sock *slp,
 			 struct proc *procp, struct mbuf **mrq));
 void	nfsrv_rcv __P((struct socket *so, caddr_t arg, int waitflag));
 void	nfsrv_slpderef __P((struct nfssvc_sock *slp));
+
+void	nfs_up(struct nfsreq *, struct nfsmount *, struct proc *,
+		const char *, int);
+void	nfs_down(struct nfsreq *, struct nfsmount *, struct proc *,
+		const char *, int, int);
 
 /*
  * NFSTRACE points were changed to FSDBG (KERNEL_DEBUG)

@@ -105,6 +105,7 @@ protected:
         thread_call_t  disableDebuggerThreadCall;
         thread_call_t  activationChangeThreadCall;
         UInt32         stateVars[2];
+		IONotifier  *interfaceNotifier;
     };
 
     /*! @var reserved
@@ -253,6 +254,8 @@ protected:
     specified, presently has an open on this object. */
 
     virtual bool handleIsOpen( const IOService * forClient ) const;
+
+	static bool interfacePublished( void *target, void *param, IOService *service );
 
 public:
 

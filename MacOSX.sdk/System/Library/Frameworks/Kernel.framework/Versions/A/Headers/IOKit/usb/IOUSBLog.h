@@ -24,9 +24,24 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBLog.h,v 1.20 2003/09/05 22:38:50 nano Exp $
+ *	$Id: IOUSBLog.h,v 1.20.12.5 2004/02/20 21:15:12 nano Exp $
  *
  *	$Log: IOUSBLog.h,v $
+ *	Revision 1.20.12.5  2004/02/20 21:15:12  nano
+ *	Sigh -- logging again
+ *	
+ *	Revision 1.20.12.4  2004/02/20 21:14:15  nano
+ *	Really fix 3548954
+ *	
+ *	Revision 1.20.12.3  2004/02/20 05:02:36  nano
+ *	remve logging
+ *	
+ *	Revision 1.20.12.2  2004/02/20 05:01:08  nano
+ *	Merge fix for rdar://3548954:don't lose the data toggle when there are no transactions to remove
+ *	
+ *	Revision 1.20.12.1  2003/11/10 19:47:30  nano
+ *	Return the fix for 3290613 to the original strategy of doing it in stop:ports, as willTerminate is called with the gate held so we were deadlocking when trying to disable the port
+ *	
  *	Revision 1.20  2003/09/05 22:38:50  nano
  *	Removed logging --set to Production
  *	
@@ -75,7 +90,7 @@
 // Allow clients to define their own debug level.
 
 #if( !defined( DEBUG_LEVEL ) )
-	#define	DEBUG_LEVEL			DEBUG_LEVEL_PRODUCTION
+	#define	DEBUG_LEVEL			DEBUG_LEVEL_FINAL
 #endif
 
 // Index for user client methods

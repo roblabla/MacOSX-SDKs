@@ -58,9 +58,9 @@
         typedef struct vImage_Buffer
         {
             void	*data;		// Pointer to the top left pixel of the buffer.	
-            u_int32_t	height;		// The height (in pixels) of the buffer		
-            u_int32_t	width;		// The width (in pixels) of the buffer 		
-            u_int32_t	rowBytes;	// The number of bytes in a pixel row		
+            uint32_t	height;		// The height (in pixels) of the buffer		
+            uint32_t	width;		// The width (in pixels) of the buffer 		
+            uint32_t	rowBytes;	// The number of bytes in a pixel row		
         }vImage_Buffer;
             
     Some functions may operate only on a rectangular subset of pixels in the input buffer. This is useful for tiling

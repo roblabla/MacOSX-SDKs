@@ -75,6 +75,8 @@ struct tseg_qent {
 	struct	mbuf	*tqe_m;		/* mbuf contains packet */
 };
 LIST_HEAD(tsegqe_head, tseg_qent);
+extern int	tcp_reass_maxseg;
+extern int	tcp_reass_qsize;
 #ifdef MALLOC_DECLARE
 MALLOC_DECLARE(M_TSEGQ);
 #endif
@@ -520,6 +522,7 @@ extern	struct inpcbhead tcb;		/* head of queue of active tcpcb's */
 extern	struct inpcbinfo tcbinfo;
 extern	struct tcpstat tcpstat;	/* tcp statistics */
 extern	int tcp_mssdflt;	/* XXX */
+extern	int tcp_minmss;
 extern	int tcp_delack_enabled;
 extern	int tcp_do_newreno;
 extern	int ss_fltsz;

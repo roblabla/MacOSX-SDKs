@@ -18,6 +18,10 @@
 #import		<Foundation/Foundation.h>
 #endif
 
+#ifdef	__cplusplus
+	extern "C" {
+#endif
+
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@header		IOBluetoothUserLib.h
 	@abstract	Public Interfaces for Apple's implementation of Bluetooth technology.
@@ -2718,4 +2722,7 @@ IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNo
                                                                                             IOBluetoothUserNotificationCallback callback,
                                                                                             void * inRefCon );
 
+#ifdef	__cplusplus
+	}
+#endif
 

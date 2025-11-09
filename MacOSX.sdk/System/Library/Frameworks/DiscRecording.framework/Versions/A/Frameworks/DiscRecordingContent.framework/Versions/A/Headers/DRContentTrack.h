@@ -14,6 +14,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*!	@header 	
+	@abstract		Interface to track objects used in filesystem creation.
+
+	@discussion		
+*/
+
 #ifndef _H_DRContentTrack
 #define _H_DRContentTrack
 
@@ -81,12 +88,12 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				The result of this function is merely an estimate, and the actual number of
 				blocks required may be lower or higher depending on the data to burn.  For
 				more accurate results, wait until the burn is ready to start, create a
-				DRFilesystemTrack, and then call DRTrackEstimateSize.  If size returned by that
+				DRFilesystemTrack, and then call @link //apple_ref/c/func/DRTrackEstimateLength DRTrackEstimateLength @/link  If size returned by that
 				function is greater than the actual space available, then the burn will not
 				succeed: ask the user to remove some data and try the burn again.
 	@param		numBlocks		The number of blocks on the disc.
 	@param		blockSize		The size of blocks on the disc (usually 2048).
-	@param		mask			The requested filesystem mask, or kDRFilesystemMaskDefault.
+	@param		mask			The requested filesystem mask, or @link kDRFilesystemMaskDefault kDRFilesystemMaskDefault @/link.
 	@result		The number of blocks needed for filesystem overhead on a typical disc of this size.
 */
 extern UInt64
@@ -107,7 +114,11 @@ typedef DRTrackRef DRAudioTrackRef;
 
 /*!
 	@function	DRAudioTrackCreate
-	@abstract	Creates an audio track capable of burning RedBook CD audio.
+	@abstract	Creates an audio track capable of burning RedBook CD audio from a file.
+	@discussion	This function creates a track object configured and primed to output RedBook audio
+				CD data. It accepts any file readable by QuickTime and extracts the audio data
+				(if any) from the file, translating that into the correct format for output
+				to the disc.
 	@param		audioFile	An FSRef referencing the file to write.
 	@result		A DRAudioTrack capable of burning the track.
 */
@@ -118,7 +129,11 @@ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@function	DRAudioTrackCreateWithURL
-	@abstract	Creates an audio track capable of burning RedBook CD audio.
+	@abstract	Creates an audio track capable of burning RedBook CD audio from a file.
+	@discussion	This function creates a track object configured and primed to output RedBook audio
+				CD data. It accepts any file readable by QuickTime and extracts the audio data
+				(if any) from the file, translating that into the correct format for output
+				to the disc.
 	@param		audioFileURL	A file CFURL referencing the on-disk file to write.
 	@result		A DRAudioTrack capable of burning the track.
 */

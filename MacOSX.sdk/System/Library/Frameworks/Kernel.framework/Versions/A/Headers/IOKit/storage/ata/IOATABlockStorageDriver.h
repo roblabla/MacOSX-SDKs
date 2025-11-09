@@ -24,9 +24,6 @@
 #ifndef _IO_ATA_BLOCKSTORAGE_DRIVER_H_
 #define _IO_ATA_BLOCKSTORAGE_DRIVER_H_
 
-/* osfmk includes */
-#include <kern/queue.h>
-
 /* General IOKit includes */
 #include <IOKit/IOLib.h>
 #include <IOKit/IOMessage.h>
@@ -34,6 +31,7 @@
 #include <IOKit/IOSyncer.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/IOCommandPool.h>
+#include <IOKit/IOLocks.h>
 
 /* IOKit ATA includes */
 #include <IOKit/storage/IOStorage.h>
@@ -166,12 +164,18 @@ protected:
 		bool			fUseExtendedLBA;
 		bool			fPowerAckInProgress;
 		IONotifier *	fPowerDownNotifier;
+		IOSimpleLock *  fParkLock;
+		IOATACommand *  fParkCommand;
+		UInt32			fParkDelayLoops;
 	};
 	ExpansionData * reserved;
 	
 	#define fUseExtendedLBA		reserved->fUseExtendedLBA
 	#define fPowerAckInProgress	reserved->fPowerAckInProgress
 	#define fPowerDownNotifier	reserved->fPowerDownNotifier
+	#define fParkLock			reserved->fParkLock
+	#define fParkCommand		reserved->fParkCommand
+	#define fParkDelayLoops		reserved->fParkDelayLoops
 
 public:
 		
@@ -235,6 +239,14 @@ protected:
 	
 	static void				sATAVoidCallback ( IOATACommand * cmd );
 
+	static IOReturn			sWaitForCommand ( IOATABlockStorageDriver * driver, IOATACommand * cmd );
+	
+	IOReturn				waitForCommand ( IOATACommand * cmd );
+	
+	//-----------------------------------------------------------------------
+	// ¥ callPlatformFunction - Handles messages platform expert.
+	
+	static void				sHandleParkCallBack ( IOATACommand * cmd );
 	
 	//-----------------------------------------------------------------------
 	// Release all allocated resource before calling super::free().
@@ -535,6 +547,16 @@ public:
 	virtual IOReturn message ( 	UInt32			type,
 								IOService * 	provider,
 								void *			argument );
+
+	//-----------------------------------------------------------------------
+	// Handles messages from platform expert.
+
+	virtual IOReturn callPlatformFunction ( const OSSymbol *	functionName,
+											bool				waitForFunction,
+											void *				p1,
+											void *				p2,
+											void *				p3,
+											void *				p4 );
 	
 	//-----------------------------------------------------------------------
 	// Returns the device type.
@@ -545,9 +567,10 @@ public:
 	// Sends an ATA SMART command to the device.
 
 	/* Added with 10.1.4 */
-	OSMetaClassDeclareReservedUsed ( IOATABlockStorageDriver, 1 )
+	OSMetaClassDeclareReservedUsed ( IOATABlockStorageDriver, 1 );
 	
 	virtual IOReturn		sendSMARTCommand ( IOATACommand * command );
+	
 	
 	// Binary Compatibility reserved method space
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDriver, 2 );

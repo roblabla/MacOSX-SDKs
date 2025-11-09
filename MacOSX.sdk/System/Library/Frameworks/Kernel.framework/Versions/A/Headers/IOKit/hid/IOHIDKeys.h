@@ -76,6 +76,7 @@ __BEGIN_DECLS
 #define kIOHIDManufacturerKey               "Manufacturer"
 #define kIOHIDProductKey                    "Product"
 #define kIOHIDSerialNumberKey               "SerialNumber"
+#define kIOHIDCountryCodeKey                "CountryCode"
 #define kIOHIDLocationIDKey                 "LocationID"
 #define kIOHIDDeviceUsageKey                "DeviceUsage"
 #define kIOHIDDeviceUsagePageKey            "DeviceUsagePage"
@@ -124,6 +125,7 @@ __BEGIN_DECLS
 #define kIOHIDElementNameKey                "Name"
 #define kIOHIDElementValueLocationKey       "ValueLocation"
 #define kIOHIDElementDuplicateIndexKey      "DuplicateIndex"
+#define kIOHIDElementParentCollectionKey    "ParentCollection"
 
 /*!
     @typedef IOHIDElementCookie

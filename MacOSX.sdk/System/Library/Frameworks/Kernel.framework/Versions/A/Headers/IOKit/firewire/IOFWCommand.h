@@ -285,7 +285,10 @@ protected:
 		// some of our subclasses didn't have room for expansion data, so
 		// we've reserved space for their use here.
 		
-		void *	fSubclassMembers; 
+		void *	fSubclassMembers;
+		int		fMaxSpeed;
+		int		fAckCode;
+		UInt32	fResponseCode;
 	} 
 	MemberVariables;
 
@@ -350,6 +353,17 @@ public:
         return kIOReturnSuccess;
     }
 
+	void setMaxSpeed( int speed );
+	
+	void setAckCode( int ack );
+	int getAckCode( void );
+
+	void setRetries( int retries);
+	int getMaxRetries( void );
+
+	void setResponseCode( UInt32 rcode );
+	UInt32 getResponseCode( void ) const;
+			
 private:
     OSMetaClassDeclareReservedUnused(IOFWAsyncCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWAsyncCommand, 1);

@@ -3,7 +3,7 @@
  
      Contains:   Apple Type Services layout public structures and constants.
  
-     Version:    ATS-135~1
+     Version:    ATS-135.7~1
  
      Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  

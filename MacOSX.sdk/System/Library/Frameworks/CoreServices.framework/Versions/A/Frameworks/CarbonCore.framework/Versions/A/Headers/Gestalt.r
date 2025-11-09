@@ -3,7 +3,7 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-545~1
+     Version:    CarbonCore-557~1
  
      Copyright:  © 1988-2003 by Apple Computer, Inc.  All rights reserved
  
@@ -935,6 +935,10 @@
 
 #define gestaltSystemUpdateVersion 		'sysu'				/*  System Update version  */
 #define gestaltSystemVersion 			'sysv'				/*  system version */
+#define gestaltSystemVersionMajor 		'sys1'				/*  The major system version number; in 10.4.17 this would be the decimal value 10  */
+#define gestaltSystemVersionMinor 		'sys2'				/*  The minor system version number; in 10.4.17 this would be the decimal value 4  */
+#define gestaltSystemVersionBugFix 		'sys3'				/*  The bug fix system version number; in 10.4.17 this would be the decimal value 17  */
+
 #define gestaltToolboxTable 			'tbtt'				/*   OS trap table base   */
 #define gestaltTextEditVersion 			'te  '				/*  TextEdit version number  */
 #define gestaltTE1 						1					/*  TextEdit in MacIIci ROM  */

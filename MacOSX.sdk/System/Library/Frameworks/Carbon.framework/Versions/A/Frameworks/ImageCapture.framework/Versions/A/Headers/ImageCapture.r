@@ -3,7 +3,7 @@
  
      Contains:   Image Capture Architecture header
  
-     Version:    ImageCapture-181~1
+     Version:    ImageCapture-183.6~1
  
      Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  

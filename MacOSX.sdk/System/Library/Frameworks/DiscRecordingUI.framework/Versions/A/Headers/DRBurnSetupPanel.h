@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header		DRBurnSetupPanel.h
+	@abstract	Panel to create and configure a DRBurn object.
+	@discussion The @link //apple_ref/occ/cl/DRBurnSetupPanel DRBurnSetupPanel @/link supports choosing the the device to use, whether or not
+				to verify the burned data and how to handle the burned disc when it completes.
+*/
+
 #import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
 
@@ -71,7 +77,7 @@
 				
 				This method must be called before the panel is displayed.
 	
-	@param		flag	YES to show the test burn checkbox, NO to hide it.
+	@param		flag	<i>YES</i> to show the test burn checkbox, <i>NO</i> to hide it.
 */
 - (void) setCanSelectTestBurn:(BOOL)flag;
 
@@ -85,7 +91,7 @@
 				open.
 				 
 				This method must be called before the panel is displayed.
-	@param		flag	YES to enable the appendable checkbox, NO to disable.
+	@param		flag	<i>YES</i> to enable the appendable checkbox, <i>NO</i> to disable.
 */
 - (void) setCanSelectAppendableMedia:(BOOL)flag;
 
@@ -94,13 +100,16 @@
 
 /*!
 	@method		burnObject
-	@abstract	Returns a configured DRBurn object which is ready to write data to
-				the currently selected device. 
-	@discussion	Do not invoke this method within a modal session (<b>runSetupPanel</b> or
-				<b>setupPanelForWindow:modalDelegate:didEndSelector:contextInfo:</b>)
+	@abstract	Creates and returns a new DRBurn object that's configured to write
+				data to the currently selected device.
+	@discussion	The new DRBurn object is configured based on the settings in the setup panel
+				when the user clicks the OK button.
+				
+				Do not invoke this method within a modal session ( @link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or
+				@link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow%58modalDelegate%58didEndSelector%58contextInfo%58 beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link )
 				because the burn object information is only updated just before the
 				modal session ends.
-   @result  	A DRBurn object.
+   @result  	A new DRBurn object.
 */
 - (DRBurn*) burnObject;
 
@@ -147,7 +156,7 @@
 
 /*!
 	@const		DRBurnSetupPanelDefaultButtonDefaultTitle
-	@discussion	Passing this to <b>setDefaultButtonTitle:</b> causes the panel to redisplay the 
+	@discussion	Passing this to @link //apple_ref/occ/instm/DRBurnSetupPanel/setDefaultButtonTitle%58 setDefaultButtonTitle: @/link causes the panel to redisplay the 
 				default button title.
 */ 
 extern NSString* const DRBurnSetupPanelDefaultButtonDefaultTitle AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

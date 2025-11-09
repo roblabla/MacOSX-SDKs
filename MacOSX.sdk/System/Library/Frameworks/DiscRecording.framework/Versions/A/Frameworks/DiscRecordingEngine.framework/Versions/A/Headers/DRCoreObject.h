@@ -14,11 +14,11 @@
                      http://developer.apple.com/bugreporter/
  
 */
-/*!
-	@header DRCoreObject
-	
-	DRCoreObject defines some base types for Disc Recording Core object references. 
-	These types are for use in polymorphic functions and as general-purpose type identifiers.
+
+/*!	@header 	
+	@abstract		Base types for Disc Recording Core object references. 
+
+	@discussion		These types are for use in polymorphic functions and as general-purpose type identifiers.
 */
 
 #ifndef _H_DRCoreObject
@@ -43,7 +43,7 @@ extern "C" {
 /*!
 	@typedef	DRTypeRef
 	@abstract	An untyped, generic reference to any Disc Recording object.
-	@discussion <tt>DRTypeRef</tt> is one of the base types defined in Disc Recording, used as a 
+	@discussion @link DRTypeRef DRTypeRef @/link is one of the base types defined in Disc Recording, used as a 
 				placeholder for parameter and return type in several polymorphic functions. 
 				It is a generic object reference that can take a reference to any other 
 				Disc Recording object.
@@ -106,7 +106,7 @@ typedef struct DRRefConCallbacks	DRRefConCallbacks;
 
 /*!
 	@constant kDRRefConCFTypeCallbacks
-	@abstract	A predefined <tt>DRRefConCallbacks</tt> structure containing a set of callbacks
+	@abstract	A predefined @link DRRefConCallbacks DRRefConCallbacks @/link structure containing a set of callbacks
 				appropriate for use when the reference context is a <tt>CFType</tt> object.
 */
 extern
@@ -126,7 +126,7 @@ const DRRefConCallbacks kDRRefConCFTypeCallbacks;
 						
 						You may pass a value of <tt>NULL</tt>, which results in the Disc Recording 
 						object having no value in its reference context.
-	@param		callbacks	A pointer to a <tt>DRRefConCallbacks</tt> structure initialized with the 
+	@param		callbacks	A pointer to a @link DRRefConCallbacks DRRefConCallbacks @/link structure initialized with the 
 							callbacks for the Disc Recording object to use on its reference context.
 							A copy of the contents of the callbacks structure is made, so that 
 							a pointer to a structure on the stack can be passed in, or can be 
@@ -145,7 +145,7 @@ const DRRefConCallbacks kDRRefConCFTypeCallbacks;
 							
 							If any of the callback structure's fields are not valid pointers to functions 
 							of the correct type, or if this parameter is not a valid pointer to a 
-							<tt>DRRefConCallbacks</tt> callbacks structure, this function's behavior 
+							@link DRRefConCallbacks DRRefConCallbacks @/link callbacks structure, this function's behavior 
 							is undefined.
 */
 extern

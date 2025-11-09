@@ -93,7 +93,7 @@ enum {
     kPMInvalidCalibrationTarget		= -30898,		/* invalid dictionary specifying printer calibration target */
     
 	/* Print Job Creator and Printing Dialog Extension error codes (-9500 to -9540) */
-    kPMNoDefaultItem            	= -9500,		/* unused; to be removed */
+    kPMNoDefaultItem            	= -9500,
     kPMNoDefaultSettings        	= -9501,		/* unused; to be removed */
     kPMInvalidPDEContext     		= -9530,		/* invalid printing dialog extension context */
 	kPMDontSwitchPDEError			= -9531,		/* tells the pjc not to switch panels */

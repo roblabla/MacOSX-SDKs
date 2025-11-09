@@ -38,23 +38,9 @@ extern "C" {
 ** version 1.2.1 Specification.
 */
 
-// switches to providing function pointers
-//#define GL_GLEXT_FUNCTION_POINTERS 1
+/* switches to providing function pointers */
+/* #define GL_GLEXT_FUNCTION_POINTERS 1 */
 
-#define GL_APPLE_specular_vector            1
-#define GL_APPLE_transform_hint             1
-#define GL_APPLE_packed_pixels              1
-#define GL_APPLE_client_storage             1
-#define GL_APPLE_ycbcr_422                  1
-#define GL_APPLE_texture_range              1
-#define GL_APPLE_fence                      1
-#define GL_APPLE_vertex_array_range         1
-#define GL_APPLE_vertex_array_object        1
-#define GL_APPLE_element_array              1
-#define GL_APPLE_vertex_program_evaluators  1
-#define GL_APPLE_float_pixels               1
-#define GL_APPLE_flush_render               1
-#define GL_APPLE_pixel_buffer               1
 #define GL_ARB_imaging                      1
 #define GL_ARB_transpose_matrix             1
 #define GL_ARB_multitexture                 1
@@ -75,6 +61,14 @@ extern "C" {
 #define GL_ARB_shadow_ambient               1
 #define GL_ARB_vertex_blend                 1
 #define GL_ARB_window_pos                   1
+#define GL_ARB_occlusion_query              1
+#define GL_ARB_shader_objects               1
+#define GL_ARB_vertex_shader                1
+#define GL_ARB_fragment_shader              1
+#define GL_ARB_shading_language_100         1
+#define GL_ARB_vertex_buffer_object         1
+#define GL_ARB_point_sprite                 1
+#define GL_ARB_texture_non_power_of_two     1
 #define GL_EXT_clip_volume_hint             1
 #define GL_EXT_rescale_normal               1
 #define GL_EXT_blend_color                  1
@@ -99,20 +93,35 @@ extern "C" {
 #define GL_EXT_multi_draw_arrays            1
 #define GL_EXT_shadow_funcs                 1
 #define GL_EXT_stencil_two_side             1
-#define GL_SGI_color_matrix                 1
-#define GL_SGIS_texture_edge_clamp          1
-#define GL_SGIS_generate_mipmap             1
-#define GL_SGIS_texture_lod                 1
+#define GL_EXT_depth_bounds_test            1
+#define GL_EXT_blend_equation_separate      1
+#define GL_EXT_texture_mirror_clamp         1
+#define GL_APPLE_specular_vector            1
+#define GL_APPLE_transform_hint             1
+#define GL_APPLE_packed_pixels              1
+#define GL_APPLE_client_storage             1
+#define GL_APPLE_ycbcr_422                  1
+#define GL_APPLE_texture_range              1
+#define GL_APPLE_fence                      1
+#define GL_APPLE_vertex_array_range         1
+#define GL_APPLE_vertex_array_object        1
+#define GL_APPLE_element_array              1
+#define GL_APPLE_vertex_program_evaluators  1
+#define GL_APPLE_float_pixels               1
+#define GL_APPLE_flush_render               1
+#define GL_APPLE_pixel_buffer               1
 #define GL_ATI_point_cull_mode              1
 #define GL_ATI_texture_mirror_once          1
 #define GL_ATI_pn_triangles                 1
-#define GL_ATIX_pn_triangles                1
 #define GL_ATI_text_fragment_shader         1
 #define GL_ATI_blend_equation_separate      1
 #define GL_ATI_blend_weighted_minmax        1
 #define GL_ATI_texture_env_combine3         1
 #define GL_ATI_separate_stencil             1
 #define GL_ATI_array_rev_comps_in_4_bytes   1
+#define GL_ATI_texture_compression_3dc      1
+#define GL_ATIX_pn_triangles                1
+#define GL_IBM_rasterpos_clip               1
 #define GL_NV_point_sprite                  1
 #define GL_NV_register_combiners            1
 #define GL_NV_register_combiners2           1
@@ -124,8 +133,22 @@ extern "C" {
 #define GL_NV_texture_shader2               1
 #define GL_NV_texture_shader3               1
 #define GL_NV_depth_clamp                   1
-#define GL_NV_light_max_exponent	    1
-#define GL_IBM_rasterpos_clip               1
+#define GL_NV_light_max_exponent            1
+#define GL_SGI_color_matrix                 1
+#define GL_SGIS_texture_edge_clamp          1
+#define GL_SGIS_generate_mipmap             1
+#define GL_SGIS_texture_lod                 1
+
+/*************************************************************/
+#if GL_ARB_shader_objects
+typedef char GLcharARB;
+typedef void *GLhandleARB;
+#endif
+
+#if GL_ARB_vertex_buffer_object || 1
+typedef long GLintptrARB;
+typedef long GLsizeiptrARB;
+#endif
 
 /*************************************************************/
 #define GL_GLEXT_VERSION 7
@@ -261,6 +284,14 @@ extern "C" {
 #define GL_MODELVIEW31_ARB                0x873F
 #endif
 
+#if GL_ARB_occlusion_query
+#define GL_SAMPLES_PASSED_ARB             0x8914
+#define GL_QUERY_COUNTER_BITS_ARB         0x8864
+#define GL_CURRENT_QUERY_ARB              0x8865
+#define GL_QUERY_RESULT_ARB               0x8866
+#define GL_QUERY_RESULT_AVAILABLE_ARB     0x8867
+#endif
+
 #if GL_ARB_texture_border_clamp
 #define GL_CLAMP_TO_BORDER_ARB           0x812D
 #endif
@@ -282,6 +313,278 @@ extern "C" {
 #if GL_ARB_shadow_ambient
 #define GL_TEXTURE_COMPARE_FAIL_VALUE_ARB 0x80BF
 #endif
+
+#if GL_ARB_texture_env_combine
+#define GL_COMBINE_ARB                    0x8570
+#define GL_COMBINE_RGB_ARB                0x8571
+#define GL_COMBINE_ALPHA_ARB              0x8572
+#define GL_RGB_SCALE_ARB                  0x8573
+#define GL_ADD_SIGNED_ARB                 0x8574
+#define GL_INTERPOLATE_ARB                0x8575
+#define GL_CONSTANT_ARB                   0x8576
+#define GL_PRIMARY_COLOR_ARB              0x8577
+#define GL_PREVIOUS_ARB                   0x8578
+#define GL_SUBTRACT_ARB                   0x84E7
+#define GL_SOURCE0_RGB_ARB                0x8580
+#define GL_SOURCE1_RGB_ARB                0x8581
+#define GL_SOURCE2_RGB_ARB                0x8582
+#define GL_SOURCE3_RGB_ARB                0x8583
+#define GL_SOURCE4_RGB_ARB                0x8584
+#define GL_SOURCE5_RGB_ARB                0x8585
+#define GL_SOURCE6_RGB_ARB                0x8586
+#define GL_SOURCE7_RGB_ARB                0x8587
+#define GL_SOURCE0_ALPHA_ARB              0x8588
+#define GL_SOURCE1_ALPHA_ARB              0x8589
+#define GL_SOURCE2_ALPHA_ARB              0x858A
+#define GL_SOURCE3_ALPHA_ARB              0x858B
+#define GL_SOURCE4_ALPHA_ARB              0x858C
+#define GL_SOURCE5_ALPHA_ARB              0x858D
+#define GL_SOURCE6_ALPHA_ARB              0x858E
+#define GL_SOURCE7_ALPHA_ARB              0x858F
+#define GL_OPERAND0_RGB_ARB               0x8590
+#define GL_OPERAND1_RGB_ARB               0x8591
+#define GL_OPERAND2_RGB_ARB               0x8592
+#define GL_OPERAND3_RGB_ARB               0x8593
+#define GL_OPERAND4_RGB_ARB               0x8594
+#define GL_OPERAND5_RGB_ARB               0x8595
+#define GL_OPERAND6_RGB_ARB               0x8596
+#define GL_OPERAND7_RGB_ARB               0x8597
+#define GL_OPERAND0_ALPHA_ARB             0x8598
+#define GL_OPERAND1_ALPHA_ARB             0x8599
+#define GL_OPERAND2_ALPHA_ARB             0x859A
+#define GL_OPERAND3_ALPHA_ARB             0x859B
+#define GL_OPERAND4_ALPHA_ARB             0x859C
+#define GL_OPERAND5_ALPHA_ARB             0x859D
+#define GL_OPERAND6_ALPHA_ARB             0x859E
+#define GL_OPERAND7_ALPHA_ARB             0x859F
+#endif
+
+#if GL_ARB_texture_mirrored_repeat
+#define GL_MIRRORED_REPEAT_ARB            0x8370
+#endif
+
+#if GL_ARB_texture_env_dot3
+#define GL_DOT3_RGB_ARB                   0x86AE
+#define GL_DOT3_RGBA_ARB                  0x86AF
+#endif
+
+#if GL_ARB_point_parameters
+#define GL_POINT_SIZE_MIN_ARB                            0x8126
+#define GL_POINT_SIZE_MAX_ARB                            0x8127
+#define GL_POINT_FADE_THRESHOLD_SIZE_ARB                 0x8128
+#define GL_POINT_DISTANCE_ATTENUATION_ARB                0x8129
+#endif
+
+#if GL_ARB_fragment_program
+#define GL_FRAGMENT_PROGRAM_ARB                         0x8804
+#define GL_PROGRAM_ALU_INSTRUCTIONS_ARB                 0x8805
+#define GL_PROGRAM_TEX_INSTRUCTIONS_ARB                 0x8806
+#define GL_PROGRAM_TEX_INDIRECTIONS_ARB                 0x8807
+#define GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB          0x8808
+#define GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB          0x8809
+#define GL_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB          0x880A
+#define GL_MAX_PROGRAM_ALU_INSTRUCTIONS_ARB             0x880B
+#define GL_MAX_PROGRAM_TEX_INSTRUCTIONS_ARB             0x880C
+#define GL_MAX_PROGRAM_TEX_INDIRECTIONS_ARB             0x880D
+#define GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB      0x880E
+#define GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB      0x880F
+#define GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB      0x8810
+#define GL_MAX_TEXTURE_COORDS_ARB                       0x8871
+#define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                  0x8872
+#endif
+
+#if GL_ARB_vertex_program
+#define GL_VERTEX_PROGRAM_ARB                            0x8620
+#define GL_VERTEX_PROGRAM_POINT_SIZE_ARB                 0x8642
+#define GL_VERTEX_PROGRAM_TWO_SIDE_ARB                   0x8643
+#define GL_PROGRAM_FORMAT_ASCII_ARB                      0x8875
+#define GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB               0x8622
+#define GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB                  0x8623
+#define GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB                0x8624
+#define GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB                  0x8625
+#define GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB            0x886A
+#define GL_CURRENT_VERTEX_ATTRIB_ARB                     0x8626
+#define GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB               0x8645
+#define GL_PROGRAM_LENGTH_ARB                            0x8627
+#define GL_PROGRAM_FORMAT_ARB                            0x8876
+#define GL_PROGRAM_NAME_ARB                              0x8677
+#define GL_PROGRAM_BINDING_ARB                           0x8677
+#define GL_PROGRAM_INSTRUCTIONS_ARB                      0x88A0
+#define GL_MAX_PROGRAM_INSTRUCTIONS_ARB                  0x88A1
+#define GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB               0x88A2
+#define GL_MAX_PROGRAM_NATIVE_INSTRUCTIONS_ARB           0x88A3
+#define GL_PROGRAM_TEMPORARIES_ARB                       0x88A4
+#define GL_MAX_PROGRAM_TEMPORARIES_ARB                   0x88A5
+#define GL_PROGRAM_NATIVE_TEMPORARIES_ARB                0x88A6
+#define GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB            0x88A7
+#define GL_PROGRAM_PARAMETERS_ARB                        0x88A8
+#define GL_MAX_PROGRAM_PARAMETERS_ARB                    0x88A9
+#define GL_PROGRAM_NATIVE_PARAMETERS_ARB                 0x88AA
+#define GL_MAX_PROGRAM_NATIVE_PARAMETERS_ARB             0x88AB
+#define GL_PROGRAM_ATTRIBS_ARB                           0x88AC
+#define GL_MAX_PROGRAM_ATTRIBS_ARB                       0x88AD
+#define GL_PROGRAM_NATIVE_ATTRIBS_ARB                    0x88AE
+#define GL_MAX_PROGRAM_NATIVE_ATTRIBS_ARB                0x88AF
+#define GL_PROGRAM_ADDRESS_REGISTERS_ARB                 0x88B0
+#define GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB             0x88B1
+#define GL_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB          0x88B2
+#define GL_MAX_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB      0x88B3
+#define GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB              0x88B4
+#define GL_MAX_PROGRAM_ENV_PARAMETERS_ARB                0x88B5
+#define GL_PROGRAM_UNDER_NATIVE_LIMITS_ARB               0x88B6
+#define GL_PROGRAM_STRING_ARB                            0x8628
+#define GL_PROGRAM_ERROR_POSITION_ARB                    0x864B
+#define GL_CURRENT_MATRIX_ARB                            0x8641
+#define GL_TRANSPOSE_CURRENT_MATRIX_ARB                  0x88B7
+#define GL_CURRENT_MATRIX_STACK_DEPTH_ARB                0x8640
+#define GL_MAX_VERTEX_ATTRIBS_ARB                        0x8869
+#define GL_MAX_PROGRAM_MATRICES_ARB                      0x862F
+#define GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB            0x862E
+#define GL_PROGRAM_ERROR_STRING_ARB                      0x8874
+
+#define GL_MATRIX0_ARB                                   0x88C0
+#define GL_MATRIX1_ARB                                   0x88C1
+#define GL_MATRIX2_ARB                                   0x88C2
+#define GL_MATRIX3_ARB                                   0x88C3
+#define GL_MATRIX4_ARB                                   0x88C4
+#define GL_MATRIX5_ARB                                   0x88C5
+#define GL_MATRIX6_ARB                                   0x88C6
+#define GL_MATRIX7_ARB                                   0x88C7
+#define GL_MATRIX8_ARB                                   0x88C8
+#define GL_MATRIX9_ARB                                   0x88C9
+#define GL_MATRIX10_ARB                                  0x88CA
+#define GL_MATRIX11_ARB                                  0x88CB
+#define GL_MATRIX12_ARB                                  0x88CC
+#define GL_MATRIX13_ARB                                  0x88CD
+#define GL_MATRIX14_ARB                                  0x88CE
+#define GL_MATRIX15_ARB                                  0x88CF
+#define GL_MATRIX16_ARB                                  0x88D0
+#define GL_MATRIX17_ARB                                  0x88D1
+#define GL_MATRIX18_ARB                                  0x88D2
+#define GL_MATRIX19_ARB                                  0x88D3
+#define GL_MATRIX20_ARB                                  0x88D4
+#define GL_MATRIX21_ARB                                  0x88D5
+#define GL_MATRIX22_ARB                                  0x88D6
+#define GL_MATRIX23_ARB                                  0x88D7
+#define GL_MATRIX24_ARB                                  0x88D8
+#define GL_MATRIX25_ARB                                  0x88D9
+#define GL_MATRIX26_ARB                                  0x88DA
+#define GL_MATRIX27_ARB                                  0x88DB
+#define GL_MATRIX28_ARB                                  0x88DC
+#define GL_MATRIX29_ARB                                  0x88DD
+#define GL_MATRIX30_ARB                                  0x88DE
+#define GL_MATRIX31_ARB                                  0x88DF
+
+#define GL_COLOR_SUM_ARB                                 0x8458
+#endif
+
+#if GL_ARB_shader_objects
+#define GL_PROGRAM_OBJECT_ARB                              0x8B40
+#define GL_OBJECT_TYPE_ARB                                 0x8B4E
+#define GL_OBJECT_SUBTYPE_ARB                              0x8B4F
+#define GL_OBJECT_DELETE_STATUS_ARB                        0x8B80
+#define GL_OBJECT_COMPILE_STATUS_ARB                       0x8B81
+#define GL_OBJECT_LINK_STATUS_ARB                          0x8B82
+#define GL_OBJECT_VALIDATE_STATUS_ARB                      0x8B83
+#define GL_OBJECT_INFO_LOG_LENGTH_ARB                      0x8B84
+#define GL_OBJECT_ATTACHED_OBJECTS_ARB                     0x8B85
+#define GL_OBJECT_ACTIVE_UNIFORMS_ARB                      0x8B86
+#define GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB            0x8B87
+#define GL_OBJECT_SHADER_SOURCE_LENGTH_ARB                 0x8B88
+#define GL_SHADER_OBJECT_ARB                               0x8B48
+#define GL_FLOAT_VEC2_ARB                                  0x8B50
+#define GL_FLOAT_VEC3_ARB                                  0x8B51
+#define GL_FLOAT_VEC4_ARB                                  0x8B52
+#define GL_INT_VEC2_ARB                                    0x8B53
+#define GL_INT_VEC3_ARB                                    0x8B54
+#define GL_INT_VEC4_ARB                                    0x8B55
+#define GL_BOOL_ARB                                        0x8B56
+#define GL_BOOL_VEC2_ARB                                   0x8B57
+#define GL_BOOL_VEC3_ARB                                   0x8B58
+#define GL_BOOL_VEC4_ARB                                   0x8B59
+#define GL_FLOAT_MAT2_ARB                                  0x8B5A
+#define GL_FLOAT_MAT3_ARB                                  0x8B5B
+#define GL_FLOAT_MAT4_ARB                                  0x8B5C
+#define GL_SAMPLER_1D_ARB                                  0x8B5D
+#define GL_SAMPLER_2D_ARB                                  0x8B5E
+#define GL_SAMPLER_3D_ARB                                  0x8B5F
+#define GL_SAMPLER_CUBE_ARB                                0x8B60
+#define GL_SAMPLER_1D_SHADOW_ARB                           0x8B61
+#define GL_SAMPLER_2D_SHADOW_ARB                           0x8B62
+#define GL_SAMPLER_2D_RECT_ARB                             0x8B63
+#define GL_SAMPLER_2D_RECT_SHADOW_ARB                      0x8B64
+#endif
+
+#if GL_ARB_vertex_shader
+#define GL_VERTEX_SHADER_ARB                               0x8B31
+#define GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB               0x8B4A
+#define GL_MAX_TEXTURE_COORDS_ARB                          0x8871
+#define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                     0x8872
+#define GL_MAX_VARYING_FLOATS_ARB                          0x8B4B
+#define GL_MAX_VERTEX_ATTRIBS_ARB                          0x8869
+#define GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB              0x8B4C
+#define GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB            0x8B4D
+#define GL_VERTEX_PROGRAM_POINT_SIZE_ARB                   0x8642
+#define GL_VERTEX_PROGRAM_TWO_SIDE_ARB                     0x8643
+#define GL_OBJECT_ACTIVE_ATTRIBUTES_ARB                    0x8B89
+#define GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB          0x8B8A
+#define GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB                 0x8622
+#define GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB                    0x8623
+#define GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB                  0x8624
+#define GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB                    0x8625
+#define GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB              0x886A
+#define GL_CURRENT_VERTEX_ATTRIB_ARB                       0x8626
+#define GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB                 0x8645
+#endif
+
+#if GL_ARB_fragment_shader
+#define GL_FRAGMENT_SHADER_ARB                             0x8B30
+#define GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB             0x8B49
+#define GL_MAX_TEXTURE_COORDS_ARB                          0x8871
+#define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                     0x8872
+#endif
+
+#if GL_ARB_vertex_buffer_object
+#define GL_ARRAY_BUFFER_ARB                                0x8892
+#define GL_ELEMENT_ARRAY_BUFFER_ARB                        0x8893
+#define GL_ARRAY_BUFFER_BINDING_ARB                        0x8894
+#define GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB                0x8895
+#define GL_VERTEX_ARRAY_BUFFER_BINDING_ARB                 0x8896
+#define GL_NORMAL_ARRAY_BUFFER_BINDING_ARB                 0x8897
+#define GL_COLOR_ARRAY_BUFFER_BINDING_ARB                  0x8898
+#define GL_INDEX_ARRAY_BUFFER_BINDING_ARB                  0x8899
+#define GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB          0x889A
+#define GL_EDGE_FLAG_ARRAY_BUFFER_BINDING_ARB              0x889B
+#define GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB        0x889C
+#define GL_FOG_COORD_ARRAY_BUFFER_BINDING_ARB              0x889D
+#define GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB                 0x889E
+#define GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB          0x889F
+#define GL_STREAM_DRAW_ARB                                 0x88E0
+#define GL_STREAM_READ_ARB                                 0x88E1
+#define GL_STREAM_COPY_ARB                                 0x88E2
+#define GL_STATIC_DRAW_ARB                                 0x88E4
+#define GL_STATIC_READ_ARB                                 0x88E5
+#define GL_STATIC_COPY_ARB                                 0x88E6
+#define GL_DYNAMIC_DRAW_ARB                                0x88E8
+#define GL_DYNAMIC_READ_ARB                                0x88E9
+#define GL_DYNAMIC_COPY_ARB                                0x88EA
+#define GL_READ_ONLY_ARB                                   0x88B8
+#define GL_WRITE_ONLY_ARB                                  0x88B9
+#define GL_READ_WRITE_ARB                                  0x88BA
+#define GL_BUFFER_SIZE_ARB                                 0x8764
+#define GL_BUFFER_USAGE_ARB                                0x8765
+#define GL_BUFFER_ACCESS_ARB                               0x88BB
+#define GL_BUFFER_MAPPED_ARB                               0x88BC
+#define GL_BUFFER_MAP_POINTER_ARB                          0x88BD
+/* Obsolete */
+#define GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB         0x889D
+#endif
+
+#if GL_ARB_point_sprite
+#define GL_POINT_SPRITE_ARB                                0x8861
+#define GL_COORD_REPLACE_ARB                               0x8862
+#endif
+
 
 #if GL_EXT_abgr
 #define GL_ABGR_EXT                       0x8000
@@ -359,11 +662,6 @@ extern "C" {
 #define GL_MAX_3D_TEXTURE_SIZE_EXT        0x8073
 #endif
 
-#if GL_SGIS_texture_filter4
-#define GL_FILTER4_SGIS                   0x8146
-#define GL_TEXTURE_FILTER4_SIZE_SGIS      0x8147
-#endif
-
 #if GL_EXT_histogram
 #define GL_HISTOGRAM_EXT                  0x8024
 #define GL_PROXY_HISTOGRAM_EXT            0x8025
@@ -404,69 +702,6 @@ extern "C" {
 #define GL_POST_CONVOLUTION_ALPHA_BIAS_EXT 0x8023
 #endif
 
-#if GL_SGI_color_matrix
-#define GL_COLOR_MATRIX_SGI               0x80B1
-#define GL_COLOR_MATRIX_STACK_DEPTH_SGI   0x80B2
-#define GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI 0x80B3
-#define GL_POST_COLOR_MATRIX_RED_SCALE_SGI 0x80B4
-#define GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI 0x80B5
-#define GL_POST_COLOR_MATRIX_BLUE_SCALE_SGI 0x80B6
-#define GL_POST_COLOR_MATRIX_ALPHA_SCALE_SGI 0x80B7
-#define GL_POST_COLOR_MATRIX_RED_BIAS_SGI 0x80B8
-#define GL_POST_COLOR_MATRIX_GREEN_BIAS_SGI 0x80B9
-#define GL_POST_COLOR_MATRIX_BLUE_BIAS_SGI 0x80BA
-#define GL_POST_COLOR_MATRIX_ALPHA_BIAS_SGI 0x80BB
-#endif
-
-#if GL_SGI_color_table
-#define GL_COLOR_TABLE_SGI                0x80D0
-#define GL_POST_CONVOLUTION_COLOR_TABLE_SGI 0x80D1
-#define GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI 0x80D2
-#define GL_PROXY_COLOR_TABLE_SGI          0x80D3
-#define GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI 0x80D4
-#define GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE_SGI 0x80D5
-#define GL_COLOR_TABLE_SCALE_SGI          0x80D6
-#define GL_COLOR_TABLE_BIAS_SGI           0x80D7
-#define GL_COLOR_TABLE_FORMAT_SGI         0x80D8
-#define GL_COLOR_TABLE_WIDTH_SGI          0x80D9
-#define GL_COLOR_TABLE_RED_SIZE_SGI       0x80DA
-#define GL_COLOR_TABLE_GREEN_SIZE_SGI     0x80DB
-#define GL_COLOR_TABLE_BLUE_SIZE_SGI      0x80DC
-#define GL_COLOR_TABLE_ALPHA_SIZE_SGI     0x80DD
-#define GL_COLOR_TABLE_LUMINANCE_SIZE_SGI 0x80DE
-#define GL_COLOR_TABLE_INTENSITY_SIZE_SGI 0x80DF
-#endif
-
-#if GL_SGIS_pixel_texture
-#define GL_PIXEL_TEXTURE_SGIS             0x8353
-#define GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS 0x8354
-#define GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS 0x8355
-#define GL_PIXEL_GROUP_COLOR_SGIS         0x8356
-#endif
-
-#if GL_SGIX_pixel_texture
-#define GL_PIXEL_TEX_GEN_SGIX             0x8139
-#define GL_PIXEL_TEX_GEN_MODE_SGIX        0x832B
-#endif
-
-#if GL_SGIS_texture4D
-#define GL_PACK_SKIP_VOLUMES_SGIS         0x8130
-#define GL_PACK_IMAGE_DEPTH_SGIS          0x8131
-#define GL_UNPACK_SKIP_VOLUMES_SGIS       0x8132
-#define GL_UNPACK_IMAGE_DEPTH_SGIS        0x8133
-#define GL_TEXTURE_4D_SGIS                0x8134
-#define GL_PROXY_TEXTURE_4D_SGIS          0x8135
-#define GL_TEXTURE_4DSIZE_SGIS            0x8136
-#define GL_TEXTURE_WRAP_Q_SGIS            0x8137
-#define GL_MAX_4D_TEXTURE_SIZE_SGIS       0x8138
-#define GL_TEXTURE_4D_BINDING_SGIS        0x814F
-#endif
-
-#if GL_SGI_texture_color_table
-#define GL_TEXTURE_COLOR_TABLE_SGI        0x80BC
-#define GL_PROXY_TEXTURE_COLOR_TABLE_SGI  0x80BD
-#endif
-
 #if GL_EXT_cmyka
 #define GL_CMYK_EXT                       0x800C
 #define GL_CMYKA_EXT                      0x800D
@@ -482,56 +717,12 @@ extern "C" {
 #define GL_TEXTURE_3D_BINDING_EXT         0x806A
 #endif
 
-#if GL_SGIS_detail_texture
-#define GL_DETAIL_TEXTURE_2D_SGIS         0x8095
-#define GL_DETAIL_TEXTURE_2D_BINDING_SGIS 0x8096
-#define GL_LINEAR_DETAIL_SGIS             0x8097
-#define GL_LINEAR_DETAIL_ALPHA_SGIS       0x8098
-#define GL_LINEAR_DETAIL_COLOR_SGIS       0x8099
-#define GL_DETAIL_TEXTURE_LEVEL_SGIS      0x809A
-#define GL_DETAIL_TEXTURE_MODE_SGIS       0x809B
-#define GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS 0x809C
-#endif
-
-#if GL_SGIS_sharpen_texture
-#define GL_LINEAR_SHARPEN_SGIS            0x80AD
-#define GL_LINEAR_SHARPEN_ALPHA_SGIS      0x80AE
-#define GL_LINEAR_SHARPEN_COLOR_SGIS      0x80AF
-#define GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS 0x80B0
-#endif
-
 #if GL_EXT_packed_pixels
 #define GL_UNSIGNED_BYTE_3_3_2_EXT        0x8032
 #define GL_UNSIGNED_SHORT_4_4_4_4_EXT     0x8033
 #define GL_UNSIGNED_SHORT_5_5_5_1_EXT     0x8034
 #define GL_UNSIGNED_INT_8_8_8_8_EXT       0x8035
 #define GL_UNSIGNED_INT_10_10_10_2_EXT    0x8036
-#endif
-
-#if GL_SGIS_texture_lod
-#define GL_TEXTURE_MIN_LOD_SGIS           0x813A
-#define GL_TEXTURE_MAX_LOD_SGIS           0x813B
-#define GL_TEXTURE_BASE_LEVEL_SGIS        0x813C
-#define GL_TEXTURE_MAX_LEVEL_SGIS         0x813D
-#endif
-
-#if GL_SGIS_multisample
-#define GL_MULTISAMPLE_SGIS               0x809D
-#define GL_SAMPLE_ALPHA_TO_MASK_SGIS      0x809E
-#define GL_SAMPLE_ALPHA_TO_ONE_SGIS       0x809F
-#define GL_SAMPLE_MASK_SGIS               0x80A0
-#define GL_1PASS_SGIS                     0x80A1
-#define GL_2PASS_0_SGIS                   0x80A2
-#define GL_2PASS_1_SGIS                   0x80A3
-#define GL_4PASS_0_SGIS                   0x80A4
-#define GL_4PASS_1_SGIS                   0x80A5
-#define GL_4PASS_2_SGIS                   0x80A6
-#define GL_4PASS_3_SGIS                   0x80A7
-#define GL_SAMPLE_BUFFERS_SGIS            0x80A8
-#define GL_SAMPLES_SGIS                   0x80A9
-#define GL_SAMPLE_MASK_VALUE_SGIS         0x80AA
-#define GL_SAMPLE_MASK_INVERT_SGIS        0x80AB
-#define GL_SAMPLE_PATTERN_SGIS            0x80AC
 #endif
 
 #if GL_EXT_rescale_normal
@@ -573,41 +764,6 @@ extern "C" {
 #define GL_EDGE_FLAG_ARRAY_POINTER_EXT    0x8093
 #endif
 
-#if GL_SGIS_generate_mipmap
-#define GL_GENERATE_MIPMAP_SGIS           0x8191
-#define GL_GENERATE_MIPMAP_HINT_SGIS      0x8192
-#endif
-
-#if GL_SGIX_clipmap
-#define GL_LINEAR_CLIPMAP_LINEAR_SGIX     0x8170
-#define GL_TEXTURE_CLIPMAP_CENTER_SGIX    0x8171
-#define GL_TEXTURE_CLIPMAP_FRAME_SGIX     0x8172
-#define GL_TEXTURE_CLIPMAP_OFFSET_SGIX    0x8173
-#define GL_TEXTURE_CLIPMAP_VIRTUAL_DEPTH_SGIX 0x8174
-#define GL_TEXTURE_CLIPMAP_LOD_OFFSET_SGIX 0x8175
-#define GL_TEXTURE_CLIPMAP_DEPTH_SGIX     0x8176
-#define GL_MAX_CLIPMAP_DEPTH_SGIX         0x8177
-#define GL_MAX_CLIPMAP_VIRTUAL_DEPTH_SGIX 0x8178
-#define GL_NEAREST_CLIPMAP_NEAREST_SGIX   0x844D
-#define GL_NEAREST_CLIPMAP_LINEAR_SGIX    0x844E
-#define GL_LINEAR_CLIPMAP_NEAREST_SGIX    0x844F
-#endif
-
-#if GL_SGIX_shadow
-#define GL_TEXTURE_COMPARE_SGIX           0x819A
-#define GL_TEXTURE_COMPARE_OPERATOR_SGIX  0x819B
-#define GL_TEXTURE_LEQUAL_R_SGIX          0x819C
-#define GL_TEXTURE_GEQUAL_R_SGIX          0x819D
-#endif
-
-#if GL_SGIS_texture_edge_clamp
-#define GL_CLAMP_TO_EDGE_SGIS             0x812F
-#endif
-
-#if GL_SGIS_texture_border_clamp
-#define GL_CLAMP_TO_BORDER_SGIS           0x812D
-#endif
-
 #if GL_EXT_blend_minmax
 #define GL_FUNC_ADD_EXT                   0x8006
 #define GL_MIN_EXT                        0x8007
@@ -615,225 +771,9 @@ extern "C" {
 #define GL_BLEND_EQUATION_EXT             0x8009
 #endif
 
-#if GL_ATI_blend_weighted_minmax
-#define GL_MIN_WEIGHTED_ATI               0x877D
-#define GL_MAX_WEIGHTED_ATI               0x877E
-#endif
-
-#if GL_ATI_texture_env_combine3
-#define GL_MODULATE_ADD_ATI               0x8744
-#define GL_MODULATE_SIGNED_ADD_ATI        0x8745
-#define GL_MODULATE_SUBTRACT_ATI          0x8746
-#endif
-
-#if GL_ATI_separate_stencil
-#define GL_STENCIL_BACK_FUNC_ATI            0x8800                
-#define GL_STENCIL_BACK_FAIL_ATI            0x8801                
-#define GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI 0x8802                
-#define GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI 0x8803                
-#endif
-
-#if GL_ATI_array_rev_comps_in_4_bytes
-#define GL_ARRAY_REV_COMPS_IN_4_BYTES_ATI 0x897C
-#endif
-
 #if GL_EXT_blend_subtract
 #define GL_FUNC_SUBTRACT_EXT              0x800A
 #define GL_FUNC_REVERSE_SUBTRACT_EXT      0x800B
-#endif
-
-#if GL_SGIX_interlace
-#define GL_INTERLACE_SGIX                 0x8094
-#endif
-
-#if GL_SGIX_pixel_tiles
-#define GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX 0x813E
-#define GL_PIXEL_TILE_CACHE_INCREMENT_SGIX 0x813F
-#define GL_PIXEL_TILE_WIDTH_SGIX          0x8140
-#define GL_PIXEL_TILE_HEIGHT_SGIX         0x8141
-#define GL_PIXEL_TILE_GRID_WIDTH_SGIX     0x8142
-#define GL_PIXEL_TILE_GRID_HEIGHT_SGIX    0x8143
-#define GL_PIXEL_TILE_GRID_DEPTH_SGIX     0x8144
-#define GL_PIXEL_TILE_CACHE_SIZE_SGIX     0x8145
-#endif
-
-#if GL_SGIS_texture_select
-#define GL_DUAL_ALPHA4_SGIS               0x8110
-#define GL_DUAL_ALPHA8_SGIS               0x8111
-#define GL_DUAL_ALPHA12_SGIS              0x8112
-#define GL_DUAL_ALPHA16_SGIS              0x8113
-#define GL_DUAL_LUMINANCE4_SGIS           0x8114
-#define GL_DUAL_LUMINANCE8_SGIS           0x8115
-#define GL_DUAL_LUMINANCE12_SGIS          0x8116
-#define GL_DUAL_LUMINANCE16_SGIS          0x8117
-#define GL_DUAL_INTENSITY4_SGIS           0x8118
-#define GL_DUAL_INTENSITY8_SGIS           0x8119
-#define GL_DUAL_INTENSITY12_SGIS          0x811A
-#define GL_DUAL_INTENSITY16_SGIS          0x811B
-#define GL_DUAL_LUMINANCE_ALPHA4_SGIS     0x811C
-#define GL_DUAL_LUMINANCE_ALPHA8_SGIS     0x811D
-#define GL_QUAD_ALPHA4_SGIS               0x811E
-#define GL_QUAD_ALPHA8_SGIS               0x811F
-#define GL_QUAD_LUMINANCE4_SGIS           0x8120
-#define GL_QUAD_LUMINANCE8_SGIS           0x8121
-#define GL_QUAD_INTENSITY4_SGIS           0x8122
-#define GL_QUAD_INTENSITY8_SGIS           0x8123
-#define GL_DUAL_TEXTURE_SELECT_SGIS       0x8124
-#define GL_QUAD_TEXTURE_SELECT_SGIS       0x8125
-#endif
-
-#if GL_SGIX_sprite
-#define GL_SPRITE_SGIX                    0x8148
-#define GL_SPRITE_MODE_SGIX               0x8149
-#define GL_SPRITE_AXIS_SGIX               0x814A
-#define GL_SPRITE_TRANSLATION_SGIX        0x814B
-#define GL_SPRITE_AXIAL_SGIX              0x814C
-#define GL_SPRITE_OBJECT_ALIGNED_SGIX     0x814D
-#define GL_SPRITE_EYE_ALIGNED_SGIX        0x814E
-#endif
-
-#if GL_SGIX_texture_multi_buffer
-#define GL_TEXTURE_MULTI_BUFFER_HINT_SGIX 0x812E
-#endif
-
-#if GL_SGIS_point_parameters
-#define GL_POINT_SIZE_MIN_EXT             0x8126
-#define GL_POINT_SIZE_MIN_SGIS            0x8126
-#define GL_POINT_SIZE_MAX_EXT             0x8127
-#define GL_POINT_SIZE_MAX_SGIS            0x8127
-#define GL_POINT_FADE_THRESHOLD_SIZE_EXT  0x8128
-#define GL_POINT_FADE_THRESHOLD_SIZE_SGIS 0x8128
-#define GL_DISTANCE_ATTENUATION_EXT       0x8129
-#define GL_DISTANCE_ATTENUATION_SGIS      0x8129
-#endif
-
-#if GL_SGIX_instruments
-#define GL_INSTRUMENT_BUFFER_POINTER_SGIX 0x8180
-#define GL_INSTRUMENT_MEASUREMENTS_SGIX   0x8181
-#endif
-
-#if GL_SGIX_texture_scale_bias
-#define GL_POST_TEXTURE_FILTER_BIAS_SGIX  0x8179
-#define GL_POST_TEXTURE_FILTER_SCALE_SGIX 0x817A
-#define GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX 0x817B
-#define GL_POST_TEXTURE_FILTER_SCALE_RANGE_SGIX 0x817C
-#endif
-
-#if GL_SGIX_framezoom
-#define GL_FRAMEZOOM_SGIX                 0x818B
-#define GL_FRAMEZOOM_FACTOR_SGIX          0x818C
-#define GL_MAX_FRAMEZOOM_FACTOR_SGIX      0x818D
-#endif
-
-#if GL_FfdMaskSGIX
-#define GL_TEXTURE_DEFORMATION_BIT_SGIX   0x00000001
-#define GL_GEOMETRY_DEFORMATION_BIT_SGIX  0x00000002
-#endif
-
-#if GL_SGIX_polynomial_ffd
-#define GL_GEOMETRY_DEFORMATION_SGIX      0x8194
-#define GL_TEXTURE_DEFORMATION_SGIX       0x8195
-#define GL_DEFORMATIONS_MASK_SGIX         0x8196
-#define GL_MAX_DEFORMATION_ORDER_SGIX     0x8197
-#endif
-
-#if GL_SGIX_reference_plane
-#define GL_REFERENCE_PLANE_SGIX           0x817D
-#define GL_REFERENCE_PLANE_EQUATION_SGIX  0x817E
-#endif
-
-#if GL_SGIX_depth_texture
-#define GL_DEPTH_COMPONENT16_SGIX         0x81A5
-#define GL_DEPTH_COMPONENT24_SGIX         0x81A6
-#define GL_DEPTH_COMPONENT32_SGIX         0x81A7
-#endif
-
-#if GL_SGIS_fog_function
-#define GL_FOG_FUNC_SGIS                  0x812A
-#define GL_FOG_FUNC_POINTS_SGIS           0x812B
-#define GL_MAX_FOG_FUNC_POINTS_SGIS       0x812C
-#endif
-
-#if GL_SGIX_fog_offset
-#define GL_FOG_OFFSET_SGIX                0x8198
-#define GL_FOG_OFFSET_VALUE_SGIX          0x8199
-#endif
-
-#if GL_HP_image_transform
-#define GL_IMAGE_SCALE_X_HP               0x8155
-#define GL_IMAGE_SCALE_Y_HP               0x8156
-#define GL_IMAGE_TRANSLATE_X_HP           0x8157
-#define GL_IMAGE_TRANSLATE_Y_HP           0x8158
-#define GL_IMAGE_ROTATE_ANGLE_HP          0x8159
-#define GL_IMAGE_ROTATE_ORIGIN_X_HP       0x815A
-#define GL_IMAGE_ROTATE_ORIGIN_Y_HP       0x815B
-#define GL_IMAGE_MAG_FILTER_HP            0x815C
-#define GL_IMAGE_MIN_FILTER_HP            0x815D
-#define GL_IMAGE_CUBIC_WEIGHT_HP          0x815E
-#define GL_CUBIC_HP                       0x815F
-#define GL_AVERAGE_HP                     0x8160
-#define GL_IMAGE_TRANSFORM_2D_HP          0x8161
-#define GL_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8162
-#define GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8163
-#endif
-
-#if GL_HP_convolution_border_modes
-#define GL_IGNORE_BORDER_HP               0x8150
-#define GL_CONSTANT_BORDER_HP             0x8151
-#define GL_REPLICATE_BORDER_HP            0x8153
-#define GL_CONVOLUTION_BORDER_COLOR_HP    0x8154
-#endif
-
-#if GL_SGIX_texture_add_env
-#define GL_TEXTURE_ENV_BIAS_SGIX          0x80BE
-#endif
-
-#if GL_PGI_vertex_hints
-#define GL_VERTEX_DATA_HINT_PGI           0x1A22A
-#define GL_VERTEX_CONSISTENT_HINT_PGI     0x1A22B
-#define GL_MATERIAL_SIDE_HINT_PGI         0x1A22C
-#define GL_MAX_VERTEX_HINT_PGI            0x1A22D
-#define GL_COLOR3_BIT_PGI                 0x00010000
-#define GL_COLOR4_BIT_PGI                 0x00020000
-#define GL_EDGEFLAG_BIT_PGI               0x00040000
-#define GL_INDEX_BIT_PGI                  0x00080000
-#define GL_MAT_AMBIENT_BIT_PGI            0x00100000
-#define GL_MAT_AMBIENT_AND_DIFFUSE_BIT_PGI 0x00200000
-#define GL_MAT_DIFFUSE_BIT_PGI            0x00400000
-#define GL_MAT_EMISSION_BIT_PGI           0x00800000
-#define GL_MAT_COLOR_INDEXES_BIT_PGI      0x01000000
-#define GL_MAT_SHININESS_BIT_PGI          0x02000000
-#define GL_MAT_SPECULAR_BIT_PGI           0x04000000
-#define GL_NORMAL_BIT_PGI                 0x08000000
-#define GL_TEXCOORD1_BIT_PGI              0x10000000
-#define GL_TEXCOORD2_BIT_PGI              0x20000000
-#define GL_TEXCOORD3_BIT_PGI              0x40000000
-#define GL_TEXCOORD4_BIT_PGI              0x80000000
-#define GL_VERTEX23_BIT_PGI               0x00000004
-#define GL_VERTEX4_BIT_PGI                0x00000008
-#endif
-
-#if GL_PGI_misc_hints
-#define GL_PREFER_DOUBLEBUFFER_HINT_PGI   0x1A1F8
-#define GL_CONSERVE_MEMORY_HINT_PGI       0x1A1FD
-#define GL_RECLAIM_MEMORY_HINT_PGI        0x1A1FE
-#define GL_NATIVE_GRAPHICS_HANDLE_PGI     0x1A202
-#define GL_NATIVE_GRAPHICS_BEGIN_HINT_PGI 0x1A203
-#define GL_NATIVE_GRAPHICS_END_HINT_PGI   0x1A204
-#define GL_ALWAYS_FAST_HINT_PGI           0x1A20C
-#define GL_ALWAYS_SOFT_HINT_PGI           0x1A20D
-#define GL_ALLOW_DRAW_OBJ_HINT_PGI        0x1A20E
-#define GL_ALLOW_DRAW_WIN_HINT_PGI        0x1A20F
-#define GL_ALLOW_DRAW_FRG_HINT_PGI        0x1A210
-#define GL_ALLOW_DRAW_MEM_HINT_PGI        0x1A211
-#define GL_STRICT_DEPTHFUNC_HINT_PGI      0x1A216
-#define GL_STRICT_LIGHTING_HINT_PGI       0x1A217
-#define GL_STRICT_SCISSOR_HINT_PGI        0x1A218
-#define GL_FULL_STIPPLE_HINT_PGI          0x1A219
-#define GL_CLIP_NEAR_HINT_PGI             0x1A220
-#define GL_CLIP_FAR_HINT_PGI              0x1A221
-#define GL_WIDE_LINE_HINT_PGI             0x1A222
-#define GL_BACK_NORMALS_HINT_PGI          0x1A223
 #endif
 
 #if GL_EXT_paletted_texture
@@ -848,24 +788,6 @@ extern "C" {
 
 #if GL_EXT_clip_volume_hint
 #define GL_CLIP_VOLUME_CLIPPING_HINT_EXT  0x80F0
-#endif
-
-#if GL_SGIX_list_priority
-#define GL_LIST_PRIORITY_SGIX             0x8182
-#endif
-
-#if GL_SGIX_ir_instrument1
-#define GL_IR_INSTRUMENT1_SGIX            0x817F
-#endif
-
-#if GL_SGIX_calligraphic_fragment
-#define GL_CALLIGRAPHIC_FRAGMENT_SGIX     0x8183
-#endif
-
-#if GL_SGIX_texture_lod_bias
-#define GL_TEXTURE_LOD_BIAS_S_SGIX        0x818E
-#define GL_TEXTURE_LOD_BIAS_T_SGIX        0x818F
-#define GL_TEXTURE_LOD_BIAS_R_SGIX        0x8190
 #endif
 
 #if GL_EXT_index_material
@@ -902,56 +824,9 @@ extern "C" {
 #define GL_CULL_VERTEX_OBJECT_POSITION_EXT 0x81AC
 #endif
 
-#if GL_SGIX_ycrcb
-#define GL_YCRCB_422_SGIX                 0x81BB
-#define GL_YCRCB_444_SGIX                 0x81BC
-#endif
-
-#if GL_SGIX_fragment_lighting
-#define GL_FRAGMENT_LIGHTING_SGIX         0x8400
-#define GL_FRAGMENT_COLOR_MATERIAL_SGIX   0x8401
-#define GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX 0x8402
-#define GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX 0x8403
-#define GL_MAX_FRAGMENT_LIGHTS_SGIX       0x8404
-#define GL_MAX_ACTIVE_LIGHTS_SGIX         0x8405
-#define GL_CURRENT_RASTER_NORMAL_SGIX     0x8406
-#define GL_LIGHT_ENV_MODE_SGIX            0x8407
-#define GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX 0x8408
-#define GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX 0x8409
-#define GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX 0x840A
-#define GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX 0x840B
-#define GL_FRAGMENT_LIGHT0_SGIX           0x840C
-#define GL_FRAGMENT_LIGHT1_SGIX           0x840D
-#define GL_FRAGMENT_LIGHT2_SGIX           0x840E
-#define GL_FRAGMENT_LIGHT3_SGIX           0x840F
-#define GL_FRAGMENT_LIGHT4_SGIX           0x8410
-#define GL_FRAGMENT_LIGHT5_SGIX           0x8411
-#define GL_FRAGMENT_LIGHT6_SGIX           0x8412
-#define GL_FRAGMENT_LIGHT7_SGIX           0x8413
-#endif
-
-#if GL_IBM_rasterpos_clip
-#define GL_RASTER_POSITION_UNCLIPPED_IBM  0x19262
-#endif
-
-#if GL_HP_texture_lighting
-#define GL_TEXTURE_LIGHTING_MODE_HP       0x8167
-#define GL_TEXTURE_POST_SPECULAR_HP       0x8168
-#define GL_TEXTURE_PRE_SPECULAR_HP        0x8169
-#endif
-
 #if GL_EXT_draw_range_elements
 #define GL_MAX_ELEMENTS_VERTICES_EXT      0x80E8
 #define GL_MAX_ELEMENTS_INDICES_EXT       0x80E9
-#endif
-
-#if GL_WIN_phong_shading
-#define GL_PHONG_WIN                      0x80EA
-#define GL_PHONG_HINT_WIN                 0x80EB
-#endif
-
-#if GL_WIN_specular_fog
-#define GL_FOG_SPECULAR_TEXTURE_WIN       0x80EC
 #endif
 
 #if GL_EXT_light_texture
@@ -967,45 +842,9 @@ extern "C" {
 /* reuse GL_FRAGMENT_DEPTH_EXT */
 #endif
 
-#if GL_SGIX_blend_alpha_minmax
-#define GL_ALPHA_MIN_SGIX                 0x8320
-#define GL_ALPHA_MAX_SGIX                 0x8321
-#endif
-
 #if GL_EXT_bgra
 #define GL_BGR_EXT                        0x80E0
 #define GL_BGRA_EXT                       0x80E1
-#endif
-
-#if GL_SGIX_async
-#define GL_ASYNC_MARKER_SGIX              0x8329
-#endif
-
-#if GL_SGIX_async_pixel
-#define GL_ASYNC_TEX_IMAGE_SGIX           0x835C
-#define GL_ASYNC_DRAW_PIXELS_SGIX         0x835D
-#define GL_ASYNC_READ_PIXELS_SGIX         0x835E
-#define GL_MAX_ASYNC_TEX_IMAGE_SGIX       0x835F
-#define GL_MAX_ASYNC_DRAW_PIXELS_SGIX     0x8360
-#define GL_MAX_ASYNC_READ_PIXELS_SGIX     0x8361
-#endif
-
-#if GL_SGIX_async_histogram
-#define GL_ASYNC_HISTOGRAM_SGIX           0x832C
-#define GL_MAX_ASYNC_HISTOGRAM_SGIX       0x832D
-#endif
-
-#if GL_INTEL_parallel_arrays
-#define GL_PARALLEL_ARRAYS_INTEL          0x83F4
-#define GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL 0x83F5
-#define GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL 0x83F6
-#define GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL 0x83F7
-#define GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL 0x83F8
-#endif
-
-#if GL_HP_occlusion_test
-#define GL_OCCLUSION_TEST_HP              0x8165
-#define GL_OCCLUSION_TEST_RESULT_HP       0x8166
 #endif
 
 #if GL_EXT_pixel_transform
@@ -1054,38 +893,6 @@ extern "C" {
 #define GL_FOG_COORDINATE_ARRAY_STRIDE_EXT 0x8455
 #define GL_FOG_COORDINATE_ARRAY_POINTER_EXT 0x8456
 #define GL_FOG_COORDINATE_ARRAY_EXT       0x8457
-#endif
-
-#if GL_APPLE_vertex_array_range
-#define GL_VERTEX_ARRAY_RANGE_APPLE             0x851D
-#define GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE      0x851E
-#define GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_APPLE 0x8520
-#define GL_VERTEX_ARRAY_RANGE_POINTER_APPLE     0x8521
-#define GL_VERTEX_ARRAY_STORAGE_HINT_APPLE      0x851F
-#define GL_STORAGE_CLIENT_APPLE                 0x85B4
-/* GL_STORAGE_PRIVATE_APPLE           0x85BD */
-/* GL_STORAGE_CACHED_APPLE            0x85BE */
-/* GL_STORAGE_SHARED_APPLE            0x85BF */
-#endif
-
-#if GL_APPLE_vertex_array_object
-#define GL_VERTEX_ARRAY_BINDING_APPLE      0x85B5
-#endif
-
-#if GL_APPLE_element_array
-#define GL_ELEMENT_ARRAY_APPLE             0x8A0C
-#define GL_ELEMENT_ARRAY_TYPE_APPLE        0x8A0D
-#define GL_ELEMENT_ARRAY_POINTER_APPLE     0x8A0E
-#endif
-
-#if GL_APPLE_fence
-#define GL_DRAW_PIXELS_APPLE              0x8A0A
-#define GL_FENCE_APPLE             	      0x8A0B
-#endif
-
-#if GL_REND_screen_coordinates
-#define GL_SCREEN_COORDINATES_REND        0x8490
-#define GL_INVERTED_SCREEN_W_REND         0x8491
 #endif
 
 #if GL_EXT_coordinate_frame
@@ -1149,158 +956,11 @@ extern "C" {
 #define GL_OPERAND7_ALPHA_EXT             0x859F
 #endif
 
-#if GL_ARB_texture_env_combine
-#define GL_COMBINE_ARB                    0x8570
-#define GL_COMBINE_RGB_ARB                0x8571
-#define GL_COMBINE_ALPHA_ARB              0x8572
-#define GL_RGB_SCALE_ARB                  0x8573
-#define GL_ADD_SIGNED_ARB                 0x8574
-#define GL_INTERPOLATE_ARB                0x8575
-#define GL_CONSTANT_ARB                   0x8576
-#define GL_PRIMARY_COLOR_ARB              0x8577
-#define GL_PREVIOUS_ARB                   0x8578
-#define GL_SUBTRACT_ARB                   0x84E7
-#define GL_SOURCE0_RGB_ARB                0x8580
-#define GL_SOURCE1_RGB_ARB                0x8581
-#define GL_SOURCE2_RGB_ARB                0x8582
-#define GL_SOURCE3_RGB_ARB                0x8583
-#define GL_SOURCE4_RGB_ARB                0x8584
-#define GL_SOURCE5_RGB_ARB                0x8585
-#define GL_SOURCE6_RGB_ARB                0x8586
-#define GL_SOURCE7_RGB_ARB                0x8587
-#define GL_SOURCE0_ALPHA_ARB              0x8588
-#define GL_SOURCE1_ALPHA_ARB              0x8589
-#define GL_SOURCE2_ALPHA_ARB              0x858A
-#define GL_SOURCE3_ALPHA_ARB              0x858B
-#define GL_SOURCE4_ALPHA_ARB              0x858C
-#define GL_SOURCE5_ALPHA_ARB              0x858D
-#define GL_SOURCE6_ALPHA_ARB              0x858E
-#define GL_SOURCE7_ALPHA_ARB              0x858F
-#define GL_OPERAND0_RGB_ARB               0x8590
-#define GL_OPERAND1_RGB_ARB               0x8591
-#define GL_OPERAND2_RGB_ARB               0x8592
-#define GL_OPERAND3_RGB_ARB               0x8593
-#define GL_OPERAND4_RGB_ARB               0x8594
-#define GL_OPERAND5_RGB_ARB               0x8595
-#define GL_OPERAND6_RGB_ARB               0x8596
-#define GL_OPERAND7_RGB_ARB               0x8597
-#define GL_OPERAND0_ALPHA_ARB             0x8598
-#define GL_OPERAND1_ALPHA_ARB             0x8599
-#define GL_OPERAND2_ALPHA_ARB             0x859A
-#define GL_OPERAND3_ALPHA_ARB             0x859B
-#define GL_OPERAND4_ALPHA_ARB             0x859C
-#define GL_OPERAND5_ALPHA_ARB             0x859D
-#define GL_OPERAND6_ALPHA_ARB             0x859E
-#define GL_OPERAND7_ALPHA_ARB             0x859F
-#endif
-
-
-#if GL_APPLE_specular_vector
-#define GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE 0x85B0
-#endif
-
-#if GL_APPLE_transform_hint
-#define GL_TRANSFORM_HINT_APPLE           0x85B1
-#endif
-
-#if GL_APPLE_client_storage
-#define GL_UNPACK_CLIENT_STORAGE_APPLE    0x85B2
-#endif
-
-#if GL_APPLE_ycbcr_422
-#define GL_YCBCR_422_APPLE                 0x85B9
-#define GL_UNSIGNED_SHORT_8_8_APPLE        0x85BA
-#define GL_UNSIGNED_SHORT_8_8_REV_APPLE    0x85BB
-#endif
-
-#if GL_APPLE_texture_range
-#define GL_TEXTURE_RANGE_LENGTH_APPLE      0x85B7
-#define GL_TEXTURE_RANGE_POINTER_APPLE     0x85B8
-#define GL_TEXTURE_STORAGE_HINT_APPLE      0x85BC
-#define GL_TEXTURE_MINIMIZE_STORAGE_APPLE  0x85B6
-#endif
-#if GL_APPLE_vertex_array_range || GL_APPLE_texture_range
-#define GL_STORAGE_PRIVATE_APPLE           0x85BD
-#define GL_STORAGE_CACHED_APPLE            0x85BE
-#define GL_STORAGE_SHARED_APPLE            0x85BF
-#endif
-
-#if GL_APPLE_float_pixels
-#define GL_HALF_APPLE                      0x140B
-#define GL_COLOR_FLOAT_APPLE               0x8A0F
-#define GL_RGBA_FLOAT32_APPLE              0x8814
-#define GL_RGB_FLOAT32_APPLE               0x8815
-#define GL_ALPHA_FLOAT32_APPLE             0x8816
-#define GL_INTENSITY_FLOAT32_APPLE         0x8817
-#define GL_LUMINANCE_FLOAT32_APPLE         0x8818
-#define GL_LUMINANCE_ALPHA_FLOAT32_APPLE   0x8819
-#define GL_RGBA_FLOAT16_APPLE              0x881A
-#define GL_RGB_FLOAT16_APPLE               0x881B
-#define GL_ALPHA_FLOAT16_APPLE             0x881C
-#define GL_INTENSITY_FLOAT16_APPLE         0x881D
-#define GL_LUMINANCE_FLOAT16_APPLE         0x881E
-#define GL_LUMINANCE_ALPHA_FLOAT16_APPLE   0x881F
-#endif
-
-#if GL_APPLE_pixel_buffer
-#define GL_MIN_PBUFFER_VIEWPORT_DIMS_APPLE 0x8A10
-#endif
-
-#if GL_SGIX_fog_scale
-#define GL_FOG_SCALE_SGIX                 0x81FC
-#define GL_FOG_SCALE_VALUE_SGIX           0x81FD
-#endif
-
-#if GL_SUNX_constant_data
-#define GL_UNPACK_CONSTANT_DATA_SUNX      0x81D5
-#define GL_TEXTURE_CONSTANT_DATA_SUNX     0x81D6
-#endif
-
-#if GL_SUN_global_alpha
-#define GL_GLOBAL_ALPHA_SUN               0x81D9
-#define GL_GLOBAL_ALPHA_FACTOR_SUN        0x81DA
-#endif
-
-#if GL_SUN_triangle_list
-#define GL_RESTART_SUN                    0x01
-#define GL_REPLACE_MIDDLE_SUN             0x02
-#define GL_REPLACE_OLDEST_SUN             0x03
-#define GL_TRIANGLE_LIST_SUN              0x81D7
-#define GL_REPLACEMENT_CODE_SUN           0x81D8
-#define GL_REPLACEMENT_CODE_ARRAY_SUN     0x85C0
-#define GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN 0x85C1
-#define GL_REPLACEMENT_CODE_ARRAY_STRIDE_SUN 0x85C2
-#define GL_REPLACEMENT_CODE_ARRAY_POINTER_SUN 0x85C3
-#define GL_R1UI_V3F_SUN                   0x85C4
-#define GL_R1UI_C4UB_V3F_SUN              0x85C5
-#define GL_R1UI_C3F_V3F_SUN               0x85C6
-#define GL_R1UI_N3F_V3F_SUN               0x85C7
-#define GL_R1UI_C4F_N3F_V3F_SUN           0x85C8
-#define GL_R1UI_T2F_V3F_SUN               0x85C9
-#define GL_R1UI_T2F_N3F_V3F_SUN           0x85CA
-#define GL_R1UI_T2F_C4F_N3F_V3F_SUN       0x85CB
-#endif
-
 #if GL_EXT_blend_func_separate
 #define GL_BLEND_DST_RGB_EXT              0x80C8
 #define GL_BLEND_SRC_RGB_EXT              0x80C9
 #define GL_BLEND_DST_ALPHA_EXT            0x80CA
 #define GL_BLEND_SRC_ALPHA_EXT            0x80CB
-#endif
-
-#if GL_INGR_color_clamp
-#define GL_RED_MIN_CLAMP_INGR             0x8560
-#define GL_GREEN_MIN_CLAMP_INGR           0x8561
-#define GL_BLUE_MIN_CLAMP_INGR            0x8562
-#define GL_ALPHA_MIN_CLAMP_INGR           0x8563
-#define GL_RED_MAX_CLAMP_INGR             0x8564
-#define GL_GREEN_MAX_CLAMP_INGR           0x8565
-#define GL_BLUE_MAX_CLAMP_INGR            0x8566
-#define GL_ALPHA_MAX_CLAMP_INGR           0x8567
-#endif
-
-#if GL_INGR_interlace_read
-#define GL_INTERLACE_READ_INGR            0x8568
 #endif
 
 #if GL_EXT_stencil_wrap
@@ -1313,11 +973,6 @@ extern "C" {
 #define GL_422_REV_EXT                    0x80CD
 #define GL_422_AVERAGE_EXT                0x80CE
 #define GL_422_REV_AVERAGE_EXT            0x80CF
-#endif
-
-#if GL_NV_texgen_reflection
-#define GL_NORMAL_MAP_NV                  0x8511
-#define GL_REFLECTION_MAP_NV              0x8512
 #endif
 
 #if GL_EXT_texture_cube_map
@@ -1333,10 +988,6 @@ extern "C" {
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT 0x851A
 #define GL_PROXY_TEXTURE_CUBE_MAP_EXT     0x851B
 #define GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT  0x851C
-#endif
-
-#if GL_SUN_convolution_border_modes
-#define GL_WRAP_BORDER_SUN                0x81D4
 #endif
 
 #if GL_EXT_texture_lod_bias
@@ -1364,103 +1015,6 @@ extern "C" {
 #define GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT   0x850E
 #define GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT 0x850F
 #define GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT 0x8510
-#endif
-
-#if GL_NV_light_max_exponent
-#define GL_MAX_SHININESS_NV               0x8504
-#define GL_MAX_SPOT_EXPONENT_NV           0x8505
-#endif
-
-#if GL_NV_vertex_array_range
-#define GL_VERTEX_ARRAY_RANGE_NV          0x851D
-#define GL_VERTEX_ARRAY_RANGE_LENGTH_NV   0x851E
-#define GL_VERTEX_ARRAY_RANGE_VALID_NV    0x851F
-#define GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV 0x8520
-#define GL_VERTEX_ARRAY_RANGE_POINTER_NV  0x8521
-#endif
-
-#if GL_NV_vertex_array_range2
-#define GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV 0x8533
-#endif
-
-#if GL_NV_register_combiners
-#define GL_REGISTER_COMBINERS_NV          0x8522
-#define GL_VARIABLE_A_NV                  0x8523
-#define GL_VARIABLE_B_NV                  0x8524
-#define GL_VARIABLE_C_NV                  0x8525
-#define GL_VARIABLE_D_NV                  0x8526
-#define GL_VARIABLE_E_NV                  0x8527
-#define GL_VARIABLE_F_NV                  0x8528
-#define GL_VARIABLE_G_NV                  0x8529
-#define GL_CONSTANT_COLOR0_NV             0x852A
-#define GL_CONSTANT_COLOR1_NV             0x852B
-#define GL_PRIMARY_COLOR_NV               0x852C
-#define GL_SECONDARY_COLOR_NV             0x852D
-#define GL_SPARE0_NV                      0x852E
-#define GL_SPARE1_NV                      0x852F
-#define GL_DISCARD_NV                     0x8530
-#define GL_E_TIMES_F_NV                   0x8531
-#define GL_SPARE0_PLUS_SECONDARY_COLOR_NV 0x8532
-#define GL_UNSIGNED_IDENTITY_NV           0x8536
-#define GL_UNSIGNED_INVERT_NV             0x8537
-#define GL_EXPAND_NORMAL_NV               0x8538
-#define GL_EXPAND_NEGATE_NV               0x8539
-#define GL_HALF_BIAS_NORMAL_NV            0x853A
-#define GL_HALF_BIAS_NEGATE_NV            0x853B
-#define GL_SIGNED_IDENTITY_NV             0x853C
-#define GL_SIGNED_NEGATE_NV               0x853D
-#define GL_SCALE_BY_TWO_NV                0x853E
-#define GL_SCALE_BY_FOUR_NV               0x853F
-#define GL_SCALE_BY_ONE_HALF_NV           0x8540
-#define GL_BIAS_BY_NEGATIVE_ONE_HALF_NV   0x8541
-#define GL_COMBINER_INPUT_NV              0x8542
-#define GL_COMBINER_MAPPING_NV            0x8543
-#define GL_COMBINER_COMPONENT_USAGE_NV    0x8544
-#define GL_COMBINER_AB_DOT_PRODUCT_NV     0x8545
-#define GL_COMBINER_CD_DOT_PRODUCT_NV     0x8546
-#define GL_COMBINER_MUX_SUM_NV            0x8547
-#define GL_COMBINER_SCALE_NV              0x8548
-#define GL_COMBINER_BIAS_NV               0x8549
-#define GL_COMBINER_AB_OUTPUT_NV          0x854A
-#define GL_COMBINER_CD_OUTPUT_NV          0x854B
-#define GL_COMBINER_SUM_OUTPUT_NV         0x854C
-#define GL_MAX_GENERAL_COMBINERS_NV       0x854D
-#define GL_NUM_GENERAL_COMBINERS_NV       0x854E
-#define GL_COLOR_SUM_CLAMP_NV             0x854F
-#define GL_COMBINER0_NV                   0x8550
-#define GL_COMBINER1_NV                   0x8551
-#define GL_COMBINER2_NV                   0x8552
-#define GL_COMBINER3_NV                   0x8553
-#define GL_COMBINER4_NV                   0x8554
-#define GL_COMBINER5_NV                   0x8555
-#define GL_COMBINER6_NV                   0x8556
-#define GL_COMBINER7_NV                   0x8557
-/* reuse GL_TEXTURE0_ARB */
-/* reuse GL_TEXTURE1_ARB */
-/* reuse GL_ZERO */
-/* reuse GL_NONE */
-/* reuse GL_FOG */
-#endif
-
-#if GL_ARB_texture_mirrored_repeat
-#define GL_MIRRORED_REPEAT_ARB            0x8370
-#endif
-
-#if GL_NV_register_combiners2
-#define GL_PER_STAGE_CONSTANTS_NV         0x8535
-#endif
-
-#if GL_NV_fog_distance
-#define GL_FOG_DISTANCE_MODE_NV           0x855A
-#define GL_EYE_RADIAL_NV                  0x855B
-#define GL_EYE_PLANE_ABSOLUTE_NV          0x855C
-/* reuse GL_EYE_PLANE */
-#endif
-
-#if GL_NV_texgen_emboss
-#define GL_EMBOSS_LIGHT_NV                0x855D
-#define GL_EMBOSS_CONSTANT_NV             0x855E
-#define GL_EMBOSS_MAP_NV                  0x855F
 #endif
 
 #if GL_EXT_texture_compression_s3tc
@@ -1695,6 +1249,250 @@ extern "C" {
 #define GL_BIAS_BIT_EXT                   0x00000008
 #endif
 
+#if GL_EXT_multisample
+#define GL_MULTISAMPLE_EXT                0x809D
+#define GL_SAMPLE_ALPHA_TO_MASK_EXT       0x809E
+#define GL_SAMPLE_ALPHA_TO_ONE_EXT        0x809F
+#define GL_SAMPLE_MASK_EXT                0x80A0
+#define GL_1PASS_EXT                      0x80A1
+#define GL_2PASS_0_EXT                    0x80A2
+#define GL_2PASS_1_EXT                    0x80A3
+#define GL_4PASS_0_EXT                    0x80A4
+#define GL_4PASS_1_EXT                    0x80A5
+#define GL_4PASS_2_EXT                    0x80A6
+#define GL_4PASS_3_EXT                    0x80A7
+#define GL_SAMPLE_BUFFERS_EXT             0x80A8
+#define GL_SAMPLES_EXT                    0x80A9
+#define GL_SAMPLE_MASK_VALUE_EXT          0x80AA
+#define GL_SAMPLE_MASK_INVERT_EXT         0x80AB
+#define GL_SAMPLE_PATTERN_EXT             0x80AC
+#endif
+
+#if GL_EXT_stencil_two_side
+#define GL_STENCIL_TEST_TWO_SIDE_EXT      0x8910
+#define GL_ACTIVE_STENCIL_FACE_EXT        0x8911
+#endif
+
+#if GL_EXT_depth_bounds_test
+#define GL_DEPTH_BOUNDS_TEST_EXT          0x8890
+#define GL_DEPTH_BOUNDS_EXT               0x8891
+#endif
+
+#if GL_EXT_blend_equation_separate
+#define GL_BLEND_EQUATION_RGB_EXT         0x8009
+#define GL_BLEND_EQUATION_ALPHA_EXT       0x883D
+#endif
+
+#if GL_EXT_texture_mirror_clamp
+#define GL_MIRROR_CLAMP_EXT               0x8742
+#define GL_MIRROR_CLAMP_TO_EDGE_EXT       0x8743
+#define GL_MIRROR_CLAMP_TO_BORDER_EXT     0x8912
+#endif
+
+
+#if GL_APPLE_vertex_array_range
+#define GL_VERTEX_ARRAY_RANGE_APPLE             0x851D
+#define GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE      0x851E
+#define GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_APPLE 0x8520
+#define GL_VERTEX_ARRAY_RANGE_POINTER_APPLE     0x8521
+#define GL_VERTEX_ARRAY_STORAGE_HINT_APPLE      0x851F
+#define GL_STORAGE_CLIENT_APPLE                 0x85B4
+#define GL_STORAGE_PRIVATE_APPLE                0x85BD
+#define GL_STORAGE_CACHED_APPLE                 0x85BE
+#define GL_STORAGE_SHARED_APPLE                 0x85BF
+#endif
+
+#if GL_APPLE_vertex_array_object
+#define GL_VERTEX_ARRAY_BINDING_APPLE      0x85B5
+#endif
+
+#if GL_APPLE_element_array
+#define GL_ELEMENT_ARRAY_APPLE             0x8A0C
+#define GL_ELEMENT_ARRAY_TYPE_APPLE        0x8A0D
+#define GL_ELEMENT_ARRAY_POINTER_APPLE     0x8A0E
+#define GL_ELEMENT_BUFFER_BINDING_APPLE    0x8A11
+#endif
+
+#if GL_APPLE_fence
+#define GL_DRAW_PIXELS_APPLE              0x8A0A
+#define GL_FENCE_APPLE             	      0x8A0B
+#define GL_BUFFER_OBJECT_APPLE            0x85B3
+#endif
+
+#if GL_APPLE_specular_vector
+#define GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE 0x85B0
+#endif
+
+#if GL_APPLE_transform_hint
+#define GL_TRANSFORM_HINT_APPLE           0x85B1
+#endif
+
+#if GL_APPLE_client_storage
+#define GL_UNPACK_CLIENT_STORAGE_APPLE    0x85B2
+#endif
+
+#if GL_APPLE_ycbcr_422
+#define GL_YCBCR_422_APPLE                 0x85B9
+#define GL_UNSIGNED_SHORT_8_8_APPLE        0x85BA
+#define GL_UNSIGNED_SHORT_8_8_REV_APPLE    0x85BB
+#endif
+
+#if GL_APPLE_texture_range
+#define GL_TEXTURE_RANGE_LENGTH_APPLE      0x85B7
+#define GL_TEXTURE_RANGE_POINTER_APPLE     0x85B8
+#define GL_TEXTURE_STORAGE_HINT_APPLE      0x85BC
+#define GL_TEXTURE_MINIMIZE_STORAGE_APPLE  0x85B6
+#define GL_STORAGE_PRIVATE_APPLE           0x85BD
+#define GL_STORAGE_CACHED_APPLE            0x85BE
+#define GL_STORAGE_SHARED_APPLE            0x85BF
+#endif
+
+#if GL_APPLE_float_pixels
+#define GL_HALF_APPLE                      0x140B
+#define GL_COLOR_FLOAT_APPLE               0x8A0F
+#define GL_RGBA_FLOAT32_APPLE              0x8814
+#define GL_RGB_FLOAT32_APPLE               0x8815
+#define GL_ALPHA_FLOAT32_APPLE             0x8816
+#define GL_INTENSITY_FLOAT32_APPLE         0x8817
+#define GL_LUMINANCE_FLOAT32_APPLE         0x8818
+#define GL_LUMINANCE_ALPHA_FLOAT32_APPLE   0x8819
+#define GL_RGBA_FLOAT16_APPLE              0x881A
+#define GL_RGB_FLOAT16_APPLE               0x881B
+#define GL_ALPHA_FLOAT16_APPLE             0x881C
+#define GL_INTENSITY_FLOAT16_APPLE         0x881D
+#define GL_LUMINANCE_FLOAT16_APPLE         0x881E
+#define GL_LUMINANCE_ALPHA_FLOAT16_APPLE   0x881F
+#endif
+
+#if GL_APPLE_pixel_buffer
+#define GL_MIN_PBUFFER_VIEWPORT_DIMS_APPLE 0x8A10
+#endif
+
+#if GL_APPLE_vertex_program_evaluators
+#define GL_VERTEX_ATTRIB_MAP1_APPLE                      0x8A00
+#define GL_VERTEX_ATTRIB_MAP2_APPLE                      0x8A01
+#define GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE                 0x8A02
+#define GL_VERTEX_ATTRIB_MAP1_COEFF_APPLE                0x8A03
+#define GL_VERTEX_ATTRIB_MAP1_ORDER_APPLE                0x8A04
+#define GL_VERTEX_ATTRIB_MAP1_DOMAIN_APPLE               0x8A05
+#define GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE                 0x8A06
+#define GL_VERTEX_ATTRIB_MAP2_COEFF_APPLE                0x8A07
+#define GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE                0x8A08
+#define GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE               0x8A09
+#endif
+
+
+#if GL_ATI_blend_weighted_minmax
+#define GL_MIN_WEIGHTED_ATI               0x877D
+#define GL_MAX_WEIGHTED_ATI               0x877E
+#endif
+
+#if GL_ATI_texture_env_combine3
+#define GL_MODULATE_ADD_ATI               0x8744
+#define GL_MODULATE_SIGNED_ADD_ATI        0x8745
+#define GL_MODULATE_SUBTRACT_ATI          0x8746
+#endif
+
+#if GL_ATI_separate_stencil
+#define GL_STENCIL_BACK_FUNC_ATI            0x8800
+#define GL_STENCIL_BACK_FAIL_ATI            0x8801
+#define GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI 0x8802
+#define GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI 0x8803
+#endif
+
+#if GL_ATI_array_rev_comps_in_4_bytes
+#define GL_ARRAY_REV_COMPS_IN_4_BYTES_ATI 0x897C
+#endif
+
+#if GL_ATI_texture_mirror_once
+#define GL_MIRROR_CLAMP_ATI                             0x8742
+#define GL_MIRROR_CLAMP_TO_EDGE_ATI                     0x8743
+#endif
+
+#if GL_ATI_pn_triangles
+#define GL_PN_TRIANGLES_ATI                             0x6090
+#define GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI       0x6091
+#define GL_PN_TRIANGLES_POINT_MODE_ATI                  0x6092
+#define GL_PN_TRIANGLES_NORMAL_MODE_ATI                 0x6093
+#define GL_PN_TRIANGLES_TESSELATION_LEVEL_ATI           0x6094
+#define GL_PN_TRIANGLES_POINT_MODE_LINEAR_ATI           0x6095
+#define GL_PN_TRIANGLES_POINT_MODE_CUBIC_ATI            0x6096
+#define GL_PN_TRIANGLES_NORMAL_MODE_LINEAR_ATI          0x6097
+#define GL_PN_TRIANGLES_NORMAL_MODE_QUADRATIC_ATI       0x6098
+#endif
+
+#if GL_ATI_text_fragment_shader
+#define GL_TEXT_FRAGMENT_SHADER_ATI                     0x8200
+#endif
+
+#if GL_ATI_blend_equation_separate
+#define GL_ALPHA_BLEND_EQUATION_ATI                     0x883D
+#endif
+
+#if GL_ATI_point_cull_mode
+#define GL_POINT_CULL_MODE_ATI                           0x60B3
+#define GL_POINT_CULL_CENTER_ATI                         0x60B4
+#define GL_POINT_CULL_CLIP_ATI                           0x60B5
+#endif
+
+#if GL_ATIX_pn_triangles
+#define GL_PN_TRIANGLES_ATIX                            0x6090
+#define GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATIX      0x6091
+#define GL_PN_TRIANGLES_POINT_MODE_ATIX                 0x6092
+#define GL_PN_TRIANGLES_NORMAL_MODE_ATIX                0x6093
+#define GL_PN_TRIANGLES_TESSELATION_LEVEL_ATIX          0x6094
+#define GL_PN_TRIANGLES_POINT_MODE_LINEAR_ATIX          0x6095
+#define GL_PN_TRIANGLES_POINT_MODE_CUBIC_ATIX           0x6096
+#define GL_PN_TRIANGLES_NORMAL_MODE_LINEAR_ATIX         0x6097
+#define GL_PN_TRIANGLES_NORMAL_MODE_QUADRATIC_ATIX      0x6098
+#endif
+
+#if GL_ATI_texture_compression_3dc
+#define GL_COMPRESSED_LUMINANCE_ALPHA_3DC_ATI           0x8837
+#endif
+
+
+#if GL_HP_image_transform
+#define GL_IMAGE_SCALE_X_HP               0x8155
+#define GL_IMAGE_SCALE_Y_HP               0x8156
+#define GL_IMAGE_TRANSLATE_X_HP           0x8157
+#define GL_IMAGE_TRANSLATE_Y_HP           0x8158
+#define GL_IMAGE_ROTATE_ANGLE_HP          0x8159
+#define GL_IMAGE_ROTATE_ORIGIN_X_HP       0x815A
+#define GL_IMAGE_ROTATE_ORIGIN_Y_HP       0x815B
+#define GL_IMAGE_MAG_FILTER_HP            0x815C
+#define GL_IMAGE_MIN_FILTER_HP            0x815D
+#define GL_IMAGE_CUBIC_WEIGHT_HP          0x815E
+#define GL_CUBIC_HP                       0x815F
+#define GL_AVERAGE_HP                     0x8160
+#define GL_IMAGE_TRANSFORM_2D_HP          0x8161
+#define GL_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8162
+#define GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8163
+#endif
+
+#if GL_HP_convolution_border_modes
+#define GL_IGNORE_BORDER_HP               0x8150
+#define GL_CONSTANT_BORDER_HP             0x8151
+#define GL_REPLICATE_BORDER_HP            0x8153
+#define GL_CONVOLUTION_BORDER_COLOR_HP    0x8154
+#endif
+
+#if GL_HP_texture_lighting
+#define GL_TEXTURE_LIGHTING_MODE_HP       0x8167
+#define GL_TEXTURE_POST_SPECULAR_HP       0x8168
+#define GL_TEXTURE_PRE_SPECULAR_HP        0x8169
+#endif
+
+#if GL_HP_occlusion_test
+#define GL_OCCLUSION_TEST_HP              0x8165
+#define GL_OCCLUSION_TEST_RESULT_HP       0x8166
+#endif
+
+
+#if GL_IBM_rasterpos_clip
+#define GL_RASTER_POSITION_UNCLIPPED_IBM  0x19262
+#endif
+
 #if GL_IBM_cull_vertex
 #define GL_CULL_VERTEX_IBM                103050
 #endif
@@ -1718,86 +1516,128 @@ extern "C" {
 #define GL_SECONDARY_COLOR_ARRAY_LIST_STRIDE_IBM 103087
 #endif
 
-#if GL_SGIX_subsample
-#define GL_PACK_SUBSAMPLE_RATE_SGIX       0x85A0
-#define GL_UNPACK_SUBSAMPLE_RATE_SGIX     0x85A1
-#define GL_PIXEL_SUBSAMPLE_4444_SGIX      0x85A2
-#define GL_PIXEL_SUBSAMPLE_2424_SGIX      0x85A3
-#define GL_PIXEL_SUBSAMPLE_4242_SGIX      0x85A4
+
+#if GL_INGR_color_clamp
+#define GL_RED_MIN_CLAMP_INGR             0x8560
+#define GL_GREEN_MIN_CLAMP_INGR           0x8561
+#define GL_BLUE_MIN_CLAMP_INGR            0x8562
+#define GL_ALPHA_MIN_CLAMP_INGR           0x8563
+#define GL_RED_MAX_CLAMP_INGR             0x8564
+#define GL_GREEN_MAX_CLAMP_INGR           0x8565
+#define GL_BLUE_MAX_CLAMP_INGR            0x8566
+#define GL_ALPHA_MAX_CLAMP_INGR           0x8567
 #endif
 
-#if GL_SGIX_ycrcba
-#define GL_YCRCB_SGIX                     0x8318
-#define GL_YCRCBA_SGIX                    0x8319
+#if GL_INGR_interlace_read
+#define GL_INTERLACE_READ_INGR            0x8568
 #endif
 
-#if GL_SGI_depth_pass_instrument
-#define GL_DEPTH_PASS_INSTRUMENT_SGIX     0x8310
-#define GL_DEPTH_PASS_INSTRUMENT_COUNTERS_SGIX 0x8311
-#define GL_DEPTH_PASS_INSTRUMENT_MAX_SGIX 0x8312
+
+#if GL_INTEL_parallel_arrays
+#define GL_PARALLEL_ARRAYS_INTEL          0x83F4
+#define GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL 0x83F5
+#define GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL 0x83F6
+#define GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL 0x83F7
+#define GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL 0x83F8
 #endif
 
-#if GL_3DFX_texture_compression_FXT1
-#define GL_COMPRESSED_RGB_FXT1_3DFX       0x86B0
-#define GL_COMPRESSED_RGBA_FXT1_3DFX      0x86B1
+
+#if GL_NV_texgen_reflection
+#define GL_NORMAL_MAP_NV                  0x8511
+#define GL_REFLECTION_MAP_NV              0x8512
 #endif
 
-#if GL_3DFX_multisample
-#define GL_MULTISAMPLE_3DFX               0x86B2
-#define GL_SAMPLE_BUFFERS_3DFX            0x86B3
-#define GL_SAMPLES_3DFX                   0x86B4
-#define GL_MULTISAMPLE_BIT_3DFX           0x20000000
+#if GL_NV_light_max_exponent
+#define GL_MAX_SHININESS_NV               0x8504
+#define GL_MAX_SPOT_EXPONENT_NV           0x8505
 #endif
 
-#if GL_EXT_multisample
-#define GL_MULTISAMPLE_EXT                0x809D
-#define GL_SAMPLE_ALPHA_TO_MASK_EXT       0x809E
-#define GL_SAMPLE_ALPHA_TO_ONE_EXT        0x809F
-#define GL_SAMPLE_MASK_EXT                0x80A0
-#define GL_1PASS_EXT                      0x80A1
-#define GL_2PASS_0_EXT                    0x80A2
-#define GL_2PASS_1_EXT                    0x80A3
-#define GL_4PASS_0_EXT                    0x80A4
-#define GL_4PASS_1_EXT                    0x80A5
-#define GL_4PASS_2_EXT                    0x80A6
-#define GL_4PASS_3_EXT                    0x80A7
-#define GL_SAMPLE_BUFFERS_EXT             0x80A8
-#define GL_SAMPLES_EXT                    0x80A9
-#define GL_SAMPLE_MASK_VALUE_EXT          0x80AA
-#define GL_SAMPLE_MASK_INVERT_EXT         0x80AB
-#define GL_SAMPLE_PATTERN_EXT             0x80AC
+#if GL_NV_vertex_array_range
+#define GL_VERTEX_ARRAY_RANGE_NV          0x851D
+#define GL_VERTEX_ARRAY_RANGE_LENGTH_NV   0x851E
+#define GL_VERTEX_ARRAY_RANGE_VALID_NV    0x851F
+#define GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV 0x8520
+#define GL_VERTEX_ARRAY_RANGE_POINTER_NV  0x8521
 #endif
 
-#if GL_SGIX_vertex_preclip
-#define GL_VERTEX_PRECLIP_SGIX            0x83EE
-#define GL_VERTEX_PRECLIP_HINT_SGIX       0x83EF
+#if GL_NV_vertex_array_range2
+#define GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV 0x8533
 #endif
 
-#if GL_SGIX_convolution_accuracy
-#define GL_CONVOLUTION_HINT_SGIX          0x8316
+#if GL_NV_register_combiners
+#define GL_REGISTER_COMBINERS_NV          0x8522
+#define GL_VARIABLE_A_NV                  0x8523
+#define GL_VARIABLE_B_NV                  0x8524
+#define GL_VARIABLE_C_NV                  0x8525
+#define GL_VARIABLE_D_NV                  0x8526
+#define GL_VARIABLE_E_NV                  0x8527
+#define GL_VARIABLE_F_NV                  0x8528
+#define GL_VARIABLE_G_NV                  0x8529
+#define GL_CONSTANT_COLOR0_NV             0x852A
+#define GL_CONSTANT_COLOR1_NV             0x852B
+#define GL_PRIMARY_COLOR_NV               0x852C
+#define GL_SECONDARY_COLOR_NV             0x852D
+#define GL_SPARE0_NV                      0x852E
+#define GL_SPARE1_NV                      0x852F
+#define GL_DISCARD_NV                     0x8530
+#define GL_E_TIMES_F_NV                   0x8531
+#define GL_SPARE0_PLUS_SECONDARY_COLOR_NV 0x8532
+#define GL_UNSIGNED_IDENTITY_NV           0x8536
+#define GL_UNSIGNED_INVERT_NV             0x8537
+#define GL_EXPAND_NORMAL_NV               0x8538
+#define GL_EXPAND_NEGATE_NV               0x8539
+#define GL_HALF_BIAS_NORMAL_NV            0x853A
+#define GL_HALF_BIAS_NEGATE_NV            0x853B
+#define GL_SIGNED_IDENTITY_NV             0x853C
+#define GL_SIGNED_NEGATE_NV               0x853D
+#define GL_SCALE_BY_TWO_NV                0x853E
+#define GL_SCALE_BY_FOUR_NV               0x853F
+#define GL_SCALE_BY_ONE_HALF_NV           0x8540
+#define GL_BIAS_BY_NEGATIVE_ONE_HALF_NV   0x8541
+#define GL_COMBINER_INPUT_NV              0x8542
+#define GL_COMBINER_MAPPING_NV            0x8543
+#define GL_COMBINER_COMPONENT_USAGE_NV    0x8544
+#define GL_COMBINER_AB_DOT_PRODUCT_NV     0x8545
+#define GL_COMBINER_CD_DOT_PRODUCT_NV     0x8546
+#define GL_COMBINER_MUX_SUM_NV            0x8547
+#define GL_COMBINER_SCALE_NV              0x8548
+#define GL_COMBINER_BIAS_NV               0x8549
+#define GL_COMBINER_AB_OUTPUT_NV          0x854A
+#define GL_COMBINER_CD_OUTPUT_NV          0x854B
+#define GL_COMBINER_SUM_OUTPUT_NV         0x854C
+#define GL_MAX_GENERAL_COMBINERS_NV       0x854D
+#define GL_NUM_GENERAL_COMBINERS_NV       0x854E
+#define GL_COLOR_SUM_CLAMP_NV             0x854F
+#define GL_COMBINER0_NV                   0x8550
+#define GL_COMBINER1_NV                   0x8551
+#define GL_COMBINER2_NV                   0x8552
+#define GL_COMBINER3_NV                   0x8553
+#define GL_COMBINER4_NV                   0x8554
+#define GL_COMBINER5_NV                   0x8555
+#define GL_COMBINER6_NV                   0x8556
+#define GL_COMBINER7_NV                   0x8557
+/* reuse GL_TEXTURE0_ARB */
+/* reuse GL_TEXTURE1_ARB */
+/* reuse GL_ZERO */
+/* reuse GL_NONE */
+/* reuse GL_FOG */
 #endif
 
-#if GL_SGIX_resample
-#define GL_PACK_RESAMPLE_SGIX             0x842C
-#define GL_UNPACK_RESAMPLE_SGIX           0x842D
-#define GL_RESAMPLE_REPLICATE_SGIX        0x842E
-#define GL_RESAMPLE_ZERO_FILL_SGIX        0x842F
-#define GL_RESAMPLE_DECIMATE_SGIX         0x8430
+#if GL_NV_register_combiners2
+#define GL_PER_STAGE_CONSTANTS_NV         0x8535
 #endif
 
-#if GL_SGIS_point_line_texgen
-#define GL_EYE_DISTANCE_TO_POINT_SGIS     0x81F0
-#define GL_OBJECT_DISTANCE_TO_POINT_SGIS  0x81F1
-#define GL_EYE_DISTANCE_TO_LINE_SGIS      0x81F2
-#define GL_OBJECT_DISTANCE_TO_LINE_SGIS   0x81F3
-#define GL_EYE_POINT_SGIS                 0x81F4
-#define GL_OBJECT_POINT_SGIS              0x81F5
-#define GL_EYE_LINE_SGIS                  0x81F6
-#define GL_OBJECT_LINE_SGIS               0x81F7
+#if GL_NV_fog_distance
+#define GL_FOG_DISTANCE_MODE_NV           0x855A
+#define GL_EYE_RADIAL_NV                  0x855B
+#define GL_EYE_PLANE_ABSOLUTE_NV          0x855C
+/* reuse GL_EYE_PLANE */
 #endif
 
-#if GL_SGIS_texture_color_mask
-#define GL_TEXTURE_COLOR_WRITEMASK_SGIS   0x81EF
+#if GL_NV_texgen_emboss
+#define GL_EMBOSS_LIGHT_NV                0x855D
+#define GL_EMBOSS_CONSTANT_NV             0x855E
+#define GL_EMBOSS_MAP_NV                  0x855F
 #endif
 
 #if GL_NV_vertex_program
@@ -1884,171 +1724,6 @@ extern "C" {
 #define GL_MAP2_VERTEX_ATTRIB13_4_NV      0x867D
 #define GL_MAP2_VERTEX_ATTRIB14_4_NV      0x867E
 #define GL_MAP2_VERTEX_ATTRIB15_4_NV      0x867F
-#endif
-
-#if GL_ARB_texture_env_dot3
-#define GL_DOT3_RGB_ARB                   0x86AE
-#define GL_DOT3_RGBA_ARB                  0x86AF
-#endif
-
-#if GL_ARB_point_parameters
-#define GL_POINT_SIZE_MIN_ARB                            0x8126
-#define GL_POINT_SIZE_MAX_ARB                            0x8127
-#define GL_POINT_FADE_THRESHOLD_SIZE_ARB                 0x8128
-#define GL_POINT_DISTANCE_ATTENUATION_ARB                0x8129
-#endif
-
-#if GL_ATI_texture_mirror_once
-#define GL_MIRROR_CLAMP_ATI                             0x8742
-#define GL_MIRROR_CLAMP_TO_EDGE_ATI                     0x8743
-#endif
-
-#if GL_ATI_pn_triangles
-#define GL_PN_TRIANGLES_ATI                             0x6090
-#define GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI       0x6091
-#define GL_PN_TRIANGLES_POINT_MODE_ATI                  0x6092
-#define GL_PN_TRIANGLES_NORMAL_MODE_ATI                 0x6093
-#define GL_PN_TRIANGLES_TESSELATION_LEVEL_ATI           0x6094
-#define GL_PN_TRIANGLES_POINT_MODE_LINEAR_ATI           0x6095
-#define GL_PN_TRIANGLES_POINT_MODE_CUBIC_ATI            0x6096
-#define GL_PN_TRIANGLES_NORMAL_MODE_LINEAR_ATI          0x6097
-#define GL_PN_TRIANGLES_NORMAL_MODE_QUADRATIC_ATI       0x6098
-#endif
-
-#if GL_ATIX_pn_triangles
-#define GL_PN_TRIANGLES_ATIX                            0x6090
-#define GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATIX      0x6091
-#define GL_PN_TRIANGLES_POINT_MODE_ATIX                 0x6092
-#define GL_PN_TRIANGLES_NORMAL_MODE_ATIX                0x6093
-#define GL_PN_TRIANGLES_TESSELATION_LEVEL_ATIX          0x6094
-#define GL_PN_TRIANGLES_POINT_MODE_LINEAR_ATIX          0x6095
-#define GL_PN_TRIANGLES_POINT_MODE_CUBIC_ATIX           0x6096
-#define GL_PN_TRIANGLES_NORMAL_MODE_LINEAR_ATIX         0x6097
-#define GL_PN_TRIANGLES_NORMAL_MODE_QUADRATIC_ATIX      0x6098
-#endif
-
-#if GL_ATI_text_fragment_shader
-#define GL_TEXT_FRAGMENT_SHADER_ATI                     0x8200
-#endif
-
-#if GL_ATI_blend_equation_separate
-#define GL_ALPHA_BLEND_EQUATION_ATI                     0x883D
-#endif
-
-#if GL_ARB_fragment_program
-#define GL_FRAGMENT_PROGRAM_ARB                         0x8804
-#define GL_PROGRAM_ALU_INSTRUCTIONS_ARB                 0x8805
-#define GL_PROGRAM_TEX_INSTRUCTIONS_ARB                 0x8806
-#define GL_PROGRAM_TEX_INDIRECTIONS_ARB                 0x8807
-#define GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB          0x8808
-#define GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB          0x8809
-#define GL_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB          0x880A
-#define GL_MAX_PROGRAM_ALU_INSTRUCTIONS_ARB             0x880B
-#define GL_MAX_PROGRAM_TEX_INSTRUCTIONS_ARB             0x880C
-#define GL_MAX_PROGRAM_TEX_INDIRECTIONS_ARB             0x880D
-#define GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB      0x880E
-#define GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB      0x880F
-#define GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB      0x8810
-#define GL_MAX_TEXTURE_COORDS_ARB                       0x8871
-#define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                  0x8872
-#endif
-
-#if GL_ARB_vertex_program
-#define GL_VERTEX_PROGRAM_ARB                            0x8620
-#define GL_VERTEX_PROGRAM_POINT_SIZE_ARB                 0x8642
-#define GL_VERTEX_PROGRAM_TWO_SIDE_ARB                   0x8643
-#define GL_PROGRAM_FORMAT_ASCII_ARB                      0x8875
-#define GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB               0x8622
-#define GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB                  0x8623
-#define GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB                0x8624
-#define GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB                  0x8625
-#define GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB            0x886A
-#define GL_CURRENT_VERTEX_ATTRIB_ARB                     0x8626
-#define GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB               0x8645
-#define GL_PROGRAM_LENGTH_ARB                            0x8627
-#define GL_PROGRAM_FORMAT_ARB                            0x8876
-#define GL_PROGRAM_NAME_ARB                              0x8677
-#define GL_PROGRAM_BINDING_ARB                           0x8677
-#define GL_PROGRAM_INSTRUCTIONS_ARB                      0x88A0
-#define GL_MAX_PROGRAM_INSTRUCTIONS_ARB                  0x88A1
-#define GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB               0x88A2
-#define GL_MAX_PROGRAM_NATIVE_INSTRUCTIONS_ARB           0x88A3
-#define GL_PROGRAM_TEMPORARIES_ARB                       0x88A4
-#define GL_MAX_PROGRAM_TEMPORARIES_ARB                   0x88A5
-#define GL_PROGRAM_NATIVE_TEMPORARIES_ARB                0x88A6
-#define GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB            0x88A7
-#define GL_PROGRAM_PARAMETERS_ARB                        0x88A8
-#define GL_MAX_PROGRAM_PARAMETERS_ARB                    0x88A9
-#define GL_PROGRAM_NATIVE_PARAMETERS_ARB                 0x88AA
-#define GL_MAX_PROGRAM_NATIVE_PARAMETERS_ARB             0x88AB
-#define GL_PROGRAM_ATTRIBS_ARB                           0x88AC
-#define GL_MAX_PROGRAM_ATTRIBS_ARB                       0x88AD
-#define GL_PROGRAM_NATIVE_ATTRIBS_ARB                    0x88AE
-#define GL_MAX_PROGRAM_NATIVE_ATTRIBS_ARB                0x88AF
-#define GL_PROGRAM_ADDRESS_REGISTERS_ARB                 0x88B0
-#define GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB             0x88B1
-#define GL_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB          0x88B2
-#define GL_MAX_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB      0x88B3
-#define GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB              0x88B4
-#define GL_MAX_PROGRAM_ENV_PARAMETERS_ARB                0x88B5
-#define GL_PROGRAM_UNDER_NATIVE_LIMITS_ARB               0x88B6
-#define GL_PROGRAM_STRING_ARB                            0x8628
-#define GL_PROGRAM_ERROR_POSITION_ARB                    0x864B
-#define GL_CURRENT_MATRIX_ARB                            0x8641
-#define GL_TRANSPOSE_CURRENT_MATRIX_ARB                  0x88B7
-#define GL_CURRENT_MATRIX_STACK_DEPTH_ARB                0x8640
-#define GL_MAX_VERTEX_ATTRIBS_ARB                        0x8869
-#define GL_MAX_PROGRAM_MATRICES_ARB                      0x862F
-#define GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB            0x862E
-#define GL_PROGRAM_ERROR_STRING_ARB                      0x8874
-
-#define GL_MATRIX0_ARB                                   0x88C0
-#define GL_MATRIX1_ARB                                   0x88C1
-#define GL_MATRIX2_ARB                                   0x88C2
-#define GL_MATRIX3_ARB                                   0x88C3
-#define GL_MATRIX4_ARB                                   0x88C4
-#define GL_MATRIX5_ARB                                   0x88C5
-#define GL_MATRIX6_ARB                                   0x88C6
-#define GL_MATRIX7_ARB                                   0x88C7
-#define GL_MATRIX8_ARB                                   0x88C8
-#define GL_MATRIX9_ARB                                   0x88C9
-#define GL_MATRIX10_ARB                                  0x88CA
-#define GL_MATRIX11_ARB                                  0x88CB
-#define GL_MATRIX12_ARB                                  0x88CC
-#define GL_MATRIX13_ARB                                  0x88CD
-#define GL_MATRIX14_ARB                                  0x88CE
-#define GL_MATRIX15_ARB                                  0x88CF
-#define GL_MATRIX16_ARB                                  0x88D0
-#define GL_MATRIX17_ARB                                  0x88D1
-#define GL_MATRIX18_ARB                                  0x88D2
-#define GL_MATRIX19_ARB                                  0x88D3
-#define GL_MATRIX20_ARB                                  0x88D4
-#define GL_MATRIX21_ARB                                  0x88D5
-#define GL_MATRIX22_ARB                                  0x88D6
-#define GL_MATRIX23_ARB                                  0x88D7
-#define GL_MATRIX24_ARB                                  0x88D8
-#define GL_MATRIX25_ARB                                  0x88D9
-#define GL_MATRIX26_ARB                                  0x88DA
-#define GL_MATRIX27_ARB                                  0x88DB
-#define GL_MATRIX28_ARB                                  0x88DC
-#define GL_MATRIX29_ARB                                  0x88DD
-#define GL_MATRIX30_ARB                                  0x88DE
-#define GL_MATRIX31_ARB                                  0x88DF
-
-#define GL_COLOR_SUM_ARB                                 0x8458
-#endif
-
-#if GL_APPLE_vertex_program_evaluators
-#define GL_VERTEX_ATTRIB_MAP1_APPLE                      0x8A00
-#define GL_VERTEX_ATTRIB_MAP2_APPLE                      0x8A01
-#define GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE                 0x8A02
-#define GL_VERTEX_ATTRIB_MAP1_COEFF_APPLE                0x8A03
-#define GL_VERTEX_ATTRIB_MAP1_ORDER_APPLE                0x8A04
-#define GL_VERTEX_ATTRIB_MAP1_DOMAIN_APPLE               0x8A05
-#define GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE                 0x8A06
-#define GL_VERTEX_ATTRIB_MAP2_COEFF_APPLE                0x8A07
-#define GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE                0x8A08
-#define GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE               0x8A09
 #endif
 
 #if GL_NV_texture_shader
@@ -2152,12 +1827,6 @@ extern "C" {
 #define GL_FORCE_BLUE_TO_ONE_NV                          0x8860
 #endif
 
-#if GL_ATI_point_cull_mode
-#define GL_POINT_CULL_MODE_ATI                           0x60B3
-#define GL_POINT_CULL_CENTER_ATI                         0x60B4
-#define GL_POINT_CULL_CLIP_ATI                           0x60B5
-#endif
-
 #if GL_NV_point_sprite
 #define GL_POINT_SPRITE_NV                               0x8861
 #define GL_COORD_REPLACE_NV                              0x8862
@@ -2177,104 +1846,510 @@ extern "C" {
 #define GL_MAX_SPOT_EXPONENT_NV				             0x8505
 #endif
 
-#if GL_EXT_stencil_two_side
-#define GL_STENCIL_TEST_TWO_SIDE_EXT                     0x8910
-#define GL_ACTIVE_STENCIL_FACE_EXT                       0x8911
+
+#if GL_PGI_vertex_hints
+#define GL_VERTEX_DATA_HINT_PGI           0x1A22A
+#define GL_VERTEX_CONSISTENT_HINT_PGI     0x1A22B
+#define GL_MATERIAL_SIDE_HINT_PGI         0x1A22C
+#define GL_MAX_VERTEX_HINT_PGI            0x1A22D
+#define GL_COLOR3_BIT_PGI                 0x00010000
+#define GL_COLOR4_BIT_PGI                 0x00020000
+#define GL_EDGEFLAG_BIT_PGI               0x00040000
+#define GL_INDEX_BIT_PGI                  0x00080000
+#define GL_MAT_AMBIENT_BIT_PGI            0x00100000
+#define GL_MAT_AMBIENT_AND_DIFFUSE_BIT_PGI 0x00200000
+#define GL_MAT_DIFFUSE_BIT_PGI            0x00400000
+#define GL_MAT_EMISSION_BIT_PGI           0x00800000
+#define GL_MAT_COLOR_INDEXES_BIT_PGI      0x01000000
+#define GL_MAT_SHININESS_BIT_PGI          0x02000000
+#define GL_MAT_SPECULAR_BIT_PGI           0x04000000
+#define GL_NORMAL_BIT_PGI                 0x08000000
+#define GL_TEXCOORD1_BIT_PGI              0x10000000
+#define GL_TEXCOORD2_BIT_PGI              0x20000000
+#define GL_TEXCOORD3_BIT_PGI              0x40000000
+#define GL_TEXCOORD4_BIT_PGI              0x80000000
+#define GL_VERTEX23_BIT_PGI               0x00000004
+#define GL_VERTEX4_BIT_PGI                0x00000008
 #endif
+
+#if GL_PGI_misc_hints
+#define GL_PREFER_DOUBLEBUFFER_HINT_PGI   0x1A1F8
+#define GL_CONSERVE_MEMORY_HINT_PGI       0x1A1FD
+#define GL_RECLAIM_MEMORY_HINT_PGI        0x1A1FE
+#define GL_NATIVE_GRAPHICS_HANDLE_PGI     0x1A202
+#define GL_NATIVE_GRAPHICS_BEGIN_HINT_PGI 0x1A203
+#define GL_NATIVE_GRAPHICS_END_HINT_PGI   0x1A204
+#define GL_ALWAYS_FAST_HINT_PGI           0x1A20C
+#define GL_ALWAYS_SOFT_HINT_PGI           0x1A20D
+#define GL_ALLOW_DRAW_OBJ_HINT_PGI        0x1A20E
+#define GL_ALLOW_DRAW_WIN_HINT_PGI        0x1A20F
+#define GL_ALLOW_DRAW_FRG_HINT_PGI        0x1A210
+#define GL_ALLOW_DRAW_MEM_HINT_PGI        0x1A211
+#define GL_STRICT_DEPTHFUNC_HINT_PGI      0x1A216
+#define GL_STRICT_LIGHTING_HINT_PGI       0x1A217
+#define GL_STRICT_SCISSOR_HINT_PGI        0x1A218
+#define GL_FULL_STIPPLE_HINT_PGI          0x1A219
+#define GL_CLIP_NEAR_HINT_PGI             0x1A220
+#define GL_CLIP_FAR_HINT_PGI              0x1A221
+#define GL_WIDE_LINE_HINT_PGI             0x1A222
+#define GL_BACK_NORMALS_HINT_PGI          0x1A223
+#endif
+
+
+#if GL_REND_screen_coordinates
+#define GL_SCREEN_COORDINATES_REND        0x8490
+#define GL_INVERTED_SCREEN_W_REND         0x8491
+#endif
+
+
+#if GL_SGI_color_matrix
+#define GL_COLOR_MATRIX_SGI               0x80B1
+#define GL_COLOR_MATRIX_STACK_DEPTH_SGI   0x80B2
+#define GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI 0x80B3
+#define GL_POST_COLOR_MATRIX_RED_SCALE_SGI 0x80B4
+#define GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI 0x80B5
+#define GL_POST_COLOR_MATRIX_BLUE_SCALE_SGI 0x80B6
+#define GL_POST_COLOR_MATRIX_ALPHA_SCALE_SGI 0x80B7
+#define GL_POST_COLOR_MATRIX_RED_BIAS_SGI 0x80B8
+#define GL_POST_COLOR_MATRIX_GREEN_BIAS_SGI 0x80B9
+#define GL_POST_COLOR_MATRIX_BLUE_BIAS_SGI 0x80BA
+#define GL_POST_COLOR_MATRIX_ALPHA_BIAS_SGI 0x80BB
+#endif
+
+#if GL_SGI_color_table
+#define GL_COLOR_TABLE_SGI                0x80D0
+#define GL_POST_CONVOLUTION_COLOR_TABLE_SGI 0x80D1
+#define GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI 0x80D2
+#define GL_PROXY_COLOR_TABLE_SGI          0x80D3
+#define GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI 0x80D4
+#define GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE_SGI 0x80D5
+#define GL_COLOR_TABLE_SCALE_SGI          0x80D6
+#define GL_COLOR_TABLE_BIAS_SGI           0x80D7
+#define GL_COLOR_TABLE_FORMAT_SGI         0x80D8
+#define GL_COLOR_TABLE_WIDTH_SGI          0x80D9
+#define GL_COLOR_TABLE_RED_SIZE_SGI       0x80DA
+#define GL_COLOR_TABLE_GREEN_SIZE_SGI     0x80DB
+#define GL_COLOR_TABLE_BLUE_SIZE_SGI      0x80DC
+#define GL_COLOR_TABLE_ALPHA_SIZE_SGI     0x80DD
+#define GL_COLOR_TABLE_LUMINANCE_SIZE_SGI 0x80DE
+#define GL_COLOR_TABLE_INTENSITY_SIZE_SGI 0x80DF
+#endif
+
+#if GL_SGI_texture_color_table
+#define GL_TEXTURE_COLOR_TABLE_SGI        0x80BC
+#define GL_PROXY_TEXTURE_COLOR_TABLE_SGI  0x80BD
+#endif
+
+#if GL_SGI_depth_pass_instrument
+#define GL_DEPTH_PASS_INSTRUMENT_SGIX     0x8310
+#define GL_DEPTH_PASS_INSTRUMENT_COUNTERS_SGIX 0x8311
+#define GL_DEPTH_PASS_INSTRUMENT_MAX_SGIX 0x8312
+#endif
+
+#if GL_SGIS_texture_filter4
+#define GL_FILTER4_SGIS                   0x8146
+#define GL_TEXTURE_FILTER4_SIZE_SGIS      0x8147
+#endif
+
+#if GL_SGIS_pixel_texture
+#define GL_PIXEL_TEXTURE_SGIS             0x8353
+#define GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS 0x8354
+#define GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS 0x8355
+#define GL_PIXEL_GROUP_COLOR_SGIS         0x8356
+#endif
+
+#if GL_SGIS_texture4D
+#define GL_PACK_SKIP_VOLUMES_SGIS         0x8130
+#define GL_PACK_IMAGE_DEPTH_SGIS          0x8131
+#define GL_UNPACK_SKIP_VOLUMES_SGIS       0x8132
+#define GL_UNPACK_IMAGE_DEPTH_SGIS        0x8133
+#define GL_TEXTURE_4D_SGIS                0x8134
+#define GL_PROXY_TEXTURE_4D_SGIS          0x8135
+#define GL_TEXTURE_4DSIZE_SGIS            0x8136
+#define GL_TEXTURE_WRAP_Q_SGIS            0x8137
+#define GL_MAX_4D_TEXTURE_SIZE_SGIS       0x8138
+#define GL_TEXTURE_4D_BINDING_SGIS        0x814F
+#endif
+
+#if GL_SGIS_detail_texture
+#define GL_DETAIL_TEXTURE_2D_SGIS         0x8095
+#define GL_DETAIL_TEXTURE_2D_BINDING_SGIS 0x8096
+#define GL_LINEAR_DETAIL_SGIS             0x8097
+#define GL_LINEAR_DETAIL_ALPHA_SGIS       0x8098
+#define GL_LINEAR_DETAIL_COLOR_SGIS       0x8099
+#define GL_DETAIL_TEXTURE_LEVEL_SGIS      0x809A
+#define GL_DETAIL_TEXTURE_MODE_SGIS       0x809B
+#define GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS 0x809C
+#endif
+
+#if GL_SGIS_sharpen_texture
+#define GL_LINEAR_SHARPEN_SGIS            0x80AD
+#define GL_LINEAR_SHARPEN_ALPHA_SGIS      0x80AE
+#define GL_LINEAR_SHARPEN_COLOR_SGIS      0x80AF
+#define GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS 0x80B0
+#endif
+
+#if GL_SGIS_texture_lod
+#define GL_TEXTURE_MIN_LOD_SGIS           0x813A
+#define GL_TEXTURE_MAX_LOD_SGIS           0x813B
+#define GL_TEXTURE_BASE_LEVEL_SGIS        0x813C
+#define GL_TEXTURE_MAX_LEVEL_SGIS         0x813D
+#endif
+
+#if GL_SGIS_multisample
+#define GL_MULTISAMPLE_SGIS               0x809D
+#define GL_SAMPLE_ALPHA_TO_MASK_SGIS      0x809E
+#define GL_SAMPLE_ALPHA_TO_ONE_SGIS       0x809F
+#define GL_SAMPLE_MASK_SGIS               0x80A0
+#define GL_1PASS_SGIS                     0x80A1
+#define GL_2PASS_0_SGIS                   0x80A2
+#define GL_2PASS_1_SGIS                   0x80A3
+#define GL_4PASS_0_SGIS                   0x80A4
+#define GL_4PASS_1_SGIS                   0x80A5
+#define GL_4PASS_2_SGIS                   0x80A6
+#define GL_4PASS_3_SGIS                   0x80A7
+#define GL_SAMPLE_BUFFERS_SGIS            0x80A8
+#define GL_SAMPLES_SGIS                   0x80A9
+#define GL_SAMPLE_MASK_VALUE_SGIS         0x80AA
+#define GL_SAMPLE_MASK_INVERT_SGIS        0x80AB
+#define GL_SAMPLE_PATTERN_SGIS            0x80AC
+#endif
+
+#if GL_SGIS_generate_mipmap
+#define GL_GENERATE_MIPMAP_SGIS           0x8191
+#define GL_GENERATE_MIPMAP_HINT_SGIS      0x8192
+#endif
+
+#if GL_SGIS_texture_edge_clamp
+#define GL_CLAMP_TO_EDGE_SGIS             0x812F
+#endif
+
+#if GL_SGIS_texture_border_clamp
+#define GL_CLAMP_TO_BORDER_SGIS           0x812D
+#endif
+
+#if GL_SGIS_texture_select
+#define GL_DUAL_ALPHA4_SGIS               0x8110
+#define GL_DUAL_ALPHA8_SGIS               0x8111
+#define GL_DUAL_ALPHA12_SGIS              0x8112
+#define GL_DUAL_ALPHA16_SGIS              0x8113
+#define GL_DUAL_LUMINANCE4_SGIS           0x8114
+#define GL_DUAL_LUMINANCE8_SGIS           0x8115
+#define GL_DUAL_LUMINANCE12_SGIS          0x8116
+#define GL_DUAL_LUMINANCE16_SGIS          0x8117
+#define GL_DUAL_INTENSITY4_SGIS           0x8118
+#define GL_DUAL_INTENSITY8_SGIS           0x8119
+#define GL_DUAL_INTENSITY12_SGIS          0x811A
+#define GL_DUAL_INTENSITY16_SGIS          0x811B
+#define GL_DUAL_LUMINANCE_ALPHA4_SGIS     0x811C
+#define GL_DUAL_LUMINANCE_ALPHA8_SGIS     0x811D
+#define GL_QUAD_ALPHA4_SGIS               0x811E
+#define GL_QUAD_ALPHA8_SGIS               0x811F
+#define GL_QUAD_LUMINANCE4_SGIS           0x8120
+#define GL_QUAD_LUMINANCE8_SGIS           0x8121
+#define GL_QUAD_INTENSITY4_SGIS           0x8122
+#define GL_QUAD_INTENSITY8_SGIS           0x8123
+#define GL_DUAL_TEXTURE_SELECT_SGIS       0x8124
+#define GL_QUAD_TEXTURE_SELECT_SGIS       0x8125
+#endif
+
+#if GL_SGIS_point_parameters
+#define GL_POINT_SIZE_MIN_EXT             0x8126
+#define GL_POINT_SIZE_MIN_SGIS            0x8126
+#define GL_POINT_SIZE_MAX_EXT             0x8127
+#define GL_POINT_SIZE_MAX_SGIS            0x8127
+#define GL_POINT_FADE_THRESHOLD_SIZE_EXT  0x8128
+#define GL_POINT_FADE_THRESHOLD_SIZE_SGIS 0x8128
+#define GL_DISTANCE_ATTENUATION_EXT       0x8129
+#define GL_DISTANCE_ATTENUATION_SGIS      0x8129
+#endif
+
+#if GL_SGIS_fog_function
+#define GL_FOG_FUNC_SGIS                  0x812A
+#define GL_FOG_FUNC_POINTS_SGIS           0x812B
+#define GL_MAX_FOG_FUNC_POINTS_SGIS       0x812C
+#endif
+
+#if GL_SGIS_point_line_texgen
+#define GL_EYE_DISTANCE_TO_POINT_SGIS     0x81F0
+#define GL_OBJECT_DISTANCE_TO_POINT_SGIS  0x81F1
+#define GL_EYE_DISTANCE_TO_LINE_SGIS      0x81F2
+#define GL_OBJECT_DISTANCE_TO_LINE_SGIS   0x81F3
+#define GL_EYE_POINT_SGIS                 0x81F4
+#define GL_OBJECT_POINT_SGIS              0x81F5
+#define GL_EYE_LINE_SGIS                  0x81F6
+#define GL_OBJECT_LINE_SGIS               0x81F7
+#endif
+
+#if GL_SGIS_texture_color_mask
+#define GL_TEXTURE_COLOR_WRITEMASK_SGIS   0x81EF
+#endif
+
+#if GL_SGIX_pixel_texture
+#define GL_PIXEL_TEX_GEN_SGIX             0x8139
+#define GL_PIXEL_TEX_GEN_MODE_SGIX        0x832B
+#endif
+
+#if GL_SGIX_clipmap
+#define GL_LINEAR_CLIPMAP_LINEAR_SGIX     0x8170
+#define GL_TEXTURE_CLIPMAP_CENTER_SGIX    0x8171
+#define GL_TEXTURE_CLIPMAP_FRAME_SGIX     0x8172
+#define GL_TEXTURE_CLIPMAP_OFFSET_SGIX    0x8173
+#define GL_TEXTURE_CLIPMAP_VIRTUAL_DEPTH_SGIX 0x8174
+#define GL_TEXTURE_CLIPMAP_LOD_OFFSET_SGIX 0x8175
+#define GL_TEXTURE_CLIPMAP_DEPTH_SGIX     0x8176
+#define GL_MAX_CLIPMAP_DEPTH_SGIX         0x8177
+#define GL_MAX_CLIPMAP_VIRTUAL_DEPTH_SGIX 0x8178
+#define GL_NEAREST_CLIPMAP_NEAREST_SGIX   0x844D
+#define GL_NEAREST_CLIPMAP_LINEAR_SGIX    0x844E
+#define GL_LINEAR_CLIPMAP_NEAREST_SGIX    0x844F
+#endif
+
+#if GL_SGIX_shadow
+#define GL_TEXTURE_COMPARE_SGIX           0x819A
+#define GL_TEXTURE_COMPARE_OPERATOR_SGIX  0x819B
+#define GL_TEXTURE_LEQUAL_R_SGIX          0x819C
+#define GL_TEXTURE_GEQUAL_R_SGIX          0x819D
+#endif
+
+#if GL_SGIX_interlace
+#define GL_INTERLACE_SGIX                 0x8094
+#endif
+
+#if GL_SGIX_pixel_tiles
+#define GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX 0x813E
+#define GL_PIXEL_TILE_CACHE_INCREMENT_SGIX 0x813F
+#define GL_PIXEL_TILE_WIDTH_SGIX          0x8140
+#define GL_PIXEL_TILE_HEIGHT_SGIX         0x8141
+#define GL_PIXEL_TILE_GRID_WIDTH_SGIX     0x8142
+#define GL_PIXEL_TILE_GRID_HEIGHT_SGIX    0x8143
+#define GL_PIXEL_TILE_GRID_DEPTH_SGIX     0x8144
+#define GL_PIXEL_TILE_CACHE_SIZE_SGIX     0x8145
+#endif
+
+#if GL_SGIX_sprite
+#define GL_SPRITE_SGIX                    0x8148
+#define GL_SPRITE_MODE_SGIX               0x8149
+#define GL_SPRITE_AXIS_SGIX               0x814A
+#define GL_SPRITE_TRANSLATION_SGIX        0x814B
+#define GL_SPRITE_AXIAL_SGIX              0x814C
+#define GL_SPRITE_OBJECT_ALIGNED_SGIX     0x814D
+#define GL_SPRITE_EYE_ALIGNED_SGIX        0x814E
+#endif
+
+#if GL_SGIX_texture_multi_buffer
+#define GL_TEXTURE_MULTI_BUFFER_HINT_SGIX 0x812E
+#endif
+
+#if GL_SGIX_instruments
+#define GL_INSTRUMENT_BUFFER_POINTER_SGIX 0x8180
+#define GL_INSTRUMENT_MEASUREMENTS_SGIX   0x8181
+#endif
+
+#if GL_SGIX_texture_scale_bias
+#define GL_POST_TEXTURE_FILTER_BIAS_SGIX  0x8179
+#define GL_POST_TEXTURE_FILTER_SCALE_SGIX 0x817A
+#define GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX 0x817B
+#define GL_POST_TEXTURE_FILTER_SCALE_RANGE_SGIX 0x817C
+#endif
+
+#if GL_SGIX_framezoom
+#define GL_FRAMEZOOM_SGIX                 0x818B
+#define GL_FRAMEZOOM_FACTOR_SGIX          0x818C
+#define GL_MAX_FRAMEZOOM_FACTOR_SGIX      0x818D
+#endif
+
+#if GL_SGIX_polynomial_ffd
+#define GL_GEOMETRY_DEFORMATION_SGIX      0x8194
+#define GL_TEXTURE_DEFORMATION_SGIX       0x8195
+#define GL_DEFORMATIONS_MASK_SGIX         0x8196
+#define GL_MAX_DEFORMATION_ORDER_SGIX     0x8197
+#endif
+
+#if GL_SGIX_reference_plane
+#define GL_REFERENCE_PLANE_SGIX           0x817D
+#define GL_REFERENCE_PLANE_EQUATION_SGIX  0x817E
+#endif
+
+#if GL_SGIX_depth_texture
+#define GL_DEPTH_COMPONENT16_SGIX         0x81A5
+#define GL_DEPTH_COMPONENT24_SGIX         0x81A6
+#define GL_DEPTH_COMPONENT32_SGIX         0x81A7
+#endif
+
+#if GL_SGIX_fog_offset
+#define GL_FOG_OFFSET_SGIX                0x8198
+#define GL_FOG_OFFSET_VALUE_SGIX          0x8199
+#endif
+
+#if GL_SGIX_texture_add_env
+#define GL_TEXTURE_ENV_BIAS_SGIX          0x80BE
+#endif
+
+#if GL_SGIX_list_priority
+#define GL_LIST_PRIORITY_SGIX             0x8182
+#endif
+
+#if GL_SGIX_ir_instrument1
+#define GL_IR_INSTRUMENT1_SGIX            0x817F
+#endif
+
+#if GL_SGIX_calligraphic_fragment
+#define GL_CALLIGRAPHIC_FRAGMENT_SGIX     0x8183
+#endif
+
+#if GL_SGIX_texture_lod_bias
+#define GL_TEXTURE_LOD_BIAS_S_SGIX        0x818E
+#define GL_TEXTURE_LOD_BIAS_T_SGIX        0x818F
+#define GL_TEXTURE_LOD_BIAS_R_SGIX        0x8190
+#endif
+
+#if GL_SGIX_ycrcb
+#define GL_YCRCB_422_SGIX                 0x81BB
+#define GL_YCRCB_444_SGIX                 0x81BC
+#endif
+
+#if GL_SGIX_fragment_lighting
+#define GL_FRAGMENT_LIGHTING_SGIX         0x8400
+#define GL_FRAGMENT_COLOR_MATERIAL_SGIX   0x8401
+#define GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX 0x8402
+#define GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX 0x8403
+#define GL_MAX_FRAGMENT_LIGHTS_SGIX       0x8404
+#define GL_MAX_ACTIVE_LIGHTS_SGIX         0x8405
+#define GL_CURRENT_RASTER_NORMAL_SGIX     0x8406
+#define GL_LIGHT_ENV_MODE_SGIX            0x8407
+#define GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX 0x8408
+#define GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX 0x8409
+#define GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX 0x840A
+#define GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX 0x840B
+#define GL_FRAGMENT_LIGHT0_SGIX           0x840C
+#define GL_FRAGMENT_LIGHT1_SGIX           0x840D
+#define GL_FRAGMENT_LIGHT2_SGIX           0x840E
+#define GL_FRAGMENT_LIGHT3_SGIX           0x840F
+#define GL_FRAGMENT_LIGHT4_SGIX           0x8410
+#define GL_FRAGMENT_LIGHT5_SGIX           0x8411
+#define GL_FRAGMENT_LIGHT6_SGIX           0x8412
+#define GL_FRAGMENT_LIGHT7_SGIX           0x8413
+#endif
+
+#if GL_SGIX_blend_alpha_minmax
+#define GL_ALPHA_MIN_SGIX                 0x8320
+#define GL_ALPHA_MAX_SGIX                 0x8321
+#endif
+
+#if GL_SGIX_async
+#define GL_ASYNC_MARKER_SGIX              0x8329
+#endif
+
+#if GL_SGIX_async_pixel
+#define GL_ASYNC_TEX_IMAGE_SGIX           0x835C
+#define GL_ASYNC_DRAW_PIXELS_SGIX         0x835D
+#define GL_ASYNC_READ_PIXELS_SGIX         0x835E
+#define GL_MAX_ASYNC_TEX_IMAGE_SGIX       0x835F
+#define GL_MAX_ASYNC_DRAW_PIXELS_SGIX     0x8360
+#define GL_MAX_ASYNC_READ_PIXELS_SGIX     0x8361
+#endif
+
+#if GL_SGIX_async_histogram
+#define GL_ASYNC_HISTOGRAM_SGIX           0x832C
+#define GL_MAX_ASYNC_HISTOGRAM_SGIX       0x832D
+#endif
+
+#if GL_SGIX_fog_scale
+#define GL_FOG_SCALE_SGIX                 0x81FC
+#define GL_FOG_SCALE_VALUE_SGIX           0x81FD
+#endif
+
+#if GL_SGIX_subsample
+#define GL_PACK_SUBSAMPLE_RATE_SGIX       0x85A0
+#define GL_UNPACK_SUBSAMPLE_RATE_SGIX     0x85A1
+#define GL_PIXEL_SUBSAMPLE_4444_SGIX      0x85A2
+#define GL_PIXEL_SUBSAMPLE_2424_SGIX      0x85A3
+#define GL_PIXEL_SUBSAMPLE_4242_SGIX      0x85A4
+#endif
+
+#if GL_SGIX_ycrcba
+#define GL_YCRCB_SGIX                     0x8318
+#define GL_YCRCBA_SGIX                    0x8319
+#endif
+
+#if GL_SGIX_vertex_preclip
+#define GL_VERTEX_PRECLIP_SGIX            0x83EE
+#define GL_VERTEX_PRECLIP_HINT_SGIX       0x83EF
+#endif
+
+#if GL_SGIX_convolution_accuracy
+#define GL_CONVOLUTION_HINT_SGIX          0x8316
+#endif
+
+#if GL_SGIX_resample
+#define GL_PACK_RESAMPLE_SGIX             0x842C
+#define GL_UNPACK_RESAMPLE_SGIX           0x842D
+#define GL_RESAMPLE_REPLICATE_SGIX        0x842E
+#define GL_RESAMPLE_ZERO_FILL_SGIX        0x842F
+#define GL_RESAMPLE_DECIMATE_SGIX         0x8430
+#endif
+
+
+#if GL_SUN_global_alpha
+#define GL_GLOBAL_ALPHA_SUN               0x81D9
+#define GL_GLOBAL_ALPHA_FACTOR_SUN        0x81DA
+#endif
+
+#if GL_SUN_triangle_list
+#define GL_RESTART_SUN                    0x01
+#define GL_REPLACE_MIDDLE_SUN             0x02
+#define GL_REPLACE_OLDEST_SUN             0x03
+#define GL_TRIANGLE_LIST_SUN              0x81D7
+#define GL_REPLACEMENT_CODE_SUN           0x81D8
+#define GL_REPLACEMENT_CODE_ARRAY_SUN     0x85C0
+#define GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN 0x85C1
+#define GL_REPLACEMENT_CODE_ARRAY_STRIDE_SUN 0x85C2
+#define GL_REPLACEMENT_CODE_ARRAY_POINTER_SUN 0x85C3
+#define GL_R1UI_V3F_SUN                   0x85C4
+#define GL_R1UI_C4UB_V3F_SUN              0x85C5
+#define GL_R1UI_C3F_V3F_SUN               0x85C6
+#define GL_R1UI_N3F_V3F_SUN               0x85C7
+#define GL_R1UI_C4F_N3F_V3F_SUN           0x85C8
+#define GL_R1UI_T2F_V3F_SUN               0x85C9
+#define GL_R1UI_T2F_N3F_V3F_SUN           0x85CA
+#define GL_R1UI_T2F_C4F_N3F_V3F_SUN       0x85CB
+#endif
+
+#if GL_SUN_convolution_border_modes
+#define GL_WRAP_BORDER_SUN                0x81D4
+#endif
+
+#if GL_SUNX_constant_data
+#define GL_UNPACK_CONSTANT_DATA_SUNX      0x81D5
+#define GL_TEXTURE_CONSTANT_DATA_SUNX     0x81D6
+#endif
+
+
+#if GL_WIN_phong_shading
+#define GL_PHONG_WIN                      0x80EA
+#define GL_PHONG_HINT_WIN                 0x80EB
+#endif
+
+#if GL_WIN_specular_fog
+#define GL_FOG_SPECULAR_TEXTURE_WIN       0x80EC
+#endif
+
+
+#if GL_3DFX_texture_compression_FXT1
+#define GL_COMPRESSED_RGB_FXT1_3DFX       0x86B0
+#define GL_COMPRESSED_RGBA_FXT1_3DFX      0x86B1
+#endif
+
+#if GL_3DFX_multisample
+#define GL_MULTISAMPLE_3DFX               0x86B2
+#define GL_SAMPLE_BUFFERS_3DFX            0x86B3
+#define GL_SAMPLES_3DFX                   0x86B4
+#define GL_MULTISAMPLE_BIT_3DFX           0x20000000
+#endif
+
 
 /*************************************************************/
-
-#if GL_VERSION_1_2
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glBlendColorProcPtr) (GLclampf, GLclampf, GLclampf, GLclampf);
-typedef void (* glBlendEquationProcPtr) (GLenum);
-typedef void (* glDrawRangeElementsProcPtr) (GLenum, GLuint, GLuint, GLsizei, GLenum, const GLvoid *);
-typedef void (* glColorTableProcPtr) (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glColorTableParameterfvProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glColorTableParameterivProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glCopyColorTableProcPtr) (GLenum, GLenum, GLint, GLint, GLsizei);
-typedef void (* glGetColorTableProcPtr) (GLenum, GLenum, GLenum, GLvoid *);
-typedef void (* glGetColorTableParameterfvProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetColorTableParameterivProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glColorSubTableProcPtr) (GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glCopyColorSubTableProcPtr) (GLenum, GLsizei, GLint, GLint, GLsizei);
-typedef void (* glConvolutionFilter1DProcPtr) (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glConvolutionFilter2DProcPtr) (GLenum, GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glConvolutionParameterfProcPtr) (GLenum, GLenum, GLfloat);
-typedef void (* glConvolutionParameterfvProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glConvolutionParameteriProcPtr) (GLenum, GLenum, GLint);
-typedef void (* glConvolutionParameterivProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glCopyConvolutionFilter1DProcPtr) (GLenum, GLenum, GLint, GLint, GLsizei);
-typedef void (* glCopyConvolutionFilter2DProcPtr) (GLenum, GLenum, GLint, GLint, GLsizei, GLsizei);
-typedef void (* glGetConvolutionFilterProcPtr) (GLenum, GLenum, GLenum, GLvoid *);
-typedef void (* glGetConvolutionParameterfvProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetConvolutionParameterivProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glGetSeparableFilterProcPtr) (GLenum, GLenum, GLenum, GLvoid *, GLvoid *, GLvoid *);
-typedef void (* glSeparableFilter2DProcPtr) (GLenum, GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *, const GLvoid *);
-typedef void (* glGetHistogramProcPtr) (GLenum, GLboolean, GLenum, GLenum, GLvoid *);
-typedef void (* glGetHistogramParameterfvProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetHistogramParameterivProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glGetMinmaxProcPtr) (GLenum, GLboolean, GLenum, GLenum, GLvoid *);
-typedef void (* glGetMinmaxParameterfvProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetMinmaxParameterivProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glHistogramProcPtr) (GLenum, GLsizei, GLenum, GLboolean);
-typedef void (* glMinmaxProcPtr) (GLenum, GLenum, GLboolean);
-typedef void (* glResetHistogramProcPtr) (GLenum);
-typedef void (* glResetMinmaxProcPtr) (GLenum);
-typedef void (* glTexImage3DProcPtr) (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
-typedef void (* glTexSubImage3DProcPtr) (GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glCopyTexSubImage3DProcPtr) (GLenum, GLint, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei);
-#else
-extern void glBlendColor (GLclampf, GLclampf, GLclampf, GLclampf);
-extern void glBlendEquation (GLenum);
-extern void glDrawRangeElements (GLenum, GLuint, GLuint, GLsizei, GLenum, const GLvoid *);
-extern void glColorTable (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glColorTableParameterfv (GLenum, GLenum, const GLfloat *);
-extern void glColorTableParameteriv (GLenum, GLenum, const GLint *);
-extern void glCopyColorTable (GLenum, GLenum, GLint, GLint, GLsizei);
-extern void glGetColorTable (GLenum, GLenum, GLenum, GLvoid *);
-extern void glGetColorTableParameterfv (GLenum, GLenum, GLfloat *);
-extern void glGetColorTableParameteriv (GLenum, GLenum, GLint *);
-extern void glColorSubTable (GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glCopyColorSubTable (GLenum, GLsizei, GLint, GLint, GLsizei);
-extern void glConvolutionFilter1D (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glConvolutionFilter2D (GLenum, GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glConvolutionParameterf (GLenum, GLenum, GLfloat);
-extern void glConvolutionParameterfv (GLenum, GLenum, const GLfloat *);
-extern void glConvolutionParameteri (GLenum, GLenum, GLint);
-extern void glConvolutionParameteriv (GLenum, GLenum, const GLint *);
-extern void glCopyConvolutionFilter1D (GLenum, GLenum, GLint, GLint, GLsizei);
-extern void glCopyConvolutionFilter2D (GLenum, GLenum, GLint, GLint, GLsizei, GLsizei);
-extern void glGetConvolutionFilter (GLenum, GLenum, GLenum, GLvoid *);
-extern void glGetConvolutionParameterfv (GLenum, GLenum, GLfloat *);
-extern void glGetConvolutionParameteriv (GLenum, GLenum, GLint *);
-extern void glGetSeparableFilter (GLenum, GLenum, GLenum, GLvoid *, GLvoid *, GLvoid *);
-extern void glSeparableFilter2D (GLenum, GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *, const GLvoid *);
-extern void glGetHistogram (GLenum, GLboolean, GLenum, GLenum, GLvoid *);
-extern void glGetHistogramParameterfv (GLenum, GLenum, GLfloat *);
-extern void glGetHistogramParameteriv (GLenum, GLenum, GLint *);
-extern void glGetMinmax (GLenum, GLboolean, GLenum, GLenum, GLvoid *);
-extern void glGetMinmaxParameterfv (GLenum, GLenum, GLfloat *);
-extern void glGetMinmaxParameteriv (GLenum, GLenum, GLint *);
-extern void glHistogram (GLenum, GLsizei, GLenum, GLboolean);
-extern void glMinmax (GLenum, GLenum, GLboolean);
-extern void glResetHistogram (GLenum);
-extern void glResetMinmax (GLenum);
-extern void glTexImage3D (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
-extern void glTexSubImage3D (GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glCopyTexSubImage3D (GLenum, GLint, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_APPLE_texture_range
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glTextureRangeAPPLEProcPtr) (GLenum target, GLsizei length, const GLvoid *pointer);
-typedef void (* glGetTexParameterPointervAPPLEProcPtr) (GLenum target, GLenum pname, GLvoid **params);
-#else
-extern void glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer);
-extern void glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
 
 #if GL_ARB_multitexture
 #ifdef GL_GLEXT_FUNCTION_POINTERS
@@ -2420,6 +2495,433 @@ extern void glVertexBlendARB(GLint);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
+#if GL_ARB_window_pos
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glWindowPos2dARBProcPtr) (GLdouble, GLdouble);
+typedef void (* glWindowPos2dvARBProcPtr) (const GLdouble *);
+typedef void (* glWindowPos2fARBProcPtr) (GLfloat, GLfloat);
+typedef void (* glWindowPos2fvARBProcPtr) (const GLfloat *);
+typedef void (* glWindowPos2iARBProcPtr) (GLint, GLint);
+typedef void (* glWindowPos2ivARBProcPtr) (const GLint *);
+typedef void (* glWindowPos2sARBProcPtr) (GLshort, GLshort);
+typedef void (* glWindowPos2svARBProcPtr) (const GLshort *);
+typedef void (* glWindowPos3dARBProcPtr) (GLdouble, GLdouble, GLdouble);
+typedef void (* glWindowPos3dvARBProcPtr) (const GLdouble *);
+typedef void (* glWindowPos3fARBProcPtr) (GLfloat, GLfloat, GLfloat);
+typedef void (* glWindowPos3fvARBProcPtr) (const GLfloat *);
+typedef void (* glWindowPos3iARBProcPtr) (GLint, GLint, GLint);
+typedef void (* glWindowPos3ivARBProcPtr) (const GLint *);
+typedef void (* glWindowPos3sARBProcPtr) (GLshort, GLshort, GLshort);
+typedef void (* glWindowPos3svARBProcPtr) (const GLshort *);
+#else
+extern void glWindowPos2dARB (GLdouble, GLdouble);
+extern void glWindowPos2dvARB (const GLdouble *);
+extern void glWindowPos2fARB (GLfloat, GLfloat);
+extern void glWindowPos2fvARB (const GLfloat *);
+extern void glWindowPos2iARB (GLint, GLint);
+extern void glWindowPos2ivARB (const GLint *);
+extern void glWindowPos2sARB (GLshort, GLshort);
+extern void glWindowPos2svARB (const GLshort *);
+extern void glWindowPos3dARB (GLdouble, GLdouble, GLdouble);
+extern void glWindowPos3dvARB (const GLdouble *);
+extern void glWindowPos3fARB (GLfloat, GLfloat, GLfloat);
+extern void glWindowPos3fvARB (const GLfloat *);
+extern void glWindowPos3iARB (GLint, GLint, GLint);
+extern void glWindowPos3ivARB (const GLint *);
+extern void glWindowPos3sARB (GLshort, GLshort, GLshort);
+extern void glWindowPos3svARB (const GLshort *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_occlusion_query
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glGenQueriesARBProcPtr) (GLsizei n, GLuint *ids);
+typedef void (* glDeleteQueriesARBProcPtr) (GLsizei n, const GLuint *ids);
+typedef GLboolean (* glIsQueryARBProcPtr) (GLuint id);
+typedef void (* glBeginQueryARBProcPtr) (GLenum target, GLuint id);
+typedef void (* glEndQueryARBProcPtr) (GLenum target);
+typedef void (* glGetQueryivARBProcPtr) (GLenum target, GLenum pname, GLint *params);
+typedef void (* glGetQueryObjectivARBProcPtr) (GLuint id, GLenum pname, GLint *params);
+typedef void (* glGetQueryObjectuivARBProcPtr) (GLuint id, GLenum pname, GLuint *params);
+#else
+extern void glGenQueriesARB(GLsizei n, GLuint *ids);
+extern void glDeleteQueriesARB(GLsizei n, const GLuint *ids);
+extern GLboolean glIsQueryARB(GLuint id);
+extern void glBeginQueryARB(GLenum target, GLuint id);
+extern void glEndQueryARB(GLenum target);
+extern void glGetQueryivARB(GLenum target, GLenum pname, GLint *params);
+extern void glGetQueryObjectivARB(GLuint id, GLenum pname, GLint *params);
+extern void glGetQueryObjectuivARB(GLuint id, GLenum pname, GLuint *params);
+#endif
+#endif
+
+#if GL_ARB_point_parameters
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glPointParameterfARBProcPtr) (GLenum pname, GLfloat param);
+typedef void (* glPointParameterfvARBProcPtr) (GLenum pname, const GLfloat *params);
+#else
+extern void glPointParameterfARB(GLenum pname, GLfloat param);
+extern void glPointParameterfvARB(GLenum pname, const GLfloat *params);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_vertex_program
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBindProgramARBProcPtr) (GLenum target, GLuint program);
+typedef void (* glDeleteProgramsARBProcPtr) (GLsizei n, const GLuint *programs);
+typedef void (* glGenProgramsARBProcPtr) (GLsizei n, GLuint *programs);
+typedef GLboolean (* glIsProgramARBProcPtr) (GLuint program);
+
+typedef void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort x);
+typedef void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat x);
+typedef void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble x);
+typedef void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort x, GLshort y);
+typedef void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat x, GLfloat y);
+typedef void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble x, GLdouble y);
+typedef void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z);
+typedef void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
+typedef void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
+typedef void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+typedef void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+typedef void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+typedef void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+typedef void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
+typedef void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
+typedef void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
+typedef void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
+typedef void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
+typedef void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
+typedef void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
+typedef void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
+typedef void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
+typedef void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
+
+typedef void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+
+typedef void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
+typedef void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
+
+typedef void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
+typedef void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
+typedef void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
+typedef void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
+
+typedef void (* glProgramEnvParameter4dARBProcPtr) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+typedef void (* glProgramEnvParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
+typedef void (* glProgramEnvParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+typedef void (* glProgramEnvParameter4fvARBProcPtr) (GLenum target, GLuint index, const GLfloat *params);
+typedef void (* glProgramLocalParameter4dARBProcPtr) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+typedef void (* glProgramLocalParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
+typedef void (* glProgramLocalParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+typedef void (* glProgramLocalParameter4fvARBProcPtr) (GLenum target, GLuint index, const GLfloat *params);
+
+typedef void (* glGetProgramEnvParameterdvARBProcPtr) (GLenum target, GLuint index, GLdouble *params);
+typedef void (* glGetProgramEnvParameterfvARBProcPtr) (GLenum target, GLuint index, GLfloat *params);
+typedef void (* glGetProgramLocalParameterdvARBProcPtr) (GLenum target, GLuint index, GLdouble *params);
+typedef void (* glGetProgramLocalParameterfvARBProcPtr) (GLenum target, GLuint index, GLfloat *params);
+
+typedef void (* glProgramStringARBProcPtr) (GLenum target, GLenum format, GLsizei len, const GLvoid *string);
+typedef void (* glGetProgramStringARBProcPtr) (GLenum target, GLenum pname, GLvoid *string);
+
+typedef void (* glGetProgramivARBProcPtr) (GLenum target, GLenum pname, GLint *params);
+#else
+extern void glBindProgramARB(GLenum target, GLuint program);
+extern void glDeleteProgramsARB(GLsizei n, const GLuint *programs);
+extern void glGenProgramsARB(GLsizei n, GLuint *programs);
+extern GLboolean glIsProgramARB(GLuint program);
+
+extern void glVertexAttrib1sARB(GLuint index, GLshort x);
+extern void glVertexAttrib1fARB(GLuint index, GLfloat x);
+extern void glVertexAttrib1dARB(GLuint index, GLdouble x);
+extern void glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y);
+extern void glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y);
+extern void glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y);
+extern void glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z);
+extern void glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z);
+extern void glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+extern void glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+extern void glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+extern void glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
+extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
+extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
+extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
+
+extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+
+extern void glEnableVertexAttribArrayARB(GLuint index);
+extern void glDisableVertexAttribArrayARB(GLuint index);
+
+extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
+extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
+extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
+extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
+
+extern void glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+extern void glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble *params);
+extern void glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+extern void glProgramEnvParameter4fvARB(GLenum target, GLuint index, const GLfloat *params);
+extern void glProgramLocalParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+extern void glProgramLocalParameter4dvARB(GLenum target, GLuint index, const GLdouble *params);
+extern void glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+extern void glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLfloat *params);
+
+extern void glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble *params);
+extern void glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat *params);
+extern void glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble *params);
+extern void glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat *params);
+
+extern void glProgramStringARB(GLenum target, GLenum format, GLsizei len, const GLvoid *string);
+extern void glGetProgramStringARB(GLenum target, GLenum pname, GLvoid *string);
+
+extern void glGetProgramivARB(GLenum target, GLenum pname, GLint *params);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_shader_objects
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+extern void (* glDeleteObjectARBProcPtr) (GLhandleARB obj);
+extern GLhandleARB (* glGetHandleARBProcPtr) (GLenum pname);
+extern void (* glDetachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB attachedObj);
+extern GLhandleARB (* glCreateShaderObjectARBProcPtr) (GLenum shaderType);
+extern void (* glShaderSourceARBProcPtr) (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+extern void (* glCompileShaderARBProcPtr) (GLhandleARB shaderObj);
+extern GLhandleARB (* glCreateProgramObjectARBProcPtr) (void);
+extern void (* glAttachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB obj);
+extern void (* glLinkProgramARBProcPtr) (GLhandleARB programObj);
+extern void (* glUseProgramObjectARBProcPtr) (GLhandleARB programObj);
+extern void (* glValidateProgramARBProcPtr) (GLhandleARB programObj);
+extern void (* glUniform1fARBProcPtr) (GLint location, GLfloat v0);
+extern void (* glUniform2fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1);
+extern void (* glUniform3fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+extern void (* glUniform4fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+extern void (* glUniform1iARBProcPtr) (GLint location, GLint v0);
+extern void (* glUniform2iARBProcPtr) (GLint location, GLint v0, GLint v1);
+extern void (* glUniform3iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2);
+extern void (* glUniform4iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+extern void (* glUniform1fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+extern void (* glUniform2fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+extern void (* glUniform3fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+extern void (* glUniform4fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+extern void (* glUniform1ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+extern void (* glUniform2ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+extern void (* glUniform3ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+extern void (* glUniform4ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+extern void (* glUniformMatrix2fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void (* glUniformMatrix3fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void (* glUniformMatrix4fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void (* glGetObjectParameterfvARBProcPtr) (GLhandleARB obj, GLenum pname, GLfloat *params);
+extern void (* glGetObjectParameterivARBProcPtr) (GLhandleARB obj, GLenum pname, GLint *params);
+extern void (* glGetInfoLogARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog);
+extern void (* glGetAttachedObjectsARBProcPtr) (GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj);
+extern GLint (* glGetUniformLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
+extern void (* glGetActiveUniformARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+extern void (* glGetUniformfvARBProcPtr) (GLhandleARB programObj, GLint location, GLfloat *params);
+extern void (* glGetUniformivARBProcPtr) (GLhandleARB programObj, GLint location, GLint *params);
+extern void (* glGetShaderSourceARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source);
+#else
+extern void glDeleteObjectARB(GLhandleARB obj);
+extern GLhandleARB glGetHandleARB(GLenum pname);
+extern void glDetachObjectARB(GLhandleARB containerObj, GLhandleARB attachedObj);
+extern GLhandleARB glCreateShaderObjectARB(GLenum shaderType);
+extern void glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+extern void glCompileShaderARB(GLhandleARB shaderObj);
+extern GLhandleARB glCreateProgramObjectARB(void);
+extern void glAttachObjectARB(GLhandleARB containerObj, GLhandleARB obj);
+extern void glLinkProgramARB(GLhandleARB programObj);
+extern void glUseProgramObjectARB(GLhandleARB programObj);
+extern void glValidateProgramARB(GLhandleARB programObj);
+extern void glUniform1fARB(GLint location, GLfloat v0);
+extern void glUniform2fARB(GLint location, GLfloat v0, GLfloat v1);
+extern void glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+extern void glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+extern void glUniform1iARB(GLint location, GLint v0);
+extern void glUniform2iARB(GLint location, GLint v0, GLint v1);
+extern void glUniform3iARB(GLint location, GLint v0, GLint v1, GLint v2);
+extern void glUniform4iARB(GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+extern void glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value);
+extern void glUniform2fvARB(GLint location, GLsizei count, const GLfloat *value);
+extern void glUniform3fvARB(GLint location, GLsizei count, const GLfloat *value);
+extern void glUniform4fvARB(GLint location, GLsizei count, const GLfloat *value);
+extern void glUniform1ivARB(GLint location, GLsizei count, const GLint *value);
+extern void glUniform2ivARB(GLint location, GLsizei count, const GLint *value);
+extern void glUniform3ivARB(GLint location, GLsizei count, const GLint *value);
+extern void glUniform4ivARB(GLint location, GLsizei count, const GLint *value);
+extern void glUniformMatrix2fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix3fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix4fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glGetObjectParameterfvARB(GLhandleARB obj, GLenum pname, GLfloat *params);
+extern void glGetObjectParameterivARB(GLhandleARB obj, GLenum pname, GLint *params);
+extern void glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog);
+extern void glGetAttachedObjectsARB(GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj);
+extern GLint glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB *name);
+extern void glGetActiveUniformARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+extern void glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params);
+extern void glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params);
+extern void glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_vertex_shader
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+extern void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat v0);
+extern void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort v0);
+extern void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble v0);
+extern void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1);
+extern void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort v0, GLshort v1);
+extern void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1);
+extern void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1, GLfloat v2);
+extern void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort v0, GLshort v1, GLshort v2);
+extern void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1, GLdouble v2);
+extern void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+extern void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort v0, GLshort v1, GLshort v2, GLshort v3);
+extern void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3);
+extern void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+extern void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
+extern void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
+extern void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
+extern void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
+extern void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
+extern void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
+extern void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
+extern void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
+extern void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
+extern void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
+extern void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
+extern void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
+extern void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
+extern void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
+extern void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
+extern void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
+extern void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
+extern void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
+extern void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
+extern void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
+extern void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
+extern void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
+extern void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
+extern void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+extern void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
+extern void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
+extern void (* glBindAttribLocationARBProcPtr) (GLhandleARB programObj, GLuint index, const GLcharARB *name);
+extern void (* glGetActiveAttribARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+extern GLint (* glGetAttribLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
+extern void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
+extern void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
+extern void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
+extern void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
+#else
+extern void glVertexAttrib1fARB(GLuint index, GLfloat v0);
+extern void glVertexAttrib1sARB(GLuint index, GLshort v0);
+extern void glVertexAttrib1dARB(GLuint index, GLdouble v0);
+extern void glVertexAttrib2fARB(GLuint index, GLfloat v0, GLfloat v1);
+extern void glVertexAttrib2sARB(GLuint index, GLshort v0, GLshort v1);
+extern void glVertexAttrib2dARB(GLuint index, GLdouble v0, GLdouble v1);
+extern void glVertexAttrib3fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2);
+extern void glVertexAttrib3sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2);
+extern void glVertexAttrib3dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2);
+extern void glVertexAttrib4fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+extern void glVertexAttrib4sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2, GLshort v3);
+extern void glVertexAttrib4dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3);
+extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
+extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
+extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
+extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
+extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+extern void glEnableVertexAttribArrayARB(GLuint index);
+extern void glDisableVertexAttribArrayARB(GLuint index);
+extern void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, const GLcharARB *name);
+extern void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+extern GLint glGetAttribLocationARB(GLhandleARB programObj, const GLcharARB *name);
+extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
+extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
+extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
+extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_vertex_buffer_object
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBindBufferARBProcPtr) (GLenum target, GLuint buffer);
+typedef void (* glDeleteBuffersARBProcPtr) (GLsizei n, const GLuint *buffers);
+typedef void (* glGenBuffersARBProcPtr) (GLsizei n, GLuint *buffers);
+typedef GLboolean (* glIsBufferARBProcPtr) (GLuint buffer);
+typedef void (* glBufferDataARBProcPtr) (GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage);
+typedef void (* glBufferSubDataARBProcPtr) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid *data);
+typedef void (* glGetBufferSubDataARBProcPtr) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid *data);
+typedef GLvoid *(* glMapBufferARBProcPtr) (GLenum target, GLenum access);
+typedef GLboolean (* glUnmapBufferARBProcPtr) (GLenum target);
+typedef void (* glGetBufferParameterivARBProcPtr) (GLenum target, GLenum pname, GLint *params);
+typedef void (* glGetBufferPointervARBProcPtr) (GLenum target, GLenum pname, GLvoid **params);
+#else
+extern void glBindBufferARB(GLenum target, GLuint buffer);
+extern void glDeleteBuffersARB(GLsizei n, const GLuint *buffers);
+extern void glGenBuffersARB(GLsizei n, GLuint *buffers);
+extern GLboolean glIsBufferARB(GLuint buffer);
+extern void glBufferDataARB(GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage);
+extern void glBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid *data);
+extern void glGetBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid *data);
+extern GLvoid *glMapBufferARB(GLenum target, GLenum access);
+extern GLboolean glUnmapBufferARB(GLenum target);
+extern void glGetBufferParameterivARB(GLenum target, GLenum pname, GLint *params);
+extern void glGetBufferPointervARB(GLenum target, GLenum pname, GLvoid **params);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
 #if GL_EXT_blend_color
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glBlendColorEXTProcPtr) (GLclampf, GLclampf, GLclampf, GLclampf);
@@ -2443,16 +2945,6 @@ typedef void (* glTexSubImage3DEXTProcPtr) (GLenum, GLint, GLint, GLint, GLint, 
 #else
 extern void glTexImage3DEXT (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
 extern void glTexSubImage3DEXT (GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_texture_filter4
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glGetTexFilterFuncSGISProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glTexFilterFuncSGISProcPtr) (GLenum, GLenum, GLsizei, const GLfloat *);
-#else
-extern void glGetTexFilterFuncSGIS (GLenum, GLenum, GLfloat *);
-extern void glTexFilterFuncSGIS (GLenum, GLenum, GLsizei, const GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2540,62 +3032,6 @@ extern void glSeparableFilter2DEXT (GLenum, GLenum, GLsizei, GLsizei, GLenum, GL
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SGI_color_table
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glColorTableSGIProcPtr) (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-typedef void (* glColorTableParameterfvSGIProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glColorTableParameterivSGIProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glCopyColorTableSGIProcPtr) (GLenum, GLenum, GLint, GLint, GLsizei);
-typedef void (* glGetColorTableSGIProcPtr) (GLenum, GLenum, GLenum, GLvoid *);
-typedef void (* glGetColorTableParameterfvSGIProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetColorTableParameterivSGIProcPtr) (GLenum, GLenum, GLint *);
-#else
-extern void glColorTableSGI (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
-extern void glColorTableParameterfvSGI (GLenum, GLenum, const GLfloat *);
-extern void glColorTableParameterivSGI (GLenum, GLenum, const GLint *);
-extern void glCopyColorTableSGI (GLenum, GLenum, GLint, GLint, GLsizei);
-extern void glGetColorTableSGI (GLenum, GLenum, GLenum, GLvoid *);
-extern void glGetColorTableParameterfvSGI (GLenum, GLenum, GLfloat *);
-extern void glGetColorTableParameterivSGI (GLenum, GLenum, GLint *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_pixel_texture
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glPixelTexGenSGIXProcPtr) (GLenum);
-#else
-extern void glPixelTexGenSGIX (GLenum);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_pixel_texture
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glPixelTexGenParameteriSGISProcPtr) (GLenum, GLint);
-typedef void (* glPixelTexGenParameterivSGISProcPtr) (GLenum, const GLint *);
-typedef void (* glPixelTexGenParameterfSGISProcPtr) (GLenum, GLfloat);
-typedef void (* glPixelTexGenParameterfvSGISProcPtr) (GLenum, const GLfloat *);
-typedef void (* glGetPixelTexGenParameterivSGISProcPtr) (GLenum, GLint *);
-typedef void (* glGetPixelTexGenParameterfvSGISProcPtr) (GLenum, GLfloat *);
-#else
-extern void glPixelTexGenParameteriSGIS (GLenum, GLint);
-extern void glPixelTexGenParameterivSGIS (GLenum, const GLint *);
-extern void glPixelTexGenParameterfSGIS (GLenum, GLfloat);
-extern void glPixelTexGenParameterfvSGIS (GLenum, const GLfloat *);
-extern void glGetPixelTexGenParameterivSGIS (GLenum, GLint *);
-extern void glGetPixelTexGenParameterfvSGIS (GLenum, GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_texture4D
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glTexImage4DSGISProcPtr) (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
-typedef void (* glTexSubImage4DSGISProcPtr) (GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-#else
-extern void glTexImage4DSGIS (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
-extern void glTexSubImage4DSGIS (GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
 #if GL_EXT_texture_object
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef GLboolean (* glAreTexturesResidentEXTProcPtr) (GLsizei, const GLuint *, GLboolean *);
@@ -2611,36 +3047,6 @@ extern void glDeleteTexturesEXT (GLsizei, const GLuint *);
 extern void glGenTexturesEXT (GLsizei, GLuint *);
 extern GLboolean glIsTextureEXT (GLuint);
 extern void glPrioritizeTexturesEXT (GLsizei, const GLuint *, const GLclampf *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_detail_texture
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glDetailTexFuncSGISProcPtr) (GLenum, GLsizei, const GLfloat *);
-typedef void (* glGetDetailTexFuncSGISProcPtr) (GLenum, GLfloat *);
-#else
-extern void glDetailTexFuncSGIS (GLenum, GLsizei, const GLfloat *);
-extern void glGetDetailTexFuncSGIS (GLenum, GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_sharpen_texture
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glSharpenTexFuncSGISProcPtr) (GLenum, GLsizei, const GLfloat *);
-typedef void (* glGetSharpenTexFuncSGISProcPtr) (GLenum, GLfloat *);
-#else
-extern void glSharpenTexFuncSGIS (GLenum, GLsizei, const GLfloat *);
-extern void glGetSharpenTexFuncSGIS (GLenum, GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_multisample
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glSampleMaskSGISProcPtr) (GLclampf, GLboolean);
-typedef void (* glSamplePatternSGISProcPtr) (GLenum);
-#else
-extern void glSampleMaskSGIS (GLclampf, GLboolean);
-extern void glSamplePatternSGIS (GLenum);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2676,112 +3082,6 @@ extern void glBlendEquationEXT (GLenum);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SGIX_sprite
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glSpriteParameterfSGIXProcPtr) (GLenum, GLfloat);
-typedef void (* glSpriteParameterfvSGIXProcPtr) (GLenum, const GLfloat *);
-typedef void (* glSpriteParameteriSGIXProcPtr) (GLenum, GLint);
-typedef void (* glSpriteParameterivSGIXProcPtr) (GLenum, const GLint *);
-#else
-extern void glSpriteParameterfSGIX (GLenum, GLfloat);
-extern void glSpriteParameterfvSGIX (GLenum, const GLfloat *);
-extern void glSpriteParameteriSGIX (GLenum, GLint);
-extern void glSpriteParameterivSGIX (GLenum, const GLint *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_instruments
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef GLint (* glGetInstrumentsSGIXProcPtr) (void);
-typedef void (* glInstrumentsBufferSGIXProcPtr) (GLsizei, GLint *);
-typedef GLint (* glPollInstrumentsSGIXProcPtr) (GLint *);
-typedef void (* glReadInstrumentsSGIXProcPtr) (GLint);
-typedef void (* glStartInstrumentsSGIXProcPtr) (void);
-typedef void (* glStopInstrumentsSGIXProcPtr) (GLint);
-#else
-extern GLint glGetInstrumentsSGIX (void);
-extern void glInstrumentsBufferSGIX (GLsizei, GLint *);
-extern GLint glPollInstrumentsSGIX (GLint *);
-extern void glReadInstrumentsSGIX (GLint);
-extern void glStartInstrumentsSGIX (void);
-extern void glStopInstrumentsSGIX (GLint);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_framezoom
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFrameZoomSGIXProcPtr) (GLint);
-#else
-extern void glFrameZoomSGIX (GLint);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_tag_sample_buffer
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glTagSampleBufferSGIXProcPtr) (void);
-#else
-extern void glTagSampleBufferSGIX (void);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_polynomial_ffd
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glDeformationMap3dSGIXProcPtr) (GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *);
-typedef void (* glDeformationMap3fSGIXProcPtr) (GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *);
-typedef void (* glDeformSGIXProcPtr) (GLbitfield);
-typedef void (* glLoadIdentityDeformationMapSGIXProcPtr) (GLbitfield);
-#else
-extern void glDeformationMap3dSGIX (GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *);
-extern void glDeformationMap3fSGIX (GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *);
-extern void glDeformSGIX (GLbitfield);
-extern void glLoadIdentityDeformationMapSGIX (GLbitfield);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_reference_plane
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glReferencePlaneSGIXProcPtr) (const GLdouble *);
-#else
-extern void glReferencePlaneSGIX (const GLdouble *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_flush_raster
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFlushRasterSGIXProcPtr) (void);
-#else
-extern void glFlushRasterSGIX (void);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIS_fog_function
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFogFuncSGISProcPtr) (GLsizei, const GLfloat *);
-typedef void (* glGetFogFuncSGISProcPtr) (const GLfloat *);
-#else
-extern void glFogFuncSGIS (GLsizei, const GLfloat *);
-extern void glGetFogFuncSGIS (const GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_HP_image_transform
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glImageTransformParameteriHPProcPtr) (GLenum, GLenum, GLint);
-typedef void (* glImageTransformParameterfHPProcPtr) (GLenum, GLenum, GLfloat);
-typedef void (* glImageTransformParameterivHPProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glImageTransformParameterfvHPProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glGetImageTransformParameterivHPProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glGetImageTransformParameterfvHPProcPtr) (GLenum, GLenum, GLfloat *);
-#else
-extern void glImageTransformParameteriHP (GLenum, GLenum, GLint);
-extern void glImageTransformParameterfHP (GLenum, GLenum, GLfloat);
-extern void glImageTransformParameterivHP (GLenum, GLenum, const GLint *);
-extern void glImageTransformParameterfvHP (GLenum, GLenum, const GLfloat *);
-extern void glGetImageTransformParameterivHP (GLenum, GLenum, GLint *);
-extern void glGetImageTransformParameterfvHP (GLenum, GLenum, GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
 #if GL_EXT_color_subtable
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glColorSubTableEXTProcPtr) (GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
@@ -2789,14 +3089,6 @@ typedef void (* glCopyColorSubTableEXTProcPtr) (GLenum, GLsizei, GLint, GLint, G
 #else
 extern void glColorSubTableEXT (GLenum, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
 extern void glCopyColorSubTableEXT (GLenum, GLsizei, GLint, GLint, GLsizei);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_PGI_misc_hints
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glHintPGIProcPtr) (GLenum, GLint);
-#else
-extern void glHintPGI (GLenum, GLint);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2813,24 +3105,6 @@ extern void glColorSubTableEXT (GLenum, GLsizei, GLsizei, GLenum, GLenum, const 
 extern void glGetColorTableEXT (GLenum, GLenum, GLenum, GLvoid *);
 extern void glGetColorTableParameterivEXT (GLenum, GLenum, GLint *);
 extern void glGetColorTableParameterfvEXT (GLenum, GLenum, GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_list_priority
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glGetListParameterfvSGIXProcPtr) (GLuint, GLenum, GLfloat *);
-typedef void (* glGetListParameterivSGIXProcPtr) (GLuint, GLenum, GLint *);
-typedef void (* glListParameterfSGIXProcPtr) (GLuint, GLenum, GLfloat);
-typedef void (* glListParameterfvSGIXProcPtr) (GLuint, GLenum, const GLfloat *);
-typedef void (* glListParameteriSGIXProcPtr) (GLuint, GLenum, GLint);
-typedef void (* glListParameterivSGIXProcPtr) (GLuint, GLenum, const GLint *);
-#else
-extern void glGetListParameterfvSGIX (GLuint, GLenum, GLfloat *);
-extern void glGetListParameterivSGIX (GLuint, GLenum, GLint *);
-extern void glListParameterfSGIX (GLuint, GLenum, GLfloat);
-extern void glListParameterfvSGIX (GLuint, GLenum, const GLfloat *);
-extern void glListParameteriSGIX (GLuint, GLenum, GLint);
-extern void glListParameterivSGIX (GLuint, GLenum, const GLint *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2870,48 +3144,6 @@ extern void glCullParameterfvEXT (GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SGIX_fragment_lighting
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFragmentColorMaterialSGIXProcPtr) (GLenum, GLenum);
-typedef void (* glFragmentLightfSGIXProcPtr) (GLenum, GLenum, GLfloat);
-typedef void (* glFragmentLightfvSGIXProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glFragmentLightiSGIXProcPtr) (GLenum, GLenum, GLint);
-typedef void (* glFragmentLightivSGIXProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glFragmentLightModelfSGIXProcPtr) (GLenum, GLfloat);
-typedef void (* glFragmentLightModelfvSGIXProcPtr) (GLenum, const GLfloat *);
-typedef void (* glFragmentLightModeliSGIXProcPtr) (GLenum, GLint);
-typedef void (* glFragmentLightModelivSGIXProcPtr) (GLenum, const GLint *);
-typedef void (* glFragmentMaterialfSGIXProcPtr) (GLenum, GLenum, GLfloat);
-typedef void (* glFragmentMaterialfvSGIXProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glFragmentMaterialiSGIXProcPtr) (GLenum, GLenum, GLint);
-typedef void (* glFragmentMaterialivSGIXProcPtr) (GLenum, GLenum, const GLint *);
-typedef void (* glGetFragmentLightfvSGIXProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetFragmentLightivSGIXProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glGetFragmentMaterialfvSGIXProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetFragmentMaterialivSGIXProcPtr) (GLenum, GLenum, GLint *);
-typedef void (* glLightEnviSGIXProcPtr) (GLenum, GLint);
-#else
-extern void glFragmentColorMaterialSGIX (GLenum, GLenum);
-extern void glFragmentLightfSGIX (GLenum, GLenum, GLfloat);
-extern void glFragmentLightfvSGIX (GLenum, GLenum, const GLfloat *);
-extern void glFragmentLightiSGIX (GLenum, GLenum, GLint);
-extern void glFragmentLightivSGIX (GLenum, GLenum, const GLint *);
-extern void glFragmentLightModelfSGIX (GLenum, GLfloat);
-extern void glFragmentLightModelfvSGIX (GLenum, const GLfloat *);
-extern void glFragmentLightModeliSGIX (GLenum, GLint);
-extern void glFragmentLightModelivSGIX (GLenum, const GLint *);
-extern void glFragmentMaterialfSGIX (GLenum, GLenum, GLfloat);
-extern void glFragmentMaterialfvSGIX (GLenum, GLenum, const GLfloat *);
-extern void glFragmentMaterialiSGIX (GLenum, GLenum, GLint);
-extern void glFragmentMaterialivSGIX (GLenum, GLenum, const GLint *);
-extern void glGetFragmentLightfvSGIX (GLenum, GLenum, GLfloat *);
-extern void glGetFragmentLightivSGIX (GLenum, GLenum, GLint *);
-extern void glGetFragmentMaterialfvSGIX (GLenum, GLenum, GLfloat *);
-extern void glGetFragmentMaterialivSGIX (GLenum, GLenum, GLint *);
-extern void glLightEnviSGIX (GLenum, GLint);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
 #if GL_EXT_draw_range_elements
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glDrawRangeElementsEXTProcPtr) (GLenum, GLuint, GLuint, GLsizei, GLenum, const GLvoid *);
@@ -2929,38 +3161,6 @@ typedef void (* glTextureMaterialEXTProcPtr) (GLenum, GLenum);
 extern void glApplyTextureEXT (GLenum);
 extern void glTextureLightEXT (GLenum);
 extern void glTextureMaterialEXT (GLenum, GLenum);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SGIX_async
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glAsyncMarkerSGIXProcPtr) (GLuint);
-typedef GLint (* glFinishAsyncSGIXProcPtr) (GLuint *);
-typedef GLint (* glPollAsyncSGIXProcPtr) (GLuint *);
-typedef GLuint (* glGenAsyncMarkersSGIXProcPtr) (GLsizei);
-typedef void (* glDeleteAsyncMarkersSGIXProcPtr) (GLuint, GLsizei);
-typedef GLboolean (* glIsAsyncMarkerSGIXProcPtr) (GLuint);
-#else
-extern void glAsyncMarkerSGIX (GLuint);
-extern GLint glFinishAsyncSGIX (GLuint *);
-extern GLint glPollAsyncSGIX (GLuint *);
-extern GLuint glGenAsyncMarkersSGIX (GLsizei);
-extern void glDeleteAsyncMarkersSGIX (GLuint, GLsizei);
-extern GLboolean glIsAsyncMarkerSGIX (GLuint);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_INTEL_parallel_arrays
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glVertexPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
-typedef void (* glNormalPointervINTELProcPtr) (GLenum, const GLvoid* *);
-typedef void (* glColorPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
-typedef void (* glTexCoordPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
-#else
-extern void glVertexPointervINTEL (GLint, GLenum, const GLvoid* *);
-extern void glNormalPointervINTEL (GLenum, const GLvoid* *);
-extern void glColorPointervINTEL (GLint, GLenum, const GLvoid* *);
-extern void glTexCoordPointervINTEL (GLint, GLenum, const GLvoid* *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -3052,78 +3252,6 @@ extern void glFogCoordPointerEXT (GLenum, GLsizei, const GLvoid *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_APPLE_vertex_array_range
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glVertexArrayRangeAPPLEProcPtr) (GLsizei length, const GLvoid *pointer);
-typedef void (* glFlushVertexArrayRangeAPPLEProcPtr) (GLsizei length, const GLvoid *pointer);
-typedef void (* glVertexArrayParameteriAPPLEProcPtr) (GLenum pname, GLint param);
-#else
-extern void glVertexArrayRangeAPPLE(GLsizei length, const GLvoid *pointer);
-extern void glFlushVertexArrayRangeAPPLE(GLsizei length, const GLvoid *pointer);
-extern void glVertexArrayParameteriAPPLE(GLenum pname, GLint param);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_APPLE_vertex_array_object
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glBindVertexArrayAPPLEProcPtr) (GLuint id);
-typedef void (* glDeleteVertexArraysAPPLEProcPtr) (GLsizei n, const GLuint *ids);
-typedef void (* glGenVertexArraysAPPLEProcPtr) (GLsizei n, GLuint *ids);
-typedef GLboolean (* glIsVertexArrayAPPLEProcPtr) (GLuint id);
-#else
-extern void glBindVertexArrayAPPLE(GLuint id);
-extern void glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *ids);
-extern void glGenVertexArraysAPPLE(GLsizei n, GLuint *ids);
-extern GLboolean glIsVertexArrayAPPLE(GLuint id);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_APPLE_fence
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glGenFencesAPPLEProcPtr) (GLsizei n, GLuint *fences);
-typedef void (* glDeleteFencesAPPLEProcPtr) (GLsizei n, const GLuint *fences);
-typedef void (* glSetFenceAPPLEProcPtr) (GLuint fence);
-typedef GLboolean (* glIsFenceAPPLEProcPtr) (GLuint fence);
-typedef GLboolean (* glTestFenceAPPLEProcPtr) (GLuint fence);
-typedef void (* glFinishFenceAPPLEProcPtr) (GLuint fence);
-typedef GLboolean (* glTestObjectAPPLEProcPtr) (GLenum object, GLuint name);
-typedef void (* glFinishObjectAPPLEProcPtr) (GLenum object, GLuint name);
-#else
-extern void glGenFencesAPPLE(GLsizei n, GLuint *fences);
-extern void glDeleteFencesAPPLE(GLsizei n, const GLuint *fences);
-extern void glSetFenceAPPLE(GLuint fence);
-extern GLboolean glIsFenceAPPLE(GLuint fence);
-extern GLboolean glTestFenceAPPLE(GLuint fence);
-extern void glFinishFenceAPPLE(GLuint fence);
-extern GLboolean glTestObjectAPPLE(GLenum object, GLuint name);
-extern void glFinishObjectAPPLE(GLenum object, GLuint name);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_APPLE_element_array
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glElementPointerAPPLEProcPtr) (GLenum type, const GLvoid *pointer);
-typedef void (* glDrawElementArrayAPPLEProcPtr) (GLenum mode, GLint first, GLsizei count);
-typedef void (* glDrawRangeElementArrayAPPLEProcPtr) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
-#else
-extern void glElementPointerAPPLE(GLenum type, const GLvoid *pointer);
-extern void glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count);
-extern void glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_APPLE_flush_render
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFlushRenderAPPLEProcPtr) (void);
-typedef void (* glFinishRenderAPPLEProcPtr) (void);
-typedef void (* glSwapAPPLEProcPtr) (void);
-#else
-extern void glFlushRenderAPPLE(void);
-extern void glFinishRenderAPPLE(void);
-extern void glSwapAPPLE(void);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
 #if GL_EXT_coordinate_frame
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glTangent3bEXTProcPtr) (GLbyte, GLbyte, GLbyte);
@@ -3174,142 +3302,6 @@ extern void glBinormalPointerEXT (GLenum, GLsizei, const GLvoid *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SUNX_constant_data
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFinishTextureSUNXProcPtr) (void);
-#else
-extern void glFinishTextureSUNX (void);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SUN_global_alpha
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glGlobalAlphaFactorbSUNProcPtr) (GLbyte);
-typedef void (* glGlobalAlphaFactorsSUNProcPtr) (GLshort);
-typedef void (* glGlobalAlphaFactoriSUNProcPtr) (GLint);
-typedef void (* glGlobalAlphaFactorfSUNProcPtr) (GLfloat);
-typedef void (* glGlobalAlphaFactordSUNProcPtr) (GLdouble);
-typedef void (* glGlobalAlphaFactorubSUNProcPtr) (GLubyte);
-typedef void (* glGlobalAlphaFactorusSUNProcPtr) (GLushort);
-typedef void (* glGlobalAlphaFactoruiSUNProcPtr) (GLuint);
-#else
-extern void glGlobalAlphaFactorbSUN (GLbyte);
-extern void glGlobalAlphaFactorsSUN (GLshort);
-extern void glGlobalAlphaFactoriSUN (GLint);
-extern void glGlobalAlphaFactorfSUN (GLfloat);
-extern void glGlobalAlphaFactordSUN (GLdouble);
-extern void glGlobalAlphaFactorubSUN (GLubyte);
-extern void glGlobalAlphaFactorusSUN (GLushort);
-extern void glGlobalAlphaFactoruiSUN (GLuint);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SUN_triangle_list
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glReplacementCodeuiSUNProcPtr) (GLuint);
-typedef void (* glReplacementCodeusSUNProcPtr) (GLushort);
-typedef void (* glReplacementCodeubSUNProcPtr) (GLubyte);
-typedef void (* glReplacementCodeuivSUNProcPtr) (const GLuint *);
-typedef void (* glReplacementCodeusvSUNProcPtr) (const GLushort *);
-typedef void (* glReplacementCodeubvSUNProcPtr) (const GLubyte *);
-typedef void (* glReplacementCodePointerSUNProcPtr) (GLenum, GLsizei, const GLvoid* *);
-#else
-extern void glReplacementCodeuiSUN (GLuint);
-extern void glReplacementCodeusSUN (GLushort);
-extern void glReplacementCodeubSUN (GLubyte);
-extern void glReplacementCodeuivSUN (const GLuint *);
-extern void glReplacementCodeusvSUN (const GLushort *);
-extern void glReplacementCodeubvSUN (const GLubyte *);
-extern void glReplacementCodePointerSUN (GLenum, GLsizei, const GLvoid* *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_SUN_vertex
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glColor4ubVertex2fSUNProcPtr) (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat);
-typedef void (* glColor4ubVertex2fvSUNProcPtr) (const GLubyte *, const GLfloat *);
-typedef void (* glColor4ubVertex3fSUNProcPtr) (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-typedef void (* glColor4ubVertex3fvSUNProcPtr) (const GLubyte *, const GLfloat *);
-typedef void (* glColor3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glColor3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
-typedef void (* glNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
-typedef void (* glColor4fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glColor4fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord2fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord2fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord4fVertex4fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord4fVertex4fvSUNProcPtr) (const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord2fColor4ubVertex3fSUNProcPtr) (GLfloat, GLfloat, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord2fColor4ubVertex3fvSUNProcPtr) (const GLfloat *, const GLubyte *, const GLfloat *);
-typedef void (* glTexCoord2fColor3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord2fColor3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord2fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord2fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord2fColor4fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord2fColor4fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glTexCoord4fColor4fNormal3fVertex4fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glTexCoord4fColor4fNormal3fVertex4fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *);
-typedef void (* glReplacementCodeuiColor4ubVertex3fSUNProcPtr) (GLenum, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiColor4ubVertex3fvSUNProcPtr) (const GLenum *, const GLubyte *, const GLfloat *);
-typedef void (* glReplacementCodeuiColor3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiColor3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiColor4fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiColor4fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiTexCoord2fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiTexCoord2fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiTexCoord2fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
-typedef void (* glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-typedef void (* glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-#else
-extern void glColor4ubVertex2fSUN (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat);
-extern void glColor4ubVertex2fvSUN (const GLubyte *, const GLfloat *);
-extern void glColor4ubVertex3fSUN (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-extern void glColor4ubVertex3fvSUN (const GLubyte *, const GLfloat *);
-extern void glColor3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glColor3fVertex3fvSUN (const GLfloat *, const GLfloat *);
-extern void glNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *);
-extern void glColor4fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glColor4fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glTexCoord2fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord2fVertex3fvSUN (const GLfloat *, const GLfloat *);
-extern void glTexCoord4fVertex4fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord4fVertex4fvSUN (const GLfloat *, const GLfloat *);
-extern void glTexCoord2fColor4ubVertex3fSUN (GLfloat, GLfloat, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord2fColor4ubVertex3fvSUN (const GLfloat *, const GLubyte *, const GLfloat *);
-extern void glTexCoord2fColor3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord2fColor3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glTexCoord2fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord2fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glTexCoord2fColor4fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord2fColor4fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glTexCoord4fColor4fNormal3fVertex4fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glTexCoord4fColor4fNormal3fVertex4fvSUN (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiVertex3fvSUN (const GLenum *, const GLfloat *);
-extern void glReplacementCodeuiColor4ubVertex3fSUN (GLenum, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiColor4ubVertex3fvSUN (const GLenum *, const GLubyte *, const GLfloat *);
-extern void glReplacementCodeuiColor3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiColor3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiColor4fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiColor4fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiTexCoord2fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiTexCoord2fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
-extern void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
-extern void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
 #if GL_EXT_blend_func_separate
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glBlendFuncSeparateEXTProcPtr) (GLenum, GLenum, GLenum, GLenum);
@@ -3327,58 +3319,6 @@ typedef void (* glVertexWeightPointerEXTProcPtr) (GLsizei, GLenum, GLsizei, cons
 extern void glVertexWeightfEXT (GLfloat);
 extern void glVertexWeightfvEXT (const GLfloat *);
 extern void glVertexWeightPointerEXT (GLsizei, GLenum, GLsizei, const GLvoid *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_NV_vertex_array_range
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glFlushVertexArrayRangeNVProcPtr) (void);
-typedef void (* glVertexArrayRangeNVProcPtr) (GLsizei, const GLvoid *);
-#else
-extern void glFlushVertexArrayRangeNV (void);
-extern void glVertexArrayRangeNV (GLsizei, const GLvoid *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_NV_register_combiners
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glCombinerParameterfvNVProcPtr) (GLenum, const GLfloat *);
-typedef void (* glCombinerParameterfNVProcPtr) (GLenum, GLfloat);
-typedef void (* glCombinerParameterivNVProcPtr) (GLenum, const GLint *);
-typedef void (* glCombinerParameteriNVProcPtr) (GLenum, GLint);
-typedef void (* glCombinerInputNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum);
-typedef void (* glCombinerOutputNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLboolean, GLboolean, GLboolean);
-typedef void (* glFinalCombinerInputNVProcPtr) (GLenum, GLenum, GLenum, GLenum);
-typedef void (* glGetCombinerInputParameterfvNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLfloat *);
-typedef void (* glGetCombinerInputParameterivNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLint *);
-typedef void (* glGetCombinerOutputParameterfvNVProcPtr) (GLenum, GLenum, GLenum, GLfloat *);
-typedef void (* glGetCombinerOutputParameterivNVProcPtr) (GLenum, GLenum, GLenum, GLint *);
-typedef void (* glGetFinalCombinerInputParameterfvNVProcPtr) (GLenum, GLenum, GLfloat *);
-typedef void (* glGetFinalCombinerInputParameterivNVProcPtr) (GLenum, GLenum, GLint *);
-#else
-extern void glCombinerParameterfvNV (GLenum, const GLfloat *);
-extern void glCombinerParameterfNV (GLenum, GLfloat);
-extern void glCombinerParameterivNV (GLenum, const GLint *);
-extern void glCombinerParameteriNV (GLenum, GLint);
-extern void glCombinerInputNV (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum);
-extern void glCombinerOutputNV (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLboolean, GLboolean, GLboolean);
-extern void glFinalCombinerInputNV (GLenum, GLenum, GLenum, GLenum);
-extern void glGetCombinerInputParameterfvNV (GLenum, GLenum, GLenum, GLenum, GLfloat *);
-extern void glGetCombinerInputParameterivNV (GLenum, GLenum, GLenum, GLenum, GLint *);
-extern void glGetCombinerOutputParameterfvNV (GLenum, GLenum, GLenum, GLfloat *);
-extern void glGetCombinerOutputParameterivNV (GLenum, GLenum, GLenum, GLint *);
-extern void glGetFinalCombinerInputParameterfvNV (GLenum, GLenum, GLfloat *);
-extern void glGetFinalCombinerInputParameterivNV (GLenum, GLenum, GLint *);
-#endif /* GL_GLEXT_FUNCTION_POINTERS */
-#endif
-
-#if GL_NV_register_combiners2
-#ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glCombinerStageParameterfvNVProcPtr) (GLenum, GLenum, const GLfloat *);
-typedef void (* glGetCombinerStageParameterfvNVProcPtr) (GLenum, GLenum, GLfloat *);
-#else
-extern void glCombinerStageParameterfvNV (GLenum, GLenum, const GLfloat *);
-extern void glGetCombinerStageParameterfvNV (GLenum, GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -3481,27 +3421,12 @@ typedef void (* glBeginFragmentShaderEXTProcPtr) (void);
 typedef void (* glEndFragmentShaderEXTProcPtr) (void);
 typedef void (* glPassTexCoordEXTProcPtr) (GLuint dst, GLuint coord, GLenum swizzle);
 typedef void (* glSampleMapEXTProcPtr) (GLuint dst, GLuint interp, GLenum swizzle);
-typedef void (* glColorFragmentOp1EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod);
-typedef void (* glColorFragmentOp2EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod, GLuint arg2, GLuint arg2Rep,
-                                   GLuint arg2Mod);
-typedef void (* glColorFragmentOp3EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod, GLuint arg2, GLuint arg2Rep,
-                                   GLuint arg2Mod, GLuint arg3, GLuint arg3Rep,
-                                   GLuint arg3Mod);
-typedef void (* glAlphaFragmentOp1EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
-typedef void (* glAlphaFragmentOp2EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod,
-                                   GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
-typedef void (* glAlphaFragmentOp3EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod,
-                                   GLuint arg2, GLuint arg2Rep, GLuint arg2Mod,
-                                   GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+typedef void (* glColorFragmentOp1EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+typedef void (* glColorFragmentOp2EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+typedef void (* glColorFragmentOp3EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+typedef void (* glAlphaFragmentOp1EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+typedef void (* glAlphaFragmentOp2EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+typedef void (* glAlphaFragmentOp3EXTProcPtr) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
 typedef void (* glSetFragmentShaderConstantEXTProcPtr) (GLuint dst, const GLfloat *value);
 #else
 extern GLuint glGenFragmentShadersEXT (GLuint range);
@@ -3511,76 +3436,211 @@ extern void glBeginFragmentShaderEXT (void);
 extern void glEndFragmentShaderEXT (void);
 extern void glPassTexCoordEXT (GLuint dst, GLuint coord, GLenum swizzle);
 extern void glSampleMapEXT (GLuint dst, GLuint interp, GLenum swizzle);
-extern void glColorFragmentOp1EXT (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod);
-extern void glColorFragmentOp2EXT (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod, GLuint arg2, GLuint arg2Rep,
-                                   GLuint arg2Mod);
-extern void glColorFragmentOp3EXT (GLenum op, GLuint dst, GLuint dstMask,
-                                   GLuint dstMod, GLuint arg1, GLuint arg1Rep,
-                                   GLuint arg1Mod, GLuint arg2, GLuint arg2Rep,
-                                   GLuint arg2Mod, GLuint arg3, GLuint arg3Rep,
-                                   GLuint arg3Mod);
-extern void glAlphaFragmentOp1EXT (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
-extern void glAlphaFragmentOp2EXT (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod,
-                                   GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
-extern void glAlphaFragmentOp3EXT (GLenum op, GLuint dst, GLuint dstMod,
-                                   GLuint arg1, GLuint arg1Rep, GLuint arg1Mod,
-                                   GLuint arg2, GLuint arg2Rep, GLuint arg2Mod,
-                                   GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+extern void glColorFragmentOp1EXT (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+extern void glColorFragmentOp2EXT (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+extern void glColorFragmentOp3EXT (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+extern void glAlphaFragmentOp1EXT (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+extern void glAlphaFragmentOp2EXT (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+extern void glAlphaFragmentOp3EXT (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
 extern void glSetFragmentShaderConstantEXT (GLuint dst, const GLfloat *value);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_MESA_resize_buffers
+#if GL_EXT_multisample
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glResizeBuffersMESAProcPtr) (void);
+typedef void (* glSampleMaskEXTProcPtr) (GLclampf, GLboolean);
+typedef void (* glSamplePatternEXTProcPtr) (GLenum);
 #else
-extern void glResizeBuffersMESA (void);
+extern void glSampleMaskEXT (GLclampf, GLboolean);
+extern void glSamplePatternEXT (GLenum);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ARB_window_pos
+#if GL_EXT_stencil_two_side
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glWindowPos2dARBProcPtr) (GLdouble, GLdouble);
-typedef void (* glWindowPos2dvARBProcPtr) (const GLdouble *);
-typedef void (* glWindowPos2fARBProcPtr) (GLfloat, GLfloat);
-typedef void (* glWindowPos2fvARBProcPtr) (const GLfloat *);
-typedef void (* glWindowPos2iARBProcPtr) (GLint, GLint);
-typedef void (* glWindowPos2ivARBProcPtr) (const GLint *);
-typedef void (* glWindowPos2sARBProcPtr) (GLshort, GLshort);
-typedef void (* glWindowPos2svARBProcPtr) (const GLshort *);
-typedef void (* glWindowPos3dARBProcPtr) (GLdouble, GLdouble, GLdouble);
-typedef void (* glWindowPos3dvARBProcPtr) (const GLdouble *);
-typedef void (* glWindowPos3fARBProcPtr) (GLfloat, GLfloat, GLfloat);
-typedef void (* glWindowPos3fvARBProcPtr) (const GLfloat *);
-typedef void (* glWindowPos3iARBProcPtr) (GLint, GLint, GLint);
-typedef void (* glWindowPos3ivARBProcPtr) (const GLint *);
-typedef void (* glWindowPos3sARBProcPtr) (GLshort, GLshort, GLshort);
-typedef void (* glWindowPos3svARBProcPtr) (const GLshort *);
+typedef void (* glActiveStencilFaceEXTProcPtr) (GLenum face);
 #else
-extern void glWindowPos2dARB (GLdouble, GLdouble);
-extern void glWindowPos2dvARB (const GLdouble *);
-extern void glWindowPos2fARB (GLfloat, GLfloat);
-extern void glWindowPos2fvARB (const GLfloat *);
-extern void glWindowPos2iARB (GLint, GLint);
-extern void glWindowPos2ivARB (const GLint *);
-extern void glWindowPos2sARB (GLshort, GLshort);
-extern void glWindowPos2svARB (const GLshort *);
-extern void glWindowPos3dARB (GLdouble, GLdouble, GLdouble);
-extern void glWindowPos3dvARB (const GLdouble *);
-extern void glWindowPos3fARB (GLfloat, GLfloat, GLfloat);
-extern void glWindowPos3fvARB (const GLfloat *);
-extern void glWindowPos3iARB (GLint, GLint, GLint);
-extern void glWindowPos3ivARB (const GLint *);
-extern void glWindowPos3sARB (GLshort, GLshort, GLshort);
-extern void glWindowPos3svARB (const GLshort *);
+extern void glActiveStencilFaceEXT(GLenum face);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
+
+#if GL_EXT_depth_bounds_test
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glDepthBoundsEXTProcPtr) (GLclampd zmin, GLclampd zmax);
+#else
+extern void glDepthBoundsEXT(GLclampd zmin, GLclampd zmax);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_EXT_blend_equation_separate
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBlendEquationSeparateEXTProcPtr) (GLenum modeRGB, GLenum modeAlpha);
+#else
+extern void glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
+#if GL_APPLE_texture_range
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glTextureRangeAPPLEProcPtr) (GLenum target, GLsizei length, const GLvoid *pointer);
+typedef void (* glGetTexParameterPointervAPPLEProcPtr) (GLenum target, GLenum pname, GLvoid **params);
+#else
+extern void glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer);
+extern void glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_vertex_array_range
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glVertexArrayRangeAPPLEProcPtr) (GLsizei length, const GLvoid *pointer);
+typedef void (* glFlushVertexArrayRangeAPPLEProcPtr) (GLsizei length, const GLvoid *pointer);
+typedef void (* glVertexArrayParameteriAPPLEProcPtr) (GLenum pname, GLint param);
+#else
+extern void glVertexArrayRangeAPPLE(GLsizei length, const GLvoid *pointer);
+extern void glFlushVertexArrayRangeAPPLE(GLsizei length, const GLvoid *pointer);
+extern void glVertexArrayParameteriAPPLE(GLenum pname, GLint param);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_vertex_array_object
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBindVertexArrayAPPLEProcPtr) (GLuint id);
+typedef void (* glDeleteVertexArraysAPPLEProcPtr) (GLsizei n, const GLuint *ids);
+typedef void (* glGenVertexArraysAPPLEProcPtr) (GLsizei n, GLuint *ids);
+typedef GLboolean (* glIsVertexArrayAPPLEProcPtr) (GLuint id);
+#else
+extern void glBindVertexArrayAPPLE(GLuint id);
+extern void glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *ids);
+extern void glGenVertexArraysAPPLE(GLsizei n, GLuint *ids);
+extern GLboolean glIsVertexArrayAPPLE(GLuint id);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_fence
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glGenFencesAPPLEProcPtr) (GLsizei n, GLuint *fences);
+typedef void (* glDeleteFencesAPPLEProcPtr) (GLsizei n, const GLuint *fences);
+typedef void (* glSetFenceAPPLEProcPtr) (GLuint fence);
+typedef GLboolean (* glIsFenceAPPLEProcPtr) (GLuint fence);
+typedef GLboolean (* glTestFenceAPPLEProcPtr) (GLuint fence);
+typedef void (* glFinishFenceAPPLEProcPtr) (GLuint fence);
+typedef GLboolean (* glTestObjectAPPLEProcPtr) (GLenum object, GLuint name);
+typedef void (* glFinishObjectAPPLEProcPtr) (GLenum object, GLuint name);
+#else
+extern void glGenFencesAPPLE(GLsizei n, GLuint *fences);
+extern void glDeleteFencesAPPLE(GLsizei n, const GLuint *fences);
+extern void glSetFenceAPPLE(GLuint fence);
+extern GLboolean glIsFenceAPPLE(GLuint fence);
+extern GLboolean glTestFenceAPPLE(GLuint fence);
+extern void glFinishFenceAPPLE(GLuint fence);
+extern GLboolean glTestObjectAPPLE(GLenum object, GLuint name);
+extern void glFinishObjectAPPLE(GLenum object, GLuint name);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_element_array
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glElementPointerAPPLEProcPtr) (GLenum type, const GLvoid *pointer);
+typedef void (* glDrawElementArrayAPPLEProcPtr) (GLenum mode, GLint first, GLsizei count);
+typedef void (* glDrawRangeElementArrayAPPLEProcPtr) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
+#else
+extern void glElementPointerAPPLE(GLenum type, const GLvoid *pointer);
+extern void glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count);
+extern void glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_flush_render
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFlushRenderAPPLEProcPtr) (void);
+typedef void (* glFinishRenderAPPLEProcPtr) (void);
+typedef void (* glSwapAPPLEProcPtr) (void);
+#else
+extern void glFlushRenderAPPLE(void);
+extern void glFinishRenderAPPLE(void);
+extern void glSwapAPPLE(void);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_vertex_program_evaluators
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glEnableVertexAttribAPPLEProcPtr) (GLuint index, GLenum pname);
+typedef void (* glDisableVertexAttribAPPLEProcPtr) (GLuint index, GLenum pname);
+typedef GLboolean (* glIsVertexAttribEnabledAPPLEProcPtr) (GLuint index, GLenum pname);
+typedef void (* glMapVertexAttrib1dAPPLEProcPtr) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
+typedef void (* glMapVertexAttrib1fAPPLEProcPtr) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
+typedef void (* glMapVertexAttrib2dAPPLEProcPtr) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
+typedef void (* glMapVertexAttrib2fAPPLEProcPtr) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+#else
+extern void glEnableVertexAttribAPPLE(GLuint index, GLenum pname);
+extern void glDisableVertexAttribAPPLE(GLuint index, GLenum pname);
+extern GLboolean glIsVertexAttribEnabledAPPLE(GLuint index, GLenum pname);
+extern void glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
+extern void glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
+extern void glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
+extern void glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
+#if GL_ATI_pn_triangles
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glPNTrianglesiATIProcPtr) (GLenum pname, GLint param);
+typedef void (* glPNTrianglesfATIProcPtr) (GLenum pname, GLfloat param);
+#else
+extern void glPNTrianglesiATI(GLenum pname, GLint param);
+extern void glPNTrianglesfATI(GLenum pname, GLfloat param);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ATI_blend_equation_separate
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBlendEquationSeparateATIProcPtr) (GLenum equationRGB, GLenum equationAlpha);
+#else
+extern void glBlendEquationSeparateATI(GLenum equationRGB, GLenum equationAlpha);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ATI_separate_stencil
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glStencilOpSeparateATIProcPtr) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
+typedef void (* glStencilFuncSeparateATIProcPtr) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+#else
+extern void glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
+extern void glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ATIX_pn_triangles
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glPNTrianglesiATIXProcPtr) (GLenum pname, GLint param);
+typedef void (* glPNTrianglesfATIXProcPtr) (GLenum pname, GLfloat param);
+#else
+extern void glPNTrianglesiATIX(GLenum pname, GLint param);
+extern void glPNTrianglesfATIX(GLenum pname, GLfloat param);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
+#if GL_HP_image_transform
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glImageTransformParameteriHPProcPtr) (GLenum, GLenum, GLint);
+typedef void (* glImageTransformParameterfHPProcPtr) (GLenum, GLenum, GLfloat);
+typedef void (* glImageTransformParameterivHPProcPtr) (GLenum, GLenum, const GLint *);
+typedef void (* glImageTransformParameterfvHPProcPtr) (GLenum, GLenum, const GLfloat *);
+typedef void (* glGetImageTransformParameterivHPProcPtr) (GLenum, GLenum, GLint *);
+typedef void (* glGetImageTransformParameterfvHPProcPtr) (GLenum, GLenum, GLfloat *);
+#else
+extern void glImageTransformParameteriHP (GLenum, GLenum, GLint);
+extern void glImageTransformParameterfHP (GLenum, GLenum, GLfloat);
+extern void glImageTransformParameterivHP (GLenum, GLenum, const GLint *);
+extern void glImageTransformParameterfvHP (GLenum, GLenum, const GLfloat *);
+extern void glGetImageTransformParameterivHP (GLenum, GLenum, GLint *);
+extern void glGetImageTransformParameterfvHP (GLenum, GLenum, GLfloat *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
 
 #if GL_IBM_multimode_draw_arrays
 #ifdef GL_GLEXT_FUNCTION_POINTERS
@@ -3614,37 +3674,80 @@ extern void glVertexPointerListIBM (GLint, GLenum, GLint, const GLvoid* *, GLint
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_3DFX_tbuffer
+
+#if GL_INTEL_parallel_arrays
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glTbufferMask3DFXProcPtr) (GLuint);
+typedef void (* glVertexPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
+typedef void (* glNormalPointervINTELProcPtr) (GLenum, const GLvoid* *);
+typedef void (* glColorPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
+typedef void (* glTexCoordPointervINTELProcPtr) (GLint, GLenum, const GLvoid* *);
 #else
-extern void glTbufferMask3DFX (GLuint);
+extern void glVertexPointervINTEL (GLint, GLenum, const GLvoid* *);
+extern void glNormalPointervINTEL (GLenum, const GLvoid* *);
+extern void glColorPointervINTEL (GLint, GLenum, const GLvoid* *);
+extern void glTexCoordPointervINTEL (GLint, GLenum, const GLvoid* *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_EXT_multisample
+
+#if GL_MESA_resize_buffers
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glSampleMaskEXTProcPtr) (GLclampf, GLboolean);
-typedef void (* glSamplePatternEXTProcPtr) (GLenum);
+typedef void (* glResizeBuffersMESAProcPtr) (void);
 #else
-extern void glSampleMaskEXT (GLclampf, GLboolean);
-extern void glSamplePatternEXT (GLenum);
+extern void glResizeBuffersMESA (void);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SGIS_texture_color_mask
+
+#if GL_NV_vertex_array_range
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glTextureColorMaskSGISProcPtr) (GLboolean, GLboolean, GLboolean, GLboolean);
+typedef void (* glFlushVertexArrayRangeNVProcPtr) (void);
+typedef void (* glVertexArrayRangeNVProcPtr) (GLsizei, const GLvoid *);
 #else
-extern void glTextureColorMaskSGIS (GLboolean, GLboolean, GLboolean, GLboolean);
+extern void glFlushVertexArrayRangeNV (void);
+extern void glVertexArrayRangeNV (GLsizei, const GLvoid *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_SGIX_igloo_interface
+#if GL_NV_register_combiners
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glIglooInterfaceSGIXProcPtr) (GLenum, const GLvoid *);
+typedef void (* glCombinerParameterfvNVProcPtr) (GLenum, const GLfloat *);
+typedef void (* glCombinerParameterfNVProcPtr) (GLenum, GLfloat);
+typedef void (* glCombinerParameterivNVProcPtr) (GLenum, const GLint *);
+typedef void (* glCombinerParameteriNVProcPtr) (GLenum, GLint);
+typedef void (* glCombinerInputNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum);
+typedef void (* glCombinerOutputNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLboolean, GLboolean, GLboolean);
+typedef void (* glFinalCombinerInputNVProcPtr) (GLenum, GLenum, GLenum, GLenum);
+typedef void (* glGetCombinerInputParameterfvNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLfloat *);
+typedef void (* glGetCombinerInputParameterivNVProcPtr) (GLenum, GLenum, GLenum, GLenum, GLint *);
+typedef void (* glGetCombinerOutputParameterfvNVProcPtr) (GLenum, GLenum, GLenum, GLfloat *);
+typedef void (* glGetCombinerOutputParameterivNVProcPtr) (GLenum, GLenum, GLenum, GLint *);
+typedef void (* glGetFinalCombinerInputParameterfvNVProcPtr) (GLenum, GLenum, GLfloat *);
+typedef void (* glGetFinalCombinerInputParameterivNVProcPtr) (GLenum, GLenum, GLint *);
 #else
-extern void glIglooInterfaceSGIX (GLenum, const GLvoid *);
+extern void glCombinerParameterfvNV (GLenum, const GLfloat *);
+extern void glCombinerParameterfNV (GLenum, GLfloat);
+extern void glCombinerParameterivNV (GLenum, const GLint *);
+extern void glCombinerParameteriNV (GLenum, GLint);
+extern void glCombinerInputNV (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum);
+extern void glCombinerOutputNV (GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLenum, GLboolean, GLboolean, GLboolean);
+extern void glFinalCombinerInputNV (GLenum, GLenum, GLenum, GLenum);
+extern void glGetCombinerInputParameterfvNV (GLenum, GLenum, GLenum, GLenum, GLfloat *);
+extern void glGetCombinerInputParameterivNV (GLenum, GLenum, GLenum, GLenum, GLint *);
+extern void glGetCombinerOutputParameterfvNV (GLenum, GLenum, GLenum, GLfloat *);
+extern void glGetCombinerOutputParameterivNV (GLenum, GLenum, GLenum, GLint *);
+extern void glGetFinalCombinerInputParameterfvNV (GLenum, GLenum, GLfloat *);
+extern void glGetFinalCombinerInputParameterivNV (GLenum, GLenum, GLint *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_NV_register_combiners2
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glCombinerStageParameterfvNVProcPtr) (GLenum, GLenum, const GLfloat *);
+typedef void (* glGetCombinerStageParameterfvNVProcPtr) (GLenum, GLenum, GLfloat *);
+#else
+extern void glCombinerStageParameterfvNV (GLenum, GLenum, const GLfloat *);
+extern void glGetCombinerStageParameterfvNV (GLenum, GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -3792,227 +3895,440 @@ extern void glPointParameterivNV(GLenum pname, const GLint *params);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ATI_pn_triangles
+
+#if GL_PGI_misc_hints
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glPNTrianglesiATIProcPtr) (GLenum pname, GLint param);
-typedef void (* glPNTrianglesfATIProcPtr) (GLenum pname, GLfloat param);
+typedef void (* glHintPGIProcPtr) (GLenum, GLint);
 #else
-extern void glPNTrianglesiATI(GLenum pname, GLint param);
-extern void glPNTrianglesfATI(GLenum pname, GLfloat param);
+extern void glHintPGI (GLenum, GLint);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ATIX_pn_triangles
+
+#if GL_SGI_color_table
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glPNTrianglesiATIXProcPtr) (GLenum pname, GLint param);
-typedef void (* glPNTrianglesfATIXProcPtr) (GLenum pname, GLfloat param);
+typedef void (* glColorTableSGIProcPtr) (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
+typedef void (* glColorTableParameterfvSGIProcPtr) (GLenum, GLenum, const GLfloat *);
+typedef void (* glColorTableParameterivSGIProcPtr) (GLenum, GLenum, const GLint *);
+typedef void (* glCopyColorTableSGIProcPtr) (GLenum, GLenum, GLint, GLint, GLsizei);
+typedef void (* glGetColorTableSGIProcPtr) (GLenum, GLenum, GLenum, GLvoid *);
+typedef void (* glGetColorTableParameterfvSGIProcPtr) (GLenum, GLenum, GLfloat *);
+typedef void (* glGetColorTableParameterivSGIProcPtr) (GLenum, GLenum, GLint *);
 #else
-extern void glPNTrianglesiATIX(GLenum pname, GLint param);
-extern void glPNTrianglesfATIX(GLenum pname, GLfloat param);
+extern void glColorTableSGI (GLenum, GLenum, GLsizei, GLenum, GLenum, const GLvoid *);
+extern void glColorTableParameterfvSGI (GLenum, GLenum, const GLfloat *);
+extern void glColorTableParameterivSGI (GLenum, GLenum, const GLint *);
+extern void glCopyColorTableSGI (GLenum, GLenum, GLint, GLint, GLsizei);
+extern void glGetColorTableSGI (GLenum, GLenum, GLenum, GLvoid *);
+extern void glGetColorTableParameterfvSGI (GLenum, GLenum, GLfloat *);
+extern void glGetColorTableParameterivSGI (GLenum, GLenum, GLint *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ATI_blend_equation_separate
+#if GL_SGIS_texture_filter4
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glBlendEquationSeparateATIProcPtr) (GLenum equationRGB, GLenum equationAlpha);
+typedef void (* glGetTexFilterFuncSGISProcPtr) (GLenum, GLenum, GLfloat *);
+typedef void (* glTexFilterFuncSGISProcPtr) (GLenum, GLenum, GLsizei, const GLfloat *);
 #else
-extern void glBlendEquationSeparateATI(GLenum equationRGB, GLenum equationAlpha);
+extern void glGetTexFilterFuncSGIS (GLenum, GLenum, GLfloat *);
+extern void glTexFilterFuncSGIS (GLenum, GLenum, GLsizei, const GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ATI_separate_stencil
+#if GL_SGIS_pixel_texture
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glStencilOpSeparateATIProcPtr) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-typedef void (* glStencilFuncSeparateATIProcPtr) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+typedef void (* glPixelTexGenParameteriSGISProcPtr) (GLenum, GLint);
+typedef void (* glPixelTexGenParameterivSGISProcPtr) (GLenum, const GLint *);
+typedef void (* glPixelTexGenParameterfSGISProcPtr) (GLenum, GLfloat);
+typedef void (* glPixelTexGenParameterfvSGISProcPtr) (GLenum, const GLfloat *);
+typedef void (* glGetPixelTexGenParameterivSGISProcPtr) (GLenum, GLint *);
+typedef void (* glGetPixelTexGenParameterfvSGISProcPtr) (GLenum, GLfloat *);
 #else
-extern void glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-extern void glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+extern void glPixelTexGenParameteriSGIS (GLenum, GLint);
+extern void glPixelTexGenParameterivSGIS (GLenum, const GLint *);
+extern void glPixelTexGenParameterfSGIS (GLenum, GLfloat);
+extern void glPixelTexGenParameterfvSGIS (GLenum, const GLfloat *);
+extern void glGetPixelTexGenParameterivSGIS (GLenum, GLint *);
+extern void glGetPixelTexGenParameterfvSGIS (GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ARB_point_parameters
+#if GL_SGIS_texture4D
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glPointParameterfARBProcPtr) (GLenum pname, GLfloat param);
-typedef void (* glPointParameterfvARBProcPtr) (GLenum pname, const GLfloat *params);
+typedef void (* glTexImage4DSGISProcPtr) (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
+typedef void (* glTexSubImage4DSGISProcPtr) (GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
 #else
-extern void glPointParameterfARB(GLenum pname, GLfloat param);
-extern void glPointParameterfvARB(GLenum pname, const GLfloat *params);
+extern void glTexImage4DSGIS (GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid *);
+extern void glTexSubImage4DSGIS (GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_ARB_vertex_program
+#if GL_SGIS_detail_texture
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glBindProgramARBProcPtr) (GLenum target, GLuint program);
-typedef void (* glDeleteProgramsARBProcPtr) (GLsizei n, const GLuint *programs);
-typedef void (* glGenProgramsARBProcPtr) (GLsizei n, GLuint *programs);
-typedef GLboolean (* glIsProgramARBProcPtr) (GLuint program);
-
-typedef void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort x);
-typedef void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat x);
-typedef void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble x);
-typedef void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort x, GLshort y);
-typedef void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat x, GLfloat y);
-typedef void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble x, GLdouble y);
-typedef void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z);
-typedef void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-typedef void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-typedef void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-typedef void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-typedef void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-typedef void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-typedef void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
-typedef void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
-typedef void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
-typedef void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
-typedef void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
-typedef void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
-typedef void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
-typedef void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
-typedef void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
-typedef void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
-
-typedef void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-
-typedef void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
-typedef void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
-
-typedef void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
-typedef void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
-typedef void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
-typedef void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
-
-typedef void (* glProgramEnvParameter4dARBProcPtr) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-typedef void (* glProgramEnvParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
-typedef void (* glProgramEnvParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-typedef void (* glProgramEnvParameter4fvARBProcPtr) (GLenum target, GLuint index, const GLfloat *params);
-typedef void (* glProgramLocalParameter4dARBProcPtr) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-typedef void (* glProgramLocalParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
-typedef void (* glProgramLocalParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-typedef void (* glProgramLocalParameter4fvARBProcPtr) (GLenum target, GLuint index, const GLfloat *params);
-
-typedef void (* glGetProgramEnvParameterdvARBProcPtr) (GLenum target, GLuint index, GLdouble *params);
-typedef void (* glGetProgramEnvParameterfvARBProcPtr) (GLenum target, GLuint index, GLfloat *params);
-typedef void (* glGetProgramLocalParameterdvARBProcPtr) (GLenum target, GLuint index, GLdouble *params);
-typedef void (* glGetProgramLocalParameterfvARBProcPtr) (GLenum target, GLuint index, GLfloat *params);
-
-typedef void (* glProgramStringARBProcPtr) (GLenum target, GLenum format, GLsizei len, const GLvoid *string); 
-typedef void (* glGetProgramStringARBProcPtr) (GLenum target, GLenum pname, GLvoid *string);
-
-typedef void (* glGetProgramivARBProcPtr) (GLenum target, GLenum pname, GLint *params);
+typedef void (* glDetailTexFuncSGISProcPtr) (GLenum, GLsizei, const GLfloat *);
+typedef void (* glGetDetailTexFuncSGISProcPtr) (GLenum, GLfloat *);
 #else
-extern void glBindProgramARB(GLenum target, GLuint program);
-extern void glDeleteProgramsARB(GLsizei n, const GLuint *programs);
-extern void glGenProgramsARB(GLsizei n, GLuint *programs);
-extern GLboolean glIsProgramARB(GLuint program);
-
-extern void glVertexAttrib1sARB(GLuint index, GLshort x);
-extern void glVertexAttrib1fARB(GLuint index, GLfloat x);
-extern void glVertexAttrib1dARB(GLuint index, GLdouble x);
-extern void glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y);
-extern void glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y);
-extern void glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y);
-extern void glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z);
-extern void glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z);
-extern void glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z);
-extern void glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-extern void glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-extern void glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
-extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
-
-extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-
-extern void glEnableVertexAttribArrayARB(GLuint index);
-extern void glDisableVertexAttribArrayARB(GLuint index);
-
-extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
-extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
-extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
-extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
-
-extern void glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-extern void glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble *params);
-extern void glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-extern void glProgramEnvParameter4fvARB(GLenum target, GLuint index, const GLfloat *params);
-extern void glProgramLocalParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-extern void glProgramLocalParameter4dvARB(GLenum target, GLuint index, const GLdouble *params);
-extern void glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-extern void glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLfloat *params);
-
-extern void glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble *params);
-extern void glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat *params);
-extern void glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble *params);
-extern void glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat *params);
-
-extern void glProgramStringARB(GLenum target, GLenum format, GLsizei len, const GLvoid *string); 
-extern void glGetProgramStringARB(GLenum target, GLenum pname, GLvoid *string);
-
-extern void glGetProgramivARB(GLenum target, GLenum pname, GLint *params);
+extern void glDetailTexFuncSGIS (GLenum, GLsizei, const GLfloat *);
+extern void glGetDetailTexFuncSGIS (GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_APPLE_vertex_program_evaluators
+#if GL_SGIS_sharpen_texture
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glEnableVertexAttribAPPLEProcPtr) (GLuint index, GLenum pname);
-typedef void (* glDisableVertexAttribAPPLEProcPtr) (GLuint index, GLenum pname);
-typedef GLboolean (* glIsVertexAttribEnabledAPPLEProcPtr) (GLuint index, GLenum pname);
-typedef void (* glMapVertexAttrib1dAPPLEProcPtr) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
-typedef void (* glMapVertexAttrib1fAPPLEProcPtr) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
-typedef void (* glMapVertexAttrib2dAPPLEProcPtr) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
-typedef void (* glMapVertexAttrib2fAPPLEProcPtr) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+typedef void (* glSharpenTexFuncSGISProcPtr) (GLenum, GLsizei, const GLfloat *);
+typedef void (* glGetSharpenTexFuncSGISProcPtr) (GLenum, GLfloat *);
 #else
-extern void glEnableVertexAttribAPPLE(GLuint index, GLenum pname);
-extern void glDisableVertexAttribAPPLE(GLuint index, GLenum pname);
-extern GLboolean glIsVertexAttribEnabledAPPLE(GLuint index, GLenum pname);
-extern void glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
-extern void glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
-extern void glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
-extern void glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+extern void glSharpenTexFuncSGIS (GLenum, GLsizei, const GLfloat *);
+extern void glGetSharpenTexFuncSGIS (GLenum, GLfloat *);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
-#if GL_EXT_stencil_two_side
+#if GL_SGIS_multisample
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-typedef void (* glActiveStencilFaceEXTProcPtr) (GLenum face);
+typedef void (* glSampleMaskSGISProcPtr) (GLclampf, GLboolean);
+typedef void (* glSamplePatternSGISProcPtr) (GLenum);
 #else
-extern void glActiveStencilFaceEXT(GLenum face);
+extern void glSampleMaskSGIS (GLclampf, GLboolean);
+extern void glSamplePatternSGIS (GLenum);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
+
+#if GL_SGIS_fog_function
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFogFuncSGISProcPtr) (GLsizei, const GLfloat *);
+typedef void (* glGetFogFuncSGISProcPtr) (const GLfloat *);
+#else
+extern void glFogFuncSGIS (GLsizei, const GLfloat *);
+extern void glGetFogFuncSGIS (const GLfloat *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIS_texture_color_mask
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glTextureColorMaskSGISProcPtr) (GLboolean, GLboolean, GLboolean, GLboolean);
+#else
+extern void glTextureColorMaskSGIS (GLboolean, GLboolean, GLboolean, GLboolean);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_pixel_texture
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glPixelTexGenSGIXProcPtr) (GLenum);
+#else
+extern void glPixelTexGenSGIX (GLenum);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_sprite
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glSpriteParameterfSGIXProcPtr) (GLenum, GLfloat);
+typedef void (* glSpriteParameterfvSGIXProcPtr) (GLenum, const GLfloat *);
+typedef void (* glSpriteParameteriSGIXProcPtr) (GLenum, GLint);
+typedef void (* glSpriteParameterivSGIXProcPtr) (GLenum, const GLint *);
+#else
+extern void glSpriteParameterfSGIX (GLenum, GLfloat);
+extern void glSpriteParameterfvSGIX (GLenum, const GLfloat *);
+extern void glSpriteParameteriSGIX (GLenum, GLint);
+extern void glSpriteParameterivSGIX (GLenum, const GLint *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_instruments
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef GLint (* glGetInstrumentsSGIXProcPtr) (void);
+typedef void (* glInstrumentsBufferSGIXProcPtr) (GLsizei, GLint *);
+typedef GLint (* glPollInstrumentsSGIXProcPtr) (GLint *);
+typedef void (* glReadInstrumentsSGIXProcPtr) (GLint);
+typedef void (* glStartInstrumentsSGIXProcPtr) (void);
+typedef void (* glStopInstrumentsSGIXProcPtr) (GLint);
+#else
+extern GLint glGetInstrumentsSGIX (void);
+extern void glInstrumentsBufferSGIX (GLsizei, GLint *);
+extern GLint glPollInstrumentsSGIX (GLint *);
+extern void glReadInstrumentsSGIX (GLint);
+extern void glStartInstrumentsSGIX (void);
+extern void glStopInstrumentsSGIX (GLint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_framezoom
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFrameZoomSGIXProcPtr) (GLint);
+#else
+extern void glFrameZoomSGIX (GLint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_tag_sample_buffer
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glTagSampleBufferSGIXProcPtr) (void);
+#else
+extern void glTagSampleBufferSGIX (void);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_polynomial_ffd
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glDeformationMap3dSGIXProcPtr) (GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *);
+typedef void (* glDeformationMap3fSGIXProcPtr) (GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *);
+typedef void (* glDeformSGIXProcPtr) (GLbitfield);
+typedef void (* glLoadIdentityDeformationMapSGIXProcPtr) (GLbitfield);
+#else
+extern void glDeformationMap3dSGIX (GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *);
+extern void glDeformationMap3fSGIX (GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *);
+extern void glDeformSGIX (GLbitfield);
+extern void glLoadIdentityDeformationMapSGIX (GLbitfield);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_reference_plane
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glReferencePlaneSGIXProcPtr) (const GLdouble *);
+#else
+extern void glReferencePlaneSGIX (const GLdouble *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_flush_raster
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFlushRasterSGIXProcPtr) (void);
+#else
+extern void glFlushRasterSGIX (void);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_list_priority
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glGetListParameterfvSGIXProcPtr) (GLuint, GLenum, GLfloat *);
+typedef void (* glGetListParameterivSGIXProcPtr) (GLuint, GLenum, GLint *);
+typedef void (* glListParameterfSGIXProcPtr) (GLuint, GLenum, GLfloat);
+typedef void (* glListParameterfvSGIXProcPtr) (GLuint, GLenum, const GLfloat *);
+typedef void (* glListParameteriSGIXProcPtr) (GLuint, GLenum, GLint);
+typedef void (* glListParameterivSGIXProcPtr) (GLuint, GLenum, const GLint *);
+#else
+extern void glGetListParameterfvSGIX (GLuint, GLenum, GLfloat *);
+extern void glGetListParameterivSGIX (GLuint, GLenum, GLint *);
+extern void glListParameterfSGIX (GLuint, GLenum, GLfloat);
+extern void glListParameterfvSGIX (GLuint, GLenum, const GLfloat *);
+extern void glListParameteriSGIX (GLuint, GLenum, GLint);
+extern void glListParameterivSGIX (GLuint, GLenum, const GLint *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_fragment_lighting
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFragmentColorMaterialSGIXProcPtr) (GLenum, GLenum);
+typedef void (* glFragmentLightfSGIXProcPtr) (GLenum, GLenum, GLfloat);
+typedef void (* glFragmentLightfvSGIXProcPtr) (GLenum, GLenum, const GLfloat *);
+typedef void (* glFragmentLightiSGIXProcPtr) (GLenum, GLenum, GLint);
+typedef void (* glFragmentLightivSGIXProcPtr) (GLenum, GLenum, const GLint *);
+typedef void (* glFragmentLightModelfSGIXProcPtr) (GLenum, GLfloat);
+typedef void (* glFragmentLightModelfvSGIXProcPtr) (GLenum, const GLfloat *);
+typedef void (* glFragmentLightModeliSGIXProcPtr) (GLenum, GLint);
+typedef void (* glFragmentLightModelivSGIXProcPtr) (GLenum, const GLint *);
+typedef void (* glFragmentMaterialfSGIXProcPtr) (GLenum, GLenum, GLfloat);
+typedef void (* glFragmentMaterialfvSGIXProcPtr) (GLenum, GLenum, const GLfloat *);
+typedef void (* glFragmentMaterialiSGIXProcPtr) (GLenum, GLenum, GLint);
+typedef void (* glFragmentMaterialivSGIXProcPtr) (GLenum, GLenum, const GLint *);
+typedef void (* glGetFragmentLightfvSGIXProcPtr) (GLenum, GLenum, GLfloat *);
+typedef void (* glGetFragmentLightivSGIXProcPtr) (GLenum, GLenum, GLint *);
+typedef void (* glGetFragmentMaterialfvSGIXProcPtr) (GLenum, GLenum, GLfloat *);
+typedef void (* glGetFragmentMaterialivSGIXProcPtr) (GLenum, GLenum, GLint *);
+typedef void (* glLightEnviSGIXProcPtr) (GLenum, GLint);
+#else
+extern void glFragmentColorMaterialSGIX (GLenum, GLenum);
+extern void glFragmentLightfSGIX (GLenum, GLenum, GLfloat);
+extern void glFragmentLightfvSGIX (GLenum, GLenum, const GLfloat *);
+extern void glFragmentLightiSGIX (GLenum, GLenum, GLint);
+extern void glFragmentLightivSGIX (GLenum, GLenum, const GLint *);
+extern void glFragmentLightModelfSGIX (GLenum, GLfloat);
+extern void glFragmentLightModelfvSGIX (GLenum, const GLfloat *);
+extern void glFragmentLightModeliSGIX (GLenum, GLint);
+extern void glFragmentLightModelivSGIX (GLenum, const GLint *);
+extern void glFragmentMaterialfSGIX (GLenum, GLenum, GLfloat);
+extern void glFragmentMaterialfvSGIX (GLenum, GLenum, const GLfloat *);
+extern void glFragmentMaterialiSGIX (GLenum, GLenum, GLint);
+extern void glFragmentMaterialivSGIX (GLenum, GLenum, const GLint *);
+extern void glGetFragmentLightfvSGIX (GLenum, GLenum, GLfloat *);
+extern void glGetFragmentLightivSGIX (GLenum, GLenum, GLint *);
+extern void glGetFragmentMaterialfvSGIX (GLenum, GLenum, GLfloat *);
+extern void glGetFragmentMaterialivSGIX (GLenum, GLenum, GLint *);
+extern void glLightEnviSGIX (GLenum, GLint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_async
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glAsyncMarkerSGIXProcPtr) (GLuint);
+typedef GLint (* glFinishAsyncSGIXProcPtr) (GLuint *);
+typedef GLint (* glPollAsyncSGIXProcPtr) (GLuint *);
+typedef GLuint (* glGenAsyncMarkersSGIXProcPtr) (GLsizei);
+typedef void (* glDeleteAsyncMarkersSGIXProcPtr) (GLuint, GLsizei);
+typedef GLboolean (* glIsAsyncMarkerSGIXProcPtr) (GLuint);
+#else
+extern void glAsyncMarkerSGIX (GLuint);
+extern GLint glFinishAsyncSGIX (GLuint *);
+extern GLint glPollAsyncSGIX (GLuint *);
+extern GLuint glGenAsyncMarkersSGIX (GLsizei);
+extern void glDeleteAsyncMarkersSGIX (GLuint, GLsizei);
+extern GLboolean glIsAsyncMarkerSGIX (GLuint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SGIX_igloo_interface
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glIglooInterfaceSGIXProcPtr) (GLenum, const GLvoid *);
+#else
+extern void glIglooInterfaceSGIX (GLenum, const GLvoid *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
+#if GL_SUN_global_alpha
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glGlobalAlphaFactorbSUNProcPtr) (GLbyte);
+typedef void (* glGlobalAlphaFactorsSUNProcPtr) (GLshort);
+typedef void (* glGlobalAlphaFactoriSUNProcPtr) (GLint);
+typedef void (* glGlobalAlphaFactorfSUNProcPtr) (GLfloat);
+typedef void (* glGlobalAlphaFactordSUNProcPtr) (GLdouble);
+typedef void (* glGlobalAlphaFactorubSUNProcPtr) (GLubyte);
+typedef void (* glGlobalAlphaFactorusSUNProcPtr) (GLushort);
+typedef void (* glGlobalAlphaFactoruiSUNProcPtr) (GLuint);
+#else
+extern void glGlobalAlphaFactorbSUN (GLbyte);
+extern void glGlobalAlphaFactorsSUN (GLshort);
+extern void glGlobalAlphaFactoriSUN (GLint);
+extern void glGlobalAlphaFactorfSUN (GLfloat);
+extern void glGlobalAlphaFactordSUN (GLdouble);
+extern void glGlobalAlphaFactorubSUN (GLubyte);
+extern void glGlobalAlphaFactorusSUN (GLushort);
+extern void glGlobalAlphaFactoruiSUN (GLuint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SUN_triangle_list
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glReplacementCodeuiSUNProcPtr) (GLuint);
+typedef void (* glReplacementCodeusSUNProcPtr) (GLushort);
+typedef void (* glReplacementCodeubSUNProcPtr) (GLubyte);
+typedef void (* glReplacementCodeuivSUNProcPtr) (const GLuint *);
+typedef void (* glReplacementCodeusvSUNProcPtr) (const GLushort *);
+typedef void (* glReplacementCodeubvSUNProcPtr) (const GLubyte *);
+typedef void (* glReplacementCodePointerSUNProcPtr) (GLenum, GLsizei, const GLvoid* *);
+#else
+extern void glReplacementCodeuiSUN (GLuint);
+extern void glReplacementCodeusSUN (GLushort);
+extern void glReplacementCodeubSUN (GLubyte);
+extern void glReplacementCodeuivSUN (const GLuint *);
+extern void glReplacementCodeusvSUN (const GLushort *);
+extern void glReplacementCodeubvSUN (const GLubyte *);
+extern void glReplacementCodePointerSUN (GLenum, GLsizei, const GLvoid* *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SUN_vertex
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glColor4ubVertex2fSUNProcPtr) (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat);
+typedef void (* glColor4ubVertex2fvSUNProcPtr) (const GLubyte *, const GLfloat *);
+typedef void (* glColor4ubVertex3fSUNProcPtr) (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+typedef void (* glColor4ubVertex3fvSUNProcPtr) (const GLubyte *, const GLfloat *);
+typedef void (* glColor3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glColor3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
+typedef void (* glNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
+typedef void (* glColor4fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glColor4fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord2fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord2fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord4fVertex4fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord4fVertex4fvSUNProcPtr) (const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord2fColor4ubVertex3fSUNProcPtr) (GLfloat, GLfloat, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord2fColor4ubVertex3fvSUNProcPtr) (const GLfloat *, const GLubyte *, const GLfloat *);
+typedef void (* glTexCoord2fColor3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord2fColor3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord2fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord2fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord2fColor4fNormal3fVertex3fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord2fColor4fNormal3fVertex3fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glTexCoord4fColor4fNormal3fVertex4fSUNProcPtr) (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glTexCoord4fColor4fNormal3fVertex4fvSUNProcPtr) (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *);
+typedef void (* glReplacementCodeuiColor4ubVertex3fSUNProcPtr) (GLenum, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiColor4ubVertex3fvSUNProcPtr) (const GLenum *, const GLubyte *, const GLfloat *);
+typedef void (* glReplacementCodeuiColor3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiColor3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiColor4fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiColor4fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiTexCoord2fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiTexCoord2fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiTexCoord2fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
+typedef void (* glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUNProcPtr) (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+typedef void (* glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUNProcPtr) (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+#else
+extern void glColor4ubVertex2fSUN (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat);
+extern void glColor4ubVertex2fvSUN (const GLubyte *, const GLfloat *);
+extern void glColor4ubVertex3fSUN (GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+extern void glColor4ubVertex3fvSUN (const GLubyte *, const GLfloat *);
+extern void glColor3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glColor3fVertex3fvSUN (const GLfloat *, const GLfloat *);
+extern void glNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *);
+extern void glColor4fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glColor4fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glTexCoord2fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord2fVertex3fvSUN (const GLfloat *, const GLfloat *);
+extern void glTexCoord4fVertex4fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord4fVertex4fvSUN (const GLfloat *, const GLfloat *);
+extern void glTexCoord2fColor4ubVertex3fSUN (GLfloat, GLfloat, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord2fColor4ubVertex3fvSUN (const GLfloat *, const GLubyte *, const GLfloat *);
+extern void glTexCoord2fColor3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord2fColor3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glTexCoord2fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord2fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glTexCoord2fColor4fNormal3fVertex3fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord2fColor4fNormal3fVertex3fvSUN (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glTexCoord4fColor4fNormal3fVertex4fSUN (GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glTexCoord4fColor4fNormal3fVertex4fvSUN (const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiVertex3fvSUN (const GLenum *, const GLfloat *);
+extern void glReplacementCodeuiColor4ubVertex3fSUN (GLenum, GLubyte, GLubyte, GLubyte, GLubyte, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiColor4ubVertex3fvSUN (const GLenum *, const GLubyte *, const GLfloat *);
+extern void glReplacementCodeuiColor3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiColor3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiColor4fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiColor4fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiTexCoord2fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiTexCoord2fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *);
+extern void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN (GLenum, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
+extern void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN (const GLenum *, const GLfloat *, const GLfloat *, const GLfloat *, const GLfloat *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_SUNX_constant_data
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glFinishTextureSUNXProcPtr) (void);
+#else
+extern void glFinishTextureSUNX (void);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+
+#if GL_3DFX_tbuffer
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glTbufferMask3DFXProcPtr) (GLuint);
+#else
+extern void glTbufferMask3DFX (GLuint);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
 
 #ifdef __cplusplus
 }

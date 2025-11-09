@@ -3,7 +3,7 @@
  
      Contains:   Color Management Device Interfaces
  
-     Version:    ColorSync-118.2~1
+     Version:    ColorSync-118.2.4~3
  
      Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  

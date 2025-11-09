@@ -14,6 +14,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*!	@header 	
+	@abstract		Property strings for filesystem objects.
+
+	@discussion		
+*/
+
 #ifndef _H_DRContentProperties
 #define _H_DRContentProperties
 

@@ -108,6 +108,9 @@ public:
 	// called for deallocation of resources.
 	virtual void 	stop 	( IOService *  provider );
 	
+	// This method is our last chance to free all resources allocated.
+	virtual void	free	( void );
+	
 protected:
 
 	// ---- member variables ----
@@ -138,7 +141,10 @@ protected:
 	bool					fResetInProgress;
 
 	// Binary Compatibility instance variable expansion
-	struct ExpansionData { };
+	struct ExpansionData
+	{
+		UInt32		fSemaphore;
+	};
 	ExpansionData * reserved;
 	
 	// ---- IOService methods overridden ----

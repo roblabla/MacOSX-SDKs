@@ -42,6 +42,7 @@
 // SCSI Architecture Model Family includes
 #include <IOKit/scsi/SCSICommandDefinitions.h>
 #include <IOKit/scsi/SCSICmds_INQUIRY_Definitions.h>
+#include <IOKit/scsi/SCSICmds_REQUEST_SENSE_Defs.h>
 #include <IOKit/scsi/IOSCSIProtocolInterface.h>
 
 
@@ -111,6 +112,10 @@ private:
 											  IOService *	newService );
 	
 	static void		TaskCallback ( SCSITaskIdentifier completedTask );
+	void			TaskCompletion ( SCSITaskIdentifier completedTask );
+	
+	static IOReturn	sWaitForTask ( void * object, SCSITaskIdentifier request );
+	IOReturn		GatedWaitForTask ( SCSITaskIdentifier request );
 	
 protected:
 	
@@ -443,6 +448,11 @@ public:
 	bool 				IsParameterValid ( 
 							SCSICmdField4Byte 			param,
 							SCSICmdField4Byte 			mask );
+	
+	// Validate Parameter used for 33 bit to 8 byte paramaters
+	bool 				IsParameterValid ( 
+							SCSICmdField8Byte 			param,
+							SCSICmdField8Byte 			mask );
 	
 
 	bool 				IsMemoryDescriptorValid (

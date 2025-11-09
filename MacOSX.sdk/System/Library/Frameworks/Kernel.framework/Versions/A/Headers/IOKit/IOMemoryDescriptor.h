@@ -110,6 +110,13 @@ protected:
 
 public:
 
+/*! @function getBackingID
+    @abstract Get an unique identifier for the virtual memory systems backing memory object.
+    @discussion For memory descriptors that are directly mapped by real memory, IOGeneralMemoryDescriptors that are also persistent (kIOMemoryPersistent) return the id of the backing vm object.  This returned value can be tested to see if 2 memory persistent memory descriptors share the same backing.  The call itself is fairly heavy weight and can only be applied to persistent memory descriptors so it is not generally useful.  This function is NOT virtual at the moment.  We may choose to make it virtual in the future however.
+    @result 0 on non-persistent or non IOGeneralMemoryDescriptors, unique id if not. */
+    // See implementation at end of file
+    inline void * getBackingID() const;
+
     virtual IOPhysicalAddress getSourceSegment( IOByteCount offset,
 						IOByteCount * length );
     OSMetaClassDeclareReservedUsed(IOMemoryDescriptor, 0);
@@ -665,6 +672,11 @@ public:
      * IOMemoryDescriptor required methods
      */
 
+/*! @function getBackingID
+    @abstract Returns the vm systems unique id for the memory backing this IOGeneralMemoryDescriptor.  See IOMemoryDescriptor::getBackingID for details.
+    @result 0 on non-persistent or non IOGeneralMemoryDescriptors, unique id if not. */
+    void * getBackingID() const;
+
     // Master initaliser
     virtual bool initWithOptions(void *		buffers,
                                  UInt32		count,
@@ -823,5 +835,17 @@ protected:
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// Implementation of inline functions
+void * IOMemoryDescriptor::getBackingID() const
+{
+    const IOGeneralMemoryDescriptor *genMD = (const IOGeneralMemoryDescriptor *)
+	OSDynamicCast(IOGeneralMemoryDescriptor, this);
+
+    if (genMD)
+        return genMD->getBackingID();
+    else
+	return 0;
+}
 
 #endif /* !_IOMEMORYDESCRIPTOR_H */

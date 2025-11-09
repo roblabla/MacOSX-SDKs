@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header		DRSetupPanel.h
+	@abstract	Base class for the DiscRecordingUI setup panels.
+	@discussion	Provides a base framework for handling device
+				selection, media ejection and confirming or cancelling the panel.
+*/
+
 #import <Cocoa/Cocoa.h>
 #import <DiscRecording/DiscRecording.h>
 #import <AvailabilityMacros.h>
@@ -23,7 +29,7 @@
 	@class		DRSetupPanel
 	@discussion	This class is the base class for setup panels in the DiscRecordingUI
 				framework. It provides a base framework for handling device
-				selection, ejection and confirming or cancelling the panel.
+				selection, media ejection and confirming or cancelling the panel.
 */
 @interface DRSetupPanel : NSPanel
 {
@@ -60,16 +66,16 @@
 /*!
 	@method		runSetupPanel
 	@abstract	Displays the receiver and begins its event loop.
-	@discussion	Invokes NSApplication's <b>runModalForWindow:</b> method with self as the argument.
-	@result		Returns NSOKButton (if the user clicks the default button) or
-				NSCancelButton (if the user clicks the Cancel button).
+	@discussion	Invokes NSApplication's @link //apple_ref/occ/instm/NSApplication/runModalForWindow%58 runModalForWindow: @/link method with self as the argument.
+	@result		Returns @link //apple_ref/c/econst/NSOKButton NSOKButton @/link (if the user clicks the default button) or
+				@link //apple_ref/c/econst/NSCancelButton NSCancelButton @/link (if the user clicks the Cancel button).
 */
 - (int) runSetupPanel;
 
 /*!
 	@method		beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo:
 	@abstract	Presents a setup panel as a sheet.
-	@param		owner				The window the erase sheet will be attached to.  If owner is not nil, the setup
+	@param		owner				The window the sheet will be attached to. If owner is not nil, the setup
 									panel slides down as a sheet running as a document modal
 									window. If owner is nil, this is an error.
 	@param		modalDelegate		The modal delegate. The object that implements the didEndSelector.
@@ -80,7 +86,8 @@
 									be dismissed on return from the method. didEndSelector should have 
 									the following signature:
 	
-									- (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo;
+									<tt>- (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo;</tt>
+									
 	@param		contextInfo			Context information to be passed when the selector named by didEndSelector
 									is invoked.
 */
@@ -144,7 +151,7 @@
 				This can include media being ejected, inserted, being used by another
 				application, etc.
 	@param		status		The new device status dictionary.
-	@result		YES if the inserted media is valid for use, NO otherwise.
+	@result		<i>YES</i> if the inserted media is valid for use, <i>NO</i> otherwise.
 */
 - (BOOL) mediaStateChanged:(NSDictionary*)status;
 
@@ -170,14 +177,15 @@ extern NSString* const DRSetupPanelDeviceSelectionChangedNotification	AVAILABLE_
 /*!	
 	@constant	DRSetupPanelSelectedDeviceKey
 	@abstract	Key in the userInfo dictionary when the
-				DRSetupPanelDeviceSelectionChangedNotification is received.
+				@link DRSetupPanelDeviceSelectionChangedNotification DRSetupPanelDeviceSelectionChangedNotification @/link is received.
 */
 extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
-	@class		DRSetupPanelDelegate
-	@abstract	The DRSetupPanelDelegate category defines a set of methods that
-				delegates of the setup panels can implement to control the behavior of the panel.
+	@category		NSObject(DRSetupPanelDelegate)
+	@discussion		This category defines a set of methods that
+					delegates of the setup panels can implement to control the 
+					behavior of the panel.
 */
 @interface NSObject(DRSetupPanelDelegate)
 
@@ -189,7 +197,7 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 				to limit the menu to only devices that are capable of writing DVD-Rs.
 	@param		aPanel		The panel.
 	@param		device		The candidate device.
-	@result		YES if the device is acceptable, NO if not.
+	@result		<i>YES</i> if the device is acceptable, <i>NO</i> if not.
 */
 - (BOOL) setupPanel:(DRSetupPanel*)aPanel deviceCouldBeTarget:(DRDevice*)device;
 
@@ -197,10 +205,10 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 	@method		setupPanelDeviceSelectionChanged:
 	@abstract	Sent by the default notification center when the device selection in the
 				panel has changed.
-	@param		aNotification 	Notification object. This is always DRSetupPanelDeviceSelectionChangedNotification. You can 
-								retrieve the DRSetupPanel object in question by sending <b>object</b> to aNotification. 
+	@param		aNotification 	Notification object. This is always @link DRSetupPanelDeviceSelectionChangedNotification DRSetupPanelDeviceSelectionChangedNotification @/link. You can 
+								retrieve the DRSetupPanel object in question by sending @link //apple_ref/occ/instm/NSNotification/object object @/link to aNotification. 
 								The userInfo dictionary contains the single key DRSetupPanelSelectedDeviceKey whose
-								value is the DRDevice object that is currently selected.
+								value is the @link //apple_ref/occ/cl/DRDevice DRDevice @/link object that is currently selected.
 */
 - (void) setupPanelDeviceSelectionChanged:(NSNotification*)aNotification;
 
@@ -208,7 +216,7 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 	@method		setupPanelShouldHandleMediaReservations:
 	@abstract	This delegate method allows the delegate to control how media reservations are handled.
 	@param		aPanel 	The setup panel sending the message.
-	@result		Return NO to indicate the delegate will handle media reservations. Return YES to
+	@result		Return <i>NO</i> to indicate the delegate will handle media reservations. Return <i>YES</i> to
 				indicate the setupPanel should handle media reservations itself.
 */
 - (BOOL) setupPanelShouldHandleMediaReservations:(DRSetupPanel*)aPanel;
@@ -221,7 +229,7 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 	@param		device 	The device that contains the media being asked about.
 	@param		prompt 	A pointer to storage for an NSString. Pass back an NSString object describing 
 						the media state.
-	@result		Return NO to disable the default button.
+	@result		Return <i>NO</i> to disable the default button.
 */
 - (BOOL) setupPanel:(DRSetupPanel*)aPanel deviceContainsSuitableMedia:(DRDevice*)device promptString:(NSString**)prompt;
 

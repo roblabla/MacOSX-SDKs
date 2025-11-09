@@ -15,12 +15,22 @@
  
 */
 
+/*!	@header 	DRMSF.h
+	@abstract	Minutes/Seconds/Frames handling.
+	@discussion	On CDs, minutes/seconds/frames are used to identify positioning on a disc (which is 
+				most useful on an audio disc), but applies to any position on a disc no matter what type of 
+				data is present.
+				
+				A frame is equivalent to a sector or block in normal disk parlance. 75 frames make up one
+				second, so a 2 second pause (typical pregap size) is 150 frames. 
+*/
+
 #import <Foundation/Foundation.h>
 
 /*!
 	@class		DRMSF
 	@abstract	Representation of a time interval expressed in minutes, seconds and frames. 
-	@discussion	In CD/DVD-land, minutes/seconds/frames are used to identify positioning on a disc (which is 
+	@discussion	On CDs, minutes/seconds/frames are used to identify positioning on a disc (which is 
 				most useful on an audio disc), but applies to any position on a disc no matter what type of 
 				data is present.
 				
@@ -72,7 +82,7 @@
 	@abstract	Returns the number of minutes represented by the receiver.
 	@discussion	If the receiver represents 
 				a non integral number of minutes, only the whole minute value is returned. For example
-				an DRMSF value of 5:30:72 will return 5 from a message to <b>minutes</b>.
+				an DRMSF value of 5:30:72 will return 5 from a message to @link //apple_ref/occ/instm/DRMSF/minutes minutes @/link.
 */
 - (unsigned long) minutes;
 
@@ -81,23 +91,25 @@
 	@abstract	Returns the number of seconds represented by the receiver.
 	@discussion	If the receiver represents 
 				a non integral number of seconds, only the whole second value is returned. For example
-				an DRMSF value of 5:30:72 will return 30 from a message to <b>seconds</b>.
+				an DRMSF value of 5:30:72 will return 30 from a message to @link //apple_ref/occ/instm/DRMSF/seconds seconds @/link.
 */
 - (unsigned long) seconds;
 
 /*!
 	@method		frames
 	@abstract	Returns the number of frames represented by the receiver.
-	@discussion	If the receiver represents 
-				a non integral number of minutes, only the whole minute value is returned. For example
-				an DRMSF value of 5:30:72 will return 5 from a message to <b>minutes</b>.
+	@discussion	This method differs from @link //apple_ref/occ/instm/DFMSF/sectors sectors @/link in that it
+				returns to the caller the number of frames remaining in the current second. For example
+				an DRMSF value of 5:30:72 will return 72 from a message to @link //apple_ref/occ/instm/DRMSF/frames frames @/link.
 */
 - (unsigned long) frames;
 
 /*!
 	@method		sectors
-	@abstract	Returns the number of frames represented by the receiver.
-	@discussion	For example an DRMSF value of 5:30:72 will return 72 from a message to <b>frames</b>.
+	@abstract	Returns the total number of frames/sectors represented by the receiver.
+	@discussion	This method differs from @link //apple_ref/occ/instm/DRMSF/frames frames @/link in that it
+				returns to the caller the total number of frames/sectors represented by the object.
+				For example an DRMSF value of 5:30:72 will return 24822 from a message to @link //apple_ref/occ/instm/DRMSF/sectors sectors @/link.
 */
 - (unsigned long) sectors;
 
@@ -113,13 +125,14 @@
 	@method		msfBySubtracting
 	@abstract	Subtracts an msf to the receiver.
 	@param		msf	The msf to subtract from the receiver
-	@result		a new DRMSF object totalling the difference of the reciever and msf
+	@result		A new DRMSF object totalling the difference of the reciever and msf
 */
 - (DRMSF*) msfBySubtracting:(DRMSF*)msf;
 
 /*!
 	@method		description
 	@abstract	Returns a textual representation of the receiver.
+	@result		NSString containing a textual representation of the object with the standard formatting.
 */
 - (NSString*) description;
 
@@ -127,7 +140,7 @@
 	@method		descriptionWithFormat
 	@abstract	Returns a textual representation of the receiver.
 	@discussion	The format string is very similar to
-				a printf-style format string with %-escaped formatting characters.
+				A printf-style format string with %-escaped formatting characters.
 				
 				<ul>
 				<li>%%	A "%" character</li>
@@ -138,7 +151,7 @@
 				
 				In addition to these formatting characters an optional length specifier can come between then
 				% and the formatting character. This length specifier will force the field in question to 
-				be at least that wide. for example a format specifier of "%02m:%02s" will cause a 
+				be at least that wide. For example a format specifier of "%02m:%02s" will cause a 
 				DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". 
 			
 				A formatter is aware of and respects rounding. If a bit of the msf is no zero, but the format
@@ -147,7 +160,7 @@
 				format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the
 				seconds to the next value
 	@param		format	The format of the description string.
-	@result		a new DRMSF object totalling the difference of the reciever and msf
+	@result		NSString containing a textual representation of the object utilizing the specified format.
 */
 - (NSString*) descriptionWithFormat:(NSString*) format;
 

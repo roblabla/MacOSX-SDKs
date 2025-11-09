@@ -15,18 +15,34 @@
  
 */
 
+/*!
+	@header		DRFolder.h
+	@abstract	Folder objects used in filesystem creation.
+	@discussion	A @link DRFile DRFile @/link object is a subclass of @link //apple_ref/occ/cl/DRFSObject DRFSObject @/link and represents a folder on the 
+				finished disc. @link DRFolder DRFolders @/link can be either a pointer to an existing folder 
+				(residing on a hard drive for example) or can be a "virtual" folder which exists
+				only on the resulting burned disc. 
+				A DRFolder pointing to an existing folder ("real" folder) cannot have it's 
+				contents changed - only those files/folders which are children of the actual folder on disk will 
+				be included on the resulting disc. "Virtual" folders are entirely created 
+				programatically and any virtual folder structure can exist and be burned 
+				to disc. It is possible to convert a "real" folder to a "virtual" folder 
+				using the @link //apple_ref/occ/intm/DRFolder/makeVirtual makeVirtual @/link method.
+*/
+
 #import <Foundation/Foundation.h>
 #import <DiscRecordingContent/DRFSObject.h>
 
 /*!
 	@class		DRFolder
 	@abstract	represents a folder to be created on the disc.
-	@discussion	DRFolders can be either a pointer to a real folder on disk or can be a "virtual" folder. 
-				A DRFolder pointing to a real folder cannot have it's contents changed - only
+	@discussion	DRFolders can be either a pointer to an existing folder on disk or can be a "virtual" folder. 
+				A DRFolder pointing to an existing folder cannot have it's contents changed - only
 				those files/folders which are children of the actual folder on disk will 
 				be included on the resulting disc. "Virtual" folders are entirely created 
 				programatically and any virtual folder structure can exist and be burned 
-				to disc.
+				to disc. It is possible to convert a "real" folder to a "virtual" folder 
+				using the @link //apple_ref/occ/intm/DRFolder/makeVirtual makeVirtual @/link method.
 */
 @interface DRFolder : DRFSObject
 { }
@@ -53,13 +69,19 @@
 
 @end
 
+/*! 
+	@category		DRFolder (VirtualFolders)
+   	@discussion		This category on DRFolder defines methods that allow creation
+   					and manipulation of folders on the output disc that do not exist
+   					on the source media.
+*/
 @interface DRFolder (VirtualFolders)
 
 /*! 
    	@method 		virtualFolderWithName:
    	@abstract		Creates a "virtual" folder object
 	@discussion		Creates and initializes a DRFolder object that will be populated with 
-					specified DRFile and DRFolder objects at runtime.
+					specified @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects at runtime.
    	@param 			name	The name of the folder on the output disc.
     @result  		An autoreleased DRFolder object.
 */
@@ -69,7 +91,7 @@
    	@method 		initWithName:
    	@abstract		Initializes a "virtual" file object
 	@discussion		Initializes a DRFolder object that will be populated with 
-					specified DRFile and DRFolder objects at runtime.
+					specified @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects at runtime.
    	@param 			name	The name of the folder on the output disc.
     @result  		A DRFolder object.
 */
@@ -135,7 +157,7 @@
 								
 					This function only applies to virtual folders.  Real folders
 					are considered "leaf nodes" and should not be passed into this call.
-	@param			An NSArray of DRFile and DRFolder objects.
+	@param			An NSArray of @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects.
 */
 - (NSArray*) children;
 

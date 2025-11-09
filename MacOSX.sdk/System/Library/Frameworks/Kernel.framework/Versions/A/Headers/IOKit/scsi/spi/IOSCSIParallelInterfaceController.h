@@ -47,15 +47,17 @@
 #include <IOKit/IOInterruptEventSource.h>
 #include <IOKit/IOFilterInterruptEventSource.h>
 #include <IOKit/IOTimerEventSource.h>
+#include <IOKit/IOCommandPool.h>
 
+// IOKit SCSI ArchitectureModel Family includes
 #include <IOKit/scsi/SCSITask.h>
-
+#include <IOKit/scsi/SCSICmds_REQUEST_SENSE_Defs.h>
+#include <IOKit/scsi/SCSIPort.h>
 
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 //	Constants
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 
-#define kIOPropertySCSIParallelInterfaceKey		"SCSI Parallel Interface"
 
 #define kIOPropertySCSIDeviceFeaturesKey		"SCSI Device Features"
 #define kIOPropertySCSI_I_T_NexusFeaturesKey	"SCSI I_T Nexus Features"
@@ -71,22 +73,22 @@
 // supports the specified SCSIParallelFeature or false if it does not.
 typedef enum SCSIParallelFeature
 {
-	// The selector for support of Wide Data Transfers.  Only Wide16 is support 
+	// The selector for support of Wide Data Transfers.  Only Wide16 is supported 
 	// as Wide32 has been obsoleted by the SPI-3 specification.
 	kSCSIParallelFeature_WideDataTransfer 					= 0,
 	
 	// The selector for support of Synchronous Data Transfers
 	kSCSIParallelFeature_SynchronousDataTransfer 			= 1,
-
+	
 	// The selector for support of Quick Arbitration and Selection (QAS)
 	kSCSIParallelFeature_QuickArbitrationAndSelection 		= 2,
-
+	
 	// The selector for support of Double Transition (DT) data transfers.
 	kSCSIParallelFeature_DoubleTransitionDataTransfers 		= 3,
 	
 	// The selector for SPI Information Unit (IU) transfers
 	kSCSIParallelFeature_InformationUnitTransfers 			= 4,
-
+	
 	// Since the Feature selectors are zero base, this will always have the 
 	// correct total.
 	kSCSIParallelFeature_TotalFeatureCount	
@@ -102,7 +104,7 @@ typedef enum SCSIParallelFeatureRequest
 	// This selector indicates that the controller
 	// should attempt negotiation for the feature
 	kSCSIParallelFeature_AttemptNegotiation 	= 1,
-
+	
 	// This selector indicates that the controller
 	// should clear any negotiation for the feature
 	kSCSIParallelFeature_ClearNegotiation 		= 2
@@ -140,7 +142,7 @@ enum SCSIParallelMessages
 	kSCSIParallelMessage_WIDE_DATA_TRANSFER_REQUEST			= 0x03,
 	kSCSIParallelMessage_PARALLEL_PROTOCOL_REQUEST			= 0x04,
 	// Reserved												= 0x05 through 0xFF
-
+	
 	// Task Attribute Message Codes
 	kSCSIParallelMessage_ACA								= 0x24,
 	kSCSIParallelMessage_HEAD_OF_QUEUE						= 0x21,
@@ -249,7 +251,7 @@ public:
 		for a specified target and controller task identifier
 		@param theTarget is the Target that the task .
 		@param theIdentifier is the controller task identifier set using the SCSI
-		Parallel Task's SetControllerTaskIdentifer method.
+		Parallel Task's SetControllerTaskIdentifier method.
 		@result returns a valid SCSIParallelTaskIdentifier or NULL if none 
 		found.
 	*/
@@ -266,7 +268,7 @@ public:
 		a SCSIParallelTask for execution.
 		@param parallelRequest is a reference to the SCSIParallelTaskIdentifier
 		to be executed.
-		@result is an appropiate SCSIServiceResponse which are defined in the
+		@result is an appropriate SCSIServiceResponse which are defined in the
 		file <IOKit/scsi/SCSITask.h>.
 	*/
 	
@@ -277,7 +279,7 @@ public:
 	
 	/*!
 		@function ReportHBAHighestLogicalUnitNumber
-		@abstract Gets the Highest Logical Unit Number
+		@abstract Gets the Highest Logical Unit Number.
 		@discussion	This method is used to query the HBA child class to 
 		determine what the highest Logical Unit Number that the controller can 
 		address.
@@ -301,7 +303,7 @@ public:
 	
 	/*!
 		@function InitializeTargetForID
-		@abstract Called to initialized a target device.
+		@abstract Called to initialize a target device.
 		@discussion	This method will be called to initialize a target device in 
 		a single-threaded manner.  The HBA can use this method to probe the 
 		target or do anything else necessary before the device object is 
@@ -311,7 +313,7 @@ public:
 	
 	virtual bool	InitializeTargetForID (  
 							SCSITargetIdentifier 		targetID ) = 0;
-
+	
 	// The SCSI Task Management Functions as defined in the SCSI Architecture
 	// Model - 2 (SAM-2) specification.  These are used by the client to request
 	// the specified function.  The controller can complete these immmediately 
@@ -324,7 +326,7 @@ public:
 							SCSITargetIdentifier 		theT,
 							SCSILogicalUnitNumber		theL,
 							SCSITaggedTaskIdentifier	theQ ) = 0;
-
+	
 	virtual	SCSIServiceResponse AbortTaskSetRequest (
 							SCSITargetIdentifier 		theT,
 							SCSILogicalUnitNumber		theL ) = 0;
@@ -344,8 +346,27 @@ public:
 	virtual	SCSIServiceResponse TargetResetRequest (
 							SCSITargetIdentifier 		theT ) = 0;
 	
+	
+
+	/*!
+		@function DoesHBAPerformAutoSense
+		@abstract Queries the HBA child class to determine if it automatically
+		performs AutoSense and provides AutoSense data for each I/O. If the HBA
+		allocates space for AutoSense in its HBA specific data region on a per
+		task basis, the HBA should respond true.
+		@discussion	Queries the HBA child class to determine if it automatically
+		performs AutoSense and provides AutoSense data for each I/O. If the HBA
+		allocates space for AutoSense in its HBA specific data region on a per
+		task basis, the HBA should respond true.
+		@result Return true if HBA performs AutoSense into its own private data
+		buffer.
+	*/
+	
+	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 1 );
+	
+	virtual bool	DoesHBAPerformAutoSense ( void );
+	
 	// Padding for the Client API
-	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 2 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 3 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 4 );
@@ -370,22 +391,51 @@ protected:
 		@abstract Method to perform device creation.
 		@discussion	For HBA child classes that report true to the 
 		DoesHBAPerformDeviceManagement method, the child class will be 
-		responsible for all device managment by using these methods;
+		responsible for all device management by using these methods;
 		otherwise, the superclass will be responsible for all device management.
 		This method must be used to perform SCSI Parallel Device creation and 
 		cannot be overridden.
 		@param  targetID SCSIDeviceIdentifier of desired targetID.
-		@result returns true if successful
+		@result returns true if successful.
 	*/
 	
 	bool	CreateTargetForID ( SCSIDeviceIdentifier targetID );
+	
+	 /*!
+		@function CreateTargetForID
+		@abstract Method to perform device creation.
+		@discussion	For HBA child classes that report true to the
+		DoesHBAPerformDeviceManagement method, the child class will be
+		responsible for all device management by using these methods;
+		otherwise, the superclass will be responsible for all device management.
+		This method must be used to perform SCSI Parallel Device creation and
+		cannot be overridden.
+		@param  targetID SCSIDeviceIdentifier of desired targetID.
+		@param	properties A dictionary of properties to associate with the device
+				upon creation. The list of valid property keys is as follows:
+				kIOPropertyFibreChannelNodeWorldWideNameKey,
+				kIOPropertyFibreChannelPortWorldWideNameKey,
+				kIOPropertyFibreChannelAddressIdentifierKey, and
+				kIOPropertyFibreChannelALPAKey.
+				These keys are defined in
+				<IOKit/storage/IOStorageProtocolCharacteristics.h> and the values
+				associated with these keys must be of the proper type/size,
+				or the target creation will not succeed.
+		NB: Correct FibreChannel multipathing requires the kIOPropertyFibreChannelNodeWorldWideNameKey
+		property be passed in and this method used to create the target device. The other keys
+		are optional upon creation and may be added later using SetTargetProperty().
+		@result returns true if successful.
+	*/
+	
+	bool	CreateTargetForID ( SCSIDeviceIdentifier 	targetID,
+								OSDictionary * 			properties );
 	
 	 /*!
 		@function DestroyTargetForID
 		@abstract Method to perform device destruction.
 		@discussion	For HBA child classes that report true to the 
 		DoesHBAPerformDeviceManagement method, the child class will be 
-		responsible for all device managment by using these methods; otherwise, 
+		responsible for all device management by using these methods; otherwise, 
 		the superclass will be responsible for all device management.
 		This method must be used to perform SCSI Parallel Device destruction and
 		cannot be overridden.
@@ -396,7 +446,7 @@ protected:
 	
 	/*!
 		@function GetTargetForID
-		@abstract Accessor for Getting pointer to IOSCSIParallelInterfaceDevice.
+		@abstract Accessor for getting pointer to IOSCSIParallelInterfaceDevice.
 		@param targetID SCSIDeviceIdentifier of desired targetID.
 		@result returns pointer to IOSCSIParallelInterfaceDevice or NULL if not 
 		found.
@@ -405,7 +455,75 @@ protected:
 	IOSCSIParallelInterfaceDevice *	GetTargetForID ( 
 							SCSIDeviceIdentifier 		targetID ); 
 	
-	// ---- Methods to retrieve the HBA specifics. ----
+	/*!
+		@function SetTargetProperty
+		@abstract Accessor for setting a property for a specific target.
+		@param device A pointer to a valid IOSCSIParallelInterfaceDevice.
+		@param key A pointer to a valid OSString object which represents the key.
+		A list of valid keys includes:
+			kIOPropertyFibreChannelNodeWorldWideNameKey,
+			kIOPropertyFibreChannelPortWorldWideNameKey,
+			kIOPropertyFibreChannelAddressIdentifierKey, and
+			kIOPropertyFibreChannelALPAKey.
+		NB: These keys and their values are described in <IOKit/storage/IOStorageProtocolCharacteristics.h>
+		@param value Pointer to an OSObject (one of type OSData, OSString, etc.)
+		which represents the value for the property. The value must be of the proper type
+		and size for the specified key.
+		@result returns true if identifier was properly set, otherwise false. 
+	*/
+	
+	bool	SetTargetProperty ( SCSIDeviceIdentifier 		targetID,
+								const char *		 		key,
+								OSObject *					value );
+
+	/*!
+		@function RemoveTargetProperty
+		@abstract Accessor for removing a property from a specific target.
+		@param device A pointer to a valid IOSCSIParallelInterfaceDevice.
+		@param key A pointer to a valid OSString object which represents the key.
+	*/
+	
+	void	RemoveTargetProperty ( SCSIDeviceIdentifier 		targetID,
+								   const char *		 			key );
+	
+	// ---- Methods for HBA specifics. ----
+	
+	/*!
+		@function SetHBAProperty
+		@abstract Accessor for setting a property for this object.
+		@param key A pointer to a valid OSString object which represents the key.
+		A list of valid keys includes:
+			kIOPropertyVendorNameKey,
+			kIOPropertyProductNameKey,
+			kIOPropertyProductRevisionLevelKey,
+			kIOPropertyPortDescriptionKey,
+			kIOPropertyPortSpeedKey,
+			kIOPropertyPortTopologyKey,
+			kIOPropertySCSIParallelSignalingTypeKey,
+			kIOPropertyFibreChannelCableDescriptionKey,
+			kIOPropertyFibreChannelNodeWorldWideNameKey,
+			kIOPropertyFibreChannelPortWorldWideNameKey,
+			kIOPropertyFibreChannelAddressIdentifierKey, and
+			kIOPropertyFibreChannelALPAKey.
+		NB: These keys and their values are described in <IOKit/storage/IOStorageDeviceCharacteristics.h>
+		and <IOKit/storage/IOStorageProtocolCharacteristics.h>
+		@param value Pointer to an OSObject (one of type OSData, OSString, etc.)
+		which represents the value for the property. The value must be of the proper type,
+		and/or size for the specified key.
+		@result returns true if identifier was properly set, otherwise false. 
+	*/
+	
+	bool	SetHBAProperty ( const char *	key,
+							 OSObject *	 	value );
+
+	/*!
+		@function RemoveHBAProperty
+		@abstract Accessor for removing a property for this object.
+		@param key A pointer to a valid OSString object which represents the key.
+		See the SetHBAProperty() method for a list of valid keys.
+	*/
+	
+	void	RemoveHBAProperty ( const char * key );
 	
 	// These methods will not be called before the InitializeController call,
 	// and will not be called after the TerminateController call.  But in the
@@ -416,9 +534,9 @@ protected:
 	
 	/*!
 		@function ReportInitiatorIdentifier
-		@abstract Get the SCSI Device Identifer for the HBA.
+		@abstract Get the SCSI Device Identifier for the HBA.
 		@discussion This method will be called to determine the SCSI Device 
-		Identifer that the Initiator has assigned for this HBA.
+		Identifier that the Initiator has assigned for this HBA.
 		@result returns SCSIInitiatorIdentifier.
 	*/
 	
@@ -426,9 +544,9 @@ protected:
 	
 	/*!
 		@function ReportHighestSupportedDeviceID
-		@abstract Get the highest supported SCSI Device Identifer.
+		@abstract Get the highest supported SCSI Device Identifier.
 		@discussion This method will be called to determine the value of the 
-		highest SCSI Device Identifer supported by the HBA. This value will be 
+		highest SCSI Device Identifier supported by the HBA. This value will be 
 		used to determine the last ID to process.
 		@result returns highest SCSIDeviceIdentifier
 	*/
@@ -542,7 +660,7 @@ protected:
 	virtual void	StopController ( void ) = 0;
 	
 	// ---- Suspend and Resume Methods for the subclass ----
-
+	
 	/*!
 		@function SuspendServices
 		@abstract Called to suspend controller services
@@ -570,7 +688,7 @@ protected:
 	/*!
 		@function HandleInterruptRequest
 		@abstract Handle Interrupt Request
-		@discussion The HandleInterruptRequest is used to notifiy an HBA 
+		@discussion The HandleInterruptRequest is used to notify an HBA 
 		specific subclass that an interrupt request needs to be serviced. It is 
 		called on the workloop (it holds the gate) at secondary interrupt level.
 	*/
@@ -585,7 +703,7 @@ protected:
 	*/
 	
 	void	EnableInterrupt ( void );
-
+	
 	/*!
 		@function DisableInterrupt
 		@abstract Disable Interrupt
@@ -594,6 +712,25 @@ protected:
 	*/
 	
 	void	DisableInterrupt ( void );
+	
+	/*!
+		@function SignalInterrupt
+		@abstract Signals that an interrupt has occurred.
+		@discussion Subclasses of IOSCSIParallelInterfaceController
+		should call this method in order to get the secondary interrupt
+		thread scheduled if and only if they will be returning false from
+		their overriden FilterInterruptRequest() method. See the
+		discussion for the FilterInterruptRequest() method for more
+		details.
+		
+		NOTE: This method should only be called from within the
+		FilterInterruptRequest() method and at no other time.
+		
+		Available in 10.3.3 or later.
+		
+	*/
+	
+	void	SignalInterrupt ( void );
 	
 	/*!
 		@function ProcessParallelTask
@@ -618,19 +755,19 @@ protected:
 		@param completionStatus The status of the SCSI bus.
 		@param serviceResponse (see <IOKit/scsi/SCSITask.h>)
 	*/
-
+	
 	void	CompleteParallelTask (
 						SCSIParallelTaskIdentifier	parallelRequest,
 						SCSITaskStatus 				completionStatus,
 						SCSIServiceResponse 		serviceResponse );
 	
-
+	
 	// Completion routines for the SCSI Task Management functions as described
 	// in the SCSI ArchitectureModel - 2 (SAM-2) specification.  Each of these
 	// correspond to a client request for the specific Task Management functions.
-	// If the Controller Child Class completed the rquest by returning a 
+	// If the Controller Child Class completed the request by returning a 
 	// SCSIServiceResponse of anything other than kSCSIServiceResponse_Request_In_Process,
-	// then the controller class does not need to call the completione memeber routine.
+	// then the controller class does not need to call the completion member routine.
 	// If the controller did not complete the request immediately, then it will
 	// need to call the appropriate completion member routine listed here.
 	void	CompleteAbortTask ( 	
@@ -638,7 +775,7 @@ protected:
 						SCSILogicalUnitNumber		theL,
 						SCSITaggedTaskIdentifier	theQ,
 						SCSIServiceResponse 		serviceResponse );
-
+	
 	void 	CompleteAbortTaskSet (
 						SCSITargetIdentifier 		theT,
 						SCSILogicalUnitNumber		theL,
@@ -671,6 +808,24 @@ protected:
 	*/
 	
 	void	NotifyClientsOfBusReset ( void );
+	
+	/*!
+		@function NotifyClientsOfPortStatusChange
+		@abstract Method called to notify clients of port status change events.
+		@discussion This method is used by the HBA child class to inform the 
+		parent class and any clients that a port has changed status.
+	*/
+	
+	void	NotifyClientsOfPortStatusChange ( SCSIPortStatus newStatus );
+	
+	/*!
+		@function GetSCSIDomainIdentifier
+		@abstract Accessor method to get the SCSI Domain Identifier.
+		@discussion Accessor method to get the SCSI Domain Identifier.
+		@result returns SCSI Domain Identifier.
+	*/
+	
+	SInt32	GetSCSIDomainIdentifier ( void );
 	
 	/*!
 		@function GetProvider
@@ -736,7 +891,7 @@ protected:
 	// ---- Methods for Accessing data in the client's SCSI Task Object ----	
 	// Method to retrieve the LUN that identifies the Logical Unit whose Task
 	// Set to which this task is to be added.
-
+	
 	/*!
 		@function GetLogicalUnitNumber
 		@abstract Method to get the logical unit number associated with a 
@@ -761,7 +916,7 @@ protected:
 	
 	SCSITaggedTaskIdentifier GetTaggedTaskIdentifier (
 							SCSIParallelTaskIdentifier	parallelTask );
-
+	
 	/*!
 		@function GetTaskAttribute
 		@abstract Method to retrieve the SCSI Task Attribute of the task 
@@ -771,7 +926,7 @@ protected:
 	
 	SCSITaskAttribute		GetTaskAttribute (
 							SCSIParallelTaskIdentifier	parallelTask );
-
+	
 	/*!
 		@function GetCommandDescriptorBlockSize
 		@abstract Method to retrieve the size of the SCSI Command Descriptor 
@@ -934,7 +1089,7 @@ protected:
  	UInt8	GetAutoSenseDataSize ( 
  							SCSIParallelTaskIdentifier 	parallelTask );
  	
-
+	
 	/*!
 		@function GetSCSIParallelFeatureNegotiation
 		@abstract Method to retrieve the requested value for negotiation of the.
@@ -1009,12 +1164,12 @@ protected:
 							SCSIParallelTaskIdentifier 	parallelTask);
 	
 	// Controller Task Identifier related member routines
-
+	
 	/*!
 		@function SetControllerTaskIdentifier
 		@abstract Method to set the Controller Task Identifier.
 		@discussion This method allows the Controller Child Class
-		driver to set a unique identifer to associate with the specified
+		driver to set a unique identifier to associate with the specified
 		SCSI Parallel Task.  This identifier is designed to be used by
 		controllers that do not have access to the LUN and Tag information
 		when notified by the HBA that a request has completed.
@@ -1031,8 +1186,8 @@ protected:
 	
 	UInt64	GetControllerTaskIdentifier (
 							SCSIParallelTaskIdentifier 	parallelTask);
-
-
+	
+	
 	// The HBA Data related fields
 	
 	/*!
@@ -1051,7 +1206,7 @@ protected:
 		@discussion Method to retrieve the HBA Data pointer.
 		@param parallelTask A valid SCSIParallelTaskIdentifier.
 		@result returns pointer to buffer for HBA specific data, NULL if 
-		none found or GetHBADataSize is zero.
+		none found or GetHBADataSize() returns zero.
 	*/
 	
 	void *	GetHBADataPointer ( SCSIParallelTaskIdentifier 	parallelTask );
@@ -1063,8 +1218,8 @@ protected:
 		@discussion Method to retrieve the IOMemoryDescriptor associated with
 		the HBA Data.
 		@param parallelTask A valid SCSIParallelTaskIdentifier.
-		@result returns pointer to IOMemoryDescriptor that wraps the HBA 
-		specific data buffer, NULL if none found or GetHBADataSize is zero.
+		@result returns pointer to an IOMemoryDescriptor that wraps the HBA 
+		specific data buffer, NULL if none found or GetHBADataSize() returns zero.
 	*/
 	
 	IOMemoryDescriptor *	GetHBADataDescriptor (
@@ -1095,12 +1250,12 @@ protected:
 	
 	void *	GetHBATargetDataPointer ( SCSITargetIdentifier 	targetID );
 	
-
+	
 #if 0
 #pragma mark -
 #pragma mark Additional Child Class APIs
 #endif
-
+	
 	
 	// ---- Timeout Related Methods ----
 	
@@ -1124,7 +1279,8 @@ protected:
 		@abstract Method to handle command timeouts.
 		@discussion Method to handle command timeouts. This should
 		be overridden by the child class in order to clean up HBA
-		specific structures after a timeout has occurred.
+		specific structures after a timeout has occurred. This method
+		is called on the workloop (it holds the gate).
 		@param parallelRequest A valid SCSIParallelTaskIdentifier.
 	*/
 	
@@ -1132,19 +1288,57 @@ protected:
 	
 	virtual void		HandleTimeout (
 							SCSIParallelTaskIdentifier parallelRequest );
-
-
-	// ---- Filter Interrupt methods ----
+	
+	
+	// ---- Filter Interrupt ----
 	
 	/*!
 		@function FilterInterruptRequest
 		@abstract Filter method called at primary interrupt time.
 		@discussion Filter method called at primary interrupt time.
 		This should only be overridden by the child class in order
-		to determine if an interrupt occurred for this controller.
+		to determine if an interrupt occurred for this controller instance.
 		Since all work occurs at primary interrupt time, this routine
 		should be quick and efficient and defer as much processing as
 		possible to the HandleInterruptRequest() method.
+		
+		NOTE: Unlike the HandleInterruptRequest() and HandleTimeout()
+		methods, FilterInterruptRequest() is NOT called with the
+		workloop lock held.
+		
+		If the value returned by FilterInterruptRequest() is true, the
+		secondary interrupt thread will be scheduled and the hardware
+		interrupt line will be disabled. If the controller instance shares
+		that interrupt line with other devices, it can cause large
+		interrupt latencies. If the controller instance can disable the
+		interrupt in the chip itself, the following can be done to reduce
+		interrupt latencies:
+		
+		- Interrupt occurs
+		- FilterInterruptRequest() method is called.
+			- If the interrupt is not for this controller, return false
+			  immediately.
+			- If the interrupt is for this controller, and the controller
+			  can disable interrupts for this chip, the controller should
+			  disable the interrupts for this chip, call SignalInterrupt(),
+			  and return false. This causes the secondary interrupt thread
+			  to get scheduled, yet does not disable the interrupt line for
+			  all devices tied to that interrupt. This effectively allows
+			  other devices to process their interrrupts, thus reducing
+			  interrupt latency for those devices.
+		- HandleInterruptRequest() method is called.
+			- Controller processes interrupt and completes I/O requests.
+			- Controller re-enables interrupts for the device.
+		
+		NOTE: If you use this approach, the interrupting condition MUST be
+		cleared from the hardware, otherwise an infinite process interrupt
+		loop will occur.
+		
+		If the controller cannot disable interrupts on the chip, it should
+		simply return true if an interrupt has occurred for its device.
+		
+		@result True if the hardware interrupt line should be disabled,
+		otherwise false.
 	*/
 	
 	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 10 );
@@ -1166,17 +1360,17 @@ protected:
 #endif
 	
 private:
-
+	
 	// binary compatibility instance variable expansion
 	struct ExpansionData { };
 	ExpansionData * fIOSCSIParallelInterfaceControllerExpansionData;
 	
 	IOService *					fProvider;
 	OSSet *						fClients;
-
+	
 	static SInt32				fSCSIParallelDomainCount;
 	SInt32						fSCSIDomainIdentifier;
-		
+	
 	// The HBA attributes
 	SCSIInitiatorIdentifier		fInitiatorIdentifier;
 	
@@ -1225,7 +1419,7 @@ private:
 	// to a device object that represents the beginning of a linked list of
 	// device objects.  By using an array of linked lists, the traversal time
 	// to find an object on a bus that supports a large number of devices, such
-	// as Fibre channel, will be significantly lower that having to walk a list 
+	// as Fibre Channel, will be significantly lower than having to walk a list 
 	// that is comprised of all devices on the bus.  For parallel wide and 
 	// narrow busses, which support 16 and 8 devices respectively, this will act 
 	// like a simple array of device objects.
@@ -1274,6 +1468,7 @@ private:
 
 	virtual bool	handleIsOpen ( 
 							const IOService * 			client ) const;
+	
 };
 
 

@@ -45,6 +45,8 @@
     
     IOBluetoothObjectID								mObjectID;
     
+    BluetoothRFCOMMChannelID                                                    mChannelID;
+    
     void											*_mReserved;
 }
 

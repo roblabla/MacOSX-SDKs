@@ -15,6 +15,54 @@
  
 */
 
+/*!
+	@header		DRErase.h
+	@abstract	Perform and monitor the erasing a rewritable CD or DVD disc.
+	@discussion	Each time you want to erase a disc, an instance of DRErase needs to be created.
+	
+				When an instance is created, you pass in an instance of @link //apple_ref/occ/cl/DRDevice DRDevice @/link to let the object 
+				know what device to erase. This object is retained for the life of the DRErase instance. 
+			
+				A DRErase object will send out notifications through the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link mechanism to 
+				broadcast the erase state to any interested observers. However, if for some reason you don't want
+				to use notifications, you can poll the erase object at any time for the current status using
+				@link //apple_ref/occ/instm/DRErase/status status @/link. This is not recommended in any 
+				application using a run loop, because it involves polling.
+
+				Here's an example that shows you how to use this class:
+				
+				<code>
+				- (void) doErase
+				{
+					DRDevice*       device;
+					DRErase*        erase;
+				
+					<i>...determine correct device to erase...</i>
+					
+					erase = [[DRErase alloc] initWithDevice:device];
+					
+					// we'll do a quick erase. It's typically all that's needed.
+					[erase setEraseType:DREraseTypeQuick];
+					
+					// register to receive notification about the erase status.
+					[[DRNotificationCenter currentRunLoopCenter] addObserver:self
+																	selector:&#x40;selector(eraseNotification:)
+																		name:DREraseStatusChangedNotification 
+																	  object:erase];
+								   
+					 // start the erase                            
+					 [erase start];
+				}
+				
+				- (void) eraseNotification:(NSNotification*)notification
+				{
+					DRErase*        erase = [notification object];
+					NSDictionary*   status = [notification userInfo];
+					
+					<i>...do what you wish with the notification...</i>
+				}
+				</code>
+*/
 #import <Foundation/Foundation.h>
 
 #import <DiscRecordingEngine/DRCoreErase.h>
@@ -28,13 +76,14 @@
 	@abstract	A DRErase object handles the process of erasing a rewritable CD or DVD disc.
 	@discussion	Each time you want to erase a disc, an instance of this class needs to be created.
 	
-				When an instance is created, you pass in an instance of DRDevice to let the object 
+				When an instance is created, you pass in an instance of @link //apple_ref/occ/cl/DRDevice DRDevice @/link to let the object 
 				know what device to erase. This object is retained for the life of the DRErase instance. 
 			
-				A DRErase object will send out notifications through the DRNotificationCenter mechanism to 
+				A DRErase object will send out notifications through the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link mechanism to 
 				broadcast the erase state to any interested observers. However, if for some reason you don't want
 				to use notifications, you can poll the erase object at any time for the current status using
-				<b>status</b>. This is not recommended in any application using a run loop, because it involves polling.
+				@link //apple_ref/occ/instm/DRErase/status status @/link. This is not recommended in any 
+				application using a run loop, because it involves polling.
 
 				Here's an example that shows you how to use this class:
 				
@@ -107,7 +156,7 @@
 	@method			status
 	@abstract		Returns a dictionary containing the status of the erase.
 	@discussion		The same dictionary is returned 
-					through the DREraseStatusChangedNotification notification.
+					through the @link //apple_ref/occ/data/DREraseStatusChangedNotification DREraseStatusChangedNotification @/link notification.
 */
 - (NSDictionary*) status;
 
@@ -134,6 +183,11 @@
 
 @end
 
+/*! 
+	@category		DRErase (PropertyConvenienceMethods)
+   	@discussion		This category on DRErase defines methods that make setting and retrieving
+   					the various DRErase properties easier.
+*/
 @interface DRErase (PropertyConvenienceMethods)
 
 /*!
@@ -164,7 +218,8 @@ extern NSString* const DREraseTypeKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATE
 
 /*" 
 	@const		DREraseTypeQuick
-	@discussion	Perform a quick erase, doing the minimal amount of work to make the 
+	@discussion	An NString value for the @link DREraseTypeKey DREraseTypeKey @/link. 
+				Configures the erase object to perform a quick erase, doing the minimal amount of work to make the 
 				disc appear blank. This operation typically takes only a minute or two. 
 				This is the default for an erase object.
 */
@@ -172,7 +227,8 @@ extern NSString* const DREraseTypeQuick			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LA
 
 /*!	
 	@const		DREraseTypeComplete	
-	@discussion	Perform a complete erase, erasing every byte on the
+	@discussion	An NString value for the @link DREraseTypeKey DREraseTypeKey @/link. 
+				Configures the erase object to perform a complete erase, erasing every byte on the
 				disk. This operation is slow (on the order of 30 minutes) to complete.
 */
 extern NSString* const DREraseTypeComplete		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -182,7 +238,7 @@ extern NSString* const DREraseTypeComplete		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_
 #endif
 /*
 	@const		DREraseStatusChangedNotification
-	@discussion	Posted by a DRNotificationCenter when the status of the
+	@discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when the status of the
 				erase operation has changed. 
 				
 				 The object associated with this notification

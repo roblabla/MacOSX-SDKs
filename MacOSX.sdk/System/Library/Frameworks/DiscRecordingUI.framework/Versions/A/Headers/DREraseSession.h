@@ -16,6 +16,12 @@
  
 */
 
+/*!	
+	@header		DREraseSession.h
+	@abstract	Erase configuration and progress user interface for Carbon applications
+	@discussion	
+*/
+
 #ifndef _H_DREraseSession
 #define _H_DREraseSession
 
@@ -64,9 +70,9 @@ DREraseSessionCreate()										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	@function	DREraseSessionSetErase
 	@abstract	Sets the erase object for this session.
 	@param		eraseSession	The erase session. If this parameter is not a valid
-								DREraseSessionRef, the behavior is undefined. 
+								@link DREraseSessionRef DREraseSessionRef @/link, the behavior is undefined. 
 	@param		erase			The erase to use for the session. If this parameter is not a valid
-								DREraseRef, the behavior is undefined. 
+								@link //apple_ref/c/tdef/DREraseRef DREraseRef @/link, the behavior is undefined. 
 */
 extern void
 DREraseSessionSetErase(
@@ -77,9 +83,9 @@ DREraseSessionSetErase(
 	@function	DREraseSessionGetErase
 	@abstract	Returns the erase object for this session.
 	@param		eraseSession	The erase session. If this parameter is not a valid
-								DREraseSessionRef, the behavior is undefined. 
+								@link DREraseSessionRef DREraseSessionRef @/link, the behavior is undefined. 
 	@result		A reference to the erase object for the session. If the setup dialog has not been run or
-				a burn object has not been set with DREraseSessionSetErase, this function returns NULL.
+				a burn object has not been set with @link DREraseSessionSetErase DREraseSessionSetErase @/link, this function returns <i>NULL</i>.
 */
 extern DREraseRef
 DREraseSessionGetErase(
@@ -106,6 +112,7 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DREraseSessionSetupDialogOptions struct version
+	@discussion	
 */
 enum {
 	kEraseSessionSetupDialogOptionsCurrentVersion      = 1
@@ -113,6 +120,7 @@ enum {
 
 /*!
 	@enum		Erase Setup Dialog Option Flags
+	@discussion	Flags used to configure the erase setup dialog behavior
 	@constant	kEraseSessionSetupDialogDefaultOptions	Use defaults for all the options
 	@constant	kEraseSessionSetupDialogDontHandleReservations	Session does not handle media reservations. Application handles them itself
 */
@@ -130,8 +138,8 @@ typedef UInt32 DREraseSessionSetupDialogOptionFlags;
 	@struct 	DREraseSessionSetupDialogOptions
 	@abstract	Options passed into the setup dialog to configure it.
 	@field		version				Identifies the version of this structure.
-	@field		dialogOptionFlags	One of several constants defined by the DREraseSessionSetupDialogOptionFlags 
-									data type as described in “Erase Setup Dialog Option Flags”.
+	@field		dialogOptionFlags	One of several constants defined by the @link DREraseSessionSetupDialogOptionFlags DREraseSessionSetupDialogOptionFlags @/link 
+									data type as described in @link //apple_ref/c/tag/Erase%32Setup%32Dialog%32Option%32Flags Erase Setup Dialog Option Flags @/link.
 */
 struct DREraseSessionSetupDialogOptions {
 	UInt32										version;
@@ -145,6 +153,7 @@ typedef struct DREraseSessionSetupDialogOptions	DREraseSessionSetupDialogOptions
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DREraseSessionSetupCallbacks struct version
+	@discussion	
 */
 enum {
 	kDREraseSessionSetupCallbacksCurrentVersion	= 1
@@ -155,7 +164,7 @@ enum {
 	@abstract	Callback used for checking the suitability of a device.
 	@discussion This callback is called whenever a new device appears. It's purpose is to allow the
 				application to filter out devices which do not support the operation to be performed. for
-				example, a device may filter our CD-R/W's if it is a DVD creation appliacation.
+				example, a device may filter our CD-R/Ws if it is a DVD creation appliacation.
 	@param		eraseSession	The erase session object.
 	@param		device			The device to examine.
 	@result		A Boolean value indicating the suitability of the device.
@@ -188,9 +197,9 @@ typedef CALLBACK_API( void , DREraseSessionDeviceSelectionNotificationProcPtr )(
 	@struct		DREraseSessionSetupCallbacks
 	@abstract	Callback functions passed to the setup dialog.
 	@field		version					Identifies the version of this structure.
-	@field		deviceShouldBeTarget	Pointer to a DREraseSessionDeviceCheckProcPtr. The value of this field may be NULL.
-	@field		containsSuitableMedia	Pointer to a DREraseSessionMediaCheckProcPtr. The value of this field may be NULL.
-	@field		deviceSelectionChanged	Pointer to a DREraseSessionDeviceSelectionNotificationProcPtr. The value of this field may be NULL.
+	@field		deviceShouldBeTarget	Pointer to a DREraseSessionDeviceCheckProcPtr. The value of this field may be <i>NULL</i>.
+	@field		containsSuitableMedia	Pointer to a DREraseSessionMediaCheckProcPtr. The value of this field may be <i>NULL</i>.
+	@field		deviceSelectionChanged	Pointer to a DREraseSessionDeviceSelectionNotificationProcPtr. The value of this field may be <i>NULL</i>.
 */
 struct DREraseSessionSetupCallbacks {
 	UInt32												version;
@@ -208,12 +217,12 @@ typedef struct DREraseSessionSetupCallbacks	DREraseSessionSetupCallbacks;
 				settings. These include: the device to use and the type of erase to perform.
 				and others. The function does not return until the user dismissed the dialog.
 	@param		eraseSession	The erase session object
-	@param		options			A pointer to a structure of type DREraseSessionSetupDialogOptions. 
-								This pointer may be NULL if no custom configuration is required.
-	@param		setupCallbacks	A pointer to a structure of type DREraseSessionSetupCallbacks. 
-								This pointer may be NULL if no custom behavior is desired.
+	@param		options			A pointer to a structure of type @link DREraseSessionSetupDialogOptions DREraseSessionSetupDialogOptions @/link. 
+								This pointer may be <i>NULL</i> if no custom configuration is required.
+	@param		setupCallbacks	A pointer to a structure of type @link DREraseSessionSetupCallbacks DREraseSessionSetupCallbacks @/link. 
+								This pointer may be <i>NULL</i> if no custom behavior is desired.
 	@param		resultCode		A pointer to a SInt8 to hold the result code for the setup dialog.
-								May be one of the constants defined by "Erase Session Dalog Result Codes".
+								May be one of the constants defined by @link //apple_ref/c/tag/Erase%32Session%32Dialog%32Result%32Codes Erase Session Dialog Result Codes @/link.
 	@result		An OSStatus.
 */
 extern SInt8
@@ -228,6 +237,7 @@ DREraseSessionSetupDialog(
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		kDREraseProgressSetupCallbacksCurrentVersion struct version
+	@discussion	
 */
 enum {
 	kDREraseProgressSetupCallbacksCurrentVersion	= 1
@@ -244,7 +254,7 @@ typedef CALLBACK_API( void , DREraseSessionProgressBeginNotificationProcPtr )(DR
 
 /*!
 	@typedef	DREraseSessionProgressFinishNotificationProcPtr
-	@abstract	Callback notifying the application the erase progress is has finished.
+	@abstract	Callback notifying the application the erase progress has finished.
 	@discussion	This callback is called when the erase progress has been removed from view. This allows the application
 				to do things such as re-enable the quit menu item, or the close menu for a document window.
 	@param		eraseSession	The erase session object.
@@ -252,8 +262,8 @@ typedef CALLBACK_API( void , DREraseSessionProgressBeginNotificationProcPtr )(DR
 typedef CALLBACK_API( void , DREraseSessionProgressFinishNotificationProcPtr )(DREraseSessionRef eraseSession);
 
 /*!
-	@typedef	DREraseSessionProgressFinishNotificationProcPtr
-	@abstract	Callback notifying the application the erase progress is has finished.
+	@typedef	DREraseSessionEraseCompleteProcPtr
+	@abstract	Callback notifying the application the erase has finished.
 	@discussion	This callback is called when the erase operation completes, either successfully or with an error.
 				This function can be used by the application to present it's own custom end-of-erase handling. If the 
 				application wants to present it's own end-of-erase notification, it can do so from this callback. If it
@@ -268,9 +278,9 @@ typedef CALLBACK_API( Boolean , DREraseSessionEraseCompleteProcPtr )(DREraseSess
 	@struct		DREraseSessionProgressCallbacks
 	@abstract	Callback functions passed to the progress dialog.
 	@field		version					Identifies the version of this structure.
-	@field		deviceShouldBeTarget	Pointer to a DREraseSessionProgressBeginNotificationProcPtr. The value of this field may be NULL.
-	@field		containsSuitableMedia	Pointer to a DREraseSessionProgressFinishNotificationProcPtr. The value of this field may be NULL.
-	@field		deviceSelectionChanged	Pointer to a DREraseSessionEraseCompleteProcPtr. The value of this field may be NULL.
+	@field		deviceShouldBeTarget	Pointer to a DREraseSessionProgressBeginNotificationProcPtr. The value of this field may be <i>NULL</i>.
+	@field		containsSuitableMedia	Pointer to a DREraseSessionProgressFinishNotificationProcPtr. The value of this field may be <i>NULL</i>.
+	@field		deviceSelectionChanged	Pointer to a DREraseSessionEraseCompleteProcPtr. The value of this field may be <i>NULL</i>.
 */
 struct DREraseSessionProgressCallbacks {
 	UInt32											version;
@@ -286,6 +296,7 @@ typedef struct DREraseSessionProgressCallbacks	DREraseSessionProgressCallbacks;
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*!
 	@enum		DREraseSessionProgressDialogOptions struct version
+	@discussion	
 */
 enum {
 	kEraseSessionProgressDialogOptionsCurrentVersion      = 1
@@ -293,6 +304,7 @@ enum {
 
 /*!
 	@enum		Erase Progress Dialog Option Flags
+	@discussion	Flags used to configure the erase progress dialog behavior
 	@constant	kEraseSessionProgressDialogDefaultOptions	Use defaults for all the options
 */
 enum {
@@ -309,10 +321,10 @@ typedef UInt32 DREraseSessionProgressDialogOptionFlags;
 	@struct 	DREraseSessionProgressDialogOptions
 	@abstract	Options passed into the progress dialog to configure it.
 	@field		version				Identifies the version of this structure.
-	@field		dialogOptionFlags	One of several constants defined by the DREraseSessionProgressDialogOptionFlags 
-									data type as described in “Erase Progress Dialog Option Flags”.
+	@field		dialogOptionFlags	One of several constants defined by the @link DREraseSessionProgressDialogOptionFlags DREraseSessionProgressDialogOptionFlags @/link 
+									data type as described in @link //apple_ref/c/tag/Erase%32Progress%32Dialog%32Option%32Flags Erase Progress Dialog Option Flags @/link.
 	@field		description			A CFStringRef that defines a custom description to be used for the dialog.
-									If you do not provide this string (passing NULL), the normal description is used.
+									If you do not provide this string (passing <i>NULL</i>), the normal description is used.
 */
 struct DREraseSessionProgressDialogOptions {
 	UInt32									version;
@@ -327,9 +339,9 @@ typedef struct DREraseSessionProgressDialogOptions	DREraseSessionProgressDialogO
 	@abstract	Presents the progress interface as a non-modal dialog.
 	@discussion	This function present the user with a non-modal dialog that shows the erase progress.
 	@param		eraseSession	The erase session object
-	@param		options			A pointer to a structure of type DREraseSessionSetupDialogOptions. 
-	@param		progressCallbacks	A pointer to a structure of type DREraseSessionProgressCallbacks. 
-									This pointer may be NULL if no custom behavior is desired.
+	@param		options			A pointer to a structure of type @link DREraseSessionSetupDialogOptions DREraseSessionSetupDialogOptions @/link. 
+	@param		progressCallbacks	A pointer to a structure of type @link DREraseSessionProgressCallbacks DREraseSessionProgressCallbacks @/link. 
+									This pointer may be <i>NULL</i> if no custom behavior is desired.
 	@result		An OSStatus.
 */
 extern void

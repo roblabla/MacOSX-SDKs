@@ -38,10 +38,6 @@ class IOUSBMassStorageUFIDevice : public IOSCSIPrimaryCommandsDevice
 private:
 	static void			AsyncReadWriteComplete( SCSITaskIdentifier	completedTask );
 	
-	static bool			ServerKeyswitchCallback (	void *		target,
-													void *		refCon,
-													IOService *	newService );
-	
 protected:
     // Reserve space for future expansion.
     struct IOUSBMassStorageUFIDeviceExpansionData

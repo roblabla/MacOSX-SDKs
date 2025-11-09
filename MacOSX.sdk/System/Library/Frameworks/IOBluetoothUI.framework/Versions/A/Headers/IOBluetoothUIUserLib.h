@@ -8,6 +8,10 @@
 
 #include <IOBluetooth/IOBluetoothUserLib.h>
 
+#ifdef	__cplusplus
+	extern "C" {
+#endif
+
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothDeviceSelectorControllerRef;
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothPairingControllerRef;
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothServiceBrowserControllerRef;
@@ -152,3 +156,7 @@ CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSele
 
 
 IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle ) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;
+
+#ifdef	__cplusplus
+	}
+#endif

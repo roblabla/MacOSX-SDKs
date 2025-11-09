@@ -197,7 +197,7 @@ extern struct seminfo	seminfo;
 extern struct semid_ds *sema;	/* semaphore id pool */
 extern struct sem *sem;		/* semaphore pool */
 /* This is now a struct sem_undo with the new memory allocation 
- * extern int	*semu;		/* undo structure pool
+ * extern int	*semu;
  */
 extern struct sem_undo	*semu;		/* undo structure pool */
 

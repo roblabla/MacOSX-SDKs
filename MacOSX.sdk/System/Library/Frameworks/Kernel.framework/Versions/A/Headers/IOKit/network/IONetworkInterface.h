@@ -128,9 +128,25 @@
     @abstract kIOPrimaryInterface is a property of IONetworkInterface
         objects. It has an OSBoolean value.
     @discussion The kIOInterfaceNamePrefix property describes whether the
-        interface is the primary or the built-in network interface. */
+        interface is the primary unit of built-in network interfaces. */
 
 #define kIOPrimaryInterface       "IOPrimaryInterface"
+
+/*! @defined kIOBuiltin
+@abstract kIOBuiltin is a property of IONetworkInterface
+objects. It has an OSBoolean value.
+@discussion The kIOBuiltin property describes whether the
+interface is built-in. */
+
+#define kIOBuiltin       "IOBuiltin"
+
+/*! @defined kIOLocation
+@abstract kIOLocation is a property of IONetworkInterface
+objects. It has an OSString value.
+@discussion The kIOLocation property describes the physical 
+location of built-in interfaces. */
+
+#define kIOLocation       "IOLocation"
 
 /*! @enum Interface state flags.
     @discussion An enumeration of the constants that are used to encode the

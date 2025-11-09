@@ -1431,6 +1431,63 @@
 #define glWindowPos3sv(v) \
 	(*agl_ctx->disp.window_pos3sv)(agl_ctx->rend, v)
 
+#define glGenQueries(n, ids) \
+	(*agl_ctx->disp.gen_queries)(agl_ctx->rend, n, ids)
+
+#define glDeleteQueries(n, ids) \
+	(*agl_ctx->disp.delete_queries)(agl_ctx->rend, n, ids)
+
+#define glIsQuery(id) \
+	(*agl_ctx->disp.is_query)(agl_ctx->rend, id)
+
+#define glBeginQuery(target, id) \
+	(*agl_ctx->disp.begin_query)(agl_ctx->rend, target, id)
+
+#define glEndQuery(target) \
+	(*agl_ctx->disp.end_query)(agl_ctx->rend, target)
+
+#define glGetQueryiv(target, pname, params) \
+	(*agl_ctx->disp.get_queryiv)(agl_ctx->rend, target, pname, params)
+
+#define glGetQueryObjectiv(id, pname, params) \
+	(*agl_ctx->disp.get_query_objectiv)(agl_ctx->rend, id, pname, params)
+
+#define glGetQueryObjectuiv(id, pname, params) \
+	(*agl_ctx->disp.get_query_objectuiv)(agl_ctx->rend, id, pname, params)
+
+#define glBindBuffer(target, buffer) \
+	(*agl_ctx->disp.bind_buffer)(agl_ctx->rend, target, buffer)
+
+#define glDeleteBuffers(n, buffers) \
+	(*agl_ctx->disp.delete_buffers)(agl_ctx->rend, n, buffers)
+
+#define glGenBuffers(n, buffers) \
+	(*agl_ctx->disp.gen_buffers)(agl_ctx->rend, n, buffers)
+
+#define glIsBuffer(buffer) \
+	(*agl_ctx->disp.is_buffer)(agl_ctx->rend, buffer)
+
+#define glBufferData(target, size, data, usage) \
+	(*agl_ctx->disp.buffer_data)(agl_ctx->rend, target, size, data, usage)
+
+#define glBufferSubData(target, offset, size, data) \
+	(*agl_ctx->disp.buffer_sub_data)(agl_ctx->rend, target, offset, size, data)
+
+#define glGetBufferSubData(target, offset, size, data) \
+	(*agl_ctx->disp.get_buffer_sub_data)(agl_ctx->rend, target, offset, size, data)
+
+#define glMapBuffer(target, access) \
+	(*agl_ctx->disp.map_buffer)(agl_ctx->rend, target, access)
+
+#define glUnmapBuffer(target) \
+	(*agl_ctx->disp.unmap_buffer)(agl_ctx->rend, target)
+
+#define glGetBufferParameteriv(target, pname, params) \
+	(*agl_ctx->disp.get_buffer_parameteriv)(agl_ctx->rend, target, pname, params)
+
+#define glGetBufferPointerv(target, pname, params) \
+	(*agl_ctx->disp.get_buffer_pointerv)(agl_ctx->rend, target, pname, params)
+
 /*********** ARB Extensions *************************************************/
 
 /* GL_ARB_vertex_program */
@@ -1728,6 +1785,157 @@
 #define glWindowPos3sARB  glWindowPos3s
 #define glWindowPos3svARB glWindowPos3sv
 
+/* GL_ARB_occlusion_query */
+#define glGenQueriesARB        glGenQueries
+#define glDeleteQueriesARB     glDeleteQueries
+#define glIsQueryARB           glIsQuery
+#define glBeginQueryARB        glBeginQuery
+#define glEndQueryARB          glEndQuery
+#define glGetQueryivARB        glGetQueryiv
+#define glGetQueryObjectivARB  glGetQueryObjectiv
+#define glGetQueryObjectuivARB glGetQueryObjectuiv
+
+/* GL_ARB_vertex_buffer_object */
+#define glBindBufferARB           glBindBuffer
+#define glDeleteBuffersARB        glDeleteBuffers
+#define glGenBuffersARB           glGenBuffers
+#define glIsBufferARB             glIsBuffer
+#define glBufferDataARB           glBufferData
+#define glBufferSubDataARB        glBufferSubData
+#define glGetBufferSubDataARB     glGetBufferSubData
+#define glMapBufferARB            glMapBuffer
+#define glUnmapBufferARB          glUnmapBuffer
+#define glGetBufferParameterivARB glGetBufferParameteriv
+#define glGetBufferPointervARB    glGetBufferPointerv
+
+/* GL_ARB_shader_objects */
+#define glDeleteObjectARB(obj) \
+	(*agl_ctx->disp.delete_object_ARB)(agl_ctx->rend, obj)
+
+#define glGetHandleARB(pname) \
+	(*agl_ctx->disp.get_handle_ARB)(agl_ctx->rend, pname)
+
+#define glDetachObjectARB(container, attached) \
+	(*agl_ctx->disp.detach_object_ARB)(agl_ctx->rend, container, attached)
+
+#define glCreateShaderObjectARB(shader) \
+	(*agl_ctx->disp.create_shader_object_ARB)(agl_ctx->rend, shader)
+
+#define glShaderSourceARB(shader, count, string, length) \
+	(*agl_ctx->disp.shader_source_ARB)(agl_ctx->rend, shader, count, string, length)
+
+#define glCompileShaderARB(shader) \
+	(*agl_ctx->disp.compile_shader_ARB)(agl_ctx->rend, shader)
+
+#define glCreateProgramObjectARB() \
+	(*agl_ctx->disp.create_program_object_ARB)(agl_ctx->rend)
+
+#define glAttachObjectARB(container, object) \
+	(*agl_ctx->disp.attach_object_ARB)(agl_ctx->rend, container, object)
+
+#define glLinkProgramARB(program) \
+	(*agl_ctx->disp.link_program_ARB)(agl_ctx->rend, program)
+
+#define glUseProgramObjectARB(program) \
+	(*agl_ctx->disp.use_program_object_ARB)(agl_ctx->rend, program)
+
+#define glValidateProgramARB(program) \
+	(*agl_ctx->disp.validate_program_ARB)(agl_ctx->rend, program)
+
+#define glUniform1fARB(location, v0) \
+	(*agl_ctx->disp.uniform1f_ARB)(agl_ctx->rend, location, v0)
+
+#define glUniform2fARB(location, v0, v1) \
+	(*agl_ctx->disp.uniform2f_ARB)(agl_ctx->rend, location, v0, v1)
+
+#define glUniform3fARB(location, v0, v1, v2) \
+	(*agl_ctx->disp.uniform3f_ARB)(agl_ctx->rend, location, v0, v1, v2)
+
+#define glUniform4fARB(location, v0, v1, v2, v3) \
+	(*agl_ctx->disp.uniform4f_ARB)(agl_ctx->rend, location, v0, v1, v2, v3)
+
+#define glUniform1iARB(location, v0) \
+	(*agl_ctx->disp.uniform1i_ARB)(agl_ctx->rend, location, v0)
+
+#define glUniform2iARB(location, v0, v1) \
+	(*agl_ctx->disp.uniform2i_ARB)(agl_ctx->rend, location, v0, v1)
+
+#define glUniform3iARB(location, v0, v1, v2) \
+	(*agl_ctx->disp.uniform3i_ARB)(agl_ctx->rend, location, v0, v1, v2)
+
+#define glUniform4iARB(location, v0, v1, v2, v3) \
+	(*agl_ctx->disp.uniform4i_ARB)(agl_ctx->rend, location, v0, v1, v2, v3)
+
+#define glUniform1fvARB(location, count, value) \
+	(*agl_ctx->disp.uniform1fv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform2fvARB(location, count, value) \
+	(*agl_ctx->disp.uniform2fv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform3fvARB(location, count, value) \
+	(*agl_ctx->disp.uniform3fv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform4fvARB(location, count, value) \
+	(*agl_ctx->disp.uniform4fv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform1ivARB(location, count, value) \
+	(*agl_ctx->disp.uniform1iv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform2ivARB(location, count, value) \
+	(*agl_ctx->disp.uniform2iv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform3ivARB(location, count, value) \
+	(*agl_ctx->disp.uniform3iv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniform4ivARB(location, count, value) \
+	(*agl_ctx->disp.uniform4iv_ARB)(agl_ctx->rend, location, count, value)
+
+#define glUniformMatrix2fvARB(location, count, transpose, value) \
+	(*agl_ctx->disp.uniform_matrix2fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+
+#define glUniformMatrix3fvARB(location, count, transpose, value) \
+	(*agl_ctx->disp.uniform_matrix3fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+
+#define glUniformMatrix4fvARB(location, count, transpose, value) \
+	(*agl_ctx->disp.uniform_matrix4fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+
+#define glGetObjectParameterfvARB(obj, pname, params) \
+	(*agl_ctx->disp.get_object_parameterfv_ARB)(agl_ctx->rend, obj, pname, params)
+
+#define glGetObjectParameterivARB(obj, pname, params) \
+	(*agl_ctx->disp.get_object_parameteriv_ARB)(agl_ctx->rend, obj, pname, params)
+
+#define glGetInfoLogARB(obj, max, length, info) \
+	(*agl_ctx->disp.get_info_log_ARB)(agl_ctx->rend, obj, max, length, info)
+
+#define glGetAttachedObjectsARB(container, max, count, obj) \
+	(*agl_ctx->disp.get_attached_objects_ARB)(agl_ctx->rend, container, max, count, obj)
+
+#define glGetUniformLocationARB(program, name) \
+	(*agl_ctx->disp.get_uniform_location_ARB)(agl_ctx->rend, program, name)
+
+#define glGetActiveUniformARB(program, index, max, length, size, type, name) \
+	(*agl_ctx->disp.get_active_uniform_ARB)(agl_ctx->rend, program, index, max, length, size, type, name)
+
+#define glGetUniformfvARB(program, location, params) \
+	(*agl_ctx->disp.get_uniformfv_ARB)(agl_ctx->rend, program, location, params)
+
+#define glGetUniformivARB(program, location, params) \
+	(*agl_ctx->disp.get_uniformiv_ARB)(agl_ctx->rend, program, location, params)
+
+#define glGetShaderSourceARB(obj, max, length, source) \
+	(*agl_ctx->disp.get_shader_source_ARB)(agl_ctx->rend, obj, max, length, source)
+
+/* GL_ARB_vertex_shader */
+#define glBindAttribLocationARB(program, index, name) \
+	(*agl_ctx->disp.bind_attrib_location_ARB)(agl_ctx->rend, program, index, name)
+
+#define glGetActiveAttribARB(program, index, max, length, size, type, name) \
+	(*agl_ctx->disp.get_active_attrib_ARB)(agl_ctx->rend, program, index, max, length, size, type, name)
+
+#define glGetAttribLocationARB(program, name) \
+	(*agl_ctx->disp.get_attrib_location_ARB)(agl_ctx->rend, program, name)
+
 /*********** EXT Extensions *************************************************/
 
 /* GL_EXT_compiled_vertex_array */
@@ -1741,12 +1949,13 @@
 #define glActiveStencilFaceEXT(face) \
 	(*agl_ctx->disp.active_stencil_face_EXT)(agl_ctx->rend, face)
 
-/* GL_ATI_separate_stencil */
-#define glStencilOpSeparateATI(face, sfail, dpfail, dppass) \
-	(*agl_ctx->disp.stencil_op_separate_ATI)(agl_ctx->rend, face, sfail, dpfail, dppass)
+/* GL_EXT_depth_bounds_test */
+#define glDepthBoundsEXT(zmin, zmax) \
+	(*agl_ctx->disp.depth_bounds_EXT)(agl_ctx->rend, zmin, zmax)
 
-#define glStencilFuncSeparateATI(frontfunc, backfunc, ref, mask) \
-	(*agl_ctx->disp.stencil_func_separate_ATI)(agl_ctx->rend, frontfunc, backfunc, ref, mask)
+/* GL_EXT_blend_equation_separate */
+#define glBlendEquationSeparateEXT(modeRGB, modeAlpha) \
+	(*agl_ctx->disp.blend_equation_separate_EXT)(agl_ctx->rend, modeRGB, modeAlpha)
 
 /* GL_EXT_paletted_texture */
 #define glColorTableEXT glColorTable
@@ -1893,19 +2102,28 @@
 #define glFinishRenderAPPLE() \
 	(*agl_ctx->disp.finish_render_APPLE)(agl_ctx->rend)
 
+#define glSwapAPPLE() \
+	(*agl_ctx->disp.swap_APPLE)(agl_ctx->rend)
+
 
 /*********** ATI Extensions *************************************************/
 
+/* GL_ATI_separate_stencil */
+#define glStencilOpSeparateATI(face, sfail, dpfail, dppass) \
+	(*agl_ctx->disp.stencil_op_separate_ATI)(agl_ctx->rend, face, sfail, dpfail, dppass)
+
+#define glStencilFuncSeparateATI(frontfunc, backfunc, ref, mask) \
+	(*agl_ctx->disp.stencil_func_separate_ATI)(agl_ctx->rend, frontfunc, backfunc, ref, mask)
+
 /* GL_ATI_blend_equation_separate */
-#define glBlendEquationSeparateATI(equationRGB, equationAlpha) \
-	(*agl_ctx->disp.blend_equation_separate_ATI)(agl_ctx->rend, equationRGB, equationAlpha)
+#define glBlendEquationSeparateATI glBlendEquationSeparateEXT
 
 /* GL_ATI_pn_triangles */
 #define glPNTrianglesiATI(pname, param) \
-    (*agl_ctx->disp.pn_trianglesi_ATI)(agl_ctx->rend, pname, param)
+	(*agl_ctx->disp.pn_trianglesi_ATI)(agl_ctx->rend, pname, param)
 
 #define glPNTrianglesfATI(pname, param) \
-    (*agl_ctx->disp.pn_trianglesf_ATI)(agl_ctx->rend, pname, param)
+	(*agl_ctx->disp.pn_trianglesf_ATI)(agl_ctx->rend, pname, param)
 
 /* GL_ATIX_pn_triangles */
 #define glPNTrianglesiATIX glPNTrianglesiATI
@@ -1968,3 +2186,4 @@
 	(*agl_ctx->disp.get_combiner_stage_parameterfv_NV)(agl_ctx->rend, stage, pname, param)
 
 #endif /* _AGLMACRO_H */
+

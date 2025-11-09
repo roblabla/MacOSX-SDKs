@@ -15,6 +15,51 @@
  
 */
 
+/*!
+	@header 		DRTrack.h
+	@abstract		Base class for track handling
+	@discussion	
+	<h3>About tracks</h3>
+
+	A @link //apple_ref/occ/cl/DRTrack DRTrack @/link provides data to the for the burn and contains a description of the 
+	track on disc (length, block type, data format, etc). 
+	Data is provided for the burn in a real-time thread. It is up to the track to 
+	provide this data in a timely manner, otherwise a burn underrun can occur and
+	ruin a disc.
+	
+	<h3>Data Production</h3>
+
+	DRTracks do not typically store or cache the data to be written to disk, instead the 
+	data is streamed to the disc from some data producer as it's needed. This is 
+	accomplished through an object associated with the track when the track is created 
+	called the <i>track producer</i>. A track producer is a class you create that implements 
+	the @link //apple_ref/occ/intfDRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
+	the methods that a track object will call during a burn to obtain data.
+	
+	<h3>Track Properties</h3>
+
+	A DRTrack object contains several properties which define the track for the burn.
+	These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link
+	and @link //apple_ref/occ/instm/DRTrack/setProperties%58 setProperties: @/link methods. 
+	
+	There are several properties that are required to be present and if they are not, will 
+	cause the burn to fail. These are:
+	
+	<ul>
+	<li>@link DRTrackLengthKey DRTrackLengthKey @/link	Length of the track (see the DRMSF class documentation)</li>
+	<li>@link DRBlockSizeKey DRBlockSizeKey @/link	Size in bytes of each track block</li>
+	<li>@link DRBlockTypeKey DRBlockTypeKey @/link	Type of each track block</li>
+	<li>@link DRDataFormKey DRDataFormKey @/link		Data form of each block in the track</li>
+	<li>@link DRSessionFormatKey DRSessionFormatKey @/link Session format of the track</li>
+	<li>@link DRTrackModeKey DRTrackModeKey @/link	Track mode of the track</li>
+	</ul>
+	
+	The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) 
+	specification for CD/DVD devices. It's up to you to understand the possble values
+	and meanings of each.
+	
+	All other keys contained in the properties dictionary are optional and can be omitted.
+*/
 #import <Foundation/Foundation.h>
 
 #import <DiscRecordingEngine/DRCoreTrack.h>
@@ -44,35 +89,30 @@
 	data is streamed to the disc from some data producer as it's needed. This is 
 	accomplished through an object associated with the track when the track is created 
 	called the <i>track producer</i>. A track producer is a class you create that implements 
-	the DRTrackDataProduction informal protocol. This informal protocol defines all of 
-	the methods that a track object will call during a burn to obtain data. See the 
-	documentation for the DRTrackDataProduction informal protocol for more information.
+	the @link //apple_ref/occ/intf/DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
+	the methods that a track object will call during a burn to obtain data.
 	
 	<h3>Track Properties</h3>
 
 	A DRTrack object contains several properties which define the track for the burn.
-	These properties are stored in an NSDictionary and are accessed through the <b>properties</b>
-	and <b>setProperties:</b> methods. 
+	These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link
+	and @link //apple_ref/occ/instm/DRTrack/setProperties%58 setProperties: @/link methods. 
 	
 	There are several properties that are required to be present and if they are not, will 
 	cause the burn to fail. These are:
 	
 	<ul>
-	<li>DRTrackLengthKey	Length of the track (see the DRMSF class documentation)</li>
-	<li>DRBlockSizeKey	Size in bytes of each track block</li>
-	<li>DRBlockTypeKey	Type of each track block</li>
-	<li>DRDataFormKey		Data form of each block in the track</li>
-	<li>DRSessionFormatKey Session format of the track</li>
-	<li>DRTrackModeKey	Track mode of the track</li>
+	<li>@link DRTrackLengthKey DRTrackLengthKey @/link	Length of the track (see the DRMSF class documentation)</li>
+	<li>@link DRBlockSizeKey DRBlockSizeKey @/link	Size in bytes of each track block</li>
+	<li>@link DRBlockTypeKey DRBlockTypeKey @/link	Type of each track block</li>
+	<li>@link DRDataFormKey DRDataFormKey @/link		Data form of each block in the track</li>
+	<li>@link DRSessionFormatKey DRSessionFormatKey @/link Session format of the track</li>
+	<li>@link DRTrackModeKey DRTrackModeKey @/link	Track mode of the track</li>
 	</ul>
-	
+		
 	The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) 
 	specification for CD/DVD devices. It's up to you to understand the possble values
-	and meanings of each. However, there are two categories on DRTrack which you may 
-	find useful. The first defines a method - <b>trackWithAudioOfLength:producer:</b> - which
-	creates a track configured with the required properties to burn an audio track. The
-	second defines - <b>trackForRootFolder:</b> - which uses the content creation classes to
-	create a fully prepared track ready to write a data track. 
+	and meanings of each. 
 	
 	All other keys contained in the properties dictionary are optional and can be omitted.
 */
@@ -108,7 +148,7 @@
    	@method 		testProductionSpeedForInterval:
    	@abstract		Tests the production speed for a specified interval.
    	@discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling
-					it's producer's <b>produceDataIntoBuffer:length:atAddress:blockSize:ioFlags:</b> for the 
+					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link for the 
 					specified time interval.
 						
 					Use this function to verify that the the production code can produce data fast 
@@ -125,7 +165,7 @@
    	@method 		testProductionSpeedForLength:
    	@abstract		Tests the production speed for a specified byte count.
    	@discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling
-					it's producer's <b>produceDataIntoBuffer:length:atAddress:blockSize:ioFlags:</b> until 
+					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link until 
 					the specified length number of bytes have been produced.
 						
 					Use this function to verify that the the production code can produce data fast 
@@ -159,6 +199,12 @@
 
 /* ------------------------------------ */
 /* Property convenience methods */
+
+/*! 
+	@category		DRTrack (PropertyConvenience)
+   	@discussion		This category on DRTrack defines methods that make setting and retrieving
+   					the various DRTrack properties easier.
+*/
 @interface DRTrack (PropertyConvenience)
 
 /*! 
@@ -166,16 +212,16 @@
    	@abstract		Returns the length of the track data.
    	@discussion		The length returned does not include the length of the pregap. Only the length
    					of the track data itself is returned. This is a simple wrapper to obtain the 
-   					DRTrackLengthKey. If the DRTrackLengthKey property has not been set for the track
-   					this method will return a zero-length DRMSF object (0m:0s:0f).
+   					@link DRTrackLengthKey DRTrackLengthKey @/link. If the @link DRTrackLengthKey DRTrackLengthKey @/link property has not been set for the track
+   					this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link object (0m:0s:0f).
 */
 - (DRMSF*) length;
 
 /*! 
    	@method 		preGap
    	@abstract		Returns the length of the pre gap.
-    @discussion		This is a simple wrapper to obtain the DRPreGapLengthKey. If the DRPreGapLengthKey 
-    				property has not been set for the track this method will return a zero-length DRMSF 
+    @discussion		This is a simple wrapper to obtain the @link DRPreGapLengthKey DRPreGapLengthKey @/link. If the @link DRPreGapLengthKey DRPreGapLengthKey @/link 
+    				property has not been set for the track this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link 
     				object (0m:0s:0f).
   	
 */
@@ -184,7 +230,7 @@
 /*! 
    	@method 		setPreGap:
    	@abstract		Sets the length of the pre gap.
-    @discussion		This is a simple wrapper to set the DRPreGapLengthKey.
+    @discussion		This is a simple wrapper to set the @link DRPreGapLengthKey DRPreGapLengthKey @/link.
 	@param			preGap	the pre gap length.
 */
 - (void) setPreGap:(DRMSF*)preGap;
@@ -204,28 +250,28 @@
 	In concept a track data producer similar to an NSTable data source in Cocoa. 
 	Each producer method receives a pointer to the track it should produce data for. 
 	There is one method that <b>must</b> be implemented -
-	<b>produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags:</b>.
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link.
 	
 	The methods of this protocol will be called in roughly this order:
 	
 	<ol type="1">
-	<li><b>prepareTrackForBurn:</b></li>
-	<li><b>producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags:</b></li>
-	<li><b>produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags:</b></li>
-	<li><b>prepareTrackForVerification:</b></li>
-	<li><b>verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags:</b></li>
-	<li><b>cleanupTrackAfterVerification:</b></li>
-	<li><b>cleanupTrackAfterBurn:</b></li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForBurn%58 prepareTrackForBurn: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/producePreGapForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification%58 prepareTrackForVerification: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification%58 cleanupTrackAfterVerification: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterBurn%58 cleanupTrackAfterBurn: @/link</li>
 	</ol>
 	
 	If verification of the disc is not requested, or a track omits or defines 
-	DRVerificationTypeKey to be DRVerificationTypeNone, then 
-	<b>prepareTrackForVerification:</b>, 
-	<b>verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags:</b> and
-	<b>cleanupTrackAfterVerification:</b>
+	@link DRVerificationTypeKey DRVerificationTypeKey @/link to be @link DRVerificationTypeNone DRVerificationTypeNone @/link, then 
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification%58 prepareTrackForVerification: @/link, 
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link and
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification%58 cleanupTrackAfterVerification: @/link
 	will not be called.
 	
-	During a burn, <b>produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags:</b> is called
+	During a burn, @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link is called
 	very frequently in a real-time thread. Because of this, it is of utmost importance that
 	this method very effficient and does not perform any long task, since by doing so, the
 	burn may fail because data is not available to write to the disc.
@@ -233,7 +279,7 @@
 @protocol DRTrackDataProduction
 
 /*!
-	@method			estimateSizeOfTrack:
+	@method			estimateLengthOfTrack:
 	@abstract		Estimates the size of the track to be burned.
 	@discussion		This message is sent outside of a burn cycle in response to a -estimateLength message 
 					sent to the track.
@@ -258,7 +304,7 @@
 					time consuming tasks. 
 	@param			track	The track object being burned
 	@param			burn	The burn object controlling the burn
-	@param			mediaInfo	The media being burned to. This is the same dictioanry as returned by -[DRDevice status]
+	@param			mediaInfo	The media being burned to. This is the same dictionary as returned by @link //apple_ref/occ/instm/DRDevice/status -[DRDevice status] @/link.
 	@result			<i>YES</i> to indicate that the burn should proceed and <i>NO</i> to indicate a failure occurred.
 */
 - (BOOL) prepareTrack:(DRTrack*)track forBurn:(DRBurn*)burn toMedia:(NSDictionary*)mediaInfo;
@@ -277,7 +323,7 @@
 /*!
 	@method			producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags:
 	@abstract		Produces the pregap data.
-	@discussion		This method is called to obtain data for the track's pregap. If the DRPreGapLengthKey 
+	@discussion		This method is called to obtain data for the track's pregap. If the @link DRPreGapLengthKey DRPreGapLengthKey @/link 
 					key is present in the track properties, the track producer will be asked for the pregap 
 					data first. If the producer implements this selector, then it's the responsibility
 					of the producer to provide data for the pregap, otherwise that length of 
@@ -337,7 +383,7 @@
 /*!
 	@method			verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags:
 	@abstract		Cleans up the track after the burn completes.
-	@discussion		If the class implementing this method asks for a verification type of <i>DRVerificationTypeReceiveData</i>, 
+	@discussion		If the class implementing this method asks for a verification type of @link DRVerificationTypeReceiveData DRVerificationTypeReceiveData @/link, 
 					then a series of calls to this method will start. It's up to the class to reproduce the data
 					again and compare it to the data passed in buffer. The buffer passed in will be a multiple of blockSize 
 					(bufferLength == blockSize * N, where N > 1). address is the sector address on the disc from
@@ -374,7 +420,7 @@
 
 /*!
 	@const		DRTrackLengthKey
-	@discussion	DRMSF representing the length of the track (see the DRMSF class documentation)
+	@discussion	@link //apple_ref/occ/cl/DRMSF DRMSF @/link representing the length of the track
 */
 extern NSString* const DRTrackLengthKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -448,7 +494,7 @@ extern NSString* const DRMaxBurnSpeedKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LA
 				key is present, the track producer will be asked for the pregap data first.
 				If the producer implements the proper selector, then it's the responsibility
 				of the producer to provide data for the pregap, otherwise that length of 
-				silence will be produced by DiscRecording.
+				silence will be produced by Disc Recording.
 */
 extern NSString* const DRPreGapLengthKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -476,11 +522,11 @@ extern NSString* const DRDVDCopyrightInfoKey	AVAILABLE_MAC_OS_X_VERSION_10_2_AND
 				is written.
 				
 				The use of this value should conform to the specifications of the IFPI. See
-				http://www.ifpi.org/isrc/ for more details on the ISRC standard.
+				<a href="http://www.ifpi.org/isrc/">http://www.ifpi.org/isrc/</a> for more details on the ISRC standard.
 				
 				Not all drives are capable of the write modes necessary to write the ISRC.
 				If this key is present in any track and the drive cannot write the ISRC, the
-				burn will fail with kDRDeviceCantWriteISRCErr.
+				burn will fail with @link //apple_ref/c/econst/kDRDeviceCantWriteISRCErr kDRDeviceCantWriteISRCErr @/link.
 */
 extern NSString* const DRTrackISRCKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -495,7 +541,7 @@ extern NSString* const DRTrackISRCKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATE
 				Not all drives are capable of writing index points, and not all consumer
 				CD players report or use them.  If this key is present in any track and the
 				drive cannot write index points, the burn will fail with
-				kDRDeviceCantWriteIndexPointsErr.
+				@link //apple_ref/c/econst/kDRDeviceCantWriteIndexPointsErr kDRDeviceCantWriteIndexPointsErr @/link.
 */
 extern NSString* const DRIndexPointsKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -533,7 +579,7 @@ extern NSString* const DRAudioFourChannelKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND
 				
 				Not all drives are capable of writing SCMS.  If this key is present in
 				any track and the drive cannot write SCMS, the burn will fail with
-				kDRDeviceCantWriteSCMSErr.
+				@link //apple_ref/c/econst/kDRDeviceCantWriteSCMSErr kDRDeviceCantWriteSCMSErr @/link.
 */
 extern NSString* const DRSerialCopyManagementStateKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -541,23 +587,23 @@ extern NSString* const DRSerialCopyManagementStateKey	AVAILABLE_MAC_OS_X_VERSION
 /* Verification types */
 /*!
 	@const		DRVerificationTypeProduceAgain
-	@discussion	One of the possible values of the DRVerificationTypeKey.
+	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				The engine will simply begin another production cycle and start calling 
-				<b>produceDataIntoBuffer:length:atAddress:blockSize:ioFlags:</b> again.
+				<@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
 */
 extern NSString* const DRVerificationTypeProduceAgain	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRVerificationTypeReceiveData
-	@discussion	One of the possible values of the DRVerificationTypeKey.
+	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				The engine will begin reading data from the disc and calling
-				<b>verifyDataInBuffer:length:atAddress:blockSize:ioFlags:</b>.
+				@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link.
 */
 extern NSString* const DRVerificationTypeReceiveData	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DRVerificationTypeNone
-	@discussion	One of the possible values of the DRVerificationTypeKey.
+	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				No verification is desired, so verification will be skipped.
 */
 extern NSString* const DRVerificationTypeNone			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -566,7 +612,7 @@ extern NSString* const DRVerificationTypeNone			AVAILABLE_MAC_OS_X_VERSION_10_2_
 /* SCMS states */
 /*!
 	@const		DRSCMSCopyrightFree
-	@discussion	One possible value for the DRSerialCopyManagementStateKey.  Indicates that
+	@discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that
 				the track has no copying restrictions.  Copies of this track should also be
 				copyright free.
 */
@@ -574,7 +620,7 @@ extern NSString* const DRSCMSCopyrightFree					AVAILABLE_MAC_OS_X_VERSION_10_3_A
 
 /*!
 	@const		DRSCMSCopyrightProtectedOriginal
-	@discussion	One possible value for the DRSerialCopyManagementStateKey.  Indicates that
+	@discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that
 				the track is an original subject to copyright protection.  Digital copying of
 				this track should be allowed, but copies should be marked with SCMS.
 */
@@ -582,7 +628,7 @@ extern NSString* const DRSCMSCopyrightProtectedOriginal		AVAILABLE_MAC_OS_X_VERS
 
 /*!
 	@const		DRSCMSCopyrightProtectedCopy
-	@discussion	One possible value for the DRSerialCopyManagementStateKey.  Indicates that
+	@discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that
 				the track is a first-generation copy of an original that was subject to copy
 				protection.  No further digital copying should be allowed.
 */
@@ -597,59 +643,60 @@ extern NSString* const DRSCMSCopyrightProtectedCopy			AVAILABLE_MAC_OS_X_VERSION
 #endif
 /*!
 	@const		DRNextWritableAddressKey
-	@discussion	This key points to a NSNumber value holding the LBA of the next writable address
+	@discussion	NSNumber containing the LBA of the next writable address
 				in the track. This key is not present in closed tracks.
 */
 extern NSString* const DRNextWritableAddressKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackStartAddressKey
-	@discussion	This key points to a NSNumber value holding the LBA of the start address for the
+	@discussion	NSNumber containing the LBA of the start address for the
 				track.
 */
 extern NSString* const DRTrackStartAddressKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRFreeBlocksKey
-	@discussion	This key points to a NSNumber value holding the length, in blocks, which is
+	@discussion	NSNumber containing the length, in blocks, which is
 				still available in a writable track.
 */
 extern NSString* const DRFreeBlocksKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackNumberKey
-	@discussion	This key points to a NSNumber value holding the physical track number of a track.
+	@discussion	NSNumber containing the physical track number of a track.
 */
 extern NSString* const DRTrackNumberKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRSessionNumberKey
-	@discussion	This key points to a NSNumber value holding the physical session number of a track.
+	@discussion	NSNumber containing the physical session number of a track.
 */
 extern NSString* const DRSessionNumberKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackTypeKey
-	@discussion	This key points to a NSString indicating the type of track. Possible values are: 
-				DRTrackTypeInvisible, DRTrackTypeIncomplete, DRTrackTypeReserved or DRTrackTypeClosed.
+	@discussion	NSString indicating the type of track. Possible values are: 
+				@link DRTrackTypeInvisible DRTrackTypeInvisible @/link, @link DRTrackTypeIncomplete DRTrackTypeIncomplete @/link, 
+				@link DRTrackTypeReserved DRTrackTypeReserved @/link or @link DRTrackTypeClosed DRTrackTypeClosed @/link.
 */
 extern NSString* const DRTrackTypeKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackIsEmptyKey
-	@discussion	This key points to a BOOL and indicates whether the track is empty.
+	@discussion	NSNumber containing a BOOL value and indicates whether the track is empty.
 */
 extern NSString* const DRTrackIsEmptyKey					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackPacketTypeKey
-	@discussion	This key points to a NSString indicating the kind of packets being written.
+	@discussion	NSString indicating the kind of packets being written.
 */
 extern NSString* const DRTrackPacketTypeKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackPacketSizeKey
-	@discussion	This key points to a NSNumber that contains the number of blocks per packet for
+	@discussion	NSNumber containing the number of blocks per packet for
 				the disc. It will only be present if the disc contains fixed packets. This key
 				will contain 16 for DVD media, and typically contains either 16 or 32 for CD media.
 */
@@ -659,7 +706,7 @@ extern NSString* const DRTrackPacketSizeKey				AVAILABLE_MAC_OS_X_VERSION_10_3_A
 /* Track types */
 /*!
 	@const		DRTrackTypeInvisible
-	@discussion	If this is the value of the DRTrackTypeKey then the track is invisible and
+	@discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is invisible and
 				available to writing. If it is packet written and not closed, DRPacketTypeKey will
 				be present, along with DRTrackPacketType and DRTrackPacketSize keys.
 */
@@ -667,20 +714,20 @@ extern NSString* const DRTrackTypeInvisible				AVAILABLE_MAC_OS_X_VERSION_10_3_A
 
 /*!
 	@const		DRTrackTypeIncomplete
-	@discussion	If this is the value of the DRTrackTypeKey then the track is not invisible or
+	@discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is not invisible or
 				reserved and is available for writing.
 */
 extern NSString* const DRTrackTypeIncomplete				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackTypeReserved
-	@discussion	If this is the value of the DRTrackTypeKey then the track is reserved for writing.
+	@discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is reserved for writing.
 */
 extern NSString* const DRTrackTypeReserved				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
 	@const		DRTrackTypeClosed
-	@discussion	If this is the value of the DRTrackTypeKey then the track has been
+	@discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track has been
 				written and is closed.
 */
 extern NSString* const DRTrackTypeClosed					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -689,7 +736,7 @@ extern NSString* const DRTrackTypeClosed					AVAILABLE_MAC_OS_X_VERSION_10_3_AND
 /* Packet types */
 /*!
 	@const		DRTrackPacketTypeFixed
-	@discussion	If this is the value of the DRTrackPacketTypeKey then the disc is writen with
+	@discussion	If this is the value of the @link DRTrackPacketTypeKey DRTrackPacketTypeKey @/link then the disc is writen with
 				fixed sized packets.  When this value is present the DRPacketSizeKey will also be
 				present.
 */
@@ -697,7 +744,7 @@ extern NSString* const DRTrackPacketTypeFixed			AVAILABLE_MAC_OS_X_VERSION_10_3_
 
 /*!
 	@const		DRTrackPacketTypeVariable
-	@discussion	If this is the value of the DRTrackPacketTypeKey then the disc is written with
+	@discussion	If this is the value of the @link DRTrackPacketTypeKey DRTrackPacketTypeKey @/link then the disc is written with
 				sequential variable sized packets.  The presence of this value indicates the lack
 				of the DRPacketSizeKey.
 */
@@ -707,7 +754,7 @@ extern NSString* const DRTrackPacketTypeVariable			AVAILABLE_MAC_OS_X_VERSION_10
 
 /* ------------------------------------ */
 /* Filesystem track properties */
-/* These properties are valid only on tracks created through the DataContent category.
+/* These properties are valid only on tracks created through the DataContentCreation category.
 	In general the burn engine will assume reasonable defaults; only change these properties
 	if you require a specific behavior. */
 #if 0

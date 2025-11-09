@@ -14,7 +14,9 @@
 extern "C" {
 #endif
 
-#include <sys/types.h>
+#include <sys/types.h>  //Header no longer needed -- left in for source compatibility for old code
+#include <stdbool.h>
+#include <stdint.h>
 #include <stddef.h>
 #include <AvailabilityMacros.h>
 
@@ -24,9 +26,9 @@ extern "C" {
 typedef struct vImage_Buffer
 {
     void	*data;		/* Pointer to the top left pixel of the buffer.	*/
-    u_int32_t	height;		/* The height (in pixels) of the buffer		*/
-    u_int32_t	width;		/* The width (in pixels) of the buffer 		*/
-    u_int32_t	rowBytes;	/* The number of bytes in a pixel row		*/
+    uintptr_t	height;		/* The height (in pixels) of the buffer		*/
+    uintptr_t	width;		/* The width (in pixels) of the buffer 		*/
+    size_t	rowBytes;	/* The number of bytes in a pixel row		*/
 }vImage_Buffer;
 
 
@@ -40,13 +42,13 @@ typedef struct vImage_AffineTransform
     float 	tx, ty;
 }vImage_AffineTransform;
 
-typedef int32_t		vImage_Error;
-typedef u_int32_t 	vImage_Flags;		/* You must set all undefined flags bits to 0 */
+typedef intptr_t	vImage_Error;
+typedef uint32_t 	vImage_Flags;		/* You must set all undefined flags bits to 0 */
 
 /* Pixel data types */
-typedef u_int8_t	Pixel_8;		/* 8 bit planar pixel value										*/
+typedef uint8_t		Pixel_8;		/* 8 bit planar pixel value										*/
 typedef float		Pixel_F;		/* floating point planar pixel value									*/
-typedef u_int8_t	Pixel_8888[4];		/* ARGB interleaved (8 bit/channel) pixel value. u_int8_t[4] = { alpha, red, green, blue } 	*/
+typedef uint8_t		Pixel_8888[4];		/* ARGB interleaved (8 bit/channel) pixel value. u_int8_t[4] = { alpha, red, green, blue } 	*/
 typedef float		Pixel_FFFF[4];		/* ARGB interleaved (floating point) pixel value. float[4] = { alpha, red, green, blue }		*/
 
 typedef void*		ResamplingFilter;

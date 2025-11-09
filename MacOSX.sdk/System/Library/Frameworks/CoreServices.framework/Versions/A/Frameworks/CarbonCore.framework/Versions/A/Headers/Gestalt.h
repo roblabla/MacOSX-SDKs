@@ -3,7 +3,7 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-545~1
+     Version:    CarbonCore-557~1
  
      Copyright:  © 1988-2003 by Apple Computer, Inc.  All rights reserved
  
@@ -2011,8 +2011,30 @@ enum {
   gestaltSystemUpdateVersion    = 'sysu' /* System Update version */
 };
 
+/*  
+    Returns the system version as a 32 bit packed BCD ( binary coded decimal )
+    version representation.  Bits 0 through 3 are the "bug fix" revision number.
+    Bits 4 through 7 are the minor revision, and bits 8 through 31 are the bcd
+    decimal digits of the major release version.
+    
+      Value:  0xMMMMMMRB = M.R.B            Example: 0x00001023 = 10.2.3
+                ^^^^^^     major rev                   ^^^^^^   major rev   = 10
+                      ^    minor rev                         ^  minor rev   =  2
+                       ^   bug fix rev                        ^ bug fix rev =  3
+    
+    If the values of the minor or bug fix revision are larger than 9, then
+    gestaltSystemVersion will substitute the value 9 for them.  For example,
+    Mac OS X 10.3.15 will be returned as 0x1039, and Mac OS X 10.10.5 will
+    return 0x1095.
+    
+    A better way to get version information on Mac OS X would be to read in the
+    system version information from the file /System/Library/CoreServices/SystemVersion.plist.
+*/
 enum {
-  gestaltSystemVersion          = 'sysv' /* system version*/
+  gestaltSystemVersion          = 'sysv', /* system version*/
+  gestaltSystemVersionMajor     = 'sys1', /* The major system version number; in 10.4.17 this would be the decimal value 10 */
+  gestaltSystemVersionMinor     = 'sys2', /* The minor system version number; in 10.4.17 this would be the decimal value 4 */
+  gestaltSystemVersionBugFix    = 'sys3' /* The bug fix system version number; in 10.4.17 this would be the decimal value 17 */
 };
 
 enum {

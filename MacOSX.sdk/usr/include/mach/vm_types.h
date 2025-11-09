@@ -62,7 +62,7 @@ typedef	uint32_t	reg64_t;
  * This limits the physical address space to 16TB of RAM.
  */
 typedef uint32_t ppnum_t;		/* Physical page number */
-
+#define PPNUM_MAX UINT32_MAX
 
 
 typedef mach_port_t		vm_map_t;

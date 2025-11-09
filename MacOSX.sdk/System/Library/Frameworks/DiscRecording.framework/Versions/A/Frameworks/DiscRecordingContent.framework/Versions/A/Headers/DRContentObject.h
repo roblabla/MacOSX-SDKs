@@ -14,18 +14,20 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 /*!
-	@header DRContentObject
-	
-	This is the header file for the base file system object in Disc Recording's
-	content-creation APIs.
-	
-	Content creation provides an interface for dynamic file system creation, allowing
-	complex file-system hierarchies to be created and burned on-the-fly without having
-	to generate a complete on-disk representation.
-	
-	The <tt>DRContentObject</tt> opaque type serves as a base for file and folder objects.	
+	@header
+	@abstract		Base file system object in Disc Recording content-creation APIs.
+
+	@discussion		Content creation provides an interface for dynamic file system
+					creation, allowing complex file-system hierarchies to be created
+					and burned on-the-fly without having to generate a complete
+					on-disk representation.
+		
+					The @link DRFSObjectRef DRFSObjectRef @/link opaque type serves as a base for file
+					and folder objects.
 */
+
 #ifndef _H_DRContentObject
 #define _H_DRContentObject
 
@@ -74,25 +76,28 @@ typedef struct __DRFolder*		DRFolderRef;
 typedef DRTypeRef DRFSObjectRef;
 
 
-
-
-
+/*!
+	@typedef DRFilesystemMask
+	@abstract			A mask of values indicating in which filesystems a particular filesystem object should be included.
+*/
 typedef UInt32 DRFilesystemMask;
+
+/*!
+	@enum	DRFilesystemMask contants
+	@discussion	
+	@constant	kDRFilesystemMaskISO9660
+					The mask specifying the ISO-9660 file system. 
+	@constant	kDRFilesystemMaskJoliet
+					The mask specifying the Joliet file system, an extension to the ISO-9660 file system.
+	@constant	kDRFilesystemMaskHFSPlus
+					The mask specifying the HFS+ file system.
+	@constant	kDRFilesystemMaskDefault
+					The default, unrestricted mask for newly-created file or folder objects.	
+*/
 enum {
-	/*!	@constant	kDRFilesystemMaskISO9660
-		@abstract	The mask specifying the ISO-9660 file system.  */
 	kDRFilesystemMaskISO9660			= (1<<0),
-	
-	/*!	@constant	kDRFilesystemMaskJoliet
-		@abstract	The mask specifying the Joliet file system, an extension to the ISO-9660 file system. */
 	kDRFilesystemMaskJoliet				= (1<<1),
-	
-	/*! @constant	kDRFilesystemMaskHFSPlus
-		@abstract	The mask specifying the HFS+ file system.	*/
 	kDRFilesystemMaskHFSPlus			= (1<<3),
-	
-	/*!	@constant	kDRFilesystemMaskDefault
-		@abstract	The default, unrestricted mask for newly-created file or folder objects. */
 	kDRFilesystemMaskDefault			= 0xFFFFFFFF
 };
 
@@ -182,17 +187,17 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract		Obtains a file-system-specific name for a file or folder object.
 	@discussion		When using this function to generate a file-system-specific name, you
 					must specify the <tt>fsKey</tt> parameter, as listed in 
-					<tt>DRContentProperties.h</tt>, as either <tt>kDRISO9660LevelOne</tt> 
-					for '8.3' names or <tt>kDRISO9660LevelTwo</tt> for 30-character names. You 
-					cannot use the <tt>kDRISO9660</tt> constant because it does not 
+					<tt>DRContentProperties.h</tt>, as either @link //apple_ref/c/data/kDRISO9660LevelOne kDRISO9660LevelOne @/link 
+					for '8.3' names or @link //apple_ref/c/data/kDRISO9660LevelTwo kDRISO9660LevelTwo @/link for 30-character names. You 
+					cannot use the @link //apple_ref/c/data/kDRISO9660 kDRISO9660 @/link constant because it does not 
 					distinguish between the level-one and level-two ISO-9660 formats. Use 
-					<tt>kDRISO9660</tt> only for accessing file and folder object
-					properties with the <tt>DRFSObjectCopyProperty</tt> or 
-					<tt>DRFSObjectCopyProperties</tt> functions.
+					@link //apple_ref/c/data/kDRISO9660 kDRISO9660 @/link only for accessing file and folder object
+					properties with the @link DRFSObjectCopyFilesystemProperty DRFSObjectCopyFilesystemProperty @/link or 
+					@link DRFSObjectCopyFilesystemProperties DRFSObjectCopyFilesystemProperties @/link functions.
 					
 	@param	object	The file or folder object to query.
 	@param	fsKey	The name-access key for the requested file-system-specific name. Valid keys
-					include <tt>kDRISO9660LevelOne</tt> for '8.3' names or <tt>kDRISO9660LevelTwo</tt>
+					include @link //apple_ref/c/data/kDRISO9660LevelOne kDRISO9660LevelOne @/link for '8.3' names or @link //apple_ref/c/data/kDRISO9660LevelTwo kDRISO9660LevelTwo @/link
 					for 30-character names.
 	@result			Returns a reference to a file-system-specific name.
 */
@@ -227,16 +232,16 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				
 					When using this function to obtain a modified name, you must specify
 					the <tt>fsKey</tt> parameter, as listed in 
-					<tt>DRContentProperties.h</tt>, as either <tt>kDRISO9660LevelOne</tt> 
-					for '8.3' names or <tt>kDRISO9660LevelTwo</tt> for 30-character names. You 
-					cannot use the <tt>kDRISO9660</tt> constant because it does not 
+					<tt>DRContentProperties.h</tt>, as either @link //apple_ref/c/data/kDRISO9660LevelOne kDRISO9660LevelOne @/link 
+					for '8.3' names or @link //apple_ref/c/data/kDRISO9660LevelTwo kDRISO9660LevelTwo @/link for 30-character names. You 
+					cannot use the @link //apple_ref/c/data/kDRISO9660 kDRISO9660 @/link constant because it does not 
 					distinguish between the level-one and level-two ISO-9660 formats. Use 
-					<tt>kDRISO9660</tt> only for accessing file and folder object
-					properties with the <tt>DRFSObjectCopyProperty</tt> or 
-					<tt>DRFSObjectCopyProperties</tt> functions.
+					@link //apple_ref/c/data/kDRISO9660 kDRISO9660 @/link only for accessing file and folder object
+					properties with the @link DRFSObjectCopyFilesystemProperty DRFSObjectCopyFilesystemProperty @/link or 
+					@link DRFSObjectCopyFilesystemProperties DRFSObjectCopyFilesystemProperties @/link functions.
 	@param	object	The object reference to query.
 	@param	fsKey	The name-access key for the requested file-system-specific name. Valid keys
-					include <tt>kDRISO9660LevelOne</tt> for '8.3' names or <tt>kDRISO9660LevelTwo</tt>
+					include @link //apple_ref/c/data/kDRISO9660LevelOne kDRISO9660LevelOne @/link for '8.3' names or @link //apple_ref/c/data/kDRISO9660LevelTwo kDRISO9660LevelTwo @/link
 					for 30-character names.
 	@result			Returns a reference to a file-system-specific name, modified as
 					necessary for uniqueness.
@@ -329,7 +334,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					
 					A file or folder object can be considered to have two mask values.  The 
 					first is the explicit mask, set by the client unless it is simply 
-					the default value of <tt>kDRFilesystemMaskDefault</tt>, with all bits set 
+					the default value of @link kDRFilesystemMaskDefault kDRFilesystemMaskDefault @/link, with all bits set 
 					to 1.  The other is the effective mask, which is a derived mask used  
 					during a burn.
 					
@@ -345,7 +350,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				</ul>
 	
 					For example, an explicit mask of 0 forces an effective mask of 0, and an
-					explicit mask of <tt>kDRFilesystemMaskDefault</tt> implies an effective mask
+					explicit mask of @link kDRFilesystemMaskDefault kDRFilesystemMaskDefault @/link implies an effective mask
 					equal to the parent's effective mask.
 					
 					For an object to appear in a file system, its parent folder, and all 
@@ -356,7 +361,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					
 				<ul>
 				<li>If your client gives the root folder has an explicit mask of 
-					<tt>kDRFilesystemMaskDefault</tt>, Disc Recording will assign to the root 
+					@link kDRFilesystemMaskDefault kDRFilesystemMaskDefault @/link, Disc Recording will assign to the root 
 					folder a default explicit mask of its own choosing in an attempt to produce 
 					the most cross-platform-compatible disc.
 					
@@ -369,7 +374,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					Assigning the root folder a mask of 0 results in undefined behavior.</li>
 					
 				<li>If your client gives every file and folder object in your source layout an 
-					explicit mask of <tt>kDRFilesystemMaskDefault</tt>, then every object will
+					explicit mask of @link kDRFilesystemMaskDefault kDRFilesystemMaskDefault @/link, then every object will
 					inherit the mask that Disc Recording chooses for the root folder.</li>
 					
 				<li>If you set the root folder's mask to a file system that is dependent on 
@@ -377,8 +382,8 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					by enabling the required file system.
 					
 					For example, the Joliet file system requires ISO-9660.  If the root 
-					folder's mask is <tt>kDRFilesystemMaskJoliet</tt> only, Disc Recording 
-					will automatically enable <tt>kDRFilesystemMaskISO9660</tt> as well.</li>
+					folder's mask is @link kDRFilesystemMaskJoliet kDRFilesystemMaskJoliet @/link only, Disc Recording 
+					will automatically enable @link kDRFilesystemMaskISO9660 kDRFilesystemMaskISO9660 @/link as well.</li>
 				
 				<li>If the root folder's mask requests a file system that cannot coexist with 
 					another requested file system, Disc Recording resolves the conflict by 
@@ -443,10 +448,10 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				
 					To ensure that you are always displaying the most current name to the user,
 					always follow a call to this function with a call to 
-					<tt>DRFSObjectCopySpecificName</tt>.
+					@link DRFSObjectCopySpecificName DRFSObjectCopySpecificName @/link.
 	@param	object	A reference to the file or folder object to modify.
 	@param	fsKey	The name-access key for the file-system-specific name you are changing. Valid keys
-					include <tt>kDRISO9660LevelOne</tt> for '8.3' names or <tt>kDRISO9660LevelTwo</tt>
+					include @link //apple_ref/c/data/kDRISO9660LevelOne kDRISO9660LevelOne @/link for '8.3' names or @link //apple_ref/c/data/kDRISO9660LevelTwo kDRISO9660LevelTwo @/link
 					for 30-character names.
 	@param	specificName	The name to apply to the file or folder object.
 */
@@ -468,7 +473,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				
 					To ensure that you are always displaying the most current name to the user,
 					always follow a call to this function with a call to 
-					<tt>DRFSObjectCopySpecificNames</tt>.
+					@link DRFSObjectCopySpecificNames DRFSObjectCopySpecificNames @/link.
 	@param	object			A reference to the file or folder object to modify.
 	@param	specificNames	The dictionary containing the names to apply to the file or folder object.
 */
@@ -514,7 +519,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@function	DRFSObjectSetFilesystemMask
 	@abstract			Sets the explicit mask for a file or folder object, indicating in 
 						which file systems this object should appear.
-	@discussion			Refer to the discussion for <tt>DRFSObjectGetFilesystemMask</tt> 
+	@discussion			Refer to the discussion for @link DRFSObjectGetFilesystemMask DRFSObjectGetFilesystemMask @/link 
 						for an explanation of explicit and effective masks.
 	@param	object		A reference to the file or folder object to modify.
 	@param	newMask		The new explicit mask to use.

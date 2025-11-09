@@ -92,8 +92,11 @@ typedef struct savearea {
 
 	savearea_comm	save_hdr;					/* Stuff common to all saveareas */
 
-	unsigned int	save_060[8];				/* Fill 32 bytes */
-
+	uint64_t		save_xdat0;					/* Exception data 0 */
+	uint64_t		save_xdat1;					/* Exception data 1 */
+	uint64_t		save_xdat2;					/* Exception data 2 */
+	uint64_t		save_xdat3;					/* Exception data 3 */
+                                             
                                                 /* offset 0x0080 */
 	uint64_t	 	save_r0;
 	uint64_t	 	save_r1;
@@ -360,6 +363,8 @@ void 			savearea_init(vm_offset_t addr);	/* Boot-time savearea initialization */
 #define SAVredriveb	13						/* Indicates that the low-level fault handler associated */
 #define	SAVinstrument 0x00080000			/* Indicates that we should return instrumentation data */
 #define	SAVinstrumentb 12					/* Indicates that we should return instrumentation data */
+#define	SAVeat 		0x00100000				/* Indicates that interruption should be ignored */
+#define	SAVeatb 	11						/* Indicates that interruption should be ignored */
 #define SAVtype		0x0000FF00				/* Shows type of savearea */
 #define SAVtypeshft	8						/* Shift to position type */
 #define SAVempty	0x86					/* Savearea is on free list */

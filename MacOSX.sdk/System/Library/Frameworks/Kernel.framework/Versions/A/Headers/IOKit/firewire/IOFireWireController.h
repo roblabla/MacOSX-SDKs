@@ -48,6 +48,7 @@ class IOFWAddressSpace;
 class IOFWPseudoAddressSpace;
 class IOFireWireNub;
 class IOFireWireDevice;
+class IOFireWireDeviceAux;
 class IOFireWireUnit;
 class IODCLProgram;
 class IOLocalConfigDirectory;
@@ -358,6 +359,7 @@ protected:
 	friend class IOFWLocalIsochPort;
 	friend class IOFWCommand;
 	friend class IOFireWireDevice;
+	friend class IOFireWireDeviceAux;
     friend class IOFireWirePCRSpace;
     friend class IOFireWireROMCache;
     friend class IOFWAsyncStreamCommand;
@@ -458,6 +460,9 @@ protected:
 	
 	UInt8						fHopCounts[(kFWMaxNodesPerBus+1)*kFWMaxNodesPerBus];
 
+	bool						fUseHalfSizePackets;
+	bool						fRequestedHalfSizePackets;
+	
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
     */    
@@ -768,11 +773,16 @@ protected:
 protected:
 	bool delayedStateCommandInUse() const;
 	void enterBusResetDisabledState( );
+	
+	virtual UInt32 getPortNumberFromIndex( UInt16 index );
 												
 public:
 
  	IOReturn clipMaxRec2K(Boolean clipMaxRec );
-
+	void setNodeSpeed( UInt16 nodeAddress, IOFWSpeed speed );
+	void useHalfSizePackets( void );
+	void disablePhyPortOnSleepForNodeID( UInt32 nodeID );
+	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireController, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireController, 1);

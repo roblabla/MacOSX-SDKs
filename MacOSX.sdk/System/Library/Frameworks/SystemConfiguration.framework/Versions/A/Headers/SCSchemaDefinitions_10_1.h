@@ -415,6 +415,8 @@
 #define kSCPropNetProxiesSOCKSEnable             SCSTR("SOCKSEnable")                     /* CFNumber (0 or 1) */
 #define kSCPropNetProxiesSOCKSPort               SCSTR("SOCKSPort")                       /* CFNumber */
 #define kSCPropNetProxiesSOCKSProxy              SCSTR("SOCKSProxy")                      /* CFString */
+#define kSCPropNetProxiesProxyAutoConfigEnable   SCSTR("ProxyAutoConfigEnable")           /* CFNumber (0 or 1) */
+#define kSCPropNetProxiesProxyAutoConfigURLString SCSTR("ProxyAutoConfigURLString")        /* CFString */
 
 /*
  kSCCompUsers Entity Keys

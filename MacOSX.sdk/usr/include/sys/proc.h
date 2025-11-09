@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -70,7 +70,6 @@
 #include <sys/lock.h>
 #include <sys/param.h>
 #include <sys/event.h>
-#include <sys/audit.h>
 
 #ifdef __APPLE_API_PRIVATE
 
@@ -123,7 +122,8 @@ struct	proc {
 
 	int	p_flag;			/* P_* flags. */
 	char	p_stat;			/* S* process status. */
-	char	p_pad1[3];
+        char	p_shutdownstate;
+	char	p_pad1[2];
 
 	pid_t	p_pid;			/* Process identifier. */
 	LIST_ENTRY(proc) p_pglist;	/* List of processes in pgrp. */
@@ -402,10 +402,14 @@ extern struct proc *initproc, *kernproc;
 extern void	pgdelete __P((struct pgrp *pgrp));
 extern void	sessrele __P((struct session *sess));
 extern void	procinit __P((void));
+__private_extern__ char *proc_core_name(const char *name, uid_t uid, pid_t pid);
+extern int proc_is_classic(struct proc *p);
+struct proc *current_proc_EXTERNAL(void);
 #endif /* __APPLE_API_PRIVATE */
 
 #ifdef __APPLE_API_UNSTABLE
 
+extern int isinferior(struct proc *, struct proc *);
 extern struct	proc *pfind __P((pid_t));	/* Find process by id. */
 __private_extern__ struct proc *pzfind(pid_t);	/* Find zombie by id. */
 extern struct	pgrp *pgfind __P((pid_t));	/* Find process group by id. */

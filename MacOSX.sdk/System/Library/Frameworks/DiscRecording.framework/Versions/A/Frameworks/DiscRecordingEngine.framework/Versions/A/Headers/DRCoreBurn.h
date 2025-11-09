@@ -15,6 +15,12 @@
  
 */
 
+/*!	@header 	
+	@abstract		Burn object interfaces for Disc Recording.
+
+	@discussion		
+*/
+
 #ifndef _H_DRCoreBurn
 #define _H_DRCoreBurn
 
@@ -124,7 +130,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				This dictionary will contain the state, percentage complete, and any errors reported.
 	@result		Returns a reference to a CFDictionary object. The reference is implicitly retained 
 				by the caller. This is the same dictionary sent to observers of the 
-				kDRBurnStatusChangedNotification notification.
+				@link kDRBurnStatusChangedNotification kDRBurnStatusChangedNotification @/link notification.
 */
 extern
 CFDictionaryRef DRBurnCopyStatus(DRBurnRef burn)
@@ -135,7 +141,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract	Obtains a reference to the device associated with a burn.
 	@param		burn	The burn for which to get the device reference. If this parameter 
 						is not a valid DRBurn object, the behavior is undefined. 
-	@result		Returns a reference of type DRDeviceRef. The caller does not implicitly retain the reference
+	@result		Returns a reference of type @link DRDeviceRef DRDeviceRef @/link. The caller does not implicitly retain the reference
 				and is not responsible for releasing it.
 */
 extern
@@ -191,12 +197,12 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@discussion 	This burn property key corresponds to a CFNumber object containing the speed at 
 					which the burn should run, expressed as a floating point value in kilobytes per 
 					second where 1 kilobyte = 1,000 bytes. If this key is not present, the requested 
-					maximum burn speed defaults to <tt>kDRDeviceBurnSpeedMax</tt>.
+					maximum burn speed defaults to @link kDRDeviceBurnSpeedMax kDRDeviceBurnSpeedMax @/link.
 					
 					The speed at which the burn will run depends on several factors including the 
 					speed of the bus to which the drive is connected, the data rate capacity of the,  
 					disc, the sustained rate at which data can be produced, and the limit your 
-					application sets in the kDRMaxBurnSpeedKey track property keys. For example, a 16x 
+					application sets in the @link kDRMaxBurnSpeedKey kDRMaxBurnSpeedKey @/link track property keys. For example, a 16x 
 					drive connected over USB 1.0 results in a maximum sustainable throughput to the 
 					drive of just 2x due to the bandwidth limitation of the bus.
 					
@@ -259,7 +265,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				actions for disc handling.
 				
 				If this key is not present, the burn will default to a value 
-				of <tt>kDRBurnCompletionActionEject</tt> and the disc will 
+				of @link kDRBurnCompletionActionEject kDRBurnCompletionActionEject @/link and the disc will 
 				be ejected.
 */
 extern const CFStringRef kDRBurnCompletionActionKey
@@ -310,7 +316,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				
 				Synchronous operations do not post status notifications and
 				do not return until they are completed.  Status can 
-				be queried at any time using the DRBurnCopyStatus function, and will 
+				be queried at any time using the @link DRBurnCopyStatus DRBurnCopyStatus @/link function, and will 
 				remain valid even after the burn operation has finished.
 */
 extern const CFStringRef kDRSynchronousBehaviorKey
@@ -323,7 +329,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 				actions for disc handling.
 				
 				If this key is not present, the burn will default to a value 
-				of <tt>kDRBurnFailureActionEject</tt> and the disc will 
+				of @link kDRBurnFailureActionEject kDRBurnFailureActionEject @/link and the disc will 
 				be ejected.
 */
 extern const CFStringRef kDRBurnFailureActionKey
@@ -338,8 +344,8 @@ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 				indicating that an MCN is not supplied.
 				
 				This value is the standard UPC/EAN product number, and should conform to the
-				specifications of the UCC and EAN.  See http://www.ean-int.org and
-				http://www.uc-council.org for more information.
+				specifications of the UCC and EAN.  See <a href="http://www.ean-int.org">http://www.ean-int.org</a> and
+				<a href="http://www.uc-council.org">http://www.uc-council.org</a> for more information.
 */				
 extern const CFStringRef kDRMediaCatalogNumberKey
 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -360,7 +366,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 				This presence of this key alone is just a suggestion--if the burn
 				engine cannot fulfill the request it will burn using whatever
 				strategy is available.  To convert the suggestion into a requirement, add the
-				kDRBurnStrategyIsRequiredKey key with a value of <tt>true</tt>.
+				@link kDRBurnStrategyIsRequiredKey kDRBurnStrategyIsRequiredKey @/link key with a value of <tt>true</tt>.
 				
 				Before using this key you should ensure that the device
 				supports the strategy or strategies requested. Do this by checking the
@@ -373,13 +379,13 @@ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	@const		kDRBurnStrategyIsRequiredKey
 	@abstract	Flag indicating whether to attempt to enforce the specified burn strategies.
 	@discussion	This burn property key corresponds to a CFBoolean object indicating whether the burn
-				strategy or strategies listed for the kDRBurnStrategyKey key are
+				strategy or strategies listed for the @link kDRBurnStrategyKey kDRBurnStrategyKey @/link key are
 				the only ones allowed.  If this key is not present, the burn will 
 				behave as though the key were <tt>false</tt>.
 				
 				If this key's value is set to <tt>true</tt> and the device does
 				not support any of the suggested burn strategies, the burn
-				will fail with a return value of <tt>kDRDeviceBurnStrategyNotAvailableErr</tt>.
+				will fail with a return value of @link //apple_ref/c/econst/kDRDeviceBurnStrategyNotAvailableErr kDRDeviceBurnStrategyNotAvailableErr @/link.
 				
 				If this key's value is set to <tt>false</tt> and the device does
 				not support any of the suggested burn strategies, the engine

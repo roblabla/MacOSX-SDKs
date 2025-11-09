@@ -50,6 +50,7 @@ typedef UInt32 IOBluetoothHCIControllerFeatureFlags;
 
 enum
 {
-	kIOBluetoothHCIControllerFeatureFlagSerializeCommands			= 0x10000000,
-	kIOBluetoothHCIControllerFeatureFlagVendorCommandFlowControl	= 0x00000001
+	kIOBluetoothHCIControllerFeatureFlagVendorCommandFlowControl	= 0x00000001,
+	kIOBluetoothHCIControllerFeatureFlagSCOSupported				= 0x00000002,
+	kIOBluetoothHCIControllerFeatureFlagSerializeCommands			= 0x10000000
 };

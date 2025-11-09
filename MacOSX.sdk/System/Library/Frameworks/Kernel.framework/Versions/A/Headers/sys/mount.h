@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -311,6 +311,7 @@ struct vfsidctl {
 #define VFS_CTL_QUERY	0x00010003	/* anything wrong? (vfsquery) */
 #define VFS_CTL_NEWADDR	0x00010004	/* reconnect to new address */
 #define VFS_CTL_TIMEO	0x00010005	/* set timeout for vfs notification */
+#define VFS_CTL_NOLOCKS	0x00010006	/* disable file locking */
 
 struct vfsquery {
 	u_int32_t	vq_flags;
@@ -326,7 +327,7 @@ struct vfsquery {
 #define VQ_DEAD		0x0020	/* filesystem is dead, needs force unmount */
 #define VQ_ASSIST	0x0040	/* filesystem needs assistance from external
 				   program */
-#define VQ_FLAG0080	0x0080	/* placeholder */
+#define VQ_NOTRESPLOCK	0x0080	/* server lockd down */
 #define VQ_FLAG0100	0x0100	/* placeholder */
 #define VQ_FLAG0200	0x0200	/* placeholder */
 #define VQ_FLAG0400	0x0400	/* placeholder */

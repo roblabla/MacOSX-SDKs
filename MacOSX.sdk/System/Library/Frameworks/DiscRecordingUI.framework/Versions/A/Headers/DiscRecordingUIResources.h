@@ -15,17 +15,24 @@
  
 */
 
+/*!	@header 	DiscRecordingUIResources.h
+	@abstract	Resources provided by the DiscRecordingUI framework.
+	@discussion
+*/
+
 #import <Cocoa/Cocoa.h>
 #import <AvailabilityMacros.h>
 
 /*!
 	@const		DRBurnIcon
-	@discussion	The name of the burn icon image.
+	@abstract	The name of the burn icon image.
+	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed%58 -[NSImage imageNamed:] @/link method.
 */
 extern NSString* const DRBurnIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DREraseIcon
-	@discussion	The name of the erase icon image.
+	@abstract	The name of the erase icon image.
+	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed%58 -[NSImage imageNamed:] @/link method.
 */
 extern NSString* const DREraseIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
