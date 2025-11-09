@@ -12,12 +12,20 @@ extern          "C" {
 
     int netsnmp_check_vb_type(const netsnmp_variable_list *var, int type);
     int netsnmp_check_vb_size(const netsnmp_variable_list *var, size_t size );
+    int netsnmp_check_vb_max_size(const netsnmp_variable_list *var, size_t size );
+    int netsnmp_check_vb_range(const netsnmp_variable_list *var,
+                               size_t low, size_t high );
     int netsnmp_check_vb_size_range(const netsnmp_variable_list *var,
                                     size_t low, size_t high );
 
     int netsnmp_check_vb_type_and_size(const netsnmp_variable_list *var,
                                     int type, size_t size);
+    int netsnmp_check_vb_type_and_max_size(const netsnmp_variable_list *var,
+                                    int type, size_t size);
 
+    int netsnmp_check_vb_oid(const netsnmp_variable_list *var);
+    int netsnmp_check_vb_int(const netsnmp_variable_list *var);
+    int netsnmp_check_vb_uint(const netsnmp_variable_list *var);
     int netsnmp_check_vb_int_range(const netsnmp_variable_list *var, int low,
                                    int high);
 

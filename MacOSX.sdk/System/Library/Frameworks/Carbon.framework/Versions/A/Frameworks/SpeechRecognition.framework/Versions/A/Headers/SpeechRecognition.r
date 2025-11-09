@@ -3,7 +3,7 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Version:    SpeechRecognition-3.6.4~311
+     Version:    SpeechRecognition-3.7.24~110
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -19,6 +19,10 @@
 
 #ifndef __CORESERVICES_R__
 #include <CoreServices/CoreServices.r>
+#endif
+
+#ifndef __STDINT_R__
+#include </stdint.r>
 #endif
 
 

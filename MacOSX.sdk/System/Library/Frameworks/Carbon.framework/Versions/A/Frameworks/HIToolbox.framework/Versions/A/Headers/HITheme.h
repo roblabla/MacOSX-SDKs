@@ -3,7 +3,7 @@
  
      Contains:   HIToolbox HITheme interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -25,7 +25,11 @@
 #endif
 
 #ifndef __HISHAPE__
-#include <HIToolbox/HIShape.h>
+#include <HIServices/HIShape.h>
+#endif
+
+#ifndef __CARBONEVENTS__
+#include <HIToolbox/CarbonEvents.h>
 #endif
 
 
@@ -40,7 +44,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* -------------------------------------------------------------------------- */
 /*  HIThemeOrientation information                                            */
@@ -240,7 +244,7 @@ struct HIScrollBarTrackInfo {
   /*
    * The view range size.
    */
-  float               viewsize;
+  CGFloat             viewsize;
 };
 typedef struct HIScrollBarTrackInfo     HIScrollBarTrackInfo;
 
@@ -919,7 +923,7 @@ struct HIThemeMenuBarDrawInfo {
   /*
    * The attributes of the menu bar to be drawn.
    */
-  UInt32              attributes;
+  OptionBits          attributes;
 };
 typedef struct HIThemeMenuBarDrawInfo   HIThemeMenuBarDrawInfo;
 typedef HIThemeMenuBarDrawInfo *        HIThemeMenuBarDrawInfoPtr;
@@ -949,7 +953,7 @@ struct HIThemeMenuTitleDrawInfo {
    * The attributes of the menu title to be drawn. Must be either 0 or
    * kHIThemeMenuTitleDrawCondensed.
    */
-  UInt32              attributes;
+  OptionBits          attributes;
 
   /*
    * The border space between the menu title rect and the menu title
@@ -961,7 +965,7 @@ struct HIThemeMenuTitleDrawInfo {
    * &extra, true ). You may pass 0 in this field to use the minimum
    * condensed title extra.
    */
-  float               condensedTitleExtra;
+  CGFloat             condensedTitleExtra;
 };
 typedef struct HIThemeMenuTitleDrawInfo HIThemeMenuTitleDrawInfo;
 typedef HIThemeMenuTitleDrawInfo *      HIThemeMenuTitleDrawInfoPtr;
@@ -1027,12 +1031,12 @@ struct HIThemeWindowDrawInfo {
   /*
    * The height of the title of the window.
    */
-  float               titleHeight;
+  CGFloat             titleHeight;
 
   /*
    * The width of the title of the window.
    */
-  float               titleWidth;
+  CGFloat             titleWidth;
 };
 typedef struct HIThemeWindowDrawInfo    HIThemeWindowDrawInfo;
 typedef HIThemeWindowDrawInfo *         HIThemeWindowDrawInfoPtr;
@@ -1085,12 +1089,12 @@ struct HIThemeWindowWidgetDrawInfo {
   /*
    * The height of the title of the window.
    */
-  float               titleHeight;
+  CGFloat             titleHeight;
 
   /*
    * The width of the title of the window.
    */
-  float               titleWidth;
+  CGFloat             titleWidth;
 };
 typedef struct HIThemeWindowWidgetDrawInfo HIThemeWindowWidgetDrawInfo;
 typedef HIThemeWindowWidgetDrawInfo *   HIThemeWindowWidgetDrawInfoPtr;
@@ -1279,9 +1283,7 @@ struct HIThemeBackgroundDrawInfo {
   UInt32              version;
 
   /*
-   * The ThemeDrawState of the background to be drawn. Currently,
-   * HIThemeDrawBackground backgrounds do not have state, so this field
-   * has no meaning. Set it to kThemeStateActive.
+   * The ThemeDrawState of the background to be drawn.
    */
   ThemeDrawState      state;
 
@@ -2267,7 +2269,8 @@ enum {
    * available bounds, truncate the text at the end of the last visible
    * line.
    */
-  kHIThemeTextTruncationEnd     = 2
+  kHIThemeTextTruncationEnd     = 2,
+  kHIThemeTextTruncationDefault = 3
 };
 
 typedef UInt32                          HIThemeTextTruncation;
@@ -2291,7 +2294,8 @@ enum {
    * The text will be drawn flush with the right side of the bounding
    * box.
    */
-  kHIThemeTextHorizontalFlushRight = 2
+  kHIThemeTextHorizontalFlushRight = 2,
+  kHIThemeTextHorizontalFlushDefault = 3
 };
 
 typedef UInt32                          HIThemeTextHorizontalFlush;
@@ -2313,7 +2317,8 @@ enum {
   /*
    * Draw the text vertically flush with the bottom of the box
    */
-  kHIThemeTextVerticalFlushBottom = 2
+  kHIThemeTextVerticalFlushBottom = 2,
+  kHIThemeTextVerticalFlushDefault = 3
 };
 
 typedef UInt32                          HIThemeTextVerticalFlush;
@@ -2322,12 +2327,36 @@ typedef UInt32                          HIThemeTextVerticalFlush;
  */
 enum {
   kHIThemeTextBoxOptionNone     = 0,
-  kHIThemeTextBoxOptionStronglyVertical = (1 << 1)
+  kHIThemeTextBoxOptionStronglyVertical = (1 << 1),
+
+  /*
+   * Draw the text with an engraved look, suitable for use on the Mac
+   * OS X 10.5 dark window backgrounds or on the bodies of some
+   * controls.
+   */
+  kHIThemeTextBoxOptionEngraved = (1 << 2)
 };
 
 typedef OptionBits                      HIThemeTextBoxOptions;
+
+/*
+ */
 enum {
-  kHIThemeTextInfoVersionZero   = 0
+
+  /*
+   * Available in Mac OS X 10.3 and later. Valid fields for this
+   * version are version, state, fontID, horizontalFlushness,
+   * verticalFlushness, options, truncationPosition, truncationMaxLines
+   * and truncationHappened.
+   */
+  kHIThemeTextInfoVersionZero   = 0,
+
+  /*
+   * Available in Mac OS X 10.5 and later. Valid fields for this
+   * version are all those in the zero version as well as the font
+   * field.
+   */
+  kHIThemeTextInfoVersionOne    = 1
 };
 
 
@@ -2348,9 +2377,9 @@ enum {
 struct HIThemeTextInfo {
 
   /*
-   * The version of this data structure. Currently, it is always 0.
+   * The version of this data structure. Currently, it is always 1.
    */
-  UInt32              version;                /* current version is 0 */
+  UInt32              version;
 
   /*
    * The theme draw state in which to draw the string.
@@ -2370,7 +2399,7 @@ struct HIThemeTextInfo {
    * same flushness that will be used with a subsequent draw will
    * trigger a performance optimization.
    */
-  HIThemeTextHorizontalFlush  horizontalFlushness; /* kHIThemeTextHorizontalFlush[Left/Center/Right] */
+  HIThemeTextHorizontalFlush  horizontalFlushness;
 
   /*
    * The vertical flushness of the text. One of the
@@ -2380,35 +2409,43 @@ struct HIThemeTextInfo {
    * flushness that will be used with a subsequent draw will trigger a
    * performance optimization.
    */
-  HIThemeTextVerticalFlush  verticalFlushness; /* kHIThemeTextVerticalFlush[Top/Center/Bottom] */
+  HIThemeTextVerticalFlush  verticalFlushness;
 
   /*
    * Currently, the only option available is for strongly vertical text
    * with the kThemeTextBoxOptionStronglyVertical option bit.
    */
-  HIThemeTextBoxOptions  options;             /* includes kHIThemeTextBoxOptionStronglyVertical */
+  HIThemeTextBoxOptions  options;
 
   /*
    * Specifies where truncation should occur. If this field is
    * kHIThemeTextTruncationNone, no truncation will occur, and all
    * fields with the truncation prefix will be ignored.
    */
-  HIThemeTextTruncation  truncationPosition;  /* kHIThemeTextTruncation[None/Middle/End], If none the following field is ignored */
+  HIThemeTextTruncation  truncationPosition;
 
   /*
    * The maximum number of lines to measure or draw before truncation
    * occurs. Ignored if truncationPosition is
    * kHIThemeTextTruncationNone.
    */
-  UInt32              truncationMaxLines;     /* the maximum number of lines before truncation occurs */
+  UInt32              truncationMaxLines;
 
   /*
    * On output, if the text has been truncated, this is set to true. If
    * the text fit completely within the parameters specified and the
    * text was not truncated, this is set to false.
    */
-  Boolean             truncationHappened;     /* on output, whether truncation needed to happen */
+  Boolean             truncationHappened;
+  UInt8               filler1;
 
+  /*
+   * If fontID is kThemeSpecifiedFont and the version is 1, this
+   * CTFontRef will be used for measuring and rendering of the string.
+   * If the fontID is anything other than kThemeSpecifiedFont or the
+   * version is not 1, this field is ignored.
+   */
+  CTFontRef           font;
 };
 typedef struct HIThemeTextInfo          HIThemeTextInfo;
 /*
@@ -2433,7 +2470,10 @@ typedef struct HIThemeTextInfo          HIThemeTextInfo;
  *      measure. You MUST NOT pass in a CFStringRef that was allocated
  *      with any of the "NoCopy" CFString creation APIs; a string
  *      created with a "NoCopy" API has transient storage which is
- *      incompatible with HIThemeGetTextDimensions's caches.
+ *      incompatible with HIThemeGetTextDimensions's caches. 
+ *      
+ *      In Mac OS X 10.5 and later, this API may also be passed a
+ *      CFAttributedStringRef.
  *    
  *    inWidth:
  *      The width to constrain the text before wrapping. If inWidth is
@@ -2477,12 +2517,12 @@ typedef struct HIThemeTextInfo          HIThemeTextInfo;
  */
 extern OSStatus 
 HIThemeGetTextDimensions(
-  CFStringRef        inString,
-  float              inWidth,
+  CFTypeRef          inString,
+  CGFloat            inWidth,
   HIThemeTextInfo *  inTextInfo,
-  float *            outWidth,          /* can be NULL */
-  float *            outHeight,         /* can be NULL */
-  float *            outBaseline)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGFloat *          outWidth,          /* can be NULL */
+  CGFloat *          outHeight,         /* can be NULL */
+  CGFloat *          outBaseline)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2506,7 +2546,10 @@ HIThemeGetTextDimensions(
  *      render. You MUST NOT pass in a CFStringRef that was allocated
  *      with any of the "NoCopy" CFString creation APIs; a string
  *      created with a "NoCopy" API has transient storage which is
- *      incompatible with HIThemeDrawTextBox's caches.
+ *      incompatible with HIThemeDrawTextBox's caches. 
+ *      
+ *      In Mac OS X 10.5 and later, this API may also be passed a
+ *      CFAttributedStringRef.
  *    
  *    inBounds:
  *      The HIRect that bounds where the text is to be drawn
@@ -2536,11 +2579,47 @@ HIThemeGetTextDimensions(
  */
 extern OSStatus 
 HIThemeDrawTextBox(
-  CFStringRef          inString,
+  CFTypeRef            inString,
   const HIRect *       inBounds,
   HIThemeTextInfo *    inTextInfo,
   CGContextRef         inContext,
   HIThemeOrientation   inOrientation)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIThemeGetUIFontType()
+ *  
+ *  Summary:
+ *    Returns the CTFontUIFontType for a ThemeFontID
+ *  
+ *  Discussion:
+ *    It is possible to create a CTFontRef that represents a
+ *    ThemeFontID by using this API in conjunction with
+ *    CTFontCreateUIFontForLanguage. 
+ *    
+ *    Suggested usage: 
+ *    CTFontRef font = CTFontCreateUIFontForLanguage(
+ *    HIThemeGetUIFontType( inFontID ), 0, NULL );
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inFontID:
+ *      The ThemeFontID to map to a CTFontUIFontType.
+ *  
+ *  Result:
+ *    The CTFontUIFontType that represents the ThemeFontID or
+ *    kCTFontNoFontType if there is an error.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CTFontUIFontType 
+HIThemeGetUIFontType(ThemeFontID inFontID)                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /* -------------------------------------------------------------------------- */
@@ -2926,7 +3005,7 @@ extern OSStatus
 HIThemeGetTrackThumbPositionFromOffset(
   const HIThemeTrackDrawInfo *  inDrawInfo,
   const HIPoint *               inThumbOffset,
-  float *                       outRelativePosition)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGFloat *                     outRelativePosition)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2961,7 +3040,7 @@ extern OSStatus
 HIThemeGetTrackThumbPositionFromBounds(
   const HIThemeTrackDrawInfo *  inDrawInfo,
   const HIRect *                inThumbBounds,
-  float *                       outRelativePosition)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGFloat *                     outRelativePosition)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2994,7 +3073,7 @@ HIThemeGetTrackThumbPositionFromBounds(
 extern OSStatus 
 HIThemeGetTrackLiveValue(
   const HIThemeTrackDrawInfo *  inDrawInfo,
-  float                         inRelativePosition,
+  CGFloat                       inRelativePosition,
   SInt32 *                      outValue)                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -3396,7 +3475,7 @@ HIThemeGetWindowRegionHit(
  *  HIThemeDrawFrame()
  *  
  *  Summary:
- *    Draws a variety of frames frame.
+ *    Draws a variety of frames.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3692,6 +3771,119 @@ HIThemeDrawFocusRect(
   Boolean              inHasFocus,
   CGContextRef         inContext,
   HIThemeOrientation   inOrientation)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ */
+enum {
+
+  /*
+   * Draw the visual focus only, and not any of the draw operations
+   * that form its shape.
+   */
+  kHIThemeFocusRingOnly         = 0,
+
+  /*
+   * Draw the visual focus above the results of the draw operations
+   * that form its shape.
+   */
+  kHIThemeFocusRingAbove        = 1,
+
+  /*
+   * Draw the visual focus below the results of the draw operations
+   * that form its shape.
+   */
+  kHIThemeFocusRingBelow        = 2
+};
+
+
+typedef UInt32                          HIThemeFocusRing;
+/*
+ *  HIThemeBeginFocus()
+ *  
+ *  Summary:
+ *    Begin focus drawing.
+ *  
+ *  Discussion:
+ *    Call HIThemeBeginFocus to begin focus drawing. All drawing
+ *    operations in the specified context after this call will be drawn
+ *    with a visual representation of focus. Currently, this is a
+ *    theme-tinted halo resembling a glow. Note that nothing will be
+ *    drawn in the specified context until HIThemeEndFocus is called. A
+ *    call to HIThemeBeginFocus must always be paired with an
+ *    HIThemeEndFocus call. Nesting these calls will not crash but the
+ *    results will be odd and is definitely not recommended.
+ *    HIThemeBegin/EndFocus is designed to replace
+ *    DrawThemeFocusRegion. For efficiency, clipping the context to the
+ *    bounds that will be drawn into is highly desirable.
+ *    HIThemeBeginFocus may do some allocations that are affected by
+ *    the size of the context's clip at the time it is called -- so an
+ *    extremely large clip or an unset clip may cause a large,
+ *    inefficient allocation.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inContext:
+ *      The CG context in which the focus is to be drawn.
+ *    
+ *    inRing:
+ *      An HIThemeFocusRing indicating which type of focus is to be
+ *      drawn.
+ *    
+ *    inReserved:
+ *      Always pass NULL for this parameter.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. Don't call
+ *    HIThemeEndFocus on the context if HIThemeBeginFocus fails.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeBeginFocus(
+  CGContextRef       inContext,
+  HIThemeFocusRing   inRing,
+  void *             inReserved)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  HIThemeEndFocus()
+ *  
+ *  Summary:
+ *    End focus drawing.
+ *  
+ *  Discussion:
+ *    See HIThemeBeginFocus for focus drawing details. Calling
+ *    HIThemeEndFocus indicates that the drawing operations to be
+ *    focused are complete.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inContext:
+ *      The CG context in which the focus is to be drawn. This needs to
+ *      be the same context passed to the HIThemeBeginFocus call with
+ *      which this call to HIThemeEndFocus is paired.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeEndFocus(CGContextRef inContext)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -3990,8 +4182,58 @@ HIThemeBrushCreateCGColor(
   CGColorRef *  outColor)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+/*
+ *  HIThemeGetTextColorForThemeBrush()
+ *  
+ *  Summary:
+ *    Returns an appropriate ThemeTextColor that matches a ThemeBrush.
+ *  
+ *  Discussion:
+ *    Creates a ThemeTextColor for use with HIThemeSetTextFill.
+ *    ThemeTextColors are currently availabe for these theme brushes:
+ *    
+ *    
+ *    kThemeBrushDialogBackgroundActive/Inactive 
+ *    
+ *    kThemeBrushAlertBackgroundActive/Inactive 
+ *    
+ *    kThemeBrushModelessDialogBackgroundActive/Inactive 
+ *    <BR> kThemeBrushNotificationWindowBackground
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBrush:
+ *      The ThemeBrush describing the requested color.
+ *    
+ *    inWindowIsActive:
+ *      Whether the text color should indicate an active or inactive
+ *      state.
+ *    
+ *    outColor:
+ *      A pointer to a ThemeTextColor that will be set to the matched
+ *      color.
+ *  
+ *  Result:
+ *    An operating system result code. themeNoAppropriateBrushErr will
+ *    be returned if no matching ThemeTextColor exists.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeGetTextColorForThemeBrush(
+  ThemeBrush        inBrush,
+  Boolean           inWindowIsActive,
+  ThemeTextColor *  outColor)                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-#pragma options align=reset
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

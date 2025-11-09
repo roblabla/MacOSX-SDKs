@@ -1,7 +1,7 @@
 /*
         NSWindowScripting.h
         AppKit Framework
-        Copyright (c) 1997-2004, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -20,13 +20,13 @@
 - (BOOL)isModalPanel;
 - (BOOL)isResizable;
 - (BOOL)isZoomable;
-- (int)orderedIndex;
+- (NSInteger)orderedIndex;
 
 // Key value coding compliant set-accessors for the like-named attributes declared in Cocoa's definition of the Standard Suite.  Attributes that don't have corresponding methods here are read-only.
 - (void)setIsMiniaturized:(BOOL)flag;
 - (void)setIsVisible:(BOOL)flag;
 - (void)setIsZoomed:(BOOL)flag;
-- (void)setOrderedIndex:(int)index;
+- (void)setOrderedIndex:(NSInteger)index;
 
 // Handlers for script commands declared in Cocoa's definition of the Standard suite.
 - (id)handleCloseScriptCommand:(NSCloseCommand *)command;

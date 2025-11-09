@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,6 +9,7 @@
 @class NSTimer, NSPort, NSArray;
 
 FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
+FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @interface NSRunLoop : NSObject {
 @private
@@ -19,6 +20,8 @@ FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
 }
 
 + (NSRunLoop *)currentRunLoop;
++ (NSRunLoop *)mainRunLoop AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 - (NSString *)currentMode;
 - (CFRunLoopRef)getCFRunLoop;
 
@@ -38,7 +41,7 @@ FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
 - (void)runUntilDate:(NSDate *)limitDate;
 - (BOOL)runMode:(NSString *)mode beforeDate:(NSDate *)limitDate;
 
-- (void)configureAsServer;
+- (void)configureAsServer DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 
@@ -57,7 +60,7 @@ FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
 
 @interface NSRunLoop (NSOrderedPerform)
 
-- (void)performSelector:(SEL)aSelector target:(id)target argument:(id)arg order:(unsigned)order modes:(NSArray *)modes;
+- (void)performSelector:(SEL)aSelector target:(id)target argument:(id)arg order:(NSUInteger)order modes:(NSArray *)modes;
 - (void)cancelPerformSelector:(SEL)aSelector target:(id)target argument:(id)arg;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (void)cancelPerformSelectorsWithTarget:(id)target;

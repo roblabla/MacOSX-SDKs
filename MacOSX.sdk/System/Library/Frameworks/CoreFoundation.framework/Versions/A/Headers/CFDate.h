@@ -1,5 +1,5 @@
 /*	CFDate.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATE__)
@@ -7,9 +7,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef double CFTimeInterval;
 typedef CFTimeInterval CFAbsoluteTime;
@@ -61,19 +59,16 @@ typedef struct {
     double seconds;
 } CFGregorianUnits;
 
-typedef enum {
+enum {
     kCFGregorianUnitsYears = (1 << 0),
     kCFGregorianUnitsMonths = (1 << 1),
     kCFGregorianUnitsDays = (1 << 2),
     kCFGregorianUnitsHours = (1 << 3),
     kCFGregorianUnitsMinutes = (1 << 4),
     kCFGregorianUnitsSeconds = (1 << 5),
-#if 0
-    kCFGregorianUnitsTimeZone = (1 << 8),
-    kCFGregorianUnitsDayOfWeek = (1 << 9),
-#endif
     kCFGregorianAllUnits = 0x00FFFFFF
-} CFGregorianUnitFlags;
+};
+typedef CFOptionFlags CFGregorianUnitFlags;
 
 CF_EXPORT
 Boolean CFGregorianDateIsValid(CFGregorianDate gdate, CFOptionFlags unitFlags);
@@ -99,9 +94,7 @@ SInt32 CFAbsoluteTimeGetDayOfYear(CFAbsoluteTime at, CFTimeZoneRef tz);
 CF_EXPORT
 SInt32 CFAbsoluteTimeGetWeekOfYear(CFAbsoluteTime at, CFTimeZoneRef tz);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFDATE__ */
 

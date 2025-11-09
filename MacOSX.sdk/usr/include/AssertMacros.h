@@ -10,7 +10,7 @@
                  <http://developer.apple.com/dev/techsupport/develop/issue11toc.shtml>
                  for the methodology behind these error handling and assertion macros.
 
-     Copyright:  © 2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2007 by Apple Inc., all rights reserved.
   
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -165,9 +165,9 @@
  */
 #ifndef DEBUG_ASSERT_MESSAGE
    #ifdef KERNEL
-      #include <syslog.h>
+      #include <libkern/libkern.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
-                                  syslog(LOG_ERR, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
+                                  printf( "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
    #else
       #include <stdio.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
@@ -231,7 +231,7 @@
    #define check(assertion)                                                   \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -272,7 +272,7 @@
    #define check_string(assertion, message)                                   \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -310,8 +310,8 @@
    #define check_noerr(errorCode)                                             \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -350,8 +350,8 @@
    #define check_noerr_string(errorCode, message)                             \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -393,7 +393,7 @@
    #define verify(assertion)                                                  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -441,7 +441,7 @@
    #define verify_string(assertion, message)                                  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -486,8 +486,8 @@
    #define verify_noerr(errorCode)                                            \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -532,8 +532,8 @@
    #define verify_noerr_string(errorCode, message)                            \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -571,7 +571,7 @@
    #define verify_action(assertion, action)                                   \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                           \
           {                                                                   \
               action;                                                         \
           }                                                                   \
@@ -580,7 +580,7 @@
    #define verify_action(assertion, action)                                  \
      do                                                                      \
       {                                                                      \
-          if ( !(assertion) )                                                \
+          if ( __builtin_expect(!(assertion), 0) )                           \
           {                                                                  \
              DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                        \
@@ -618,7 +618,7 @@
    #define require(assertion, exceptionLabel)                                 \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               goto exceptionLabel;                                            \
           }                                                                   \
@@ -627,7 +627,7 @@
    #define require(assertion, exceptionLabel)                                 \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -673,7 +673,7 @@
    #define require_action(assertion, exceptionLabel, action)                  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               {                                                               \
                   action;                                                     \
@@ -685,7 +685,7 @@
    #define require_action(assertion, exceptionLabel, action)                  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -724,7 +724,7 @@
 #define require_quiet(assertion, exceptionLabel)                              \
   do                                                                          \
   {                                                                           \
-      if ( !(assertion) )                                                     \
+      if ( __builtin_expect(!(assertion), 0) )                                \
       {                                                                       \
           goto exceptionLabel;                                                \
       }                                                                       \
@@ -755,7 +755,7 @@
 #define require_action_quiet(assertion, exceptionLabel, action)               \
   do                                                                          \
   {                                                                           \
-      if ( !(assertion) )                                                     \
+      if ( __builtin_expect(!(assertion), 0) )                                \
       {                                                                       \
           {                                                                   \
               action;                                                         \
@@ -793,7 +793,7 @@
    #define require_string(assertion, exceptionLabel, message)                 \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               goto exceptionLabel;                                            \
           }                                                                   \
@@ -802,7 +802,7 @@
    #define require_string(assertion, exceptionLabel, message)                 \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -851,7 +851,7 @@
    #define require_action_string(assertion, exceptionLabel, action, message)  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               {                                                               \
                   action;                                                     \
@@ -863,7 +863,7 @@
    #define require_action_string(assertion, exceptionLabel, action, message)  \
       do                                                                      \
       {                                                                       \
-          if ( !(assertion) )                                                 \
+          if ( __builtin_expect(!(assertion), 0) )                            \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -907,7 +907,7 @@
    #define require_noerr(errorCode, exceptionLabel)                           \
       do                                                                      \
       {                                                                       \
-          if ( 0 != (errorCode) )                                             \
+          if ( __builtin_expect(0 != (errorCode), 0) )                        \
           {                                                                   \
               goto exceptionLabel;                                            \
           }                                                                   \
@@ -916,8 +916,8 @@
    #define require_noerr(errorCode, exceptionLabel)                           \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -959,7 +959,7 @@
    #define require_noerr_action(errorCode, exceptionLabel, action)            \
       do                                                                      \
       {                                                                       \
-          if ( 0 != (errorCode) )                                             \
+          if ( __builtin_expect(0 != (errorCode), 0) )                        \
           {                                                                   \
               {                                                               \
                   action;                                                     \
@@ -971,8 +971,8 @@
    #define require_noerr_action(errorCode, exceptionLabel, action)            \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -1009,7 +1009,7 @@
 #define require_noerr_quiet(errorCode, exceptionLabel)                        \
   do                                                                          \
   {                                                                           \
-      if ( 0 != (errorCode) )                                                 \
+      if ( __builtin_expect(0 != (errorCode), 0) )                            \
       {                                                                       \
           goto exceptionLabel;                                                \
       }                                                                       \
@@ -1038,7 +1038,7 @@
 #define require_noerr_action_quiet(errorCode, exceptionLabel, action)         \
   do                                                                          \
   {                                                                           \
-      if ( 0 != (errorCode) )                                                 \
+      if ( __builtin_expect(0 != (errorCode), 0) )                            \
       {                                                                       \
           {                                                                   \
               action;                                                         \
@@ -1073,7 +1073,7 @@
    #define require_noerr_string(errorCode, exceptionLabel, message)           \
       do                                                                      \
       {                                                                       \
-          if ( 0 != (errorCode) )                                             \
+          if ( __builtin_expect(0 != (errorCode), 0) )                        \
           {                                                                   \
               goto exceptionLabel;                                            \
           }                                                                   \
@@ -1082,8 +1082,8 @@
    #define require_noerr_string(errorCode, exceptionLabel, message)           \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \
@@ -1129,7 +1129,7 @@
    #define require_noerr_action_string(errorCode, exceptionLabel, action, message)\
       do                                                                      \
       {                                                                       \
-          if ( 0 != (errorCode) )                                             \
+          if ( __builtin_expect(0 != (errorCode), 0) )                        \
           {                                                                   \
               {                                                               \
                   action;                                                     \
@@ -1141,8 +1141,8 @@
    #define require_noerr_action_string(errorCode, exceptionLabel, action, message) \
       do                                                                      \
       {                                                                       \
-          int evalOnceErrorCode = (errorCode);                                \
-          if ( 0 != evalOnceErrorCode )                                       \
+          long evalOnceErrorCode = (errorCode);                               \
+          if ( __builtin_expect(0 != evalOnceErrorCode, 0) )                  \
           {                                                                   \
               DEBUG_ASSERT_MESSAGE(                                           \
                   DEBUG_ASSERT_COMPONENT_NAME_STRING,                         \

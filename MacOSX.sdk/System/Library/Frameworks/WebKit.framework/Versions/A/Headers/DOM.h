@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004, 2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -28,7 +29,8 @@
 #import <WebKit/DOMExtensions.h>
 #import <WebKit/DOMEvents.h>
 #import <WebKit/DOMHTML.h>
-#import <WebKit/DOMRange.h>
+#import <WebKit/DOMRanges.h>
 #import <WebKit/DOMStylesheets.h>
 #import <WebKit/DOMTraversal.h>
 #import <WebKit/DOMViews.h>
+#import <WebKit/DOMXPath.h>

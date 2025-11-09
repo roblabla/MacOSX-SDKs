@@ -3,7 +3,7 @@
  
      Contains:   Driver Synchronization Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -91,9 +91,19 @@ CompareAndSwap(
  *  
  *  Discussion:
  *    The TestAndClear function clears a single bit in a byte at a
- *    specified address. It returns true if the bit was already clear,
- *    false otherwise.
- *    This function guarantees atomicity only with main system memory.
+ *    specified address. It returns false if the bit was already clear,
+ *    true otherwise.
+ *     ------------------------------------------------------------
+ *     THIS ROUTINE WAS DOCUMENTED AS RETURNING TRUE IF THE BIT WAS
+ *    ALREADY CLEAR AND FALSE OTHERWISE, and on MAC OS 9.x and earlier
+ *    it did have this behavior, but on Mac OS X 10.0 and later it has
+ *    always returned the state of the bit before the operation ( false
+ *    if the bit was clear; true if it was set ).  We have decided that
+ *    changing the documentation ( leaving the implementation as is )
+ *    is less risky than changing the implementation to match the
+ *    documented behavior.
+ *     ------------------------------------------------------------
+ *     This function guarantees atomicity only with main system memory.
  *    It is specifically unsuitable for use on noncacheable memory such
  *    as that in devices; this function cannot guarantee atomicity, for
  *    example, on memory mapped from a PCI device.
@@ -820,21 +830,6 @@ extern UInt32
 BitXorAtomic(
   UInt32    mask,
   UInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  SynchronizeIO()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    This function has never been supporetd on Mac OS X.
- *  
- *  Availability:
- *    Mac OS X:         not available but deprecated in 10.4
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.0 and later
- */
-
-
 
 
 

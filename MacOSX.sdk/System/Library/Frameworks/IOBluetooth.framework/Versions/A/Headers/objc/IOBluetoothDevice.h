@@ -30,6 +30,10 @@
 #define kIOBluetoothDeviceInquiryInfoChangedNotification	@"IOBluetoothDeviceInquiryInfoChanged"
 #define kIOBluetoothDeviceServicesChangedNotification		@"IOBluetoothDeviceServicesChanged"
 
+// These are for the configuration of L2CAP Channels:
+#define kIOBluetoothL2CAPChannelMaxAllowedIncomingMTU		@"MaxAllowedIncomingMTU"
+#define kIOBluetoothL2CAPChannelDesiredOutgoingMTU			@"DesiredOutgoingMTU"
+
 //====================================================================================================================
 //	Forward declarations
 //====================================================================================================================
@@ -260,7 +264,7 @@
                 L2CAP channel was found). 
 */
 
-- (IOReturn)openL2CAPChannel:(BluetoothL2CAPPSM)psm findExisting:(BOOL)findExisting newChannel:(IOBluetoothL2CAPChannel **)newChannel;
+- (IOReturn)openL2CAPChannel:(BluetoothL2CAPPSM)psm findExisting:(BOOL)findExisting newChannel:(IOBluetoothL2CAPChannel **)newChannel DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 /*!
     @method		sendL2CAPEchoRequest:length:
@@ -292,7 +296,7 @@
                 RFCOMM channel was found). 
 */
 
-- (IOReturn)openRFCOMMChannel:(BluetoothRFCOMMChannelID)channelID channel:(IOBluetoothRFCOMMChannel **)rfcommChannel;
+- (IOReturn)openRFCOMMChannel:(BluetoothRFCOMMChannelID)channelID channel:(IOBluetoothRFCOMMChannel **)rfcommChannel DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
@@ -694,10 +698,8 @@
 	@abstract	Gets an array of service records for the device.
 	@discussion	The resulting array contains IOBluetoothSDPServiceRecord objects.  The service records are only
                 present if an SDP query has been done on the target object.  This can be determined by calling
-                -getLastServicesUpdate.  It will return the last date/time of the SDP query.  Currently, the only
-                way to have an SDP query executed is to use the search manager (IOBluetoothDevicePerformSDPQuery()).
-                This will change in the future as API will be added to IOBluetoothDevice to initiate the SDP
-                query. 
+                -getLastServicesUpdate.  It will return the last date/time of the SDP query. To initiate an
+				SDP query on a device, use -performSDPQuery: as defined above.
                 
                 Instead of allowing individual clients to query for different services and service attributes,
                 the system request all of the device's services and service attributes.
@@ -787,7 +789,7 @@
 				nil is returned.
 */
 
-+ (NSArray *)recentDevices:(UInt32)numDevices;
++ (NSArray *)recentDevices:(unsigned long)numDevices;
 
 /*!
     @method		recentAccessDate
@@ -829,6 +831,78 @@
 - (BOOL)isPaired;
 
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+/*!
+    @method		setSupervisionTimeout
+	@abstract	Sets the connection supervision timeout.
+	@discussion	NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
+	@param		timeout A client-supplied link supervision timeout value to use to monitor the connection.
+	@result		Returns kIOReturnSuccess if it was possible to set the connection supervision timeout.
+*/
+
+- (IOReturn)setSupervisionTimeout:(UInt16)timeout;
+
+/*!
+    @method		openL2CAPChannelSync:withPSM:withConfiguration:delegate:
+	@abstract	Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
+	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
+                The baseband connection to the device will be opened if it is not open already.  The L2CAP
+                channel open process will not complete until the client has registered an incoming data 
+                listener on the new channel.  This prevents a situation where the channel succeeds
+                in being configured and opened and receives data before the client is listening and
+                is ready for it.
+
+				NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
+	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
+                                requested to be opened.  The newChannel pointer will only be set if 
+                                kIOReturnSuccess is returned.
+	@param		withPSM			The L2CAP PSM value for the new channel.
+	@param		channelConfiguration the dictionary that describes the initial configuration for
+				the channel.
+	@param		delegate the object that will play the role of delegate for the channel.
+				A channel delegate is the object the l2cap uses as target for  data and events. The
+				developer will implement only the the methods he/she is interested in. A list of the
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				of the protocol IOBluetoothL2CAPChannelDelegate.
+			
+	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
+                L2CAP channel was found). 
+*/
+
+- (IOReturn)openL2CAPChannelSync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm withConfiguration:(NSDictionary*)channelConfiguration delegate:(id)channelDelegate;
+
+/*!
+    @method		openL2CAPChannelAsync:withPSM:withConfiguration:delegate:
+	@abstract	Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
+	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
+                The baseband connection to the device will be opened if it is not open already.  The L2CAP
+                channel open process will not complete until the client has registered an incoming data 
+                listener on the new channel.  This prevents a situation where the channel succeeds
+                in being configured and opened and receives data before the client is listening and
+                is ready for it.
+
+				NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
+	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
+                                requested to be opened.  The newChannel pointer will only be set if 
+                                kIOReturnSuccess is returned.
+	@param		psm				The L2CAP PSM value for the new channel.
+	@param		channelConfiguration the dictionary that describes the initial configuration for
+				the channel.
+	@param		delegate the object that will play the role of delegate for the channel.
+				A channel delegate is the object the l2cap uses as target for  data and events. The
+				developer will implement only the the methods he/she is interested in. A list of the
+				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h in the definition
+				of the protocol IOBluetoothL2CAPChannelDelegate.
+				
+	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
+                L2CAP channel was found). 
+*/
+
+- (IOReturn)openL2CAPChannelAsync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm withConfiguration:(NSDictionary*)channelConfiguration delegate:(id)channelDelegate;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 - (NSString *)description;
 - (id)initWithCoder:(NSCoder *)coder;

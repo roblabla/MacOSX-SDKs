@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2005, Apple Computer, Inc.
+	Copyright (c) 2003-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -36,7 +36,9 @@
 	unsigned int menuTracking:1;
 	unsigned int deferredUpdate:1;
 	unsigned int sendsImmediately:1;
-	unsigned int reserved:16;
+        unsigned int activeTimer:1;
+
+	unsigned int reserved:15;
     } _sfFlags;
     NSButtonCell*   _searchButtonCell;
     NSButtonCell*   _cancelButtonCell;
@@ -76,8 +78,8 @@
 - (BOOL) sendsWholeSearchString;
     // if clear, send action on each key stroke (after sufficient amount of time so we don't interfere with typing). if set, send only on return/enter or clicking magnifying search button
 
-- (void) setMaximumRecents:(int)maxRecents;
-- (int) maximumRecents;
+- (void) setMaximumRecents:(NSInteger)maxRecents;
+- (NSInteger) maximumRecents;
     // set/get limit max recents. allowable between 0 and 254. setting -1 will use default.
 
 - (void) setRecentSearches:(NSArray*)searches;

@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -16,15 +16,22 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_ini.h,v 1.45.2.3.2.4 2007/12/31 07:20:15 sebastian Exp $ */
+
 #ifndef PHP_INI_H
 #define PHP_INI_H
 
 #include "zend_ini.h"
 
-int php_init_config();
+BEGIN_EXTERN_C()
+int php_init_config(TSRMLS_D);
 int php_shutdown_config(void);
-void php_ini_delayed_modules_startup(TSRMLS_D);
-zval *cfg_get_entry(char *name, uint name_length);
+void php_ini_register_extensions(TSRMLS_D);
+PHPAPI zval *cfg_get_entry(char *name, uint name_length);
+PHPAPI int cfg_get_long(char *varname, long *result);
+PHPAPI int cfg_get_double(char *varname, double *result);
+PHPAPI int cfg_get_string(char *varname, char **result);
+END_EXTERN_C()
 
 #define PHP_INI_USER	ZEND_INI_USER
 #define PHP_INI_PERDIR	ZEND_INI_PERDIR
@@ -61,6 +68,7 @@ zval *cfg_get_entry(char *name, uint name_length);
 #define PHP_INI_STAGE_ACTIVATE		ZEND_INI_STAGE_ACTIVATE
 #define PHP_INI_STAGE_DEACTIVATE	ZEND_INI_STAGE_DEACTIVATE
 #define PHP_INI_STAGE_RUNTIME		ZEND_INI_STAGE_RUNTIME
+#define PHP_INI_STAGE_HTACCESS		ZEND_INI_STAGE_HTACCESS
 
 #define php_ini_boolean_displayer_cb	zend_ini_boolean_displayer_cb
 #define php_ini_color_displayer_cb		zend_ini_color_displayer_cb

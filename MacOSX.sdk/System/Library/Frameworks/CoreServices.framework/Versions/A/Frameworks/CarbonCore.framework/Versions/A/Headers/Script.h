@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
-     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2006 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Meta script codes:*/
 enum {
@@ -619,118 +619,6 @@ enum {
 };
 
 enum {
-                                        /* Result values from GetScriptManagerVariable and SetScriptManagerVariable calls. */
-  smNotInstalled                = 0,    /*routine not available in script*/
-  smBadVerb                     = -1,   /*Bad verb passed to a routine*/
-  smBadScript                   = -2    /*Bad script code passed to a routine*/
-};
-
-enum {
-                                        /* Values for script redraw flag. */
-  smRedrawChar                  = 0,    /*Redraw character only*/
-  smRedrawWord                  = 1,    /*Redraw entire word (2-byte systems)*/
-  smRedrawLine                  = -1    /*Redraw entire line (bidirectional systems)*/
-};
-
-enum {
-                                        /* GetScriptManagerVariable and SetScriptManagerVariable verbs */
-                                        /* all the constants are deprecated except for smLastScript and smKeyScript */
-                                        /* all the deprecated constants are not needed on MacOSX except for */
-                                        /* smEnabled can be replaced with CFLocaleCopyAvailableLocaleIdentifiers */
-                                        /* smSysScript can be replaced with GetApplicationTextEncoding() or CFStringGetSystemEncoding */
-  smVersion                     = 0,    /*Script Manager version number*/
-  smMunged                      = 2,    /*Globals change count*/
-  smEnabled                     = 4,    /*Count of enabled scripts, incl Roman*/
-  smBidirect                    = 6,    /*At least one bidirectional script*/
-  smFontForce                   = 8,    /*Force font flag*/
-  smIntlForce                   = 10,   /*Force intl flag*/
-  smForced                      = 12,   /*Script was forced to system script*/
-  smDefault                     = 14,   /*Script was defaulted to Roman script*/
-  smPrint                       = 16,   /*Printer action routine*/
-  smSysScript                   = 18,   /*System script*/
-  smLastScript                  = 20,   /*Last keyboard script*/
-  smKeyScript                   = 22,   /*Keyboard script*/
-  smSysRef                      = 24,   /*System folder refNum*/
-  smKeyCache                    = 26,   /*obsolete*/
-  smKeySwap                     = 28,   /*Swapping table handle*/
-  smGenFlags                    = 30,   /*General flags long*/
-  smOverride                    = 32,   /*Script override flags*/
-  smCharPortion                 = 34,   /*Ch vs SpExtra proportion*/
-                                        /* New for System 7.0: */
-  smDoubleByte                  = 36,   /*Flag for double-byte script installed*/
-  smKCHRCache                   = 38,   /*Returns pointer to KCHR cache*/
-  smRegionCode                  = 40,   /*Returns current region code (verXxx)*/
-  smKeyDisableState             = 42    /*Returns current keyboard disable state*/
-};
-
-enum {
-                                        /* GetScriptVariable and SetScriptVariable verbs. */
-                                        /* Note: Verbs private to script systems are negative, while */
-                                        /* those general across script systems are non-negative. */
-                                        /* all the constants are deprecated */
-                                        /* all the deprecated constants are not needed on MacOSX except for */
-                                        /* smScriptRight can be replaced with useUCGetCharProperty */
-                                        /* smScriptsysFond and smScriptAppFond can be replaced with GetThemeFont or UseThemeFont */
-                                        /* smScriptNumber can be replaced with CFNumberFormatter */
-                                        /* smScriptDate can be replaced with CFDateFormatter */
-                                        /* smScriptSort can be replaced with CFString or UCCollate */
-                                        /* smScriptEncoding can be replaced with GetApplicationTextEncoding or CFStringGetSystemEncoding */
-                                        /* smScriptLang can be replaced with CFLocale */
-  smScriptVersion               = 0,    /*Script software version*/
-  smScriptMunged                = 2,    /*Script entry changed count*/
-  smScriptEnabled               = 4,    /*Script enabled flag*/
-  smScriptRight                 = 6,    /*Right to left flag*/
-  smScriptJust                  = 8,    /*Justification flag*/
-  smScriptRedraw                = 10,   /*Word redraw flag*/
-  smScriptSysFond               = 12,   /*Preferred system font*/
-  smScriptAppFond               = 14,   /*Preferred Application font*/
-  smScriptBundle                = 16,   /*Beginning of itlb verbs*/
-  smScriptNumber                = 16,   /*Script itl0 id*/
-  smScriptDate                  = 18,   /*Script itl1 id*/
-  smScriptSort                  = 20,   /*Script itl2 id*/
-  smScriptFlags                 = 22,   /*flags word*/
-  smScriptToken                 = 24,   /*Script itl4 id*/
-  smScriptEncoding              = 26,   /*id of optional itl5, if present*/
-  smScriptLang                  = 28    /*Current language for script*/
-};
-
-enum {
-  smScriptNumDate               = 30,   /*Script Number/Date formats.*/
-  smScriptKeys                  = 32,   /*Script KCHR id*/
-  smScriptIcon                  = 34,   /*ID # of SICN or kcs#/kcs4/kcs8 suite*/
-  smScriptPrint                 = 36,   /*Script printer action routine*/
-  smScriptTrap                  = 38,   /*Trap entry pointer*/
-  smScriptCreator               = 40,   /*Script file creator*/
-  smScriptFile                  = 42,   /*Script file name*/
-  smScriptName                  = 44,   /*Script name*/
-                                        /* There is a hole here for old Kanji private verbs 46-76 */
-                                        /* New for System 7.0: */
-  smScriptMonoFondSize          = 78,   /*default monospace FOND (hi) & size (lo)*/
-  smScriptPrefFondSize          = 80,   /*preferred FOND (hi) & size (lo)*/
-  smScriptSmallFondSize         = 82,   /*default small FOND (hi) & size (lo)*/
-  smScriptSysFondSize           = 84,   /*default system FOND (hi) & size (lo)*/
-  smScriptAppFondSize           = 86,   /*default app FOND (hi) & size (lo)*/
-  smScriptHelpFondSize          = 88,   /*default Help Mgr FOND (hi) & size (lo)*/
-  smScriptValidStyles           = 90,   /*mask of valid styles for script*/
-  smScriptAliasStyle            = 92    /*style (set) to use for aliases*/
-};
-
-/* special negative verbs for Get/SetScriptVariable that were associated with WorldScriptI */
-/* move them here to be public */
-enum {
-                                        /* WorldScript private verbs */
-  smLayoutCache                 = -309, /* HiWrd(param) is # entries, LoWrd is max input length*/
-  smOldVerbSupport              = -311, /* param is added to old verbs to map to WSI verb*/
-  smSetKashidas                 = -291, /* param is ON or OFF, old verb = -36*/
-  smSetKashProp                 = -287, /* param is kashida proportion, old verb = -32*/
-  smScriptSysBase               = -281, /* param is associated font to use w/ system font (old verb = -26)*/
-  smScriptAppBase               = -283, /* param is associated font to use w/ app font (old verb = -28)*/
-  smScriptFntBase               = -285, /* param is associated font to use w/ all other fonts (old verb = -30)*/
-  smScriptLigatures             = -263, /* old verb = -8*/
-  smScriptNumbers               = -267  /* old verb = -12*/
-};
-
-enum {
                                         /* Special script code values for International Utilities */
   iuSystemScript                = -1,   /* <obsolete>  system script */
   iuCurrentScript               = -2    /* <obsolete>  current script (for font of grafPort) */
@@ -756,44 +644,10 @@ enum {
   smKeyRoman                    = -17   /* Set keyscript to Roman. Does nothing if Roman-only system, unlike KeyScript(smRoman) which forces an update to current default Roman keyboard */
 };
 
-/* Optional font and keyboard script synchronization */
-enum {
-                                        /* One more flag in the smGenFlags long. */
-  smfDisableKeyScriptSync       = 27    /*Disable font and keyboard script synchronization*/
-};
-
-enum {
-                                        /* We should define masks, too. */
-  smfDisableKeyScriptSyncMask   = 1L << smfDisableKeyScriptSync /*Disable font and keyboard script synchronization mask*/
-};
-
 enum {
                                         /* Force keyboard script switching flag and mask for zero and positive KeyScript verbs */
   smKeyForceKeyScriptBit        = 7,    /* Force keyboard script switching flag */
   smKeyForceKeyScriptMask       = 1 << smKeyForceKeyScriptBit /* its mask */
-};
-
-enum {
-                                        /* Bits in the smScriptFlags word */
-                                        /*  (bits above 8 are non-static) */
-  smsfIntellCP                  = 0,    /*Script has intelligent cut & paste*/
-  smsfSingByte                  = 1,    /*Script has only single bytes*/
-  smsfNatCase                   = 2,    /*Native chars have upper & lower case*/
-  smsfContext                   = 3,    /*Script is contextual*/
-  smsfNoForceFont               = 4,    /*Script will not force characters*/
-  smsfB0Digits                  = 5,    /*Script has alternate digits at B0-B9*/
-  smsfAutoInit                  = 6,    /*Auto initialize the script*/
-  smsfUnivExt                   = 7,    /*Script is handled by universal extension*/
-  smsfSynchUnstyledTE           = 8,    /*Script synchronizes for unstyled TE*/
-  smsfForms                     = 13,   /*Uses contextual forms for letters*/
-  smsfLigatures                 = 14,   /*Uses contextual ligatures*/
-  smsfReverse                   = 15,   /*Reverses native text, right-left*/
-                                        /* Bits in the smGenFlags long. */
-                                        /* First (high-order) byte is set from itlc flags byte. */
-  smfShowIcon                   = 31,   /*Show icon even if only one script*/
-  smfDualCaret                  = 30,   /*Use dual caret for mixed direction text*/
-  smfNameTagEnab                = 29,   /*Reserved for internal use*/
-  smfUseAssocFontInfo           = 28    /*Use the associated font info for FontMetrics calls <48>*/
 };
 
 enum {
@@ -1019,6 +873,343 @@ struct TokenBlock {
 };
 typedef struct TokenBlock               TokenBlock;
 typedef TokenBlock *                    TokenBlockPtr;
+
+/* Result values from GetScriptManagerVariable and SetScriptManagerVariable calls. */
+enum {
+  smNotInstalled                = 0,    /*routine not available in script*/
+  smBadVerb                     = -1,   /*Bad verb passed to a routine*/
+  smBadScript                   = -2    /*Bad script code passed to a routine*/
+};
+
+/* Bits in the smGenFlags long. */
+/* First (high-order) byte is set from itlc flags byte. */
+enum {
+  smfShowIcon                   = 31,   /*Show icon even if only one script*/
+  smfDualCaret                  = 30,   /*Use dual caret for mixed direction text*/
+  smfNameTagEnab                = 29,   /*Reserved for internal use*/
+  smfUseAssocFontInfo           = 28,   /*Use the associated font info for FontMetrics calls*/
+  smfDisableKeyScriptSync       = 27    /*Disable font and keyboard script synchronization*/
+};
+
+/* We should define masks, too. */
+enum {
+  smfDisableKeyScriptSyncMask   = 1L << smfDisableKeyScriptSync /*Disable font and keyboard script synchronization mask*/
+};
+
+/* GetScriptManagerVariable and SetScriptManagerVariable verbs (deprecated) */
+enum {
+  smSysScript                   = 18,   /*System script*/
+  smKeyScript                   = 22,   /*Keyboard script*/
+  smKCHRCache                   = 38,   /*Returns pointer to KCHR cache*/
+  smRegionCode                  = 40    /*Returns current region code (verXxx)*/
+};
+
+#if !__LP64__
+enum {
+  smVersion                     = 0,    /*Script Manager version number*/
+  smMunged                      = 2,    /*Globals change count*/
+  smEnabled                     = 4,    /*Count of enabled scripts, incl Roman*/
+  smBidirect                    = 6,    /*At least one bidirectional script*/
+  smFontForce                   = 8,    /*Force font flag*/
+  smIntlForce                   = 10,   /*Force intl flag*/
+  smForced                      = 12,   /*Script was forced to system script*/
+  smDefault                     = 14,   /*Script was defaulted to Roman script*/
+  smPrint                       = 16,   /*Printer action routine*/
+  smLastScript                  = 20,   /*Last keyboard script*/
+  smSysRef                      = 24,   /*System folder refNum*/
+  smKeyCache                    = 26,   /*obsolete*/
+  smKeySwap                     = 28,   /*Swapping table handle*/
+  smGenFlags                    = 30,   /*General flags long*/
+  smOverride                    = 32,   /*Script override flags*/
+  smCharPortion                 = 34,   /*Ch vs SpExtra proportion*/
+  smDoubleByte                  = 36,   /*Flag for double-byte script installed*/
+  smKeyDisableState             = 42    /*Returns current keyboard disable state*/
+};
+
+#endif  /* !__LP64__ */
+
+/*
+ *  GetScriptManagerVariable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The replacement for GetScriptManagerVariable depends on the
+ *    selector used with it. Many of the selectors refer to information
+ *    that is not meaningful on a Unicode system, or refer to details
+ *    of the Script Manager itself; in general there is no replacement
+ *    functionality for these. 
+ *    Selectors that have meaningful replacements are as follows (these
+ *    are not direct replacements; they provide analogous but more
+ *    modern functionality): 
+ *    1. smSysScript - To obtain a TextEncoding for the legacy Mac OS
+ *    encoding associated with the user's preferred UI language or with
+ *    the application's default text encoding, use
+ *    CFStringGetSystemEncoding or GetApplicationTextEncoding.
+ *    Sometimes smSysScript is just used to get a script code to pass
+ *    to GetScriptVariable; in this case the replacements for
+ *    GetScriptVariable selectors may provide more information. 
+ *    2. smKeyScript - To obtain the intended language associated with
+ *    the user's current keyboard input source (plus other languages
+ *    that can be input using it): Use
+ *    TISCopyCurrentKeyboardInputSource to get that input source, then
+ *    pass it to TISGetInputSourceProperty with the
+ *    kTISPropertyInputSourceLanguages key. 
+ *    3. smKCHRCache - To obtain the key layout data for the keyboard
+ *    layout currently in use, use
+ *    TISCopyCurrentKeyboardLayoutInputSource to get that input source,
+ *    then pass it to TISGetInputSourceProperty with the
+ *    kTISPropertyUnicodeKeyLayoutData key (this returns 'uchr' Unicode
+ *    layout data only; it will not return any data for keyboard
+ *    layouts that only have 'KCHR' data). 
+ *    4. smRegionCode - To obtain the locale associated with the user's
+ *    preferred formats (for dates, times, numbers, etc.) do: 
+ *     CFStringRef curLocaleStringRef = NULL;  // 
+ *    localeRef = CFLocaleCopyCurrent();  // 
+ *    if (localeRef) {    // 
+ *    curLocaleStringRef = CFLocaleGetIdentifier(localeRef);  // 
+ *     CFRelease(localeRef);   // 
+ *    }   // 
+ *    To obtain the user's preferred UI language, do: 
+ *    CFArrayRef langArray = (CFArrayRef)CFPreferencesCopyAppValue(
+ *    CFSTR("AppleLanguages"), kCFPreferencesCurrentApplication );  //
+ *    
+ *    the first entry in langArray indicates the preferred language.
+ *    For Mac OS X 10.5 there is also a proposed API to return this.
+ *    
+ *    Selectors that have no meaningful replacement on a Unicode system
+ *    include smEnabled, smBidirect, smDoubleByte, etc. 
+ *    Selectors that pertain to internal operation of the Script
+ *    Manager itself and thus have no meaningful replacement include
+ *    smVersion, smMunged, smPrint, smSysRef, etc.
+ *  
+ *  Summary:
+ *    Check the value of Script Manager general environment variables.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern long 
+GetScriptManagerVariable(short selector)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  SetScriptManagerVariable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This is mainly used to set the value of variables that control
+ *    the internal operation of the Script Manager (selectors
+ *    smIntlForce, smGenFlags) and therefore there is no modern
+ *    replacement.
+ *  
+ *  Summary:
+ *    Set the value of (some) Script Manager general environment
+ *    variables.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+SetScriptManagerVariable(
+  short   selector,
+  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#if !__LP64__
+/* Values for script redraw flag. */
+enum {
+  smRedrawChar                  = 0,    /*Redraw character only*/
+  smRedrawWord                  = 1,    /*Redraw entire word (2-byte systems)*/
+  smRedrawLine                  = -1    /*Redraw entire line (bidirectional systems)*/
+};
+
+#endif  /* !__LP64__ */
+
+/* Bits in the smScriptFlags word */
+/*  (bits above 8 are non-static) */
+enum {
+  smsfIntellCP                  = 0,    /*Script has intelligent cut & paste*/
+  smsfSingByte                  = 1,    /*Script has only single bytes*/
+  smsfNatCase                   = 2,    /*Native chars have upper & lower case*/
+  smsfContext                   = 3,    /*Script is contextual*/
+  smsfNoForceFont               = 4,    /*Script will not force characters*/
+  smsfB0Digits                  = 5,    /*Script has alternate digits at B0-B9*/
+  smsfAutoInit                  = 6,    /*Auto initialize the script*/
+  smsfUnivExt                   = 7,    /*Script is handled by universal extension*/
+  smsfSynchUnstyledTE           = 8,    /*Script synchronizes for unstyled TE*/
+  smsfForms                     = 13,   /*Uses contextual forms for letters*/
+  smsfLigatures                 = 14,   /*Uses contextual ligatures*/
+  smsfReverse                   = 15    /*Reverses native text, right-left*/
+};
+
+/* GetScriptVariable and SetScriptVariable verbs (deprecated). */
+/* Note: Verbs private to script systems are negative, while */
+/* those general across script systems are non-negative. */
+#if !__LP64__
+enum {
+  smScriptVersion               = 0,    /*Script software version*/
+  smScriptMunged                = 2,    /*Script entry changed count*/
+  smScriptEnabled               = 4,    /*Script enabled flag*/
+  smScriptRight                 = 6,    /*Right to left flag*/
+  smScriptJust                  = 8,    /*Justification flag*/
+  smScriptRedraw                = 10,   /*Word redraw flag*/
+  smScriptSysFond               = 12,   /*Preferred system font*/
+  smScriptAppFond               = 14,   /*Preferred Application font*/
+  smScriptBundle                = 16,   /*Beginning of itlb verbs*/
+  smScriptNumber                = 16,   /*Script itl0 id*/
+  smScriptDate                  = 18,   /*Script itl1 id*/
+  smScriptSort                  = 20,   /*Script itl2 id*/
+  smScriptFlags                 = 22,   /*flags word*/
+  smScriptToken                 = 24,   /*Script itl4 id*/
+  smScriptEncoding              = 26,   /*id of optional itl5, if present*/
+  smScriptLang                  = 28,   /*Current language for script*/
+  smScriptNumDate               = 30,   /*Script Number/Date formats.*/
+  smScriptKeys                  = 32,   /*Script KCHR id*/
+  smScriptIcon                  = 34,   /*ID # of SICN or kcs#/kcs4/kcs8 suite*/
+  smScriptPrint                 = 36,   /*Script printer action routine*/
+  smScriptTrap                  = 38,   /*Trap entry pointer*/
+  smScriptCreator               = 40,   /*Script file creator*/
+  smScriptFile                  = 42,   /*Script file name*/
+  smScriptName                  = 44,   /*Script name*/
+                                        /* There is a hole here for old Kanji private verbs 46-76 */
+  smScriptMonoFondSize          = 78,   /*default monospace FOND (hi) & size (lo)*/
+  smScriptPrefFondSize          = 80,   /*preferred FOND (hi) & size (lo)*/
+  smScriptSmallFondSize         = 82,   /*default small FOND (hi) & size (lo)*/
+  smScriptSysFondSize           = 84,   /*default system FOND (hi) & size (lo)*/
+  smScriptAppFondSize           = 86,   /*default app FOND (hi) & size (lo)*/
+  smScriptHelpFondSize          = 88,   /*default Help Mgr FOND (hi) & size (lo)*/
+  smScriptValidStyles           = 90,   /*mask of valid styles for script*/
+  smScriptAliasStyle            = 92    /*style (set) to use for aliases*/
+};
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+/* WorldScript private verbs */
+/* special negative verbs for Get/SetScriptVariable that were associated with WorldScriptI */
+/* move them here to be public */
+enum {
+  smLayoutCache                 = -309, /* HiWrd(param) is # entries, LoWrd is max input length*/
+  smOldVerbSupport              = -311, /* param is added to old verbs to map to WSI verb*/
+  smSetKashidas                 = -291, /* param is ON or OFF, old verb = -36*/
+  smSetKashProp                 = -287, /* param is kashida proportion, old verb = -32*/
+  smScriptSysBase               = -281, /* param is associated font to use w/ system font (old verb = -26)*/
+  smScriptAppBase               = -283, /* param is associated font to use w/ app font (old verb = -28)*/
+  smScriptFntBase               = -285, /* param is associated font to use w/ all other fonts (old verb = -30)*/
+  smScriptLigatures             = -263, /* old verb = -8*/
+  smScriptNumbers               = -267  /* old verb = -12*/
+};
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+/*
+ *  GetScriptVariable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The replacement for GetScriptVariable depends on the selector
+ *    used with it. Many of the selectors refer to information that is
+ *    not meaningful on a Unicode system, or refer to details of the
+ *    Script Manager itself; in general there is no replacement
+ *    functionality for these. 
+ *    Selectors that have meaningful replacements are as follows (these
+ *    are not direct replacements; they provide analogous but more
+ *    modern functionality): 
+ *    1. smScriptLang - This was typically used with the system script
+ *    to determine the system language. Instead, to obtain the user's
+ *    preferred UI language, do: 
+ *    CFArrayRef langArray = (CFArrayRef)CFPreferencesCopyAppValue(
+ *    CFSTR("AppleLanguages"), kCFPreferencesCurrentApplication );  //
+ *    
+ *    the first entry in langArray indicates the preferred language.
+ *    For Mac OS X 10.5 there is also a proposed API to return this.
+ *    
+ *    2. Font selectors smScriptSysFond / smScriptSysFondSize,
+ *    smScriptAppFond / smScriptAppFondSize,  smScriptMonoFondSize,
+ *    smScriptPrefFondSize, smScriptSmallFondSize, smScriptHelpFondSize
+ *    - On Mac OS X you generally do not need to worry about setting an
+ *    appropriate font based on character script to ensure that
+ *    characters are displayed correctly; Unicode encoding and font
+ *    fallbacks (to automatically find a font that can display a
+ *    character) take care of this. 
+ *    However for cases where you do need to do this (such as Carbon
+ *    applications that handle non-Unicode text), the CoreText function
+ *    CTFontCreateUIFontForLanguage (available in 10.5 and later)
+ *    provides a way to get a CTFontRef for a specified language and UI
+ *    usage. 
+ *    3. Script resource ID selectors smScriptNumber, smScriptDate,
+ *    smScriptSort, smScriptToken - These were used in several ways.
+ *    Sometimes they were used to get a resource ID so specific fields
+ *    in the resource could be examined (e.g. to determine the
+ *    appropriate decimal separator or time format). For this usage
+ *    CFLocaleGetValue can now be used with an appropriate key (e.g.
+ *    kCFLocaleDecimalSeparator) to get similar information (Much of
+ *    the information associated with the resource specified by
+ *    smScriptToken is not relevant for a Unicode system). Another
+ *    usage was to get a resource ID (or a Handle) to pass to some
+ *    other system function. For text sorting, this is replaced by the
+ *    collation functionality in CFString. For formatting of times,
+ *    dates, and numbers, this is replaced by functionality in
+ *    CFLocale, CFDateFormatter, CFNumberFormatter. 
+ *    4. smScriptKeys - To determine an appropriate keyboard input
+ *    source for a particular language, use
+ *    TISCopyInputSourceForLanguage. 
+ *    5. smScriptIcon - To obtain an icon for a particular keyboard
+ *    input source, use TISGetInputSourceProperty with the
+ *    kTISPropertyIconRef or kTISPropertyIconImageURL key.
+ *  
+ *  Summary:
+ *    Check the value of a script system's variables.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern long 
+GetScriptVariable(
+  short   script,
+  short   selector)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+/*
+ *  SetScriptVariable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The primary (perhaps only) recent usage of SetScriptVariable is
+ *    to set a specific keyboard layout, as follows: 
+ *    err = SetScriptVariable(aScript, smScriptKeys, aKeyLayoutID);  
+ *    // 
+ *    KeyScript(aScript); // 
+ *    The replacement depends on whether the goal is to set the
+ *    keyboard layout globally or for a specific TSMDocument. 
+ *    To set it globally, use TISSelectInputSource. 
+ *    To set it for a specific document, use the TSMDocument property
+ *    kTSMDocumentInputSourceOverridePropertyTag.
+ *  
+ *  Summary:
+ *    Set the value of (some of) a script system's variables.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+SetScriptVariable(
+  short   script,
+  short   selector,
+  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
  *  GetSysDirection()   *** DEPRECATED ***
  *  
@@ -1031,7 +1222,7 @@ typedef TokenBlock *                    TokenBlockPtr;
  *    assumed
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1046,10 +1237,10 @@ GetSysDirection(void)                                         AVAILABLE_MAC_OS_X
  *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    This function is obsolate.
+ *    This function is obsolete.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1061,14 +1252,20 @@ SetSysDirection(short value)                                  AVAILABLE_MAC_OS_X
  *  FontScript()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use ATSFontGetEncoding instead.
+ *    Use ATSFontFamilyGetEncoding instead.
  *  
  *  Discussion:
- *    This function is no longer recommended. Please use
- *    ATSFontGetEncoding instead.
+ *    This function returns the ScriptCode of the font of the Quickdraw
+ *    grafPort or - if that font is Roman and the smFontForce flag is
+ *    true - it returns the system ScriptCode. Both the Quickdraw
+ *    grafPort and the ScriptCode type are deprecated. Instead, you can
+ *    obtain the TextEncoding for an ATSFontFamilyRef using the
+ *    function ATSFontFamilyGetEncoding. To get an ATSFontFamilyRef for
+ *    a (deprecated) Quickdraw-style FMFontFamily ID, use the
+ *    deprecated Quickdraw function FMGetATSFontFamilyRefFromFontFamily.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1080,14 +1277,20 @@ FontScript(void)                                              AVAILABLE_MAC_OS_X
  *  IntlScript()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use ATSFontGetEncoding instead.
+ *    Use ATSFontFamilyGetEncoding instead.
  *  
  *  Discussion:
- *    This function is no longer recommended. Please use
- *    ATSFontGetEncoding instead.
+ *    This function returns the ScriptCode of the font of the Quickdraw
+ *    grafPort or - if the smIntlForce flag is true - it returns the
+ *    system ScriptCode. Both the Quickdraw grafPort and the ScriptCode
+ *    type are deprecated. Instead, you can obtain the TextEncoding for
+ *    an ATSFontFamilyRef using the function ATSFontFamilyGetEncoding.
+ *    To get an ATSFontFamilyRef for a (deprecated) Quickdraw-style
+ *    FMFontFamily ID, use the deprecated Quickdraw function
+ *    FMGetATSFontFamilyRefFromFontFamily.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1099,74 +1302,24 @@ IntlScript(void)                                              AVAILABLE_MAC_OS_X
  *  FontToScript()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use ATSFontGetEncoding instead.
+ *    Use FMGetATSFontFamilyRefFromFontFamily +
+ *    ATSFontFamilyGetEncoding instead.
  *  
  *  Discussion:
- *    This function is no longer recommended. Please use
- *    ATSFontGetEncoding instead.
+ *    This function returns the ScriptCode associated with a Quickdraw
+ *    FMFontFamily ID. Both the FMFontFamily type and the ScriptCode
+ *    type are deprecated. Instead, you can obtain the TextEncoding for
+ *    an ATSFontFamilyRef using the function ATSFontFamilyGetEncoding.
+ *    To get an ATSFontFamilyRef for a FMFontFamily ID, use the
+ *    deprecated Quickdraw function FMGetATSFontFamilyRefFromFontFamily.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
 FontToScript(short fontNumber)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
-/*
- *  GetScriptManagerVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern long 
-GetScriptManagerVariable(short selector)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  SetScriptManagerVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-SetScriptManagerVariable(
-  short   selector,
-  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  GetScriptVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern long 
-GetScriptVariable(
-  short   script,
-  short   selector)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  SetScriptVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-SetScriptVariable(
-  short   script,
-  short   selector,
-  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1182,7 +1335,7 @@ SetScriptVariable(
  *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1206,7 +1359,7 @@ CharacterByteType(
  *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1221,14 +1374,14 @@ CharacterType(
  *  TransliterateText()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use CFStringUppercase instead.
+ *    use CFStringTransform instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
- *    CFStringUppercase instead.
+ *    CFStringTransform instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1254,7 +1407,7 @@ TransliterateText(
  *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1265,15 +1418,44 @@ FillParseTable(
 
 
 /*
- *  GetIntlResource()
+ *  GetIntlResource()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Depending on the information that GetIntlResource was being
+ *    called to obtain, it can be replaced by the use of
+ *    CFLocaleCopyCurrent to get an appropriate CFLocaleRef followed by
+ *    one of the following: 
+ *    
+ *    - CFLocaleGetValue with keys such as kCFLocaleUsesMetricSystem,
+ *    kCFLocaleDecimalSeparator, kCFLocaleCurrencySymbol. 
+ *    
+ *    - CFDateFormatterCreate to get an appropriate CFDateFormatterRef,
+ *    followed by CFDateFormatterCopyProperty with keys such as
+ *    kCFDateFormatterMonthSymbols, kCFDateFormatterWeekdaySymbols,
+ *    kCFDateFormatterAMSymbol. 
+ *    
+ *    - CFNumberFormatterCreate to get an appropriate
+ *    CFNumberFormatterRef, followed by CFNumberFormatterCopyProperty
+ *    with keys such as kCFNumberFormatterCurrencyDecimalSeparator,
+ *    kCFNumberFormatterMinusSign, kCFNumberFormatterPercentSymbol,
+ *    kCFNumberFormatterNegativePrefix.
+ *  
+ *  Discussion:
+ *    GetIntlResource was used to get a handle to the specified
+ *    international resource type (e.g. 'itl0', 'itl1', 'itl2, 'itl4').
+ *    Typically the resource handle was then used to obtain
+ *    locale-specific information, or was passed to a function that
+ *    performed - for example - string comparison. GetIntlResource is
+ *    no longer recommended; please use the replacements described in
+ *    the "deprecated" section.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetIntlResource(short theID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetIntlResource(short theID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -1283,10 +1465,10 @@ GetIntlResource(short theID)                                  AVAILABLE_MAC_OS_X
  *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    This function is obsolate.
+ *    This function is obsolete.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1301,10 +1483,10 @@ ClearIntlResourceCache(void)                                  AVAILABLE_MAC_OS_X
  *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    This function is obsolate.
+ *    This function is obsolete.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1316,6 +1498,8 @@ GetIntlResourceTable(
   long *       offset,
   long *       length)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  GetScriptUtilityAddress()
@@ -1408,6 +1592,7 @@ GetIntlResourceTable(
 
 
 
+#if !__LP64__
 /*
  *  IntlTokenize()   *** DEPRECATED ***
  *  
@@ -1415,16 +1600,18 @@ GetIntlResourceTable(
  *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    This function is obsolate.
+ *    This function is obsolete.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern TokenResults 
 IntlTokenize(TokenBlockPtr tokenParam)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 #if OLDROUTINENAMES
 #define SetSysJust(newJust) SetSysDirection(newJust)
@@ -1443,7 +1630,7 @@ IntlTokenize(TokenBlockPtr tokenParam)                        AVAILABLE_MAC_OS_X
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

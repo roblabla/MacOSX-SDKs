@@ -1,7 +1,7 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,22 +11,22 @@
 
 @interface  NSForm : NSMatrix
 
-- (int)indexOfSelectedItem;
-- (void)setEntryWidth:(float)width;
-- (void)setInterlineSpacing:(float)spacing;
+- (NSInteger)indexOfSelectedItem;
+- (void)setEntryWidth:(CGFloat)width;
+- (void)setInterlineSpacing:(CGFloat)spacing;
 - (void)setBordered:(BOOL)flag;
 - (void)setBezeled:(BOOL)flag;
 - (void)setTitleAlignment:(NSTextAlignment)mode;
-- (void)setTextAlignment:(int)mode;
+- (void)setTextAlignment:(NSTextAlignment)mode;
 - (void)setTitleFont:(NSFont *)fontObj;
 - (void)setTextFont:(NSFont *)fontObj;
-- (id)cellAtIndex:(int)index;
-- (void)drawCellAtIndex:(int)index;
+- (id)cellAtIndex:(NSInteger)index;
+- (void)drawCellAtIndex:(NSInteger)index;
 - (NSFormCell *)addEntry:(NSString *)title;
-- (NSFormCell *)insertEntry:(NSString *)title atIndex:(int)index;
-- (void)removeEntryAtIndex:(int)index;
-- (int)indexOfCellWithTag:(int)aTag;
-- (void)selectTextAtIndex:(int)index;
+- (NSFormCell *)insertEntry:(NSString *)title atIndex:(NSInteger)index;
+- (void)removeEntryAtIndex:(NSInteger)index;
+- (NSInteger)indexOfCellWithTag:(NSInteger)aTag;
+- (void)selectTextAtIndex:(NSInteger)index;
 - (void)setFrameSize:(NSSize)newSize;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;

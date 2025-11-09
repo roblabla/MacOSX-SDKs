@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,8 +16,8 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 @interface NSScreen : NSObject {
 /*All instance variables are private*/
 @private
-    NSRect _frame;
-    NSWindowDepth _depth;
+    NSRect _frame;          // cached value, possibly stale
+    NSWindowDepth _depth;   // unused
     int _screenNumber;
     NSScreenAuxiliaryOpaque *_auxiliaryStorage;
 }
@@ -36,7 +36,7 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Returns scale factor applied by default to windows created on this screen
 */
-- (float)userSpaceScaleFactor;
+- (CGFloat)userSpaceScaleFactor;
 
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 

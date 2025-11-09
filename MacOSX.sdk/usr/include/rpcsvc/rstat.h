@@ -114,34 +114,34 @@ bool_t xdr_stats();
 #endif /* Old Style C */
 
 
-#define RSTATPROG ((u_long)100001)
-#define RSTATVERS_TIME ((u_long)3)
+#define RSTATPROG ((rpc_uint)100001)
+#define RSTATVERS_TIME ((rpc_uint)3)
 
 #ifdef __cplusplus
-#define RSTATPROC_STATS ((u_long)1)
+#define RSTATPROC_STATS ((rpc_uint)1)
 extern "C" statstime * rstatproc_stats_3(void *, CLIENT *);
 extern "C" statstime * rstatproc_stats_3_svc(void *, struct svc_req *);
-#define RSTATPROC_HAVEDISK ((u_long)2)
+#define RSTATPROC_HAVEDISK ((rpc_uint)2)
 extern "C" u_int * rstatproc_havedisk_3(void *, CLIENT *);
 extern "C" u_int * rstatproc_havedisk_3_svc(void *, struct svc_req *);
 
 #elif __STDC__
-#define RSTATPROC_STATS ((u_long)1)
+#define RSTATPROC_STATS ((rpc_uint)1)
 extern  statstime * rstatproc_stats_3(void *, CLIENT *);
 extern  statstime * rstatproc_stats_3_svc(void *, struct svc_req *);
-#define RSTATPROC_HAVEDISK ((u_long)2)
+#define RSTATPROC_HAVEDISK ((rpc_uint)2)
 extern  u_int * rstatproc_havedisk_3(void *, CLIENT *);
 extern  u_int * rstatproc_havedisk_3_svc(void *, struct svc_req *);
 
 #else /* Old Style C */
-#define RSTATPROC_STATS ((u_long)1)
+#define RSTATPROC_STATS ((rpc_uint)1)
 extern  statstime * rstatproc_stats_3();
 extern  statstime * rstatproc_stats_3_svc();
-#define RSTATPROC_HAVEDISK ((u_long)2)
+#define RSTATPROC_HAVEDISK ((rpc_uint)2)
 extern  u_int * rstatproc_havedisk_3();
 extern  u_int * rstatproc_havedisk_3_svc();
 #endif /* Old Style C */
-#define RSTATVERS_SWTCH ((u_long)2)
+#define RSTATVERS_SWTCH ((rpc_uint)2)
 
 #ifdef __cplusplus
 extern "C" statsswtch * rstatproc_stats_2(void *, CLIENT *);
@@ -161,7 +161,7 @@ extern  statsswtch * rstatproc_stats_2_svc();
 extern  u_int * rstatproc_havedisk_2();
 extern  u_int * rstatproc_havedisk_2_svc();
 #endif /* Old Style C */
-#define RSTATVERS_ORIG ((u_long)1)
+#define RSTATVERS_ORIG ((rpc_uint)1)
 
 #ifdef __cplusplus
 extern "C" stats * rstatproc_stats_1(void *, CLIENT *);

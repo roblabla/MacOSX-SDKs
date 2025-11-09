@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -14,9 +14,9 @@
 
 @interface NSArrayController : NSObjectController {
 @private
-    void *_reserved5;
+	void *_reserved4;
+	id _rearrangementExtensions;
     NSMutableArray *_temporaryWorkObjects;
-    NSPredicate *_filterPredicate;
     struct __arrayControllerFlags {
         unsigned int _avoidsEmptySelection:1;
         unsigned int _preservesSelection:1;
@@ -25,23 +25,34 @@
         unsigned int _refreshesAllModelObjects:1;
         unsigned int _filterRestrictsInsertion:1;
         unsigned int _overridesArrangeObjects:1;
+        unsigned int _overridesDidChangeArrangementCriteria:1;
         unsigned int _explicitlyCannotInsert:1;
         unsigned int _generatedEmptyArray:1;
         unsigned int _isObservingKeyPathsThroughArrangedObjects:1;
         unsigned int _arrangedObjectsIsMutable:1;
         unsigned int _clearsFilterPredicateOnInsertion:1;
         unsigned int _skipSortingAfterFetch:1;
-        unsigned int _reservedArrayController:19;
+        unsigned int _automaticallyRearrangesObjects:1;
+        unsigned int _reservedArrayController:17;
     } _arrayControllerFlags;
-    NSArray *_sortDescriptors;
+    NSUInteger _observedIndexHint;
     NSMutableIndexSet *_selectionIndexes;
-    unsigned int _observedIndexHint;
     NSMutableArray *_objects;
-    NSMutableArray *_selectedObjects;
+    NSIndexSet *_cachedSelectedIndexes;
+    NSArray *_cachedSelectedObjects;
     NSArray *_arrangedObjects;
 }
 
-- (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes (for example the filter parameters)
+- (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting and filtering; subclasses can override and invoke this method if any parameter that affects the arranged objects changes
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setAutomaticallyRearrangesObjects:(BOOL)flag;    // default: NO
+- (BOOL)automaticallyRearrangesObjects;
+
+- (NSArray *)automaticRearrangementKeyPaths;    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
+- (void)didChangeArrangementCriteria;    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
+#endif
+
 - (void)setSortDescriptors:(NSArray *)sortDescriptors;
 - (NSArray *)sortDescriptors;
 
@@ -76,8 +87,8 @@
 */
 - (BOOL)setSelectionIndexes:(NSIndexSet *)indexes;    // to deselect all: empty index set, to select all: index set with indexes [0...count - 1]
 - (NSIndexSet *)selectionIndexes;
-- (BOOL)setSelectionIndex:(unsigned int)index;
-- (unsigned int)selectionIndex;
+- (BOOL)setSelectionIndex:(NSUInteger)index;
+- (NSUInteger)selectionIndex;
 - (BOOL)addSelectionIndexes:(NSIndexSet *)indexes;
 - (BOOL)removeSelectionIndexes:(NSIndexSet *)indexes;
 
@@ -97,9 +108,9 @@
 
 - (void)addObject:(id)object;    // overridden to add to the content objects and to the arranged objects if all filters currently applied are matched
 - (void)addObjects:(NSArray *)objects;
-- (void)insertObject:(id)object atArrangedObjectIndex:(unsigned int)index;    // inserts into the content objects and the arranged objects (as specified by index in the arranged objects) - will raise an exception if the object does not match all filters currently applied
+- (void)insertObject:(id)object atArrangedObjectIndex:(NSUInteger)index;    // inserts into the content objects and the arranged objects (as specified by index in the arranged objects) - will raise an exception if the object does not match all filters currently applied
 - (void)insertObjects:(NSArray *)objects atArrangedObjectIndexes:(NSIndexSet *)indexes;
-- (void)removeObjectAtArrangedObjectIndex:(unsigned int)index;    // removes from the content objects and the arranged objects (as specified by index in the arranged objects)
+- (void)removeObjectAtArrangedObjectIndex:(NSUInteger)index;    // removes from the content objects and the arranged objects (as specified by index in the arranged objects)
 - (void)removeObjectsAtArrangedObjectIndexes:(NSIndexSet *)indexes;
 - (void)removeObject:(id)object;    // removes from the content objects and the arranged objects (if currently contained)
 - (void)removeObjects:(NSArray *)objects;

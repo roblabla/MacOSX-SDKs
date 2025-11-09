@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1989-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -14,7 +14,9 @@
     id		sendPort;
     id          delegate;
     int32_t	busy;
-    char	slack[12];
+    int32_t	localProxyCount;
+    int32_t	waitCount;
+    id		delayedRL;
     id		statistics;
     unsigned char isDead;
     unsigned char isValid;
@@ -27,8 +29,8 @@
     unsigned char isQueueing:1;
     unsigned char isMulti:1;
     unsigned char invalidateRP:1;
-    id          localProxies;
-    id          remoteProxies;
+    id          ___1;
+    id          ___2;
     id          runLoops;
     id		requestModes;
     id          rootObject;
@@ -45,10 +47,13 @@
 
 + (NSConnection *)defaultConnection;
 
-+ (NSConnection *)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
-+ (NSConnection *)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
++ (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
++ (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
+
++ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)setRequestTimeout:(NSTimeInterval)ti;
 - (NSTimeInterval)requestTimeout;
@@ -77,7 +82,7 @@
 - (BOOL)registerName:(NSString *) name;
 - (BOOL)registerName:(NSString *) name withNameServer:(NSPortNameServer *)server;
 
-+ (NSConnection *)connectionWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
++ (id)connectionWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
 
 + (id)currentConversation;
 

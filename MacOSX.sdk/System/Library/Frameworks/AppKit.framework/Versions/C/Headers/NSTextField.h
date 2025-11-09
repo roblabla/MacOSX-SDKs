@@ -1,14 +1,15 @@
 /*
 	NSTextField.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSTextFieldCell.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
-@interface NSTextField : NSControl
+@interface NSTextField : NSControl <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
     id	_delegate;

@@ -403,185 +403,185 @@ bool_t xdr_ypbind_setdom();
 #endif /* Old Style C */
 
 
-#define YPPROG ((u_long)100004)
-#define YPVERS ((u_long)2)
+#define YPPROG ((rpc_uint)100004)
+#define YPVERS ((rpc_uint)2)
 
 #ifdef __cplusplus
-#define YPPROC_NULL ((u_long)0)
+#define YPPROC_NULL ((rpc_uint)0)
 extern "C" void * ypproc_null_2(void *, CLIENT *);
 extern "C" void * ypproc_null_2_svc(void *, struct svc_req *);
-#define YPPROC_DOMAIN ((u_long)1)
+#define YPPROC_DOMAIN ((rpc_uint)1)
 extern "C" bool_t * ypproc_domain_2(domainname *, CLIENT *);
 extern "C" bool_t * ypproc_domain_2_svc(domainname *, struct svc_req *);
-#define YPPROC_DOMAIN_NONACK ((u_long)2)
+#define YPPROC_DOMAIN_NONACK ((rpc_uint)2)
 extern "C" bool_t * ypproc_domain_nonack_2(domainname *, CLIENT *);
 extern "C" bool_t * ypproc_domain_nonack_2_svc(domainname *, struct svc_req *);
-#define YPPROC_MATCH ((u_long)3)
+#define YPPROC_MATCH ((rpc_uint)3)
 extern "C" ypresp_val * ypproc_match_2(ypreq_key *, CLIENT *);
 extern "C" ypresp_val * ypproc_match_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_FIRST ((u_long)4)
+#define YPPROC_FIRST ((rpc_uint)4)
 extern "C" ypresp_key_val * ypproc_first_2(ypreq_key *, CLIENT *);
 extern "C" ypresp_key_val * ypproc_first_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_NEXT ((u_long)5)
+#define YPPROC_NEXT ((rpc_uint)5)
 extern "C" ypresp_key_val * ypproc_next_2(ypreq_key *, CLIENT *);
 extern "C" ypresp_key_val * ypproc_next_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_XFR ((u_long)6)
+#define YPPROC_XFR ((rpc_uint)6)
 extern "C" ypresp_xfr * ypproc_xfr_2(ypreq_xfr *, CLIENT *);
 extern "C" ypresp_xfr * ypproc_xfr_2_svc(ypreq_xfr *, struct svc_req *);
-#define YPPROC_CLEAR ((u_long)7)
+#define YPPROC_CLEAR ((rpc_uint)7)
 extern "C" void * ypproc_clear_2(void *, CLIENT *);
 extern "C" void * ypproc_clear_2_svc(void *, struct svc_req *);
-#define YPPROC_ALL ((u_long)8)
+#define YPPROC_ALL ((rpc_uint)8)
 extern "C" ypresp_all * ypproc_all_2(ypreq_nokey *, CLIENT *);
 extern "C" ypresp_all * ypproc_all_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_MASTER ((u_long)9)
+#define YPPROC_MASTER ((rpc_uint)9)
 extern "C" ypresp_master * ypproc_master_2(ypreq_nokey *, CLIENT *);
 extern "C" ypresp_master * ypproc_master_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_ORDER ((u_long)10)
+#define YPPROC_ORDER ((rpc_uint)10)
 extern "C" ypresp_order * ypproc_order_2(ypreq_nokey *, CLIENT *);
 extern "C" ypresp_order * ypproc_order_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_MAPLIST ((u_long)11)
+#define YPPROC_MAPLIST ((rpc_uint)11)
 extern "C" ypresp_maplist * ypproc_maplist_2(domainname *, CLIENT *);
 extern "C" ypresp_maplist * ypproc_maplist_2_svc(domainname *, struct svc_req *);
 
 #elif __STDC__
-#define YPPROC_NULL ((u_long)0)
+#define YPPROC_NULL ((rpc_uint)0)
 extern  void * ypproc_null_2(void *, CLIENT *);
 extern  void * ypproc_null_2_svc(void *, struct svc_req *);
-#define YPPROC_DOMAIN ((u_long)1)
+#define YPPROC_DOMAIN ((rpc_uint)1)
 extern  bool_t * ypproc_domain_2(domainname *, CLIENT *);
 extern  bool_t * ypproc_domain_2_svc(domainname *, struct svc_req *);
-#define YPPROC_DOMAIN_NONACK ((u_long)2)
+#define YPPROC_DOMAIN_NONACK ((rpc_uint)2)
 extern  bool_t * ypproc_domain_nonack_2(domainname *, CLIENT *);
 extern  bool_t * ypproc_domain_nonack_2_svc(domainname *, struct svc_req *);
-#define YPPROC_MATCH ((u_long)3)
+#define YPPROC_MATCH ((rpc_uint)3)
 extern  ypresp_val * ypproc_match_2(ypreq_key *, CLIENT *);
 extern  ypresp_val * ypproc_match_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_FIRST ((u_long)4)
+#define YPPROC_FIRST ((rpc_uint)4)
 extern  ypresp_key_val * ypproc_first_2(ypreq_key *, CLIENT *);
 extern  ypresp_key_val * ypproc_first_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_NEXT ((u_long)5)
+#define YPPROC_NEXT ((rpc_uint)5)
 extern  ypresp_key_val * ypproc_next_2(ypreq_key *, CLIENT *);
 extern  ypresp_key_val * ypproc_next_2_svc(ypreq_key *, struct svc_req *);
-#define YPPROC_XFR ((u_long)6)
+#define YPPROC_XFR ((rpc_uint)6)
 extern  ypresp_xfr * ypproc_xfr_2(ypreq_xfr *, CLIENT *);
 extern  ypresp_xfr * ypproc_xfr_2_svc(ypreq_xfr *, struct svc_req *);
-#define YPPROC_CLEAR ((u_long)7)
+#define YPPROC_CLEAR ((rpc_uint)7)
 extern  void * ypproc_clear_2(void *, CLIENT *);
 extern  void * ypproc_clear_2_svc(void *, struct svc_req *);
-#define YPPROC_ALL ((u_long)8)
+#define YPPROC_ALL ((rpc_uint)8)
 extern  ypresp_all * ypproc_all_2(ypreq_nokey *, CLIENT *);
 extern  ypresp_all * ypproc_all_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_MASTER ((u_long)9)
+#define YPPROC_MASTER ((rpc_uint)9)
 extern  ypresp_master * ypproc_master_2(ypreq_nokey *, CLIENT *);
 extern  ypresp_master * ypproc_master_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_ORDER ((u_long)10)
+#define YPPROC_ORDER ((rpc_uint)10)
 extern  ypresp_order * ypproc_order_2(ypreq_nokey *, CLIENT *);
 extern  ypresp_order * ypproc_order_2_svc(ypreq_nokey *, struct svc_req *);
-#define YPPROC_MAPLIST ((u_long)11)
+#define YPPROC_MAPLIST ((rpc_uint)11)
 extern  ypresp_maplist * ypproc_maplist_2(domainname *, CLIENT *);
 extern  ypresp_maplist * ypproc_maplist_2_svc(domainname *, struct svc_req *);
 
 #else /* Old Style C */
-#define YPPROC_NULL ((u_long)0)
+#define YPPROC_NULL ((rpc_uint)0)
 extern  void * ypproc_null_2();
 extern  void * ypproc_null_2_svc();
-#define YPPROC_DOMAIN ((u_long)1)
+#define YPPROC_DOMAIN ((rpc_uint)1)
 extern  bool_t * ypproc_domain_2();
 extern  bool_t * ypproc_domain_2_svc();
-#define YPPROC_DOMAIN_NONACK ((u_long)2)
+#define YPPROC_DOMAIN_NONACK ((rpc_uint)2)
 extern  bool_t * ypproc_domain_nonack_2();
 extern  bool_t * ypproc_domain_nonack_2_svc();
-#define YPPROC_MATCH ((u_long)3)
+#define YPPROC_MATCH ((rpc_uint)3)
 extern  ypresp_val * ypproc_match_2();
 extern  ypresp_val * ypproc_match_2_svc();
-#define YPPROC_FIRST ((u_long)4)
+#define YPPROC_FIRST ((rpc_uint)4)
 extern  ypresp_key_val * ypproc_first_2();
 extern  ypresp_key_val * ypproc_first_2_svc();
-#define YPPROC_NEXT ((u_long)5)
+#define YPPROC_NEXT ((rpc_uint)5)
 extern  ypresp_key_val * ypproc_next_2();
 extern  ypresp_key_val * ypproc_next_2_svc();
-#define YPPROC_XFR ((u_long)6)
+#define YPPROC_XFR ((rpc_uint)6)
 extern  ypresp_xfr * ypproc_xfr_2();
 extern  ypresp_xfr * ypproc_xfr_2_svc();
-#define YPPROC_CLEAR ((u_long)7)
+#define YPPROC_CLEAR ((rpc_uint)7)
 extern  void * ypproc_clear_2();
 extern  void * ypproc_clear_2_svc();
-#define YPPROC_ALL ((u_long)8)
+#define YPPROC_ALL ((rpc_uint)8)
 extern  ypresp_all * ypproc_all_2();
 extern  ypresp_all * ypproc_all_2_svc();
-#define YPPROC_MASTER ((u_long)9)
+#define YPPROC_MASTER ((rpc_uint)9)
 extern  ypresp_master * ypproc_master_2();
 extern  ypresp_master * ypproc_master_2_svc();
-#define YPPROC_ORDER ((u_long)10)
+#define YPPROC_ORDER ((rpc_uint)10)
 extern  ypresp_order * ypproc_order_2();
 extern  ypresp_order * ypproc_order_2_svc();
-#define YPPROC_MAPLIST ((u_long)11)
+#define YPPROC_MAPLIST ((rpc_uint)11)
 extern  ypresp_maplist * ypproc_maplist_2();
 extern  ypresp_maplist * ypproc_maplist_2_svc();
 #endif /* Old Style C */
 
-#define YPPUSH_XFRRESPPROG ((u_long)0x40000000)
-#define YPPUSH_XFRRESPVERS ((u_long)1)
+#define YPPUSH_XFRRESPPROG ((rpc_uint)0x40000000)
+#define YPPUSH_XFRRESPVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define YPPUSHPROC_NULL ((u_long)0)
+#define YPPUSHPROC_NULL ((rpc_uint)0)
 extern "C" void * yppushproc_null_1(void *, CLIENT *);
 extern "C" void * yppushproc_null_1_svc(void *, struct svc_req *);
-#define YPPUSHPROC_XFRRESP ((u_long)1)
+#define YPPUSHPROC_XFRRESP ((rpc_uint)1)
 extern "C" yppushresp_xfr * yppushproc_xfrresp_1(void *, CLIENT *);
 extern "C" yppushresp_xfr * yppushproc_xfrresp_1_svc(void *, struct svc_req *);
 
 #elif __STDC__
-#define YPPUSHPROC_NULL ((u_long)0)
+#define YPPUSHPROC_NULL ((rpc_uint)0)
 extern  void * yppushproc_null_1(void *, CLIENT *);
 extern  void * yppushproc_null_1_svc(void *, struct svc_req *);
-#define YPPUSHPROC_XFRRESP ((u_long)1)
+#define YPPUSHPROC_XFRRESP ((rpc_uint)1)
 extern  yppushresp_xfr * yppushproc_xfrresp_1(void *, CLIENT *);
 extern  yppushresp_xfr * yppushproc_xfrresp_1_svc(void *, struct svc_req *);
 
 #else /* Old Style C */
-#define YPPUSHPROC_NULL ((u_long)0)
+#define YPPUSHPROC_NULL ((rpc_uint)0)
 extern  void * yppushproc_null_1();
 extern  void * yppushproc_null_1_svc();
-#define YPPUSHPROC_XFRRESP ((u_long)1)
+#define YPPUSHPROC_XFRRESP ((rpc_uint)1)
 extern  yppushresp_xfr * yppushproc_xfrresp_1();
 extern  yppushresp_xfr * yppushproc_xfrresp_1_svc();
 #endif /* Old Style C */
 
-#define YPBINDPROG ((u_long)100007)
-#define YPBINDVERS ((u_long)2)
+#define YPBINDPROG ((rpc_uint)100007)
+#define YPBINDVERS ((rpc_uint)2)
 
 #ifdef __cplusplus
-#define YPBINDPROC_NULL ((u_long)0)
+#define YPBINDPROC_NULL ((rpc_uint)0)
 extern "C" void * ypbindproc_null_2(void *, CLIENT *);
 extern "C" void * ypbindproc_null_2_svc(void *, struct svc_req *);
-#define YPBINDPROC_DOMAIN ((u_long)1)
+#define YPBINDPROC_DOMAIN ((rpc_uint)1)
 extern "C" ypbind_resp * ypbindproc_domain_2(domainname *, CLIENT *);
 extern "C" ypbind_resp * ypbindproc_domain_2_svc(domainname *, struct svc_req *);
-#define YPBINDPROC_SETDOM ((u_long)2)
+#define YPBINDPROC_SETDOM ((rpc_uint)2)
 extern "C" void * ypbindproc_setdom_2(ypbind_setdom *, CLIENT *);
 extern "C" void * ypbindproc_setdom_2_svc(ypbind_setdom *, struct svc_req *);
 
 #elif __STDC__
-#define YPBINDPROC_NULL ((u_long)0)
+#define YPBINDPROC_NULL ((rpc_uint)0)
 extern  void * ypbindproc_null_2(void *, CLIENT *);
 extern  void * ypbindproc_null_2_svc(void *, struct svc_req *);
-#define YPBINDPROC_DOMAIN ((u_long)1)
+#define YPBINDPROC_DOMAIN ((rpc_uint)1)
 extern  ypbind_resp * ypbindproc_domain_2(domainname *, CLIENT *);
 extern  ypbind_resp * ypbindproc_domain_2_svc(domainname *, struct svc_req *);
-#define YPBINDPROC_SETDOM ((u_long)2)
+#define YPBINDPROC_SETDOM ((rpc_uint)2)
 extern  void * ypbindproc_setdom_2(ypbind_setdom *, CLIENT *);
 extern  void * ypbindproc_setdom_2_svc(ypbind_setdom *, struct svc_req *);
 
 #else /* Old Style C */
-#define YPBINDPROC_NULL ((u_long)0)
+#define YPBINDPROC_NULL ((rpc_uint)0)
 extern  void * ypbindproc_null_2();
 extern  void * ypbindproc_null_2_svc();
-#define YPBINDPROC_DOMAIN ((u_long)1)
+#define YPBINDPROC_DOMAIN ((rpc_uint)1)
 extern  ypbind_resp * ypbindproc_domain_2();
 extern  ypbind_resp * ypbindproc_domain_2_svc();
-#define YPBINDPROC_SETDOM ((u_long)2)
+#define YPBINDPROC_SETDOM ((rpc_uint)2)
 extern  void * ypbindproc_setdom_2();
 extern  void * ypbindproc_setdom_2_svc();
 #endif /* Old Style C */

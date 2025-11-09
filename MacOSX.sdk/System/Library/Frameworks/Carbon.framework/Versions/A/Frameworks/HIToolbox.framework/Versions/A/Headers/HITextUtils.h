@@ -3,7 +3,7 @@
  
      Contains:   Text utilities provided by HIToolbox.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -31,6 +31,7 @@
 extern "C" {
 #endif
 
+#if !__LP64__
 /*
  *  GetTextAndEncodingFromCFString()
  *  
@@ -92,7 +93,7 @@ extern "C" {
  *      the output buffer.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.2.5 and later
  *    Non-Carbon CFM:   not available
  */
@@ -104,6 +105,8 @@ GetTextAndEncodingFromCFString(
   ByteCount *     outTextLength,
   TextEncoding *  outEncoding)           /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

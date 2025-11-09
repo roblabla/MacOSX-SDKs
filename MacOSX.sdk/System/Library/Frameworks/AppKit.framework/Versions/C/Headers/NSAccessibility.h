@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2005, Apple Computer, Inc.
+	Copyright (c) 2001-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -136,6 +136,9 @@ APPKIT_EXTERN NSString *const NSAccessibilityDescriptionAttribute	//(NSString *)
     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 APPKIT_EXTERN NSString *const NSAccessibilityShownMenuAttribute		//(id)         - menu being displayed
     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityValueDescriptionAttribute	//(NSString *)  - text description of value
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
                                                                         
 // misc attributes
 APPKIT_EXTERN NSString *const NSAccessibilityPreviousContentsAttribute;	//(NSArray *)  - main elements
@@ -158,6 +161,13 @@ APPKIT_EXTERN NSString *const NSAccessibilityURLAttribute		//(NSURL *)    - url
 APPKIT_EXTERN NSString *const NSAccessibilityIndexAttribute		//(NSNumber *)  - (intValue)
     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+APPKIT_EXTERN NSString *const NSAccessibilityRowCountAttribute		//(NSNumber *)  - (intValue) number of rows
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityColumnCountAttribute	//(NSNumber *)  - (intValue) number of columns
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityOrderedByRowAttribute	//(NSNumber *)  - (boolValue) is ordered by row?
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 // linkage attributes
 APPKIT_EXTERN NSString *const NSAccessibilityTitleUIElementAttribute;		//(id)	      - UIElement for the title
 APPKIT_EXTERN NSString *const NSAccessibilityServesAsTitleForUIElementsAttribute//(NSArray *) - UIElements this titles
@@ -179,6 +189,8 @@ APPKIT_EXTERN NSString *const NSAccessibilitySharedCharacterRangeAttribute	//(NS
     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 APPKIT_EXTERN NSString *const NSAccessibilityInsertionPointLineNumberAttribute	//(NSNumber *) - line# containing caret
     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextRangesAttribute	//(NSArray *) - array of NSValue (rangeValue) ranges of selected text
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
                                                                         
                                                                         
 // parameterized text specific attributes
@@ -442,6 +454,8 @@ APPKIT_EXTERN NSString *const NSAccessibilityRulerRole		AVAILABLE_MAC_OS_X_VERSI
 APPKIT_EXTERN NSString *const NSAccessibilityRulerMarkerRole	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 APPKIT_EXTERN NSString *const NSAccessibilitySortButtonRole	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 APPKIT_EXTERN NSString *const NSAccessibilityLinkRole		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityDisclosureTriangleRole AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityGridRole		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 // subroles
@@ -465,5 +479,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityDecrementPageSubrole		AVAILABLE_MAC
 APPKIT_EXTERN NSString *const NSAccessibilitySearchFieldSubrole			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 APPKIT_EXTERN NSString *const NSAccessibilityTextAttachmentSubrole		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
 APPKIT_EXTERN NSString *const NSAccessibilityTextLinkSubrole			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
+APPKIT_EXTERN NSString *const NSAccessibilityTimelineSubrole			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
+
 
 #endif

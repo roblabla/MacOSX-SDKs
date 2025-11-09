@@ -3,9 +3,9 @@
  
      Contains:   SFNT file layout structures and constants.
  
-     Version:    ATS-184.7.7~42
+     Version:    ATS-236~129
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,7 +27,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* ----------------------------------------------------------------------------------------- */
 /* CONSTANTS */
@@ -1407,7 +1407,7 @@ typedef struct BslnTable                BslnTable;
 typedef BslnTable *                     BslnTablePtr;
 /* --------------------------------------------------------------------------- */
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __SFNTLAYOUTTYPES__ */

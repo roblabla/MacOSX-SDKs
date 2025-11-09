@@ -3,7 +3,7 @@
  
      Contains:   Services to load and share icon family data.
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -21,7 +21,13 @@
 #include <CarbonCore/ConditionalMacros.r>
 #endif
 
-#define kIconServices256PixelDataARGB 	'ic08'
+#define kIconServices16PixelDataARGB 	'ic04'				/*  uses kSmall32BitIconIndex and kSmallDeepMaskIconIndex */
+#define kIconServices32PixelDataARGB 	'ic05'				/*  uses kLarge32BitIconIndex and kLargeDeepMaskIconIndex */
+#define kIconServices48PixelDataARGB 	'ic06'				/*  uses kHuge32BitIconIndex and kHugeDeepMaskIconIndex */
+#define kIconServices128PixelDataARGB 	'ic07'				/*  uses kThumbnailDataIndex and kThumbnailMaskIndex */
+
+#define kIconServices256PixelDataARGB 	'ic08'				/*  non-premultiplied 256x256 ARGB bitmap */
+#define kIconServices512PixelDataARGB 	'ic09'				/*  non-premultiplied 512x512 ARGB bitmap */
 #define kThumbnail32BitData 			'it32'
 #define kThumbnail8BitMask 				't8mk'
 

@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -36,6 +36,9 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
         unsigned int hasAttemptedLoadingBundleForDirectory:1;
 	unsigned int isProfileBased:1;
 	unsigned int :24;
+#if __LP64__
+	unsigned int :32;
+#endif
     } _flags;
     id _clAuxiliaryStorage;
 }
@@ -63,7 +66,7 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Inserts color at the specified location. If a color by the same key is already in the list but at a different location it is removed from there.
 */
-- (void)insertColor:(NSColor *)color key:(NSString *)key atIndex:(unsigned)loc;
+- (void)insertColor:(NSColor *)color key:(NSString *)key atIndex:(NSUInteger)loc;
 
 /* No-op if key doesn't exist.
 */

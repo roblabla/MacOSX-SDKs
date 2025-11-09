@@ -1,61 +1,40 @@
 /* CoreGraphics - CGFunction.h
- * Copyright (c) 1999-2002 Apple Computer, Inc. (unpublished)
+ * Copyright (c) 1999-2005 Apple Computer, Inc. (unpublished)
  * All rights reserved.
  */
 
 #ifndef CGFUNCTION_H_
 #define CGFUNCTION_H_
 
-/*! @header CGFunction
- *   A general floating-point function evaluator, using a callback mapping
- *   an arbitrary number of float inputs to an arbitrary number of float
- *   outputs.
- */
+/* A CGFunction is a general floating-point function evaluator which uses a
+ * user-specified callback to map an arbitrary number of inputs to an
+ * arbitrary number of outputs. */
 
 typedef struct CGFunction *CGFunctionRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFBase.h>
 
-/*! @typedef CGFunctionEvaluateCallback
- *   This callback evaluates a function, using <tt>in</tt> as inputs, and
- *   places the result in <tt>out</tt>.
- *
- * @param info
- *   The info parameter passed to CGFunctionCreate.
- *
- * @param inData
- *   An array of <tt>domainDimension</tt> floats.
- *
- * @param outData
- *   An array of <tt>rangeDimension</tt> floats.
- */
+/* This callback evaluates a function, using `in' as inputs, and places the
+ * result in `out'. `info' is the info parameter passed to the CGFunction
+ * creation functions. */
 
-typedef void (*CGFunctionEvaluateCallback)(void *info, const float *in, float *out);
+typedef void (*CGFunctionEvaluateCallback)(void *info, const CGFloat *in, CGFloat *out);
 
-/*! @typedef CGFunctionReleaseInfoCallback
- *   This callback releases the info parameter passed to the CGFunction
- *   creation functions when the function is deallocated.
- *
- * @param info
- *   The info parameter passed to CGFunctionCreate.
- */
+/* When a function is deallocated, this callback releases `info', the info
+ * parameter passed to the CGFunction creation functions. */
 
 typedef void (*CGFunctionReleaseInfoCallback)(void *info);
 
-/*! @typedef CGFunctionCallbacks
- *   Structure containing the callbacks of a CGFunction.
+/* Callbacks for a CGFunction.
+ *   `version' is the version number of this structure. This structure is
+ *   version 0.
  *
- * @field version
- *   The version number of the structure passed to the CGFunction creation
- *   functions. This structure is version 0.
+ *   `evaluate' is the callback used to evaluate the function.
  *
- * @field evaluate
- *   The callback used to evaluate the function.
- *
- * @field releaseInfo
- *   If non-NULL, the callback used to release the info parameter passed to
- *   the CGFunction creation functions when the function is deallocated.
+ *   `releaseInfo', if non-NULL, is the callback used to release the info
+ *   parameter passed to the CGFunction creation functions when the
+ *   function is deallocated.
  */
 
 struct CGFunctionCallbacks {
@@ -67,66 +46,45 @@ typedef struct CGFunctionCallbacks CGFunctionCallbacks;
 
 CG_EXTERN_C_BEGIN
 
-/*! @function CGFunctionGetTypeID
- *   Return the CFTypeID for CGFunctionRefs.
- */
+/* Return the CFTypeID for CGFunctionRefs. */
 
 CG_EXTERN CFTypeID CGFunctionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/*! @function CGFunctionCreate
- *   Create a function.
+/* Create a CGFunction using `callbacks' to evaluate the function. `info'
+ * is passed to each of the callback functions. `domainDimension' is the
+ * number of input values to the function; `rangeDimension' is the number
+ * of output values from the function.
  *
- * @param info
- *   The parameter passed to the callback functions.
+ * `domain' is an array of 2M values, where M is the number of input
+ * values. For each k from 0 to M-1, domain[2*k] must be less than or equal
+ * to domain[2*k+1]. The k'th input value (in[k]) will be clipped to lie in
+ * this interval, so that domain[2*k] <= in[k] <= domain[2*k+1]. If
+ * `domain' is NULL, then the input values will not be clipped. However,
+ * it's strongly recommended that `domain' be specified; each domain
+ * interval should specify reasonable values for the minimum and maximum in
+ * that dimension.
  *
- * @param domainDimension
- *   The number of inputs to the function.
+ * `range' is an array of 2N values, where N is the number of output
+ * values. For each k from 0 to N-1, range[2*k] must be less than or equal
+ * to range[2*k+1]. The k'th output value (out[k]) will be clipped to lie
+ * in this interval, so that range[2*k] <= out[k] <= range[2*k+1]. If
+ * `range' is NULL, then the output values will not be clipped. However,
+ * it's strongly recommended that `range' be specified; each range interval
+ * should specify reasonable values for the minimum and maximum in that
+ * dimension.
  *
- * @param domain
- *   An array of <tt>2*domainDimension</tt> floats used to specify the
- *   valid intervals of input values.  For each <tt>k</tt> from <tt>0</tt>
- *   to <tt>domainDimension - 1</tt>, <tt>domain[2*k]</tt> must be less
- *   than or equal to <tt>domain[2*k+1]</tt>, and the <tt>k</tt>'th input
- *   value <tt>in[k]</tt> will be clipped to lie in the interval
- *   <tt>domain[2*k] <= in[k] <= domain[2*k+1]</tt>.  If this parameter is
- *   NULL, then the input values are not clipped.  However, it's strongly
- *   recommended that this parameter be specified; each domain interval
- *   should specify reasonable values for the minimum and maximum in each
- *   dimension.
- *
- * @param rangeDimension
- *   The number of outputs from the function.
- *
- * @param range
- *   An array of <tt>2*rangeDimension</tt> floats used to specify the valid
- *   intervals of output values.  For each <tt>k</tt> from <tt>0</tt> to
- *   <tt>rangeDimension - 1</tt>, <tt>range[2*k]</tt> must be less than or
- *   equal to <tt>range[2*k+1]</tt>, and the <tt>k</tt>'th output value
- *   <tt>out[k]</tt> will be clipped to lie in the interval <tt>range[2*k]
- *   <= out[k] <= range[2*k+1]</tt>.  If this parameter is NULL, then the
- *   output values are not clipped.  However, it's strongly recommended
- *   that this parameter be specified; each range interval should specify
- *   reasonable values for the minimum and maximum in each dimension.
- *
- * @param callbacks
- *   A pointer to a CGFunctionCallbacks structure.  The function uses these
- *   callbacks to evaluate values.  The contents of the callbacks structure
- *   is copied, so, for example, a pointer to a structure on the stack can
- *   be passed in.  */
+ * The contents of the callbacks structure is copied, so, for example, a
+ * pointer to a structure on the stack can be passed to this function. */
 
-CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension, const float *domain, size_t rangeDimension, const float *range, const CGFunctionCallbacks *callbacks) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension, const CGFloat *domain, size_t rangeDimension, const CGFloat *range, const CGFunctionCallbacks *callbacks) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/*! @function CGFunctionRetain
- *
- * Equivalent to <tt>CFRetain(function)</tt>.
- */
+/* Equivalent to `CFRetain(function)', except it doesn't crash (as CFRetain
+ * does) if `function' is NULL. */
 
 CG_EXTERN CGFunctionRef CGFunctionRetain(CGFunctionRef function) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/*! @function CGFunctionRelease
- *
- * Equivalent to <tt>CFRelease(function)</tt>.
- */
+/* Equivalent to `CFRelease(function)', except it doesn't crash (as CFRelease
+ * does) if `function' is NULL. */
 
 CG_EXTERN void CGFunctionRelease(CGFunctionRef function) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

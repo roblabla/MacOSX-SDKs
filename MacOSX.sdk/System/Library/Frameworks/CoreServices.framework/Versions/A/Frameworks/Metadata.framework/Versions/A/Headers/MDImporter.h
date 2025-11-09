@@ -1,7 +1,7 @@
 /**
  *      filename: MDImporter.h
  *      created : Thu Apr  8 13:33:00 2004
- *      LastEditDate Was "Thu May 20 10:07:05 2004"
+ *      LastEditDate Was "Thu Jul  7 14:09:31 2005"
  *
  */
 
@@ -29,12 +29,17 @@ extern "C" {
         @constant kMDImporterTypeID The importer only loads CFPlugIns of type
         kMDImporterTypeID - 8B08C4BF-415B-11D8-B3F9-0003936726FC
 
+
         @constant kMDImporterInterfaceID Importers must implement this
         Interface - 6EBC27C4-899C-11D8-84A3-0003936726FC
+
+        @constant kMDExporterInterfaceID Exporters can optionaly also implement this
+        Interface - B41C6074-7DFB-4057-969D-31C8E861A8D4
 */
 
-#define kMDImporterTypeID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0x8B,0x08,0xC4,0xBF,0x41,0x5B,0x11,0xD8,0xB3,0xF9,0x00,0x03,0x93,0x67,0x26,0xFC)
+#define kMDImporterTypeID      CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0x8B,0x08,0xC4,0xBF,0x41,0x5B,0x11,0xD8,0xB3,0xF9,0x00,0x03,0x93,0x67,0x26,0xFC)
 #define kMDImporterInterfaceID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0x6E,0xBC,0x27,0xC4,0x89,0x9C,0x11,0xD8,0x84,0xAE,0x00,0x03,0x93,0x67,0x26,0xFC)
+#define kMDExporterInterfaceID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault,0xB4,0x1C,0x60,0x74,0x7D,0xFB,0x40,0x57,0x96,0x9D,0x31,0xC8,0xE8,0x61,0xA8,0xD4)
 
 /*!
         @typedef MDImporterInterfaceStruct
@@ -49,11 +54,28 @@ extern "C" {
         @param attributes any attributes that can be gotten from the
         file should be places in the attributes
         CFMutableDictionaryRef. For example if the file has a
-        kMDItemDuration  then the key would be kMDItemDuration and the
+        kMDItemDurationSeconds then the key would be kMDItemDurationSeconds and the
         value would be a CFNumberRef containing the duration of the
         song etc. If you want to remove an attribute, then in the
         dictionary place the attribute and set the value of the
         attribute to kCFNull.
+
+        @param contentTypeUTI  The content type (a uniform type identifier)
+        of the file that is given to this plugin.
+
+        @param pathToFile location of the file on disk.
+
+        @result Boolean indicating if the import was successful
+
+
+        @typedef MDExporterInterfaceStruct
+        Interface for exporting data from the mdimport system back to the file.
+
+        @function ImporterExportData
+
+        @param thisInterface this plugin
+
+        @param attributes any attributes should be written back to the file
 
         @param contentTypeUTI  The content type (a uniform type identifier)
         of the file that is given to this plugin.
@@ -68,6 +90,11 @@ typedef struct {
     IUNKNOWN_C_GUTS;
     Boolean    (*ImporterImportData)(void *thisInterface,CFMutableDictionaryRef attributes,CFStringRef contentTypeUTI,CFStringRef pathToFile);
 } MDImporterInterfaceStruct;
+
+typedef struct {
+    IUNKNOWN_C_GUTS;
+    Boolean    (*ImporterExportData)(void *thisInterface,CFDictionaryRef attributes,CFStringRef contentTypeUTI,CFStringRef pathToFile);
+} MDExporterInterfaceStruct;
 #endif
 
 #if defined(__cplusplus)

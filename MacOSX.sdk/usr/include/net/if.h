@@ -1,23 +1,29 @@
 /*
  * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1982, 1986, 1989, 1993
@@ -58,9 +64,11 @@
 #ifndef _NET_IF_H_
 #define	_NET_IF_H_
 
+#include <sys/cdefs.h>
+
 #define	IF_NAMESIZE	16
 
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #include <sys/appleapiopts.h>
 #ifdef __APPLE__
 /*
@@ -198,6 +206,44 @@ struct ifdevmtu {
 	int	ifdm_max;
 };
 
+#pragma pack(4)
+
+/*
+ ifkpi: interface kpi ioctl
+ Used with SIOCSIFKPI and SIOCGIFKPI.
+
+ ifk_module_id - From in the kernel, a value from kev_vendor_code_find. From
+ 	user space, a value from SIOCGKEVVENDOR ioctl on a kernel event socket.
+ ifk_type - The type. Types are specific to each module id.
+ ifk_data - The data. ifk_ptr may be a 64bit pointer for 64 bit processes.
+ 
+ Copying data between user space and kernel space is done using copyin
+ and copyout. A process may be running in 64bit mode. In such a case,
+ the pointer will be a 64bit pointer, not a 32bit pointer. The following
+ sample is a safe way to copy the data in to the kernel from either a
+ 32bit or 64bit process:
+ 
+ user_addr_t tmp_ptr;
+ if (IS_64BIT_PROCESS(current_proc())) {
+ 	tmp_ptr = CAST_USER_ADDR_T(ifkpi.ifk_data.ifk_ptr64);
+ }
+ else {
+ 	tmp_ptr = CAST_USER_ADDR_T(ifkpi.ifk_data.ifk_ptr);
+ }
+ error = copyin(tmp_ptr, allocated_dst_buffer, size of allocated_dst_buffer);
+ */
+
+struct ifkpi {
+	unsigned int	ifk_module_id;
+	unsigned int	ifk_type;
+	union {
+		void		*ifk_ptr;
+		int		ifk_value;
+	} ifk_data;
+};
+
+#pragma pack()
+
 /*
  * Interface request structure used for socket
  * ioctl's.  All interface ioctl's must have parameter
@@ -221,6 +267,7 @@ struct	ifreq {
 		int 	ifru_intval;
 		caddr_t	ifru_data;
 		struct	ifdevmtu ifru_devmtu;
+		struct	ifkpi	ifru_kpi;
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
 #define	ifr_dstaddr	ifr_ifru.ifru_dstaddr	/* other end of p-to-p link */
@@ -238,6 +285,7 @@ struct	ifreq {
 #define	ifr_data	ifr_ifru.ifru_data	/* for use by interface */
 #define ifr_devmtu	ifr_ifru.ifru_devmtu	
 #define ifr_intval	ifr_ifru.ifru_intval	/* integer value */
+#define ifr_kpi		ifr_ifru.ifru_kpi
 };
 
 #define	_SIZEOF_ADDR_IFREQ(ifr) \
@@ -257,6 +305,8 @@ struct rslvmulti_req {
      struct sockaddr **llsa;
 };
 
+#pragma pack(4)
+
 struct ifmediareq {
 	char	ifm_name[IFNAMSIZ];	/* if name, e.g. "en0" */
 	int	ifm_current;		/* current media options */
@@ -266,6 +316,8 @@ struct ifmediareq {
 	int	ifm_count;		/* # entries in ifm_ulist array */
 	int	*ifm_ulist;		/* media words */
 };
+
+#pragma pack()
 
 
 /* 
@@ -281,6 +333,8 @@ struct ifstat {
 	char	ascii[IFSTATMAX + 1];
 };
 
+#pragma pack(4)
+
 /*
  * Structure used in SIOCGIFCONF request.
  * Used to retrieve interface configuration
@@ -293,9 +347,11 @@ struct	ifconf {
 		caddr_t	ifcu_buf;
 		struct	ifreq *ifcu_req;
 	} ifc_ifcu;
+};
 #define	ifc_buf	ifc_ifcu.ifcu_buf	/* buffer address */
 #define	ifc_req	ifc_ifcu.ifcu_req	/* array of structures returned */
-};
+
+#pragma pack()
 
 
 /*
@@ -303,8 +359,8 @@ struct	ifconf {
  */
 struct kev_dl_proto_data {
      struct net_event_data   	link_data;
-     unsigned long		proto_family;
-     unsigned long		proto_remaining_count;
+     u_int32_t			proto_family;
+     u_int32_t			proto_remaining_count;
 };
 
 /*
@@ -319,7 +375,7 @@ struct if_laddrreq {
 	struct sockaddr_storage	dstaddr; /* out */
 };
 
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 struct if_nameindex {
 	unsigned int	 if_index;	/* 1, 2, ... */

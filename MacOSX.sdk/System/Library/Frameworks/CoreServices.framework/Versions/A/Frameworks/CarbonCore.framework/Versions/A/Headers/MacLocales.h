@@ -3,7 +3,7 @@
  
      Contains:   Types & prototypes for locale functions
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -235,22 +235,34 @@ LocaleGetIndName(
 
 
 
+#if !__LP64__
 /*
- *  LocaleGetRegionLanguageName()
+ *  LocaleGetRegionLanguageName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes
+ *    and CFLocaleCopyDisplayNameForPropertyValue instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes and
+ *    CFLocaleCopyDisplayNameForPropertyValue instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 9.0 and later
  */
 extern OSStatus 
 LocaleGetRegionLanguageName(
   RegionCode   region,
-  Str255       languageName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255       languageName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /* Get names for a LocaleOperationClass*/
+
+#endif  /* !__LP64__ */
 
 /*
  *  LocaleOperationGetName()
@@ -302,7 +314,7 @@ LocaleOperationGetIndName(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

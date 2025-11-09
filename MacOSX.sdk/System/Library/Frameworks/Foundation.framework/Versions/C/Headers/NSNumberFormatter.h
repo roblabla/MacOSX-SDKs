@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1996-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -10,9 +10,9 @@
 @interface NSNumberFormatter : NSFormatter {
 @private
     NSMutableDictionary	*_attributes;
-    CFNumberFormatterRef _formatter;
-    void		*_unused[12];
-    void		*_reserved;
+    __strong CFNumberFormatterRef _formatter;
+    NSUInteger _counter;
+    void *_reserved[12];
 }
 
 - (id)init;
@@ -35,29 +35,31 @@
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-typedef enum {
+enum {
     NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,
     NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,
     NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,
     NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,
     NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,
     NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle
-} NSNumberFormatterStyle;
+};
+typedef NSUInteger NSNumberFormatterStyle;
 
 - (NSNumberFormatterStyle)numberStyle;
 - (void)setNumberStyle:(NSNumberFormatterStyle)style;
 
 - (NSLocale *)locale;
-- (void)setLocale:(NSLocale *)string;
+- (void)setLocale:(NSLocale *)locale;
 
 - (BOOL)generatesDecimalNumbers;
 - (void)setGeneratesDecimalNumbers:(BOOL)b;
 
-typedef enum {
+enum {
     NSNumberFormatterBehaviorDefault = 0,
     NSNumberFormatterBehavior10_0 = 1000,
     NSNumberFormatterBehavior10_4 = 1040,
-} NSNumberFormatterBehavior;
+};
+typedef NSUInteger NSNumberFormatterBehavior;
 
 - (NSNumberFormatterBehavior)formatterBehavior;
 - (void)setFormatterBehavior:(NSNumberFormatterBehavior)behavior;
@@ -168,32 +170,33 @@ typedef enum {
 - (void)setExponentSymbol:(NSString *)string;
 
 
-- (unsigned int)groupingSize;
-- (void)setGroupingSize:(unsigned int)number;
+- (NSUInteger)groupingSize;
+- (void)setGroupingSize:(NSUInteger)number;
 
-- (unsigned int)secondaryGroupingSize;
-- (void)setSecondaryGroupingSize:(unsigned int)number;
+- (NSUInteger)secondaryGroupingSize;
+- (void)setSecondaryGroupingSize:(NSUInteger)number;
 
 - (NSNumber *)multiplier;
 - (void)setMultiplier:(NSNumber *)number;
 
-- (unsigned int)formatWidth;
-- (void)setFormatWidth:(unsigned int)number;
+- (NSUInteger)formatWidth;
+- (void)setFormatWidth:(NSUInteger)number;
 
 - (NSString *)paddingCharacter;
 - (void)setPaddingCharacter:(NSString *)string;
 
-typedef enum {
+enum {
     NSNumberFormatterPadBeforePrefix = kCFNumberFormatterPadBeforePrefix,
     NSNumberFormatterPadAfterPrefix = kCFNumberFormatterPadAfterPrefix,
     NSNumberFormatterPadBeforeSuffix = kCFNumberFormatterPadBeforeSuffix,
     NSNumberFormatterPadAfterSuffix = kCFNumberFormatterPadAfterSuffix
-} NSNumberFormatterPadPosition;
+};
+typedef NSUInteger NSNumberFormatterPadPosition;
 
 - (NSNumberFormatterPadPosition)paddingPosition;
 - (void)setPaddingPosition:(NSNumberFormatterPadPosition)position;
 
-typedef enum {
+enum {
     NSNumberFormatterRoundCeiling = kCFNumberFormatterRoundCeiling,
     NSNumberFormatterRoundFloor = kCFNumberFormatterRoundFloor,
     NSNumberFormatterRoundDown = kCFNumberFormatterRoundDown,
@@ -201,7 +204,8 @@ typedef enum {
     NSNumberFormatterRoundHalfEven = kCFNumberFormatterRoundHalfEven,
     NSNumberFormatterRoundHalfDown = kCFNumberFormatterRoundHalfDown,
     NSNumberFormatterRoundHalfUp = kCFNumberFormatterRoundHalfUp
-} NSNumberFormatterRoundingMode;
+};
+typedef NSUInteger NSNumberFormatterRoundingMode;
 
 - (NSNumberFormatterRoundingMode)roundingMode;
 - (void)setRoundingMode:(NSNumberFormatterRoundingMode)mode;
@@ -209,17 +213,17 @@ typedef enum {
 - (NSNumber *)roundingIncrement;
 - (void)setRoundingIncrement:(NSNumber *)number;
 
-- (unsigned int)minimumIntegerDigits;
-- (void)setMinimumIntegerDigits:(unsigned int)number;
+- (NSUInteger)minimumIntegerDigits;
+- (void)setMinimumIntegerDigits:(NSUInteger)number;
 
-- (unsigned int)maximumIntegerDigits;
-- (void)setMaximumIntegerDigits:(unsigned int)number;
+- (NSUInteger)maximumIntegerDigits;
+- (void)setMaximumIntegerDigits:(NSUInteger)number;
 
-- (unsigned int)minimumFractionDigits;
-- (void)setMinimumFractionDigits:(unsigned int)number;
+- (NSUInteger)minimumFractionDigits;
+- (void)setMinimumFractionDigits:(NSUInteger)number;
 
-- (unsigned int)maximumFractionDigits;
-- (void)setMaximumFractionDigits:(unsigned int)number;
+- (NSUInteger)maximumFractionDigits;
+- (void)setMaximumFractionDigits:(NSUInteger)number;
 
 
 - (NSNumber *)minimum;
@@ -229,6 +233,24 @@ typedef enum {
 - (void)setMaximum:(NSNumber *)number;
 
 #endif
+
+- (NSString *)currencyGroupingSeparator AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setCurrencyGroupingSeparator:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (BOOL)isLenient AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setLenient:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (BOOL)usesSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setUsesSignificantDigits:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSUInteger)minimumSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setMinimumSignificantDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSUInteger)maximumSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setMaximumSignificantDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (BOOL)isPartialStringValidationEnabled AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setPartialStringValidationEnabled:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

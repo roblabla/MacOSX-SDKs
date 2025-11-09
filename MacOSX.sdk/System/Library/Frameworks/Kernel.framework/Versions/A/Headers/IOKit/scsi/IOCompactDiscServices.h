@@ -170,6 +170,7 @@ public:
 	
 	virtual IOReturn	setSpeed ( UInt16 kilobytesPerSecond );
 			
+	/* System Specific */
 	virtual IOReturn message ( UInt32 type, IOService * provider, void * argument );
     virtual IOReturn setProperties ( OSObject * properties );
 	

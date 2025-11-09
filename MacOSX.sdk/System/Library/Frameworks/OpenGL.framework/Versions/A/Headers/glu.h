@@ -294,7 +294,7 @@ extern void gluTessNormal (GLUtesselator* tess, GLdouble valueX, GLdouble valueY
 extern void gluTessProperty (GLUtesselator* tess, GLenum which, GLdouble data);
 extern void gluTessVertex (GLUtesselator* tess, GLdouble *location, GLvoid* data);
 extern GLint gluUnProject (GLdouble winX, GLdouble winY, GLdouble winZ, const GLdouble *model, const GLdouble *proj, const GLint *view, GLdouble* objX, GLdouble* objY, GLdouble* objZ);
-extern GLint gluUnProject4 (GLdouble winX, GLdouble winY, GLdouble winZ, GLdouble clipW, const GLdouble *model, const GLdouble *proj, const GLint *view, GLdouble near, GLdouble far, GLdouble* objX, GLdouble* objY, GLdouble* objZ, GLdouble* objW);
+extern GLint gluUnProject4 (GLdouble winX, GLdouble winY, GLdouble winZ, GLdouble clipW, const GLdouble *model, const GLdouble *proj, const GLint *view, GLdouble nearPlane, GLdouble farPlane, GLdouble* objX, GLdouble* objY, GLdouble* objZ, GLdouble* objW);
 
 #ifdef __cplusplus
 }

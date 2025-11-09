@@ -146,6 +146,7 @@ enum
     kSCSICmd_READ_DEFECT_DATA_12            = 0xB7,
     kSCSICmd_READ_DISC_INFORMATION          = 0x51,
     kSCSICmd_READ_DVD_STRUCTURE             = 0xAD,
+    kSCSICmd_READ_DISC_STRUCTURE            = 0xAD,
     kSCSICmd_READ_ELEMENT_STATUS_ATTACHED   = 0xB4,
     kSCSICmd_READ_FORMAT_CAPACITIES         = 0x23,
     kSCSICmd_READ_GENERATION				= 0x29,
@@ -686,6 +687,7 @@ enum
     kSCSICmd_READ_CAPACITY                  = 0x25, /* Sec. 6.1.18: */
     kSCSICmd_READ_DISC_INFORMATION          = 0x51, /* Sec. 6.1.19: */
     kSCSICmd_READ_DVD_STRUCTURE             = 0xAD, /* Sec. 6.1.20: */
+    kSCSICmd_READ_DISC_STRUCTURE            = 0xAD, /* Sec. 6.1.20: */
     kSCSICmd_READ_FORMAT_CAPACITIES         = 0x23, /* Sec. 6.1.21: */
     kSCSICmd_READ_HEADER                    = 0x44, /* Sec. 6.1.22: */
     kSCSICmd_READ_LONG                      = 0x3E, /* Optional */

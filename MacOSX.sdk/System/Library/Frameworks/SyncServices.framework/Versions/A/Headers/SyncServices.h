@@ -10,4 +10,8 @@
 #import <SyncServices/ISyncFilter.h>
 #import <SyncServices/ISyncManager.h>
 #import <SyncServices/ISyncRecordSnapshot.h>
+#import <SyncServices/ISyncRecordReference.h>
 #import <SyncServices/ISyncSession.h>
+#import <SyncServices/ISyncSessionDriver.h>
+#import <SyncServices/ISyncCoreData.h>
+#import <SyncServices/SyncServicesErrors.h>

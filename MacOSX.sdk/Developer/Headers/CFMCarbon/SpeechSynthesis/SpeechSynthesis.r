@@ -1,1 +1,0 @@
-../../../../System/Library/Frameworks/ApplicationServices.framework/Frameworks/SpeechSynthesis.framework/Headers/SpeechSynthesis.r

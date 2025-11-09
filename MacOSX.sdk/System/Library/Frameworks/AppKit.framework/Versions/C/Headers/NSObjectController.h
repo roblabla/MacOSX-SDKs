@@ -1,7 +1,7 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -25,7 +25,8 @@
         unsigned int _explicitlyCannotRemove:1;
         unsigned int _isUsingManagedProxy:1;
         unsigned int _hasFetched:1;
-        unsigned int _reservedObjectController:25;
+        unsigned int _batches:1;
+        unsigned int _reservedObjectController:24;
     } _objectControllerFlags;
     NSString *_objectClassName;
     Class _objectClass;
@@ -59,7 +60,7 @@
 - (BOOL)canAdd;    // can be used in bindings controlling the enabling of buttons, for example
 - (void)remove:(id)sender;    // removes content object through removeObject:
 - (BOOL)canRemove;    // can be used in bindings controlling the enabling of buttons, for example
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;    // used to automatically disable menu items for action methods of the controller (for example if canAdd returns NO, menu items with the add: action are disabled)
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;    // overridden to automatically disable user interface elements sending action methods to the controller (for example if canAdd returns NO, menu items with the add: action are disabled)
 
 @end
 
@@ -78,6 +79,15 @@
 - (BOOL)fetchWithRequest:(NSFetchRequest *)fetchRequest merge:(BOOL)merge error:(NSError **)error;    // subclasses can override this method to customize the fetch request, for example to specify fetch limits (passing nil for the fetch request will result in the default fetch request to be used; this method will never be invoked with a nil fetch request from within the standard Cocoa frameworks) - the merge flag determines whether the controller replaces the entire content with the fetch result or merges the existing content with the fetch result
 
 - (void)fetch:(id)sender;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+- (void)setUsesLazyFetching:(BOOL)enabled;
+- (BOOL)usesLazyFetching; // defaults to NO. 
+
+- (NSFetchRequest *)defaultFetchRequest;
+
+#endif
 
 @end
 

@@ -1,5 +1,5 @@
 /*	NSPortCoder.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>

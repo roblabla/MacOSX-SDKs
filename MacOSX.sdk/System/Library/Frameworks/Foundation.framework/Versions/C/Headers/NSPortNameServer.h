@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1993-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -39,6 +39,8 @@
 // you have to destroy the port (invalidate the NSMachPort
 // given to registerPort:name:).
 
+- (NSPort *)servicePortWithName:(NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 @end
 
 #endif
@@ -76,10 +78,10 @@
      // removePortForName: is supported, and should be used
 
 // the following may be used in the future, but for now nameServerPortNumber arguments are ignored
-- (NSPort *)portForName:(NSString *)name host:(NSString *)host nameServerPortNumber:(unsigned short)portNumber;
-- (BOOL)registerPort:(NSPort *)port name:(NSString *)name nameServerPortNumber:(unsigned short)portNumber;
-- (void)setDefaultNameServerPortNumber:(unsigned short)portNumber;
-- (unsigned short)defaultNameServerPortNumber;
+- (NSPort *)portForName:(NSString *)name host:(NSString *)host nameServerPortNumber:(uint16_t)portNumber;
+- (BOOL)registerPort:(NSPort *)port name:(NSString *)name nameServerPortNumber:(uint16_t)portNumber;
+- (void)setDefaultNameServerPortNumber:(uint16_t)portNumber;
+- (uint16_t)defaultNameServerPortNumber;
 
 @end
 

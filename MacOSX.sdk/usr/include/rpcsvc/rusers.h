@@ -62,39 +62,39 @@ bool_t xdr_utmp_array();
 #define RUSERS_DEAD_PROCESS 8
 #define RUSERS_ACCOUNTING 9
 
-#define RUSERSPROG ((u_long)100002)
-#define RUSERSVERS_3 ((u_long)3)
+#define RUSERSPROG ((rpc_uint)100002)
+#define RUSERSVERS_3 ((rpc_uint)3)
 
 #ifdef __cplusplus
-#define RUSERSPROC_NUM ((u_long)1)
+#define RUSERSPROC_NUM ((rpc_uint)1)
 extern "C" int * rusersproc_num_3(void *, CLIENT *);
 extern "C" int * rusersproc_num_3_svc(void *, struct svc_req *);
-#define RUSERSPROC_NAMES ((u_long)2)
+#define RUSERSPROC_NAMES ((rpc_uint)2)
 extern "C" utmp_array * rusersproc_names_3(void *, CLIENT *);
 extern "C" utmp_array * rusersproc_names_3_svc(void *, struct svc_req *);
-#define RUSERSPROC_ALLNAMES ((u_long)3)
+#define RUSERSPROC_ALLNAMES ((rpc_uint)3)
 extern "C" utmp_array * rusersproc_allnames_3(void *, CLIENT *);
 extern "C" utmp_array * rusersproc_allnames_3_svc(void *, struct svc_req *);
 
 #elif __STDC__
-#define RUSERSPROC_NUM ((u_long)1)
+#define RUSERSPROC_NUM ((rpc_uint)1)
 extern  int * rusersproc_num_3(void *, CLIENT *);
 extern  int * rusersproc_num_3_svc(void *, struct svc_req *);
-#define RUSERSPROC_NAMES ((u_long)2)
+#define RUSERSPROC_NAMES ((rpc_uint)2)
 extern  utmp_array * rusersproc_names_3(void *, CLIENT *);
 extern  utmp_array * rusersproc_names_3_svc(void *, struct svc_req *);
-#define RUSERSPROC_ALLNAMES ((u_long)3)
+#define RUSERSPROC_ALLNAMES ((rpc_uint)3)
 extern  utmp_array * rusersproc_allnames_3(void *, CLIENT *);
 extern  utmp_array * rusersproc_allnames_3_svc(void *, struct svc_req *);
 
 #else /* Old Style C */
-#define RUSERSPROC_NUM ((u_long)1)
+#define RUSERSPROC_NUM ((rpc_uint)1)
 extern  int * rusersproc_num_3();
 extern  int * rusersproc_num_3_svc();
-#define RUSERSPROC_NAMES ((u_long)2)
+#define RUSERSPROC_NAMES ((rpc_uint)2)
 extern  utmp_array * rusersproc_names_3();
 extern  utmp_array * rusersproc_names_3_svc();
-#define RUSERSPROC_ALLNAMES ((u_long)3)
+#define RUSERSPROC_ALLNAMES ((rpc_uint)3)
 extern  utmp_array * rusersproc_allnames_3();
 extern  utmp_array * rusersproc_allnames_3_svc();
 #endif /* Old Style C */

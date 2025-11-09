@@ -59,13 +59,13 @@ static __inline__ float SSRandomFloatBetween(float a, float b)
 
 static __inline__ NSPoint SSRandomPointForSizeWithinRect(NSSize size, NSRect rect)
 {
-    return NSMakePoint(floor(SSRandomFloatBetween(rect.origin.x, rect.origin.x + rect.size.width - size.width)),
-                       floor(SSRandomFloatBetween(rect.origin.y, rect.origin.y + rect.size.height - size.height)));
+    return NSMakePoint(floorf(SSRandomFloatBetween(rect.origin.x, rect.origin.x + rect.size.width - size.width)),
+                       floorf(SSRandomFloatBetween(rect.origin.y, rect.origin.y + rect.size.height - size.height)));
 }
 
 static __inline__ NSRect SSCenteredRectInRect(NSRect innerRect, NSRect outerRect)
 {
-    innerRect.origin.x = floor((outerRect.size.width - innerRect.size.width) / 2);
-    innerRect.origin.y = floor((outerRect.size.height - innerRect.size.height) / 2);
+    innerRect.origin.x = floorf((outerRect.size.width - innerRect.size.width) / 2);
+    innerRect.origin.y = floorf((outerRect.size.height - innerRect.size.height) / 2);
     return innerRect;
 }

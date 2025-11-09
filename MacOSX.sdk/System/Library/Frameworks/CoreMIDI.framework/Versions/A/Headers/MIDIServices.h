@@ -136,6 +136,7 @@ enum {
 //=============================================================================
 #pragma mark	Types
 
+#if __LP64__
 /*!
 	@typedef		MIDIObjectRef
 	@abstract		The base class of many CoreMIDI objects.
@@ -148,7 +149,7 @@ enum {
 		company's inverted domain name, as in Java package names, but with underscores instead
 		of dots, e.g.: com_apple_APrivateAppleProperty
 */
-typedef void *							MIDIObjectRef;
+typedef UInt32 MIDIObjectRef;
 
 /*!
 	@typedef		MIDIClientRef
@@ -159,7 +160,7 @@ typedef void *							MIDIObjectRef;
 		To use CoreMIDI, an application creates a MIDIClientRef, to which it can add
 		MIDIPortRef's, through which it can send and receive MIDI.
 */
-typedef struct OpaqueMIDIClient *		MIDIClientRef;
+typedef MIDIObjectRef MIDIClientRef;
 
 /*!
 	@typedef		MIDIPortRef
@@ -170,7 +171,7 @@ typedef struct OpaqueMIDIClient *		MIDIClientRef;
 		A MIDIPortRef, which may be an input port or output port, is an object through which a
 		client may communicate with any number of MIDI sources or destinations.
 */
-typedef struct OpaqueMIDIPort *			MIDIPortRef;
+typedef MIDIObjectRef MIDIPortRef;
 
 /*!
 	@typedef		MIDIDeviceRef
@@ -184,7 +185,7 @@ typedef struct OpaqueMIDIPort *			MIDIPortRef;
 
 		A MIDIDeviceRef has properties and contains MIDIEntityRef's.
 */
-typedef struct OpaqueMIDIDevice *		MIDIDeviceRef;
+typedef MIDIObjectRef MIDIDeviceRef;
 
 /*!
 	@typedef		MIDIEntityRef
@@ -201,7 +202,7 @@ typedef struct OpaqueMIDIDevice *		MIDIDeviceRef;
 
 		These sub-components are MIDIEntityRef's.
 */
-typedef struct OpaqueMIDIEntity *		MIDIEntityRef;
+typedef MIDIObjectRef MIDIEntityRef;
 
 /*!
 	@typedef		MIDIEndpointRef
@@ -213,7 +214,15 @@ typedef struct OpaqueMIDIEntity *		MIDIEntityRef;
 		Entities have any number of MIDIEndpointRef's, sources and destinations of 16-channel
 		MIDI streams.
 */
+typedef MIDIObjectRef MIDIEndpointRef;
+#else
+typedef void *							MIDIObjectRef;
+typedef struct OpaqueMIDIClient *		MIDIClientRef;
+typedef struct OpaqueMIDIPort *			MIDIPortRef;
+typedef struct OpaqueMIDIDevice *		MIDIDeviceRef;
+typedef struct OpaqueMIDIEntity *		MIDIEntityRef;
 typedef struct OpaqueMIDIEndpoint *		MIDIEndpointRef;
+#endif
 
 
 /*!
@@ -328,10 +337,7 @@ typedef void
 //=============================================================================
 #pragma mark	Structures
 
-#if PRAGMA_STRUCT_ALIGN
-	#pragma options align=power
-#endif
-
+#pragma pack(push, 4)
 /*!
 	@struct			MIDIPacket
 	@abstract		A collection of simultaneous MIDI events.
@@ -396,10 +402,7 @@ struct MIDIPacketList
 	UInt32  			numPackets;	
 	MIDIPacket  		packet[1];
 };
-
-#if PRAGMA_STRUCT_ALIGN
-	#pragma options align=reset
-#endif
+#pragma pack(pop)
 
 /*!
 	@struct			MIDISysexSendRequest
@@ -489,7 +492,7 @@ typedef SInt32			MIDINotificationMessageID;
 struct MIDINotification
 {
 	MIDINotificationMessageID	messageID;
-	ByteCount					messageSize;
+	UInt32						messageSize;
 	// additional data may follow, depending on messageID
 };
 
@@ -513,7 +516,7 @@ struct MIDINotification
 struct MIDIObjectAddRemoveNotification
 {
 	MIDINotificationMessageID	messageID;
-	ByteCount					messageSize;
+	UInt32						messageSize;
 	MIDIObjectRef				parent;
 	MIDIObjectType				parentType;
 	MIDIObjectRef				child;
@@ -539,7 +542,7 @@ typedef struct MIDIObjectAddRemoveNotification MIDIObjectAddRemoveNotification;
 struct MIDIObjectPropertyChangeNotification
 {
 	MIDINotificationMessageID	messageID;
-	ByteCount					messageSize;
+	UInt32						messageSize;
 	MIDIObjectRef				object;
 	MIDIObjectType				objectType;
 	CFStringRef					propertyName;
@@ -549,7 +552,7 @@ typedef struct MIDIObjectPropertyChangeNotification MIDIObjectPropertyChangeNoti
 struct MIDIIOErrorNotification
 {
 	MIDINotificationMessageID	messageID;
-	ByteCount					messageSize;
+	UInt32						messageSize;
 	MIDIDeviceRef				driverDevice;
 	OSStatus					errorCode;
 };
@@ -1981,6 +1984,9 @@ MIDISendSysex(	MIDISysexSendRequest *request )				AVAILABLE_MAC_OS_X_VERSION_10_
 
 		Clients which have created virtual sources, using MIDISourceCreate, should call this
 		function when the source is generating MIDI.
+		
+		Unlike MIDISend(), a timestamp of 0 is not equivalent to "now"; the driver or virtual
+		source is responsible for putting proper timestamps in the packets.
 */
 extern OSStatus 
 MIDIReceived(	MIDIEndpointRef			src, 

@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2004, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -25,12 +25,24 @@ APPKIT_EXTERN NSString *NSGraphicsContextRepresentationFormatAttributeName; // S
 APPKIT_EXTERN NSString *NSGraphicsContextPSFormat;
 APPKIT_EXTERN NSString *NSGraphicsContextPDFFormat;
 
-typedef enum NSImageInterpolation {
+enum {
    NSImageInterpolationDefault,
    NSImageInterpolationNone,
    NSImageInterpolationLow,
    NSImageInterpolationHigh
-} NSImageInterpolation;
+};
+typedef NSUInteger NSImageInterpolation;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+enum {
+    NSColorRenderingIntentDefault,
+    NSColorRenderingIntentAbsoluteColorimetric,
+    NSColorRenderingIntentRelativeColorimetric,
+    NSColorRenderingIntentPerceptual,
+    NSColorRenderingIntentSaturation
+};
+typedef NSInteger NSColorRenderingIntent;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 @interface NSGraphicsContext : NSObject {
 }
@@ -61,10 +73,10 @@ typedef enum NSImageInterpolation {
 // Graphics state controls
 // Calls -saveGraphicsContext, and pushes the current context on per-thread stack. It's functional equivalent of PSgsave
 + (void)saveGraphicsState;
-// Pops a context from per-thread stack, makes it current, and calls -resotreGraphicsContext. It's functional equivalent of PSgrestore
+// Pops a context from per-thread stack, makes it current, and calls -restoreGraphicsContext. It's functional equivalent of PSgrestore
 + (void)restoreGraphicsState;
 // Makes gState's context current, and resets graphics state. The gState must be created in the calling thread
-+ (void)setGraphicsState:(int)gState;
++ (void)setGraphicsState:(NSInteger)gState;
 
 // Returns attributes used to create this instance
 - (NSDictionary *)attributes;
@@ -79,8 +91,8 @@ typedef enum NSImageInterpolation {
 - (void)flushGraphics;
 
 // Focus Stack support (abstract)
-- (void *)focusStack;
-- (void)setFocusStack:(void *)stack;
+- (id)focusStack;
+- (void)setFocusStack:(id)stack;
 
 // Platform specific drawing context (usually CGContextRef)
 - (void *)graphicsPort;
@@ -107,6 +119,10 @@ typedef enum NSImageInterpolation {
 - (void)setCompositingOperation:(NSCompositingOperation)operation;
 - (NSCompositingOperation)compositingOperation;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSColorRenderingIntent)colorRenderingIntent;
+- (void)setColorRenderingIntent:(NSColorRenderingIntent)renderingIntent;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 @end
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4

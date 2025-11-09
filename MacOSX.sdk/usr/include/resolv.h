@@ -50,7 +50,7 @@
 
 /*
  *	@(#)resolv.h	8.1 (Berkeley) 6/2/93
- *	$Id: resolv.h,v 1.6 2004/05/13 19:37:48 majka Exp $
+ *	$Id: resolv.h,v 1.1 2006/03/01 19:01:39 majka Exp $
  */
 
 /*
@@ -80,6 +80,7 @@
 #endif
 #include <sys/cdefs.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <stdio.h>
 #include <arpa/nameser.h>
 

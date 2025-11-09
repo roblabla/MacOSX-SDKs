@@ -2,7 +2,7 @@
 //  ABPerson.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <AddressBook/ABRecord.h>
@@ -19,7 +19,7 @@
 @interface ABPerson : ABRecord
 
 - (NSArray *)parentGroups;
-    // Returns an array of ABGroup this group belongs to.
+    // Returns an array of ABGroup this person belongs to.
     // Returns an empty array if this person doesn't belong to any groups
 
 @end
@@ -31,16 +31,16 @@
 
 @interface ABPerson (ABPerson_Properties)
 
-+ (int)addPropertiesAndTypes:(NSDictionary *)properties;
++ (NSInteger)addPropertiesAndTypes:(NSDictionary *)properties;
     // Adds properties to all people records. The dictionary must be of the form:
     //          key: property name
     //          value: property type
     // Property name must be unique
-    // Returns the number of properties successfully added
+    // Returns the number of properties successfully added (-1 if an error occurred)
 
-+ (int)removeProperties:(NSArray *)properties;
++ (NSInteger)removeProperties:(NSArray *)properties;
     // Removes properties from all people
-    // Returns the number of properties successfully removed
+    // Returns the number of properties successfully removed (-1 if an error occurred)
 
 + (NSArray *)properties;
     // Returns an array of property names
@@ -62,14 +62,14 @@
                                         value:(id)value
                                    comparison:(ABSearchComparison)comparison;
     // Returns a search element that will search people
-    //          property: the name of the property to search on (cannot be null)
-    //          label: for multi-value properties an optional label (can be null)
-    //          key: for dictionary values an optional key (can be null)
-    //          value: value to match (can be null)
+    //          property: the name of the property to search on (cannot be nil)
+    //          label: for multi-value properties an optional label (can be nil)
+    //          key: for dictionary values an optional key (can be nil)
+    //          value: value to match (can be nil)
     //          comparison: the type of search (see ABTypedefs.h)
     //
-    // if the value is null then the only supported comparisons are kABEqual or kABNotEqual.
-    // Note: Support for Null values was added to Mac OS X version 10.2.4
+    // if the value is nil then the only supported comparisons are kABEqual or kABNotEqual.
+    // Note: Support for nil values was added to Mac OS X version 10.2.4
 @end
 
 // ================================================================================

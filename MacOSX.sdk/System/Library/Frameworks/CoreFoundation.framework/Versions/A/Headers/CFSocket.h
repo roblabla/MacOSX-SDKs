@@ -1,5 +1,5 @@
 /*	CFSocket.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSOCKET__)
@@ -14,14 +14,10 @@ typedef SOCKET CFSocketNativeHandle;
 typedef int CFSocketNativeHandle;
 #endif
 
-#include <CoreFoundation/CFBase.h>
-#include <CoreFoundation/CFData.h>
-#include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFRunLoop.h>
+#include <CoreFoundation/CFData.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif /* __cplusplus */
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFSocket * CFSocketRef;
 
@@ -102,11 +98,13 @@ filled in properly when passing in an address.
 
 */
 
-typedef enum {
+/* Values for CFSocketError */
+enum {
     kCFSocketSuccess = 0,
     kCFSocketError = -1,
     kCFSocketTimeout = -2
-} CFSocketError;
+};
+typedef CFIndex CFSocketError;
 
 typedef struct {
     SInt32	protocolFamily;
@@ -115,7 +113,8 @@ typedef struct {
     CFDataRef	address;
 } CFSocketSignature;
 
-typedef enum {
+/* Values for CFSocketCallBackType */
+enum {
     kCFSocketNoCallBack = 0,
     kCFSocketReadCallBack = 1,
     kCFSocketAcceptCallBack = 2,
@@ -125,7 +124,8 @@ typedef enum {
     ,
     kCFSocketWriteCallBack = 8
 #endif
-} CFSocketCallBackType;
+};
+typedef CFOptionFlags CFSocketCallBackType;
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /* Socket flags */
@@ -216,9 +216,7 @@ CF_EXPORT const CFStringRef kCFSocketErrorKey;
 CF_EXPORT const CFStringRef kCFSocketRegisterCommand;
 CF_EXPORT const CFStringRef kCFSocketRetrieveCommand;
 
-#if defined(__cplusplus)
-}
-#endif /* __cplusplus */
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFSOCKET__ */
 

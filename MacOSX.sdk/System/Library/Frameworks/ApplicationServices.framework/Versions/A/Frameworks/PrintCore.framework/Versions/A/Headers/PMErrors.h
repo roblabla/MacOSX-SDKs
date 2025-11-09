@@ -3,30 +3,26 @@
  
      Contains:   Mac OS X Printing Manager Error Codes.
  
-     Version:    Technology: Mac OS X
-                 Release:    1.0
- 
-     Copyright:  © 2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
  
-	History:
-		09/06/00	amq		Created.	
-
 */
 #ifndef __PMERRORS__
 #define __PMERRORS__
 
-#ifndef __APPLICATIONSERVICES__
-#include <ApplicationServices/ApplicationServices.h>
-#endif
-
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
+
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
+#endif
+
+#include <PrintCore/PMDefinitions.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -34,18 +30,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_IMPORT
-#pragma import on
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 enum {
@@ -66,6 +50,7 @@ enum {
     kPMInvalidPrintSession      = -30879,          	/* the print session is invalid */
     kPMInvalidPrinter           = -30880,        	/* the printer reference is invalid */
     kPMObjectInUse              = -30881,        	/* the object is in use */
+	kPMInvalidPreset            = -30899			/* the preset is invalid */
 
 #endif
 
@@ -89,7 +74,7 @@ enum {
     kPMInvalidReply					= -30894,		/* invalid reply from a remote server/client */
     kPMInvalidFileType				= -30895,		/* invalid file type in queue */
     kPMInvalidObject				= -30896,		/* invalid object or internal error */
-    kPMInvalidPaper				= -30897,		/* Invalid PMPaper. */
+    kPMInvalidPaper					= -30897,		/* Invalid PMPaper. */
     kPMInvalidCalibrationTarget		= -30898,		/* invalid dictionary specifying printer calibration target */
     
 	/* Print Job Creator and Printing Dialog Extension error codes (-9500 to -9540) */
@@ -184,20 +169,6 @@ enum {
 	/* End of list */
     kPMLastErrorCodeToMakeMaintenanceOfThisListEasier = -9799
 };
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
-
-#ifdef PRAGMA_IMPORT_OFF
-#pragma import off
-#elif PRAGMA_IMPORT
-#pragma import reset
-#endif
 
 #ifdef __cplusplus
 }

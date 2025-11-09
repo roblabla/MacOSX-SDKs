@@ -93,13 +93,13 @@
 #endif
 
 /*
- * if max OS not specified, assume largerof(10.4, min)
+ * if max OS not specified, assume largerof(10.5, min)
  */
 #ifndef MAC_OS_X_VERSION_MAX_ALLOWED
-    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_5
         #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_MIN_REQUIRED
     #else
-        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_4
+        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_5
     #endif
 #endif
 
@@ -114,7 +114,7 @@
 #endif
 
 /*
- * only certain compilers support __attribute((weak_import))__
+ * only certain compilers support __attribute__((weak_import))
  */
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1))) && (MAC_OS_X_VERSION_MIN_REQUIRED >= 1020)
     #define WEAK_IMPORT_ATTRIBUTE __attribute__((weak_import))
@@ -125,7 +125,7 @@
 #endif
 
 /*
- * only certain compilers support __attribute((deprecated))__
+ * only certain compilers support __attribute__((deprecated))
  */
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
     #define DEPRECATED_ATTRIBUTE __attribute__((deprecated))
@@ -134,7 +134,7 @@
 #endif
 
 /*
- * only certain compilers support __attribute((unavailable))__
+ * only certain compilers support __attribute__((unavailable))
  */
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
     #define UNAVAILABLE_ATTRIBUTE __attribute__((unavailable))
@@ -430,7 +430,7 @@
 /*
  * AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4
  * 
- * Used on declarations introduced in Mac OS X 10.2, 
+ * Used on declarations introduced in Mac OS X 10.3, 
  * but later deprecated in Mac OS X 10.4
  */
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_4
@@ -449,6 +449,7 @@
 #else
     #define DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER
 #endif
+
 
 
 
@@ -548,7 +549,6 @@
 #else
     #define DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
 #endif
-
 
 #endif  /* __AVAILABILITYMACROS__ */
 

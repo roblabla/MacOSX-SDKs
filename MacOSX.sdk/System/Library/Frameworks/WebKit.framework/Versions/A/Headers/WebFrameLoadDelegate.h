@@ -1,9 +1,30 @@
-/*	
-    WebFrameLoadDelegate.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.
-    
-    Public header file.
-*/
+/*
+ * Copyright (C) 2003, 2004, 2005 Apple Computer, Inc.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer. 
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution. 
+ * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission. 
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #import <Cocoa/Cocoa.h>
 
@@ -147,13 +168,29 @@
 - (void)webView:(WebView *)sender willCloseFrame:(WebFrame *)frame;
 
 /*!
+    @method webView:didClearWindowObject:forFrame:
+    @abstract Notifies the delegate that the JavaScript window object in a frame has 
+    been cleared in preparation for a new load. This is the preferred place to set custom 
+    properties on the window object using the WebScriptObject and JavaScriptCore APIs.
+    @param webView The webView sending the message.
+    @param windowObject The WebScriptObject representing the frame's JavaScript window object.
+    @param frame The WebFrame to which windowObject belongs.
+    @discussion If a delegate implements both webView:didClearWindowObject:forFrame:
+    and webView:windowScriptObjectAvailable:, only webView:didClearWindowObject:forFrame: 
+    will be invoked. This enables a delegate to implement both methods for backwards 
+    compatibility with older versions of WebKit.
+*/
+- (void)webView:(WebView *)webView didClearWindowObject:(WebScriptObject *)windowObject forFrame:(WebFrame *)frame;
+
+/*!
     @method webView:windowScriptObjectAvailable:
     @abstract Notifies the delegate that the scripting object for a page is available.  This is called
     before the page is loaded.  It may be useful to allow delegates to bind native objects to the window.
     @param webView The webView sending the message.
     @param windowScriptObject The WebScriptObject for the window in the scripting environment.
+    @discussion This method is deprecated. Consider using webView:didClearWindowObject:forFrame:
+    instead.
 */
 - (void)webView:(WebView *)webView windowScriptObjectAvailable:(WebScriptObject *)windowScriptObject;
 
 @end
-

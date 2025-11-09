@@ -171,7 +171,6 @@ public:
 	// OSMetaClassDeclareReservedUsed(IOAudioControl, 2);
 	virtual void sendQueuedNotifications(void);
 
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	// OSMetaClassDeclareReservedUsed(IOAudioControl, 3);
     /*!
      * @function createUserClient
@@ -191,17 +190,12 @@ public:
      * @result Returns kIOReturnSuccess on success.
      */
     virtual IOReturn createUserClient(task_t task, void *securityID, UInt32 type, IOAudioControlUserClient **newUserClient, OSDictionary *properties);
-#endif
 
 private:
     OSMetaClassDeclareReservedUsed(IOAudioControl, 0);
     OSMetaClassDeclareReservedUsed(IOAudioControl, 1);
     OSMetaClassDeclareReservedUsed(IOAudioControl, 2);
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
     OSMetaClassDeclareReservedUsed(IOAudioControl, 3);
-#else
-    OSMetaClassDeclareReservedUnused(IOAudioControl, 3);
-#endif
 
     OSMetaClassDeclareReservedUnused(IOAudioControl, 4);
     OSMetaClassDeclareReservedUnused(IOAudioControl, 5);

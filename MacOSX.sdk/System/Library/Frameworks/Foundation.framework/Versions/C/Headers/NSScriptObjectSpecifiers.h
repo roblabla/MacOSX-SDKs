@@ -1,6 +1,6 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,29 +20,29 @@ enum {
 };
 
 
-typedef enum {
+enum {
     NSPositionAfter,
     NSPositionBefore,
     NSPositionBeginning,
     NSPositionEnd,
     NSPositionReplace
-} NSInsertionPosition;
+};
+typedef NSUInteger NSInsertionPosition;
 
-
-typedef enum {
+enum {
     NSRelativeAfter = 0,
     NSRelativeBefore
-} NSRelativePosition;
+};
+typedef NSUInteger NSRelativePosition;
 
-
-typedef enum {
+enum {
     NSIndexSubelement = 0,
     NSEverySubelement = 1,
     NSMiddleSubelement = 2,
     NSRandomSubelement = 3,
     NSNoSubelement = 4 // Only valid for the end subelement
-} NSWhoseSubelementIdentifier;
-
+};
+typedef NSUInteger NSWhoseSubelementIdentifier;
 
 // This class represents a specifier to a set of objects.  It can be evaluated to return the objects it specifiers.  This abstract superclass is subclassed for each type of specifier.
 // A specifier always accesses a specific property of an object or array of objects.  The object accessed is called the container (or container).  When object specifiers are nested the container[s] are described by the container specifier.  When an object specifier has no container specifier, the container objects must be supplied explicitly.
@@ -58,8 +58,16 @@ typedef enum {
     BOOL _containerIsRangeContainerObject;
     char _padding[2];
     NSAppleEventDescriptor *_descriptor;
-    int _error;
+    NSInteger _error;
 }
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/* Given a typeObjectSpecifier Apple event descriptor, create and return an object specifier, or nil for failure. If this is invoked and fails during the execution of a script command, information about the error that caused the failure is recorded in [NSScriptCommand currentCommand].
+*/
++ (NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor;
+
+#endif
 
 - (id)initWithContainerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property;
     // This figures out the container class desc from the container specifier.
@@ -91,16 +99,24 @@ typedef enum {
 - (void)setContainerClassDescription:(NSScriptClassDescription *)classDesc;
 - (NSScriptClassDescription *)keyClassDescription;
 
-- (int *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(int *)count;
+- (NSInteger *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(NSInteger *)count;
     // Returning with count == -1 is shorthand for all indices.
     // count == 0 means no objects match.
 - (id)objectsByEvaluatingWithContainers:(id)containers;
 - (id)objectsByEvaluatingSpecifier;
 
-- (int)evaluationErrorNumber;
-- (void)setEvaluationErrorNumber:(int)error;
+- (NSInteger)evaluationErrorNumber;
+- (void)setEvaluationErrorNumber:(NSInteger)error;
 
 - (NSScriptObjectSpecifier *)evaluationErrorSpecifier;
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/* Return an Apple event descriptor that represents the receiver. If the receiver was created with +objectSpecifierWithDescriptor: that passed-in descriptor is returned. Otherwise a new one is created and returned (autoreleased, of course).
+*/ 
+- (NSAppleEventDescriptor *)descriptor;
+
+#endif
 
 @end
 
@@ -120,13 +136,13 @@ typedef enum {
 
 @interface NSIndexSpecifier : NSScriptObjectSpecifier {
     @private
-    int _index;
+    NSInteger _index;
 }
 
-- (id)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property index:(int)index;
+- (id)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property index:(NSInteger)index;
 
-- (int)index;
-- (void)setIndex:(int)index;
+- (NSInteger)index;
+- (void)setIndex:(NSInteger)index;
 
 @end
 
@@ -169,6 +185,14 @@ typedef enum {
 // Given an object specifier and an insertion position relative to the specified object, initialize.
 - (id)initWithPosition:(NSInsertionPosition)position objectSpecifier:(NSScriptObjectSpecifier *)specifier;
 
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Return the position or object specifier that was specified at initialization time.
+- (NSInsertionPosition)position;
+- (NSScriptObjectSpecifier *)objectSpecifier;
+
+#endif
+
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 // Set the class description for the object or objects to be inserted.  This message can be sent at any time after object initialization, but must be sent before evaluation to have any effect.
@@ -186,7 +210,7 @@ typedef enum {
 - (NSString *)insertionKey;
 
 // Return an index into the set of keyed to-many relationship objects before which insertion should be done in the insertion container, if evaluation has been successful, or -1 otherwise.  If this object has never been evaluated, evaluation is attempted.
-- (int)insertionIndex;
+- (NSInteger)insertionIndex;
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
@@ -281,9 +305,9 @@ typedef enum {
     @private
     NSScriptWhoseTest *_test;
     NSWhoseSubelementIdentifier _startSubelementIdentifier;
-    int _startSubelementIndex;
+    NSInteger _startSubelementIndex;
     NSWhoseSubelementIdentifier _endSubelementIdentifier;
-    int _endSubelementIndex;
+    NSInteger _endSubelementIndex;
 }
 
 - (id)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property test:(NSScriptWhoseTest *)test;
@@ -295,15 +319,15 @@ typedef enum {
 - (NSWhoseSubelementIdentifier)startSubelementIdentifier;
 - (void)setStartSubelementIdentifier:(NSWhoseSubelementIdentifier)subelement;
 
-- (int)startSubelementIndex;
-- (void)setStartSubelementIndex:(int)index;
+- (NSInteger)startSubelementIndex;
+- (void)setStartSubelementIndex:(NSInteger)index;
     // Only used if the startSubelementIdentifier == NSIndexSubelement
 
 - (NSWhoseSubelementIdentifier)endSubelementIdentifier;
 - (void)setEndSubelementIdentifier:(NSWhoseSubelementIdentifier)subelement;
 
-- (int)endSubelementIndex;
-- (void)setEndSubelementIndex:(int)index;
+- (NSInteger)endSubelementIndex;
+- (void)setEndSubelementIndex:(NSInteger)index;
     // Only used if the endSubelementIdentifier == NSIndexSubelement
 
 @end

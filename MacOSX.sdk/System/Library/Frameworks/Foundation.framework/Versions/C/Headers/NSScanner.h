@@ -1,5 +1,5 @@
 /*	NSScanner.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,11 +9,11 @@
 @interface NSScanner : NSObject <NSCopying>
 
 - (NSString *)string;
-- (unsigned)scanLocation;
-- (void)setScanLocation:(unsigned)pos;
+- (NSUInteger)scanLocation;
+- (void)setScanLocation:(NSUInteger)pos;
 - (void)setCharactersToBeSkipped:(NSCharacterSet *)set;
 - (void)setCaseSensitive:(BOOL)flag;
-- (void)setLocale:(NSDictionary *)dict;
+- (void)setLocale:(id)locale;
 
 @end
 
@@ -21,13 +21,20 @@
 
 - (NSCharacterSet *)charactersToBeSkipped;
 - (BOOL)caseSensitive;
-- (NSDictionary *)locale;
+- (id)locale;
 
 - (BOOL)scanInt:(int *)value;
-- (BOOL)scanHexInt:(unsigned *)value;		/* Optionally prefixed with "0x" or "0X" */
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)scanInteger:(NSInteger *)value;
+- (BOOL)scanHexLongLong:(unsigned long long *)result;
+- (BOOL)scanHexFloat:(float *)result;		// Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix. 
+- (BOOL)scanHexDouble:(double *)result;		// Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix. 
+#endif
+- (BOOL)scanHexInt:(unsigned *)value;		// Optionally prefixed with "0x" or "0X"
 - (BOOL)scanLongLong:(long long *)value;
 - (BOOL)scanFloat:(float *)value;
 - (BOOL)scanDouble:(double *)value;
+
 - (BOOL)scanString:(NSString *)string intoString:(NSString **)value;
 - (BOOL)scanCharactersFromSet:(NSCharacterSet *)set intoString:(NSString **)value;
 

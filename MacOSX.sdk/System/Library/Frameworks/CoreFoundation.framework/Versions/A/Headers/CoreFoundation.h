@@ -1,5 +1,5 @@
 /*	CoreFoundation.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_COREFOUNDATION__)
@@ -38,58 +38,46 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFBag.h>
+#include <CoreFoundation/CFBinaryHeap.h>
+#include <CoreFoundation/CFBitVector.h>
+#include <CoreFoundation/CFBundle.h>
+#include <CoreFoundation/CFByteOrder.h>
+#include <CoreFoundation/CFCalendar.h>
 #include <CoreFoundation/CFCharacterSet.h>
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFDate.h>
+#include <CoreFoundation/CFDateFormatter.h>
 #include <CoreFoundation/CFDictionary.h>
+#include <CoreFoundation/CFError.h>
+#include <CoreFoundation/CFFileDescriptor.h>
+#include <CoreFoundation/CFLocale.h>
+#include <CoreFoundation/CFMachPort.h>
+#include <CoreFoundation/CFMessagePort.h>
 #include <CoreFoundation/CFNumber.h>
+#include <CoreFoundation/CFNumberFormatter.h>
+#include <CoreFoundation/CFPlugIn.h>
+#include <CoreFoundation/CFPreferences.h>
 #include <CoreFoundation/CFPropertyList.h>
+#include <CoreFoundation/CFRunLoop.h>
 #include <CoreFoundation/CFSet.h>
+#include <CoreFoundation/CFSocket.h>
+#include <CoreFoundation/CFStream.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFStringEncodingExt.h>
 #include <CoreFoundation/CFTimeZone.h>
 #include <CoreFoundation/CFTree.h>
 #include <CoreFoundation/CFURL.h>
+#include <CoreFoundation/CFURLAccess.h>
+#include <CoreFoundation/CFUUID.h>
+#include <CoreFoundation/CFUserNotification.h>
 #include <CoreFoundation/CFXMLNode.h>
 #include <CoreFoundation/CFXMLParser.h>
 
-#if defined(__MACH__) || defined(__WIN32__)
-#include <CoreFoundation/CFMachPort.h>
-#include <CoreFoundation/CFMessagePort.h>
-#include <CoreFoundation/CFRunLoop.h>
-#include <CoreFoundation/CFSocket.h>
-#endif
-
-#include <CoreFoundation/CFBinaryHeap.h>
-#include <CoreFoundation/CFBitVector.h>
-#include <CoreFoundation/CFBundle.h>
-#include <CoreFoundation/CFByteOrder.h>
-#include <CoreFoundation/CFPlugIn.h>
-#include <CoreFoundation/CFPreferences.h>
-#include <CoreFoundation/CFURLAccess.h>
-#include <CoreFoundation/CFUUID.h>
-
-#include <CoreFoundation/CFLocale.h>
-
-#include <CoreFoundation/CFStream.h>
-
-#if defined(__MACH__)
-
 #ifndef CF_OPEN_SOURCE
-#include <CoreFoundation/CFDateFormatter.h>
-#include <CoreFoundation/CFNumberFormatter.h>
-#include <CoreFoundation/CFCalendar.h>
-#endif
-
-#include <CoreFoundation/CFUserNotification.h>
-
-#ifndef CF_OPEN_SOURCE
-#include <CoreFoundation/CFNotificationCenter.h>
 #include <CoreFoundation/CFAttributedString.h>
-#endif // !CF_OPEN_SOURCE
-
-#endif // __MACH__
-
+#include <CoreFoundation/CFNotificationCenter.h>
+#include <CoreFoundation/CFStringTokenizer.h>
+#endif
 
 #endif /* ! __COREFOUNDATION_COREFOUNDATION__ */
 

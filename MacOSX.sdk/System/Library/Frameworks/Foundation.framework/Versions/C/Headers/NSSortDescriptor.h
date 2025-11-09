@@ -1,7 +1,7 @@
 /*
 	NSSortDescriptor.h
 	Foundation
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,10 +11,7 @@
 
 @interface NSSortDescriptor : NSObject <NSCoding, NSCopying> {
 @private
-    struct __sortDescriptorFlags {
-        unsigned int _ascending:1;
-        unsigned int _reservedSortDescriptor:31;
-    } _sortDescriptorFlags;
+    NSUInteger _sortDescriptorFlags;
     NSString *_key;
     SEL _selector;
     NSString *_selectorName;
@@ -46,3 +43,4 @@
 @end
 
 #endif
+

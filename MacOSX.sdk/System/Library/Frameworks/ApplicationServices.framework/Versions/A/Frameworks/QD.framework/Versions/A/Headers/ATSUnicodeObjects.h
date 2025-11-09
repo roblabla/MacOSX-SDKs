@@ -3,9 +3,9 @@
  
      Contains:   ATSUI object manipulation functions.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -75,6 +75,7 @@ extern OSStatus
 ATSUCreateStyle(ATSUStyle * oStyle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUCreateAndCopyStyle()
  *  
@@ -104,7 +105,7 @@ ATSUCreateStyle(ATSUStyle * oStyle)                           AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -113,6 +114,8 @@ ATSUCreateAndCopyStyle(
   ATSUStyle    iStyle,
   ATSUStyle *  oStyle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUDisposeStyle()
@@ -151,6 +154,7 @@ extern OSStatus
 ATSUDisposeStyle(ATSUStyle iStyle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUSetStyleRefCon()
  *  
@@ -180,14 +184,14 @@ ATSUDisposeStyle(ATSUStyle iStyle)                            AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUSetStyleRefCon(
   ATSUStyle   iStyle,
-  UInt32      iRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon     iRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -217,14 +221,14 @@ ATSUSetStyleRefCon(
  *    error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUGetStyleRefCon(
   ATSUStyle   iStyle,
-  UInt32 *    oRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon *   oRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -265,7 +269,7 @@ ATSUGetStyleRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -305,7 +309,7 @@ ATSUCompareStyles(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -357,7 +361,7 @@ ATSUCopyAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -410,7 +414,7 @@ ATSUOverwriteAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -448,7 +452,7 @@ ATSUUnderwriteAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -486,7 +490,7 @@ ATSUClearStyle(ATSUStyle iStyle)                              AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -552,7 +556,7 @@ ATSUStyleIsEmpty(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -562,6 +566,8 @@ ATSUCalculateBaselineDeltas(
   BslnBaselineClass    iBaselineClass,
   BslnBaselineRecord   oBaselineDeltas)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUSetAttributes()
@@ -630,6 +636,7 @@ ATSUSetAttributes(
   const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetAttribute()
  *  
@@ -673,7 +680,7 @@ ATSUSetAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -739,7 +746,7 @@ ATSUGetAttribute(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -789,7 +796,7 @@ ATSUGetAllAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -839,7 +846,7 @@ ATSUClearAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -877,7 +884,7 @@ ATSUCreateTextLayout(ATSUTextLayout * oTextLayout)            AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -886,6 +893,8 @@ ATSUCreateAndCopyTextLayout(
   ATSUTextLayout    iTextLayout,
   ATSUTextLayout *  oTextLayout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUCreateTextLayoutWithTextPtr()
@@ -1138,9 +1147,10 @@ ATSUDisposeTextLayout(ATSUTextLayout iTextLayout)             AVAILABLE_MAC_OS_X
 extern OSStatus 
 ATSUSetTextLayoutRefCon(
   ATSUTextLayout   iTextLayout,
-  UInt32           iRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon          iRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetTextLayoutRefCon()
  *  
@@ -1166,14 +1176,14 @@ ATSUSetTextLayoutRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUGetTextLayoutRefCon(
   ATSUTextLayout   iTextLayout,
-  UInt32 *         oRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon *        oRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ---------------------------------------------------------------------------- */
@@ -1257,7 +1267,7 @@ ATSUGetTextLayoutRefCon(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1322,7 +1332,7 @@ ATSUSetTextPointerLocation(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1387,7 +1397,7 @@ ATSUGetTextLocation(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1438,7 +1448,7 @@ ATSUTextDeleted(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1448,6 +1458,8 @@ ATSUTextInserted(
   UniCharArrayOffset   iInsertionLocation,
   UniCharCount         iInsertionLength)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUTextMoved()
@@ -1488,6 +1500,7 @@ ATSUTextMoved(
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI layout controls                                                       */
 /* ---------------------------------------------------------------------------- */
+#if !__LP64__
 /*
  *  ATSUCopyLayoutControls()
  *  
@@ -1520,7 +1533,7 @@ ATSUTextMoved(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1529,6 +1542,8 @@ ATSUCopyLayoutControls(
   ATSUTextLayout   iSourceTextLayout,
   ATSUTextLayout   iDestTextLayout)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUSetLayoutControls()
@@ -1599,6 +1614,7 @@ ATSUSetLayoutControls(
   const ATSUAttributeValuePtr   iValue[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetLayoutControl()
  *  
@@ -1656,7 +1672,7 @@ ATSUSetLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1726,7 +1742,7 @@ ATSUGetLayoutControl(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1776,7 +1792,7 @@ ATSUGetAllLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1833,7 +1849,7 @@ ATSUClearLayoutControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1911,7 +1927,7 @@ ATSUCopyLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -1980,7 +1996,7 @@ ATSUSetLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2055,7 +2071,7 @@ ATSUGetLineControl(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2108,7 +2124,7 @@ ATSUGetAllLineControls(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2123,6 +2139,8 @@ ATSUClearLineControls(
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI style run processing                                                  */
 /* ---------------------------------------------------------------------------- */
+#endif  /* !__LP64__ */
+
 /*
  *  ATSUSetRunStyle()
  *  
@@ -2191,6 +2209,7 @@ ATSUSetRunStyle(
   UniCharCount         iRunLength)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetRunStyle()
  *  
@@ -2245,7 +2264,7 @@ ATSUSetRunStyle(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2298,7 +2317,7 @@ ATSUGetRunStyle(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2345,7 +2364,7 @@ ATSUGetContinuousAttributes(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2400,7 +2419,7 @@ ATSUSetTabArray(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2443,7 +2462,7 @@ ATSUGetTabArray(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2473,7 +2492,7 @@ ATSUCreateFontFallbacks(ATSUFontFallbacks * oFontFallback)    AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2528,7 +2547,7 @@ ATSUDisposeFontFallbacks(ATSUFontFallbacks iFontFallbacks)    AVAILABLE_MAC_OS_X
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2583,7 +2602,7 @@ ATSUSetObjFontFallbacks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2599,6 +2618,8 @@ ATSUGetObjFontFallbacks(
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI font matching                                                         */
 /* ---------------------------------------------------------------------------- */
+#endif  /* !__LP64__ */
+
 /*
  *  ATSUMatchFontsToText()
  *  
@@ -2733,6 +2754,7 @@ ATSUSetTransientFontMatching(
   Boolean          iTransientFontMatching)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetTransientFontMatching()
  *  
@@ -2763,7 +2785,7 @@ ATSUSetTransientFontMatching(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2800,7 +2822,7 @@ ATSUGetTransientFontMatching(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2833,7 +2855,7 @@ ATSUSetFontFallbacks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
@@ -2859,7 +2881,7 @@ ATSUGetFontFallbacks(
  *    ATSUCreateTextLayoutWithTextPtr instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2886,7 +2908,7 @@ ATSUCreateTextLayoutWithTextHandle(
  *    ATSUSetTextPointerLocation instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2917,7 +2939,7 @@ ATSUSetTextHandleLocation(
  *    nothing.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2925,72 +2947,7 @@ extern OSStatus
 ATSUIdle(ATSUTextLayout iTextLayout)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
-/* ---------------------------------------------------------------------------- */
-/*  ATSUI Memory allocation specification functions (not in Carbon)             */
-/* ---------------------------------------------------------------------------- */
-/*
- *  ATSUCreateMemorySetting()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    No longer needed on MacOS X.
- *  
- *  Discussion:
- *    ATSUI memory setting functions are not necessary on MacOS X.
- *  
- *  Availability:
- *    Mac OS X:         not available but deprecated in 10.0
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-
-
-/*
- *  ATSUSetCurrentMemorySetting()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    No longer needed on MacOS X.
- *  
- *  Discussion:
- *    ATSUI memory setting functions are not necessary on MacOS X.
- *  
- *  Availability:
- *    Mac OS X:         not available but deprecated in 10.0
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-
-
-/*
- *  ATSUGetCurrentMemorySetting()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    No longer needed on MacOS X.
- *  
- *  Discussion:
- *    ATSUI memory setting functions are not necessary on Mac OS X.
- *  
- *  Availability:
- *    Mac OS X:         not available but deprecated in 10.0
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-
-
-/*
- *  ATSUDisposeMemorySetting()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    No longer needed on MacOS X.
- *  
- *  Discussion:
- *    ATSUI memory setting functions are not necessary on MacOS X.
- *  
- *  Availability:
- *    Mac OS X:         not available but deprecated in 10.0
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

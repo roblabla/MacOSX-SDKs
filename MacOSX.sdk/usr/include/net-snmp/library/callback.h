@@ -28,6 +28,14 @@ extern          "C" {
 #define SNMP_CALLBACK_LOGGING			4
 #define SNMP_CALLBACK_SESSION_INIT		5
 
+
+    /*
+     * Callback priority (lower priority numbers called first(
+     */
+#define NETSNMP_CALLBACK_HIGHEST_PRIORITY      -1024 
+#define NETSNMP_CALLBACK_DEFAULT_PRIORITY       0
+#define NETSNMP_CALLBACK_LOWEST_PRIORITY        1024
+
     typedef int     (SNMPCallback) (int majorID, int minorID,
                                     void *serverarg, void *clientarg);
 
@@ -57,6 +65,8 @@ extern          "C" {
                                              SNMPCallback * new_callback,
                                              void *arg, int matchargs);
     void            clear_callback (void);
+    int             netsnmp_callback_clear_client_arg(void *, int i, int j);
+
     struct snmp_gen_callback *snmp_callback_list(int major, int minor);
 
 #ifdef __cplusplus

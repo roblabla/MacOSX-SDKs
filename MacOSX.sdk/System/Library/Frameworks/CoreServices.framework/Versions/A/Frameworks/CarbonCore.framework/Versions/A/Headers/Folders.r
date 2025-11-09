@@ -3,7 +3,7 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -29,103 +29,65 @@
 #define kLocalDomain 					(-32765)			/*  All users of a single machine have access to these resources. */
 #define kNetworkDomain 					(-32764)			/*  All users configured to use a common network server has access to these resources. */
 #define kUserDomain 					(-32763)			/*  Read/write. Resources that are private to the user. */
-#define kClassicDomain 					(-32762)			/*  Domain referring to the currently configured Classic System Folder */
+#define kClassicDomain 					(-32762)			/*  Domain referring to the currently configured Classic System Folder.  Not supported in Mac OS X Leopard and later. */
+#define kFolderManagerLastDomain 		(-32760)
 
-#define kLastDomainConstant 			(-32761)
+#define kLastDomainConstant 			(-32760)
 #define kCreateFolder 					1
 #define kDontCreateFolder 				0
 
-#define kSystemFolderType 				'macs'				/*  the system folder  */
-#define kDesktopFolderType 				'desk'				/*  the desktop folder; objects in this folder show on the desk top.  */
-#define kSystemDesktopFolderType 		'sdsk'				/*  the desktop folder at the root of the hard drive, never the redirected user desktop folder  */
+#define kDesktopFolderType 				'desk'				/*  the desktop folder; objects in this folder show on the desktop.  */
 #define kTrashFolderType 				'trsh'				/*  the trash folder; objects in this folder show up in the trash  */
-#define kSystemTrashFolderType 			'strs'				/*  the trash folder at the root of the drive, never the redirected user trash folder  */
 #define kWhereToEmptyTrashFolderType 	'empt'				/*  the "empty trash" folder; Finder starts empty from here down  */
-#define kPrintMonitorDocsFolderType 	'prnt'				/*  Print Monitor documents  */
-#define kStartupFolderType 				'strt'				/*  Finder objects (applications, documents, DAs, aliases, to...) to open at startup go here  */
-#define kShutdownFolderType 			'shdf'				/*  Finder objects (applications, documents, DAs, aliases, to...) to open at shutdown go here  */
-#define kAppleMenuFolderType 			'amnu'				/*  Finder objects to put into the Apple menu go here  */
-#define kControlPanelFolderType 		'ctrl'				/*  Control Panels go here (may contain INITs)  */
-#define kSystemControlPanelFolderType 	'sctl'				/*  System control panels folder - never the redirected one, always "Control Panels" inside the System Folder  */
-#define kExtensionFolderType 			'extn'				/*  System extensions go here  */
 #define kFontsFolderType 				'font'				/*  Fonts go here  */
 #define kPreferencesFolderType 			'pref'				/*  preferences for applications go here  */
-#define kSystemPreferencesFolderType 	'sprf'				/*  System-type Preferences go here - this is always the system's preferences folder, never a logged in user's  */
-															/*     On Mac OS X, items in the temporary items folder on the boot volume will be deleted a certain amount of time after their */
-															/*     last access.  On non-boot volumes, items in the temporary items folder may never get deleted.  Thus, the use of the */
-															/*     temporary items folder on Mac OS X is discouraged, especially for long lived data.  Using this folder temporarily ( like */
-															/*     to write a temporary copy of a document to during a save, after which you FSpExchangeFiles() to swap the new contents with */
-															/*     the old version ) is certainly ok, but using the temporary items folder to cache data is not a good idea.  Instead, look */
-															/*     at tmpfile() and its cousins for a better way to do this kind of thing.  On Mac OS X 10.4 and later, this folder is inside a */
-															/*     folder named ".TemporaryItems" and in earlier versions of Mac OS X this folder is inside a folder named "Temporary Items". */
-															/*     On Mac OS 9.x, items in the the Temporary Items folder are never automatically deleted.  Instead, when a 9.x machine boots */
-															/*     up the temporary items folder on a volume ( if one still exists, and is not empty ) is moved into the trash folder on the */
-															/*     same volume and renamed "Rescued Items from <diskname>".    */
-#define kTemporaryFolderType 			'temp'				/*  temporary files go here (deleted periodically, but don't rely on it.)  */
+#define kSystemPreferencesFolderType 	'sprf'				/*  the PreferencePanes folder, where Mac OS X Preference Panes go  */
+#define kTemporaryFolderType 			'temp'				/*     On Mac OS X, each user has their own temporary items folder, and the Folder Manager attempts to set permissions of these */
+															/*     folders such that other users can not access the data inside.  On Mac OS X 10.4 and later the data inside the temporary */
+															/*     items folder is deleted at logout and at boot, but not otherwise.  Earlier version of Mac OS X would delete items inside */
+															/*     the temporary items folder after a period of inaccess.  You can ask for a temporary item in a specific domain or on a  */
+															/*     particular volume by FSVolumeRefNum.  If you want a location for temporary items for a short time, then use either */
+															/*     ( kUserDomain, kkTemporaryFolderType ) or ( kSystemDomain, kTemporaryFolderType ).  The kUserDomain varient will always be */
+															/*     on the same volume as the user's home folder, while the kSystemDomain version will be on the same volume as /var/tmp/ ( and */
+															/*     will probably be on the local hard drive in case the user's home is a network volume ).  If you want a location for a temporary */
+															/*     file or folder to use for saving a document, especially if you want to use FSpExchangeFile() to implement a safe-save, then */
+															/*     ask for the temporary items folder on the same volume as the file you are safe saving. */
+															/*     However, be prepared for a failure to find a temporary folder in any domain or on any volume.  Some volumes may not have */
+															/*     a location for a temporary folder, or the permissions of the volume may be such that the Folder Manager can not return */
+															/*     a temporary folder for the volume. */
+															/*     If your application creates an item in a temporary items older you should delete that item as soon as it is not needed, */
+															/*     and certainly before your application exits, since otherwise the item is consuming disk space until the user logs out or */
+															/*     restarts.  Any items left inside a temporary items folder should be moved into a folder inside the Trash folder on the disk */
+															/*     when the user logs in, inside a folder named "Recovered items", in case there is anything useful to the end user. */
+#define kChewableItemsFolderType 		'flnt'				/*  similar to kTemporaryItemsFolderType, except items in this folder are deleted at boot or when the disk is unmounted  */
+#define kTemporaryItemsInCacheDataFolderType  'vtmp'		/*  A folder inside the kCachedDataFolderType for the given domain which can be used for transient data */
+#define kApplicationsFolderType 		'apps'				/*     Applications on Mac OS X are typically put in this folder ( or a subfolder ). */
+#define kVolumeRootFolderType 			'root'				/*  root folder of a volume or domain  */
+#define kDomainTopLevelFolderType 		'dtop'				/*  The top-level of a Folder domain, e.g. "/System" */
+#define kDomainLibraryFolderType 		'dlib'				/*  the Library subfolder of a particular domain */
+#define kUsersFolderType 				'usrs'				/*  "Users" folder, usually contains one folder for each user.  */
+#define kCurrentUserFolderType 			'cusr'				/*  The folder for the currently logged on user; domain passed in is ignored.  */
+#define kSharedUserDataFolderType 		'sdat'				/*  A Shared folder, readable & writeable by all users  */
 
-#define kExtensionDisabledFolderType 	'extD'
-#define kControlPanelDisabledFolderType  'ctrD'
-#define kSystemExtensionDisabledFolderType  'macD'
-#define kStartupItemsDisabledFolderType  'strD'
-#define kShutdownItemsDisabledFolderType  'shdD'
-#define kApplicationsFolderType 		'apps'
-#define kDocumentsFolderType 			'docs'
+#define kDocumentsFolderType 			'docs'				/*     User documents are typically put in this folder ( or a subfolder ). */
+#define kPictureDocumentsFolderType 	'pdoc'				/*  Refers to the "Pictures" folder in a users home directory */
+#define kMovieDocumentsFolderType 		'mdoc'				/*  Refers to the "Movies" folder in a users home directory */
+#define kMusicDocumentsFolderType 		'µdoc'				/*  Refers to the "Music" folder in a users home directory */
+#define kInternetSitesFolderType 		'site'				/*  Refers to the "Sites" folder in a users home directory */
+#define kPublicFolderType 				'pubb'				/*  Refers to the "Public" folder in a users home directory */
 
-															/*  new constants  */
-#define kVolumeRootFolderType 			'root'				/*  root folder of a volume  */
-#define kChewableItemsFolderType 		'flnt'				/*  items deleted at boot  */
-#define kApplicationSupportFolderType 	'asup'				/*  third-party items and folders  */
-#define kTextEncodingsFolderType 		'Ätex'				/*  encoding tables  */
-#define kStationeryFolderType 			'odst'				/*  stationery  */
-#define kOpenDocFolderType 				'odod'				/*  OpenDoc root  */
-#define kOpenDocShellPlugInsFolderType 	'odsp'				/*  OpenDoc Shell Plug-Ins in OpenDoc folder  */
-#define kEditorsFolderType 				'oded'				/*  OpenDoc editors in MacOS Folder  */
-#define kOpenDocEditorsFolderType 		'Äodf'				/*  OpenDoc subfolder of Editors folder  */
-#define kOpenDocLibrariesFolderType 	'odlb'				/*  OpenDoc libraries folder  */
-#define kGenEditorsFolderType 			'Äedi'				/*  CKH general editors folder at root level of Sys folder  */
-#define kHelpFolderType 				'Ählp'				/*  CKH help folder currently at root of system folder  */
-#define kInternetPlugInFolderType 		'Änet'				/*  CKH internet plug ins for browsers and stuff  */
-#define kModemScriptsFolderType 		'Ämod'				/*  CKH modem scripts, get 'em OUT of the Extensions folder  */
-#define kPrinterDescriptionFolderType 	'ppdf'				/*  CKH new folder at root of System folder for printer descs.  */
-#define kPrinterDriverFolderType 		'Äprd'				/*  CKH new folder at root of System folder for printer drivers  */
-#define kScriptingAdditionsFolderType 	'Äscr'				/*  CKH at root of system folder  */
-#define kSharedLibrariesFolderType 		'Älib'				/*  CKH for general shared libs.  */
-#define kVoicesFolderType 				'fvoc'				/*  CKH macintalk can live here  */
-#define kControlStripModulesFolderType 	'sdev'				/*  CKH for control strip modules  */
-#define kAssistantsFolderType 			'astÄ'				/*  SJF for Assistants (MacOS Setup Assistant, etc)  */
-#define kUtilitiesFolderType 			'utiÄ'				/*  SJF for Utilities folder  */
-#define kAppleExtrasFolderType 			'aexÄ'				/*  SJF for Apple Extras folder  */
-#define kContextualMenuItemsFolderType 	'cmnu'				/*  SJF for Contextual Menu items  */
-#define kMacOSReadMesFolderType 		'morÄ'				/*  SJF for MacOS ReadMes folder  */
-#define kALMModulesFolderType 			'walk'				/*  EAS for Location Manager Module files except type 'thng' (within kExtensionFolderType)  */
-#define kALMPreferencesFolderType 		'trip'				/*  EAS for Location Manager Preferences (within kPreferencesFolderType; contains kALMLocationsFolderType)  */
-#define kALMLocationsFolderType 		'fall'				/*  EAS for Location Manager Locations (within kALMPreferencesFolderType)  */
-#define kColorSyncProfilesFolderType 	'prof'				/*  for ColorSyncª Profiles  */
+#define kSharedLibrariesFolderType 		'Älib'				/*  for general shared libs.  */
+#define kVoicesFolderType 				'fvoc'				/*  macintalk can live here  */
+#define kUtilitiesFolderType 			'utiÄ'				/*  for Utilities folder  */
 #define kThemesFolderType 				'thme'				/*  for Theme data files  */
 #define kFavoritesFolderType 			'favs'				/*  Favorties folder for Navigation Services  */
-#define kInternetFolderType 			'intÄ'				/*  Internet folder (root level of startup volume)  */
-#define kAppearanceFolderType 			'appr'				/*  Appearance folder (root of system folder)  */
-#define kSoundSetsFolderType 			'snds'				/*  Sound Sets folder (in Appearance folder)  */
-#define kDesktopPicturesFolderType 		'dtpÄ'				/*  Desktop Pictures folder (in Appearance folder)  */
 #define kInternetSearchSitesFolderType 	'issf'				/*  Internet Search Sites folder  */
-#define kFindSupportFolderType 			'fnds'				/*  Find support folder  */
-#define kFindByContentFolderType 		'fbcf'				/*  Find by content folder  */
 #define kInstallerLogsFolderType 		'ilgf'				/*  Installer Logs folder  */
 #define kScriptsFolderType 				'scrÄ'				/*  Scripts folder  */
 #define kFolderActionsFolderType 		'fasf'				/*  Folder Actions Scripts folder  */
-#define kLauncherItemsFolderType 		'laun'				/*  Launcher Items folder  */
-#define kRecentApplicationsFolderType 	'rapp'				/*  Recent Applications folder  */
-#define kRecentDocumentsFolderType 		'rdoc'				/*  Recent Documents folder  */
-#define kRecentServersFolderType 		'rsvr'				/*  Recent Servers folder  */
 #define kSpeakableItemsFolderType 		'spki'				/*  Speakable Items folder  */
 #define kKeychainFolderType 			'kchn'				/*  Keychain folder  */
-#define kQuickTimeExtensionsFolderType 	'qtex'				/*  QuickTime Extensions Folder (in Extensions folder)  */
-#define kDisplayExtensionsFolderType 	'dspl'				/*  Display Extensions Folder (in Extensions folder)  */
-#define kMultiprocessingFolderType 		'mpxf'				/*  Multiprocessing Folder (in Extensions folder)  */
-#define kPrintingPlugInsFolderType 		'pplg'				/*  Printing Plug-Ins Folder (in Extensions folder)  */
 
-#define kDomainTopLevelFolderType 		'dtop'				/*  The top-level of a Folder domain, e.g. "/System" */
-#define kDomainLibraryFolderType 		'dlib'				/*  the Library subfolder of a particular domain */
 #define kColorSyncFolderType 			'sync'				/*  Contains ColorSync-related folders */
 #define kColorSyncCMMFolderType 		'ccmm'				/*  ColorSync CMMs */
 #define kColorSyncScriptingFolderType 	'cscr'				/*  ColorSync Scripting support */
@@ -133,28 +95,16 @@
 #define kSpeechFolderType 				'spch'				/*  Contains Speech-related folders */
 #define kCarbonLibraryFolderType 		'carb'				/*  Contains Carbon-specific file */
 #define kDocumentationFolderType 		'info'				/*  Contains Documentation files (not user documents) */
-#define kDeveloperDocsFolderType 		'ddoc'				/*  Contains Developer Documentation files and folders */
-#define kDeveloperHelpFolderType 		'devh'				/*  Contains Developer Help related files */
 #define kISSDownloadsFolderType 		'issd'				/*  Contains Internet Search Sites downloaded from the Internet */
 #define kUserSpecificTmpFolderType 		'utmp'				/*  Contains temporary items created on behalf of the current user */
 #define kCachedDataFolderType 			'cach'				/*  Contains various cache files for different clients */
-#define kTemporaryItemsInCacheDataFolderType  'vtmp'
-#define kMagicTemporaryItemsFolderType 	'mtmp'
 #define kFrameworksFolderType 			'fram'				/*  Contains MacOS X Framework folders */
 #define kPrivateFrameworksFolderType 	'pfrm'				/*  Contains MacOS X Private Framework folders      */
-#define kClassicDesktopFolderType 		'sdsk'				/*  MacOS 9 compatible desktop folder - same as  */
-															/*  kSystemDesktopFolderType but with a more appropriate */
-															/*  name for Mac OS X code. */
-#define kDeveloperFolderType 			'devf'				/*  Contains MacOS X Developer Resources */
+#define kClassicDesktopFolderType 		'sdsk'				/*  MacOS 9 compatible desktop folder - same as kSystemDesktopFolderType but with a more appropriate name for Mac OS X code. */
 #define kSystemSoundsFolderType 		'ssnd'				/*  Contains Mac OS X System Sound Files ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
 #define kComponentsFolderType 			'cmpd'				/*  Contains Mac OS X components   ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
 #define kQuickTimeComponentsFolderType 	'wcmp'				/*  Contains QuickTime components for Mac OS X ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
-#define kCoreServicesFolderType 		'csrv'				/*  Refers to the "CoreServices" folder on Mac OS X */
-#define kPictureDocumentsFolderType 	'pdoc'				/*  Refers to the "Pictures" folder in a users home directory */
-#define kMovieDocumentsFolderType 		'mdoc'				/*  Refers to the "Movies" folder in a users home directory */
-#define kMusicDocumentsFolderType 		'µdoc'				/*  Refers to the "Music" folder in a users home directory */
-#define kInternetSitesFolderType 		'site'				/*  Refers to the "Sites" folder in a users home directory */
-#define kPublicFolderType 				'pubb'				/*  Refers to the "Public" folder in a users home directory */
+#define kCoreServicesFolderType 		'csrv'				/*  Refers to the "/System/Library/CoreServices" folder on Mac OS X */
 #define kAudioSupportFolderType 		'adio'				/*  Refers to the Audio support folder for Mac OS X */
 #define kAudioPresetsFolderType 		'apst'				/*  "Presets" folder of "Audio" folder, Mac OS X 10.4 and later */
 #define kAudioSoundsFolderType 			'asnd'				/*  Refers to the Sounds subfolder of Audio Support */
@@ -175,19 +125,82 @@
 #define kFindByContentIndexesFolderType  'fbcx'				/*  Refers to the [domain]/Library/Indexes/FindByContent folder in Mac OS X */
 #define kManagedItemsFolderType 		'mang'				/*  Refers to the Managed Items folder for Mac OS X  */
 #define kBootTimeStartupItemsFolderType  'empz'				/*  Refers to the "StartupItems" folder of Mac OS X  */
+#define kAutomatorWorkflowsFolderType 	'flow'				/*  Automator Workflows folder  */
+#define kAutosaveInformationFolderType 	'asav'				/*  ~/Library/Autosaved Information/ folder, can be used to store autosave information for user's applications.  Available in Mac OS X 10.4 and later.   */
+#define kSpotlightSavedSearchesFolderType  'spot'			/*  Usually ~/Library/Saved Searches/; used by Finder and Nav/Cocoa panels to find saved Spotlight searches  */
+															/*  The following folder types are available in Mac OS X 10.5 and later  */
+#define kSpotlightImportersFolderType 	'simp'				/*  Folder for Spotlight importers, usually /Library/Spotlight/ or ~/Library/Spotlight, etc.  */
+#define kSpotlightMetadataCacheFolderType  'scch'			/*  Folder for Spotlight metadata caches, for example: ~/Library/Caches/Metadata/  */
+#define kInputManagersFolderType 		'inpt'				/*  InputManagers  */
+#define kInputMethodsFolderType 		'inpf'				/*  ../Library/Input Methods/  */
+#define kLibraryAssistantsFolderType 	'astl'				/*  Refers to the [domain]/Library/Assistants folder */
+#define kAudioDigidesignFolderType 		'adig'				/*  Refers to the Digidesign subfolder of the Audio Plug-ins folder */
+#define kAudioVSTFolderType 			'avst'				/*  Refers to the VST subfolder of the Audio Plug-ins folder */
+#define kColorPickersFolderType 		'cpkr'				/*  Refers to the ColorPickers folder */
+#define kCompositionsFolderType 		'cmps'				/*  Refers to the Compositions folder */
+#define kFontCollectionsFolderType 		'fncl'				/*  Refers to the FontCollections folder */
+#define kiMovieFolderType 				'imov'				/*  Refers to the iMovie folder */
+#define kiMoviePlugInsFolderType 		'impi'				/*  Refers to the Plug-ins subfolder of the iMovie Folder */
+#define kiMovieSoundEffectsFolderType 	'imse'				/*  Refers to the Sound Effects subfolder of the iMovie Folder */
+#define kDownloadsFolderType 			'down'				/*  Refers to the ~/Downloads folder */
 
-#define kLocalesFolderType 				'Äloc'				/*  PKE for Locales folder  */
-#define kFindByContentPluginsFolderType  'fbcp'				/*  Find By Content Plug-ins  */
-
-#define kUsersFolderType 				'usrs'				/*  "Users" folder, contains one folder for each user.  */
-#define kCurrentUserFolderType 			'cusr'				/*  The folder for the currently logged on user.  */
-#define kCurrentUserRemoteFolderLocation  'rusf'			/*  The remote folder for the currently logged on user  */
-#define kCurrentUserRemoteFolderType 	'rusr'				/*  The remote folder location for the currently logged on user  */
-#define kSharedUserDataFolderType 		'sdat'				/*  A Shared "Documents" folder, readable & writeable by all users  */
-#define kVolumeSettingsFolderType 		'vsfd'				/*  Volume specific user information goes here  */
+#define kColorSyncProfilesFolderType 	'prof'				/*  for ColorSyncª Profiles  */
+#define kApplicationSupportFolderType 	'asup'				/*  third-party items and folders  */
+#define kTextEncodingsFolderType 		'Ätex'				/*  encoding tables  */
+#define kPrinterDescriptionFolderType 	'ppdf'				/*  new folder at root of System folder for printer descs.  */
+#define kPrinterDriverFolderType 		'Äprd'				/*  new folder at root of System folder for printer drivers  */
+#define kScriptingAdditionsFolderType 	'Äscr'				/*  at root of system folder  */
 
 #define kClassicPreferencesFolderType 	'cprf'				/*  "Classic" folder in ~/Library/ for redirected preference files.  */
+															/*     The following selectors really only make sense when used within the Classic environment on Mac OS X. */
+#define kSystemFolderType 				'macs'				/*  the system folder  */
+#define kSystemDesktopFolderType 		'sdsk'				/*  the desktop folder at the root of the hard drive, never the redirected user desktop folder  */
+#define kSystemTrashFolderType 			'strs'				/*  the trash folder at the root of the drive, never the redirected user trash folder  */
+#define kPrintMonitorDocsFolderType 	'prnt'				/*  Print Monitor documents  */
+#define kALMModulesFolderType 			'walk'				/*  for Location Manager Module files except type 'thng' (within kExtensionFolderType)  */
+#define kALMPreferencesFolderType 		'trip'				/*  for Location Manager Preferences (within kPreferencesFolderType; contains kALMLocationsFolderType)  */
+#define kALMLocationsFolderType 		'fall'				/*  for Location Manager Locations (within kALMPreferencesFolderType)  */
+#define kAppleExtrasFolderType 			'aexÄ'				/*  for Apple Extras folder  */
+#define kContextualMenuItemsFolderType 	'cmnu'				/*  for Contextual Menu items  */
+#define kMacOSReadMesFolderType 		'morÄ'				/*  for MacOS ReadMes folder  */
+#define kStartupFolderType 				'strt'				/*  Finder objects (applications, documents, DAs, aliases, to...) to open at startup go here  */
+#define kShutdownFolderType 			'shdf'				/*  Finder objects (applications, documents, DAs, aliases, to...) to open at shutdown go here  */
+#define kAppleMenuFolderType 			'amnu'				/*  Finder objects to put into the Apple menu go here  */
+#define kControlPanelFolderType 		'ctrl'				/*  Control Panels go here (may contain INITs)  */
+#define kSystemControlPanelFolderType 	'sctl'				/*  System control panels folder - never the redirected one, always "Control Panels" inside the System Folder  */
+#define kExtensionFolderType 			'extn'				/*  System extensions go here  */
+#define kExtensionDisabledFolderType 	'extD'
+#define kControlPanelDisabledFolderType  'ctrD'
+#define kSystemExtensionDisabledFolderType  'macD'
+#define kStartupItemsDisabledFolderType  'strD'
+#define kShutdownItemsDisabledFolderType  'shdD'
+#define kAssistantsFolderType 			'astÄ'				/*  for Assistants (MacOS Setup Assistant, etc)  */
+#define kStationeryFolderType 			'odst'				/*  stationery  */
+#define kOpenDocFolderType 				'odod'				/*  OpenDoc root  */
+#define kOpenDocShellPlugInsFolderType 	'odsp'				/*  OpenDoc Shell Plug-Ins in OpenDoc folder  */
+#define kEditorsFolderType 				'oded'				/*  OpenDoc editors in MacOS Folder  */
+#define kOpenDocEditorsFolderType 		'Äodf'				/*  OpenDoc subfolder of Editors folder  */
+#define kOpenDocLibrariesFolderType 	'odlb'				/*  OpenDoc libraries folder  */
+#define kGenEditorsFolderType 			'Äedi'				/*  CKH general editors folder at root level of Sys folder  */
+#define kHelpFolderType 				'Ählp'				/*  CKH help folder currently at root of system folder  */
+#define kInternetPlugInFolderType 		'Änet'				/*  CKH internet plug ins for browsers and stuff  */
+#define kModemScriptsFolderType 		'Ämod'				/*  CKH modem scripts, get 'em OUT of the Extensions folder  */
+#define kControlStripModulesFolderType 	'sdev'				/*  CKH for control strip modules  */
+#define kInternetFolderType 			'intÄ'				/*  Internet folder (root level of startup volume)  */
+#define kAppearanceFolderType 			'appr'				/*  Appearance folder (root of system folder)  */
+#define kSoundSetsFolderType 			'snds'				/*  Sound Sets folder (in Appearance folder)  */
+#define kDesktopPicturesFolderType 		'dtpÄ'				/*  Desktop Pictures folder (in Appearance folder)  */
+#define kFindSupportFolderType 			'fnds'				/*  Find support folder  */
+#define kRecentApplicationsFolderType 	'rapp'				/*  Recent Applications folder  */
+#define kRecentDocumentsFolderType 		'rdoc'				/*  Recent Documents folder  */
+#define kRecentServersFolderType 		'rsvr'				/*  Recent Servers folder  */
+#define kLauncherItemsFolderType 		'laun'				/*  Launcher Items folder  */
+#define kQuickTimeExtensionsFolderType 	'qtex'				/*  QuickTime Extensions Folder (in Extensions folder)  */
+#define kDisplayExtensionsFolderType 	'dspl'				/*  Display Extensions Folder (in Extensions folder)  */
+#define kMultiprocessingFolderType 		'mpxf'				/*  Multiprocessing Folder (in Extensions folder)  */
+#define kPrintingPlugInsFolderType 		'pplg'				/*  Printing Plug-Ins Folder (in Extensions folder)  */
 #define kAppleshareAutomountServerAliasesFolderType  'srvÄ'	/*  Appleshare puts volumes to automount inside this folder.  */
+#define kVolumeSettingsFolderType 		'vsfd'				/*  Volume specific user information goes here  */
 #define kPreMacOS91ApplicationsFolderType  'Œpps'			/*  The "Applications" folder, pre Mac OS 9.1  */
 #define kPreMacOS91InstallerLogsFolderType  '”lgf'			/*  The "Installer Logs" folder, pre Mac OS 9.1  */
 #define kPreMacOS91AssistantsFolderType  'ŒstÄ'				/*  The "Assistants" folder, pre Mac OS 9.1  */
@@ -197,11 +210,19 @@
 #define kPreMacOS91InternetFolderType 	'”ntÄ'				/*  The "Internet" folder, pre Mac OS 9.1  */
 #define kPreMacOS91AutomountedServersFolderType  '§rvÄ'		/*  The "Servers" folder, pre Mac OS 9.1  */
 #define kPreMacOS91StationeryFolderType  '¿dst'				/*  The "Stationery" folder, pre Mac OS 9.1  */
+#define kLocalesFolderType 				'Äloc'				/*  PKE for Locales folder  */
+#define kFindByContentPluginsFolderType  'fbcp'				/*  Find By Content Plug-ins  */
+#define kFindByContentFolderType 		'fbcf'				/*  Find by content folder  */
 
+#define kMagicTemporaryItemsFolderType 	'mtmp'
 #define kTemporaryItemsInUserDomainFolderType  'temq'
-#define kAutosaveInformationFolderType 	'asav'				/*  ~/Library/Autosaved Information/ folder, used to store autosave information for user's applications.  Available in Mac OS X 10.4 and later.   */
-#define kSpotlightSavedSearchesFolderType  'spot'			/*  Usually ~/Library/Saved Searches/; used by Finder and Nav/Cocoa panels to find saved Spotlight searches  */
-#define kAutomatorWorkflowsFolderType 	'flow'				/*  Automator Workflows folder  */
+#define kCurrentUserRemoteFolderLocation  'rusf'			/*  The remote folder for the currently logged on user  */
+#define kCurrentUserRemoteFolderType 	'rusr'				/*  The remote folder location for the currently logged on user  */
+
+#define kDeveloperDocsFolderType 		'ddoc'				/*  Deprecated in 10.5. Contains Developer Documentation files and folders */
+#define kDeveloperHelpFolderType 		'devh'				/*  Deprecated in 10.5. Contains Developer Help related files */
+#define kDeveloperFolderType 			'devf'				/*  Deprecated in 10.5. Contains MacOS X Developer Resources */
+#define kDeveloperApplicationsFolderType  'dapp'			/*  Deprecated in 10.5. Contains Developer Applications */
 
 #define kCreateFolderAtBoot 			0x00000002
 #define kCreateFolderAtBootBit 			1
@@ -240,37 +261,11 @@
 #define kCurrentUserFolderLocation 		'cusf'				/*     the magic 'Current User' folder location */
 #define kDictionariesFolderType 		'dict'				/*  Dictionaries folder  */
 #define kLogsFolderType 				'logs'				/*  Logs folder  */
-#define kDeveloperApplicationsFolderType  'dapp'			/*  Contains Developer Applications */
 #define kPreferencePanesFolderType 		'ppan'				/*  PreferencePanes folder, in .../Library/  */
 
-															/*     Set this bit to 1 in the .flags field of a FindFolderUserRedirectionGlobals */
-															/*     structure if the userName in the struct should be used as the current */
-															/*     "User" name */
-#define kFindFolderRedirectionFlagUseDistinctUserFoldersBit  0 /*     Set this bit to 1 and the currentUserFolderVRefNum and currentUserFolderDirID */
-															/*     fields of the user record will get used instead of finding the user folder */
-															/*     with the userName field. */
-#define kFindFolderRedirectionFlagUseGivenVRefAndDirIDAsUserFolderBit  1 /*     Set this bit to 1 and the remoteUserFolderVRefNum and remoteUserFolderDirID */
-															/*     fields of the user record will get used instead of finding the user folder */
-															/*     with the userName field. */
-#define kFindFolderRedirectionFlagsUseGivenVRefNumAndDirIDAsRemoteUserFolderBit  2
+#define kWidgetsFolderType 				'wdgt'				/*  Dashboard Widgets folder, in system, local, and user domains   */
+#define kScreenSaversFolderType 		'scrn'				/*  Screen Savers folder, in system, local, and user domains  */
 
-#define kFolderManagerUserRedirectionGlobalsCurrentVersion  1
-															/*     These constants only work on Mac OS 9.x.  On Mac OS X, they are ignored. */
-#define kFindFolderExtendedFlagsDoNotFollowAliasesBit  0
-#define kFindFolderExtendedFlagsDoNotUseUserFolderBit  1
-#define kFindFolderExtendedFlagsUseOtherUserRecord  0x01000000
-
-#define kFolderManagerNotificationMessageUserLogIn  'log+'	/*     Sent by system & third party software after a user logs in.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner */
-#define kFolderManagerNotificationMessagePreUserLogIn  'logj' /*     Sent by system & third party software before a user logs in.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner */
-#define kFolderManagerNotificationMessageUserLogOut  'log-'	/*     Sent by system & third party software before a user logs out.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner */
-#define kFolderManagerNotificationMessagePostUserLogOut  'logp' /*     Sent by system & third party software after a user logs out.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner */
-#define kFolderManagerNotificationDiscardCachedData  'dche'	/*     Sent by system & third party software when the entire Folder Manager cache should be flushed */
-#define kFolderManagerNotificationMessageLoginStartup  'stup' /*     Sent by 'Login' application the first time it starts up after each boot */
-
-#define kDoNotRemoveWhenCurrentApplicationQuitsBit  0
-#define kDoNotRemoveWheCurrentApplicationQuitsBit  0		/*     Going away soon, use kDoNotRemoveWheCurrentApplicationQuitsBit */
-
-#define kStopIfAnyNotificationProcReturnsErrorBit  31
 
 /* fld# ¥ list of folder names for Folder Mgr */
 

@@ -1,27 +1,29 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSCell.h>
 
-typedef enum _NSScrollArrowPosition {
+enum {
     NSScrollerArrowsMaxEnd		= 0,	/* deprecated */
     NSScrollerArrowsMinEnd		= 1,	/* deprecated */
     NSScrollerArrowsDefaultSetting	= 0,
     NSScrollerArrowsNone	       	= 2
-} NSScrollArrowPosition;
+};
+typedef NSUInteger NSScrollArrowPosition;
 
-typedef enum _NSUsableScrollerParts {
+enum {
     NSNoScrollerParts			= 0,
     NSOnlyScrollerArrows		= 1,
     NSAllScrollerParts			= 2
-} NSUsableScrollerParts;
+};
+typedef NSUInteger NSUsableScrollerParts;
 
-typedef enum _NSScrollerPart {
+enum {
     NSScrollerNoPart			= 0,
     NSScrollerDecrementPage		= 1,
     NSScrollerKnob			= 2,
@@ -29,24 +31,28 @@ typedef enum _NSScrollerPart {
     NSScrollerDecrementLine    		= 4,
     NSScrollerIncrementLine	 	= 5,
     NSScrollerKnobSlot			= 6
-} NSScrollerPart;
+};
+typedef NSUInteger NSScrollerPart;
 
-typedef enum _NSScrollerArrow {
+enum {
     NSScrollerIncrementArrow		= 0,
     NSScrollerDecrementArrow		= 1
-} NSScrollerArrow;
+};
+typedef NSUInteger NSScrollerArrow;
 
 @interface NSScroller : NSControl
 {
     /*All instance variables are private*/
-    float               _curValue;
-    float               _percent;
-    float		_knobSize;
+    CGFloat               _curValue;
+    CGFloat               _percent;
+    CGFloat		_knobSize;
     struct __sFlags2 {
         unsigned int   hitPart:4;
         unsigned int   controlSize:2;
         unsigned int   inMaxEnd:1;
-        unsigned int   reserved:25;
+        unsigned int   setFloatValueOverridden:1;
+        unsigned int   setFloatValueKnobProportionOverridden:1;
+        unsigned int   reserved:23;
     } _sFlags2;
     id                  _target;
     SEL                 _action;
@@ -67,8 +73,8 @@ typedef enum _NSScrollerArrow {
     } sFlags;
 }
 
-+ (float)scrollerWidth;
-+ (float)scrollerWidthForControlSize:(NSControlSize)controlSize;
++ (CGFloat)scrollerWidth;
++ (CGFloat)scrollerWidthForControlSize:(NSControlSize)controlSize;
 
 - (void)drawParts;
 - (NSRect)rectForPart:(NSScrollerPart)partCode;
@@ -82,12 +88,21 @@ typedef enum _NSScrollerArrow {
 - (NSControlSize)controlSize;
 - (void)drawArrow:(NSScrollerArrow)whichArrow highlight:(BOOL)flag;
 - (void)drawKnob;
+- (void)drawKnobSlotInRect:(NSRect)slotRect highlight:(BOOL)flag;
 - (void)highlight:(BOOL)flag;
 - (NSScrollerPart)testPart:(NSPoint)thePoint;
 - (void)trackKnob:(NSEvent *)theEvent;
 - (void)trackScrollButtons:(NSEvent *)theEvent;
 - (NSScrollerPart)hitPart;
-- (void)setFloatValue:(float)aFloat knobProportion:(float)percent;
-- (float)knobProportion;
+- (CGFloat)knobProportion;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setKnobProportion:(CGFloat)proportion;
+#endif
 
+@end
+
+@interface NSScroller(NSDeprecated)
+/* A method that was deprecated in Mac OS 10.5. To maintain binary compatibility, AppKit will continue to invoke overrides of this method. Code that targets Mac OS 10.5 and later should use -setDoubleValue: and -setKnobProportion: instead, and eliminate any overrides of -setFloatValue:knobProportion:. Code that needs to remain compatible with Mac OS 10.4 and earlier should continue to use -setFloatValue:knobProportion:. 
+*/
+- (void)setFloatValue:(float)aFloat knobProportion:(CGFloat)proportion;
 @end

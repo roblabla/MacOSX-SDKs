@@ -26,7 +26,7 @@ typedef function_table_entry 	*function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	memory_object_control_MSG_COUNT
-#define	memory_object_control_MSG_COUNT	11
+#define	memory_object_control_MSG_COUNT	12
 #endif	/* memory_object_control_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -146,6 +146,20 @@ kern_return_t memory_object_super_upl_request
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t *page_listCnt,
 	integer_t cntrl_flags
+);
+
+/* Routine memory_object_cluster_size */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t memory_object_cluster_size
+(
+	memory_object_control_t control,
+	memory_object_offset_t *start,
+	vm_size_t *length,
+	memory_object_fault_info_t fault_info
 );
 
 /* Routine memory_object_page_op */
@@ -325,6 +339,18 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
+		memory_object_fault_info_t fault_info;
+	} __Request__memory_object_cluster_size_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
 		memory_object_offset_t offset;
 		integer_t ops;
 	} __Request__memory_object_page_op_t;
@@ -383,6 +409,7 @@ union __RequestUnion__memory_object_control_subsystem {
 	__Request__memory_object_destroy_t Request_memory_object_destroy;
 	__Request__memory_object_upl_request_t Request_memory_object_upl_request;
 	__Request__memory_object_super_upl_request_t Request_memory_object_super_upl_request;
+	__Request__memory_object_cluster_size_t Request_memory_object_cluster_size;
 	__Request__memory_object_page_op_t Request_memory_object_page_op;
 	__Request__memory_object_recover_named_t Request_memory_object_recover_named;
 	__Request__memory_object_release_name_t Request_memory_object_release_name;
@@ -499,6 +526,20 @@ union __RequestUnion__memory_object_control_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
+		memory_object_offset_t start;
+		vm_size_t length;
+	} __Reply__memory_object_cluster_size_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
 		uint32_t phys_entry;
 		integer_t flags;
 	} __Reply__memory_object_page_op_t;
@@ -556,6 +597,7 @@ union __ReplyUnion__memory_object_control_subsystem {
 	__Reply__memory_object_destroy_t Reply_memory_object_destroy;
 	__Reply__memory_object_upl_request_t Reply_memory_object_upl_request;
 	__Reply__memory_object_super_upl_request_t Reply_memory_object_super_upl_request;
+	__Reply__memory_object_cluster_size_t Reply_memory_object_cluster_size;
 	__Reply__memory_object_page_op_t Reply_memory_object_page_op;
 	__Reply__memory_object_recover_named_t Reply_memory_object_recover_named;
 	__Reply__memory_object_release_name_t Reply_memory_object_release_name;
@@ -572,10 +614,11 @@ union __ReplyUnion__memory_object_control_subsystem {
     { "memory_object_destroy", 2004 },\
     { "memory_object_upl_request", 2005 },\
     { "memory_object_super_upl_request", 2006 },\
-    { "memory_object_page_op", 2007 },\
-    { "memory_object_recover_named", 2008 },\
-    { "memory_object_release_name", 2009 },\
-    { "memory_object_range_op", 2010 }
+    { "memory_object_cluster_size", 2007 },\
+    { "memory_object_page_op", 2008 },\
+    { "memory_object_recover_named", 2009 },\
+    { "memory_object_release_name", 2010 },\
+    { "memory_object_range_op", 2011 }
 #endif
 
 #ifdef __AfterMigUserHeader

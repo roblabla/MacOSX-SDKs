@@ -3,9 +3,7 @@
  
      Contains:   CoreFoundation Network header
  
-     Version:    CFNetwork-129.20~93
- 
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,6 +12,31 @@
  
 */
 
+#ifndef __CFNETWORK_DEFS_H_
+#define __CFNETWORK_DEFS_H_
 
-#define CFNetwork_EXPORT extern
+
+
+
+/* Required to build on platforms that do not have MacTypes.h */
+#if !defined(__MACH__)
+#ifndef CALLBACK_API_C
+    #define CALLBACK_API_C(_type, _name)            _type ( * _name)
+#endif
+#endif /* __MACH__ */
+
+/* Standard incantation for exporting/importing DLL symbols */
+#if defined(__WIN32__)
+  #if defined(CFNETWORK_BUILDING_DLL)
+        #define CFN_EXPORT __declspec(dllexport) extern
+ #else
+      #define CFN_EXPORT __declspec(dllimport) extern
+ #endif
+#else
+    #define CFN_EXPORT extern
+#endif
+
+
+#endif //__CFNETWORK_DEFS_H_
+
 

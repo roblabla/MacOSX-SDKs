@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -30,12 +30,13 @@
     NSURLCache is not allowed in any fashion, either in memory or on
     disk.
 */
-typedef enum
+enum
 {
     NSURLCacheStorageAllowed,
     NSURLCacheStorageAllowedInMemoryOnly,
     NSURLCacheStorageNotAllowed,
-} NSURLCacheStoragePolicy;
+};
+typedef NSUInteger NSURLCacheStoragePolicy;
 
 
 @class NSCachedURLResponseInternal;
@@ -175,7 +176,7 @@ typedef enum
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
 */
-- (id)initWithMemoryCapacity:(unsigned)memoryCapacity diskCapacity:(unsigned)diskCapacity diskPath:(NSString *)path;
+- (id)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(NSString *)path;
 
 /*! 
     @method cachedResponseForRequest:
@@ -221,14 +222,14 @@ typedef enum
     @abstract Returns the in-memory capacity of the receiver. 
     @result The in-memory capacity, measured in bytes, for the receiver. 
 */
-- (unsigned)memoryCapacity;
+- (NSUInteger)memoryCapacity;
 
 /*! 
     @method diskCapacity
     @abstract Returns the on-disk capacity of the receiver. 
     @result The on-disk capacity, measured in bytes, for the receiver. 
 */
-- (unsigned)diskCapacity;
+- (NSUInteger)diskCapacity;
 
 /*! 
     @method setMemoryCapacity:
@@ -238,7 +239,7 @@ typedef enum
     @param memoryCapacity the new in-memory capacity, measured in
     bytes, for the receiver.
 */
-- (void)setMemoryCapacity:(unsigned)memoryCapacity;
+- (void)setMemoryCapacity:(NSUInteger)memoryCapacity;
 
 /*! 
     @method setDiskCapacity:
@@ -248,7 +249,7 @@ typedef enum
     @param diskCapacity the new on-disk capacity, measured in
     bytes, for the receiver.
 */
-- (void)setDiskCapacity:(unsigned)diskCapacity;
+- (void)setDiskCapacity:(NSUInteger)diskCapacity;
 
 /*! 
     @method currentMemoryUsage
@@ -258,7 +259,7 @@ typedef enum
     usage of the in-memory cache. 
     @result the current usage of the in-memory cache of the receiver.
 */
-- (unsigned)currentMemoryUsage;
+- (NSUInteger)currentMemoryUsage;
 
 /*! 
     @method currentDiskUsage
@@ -268,7 +269,7 @@ typedef enum
     usage of the on-disk cache. 
     @result the current usage of the on-disk cache of the receiver.
 */
-- (unsigned)currentDiskUsage;
+- (NSUInteger)currentDiskUsage;
 
 @end
 

@@ -1,6 +1,6 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -18,15 +18,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fopen_wrappers.h,v 1.14.4.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: php_fopen_wrappers.h,v 1.21.2.1.2.2 2007/12/31 07:20:13 sebastian Exp $ */
 
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
 
 php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 php_stream *php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
-extern php_stream_wrapper php_stream_http_wrapper;
-extern php_stream_wrapper php_stream_ftp_wrapper;
+extern PHPAPI php_stream_wrapper php_stream_http_wrapper;
+extern PHPAPI php_stream_wrapper php_stream_ftp_wrapper;
 extern php_stream_wrapper php_stream_php_wrapper;
+extern php_stream_wrapper php_plain_files_wrapper;
 
 #endif

@@ -1,11 +1,38 @@
-/*	
-    WebView.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.    
-    
-    Public header file.
-*/
+/*
+ * Copyright (C) 2003, 2004, 2005, 2006 Apple Computer, Inc.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer. 
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution. 
+ * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission. 
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #import <Cocoa/Cocoa.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4
+#define WebNSInteger int
+#else
+#define WebNSInteger NSInteger
+#endif
 
 @class DOMCSSStyleDeclaration;
 @class DOMDocument;
@@ -25,16 +52,16 @@
 
 // Element dictionary keys
 extern NSString *WebElementDOMNodeKey;          // DOMNode of the element
-extern NSString *WebElementFrameKey;		// WebFrame of the element
-extern NSString *WebElementImageAltStringKey;	// NSString of the ALT attribute of the image element
-extern NSString *WebElementImageKey;		// NSImage of the image element
-extern NSString *WebElementImageRectKey;	// NSValue of an NSRect, the rect of the image element
-extern NSString *WebElementImageURLKey;		// NSURL of the image element
-extern NSString *WebElementIsSelectedKey; 	// NSNumber of BOOL indicating whether the element is selected or not 
-extern NSString *WebElementLinkURLKey;		// NSURL of the link if the element is within an anchor
-extern NSString *WebElementLinkTargetFrameKey;	// NSString of the target of the anchor
-extern NSString *WebElementLinkTitleKey;	// NSString of the title of the anchor
-extern NSString *WebElementLinkLabelKey;	// NSString of the text within the anchor
+extern NSString *WebElementFrameKey;            // WebFrame of the element
+extern NSString *WebElementImageAltStringKey;   // NSString of the ALT attribute of the image element
+extern NSString *WebElementImageKey;            // NSImage of the image element
+extern NSString *WebElementImageRectKey;        // NSValue of an NSRect, the rect of the image element
+extern NSString *WebElementImageURLKey;         // NSURL of the image element
+extern NSString *WebElementIsSelectedKey;       // NSNumber of BOOL indicating whether the element is selected or not 
+extern NSString *WebElementLinkURLKey;          // NSURL of the link if the element is within an anchor
+extern NSString *WebElementLinkTargetFrameKey;  // WebFrame of the target of the anchor
+extern NSString *WebElementLinkTitleKey;        // NSString of the title of the anchor
+extern NSString *WebElementLinkLabelKey;        // NSString of the text within the anchor
 
 /*
     @discussion Notifications sent by WebView to mark the progress of loads.
@@ -144,6 +171,13 @@ extern NSString *WebViewProgressFinishedNotification;
 + (NSString *)URLTitleFromPasteboard:(NSPasteboard *)pasteboard;
 
 /*!
+    @method registerURLSchemeAsLocal:
+    @abstract Adds the scheme to the list of schemes to be treated as local.
+    @param scheme The scheme to register
+*/
++ (void)registerURLSchemeAsLocal:(NSString *)scheme;
+
+/*!
     @method initWithFrame:frameName:groupName:
     @abstract The designated initializer for WebView.
     @discussion Initialize a WebView with the supplied parameters. This method will 
@@ -156,6 +190,33 @@ extern NSString *WebViewProgressFinishedNotification;
     @result Returns an initialized WebView.
 */
 - (id)initWithFrame:(NSRect)frame frameName:(NSString *)frameName groupName:(NSString *)groupName;
+
+/*!
+    @method close
+    @abstract Closes the receiver, unloading its web page and canceling any pending loads.
+    Once the receiver has closed, it will no longer respond to requests or fire delegate methods.
+    (However, the -close method itself may fire delegate methods.)
+    @discussion A garbage collected application is required to call close when the receiver is no longer needed.
+    The close method will be called automatically when the window or hostWindow closes and shouldCloseWithWindow returns YES.
+    A non-garbage collected application can still call close, providing a convenient way to prevent receiver
+    from doing any more loading and firing any future delegate methods.
+*/
+- (void)close;
+
+/*!
+    @method setShouldCloseWithWindow:
+    @abstract Set whether the receiver closes when either it's window or hostWindow closes.
+    @param close YES if the receiver should close when either it's window or hostWindow closes, otherwise NO.
+*/
+- (void)setShouldCloseWithWindow:(BOOL)close;
+
+/*!
+    @method shouldCloseWithWindow
+    @abstract Returns whether the receiver closes when either it's window or hostWindow closes.
+    @discussion Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
+    @result YES if the receiver closes when either it's window or hostWindow closes, otherwise NO.
+*/
+- (BOOL)shouldCloseWithWindow;
 
 /*!
     @method setUIDelegate:
@@ -235,6 +296,15 @@ extern NSString *WebViewProgressFinishedNotification;
     @result The main frame.
 */    
 - (WebFrame *)mainFrame;
+
+/*!
+    @method selectedFrame
+    @abstract Return the frame that has the active selection.  
+    @discussion Returns the frame that contains the first responder, if any. Otherwise returns the
+    frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
+    @result The selected frame.
+*/
+- (WebFrame *)selectedFrame;
 
 /*!
     @method backForwardList
@@ -464,7 +534,6 @@ extern NSString *WebViewProgressFinishedNotification;
 */
 - (NSString *)groupName;
 
-
 /*!
     @method estimatedProgress
     @discussion An estimate of the percent complete for a document load.  This
@@ -476,6 +545,12 @@ extern NSString *WebViewProgressFinishedNotification;
     WebResourceLoadDelegate.
 */
 - (double)estimatedProgress;
+
+/*!
+    @method isLoading
+    @discussion Returns YES if there are any pending loads.
+*/
+- (BOOL)isLoading;
 
 /*!
     @method elementAtPoint:
@@ -528,6 +603,50 @@ extern NSString *WebViewProgressFinishedNotification;
 */
 - (void)removeDragCaret;
 
+/*!
+    @method setDrawsBackground:
+    @param drawsBackround YES to cause the receiver to draw a default white background, NO otherwise.
+    @abstract Sets whether the receiver draws a default white background when the loaded page has no background specified.
+*/
+- (void)setDrawsBackground:(BOOL)drawsBackround;
+
+/*!
+    @method drawsBackground
+    @result Returns YES if the receiver draws a default white background, NO otherwise.
+*/
+- (BOOL)drawsBackground;
+
+/*!
+    @method setMainFrameURL:
+    @param URLString The URL to load in the mainFrame.
+*/
+- (void)setMainFrameURL:(NSString *)URLString;
+
+/*!
+    @method mainFrameURL
+    @result Returns the main frame's current URL.
+*/
+- (NSString *)mainFrameURL;
+
+/*!
+    @method mainFrameDocument
+    @result Returns the main frame's DOMDocument.
+*/
+- (DOMDocument *)mainFrameDocument;
+
+/*!
+    @method mainFrameTitle
+    @result Returns the main frame's title if any, otherwise an empty string.
+*/
+- (NSString *)mainFrameTitle;
+
+/*!
+    @method mainFrameIcon
+    @discussion The methods returns the site icon for the current page loaded in the mainFrame.
+    @result Returns the main frame's icon if any, otherwise nil.
+*/
+- (NSImage *)mainFrameIcon;
+
 @end
 
 
@@ -543,6 +662,10 @@ extern NSString *WebViewProgressFinishedNotification;
 - (IBAction)makeTextLarger:(id)sender;
 - (BOOL)canMakeTextSmaller;
 - (IBAction)makeTextSmaller:(id)sender;
+- (BOOL)canMakeTextStandardSize;
+- (IBAction)makeTextStandardSize:(id)sender;
+- (IBAction)toggleContinuousSpellChecking:(id)sender;
+- (IBAction)toggleSmartInsertDelete:(id)sender;
 @end
 
 
@@ -563,6 +686,7 @@ extern NSString * const WebViewDidChangeSelectionNotification;
 - (void)setSelectedDOMRange:(DOMRange *)range affinity:(NSSelectionAffinity)selectionAffinity;
 - (DOMRange *)selectedDOMRange;
 - (NSSelectionAffinity)selectionAffinity;
+- (BOOL)maintainsInactiveSelection;
 - (void)setEditable:(BOOL)flag;
 - (BOOL)isEditable;
 - (void)setTypingStyle:(DOMCSSStyleDeclaration *)style;
@@ -571,7 +695,7 @@ extern NSString * const WebViewDidChangeSelectionNotification;
 - (BOOL)smartInsertDeleteEnabled;
 - (void)setContinuousSpellCheckingEnabled:(BOOL)flag;
 - (BOOL)isContinuousSpellCheckingEnabled;
-- (int)spellCheckerDocumentTag;
+- (WebNSInteger)spellCheckerDocumentTag;
 - (NSUndoManager *)undoManager;
 - (void)setEditingDelegate:(id)delegate;
 - (id)editingDelegate;
@@ -614,6 +738,12 @@ extern NSString * const WebViewDidChangeSelectionNotification;
 
 - (void)startSpeaking:(id)sender;
 - (void)stopSpeaking:(id)sender;
+
+- (void)moveToBeginningOfSentence:(id)sender;
+- (void)moveToBeginningOfSentenceAndModifySelection:(id)sender;
+- (void)moveToEndOfSentence:(id)sender;
+- (void)moveToEndOfSentenceAndModifySelection:(id)sender;
+- (void)selectSentence:(id)sender;
 
 /* 
 The following methods are declared in NSResponder.h.
@@ -685,3 +815,5 @@ a custom implementation for each.
 */
  
 @end
+
+#undef WebNSInteger

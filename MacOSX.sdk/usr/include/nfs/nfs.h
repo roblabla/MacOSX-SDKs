@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Apple Inc.  All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /* Copyright (c) 1995 NeXT Computer, Inc. All Rights Reserved */
 /*
@@ -70,43 +76,40 @@
  * Tunable constants for nfs
  */
 
-#define	NFS_MAXIOVEC	34
 #define NFS_TICKINTVL	5		/* Desired time for a tick (msec) */
 #define NFS_HZ		(hz / nfs_ticks) /* Ticks/sec */
+__private_extern__ int nfs_ticks;
 #define	NFS_TIMEO	(1 * NFS_HZ)	/* Default timeout = 1 second */
 #define	NFS_MINTIMEO	(1 * NFS_HZ)	/* Min timeout to use */
 #define	NFS_MAXTIMEO	(60 * NFS_HZ)	/* Max timeout to backoff to */
 #define	NFS_MINIDEMTIMEO (5 * NFS_HZ)	/* Min timeout for non-idempotent ops*/
 #define	NFS_MAXREXMIT	100		/* Stop counting after this many */
-#define	NFS_MAXWINDOW	1024		/* Max number of outstanding requests */
 #define	NFS_RETRANS	10		/* Num of retrans for soft mounts */
-#define	NFS_TRYLATERDEL	15		/* Initial try later delay (sec) */
+#define	NFS_TRYLATERDEL	4		/* Initial try later delay (sec) */
 #define	NFS_MAXGRPS	16		/* Max. size of groups list */
-#ifndef NFS_MINATTRTIMO
 #define	NFS_MINATTRTIMO 5		/* Attribute cache timeout in sec */
-#endif
-#ifndef NFS_MAXATTRTIMO
 #define	NFS_MAXATTRTIMO 60
-#endif
-#ifndef NFS_MINDIRATTRTIMO
 #define	NFS_MINDIRATTRTIMO 5		/* directory attribute cache timeout in sec */
-#endif
-#ifndef NFS_MAXDIRATTRTIMO
 #define	NFS_MAXDIRATTRTIMO 60
-#endif
-#define	NFS_IOSIZE	(256 * 1024)	/* suggested I/O size */
-#define	NFS_WSIZE	16384		/* Def. write data size <= 16K */
-#define	NFS_RSIZE	16384		/* Def. read data size <= 16K */
+#define	NFS_IOSIZE	(1024 * 1024)	/* suggested I/O size */
+#define	NFS_RWSIZE	32768		/* Def. read/write data size <= 32K */
+#define	NFS_WSIZE	NFS_RWSIZE	/* Def. write data size <= 32K */
+#define	NFS_RSIZE	NFS_RWSIZE	/* Def. read data size <= 32K */
 #define	NFS_DGRAM_WSIZE	8192		/* UDP Def. write data size <= 8K */
 #define	NFS_DGRAM_RSIZE	8192		/* UDP Def. read data size <= 8K */
 #define NFS_READDIRSIZE	8192		/* Def. readdir size */
-#define	NFS_DEFRAHEAD	4		/* Def. read ahead # blocks */
-#define	NFS_MAXRAHEAD	16		/* Max. read ahead # blocks */
-#define	NFS_MAXUIDHASH	64		/* Max. # of hashed uid entries/mp */
-#define	NFS_MAXASYNCDAEMON 	32	/* Max. number async_daemons runnable */
-#define NFS_MAXGATHERDELAY	100	/* Max. write gather delay (msec) */
-#ifndef NFS_GATHERDELAY
-#define NFS_GATHERDELAY		10	/* Default write gather delay (msec) */
+#define	NFS_DEFRAHEAD	16		/* Def. read ahead # blocks */
+#define	NFS_MAXRAHEAD	128		/* Max. read ahead # blocks */
+#define	NFS_DEFMAXASYNCWRITES 	128	/* Def. max # concurrent async write RPCs */
+#define	NFS_DEFASYNCTHREAD 	16	/* Def. # nfsiod threads */
+#define	NFS_MAXASYNCTHREAD 	64	/* max # nfsiod threads */
+#define	NFS_ASYNCTHREADMAXIDLE	60	/* Seconds before idle nfsiods are reaped */
+#define	NFS_DEFSTATFSRATELIMIT 	10	/* Def. max # statfs RPCs per second */
+#define NFS_REQUESTDELAY	10	/* ms interval to check request queue */
+#define NFSRV_DEADSOCKDELAY	5	/* Seconds before dead sockets are reaped */
+#define NFSRV_MAXWGATHERDELAY	100	/* Max. write gather delay (msec) */
+#ifndef NFSRV_WGATHERDELAY
+#define NFSRV_WGATHERDELAY	1	/* Default write gather delay (msec) */
 #endif
 #define	NFS_DIRBLKSIZ	4096		/* Must be a multiple of DIRBLKSIZ */
 #if defined(KERNEL) && !defined(DIRBLKSIZ)
@@ -114,27 +117,18 @@
  					/* can't be larger than NFS_FABLKSIZE */
 #endif
 
+/* default values for unresponsive mount timeouts */
+#define NFS_TPRINTF_INITIAL_DELAY	12
+#define NFS_TPRINTF_DELAY		30
+
 /*
  * Oddballs
  */
-#define	NMOD(a)		((a) % nfs_asyncdaemons)
 #define NFS_CMPFH(n, f, s) \
 	((n)->n_fhsize == (s) && !bcmp((caddr_t)(n)->n_fhp, (caddr_t)(f), (s)))
-#define NFS_ISV3(v)	(VFSTONFS(vnode_mount(v))->nm_flag & NFSMNT_NFSV3)
 #define NFS_SRVMAXDATA(n) \
-		(((n)->nd_flag & ND_NFSV3) ? (((n)->nd_nam2) ? \
+		(((n)->nd_vers == NFS_VER3) ? (((n)->nd_nam2) ? \
 		 NFS_MAXDGRAMDATA : NFS_MAXDATA) : NFS_V2MAXDATA)
-
-/*
- * XXX
- * The NB_INVAFTERWRITE flag should be set to whatever is required by the
- * buffer cache code to say "Invalidate the block after it is written back".
- */
-#ifdef __FreeBSD__
-#define	NB_INVAFTERWRITE	NB_NOCACHE
-#else
-#define	NB_INVAFTERWRITE	NB_INVAL
-#endif
 
 /*
  * The IO_METASYNC flag should be implemented for local file systems.
@@ -157,13 +151,39 @@
 #define NFS_NODEALLOC	512
 #define NFS_MNTALLOC	512
 #define NFS_SVCALLOC	256
-#define NFS_UIDALLOC	128
 
 /*
  * Arguments to mount NFS
  */
-#define NFS_ARGSVERSION	4		/* change when nfs_args changes */
+#define NFS_ARGSVERSION	5		/* change when nfs_args changes */
 struct nfs_args {
+	int		version;	/* args structure version number */
+	struct sockaddr	*addr;		/* file server address */
+	int		addrlen;	/* length of address */
+	int		sotype;		/* Socket type */
+	int		proto;		/* and Protocol */
+	u_char		*fh;		/* File handle to be mounted */
+	int		fhsize;		/* Size, in bytes, of fh */
+	int		flags;		/* flags */
+	int		wsize;		/* write size in bytes */
+	int		rsize;		/* read size in bytes */
+	int		readdirsize;	/* readdir size in bytes */
+	int		timeo;		/* initial timeout in .1 secs */
+	int		retrans;	/* times to retry send */
+	int		maxgrouplist;	/* Max. size of group list */
+	int		readahead;	/* # of blocks to readahead */
+	int		leaseterm;	/* obsolete: Term (sec) of lease */
+	int		deadthresh;	/* obsolete: Retrans threshold */
+	char		*hostname;	/* server's name */
+	/* NFS_ARGSVERSION 3 ends here */
+	int		acregmin;	/* reg file min attr cache timeout */
+	int		acregmax;	/* reg file max attr cache timeout */
+	int		acdirmin;	/* dir min attr cache timeout */
+	int		acdirmax;	/* dir max attr cache timeout */
+	/* NFS_ARGSVERSION 4 ends here */
+	uint32_t	auth;		/* security mechanism flavor */
+};
+struct nfs_args4 {
 	int		version;	/* args structure version number */
 	struct sockaddr	*addr;		/* file server address */
 	int		addrlen;	/* length of address */
@@ -210,7 +230,6 @@ struct nfs_args3 {
 	char		*hostname;	/* server's name */
 };
 
-// LP64todo - should this move?
 
 /*
  * NFS mount option flags
@@ -223,50 +242,27 @@ struct nfs_args3 {
 #define	NFSMNT_MAXGRPS		0x00000020  /* set maximum grouplist size */
 #define	NFSMNT_INT		0x00000040  /* allow interrupts on hard mount */
 #define	NFSMNT_NOCONN		0x00000080  /* Don't Connect the socket */
+#define	NFSMNT_NONEGNAMECACHE	0x00000100  /* Don't do negative name caching */
 #define	NFSMNT_NFSV3		0x00000200  /* Use NFS Version 3 protocol */
-#define	NFSMNT_KERB		0x00000400  /* Use Kerberos authentication */
+#define	NFSMNT_NFSV4		0x00000400  /* Use NFS Version 4 protocol */
 #define	NFSMNT_DUMBTIMR		0x00000800  /* Don't estimate rtt dynamically */
+// #define	NFSMNT_UNUSED	0x00001000  /* unused */
 #define	NFSMNT_READAHEAD	0x00002000  /* set read ahead */
+// #define	NFSMNT_UNUSED	0x00004000  /* unused */
 #define	NFSMNT_RESVPORT		0x00008000  /* Allocate a reserved port */
 #define	NFSMNT_RDIRPLUS		0x00010000  /* Use Readdirplus for V3 */
 #define	NFSMNT_READDIRSIZE	0x00020000  /* Set readdir size */
 #define	NFSMNT_NOLOCKS		0x00040000  /* don't support file locking */
+#define	NFSMNT_LOCALLOCKS	0x00080000  /* do file locking locally on client */
 #define	NFSMNT_ACREGMIN		0x00100000  /* reg min attr cache timeout */
 #define	NFSMNT_ACREGMAX		0x00200000  /* reg max attr cache timeout */
 #define	NFSMNT_ACDIRMIN		0x00400000  /* dir min attr cache timeout */
 #define	NFSMNT_ACDIRMAX		0x00800000  /* dir max attr cache timeout */
+#define	NFSMNT_SECFLAVOR	0x01000000  /* Use security flavor */
+#define	NFSMNT_SECGIVEN		0x02000000  /* A sec= mount option was given */
 
 /*
- * NFS mount state flags (nm_state)
- */
-#define NFSSTA_LOCKTIMEO	0x00002000  /* experienced a lock req timeout */
-#define	NFSSTA_MOUNTED		0x00004000  /* completely mounted */
-#define NFSSTA_LOCKSWORK	0x00008000  /* lock ops have worked. */
-#define NFSSTA_TIMEO		0x00010000  /* experienced a timeout. */
-#define NFSSTA_FORCE		0x00020000  /* doing a forced unmount. */
-#define NFSSTA_HASWRITEVERF	0x00040000  /* Has write verifier for V3 */
-#define NFSSTA_GOTPATHCONF	0x00080000  /* Got the V3 pathconf info */
-#define NFSSTA_GOTFSINFO	0x00100000  /* Got the V3 fsinfo */
-#define	NFSSTA_MNTD		0x00200000  /* Mnt server for mnt point */
-#define	NFSSTA_SNDLOCK		0x01000000  /* Send socket lock */
-#define	NFSSTA_WANTSND		0x02000000  /* Want above */
-#define	NFSSTA_RCVLOCK		0x04000000  /* Rcv socket lock */
-#define	NFSSTA_WANTRCV		0x08000000  /* Want above */
-#define	NFSSTA_WAITAUTH		0x10000000  /* Wait for authentication */
-#define	NFSSTA_HASAUTH		0x20000000  /* Has authenticator */
-#define	NFSSTA_WANTAUTH		0x40000000  /* Wants an authenticator */
-#define	NFSSTA_AUTHERR		0x80000000  /* Authentication error */
-
-/*
- * NFS mount pathconf info flags (nm_fsinfo.pcflags)
- */
-#define NFSPCINFO_NOTRUNC		0x01
-#define NFSPCINFO_CHOWN_RESTRICTED	0x02
-#define NFSPCINFO_CASE_INSENSITIVE	0x04
-#define NFSPCINFO_CASE_PRESERVING	0x08
-
-/*
- * Structures for the nfssvc(2) syscall. Not that anyone but nfsd and mount_nfs
+ * Structures for the nfssvc(2) syscall. Not that anyone but nfsd
  * should ever try and use it.
  */
 struct nfsd_args {
@@ -275,32 +271,6 @@ struct nfsd_args {
 	int	namelen;	/* Length of name */
 };
 
-// LP64todo - should this move?
-
-struct nfsd_srvargs {
-	struct nfsd	*nsd_nfsd;	/* Pointer to in kernel nfsd struct */
-	uid_t		nsd_uid;	/* Effective uid mapped to cred */
-	u_long		nsd_haddr;	/* Ip address of client */
-	struct ucred	nsd_cr;		/* Cred. uid maps to */
-	int		nsd_authlen;	/* Length of auth string (ret) */
-	u_char		*nsd_authstr;	/* Auth string (ret) */
-	int		nsd_verflen;	/* and the verfier */
-	u_char		*nsd_verfstr;
-	struct timeval	nsd_timestamp;	/* timestamp from verifier */
-	u_long		nsd_ttl;	/* credential ttl (sec) */
-	NFSKERBKEY_T	nsd_key;	/* Session key */
-};
-
-struct nfsd_cargs {
-	char		*ncd_dirp;	/* Mount dir path */
-	uid_t		ncd_authuid;	/* Effective uid */
-	int		ncd_authtype;	/* Type of authenticator */
-	int		ncd_authlen;	/* Length of authenticator string */
-	u_char		*ncd_authstr;	/* Authenticator string */
-	int		ncd_verflen;	/* and the verifier */
-	u_char		*ncd_verfstr;
-	NFSKERBKEY_T	ncd_key;	/* Session key */
-};
 
 /*
  * NFS Server File Handle structures
@@ -321,24 +291,37 @@ struct nfs_exphandle {
 #define NXHF_INVALIDFH		0x0001		/* file handle is invalid */
 
 #define	NFS_MAX_FID_SIZE	(NFS_MAX_FH_SIZE - sizeof(struct nfs_exphandle))
+#define	NFSV4_MAX_FID_SIZE	(NFSV4_MAX_FH_SIZE - sizeof(struct nfs_exphandle))
+#define	NFSV3_MAX_FID_SIZE	(NFSV3_MAX_FH_SIZE - sizeof(struct nfs_exphandle))
 #define	NFSV2_MAX_FID_SIZE	(NFSV2_MAX_FH_SIZE - sizeof(struct nfs_exphandle))
 
 /* NFS server internal view of fhandle_t */
+/* The first sizeof(fhandle_t) bytes must match what goes into fhandle_t. */
+/* (fhp is used to allow use of an external buffer) */
 struct nfs_filehandle {
-	int			nfh_len;	/* total length of file handle */
+	uint32_t		nfh_len;	/* total length of file handle */
 	struct nfs_exphandle	nfh_xh;		/* export handle */
 	unsigned char		nfh_fid[NFS_MAX_FID_SIZE]; /* File ID */
+	unsigned char		*nfh_fhp;	/* pointer to file handle */
 };
 
 /*
  * NFS export data structures
  */
 
+/* Structure to hold an array of security flavors */
+#define NX_MAX_SEC_FLAVORS 5
+struct nfs_sec {
+	int count;
+	uint32_t flavors[NX_MAX_SEC_FLAVORS];
+}; 
+
 struct nfs_export_net_args {
 	uint32_t		nxna_flags;	/* export flags */
 	struct xucred		nxna_cred;	/* mapped credential for root/all user */
 	struct sockaddr_storage	nxna_addr;	/* net address to which exported */
 	struct sockaddr_storage	nxna_mask;	/* mask for net address */
+	struct nfs_sec		nxna_sec;	/* security mechanism flavors */
 };
 
 struct nfs_export_args {
@@ -357,14 +340,69 @@ struct nfs_export_args {
 #define NXA_ADD			0x0002	/* add the specified export(s) */
 #define NXA_REPLACE		0x0003	/* delete and add the specified export(s) */
 #define NXA_DELETE_ALL		0x0004	/* delete all exports */
+#define NXA_OFFLINE		0x0008	/* export is offline */
 
 /* export option flags */
 #define NX_READONLY		0x0001	/* exported read-only */
 #define NX_DEFAULTEXPORT	0x0002	/* exported to the world */
 #define NX_MAPROOT		0x0004	/* map root access to anon credential */
 #define NX_MAPALL		0x0008	/* map all access to anon credential */
-#define NX_KERB			0x0010	/* exported with Kerberos uid mapping */
 #define NX_32BITCLIENTS		0x0020	/* restrict directory cookies to 32 bits */
+#define NX_OFFLINE		0x0040	/* export is offline */
+
+/*
+ * fs.nfs sysctl(3) export stats record structures
+ */
+#define NFS_EXPORT_STAT_REC_VERSION 1	/* export stat record version */
+#define NFS_USER_STAT_REC_VERSION 1     /* active user list record version */
+
+/* descriptor describing following records */
+struct nfs_export_stat_desc
+{
+	uint32_t rec_vers;		/* version of export stat records */
+	uint32_t rec_count;		/* total record count */
+}__attribute__((__packed__));
+
+/* export stat record containing path and stat counters */
+struct nfs_export_stat_rec {
+	char     path[RPCMNT_PATHLEN + 1];
+	uint64_t ops;		/* Count of NFS Requests received for this export */
+	uint64_t bytes_read;	/* Count of bytes read from this export */
+	uint64_t bytes_written;	/* Count of bytes written to this export */
+}__attribute__((__packed__));
+
+/* Active user list stat buffer descriptor */
+struct nfs_user_stat_desc
+{
+	uint32_t rec_vers;	/* version of active user stat records */
+	uint32_t rec_count;	/* total record count */
+}__attribute__((__packed__));
+
+/* Active user list user stat record format */
+struct nfs_user_stat_user_rec {
+	u_char			rec_type;
+	uid_t			uid;
+	struct sockaddr_storage	sock;
+	uint64_t		ops;
+	uint64_t		bytes_read;
+	uint64_t		bytes_written;
+	uint32_t		tm_start;
+	uint32_t		tm_last;
+}__attribute__((__packed__));
+
+/* Active user list path record format */
+struct nfs_user_stat_path_rec {
+	u_char	rec_type;
+	char	path[RPCMNT_PATHLEN + 1];
+}__attribute__((__packed__));
+
+/* Defines for rec_type field of
+ * nfs_user_stat_rec & nfs_user_stat_rec
+ * data structures
+ */
+#define NFS_USER_STAT_USER_REC  0
+#define NFS_USER_STAT_PATH_REC  1
+
 
 
 /*
@@ -413,49 +451,27 @@ struct nfsstats {
 /*
  * Flags for nfssvc() system call.
  */
-#define	NFSSVC_BIOD	0x002
 #define	NFSSVC_NFSD	0x004
 #define	NFSSVC_ADDSOCK	0x008
-#define	NFSSVC_AUTHIN	0x010
-#define	NFSSVC_GOTAUTH	0x040
-#define	NFSSVC_AUTHINFAIL 0x080
-#define	NFSSVC_MNTD	0x100
 #define	NFSSVC_EXPORT	0x200
 
 /*
  * Flags for nfsclnt() system call.
  */
 #define NFSCLNT_LOCKDANS	0x200
-#define NFSCLNT_LOCKDFD		0x400
-#define NFSCLNT_LOCKDWAIT	0x800
 
 /*
  * fs.nfs sysctl(3) identifiers
  */
-#define NFS_NFSSTATS	1		/* struct: struct nfsstats */
-#define NFS_NFSPRIVPORT	2		/* int: prohibit nfs to resvports */
+#define NFS_NFSSTATS	1	/* struct: struct nfsstats */
+#define NFS_EXPORTSTATS 3	/* gets exported directory stats */
+#define NFS_USERSTATS	4	/* gets exported directory active user stats */
+#define NFS_USERCOUNT	5	/* gets current count of active nfs users */
 
-#define FS_NFS_NAMES { \
-		       { 0, 0 }, \
-		       { "nfsstats", CTLTYPE_STRUCT }, \
-		       { "nfsprivport", CTLTYPE_INT }, \
-}
-
-#ifndef NFS_MUIDHASHSIZ
-#define NFS_MUIDHASHSIZ	63	/* Tune the size of nfsmount with this */
-#endif
 #ifndef NFS_WDELAYHASHSIZ
 #define	NFS_WDELAYHASHSIZ 16	/* and with this */
 #endif
 
-/*
- * The set of signals the interrupt an I/O in progress for NFSMNT_INT mounts.
- * What should be in this set is open to debate, but I believe that since
- * I/O system calls on ufs are never interrupted by signals the set should
- * be minimal. My reasoning is that many current programs that use signals
- * such as SIGALRM will not expect file I/O system calls to be interrupted
- * by them and break.
- */
 #endif /* __APPLE_API_PRIVATE */
 
 #endif

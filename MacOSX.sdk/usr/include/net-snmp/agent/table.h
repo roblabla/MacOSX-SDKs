@@ -147,6 +147,8 @@ extern          "C" {
     netsnmp_table_registration_info
         *netsnmp_find_table_registration_info(netsnmp_handler_registration
                                               *reginfo);
+    void netsnmp_table_registration_info_free(netsnmp_table_registration_info *);
+
     netsnmp_index * netsnmp_table_index_find_next_row(netsnmp_container *c,
                                                       netsnmp_table_request_info *tblreq);
 

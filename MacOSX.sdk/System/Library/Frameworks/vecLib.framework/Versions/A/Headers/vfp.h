@@ -3,9 +3,9 @@
  
      Contains:   MathLib style functions for vectors
  
-     Version:    vecLib-192.17
+     Version:    vecLib-240.0
  
-     Copyright:  © 1999-2007 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 #if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
-#if defined(__VEC__) || defined(__SSE__)
+#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -55,6 +55,48 @@ extern "C" {
                                                                                 
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
+/*
+ *  vceilf() -- vector ceilf()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vceilf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+ *  vfloorf()  -- vector floorf()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vfloorf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+ *  vintf()  -- vector truncf()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vintf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+ *  vnintf()  -- vector rintf()   (round-to-nearest-even rounding mode)
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vnintf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  vrecf() -- vector reciprocal  1.0f / v
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vrecf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
 /*
  *  vdivf()
  *  
@@ -97,6 +139,7 @@ extern vFloat  vrsqrtf(vFloat X)                              AVAILABLE_MAC_OS_X
     vexpm1f     ExpM1(x) = Exp(x) - 1.  But, for small enough arguments,        
                 ExpM1(x) is expected to be more accurate than Exp(x) - 1.       
     vlogf       B = Log(A)                                                      
+    vlog10f     B = Log10(A)                                                      
     vlog1pf     Log1P = Log(1 + x). But, for small enough arguments,            
                 Log1P is expected to be more accurate than Log(1 + x).          
     vlogbf      Extracts the exponent of its argument, as a signed integral     
@@ -140,6 +183,14 @@ extern vFloat  vexpm1f(vFloat X)                              AVAILABLE_MAC_OS_X
  */
 extern vFloat  vlogf(vFloat X)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+/*
+ *  vlogf()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vlog10f(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 
 /*
  *  vlog1pf()
@@ -163,9 +214,6 @@ extern vFloat  vlog1pf(vFloat X)                              AVAILABLE_MAC_OS_X
 extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
-
-#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vscalbf()
  *  
@@ -177,9 +225,6 @@ extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X
 extern vFloat  vscalbf(vFloat X, vSInt32 n)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
-
-#if defined(__VEC__) || defined(__SSE__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Auxiliary Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -228,9 +273,6 @@ extern vFloat  vcopysignf(vFloat arg2, vFloat arg1)                         AVAI
 extern vFloat  vnextafterf(vFloat x, vFloat y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
-
-#if defined(__VEC__) || defined(__SSE2__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Inquiry Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -262,13 +304,10 @@ extern vUInt32  vclassifyf(vFloat arg)                        AVAILABLE_MAC_OS_X
 extern vUInt32  vsignbitf(vFloat arg)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
-
-#if defined(__VEC__) || defined(__SSE__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Transcendental Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
-    vsinf           B = Sin(A).                                                 
+    vsinf           B = Sin(A). 
     vcosf           B = Cos(A).                                                 
     vtanf           B = Tan(A).                                                 
                                                                                 
@@ -283,6 +322,15 @@ extern vUInt32  vsignbitf(vFloat arg)                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
 extern vFloat  vsinf(vFloat arg)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+/*
+ *  vsincosf()   -- simultaneous calculation of sine and cosine of input. (Cheaper than doing these separately.)
+ *                  sine_result must be a valid pointer and must be at least 16 byte aligned.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Accelerate.framework
+ */
+extern vFloat  vsincosf( vFloat arg, vFloat *sine_result)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -479,9 +527,6 @@ extern vFloat  vfmodf(vFloat X, vFloat Y)                                   AVAI
 extern vFloat  vremainderf(vFloat X, vFloat Y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
-
-#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vremquof()
  *  
@@ -515,9 +560,6 @@ extern vFloat  vremquof(vFloat X, vFloat Y, vUInt32 *QUO)                       
 extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
-
-#if defined(__VEC__) || defined(__SSE__)
 /*
  *  vpowf()
  *  
@@ -529,14 +571,12 @@ extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVA
 extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Useful                                                                      
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
-#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vtablelookup()
  *  
@@ -548,7 +588,7 @@ extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAI
 extern vUInt32  vtablelookup(vSInt32 Index_Vect, uint32_t *Table)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
+#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 

@@ -3,7 +3,7 @@
  
      Contains:   Translation Services Interfaces.
  
-     Version:    HIServices-169~651
+     Version:    HIServices-247.0.1~2
  
      Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -139,7 +139,7 @@ enum {
  *    client is requesting only those translations which support both
  *    data AND file translations).
  */
-typedef UInt32 TranslationFlags;
+typedef OptionBits TranslationFlags;
 enum {
 
   /*

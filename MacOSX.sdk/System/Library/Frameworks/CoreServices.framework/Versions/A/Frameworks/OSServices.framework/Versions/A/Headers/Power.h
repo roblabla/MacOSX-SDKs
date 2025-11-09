@@ -3,7 +3,7 @@
  
      Contains:   Power Manager Interfaces.
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 1990-2006 by Apple Computer, Inc.  All rights reserved
  
@@ -28,10 +28,6 @@
 #include <CarbonCore/Multiprocessing.h>
 #endif
 
-#ifndef __NAMEREGISTRY__
-#include <CarbonCore/NameRegistry.h>
-#endif
-
 #ifndef __MACERRORS__
 #include <CarbonCore/MacErrors.h>
 #endif
@@ -48,8 +44,416 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+enum {
+                                        /* commands to SleepQRec sleepQProc */
+  kSleepRequest                 = 1,
+  kSleepDemand                  = 2,
+  kSleepWakeUp                  = 3,
+  kSleepRevoke                  = 4,
+  kSleepUnlock                  = 4,
+  kSleepDeny                    = 5,    /* A non-zero value clients can use to deny requests*/
+  kSleepNow                     = 6,
+  kDozeDemand                   = 7,
+  kDozeWakeUp                   = 8,
+  kDozeRequest                  = 9,    /* additional messages for Power Mgr 2.0*/
+  kEnterStandby                 = 10,   /* Idle Queue Only*/
+  kEnterRun                     = 11,   /* Idle Queue Only*/
+  kSuspendRequest               = 12,
+  kSuspendDemand                = 13,
+  kSuspendRevoke                = 14,
+  kSuspendWakeUp                = 15,
+  kGetPowerLevel                = 16,
+  kSetPowerLevel                = 17,
+  kDeviceInitiatedWake          = 18,
+  kWakeToDoze                   = 19,
+  kDozeToFullWakeUp             = 20,
+  kGetPowerInfo                 = 21,
+  kGetWakeOnNetInfo             = 22,
+  kSuspendWakeToDoze            = 23,
+  kEnterIdle                    = 24,   /* Idle Queue Only*/
+  kStillIdle                    = 25,   /* Idle Queue Only*/
+  kExitIdle                     = 26    /* Idle Queue Only*/
+};
+
+enum {
+                                        /* SleepQRec.sleepQFlags */
+  noCalls                       = 1,
+  noRequest                     = 2,
+  slpQType                      = 16,
+  sleepQType                    = 16
+};
+
+/* System Activity Selectors */
+/* Notes:  The IdleActivity selector is not available unless the hasAggressiveIdling PMFeatures bit is set. */
+/*         Use IdleActivity where you used to use OverallAct if necessary.  OverallAct will only            */
+/*         delay power cycling if it's enabled, and will delay sleep by a small amount when                 */
+/*         hasAggressiveIdling is set.  Don't use IdleActivity unless hasAggressiveIdling is set; when      */
+/*         hasAggressiveIdling is not set, the use of IdleActivity is undefined, and well do different      */
+/*         things depending on which Power Manager is currently running.                                    */
+enum {
+  OverallAct                    = 0,    /* Delays idle sleep by small amount                 */
+  UsrActivity                   = 1,    /* Delays idle sleep and dimming by timeout time          */
+  NetActivity                   = 2,    /* Delays idle sleep and power cycling by small amount         */
+  HDActivity                    = 3,    /* Delays hard drive spindown and idle sleep by small amount  */
+  IdleActivity                  = 4     /* Delays idle sleep by timeout time                 */
+};
+
+typedef struct SleepQRec                SleepQRec;
+typedef SleepQRec *                     SleepQRecPtr;
+typedef CALLBACK_API( long , SleepQProcPtr )(long message, SleepQRecPtr qRecPtr);
+typedef STACK_UPP_TYPE(SleepQProcPtr)                           SleepQUPP;
+/*
+ *  NewSleepQUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern SleepQUPP
+NewSleepQUPP(SleepQProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+/*
+ *  DisposeSleepQUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern void
+DisposeSleepQUPP(SleepQUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+/*
+ *  InvokeSleepQUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern long
+InvokeSleepQUPP(
+  long          message,
+  SleepQRecPtr  qRecPtr,
+  SleepQUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SleepQUPP                                            NewSleepQUPP(SleepQProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSleepQUPP(SleepQUPP) { }
+    inline long                                                 InvokeSleepQUPP(long message, SleepQRecPtr qRecPtr, SleepQUPP userUPP) { return (*userUPP)(message, qRecPtr); }
+  #else
+    #define NewSleepQUPP(userRoutine)                           ((SleepQUPP)userRoutine)
+    #define DisposeSleepQUPP(userUPP)
+    #define InvokeSleepQUPP(message, qRecPtr, userUPP)          (*userUPP)(message, qRecPtr)
+  #endif
+#endif
+
+struct SleepQRec {
+  SleepQRecPtr        sleepQLink;             /* pointer to next queue element          */
+  short               sleepQType;             /* queue element type (must be SleepQType)       */
+  SleepQUPP           sleepQProc;             /* pointer to sleep universal proc ptr         */
+  short               sleepQFlags;            /* flags                       */
+};
+
+/*
+ *  GetCPUSpeed()
+ *  
+ *  Discussion:
+ *    GetCPUSpeed() returns the current effective clock speed of the
+ *    CPU in megahertz.
+ *  
+ *  Result:
+ *    the current effective clock speed of the CPU in megahertz.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern long 
+GetCPUSpeed(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  SleepQInstall()
+ *  
+ *  Discussion:
+ *    Adds an entry to the sleep queue.
+ *  
+ *  Parameters:
+ *    
+ *    qRecPtr:
+ *      A pointer to a sleep queue record to be installed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+SleepQInstall(SleepQRecPtr qRecPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  SleepQRemove()
+ *  
+ *  Discussion:
+ *    Remove an entry from the sleep queue.
+ *  
+ *  Parameters:
+ *    
+ *    qRecPtr:
+ *      A pointer to a sleep queue record to be removed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+SleepQRemove(SleepQRecPtr qRecPtr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  MaximumProcessorSpeed()
+ *  
+ *  Discussion:
+ *    MaximumProcessorSpeed() returns the maximum effective clock speed
+ *    of the CPU in megahertz.
+ *  
+ *  Result:
+ *    the maximum effective clock speed of the CPU in megahertz.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern short 
+MaximumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  MinimumProcessorSpeed()
+ *  
+ *  Discussion:
+ *    MinimumProcessorSpeed() returns the minimum effective clock speed
+ *    of the CPU in megahertz. Before Mac OS X 10.4, this function
+ *    always returns the maximum cpu speed, not the minimum as expected.
+ *  
+ *  Result:
+ *    the minimum effective clock speed of the CPU in megahertz.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern short 
+MinimumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  CurrentProcessorSpeed()
+ *  
+ *  Discussion:
+ *    CurrentProcessorSpeed() returns the current effective clock speed
+ *    of the CPU in megahertz. Before Mac OS X 10.4, this function
+ *    always returns the maximum cpu speed, not the actual current
+ *    speed the processor is running at.  One MHz represents one
+ *    million cycles per second.
+ *  
+ *  Result:
+ *    the current effective clock speed of the CPU in megahertz.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern short 
+CurrentProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  BatteryCount()
+ *  
+ *  Summary:
+ *    Return the count of batteries installed on this computer.
+ *  
+ *  Result:
+ *    the count of batteries installed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern short 
+BatteryCount(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  UpdateSystemActivity()
+ *  
+ *  Summary:
+ *    You can use the UpdateSystemActivity function to notify the Power
+ *    Manager that activity has taken place .
+ *  
+ *  Discussion:
+ *    The UpdateSystemActivity function is used to notify the Power
+ *    Manager that activity has taken place and the timers used to
+ *    measure idle time should be updated to the time of this call.
+ *    This function can be used by device drivers to prevent the
+ *    computer from entering a low-power mode while critical activity
+ *    is taking place on a particular device. The function is passed a
+ *    parameter indicating the type of activity that has
+ *    occurred.
+ *    
+ *    This function is slightly different from DelaySystemIdle, which
+ *    should be used to prevent sleep or idle during a critical
+ *    section. UpdateSystemActivity simply updates the tick count for
+ *    the activity type selected. Conversely, DelaySystemIdle actually
+ *    moves the counter to some number of ticks into the future, which
+ *    allows the caller to go off and do somethingwithout fear of
+ *    idling.
+ *    
+ *    The valid types of activity are:
+ *    Value Name       Value        Description
+ *    OverallAct       0            general type of activity
+ *     UsrActivity      1            user activity (i.e.keyboard or
+ *    mouse)
+ *    NetActivity      2            interaction with network(s)
+ *     HDActivity       3            hard disk or storage device in use
+ *  
+ *  Parameters:
+ *    
+ *    activity:
+ *      The type of activity which has occurred.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern OSErr 
+UpdateSystemActivity(UInt8 activity)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/**********************************************************************************************
+ *
+ *  Everything below this point in this file is deprecated and should not be used
+ *  in new code on Mac OS X.  Existing clients should move to non-deprecated
+ *  where possible.
+ *
+ **********************************************************************************************/
+#if !__LP64__
+/* Storage Media sleep mode defines */
+enum {
+  kMediaModeOn                  = 0,    /* Media active (Drive spinning and at full power)    */
+  kMediaModeStandBy             = 1,    /* Media standby (not implemented)    */
+  kMediaModeSuspend             = 2,    /* Media Idle (not implemented)   */
+  kMediaModeOff                 = 3     /* Media Sleep (Drive not spinning and at min power, max recovery time)   */
+};
+
+enum {
+  kMediaPowerCSCode             = 70
+};
+
+/* definitions for HDQueueElement.hdFlags   */
+enum {
+  kHDQueuePostBit               = 0,    /* 1 = call this routine on the second pass     */
+  kHDQueuePostMask              = (1 << kHDQueuePostBit)
+};
+
+struct ActivityInfo {
+  short               ActivityType;           /* Type of activity to be fetched.  Same as UpdateSystemActivity Selectors */
+  unsigned long       ActivityTime;           /* Time of last activity (in ticks) of specified type. */
+};
+typedef struct ActivityInfo             ActivityInfo;
+/* information returned by GetScaledBatteryInfo */
+struct BatteryInfo {
+  UInt8               flags;                  /* misc flags (see below)                  */
+  UInt8               warningLevel;           /* scaled warning level (0-255)               */
+  UInt8               reserved;               /* reserved for internal use             */
+  UInt8               batteryLevel;           /* scaled battery level (0-255)               */
+};
+typedef struct BatteryInfo              BatteryInfo;
+
+typedef SInt8                           ModemByte;
+typedef SInt8                           BatteryByte;
+typedef SInt8                           SoundMixerByte;
+typedef long                            PMResultCode;
+enum {
+                                        /* depreciated commands to SleepQRec sleepQProc */
+  sleepRequest                  = kSleepRequest,
+  sleepDemand                   = kSleepDemand,
+  sleepWakeUp                   = kSleepWakeUp,
+  sleepRevoke                   = kSleepRevoke,
+  sleepUnlock                   = kSleepUnlock,
+  sleepDeny                     = kSleepDeny,
+  sleepNow                      = kSleepNow,
+  dozeDemand                    = kDozeDemand,
+  dozeWakeUp                    = kDozeWakeUp,
+  dozeRequest                   = kDozeRequest,
+  enterStandby                  = kEnterStandby,
+  enterRun                      = kEnterRun,
+  suspendRequestMsg             = kSuspendRequest,
+  suspendDemandMsg              = kSuspendDemand,
+  suspendRevokeMsg              = kSuspendRevoke,
+  suspendWakeUpMsg              = kSuspendWakeUp,
+  getPowerLevel                 = kGetPowerLevel,
+  setPowerLevel                 = kSetPowerLevel
+};
+
+/* Power Handler func messages */
+typedef UInt32                          PowerLevel;
+/* Power levels corresponding to PCI Bus Power Management Interface Spec (PMIS) */
+enum {
+  kPMDevicePowerLevel_On        = 0,    /* fully-powered 'On' state (D0 state)    */
+  kPMDevicePowerLevel_D1        = 1,    /* not used by Apple system SW         */
+  kPMDevicePowerLevel_D2        = 2,    /* not used by Apple system SW         */
+  kPMDevicePowerLevel_Off       = 3     /* main PCI bus power 'Off', but PCI standby power available (D3cold state) */
+};
+
+/* PowerHandlerProc definition */
+#endif  /* !__LP64__ */
+typedef unsigned long                   RegEntryID;
+typedef CALLBACK_API( OSStatus , PowerHandlerProcPtr )(UInt32 message, void *param, UInt32 refCon, RegEntryID *regEntryID);
+typedef STACK_UPP_TYPE(PowerHandlerProcPtr)                     PowerHandlerUPP;
+/*
+ *  NewPowerHandlerUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+
+/*
+ *  DisposePowerHandlerUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+
+/*
+ *  InvokePowerHandlerUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+
+#if !__LP64__
+/* Power Mgt Apple Event types and errors */
 enum {
                                         /* Bit positions for ModemByte */
   modemOnBit                    = 0,
@@ -104,154 +508,6 @@ enum {
   PCCardSndEnMask               = 0x08
 };
 
-enum {
-                                        /* commands to SleepQRec sleepQProc */
-  kSleepRequest                 = 1,
-  kSleepDemand                  = 2,
-  kSleepWakeUp                  = 3,
-  kSleepRevoke                  = 4,
-  kSleepUnlock                  = 4,
-  kSleepDeny                    = 5,    /* A non-zero value clients can use to deny requests*/
-  kSleepNow                     = 6,
-  kDozeDemand                   = 7,
-  kDozeWakeUp                   = 8,
-  kDozeRequest                  = 9,    /* additional messages for Power Mgr 2.0*/
-  kEnterStandby                 = 10,   /* Idle Queue Only*/
-  kEnterRun                     = 11,   /* Idle Queue Only*/
-  kSuspendRequest               = 12,
-  kSuspendDemand                = 13,
-  kSuspendRevoke                = 14,
-  kSuspendWakeUp                = 15,
-  kGetPowerLevel                = 16,
-  kSetPowerLevel                = 17,
-  kDeviceInitiatedWake          = 18,
-  kWakeToDoze                   = 19,
-  kDozeToFullWakeUp             = 20,
-  kGetPowerInfo                 = 21,
-  kGetWakeOnNetInfo             = 22,
-  kSuspendWakeToDoze            = 23,
-  kEnterIdle                    = 24,   /* Idle Queue Only*/
-  kStillIdle                    = 25,   /* Idle Queue Only*/
-  kExitIdle                     = 26    /* Idle Queue Only*/
-};
-
-enum {
-                                        /* depreciated commands to SleepQRec sleepQProc */
-  sleepRequest                  = kSleepRequest,
-  sleepDemand                   = kSleepDemand,
-  sleepWakeUp                   = kSleepWakeUp,
-  sleepRevoke                   = kSleepRevoke,
-  sleepUnlock                   = kSleepUnlock,
-  sleepDeny                     = kSleepDeny,
-  sleepNow                      = kSleepNow,
-  dozeDemand                    = kDozeDemand,
-  dozeWakeUp                    = kDozeWakeUp,
-  dozeRequest                   = kDozeRequest,
-  enterStandby                  = kEnterStandby,
-  enterRun                      = kEnterRun,
-  suspendRequestMsg             = kSuspendRequest,
-  suspendDemandMsg              = kSuspendDemand,
-  suspendRevokeMsg              = kSuspendRevoke,
-  suspendWakeUpMsg              = kSuspendWakeUp,
-  getPowerLevel                 = kGetPowerLevel,
-  setPowerLevel                 = kSetPowerLevel
-};
-
-/* Power Handler func messages */
-typedef UInt32                          PowerLevel;
-/* Power levels corresponding to PCI Bus Power Management Interface Spec (PMIS) */
-enum {
-  kPMDevicePowerLevel_On        = 0,    /* fully-powered 'On' state (D0 state)    */
-  kPMDevicePowerLevel_D1        = 1,    /* not used by Apple system SW         */
-  kPMDevicePowerLevel_D2        = 2,    /* not used by Apple system SW         */
-  kPMDevicePowerLevel_Off       = 3     /* main PCI bus power 'Off', but PCI standby power available (D3cold state) */
-};
-
-/* PowerHandlerProc definition */
-typedef CALLBACK_API( OSStatus , PowerHandlerProcPtr )(UInt32 message, void *param, UInt32 refCon, RegEntryID *regEntryID);
-typedef STACK_UPP_TYPE(PowerHandlerProcPtr)                     PowerHandlerUPP;
-/*
- *  NewPowerHandlerUPP()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   available as macro/inline
- */
-
-/*
- *  DisposePowerHandlerUPP()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   available as macro/inline
- */
-
-/*
- *  InvokePowerHandlerUPP()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   available as macro/inline
- */
-
-/*
-   Use kIdleQueueDeviceType as the deviceType argument to AddDevicePowerHandler() to get the
-   handler into the idle queue instead of the device sleep queue.
-*/
-#define kIdleQueueDeviceType    "idle-queue"
-/* PCI power management support*/
-
-enum {
-  kUseDefaultMinimumWakeTime    = 0,    /* Defaults to 5 minutes*/
-  kPowerSummaryVersion          = 1,    /* Version of PowerSummary structure.*/
-  kDevicePowerInfoVersion       = 1     /* Version of DevicePowerInfo structure.*/
-};
-
-enum {
-                                        /* PowerSummary flags*/
-  kPCIPowerOffAllowed           = (1L << 0) /* PCI power off is allowed.*/
-};
-
-enum {
-                                        /* DevicePowerInfo flags*/
-  kDevicePCIPowerOffAllowed     = (1L << 0), /* PCI power off is allowed for device.*/
-  kDeviceSupportsPMIS           = (1L << 1), /* Device supports Power Mgt Interface Spec.*/
-  kDeviceCanAssertPMEDuringSleep = (1L << 2), /* Device can assert PME# during sleep.*/
-  kDeviceUsesCommonLogicPower   = (1L << 3), /* Device uses common-logic power*/
-  kDeviceDriverPresent          = (1L << 4), /* Driver present for device.*/
-  kDeviceDriverSupportsPowerMgt = (1L << 5) /* Driver installed a power handler.*/
-};
-
-struct DevicePowerInfo {
-  UInt32              version;                /* Version of this structure.*/
-  RegEntryID          regID;                  /* RegEntryID for device.*/
-  OptionBits          flags;                  /* Flags*/
-  UInt32              minimumWakeTime;        /* Minimum seconds before sleeping again.*/
-  UInt32              sleepPowerNeeded;       /* Milliwatts needed in the sleep state.*/
-};
-typedef struct DevicePowerInfo          DevicePowerInfo;
-struct PowerSummary {
-  UInt32              version;                /* Version of this structure.*/
-  OptionBits          flags;                  /* Flags*/
-  UInt32              sleepPowerAvailable;    /* Milliwatts available during sleep.*/
-  UInt32              sleepPowerNeeded;       /* Milliwatts needed during sleep.*/
-  UInt32              minimumWakeTime;        /* Minimum seconds before sleeping again.*/
-  ItemCount           deviceCount;            /* Number of device power info records.*/
-  DevicePowerInfo     devices[1];             /* Array of device power info records.*/
-};
-typedef struct PowerSummary             PowerSummary;
-enum {
-                                        /* SleepQRec.sleepQFlags */
-  noCalls                       = 1,
-  noRequest                     = 2,
-  slpQType                      = 16,
-  sleepQType                    = 16
-};
-
-/* Power Mgt Apple Event types and errors */
 enum {
                                         /* power mgt class*/
   kAEMacPowerMgtEvt             = 'pmgt', /* event ids*/
@@ -361,75 +617,61 @@ enum {
   pmWakeOnNetActivityChangedMask = (1 << pmWakeOnNetActivityChanged)
 };
 
-/* System Activity Selectors */
-/* Notes:  The IdleActivity selector is not available unless the hasAggressiveIdling PMFeatures bit is set. */
-/*         Use IdleActivity where you used to use OverallAct if necessary.  OverallAct will only            */
-/*         delay power cycling if it's enabled, and will delay sleep by a small amount when                 */
-/*         hasAggressiveIdling is set.  Don't use IdleActivity unless hasAggressiveIdling is set; when      */
-/*         hasAggressiveIdling is not set, the use of IdleActivity is undefined, and well do different      */
-/*         things depending on which Power Manager is currently running.                                    */
-enum {
-  OverallAct                    = 0,    /* Delays idle sleep by small amount                 */
-  UsrActivity                   = 1,    /* Delays idle sleep and dimming by timeout time          */
-  NetActivity                   = 2,    /* Delays idle sleep and power cycling by small amount         */
-  HDActivity                    = 3,    /* Delays hard drive spindown and idle sleep by small amount  */
-  IdleActivity                  = 4     /* Delays idle sleep by timeout time                 */
-};
+/*
+   Use kIdleQueueDeviceType as the deviceType argument to AddDevicePowerHandler() to get the
+   handler into the idle queue instead of the device sleep queue.
+*/
 
-/* Storage Media sleep mode defines */
+#define kIdleQueueDeviceType    "idle-queue"
+/* PCI power management support*/
+
 enum {
-  kMediaModeOn                  = 0,    /* Media active (Drive spinning and at full power)    */
-  kMediaModeStandBy             = 1,    /* Media standby (not implemented)    */
-  kMediaModeSuspend             = 2,    /* Media Idle (not implemented)   */
-  kMediaModeOff                 = 3     /* Media Sleep (Drive not spinning and at min power, max recovery time)   */
+  kUseDefaultMinimumWakeTime    = 0,    /* Defaults to 5 minutes*/
+  kPowerSummaryVersion          = 1,    /* Version of PowerSummary structure.*/
+  kDevicePowerInfoVersion       = 1     /* Version of DevicePowerInfo structure.*/
 };
 
 enum {
-  kMediaPowerCSCode             = 70
+                                        /* PowerSummary flags*/
+  kPCIPowerOffAllowed           = (1L << 0) /* PCI power off is allowed.*/
 };
 
-
-/* definitions for HDQueueElement.hdFlags   */
 enum {
-  kHDQueuePostBit               = 0,    /* 1 = call this routine on the second pass     */
-  kHDQueuePostMask              = (1 << kHDQueuePostBit)
+                                        /* DevicePowerInfo flags*/
+  kDevicePCIPowerOffAllowed     = (1L << 0), /* PCI power off is allowed for device.*/
+  kDeviceSupportsPMIS           = (1L << 1), /* Device supports Power Mgt Interface Spec.*/
+  kDeviceCanAssertPMEDuringSleep = (1L << 2), /* Device can assert PME# during sleep.*/
+  kDeviceUsesCommonLogicPower   = (1L << 3), /* Device uses common-logic power*/
+  kDeviceDriverPresent          = (1L << 4), /* Driver present for device.*/
+  kDeviceDriverSupportsPowerMgt = (1L << 5) /* Driver installed a power handler.*/
 };
 
-struct ActivityInfo {
-  short               ActivityType;           /* Type of activity to be fetched.  Same as UpdateSystemActivity Selectors */
-  unsigned long       ActivityTime;           /* Time of last activity (in ticks) of specified type. */
+struct DevicePowerInfo {
+  UInt32              version;                /* Version of this structure.*/
+  RegEntryID          regID;                  /* RegEntryID for device.*/
+  OptionBits          flags;                  /* Flags*/
+  UInt32              minimumWakeTime;        /* Minimum seconds before sleeping again.*/
+  UInt32              sleepPowerNeeded;       /* Milliwatts needed in the sleep state.*/
 };
-typedef struct ActivityInfo             ActivityInfo;
-/* information returned by GetScaledBatteryInfo */
-struct BatteryInfo {
-  UInt8               flags;                  /* misc flags (see below)                  */
-  UInt8               warningLevel;           /* scaled warning level (0-255)               */
-  UInt8               reserved;               /* reserved for internal use             */
-  UInt8               batteryLevel;           /* scaled battery level (0-255)               */
+typedef struct DevicePowerInfo          DevicePowerInfo;
+struct PowerSummary {
+  UInt32              version;                /* Version of this structure.*/
+  OptionBits          flags;                  /* Flags*/
+  UInt32              sleepPowerAvailable;    /* Milliwatts available during sleep.*/
+  UInt32              sleepPowerNeeded;       /* Milliwatts needed during sleep.*/
+  UInt32              minimumWakeTime;        /* Minimum seconds before sleeping again.*/
+  ItemCount           deviceCount;            /* Number of device power info records.*/
+  DevicePowerInfo     devices[1];             /* Array of device power info records.*/
 };
-typedef struct BatteryInfo              BatteryInfo;
-
-typedef SInt8                           ModemByte;
-typedef SInt8                           BatteryByte;
-typedef SInt8                           SoundMixerByte;
-typedef long                            PMResultCode;
-typedef struct SleepQRec                SleepQRec;
-typedef SleepQRec *                     SleepQRecPtr;
+typedef struct PowerSummary             PowerSummary;
+#endif  /* !__LP64__ */
 typedef struct HDQueueElement           HDQueueElement;
 typedef struct PMgrQueueElement         PMgrQueueElement;
-typedef CALLBACK_API( long , SleepQProcPtr )(long message, SleepQRecPtr qRecPtr);
 typedef CALLBACK_API( void , HDSpindownProcPtr )(HDQueueElement * theElement);
 typedef CALLBACK_API( void , PMgrStateChangeProcPtr )(PMgrQueueElement *theElement, long stateBits);
-typedef STACK_UPP_TYPE(SleepQProcPtr)                           SleepQUPP;
 typedef STACK_UPP_TYPE(HDSpindownProcPtr)                       HDSpindownUPP;
 typedef STACK_UPP_TYPE(PMgrStateChangeProcPtr)                  PMgrStateChangeUPP;
-struct SleepQRec {
-  SleepQRecPtr        sleepQLink;             /* pointer to next queue element          */
-  short               sleepQType;             /* queue element type (must be SleepQType)       */
-  SleepQUPP           sleepQProc;             /* pointer to sleep universal proc ptr         */
-  short               sleepQFlags;            /* flags                       */
-};
-
+#if !__LP64__
 struct HDQueueElement {
   struct HDQueueElement * hdQLink;            /* pointer to next queue element          */
   short               hdQType;                /* queue element type (must be HDPwrQType)       */
@@ -447,7 +689,6 @@ struct PMgrQueueElement {
   long                pmUser;                 /* user-defined (variable storage, etc.)   */
 };
 
-
 struct BatteryTimeRec {
   unsigned long       expectedBatteryTime;    /* estimated battery time remaining (seconds) */
   unsigned long       minimumBatteryTime;     /* minimum battery time remaining (seconds)     */
@@ -455,108 +696,85 @@ struct BatteryTimeRec {
   unsigned long       timeUntilCharged;       /* time until battery is fully charged (seconds)*/
 };
 typedef struct BatteryTimeRec           BatteryTimeRec;
-
 struct WakeupTime {
   unsigned long       wakeTime;               /* wakeup time (same format as current time)   */
   Boolean             wakeEnabled;            /* 1=enable wakeup timer, 0=disable wakeup timer  */
   SInt8               filler;
 };
 typedef struct WakeupTime               WakeupTime;
-
 struct StartupTime {
   unsigned long       startTime;              /* startup time (same format as current time)     */
   Boolean             startEnabled;           /* 1=enable startup timer, 0=disable startup timer    */
   SInt8               filler;
 };
 typedef struct StartupTime              StartupTime;
-/* PowerSource version*/
-enum {
-  kVersionOnePowerSource        = 1,
-  kVersionTwoPowerSource        = 2,
-  kCurrentPowerSourceVersion    = kVersionTwoPowerSource
-};
-
-/* PowerSourceAttrs bits*/
-
-enum {
-  bSourceIsBattery              = 0,    /* power source is battery*/
-  bSourceIsAC                   = 1,    /* power source is AC*/
-  bSourceCanBeCharged           = 2,    /* power source can be charged*/
-  bSourceIsUPS                  = 3,    /* power source is UPS. NOTE: software should set bSourceIsBattery and bSourceIsAC also, as appropriate*/
-  bSourceProvidesWarnLevels     = 4,    /* power source provides low power and dead battery warning levels*/
-  kSourceIsBatteryMask          = (1 << bSourceIsBattery),
-  kSourceIsACMask               = (1 << bSourceIsAC),
-  kSourceCanBeChargedMask       = (1 << bSourceCanBeCharged),
-  kSourceIsUPSMask              = (1 << bSourceIsUPS),
-  kSourceProvidesWarnLevelsMask = (1 << bSourceProvidesWarnLevels)
-};
-
-/* PowerSourceFlags bits*/
-
-enum {
-  bSourceIsAvailable            = 0,    /* power source is installed*/
-  bSourceIsCharging             = 1,    /* power source being charged*/
-  bChargerIsAttached            = 2,    /* a charger is connected*/
-  kSourceIsAvailableMask        = (1 << bSourceIsAvailable),
-  kSourceIsChargingMask         = (1 << bSourceIsCharging),
-  kChargerIsAttachedMask        = (1 << bChargerIsAttached)
-};
-
-/* Power Capacity Types*/
-
-enum {
-  kCapacityIsActual             = 0,    /* current capacity is expessed as actual capacity in same units as max*/
-  kCapacityIsPercentOfMax       = 1     /* current capacity is expressed as a percentage of maximumCapacity*/
-};
-
-/* Net Activity Wake Options*/
-enum {
-  kConfigSupportsWakeOnNetBit   = 0,
-  kWakeOnNetAdminAccessesBit    = 1,
-  kWakeOnAllNetAccessesBit      = 2,
-  kUnmountServersBeforeSleepingBit = 3,
-  kConfigSupportsWakeOnNetMask  = (1 << kConfigSupportsWakeOnNetBit),
-  kWakeOnNetAdminAccessesMask   = (1 << kWakeOnNetAdminAccessesBit),
-  kWakeOnAllNetAccessesMask     = (1 << kWakeOnAllNetAccessesBit),
-  kUnmountServersBeforeSleepingMask = (1 << kUnmountServersBeforeSleepingBit)
-};
-
-/* Power Source capacity usage types*/
-enum {
-  kCurrentCapacityIsActualValue = 0,    /* currentCapacity is a real value in same units as maxCapacity*/
-  kCurrentCapacityIsPercentOfMax = 1    /* currentCapacity is expressed as a percentage of maxCapacity.*/
-};
+#if !__LP64__
+/*
+ *  SetSpindownDisable()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern void 
+SetSpindownDisable(Boolean setDisable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-typedef SInt16                          PowerSourceID;
-struct PowerSourceParamBlock {
-  PowerSourceID       sourceID;               /* unique id assigned by Power Mgr*/
-  UInt16              sourceCapacityUsage;    /* how currentCapacity is used*/
-  UInt32              sourceVersion;          /* version of this record*/
-  OptionBits          sourceAttr;             /* attribute flags (see below)*/
-  OptionBits          sourceState;            /* state flags (see below)*/
-  UInt32              currentCapacity;        /* current capacity, in*/
-                                              /*   milliwatts or %*/
-  UInt32              maxCapacity;            /* full capacity, in milliwatts*/
-  UInt32              timeRemaining;          /* time left to deplete, */
-                                              /*   in milliwatt-hours*/
-  UInt32              timeToFullCharge;       /* time to charge, */
-                                              /*   in milliwatt-hours*/
-  UInt32              voltage;                /* voltage in millivolts*/
-  SInt32              current;                /* current in milliamperes */
-                                              /*  (negative if consuming, */
-                                              /*   positive if charging)*/
-  UInt32              lowWarnLevel;           /* low warning level in milliwatts (or % if sourceCapacityUsage is %)*/
-  UInt32              deadWarnLevel;          /* dead warning level in milliwatts (or % if sourceCapacityUsage is %)*/
-  UInt32              reserved[16];           /* for future expansion*/
-};
-typedef struct PowerSourceParamBlock    PowerSourceParamBlock;
-typedef PowerSourceParamBlock *         PowerSourceParamBlockPtr;
+/*
+ *  PMSelectorCount()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern short 
+PMSelectorCount(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  PMFeatures()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern UInt32 
+PMFeatures(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  SetProcessorSpeed()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern Boolean 
+SetProcessorSpeed(Boolean fullSpeed)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  FullProcessorSpeed()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
+ */
+extern Boolean 
+FullProcessorSpeed(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*  The following constants, structures, and functions have all been deprecated on Mac OS X and are not recommended for use.*/
 /*
  *  DisableWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -568,7 +786,7 @@ DisableWUTime(void)                                           AVAILABLE_MAC_OS_X
  *  SetWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -576,11 +794,14 @@ extern OSErr
 SetWUTime(long wuTime)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
  *  GetWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -594,7 +815,7 @@ GetWUTime(
  *  BatteryStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -608,7 +829,7 @@ BatteryStatus(
  *  ModemStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -616,25 +837,9 @@ extern OSErr
 ModemStatus(Byte * status)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
-/*
- *  GetCPUSpeed()
- *  
- *  Discussion:
- *    GetCPUSpeed() returns the current effective clock speed of the
- *    CPU in megahertz.
- *  
- *  Result:
- *    the current effective clock speed of the CPU in megahertz.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern long 
-GetCPUSpeed(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#endif  /* !__LP64__ */
 
-
+#if !__LP64__
 /*
  *  IdleUpdate()   *** DEPRECATED ***
  *  
@@ -644,7 +849,7 @@ GetCPUSpeed(void)                                             AVAILABLE_MAC_OS_X
  *    provided in the Carbon and Cocoa frameworks.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -661,7 +866,7 @@ IdleUpdate(void)                                              AVAILABLE_MAC_OS_X
  *    provided in the Carbon and Cocoa frameworks.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -678,36 +883,12 @@ EnableIdle(void)                                              AVAILABLE_MAC_OS_X
  *    provided in the Carbon and Cocoa frameworks.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 DisableIdle(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
-
-
-/*
- *  SleepQInstall()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void 
-SleepQInstall(SleepQRecPtr qRecPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  SleepQRemove()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void 
-SleepQRemove(SleepQRecPtr qRecPtr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -719,7 +900,7 @@ SleepQRemove(SleepQRecPtr qRecPtr)                            AVAILABLE_MAC_OS_X
  *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -736,7 +917,7 @@ AOn(void)                                                     AVAILABLE_MAC_OS_X
  *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -753,7 +934,7 @@ AOnIgnoreModem(void)                                          AVAILABLE_MAC_OS_X
  *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -770,7 +951,7 @@ BOn(void)                                                     AVAILABLE_MAC_OS_X
  *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -787,7 +968,7 @@ AOff(void)                                                    AVAILABLE_MAC_OS_X
  *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -798,34 +979,10 @@ BOff(void)                                                    AVAILABLE_MAC_OS_X
 
 /* Public Power Management API  */
 /*
- *  PMSelectorCount()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern short 
-PMSelectorCount(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMFeatures()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern UInt32 
-PMFeatures(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  GetSleepTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -837,7 +994,7 @@ GetSleepTimeout(void)                                         AVAILABLE_MAC_OS_X
  *  SetSleepTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -849,7 +1006,7 @@ SetSleepTimeout(UInt8 timeout)                                AVAILABLE_MAC_OS_X
  *  GetHardDiskTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -861,7 +1018,7 @@ GetHardDiskTimeout(void)                                      AVAILABLE_MAC_OS_X
  *  SetHardDiskTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -873,7 +1030,7 @@ SetHardDiskTimeout(UInt8 timeout)                             AVAILABLE_MAC_OS_X
  *  HardDiskPowered()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -885,7 +1042,7 @@ HardDiskPowered(void)                                         AVAILABLE_MAC_OS_X
  *  SpinDownHardDisk()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -897,7 +1054,7 @@ SpinDownHardDisk(void)                                        AVAILABLE_MAC_OS_X
  *  IsSpindownDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -906,22 +1063,10 @@ IsSpindownDisabled(void)                                      AVAILABLE_MAC_OS_X
 
 
 /*
- *  SetSpindownDisable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern void 
-SetSpindownDisable(Boolean setDisable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  HardDiskQInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -933,7 +1078,7 @@ HardDiskQInstall(HDQueueElement * theElement)                 AVAILABLE_MAC_OS_X
  *  HardDiskQRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -945,7 +1090,7 @@ HardDiskQRemove(HDQueueElement * theElement)                  AVAILABLE_MAC_OS_X
  *  GetScaledBatteryInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -959,7 +1104,7 @@ GetScaledBatteryInfo(
  *  AutoSleepControl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -971,7 +1116,7 @@ AutoSleepControl(Boolean enableSleep)                         AVAILABLE_MAC_OS_X
  *  GetIntModemInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -983,7 +1128,7 @@ GetIntModemInfo(void)                                         AVAILABLE_MAC_OS_X
  *  SetIntModemState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -992,95 +1137,10 @@ SetIntModemState(short theState)                              AVAILABLE_MAC_OS_X
 
 
 /*
- *  MaximumProcessorSpeed()
- *  
- *  Discussion:
- *    MaximumProcessorSpeed() returns the maximum effective clock speed
- *    of the CPU in megahertz.
- *  
- *  Result:
- *    the maximum effective clock speed of the CPU in megahertz.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern short 
-MaximumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  MinimumProcessorSpeed()
- *  
- *  Discussion:
- *    MinimumProcessorSpeed() returns the minimum effective clock speed
- *    of the CPU in megahertz. Before Mac OS X 10.4, this function
- *    always returns the maximum cpu speed, not the minimum as expected.
- *  
- *  Result:
- *    the minimum effective clock speed of the CPU in megahertz.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.1 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern short 
-MinimumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
-
-
-/*
- *  CurrentProcessorSpeed()
- *  
- *  Discussion:
- *    CurrentProcessorSpeed() returns the current effective clock speed
- *    of the CPU in megahertz. Before Mac OS X 10.4, this function
- *    always returns the maximum cpu speed, not the actual current
- *    speed the processor is running at.  One MHz represents one
- *    million cycles per second.
- *  
- *  Result:
- *    the current effective clock speed of the CPU in megahertz.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern short 
-CurrentProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  FullProcessorSpeed()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern Boolean 
-FullProcessorSpeed(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  SetProcessorSpeed()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern Boolean 
-SetProcessorSpeed(Boolean fullSpeed)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  GetSCSIDiskModeAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1092,7 +1152,7 @@ GetSCSIDiskModeAddress(void)                                  AVAILABLE_MAC_OS_X
  *  SetSCSIDiskModeAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1104,7 +1164,7 @@ SetSCSIDiskModeAddress(short scsiAddress)                     AVAILABLE_MAC_OS_X
  *  GetWakeupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1116,7 +1176,7 @@ GetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X
  *  SetWakeupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1125,46 +1185,34 @@ SetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X
 
 
 /*
- *  IsProcessorCyclingEnabled()
+ *  IsProcessorCyclingEnabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsProcessorCyclingEnabled(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsProcessorCyclingEnabled(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  EnableProcessorCycling()
+ *  EnableProcessorCycling()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-EnableProcessorCycling(Boolean enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  BatteryCount()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern short 
-BatteryCount(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+EnableProcessorCycling(Boolean enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
  *  GetBatteryVoltage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1176,7 +1224,7 @@ GetBatteryVoltage(short whichBattery)                         AVAILABLE_MAC_OS_X
  *  GetBatteryTimes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1190,7 +1238,7 @@ GetBatteryTimes(
  *  GetDimmingTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1202,7 +1250,7 @@ GetDimmingTimeout(void)                                       AVAILABLE_MAC_OS_X
  *  SetDimmingTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1214,7 +1262,7 @@ SetDimmingTimeout(UInt8 timeout)                              AVAILABLE_MAC_OS_X
  *  DimmingControl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1226,7 +1274,7 @@ DimmingControl(Boolean enableSleep)                           AVAILABLE_MAC_OS_X
  *  IsDimmingControlDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1238,7 +1286,7 @@ IsDimmingControlDisabled(void)                                AVAILABLE_MAC_OS_X
  *  IsAutoSlpControlDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1250,7 +1298,7 @@ IsAutoSlpControlDisabled(void)                                AVAILABLE_MAC_OS_X
  *  PMgrStateQInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1262,7 +1310,7 @@ PMgrStateQInstall(PMgrQueueElement * theElement)              AVAILABLE_MAC_OS_X
  *  PMgrStateQRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1271,22 +1319,10 @@ PMgrStateQRemove(PMgrQueueElement * theElement)               AVAILABLE_MAC_OS_X
 
 
 /*
- *  UpdateSystemActivity()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
- */
-extern OSErr 
-UpdateSystemActivity(UInt8 activity)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  DelaySystemIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1298,7 +1334,7 @@ DelaySystemIdle(void)                                         AVAILABLE_MAC_OS_X
  *  GetStartupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1310,7 +1346,7 @@ GetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X
  *  SetStartupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1322,7 +1358,7 @@ SetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X
  *  GetLastActivity()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
@@ -1334,7 +1370,7 @@ GetLastActivity(ActivityInfo * theActivity)                   AVAILABLE_MAC_OS_X
  *  GetSoundMixerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
@@ -1346,7 +1382,7 @@ GetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X
  *  SetSoundMixerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
@@ -1358,7 +1394,7 @@ SetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X
  *  GetDimSuspendState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
@@ -1370,7 +1406,7 @@ GetDimSuspendState(void)                                      AVAILABLE_MAC_OS_X
  *  SetDimSuspendState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
@@ -1378,187 +1414,8 @@ extern void
 SetDimSuspendState(Boolean dimSuspendState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
-/*
- *  GetCoreProcessorTemperature()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  GetWakeOnNetworkOptions()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  SetWakeOnNetworkOptions()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  AddPowerSource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  RemovePowerSource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  UpdatePowerSource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  IsServerModeEnabled()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/*
- *  EnableServerMode()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/* 
-   NumBatteriesInstalled is different from BatteryCount in that it
-   indicates how many batteries are actually available at the time
-   it is called (including UPS batteries). BatteryCount shows a 
-   static number of batteries a machine is capable of holding which does NOT
-   include UPS batteries. So, while a desktop might show a BatteryCount
-   of zero, its NumBatteriesInstalled value might be 1 or more if a UPS
-   is attached. 
-*/
-/*
- *  NumBatteriesInstalled()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in PowerMgrLib 2.0 and later
- */
-
-
-/* Power Handler Management */
-/*
- *  IsPCIPowerOffDisabled()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  EnablePCIPowerOff()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  AddDevicePowerHandler()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  RemoveDevicePowerHandler()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  RemoveDevicePowerHandlerForProc()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  GetDevicePowerLevel()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-/*
- *  SetDevicePowerLevel()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DriverServicesLib 1.1 and later
- */
-
-
-
-/*
- *  NewSleepQUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern SleepQUPP
-NewSleepQUPP(SleepQProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#endif  /* !__LP64__ */
+#endif  /* !__LP64__ */
 
 /*
  *  NewHDSpindownUPP()
@@ -1583,17 +1440,6 @@ extern PMgrStateChangeUPP
 NewPMgrStateChangeUPP(PMgrStateChangeProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
- *  DisposeSleepQUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeSleepQUPP(SleepQUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
  *  DisposeHDSpindownUPP()
  *  
  *  Availability:
@@ -1614,20 +1460,6 @@ DisposeHDSpindownUPP(HDSpindownUPP userUPP)                   AVAILABLE_MAC_OS_X
  */
 extern void
 DisposePMgrStateChangeUPP(PMgrStateChangeUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  InvokeSleepQUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern long
-InvokeSleepQUPP(
-  long          message,
-  SleepQRecPtr  qRecPtr,
-  SleepQUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHDSpindownUPP()
@@ -1656,9 +1488,26 @@ InvokePMgrStateChangeUPP(
   long                stateBits,
   PMgrStateChangeUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline HDSpindownUPP                                        NewHDSpindownUPP(HDSpindownProcPtr userRoutine) { return userRoutine; }
+    inline PMgrStateChangeUPP                                   NewPMgrStateChangeUPP(PMgrStateChangeProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeHDSpindownUPP(HDSpindownUPP) { }
+    inline void                                                 DisposePMgrStateChangeUPP(PMgrStateChangeUPP) { }
+    inline void                                                 InvokeHDSpindownUPP(HDQueueElement * theElement, HDSpindownUPP userUPP) { (*userUPP)(theElement); }
+    inline void                                                 InvokePMgrStateChangeUPP(PMgrQueueElement * theElement, long stateBits, PMgrStateChangeUPP userUPP) { (*userUPP)(theElement, stateBits); }
+  #else
+    #define NewHDSpindownUPP(userRoutine)                       ((HDSpindownUPP)userRoutine)
+    #define NewPMgrStateChangeUPP(userRoutine)                  ((PMgrStateChangeUPP)userRoutine)
+    #define DisposeHDSpindownUPP(userUPP)
+    #define DisposePMgrStateChangeUPP(userUPP)
+    #define InvokeHDSpindownUPP(theElement, userUPP)            (*userUPP)(theElement)
+    #define InvokePMgrStateChangeUPP(theElement, stateBits, userUPP) (*userUPP)(theElement, stateBits)
+  #endif
+#endif
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

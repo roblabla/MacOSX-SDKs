@@ -26,7 +26,7 @@ CG_EXTERN_C_BEGIN
 typedef struct _CGDisplayConfigRef * CGDisplayConfigRef;
 
 /* Get a new CGDisplayConfigRef */
-CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *pConfigRef);
+CG_EXTERN CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *pConfigRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Set the origin point for a display
@@ -42,10 +42,10 @@ CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *pConfigRef);
  * to the requested location without overlapping or leaving a gap between
  * displays.
  */
-CGError CGConfigureDisplayOrigin(CGDisplayConfigRef configRef,
+CG_EXTERN CGError CGConfigureDisplayOrigin(CGDisplayConfigRef configRef,
                                  CGDirectDisplayID display,
                                  CGDisplayCoord x,
-                                 CGDisplayCoord y);
+                                 CGDisplayCoord y) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Set the display mode
@@ -57,9 +57,9 @@ CGError CGConfigureDisplayOrigin(CGDisplayConfigRef configRef,
  * the mirroring set whose mode is not explicitly changed will be set to a display
  * mode capable of mirroring the bounds of the largest display being explicitly set. 
  */
-CGError CGConfigureDisplayMode(CGDisplayConfigRef configRef,
+CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef configRef,
                                 CGDirectDisplayID display,
-                                CFDictionaryRef mode);
+                                CFDictionaryRef mode) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Enable or disable stereo operation.
@@ -86,7 +86,7 @@ CGError CGConfigureDisplayMode(CGDisplayConfigRef configRef,
  * and the first 75% of the last scanline for the right eye view.  The remainder
  * of the scanline is black.   It may be set using the forceBlueLine option.
  */
-CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef configRef, CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine);
+CG_EXTERN CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef configRef, CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine);
 
 /*
  * Make a display a mirror of masterDisplay.
@@ -110,12 +110,12 @@ CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef configRef, CGDirect
  * (All Carbon and Cocoa apps using windows and/or DrawSprocket fall into this class)
  * will automatically get the correct behavior.
  */
-CGError CGConfigureDisplayMirrorOfDisplay(CGDisplayConfigRef configRef,
+CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(CGDisplayConfigRef configRef,
                                                      CGDirectDisplayID display,
-                                                     CGDirectDisplayID masterDisplay);
+                                                     CGDirectDisplayID masterDisplay) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Cancel a reconfiguration operation, discarding the configRef */
-CGError CGCancelDisplayConfiguration(CGDisplayConfigRef configRef);
+CG_EXTERN CGError CGCancelDisplayConfiguration(CGDisplayConfigRef configRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Perform the requested reconfigurations and discard the configRef
@@ -146,10 +146,10 @@ enum {
 };
 typedef u_int32_t CGConfigureOption;
 
-CGError CGCompleteDisplayConfiguration( CGDisplayConfigRef configRef, CGConfigureOption option );
+CG_EXTERN CGError CGCompleteDisplayConfiguration( CGDisplayConfigRef configRef, CGConfigureOption option ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Restore the permanent display configuration from the user's display preferences settings */
-void CGRestorePermanentDisplayConfiguration(void);
+CG_EXTERN void CGRestorePermanentDisplayConfiguration(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Applications may want to register for notifications of display changes.
@@ -192,7 +192,8 @@ enum {
     kCGDisplayEnabledFlag            = (1 << 8), /* post-reconfiguration callback flag */
     kCGDisplayDisabledFlag           = (1 << 9), /* post-reconfiguration callback flag */
     kCGDisplayMirrorFlag             = (1 << 10),/* post-reconfiguration callback flag */
-    kCGDisplayUnMirrorFlag           = (1 << 11) /* post-reconfiguration callback flag */
+    kCGDisplayUnMirrorFlag           = (1 << 11),/* post-reconfiguration callback flag */
+    kCGDisplayDesktopShapeChangedFlag = (1 << 12) /* post-reconfiguration callback flag */
 };
 typedef u_int32_t CGDisplayChangeSummaryFlags;
 
@@ -205,8 +206,8 @@ typedef void(*CGDisplayReconfigurationCallBack)(CGDirectDisplayID display,
  * The userInfo argument is passed back to the callback procedure each time
  * it is invoked.
  */
-CGError CGDisplayRegisterReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGError CGDisplayRegisterReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  * Specialized configuration changes should be done outside of the
@@ -253,7 +254,7 @@ CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack 
  * When the system reverts configurations at session termination, the
  * configuration always reverts to the permanent configuration setting.
  */
-CGError CGDisplaySetStereoOperation(CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option);
+CG_EXTERN CGError CGDisplaySetStereoOperation(CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option);
 
 /*
  * These APIs allow applications and higher level frameworks
@@ -273,59 +274,58 @@ CGError CGDisplaySetStereoOperation(CGDirectDisplayID display, boolean_t stereo,
  */
 
 /* True if the display is connected, awake, and drawable */
-boolean_t CGDisplayIsActive(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsActive(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is asleep and therefore not drawable */
-boolean_t CGDisplayIsAsleep(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsAsleep(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * True if the display is valid, with a monitor connected
  * (support for hot plugging of monitors)
  */
-boolean_t CGDisplayIsOnline(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsOnline(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is the current main display */
-boolean_t CGDisplayIsMain(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsMain(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is built in, such as the internal display in portables */
-boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is in a mirroring set */
-boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is always in a mirroring set, and cannot be unmirrored */
-boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is in a hardware mirroring set */
-boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Returns display being mirrored, or kCGNullDirectDisplay if master or unmirrored */
-CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display);
+CG_EXTERN CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is using OpenGL acceleration */
-boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* True if the display is running in a stereo graphics mode */
-boolean_t CGDisplayIsStereo(CGDirectDisplayID display);
-
+CG_EXTERN boolean_t CGDisplayIsStereo(CGDirectDisplayID display); /* 10.4.3 and later - need a macro */
 
 /*
  * Returns the display bound to the hardware accelerator in a HW mirror set,
  * or 'display' if software mirrored or unmirrored
  */
-CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display);
+CG_EXTERN CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Returns the logical unit, vendor ID, vendor model number,
  * and serial number for a display
  */
-uint32_t CGDisplayUnitNumber(CGDirectDisplayID display);
-uint32_t CGDisplayVendorNumber(CGDirectDisplayID display);
-uint32_t CGDisplayModelNumber(CGDirectDisplayID display);
-uint32_t CGDisplaySerialNumber(CGDirectDisplayID display);
+CG_EXTERN uint32_t CGDisplayUnitNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN uint32_t CGDisplayVendorNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN uint32_t CGDisplayModelNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Returns the IOKit service port for a display device */
-io_service_t CGDisplayIOServicePort(CGDirectDisplayID display);
+CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Returns the size of the specified display in millimeters.
@@ -336,7 +336,24 @@ io_service_t CGDisplayIOServicePort(CGDirectDisplayID display);
  * the device width and height in pixels from CGDisplayBounds(), with an assumed resolution
  * of 2.835 pixels/mm, or 72 DPI, a reasonable guess for displays predating EDID support.
  */
-CGSize CGDisplayScreenSize(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
+ * Returns the rotation of the specified display in degrees.
+ *
+ * The display's angle is clockwise.   That is, a display rotation of 90 degrees implies the display is
+ * rotated clockwise 90 degrees, such that what was the physical  bottom of the display is now the left side,
+ * and what was the physical top is now the right side.
+ *
+ * The content is rendered so as to look correct on the rotated display.
+ *
+ * If 'display' is not a valid display ID, the rotation returned is 0.0.
+ */
+CG_EXTERN double CGDisplayRotation(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Return a copy of the current color space of the specified display. */
+
+CG_EXTERN CGColorSpaceRef CGDisplayCopyColorSpace(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 CG_EXTERN_C_END
 

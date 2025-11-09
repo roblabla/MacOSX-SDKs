@@ -1,7 +1,7 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,11 +24,11 @@
 - (NSFont *)titleFont;
 - (NSString *)title;
 - (void)setTitle:(NSString *)aString;
-- (void)setKnobThickness:(float)aFloat;
-- (float)knobThickness;
+- (void)setKnobThickness:(CGFloat)aFloat;
+- (CGFloat)knobThickness;
 - (void)setImage:(NSImage *)backgroundImage;
 - (NSImage *)image;
-- (int)isVertical;
+- (NSInteger)isVertical;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 
 @end
@@ -37,8 +37,8 @@
 
 // For setting and retrieving the number of tick marks on a slider.
 //   0 indicates no tick marks are present, which is the default
-- (void)setNumberOfTickMarks:(int)count;
-- (int)numberOfTickMarks;
+- (void)setNumberOfTickMarks:(NSInteger)count;
+- (NSInteger)numberOfTickMarks;
 
 // For setting and retrieving the position tick marks will be displayed in.
 //   This has no effect if numberOfTickMarks is 0.
@@ -53,16 +53,16 @@
 
 // Determine the slider value for a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.
-- (double)tickMarkValueAtIndex:(int)index;
+- (double)tickMarkValueAtIndex:(NSInteger)index;
 
 // Determine the bounding rectangle of a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.
-- (NSRect)rectOfTickMarkAtIndex:(int)index;
+- (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 
 // Determine whether a particular point is "near" a tick mark and return its
 // index if so.  NSNotFound will be returned if no tick mark is close enough
 // to qualify.
-- (int)indexOfTickMarkAtPoint:(NSPoint)point;
+- (NSInteger)indexOfTickMarkAtPoint:(NSPoint)point;
 
 - (double)closestTickMarkValueToValue:(double)value;
 

@@ -1,11 +1,12 @@
 /*
         NSTableColumn.h
         Application Kit
-        Copyright (c) 1995-2004, Apple Computer, Inc.
+        Copyright (c) 1995-2007, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSGeometry.h>
 
 @class NSTableView;
 @class NSCell;
@@ -16,9 +17,9 @@
 {
     /*All instance variables are private*/
     id		_identifier;
-    float	_width;
-    float	_minWidth;
-    float	_maxWidth;
+    CGFloat	_width;
+    CGFloat	_minWidth;
+    CGFloat	_maxWidth;
     NSTableView *_tableView;
     NSCell	*_headerCell;
     NSCell	*_dataCell;
@@ -29,9 +30,10 @@
         unsigned int    canUseReorderResizeImageCache:1;
         unsigned int    userResizingAllowed:1;
         unsigned int    autoResizingAllowed:1;
-        unsigned int	RESERVED:19;
+        unsigned int    hidden:1; // Defaults to NO
+        unsigned int	RESERVED:18;
     } _cFlags;
-    id          _tcAuxiliaryStorage;
+    id _tcAuxiliaryStorage;
 }
 
 - (id)initWithIdentifier:(id)identifier;
@@ -40,21 +42,21 @@
 - (id)identifier;
 - (void)setTableView:(NSTableView *)tableView;
 - (NSTableView *)tableView;
-- (void)setWidth:(float)width;
-- (float)width;
-- (void)setMinWidth:(float)minWidth;
-- (float)minWidth;
-- (void)setMaxWidth:(float)maxWidth;
-- (float)maxWidth;
+- (void)setWidth:(CGFloat)width;
+- (CGFloat)width;
+- (void)setMinWidth:(CGFloat)minWidth;
+- (CGFloat)minWidth;
+- (void)setMaxWidth:(CGFloat)maxWidth;
+- (CGFloat)maxWidth;
 
 - (void)setHeaderCell:(NSCell *)cell; // Manage the cell used to draw the header for this column
 - (id)headerCell;
 
-/* Manage the cell used to draw the actual values in the column.  NSTableView will always call -dataCellForRow:.  By default, -dataCellForRow: just calls -dataCell.  Subclassers can override if they need to potentially use different cells for different rows.  Subclassers should be prepared to be called with -dataCellForRow:-1 in cases where no actual row is involved but the table view needs to get some generic cell info.
+/* Manage the cell used to draw the actual values in the column. NSTableView will call -dataCellForRow:. By default, -dataCellForRow: just calls -dataCell.  Subclassers can override -dataCellForRow: if they need to potentially use different cells for different rows. The returned cell should properly implement copyWithZone:, since NSTableView may make copies of the cells.
  */
 - (void)setDataCell:(NSCell *)cell;
 - (id)dataCell;
-- (id)dataCellForRow:(int)row;
+- (id)dataCellForRow:(NSInteger)row;
     
 - (void)setEditable:(BOOL)flag;
 - (BOOL)isEditable;
@@ -72,8 +74,8 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* The resizing mask controls the resizability of a table column.  Compatability Note: This method replaces setResizable.
 */ 
-- (void)setResizingMask:(unsigned)resizingMask;
-- (unsigned)resizingMask;
+- (void)setResizingMask:(NSUInteger)resizingMask;
+- (NSUInteger)resizingMask;
 
 enum {
     NSTableColumnNoResizing = 0, // Disallow any kind of resizing.
@@ -82,11 +84,26 @@ enum {
 };
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+/* Get and set the Tool Tip for the NSTableColumn header.
+*/
+- (void)setHeaderToolTip:(NSString *)string;
+- (NSString *)headerToolTip;
+
+/* Determines if the column is hidden or not. The isHidden value is stored out when the NSTableView automatically saves out NSTableColumn state. Note that columns which are hidden still exist in the the -[NSTableView tableColumns] array and -[NSTableView numberOfColumns] includes columns which are hidden. 
+*/
+- (BOOL)isHidden;
+- (void)setHidden:(BOOL)hidden;
+
+#endif
+
 /*
  * Deprecated Methods
  */
 
-// Deprecated in Mac OS 10.4.  If flag is YES, calls setResizingMask:(NSTableColumnUserResizingMask | NSTableColumnAutoresizingMask).  If flag is NO, calls setResizingMask:(NSTableColumnNoResizing).
+/* Deprecated in Mac OS 10.4.  If flag is YES, calls setResizingMask:(NSTableColumnUserResizingMask | NSTableColumnAutoresizingMask).  If flag is NO, calls setResizingMask:(NSTableColumnNoResizing).
+*/
 - (void)setResizable:(BOOL)flag;
 - (BOOL)isResizable;
 

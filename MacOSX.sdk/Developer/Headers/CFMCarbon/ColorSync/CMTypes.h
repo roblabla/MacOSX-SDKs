@@ -1,1 +1,0 @@
-../../../../System/Library/Frameworks/ApplicationServices.framework/Frameworks/ColorSync.framework/Headers/CMTypes.h

@@ -50,8 +50,11 @@
 					MIDIServer maintains a single global MIDISetupRef, stored
 					persistently in a preference file.
 */
+#if __LP64__
+typedef MIDIObjectRef MIDISetupRef;
+#else
 typedef struct OpaqueMIDISetup *		MIDISetupRef;
-
+#endif
 
 #ifdef __cplusplus
 extern "C" {

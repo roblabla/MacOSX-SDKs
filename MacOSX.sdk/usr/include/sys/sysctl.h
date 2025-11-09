@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /* Copyright (c) 1995 NeXT Computer, Inc. All Rights Reserved */
 /*
@@ -57,6 +63,12 @@
  *
  *	@(#)sysctl.h	8.1 (Berkeley) 6/2/93
  */
+/*
+ * NOTICE: This file was modified by SPARTA, Inc. in 2005 to introduce
+ * support for mandatory and extensible security protections.  This notice
+ * is included in support of clause 2.2 (b) of the Apple Public License,
+ * Version 2.0.
+ */
 
 #ifndef _SYS_SYSCTL_H_
 #define	_SYS_SYSCTL_H_
@@ -90,6 +102,13 @@
  * levels defined below it, or it is a leaf of some particular
  * type given below. Each sysctl level defines a set of name/type
  * pairs to be used by sysctl(1) in manipulating the subsystem.
+ *
+ * When declaring new sysctl names, please use the CTLFLAG_LOCKED
+ * flag in the type to indicate that all necessary locking will
+ * be handled within the sysctl. Any sysctl defined without
+ * CTLFLAG_LOCKED is considered legacy and will be protected by
+ * both the kernel funnel and the sysctl memlock. This is not
+ * optimal, so it is best to handle locking yourself.
  */
 struct ctlname {
 	char	*ctl_name;	/* subsystem name */
@@ -113,15 +132,23 @@ struct ctlname {
 #define CTLFLAG_MASKED	0x04000000	/* deprecated variable, do not display */
 #define CTLFLAG_NOAUTO	0x02000000	/* do not auto-register */
 #define CTLFLAG_KERN	0x01000000	/* valid inside the kernel */
+#define CTLFLAG_LOCKED	0x00800000	/* node will handle locking itself (highly encouraged) */
 
 /*
  * USE THIS instead of a hardwired number from the categories below
  * to get dynamically assigned sysctl entries using the linker-set
  * technology. This is the way nearly all new sysctl variables should
  * be implemented.
+ *
  * e.g. SYSCTL_INT(_parent, OID_AUTO, name, CTLFLAG_RW, &variable, 0, "");
- */ 
+ *
+ * Note that linker set technology will automatically register all nodes
+ * declared like this on kernel initialization, UNLESS they are defined
+ * in I/O-Kit. In this case, you have to call sysctl_register_oid()
+ * manually - just like in a KEXT.
+ */
 #define OID_AUTO	(-1)
+#define OID_AUTO_START 100 /* conventional */
 
 
 #define SYSCTL_DEF_ENABLED
@@ -195,7 +222,7 @@ struct ctlname {
 #define	KERN_LOGSIGEXIT	36	/* int: do we log sigexit procs? */
 #define KERN_SYMFILE		37	/* string: kernel symbol filename */
 #define KERN_PROCARGS		38
-#define KERN_PCSAMPLES		39	/* node: pc sampling */
+                             /* 39 was KERN_PCSAMPLES... now deprecated */
 #define KERN_NETBOOT		40	/* int: are we netbooted? 1=yes,0=no */
 #define	KERN_PANICINFO		41	/* node: panic UI information */
 #define	KERN_SYSV		42	/* node: System V IPC information */
@@ -223,8 +250,24 @@ struct ctlname {
 #define KERN_NX_PROTECTION	60	/* int: whether no-execute protection is enabled */
 #define	KERN_TFP 		61	/* Task for pid settings */
 #define	KERN_PROCNAME 		62	/* setup process program  name(2*MAXCOMLEN) */
-#define	KERN_THALTSTACK 	63	/* setup process to have per thread sigaltstack */
-#define	KERN_MAXID		64	/* number of valid kern ids */
+#define	KERN_THALTSTACK		63	/* for compat with older x86 and does nothing */
+#define	KERN_SPECULATIVE_READS	64	/* int: whether speculative reads are disabled */
+#define	KERN_OSVERSION		65	/* for build number i.e. 9A127 */
+#define	KERN_SAFEBOOT		66	/* are we booted safe? */
+#define	KERN_LCTX		67	/* node: login context */
+#define KERN_RAGEVNODE		68
+#define KERN_TTY		69	/* node: tty settings */
+#define KERN_CHECKOPENEVT       70      /* spi: check the VOPENEVT flag on vnodes at open time */
+#define	KERN_MAXID		71	/* number of valid kern ids */
+/*
+ * Don't add any more sysctls like this.  Instead, use the SYSCTL_*() macros
+ * and OID_AUTO. This will have the added benefit of not having to recompile
+ * sysctl(8) to pick up your changes.
+ */
+
+#if COUNT_SYSCALLS && defined(KERNEL) 
+#define	KERN_COUNT_SYSCALLS (KERN_OSTYPE + 1000)	/* keep called count for each bsd syscall */
+#endif
 
 #if defined(__LP64__)
 #define	KERN_USRSTACK KERN_USRSTACK64
@@ -232,15 +275,23 @@ struct ctlname {
 #define	KERN_USRSTACK KERN_USRSTACK32
 #endif
 
+
+/* KERN_RAGEVNODE types */
+#define KERN_RAGE_PROC		1
+#define KERN_RAGE_THREAD	2
+#define KERN_UNRAGE_PROC	3
+#define KERN_UNRAGE_THREAD	4
+
+/* KERN_OPENEVT types */
+#define KERN_OPENEVT_PROC     1
+#define KERN_UNOPENEVT_PROC   2
+
 /* KERN_TFP types */
 #define KERN_TFP_POLICY 		1
-#define KERN_TFP_READ_GROUP 	2
-#define KERN_TFP_RW_GROUP 		3
 
 /* KERN_TFP_POLICY values . All policies allow task port for self */
 #define KERN_TFP_POLICY_DENY 		0 	/* Deny Mode: None allowed except privileged */
-#define KERN_TFP_POLICY_PERMISSIVE 	1	/* Permissive Mode: related ones allowed or privileged */
-#define KERN_TFP_POLICY_RESTRICTED 	2	/* Restricted Mode: privileged or setgid and realted */
+#define KERN_TFP_POLICY_DEFAULT 	2	/* Default  Mode: related ones allowed and upcall authentication */
 
 /* KERN_KDEBUG types */
 #define KERN_KDEFLAGS		1
@@ -260,34 +311,9 @@ struct ctlname {
 #define KERN_KDSETRTCDEC        15
 #define KERN_KDGETENTROPY       16
 
-/* KERN_PCSAMPLES types */
-#define KERN_PCDISABLE		1
-#define KERN_PCSETBUF	        2
-#define KERN_PCGETBUF		3
-#define KERN_PCSETUP		4
-#define KERN_PCREMOVE		5
-#define KERN_PCREADBUF		6
-#define KERN_PCSETREG           7
-#define KERN_PCCOMM             8
-
 /* KERN_PANICINFO types */
 #define	KERN_PANICINFO_MAXSIZE	1	/* quad: panic UI image size limit */
 #define	KERN_PANICINFO_IMAGE	2	/* panic UI in 8-bit kraw format */
-
-/*
- * KERN_SYSV identifiers
- */
-#define KSYSV_SHMMAX		1	/* int: max shared memory segment size (bytes) */
-#define	KSYSV_SHMMIN		2	/* int: min shared memory segment size (bytes) */
-#define	KSYSV_SHMMNI		3	/* int: max number of shared memory identifiers */
-#define	KSYSV_SHMSEG		4	/* int: max shared memory segments per process */
-#define	KSYSV_SHMALL		5	/* int: max amount of shared memory (pages) */
-#define KSYSV_SEMMNI		6	/* int: max num of semaphore identifiers  */
-#define KSYSV_SEMMNS		7	/* int: max num of semaphores in system */
-#define KSYSV_SEMMNU		8	/* int: max num of undo structures in system  */
-#define KSYSV_SEMMSL		9	/* int: max num of semaphores per id  */
-#define KSYSV_SEMUNE		10	/* int: max num of undo entries per process */
-
 
 #define CTL_KERN_NAMES { \
 	{ 0, 0 }, \
@@ -329,7 +355,7 @@ struct ctlname {
 	{ "logsigexit", CTLTYPE_INT }, \
 	{ "symfile",CTLTYPE_STRING },\
 	{ "procargs",CTLTYPE_STRUCT },\
-	{ "pcsamples",CTLTYPE_STRUCT },\
+        { "dummy", CTLTYPE_INT },		/* deprecated pcsamples */ \
 	{ "netboot", CTLTYPE_INT }, \
 	{ "panicinfo", CTLTYPE_NODE }, \
 	{ "sysv", CTLTYPE_NODE }, \
@@ -353,7 +379,14 @@ struct ctlname {
 	{ "nx", CTLTYPE_INT }, \
 	{ "tfp", CTLTYPE_NODE }, \
 	{ "procname", CTLTYPE_STRING }, \
-	{ "threadsigaltstack", CTLTYPE_INT } \
+	{ "threadsigaltstack", CTLTYPE_INT }, \
+	{ "speculative_reads_disabled", CTLTYPE_INT }, \
+	{ "osversion", CTLTYPE_STRING }, \
+	{ "safeboot", CTLTYPE_INT }, \
+	{ "lctx", CTLTYPE_NODE }, \
+	{ "rage_vnode", CTLTYPE_INT }, \
+	{ "tty", CTLTYPE_NODE },	\
+	{ "check_openevt", CTLTYPE_INT } \
 }
 
 /*
@@ -373,6 +406,13 @@ struct ctlname {
 #define	KERN_PROC_TTY		4	/* by controlling tty */
 #define	KERN_PROC_UID		5	/* by effective uid */
 #define	KERN_PROC_RUID		6	/* by real uid */
+#define	KERN_PROC_LCID		7	/* by login context id */
+
+/*
+ * KERN_LCTX subtypes
+ */
+#define	KERN_LCTX_ALL		0	/* everything */
+#define	KERN_LCTX_LCID		1	/* by login context id */
 
 /* 
  * KERN_PROC subtype ops return arrays of augmented proc structures:
@@ -421,8 +461,18 @@ struct kinfo_proc {
 #define	EPROC_SLEADER	0x02	/* session leader */
 #define	COMAPT_MAXLOGNAME	12
 		char	e_login[COMAPT_MAXLOGNAME];	/* short setlogin() name */
+#if CONFIG_LCTX
+		pid_t	e_lcid;
+		int32_t	e_spare[3];
+#else
 		int32_t	e_spare[4];
+#endif
 	} kp_eproc;
+};
+
+struct kinfo_lctx {
+	pid_t	id;	/* Login Context ID */
+	int	mc;	/* Member Count */
 };
 
 
@@ -440,6 +490,7 @@ struct kinfo_proc {
 #define	KIPC_MAX_DATALEN	7	/* int: max length of data? */
 #define	KIPC_MBSTAT		8	/* struct: mbuf usage statistics */
 #define	KIPC_NMBCLUSTERS	9	/* int: maximum mbuf clusters */
+#define KIPC_SOQLIMITCOMPAT	10	/* int: socket queue limit */
 
 /*
  * CTL_VM identifiers
@@ -459,7 +510,7 @@ struct kinfo_proc {
 	{ "vmmeter", CTLTYPE_STRUCT }, \
 	{ "loadavg", CTLTYPE_STRUCT }, \
 	{ 0, 0 }, /* placeholder for "3" (see comment above) */ \
-	{ "machfactor", CTLTYPE_STRUCT }, \
+	{ "dummy", CTLTYPE_INT }, \
 	{ "swapusage", CTLTYPE_STRUCT } \
 }
 
@@ -481,7 +532,6 @@ struct loadavg {
 extern struct loadavg averunnable;
 #define LSCALE	1000		/* scaling for "fixed point" arithmetic */
 
-// LP64todo - should this move?
 #endif /* __APPLE_API_PRIVATE */
 
 
@@ -545,6 +595,8 @@ extern struct loadavg averunnable;
 }
 
 /*
+ * XXX This information should be moved to the man page.
+ *
  * These are the support HW selectors for sysctlbyname.  Parameters that are byte counts or frequencies are 64 bit numbers.
  * All other parameters are 32 bit numbers.
  *
@@ -596,6 +648,7 @@ extern struct loadavg averunnable;
  *   hw.l2cachesize            -
  *   hw.l3cachesize            -
  *
+ *   hw.packages               - Gives the number of processor packages.
  *
  * These are the selectors for optional processor features for specific processors.  Selectors that return errors are not support 
  * on the system.  Supported features will return 1 if they are recommended or 0 if they are supported but are not expected to help .
@@ -615,12 +668,13 @@ extern struct loadavg averunnable;
  *
  * For x86 Architecture:
  * 
- *   hw.optional.floatingpoint - Floating Point Instructions
- *   hw.optional.mmx           - Original MMX vector instructions
- *   hw.optional.sse           - Streaming SIMD Extensions
- *   hw.optional.sse2          - Streaming SIMD Extensions 2
- *   hw.optional.sse3          - Streaming SIMD Extensions 3
- *   hw.optional.x86_64        - 64-bit support
+ *   hw.optional.floatingpoint     - Floating Point Instructions
+ *   hw.optional.mmx               - Original MMX vector instructions
+ *   hw.optional.sse               - Streaming SIMD Extensions
+ *   hw.optional.sse2              - Streaming SIMD Extensions 2
+ *   hw.optional.sse3              - Streaming SIMD Extensions 3
+ *   hw.optional.supplementalsse3  - Supplemental Streaming SIMD Extensions 3
+ *   hw.optional.x86_64            - 64-bit support
  */
 
 
@@ -684,6 +738,12 @@ extern struct loadavg averunnable;
 #define	CTL_DEBUG_NAME		0	/* string: variable name */
 #define	CTL_DEBUG_VALUE		1	/* int: variable value */
 #define	CTL_DEBUG_MAXID		20
+
+
+#if (CTL_MAXID != 9) || (KERN_MAXID != 71) || (VM_MAXID != 6) || (HW_MAXID != 26) || (USER_MAXID != 21) || (CTL_DEBUG_MAXID != 20)
+#error Use the SYSCTL_*() macros and OID_AUTO instead!
+#endif
+
 
 
 __BEGIN_DECLS

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -41,34 +41,6 @@
 #define kIOStorageClass "IOStorage"
 
 /*!
- * @enum IOStorageAccess
- * @discussion
- * The IOStorageAccess enumeration describes the possible access levels for open
- * requests.
- * @constant kIOStorageAccessNone
- * No access is requested; should not be passed to open().
- * @constant kIOStorageAccessReader
- * Read-only access is requested.
- * @constant kIOStorageAccessReaderWriter
- * Read and write access is requested.
- * @constant kIOStorageAccessSharedLock
- * Shared access is requested.
- * @constant kIOStorageAccessExclusiveLock
- * Exclusive access is requested.
- */
-
-enum
-{
-    kIOStorageAccessNone          = 0x00,
-    kIOStorageAccessReader        = 0x01,
-    kIOStorageAccessReaderWriter  = 0x03,
-    kIOStorageAccessSharedLock    = 0x04,
-    kIOStorageAccessExclusiveLock = 0x08
-};
-
-typedef UInt32 IOStorageAccess;
-
-/*!
  * @defined kIOStorageCategory
  * @abstract
  * kIOStorageCategory is a value for IOService's kIOMatchCategoryKey property.
@@ -82,5 +54,31 @@ typedef UInt32 IOStorageAccess;
  */
 
 #define kIOStorageCategory "IOStorage"                /* (as IOMatchCategory) */
+
+/*!
+ * @defined kIOStorageFeaturesKey
+ * @abstract
+ * A property of any object in the storage stack.
+ * @discussion
+ * kIOStorageFeaturesKey is a property of any object in the storage stack that
+ * wishes to express support of additional features, such as Force Unit Access.
+ * It is typically defined in the device object below the block storage driver
+ * object.  It has an OSDictionary value, where each entry describes one given
+ * feature.
+ */
+
+#define kIOStorageFeaturesKey "IOStorageFeatures"
+
+/*!
+ * @defined kIOStorageFeatureForceUnitAccess
+ * @abstract
+ * Describes the presence of the Force Unit Access feature.
+ * @discussion
+ * This property describes the ability of the storage stack to force a request
+ * to access the media.  It is one of the feature entries listed under the top-
+ * level kIOStorageFeaturesKey property table.  It has an OSBoolean value.
+ */
+
+#define kIOStorageFeatureForceUnitAccess "Force Unit Access"
 
 #endif /* !_IOSTORAGE_H */

@@ -1,14 +1,14 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2005, Apple Computer, Inc.
+	Copyright (c) 2004-2007, Apple Inc.
 	All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDatePickerCell.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSCalendar, NSLocale, NSTimeZone;
 
@@ -44,7 +44,7 @@
 #pragma mark *** Date Presentation Control ***
 
 - (NSDatePickerElementFlags)datePickerElements;
-- (void)setDatePickerElements:(unsigned)elementFlags;
+- (void)setDatePickerElements:(NSDatePickerElementFlags)elementFlags;
 
 - (NSCalendar *)calendar;
 - (void)setCalendar:(NSCalendar *)newCalendar;

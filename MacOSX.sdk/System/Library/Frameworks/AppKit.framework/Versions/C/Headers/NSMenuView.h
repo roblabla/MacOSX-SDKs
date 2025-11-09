@@ -1,9 +1,12 @@
 /*
         NSMenuView.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
+
+/* old-style menus are not available on 64-bit */
+#if ! __LP64__
 
 #import <AppKit/NSView.h>
 #import <AppKit/AppKitDefines.h>
@@ -17,19 +20,19 @@
     @private
     NSMenu *_menu;
     NSMutableArray *_cells;
-    float _stateImageWidth;
-    float _imageAndTitleWidth;
-    float _keyEquivalentWidth;
-    float *_extents;
+    CGFloat _stateImageWidth;
+    CGFloat _imageAndTitleWidth;
+    CGFloat _keyEquivalentWidth;
+    CGFloat *_extents;
     unsigned _extentsCapacity;
     int _highlightedItemIndex;
     void *_submenuPopupTimer;
     NSMenuView *_attachedMenuView;
-    float _scrollArrowHeight;
-    float _maxWinHeight;
+    CGFloat _scrollArrowHeight;
+    CGFloat _maxWinHeight;
     NSFont *_font;
     NSSize _minSize;
-    float _horizontalEdgePad;
+    CGFloat _horizontalEdgePad;
     void *trackingState;
     id _scrollingView;
     struct __mvFlags {
@@ -49,7 +52,7 @@
     } _mvFlags;
 }
 
-+ (float)menuBarHeight;
++ (CGFloat)menuBarHeight;
 
 - (id)initWithFrame:(NSRect)frame;  // DI
 - (id)initAsTearOff;
@@ -70,22 +73,22 @@
 - (NSFont *)font;
 
 - (NSRect)innerRect; // inside the bezel (if any)
-- (NSRect)rectOfItemAtIndex:(int)index;
-- (int)indexOfItemAtPoint:(NSPoint)point;
-- (void)setNeedsDisplayForItemAtIndex:(int)index;
+- (NSRect)rectOfItemAtIndex:(NSInteger)index;
+- (NSInteger)indexOfItemAtPoint:(NSPoint)point;
+- (void)setNeedsDisplayForItemAtIndex:(NSInteger)index;
 
-- (void)setHighlightedItemIndex:(int)index;
-- (int)highlightedItemIndex;
+- (void)setHighlightedItemIndex:(NSInteger)index;
+- (NSInteger)highlightedItemIndex;
 
-- (float)stateImageOffset;
-- (float)stateImageWidth;
-- (float)imageAndTitleOffset;
-- (float)imageAndTitleWidth;
-- (float)keyEquivalentOffset;
-- (float)keyEquivalentWidth;
+- (CGFloat)stateImageOffset;
+- (CGFloat)stateImageWidth;
+- (CGFloat)imageAndTitleOffset;
+- (CGFloat)imageAndTitleWidth;
+- (CGFloat)keyEquivalentOffset;
+- (CGFloat)keyEquivalentWidth;
 
-- (void)setMenuItemCell:(NSMenuItemCell *)cell forItemAtIndex:(int)index;
-- (NSMenuItemCell *)menuItemCellForItemAtIndex:(int)index;
+- (void)setMenuItemCell:(NSMenuItemCell *)cell forItemAtIndex:(NSInteger)index;
+- (NSMenuItemCell *)menuItemCellForItemAtIndex:(NSInteger)index;
 
 - (NSMenuView *)attachedMenuView;
 
@@ -98,16 +101,18 @@
 - (BOOL)isTornOff;
 - (NSPoint)locationForSubmenu:(NSMenu *)aSubmenu;
 
-- (void)setWindowFrameForAttachingToRect:(NSRect)screenRect onScreen:(NSScreen *)screen preferredEdge:(NSRectEdge)edge popUpSelectedItem:(int)selectedItemIndex;
+- (void)setWindowFrameForAttachingToRect:(NSRect)screenRect onScreen:(NSScreen *)screen preferredEdge:(NSRectEdge)edge popUpSelectedItem:(NSInteger)selectedItemIndex;
 - (void)detachSubmenu;
-- (void)attachSubmenuForItemAtIndex:(int)index;
+- (void)attachSubmenuForItemAtIndex:(NSInteger)index;
 
-- (void)performActionWithHighlightingForItemAtIndex:(int)index;
+- (void)performActionWithHighlightingForItemAtIndex:(NSInteger)index;
 
 - (BOOL)trackWithEvent:(NSEvent *)event;
 
-- (float)horizontalEdgePadding;
-- (void)setHorizontalEdgePadding:(float)pad;
+- (CGFloat)horizontalEdgePadding;
+- (void)setHorizontalEdgePadding:(CGFloat)pad;
     // How much empty pad should be left on either edge of the item.
 
 @end
+
+#endif

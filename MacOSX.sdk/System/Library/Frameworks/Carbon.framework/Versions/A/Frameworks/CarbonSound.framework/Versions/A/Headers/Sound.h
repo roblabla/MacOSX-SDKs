@@ -3,7 +3,7 @@
  
      Contains:   Sound Manager Interfaces.
  
-     Version:    CarbonSound-103.1~889
+     Version:    CarbonSound-106.5~87
  
      Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,8 +36,9 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+#if !__LP64__
 /*
                         * * *  N O T E  * * *
 
@@ -686,7 +687,7 @@ struct SndChannel {
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SndCallBackUPP
-NewSndCallBackUPP(SndCallBackProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSndCallBackUPP(SndCallBackProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSndCallBackUPP()
@@ -697,7 +698,7 @@ NewSndCallBackUPP(SndCallBackProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSndCallBackUPP(SndCallBackUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSndCallBackUPP(SndCallBackUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSndCallBackUPP()
@@ -711,7 +712,19 @@ extern void
 InvokeSndCallBackUPP(
   SndChannelPtr   chan,
   SndCommand *    cmd,
-  SndCallBackUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SndCallBackUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SndCallBackUPP                                       NewSndCallBackUPP(SndCallBackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSndCallBackUPP(SndCallBackUPP) { }
+    inline void                                                 InvokeSndCallBackUPP(SndChannelPtr chan, SndCommand * cmd, SndCallBackUPP userUPP) { (*userUPP)(chan, cmd); }
+  #else
+    #define NewSndCallBackUPP(userRoutine)                      ((SndCallBackUPP)userRoutine)
+    #define DisposeSndCallBackUPP(userUPP)
+    #define InvokeSndCallBackUPP(chan, cmd, userUPP)            (*userUPP)(chan, cmd)
+  #endif
+#endif
 
 /*MACE structures*/
 struct StateBlock {
@@ -1151,7 +1164,7 @@ struct SPB {
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SoundParamUPP
-NewSoundParamUPP(SoundParamProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSoundParamUPP(SoundParamProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewSoundConverterFillBufferDataUPP()
@@ -1162,7 +1175,7 @@ NewSoundParamUPP(SoundParamProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SoundConverterFillBufferDataUPP
-NewSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewSIInterruptUPP()
@@ -1173,7 +1186,7 @@ NewSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataProcPtr userRouti
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SIInterruptUPP
-NewSIInterruptUPP(SIInterruptProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSIInterruptUPP(SIInterruptProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewSICompletionUPP()
@@ -1184,7 +1197,7 @@ NewSIInterruptUPP(SIInterruptProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SICompletionUPP
-NewSICompletionUPP(SICompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSICompletionUPP(SICompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSoundParamUPP()
@@ -1195,7 +1208,7 @@ NewSICompletionUPP(SICompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSoundParamUPP(SoundParamUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSoundParamUPP(SoundParamUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSoundConverterFillBufferDataUPP()
@@ -1206,7 +1219,7 @@ DisposeSoundParamUPP(SoundParamUPP userUPP)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSIInterruptUPP()
@@ -1217,7 +1230,7 @@ DisposeSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataUPP userUPP) 
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSIInterruptUPP(SIInterruptUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSIInterruptUPP(SIInterruptUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSICompletionUPP()
@@ -1228,7 +1241,7 @@ DisposeSIInterruptUPP(SIInterruptUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSICompletionUPP(SICompletionUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSICompletionUPP(SICompletionUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSoundParamUPP()
@@ -1241,7 +1254,7 @@ DisposeSICompletionUPP(SICompletionUPP userUPP)               AVAILABLE_MAC_OS_X
 extern Boolean
 InvokeSoundParamUPP(
   SoundParamBlockPtr *  pb,
-  SoundParamUPP         userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundParamUPP         userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSoundConverterFillBufferDataUPP()
@@ -1255,7 +1268,7 @@ extern Boolean
 InvokeSoundConverterFillBufferDataUPP(
   SoundComponentDataPtr *          data,
   void *                           refCon,
-  SoundConverterFillBufferDataUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundConverterFillBufferDataUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSIInterruptUPP()
@@ -1271,7 +1284,7 @@ InvokeSIInterruptUPP(
   Ptr             dataBuffer,
   short           peakAmplitude,
   long            sampleSize,
-  SIInterruptUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SIInterruptUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSICompletionUPP()
@@ -1284,7 +1297,37 @@ InvokeSIInterruptUPP(
 extern void
 InvokeSICompletionUPP(
   SPBPtr           inParamPtr,
-  SICompletionUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SICompletionUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SoundParamUPP                                        NewSoundParamUPP(SoundParamProcPtr userRoutine) { return userRoutine; }
+    inline SoundConverterFillBufferDataUPP                      NewSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataProcPtr userRoutine) { return userRoutine; }
+    inline SIInterruptUPP                                       NewSIInterruptUPP(SIInterruptProcPtr userRoutine) { return userRoutine; }
+    inline SICompletionUPP                                      NewSICompletionUPP(SICompletionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSoundParamUPP(SoundParamUPP) { }
+    inline void                                                 DisposeSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataUPP) { }
+    inline void                                                 DisposeSIInterruptUPP(SIInterruptUPP) { }
+    inline void                                                 DisposeSICompletionUPP(SICompletionUPP) { }
+    inline Boolean                                              InvokeSoundParamUPP(SoundParamBlockPtr * pb, SoundParamUPP userUPP) { return (*userUPP)(pb); }
+    inline Boolean                                              InvokeSoundConverterFillBufferDataUPP(SoundComponentDataPtr * data, void * refCon, SoundConverterFillBufferDataUPP userUPP) { return (*userUPP)(data, refCon); }
+    inline void                                                 InvokeSIInterruptUPP(SPBPtr inParamPtr, Ptr dataBuffer, short peakAmplitude, long sampleSize, SIInterruptUPP userUPP) { (*userUPP)(inParamPtr, dataBuffer, peakAmplitude, sampleSize); }
+    inline void                                                 InvokeSICompletionUPP(SPBPtr inParamPtr, SICompletionUPP userUPP) { (*userUPP)(inParamPtr); }
+  #else
+    #define NewSoundParamUPP(userRoutine)                       ((SoundParamUPP)userRoutine)
+    #define NewSoundConverterFillBufferDataUPP(userRoutine)     ((SoundConverterFillBufferDataUPP)userRoutine)
+    #define NewSIInterruptUPP(userRoutine)                      ((SIInterruptUPP)userRoutine)
+    #define NewSICompletionUPP(userRoutine)                     ((SICompletionUPP)userRoutine)
+    #define DisposeSoundParamUPP(userUPP)
+    #define DisposeSoundConverterFillBufferDataUPP(userUPP)
+    #define DisposeSIInterruptUPP(userUPP)
+    #define DisposeSICompletionUPP(userUPP)
+    #define InvokeSoundParamUPP(pb, userUPP)                    (*userUPP)(pb)
+    #define InvokeSoundConverterFillBufferDataUPP(data, refCon, userUPP) (*userUPP)(data, refCon)
+    #define InvokeSIInterruptUPP(inParamPtr, dataBuffer, peakAmplitude, sampleSize, userUPP) (*userUPP)(inParamPtr, dataBuffer, peakAmplitude, sampleSize)
+    #define InvokeSICompletionUPP(inParamPtr, userUPP)          (*userUPP)(inParamPtr)
+  #endif
+#endif
 
 typedef CALLBACK_API( void , FilePlayCompletionProcPtr )(SndChannelPtr chan);
 typedef STACK_UPP_TYPE(FilePlayCompletionProcPtr)               FilePlayCompletionUPP;
@@ -1323,23 +1366,28 @@ typedef STACK_UPP_TYPE(FilePlayCompletionProcPtr)               FilePlayCompleti
 
 
 /* Sound Manager routines */
+#if !__LP64__
 /*
- *  SysBeep()
+ *  SysBeep()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesPlayAlertSound(). Found in
+ *    AudioToolbox/AudioServices.h
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysBeep(short duration)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SysBeep(short duration)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndDoCommand()
+ *  SndDoCommand()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1347,28 +1395,28 @@ extern OSErr
 SndDoCommand(
   SndChannelPtr       chan,
   const SndCommand *  cmd,
-  Boolean             noWait)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             noWait)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndDoImmediate()
+ *  SndDoImmediate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SndDoImmediate(
   SndChannelPtr       chan,
-  const SndCommand *  cmd)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const SndCommand *  cmd)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndNewChannel()
+ *  SndNewChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1377,28 +1425,28 @@ SndNewChannel(
   SndChannelPtr *  chan,
   short            synth,
   long             init,
-  SndCallBackUPP   userRoutine)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SndCallBackUPP   userRoutine)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndDisposeChannel()
+ *  SndDisposeChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SndDisposeChannel(
   SndChannelPtr   chan,
-  Boolean         quietNow)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean         quietNow)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndPlay()
+ *  SndPlay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1406,8 +1454,10 @@ extern OSErr
 SndPlay(
   SndChannelPtr   chan,
   SndListHandle   sndHandle,
-  Boolean         async)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean         async)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 #if OLDROUTINENAMES
 /*
@@ -1433,17 +1483,20 @@ SndPlay(
 
 
 /* Sound Manager 2.0 and later, uses _SoundDispatch */
+#if !__LP64__
 /*
- *  SndSoundManagerVersion()
+ *  SndSoundManagerVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern NumVersion 
-SndSoundManagerVersion(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndSoundManagerVersion(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  SndStartFilePlay()
@@ -1475,11 +1528,12 @@ SndSoundManagerVersion(void)                                  AVAILABLE_MAC_OS_X
  */
 
 
+#if !__LP64__
 /*
- *  SndChannelStatus()
+ *  SndChannelStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1487,46 +1541,56 @@ extern OSErr
 SndChannelStatus(
   SndChannelPtr   chan,
   short           theLength,
-  SCStatusPtr     theStatus)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SCStatusPtr     theStatus)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndManagerStatus()
+ *  SndManagerStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SndManagerStatus(
   short         theLength,
-  SMStatusPtr   theStatus)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SMStatusPtr   theStatus)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndGetSysBeepState()
+ *  SndGetSysBeepState()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    SysBeep related APIs have been replaced by AudioServices. Found
+ *    in AudioToolbox/AudioServices.h
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SndGetSysBeepState(short * sysBeepState)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndGetSysBeepState(short * sysBeepState)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndSetSysBeepState()
+ *  SndSetSysBeepState()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    SysBeep related APIs have been replaced by AudioServices. Found
+ *    in AudioToolbox/AudioServices.h
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SndSetSysBeepState(short sysBeepState)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndSetSysBeepState(short sysBeepState)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  SndPlayDoubleBuffer()
@@ -1590,67 +1654,70 @@ SndSetSysBeepState(short sysBeepState)                        AVAILABLE_MAC_OS_X
 
 
 /* Sound Manager 3.0 and later calls, uses _SoundDispatch */
+#if !__LP64__
 /*
- *  GetSysBeepVolume()
+ *  GetSysBeepVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-GetSysBeepVolume(long * level)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSysBeepVolume(long * level)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetSysBeepVolume()
+ *  SetSysBeepVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetSysBeepVolume(long level)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetSysBeepVolume(long level)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetDefaultOutputVolume()
+ *  GetDefaultOutputVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-GetDefaultOutputVolume(long * level)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetDefaultOutputVolume(long * level)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetDefaultOutputVolume()
+ *  SetDefaultOutputVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetDefaultOutputVolume(long level)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetDefaultOutputVolume(long level)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetSoundHeaderOffset()
+ *  GetSoundHeaderOffset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 GetSoundHeaderOffset(
   SndListHandle   sndHandle,
-  long *          offset)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *          offset)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  UnsignedFixedMulDiv()
@@ -1667,11 +1734,12 @@ UnsignedFixedMulDiv(
   UnsignedFixed   divisor);
 
 
+#if !__LP64__
 /*
- *  GetCompressionInfo()
+ *  GetCompressionInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -1681,14 +1749,14 @@ GetCompressionInfo(
   OSType               format,
   short                numChannels,
   short                sampleSize,
-  CompressionInfoPtr   cp)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CompressionInfoPtr   cp)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetSoundPreference()
+ *  SetSoundPreference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -1696,14 +1764,14 @@ extern OSErr
 SetSoundPreference(
   OSType   theType,
   Str255   name,
-  Handle   settings)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle   settings)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetSoundPreference()
+ *  GetSoundPreference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -1711,14 +1779,14 @@ extern OSErr
 GetSoundPreference(
   OSType   theType,
   Str255   name,
-  Handle   settings)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle   settings)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  OpenMixerSoundComponent()
+ *  OpenMixerSoundComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -1726,27 +1794,27 @@ extern OSErr
 OpenMixerSoundComponent(
   SoundComponentDataPtr   outputDescription,
   long                    outputFlags,
-  ComponentInstance *     mixerComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *     mixerComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  CloseMixerSoundComponent()
+ *  CloseMixerSoundComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
 extern OSErr 
-CloseMixerSoundComponent(ComponentInstance ci)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseMixerSoundComponent(ComponentInstance ci)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Sound Manager 3.1 and later calls, uses _SoundDispatch */
 /*
- *  SndGetInfo()
+ *  SndGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.1 and later
  */
@@ -1754,14 +1822,14 @@ extern OSErr
 SndGetInfo(
   SndChannelPtr   chan,
   OSType          selector,
-  void *          infoPtr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *          infoPtr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndSetInfo()
+ *  SndSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.1 and later
  */
@@ -1769,14 +1837,14 @@ extern OSErr
 SndSetInfo(
   SndChannelPtr   chan,
   OSType          selector,
-  const void *    infoPtr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *    infoPtr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetSoundOutputInfo()
+ *  GetSoundOutputInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.1 and later
  */
@@ -1784,14 +1852,14 @@ extern OSErr
 GetSoundOutputInfo(
   Component   outputDevice,
   OSType      selector,
-  void *      infoPtr)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *      infoPtr)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetSoundOutputInfo()
+ *  SetSoundOutputInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.1 and later
  */
@@ -1799,29 +1867,29 @@ extern OSErr
 SetSoundOutputInfo(
   Component     outputDevice,
   OSType        selector,
-  const void *  infoPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *  infoPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Sound Manager 3.2 and later calls, uses _SoundDispatch */
 /*
- *  GetCompressionName()
+ *  GetCompressionName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
 extern OSErr 
 GetCompressionName(
   OSType   compressionType,
-  Str255   compressionName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255   compressionName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterOpen()
+ *  SoundConverterOpen()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
@@ -1829,26 +1897,26 @@ extern OSErr
 SoundConverterOpen(
   const SoundComponentData *  inputFormat,
   const SoundComponentData *  outputFormat,
-  SoundConverter *            sc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundConverter *            sc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterClose()
+ *  SoundConverterClose()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
 extern OSErr 
-SoundConverterClose(SoundConverter sc)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SoundConverterClose(SoundConverter sc)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterGetBufferSizes()
+ *  SoundConverterGetBufferSizes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
@@ -1858,26 +1926,26 @@ SoundConverterGetBufferSizes(
   unsigned long    inputBytesTarget,
   unsigned long *  inputFrames,
   unsigned long *  inputBytes,
-  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterBeginConversion()
+ *  SoundConverterBeginConversion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
 extern OSErr 
-SoundConverterBeginConversion(SoundConverter sc)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SoundConverterBeginConversion(SoundConverter sc)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterConvertBuffer()
+ *  SoundConverterConvertBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
@@ -1888,14 +1956,14 @@ SoundConverterConvertBuffer(
   unsigned long    inputFrames,
   void *           outputPtr,
   unsigned long *  outputFrames,
-  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterEndConversion()
+ *  SoundConverterEndConversion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.2 and later
  */
@@ -1904,15 +1972,15 @@ SoundConverterEndConversion(
   SoundConverter   sc,
   void *           outputPtr,
   unsigned long *  outputFrames,
-  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  outputBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Sound Manager 3.3 and later calls, uses _SoundDispatch */
 /*
- *  SoundConverterGetInfo()
+ *  SoundConverterGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.3 and later
  */
@@ -1920,14 +1988,14 @@ extern OSErr
 SoundConverterGetInfo(
   SoundConverter   sc,
   OSType           selector,
-  void *           infoPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *           infoPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundConverterSetInfo()
+ *  SoundConverterSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.3 and later
  */
@@ -1935,15 +2003,15 @@ extern OSErr
 SoundConverterSetInfo(
   SoundConverter   sc,
   OSType           selector,
-  void *           infoPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *           infoPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Sound Manager 3.6 and later calls, uses _SoundDispatch */
 /*
- *  SoundConverterFillBuffer()
+ *  SoundConverterFillBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in SoundLib 3.6 and later
  */
@@ -1956,35 +2024,35 @@ SoundConverterFillBuffer(
   unsigned long                     outputBufferByteSize,
   unsigned long *                   bytesWritten,
   unsigned long *                   framesWritten,
-  unsigned long *                   outputFlags)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *                   outputFlags)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundManagerGetInfo()
+ *  SoundManagerGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in SoundLib 3.6 and later
  */
 extern OSErr 
 SoundManagerGetInfo(
   OSType   selector,
-  void *   infoPtr)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *   infoPtr)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundManagerSetInfo()
+ *  SoundManagerSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in SoundLib 3.6 and later
  */
 extern OSErr 
 SoundManagerSetInfo(
   OSType        selector,
-  const void *  infoPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *  infoPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -1993,24 +2061,24 @@ SoundManagerSetInfo(
 */
 
 /*
- *  SoundComponentInitOutputDevice()
+ *  SoundComponentInitOutputDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
 extern ComponentResult 
 SoundComponentInitOutputDevice(
   ComponentInstance   ti,
-  long                actions)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                actions)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentSetSource()
+ *  SoundComponentSetSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2018,14 +2086,14 @@ extern ComponentResult
 SoundComponentSetSource(
   ComponentInstance   ti,
   SoundSource         sourceID,
-  ComponentInstance   source)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   source)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentGetSource()
+ *  SoundComponentGetSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2033,28 +2101,28 @@ extern ComponentResult
 SoundComponentGetSource(
   ComponentInstance    ti,
   SoundSource          sourceID,
-  ComponentInstance *  source)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  source)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentGetSourceData()
+ *  SoundComponentGetSourceData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
 extern ComponentResult 
 SoundComponentGetSourceData(
   ComponentInstance        ti,
-  SoundComponentDataPtr *  sourceData)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundComponentDataPtr *  sourceData)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentSetOutput()
+ *  SoundComponentSetOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2062,44 +2130,44 @@ extern ComponentResult
 SoundComponentSetOutput(
   ComponentInstance        ti,
   SoundComponentDataPtr    requested,
-  SoundComponentDataPtr *  actual)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundComponentDataPtr *  actual)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* junction methods for the mixer, must be called at non-interrupt level*/
 /*
- *  SoundComponentAddSource()
+ *  SoundComponentAddSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
 extern ComponentResult 
 SoundComponentAddSource(
   ComponentInstance   ti,
-  SoundSource *       sourceID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundSource *       sourceID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentRemoveSource()
+ *  SoundComponentRemoveSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
 extern ComponentResult 
 SoundComponentRemoveSource(
   ComponentInstance   ti,
-  SoundSource         sourceID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundSource         sourceID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* info methods*/
 /*
- *  SoundComponentGetInfo()
+ *  SoundComponentGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2108,14 +2176,14 @@ SoundComponentGetInfo(
   ComponentInstance   ti,
   SoundSource         sourceID,
   OSType              selector,
-  void *              infoPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              infoPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentSetInfo()
+ *  SoundComponentSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2124,15 +2192,15 @@ SoundComponentSetInfo(
   ComponentInstance   ti,
   SoundSource         sourceID,
   OSType              selector,
-  void *              infoPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              infoPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* control methods*/
 /*
- *  SoundComponentStartSource()
+ *  SoundComponentStartSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2140,14 +2208,14 @@ extern ComponentResult
 SoundComponentStartSource(
   ComponentInstance   ti,
   short               count,
-  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentStopSource()
+ *  SoundComponentStopSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2155,14 +2223,14 @@ extern ComponentResult
 SoundComponentStopSource(
   ComponentInstance   ti,
   short               count,
-  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentPauseSource()
+ *  SoundComponentPauseSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2170,14 +2238,14 @@ extern ComponentResult
 SoundComponentPauseSource(
   ComponentInstance   ti,
   short               count,
-  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SoundSource *       sources)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SoundComponentPlaySourceBuffer()
+ *  SoundComponentPlaySourceBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2186,8 +2254,10 @@ SoundComponentPlaySourceBuffer(
   ComponentInstance    ti,
   SoundSource          sourceID,
   SoundParamBlockPtr   pb,
-  long                 actions)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 actions)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 
 /* selectors for component calls */
@@ -2347,23 +2417,24 @@ enum {
 
 
 /* Sound Input Manager routines, uses _SoundDispatch */
+#if !__LP64__
 /*
- *  SPBVersion()
+ *  SPBVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern NumVersion 
-SPBVersion(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBVersion(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndRecord()
+ *  SndRecord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2372,8 +2443,10 @@ SndRecord(
   ModalFilterUPP   filterProc,
   Point            corner,
   OSType           quality,
-  SndListHandle *  sndHandle)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SndListHandle *  sndHandle)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  SndRecordToFile()
@@ -2385,37 +2458,38 @@ SndRecord(
  */
 
 
+#if !__LP64__
 /*
- *  SPBSignInDevice()
+ *  SPBSignInDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SPBSignInDevice(
   short              deviceRefNum,
-  ConstStr255Param   deviceName)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   deviceName)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBSignOutDevice()
+ *  SPBSignOutDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SPBSignOutDevice(short deviceRefNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBSignOutDevice(short deviceRefNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBGetIndexedDevice()
+ *  SPBGetIndexedDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2423,14 +2497,14 @@ extern OSErr
 SPBGetIndexedDevice(
   short     count,
   Str255    deviceName,
-  Handle *  deviceIconHandle)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *  deviceIconHandle)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBOpenDevice()
+ *  SPBOpenDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2438,34 +2512,36 @@ extern OSErr
 SPBOpenDevice(
   ConstStr255Param   deviceName,
   short              permission,
-  long *             inRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             inRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBCloseDevice()
+ *  SPBCloseDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SPBCloseDevice(long inRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBCloseDevice(long inRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBRecord()
+ *  SPBRecord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SPBRecord(
   SPBPtr    inParamPtr,
-  Boolean   asynchFlag)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   asynchFlag)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  SPBRecordToFile()
@@ -2477,47 +2553,48 @@ SPBRecord(
  */
 
 
+#if !__LP64__
 /*
- *  SPBPauseRecording()
+ *  SPBPauseRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SPBPauseRecording(long inRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBPauseRecording(long inRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBResumeRecording()
+ *  SPBResumeRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SPBResumeRecording(long inRefNum)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBResumeRecording(long inRefNum)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBStopRecording()
+ *  SPBStopRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SPBStopRecording(long inRefNum)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SPBStopRecording(long inRefNum)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBGetRecordingStatus()
+ *  SPBGetRecordingStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2529,14 +2606,14 @@ SPBGetRecordingStatus(
   unsigned long *  totalSamplesToRecord,
   unsigned long *  numberOfSamplesRecorded,
   unsigned long *  totalMsecsToRecord,
-  unsigned long *  numberOfMsecsRecorded)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  numberOfMsecsRecorded)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBGetDeviceInfo()
+ *  SPBGetDeviceInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2544,14 +2621,14 @@ extern OSErr
 SPBGetDeviceInfo(
   long     inRefNum,
   OSType   infoType,
-  void *   infoData)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *   infoData)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBSetDeviceInfo()
+ *  SPBSetDeviceInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2559,42 +2636,42 @@ extern OSErr
 SPBSetDeviceInfo(
   long     inRefNum,
   OSType   infoType,
-  void *   infoData)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *   infoData)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBMillisecondsToBytes()
+ *  SPBMillisecondsToBytes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SPBMillisecondsToBytes(
   long    inRefNum,
-  long *  milliseconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *  milliseconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SPBBytesToMilliseconds()
+ *  SPBBytesToMilliseconds()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SPBBytesToMilliseconds(
   long    inRefNum,
-  long *  byteCount)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *  byteCount)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetupSndHeader()
+ *  SetupSndHeader()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2607,14 +2684,14 @@ SetupSndHeader(
   OSType          compressionType,
   short           baseNote,
   unsigned long   numBytes,
-  short *         headerLen)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *         headerLen)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetupAIFFHeader()
+ *  SetupAIFFHeader()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -2626,15 +2703,15 @@ SetupAIFFHeader(
   short           sampleSize,
   OSType          compressionType,
   unsigned long   numBytes,
-  unsigned long   numFrames)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   numFrames)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Sound Input Manager 1.1 and later calls, uses _SoundDispatch */
 /*
- *  ParseAIFFHeader()
+ *  ParseAIFFHeader()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2643,14 +2720,14 @@ ParseAIFFHeader(
   short                 fRefNum,
   SoundComponentData *  sndInfo,
   unsigned long *       numFrames,
-  unsigned long *       dataOffset)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *       dataOffset)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  ParseSndHeader()
+ *  ParseSndHeader()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SoundLib 3.0 and later
  */
@@ -2659,12 +2736,14 @@ ParseSndHeader(
   SndListHandle         sndHandle,
   SoundComponentData *  sndInfo,
   unsigned long *       numFrames,
-  unsigned long *       dataOffset)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *       dataOffset)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 
 
+
+#endif  /* !__LP64__ */
 
 #if TARGET_API_MAC_CARBON
 /*  Only to be used if you are writing a sound input component; this */
@@ -2686,75 +2765,76 @@ struct SndInputCmpParam {
   Ptr                 ioMisc;
 };
 
+#if !__LP64__
 /*
- *  SndInputReadAsync()
+ *  SndInputReadAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
 SndInputReadAsync(
   ComponentInstance     self,
-  SndInputCmpParamPtr   SICParmPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SndInputCmpParamPtr   SICParmPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputReadSync()
+ *  SndInputReadSync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
 SndInputReadSync(
   ComponentInstance     self,
-  SndInputCmpParamPtr   SICParmPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SndInputCmpParamPtr   SICParmPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputPauseRecording()
+ *  SndInputPauseRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SndInputPauseRecording(ComponentInstance self)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndInputPauseRecording(ComponentInstance self)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputResumeRecording()
+ *  SndInputResumeRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SndInputResumeRecording(ComponentInstance self)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndInputResumeRecording(ComponentInstance self)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputStopRecording()
+ *  SndInputStopRecording()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SndInputStopRecording(ComponentInstance self)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndInputStopRecording(ComponentInstance self)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputGetStatus()
+ *  SndInputGetStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2763,14 +2843,14 @@ SndInputGetStatus(
   ComponentInstance   self,
   short *             recordingStatus,
   unsigned long *     totalSamplesToRecord,
-  unsigned long *     numberOfSamplesRecorded)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *     numberOfSamplesRecorded)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputGetDeviceInfo()
+ *  SndInputGetDeviceInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2778,14 +2858,14 @@ extern ComponentResult
 SndInputGetDeviceInfo(
   ComponentInstance   self,
   OSType              infoType,
-  void *              infoData)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              infoData)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputSetDeviceInfo()
+ *  SndInputSetDeviceInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2793,20 +2873,22 @@ extern ComponentResult
 SndInputSetDeviceInfo(
   ComponentInstance   self,
   OSType              infoType,
-  void *              infoData)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              infoData)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SndInputInitHardware()
+ *  SndInputInitHardware()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SndInputInitHardware(ComponentInstance self)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SndInputInitHardware(ComponentInstance self)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 
 /* selectors for component calls */
@@ -2823,9 +2905,10 @@ enum {
 };
 #endif  /* TARGET_API_MAC_CARBON */
 
+#endif  /* !__LP64__ */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*	CFCharacterSet.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -34,9 +34,7 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFData.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*!
 	@typedef CFCharacterSetRef
@@ -54,7 +52,8 @@ typedef struct __CFCharacterSet * CFMutableCharacterSetRef;
 	@typedef CFCharacterSetPredefinedSet
         Type of the predefined CFCharacterSet selector values.
 */
-typedef enum {
+   
+enum {
     kCFCharacterSetControl = 1, /* Control character set (Unicode General Category Cc and Cf) */
     kCFCharacterSetWhitespace, /* Whitespace character set (Unicode General Category Zs and U0009 CHARACTER TABULATION) */
     kCFCharacterSetWhitespaceAndNewline,  /* Whitespace and Newline character set (Unicode General Category Z*, U000A ~ U000D, and U0085) */
@@ -66,14 +65,18 @@ typedef enum {
     kCFCharacterSetDecomposable, /* Canonically decomposable character set */
     kCFCharacterSetAlphaNumeric, /* Alpha Numeric character set (Unicode General Category L*, M*, & N*) */
     kCFCharacterSetPunctuation, /* Punctuation character set (Unicode General Category P*) */
-    kCFCharacterSetIllegal /* Illegal character set */
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-    , kCFCharacterSetCapitalizedLetter /* Titlecase character set (Unicode General Category Lt) */
+    kCFCharacterSetCapitalizedLetter = 13, /* Titlecase character set (Unicode General Category Lt) */
 #endif
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-    , kCFCharacterSetSymbol /* Symbol character set (Unicode General Category S*) */
+    kCFCharacterSetSymbol = 14, /* Symbol character set (Unicode General Category S*) */
 #endif
-} CFCharacterSetPredefinedSet;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    kCFCharacterSetNewline = 15, /* Newline character set (U000A ~ U000D, U0085, U2028, and U2029) */
+#endif
+    kCFCharacterSetIllegal = 12/* Illegal character set */
+};
+typedef CFIndex CFCharacterSetPredefinedSet;
 
 /*!
 	@function CFCharacterSetGetTypeID
@@ -143,13 +146,13 @@ CFCharacterSetRef CFCharacterSetCreateWithCharactersInString(CFAllocatorRef allo
                 bitmap representation of the Unicode character points
                 the character set is filled with.  The bitmap
                 representation could contain all the Unicode character
-                range starting from BMP to Plane 16.  The first 8K bytes
-                of the data represents the BMP range.  The BMP range 8K
-                bytes can be followed by zero to sixteen 8K byte
+                range starting from BMP to Plane 16.  The first 8192 bytes
+                of the data represent the BMP range.  The BMP range 8192
+                bytes can be followed by zero to sixteen 8192 byte
                 bitmaps, each one with the plane index byte prepended.
                 For example, the bitmap representing the BMP and Plane 2
-                has the size of 16385 bytes (8K bytes for BMP, 1 byte
-                index + 8K bytes bitmap for Plane 2).  The plane index
+                has the size of 16385 bytes (8192 bytes for BMP, 1 byte
+                index + 8192 bytes bitmap for Plane 2).  The plane index
                 byte, in this case, contains the integer value two.  If
                 this parameter is not a valid CFData or it contains a
                 Plane index byte outside of the valid Plane range
@@ -226,7 +229,7 @@ CFMutableCharacterSetRef CFCharacterSetCreateMutable(CFAllocatorRef alloc);
 */
 CF_EXPORT
 CFCharacterSetRef CFCharacterSetCreateCopy(CFAllocatorRef alloc, CFCharacterSetRef theSet) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-#endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+#endif
 
 /*!
 	@function CFCharacterSetCreateMutableCopy
@@ -384,9 +387,7 @@ void CFCharacterSetIntersect(CFMutableCharacterSetRef theSet, CFCharacterSetRef 
 CF_EXPORT
 void CFCharacterSetInvert(CFMutableCharacterSetRef theSet);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
-#endif /* !__COREFOUNDATION_CFCHARACTERSET__ */
+#endif /* ! __COREFOUNDATION_CFCHARACTERSET__ */
 

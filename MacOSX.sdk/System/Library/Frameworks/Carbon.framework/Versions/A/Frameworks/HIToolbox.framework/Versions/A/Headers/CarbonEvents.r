@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
-     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -53,6 +53,7 @@
 #define kHICommandNew 					'new '
 #define kHICommandOpen 					'open'
 #define kHICommandClose 				'clos'
+#define kHICommandCloseFile 			'clof'
 #define kHICommandSave 					'save'
 #define kHICommandSaveAs 				'svas'
 #define kHICommandRevert 				'rvrt'

@@ -92,8 +92,11 @@ typedef MIDIDriverInterface **			MIDIDriverRef;
 					not owned by the list (i.e., disposing the list does not dispose
 					the devices it references).
 */
+#if __LP64__
+typedef MIDIObjectRef MIDIDeviceListRef;
+#else
 typedef struct OpaqueMIDIDeviceList*    MIDIDeviceListRef;
-
+#endif
 
 /*!
 	@interface		MIDIDriverInterface

@@ -3,9 +3,9 @@
  
      Contains:   Scaler streaming data structures and constants for OFA 1.x
  
-     Version:    ATS-184.7.7~42
+     Version:    ATS-236~129
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,7 +32,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* ScalerStream input/output types */
 enum {
@@ -55,7 +55,7 @@ enum {
 };
 
 /* Possible streamed font formats */
-typedef unsigned long                   scalerStreamTypeFlag;
+typedef UInt32                          scalerStreamTypeFlag;
 enum {
   downloadStreamAction          = 0,    /* Transmit the (possibly sparse) font data */
   asciiDownloadStreamAction     = 1,    /* Transmit font data to a 7-bit ASCII destination */
@@ -67,14 +67,14 @@ enum {
   variationPSOperatorStreamAction = 7   /* Transmit Postscript code necessary to effect variation of a font */
 };
 
-typedef long                            scalerStreamAction;
+typedef SInt32                          scalerStreamAction;
 enum {
   selectAllVariations           = -1    /* Special variationCount value meaning include all variation data */
 };
 
 struct scalerPrerequisiteItem {
-  long                enumeration;            /* Shorthand tag identifying the item */
-  long                size;                   /* Worst case vm in printer item requires */
+  SInt32              enumeration;            /* Shorthand tag identifying the item */
+  SInt32              size;                   /* Worst case vm in printer item requires. Never > than 16-bit quantity */
   unsigned char       name[1];                /* Name to be used by the client when emitting the item (Pascal string) */
 };
 typedef struct scalerPrerequisiteItem   scalerPrerequisiteItem;
@@ -83,37 +83,37 @@ struct scalerStream {
   const char *        targetVersion;          /* <- e.g. Postscript printer name (C string) */
   scalerStreamTypeFlag  types;                /* <->    Data stream formats desired/supplied */
   scalerStreamAction  action;                 /* <-     What action to take */
-  unsigned long       memorySize;             /* -> Worst case memory use (vm) in printer or as sfnt */
-  long                variationCount;         /* <- The number of variations, or selectAllVariations */
+  UInt32              memorySize;             /* -> Worst case memory use (vm) in printer or as sfnt */
+  SInt32              variationCount;         /* <- The number of variations, or selectAllVariations */
   const void *        variations;             /* <- A pointer to an array of the variations (gxFontVariation) */
   union {
                                               /* Normal font streaming information*/
     struct {
       const unsigned short * encoding;        /* <- Intention is * unsigned short[256] */
-      long *              glyphBits;          /* <->    Bitvector: a bit for each glyph, 1 = desired/supplied */
+      SInt32 *            glyphBits;          /* <->    Bitvector: a bit for each glyph, 1 = desired/supplied */
       char *              name;               /* <->    The printer font name to use/used (C string) */
     }                       font;
 
                                               /* Used to obtain a list of prerequisites from the scaler*/
     struct {
-      long                size;               /* ->     Size of the prereq. list in bytes (0 indicates no prerequisites)*/
+      SInt32              size;               /* ->     Size of the prereq. list in bytes (0 indicates no prerequisites)*/
       void *              list;               /* <- Pointer to client block to hold list (nil = list size query only) */
     }                       prerequisiteQuery;
 
-    long                prerequisiteItem;     /* <-     Enumeration value for the prerequisite item to be streamed.*/
+    SInt32              prerequisiteItem;     /* <-     Enumeration value for the prerequisite item to be streamed.*/
 
-    long                variationQueryResult; /* -> Output from the variationQueryStreamAction */
+    SInt32              variationQueryResult; /* -> Output from the variationQueryStreamAction */
   }                       info;
 };
 typedef struct scalerStream             scalerStream;
 struct scalerStreamData {
-  long                hexFlag;                /* Indicates that the data is to be interpreted as hex, versus binary */
-  long                byteCount;              /* Number of bytes in the data being streamed */
+  SInt32              hexFlag;                /* Indicates that the data is to be interpreted as hex, versus binary */
+  SInt32              byteCount;              /* Number of bytes in the data being streamed */
   const void *        data;                   /* Pointer to the data being streamed */
 };
 typedef struct scalerStreamData         scalerStreamData;
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __SCALERSTREAMTYPES__ */

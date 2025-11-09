@@ -1,6 +1,6 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,7 +20,7 @@ FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange AVAILABLE_MAC_OS_X_VER
 @interface NSAppleScript : NSObject<NSCopying> {
     @private
     NSString *_source;
-    unsigned long _compiledScriptID;
+    unsigned int _compiledScriptID;
     void *_reserved1;
     void *_reserved2;
 }

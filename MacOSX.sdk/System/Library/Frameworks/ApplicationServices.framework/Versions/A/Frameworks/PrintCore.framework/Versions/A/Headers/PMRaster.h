@@ -17,7 +17,7 @@
 #ifndef __PMRASTER__
 #define __PMRASTER__
 
-#include <ApplicationServices/ApplicationServices.h>
+#if !__LP64__
 
 #ifdef __cplusplus
 extern "C" {
@@ -72,6 +72,8 @@ typedef struct PMRasterBand             PMRasterBand;
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* !__LP64__ */
 
 #endif /* __PMRASTER__ */
 

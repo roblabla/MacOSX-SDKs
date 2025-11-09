@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -95,6 +95,17 @@
  */
 
 #define kIOMediaLeafKey "Leaf"
+
+/*!
+ * @defined kIOMediaOpenKey
+ * @abstract
+ * A property of IOMedia objects.
+ * @discussion
+ * The kIOMediaOpenKey property has an OSBoolean value and describes whether
+ * a client presently has an open on this media.
+ */
+
+#define kIOMediaOpenKey "Open"
 
 /*!
  * @defined kIOMediaPreferredBlockSizeKey

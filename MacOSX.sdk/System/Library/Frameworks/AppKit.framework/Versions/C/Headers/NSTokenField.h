@@ -1,17 +1,16 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2005, Apple Computer, Inc.
+	Copyright (c) 2004-2007, Apple Inc.
 	All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
-#import <Foundation/Foundation.h>
-#import <AppKit/NSTokenFieldCell.h>
 #import <AppKit/NSTextContainer.h>
 #import <AppKit/NSTextField.h>
+#import <AppKit/NSTokenFieldCell.h>
+#import <Foundation/Foundation.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSTokenField : NSTextField {    
     BOOL _reserved1;
@@ -19,7 +18,7 @@
     BOOL _reserved3;
     BOOL _reserved4;
 
-    int  _trackingRectTag;
+    NSTrackingRectTag  _trackingRectTag;
     id _reserved5;
     id _reserved6;
     id _reserved7;
@@ -46,12 +45,12 @@
 // substring is the partial string that is being completed.  tokenIndex is the index of the token being completed.
 // selectedIndex allows you to return by reference an index specifying which of the completions should be selected initially. 
 // The default behavior is not to have any completions.
-- (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(int)tokenIndex indexOfSelectedItem: (int *)selectedIndex;
+- (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex;
 
 // return an array of represented objects you want to add.
 // If you want to reject the add, return an empty array.
 // returning nil will cause an error.
-- (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(unsigned)index;
+- (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(NSUInteger)index;
 
 // If you return nil or don't implement these delegate methods, we will assume
 // editing string = display string = represented object

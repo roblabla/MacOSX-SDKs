@@ -249,6 +249,8 @@ public:
     	
 	virtual OSObject * getDiagnostics( void );
 
+    virtual bool finalize( IOOptionBits options );
+
 protected:
 
 	void terminateNotify( void );

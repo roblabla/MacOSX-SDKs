@@ -161,8 +161,14 @@ struct nlist_64 {
  * Common symbols are represented by undefined (N_UNDF) external (N_EXT) types
  * who's values (n_value) are non-zero.  In which case the value of the n_value
  * field is the size (in bytes) of the common symbol.  The n_sect field is set
- * to NO_SECT.
+ * to NO_SECT.  The alignment of a common symbol may be set as a power of 2
+ * between 2^1 and 2^15 as part of the n_desc field using the macros below. If
+ * the alignment is not set (a value of zero) then natural alignment based on
+ * the size is used.
  */
+#define GET_COMM_ALIGN(n_desc) (((n_desc) >> 8) & 0x0f)
+#define SET_COMM_ALIGN(n_desc,align) \
+    (n_desc) = (((n_desc) & 0xf0ff) | (((align) & 0x0f) << 8))
 
 /*
  * To support the lazy binding of undefined symbols in the dynamic link-editor,
@@ -184,7 +190,7 @@ struct nlist_64 {
  * REFERENCE_FLAG_DEFINED, is also used.
  */
 /* Reference type bits of the n_desc field of undefined symbols */
-#define REFERENCE_TYPE				0xf
+#define REFERENCE_TYPE				0x7
 /* types of references */
 #define REFERENCE_FLAG_UNDEFINED_NON_LAZY		0
 #define REFERENCE_FLAG_UNDEFINED_LAZY			1
@@ -274,11 +280,23 @@ struct nlist_64 {
  */
 #define	N_REF_TO_WEAK	0x0080 /* reference to a weak symbol */
 
+/*
+ * The N_ARM_THUMB_DEF bit of the n_desc field indicates that the symbol is
+ * a defintion of a Thumb function.
+ */
+#define N_ARM_THUMB_DEF	0x0008 /* symbol is a Thumb function (ARM) */
+
 #ifndef __STRICT_BSD__
+#if __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 /*
  * The function nlist(3) from the C library.
  */
 extern int nlist (const char *filename, struct nlist *list);
+#if __cplusplus
+}
+#endif /* __cplusplus */
 #endif /* __STRICT_BSD__ */
 
 #endif /* _MACHO_LIST_H_ */

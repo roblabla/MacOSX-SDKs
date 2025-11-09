@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1993-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,7 +12,7 @@
 - (void)encodeDataObject:(NSData *)data;
 - (void)decodeValueOfObjCType:(const char *)type at:(void *)data;
 - (NSData *)decodeDataObject;
-- (unsigned)versionForClassName:(NSString *)className;
+- (NSInteger)versionForClassName:(NSString *)className;
 
 @end
 
@@ -25,14 +25,14 @@
 - (void)encodeByrefObject:(id)anObject;
 - (void)encodeConditionalObject:(id)object;
 - (void)encodeValuesOfObjCTypes:(const char *)types, ...;
-- (void)encodeArrayOfObjCType:(const char *)type count:(unsigned)count at:(const void *)array;
-- (void)encodeBytes:(const void *)byteaddr length:(unsigned)length;
+- (void)encodeArrayOfObjCType:(const char *)type count:(NSUInteger)count at:(const void *)array;
+- (void)encodeBytes:(const void *)byteaddr length:(NSUInteger)length;
 
 - (id)decodeObject;
 - (id)decodePropertyList;
 - (void)decodeValuesOfObjCTypes:(const char *)types, ...;
-- (void)decodeArrayOfObjCType:(const char *)itemType count:(unsigned)count at:(void *)array;
-- (void *)decodeBytesWithReturnedLength:(unsigned *)lengthp;
+- (void)decodeArrayOfObjCType:(const char *)itemType count:(NSUInteger)count at:(void *)array;
+- (void *)decodeBytesWithReturnedLength:(NSUInteger *)lengthp;
 
 - (void)setObjectZone:(NSZone *)zone;
 - (NSZone *)objectZone;
@@ -50,7 +50,7 @@
 - (void)encodeInt64:(int64_t)intv forKey:(NSString *)key;
 - (void)encodeFloat:(float)realv forKey:(NSString *)key;
 - (void)encodeDouble:(double)realv forKey:(NSString *)key;
-- (void)encodeBytes:(const uint8_t *)bytesp length:(unsigned)lenv forKey:(NSString *)key;
+- (void)encodeBytes:(const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
 
 - (BOOL)containsValueForKey:(NSString *)key;
 - (id)decodeObjectForKey:(NSString *)key;
@@ -60,18 +60,23 @@
 - (int64_t)decodeInt64ForKey:(NSString *)key;
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
-- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(unsigned *)lengthp;   // returned bytes immutable!
+- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp;   // returned bytes immutable!
+#endif
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)encodeInteger:(NSInteger)intv forKey:(NSString *)key;
+- (NSInteger)decodeIntegerForKey:(NSString *)key;
 #endif
 
 @end
 
-FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder);
+FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* Given an NSCoder, returns an object previously written with
    NXWriteNSObject(). The returned object is autoreleased. */
 
 @interface NSCoder (NSTypedstreamCompatibility)
 
-- (void)encodeNXObject:(id)object;
+- (void)encodeNXObject:(id)object DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* Writes old-style object onto the coder. No sharing is done across
    separate -encodeNXObject:. Callers must have implemented an
    -encodeWithCoder:, which parallels the -write: methods, on all of
@@ -79,7 +84,7 @@ FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder);
    -replacementObjectForCoder: compatibility method will take care
    of calling -startArchiving:. */
     
-- (id)decodeNXObject;
+- (id)decodeNXObject DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* Reads an object previously written with -encodeNXObject:. No
    sharing is done across separate -decodeNXObject. Callers must
    have implemented an -initWithCoder:, which parallels the -read:

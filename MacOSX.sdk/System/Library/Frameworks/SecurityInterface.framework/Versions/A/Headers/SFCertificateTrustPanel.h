@@ -26,6 +26,9 @@
 {
 @private
 	/* All instance variables are private */
+#if defined (__LP64__)
+	id _reserved_SFCertificateTrustPanel;
+#else
 	IBOutlet NSSplitView *_splitView;		
 	IBOutlet NSTextField *_messageView;		
 	IBOutlet NSButton *_saveChangesButton;
@@ -33,6 +36,7 @@
 	NSString *_defaultMessage;
 	BOOL _saveChanges;
 	id _reserved_SFCertificateTrustPanel;
+#endif
 }
 
 /*!
@@ -52,13 +56,13 @@
 	@param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
     @param message Client-defined message string to display in the panel.
 */
-- (int)runModalForTrust:(SecTrustRef)trust message:(NSString *)message;
+- (NSInteger)runModalForTrust:(SecTrustRef)trust message:(NSString *)message;
 
 /*!
 	@method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo:
 	@abstract Displays a modal sheet that shows the results of a certificate trust evaluation.
 	@discussion The didEndSelector method should have the following signature:
-        - (void)certificateTrustSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+        - (void)certificateTrustSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 		returnCode will contain either NSOKButton or NSCancelButton.
 		Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed
 		to obtain the current trust result for the SecTrustRef.
@@ -70,6 +74,21 @@
     @param message Client-defined message string to display in the panel.
 */
 - (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust message:(NSString *)message;
+
+/*!
+    @method setInformativeText:
+    @abstract Sets the optional informative text displayed in the SFCertificateTrustPanel.
+	@param informativeText The informative text to display in the panel.
+	@discussion By default, informative text describing the current certificate trust status is displayed.
+		Call this method only if your application needs to customize the displayed informative text.
+*/
+- (void)setInformativeText:(NSString *)informativeText;
+
+/*!
+    @method informativeText
+	@abstract Returns the informative text currently displayed in the SFCertificateTrustPanel.
+*/
+- (NSString *)informativeText;
 
 @end
 

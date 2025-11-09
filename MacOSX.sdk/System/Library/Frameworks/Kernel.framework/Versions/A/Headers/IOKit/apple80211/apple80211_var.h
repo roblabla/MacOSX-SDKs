@@ -42,6 +42,8 @@
 #define APPLE80211_MAX_MCS_INDEX	76
 #define APPLE80211_MAX_MPDU_FACTOR	3
 #define APPLE80211_MAX_MPDU_DENSITY	7
+#define APPLE80211_MAX_WOW_PAT_LEN	1500	// Max wake on wireless pattern length
+#define APPLE80211_MAX_WOW_PATTERNS	12		// Arbitrary..this can change
 
 #define APPLE80211_MAP_SIZE( _bits ) (roundup( _bits, NBBY )/NBBY)
 
@@ -107,6 +109,7 @@ enum apple80211_cipher_type {
 	APPLE80211_CIPHER_AES_OCB = 4,		// AES (OCB)
 	APPLE80211_CIPHER_AES_CCM = 5,		// AES (CCM)
 	APPLE80211_CIPHER_PMK	  = 6,		// PMK
+	APPLE80211_CIPHER_PMKSA	  = 7,		// PMK obtained from pre-authentication
 };
 
 enum apple80211_cipher_key_type
@@ -135,6 +138,7 @@ enum apple80211_authtype_upper
 	APPLE80211_AUTHTYPE_WPA2_PSK	= 4,	//	WPA2 PSK
 	APPLE80211_AUTHTYPE_LEAP		= 5,	//	LEAP
 	APPLE80211_AUTHTYPE_8021X		= 6,	//	802.1x
+	APPLE80211_AUTHTYPE_WPS			= 7,	//	WiFi Protected Setup
 };
 
 // Unify association status code and deauth reason codes into a single enum describing
@@ -241,15 +245,25 @@ enum apple80211_short_slot_mode
 enum apple80211_powersave_mode
 {
 	// Standard modes
-	APPLE80211_POWERSAVE_MODE_DISABLED		= 0,
-	APPLE80211_POWERSAVE_MODE_80211			= 1,
-	APPLE80211_POWERSAVE_MODE_VENDOR		= 2,	//	Vendor specific mode, there should be
+	APPLE80211_POWERSAVE_MODE_DISABLED		 = 0,
+	APPLE80211_POWERSAVE_MODE_80211			 = 1,
+	APPLE80211_POWERSAVE_MODE_VENDOR		 = 2,	//	Vendor specific mode, there should be
 													//  more general apple modes in the future.
 													//  Vendor modes also likely require more info.
 	// Mimo modes
-	APPLE80211_POWERSAVE_MODE_MIMO_STATIC	= 3,
-	APPLE80211_POWERSAVE_MODE_MIMO_DYNAMIC	= 4,
-	APPLE80211_POWERSAVE_MODE_MIMO_MIMO		= 5,
+	APPLE80211_POWERSAVE_MODE_MIMO_STATIC	 = 3,
+	APPLE80211_POWERSAVE_MODE_MIMO_DYNAMIC	 = 4,
+	APPLE80211_POWERSAVE_MODE_MIMO_MIMO		 = 5,
+	
+	// WOW
+	APPLE80211_POWERSAVE_MODE_WOW			 = 6,
+	
+	// Vendor specific powersave mode, throughput is maximized
+	APPLE80211_POWERSAVE_MODE_MAX_THROUGHPUT = 7,
+	
+	// Vendor specific powersave mode, power savings are maximized, possibly
+	// at the expense of throughput/latency.
+	APPLE80211_POWERSAVE_MODE_MAX_POWERSAVE	 = 8,
 };
 
 enum apple80211_debug_flag
@@ -328,6 +342,8 @@ struct apple80211_rate
 #define APPLE80211_REASON_NOT_ASSOCED		7
 #define APPLE80211_REASON_ASSOC_LEAVING		8
 #define	APPLE80211_REASON_ASSOC_NOT_AUTHED	9
+#define APPLE80211_REASON_POWER_CAP			10
+#define APPLE80211_REASON_SUPPORTED_CHANS	11
 
 #define APPLE80211_REASON_INVALID_IE		13
 #define APPLE80211_REASON_MIC_FAILURE		14
@@ -435,7 +451,11 @@ struct apple80211_network_data
 	u_int32_t					nd_ssid_len;
 	u_int8_t					nd_ssid[ APPLE80211_MAX_SSID_LEN ];
 	struct apple80211_key		nd_key;
+	u_int32_t					nd_ie_len;
+	void					   *nd_ie_data;
 };
+
+#define APPLE80211_NETWORK_DATA_MAX_IE_LEN 1024
 
 // As hostap support improves, this will grow
 struct apple80211_station
@@ -445,31 +465,69 @@ struct apple80211_station
 	int32_t				sta_rssi;
 };
 
+// WOW structures and defines
+
+struct apple80211_wow_pattern
+{
+	size_t len;
+	u_int8_t * pattern;
+};
+
+enum apple80211_wake_condition
+{
+	APPLE80211_WAKE_COND_MAGIC_PATTERN  = 0,
+	APPLE80211_WAKE_COND_NET_PATTERN    = 1,
+	APPLE80211_WAKE_COND_DISASSOCIATED  = 2,
+	APPLE80211_WAKE_COND_DEAUTHED	    = 3,
+	APPLE80211_WAKE_COND_RETROGRADE_TSF = 4,
+	APPLE80211_WAKE_COND_BEACON_LOSS	= 5,
+};
+
+#define APPLE80211_MAX_WAKE_COND 5	
+
 enum apple80211_card_capability
 {
-	APPLE80211_CAP_WEP			= 1,	// CAPABILITY: WEP available
-	APPLE80211_CAP_TKIP			= 2,	// CAPABILITY: TKIP available
-	APPLE80211_CAP_AES			= 3,	// CAPABILITY: AES OCB avail
-	APPLE80211_CAP_AES_CCM		= 4,	// CAPABILITY: AES CCM avail
-	APPLE80211_CAP_CKIP			= 5,	// CAPABILITY: CKIP available
-	APPLE80211_CAP_IBSS			= 6,	// CAPABILITY: IBSS available
-	APPLE80211_CAP_PMGT			= 7,	// CAPABILITY: Power mgmt
-	APPLE80211_CAP_HOSTAP		= 8,	// CAPABILITY: HOSTAP avail
-	APPLE80211_CAP_TXPMGT		= 9,	// CAPABILITY: tx power mgmt
-	APPLE80211_CAP_SHSLOT		= 10,	// CAPABILITY: short slottime
-	APPLE80211_CAP_SHPREAMBLE	= 11,	// CAPABILITY: short preamble
-	APPLE80211_CAP_MONITOR		= 12,	// CAPABILITY: monitor mode
-	APPLE80211_CAP_TKIPMIC		= 13,	// CAPABILITY: TKIP MIC avail
-	APPLE80211_CAP_WPA1			= 14,	// CAPABILITY: WPA1 avail
-	APPLE80211_CAP_WPA2			= 15,	// CAPABILITY: WPA2 avail
-	APPLE80211_CAP_WPA			= 16,	// CAPABILITY: WPA1+WPA2 avail
-	APPLE80211_CAP_BURST		= 17,	// CAPABILITY: frame bursting
-	APPLE80211_CAP_WME			= 18,	// CAPABILITY: WME avail
-	APPLE80211_CAP_SHORT_GI		= 19,	// CAPABILITY: Short guard interval
+	APPLE80211_CAP_WEP				= 0,	// CAPABILITY: WEP available
+	APPLE80211_CAP_TKIP				= 1,	// CAPABILITY: TKIP available
+	APPLE80211_CAP_AES				= 2,	// CAPABILITY: AES OCB avail
+	APPLE80211_CAP_AES_CCM			= 3,	// CAPABILITY: AES CCM avail
+	APPLE80211_CAP_CKIP				= 4,	// CAPABILITY: CKIP available
+	APPLE80211_CAP_IBSS				= 5,	// CAPABILITY: IBSS available
+	APPLE80211_CAP_PMGT				= 6,	// CAPABILITY: Power mgmt
+	APPLE80211_CAP_HOSTAP			= 7,	// CAPABILITY: HOSTAP avail
+	APPLE80211_CAP_TXPMGT			= 8,	// CAPABILITY: tx power mgmt
+	APPLE80211_CAP_SHSLOT			= 9,	// CAPABILITY: short slottime
+	APPLE80211_CAP_SHPREAMBLE		= 10,	// CAPABILITY: short preamble
+	APPLE80211_CAP_MONITOR			= 11,	// CAPABILITY: monitor mode
+	APPLE80211_CAP_TKIPMIC			= 12,	// CAPABILITY: TKIP MIC avail
+	APPLE80211_CAP_WPA1				= 13,	// CAPABILITY: WPA1 avail
+	APPLE80211_CAP_WPA2				= 14,	// CAPABILITY: WPA2 avail
+	APPLE80211_CAP_WPA				= 15,	// CAPABILITY: WPA1+WPA2 avail
+	APPLE80211_CAP_BURST			= 16,	// CAPABILITY: frame bursting
+	APPLE80211_CAP_WME				= 17,	// CAPABILITY: WME avail
+	APPLE80211_CAP_SHORT_GI_40MHZ	= 18,	// CAPABILITY: Short guard interval in 40 MHz
+	APPLE80211_CAP_SHORT_GI_20MHZ	= 19,	// CAPABILITY: Short guard interval in 20 MHz
+	APPLE80211_CAP_WOW				= 20,	// CAPABILITY: Wake on wireless
+	APPLE80211_CAP_TSN				= 21,	// CAPABILITY: WPA with WEP group key
 };
-#define APPLE80211_CAP_MAX	18
+#define APPLE80211_CAP_MAX	21
+
+enum apple80211_assoc_flags {
+	APPLE80211_ASSOC_F_CLOSED	= 1,	// flag: scan was directed, needed to remember closed networks
+};
 
 // Kernel messages
+
+struct apple80211_status_msg_hdr
+{
+	u_int32_t	msg_type;		//	type of message
+	u_int32_t	msg_len;		//  length of data (not including msg_type and msg_len)
+	
+	// data follows
+};
+
+#define APPLE80211_M_MAX_LEN				2048
+
 #define APPLE80211_M_POWER_CHANGED			1
 #define APPLE80211_M_SSID_CHANGED			2
 #define APPLE80211_M_BSSID_CHANGED			3
@@ -481,14 +539,11 @@ enum apple80211_card_capability
 #define APPLE80211_M_ASSOC_DONE				9
 #define APPLE80211_M_SCAN_DONE				10
 #define APPLE80211_M_COUNTRY_CODE_CHANGED	11
+#define APPLE80211_M_STA_ARRIVE				12
+#define APPLE80211_M_STA_LEAVE				13
 
-#define APPLE80211_M_MAX					11
+#define APPLE80211_M_MAX					13
 #define APPLE80211_M_BUFF_SIZE				APPLE80211_MAP_SIZE( APPLE80211_M_MAX )
-
-struct apple80211_status_msg
-{
-	u_int8_t stat_msgs[APPLE80211_M_BUFF_SIZE];
-};
 
 // Registry Information
 #define APPLE80211_REGKEY_HARDWARE_VERSION	"IO80211HardwareVersion"

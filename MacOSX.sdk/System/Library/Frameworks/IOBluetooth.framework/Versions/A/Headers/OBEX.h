@@ -9,7 +9,7 @@
 #import <stdio.h>
 #import <stdint.h>
 
-#import <Foundation/Foundation.h>
+#import <CoreServices/CoreServices.h>
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@header		OBEX
@@ -1201,11 +1201,11 @@ OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
 	@param		inTitleLength					Length of Title of person in biz/org.
 	@param		inOrganizationCharset			Pointer to the charset the Title is in.
 	@param		inOrganizationCharsetLength		Length of data for the Title charset.
-	@result		An NSData* containing the compiled data. nil if we failed.
-	@discussion	All parameters are optional. The NSData returned to you is NOT retained. Retain it if you want to keep it.
+	@result		An CFDataRef containing the compiled data. nil if we failed.
+	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
 */
 
-NSData*	OBEXCreateVCard(	const void *	inFirstName,
+CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
 							uint32_t		inFirstNameLength,
 							const void *	inLastName,
 							uint32_t		inLastNameLength,
@@ -1257,12 +1257,12 @@ NSData*	OBEXCreateVCard(	const void *	inFirstName,
 	@param		inXIRMCLUID			The IRMC Local Unique Identifier Label, max length 12 bytes. Longer will result in
 									a bad argument error.
 	@param		inCharsetLength		The length of the Charset passed data.
-	@result		A valid NSData* - nil if we failed.
-	@discussion	All parameters are optional. The NSData returned to you is NOT retained. Retain it if you want to keep it.
+	@result		A valid CFDataRef - nil if we failed.
+	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
 				Be aware that certain devices such as Ericsson phones MUST have certain fields, such as a start and end date.
 */
 
-NSData*		OBEXCreateVEvent(	const char *	inCharset,
+CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
 								uint32_t		inCharsetLength,
 								const char *	inEncoding,
 								uint32_t		inEncodingLength,
@@ -1391,7 +1391,7 @@ CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize );
 	uint8_t* 				headerDataPtr;
 	uint32_t 				headerDataLength;
 	
-	dictionary = CFDictionaryCreateMutable( NULL, 0, NULL, NULL );
+	dictionary = CFDictionaryCreateMutable( kCFAllocatorDefault, 0, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
 	
 	// Package up desired headers.
 

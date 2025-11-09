@@ -1,7 +1,7 @@
 /*
         NSAffineTransform.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 

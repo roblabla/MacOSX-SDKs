@@ -1,9 +1,10 @@
 /*
-								NSUserInterfaceValidation.h
-        Application Kit
-        Copyright (c) 1999-2005, Apple Computer, Inc.
-        All rights reserved.
+	NSUserInterfaceValidation.h
+	Application Kit
+	Copyright (c) 1999-2007, Apple Inc.
+	All rights reserved.
 */
+
 #import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
 
@@ -66,7 +67,7 @@ You can extend this functionality by introducing a new set of protocols that are
 /* Protocol implemented by validated objects */
 @protocol NSValidatedUserInterfaceItem
 - (SEL)action;
-- (int)tag;
+- (NSInteger)tag;
 @end
 
 /* Protocol implemented by validator objects */

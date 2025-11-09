@@ -64,7 +64,7 @@ extern "C" {
 	#define	HUGE_VALF	__builtin_huge_valf()
 	#define	HUGE_VALL	__builtin_huge_vall()
     #define NAN         __builtin_nanf("0x7fc00000") /* Constant expression, can be used as initializer. */
-    #define __MATH_H_ALWAYS_INLINE__		__attribute__ ((always_inline))
+    #define __MATH_H_ALWAYS_INLINE__		__attribute__ ((__always_inline__))
 #else
     #define	HUGE_VAL	1e500
     #define	HUGE_VALF	1e50f
@@ -138,7 +138,12 @@ extern int __fpclassifyf(float      );
 extern int __fpclassifyd(double     );
 extern int __fpclassify (long double);
 
-#if defined( __GNUC__ )
+#if defined( __GNUC__ ) && 0 == __FINITE_MATH_ONLY__ 
+    /*  Yes, that's right. You only get the fast iswhatever() macros if you do NOT turn on -ffast-math.  */
+    /*  These inline functions require the compiler to be compiling to standard in order to work.        */
+    /*  -ffast-math, among other things, implies that NaNs don't happen. The compiler can in that case   */
+    /*  optimize x != x to be false always, wheras it would be true for NaNs. That breaks __inline_isnan() */
+    /*  below.                                                                                           */
 	#define isnormal(x)	\
 		(	sizeof (x) == sizeof(float )	?	__inline_isnormalf((float)(x))	\
 		:	sizeof (x) == sizeof(double)	?	__inline_isnormald((double)(x))	\
@@ -189,9 +194,9 @@ extern int __fpclassify (long double);
 	static __inline__  int __inline_isnanf( float __x ) { return __x != __x; }
 	static __inline__  int __inline_isnand( double __x ) { return __x != __x; }
 	static __inline__  int __inline_isnan( long double __x ) { return __x != __x; }
-	static __inline__  int __inline_signbitf( float __x ) { union{ float __f; unsigned int __u; }__u = {__x}; return (int)(__u.__u >> 31); }
-	static __inline__  int __inline_signbitd( double __x ) { union{ double __f; unsigned long long __u; }__u = {__x}; return (int)(__u.__u >> 63); }
-	static __inline__  int __inline_signbit( long double __x ){ union{ long double __ld; struct{ unsigned long long __m; short __sexp; }__p; }__u = {__x}; return (int) ((unsigned int) __u.__p.__sexp >> 15); } 
+	static __inline__  int __inline_signbitf( float __x ) { union{ float __f; unsigned int __u; }__u; __u.__f = __x; return (int)(__u.__u >> 31); }
+	static __inline__  int __inline_signbitd( double __x ) { union{ double __f; unsigned int __u[2]; }__u; __u.__f = __x; return (int)(__u.__u[1] >> 31); }
+	static __inline__  int __inline_signbit( long double __x ){ union{ long double __ld; struct{ unsigned int __m[2]; short __sexp; }__p; }__u; __u.__ld = __x; return (int) (((unsigned short) __u.__p.__sexp) >> 15); } 
 	static __inline__  int __inline_isnormalf( float __x ) { float fabsf = __builtin_fabsf(__x); if( __x != __x ) return 0; return fabsf < __builtin_inff() && fabsf >= __FLT_MIN__; }  
 	static __inline__  int __inline_isnormald( double __x ) { double fabsf = __builtin_fabs(__x); if( __x != __x ) return 0; return fabsf < __builtin_inf() && fabsf >= __DBL_MIN__; }  
 	static __inline__  int __inline_isnormal( long double __x ) { long double fabsf = __builtin_fabsl(__x); if( __x != __x ) return 0; return fabsf < __builtin_infl() && fabsf >= __LDBL_MIN__; }  
@@ -377,17 +382,22 @@ extern float rintf ( float );
 extern long int lrint ( double );
 extern long int lrintf ( float );
 
-extern long long int llrint ( double );
-extern long long int llrintf ( float );
-
 extern double round ( double );
 extern float roundf ( float );
 
 extern long int lround ( double );
 extern long int lroundf ( float );
 
-extern long long int llround ( double );
-extern long long int llroundf ( float );
+#if ( defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) || ! defined( __STRICT_ANSI__ )  || ! defined( __GNUC__ )
+
+    /* long long is not part of C90. Make sure you are passing -std=c99 or -std=gnu99 or better if you need this. */
+    extern long long int llrint ( double );
+    extern long long int llrintf ( float );
+
+    extern long long int llround ( double );
+    extern long long int llroundf ( float );
+
+#endif /* #if ( defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) || ! defined( __STRICT_ANSI__ )  || ! defined( __GNUC__ ) */
 
 extern double trunc ( double );
 extern float truncf ( float );
@@ -463,10 +473,15 @@ extern long double floorl(long double);
 extern long double nearbyintl(long double);
 extern long double rintl(long double);
 extern long int lrintl(long double);
-extern long long int llrintl(long double);
 extern long double roundl(long double);
 extern long int lroundl(long double);
-extern long long int llroundl(long double);
+
+#if ( defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) || ! defined( __STRICT_ANSI__ )  || ! defined( __GNUC__ )
+    /* long long is not part of C90. Make sure you are passing -std=c99 or -std=gnu99 or better if you need this. */
+    extern long long int llrintl(long double);
+    extern long long int llroundl(long double);
+#endif /* #if ( defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) || ! defined( __STRICT_ANSI__ )  || ! defined( __GNUC__ ) */
+
 extern long double truncl(long double);
 extern long double fmodl(long double, long double);
 extern long double remainderl(long double, long double);
@@ -578,7 +593,7 @@ struct exception {
 #endif /* (!_XOPEN_SOURCE || _DARWIN_C_SOURCE) */
 #endif /* !_ANSI_SOURCE && (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
-#if !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
+#if !defined( __STRICT_ANSI__) && !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
 extern int finite ( double );			/* Legacy API: please use C99 isfinite() instead. */
 
 extern double gamma ( double );			/* Legacy API: please use C99 tgamma() instead. */

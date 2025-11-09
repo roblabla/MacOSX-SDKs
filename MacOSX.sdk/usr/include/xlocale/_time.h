@@ -29,7 +29,7 @@ size_t	 strftime_l(char * __restrict, size_t, const char * __restrict,
 		const struct tm * __restrict, locale_t)
 		__DARWIN_ALIAS(strftime_l);
 char	*strptime_l(const char * __restrict, const char * __restrict,
-		struct tm * __restrict, locale_t);
+		struct tm * __restrict, locale_t) __DARWIN_ALIAS(strptime_l);
 __END_DECLS
 
 #endif /* _XLOCALE__TIME_H_ */

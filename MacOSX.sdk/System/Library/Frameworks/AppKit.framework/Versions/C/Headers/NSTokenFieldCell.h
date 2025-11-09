@@ -1,59 +1,59 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2005, Apple Computer, Inc.
+	Copyright (c) 2004-2007, Apple Inc.
 	All rights reserved.
 
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <AppKit/NSTextFieldCell.h>
 #import <Foundation/Foundation.h>
 
-@class NSTextContainer;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
-typedef enum NSTokenStyle {
+@class NSMutableArray, NSMutableCharacterSet, NSMutableDictionary, NSTextContainer;
+
+enum {
     NSDefaultTokenStyle,             // Style best used for keyword type tokens.  Currently a rounded style, but this may change in future releases.
     NSPlainTextTokenStyle,	     // Style to use for data you want represented as plain-text and without any token background.
     NSRoundedTokenStyle              // Style best used for address type tokens.
-} NSTokenStyle;
+};
+typedef NSUInteger NSTokenStyle;
 
 
-@interface NSTokenFieldCell : NSTextFieldCell {    
-    NSTimeInterval _completionDelay;
-    NSTokenStyle _tokenStyle;
-    id _delegate;
-    NSMutableDictionary *_tokens;
+@interface NSTokenFieldCell : NSTextFieldCell {
+@private
     NSCharacterSet *_tokenizingCharacterSet;
-    NSMutableCharacterSet *_fancyTokenizingCharacterSet;
-    BOOL _editingText;
-    BOOL _lastTextChangeWasSelectionDeletion;
-    BOOL _reserved;
-    BOOL _editing;
-    BOOL _inAutoCompleteTyping;
-    BOOL _addingObject;
-    id _spotlightedAttachment;
-    id _layoutManager;
-    NSTextContainer *_textContainer;
-    NSRange _editingRange;
-    NSMutableArray *_dirtyTokens;
-    NSString *_lastTokenizingCharacter;
+    id _delegate;
+    NSTimeInterval _completionDelay;
+    id _cache;
+    id _defaultTerminator;
+    id _trackingArea;
+    id _lastCell;
+    NSRect _lastCellFrame;
+    id _reserved[7];
+    struct {
+        unsigned int _style:4;
 
-    unsigned int _insertionGlyphIndexForDrag;
-    id _reserved2; 
-    id _reserved3;
-    id _reserved4;
+        unsigned int _invalidCache:1;
+        unsigned int _inDidChange:1;
+        unsigned int _validationDisabled:1;
+        unsigned int _pendingComplete:1;
+        unsigned int _autoCompleteMode:2;
+        unsigned int _inValidateEditing:1;
+
+        unsigned int _reserved:21;
+    } _tfcFlags;
 }
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
-- (void)setTokenStyle: (NSTokenStyle) style;
+- (void)setTokenStyle:(NSTokenStyle)style;
 - (NSTokenStyle)tokenStyle;
 
 /* Sets the auto-completion delay before the list of possible completions automatically pops up.  Completions are only offered if the delegate implements the completion delegate API.  A negative delay will disable completion while a delay of 0.0 will make completion UI presentation immediate.
 */
-- (void)setCompletionDelay: (NSTimeInterval) delay;
+- (void)setCompletionDelay:(NSTimeInterval)delay;
 - (NSTimeInterval)completionDelay;
 + (NSTimeInterval)defaultCompletionDelay;
 
@@ -72,12 +72,12 @@ typedef enum NSTokenStyle {
 // substring is the partial string that is being completed.  tokenIndex is the index of the token being completed.
 // selectedIndex allows you to return by reference an index specifying which of the completions should be selected initially. 
 // The default behavior is not to have any completions.
-- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell completionsForSubstring:(NSString *)substring indexOfToken:(int)tokenIndex indexOfSelectedItem: (int *)selectedIndex;
+- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex;
 
 // return an array of represented objects you want to add.
 // If you want to reject the add, return an empty array.
 // returning nil will cause an error.
-- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell shouldAddObjects:(NSArray *)tokens atIndex:(unsigned)index;
+- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell shouldAddObjects:(NSArray *)tokens atIndex:(NSUInteger)index;
 
 // If you return nil or don't implement these delegate methods, we will assume
 // editing string = display string = represented object

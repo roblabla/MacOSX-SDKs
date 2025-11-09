@@ -1,6 +1,6 @@
 /* 
 	NSTextStorage.h
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 
 NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives:
@@ -28,11 +28,15 @@ enum {
 @interface NSTextStorage : NSMutableAttributedString {
     /*All instance variables are private*/
     NSRange _editedRange;
-    int _editedDelta;
+    NSInteger _editedDelta;
     struct {
 	unsigned int editedMask:8;
-        unsigned int :8;
+        unsigned int inFSC:1;
+        unsigned int :7;
         unsigned int disabled:16;
+#if __LP64__
+        unsigned int :32;
+#endif
     } _flags;
     NSMutableArray *_layoutManagers;
     id _sideData;
@@ -46,7 +50,7 @@ enum {
 
 /* If there are no outstanding beginEditing calls, this method calls processEditing to cause post-editing stuff to happen. This method has to be called by the primitives after changes are made. The range argument to edited:... is the range in the original string (before the edit).
 */
-- (void)edited:(unsigned)editedMask range:(NSRange)range changeInLength:(int)delta;
+- (void)edited:(NSUInteger)editedMask range:(NSRange)range changeInLength:(NSInteger)delta;
 
 /* This is called from edited:range:changeInLength: or endEditing. This method sends out NSTextStorageWillProcessEditing, then fixes the attributes, then sends out NSTextStorageDidProcessEditing, and finally notifies the layout managers of change with the textStorage:edited:range:changeInLength:invalidatedRange: method.
 */
@@ -64,9 +68,9 @@ enum {
 
 /* These methods return information about the editing status. Especially useful when there are outstanding beginEditing calls or during processEditing... editedRange.location will be NSNotFound if nothing has been edited.
 */       
-- (unsigned)editedMask;
+- (NSUInteger)editedMask;
 - (NSRange)editedRange;
-- (int)changeInLength;
+- (NSInteger)changeInLength;
 
 /* Set/get the delegate
 */

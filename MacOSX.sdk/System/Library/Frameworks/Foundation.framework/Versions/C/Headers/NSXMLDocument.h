@@ -1,10 +1,10 @@
-/*		NSXMLDocument.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLDocument.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 #import <Foundation/NSXMLNode.h>
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSData;
 @class NSXMLDTD;
@@ -38,12 +38,13 @@
 	@constant NSXMLDocumentHTMLKind Outputs empty tags without a close tag, eg <br>
 	@constant NSXMLDocumentTextKind Output the string value of the document
 */
-typedef enum {
+enum {
 	NSXMLDocumentXMLKind = 0,
 	NSXMLDocumentXHTMLKind,
 	NSXMLDocumentHTMLKind,
 	NSXMLDocumentTextKind
-} NSXMLDocumentContentKind;
+};
+typedef NSUInteger NSXMLDocumentContentKind;
 
 /*!
     @class NSXMLDocument
@@ -62,7 +63,7 @@ typedef enum {
 	NSXMLElement *_rootElement;
 	NSString *_URI;
 	NSString *_MIMEType;
-	unsigned int _fidelityMask;
+	NSUInteger _fidelityMask;
 	NSXMLDocumentContentKind _contentKind;
 }
 
@@ -70,19 +71,19 @@ typedef enum {
     @method initWithXMLString:options:error:
     @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithXMLString:(NSString *)string options:(unsigned int)mask error:(NSError **)error;
+- (id)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithContentsOfURL:options:error:
     @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithContentsOfURL:(NSURL *)url options:(unsigned int)mask error:(NSError **)error;
+- (id)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithData:options:error:
     @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithData:(NSData *)data options:(unsigned int)mask error:(NSError **)error; //primitive
+- (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error; //primitive
 
 /*!
     @method initWithRootElement:
@@ -184,19 +185,19 @@ typedef enum {
     @method insertChild:atIndex:
     @abstract Inserts a child at a particular index.
 */
-- (void)insertChild:(NSXMLNode *)child atIndex:(unsigned)index; //primitive
+- (void)insertChild:(NSXMLNode *)child atIndex:(NSUInteger)index; //primitive
 
 /*!
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(unsigned)index;
+- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:atIndex:
     @abstract Removes a child at a particular index.
 */
-- (void)removeChildAtIndex:(unsigned)index; //primitive
+- (void)removeChildAtIndex:(NSUInteger)index; //primitive
 
 /*!
     @method setChildren:
@@ -214,7 +215,7 @@ typedef enum {
     @method replaceChildAtIndex:withNode:
     @abstract Replaces a child at a particular index with another child.
 */
-- (void)replaceChildAtIndex:(unsigned)index withNode:(NSXMLNode *)node;
+- (void)replaceChildAtIndex:(NSUInteger)index withNode:(NSXMLNode *)node;
 
 #pragma mark --- Output ---
 
@@ -228,19 +229,19 @@ typedef enum {
     @method XMLDataWithOptions:
     @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
 */
-- (NSData *)XMLDataWithOptions:(unsigned int)options;
+- (NSData *)XMLDataWithOptions:(NSUInteger)options;
 
 #pragma mark --- XSLT ---
 
 /*!
-    @method objectByApplyingXSLTString:arguments:error:
+    @method objectByApplyingXSLT:arguments:error:
     @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
 */
 - (id)objectByApplyingXSLT:(NSData *)xslt arguments:(NSDictionary *)arguments error:(NSError **)error;
 
 /*!
     @method objectByApplyingXSLTString:arguments:error:
-    @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
+    @abstract Applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
 */
 - (id)objectByApplyingXSLTString:(NSString *)xslt arguments:(NSDictionary *)arguments error:(NSError **)error;
 

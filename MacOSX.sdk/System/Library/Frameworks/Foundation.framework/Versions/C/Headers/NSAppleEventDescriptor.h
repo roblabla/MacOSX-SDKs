@@ -1,6 +1,6 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,7 +21,7 @@
 
 // Given some data, and a four-character type code, create and return an autoreleased NSAppleEventDescriptor that contains that data, with that type.
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-+ (NSAppleEventDescriptor *)descriptorWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(unsigned int)byteCount;
++ (NSAppleEventDescriptor *)descriptorWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(NSUInteger)byteCount;
 #endif
 + (NSAppleEventDescriptor *)descriptorWithDescriptorType:(DescType)descriptorType data:(NSData *)data;
 
@@ -49,7 +49,7 @@
 #endif
 
 // Other initializers.
-- (id)initWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(unsigned int)byteCount;
+- (id)initWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(NSUInteger)byteCount;
 - (id)initWithDescriptorType:(DescType)descriptorType data:(NSData *)data;
 - (id)initWithEventClass:(AEEventClass)eventClass eventID:(AEEventID)eventID targetDescriptor:(NSAppleEventDescriptor *)targetDescriptor returnID:(AEReturnID)returnID transactionID:(AETransactionID)transactionID;
 - (id)initListDescriptor;
@@ -93,15 +93,15 @@
 - (NSAppleEventDescriptor *)attributeDescriptorForKeyword:(AEKeyword)keyword;
 
 // Return the number of items inside a list or record descriptor.
-- (int)numberOfItems;
+- (NSInteger)numberOfItems;
 
 // Set, retrieve, or remove indexed descriptors inside a list or record descriptor.
-- (void)insertDescriptor:(NSAppleEventDescriptor *)descriptor atIndex:(long int)index;
-- (NSAppleEventDescriptor *)descriptorAtIndex:(long int)index;
+- (void)insertDescriptor:(NSAppleEventDescriptor *)descriptor atIndex:(NSInteger)index;
+- (NSAppleEventDescriptor *)descriptorAtIndex:(NSInteger)index;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (void)removeDescriptorAtIndex:(long int)index;
+- (void)removeDescriptorAtIndex:(NSInteger)index;
 #else
-- (void)removeDecriptorAtIndex:(long int)index;
+- (void)removeDecriptorAtIndex:(NSInteger)index;
 #endif
 
 // Set, retrieve, or remove keyed descriptors inside a record descriptor.
@@ -110,7 +110,7 @@
 - (void)removeDescriptorWithKeyword:(AEKeyword)keyword;
 
 // Return the keyword associated with an indexed descriptor inside a record descriptor.
-- (AEKeyword)keywordForDescriptorAtIndex:(long int)index;
+- (AEKeyword)keywordForDescriptorAtIndex:(NSInteger)index;
 
 // Create and return a descriptor of the requested type, doing a coercion if that's appropriate and possible.
 - (NSAppleEventDescriptor *)coerceToDescriptorType:(DescType)descriptorType;

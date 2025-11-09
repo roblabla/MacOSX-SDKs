@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -10,8 +10,8 @@
 @interface NSDateFormatter : NSFormatter {
 @private
     NSMutableDictionary *_attributes;
-    CFDateFormatterRef   _formatter;
-    void		*_reserved;
+    __strong CFDateFormatterRef _formatter;
+    NSUInteger _counter;
 }
 
 - (id)init;
@@ -36,13 +36,14 @@
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-typedef enum {    // date and time format styles
+enum {    // date and time format styles
     NSDateFormatterNoStyle = kCFDateFormatterNoStyle,
     NSDateFormatterShortStyle = kCFDateFormatterShortStyle,
     NSDateFormatterMediumStyle = kCFDateFormatterMediumStyle,
     NSDateFormatterLongStyle = kCFDateFormatterLongStyle,
     NSDateFormatterFullStyle = kCFDateFormatterFullStyle
-} NSDateFormatterStyle;
+};
+typedef NSUInteger NSDateFormatterStyle;
 
 - (NSDateFormatterStyle)dateStyle;
 - (void)setDateStyle:(NSDateFormatterStyle)style;
@@ -56,11 +57,12 @@ typedef enum {    // date and time format styles
 - (BOOL)generatesCalendarDates;
 - (void)setGeneratesCalendarDates:(BOOL)b;
 
-typedef enum {
+enum {
     NSDateFormatterBehaviorDefault = 0,
     NSDateFormatterBehavior10_0 = 1000,
     NSDateFormatterBehavior10_4 = 1040,
-} NSDateFormatterBehavior;
+};
+typedef NSUInteger NSDateFormatterBehavior;
 
 - (NSDateFormatterBehavior)formatterBehavior;
 - (void)setFormatterBehavior:(NSDateFormatterBehavior)behavior;
@@ -107,6 +109,48 @@ typedef enum {
 - (void)setPMSymbol:(NSString *)string;
 
 #endif
+
+- (NSArray *)longEraSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setLongEraSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)veryShortMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVeryShortMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)standaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setStandaloneMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)shortStandaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setShortStandaloneMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)veryShortStandaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVeryShortStandaloneMonthSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)veryShortWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVeryShortWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)standaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setStandaloneWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)shortStandaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setShortStandaloneWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)veryShortStandaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVeryShortStandaloneWeekdaySymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)quarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setQuarterSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)shortQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setShortQuarterSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)standaloneQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setStandaloneQuarterSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSArray *)shortStandaloneQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setShortStandaloneQuarterSymbols:(NSArray *)array AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (NSDate *)gregorianStartDate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setGregorianStartDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

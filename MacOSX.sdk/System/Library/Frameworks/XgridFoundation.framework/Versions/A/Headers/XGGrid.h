@@ -30,6 +30,13 @@
 }
 
 /*!
+    @method name
+    @abstract Returns the name associated with the grid.
+    @result A string.
+*/
+- (NSString *)name;
+
+/*!
 	@method isDefault
 	@abstract Returns YES if the receiver is the default grid.
 	@result YES or NO.

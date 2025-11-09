@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -29,10 +29,10 @@
 
 - (NSArray *)stringsByAppendingPaths:(NSArray *)paths;
 
-- (unsigned)completePathIntoString:(NSString **)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray **)outputArray filterTypes:(NSArray *)filterTypes;
+- (NSUInteger)completePathIntoString:(NSString **)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray **)outputArray filterTypes:(NSArray *)filterTypes;
 
 - (const char *)fileSystemRepresentation;
-- (BOOL)getFileSystemRepresentation:(char *)cname maxLength:(unsigned)max;
+- (BOOL)getFileSystemRepresentation:(char *)cname maxLength:(NSUInteger)max;
 
 @end
 
@@ -52,7 +52,7 @@ FOUNDATION_EXPORT NSString *NSTemporaryDirectory(void);
 
 FOUNDATION_EXPORT NSString *NSOpenStepRootDirectory(void);
 
-typedef enum {
+enum {
     NSApplicationDirectory = 1,		// supported applications (Applications)
     NSDemoApplicationDirectory,		// unsupported applications, demonstration versions (Demos)
     NSDeveloperApplicationDirectory,	// developer applications (Developer/Applications)
@@ -72,17 +72,22 @@ typedef enum {
     NSCachesDirectory = 13,             // location of discardable cache files (Library/Caches)
     NSApplicationSupportDirectory = 14, // location of application support files (plug-ins, etc) (Library/Application Support)
 #endif
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSDownloadsDirectory = 15,          // location of the user's "Downloads" directory
+#endif
     NSAllApplicationsDirectory = 100,	// all directories where applications can occur
     NSAllLibrariesDirectory = 101	// all directories where resources can occur
-} NSSearchPathDirectory;
+};
+typedef NSUInteger NSSearchPathDirectory;
 
-typedef enum {
+enum {
     NSUserDomainMask = 1,	// user's home directory --- place to install user's personal items (~)
     NSLocalDomainMask = 2,	// local to the current machine --- place to install items available to everyone on this machine (/Library)
     NSNetworkDomainMask = 4, 	// publically available location in the local area network --- place to install items available on the network (/Network)
     NSSystemDomainMask = 8,	// provided by Apple, unmodifiable (/System)
     NSAllDomainsMask = 0x0ffff	// all domains: all of the above and future items
-} NSSearchPathDomainMask;
+};
+typedef NSUInteger NSSearchPathDomainMask;
 
 FOUNDATION_EXPORT NSArray *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainMask domainMask, BOOL expandTilde);
 

@@ -3,7 +3,7 @@
  
      Contains:   Collection Manager Interfaces
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
@@ -220,6 +220,24 @@ InvokeCollectionExceptionUPP(
   Collection              c,
   OSErr                   status,
   CollectionExceptionUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline CollectionFlattenUPP                                 NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine) { return userRoutine; }
+    inline CollectionExceptionUPP                               NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeCollectionFlattenUPP(CollectionFlattenUPP) { }
+    inline void                                                 DisposeCollectionExceptionUPP(CollectionExceptionUPP) { }
+    inline OSErr                                                InvokeCollectionFlattenUPP(SInt32 size, void * data, void * refCon, CollectionFlattenUPP userUPP) { return (*userUPP)(size, data, refCon); }
+    inline OSErr                                                InvokeCollectionExceptionUPP(Collection c, OSErr status, CollectionExceptionUPP userUPP) { return (*userUPP)(c, status); }
+  #else
+    #define NewCollectionFlattenUPP(userRoutine)                ((CollectionFlattenUPP)userRoutine)
+    #define NewCollectionExceptionUPP(userRoutine)              ((CollectionExceptionUPP)userRoutine)
+    #define DisposeCollectionFlattenUPP(userUPP)
+    #define DisposeCollectionExceptionUPP(userUPP)
+    #define InvokeCollectionFlattenUPP(size, data, refCon, userUPP) (*userUPP)(size, data, refCon)
+    #define InvokeCollectionExceptionUPP(c, status, userUPP)    (*userUPP)(c, status)
+  #endif
+#endif
 
 /*********************************************/
 /************* Public interfaces *************/
@@ -455,7 +473,7 @@ GetCollectionItemInfo(
   Collection      c,
   CollectionTag   tag,
   SInt32          id,
-  SInt32 *        index,
+  SInt32 *        itemIndex,
   SInt32 *        itemSize,
   SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -472,7 +490,7 @@ GetCollectionItemInfo(
 extern OSErr 
 ReplaceIndexedCollectionItem(
   Collection    c,
-  SInt32        index,
+  SInt32        itemIndex,
   SInt32        itemSize,
   const void *  itemData)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -489,7 +507,7 @@ ReplaceIndexedCollectionItem(
 extern OSErr 
 GetIndexedCollectionItem(
   Collection   c,
-  SInt32       index,
+  SInt32       itemIndex,
   SInt32 *     itemSize,
   void *       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -506,7 +524,7 @@ GetIndexedCollectionItem(
 extern OSErr 
 RemoveIndexedCollectionItem(
   Collection   c,
-  SInt32       index)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       itemIndex)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -521,7 +539,7 @@ RemoveIndexedCollectionItem(
 extern OSErr 
 SetIndexedCollectionItemInfo(
   Collection   c,
-  SInt32       index,
+  SInt32       itemIndex,
   SInt32       whichAttributes,
   SInt32       newAttributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -538,7 +556,7 @@ SetIndexedCollectionItemInfo(
 extern OSErr 
 GetIndexedCollectionItemInfo(
   Collection       c,
-  SInt32           index,
+  SInt32           itemIndex,
   CollectionTag *  tag,
   SInt32 *         id,
   SInt32 *         itemSize,
@@ -637,7 +655,7 @@ GetTaggedCollectionItemInfo(
   CollectionTag   tag,
   SInt32          whichItem,
   SInt32 *        id,
-  SInt32 *        index,
+  SInt32 *        itemIndex,
   SInt32 *        itemSize,
   SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -825,7 +843,7 @@ GetCollectionItemHdl(
 extern OSErr 
 ReplaceIndexedCollectionItemHdl(
   Collection   aCollection,
-  SInt32       index,
+  SInt32       itemIndex,
   Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -841,7 +859,7 @@ ReplaceIndexedCollectionItemHdl(
 extern OSErr 
 GetIndexedCollectionItemHdl(
   Collection   aCollection,
-  SInt32       index,
+  SInt32       itemIndex,
   Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 

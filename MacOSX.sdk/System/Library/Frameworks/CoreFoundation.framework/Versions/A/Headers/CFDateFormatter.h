@@ -1,5 +1,5 @@
 /*	CFDateFormatter.h
-	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATEFORMATTER__)
@@ -9,11 +9,9 @@
 #include <CoreFoundation/CFDate.h>
 #include <CoreFoundation/CFLocale.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFDateFormatter *CFDateFormatterRef;
 
@@ -22,13 +20,14 @@ typedef struct __CFDateFormatter *CFDateFormatterRef;
 CF_EXPORT
 CFTypeID CFDateFormatterGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-typedef enum {	// date and time format styles
+enum {	// date and time format styles
 	kCFDateFormatterNoStyle = 0,
 	kCFDateFormatterShortStyle = 1,
 	kCFDateFormatterMediumStyle = 2,
 	kCFDateFormatterLongStyle = 3,
 	kCFDateFormatterFullStyle = 4
-} CFDateFormatterStyle;
+};
+typedef CFIndex CFDateFormatterStyle;
 
 // The exact formatted result for these date and time styles depends on the
 // locale, but generally:
@@ -114,6 +113,20 @@ CF_EXPORT const CFStringRef kCFDateFormatterWeekdaySymbols AVAILABLE_MAC_OS_X_VE
 CF_EXPORT const CFStringRef kCFDateFormatterShortWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFArray of CFString
 CF_EXPORT const CFStringRef kCFDateFormatterAMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
 CF_EXPORT const CFStringRef kCFDateFormatterPMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFDateFormatterLongEraSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;   // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterVeryShortMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterStandaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortStandaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterVeryShortStandaloneMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterVeryShortWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterStandaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortStandaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterVeryShortStandaloneWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 	// CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterStandaloneQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortStandaloneQuarterSymbols AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterGregorianStartDate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFDate
 
 // See CFLocale.h for these calendar constants:
 //	const CFStringRef kCFGregorianCalendar;
@@ -124,9 +137,7 @@ CF_EXPORT const CFStringRef kCFDateFormatterPMSymbol AVAILABLE_MAC_OS_X_VERSION_
 //	const CFStringRef kCFHebrewCalendar;
 //	const CFStringRef kCFChineseCalendar;
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif
 

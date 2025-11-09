@@ -1,4 +1,4 @@
-/*	$NetBSD: histedit.h,v 1.25 2003/12/05 13:37:48 lukem Exp $	*/
+/*	$NetBSD: histedit.h,v 1.28 2005/07/14 15:00:58 christos Exp $	*/
 
 /*-
  * Copyright (c) 1992, 1993
@@ -46,6 +46,10 @@
 #include <sys/types.h>
 #include <stdio.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * ==== Editing ====
  */
@@ -88,7 +92,7 @@ void		 el_reset(EditLine *);
  */
 const char	*el_gets(EditLine *, int *);
 int		 el_getc(EditLine *, char *);
-void		 el_push(EditLine *, char *);
+void		 el_push(EditLine *, const char *);
 
 /*
  * Beep!
@@ -106,6 +110,7 @@ int		 el_parse(EditLine *, int, const char **);
  */
 int		 el_set(EditLine *, int, ...);
 int		 el_get(EditLine *, int, void *);
+unsigned char	_el_fn_complete(EditLine *, int);
 
 /*
  * el_set/el_get parameters
@@ -177,7 +182,7 @@ int		history(History *, HistEvent *, int, ...);
 #define	H_LAST		 4	/* , void);		*/
 #define	H_PREV		 5	/* , void);		*/
 #define	H_NEXT		 6	/* , void);		*/
-#define	H_CURR		 8	/* , const int);	*/
+#define	H_CURR		 8	/* , void);		*/
 #define	H_SET		 7	/* , int);		*/
 #define	H_ADD		 9	/* , const char *);	*/
 #define	H_ENTER		10	/* , const char *);	*/
@@ -192,6 +197,10 @@ int		history(History *, HistEvent *, int, ...);
 #define	H_CLEAR		19	/* , void);		*/
 #define	H_SETUNIQUE	20	/* , int);		*/
 #define	H_GETUNIQUE	21	/* , void);		*/
+#define	H_DEL		22	/* , int);		*/
+#define	H_NEXT_EVDATA	23	/* , const int, histdata_t *);	*/
+#define	H_DELDATA	24	/* , int, histdata_t *);*/
+#define	H_REPLACE	25	/* , const char *, histdata_t);	*/
 
 
 /*
@@ -210,5 +219,9 @@ int		 tok_line(Tokenizer *, const LineInfo *,
 		    int *, const char ***, int *, int *);
 int		 tok_str(Tokenizer *, const char *,
 		    int *, const char ***);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _HISTEDIT_H_ */

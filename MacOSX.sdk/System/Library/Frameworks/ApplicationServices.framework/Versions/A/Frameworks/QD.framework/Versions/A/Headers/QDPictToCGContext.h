@@ -3,7 +3,7 @@
  
      Contains:   API to draw Quickdraw PICTs into CoreGraphics context
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -49,11 +49,12 @@ typedef struct QDPict*                  QDPictRef;
  * picture header. If the URL does not begin PICT data at one
  * of these places in the data fork then the QDPictRef returned will be NULL.
 */
+#if !__LP64__
 /*
  *  QDPictCreateWithProvider()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -71,7 +72,7 @@ QDPictCreateWithProvider(CGDataProviderRef provider)          AVAILABLE_MAC_OS_X
  *  QDPictCreateWithURL()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -85,7 +86,7 @@ QDPictCreateWithURL(CFURLRef url)                             AVAILABLE_MAC_OS_X
  *  QDPictRetain()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -99,7 +100,7 @@ QDPictRetain(QDPictRef pictRef)                               AVAILABLE_MAC_OS_X
  *  QDPictRelease()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -114,7 +115,7 @@ QDPictRelease(QDPictRef pictRef)                              AVAILABLE_MAC_OS_X
  *  QDPictGetBounds()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -131,7 +132,7 @@ QDPictGetBounds(QDPictRef pictRef)                            AVAILABLE_MAC_OS_X
  *  QDPictGetResolution()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -151,7 +152,7 @@ QDPictGetResolution(
  *  QDPictDrawToCGContext()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -161,6 +162,8 @@ QDPictDrawToCGContext(
   CGRect         rect,
   QDPictRef      pictRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

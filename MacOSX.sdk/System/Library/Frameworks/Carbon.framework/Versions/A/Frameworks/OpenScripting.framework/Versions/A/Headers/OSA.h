@@ -3,7 +3,7 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-97~629
+     Version:    OSA-122~37
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
@@ -35,8 +35,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#pragma options align=mac68k
 
 /**************************************************************************
     Types and Constants
@@ -125,13 +123,13 @@ enum {
 
 typedef ComponentResult                 OSAError;
 /* Under the Open Scripting Architecture all error results are longs */
-typedef unsigned long                   OSAID;
+typedef UInt32                          OSAID;
 /*
         OSAIDs allow transparent manipulation of scripts associated with
         various scripting systems.
     */
 enum {
-  kOSANullScript                = 0L
+  kOSANullScript                = 0
 };
 
 /* No -script constant. */
@@ -144,8 +142,8 @@ enum {
         Some routines take flags that control their execution.  This constant
         declares default mode settings are used.
     */
-typedef CALLBACK_API( OSErr , OSACreateAppleEventProcPtr )(AEEventClass theAEEventClass, AEEventID theAEEventID, const AEAddressDesc *target, short returnID, long transactionID, AppleEvent *result, long refCon);
-typedef CALLBACK_API( OSErr , OSASendProcPtr )(const AppleEvent *theAppleEvent, AppleEvent *reply, AESendMode sendMode, AESendPriority sendPriority, long timeOutInTicks, AEIdleUPP idleProc, AEFilterUPP filterProc, long refCon);
+typedef CALLBACK_API( OSErr , OSACreateAppleEventProcPtr )(AEEventClass theAEEventClass, AEEventID theAEEventID, const AEAddressDesc *target, short returnID, SInt32 transactionID, AppleEvent *result, SRefCon refCon);
+typedef CALLBACK_API( OSErr , OSASendProcPtr )(const AppleEvent *theAppleEvent, AppleEvent *reply, AESendMode sendMode, AESendPriority sendPriority, SInt32 timeOutInTicks, AEIdleUPP idleProc, AEFilterUPP filterProc, SRefCon refCon);
 typedef STACK_UPP_TYPE(OSACreateAppleEventProcPtr)              OSACreateAppleEventUPP;
 typedef STACK_UPP_TYPE(OSASendProcPtr)                          OSASendUPP;
 /*
@@ -206,9 +204,9 @@ InvokeOSACreateAppleEventUPP(
   AEEventID               theAEEventID,
   const AEAddressDesc *   target,
   short                   returnID,
-  long                    transactionID,
+  SInt32                  transactionID,
   AppleEvent *            result,
-  long                    refCon,
+  SRefCon                 refCon,
   OSACreateAppleEventUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -225,11 +223,29 @@ InvokeOSASendUPP(
   AppleEvent *        reply,
   AESendMode          sendMode,
   AESendPriority      sendPriority,
-  long                timeOutInTicks,
+  SInt32              timeOutInTicks,
   AEIdleUPP           idleProc,
   AEFilterUPP         filterProc,
-  long                refCon,
+  SRefCon             refCon,
   OSASendUPP          userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline OSACreateAppleEventUPP                               NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine) { return userRoutine; }
+    inline OSASendUPP                                           NewOSASendUPP(OSASendProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP) { }
+    inline void                                                 DisposeOSASendUPP(OSASendUPP) { }
+    inline OSErr                                                InvokeOSACreateAppleEventUPP(AEEventClass theAEEventClass, AEEventID theAEEventID, const AEAddressDesc * target, short returnID, SInt32 transactionID, AppleEvent * result, SRefCon refCon, OSACreateAppleEventUPP userUPP) { return (*userUPP)(theAEEventClass, theAEEventID, target, returnID, transactionID, result, refCon); }
+    inline OSErr                                                InvokeOSASendUPP(const AppleEvent * theAppleEvent, AppleEvent * reply, AESendMode sendMode, AESendPriority sendPriority, SInt32 timeOutInTicks, AEIdleUPP idleProc, AEFilterUPP filterProc, SRefCon refCon, OSASendUPP userUPP) { return (*userUPP)(theAppleEvent, reply, sendMode, sendPriority, timeOutInTicks, idleProc, filterProc, refCon); }
+  #else
+    #define NewOSACreateAppleEventUPP(userRoutine)              ((OSACreateAppleEventUPP)userRoutine)
+    #define NewOSASendUPP(userRoutine)                          ((OSASendUPP)userRoutine)
+    #define DisposeOSACreateAppleEventUPP(userUPP)
+    #define DisposeOSASendUPP(userUPP)
+    #define InvokeOSACreateAppleEventUPP(theAEEventClass, theAEEventID, target, returnID, transactionID, result, refCon, userUPP) (*userUPP)(theAEEventClass, theAEEventID, target, returnID, transactionID, result, refCon)
+    #define InvokeOSASendUPP(theAppleEvent, reply, sendMode, sendPriority, timeOutInTicks, idleProc, filterProc, refCon, userUPP) (*userUPP)(theAppleEvent, reply, sendMode, sendPriority, timeOutInTicks, idleProc, filterProc, refCon)
+  #endif
+#endif
 
 /**************************************************************************
     OSA Interface Descriptions
@@ -265,7 +281,8 @@ enum {
   kOSASelectSetScriptInfo       = 0x0007,
   kOSASelectGetScriptInfo       = 0x0008,
   kOSASelectSetActiveProc       = 0x0009,
-  kOSASelectGetActiveProc       = 0x000A
+  kOSASelectGetActiveProc       = 0x000A,
+  kOSASelectCopyDisplayString   = 0x000B
 };
 
 /* Compiling: */
@@ -281,7 +298,8 @@ enum {
 
 /* GetSource: */
 enum {
-  kOSASelectGetSource           = 0x0201
+  kOSASelectGetSource           = 0x0201,
+  kOSASelectCopySourceString    = 0x0202
 };
 
 /* AECoercion: */
@@ -330,23 +348,6 @@ enum {
   kOSASelectMakeContext         = 0x0805
 };
 
-/* Debugging (currently unsupported) */
-enum {
-  kOSADebuggerCreateSession     = 0x0901,
-  kOSADebuggerGetSessionState   = 0x0902,
-  kOSADebuggerSessionStep       = 0x0903,
-  kOSADebuggerDisposeSession    = 0x0904,
-  kOSADebuggerGetStatementRanges = 0x0905,
-  kOSADebuggerGetBreakpoint     = 0x0910,
-  kOSADebuggerSetBreakpoint     = 0x0911,
-  kOSADebuggerGetDefaultBreakpoint = 0x0912,
-  kOSADebuggerGetCurrentCallFrame = 0x0906,
-  kOSADebuggerGetCallFrameState = 0x0907,
-  kOSADebuggerGetVariable       = 0x0908,
-  kOSADebuggerSetVariable       = 0x0909,
-  kOSADebuggerGetPreviousCallFrame = 0x090A,
-  kOSADebuggerDisposeCallFrame  = 0x090B
-};
 
 /* scripting component specific selectors are added beginning with this value  */
 enum {
@@ -525,7 +526,7 @@ extern OSAError
 OSALoad(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -556,7 +557,7 @@ OSAStore(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDesc *            resultingScriptData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -587,7 +588,7 @@ OSAExecute(
   ComponentInstance   scriptingComponent,
   OSAID               compiledScriptID,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -630,7 +631,7 @@ OSADisplay(
   ComponentInstance   scriptingComponent,
   OSAID               scriptValueID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -654,6 +655,27 @@ OSADisplay(
         ModeFlags:
             kOSAModeDisplayForHumans
     */
+/*
+    @function   OSACopyDisplayString
+
+    @discussion Similar to OSADisplay, but returns the text as a CFAttributedStringRef.
+*/
+/*
+ *  OSACopyDisplayString()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSACopyDisplayString(
+  ComponentInstance        scriptingComponent,
+  OSAID                    scriptID,
+  SInt32                   modeFlags,
+  CFAttributedStringRef *  result)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
 /* Getting Error Information: */
 /*
  *  OSAScriptError()
@@ -691,7 +713,7 @@ OSAScriptError(
         These error numbers may be either system error numbers, or error numbers
         that are scripting component specific.
         Required desiredTypes:  
-            typeShortInteger
+            typeSInt16
     */
 enum {
   kOSAErrorNumber               = keyErrorNumber
@@ -790,13 +812,13 @@ enum {
   typeOSAErrorRange             = 'erng'
 };
 
-/* Field of a typeOSAErrorRange record of typeShortInteger */
+/* Field of a typeOSAErrorRange record of typeSInt16 */
 /*  0x73726373    */
 enum {
   keyOSASourceStart             = 'srcs'
 };
 
-/* Field of a typeOSAErrorRange record of typeShortInteger */
+/* Field of a typeOSAErrorRange record of typeSInt16 */
 /*  0x73726365   */
 enum {
   keyOSASourceEnd               = 'srce'
@@ -884,7 +906,7 @@ OSAGetScriptInfo(
     Scripting systems will supply default values for these procedures if they
     are not set by the client:
 */
-typedef CALLBACK_API( OSErr , OSAActiveProcPtr )(long refCon);
+typedef CALLBACK_API( OSErr , OSAActiveProcPtr )(SRefCon refCon);
 typedef STACK_UPP_TYPE(OSAActiveProcPtr)                        OSAActiveUPP;
 /*
  *  NewOSAActiveUPP()
@@ -918,8 +940,20 @@ DisposeOSAActiveUPP(OSAActiveUPP userUPP)                     AVAILABLE_MAC_OS_X
  */
 extern OSErr
 InvokeOSAActiveUPP(
-  long          refCon,
+  SRefCon       refCon,
   OSAActiveUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline OSAActiveUPP                                         NewOSAActiveUPP(OSAActiveProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeOSAActiveUPP(OSAActiveUPP) { }
+    inline OSErr                                                InvokeOSAActiveUPP(SRefCon refCon, OSAActiveUPP userUPP) { return (*userUPP)(refCon); }
+  #else
+    #define NewOSAActiveUPP(userRoutine)                        ((OSAActiveUPP)userRoutine)
+    #define DisposeOSAActiveUPP(userUPP)
+    #define InvokeOSAActiveUPP(refCon, userUPP)                 (*userUPP)(refCon)
+  #endif
+#endif
 
 /*
  *  OSASetActiveProc()
@@ -933,7 +967,7 @@ extern OSAError
 OSASetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP        activeProc,
-  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -956,7 +990,7 @@ extern OSAError
 OSAGetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP *      activeProc,
-  long *              refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *           refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1010,7 +1044,7 @@ extern OSAError
 OSACompile(
   ComponentInstance   scriptingComponent,
   const AEDesc *      sourceData,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             previousAndResultingScriptID)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1121,6 +1155,27 @@ OSAGetSource(
             errOSAInvalidID
             errOSASourceNotAvailable    can't get source for this scriptID
     */
+/*
+    @function   OSACopySourceString
+
+    @discussion Similar to OSAGetSource, but returns the text as a CFAttributedStringRef.
+*/
+/*
+ *  OSACopySourceString()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSACopySourceString(
+  ComponentInstance        scriptingComponent,
+  OSAID                    scriptID,
+  SInt32                   modeFlags,
+  CFAttributedStringRef *  result)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
 /**************************************************************************
     OSA Optional AECoercion Interface
 **************************************************************************
@@ -1139,7 +1194,7 @@ extern OSAError
 OSACoerceFromDesc(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1177,7 +1232,7 @@ OSACoerceToDesc(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1214,7 +1269,7 @@ extern OSAError
 OSASetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP          sendProc,
-  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1237,7 +1292,7 @@ extern OSAError
 OSAGetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP *        sendProc,
-  long *              refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *           refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1259,7 +1314,7 @@ extern OSAError
 OSASetCreateProc(
   ComponentInstance        scriptingComponent,
   OSACreateAppleEventUPP   createProc,
-  long                     refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon                  refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1282,7 +1337,7 @@ extern OSAError
 OSAGetCreateProc(
   ComponentInstance         scriptingComponent,
   OSACreateAppleEventUPP *  createProc,
-  long *                    refCon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *                 refCon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1395,7 +1450,7 @@ OSALoadExecute(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1436,7 +1491,7 @@ OSACompileExecute(
   ComponentInstance   scriptingComponent,
   const AEDesc *      sourceData,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1477,7 +1532,7 @@ OSADoScript(
   const AEDesc *      sourceData,
   OSAID               contextID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1640,7 +1695,7 @@ OSAAvailableDialectCodeList(
         and  OSAGetDialectInfo to get information on dialects.
         This call return an AEList containing dialect code for each of the
         currently available dialects of a scripting component. Each dialect
-        code is a short integer of type typeShortInteger.
+        code is a short integer of type typeSInt16.
     
         Errors:
             badComponentInstance    invalid scripting component instance
@@ -1652,9 +1707,9 @@ OSAAvailableDialectCodeList(
         keys for dialect info record, also used as selectors to OSAGetDialectInfo.
 
         Field of a typeOSADialectInfo record of typeChar.
-        Field of a typeOSADialectInfo record of typeShortInteger.
-        Field of a typeOSADialectInfo record of typeShortInteger.
-        Field of a typeOSADialectInfo record of typeShortInteger.
+        Field of a typeOSADialectInfo record of typeSInt16.
+        Field of a typeOSADialectInfo record of typeSInt16.
+        Field of a typeOSADialectInfo record of typeSInt16.
     */
 /**************************************************************************
     OSA Optional Event Handling Interface
@@ -1674,7 +1729,7 @@ extern OSAError
 OSASetResumeDispatchProc(
   ComponentInstance   scriptingComponent,
   AEEventHandlerUPP   resumeDispatchProc,
-  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1743,7 +1798,7 @@ extern OSAError
 OSAGetResumeDispatchProc(
   ComponentInstance    scriptingComponent,
   AEEventHandlerUPP *  resumeDispatchProc,
-  long *               refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *            refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1768,7 +1823,7 @@ OSAExecuteEvent(
   ComponentInstance   scriptingComponent,
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1811,7 +1866,7 @@ OSADoEvent(
   ComponentInstance   scriptingComponent,
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   AppleEvent *        reply)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1874,279 +1929,6 @@ OSAMakeContext(
             errOSAInvalidID
             errAECoercionFail:      contextName is invalid
     */
-/*
- * Debugging API
- */
-/*
- * Types
- */
-typedef OSAID                           OSADebugSessionRef;
-typedef OSAID                           OSADebugCallFrameRef;
-/*
- * Constants
- */
-typedef UInt32 OSAProgramState;
-enum {
-  eNotStarted                   = 0,
-  eRunnable                     = 1,
-  eRunning                      = 2,
-  eStopped                      = 3,
-  eTerminated                   = 4
-};
-
-typedef UInt32 OSADebugStepKind;
-enum {
-  eStepOver                     = 0,
-  eStepIn                       = 1,
-  eStepOut                      = 2,
-  eRun                          = 3
-};
-
-/*
- * Session Information
- */
-enum {
-  keyProgramState               = 'dsps'
-};
-
-/*
- * Call Frame Information
- */
-struct StatementRange {
-  unsigned long       startPos;
-  unsigned long       endPos;
-};
-typedef struct StatementRange           StatementRange;
-enum {
-  typeStatementRange            = 'srng'
-};
-
-enum {
-  keyProcedureName              = 'dfnm', /* typeChar */
-  keyStatementRange             = 'dfsr', /* typeStatementRange */
-  keyLocalsNames                = 'dfln', /* typeAEList of typeChar */
-  keyGlobalsNames               = 'dfgn', /* typeAEList of typeChar */
-  keyParamsNames                = 'dfpn' /* typeAEList of typeChar */
-};
-
-/*
- * Sessions
- */
-/*
- *  OSADebuggerCreateSession()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerCreateSession(
-  ComponentInstance     scriptingComponent,
-  OSAID                 inScript,
-  OSAID                 inContext,
-  OSADebugSessionRef *  outSession)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetSessionState()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetSessionState(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  AERecord *           outState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerSessionStep()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerSessionStep(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  OSADebugStepKind     inKind)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerDisposeSession()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerDisposeSession(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetStatementRanges()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetStatementRanges(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  AEDescList *         outStatementRangeArray)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/* Returns an array of StatementRange objects.*/
-/*
- *  OSADebuggerGetBreakpoint()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetBreakpoint(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  UInt32               inSrcOffset,
-  OSAID *              outBreakpoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerSetBreakpoint()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerSetBreakpoint(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  UInt32               inSrcOffset,
-  OSAID                inBreakpoint)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetDefaultBreakpoint()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetDefaultBreakpoint(
-  ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession,
-  OSAID *              outBreakpoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- * Call Frames
- */
-/*
- *  OSADebuggerGetCurrentCallFrame()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetCurrentCallFrame(
-  ComponentInstance       scriptingComponent,
-  OSADebugSessionRef      inSession,
-  OSADebugCallFrameRef *  outCallFrame)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetCallFrameState()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetCallFrameState(
-  ComponentInstance      scriptingComponent,
-  OSADebugCallFrameRef   inCallFrame,
-  AERecord *             outState)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetVariable(
-  ComponentInstance      scriptingComponent,
-  OSADebugCallFrameRef   inCallFrame,
-  const AEDesc *         inVariableName,
-  OSAID *                outVariable)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerSetVariable()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerSetVariable(
-  ComponentInstance      scriptingComponent,
-  OSADebugCallFrameRef   inCallFrame,
-  const AEDesc *         inVariableName,
-  OSAID                  inVariable)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerGetPreviousCallFrame()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerGetPreviousCallFrame(
-  ComponentInstance       scriptingComponent,
-  OSADebugCallFrameRef    inCurrentFrame,
-  OSADebugCallFrameRef *  outPrevFrame)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OSADebuggerDisposeCallFrame()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in AppleScriptLib 1.5 and later
- */
-extern OSAError 
-OSADebuggerDisposeCallFrame(
-  ComponentInstance      scriptingComponent,
-  OSADebugCallFrameRef   inCallFrame)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /**************************************************************************
@@ -2164,8 +1946,8 @@ extern OSAError
 OSALoadFile(
   ComponentInstance   scriptingComponent,
   const FSRef *       scriptFile,
-  Boolean *           storable,
-  long                modeFlags,
+  Boolean *           storable,                 /* can be NULL */
+  SInt32              modeFlags,
   OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -2194,7 +1976,7 @@ OSAStoreFile(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   const FSRef *       scriptFile)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -2220,7 +2002,7 @@ OSALoadExecuteFile(
   ComponentInstance   scriptingComponent,
   const FSRef *       scriptFile,
   OSAID               contextID,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -2249,7 +2031,7 @@ OSADoScriptFile(
   const FSRef *       scriptFile,
   OSAID               contextID,
   DescType            desiredType,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -2268,8 +2050,6 @@ OSADoScriptFile(
         ModeFlags:
             See OSALoad(), OSACompile(), OSAExecute(), and OSADisplay().
     */
-
-#pragma options align=reset
 
 #ifdef __cplusplus
 }

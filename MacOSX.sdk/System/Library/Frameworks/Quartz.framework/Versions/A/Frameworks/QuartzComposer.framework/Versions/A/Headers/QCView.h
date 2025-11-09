@@ -1,34 +1,56 @@
 /*
-	Copyright:	(c) 2003-2004 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c) 2003-2007 by Apple, Inc., all rights reserved.
 */
 
 #import <AppKit/AppKit.h>
+
 #import <QuartzComposer/QCRenderer.h>
 
 /* HIGH-LEVEL NOTES:
-- A QCView is a custom NSView that plays QuartzComposer compositions.
+- A QCView is a custom NSView that plays Quartz compositions.
 - When archived, a QCView saves its current composition.
 - V-sync is always enabled in the QCView.
 - If "autoStart" is set to YES, the QCView automatically starts rendering when it is put on screen (default setting is NO).
 - The QCView automatically stops rendering when it is put off screen.
 - When the QCView is not rendering, it is filled with the erase color.
+- Use the methods from the <QCCompositionRenderer> protocol to communicate with the composition.
+- The input and output ports of the root patch of the composition are also accessible with KVC through the "patch" property e.g. "patch.inputFoo.value".
 */
 
 /* Notification names */
 extern NSString* const QCViewDidStartRenderingNotification;
 extern NSString* const QCViewDidStopRenderingNotification;
 
-/* QuartzComposer Composition Player */
-@interface QCView : NSView
+/* Quartz Composer Composition View */
+@interface QCView : NSView <QCCompositionRenderer>
 {
 @private
 	__strong void*				_QCViewPrivate;
 }
 
 /*
-Loads a Quartz Composer composition file on the view.
+Loads a Quartz composition file on the view.
 */
 - (BOOL) loadCompositionFromFile:(NSString*)path;
+
+#if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+
+/*
+Loads a QCComposition object.
+*/
+- (BOOL) loadComposition:(QCComposition*)composition;
+
+/*
+Returns the QCComposition from the QCView or nil if none is currently loaded.
+*/
+- (QCComposition*) loadedComposition;
+
+/* 
+Unloads the compositon from the view. Indirectly calls -stopRendering if necessary 
+*/
+- (void) unloadComposition;
+
+#endif
 
 /*
 Sets / Checks if the view automatically starts rendering when put on screen.
@@ -61,8 +83,8 @@ The events which may be filtered are:
 	NSFlagsChanged
 The mask should be a combination of the masks corresponding to the above events or be "NSAnyEventMask".
 */
-- (void) setEventForwardingMask:(unsigned)mask;
-- (unsigned) eventForwardingMask;
+- (void) setEventForwardingMask:(NSUInteger)mask;
+- (NSUInteger) eventForwardingMask;
 
 /*
 Sets / Retrieves the maximum rendering framerate (pass 0.0 to specify no limit).
@@ -80,6 +102,40 @@ Starts rendering and returns NO on failure.
 */
 - (BOOL) startRendering;
 
+#if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+
+/*
+Allow subclassers to do additional operations or OpenGL rendering before and after the composition is rendered.
+Do not call this method directly.
+If the return value of super is NO, or if your custom rendering failed, return NO, otherwise, return YES.
+
+Use the OpenGL context of the QCView to do drawing. You can retrieve it by calling [self openGLContext].
+Note that this context won't be necessarily set as the current OpenGL context.
+For efficiency, it is recommended you use <OpenGL/CGLMacro.h> instead of setting this context as current:
+	CGLContextObj cgl_ctx = [[self openGLContext] CGLContextObj];
+	//OpenGL commands go here
+Make sure you save / restore all OpenGL states you change (except states defined in GL_CURRENT_BIT).
+Do not flush the context, since that is handled by the QCView.
+*/
+- (BOOL) renderAtTime:(NSTimeInterval)time arguments:(NSDictionary*)arguments;
+
+/*
+Pauses rendering in the view (calls to that method can be nested).
+*/
+- (void) pauseRendering;
+
+/*
+Returns YES if the view rendering is currently paused.
+*/
+- (BOOL) isPausedRendering;
+
+/*
+Resumes rendering in the view if previously paused (calls to that method can be nested).
+*/
+- (void) resumeRendering;
+
+#endif
+
 /*
 Stops rendering in the view.
 */
@@ -90,66 +146,33 @@ Returns YES if the view is currently rendering.
 */
 - (BOOL) isRendering;
 
-/*
-Returns a dictionary containing attributes describing the composition and the input / output ports on its root patch.
-The dictionary may define the following composition attributes:
-	- QCCompositionAttributeNameKey: the name of the composition as specified in the information dialog in Quartz Composer (NSString*)
-	- QCCompositionAttributeDescriptionKey: the description of the composition as specified in the information dialog in Quartz Composer (NSString*)
-	- QCCompositionAttributeCopyrightKey: the copyright of the composition as specified in the information dialog in Quartz Composer (NSString*)
-The dictionary also contains dictionaries corresponding to the keys identifying each input / output port of the root patch of the composition. Each of those dictionaries defines the following port attributes:
-	- QCPortAttributeTypeKey: the type of the port (NSString)
-	- QCPortAttributeNameKey: the name of the port if available (NSString)
-	- QCPortAttributeMinimumValueKey: the minimum numerical value accepted by the port if available - smaller values will be clamped (NSNumber)
-	- QCPortAttributeMaximumValueKey: the maximum numerical value accepted by the port if available - bigger values will be clamped (NSNumber)
-*/
-- (NSDictionary*) attributes;
+#if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
 /*
-Returns an array listing the keys identifying the input ports of the root patch of the composition.
+Returns a snapshot of the current image in the QCView.
 */
-- (NSArray*) inputKeys;
+- (NSImage*) snapshotImage;
 
 /*
-Returns an array listing the keys identifying the output ports of the root patch of the composition.
+Returns a snapshot of the current image in the QCView as a specific image type.
+The following image types are supported: NSBitmapImageRep, NSImage, CIImage, CGImage, CVOpenGLBuffer, CVPixelBuffer or QCImage (optimized abstract image object only to be used with -setValue:forInputKey: of a <QCCompositionRenderer>).
+The caller is responsible for releasing the returned object.
 */
-- (NSArray*) outputKeys;
+- (id) createSnapshotImageOfType:(NSString*)type;
 
 /*
-Sets the value on an input port (identified by its key) of the root patch of the composition.
-This method will throw an exception if "key" is invalid or return NO if it cannot set the value.
-The types of values you can pass depends on the type of the input port:
-	- NSNumber or any object that responds to -intValue, -floatValue or -doubleValue for Boolean, Index and Number ports
-	- NSString or any object that responds to -stringValue or -description for String ports
-	- NSColor for Color ports
-	- NSImage, CGImageRef, CIImage or CVImageBufferRef for Image ports
-	- NSArray or NSDictionary for Structure ports
-This method will force a redraw if the view is currently rendering in "kQCViewRenderingModeAutomatic" mode.
+Returns the OpenGL context used by the QCView.
+Consider this context as a read-only object and do not attempt to change any of its settings.
 */
-- (BOOL) setValue:(id)value forInputKey:(NSString*)key;
+- (NSOpenGLContext*) openGLContext;
 
 /*
-Returns the current value on an input port (identified by its key) of the root patch of the composition.
-This method will throw an exception if "key" is invalid.
-The type of value returned depends on the type of the input port:
-- NSNumber for Boolean, Index and Number ports
-- NSString for String ports
-- NSColor for Color ports
-- NSImage for Image ports
-- NSDictionary for Structure ports
+Returns the OpenGL pixel format used by the QCView.
+Consider this pixel format as a read-only object and do not attempt to change any of its settings.
 */
-- (id) valueForInputKey:(NSString*)key; 
+- (NSOpenGLPixelFormat*) openGLPixelFormat;
 
-/*
-Returns the current value on an output port (identified by its key) of the root patch of the composition.
-This method will throw an exception if "key" is invalid.
-The type of value returned depends on the type of the output port:
-	- NSNumber for Boolean, Index and Number ports
-	- NSString for String ports
-	- NSColor for Color ports
-	- NSImage for Image ports
-	- NSDictionary for Structure ports
-*/
-- (id) valueForOutputKey:(NSString*)key;
+#endif
 
 @end
 
@@ -164,5 +187,14 @@ IBAction equivalent of -startRendering.
 IBAction equivalent of -stopRendering.
 */
 - (IBAction) stop:(id)sender;
+
+#if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+
+/*
+IBAction that starts rendering if not already rendering, pauses if already rendering or resumes rendering if paused
+*/
+- (IBAction) play:(id)sender;
+
+#endif
 
 @end

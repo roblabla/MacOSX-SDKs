@@ -1,12 +1,13 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotation.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
+#import <AppKit/AppKit.h>
 #import <PDFKit/PDFPage.h>
 
 
-@class NSColor, PDFBorder, PDFPage, PDFAnnotationPrivateVars;
+@class PDFAction, PDFBorder, PDFPage, PDFAnnotationPopup, PDFAnnotationPrivateVars;
 
 
 @interface PDFAnnotation : NSObject
@@ -15,10 +16,9 @@
     PDFAnnotationPrivateVars *_pdfPriv;
 }
 
-// This is the base class for all annotations. A PDFAnnotation object by itself is not useful, only the subclasses (like 
+// This is the base class for all annotations. A PDFAnnotation object by itself is not useful, only subclasses (like 
 // PDFAnnotationCircle, PDFAnnotationText) are interesting. In parsing a PDF however, any unknown or unsupported 
-// annotations will be represented as this base class.  Its -[drawRect] method merely frames the bounds of the 
-// annotation and prints the annotation type (like "TrapNet") within the box.
+// annotations will be represented as this base class.
 
 // -------- initializer
 
@@ -28,34 +28,45 @@
 
 // -------- accessors
 
-// Returns the page the annotation is associated with.
+// Returns the page the annotation is associated with (may return NULL if annotation not associated with a page).
 - (PDFPage *) page;
 
-// Returns the annotation type (called "Subtype" in the PDF specification since "Annot" is the type).  Examples include:
-// "Text", "Link", "Line", etc.
+// Returns the annotation type (called "Subtype" in the PDF specification since "Annot" is the type). Examples include: 
+// "Text", "Link", "Line", etc.  Required.
 - (NSString *) type;
-
-// Specifies whether it should be drawn to the display or not.
-- (BOOL) shouldDisplay;
-- (void) setShouldDisplay: (BOOL) display;
-
-// Specifies whether it should be printed or not.
-- (BOOL) shouldPrint;
-- (void) setShouldPrint: (BOOL) print;
-
-// A string of text associated with an annotation. Often to be displayed in a pop-up when the annotation is clicked on 
-// ("FreeText" and "Text" especially).
-- (NSString *) contents;
-- (void) setContents: (NSString *) contents;
-
-// String used for tooltips.  The base class returns [self contents], sub-classes may override as appropriate.
-- (NSString *) toolTip;
 
 // Required for all annotations.  The bounding box in page-space of the annotation.
 - (NSRect) bounds;
 - (void) setBounds: (NSRect) bounds;
 
-// Optional border or border style that describes how to draw the annoation border (if any).
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Optional (-[modificationDate] may return NULL).  Modification date of the annotation.
+- (NSDate *) modificationDate;
+- (void) setModificationDate: (NSDate *) date;
+
+// Optional (-[userName] may return NULL).  Name of the user who created the annotation.
+- (NSString *) userName;
+- (void) setUserName: (NSString *) name;
+
+// Optional (-[popup] may return NULL).  Not used with links or widgets, a popup annotation associated with this 
+// annotation.  The bounds and open state of the popup indicate the placement and open state of the popup window.
+- (PDFAnnotationPopup *) popup;
+- (void) setPopup: (PDFAnnotationPopup *) popup;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Indicates whether the annotation should be displayed on screen (depending upon -[shouldPrint] it may still print).
+- (BOOL) shouldDisplay;
+- (void) setShouldDisplay: (BOOL) display;
+
+// Indicates whether the annotation should be printed or not.
+- (BOOL) shouldPrint;
+- (void) setShouldPrint: (BOOL) print;
+
+// Optional border or border style that describes how to draw the annotation border (if any).  For the "geometry" 
+// annotations (Circle, Ink, Line, Square), the border indicates the line width and whether to draw with a dash pattern 
+// or solid pattern.  PDFAnnotationMarkup ignores the border.
 - (PDFBorder *) border;
 - (void) setBorder: (PDFBorder *) border;
 
@@ -63,9 +74,36 @@
 - (NSColor *) color;
 - (void) setColor: (NSColor *) color;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Optional action performed when a user releases the mouse within an annotation. PDF readers ignore actions except 
+// for those associated with Link or button Widget annotations. 
+- (PDFAction *) mouseUpAction;
+- (void) setMouseUpAction: (PDFAction *) action;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// A string of text associated with an annotation. Often displayed in a window when the annotation is clicked on 
+// ("FreeText" and "Text" especially).
+- (NSString *) contents;
+- (void) setContents: (NSString *) contents;
+
+// String used for tooltips.  The base class returns [self contents], sub-classes may override as appropriate.
+- (NSString *) toolTip;
+
 // Returns YES if the annotation has an appearance stream.  Annotations with appearance streams are drawn using their 
-// stream. As a result, setting many parameters (like 'setColor' above), will have no visible effect.
+// stream. As a result setting many parameters (like -[setColor:] above) will have no visible effect.
 - (BOOL) hasAppearanceStream;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// All appearance streams for the target annotation are removed.  Without an appearance stream, annotations are drawn 
+// strictly according to their parameters (color, border, font, etc.).  When a PDF is saved, PDF Kit will always 
+// write out an appearance stream(s) for each annotation.  If the PDF is reloaded, you will need to remove the 
+// appearance streams in order to continue to edit the annotations parameters.
+- (void) removeAllAppearanceStreams;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // -------- drawing
 

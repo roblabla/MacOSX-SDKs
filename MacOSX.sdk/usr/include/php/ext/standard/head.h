@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: head.h,v 1.21.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: head.h,v 1.28.2.1.2.3 2007/12/31 07:20:12 sebastian Exp $ */
 
 #ifndef HEAD_H
 #define HEAD_H
@@ -24,9 +24,11 @@
 extern PHP_RINIT_FUNCTION(head);
 PHP_FUNCTION(header);
 PHP_FUNCTION(setcookie);
+PHP_FUNCTION(setrawcookie);
 PHP_FUNCTION(headers_sent);
+PHP_FUNCTION(headers_list);
 
-PHPAPI int php_header(void);
-PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure TSRMLS_DC);
+PHPAPI int php_header(TSRMLS_D);
+PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode, int httponly TSRMLS_DC);
 
 #endif

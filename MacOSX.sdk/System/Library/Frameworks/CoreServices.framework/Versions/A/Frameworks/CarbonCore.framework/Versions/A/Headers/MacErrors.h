@@ -3,7 +3,7 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -66,7 +66,7 @@ enum {
   dskFulErr                     = -34,  /*disk full*/
   nsvErr                        = -35,  /*no such volume*/
   ioErr                         = -36,  /*I/O error (bummers)*/
-  bdNamErr                      = -37,  /*there may be no bad names in the final system!*/
+  bdNamErr                      = -37,  /* bad file name passed to routine; there may be no bad names in the final system!*/
   fnOpnErr                      = -38,  /*File not open*/
   eofErr                        = -39,  /*End of file*/
   posErr                        = -40,  /*tried to position to before start of file (r/w)*/
@@ -3066,6 +3066,119 @@ enum {
                                         /* DS Errors which are specific to the new runtime model introduced with PowerPC */
   dsBadLibrary                  = 1010, /* Bad shared library */
   dsMixedModeFailure            = 1011  /* Internal Mixed Mode Failure */
+};
+
+
+/*
+    On Mac OS X, the range from 100,000 to 100,999 has been reserved for returning POSIX errno error values.
+    Every POSIX errno value can be converted into a Mac OS X OSStatus value by adding kPOSIXErrorBase to the
+    value of errno.  They can't be returned by anything which just returns OSErr since kPOSIXErrorBase is
+    larger than the highest OSErr value.
+*/
+enum {
+  kPOSIXErrorBase               = 100000L,
+  kPOSIXErrorEPERM              = 100001L, /* Operation not permitted */
+  kPOSIXErrorENOENT             = 100002L, /* No such file or directory */
+  kPOSIXErrorESRCH              = 100003L, /* No such process */
+  kPOSIXErrorEINTR              = 100004L, /* Interrupted system call */
+  kPOSIXErrorEIO                = 100005L, /* Input/output error */
+  kPOSIXErrorENXIO              = 100006L, /* Device not configured */
+  kPOSIXErrorE2BIG              = 100007L, /* Argument list too long */
+  kPOSIXErrorENOEXEC            = 100008L, /* Exec format error */
+  kPOSIXErrorEBADF              = 100009L, /* Bad file descriptor */
+  kPOSIXErrorECHILD             = 100010L, /* No child processes */
+  kPOSIXErrorEDEADLK            = 100011L, /* Resource deadlock avoided */
+  kPOSIXErrorENOMEM             = 100012L, /* Cannot allocate memory */
+  kPOSIXErrorEACCES             = 100013L, /* Permission denied */
+  kPOSIXErrorEFAULT             = 100014L, /* Bad address */
+  kPOSIXErrorENOTBLK            = 100015L, /* Block device required */
+  kPOSIXErrorEBUSY              = 100016L, /* Device busy */
+  kPOSIXErrorEEXIST             = 100017L, /* File exists */
+  kPOSIXErrorEXDEV              = 100018L, /* Cross-device link */
+  kPOSIXErrorENODEV             = 100019L, /* Operation not supported by device */
+  kPOSIXErrorENOTDIR            = 100020L, /* Not a directory */
+  kPOSIXErrorEISDIR             = 100021L, /* Is a directory */
+  kPOSIXErrorEINVAL             = 100022L, /* Invalid argument */
+  kPOSIXErrorENFILE             = 100023L, /* Too many open files in system */
+  kPOSIXErrorEMFILE             = 100024L, /* Too many open files */
+  kPOSIXErrorENOTTY             = 100025L, /* Inappropriate ioctl for device */
+  kPOSIXErrorETXTBSY            = 100026L, /* Text file busy */
+  kPOSIXErrorEFBIG              = 100027L, /* File too large */
+  kPOSIXErrorENOSPC             = 100028L, /* No space left on device */
+  kPOSIXErrorESPIPE             = 100029L, /* Illegal seek */
+  kPOSIXErrorEROFS              = 100030L, /* Read-only file system */
+  kPOSIXErrorEMLINK             = 100031L, /* Too many links */
+  kPOSIXErrorEPIPE              = 100032L, /* Broken pipe */
+  kPOSIXErrorEDOM               = 100033L, /* Numerical argument out of domain */
+  kPOSIXErrorERANGE             = 100034L, /* Result too large */
+  kPOSIXErrorEAGAIN             = 100035L, /* Resource temporarily unavailable */
+  kPOSIXErrorEINPROGRESS        = 100036L, /* Operation now in progress */
+  kPOSIXErrorEALREADY           = 100037L, /* Operation already in progress */
+  kPOSIXErrorENOTSOCK           = 100038L, /* Socket operation on non-socket */
+  kPOSIXErrorEDESTADDRREQ       = 100039L, /* Destination address required */
+  kPOSIXErrorEMSGSIZE           = 100040L, /* Message too long */
+  kPOSIXErrorEPROTOTYPE         = 100041L, /* Protocol wrong type for socket */
+  kPOSIXErrorENOPROTOOPT        = 100042L, /* Protocol not available */
+  kPOSIXErrorEPROTONOSUPPORT    = 100043L, /* Protocol not supported */
+  kPOSIXErrorESOCKTNOSUPPORT    = 100044L, /* Socket type not supported */
+  kPOSIXErrorENOTSUP            = 100045L, /* Operation not supported */
+  kPOSIXErrorEPFNOSUPPORT       = 100046L, /* Protocol family not supported */
+  kPOSIXErrorEAFNOSUPPORT       = 100047L, /* Address family not supported by protocol family */
+  kPOSIXErrorEADDRINUSE         = 100048L, /* Address already in use */
+  kPOSIXErrorEADDRNOTAVAIL      = 100049L, /* Can't assign requested address */
+  kPOSIXErrorENETDOWN           = 100050L, /* Network is down */
+  kPOSIXErrorENETUNREACH        = 100051L, /* Network is unreachable */
+  kPOSIXErrorENETRESET          = 100052L, /* Network dropped connection on reset */
+  kPOSIXErrorECONNABORTED       = 100053L, /* Software caused connection abort */
+  kPOSIXErrorECONNRESET         = 100054L, /* Connection reset by peer */
+  kPOSIXErrorENOBUFS            = 100055L, /* No buffer space available */
+  kPOSIXErrorEISCONN            = 100056L, /* Socket is already connected */
+  kPOSIXErrorENOTCONN           = 100057L, /* Socket is not connected */
+  kPOSIXErrorESHUTDOWN          = 100058L, /* Can't send after socket shutdown */
+  kPOSIXErrorETOOMANYREFS       = 100059L, /* Too many references: can't splice */
+  kPOSIXErrorETIMEDOUT          = 100060L, /* Operation timed out */
+  kPOSIXErrorECONNREFUSED       = 100061L, /* Connection refused */
+  kPOSIXErrorELOOP              = 100062L, /* Too many levels of symbolic links */
+  kPOSIXErrorENAMETOOLONG       = 100063L, /* File name too long */
+  kPOSIXErrorEHOSTDOWN          = 100064L, /* Host is down */
+  kPOSIXErrorEHOSTUNREACH       = 100065L, /* No route to host */
+  kPOSIXErrorENOTEMPTY          = 100066L, /* Directory not empty */
+  kPOSIXErrorEPROCLIM           = 100067L, /* Too many processes */
+  kPOSIXErrorEUSERS             = 100068L, /* Too many users */
+  kPOSIXErrorEDQUOT             = 100069L, /* Disc quota exceeded */
+  kPOSIXErrorESTALE             = 100070L, /* Stale NFS file handle */
+  kPOSIXErrorEREMOTE            = 100071L, /* Too many levels of remote in path */
+  kPOSIXErrorEBADRPC            = 100072L, /* RPC struct is bad */
+  kPOSIXErrorERPCMISMATCH       = 100073L, /* RPC version wrong */
+  kPOSIXErrorEPROGUNAVAIL       = 100074L, /* RPC prog. not avail */
+  kPOSIXErrorEPROGMISMATCH      = 100075L, /* Program version wrong */
+  kPOSIXErrorEPROCUNAVAIL       = 100076L, /* Bad procedure for program */
+  kPOSIXErrorENOLCK             = 100077L, /* No locks available */
+  kPOSIXErrorENOSYS             = 100078L, /* Function not implemented */
+  kPOSIXErrorEFTYPE             = 100079L, /* Inappropriate file type or format */
+  kPOSIXErrorEAUTH              = 100080L, /* Authentication error */
+  kPOSIXErrorENEEDAUTH          = 100081L, /* Need authenticator */
+  kPOSIXErrorEPWROFF            = 100082L, /* Device power is off */
+  kPOSIXErrorEDEVERR            = 100083L, /* Device error, e.g. paper out */
+  kPOSIXErrorEOVERFLOW          = 100084L, /* Value too large to be stored in data type */
+  kPOSIXErrorEBADEXEC           = 100085L, /* Bad executable */
+  kPOSIXErrorEBADARCH           = 100086L, /* Bad CPU type in executable */
+  kPOSIXErrorESHLIBVERS         = 100087L, /* Shared library version mismatch */
+  kPOSIXErrorEBADMACHO          = 100088L, /* Malformed Macho file */
+  kPOSIXErrorECANCELED          = 100089L, /* Operation canceled */
+  kPOSIXErrorEIDRM              = 100090L, /* Identifier removed */
+  kPOSIXErrorENOMSG             = 100091L, /* No message of desired type */
+  kPOSIXErrorEILSEQ             = 100092L, /* Illegal byte sequence */
+  kPOSIXErrorENOATTR            = 100093L, /* Attribute not found */
+  kPOSIXErrorEBADMSG            = 100094L, /* Bad message */
+  kPOSIXErrorEMULTIHOP          = 100095L, /* Reserved */
+  kPOSIXErrorENODATA            = 100096L, /* No message available on STREAM */
+  kPOSIXErrorENOLINK            = 100097L, /* Reserved */
+  kPOSIXErrorENOSR              = 100098L, /* No STREAM resources */
+  kPOSIXErrorENOSTR             = 100099L, /* Not a STREAM */
+  kPOSIXErrorEPROTO             = 100100L, /* Protocol error */
+  kPOSIXErrorETIME              = 100101L, /* STREAM ioctl timeout */
+  kPOSIXErrorEOPNOTSUPP         = 100102L /* Operation not supported on socket */
 };
 
 

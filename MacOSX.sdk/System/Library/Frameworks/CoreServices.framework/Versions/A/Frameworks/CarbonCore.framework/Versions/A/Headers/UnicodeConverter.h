@@ -3,7 +3,7 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Unicode conversion contexts: */
 typedef struct OpaqueTextToUnicodeInfo*  TextToUnicodeInfo;
@@ -224,6 +224,18 @@ InvokeUnicodeToTextFallbackUPP(
   LogicalAddress            iInfoPtr,
   ConstUnicodeMappingPtr    iUnicodeMappingPtr,
   UnicodeToTextFallbackUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline UnicodeToTextFallbackUPP                             NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeUnicodeToTextFallbackUPP(UnicodeToTextFallbackUPP) { }
+    inline OSStatus                                             InvokeUnicodeToTextFallbackUPP(UniChar * iSrcUniStr, ByteCount iSrcUniStrLen, ByteCount * oSrcConvLen, TextPtr oDestStr, ByteCount iDestStrLen, ByteCount * oDestConvLen, LogicalAddress iInfoPtr, ConstUnicodeMappingPtr iUnicodeMappingPtr, UnicodeToTextFallbackUPP userUPP) { return (*userUPP)(iSrcUniStr, iSrcUniStrLen, oSrcConvLen, oDestStr, iDestStrLen, oDestConvLen, iInfoPtr, iUnicodeMappingPtr); }
+  #else
+    #define NewUnicodeToTextFallbackUPP(userRoutine)            ((UnicodeToTextFallbackUPP)userRoutine)
+    #define DisposeUnicodeToTextFallbackUPP(userUPP)
+    #define InvokeUnicodeToTextFallbackUPP(iSrcUniStr, iSrcUniStrLen, oSrcConvLen, oDestStr, iDestStrLen, oDestConvLen, iInfoPtr, iUnicodeMappingPtr, userUPP) (*userUPP)(iSrcUniStr, iSrcUniStrLen, oSrcConvLen, oDestStr, iDestStrLen, oDestConvLen, iInfoPtr, iUnicodeMappingPtr)
+  #endif
+#endif
 
 /* Function prototypes */
 /*
@@ -677,7 +689,7 @@ ResetUnicodeToTextRunInfo(UnicodeToTextRunInfo ioUnicodeToTextRunInfo) AVAILABLE
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

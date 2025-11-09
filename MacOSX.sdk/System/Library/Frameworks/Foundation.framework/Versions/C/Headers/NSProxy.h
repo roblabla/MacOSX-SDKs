@@ -1,5 +1,5 @@
 /*	NSProxy.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,6 +17,7 @@
 - (void)forwardInvocation:(NSInvocation *)invocation;
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel;
 - (void)dealloc;
+- (void)finalize;
 - (NSString *)description;
 + (BOOL)respondsToSelector:(SEL)aSelector;
 

@@ -1,7 +1,7 @@
 /*
 	File:		IOBluetoothUIUserLib.h
 	Contains:	Library to allow user-side clients to use Bluetooth UI C API's.
-	Copyright:	й 2002 by Apple Computer, Inc. All rights reserved.
+	Copyright:	й 2002-2006 by Apple Computer, Inc. All rights reserved.
 */
 
 #pragma once
@@ -20,14 +20,14 @@ typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothServiceBrowserControlle
 
 #if 0
 #pragma mark -
-#pragma mark ее Bluetooth Service Browser Controller ее
+#pragma mark === Bluetooth Service Browser Controller ===
 #endif
 
 /*!
   @enum IOBluetoothServiceBrowserControllerOptions
   @discussion Option values to customize the behavior of an IOBluetoothServiceBrowserController object.
   @constant kIOBluetoothServiceBrowserControllerOptionsNone - no options set.
-  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is displayed.
+  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is displayed.  This has been deprecated in 10.5
   @constant kIOBluetoothServiceBrowserControllerOptionsDisconnectWhenDone - disconnect from the device when UI operations are finished.
   
 */
@@ -36,7 +36,7 @@ typedef uint32_t IOBluetoothServiceBrowserControllerOptions;
 enum
 {
 	kIOBluetoothServiceBrowserControllerOptionsNone					= (0 << 0L),
-	kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry		= (1 << 0L),
+	kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry		= (1 << 0L), // this has been deprecated in 10.5, all panels will AutoStart
     kIOBluetoothServiceBrowserControllerOptionsDisconnectWhenDone	= (2 << 0L)
 };
 
@@ -100,7 +100,7 @@ IOReturn IOBluetoothServiceBrowserControllerDiscoverWithDeviceAttributes(IOBluet
 
 #if 0
 #pragma mark -
-#pragma mark ее Bluetooth Pairing Controller ее
+#pragma mark === Bluetooth Pairing Controller ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ void	IOBluetoothPairingControllerRunPanelWithAttributes(IOBluetoothPairingContro
 
 #if 0
 #pragma mark -
-#pragma mark ее Bluetooth Device Selector Controller ее
+#pragma mark === Bluetooth Device Selector Controller ===
 #endif
 
 
@@ -152,7 +152,7 @@ CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSele
 
 #if 0
 #pragma mark -
-#pragma mark ее Other functions ее
+#pragma mark === Other functions ===
 #endif
 
 

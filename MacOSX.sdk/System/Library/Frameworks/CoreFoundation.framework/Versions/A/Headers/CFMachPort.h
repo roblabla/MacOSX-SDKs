@@ -1,18 +1,14 @@
 /*	CFMachPort.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFMACHPORT__)
 #define __COREFOUNDATION_CFMACHPORT__ 1
 
-#if defined(__MACH__)
-
 #include <CoreFoundation/CFRunLoop.h>
 #include <mach/port.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFMachPort * CFMachPortRef;
 
@@ -41,11 +37,7 @@ CF_EXPORT void		CFMachPortSetInvalidationCallBack(CFMachPortRef port, CFMachPort
 
 CF_EXPORT CFRunLoopSourceRef	CFMachPortCreateRunLoopSource(CFAllocatorRef allocator, CFMachPortRef port, CFIndex order);
 
-#if defined(__cplusplus)
-}
-#endif
-
-#endif /* __MACH__ */
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFMACHPORT__ */
 

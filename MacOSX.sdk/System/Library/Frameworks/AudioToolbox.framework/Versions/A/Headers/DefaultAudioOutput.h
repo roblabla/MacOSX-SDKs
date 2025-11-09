@@ -9,6 +9,8 @@
 #ifndef __DefaultAudioOutput_h__
 #define __DefaultAudioOutput_h__
 
+#if !__LP64__
+
 #include <AvailabilityMacros.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AudioUnit.h>
@@ -29,5 +31,7 @@ extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	AVAILABLE_MAC_OS_
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !__LP64__
 
 #endif // __DefaultAudioOutput_h__

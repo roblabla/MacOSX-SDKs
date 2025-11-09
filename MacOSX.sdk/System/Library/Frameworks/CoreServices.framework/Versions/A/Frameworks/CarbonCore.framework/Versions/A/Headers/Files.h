@@ -1,11 +1,11 @@
 /*
      File:       CarbonCore/Files.h
  
-     Contains:   File Manager (MFS, HFS, and HFS+) Interfaces.
+     Contains:   File Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 Apple, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -71,7 +71,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 #ifndef _HFSUNISTR255_DEFINED_
 #define _HFSUNISTR255_DEFINED_
@@ -84,14 +84,39 @@ typedef struct HFSUniStr255             HFSUniStr255;
 typedef const HFSUniStr255 *            ConstHFSUniStr255Param;
 #endif
 #define kFSFileSecurityRemoveACL (acl_t) _FILESEC_REMOVE_ACL
+/*
+    File Permissions
+
+    Do not mix and match the following two sets of constants
+    see DTS Technote FL 37 "You Want Permission To Do What?!!"
+    <http://developer.apple.com/technotes/fl/fl_37.html>
+    for a detailed discussion of the two separate models
+    and how they are related.
+*/
+/*  Permissions for File Manager routines which follow the original model */
 enum {
   fsCurPerm                     = 0x00, /* open access permissions in ioPermssn */
   fsRdPerm                      = 0x01,
   fsWrPerm                      = 0x02,
   fsRdWrPerm                    = 0x03,
-  fsRdWrShPerm                  = 0x04,
-  fsRdDenyPerm                  = 0x10, /* for use with OpenDeny and OpenRFDeny */
-  fsWrDenyPerm                  = 0x20  /* for use with OpenDeny and OpenRFDeny */
+  fsRdWrShPerm                  = 0x04
+};
+
+/*    Permissions for File Manager routines which follow the AFP model
+    that is, routines with "OpenDeny" in the name.
+    
+    The most useful combinations of these are:
+        fsRdAccessPerm -> one writer, multiple readers: the readers
+        fsRdAccessPerm + fsWrAccessPerm + fsWrDenyPerm -> one writer, multiple readers: the writer
+        fsWrDenyPerm + fsRdAccessPerm -> multiple readers, no writers
+        fsRdAccessPerm + fsWrAccessPerm -> shared read/write access
+        fsRdAccessPerm + fsWrAccessPerm + fsRdDenyPerm + fsWrDenyPerm -> exclusive access
+*/
+enum {
+  fsRdAccessPerm                = 0x01,
+  fsWrAccessPerm                = 0x02,
+  fsRdDenyPerm                  = 0x10,
+  fsWrDenyPerm                  = 0x20
 };
 
 enum {
@@ -293,6 +318,12 @@ enum {
 
 
 typedef SInt16                          FSVolumeRefNum;
+#if __LP64__
+typedef int                             FSIORefNum;
+#else
+typedef SInt16                          FSIORefNum;
+#endif  /* __LP64__ */
+
 enum {
   kFSInvalidVolumeRefNum        = 0
 };
@@ -305,16 +336,24 @@ typedef FSRef *                         FSRefPtr;
 typedef struct __FSFileSecurity*        FSFileSecurityRef;
 /* Catalog position record */
 struct CatPositionRec {
-  long                initialize;
-  short               priv[6];
+  SInt32              initialize;
+  SInt16              priv[6];
 };
 typedef struct CatPositionRec           CatPositionRec;
+#if __LP64__
 struct FSSpec {
-  short               vRefNum;
-  long                parID;
+  UInt8               hidden[70];             /* FSSpecs are invalid for 64 bit, but defined in case they appear in shared structs*/
+};
+typedef struct FSSpec                   FSSpec;
+#else
+struct FSSpec {
+  FSVolumeRefNum      vRefNum;
+  SInt32              parID;
   StrFileName         name;                   /* a Str63 on MacOS*/
 };
 typedef struct FSSpec                   FSSpec;
+#endif  /* __LP64__ */
+
 typedef FSSpec *                        FSSpecPtr;
 typedef FSSpecPtr *                     FSSpecHandle;
 /* pointer to array of FSSpecs */
@@ -325,113 +364,119 @@ typedef FSSpecPtr                       FSSpecArrayPtr;
 */
 typedef const FSSpec *                  ConstFSSpecPtr;
 typedef union ParamBlockRec             ParamBlockRec;
+#if __LP64__
+typedef void *                          ParmBlkPtr;
+#else
 typedef ParamBlockRec *                 ParmBlkPtr;
+#endif  /* __LP64__ */
+
 typedef CALLBACK_API( void , IOCompletionProcPtr )(ParmBlkPtr paramBlock);
 typedef STACK_UPP_TYPE(IOCompletionProcPtr)                     IOCompletionUPP;
+#if !__LP64__
 struct IOParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioRefNum;               /*refNum for I/O operation*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioRefNum;               /*refNum for I/O operation*/
   SInt8               ioVersNum;              /*version number*/
   SInt8               ioPermssn;              /*Open: permissions (byte)*/
   Ptr                 ioMisc;                 /*Rename: new name (GetEOF,SetEOF: logical end of file) (Open: optional ptr to buffer) (SetFileType: new type)*/
   Ptr                 ioBuffer;               /*data buffer Ptr*/
-  long                ioReqCount;             /*requested byte count; also = ioNewDirID*/
-  long                ioActCount;             /*actual byte count completed*/
-  short               ioPosMode;              /*initial file positioning*/
-  long                ioPosOffset;            /*file position offset*/
+  SInt32              ioReqCount;             /*requested byte count; also = ioNewDirID*/
+  SInt32              ioActCount;             /*actual byte count completed*/
+  SInt16              ioPosMode;              /*initial file positioning*/
+  SInt32              ioPosOffset;            /*file position offset*/
 };
 typedef struct IOParam                  IOParam;
 typedef IOParam *                       IOParamPtr;
 struct FileParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioFRefNum;              /*reference number*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioFRefNum;              /*reference number*/
   SInt8               ioFVersNum;             /*version number*/
   SInt8               filler1;
-  short               ioFDirIndex;            /*GetFInfo directory index*/
+  SInt16              ioFDirIndex;            /*GetFInfo directory index*/
   SInt8               ioFlAttrib;             /*GetFInfo: in-use bit=7, lock bit=0*/
   SInt8               ioFlVersNum;            /*file version number*/
   FInfo               ioFlFndrInfo;           /*user info*/
-  unsigned long       ioFlNum;                /*GetFInfo: file number; TF- ioDirID*/
-  unsigned short      ioFlStBlk;              /*start file block (0 if none)*/
-  long                ioFlLgLen;              /*logical length (EOF)*/
-  long                ioFlPyLen;              /*physical length*/
-  unsigned short      ioFlRStBlk;             /*start block rsrc fork*/
-  long                ioFlRLgLen;             /*file logical length rsrc fork*/
-  long                ioFlRPyLen;             /*file physical length rsrc fork*/
-  unsigned long       ioFlCrDat;              /*file creation date& time (32 bits in secs)*/
-  unsigned long       ioFlMdDat;              /*last modified date and time*/
+  UInt32              ioFlNum;                /*GetFInfo: file number; TF- ioDirID*/
+  UInt16              ioFlStBlk;              /*start file block (0 if none)*/
+  SInt32              ioFlLgLen;              /*logical length (EOF)*/
+  SInt32              ioFlPyLen;              /*physical length*/
+  UInt16              ioFlRStBlk;             /*start block rsrc fork*/
+  SInt32              ioFlRLgLen;             /*file logical length rsrc fork*/
+  SInt32              ioFlRPyLen;             /*file physical length rsrc fork*/
+  UInt32              ioFlCrDat;              /*file creation date& time (32 bits in secs)*/
+  UInt32              ioFlMdDat;              /*last modified date and time*/
 };
 typedef struct FileParam                FileParam;
 typedef FileParam *                     FileParamPtr;
 struct VolumeParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  long                filler2;
-  short               ioVolIndex;             /*volume index number*/
-  unsigned long       ioVCrDate;              /*creation date and time*/
-  unsigned long       ioVLsBkUp;              /*last backup date and time*/
-  unsigned short      ioVAtrb;                /*volume attrib*/
-  unsigned short      ioVNmFls;               /*number of files in directory*/
-  unsigned short      ioVDirSt;               /*start block of file directory*/
-  short               ioVBlLn;                /*GetVolInfo: length of dir in blocks*/
-  unsigned short      ioVNmAlBlks;            /*for compatibilty ioVNmAlBlks * ioVAlBlkSiz <= 2 GB*/
-  unsigned long       ioVAlBlkSiz;            /*for compatibilty ioVAlBlkSiz is <= $0000FE00 (65,024)*/
-  unsigned long       ioVClpSiz;              /*GetVolInfo: bytes to allocate at a time*/
-  unsigned short      ioAlBlSt;               /*starting disk(512-byte) block in block map*/
-  unsigned long       ioVNxtFNum;             /*GetVolInfo: next free file number*/
-  unsigned short      ioVFrBlk;               /*GetVolInfo: # free alloc blks for this vol*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  UInt32              filler2;
+  SInt16              ioVolIndex;             /*volume index number*/
+  UInt32              ioVCrDate;              /*creation date and time*/
+  UInt32              ioVLsBkUp;              /*last backup date and time*/
+  UInt16              ioVAtrb;                /*volume attrib*/
+  UInt16              ioVNmFls;               /*number of files in directory*/
+  UInt16              ioVDirSt;               /*start block of file directory*/
+  SInt16              ioVBlLn;                /*GetVolInfo: length of dir in blocks*/
+  UInt16              ioVNmAlBlks;            /*for compatibilty ioVNmAlBlks * ioVAlBlkSiz <= 2 GB*/
+  UInt32              ioVAlBlkSiz;            /*for compatibilty ioVAlBlkSiz is <= $0000FE00 (65,024)*/
+  UInt32              ioVClpSiz;              /*GetVolInfo: bytes to allocate at a time*/
+  UInt16              ioAlBlSt;               /*starting disk(512-byte) block in block map*/
+  UInt32              ioVNxtFNum;             /*GetVolInfo: next free file number*/
+  UInt16              ioVFrBlk;               /*GetVolInfo: # free alloc blks for this vol*/
 };
 typedef struct VolumeParam              VolumeParam;
 typedef VolumeParam *                   VolumeParamPtr;
 struct CntrlParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioCRefNum;              /*refNum for I/O operation*/
-  short               csCode;                 /*word for control status code*/
-  short               csParam[11];            /*operation-defined parameters*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioCRefNum;              /*refNum for I/O operation*/
+  SInt16              csCode;                 /*word for control status code*/
+  SInt16              csParam[11];            /*operation-defined parameters*/
 };
 typedef struct CntrlParam               CntrlParam;
 typedef CntrlParam *                    CntrlParamPtr;
 struct SlotDevParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioSRefNum;
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioSRefNum;
   SInt8               ioSVersNum;
   SInt8               ioSPermssn;
   Ptr                 ioSMix;
-  short               ioSFlags;
+  SInt16              ioSFlags;
   SInt8               ioSlot;
   SInt8               ioID;
 };
@@ -439,18 +484,18 @@ typedef struct SlotDevParam             SlotDevParam;
 typedef SlotDevParam *                  SlotDevParamPtr;
 struct MultiDevParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioMRefNum;
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioMRefNum;
   SInt8               ioMVersNum;
   SInt8               ioMPermssn;
   Ptr                 ioMMix;
-  short               ioMFlags;
+  SInt16              ioMFlags;
   Ptr                 ioSEBlkPtr;
 };
 typedef struct MultiDevParam            MultiDevParam;
@@ -463,6 +508,547 @@ union ParamBlockRec {
   SlotDevParam        slotDevParam;
   MultiDevParam       multiDevParam;
 };
+
+struct HFileInfo {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioFRefNum;
+  SInt8               ioFVersNum;
+  SInt8               filler1;
+  SInt16              ioFDirIndex;
+  SInt8               ioFlAttrib;
+  SInt8               ioACUser;
+  FInfo               ioFlFndrInfo;
+  SInt32              ioDirID;
+  UInt16              ioFlStBlk;
+  SInt32              ioFlLgLen;
+  SInt32              ioFlPyLen;
+  UInt16              ioFlRStBlk;
+  SInt32              ioFlRLgLen;
+  SInt32              ioFlRPyLen;
+  UInt32              ioFlCrDat;
+  UInt32              ioFlMdDat;
+  UInt32              ioFlBkDat;
+  FXInfo              ioFlXFndrInfo;
+  SInt32              ioFlParID;
+  SInt32              ioFlClpSiz;
+};
+typedef struct HFileInfo                HFileInfo;
+struct DirInfo {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioFRefNum;
+  SInt8               ioFVersNum;
+  SInt8               filler1;
+  SInt16              ioFDirIndex;
+  SInt8               ioFlAttrib;
+  SInt8               ioACUser;
+  DInfo               ioDrUsrWds;
+  SInt32              ioDrDirID;
+  UInt16              ioDrNmFls;
+  SInt16              filler3[9];
+  UInt32              ioDrCrDat;
+  UInt32              ioDrMdDat;
+  UInt32              ioDrBkDat;
+  DXInfo              ioDrFndrInfo;
+  SInt32              ioDrParID;
+};
+typedef struct DirInfo                  DirInfo;
+union CInfoPBRec {
+  HFileInfo           hFileInfo;
+  DirInfo             dirInfo;
+};
+typedef union CInfoPBRec                CInfoPBRec;
+typedef CInfoPBRec *                    CInfoPBPtr;
+struct XCInfoPBRec {
+  QElemPtr            qLink;
+  SInt16              qType;
+  SInt16              ioTrap;
+  Ptr                 ioCmdAddr;
+  ProcPtr             ioCompletion;           /* --> A pointer to a completion routine */
+  volatile OSErr      ioResult;               /* --> The result code of the function */
+  StringPtr           ioNamePtr;              /* --> Pointer to pathname to object */
+  FSVolumeRefNum      ioVRefNum;              /* --> A volume specification */
+  SInt32              filler1;
+  StringPtr           ioShortNamePtr;         /* <-> A pointer to the short name string buffer - required! */
+  SInt16              filler2;
+  SInt16              ioPDType;               /* <-- The ProDOS file type */
+  SInt32              ioPDAuxType;            /* <-- The ProDOS aux type */
+  SInt32              filler3[2];
+  SInt32              ioDirID;                /* --> A directory ID */
+};
+typedef struct XCInfoPBRec              XCInfoPBRec;
+typedef XCInfoPBRec *                   XCInfoPBPtr;
+struct DTPBRec {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioDTRefNum;             /* desktop refnum */
+  SInt16              ioIndex;
+  SInt32              ioTagInfo;
+  Ptr                 ioDTBuffer;
+  SInt32              ioDTReqCount;
+  SInt32              ioDTActCount;
+  SInt8               ioFiller1;
+  UInt8               ioIconType;
+  SInt16              ioFiller2;
+  SInt32              ioDirID;
+  OSType              ioFileCreator;
+  OSType              ioFileType;
+  SInt32              ioFiller3;
+  SInt32              ioDTLgLen;
+  SInt32              ioDTPyLen;
+  SInt16              ioFiller4[14];
+  SInt32              ioAPPLParID;
+};
+typedef struct DTPBRec                  DTPBRec;
+typedef DTPBRec *                       DTPBPtr;
+
+struct HIOParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioRefNum;
+  SInt8               ioVersNum;
+  SInt8               ioPermssn;
+  Ptr                 ioMisc;
+  Ptr                 ioBuffer;
+  SInt32              ioReqCount;
+  SInt32              ioActCount;
+  SInt16              ioPosMode;
+  SInt32              ioPosOffset;
+};
+typedef struct HIOParam                 HIOParam;
+typedef HIOParam *                      HIOParamPtr;
+struct HFileParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioFRefNum;
+  SInt8               ioFVersNum;
+  SInt8               filler1;
+  SInt16              ioFDirIndex;
+  SInt8               ioFlAttrib;
+  SInt8               ioFlVersNum;
+  FInfo               ioFlFndrInfo;
+  SInt32              ioDirID;
+  UInt16              ioFlStBlk;
+  SInt32              ioFlLgLen;
+  SInt32              ioFlPyLen;
+  UInt16              ioFlRStBlk;
+  SInt32              ioFlRLgLen;
+  SInt32              ioFlRPyLen;
+  UInt32              ioFlCrDat;
+  UInt32              ioFlMdDat;
+};
+typedef struct HFileParam               HFileParam;
+typedef HFileParam *                    HFileParamPtr;
+struct HVolumeParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt32              filler2;
+  SInt16              ioVolIndex;
+  UInt32              ioVCrDate;
+  UInt32              ioVLsMod;
+  SInt16              ioVAtrb;
+  UInt16              ioVNmFls;
+  UInt16              ioVBitMap;
+  UInt16              ioAllocPtr;
+  UInt16              ioVNmAlBlks;
+  UInt32              ioVAlBlkSiz;
+  UInt32              ioVClpSiz;
+  UInt16              ioAlBlSt;
+  UInt32              ioVNxtCNID;
+  UInt16              ioVFrBlk;
+  UInt16              ioVSigWord;
+  SInt16              ioVDrvInfo;
+  FSIORefNum          ioVDRefNum;
+  SInt16              ioVFSID;
+  UInt32              ioVBkUp;
+  SInt16              ioVSeqNum;
+  UInt32              ioVWrCnt;
+  UInt32              ioVFilCnt;
+  UInt32              ioVDirCnt;
+  SInt32              ioVFndrInfo[8];
+};
+typedef struct HVolumeParam             HVolumeParam;
+typedef HVolumeParam *                  HVolumeParamPtr;
+struct XIOParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioRefNum;
+  SInt8               ioVersNum;
+  SInt8               ioPermssn;
+  Ptr                 ioMisc;
+  Ptr                 ioBuffer;
+  SInt32              ioReqCount;
+  SInt32              ioActCount;
+  SInt16              ioPosMode;              /* must have kUseWidePositioning bit set */
+  wide                ioWPosOffset;           /* wide positioning offset */
+};
+typedef struct XIOParam                 XIOParam;
+typedef XIOParam *                      XIOParamPtr;
+struct XVolumeParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  UInt32              ioXVersion;             /* this XVolumeParam version (0) */
+  SInt16              ioVolIndex;
+  UInt32              ioVCrDate;
+  UInt32              ioVLsMod;
+  SInt16              ioVAtrb;
+  UInt16              ioVNmFls;
+  UInt16              ioVBitMap;
+  UInt16              ioAllocPtr;
+  UInt16              ioVNmAlBlks;
+  UInt32              ioVAlBlkSiz;
+  UInt32              ioVClpSiz;
+  UInt16              ioAlBlSt;
+  UInt32              ioVNxtCNID;
+  UInt16              ioVFrBlk;
+  UInt16              ioVSigWord;
+  SInt16              ioVDrvInfo;
+  SInt16              ioVDRefNum;
+  SInt16              ioVFSID;
+  UInt32              ioVBkUp;
+  SInt16              ioVSeqNum;
+  UInt32              ioVWrCnt;
+  UInt32              ioVFilCnt;
+  UInt32              ioVDirCnt;
+  SInt32              ioVFndrInfo[8];
+  UInt64              ioVTotalBytes;          /* total number of bytes on volume */
+  UInt64              ioVFreeBytes;           /* number of free bytes on volume */
+};
+typedef struct XVolumeParam             XVolumeParam;
+typedef XVolumeParam *                  XVolumeParamPtr;
+struct AccessParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioRefNum;               /* <- , ioRefNum ( use to be filler3 ) */
+  SInt16              ioDenyModes;            /*access rights data*/
+  SInt16              filler4;
+  SInt8               filler5;
+  SInt8               ioACUser;               /*access rights for directory only*/
+  SInt32              filler6;
+  SInt32              ioACOwnerID;            /*owner ID*/
+  SInt32              ioACGroupID;            /*group ID*/
+  SInt32              ioACAccess;             /*access rights*/
+  SInt32              ioDirID;
+};
+typedef struct AccessParam              AccessParam;
+typedef AccessParam *                   AccessParamPtr;
+struct ObjParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt16              filler7;
+  SInt16              ioObjType;              /*function code*/
+  StringPtr           ioObjNamePtr;           /*ptr to returned creator/group name*/
+  SInt32              ioObjID;                /*creator/group ID*/
+};
+typedef struct ObjParam                 ObjParam;
+typedef ObjParam *                      ObjParamPtr;
+struct CopyParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSVolumeRefNum      ioDstVRefNum;           /*destination vol identifier*/
+  SInt16              filler8;
+  StringPtr           ioNewName;              /*ptr to destination pathname*/
+  StringPtr           ioCopyName;             /*ptr to optional name*/
+  SInt32              ioNewDirID;             /*destination directory ID*/
+  SInt32              filler14;
+  SInt32              filler15;
+  SInt32              ioDirID;
+};
+typedef struct CopyParam                CopyParam;
+typedef CopyParam *                     CopyParamPtr;
+struct WDParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt16              ioWDCreated;
+  SInt16              ioWDIndex;
+  SInt32              ioWDProcID;
+  FSVolumeRefNum      ioWDVRefNum;
+  SInt16              filler10;
+  SInt32              filler11;
+  SInt32              filler12;
+  SInt32              filler13;
+  SInt32              ioWDDirID;
+};
+typedef struct WDParam                  WDParam;
+typedef WDParam *                       WDParamPtr;
+struct FIDParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt32              filler14;
+  StringPtr           ioDestNamePtr;          /* dest file name */
+  SInt32              filler15;
+  SInt32              ioDestDirID;            /* dest file's directory id */
+  SInt32              filler16;
+  SInt32              filler17;
+  SInt32              ioSrcDirID;             /* source file's directory id */
+  SInt16              filler18;
+  SInt32              ioFileID;               /* file ID */
+};
+typedef struct FIDParam                 FIDParam;
+typedef FIDParam *                      FIDParamPtr;
+struct ForeignPrivParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt32              ioFiller21;
+  SInt32              ioFiller22;
+  Ptr                 ioForeignPrivBuffer;
+  SInt32              ioForeignPrivActCount;
+  SInt32              ioForeignPrivReqCount;
+  SInt32              ioFiller23;
+  SInt32              ioForeignPrivDirID;
+  SInt32              ioForeignPrivInfo1;
+  SInt32              ioForeignPrivInfo2;
+  SInt32              ioForeignPrivInfo3;
+  SInt32              ioForeignPrivInfo4;
+};
+typedef struct ForeignPrivParam         ForeignPrivParam;
+typedef ForeignPrivParam *              ForeignPrivParamPtr;
+struct CSParam {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSSpecPtr           ioMatchPtr;             /* match array */
+  SInt32              ioReqMatchCount;        /* maximum allowable matches */
+  SInt32              ioActMatchCount;        /* actual match count */
+  SInt32              ioSearchBits;           /* search criteria selector */
+  CInfoPBPtr          ioSearchInfo1;          /* search values and range lower bounds */
+  CInfoPBPtr          ioSearchInfo2;          /* search values and range upper bounds */
+  SInt32              ioSearchTime;           /* length of time to run search */
+  CatPositionRec      ioCatPosition;          /* current position in the catalog */
+  Ptr                 ioOptBuffer;            /* optional performance enhancement buffer */
+  SInt32              ioOptBufSize;           /* size of buffer pointed to by ioOptBuffer */
+};
+typedef struct CSParam                  CSParam;
+typedef CSParam *                       CSParamPtr;
+union HParamBlockRec {
+  HIOParam            ioParam;
+  HFileParam          fileParam;
+  HVolumeParam        volumeParam;
+  AccessParam         accessParam;
+  ObjParam            objParam;
+  CopyParam           copyParam;
+  WDParam             wdParam;
+  FIDParam            fidParam;
+  CSParam             csParam;
+  ForeignPrivParam    foreignPrivParam;
+};
+typedef union HParamBlockRec            HParamBlockRec;
+
+
+typedef HParamBlockRec *                HParmBlkPtr;
+
+struct CMovePBRec {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt32              filler1;
+  StringPtr           ioNewName;
+  SInt32              filler2;
+  SInt32              ioNewDirID;
+  SInt32              filler3[2];
+  SInt32              ioDirID;
+};
+typedef struct CMovePBRec               CMovePBRec;
+typedef CMovePBRec *                    CMovePBPtr;
+struct WDPBRec {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  SInt16              filler1;
+  SInt16              ioWDIndex;
+  SInt32              ioWDProcID;
+  FSVolumeRefNum      ioWDVRefNum;
+  SInt16              filler2[7];
+  SInt32              ioWDDirID;
+};
+typedef struct WDPBRec                  WDPBRec;
+typedef WDPBRec *                       WDPBPtr;
+struct FCBPBRec {
+  QElemPtr            qLink;                  /*queue link in header*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
+  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
+  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
+  volatile OSErr      ioResult;               /*result code*/
+  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSIORefNum          ioRefNum;
+  SInt16              filler;
+  SInt16              ioFCBIndx;
+  SInt16              filler1;
+  SInt32              ioFCBFlNm;
+  SInt16              ioFCBFlags;
+  UInt16              ioFCBStBlk;
+  SInt32              ioFCBEOF;
+  SInt32              ioFCBPLen;
+  SInt32              ioFCBCrPs;
+  FSVolumeRefNum      ioFCBVRefNum;
+  SInt32              ioFCBClpSiz;
+  SInt32              ioFCBParID;
+};
+typedef struct FCBPBRec                 FCBPBRec;
+typedef FCBPBRec *                      FCBPBPtr;
+struct VCB {
+  QElemPtr            qLink;
+  SInt16              qType;
+  SInt16              vcbFlags;
+  UInt16              vcbSigWord;
+  UInt32              vcbCrDate;
+  UInt32              vcbLsMod;
+  SInt16              vcbAtrb;
+  UInt16              vcbNmFls;
+  SInt16              vcbVBMSt;
+  SInt16              vcbAllocPtr;
+  UInt16              vcbNmAlBlks;
+  SInt32              vcbAlBlkSiz;
+  SInt32              vcbClpSiz;
+  SInt16              vcbAlBlSt;
+  SInt32              vcbNxtCNID;
+  UInt16              vcbFreeBks;
+  Str27               vcbVN;
+  SInt16              vcbDrvNum;
+  FSIORefNum          vcbDRefNum;
+  SInt16              vcbFSID;
+  FSVolumeRefNum      vcbVRefNum;
+  Ptr                 vcbMAdr;
+  Ptr                 vcbBufAdr;
+  SInt16              vcbMLen;
+  SInt16              vcbDirIndex;
+  SInt16              vcbDirBlk;
+  UInt32              vcbVolBkUp;
+  UInt16              vcbVSeqNum;
+  SInt32              vcbWrCnt;
+  SInt32              vcbXTClpSiz;
+  SInt32              vcbCTClpSiz;
+  UInt16              vcbNmRtDirs;
+  SInt32              vcbFilCnt;
+  SInt32              vcbDirCnt;
+  SInt32              vcbFndrInfo[8];
+  UInt16              vcbVCSize;
+  UInt16              vcbVBMCSiz;
+  UInt16              vcbCtlCSiz;
+  UInt16              vcbXTAlBlks;
+  UInt16              vcbCTAlBlks;
+  SInt16              vcbXTRef;
+  SInt16              vcbCTRef;
+  Ptr                 vcbCtlBuf;
+  SInt32              vcbDirIDM;
+  SInt16              vcbOffsM;
+};
+typedef struct VCB                      VCB;
+typedef VCB *                           VCBPtr;
+struct DrvQEl {
+  QElemPtr            qLink;
+  SInt16              qType;
+  SInt16              dQDrive;
+  SInt16              dQRefNum;
+  SInt16              dQFSID;
+  UInt16              dQDrvSz;
+  UInt16              dQDrvSz2;
+};
+typedef struct DrvQEl                   DrvQEl;
+typedef DrvQEl *                        DrvQElPtr;
+#endif  /* !__LP64__ */
 
 
 /*
@@ -533,7 +1119,7 @@ enum {
   kFSNodeCopyProtectMask        = 0x0040,
   kFSNodeForkOpenBit            = 7,    /* Set if the file or directory has any open fork */
   kFSNodeForkOpenMask           = 0x0080,
-  kFSNodeHardLinkBit            = 8,    /* Set if the file is a hard link */
+  kFSNodeHardLinkBit            = 8,    /* Set if the file or directory has a link count > 1 */
   kFSNodeHardLinkMask           = 0x00000100
 };
 
@@ -547,6 +1133,7 @@ enum {
   kFSNodeIsSharePointMask       = 0x0020
 };
 
+#ifdef __LP64__
 
 /*
  *  FSCatalogInfo
@@ -624,13 +1211,11 @@ struct FSCatalogInfo {
    */
   UTCDateTime         backupDate;             /* date and time of last backup */
 
-
   /*
    * kFSCatInfoPermissions / Mac OS X only, file system permissions of
    * the returned item.  Coerce to a FSPermissionInfo to use.
    */
-  UInt32              permissions[4];         /* permissions (for Mac OS X), as FSPermissionInfo */
-
+  FSPermissionInfo    permissions;            /* permissions (for Mac OS X), as FSPermissionInfo */
 
   /*
    * kFSCatInfoFinderInfo / file type, creator, flags, location. 
@@ -682,16 +1267,46 @@ struct FSCatalogInfo {
   TextEncoding        textEncodingHint;
 };
 typedef struct FSCatalogInfo            FSCatalogInfo;
+#else
+struct FSCatalogInfo {
+  UInt16              nodeFlags;              /* node flags */
+  FSVolumeRefNum      volume;                 /* object's volume ref */
+  UInt32              parentDirID;            /* parent directory's ID */
+  UInt32              nodeID;                 /* file/directory ID */
+  UInt8               sharingFlags;           /* kioFlAttribMountedBit and kioFlAttribSharePointBit */
+  UInt8               userPrivileges;         /* user's effective AFP privileges (same as ioACUser) */
+  UInt8               reserved1;
+  UInt8               reserved2;
+  UTCDateTime         createDate;             /* date and time of creation */
+  UTCDateTime         contentModDate;         /* date and time of last fork modification */
+  UTCDateTime         attributeModDate;       /* date and time of last attribute modification */
+  UTCDateTime         accessDate;             /* date and time of last access (for Mac OS X) */
+  UTCDateTime         backupDate;             /* date and time of last backup */
+  UInt32              permissions[4];         /* permissions (for Mac OS X), as FSPermissionInfo */
+  UInt8               finderInfo[16];         /* Finder information part 1, as FileInfo or FolderInfo  */
+  UInt8               extFinderInfo[16];      /* Finder information part 2, as ExtendedFileInfo or ExtendedFolderInfo */
+
+  UInt64              dataLogicalSize;        /* files only */
+  UInt64              dataPhysicalSize;       /* files only */
+  UInt64              rsrcLogicalSize;        /* files only */
+  UInt64              rsrcPhysicalSize;       /* files only */
+
+  UInt32              valence;                /* folders only */
+  TextEncoding        textEncodingHint;
+};
+typedef struct FSCatalogInfo            FSCatalogInfo;
+#endif  /* defined(__LP64__) */
+
 typedef FSCatalogInfo *                 FSCatalogInfoPtr;
 struct FSRefParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   ConstStringPtr      ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
+  FSVolumeRefNum      ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
 
   SInt16              reserved1;              /* was ioRefNum */
   UInt8               reserved2;              /* was ioVersNum */
@@ -702,8 +1317,8 @@ struct FSRefParam {
   FSCatalogInfo *     catInfo;
   UniCharCount        nameLength;             /* input name length for create/rename */
   const UniChar *     name;                   /* input name for create/rename */
-  long                ioDirID;
-  FSSpec *            spec;
+  UInt32              ioDirID;
+  FSSpecPtr           spec;
   FSRef *             parentRef;              /* ref of directory to move another ref to */
   FSRef *             newRef;                 /* Output ref */
   TextEncoding        textEncodingHint;       /* for Rename, MakeFSRefUnicode */
@@ -714,8 +1329,8 @@ typedef FSRefParam *                    FSRefParamPtr;
 /* for use with PBCreateFileAndOpenFork*/
 struct FSRefForkIOParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
@@ -728,7 +1343,7 @@ struct FSRefForkIOParam {
   const UniChar *     forkName;               /* input; name of fork (NULL indicates data fork) */
   SInt8               permissions;            /* desired access to the fork */
   UInt8               reserved1;
-  SInt16              forkRefNum;             /* Output refNum of newly opened fork */
+  FSIORefNum          forkRefNum;             /* Output refNum of newly opened fork */
   FSRef *             newRef;                 /* Output ref */
 };
 typedef struct FSRefForkIOParam         FSRefForkIOParam;
@@ -754,8 +1369,8 @@ typedef struct FSSearchParams           FSSearchParams;
 typedef FSSearchParams *                FSSearchParamsPtr;
 struct FSCatalogBulkParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
@@ -770,7 +1385,7 @@ struct FSCatalogBulkParam {
   FSCatalogInfoBitmap  whichInfo;
   FSCatalogInfo *     catalogInfo;            /* returns an array */
   FSRef *             refs;                   /* returns an array */
-  FSSpec *            specs;                  /* returns an array */
+  FSSpecPtr           specs;                  /* returns an array */
   HFSUniStr255 *      names;                  /* returns an array */
   const FSSearchParams * searchParams;
 };
@@ -787,14 +1402,14 @@ enum {
 
 struct FSForkIOParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
   void *              reserved1;              /* was ioNamePtr */
   SInt16              reserved2;              /* was ioVRefNum */
-  SInt16              forkRefNum;             /* same as ioRefNum */
+  FSIORefNum          forkRefNum;             /* same as ioRefNum */
   UInt8               reserved3;              /* was ioVersNum */
   SInt8               permissions;            /* desired access to the fork */
   const FSRef *       ref;                    /* which object to open */
@@ -833,15 +1448,15 @@ typedef struct FSForkInfo               FSForkInfo;
 typedef FSForkInfo *                    FSForkInfoPtr;
 struct FSForkCBInfoParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
-  SInt16              desiredRefNum;          /* 0 to iterate, non-0 for specific refnum */
-  SInt16              volumeRefNum;           /* volume to match, or 0 for all volumes */
-  SInt16              iterator;               /* 0 to start iteration */
-  SInt16              actualRefNum;           /* actual refnum found */
+  FSIORefNum          desiredRefNum;          /* 0 to iterate, non-0 for specific refnum */
+  FSVolumeRefNum      volumeRefNum;           /* volume to match, or 0 for all volumes */
+  FSIORefNum          iterator;               /* 0 to start iteration */
+  FSVolumeRefNum      actualRefNum;           /* actual refnum found */
 
   FSRef *             ref;
   FSForkInfo *        forkInfo;
@@ -852,12 +1467,12 @@ typedef FSForkCBInfoParam *             FSForkCBInfoParamPtr;
 /* Parameter block for use with 64 bit range lock calls.*/
 struct FSRangeLockParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
-  SInt16              forkRefNum;             /* fork to operate on */
+  FSIORefNum          forkRefNum;             /* fork to operate on */
   UInt64              requestCount;           /*requested byte count*/
   UInt16              positionMode;           /*initial file positioning*/
   SInt64              positionOffset;         /*file position offset*/
@@ -934,14 +1549,14 @@ struct FSVolumeInfo {
   UInt16              filesystemID;           /* ioVFSID */
   UInt16              signature;              /* ioVSigWord, unique within an FSID */
   UInt16              driveNumber;            /* ioVDrvInfo */
-  short               driverRefNum;           /* ioVDRefNum */
+  FSIORefNum          driverRefNum;           /* ioVDRefNum */
 };
 typedef struct FSVolumeInfo             FSVolumeInfo;
 typedef FSVolumeInfo *                  FSVolumeInfoPtr;
 struct FSVolumeInfoParam {
   QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
+  SInt16              qType;                  /*type byte for safety check*/
+  SInt16              ioTrap;                 /*FS: the Trap*/
   Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
   IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
   volatile OSErr      ioResult;               /*result code*/
@@ -957,15 +1572,15 @@ struct FSVolumeInfoParam {
 typedef struct FSVolumeInfoParam        FSVolumeInfoParam;
 typedef FSVolumeInfoParam *             FSVolumeInfoParamPtr;
 struct GetVolParmsInfoBuffer {
-  short               vMVersion;              /*version number*/
-  long                vMAttrib;               /*bit vector of attributes (see vMAttrib constants)*/
+  SInt16              vMVersion;              /*version number*/
+  SInt32              vMAttrib;               /*bit vector of attributes (see vMAttrib constants)*/
   Handle              vMLocalHand;            /*handle to private data*/
-  long                vMServerAdr;            /*AppleTalk server address or zero*/
+  SInt32              vMServerAdr;            /*AppleTalk server address or zero*/
                                               /*       vMVersion 1 GetVolParmsInfoBuffer ends here */
-  long                vMVolumeGrade;          /*approx. speed rating or zero if unrated*/
-  short               vMForeignPrivID;        /*foreign privilege model supported or zero if none*/
+  SInt32              vMVolumeGrade;          /*approx. speed rating or zero if unrated*/
+  SInt16              vMForeignPrivID;        /*foreign privilege model supported or zero if none*/
                                               /*       vMVersion 2 GetVolParmsInfoBuffer ends here */
-  long                vMExtendedAttributes;   /*extended attribute bits (see vMExtendedAttributes constants)*/
+  SInt32              vMExtendedAttributes;   /*extended attribute bits (see vMExtendedAttributes constants)*/
                                               /*       vMVersion 3 GetVolParmsInfoBuffer ends here */
   void *              vMDeviceID;             /* device id name for interoperability with IOKit */
                                               /*       vMVersion 4 GetVolParmsInfoBuffer ends here */
@@ -973,93 +1588,12 @@ struct GetVolParmsInfoBuffer {
                                               /*       vMVersion 5 GetVolParmsInfoBuffer ends here */
 };
 typedef struct GetVolParmsInfoBuffer    GetVolParmsInfoBuffer;
-struct HFileInfo {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioFRefNum;
-  SInt8               ioFVersNum;
-  SInt8               filler1;
-  short               ioFDirIndex;
-  SInt8               ioFlAttrib;
-  SInt8               ioACUser;
-  FInfo               ioFlFndrInfo;
-  long                ioDirID;
-  unsigned short      ioFlStBlk;
-  long                ioFlLgLen;
-  long                ioFlPyLen;
-  unsigned short      ioFlRStBlk;
-  long                ioFlRLgLen;
-  long                ioFlRPyLen;
-  unsigned long       ioFlCrDat;
-  unsigned long       ioFlMdDat;
-  unsigned long       ioFlBkDat;
-  FXInfo              ioFlXFndrInfo;
-  long                ioFlParID;
-  long                ioFlClpSiz;
-};
-typedef struct HFileInfo                HFileInfo;
-struct DirInfo {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioFRefNum;
-  SInt8               ioFVersNum;
-  SInt8               filler1;
-  short               ioFDirIndex;
-  SInt8               ioFlAttrib;
-  SInt8               ioACUser;
-  DInfo               ioDrUsrWds;
-  long                ioDrDirID;
-  unsigned short      ioDrNmFls;
-  short               filler3[9];
-  unsigned long       ioDrCrDat;
-  unsigned long       ioDrMdDat;
-  unsigned long       ioDrBkDat;
-  DXInfo              ioDrFndrInfo;
-  long                ioDrParID;
-};
-typedef struct DirInfo                  DirInfo;
-union CInfoPBRec {
-  HFileInfo           hFileInfo;
-  DirInfo             dirInfo;
-};
-typedef union CInfoPBRec                CInfoPBRec;
-typedef CInfoPBRec *                    CInfoPBPtr;
-struct XCInfoPBRec {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  ProcPtr             ioCompletion;           /* --> A pointer to a completion routine */
-  volatile OSErr      ioResult;               /* --> The result code of the function */
-  StringPtr           ioNamePtr;              /* --> Pointer to pathname to object */
-  short               ioVRefNum;              /* --> A volume specification */
-  long                filler1;
-  StringPtr           ioShortNamePtr;         /* <-> A pointer to the short name string buffer - required! */
-  short               filler2;
-  short               ioPDType;               /* <-- The ProDOS file type */
-  long                ioPDAuxType;            /* <-- The ProDOS aux type */
-  long                filler3[2];
-  long                ioDirID;                /* --> A directory ID */
-};
-typedef struct XCInfoPBRec              XCInfoPBRec;
-typedef XCInfoPBRec *                   XCInfoPBPtr;
 /* 
     The following are structures to be filled out with the _PBGetVolMountInfo call
     and passed back into the _PBVolumeMount call for external file system mounts. 
 */
 /* the "signature" of the file system */
+
 typedef OSType                          VolumeType;
 enum {
                                         /* the signature for AppleShare */
@@ -1070,7 +1604,7 @@ enum {
     VolMount stuff was once in FSM.Å
 */
 struct VolMountInfoHeader {
-  short               length;                 /* length of location data (including self) */
+  SInt16              length;                 /* length of location data (including self) */
   VolumeType          media;                  /* type of media.  Variable length data follows */
 };
 typedef struct VolMountInfoHeader       VolMountInfoHeader;
@@ -1080,9 +1614,9 @@ typedef VolMountInfoHeader *            VolMountInfoPtr;
     portion of the record. This portion is now public.  
 */
 struct VolumeMountInfoHeader {
-  short               length;                 /* length of location data (including self) */
+  SInt16              length;                 /* length of location data (including self) */
   VolumeType          media;                  /* type of media (must be registered with Apple) */
-  short               flags;                  /* volume mount flags. Variable length data follows */
+  SInt16              flags;                  /* volume mount flags. Variable length data follows */
 };
 typedef struct VolumeMountInfoHeader    VolumeMountInfoHeader;
 typedef VolumeMountInfoHeader *         VolumeMountInfoHeaderPtr;
@@ -1103,18 +1637,18 @@ enum {
 
 
 struct AFPVolMountInfo {
-  short               length;                 /* length of location data (including self) */
+  SInt16              length;                 /* length of location data (including self) */
   VolumeType          media;                  /* type of media */
-  short               flags;                  /* bits for no messages, no reconnect */
+  SInt16              flags;                  /* bits for no messages, no reconnect */
   SInt8               nbpInterval;            /* NBP Interval parameter (IM2, p.322) */
   SInt8               nbpCount;               /* NBP Interval parameter (IM2, p.322) */
-  short               uamType;                /* User Authentication Method */
-  short               zoneNameOffset;         /* short positive offset from start of struct to Zone Name */
-  short               serverNameOffset;       /* offset to pascal Server Name string */
-  short               volNameOffset;          /* offset to pascal Volume Name string */
-  short               userNameOffset;         /* offset to pascal User Name string */
-  short               userPasswordOffset;     /* offset to pascal User Password string */
-  short               volPasswordOffset;      /* offset to pascal Volume Password string */
+  SInt16              uamType;                /* User Authentication Method */
+  SInt16              zoneNameOffset;         /* short positive offset from start of struct to Zone Name */
+  SInt16              serverNameOffset;       /* offset to pascal Server Name string */
+  SInt16              volNameOffset;          /* offset to pascal Volume Name string */
+  SInt16              userNameOffset;         /* offset to pascal User Name string */
+  SInt16              userPasswordOffset;     /* offset to pascal User Password string */
+  SInt16              volPasswordOffset;      /* offset to pascal Volume Password string */
   char                AFPData[144];           /* variable length data may follow */
 };
 typedef struct AFPVolMountInfo          AFPVolMountInfo;
@@ -1123,21 +1657,21 @@ typedef AFPVolMountInfo *               AFPVolMountInfoPtr;
 
 /* AFPXVolMountInfo is the new AFP volume mount info record, requires the 3.7 AppleShare Client */
 struct AFPXVolMountInfo {
-  short               length;                 /* length of location data (including self) */
+  SInt16              length;                 /* length of location data (including self) */
   VolumeType          media;                  /* type of media */
-  short               flags;                  /* bits for no messages, no reconnect */
+  SInt16              flags;                  /* bits for no messages, no reconnect */
   SInt8               nbpInterval;            /* NBP Interval parameter (IM2, p.322) */
   SInt8               nbpCount;               /* NBP Interval parameter (IM2, p.322) */
-  short               uamType;                /* User Authentication Method type */
-  short               zoneNameOffset;         /* short positive offset from start of struct to Zone Name */
-  short               serverNameOffset;       /* offset to pascal Server Name string */
-  short               volNameOffset;          /* offset to pascal Volume Name string */
-  short               userNameOffset;         /* offset to pascal User Name string */
-  short               userPasswordOffset;     /* offset to pascal User Password string */
-  short               volPasswordOffset;      /* offset to pascal Volume Password string */
-  short               extendedFlags;          /* extended flags word */
-  short               uamNameOffset;          /* offset to a pascal UAM name string */
-  short               alternateAddressOffset; /* offset to Alternate Addresses in tagged format */
+  SInt16              uamType;                /* User Authentication Method type */
+  SInt16              zoneNameOffset;         /* short positive offset from start of struct to Zone Name */
+  SInt16              serverNameOffset;       /* offset to pascal Server Name string */
+  SInt16              volNameOffset;          /* offset to pascal Volume Name string */
+  SInt16              userNameOffset;         /* offset to pascal User Name string */
+  SInt16              userPasswordOffset;     /* offset to pascal User Password string */
+  SInt16              volPasswordOffset;      /* offset to pascal Volume Password string */
+  SInt16              extendedFlags;          /* extended flags word */
+  SInt16              uamNameOffset;          /* offset to a pascal UAM name string */
+  SInt16              alternateAddressOffset; /* offset to Alternate Addresses in tagged format */
   char                AFPData[176];           /* variable length data may follow */
 };
 typedef struct AFPXVolMountInfo         AFPXVolMountInfo;
@@ -1176,463 +1710,15 @@ struct AFPAlternateAddress {
   UInt8               fAddressList[1];        /* actually variable length packed set of AFPTagData */
 };
 typedef struct AFPAlternateAddress      AFPAlternateAddress;
-struct DTPBRec {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioDTRefNum;             /* desktop refnum */
-  short               ioIndex;
-  long                ioTagInfo;
-  Ptr                 ioDTBuffer;
-  long                ioDTReqCount;
-  long                ioDTActCount;
-  SInt8               ioFiller1;
-  UInt8               ioIconType;
-  short               ioFiller2;
-  long                ioDirID;
-  OSType              ioFileCreator;
-  OSType              ioFileType;
-  long                ioFiller3;
-  long                ioDTLgLen;
-  long                ioDTPyLen;
-  short               ioFiller4[14];
-  long                ioAPPLParID;
+enum {
+  kLargeIconSize                = 256,
+  kLarge4BitIconSize            = 512,
+  kLarge8BitIconSize            = 1024,
+  kSmallIconSize                = 64,
+  kSmall4BitIconSize            = 128,
+  kSmall8BitIconSize            = 256
 };
-typedef struct DTPBRec                  DTPBRec;
-typedef DTPBRec *                       DTPBPtr;
 
-struct HIOParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioRefNum;
-  SInt8               ioVersNum;
-  SInt8               ioPermssn;
-  Ptr                 ioMisc;
-  Ptr                 ioBuffer;
-  long                ioReqCount;
-  long                ioActCount;
-  short               ioPosMode;
-  long                ioPosOffset;
-};
-typedef struct HIOParam                 HIOParam;
-typedef HIOParam *                      HIOParamPtr;
-struct HFileParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioFRefNum;
-  SInt8               ioFVersNum;
-  SInt8               filler1;
-  short               ioFDirIndex;
-  SInt8               ioFlAttrib;
-  SInt8               ioFlVersNum;
-  FInfo               ioFlFndrInfo;
-  long                ioDirID;
-  unsigned short      ioFlStBlk;
-  long                ioFlLgLen;
-  long                ioFlPyLen;
-  unsigned short      ioFlRStBlk;
-  long                ioFlRLgLen;
-  long                ioFlRPyLen;
-  unsigned long       ioFlCrDat;
-  unsigned long       ioFlMdDat;
-};
-typedef struct HFileParam               HFileParam;
-typedef HFileParam *                    HFileParamPtr;
-struct HVolumeParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  long                filler2;
-  short               ioVolIndex;
-  unsigned long       ioVCrDate;
-  unsigned long       ioVLsMod;
-  short               ioVAtrb;
-  unsigned short      ioVNmFls;
-  unsigned short      ioVBitMap;
-  unsigned short      ioAllocPtr;
-  unsigned short      ioVNmAlBlks;
-  unsigned long       ioVAlBlkSiz;
-  unsigned long       ioVClpSiz;
-  unsigned short      ioAlBlSt;
-  unsigned long       ioVNxtCNID;
-  unsigned short      ioVFrBlk;
-  unsigned short      ioVSigWord;
-  short               ioVDrvInfo;
-  short               ioVDRefNum;
-  short               ioVFSID;
-  unsigned long       ioVBkUp;
-  short               ioVSeqNum;
-  unsigned long       ioVWrCnt;
-  unsigned long       ioVFilCnt;
-  unsigned long       ioVDirCnt;
-  long                ioVFndrInfo[8];
-};
-typedef struct HVolumeParam             HVolumeParam;
-typedef HVolumeParam *                  HVolumeParamPtr;
-struct XIOParam {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  IOCompletionUPP     ioCompletion;
-  volatile OSErr      ioResult;
-  StringPtr           ioNamePtr;
-  short               ioVRefNum;
-  short               ioRefNum;
-  SInt8               ioVersNum;
-  SInt8               ioPermssn;
-  Ptr                 ioMisc;
-  Ptr                 ioBuffer;
-  long                ioReqCount;
-  long                ioActCount;
-  short               ioPosMode;              /* must have kUseWidePositioning bit set */
-  wide                ioWPosOffset;           /* wide positioning offset */
-};
-typedef struct XIOParam                 XIOParam;
-typedef XIOParam *                      XIOParamPtr;
-struct XVolumeParam {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  IOCompletionUPP     ioCompletion;
-  volatile OSErr      ioResult;
-  StringPtr           ioNamePtr;
-  short               ioVRefNum;
-  unsigned long       ioXVersion;             /* this XVolumeParam version (0) */
-  short               ioVolIndex;
-  unsigned long       ioVCrDate;
-  unsigned long       ioVLsMod;
-  short               ioVAtrb;
-  unsigned short      ioVNmFls;
-  unsigned short      ioVBitMap;
-  unsigned short      ioAllocPtr;
-  unsigned short      ioVNmAlBlks;
-  unsigned long       ioVAlBlkSiz;
-  unsigned long       ioVClpSiz;
-  unsigned short      ioAlBlSt;
-  unsigned long       ioVNxtCNID;
-  unsigned short      ioVFrBlk;
-  unsigned short      ioVSigWord;
-  short               ioVDrvInfo;
-  short               ioVDRefNum;
-  short               ioVFSID;
-  unsigned long       ioVBkUp;
-  short               ioVSeqNum;
-  unsigned long       ioVWrCnt;
-  unsigned long       ioVFilCnt;
-  unsigned long       ioVDirCnt;
-  long                ioVFndrInfo[8];
-  UInt64              ioVTotalBytes;          /* total number of bytes on volume */
-  UInt64              ioVFreeBytes;           /* number of free bytes on volume */
-};
-typedef struct XVolumeParam             XVolumeParam;
-typedef XVolumeParam *                  XVolumeParamPtr;
-struct AccessParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioRefNum;               /* <- , ioRefNum ( use to be filler3 ) */
-  short               ioDenyModes;            /*access rights data*/
-  short               filler4;
-  SInt8               filler5;
-  SInt8               ioACUser;               /*access rights for directory only*/
-  long                filler6;
-  long                ioACOwnerID;            /*owner ID*/
-  long                ioACGroupID;            /*group ID*/
-  long                ioACAccess;             /*access rights*/
-  long                ioDirID;
-};
-typedef struct AccessParam              AccessParam;
-typedef AccessParam *                   AccessParamPtr;
-struct ObjParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               filler7;
-  short               ioObjType;              /*function code*/
-  StringPtr           ioObjNamePtr;           /*ptr to returned creator/group name*/
-  long                ioObjID;                /*creator/group ID*/
-};
-typedef struct ObjParam                 ObjParam;
-typedef ObjParam *                      ObjParamPtr;
-struct CopyParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioDstVRefNum;           /*destination vol identifier*/
-  short               filler8;
-  StringPtr           ioNewName;              /*ptr to destination pathname*/
-  StringPtr           ioCopyName;             /*ptr to optional name*/
-  long                ioNewDirID;             /*destination directory ID*/
-  long                filler14;
-  long                filler15;
-  long                ioDirID;
-};
-typedef struct CopyParam                CopyParam;
-typedef CopyParam *                     CopyParamPtr;
-struct WDParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  short               ioWDCreated;
-  short               ioWDIndex;
-  long                ioWDProcID;
-  short               ioWDVRefNum;
-  short               filler10;
-  long                filler11;
-  long                filler12;
-  long                filler13;
-  long                ioWDDirID;
-};
-typedef struct WDParam                  WDParam;
-typedef WDParam *                       WDParamPtr;
-struct FIDParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  long                filler14;
-  StringPtr           ioDestNamePtr;          /* dest file name */
-  long                filler15;
-  long                ioDestDirID;            /* dest file's directory id */
-  long                filler16;
-  long                filler17;
-  long                ioSrcDirID;             /* source file's directory id */
-  short               filler18;
-  long                ioFileID;               /* file ID */
-};
-typedef struct FIDParam                 FIDParam;
-typedef FIDParam *                      FIDParamPtr;
-struct ForeignPrivParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  long                ioFiller21;
-  long                ioFiller22;
-  Ptr                 ioForeignPrivBuffer;
-  long                ioForeignPrivActCount;
-  long                ioForeignPrivReqCount;
-  long                ioFiller23;
-  long                ioForeignPrivDirID;
-  long                ioForeignPrivInfo1;
-  long                ioForeignPrivInfo2;
-  long                ioForeignPrivInfo3;
-  long                ioForeignPrivInfo4;
-};
-typedef struct ForeignPrivParam         ForeignPrivParam;
-typedef ForeignPrivParam *              ForeignPrivParamPtr;
-struct CSParam {
-  QElemPtr            qLink;                  /*queue link in header*/
-  short               qType;                  /*type byte for safety check*/
-  short               ioTrap;                 /*FS: the Trap*/
-  Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-  IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-  volatile OSErr      ioResult;               /*result code*/
-  StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-  short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-  FSSpecPtr           ioMatchPtr;             /* match array */
-  long                ioReqMatchCount;        /* maximum allowable matches */
-  long                ioActMatchCount;        /* actual match count */
-  long                ioSearchBits;           /* search criteria selector */
-  CInfoPBPtr          ioSearchInfo1;          /* search values and range lower bounds */
-  CInfoPBPtr          ioSearchInfo2;          /* search values and range upper bounds */
-  long                ioSearchTime;           /* length of time to run search */
-  CatPositionRec      ioCatPosition;          /* current position in the catalog */
-  Ptr                 ioOptBuffer;            /* optional performance enhancement buffer */
-  long                ioOptBufSize;           /* size of buffer pointed to by ioOptBuffer */
-};
-typedef struct CSParam                  CSParam;
-typedef CSParam *                       CSParamPtr;
-union HParamBlockRec {
-  HIOParam            ioParam;
-  HFileParam          fileParam;
-  HVolumeParam        volumeParam;
-  AccessParam         accessParam;
-  ObjParam            objParam;
-  CopyParam           copyParam;
-  WDParam             wdParam;
-  FIDParam            fidParam;
-  CSParam             csParam;
-  ForeignPrivParam    foreignPrivParam;
-};
-typedef union HParamBlockRec            HParamBlockRec;
-
-
-typedef HParamBlockRec *                HParmBlkPtr;
-
-struct CMovePBRec {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  IOCompletionUPP     ioCompletion;
-  volatile OSErr      ioResult;
-  StringPtr           ioNamePtr;
-  short               ioVRefNum;
-  long                filler1;
-  StringPtr           ioNewName;
-  long                filler2;
-  long                ioNewDirID;
-  long                filler3[2];
-  long                ioDirID;
-};
-typedef struct CMovePBRec               CMovePBRec;
-typedef CMovePBRec *                    CMovePBPtr;
-struct WDPBRec {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  IOCompletionUPP     ioCompletion;
-  volatile OSErr      ioResult;
-  StringPtr           ioNamePtr;
-  short               ioVRefNum;
-  short               filler1;
-  short               ioWDIndex;
-  long                ioWDProcID;
-  short               ioWDVRefNum;
-  short               filler2[7];
-  long                ioWDDirID;
-};
-typedef struct WDPBRec                  WDPBRec;
-typedef WDPBRec *                       WDPBPtr;
-struct FCBPBRec {
-  QElemPtr            qLink;
-  short               qType;
-  short               ioTrap;
-  Ptr                 ioCmdAddr;
-  IOCompletionUPP     ioCompletion;
-  volatile OSErr      ioResult;
-  StringPtr           ioNamePtr;
-  short               ioVRefNum;
-  short               ioRefNum;
-  short               filler;
-  short               ioFCBIndx;
-  short               filler1;
-  long                ioFCBFlNm;
-  short               ioFCBFlags;
-  unsigned short      ioFCBStBlk;
-  long                ioFCBEOF;
-  long                ioFCBPLen;
-  long                ioFCBCrPs;
-  short               ioFCBVRefNum;
-  long                ioFCBClpSiz;
-  long                ioFCBParID;
-};
-typedef struct FCBPBRec                 FCBPBRec;
-typedef FCBPBRec *                      FCBPBPtr;
-struct VCB {
-  QElemPtr            qLink;
-  short               qType;
-  short               vcbFlags;
-  unsigned short      vcbSigWord;
-  unsigned long       vcbCrDate;
-  unsigned long       vcbLsMod;
-  short               vcbAtrb;
-  unsigned short      vcbNmFls;
-  short               vcbVBMSt;
-  short               vcbAllocPtr;
-  unsigned short      vcbNmAlBlks;
-  long                vcbAlBlkSiz;
-  long                vcbClpSiz;
-  short               vcbAlBlSt;
-  long                vcbNxtCNID;
-  unsigned short      vcbFreeBks;
-  Str27               vcbVN;
-  short               vcbDrvNum;
-  short               vcbDRefNum;
-  short               vcbFSID;
-  short               vcbVRefNum;
-  Ptr                 vcbMAdr;
-  Ptr                 vcbBufAdr;
-  short               vcbMLen;
-  short               vcbDirIndex;
-  short               vcbDirBlk;
-  unsigned long       vcbVolBkUp;
-  unsigned short      vcbVSeqNum;
-  long                vcbWrCnt;
-  long                vcbXTClpSiz;
-  long                vcbCTClpSiz;
-  unsigned short      vcbNmRtDirs;
-  long                vcbFilCnt;
-  long                vcbDirCnt;
-  long                vcbFndrInfo[8];
-  unsigned short      vcbVCSize;
-  unsigned short      vcbVBMCSiz;
-  unsigned short      vcbCtlCSiz;
-  unsigned short      vcbXTAlBlks;
-  unsigned short      vcbCTAlBlks;
-  short               vcbXTRef;
-  short               vcbCTRef;
-  Ptr                 vcbCtlBuf;
-  long                vcbDirIDM;
-  short               vcbOffsM;
-};
-typedef struct VCB                      VCB;
-typedef VCB *                           VCBPtr;
-struct DrvQEl {
-  QElemPtr            qLink;
-  short               qType;
-  short               dQDrive;
-  short               dQRefNum;
-  short               dQFSID;
-  unsigned short      dQDrvSz;
-  unsigned short      dQDrvSz2;
-};
-typedef struct DrvQEl                   DrvQEl;
-typedef DrvQEl *                        DrvQElPtr;
 /*
  *  NewIOCompletionUPP()
  *  
@@ -1668,67 +1754,17 @@ InvokeIOCompletionUPP(
   ParmBlkPtr       paramBlock,
   IOCompletionUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-/*
-   PBOpenSync(), PBOpenAsync(), PBOpenImmed() were moved to Devices.h
-   PBCloseSync(), PBCloseAsync(), PBCloseImmed() were moved to Devices.h
-   PBReadSync(), PBReadAsync(), PBReadImmed() were moved to Devices.h
-   PBWriteSync(), PBWriteAsync(), PBWriteImmed() were moved to Devices.h
-*/
-
-
-/*
-    MakeFSRef
-    Create an FSRef for an existing object specified by a combination
-    of volume refnum, parent directory, and pathname.
-    ->  ioCompletion    A pointer to a completion routine
-    <-  ioResult        The result code of the function
-    ->  ioNamePtr       A pointer to a pathname
-    ->  ioVRefNum       A volume specification
-    ->  ioDirID         A directory ID
-    <-  newRef          A pointer to an FSRef
-*/
-/*
- *  FSpMakeFSRef()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr  FSpMakeFSRef(const FSSpec *source, FSRef *newRef)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBMakeFSRefSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr  PBMakeFSRefSync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBMakeFSRefAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
+#if __MACH__
+  #ifdef __cplusplus
+    inline IOCompletionUPP                                      NewIOCompletionUPP(IOCompletionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeIOCompletionUPP(IOCompletionUPP) { }
+    inline void                                                 InvokeIOCompletionUPP(ParmBlkPtr paramBlock, IOCompletionUPP userUPP) { (*userUPP)(paramBlock); }
+  #else
+    #define NewIOCompletionUPP(userRoutine)                     ((IOCompletionUPP)userRoutine)
+    #define DisposeIOCompletionUPP(userUPP)
+    #define InvokeIOCompletionUPP(paramBlock, userUPP)          (*userUPP)(paramBlock)
+  #endif
+#endif
 
 
 /*
@@ -1738,7 +1774,7 @@ extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X
     ->  ioCompletion    A pointer to a completion routine
     <-  ioResult        The result code of the function
     ->  ref             A pointer to the parent directory FSRef
-    ->  name            A pointer to Unicde name
+    ->  name            A pointer to Unicode name
     ->  nameLength      The length of the Unicode Name
     ->  textEncodingHint A suggested text encoding to use for the name
     <-  newRef          A pointer to an FSRef
@@ -1850,7 +1886,7 @@ extern void  PBCompareFSRefsAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
     ->  catInfo         The values for catalog info fields to set; may be NULL
     ->  nameLength      Number of Unicode characters in the file's name
     ->  name            A pointer to the Unicode name
-    <-  spec            A pointer to the FSSpec for the new directory; may be NULL
+    <-  spec            A pointer to the FSSpec for the new directory; may be NULL.  Ignored on 64 bit.
     <-  newRef          A pointer to the FSRef for the new file; may be NULL
 */
 /*
@@ -1864,7 +1900,7 @@ extern void  PBCompareFSRefsAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCreateFileUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpec *newSpec) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCreateFileUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1908,7 +1944,7 @@ extern void  PBCreateFileUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_
     ->  nameLength      Number of Unicode characters in the directory's name
     ->  name            A pointer to the Unicode name
     <-  ioDirID         The DirID of the new directory
-    <-  spec            A pointer to the FSSpec for the new directory; may be NULL
+    <-  newSpec         A pointer to the FSSpec for the new directory; may be NULL.  Ignored on 64 bit.
     <-  newRef          A pointer to the FSRef for the new directory; may be NULL
 */
 /*
@@ -1922,7 +1958,7 @@ extern void  PBCreateFileUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCreateDirectoryUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpec *newSpec, UInt32 *newDirID) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCreateDirectoryUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec, UInt32 *newDirID) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2002,6 +2038,56 @@ extern OSErr  PBDeleteObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X
  */
 extern void  PBDeleteObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+
+/*
+    UnlinkObject
+    Unlinks an existing file or deletes an existing directory.  This call will succeed on an open file, unlike
+    DeleteObject.  This call will unlink an archive directory link (where DeleteObject will treat the ADL as a directory).
+    ->  ioCompletion    A pointer to a completion routine
+    <-  ioResult        The result code of the function
+    ->  ref             The file or directory to be deleted
+*/
+/*
+ *  FSUnlinkObject()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr  FSUnlinkObject(const FSRef * ref)               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  PBUnlinkObjectSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr  PBUnlinkObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  PBUnlinkObjectAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void  PBUnlinkObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -2112,6 +2198,332 @@ extern OSErr  PBExchangeObjectsSync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X
 extern void  PBExchangeObjectsAsync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+    FSReplaceObject and FSPathReplaceObject
+
+    You can use the FSReplaceObject and FSPathReplaceObject functions to replace
+    one object, the original object, with another, the replacement object.
+    FSReplaceObject and FSPathReplaceObject are provided to assist in properly
+    preserving metadata during safe save operations. These functions allow files
+    to replace files, directories to replace directories, directories to replace
+    files and files to replace directories (so a package can replace a file, or
+    a file can replace a package). Both objects must reside on the same volume.
+
+    If FSReplaceObject or FSPathReplaceObject are successful, the result object
+    will exist at the location of the original object. Nothing will exist at the
+    location of the replacement object.  By default FSReplaceObject and  FSPathReplaceObject
+    will test the object for write access, and fail if write access is not available.
+    Write access in this context is ACL_WRITE_DATA for files and ACL_ADD_FILE for directories.
+    This check can be bypassed by passing the kFSReplaceObjectDoNotCheckObjectWriteAccess flag.
+
+    FSReplaceObject and FSPathReplaceObject may need to create a temporary object
+    when one of the input objects is a directory, or when the
+    kFSReplaceObjectSaveOriginalAsABackup option is specified. The temporary object
+    is required since the rename system call does not handle non-empty directory
+    replacement or file <-> directory replacement. The file replacing file case
+    does not use a temporary object (unless the kFSReplaceObjectSaveOriginalAsABackup
+    option is specified). If no temporary name is provided and a temporary object
+    is required, then the functions will return an error. Providing a temporary
+    name will also allow an application to recover the original object should a
+    catastrophic failure (such as a power outage) occur during a replacement
+    involving a directory. The temporary object will be created with the temporary
+    name either in the temporary directory specified by the temporaryDirectory
+    parameter, or in the preferred temporary directory (the preferred temporary
+    directory can be obtained with the FSGetTemporaryDirectoryForReplaceObject
+    or FSPathGetTemporaryDirectoryForReplaceObject functions). 
+
+    If the kFSReplaceObjectSaveOriginalAsABackup option is specified, the original
+    object will be saved in one of two locations: If the temporaryName parameter
+    is provided, the original object will be saved with that temporary name in
+    the temporary directory. If the temporaryName parameter is not provided and
+    the newName parameter is provided, the original object will be saved with
+    its original name in the temporary directory.
+
+    The result object will have the data (or directory contents) from the
+    replacement object, but will have the original object's creation date and
+    backup date. By default, the result object will have extended attributes
+    merged from the original object and the replacement object, using the extended
+    attributes of the replacement object if the original object has extended
+    attributes with the same name. If the kFSReplaceObjectReplaceMetadata option
+    flag is passed, then the extended attributes of the original object will be
+    completely overwritten by the extended attributes of the replacement object.
+    
+    The kFSReplaceObjectReplaceMetadata also controls how the label, type, creator,
+    hidden extension bit, strong binding, custom icon and custom badge are handled.
+    For the custom icon, custom badge, label (where a value of 0 is considered not
+    present), and strong binding the replacement object's attributes will be
+    used if present, otherwise the original object's attributes will be retained.  For
+    the extension hidden bit, type, and creator the original object's attribute is
+    preserved.  Setting the kFSReplaceObjectReplaceMetadata flag will use the replacement
+    object's attributes for all cases.  Type and creator are only handled in the 
+    file to file case.  Strong bindings are not applicable to plain directories.
+    
+    The default handling of ACL and mode info depends on the types of objects
+    involved. If the original object and replacement object are of the same type
+    (both files or both directories) then the default behavior is to use the ACL
+    and mode of the original object. Setting the kFSReplaceObjectReplacePermissionInfo
+    flag will use the ACL and mode from the replacementObject.
+
+    If the objects are different types, then the ACL and mode will be based off
+    the original object and will translated as follows:
+
+        Mode:
+        file r -> dir rx
+        file w -> dir wx
+        file x -> dir nothing
+
+        dir r -> file r
+        dir w -> file w
+        dir x -> file nothing
+
+        ACLs:
+
+        ACL_SEARCH will be added to any allow ACE in the file to directory case.
+        ACL_EXECUTE will be removed from any ACE in the file to directory case.
+        
+        ACL_SEARCH and ACL_DELETE_CHILD will be removed from any ACE in the directory to file case.
+
+        File                Directory
+        ACL_READ_DATA   <-> ACL_LIST_DIRECTORY
+        ACL_WRITE_DATA  <-> ACL_ADD_FILE
+        ACL_APPEND_DATA <-> ACL_ADD_SUBDIRECTORY
+
+        ACL_DELETE , ACL_READ_ATTRIBUTES, ACL_WRITE_ATTRIBUTES, ACL_READ_EXTATTRIBUTES,
+        ACL_WRITE_EXTATTRIBUTES, ACL_READ_SECURITY, ACL_WRITE_SECURITY and ACL_CHANGE_OWNER
+        are the same for both types and will be left alone.
+                        
+    This translation behavior can be avoided by passing in either
+    kFSReplaceObjectPreservePermissionInfo to use the original object ACL and
+    mode info unchanged (except where the bits have different meanings for files
+    and directories) or kFSReplaceObjectReplacePermissionInfo to use the ACL and
+    mode info of the replacement object (except where the bits have different
+    meanings for files and directories). Setting both of these flags is an
+    error -- the call will fail with a paramErr. The permissions are only set on
+    the top-level object -- the permissions inside a directory are unaffected.
+    
+    FSReplaceObject may not be atomic -- it may issue multiple system calls to
+    accurately replace and preserve the metadata of a file system object.
+*/
+
+/*
+ *  FSReplaceObjectOptions
+ *  
+ *  Discussion:
+ *    Options that can be passed to the FSReplaceObject and
+ *    FSPathReplaceObject functions. These are mask values that can be
+ *    ORed together to set more than one option.
+ */
+enum {
+
+  /*
+   * Use the default behavior (see the discussion of the
+   * FSReplaceObject function)
+   */
+  kFSReplaceObjectDefaultOptions = 0,
+
+  /*
+   * The result object will only have the metadata from the replacement
+   * object. The result object will have no metadata from the original
+   * object.
+   */
+  kFSReplaceObjectReplaceMetadata = 0x01,
+
+  /*
+   * The original object will be saved with the temporary name in the
+   * temporaryDirectory, or will be saved with the original name (if no
+   * temporaryName is provided and a newName is provided) in the
+   * temporaryDirectory.
+   */
+  kFSReplaceObjectSaveOriginalAsABackup = 0x02,
+
+  /*
+   * ACL and mode info will come from the replacement object.
+   */
+  kFSReplaceObjectReplacePermissionInfo = 0x04,
+
+  /*
+   * ACL and mode info will come from the original object
+   */
+  kFSReplaceObjectPreservePermissionInfo = 0x08,
+
+  /*
+   * FSReplaceObject does not actually require write permission to
+   * perform the replace operation, since no actual writing is done to
+   * the original object.  By default ReplaceObject will test the
+   * object for write permissions and fail if they are not present
+   * (tested using accessx_np).  Write permission in this context is
+   * defined as ACL_WRITE_DATA for files and ACL_ADD_FILE for
+   * directories.  Pass this flag to skip this check (which will allow
+   * the replace to operate on "read only" objects).
+   */
+  kFSReplaceObjectDoNotCheckObjectWriteAccess = 0x10
+};
+
+/*
+ *  FSReplaceObject()
+ *  
+ *  Discussion:
+ *    This function will replace the object specified by originalObject
+ *    with the object specified by replacementObject. The result object
+ *    will be in the same parent directory as the original object.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    originalObject:
+ *      The original object to be replaced.
+ *    
+ *    replacementObject:
+ *      The object which will replace the original object.
+ *    
+ *    newName:
+ *      The new name for the result object. Pass NULL to use the
+ *      original object's name.
+ *    
+ *    temporaryName:
+ *      The name of a temporary object should the operation require a
+ *      temporary object. The temporary object will be created in the
+ *      preferred temporary directory or in the directory specified by
+ *      the temporaryDirectory parameter.
+ *    
+ *    temporaryDirectory:
+ *      The directory where the temporary object (if needed) will be
+ *      created. The temporary directory must be on the same volume as
+ *      the original object. If NULL is passed, then the preferred
+ *      temporary directory is used (as per
+ *      FSGetTemporaryDirectoryForReplaceObject).
+ *    
+ *    flags:
+ *      A set of options to specify non-default behavior.
+ *    
+ *    resultObject:
+ *      A new FSRef for the result object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *replacementObject, CFStringRef newName, CFStringRef temporaryName, const FSRef *temporaryDirectory, OptionBits flags, FSRef *resultObject) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  FSPathReplaceObject()
+ *  
+ *  Discussion:
+ *    This function will replace the object specified by
+ *    originalObjectPath with the object specified by
+ *    replacementObjectPath. The result object will be in the same
+ *    parent directory as the original object.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    originalObjectPath:
+ *      The path to the original object to be replaced.
+ *    
+ *    replacementObjectPath:
+ *      The path to the object which will replace the original object.
+ *    
+ *    newName:
+ *      The new name for the result object. Pass NULL to use the
+ *      original object's name.
+ *    
+ *    temporaryName:
+ *      The name of a temporary object should the operation require a
+ *      temporary object. The temporary object will be created in the
+ *      preferred temporary directory or in the directory specified by
+ *      the temporaryDirectory parameter.
+ *    
+ *    temporaryDirectoryPath:
+ *      The path to the directory where the temporary object (if
+ *      needed) will be created. The temporary directory must be on the
+ *      same volume as the original object. If NULL is passed, then the
+ *      preferred temporary directory is used (as per
+ *      FSPathGetTemporaryDirectoryForReplaceObject).
+ *    
+ *    flags:
+ *      A set of options to specify non-default behavior.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char *replacementObjectPath, CFStringRef newName, CFStringRef temporaryName, const char *temporaryDirectoryPath, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  FSGetTemporaryDirectoryForReplaceObject()
+ *  
+ *  Discussion:
+ *    This function will return the preferred directory for use as the
+ *    temporaryDirectory by FSReplaceObject. It will return an
+ *    appropriate temporary location or the parent directory of the
+ *    original object.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    originalObject:
+ *      The original object to be replaced.
+ *    
+ *    temporaryDirectory:
+ *      The preferred temporary directory.
+ *    
+ *    flags:
+ *      A set of options to specify non-default behavior. Currently no
+ *      flags are defined - pass in 0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSGetTemporaryDirectoryForReplaceObject(const FSRef *originalObject, FSRef *temporaryDirectory, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  FSPathGetTemporaryDirectoryForReplaceObject()
+ *  
+ *  Discussion:
+ *    This function will return the preferred directory for use as the
+ *    temporaryDirectory by FSPathReplaceObject. It will return an
+ *    appropriate temporary location or the parent directory of the
+ *    original object.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    originalObjectPath:
+ *      The path to the original object to be replaced.
+ *    
+ *    temporaryDirectoryPath:
+ *      The path to the preferred temporary directory.
+ *    
+ *    maxPathSize:
+ *      The size of the buffer pointed to by the temporaryDirectoryPath
+ *      parameter.
+ *    
+ *    flags:
+ *      A set of options to specify non-default behavior. Currently no
+ *      flags are defined - pass in 0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSPathGetTemporaryDirectoryForReplaceObject(const char *originalObjectPath, char *temporaryDirectoryPath, UInt32 maxPathSize, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 
 /*
     RenameUnicode
@@ -2181,7 +2593,7 @@ extern void  PBRenameUnicodeAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
     ->  ref             The file or directory whose information is to be returned
     ->  whichInfo       Which catalog info fields to get
     <-  catInfo         The returned values of catalog info fields; may be NULL
-    <-  spec            A pointer to the FSSpec for the object; may be NULL
+    <-  spec            A pointer to the FSSpec for the object; may be NULL.  Ignored for 64 bit.
     <-  parentRef       A pointer to the FSRef for the object's parent directory; may be NULL
     <-  outName         The Unicode name is returned here.  This pointer may be NULL.
     Note: All of the outputs are optional; if you don't want that particular output, just
@@ -2198,7 +2610,7 @@ extern void  PBRenameUnicodeAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfo, HFSUniStr255 *outName, FSSpec *fsSpec, FSRef *parentRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfo, HFSUniStr255 *outName, FSSpecPtr fsSpec, FSRef *parentRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2231,22 +2643,37 @@ extern void  PBGetCatalogInfoAsync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
 
 
 /*
-    SetCatalogInfo
-    Set catalog information about a given file or directory.
-    ->  ioCompletion    A pointer to a completion routine
-    <-  ioResult        The result code of the function
-    ->  ref             The file or directory whose information is to be changed
-    ->  whichInfo       Which catalog info fields to set
-    ->  catInfo         The new values of catalog info fields
-    Note: Only some of the catalog info fields may be set.  The settable fields
-    are given by the constant kFSCatInfoSettableInfo; no other bits may be set in
-    whichInfo.
-*/
-/*
  *  FSSetCatalogInfo()
+ *  
+ *  Summary:
+ *    Set catalog information about a given file or directory.
+ *  
+ *  Discussion:
+ *    Set the catalog information for the file or directory represented
+ *    by ref.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.0
+ *  
+ *  Parameters:
+ *    
+ *    ref:
+ *      A pointer to an FSRef specifying the file or directory whose
+ *      information is to be changed
+ *    
+ *    whichInfo:
+ *      A bitmap specifying which catalog information fields may be
+ *      set.  The settable fields are given by the constant
+ *      kFSCatInfoSettableInfo; no other bits may be set in whichInfo. 
+ *      The one exception to this is that processes running as eid 0 or
+ *      euid 0  can change the user ID and group ID of a file or
+ *      directory by setting kFSCatInfoSetOwnership in whichInfo and
+ *      setting the permissions field of catalogInfo.
+ *    
+ *    catalogInfo:
+ *      A pointer to the structure containing the new catalog
+ *      information. Only some of the catalog information fields may be
+ *      set.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2258,6 +2685,14 @@ extern OSErr  FSSetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, 
 
 /*
  *  PBSetCatalogInfoSync()
+ *  
+ *  Summary:
+ *    Set catalog information about a given file or directory.
+ *  
+ *  Discussion:
+ *    Set the catalog information for the file or directory represented
+ *    by ref.  See the description in FSSetCatalogInfo for which items
+ *    may be set.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.0
@@ -2272,6 +2707,14 @@ extern OSErr  PBSetCatalogInfoSync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
 
 /*
  *  PBSetCatalogInfoAsync()
+ *  
+ *  Summary:
+ *    Set catalog information about a given file or directory.
+ *  
+ *  Discussion:
+ *    Set the catalog information for the file or directory represented
+ *    by ref.  See the description in FSSetCatalogInfo for which items
+ *    may be set.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.0
@@ -2403,7 +2846,7 @@ extern void  PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
     ->  whichInfo       The catalog information fields to return for each item
     <-  catalogInfo     An array of catalog information; one for each returned item
     <-  refs            An array of FSRefs; one for each returned item
-    <-  specs           An array of FSSpecs; one for each returned item
+    <-  specs           An array of FSSpecs; one for each returned item.  Ignored on 64 bit.
     <-  names           An array of filenames; one for each returned item
     Note: The catalogInfo, refs, specs, names, and containerChanged are all optional outputs;
     if you don't want that particular output, set its pointer to NULL.
@@ -2419,7 +2862,7 @@ extern void  PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetCatalogInfoBulk(FSIterator iterator, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpec *specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetCatalogInfoBulk(FSIterator iterator, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2465,7 +2908,7 @@ extern void  PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock) AVAILABL
     ->  whichInfo       The catalog information fields to return for each item
     <-  catalogInfo     An array of catalog information; one for each returned item
     <-  refs            An array of FSRefs; one for each returned item
-    <-  specs           An array of FSSpecs; one for each returned item
+    <-  specs           An array of FSSpecs; one for each returned item.  Ignored on 64 bit.
     <-  names           An array of filenames; one for each returned item
     ->  searchParams    The criteria that controls the matching, including timeout, a bitmap
                         controlling the fields to compare, and the (Unicode) name to compare.
@@ -2483,7 +2926,7 @@ extern void  PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock) AVAILABL
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCatalogSearch(FSIterator iterator, const FSSearchParams *searchCriteria, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpec *specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCatalogSearch(FSIterator iterator, const FSSearchParams *searchCriteria, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2543,7 +2986,7 @@ extern void  PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCreateFileAndOpenForkUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, SInt16 *forkRefNum, FSRef *newRef) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSCreateFileAndOpenForkUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum, FSRef *newRef) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -2759,7 +3202,7 @@ extern void  PBIterateForksAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSOpenFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, SInt16 *forkRefNum) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSOpenFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2815,7 +3258,7 @@ extern void  PBOpenForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSReadFork(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSReadFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2871,7 +3314,7 @@ extern void  PBReadForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSWriteFork(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, const void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSWriteFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, const void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2923,7 +3366,7 @@ extern void  PBWriteForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkPosition(SInt16 forkRefNum, SInt64 *position)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkPosition(FSIORefNum forkRefNum, SInt64 *position)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2976,7 +3419,7 @@ extern void  PBGetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetForkPosition(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetForkPosition(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3027,7 +3470,7 @@ extern void  PBSetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkSize(SInt16 forkRefNum, SInt64 *forkSize)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkSize(FSIORefNum forkRefNum, SInt64 *forkSize)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3080,7 +3523,7 @@ extern void  PBGetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetForkSize(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetForkSize(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3148,7 +3591,7 @@ extern void  PBSetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSAllocateFork(SInt16 forkRefNum, FSAllocationFlags flags, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSAllocateFork(FSIORefNum forkRefNum, FSAllocationFlags flags, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3199,7 +3642,7 @@ extern void  PBAllocateForkAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSFlushFork(SInt16 forkRefNum)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSFlushFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3250,7 +3693,7 @@ extern void  PBFlushForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCloseFork(SInt16 forkRefNum)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCloseFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3316,7 +3759,7 @@ extern void  PBCloseForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkCBInfo(SInt16 desiredRefNum, FSVolumeRefNum volume, SInt16 *iterator, SInt16 *actualRefNum, FSForkInfo *forkInfo, FSRef *ref, HFSUniStr255 *outForkName) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkCBInfo(FSIORefNum desiredRefNum, FSVolumeRefNum volume, short *iterator, FSIORefNum *actualRefNum, FSForkInfo *forkInfo, FSRef *ref, HFSUniStr255 *outForkName) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3370,7 +3813,7 @@ extern void  PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSLockRange(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSLockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -3424,7 +3867,7 @@ extern OSStatus  PBXLockRangeAsync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSUnlockRange(SInt16 forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSUnlockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -3624,15 +4067,16 @@ extern OSErr  FSGetResourceForkName(HFSUniStr255 * resourceForkName) AVAILABLE_M
  *      a pointer to a buffer which FSRefMakePath will fill with a UTF8
  *      encoded C string representing the path the the specified FSRef
  *    
- *    maxPathSize:
- *      the maximum size path length in bytes that path can hold
+ *    pathBufferSize:
+ *      the size of the path buffer in bytes.  This size should include
+ *      the NULL terminator for the returned path string.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSRefMakePath(const FSRef *ref, UInt8 *path, UInt32 maxPathSize)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSRefMakePath(const FSRef *ref, UInt8 *path, UInt32 pathBufferSize)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3943,6 +4387,18 @@ InvokeFNSubscriptionUPP(
   FNSubscriptionRef  subscription,
   FNSubscriptionUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline FNSubscriptionUPP                                    NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeFNSubscriptionUPP(FNSubscriptionUPP) { }
+    inline void                                                 InvokeFNSubscriptionUPP(FNMessage message, OptionBits flags, void * refcon, FNSubscriptionRef subscription, FNSubscriptionUPP userUPP) { (*userUPP)(message, flags, refcon, subscription); }
+  #else
+    #define NewFNSubscriptionUPP(userRoutine)                   ((FNSubscriptionUPP)userRoutine)
+    #define DisposeFNSubscriptionUPP(userUPP)
+    #define InvokeFNSubscriptionUPP(message, flags, refcon, subscription, userUPP) (*userUPP)(message, flags, refcon, subscription)
+  #endif
+#endif
+
 /*
  *  FNSubscribe()
  *  
@@ -4077,6 +4533,7 @@ enum {
   kAsyncEjectComplete           = 6
 };
 
+
 typedef UInt32                          FSMountStatus;
 typedef UInt32                          FSEjectStatus;
 typedef UInt32                          FSUnmountStatus;
@@ -4203,6 +4660,30 @@ InvokeFSVolumeEjectUPP(
   pid_t              dissenter,
   FSVolumeEjectUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline FSVolumeMountUPP                                     NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine) { return userRoutine; }
+    inline FSVolumeUnmountUPP                                   NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine) { return userRoutine; }
+    inline FSVolumeEjectUPP                                     NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeFSVolumeMountUPP(FSVolumeMountUPP) { }
+    inline void                                                 DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP) { }
+    inline void                                                 DisposeFSVolumeEjectUPP(FSVolumeEjectUPP) { }
+    inline void                                                 InvokeFSVolumeMountUPP(FSVolumeOperation volumeOp, void * clientData, OSStatus err, FSVolumeRefNum mountedVolumeRefNum, FSVolumeMountUPP userUPP) { (*userUPP)(volumeOp, clientData, err, mountedVolumeRefNum); }
+    inline void                                                 InvokeFSVolumeUnmountUPP(FSVolumeOperation volumeOp, void * clientData, OSStatus err, FSVolumeRefNum volumeRefNum, pid_t dissenter, FSVolumeUnmountUPP userUPP) { (*userUPP)(volumeOp, clientData, err, volumeRefNum, dissenter); }
+    inline void                                                 InvokeFSVolumeEjectUPP(FSVolumeOperation volumeOp, void * clientData, OSStatus err, FSVolumeRefNum volumeRefNum, pid_t dissenter, FSVolumeEjectUPP userUPP) { (*userUPP)(volumeOp, clientData, err, volumeRefNum, dissenter); }
+  #else
+    #define NewFSVolumeMountUPP(userRoutine)                    ((FSVolumeMountUPP)userRoutine)
+    #define NewFSVolumeUnmountUPP(userRoutine)                  ((FSVolumeUnmountUPP)userRoutine)
+    #define NewFSVolumeEjectUPP(userRoutine)                    ((FSVolumeEjectUPP)userRoutine)
+    #define DisposeFSVolumeMountUPP(userUPP)
+    #define DisposeFSVolumeUnmountUPP(userUPP)
+    #define DisposeFSVolumeEjectUPP(userUPP)
+    #define InvokeFSVolumeMountUPP(volumeOp, clientData, err, mountedVolumeRefNum, userUPP) (*userUPP)(volumeOp, clientData, err, mountedVolumeRefNum)
+    #define InvokeFSVolumeUnmountUPP(volumeOp, clientData, err, volumeRefNum, dissenter, userUPP) (*userUPP)(volumeOp, clientData, err, volumeRefNum, dissenter)
+    #define InvokeFSVolumeEjectUPP(volumeOp, clientData, err, volumeRefNum, dissenter, userUPP) (*userUPP)(volumeOp, clientData, err, volumeRefNum, dissenter)
+  #endif
+#endif
+
 
 /*
  *  Discussion:
@@ -4218,16 +4699,27 @@ enum {
   kFSMountServerMarkDoNotDisplay = (1 << 0),
 
   /*
-   * Specify this option if you do not want other processes notified
-   * that this volume has been mounted.
-   */
-  kFSMountServerMountWithoutNotification = (1 << 1),
-
-  /*
    * Specify this option if you want the volume mounted on the mountdir
    * passed in instead of in it.
    */
   kFSMountServerMountOnMountDir = (1 << 2)
+};
+
+
+/*
+ *  Discussion:
+ *    Deprecated options that can be passed to
+ *    FSMountServerVolumeCalls.  The options will have no effect on the
+ *    OS version they are noted as deprecated on or later.
+ */
+enum {
+
+  /*
+   * Specify this option if you do not want other processes notified
+   * that this volume has been mounted.  Deprecated on Mac OS X 10.5. 
+   * Use kFSMountServerMarkDoNotDisplay instead.
+   */
+  kFSMountServerMountWithoutNotification = (1 << 1)
 };
 
 
@@ -5104,8 +5596,9 @@ enum {
  *  FSFileOperationStage
  *  
  *  Discussion:
- *    Set of flags that can be passed into an FSMoveObject(A)sync or
- *    FSCopyObject(A)sync call.
+ *    The stage corresponds to the state of an asynchronous File
+ *    Operation.  The stage is reported in the operation's status
+ *    callback or as part of an FSFileOperationCopyStatus call.
  */
 enum {
 
@@ -5352,19 +5845,19 @@ extern OSStatus  FSCopyObjectSync(const FSRef *source, const FSRef *destDir, CFS
  *  Parameters:
  *    
  *    source:
- *      The source object to copy.
+ *      The source object to move.
  *    
  *    destDir:
- *      The destination directory for the copy.
+ *      The destination directory for the move.
  *    
  *    destName:
- *      The name for the new object in the destination directory.  Pass
+ *      The name for the object in the destination directory.  Pass
  *      NULL to use the source object name.
  *    
  *    target:
- *      Upon successful completion a ref to the newly created object. 
- *      If source is a directory then target will be the corresponding
- *      object in the destination directory.
+ *      Upon successful completion a ref to the object in its new
+ *      location.  If source is a directory then target will be the
+ *      corresponding object in the destination directory.
  *    
  *    options:
  *      One or more FSFileOperation flags
@@ -5375,6 +5868,40 @@ extern OSStatus  FSCopyObjectSync(const FSRef *source, const FSRef *destDir, CFS
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus  FSMoveObjectSync(const FSRef *source, const FSRef *destDir, CFStringRef destName, FSRef *target, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  FSMoveObjectToTrashSync()
+ *  
+ *  Discussion:
+ *    This routine will move the source object into the trash.  The
+ *    source object can be a file or directory.  If the volume the
+ *    source object resides on does not support a trash folder then
+ *    this call will return an error (this is the same circumstance
+ *    that triggers the delete immediately behavior in the Finder).
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    source:
+ *      The source object to move to the trash.
+ *    
+ *    target:
+ *      Upon successful completion a ref the object in the trash.  If
+ *      source is a directory then target will be the corresponding
+ *      object in the destination directory.
+ *    
+ *    options:
+ *      One or more FSFileOperation flags
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSMoveObjectToTrashSync(const FSRef *source, FSRef *target, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -5458,6 +5985,41 @@ extern OSStatus  FSPathCopyObjectSync(const char *sourcePath, const char *destDi
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus  FSPathMoveObjectSync(const char *sourcePath, const char *destDirPath, CFStringRef destName, char **targetPath, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  FSPathMoveObjectToTrashSync()
+ *  
+ *  Discussion:
+ *    This routine will move the source object into the trash.  The
+ *    source object can be a file or directory.  If the volume the
+ *    source object resides on does not support a trash folder then
+ *    this call will return an error (this is the same circumstance
+ *    that triggers the delete immediately behavior in the Finder).
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    sourcePath:
+ *      The UTF-8 path string of the source object to move.
+ *    
+ *    targetPath:
+ *      A pointer to a char * to allow returning the path to the newly
+ *      created object.  The path is allocated using malloc and it is
+ *      the caller's responsibility to free.  The pointer will be set
+ *      to NULL if the move failed.
+ *    
+ *    options:
+ *      One or more FSFileOperation flags
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSPathMoveObjectToTrashSync(const char *sourcePath, char **targetPath, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -5654,7 +6216,7 @@ extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *    
  *    destName:
  *      The name for the object in the destination directory.  Pass
- *      NULL leave the name unchanged.
+ *      NULL to leave the name unchanged.
  *    
  *    flags:
  *      One or more FSFileOperation flags
@@ -5677,6 +6239,55 @@ extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus  FSMoveObjectAsync(FSFileOperationRef fileOp, const FSRef *source, const FSRef *destDir, CFStringRef destName, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  FSMoveObjectToTrashAsync()
+ *  
+ *  Discussion:
+ *    This routine will start an asynchronous move of the object
+ *    speficied by source to the trash.  If the volume the source
+ *    object resides on does not support a trash folder then the
+ *    operation will return an error (this is the same circumstance
+ *    that triggers the delete immediately behavior in the Finder).
+ *    Status callbacks will occur on one of the runloop/mode
+ *    combinations that the operation was scheduled on (and is
+ *    running).   Upon successul complettion of the operation the last
+ *    currentItem (from either the last status callback or retrieved by
+ *    FSFileOperationCopyStatus) will be object in the trash.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    fileOp:
+ *      The FSFileOperation object created for this operation.
+ *    
+ *    source:
+ *      The source object to move.
+ *    
+ *    flags:
+ *      One or more FSFileOperation flags
+ *    
+ *    callback:
+ *      An optional FSFileOperationStatusProcPtr which will be called
+ *      with status updates as the move proceeds.
+ *    
+ *    statusChangeInterval:
+ *      The minimum time between callbacks within a single stage of an
+ *      operation.
+ *    
+ *    clientContext:
+ *      Client contextual information to associate with this operation.
+ *       The info pointer will be passed to status callbacks.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSMoveObjectToTrashAsync(FSFileOperationRef fileOp, const FSRef *source, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -5763,14 +6374,14 @@ extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *so
  *    
  *    destName:
  *      The name for the object in the destination directory.  Pass
- *      NULL leave the name unchanged.
+ *      NULL to leave the name unchanged.
  *    
  *    flags:
  *      One or more FSFileOperation flags
  *    
  *    callback:
  *      An optional FSPathFileOperationStatusProcPtr which will be
- *      called with status updates as the copy proceeds.
+ *      called with status updates as the move proceeds.
  *    
  *    statusChangeInterval:
  *      The minimum time between callbacks within a single stage of an
@@ -5786,6 +6397,56 @@ extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *so
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus  FSPathMoveObjectAsync(FSFileOperationRef fileOp, const char *sourcePath, const char *destDirPath, CFStringRef destName, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  FSPathMoveObjectToTrashAsync()
+ *  
+ *  Discussion:
+ *    This routine will start an asynchronous move of the object
+ *    speficied by source to the trash.  If the volume the source
+ *    object resides on does not support a trash folder then this call
+ *    will return an error (this is the same circumstance that triggers
+ *    the delete immediately behavior in the Finder). Status callbacks
+ *    will occur on one of the runloop/mode combinations that the
+ *    operation was scheduled on (and is running).  Note that the
+ *    object may be renamed when placed in the trash.  Upon successful
+ *    completion of the operation the last currentItem (from either the
+ *    last status callback or retrieved by
+ *    FSPathFileOperationCopyStatus) will be object in the trash.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    fileOp:
+ *      The FSFileOperation object created for this operation.
+ *    
+ *    sourcePath:
+ *      The UTF-8 path string of the source object to move.
+ *    
+ *    flags:
+ *      One or more FSFileOperation flags
+ *    
+ *    callback:
+ *      An optional FSPathFileOperationStatusProcPtr which will be
+ *      called with status updates as the move proceeds.
+ *    
+ *    statusChangeInterval:
+ *      The minimum time between callbacks within a single stage of an
+ *      operation.
+ *    
+ *    clientContext:
+ *      Client contextual information to associate with this operation.
+ *       The info pointer will be passed to status callbacks.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSPathMoveObjectToTrashAsync(FSFileOperationRef fileOp, const char *sourcePath, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -6449,6 +7110,11 @@ enum {
 };
 
 /* ioFCBFlags bits returned by PBGetFCBInfo */
+/* IMPORTANT: These constants are for the SInt16 FCBPBRec.ioFCBFlags field returned */
+/* by PBGetFCBInfoSync and PBGetFCBInfoAsync. To use them with the SInt8 FSForkInfo.flags */
+/* field returned by the FSGetForkCBInfo, PBGetForkCBInfoSync and PBGetForkCBInfoAsync */
+/* functions, 8 must be subtracted from the bit constants and the mask constants */
+/* must be shifted right by 8. */
 enum {
   kioFCBWriteBit                = 8,    /* Data can be written to this file */
   kioFCBWriteMask               = 0x0100,
@@ -6515,399 +7181,835 @@ enum {
   kownerPrivileges              = 0x00000007 /* all privileges for owner only*/
 };
 
+
 /*  Volume Characteristics */
 /*
- *  PBHGetVolParmsSync()
+ *  FSGetVolumeParms()
+ *  
+ *  Discussion:
+ *    Returns information about the specified volume in the passed in
+ *    GetVolParmsInfoBuffer.
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    volume:
+ *      The volume to get the information about.
+ *    
+ *    buffer:
+ *      A GetVolParmsInfoBuffer to fill out
+ *    
+ *    bufferSize:
+ *      the size of the passed in buffer
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHGetVolParmsAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSGetVolumeParms(FSVolumeRefNum volume, GetVolParmsInfoBuffer *buffer, ByteCount bufferSize) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*  VolumeMount */
 /*
- *  PBGetVolMountInfoSize()
+ *  FSGetVolumeMountInfoSize()
+ *  
+ *  Discussion:
+ *    Returns the size of the MountInfo block associated with the
+ *    specified volume.
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    volume:
+ *      The volume to get the MountInfo size for.
+ *    
+ *    size:
+ *      The size of the buffer required to store the MountInfo data
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSGetVolumeMountInfoSize(FSVolumeRefNum volume, ByteCount *size)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBGetVolMountInfo()
+ *  FSGetVolumeMountInfo()
+ *  
+ *  Discussion:
+ *    Returns the MountInfo data for the specified volume.  If the
+ *    buffer passed in is too small then errFSBadBuffer is returned and
+ *    actualSize will contain the required buffer size to hold the
+ *    MountInfo data.
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    volume:
+ *      The volume to get the MountInfo for.
+ *    
+ *    buffer:
+ *      A pointer to the buffer to copy the MountInfo data into
+ *    
+ *    bufferSize:
+ *      The size of the buffer passed in
+ *    
+ *    actualSize:
+ *      The actual size of the MountInfo data
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSGetVolumeMountInfo(FSVolumeRefNum volume, BytePtr buffer, ByteCount bufferSize, ByteCount *actualSize) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBVolumeMount()
+ *  FSVolumeMount()
+ *  
+ *  Discussion:
+ *    Will attempt to remount a volume using the passed in MountInfo
+ *    buffer
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    buffer:
+ *      A pointer to the buffer with the MountInfo data.
+ *    
+ *    mountedVolume:
+ *      the FSVolumeRefNum of the volume that was mounted
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSVolumeMount(BytePtr buffer, FSVolumeRefNum *mountedVolume)         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*  Volume flushing */
 /*
- *  FlushVol()
+ *  FSFlushVolume()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  FlushVol(ConstStr63Param volName, short vRefNum)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSFlushVolume(FSVolumeRefNum vRefNum)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBFlushVolSync()
+ *  PBFlushVolumeSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  PBFlushVolumeSync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBFlushVolAsync()
+ *  PBFlushVolumeAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  PBFlushVolumeAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* CopyFile */
+/*
+    PBFSCopyFile
+    Copies a file on a volume that supports the CopyFile system call (which can be
+    determined from the bHasCopyFile GetVolParms bit).
+    ->  ioCompletion    A pointer to a completion routine
+    <-  ioResult        The result code of the function
+    ->  ref             The source item to copy
+    ->  parentRef       The destination to copy to
+    ->  nameLength      Number of Unicode characters in the optional new name.  Pass in 0 to use the source name
+    ->  name            A pointer to the optional new Unicode name; Pass in NULL to use the source name
+    <-  newRef          A pointer to the FSRef for the new object; may be NULL
+*/
+/*
+ *  PBFSCopyFileSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  PBFSCopyFileSync(FSRefParamPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBHOpenDenySync()
+ *  PBFSCopyFileAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  PBFSCopyFileAsync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* Node ID Resolution */
+/*
+ *  FSResolveNodeID()
+ *  
+ *  Discussion:
+ *    Returns an FSRef to the item on volume with the specified node id.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    volume:
+ *      The FSVolumeRefNum of the volume the item is on
+ *    
+ *    nodeID:
+ *      The node id to resolve
+ *    
+ *    newRef:
+ *      A pointer to storage for the FSRef of the item with the
+ *      corresponding node id
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus  FSResolveNodeID(FSVolumeRefNum volume, UInt32 nodeID, FSRefPtr newRef)      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBHOpenDenyAsync()
+    ->  ioCompletion    A pointer to a completion routine
+    <-  ioResult        The result code of the function
+    ->  ioVRefNum       The FSVolumeRefNum of the volume the item is on
+    ->  ioDirID         The node id to resolve (can be file as well as a directory node id)
+    <-  newRef          A pointer to storage for the FSRef of the item with the corresponding node id
+*/
+/*
+ *  PBFSResolveNodeIDSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  PBFSResolveNodeIDSync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
- *  PBHOpenRFDenySync()
+ *  PBFSResolveNodeIDAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version 10.0
+ *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHOpenRFDenyAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHGetDirAccessSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHGetDirAccessAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHSetDirAccessSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHSetDirAccessAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHMapIDSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHMapIDAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHMapNameSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHMapNameAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHCopyFileSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBHCopyFileAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBCreateFileIDRefSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBCreateFileIDRefAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBResolveFileIDRefSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBResolveFileIDRefAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBDeleteFileIDRefSync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PBDeleteFileIDRefAsync()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  PBFSResolveNodeIDAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /* Calls beyond this point are deprecated*/
+
+/*
+    MakeFSRef
+    Create an FSRef for an existing object specified by a combination
+    of volume refnum, parent directory, and pathname.
+    ->  ioCompletion    A pointer to a completion routine
+    <-  ioResult        The result code of the function
+    ->  ioNamePtr       A pointer to a pathname
+    ->  ioVRefNum       A volume specification
+    ->  ioDirID         A directory ID
+    <-  newRef          A pointer to an FSRef
+   This function is deprecated in Mac OS X 10.5. Use FSMakeFSRefUnicode instead.
+*/
+#if !__LP64__
+/*
+ *  FSpMakeFSRef()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr  FSpMakeFSRef(const FSSpec *source, FSRef *newRef)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBMakeFSRefUnicodeSync instead.*/
+/*
+ *  PBMakeFSRefSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr  PBMakeFSRefSync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBMakeFSRefUnicodeAsync instead.*/
+/*
+ *  PBMakeFSRefAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBCloseForkSync instead.*/
+/*
+ *  PBCloseSync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBCloseSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBCloseForkAsync instead.*/
+/*
+ *  PBCloseAsync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBCloseAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBReadForkSync instead.*/
+/*
+ *  PBReadSync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBReadSync(ParmBlkPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBReadForkAsync instead.*/
+/*
+ *  PBReadAsync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBReadAsync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBWriteForkSync instead.*/
+/*
+ *  PBWriteSync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBWriteSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBWriteForkAsync instead.*/
+/*
+ *  PBWriteAsync()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBWriteAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. It was never implemented on OS X.*/
+/*
+ *  PBWaitIOComplete()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr  PBWaitIOComplete(ParmBlkPtr paramBlock, Duration timeout)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*  Volume Characteristics */
+/* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeParms instead.*/
+/*
+ *  PBHGetVolParmsSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeParms instead.*/
+/*
+ *  PBHGetVolParmsAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*  VolumeMount */
+/* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeMountInfoSize instead.*/
+/*
+ *  PBGetVolMountInfoSize()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeMountInfo instead.*/
+/*
+ *  PBGetVolMountInfo()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSVolumeMount instead.*/
+/*
+ *  PBVolumeMount()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*  Volume flushing */
+/* This function is deprecated in Mac OS X 10.5. Use FSFlushVolume instead.*/
+/*
+ *  FlushVol()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  FlushVol(ConstStr63Param volName, FSVolumeRefNum vRefNum)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBFlushVolumeSync instead.*/
+/*
+ *  PBFlushVolSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBFlushVolumeAsync instead.*/
+/*
+ *  PBFlushVolAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkSync with deny pos modes instead.*/
+/*
+ *  PBHOpenDenySync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkAsync with deny pos modes instead.*/
+/*
+ *  PBHOpenDenyAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkSync with deny pos modes instead.*/
+/*
+ *  PBHOpenRFDenySync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkAsync with deny pos modes instead.*/
+/*
+ *  PBHOpenRFDenyAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo instead.*/
+/*
+ *  PBHGetDirAccessSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo instead.*/
+/*
+ *  PBHGetDirAccessAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSSetCatalogInfo instead.*/
+/*
+ *  PBHSetDirAccessSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSSetCatalogInfo instead.*/
+/*
+ *  PBHSetDirAccessAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
+/*
+ *  PBHMapIDSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
+/*
+ *  PBHMapIDAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
+/*
+ *  PBHMapNameSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
+/*
+ *  PBHMapNameAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBFSCopyFileSync instead.*/
+/*
+ *  PBHCopyFileSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use PBFSCopyFileAsync instead.*/
+/*
+ *  PBHCopyFileAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
+/*
+ *  PBCreateFileIDRefSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
+/*
+ *  PBCreateFileIDRefAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
+/*
+ *  PBResolveFileIDRefSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
+/*
+ *  PBResolveFileIDRefAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. It is obsolete and has no replacement.*/
+/*
+ *  PBDeleteFileIDRefSync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* This function is deprecated in Mac OS X 10.5. It is obsolete and has no replacement.*/
+/*
+ *  PBDeleteFileIDRefAsync()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetVolumeInfo instead.*/
 /*
@@ -6917,7 +8019,7 @@ extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -6932,7 +8034,7 @@ extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -6947,7 +8049,7 @@ extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -6962,7 +8064,7 @@ extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -6977,7 +8079,7 @@ extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -6992,7 +8094,7 @@ extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7007,7 +8109,7 @@ extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7022,7 +8124,7 @@ extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7037,7 +8139,7 @@ extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7052,7 +8154,7 @@ extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7067,7 +8169,7 @@ extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7082,7 +8184,7 @@ extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7097,7 +8199,7 @@ extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7112,7 +8214,7 @@ extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7127,7 +8229,7 @@ extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7142,7 +8244,7 @@ extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7157,7 +8259,7 @@ extern OSErr  PBCatSearchSync(CSParamPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7172,14 +8274,14 @@ extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 UnmountVol(
   ConstStr63Param   volName,       /* can be NULL */
-  short             vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSVolumeRefNum    vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -7190,15 +8292,15 @@ UnmountVol(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HSetVol(
   ConstStr63Param   volName,       /* can be NULL */
-  short             vRefNum,
-  long              dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSVolumeRefNum    vRefNum,
+  SInt32            dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* AddDrive() was moved to Devices.h*/
@@ -7211,12 +8313,12 @@ HSetVol(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSClose(short refNum)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+FSClose(FSIORefNum refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSReadFork instead.*/
@@ -7227,15 +8329,15 @@ FSClose(short refNum)                                         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 FSRead(
-  short   refNum,
-  long *  count,
-  void *  buffPtr)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt32 *     count,
+  void *       buffPtr)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSWriteFork instead.*/
@@ -7246,14 +8348,14 @@ FSRead(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 FSWrite(
-  short         refNum,
-  long *        count,
+  FSIORefNum    refNum,
+  SInt32 *      count,
   const void *  buffPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
@@ -7265,14 +8367,14 @@ FSWrite(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 Allocate(
-  short   refNum,
-  long *  count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetForkSize instead.*/
@@ -7283,14 +8385,14 @@ Allocate(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 GetEOF(
-  short   refNum,
-  long *  logEOF)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt32 *     logEOF)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetForkSize instead.*/
@@ -7301,14 +8403,14 @@ GetEOF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SetEOF(
-  short   refNum,
-  long    logEOF)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt32       logEOF)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetForkPosition instead.*/
@@ -7319,14 +8421,14 @@ SetEOF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 GetFPos(
-  short   refNum,
-  long *  filePos)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt32 *     filePos)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetForkPosition instead.*/
@@ -7337,15 +8439,15 @@ GetFPos(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 SetFPos(
-  short   refNum,
-  short   posMode,
-  long    posOff)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum   refNum,
+  SInt16       posMode,
+  SInt32       posOff)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetCatalogInfo instead.*/
@@ -7356,14 +8458,14 @@ SetFPos(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 GetVRefNum(
-  short    fileRefNum,
-  short *  vRefNum)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum        fileRefNum,
+  FSVolumeRefNum *  vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBXLockRangeSync or FSLockRange instead.*/
@@ -7374,7 +8476,7 @@ GetVRefNum(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7390,7 +8492,7 @@ PBLockRangeSync(ParmBlkPtr paramBlock)                        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7406,7 +8508,7 @@ PBLockRangeAsync(ParmBlkPtr paramBlock)                       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7422,7 +8524,7 @@ PBUnlockRangeSync(ParmBlkPtr paramBlock)                      AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7438,7 +8540,7 @@ PBUnlockRangeAsync(ParmBlkPtr paramBlock)                     AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7453,7 +8555,7 @@ extern OSErr  PBHSetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7468,7 +8570,7 @@ extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7483,7 +8585,7 @@ extern OSErr  PBHGetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7498,7 +8600,7 @@ extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7513,7 +8615,7 @@ extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7528,7 +8630,7 @@ extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7543,7 +8645,7 @@ extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7558,7 +8660,7 @@ extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7573,7 +8675,7 @@ extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7588,7 +8690,7 @@ extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7603,7 +8705,7 @@ extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7618,7 +8720,7 @@ extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7633,7 +8735,7 @@ extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7648,7 +8750,7 @@ extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7663,7 +8765,7 @@ extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7678,7 +8780,7 @@ extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7693,7 +8795,7 @@ extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7708,7 +8810,7 @@ extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7723,7 +8825,7 @@ extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7738,7 +8840,7 @@ extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7753,7 +8855,7 @@ extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7768,7 +8870,7 @@ extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7783,7 +8885,7 @@ extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7798,7 +8900,7 @@ extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7813,7 +8915,7 @@ extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7828,7 +8930,7 @@ extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7843,7 +8945,7 @@ extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7858,7 +8960,7 @@ extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7873,7 +8975,7 @@ extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7888,7 +8990,7 @@ extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7903,7 +9005,7 @@ extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7918,7 +9020,7 @@ extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7933,7 +9035,7 @@ extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7948,7 +9050,7 @@ extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7963,7 +9065,7 @@ extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7978,7 +9080,7 @@ extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -7993,7 +9095,7 @@ extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8008,7 +9110,7 @@ extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8023,7 +9125,7 @@ extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8038,7 +9140,7 @@ extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8053,7 +9155,7 @@ extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8068,15 +9170,15 @@ extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HGetVol(
-  StringPtr   volName,
-  short *     vRefNum,
-  long *      dirID)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  StringPtr         volName,
+  FSVolumeRefNum *  vRefNum,
+  SInt32 *          dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -8087,17 +9189,17 @@ HGetVol(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HOpen(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -8108,17 +9210,17 @@ HOpen(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HOpenDF(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -8129,17 +9231,17 @@ HOpenDF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HOpenRF(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSAllocateFork instead.*/
@@ -8150,14 +9252,14 @@ HOpenRF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 AllocContig(
-  short   refNum,
-  long *  count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSVolumeRefNum   refNum,
+  SInt32 *         count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateFileUnicode instead.*/
@@ -8168,14 +9270,14 @@ AllocContig(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HCreate(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   OSType             creator,
   OSType             fileType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
@@ -8189,16 +9291,16 @@ HCreate(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DirCreate(
-  short              vRefNum,
-  long               parentDirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             parentDirID,
   ConstStr255Param   directoryName,
-  long *             createdDirID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *           createdDirID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSDeleteObject instead.*/
@@ -8209,14 +9311,14 @@ DirCreate(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HDelete(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
@@ -8228,14 +9330,14 @@ HDelete(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HGetFInfo(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   FInfo *            fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
@@ -8248,14 +9350,14 @@ HGetFInfo(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HSetFInfo(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   const FInfo *      fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
@@ -8268,14 +9370,14 @@ HSetFInfo(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HSetFLock(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
@@ -8287,14 +9389,14 @@ HSetFLock(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HRstFLock(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
@@ -8306,14 +9408,14 @@ HRstFLock(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 HRename(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   oldName,
   ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
@@ -8326,16 +9428,16 @@ HRename(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 CatMove(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   oldName,
-  long               newDirID,
+  SInt32             newDirID,
   ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
@@ -8347,7 +9449,7 @@ CatMove(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8362,14 +9464,17 @@ extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
-/* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
+/*
+   This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.
+   Use FSMoveObjectSync instead.
+*/
 /*
  *  PBHMoveRenameSync()   *** DEPRECATED ***
  *  
@@ -8377,14 +9482,17 @@ extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
-/* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
+/*
+   This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.
+   Use FSMoveObjectAsync instead.
+*/
 /*
  *  PBHMoveRenameAsync()   *** DEPRECATED ***
  *  
@@ -8392,7 +9500,7 @@ extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8407,7 +9515,7 @@ extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -8422,7 +9530,7 @@ extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -8437,7 +9545,7 @@ extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8452,7 +9560,7 @@ extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8467,7 +9575,7 @@ extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8482,7 +9590,7 @@ extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8497,7 +9605,7 @@ extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8512,7 +9620,7 @@ extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8520,6 +9628,9 @@ extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
 
 
 /*  Desktop Manager  */
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 enum {
                                         /* Desktop Database, ffsGetIconMessage and fsmGetFSIconMessage icon type and size Constants */
   kLargeIcon                    = 1,
@@ -8531,15 +9642,9 @@ enum {
   kicnsIconFamily               = 239   /* Note: The 'icns' icon family record is variable sized. */
 };
 
-enum {
-  kLargeIconSize                = 256,
-  kLarge4BitIconSize            = 512,
-  kLarge8BitIconSize            = 1024,
-  kSmallIconSize                = 64,
-  kSmall4BitIconSize            = 128,
-  kSmall8BitIconSize            = 256
-};
+#endif  /* !__LP64__ */
 
+#if !__LP64__
 /*
  *  PBDTGetPath()   *** DEPRECATED ***
  *  
@@ -8547,7 +9652,7 @@ enum {
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8561,7 +9666,7 @@ extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8575,7 +9680,7 @@ extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8589,7 +9694,7 @@ extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8603,7 +9708,7 @@ extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8617,7 +9722,7 @@ extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8631,7 +9736,7 @@ extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8645,7 +9750,7 @@ extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8659,7 +9764,7 @@ extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8673,7 +9778,7 @@ extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8687,7 +9792,7 @@ extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8701,7 +9806,7 @@ extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8715,7 +9820,7 @@ extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8729,7 +9834,7 @@ extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8743,7 +9848,7 @@ extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8757,7 +9862,7 @@ extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8771,7 +9876,7 @@ extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8785,7 +9890,7 @@ extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8799,7 +9904,7 @@ extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8813,7 +9918,7 @@ extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8827,7 +9932,7 @@ extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8841,7 +9946,7 @@ extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8855,7 +9960,7 @@ extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8869,7 +9974,7 @@ extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8883,7 +9988,7 @@ extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8897,7 +10002,7 @@ extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8911,7 +10016,7 @@ extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8925,7 +10030,7 @@ extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8939,7 +10044,7 @@ extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8955,14 +10060,14 @@ extern OSErr  PBDTDeleteAsync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 FSMakeFSSpec(
-  short              vRefNum,
-  long               dirID,
+  FSVolumeRefNum     vRefNum,
+  SInt32             dirID,
   ConstStr255Param   fileName,
   FSSpec *           spec)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
@@ -8975,7 +10080,7 @@ FSMakeFSSpec(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -8983,7 +10088,7 @@ extern OSErr
 FSpOpenDF(
   const FSSpec *  spec,
   SInt8           permission,
-  short *         refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *    refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -8994,7 +10099,7 @@ FSpOpenDF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9002,7 +10107,7 @@ extern OSErr
 FSpOpenRF(
   const FSSpec *  spec,
   SInt8           permission,
-  short *         refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *    refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateFileUnicode instead.*/
@@ -9013,7 +10118,7 @@ FSpOpenRF(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9033,7 +10138,7 @@ FSpCreate(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9041,7 +10146,7 @@ extern OSErr
 FSpDirCreate(
   const FSSpec *  spec,
   ScriptCode      scriptTag,
-  long *          createdDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *        createdDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSDeleteObject instead.*/
@@ -9052,7 +10157,7 @@ FSpDirCreate(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9068,7 +10173,7 @@ FSpDelete(const FSSpec * spec)                                AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9086,7 +10191,7 @@ FSpGetFInfo(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9104,7 +10209,7 @@ FSpSetFInfo(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9120,7 +10225,7 @@ FSpSetFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9136,7 +10241,7 @@ FSpRstFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9154,7 +10259,7 @@ FSpRename(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9172,7 +10277,7 @@ FSpCatMove(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9191,7 +10296,7 @@ FSpExchangeFiles(
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9206,7 +10311,7 @@ extern OSErr  PBShareSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9221,7 +10326,7 @@ extern OSErr  PBShareAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9236,7 +10341,7 @@ extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9251,7 +10356,7 @@ extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -9266,13 +10371,16 @@ extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
     The PBxxx() routines are obsolete.  
     
@@ -9355,8 +10463,10 @@ extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
 #define PBDTReset(pb, async) ((async) ? PBDTResetAsync(pb) : PBDTResetSync(pb))
 #define PBDTGetInfo(pb, async) ((async) ? PBDTGetInfoAsync(pb) : PBDTGetInfoSync(pb))
 #define PBDTDelete(pb, async) ((async) ? PBDTDeleteAsync(pb) : PBDTDeleteSync(pb))
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

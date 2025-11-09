@@ -1,10 +1,10 @@
-/*		NSXMLDTD.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLDTD.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 #import <Foundation/NSXMLNode.h>
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSData, NSMutableDictionary;
 @class NSXMLDTDNode;
@@ -32,8 +32,8 @@
 
 #pragma mark --- Properties ---
 
-- (id)initWithContentsOfURL:(NSURL *)url options:(unsigned int)mask error:(NSError **)error;
-- (id)initWithData:(NSData *)data options:(unsigned int)mask error:(NSError **)error; //primitive
+- (id)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error; //primitive
 
 /*!
     @method setPublicID:
@@ -65,19 +65,19 @@
     @method insertChild:atIndex:
     @abstract Inserts a child at a particular index.
 */
-- (void)insertChild:(NSXMLNode *)child atIndex:(unsigned)index; //primitive
+- (void)insertChild:(NSXMLNode *)child atIndex:(NSUInteger)index; //primitive
 
 /*!
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(unsigned)index;
+- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:
     @abstract Removes a child at a particular index.
 */
-- (void)removeChildAtIndex:(unsigned)index; //primitive
+- (void)removeChildAtIndex:(NSUInteger)index; //primitive
 
 /*!
     @method setChildren:
@@ -95,7 +95,7 @@
     @method replaceChildAtIndex:withNode:
     @abstract Replaces a child at a particular index with another child.
 */
-- (void)replaceChildAtIndex:(unsigned)index withNode:(NSXMLNode *)node;
+- (void)replaceChildAtIndex:(NSUInteger)index withNode:(NSXMLNode *)node;
 
 #pragma mark --- Accessors ---
 

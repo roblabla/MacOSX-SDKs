@@ -1,5 +1,5 @@
 /*	CFAttributedString.h
-	Copyright (c) 2004-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
 /*! @header CFAttributedString
@@ -16,11 +16,8 @@ Attributes are identified by key/value pairs stored in CFDictionaryRefs. Keys mu
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
-#include <stdarg.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 
 /* CFAttributedString comes in immutable and mutable flavors.
@@ -65,7 +62,7 @@ CF_EXPORT CFIndex CFAttributedStringGetLength(CFAttributedStringRef aStr) AVAILA
 /*! @function CFAttributedStringGetAttributes
 Returns the attributes at the specified location. If effectiveRange is not NULL, upon return *effectiveRange contains a range over which the exact same set of attributes apply. Note that for performance reasons, the returned effectiveRange is not necessarily the maximal range - for that, use CFAttributedStringGetAttributesAndLongestEffectiveRange().  It's a programming error for loc to specify a location outside the bounds of the attributed string.
 
-Note that the returned attribute dictionary might change in unpredicatable ways from under the caller if the attributed string is edited after this call. If you wish to hang on to the dictionary long-term, you should make an actual copy of it rather than just retaining it.  Also, no assumptions should be made about the relationship of the actual CFDictionaryRef returned by this call and the dictionary originally used to set the attributes, other than the fact that the values stored in the dictionary will be identical (that is, ==) to those originally specified.
+Note that the returned attribute dictionary might change in unpredictable ways from under the caller if the attributed string is edited after this call. If you wish to hang on to the dictionary long-term, you should make an actual copy of it rather than just retaining it.  Also, no assumptions should be made about the relationship of the actual CFDictionaryRef returned by this call and the dictionary originally used to set the attributes, other than the fact that the values stored in the dictionary will be identical (that is, ==) to those originally specified.
 */
 CF_EXPORT CFDictionaryRef CFAttributedStringGetAttributes(CFAttributedStringRef aStr, CFIndex loc, CFRange *effectiveRange) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -143,9 +140,7 @@ In cases where attributed string might do a bunch of work to assure self-consist
 CF_EXPORT void CFAttributedStringEndEditing(CFMutableAttributedStringRef aStr) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
-#endif /* !__COREFOUNDATION_CFATTRIBUTEDSTRING__ */
+#endif /* ! __COREFOUNDATION_CFATTRIBUTEDSTRING__ */
 

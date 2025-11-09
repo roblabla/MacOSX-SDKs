@@ -47,6 +47,7 @@ extern const OSSymbol *gFireWire_GUID;
 extern const OSSymbol *gFireWireVendor_Name;
 extern const OSSymbol *gFireWireProduct_Name;
 extern const OSSymbol *gFireWireModel_ID;
+extern const OSSymbol *gFireWireTDM;
 
 class IOFireWireDevice;
 class IOLocalConfigDirectory;
@@ -351,7 +352,6 @@ protected:
 		inline IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction )
 			{ return fAuxiliary->createSimplePhysicalAddressSpace( size, direction ); }
 			
-
 	private:
 	
 		OSMetaClassDeclareReservedUsed(IOFireWireBus, 0);

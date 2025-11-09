@@ -53,13 +53,13 @@ enum _CGCommonWindowLevelKey {
     kCGNumberOfWindowLevelKeys	/* Internal bookkeeping; must be last */
 };
 
-CGWindowLevel CGWindowLevelForKey( CGWindowLevelKey key );
+CG_EXTERN CGWindowLevel CGWindowLevelForKey( CGWindowLevelKey key )  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* number of levels above kCGMaximumWindowLevel reserved for internal use */
 #define kCGNumReservedWindowLevels	(16)
 
 /* Definitions of older constant values as calls */
-#define kCGBaseWindowLevel		CGWindowLevelForKey(kCGBaseWindowLevelKey)	/* LONG_MIN */
+#define kCGBaseWindowLevel		CGWindowLevelForKey(kCGBaseWindowLevelKey)	/* INT32_MIN */
 #define kCGMinimumWindowLevel 		CGWindowLevelForKey(kCGMinimumWindowLevelKey)	/* (kCGBaseWindowLevel + 1) */
 #define kCGDesktopWindowLevel		CGWindowLevelForKey(kCGDesktopWindowLevelKey)	/* kCGMinimumWindowLevel */
 #define kCGDesktopIconWindowLevel		CGWindowLevelForKey(kCGDesktopIconWindowLevelKey)	/* kCGMinimumWindowLevel + 20 */
@@ -76,13 +76,12 @@ CGWindowLevel CGWindowLevelForKey( CGWindowLevelKey key );
 #define kCGScreenSaverWindowLevel	CGWindowLevelForKey(kCGScreenSaverWindowLevelKey)	/* 1000 */
 #define kCGCursorWindowLevel		CGWindowLevelForKey(kCGCursorWindowLevelKey)	/* 2000 */
 #define kCGOverlayWindowLevel		CGWindowLevelForKey(kCGOverlayWindowLevelKey)	/* 102 */
-#define kCGHelpWindowLevel		CGWindowLevelForKey(kCGHelpWindowLevelKey)	/* 102 */
+#define kCGHelpWindowLevel		CGWindowLevelForKey(kCGHelpWindowLevelKey)	/* 200 */
 #define kCGUtilityWindowLevel		CGWindowLevelForKey(kCGUtilityWindowLevelKey)	/* 19 */
 
 #define kCGAssistiveTechHighWindowLevel		CGWindowLevelForKey(kCGAssistiveTechHighWindowLevelKey)	/* 1500 */
 
-#define kCGMaximumWindowLevel 		CGWindowLevelForKey(kCGMaximumWindowLevelKey)	/* LONG_MAX - kCGNumReservedWindowLevels */
-
+#define kCGMaximumWindowLevel 		CGWindowLevelForKey(kCGMaximumWindowLevelKey)	/* INT32_MAX - kCGNumReservedWindowLevels */
 
 CG_EXTERN_C_END
 

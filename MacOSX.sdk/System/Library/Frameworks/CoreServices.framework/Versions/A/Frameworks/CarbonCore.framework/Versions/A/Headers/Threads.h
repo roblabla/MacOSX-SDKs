@@ -3,7 +3,7 @@
  
      Contains:   Thread Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Thread states*/
 typedef UInt16 ThreadState;
@@ -62,7 +62,7 @@ enum {
 };
 
 /* Thread identifiers*/
-typedef UInt32 ThreadID;
+typedef unsigned long                   ThreadID;
 enum {
   kNoThreadID                   = 0,
   kCurrentThreadID              = 1,
@@ -363,6 +363,54 @@ InvokeDebuggerThreadSchedulerUPP(
   SchedulerInfoRecPtr         schedulerInfo,
   DebuggerThreadSchedulerUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ThreadEntryUPP                                       NewThreadEntryUPP(ThreadEntryProcPtr userRoutine) { return userRoutine; }
+    inline ThreadSchedulerUPP                                   NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine) { return userRoutine; }
+    inline ThreadSwitchUPP                                      NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine) { return userRoutine; }
+    inline ThreadTerminationUPP                                 NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) { return userRoutine; }
+    inline DebuggerNewThreadUPP                                 NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) { return userRoutine; }
+    inline DebuggerDisposeThreadUPP                             NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) { return userRoutine; }
+    inline DebuggerThreadSchedulerUPP                           NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeThreadEntryUPP(ThreadEntryUPP) { }
+    inline void                                                 DisposeThreadSchedulerUPP(ThreadSchedulerUPP) { }
+    inline void                                                 DisposeThreadSwitchUPP(ThreadSwitchUPP) { }
+    inline void                                                 DisposeThreadTerminationUPP(ThreadTerminationUPP) { }
+    inline void                                                 DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP) { }
+    inline void                                                 DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP) { }
+    inline void                                                 DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP) { }
+    inline voidPtr                                              InvokeThreadEntryUPP(void * threadParam, ThreadEntryUPP userUPP) { return (*userUPP)(threadParam); }
+    inline ThreadID                                             InvokeThreadSchedulerUPP(SchedulerInfoRecPtr schedulerInfo, ThreadSchedulerUPP userUPP) { return (*userUPP)(schedulerInfo); }
+    inline void                                                 InvokeThreadSwitchUPP(ThreadID threadBeingSwitched, void * switchProcParam, ThreadSwitchUPP userUPP) { (*userUPP)(threadBeingSwitched, switchProcParam); }
+    inline void                                                 InvokeThreadTerminationUPP(ThreadID threadTerminated, void * terminationProcParam, ThreadTerminationUPP userUPP) { (*userUPP)(threadTerminated, terminationProcParam); }
+    inline void                                                 InvokeDebuggerNewThreadUPP(ThreadID threadCreated, DebuggerNewThreadUPP userUPP) { (*userUPP)(threadCreated); }
+    inline void                                                 InvokeDebuggerDisposeThreadUPP(ThreadID threadDeleted, DebuggerDisposeThreadUPP userUPP) { (*userUPP)(threadDeleted); }
+    inline ThreadID                                             InvokeDebuggerThreadSchedulerUPP(SchedulerInfoRecPtr schedulerInfo, DebuggerThreadSchedulerUPP userUPP) { return (*userUPP)(schedulerInfo); }
+  #else
+    #define NewThreadEntryUPP(userRoutine)                      ((ThreadEntryUPP)userRoutine)
+    #define NewThreadSchedulerUPP(userRoutine)                  ((ThreadSchedulerUPP)userRoutine)
+    #define NewThreadSwitchUPP(userRoutine)                     ((ThreadSwitchUPP)userRoutine)
+    #define NewThreadTerminationUPP(userRoutine)                ((ThreadTerminationUPP)userRoutine)
+    #define NewDebuggerNewThreadUPP(userRoutine)                ((DebuggerNewThreadUPP)userRoutine)
+    #define NewDebuggerDisposeThreadUPP(userRoutine)            ((DebuggerDisposeThreadUPP)userRoutine)
+    #define NewDebuggerThreadSchedulerUPP(userRoutine)          ((DebuggerThreadSchedulerUPP)userRoutine)
+    #define DisposeThreadEntryUPP(userUPP)
+    #define DisposeThreadSchedulerUPP(userUPP)
+    #define DisposeThreadSwitchUPP(userUPP)
+    #define DisposeThreadTerminationUPP(userUPP)
+    #define DisposeDebuggerNewThreadUPP(userUPP)
+    #define DisposeDebuggerDisposeThreadUPP(userUPP)
+    #define DisposeDebuggerThreadSchedulerUPP(userUPP)
+    #define InvokeThreadEntryUPP(threadParam, userUPP)          (*userUPP)(threadParam)
+    #define InvokeThreadSchedulerUPP(schedulerInfo, userUPP)    (*userUPP)(schedulerInfo)
+    #define InvokeThreadSwitchUPP(threadBeingSwitched, switchProcParam, userUPP) (*userUPP)(threadBeingSwitched, switchProcParam)
+    #define InvokeThreadTerminationUPP(threadTerminated, terminationProcParam, userUPP) (*userUPP)(threadTerminated, terminationProcParam)
+    #define InvokeDebuggerNewThreadUPP(threadCreated, userUPP)  (*userUPP)(threadCreated)
+    #define InvokeDebuggerDisposeThreadUPP(threadDeleted, userUPP) (*userUPP)(threadDeleted)
+    #define InvokeDebuggerThreadSchedulerUPP(schedulerInfo, userUPP) (*userUPP)(schedulerInfo)
+  #endif
+#endif
+
 /*
    Thread Manager function pointers (TPP):
    on classic 68k use raw function pointers (same as UPP's)
@@ -473,35 +521,6 @@ CreateThreadPool(
 
 
 /*
- *  GetFreeThreadCount()   *** DEPRECATED ***
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
- */
-extern OSErr 
-GetFreeThreadCount(
-  ThreadStyle   threadStyle,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
-
-
-/*
- *  GetSpecificFreeThreadCount()   *** DEPRECATED ***
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
- */
-extern OSErr 
-GetSpecificFreeThreadCount(
-  ThreadStyle   threadStyle,
-  Size          stackSize,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
-
-
-/*
  *  GetDefaultThreadStackSize()
  *  
  *  Availability:
@@ -525,8 +544,8 @@ GetDefaultThreadStackSize(
  */
 extern OSErr 
 ThreadCurrentStackSpace(
-  ThreadID   thread,
-  UInt32 *   freeStack)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID     thread,
+  ByteCount *  freeStack)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -692,8 +711,42 @@ SetThreadReadyGivenTaskRef(
   ThreadID        threadToSet)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
+/* This routine was never implemented on Mac OS X.*/
+/*
+ *  GetFreeThreadCount()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
+ */
+extern OSErr 
+GetFreeThreadCount(
+  ThreadStyle   threadStyle,
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
-#pragma options align=reset
+
+/* This routine was never implemented on Mac OS X.*/
+/*
+ *  GetSpecificFreeThreadCount()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
+ */
+extern OSErr 
+GetSpecificFreeThreadCount(
+  ThreadStyle   threadStyle,
+  Size          stackSize,
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+#endif  /* !__LP64__ */
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

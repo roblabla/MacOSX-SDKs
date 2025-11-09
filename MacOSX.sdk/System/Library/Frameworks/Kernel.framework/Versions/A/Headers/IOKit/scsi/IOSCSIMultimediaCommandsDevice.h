@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -63,6 +63,7 @@ enum
 // IOKit property keys and constants
 #define	kIOPropertySupportedCDFeatures		kIOPropertySupportedCDFeaturesKey
 #define	kIOPropertySupportedDVDFeatures		kIOPropertySupportedDVDFeaturesKey
+#define	kIOPropertySupportedBDFeatures		kIOPropertySupportedBDFeaturesKey
 #define kIOPropertyLowPowerPolling			"Low Power Polling"
 
 typedef UInt32 CDFeatures;
@@ -107,7 +108,11 @@ enum
 	kDVDFeaturesTestWriteBit			= 5,	// DVD-R Write - Test Write
 	kDVDFeaturesBUFWriteBit				= 6,	// DVD-R Write - Buffer Underrun Free
 	kDVDFeaturesPlusRBit				= 7,	// DVD+R
-	kDVDFeaturesPlusRWBit				= 8		// DVD+RW (implies backgound format support)
+	kDVDFeaturesPlusRWBit				= 8,	// DVD+RW (implies backgound format support)
+	kDVDFeaturesHDReadBit				= 9,	// HD DVD-ROM
+	kDVDFeaturesHDRBit					= 10,	// HD DVD-R
+	kDVDFeaturesHDRAMBit				= 11,	// HD DVD-RAM
+	kDVDFeaturesHDRWBit					= 12	// HD DVD-RW
 };
 
 enum
@@ -120,7 +125,24 @@ enum
 	kDVDFeaturesTestWriteMask			= (1 << kDVDFeaturesTestWriteBit),
 	kDVDFeaturesBUFWriteMask			= (1 << kDVDFeaturesBUFWriteBit),
 	kDVDFeaturesPlusRMask				= (1 << kDVDFeaturesPlusRBit),
-	kDVDFeaturesPlusRWMask				= (1 << kDVDFeaturesPlusRWBit)
+	kDVDFeaturesPlusRWMask				= (1 << kDVDFeaturesPlusRWBit),
+	kDVDFeaturesHDReadMask				= (1 << kDVDFeaturesHDReadBit),
+	kDVDFeaturesHDRMask					= (1 << kDVDFeaturesHDRBit),
+	kDVDFeaturesHDRAMMask				= (1 << kDVDFeaturesHDRAMBit),
+	kDVDFeaturesHDRWMask				= (1 << kDVDFeaturesHDRWBit)
+};
+
+typedef	UInt32 BDFeatures;
+enum
+{
+	kBDFeaturesReadBit					= 0,	// BD-ROM
+	kBDFeaturesWriteBit					= 1		// BD-R / BD-RE
+};
+
+enum
+{
+	kBDFeaturesReadMask					= (1 << kBDFeaturesReadBit),
+	kBDFeaturesWriteMask				= (1 << kBDFeaturesWriteBit)
 };
 
 enum
@@ -201,11 +223,13 @@ protected:
 	{
 		IONotifier *		fPowerDownNotifier;
 		bool				fDeviceSupportsPowerOff;
+		BDFeatures			fSupportedBDFeatures;
 	};
     IOSCSIMultimediaCommandsDeviceExpansionData * fIOSCSIMultimediaCommandsDeviceReserved;
 	
 	#define fPowerDownNotifier 			fIOSCSIMultimediaCommandsDeviceReserved->fPowerDownNotifier
 	#define fDeviceSupportsPowerOff 	fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsPowerOff
+	#define fSupportedBDFeatures		fIOSCSIMultimediaCommandsDeviceReserved->fSupportedBDFeatures
 	
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
@@ -878,17 +902,80 @@ public:
 	/* Added with 10.3.3 */
 	OSMetaClassDeclareReservedUsed ( IOSCSIMultimediaCommandsDevice, 5 );
 	
+	
 protected:
 	
+	
 	virtual void AsyncReadWriteCompletion ( SCSITaskIdentifier completedTask );
+	
+	
+public:
+	
+	
+	/* Added with 10.5 */
+    OSMetaClassDeclareReservedUsed ( IOSCSIMultimediaCommandsDevice, 6 );
+	
+	virtual	IOReturn	ReadDiscStructure (	IOMemoryDescriptor * 		buffer,
+											const UInt32 				length,
+											const UInt8					structureFormat,
+											const UInt32				logicalBlockAddress,
+											const UInt8					layer,
+											const UInt8 				agid,
+											const UInt8					mediaType );
+	
+	
+	bool		CheckForBDMediaType ( void );
+	
+	
+    bool		READ_DISC_STRUCTURE (
+						SCSITaskIdentifier			request,
+						IOMemoryDescriptor *		dataBuffer,
+						SCSICmdField4Bit 			MEDIA_TYPE,
+						SCSICmdField4Byte 			ADDRESS,
+						SCSICmdField1Byte 			LAYER_NUMBER, 
+						SCSICmdField1Byte 			FORMAT, 
+						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
+						SCSICmdField2Bit 			AGID,
+						SCSICmdField1Byte 			CONTROL );
+	
+	
+    OSMetaClassDeclareReservedUsed ( IOSCSIMultimediaCommandsDevice, 7 );
+	
+	virtual	IOReturn	ReserveTrack (	UInt8		reservationType,
+										UInt8		reservationFormat,
+										UInt64		ReservationParameter );
+	
+	
+	bool		RESERVE_TRACK_V2 (	SCSITaskIdentifier		request,
+									SCSICmdField1Bit		RMZ,
+									SCSICmdField1Bit		ARSV,
+									SCSICmdField7Byte		RESERVATION_PARAMETER,
+									SCSICmdField1Byte 		CONTROL					);
+	
+	
+	bool		REPORT_KEY_V2 (	SCSITaskIdentifier			request,
+								IOMemoryDescriptor *		dataBuffer,
+								SCSICmdField4Byte			LOGICAL_BLOCK_ADDRESS,
+								SCSICmdField1Byte			KEY_CLASS,
+								SCSICmdField2Byte 			ALLOCATION_LENGTH,
+								SCSICmdField2Bit 			AGID,
+								SCSICmdField6Bit 			KEY_FORMAT,
+								SCSICmdField1Byte 			CONTROL					);
+	
+	
+	bool		SEND_KEY_V2 (	SCSITaskIdentifier			request,
+								IOMemoryDescriptor *		dataBuffer,
+								SCSICmdField1Byte			KEY_CLASS,
+								SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
+								SCSICmdField2Bit 			AGID,
+								SCSICmdField6Bit 			KEY_FORMAT,
+								SCSICmdField1Byte 			CONTROL					);
 	
 	
 private:
 	
 	// Space reserved for future expansion.
-    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	6 );
-    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	7 );
-    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	8 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice,  8 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 	9 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 10 );
     OSMetaClassDeclareReservedUnused ( IOSCSIMultimediaCommandsDevice, 11 );

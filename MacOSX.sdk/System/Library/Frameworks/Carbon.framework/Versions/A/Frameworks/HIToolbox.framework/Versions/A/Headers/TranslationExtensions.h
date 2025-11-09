@@ -3,7 +3,7 @@
  
      Contains:   Macintosh Easy Open Translation Extension Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
    Translation Extensions are no longer supported. Carbon clients interested in extending translations
@@ -122,6 +122,7 @@ typedef long                            TranslationRefNum;
     Exit    :   returns         noErr, paramErr, or memFullErr
 
 *******************************************************************************************/
+#if !__LP64__
 /*
  *  SetTranslationAdvertisement()   *** DEPRECATED ***
  *  
@@ -132,7 +133,7 @@ typedef long                            TranslationRefNum;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -168,7 +169,7 @@ SetTranslationAdvertisement(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -184,6 +185,8 @@ UpdateTranslationProgress(
     Component Manager component selectors for translation extension routines
 
 *******************************************************************************************/
+#endif  /* !__LP64__ */
+
 enum {
   kTranslateGetFileTranslationList = 0,
   kTranslateIdentifyFile        = 1,
@@ -209,7 +212,7 @@ typedef CALLBACK_API( ComponentResult , DoGetScrapTranslationListProcPtr )(Compo
 typedef CALLBACK_API( ComponentResult , DoIdentifyScrapProcPtr )(ComponentInstance self, const void *dataPtr, Size dataLength, ScrapType *dataFormat);
 typedef CALLBACK_API( ComponentResult , DoTranslateScrapProcPtr )(ComponentInstance self, TranslationRefNum refNum, const void *srcDataPtr, Size srcDataLength, ScrapType srcType, long srcTypeHint, Handle dstData, ScrapType dstType, long dstTypeHint);
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

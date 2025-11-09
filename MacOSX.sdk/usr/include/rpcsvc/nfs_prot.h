@@ -488,174 +488,174 @@ bool_t xdr_statfsres();
 #endif /* Old Style C */
 
 
-#define NFS_PROGRAM ((u_long)100003)
-#define NFS_VERSION ((u_long)2)
+#define NFS_PROGRAM ((rpc_uint)100003)
+#define NFS_VERSION ((rpc_uint)2)
 
 #ifdef __cplusplus
-#define NFSPROC_NULL ((u_long)0)
+#define NFSPROC_NULL ((rpc_uint)0)
 extern "C" void * nfsproc_null_2(void *, CLIENT *);
 extern "C" void * nfsproc_null_2_svc(void *, struct svc_req *);
-#define NFSPROC_GETATTR ((u_long)1)
+#define NFSPROC_GETATTR ((rpc_uint)1)
 extern "C" attrstat * nfsproc_getattr_2(nfs_fh *, CLIENT *);
 extern "C" attrstat * nfsproc_getattr_2_svc(nfs_fh *, struct svc_req *);
-#define NFSPROC_SETATTR ((u_long)2)
+#define NFSPROC_SETATTR ((rpc_uint)2)
 extern "C" attrstat * nfsproc_setattr_2(sattrargs *, CLIENT *);
 extern "C" attrstat * nfsproc_setattr_2_svc(sattrargs *, struct svc_req *);
-#define NFSPROC_ROOT ((u_long)3)
+#define NFSPROC_ROOT ((rpc_uint)3)
 extern "C" void * nfsproc_root_2(void *, CLIENT *);
 extern "C" void * nfsproc_root_2_svc(void *, struct svc_req *);
-#define NFSPROC_LOOKUP ((u_long)4)
+#define NFSPROC_LOOKUP ((rpc_uint)4)
 extern "C" diropres * nfsproc_lookup_2(diropargs *, CLIENT *);
 extern "C" diropres * nfsproc_lookup_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_READLINK ((u_long)5)
+#define NFSPROC_READLINK ((rpc_uint)5)
 extern "C" readlinkres * nfsproc_readlink_2(nfs_fh *, CLIENT *);
 extern "C" readlinkres * nfsproc_readlink_2_svc(nfs_fh *, struct svc_req *);
-#define NFSPROC_READ ((u_long)6)
+#define NFSPROC_READ ((rpc_uint)6)
 extern "C" readres * nfsproc_read_2(readargs *, CLIENT *);
 extern "C" readres * nfsproc_read_2_svc(readargs *, struct svc_req *);
-#define NFSPROC_WRITECACHE ((u_long)7)
+#define NFSPROC_WRITECACHE ((rpc_uint)7)
 extern "C" void * nfsproc_writecache_2(void *, CLIENT *);
 extern "C" void * nfsproc_writecache_2_svc(void *, struct svc_req *);
-#define NFSPROC_WRITE ((u_long)8)
+#define NFSPROC_WRITE ((rpc_uint)8)
 extern "C" attrstat * nfsproc_write_2(writeargs *, CLIENT *);
 extern "C" attrstat * nfsproc_write_2_svc(writeargs *, struct svc_req *);
-#define NFSPROC_CREATE ((u_long)9)
+#define NFSPROC_CREATE ((rpc_uint)9)
 extern "C" diropres * nfsproc_create_2(createargs *, CLIENT *);
 extern "C" diropres * nfsproc_create_2_svc(createargs *, struct svc_req *);
-#define NFSPROC_REMOVE ((u_long)10)
+#define NFSPROC_REMOVE ((rpc_uint)10)
 extern "C" nfsstat * nfsproc_remove_2(diropargs *, CLIENT *);
 extern "C" nfsstat * nfsproc_remove_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_RENAME ((u_long)11)
+#define NFSPROC_RENAME ((rpc_uint)11)
 extern "C" nfsstat * nfsproc_rename_2(renameargs *, CLIENT *);
 extern "C" nfsstat * nfsproc_rename_2_svc(renameargs *, struct svc_req *);
-#define NFSPROC_LINK ((u_long)12)
+#define NFSPROC_LINK ((rpc_uint)12)
 extern "C" nfsstat * nfsproc_link_2(linkargs *, CLIENT *);
 extern "C" nfsstat * nfsproc_link_2_svc(linkargs *, struct svc_req *);
-#define NFSPROC_SYMLINK ((u_long)13)
+#define NFSPROC_SYMLINK ((rpc_uint)13)
 extern "C" nfsstat * nfsproc_symlink_2(symlinkargs *, CLIENT *);
 extern "C" nfsstat * nfsproc_symlink_2_svc(symlinkargs *, struct svc_req *);
-#define NFSPROC_MKDIR ((u_long)14)
+#define NFSPROC_MKDIR ((rpc_uint)14)
 extern "C" diropres * nfsproc_mkdir_2(createargs *, CLIENT *);
 extern "C" diropres * nfsproc_mkdir_2_svc(createargs *, struct svc_req *);
-#define NFSPROC_RMDIR ((u_long)15)
+#define NFSPROC_RMDIR ((rpc_uint)15)
 extern "C" nfsstat * nfsproc_rmdir_2(diropargs *, CLIENT *);
 extern "C" nfsstat * nfsproc_rmdir_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_READDIR ((u_long)16)
+#define NFSPROC_READDIR ((rpc_uint)16)
 extern "C" readdirres * nfsproc_readdir_2(readdirargs *, CLIENT *);
 extern "C" readdirres * nfsproc_readdir_2_svc(readdirargs *, struct svc_req *);
-#define NFSPROC_STATFS ((u_long)17)
+#define NFSPROC_STATFS ((rpc_uint)17)
 extern "C" statfsres * nfsproc_statfs_2(nfs_fh *, CLIENT *);
 extern "C" statfsres * nfsproc_statfs_2_svc(nfs_fh *, struct svc_req *);
 
 #elif __STDC__
-#define NFSPROC_NULL ((u_long)0)
+#define NFSPROC_NULL ((rpc_uint)0)
 extern  void * nfsproc_null_2(void *, CLIENT *);
 extern  void * nfsproc_null_2_svc(void *, struct svc_req *);
-#define NFSPROC_GETATTR ((u_long)1)
+#define NFSPROC_GETATTR ((rpc_uint)1)
 extern  attrstat * nfsproc_getattr_2(nfs_fh *, CLIENT *);
 extern  attrstat * nfsproc_getattr_2_svc(nfs_fh *, struct svc_req *);
-#define NFSPROC_SETATTR ((u_long)2)
+#define NFSPROC_SETATTR ((rpc_uint)2)
 extern  attrstat * nfsproc_setattr_2(sattrargs *, CLIENT *);
 extern  attrstat * nfsproc_setattr_2_svc(sattrargs *, struct svc_req *);
-#define NFSPROC_ROOT ((u_long)3)
+#define NFSPROC_ROOT ((rpc_uint)3)
 extern  void * nfsproc_root_2(void *, CLIENT *);
 extern  void * nfsproc_root_2_svc(void *, struct svc_req *);
-#define NFSPROC_LOOKUP ((u_long)4)
+#define NFSPROC_LOOKUP ((rpc_uint)4)
 extern  diropres * nfsproc_lookup_2(diropargs *, CLIENT *);
 extern  diropres * nfsproc_lookup_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_READLINK ((u_long)5)
+#define NFSPROC_READLINK ((rpc_uint)5)
 extern  readlinkres * nfsproc_readlink_2(nfs_fh *, CLIENT *);
 extern  readlinkres * nfsproc_readlink_2_svc(nfs_fh *, struct svc_req *);
-#define NFSPROC_READ ((u_long)6)
+#define NFSPROC_READ ((rpc_uint)6)
 extern  readres * nfsproc_read_2(readargs *, CLIENT *);
 extern  readres * nfsproc_read_2_svc(readargs *, struct svc_req *);
-#define NFSPROC_WRITECACHE ((u_long)7)
+#define NFSPROC_WRITECACHE ((rpc_uint)7)
 extern  void * nfsproc_writecache_2(void *, CLIENT *);
 extern  void * nfsproc_writecache_2_svc(void *, struct svc_req *);
-#define NFSPROC_WRITE ((u_long)8)
+#define NFSPROC_WRITE ((rpc_uint)8)
 extern  attrstat * nfsproc_write_2(writeargs *, CLIENT *);
 extern  attrstat * nfsproc_write_2_svc(writeargs *, struct svc_req *);
-#define NFSPROC_CREATE ((u_long)9)
+#define NFSPROC_CREATE ((rpc_uint)9)
 extern  diropres * nfsproc_create_2(createargs *, CLIENT *);
 extern  diropres * nfsproc_create_2_svc(createargs *, struct svc_req *);
-#define NFSPROC_REMOVE ((u_long)10)
+#define NFSPROC_REMOVE ((rpc_uint)10)
 extern  nfsstat * nfsproc_remove_2(diropargs *, CLIENT *);
 extern  nfsstat * nfsproc_remove_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_RENAME ((u_long)11)
+#define NFSPROC_RENAME ((rpc_uint)11)
 extern  nfsstat * nfsproc_rename_2(renameargs *, CLIENT *);
 extern  nfsstat * nfsproc_rename_2_svc(renameargs *, struct svc_req *);
-#define NFSPROC_LINK ((u_long)12)
+#define NFSPROC_LINK ((rpc_uint)12)
 extern  nfsstat * nfsproc_link_2(linkargs *, CLIENT *);
 extern  nfsstat * nfsproc_link_2_svc(linkargs *, struct svc_req *);
-#define NFSPROC_SYMLINK ((u_long)13)
+#define NFSPROC_SYMLINK ((rpc_uint)13)
 extern  nfsstat * nfsproc_symlink_2(symlinkargs *, CLIENT *);
 extern  nfsstat * nfsproc_symlink_2_svc(symlinkargs *, struct svc_req *);
-#define NFSPROC_MKDIR ((u_long)14)
+#define NFSPROC_MKDIR ((rpc_uint)14)
 extern  diropres * nfsproc_mkdir_2(createargs *, CLIENT *);
 extern  diropres * nfsproc_mkdir_2_svc(createargs *, struct svc_req *);
-#define NFSPROC_RMDIR ((u_long)15)
+#define NFSPROC_RMDIR ((rpc_uint)15)
 extern  nfsstat * nfsproc_rmdir_2(diropargs *, CLIENT *);
 extern  nfsstat * nfsproc_rmdir_2_svc(diropargs *, struct svc_req *);
-#define NFSPROC_READDIR ((u_long)16)
+#define NFSPROC_READDIR ((rpc_uint)16)
 extern  readdirres * nfsproc_readdir_2(readdirargs *, CLIENT *);
 extern  readdirres * nfsproc_readdir_2_svc(readdirargs *, struct svc_req *);
-#define NFSPROC_STATFS ((u_long)17)
+#define NFSPROC_STATFS ((rpc_uint)17)
 extern  statfsres * nfsproc_statfs_2(nfs_fh *, CLIENT *);
 extern  statfsres * nfsproc_statfs_2_svc(nfs_fh *, struct svc_req *);
 
 #else /* Old Style C */
-#define NFSPROC_NULL ((u_long)0)
+#define NFSPROC_NULL ((rpc_uint)0)
 extern  void * nfsproc_null_2();
 extern  void * nfsproc_null_2_svc();
-#define NFSPROC_GETATTR ((u_long)1)
+#define NFSPROC_GETATTR ((rpc_uint)1)
 extern  attrstat * nfsproc_getattr_2();
 extern  attrstat * nfsproc_getattr_2_svc();
-#define NFSPROC_SETATTR ((u_long)2)
+#define NFSPROC_SETATTR ((rpc_uint)2)
 extern  attrstat * nfsproc_setattr_2();
 extern  attrstat * nfsproc_setattr_2_svc();
-#define NFSPROC_ROOT ((u_long)3)
+#define NFSPROC_ROOT ((rpc_uint)3)
 extern  void * nfsproc_root_2();
 extern  void * nfsproc_root_2_svc();
-#define NFSPROC_LOOKUP ((u_long)4)
+#define NFSPROC_LOOKUP ((rpc_uint)4)
 extern  diropres * nfsproc_lookup_2();
 extern  diropres * nfsproc_lookup_2_svc();
-#define NFSPROC_READLINK ((u_long)5)
+#define NFSPROC_READLINK ((rpc_uint)5)
 extern  readlinkres * nfsproc_readlink_2();
 extern  readlinkres * nfsproc_readlink_2_svc();
-#define NFSPROC_READ ((u_long)6)
+#define NFSPROC_READ ((rpc_uint)6)
 extern  readres * nfsproc_read_2();
 extern  readres * nfsproc_read_2_svc();
-#define NFSPROC_WRITECACHE ((u_long)7)
+#define NFSPROC_WRITECACHE ((rpc_uint)7)
 extern  void * nfsproc_writecache_2();
 extern  void * nfsproc_writecache_2_svc();
-#define NFSPROC_WRITE ((u_long)8)
+#define NFSPROC_WRITE ((rpc_uint)8)
 extern  attrstat * nfsproc_write_2();
 extern  attrstat * nfsproc_write_2_svc();
-#define NFSPROC_CREATE ((u_long)9)
+#define NFSPROC_CREATE ((rpc_uint)9)
 extern  diropres * nfsproc_create_2();
 extern  diropres * nfsproc_create_2_svc();
-#define NFSPROC_REMOVE ((u_long)10)
+#define NFSPROC_REMOVE ((rpc_uint)10)
 extern  nfsstat * nfsproc_remove_2();
 extern  nfsstat * nfsproc_remove_2_svc();
-#define NFSPROC_RENAME ((u_long)11)
+#define NFSPROC_RENAME ((rpc_uint)11)
 extern  nfsstat * nfsproc_rename_2();
 extern  nfsstat * nfsproc_rename_2_svc();
-#define NFSPROC_LINK ((u_long)12)
+#define NFSPROC_LINK ((rpc_uint)12)
 extern  nfsstat * nfsproc_link_2();
 extern  nfsstat * nfsproc_link_2_svc();
-#define NFSPROC_SYMLINK ((u_long)13)
+#define NFSPROC_SYMLINK ((rpc_uint)13)
 extern  nfsstat * nfsproc_symlink_2();
 extern  nfsstat * nfsproc_symlink_2_svc();
-#define NFSPROC_MKDIR ((u_long)14)
+#define NFSPROC_MKDIR ((rpc_uint)14)
 extern  diropres * nfsproc_mkdir_2();
 extern  diropres * nfsproc_mkdir_2_svc();
-#define NFSPROC_RMDIR ((u_long)15)
+#define NFSPROC_RMDIR ((rpc_uint)15)
 extern  nfsstat * nfsproc_rmdir_2();
 extern  nfsstat * nfsproc_rmdir_2_svc();
-#define NFSPROC_READDIR ((u_long)16)
+#define NFSPROC_READDIR ((rpc_uint)16)
 extern  readdirres * nfsproc_readdir_2();
 extern  readdirres * nfsproc_readdir_2_svc();
-#define NFSPROC_STATFS ((u_long)17)
+#define NFSPROC_STATFS ((rpc_uint)17)
 extern  statfsres * nfsproc_statfs_2();
 extern  statfsres * nfsproc_statfs_2_svc();
 #endif /* Old Style C */

@@ -1,10 +1,10 @@
-//
-//  InstallerPane.h
-//  InstallerSection
-//
-//  Created by Christopher Ryan on Mon Dec 01 2003.
-//  Copyright (c) 2003 Apple Computer. All rights reserved.
-//
+/*
+	InstallerPane.h
+	InstallerPlugins
+	Copyright (c) 2003-2005 Apple Computer, Inc.
+	All rights reserved.
+*/
+
 
 /*!
     @header InstallerPane
@@ -20,7 +20,7 @@
     @constant   InstallerDirectionForward Specifies that the pane was entered/exited while moving in the forward direction.
 	@constant   InstallerDirectionBackward Specifies that the pane was entered/exited while moving backwards.
 	@constant   InstallerDirectionUndefined Specifies that the pane was entered/exited using the gotoPane: method.  Since the pane
-				is "jumped" to rather then moved to going forward or back, InstallerDirectionUndefined is used.
+				is "jumped" to rather than moved to going forward or back, InstallerDirectionUndefined is used.
 */
 
 typedef enum{
@@ -219,4 +219,5 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 	@result		gotoPreviousPane will return NO if there is no previous (in any sections) or there is an error loading the previousPane.
 */
 - (BOOL)gotoPreviousPane;
+
 @end

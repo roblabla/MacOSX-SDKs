@@ -1,5 +1,5 @@
 /*	CFTimeZone.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFTIMEZONE__)
@@ -12,9 +12,7 @@
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 CF_EXPORT
 CFTypeID CFTimeZoneGetTypeID(void);
@@ -64,9 +62,29 @@ CFStringRef CFTimeZoneCopyAbbreviation(CFTimeZoneRef tz, CFAbsoluteTime at);
 CF_EXPORT
 Boolean CFTimeZoneIsDaylightSavingTime(CFTimeZoneRef tz, CFAbsoluteTime at);
 
-#if defined(__cplusplus)
-}
+CF_EXPORT
+CFTimeInterval CFTimeZoneGetDaylightSavingTimeOffset(CFTimeZoneRef tz, CFAbsoluteTime at) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+CF_EXPORT
+CFAbsoluteTime CFTimeZoneGetNextDaylightSavingTimeTransition(CFTimeZoneRef tz, CFAbsoluteTime at) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+enum {
+	kCFTimeZoneNameStyleStandard,
+	kCFTimeZoneNameStyleShortStandard,
+	kCFTimeZoneNameStyleDaylightSaving,
+	kCFTimeZoneNameStyleShortDaylightSaving
+};
+typedef CFIndex CFTimeZoneNameStyle;
+
+CF_EXPORT
+CFStringRef CFTimeZoneCopyLocalizedName(CFTimeZoneRef tz, CFTimeZoneNameStyle style, CFLocaleRef locale) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 #endif
+
+CF_EXPORT
+const CFStringRef kCFTimeZoneSystemTimeZoneDidChangeNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFTIMEZONE__ */
 

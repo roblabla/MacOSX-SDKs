@@ -3,7 +3,7 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-169~651
+     Version:    HIServices-247.0.1~2
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
                                         /* Process identifier - Various reserved process serial numbers */
@@ -43,7 +43,7 @@ enum {
 
 /* Definition of the parameter block passed to _Launch */
 /* Typedef and flags for launchControlFlags field*/
-typedef unsigned short                  LaunchFlags;
+typedef UInt16                          LaunchFlags;
 enum {
   launchContinue                = 0x4000,
   launchNoFileFlags             = 0x0800,
@@ -63,27 +63,46 @@ struct AppParameters {
     Point               where;
     UInt16              modifiers;
   }                       theMsgEvent;
-  unsigned long       eventRefCon;
-  unsigned long       messageLength;
+  UInt32              eventRefCon;
+  UInt32              messageLength;
 };
 typedef struct AppParameters            AppParameters;
 typedef AppParameters *                 AppParametersPtr;
 /* Parameter block to _Launch */
+#if __LP64__
 struct LaunchParamBlockRec {
-  unsigned long       reserved1;
-  unsigned short      reserved2;
-  unsigned short      launchBlockID;
-  unsigned long       launchEPBLength;
-  unsigned short      launchFileFlags;
+  UInt32              reserved1;
+  UInt16              reserved2;
+  UInt16              launchBlockID;
+  UInt32              launchEPBLength;
+  UInt16              launchFileFlags;
   LaunchFlags         launchControlFlags;
-  FSSpecPtr           launchAppSpec;
+  FSRefPtr            launchAppRef;
   ProcessSerialNumber  launchProcessSN;
-  unsigned long       launchPreferredSize;
-  unsigned long       launchMinimumSize;
-  unsigned long       launchAvailableSize;
+  UInt32              launchPreferredSize;
+  UInt32              launchMinimumSize;
+  UInt32              launchAvailableSize;
   AppParametersPtr    launchAppParameters;
 };
 typedef struct LaunchParamBlockRec      LaunchParamBlockRec;
+#else
+struct LaunchParamBlockRec {
+  UInt32              reserved1;
+  UInt16              reserved2;
+  UInt16              launchBlockID;
+  UInt32              launchEPBLength;
+  UInt16              launchFileFlags;
+  LaunchFlags         launchControlFlags;
+  FSSpecPtr           launchAppSpec;
+  ProcessSerialNumber  launchProcessSN;
+  UInt32              launchPreferredSize;
+  UInt32              launchMinimumSize;
+  UInt32              launchAvailableSize;
+  AppParametersPtr    launchAppParameters;
+};
+typedef struct LaunchParamBlockRec      LaunchParamBlockRec;
+#endif  /* __LP64__ */
+
 typedef LaunchParamBlockRec *           LaunchPBPtr;
 /* Set launchBlockID to extendedBlock to specify that extensions exist.
  Set launchEPBLength to extendedBlockLen for compatibility.*/
@@ -140,22 +159,42 @@ enum {
     set.
     
 */
+#if __LP64__
 struct ProcessInfoRec {
-  unsigned long       processInfoLength;
+  UInt32              processInfoLength;
   StringPtr           processName;
   ProcessSerialNumber  processNumber;
-  unsigned long       processType;
+  UInt32              processType;
   OSType              processSignature;
-  unsigned long       processMode;
+  UInt32              processMode;
   Ptr                 processLocation;
-  unsigned long       processSize;
-  unsigned long       processFreeMem;
+  UInt32              processSize;
+  UInt32              processFreeMem;
   ProcessSerialNumber  processLauncher;
-  unsigned long       processLaunchDate;
-  unsigned long       processActiveTime;
+  UInt32              processLaunchDate;
+  UInt32              processActiveTime;
+  FSRefPtr            processAppRef;
+};
+typedef struct ProcessInfoRec           ProcessInfoRec;
+#else
+struct ProcessInfoRec {
+  UInt32              processInfoLength;
+  StringPtr           processName;
+  ProcessSerialNumber  processNumber;
+  UInt32              processType;
+  OSType              processSignature;
+  UInt32              processMode;
+  Ptr                 processLocation;
+  UInt32              processSize;
+  UInt32              processFreeMem;
+  ProcessSerialNumber  processLauncher;
+  UInt32              processLaunchDate;
+  UInt32              processActiveTime;
   FSSpecPtr           processAppSpec;
 };
 typedef struct ProcessInfoRec           ProcessInfoRec;
+#endif  /* __LP64__ */
+
 typedef ProcessInfoRec *                ProcessInfoRecPtr;
 /*
     Some applications assumed the size of a ProcessInfoRec would never change,
@@ -179,30 +218,52 @@ typedef ProcessInfoRec *                ProcessInfoRecPtr;
     set.
     
 */
+#if __LP64__
 struct ProcessInfoExtendedRec {
-  unsigned long       processInfoLength;
+  UInt32              processInfoLength;
   StringPtr           processName;
   ProcessSerialNumber  processNumber;
-  unsigned long       processType;
+  UInt32              processType;
   OSType              processSignature;
-  unsigned long       processMode;
+  UInt32              processMode;
   Ptr                 processLocation;
-  unsigned long       processSize;
-  unsigned long       processFreeMem;
+  UInt32              processSize;
+  UInt32              processFreeMem;
   ProcessSerialNumber  processLauncher;
-  unsigned long       processLaunchDate;
-  unsigned long       processActiveTime;
-  FSSpecPtr           processAppSpec;
-  unsigned long       processTempMemTotal;
-  unsigned long       processPurgeableTempMemTotal;
+  UInt32              processLaunchDate;
+  UInt32              processActiveTime;
+  FSRefPtr            processAppRef;
+  UInt32              processTempMemTotal;
+  UInt32              processPurgeableTempMemTotal;
 };
 typedef struct ProcessInfoExtendedRec   ProcessInfoExtendedRec;
+#else
+struct ProcessInfoExtendedRec {
+  UInt32              processInfoLength;
+  StringPtr           processName;
+  ProcessSerialNumber  processNumber;
+  UInt32              processType;
+  OSType              processSignature;
+  UInt32              processMode;
+  Ptr                 processLocation;
+  UInt32              processSize;
+  UInt32              processFreeMem;
+  ProcessSerialNumber  processLauncher;
+  UInt32              processLaunchDate;
+  UInt32              processActiveTime;
+  FSSpecPtr           processAppSpec;
+  UInt32              processTempMemTotal;
+  UInt32              processPurgeableTempMemTotal;
+};
+typedef struct ProcessInfoExtendedRec   ProcessInfoExtendedRec;
+#endif  /* __LP64__ */
+
 typedef ProcessInfoExtendedRec *        ProcessInfoExtendedRecPtr;
 /* Record corresponding to the SIZE resource definition */
 struct SizeResourceRec {
-  unsigned short      flags;
-  unsigned long       preferredHeapSize;
-  unsigned long       minimumHeapSize;
+  UInt16              flags;
+  UInt32              preferredHeapSize;
+  UInt32              minimumHeapSize;
 };
 typedef struct SizeResourceRec          SizeResourceRec;
 typedef SizeResourceRec *               SizeResourceRecPtr;
@@ -244,6 +305,9 @@ enum {
 /*
  *  LaunchApplication()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -253,15 +317,18 @@ extern OSErr
 LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  LaunchDeskAccessory()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  [Mac]GetCurrentProcess()
@@ -316,6 +383,9 @@ LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X
  *    or use it in an AppleEvent, you do need to get the canonical PSN
  *    with this routine.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    PSN:
@@ -340,6 +410,9 @@ MacGetCurrentProcess(ProcessSerialNumber * PSN)               AVAILABLE_MAC_OS_X
 /*
  *  GetFrontProcess()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -351,6 +424,9 @@ GetFrontProcess(ProcessSerialNumber * PSN)                    AVAILABLE_MAC_OS_X
 
 /*
  *  GetNextProcess()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -391,6 +467,9 @@ GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X
  *    On Mac OS X, the processSize and processFreeMem fields are
  *    returned with the value 0.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    PSN:
@@ -418,6 +497,9 @@ GetProcessInformation(
  *    Return a CFDictionary containing information about the given
  *    process. This is intended to return a superset of the information
  *    returned by GetProcessInformation(), in more modern datatypes.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -452,14 +534,13 @@ GetProcessInformation(
  *    "LSUIElement"               CFBoolean 
  *    "IsHiddenAttr"              CFBoolean 
  *    "IsCheckedInAttr"           CFBoolean 
- *    "RequiresClassic"           CFBoolean 
  *    "RequiresCarbon"            CFBoolean 
- *    "LSUserQuitOnly"            CFBoolean 
+ *    "LSUserQuitOnly" *          CFBoolean 
  *    "LSUIPresentationMode"      CFNumber, kCFNumberShortType 
  *     "BundlePath" *              CFString 
- *    kIOBundleExecutableKey *    CFString 
- *    kIOBundleNameKey *          CFString 
- *    kIOBundleIdentifierKey *    CFString
+ *    kCFBundleExecutableKey *    CFString 
+ *    kCFBundleNameKey *          CFString 
+ *    kCFBundleIdentifierKey *    CFString
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -474,6 +555,9 @@ ProcessInformationCopyDictionary(
 
 /*
  *  SetFrontProcess()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -512,6 +596,9 @@ enum {
  *    without bringing all of the process's windows forward (just the
  *    front window of the process will come forward).
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    inProcess:
@@ -537,6 +624,9 @@ SetFrontProcessWithOptions(
 /*
  *  WakeUpProcess()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -548,6 +638,9 @@ WakeUpProcess(const ProcessSerialNumber * PSN)                AVAILABLE_MAC_OS_X
 
 /*
  *  SameProcess()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -561,18 +654,30 @@ SameProcess(
   Boolean *                    result)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*  ExitToShell was previously in SegLoad.h*/
 /*
  *  ExitToShell()
+ *  
+ *  Discussion:
+ *    In general, you need to call ExitToShell only if you want your
+ *    application to terminate without reaching the end of its main
+ *    function.
+ *
+ *    The ExitToShell function terminates the calling process. The
+ *    Process Manager removes your application from the list of open
+ *    processes and performs any other necessary cleanup operations. If
+ *    necessary, the Application Died Apple event is sent to the
+ *    process that launched your application.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void 
-ExitToShell(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
+#if __GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 5
+void ExitToShell() __attribute__ (( __noreturn__ ));
+#else
+void ExitToShell();
+#endif
 
 /*
  *  KillProcess()
@@ -585,6 +690,9 @@ ExitToShell(void)                                             AVAILABLE_MAC_OS_X
  *    failed. It is not guaranteed that this will succeed and that the
  *    target application will be killed, even if this function returns
  *    noErr and seems to work.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -607,15 +715,18 @@ KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X
    LaunchControlPanel is similar to LaunchDeskAccessory, but for Control Panel files instead.
    It launches a control panel in an application shell maintained by the Process Manager.
 */
+#if !__LP64__
 /*
  *  LaunchControlPanel()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  GetProcessBundleLocation()
@@ -629,6 +740,9 @@ KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X
  *    application. For an application that is packaged as an app
  *    bundle, this will be the app bundle directory; otherwise it will
  *    be the location of the executable itself.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -664,6 +778,9 @@ GetProcessBundleLocation(
  *    multi-lingual name, whereas previously only a mac-encoded string
  *    was possible.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    psn:
@@ -696,6 +813,9 @@ CopyProcessName(
  *    sense for Classic apps, since they all share a single UNIX
  *    process ID.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    psn:
@@ -726,6 +846,9 @@ GetProcessPID(
  *    number for that process, if appropriate. Note that this call does
  *    not make sense for Classic apps, since they all share a single
  *    UNIX process ID.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -759,6 +882,9 @@ GetProcessForPID(
  *    Given a psn, this call will return true or false depending on
  *    whether or not the process is currently visible.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    psn:
@@ -784,6 +910,9 @@ IsProcessVisible(const ProcessSerialNumber * psn)             AVAILABLE_MAC_OS_X
  *    the psn parameter. You determine whether you would like to show
  *    or hide the process with the visible parameter. True passed into
  *    visible indicates you wish for the process to become visible.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -821,6 +950,9 @@ ShowHideProcess(
  *    Dock and Force Quit dialog and does have a menu bar.  This call
  *    does not cause the application to be brought to the front ( use
  *    SetFrontProcess for that ).
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -874,7 +1006,7 @@ enum {
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

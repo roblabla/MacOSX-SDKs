@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-97~629
+     Version:    OSA-122~37
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
@@ -81,7 +81,7 @@ enum {
 extern OSAError 
 OSASetProperty(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
   OSAID               scriptValueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -98,7 +98,7 @@ OSASetProperty(
 extern OSAError 
 OSAGetProperty(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
   OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -115,7 +115,7 @@ OSAGetProperty(
 extern OSAError 
 OSAGetPropertyNames(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   AEDescList *        resultingPropertyNames)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -131,7 +131,7 @@ OSAGetPropertyNames(
 extern OSAError 
 OSASetHandler(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
   OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -148,7 +148,7 @@ OSASetHandler(
 extern OSAError 
 OSAGetHandler(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
   OSAID *             resultingCompiledScriptID)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -165,34 +165,42 @@ OSAGetHandler(
 extern OSAError 
 OSAGetHandlerNames(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   OSAID               contextID,
   AEDescList *        resultingHandlerNames)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
- *  OSAGetAppTerminology()
+ *  OSAGetAppTerminology()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use OSACopyScriptingDefinition instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
 extern OSAError 
 OSAGetAppTerminology(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   FSSpec *            fileSpec,
   short               terminologyID,
   Boolean *           didLaunch,
-  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* Errors:
-       errOSASystemError        operation failed
-    */
+#endif  /* !__LP64__ */
+
 /*
  *  OSAGetSysTerminology()
+ *  
+ *  Discussion:
+ *    A terminology ID is derived from script code and language code as
+ *    follows: terminologyID = ((scriptCode & 0x7F) << 8) | (langCode &
+ *    0xFF)
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -202,21 +210,11 @@ OSAGetAppTerminology(
 extern OSAError 
 OSAGetSysTerminology(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   short               terminologyID,
   AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Errors:
-       errOSASystemError        operation failed
-    */
-/* Notes on terminology ID
-
-    A terminology ID is derived from script code and language code
-    as follows;
-
-        terminologyID = ((scriptCode & 0x7F) << 8) | (langCode & 0xFF)
-*/
 /*
  *  OSACopyScriptingDefinition()
  *  
@@ -247,14 +245,16 @@ OSACopyScriptingDefinition(
   CFDataRef *    sdef)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+
 /**************************************************************************
     Obsolete versions provided for backward compatibility:
 */
+#if !__LP64__
 /*
  *  ASSetProperty()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
@@ -270,7 +270,7 @@ ASSetProperty(
  *  ASGetProperty()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
@@ -286,7 +286,7 @@ ASGetProperty(
  *  ASSetHandler()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
@@ -302,7 +302,7 @@ ASSetHandler(
  *  ASGetHandler()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
@@ -318,7 +318,7 @@ ASGetHandler(
  *  ASGetAppTerminology()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
@@ -336,6 +336,8 @@ ASGetAppTerminology(
     */
 /**************************************************************************/
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

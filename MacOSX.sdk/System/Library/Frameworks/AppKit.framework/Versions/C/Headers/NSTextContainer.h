@@ -1,7 +1,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2005, Apple Computer, Inc.
+        Copyright (c) 1994-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -14,31 +14,35 @@
 @class NSLayoutManager;
 @class NSTextView;
 
-typedef enum {
-    NSLineSweepLeft = 0,
-    NSLineSweepRight = 1,
-    NSLineSweepDown = 2,
-    NSLineSweepUp = 3
-} NSLineSweepDirection;
+/* Values for NSLineSweepDirection */
+enum {
+    NSLineSweepLeft     = 0,
+    NSLineSweepRight    = 1,
+    NSLineSweepDown     = 2,
+    NSLineSweepUp       = 3
+};
+typedef NSUInteger NSLineSweepDirection;
 
-typedef enum {
-    NSLineDoesntMove = 0, 
-    NSLineMovesLeft = 1,
-    NSLineMovesRight = 2,
-    NSLineMovesDown = 3,
-    NSLineMovesUp = 4
-} NSLineMovementDirection;
+/* Values for NSLineMovementDirection */
+enum {
+    NSLineDoesntMove    = 0, 
+    NSLineMovesLeft     = 1,
+    NSLineMovesRight    = 2,
+    NSLineMovesDown     = 3,
+    NSLineMovesUp       = 4
+};
+typedef NSUInteger NSLineMovementDirection;
 
 
 @interface NSTextContainer : NSObject <NSCoding> {
-    
+
   /*All instance variables are private*/
     
   @private
     NSLayoutManager *_layoutManager;
     NSTextView *_textView;
     NSSize _size;
-    float _lineFragmentPadding;
+    CGFloat _lineFragmentPadding;
     struct __tcFlags {
         unsigned short widthTracksTextView:1;
         unsigned short heightTracksTextView:1;
@@ -76,8 +80,8 @@ typedef enum {
 - (NSSize)containerSize;
     // Sets/Returns the current size of the container.  This size has nothing to do with how much text is in the container and how much space it takes up (which the container is not in a position to know).  It is basically the maximum flowable area of the container.  The NSTextView's size will not generally have much connection to this size.  The NSTextView will generally want to be big enough to display all the text which has been laid in the container at the moment and no bigger.  The NSLayoutManager will generally be in charge of telling the view what size it should be.
 
-- (void)setLineFragmentPadding:(float)pad;
-- (float)lineFragmentPadding;
+- (void)setLineFragmentPadding:(CGFloat)pad;
+- (CGFloat)lineFragmentPadding;
     // This value is used by the typesetter to inset the line fragment rects it gets along the sweep direction to give a little default pad to each fragment.
 
 /**************************** Line fragments ****************************/

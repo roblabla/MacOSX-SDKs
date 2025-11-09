@@ -1,17 +1,18 @@
 /*	NSCalendar.h
-	Copyright (c) 2004-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
+#import <Foundation/NSDate.h>
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #include <CoreFoundation/CFCalendar.h>
 
-@class NSDateComponents, NSLocale, NSTimeZone, NSDate, NSString;
+@class NSDateComponents, NSLocale, NSTimeZone, NSString;
 
-typedef enum {
+enum {
 	NSEraCalendarUnit = kCFCalendarUnitEra,
 	NSYearCalendarUnit = kCFCalendarUnitYear,
 	NSMonthCalendarUnit = kCFCalendarUnitMonth,
@@ -22,11 +23,13 @@ typedef enum {
 	NSWeekCalendarUnit = kCFCalendarUnitWeek,
 	NSWeekdayCalendarUnit = kCFCalendarUnitWeekday,
 	NSWeekdayOrdinalCalendarUnit = kCFCalendarUnitWeekdayOrdinal,
-} NSCalendarUnit;
+};
+typedef NSUInteger NSCalendarUnit;
 
 @interface NSCalendar : NSObject <NSCopying, NSCoding>
 
 + (id)currentCalendar; // users preferred calendar, tracks changes
++ (id)autoupdatingCurrentCalendar AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (id)initWithCalendarIdentifier:(NSString *)ident;
 
@@ -39,25 +42,27 @@ typedef enum {
 - (void)setTimeZone:(NSTimeZone *)tz;
 - (NSTimeZone *)timeZone;
 
-- (void)setFirstWeekday:(unsigned)weekday;
-- (unsigned)firstWeekday;
+- (void)setFirstWeekday:(NSUInteger)weekday;
+- (NSUInteger)firstWeekday;
 
-- (void)setMinimumDaysInFirstWeek:(unsigned)mdw;
-- (unsigned)minimumDaysInFirstWeek;
+- (void)setMinimumDaysInFirstWeek:(NSUInteger)mdw;
+- (NSUInteger)minimumDaysInFirstWeek;
 
 
 - (NSRange)minimumRangeOfUnit:(NSCalendarUnit)unit;
 - (NSRange)maximumRangeOfUnit:(NSCalendarUnit)unit;
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
-- (unsigned)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
+- (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
+
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)datep interval:(NSTimeInterval *)tip forDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (NSDate *)dateFromComponents:(NSDateComponents *)comps;
-- (NSDateComponents *)components:(unsigned)unitFlags fromDate:(NSDate *)date;
+- (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date;
 
-- (NSDate *)dateByAddingComponents:(NSDateComponents *)comps toDate:(NSDate *)date options:(unsigned)opts;
+- (NSDate *)dateByAddingComponents:(NSDateComponents *)comps toDate:(NSDate *)date options:(NSUInteger)opts;
 
-- (NSDateComponents *)components:(unsigned)unitFlags fromDate:(NSDate *)startingDate toDate:(NSDate *)resultDate options:(unsigned)opts;
+- (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startingDate toDate:(NSDate *)resultDate options:(NSUInteger)opts;
 
 @end
 
@@ -84,31 +89,31 @@ enum {
 // When you create a new one of these, all values begin Undefined.
 
 enum {
-	NSUndefinedDateComponent = 0x7fffffff
+	NSUndefinedDateComponent = NSIntegerMax
 };
 
 @interface NSDateComponents : NSObject <NSCopying, NSCoding>
-- (int)era;
-- (int)year;
-- (int)month;
-- (int)day;
-- (int)hour;
-- (int)minute;
-- (int)second;
-- (int)week;
-- (int)weekday;
-- (int)weekdayOrdinal;
+- (NSInteger)era;
+- (NSInteger)year;
+- (NSInteger)month;
+- (NSInteger)day;
+- (NSInteger)hour;
+- (NSInteger)minute;
+- (NSInteger)second;
+- (NSInteger)week;
+- (NSInteger)weekday;
+- (NSInteger)weekdayOrdinal;
 
-- (void)setEra:(int)v;
-- (void)setYear:(int)v;
-- (void)setMonth:(int)v;
-- (void)setDay:(int)v;
-- (void)setHour:(int)v;
-- (void)setMinute:(int)v;
-- (void)setSecond:(int)v;
-- (void)setWeek:(int)v;
-- (void)setWeekday:(int)v;
-- (void)setWeekdayOrdinal:(int)v;
+- (void)setEra:(NSInteger)v;
+- (void)setYear:(NSInteger)v;
+- (void)setMonth:(NSInteger)v;
+- (void)setDay:(NSInteger)v;
+- (void)setHour:(NSInteger)v;
+- (void)setMinute:(NSInteger)v;
+- (void)setSecond:(NSInteger)v;
+- (void)setWeek:(NSInteger)v;
+- (void)setWeekday:(NSInteger)v;
+- (void)setWeekdayOrdinal:(NSInteger)v;
 @end
 
 #endif

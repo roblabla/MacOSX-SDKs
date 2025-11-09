@@ -1,17 +1,21 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2005, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
+#if !__LP64__
+
 #import <AppKit/NSView.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSMovie;
 
-typedef enum {
+enum {
     NSQTMovieNormalPlayback,
     NSQTMovieLoopingPlayback,
     NSQTMovieLoopingBackAndForthPlayback
-} NSQTMovieLoopMode;
+};
+typedef NSUInteger NSQTMovieLoopMode;
 
 typedef struct __MVFlags {
     unsigned int        editable:1;
@@ -22,7 +26,7 @@ typedef struct __MVFlags {
     unsigned int        reserved:25;
 } _MVFlags;
 
-@interface NSMovieView : NSView
+@interface NSMovieView : NSView <NSUserInterfaceValidations>
 {
   @protected
     NSMovie*       _fMovie;
@@ -80,8 +84,8 @@ typedef struct __MVFlags {
 
     // size
 
-- (void)resizeWithMagnification:(float)magnification;
-- (NSSize)sizeForMagnification:(float)magnification;
+- (void)resizeWithMagnification:(CGFloat)magnification;
+- (NSSize)sizeForMagnification:(CGFloat)magnification;
 
     // editing
 
@@ -99,3 +103,5 @@ typedef struct __MVFlags {
 - (void)clear:(id)sender;	// deprecated. use delete:
 
 @end
+
+#endif /* !__LP64__ */

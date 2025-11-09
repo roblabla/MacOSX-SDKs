@@ -28,7 +28,7 @@
 #endif
 
 
-
+#warning The file afpClient.h is obsolete, contact DTS <mailto:dts@apple.com> for alternate APIs
 
 #if PRAGMA_ONCE
 #pragma once
@@ -54,7 +54,7 @@ extern "C" {
 
 
 /* Data Types */
-typedef UInt32 							AFPSharedVolumesEnumeratorRef;
+typedef uintptr_t 						AFPSharedVolumesEnumeratorRef;
 typedef UInt32 							ATEventCode;
 typedef UInt32 							ATPortRef;
 typedef UInt32 							OneBasedIndex;

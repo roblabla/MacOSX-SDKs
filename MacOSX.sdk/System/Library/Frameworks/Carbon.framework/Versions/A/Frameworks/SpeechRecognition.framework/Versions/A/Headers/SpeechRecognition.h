@@ -3,7 +3,7 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Version:    SpeechRecognition-3.6.4~311
+     Version:    SpeechRecognition-3.7.24~110
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -20,6 +20,8 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
+#include <stdint.h>
+
 
 #include <AvailabilityMacros.h>
 
@@ -31,7 +33,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Error Codes [Speech recognition gets -5100 through -5199] */
 enum {
@@ -86,19 +88,19 @@ typedef SRLanguageObject                SRPath;
 typedef SRLanguageObject                SRPhrase;
 typedef SRLanguageObject                SRWord;
 /* between 0 and 100 */
-typedef unsigned short                  SRSpeedSetting;
+typedef UInt16                          SRSpeedSetting;
 /* between 0 and 100 */
-typedef unsigned short                  SRRejectionLevel;
+typedef UInt16                          SRRejectionLevel;
 /* When an event occurs, the user supplied proc will be called with a pointer   */
 /*  to the param passed in and a flag to indicate conditions such               */
 /*  as interrupt time or system background time.                                */
 struct SRCallBackStruct {
-  long                what;                   /* one of notification flags */
-  long                message;                /* contains SRRecognitionResult id */
+  UInt32              what;                   /* one of notification flags */
+  long                message;                /* contains SRRecognitionResult id (32 / 64 bits) */
   SRRecognizer        instance;               /* ID of recognizer being notified */
   OSErr               status;                 /* result status of last search */
-  short               flags;                  /* non-zero if occurs during interrupt */
-  long                refCon;                 /* user defined - set from SRCallBackParam */
+  SInt16              flags;                  /* non-zero if occurs during interrupt */
+  SRefCon             refCon;                 /* user defined - set from SRCallBackParam */
 };
 typedef struct SRCallBackStruct         SRCallBackStruct;
 /* Call back procedure definition */
@@ -139,9 +141,21 @@ InvokeSRCallBackUPP(
   SRCallBackStruct *  param,
   SRCallBackUPP       userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline SRCallBackUPP                                        NewSRCallBackUPP(SRCallBackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSRCallBackUPP(SRCallBackUPP) { }
+    inline void                                                 InvokeSRCallBackUPP(SRCallBackStruct * param, SRCallBackUPP userUPP) { (*userUPP)(param); }
+  #else
+    #define NewSRCallBackUPP(userRoutine)                       ((SRCallBackUPP)userRoutine)
+    #define DisposeSRCallBackUPP(userUPP)
+    #define InvokeSRCallBackUPP(param, userUPP)                 (*userUPP)(param)
+  #endif
+#endif
+
 struct SRCallBackParam {
   SRCallBackUPP       callBack;
-  long                refCon;
+  SRefCon             refCon;
 };
 typedef struct SRCallBackParam          SRCallBackParam;
 /* Recognition System Types */
@@ -204,17 +218,17 @@ enum {
 
 /* SRRecognizer Properties */
 enum {
-  kSRNotificationParam          = 'noti', /* see notification flags below */
+  kSRNotificationParam          = 'noti', /* SInt32: See notification flags below */
   kSRCallBackParam              = 'call', /* type SRCallBackParam */
-  kSRSearchStatusParam          = 'stat', /* see status flags below */
-  kSRAutoFinishingParam         = 'afin', /* automatic finishing applied on LM for search */
-  kSRForegroundOnly             = 'fgon', /* Boolean. Default is true. If true, client recognizer only active when in foreground.   */
-  kSRBlockBackground            = 'blbg', /* Boolean. Default is false. If true, when client recognizer in foreground, rest of LMs are inactive.    */
-  kSRBlockModally               = 'blmd', /* Boolean. Default is false. When true, this client's LM is only active LM; all other LMs are inactive. Be nice, don't be modal for long periods! */
-  kSRWantsResultTextDrawn       = 'txfb', /* Boolean. Default is true. If true, search results are posted to Feedback window */
-  kSRWantsAutoFBGestures        = 'dfbr', /* Boolean. Default is true. If true, client needn't call SRProcessBegin/End to get default feedback behavior */
+  kSRSearchStatusParam          = 'stat', /* SInt32: see status flags below */
+  kSRAutoFinishingParam         = 'afin', /* SInt32: Automatic finishing applied on LM for search */
+  kSRForegroundOnly             = 'fgon', /* Boolean: Default is true. If true, client recognizer only active when in foreground.   */
+  kSRBlockBackground            = 'blbg', /* Boolean: Default is false. If true, when client recognizer in foreground, rest of LMs are inactive.    */
+  kSRBlockModally               = 'blmd', /* Boolean: Default is false. When true, this client's LM is only active LM; all other LMs are inactive. Be nice, don't be modal for long periods! */
+  kSRWantsResultTextDrawn       = 'txfb', /* Boolean: Default is true. If true, search results are posted to Feedback window */
+  kSRWantsAutoFBGestures        = 'dfbr', /* Boolean: Default is true. If true, client needn't call SRProcessBegin/End to get default feedback behavior */
   kSRSoundInVolume              = 'volu', /* short in [0..100] log scaled sound input power. Can't set this property */
-  kSRReadAudioFSSpec            = 'aurd', /* *FSSpec. Specify FSSpec where raw audio is to be read (AIFF format) using kSRCanned22kHzSpeechSource. Reads until EOF */
+  kSRReadAudioFSSpec            = 'aurd', /* *FSSpec: Specify FSSpec where raw audio is to be read (AIFF format) using kSRCanned22kHzSpeechSource. Reads until EOF */
   kSRCancelOnSoundOut           = 'caso', /* Boolean: Default is true.  If any sound is played out during utterance, recognition is aborted. */
   kSRSpeedVsAccuracyParam       = 'sped' /* SRSpeedSetting between 0 and 100 */
 };
@@ -255,7 +269,7 @@ enum {
 enum {
   kSRSpelling                   = 'spel', /* spelling of a SRWord or SRPhrase or SRPath, or name of a SRLanguageModel */
   kSRLMObjType                  = 'lmtp', /* Returns one of SRLanguageObject Types listed below */
-  kSRRefCon                     = 'refc', /* 4 bytes of user storage */
+  kSRRefCon                     = 'refc', /* long (4/8 bytes) for user storage */
   kSROptional                   = 'optl', /* Boolean -- true if SRLanguageObject is optional    */
   kSREnabled                    = 'enbl', /* Boolean -- true if SRLanguageObject enabled */
   kSRRepeatable                 = 'rptb', /* Boolean -- true if SRLanguageObject is repeatable */
@@ -510,7 +524,7 @@ SRNewLanguageModel(
   SRRecognitionSystem   system,
   SRLanguageModel *     model,
   const void *          name,
-  Size                  nameLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                nameLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -540,7 +554,7 @@ SRNewPhrase(
   SRRecognitionSystem   system,
   SRPhrase *            phrase,
   const void *          text,
-  Size                  textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -556,7 +570,7 @@ SRNewWord(
   SRRecognitionSystem   system,
   SRWord *              word,
   const void *          text,
-  Size                  textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Operations on any object of the SRLanguageObject family */
@@ -642,7 +656,7 @@ extern OSErr
 SRChangeLanguageObject(
   SRLanguageObject   languageObject,
   const void *       text,
-  Size               textLength)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32             textLength)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -671,8 +685,8 @@ extern OSErr
 SRAddText(
   SRLanguageObject   base,
   const void *       text,
-  Size               textLength,
-  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32             textLength,
+  SRefCon            refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -761,7 +775,7 @@ extern OSErr
 SRDrawText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  Size           dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -776,7 +790,7 @@ extern OSErr
 SRDrawRecognizedText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  Size           dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -791,7 +805,7 @@ extern OSErr
 SRSpeakText(
   SRRecognizer   recognizer,
   const void *   speakText,
-  Size           speakLength)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         speakLength)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -806,7 +820,7 @@ extern OSErr
 SRSpeakAndDrawText(
   SRRecognizer   recognizer,
   const void *   text,
-  Size           textLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         textLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -864,7 +878,7 @@ SRProcessEnd(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

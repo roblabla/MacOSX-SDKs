@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -50,7 +50,7 @@
  * operating statistics.  The table is an OSDictionary, where each entry
  * describes one given statistic.
  */
- 
+
 #define kIOBlockStorageDriverStatisticsKey "Statistics"
 
 /*!

@@ -1,6 +1,6 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -13,16 +13,20 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Jim Winstead <jimw@php.net>                                 |
-   |          Stig Sæther Bakken <ssb@fast.no>                            |
+   |          Stig Sæther Bakken <ssb@php.net>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.17.2.2.4.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: php_math.h,v 1.28.2.2.2.4 2007/12/31 07:20:13 sebastian Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
 
 PHPAPI char *_php_math_number_format(double, int, char , char);
+PHPAPI char * _php_math_longtobase(zval *arg, int base);
+PHPAPI long _php_math_basetolong(zval *arg, int base);
+PHPAPI int _php_math_basetozval(zval *arg, int base, zval *ret);
+PHPAPI char * _php_math_zvaltobase(zval *arg, int base TSRMLS_DC);
 
 PHP_FUNCTION(sin);
 PHP_FUNCTION(cos);
@@ -66,12 +70,11 @@ PHP_FUNCTION(rad2deg);
    WARNING: these functions are expermental: they could change their names or 
    disappear in the next version of PHP!
    */
-#ifdef HAVE_HYPOT
 PHP_FUNCTION(hypot);
-#endif
 PHP_FUNCTION(expm1);
+#ifdef HAVE_LOG1P
 PHP_FUNCTION(log1p);
-
+#endif
 
 PHP_FUNCTION(sinh);
 PHP_FUNCTION(cosh);

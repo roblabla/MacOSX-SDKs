@@ -3,7 +3,7 @@
  
      Contains:   Master include for CarbonCore private framework
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -77,6 +77,10 @@
 #include <CarbonCore/MacErrors.h>
 #endif
 
+#ifndef __BACKUPCORE__
+#include <CarbonCore/BackupCore.h>
+#endif
+
 #ifndef __COMPONENTS__
 #include <CarbonCore/Components.h>
 #endif
@@ -117,10 +121,6 @@
 #include <CarbonCore/DriverSynchronization.h>
 #endif
 
-#ifndef __DEVICES__
-#include <CarbonCore/Devices.h>
-#endif
-
 #ifndef __DRIVERSERVICES__
 #include <CarbonCore/DriverServices.h>
 #endif
@@ -147,10 +147,6 @@
 
 #ifndef __TOOLUTILS__
 #include <CarbonCore/ToolUtils.h>
-#endif
-
-#ifndef __NAMEREGISTRY__
-#include <CarbonCore/NameRegistry.h>
 #endif
 
 #ifndef __UNICODEUTILITIES__
@@ -216,6 +212,10 @@
 
 #ifndef __TEXTENCODINGPLUGIN__
 #include <CarbonCore/TextEncodingPlugin.h>
+#endif
+
+#ifndef __FSEVENTS__
+#include <CarbonCore/FSEvents.h>
 #endif
 
 

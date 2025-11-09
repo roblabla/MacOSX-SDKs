@@ -19,11 +19,9 @@
 
 #ifndef __COREAUDIO_USE_FLAT_INCLUDES__
 	#include <AudioUnit/AUComponent.r>
-	#include <AudioUnit/AUNTComponent.r>
 	#include <AudioUnit/AudioUnitCarbonView.r>
 #else
 	#include "AUComponent.r"
-	#include "AUNTComponent.r"
 	#include "AudioUnitCarbonView.r"
 #endif
 

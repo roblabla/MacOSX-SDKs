@@ -16,7 +16,6 @@
 #ifndef __PMIOMODULE__
 #define __PMIOMODULE__
 
-#include <ApplicationServices/ApplicationServices.h>
 #include <CoreFoundation/CFString.h>
 #include <PrintCore/PMTicket.h>
 #include <PrintCore/PMPluginHeader.h>

@@ -1,5 +1,5 @@
 /*	CFSet.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 /*!
         @header CFSet
@@ -11,9 +11,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*!
 	@typedef CFSetRetainCallBack
@@ -216,13 +214,12 @@ CFSetRef CFSetCreateCopy(CFAllocatorRef allocator, CFSetRef theSet);
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFSet. The set starts empty, and can grow to this
-		number of values (and it can have less). If this parameter
-		is 0, the set's maximum capacity is unlimited (or rather,
-		only limited by address space and available memory
-		constraints). If this parameter is negative, the behavior is
-		undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFSet. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A set's actual capacity is only limited by 
+                address space and available memory constraints). If this 
+                parameter is negative, the behavior is undefined.
 	@param callBacks A C pointer to a CFSetCallBacks structure
 		initialized with the callbacks for the set to use on each
 		value in the set. A copy of the contents of the
@@ -263,14 +260,15 @@ CFMutableSetRef CFSetCreateMutable(CFAllocatorRef allocator, CFIndex capacity, c
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFSet. The set starts with the same values as the
-                set to be copied, and can grow to this number of values.
-                If this parameter is 0, the set's maximum capacity is 
-                unlimited (or rather, only limited by address space and 
-                available memory constraints). This parameter must be 
-                greater than or equal to the count of the set which is to
-                be copied, or the behavior is undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFSet. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A set's actual capacity is only limited by
+                address space and available memory constraints). 
+                This parameter must be greater than or equal
+                to the count of the set which is to be copied, or the
+                behavior is undefined. If this parameter is negative, the
+                behavior is undefined.
 	@param theSet The set which is to be copied. The values from the
 		set are copied as pointers into the new set (that is,
 		the values themselves are copied, not that which the values
@@ -406,8 +404,7 @@ void CFSetApplyFunction(CFSetRef theSet, CFSetApplierFunction applier, void *con
 	Adds the value to the set if it is not already present.
 	@param theSet The set to which the value is to be added. If this
 		parameter is not a valid mutable CFSet, the behavior is
-		undefined. If the set is a fixed-capacity set and it
-		is full before this operation, the behavior is undefined.
+		undefined.
 	@param value The value to add to the set. The value is retained by
 		the set using the retain callback provided when the set
 		was created. If the value is not of the sort expected by the
@@ -481,9 +478,7 @@ void CFSetRemoveValue(CFMutableSetRef theSet, const void *value);
 CF_EXPORT
 void CFSetRemoveAllValues(CFMutableSetRef theSet);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFSET__ */
 

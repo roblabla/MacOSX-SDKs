@@ -1,5 +1,5 @@
 /*	NSXMLParser.h
-        Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
+        Copyright (c) 2003-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -41,8 +41,8 @@
 @interface NSXMLParser (NSXMLParserLocatorAdditions)
 - (NSString *)publicID;
 - (NSString *)systemID;
-- (int)lineNumber;
-- (int)columnNumber;
+- (NSInteger)lineNumber;
+- (NSInteger)columnNumber;
 @end
 
 /*
@@ -129,7 +129,7 @@
 FOUNDATION_EXPORT NSString * const NSXMLParserErrorDomain	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;  // for use with NSError.
 
 // Error reporting
-typedef enum {
+enum {
     NSXMLParserInternalError = 1,
     NSXMLParserOutOfMemoryError = 2,
     NSXMLParserDocumentStartError = 3,
@@ -223,6 +223,7 @@ typedef enum {
     NSXMLParserURIFragmentError = 92,
     NSXMLParserNoDTDError = 94,
     NSXMLParserDelegateAbortedParseError = 512
-} NSXMLParserError;
+};
+typedef NSInteger NSXMLParserError;
 
 #endif		// Availability guard

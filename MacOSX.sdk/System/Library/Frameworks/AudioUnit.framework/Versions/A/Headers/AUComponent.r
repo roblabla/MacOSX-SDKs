@@ -57,14 +57,20 @@
 #define kAudioUnitSubType_Pitch					'pitc'
 #define kAudioUnitSubType_AUFilter				'filt'
 #define kAudioUnitSubType_NetSend				'nsnd'
+#define kAudioUnitSubType_Distortion			'dist'
+#define kAudioUnitSubType_RogerBeep				'rogr'
 
 #define kAudioUnitType_Mixer					'aumx'
 #define kAudioUnitSubType_StereoMixer			'smxr'
 #define kAudioUnitSubType_3DMixer				'3dmx'
 #define kAudioUnitSubType_MatrixMixer			'mxmx'
-#define kAudioUnitSubType_DynamicMatrix			'dymx'
+#define kAudioUnitSubType_MultiChannelMixer		'mcmx'
 
 #define kAudioUnitType_Panner					'aupn'
+#define kAudioUnitSubType_SphericalHeadPanner	'sphr'
+#define kAudioUnitSubType_VectorPanner			'vbas'
+#define kAudioUnitSubType_SoundFieldPanner		'ambi'
+#define kAudioUnitSubType_HRTFPanner			'hrtf'
 
 #define kAudioUnitType_OfflineEffect			'auol'
 

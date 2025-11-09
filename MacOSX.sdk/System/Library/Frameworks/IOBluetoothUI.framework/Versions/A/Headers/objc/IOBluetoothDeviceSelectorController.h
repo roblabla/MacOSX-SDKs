@@ -61,7 +61,7 @@
 	@param	attributes	(IOBluetoothDeviceSearchAttributes *) A pointer to a list of device attributes to allow.  This list of attributes is used to determine which device types to display in the UI.
 	@result		NSArray * of the selected IOBluetoothDevice objects.
 */
--(NSArray *)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes;
+-(NSArray *)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 

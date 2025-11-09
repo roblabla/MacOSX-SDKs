@@ -3,7 +3,7 @@
  
      Contains:   Sound Manager Interfaces.
  
-     Version:    CarbonSound-103.1~889
+     Version:    CarbonSound-106.5~87
  
      Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
@@ -21,6 +21,7 @@
 #include <CoreServices/CoreServices.r>
 #endif
 
+#if !__LP64__
 #define kInvalidSource 					0xFFFFFFFF			/* this source may be returned from GetInfo if no other source is the monitored source */
 #define kNoSource 						'none'				/* no source selection */
 #define kCDSource 						'cd  '				/* internal CD player input */
@@ -254,6 +255,8 @@ type 'snfo' {
     longint = 0;
     longint;    // feature flags
 };
+
+#endif  /* !__LP64__ */
 
 
 #endif /* __SOUND_R__ */

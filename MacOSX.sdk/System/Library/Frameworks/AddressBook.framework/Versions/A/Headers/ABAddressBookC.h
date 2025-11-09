@@ -2,7 +2,7 @@
 //  ABAddressBookC.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #ifndef __ADDRESSBOOKC__
@@ -73,8 +73,8 @@ extern CFStringRef ABCopyRecordTypeFromUniqueId(ABAddressBookRef addressBook, CF
 
     // --- Properties
     // Property names must be unique for a record type
-extern int ABAddPropertiesAndTypes(ABAddressBookRef addressBook, CFStringRef recordType, CFDictionaryRef propertiesAnTypes);
-extern int ABRemoveProperties(ABAddressBookRef addressBook, CFStringRef recordType, CFArrayRef properties);
+extern CFIndex ABAddPropertiesAndTypes(ABAddressBookRef addressBook, CFStringRef recordType, CFDictionaryRef propertiesAnTypes);
+extern CFIndex ABRemoveProperties(ABAddressBookRef addressBook, CFStringRef recordType, CFArrayRef properties);
 extern CFArrayRef ABCopyArrayOfPropertiesForRecordType(ABAddressBookRef addressBook, CFStringRef recordType);
 extern ABPropertyType ABTypeOfProperty(ABAddressBookRef addressBook, CFStringRef recordType, CFStringRef property);
 
@@ -162,12 +162,12 @@ extern bool ABSearchElementMatchesRecord(ABSearchElementRef searchElement, ABRec
 // --------------------------------------------------------------------------------
 
 extern ABMultiValueRef ABMultiValueCreate(void);
-extern unsigned ABMultiValueCount(ABMultiValueRef multiValue);
-extern CFTypeRef ABMultiValueCopyValueAtIndex(ABMultiValueRef multiValue, int index);
-extern CFStringRef ABMultiValueCopyLabelAtIndex(ABMultiValueRef multiValue, int index);
+extern CFIndex ABMultiValueCount(ABMultiValueRef multiValue);
+extern CFTypeRef ABMultiValueCopyValueAtIndex(ABMultiValueRef multiValue, CFIndex index);
+extern CFStringRef ABMultiValueCopyLabelAtIndex(ABMultiValueRef multiValue, CFIndex index);
 extern CFStringRef ABMultiValueCopyPrimaryIdentifier(ABMultiValueRef multiValue);
-extern int ABMultiValueIndexForIdentifier(ABMultiValueRef multiValue, CFStringRef identifier);
-extern CFStringRef ABMultiValueCopyIdentifierAtIndex(ABMultiValueRef multiValue, int index);
+extern CFIndex ABMultiValueIndexForIdentifier(ABMultiValueRef multiValue, CFStringRef identifier);
+extern CFStringRef ABMultiValueCopyIdentifierAtIndex(ABMultiValueRef multiValue, CFIndex index);
 extern ABPropertyType ABMultiValuePropertyType(ABMultiValueRef multiValue);
 extern ABMultiValueRef ABMultiValueCreateCopy(ABMultiValueRef multiValue);
 
@@ -177,10 +177,10 @@ extern ABMultiValueRef ABMultiValueCreateCopy(ABMultiValueRef multiValue);
 
 extern ABMutableMultiValueRef ABMultiValueCreateMutable(void);
 extern bool ABMultiValueAdd(ABMutableMultiValueRef multiValue, CFTypeRef value, CFStringRef label, CFStringRef *outIdentifier);
-extern bool ABMultiValueInsert(ABMutableMultiValueRef multiValue, CFTypeRef value, CFStringRef label, int index, CFStringRef *outIdentifier);
-extern bool ABMultiValueRemove(ABMutableMultiValueRef multiValue, int index);
-extern bool ABMultiValueReplaceValue(ABMutableMultiValueRef multiValue, CFTypeRef value, int index);
-extern bool ABMultiValueReplaceLabel(ABMutableMultiValueRef multiValue, CFStringRef label, int index);
+extern bool ABMultiValueInsert(ABMutableMultiValueRef multiValue, CFTypeRef value, CFStringRef label, CFIndex index, CFStringRef *outIdentifier);
+extern bool ABMultiValueRemove(ABMutableMultiValueRef multiValue, CFIndex index);
+extern bool ABMultiValueReplaceValue(ABMutableMultiValueRef multiValue, CFTypeRef value, CFIndex index);
+extern bool ABMultiValueReplaceLabel(ABMutableMultiValueRef multiValue, CFStringRef label, CFIndex index);
 extern bool ABMultiValueSetPrimaryIdentifier(ABMutableMultiValueRef multiValue, CFStringRef identifier);
 extern ABMutableMultiValueRef ABMultiValueCreateMutableCopy(ABMultiValueRef multiValue);
 
@@ -201,10 +201,10 @@ extern CFStringRef ABCopyDefaultCountryCode(ABAddressBookRef addressBook) AVAILA
 extern bool ABPersonSetImageData(ABPersonRef person, CFDataRef imageData);
 extern CFDataRef ABPersonCopyImageData(ABPersonRef person);
 
-typedef void (*ABImageClientCallback) (CFDataRef imageData, int tag, void* refcon);
+typedef void (*ABImageClientCallback) (CFDataRef imageData, CFIndex tag, void* refcon);
 
-extern int ABBeginLoadingImageDataForClient(ABPersonRef person, ABImageClientCallback callback, void* refcon);
-extern void ABCancelLoadingImageDataForTag(int tag);
+extern CFIndex ABBeginLoadingImageDataForClient(ABPersonRef person, ABImageClientCallback callback, void* refcon);
+extern void ABCancelLoadingImageDataForTag(CFIndex tag);
 
 #if defined(__cplusplus)
 }

@@ -3,7 +3,7 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-169~651
+     Version:    HIServices-247.0.1~2
  
      Copyright:  © 1990-2006 by Apple Computer, Inc. All rights reserved
  
@@ -24,79 +24,6 @@
 #ifndef __CORESERVICES_R__
 #include <CoreServices/CoreServices.r>
 #endif
-
-#define kGenericDocumentIconResource 	(-4000)
-#define kGenericStationeryIconResource 	(-3985)
-#define kGenericEditionFileIconResource  (-3989)
-#define kGenericApplicationIconResource  (-3996)
-#define kGenericDeskAccessoryIconResource  (-3991)
-#define kGenericFolderIconResource 		(-3999)
-#define kPrivateFolderIconResource 		(-3994)
-#define kFloppyIconResource 			(-3998)
-#define kTrashIconResource 				(-3993)
-#define kGenericRAMDiskIconResource 	(-3988)
-#define kGenericCDROMIconResource 		(-3987)
-
-#define kDesktopIconResource 			(-3992)
-#define kOpenFolderIconResource 		(-3997)
-#define kGenericHardDiskIconResource 	(-3995)
-#define kGenericFileServerIconResource 	(-3972)
-#define kGenericSuitcaseIconResource 	(-3970)
-#define kGenericMoverObjectIconResource  (-3969)
-
-#define kGenericPreferencesIconResource  (-3971)
-#define kGenericQueryDocumentIconResource  (-16506)
-#define kGenericExtensionIconResource 	(-16415)
-#define kSystemFolderIconResource 		(-3983)
-#define kHelpIconResource 				(-20271)
-#define kAppleMenuFolderIconResource 	(-3982)
-
-#define genericDocumentIconResource 	(-4000)
-#define genericStationeryIconResource 	(-3985)
-#define genericEditionFileIconResource 	(-3989)
-#define genericApplicationIconResource 	(-3996)
-#define genericDeskAccessoryIconResource  (-3991)
-#define genericFolderIconResource 		(-3999)
-#define privateFolderIconResource 		(-3994)
-#define floppyIconResource 				(-3998)
-#define trashIconResource 				(-3993)
-#define genericRAMDiskIconResource 		(-3988)
-#define genericCDROMIconResource 		(-3987)
-#define desktopIconResource 			(-3992)
-#define openFolderIconResource 			(-3997)
-#define genericHardDiskIconResource 	(-3995)
-#define genericFileServerIconResource 	(-3972)
-#define genericSuitcaseIconResource 	(-3970)
-#define genericMoverObjectIconResource 	(-3969)
-#define genericPreferencesIconResource 	(-3971)
-#define genericQueryDocumentIconResource  (-16506)
-#define genericExtensionIconResource 	(-16415)
-#define systemFolderIconResource 		(-3983)
-#define appleMenuFolderIconResource 	(-3982)
-
-#define kStartupFolderIconResource 		(-3981)
-#define kOwnedFolderIconResource 		(-3980)
-#define kDropFolderIconResource 		(-3979)
-#define kSharedFolderIconResource 		(-3978)
-#define kMountedFolderIconResource 		(-3977)
-#define kControlPanelFolderIconResource  (-3976)
-#define kPrintMonitorFolderIconResource  (-3975)
-#define kPreferencesFolderIconResource 	(-3974)
-#define kExtensionsFolderIconResource 	(-3973)
-#define kFontsFolderIconResource 		(-3968)
-#define kFullTrashIconResource 			(-3984)
-
-#define startupFolderIconResource 		(-3981)
-#define ownedFolderIconResource 		(-3980)
-#define dropFolderIconResource 			(-3979)
-#define sharedFolderIconResource 		(-3978)
-#define mountedFolderIconResource 		(-3977)
-#define controlPanelFolderIconResource 	(-3976)
-#define printMonitorFolderIconResource 	(-3975)
-#define preferencesFolderIconResource 	(-3974)
-#define extensionsFolderIconResource 	(-3973)
-#define fontsFolderIconResource 		(-3968)
-#define fullTrashIconResource 			(-3984)
 
 #define kAlignNone 						0x00
 #define kAlignVerticalCenter 			0x01
@@ -208,6 +135,10 @@
 #define svAll4BitData 					0x02020202
 #define svAll8BitData 					0x04040404
 #define svAllAvailableData 				0xFFFFFFFF
+
+#define kPlotIconRefNormalFlags 		0
+#define kPlotIconRefNoImage 			0x02
+#define kPlotIconRefNoMask 				0x04
 
 
 /*-----------------------------------cicn ¥ Color Icon -------------------------------------------*/
@@ -419,191 +350,6 @@ type 'kcl8' as 'icl8';                                /* Keyboard 8-bit color ic
 type 'kcl4' as 'icl4';                              /* Keyboard 4-bit color icon */
 type 'kcs8' as 'ics8';                              /* Keyboard 8-bit small color icon */
 type 'kcs4' as 'ics4';                                /* Keyboard 4-bit small color icon */
-
-#define kSystemIconsCreator 			'macs'
-#define kClipboardIcon 					'CLIP'
-#define kClippingUnknownTypeIcon 		'clpu'
-#define kClippingPictureTypeIcon 		'clpp'
-#define kClippingTextTypeIcon 			'clpt'
-#define kClippingSoundTypeIcon 			'clps'
-#define kDesktopIcon 					'desk'
-#define kFinderIcon 					'FNDR'
-#define kComputerIcon 					'root'
-#define kFontSuitcaseIcon 				'FFIL'
-#define kFullTrashIcon 					'ftrh'
-#define kGenericApplicationIcon 		'APPL'
-#define kGenericCDROMIcon 				'cddr'
-#define kGenericControlPanelIcon 		'APPC'
-#define kGenericControlStripModuleIcon 	'sdev'
-#define kGenericComponentIcon 			'thng'
-#define kGenericDeskAccessoryIcon 		'APPD'
-#define kGenericDocumentIcon 			'docu'
-#define kGenericEditionFileIcon 		'edtf'
-#define kGenericExtensionIcon 			'INIT'
-#define kGenericFileServerIcon 			'srvr'
-#define kGenericFontIcon 				'ffil'
-#define kGenericFontScalerIcon 			'sclr'
-#define kGenericFloppyIcon 				'flpy'
-#define kGenericHardDiskIcon 			'hdsk'
-#define kGenericIDiskIcon 				'idsk'
-#define kGenericRemovableMediaIcon 		'rmov'
-#define kGenericMoverObjectIcon 		'movr'
-#define kGenericPCCardIcon 				'pcmc'
-#define kGenericPreferencesIcon 		'pref'
-#define kGenericQueryDocumentIcon 		'qery'
-#define kGenericRAMDiskIcon 			'ramd'
-#define kGenericSharedLibaryIcon 		'shlb'
-#define kGenericStationeryIcon 			'sdoc'
-#define kGenericSuitcaseIcon 			'suit'
-#define kGenericURLIcon 				'gurl'
-#define kGenericWORMIcon 				'worm'
-#define kInternationalResourcesIcon 	'ifil'
-#define kKeyboardLayoutIcon 			'kfil'
-#define kSoundFileIcon 					'sfil'
-#define kSystemSuitcaseIcon 			'zsys'
-#define kTrashIcon 						'trsh'
-#define kTrueTypeFontIcon 				'tfil'
-#define kTrueTypeFlatFontIcon 			'sfnt'
-#define kTrueTypeMultiFlatFontIcon 		'ttcf'
-#define kUserIDiskIcon 					'udsk'
-#define kUnknownFSObjectIcon 			'unfs'
-#define kInternationResourcesIcon 		'ifil'				/*  old name */
-
-#define kInternetLocationHTTPIcon 		'ilht'
-#define kInternetLocationFTPIcon 		'ilft'
-#define kInternetLocationAppleShareIcon  'ilaf'
-#define kInternetLocationAppleTalkZoneIcon  'ilat'
-#define kInternetLocationFileIcon 		'ilfi'
-#define kInternetLocationMailIcon 		'ilma'
-#define kInternetLocationNewsIcon 		'ilnw'
-#define kInternetLocationNSLNeighborhoodIcon  'ilns'
-#define kInternetLocationGenericIcon 	'ilge'
-
-#define kGenericFolderIcon 				'fldr'
-#define kDropFolderIcon 				'dbox'
-#define kMountedFolderIcon 				'mntd'
-#define kOpenFolderIcon 				'ofld'
-#define kOwnedFolderIcon 				'ownd'
-#define kPrivateFolderIcon 				'prvf'
-#define kSharedFolderIcon 				'shfl'
-
-#define kSharingPrivsNotApplicableIcon 	'shna'
-#define kSharingPrivsReadOnlyIcon 		'shro'
-#define kSharingPrivsReadWriteIcon 		'shrw'
-#define kSharingPrivsUnknownIcon 		'shuk'
-#define kSharingPrivsWritableIcon 		'writ'
-
-#define kUserFolderIcon 				'ufld'
-#define kWorkgroupFolderIcon 			'wfld'
-#define kGuestUserIcon 					'gusr'
-#define kUserIcon 						'user'
-#define kOwnerIcon 						'susr'
-#define kGroupIcon 						'grup'
-
-#define kAppearanceFolderIcon 			'appr'
-#define kAppleExtrasFolderIcon 			'aexÄ'
-#define kAppleMenuFolderIcon 			'amnu'
-#define kApplicationsFolderIcon 		'apps'
-#define kApplicationSupportFolderIcon 	'asup'
-#define kAssistantsFolderIcon 			'astÄ'
-#define kColorSyncFolderIcon 			'prof'
-#define kContextualMenuItemsFolderIcon 	'cmnu'
-#define kControlPanelDisabledFolderIcon  'ctrD'
-#define kControlPanelFolderIcon 		'ctrl'
-#define kControlStripModulesFolderIcon 	'sdvÄ'
-#define kDocumentsFolderIcon 			'docs'
-#define kExtensionsDisabledFolderIcon 	'extD'
-#define kExtensionsFolderIcon 			'extn'
-#define kFavoritesFolderIcon 			'favs'
-#define kFontsFolderIcon 				'font'
-#define kHelpFolderIcon 				'Ählp'
-#define kInternetFolderIcon 			'intÄ'
-#define kInternetPlugInFolderIcon 		'Änet'
-#define kInternetSearchSitesFolderIcon 	'issf'
-#define kLocalesFolderIcon 				'Äloc'
-#define kMacOSReadMeFolderIcon 			'morÄ'
-#define kPublicFolderIcon 				'pubf'
-#define kPreferencesFolderIcon 			'prfÄ'
-#define kPrinterDescriptionFolderIcon 	'ppdf'
-#define kPrinterDriverFolderIcon 		'Äprd'
-#define kPrintMonitorFolderIcon 		'prnt'
-#define kRecentApplicationsFolderIcon 	'rapp'
-#define kRecentDocumentsFolderIcon 		'rdoc'
-#define kRecentServersFolderIcon 		'rsrv'
-#define kScriptingAdditionsFolderIcon 	'Äscr'
-#define kSharedLibrariesFolderIcon 		'Älib'
-#define kScriptsFolderIcon 				'scrÄ'
-#define kShutdownItemsDisabledFolderIcon  'shdD'
-#define kShutdownItemsFolderIcon 		'shdf'
-#define kSpeakableItemsFolder 			'spki'
-#define kStartupItemsDisabledFolderIcon  'strD'
-#define kStartupItemsFolderIcon 		'strt'
-#define kSystemExtensionDisabledFolderIcon  'macD'
-#define kSystemFolderIcon 				'macs'
-#define kTextEncodingsFolderIcon 		'Ätex'
-#define kUsersFolderIcon 				'usrÄ'
-#define kUtilitiesFolderIcon 			'utiÄ'
-#define kVoicesFolderIcon 				'fvoc'
-
-#define kAppleScriptBadgeIcon 			'scrp'
-#define kLockedBadgeIcon 				'lbdg'
-#define kMountedBadgeIcon 				'mbdg'
-#define kSharedBadgeIcon 				'sbdg'
-#define kAliasBadgeIcon 				'abdg'
-#define kAlertCautionBadgeIcon 			'cbdg'
-
-#define kAlertNoteIcon 					'note'
-#define kAlertCautionIcon 				'caut'
-#define kAlertStopIcon 					'stop'
-
-#define kAppleTalkIcon 					'atlk'
-#define kAppleTalkZoneIcon 				'atzn'
-#define kAFPServerIcon 					'afps'
-#define kFTPServerIcon 					'ftps'
-#define kHTTPServerIcon 				'htps'
-#define kGenericNetworkIcon 			'gnet'
-#define kIPFileServerIcon 				'isrv'
-
-#define kToolbarCustomizeIcon 			'tcus'
-#define kToolbarDeleteIcon 				'tdel'
-#define kToolbarFavoritesIcon 			'tfav'
-#define kToolbarHomeIcon 				'thom'
-
-#define kAppleLogoIcon 					'capl'
-#define kAppleMenuIcon 					'sapl'
-#define kBackwardArrowIcon 				'baro'
-#define kFavoriteItemsIcon 				'favr'
-#define kForwardArrowIcon 				'faro'
-#define kGridIcon 						'grid'
-#define kHelpIcon 						'help'
-#define kKeepArrangedIcon 				'arng'
-#define kLockedIcon 					'lock'
-#define kNoFilesIcon 					'nfil'
-#define kNoFolderIcon 					'nfld'
-#define kNoWriteIcon 					'nwrt'
-#define kProtectedApplicationFolderIcon  'papp'
-#define kProtectedSystemFolderIcon 		'psys'
-#define kRecentItemsIcon 				'rcnt'
-#define kShortcutIcon 					'shrt'
-#define kSortAscendingIcon 				'asnd'
-#define kSortDescendingIcon 			'dsnd'
-#define kUnlockedIcon 					'ulck'
-#define kConnectToIcon 					'cnct'
-#define kGenericWindowIcon 				'gwin'
-#define kQuestionMarkIcon 				'ques'
-#define kDeleteAliasIcon 				'dali'
-#define kEjectMediaIcon 				'ejec'
-#define kBurningIcon 					'burn'
-#define kRightContainerArrowIcon 		'rcar'
-
-#define kIconServicesNormalUsageFlag 	0x00000000
-#define kIconServicesNoBadgeFlag 		0x00000001			/*  available on Panther and later  */
-#define kIconServicesUpdateIfNeededFlag  0x00000002			/*  available on Panther and later  */
-
-#define kIconServicesCatalogInfoMask 	0x00081C5E
-#define kPlotIconRefNormalFlags 		0
-#define kPlotIconRefNoImage 			0x02
-#define kPlotIconRefNoMask 				0x04
 
 
 /*--------------------------icns ¥ icon family-----------------------------*/

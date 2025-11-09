@@ -3,7 +3,7 @@
  
      Contains:   ColorSync Calibration API
  
-     Version:    CommonPanels-73.2~861
+     Version:    CommonPanels-87~138
  
      Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef CALLBACK_API( void , CalibrateEventProcPtr )(EventRecord * event);
 typedef STACK_UPP_TYPE(CalibrateEventProcPtr)                   CalibrateEventUPP;
@@ -168,6 +168,30 @@ InvokeCalibrateUPP(
   CalibratorInfo *  theInfo,
   CalibrateUPP      userUPP);
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline CalibrateEventUPP                                    NewCalibrateEventUPP(CalibrateEventProcPtr userRoutine) { return userRoutine; }
+    inline CanCalibrateUPP                                      NewCanCalibrateUPP(CanCalibrateProcPtr userRoutine) { return userRoutine; }
+    inline CalibrateUPP                                         NewCalibrateUPP(CalibrateProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeCalibrateEventUPP(CalibrateEventUPP) { }
+    inline void                                                 DisposeCanCalibrateUPP(CanCalibrateUPP) { }
+    inline void                                                 DisposeCalibrateUPP(CalibrateUPP) { }
+    inline void                                                 InvokeCalibrateEventUPP(EventRecord * event, CalibrateEventUPP userUPP) { (*userUPP)(event); }
+    inline Boolean                                              InvokeCanCalibrateUPP(CMDisplayIDType displayID, Str255 errMessage, CanCalibrateUPP userUPP) { return (*userUPP)(displayID, errMessage); }
+    inline OSErr                                                InvokeCalibrateUPP(CalibratorInfo * theInfo, CalibrateUPP userUPP) { return (*userUPP)(theInfo); }
+  #else
+    #define NewCalibrateEventUPP(userRoutine)                   ((CalibrateEventUPP)userRoutine)
+    #define NewCanCalibrateUPP(userRoutine)                     ((CanCalibrateUPP)userRoutine)
+    #define NewCalibrateUPP(userRoutine)                        ((CalibrateUPP)userRoutine)
+    #define DisposeCalibrateEventUPP(userUPP)
+    #define DisposeCanCalibrateUPP(userUPP)
+    #define DisposeCalibrateUPP(userUPP)
+    #define InvokeCalibrateEventUPP(event, userUPP)             (*userUPP)(event)
+    #define InvokeCanCalibrateUPP(displayID, errMessage, userUPP) (*userUPP)(displayID, errMessage)
+    #define InvokeCalibrateUPP(theInfo, userUPP)                (*userUPP)(theInfo)
+  #endif
+#endif
+
 /*
  *  CMCalibrateDisplay()
  *  
@@ -182,7 +206,7 @@ CMCalibrateDisplay(CalibratorInfo * theInfo)                  AVAILABLE_MAC_OS_X
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -1,11 +1,11 @@
 /*
-     File:       Quickdraw.r
+     File:       QuickdrawTypes.r
  
-     Contains:   Interface to Quickdraw Graphics
+     Contains:   Type definitions from the former Quickdraw.i
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2005-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,24 +21,9 @@
 #include <CoreServices/CoreServices.r>
 #endif
 
-#ifndef OLDPIXMAPSTRUCT
-#if TARGET_API_MAC_OS8
-#define OLDPIXMAPSTRUCT 1
-#else
 #define OLDPIXMAPSTRUCT 0
-#endif  /* TARGET_API_MAC_OS8 */
-
-#endif  /* !defined(OLDPIXMAPSTRUCT) */
-
-#ifndef OLDGDEVICESTRUCT
-#if TARGET_API_MAC_OS8
-#define OLDGDEVICESTRUCT 1
-#else
+#define NON_MAC_PIXEL_FORMATS 1
 #define OLDGDEVICESTRUCT 0
-#endif  /* TARGET_API_MAC_OS8 */
-
-#endif  /* !defined(OLDGDEVICESTRUCT) */
-
 
 /*----------------------------acur ¥ Cursor Pointers -----------------------------------*/
 type 'acur' {

@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000,2007 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1980, 1986, 1993
@@ -80,26 +86,23 @@ struct route;
  * retransmission behavior and are included in the routing structure.
  */
 struct rt_metrics {
-	u_long	rmx_locks;	/* Kernel must leave these values alone */
-	u_long	rmx_mtu;	/* MTU for this path */
-	u_long	rmx_hopcount;	/* max hops expected */
-	int32_t	rmx_expire;	/* lifetime for route, e.g. redirect */
-	u_long	rmx_recvpipe;	/* inbound delay-bandwidth product */
-	u_long	rmx_sendpipe;	/* outbound delay-bandwidth product */
-	u_long	rmx_ssthresh;	/* outbound gateway buffer limit */
-	u_long	rmx_rtt;	/* estimated round trip time */
-	u_long	rmx_rttvar;	/* estimated rtt variance */
-	u_long	rmx_pksent;	/* packets sent using this route */
-	u_long	rmx_filler[4];	/* will be used for T/TCP later */
+	u_int32_t	rmx_locks;	/* Kernel must leave these values alone */
+	u_int32_t	rmx_mtu;	/* MTU for this path */
+	u_int32_t	rmx_hopcount;	/* max hops expected */
+	int32_t		rmx_expire;	/* lifetime for route, e.g. redirect */
+	u_int32_t	rmx_recvpipe;	/* inbound delay-bandwidth product */
+	u_int32_t	rmx_sendpipe;	/* outbound delay-bandwidth product */
+	u_int32_t	rmx_ssthresh;	/* outbound gateway buffer limit */
+	u_int32_t	rmx_rtt;	/* estimated round trip time */
+	u_int32_t	rmx_rttvar;	/* estimated rtt variance */
+	u_int32_t	rmx_pksent;	/* packets sent using this route */
+	u_int32_t	rmx_filler[4];	/* will be used for T/TCP later */
 };
 
 /*
  * rmx_rtt and rmx_rttvar are stored as microseconds;
- * RTTTOPRHZ(rtt) converts to a value suitable for use
- * by a protocol slowtimo counter.
  */
 #define	RTM_RTTUNIT	1000000	/* units for rtt, rttvar, as units per sec */
-#define	RTTTOPRHZ(r)	((r) / (RTM_RTTUNIT / PR_SLOWHZ))
 
 /*
  * XXX kernel function pointer `rt_output' is visible to applications.
@@ -152,9 +155,10 @@ struct ortentry {
 #define RTF_PROTO3	0x40000		/* protocol specific routing flag */
 					/* 0x80000 unused */
 #define RTF_PINNED	0x100000	/* future use */
-#define	RTF_LOCAL	0x200000 	/* route represents a local address */
+#define	RTF_LOCAL	0x200000	/* route represents a local address */
 #define	RTF_BROADCAST	0x400000	/* route represents a bcast address */
 #define	RTF_MULTICAST	0x800000	/* route represents a mcast address */
+#define RTF_TRACKREFS	0x1000000	/* Debug references and releases */
 					/* 0x1000000 and up unassigned */
 
 /*
@@ -172,33 +176,33 @@ struct	rtstat {
  * Structures for routing messages.
  */
 struct rt_msghdr {
-	u_short	rtm_msglen;	/* to skip over non-understood messages */
-	u_char	rtm_version;	/* future binary compatibility */
-	u_char	rtm_type;	/* message type */
-	u_short	rtm_index;	/* index for associated ifp */
-	int	rtm_flags;	/* flags, incl. kern & message, e.g. DONE */
-	int	rtm_addrs;	/* bitmask identifying sockaddrs in msg */
-	pid_t   rtm_pid;	/* identify sender */
-	int     rtm_seq;	/* for sender to identify action */
-	int     rtm_errno;	/* why failed */
-	int	rtm_use;	/* from rtentry */
-	u_long	rtm_inits;	/* which metrics we are initializing */
-	struct	rt_metrics rtm_rmx; /* metrics themselves */
+	u_short	rtm_msglen;		/* to skip over non-understood messages */
+	u_char	rtm_version;		/* future binary compatibility */
+	u_char	rtm_type;		/* message type */
+	u_short	rtm_index;		/* index for associated ifp */
+	int	rtm_flags;		/* flags, incl. kern & message, e.g. DONE */
+	int	rtm_addrs;		/* bitmask identifying sockaddrs in msg */
+	pid_t	rtm_pid;		/* identify sender */
+	int	rtm_seq;		/* for sender to identify action */
+	int	rtm_errno;		/* why failed */
+	int	rtm_use;		/* from rtentry */
+	u_int32_t rtm_inits;		/* which metrics we are initializing */
+	struct rt_metrics rtm_rmx;	/* metrics themselves */
 };
 
 struct rt_msghdr2 {
-        u_short rtm_msglen;     /* to skip over non-understood messages */
-        u_char  rtm_version;    /* future binary compatibility */
-        u_char  rtm_type;       /* message type */
-        u_short rtm_index;      /* index for associated ifp */
-        int     rtm_flags;      /* flags, incl. kern & message, e.g. DONE */
-        int     rtm_addrs;      /* bitmask identifying sockaddrs in msg */
-	int32_t rtm_refcnt;         /* reference count */
-	int     rtm_parentflags;      /* flags of the parent route */
-        int     rtm_reserved;      /* reserved field set to 0 */
-        int     rtm_use;        /* from rtentry */
-        u_long  rtm_inits;      /* which metrics we are initializing */
-        struct  rt_metrics rtm_rmx; /* metrics themselves */
+	u_short	rtm_msglen;		/* to skip over non-understood messages */
+	u_char	rtm_version;		/* future binary compatibility */
+	u_char	rtm_type;		/* message type */
+	u_short	rtm_index;		/* index for associated ifp */
+	int	rtm_flags;		/* flags, incl. kern & message, e.g. DONE */
+	int	rtm_addrs;		/* bitmask identifying sockaddrs in msg */
+	int32_t	rtm_refcnt;		/* reference count */
+	int	rtm_parentflags;	/* flags of the parent route */
+	int	rtm_reserved;		/* reserved field set to 0 */
+	int	rtm_use;		/* from rtentry */
+	u_int32_t rtm_inits;		/* which metrics we are initializing */
+	struct rt_metrics rtm_rmx;	/* metrics themselves */
 };
 
 

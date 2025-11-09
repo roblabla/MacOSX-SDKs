@@ -3,7 +3,7 @@
  
      Contains:   Finder flags and container types.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1990-2006 by Apple Computer, Inc., all rights reserved
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Creator and type of clipping files */
 enum {
@@ -172,7 +172,9 @@ enum {
   kHasCustomIcon                = 0x0400, /* Files and folders */
   kIsStationery                 = 0x0800, /* Files only */
   kNameLocked                   = 0x1000, /* Files and folders */
-  kHasBundle                    = 0x2000, /* Files only */
+  kHasBundle                    = 0x2000, /* Files and folders */
+                                        /* Indicates that a file has a BNDL resource */
+                                        /* Indicates that a folder is displayed as a package */
   kIsInvisible                  = 0x4000, /* Files and folders */
   kIsAlias                      = 0x8000 /* Files only */
 };
@@ -339,7 +341,7 @@ struct DXInfo {
 typedef struct DXInfo                   DXInfo;
 /* ControlPanelDefProcPtr and cdev constants have all been moved to Processes.i*/
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __FINDER__ */

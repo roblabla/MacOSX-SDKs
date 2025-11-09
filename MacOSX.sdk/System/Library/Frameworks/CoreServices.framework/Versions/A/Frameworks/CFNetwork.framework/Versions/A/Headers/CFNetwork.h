@@ -1,13 +1,11 @@
 /*
-     File:       CFNetwork/CFNetwork.h
+    File:       CFNetwork/CFNetwork.h
  
-     Contains:   CoreFoundation Network header
+    Contains:   CoreFoundation Network header
  
-     Version:    CFNetwork-129.20~93
+    Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
  
-     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
+    Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -23,6 +21,10 @@
 
 #ifndef __CFNETWORKDEFS__
 #include <CFNetwork/CFNetworkDefs.h>
+#endif
+
+#ifndef __CFNETWORKERRORS__
+#include <CFNetwork/CFNetworkErrors.h>
 #endif
 
 #ifndef __CFSOCKETSTREAM__
@@ -55,6 +57,10 @@
 
 #ifndef __CFNETSERVICES__
 #include <CFNetwork/CFNetServices.h>
+#endif
+
+#ifndef __CFPROXYSUPPORT__
+#include <CFNetwork/CFProxySupport.h>
 #endif
 
 

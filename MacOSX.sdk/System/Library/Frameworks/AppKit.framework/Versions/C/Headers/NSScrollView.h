@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -61,7 +61,7 @@ typedef struct __SFlags {
     NSView *    _cornerView;
     id		_ruler;
     _SFlags     _sFlags;
-    void *      _extraIvars;
+    __strong void *_extraIvars;
     
     // new rulers
     NSRulerView *_horizontalRuler;
@@ -98,18 +98,18 @@ typedef struct __SFlags {
 - (BOOL)autohidesScrollers;
 - (void)setAutohidesScrollers:(BOOL)flag;
 #endif
-- (void)setHorizontalLineScroll:(float)value;
-- (void)setVerticalLineScroll:(float)value;
-- (void)setLineScroll:(float)value;
-- (float)horizontalLineScroll;
-- (float)verticalLineScroll;
-- (float)lineScroll;
-- (void)setHorizontalPageScroll:(float)value;
-- (void)setVerticalPageScroll:(float)value;
-- (void)setPageScroll:(float)value;
-- (float)horizontalPageScroll;
-- (float)verticalPageScroll;
-- (float)pageScroll;
+- (void)setHorizontalLineScroll:(CGFloat)value;
+- (void)setVerticalLineScroll:(CGFloat)value;
+- (void)setLineScroll:(CGFloat)value;
+- (CGFloat)horizontalLineScroll;
+- (CGFloat)verticalLineScroll;
+- (CGFloat)lineScroll;
+- (void)setHorizontalPageScroll:(CGFloat)value;
+- (void)setVerticalPageScroll:(CGFloat)value;
+- (void)setPageScroll:(CGFloat)value;
+- (CGFloat)horizontalPageScroll;
+- (CGFloat)verticalPageScroll;
+- (CGFloat)pageScroll;
 - (void)setScrollsDynamically:(BOOL)flag;
 - (BOOL)scrollsDynamically;
 - (void)tile;

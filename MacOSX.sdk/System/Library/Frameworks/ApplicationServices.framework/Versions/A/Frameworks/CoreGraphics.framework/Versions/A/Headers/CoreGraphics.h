@@ -1,11 +1,12 @@
 /* CoreGraphics - CoreGraphics.h
- * Copyright (c) 2000 Apple Computer, Inc.
+ * Copyright (c) 2000-2006 Apple Computer, Inc.
  * All rights reserved.
  */
 
 #ifndef COREGRAPHICS_H_
 #define COREGRAPHICS_H_
 #define __COREGRAPHICS__
+
 
 #include <CoreGraphics/CGBase.h>
 
@@ -26,8 +27,9 @@
 #include <CoreGraphics/CGEventTypes.h>
 #include <CoreGraphics/CGFont.h>
 #include <CoreGraphics/CGFunction.h>
-#include <CoreGraphics/CGGLContext.h>
 #include <CoreGraphics/CGGeometry.h>
+#include <CoreGraphics/CGGLContext.h>
+#include <CoreGraphics/CGGradient.h>
 #include <CoreGraphics/CGImage.h>
 #include <CoreGraphics/CGLayer.h>
 #include <CoreGraphics/CGPDFArray.h>
@@ -48,5 +50,6 @@
 #include <CoreGraphics/CGSession.h>
 #include <CoreGraphics/CGShading.h>
 #include <CoreGraphics/CGWindowLevel.h>
+#include <CoreGraphics/CGWindow.h>
 
 #endif	/* COREGRAPHICS_H_ */

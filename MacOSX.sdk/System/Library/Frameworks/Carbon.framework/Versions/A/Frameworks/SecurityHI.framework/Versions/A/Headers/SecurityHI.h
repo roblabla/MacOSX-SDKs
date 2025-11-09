@@ -3,7 +3,7 @@
  
      Contains:   Master include for SecurityHI private framework
  
-     Version:    SecurityHI-24742~1491
+     Version:    SecurityHI-30817~522
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -29,6 +29,9 @@
 #include <SecurityHI/URLAccess.h>
 #endif
 
+#ifndef __SECCERTIFICATESUPPORT__
+#include <SecurityHI/SecCertificateSupport.h>
+#endif
 
 #endif /* __SECURITYHI__ */
 

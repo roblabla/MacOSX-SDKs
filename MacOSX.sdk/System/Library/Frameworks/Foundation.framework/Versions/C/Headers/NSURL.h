@@ -1,5 +1,5 @@
 /*	NSURL.h
-	Copyright (c) 1997-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -16,13 +16,16 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
     NSString *_urlString;
     NSURL *_baseURL;
     void *_clients;
-    void *_reserved;
+    __strong void *_reserved;
 }
         
 // Convenience initializers
 - initWithScheme:(NSString *)scheme host:(NSString *)host path:(NSString *)path;
-- initFileURLWithPath:(NSString *)path;  // Equivalent to [self initWithScheme:NSFileScheme host:nil path:path];
-+ (id)fileURLWithPath:(NSString *)path;
+- initFileURLWithPath:(NSString *)path isDirectory:(BOOL)isDir AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- initFileURLWithPath:(NSString *)path;  // Better to use initFileURLWithPath:isDirectory: if you know if the path is a file vs directory, as it saves an i/o.
+
++ (id)fileURLWithPath:(NSString *)path isDirectory:(BOOL) isDir AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (id)fileURLWithPath:(NSString *)path; // Better to use fileURLWithPath:isDirectory: if you know if the path is a file vs directory, as it saves an i/o.
 
 // These methods expect their string arguments to contain any percent escape codes that are necessary
 - initWithString:(NSString *)URLString;
@@ -55,26 +58,6 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 - (NSURL *)standardizedURL;
 @end
 
-@interface NSURL (NSURLLoading)
-- (NSData *)resourceDataUsingCache:(BOOL)shouldUseCache; // Blocks to load the data if necessary.  If shouldUseCache is YES, then if an equivalent URL has already been loaded and cached, its resource data will be returned immediately.  If shouldUseCache is NO, a new load will be started
-- (void)loadResourceDataNotifyingClient:(id)client usingCache:(BOOL)shouldUseCache; // Starts an asynchronous load of the data, registering delegate to receive notification.  Only one such background load can proceed at a time.
-- (id)propertyForKey:(NSString *)propertyKey;
-
-// These attempt to write the given arguments for the resource specified by the URL; they return success or failure
-- (BOOL)setResourceData:(NSData *)data;
-- (BOOL)setProperty:(id)property forKey:(NSString *)propertyKey;
-
-- (NSURLHandle *)URLHandleUsingCache:(BOOL)shouldUseCache; // Sophisticated clients will want to ask for this, then message the handle directly.  If shouldUseCache is NO, a newly instantiated handle is returned, even if an equivalent URL has been loaded
-
-@end
-
-@interface NSObject(NSURLClient)
-- (void)URL:(NSURL *)sender resourceDataDidBecomeAvailable:(NSData *)newBytes;
-- (void)URLResourceDidFinishLoading:(NSURL *)sender;
-- (void)URLResourceDidCancelLoading:(NSURL *)sender;
-- (void)URL:(NSURL *)sender resourceDidFailLoadingWithReason:(NSString *)reason;
-@end
-
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 @interface NSString (NSURLUtilities)
 
@@ -86,3 +69,26 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 
 @end
 #endif
+
+// Client informal protocol for use with the deprecated loadResourceDataNotifyingClient: below.  
+@interface NSObject(NSURLClient)
+- (void)URL:(NSURL *)sender resourceDataDidBecomeAvailable:(NSData *)newBytes DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)URLResourceDidFinishLoading:(NSURL *)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)URLResourceDidCancelLoading:(NSURL *)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)URL:(NSURL *)sender resourceDidFailLoadingWithReason:(NSString *)reason DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+@end
+
+//  This entire protocol is deprecated; use NSURLConnection instead.
+@interface NSURL (NSURLLoading)
+- (NSData *)resourceDataUsingCache:(BOOL)shouldUseCache DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Blocks to load the data if necessary.  If shouldUseCache is YES, then if an equivalent URL has already been loaded and cached, its resource data will be returned immediately.  If shouldUseCache is NO, a new load will be started
+- (void)loadResourceDataNotifyingClient:(id)client usingCache:(BOOL)shouldUseCache DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Starts an asynchronous load of the data, registering delegate to receive notification.  Only one such background load can proceed at a time.
+- (id)propertyForKey:(NSString *)propertyKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+    // These attempt to write the given arguments for the resource specified by the URL; they return success or failure
+- (BOOL)setResourceData:(NSData *)data DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)setProperty:(id)property forKey:(NSString *)propertyKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+- (NSURLHandle *)URLHandleUsingCache:(BOOL)shouldUseCache DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Sophisticated clients will want to ask for this, then message the handle directly.  If shouldUseCache is NO, a newly instantiated handle is returned, even if an equivalent URL has been loaded
+
+@end
+

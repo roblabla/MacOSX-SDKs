@@ -170,7 +170,7 @@ protected:
     UInt32			fMaxPayloadSize;
     UInt32			fTimeoutDuration;
     UInt32			fGeneration;
-    void *			fRefCon;
+    UInt64			fRefCon;
 
 	//
     // orb
@@ -222,7 +222,7 @@ protected:
     UInt32					fFetchAgentWriteRetryInterval;
 
 	UInt32					fConstraintOptions;
-	
+
     virtual IOReturn allocateResources( void );
     virtual void free( void );
 
@@ -494,6 +494,48 @@ public:
 
 	IOReturn setBufferConstraints( UInt64 maxSegmentSize, UInt32 alignment, UInt32 options = 0);
 
+
+    /*! 
+        @function setCommandBuffersAsRanges64
+        @abstract Creates a page table from a list of 64 bit ranges.
+        @discussion Creates a page table with the given parameters. Any addresses mapped by this method 
+        must remain valid until setCommandBuffers is called again or releaseCommandBuffers is called.  
+        The SBP2 services do not release references to the command buffers just because the command 
+        has completed. This is a 64 bit compatible version of setCommandBuffersAsRanges.
+        @param ranges An array of ranges representing the data to be transfered.
+        @param withCount The number of ranges in the ranges array.
+        @param withDirection An IODirection indicating the direction of data transfer.
+        @param withTask The task that these adressses reside in.
+        @param offset Offset in bytes into data to begin writing table at.
+        @param length Number of bytes of data to map from offset.
+        @result Returns KIOReturnSuccess if the page table was written successfully. 
+    */
+	   
+    IOReturn setCommandBuffersAsRanges64(	IOAddressRange *	ranges,
+											uint64_t			withCount,
+											IODirection			withDirection,
+											task_t				withTask,
+											uint64_t			offset = 0,
+											uint64_t			length = 0);
+
+    /*!
+		@function setRefCon64
+		@abstract Sets the ORB refCon as a 64 bit value.
+		@discussion Sets a user defined value on the ORB that can be retrieved later with the 
+        method getRefCon.
+        @param refCon a user defined value.
+    */
+    
+    virtual void setRefCon64( UInt64 refCon );
+
+    /*!
+		@function getRefCon64
+		@abstract Returns the 64 bit refCon set with setRefCon64.
+		@discussion Returns the user defined value previously stored in the ORB with setRefCon.
+        @result Returns the previously stored user defined value.
+	*/
+    
+    virtual UInt64 getRefCon64( void );
 };
     
 #endif

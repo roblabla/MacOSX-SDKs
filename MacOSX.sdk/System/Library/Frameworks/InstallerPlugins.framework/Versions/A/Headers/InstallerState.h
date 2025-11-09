@@ -1,9 +1,11 @@
-//
-//  $Id: InstallerState.h,v 1.2 2004/12/19 00:50:57 pmb Exp $
-//
-//  Created by Christopher Ryan on 8/19/04.
-//  Copyright 2004 Apple Computer. All rights reserved.
-//
+/*
+	InstallerState.h
+	InstallerPlugins
+	Copyright (c) 2003-2005 Apple Computer, Inc.
+	All rights reserved.
+*/
+
+
 
 #import <Cocoa/Cocoa.h>
 
@@ -27,7 +29,7 @@ extern NSString* const InstallerState_Choice_Installed;
 /*!
     @const 		InstallerState_Choice_CustomLocation
     @abstract   Key for accessing choice custom location.  The value for this key is a full path to the install location.
-    @discussion Certain choices can be relocated to a different location then the target.  If this choice has been relocated, this
+    @discussion Certain choices can be relocated to a different location than the target.  If this choice has been relocated, this
  				value for this key when used in a choicesDictionary will be the alternate location (selected by the user).
 */
 extern NSString* const InstallerState_Choice_CustomLocation;

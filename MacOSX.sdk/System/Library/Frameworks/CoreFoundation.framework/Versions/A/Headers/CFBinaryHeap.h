@@ -1,5 +1,5 @@
 /*	CFBinaryHeap.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 /*!
         @header CFBinaryHeap
@@ -13,9 +13,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct {
     CFIndex	version;
@@ -88,19 +86,18 @@ CF_EXPORT CFTypeID	CFBinaryHeapGetTypeID(void);
 
 /*!
 	@function CFBinaryHeapCreate
-	Creates a new mutable or fixed-mutable binary heap with the given values.
+	Creates a new mutable binary heap with the given values.
 	@param allocator The CFAllocator which should be used to allocate
 		memory for the binary heap and its storage for values. This
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFBinaryHeap. The binary heap starts empty, and can grow to this
-		number of values (and it can have less). If this parameter
-		is 0, the binary heap's maximum capacity is unlimited (or rather,
-		only limited by address space and available memory
-		constraints). If this parameter is negative, the behavior is
-		undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFBinaryHeap. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A heap's actual capacity is only limited by 
+                address space and available memory constraints). If this 
+                parameter is negative, the behavior is undefined.
 	@param callBacks A pointer to a CFBinaryHeapCallBacks structure
 		initialized with the callbacks for the binary heap to use on
 		each value in the binary heap. A copy of the contents of the
@@ -133,19 +130,21 @@ CF_EXPORT CFBinaryHeapRef	CFBinaryHeapCreate(CFAllocatorRef allocator, CFIndex c
 
 /*!
 	@function CFBinaryHeapCreateCopy
-	Creates a new mutable or fixed-mutable binary heap with the values from the given binary heap.
+	Creates a new mutable binary heap with the values from the given binary heap.
 	@param allocator The CFAllocator which should be used to allocate
 		memory for the binary heap and its storage for values. This
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFBinaryHeap. The binary heap starts empty, and can grow to this
-		number of values (and it can have less). If this parameter
-		is 0, the binary heap's maximum capacity is unlimited (or rather,
-		only limited by address space and available memory
-		constraints). If this parameter is negative, or less than the number of
-                values in the given binary heap, the behavior is undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFBinaryHeap. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A heap's actual capacity is only limited by
+                address space and available memory constraints). 
+                This parameter must be greater than or equal
+                to the count of the heap which is to be copied, or the
+                behavior is undefined. If this parameter is negative, the
+                behavior is undefined.
 	@param heap The binary heap which is to be copied. The values from the
 		binary heap are copied as pointers into the new binary heap (that is,
 		the values themselves are copied, not that which the values
@@ -154,7 +153,7 @@ CF_EXPORT CFBinaryHeapRef	CFBinaryHeapCreate(CFAllocatorRef allocator, CFIndex c
 		be the same as the given binary heap. The new binary heap uses the same
 		callbacks as the binary heap to be copied. If this parameter is
 		not a valid CFBinaryHeap, the behavior is undefined.
-	@result A reference to the new mutable or fixed-mutable binary heap.
+	@result A reference to the new mutable binary heap.
 */
 CF_EXPORT CFBinaryHeapRef	CFBinaryHeapCreateCopy(CFAllocatorRef allocator, CFIndex capacity, CFBinaryHeapRef heap);
 
@@ -258,8 +257,6 @@ CF_EXPORT void		CFBinaryHeapApplyFunction(CFBinaryHeapRef heap, CFBinaryHeapAppl
 	Adds the value to the binary heap.
 	@param heap The binary heap to which the value is to be added. If this parameter is not a
 		valid mutable CFBinaryHeap, the behavior is undefined.
-                If the binary heap is a fixed-capacity binary heap and it
-		is full before this operation, the behavior is undefined.
 	@param value The value to add to the binary heap. The value is retained by
 		the binary heap using the retain callback provided when the binary heap
 		was created. If the value is not of the sort expected by the
@@ -284,9 +281,7 @@ CF_EXPORT void		CFBinaryHeapRemoveMinimumValue(CFBinaryHeapRef heap);
 */
 CF_EXPORT void		CFBinaryHeapRemoveAllValues(CFBinaryHeapRef heap);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFBINARYHEAP__ */
 

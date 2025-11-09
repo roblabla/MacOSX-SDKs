@@ -1,13 +1,11 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 
-#define NSMQA1 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSString, NSArray, NSDictionary, NSPredicate;
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
@@ -15,7 +13,7 @@
 
 @interface NSMetadataQuery : NSObject {
 @private
-    unsigned _flags;
+    NSUInteger _flags;
     NSTimeInterval _interval;
     id _private[11];
     void *_reserved;
@@ -61,18 +59,18 @@
 
 
 // Results are NSMetadataItems, or whatever the delegate replaces that with
-- (unsigned)resultCount;
-- (id)resultAtIndex:(unsigned)idx;
+- (NSUInteger)resultCount;
+- (id)resultAtIndex:(NSUInteger)idx;
 
 - (NSArray *)results;   // this is for K-V Bindings, and causes side-effects on the query
 
-- (unsigned)indexOfResult:(id)result;
+- (NSUInteger)indexOfResult:(id)result;
 
 - (NSDictionary *)valueLists; // values are arrays of NSMetadataQueryAttributeValueTuple
 
 - (NSArray *)groupedResults; // array of NSMetadataQueryResultGroups, for first grouping attribute
 
-- (id)valueOfAttribute:(NSString *)attrName forResultAtIndex:(unsigned)idx;
+- (id)valueOfAttribute:(NSString *)attrName forResultAtIndex:(NSUInteger)idx;
 
 @end
 
@@ -84,17 +82,17 @@
 @end
 
 // There is no info associated with these notifications
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidStartGatheringNotification NSMQA1;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryGatheringProgressNotification NSMQA1;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification NSMQA1;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification NSMQA1;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidStartGatheringNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryGatheringProgressNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute NSMQA1;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 // Scope constants for defined search locations
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope NSMQA1; // user home directory
-FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope NSMQA1; // all local mounted volumes + user home (even if remote)
-FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope NSMQA1; // all user-mounted remote volumes
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // user home directory
+FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // all local mounted volumes + user home (even if remote)
+FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // all user-mounted remote volumes
 
 @interface NSMetadataItem : NSObject {
 @private
@@ -113,20 +111,20 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope NSMQA1; // all us
 @private
     id _attr;
     id _value;
-    unsigned _count;
+    NSUInteger _count;
     void *_reserved;
 }
 
 - (NSString *)attribute;
 - (id)value;
-- (unsigned)count;
+- (NSUInteger)count;
 
 @end
 
 @interface NSMetadataQueryResultGroup : NSObject {
 @private
     id _private[9];
-    unsigned _private2[1];
+    NSUInteger _private2[1];
     void *_reserved;
 }
 
@@ -135,8 +133,8 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope NSMQA1; // all us
 
 - (NSArray *)subgroups; // nil if this is a leaf
 
-- (unsigned)resultCount;
-- (id)resultAtIndex:(unsigned)idx; // uncertain whether this will do anything useful for non-leaf groups
+- (NSUInteger)resultCount;
+- (id)resultAtIndex:(NSUInteger)idx; // uncertain whether this will do anything useful for non-leaf groups
 
 - (NSArray *)results;   // this is for K-V Bindings, and causes side-effects on the query
 

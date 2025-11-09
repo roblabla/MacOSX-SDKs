@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,11 +12,8 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 
 @interface NSUserDefaults : NSObject {
 @private
-    void *_preferences;
-    NSMutableDictionary *_temp;
-    NSString *_reserved;
-    void *_reserved2;
-    void *_reserved3;
+    id _private;
+    void *_reserved[4];
 }
 
 + (NSUserDefaults *)standardUserDefaults;
@@ -34,12 +31,14 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (NSDictionary *)dictionaryForKey:(NSString *)defaultName;
 - (NSData *)dataForKey:(NSString *)defaultName;
 - (NSArray *)stringArrayForKey:(NSString *)defaultName;
-- (int)integerForKey:(NSString *)defaultName; 
-- (float)floatForKey:(NSString *)defaultName; 
-- (BOOL)boolForKey:(NSString *)defaultName;  
+- (NSInteger)integerForKey:(NSString *)defaultName;
+- (float)floatForKey:(NSString *)defaultName;
+- (double)doubleForKey:(NSString *)defaultName;
+- (BOOL)boolForKey:(NSString *)defaultName;
 
-- (void)setInteger:(int)value forKey:(NSString *)defaultName;
+- (void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
 - (void)setFloat:(float)value forKey:(NSString *)defaultName;
+- (void)setDouble:(double)value forKey:(NSString *)defaultName;
 - (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
 
 - (void)registerDefaults:(NSDictionary *)registrationDictionary;
@@ -71,30 +70,32 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 
 FOUNDATION_EXPORT NSString * const NSUserDefaultsDidChangeNotification;
 
-FOUNDATION_EXPORT NSString * const NSWeekDayNameArray;
-FOUNDATION_EXPORT NSString * const NSShortWeekDayNameArray;
-FOUNDATION_EXPORT NSString * const NSMonthNameArray;
-FOUNDATION_EXPORT NSString * const NSShortMonthNameArray;
-FOUNDATION_EXPORT NSString * const NSTimeFormatString;
-FOUNDATION_EXPORT NSString * const NSDateFormatString;
-FOUNDATION_EXPORT NSString * const NSTimeDateFormatString;
-FOUNDATION_EXPORT NSString * const NSShortTimeDateFormatString;
-FOUNDATION_EXPORT NSString * const NSCurrencySymbol;
-FOUNDATION_EXPORT NSString * const NSDecimalSeparator;
-FOUNDATION_EXPORT NSString * const NSThousandsSeparator;
-FOUNDATION_EXPORT NSString * const NSDecimalDigits;
-FOUNDATION_EXPORT NSString * const NSAMPMDesignation;
-FOUNDATION_EXPORT NSString * const NSHourNameDesignations;
-FOUNDATION_EXPORT NSString * const NSYearMonthWeekDesignations;
-FOUNDATION_EXPORT NSString * const NSEarlierTimeDesignations;
-FOUNDATION_EXPORT NSString * const NSLaterTimeDesignations;
-FOUNDATION_EXPORT NSString * const NSThisDayDesignations;
-FOUNDATION_EXPORT NSString * const NSNextDayDesignations;
-FOUNDATION_EXPORT NSString * const NSNextNextDayDesignations;
-FOUNDATION_EXPORT NSString * const NSPriorDayDesignations;
-FOUNDATION_EXPORT NSString * const NSDateTimeOrdering;
-FOUNDATION_EXPORT NSString * const NSInternationalCurrencyString;
-FOUNDATION_EXPORT NSString * const NSShortDateFormatString;
-FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString;
-FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString;
+/* The following keys and their values are deprecated in Mac OS X 10.5 "Leopard". Developers should use NSLocale, NSDateFormatter and NSNumberFormatter to retrieve the values formerly returned by these keys.
+ */
+FOUNDATION_EXPORT NSString * const NSWeekDayNameArray DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSShortWeekDayNameArray DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMonthNameArray DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSShortMonthNameArray DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSTimeFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSDateFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSTimeDateFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSShortTimeDateFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSCurrencySymbol DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSDecimalSeparator DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSThousandsSeparator DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSDecimalDigits DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSAMPMDesignation DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSHourNameDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSYearMonthWeekDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSEarlierTimeDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSLaterTimeDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSThisDayDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSNextDayDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSNextNextDayDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSPriorDayDesignations DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSDateTimeOrdering DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSInternationalCurrencyString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSShortDateFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 

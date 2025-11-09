@@ -1,5 +1,5 @@
 /*	NSValue.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -48,13 +48,18 @@
 - (float)floatValue;
 - (double)doubleValue;
 - (BOOL)boolValue;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSInteger)integerValue;
+- (NSUInteger)unsignedIntegerValue;
+#endif
+
 - (NSString *)stringValue;
 
 - (NSComparisonResult)compare:(NSNumber *)otherNumber;
 
 - (BOOL)isEqualToNumber:(NSNumber *)number;
 
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale;
+- (NSString *)descriptionWithLocale:(id)locale;
 
 @end
 
@@ -73,6 +78,10 @@
 - (id)initWithFloat:(float)value;
 - (id)initWithDouble:(double)value;
 - (id)initWithBool:(BOOL)value;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)initWithInteger:(NSInteger)value;
+- (id)initWithUnsignedInteger:(NSUInteger)value;
+#endif
 
 + (NSNumber *)numberWithChar:(char)value;
 + (NSNumber *)numberWithUnsignedChar:(unsigned char)value;
@@ -87,6 +96,10 @@
 + (NSNumber *)numberWithFloat:(float)value;
 + (NSNumber *)numberWithDouble:(double)value;
 + (NSNumber *)numberWithBool:(BOOL)value;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (NSNumber *)numberWithInteger:(NSInteger)value;
++ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)value;
+#endif
 
 @end
 

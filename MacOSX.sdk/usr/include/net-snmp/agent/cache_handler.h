@@ -43,9 +43,10 @@ extern          "C" {
         void             *magic;
 
        /*
-        * hint from the cache helper
+        * hint from the cache helper. contains the standard
+        * handler arguments.
         */
-       void              *cache_hint;
+       netsnmp_handler_args          *cache_hint;
 
         /*
 	 * For SNMP-management of the data caches
@@ -53,6 +54,7 @@ extern          "C" {
 	netsnmp_cache *next, *prev;
         oid *rootoid;
         int  rootoid_len;
+
     };
 
 
@@ -83,6 +85,8 @@ extern          "C" {
     netsnmp_cache_create(int timeout, NetsnmpCacheLoad * load_hook,
                          NetsnmpCacheFree * free_hook,
                          oid * rootoid, int rootoid_len);
+    int netsnmp_cache_free(netsnmp_cache *cache);
+
     netsnmp_mib_handler *
     netsnmp_cache_handler_get(netsnmp_cache* cache);
 

@@ -13,6 +13,7 @@
 
 /* Phase I: negotiating the sync mode. */
 + (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date;
+
 /* Returns immediately and invokes a target callback when the session can start or if the session.
    cannot be started. The target is invoked with the selector and two arguments, the ISyncClient
    and the ISyncSession. The selector should be of this form:
@@ -21,6 +22,38 @@
 */
 + (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector;
 + (void)cancelPreviousBeginSessionWithClient:(ISyncClient *)client;
+
+/* If a client is using sync anchors, when starting a sync session, the client passes in the previous
+   sync anchors, one per entity. The anchors dictionary is a map from the entity name to the sync anchor
+   value, and the values are the anchors as last set in the previous sync's calls to the methods
+   clientFinishedPushingChangesWithNextAnchors or clientCommittedAcceptedChanges. As a convenience, the
+   user may specify a mapping for a single entity name for some representative entity of a
+   dataclass. However, if more than one mapping per dataclass is provided, then mappings are required
+   for every entity name being synchronized. The lack of a mapping in this case will force the entity
+   without a mapping to be refreshed.
+    
+   The values that are passed in are compared to the previous values. If an anchor does not match for
+   an entity, then the method shouldPushAllRecordsForEntityName will return YES for this entity.
+    
+   If there is no value for a entity's anchor, then the entity can either be left out of the dictionary,
+   or even better, the value [NSNull null] can be can be put in the dictionary for that entity name. If
+   there is no value the client will be refreshed and the sync will be treated as if it is the first
+   sync done by the client. The null value (or lack of value) for an anchor should be used on the
+   client's first sync (when there would be no value in the client's data store), or when the data store
+   is cleared or lost.
+
+   nil is an acceptable value for the dictionary, and will always result in a full refresh sync for all
+   the entities specified in the sync.
+
+   If a client is using sync anchors, it should also call the method
+   clientFinishedPushingChangesWithNextAnchors after pushing changes, and call the sync anchor variant
+   of clientCommittedAcceptedChanges as outlined below. Failure to make these calls will likely result
+   in the next sync of these entities being a refresh sync. Finally, an exception will be raised if
+   these methods are called on a session that was created using the earlier API that did not include a
+   lastAnchors argument.
+*/
++ (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* The default is to assume that a client will be fast syncing all the entities specified when the
    session was created.  Telling the engine that a client was reset is tantamount to saying "forget
@@ -110,6 +143,13 @@
 */
 - (void)clientLostRecordWithIdentifier:(NSString *)recordId shouldReplaceOnNextSync:(BOOL)flag;
 
+/* If a client is using Sync Anchors, after pushing all changes, a client must create a new sync anchor
+   string for each entity name that was synced, save the anchors in the client datastore, and pass the
+   anchors to clientFinishedPushingChangesWithNextAnchors. As a convenience a single representative
+   entity name to anchor mapping may be used for all of the entities in a dataclass. If the client is
+   pulling the truth, the anchor is specified when calling clientCommittedAcceptedChanges.
+*/
+- (void)clientFinishedPushingChangesWithNextAnchors:(NSDictionary /* string entity  name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Phase III: pulling changes for the client.  The entities that you specify here must be a subset of
    the entities specified when the session was created. */
@@ -133,6 +173,15 @@
 */
 - (void)clientRefusedChangesForRecordWithIdentifier:(NSString *)recordId;
 - (void)clientCommittedAcceptedChanges;
+/* If a client is using sync anchors, after accepting pulled changes, a client must create a new sync anchor
+   string for each entity that was synced, save the anchors in the client datastore, and pass the anchors to
+   the call to clientCommittedAcceptedChangesWithNextAnchors. As a convenience a single representative entity
+   name to anchor mapping may be used for all of the entities in a dataclass. If a client is pushing the
+   truth, this method won't be called, but that is fine, as the sync anchors passed into the method
+   clientFinishedPushingChangesWithNextAnchors will be used.
+*/
+- (void)clientCommittedAcceptedChangesWithNextAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 - (void)clientChangedRecordIdentifiers:(NSDictionary *)oldToNew;
 
 - (BOOL)isCancelled;

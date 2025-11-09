@@ -1,11 +1,12 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2005, Apple Computer, Inc.
+        Copyright (c) 2000-2007, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <OpenGL/gl.h>
 
 @class NSData, NSView, NSScreen;
 
@@ -28,13 +29,13 @@ typedef enum {
 /*
 ** Library global options.
 */
-extern void NSOpenGLSetOption(NSOpenGLGlobalOption pname, long param);
-extern void NSOpenGLGetOption(NSOpenGLGlobalOption pname, long *param);
+extern void NSOpenGLSetOption(NSOpenGLGlobalOption pname, GLint param);
+extern void NSOpenGLGetOption(NSOpenGLGlobalOption pname, GLint *param);
 
 /*
 ** Library version.
 */
-extern void NSOpenGLGetVersion(long *major, long *minor);
+extern void NSOpenGLGetVersion(GLint *major, GLint *minor);
 
 
 /*********************
@@ -45,7 +46,7 @@ extern void NSOpenGLGetVersion(long *major, long *minor);
 ** Attribute names for [NSOpenGLPixelFormat initWithAttributes]
 ** and [NSOpenGLPixelFormat getValues:forAttribute:forVirtualScreen].
 */
-typedef enum {
+enum {
 	NSOpenGLPFAAllRenderers       =   1,	/* choose from all available renderers          */
 	NSOpenGLPFADoubleBuffer       =   5,	/* choose a double buffered pixel format        */
 	NSOpenGLPFAStereo             =   6,	/* stereo buffering supported                   */
@@ -81,8 +82,12 @@ typedef enum {
 	NSOpenGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	NSOpenGLPFAScreenMask         =  84,	/* bit mask of supported physical screens       */
 	NSOpenGLPFAPixelBuffer        =  90,	/* can be used to render to a pbuffer           */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+	NSOpenGLPFAAllowOfflineRenderers = 96,  /* allow use of offline renderers               */
+#endif
 	NSOpenGLPFAVirtualScreenCount = 128	/* number of virtual screens in this format     */
-} NSOpenGLPixelFormatAttribute;
+};
+typedef  uint32_t NSOpenGLPixelFormatAttribute;
 
 
 /*
@@ -95,19 +100,19 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 @private
     NSOpenGLPixelFormatAuxiliary* _pixelFormatAuxiliary;
     NSData*                       _pixelAttributes;
-    unsigned long                 _reserved1;
-    unsigned long                 _reserved2;
-    unsigned long                 _reserved3;
+    NSInteger                         _reserved1;
+    NSInteger                         _reserved2;
+    NSInteger                         _reserved3;
 }
 
-- (id)initWithAttributes:(NSOpenGLPixelFormatAttribute*)attribs;
+- (id)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
 - (id)initWithData:(NSData*)attribs;
 
 - (NSData*)attributes;
 - (void)setAttributes:(NSData*)attribs;
 
-- (void)getValues:(long*)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(int)screen;
-- (int)numberOfVirtualScreens;
+- (void)getValues:(GLint *)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(GLint)screen;
+- (GLint)numberOfVirtualScreens;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void *)CGLPixelFormatObj;
@@ -136,12 +141,12 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 ** maxLevel specifies the desired maximum mipmap level, starting with 0.  Must be 0 for
 ** TEXTURE_RECTANGLE targets.
 */
-- (id)initWithTextureTarget:(unsigned long/*GLenum*/)target textureInternalFormat:(unsigned long/*GLenum*/)format textureMaxMipMapLevel:(long/*GLenum*/)maxLevel pixelsWide:(int)pixelsWide pixelsHigh:(int)pixelsHigh;
-- (int)pixelsWide;
-- (int)pixelsHigh;
-- (unsigned long/*GLenum*/)textureTarget;
-- (unsigned long/*GLenum*/)textureInternalFormat;
-- (long/*GLint*/)textureMaxMipMapLevel;
+- (id)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh;
+- (GLsizei)pixelsWide;
+- (GLsizei)pixelsHigh;
+- (GLenum)textureTarget;
+- (GLenum)textureInternalFormat;
+- (GLint)textureMaxMipMapLevel;
 @end
 #endif
 
@@ -185,7 +190,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 - (void)setView:(NSView *)view;
 - (NSView *)view;
 - (void)setFullScreen;
-- (void)setOffScreen:(void *)baseaddr width:(long)width height:(long)height rowbytes:(long)rowbytes;
+- (void)setOffScreen:(void *)baseaddr width:(GLsizei)width height:(GLsizei)height rowbytes:(GLint)rowbytes;
 - (void)clearDrawable;
 - (void)update;
 
@@ -198,20 +203,20 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 + (NSOpenGLContext *)currentContext;
 
 /* Copy attributes from another context */
-- (void)copyAttributesFromContext:(NSOpenGLContext *)context withMask:(unsigned long)mask;
+- (void)copyAttributesFromContext:(NSOpenGLContext *)context withMask:(GLbitfield)mask;
 
 /* Context Parameter handling */
-- (void)setValues:(const long *)vals forParameter:(NSOpenGLContextParameter)param;
-- (void)getValues:(long *)vals forParameter:(NSOpenGLContextParameter)param;
+- (void)setValues:(const GLint *)vals forParameter:(NSOpenGLContextParameter)param;
+- (void)getValues:(GLint *)vals forParameter:(NSOpenGLContextParameter)param;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 /* virtual screens */
-- (void)setCurrentVirtualScreen:(int)screen;
-- (int)currentVirtualScreen;
+- (void)setCurrentVirtualScreen:(GLint)screen;
+- (GLint)currentVirtualScreen;
 
 /* creating textures */
-- (void)createTexture:(unsigned long/*GLenum*/)target fromView:(NSView*)view internalFormat:(unsigned long/*GLenum*/)format;
+- (void)createTexture:(GLenum)target fromView:(NSView *)view internalFormat:(GLenum)format;
 
 #endif
 
@@ -227,16 +232,16 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 ** If applicable, the virtual screen should be set to the same value as the current virtual screen you are using
 ** to render on-screen with.
 */
-- (void)setPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer cubeMapFace:(unsigned long/*GLenum*/)face mipMapLevel:(long/*GLint*/)level currentVirtualScreen:(int)screen;
+- (void)setPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer cubeMapFace:(GLenum)face mipMapLevel:(GLint)level currentVirtualScreen:(GLint)screen;
 - (NSOpenGLPixelBuffer *)pixelBuffer;
-- (unsigned long/*GLenum*/)pixelBufferCubeMapFace;
-- (long/*GLint*/)pixelBufferMipMapLevel;
+- (GLenum)pixelBufferCubeMapFace;
+- (GLint)pixelBufferMipMapLevel;
 /*
 ** This call is a mirror of CGLTexImagePBuffer.  This essentially "binds" the given pixel buffer's image data
 ** to the currently bound texture object.   Source specifies which of the PBuffer's color buffers should be used,
 ** and should be one of GL_FRONT, GL_BACK, GL_AUX0, etc.
 */
-- (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(unsigned long/*GLenum*/)source;
+- (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(GLenum)source;
 #endif
 
 @end

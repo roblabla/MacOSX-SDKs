@@ -1,12 +1,18 @@
 /*	
     AMBundleAction.h
-    Copyright (C) 2004 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2004-2006 Apple Computer, Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/Foundation.h>
 #import <Automator/AMAction.h>
+
+#ifndef IBOutlet
+#define IBOutlet
+#endif
+
+@class NSView;
 
 // AMBundleAction
 // =============

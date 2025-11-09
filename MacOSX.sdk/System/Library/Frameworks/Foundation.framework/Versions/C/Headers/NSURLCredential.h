@@ -1,6 +1,6 @@
 /*	
     NSURLCredential.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -22,11 +22,12 @@
     @constant NSURLCredentialPersistencePermanent This credential will be stored permanently and shared with other applications.
 */
 
-typedef enum {
+enum {
     NSURLCredentialPersistenceNone,
     NSURLCredentialPersistenceForSession,
     NSURLCredentialPersistencePermanent
-} NSURLCredentialPersistence;
+};
+typedef NSUInteger NSURLCredentialPersistence;
 
 @class NSURLCredentialInternal;
 

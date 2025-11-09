@@ -90,11 +90,10 @@ typedef UInt32							AudioConverterPropertyID;
 					data that can be supplied to AudioConverterFillBuffer or as the output to
 					AudioConverterConvertBuffer
 	@constant	kAudioConverterPropertyMaximumInputBufferSize
-					a UInt32 that indicates the size in bytes of the largest buffer of input
-					data that will be requested from the AudioConverterInputProc. This is mostly
-					useful for variable bit rate compressed data. This will be equal to
-					0xFFFFFFFF if the maximum value depends on what is requested from the
-					output, which is usually the case for constant bit rate formats.
+					DEPRECATED. The AudioConverter input proc may be passed any number of packets of data.
+					If fewer are packets are returned than required, then the input proc will be called again.
+					If more packets are passed than required, they will remain in the client's buffer and be 
+					consumed as needed.
 	@constant	kAudioConverterPropertyMaximumInputPacketSize
 					a UInt32 that indicates the size in bytes of the largest single packet of
 					data in the input format. This is mostly useful for variable bit rate
@@ -120,13 +119,16 @@ typedef UInt32							AudioConverterPropertyID;
 					The value of this property varies from format to format and is considered
 					private to the format. It is treated as a buffer of untyped data.
 	@constant	kAudioConverterSampleRateConverterAlgorithm
-					DEPRECATED: please use kAudioConverterSampleRateConverterQuality instead
-
-					An OSType that specifies the sample rate converter to use (as defined in
-					AudioUnit/AudioUnitProperties.h -- for now only Apple SRC's can be used)
+					DEPRECATED: please use kAudioConverterSampleRateConverterComplexity instead
+	@constant	kAudioConverterSampleRateConverterComplexity
+					An OSType that specifies the sample rate converter algorithm to use (as defined in
+					AudioUnit/AudioUnitProperties.h)
 	@constant	kAudioConverterSampleRateConverterQuality
 					A UInt32 that specifies rendering quality of the sample rate converter (see
 					enum constants below)
+	@constant	kAudioConverterSampleRateConverterInitialPhase
+					A Float64 with value 0.0 <= x < 1.0 giving the initial subsample position of the 
+					sample rate converter.
 	@constant	kAudioConverterCodecQuality
 					A UInt32 that specifies rendering quality of a codec (see enum constants
 					below)
@@ -165,7 +167,7 @@ typedef UInt32							AudioConverterPropertyID;
 					back to the converter for decompression at a later time.
 	@constant	kAudioConverterEncodeBitRate
 					A UInt32 containing the number of bits per second to aim for when encoding
-					data. This property is only relevant to encoders.
+					data. Some decoders will also allow you to get this property to discover the bit rate.
 	@constant	kAudioConverterEncodeAdjustableSampleRate
 					For encoders where the AudioConverter was created with an output sample rate
 					of zero, and the codec can do rate conversion on its input, this provides a
@@ -205,6 +207,13 @@ typedef UInt32							AudioConverterPropertyID;
 					converter usually tries to preserve as many as possible, but a lossless
 					encoder will do poorly if more bits are supplied than are desired in the
 					output.
+	@constant	kAudioConverterPropertyFormatList
+					An array of AudioFormatListItem structs describing all the data formats produced by the
+					encoder end of the AudioConverter. If the ioPropertyDataSize parameter indicates that
+					outPropertyData is sizeof(AudioFormatListItem), then only the best format is returned.
+					This property may be used for example to discover all the data formats produced by the AAC_HE2
+					(AAC High Efficiency vers. 2) encoder.
+
 */
 enum // typedef UInt32 AudioConverterPropertyID
 {
@@ -218,7 +227,9 @@ enum // typedef UInt32 AudioConverterPropertyID
 	kAudioConverterPropertyInputCodecParameters			= 'icdp',
 	kAudioConverterPropertyOutputCodecParameters		= 'ocdp',
 	kAudioConverterSampleRateConverterAlgorithm			= 'srci',
+	kAudioConverterSampleRateConverterComplexity		= 'srca',
 	kAudioConverterSampleRateConverterQuality			= 'srcq',
+	kAudioConverterSampleRateConverterInitialPhase		= 'srcp',
 	kAudioConverterCodecQuality							= 'cdqu',
 	kAudioConverterPrimeMethod							= 'prmm',
 	kAudioConverterPrimeInfo							= 'prim',
@@ -237,7 +248,8 @@ enum // typedef UInt32 AudioConverterPropertyID
 	kAudioConverterCurrentOutputStreamDescription		= 'acod',
 	kAudioConverterCurrentInputStreamDescription		= 'acid',
 	kAudioConverterPropertySettings						= 'acps',
-	kAudioConverterPropertyBitDepthHint					= 'acbd'
+	kAudioConverterPropertyBitDepthHint					= 'acbd',
+	kAudioConverterPropertyFormatList					= 'flst'
 };
 
 /*!
@@ -258,6 +270,22 @@ enum
 	kAudioConverterQuality_Medium							= 0x40,
 	kAudioConverterQuality_Low								= 0x20,
 	kAudioConverterQuality_Min								= 0
+};
+
+
+/*!
+	@enum			Sample Rate Converter Complexity
+	@constant		kAudioConverterSampleRateConverterComplexity_Linear
+	@discussion			Linear interpolation. lowest quality, cheapest.
+	@constant		kAudioConverterSampleRateConverterComplexity_Normal
+	@discussion			Normal quality sample rate conversion.
+	@constant		kAudioConverterSampleRateConverterComplexity_Mastering
+	@discussion			Mastering quality sample rate conversion. More expensive.
+*/
+enum {
+	kAudioConverterSampleRateConverterComplexity_Linear				= 'line',	// linear interpolation
+	kAudioConverterSampleRateConverterComplexity_Normal				= 'norm',	// the default
+	kAudioConverterSampleRateConverterComplexity_Mastering			= 'bats'	// higher quality, more expensive
 };
 
 
@@ -598,16 +626,17 @@ typedef OSStatus
 				Produces a buffer of output data from an AudioConverter. The supplied input
 				callback function is called whenever necessary.
 				
-				<b>NOTE:</b> AudioConverterFillBuffer is limited to simpler conversions
-				that do not involve multiple deinterleaved buffers or packetized
-				formats. Use AudioConverterFillComplexBuffer for those cases.
+				<b>NOTE:</b> This API is now deprecated, 
+				use AudioConverterFillComplexBuffer instead.
 */
 extern OSStatus
 AudioConverterFillBuffer(	AudioConverterRef				inAudioConverter,
 							AudioConverterInputDataProc		inInputDataProc,
 							void*							inInputDataProcUserData,
 							UInt32*							ioOutputDataSize,
-							void*							outOutputData)		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+							void*							outOutputData)
+							
+						AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //-----------------------------------------------------------------------------
 /*!

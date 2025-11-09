@@ -1,1 +1,0 @@
-../../../System/Library/Frameworks/CoreServices.framework/Frameworks/WebServicesCore.framework/Headers/WSTypes.h

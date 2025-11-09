@@ -1,22 +1,24 @@
 /*	NSNotificationQueue.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSNotification, NSNotificationCenter, NSArray;
 
-typedef enum {
+enum {
     NSPostWhenIdle = 1,
     NSPostASAP = 2,
     NSPostNow = 3
-} NSPostingStyle;
+};
+typedef NSUInteger NSPostingStyle;
 
-typedef enum {
+enum {
     NSNotificationNoCoalescing = 0,
     NSNotificationCoalescingOnName = 1,
     NSNotificationCoalescingOnSender = 2
-} NSNotificationCoalescing;
+};
+typedef NSUInteger NSNotificationCoalescing;
 
 @interface NSNotificationQueue : NSObject {
 @private
@@ -27,14 +29,14 @@ typedef enum {
     id		_idleObs;
 }
 
-+ (NSNotificationQueue *)defaultQueue;
++ (id)defaultQueue;
 
 - (id)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter;
 
 - (void)enqueueNotification:(NSNotification *)notification postingStyle:(NSPostingStyle)postingStyle;
-- (void)enqueueNotification:(NSNotification *)notification postingStyle:(NSPostingStyle)postingStyle coalesceMask:(unsigned)coalesceMask forModes:(NSArray *)modes;
+- (void)enqueueNotification:(NSNotification *)notification postingStyle:(NSPostingStyle)postingStyle coalesceMask:(NSUInteger)coalesceMask forModes:(NSArray *)modes;
 
-- (void)dequeueNotificationsMatching:(NSNotification *)notification coalesceMask:(unsigned)coalesceMask;
+- (void)dequeueNotificationsMatching:(NSNotification *)notification coalesceMask:(NSUInteger)coalesceMask;
 
 @end
 

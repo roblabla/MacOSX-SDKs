@@ -1,5 +1,5 @@
 /*	CFURLAccess.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURLACCESS__)
@@ -12,9 +12,7 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFURL.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /* Attempts to read the data and properties for the given URL.  If
 only interested in one of the resourceData and properties, pass NULL
@@ -63,7 +61,7 @@ CF_EXPORT
 CFTypeRef CFURLCreatePropertyFromResource(CFAllocatorRef alloc, CFURLRef url, CFStringRef property, SInt32 *errorCode);
 
 /* Common error codes; this list is expected to grow */
-typedef enum {
+enum {
     kCFURLUnknownError = -10,
     kCFURLUnknownSchemeError = -11,
     kCFURLResourceNotFoundError = -12,
@@ -73,7 +71,8 @@ typedef enum {
     kCFURLUnknownPropertyKeyError = -16,
     kCFURLPropertyKeyUnavailableError = -17,
     kCFURLTimeoutError = -18
-} CFURLError;
+};
+typedef CFIndex CFURLError;
 
 /* Property keys */
 
@@ -105,9 +104,7 @@ const CFStringRef kCFURLHTTPStatusLine;
 /* The value of kCFURLHTTPStatusCode is a CFNumber */
 /* The value of kCFURLHTTPStatusLine is a CFString */
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
-#endif /* !__COREFOUNDATION_CFURLACCESS__ */
+#endif /* ! __COREFOUNDATION_CFURLACCESS__ */
 

@@ -78,7 +78,7 @@ void vvexp (double * /* y */, const double * /* x */, const int * /* n */)   AVA
 
 /* Set y[i] to the base-e exponential of x , minus 1 accurately even
    for very small values of x[i], for i=0,..,n-1 */
-void vvexpm1f (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
+void vvexpm1f (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
 /* No double-precision version currently available */
 
 /* Set y[i] to the natural logarithm of x[i], for i=0,..,n-1 */
@@ -91,17 +91,17 @@ void vvlog10 (double * /* y */, const double * /* x */, const int * /* n */)   A
 
 /* Set y[i] to the value of log(1+x[i]) accurately even for very small
    values of x[i], for i=0,..,n-1 */
-void vvlog1pf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
+void vvlog1pf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
 /* No double-precision version currently available */
 
 /* Set y[i] to the the exponent of x[i], represented as a floating-
      point number, for i=0,..,n-1 */
-void vvlogbf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
+void vvlogbf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
 /* No double-precision version currently available */
 
 /* Set y[i] to the absolute value of a floating-point number x[i], for
      i=0,..,n-1 */
-void vvfabf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
+void vvfabf (float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
 /* No double-precision version currently available */
 
 /* Set z[i] to x[i] ** y[i], for i=0,..,n-1 */
@@ -187,23 +187,23 @@ void vvfloor (double * /* y */, const double * /* x */, const int * /* n */)   A
 
 /* Set z[i] to the floating-point remainder of x[i]/y[i], for
    i=0,..,n-1 */
-void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* No double-precision version currently available */
 
 /* Set z[i] to the value r such that r = x[i] - N*y[i], where N is the
      integer nearest the exact value of x[i]/y[i].  If there are two
      integers closest to x[i]/y[i], N shall be the even one. If r is
      zero, it is given the same sign as x[i], for i=0,..,n-1 */
-void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* No double-precision version currently available */
 
 /* Set z[i] to x[i] with its sign changed to y[i]'s, for i=0,..,n-1 */
-void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* No double-precision version currently available */
 
 /* Set z[i] to the next machine representable number from x[i] in
      direction y[i], for i=0,..,n-1 */
-void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /* No double-precision version currently available */
 
 

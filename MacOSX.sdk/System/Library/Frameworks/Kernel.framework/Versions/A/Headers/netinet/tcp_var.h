@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1982, 1986, 1993, 1994, 1995
@@ -62,17 +68,30 @@
 #include <netinet/in_pcb.h>
 #include <netinet/tcp_timer.h>
 
+#if defined(__LP64__)
+#define _TCPCB_PTR(x)			u_int32_t
+#define _TCPCB_LIST_HEAD(name, type)	\
+struct name {				\
+	u_int32_t	lh_first;	\
+};
+#else
+#define _TCPCB_PTR(x)			x
+#define _TCPCB_LIST_HEAD(name, type)	LIST_HEAD(name, type)
+#endif
+
+#define TCP_RETRANSHZ	    10		/* tcp retrans timer (100ms) per hz */		
+
 struct tseg_qent;
-LIST_HEAD(tsegqe_head, tseg_qent);
+_TCPCB_LIST_HEAD(tsegqe_head, tseg_qent);
 
 struct tcpcb {
 	struct	tsegqe_head t_segq;
 	int	t_dupacks;		/* consecutive dup acks recd */
-	struct	tcptemp	*unused;	/* unused now: was t_template */
+	u_int32_t unused;		/* unused now: was t_template */
 
 	int	t_timer[TCPT_NTIMERS];	/* tcp timers */
 
-	struct	inpcb *t_inpcb;		/* back pointer to internet pcb */
+	_TCPCB_PTR(struct inpcb *) t_inpcb;	/* back pointer to internet pcb */
 	int	t_state;		/* state of this connection */
 	u_int	t_flags;
 #define	TF_ACKNOW	0x00001		/* ack peer immediately */
@@ -112,19 +131,19 @@ struct tcpcb {
 
 	tcp_seq	rcv_nxt;		/* receive next */
 	tcp_seq	rcv_adv;		/* advertised window */
-	u_long	rcv_wnd;		/* receive window */
+	u_int32_t rcv_wnd;		/* receive window */
 	tcp_seq	rcv_up;			/* receive urgent pointer */
 
-	u_long	snd_wnd;		/* send window */
-	u_long	snd_cwnd;		/* congestion-controlled window */
-	u_long	snd_ssthresh;		/* snd_cwnd size threshold for
+	u_int32_t snd_wnd;		/* send window */
+	u_int32_t snd_cwnd;		/* congestion-controlled window */
+	u_int32_t snd_ssthresh;		/* snd_cwnd size threshold for
 					 * for slow start exponential to
 					 * linear switch
 					 */
 	u_int	t_maxopd;		/* mss plus options */
 
-	u_long	t_rcvtime;		/* inactivity time */
-	u_long	t_starttime;		/* time connection was established */
+	u_int32_t t_rcvtime;		/* inactivity time */
+	u_int32_t t_starttime;		/* time connection was established */
 	int	t_rtttime;		/* round trip time */
 	tcp_seq	t_rtseq;		/* sequence number being timed */
 
@@ -135,8 +154,8 @@ struct tcpcb {
 
 	int	t_rxtshift;		/* log(2) of rexmt exp. backoff */
 	u_int	t_rttmin;		/* minimum rtt allowed */
-	u_long	t_rttupdated;		/* number of times rtt sampled */
-	u_long	max_sndwnd;		/* largest window peer has offered */
+	u_int32_t t_rttupdated;		/* number of times rtt sampled */
+	u_int32_t max_sndwnd;		/* largest window peer has offered */
 
 	int	t_softerror;		/* possible error not yet reported */
 /* out-of-band data */
@@ -149,18 +168,18 @@ struct tcpcb {
 	u_char	rcv_scale;		/* window scaling for recv window */
 	u_char	request_r_scale;	/* pending window scaling */
 	u_char	requested_s_scale;
-	u_long	ts_recent;		/* timestamp echo data */
+	u_int32_t ts_recent;		/* timestamp echo data */
 
-	u_long	ts_recent_age;		/* when last updated */
+	u_int32_t ts_recent_age;	/* when last updated */
 	tcp_seq	last_ack_sent;
 /* RFC 1644 variables */
 	tcp_cc	cc_send;		/* send connection count */
 	tcp_cc	cc_recv;		/* receive connection count */
-	tcp_seq	snd_recover;	/* for use in fast recovery */
+	tcp_seq	snd_recover;		/* for use in fast recovery */
 /* experimental */
-	u_long	snd_cwnd_prev;		/* cwnd prior to retransmit */
-	u_long	snd_ssthresh_prev;	/* ssthresh prior to retransmit */
-	u_long	t_badrxtwin;		/* window for retransmit recovery */
+	u_int32_t snd_cwnd_prev;	/* cwnd prior to retransmit */
+	u_int32_t snd_ssthresh_prev;	/* ssthresh prior to retransmit */
+	u_int32_t t_badrxtwin;		/* window for retransmit recovery */
 };
 
 /*
@@ -169,79 +188,108 @@ struct tcpcb {
  * but that's inconvenient at the moment.
  */
 struct	tcpstat {
-	u_long	tcps_connattempt;	/* connections initiated */
-	u_long	tcps_accepts;		/* connections accepted */
-	u_long	tcps_connects;		/* connections established */
-	u_long	tcps_drops;		/* connections dropped */
-	u_long	tcps_conndrops;		/* embryonic connections dropped */
-	u_long	tcps_closed;		/* conn. closed (includes drops) */
-	u_long	tcps_segstimed;		/* segs where we tried to get rtt */
-	u_long	tcps_rttupdated;	/* times we succeeded */
-	u_long	tcps_delack;		/* delayed acks sent */
-	u_long	tcps_timeoutdrop;	/* conn. dropped in rxmt timeout */
-	u_long	tcps_rexmttimeo;	/* retransmit timeouts */
-	u_long	tcps_persisttimeo;	/* persist timeouts */
-	u_long	tcps_keeptimeo;		/* keepalive timeouts */
-	u_long	tcps_keepprobe;		/* keepalive probes sent */
-	u_long	tcps_keepdrops;		/* connections dropped in keepalive */
+	u_int32_t	tcps_connattempt;	/* connections initiated */
+	u_int32_t	tcps_accepts;		/* connections accepted */
+	u_int32_t	tcps_connects;		/* connections established */
+	u_int32_t	tcps_drops;		/* connections dropped */
+	u_int32_t	tcps_conndrops;		/* embryonic connections dropped */
+	u_int32_t	tcps_closed;		/* conn. closed (includes drops) */
+	u_int32_t	tcps_segstimed;		/* segs where we tried to get rtt */
+	u_int32_t	tcps_rttupdated;	/* times we succeeded */
+	u_int32_t	tcps_delack;		/* delayed acks sent */
+	u_int32_t	tcps_timeoutdrop;	/* conn. dropped in rxmt timeout */
+	u_int32_t	tcps_rexmttimeo;	/* retransmit timeouts */
+	u_int32_t	tcps_persisttimeo;	/* persist timeouts */
+	u_int32_t	tcps_keeptimeo;		/* keepalive timeouts */
+	u_int32_t	tcps_keepprobe;		/* keepalive probes sent */
+	u_int32_t	tcps_keepdrops;		/* connections dropped in keepalive */
 
-	u_long	tcps_sndtotal;		/* total packets sent */
-	u_long	tcps_sndpack;		/* data packets sent */
-	u_long	tcps_sndbyte;		/* data bytes sent */
-	u_long	tcps_sndrexmitpack;	/* data packets retransmitted */
-	u_long	tcps_sndrexmitbyte;	/* data bytes retransmitted */
-	u_long	tcps_sndacks;		/* ack-only packets sent */
-	u_long	tcps_sndprobe;		/* window probes sent */
-	u_long	tcps_sndurg;		/* packets sent with URG only */
-	u_long	tcps_sndwinup;		/* window update-only packets sent */
-	u_long	tcps_sndctrl;		/* control (SYN|FIN|RST) packets sent */
+	u_int32_t	tcps_sndtotal;		/* total packets sent */
+	u_int32_t	tcps_sndpack;		/* data packets sent */
+	u_int32_t	tcps_sndbyte;		/* data bytes sent */
+	u_int32_t	tcps_sndrexmitpack;	/* data packets retransmitted */
+	u_int32_t	tcps_sndrexmitbyte;	/* data bytes retransmitted */
+	u_int32_t	tcps_sndacks;		/* ack-only packets sent */
+	u_int32_t	tcps_sndprobe;		/* window probes sent */
+	u_int32_t	tcps_sndurg;		/* packets sent with URG only */
+	u_int32_t	tcps_sndwinup;		/* window update-only packets sent */
+	u_int32_t	tcps_sndctrl;		/* control (SYN|FIN|RST) packets sent */
 
-	u_long	tcps_rcvtotal;		/* total packets received */
-	u_long	tcps_rcvpack;		/* packets received in sequence */
-	u_long	tcps_rcvbyte;		/* bytes received in sequence */
-	u_long	tcps_rcvbadsum;		/* packets received with ccksum errs */
-	u_long	tcps_rcvbadoff;		/* packets received with bad offset */
-	u_long	tcps_rcvmemdrop;	/* packets dropped for lack of memory */
-	u_long	tcps_rcvshort;		/* packets received too short */
-	u_long	tcps_rcvduppack;	/* duplicate-only packets received */
-	u_long	tcps_rcvdupbyte;	/* duplicate-only bytes received */
-	u_long	tcps_rcvpartduppack;	/* packets with some duplicate data */
-	u_long	tcps_rcvpartdupbyte;	/* dup. bytes in part-dup. packets */
-	u_long	tcps_rcvoopack;		/* out-of-order packets received */
-	u_long	tcps_rcvoobyte;		/* out-of-order bytes received */
-	u_long	tcps_rcvpackafterwin;	/* packets with data after window */
-	u_long	tcps_rcvbyteafterwin;	/* bytes rcvd after window */
-	u_long	tcps_rcvafterclose;	/* packets rcvd after "close" */
-	u_long	tcps_rcvwinprobe;	/* rcvd window probe packets */
-	u_long	tcps_rcvdupack;		/* rcvd duplicate acks */
-	u_long	tcps_rcvacktoomuch;	/* rcvd acks for unsent data */
-	u_long	tcps_rcvackpack;	/* rcvd ack packets */
-	u_long	tcps_rcvackbyte;	/* bytes acked by rcvd acks */
-	u_long	tcps_rcvwinupd;		/* rcvd window update packets */
-	u_long	tcps_pawsdrop;		/* segments dropped due to PAWS */
-	u_long	tcps_predack;		/* times hdr predict ok for acks */
-	u_long	tcps_preddat;		/* times hdr predict ok for data pkts */
-	u_long	tcps_pcbcachemiss;
-	u_long	tcps_cachedrtt;		/* times cached RTT in route updated */
-	u_long	tcps_cachedrttvar;	/* times cached rttvar updated */
-	u_long	tcps_cachedssthresh;	/* times cached ssthresh updated */
-	u_long	tcps_usedrtt;		/* times RTT initialized from route */
-	u_long	tcps_usedrttvar;	/* times RTTVAR initialized from rt */
-	u_long	tcps_usedssthresh;	/* times ssthresh initialized from rt*/
-	u_long	tcps_persistdrop;	/* timeout in persist state */
-	u_long	tcps_badsyn;		/* bogus SYN, e.g. premature ACK */
-	u_long	tcps_mturesent;		/* resends due to MTU discovery */
-	u_long	tcps_listendrop;	/* listen queue overflows */
+	u_int32_t	tcps_rcvtotal;		/* total packets received */
+	u_int32_t	tcps_rcvpack;		/* packets received in sequence */
+	u_int32_t	tcps_rcvbyte;		/* bytes received in sequence */
+	u_int32_t	tcps_rcvbadsum;		/* packets received with ccksum errs */
+	u_int32_t	tcps_rcvbadoff;		/* packets received with bad offset */
+	u_int32_t	tcps_rcvmemdrop;	/* packets dropped for lack of memory */
+	u_int32_t	tcps_rcvshort;		/* packets received too short */
+	u_int32_t	tcps_rcvduppack;	/* duplicate-only packets received */
+	u_int32_t	tcps_rcvdupbyte;	/* duplicate-only bytes received */
+	u_int32_t	tcps_rcvpartduppack;	/* packets with some duplicate data */
+	u_int32_t	tcps_rcvpartdupbyte;	/* dup. bytes in part-dup. packets */
+	u_int32_t	tcps_rcvoopack;		/* out-of-order packets received */
+	u_int32_t	tcps_rcvoobyte;		/* out-of-order bytes received */
+	u_int32_t	tcps_rcvpackafterwin;	/* packets with data after window */
+	u_int32_t	tcps_rcvbyteafterwin;	/* bytes rcvd after window */
+	u_int32_t	tcps_rcvafterclose;	/* packets rcvd after "close" */
+	u_int32_t	tcps_rcvwinprobe;	/* rcvd window probe packets */
+	u_int32_t	tcps_rcvdupack;		/* rcvd duplicate acks */
+	u_int32_t	tcps_rcvacktoomuch;	/* rcvd acks for unsent data */
+	u_int32_t	tcps_rcvackpack;	/* rcvd ack packets */
+	u_int32_t	tcps_rcvackbyte;	/* bytes acked by rcvd acks */
+	u_int32_t	tcps_rcvwinupd;		/* rcvd window update packets */
+	u_int32_t	tcps_pawsdrop;		/* segments dropped due to PAWS */
+	u_int32_t	tcps_predack;		/* times hdr predict ok for acks */
+	u_int32_t	tcps_preddat;		/* times hdr predict ok for data pkts */
+	u_int32_t	tcps_pcbcachemiss;
+	u_int32_t	tcps_cachedrtt;		/* times cached RTT in route updated */
+	u_int32_t	tcps_cachedrttvar;	/* times cached rttvar updated */
+	u_int32_t	tcps_cachedssthresh;	/* times cached ssthresh updated */
+	u_int32_t	tcps_usedrtt;		/* times RTT initialized from route */
+	u_int32_t	tcps_usedrttvar;	/* times RTTVAR initialized from rt */
+	u_int32_t	tcps_usedssthresh;	/* times ssthresh initialized from rt*/
+	u_int32_t	tcps_persistdrop;	/* timeout in persist state */
+	u_int32_t	tcps_badsyn;		/* bogus SYN, e.g. premature ACK */
+	u_int32_t	tcps_mturesent;		/* resends due to MTU discovery */
+	u_int32_t	tcps_listendrop;	/* listen queue overflows */
+
+	/* new stats from FreeBSD 5.4 sync up */
+	u_int32_t	tcps_minmssdrops;	/* average minmss too low drops */
+	u_int32_t	tcps_sndrexmitbad;	/* unnecessary packet retransmissions */
+	u_int32_t	tcps_badrst;		/* ignored RSTs in the window */
+
+	u_int32_t	tcps_sc_added;		/* entry added to syncache */
+	u_int32_t	tcps_sc_retransmitted;	/* syncache entry was retransmitted */
+	u_int32_t	tcps_sc_dupsyn;		/* duplicate SYN packet */
+	u_int32_t	tcps_sc_dropped;	/* could not reply to packet */
+	u_int32_t	tcps_sc_completed;	/* successful extraction of entry */
+	u_int32_t	tcps_sc_bucketoverflow;	/* syncache per-bucket limit hit */
+	u_int32_t	tcps_sc_cacheoverflow;	/* syncache cache limit hit */
+	u_int32_t	tcps_sc_reset;		/* RST removed entry from syncache */
+	u_int32_t	tcps_sc_stale;		/* timed out or listen socket gone */
+	u_int32_t	tcps_sc_aborted;	/* syncache entry aborted */
+	u_int32_t	tcps_sc_badack;		/* removed due to bad ACK */
+	u_int32_t	tcps_sc_unreach;	/* ICMP unreachable received */
+	u_int32_t	tcps_sc_zonefail;	/* zalloc() failed */
+	u_int32_t	tcps_sc_sendcookie;	/* SYN cookie sent */
+	u_int32_t	tcps_sc_recvcookie;	/* SYN cookie received */
+
+	u_int32_t	tcps_hc_added;		/* entry added to hostcache */
+	u_int32_t	tcps_hc_bucketoverflow;	/* hostcache per bucket limit hit */
 
 	/* SACK related stats */
-	u_long	tcps_sack_recovery_episode; /* SACK recovery episodes */
-	u_long  tcps_sack_rexmits;	    /* SACK rexmit segments   */
-	u_long  tcps_sack_rexmit_bytes;	    /* SACK rexmit bytes      */
-	u_long  tcps_sack_rcv_blocks;	    /* SACK blocks (options) received */
-	u_long  tcps_sack_send_blocks;	    /* SACK blocks (options) sent     */
-	u_long  tcps_sack_sboverflow;	    /* SACK sendblock overflow   */
+	u_int32_t	tcps_sack_recovery_episode; /* SACK recovery episodes */
+	u_int32_t  tcps_sack_rexmits;	    /* SACK rexmit segments   */
+	u_int32_t  tcps_sack_rexmit_bytes;	    /* SACK rexmit bytes      */
+	u_int32_t  tcps_sack_rcv_blocks;	    /* SACK blocks (options) received */
+	u_int32_t  tcps_sack_send_blocks;	    /* SACK blocks (options) sent     */
+	u_int32_t  tcps_sack_sboverflow;	    /* SACK sendblock overflow   */
 
+#if TRAFFIC_MGT
+	u_int32_t	tcps_bg_rcvtotal;	/* total background packets received */
+#endif /* TRAFFIC_MGT */
 };
+
+#pragma pack(4)
 
 /*
  * TCB structure exported to user-land via sysctl(3).
@@ -249,12 +297,14 @@ struct	tcpstat {
  * included.  Not all of our clients do.
  */
 struct	xtcpcb {
-	size_t	xt_len;
+	u_int32_t	xt_len;
 	struct	inpcb	xt_inp;
 	struct  tcpcb   xt_tp;
 	struct	xsocket	xt_socket;
 	u_quad_t	xt_alignment_hack;
 };
+
+#pragma pack()
 
 /*
  * Names for TCP sysctl objects

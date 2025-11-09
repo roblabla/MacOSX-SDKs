@@ -3,7 +3,7 @@
  
      Contains:   Keyboard API.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
@@ -32,126 +32,6 @@ extern "C" {
 #endif
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/*  OBSOLETE                                                                        */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* These are obsolete.  Carbon does not support these. */
-/* Keyboard API Trap Number. Should be moved to Traps.i */
-enum {
-  _KeyboardDispatch             = 0xAA7A
-};
-
-/* Gestalt selector and values for the Keyboard API */
-enum {
-  gestaltKeyboardsAttr          = 'kbds',
-  gestaltKBPS2Keyboards         = 1,
-  gestaltKBPS2SetIDToAny        = 2,
-  gestaltKBPS2SetTranslationTable = 4
-};
-
-/* Keyboard API Error Codes */
-/*
-   I stole the range blow from the empty space in the Allocation project but should
-   be updated to the officially registered range.
-*/
-enum {
-  errKBPS2KeyboardNotAvailable  = -30850,
-  errKBIlligalParameters        = -30851,
-  errKBFailSettingID            = -30852,
-  errKBFailSettingTranslationTable = -30853,
-  errKBFailWritePreference      = -30854
-};
-
-/*
- *  KBInitialize()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBSetupPS2Keyboard()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBGetPS2KeyboardID()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBIsPS2KeyboardConnected()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBIsPS2KeyboardEnabled()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBGetPS2KeyboardAttributes()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBSetKCAPForPS2Keyboard()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBSetupPS2KeyboardFromLayoutType()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*
- *  KBGetPS2KeyboardLayoutType()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
- */
-
-
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Keyboard API constants                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
@@ -162,7 +42,7 @@ enum {
  *    Physical keyboard layout types indicate the physical keyboard
  *    layout. They are returned by the KBGetLayoutType API.
  */
-typedef UInt32 PhysicalKeyboardLayoutType;
+typedef OSType PhysicalKeyboardLayoutType;
 enum {
 
   /*
@@ -331,8 +211,13 @@ KBGetLayoutType(SInt16 iKeyboardType)                         AVAILABLE_MAC_OS_X
 
 /* iterate keyboard layouts*/
 
+#if !__LP64__
 /*
- *  KLGetKeyboardLayoutCount()
+ *  KLGetKeyboardLayoutCount()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISCreateInputSourceList API to create a list of input
+ *    sources that match specified properties.
  *  
  *  Summary:
  *    Returns the number of keyboard layouts.
@@ -346,16 +231,20 @@ KBGetLayoutType(SInt16 iKeyboardType)                         AVAILABLE_MAC_OS_X
  *      On exit, the number of keyboard layouts
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-KLGetKeyboardLayoutCount(CFIndex * oCount)                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+KLGetKeyboardLayoutCount(CFIndex * oCount)                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  KLGetKeyboardLayoutAtIndex()
+ *  KLGetKeyboardLayoutAtIndex()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISCreateInputSourceList API to create a list of input
+ *    sources that match specified properties.
  *  
  *  Summary:
  *    Retrieves the keyboard layout at the given index.
@@ -375,14 +264,14 @@ KLGetKeyboardLayoutCount(CFIndex * oCount)                    AVAILABLE_MAC_OS_X
  *      On exit, the keyboard layout with the given index.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 KLGetKeyboardLayoutAtIndex(
   CFIndex              iIndex,
-  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -396,7 +285,11 @@ KLGetKeyboardLayoutAtIndex(
 /* get keyboard layout info*/
 
 /*
- *  KLGetKeyboardLayoutProperty()
+ *  KLGetKeyboardLayoutProperty()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISGetInputSourceProperty API to query properties of a
+ *    TISInputSourceRef.
  *  
  *  Summary:
  *    Retrives property value for the given keyboard layout and tag.
@@ -418,7 +311,7 @@ KLGetKeyboardLayoutAtIndex(
  *      tag.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -426,13 +319,18 @@ extern OSStatus
 KLGetKeyboardLayoutProperty(
   KeyboardLayoutRef           iKeyboardLayout,
   KeyboardLayoutPropertyTag   iPropertyTag,
-  const void **               oValue)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  const void **               oValue)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* get keyboard layout with identifier or name*/
 
 /*
- *  KLGetKeyboardLayoutWithIdentifier()
+ *  KLGetKeyboardLayoutWithIdentifier()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISCreateInputSourceList API to create a list of input
+ *    sources that match specified properties, such as the
+ *    kTISPropertyInputSourceID property.
  *  
  *  Summary:
  *    Retrieves the keyboard layout with the given identifier.
@@ -456,18 +354,23 @@ KLGetKeyboardLayoutProperty(
  *      On exit, the keyboard layout with the given identifier.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 KLGetKeyboardLayoutWithIdentifier(
   KeyboardLayoutIdentifier   iIdentifier,
-  KeyboardLayoutRef *        oKeyboardLayout)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  KeyboardLayoutRef *        oKeyboardLayout)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  KLGetKeyboardLayoutWithName()
+ *  KLGetKeyboardLayoutWithName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISCreateInputSourceList API to create a list of input
+ *    sources that match specified properties, such as the
+ *    kTISPropertyInputSourceID property.
  *  
  *  Summary:
  *    Retrieves the keyboard layout with the given name.
@@ -484,20 +387,28 @@ KLGetKeyboardLayoutWithIdentifier(
  *      On exit, the keyboard layout with the given name.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 KLGetKeyboardLayoutWithName(
   CFStringRef          iName,
-  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* get/set current keyboard layout of the current group identifier*/
 
 /*
- *  KLGetCurrentKeyboardLayout()
+ *  KLGetCurrentKeyboardLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISCopyCurrentKeyboardLayoutInputSource.
+ *     TISCopyCurrentKeyboardLayoutInputSource will return the current
+ *    input source if it is a keyboard layout.  If the current input
+ *    source is an input method or one of its input modes, the TIS API
+ *    will also return any keyboard override specified via
+ *    TISSetInputMethodKeyboardLayoutOverride.
  *  
  *  Summary:
  *    Retrieves the current keyboard layout.
@@ -517,16 +428,31 @@ KLGetKeyboardLayoutWithName(
  *      On exit, the current keyboard layout.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-KLGetCurrentKeyboardLayout(KeyboardLayoutRef * oKeyboardLayout) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+KLGetCurrentKeyboardLayout(KeyboardLayoutRef * oKeyboardLayout) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  KLSetCurrentKeyboardLayout()
+ *  KLSetCurrentKeyboardLayout()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    To make a keyboard layout become the current input source, use
+ *    TISSelectInputSource API.
+ *    
+ *    Input methods have used this API to override the keyboard layout
+ *    used when the input method or one of its input modes is selected.
+ *     TISSetInputMethodKeyboardLayoutOverride should be used for this
+ *    purpose and TISCopyCurrentKeyboardLayoutInputSource will return
+ *    the keyboard layout specified.
+ *    An benefit of using the TIS API to specify an override is that
+ *    when the input method is selected, the keyboard layout specified
+ *    will be visible to users of the Keyboard Viewer and allow them to
+ *    see the underlying keyboard used for event delivery to your input
+ *    method.
  *  
  *  Summary:
  *    Sets the current keyboard layout.
@@ -549,13 +475,45 @@ KLGetCurrentKeyboardLayout(KeyboardLayoutRef * oKeyboardLayout) AVAILABLE_MAC_OS
  *      The keyboard layout.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-KLSetCurrentKeyboardLayout(KeyboardLayoutRef iKeyboardLayout) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+KLSetCurrentKeyboardLayout(KeyboardLayoutRef iKeyboardLayout) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  OBSOLETE                                                                        */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* These are obsolete.  Carbon does not support these. */
+/* Keyboard API Trap Number. Should be moved to Traps.i */
+#endif  /* !__LP64__ */
+
+enum {
+  _KeyboardDispatch             = 0xAA7A
+};
+
+/* Gestalt selector and values for the Keyboard API */
+enum {
+  gestaltKeyboardsAttr          = 'kbds',
+  gestaltKBPS2Keyboards         = 1,
+  gestaltKBPS2SetIDToAny        = 2,
+  gestaltKBPS2SetTranslationTable = 4
+};
+
+/* Keyboard API Error Codes */
+/*
+   I stole the range blow from the empty space in the Allocation project but should
+   be updated to the officially registered range.
+*/
+enum {
+  errKBPS2KeyboardNotAvailable  = -30850,
+  errKBIlligalParameters        = -30851,
+  errKBFailSettingID            = -30852,
+  errKBFailSettingTranslationTable = -30853,
+  errKBFailWritePreference      = -30854
+};
 
 
 #ifdef __cplusplus

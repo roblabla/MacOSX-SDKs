@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothServiceBrowserController.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	© 2002-2006 by Apple Computer, Inc. All rights reserved.
 */
  
 #import <Cocoa/Cocoa.h>
@@ -56,7 +56,7 @@
 	@discussion	This method allocates and runs the browser window as a modal window waiting for the user to either select a
                         service, or cancel the browser window.  
 */
-+(IOReturn)browseDevices:(IOBluetoothSDPServiceRecord**)outRecord options:(IOBluetoothServiceBrowserControllerOptions)inOptions;
++(IOReturn)browseDevices:(IOBluetoothSDPServiceRecord**)outRecord options:(IOBluetoothServiceBrowserControllerOptions)inOptions	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -76,7 +76,7 @@
 */
 +(IOReturn)browseDevicesAsSheetForWindow:(IOBluetoothSDPServiceRecord**)outRecord
 								 options:(IOBluetoothServiceBrowserControllerOptions)inOptions
-								  window:(NSWindow*)inWindow;
+								  window:(NSWindow*)inWindow	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 
 /*!	@method	withServiceBrowserControllerRef:
@@ -106,7 +106,7 @@
                             
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window modally.
 */
--(IOReturn)discover:(IOBluetoothSDPServiceRecord **)outRecord;
+-(IOReturn)discover:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -123,7 +123,7 @@
                             
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
--(IOReturn)discoverAsSheetForWindow:(NSWindow *)sheetWindow withRecord:(IOBluetoothSDPServiceRecord **)outRecord;
+-(IOReturn)discoverAsSheetForWindow:(NSWindow *)sheetWindow withRecord:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -144,7 +144,7 @@
                             
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
--(IOReturn)discoverWithDeviceAttributes:(IOBluetoothDeviceSearchAttributes *)deviceAttributes serviceList:(NSArray *)serviceArray serviceRecord:(IOBluetoothSDPServiceRecord**)outRecord;
+-(IOReturn)discoverWithDeviceAttributes:(IOBluetoothDeviceSearchAttributes *)deviceAttributes serviceList:(NSArray *)serviceArray serviceRecord:(IOBluetoothSDPServiceRecord**)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!

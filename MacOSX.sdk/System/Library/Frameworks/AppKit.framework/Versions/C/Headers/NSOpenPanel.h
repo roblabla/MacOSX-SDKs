@@ -1,11 +1,14 @@
 /*
 	NSOpenPanel.h
 	Application Kit
-	Copyright (c) 1994-2004, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSSavePanel.h>
+@class NSArray;
+@class NSString;
+@class NSWindow;
 
 @interface NSOpenPanel : NSSavePanel {
     char _reservedOpenPanel[4];
@@ -39,7 +42,7 @@
 - (void)beginForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modelessDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
 #endif
 
-- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;
-- (int)runModalForTypes:(NSArray *)fileTypes;
+- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;
+- (NSInteger)runModalForTypes:(NSArray *)fileTypes;
 
 @end

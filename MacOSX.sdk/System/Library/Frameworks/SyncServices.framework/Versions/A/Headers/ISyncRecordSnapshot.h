@@ -26,3 +26,23 @@
 - (NSDictionary *)recordsWithMatchingAttributes:(NSDictionary *)attributes;
 
 @end
+
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
+
+@class ISyncRecordReference;
+
+@interface ISyncRecordSnapshot (ISyncRecordReference)
+/* Get an ISyncRecordReference for a global identifier. The Snapshot can be scoped to any client,
+   or global. The identifier must be in the record id scope of the Snapshot. */
+- (ISyncRecordReference *) recordReferenceForRecordWithIdentifier:(NSString *)identifier;
+
+/* Get a record identifier in the Snapshot's scope for the reference. The Snapshot can be scoped to any
+   client, or global. If pModified is non-nil, pModified is set to YES if any data internal to the
+   ISyncRecordRefence has changed and set to NO if not. 
+
+   Note that self will have mutated if *pModified == YES.  The Client should store the new reference
+   in its configuration for subsequent use. */
+- (NSString *) recordIdentifierForReference:(ISyncRecordReference *)reference isModified:(BOOL *)pModified;
+@end
+
+#endif

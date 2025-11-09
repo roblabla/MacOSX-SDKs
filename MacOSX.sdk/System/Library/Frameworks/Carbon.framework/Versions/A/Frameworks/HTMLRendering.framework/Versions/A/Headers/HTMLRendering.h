@@ -3,7 +3,7 @@
  
      Contains:   HTML Rendering Library Interfaces.
  
-     Version:    HTMLRenderingLib-66.1~1791
+     Version:    HTMLRenderingLib-71~161
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved
  
@@ -1520,6 +1520,48 @@ InvokeHRURLToFSRefUPP(
   URLSourceType    urlSourceType,
   void *           refCon,
   HRURLToFSRefUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline HRWasURLVisitedUPP                                   NewHRWasURLVisitedUPP(HRWasURLVisitedProcPtr userRoutine) { return userRoutine; }
+    inline HRWasCFURLVisitedUPP                                 NewHRWasCFURLVisitedUPP(HRWasCFURLVisitedProcPtr userRoutine) { return userRoutine; }
+    inline HRNewURLUPP                                          NewHRNewURLUPP(HRNewURLProcPtr userRoutine) { return userRoutine; }
+    inline HRNewCFURLUPP                                        NewHRNewCFURLUPP(HRNewCFURLProcPtr userRoutine) { return userRoutine; }
+    inline HRURLToFSSpecUPP                                     NewHRURLToFSSpecUPP(HRURLToFSSpecProcPtr userRoutine) { return userRoutine; }
+    inline HRURLToFSRefUPP                                      NewHRURLToFSRefUPP(HRURLToFSRefProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeHRWasURLVisitedUPP(HRWasURLVisitedUPP) { }
+    inline void                                                 DisposeHRWasCFURLVisitedUPP(HRWasCFURLVisitedUPP) { }
+    inline void                                                 DisposeHRNewURLUPP(HRNewURLUPP) { }
+    inline void                                                 DisposeHRNewCFURLUPP(HRNewCFURLUPP) { }
+    inline void                                                 DisposeHRURLToFSSpecUPP(HRURLToFSSpecUPP) { }
+    inline void                                                 DisposeHRURLToFSRefUPP(HRURLToFSRefUPP) { }
+    inline Boolean                                              InvokeHRWasURLVisitedUPP(const char * url, void * refCon, HRWasURLVisitedUPP userUPP) { return (*userUPP)(url, refCon); }
+    inline Boolean                                              InvokeHRWasCFURLVisitedUPP(CFURLRef url, void * refCon, HRWasCFURLVisitedUPP userUPP) { return (*userUPP)(url, refCon); }
+    inline OSStatus                                             InvokeHRNewURLUPP(const char * url, const char * targetFrame, Boolean addToHistory, void * refCon, HRNewURLUPP userUPP) { return (*userUPP)(url, targetFrame, addToHistory, refCon); }
+    inline OSStatus                                             InvokeHRNewCFURLUPP(CFURLRef url, CFStringRef targetString, Boolean addToHistory, void * refCon, HRNewCFURLUPP userUPP) { return (*userUPP)(url, targetString, addToHistory, refCon); }
+    inline OSStatus                                             InvokeHRURLToFSSpecUPP(const char * rootURL, const char * linkURL, FSSpec * fsspec, URLSourceType urlSourceType, void * refCon, HRURLToFSSpecUPP userUPP) { return (*userUPP)(rootURL, linkURL, fsspec, urlSourceType, refCon); }
+    inline OSStatus                                             InvokeHRURLToFSRefUPP(CFStringRef rootString, CFStringRef linkString, FSRef * fref, URLSourceType urlSourceType, void * refCon, HRURLToFSRefUPP userUPP) { return (*userUPP)(rootString, linkString, fref, urlSourceType, refCon); }
+  #else
+    #define NewHRWasURLVisitedUPP(userRoutine)                  ((HRWasURLVisitedUPP)userRoutine)
+    #define NewHRWasCFURLVisitedUPP(userRoutine)                ((HRWasCFURLVisitedUPP)userRoutine)
+    #define NewHRNewURLUPP(userRoutine)                         ((HRNewURLUPP)userRoutine)
+    #define NewHRNewCFURLUPP(userRoutine)                       ((HRNewCFURLUPP)userRoutine)
+    #define NewHRURLToFSSpecUPP(userRoutine)                    ((HRURLToFSSpecUPP)userRoutine)
+    #define NewHRURLToFSRefUPP(userRoutine)                     ((HRURLToFSRefUPP)userRoutine)
+    #define DisposeHRWasURLVisitedUPP(userUPP)
+    #define DisposeHRWasCFURLVisitedUPP(userUPP)
+    #define DisposeHRNewURLUPP(userUPP)
+    #define DisposeHRNewCFURLUPP(userUPP)
+    #define DisposeHRURLToFSSpecUPP(userUPP)
+    #define DisposeHRURLToFSRefUPP(userUPP)
+    #define InvokeHRWasURLVisitedUPP(url, refCon, userUPP)      (*userUPP)(url, refCon)
+    #define InvokeHRWasCFURLVisitedUPP(url, refCon, userUPP)    (*userUPP)(url, refCon)
+    #define InvokeHRNewURLUPP(url, targetFrame, addToHistory, refCon, userUPP) (*userUPP)(url, targetFrame, addToHistory, refCon)
+    #define InvokeHRNewCFURLUPP(url, targetString, addToHistory, refCon, userUPP) (*userUPP)(url, targetString, addToHistory, refCon)
+    #define InvokeHRURLToFSSpecUPP(rootURL, linkURL, fsspec, urlSourceType, refCon, userUPP) (*userUPP)(rootURL, linkURL, fsspec, urlSourceType, refCon)
+    #define InvokeHRURLToFSRefUPP(rootString, linkString, fref, urlSourceType, refCon, userUPP) (*userUPP)(rootString, linkString, fref, urlSourceType, refCon)
+  #endif
+#endif
 
 
 #ifdef __cplusplus

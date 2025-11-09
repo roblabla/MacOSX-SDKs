@@ -26,11 +26,10 @@ extern          "C" {
 #include <net-snmp/agent/table.h>
 #include <net-snmp/agent/table_data.h>
 #include <net-snmp/agent/table_dataset.h>
+#include <net-snmp/agent/table_tdata.h>
 #include <net-snmp/agent/table_iterator.h>
 #include <net-snmp/agent/table_container.h>
-/*
- * #include <net-snmp/agent/table_array.h> 
- */
+#include <net-snmp/agent/table_array.h> 
 
 #include <net-snmp/agent/mfd.h>
 

@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -15,29 +15,32 @@ enum {
 
 @interface NSCharacterSet : NSObject <NSCopying, NSMutableCopying, NSCoding>
 
-+ (NSCharacterSet *)controlCharacterSet;
-+ (NSCharacterSet *)whitespaceCharacterSet;
-+ (NSCharacterSet *)whitespaceAndNewlineCharacterSet;
-+ (NSCharacterSet *)decimalDigitCharacterSet;
-+ (NSCharacterSet *)letterCharacterSet;
-+ (NSCharacterSet *)lowercaseLetterCharacterSet;
-+ (NSCharacterSet *)uppercaseLetterCharacterSet;
-+ (NSCharacterSet *)nonBaseCharacterSet;
-+ (NSCharacterSet *)alphanumericCharacterSet;
-+ (NSCharacterSet *)decomposableCharacterSet;
-+ (NSCharacterSet *)illegalCharacterSet;
-+ (NSCharacterSet *)punctuationCharacterSet;
++ (id)controlCharacterSet;
++ (id)whitespaceCharacterSet;
++ (id)whitespaceAndNewlineCharacterSet;
++ (id)decimalDigitCharacterSet;
++ (id)letterCharacterSet;
++ (id)lowercaseLetterCharacterSet;
++ (id)uppercaseLetterCharacterSet;
++ (id)nonBaseCharacterSet;
++ (id)alphanumericCharacterSet;
++ (id)decomposableCharacterSet;
++ (id)illegalCharacterSet;
++ (id)punctuationCharacterSet;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-+ (NSCharacterSet *)capitalizedLetterCharacterSet;
++ (id)capitalizedLetterCharacterSet;
 #endif
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-+ (NSCharacterSet *)symbolCharacterSet;
++ (id)symbolCharacterSet;
+#endif
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (id)newlineCharacterSet;
 #endif
 
-+ (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;
-+ (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
-+ (NSCharacterSet *)characterSetWithBitmapRepresentation:(NSData *)data;
-+ (NSCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
++ (id)characterSetWithRange:(NSRange)aRange;
++ (id)characterSetWithCharactersInString:(NSString *)aString;
++ (id)characterSetWithBitmapRepresentation:(NSData *)data;
++ (id)characterSetWithContentsOfFile:(NSString *)fName;
 
 - (BOOL)characterIsMember:(unichar)aCharacter;
 - (NSData *)bitmapRepresentation;

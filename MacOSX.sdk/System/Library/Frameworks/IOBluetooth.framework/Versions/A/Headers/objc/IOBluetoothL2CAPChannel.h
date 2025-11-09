@@ -180,7 +180,7 @@
 	@result		Returns kIOReturnSuccess if the data was written successfully.
 */
 
-- (IOReturn)write:(void *)data length:(UInt16)length;
+- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
@@ -232,7 +232,7 @@
 	@result		Returns kIOReturnSuccess if the listener is successfully registered.
 */
 
-- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon;
+- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
@@ -248,13 +248,37 @@
                 data is received before the client is ready. 
 
 				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
-	@param		channelDelegate	the object that will play the role of channel delegate.
+	@param		channelDelegate	the object that will play the role of channel delegate [NOTE the l2cap channel will retain the delegate].
 	@result		Returns kIOReturnSuccess if the delegate is successfully registered.
 */
 
 - (IOReturn)setDelegate:(id)channelDelegate;
 
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+/*!
+    @method		setDelegate:withConfiguration:
+	@abstract	Allows an object to register itself as client of the L2CAP channel.
+    @discussion A channel delegate is the object the L2CAP channel uses as target for data and events. The
+				developer will implement only the the methods he/she is interested in. A list of the
+				possible methods is at the end of this file in the definition of the informal protocol
+				IOBluetoothL2CAPChannelDelegate.
+                A newly opened L2CAP channel will not complete its configuration process until the client
+                that opened it registers a connectionHandler.  This prevents that case where incoming
+                data is received before the client is ready. 
+
+				NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
+	@param		channelDelegate	the object that will play the role of channel delegate.
+	@param		channelConfiguration the dictionary that describes the initial configuration for
+				the channel.
+	@result		Returns kIOReturnSuccess if the delegate is successfully registered.
+*/
+
+- (IOReturn)setDelegate:(id)channelDelegate withConfiguration:(NSDictionary*)channelConfiguration;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 /*!
     @method		getDevice

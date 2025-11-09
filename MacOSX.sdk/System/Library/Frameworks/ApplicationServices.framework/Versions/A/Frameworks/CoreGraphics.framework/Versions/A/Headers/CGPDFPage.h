@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFPage.h
- * Copyright (c) 2001-2004 Apple Computer, Inc.
+ * Copyright (c) 2001-2007 Apple Inc.
  * All rights reserved.
  */
 
@@ -41,13 +41,13 @@ CG_EXTERN CGPDFDocumentRef CGPDFPageGetDocument(CGPDFPageRef page) AVAILABLE_MAC
 
 CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-/* Return the rectangle associated with `box' in `page'.  This is the value
+/* Return the rectangle associated with `box' in `page'. This is the value
  * of the corresponding entry (such as /MediaBox, /ArtBox, and so on) in
  * the page's dictionary. */
 
 CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef page, CGPDFBox box) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-/* Return the rotation angle (in degrees) of `page'.  This is the value of
+/* Return the rotation angle (in degrees) of `page'. This is the value of
  * the /Rotate entry in the page's dictionary. */
 
 CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -57,11 +57,11 @@ CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VE
  *   - Compute the effective rect by intersecting the rect associated with
  *     `box' and the /MediaBox entry of the page.
  *   - Rotate the effective rect according to the page's /Rotate entry.
- *   - Center the resulting rect on `rect'.  If `rotation' is non-zero,
- *     then the rect will rotated clockwise by `rotation' degrees.
- *     `rotation' must be a multiple of 90.
+ *   - Center the resulting rect on `rect'. If `rotation' is non-zero, then
+ *     the rect will rotated clockwise by `rotation' degrees. `rotation'
+ *     must be a multiple of 90.
  *   - Scale the rect down, if necessary, so that it coincides with the
- *     edges of `rect'.  If `preserveAspectRatio' is true, then the final
+ *     edges of `rect'. If `preserveAspectRatio' is true, then the final
  *     rect will coincide with the edges of `rect' only in the more
  *     restrictive dimension. */
 

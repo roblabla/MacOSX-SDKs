@@ -1,7 +1,7 @@
 /*
 	NSWindowController.h
 	Application Kit
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,8 +24,8 @@
         unsigned int nibNameIsPath:1;
         unsigned int RESERVED:28;
     } _wcFlags;
-    id _autounbinder;
-    void *_reserved;
+    NSString *_frameAutosaveName;
+    id _moreVars;
 }
 
 - (id)initWithWindow:(NSWindow *)window;
@@ -103,9 +103,9 @@
 - (BOOL)isWindowLoaded;
     // Returns YES if the receiver has loded its -windowNibName OR has no -windowNibName.  In other words, if there is no nib to load, this always returns YES.
 
-- (void)windowDidLoad;
 - (void)windowWillLoad;
-    // These are called immediately before and after the controller loads its nib file.  You can subclass these but should not call them directly.  Always call super from your override.
+- (void)windowDidLoad;
+    // These are invoked immediately before and after this controller loads its nib, if the the nib loading is triggered by an invocation of -window (which is typical). The default implementations of these methods do nothing. You can override them to add additional processing before and after nib loading. Overriding of -windowDidLoad in particular is useful because it's the first method that's invoked after the connecting of any IB outlets added in a subclass. Your application should not invoke these methods directly.
 
 - (void)loadWindow;
     // This method can be overridden by advanced users.  It should not be called directly (doing so will cause the window controller to be improperly set up).  Call the -window method to force loading of the nib.

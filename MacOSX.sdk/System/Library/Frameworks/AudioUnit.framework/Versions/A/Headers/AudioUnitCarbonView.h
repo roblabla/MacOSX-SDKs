@@ -5,7 +5,7 @@
  
      Version:    Mac OS X
  
-     Copyright:  © 2002-2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2004 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -45,15 +45,24 @@ extern "C" {
 	#pragma pack(2)
 #endif
 
-//-----------------------------------------------------------------------------
-//	An AudioUnitCarbonView is a ComponentInstance.
-//-----------------------------------------------------------------------------
+/*!
+	@header		AudioUnitCarbonView
+	@abstract	This file defines interfaces for creating and event handling in carbon-based views of Audio Units.
+*/
+
+/*!
+	@typedef	AudioUnitCarbonView
+	@abstract	An audio unit Carbon view is of type ComponentInstance, defined by the Component Manager.
+*/
 typedef ComponentInstance			   AudioUnitCarbonView;
 
-
-//-----------------------------------------------------------------------------
-//	AudioUnitCarbonView component types and subtypes
-//-----------------------------------------------------------------------------
+/*!
+	@enum		Carbon view component types and subtypes
+	@constant	kAudioUnitCarbonViewComponentType
+					The four char-code type of a carbon-based view component
+	@constant	kAUCarbonViewSubType_Generic
+					The four char-code subtype of a carbon-based view component
+*/
 enum
 {
 	kAudioUnitCarbonViewComponentType   = 'auvw',
@@ -61,99 +70,79 @@ enum
 };
 
 
-//-----------------------------------------------------------------------------
-//	AudioUnitCarbonViewEventID values
-//-----------------------------------------------------------------------------
+/*!
+	@enum		Carbon view events
+	@constant	kAudioUnitCarbonViewEvent_MouseDownInControl
+					The event type indicating that the mouse is pressed in a control
+	@constant	kAudioUnitCarbonViewEvent_MouseUpInControl
+					The event type indicating that the mouse is released in a control
+*/
 enum
 {
 	kAudioUnitCarbonViewEvent_MouseDownInControl	= 0,
 	kAudioUnitCarbonViewEvent_MouseUpInControl		= 1
 };
 
-/*
- *  AudioUnitCarbonViewEventID
- *  
- *  Discussion:
- *		Specifies an event passed to an AudioUnitCarbonViewEventListener.
- */
+/*!
+	@typedef	AudioUnitcarbViewEventID
+	@abstract	Specifies an event passed to an AudioUnitCarbonViewEventListener callback.
+*/
 typedef SInt32						  AudioUnitCarbonViewEventID;
 
-/*
- *  AudioUnitCarbonViewEventListener
- *  
- *  Discussion:
- *	This callback function is called when certain events occur in an
- *    AudioUnitCarbonView, such as mouse-down and up events on a
- *    control.
- *  
- *  Parameters:
- *    
- *    inUserData:
- *      User-defined pointer that was passed to
- *      AudioUnitCarbonViewSetEventListener.
- *    
- *    inView:
- *      The AudioUnitCarbonVIew generating the message.
- *    
- *    inParameter:
- *      The parameter associated with the control generating the
- *      message.
- *    
- *    inEvent:
- *      The type of event.
- *    
- *    inEventParam:
- *      Further information about the event, dependent on its type.
- */
+/*!
+	@typedef	AudioUnitCarbonViewEventListener
+	@abstract	Defines a callback function that is called when certain events occur in an
+				Audio Unit Carbon view, such as mouse-down and up events on a control.
+				
+	@param		inUserData
+					A user-defined pointer that was passed to an AudioUnitCarbonViewSetEventListener callback.
+	@param		inView
+					The Audio unit Carbon vIew that generated the message.
+	@param		inParameter
+					The parameter associated with the control generating the message.
+	@param		inEvent
+					The type of event, as listed in Audio unit Carbon view events.
+	@param		inEventParam
+					Further information about the event, dependent on its type.
+*/
+#ifndef __LP64__
 typedef void
 (*AudioUnitCarbonViewEventListener)(	void *						inUserData,
 										AudioUnitCarbonView			inView,
 										const AudioUnitParameter *	inParameter,
 										AudioUnitCarbonViewEventID	inEvent,
 										const void *				inEventParam);
-/*
- *  AudioUnitCarbonViewCreate()
- *  
- *  Summary:
- *    Tells an AudioUnitCarbonView to open its user interface (user
- *    pane).
- *  
- *  Discussion:
- *    The host application specifies the AudioUnit which the view is to
- *    control, and provides a window, parent control, and rectangle
- *    into which the AudioUnitCarbonView component is to create itself.
- *    The host application is responsible for closing the
- *    AudioUnitCarbonView component (via CloseComponent) before closing
- *    its window.
- *  
- *  Parameters:
- *    
- *    inView:
- *      The view component instance.
- *    
- *    inAudioUnit:
- *      The AudioUnit component instance which the view is to control.
- *    
- *    inWindow:
- *      The Carbon window in which the user interface is to be opened.
- *    
- *    inParentControl:
- *      The Carbon control into which the user interface is to be
- *      embedded (often but not necessarily the window's root control).
- *    
- *    inLocation:
- *      The host application's requested location for the view. The
- *      view should always create itself at the specified location,
- *    
- *    inSize:
- *      The host application's requested size for the view. The view
- *      may choose a different size for itself, determined by the
- *      dimensions of outControl.
- *    
- *    outControl:
- *      The Carbon control which contains the entire user interface.
- *  
- */
+#endif
+
+/*!
+	@function	AudioUnitCarbonViewCreate
+	@abstract	A callback that tells an Audio unit Carbon view to open its user interface (user pane).
+	@discussion	The host application specifies the audio unit which the view is to control. The host 
+				also provides the window, parent control, and rectangle into which the Audio unit 
+				Carbon view component (of type AudioUnitCarbonView) is to create itself.
+
+				The host application is responsible for closing the component (by calling the
+				CloseComponent function) before closing its window.
+				
+	@param		inView
+					The view component instance.
+	@param		inAudioUnit
+					The audio unit component instance which the view is to control.
+	@param		inWindow
+					The Carbon window in which the user interface is to be opened.
+	@param		inParentControl
+					The Carbon control into which the user interface is to be embedded. 
+					(This is typically the window's root control).
+	@param		inLocation
+					The host application's requested location for the view. The view should 
+					always create itself at the specified location.
+	@param		inSize
+					The host application's requested size for the view. The view may choose a 
+					different size for itself. The actual dimensions of the view are described 
+					by the value of the outControl parameter.
+	@param		outControl
+					The Carbon control which contains the entire user interface for the view.
+*/
 extern ComponentResult
 AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 							  AudioUnit             inAudioUnit,
@@ -163,36 +152,36 @@ AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 							  const Float32Point *  inSize,
 							  ControlRef *          outControl)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-
-/*
- *  AudioUnitCarbonViewSetEventListener()
- *  
- *  Summary:
- *    Installs an event listener in an AudioUnitCarbonView.
- *  
- *  Parameters:
- *    
- *    inView:
- *      The view component instance.
- *    
- *    inCallback:
- *      The event listener callback function
- *    
- *    inUserData:
- *      A user data pointer passed to the callback
- *  
- *	NOTE: Carbon view event listeners are deprecated as of Mac OS X 10.4. Use the AUEventListener functions in <AudioToolbox/AudioUnitUtilities.h>.
- */
+/*!
+	@function	AudioUnitCarbonViewSetEventListener
+	@abstract	Add an event listener to the carbon view.
+	@deprecated	in Mac OS X version 10.4
+	@discussion	Use the AUEventListener functions in <AudioToolbox/AudioUnitUtilities.h> instead.
+	
+	@param		inView
+					The Carbon view component instance.
+	@param		inCallback
+					The event listener callback function.
+	@param		inUserData
+					A user data pointer passed to the callback.
+*/
+#ifndef __LP64__
 extern ComponentResult
 AudioUnitCarbonViewSetEventListener(	AudioUnitCarbonView                inView,
 										AudioUnitCarbonViewEventListener   inCallback,
 										void *                             inUserData)
 																			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+#endif
 
-
-//-----------------------------------------------------------------------------
-//	Selectors for component calls
-//-----------------------------------------------------------------------------
+/*!
+	@enum		Selectors for component calls
+	@constant	kAudioUnitCarbonViewRange
+					Range of selectors
+	@constant	kAudioUnitCarbonViewCreateSelect
+					Selector for creating the carbon view
+	@constant	kAudioUnitCarbonViewSetEventListenerSelect
+					Selector for setting the event listener callback
+*/
 enum
 {
 	kAudioUnitCarbonViewRange                  = 0x0300,	// range of selectors

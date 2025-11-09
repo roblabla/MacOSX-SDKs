@@ -66,6 +66,11 @@
 // This Property is a value, in miliseconds
 #define kIOPropertyWriteTimeOutDurationKey			"Write Time Out Duration"
 
+// This key is used to define the number of Read/Write retries for a particular device
+// This property overrides all of the protocol defaults
+// The value is a UInt32 corresponding to the number of retries
+#define kIOPropertyRetryCountKey					"Retry Count"
+
 
 #if defined(KERNEL) && defined(__cplusplus)
 

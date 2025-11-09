@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for Apple Type Services for Unicode Imaging
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef UInt32 ATSUFlattenedDataStreamFormat;
 enum {
@@ -495,6 +495,7 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
 /* ---------------------------------------------------------------------------- */
 /* Style Flattening and Parsing Functions                                       */
 /* ---------------------------------------------------------------------------- */
+#if !__LP64__
 /*
  *  ATSUFlattenStyleRunsToStream()
  *  
@@ -584,7 +585,7 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -701,7 +702,7 @@ ATSUFlattenStyleRunsToStream(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -732,7 +733,7 @@ ATSUUnflattenStyleRunsFromStream(
  *    ATSUFlattenStyleRunsToStream instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.1
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.1
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -753,7 +754,7 @@ ATSUCopyToHandle(
  *    ATSUUnflattenStyleRunsFromStream instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.1
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.1
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -763,8 +764,10 @@ ATSUPasteFromHandle(
   Handle      iStyleHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_1;
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

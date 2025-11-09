@@ -3,7 +3,7 @@
  
      Contains:   Picture Utilities Interfaces.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 1990-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* verbs for the GetPictInfo, GetPixMapInfo, and NewPictInfo calls */
 enum {
@@ -266,11 +266,42 @@ InvokeDisposeColorPickMethodUPP(
   UInt32                     dataRef,
   DisposeColorPickMethodUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline InitPickMethodUPP                                    NewInitPickMethodUPP(InitPickMethodProcPtr userRoutine) { return userRoutine; }
+    inline RecordColorsUPP                                      NewRecordColorsUPP(RecordColorsProcPtr userRoutine) { return userRoutine; }
+    inline CalcColorTableUPP                                    NewCalcColorTableUPP(CalcColorTableProcPtr userRoutine) { return userRoutine; }
+    inline DisposeColorPickMethodUPP                            NewDisposeColorPickMethodUPP(DisposeColorPickMethodProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeInitPickMethodUPP(InitPickMethodUPP) { }
+    inline void                                                 DisposeRecordColorsUPP(RecordColorsUPP) { }
+    inline void                                                 DisposeCalcColorTableUPP(CalcColorTableUPP) { }
+    inline void                                                 DisposeDisposeColorPickMethodUPP(DisposeColorPickMethodUPP) { }
+    inline OSErr                                                InvokeInitPickMethodUPP(SInt16 colorsRequested, UInt32 * dataRef, SInt16 * colorBankType, InitPickMethodUPP userUPP) { return (*userUPP)(colorsRequested, dataRef, colorBankType); }
+    inline OSErr                                                InvokeRecordColorsUPP(UInt32 dataRef, RGBColor * colorsArray, SInt32 colorCount, SInt32 * uniqueColors, RecordColorsUPP userUPP) { return (*userUPP)(dataRef, colorsArray, colorCount, uniqueColors); }
+    inline OSErr                                                InvokeCalcColorTableUPP(UInt32 dataRef, SInt16 colorsRequested, void * colorBankPtr, CSpecArray resultPtr, CalcColorTableUPP userUPP) { return (*userUPP)(dataRef, colorsRequested, colorBankPtr, resultPtr); }
+    inline OSErr                                                InvokeDisposeColorPickMethodUPP(UInt32 dataRef, DisposeColorPickMethodUPP userUPP) { return (*userUPP)(dataRef); }
+  #else
+    #define NewInitPickMethodUPP(userRoutine)                   ((InitPickMethodUPP)userRoutine)
+    #define NewRecordColorsUPP(userRoutine)                     ((RecordColorsUPP)userRoutine)
+    #define NewCalcColorTableUPP(userRoutine)                   ((CalcColorTableUPP)userRoutine)
+    #define NewDisposeColorPickMethodUPP(userRoutine)           ((DisposeColorPickMethodUPP)userRoutine)
+    #define DisposeInitPickMethodUPP(userUPP)
+    #define DisposeRecordColorsUPP(userUPP)
+    #define DisposeCalcColorTableUPP(userUPP)
+    #define DisposeDisposeColorPickMethodUPP(userUPP)
+    #define InvokeInitPickMethodUPP(colorsRequested, dataRef, colorBankType, userUPP) (*userUPP)(colorsRequested, dataRef, colorBankType)
+    #define InvokeRecordColorsUPP(dataRef, colorsArray, colorCount, uniqueColors, userUPP) (*userUPP)(dataRef, colorsArray, colorCount, uniqueColors)
+    #define InvokeCalcColorTableUPP(dataRef, colorsRequested, colorBankPtr, resultPtr, userUPP) (*userUPP)(dataRef, colorsRequested, colorBankPtr, resultPtr)
+    #define InvokeDisposeColorPickMethodUPP(dataRef, userUPP)   (*userUPP)(dataRef)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  GetPictInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -288,7 +319,7 @@ GetPictInfo(
  *  GetPixMapInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -306,7 +337,7 @@ GetPixMapInfo(
  *  NewPictInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -323,7 +354,7 @@ NewPictInfo(
  *  RecordPictInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -337,7 +368,7 @@ RecordPictInfo(
  *  RecordPixMapInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -351,7 +382,7 @@ RecordPixMapInfo(
  *  RetrievePictInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -366,13 +397,15 @@ RetrievePictInfo(
  *  DisposePictInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DisposePictInfo(PictInfoID thePictInfoID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 #if OLDROUTINENAMES
 #define DisposPictInfo(thePictInfoID) DisposePictInfo(thePictInfoID)
@@ -382,7 +415,7 @@ DisposePictInfo(PictInfoID thePictInfoID)                     AVAILABLE_MAC_OS_X
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

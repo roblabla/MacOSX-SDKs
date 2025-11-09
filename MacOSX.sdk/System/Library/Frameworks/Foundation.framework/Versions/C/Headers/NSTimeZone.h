@@ -1,19 +1,22 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSDate.h>
 
-@class NSString, NSArray, NSDictionary, NSDate, NSData;
+@class NSString, NSArray, NSDictionary, NSDate, NSData, NSLocale;
 
 @interface NSTimeZone : NSObject <NSCopying, NSCoding>
 
 - (NSString *)name;
 - (NSData *)data;
 
-- (int)secondsFromGMTForDate:(NSDate *)aDate;
+- (NSInteger)secondsFromGMTForDate:(NSDate *)aDate;
 - (NSString *)abbreviationForDate:(NSDate *)aDate;
 - (BOOL)isDaylightSavingTimeForDate:(NSDate *)aDate;
+- (NSTimeInterval)daylightSavingTimeOffsetForDate:(NSDate *)aDate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSDate *)nextDaylightSavingTimeTransitionAfterDate:(NSDate *)aDate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 
@@ -31,13 +34,25 @@
 
 + (NSDictionary *)abbreviationDictionary;
 
-- (int)secondsFromGMT;
+- (NSInteger)secondsFromGMT;
 - (NSString *)abbreviation;
 - (BOOL)isDaylightSavingTime;
+- (NSTimeInterval)daylightSavingTimeOffset AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // for current instant
+- (NSDate *)nextDaylightSavingTimeTransition AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // after current instant
 
 - (NSString *)description;
 
 - (BOOL)isEqualToTimeZone:(NSTimeZone *)aTimeZone;
+
+enum {
+	NSTimeZoneNameStyleStandard,
+	NSTimeZoneNameStyleShortStandard,
+	NSTimeZoneNameStyleDaylightSaving,
+	NSTimeZoneNameStyleShortDaylightSaving
+};
+typedef NSInteger NSTimeZoneNameStyle;
+
+- (NSString *)localizedName:(NSTimeZoneNameStyle)style locale:(NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 
@@ -55,9 +70,11 @@
 // Time zones created with this never have daylight savings and the
 // offset is constant no matter the date; the name and abbreviation
 // do NOT follow the POSIX convention (of minutes-west).
-+ (id)timeZoneForSecondsFromGMT:(int)seconds;
++ (id)timeZoneForSecondsFromGMT:(NSInteger)seconds;
 
 + (id)timeZoneWithAbbreviation:(NSString *)abbreviation;
 
 @end
+
+FOUNDATION_EXPORT NSString * const NSSystemTimeZoneDidChangeNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 

@@ -26,6 +26,66 @@
 extern "C" {
 #endif
 
+/*
+CoreVideo pixel format type constants.
+CoreVideo does not provide support for all of these formats; this list just defines their names.
+*/
+enum {
+  kCVPixelFormatType_1Monochrome    = 0x00000001, /* 1 bit indexed */
+  kCVPixelFormatType_2Indexed       = 0x00000002, /* 2 bit indexed */
+  kCVPixelFormatType_4Indexed       = 0x00000004, /* 4 bit indexed */
+  kCVPixelFormatType_8Indexed       = 0x00000008, /* 8 bit indexed */
+  kCVPixelFormatType_1IndexedGray_WhiteIsZero = 0x00000021, /* 1 bit indexed gray, white is zero */
+  kCVPixelFormatType_2IndexedGray_WhiteIsZero = 0x00000022, /* 2 bit indexed gray, white is zero */
+  kCVPixelFormatType_4IndexedGray_WhiteIsZero = 0x00000024, /* 4 bit indexed gray, white is zero */
+  kCVPixelFormatType_8IndexedGray_WhiteIsZero = 0x00000028, /* 8 bit indexed gray, white is zero */
+  kCVPixelFormatType_16BE555        = 0x00000010, /* 16 bit BE RGB 555 */
+  kCVPixelFormatType_16LE555        = 'L555',     /* 16 bit LE RGB 555 */
+  kCVPixelFormatType_16LE5551       = '5551',     /* 16 bit LE RGB 5551 */
+  kCVPixelFormatType_16BE565        = 'B565',     /* 16 bit BE RGB 565 */
+  kCVPixelFormatType_16LE565        = 'L565',     /* 16 bit LE RGB 565 */
+  kCVPixelFormatType_24RGB          = 0x00000018, /* 24 bit RGB */
+  kCVPixelFormatType_24BGR          = '24BG',     /* 24 bit BGR */
+  kCVPixelFormatType_32ARGB         = 0x00000020, /* 32 bit ARGB */
+  kCVPixelFormatType_32BGRA         = 'BGRA',     /* 32 bit BGRA */
+  kCVPixelFormatType_32ABGR         = 'ABGR',     /* 32 bit ABGR */
+  kCVPixelFormatType_32RGBA         = 'RGBA',     /* 32 bit RGBA */
+  kCVPixelFormatType_64ARGB         = 'b64a',     /* 64 bit ARGB, 16-bit big-endian samples */
+  kCVPixelFormatType_48RGB          = 'b48r',     /* 48 bit RGB, 16-bit big-endian samples */
+  kCVPixelFormatType_32AlphaGray    = 'b32a',     /* 32 bit AlphaGray, 16-bit big-endian samples, black is zero */
+  kCVPixelFormatType_16Gray         = 'b16g',     /* 16 bit Grayscale, 16-bit big-endian samples, black is zero */
+  kCVPixelFormatType_422YpCbCr8     = '2vuy',     /* Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1 */
+  kCVPixelFormatType_4444YpCbCrA8   = 'v408',     /* Component Y'CbCrA 8-bit 4:4:4:4, ordered Cb Y' Cr A */
+  kCVPixelFormatType_4444YpCbCrA8R  = 'r408',     /* Component Y'CbCrA 8-bit 4:4:4:4, rendering format. full range alpha, zero biased YUV, ordered A Y' Cb Cr */
+  kCVPixelFormatType_444YpCbCr8     = 'v308',     /* Component Y'CbCr 8-bit 4:4:4 */
+  kCVPixelFormatType_422YpCbCr16    = 'v216',     /* Component Y'CbCr 10,12,14,16-bit 4:2:2 */
+  kCVPixelFormatType_422YpCbCr10    = 'v210',     /* Component Y'CbCr 10-bit 4:2:2 */
+  kCVPixelFormatType_444YpCbCr10    = 'v410',     /* Component Y'CbCr 10-bit 4:4:4 */
+  kCVPixelFormatType_420YpCbCr8Planar = 'y420',   /* Planar Component Y'CbCr 8-bit 4:2:0.  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrPlanar struct */
+  kCVPixelFormatType_422YpCbCr_4A_8BiPlanar = 'a2vy', /* First plane: Video-range Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1; second plane: alpha 8-bit 0-255 */
+};
+
+/*
+Planar pixel buffers have the following descriptor at their base address.  
+Clients should generally use CVPixelBufferGetBaseAddressOfPlane, 
+CVPixelBufferGetBytesPerRowOfPlane, etc. instead of accessing it directly.
+*/
+struct CVPlanarComponentInfo {
+  int32_t             offset;    /* offset from main base address to base address of this plane, big-endian */
+  uint32_t            rowBytes;  /* bytes per row of this plane, big-endian */
+};
+typedef struct CVPlanarComponentInfo      CVPlanarComponentInfo;
+struct CVPlanarPixelBufferInfo {
+  CVPlanarComponentInfo  componentInfo[1];
+};
+typedef struct CVPlanarPixelBufferInfo         CVPlanarPixelBufferInfo;
+struct CVPlanarPixelBufferInfo_YCbCrPlanar {
+  CVPlanarComponentInfo  componentInfoY;
+  CVPlanarComponentInfo  componentInfoCb;
+  CVPlanarComponentInfo  componentInfoCr;
+};
+typedef struct CVPlanarPixelBufferInfo_YCbCrPlanar   CVPlanarPixelBufferInfo_YCbCrPlanar;
+
 #pragma mark BufferAttributeKeys
 CV_EXPORT const CFStringRef kCVPixelBufferPixelFormatTypeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
 CV_EXPORT const CFStringRef kCVPixelBufferMemoryAllocatorKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		    // CFAllocatorRef
@@ -39,6 +99,7 @@ CV_EXPORT const CFStringRef kCVPixelBufferBytesPerRowAlignmentKey AVAILABLE_MAC_
 CV_EXPORT const CFStringRef kCVPixelBufferCGBitmapContextCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // CFBoolean
 CV_EXPORT const CFStringRef kCVPixelBufferCGImageCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
 CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
+CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey; // AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;		    // CFNumber
 
 /*!
     @typedef	CVPixelBufferRef
@@ -85,7 +146,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(CFAllocatorRe
     @param      width   Width of the PixelBuffer in pixels.
     @param      height  Height of the PixelBuffer in pixels.
     @param	pixelFormatType		Pixel format indentified by its respective OSType.
-    @param	pixelBufferAttributes      A dictionary with additonal attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
+    @param	pixelBufferAttributes      A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */    
@@ -109,7 +170,7 @@ typedef void (*CVPixelBufferReleaseBytesCallback)( void *releaseRefCon, const vo
     @param      bytesPerRow		Row bytes of the pixel storage memory.
     @param      releaseCallback         CVPixelBufferReleaseBytePointerCallback function that gets called when the PixelBuffer gets destroyed.
     @param      releaseRefCon           User data identifying the PixelBuffer for the release callback.
-    @param      pixelBufferAttributes      A dictionary with additonal attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
+    @param      pixelBufferAttributes      A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */
@@ -142,7 +203,7 @@ typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void *releaseRefCon, co
     @param	planeBytesPerRow	Array of plane bytesPerRow values.
     @param	releaseCallback		CVPixelBufferReleaseBytePointerCallback function that gets called when the PixelBuffer gets destroyed.
     @param	releaseRefCon		User data identifying the PixelBuffer for the release callback.
-    @param	pixelBufferAttributes      A dictionary with additonal attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
+    @param	pixelBufferAttributes      A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */

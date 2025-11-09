@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for String Comparison and related operations
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
-     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -98,6 +98,7 @@ enum {
 /*
  *  These routines are available in Carbon with the new names.
  */
+#if !__LP64__
 /*
  *  [Mac]ReplaceText()   *** DEPRECATED ***
  *  
@@ -109,7 +110,7 @@ enum {
  *    CFStringReplace instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -134,7 +135,7 @@ MacReplaceText(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -155,7 +156,7 @@ ScriptOrder(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -180,7 +181,7 @@ MacCompareString(
  *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -202,7 +203,7 @@ IdenticalString(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -227,7 +228,7 @@ StringOrder(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -251,7 +252,7 @@ CompareText(
  *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -275,7 +276,7 @@ IdenticalText(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -302,7 +303,7 @@ TextOrder(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -317,6 +318,8 @@ LanguageOrder(
  *  These routines are available in InterfaceLib with old names.
  *  Macros are provided for C to allow source code use to the new names.
  */
+#endif  /* !__LP64__ */
+
 /*
  *  IUMagPString()
  *  
@@ -507,6 +510,7 @@ LanguageOrder(
 
 
 
+#if !__LP64__
 /*
  *  RelString()   *** DEPRECATED ***
  *  
@@ -518,7 +522,7 @@ LanguageOrder(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -541,7 +545,7 @@ RelString(
  *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -553,6 +557,9 @@ EqualString(
   Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
  *  relstring()   *** DEPRECATED ***
  *  
@@ -564,7 +571,7 @@ EqualString(
  *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -580,11 +587,13 @@ relstring(
  *  equalstring()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available [32-bit only]
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 
+
+#endif  /* !__LP64__ */
 
 
 

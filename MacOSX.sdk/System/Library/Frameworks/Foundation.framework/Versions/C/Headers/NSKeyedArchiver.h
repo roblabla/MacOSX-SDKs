@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2001-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -16,7 +16,7 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 @interface NSKeyedArchiver : NSCoder {
 @private
     void *_stream;
-    uint32_t _flags;
+    NSUInteger _flags;
     id _delegate;
     id _containers;
     id _objects;
@@ -25,13 +25,13 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
     id _classNameMap;
     id _conditionals;
     id _classes;
-    int32_t _genericKey;
+    NSUInteger _genericKey;
     void *_cache;
-    uint32_t _cacheSize;
+    NSUInteger _cacheSize;
     void *_reserved3;
     void *_reserved2;
     void *_reserved1;
-    void *_reserved0;
+    void * __strong _reserved0;
 }
 
 + (NSData *)archivedDataWithRootObject:(id)rootObject;
@@ -63,7 +63,7 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 - (void)encodeInt64:(int64_t)intv forKey:(NSString *)key;
 - (void)encodeFloat:(float)realv forKey:(NSString *)key;
 - (void)encodeDouble:(double)realv forKey:(NSString *)key;
-- (void)encodeBytes:(const uint8_t *)bytesp length:(unsigned)lenv forKey:(NSString *)key;
+- (void)encodeBytes:(const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
 
 @end
 
@@ -83,8 +83,8 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
     id _objects;
     const uint8_t *_bytes;
     uint64_t _len;
-    void *_reserved1;
-    void *_reserved0;
+    id _white;
+    void *__strong _reserved0;
 }
 
 + (id)unarchiveObjectWithData:(NSData *)data;
@@ -114,7 +114,7 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 - (int64_t)decodeInt64ForKey:(NSString *)key;
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
-- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(unsigned *)lengthp;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorlease pool
+- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorlease pool
 
 @end
 

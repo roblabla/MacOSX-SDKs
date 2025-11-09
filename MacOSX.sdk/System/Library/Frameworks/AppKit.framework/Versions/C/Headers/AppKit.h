@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -14,6 +14,7 @@
 #import <AppKit/NSAccessibility.h>
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSAlert.h>
+#import <AppKit/NSAnimationContext.h>
 #import <AppKit/NSAppleScriptExtensions.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSBox.h>
@@ -22,6 +23,7 @@
 #import <AppKit/NSCell.h>
 #import <AppKit/NSClipView.h>
 #import <AppKit/NSControl.h>
+#import <AppKit/NSDockTile.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSFontDescriptor.h>
 #import <AppKit/NSFontManager.h>
@@ -53,6 +55,7 @@
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSFileWrapper.h>
 #import <AppKit/NSHelpManager.h>
+#import <AppKit/NSGradient.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSImageCell.h>
@@ -89,7 +92,9 @@
 #import <AppKit/NSText.h>
 #import <AppKit/NSTokenField.h>
 #import <AppKit/NSTokenFieldCell.h>
+#import <AppKit/NSTrackingArea.h>
 #import <AppKit/NSView.h>
+#import <AppKit/NSViewController.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSWindowController.h>
 #import <AppKit/NSWorkspace.h>
@@ -121,7 +126,6 @@
 #import <AppKit/NSMenuView.h>
 #import <AppKit/NSMenuItemCell.h>
 #import <AppKit/NSPopUpButtonCell.h>
-#import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSAffineTransform.h>
 #import <AppKit/NSBezierPath.h>
 #import <AppKit/NSPICTImageRep.h>
@@ -140,6 +144,7 @@
 #import <AppKit/NSTextStorageScripting.h>
 #import <AppKit/NSToolbar.h>
 #import <AppKit/NSToolbarItem.h>
+#import <AppKit/NSToolbarItemGroup.h>
 #import <AppKit/NSWindowScripting.h>
 #import <AppKit/NSStepper.h>
 #import <AppKit/NSStepperCell.h>
@@ -152,6 +157,8 @@
 #import <AppKit/NSController.h>
 #import <AppKit/NSObjectController.h>
 #import <AppKit/NSArrayController.h>
+#import <AppKit/NSDictionaryController.h>
+#import <AppKit/NSTreeNode.h>
 #import <AppKit/NSTreeController.h>
 #import <AppKit/NSUserDefaultsController.h>
 #import <AppKit/NSKeyValueBinding.h>
@@ -163,3 +170,11 @@
 #import <AppKit/NSLevelIndicator.h>
 #import <AppKit/NSAnimation.h>
 #import <AppKit/NSPersistentDocument.h>
+#import <AppKit/NSRuleEditor.h>
+#import <AppKit/NSPredicateEditor.h>
+#import <AppKit/NSPredicateEditorRowTemplate.h>
+#import <AppKit/NSPathCell.h>
+#import <AppKit/NSPathControl.h>
+#import <AppKit/NSPathComponentCell.h>
+#import <AppKit/NSCollectionView.h>
+#import <AppKit/NSTextInputClient.h>

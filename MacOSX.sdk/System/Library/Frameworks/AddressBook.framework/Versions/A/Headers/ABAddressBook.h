@@ -2,7 +2,7 @@
 //  ABAddressBook.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <AddressBook/ABTypedefs.h>
@@ -37,35 +37,44 @@
 @interface ABAddressBook : NSObject
 {
 @private
-    id                   _personIndexer;
-    id                   _subscribedPersonIndexer;
     NSMutableDictionary *_masterCache;
-
-    NSMutableSet        *_insertedRecords;
-    NSMutableSet        *_modifiedRecords;
-    NSMutableSet        *_deletedRecords;
+    
+    void                *_reserved2;
+    void                *_reserved3;
+    id                   _reserved4;
     NSMutableDictionary *_tableSchemas;
-    NSMutableDictionary *_propertyTypes;
-    void                *_converterPort;
+    NSMutableDictionary *_reserved5;
+    __strong void		*_converterPort;
     NSTimer             *_inactivityTimer;
-    NSString            *_meUniqueId;
+    id                   _reserved;
 
-    void                *_reserved1;
+    id                   _reserved1;
+	
+    void                *_reserved6;
+    void                *_reserved7;
 
     struct __ABBookflags {
         unsigned int     hasUnsavedChanges:1;
         unsigned int     readOnly:1;
         unsigned int     importMe:1;
-        unsigned int     needConversion:1;
+        unsigned int     needConversion:1; // only used for puma conversion
         unsigned int     cleanedUp:1;
         unsigned int     importTips:1;
         unsigned int     restoreFromMetaData:1;
-        unsigned int     _reserved:25;
+        unsigned int     prefsNeedSync:1;
+        unsigned int     _reserved:24;
     } _flags;
 }
 
 + (ABAddressBook *)sharedAddressBook;
     // Returns the unique shared instance of ABAddressBook
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
++ (ABAddressBook *)addressBook;
+    // Returns a new instance of ABAddressBook
+
+#endif
 
 - (NSArray *)recordsMatchingSearchElement:(ABSearchElement *)search;
     // Returns an array of records matching the given search element
@@ -76,8 +85,16 @@
     // Saves changes made since the last save
     // Return YES if successful (or there was no change)
 
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+- (BOOL)saveAndReturnError:(NSError **)error;
+    // Saves changes made since the last save
+    // Return YES if successful (or there was no change)
+
+#endif
+
 - (BOOL)hasUnsavedChanges;
-    // Returns YES if they are unsaved changes
+    // Returns YES if there are unsaved changes
     // The unsaved changes flag is automatically set when changes are made
 
 - (ABPerson *)me;
@@ -94,18 +111,18 @@
     // Returns nil if the record could not be found
 
 - (BOOL)addRecord:(ABRecord *)record;
-    // Adds a record (ABPerson or ABGroup) to the AddressBook Database
+    // Adds a record (ABPerson or ABGroup) to the AddressBook database
     // Raises if record is nil
     // Returns YES if the addition was successful
 
 - (BOOL)removeRecord:(ABRecord *)record;
-    // Removes a record (ABPerson or ABGroup) from the AddressBook Database
+    // Removes a record (ABPerson or ABGroup) from the AddressBook database
     // Raises if record is nil
     // Returns YES if the removal was successful
 
 - (NSArray *)people;
     // Returns an array of all the people in the AddressBook database
-    // Returns an empty array in case the DB doesn't contain any body
+    // Returns an empty array in case the DB doesn't contain any people
 
 - (NSArray *)groups;
     // Returns an array of all the groups in the AddressBook database
@@ -124,11 +141,11 @@
 - (NSString *)defaultCountryCode;
     // Returns the default country code for records without specified codes.
 
-- (int)defaultNameOrdering;
+- (NSInteger)defaultNameOrdering;
     // Returns the default name ordering defined by the user in the Address Book preferences.
     // Possible values: kABFirstNameFirst or kABLastNameFirst
 
 #endif
-@end
 
+@end
 

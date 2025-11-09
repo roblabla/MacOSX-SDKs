@@ -1,7 +1,7 @@
 /*
         NSDrawer.h
         Application Kit
-        Copyright (c) 1999-2005, Apple Computer, Inc.
+        Copyright (c) 1999-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -19,12 +19,13 @@
 @class NSWindow;
 @class NSNotification;
 
-typedef enum _NSDrawerState {
+enum {
     NSDrawerClosedState			= 0,
     NSDrawerOpeningState 		= 1,
     NSDrawerOpenState 			= 2,
     NSDrawerClosingState 		= 3
-} NSDrawerState;
+};
+typedef NSUInteger NSDrawerState;
 
 @interface NSDrawer : NSResponder
 {
@@ -36,8 +37,8 @@ typedef enum _NSDrawerState {
     NSRectEdge 		_drawerPreferredEdge;
     float 		_drawerPercent;
     float 		_drawerPercentSaved;
-    float		_drawerLeadingOffset;
-    float		_drawerTrailingOffset;
+    CGFloat		_drawerLeadingOffset;
+    CGFloat		_drawerTrailingOffset;
     NSLock 		*_drawerLock;
     NSWindow		*_drawerWindow;
     NSWindow 		*_drawerParentWindow;
@@ -46,10 +47,10 @@ typedef enum _NSDrawerState {
     CFAbsoluteTime 	_drawerStartTime;
     CFTimeInterval 	_drawerTotalTime;
     CFRunLoopRef 	_drawerLoop;
-    CFRunLoopTimerRef 	_drawerTimer;
+    __strong CFRunLoopTimerRef 	_drawerTimer;
     id 			_drawerDelegate;
     unsigned int	_drawerFlags;
-    CFRunLoopObserverRef _drawerObserver;
+    __strong CFRunLoopObserverRef _drawerObserver;
 }
 
 - (id)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
@@ -71,7 +72,7 @@ typedef enum _NSDrawerState {
 - (void)close:(id)sender;
 - (void)toggle:(id)sender;
 
-- (int)state;
+- (NSInteger)state;
 - (NSRectEdge)edge;
 
 - (void)setContentSize:(NSSize)size;
@@ -81,10 +82,10 @@ typedef enum _NSDrawerState {
 - (void)setMaxContentSize:(NSSize)size;
 - (NSSize)maxContentSize;
 
-- (void)setLeadingOffset:(float)offset;
-- (float)leadingOffset;
-- (void)setTrailingOffset:(float)offset;
-- (float)trailingOffset;
+- (void)setLeadingOffset:(CGFloat)offset;
+- (CGFloat)leadingOffset;
+- (void)setTrailingOffset:(CGFloat)offset;
+- (CGFloat)trailingOffset;
 
 @end
 

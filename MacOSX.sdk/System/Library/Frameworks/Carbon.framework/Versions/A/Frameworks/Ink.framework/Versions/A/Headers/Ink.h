@@ -3,7 +3,7 @@
  
      Contains:   Ink Manager
  
-     Version:    InkFramework-71~854
+     Version:    InkFramework-86~103
  
      Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -408,7 +408,7 @@ enum {
    * matching the current user settings. See above note for
    * kInkTerminationOutOfProximity.
    */
-  kInkTerminationAll            = (unsigned long)0xFFFFFFFF /* Deprecated*/
+  kInkTerminationAll            = (UInt32)0xFFFFFFFF /* Deprecated*/
 };
 
 
@@ -1154,6 +1154,7 @@ InkTextCreateCFString(
    that triggered the contextual/alternates menu.)
 */
 
+#if !__LP64__
 /*
  *  InkTextInsertAlternatesInMenu()
  *  
@@ -1191,7 +1192,7 @@ InkTextCreateCFString(
  *    was unsuccessful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1202,6 +1203,8 @@ InkTextInsertAlternatesInMenu(
   MenuItemIndex   iAfterItem)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  InkTextKeyModifiers()
@@ -1618,7 +1621,7 @@ InkStrokeGetTypeID(void)                                      AVAILABLE_MAC_OS_X
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

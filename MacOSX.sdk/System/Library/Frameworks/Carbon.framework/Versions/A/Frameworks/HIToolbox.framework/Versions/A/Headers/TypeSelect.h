@@ -3,7 +3,7 @@
  
      Contains:   TypeSelect Utilties
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -32,8 +32,18 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+
+/*
+ *  TypeSelect
+ *  
+ *  Discussion:
+ *    The TypeSelection API is deprecated in Mac OS X 10.4 and later,
+ *    and is not included in the 64-bit version of HIToolbox.
+ *    Applications should use the UCTypeSelect API in
+ *    UnicodeUtilities.h.
+ */
 typedef SInt16 TSCode;
 enum {
   tsPreviousSelectMode          = -1,
@@ -42,118 +52,14 @@ enum {
 };
 
 struct TypeSelectRecord {
-  unsigned long       tsrLastKeyTime;
+  UInt32              tsrLastKeyTime;
   ScriptCode          tsrScript;
   Str63               tsrKeyStrokes;
 };
 typedef struct TypeSelectRecord         TypeSelectRecord;
+#if !__LP64__
 typedef CALLBACK_API( Boolean , IndexToStringProcPtr )(short item, ScriptCode *itemsScript, StringPtr *itemsStringPtr, void *yourDataPtr);
 typedef STACK_UPP_TYPE(IndexToStringProcPtr)                    IndexToStringUPP;
-/*
- *  TypeSelectClear()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    use CFStringUppercase instead.
- *  
- *  Discussion:
- *    This function is no longer recommended. Please use
- *    CFStringUppercase instead.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern void 
-TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
-/*
-        Long ago the implementation of TypeSelectNewKey had a bug that
-        required the high word of D0 to be zero or the function did not work.
-        Although fixed now, we are continuing to clear the high word
-        just in case someone tries to run on an older system.
-    */
-/*
- *  TypeSelectNewKey()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    use UCTypeSelect instead.
- *  
- *  Discussion:
- *    This function is no longer recommended. Please use UCTypeSelect
- *    instead.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern Boolean 
-TypeSelectNewKey(
-  const EventRecord *  theEvent,
-  TypeSelectRecord *   tsr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
-/*
- *  TypeSelectFindItem()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    use UCTypeSelect instead.
- *  
- *  Discussion:
- *    This function is no longer recommended. Please use UCTypeSelect
- *    instead.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern short 
-TypeSelectFindItem(
-  const TypeSelectRecord *  tsr,
-  short                     listSize,
-  TSCode                    selectMode,
-  IndexToStringUPP          getStringProc,
-  void *                    yourDataPtr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
-
-/*
- *  TypeSelectCompare()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    use CFStringUppercase instead.
- *  
- *  Discussion:
- *    This function is no longer recommended. Please use
- *    CFStringUppercase instead.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern short 
-TypeSelectCompare(
-  const TypeSelectRecord *  tsr,
-  ScriptCode                testStringScript,
-  StringPtr                 testStringPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
 /*
  *  NewIndexToStringUPP()
  *  
@@ -163,7 +69,7 @@ TypeSelectCompare(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern IndexToStringUPP
-NewIndexToStringUPP(IndexToStringProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewIndexToStringUPP(IndexToStringProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeIndexToStringUPP()
@@ -174,7 +80,7 @@ NewIndexToStringUPP(IndexToStringProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeIndexToStringUPP(IndexToStringUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeIndexToStringUPP(IndexToStringUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeIndexToStringUPP()
@@ -190,13 +96,126 @@ InvokeIndexToStringUPP(
   ScriptCode *      itemsScript,
   StringPtr *       itemsStringPtr,
   void *            yourDataPtr,
-  IndexToStringUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IndexToStringUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline IndexToStringUPP                                     NewIndexToStringUPP(IndexToStringProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeIndexToStringUPP(IndexToStringUPP) { }
+    inline Boolean                                              InvokeIndexToStringUPP(short item, ScriptCode * itemsScript, StringPtr * itemsStringPtr, void * yourDataPtr, IndexToStringUPP userUPP) { return (*userUPP)(item, itemsScript, itemsStringPtr, yourDataPtr); }
+  #else
+    #define NewIndexToStringUPP(userRoutine)                    ((IndexToStringUPP)userRoutine)
+    #define DisposeIndexToStringUPP(userUPP)
+    #define InvokeIndexToStringUPP(item, itemsScript, itemsStringPtr, yourDataPtr, userUPP) (*userUPP)(item, itemsScript, itemsStringPtr, yourDataPtr)
+  #endif
+#endif
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+/*
+ *  TypeSelectClear()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UCTypeSelectFlushSelectorData instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    UCTypeSelectFlushSelectorData instead.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  TypeSelectNewKey()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UCTypeSelectAddKeyToSelector instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    UCTypeSelectAddKeyToSelector instead.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+TypeSelectNewKey(
+  const EventRecord *  theEvent,
+  TypeSelectRecord *   tsr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  TypeSelectFindItem()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UCTypeSelectFindItem instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    UCTypeSelectFindItem instead.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern short 
+TypeSelectFindItem(
+  const TypeSelectRecord *  tsr,
+  short                     listSize,
+  TSCode                    selectMode,
+  IndexToStringUPP          getStringProc,
+  void *                    yourDataPtr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  TypeSelectCompare()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UCTypeSelectCompare instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    UCTypeSelectCompare instead.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern short 
+TypeSelectCompare(
+  const TypeSelectRecord *  tsr,
+  ScriptCode                testStringScript,
+  StringPtr                 testStringPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
+#endif  /* !__LP64__ */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

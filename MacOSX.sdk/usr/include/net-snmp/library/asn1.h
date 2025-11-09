@@ -85,7 +85,7 @@ SOFTWARE.
         u_long          low;
     };
 
-#ifdef OPAQUE_SPECIAL_TYPES
+#ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
     typedef struct counter64 integer64;
     typedef struct counter64 unsigned64;
 
@@ -173,7 +173,7 @@ SOFTWARE.
      */
 #define ASN_OPAQUE_U64_MX_BER_LEN 12
 
-#endif                          /* OPAQUE_SPECIAL_TYPES */
+#endif                          /* NETSNMP_WITH_OPAQUE_SPECIAL_TYPES */
 
 
 #define ASN_PRIV_INCL_RANGE (ASN_PRIVATE | 2)
@@ -181,7 +181,7 @@ SOFTWARE.
 #define ASN_PRIV_DELEGATED  (ASN_PRIVATE | 5)
 #define ASN_PRIV_IMPLIED_OCTET_STR  (ASN_PRIVATE | ASN_OCTET_STR)       /* 4 */
 #define ASN_PRIV_IMPLIED_OBJECT_ID  (ASN_PRIVATE | ASN_OBJECT_ID)       /* 6 */
-#define ASN_PRIV_RETRY      (ASN_PRIVATE | 7)
+#define ASN_PRIV_RETRY      (ASN_PRIVATE | 7)   /* 199 */
 #define IS_DELEGATED(x)   ((x) == ASN_PRIV_DELEGATED)
 
 
@@ -232,7 +232,7 @@ SOFTWARE.
     u_char         *asn_parse_double(u_char *, size_t *, u_char *,
                                      double *, size_t);
 
-#ifdef USE_REVERSE_ASNENCODING
+#ifdef NETSNMP_USE_REVERSE_ASNENCODING
 
     /*
      * Re-allocator function for below.  

@@ -1,10 +1,10 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <Foundation/NSPredicate.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 // Flags(s) that can be passed to the factory to indicate that a operator operating on strings should do so in a case insensitive fashion.
 enum {
@@ -13,14 +13,16 @@ enum {
 };
 
 // Describes how the operator is modified: can be direct, ALL, or ANY
-typedef enum {
+enum {
     NSDirectPredicateModifier = 0, // Do a direct comparison
     NSAllPredicateModifier, // ALL toMany.x = y
     NSAnyPredicateModifier // ANY toMany.x = y
-} NSComparisonPredicateModifier;
+};
+typedef NSUInteger NSComparisonPredicateModifier;
+
 
 // Type basic set of operators defined. Most are obvious; NSCustomSelectorPredicateOperatorType allows a developer to create an operator which uses the custom selector specified in the constructor to do the evaluation.
-typedef enum {
+enum {
     NSLessThanPredicateOperatorType = 0, // compare: returns NSOrderedAscending
     NSLessThanOrEqualToPredicateOperatorType, // compare: returns NSOrderedAscending || NSOrderedSame
     NSGreaterThanPredicateOperatorType, // compare: returns NSOrderedDescending
@@ -33,7 +35,13 @@ typedef enum {
     NSEndsWithPredicateOperatorType,
     NSInPredicateOperatorType, // rhs contains lhs returns true
     NSCustomSelectorPredicateOperatorType
-} NSPredicateOperatorType;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    ,
+    NSContainsPredicateOperatorType = 99,
+    NSBetweenPredicateOperatorType
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+};
+typedef NSUInteger NSPredicateOperatorType;
 
 @class NSPredicateOperator;
 @class NSExpression;
@@ -48,10 +56,10 @@ typedef enum {
     NSExpression *_rhs;
 }
 
-+ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(unsigned)options;
++ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSUInteger)options;
 + (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
-- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(unsigned)options;
+- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSUInteger)options;
 - (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
 - (NSPredicateOperatorType)predicateOperatorType;
@@ -59,7 +67,7 @@ typedef enum {
 - (NSExpression *)leftExpression;
 - (NSExpression *)rightExpression;
 - (SEL)customSelector;
-- (unsigned)options;
+- (NSUInteger)options;
 
 @end
 

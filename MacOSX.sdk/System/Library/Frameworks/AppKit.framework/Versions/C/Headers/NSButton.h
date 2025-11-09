@@ -1,16 +1,17 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSButtonCell.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSSound;
 
-@interface NSButton : NSControl
+@interface NSButton : NSControl <NSUserInterfaceValidations>
 
 - (NSString *)title;
 - (void)setTitle:(NSString *)aString;
@@ -23,8 +24,8 @@
 - (NSCellImagePosition)imagePosition;
 - (void)setImagePosition:(NSCellImagePosition)aPosition;
 - (void)setButtonType:(NSButtonType)aType;
-- (int)state;
-- (void)setState:(int)value;
+- (NSInteger)state;
+- (void)setState:(NSInteger)value;
 - (BOOL)isBordered;
 - (void)setBordered:(BOOL)flag;
 - (BOOL)isTransparent;
@@ -33,8 +34,8 @@
 - (void)getPeriodicDelay:(float *)delay interval:(float *)interval;
 - (NSString *)keyEquivalent;
 - (void)setKeyEquivalent:(NSString *)charCode;
-- (unsigned int)keyEquivalentModifierMask;
-- (void)setKeyEquivalentModifierMask:(unsigned int)mask;
+- (NSUInteger)keyEquivalentModifierMask;
+- (void)setKeyEquivalentModifierMask:(NSUInteger)mask;
 - (void)highlight:(BOOL)flag;
 - (BOOL)performKeyEquivalent:(NSEvent *)key;
 

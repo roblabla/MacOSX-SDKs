@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,14 +9,14 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <Foundation/NSDate.h>
 
-@class NSArray, NSDocument, NSError, NSMenuItem, NSMutableArray, NSOpenPanel, NSURL, NSWindow;
+@class NSArray, NSDocument, NSError, NSMenuItem, NSMutableDictionary, NSOpenPanel, NSURL, NSWindow;
 
-@interface NSDocumentController : NSObject<NSCoding> {
+@interface NSDocumentController : NSObject<NSCoding, NSUserInterfaceValidations> {
     @private
     id _documents;
     id _moreVars;
-    NSArray *_types;
-    NSMutableArray *_recents;
+    NSArray *_cachedTypeDescriptions;
+    NSMutableDictionary *_recents;
     int _recentsLimit;
 }
 
@@ -97,9 +97,9 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 */
 - (NSArray *)URLsFromRunningOpenPanel;
 
-/* Present the application-modal open panel to the user, specifying a list of file name extensions and HFS file type codes for openable files. Return NSOKButton or NSCancelButton depending on how the user dismisses the panel.
+/* Present the application-modal open panel to the user, specifying a list of UTIs (in Mac OS 10.5), file name extensions, and encoded HFS file types for openable files. Return NSOKButton or NSCancelButton depending on how the user dismisses the panel.
 */
-- (int)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)fileNameExtensionsAndHFSFileTypes;
+- (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
@@ -160,7 +160,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 */
 - (void)reviewUnsavedDocumentsWithAlertTitle:(NSString *)title cancellable:(BOOL)cancellable delegate:(id)delegate didReviewAllSelector:(SEL)didReviewAllSelector contextInfo:(void *)contextInfo;
 
-/* For each open, modified, document present a document-modal alert panel asking whether the document should be saved and giving the option of cancelling, not saving the document, or saving the document. Stop presenting alert panels if the user indicates cancellation in any one of them. The default implementation of this merely sends each open document -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: and -close messages until one of them cannot be closed. The method selected by didCloseAllSelector must have the same signature as:
+/* For each open, modified, document present a document-modal alert panel asking whether the document should be saved and giving the option of canceling, not saving the document, or saving the document. Stop presenting alert panels if the user indicates cancellation in any one of them. The default implementation of this merely sends each open document -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: and -close messages until one of them cannot be closed. The method selected by didCloseAllSelector must have the same signature as:
 
     - (void)documentController:(NSDocumentController *)documentController didCloseAll:(BOOL)didCloseAll contextInfo:(void *)contextInfo;
 */
@@ -190,7 +190,7 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 /* Return the maximum number of items that may be presented in the standard Open Recent menu. A value of 0 indicates that NSDocumentController will not attempt to add an Open Recent menu to your application's File menu, though NSDocumentController will not attempt to remove any Open Recent menu item if there is one already there. The default implementation returns a value that is subject to change and may or may not be derived from a setting made by the user in a System Preferences panel.
 */
-- (unsigned int)maximumRecentDocumentCount;
+- (NSUInteger)maximumRecentDocumentCount;
 
 #endif
 
@@ -218,7 +218,9 @@ You can customize the presentation of errors for all kinds of documents by overr
 */
 - (NSString *)defaultType;
 
-/* Given a URL, return the name of the document type that should be used when opening the document at that location, if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document's type could not be determined, or the fact that the document's type is just unrecognized. The default implementation of this method invokes -typeFromFileExtension:, possibly twice, passing an HFS file type string for the second invocation. The default implementation is of course subject to change however. You can override this to customize type determination for documents being opened.
+/* Given a URL, return the name of the document type that should be used when opening the document at that location, if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document's type could not be determined, or the fact that the document's type is just unrecognized. The default implementation of this method merely invokes -[NSWorkspace typeOfFile:error:]. You can override this to customize type determination for documents being opened.
+
+For backward binary compatibility with Mac OS 10.4 and earlier, the default implementation of this method actually first does the same thing that it did in Mac OS 10.4 (invoke -typeFromFileExtension:, possibly twice, passing an HFS file type string for the second invocation) if there are any CFBundleDocumentTypes Info.plist entries that don't have LSItemContentTypes subentries, and only invokes -[NSWorkspace typeOfFile:error:] if that does not succeed.
 */
 - (NSString *)typeForContentsOfURL:(NSURL *)inAbsoluteURL error:(NSError **)outError;
 
@@ -228,21 +230,13 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 #endif
 
-/* Given a file name extension or an HFS file type string of the sort returned by NSFileTypeForHFSTypeCode(), return a document type name.
-*/
-- (NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType;
-
-/* Given a document type name, return the subclass of NSDocument that should be instantiated when opening a document of that type.
+/* Given a document type name, return the subclass of NSDocument that should be instantiated when opening a document of that type, or nil for failure.
 */
 - (Class)documentClassForType:(NSString *)typeName;
 
-/* Given a document type name, return a string describing the document type that is fit to present to the user.
+/* Given a document type name, return a string describing the document type that is fit to present to the user, or nil for failure.
 */
 - (NSString *)displayNameForType:(NSString *)typeName;
-
-/* Given a document type, return an array of corresponding file name extensions and HFS file type strings of the sort returned by NSFileTypeForHFSTypeCode().
-*/
-- (NSArray *)fileExtensionsFromType:(NSString *)typeName;
 
 #pragma mark *** Menu Item Validation ***
 
@@ -255,6 +249,11 @@ You can customize the presentation of errors for all kinds of documents by overr
 @interface NSDocumentController(NSDeprecated)
 
 #pragma mark *** Backward Compatibility
+
+/* Methods that were deprecated in Mac OS 10.5, and don't work well in applications whose document types are declared with UTIs. In general, if each of the application's CFBundleDocumentTypes Info.plist entries has a valid LSItemContentTypes subentry, and the application doesn't invoke deprecated methods like -fileNamesFromRunningOpenPanel, then these methods will never be invoked from within Cocoa.
+*/
+- (NSArray *)fileExtensionsFromType:(NSString *)typeName;
+- (NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType;
 
 /* Methods that were deprecated in Mac OS 10.4. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */

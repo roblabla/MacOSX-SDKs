@@ -1,5 +1,5 @@
 /*	CFXMLParser.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLPARSER__)
@@ -13,9 +13,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFXMLNode.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFXMLParser * CFXMLParserRef;
 
@@ -49,7 +47,7 @@ kCFXMLParserAddImpliedAttributes -
    Currently not supported.
 */
 
-typedef enum {
+enum {
     kCFXMLParserValidateDocument = (1 << 0),
     kCFXMLParserSkipMetaData = (1 << 1),
     kCFXMLParserReplacePhysicalEntities = (1 << 2),
@@ -58,10 +56,11 @@ typedef enum {
     kCFXMLParserAddImpliedAttributes = (1 << 5),
     kCFXMLParserAllOptions = 0x00FFFFFF,
     kCFXMLParserNoOptions = 0
-} CFXMLParserOptions;
+};
+typedef CFOptionFlags CFXMLParserOptions;
 
 /* This list is expected to grow */
-typedef enum {
+enum {
     kCFXMLStatusParseNotBegun = -2,
     kCFXMLStatusParseInProgress = -1,
     kCFXMLStatusParseSuccessful = 0,
@@ -80,7 +79,8 @@ typedef enum {
     kCFXMLErrorMalformedCharacterReference,
     kCFXMLErrorMalformedParsedCharacterData,
     kCFXMLErrorNoData
-} CFXMLParserStatusCode;
+};
+typedef CFIndex CFXMLParserStatusCode;
 
 
 /*  These functions are called as a parse progresses.
@@ -263,9 +263,7 @@ CF_EXPORT const CFStringRef kCFXMLTreeErrorLocation		AVAILABLE_MAC_OS_X_VERSION_
 CF_EXPORT const CFStringRef kCFXMLTreeErrorStatusCode		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
     /* value is a CFNumber containing the error status code. */
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFXMLPARSER__ */
 

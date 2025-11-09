@@ -56,12 +56,12 @@ typedef float CGDisplayFadeInterval;
  * is complete, control returns to the calling program, while a fade-in effect
  * runs asynchronously.
  */
-CGError CGConfigureDisplayFadeEffect(CGDisplayConfigRef configRef,
+CG_EXTERN CGError CGConfigureDisplayFadeEffect(CGDisplayConfigRef configRef,
                                      CGDisplayFadeInterval fadeOutSeconds,
                                      CGDisplayFadeInterval fadeInSeconds,
                                      float fadeRed,
                                      float fadeGreen,
-                                     float fadeBlue);
+                                     float fadeBlue) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * It may also be desirable to perform fade operations at other times, as when
@@ -85,8 +85,8 @@ typedef float CGDisplayReservationInterval;
  * Returns kCGErrorNoneAvailable if another reservation is in effect,
  * and kCGErrorSuccess on success.
  */
-CGError CGAcquireDisplayFadeReservation(CGDisplayReservationInterval seconds,
-                                        CGDisplayFadeReservationToken * pNewToken);
+CG_EXTERN CGError CGAcquireDisplayFadeReservation(CGDisplayReservationInterval seconds,
+                                        CGDisplayFadeReservationToken * pNewToken) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Releases a display fade reservation, and unfades the display if needed
@@ -100,7 +100,7 @@ CGError CGAcquireDisplayFadeReservation(CGDisplayReservationInterval seconds,
  * Returns kCGErrorIllegalArgument if myToken is not the valid reservation token,
  * and kCGErrorSuccess on success.
  */
-CGError CGReleaseDisplayFadeReservation(CGDisplayFadeReservationToken myToken);
+CG_EXTERN CGError CGReleaseDisplayFadeReservation(CGDisplayFadeReservationToken myToken) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * The actual fade mechanism:
@@ -151,19 +151,17 @@ CGError CGReleaseDisplayFadeReservation(CGDisplayFadeReservationToken myToken);
  *		      0.0, 0.0, 0.0,		// black 
  *		      false);			// Don't wait for completion 
  */
-CGError CGDisplayFade(CGDisplayFadeReservationToken myToken,
+CG_EXTERN CGError CGDisplayFade(CGDisplayFadeReservationToken myToken,
                       CGDisplayFadeInterval seconds,
                       CGDisplayBlendFraction startBlend,
                       CGDisplayBlendFraction endBlend,
                       float redBlend, float greenBlend, float blueBlend,
-                      boolean_t synchronous );
+                      boolean_t synchronous )  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Returns true if a fade operation is currently in progress.
  */
-boolean_t CGDisplayFadeOperationInProgress(void);
-
-
+CG_EXTERN boolean_t CGDisplayFadeOperationInProgress(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 CG_EXTERN_C_END
 

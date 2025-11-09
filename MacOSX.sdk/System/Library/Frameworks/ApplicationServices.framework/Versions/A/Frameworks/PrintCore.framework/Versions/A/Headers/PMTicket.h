@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    1.0
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,12 +17,8 @@
 #ifndef __PMTICKET__
 #define __PMTICKET__
 
-#ifndef __APPLICATIONSERVICES__
-	#include <ApplicationServices/ApplicationServices.h>
-#endif
-
 #ifndef	__PMERRORS__
-	#include <PrintCore/PMErrors.h>
+#include <PrintCore/PMErrors.h>
 #endif
 
 #ifndef __COREFOUNDATION__
@@ -100,28 +96,6 @@ enum {
     kPMModuleInfoTicketType     = 9,
     kPMTicketListType           = 10,
     kPMPaperInfoTicketType      = 11
-};
-
-
-/* An enum to demark where in the printing process we are. This value will be stored in the */
-/* print settings ticket at the top level in the Job Ticket. It will be used to signal shift */
-/* from one phase to the next and may be set by just about any part of the system. Users will */
-/* want to check for ">" (greater than) or "<" (less than) conditions when possible, allowing */
-/* for additional phases to be defined later on. */
-
-typedef UInt16 PMPrintingPhaseType;
-enum {
-    kPMPhaseUnknown             = 0,                            /* Not clear what phase we're in yet. */
-    kPMPhasePreDialog           = 1,                            /* Just before we execute the code to open the dialog. */
-    kPMPhaseDialogsUp           = 2,                            /* One of the dialogs is in front of the user. */
-    kPMPhasePostDialogs         = 3,                            /* Dialogs are down, not yet spooling. */
-    kPMPhasePreAppDrawing       = 4,                            /* Just before we begin to spool */
-    kPMPhaseAppDrawing          = 5,                            /* We're spooling drawing commands from the app. */
-    kPMPhasePostAppDrawing      = 6,                            /* Finished with spooling, not yet rendering or converting. */
-    kPMPhasePreConversion       = 7,                            /* Just before we begin to convert to PS, Raster, or other final format. */
-    kPMPhaseConverting          = 8,                            /* Converting from Spool file to final printer format. */
-    kPMPhasePostConversion      = 9,                            /* Done with printer ready data, waiting for completion. */
-    kPMPhasePrinting            = 10                            /* In the process of waiting for the printer. */
 };
 
 typedef SInt16 PMTicketErrors;
@@ -238,10 +212,16 @@ enum {
 */
 #define kPMPaperInfoPrelude                 "com.apple.print.PaperInfo."
 #define kPMPaperNameStr                     kPMPaperInfoPrelude "PMPaperName"
-#define kPMPaperNameKey                     CFSTR( kPMPaperNameStr )                    /* CFString for the name of the paper displayed in UI */
-#define kPMPPDPaperNameStr		    kPMPaperInfoPrelude "ppd.PMPaperName"
-#define kPMPPDPaperNameKey		    CFSTR( kPMPPDPaperNameStr )			/* CFString for the PPD name of the paper. */
-#define kPMUnadjustedPaperRectStr           kPMPaperInfoPrelude "PMUnadjustedPaperRect"
+#define kPMPaperNameKey                     CFSTR( kPMPaperNameStr )                    /* CFString for the iso name of the paper, e.g. na-letter */
+#define kPMPPDPaperNameStr					kPMPaperInfoPrelude "ppd.PMPaperName"
+#define kPMPPDPaperNameKey                  CFSTR( kPMPPDPaperNameStr )                 /* CFString intended to be the ppd code name for the paper, e.g Letter */
+
+/* The kPMPPDPaperCodeNameKey key stores a CFStringRef which is the true PPD code name for a paper. May not be available for some papers. Only available for
+papers created on Mac OS X 10.5 and later. */
+#define kPMPPDPaperCodeNameStr	"PMPPDPaperCodeName"
+#define kPMPPDPaperCodeNameKey	CFSTR( kPMPPDPaperCodeNameStr )
+	
+#define kPMUnadjustedPaperRectStr			kPMPaperInfoPrelude "PMUnadjustedPaperRect"
 #define kPMUnadjustedPaperRectKey           CFSTR( kPMUnadjustedPaperRectStr )          /* CFArray of 4 CFNumbers of kCFNumberDoubleType for paper size in points. */
 #define kPMUnadjustedPageRectStr            kPMPaperInfoPrelude "PMUnadjustedPageRect"
 #define kPMUnadjustedPageRectKey            CFSTR( kPMUnadjustedPageRectStr )           /* CFArray of 4 CFNumbers of kCFNumberDoubleType for page size within the paper, in points. */
@@ -273,13 +253,7 @@ enum {
 #define kPMPageScalingVerticalStr           kPMPageFormatPrelude "PMVerticalScaling"
 #define kPMPageScalingVerticalKey           CFSTR( kPMPageScalingVerticalStr )          /* CFNumber - kCFNumberDoubleType, Vertical scaling factor applied to original page size - 1 = 100%. */
 #define kPMPageOrientationStr               kPMPageFormatPrelude "PMOrientation"
-#define kPMPageOrientationKey               CFSTR( kPMPageOrientationStr )              /* CFNumber - kCFNumberSInt32Type, PMOrientation, 1 = portrait, 2 = landscape, 3 = reverse landscape, 4 = reverse portrait. */
-#define kPMPageBackupRecordHdlStr           kPMPageFormatPrelude "BackupPrintRecordHandle"
-#define kPMPageBackupRecordHdlKey           CFSTR( kPMPageBackupRecordHdlStr )          /* CFData - Print record handle, allowing easy access during most calls. Not used when flattened. (OS8 Only) */
-#define kPMPageBackupRecordDataStr          kPMPageFormatPrelude "BackupPrintRecord"
-#define kPMPageBackupRecordDataKey          CFSTR( kPMPageBackupRecordDataStr )         /* CFData - Print record stored in complete form - used when flattening Ticket w/ record. (OS8 only) */
-#define kPMPageCustomDialogHdlStr           kPMPageFormatPrelude "CustomDialogRecord"
-#define kPMPageCustomDialogHdlKey           CFSTR( kPMPageCustomDialogHdlStr )      	/* CFData - Handle to the print record using for custom dialog calls. Not stored when flattened. (OS8 Only) */
+#define kPMPageOrientationKey               CFSTR( kPMPageOrientationStr )              /* CFNumber - kCFNumberSInt32Type, PMOrientation, 1 = portrait, 2 = landscape, 3 = reverse portrait, 4 = reverse landscape. */
 #define kPMFormattingPrinterStr          	kPMPageFormatPrelude "FormattingPrinter"
 #define kPMFormattingPrinterKey          	CFSTR( kPMFormattingPrinterStr )      		/* CFString - name of the formating printer */
 
@@ -310,6 +284,8 @@ enum {
 #define kPMFirstPageKey                     CFSTR( kPMFirstPageStr )                    /* CFNumber - kCFNumberSInt32Type, first page selected by user to print. */
 #define kPMLastPageStr                      kPMPrintSettingsPrelude "PMLastPage"
 #define kPMLastPageKey                      CFSTR( kPMLastPageStr )                     /* CFNumber - kCFNumberSInt32Type, last page selected by user to print. */
+#define kPMPrintSelectionOnlyStr            kPMPrintSettingsPrelude "PMPrintSelectionOnly"
+#define kPMPrintSelectionOnlyKey            CFSTR( kPMPrintSelectionOnlyStr )            /* CFBoolean - True if only current selection should be printed. */
 #define kPMBorderStr                        kPMPrintSettingsPrelude "PMBorder"
 #define kPMBorderKey                        CFSTR( kPMBorderStr )                       /* CFBoolean - If true, we do borders. */
 #define kPMBorderTypeStr                    kPMPrintSettingsPrelude "PMBorderType"
@@ -324,18 +300,12 @@ enum {
 #define kPMLayoutDirectionKey               CFSTR( kPMLayoutDirectionStr )              /* CFNumber - kCFNumberSInt32Type, Enum (PMLayoutDirection) */
 #define kPMLayoutTileOrientationStr         kPMPrintSettingsPrelude "PMLayoutTileOrientation"
 #define kPMLayoutTileOrientationKey         CFSTR( kPMLayoutTileOrientationStr )        /* CFNumber - kCFNumberSInt32Type, PMOrientation, 1 = portrait, 2 = landscape, etc. */
-#define kPMQualityStr                       kPMPrintSettingsPrelude "PMQuality"
-#define kPMQualityKey                       CFSTR( kPMQualityStr )                      /* CFNumber - kCFNumberSInt32Type, Enum, draft, normal, best */
-#define kPMPaperTypeStr                     kPMPrintSettingsPrelude "PMPaperType"
-#define kPMPaperTypeKey                     CFSTR( kPMPaperTypeStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, draft, normal, best */
 #define kPMJobStateStr                      kPMPrintSettingsPrelude "PMJobState"
 #define kPMJobStateKey                      CFSTR( kPMJobStateStr )                     /* CFNumber - kCFNumberSInt32Type, Enum, active = 0, pending, hold until, hold indefinitely, aborted, finished */
 #define kPMJobHoldUntilTimeStr              kPMPrintSettingsPrelude "PMJobHoldUntilTime"
 #define kPMJobHoldUntilTimeKey              CFSTR( kPMJobHoldUntilTimeStr )             /* CFDate - Time we expect to print the job. */
 #define kPMJobPriorityStr                   kPMPrintSettingsPrelude "PMJobPriority"
 #define kPMJobPriorityKey                   CFSTR( kPMJobPriorityStr )                  /* CFNumber - kCFNumberSInt32Type, Enum, Low = 0, normal, urgent */
-#define kPMPaperSourceStr                   kPMPrintSettingsPrelude "PMPaperSource"
-#define kPMPaperSourceKey                   CFSTR( kPMPaperSourceStr )                  /* CFNUmber - kCFNumberSInt32Type, Enum, paper sources. */
 #define kPMDuplexingStr                     kPMPrintSettingsPrelude "PMDuplexing"
 #define kPMDuplexingKey                     CFSTR( kPMDuplexingStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, kPMDuplexNone,  kPMDuplexNoTumble, kPMDuplexTumble, kPMSimplexTumble */
 #define kPMDuplexingRequiresFlippedMarginAdjustStr   kPMPrintSettingsPrelude "PMDuplexingRequiresFlippedMargins"
@@ -348,36 +318,18 @@ enum {
 #define kPMHasCustomDuplexPDEStr   			kPMPrintSettingsPrelude "HasCustomDuplexPDE"
 #define kPMHasCustomDuplexPDEKey 			CFSTR( kPMHasCustomDuplexPDEStr )	
                                                                                         /* CFBoolean indicating that the Tioga Printer Module has its own Duplex PDE. */
-#define kPMColorModeStr                     kPMPrintSettingsPrelude "PMColorMode"
-#define kPMColorModeKey                     CFSTR( kPMColorModeStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, B/W, Grayscale, Color, HiFi Color. */
 #define kPMColorSpaceModelStr                     kPMPrintSettingsPrelude "PMColorSpaceModel"
 #define kPMColorSpaceModelKey                     CFSTR( kPMColorSpaceModelStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, see PMColorSpaceModel. */
 #define kPMColorSyncProfileIDStr            kPMPrintSettingsPrelude "PMColorSyncProfileID"
 #define kPMColorSyncProfileIDKey            CFSTR( kPMColorSyncProfileIDStr )           /* CFNumber - kCFNumberSInt32Type, ID of profile to use. */
-#define kPMPrintScalingHorizontalStr        kPMPrintSettingsPrelude "PMScaling"
-#define kPMPrintScalingHorizontalKey        CFSTR( kPMPrintScalingHorizontalStr )       /* CFNumber - kCFNumberDoubleType, Horizontal scaling factor applied to original page size. */
-#define kPMPrintScalingVerticalStr          kPMPrintSettingsPrelude "PMVerticalScaling"
-#define kPMPrintScalingVerticalKey          CFSTR( kPMPrintScalingVerticalStr )         /* CFNumber - kCFNumberDoubleType, Vertical scaling factor applied to original page size. */
-#define kPMPrintScalingAlignmentStr         kPMPrintSettingsPrelude "PMScalingAlignment"
-#define kPMPrintScalingAlignmentKey         CFSTR( kPMPrintScalingAlignmentStr )        /* CFNumber - kCFNumberSInt32Type, Enum (PMScalingAlignment) */
-#define kPMPrintOrientationStr              kPMPrintSettingsPrelude "PMOrientation"
-#define kPMPrintOrientationKey              CFSTR( kPMPrintOrientationStr )             /* CFNumber - kCFNumberSInt32Type, PMOrientation, 1 = portrait, 2 = landscape, etc. */
 #define kPMPreviewStr                       kPMPrintSettingsPrelude "PMPreview"
 #define kPMPreviewKey                       CFSTR( kPMPreviewStr )                      /* CFString - YES means the user clicked on the Preview button */
-#define kPMPrintBackupRecordHdlStr          kPMPrintSettingsPrelude "BackupPrintRecordHandle"
-#define kPMPrintBackupRecordHdlKey          CFSTR( kPMPrintBackupRecordHdlStr )         /* CFData - Print record handle, allowing easy access during most calls. Not used when flattened. (OS8 Only) */
-#define kPMPrintBackupRecordDataStr         kPMPrintSettingsPrelude "BackupPrintRecord"
-#define kPMPrintBackupRecordDataKey         CFSTR( kPMPrintBackupRecordDataStr )        /* CFData - Print record stored in complete form - used when flattening Ticket w/ record. (OS8 only) */
-#define kPMPrintCustomDialogHdlStr          kPMPrintSettingsPrelude "CustomDialogRecord"
-#define kPMPrintCustomDialogHdlKey          CFSTR( kPMPrintCustomDialogHdlStr )         /* CFData - Handle to the print record using for custom dialog calls. Not stored when flattened. (OS8 Only) */
 #define kPMPrimaryPaperFeedStr				kPMPrintSettingsPrelude "PMPrimaryPaperFeed"
 #define kPMPrimaryPaperFeedKey				CFSTR( kPMPrimaryPaperFeedStr )				/* CFArray - main & option PPD key for input paper feed */
 #define kPMSecondaryPaperFeedStr			kPMPrintSettingsPrelude "PMSecondaryPaperFeed"
 #define kPMSecondaryPaperFeedKey			CFSTR( kPMSecondaryPaperFeedStr )			/* CFArray - main & option PPD key for input paper feed */
 #define kPMPSErrorHandlerStr				kPMPrintSettingsPrelude "PMPSErrorHandler"
 #define kPMPSErrorHandlerKey				CFSTR( kPMPSErrorHandlerStr )				/* CFNumber - kCFNumberSInt32Type  */
-#define kPMPSErrorOnScreenStr				kPMPrintSettingsPrelude "PMPSErrorOnScreen"
-#define kPMPSErrorOnScreenKey				CFSTR( kPMPSErrorOnScreenStr )				/* CFBoolean, Turns on PS error on screen notification.  */
 #define kPMPSTraySwitchStr					kPMPrintSettingsPrelude "PMPSTraySwitch"
 #define kPMPSTraySwitchKey					CFSTR( kPMPSTraySwitchStr )					/* CFArray - main & option PPD key for tray switching */
 
@@ -463,10 +415,11 @@ enum {
 #define kPMJobOwnerKey                      CFSTR( kPMJobOwnerStr )                     /* CFString - Name of the user who submitted the job. */
 #define kPMJobTemplateStr                   kPMJobTicketPrelude "PMJobTemplate"
 #define kPMJobTemplateKey                   CFSTR( kPMJobTemplateStr )                  /* CFDictionary - PMTemplateRef, actually. See PMTemplate.h */
-#define kPMPhaseStr                         kPMJobTicketPrelude "PMPrintingPhase"
-#define kPMPhaseKey                         CFSTR( kPMPhaseStr )                        /* CFNumber, kCFNumberSInt32Type, Enum - Spooling, RIPing, etc. */
+
 #define kPMOutputTypeStr		    		kPMJobTicketPrelude "PMOutputType"
-#define kPMOutputTypeKey		    		CFSTR( kPMOutputTypeStr )			/* CFString, Mime type from the kPMOutputTypeListKey array the printer module should generate. */
+#define kPMOutputTypeKey		    		CFSTR( kPMOutputTypeStr )					/* CFString, Mime type from the kPMOutputTypeListKey array the printer module should generate. */
+#define kPMJobTagsStr                      kPMJobTicketPrelude "PMJobTags"				
+#define kPMJobTagsKey                      CFSTR( kPMJobTagsStr )						/* CFArray - keywords associated with the job */
 
 /* Ticket: LIST TICKET
     Contains a list of other tickets. There is no restriction on the type of tickets
@@ -620,29 +573,6 @@ enum {
 #define kPMTransparentCommStr			kPMPrinterInfoPrelude "PMTransparentComm"
 #define kPMTransparentCommKey			CFSTR(kPMTransparentCommStr)
 
-/* Ticket: Converter Setup Ticket
-    Contains controls for converter. Generally, the Printer Module and Job Manager will set
-    tags in this ticket to control the various settings of the conversion process. 
-*/
-#define kPMConverterSetupPrelude            "com.apple.print.ConverterSetup."
-#define kPMBandingRequestedStr              kPMConverterSetupPrelude "PMBandingRequested"
-#define kPMBandingRequestedKey              CFSTR( kPMBandingRequestedStr )             /* CFBoolean, turns on banding if it's available. */
-#define kPMRequiredBandHeightStr            kPMConverterSetupPrelude "PMRequiredBandHeight"
-#define kPMRequiredBandHeightKey            CFSTR( kPMRequiredBandHeightStr )           /* CFNumber, number of scan lines needed for each band. Could be whole page, in which case banding is disabled. */
-#define kPMDepthSwitchingEnabledStr         kPMConverterSetupPrelude "PMDepthSwitching"
-#define kPMDepthSwitchingEnabledKey         CFSTR( kPMDepthSwitchingEnabledStr )        /* CFBoolean. If true, the printer module wants converter to switch between b/w bands and color bands when possible. */
-#define kPMWhiteSkippingEnabledStr          kPMConverterSetupPrelude "PMWhiteSpaceSkipping"
-#define kPMWhiteSkippingEnabledKey          CFSTR( kPMWhiteSkippingEnabledStr )         /* CFBoolean. If true, the printer module wants converter to skip over white space if possible. */
-#define kPMConverterResHorizontalStr        kPMConverterSetupPrelude "PMConversionResHorizontal"
-#define kPMConverterResHorizontalKey        CFSTR( kPMConverterResHorizontalStr )       /* CFNumber, CFNumberDoubleType indicating horizontal final rendering resolution. */
-#define kPMConverterResVerticalStr          kPMConverterSetupPrelude "PMConversionResVertcial"
-#define kPMConverterResVerticalKey          CFSTR( kPMConverterResVerticalStr )         /* CFNumber, CFNumberDoubleType indicating vertical final rendering resolution. */
-#define kPMRequestedPixelFormatStr          kPMConverterSetupPrelude "PMPixelFormat"
-#define kPMRequestedPixelFormatKey          CFSTR( kPMRequestedPixelFormatStr )         /* CFNumber, CFNumberLongType, indicates the pixel format requested of the converter. */
-#define kPMRequestedPixelLayoutStr          kPMConverterSetupPrelude "PMPixelLayout"
-#define kPMRequestedPixelLayoutKey          CFSTR( kPMRequestedPixelLayoutStr )         /* CFNumber, CFNumberLongType, indicates the pixel layout requested of the converter. */
-#define kPMCVColorSyncProfileIDStr			kPMConverterSetupPrelude "PMProfileID"
-#define kPMCVColorSyncProfileIDKey			CFSTR( kPMCVColorSyncProfileIDStr )			/* CFNumber, kCFNumberSInt32Type, the profile ID for the profile to be used with this job. */
 
 
 #define kPMPageToPaperMappingTypeStr	    "com.apple.print.PageToPaperMappingType"
@@ -657,19 +587,25 @@ enum {
 												    sheet. Default value: false. */
 
 /* Possible values for the kPMColorMatchingModeKey*/
-#define kPMColorSyncMatchingStr		    "AP_ColorSyncColorMatching"
-#define kPMColorSyncMatching		    CFSTR( kPMColorSyncMatchingStr )
 #define kPMVendorColorMatchingStr	    "AP_VendorColorMatching"
 #define kPMVendorColorMatching		    CFSTR( kPMVendorColorMatchingStr )
 #define kPMApplicationColorMatchingStr      "AP_ApplicationColorMatching"
 #define kPMApplicationColorMatching	    CFSTR( kPMApplicationColorMatchingStr )
 
 #define kPMColorMatchingModeStr		    "AP_ColorMatchingMode"
-#define kPMColorMatchingModeKey		    CFSTR( kPMColorMatchingModeStr )   /* Value is CFStringRef - one of kPMColorSyncMatching, 
+#define kPMColorMatchingModeKey		    CFSTR( kPMColorMatchingModeStr )   /* Value is CFStringRef - one of kPMColorSyncMatching (deprecated), 
 										kPMVendorColorMatching, kPMApplicationColorMatching */
 
 #define kPMSupportsVendorMatchingModeStr    "APSupportsCustomColorMatching"
 #define kPMSupportsVendorMatchingModeKey    CFSTR( kPMSupportsVendorMatchingModeStr )
+
+#define kPMsRGBCustomColorMatchingProfileStr		"sRGB"
+#define kPMsRGBCustomColorMatchingProfileKey		CFSTR( kPMsRGBCustomColorMatchingProfileStr )
+#define kPMAdobeRGBCustomColorMatchingProfileStr	"AdobeRGB"
+#define kPMAdobeRGBCustomColorMatchingProfileKey	CFSTR( kPMAdobeRGBCustomColorMatchingProfileStr )
+
+#define kPMCustomColorMatchingProfileStr    "APCustomColorMatchingProfile"
+#define kPMCustomColorMatchingProfileKey    CFSTR( kPMCustomColorMatchingProfileStr )  /* Allowed values are kPMsRGBCustomColorMatchingProfileKey or kPMAdobeRGBCustomColorMatchingProfileKey */
 
 /* Page to Paper Mapping Types */
 typedef enum{
@@ -692,7 +628,7 @@ PMTicketCopy                    (CFAllocatorRef         allocator,
                                  PMTicketRef            sourceTicket,
                                  PMTicketRef *          destinationTicket);
 
-/* Retain, release, or get retain count of a Ticket. The behavior is modelled after */
+/* Retain, release, or get retain count of a Ticket. The behavior is modeled after */
 /* CoreFoundation's CFRetain, CFRelease, and CFGetRetainCount APIs. */
 
 EXTERN_API_C( OSStatus )
@@ -713,15 +649,6 @@ EXTERN_API_C( OSStatus )
 PMTicketReleaseAndClear         (PMTicketRef *          ticket);
 
 
-
-/* Tickets may be locked by the printing system, so we provide a function to determine if */
-/* the ticket is indeed locked. Any attempted changes to a locked ticket will result in */
-/* "kPMTicketLocked" error. */
-EXTERN_API_C( OSStatus )
-PMTicketGetLockedState          (PMTicketRef            ticket,
-                                 Boolean *              lockedState);
-
-
 /* To confirm that we have a real ticket, this short function gets called. */
 EXTERN_API_C( OSStatus )
 PMTicketConfirmTicket           (PMTicketRef            ticket);
@@ -730,8 +657,7 @@ PMTicketConfirmTicket           (PMTicketRef            ticket);
 /* We validate an entire ticket by calling our PMTicketValidate function, passing a template  */
 /* which contains constraints for all the values in the ticket. Those entries in the ticket */
 /* that don't have constraints will not be checked, so developers can add their own custom */
-/* data. For now we have to verify a single ticket at a time. Future updates will allow the */
-/* caller to confirm an entire tree of tickets. */
+/* data. */
 EXTERN_API_C( OSStatus )
 PMTicketValidate                (PMTicketRef            ticket,
                                  PMTemplateRef          verifyingTemplate,
@@ -774,8 +700,7 @@ PMTicketWriteXMLToFile          (PMTicketRef            ticket,
 				 
 /* Convert to XML and write to FILE stream. */
 EXTERN_API_C( OSStatus )
-PMTicketWriteXML		(PMTicketRef 		ticket,
-				 FILE *			file );
+PMTicketWriteXML		(PMTicketRef 		ticket, FILE *			file );
 
 /* Convert from XML */
 EXTERN_API_C( OSStatus )
@@ -791,13 +716,6 @@ PMXMLURLToTicket				( CFAllocatorRef allocator,
                                   PMTicketRef *ticket, 
                                   CFPropertyListFormat *format, 
                                   CFStringRef *errorString );
-
-/* Convert to XML and write to a file */
-EXTERN_API_C( OSStatus )
-PMTicketToXMLURL				( PMTicketRef ticket, 
-                                    CFURLRef anXMLFileURL,
-                                    CFPropertyListFormat format, 
-                                    CFStringRef *errorString );
 
 /* Read from file and convert to XML. */
 EXTERN_API_C( OSStatus )
@@ -1019,14 +937,6 @@ PMTicketSetItem                 (PMTicketRef            ticket,
                                  CFTypeRef              item,
                                  Boolean                locked);
 
-/*****
-Warning: PMTicketSetMetaItem is being deprecated.
-*****/
-EXTERN_API_C( OSStatus )
-PMTicketSetMetaItem             (PMTicketRef            ticket,
-                                 CFStringRef            key,
-                                 CFTypeRef              item);
-
 
 /* Convert an array of static item structures into entries for a ticket and add them one at */
 /* a time to the ticket. Could fail part way through. */
@@ -1048,35 +958,20 @@ PMTicketCopyItem                (PMTicketRef            sourceTicket,
                                  Boolean                locked);
 
 
-/* A couple of functions that will help in managing the "locked" state of any ticket */
-/* item. These functions only work for items directly stored in the current ticket, not */
-/* for items in sub-tickets. */
-EXTERN_API_C( OSStatus )
-PMTicketIsItemLocked            (PMTicketRef            ticket,
-                                 CFStringRef            key,
-                                 Boolean *              locked);
-
-EXTERN_API_C( OSStatus )
-PMTicketLockItem                (PMTicketRef            ticket,
-                                 CFStringRef            clientID,
-                                 CFStringRef            key);
-
-EXTERN_API_C( OSStatus )
-PMTicketUnlockItem              (PMTicketRef            ticket,
-                                 CFStringRef            clientID,
-                                 CFStringRef            key);
-
-
 /* Disable an item using PMTicketDelete. Future callers will see "ItemNotFound" errors. */
 /* This call actually tags a new set of structures to the end of an item's dictionary, in */
 /* order to keep a history of the item. */
+/* NOTE: In 10.5 and later, PMTicketDeleteItem and PMTicketReleaseItem */
+/* produce the same result */
 EXTERN_API_C( OSStatus )
 PMTicketDeleteItem              (PMTicketRef            ticket,
                                  CFStringRef            clientID,
                                  CFStringRef            key);
 
-/* Release an item (quite different from delete) when you want it completely removed from the */
+/* Release an item when you want it completely removed from the */
 /* ticket. This can only be done if the item is unlocked. */
+/* NOTE: In 10.5 and later, PMTicketDeleteItem and PMTicketReleaseItem */
+/* produce the same result */
 EXTERN_API_C( OSStatus )
 PMTicketReleaseItem             (PMTicketRef            ticket,
                                  CFStringRef            key);
@@ -1260,14 +1155,6 @@ PMTicketGetItem                 (PMTicketRef            ticket,
                                  CFStringRef            key,
                                  CFTypeRef *            item);
 
-/*****
-Warning: PMTicketGetMetaItem is being deprecated.
-*****/
-EXTERN_API_C( OSStatus )
-PMTicketGetMetaItem             (PMTicketRef            ticket,
-                                 CFStringRef            key,
-                                 CFTypeRef *            item);
-
 
 /* Any ticket can contain another ticket, allowing us to store multiple PageFormat tickets */
 /* (one for each page) and multiple Document Info tickets (for multi-document jobs). The following */
@@ -1295,11 +1182,6 @@ PMTicketRemoveTicket            (PMTicketRef            ticket,
                                  CFStringRef            typeToRemove,
                                  UInt32                 index);
 
-EXTERN_API_C( OSStatus )
-PMTicketGetPPDDict	            (PMTicketRef            ticket,
-                                 UInt32                 nodeIndex1,
-                                 UInt32                 nodeIndex2,
-                                 CFMutableDictionaryRef	*dict);
 
 /*!
  * @function	PMTicketCreateDict
@@ -1313,26 +1195,13 @@ EXTERN_API_C( CFDictionaryRef )
 PMTicketCreateDict		(PMTicketRef ticket);
 
 /*!
- * @function	PMTicketHasEqualValues
- * @abstract	Return true of the two tickets have equal values for their
- *		keys.
+ * @function	PMTicketCopyKeys
+ * @abstract	Return the valid non-subticket keys in a ticket.
  *
- * @param	ticket1		A valid PMTicketRef.
- *
- * @param	ticket2		A valid PMTicketRef.
- *
- * @discussion	This function ignores any extra information maintained by tickets,
- *		such as the client who entered the value and when. The comparison
- *		is based solely on the keys and values in the ticket.
- */
-EXTERN_API_C( Boolean )
-PMTicketHasEqualValues		(PMTicketRef ticket1, PMTicketRef ticket2);
+ */	 
+EXTERN_API_C ( CFArrayRef )
+PMTicketCopyKeys		(PMTicketRef ticket);
 
-EXTERN_API_C( OSStatus )
-PMSessionGetTicketFromSession( PMPrintSession session, CFStringRef key, PMTicketRef* theTicket );
-
-EXTERN_API_C( OSStatus )
-PMSessionGetTemplateFromSession( PMPrintSession session, CFStringRef key, PMTemplateRef* theTemplate );
 
 #ifdef __cplusplus
 }

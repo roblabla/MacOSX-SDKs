@@ -3,7 +3,7 @@
  
      Contains:   AppleEvent functions that deal with Events and interacting with user
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -28,6 +28,10 @@
 #include <HIToolbox/Events.h>
 #endif
 
+#ifndef __CARBONEVENTS__
+#include <HIToolbox/CarbonEvents.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -43,8 +47,8 @@ extern "C" {
 /**************************************************************************
   AppleEvent callbacks. 
 **************************************************************************/
-typedef CALLBACK_API( Boolean , AEIdleProcPtr )(EventRecord *theEvent, long *sleepTime, RgnHandle *mouseRgn);
-typedef CALLBACK_API( Boolean , AEFilterProcPtr )(EventRecord *theEvent, long returnID, long transactionID, const AEAddressDesc *sender);
+typedef CALLBACK_API( Boolean , AEIdleProcPtr )(EventRecord *theEvent, SInt32 *sleepTime, RgnHandle *mouseRgn);
+typedef CALLBACK_API( Boolean , AEFilterProcPtr )(EventRecord *theEvent, SInt32 returnID, AETransactionID transactionID, const AEAddressDesc *sender);
 typedef STACK_UPP_TYPE(AEIdleProcPtr)                           AEIdleUPP;
 typedef STACK_UPP_TYPE(AEFilterProcPtr)                         AEFilterUPP;
 
@@ -69,7 +73,7 @@ AESend(
   AppleEvent *        reply,
   AESendMode          sendMode,
   AESendPriority      sendPriority,
-  long                timeOutInTicks,
+  SInt32              timeOutInTicks,
   AEIdleUPP           idleProc,             /* can be NULL */
   AEFilterUPP         filterProc)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -88,6 +92,46 @@ AESend(
 extern OSErr 
 AEProcessAppleEvent(const EventRecord * theEventRecord)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  AEProcessEvent()
+ *  
+ *  Summary:
+ *    Dispatches a Carbon event of type kEventAppleEvent to the
+ *    appropriate AppleEvent handlers.
+ *  
+ *  Discussion:
+ *    This API is similar to AEProcessAppleEvent, but does not require
+ *    the Carbon event to be converted to an EventRecord. Also, unlike
+ *    AEProcessAppleEvent, this API does not require that an event be
+ *    removed from its event queue before processing; the AppleEvent
+ *    will be correctly dispatched even if the Carbon event is still in
+ *    its event queue. Of course, you should still remove the Carbon
+ *    event from its event queue later once you're done handling it,
+ *    and it is also acceptable to remove it from the event queue
+ *    before calling this API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inEvent:
+ *      A Carbon event of class kEventClassAppleEvent and kind
+ *      kEventAppleEvent.
+ *  
+ *  Result:
+ *    The operating system result code returned by the AppleEvent
+ *    handler, or paramErr if the event passed to this API is not of
+ *    the correct class and kind.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+AEProcessEvent(EventRef inEvent)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /* 
@@ -167,7 +211,7 @@ AESetInteractionAllowed(AEInteractAllowed level)              AVAILABLE_MAC_OS_X
  */
 extern OSErr 
 AEInteractWithUser(
-  long        timeOutInTicks,
+  SInt32      timeOutInTicks,
   NMRecPtr    nmReqPtr,
   AEIdleUPP   idleProc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -243,7 +287,7 @@ AEResumeTheCurrentEvent(
   const AppleEvent *  theAppleEvent,
   const AppleEvent *  reply,
   AEEventHandlerUPP   dispatcher,          /* can be NULL */
-  long                handlerRefcon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             handlerRefcon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +379,7 @@ DisposeAEFilterUPP(AEFilterUPP userUPP)                       AVAILABLE_MAC_OS_X
 extern Boolean
 InvokeAEIdleUPP(
   EventRecord *  theEvent,
-  long *         sleepTime,
+  SInt32 *       sleepTime,
   RgnHandle *    mouseRgn,
   AEIdleUPP      userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -350,10 +394,28 @@ InvokeAEIdleUPP(
 extern Boolean
 InvokeAEFilterUPP(
   EventRecord *          theEvent,
-  long                   returnID,
-  long                   transactionID,
+  SInt32                 returnID,
+  AETransactionID        transactionID,
   const AEAddressDesc *  sender,
   AEFilterUPP            userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline AEIdleUPP                                            NewAEIdleUPP(AEIdleProcPtr userRoutine) { return userRoutine; }
+    inline AEFilterUPP                                          NewAEFilterUPP(AEFilterProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeAEIdleUPP(AEIdleUPP) { }
+    inline void                                                 DisposeAEFilterUPP(AEFilterUPP) { }
+    inline Boolean                                              InvokeAEIdleUPP(EventRecord * theEvent, SInt32 * sleepTime, RgnHandle * mouseRgn, AEIdleUPP userUPP) { return (*userUPP)(theEvent, sleepTime, mouseRgn); }
+    inline Boolean                                              InvokeAEFilterUPP(EventRecord * theEvent, SInt32 returnID, AETransactionID transactionID, const AEAddressDesc * sender, AEFilterUPP userUPP) { return (*userUPP)(theEvent, returnID, transactionID, sender); }
+  #else
+    #define NewAEIdleUPP(userRoutine)                           ((AEIdleUPP)userRoutine)
+    #define NewAEFilterUPP(userRoutine)                         ((AEFilterUPP)userRoutine)
+    #define DisposeAEIdleUPP(userUPP)
+    #define DisposeAEFilterUPP(userUPP)
+    #define InvokeAEIdleUPP(theEvent, sleepTime, mouseRgn, userUPP) (*userUPP)(theEvent, sleepTime, mouseRgn)
+    #define InvokeAEFilterUPP(theEvent, returnID, transactionID, sender, userUPP) (*userUPP)(theEvent, returnID, transactionID, sender)
+  #endif
+#endif
 
 
 

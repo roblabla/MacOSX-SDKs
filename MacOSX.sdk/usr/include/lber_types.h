@@ -1,8 +1,8 @@
-/* include/lber_types.h.  Generated automatically by configure.  */
-/* $OpenLDAP: pkg/ldap/include/lber_types.h.in,v 1.10.2.2 2004/01/01 18:16:28 kurt Exp $ */
+/* include/lber_types.h.  Generated from lber_types.hin by configure.  */
+/* $OpenLDAP: pkg/ldap/include/lber_types.hin,v 1.2.2.2 2006/01/03 22:16:06 kurt Exp $ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2004 The OpenLDAP Foundation.
+ * Copyright 1998-2006 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

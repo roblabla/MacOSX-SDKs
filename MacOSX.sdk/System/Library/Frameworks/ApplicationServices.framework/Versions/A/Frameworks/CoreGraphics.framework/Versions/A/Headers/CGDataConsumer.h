@@ -14,8 +14,8 @@ typedef struct CGDataConsumer *CGDataConsumerRef;
 
 CG_EXTERN_C_BEGIN
 
-/* This callback is called to copy `count' bytes from `buffer' to the
- * data consumer. */
+/* This callback is called to copy `count' bytes from `buffer' to the data
+ * consumer. */
 
 typedef size_t (*CGDataConsumerPutBytesCallback)(void *info, const void *buffer, size_t count);
 
@@ -24,10 +24,10 @@ typedef size_t (*CGDataConsumerPutBytesCallback)(void *info, const void *buffer,
 
 typedef void (*CGDataConsumerReleaseInfoCallback)(void *info);
 
-/* Callbacks for accessing data.
+/* Callbacks for writing data.
  * `putBytes' copies `count' bytes from `buffer' to the consumer, and
- * returns the number of bytes copied.  It should return 0 if no more data
- * can be written to the consumer.
+ *   returns the number of bytes copied. It should return 0 if no more data
+ *   can be written to the consumer.
  * `releaseConsumer', if non-NULL, is called when the consumer is freed. */
 
 struct CGDataConsumerCallbacks {
@@ -40,7 +40,7 @@ typedef struct CGDataConsumerCallbacks CGDataConsumerCallbacks;
 
 CG_EXTERN CFTypeID CGDataConsumerGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/* Create a data consumer using `callbacks' to handle the data.  `info' is
+/* Create a data consumer using `callbacks' to handle the data. `info' is
  * passed to each of the callback functions. */
 
 CG_EXTERN CGDataConsumerRef CGDataConsumerCreate(void *info, const CGDataConsumerCallbacks *callbacks);

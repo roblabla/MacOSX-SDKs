@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-192.17
+     Version:    vecLib-240.0
  
-     Copyright:  © 1999-2007 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 #if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
-#if defined(__VEC__) || defined(__SSE2__)
+#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 /*                                                                                  
   This section is a collection of algebraic functions that uses the AltiVec       
   instruction set, and is designed to facilitate vector processing in             
@@ -775,6 +775,39 @@ vS128AddS(
 
 
 /*
+ *  vU64Neg()
+ */  
+extern vUInt32 
+vU64Neg (
+  vUInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  vS64Neg()
+ */  
+extern vSInt32 
+vS64Neg (
+  vSInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  vU1284Neg()
+ */  
+extern vUInt32 
+vU128Neg (
+  vUInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  vS1284Neg()
+ */  
+extern vSInt32 
+vS128Neg (
+  vSInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+
+/*
  *  vLL64Shift()
  *  
  *  Availability:
@@ -856,6 +889,34 @@ extern vUInt32
 vLR64Shift2(
   vUInt32   vA,
   vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  vLL128Shift()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in vecLib.framework
+ *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
+ *    Non-Carbon CFM:   in vecLib 1.0 and later
+ */
+extern vUInt32 
+vLL128Shift(
+  vUInt32   vA,
+  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  vLR128Shift()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in vecLib.framework
+ *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
+ *    Non-Carbon CFM:   in vecLib 1.0 and later
+ */
+extern vUInt32 
+vLR128Shift(
+  vUInt32   vA,
+  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -957,7 +1018,7 @@ vR128Rotate(
   vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
+#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 

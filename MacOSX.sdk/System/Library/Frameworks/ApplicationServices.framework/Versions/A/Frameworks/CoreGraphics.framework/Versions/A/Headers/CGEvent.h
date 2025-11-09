@@ -17,9 +17,7 @@
 #include <CoreServices/CoreServices.h>
 #include <CoreGraphics/CGEventTypes.h>
 
-
 CG_EXTERN_C_BEGIN
-
 
 /* Return the CFTypeID for CGEventRefs. */
 CG_EXTERN CFTypeID CGEventGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -39,13 +37,13 @@ CG_EXTERN CGEventRef CGEventCreate(CGEventSourceRef source) AVAILABLE_MAC_OS_X_V
  * Returns a CGEventRef built from the flattened data representation, or NULL
  * if the eventData is invalid.
  */
-CGEventRef CGEventCreateFromData(CFAllocatorRef allocator, CFDataRef eventData);
+CG_EXTERN CGEventRef CGEventCreateFromData(CFAllocatorRef allocator, CFDataRef eventData)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*
  * Returns a CFDataRef containing  the flattened data representation of the event,
  * or NULL if the eventData is invalid.
  */
-CFDataRef CGEventCreateData(CFAllocatorRef allocator, CGEventRef event);
+CG_EXTERN CFDataRef CGEventCreateData(CFAllocatorRef allocator, CGEventRef event)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*
  * Create mouse events.
@@ -79,21 +77,43 @@ CG_EXTERN CGEventRef CGEventCreateMouseEvent( CGEventSourceRef source,
  * SHIFT, CONTROL, OPTION, and COMMAND keys.  For example, to produce a 'Z',
  * the SHIFT key must be down, the 'z' key must go down, and then the SHIFT
  * and 'z' key must be released:
- *	CGEventCreateKeyboardEvent((CGKeyCode)56, true ); // shift down
- *	CGEventCreateKeyboardEvent( (CGKeyCode)6, true ); // 'z' down
- *	CGEventCreateKeyboardEvent( (CGKeyCode)6, false ); // 'z' up
- *	CGEventCreateKeyboardEvent( (CGKeyCode)56, false ); // 'shift up
+ *	CGEventCreateKeyboardEvent( source, (CGKeyCode)56, true ); // shift down
+ *	CGEventCreateKeyboardEvent( source, (CGKeyCode)6, true ); // 'z' down
+ *	CGEventCreateKeyboardEvent( source, (CGKeyCode)6, false ); // 'z' up
+ *	CGEventCreateKeyboardEvent( source, (CGKeyCode)56, false ); // 'shift up
  */
 CG_EXTERN CGEventRef CGEventCreateKeyboardEvent( CGEventSourceRef source,
                                                  CGKeyCode virtualKey,
                                                  bool keyDown ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                 
+/*
+ * Create scrollwheel events
+ *
+ * The event source may be taken from another event, or may be NULL.
+ *
+ * The scrolling units may be specified in lines using kCGScrollEventUnitLine, or in
+ * pixels using kCGScrollEventUnitPixel. kCGScrollEventUnitPixel will produce an
+ * event that most applications interpret as a smooth scrolling event.
+ *
+ * One or more wheels must be specified.  The current implementation supports up to
+ * three wheels.
+ *
+ * Every scrollwheel event can be interpreted to be scrolling by pixel or by line.
+ * The scale between the two is about 10 pixels per line by default.  The scale can be
+ * altered by setting a custom value for the event source, using CGEventSourceSetPixelsPerLine().
+ */
+ 
+CG_EXTERN CGEventRef CGEventCreateScrollWheelEvent (CGEventSourceRef source,
+                                                   CGScrollEventUnit units,
+                                                   CGWheelCount wheelCount,
+                                                   int32_t wheel1,
+                                                   ... ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 CG_EXTERN CGEventRef CGEventCreateCopy(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 /* 
  * CFRetain() and CFRelease() may be used to retain and release CGEventRefs.
  */
 
-CG_EXTERN CGEventSourceRef CGEventGetSource(CGEventRef event) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
  * These functions provide access to the event source for an event.
  * Event filters may use these to generate events that are compatible
@@ -116,6 +136,7 @@ CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef event) AVAILABLE_MAC_O
 CG_EXTERN void CGEventSetTimestamp(CGEventRef event, CGEventTimestamp timestamp) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CG_EXTERN CGPoint CGEventGetLocation(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 CG_EXTERN void CGEventSetLocation(CGEventRef event, CGPoint location) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef event) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -216,8 +237,9 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event, CGEventField field, 
  * kCGAnnotatedSessionEventTap, or on a specific process may
  * only receive key up and down events if access for assistive
  * devices is enabled (Preferences Universal Access panel,
- * Keyboard view). If the tap is not permitted to monitor these
- * when the tap is being created, then the appropriate bits
+ * Keyboard view) or the caller is enabled for assistive device access,
+ * as by AXMakeProcessTrusted(). If the tap is not permitted to monitor
+ * these when the tap is being created, then the appropriate bits
  * in the mask are cleared.  If that results in an empty mask,
  * then NULL is returned.
  *
@@ -299,11 +321,11 @@ CG_EXTERN void CGEventTapPostEvent( CGEventTapProxy proxy,
  * the desired PSN.
  */
 
-/* Post an event from the event tap into the event stream. */
+/* Post an event into the event stream. */
 CG_EXTERN void CGEventPost( CGEventTapLocation tap,
                             CGEventRef event ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-/* Post an event from the event tap into the event stream for a specific application. */
+/* Post an event into the event stream for a specific application. */
 CG_EXTERN void CGEventPostToPSN( void *processSerialNumber, /* Temp type, til def moves to CoreServices */
                                  CGEventRef event ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 

@@ -30,25 +30,35 @@
 	#include <gl.h>
 #endif
 
+/*
+** Certain functions are deprecated for Leopard applications, these are marked as unavailable.
+*/
+#define DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER	DEPRECATED_ATTRIBUTE
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
 /*
 ** AGL API version.
 */
-#define AGL_VERSION_2_0  1
+#define AGL_VERSION_3_0  1
 
 /*
 ** Macintosh device type.
+*
+*  Note:
+*	AGLDevice is a QuickDraw type it has been deprecated, use CGDirectDisplayID
 */
-typedef GDHandle AGLDevice;
+typedef GDHandle AGLDevice	DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Macintosh drawable type.
+*
+*  Note:
+*	AGLDrawable is a QuickDraw type it has been deprecated. use WindowRef or HIViewRef
 */
-typedef CGrafPtr AGLDrawable;
+typedef CGrafPtr AGLDrawable	DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** AGL opaque data.
@@ -114,9 +124,12 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_MULTISCREEN           81  /* single window can span multiple screens      */
 #define AGL_VIRTUAL_SCREEN        82  /* virtual screen number                        */
 #define AGL_COMPLIANT             83  /* renderer is opengl compliant                 */
+#define AGL_DISPLAY_MASK          84  /* mask limiting supported displays             */
 
 #define AGL_PBUFFER               90  /* can be used to render to a pbuffer           */
 #define AGL_REMOTE_PBUFFER        91  /* can be used to render offline to a pbuffer	  */
+
+#define AGL_ALLOW_OFFLINE_RENDERERS 96  /* show offline renderers in pixel formats    */
 
 /*
 ** Property names for aglDescribeRenderer
@@ -255,25 +268,36 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_BAD_MODULE           10015 /* invalid code module             */
 #define AGL_BAD_ALLOC            10016 /* memory allocation failure       */
 #define AGL_BAD_CONNECTION       10017 /* invalid CoreGraphics connection */
+#define AGL_INVALID_FUNCTION     10018 /* invalid 64 bit function use     */
 
 /************************************************************************/
 
 /*
 ** Pixel format functions
+*
+*  Note:
+*	aglDevicesOfPixelFormat has been deprecated use aglDisplaysOfPixelFormat
 */
-extern AGLPixelFormat aglChoosePixelFormat(const AGLDevice *gdevs, GLint ndev, const GLint *attribs);
+extern AGLPixelFormat aglChoosePixelFormat(const void *gdevs, GLint ndev, const GLint *attribs);
+extern AGLPixelFormat aglCreatePixelFormat(const GLint *attribs) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern void aglDestroyPixelFormat(AGLPixelFormat pix);
 extern AGLPixelFormat aglNextPixelFormat(AGLPixelFormat pix);
 extern GLboolean aglDescribePixelFormat(AGLPixelFormat pix, GLint attrib, GLint *value);
-extern AGLDevice *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs);
+extern CGDirectDisplayID *aglDisplaysOfPixelFormat(AGLPixelFormat pix, GLint *ndevs);
+extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Renderer information functions
+*
+*  Note:
+*	aglQueryRendererInfo has been deprecated use aglQueryRendererInfoForCGDirectDisplayIDs
 */
-extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev);
+extern AGLRendererInfo aglQueryRendererInfoForCGDirectDisplayIDs(const CGDirectDisplayID *dspIDs, GLint ndev) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 extern void aglDestroyRendererInfo(AGLRendererInfo rend);
 extern AGLRendererInfo aglNextRendererInfo(AGLRendererInfo rend);
 extern GLboolean aglDescribeRenderer(AGLRendererInfo rend, GLint prop, GLint *value);
+extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 
 /*
 ** Context functions
@@ -291,11 +315,34 @@ extern AGLContext aglGetCurrentContext(void);
 
 /*
 ** Drawable Functions
+*
+*  Note:
+*	aglSetDrawable / aglGetDrawable have been deprecated use aglGetWindowRef or aglSetHIViewRef
+*/ 
+extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern AGLDrawable aglGetDrawable(AGLContext ctx) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+** WindowRef Functions
 */
-extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw);
+extern GLboolean aglSetWindowRef(AGLContext ctx, WindowRef window) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern WindowRef aglGetWindowRef(AGLContext ctx) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+** HIViewRef Functions
+*/
+extern GLboolean aglSetHIViewRef(AGLContext ctx, HIViewRef hiview) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern HIViewRef aglGetHIViewRef(AGLContext ctx) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+** OffScreen buffer Function
+*/
 extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr);
+
+/*
+** FullScreen Function
+*/
 extern GLboolean aglSetFullScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei freq, GLint device);
-extern AGLDrawable aglGetDrawable(AGLContext ctx);
 
 /*
 ** Virtual screen functions
@@ -329,8 +376,11 @@ extern GLboolean aglGetInteger(AGLContext ctx, GLenum pname, GLint *params);
 
 /*
 ** Font function
+*
+*  Note:
+*	aglUseFont has been deprecated, no replacement available
 */
-extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base);
+extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** Error functions
@@ -345,13 +395,16 @@ extern void aglResetLibrary(void);
 
 /*
 ** Surface texture function
+*
+*  Note:
+*	aglSurfaceTexture has been deprecated, no replacement available
 */
-extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext)    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext) DEPRECATED_FOR_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** PBuffer functions
 */
-extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, long max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

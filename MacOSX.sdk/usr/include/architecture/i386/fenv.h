@@ -30,6 +30,10 @@
 
 #ifndef __FENV__
 #define __FENV__
+
+#if defined( __ppc__ ) || defined( __ppc64__ )
+    #error  Wrong arch. This is Intel only.
+#endif
    
 #if defined(__GNUC__) && (__GNUC__ >= 4)   
 #pragma GCC fenv

@@ -2,10 +2,16 @@
 //  ABRecord.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+#endif
+
+@class ABAddressBook;
 
 // ================================================================================
 //	interface ABRecord
@@ -15,11 +21,31 @@
 @interface ABRecord : NSObject
 {
 @private
+	id		_databaseImpl;
+	id   _reserved1;
+	id   _reserved2;
+	id   _reserved3;
+// pre leopard:
+/*
     NSString            *_UIDString;
     NSMutableDictionary *_changedProperties;
     NSMutableDictionary *_temporaryCache;
     unsigned int         _hash;
+*/
 }
+
+- (id)init;
+	// on Mac OS X 10.5 and later equivalent to initWithAddressBook:[ABAddressBook addressBook]
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+- (id)initWithAddressBook:(ABAddressBook*)addressBook; // designated initializer
+	// initializes the ABRecord within the given AddressBook. This means that there is no need to call addRecord:
+	// the record is in this AddressBook. However it will only be visible to other AddressBooks once this AddressBook
+	// is saved.
+	
+#endif
+
 - (id)valueForProperty:(NSString *)property;
     // Returns the value of a given property. The type of the value depends on the property type.
     // The retuned object is immutable (NSString not NSMutableString, ABMultiValue not ABMutableMultiValue, etc..)

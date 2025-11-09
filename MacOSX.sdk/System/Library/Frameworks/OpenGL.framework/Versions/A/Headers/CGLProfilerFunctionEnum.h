@@ -741,6 +741,29 @@ typedef enum
 	/* GL_EXT_gpu_program_parameters */
 	kCGLFEglProgramEnvParameters4fvEXT,
 	kCGLFEglProgramLocalParameters4fvEXT,
+	
+	/* GL_APPLE_object_purgeable */
+	kCGLFEglObjectPurgeableAPPLE,
+	kCGLFEglObjectUnpurgeableAPPLE,
+	kCGLFEglGetObjectParameterivAPPLE,
+	
+	/* EXT_framebuffer_blit and EXT_framebuffer_multisample */
+	kCGLFEglBlitFramebufferEXT,
+	kCGLFEglRenderbufferStorageMultisampleEXT,
+	
+	/* OpenGL 2.1 */
+	kCGLFEglUniformMatrix2x3fv,
+	kCGLFEglUniformMatrix3x2fv,
+	kCGLFEglUniformMatrix2x4fv,
+	kCGLFEglUniformMatrix4x2fv,
+	kCGLFEglUniformMatrix3x4fv,
+	kCGLFEglUniformMatrix4x3fv,
+	
+	/* OpenGL ES 2.0 */
+	kCGLFEglShaderBinaryOES,
+	kCGLFEglGetShaderPrecisionFormatOES,
+	kCGLFEglReleaseShaderCompilerOES,
+	kCGLFEglGetRenderbufferStorageFormatOES,
 
 	kCGLFENumFunctions
 } CGLProfilerFunctionEnum;

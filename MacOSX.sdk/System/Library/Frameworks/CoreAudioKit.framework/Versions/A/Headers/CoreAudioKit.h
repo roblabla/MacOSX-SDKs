@@ -17,5 +17,6 @@
 #define __COREAUDIOKIT__
 
 #import <CoreAudioKit/AUGenericView.h>
+#import <CoreAudioKit/AUPannerView.h>
 
 #endif /* __COREAUDIOKIT__ */

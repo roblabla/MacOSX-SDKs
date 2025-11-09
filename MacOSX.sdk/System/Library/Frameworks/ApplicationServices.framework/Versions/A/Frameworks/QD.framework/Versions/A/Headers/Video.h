@@ -3,7 +3,7 @@
  
      Contains:   Video Driver Interfaces.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 
@@ -1130,7 +1130,7 @@ struct VDCommunicationInfoRec {
 typedef struct VDCommunicationInfoRec   VDCommunicationInfoRec;
 typedef VDCommunicationInfoRec *        VDCommunicationInfoPtr;
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __VIDEO__ */

@@ -217,57 +217,57 @@ bool_t xdr_rex_ttymode();
 #define LDECCTQ 0x4000
 #define LNOFLSH 0x8000
 
-#define REXPROG ((u_long)100017)
-#define REXVERS ((u_long)1)
+#define REXPROG ((rpc_uint)100017)
+#define REXVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define REXPROC_START ((u_long)1)
+#define REXPROC_START ((rpc_uint)1)
 extern "C" rex_result * rexproc_start_1(rex_start *, CLIENT *);
 extern "C" rex_result * rexproc_start_1_svc(rex_start *, struct svc_req *);
-#define REXPROC_WAIT ((u_long)2)
+#define REXPROC_WAIT ((rpc_uint)2)
 extern "C" rex_result * rexproc_wait_1(void *, CLIENT *);
 extern "C" rex_result * rexproc_wait_1_svc(void *, struct svc_req *);
-#define REXPROC_MODES ((u_long)3)
+#define REXPROC_MODES ((rpc_uint)3)
 extern "C" void * rexproc_modes_1(rex_ttymode *, CLIENT *);
 extern "C" void * rexproc_modes_1_svc(rex_ttymode *, struct svc_req *);
-#define REXPROC_WINCH ((u_long)4)
+#define REXPROC_WINCH ((rpc_uint)4)
 extern "C" void * rexproc_winch_1(rex_ttysize *, CLIENT *);
 extern "C" void * rexproc_winch_1_svc(rex_ttysize *, struct svc_req *);
-#define REXPROC_SIGNAL ((u_long)5)
+#define REXPROC_SIGNAL ((rpc_uint)5)
 extern "C" void * rexproc_signal_1(int *, CLIENT *);
 extern "C" void * rexproc_signal_1_svc(int *, struct svc_req *);
 
 #elif __STDC__
-#define REXPROC_START ((u_long)1)
+#define REXPROC_START ((rpc_uint)1)
 extern  rex_result * rexproc_start_1(rex_start *, CLIENT *);
 extern  rex_result * rexproc_start_1_svc(rex_start *, struct svc_req *);
-#define REXPROC_WAIT ((u_long)2)
+#define REXPROC_WAIT ((rpc_uint)2)
 extern  rex_result * rexproc_wait_1(void *, CLIENT *);
 extern  rex_result * rexproc_wait_1_svc(void *, struct svc_req *);
-#define REXPROC_MODES ((u_long)3)
+#define REXPROC_MODES ((rpc_uint)3)
 extern  void * rexproc_modes_1(rex_ttymode *, CLIENT *);
 extern  void * rexproc_modes_1_svc(rex_ttymode *, struct svc_req *);
-#define REXPROC_WINCH ((u_long)4)
+#define REXPROC_WINCH ((rpc_uint)4)
 extern  void * rexproc_winch_1(rex_ttysize *, CLIENT *);
 extern  void * rexproc_winch_1_svc(rex_ttysize *, struct svc_req *);
-#define REXPROC_SIGNAL ((u_long)5)
+#define REXPROC_SIGNAL ((rpc_uint)5)
 extern  void * rexproc_signal_1(int *, CLIENT *);
 extern  void * rexproc_signal_1_svc(int *, struct svc_req *);
 
 #else /* Old Style C */
-#define REXPROC_START ((u_long)1)
+#define REXPROC_START ((rpc_uint)1)
 extern  rex_result * rexproc_start_1();
 extern  rex_result * rexproc_start_1_svc();
-#define REXPROC_WAIT ((u_long)2)
+#define REXPROC_WAIT ((rpc_uint)2)
 extern  rex_result * rexproc_wait_1();
 extern  rex_result * rexproc_wait_1_svc();
-#define REXPROC_MODES ((u_long)3)
+#define REXPROC_MODES ((rpc_uint)3)
 extern  void * rexproc_modes_1();
 extern  void * rexproc_modes_1_svc();
-#define REXPROC_WINCH ((u_long)4)
+#define REXPROC_WINCH ((rpc_uint)4)
 extern  void * rexproc_winch_1();
 extern  void * rexproc_winch_1_svc();
-#define REXPROC_SIGNAL ((u_long)5)
+#define REXPROC_SIGNAL ((rpc_uint)5)
 extern  void * rexproc_signal_1();
 extern  void * rexproc_signal_1_svc();
 #endif /* Old Style C */

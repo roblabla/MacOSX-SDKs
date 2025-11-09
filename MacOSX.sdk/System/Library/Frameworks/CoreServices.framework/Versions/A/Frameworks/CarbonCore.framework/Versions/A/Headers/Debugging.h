@@ -3,7 +3,7 @@
  
      Contains:   Macros to handle exceptions and assertions.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -552,7 +552,7 @@ DisposeDebugComponent(OSType componentSignature)              AVAILABLE_MAC_OS_X
  *  
  *  Parameters:
  *    
- *    index:
+ *    itemIndex:
  *      The index into the list of registered components (1-based).
  *    
  *    componentSignature:
@@ -573,7 +573,7 @@ DisposeDebugComponent(OSType componentSignature)              AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 GetDebugComponentInfo(
-  UInt32    index,
+  UInt32    itemIndex,
   OSType *  componentSignature,
   Str255    componentName)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -590,7 +590,7 @@ GetDebugComponentInfo(
  *  
  *  Parameters:
  *    
- *    index:
+ *    itemIndex:
  *      The index into the list of registered debug options (0-based);
  *      0 = kComponentDebugOption.
  *    
@@ -620,7 +620,7 @@ GetDebugComponentInfo(
  */
 extern OSStatus 
 GetDebugOptionInfo(
-  UInt32     index,
+  UInt32     itemIndex,
   OSType     componentSignature,
   SInt32 *   optionSelectorNum,
   Str255     optionName,
@@ -939,6 +939,24 @@ InvokeDebugAssertOutputHandlerUPP(
   void *                       value,
   ConstStr255Param             outputMsg,
   DebugAssertOutputHandlerUPP  userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline DebugComponentCallbackUPP                            NewDebugComponentCallbackUPP(DebugComponentCallbackProcPtr userRoutine) { return userRoutine; }
+    inline DebugAssertOutputHandlerUPP                          NewDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeDebugComponentCallbackUPP(DebugComponentCallbackUPP) { }
+    inline void                                                 DisposeDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerUPP) { }
+    inline void                                                 InvokeDebugComponentCallbackUPP(SInt32 optionSelectorNum, UInt32 command, Boolean * optionSetting, DebugComponentCallbackUPP userUPP) { (*userUPP)(optionSelectorNum, command, optionSetting); }
+    inline void                                                 InvokeDebugAssertOutputHandlerUPP(OSType componentSignature, UInt32 options, const char * assertionString, const char * exceptionLabelString, const char * errorString, const char * fileName, long lineNumber, void * value, ConstStr255Param outputMsg, DebugAssertOutputHandlerUPP userUPP) { (*userUPP)(componentSignature, options, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value, outputMsg); }
+  #else
+    #define NewDebugComponentCallbackUPP(userRoutine)           ((DebugComponentCallbackUPP)userRoutine)
+    #define NewDebugAssertOutputHandlerUPP(userRoutine)         ((DebugAssertOutputHandlerUPP)userRoutine)
+    #define DisposeDebugComponentCallbackUPP(userUPP)
+    #define DisposeDebugAssertOutputHandlerUPP(userUPP)
+    #define InvokeDebugComponentCallbackUPP(optionSelectorNum, command, optionSetting, userUPP) (*userUPP)(optionSelectorNum, command, optionSetting)
+    #define InvokeDebugAssertOutputHandlerUPP(componentSignature, options, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value, outputMsg, userUPP) (*userUPP)(componentSignature, options, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value, outputMsg)
+  #endif
+#endif
 
 
 #ifdef __cplusplus

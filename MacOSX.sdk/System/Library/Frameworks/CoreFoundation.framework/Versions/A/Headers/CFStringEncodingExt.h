@@ -1,5 +1,5 @@
 /*	CFStringEncodingExt.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTRINGENCODINGEXT__)
@@ -7,11 +7,9 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
-typedef enum {
+enum {
 /*  kCFStringEncodingMacRoman = 0L, defined in CoreFoundation/CFString.h */
     kCFStringEncodingMacJapanese = 1,
     kCFStringEncodingMacChineseTrad = 2,
@@ -80,9 +78,9 @@ typedef enum {
     kCFStringEncodingISOLatin7 = 0x020D,	/* ISO 8859-13 */
     kCFStringEncodingISOLatin8 = 0x020E,	/* ISO 8859-14 */
     kCFStringEncodingISOLatin9 = 0x020F,	/* ISO 8859-15 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     kCFStringEncodingISOLatin10 = 0x0210,	/* ISO 8859-16 */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#endif
 
     /* MS-DOS & Windows encodings begin at 0x400 */
     kCFStringEncodingDOSLatinUS = 0x0400,	/* code page 437 */
@@ -119,18 +117,20 @@ typedef enum {
 
     /* Various national standards begin at 0x600 */
 /*  kCFStringEncodingASCII = 0x0600, defined in CoreFoundation/CFString.h */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     kCFStringEncodingANSEL = 0x0601,	/* ANSEL (ANSI Z39.47) */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#endif
     kCFStringEncodingJIS_X0201_76 = 0x0620,
     kCFStringEncodingJIS_X0208_83 = 0x0621,
     kCFStringEncodingJIS_X0208_90 = 0x0622,
     kCFStringEncodingJIS_X0212_90 = 0x0623,
     kCFStringEncodingJIS_C6226_78 = 0x0624,
-    kCFStringEncodingShiftJIS_X0213_00 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    kCFStringEncodingShiftJIS_X0213 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
+#endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     kCFStringEncodingShiftJIS_X0213_MenKuTen = 0x0629,	/* JIS X0213 in plane-row-column notation */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#endif
     kCFStringEncodingGB_2312_80 = 0x0630,
     kCFStringEncodingGBK_95 = 0x0631,		/* annex to GB 13000-93; for Windows 95 */
     kCFStringEncodingGB_18030_2000 = 0x0632,
@@ -162,26 +162,28 @@ typedef enum {
     kCFStringEncodingMacRomanLatin1 = 0x0A04,	/* Mac OS Roman permuted to align with ISO Latin-1 */
     kCFStringEncodingHZ_GB_2312 = 0x0A05,	/* HZ (RFC 1842, for Chinese mail & news) */
     kCFStringEncodingBig5_HKSCS_1999 = 0x0A06, /* Big-5 with Hong Kong special char set supplement*/
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     kCFStringEncodingVISCII = 0x0A07,	/* RFC 1456, Vietnamese */
     kCFStringEncodingKOI8_U = 0x0A08,	/* RFC 2319, Ukrainian */
     kCFStringEncodingBig5_E = 0x0A09,	/* Taiwan Big-5E standard */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#endif
 
     /* Other platform encodings*/
 /*  kCFStringEncodingNextStepLatin = 0x0B01, defined in CoreFoundation/CFString.h */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     kCFStringEncodingNextStepJapanese = 0x0B02,	/* NextStep Japanese encoding */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+#endif
 
     /* EBCDIC & IBM host encodings begin at 0xC00 */
     kCFStringEncodingEBCDIC_US = 0x0C01,	/* basic EBCDIC-US */
-    kCFStringEncodingEBCDIC_CP037 = 0x0C02	/* code page 037, extended EBCDIC (Latin-1 set) for US,Canada... */
-} CFStringEncodings;
+    kCFStringEncodingEBCDIC_CP037 = 0x0C02,	/* code page 037, extended EBCDIC (Latin-1 set) for US,Canada... */
 
-#if defined(__cplusplus)
-}
-#endif
+    /* Deprecated constants */
+    kCFStringEncodingShiftJIS_X0213_00 = 0x0628 /* Shift-JIS format encoding of JIS X0213 planes 1 and 2 (DEPRECATED) */
+};
+typedef CFIndex CFStringEncodings;
 
-#endif /* !__COREFOUNDATION_CFSTRINGENCODINGEXT__ */
+CF_EXTERN_C_END
+
+#endif /* ! __COREFOUNDATION_CFSTRINGENCODINGEXT__ */
 

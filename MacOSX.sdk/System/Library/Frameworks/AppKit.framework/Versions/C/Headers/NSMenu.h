@@ -1,9 +1,9 @@
 /*
-        NSMenu.h
-        Application Kit
-        Copyright (c) 1996-2005, Apple Computer, Inc.
-        All rights reserved.
-*/
+ NSMenu.h
+ Application Kit
+ Copyright (c) 1996-2007, Apple Inc.
+ All rights reserved.
+ */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
@@ -14,7 +14,8 @@
 @class NSMenu;
 @class NSMutableArray, NSArray;
 
-@interface NSMenu : NSObject <NSCopying, NSCoding> {
+@interface NSMenu : NSObject <NSCopying, NSCoding>
+{
     /*All instance variables are private*/
     @private
     NSMenu *_supermenu;
@@ -32,7 +33,11 @@
 	unsigned int delegateUpdateItem:1;
 	unsigned int delegateHasKeyEquiv:1;
 	unsigned int delegateHasAltKeyEquiv:1;
-        unsigned int RESERVED:22;
+        unsigned int keyEquivalentMapIsDirty:1;
+	unsigned int excludeMarkColumn:1;
+	unsigned int isContextualMenu:1;
+        unsigned int RESERVED:19;
+
     } _mFlags;
     NSString *_name;
 }
@@ -59,27 +64,27 @@
 - (NSMenu *)supermenu;
     // Never call the set method directly it is there only for subclassers.
 
-- (void)insertItem:(id <NSMenuItem>)newItem atIndex:(int)index;
-- (void)addItem:(id <NSMenuItem>)newItem;
-- (id <NSMenuItem>)insertItemWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode atIndex:(int)index;
-- (id <NSMenuItem>)addItemWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode;
-- (void)removeItemAtIndex:(int)index;
-- (void)removeItem:(id <NSMenuItem>)item;
-- (void)setSubmenu:(NSMenu *)aMenu forItem:(id <NSMenuItem>)anItem;
+- (void)insertItem:(NSMenuItem *)newItem atIndex:(NSInteger)index;
+- (void)addItem:(NSMenuItem *)newItem;
+- (NSMenuItem *)insertItemWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode atIndex:(NSInteger)index;
+- (NSMenuItem *)addItemWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode;
+- (void)removeItemAtIndex:(NSInteger)index;
+- (void)removeItem:(NSMenuItem *)item;
+- (void)setSubmenu:(NSMenu *)aMenu forItem:(NSMenuItem *)anItem;
 
 - (NSArray *)itemArray;
-- (int)numberOfItems;
+- (NSInteger)numberOfItems;
 
-- (int)indexOfItem:(id <NSMenuItem>)index;
-- (int)indexOfItemWithTitle:(NSString *)aTitle;
-- (int)indexOfItemWithTag:(int)aTag;
-- (int)indexOfItemWithRepresentedObject:(id)object;
-- (int)indexOfItemWithSubmenu:(NSMenu *)submenu;
-- (int)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
+- (NSInteger)indexOfItem:(NSMenuItem *)index;
+- (NSInteger)indexOfItemWithTitle:(NSString *)aTitle;
+- (NSInteger)indexOfItemWithTag:(NSInteger)aTag;
+- (NSInteger)indexOfItemWithRepresentedObject:(id)object;
+- (NSInteger)indexOfItemWithSubmenu:(NSMenu *)submenu;
+- (NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
 
-- (id <NSMenuItem>)itemAtIndex:(int)index;
-- (id <NSMenuItem>)itemWithTitle:(NSString *)aTitle;
-- (id <NSMenuItem>)itemWithTag:(int)tag;
+- (NSMenuItem *)itemAtIndex:(NSInteger)index;
+- (NSMenuItem *)itemWithTitle:(NSString *)aTitle;
+- (NSMenuItem *)itemWithTag:(NSInteger)tag;
 
 - (void)setAutoenablesItems:(BOOL)flag;
 - (BOOL)autoenablesItems;
@@ -90,7 +95,7 @@
 - (void)setMenuChangedMessagesEnabled:(BOOL)flag;
 - (BOOL)menuChangedMessagesEnabled;
 
-- (void)itemChanged:(id <NSMenuItem>)item;
+- (void)itemChanged:(NSMenuItem *)item;
 
 - (void)helpRequested:(NSEvent *)eventPtr;
 
@@ -105,13 +110,13 @@
 
 - (BOOL)isTornOff;
 
-// These methods are platform specific.  They really make little sense on Windows.  Their use is discouraged.
+    // These methods are platform specific.  They really make little sense on Windows.  Their use is discouraged.
 - (NSMenu *)attachedMenu;
 - (BOOL)isAttached;
 - (void)sizeToFit;
 - (NSPoint)locationForSubmenu:(NSMenu *)aSubmenu;
 
-- (void)performActionForItemAtIndex:(int)index;
+- (void)performActionForItemAtIndex:(NSInteger)index;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setDelegate:(id)anObject;
@@ -119,7 +124,18 @@
 #endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (float)menuBarHeight;
+- (CGFloat)menuBarHeight;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* Dismisses the menu and ends all menu tracking */
+- (void)cancelTracking;
+
+/* Returns the highlighted item in the menu, or nil if no item in the menu is highlighted */
+- (NSMenuItem *)highlightedItem;
+
+- (void)setShowsStateColumn:(BOOL)showsState;
+- (BOOL)showsStateColumn;
 #endif
 
 @end
@@ -129,17 +145,27 @@
 @end
 
 @interface NSObject(NSMenuValidation)
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
 @end
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 @interface NSObject(NSMenuDelegate)
 - (void)menuNeedsUpdate:(NSMenu*)menu;
-- (int)numberOfItemsInMenu:(NSMenu*)menu;
-- (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(int)index shouldCancel:(BOOL)shouldCancel;
+- (NSInteger)numberOfItemsInMenu:(NSMenu*)menu;
+- (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel;
     // implement either the first one or the next two to populate the menu
 - (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(id*)target action:(SEL*)action;
     // bypasses populating the menu for checking for key equivalents. set target and action on return
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* indicates that the menu is being opened (displayed) or closed (hidden).  Do not modify the structure of the menu or the menu items from within these callbacks. */
+- (void)menuWillOpen:(NSMenu *)menu;
+- (void)menuDidClose:(NSMenu *)menu;
+
+/* Indicates that menu is about to highlight item.  Only one item per menu can be highlighted at a time.  If item is nil, it means all items in the menu are about to be unhighlighted. */
+- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item;
+#endif
+
 @end
 #endif
 
@@ -149,6 +175,7 @@ APPKIT_EXTERN NSString *NSMenuDidSendActionNotification;
 APPKIT_EXTERN NSString *NSMenuDidAddItemNotification;
 APPKIT_EXTERN NSString *NSMenuDidRemoveItemNotification;
 APPKIT_EXTERN NSString *NSMenuDidChangeItemNotification;
-    // All three of these have a user info key NSMenuItemIndex with a NSNumber value.
+// All three of these have a user info key NSMenuItemIndex with a NSNumber value.
 
+APPKIT_EXTERN NSString *NSMenuDidBeginTrackingNotification  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

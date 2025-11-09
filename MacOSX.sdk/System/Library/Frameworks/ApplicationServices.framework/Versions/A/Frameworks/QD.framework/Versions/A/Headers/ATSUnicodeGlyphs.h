@@ -3,9 +3,9 @@
  
      Contains:   ATSUI glyph handling functions.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -35,6 +35,7 @@
 extern "C" {
 #endif
 
+#if !__LP64__
 /*
  *  ATSUGlyphGetIdealMetrics()
  *  
@@ -90,7 +91,7 @@ extern "C" {
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -158,7 +159,7 @@ ATSUGlyphGetIdealMetrics(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -208,7 +209,7 @@ ATSUGlyphGetScreenMetrics(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -217,6 +218,8 @@ ATSUGetNativeCurveType(
   ATSUStyle       iATSUStyle,
   ATSCurveType *  oCurveType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 /*
@@ -276,6 +279,18 @@ extern OSStatus
 InvokeATSQuadraticNewPathUPP(
   void *                  callBackDataPtr,
   ATSQuadraticNewPathUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSQuadraticNewPathUPP                               NewATSQuadraticNewPathUPP(ATSQuadraticNewPathProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSQuadraticNewPathUPP(ATSQuadraticNewPathUPP) { }
+    inline OSStatus                                             InvokeATSQuadraticNewPathUPP(void * callBackDataPtr, ATSQuadraticNewPathUPP userUPP) { return (*userUPP)(callBackDataPtr); }
+  #else
+    #define NewATSQuadraticNewPathUPP(userRoutine)              ((ATSQuadraticNewPathUPP)userRoutine)
+    #define DisposeATSQuadraticNewPathUPP(userUPP)
+    #define InvokeATSQuadraticNewPathUPP(callBackDataPtr, userUPP) (*userUPP)(callBackDataPtr)
+  #endif
+#endif
 
 
 /*
@@ -343,6 +358,18 @@ InvokeATSQuadraticLineUPP(
   const Float32Point *  pt2,
   void *                callBackDataPtr,
   ATSQuadraticLineUPP   userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSQuadraticLineUPP                                  NewATSQuadraticLineUPP(ATSQuadraticLineProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSQuadraticLineUPP(ATSQuadraticLineUPP) { }
+    inline OSStatus                                             InvokeATSQuadraticLineUPP(const Float32Point * pt1, const Float32Point * pt2, void * callBackDataPtr, ATSQuadraticLineUPP userUPP) { return (*userUPP)(pt1, pt2, callBackDataPtr); }
+  #else
+    #define NewATSQuadraticLineUPP(userRoutine)                 ((ATSQuadraticLineUPP)userRoutine)
+    #define DisposeATSQuadraticLineUPP(userUPP)
+    #define InvokeATSQuadraticLineUPP(pt1, pt2, callBackDataPtr, userUPP) (*userUPP)(pt1, pt2, callBackDataPtr)
+  #endif
+#endif
 
 
 /*
@@ -417,6 +444,18 @@ InvokeATSQuadraticCurveUPP(
   void *                callBackDataPtr,
   ATSQuadraticCurveUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSQuadraticCurveUPP                                 NewATSQuadraticCurveUPP(ATSQuadraticCurveProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSQuadraticCurveUPP(ATSQuadraticCurveUPP) { }
+    inline OSStatus                                             InvokeATSQuadraticCurveUPP(const Float32Point * pt1, const Float32Point * controlPt, const Float32Point * pt2, void * callBackDataPtr, ATSQuadraticCurveUPP userUPP) { return (*userUPP)(pt1, controlPt, pt2, callBackDataPtr); }
+  #else
+    #define NewATSQuadraticCurveUPP(userRoutine)                ((ATSQuadraticCurveUPP)userRoutine)
+    #define DisposeATSQuadraticCurveUPP(userUPP)
+    #define InvokeATSQuadraticCurveUPP(pt1, controlPt, pt2, callBackDataPtr, userUPP) (*userUPP)(pt1, controlPt, pt2, callBackDataPtr)
+  #endif
+#endif
+
 
 /*
  *  ATSQuadraticClosePathProcPtr
@@ -476,6 +515,19 @@ InvokeATSQuadraticClosePathUPP(
   void *                    callBackDataPtr,
   ATSQuadraticClosePathUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSQuadraticClosePathUPP                             NewATSQuadraticClosePathUPP(ATSQuadraticClosePathProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSQuadraticClosePathUPP(ATSQuadraticClosePathUPP) { }
+    inline OSStatus                                             InvokeATSQuadraticClosePathUPP(void * callBackDataPtr, ATSQuadraticClosePathUPP userUPP) { return (*userUPP)(callBackDataPtr); }
+  #else
+    #define NewATSQuadraticClosePathUPP(userRoutine)            ((ATSQuadraticClosePathUPP)userRoutine)
+    #define DisposeATSQuadraticClosePathUPP(userUPP)
+    #define InvokeATSQuadraticClosePathUPP(callBackDataPtr, userUPP) (*userUPP)(callBackDataPtr)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  ATSUGlyphGetQuadraticPaths()
  *  
@@ -546,7 +598,7 @@ InvokeATSQuadraticClosePathUPP(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -561,6 +613,8 @@ ATSUGlyphGetQuadraticPaths(
   void *                     iCallbackDataPtr,
   OSStatus *                 oCallbackResult)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 /*
@@ -625,6 +679,18 @@ InvokeATSCubicMoveToUPP(
   void *                callBackDataPtr,
   ATSCubicMoveToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSCubicMoveToUPP                                    NewATSCubicMoveToUPP(ATSCubicMoveToProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSCubicMoveToUPP(ATSCubicMoveToUPP) { }
+    inline OSStatus                                             InvokeATSCubicMoveToUPP(const Float32Point * pt, void * callBackDataPtr, ATSCubicMoveToUPP userUPP) { return (*userUPP)(pt, callBackDataPtr); }
+  #else
+    #define NewATSCubicMoveToUPP(userRoutine)                   ((ATSCubicMoveToUPP)userRoutine)
+    #define DisposeATSCubicMoveToUPP(userUPP)
+    #define InvokeATSCubicMoveToUPP(pt, callBackDataPtr, userUPP) (*userUPP)(pt, callBackDataPtr)
+  #endif
+#endif
+
 
 /*
  *  ATSCubicLineToProcPtr
@@ -688,6 +754,18 @@ InvokeATSCubicLineToUPP(
   const Float32Point *  pt,
   void *                callBackDataPtr,
   ATSCubicLineToUPP     userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSCubicLineToUPP                                    NewATSCubicLineToUPP(ATSCubicLineToProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSCubicLineToUPP(ATSCubicLineToUPP) { }
+    inline OSStatus                                             InvokeATSCubicLineToUPP(const Float32Point * pt, void * callBackDataPtr, ATSCubicLineToUPP userUPP) { return (*userUPP)(pt, callBackDataPtr); }
+  #else
+    #define NewATSCubicLineToUPP(userRoutine)                   ((ATSCubicLineToUPP)userRoutine)
+    #define DisposeATSCubicLineToUPP(userUPP)
+    #define InvokeATSCubicLineToUPP(pt, callBackDataPtr, userUPP) (*userUPP)(pt, callBackDataPtr)
+  #endif
+#endif
 
 
 /*
@@ -762,6 +840,18 @@ InvokeATSCubicCurveToUPP(
   void *                callBackDataPtr,
   ATSCubicCurveToUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSCubicCurveToUPP                                   NewATSCubicCurveToUPP(ATSCubicCurveToProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSCubicCurveToUPP(ATSCubicCurveToUPP) { }
+    inline OSStatus                                             InvokeATSCubicCurveToUPP(const Float32Point * pt1, const Float32Point * pt2, const Float32Point * pt3, void * callBackDataPtr, ATSCubicCurveToUPP userUPP) { return (*userUPP)(pt1, pt2, pt3, callBackDataPtr); }
+  #else
+    #define NewATSCubicCurveToUPP(userRoutine)                  ((ATSCubicCurveToUPP)userRoutine)
+    #define DisposeATSCubicCurveToUPP(userUPP)
+    #define InvokeATSCubicCurveToUPP(pt1, pt2, pt3, callBackDataPtr, userUPP) (*userUPP)(pt1, pt2, pt3, callBackDataPtr)
+  #endif
+#endif
+
 
 /*
  *  ATSCubicClosePathProcPtr
@@ -821,6 +911,19 @@ InvokeATSCubicClosePathUPP(
   void *                callBackDataPtr,
   ATSCubicClosePathUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ATSCubicClosePathUPP                                 NewATSCubicClosePathUPP(ATSCubicClosePathProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeATSCubicClosePathUPP(ATSCubicClosePathUPP) { }
+    inline OSStatus                                             InvokeATSCubicClosePathUPP(void * callBackDataPtr, ATSCubicClosePathUPP userUPP) { return (*userUPP)(callBackDataPtr); }
+  #else
+    #define NewATSCubicClosePathUPP(userRoutine)                ((ATSCubicClosePathUPP)userRoutine)
+    #define DisposeATSCubicClosePathUPP(userUPP)
+    #define InvokeATSCubicClosePathUPP(callBackDataPtr, userUPP) (*userUPP)(callBackDataPtr)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  ATSUGlyphGetCubicPaths()
  *  
@@ -891,7 +994,7 @@ InvokeATSCubicClosePathUPP(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -957,7 +1060,7 @@ ATSUGlyphGetCubicPaths(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -988,7 +1091,7 @@ ATSUGlyphGetCurvePaths(
  *    Please see ATSUnicodeDirectAccess.h for replacement functions.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -1015,7 +1118,7 @@ ATSUGetGlyphInfo(
  *    Please see ATSUnicodeDirectAccess.h for replacement functions.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -1024,6 +1127,8 @@ ATSUDrawGlyphInfo(
   ATSUGlyphInfoArray *  iGlyphInfoArray,
   Float32Point          iLocation)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

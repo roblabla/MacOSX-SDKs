@@ -44,21 +44,21 @@ bool_t xdr_yppasswd();
 #endif /* Old Style C */
 
 
-#define YPPASSWDPROG ((u_long)100009)
-#define YPPASSWDVERS ((u_long)1)
+#define YPPASSWDPROG ((rpc_uint)100009)
+#define YPPASSWDVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define YPPASSWDPROC_UPDATE ((u_long)1)
+#define YPPASSWDPROC_UPDATE ((rpc_uint)1)
 extern "C" int * yppasswdproc_update_1(yppasswd *, CLIENT *);
 extern "C" int * yppasswdproc_update_1_svc(yppasswd *, struct svc_req *);
 
 #elif __STDC__
-#define YPPASSWDPROC_UPDATE ((u_long)1)
+#define YPPASSWDPROC_UPDATE ((rpc_uint)1)
 extern  int * yppasswdproc_update_1(yppasswd *, CLIENT *);
 extern  int * yppasswdproc_update_1_svc(yppasswd *, struct svc_req *);
 
 #else /* Old Style C */
-#define YPPASSWDPROC_UPDATE ((u_long)1)
+#define YPPASSWDPROC_UPDATE ((rpc_uint)1)
 extern  int * yppasswdproc_update_1();
 extern  int * yppasswdproc_update_1_svc();
 #endif /* Old Style C */

@@ -3,7 +3,7 @@
  
      Contains:   Interfaces for Multilingual Text Engine (MLTE)
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -44,6 +44,10 @@
 #include <HIToolbox/Menus.h>
 #endif
 
+#ifndef __TEXTSERVICES__
+#include <HIToolbox/TextServices.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -56,15 +60,12 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
-
+#pragma pack(push, 2)
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Various Defs                                                                                      */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
 typedef struct OpaqueTXNObject*         TXNObject;
-typedef struct OpaqueTXNFontMenuObject*  TXNFontMenuObject;
 typedef UInt32                          TXNVersionValue;
 
 /*
@@ -75,8 +76,6 @@ typedef UInt32                          TXNVersionValue;
  *    parameter.
  */
 typedef UInt32                          TXNFrameID;
-
-
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Error Status                                                                                      */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
@@ -103,6 +102,7 @@ enum {
   kTXNWillDefaultToCarbonEventMask = 1L << kTXNWillDefaultToCarbonEventBit
 };
 
+#if !__LP64__
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Initialization Bits                                                                               */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
@@ -125,9 +125,7 @@ enum {
   kTXNUseTemporaryMemoryMask    = 1L << kTXNUseTemporaryMemoryBit
 };
 
-/* Default constants  */
-
-#define kTXNDefaultFontName             ((StringPtr)NULL)
+/* Default constants*/
 
 enum {
   kTXNDefaultFontSize           = 0x000C0000
@@ -136,6 +134,8 @@ enum {
 enum {
   kTXNDefaultFontStyle          = normal
 };
+
+#endif  /* !__LP64__ */
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • FrameOption Bits                                                                                  */
@@ -148,7 +148,6 @@ enum {
   kTXNWantHScrollBarBit         = 2,
   kTXNWantVScrollBarBit         = 3,
   kTXNReadOnlyBit               = 5,
-  kTXNNoKeyboardSyncBit         = 6,
   kTXNNoSelectionBit            = 7,
   kTXNSaveStylesAsSTYLResourceBit = 8,
   kOutputTextInUnicodeEncodingBit = 9,
@@ -216,11 +215,6 @@ enum {
    * mode.
    */
   kTXNReadOnlyMask              = 1L << kTXNReadOnlyBit,
-
-  /*
-   * Indicates that keyboard synchronization will not occur.
-   */
-  kTXNNoKeyboardSyncMask        = 1L << kTXNNoKeyboardSyncBit,
 
   /*
    * Indicates that the user shouldn't be able to set the insertion
@@ -297,8 +291,8 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • TextBox Option Bits                                                                               */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-/*  Useful for TXNDrawUnicodeTextBox and TXNDrawCFStringTextBox APIs.                                   */
-
+/*  Useful for TXNDrawUnicodeTextBox and TXNDrawCFStringTextBox APIs.   32 bit only                     */
+#if !__LP64__
 enum {
   kTXNSetFlushnessBit           = 0,
   kTXNSetJustificationBit       = 1,
@@ -311,6 +305,9 @@ enum {
   kTXNDontWrapTextBit           = 9
 };
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 
 /*
  *  TXNTextBoxOptions
@@ -390,10 +387,12 @@ enum {
   kTXNDontWrapTextMask          = 1L << kTXNDontWrapTextBit
 };
 
+#endif  /* !__LP64__ */
+
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • TextBox Options Data                                                                              */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
+#if !__LP64__
 struct TXNTextBoxOptionsData {
   TXNTextBoxOptions   optionTags;
   Fract               flushness;
@@ -402,6 +401,7 @@ struct TXNTextBoxOptionsData {
   void *              options;
 };
 typedef struct TXNTextBoxOptionsData    TXNTextBoxOptionsData;
+#endif  /* !__LP64__ */
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • File Types                                                                                        */
@@ -415,14 +415,20 @@ typedef struct TXNTextBoxOptionsData    TXNTextBoxOptionsData;
  */
 typedef OSType TXNFileType;
 enum {
-  kTXNTextensionFile            = 'txtn',
   kTXNTextFile                  = 'TEXT',
+  kTXNAIFFFile                  = 'AIFF',
+  kTXNUnicodeTextFile           = 'utxt',
+  kTXNTextensionFile            = 'txtn'
+};
+
+#if !__LP64__
+enum {
   kTXNPictureFile               = 'PICT',
   kTXNMovieFile                 = 'MooV',
-  kTXNSoundFile                 = 'sfil',
-  kTXNAIFFFile                  = 'AIFF',
-  kTXNUnicodeTextFile           = 'utxt'
+  kTXNSoundFile                 = 'sfil'
 };
+
+#endif  /* !__LP64__ */
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Text Encoding Types                                                                               */
@@ -448,13 +454,19 @@ enum {
 typedef OSType TXNDataType;
 enum {
   kTXNTextData                  = 'TEXT',
+  kTXNUnicodeTextData           = 'utxt',
+  kTXNRichTextFormatData        = 'RTF '
+};
+
+#if !__LP64__
+enum {
   kTXNPictureData               = 'PICT',
   kTXNMovieData                 = 'moov',
   kTXNSoundData                 = 'snd ',
-  kTXNUnicodeTextData           = 'utxt',
-  kTXNTextAndMultimediaData     = 'txtn',
-  kTXNRichTextFormatData        = 'RTF '
+  kTXNTextAndMultimediaData     = 'txtn'
 };
+
+#endif  /* !__LP64__ */
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
@@ -473,7 +485,7 @@ enum {
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -489,7 +501,7 @@ extern const CFStringRef kTXNActionTyping                            AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -505,7 +517,7 @@ extern const CFStringRef kTXNActionCut                               AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -521,7 +533,7 @@ extern const CFStringRef kTXNActionPaste                             AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -537,7 +549,7 @@ extern const CFStringRef kTXNActionClear                             AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -553,7 +565,7 @@ extern const CFStringRef kTXNActionChangeFont                        AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -569,7 +581,7 @@ extern const CFStringRef kTXNActionChangeColor                       AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -585,7 +597,7 @@ extern const CFStringRef kTXNActionChangeSize                        AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -601,7 +613,7 @@ extern const CFStringRef kTXNActionChangeStyle                       AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -617,7 +629,7 @@ extern const CFStringRef kTXNActionAlignLeft                         AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -633,7 +645,7 @@ extern const CFStringRef kTXNActionAlignCenter                       AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -649,7 +661,7 @@ extern const CFStringRef kTXNActionAlignRight                        AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -665,7 +677,7 @@ extern const CFStringRef kTXNActionDrop                              AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -681,7 +693,7 @@ extern const CFStringRef kTXNActionMove                              AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -697,7 +709,7 @@ extern const CFStringRef kTXNActionChangeFontFeature                 AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -713,7 +725,7 @@ extern const CFStringRef kTXNActionChangeFontVariation               AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -731,7 +743,7 @@ extern const CFStringRef kTXNActionChangeGlyphVariation              AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -747,7 +759,7 @@ extern const CFStringRef kTXNActionChangeTextPosition                AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -822,7 +834,6 @@ enum {
   kTXNSelectionStateTag         = 'slst',
   kTXNInlineStateTag            = 'inst',
   kTXNWordWrapStateTag          = 'wwrs',
-  kTXNKeyboardSyncStateTag      = 'kbsy',
   kTXNAutoIndentStateTag        = 'auin',
   kTXNTabSettingsTag            = 'tabs',
   kTXNRefConTag                 = 'rfcn',
@@ -863,7 +874,7 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 
 enum {
-  kTXNClearThisControl          = (long)0xFFFFFFFF, /* To clear an object control setting */
+  kTXNClearThisControl          = -1,   /* To clear an object control setting */
   kTXNClearTheseFontFeatures    = (long)0x80000000 /* To clear ATSUI font feature(s) */
 };
 
@@ -889,12 +900,6 @@ enum {
 enum {
   kTXNAutoWrap                  = false,
   kTXNNoAutoWrap                = true
-};
-
-/* kTXNKeyboardSyncStateTag*/
-enum {
-  kTXNSyncKeyboard              = false,
-  kTXNNoSyncKeyboard            = true
 };
 
 /* kTXNAutoIndentStateTag*/
@@ -923,8 +928,8 @@ enum {
 
 /* Formatting info */
 union TXNControlData {
-  UInt32              uValue;
-  SInt32              sValue;
+  unsigned long       uValue;
+  long                sValue;
   TXNTab              tabValue;
   TXNMargins *        marginsPtr;
 };
@@ -978,10 +983,9 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Offset/Selection Constants                                                                        */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
 typedef UInt32 TXNOffset;
 enum {
-  kTXNUseCurrentSelection       = (unsigned long)0xFFFFFFFF,
+  kTXNUseCurrentSelection       = (UInt32)0xFFFFFFFF,
   kTXNStartOffset               = 0,
   kTXNEndOffset                 = 0x7FFFFFFF
 };
@@ -1026,13 +1030,10 @@ enum {
 /*  are limited by what's available in ATSUI.  Currently, MLTE supports types defined in MacTypes.h     */
 /*  which are normal, bold, italic, underline, condensed, and extended.  An alternative is to use       */
 /*  available QD compatibility tags defined in ATSUnicode.h.                                            */
-
+/*  Deprecate all QD TXNTypeRunAttributes/TXNTypeRunAttributeSizes constants. Use kTXNATSUIStyle or     */
+/*  ATSUI tags ATSUFontTag, kATSUColorTag and kATSUSizeTag to Set/Get the font, color or size           */
 typedef FourCharCode TXNTypeRunAttributes;
 enum {
-  kTXNQDFontNameAttribute       = 'fntn',
-  kTXNQDFontFamilyIDAttribute   = 'font',
-  kTXNQDFontStyleAttribute      = 'face',
-  kTXNQDFontColorAttribute      = 'klor',
   kTXNTextEncodingAttribute     = 'encd',
   kTXNATSUIFontFeaturesAttribute = 'atfe',
   kTXNATSUIFontVariationsAttribute = 'atva',
@@ -1042,12 +1043,7 @@ enum {
 
 typedef ByteCount TXNTypeRunAttributeSizes;
 enum {
-  kTXNQDFontNameAttributeSize   = sizeof(Str255),
-  kTXNQDFontFamilyIDAttributeSize = sizeof(SInt16),
-  kTXNQDFontStyleAttributeSize  = sizeof(Style),
-  kTXNQDFontColorAttributeSize  = sizeof(RGBColor),
   kTXNTextEncodingAttributeSize = sizeof(TextEncoding),
-  kTXNFontSizeAttributeSize     = sizeof(Fixed),
   kTXNATSUIStyleSize            = sizeof(ATSUStyle)
 };
 
@@ -1084,7 +1080,7 @@ typedef struct TXNTypeAttributes        TXNTypeAttributes;
 /*
  */
 enum {
-  kTXNDontCareTypeSize          = (long)0xFFFFFFFF,
+  kTXNDontCareTypeSize          = -1,
   kTXNDontCareTypeStyle         = 0xFF,
   kTXNIncrementTypeSize         = 0x00000001,
   kTXNDecrementTypeSize         = (long)0x80000000,
@@ -1139,8 +1135,8 @@ enum {
 };
 
 struct TXNMatchTextRecord {
-  void *              iTextPtr;
-  SInt32              iTextToMatchLength;
+  const void *        iTextPtr;
+  long                iTextToMatchLength;
   TextEncoding        iTextEncoding;
 };
 typedef struct TXNMatchTextRecord       TXNMatchTextRecord;
@@ -1148,7 +1144,7 @@ typedef struct TXNMatchTextRecord       TXNMatchTextRecord;
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Font Description                                                                                  */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
+#if !__LP64__
 struct TXNMacOSPreferredFontDescription {
   UInt32              fontID;
   Fixed               pointSize;
@@ -1156,6 +1152,7 @@ struct TXNMacOSPreferredFontDescription {
   Style               fontStyle;
 };
 typedef struct TXNMacOSPreferredFontDescription TXNMacOSPreferredFontDescription;
+#endif  /* !__LP64__ */
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Background                                                                                        */
@@ -1180,14 +1177,14 @@ enum {
  *    The TXNBackgroundData is left as a union so that it can be
  *    expanded in the future to support other background types.
  */
-union TXNBackgroundData {
+struct TXNBackgroundData {
 
   /*
    * Currently only an RGBColor is supported.
    */
   RGBColor            color;
 };
-typedef union TXNBackgroundData         TXNBackgroundData;
+typedef struct TXNBackgroundData        TXNBackgroundData;
 
 struct TXNBackground {
   TXNBackgroundType   bgType;
@@ -1216,7 +1213,7 @@ typedef struct TXNBackground            TXNBackground;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1236,7 +1233,7 @@ extern const CFStringRef kTXNActionCountOfTextChanges                AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1253,7 +1250,7 @@ extern const CFStringRef kTXNActionCountOfStyleChanges               AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1318,7 +1315,7 @@ enum {
   kTXNDrawItemScrollbarsMask    = 1L << kTXNDrawItemScrollbarsBit,
   kTXNDrawItemTextMask          = 1L << kTXNDrawItemTextBit,
   kTXNDrawItemTextAndSelectionMask = 1L << kTXNDrawItemTextAndSelectionBit,
-  kTXNDrawItemAllMask           = (unsigned long)0xFFFFFFFF
+  kTXNDrawItemAllMask           = (unsigned long)(-1)
 };
 
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
@@ -1345,7 +1342,6 @@ enum {
 #define   kTXNWindowResizeEventHandlerKey           CFSTR("WindowResize")
 #define   kTXNCommandTargetKey                      CFSTR("CommandTarget")
 #define   kTXNCommandUpdateKey                      CFSTR("CommandUpdate")
-#define   kTXNFontMenuObjectKey                     CFSTR("FontMenuObject")
 #define   kTXNActionNameMapperKey                   CFSTR("ActionNameMapper")
 #define   kTXNWheelMouseEventHandlerKey             CFSTR("WheelMouseEvent")
 #define   kTXNTSMDocumentAccessHandlerKey           CFSTR("TSMDocumentAccess")
@@ -1404,7 +1400,7 @@ typedef struct TXNCarbonEventInfo       TXNCarbonEventInfo;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1420,7 +1416,7 @@ extern const CFStringRef kTXNDocumentAttributeTitleKey               AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1436,7 +1432,7 @@ extern const CFStringRef kTXNDocumentAttributeCompanyNameKey         AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1453,7 +1449,7 @@ extern const CFStringRef kTXNDocumentAttributeSubjectKey             AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1469,7 +1465,7 @@ extern const CFStringRef kTXNDocumentAttributeAuthorKey              AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1485,7 +1481,7 @@ extern const CFStringRef kTXNDocumentAttributeKeywordsKey            AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1501,7 +1497,7 @@ extern const CFStringRef kTXNDocumentAttributeCommentKey             AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1519,7 +1515,7 @@ extern const CFStringRef kTXNDocumentAttributeEditorKey              AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1536,7 +1532,7 @@ extern const CFStringRef kTXNDocumentAttributeCreationTimeKey        AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1551,7 +1547,7 @@ extern const CFStringRef kTXNDocumentAttributeModificationTimeKey    AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1574,7 +1570,7 @@ extern const CFStringRef kTXNDocumentAttributeCopyrightKey           AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1591,7 +1587,7 @@ extern const CFStringRef kTXNDataOptionDocumentTypeKey               AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1609,7 +1605,7 @@ extern const CFStringRef kTXNDataOptionCharacterEncodingKey          AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1625,7 +1621,7 @@ extern const CFStringRef kTXNPlainTextDocumentType                   AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1641,7 +1637,7 @@ extern const CFStringRef kTXNMLTEDocumentType                        AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1658,21 +1654,19 @@ extern const CFStringRef kTXNRTFDocumentType                         AVAILABLE_M
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
 extern const CFStringRef kTXNQuickTimeDocumentType                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Callbacks                                                                                         */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 
-typedef CALLBACK_API( OSStatus , TXNFindProcPtr )(const TXNMatchTextRecord *matchData, TXNDataType iDataType, TXNMatchOptions iMatchOptions, const void *iSearchTextPtr, TextEncoding encoding, TXNOffset absStartOffset, ByteCount searchTextLength, TXNOffset *oStartMatch, TXNOffset *oEndMatch, Boolean *ofound, UInt32 refCon);
+typedef CALLBACK_API( OSStatus , TXNFindProcPtr )(const TXNMatchTextRecord *matchData, TXNDataType iDataType, TXNMatchOptions iMatchOptions, const void *iSearchTextPtr, TextEncoding encoding, TXNOffset absStartOffset, ByteCount searchTextLength, TXNOffset *oStartMatch, TXNOffset *oEndMatch, Boolean *ofound, URefCon refCon);
 typedef CALLBACK_API( CFStringRef , TXNActionNameMapperProcPtr )(CFStringRef actionName, UInt32 commandID, void *inUserData);
 typedef CALLBACK_API( void , TXNContextualMenuSetupProcPtr )(MenuRef iContextualMenu, TXNObject object, void *inUserData);
-typedef CALLBACK_API( void , TXNScrollInfoProcPtr )(SInt32 iValue, SInt32 iMaximumValue, TXNScrollBarOrientation iScrollBarOrientation, SInt32 iRefCon);
+typedef CALLBACK_API( void , TXNScrollInfoProcPtr )(SInt32 iValue, SInt32 iMaximumValue, TXNScrollBarOrientation iScrollBarOrientation, SRefCon iRefCon);
 typedef STACK_UPP_TYPE(TXNFindProcPtr)                          TXNFindUPP;
 typedef STACK_UPP_TYPE(TXNActionNameMapperProcPtr)              TXNActionNameMapperUPP;
 typedef STACK_UPP_TYPE(TXNContextualMenuSetupProcPtr)           TXNContextualMenuSetupUPP;
@@ -1785,7 +1779,7 @@ InvokeTXNFindUPP(
   TXNOffset *                 oStartMatch,
   TXNOffset *                 oEndMatch,
   Boolean *                   ofound,
-  UInt32                      refCon,
+  URefCon                     refCon,
   TXNFindUPP                  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -1831,8 +1825,38 @@ InvokeTXNScrollInfoUPP(
   SInt32                   iValue,
   SInt32                   iMaximumValue,
   TXNScrollBarOrientation  iScrollBarOrientation,
-  SInt32                   iRefCon,
+  SRefCon                  iRefCon,
   TXNScrollInfoUPP         userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline TXNFindUPP                                           NewTXNFindUPP(TXNFindProcPtr userRoutine) { return userRoutine; }
+    inline TXNActionNameMapperUPP                               NewTXNActionNameMapperUPP(TXNActionNameMapperProcPtr userRoutine) { return userRoutine; }
+    inline TXNContextualMenuSetupUPP                            NewTXNContextualMenuSetupUPP(TXNContextualMenuSetupProcPtr userRoutine) { return userRoutine; }
+    inline TXNScrollInfoUPP                                     NewTXNScrollInfoUPP(TXNScrollInfoProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeTXNFindUPP(TXNFindUPP) { }
+    inline void                                                 DisposeTXNActionNameMapperUPP(TXNActionNameMapperUPP) { }
+    inline void                                                 DisposeTXNContextualMenuSetupUPP(TXNContextualMenuSetupUPP) { }
+    inline void                                                 DisposeTXNScrollInfoUPP(TXNScrollInfoUPP) { }
+    inline OSStatus                                             InvokeTXNFindUPP(const TXNMatchTextRecord * matchData, TXNDataType iDataType, TXNMatchOptions iMatchOptions, const void * iSearchTextPtr, TextEncoding encoding, TXNOffset absStartOffset, ByteCount searchTextLength, TXNOffset * oStartMatch, TXNOffset * oEndMatch, Boolean * ofound, URefCon refCon, TXNFindUPP userUPP) { return (*userUPP)(matchData, iDataType, iMatchOptions, iSearchTextPtr, encoding, absStartOffset, searchTextLength, oStartMatch, oEndMatch, ofound, refCon); }
+    inline CFStringRef                                          InvokeTXNActionNameMapperUPP(CFStringRef actionName, UInt32 commandID, void * inUserData, TXNActionNameMapperUPP userUPP) { return (*userUPP)(actionName, commandID, inUserData); }
+    inline void                                                 InvokeTXNContextualMenuSetupUPP(MenuRef iContextualMenu, TXNObject object, void * inUserData, TXNContextualMenuSetupUPP userUPP) { (*userUPP)(iContextualMenu, object, inUserData); }
+    inline void                                                 InvokeTXNScrollInfoUPP(SInt32 iValue, SInt32 iMaximumValue, TXNScrollBarOrientation iScrollBarOrientation, SRefCon iRefCon, TXNScrollInfoUPP userUPP) { (*userUPP)(iValue, iMaximumValue, iScrollBarOrientation, iRefCon); }
+  #else
+    #define NewTXNFindUPP(userRoutine)                          ((TXNFindUPP)userRoutine)
+    #define NewTXNActionNameMapperUPP(userRoutine)              ((TXNActionNameMapperUPP)userRoutine)
+    #define NewTXNContextualMenuSetupUPP(userRoutine)           ((TXNContextualMenuSetupUPP)userRoutine)
+    #define NewTXNScrollInfoUPP(userRoutine)                    ((TXNScrollInfoUPP)userRoutine)
+    #define DisposeTXNFindUPP(userUPP)
+    #define DisposeTXNActionNameMapperUPP(userUPP)
+    #define DisposeTXNContextualMenuSetupUPP(userUPP)
+    #define DisposeTXNScrollInfoUPP(userUPP)
+    #define InvokeTXNFindUPP(matchData, iDataType, iMatchOptions, iSearchTextPtr, encoding, absStartOffset, searchTextLength, oStartMatch, oEndMatch, ofound, refCon, userUPP) (*userUPP)(matchData, iDataType, iMatchOptions, iSearchTextPtr, encoding, absStartOffset, searchTextLength, oStartMatch, oEndMatch, ofound, refCon)
+    #define InvokeTXNActionNameMapperUPP(actionName, commandID, inUserData, userUPP) (*userUPP)(actionName, commandID, inUserData)
+    #define InvokeTXNContextualMenuSetupUPP(iContextualMenu, object, inUserData, userUPP) (*userUPP)(iContextualMenu, object, inUserData)
+    #define InvokeTXNScrollInfoUPP(iValue, iMaximumValue, iScrollBarOrientation, iRefCon, userUPP) (*userUPP)(iValue, iMaximumValue, iScrollBarOrientation, iRefCon)
+  #endif
+#endif
 
 
 
@@ -1846,6 +1870,7 @@ InvokeTXNScrollInfoUPP(
 /*  • Creating and Destroying Object                                                                    */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 
+#if !__LP64__
 /*
  *  TXNCreateObject()
  *  
@@ -1881,7 +1906,7 @@ InvokeTXNScrollInfoUPP(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1912,7 +1937,7 @@ TXNCreateObject(
  *      object to free.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -1960,7 +1985,7 @@ TXNDeleteObject(TXNObject iTXNObject)                         AVAILABLE_MAC_OS_X
  *    are possible if something is wrong.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -1997,7 +2022,7 @@ TXNInitTextension(
  *    TXNVersionValue: Current version.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2031,7 +2056,7 @@ TXNVersionInformation(TXNFeatureBits * oFeatureFlags)         AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2065,7 +2090,7 @@ TXNAttachObjectToWindowRef(
  *    object.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2099,7 +2124,7 @@ TXNGetWindowRef(TXNObject iTXNObject)                         AVAILABLE_MAC_OS_X
  *      The keydown event.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2132,7 +2157,7 @@ TXNKeyDown(
  *      TXNAdjustCursor.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2164,7 +2189,7 @@ TXNAdjustCursor(
  *      The mousedown event.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2191,7 +2216,7 @@ TXNClick(
  *      Opaque struct obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2220,7 +2245,7 @@ TXNSelectAll(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X
  *      true if becoming active.  false otherwise.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2251,7 +2276,7 @@ TXNFocus(
  *      Opaque struct obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2296,7 +2321,7 @@ TXNUpdate(TXNObject iTXNObject)                               AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2325,7 +2350,7 @@ TXNDrawObject(
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2354,7 +2379,7 @@ TXNForceUpdate(TXNObject iTXNObject)                          AVAILABLE_MAC_OS_X
  *    A UInt32 value of the appropriate sleep time.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2380,7 +2405,7 @@ TXNGetSleepTicks(TXNObject iTXNObject)                        AVAILABLE_MAC_OS_X
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2408,7 +2433,7 @@ TXNIdle(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
  *      The mousedown event
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2438,7 +2463,7 @@ TXNGrowWindow(
  *      Value returned by FindWindow
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2483,7 +2508,7 @@ TXNZoomWindow(
  *    has already been started but not terminated.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2513,7 +2538,7 @@ TXNBeginActionGroup(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2561,7 +2586,7 @@ TXNEndActionGroup(TXNObject iTXNObject)                       AVAILABLE_MAC_OS_X
  *    in the Edit menu should be grayed out.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2607,7 +2632,7 @@ TXNCanUndoAction(
  *    item in the Edit menu should be grayed out.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2657,7 +2682,7 @@ TXNCanRedoAction(
  *    OSStatus.  noErr if the operation is successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2685,7 +2710,7 @@ TXNSetActionNameMapper(
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2711,7 +2736,7 @@ TXNUndo(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2736,7 +2761,7 @@ TXNRedo(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   in Textension not yet available
  */
@@ -2767,7 +2792,7 @@ TXNClearUndo(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2795,7 +2820,7 @@ TXNCut(TXNObject iTXNObject)                                  AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2823,7 +2848,7 @@ TXNCopy(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2851,7 +2876,7 @@ TXNPaste(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2880,7 +2905,7 @@ TXNClear(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
  *    the menu can be highlighted.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2915,7 +2940,7 @@ TXNIsScrapPastable(void)                                      AVAILABLE_MAC_OS_X
  *      End of current selection.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2947,7 +2972,7 @@ TXNGetSelection(
  *      false the beginning of selection is scrolled into view.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -2955,6 +2980,41 @@ extern void
 TXNShowSelection(
   TXNObject   iTXNObject,
   Boolean     iShowEnd)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNShowOffset()
+ *  
+ *  Summary:
+ *    Scroll the text at a specified offset into view.
+ *  
+ *  Discussion:
+ *    TXNShowOffset can be used to reveal the text at any offset.
+ *    TXNShowSelection, in contrast, can only reveal the current
+ *    selection.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    inOffset:
+ *      The offset which will be scrolled into view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TXNShowOffset(
+  TXNObject   iTXNObject,
+  TXNOffset   inOffset)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -2979,7 +3039,7 @@ TXNShowSelection(
  *    end offset). False if selection is not empty.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3013,7 +3073,7 @@ TXNIsSelectionEmpty(TXNObject iTXNObject)                     AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3071,7 +3131,7 @@ TXNSetSelection(
  *      the caller is interested in. For example: 1. if you wanted to
  *      know if the current selection was continuous in terms of being
  *      all one same font size you could do something like this.
- *      TXNTypeAttributes       attr[1] = { TXNFontSizeAttribute,
+ *      TXNTypeAttributes       attr[1] = { kTXNQDFontSizeAttribute,
  *      sizeof(Fixed),{ 0 } } on return from the function if size is
  *      continuous (i.e. if the bit 3 of flags is set) then the third
  *      field (attr[0].data.dataValue) will contain the size of the
@@ -3086,7 +3146,7 @@ TXNSetSelection(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3109,7 +3169,9 @@ TXNGetContinuousTypeAttributes(
  *    value. > sizeof(UInt32) are passed as a pointer. That is the
  *    TXNTypeAttributes' 3rd field is a union that servers as either a
  *    32-bit integer where values can be written or a 32-bit pointer a
- *    value.  Functional in NoUserIO mode.
+ *    value.  Functional in NoUserIO mode. When you call
+ *    TXNSetTypeAttributes, any attributes that you do not set retain
+ *    their previous values.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3135,7 +3197,7 @@ TXNGetContinuousTypeAttributes(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3209,7 +3271,7 @@ TXNSetTypeAttributes(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3260,7 +3322,7 @@ TXNSetTXNObjectControls(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3300,7 +3362,7 @@ TXNGetTXNObjectControls(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3350,7 +3412,7 @@ TXNSetBackground(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3396,7 +3458,7 @@ TXNEchoMode(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3474,7 +3536,7 @@ TXNCountRunsInRange(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3514,7 +3576,7 @@ TXNGetIndexedRunInfoFromRange(
  *    The bytes required to hold the characters.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3583,7 +3645,7 @@ TXNDataSize(TXNObject iTXNObject)                             AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3662,7 +3724,7 @@ TXNWriteRangeToCFURL(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3718,7 +3780,7 @@ TXNReadFromCFURL(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3776,7 +3838,7 @@ TXNCopyTypeIdentifiersForRange(
  *    specify a range that crosses a data type boundary.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3826,7 +3888,7 @@ TXNGetData(
  *    specify a range that crosses a data type boundary.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3884,7 +3946,7 @@ TXNGetDataEncoded(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -3931,7 +3993,7 @@ TXNSetData(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3969,7 +4031,7 @@ TXNFlattenObjectToCFDataRef(
  *    Manager errors)
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4003,7 +4065,7 @@ TXNRevert(TXNObject iTXNObject)                               AVAILABLE_MAC_OS_X
  *    Manager errors )
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4032,7 +4094,7 @@ TXNPageSetup(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X
  *    Manager errors )
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4119,7 +4181,7 @@ TXNPrint(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4132,300 +4194,10 @@ TXNFind(
   TXNOffset                   iStartSearchOffset,
   TXNOffset                   iEndSearchOffset,
   TXNFindUPP                  iFindProc,
-  SInt32                      iRefCon,
+  SRefCon                     iRefCon,
   TXNOffset *                 oStartMatchOffset,
   TXNOffset *                 oEndMatchOffset)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-
-
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-/*  • Font Defaults                                                                                     */
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
-/*
- *  TXNSetFontDefaults()
- *  
- *  Summary:
- *    For a given TXNObject specify the font defaults for each script.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque TXNObject obtained from TXNCreateObject.
- *    
- *    iCount:
- *      Count of FontDescriptions.
- *    
- *    iFontDefaults:
- *      Array of FontDescriptions.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNSetFontDefaults(
-  TXNObject                                iTXNObject,
-  ItemCount                                iCount,
-  const TXNMacOSPreferredFontDescription   iFontDefaults[])   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-
-/*
- *  TXNGetFontDefaults()
- *  
- *  Summary:
- *    For a given TXNObject make a copy of the font defaults.
- *  
- *  Discussion:
- *    To determine how many font descriptions need to be in the array
- *    you should call this function with a NULL for the array.  iCount
- *    will return with the number of font defaults currently stored.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque TXNObject obtained from TXNCreateObject.
- *    
- *    ioCount:
- *      Count of FontDescriptions in the array.
- *    
- *    oFontDefaults:
- *      Array of FontDescriptins to be filled out.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNGetFontDefaults(
-  TXNObject                          iTXNObject,
-  ItemCount *                        ioCount,
-  TXNMacOSPreferredFontDescription   oFontDefaults[])     /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-/*  • Font Menu                                                                                         */
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
-/*
- *  TXNNewFontMenuObject()
- *  
- *  Summary:
- *    Get a FontMenuObject.  Caller can extract a fontmenu from this
- *    object and pass this object to the active TXNObject to handle
- *    events in the font menu.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iFontMenuHandle:
- *      An empty menu handle (well the title is there) that the caller
- *      created via NewMenu or GetNewMenu. This menu handle should not
- *      be disposed before the returned TXNFontMenuObject has been
- *      disposed via TXNDisposeFontMenuObject.
- *    
- *    iMenuID:
- *      The MenuID for iFontMenuHandle.
- *    
- *    iStartHierMenuID:
- *      The first MenuID to use if any hierarchical menus need to be
- *      created. TXNNewFontMenuObject uses SetMenuItemHierarchicalID
- *      when creating hierarchial menus.  The iStartHierMenuID must
- *      therefor follow the rules for this function.  On systems less
- *      than system 8.5 the submenuID must be less than 255.  For
- *      systems above system 8.5 the range can be as large can be as
- *      large 32767.  However, it is important to remember that
- *      TXNNewFontMenuObject only uses iStartHierMenuID as a starting
- *      id when adding hierarchical menus.  Therefore provide plenty of
- *      room to increment this value. For example, on a system less
- *      than 8.5 it would be good to start at 175.  On systems greater
- *      than 8.5 it is probably a good idea to not use a value higher
- *      than 32000.
- *    
- *    oTXNFontMenuObject:
- *      A font menu object.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNNewFontMenuObject(
-  MenuRef              iFontMenuHandle,
-  SInt16               iMenuID,
-  SInt16               iStartHierMenuID,
-  TXNFontMenuObject *  oTXNFontMenuObject)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-
-/*
- *  TXNGetFontMenuHandle()
- *  
- *  Summary:
- *    Get the MenuRef from the TXNFontMenuObject.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNFontMenuObject:
- *      A Font Menu Object obtained from TXNNewFontMenuObject.
- *    
- *    oFontMenuHandle:
- *      The returned font menu. Returned value could be NULL.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNGetFontMenuHandle(
-  TXNFontMenuObject   iTXNFontMenuObject,
-  MenuRef *           oFontMenuHandle)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-#define TXNGetFontMenuRef TXNGetFontMenuHandle
-
-
-/*
- *  TXNDisposeFontMenuObject()
- *  
- *  Summary:
- *    Dispose a TXNFontMenuObject and its font menu handle.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNFontMenuObject:
- *      A Font Menu Object obtained from TXNNewFontMenuObject.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNDisposeFontMenuObject(TXNFontMenuObject iTXNFontMenuObject) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-
-/*
- *  TXNDoFontMenuSelection()
- *  
- *  Summary:
- *    Given the menuID and menu item returned by MenuSelect determine
- *    the selected font and change the current selection to be that
- *    Font.  If the input TXNObject is not active a parameter error is
- *    returned.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque TXNObject obtained from TXNCreateObject.
- *    
- *    iTXNFontMenuObject:
- *      A Font Menu Object obtained from TXNNewFontMenuObject.
- *    
- *    iMenuID:
- *      SInt16 the ID of the selected menu.
- *    
- *    iMenuItem:
- *      The item that was selected.
- *  
- *  Result:
- *    A result code indicating success or failure.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNDoFontMenuSelection(
-  TXNObject           iTXNObject,
-  TXNFontMenuObject   iTXNFontMenuObject,
-  SInt16              iMenuID,
-  SInt16              iMenuItem)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  TXNPrepareFontMenu()
- *  
- *  Summary:
- *    Prepares a Font menu for display.
- *  
- *  Discussion:
- *    You should call the TXNPrepareFontMenu function just before your
- *    application opens the Font menu for your user. If the text
- *    object’s current selection is a single font, MLTE places a
- *    checkmark next to the menu item for that font.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      The text object that identifies the document with the Font menu
- *      you want to prepare. Pass NULL to display an inactive menu
- *      (dimmed).
- *    
- *    iTXNFontMenuObject:
- *      A Font menu object.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNPrepareFontMenu(
-  TXNObject           iTXNObject,               /* can be NULL */
-  TXNFontMenuObject   iTXNFontMenuObject)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4472,7 +4244,7 @@ TXNPrepareFontMenu(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
@@ -4522,7 +4294,7 @@ TXNDrawUnicodeTextBox(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4560,7 +4332,7 @@ TXNDrawCFStringTextBox(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
@@ -4599,16 +4371,16 @@ TXNGetLineCount(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
 extern OSStatus 
 TXNGetLineMetrics(
-  TXNObject   iTXNObject,
-  UInt32      iLineNumber,
-  Fixed *     oLineWidth,
-  Fixed *     oLineHeight)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TXNObject       iTXNObject,
+  unsigned long   iLineNumber,
+  Fixed *         oLineWidth,
+  Fixed *         oLineHeight)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4641,7 +4413,7 @@ TXNGetLineMetrics(
  *    routine was last called or anything like that.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4685,7 +4457,7 @@ TXNGetChangeCount(TXNObject iTXNObject)                       AVAILABLE_MAC_OS_X
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4724,7 +4496,7 @@ TXNGetCountForActionType(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4773,7 +4545,7 @@ TXNClearCountForActionType(
  *      to be recalculated and redrawn, otherwise pass false.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4815,7 +4587,7 @@ TXNSetHIRectBounds(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4852,7 +4624,7 @@ TXNGetHIRect(
  *      Deprecated. Pass 0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4896,7 +4668,7 @@ TXNResizeFrame(
  *      Deprecated. Pass 0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4931,7 +4703,7 @@ TXNSetFrameBounds(
  *      The requested view rectangle.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -4971,7 +4743,7 @@ TXNGetViewRect(
  *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5039,7 +4811,7 @@ TXNRecalcTextLayout(TXNObject iTXNObject)                     AVAILABLE_MAC_OS_X
  *      moves the text to the right.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   in Textension not yet available
  */
@@ -5048,8 +4820,8 @@ TXNScroll(
   TXNObject       iTXNObject,
   TXNScrollUnit   iVerticalScrollUnit,
   TXNScrollUnit   iHorizontalScrollUnit,
-  SInt32 *        ioVerticalDelta,
-  SInt32 *        ioHorizontalDelta)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long *          ioVerticalDelta,
+  long *          ioHorizontalDelta)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -5084,7 +4856,7 @@ TXNScroll(
  *      A refcon that is passed to the callback.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   in Textension not yet available
  */
@@ -5092,7 +4864,7 @@ extern void
 TXNRegisterScrollInfoProc(
   TXNObject          iTXNObject,
   TXNScrollInfoUPP   iTXNScrollInfoUPP,
-  SInt32             iRefCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  SRefCon            iRefCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -5126,7 +4898,7 @@ TXNRegisterScrollInfoProc(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5177,7 +4949,7 @@ TXNSetScrollbarState(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5222,7 +4994,7 @@ TXNHIPointToOffset(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5274,7 +5046,7 @@ TXNOffsetToHIPoint(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -5323,7 +5095,7 @@ TXNDragTracker(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -5341,6 +5113,8 @@ TXNDragReceiver(
 /*  • Command Events and Spell Checking                                                                 */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 
+#endif  /* !__LP64__ */
+
 
 /*
  *  TXNCommandEventSupportOptions
@@ -5349,7 +5123,7 @@ TXNDragReceiver(
  *    Use these constants to turn support for specific HICommands in a
  *    given MLTE object.
  */
-typedef UInt32 TXNCommandEventSupportOptions;
+typedef OptionBits TXNCommandEventSupportOptions;
 enum {
 
   /*
@@ -5386,9 +5160,10 @@ enum {
 
   /*
    * Turns on support for spell checking.  The spell checking commands
-   * supported are: Show Spelling Panel ('shsp'), Check Spelling
-   * ('cksp'), Change Spelling ('chsp'), enable check spelling as you
-   * type ('aspc'), ignore spelling ('igsp'), learn spelling ('lrwd').
+   * supported are kHICommandShowSpellingPanel,
+   * kHICommandCheckSpelling, kHICommandChangeSpelling,
+   * kHICommandCheckSpellingAsYouType, kHICommandIgnoreSpelling, and
+   * kHICommandLearnWord.
    */
   kTXNSupportSpellCheckCommandProcessing = 1 << 2,
 
@@ -5402,7 +5177,7 @@ enum {
    * 
    * Change Spelling:  Typically this is not included in a spelling
    * menu.  If it is included it is enabled if the current selection is
-   * a missspelled word.  It is disabled if the current selection is
+   * a misspelled word.  It is disabled if the current selection is
    * empty or is not a misspelled word. 
    * 
    * Check Spelling as You Type:  This item is always enabled.  It is
@@ -5443,6 +5218,7 @@ enum {
   kTXNSupportFontCommandUpdating = 1 << 5
 };
 
+#if !__LP64__
 /*
  *  TXNSetCommandEventSupport()
  *  
@@ -5481,7 +5257,7 @@ enum {
  *    An OSStatus code.  noErr if the operation was successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5514,7 +5290,7 @@ TXNSetCommandEventSupport(
  *    An OSStatus code.  noErr if the operation was successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5548,7 +5324,7 @@ TXNGetCommandEventSupport(
  *    An OSStatus code.  noErr if the operation was successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5579,7 +5355,7 @@ TXNSetSpellCheckAsYouType(
  *    for the TXNObject then the result of this function will be false.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5626,6 +5402,7 @@ TXNGetSpellCheckAsYouType(TXNObject iTXNObject)               AVAILABLE_MAC_OS_X
  *     kEventTSMDocumentAccessGetCharacters 
  *     kEventTSMDocumentAccessGetFont 
  *     kEventTSMDocumentAccessGetGlyphInfo 
+ *     kEventTSMDocumentAccessGetFirstRectForRange 
  *    
  *    For kEventClassFont: 
  *    kEventFontPanelClosed 
@@ -5671,7 +5448,7 @@ TXNGetSpellCheckAsYouType(TXNObject iTXNObject)               AVAILABLE_MAC_OS_X
  *    An OSStatus code.  noErr if the operation was successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5708,7 +5485,7 @@ TXNSetEventTarget(
  *    An OSStatus code.  noErr if the operation was successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5754,7 +5531,7 @@ TXNGetEventTarget(
  *    OStatus.  noErr is the operation is successful.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5838,7 +5615,7 @@ TXNSetContextualMenuSetup(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -5851,177 +5628,6 @@ TXNGetAccessibilityHIObject(
 
 /* **************************************************************************************************** */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-/*                                  • HITEXTVIEW APIs •                                                 */
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-/* **************************************************************************************************** */
-
-/*==============================================================================*/
-/* HITextView is a MLTE view that can be embedded in the HIView hierarchy. The  */
-/* view can be embedded in an HIScrollView if scroll bars are desired and can   */
-/* be used in a composited window. On creation, a TXNObject is created to back  */
-/* the view. You can extract the TXNObject at any time and use a subset of the  */
-/* MLTE API with that object as an argument.                                    */
-/*==============================================================================*/
-/*
-    In Mac OS X 10.4 and later, HITextView supports these tags previously defined for the EditText control:
-    
-        kControlEditTextCharCount
-        kControlEditTextSelectionTag
-        kControlEditTextCFStringTag
-        kControlEditTextInsertCFStringRefTag
-*/
-
-/* The HIObject class ID for the HITextView class. */
-#define kHITextViewClassID              CFSTR("com.apple.HITextView")
-/* ControlKind*/
-enum {
-  kControlKindHITextView        = 'hitx'
-};
-
-
-/*
- *  HITextViewCreate()
- *  
- *  Summary:
- *    Creates a text view. The new view is initially invisible.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inBoundsRect:
- *      The bounding box of the view. If NULL, the bounds of the view
- *      will be initialized to 0.
- *    
- *    inOptions:
- *      There are currently no options. This must be 0.
- *    
- *    inTXNFrameOptions:
- *      Any frame options desired for the TXN object creation.
- *    
- *    outTextView:
- *      On exit, contains the new view.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HITextViewCreate(
-  const HIRect *    inBoundsRect,            /* can be NULL */
-  OptionBits        inOptions,
-  TXNFrameOptions   inTXNFrameOptions,
-  HIViewRef *       outTextView)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-
-/*
- *  HITextViewGetTXNObject()
- *  
- *  Summary:
- *    Obtains the TXNObject that backs the text view.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inTextView:
- *      The text view that contains the TXNObject you wish to retrieve.
- *  
- *  Result:
- *    The TXNObject backing the given view.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
- *    Non-Carbon CFM:   not available
- */
-extern TXNObject 
-HITextViewGetTXNObject(HIViewRef inTextView)                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-
-/*
- *  HITextViewSetBackgroundColor()
- *  
- *  Summary:
- *    Sets the background color of the view. This allows you to provide
- *    alpha as well. If inColor is NULL, the background of the text
- *    view will not draw.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inTextView:
- *      The text view that you are modifying the background color of.
- *    
- *    inColor:
- *      A CGColorRef representing the color or pattern that will fill
- *      the background of the text view. The CGColorRef will be
- *      retained by this API. If the text view already contains a
- *      background color, it will be released prior to the new color
- *      being retained. If inColor is NULL, the background of the text
- *      view will not draw.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HITextViewSetBackgroundColor(
-  HIViewRef    inTextView,
-  CGColorRef   inColor)          /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-
-/*
- *  HITextViewCopyBackgroundColor()
- *  
- *  Summary:
- *    Gets the background color of the view. If the background color
- *    returned is NULL, the background does not draw.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inTextView:
- *      The text view from which you want to obtain the background
- *      color.
- *    
- *    outColor:
- *      A CGColorRef representing the color or pattern that is used for
- *      drawing the background of the text view. If the returned value
- *      is NULL, the background does not draw. If the returned
- *      CGColorRef is not NULL, it will be retained on return. You are
- *      responsible for releasing this CGColorRef when you are no
- *      longer referencing it.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HITextViewCopyBackgroundColor(
-  HIViewRef     inTextView,
-  CGColorRef *  outColor)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-
-
-
-/* **************************************************************************************************** */
-/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*                                  •  DEPRECATED •                                                     */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /* **************************************************************************************************** */
@@ -6029,6 +5635,39 @@ HITextViewCopyBackgroundColor(
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • DEPRECATED CONSTANTS                                                                              */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Deprecated Font Menu support on Mac OS X version 10.5 and later, use Font Panel instead              */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+typedef struct OpaqueTXNFontMenuObject*  TXNFontMenuObject;
+#define   kTXNFontMenuRefKey                        CFSTR("FontMenuRef")
+#define   kTXNFontMenuObjectKey                     CFSTR("FontMenuObject")
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Deprecated Font / keyboard synchronization support constants on Mac OS X version 10.5 and later      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+enum {
+  kTXNKeyboardSyncStateTag      = 'kbsy'
+};
+
+/* kTXNKeyboardSyncStateTag*/
+enum {
+  kTXNSyncKeyboard              = false,
+  kTXNNoSyncKeyboard            = true
+};
+
+enum {
+  kTXNNoKeyboardSyncBit         = 6
+};
+
+enum {
+  kTXNNoKeyboardSyncMask        = 1L << kTXNNoKeyboardSyncBit
+};
+
+#endif  /* !__LP64__ */
+
 
 /*
  *  TXTNTag
@@ -6086,20 +5725,23 @@ enum {
 };
 
 
-/*
-    Deprecated TXNTypeRunAttributes and TXNTypeRunAttributeSizes constants.
-    kTXNQDFontSizeAttribute is obsolete.  Incorrect font sizes are always returned as a Fixed
-    value.  Use kTXNFontSizeAttribute instead.
-*/
-
+/*  Deprecated all QD TXNTypeRunAttributes & TXNTypeRunAttributeSizes constants.*/
 enum {
-  kTXNQDFontSizeAttribute       = 'size'
+  kTXNQDFontNameAttribute       = 'fntn',
+  kTXNQDFontFamilyIDAttribute   = 'font',
+  kTXNQDFontSizeAttribute       = 'size', /*the corresponding TXNTypeRunAttributeSizes is kTXNFontSizeAttributeSize*/
+  kTXNQDFontStyleAttribute      = 'face',
+  kTXNQDFontColorAttribute      = 'klor'
 };
 
 enum {
-  kTXNQDFontSizeAttributeSize   = sizeof(SInt16)
+  kTXNQDFontNameAttributeSize   = sizeof(Str255),
+  kTXNQDFontFamilyIDAttributeSize = sizeof(SInt16),
+  kTXNFontSizeAttributeSize     = sizeof(Fixed),
+  kTXNQDFontSizeAttributeSize   = sizeof(SInt16),
+  kTXNQDFontStyleAttributeSize  = sizeof(Style),
+  kTXNQDFontColorAttributeSize  = sizeof(RGBColor)
 };
-
 
 /*
     Deprecated QuickDraw imaging constants.
@@ -6176,8 +5818,7 @@ enum {
   kTXNRestartAppleEventHandlersMask = 1 << kTXNRestartAppleEventHandlersBit
 };
 
-/* Use kTXNFontMenuObjectKey*/
-#define   kTXNFontMenuRefKey                        CFSTR("FontMenuRef")
+
 
 /*
  *  TXNActionKey
@@ -6249,6 +5890,18 @@ InvokeTXNActionKeyMapperUPP(
   UInt32                 commandID,
   TXNActionKeyMapperUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline TXNActionKeyMapperUPP                                NewTXNActionKeyMapperUPP(TXNActionKeyMapperProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeTXNActionKeyMapperUPP(TXNActionKeyMapperUPP) { }
+    inline CFStringRef                                          InvokeTXNActionKeyMapperUPP(TXNActionKey actionKey, UInt32 commandID, TXNActionKeyMapperUPP userUPP) { return (*userUPP)(actionKey, commandID); }
+  #else
+    #define NewTXNActionKeyMapperUPP(userRoutine)               ((TXNActionKeyMapperUPP)userRoutine)
+    #define DisposeTXNActionKeyMapperUPP(userUPP)
+    #define InvokeTXNActionKeyMapperUPP(actionKey, commandID, userUPP) (*userUPP)(actionKey, commandID)
+  #endif
+#endif
+
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Count Option Bits                                                                                 */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
@@ -6276,6 +5929,7 @@ enum {
 /*  • DEPRECATED APIs,  Mac OS X version 10.2 and later                                                 */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 
+#if !__LP64__
 /*
  *  TXNSetViewRect()   *** DEPRECATED ***
  *  
@@ -6299,7 +5953,7 @@ enum {
  *      Rect of the view.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.2
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.2
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in Textension 1.3 and later
  */
@@ -6309,11 +5963,9 @@ TXNSetViewRect(
   const Rect *  iViewRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
 
-
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*  • DEPRECATED APIs, Mac OS X version 10.3 and later                                                  */
 /*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
-
 /*
  *  TXNNewObject()   *** DEPRECATED ***
  *  
@@ -6399,7 +6051,7 @@ TXNSetViewRect(
  *    reading a specified file the  object is freed.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6432,7 +6084,7 @@ TXNNewObject(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6475,8 +6127,8 @@ TXNTerminateTextension(void)                                  AVAILABLE_MAC_OS_X
  *      ignored since length, etc. information is part of the format.
  *      Further note that if you you just want Textension to read a
  *      file and you are not interested in embedding you can just pass
- *      kTXNEndOffset(0x7FFFFFFF), and Textension will use the file
- *      manager to determine the files length.
+ *      kTXNEndOffset, and Textension will use the file manager to
+ *      determine the files length.
  *    
  *    iStartOffset:
  *      Start position at which to insert the file into the document.
@@ -6488,7 +6140,7 @@ TXNTerminateTextension(void)                                  AVAILABLE_MAC_OS_X
  *    File manager error or noErr.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6524,7 +6176,7 @@ TXNSetDataFromFile(
  *    Memory Manager errors, Scrap Manager errors, or noErr.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6556,7 +6208,7 @@ TXNConvertToPublicScrap(void)                                 AVAILABLE_MAC_OS_X
  *    Memory Manager errors, Scrap Manager errors, or noErr.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6601,7 +6253,7 @@ TXNConvertFromPublicScrap(void)                               AVAILABLE_MAC_OS_X
  *      in unless you want static text (printed or non-editable)
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6650,7 +6302,7 @@ TXNDraw(
  *    paramErrs or noErr.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6684,7 +6336,7 @@ TXNAttachObjectToWindow(
  *    True if object is attached, false if TXNObject is not attached.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6722,7 +6374,7 @@ TXNIsObjectAttachedToWindow(TXNObject iTXNObject)             AVAILABLE_MAC_OS_X
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in Textension 1.2 and later
  */
@@ -6769,7 +6421,7 @@ TXNIsObjectAttachedToSpecificWindow(
  *      wait on this pass false.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
@@ -6817,7 +6469,7 @@ TXNSetRectBounds(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
@@ -6872,7 +6524,7 @@ TXNGetRectBounds(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -6910,7 +6562,7 @@ TXNActivate(
  *    bounds errors (if the point is out of the ViewRect).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
@@ -6947,7 +6599,7 @@ TXNPointToOffset(
  *    bounds errors.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in Textension 1.1 and later
  */
@@ -6956,41 +6608,6 @@ TXNOffsetToPoint(
   TXNObject   iTXNObject,
   TXNOffset   iOffset,
   Point *     oPoint)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
-
-
-
-
-/*
- *  TXNTSMCheck()
- *  
- *  Summary:
- *    Deprecated.
- *  
- *  Discussion:
- *    Call this when WaitNextEvent returns false or there is no active
- *    TSMObject . The TXNObject parameter can be NULL which allows a
- *    client to call this function at any time.  This is necessary to
- *    insure input methods enough time to be reasonably responsive.
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque struct obtained from TXNNewObject.
- *    
- *    ioEvent:
- *      The event record.  Usually a NULL event.  If the event is not
- *      an NULL event on entry, and an input method consumes the event
- *      the event should return as a NULL event.
- *  
- *  Result:
- *    Boolean: True if TSM handled this event.  False if TSM did not
- *    handle this event.
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
 
 
 
@@ -7027,7 +6644,7 @@ TXNOffsetToPoint(
  *    undone and undo should be grayed in the menu.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -7066,7 +6683,7 @@ TXNCanUndo(
  *    active.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -7109,7 +6726,7 @@ TXNCanRedo(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in Textension 1.3 and later
  */
@@ -7149,7 +6766,7 @@ TXNGetActionChangeCount(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in Textension 1.3 and later
  */
@@ -7201,7 +6818,7 @@ TXNClearActionChangeCount(
  *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -7211,8 +6828,6 @@ TXNSetDataFromCFURLRef(
   CFURLRef    iURL,
   TXNOffset   iStartOffset,
   TXNOffset   iEndOffset)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
-
-
 
 
 /*
@@ -7270,7 +6885,7 @@ TXNSetDataFromCFURLRef(
  *    The result of writing the file.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
@@ -7285,9 +6900,312 @@ TXNSave(
   SInt16                         iResourceReference)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • DEPRECATED APIs, Mac OS X version 10.5 and later                                                  */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Font Menu                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNNewFontMenuObject()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use Font Panel instead.
+ *  
+ *  Summary:
+ *    Get a FontMenuObject.  Caller can extract a fontmenu from this
+ *    object and pass this object to the active TXNObject to handle
+ *    events in the font menu.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iFontMenuHandle:
+ *      An empty menu handle (well the title is there) that the caller
+ *      created via NewMenu or GetNewMenu. This menu handle should not
+ *      be disposed before the returned TXNFontMenuObject has been
+ *      disposed via TXNDisposeFontMenuObject.
+ *    
+ *    iMenuID:
+ *      The MenuID for iFontMenuHandle.
+ *    
+ *    iStartHierMenuID:
+ *      The first MenuID to use if any hierarchical menus need to be
+ *      created. TXNNewFontMenuObject uses SetMenuItemHierarchicalID
+ *      when creating hierarchial menus.  The iStartHierMenuID must
+ *      therefore follow the rules for this function.  On systems less
+ *      than system 8.5 the submenuID must be less than 255.  For
+ *      systems above system 8.5 the range can be as large as 32767.
+ *      However, it is important to remember that TXNNewFontMenuObject
+ *      only uses iStartHierMenuID as a starting id when adding
+ *      hierarchical menus.  Therefore provide plenty of room to
+ *      increment this value. For example, on a system less than 8.5 it
+ *      would be good to start at 175.  On systems greater than 8.5 it
+ *      is probably a good idea to not use a value higher than 32000.
+ *    
+ *    oTXNFontMenuObject:
+ *      A font menu object.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNNewFontMenuObject(
+  MenuRef              iFontMenuHandle,
+  SInt16               iMenuID,
+  SInt16               iStartHierMenuID,
+  TXNFontMenuObject *  oTXNFontMenuObject)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-#pragma options align=reset
+
+
+/*
+ *  TXNGetFontMenuHandle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use Font Panel instead.
+ *  
+ *  Summary:
+ *    Get the MenuRef from the TXNFontMenuObject.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *    
+ *    oFontMenuHandle:
+ *      The returned font menu. Returned value could be NULL.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNGetFontMenuHandle(
+  TXNFontMenuObject   iTXNFontMenuObject,
+  MenuRef *           oFontMenuHandle)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#define TXNGetFontMenuRef TXNGetFontMenuHandle
+
+/*
+ *  TXNDisposeFontMenuObject()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use Font Panel instead.
+ *  
+ *  Summary:
+ *    Dispose a TXNFontMenuObject and its font menu handle.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNDisposeFontMenuObject(TXNFontMenuObject iTXNFontMenuObject) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+
+/*
+ *  TXNDoFontMenuSelection()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use Font Panel instead.
+ *  
+ *  Summary:
+ *    Given the menuID and menu item returned by MenuSelect determine
+ *    the selected font and change the current selection to be that
+ *    Font.  If the input TXNObject is not active a parameter error is
+ *    returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *    
+ *    iMenuID:
+ *      SInt16 the ID of the selected menu.
+ *    
+ *    iMenuItem:
+ *      The item that was selected.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNDoFontMenuSelection(
+  TXNObject           iTXNObject,
+  TXNFontMenuObject   iTXNFontMenuObject,
+  SInt16              iMenuID,
+  SInt16              iMenuItem)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+/*
+ *  TXNPrepareFontMenu()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use Font Panel instead.
+ *  
+ *  Summary:
+ *    Prepares a Font menu for display.
+ *  
+ *  Discussion:
+ *    You should call the TXNPrepareFontMenu function just before your
+ *    application opens the Font menu for your user. If the text
+ *    object’s current selection is a single font, MLTE places a
+ *    checkmark next to the menu item for that font.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      The text object that identifies the document with the Font menu
+ *      you want to prepare. Pass NULL to display an inactive menu
+ *      (dimmed).
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font menu object.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNPrepareFontMenu(
+  TXNObject           iTXNObject,               /* can be NULL */
+  TXNFontMenuObject   iTXNFontMenuObject)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Font Defaults                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+
+/*
+ *  TXNSetFontDefaults()   *** DEPRECATED ***
+ *  
+ *  Summary:
+ *    For a given TXNObject specify the font defaults for each script.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iCount:
+ *      Count of FontDescriptions.
+ *    
+ *    iFontDefaults:
+ *      Array of FontDescriptions.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNSetFontDefaults(
+  TXNObject                                iTXNObject,
+  ItemCount                                iCount,
+  const TXNMacOSPreferredFontDescription   iFontDefaults[])   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+
+/*
+ *  TXNGetFontDefaults()   *** DEPRECATED ***
+ *  
+ *  Summary:
+ *    For a given TXNObject make a copy of the font defaults.
+ *  
+ *  Discussion:
+ *    To determine how many font descriptions need to be in the array
+ *    you should call this function with a NULL for the array.  iCount
+ *    will return with the number of font defaults currently stored.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    ioCount:
+ *      Count of FontDescriptions in the array.
+ *    
+ *    oFontDefaults:
+ *      Array of FontDescriptins to be filled out.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNGetFontDefaults(
+  TXNObject                          iTXNObject,
+  ItemCount *                        ioCount,
+  TXNMacOSPreferredFontDescription   oFontDefaults[])     /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+#endif  /* !__LP64__ */
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

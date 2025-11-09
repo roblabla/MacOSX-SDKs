@@ -53,6 +53,7 @@
 #define kAXSelectedRowsChangedNotification	CFSTR("AXSelectedRowsChanged")
 #define kAXSelectedColumnsChangedNotification	CFSTR("AXSelectedColumnsChanged")
 #define kAXSelectedTextChangedNotification	CFSTR("AXSelectedTextChanged")
+#define kAXTitleChangedNotification             CFSTR("AXTitleChangedNotification")
 
 
 #endif // __AXNOTIFICATIONCONSTANTS__

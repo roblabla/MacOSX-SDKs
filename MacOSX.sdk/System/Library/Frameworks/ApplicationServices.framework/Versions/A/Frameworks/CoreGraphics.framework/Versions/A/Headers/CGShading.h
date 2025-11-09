@@ -1,5 +1,5 @@
 /* CoreGraphics - CGShading.h
- * Copyright (c) 2001-2002 Apple Computer, Inc.
+ * Copyright (c) 2001-2006 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -37,7 +37,7 @@ CG_EXTERN CFTypeID CGShadingGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_
  *   The ending point of the axis, in the shading's target coordinate space.
  * @param function
  *   A 1-in, N-out function, where N is one more (for alpha) than the
- *   number of color components in the shading's colorspace.  The input
+ *   number of color components in the shading's colorspace. The input
  *   value 0 corresponds to the color at the starting point of the shading;
  *   the input value 1 corresponds to the color at the ending point of the
  *   shading.
@@ -54,7 +54,7 @@ CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint 
 /*! @function CGShadingCreateRadial
  *
  * Create a shading defining a color blend which varies between two
- * circles.  The shading may optionally extend beyond either circle by
+ * circles. The shading may optionally extend beyond either circle by
  * continuing the boundary colors.
  *
  * @param colorspace
@@ -73,7 +73,7 @@ CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint 
  *   space.
  * @param function
  *   A 1-in, N-out function, where N is one more (for alpha) than the
- *   number of color components in the shading's colorspace.  The input
+ *   number of color components in the shading's colorspace. The input
  *   value 0 corresponds to the color of the starting circle; the input
  *   value 1 corresponds to the color of the ending circle.
  * @param extendStart
@@ -84,7 +84,7 @@ CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint 
  *   circle.
  */
 
-CG_EXTERN CGShadingRef CGShadingCreateRadial(CGColorSpaceRef colorspace, CGPoint start, float startRadius, CGPoint end, float endRadius, CGFunctionRef function, bool extendStart, bool extendEnd) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGShadingRef CGShadingCreateRadial(CGColorSpaceRef colorspace, CGPoint start, CGFloat startRadius, CGPoint end, CGFloat endRadius, CGFunctionRef function, bool extendStart, bool extendEnd) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGShadingRetain
  *

@@ -79,30 +79,30 @@ bool_t xdr_getquota_rslt();
 #endif /* Old Style C */
 
 
-#define RQUOTAPROG ((u_long)100011)
-#define RQUOTAVERS ((u_long)1)
+#define RQUOTAPROG ((rpc_uint)100011)
+#define RQUOTAVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define RQUOTAPROC_GETQUOTA ((u_long)1)
+#define RQUOTAPROC_GETQUOTA ((rpc_uint)1)
 extern "C" getquota_rslt * rquotaproc_getquota_1(getquota_args *, CLIENT *);
 extern "C" getquota_rslt * rquotaproc_getquota_1_svc(getquota_args *, struct svc_req *);
-#define RQUOTAPROC_GETACTIVEQUOTA ((u_long)2)
+#define RQUOTAPROC_GETACTIVEQUOTA ((rpc_uint)2)
 extern "C" getquota_rslt * rquotaproc_getactivequota_1(getquota_args *, CLIENT *);
 extern "C" getquota_rslt * rquotaproc_getactivequota_1_svc(getquota_args *, struct svc_req *);
 
 #elif __STDC__
-#define RQUOTAPROC_GETQUOTA ((u_long)1)
+#define RQUOTAPROC_GETQUOTA ((rpc_uint)1)
 extern  getquota_rslt * rquotaproc_getquota_1(getquota_args *, CLIENT *);
 extern  getquota_rslt * rquotaproc_getquota_1_svc(getquota_args *, struct svc_req *);
-#define RQUOTAPROC_GETACTIVEQUOTA ((u_long)2)
+#define RQUOTAPROC_GETACTIVEQUOTA ((rpc_uint)2)
 extern  getquota_rslt * rquotaproc_getactivequota_1(getquota_args *, CLIENT *);
 extern  getquota_rslt * rquotaproc_getactivequota_1_svc(getquota_args *, struct svc_req *);
 
 #else /* Old Style C */
-#define RQUOTAPROC_GETQUOTA ((u_long)1)
+#define RQUOTAPROC_GETQUOTA ((rpc_uint)1)
 extern  getquota_rslt * rquotaproc_getquota_1();
 extern  getquota_rslt * rquotaproc_getquota_1_svc();
-#define RQUOTAPROC_GETACTIVEQUOTA ((u_long)2)
+#define RQUOTAPROC_GETACTIVEQUOTA ((rpc_uint)2)
 extern  getquota_rslt * rquotaproc_getactivequota_1();
 extern  getquota_rslt * rquotaproc_getactivequota_1_svc();
 #endif /* Old Style C */

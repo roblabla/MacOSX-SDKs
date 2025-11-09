@@ -1,5 +1,5 @@
 /*	CFPropertyList.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPROPERTYLIST__)
@@ -10,15 +10,14 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFStream.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
-typedef enum {
+enum {
     kCFPropertyListImmutable = 0,
     kCFPropertyListMutableContainers,
     kCFPropertyListMutableContainersAndLeaves
-} CFPropertyListMutabilityOptions;
+};
+typedef CFOptionFlags CFPropertyListMutabilityOptions;
     
 /*
 	Creates a property list object from its XML description; xmlData should
@@ -55,11 +54,12 @@ CFPropertyListRef CFPropertyListCreateDeepCopy(CFAllocatorRef allocator, CFPrope
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-typedef enum {
+enum {
     kCFPropertyListOpenStepFormat = 1,
     kCFPropertyListXMLFormat_v1_0 = 100,
     kCFPropertyListBinaryFormat_v1_0 = 200
-} CFPropertyListFormat;
+};
+typedef CFIndex CFPropertyListFormat;
 
 CF_EXPORT
 Boolean CFPropertyListIsValid(CFPropertyListRef plist, CFPropertyListFormat format);
@@ -97,9 +97,7 @@ CFPropertyListRef CFPropertyListCreateFromStream(CFAllocatorRef allocator, CFRea
 
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFPROPERTYLIST__ */
 

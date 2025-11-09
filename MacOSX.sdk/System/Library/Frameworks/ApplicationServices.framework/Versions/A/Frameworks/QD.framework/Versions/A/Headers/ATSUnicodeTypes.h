@@ -3,7 +3,7 @@
  
      Contains:   ATSUI types and constants.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -56,7 +56,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -957,63 +957,6 @@ struct ATSUGlyphSelector {
   GlyphID             glyphID;
 };
 typedef struct ATSUGlyphSelector        ATSUGlyphSelector;
-#if CALL_NOT_IN_CARBON
-typedef CALLBACK_API_C( void *, ATSUCustomAllocFunc )(void *refCon, ByteCount howMuch);
-typedef CALLBACK_API_C( void , ATSUCustomFreeFunc )(void *refCon, void *doomedBlock);
-typedef CALLBACK_API_C( void *, ATSUCustomGrowFunc )(void *refCon, void *oldBlock, ByteCount oldSize, ByteCount newSize);
-
-/*
- *  ATSUMemoryCallbacks
- *  
- *  Discussion:
- *    ATSUMemoryCallbacks is a union struct that allows the ATSUI
- *    client to specify a specific heap for ATSUI use or allocation
- *    callbacks of which ATSUI is to use each time ATSUI performs a
- *    memory operation (alloc, grow, free).
- */
-union ATSUMemoryCallbacks {
-  struct {
-    ATSUCustomAllocFunc  Alloc;
-    ATSUCustomFreeFunc  Free;
-    ATSUCustomGrowFunc  Grow;
-    void *              memoryRefCon;
-  }                       callbacks;
-
-  THz                 heapToUse;
-};
-typedef union ATSUMemoryCallbacks       ATSUMemoryCallbacks;
-
-/*
- *  ATSUHeapSpec
- *  
- *  Discussion:
- *    ATSUHeapSpec provides the ATSUI client a means of specifying the
- *    heap from which ATSUI should allocate its dynamic memory or
- *    specifying that ATSUI should use the memory callback provided by
- *    the client.
- */
-typedef UInt16 ATSUHeapSpec;
-enum {
-  kATSUUseCurrentHeap           = 0,
-  kATSUUseAppHeap               = 1,
-  kATSUUseSpecificHeap          = 2,
-  kATSUUseCallbacks             = 3
-};
-
-
-
-/*
- *  ATSUMemorySetting
- *  
- *  Discussion:
- *    ATSUMemorySetting is used to store the results from a
- *    ATSUSetMemoryAlloc or a ATSUGetCurrentMemorySetting call.  It can
- *    also be used to change the current ATSUMemorySetting by passing
- *    it into the ATSUSetCurrentMemorySetting call.
- */
-typedef struct OpaqueATSUMemorySetting*  ATSUMemorySetting;
-#endif  /* CALL_NOT_IN_CARBON */
-
 
 /*
  *  ATSUGlyphInfo
@@ -1205,6 +1148,18 @@ InvokeRedrawBackgroundUPP(
   ItemCount            iTrapezoidCount,
   RedrawBackgroundUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline RedrawBackgroundUPP                                  NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeRedrawBackgroundUPP(RedrawBackgroundUPP) { }
+    inline Boolean                                              InvokeRedrawBackgroundUPP(ATSUTextLayout iLayout, UniCharArrayOffset iTextOffset, UniCharCount iTextLength, ATSTrapezoid iUnhighlightArea[], ItemCount iTrapezoidCount, RedrawBackgroundUPP userUPP) { return (*userUPP)(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount); }
+  #else
+    #define NewRedrawBackgroundUPP(userRoutine)                 ((RedrawBackgroundUPP)userRoutine)
+    #define DisposeRedrawBackgroundUPP(userUPP)
+    #define InvokeRedrawBackgroundUPP(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount, userUPP) (*userUPP)(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount)
+  #endif
+#endif
+
 
 /*
  *  ATSUBackgroundData
@@ -1357,22 +1312,22 @@ enum {
   /*
    * Refers to the beginning of a text buffer.
    */
-  kATSUFromTextBeginning        = (unsigned long)0xFFFFFFFF,
+  kATSUFromTextBeginning        = (UInt32)0xFFFFFFFF,
 
   /*
    * Refers to the end of a text buffer.
    */
-  kATSUToTextEnd                = (unsigned long)0xFFFFFFFF,
+  kATSUToTextEnd                = (UInt32)0xFFFFFFFF,
 
   /*
    * Used for bidi cursor movement between paragraphs.
    */
-  kATSUFromPreviousLayout       = (unsigned long)0xFFFFFFFE,
+  kATSUFromPreviousLayout       = (UInt32)0xFFFFFFFE,
 
   /*
    * Used for bidi cursor movement between paragraphs.
    */
-  kATSUFromFollowingLayout      = (unsigned long)0xFFFFFFFD
+  kATSUFromFollowingLayout      = (UInt32)0xFFFFFFFD
 };
 
 
@@ -1387,18 +1342,18 @@ enum {
    * (i.e., ATSUDrawText, ATSUHighlightText) if you want ATSUI to use
    * the current Quickdraw graphics port pen location.
    */
-  kATSUUseGrafPortPenLoc        = (unsigned long)0xFFFFFFFF,
+  kATSUUseGrafPortPenLoc        = (UInt32)0xFFFFFFFF,
 
   /*
    * Pass this constant to functions such as ATSUClearAttributes and
    * ATSUClearLayoutControls if you wish to clear all settings instead
    * of a specific array of settings.
    */
-  kATSUClearAll                 = (unsigned long)0xFFFFFFFF
+  kATSUClearAll                 = (UInt32)0xFFFFFFFF
 };
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

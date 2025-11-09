@@ -19,7 +19,7 @@
 @interface SFCertificateView : NSView
 {
 @private
-    id _reserved;
+    id	_reserved_SFCertificateView;
 }
 
 /*!
@@ -34,6 +34,25 @@
 	@abstract Returns the certificate currently displayed in the view.
 */
 - (SecCertificateRef)certificate;
+
+/*!
+    @method setPolicies:
+	@abstract Specifies one or more policies that apply to the displayed certificate.
+    @param policies The policies to use when evaluating this certificate's status.
+		You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter.
+		If policies is set to nil, the Apple X.509 Basic Policy will be used.
+	@discussion Applications will typically display a SFCertificateView in the context of a specific usage, such as SSL or S/MIME.
+	You should set only the policy references which apply to your intended usage.
+*/
+- (void)setPolicies:(id)policies;
+
+/*!
+    @method policies
+	@abstract Returns an array of policies used to evaluate the status of the displayed certificate.
+	@discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous
+	setPolicies: call. The array will always contain at least one item (the Apple X.509 Basic Policy).
+*/
+- (NSArray *)policies;
 
 /*!
     @method setEditableTrust:
@@ -87,24 +106,36 @@
 - (BOOL)detailsDisplayed;
 
 /*!
-    @method setPolicies:
-	@abstract Specifies one or more policies that apply to the displayed certificate.
-    @param policies The policies to use when evaluating this certificate's status.
-		You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter.
-		If policies is set to nil, the Apple X.509 Basic Policy will be used.
-	@discussion Applications will typically display a SFCertificateView in the context of a specific usage, such as SSL or S/MIME.
-	You should set only the policy references which apply to your intended usage.
+    @method setDetailsDisclosed:
+	@abstract Specifies whether the certificate details subview is disclosed (i.e. the triangle is turned down).
+    @param disclosed Pass YES to disclose the certificate details subview, or NO to collapse it.
+	@discussion By default, the certificate details subview is not disclosed.
+	Note that changing the disclosure state of a line item does not affect whether the item itself is shown;
+	use setDisplayDetails: to cause it to be displayed or hidden.
 */
-- (void)setPolicies:(id)policies;
+- (void)setDetailsDisclosed:(BOOL)disclosed;
 
 /*!
-    @method policies
-	@abstract Returns an array of policies used to evaluate the status of the displayed certificate.
-	@discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous
-	setPolicies: call. The array will always contain at least one item (the Apple X.509 Basic Policy).
+	@method detailsDisclosed
+	@abstract Indicates if the view currently discloses the certificate's details.
 */
-- (NSArray *)policies;
+- (BOOL)detailsDisclosed;
 
+/*!
+    @method setPoliciesDisclosed:
+	@abstract Specifies whether the trust policy settings are disclosed (i.e. the triangle is turned down).
+    @param disclosed Pass YES to disclose the trust policies subview, or NO to collapse it.
+	@discussion By default, the trust policies subview is not disclosed.
+	Note that changing the disclosure state of a line item does not affect whether the item itself is shown;
+	use setDisplayTrust: to cause it to be displayed or hidden.
+*/
+- (void)setPoliciesDisclosed:(BOOL)disclosed;
+
+/*!
+	@method policiesDisclosed
+	@abstract Indicates if the view currently discloses the trust policy settings.
+*/
+- (BOOL)policiesDisclosed;
 
 @end
 

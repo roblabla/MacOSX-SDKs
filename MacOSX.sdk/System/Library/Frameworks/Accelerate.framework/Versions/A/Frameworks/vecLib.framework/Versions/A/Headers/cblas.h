@@ -689,8 +689,8 @@ void SetBLASParamErrorProc(BLASParamErrorProc ErrorProc);
 
 #if defined(__ppc__) || defined(__ppc64__)
     #if defined( __VEC__ )
-        typedef vector float	VectorFloat;
-        typedef vector float	ConstVectorFloat; 
+        typedef __vector float	VectorFloat;
+        typedef __vector float	ConstVectorFloat; 
     #endif
 
 #elif defined(__i386__) || defined( __x86_64__ )

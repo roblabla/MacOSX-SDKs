@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2005, Apple Computer, Inc.
+	Copyright (c) 1996-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,7 +21,8 @@
 	unsigned int filteringEvents:1;
         unsigned int drawing:1;
         unsigned int synchronizingSelection:1;
-        unsigned int reserved:9;
+        unsigned int subclassOverridesBoundsForButtonCell:1;
+        unsigned int reserved:8;
 	unsigned int visibleItems:16;
     } _cbcFlags;
     NSButtonCell *_buttonCell;
@@ -29,7 +30,7 @@
     NSScrollView *_scrollView;
     NSWindow *_popUp;
     NSMutableArray *_popUpList;
-    NSRect *_cellFrame;
+    __strong NSRect *_cellFrame;
     void *_reserved;
  }
 
@@ -37,10 +38,10 @@
 - (void)setHasVerticalScroller:(BOOL)flag;
 - (NSSize)intercellSpacing; 
 - (void)setIntercellSpacing:(NSSize)aSize; 
-- (float)itemHeight;
-- (void)setItemHeight:(float)itemHeight; 
-- (int)numberOfVisibleItems;
-- (void)setNumberOfVisibleItems:(int)visibleItems;
+- (CGFloat)itemHeight;
+- (void)setItemHeight:(CGFloat)itemHeight; 
+- (NSInteger)numberOfVisibleItems;
+- (void)setNumberOfVisibleItems:(NSInteger)visibleItems;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setButtonBordered:(BOOL)flag;
@@ -53,13 +54,13 @@
 - (void)setUsesDataSource:(BOOL)flag;
 - (BOOL)usesDataSource;
 
-- (void)scrollItemAtIndexToTop:(int)index;
-- (void)scrollItemAtIndexToVisible:(int)index;
+- (void)scrollItemAtIndexToTop:(NSInteger)index;
+- (void)scrollItemAtIndexToVisible:(NSInteger)index;
 
-- (void)selectItemAtIndex:(int)index;
-- (void)deselectItemAtIndex:(int)index;
-- (int)indexOfSelectedItem;
-- (int)numberOfItems;
+- (void)selectItemAtIndex:(NSInteger)index;
+- (void)deselectItemAtIndex:(NSInteger)index;
+- (NSInteger)indexOfSelectedItem;
+- (NSInteger)numberOfItems;
 
 - (BOOL)completes;
 - (void)setCompletes:(BOOL)completes;
@@ -72,21 +73,21 @@
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
 - (void)addItemsWithObjectValues:(NSArray *)objects;
-- (void)insertItemWithObjectValue:(id)object atIndex:(int)index;
+- (void)insertItemWithObjectValue:(id)object atIndex:(NSInteger)index;
 - (void)removeItemWithObjectValue:(id)object;
-- (void)removeItemAtIndex:(int)index;
+- (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeAllItems;
 - (void)selectItemWithObjectValue:(id)object;
-- (id)itemObjectValueAtIndex:(int)index;
+- (id)itemObjectValueAtIndex:(NSInteger)index;
 - (id)objectValueOfSelectedItem;
-- (int)indexOfItemWithObjectValue:(id)object;
+- (NSInteger)indexOfItemWithObjectValue:(id)object;
 - (NSArray *)objectValues;
 
 @end
 
 @interface NSObject (NSComboBoxCellDataSource)
-- (int)numberOfItemsInComboBoxCell:(NSComboBoxCell *)comboBoxCell;
-- (id)comboBoxCell:(NSComboBoxCell *)aComboBoxCell objectValueForItemAtIndex:(int)index;
-- (unsigned int)comboBoxCell:(NSComboBoxCell *)aComboBoxCell indexOfItemWithStringValue:(NSString *)string;
+- (NSInteger)numberOfItemsInComboBoxCell:(NSComboBoxCell *)comboBoxCell;
+- (id)comboBoxCell:(NSComboBoxCell *)aComboBoxCell objectValueForItemAtIndex:(NSInteger)index;
+- (NSUInteger)comboBoxCell:(NSComboBoxCell *)aComboBoxCell indexOfItemWithStringValue:(NSString *)string;
 - (NSString *)comboBoxCell:(NSComboBoxCell *)aComboBoxCell completedString:(NSString *)uncompletedString; 
 @end

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004, 2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -23,80 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
+#import <WebKit/DOMDocument.h>
+#import <WebKit/DOMNode.h>
+#import <WebKit/DOMObject.h>
 #import <WebKit/DOMViews.h>
 
-@class DOMEvent;
+#import <WebKit/DOMEvent.h>
+#import <WebKit/DOMEventException.h>
+#import <WebKit/DOMEventListener.h>
+#import <WebKit/DOMEventTarget.h>
+#import <WebKit/DOMKeyboardEvent.h>
+#import <WebKit/DOMMouseEvent.h>
+#import <WebKit/DOMMutationEvent.h>
+#import <WebKit/DOMOverflowEvent.h>
+#import <WebKit/DOMUIEvent.h>
+#import <WebKit/DOMWheelEvent.h>
 
-extern NSString * const DOMEventException;
-
-enum DOMEventExceptionCode {
-    DOM_UNSPECIFIED_EVENT_TYPE_ERR = 0
-};
-
-@protocol DOMEventListener <NSObject>
-- (void)handleEvent:(DOMEvent *)event;
-@end
-
-@protocol DOMEventTarget <NSObject, NSCopying>
-- (void)addEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture;
-- (void)removeEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture;
-- (BOOL)dispatchEvent:(DOMEvent *)event;
-@end
-
-enum {
-    DOM_CAPTURING_PHASE = 1,
-    DOM_AT_TARGET = 2,
-    DOM_BUBBLING_PHASE = 3
-};
-
-@interface DOMEvent : DOMObject
-- (NSString *)type;
-- (id <DOMEventTarget>)target;
-- (id <DOMEventTarget>)currentTarget;
-- (unsigned short)eventPhase;
-- (BOOL)bubbles;
-- (BOOL)cancelable;
-- (DOMTimeStamp)timeStamp;
-- (void)stopPropagation;
-- (void)preventDefault;
-- (void)initEvent:(NSString *)eventTypeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg;
-@end
-
-@interface DOMDocument (DOMDocumentEvent)
-- (DOMEvent *)createEvent:(NSString *)eventType;
-@end
-
-@interface DOMUIEvent : DOMEvent
-- (DOMAbstractView *)view;
-- (long)detail;
-- (void)initUIEvent:(NSString *)typeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg :(DOMAbstractView *)viewArg :(long)detailArg;
-@end
-
-@interface DOMMouseEvent : DOMUIEvent
-- (long)screenX;
-- (long)screenY;
-- (long)clientX;
-- (long)clientY;
-- (BOOL)ctrlKey;
-- (BOOL)shiftKey;
-- (BOOL)altKey;
-- (BOOL)metaKey;
-- (unsigned short)button;
-- (id <DOMEventTarget>)relatedTarget;
-- (void)initMouseEvent:(NSString *)typeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg :(DOMAbstractView *)viewArg :(long)detailArg :(long)screenXArg :(long)screenYArg :(long)clientX :(long)clientY :(BOOL)ctrlKeyArg :(BOOL)altKeyArg :(BOOL)shiftKeyArg :(BOOL)metaKeyArg :(unsigned short)buttonArg :(id <DOMEventTarget>)relatedTargetArg;
-@end
-
-enum {
-    DOM_MODIFICATION = 1,
-    DOM_ADDITION = 2,
-    DOM_REMOVAL = 3
-};
-
-@interface DOMMutationEvent : DOMEvent
-- (DOMNode *)relatedNode;
-- (NSString *)prevValue;
-- (NSString *)newValue;
-- (NSString *)attrName;
-- (unsigned short)attrChange;
-- (void)initMutationEvent:(NSString *)typeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg :(DOMNode *)relatedNodeArg :(NSString *)prevValueArg :(NSString *)newValueArg :(NSString *)attrNameArg :(unsigned short)attrChangeArg;
+@interface DOMNode (DOMEventTarget) <DOMEventTarget>
 @end

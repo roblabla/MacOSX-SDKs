@@ -50,7 +50,7 @@
 -(OBEXError)addImageHandleHeader:(NSString*)type;
 -(OBEXError)addImageDescriptorHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
 
-// Deprecated in favor of dictionaryWithOBEXHeadersData: above.
+// This is going to be deprecated in favor of dictionaryWithOBEXHeadersData: above.
 
 +(NSMutableDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
 

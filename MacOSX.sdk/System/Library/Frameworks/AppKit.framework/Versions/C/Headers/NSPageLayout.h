@@ -1,123 +1,79 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
-
 #import <AppKit/NSApplication.h>
-#import <AppKit/NSPanel.h>		// For NSCancelButton & NSOKButton.
-#import <Foundation/NSObject.h>
 
+@class NSArray, NSMutableArray, NSPrintInfo, NSView, NSViewController, NSWindow, NSWindowController;
 
-@class NSPrintInfo, NSView, NSWindow;
-
-
-#ifndef WIN32
-
-
-// Tags for use with -viewWithTag:.  NSPAGELAYOUT IS NO LONGER A SUBCLASS OF NSPANEL.  THESE ARE ALL DEPRECATED.
-enum {
-    NSPLImageButton			= 50,
-    NSPLTitleField			= 51,
-    NSPLPaperNameButton			= 52,
-    NSPLUnitsButton			= 54,
-    NSPLWidthForm			= 55,
-    NSPLHeightForm			= 56,
-    NSPLOrientationMatrix		= 57,
-    NSPLCancelButton			= NSCancelButton,
-    NSPLOKButton			= NSOKButton
-};
-
-
-@interface NSPageLayout : NSObject
-
-// Instance variables.
-{
-
-@private
-
-    // All instance variables are private.
-    unsigned char _184BytesOfPrivateData[184];
-    
+@interface NSPageLayout : NSObject {
+    @private
+    NSMutableArray *_accessoryControllers;
+    NSPrintInfo *_originalPrintInfo;
+    id _delegate;
+    SEL _didEndSelector;
+    void *_contextInfo;
+    NSPrintInfo *_presentedPrintInfo;
+    NSWindowController *_windowController;
+#if __LP64__
+    id _reserved[4];
+#else
+    unsigned char _compatibilityPadding[156];
+#endif
 }
 
-// Creating an NSPageLayout.
+/* Create a new NSPageLayout.
+*/
 + (NSPageLayout *)pageLayout;
 
-// Running the NSPageLayout panel, document-modally.  didEndSelector must have the same signature as:
-// - (void)pageLayoutDidEnd:(NSPageLayout *)pageLayout returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+/* Controllers for the accessory views that will be presented in the page setup panel by the methods below. When the page setup panel is presented to the user each controller is automatically sent a -setRepresentedObject: message with this object's NSPrintInfo. Because NSViewControllers are KVC and KVO compliant for "representedObject," you can use one as the file's owner of an accessory view's nib and bind controls to the file's owner using key paths that start with "representedObject." to take advantage of NSPrintInfo's KVC and KVO compliance. Each controller is also automatically sent a -title message. If that returns nil the application's short name is used in the popup menu that lets the user choose an accessory view.
+*/
+- (void)addAccessoryController:(NSViewController *)accessoryController;
+- (void)removeAccessoryController:(NSViewController *)accessoryController;
+- (NSArray *)accessoryControllers;
+
+#endif
+
+/* Present a page setup panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
+
+    - (void)pageLayoutDidEnd:(NSPageLayout *)pageLayout returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+*/
 - (void)beginSheetWithPrintInfo:(NSPrintInfo *)printInfo modalForWindow:(NSWindow *)docWindow delegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
 
-// Running the NSPageLayout panel, application-modally.
-- (int)runModal;
-- (int)runModalWithPrintInfo:(NSPrintInfo *)pInfo;
+/* Present a page setup panel to the user, application-modally, and return either NSOKButton or NSCancelButton. The default implementation of -runModal just invokes [self runModalWithPrintInfo:[NSPrintInfo sharedPrintInfo]].
+*/
+- (NSInteger)runModalWithPrintInfo:(NSPrintInfo *)printInfo;
+- (NSInteger)runModal;
 
-// Customizing an NSPageLayout.
-- (NSView *)accessoryView;
-- (void)setAccessoryView:(NSView *)aView;
-
-// Accessing the NSPrintInfo.
+/* A simple accessor. Your -beginSheetWithPrintInfo:... delegate can use this so it doesn't have to keep a pointer to the NSPrintInfo elsewhere while waiting for the user to dismiss the print panel.
+*/
 - (NSPrintInfo *)printInfo;
+
+@end
+
+@interface NSPageLayout(NSDeprecated)
+
+/* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
+*/
+- (void)setAccessoryView:(NSView *)accessoryView;
+- (NSView *)accessoryView;
+
+/* Methods that were deprecated in Mac OS 10.5.
+*/
 - (void)readPrintInfo;
 - (void)writePrintInfo;
 
-// Updating the display.  THESE ARE ALL DEPRECATED.
-- (void)convertOldFactor:(float *)oldFactor newFactor:(float *)newFactor;
-- (void)pickedButton:(id)sender;
-- (void)pickedOrientation:(id)sender;
-- (void)pickedPaperSize:(id)sender;
-- (void)pickedUnits:(id)sender;
-
-@end // interface NSPageLayout
-
+@end
 
 @interface NSApplication(NSPageLayoutPanel)
 
-// Showing standard panels.
+/* An action method that merely invokes [[NSPageLayout pageLayout] runModal].
+*/
 - (void)runPageLayout:(id)sender;
 
-@end // interface NSApplication(NSPageLayoutPanel)
-
-
-#else // WIN32
-
-
-@interface NSPageLayout : NSObject
-
-// Instance variables.
-{
-
-    // All instance variables are private.
-    void *_printdlg;
-    NSPrintInfo *_printInfo;
-    id _accessoryView;
-    unsigned int _reservedPageLayout1;
-
-}
-
-// Class methods.
-+ (NSPageLayout *)pageLayout;
-
-// Instance methods.
-- (void)setAccessoryView:(NSView *)aView;
-- (NSView *)accessoryView;
-- (void)readPrintInfo;
-- (void)writePrintInfo;
-- (NSPrintInfo *)printInfo;
-- (int)runModalWithPrintInfo:(NSPrintInfo *)pInfo;
-- (int)runModal;
-
-@end // interface NSPageLayout
-
-
-@interface NSApplication(NSPageLayoutPanel)
-
-// Instance methods.
-- (void)runPageLayout:(id)sender;
-
-@end // interface NSApplication(NSPageLayoutPanel)
-
-
-#endif // WIN32
+@end

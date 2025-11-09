@@ -1,17 +1,18 @@
 /*
 	NSTextFieldCell.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-typedef enum {
+enum {
     NSTextFieldSquareBezel  = 0,
     NSTextFieldRoundedBezel = 1
-} NSTextFieldBezelStyle;
+};
+typedef NSUInteger NSTextFieldBezelStyle;
 #endif
 
 @class NSColor;
@@ -30,7 +31,8 @@ typedef enum {
 	unsigned int textColorDisableFlag:1;
         unsigned int thcForceHighlightForSort:1;
 	unsigned int invalidTextColor:1;
-	unsigned int reservedTextFieldCell:17;
+        unsigned int notificationForMarkedText:1;
+	unsigned int reservedTextFieldCell:16;
     } _tfFlags;
 }
 
@@ -53,6 +55,15 @@ typedef enum {
 - (void)setPlaceholderAttributedString:(NSAttributedString*)string;
 - (NSAttributedString*)placeholderAttributedString;
 #endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setWantsNotificationForMarkedText:(BOOL)flag;
+
+/* Returns an array of locale identifiers representing input sources allowed to be enabled when the receiver has the keyboard focus.
+ */
+- (NSArray *)allowedInputSourceLocales;
+- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 @end
 

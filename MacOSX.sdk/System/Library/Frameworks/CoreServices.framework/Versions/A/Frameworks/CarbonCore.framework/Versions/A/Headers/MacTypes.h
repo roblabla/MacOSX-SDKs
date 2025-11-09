@@ -3,7 +3,7 @@
  
      Contains:   Basic Macintosh data types.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -22,6 +22,7 @@
 
 #include <stdbool.h>
 
+#include <sys/types.h>
 
 #include <AvailabilityMacros.h>
 
@@ -33,7 +34,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -61,22 +62,12 @@ extern "C" {
 
 #endif
 
-/********************************************************************************
-
-    Special values
-
-        NULL        The C standard for an null pointer constant
-        nil         In Objective-C, a null id defined in <objc/objc.h>
-                    In C, an alias for NULL
-
-*********************************************************************************/
 #ifndef NULL
-    #define NULL 0
-#endif
+#define NULL    __DARWIN_NULL
+#endif /* ! NULL */
 #ifndef nil
-    #define nil 0
-#endif
-
+    #define nil NULL
+#endif /* ! nil */
 /********************************************************************************
 
     Base integer types for all target OS's and CPU's
@@ -260,12 +251,12 @@ typedef void *                          LogicalAddress;
 typedef const void *                    ConstLogicalAddress;
 typedef void *                          PhysicalAddress;
 typedef UInt8 *                         BytePtr;
-typedef UInt32                          ByteCount;
-typedef UInt32                          ByteOffset;
+typedef unsigned long                   ByteCount;
+typedef unsigned long                   ByteOffset;
 typedef SInt32                          Duration;
 typedef UnsignedWide                    AbsoluteTime;
 typedef UInt32                          OptionBits;
-typedef UInt32                          ItemCount;
+typedef unsigned long                   ItemCount;
 typedef UInt32                          PBVersion;
 typedef SInt16                          ScriptCode;
 typedef SInt16                          LangCode;
@@ -309,7 +300,28 @@ typedef ProcPtr                         UniversalProcPtr;
 
 typedef ProcPtr *                       ProcHandle;
 typedef UniversalProcPtr *              UniversalProcHandle;
+/********************************************************************************
 
+    RefCon Types
+    
+        For access to private data in callbacks, etc.; refcons are generally
+        used as a pointer to something, but in the 32-bit world refcons in
+        different APIs have had various types: pointer, unsigned scalar, and
+        signed scalar. The RefCon types defined here support the current 32-bit
+        usage but provide normalization to pointer types for 64-bit.
+        
+        PRefCon is preferred for new APIs; URefCon and SRefCon are primarily
+        for compatibility with existing APIs.
+        
+*********************************************************************************/
+typedef void *                          PRefCon;
+#if __LP64__
+typedef void *                          URefCon;
+typedef void *                          SRefCon;
+#else
+typedef UInt32                          URefCon;
+typedef SInt32                          SRefCon;
+#endif  /* __LP64__ */
 
 /********************************************************************************
 
@@ -407,7 +419,7 @@ typedef UInt16                          UniChar;
 typedef UInt16                          UTF16Char;
 typedef UInt8                           UTF8Char;
 typedef UniChar *                       UniCharPtr;
-typedef UInt32                          UniCharCount;
+typedef unsigned long                   UniCharCount;
 typedef UniCharCount *                  UniCharCountPtr;
 typedef unsigned char                   Str255[256];
 typedef unsigned char                   Str63[64];
@@ -745,7 +757,7 @@ SysBreakFunc(ConstStr255Param debuggerMsg)                    AVAILABLE_MAC_OS_X
 #endif
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

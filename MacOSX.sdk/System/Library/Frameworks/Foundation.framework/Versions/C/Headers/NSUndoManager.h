@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 //
@@ -10,7 +10,6 @@
 #import <Foundation/NSObject.h>
 
 @class NSArray;
-@class NSInvocation;
 @class NSString;
 
 // used with NSRunLoop's performSelector:target:argument:order:modes:
@@ -24,7 +23,7 @@ enum {
     id 			_undoStack;
     id 			_redoStack;
     NSArray 		*_runLoopModes;
-    int 		_disabled;
+    NSInteger 		_disabled;
     struct {
         unsigned int undoing:1;
         unsigned int redoing:1;
@@ -47,7 +46,7 @@ enum {
 - (void)endUndoGrouping;
     // These nest.
 
-- (int)groupingLevel;
+- (NSInteger)groupingLevel;
     // Zero means no open group.
 
         /* Enable/Disable registration */
@@ -66,8 +65,8 @@ enum {
 
         /* Undo levels */
 
-- (void)setLevelsOfUndo:(unsigned)levels;
-- (unsigned)levelsOfUndo;
+- (void)setLevelsOfUndo:(NSUInteger)levels;
+- (NSUInteger)levelsOfUndo;
     // Sets the number of complete groups (not operations) that should
     // be kept my the manager.  When limit is reached, oldest undos are
     // thrown away.  0 means no limit !
@@ -104,8 +103,6 @@ enum {
 - (void)removeAllActions;
 
 - (void)removeAllActionsWithTarget:(id)target;
-    // Should be called from the dealloc method of any object that may have
-    // registered as a target for undo operations
 
         /* Object based Undo */
 
@@ -118,8 +115,6 @@ enum {
    // [[undoManager prepareWithInvocationTarget:self] setFont:oldFont color:oldColor]
    // When undo is called, the specified target will be called with
    // [target setFont:oldFont color:oldColor]
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation;
 
     	/* Undo/Redo action name */
 

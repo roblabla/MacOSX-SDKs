@@ -3,7 +3,7 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -32,8 +32,8 @@
 #define kControlEntireControl 			0
 #define kControlStructureMetaPart 		(-1)
 #define kControlContentMetaPart 		(-2)
-#define kControlOpaqueMetaPart 			(-3)				/*  Jaguar or later */
-#define kControlClickableMetaPart 		(-4)				/*  Panther or later, only used for async window dragging. Default is structure region. */
+#define kControlOpaqueMetaPart 			(-3)
+#define kControlClickableMetaPart 		(-4)
 
 #define kControlFocusNoPart 			0					/*  tells control to clear its focus */
 #define kControlFocusNextPart 			(-1)				/*  tells control to focus on the next part */
@@ -59,6 +59,7 @@
 #define kControlContentCIconRes 		2
 #define kControlContentPictRes 			3
 #define kControlContentICONRes 			4
+#define kControlContentAlertIconRes 	5
 #define kControlContentIconSuiteHandle 	129
 #define kControlContentCIconHandle 		130
 #define kControlContentPictHandle 		131
@@ -97,6 +98,12 @@
 #define kControlKeyFilterTag 			'fltr'
 #define kControlKindTag 				'kind'
 #define kControlSizeTag 				'size'
+#define kControlContentTag 				'cont'
+#define kControlThemeTextFontTag 		'thft'
+#define kControlThemeTextHorizontalFlushTag  'thhf'
+#define kControlThemeTextVerticalFlushTag  'thvf'
+#define kControlThemeTextTruncationTag 	'thtt'
+#define kControlThemeTextInfoTag 		'thti'
 
 #define kControlSupportsGhosting 		0x01
 #define kControlSupportsEmbedding 		0x02
@@ -120,6 +127,7 @@
 #define kControlIdlesWithTimer 			0x00800000			/*  Available in Carbon - this bit indicates that the control animates automatically */
 #define kControlInvertsUpDownValueMeaning  0x01000000
 
+#if !__LP64__
 #define drawCntl 						0
 #define testCntl 						1
 #define calcCRgns 						2
@@ -160,6 +168,8 @@
 #define kControlMsgContextualMenuClick 	47					/*  Available in Carbon. Param is ControlContextualMenuClickRec */
 #define kControlMsgGetClickActivation 	48					/*  Available in Carbon. Param is ControlClickActivationRec */
 
+#endif  /* !__LP64__ */
+
 #define kControlSizeNormal 				0
 #define kControlSizeSmall 				1
 #define kControlSizeLarge 				2
@@ -169,14 +179,21 @@
 #define kDrawControlEntireControl 		0
 #define kDrawControlIndicatorOnly 		129
 
+#if !__LP64__
 #define kDragControlEntireControl 		0
 #define kDragControlIndicator 			1
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 #define kControlSupportsNewMessages 	' ok '
+#endif  /* !__LP64__ */
+
 #define kControlKeyFilterBlockKey 		0
 #define kControlKeyFilterPassKey 		1
 
 #define kControlKindSignatureApple 		'appl'
+#if !__LP64__
 
 /*--------------------------cctb ¥ Control Color old Lookup Table----------------------*/
 #ifdef oldTemp
@@ -243,6 +260,8 @@ type 'CNTL' {
 };
 
 #define  popupMenuCDEFproc       1008                            /* ProcID 1008 = 16 * 63        */
+
+#endif  /* !__LP64__ */
 
 
 #endif /* __CONTROLS_R__ */

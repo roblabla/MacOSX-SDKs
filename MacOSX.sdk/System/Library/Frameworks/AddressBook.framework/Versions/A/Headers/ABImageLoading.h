@@ -2,15 +2,16 @@
 //  ABImageLoading.h
 //  AddressBook
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <AddressBook/AddressBook.h>
 
 @protocol ABImageClient <NSObject>
-- (void)consumeImageData:(NSData *)data forTag:(int)tag;
+- (void)consumeImageData:(NSData *)data forTag:(NSInteger)tag;
     // data will be in an NSImage/QuickTime compatible format or nil if no image could be found.
     // This is always called on the main thread.
+	// Use the tag returned by the -beginLoadingImageDataForClient: method
 @end
 
 @interface ABPerson (ABPersonImageAdditions)
@@ -23,12 +24,13 @@
     // Synchronously returns data containing an image for this person. Only does local
     // file system searches. Data will be in an NSImage/QuickTime compatible format.
 
-- (int)beginLoadingImageDataForClient:(id<ABImageClient>)client;
+- (NSInteger)beginLoadingImageDataForClient:(id<ABImageClient>)client;
     // Starts an asynchronous fetch for image data in all locations using all. Returns a non-zero tag for tracking.
     // The consumer will not be called back until after this method has returned.
     // Cancel with -[ABPerson cancelLoadingImageDataForTag:].
 
-+ (void)cancelLoadingImageDataForTag:(int)tag;
++ (void)cancelLoadingImageDataForTag:(NSInteger)tag;
     // Cancels an asynchronous fetch for a specific tag
+	// Use the tag returned by the -beginLoadingImageDataForClient: method
 
 @end

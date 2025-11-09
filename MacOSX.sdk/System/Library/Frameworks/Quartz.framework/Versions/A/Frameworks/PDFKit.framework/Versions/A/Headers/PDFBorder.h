@@ -1,14 +1,16 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFBorder.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-@class PDFPage;
+#import <AppKit/AppKit.h>
+
+
+@class PDFBorderPrivateVars;
 
 
 // Style in which PDFBorder is displayed.
-typedef int PDFBorderStyle;
-
+typedef NSInteger PDFBorderStyle;
 enum
 {
     kPDFBorderStyleSolid = 0, 
@@ -18,10 +20,11 @@ enum
     kPDFBorderStyleUnderline = 4
 };
 
+
 @interface PDFBorder : NSObject
 {
 @private
-    struct PDFBorderPrivateVars *_pdfPriv;
+	PDFBorderPrivateVars *_pdfPriv;
 }
 
 // -------- accessors
@@ -31,20 +34,22 @@ enum
 - (void) setStyle: (PDFBorderStyle) style;
 
 // Width of line used to strok border.
-- (float) lineWidth;
-- (void) setLineWidth: (float) width;
+- (CGFloat) lineWidth;
+- (void) setLineWidth: (CGFloat) width;
 
-// For rounded-rect borders, the corner radii.
-- (float) horizontalCornerRadius;
-- (void) setHorizontalCornerRadius: (float) radius;
-- (float) verticalCornerRadius;
-- (void) setVerticalCornerRadius: (float) radius;
+// For rounded-rect borders, the corner radii.  Widget annotations generally do not specify a corder radius.
+- (CGFloat) horizontalCornerRadius;
+- (void) setHorizontalCornerRadius: (CGFloat) radius;
+- (CGFloat) verticalCornerRadius;
+- (void) setVerticalCornerRadius: (CGFloat) radius;
 
 // Array of floats specifying the dash pattern (see NSBezierPath for more detail).
 - (NSArray *) dashPattern;
 - (void) setDashPattern: (NSArray *) pattern;
 
-// Draw method.
+// Draw method.  Not generally needed since the annotations themselves call this method when they are drawn.
+// Call -[NSColor set] before calling (the various annotations do this often calling -[PDFAnnotation color] or whatever 
+// is appropriate for their class.
 - (void) drawInRect: (NSRect) rect;
 
 @end

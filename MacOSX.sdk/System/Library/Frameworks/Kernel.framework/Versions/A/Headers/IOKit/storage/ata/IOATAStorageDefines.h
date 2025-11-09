@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -67,6 +67,10 @@ enum
 	kATAIdentifyCommandsEnabled				= 86,
 	kATAIdentifyCommandsDefault				= 87,
 	kATAIdentifyUltraDMASupported			= 88,
+	kATAIdentifyPhysicalLogicalSectorSize	= 106,
+	kATAIdentifyWordsPerLogicalSector1		= 117,
+	kATAIdentifyWordsPerLogicalSector2		= 118,
+	kATAIdentifyLogicalSectorAlignment		= 209,
 	kATAIdentifyIntegrity					= 255
 };
 	
@@ -206,7 +210,20 @@ enum
 	kATASupportsFlushCacheExtendedMask		= (1 << kATASupportsFlushCacheExtendedBit),
 	
 	// Mask to ensure data is valid
-	kATADataIsValidMask						= 0xC000
+	kIdentifyWordValidationMask				= 0xC000,
+	kIdentifyWordValid						= 0x4000
+};
+
+/* Bits for features published in Word 84 of device identify data */
+enum
+{
+	kATAForceUnitAccessFeatureBit			= 6,
+};
+
+/* Masks for features published in Word 84 of device identify data */
+enum
+{
+	kATAForceUnitAccessFeatureMask			= (1 << kATAForceUnitAccessFeatureBit),
 };
 
 /* Bits for features published in Word 85 of device identify data */
@@ -222,11 +239,34 @@ enum
 };
 
 
+/* Bits for features published in Word 106 of device identify data */
+enum
+{
+	kATAPhysicalLogicalEnabledBit0			= 15,
+	kATAPhysicalLogicalEnabledBit1			= 14,
+	kATAMultipleLogicalSectorsBit			= 13,
+	kATAValidLogicalSectorSizeBit			= 12	
+};
+
+/* Masks for features published in Word 106 of device identify data */
+enum
+{
+	kATAPhysicalLogicalEnabledMask			= (1 << kATAPhysicalLogicalEnabledBit0) | (1 << kATAPhysicalLogicalEnabledBit1),
+	kATAPhysicalLogicalEnabledValue			= (0 << kATAPhysicalLogicalEnabledBit0) | (1 << kATAPhysicalLogicalEnabledBit1),
+	kATAMultipleLogicalSectorsMask			= (1 << kATAMultipleLogicalSectorsBit),
+	kATAValidLogicalSectorSizeMask			= (1 << kATAValidLogicalSectorSizeBit),
+	kATAPhysicalSectorSizeMask				= 0xF,
+	kATALogicalSectorAlignmentMask			= 0x3FFF
+};
+
+// Property table keys
+#define kIOATASupportedFeaturesKey		"ATA Features"
+
 /* ATA supported features */
 enum
 {
-	kIOATAFeaturePowerManagement			= 0x01,
-	kIOATAFeatureWriteCache					= 0x02,
+	kIOATAFeaturePowerManagement			= 0x01,		/* OBSOLETE */
+	kIOATAFeatureWriteCache					= 0x02,		/* OBSOLETE */
 	kIOATAFeatureAdvancedPowerManagement 	= 0x04,
 	kIOATAFeatureCompactFlash				= 0x08,
 	kIOATAFeature48BitLBA					= 0x10,
@@ -242,18 +282,6 @@ enum
 	kIOATAMaxPowerSavings					= 0x01
 };
 
-/* ATA power states, from lowest to highest power usage */
-typedef UInt32 IOATAPowerState;
-enum
-{
-	kIOATAPowerStateSystemSleep	= 0,
-	kIOATAPowerStateSleep 		= 1,
-	kIOATAPowerStateStandby		= 2,
-	kIOATAPowerStateIdle		= 3,
-	kIOATAPowerStateActive		= 4,
-	kIOATAPowerStates			= 5
-};
-
 /* ATA Transfer Mode bit masks */
 enum
 {
@@ -262,5 +290,24 @@ enum
 	kATAEnablePIOModeMask			= 0x08
 };
 
+
+#if defined(KERNEL) && defined(__cplusplus)
+
+typedef UInt32	ATAOperationType;
+enum
+{
+	kATAOperationTypeRead				= 0,
+	kATAOperationTypeWrite				= 1,
+	kATAOperationTypeFlushCache			= 2,
+	kATAOperationTypeSMART				= 3,
+	kATAOperationTypeConfiguration		= 4,
+	kATAOperationTypePowerManagement	= 5,
+	kATAOperationTypeSMS				= 6
+};
+
+typedef struct __ATAIORequest *	ATARequestIdentifier;
+
+
+#endif	/* defined(KERNEL) && defined(__cplusplus) */
 
 #endif	/* _IOKIT_IO_ATA_STORAGE_DEFINES_H_ */

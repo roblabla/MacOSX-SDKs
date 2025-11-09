@@ -263,8 +263,17 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Whether iconv support is available
  */
-#if 1
+#if 0
 #define LIBXML_ICONV_ENABLED
+#endif
+
+/**
+ * LIBXML_ICU_ENABLED:
+ *
+ * Whether ICU support is available
+ */
+#if 1
+#define LIBXML_ICU_ENABLED
 #endif
 
 /**

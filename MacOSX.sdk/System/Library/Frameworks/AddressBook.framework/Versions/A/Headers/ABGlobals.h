@@ -2,7 +2,7 @@
  *  ABGlobals.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+ *  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
  *
  */
 
@@ -40,6 +40,8 @@ extern NSString * const kABHomePageProperty;              // Home Web page - kAB
 
 extern NSString * const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;          // URLs - kABMultiStringProperty
         extern NSString * const kABHomePageLabel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // Homepage URL
+		
+extern NSString * const kABCalendarURIsProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // Calendar URIs - kABMultiStringProperty
 
 extern NSString * const kABEmailProperty;                 // Email(s) - kABMultiStringProperty
         extern NSString * const kABEmailWorkLabel;        // Home email

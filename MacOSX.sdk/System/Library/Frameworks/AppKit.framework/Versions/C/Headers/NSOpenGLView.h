@@ -1,7 +1,7 @@
 /*
         NSOpenGLView.h
         Application Kit
-        Copyright (c) 2000-2005, Apple Computer, Inc.
+        Copyright (c) 2000-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -13,9 +13,9 @@
   @private
     NSOpenGLContext*     _openGLContext;
     NSOpenGLPixelFormat* _pixelFormat;
-    unsigned long        _reserved1;
-    unsigned long        _reserved2;
-    unsigned long        _reserved3;
+    NSInteger                _reserved1;
+    NSInteger                _reserved2;
+    NSInteger                _reserved3;
 }
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat;

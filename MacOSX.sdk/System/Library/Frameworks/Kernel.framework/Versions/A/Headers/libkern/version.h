@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
  * The contents of this file constitute Original Code as defined in and
  * are subject to the Apple Public Source License Version 1.1 (the
@@ -17,7 +17,7 @@
  * License for the specific language governing rights and limitations
  * under the License.
  *
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
 #ifndef	LIBKERN_VERSION_H
@@ -34,25 +34,25 @@ extern "C" {
 /* VERSION_MAJOR, version_major is an integer that represents that major version
  * of the kernel
  */
-#define VERSION_MAJOR		8
+#define VERSION_MAJOR		9
 extern const int version_major;
 
 /* VERSION_MINOR, version_minor is an integer that represents the minor version
  * of the kernel
  */
-#define VERSION_MINOR		8
+#define VERSION_MINOR		0
 extern const int version_minor;
 
 /* VERSION_VARIANT, version_variant is a string that contains the revision,
  * stage, and prerelease level of the kernel
  */
-#define VERSION_VARIANT		"1"
+#define VERSION_VARIANT		"0"
 extern const char version_variant[];
 
 /* VERSION_REVISION, version_revision is an integer that represents the revision
  * of the kernel
  */
-#define VERSION_REVISION	1
+#define VERSION_REVISION	0
 extern const int version_revision;
 
 /* VERSION_STAGE, version_stage, is an integer set to one of the following: */
@@ -74,7 +74,7 @@ extern const int version_prerelease_level;
 extern const char ostype[];
 
 /* OSRELEASE, osrelease, is a string as returned by uname -r */
-#define OSRELEASE	"8.8.1"
+#define OSRELEASE	"9.0.0"
 extern const char osrelease[];
 
 /* osbuilder is a string as returned by uname -r */
@@ -85,6 +85,9 @@ extern const char osbuilder[];
  */
 
 extern const char version[];
+
+#define OSVERSIZE 256
+extern char osversion[];
 
 
 #if defined(__cplusplus)

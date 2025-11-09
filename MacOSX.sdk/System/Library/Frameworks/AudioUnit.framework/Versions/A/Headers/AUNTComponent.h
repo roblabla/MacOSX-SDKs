@@ -21,6 +21,9 @@
 #ifndef __AUNTCOMPONENT__
 #define __AUNTCOMPONENT__
 
+#if !__LP64__
+// not available for __LP64__
+
 #include <AvailabilityMacros.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AUComponent.h>
@@ -161,6 +164,8 @@ enum
 #ifdef __cplusplus
 }
 #endif
+
+#endif // __LP64__
 
 #endif /* __AUNTCOMPONENT__ */
 

@@ -1,5 +1,5 @@
 /*	CFUserNotification.h
-	Copyright (c) 2000-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2000-2007, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUSERNOTIFICATION__)
@@ -12,9 +12,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFRunLoop.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFUserNotification * CFUserNotificationRef;
 
@@ -170,9 +168,7 @@ CF_EXPORT
 const CFStringRef kCFUserNotificationPopUpSelectionKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFUSERNOTIFICATION__ */
 

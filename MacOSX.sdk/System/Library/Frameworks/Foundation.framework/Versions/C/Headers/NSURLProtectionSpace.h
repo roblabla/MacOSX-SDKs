@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -33,7 +33,7 @@ extern NSString * const NSURLProtectionSpaceHTTPSProxy;
 extern NSString * const NSURLProtectionSpaceFTPProxy;
 
 /*!
-    @const NSURLProtectionSpaceSOCKProxy
+    @const NSURLProtectionSpaceSOCKSProxy
     @abstract The proxy type for SOCKS proxies
 */
 extern NSString * const NSURLProtectionSpaceSOCKSProxy;
@@ -91,7 +91,7 @@ extern NSString * const NSURLAuthenticationMethodHTMLForm;
     valid values include nil (default method), @"digest" and @"form".
     @result The initialized object.
 */
-- (id)initWithHost:(NSString *)host port:(int)port protocol:(NSString *)protocol realm:(NSString *)realm authenticationMethod:(NSString *)authenticationMethod;
+- (id)initWithHost:(NSString *)host port:(NSInteger)port protocol:(NSString *)protocol realm:(NSString *)realm authenticationMethod:(NSString *)authenticationMethod;
 
 /*!
     @method initWithProxyHost:port:type:realm:authenticationMethod:
@@ -107,7 +107,7 @@ extern NSString * const NSURLAuthenticationMethodHTMLForm;
     valid values include nil (default method) and @"digest"
     @result The initialized object.
 */
-- (id)initWithProxyHost:(NSString *)host port:(int)port type:(NSString *)type realm:(NSString *)realm  authenticationMethod:(NSString *)authenticationMethod;
+- (id)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(NSString *)type realm:(NSString *)realm  authenticationMethod:(NSString *)authenticationMethod;
 
 /*!
     @method realm
@@ -145,7 +145,7 @@ extern NSString * const NSURLAuthenticationMethodHTMLForm;
     @abstract Get the proxy port if this is a proxy authentication, or the port from the URL.
     @result The port for this protection space, or 0 if not set.
 */
-- (int)port;
+- (NSInteger)port;
 
 /*!
     @method proxyType

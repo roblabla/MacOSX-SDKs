@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -32,7 +32,43 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
+
+
+/*
+ *  Generic Text Alignment Constants
+ *  
+ *  Summary:
+ *    These constants are implemented to supplant the old TextEdit
+ *    Manager constants ( teFlushDefault, teCenter teFlushRight,
+ *    teFlushLeft ) These constants are used outside the context of the
+ *    legacy TextEdit Manager Framework. Use these as you would use the
+ *    old TextEdit.h constants to specify how text should be justified
+ *    (word aligned.) The new constants use the same values as the the
+ *    old TextEdit ones, for backwards compatibility.
+ */
+enum {
+
+  /*
+   * Flush according to the line direction
+   */
+  kTextFlushDefault             = 0,
+
+  /*
+   * Center justify (word alignment)
+   */
+  kTextCenter                   = 1,
+
+  /*
+   * Flush right
+   */
+  kTextFlushRight               = -1,
+
+  /*
+   * Flush left
+   */
+  kTextFlushLeft                = -2
+};
 
 /* TextEncodingBase type & values */
 /* (values 0-32 correspond to the Script Codes defined in Inside Macintosh: Text pages 6-52 and 6-53 */
@@ -131,7 +167,8 @@ enum {
   kTextEncodingUnicodeV3_0      = 0x0104,
   kTextEncodingUnicodeV3_1      = 0x0105, /* Adds characters requiring surrogate pairs in UTF-16*/
   kTextEncodingUnicodeV3_2      = 0x0106,
-  kTextEncodingUnicodeV4_0      = 0x0108
+  kTextEncodingUnicodeV4_0      = 0x0108,
+  kTextEncodingUnicodeV5_0      = 0x010A
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
@@ -197,7 +234,7 @@ enum {
   kTextEncodingJIS_X0208_90     = 0x0622,
   kTextEncodingJIS_X0212_90     = 0x0623,
   kTextEncodingJIS_C6226_78     = 0x0624,
-  kTextEncodingShiftJIS_X0213_00 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
+  kTextEncodingShiftJIS_X0213   = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
   kTextEncodingJIS_X0213_MenKuTen = 0x0629, /* JIS X0213 in plane-row-column notation (3 bytes)*/
   kTextEncodingGB_2312_80       = 0x0630,
   kTextEncodingGBK_95           = 0x0631, /* annex to GB 13000-93; for Windows 95; EUC-CN extended*/
@@ -481,7 +518,9 @@ enum {
   kJapaneseBasicVariant         = 2,
   kJapanesePostScriptScrnVariant = 3,
   kJapanesePostScriptPrintVariant = 4,
-  kJapaneseVertAtKuPlusTenVariant = 5,  /* kJapaneseStdNoOneByteKanaVariant = 6,  // replaced by kJapaneseNoOneByteKanaOption*/
+  kJapaneseVertAtKuPlusTenVariant = 5,
+  kTextEncodingShiftJIS_X0213_00 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
+                                        /* kJapaneseStdNoOneByteKanaVariant = 6,  // replaced by kJapaneseNoOneByteKanaOption*/
                                         /* kJapaneseBasicNoOneByteKanaVariant = 7,    // replaced by kJapaneseNoOneByteKanaOption    */
   kHebrewStandardVariant        = 0,
   kHebrewFigureSpaceVariant     = 1,    /* Old Unicode variants. Variant 2 (kUnicodeCanonicalDecompVariant, kUnicodeMaxDecomposedVariant) is ambiguous and means*/
@@ -494,11 +533,7 @@ enum {
   kUnicodeCanonicalDecompVariant = 2,   /* use kUnicodeNormalizationFormD or kUnicodeHFSPlusDecompVariant*/
   kUnicodeMaxDecomposedVariant  = 2,    /* use kUnicodeNormalizationFormD or kUnicodeHFSPlusDecompVariant*/
   kUnicodeCanonicalCompVariant  = 3,    /* replaced by kUnicodeNormalizationFormC*/
-  kUnicodeNoComposedVariant     = 3,    /* this really meant NoComposing; replaced by kUnicodeNormalizationFormC*/
-                                        /* The following Japanese variant options were never supported and are now deprecated.*/
-                                        /* In TEC 1.4 and later their functionality is replaced by the Unicode Converter options listed.*/
-  kJapaneseNoOneByteKanaOption  = 0x20, /* replaced by UnicodeConverter option kUnicodeNoHalfwidthCharsBit*/
-  kJapaneseUseAsciiBackslashOption = 0x40 /* replaced by UnicodeConverter option kUnicodeForceASCIIRangeBit*/
+  kUnicodeNoComposedVariant     = 3     /* this really meant NoComposing; replaced by kUnicodeNormalizationFormC*/
 };
 
 /* TextEncodingFormat type & values */
@@ -568,7 +603,7 @@ typedef UniCharArrayPtr *               UniCharArrayHandle;
    UniCharArrayOffset is used to indicate an edge offset in an array
    of UniChars (UInt16s).  
 */
-typedef UInt32                          UniCharArrayOffset;
+typedef unsigned long                   UniCharArrayOffset;
 /* enums for TextEncoding Conversion routines*/
 enum {
   kTextScriptDontCare           = -128,
@@ -1047,10 +1082,10 @@ UCGetCharProperty(
 
 // surrogate ranges
 enum {
-  kUCHighSurrogateRangeStart  = 0xD800UL,
-    kUCHighSurrogateRangeEnd    = 0xDBFFUL,
-    kUCLowSurrogateRangeStart   = 0xDC00UL,
-    kUCLowSurrogateRangeEnd     = 0xDFFFUL
+  kUCHighSurrogateRangeStart  = 0xD800,
+  kUCHighSurrogateRangeEnd    = 0xDBFF,
+  kUCLowSurrogateRangeStart   = 0xDC00,
+  kUCLowSurrogateRangeEnd     = 0xDFFF
 };
 
 
@@ -1062,22 +1097,22 @@ enum {
 */
 UC_INLINE Boolean UCIsSurrogateHighCharacter( UniChar character ) {
     /* return ( ( character >= kUCHighSurrogateRangeStart ) && (character <= kUCHighSurrogateRangeEnd ) ? true : false ); */
-   return ( ( character & 0xFC00UL ) == kUCHighSurrogateRangeStart );
+   return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
 }
 
 /*!
-  @function UCIsSurrogateLowCharacter
+    @function UCIsSurrogateLowCharacter
     Reports whether or not the character is a low surrogate.
    @param character  The character to be checked.
  @result true, if character is a low surrogate, otherwise false.
 */
 UC_INLINE Boolean UCIsSurrogateLowCharacter( UniChar character ) {
   /* return ( ( character >= kUCLowSurrogateRangeStart ) && ( character <= kUCLowSurrogateRangeEnd ) ? true : false ); */
-    return ( ( character & 0xFC00UL ) == kUCLowSurrogateRangeStart );
+    return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
 }
 
 /*!
-   @function UCGetUnicodeScalarValueForSurrogatePair
+ @function UCGetUnicodeScalarValueForSurrogatePair
   Returns the UTF-32 value corresponding to the surrogate pair passed in.
     @param surrogateHigh  The high surrogate character.  If this parameter
          is not a valid high surrogate character, the behavior is undefined.
@@ -1086,12 +1121,12 @@ UC_INLINE Boolean UCIsSurrogateLowCharacter( UniChar character ) {
  @result The UTF-32 value for the surrogate pair.
 */
 UC_INLINE UnicodeScalarValue UCGetUnicodeScalarValueForSurrogatePair( UniChar surrogateHigh, UniChar surrogateLow ) {
-  return ( ( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000UL;
+  return ( ( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 }
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

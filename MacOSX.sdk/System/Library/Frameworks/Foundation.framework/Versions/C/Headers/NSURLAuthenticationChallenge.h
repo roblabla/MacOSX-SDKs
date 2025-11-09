@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -70,7 +70,7 @@
     @param error The NSError for the authentication failure, if applicable, else nil
     @result An authentication challenge initialized with the specified parameters
 */
-- (id)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(NSURLCredential *)credential previousFailureCount:(int)previousFailureCount failureResponse:(NSURLResponse *)response error:(NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
+- (id)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(NSURLCredential *)credential previousFailureCount:(NSInteger)previousFailureCount failureResponse:(NSURLResponse *)response error:(NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
 
 /*!
     @method initWithAuthenticationChallenge:
@@ -108,7 +108,7 @@
     @abstract Get count of previous failed authentication attempts
     @result The count of previous failures
 */
-- (int)previousFailureCount;
+- (NSInteger)previousFailureCount;
 
 /*!
     @method failureResponse

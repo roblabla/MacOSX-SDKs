@@ -14,7 +14,7 @@
  * @addtogroup agent
  * @addtogroup library *
  *
- * $Id: data_list.h,v 5.3 2004/02/16 20:46:24 hardaker Exp $
+ * $Id: data_list.h 9583 2004-02-16 20:46:24Z hardaker $
  *
  * External definitions for functions and variables in netsnmp_data_list.c.
  *

@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -10,7 +10,7 @@
 
 @interface NSArchiver : NSCoder {
 @private
-    void		*mdata;
+    void		* __strong mdata;
     void		*pointerTable;
     void		*stringTable;
     void		*ids;
@@ -42,9 +42,9 @@
 @interface NSUnarchiver : NSCoder {
 @private
     void *		datax;
-    unsigned		cursor;
+    NSUInteger		cursor;
     NSZone		*objectZone;
-    unsigned		systemVersion;
+    NSUInteger		systemVersion;
     signed char		streamerVersion;
     char		swap;
     char		unused1;
@@ -52,10 +52,10 @@
     void		*pointerTable;
     void		*stringTable;
     id			classVersions;
-    int			lastLabel;
+    NSInteger			lastLabel;
     void		*map;
     void		*allUnarchivedObjects;
-    void		*reserved;
+    id			reserved;
 }
 
 - (id)initForReadingWithData:(NSData *)data;

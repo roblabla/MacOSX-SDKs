@@ -29,6 +29,44 @@
 #define _IPFW2_H
 
 /*
+ * Define IP Firewall event subclass, and associated events.
+ */
+
+/*!
+	@defined KEV_IPFW_SUBCLASS
+	@discussion The kernel event subclass for IP Firewall.
+*/
+#define KEV_IPFW_SUBCLASS	1
+
+/*!
+	@defined KEV_IPFW_ADD
+	@discussion The event code indicating a rule has been added.
+*/
+#define KEV_IPFW_ADD		1
+
+/*!
+	@defined KEV_IPFW_DEL
+	@discussion The event code indicating a rule has been removed.
+*/
+#define KEV_IPFW_DEL		2
+
+/*!
+	@defined KEV_IPFW_FLUSH
+	@discussion The event code indicating the rule set has been flushed.
+*/
+#define KEV_IPFW_FLUSH		3
+
+/*!
+	@defined KEV_IPFW_ENABLE
+	@discussion The event code indicating the enable flag has been changed 
+*/
+#define KEV_IPFW_ENABLE		4
+
+
+
+#if !__LP64__
+
+/*
  * The kernel representation of ipfw rules is made of a list of
  * 'instructions' (for all practical purposes equivalent to BPF
  * instructions), which specify which fields of the packet
@@ -394,4 +432,5 @@ struct _ipfw_dyn_rule {
  * Main firewall chains definitions and global var's definitions.
  */
 
+#endif /* !__LP64__ */
 #endif /* _IPFW2_H */

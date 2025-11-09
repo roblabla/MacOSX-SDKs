@@ -3,7 +3,7 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-3.5.19~278
+     Version:    SpeechSynthesis-3.6.59~90
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -19,6 +19,10 @@
 
 #ifndef __CORESERVICES_R__
 #include <CoreServices/CoreServices.r>
+#endif
+
+#ifndef __STDINT_R__
+#include </stdint.r>
 #endif
 
 

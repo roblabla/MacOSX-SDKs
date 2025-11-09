@@ -7,7 +7,7 @@
 /*! @header
 	<code>NSMailDelivery.h</code> includes the class
 	<code>NSMailDelivery</code>, which allows applications to send
-	email using Mail.app.
+	email using Mail.
  */
 
 #import <Foundation/Foundation.h>
@@ -15,15 +15,16 @@
 
 
 /*! The <code>NSMailDelivery</code> class enables applications to send
-    email messages using Mail.app.  It includes the ability to send both
+    email messages using Mail.  It includes the ability to send both
     plain text and MIME-encapsulated email messages through
     {@link deliverMessage:headers:format:protocol: deliverMessage:headers:format:protocol:},
     and also provides a simplified interface,
     {@link deliverMessage:subject:to: deliverMessage:subject:to:},
     for delivering basic messages easily.
 
-    @abstract class to enable delivery of an email message using Mail.app.
+    @abstract class to enable delivery of an email message using Mail.
  */
+AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5
 @interface NSMailDelivery : NSObject
 {
 }
@@ -32,7 +33,7 @@
 	to whether delivery accounts have been configured.
     @abstract Have delivery accounts have been configured?
  */
-+ (BOOL)hasDeliveryClassBeenConfigured;
++ (BOOL)hasDeliveryClassBeenConfigured          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     <code>deliverMessage:headers:format:protocol:</code> is used to deliver
@@ -44,7 +45,7 @@
 
     @abstract Deliver a message.
     @param messageBody
-	the actual contents of the message.  If <code>messageFormat<c/de>
+	the actual contents of the message.  If <code>messageFormat</code>
 	is <code>NSASCIIMailFormat</code>, any rich text or attachments
 	in messageBody will be lost.
     @param messageHeaders
@@ -58,7 +59,7 @@
 	can be NSSMTPDeliveryProtocol or nil to use the platform's default
 	deliveryProtocol (this is the preferred choice).
  */
-+ (BOOL)deliverMessage: (NSAttributedString *)messageBody headers: (NSDictionary *)messageHeaders format: (NSString *)messageFormat protocol: (NSString *)deliveryProtocol;
++ (BOOL)deliverMessage: (NSAttributedString *)messageBody headers: (NSDictionary *)messageHeaders format: (NSString *)messageFormat protocol: (NSString *)deliveryProtocol      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     <code>deliverMessage:subject:to:</code> is a method for delivering basic
@@ -69,7 +70,7 @@
     @param messageSubject is the subject of the message
     @param destinationAddress is the recipient's email address, e.g. johndoe\@apple.com
  */
-+ (BOOL)deliverMessage:(NSString *)messageBody subject:(NSString *)messageSubject to:(NSString *)destinationAddress;
++ (BOOL)deliverMessage:(NSString *)messageBody subject:(NSString *)messageSubject to:(NSString *)destinationAddress     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 @end
 
@@ -79,15 +80,15 @@
     @abstract String constants used to specify the format in
     the +deliverMessage:headers:format:protocol: method.
 */
-MESSAGE_EXPORT NSString *NSMIMEMailFormat;
-MESSAGE_EXPORT NSString *NSASCIIMailFormat;
+MESSAGE_EXPORT NSString *NSMIMEMailFormat               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+MESSAGE_EXPORT NSString *NSASCIIMailFormat              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @const NSSMTPDeliveryProtocol
     @abstract String constants used to specify the delivery protocol in
     the +deliverMessage:headers:format:protocol: method.
 */
-MESSAGE_EXPORT NSString *NSSMTPDeliveryProtocol;
+MESSAGE_EXPORT NSString *NSSMTPDeliveryProtocol         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @const NSSendmailDeliveryProtocol
@@ -96,5 +97,4 @@ MESSAGE_EXPORT NSString *NSSMTPDeliveryProtocol;
     specified will immediately return NO and the message will
     not be delivered.  
 */
-MESSAGE_EXPORT NSString *NSSendmailDeliveryProtocol;
-
+MESSAGE_EXPORT NSString *NSSendmailDeliveryProtocol     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;

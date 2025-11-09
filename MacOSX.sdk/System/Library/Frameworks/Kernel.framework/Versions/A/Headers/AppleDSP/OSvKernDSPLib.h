@@ -1,3 +1,15 @@
+#ifndef __OSvKernDSPLib__
+#define __OSvKernDSPLib__
+
+#if PRAGMA_ONCE
+#pragma once
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /*
  *	OSvKernDSPLib.h
  *
@@ -57,3 +69,9 @@ void vDSP_vdiv(
 	float		vDSP_result[],
 	ptrdiff_t	vDSP_strideResult,
 	size_t		vDSP_size);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif	// __OSvKernDSPLib__

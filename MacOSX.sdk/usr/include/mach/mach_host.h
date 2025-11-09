@@ -34,6 +34,7 @@ typedef function_table_entry 	*function_table_t;
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 #include <mach_debug/mach_debug_types.h>
+#include <mach/mach_init.h>
 
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
@@ -69,13 +70,13 @@ kern_return_t host_kernel_version
 	kernel_version_t kernel_version
 );
 
-/* Routine host_page_size */
+/* Routine _host_page_size */
 #ifdef	mig_external
 mig_external
 #else
 extern
 #endif	/* mig_external */
-kern_return_t host_page_size
+kern_return_t _host_page_size
 (
 	host_t host,
 	vm_size_t *out_page_size
@@ -343,7 +344,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_page_size_t;
+	} __Request___host_page_size_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -549,7 +550,7 @@ __END_DECLS
 union __RequestUnion__mach_host_subsystem {
 	__Request__host_info_t Request_host_info;
 	__Request__host_kernel_version_t Request_host_kernel_version;
-	__Request__host_page_size_t Request_host_page_size;
+	__Request___host_page_size_t Request__host_page_size;
 	__Request__mach_memory_object_memory_entry_t Request_mach_memory_object_memory_entry;
 	__Request__host_processor_info_t Request_host_processor_info;
 	__Request__host_get_io_master_t Request_host_get_io_master;
@@ -581,7 +582,7 @@ union __RequestUnion__mach_host_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t host_info_outCnt;
-		integer_t host_info_out[14];
+		integer_t host_info_out[15];
 	} __Reply__host_info_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -610,7 +611,7 @@ union __RequestUnion__mach_host_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		vm_size_t out_page_size;
-	} __Reply__host_page_size_t;
+	} __Reply___host_page_size_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -815,7 +816,7 @@ union __RequestUnion__mach_host_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t host_info_outCnt;
-		integer_t host_info_out[14];
+		integer_t host_info_out[15];
 	} __Reply__host_statistics_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -857,7 +858,7 @@ union __RequestUnion__mach_host_subsystem {
 union __ReplyUnion__mach_host_subsystem {
 	__Reply__host_info_t Reply_host_info;
 	__Reply__host_kernel_version_t Reply_host_kernel_version;
-	__Reply__host_page_size_t Reply_host_page_size;
+	__Reply___host_page_size_t Reply__host_page_size;
 	__Reply__mach_memory_object_memory_entry_t Reply_mach_memory_object_memory_entry;
 	__Reply__host_processor_info_t Reply_host_processor_info;
 	__Reply__host_get_io_master_t Reply_host_get_io_master;
@@ -881,7 +882,7 @@ union __ReplyUnion__mach_host_subsystem {
 #define subsystem_to_name_map_mach_host \
     { "host_info", 200 },\
     { "host_kernel_version", 201 },\
-    { "host_page_size", 202 },\
+    { "_host_page_size", 202 },\
     { "mach_memory_object_memory_entry", 203 },\
     { "host_processor_info", 204 },\
     { "host_get_io_master", 205 },\

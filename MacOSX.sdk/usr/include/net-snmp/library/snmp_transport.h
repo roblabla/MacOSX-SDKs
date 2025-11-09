@@ -18,19 +18,20 @@ extern          "C" {
 
 #define		NETSNMP_TRANSPORT_FLAG_STREAM	0x01
 #define		NETSNMP_TRANSPORT_FLAG_LISTEN	0x02
+#define		NETSNMP_TRANSPORT_FLAG_TUNNELED	0x04
 
 /*  The standard SNMP domains.  */
 
-extern oid      netsnmpUDPDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 1 };  */
-extern oid      netsnmpCLNSDomain[];    /*      = { 1, 3, 6, 1, 6, 1, 2 };  */
-extern oid      netsnmpCONSDomain[];    /*      = { 1, 3, 6, 1, 6, 1, 3 };  */
-extern oid      netsnmpDDPDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 4 };  */
-extern oid      netsnmpIPXDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 5 };  */
-extern size_t   netsnmpUDPDomain_len;
-extern size_t   netsnmpCLNSDomain_len;
-extern size_t   netsnmpCONSDomain_len;
-extern size_t   netsnmpDDPDomain_len;
-extern size_t   netsnmpIPXDomain_len;
+NETSNMP_IMPORT oid      netsnmpUDPDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 1 };  */
+NETSNMP_IMPORT oid      netsnmpCLNSDomain[];    /*      = { 1, 3, 6, 1, 6, 1, 2 };  */
+NETSNMP_IMPORT oid      netsnmpCONSDomain[];    /*      = { 1, 3, 6, 1, 6, 1, 3 };  */
+NETSNMP_IMPORT oid      netsnmpDDPDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 4 };  */
+NETSNMP_IMPORT oid      netsnmpIPXDomain[]; 	/*      = { 1, 3, 6, 1, 6, 1, 5 };  */
+NETSNMP_IMPORT size_t   netsnmpUDPDomain_len;
+NETSNMP_IMPORT size_t   netsnmpCLNSDomain_len;
+NETSNMP_IMPORT size_t   netsnmpCONSDomain_len;
+NETSNMP_IMPORT size_t   netsnmpDDPDomain_len;
+NETSNMP_IMPORT size_t   netsnmpIPXDomain_len;
 
 /*  Structure which defines the transport-independent API.  */
 
@@ -97,10 +98,20 @@ typedef struct netsnmp_tdomain_s {
     const oid      *name;
     size_t          name_length;
     const char    **prefix;
+
+    /*
+     * The f_create_from_tstring field is deprecated, please do not use it
+     * for new code and try to migrate old code away from using it.
+     */
     netsnmp_transport *(*f_create_from_tstring) (const char *, int);
-    netsnmp_transport *(*f_create_from_ostring) (const u_char *,  size_t, int);
+
+    netsnmp_transport *(*f_create_from_ostring) (const u_char *, size_t, int);
 
     struct netsnmp_tdomain_s *next;
+
+    netsnmp_transport *(*f_create_from_tstring_new) (const char *, int,
+						     const char*);
+
 } netsnmp_tdomain;
 
 
@@ -144,16 +155,30 @@ void            netsnmp_clear_tdomain_list(void);
 
 void            netsnmp_tdomain_init(void);
 
-netsnmp_transport *netsnmp_tdomain_transport(const char *string,
+netsnmp_transport *netsnmp_tdomain_transport(const char *str,
 					     int local,
-					     const char
-					     *default_domain);
+					     const char *default_domain);
+
+netsnmp_transport *netsnmp_tdomain_transport_full(const char *application,
+						  const char *str,
+						  int local,
+						  const char *default_domain,
+						  const char *default_target);
 
 netsnmp_transport *netsnmp_tdomain_transport_oid(const oid * dom,
 						 size_t dom_len,
 						 const u_char * o,
 						 size_t o_len,
 						 int local);
+
+netsnmp_transport*
+netsnmp_transport_open_client(const char* application, const char* str);
+
+netsnmp_transport*
+netsnmp_transport_open_server(const char* application, const char* str);
+
+netsnmp_transport*
+netsnmp_transport_open(const char* application, const char* str, int local);
 
 #ifdef __cplusplus
 }

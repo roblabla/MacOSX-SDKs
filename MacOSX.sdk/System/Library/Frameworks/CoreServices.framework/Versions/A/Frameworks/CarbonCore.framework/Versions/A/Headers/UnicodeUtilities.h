@@ -3,7 +3,7 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -49,7 +49,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
    -------------------------------------------------------------------------------------------------
@@ -157,19 +157,19 @@ typedef struct UCKeyStateEntryRange     UCKeyStateEntryRange;
 struct UCKeyboardTypeHeader {
   UInt32              keyboardTypeFirst;      /* first keyboardType in this entry*/
   UInt32              keyboardTypeLast;       /* last keyboardType in this entry*/
-  ByteOffset          keyModifiersToTableNumOffset; /* required*/
-  ByteOffset          keyToCharTableIndexOffset; /* required*/
-  ByteOffset          keyStateRecordsIndexOffset; /* 0 => no table*/
-  ByteOffset          keyStateTerminatorsOffset; /* 0 => no table*/
-  ByteOffset          keySequenceDataIndexOffset; /* 0 => no table*/
+  UInt32              keyModifiersToTableNumOffset; /* required*/
+  UInt32              keyToCharTableIndexOffset; /* required*/
+  UInt32              keyStateRecordsIndexOffset; /* 0 => no table*/
+  UInt32              keyStateTerminatorsOffset; /* 0 => no table*/
+  UInt32              keySequenceDataIndexOffset; /* 0 => no table*/
 };
 typedef struct UCKeyboardTypeHeader     UCKeyboardTypeHeader;
 struct UCKeyboardLayout {
                                               /* header only; other tables accessed via offsets*/
   UInt16              keyLayoutHeaderFormat;  /* =kUCKeyLayoutHeaderFormat*/
   UInt16              keyLayoutDataVersion;   /* 0x0100 = 1.0, 0x0110 = 1.1, etc.*/
-  ByteOffset          keyLayoutFeatureInfoOffset; /* may be 0                       */
-  ItemCount           keyboardTypeCount;      /* Dimension for keyboardTypeHeadList[]     */
+  UInt32              keyLayoutFeatureInfoOffset; /* may be 0                       */
+  UInt32              keyboardTypeCount;      /* Dimension for keyboardTypeHeadList[]     */
   UCKeyboardTypeHeader  keyboardTypeList[1];
 };
 typedef struct UCKeyboardLayout         UCKeyboardLayout;
@@ -177,14 +177,14 @@ typedef struct UCKeyboardLayout         UCKeyboardLayout;
 struct UCKeyLayoutFeatureInfo {
   UInt16              keyLayoutFeatureInfoFormat; /* =kUCKeyLayoutFeatureInfoFormat*/
   UInt16              reserved;
-  UniCharCount        maxOutputStringLength;  /* longest possible output string*/
+  UInt32              maxOutputStringLength;  /* longest possible output string*/
 };
 typedef struct UCKeyLayoutFeatureInfo   UCKeyLayoutFeatureInfo;
 /* -------------------------------------------------------------------------------------------------*/
 struct UCKeyModifiersToTableNum {
   UInt16              keyModifiersToTableNumFormat; /* =kUCKeyModifiersToTableNumFormat*/
   UInt16              defaultTableNum;        /* For modifier combos not in tableNum[]*/
-  ItemCount           modifiersCount;         /* Dimension for tableNum[]*/
+  UInt32              modifiersCount;         /* Dimension for tableNum[]*/
   UInt8               tableNum[1];
 
                                               /* Then there is padding to a 4-byte boundary with bytes containing 0, if necessary.*/
@@ -194,8 +194,8 @@ typedef struct UCKeyModifiersToTableNum UCKeyModifiersToTableNum;
 struct UCKeyToCharTableIndex {
   UInt16              keyToCharTableIndexFormat; /* =kUCKeyToCharTableIndexFormat*/
   UInt16              keyToCharTableSize;     /* Max keyCode (128 for ADB keyboards)*/
-  ItemCount           keyToCharTableCount;    /* Dimension for keyToCharTableOffsets[] (usually 6 to 12 tables)*/
-  ByteOffset          keyToCharTableOffsets[1];
+  UInt32              keyToCharTableCount;    /* Dimension for keyToCharTableOffsets[] (usually 6 to 12 tables)*/
+  UInt32              keyToCharTableOffsets[1];
 
                                               /* Each offset in keyToCharTableOffsets is from the beginning of the resource to a*/
                                               /* table as follows:*/
@@ -208,7 +208,7 @@ typedef struct UCKeyToCharTableIndex    UCKeyToCharTableIndex;
 struct UCKeyStateRecordsIndex {
   UInt16              keyStateRecordsIndexFormat; /* =kUCKeyStateRecordsIndexFormat*/
   UInt16              keyStateRecordCount;    /* Dimension for keyStateRecordOffsets[]*/
-  ByteOffset          keyStateRecordOffsets[1];
+  UInt32              keyStateRecordOffsets[1];
 
                                               /* Each offset in keyStateRecordOffsets is from the beginning of the resource to a*/
                                               /* UCKeyStateRecord. These UCKeyStateRecords follow the keyStateRecordOffsets[] array.*/
@@ -423,12 +423,24 @@ InvokeIndexToUCStringUPP(
   UCTypeSelectOptions *  tsOptions,
   IndexToUCStringUPP     userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline IndexToUCStringUPP                                   NewIndexToUCStringUPP(IndexToUCStringProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeIndexToUCStringUPP(IndexToUCStringUPP) { }
+    inline Boolean                                              InvokeIndexToUCStringUPP(UInt32 index, void * listDataPtr, void * refcon, CFStringRef * outString, UCTypeSelectOptions * tsOptions, IndexToUCStringUPP userUPP) { return (*userUPP)(index, listDataPtr, refcon, outString, tsOptions); }
+  #else
+    #define NewIndexToUCStringUPP(userRoutine)                  ((IndexToUCStringUPP)userRoutine)
+    #define DisposeIndexToUCStringUPP(userUPP)
+    #define InvokeIndexToUCStringUPP(index, listDataPtr, refcon, outString, tsOptions, userUPP) (*userUPP)(index, listDataPtr, refcon, outString, tsOptions)
+  #endif
+#endif
+
 /*
    kUCTypeSelectMaxListSize can be used for any listSize arguement
    when the length of the list is unknown.
 */
 enum {
-  kUCTypeSelectMaxListSize      = (unsigned long)0xFFFFFFFF
+  kUCTypeSelectMaxListSize      = (UInt32)0xFFFFFFFF
 };
 
 
@@ -1111,7 +1123,7 @@ UCTypeSelectWalkList(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

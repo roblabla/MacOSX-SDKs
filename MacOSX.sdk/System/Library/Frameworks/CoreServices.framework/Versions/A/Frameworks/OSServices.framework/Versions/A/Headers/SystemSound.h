@@ -3,7 +3,7 @@
  
      Contains:   SystemSound include file
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -60,7 +60,7 @@ typedef STACK_UPP_TYPE(SystemSoundCompletionProcPtr)            SystemSoundCompl
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SystemSoundCompletionUPP
-NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeSystemSoundCompletionUPP()
@@ -71,7 +71,7 @@ NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSystemSoundCompletionUPP(SystemSoundCompletionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+DisposeSystemSoundCompletionUPP(SystemSoundCompletionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeSystemSoundCompletionUPP()
@@ -85,13 +85,29 @@ extern OSStatus
 InvokeSystemSoundCompletionUPP(
   SystemSoundActionID       actionID,
   void *                    userData,
-  SystemSoundCompletionUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SystemSoundCompletionUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SystemSoundCompletionUPP                             NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSystemSoundCompletionUPP(SystemSoundCompletionUPP) { }
+    inline OSStatus                                             InvokeSystemSoundCompletionUPP(SystemSoundActionID actionID, void * userData, SystemSoundCompletionUPP userUPP) { return (*userUPP)(actionID, userData); }
+  #else
+    #define NewSystemSoundCompletionUPP(userRoutine)            ((SystemSoundCompletionUPP)userRoutine)
+    #define DisposeSystemSoundCompletionUPP(userUPP)
+    #define InvokeSystemSoundCompletionUPP(actionID, userData, userUPP) (*userUPP)(actionID, userData)
+  #endif
+#endif
 
 /* ================================================================================ */
 /* Public APIs                                                                      */
 /* ================================================================================ */
 /*
- *  AlertSoundPlay()
+ *  AlertSoundPlay()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesPlayAlertSound(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Play an Alert Sound
@@ -101,16 +117,20 @@ InvokeSystemSoundCompletionUPP(
  *    playing alert sound.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AlertSoundPlay(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+AlertSoundPlay(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AlertSoundPlayCustomSound()
+ *  AlertSoundPlayCustomSound()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesPlayAlertSound(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Play a User designated Alert Sound
@@ -126,16 +146,20 @@ AlertSoundPlay(void)                                          AVAILABLE_MAC_OS_X
  *      with AlertSound behavior.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AlertSoundPlayCustomSound(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+AlertSoundPlayCustomSound(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SystemSoundPlay()
+ *  SystemSoundPlay()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesPlaySystemSound(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Play a System Sound
@@ -152,16 +176,20 @@ AlertSoundPlayCustomSound(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X
  *      played.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SystemSoundGetActionID()
+ *  SystemSoundGetActionID()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesCreateSystemSoundID(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Create a 'custom' System Sound by providing an audio file.
@@ -188,18 +216,22 @@ SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X
  *      turn can be passed to SystemSoundPlay().
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 SystemSoundGetActionID(
   const FSRef *          userFile,
-  SystemSoundActionID *  outAction)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  SystemSoundActionID *  outAction)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SystemSoundRemoveActionID()
+ *  SystemSoundRemoveActionID()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesDisposeSystemSoundID(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Remove a 'custom' System Sound.
@@ -217,16 +249,20 @@ SystemSoundGetActionID(
  *      removed.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-SystemSoundRemoveActionID(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+SystemSoundRemoveActionID(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SystemSoundSetCompletionRoutine()
+ *  SystemSoundSetCompletionRoutine()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesAddSystemSoundCompletion(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Call the provided Completion Routine when the provided
@@ -261,7 +297,7 @@ SystemSoundRemoveActionID(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X
  *      A void * to pass user data to the completion routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -271,11 +307,15 @@ SystemSoundSetCompletionRoutine(
   CFRunLoopRef               inRunLoop,
   CFStringRef                inRunLoopMode,
   SystemSoundCompletionUPP   inCompletionRoutine,
-  void *                     inUserData)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  void *                     inUserData)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SystemSoundRemoveCompletionRoutine()
+ *  SystemSoundRemoveCompletionRoutine()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use AudioServicesRemoveSystemSoundCompletion(). Found in
+ *    <AudioToolbox/AudioServices.h>
  *  
  *  Summary:
  *    Remove the Completion Routine being used for the provided
@@ -293,12 +333,12 @@ SystemSoundSetCompletionRoutine(
  *      completion routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SystemSoundRemoveCompletionRoutine(SystemSoundActionID inAction) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SystemSoundRemoveCompletionRoutine(SystemSoundActionID inAction) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 

@@ -1,5 +1,5 @@
 /*	NSPortMessage.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,7 +11,7 @@
     NSPort 		*localPort;
     NSPort 		*remotePort;
     NSMutableArray 	*components;
-    unsigned		msgid;
+    uint32_t		msgid;
     void		*reserved2;
     void		*reserved;
 }
@@ -23,6 +23,8 @@
 - (NSPort *)sendPort;
 - (BOOL)sendBeforeDate:(NSDate *)date;
 
-- (unsigned)msgid;
-- (void)setMsgid:(unsigned)msgid;
+- (uint32_t)msgid;
+- (void)setMsgid:(uint32_t)msgid;
+
 @end
+

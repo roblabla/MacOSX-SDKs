@@ -2,7 +2,7 @@
 //  ABActionsC.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #ifndef __ABACTIONSC__

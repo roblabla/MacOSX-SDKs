@@ -1,5 +1,5 @@
 /*	NSPropertyList.h
-	Copyright (c) 2002-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2002-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,19 +9,19 @@
 
 @class NSData, NSString;
 
-typedef enum {
+enum {
     NSPropertyListImmutable = kCFPropertyListImmutable,
     NSPropertyListMutableContainers = kCFPropertyListMutableContainers,
     NSPropertyListMutableContainersAndLeaves = kCFPropertyListMutableContainersAndLeaves
-} NSPropertyListMutabilityOptions;
+};
+typedef NSUInteger NSPropertyListMutabilityOptions;
 
-typedef enum {
+enum {
     NSPropertyListOpenStepFormat = kCFPropertyListOpenStepFormat,
     NSPropertyListXMLFormat_v1_0 = kCFPropertyListXMLFormat_v1_0,
     NSPropertyListBinaryFormat_v1_0 = kCFPropertyListBinaryFormat_v1_0
-} NSPropertyListFormat;
-
-// Note: the old-style binary plist format of NSSerializer and NSDeserializer is version "0.5"
+};
+typedef NSUInteger NSPropertyListFormat;
 
 @interface NSPropertyListSerialization : NSObject {
     void *reserved[6];

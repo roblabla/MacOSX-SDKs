@@ -1,11 +1,12 @@
 /*
 	NSFontDescriptor.h
 	Application Kit
-	Copyright (c) 2003-2005, Apple Computer, Inc.
+	Copyright (c) 2003-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
@@ -25,7 +26,7 @@ typedef uint32_t NSFontSymbolicTraits;
     @abstract Stylistic class values.
     @discussion NSFontFamilyClass classifies certain stylistic qualities of the font. These values correspond closely to the font class values in the OpenType 'OS/2' table. The class values are bundled in the upper four bits of the NSFontSymbolicTraits and can be accessed via NSFontFamilyClassMask. For specific meaning of each identifier, refer to the OpenType specification.
  */
-typedef enum {
+enum {
     NSFontUnknownClass = 0 << 28,
     NSFontOldStyleSerifsClass = 1 << 28,
     NSFontTransitionalSerifsClass = 2 << 28,
@@ -37,7 +38,8 @@ typedef enum {
     NSFontOrnamentalsClass = 9 << 28,
     NSFontScriptsClass = 10 << 28,
     NSFontSymbolicClass = 12 << 28
-} NSFontFamilyClass;	
+};	
+typedef uint32_t NSFontFamilyClass;
 
 enum {
     NSFontFamilyClassMask = 0xF0000000
@@ -70,7 +72,7 @@ enum {
 /* Core attribute access */
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSString *)postscriptName;
-- (float)pointSize;
+- (CGFloat)pointSize;
 - (NSAffineTransform *)matrix;
 - (NSFontSymbolicTraits)symbolicTraits;
 
@@ -81,7 +83,7 @@ enum {
 
 /* Instantiation */
 + (NSFontDescriptor *)fontDescriptorWithFontAttributes:(NSDictionary *)attributes;
-+ (NSFontDescriptor *)fontDescriptorWithName:(NSString *)fontName size:(float)size;
++ (NSFontDescriptor *)fontDescriptorWithName:(NSString *)fontName size:(CGFloat)size;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 + (NSFontDescriptor *)fontDescriptorWithName:(NSString *)fontName matrix:(NSAffineTransform *)matrix;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
@@ -93,9 +95,13 @@ enum {
 */
 - (NSArray *)matchingFontDescriptorsWithMandatoryKeys:(NSSet *)mandatoryKeys;
 
+/* Returns a "normalized" font descriptor matching the receiver. It is the first element returned from -matchingFontDescriptorsWithMandatoryKeys:. mandatoryKeys is an NSSet instance containing keys that are required to be identical in order to be matched. mandatoryKeys can be nil.
+ */
+- (NSFontDescriptor *)matchingFontDescriptorWithMandatoryKeys:(NSSet *)mandatoryKeys AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 - (NSFontDescriptor *)fontDescriptorByAddingAttributes:(NSDictionary *)attributes; // the new attributes take precedence over the existing ones in the receiver
 - (NSFontDescriptor *)fontDescriptorWithSymbolicTraits:(NSFontSymbolicTraits)symbolicTraits;
-- (NSFontDescriptor *)fontDescriptorWithSize:(float)newPointSize;
+- (NSFontDescriptor *)fontDescriptorWithSize:(CGFloat)newPointSize;
 - (NSFontDescriptor *)fontDescriptorWithMatrix:(NSAffineTransform *)matrix;
 - (NSFontDescriptor *)fontDescriptorWithFace:(NSString *)newFace;
 - (NSFontDescriptor *)fontDescriptorWithFamily:(NSString *)newFamily;
@@ -117,6 +123,7 @@ APPKIT_EXTERN NSString *NSFontCharacterSetAttribute             AVAILABLE_MAC_OS
 APPKIT_EXTERN NSString *NSFontCascadeListAttribute              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // An NSArray instance. Each member of the array is a sub-descriptor. (default: the system default cascading list for user's locale)
 APPKIT_EXTERN NSString *NSFontTraitsAttribute                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // An NSDictionary instance fully describing font traits. (default: supplied by font)
 APPKIT_EXTERN NSString *NSFontFixedAdvanceAttribute             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // A float represented as an NSNumber. The value overrides glyph advancement specified by the font. (default: 0.0)
+APPKIT_EXTERN NSString *NSFontFeatureSettingsAttribute          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // An array of dictionaries representing non-default font feature settings. Each dictionary contains NSFontFeatureTypeIdentifierKey and NSFontFeatureSelectorIdentifierKey.
 
 APPKIT_EXTERN NSString *NSFontColorAttribute 			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4; // This attribute is obsolete. Use NSForegroundColorAttributeName instead.
 
@@ -157,3 +164,12 @@ APPKIT_EXTERN NSString *NSFontVariationAxisDefaultValueKey AVAILABLE_MAC_OS_X_VE
 /* This key is used with a variation axis dictionary to get the localized variation axis name.
 */
 APPKIT_EXTERN NSString *NSFontVariationAxisNameKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Font feature keys */
+/* A number object specifying font feature type such as ligature, character shape, etc. Refer to ATS/SFNTLayoutTypes.h for predefined feature types.
+ */
+APPKIT_EXTERN NSString *NSFontFeatureTypeIdentifierKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* A number object specifying font feature selector such as common ligature off, traditional character shape, etc. Refer to ATS/SFNTLayoutTypes.h for predefined feature selectors.
+ */
+APPKIT_EXTERN NSString *NSFontFeatureSelectorIdentifierKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;

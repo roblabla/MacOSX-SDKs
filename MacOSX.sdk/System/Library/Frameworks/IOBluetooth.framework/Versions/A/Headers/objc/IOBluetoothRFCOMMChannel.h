@@ -172,7 +172,7 @@
     @result An error code value. 0 if successful. 
 */
 
-- (IOReturn)write:(void *)data length:(UInt16)length sleep:(BOOL)sleep;
+- (IOReturn)write:(void *)data length:(UInt16)length sleep:(BOOL)sleep DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
@@ -226,7 +226,7 @@
     @result An error code value. 0 if successful.
 */
 
-- (IOReturn)writeSimple:(void *)data length:(UInt16)length sleep:(BOOL)sleep bytesSent:(UInt32 *)numBytesSent;
+- (IOReturn)writeSimple:(void *)data length:(UInt16)length sleep:(BOOL)sleep bytesSent:(UInt32 *)numBytesSent DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 /*!
     @method  setSerialParameters:dataBits:parity:stopBits:
@@ -265,7 +265,7 @@
     @result An error code value. 0 if successful. 
 */
 
-- (IOReturn)registerIncomingDataListener:(IOBluetoothRFCOMMChannelIncomingDataListener)listener refCon:(void *)refCon;
+- (IOReturn)registerIncomingDataListener:(IOBluetoothRFCOMMChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 /*!
     @method  registerIncomingEventListener:refCon:refCon:
@@ -307,7 +307,7 @@
 				IOBluetoothRFCOMMChannelDelegate.
 
 				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
-	@param		delegate	The object that will play the role of channel delegate.
+	@param		delegate	The object that will play the role of channel delegate [NOTE the rfcomm channel will reatin the delegate].
 	@result		Returns kIOReturnSuccess if the delegate is successfully registered.
 */
 
@@ -369,7 +369,7 @@
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
-// Informal protocol to describe the RFCOMM channel delegate methods:
+// protocol to describe the RFCOMM channel delegate methods:
 // If the developer wishes to take advantage of the asynchronous API in Objective C
 // these are the methods that may be implemented:
 

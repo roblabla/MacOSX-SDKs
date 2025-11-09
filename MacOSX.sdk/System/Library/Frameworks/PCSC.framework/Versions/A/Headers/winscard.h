@@ -20,96 +20,117 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-/******************************************************************
+/*
+ * MUSCLE SmartCard Development ( http://www.linuxnet.com )
+ *
+ * Copyright (C) 1999-2003
+ *  David Corcoran <corcoran@linuxnet.com>
+ *  Ludovic Rousseau <ludovic.rousseau@free.fr>
+ *
+ * $Id: winscard.h 2072 2006-06-06 09:31:07Z rousseau $
+ */
 
-	MUSCLE SmartCard Development ( http://www.linuxnet.com )
-	    Title  : winscard.h
-	    Package: pcsc lite
-            Author : David Corcoran
-            Date   : 7/27/99
- 	    License: Copyright (C) 1999 David Corcoran
-	             <corcoran@linuxnet.com>
-            Purpose: This handles smartcard reader communications. 
-	            
-
-********************************************************************/
+/**
+ * @file
+ * @brief This handles smartcard reader communications.
+ */
 
 #ifndef __winscard_h__
 #define __winscard_h__
 
-#ifndef __APPLE__
-#include <pcsclite.h>
-#else
 #include <PCSC/pcsclite.h>
-#endif
-
 #include <stdint.h>
+//#include "pcscexport.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-	int32_t SCardEstablishContext(uint32_t dwScope,
+#ifndef PCSC_API
+#define PCSC_API
+#endif
+
+	PCSC_API int32_t SCardEstablishContext(uint32_t dwScope,
 		const void *pvReserved1, const void *pvReserved2, LPSCARDCONTEXT phContext);
 
-	int32_t SCardReleaseContext(int32_t hContext);
+	PCSC_API int32_t SCardReleaseContext(SCARDCONTEXT hContext);
 
-	int32_t SCardSetTimeout(int32_t hContext, uint32_t dwTimeout);
+	PCSC_API int32_t SCardSetTimeout(SCARDCONTEXT hContext, uint32_t dwTimeout);
 
-	int32_t SCardConnect(int32_t hContext,
+	PCSC_API int32_t SCardConnect(SCARDCONTEXT hContext,
 		const char *szReader,
 		uint32_t dwShareMode,
 		uint32_t dwPreferredProtocols,
-		int32_t *phCard, uint32_t *pdwActiveProtocol);
+		LPSCARDHANDLE phCard, uint32_t *pdwActiveProtocol);
 
-	int32_t SCardReconnect(int32_t hCard,
+	PCSC_API int32_t SCardReconnect(SCARDHANDLE hCard,
 		uint32_t dwShareMode,
 		uint32_t dwPreferredProtocols,
 		uint32_t dwInitialization, uint32_t *pdwActiveProtocol);
 
-	int32_t SCardDisconnect(int32_t hCard, uint32_t dwDisposition);
+	PCSC_API int32_t SCardDisconnect(SCARDHANDLE hCard, uint32_t dwDisposition);
 
-	int32_t SCardBeginTransaction(int32_t hCard);
+	PCSC_API int32_t SCardBeginTransaction(SCARDHANDLE hCard);
 
-	int32_t SCardEndTransaction(int32_t hCard, uint32_t dwDisposition);
+	PCSC_API int32_t SCardEndTransaction(SCARDHANDLE hCard, uint32_t dwDisposition);
 
-	int32_t SCardCancelTransaction(int32_t hCard);
+	PCSC_API int32_t SCardCancelTransaction(SCARDHANDLE hCard);
 
-	int32_t SCardStatus(int32_t hCard,
-		char *mszReaderNames,
-		uint32_t *pcchReaderLen,
+	PCSC_API int32_t SCardStatus(SCARDHANDLE hCard,
+		char *mszReaderNames, uint32_t *pcchReaderLen,
 		uint32_t *pdwState,
 		uint32_t *pdwProtocol,
 		unsigned char *pbAtr, uint32_t *pcbAtrLen);
 
-	int32_t SCardGetStatusChange(int32_t hContext,
+	PCSC_API int32_t SCardGetStatusChange(SCARDCONTEXT hContext,
 		uint32_t dwTimeout,
 		LPSCARD_READERSTATE_A rgReaderStates, uint32_t cReaders);
 
-	int32_t SCardControl(int32_t hCard,
-		const unsigned char *pbSendBuffer,
-		uint32_t cbSendLength,
-		unsigned char *pbRecvBuffer, uint32_t *pcbRecvLength);
+	PCSC_API int32_t SCardControl(SCARDHANDLE hCard,
+		const void *pbSendBuffer, uint32_t cbSendLength,
+		void *pbRecvBuffer, uint32_t *pcbRecvLength);
 
-	int32_t SCardTransmit(int32_t hCard,
+	PCSC_API int32_t SCardControl132(SCARDHANDLE hCard, uint32_t dwControlCode,
+		const void *pbSendBuffer, uint32_t cbSendLength,
+		void *pbRecvBuffer, uint32_t cbRecvLength, uint32_t *lpBytesReturned);
+
+	PCSC_API int32_t SCardTransmit(SCARDHANDLE hCard,
 		LPCSCARD_IO_REQUEST pioSendPci,
-		const unsigned char *pbSendBuffer,
-		uint32_t cbSendLength,
+		const unsigned char *pbSendBuffer, uint32_t cbSendLength,
 		LPSCARD_IO_REQUEST pioRecvPci,
 		unsigned char *pbRecvBuffer, uint32_t *pcbRecvLength);
 
-	int32_t SCardListReaderGroups(int32_t hContext,
+	PCSC_API int32_t SCardListReaderGroups(SCARDCONTEXT hContext,
 		char *mszGroups, uint32_t *pcchGroups);
 
-	int32_t SCardListReaders(int32_t hContext,
+	PCSC_API int32_t SCardListReaders(SCARDCONTEXT hContext,
 		const char *mszGroups,
 		char *mszReaders, uint32_t *pcchReaders);
 
-	int32_t SCardCancel(int32_t hContext);
+	PCSC_API int32_t SCardCancel(SCARDCONTEXT hContext);
+
+	PCSC_API int32_t SCardGetAttrib(SCARDHANDLE hCard, uint32_t dwAttrId,
+		uint8_t *pbAttr, uint32_t *pcbAttrLen);
+
+	PCSC_API int32_t SCardSetAttrib(SCARDHANDLE hCard, uint32_t dwAttrId,
+		const uint8_t *pbAttr, uint32_t cbAttrLen);
+
+	void SCardUnload(void);
 
 #ifdef __cplusplus
 }
 #endif
 
+/*
+	To support the newer version of SCardControl, we define it
+	as follows. The old version number was 1.1.2, the new call
+	appears in 1.3.2 of pcsc-lite (or perhaps earlier).
+*/
+
+#if !defined(USE_SCARD_CONTROL_112)
+#define SCardControl SCardControl132
+#endif /* USE_SCARD_CONTROL_112 */
+
 #endif
+

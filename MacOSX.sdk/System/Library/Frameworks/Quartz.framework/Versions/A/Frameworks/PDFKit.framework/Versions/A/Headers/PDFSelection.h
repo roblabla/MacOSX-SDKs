@@ -1,21 +1,47 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFSelection.h
-// ======================================================================================================================
+// =====================================================================================================================
+
+
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFPage.h>
 
 
 @class PDFPage, PDFDestination, PDFSelectionPrivateVars;
 
 
-@interface PDFSelection : NSObject
+@interface PDFSelection : NSObject <NSCopying>
 {
 @private
     PDFSelectionPrivateVars *_pdfPriv;
 }
 
+
+// -------- initialization
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Returns and empty PDFSelection.  Generally this is not useful but you can use this empty PDFSelection as a container 
+// into which you -[addSelection] or -[addSelections] below.
+- (id) initWithDocument: (PDFDocument *) document;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+
 // -------- accessors
 
 // Array of pages covered by the selection.  These are sorted by page index.
 - (NSArray *) pages;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// If no color is ever specified, PDFSelections will draw using [NSColor selectedTextBackgroundColor] when active and 
+// [NSColor secondarySelectedControlColor] when not active.  Calling -[setColor] will force the specified color to be 
+// used for both active and inactive drawing.
+- (NSColor *) color;
+- (void) setColor: (NSColor *) color;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // String representing the text covered by the selection. May contain line-feeds.
 - (NSString *) string;
@@ -24,16 +50,35 @@
 // Given a PDFPage, returns the bounds in page-space of the text covered by the selection on that page.
 - (NSRect) boundsForPage: (PDFPage *) page;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Returns an array of PDFSelection objects - one for each line of text covered by the receiver.  For example if the 
+// receiver PDFSelection represents a selected paragraph, calling this method would return several PDFSelections - one 
+// for each line of text in the paragraph.
+- (NSArray *) selectionsByLine;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 // -------- modifying
 
-// Add a selection to this selection. Selections do not have to be contiguous. If the selection added overlaps with this 
+// Add a selection to this selection. Selections don't have to be contiguous. If the selection added overlaps with this 
 // selection, overlaps are removed.
 - (void) addSelection: (PDFSelection *) selection;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// For adding several selections, you can get better performance calling -[addSelections:] and passing in an array of 
+// PDFSelections than calling -[addSelection] above inside a loop.  It is the "normalization" (removing the overlaps) 
+// that can be slow when adding a selection to another.  This function adds all the selections first and then 
+// normalizes just once at the end.
+- (void) addSelections: (NSArray *) selections;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 // Extends the selection at either end. Selections can be extended right off onto neighboring pages even to include the 
 // entire PDF document.
-- (void) extendSelectionAtEnd: (int) chars;
-- (void) extendSelectionAtStart: (int) chars;
+- (void) extendSelectionAtEnd: (NSInteger) succeed;
+- (void) extendSelectionAtStart: (NSInteger) precede;
 
 // -------- rendering
 

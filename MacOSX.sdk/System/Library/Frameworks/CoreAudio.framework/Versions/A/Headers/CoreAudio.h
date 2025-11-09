@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
 
-     Copyright:  (c) 1985-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

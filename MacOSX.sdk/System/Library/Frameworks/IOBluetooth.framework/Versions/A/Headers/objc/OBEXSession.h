@@ -8,8 +8,9 @@
 
 #import <IOBluetooth/OBEX.h>
 
+#import <Foundation/Foundation.h>
 
-#pragma mark еее Types еее
+#pragma mark === Types ===
 
 typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 
@@ -42,7 +43,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 */
 
 #pragma mark -
-#pragma mark еее OBEXSession Interface еее
+#pragma mark === OBEXSession Interface ===
 
 @interface OBEXSession : NSObject
 {	
@@ -62,7 +63,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 
 #if 0
 #pragma mark -
-#pragma mark еее Client Commands еее
+#pragma mark === Client Commands ===
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -254,7 +255,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 
 #if 0
 #pragma mark -
-#pragma mark еее Server Command Responses еее
+#pragma mark === Server Command Responses ===
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -443,16 +444,15 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 
 #if 0
 #pragma mark -
-#pragma mark еее Session Accessors еее
+#pragma mark === Session Accessors ===
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		getAvailableCommandPayloadLength
 	@abstract	Determine the maximum amount of data you can send in a particular command as an OBEX client session.
 	@param		inOpCode		The opcode you are interested in sending (as a client).
-	@result		The maximum amount of data a particular packet can handle, after accounting for the command/ overhead.
-	@discussion	You should call this only if you are a server and are responding to a client's command.
-				Each OBEX Command has a certain amount of overhead. Since the negotiated max packet length does
+	@result		The maximum amount of data a particular packet can handle, after accounting for any command overhead.
+	@discussion	Each OBEX Command has a certain amount of overhead. Since the negotiated max packet length does
 				not indicate what the maximum data amount you can send in a particular command's packet, you can
 				use this function to determine how much data to provide in optional headers or body data headers.
 */
@@ -463,10 +463,8 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 /*!	@method		getAvailableCommandResponsePayloadLength
 	@abstract	Determine the maximum amount of data you can send in a particular command response as an OBEX server session.
 	@param		inOpCode		The opcode you are interested in responding to (as a server).
-	@param		inIsResponse	Whether or not you the opcode will be sent as a command (client) or as a command response (server).
-	@result		The maximum amount of data a particular packet can handle, after accounting for the command response overhead.
-	@discussion	You should call this only if you are a server and are responding to a client's command.
-				Each OBEX Command response has a certain amount of overhead. Since the negotiated max packet length does
+	@result		The maximum amount of data a particular packet can handle, after accounting for any command response overhead.
+	@discussion	Each OBEX Command response has a certain amount of overhead. Since the negotiated max packet length does
 				not indicate what the maximum data amount you can send in a particular response's packet, you can
 				use this function to determine how much data to provide in optional headers or body data headers.
 */
@@ -531,7 +529,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	
 #if 0
 #pragma mark -
-#pragma mark еее Transport Subclassing еее
+#pragma mark === Transport Subclassing ===
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------

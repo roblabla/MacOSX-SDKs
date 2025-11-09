@@ -1,5 +1,7 @@
-/*	NSScriptExecutionContext.h
-	Copyright (c) 1997-2005, Apple, Inc. All rights reserved.
+/*
+	NSScriptExecutionContext.h
+	Copyright (c) 1997-2007, Apple Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,8 +13,7 @@
     id _topLevelObject;
     id _objectBeingTested;
     id _rangeContainerObject;
-
-    NSConnection *_connection;
+    id _moreVars;
 }
 
 + (NSScriptExecutionContext *)sharedScriptExecutionContext;

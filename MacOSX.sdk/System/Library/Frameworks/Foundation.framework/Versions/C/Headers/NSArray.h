@@ -1,18 +1,19 @@
 /*	NSArray.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSEnumerator.h>
 #import <Foundation/NSRange.h>
 
-@class NSData, NSDictionary, NSEnumerator, NSIndexSet, NSString, NSURL;
+@class NSData, NSIndexSet, NSString, NSURL;
 
 /****************	Immutable Array		****************/
 
-@interface NSArray : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSArray : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
 
-- (unsigned)count;
-- (id)objectAtIndex:(unsigned)index;
+- (NSUInteger)count;
+- (id)objectAtIndex:(NSUInteger)index;
     
 @end
 
@@ -23,22 +24,22 @@
 - (NSString *)componentsJoinedByString:(NSString *)separator;
 - (BOOL)containsObject:(id)anObject;
 - (NSString *)description;
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale;
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale indent:(unsigned)level;
+- (NSString *)descriptionWithLocale:(id)locale;
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (id)firstObjectCommonWithArray:(NSArray *)otherArray;
 - (void)getObjects:(id *)objects;
 - (void)getObjects:(id *)objects range:(NSRange)range;
-- (unsigned)indexOfObject:(id)anObject;
-- (unsigned)indexOfObject:(id)anObject inRange:(NSRange)range;
-- (unsigned)indexOfObjectIdenticalTo:(id)anObject;
-- (unsigned)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
+- (NSUInteger)indexOfObject:(id)anObject;
+- (NSUInteger)indexOfObject:(id)anObject inRange:(NSRange)range;
+- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject;
+- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
 - (BOOL)isEqualToArray:(NSArray *)otherArray;
 - (id)lastObject;
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
 - (NSData *)sortedArrayHint;
-- (NSArray *)sortedArrayUsingFunction:(int (*)(id, id, void *))comparator context:(void *)context;
-- (NSArray *)sortedArrayUsingFunction:(int (*)(id, id, void *))comparator context:(void *)context hint:(NSData *)hint;
+- (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context;
+- (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context hint:(NSData *)hint;
 - (NSArray *)sortedArrayUsingSelector:(SEL)comparator;
 - (NSArray *)subarrayWithRange:(NSRange)range;
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
@@ -56,21 +57,20 @@
 @interface NSArray (NSArrayCreation)
 
 + (id)array;
++ (id)arrayWithObject:(id)anObject;
++ (id)arrayWithObjects:(const id *)objects count:(NSUInteger)cnt;
++ (id)arrayWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (id)arrayWithArray:(NSArray *)array;
+
+- (id)initWithObjects:(const id *)objects count:(NSUInteger)cnt;
+- (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)initWithArray:(NSArray *)array;
+- (id)initWithArray:(NSArray *)array copyItems:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 + (id)arrayWithContentsOfFile:(NSString *)path;
 + (id)arrayWithContentsOfURL:(NSURL *)url;
-+ (id)arrayWithObject:(id)anObject;
-+ (id)arrayWithObjects:(id)firstObj, ...;
-- (id)initWithArray:(NSArray *)array;
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (id)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
-#endif
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;
-- (id)initWithObjects:(id *)objects count:(unsigned)count;
-- (id)initWithObjects:(id)firstObj, ...;
-
-+ (id)arrayWithArray:(NSArray *)array;
-+ (id)arrayWithObjects:(id *)objs count:(unsigned)cnt;
 
 @end
 
@@ -79,29 +79,29 @@
 @interface NSMutableArray : NSArray
 
 - (void)addObject:(id)anObject;
-- (void)insertObject:(id)anObject atIndex:(unsigned)index;
+- (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;
-- (void)removeObjectAtIndex:(unsigned)index;
-- (void)replaceObjectAtIndex:(unsigned)index withObject:(id)anObject;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
 
 @end
 
 @interface NSMutableArray (NSExtendedMutableArray)
     
 - (void)addObjectsFromArray:(NSArray *)otherArray;
-- (void)exchangeObjectAtIndex:(unsigned)idx1 withObjectAtIndex:(unsigned)idx2;
+- (void)exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2;
 - (void)removeAllObjects;
 - (void)removeObject:(id)anObject inRange:(NSRange)range;
 - (void)removeObject:(id)anObject;
 - (void)removeObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
 - (void)removeObjectIdenticalTo:(id)anObject;
-- (void)removeObjectsFromIndices:(unsigned *)indices numIndices:(unsigned)count;
+- (void)removeObjectsFromIndices:(NSUInteger *)indices numIndices:(NSUInteger)cnt;
 - (void)removeObjectsInArray:(NSArray *)otherArray;
 - (void)removeObjectsInRange:(NSRange)range;
 - (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray range:(NSRange)otherRange;
 - (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray;
 - (void)setArray:(NSArray *)otherArray;
-- (void)sortUsingFunction:(int (*)(id, id, void *))compare context:(void *)context;
+- (void)sortUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context;
 - (void)sortUsingSelector:(SEL)comparator;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -114,8 +114,8 @@
 
 @interface NSMutableArray (NSMutableArrayCreation)
 
-+ (id)arrayWithCapacity:(unsigned)numItems;
-- (id)initWithCapacity:(unsigned)numItems;
++ (id)arrayWithCapacity:(NSUInteger)numItems;
+- (id)initWithCapacity:(NSUInteger)numItems;
 
 @end
 

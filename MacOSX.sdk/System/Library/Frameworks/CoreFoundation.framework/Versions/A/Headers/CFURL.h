@@ -1,5 +1,5 @@
 /*	CFURL.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURL__)
@@ -9,15 +9,14 @@
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
-typedef enum {
+enum {
     kCFURLPOSIXPathStyle = 0,
     kCFURLHFSPathStyle,
     kCFURLWindowsPathStyle
-} CFURLPathStyle;
+};
+typedef CFIndex CFURLPathStyle;
     
 typedef const struct __CFURL * CFURLRef;
 
@@ -271,7 +270,7 @@ CFURLRef CFURLCreateCopyDeletingPathExtension(CFAllocatorRef allocator, CFURLRef
 CF_EXPORT
 CFIndex CFURLGetBytes(CFURLRef url, UInt8 *buffer, CFIndex bufferLength) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-typedef enum {
+enum {
 	kCFURLComponentScheme = 1,
 	kCFURLComponentNetLocation = 2,
 	kCFURLComponentPath = 3,
@@ -285,7 +284,8 @@ typedef enum {
 	kCFURLComponentParameterString = 10,
 	kCFURLComponentQuery = 11,
 	kCFURLComponentFragment = 12
-} CFURLComponentType;
+};
+typedef CFIndex CFURLComponentType;
  
 /* 
 Gets the  range of the requested component in the bytes of url, as
@@ -382,7 +382,7 @@ CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorR
 /* charactersToLeaveUnescaped.  To simply correct any non-URL characters */
 /* in an otherwise correct URL string, do: */
 
-/* newString = CFURLCreateStringByAddingPercentEscapes(NULL, origString, NULL, NULL, kCFStringEncodingUTF8); */
+/* newString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, origString, NULL, NULL, kCFStringEncodingUTF8); */
 CF_EXPORT
 CFStringRef CFURLCreateStringByAddingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveUnescaped, CFStringRef legalURLCharactersToBeEscaped, CFStringEncoding encoding);
 
@@ -397,12 +397,10 @@ CFURLRef CFURLCreateFromFSRef(CFAllocatorRef allocator, const struct FSRef *fsRe
 CF_EXPORT
 Boolean CFURLGetFSRef(CFURLRef url, struct FSRef *fsRef);
 
-#endif // __MACH__
-#endif // !CF_OPEN_SOURCE
-
-#if defined(__cplusplus)
-}
+#endif
 #endif
 
-#endif /* !__COREFOUNDATION_CFURL__ */
+CF_EXTERN_C_END
+
+#endif /* ! __COREFOUNDATION_CFURL__ */
 

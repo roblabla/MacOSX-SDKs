@@ -1,7 +1,7 @@
 /*
 	ExceptionHandlingDefines.h
 	Exception Handling
-	Copyright (c) 1998, Apple Computer, Inc.
+	Copyright (c) 1998-2006, Apple Computer, Inc.
 	All rights reserved.
 */
 

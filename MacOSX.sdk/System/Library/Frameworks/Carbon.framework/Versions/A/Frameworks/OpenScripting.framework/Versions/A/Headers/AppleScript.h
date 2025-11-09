@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Specific Interfaces.
  
-     Version:    OSA-97~629
+     Version:    OSA-122~37
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
@@ -61,7 +61,9 @@ enum {
   kASSelectInit                 = 0x1001,
   kASSelectSetSourceStyles      = 0x1002,
   kASSelectGetSourceStyles      = 0x1003,
-  kASSelectGetSourceStyleNames  = 0x1004
+  kASSelectGetSourceStyleNames  = 0x1004,
+  kASSelectCopySourceAttributes = 0x1005,
+  kASSelectSetSourceAttributes  = 0x1006
 };
 
 
@@ -93,13 +95,13 @@ enum {
 extern OSAError 
 ASInit(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
-  long                minStackSize,
-  long                preferredStackSize,
-  long                maxStackSize,
-  long                minHeapSize,
-  long                preferredHeapSize,
-  long                maxHeapSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32              modeFlags,
+  UInt32              minStackSize,
+  UInt32              preferredStackSize,
+  UInt32              maxStackSize,
+  UInt32              minHeapSize,
+  UInt32              preferredHeapSize,
+  UInt32              maxHeapSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -130,45 +132,121 @@ enum {
     Source Styles
 **************************************************************************/
 /*
- *  ASSetSourceStyles()
+ *  ASSetSourceStyles()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use ASSetSourceAttributes instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
 extern OSAError 
 ASSetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle            sourceStyles)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  STHandle            sourceStyles)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
-        ComponentCallNow(kASSelectSetSourceStyles, 4);
-        Errors:
-        errOSASystemError       operation failed
-    */
-/*
- *  ASGetSourceStyles()
+ *  ASGetSourceStyles()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use ASCopySourceAttributes instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
 extern OSAError 
 ASGetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle *          resultingSourceStyles)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  STHandle *          resultingSourceStyles)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
-        ComponentCallNow(kASSelectGetSourceStyles, 4);
-        Errors:
-        errOSASystemError       operation failed
-    */
+ *  ASCopySourceAttributes()
+ *  
+ *  Summary:
+ *    Get the current AppleScript source style attributes.
+ *  
+ *  Discussion:
+ *    A "style attribute" will typically be something meaningful to a
+ *    CFAttributedString, but clients may add any attributes they like
+ *    using ASSetSourceAttributes.
+ *  
+ *  Parameters:
+ *    
+ *    scriptingComponent:
+ *      A valid AppleScript component instance.
+ *    
+ *    resultingSourceAttributes:
+ *      If successful, *resultingSourceAttributes will be set to a
+ *      CFArray of CFDictionaries of text attributes.  The order of the
+ *      array elements corresponds to the source style constants below,
+ *      and therefore also to the names returned by
+ *      ASGetSourceStyleNames. The caller is responsible for releasing
+ *      this array.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+ASCopySourceAttributes(
+  ComponentInstance   scriptingComponent,
+  CFArrayRef *        resultingSourceAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ASSetSourceAttributes()
+ *  
+ *  Summary:
+ *    Set the AppleScript source style attributes.
+ *  
+ *  Discussion:
+ *    A "style attribute" will typically be something meaningful to a
+ *    CFAttributedString, but clients may add any attributes they like.
+ *     Because of this, you should generally call ASSetSourceAttributes
+ *    with a modified copy of the result from ASCopySourceAttributes,
+ *    not a built-from-scratch set of attributes.
+ *  
+ *  Parameters:
+ *    
+ *    scriptingComponent:
+ *      A valid AppleScript component instance.
+ *    
+ *    sourceAttributes:
+ *      A CFArray of CFDictionaries of text attributes.  The order of
+ *      the array elements corresponds to the source style constants
+ *      below, and therefore also to the names returned by
+ *      ASGetSourceStyleNames.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+ASSetSourceAttributes(
+  ComponentInstance   scriptingComponent,
+  CFArrayRef          sourceAttributes)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
 /*
  *  ASGetSourceStyleNames()
+ *  
+ *  Summary:
+ *    Returns the AppleScript source style names.
+ *  
+ *  Discussion:
+ *    This call returns an AEList of text descriptors with the names of
+ *    the source styles.  The order of the names corresponds to the
+ *    order of the source style constants, below.  The precise type of
+ *    the text descriptors is not defined; you should coerce them to
+ *    the type you want to handle.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -178,20 +256,11 @@ ASGetSourceStyles(
 extern OSAError 
 ASGetSourceStyleNames(
   ComponentInstance   scriptingComponent,
-  long                modeFlags,
+  SInt32              modeFlags,
   AEDescList *        resultingSourceStyleNamesList)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-        ComponentCallNow(kASSelectGetSourceStyleNames, 8);
-        This call returns an AEList of styled text descriptors the names of the
-        source styles in the current dialect.  The order of the names corresponds
-        to the order of the source style constants, below.  The style of each
-        name is the same as the styles returned by ASGetSourceStyles.
-        
-        Errors:
-        errOSASystemError       operation failed
-    */
+
 /*
     Elements of STHandle correspond to following categories of tokens, and
     accessed through following index constants:

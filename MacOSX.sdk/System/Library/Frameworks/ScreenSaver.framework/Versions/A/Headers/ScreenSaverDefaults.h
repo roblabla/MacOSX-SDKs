@@ -9,9 +9,13 @@
 
 @interface ScreenSaverDefaults : NSUserDefaults 
 {
-	@private
-		void			*_reserved4;
-		void			*_reserved5;
+@private
+	NSMutableDictionary		*_defaults;
+	NSMutableDictionary		*_registeredDefaults;
+	NSString				*_userName;
+	NSString				*_domainName;
+	BOOL					_dirty;
+	BOOL					_screenLockPrefChanged;
 }
 
 + (id) defaultsForModuleWithName:(NSString *)inModuleName;

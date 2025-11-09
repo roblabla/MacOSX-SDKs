@@ -2,11 +2,12 @@
 //  ABMultiValue.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer, Inc. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/ABTypedefs.h>
+#import <Foundation/NSEnumerator.h>
 
 // ================================================================================
 //	interface ABMutableMultiValue
@@ -19,7 +20,7 @@
 // point to the wrong pair. Identifiers are unique Ids.
 //
 
-@interface ABMultiValue : NSObject <NSCopying, NSMutableCopying>
+@interface ABMultiValue : NSObject <NSCopying, NSMutableCopying, NSFastEnumeration>
 {
 @protected
     NSMutableArray      *_identifiers;
@@ -28,22 +29,22 @@
     NSString            *_primaryIdentifier;
 }
 
-- (unsigned int)count;
+- (NSUInteger)count;
     // Returns the number of value/label pairs
 
-- (id)valueAtIndex:(unsigned int)index;
+- (id)valueAtIndex:(NSUInteger)index;
     // Returns a value at a given index
     // Raises if index is out of bounds
 
-- (NSString *)labelAtIndex:(unsigned int)index;
+- (NSString *)labelAtIndex:(NSUInteger)index;
     // Returns a label at a given index
     // Raises if index is out of bounds
 
-- (NSString *)identifierAtIndex:(unsigned int)index;
+- (NSString *)identifierAtIndex:(NSUInteger)index;
     // Returns an identifier at a given index
     // Raises if index is out of bounds
 
-- (unsigned int)indexForIdentifier:(NSString *)identifier;
+- (NSUInteger)indexForIdentifier:(NSString *)identifier;
     // Returns the index of a given identifier
     // Returns NSNotFound if not found
 
@@ -54,6 +55,17 @@
     // Type of this multivalue (kABMultiXXXXProperty)
     // Returns kABErrorInProperty if this multi-value is empty or not all values have
     // the same type.
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)valueForIdentifier:(NSString*)identifier;
+	//	Returns the value for a given identifier
+	//	Returns nil if the identifier is not found
+	
+- (id)labelForIdentifier:(NSString*)identifier;
+	//	Returns the value for a given identifier
+	//	Returns nil if the identifier is not found
+
+#endif
 @end
 
 // ================================================================================
@@ -70,22 +82,22 @@
     // Note: No type checking is made when adding a value. But trying to set a multivalue property
     // with a multivalue that doesn't have all its values of the same type will return an error
 
-- (NSString *)insertValue:(id)value withLabel:(NSString *)label atIndex:(unsigned int)index;
+- (NSString *)insertValue:(id)value withLabel:(NSString *)label atIndex:(NSUInteger)index;
     // Insert a value/label pair at a given index
     // Returns the identifier if successful. nil otherwise
     // Raises if value or label are nil or the index is out of bounds
     // Note: No type checking is made when adding a value. But trying to set a multivalue property
     // with a multivalue that doesn't have all its values of the same type will return an error
 
-- (BOOL)removeValueAndLabelAtIndex:(unsigned int)index;
+- (BOOL)removeValueAndLabelAtIndex:(NSUInteger)index;
     // Removes a value/label pair at a given index
     // Raises if the index is out of bounds
 
-- (BOOL)replaceValueAtIndex:(unsigned int)index withValue:(id)value;
+- (BOOL)replaceValueAtIndex:(NSUInteger)index withValue:(id)value;
     // Replaces a value at a given index
     // Raises if the index is out of bounds or the value is nil
 
-- (BOOL)replaceLabelAtIndex:(unsigned int)index withLabel:(NSString*)label;
+- (BOOL)replaceLabelAtIndex:(NSUInteger)index withLabel:(NSString*)label;
     // Replaces a label at a given index
     // Raises if the index is out of bounds or the label is nil
 

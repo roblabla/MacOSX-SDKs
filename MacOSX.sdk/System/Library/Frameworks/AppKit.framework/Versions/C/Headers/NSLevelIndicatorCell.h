@@ -1,21 +1,22 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2005, Apple Computer, Inc.
+    Copyright (c) 2004-2007, Apple Inc.
     All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSliderCell.h>
 
-typedef enum {
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+enum {
     NSRelevancyLevelIndicatorStyle,
     NSContinuousCapacityLevelIndicatorStyle,
     NSDiscreteCapacityLevelIndicatorStyle,
     NSRatingLevelIndicatorStyle
-} NSLevelIndicatorStyle;
+};
+typedef NSUInteger NSLevelIndicatorStyle;
 
 @interface NSLevelIndicatorCell : NSActionCell {
   @private
@@ -29,7 +30,8 @@ typedef enum {
     struct {
 	unsigned int indicatorStyle:4;
         unsigned int tickMarkPosition:1;
-	unsigned int reserved:27;
+        unsigned int selectable:1;
+	unsigned int reserved:26;
     } _liFlags;
     NSRect _cellFrame;
     int    _reserved1;
@@ -58,14 +60,14 @@ typedef enum {
 - (void)setTickMarkPosition:(NSTickMarkPosition)position;
 - (NSTickMarkPosition)tickMarkPosition;
 
-- (void)setNumberOfTickMarks:(int)count;
-- (int)numberOfTickMarks;
+- (void)setNumberOfTickMarks:(NSInteger)count;
+- (NSInteger)numberOfTickMarks;
 
-- (void)setNumberOfMajorTickMarks:(int)count;
-- (int)numberOfMajorTickMarks;
+- (void)setNumberOfMajorTickMarks:(NSInteger)count;
+- (NSInteger)numberOfMajorTickMarks;
 
-- (NSRect)rectOfTickMarkAtIndex:(int)index;
-- (double)tickMarkValueAtIndex:(int)index;
+- (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
+- (double)tickMarkValueAtIndex:(NSInteger)index;
 
 - (void)setImage:(NSImage*)image;
 

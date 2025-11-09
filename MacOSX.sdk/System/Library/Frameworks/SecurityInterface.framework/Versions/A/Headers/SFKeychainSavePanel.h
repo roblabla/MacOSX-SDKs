@@ -11,6 +11,10 @@
 #import <AppKit/AppKit.h>
 #include <Security/SecKeychain.h>
 
+#ifndef __APPLE_CC__
+#define __strong
+#endif
+
 /*!
 	@class SFKeychainSavePanel
     @abstract SFKeychainSavePanel is a panel and sheet interface used to create a keychain using the NSSavePanel UI.
@@ -18,6 +22,10 @@
 @interface SFKeychainSavePanel : NSSavePanel 
 {
 @private
+	/* All instance variables are private */
+#if defined (__LP64__)
+	id _reserved_SFKeychainSavePanel;
+#else
     IBOutlet NSView *_customView;
     IBOutlet NSTextField *_message;
 	NSString *_password;
@@ -30,7 +38,8 @@
 	id	_clientDelegate;			
 	void *_contextInfo;
     OSStatus _result;
-    void *_reserved_SFKeychainSavePanel;
+    id _reserved_SFKeychainSavePanel;
+#endif
 }
 
 /*!
@@ -46,7 +55,7 @@
     @param name The keychain name to be automatically filled out in the NSSave panel.
     @result a result code returned by NSSavePanel's runModalForDirectory method.
 */
-- (int)runModalForDirectory:(NSString *)path file:(NSString *)name;
+- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name;
 
 /*!
 	@method setPassword:
@@ -63,15 +72,21 @@
 - (SecKeychainRef)keychain;
 
 /*!
+    @method error
+    @abstract Returns the last error encountered by SFKeychainSavePanel.
+    @result The error object.
+*/
+- (NSError *)error;
+
+/*!
     @method beginSheetForDirectory:file:modalForWindow:modalDelegate:didEndSelector:contextInfo:
     @abstract Displays a keychain save panel as a sheet.
     @param path The path to where the keychain is created (nil for ~/Library/Keychains).
     @param name The keychain name to be automatically filled out in the NSSave panel.
     @param docWindow The panel in which the save sheet slides down; acting as a document modal window. If docWindow is nil, the behavior defaults to a standalone modal window.
     @param delegate Delegate object in which didEndSelector is a method.
-    @param didEndSelector The didEndSelector method is optional.  If implemented by the delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. didEndSelector may dismiss the keychain panel itself; otherwise it will be dismissed on return from the method.  didEndSelector should have the following signature:
-
-- (void)createPanelDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo;
+    @param didEndSelector The didEndSelector method is optional. If implemented by the delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. didEndSelector may dismiss the keychain panel itself; otherwise it will be dismissed on return from the method. didEndSelector should have the following signature:
+	- (void)createPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
     @param contextInfo Client-defined context pointer.
 */
 - (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;

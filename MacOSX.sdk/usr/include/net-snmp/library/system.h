@@ -140,12 +140,14 @@ SOFTWARE.
 
     int             mkdirhier(const char *pathname, mode_t mode,
                               int skiplast);
+    const char     *netsnmp_mktemp(void);
 #ifndef HAVE_STRLCPY
     size_t            strlcpy(char *, const char *, size_t);
 #endif
 
     int             netsnmp_os_prematch(const char *ospmname,
                                         const char *ospmrelprefix);
+    int             netsnmp_os_kernel_width(void);
 
 #ifdef __cplusplus
 }

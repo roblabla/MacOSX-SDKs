@@ -3,7 +3,7 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -39,17 +39,18 @@
 #define kAlertStdAlertOtherButton 		3
 #define kAlertStdAlertHelpButton 		4
 
-															/*  Dialog Flags for use in NewFeaturesDialog or dlgx resource  */
 #define kDialogFlagsUseThemeBackground 	0x01
 #define kDialogFlagsUseControlHierarchy  0x02
 #define kDialogFlagsHandleMovableModal 	0x04
 #define kDialogFlagsUseThemeControls 	0x08
+#define kDialogFlagsUseCompositing 		0x0100
 
 															/*  Alert Flags for use in alrx resource  */
 #define kAlertFlagsUseThemeBackground 	0x01
 #define kAlertFlagsUseControlHierarchy 	0x02
 #define kAlertFlagsAlertIsMovable 		0x04
 #define kAlertFlagsUseThemeControls 	0x08
+#define kAlertFlagsUseCompositing 		0x0100
 
 #define kDialogFontNoFontStyle 			0
 #define kDialogFontUseFontMask 			0x0001
@@ -66,7 +67,9 @@
 
 #define kDialogFontUseThemeFontIDMask 	0x0080
 #define kHICommandOther 				'othr'				/*  sent by standard sheet dialogs when the "other" button is pressed  */
-#define kStdCFStringAlertVersionOne 	1					/*  current version of AlertStdCFStringAlertParamRec  */
+#define kStdCFStringAlertVersionOne 	1
+#define kStdCFStringAlertVersionTwo 	2
+
 #define kStdAlertDoNotDisposeSheet 		0x01
 #define kStdAlertDoNotAnimateOnDefault 	0x02
 #define kStdAlertDoNotAnimateOnCancel 	0x04
@@ -178,7 +181,7 @@ type 'DITL' {
                       boolean         enabled,disabled;       /* Enable flag          */
                      key bitstring[7] = 7;
                       byte = 2;
-                      integer;                                /* 'CTRL' ID            */
+                      integer;                                /* 'CNTL' ID            */
 
                 case StaticText:
                        boolean         enabled,disabled;       /* Enable flag          */
@@ -232,12 +235,8 @@ type 'DLOG' {
                        noGrowDocProc,
                      movableDBoxProc,
                        zoomDocProc = 8,
-                       zoomNoGrow = 12
-#if CALL_NOT_IN_CARBON
-                     ,rDocProc = 16
-#endif
-                      ;
-      byte            invisible, visible;                     /* visible              */
+                       zoomNoGrow = 12;
+       byte            invisible, visible;                     /* visible              */
      fill byte;
      byte            noGoAway, goAway;                       /* goAway               */
      fill byte;

@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPattern.h
- * Copyright (c) 2000-2002 Apple Computer, Inc.
+ * Copyright (c) 2000-2005 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -34,7 +34,7 @@ typedef enum CGPatternTiling CGPatternTiling;
 
 CG_EXTERN_C_BEGIN
 
-/* The drawing of the pattern is delegated to the callbacks.  The callbacks
+/* The drawing of the pattern is delegated to the callbacks. The callbacks
  * may be called one or many times to draw the pattern.
  *
  * `version' is the version number of the structure passed in as a
@@ -62,7 +62,7 @@ CG_EXTERN CFTypeID CGPatternGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_
 
 /* Create a pattern. */
 
-CG_EXTERN CGPatternRef CGPatternCreate(void *info, CGRect bounds, CGAffineTransform matrix, float xStep, float yStep, CGPatternTiling tiling, bool isColored, const CGPatternCallbacks *callbacks);
+CG_EXTERN CGPatternRef CGPatternCreate(void *info, CGRect bounds, CGAffineTransform matrix, CGFloat xStep, CGFloat yStep, CGPatternTiling tiling, bool isColored, const CGPatternCallbacks *callbacks);
 
 /* Equivalent to `CFRetain(pattern)', except it doesn't crash (as CF does)
  * if `pattern' is NULL. */

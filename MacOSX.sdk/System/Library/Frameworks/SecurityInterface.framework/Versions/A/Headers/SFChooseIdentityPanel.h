@@ -22,6 +22,9 @@
 {
 @private
 	/* All instance variables are private */
+#if defined (__LP64__)
+	id _reserved_SFChooseIdentityPanel;
+#else
 	IBOutlet NSTextField *_panelMessage;
 	IBOutlet NSPopUpButton *_identityPopup;
 	IBOutlet SFCertificateView *_certificateView;
@@ -36,6 +39,7 @@
 	id _clientDelegate;			
 	void *_clientContextInfo;
 	id _reserved_SFChooseIdentityPanel;
+#endif
 }
 
 /*!
@@ -53,7 +57,7 @@
     @param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>).
     @param message Client-defined message string to display in the panel.
 */
-- (int)runModalForIdentities:(NSArray *)identities message:(NSString *)message;
+- (NSInteger)runModalForIdentities:(NSArray *)identities message:(NSString *)message;
 
 /*!
 	@method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:identities:message:
@@ -65,7 +69,7 @@
 	@param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>).
 	@param message Client-defined message string to display in the panel.
 	@discussion The didEndSelector method should have the following signature:
-        - (void)chooseIdentitySheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+        - (void)chooseIdentitySheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 */
 - (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo identities:(NSArray *)identities message:(NSString *)message;
 
@@ -136,6 +140,35 @@ is first consulted.  If the delegate does not implement -chooseIdentityPanelShow
 	@abstract Returns the current help anchor string for the modal panel.
 */
 - (NSString *)helpAnchor;
+
+/*!
+    @method setInformativeText:
+    @abstract Sets the optional informative text displayed in the SFChooseIdentityPanel.
+	@param informativeText The informative text to display in the panel.
+	@discussion Call this method to set the informative text to be displayed.
+*/
+- (void)setInformativeText:(NSString *)informativeText;
+
+/*!
+    @method informativeText
+	@abstract Returns the informative text currently displayed in the SFChooseIdentityPanel.
+*/
+- (NSString *)informativeText;
+
+/*!
+    @method setDomain:
+    @abstract Sets an optional domain in which the identity is to be used.
+	@param domainString A string containing a hostname, RFC822 name (email address), URL, or similar identifier.
+	@discussion Call this method to associate a domain with the chosen identity.
+		If the user chooses an identity and a domain has been set, an identity preference item will be created in the default keychain. Subsequently, calling SecIdentitySearchCreateWithPolicy and SecIdentitySearchCopyNext will return the preferred identity for this domain first.
+*/
+- (void)setDomain:(NSString *)domainString;
+
+/*!
+    @method domain
+	@abstract Returns the domain which will be associated with the chosen identity.
+*/
+- (NSString *)domain;
 
 @end
 

@@ -1,14 +1,17 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotationText.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-#import "PDFAnnotation.h"
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFAnnotation.h>
+
+
+@class PDFAnnotationTextPrivateVars;
 
 
 // Icon that appears indicating text annotaion pop-up.
-typedef int PDFTextAnnotationIconType;
-
+typedef NSInteger PDFTextAnnotationIconType;
 enum
 {
     kPDFTextAnnotationIconComment = 0, 
@@ -20,7 +23,6 @@ enum
     kPDFTextAnnotationIconInsert = 6
 };
 
-@class PDFAnnotationTextPrivateVars;
 
 @interface PDFAnnotationText : PDFAnnotation
 {
@@ -28,13 +30,14 @@ enum
     PDFAnnotationTextPrivateVars *_pdfPriv2;
 }
 
-// Whether the pop-up window displaying the text is open or closed. This is used merely for storage as the 
-// PDFAnnotationText does not open a window.
-- (BOOL) windowIsOpen;
-- (void) setWindowIsOpen: (BOOL) isOpen;
+// DEPRECATED: Use -[isOpen] on the annotation's popup. All PDFAnnotationText objects have a popup associated with them.
+//- (BOOL) windowIsOpen;
+// DEPRECATED: Call -[setIsOpen] on the annotation's popup. All PDFAnnotationText objects have a popup.
+//- (void) setWindowIsOpen: (BOOL) isOpen;
 
 // The type of icon displayed in the PDF.  Supported icons: "Comment", "Key", "Note", "Help", "NewParagraph", 
 // "Paragraph" and "Insert".
 - (PDFTextAnnotationIconType) iconType;
 - (void) setIconType: (PDFTextAnnotationIconType) type;
 @end
+

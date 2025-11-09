@@ -36,6 +36,9 @@
         TARGET_OS_WIN32         - Generate code will run under 32-bit Windows
         TARGET_OS_UNIX          - Generate code will run under some non Mac OS X unix 
 
+        TARGET_OS_EMBEDDED      - Generate code will run under an embedded OS variant
+                                  of one of the above OSes. Can be true at the same
+                                  time as TARGET_OS_MAC
 
     TARGET_RT_* 
     These conditionals specify in which runtime the generated code will
@@ -58,6 +61,7 @@
     #define TARGET_OS_MAC               1
     #define TARGET_OS_WIN32             0
     #define TARGET_OS_UNIX              0
+    #define TARGET_OS_EMBEDDED          0
     #if defined(__ppc__) 
         #define TARGET_CPU_PPC          1
         #define TARGET_CPU_PPC64        0
@@ -131,6 +135,7 @@
     #define TARGET_OS_MAC               1
     #define TARGET_OS_WIN32             0
     #define TARGET_OS_UNIX              0
+    #define TARGET_OS_EMBEDDED          0
     #if defined(__POWERPC__)
         #define TARGET_CPU_PPC          1
         #define TARGET_CPU_PPC64        0
@@ -226,6 +231,7 @@
     #define TARGET_OS_MAC                1
     #define TARGET_OS_WIN32              0
     #define TARGET_OS_UNIX               0
+    #define TARGET_OS_EMBEDDED           0
     #if TARGET_CPU_PPC || TARGET_CPU_PPC64
         #define TARGET_RT_BIG_ENDIAN     1
         #define TARGET_RT_LITTLE_ENDIAN  0

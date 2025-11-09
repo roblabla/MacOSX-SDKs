@@ -1,7 +1,7 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -46,17 +46,17 @@
 
 /* These methods are sent by input manager when the conversation within a particular sender changes.
 */
-- (void) activeConversationWillChange:(id)sender fromOldConversation:(long)oldConversation;
-- (void) activeConversationChanged:(id)sender toNewConversation:(long)newConversation;
+- (void) activeConversationWillChange:(id)sender fromOldConversation:(NSInteger)oldConversation;
+- (void) activeConversationChanged:(id)sender toNewConversation:(NSInteger)newConversation;
 
 @end
 
 /* These methods are sent to input servers that return YES to wantsToHandleMouseEvents.  thePoint is in screen coordinate.
 */
 @protocol NSInputServerMouseTracker
-- (BOOL) mouseDownOnCharacterIndex:(unsigned)theIndex atCoordinate:(NSPoint)thePoint withModifier:(unsigned int)theFlags client:(id)sender;
-- (BOOL) mouseDraggedOnCharacterIndex:(unsigned)theIndex atCoordinate:(NSPoint)thePoint withModifier:(unsigned int)theFlags client:(id)sender;
-- (void) mouseUpOnCharacterIndex:(unsigned)theIndex atCoordinate:(NSPoint)thePoint withModifier:(unsigned int)theFlags client:(id)sender;
+- (BOOL) mouseDownOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender;
+- (BOOL) mouseDraggedOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender;
+- (void) mouseUpOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender;
 @end
 
 @interface NSInputServer : NSObject <NSInputServiceProvider, NSInputServerMouseTracker> {

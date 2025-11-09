@@ -1,23 +1,48 @@
-/*
+/* -*- Mode: C; tab-width: 4 -*-
+ *
  * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*!	@header		DNS Service Discovery (Deprecated Mach-based API)
  *
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
-* "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * @discussion	This section describes the functions, callbacks, and data structures that 
+ *				make up the DNS Service Discovery API.
  *
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ *				The DNS Service Discovery API is part of Bonjour, Apple's implementation of 
+ *				zero-configuration networking (ZEROCONF).
  *
- * @APPLE_LICENSE_HEADER_END@
+ *				Bonjour allows you to register a network service, such as a 
+ *				printer or file server, so that it can be found by name or browsed 
+ *				for by service type and domain. Using Bonjour, applications can 
+ *				discover what services are available on the network, along with 
+ *				all necessary access information-such as name, IP address, and port 
+ *				number-for a given service.
+ *
+ *				In effect, Bonjour combines the functions of a local DNS server 
+ *				and AppleTalk. Bonjour allows applications to provide user-friendly printer 
+ *				and server browsing, among other things, over standard IP networks. 
+ *				This behavior is a result of combining protocols such as multicast and DNS 
+ *				to add new functionality to the network (such as multicast DNS).
+ *
+ *				Bonjour gives applications easy access to services over local IP 
+ *				networks without requiring the service or the application to support 
+ *				an AppleTalk or a Netbeui stack, and without requiring a DNS server 
+ *				for the local network.
+ *
+ *				Note that this API was deprecated in Mac OS X 10.3, and replaced
+ *				by the portable cross-platform /usr/include/dns_sd.h API.
  */
 
 #ifndef __DNS_SERVICE_DISCOVERY_H
@@ -74,7 +99,7 @@ typedef uint32_t DNSRecordReference;
 
 /*!
 @function DNSServiceResolver_handleReply
- @description This function should be called with the Mach message sent
+ @discussion This function should be called with the Mach message sent
  to the port returned by the call to DNSServiceResolverResolve.
  The reply message will be interpreted and will result in a
  call to the specified callout function.
@@ -91,7 +116,7 @@ typedef void (*DNSServiceRegistrationReply) (
 
 /*!
 @function DNSServiceRegistrationCreate
-    @description Register a named service with DNS Service Discovery
+    @discussion Register a named service with DNS Service Discovery
     @param name The name of this service instance (e.g. "Steve's Printer")
     @param regtype The service type (e.g. "_printer._tcp." -- see
         RFC 2782 (DNS SRV) and <http://www.iana.org/assignments/port-numbers>)
@@ -111,7 +136,7 @@ dns_service_discovery_ref DNSServiceRegistrationCreate
     const char 		*txtRecord,
     DNSServiceRegistrationReply callBack,
     void		*context
-) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /***************************************************************************/
 /*   DNS Domain Enumeration   */
@@ -138,7 +163,7 @@ typedef void (*DNSServiceDomainEnumerationReply) (
 
 /*!
     @function DNSServiceDomainEnumerationCreate
-    @description Asynchronously create a DNS Domain Enumerator
+    @discussion Asynchronously create a DNS Domain Enumerator
     @param registrationDomains A boolean indicating whether you are looking
         for recommended registration domains
         (e.g. equivalent to the AppleTalk zone list in the AppleTalk Control Panel)
@@ -153,7 +178,7 @@ dns_service_discovery_ref DNSServiceDomainEnumerationCreate
     int 		registrationDomains,
     DNSServiceDomainEnumerationReply	callBack,
     void		*context
-) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /***************************************************************************/
 /*   DNS Service Browser   */
@@ -175,7 +200,7 @@ typedef void (*DNSServiceBrowserReply) (
 
 /*!
     @function DNSServiceBrowserCreate
-    @description Asynchronously create a DNS Service browser
+    @discussion Asynchronously create a DNS Service browser
     @param regtype The type of service
     @param domain The domain in which to find the service
     @param callBack The function to be called when service instances are found or removed
@@ -188,7 +213,7 @@ dns_service_discovery_ref DNSServiceBrowserCreate
     const char 		*domain,
     DNSServiceBrowserReply	callBack,
     void		*context
-) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /***************************************************************************/
 /* Resolver requests */
@@ -203,7 +228,7 @@ typedef void (*DNSServiceResolverReply) (
 
 /*!
 @function DNSServiceResolverResolve
-    @description Resolved a named instance of a service to its address, port, and
+    @discussion Resolved a named instance of a service to its address, port, and
         (optionally) other demultiplexing information contained in the TXT record.
     @param name The name of the service instance
     @param regtype The type of service
@@ -221,14 +246,14 @@ dns_service_discovery_ref DNSServiceResolverResolve
     const char 		*domain,
     DNSServiceResolverReply callBack,
     void		*context
-) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /***************************************************************************/
 /* Mach port accessor and deallocation */
 
 /*!
     @function DNSServiceDiscoveryMachPort
-    @description Returns the mach port for a dns_service_discovery_ref
+    @discussion Returns the mach port for a dns_service_discovery_ref
     @param registration A dns_service_discovery_ref as returned from DNSServiceRegistrationCreate
     @result A mach reply port which will be sent messages as appropriate.
         These messages should be passed to the DNSServiceDiscovery_handleReply
@@ -236,15 +261,15 @@ dns_service_discovery_ref DNSServiceResolverResolve
         specified or some other error occurred which prevented the
         resolution from being started.
 */
-mach_port_t DNSServiceDiscoveryMachPort(dns_service_discovery_ref dnsServiceDiscovery) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+mach_port_t DNSServiceDiscoveryMachPort(dns_service_discovery_ref dnsServiceDiscovery) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /*!
     @function DNSServiceDiscoveryDeallocate
-    @description Deallocates the DNS Service Discovery type / closes the connection to the server
+    @discussion Deallocates the DNS Service Discovery type / closes the connection to the server
     @param dnsServiceDiscovery A dns_service_discovery_ref as returned from a creation or enumeration call
     @result void
 */
-void DNSServiceDiscoveryDeallocate(dns_service_discovery_ref dnsServiceDiscovery) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+void DNSServiceDiscoveryDeallocate(dns_service_discovery_ref dnsServiceDiscovery) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /***************************************************************************/
 /* Registration updating */
@@ -252,7 +277,7 @@ void DNSServiceDiscoveryDeallocate(dns_service_discovery_ref dnsServiceDiscovery
 
 /*!
     @function DNSServiceRegistrationAddRecord
-    @description Request that the mDNS Responder add the DNS Record of a specific type
+    @discussion Request that the mDNS Responder add the DNS Record of a specific type
     @param dnsServiceDiscovery A dns_service_discovery_ref as returned from a DNSServiceRegistrationCreate call
     @param rrtype A standard DNS Resource Record Type, from http://www.iana.org/assignments/dns-parameters
     @param rdlen Length of the data
@@ -260,12 +285,11 @@ void DNSServiceDiscoveryDeallocate(dns_service_discovery_ref dnsServiceDiscovery
     @param ttl time to live for the added record.
     @result DNSRecordReference An opaque reference that can be passed to the update and remove record calls.  If an error occurs, this value will be zero or negative
 */
-DNSRecordReference DNSServiceRegistrationAddRecord(dns_service_discovery_ref dnsServiceDiscovery, uint16_t rrtype, uint16_t rdlen, const char *rdata, uint32_t ttl)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+DNSRecordReference DNSServiceRegistrationAddRecord(dns_service_discovery_ref dnsServiceDiscovery, uint16_t rrtype, uint16_t rdlen, const char *rdata, uint32_t ttl) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /*!
     @function DNSServiceRegistrationUpdateRecord
-    @description Request that the mDNS Responder add the DNS Record of a specific type
+    @discussion Request that the mDNS Responder add the DNS Record of a specific type
     @param dnsServiceDiscovery A dns_service_discovery_ref as returned from a DNSServiceRegistrationCreate call
     @param dnsRecordReference A dnsRecordReference as returned from a DNSServiceRegistrationAddRecord call
     @param rdlen Length of the data
@@ -273,18 +297,16 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
     @param ttl time to live for the updated record.
     @result DNSServiceRegistrationReplyErrorType If an error occurs, this value will be non zero
 */
-DNSServiceRegistrationReplyErrorType DNSServiceRegistrationUpdateRecord(dns_service_discovery_ref ref, DNSRecordReference reference, uint16_t rdlen, const char *rdata, uint32_t ttl)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+DNSServiceRegistrationReplyErrorType DNSServiceRegistrationUpdateRecord(dns_service_discovery_ref ref, DNSRecordReference reference, uint16_t rdlen, const char *rdata, uint32_t ttl) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 /*!
     @function DNSServiceRegistrationRemoveRecord
-    @description Request that the mDNS Responder remove the DNS Record(s) of a specific type
+    @discussion Request that the mDNS Responder remove the DNS Record(s) of a specific type
     @param dnsServiceDiscovery A dns_service_discovery_ref as returned from a DNSServiceRegistrationCreate call
     @param dnsRecordReference A dnsRecordReference as returned from a DNSServiceRegistrationAddRecord call
     @result DNSServiceRegistrationReplyErrorType If an error occurs, this value will be non zero
 */
-DNSServiceRegistrationReplyErrorType DNSServiceRegistrationRemoveRecord(dns_service_discovery_ref ref, DNSRecordReference reference)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED;
+DNSServiceRegistrationReplyErrorType DNSServiceRegistrationRemoveRecord(dns_service_discovery_ref ref, DNSRecordReference reference) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 __END_DECLS

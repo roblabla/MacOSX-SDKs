@@ -1,9 +1,7 @@
 /*
 	File:		IOBluetoothTypes.h
-	Contains:	Public header with family provided types and defines - shared between user and kernel code.
-	Version:	1.0
-	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
-	Technology:	Bluetooth
+	Contains:	Family provided types and defines - shared between user and kernel code.
+	Copyright:	© 2002-2007 by Apple Inc. All rights reserved.
 */
 
 #pragma once

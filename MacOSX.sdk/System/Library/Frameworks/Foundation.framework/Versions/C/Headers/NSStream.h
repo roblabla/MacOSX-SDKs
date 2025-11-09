@@ -1,5 +1,5 @@
 /*	NSStream.h
-        Copyright (c) 2003-2005, Apple, Inc. All rights reserved
+        Copyright (c) 2003-2007, Apple Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>
@@ -8,7 +8,7 @@
 
 @class NSData, NSDictionary, NSError, NSHost, NSInputStream, NSRunLoop, NSString, NSOutputStream;
 
-typedef enum {
+enum {
     NSStreamStatusNotOpen = 0,
     NSStreamStatusOpening = 1,
     NSStreamStatusOpen = 2,
@@ -17,16 +17,18 @@ typedef enum {
     NSStreamStatusAtEnd = 5,
     NSStreamStatusClosed = 6,
     NSStreamStatusError = 7
-} NSStreamStatus;
+};
+typedef NSUInteger NSStreamStatus;
 
-typedef enum {
+enum {
     NSStreamEventNone = 0,
     NSStreamEventOpenCompleted = 1 << 0,
     NSStreamEventHasBytesAvailable = 1 << 1,
     NSStreamEventHasSpaceAvailable = 1 << 2,
     NSStreamEventErrorOccurred = 1 << 3,
     NSStreamEventEndEncountered = 1 << 4
-} NSStreamEvent;
+};
+typedef NSUInteger NSStreamEvent;
 
 // NSStream is an abstract class encapsulating the common API to NSInputStream and NSOutputStream.
 // Subclassers of NSInputStream and NSOutputStream must also implement these methods.
@@ -51,10 +53,10 @@ typedef enum {
 // NSInputStream is an abstract class representing the base functionality of a read stream.
 // Subclassers are required to implement these methods.
 @interface NSInputStream : NSStream
-- (int)read:(uint8_t *)buffer maxLength:(unsigned int)len;
+- (NSInteger)read:(uint8_t *)buffer maxLength:(NSUInteger)len;
     // reads up to length bytes into the supplied buffer, which must be at least of size len. Returns the actual number of bytes read.
 
-- (BOOL)getBuffer:(uint8_t **)buffer length:(unsigned int *)len;
+- (BOOL)getBuffer:(uint8_t **)buffer length:(NSUInteger *)len;
     // returns in O(1) a pointer to the buffer in 'buffer' and by reference in 'len' how many bytes are available. This buffer is only valid until the next stream operation. Subclassers may return NO for this if it is not appropriate for the stream type. This may return NO if the buffer is not available.
 
 - (BOOL)hasBytesAvailable;
@@ -64,7 +66,7 @@ typedef enum {
 // NSOutputStream is an abstract class representing the base functionality of a write stream.
 // Subclassers are required to implement these methods.
 @interface NSOutputStream : NSStream
-- (int)write:(const uint8_t *)buffer maxLength:(unsigned int)len;
+- (NSInteger)write:(const uint8_t *)buffer maxLength:(NSUInteger)len;
     // writes the bytes from the specified buffer to the stream up to len bytes. Returns the number of bytes actually written.
 
 - (BOOL)hasSpaceAvailable;
@@ -72,7 +74,7 @@ typedef enum {
 @end
 
 @interface NSStream (NSSocketStreamCreationExtensions)
-+ (void)getStreamsToHost:(NSHost *)host port:(int)port inputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream;
++ (void)getStreamsToHost:(NSHost *)host port:(NSInteger)port inputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream;
 @end
 
 // The NSInputStreamExtensions category contains additional initializers and convenience routines for dealing with NSInputStreams.
@@ -87,11 +89,11 @@ typedef enum {
 // The NSOutputStreamExtensions category contains additiona initializers and convenience routines for dealing with NSOutputStreams.
 @interface NSOutputStream (NSOutputStreamExtensions)
 - (id)initToMemory;
-- (id)initToBuffer:(uint8_t *)buffer capacity:(unsigned int)capacity;
+- (id)initToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;
 - (id)initToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
 
 + (id)outputStreamToMemory;
-+ (id)outputStreamToBuffer:(uint8_t *)buffer capacity:(unsigned int)capacity;
++ (id)outputStreamToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;
 + (id)outputStreamToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
 @end
 

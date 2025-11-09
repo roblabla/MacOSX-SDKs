@@ -53,13 +53,13 @@ typedef void (*CGScreenRefreshCallback)(CGRectCount count, const CGRect * rectAr
  * of execution that is processing events within your application.
  * userParameter is passed back with each invocation of the callback function.
  */
-CG_EXTERN CGError CGRegisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter );
+CG_EXTERN CGError CGRegisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Remove a previously registered calback function.
  * Both the function and the userParameter must match the registered entry to be removed.
  */
-CG_EXTERN void CGUnregisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter );
+CG_EXTERN void CGUnregisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * In some applications it may be preferable to have a seperate thread wait for screen refresh data.
@@ -72,7 +72,7 @@ CG_EXTERN void CGUnregisterScreenRefreshCallback( CGScreenRefreshCallback functi
  * Returns an error code if parameters are invalid or an error occurs in retrieving
  * dirty screen rects from the server.
  */
-CG_EXTERN CGError CGWaitForScreenRefreshRects( CGRect ** pRectArray, CGRectCount * pCount );
+CG_EXTERN CGError CGWaitForScreenRefreshRects( CGRect ** pRectArray, CGRectCount * pCount ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /* End Old API */
 
 /* Begin New API */
@@ -178,7 +178,7 @@ CG_EXTERN CGError CGWaitForScreenUpdateRects( CGScreenUpdateOperation requestedO
 /*
  * Deallocate the list of rects recieved from CGWaitForScreenRefreshRects()
  */
-CG_EXTERN void CGReleaseScreenRefreshRects( CGRect * rectArray );
+CG_EXTERN void CGReleaseScreenRefreshRects( CGRect * rectArray ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Programs reading the frame buffer content may want to hide the cursor, if it is visible and
@@ -213,14 +213,14 @@ CG_EXTERN boolean_t CGCursorIsDrawnInFramebuffer(void) AVAILABLE_MAC_OS_X_VERSIO
  * The buttonCount parameter should be followed by 'buttonCount' boolean_t values
  * indicating button state.  The first value should reflect the state of the primary
  * button on the mouse. The second value, if any, should reflect the state of the secondary
- * mouse button (right), if any. A third value woule be the center button, and the remaining
+ * mouse button (right), if any. A third value would be the center button, and the remaining
  * buttons would be in USB device order.
  */
 typedef u_int32_t CGButtonCount;
 CG_EXTERN CGError CGPostMouseEvent( CGPoint mouseCursorPosition,
                                         boolean_t updateMouseCursorPosition,
                                         CGButtonCount buttonCount,
-                                        boolean_t mouseButtonDown, ... );
+                                        boolean_t mouseButtonDown, ... ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Synthesize scroll wheel events.
@@ -238,7 +238,7 @@ CG_EXTERN CGError CGPostMouseEvent( CGPoint mouseCursorPosition,
  */
 typedef u_int32_t CGWheelCount;
 CG_EXTERN CGError CGPostScrollWheelEvent( CGWheelCount wheelCount,
-                                            int32_t wheel1, ... );
+                                            int32_t wheel1, ... ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Synthesize keyboard events.  Based on the values entered,
@@ -260,13 +260,13 @@ typedef u_int16_t    CGKeyCode;		/* Virtual keycode for event */
 
 CG_EXTERN CGError CGPostKeyboardEvent( CGCharCode keyChar,
                                           CGKeyCode virtualKey,
-                                          boolean_t keyDown );
+                                          boolean_t keyDown ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Warp the mouse cursor to the desired position in global
  * coordinates without generating events
  */
-CG_EXTERN CGError CGWarpMouseCursorPosition( CGPoint newCursorPosition );
+CG_EXTERN CGError CGWarpMouseCursorPosition( CGPoint newCursorPosition ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Remote operation may want to inhibit local events (events from
@@ -280,13 +280,13 @@ CG_EXTERN CGError CGWarpMouseCursorPosition( CGPoint newCursorPosition );
  *
  * Local event inhibition is turned off if the app that requested it terminates.
  */
-CG_EXTERN CGError CGInhibitLocalEvents( boolean_t doInhibit);
+CG_EXTERN CGError CGInhibitLocalEvents( boolean_t doInhibit) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Set the period of time in seconds that local hardware events (keyboard and mouse)
  * are suppressed after posting an event.  Defaults to 0.25 second.
  */
-CG_EXTERN CGError CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds);
+CG_EXTERN CGError CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * By default, the flags that indicate modifier key state (Command, Alt, Shift, etc.)
@@ -304,7 +304,7 @@ CG_EXTERN CGError CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds);
  * When called with doCombineState equal to TRUE, the current global state of keys, modifiers,
  * and mouse buttons are used in generating events.
  */
-CG_EXTERN CGError CGEnableEventStateCombining(boolean_t doCombineState);
+CG_EXTERN CGError CGEnableEventStateCombining(boolean_t doCombineState) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  * By default the system suppresses local hardware events from the keyboard and mouse during
@@ -341,7 +341,7 @@ typedef uint32_t CGEventSuppressionState;
     kCGEventFilterMaskPermitSystemDefinedEvents)
 
 CG_EXTERN CGError CGSetLocalEventsFilterDuringSuppressionState(CGEventFilterMask filter,
-CGEventSuppressionState state);
+CGEventSuppressionState state) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  * After posting a left mouse down, with remote mouse drag suppressing hardware mouse
@@ -373,7 +373,7 @@ CGEventSuppressionState state);
  *
  * Note: The Force Quit key combination (CMD-OPT-ESC by default) will reconnect the mouse and cursor.
  */
-CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected);
+CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Some classes of applications need to detect when the window server process dies, or
@@ -413,7 +413,7 @@ CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected);
  * callback to function.  A program which does not use a CFRunLoop may use
  * CFMachPortIsValid(CFMachPortRef port) periodically to check if the port is valid.
  */
-CG_EXTERN CFMachPortRef CGWindowServerCFMachPort(void);
+CG_EXTERN CFMachPortRef CGWindowServerCFMachPort(void) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*

@@ -3,7 +3,7 @@
  
      Contains:   Services to load and share icon family data.
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -28,12 +28,22 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
+
+/* virtual ARGB icon types. Each type will be split into separate 24 bit RGB data and 8 bit mask for storage in icns container */
+/* the ARGB bitmap must be non-premultiplied */
+enum {
+  kIconServices16PixelDataARGB  = 'ic04', /* uses kSmall32BitIconIndex and kSmallDeepMaskIconIndex*/
+  kIconServices32PixelDataARGB  = 'ic05', /* uses kLarge32BitIconIndex and kLargeDeepMaskIconIndex*/
+  kIconServices48PixelDataARGB  = 'ic06', /* uses kHuge32BitIconIndex and kHugeDeepMaskIconIndex*/
+  kIconServices128PixelDataARGB = 'ic07' /* uses kThumbnailDataIndex and kThumbnailMaskIndex*/
+};
 
 /* The following icon types can only be used as an icon element */
 /* inside a 'icns' icon family */
 enum {
-  kIconServices256PixelDataARGB = 'ic08',
+  kIconServices256PixelDataARGB = 'ic08', /* non-premultiplied 256x256 ARGB bitmap*/
+  kIconServices512PixelDataARGB = 'ic09', /* non-premultiplied 512x512 ARGB bitmap*/
   kThumbnail32BitData           = 'it32',
   kThumbnail8BitMask            = 't8mk'
 };
@@ -89,7 +99,10 @@ enum {
    driver icon for a particular device.  The result of the kdgMediaIconSuite call to DriverGestalt should
    be a pointer an an IconFamily.  In this manner driver vendors can provide rich, detailed drive icons
    instead of the 1-bit variety previously supported.
+   The IconFamilyElement and IconFamilyResource data types (which also include the data types
+   IconFamilyPtr and IconFamilyHandle) are always big-endian.
 */
+
 enum {
   kIconFamilyType               = 'icns'
 };
@@ -97,13 +110,13 @@ enum {
 
 struct IconFamilyElement {
   OSType              elementType;            /* 'ICN#', 'icl8', etc...*/
-  Size                elementSize;            /* Size of this element*/
+  SInt32              elementSize;            /* Size of this element*/
   unsigned char       elementData[1];
 };
 typedef struct IconFamilyElement        IconFamilyElement;
 struct IconFamilyResource {
   OSType              resourceType;           /* Always 'icns'*/
-  Size                resourceSize;           /* Total size of this resource*/
+  SInt32              resourceSize;           /* Total size of this resource*/
   IconFamilyElement   elements[1];
 
 };
@@ -122,7 +135,7 @@ enum {
 };
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __ICONSTORAGE__ */

@@ -1,21 +1,21 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSDictionary, NSString;
+@class NSArray, NSDictionary, NSString, NSError;
 
 /* Because NSBundle caches allocated instances, subclasses should be prepared
    to receive an already initialized object back from [super initWithPath:] */
 @interface NSBundle : NSObject {
 @private
-    unsigned int	_flags;
+    NSUInteger	_flags;
     id		        _cfBundle;
-    void		*_reserved5;
+    NSUInteger	_refCount;
     Class		_principalClass;
-    void		*_tmp1;
-    void		*_tmp2;
+    id                  _tmp1;
+    id                  _tmp2;
     void		*_reserved1;
     void		*_reserved0;
 }
@@ -33,7 +33,13 @@
 - (BOOL)load;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (BOOL)isLoaded;
-#endif
+- (BOOL)unload;
+#endif /* MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)preflightAndReturnError:(NSError **)error;
+- (BOOL)loadAndReturnError:(NSError **)error;
+#endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 - (NSString *)bundlePath;
 - (NSString *)resourcePath;
@@ -67,18 +73,29 @@
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (NSDictionary *)localizedInfoDictionary;
 - (id)objectForInfoDictionaryKey:(NSString *)key;
-#endif
+#endif /* MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 - (NSArray *)localizations;
 - (NSArray *)preferredLocalizations;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (NSString *)developmentLocalization;
-#endif
+#endif /* MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 + (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray forPreferences:(NSArray *)preferencesArray;
-#endif
+#endif /* MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+enum {
+    NSBundleExecutableArchitectureI386      = 0x00000007,
+    NSBundleExecutableArchitecturePPC       = 0x00000012,
+    NSBundleExecutableArchitectureX86_64    = 0x01000007,
+    NSBundleExecutableArchitecturePPC64     = 0x01000012
+};
+
+- (NSArray *)executableArchitectures;
+#endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 @end
 

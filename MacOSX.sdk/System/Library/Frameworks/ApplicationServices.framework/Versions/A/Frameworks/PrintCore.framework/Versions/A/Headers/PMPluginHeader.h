@@ -16,7 +16,6 @@
 #ifndef __PMPLUGINHEADER__
 #define __PMPLUGINHEADER__
 
-#include <ApplicationServices/ApplicationServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE

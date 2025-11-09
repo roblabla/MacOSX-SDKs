@@ -27,7 +27,7 @@ typedef int boolean_t;
 
 CG_EXTERN_C_BEGIN
 
-typedef struct _CGDirectDisplayID * CGDirectDisplayID;
+typedef uint32_t CGDirectDisplayID;
 typedef struct _CGDirectPaletteRef * CGDirectPaletteRef;
 typedef uint32_t CGDisplayCount;
 typedef uint32_t CGTableCount;
@@ -46,7 +46,7 @@ typedef CGError CGDisplayErr;
 #define kCGNullDirectDisplay ((CGDirectDisplayID)0)
 
 /* Returns the display ID of the current main display */
-CGDirectDisplayID CGMainDisplayID(void);
+CG_EXTERN CGDirectDisplayID CGMainDisplayID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 #define kCGDirectMainDisplay CGMainDisplayID()
 
@@ -60,20 +60,20 @@ CGDirectDisplayID CGMainDisplayID(void);
  * If the dspys array is NULL, maxDisplays is ignored, and *dspyCnt is filled
  * in with the number of displays meeting the function's requirements.
  */
-CGDisplayErr CGGetDisplaysWithPoint(CGPoint point,
+CG_EXTERN CGDisplayErr CGGetDisplaysWithPoint(CGPoint point,
                              CGDisplayCount maxDisplays,
                              CGDirectDisplayID * dspys,
-                             CGDisplayCount * dspyCnt);
+                             CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-CGDisplayErr CGGetDisplaysWithRect(CGRect rect,
+CG_EXTERN CGDisplayErr CGGetDisplaysWithRect(CGRect rect,
                             CGDisplayCount maxDisplays,
                             CGDirectDisplayID * dspys,
-                            CGDisplayCount * dspyCnt);
+                            CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-CGDisplayErr CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
+CG_EXTERN CGDisplayErr CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
                             CGDisplayCount maxDisplays,
                             CGDirectDisplayID * dspys,
-                            CGDisplayCount * dspyCnt);
+                            CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
                             
 /*
  * Get lists of displays.  Use this to determine display IDs
@@ -86,9 +86,9 @@ CGDisplayErr CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
  * When mirroring, this will be the largest drawable display in the mirror,
  * set, or if all are the same size, the one with the deepest pixel depth.
  */
-CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
+CG_EXTERN CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
                              CGDirectDisplayID * activeDspys,
-                             CGDisplayCount * dspyCnt);
+                             CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * With hardware mirroring, a display may be on-line,
@@ -97,12 +97,12 @@ CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
  * palette or gamma tables need access to all displays in use,
  * including hardware mirrors which are not drawable.
  */
-CGDisplayErr CGGetOnlineDisplayList(CGDisplayCount maxDisplays,
+CG_EXTERN CGDisplayErr CGGetOnlineDisplayList(CGDisplayCount maxDisplays,
                                     CGDirectDisplayID * onlineDspys,
-                                    CGDisplayCount * dspyCnt);
+                                    CGDisplayCount * dspyCnt) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Map a display to an OpenGL display mask; returns 0 on invalid display */
-CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(CGDirectDisplayID display);
+CG_EXTERN CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Map an OpenGL display mask to a display.
@@ -110,13 +110,13 @@ CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(CGDirectDisplayID display);
  * match a display.
  * Passing in multiple bits results in an arbitrary match. 
  */
-CGDirectDisplayID  CGOpenGLDisplayMaskToDisplayID(CGOpenGLDisplayMask mask);
+CG_EXTERN CGDirectDisplayID  CGOpenGLDisplayMaskToDisplayID(CGOpenGLDisplayMask mask) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Return screen size and origin in global coords; Empty rect if display is invalid */
-CGRect CGDisplayBounds(CGDirectDisplayID display);
+CG_EXTERN CGRect CGDisplayBounds(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-size_t CGDisplayPixelsWide(CGDirectDisplayID display);
-size_t CGDisplayPixelsHigh(CGDirectDisplayID display);
+CG_EXTERN size_t CGDisplayPixelsWide(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN size_t CGDisplayPixelsHigh(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Display mode selection
@@ -149,6 +149,7 @@ size_t CGDisplayPixelsHigh(CGDirectDisplayID display);
 #define kCGDisplayModeUsableForDesktopGUI	CFSTR("UsableForDesktopGUI")
 #define kCGDisplayIOFlags			CFSTR("IOFlags")
 #define kCGDisplayBytesPerRow			CFSTR("kCGDisplayBytesPerRow")
+#define kCGIODisplayModeID          CFSTR("IODisplayModeID")
 
 /*
  * Keys to describe optional properties of display modes.
@@ -174,7 +175,7 @@ size_t CGDisplayPixelsHigh(CGDirectDisplayID display);
  * Return a CFArray of CFDictionaries describing all display modes.
  * Returns NULL if the display is invalid.
  */
-CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display);
+CG_EXTERN CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /*
  * Try to find a display mode of specified depth with dimensions equal or greater than
  * specified.
@@ -193,17 +194,17 @@ CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display);
  *	
  * Returns NULL if display is invalid.
  */
-CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t * exactMatch);
+CG_EXTERN CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, boolean_t * exactMatch);
+CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, CFStringRef property, boolean_t * exactMatch);
+CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, CFStringRef property, boolean_t * exactMatch) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  * Return a CFDictionary describing the current display mode.
  * Returns NULL if display is invalid.
  */
-CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display);
+CG_EXTERN CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /*
  * Switch display mode.  Note that after switching, 
  * display parameters and addresses may change.
@@ -219,13 +220,13 @@ CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display);
  * the mirroring set will be set to a display mode capable of mirroring the bounds
  * of the largest display being explicitly set. 
  */
-CGDisplayErr CGDisplaySwitchToMode(CGDirectDisplayID display, CFDictionaryRef mode);
+CG_EXTERN CGDisplayErr CGDisplaySwitchToMode(CGDirectDisplayID display, CFDictionaryRef mode) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Query parameters for current mode */
-size_t CGDisplayBitsPerPixel(CGDirectDisplayID display);
-size_t CGDisplayBitsPerSample(CGDirectDisplayID display);
-size_t CGDisplaySamplesPerPixel(CGDirectDisplayID display);
-size_t CGDisplayBytesPerRow(CGDirectDisplayID display);
+CG_EXTERN size_t CGDisplayBitsPerPixel(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN size_t CGDisplayBitsPerSample(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN size_t CGDisplaySamplesPerPixel(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN size_t CGDisplayBytesPerRow(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Set a display gamma/transfer function from a formula specifying
@@ -244,7 +245,7 @@ size_t CGDisplayBytesPerRow(CGDirectDisplayID display);
  */
 typedef float CGGammaValue;
                                               
-CGDisplayErr CGSetDisplayTransferByFormula(CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGSetDisplayTransferByFormula(CGDirectDisplayID display,
                                     CGGammaValue redMin,
                                     CGGammaValue redMax,
                                     CGGammaValue redGamma,
@@ -253,9 +254,9 @@ CGDisplayErr CGSetDisplayTransferByFormula(CGDirectDisplayID display,
                                     CGGammaValue greenGamma,
                                     CGGammaValue blueMin,
                                     CGGammaValue blueMax,
-                                    CGGammaValue blueGamma);
+                                    CGGammaValue blueGamma) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
                                               
-CGDisplayErr CGGetDisplayTransferByFormula(CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGGetDisplayTransferByFormula(CGDirectDisplayID display,
                                     CGGammaValue *redMin,
                                     CGGammaValue *redMax,
                                     CGGammaValue *redGamma,
@@ -264,12 +265,12 @@ CGDisplayErr CGGetDisplayTransferByFormula(CGDirectDisplayID display,
                                     CGGammaValue *greenGamma,
                                     CGGammaValue *blueMin,
                                     CGGammaValue *blueMax,
-                                    CGGammaValue *blueGamma);
+                                    CGGammaValue *blueGamma) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /*
  * Returns the capacity, or nunber of entries, in the camma table for the specified
  * display.  If 'display' is invalid, returns 0.
  */
-CGTableCount CGDisplayGammaTableCapacity(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGTableCount CGDisplayGammaTableCapacity(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  * Set a display gamma/transfer function using tables of data for each channel.
@@ -279,33 +280,33 @@ CGTableCount CGDisplayGammaTableCapacity(CGDirectDisplayID display) AVAILABLE_MA
  * The tables are interpolated as needed to generate the number of samples needed
  * by hardware.
  */
-CGDisplayErr CGSetDisplayTransferByTable(CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGSetDisplayTransferByTable(CGDirectDisplayID display,
                                   CGTableCount tableSize,
                                   const CGGammaValue  *redTable,
                                   const CGGammaValue  *greenTable,
-                                  const CGGammaValue  *blueTable);
+                                  const CGGammaValue  *blueTable) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Get transfer tables.  Capacity should contain the number of samples each
  * array can hold, and *sampleCount is filled in with the number of samples
  * actually copied in.
  */
-CGDisplayErr CGGetDisplayTransferByTable(CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGGetDisplayTransferByTable(CGDirectDisplayID display,
                                   CGTableCount capacity,
                                   CGGammaValue  *redTable,
                                   CGGammaValue  *greenTable,
                                   CGGammaValue  *blueTable,
-                                  CGTableCount *sampleCount);
+                                  CGTableCount *sampleCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* As a convenience, allow setting of the gamma table by byte values */
-CGDisplayErr CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
                                       CGTableCount tableSize,
                                       const CGByteValue  *redTable,
                                       const CGByteValue  *greenTable,
-                                      const CGByteValue  *blueTable);
+                                      const CGByteValue  *blueTable) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Restore gamma tables of system displays to the user's ColorSync specified values */
-void CGDisplayRestoreColorSyncSettings(void);
+CG_EXTERN void CGDisplayRestoreColorSyncSettings(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Options used with CGDisplayCaptureWithOptions and CGCaptureAllDisplaysWithOptions
@@ -316,45 +317,45 @@ enum {
 };
 
 /* Display capture and release */
-boolean_t CGDisplayIsCaptured(CGDirectDisplayID display);
-CGDisplayErr CGDisplayCapture(CGDirectDisplayID display);
-CGDisplayErr CGDisplayCaptureWithOptions(CGDirectDisplayID display, CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-CGDisplayErr CGDisplayRelease(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayIsCaptured(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN CGDisplayErr CGDisplayCapture(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN CGDisplayErr CGDisplayCaptureWithOptions(CGDirectDisplayID display, CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGDisplayErr CGDisplayRelease(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Capture all displays; this has the nice effect of providing an immersive
  * environment, and preventing other apps from trying to adjust themselves
  * to display changes only needed by your app.
  */
-CGDisplayErr CGCaptureAllDisplays(void);
-CGDisplayErr CGCaptureAllDisplaysWithOptions(CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGDisplayErr CGCaptureAllDisplays(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CG_EXTERN CGDisplayErr CGCaptureAllDisplaysWithOptions(CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  * Release all captured displays, and restore the display modes to the
  * user's preferences.  May be used in conjunction with CGDisplayCapture()
  * or CGCaptureAllDisplays().
  */
-CGDisplayErr CGReleaseAllDisplays(void);
+CG_EXTERN CGDisplayErr CGReleaseAllDisplays(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Returns CoreGraphics raw shield window ID or NULL if not shielded
  * This value may be used with drawing surface APIs.
  */
-void * CGShieldingWindowID(CGDirectDisplayID display);
+CG_EXTERN uint32_t CGShieldingWindowID(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Returns the window level used for the shield window.
  * This value may be used with Cocoa windows to position the
  * Cocoa window in the same window level as the shield window.
  */
-int32_t CGShieldingWindowLevel(void);
+CG_EXTERN int32_t CGShieldingWindowLevel(void) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Returns base address of display or NULL for an invalid display.
  * If the display has not been captured, the returned address may refer
  * to read-only memory.
  */
-void * CGDisplayBaseAddress(CGDirectDisplayID display);
+CG_EXTERN void * CGDisplayBaseAddress(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /*
  * return address for X,Y in global coordinates;
  *	(0,0) represents the upper left corner of the main display.
@@ -362,12 +363,12 @@ void * CGDisplayBaseAddress(CGDirectDisplayID display);
  * If the display has not been captured, the returned address may refer
  * to read-only memory.
  */
-void * CGDisplayAddressForPosition(CGDirectDisplayID display, CGDisplayCoord x, CGDisplayCoord y);
+CG_EXTERN void * CGDisplayAddressForPosition(CGDirectDisplayID display, CGDisplayCoord x, CGDisplayCoord y) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /* Mouse Cursor controls */
-CGDisplayErr CGDisplayHideCursor(CGDirectDisplayID display);	/* increments hide cursor count */
-CGDisplayErr CGDisplayShowCursor(CGDirectDisplayID display);	/* decrements hide cursor count  */
+CG_EXTERN CGDisplayErr CGDisplayHideCursor(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;	/* increments hide cursor count */
+CG_EXTERN CGDisplayErr CGDisplayShowCursor(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;	/* decrements hide cursor count  */
 
 /*
  * Move the cursor to the specified point relative to the display origin
@@ -375,13 +376,13 @@ CGDisplayErr CGDisplayShowCursor(CGDirectDisplayID display);	/* decrements hide 
  * No events are generated as a result of this move.
  * Points that would lie outside the desktop are clipped to the desktop.
  */
-CGDisplayErr CGDisplayMoveCursorToPoint(CGDirectDisplayID display, CGPoint point);
+CG_EXTERN CGDisplayErr CGDisplayMoveCursorToPoint(CGDirectDisplayID display, CGPoint point) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Report the mouse position change associated with the last mouse move event
  * recieved by this application.
  */
-void CGGetLastMouseDelta( CGMouseDelta * deltaX, CGMouseDelta * deltaY );
+CG_EXTERN void CGGetLastMouseDelta( CGMouseDelta * deltaX, CGMouseDelta * deltaY ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Palette controls (8 bit pseudocolor only) */
@@ -391,7 +392,7 @@ void CGGetLastMouseDelta( CGMouseDelta * deltaX, CGMouseDelta * deltaY );
  * Display must not be a hardware mirror of another, and should
  * have a depth of 8 bits per pixel for this to return TRUE.
  */
-boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display);
+CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Set a palette.  The current gamma function is applied to the palette
@@ -400,7 +401,7 @@ boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display);
  * Setting the palette on the active, or primary display in a hardware
  * mirroring set affects all displays in that set.
  */
-CGDisplayErr CGDisplaySetPalette(CGDirectDisplayID display, const CGDirectPaletteRef palette);
+CG_EXTERN CGDisplayErr CGDisplaySetPalette(CGDirectDisplayID display, const CGDirectPaletteRef palette) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Wait until the beam position is outside the range specified by upperScanLine and lowerScanLine.
@@ -432,16 +433,16 @@ CGDisplayErr CGDisplaySetPalette(CGDirectDisplayID display, const CGDirectPalett
  * support. If you need extremely precise timing, or access to vertical blanking interrupts,
  * you should consider writing a device driver to tie into hardware-specific capabilities.
  */
-CGDisplayErr CGDisplayWaitForBeamPositionOutsideLines( CGDirectDisplayID display,
+CG_EXTERN CGDisplayErr CGDisplayWaitForBeamPositionOutsideLines( CGDirectDisplayID display,
                                                        CGBeamPosition upperScanLine,
-                                                       CGBeamPosition lowerScanLine );
+                                                       CGBeamPosition lowerScanLine ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Returns the current beam position on the display.  If display is invalid,
  * or the display does not implement conventional video vertical and horizontal
  * sweep in painting, or the driver does not implement this functionality, 0 is returned.
  */
-CGBeamPosition CGDisplayBeamPosition( CGDirectDisplayID display );
+CG_EXTERN CGBeamPosition CGDisplayBeamPosition( CGDirectDisplayID display ) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  * Obtain a CGContextRef suitable for drawing to a captured display.
@@ -462,7 +463,7 @@ CGBeamPosition CGDisplayBeamPosition( CGDirectDisplayID display );
  *
  * If the display has not been captured, this function returns NULL.
  */
-CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 CG_EXTERN_C_END
 

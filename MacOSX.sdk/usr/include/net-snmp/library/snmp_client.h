@@ -57,6 +57,8 @@ extern          "C" {
                                              newvar, u_char type,
                                              const u_char * val_str,
                                              size_t val_len);
+    int             snmp_set_var_typed_integer(netsnmp_variable_list * newvar,
+                                               u_char type, long val);
     void            snmp_replace_var_types(netsnmp_variable_list * vbl,
                                            u_char old_type,
                                            u_char new_type);
@@ -68,6 +70,8 @@ extern          "C" {
                                            u_char type);
     netsnmp_variable_list *find_varbind_of_type(netsnmp_variable_list *
                                                 var_ptr, u_char type);
+    netsnmp_variable_list *find_varbind_in_list(netsnmp_variable_list *vblist,
+                                                oid *name, size_t len);
 
     netsnmp_variable_list *snmp_add_null_var(netsnmp_pdu *, const oid *, size_t);
     netsnmp_pdu    *snmp_pdu_create(int);
@@ -93,6 +97,13 @@ extern          "C" {
      */
     int             snmp_sess_synch_response(void *, netsnmp_pdu *,
                                              netsnmp_pdu **);
+
+void              netsnmp_query_set_default_session(netsnmp_session *);
+netsnmp_session * netsnmp_query_get_default_session( void );
+int netsnmp_query_get(     netsnmp_variable_list *, netsnmp_session *);
+int netsnmp_query_getnext( netsnmp_variable_list *, netsnmp_session *);
+int netsnmp_query_walk(    netsnmp_variable_list *, netsnmp_session *);
+int netsnmp_query_set(     netsnmp_variable_list *, netsnmp_session *);
 
 #ifdef __cplusplus
 }

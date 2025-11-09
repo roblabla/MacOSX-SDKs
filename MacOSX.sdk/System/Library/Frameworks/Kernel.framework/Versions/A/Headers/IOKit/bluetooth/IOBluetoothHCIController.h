@@ -16,6 +16,8 @@
 #import <IOKit/system.h>
 #import <kern/thread_call.h>
 
+#import </usr/include/AvailabilityMacros.h>
+
 #include <IOKit/pwr_mgt/RootDomain.h>
 
 #import <IOKit/bluetooth/Bluetooth.h>
@@ -73,7 +75,6 @@ struct HCIEventNotificationListener
 #define POWER_STATE_CHANGE_IN_PROGRESS()	( mCurrentInternalPowerState != mPendingInternalPowerState )
 #define	IS_POWERING_DOWN()	( POWER_STATE_CHANGE_IN_PROGRESS() && ( mPendingInternalPowerState == kIOBluetoothHCIControllerInternalPowerStateOff ) )
 
-
 //====================================================================================================
 // Callback structure for data:
 //====================================================================================================
@@ -101,6 +102,7 @@ typedef struct SendDataContext
 // IOBluetoothHCIController
 //====================================================================================================
 
+class IOBluetoothHCIPacketLogUserClient;
 class IOBluetoothHCIController : public IOService
 {
 	// We don't make many friends, but at least we have a few...
@@ -109,7 +111,8 @@ class IOBluetoothHCIController : public IOService
     friend class IOBluetoothSerialManager;
     friend class IOBluetoothHCIUserClient;
     friend class IOBluetoothDevice;
-    
+	friend class IOBluetoothHCIRequest;
+	
 	// IOKit stuff.
 	
     OSDeclareDefaultStructors( IOBluetoothHCIController )
@@ -176,7 +179,7 @@ protected:
 	Boolean										mAsyncPowerStateChangeInProgress;
 	UInt32										mPendingPowerStateChangeOptions;
 	IOBluetoothHCIControllerPowerOptions		mControllerPowerOptions;
-	Boolean										mIgnorePowerStateChanges;
+	Boolean										mPowerStateChangeIsUserEnforced;
 	
 	Boolean										mHardwareSetupComplete;
 	
@@ -192,7 +195,11 @@ protected:
 	bool		 		init( OSDictionary* dictionary );
 
     virtual void		free();
-    
+
+#if defined( MAC_OS_X_VERSION_10_5 )
+    virtual void		systemWillShutdown( IOOptionBits specifier );
+#endif
+
     static IOReturn		initHardwareAction(	OSObject	*owner,
                                             void		*arg1,
                                             void		*arg2,
@@ -212,16 +219,9 @@ protected:
     virtual void		hardwareSetupComplete( IOReturn status );
     
 	virtual	void		setConfigState( IOBluetoothHCIControllerConfigState configState );
-
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	virtual	bool		terminate( IOOptionBits options = 0 );
-#endif
-
 	virtual bool		willTerminate( IOService * provider, IOOptionBits options );
-
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	virtual bool		didTerminate( IOService * provider, IOOptionBits options, bool * defer );
-#endif
 	
 	void 				stop( IOService * provider );
 	
@@ -232,6 +232,11 @@ protected:
 	
 	uint32_t			CountExistingHCIControllers();
 
+	virtual IOReturn	powerStateWillChangeTo(	IOPMPowerFlags	powerFlags,
+												unsigned long	powerState,
+												IOService *		from );
+
+	virtual unsigned long	initialPowerStateForDomainState ( IOPMPowerFlags powerFlags );
 
 	// Our protected custom stuff.
 	
@@ -568,8 +573,8 @@ public:
 	virtual Boolean IsAllowedIncomingRFCOMMChannelForDevice( BluetoothRFCOMMChannelID incomingChannelID, IOBluetoothDevice *device );
 
 	// Enabled state for RFCOMM channels:
-	virtual void IOBluetoothHCIController::SetEnabledIncomingRFCOMMChannel( OSNumber *channelIDNumber, bool ShouldBeEnabled);
-	virtual void IOBluetoothHCIController::SetEnabledIncomingRFCOMMChannel( BluetoothRFCOMMChannelID incomingChannelID, bool ShouldBeEnabled);
+	virtual void SetEnabledIncomingRFCOMMChannel( OSNumber *channelIDNumber, bool ShouldBeEnabled);
+	virtual void SetEnabledIncomingRFCOMMChannel( BluetoothRFCOMMChannelID incomingChannelID, bool ShouldBeEnabled);
 
     virtual Boolean ShouldRunInactivityTimer();
     virtual void	SetRunInactivityTimer( Boolean shouldRun );
@@ -957,25 +962,19 @@ protected:
 	
 	virtual void		SetControllerFeatureFlags( IOBluetoothHCIControllerFeatureFlags featureFlags );
 
-protected:
-
-	// HCI Command Enqueueing:
-	typedef struct HCICommandHolder {
-		HCICommandHolder								*next;			// Next holder in the list;
-		IOBluetoothHCIRequest 							*requestPtr;	// Request for this command
-	} HCICommandHolder;
-
 	// Enablers for future Changes.
 
     typedef struct ExpansionData 
 	{
-		HCICommandHolder	*mCommandQueueHead, *mCommandQueueTail;
+		void	*mUnsedPointer1, *mUnsedPointer2;
 
 		// Max number of HCI command allowed;
 		UInt8				mNumberOfCommandsAllowedByHardware;
 		UInt8				mNumConfiguredHIDDevices;
 		UInt8				mControllerSleepFlags;
-		IONotifier*			mSleepWakeNotifier;
+		
+		// This pointer is depreacted and free for future uses.
+		void*				mUnusedPointer;
 
 		// AFH support:
 		// the mask for the channels to use:
@@ -1003,7 +1002,7 @@ protected:
 		uint32_t			mNewRequestIndex;
 		
 		IOBluetoothInactivityTimerEventSource	*mIdleTimer;
-		Boolean				mIgnoreIdleTimer;
+		Boolean				mSystemOnTheWayToSleep;
 
 		// New Airport notifications:
 		IONotifier *				mIO80211Interface;
@@ -1011,8 +1010,6 @@ protected:
 
 	ExpansionData*		mExpansionData;
 	
-#define mCommandQueueHead						IOBluetoothHCIController::mExpansionData->mCommandQueueHead
-#define mCommandQueueTail						IOBluetoothHCIController::mExpansionData->mCommandQueueTail
 #define mNumberOfCommandsAllowedByHardware		IOBluetoothHCIController::mExpansionData->mNumberOfCommandsAllowedByHardware
 #define	mNumConfiguredHIDDevices				IOBluetoothHCIController::mExpansionData->mNumConfiguredHIDDevices
 #define mControllerSleepFlags					IOBluetoothHCIController::mExpansionData->mControllerSleepFlags
@@ -1034,7 +1031,7 @@ protected:
 #define mHCIRequestListSize						IOBluetoothHCIController::mExpansionData->mHCIRequestListSize
 #define mNewRequestIndex						IOBluetoothHCIController::mExpansionData->mNewRequestIndex
 #define mIdleTimer								IOBluetoothHCIController::mExpansionData->mIdleTimer
-#define mIgnoreIdleTimer						IOBluetoothHCIController::mExpansionData->mIgnoreIdleTimer
+#define mSystemOnTheWayToSleep					IOBluetoothHCIController::mExpansionData->mSystemOnTheWayToSleep
 #define mIO80211Interface						IOBluetoothHCIController::mExpansionData->mIO80211Interface
 
 	enum {
@@ -1055,9 +1052,11 @@ private:
 	// Expanded version of OpenDeviceConnection MUST BE CALLED IN THE WORKLOOP
     virtual IOBluetoothDevice *OpenDeviceConnection( const BluetoothDeviceAddress *inDeviceAddress, BluetoothHCIPageTimeout pageTimeoutValue, bool  authenticationRequired);
 
-	static	IOReturn sleepWakeHandler( void *target, void *refCon,
-					UInt32 messageType, IOService *service, void *messageArgument, vm_size_t argSize );
+	// sleepWakeHandler DEPRECATED METHOD RETURNS kIOReturnUnsupported ALL THE TIME	!
+	static	IOReturn sleepWakeHandler( void *target, void *refCon, UInt32 messageType, IOService *service, void *messageArgument, vm_size_t argSize );
+	
 	static	IOReturn	restartShutdownAction( OSObject *owner, void *arg1, void *arg2, void *arg3, void *arg4 );
+	static	IOReturn	systemSleepWakeAction( OSObject *owner, void *arg1, void *arg2, void *arg3, void *arg4 );
 
 public:	
 	virtual	IOReturn 	restartShutdownWL( UInt32 messageType, void *reserved);
@@ -1108,9 +1107,6 @@ protected:
         OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  15 );
         virtual bool willTerminateWL( IOService * provider, IOOptionBits options );
 
-protected:
-
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  16 );
 	virtual bool shouldOverrideExistingController( IOBluetoothHCIController *controller );
 
@@ -1119,7 +1115,7 @@ protected:
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  17 );
 	virtual void handleIdleTimeout();
 
-	static IOReturn IOBluetoothHCIController::terminateAction(	OSObject	*owner, 
+	static IOReturn terminateAction(	OSObject	*owner, 
 														void		*arg1, 
 														void		*arg2, 
 														void		*arg3, 
@@ -1131,35 +1127,99 @@ protected:
 	// Support for dynamic channel width
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  19 );
 	virtual	UInt8 *rangeForChannel(UInt16 channel, SInt16 width);
-#endif
-	
-private:
-#if (defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  16 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  17 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  18 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  19 );
-#endif
 
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  20 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  21 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  22 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  23 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  24 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  25 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  26 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  27 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  28 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  29 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  30 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  31 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  32 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  33 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  34 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  35 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  36 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  37 );
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  38 );
+public:
+
+	// v1.2 + v2.1 commands
+	
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  20 );
+	virtual	IOReturn	BluetoothHCIReadExtendedInquiryResponse(	BluetoothHCIRequestID								inID,
+																	BluetoothHCIReadExtendedInquiryResponseResults *	outData );
+
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  21 );
+	virtual	IOReturn	BluetoothHCIWriteExtendedInquiryResponse(	BluetoothHCIRequestID					inID,
+																	BluetoothHCIFECRequired					inFECRequired,
+																	BluetoothHCIExtendedInquiryResponse *	inData );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  22 );
+	virtual	IOReturn	BluetoothHCIReadInquiryMode(	BluetoothHCIRequestID		inID,
+														BluetoothHCIInquiryMode	*	outMode );
+
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  23 );
+	virtual	IOReturn	BluetoothHCIWriteInquiryMode(	BluetoothHCIRequestID		inID,
+														BluetoothHCIInquiryMode		inMode );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  24 );
+	virtual	IOReturn	BluetoothHCIReadSimplePairingMode(	BluetoothHCIRequestID				inID,
+															BluetoothHCISimplePairingMode	*	outMode );
+
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  25 );
+	virtual	IOReturn	BluetoothHCIWriteSimplePairingMode(	BluetoothHCIRequestID				inID,
+															BluetoothHCISimplePairingMode		inMode );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  26 );
+	virtual IOReturn	BluetoothHCIIOCapabilityResponse(	BluetoothHCIRequestID					inID, 
+															const BluetoothDeviceAddress *			inAddress,
+															BluetoothIOCapability					inIOCapability,
+															BluetoothOOBDataPresence				inOOBDataPresence,
+															BluetoothAuthenticationRequirements		inAuthenticationRequirements );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  27 );
+	virtual	IOReturn	BluetoothHCIReadLocalOOBData(	BluetoothHCIRequestID					inID,
+														BluetoothHCIReadLocalOOBDataResults *	outData	);
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  28 );
+	virtual	IOReturn	BluetoothHCIReadInquiryResponseTransmitPower(	BluetoothHCIRequestID				inID,
+																		BluetoothHCITransmitPowerLevel *	outData	);
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  29 );
+	virtual	IOReturn	BluetoothHCIWriteInquiryResponseTransmitPower(	BluetoothHCIRequestID				inID,
+																		BluetoothHCITransmitPowerLevel		inData );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  30 );
+	virtual	IOReturn	BluetoothHCIUserConfirmationRequestReply(	BluetoothHCIRequestID				inID,
+																	const BluetoothDeviceAddress *		inAddress );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  31 );
+	virtual	IOReturn	BluetoothHCIUserConfirmationRequestNegativeReply(	BluetoothHCIRequestID				inID,
+																			const BluetoothDeviceAddress *		inAddress );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  32 );
+	virtual	IOReturn	BluetoothHCIUserPasskeyRequestReply(	BluetoothHCIRequestID					inID,
+																const BluetoothDeviceAddress *			inAddress,
+																BluetoothPasskey						inPasskey);
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  33 );
+	virtual	IOReturn	BluetoothHCIUserPasskeyRequestNegativeReply(	BluetoothHCIRequestID					inID,
+																		const BluetoothDeviceAddress *			inAddress );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  34 );
+	virtual	IOReturn	BluetoothHCIRemoteOOBDataRequestReply(	BluetoothHCIRequestID				inID,
+																const BluetoothDeviceAddress *		inAddress,
+																BluetoothHCISimplePairingOOBData *	hash,
+																BluetoothHCISimplePairingOOBData *	randomizer );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  35 );
+	virtual	IOReturn	BluetoothHCIRemoteOOBDataRequestNegativeReply(	BluetoothHCIRequestID				inID,
+																		const BluetoothDeviceAddress *		inAddress );
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  36 );
+	virtual	IOReturn	BluetoothHCIWriteSimplePairingDebugMode(	BluetoothHCIRequestID					inID,
+																	BluetoothSimplePairingDebugMode			inData	);
+
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  37 );
+	virtual	IOReturn	BluetoothHCISendKeypressNotification(	BluetoothHCIRequestID					inID,
+																const BluetoothDeviceAddress *			inAddress,
+																BluetoothKeypressNotificationType		inData	);
+
+protected:
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  38 );
+	virtual	IOReturn	systemSleepWakeWL( UInt32 messageType, void *reserved);
+
+private:
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  39 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  40 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  41 );

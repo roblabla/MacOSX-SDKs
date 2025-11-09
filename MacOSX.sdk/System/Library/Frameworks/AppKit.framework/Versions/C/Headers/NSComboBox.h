@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2005, Apple Computer, Inc.
+	Copyright (c) 1996-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,10 +21,10 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (void)setHasVerticalScroller:(BOOL)flag;
 - (NSSize)intercellSpacing;
 - (void)setIntercellSpacing:(NSSize)aSize;
-- (float)itemHeight;
-- (void)setItemHeight:(float)itemHeight;
-- (int)numberOfVisibleItems;
-- (void)setNumberOfVisibleItems:(int)visibleItems;
+- (CGFloat)itemHeight;
+- (void)setItemHeight:(CGFloat)itemHeight;
+- (NSInteger)numberOfVisibleItems;
+- (void)setNumberOfVisibleItems:(NSInteger)visibleItems;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setButtonBordered:(BOOL)flag;
@@ -37,13 +37,13 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (void)setUsesDataSource:(BOOL)flag;
 - (BOOL)usesDataSource;
 
-- (void)scrollItemAtIndexToTop:(int)index;
-- (void)scrollItemAtIndexToVisible:(int)index;
+- (void)scrollItemAtIndexToTop:(NSInteger)index;
+- (void)scrollItemAtIndexToVisible:(NSInteger)index;
 
-- (void)selectItemAtIndex:(int)index;
-- (void)deselectItemAtIndex:(int)index;
-- (int)indexOfSelectedItem;
-- (int)numberOfItems;
+- (void)selectItemAtIndex:(NSInteger)index;
+- (void)deselectItemAtIndex:(NSInteger)index;
+- (NSInteger)indexOfSelectedItem;
+- (NSInteger)numberOfItems;
 
 - (BOOL)completes;
 - (void)setCompletes:(BOOL)completes;
@@ -55,22 +55,22 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
 - (void)addItemsWithObjectValues:(NSArray *)objects;
-- (void)insertItemWithObjectValue:(id)object atIndex:(int)index;
+- (void)insertItemWithObjectValue:(id)object atIndex:(NSInteger)index;
 - (void)removeItemWithObjectValue:(id)object;
-- (void)removeItemAtIndex:(int)index;
+- (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeAllItems;
 - (void)selectItemWithObjectValue:(id)object;
-- (id)itemObjectValueAtIndex:(int)index;
+- (id)itemObjectValueAtIndex:(NSInteger)index;
 - (id)objectValueOfSelectedItem;
-- (int)indexOfItemWithObjectValue:(id)object;
+- (NSInteger)indexOfItemWithObjectValue:(id)object;
 - (NSArray *)objectValues;
 
 @end
 
 @interface NSObject (NSComboBoxDataSource)
-- (int)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(int)index;
-- (unsigned int)comboBox:(NSComboBox *)aComboBox indexOfItemWithStringValue:(NSString *)string;
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
+- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
+- (NSUInteger)comboBox:(NSComboBox *)aComboBox indexOfItemWithStringValue:(NSString *)string;
 - (NSString *)comboBox:(NSComboBox *)aComboBox completedString:(NSString *)string;
 @end
 

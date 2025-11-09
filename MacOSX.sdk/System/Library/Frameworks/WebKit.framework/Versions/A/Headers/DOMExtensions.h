@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004-2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -23,45 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
+#import <WebKit/DOMAttr.h>
 #import <WebKit/DOMCSS.h>
+#import <WebKit/DOMCSSStyleDeclaration.h>
+#import <WebKit/DOMDocument.h>
+#import <WebKit/DOMElement.h>
 #import <WebKit/DOMHTML.h>
+#import <WebKit/DOMHTMLAnchorElement.h>
+#import <WebKit/DOMHTMLAreaElement.h>
+#import <WebKit/DOMHTMLDocument.h>
+#import <WebKit/DOMHTMLElement.h>
+#import <WebKit/DOMHTMLEmbedElement.h>
+#import <WebKit/DOMHTMLImageElement.h>
+#import <WebKit/DOMHTMLInputElement.h>
+#import <WebKit/DOMHTMLLinkElement.h>
+#import <WebKit/DOMHTMLObjectElement.h>
+#import <WebKit/DOMNode.h>
+#import <WebKit/DOMRGBColor.h>
+#import <WebKit/DOMRange.h>
 
-@class DOMCSSStyleDeclaration;
+@class NSArray;
+@class NSImage;
+@class NSURL;
 
-@interface DOMDocument (DOMDocumentExtensions)
-- (DOMCSSStyleDeclaration *)createCSSStyleDeclaration;
+@interface DOMNode (DOMNodeExtensions)
+- (NSRect)boundingBox;
+- (NSArray *)lineBoxRects;
 @end
 
-@interface DOMHTMLElement (DOMHTMLElementExtensions)
-- (NSString *)innerHTML;
-- (void)setInnerHTML:(NSString *)innerHTML;
-- (NSString *)innerText;
-- (void)setInnerText:(NSString *)innerText;
-- (NSString *)outerHTML;
-- (void)setOuterHTML:(NSString *)outerHTML;
-- (NSString *)outerText;
-- (void)setOuterText:(NSString *)outerText;
-- (DOMHTMLCollection *)children;
-- (NSString *)contentEditable;
-- (void)setContentEditable:(NSString *)contentEditable;
-- (BOOL)isContentEditable;
+@interface DOMElement (DOMElementAppKitExtensions)
+- (NSImage *)image;
 @end
 
-@interface DOMHTMLEmbedElement : DOMHTMLElement
-- (NSString *)align;
-- (void)setAlign:(NSString *)align;
-- (long)height;
-- (void)setHeight:(long)height;
-- (NSString *)name;
-- (void)setName:(NSString *)name;
-- (NSString *)src;
-- (void)setSrc:(NSString *)src;
-- (NSString *)type;
-- (void)setType:(NSString *)type;
-- (long)width;
-- (void)setWidth:(long)width;
-@end
-
-@interface DOMRGBColor (DOMRGBColorExtensions)
-- (DOMCSSPrimitiveValue *)alpha;
+@interface DOMHTMLDocument (DOMHTMLDocumentExtensions)
+- (DOMDocumentFragment *)createDocumentFragmentWithMarkupString:(NSString *)markupString baseURL:(NSURL *)baseURL;
+- (DOMDocumentFragment *)createDocumentFragmentWithText:(NSString *)text;
 @end

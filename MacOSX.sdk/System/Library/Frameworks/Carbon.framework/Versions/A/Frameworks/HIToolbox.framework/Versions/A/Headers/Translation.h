@@ -3,7 +3,7 @@
  
      Contains:   Translation Manager (Macintosh Easy Open) Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -36,13 +36,12 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
    Carbon clients should use Translation Services. The definitions below will NOT work for Carbon and
    are only defined for those files that need to build pre-Carbon applications.
 */
-
 /* enumerated types on how a document can be opened*/
 typedef short                           DocOpenMethod;
 enum {
@@ -70,7 +69,7 @@ struct FileTranslationSpec {
 typedef struct FileTranslationSpec      FileTranslationSpec;
 typedef FileTranslationSpec *           FileTranslationSpecArrayPtr;
 typedef FileTranslationSpecArrayPtr *   FileTranslationSpecArrayHandle;
-
+#if !__LP64__
 /*
  *  GetFileTypesThatAppCanNativelyOpen()   *** DEPRECATED ***
  *  
@@ -81,7 +80,7 @@ typedef FileTranslationSpecArrayPtr *   FileTranslationSpecArrayHandle;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -103,7 +102,7 @@ GetFileTypesThatAppCanNativelyOpen(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -125,7 +124,7 @@ ExtendFileTypeList(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -151,7 +150,7 @@ CanDocBeOpened(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -175,7 +174,7 @@ GetFileTranslationPaths(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -198,7 +197,7 @@ GetPathFromTranslationDialog(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -219,7 +218,7 @@ TranslateFile(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -244,7 +243,7 @@ GetDocumentKindString(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -253,6 +252,8 @@ GetTranslationExtensionName(
   const FileTranslationSpec *  translationMethod,
   Str31                        extensionName)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
+
+#endif  /* !__LP64__ */
 
 
 /*
@@ -297,7 +298,20 @@ InvokeGetScrapDataUPP(
   void *           srcDataGetterRefCon,
   GetScrapDataUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline GetScrapDataUPP                                      NewGetScrapDataUPP(GetScrapDataProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeGetScrapDataUPP(GetScrapDataUPP) { }
+    inline OSErr                                                InvokeGetScrapDataUPP(ScrapType requestedFormat, Handle dataH, void * srcDataGetterRefCon, GetScrapDataUPP userUPP) { return (*userUPP)(requestedFormat, dataH, srcDataGetterRefCon); }
+  #else
+    #define NewGetScrapDataUPP(userRoutine)                     ((GetScrapDataUPP)userRoutine)
+    #define DisposeGetScrapDataUPP(userUPP)
+    #define InvokeGetScrapDataUPP(requestedFormat, dataH, srcDataGetterRefCon, userUPP) (*userUPP)(requestedFormat, dataH, srcDataGetterRefCon)
+  #endif
+#endif
+
 typedef GetScrapDataUPP                 GetScrapData;
+#if !__LP64__
 /*
  *  TranslateScrap()   *** DEPRECATED ***
  *  
@@ -308,7 +322,7 @@ typedef GetScrapDataUPP                 GetScrapData;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -322,9 +336,10 @@ TranslateScrap(
 
 
 
+#endif  /* !__LP64__ */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

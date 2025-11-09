@@ -118,7 +118,10 @@ SOFTWARE.
     void            netsnmp_set_mib_directory(const char *dir);
     char            *netsnmp_get_mib_directory(void);
     void            netsnmp_fixup_mib_directory(void);
+    void            netsnmp_init_mib(void);
+#ifndef NETSNMP_CLEAN_NAMESPACE
     void            init_mib(void);
+#endif
     void            shutdown_mib(void);
     void            print_description(oid *, size_t, int);
     void            fprint_description(FILE *, oid *, size_t, int);
@@ -130,7 +133,6 @@ SOFTWARE.
     int             get_wild_node(const char *, oid *, size_t *);
     int             get_node(const char *, oid *, size_t *);
     oid            *snmp_parse_oid(const char *, oid *, size_t *);
-    struct tree    *get_symbol(oid *, size_t, struct tree *, char *);
     struct tree    *get_tree(const oid *, size_t, struct tree *);
     struct tree    *get_tree_head(void);
     void            set_function(struct tree *);
@@ -170,7 +172,7 @@ SOFTWARE.
                                             const netsnmp_variable_list *
                                             variable);
 
-#ifndef DISABLE_MIB_LOADING
+#ifndef NETSNMP_DISABLE_MIB_LOADING
     struct tree    *
 #else
     void
@@ -371,7 +373,7 @@ SOFTWARE.
                                            const struct enum_list *,
                                            const char *, const char *);
 
-#ifdef OPAQUE_SPECIAL_TYPES
+#ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
     int             sprint_realloc_float(u_char ** buf, size_t * buf_len,
                                          size_t * out_len,
                                          int allow_realloc,
@@ -478,7 +480,7 @@ SOFTWARE.
                                     const struct enum_list *, const char *,
                                     const char *);
 
-#ifdef OPAQUE_SPECIAL_TYPES
+#ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
     int             snprint_float(char *buf, size_t buf_len,
                                   const netsnmp_variable_list *,
                                   const struct enum_list *, const char *,
@@ -495,6 +497,7 @@ SOFTWARE.
     void            print_oid_report_enable_oid(void);
     void            print_oid_report_enable_suffix(void);
     void            print_oid_report_enable_symbolic(void);
+    void            print_oid_report_enable_mibchildoid(void);
 
     const char     *parse_octet_hint(const char *hint, const char *value,
 	                             unsigned char **new_val, int *new_val_len);

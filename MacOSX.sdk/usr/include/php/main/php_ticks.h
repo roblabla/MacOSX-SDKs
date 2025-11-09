@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Bakken <ssb@fast.no>                                    |
+   | Author: Stig Bakken <ssb@php.net>                                    |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.h,v 1.8.8.1.8.3 2007/12/31 07:22:55 sebastian Exp $ */
+/* $Id: php_ticks.h,v 1.14.2.1.2.2 2007/12/31 07:20:15 sebastian Exp $ */
 
 #ifndef PHP_TICKS_H
 #define PHP_TICKS_H
@@ -24,8 +24,11 @@
 int php_startup_ticks(TSRMLS_D);
 void php_shutdown_ticks(TSRMLS_D);
 void php_run_ticks(int count);
+
+BEGIN_EXTERN_C()
 PHPAPI void php_add_tick_function(void (*func)(int));
 PHPAPI void php_remove_tick_function(void (*func)(int));
+END_EXTERN_C()
 
 #endif
 

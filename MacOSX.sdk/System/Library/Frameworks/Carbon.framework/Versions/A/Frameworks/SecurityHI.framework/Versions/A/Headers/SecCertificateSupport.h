@@ -61,7 +61,7 @@ enum {
     @param identityRef On return, a pointer to an identity reference that was chosen by the user.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 */
-OSStatus SecChooseIdentity(CFStringRef displayInfo, CFArrayRef identities, SecIdentityRef *identityRef);
+OSStatus SecChooseIdentity(CFStringRef displayInfo, CFArrayRef identities, SecIdentityRef *identityRef)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@function SecChooseIdentityAsSheet
@@ -72,7 +72,7 @@ OSStatus SecChooseIdentity(CFStringRef displayInfo, CFArrayRef identities, SecId
     @param identities A reference to an array of identities to choose from. You call the functions  SecCreateIdentitySearch and SecIdentitySearchNext to obtain the identities.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 */
-OSStatus SecChooseIdentityAsSheet(WindowRef parentWindow, EventTargetRef inTarget, CFStringRef displayInfo, CFArrayRef identities);
+OSStatus SecChooseIdentityAsSheet(WindowRef parentWindow, EventTargetRef inTarget, CFStringRef displayInfo, CFArrayRef identities)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@function SecDisplayCertificate
@@ -81,7 +81,7 @@ OSStatus SecChooseIdentityAsSheet(WindowRef parentWindow, EventTargetRef inTarge
     @param keychainList A reference to a list of keychains to assist in the finding of intermediate certificates. Pass NULL to specify the user's default keychain search list.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 */
-OSStatus SecDisplayCertificate(SecCertificateRef certificate, CFArrayRef keychainList);
+OSStatus SecDisplayCertificate(SecCertificateRef certificate, CFArrayRef keychainList)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@function SecDisplayCertificateGroup
@@ -90,7 +90,7 @@ OSStatus SecDisplayCertificate(SecCertificateRef certificate, CFArrayRef keychai
     @param keychainList A reference to a list of keychains to assist in the finding of intermediate certificates. Pass NULL to specify the user's default keychain search list.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 */
-OSStatus SecDisplayCertificateGroup(const CSSM_CERTGROUP *certificates, CFArrayRef keychainList);
+OSStatus SecDisplayCertificateGroup(const CSSM_CERTGROUP *certificates, CFArrayRef keychainList)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@function SecEditTrust
@@ -100,7 +100,7 @@ OSStatus SecDisplayCertificateGroup(const CSSM_CERTGROUP *certificates, CFArrayR
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 	@discussion  You must call the SecTrustEvaluate function prior to editing the trust information of the trust object. Pass in a string with arbitrary encoding for display purposes in the edit trust panel. For example, the user interface can show what went wrong during a verify or it can indicate that a certificate has expired. The user can edit the trust decisions at this time. If any certificate that is involved in the verification doesn't exist in a keychain, it can be added to a keychain by the user. 
 */
-OSStatus SecEditTrust(CFStringRef displayInfo, SecTrustRef trust);
+OSStatus SecEditTrust(CFStringRef displayInfo, SecTrustRef trust)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@function SecEditTrustAsSheet
@@ -111,7 +111,7 @@ OSStatus SecEditTrust(CFStringRef displayInfo, SecTrustRef trust);
     @param trust A reference to the trust object in which to edit the trust.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
 */
-OSStatus SecEditTrustAsSheet(WindowRef parentWindow, EventTargetRef inTarget, CFStringRef displayInfo, SecTrustRef trust);
+OSStatus SecEditTrustAsSheet(WindowRef parentWindow, EventTargetRef inTarget, CFStringRef displayInfo, SecTrustRef trust)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 #if defined(__cplusplus)
 }

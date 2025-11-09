@@ -1,7 +1,7 @@
 /*
 	NSController.h
 	Application Kit
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -18,7 +18,7 @@
     void *_reserved2;
     int _specialPurposeType;
     id _bindingAdaptor;
-    CFMutableArrayRef _editors;
+    NSMutableArray *_editors;
     NSMutableArray *_declaredKeys;
     NSMutableDictionary *_dependentKeyToModelKeyTable;
     NSMutableDictionary *_modelKeyToDependentKeyTable;

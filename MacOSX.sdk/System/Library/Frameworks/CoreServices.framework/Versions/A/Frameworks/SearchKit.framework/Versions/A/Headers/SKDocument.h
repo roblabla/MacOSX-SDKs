@@ -3,7 +3,7 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-147.2~771
+     Version:    SearchKit-218~113
  
      Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved
  
@@ -48,7 +48,7 @@ extern "C" {
  *    built from a document scheme, a parent document, and a document
  *    name.
  */
-typedef struct __SKDocument*            SKDocumentRef;
+typedef CFTypeRef                       SKDocumentRef;
 /*
  *  SKDocumentGetTypeID()
  *  

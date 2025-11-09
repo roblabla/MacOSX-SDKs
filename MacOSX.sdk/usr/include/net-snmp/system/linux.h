@@ -1,6 +1,6 @@
 #include "sysv.h"
 
-#define DONT_USE_NLIST 1
+#define NETSNMP_DONT_USE_NLIST 1
 
 #undef NPROC_SYMBOL
 
@@ -17,3 +17,7 @@
 #ifndef MNTTYPE_PROC
 #define MNTTYPE_PROC "proc"
 #endif
+
+/* define the extra mib modules that are supported */
+#define NETSNMP_INCLUDE_HOST_RESOURCES
+#define NETSNMP_INCLUDE_IFTABLE_REWRITES

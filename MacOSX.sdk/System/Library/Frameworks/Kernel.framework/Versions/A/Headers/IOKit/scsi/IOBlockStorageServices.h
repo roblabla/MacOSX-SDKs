@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -63,8 +63,14 @@ protected:
 	UInt64							fMaxReadBlocks;
 	UInt64							fMaxWriteBlocks;
 	
-	virtual bool	attach ( IOService * provider );
-	virtual void	detach ( IOService * provider );
+	virtual bool		attach ( IOService * provider );
+	virtual void		detach ( IOService * provider );
+    virtual IOReturn	newUserClient (
+    						   task_t			owningTask,
+    						   void *			securityID,
+    						   UInt32			type,
+    						   OSDictionary * 	properties,
+    						   IOUserClient **	handler );
 	
     // Reserve space for future expansion.
     struct IOBlockStorageServicesExpansionData { };

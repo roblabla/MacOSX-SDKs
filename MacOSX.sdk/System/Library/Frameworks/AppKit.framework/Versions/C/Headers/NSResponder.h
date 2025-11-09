@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2005, Apple Computer, Inc.
+        Copyright (c) 1994-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -39,6 +39,9 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)tabletPoint:(NSEvent *)theEvent;
 - (void)tabletProximity:(NSEvent *)theEvent;
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)cursorUpdate:(NSEvent *)event;
 #endif
 - (void)noResponderFor:(SEL)eventSelector;
 - (BOOL)acceptsFirstResponder;

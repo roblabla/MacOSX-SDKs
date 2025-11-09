@@ -49,7 +49,7 @@
  */
 
 /*
- *	$Id: nameser.h,v 1.3 2003/02/24 01:20:13 majka Exp $
+ *	$Id: nameser.h,v 1.1 2006/03/01 19:01:36 majka Exp $
  */
 
 #ifndef _NAMESER_9_H_

@@ -3,7 +3,7 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1995-2006 DayStar Digital, Inc.
  
@@ -240,8 +240,8 @@ enum {
 
 
 typedef OptionBits                      MPTaskOptions;
-typedef UInt32                          TaskStorageIndex;
-typedef UInt32                          TaskStorageValue;
+typedef ItemCount                       TaskStorageIndex;
+typedef LogicalAddress                  TaskStorageValue;
 typedef ItemCount                       MPSemaphoreCount;
 typedef UInt32                          MPTaskWeight;
 typedef UInt32                          MPEventFlags;
@@ -311,7 +311,7 @@ MPProcessorsScheduled(void)                                   AVAILABLE_MAC_OS_X
 
 enum {
                                         /* For MPCreateTask options*/
-  kMPCreateTaskSuspendedMask    = 1L << 0,
+  kMPCreateTaskSuspendedMask    = 1L << 0, /*    not supported on Mac OS X*/
   kMPCreateTaskTakesAllExceptionsMask = 1L << 1,
   kMPCreateTaskNotDebuggableMask = 1L << 2,
   kMPCreateTaskValidOptionsMask = kMPCreateTaskSuspendedMask | kMPCreateTaskTakesAllExceptionsMask | kMPCreateTaskNotDebuggableMask
@@ -1286,8 +1286,9 @@ MPBlockClear(
   ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* ! MPBlockClear is new in version 2.0.*/
 
+
+#if !__LP64__
 /*
  *  MPDataToCode()
  *  
@@ -1295,7 +1296,7 @@ MPBlockClear(
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1305,7 +1306,9 @@ MPDataToCode(
   ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* ! MPDataToCode is new in version 2.0.*/
+/* NOTE:    MPDataToCode is not supported for 64-bit applications. Use mprotect(2) instead.*/
+
+
 /*
    ¤
    ===========================================================================================
@@ -1350,6 +1353,8 @@ MPDataToCode(
 */
 
 
+
+#endif  /* !__LP64__ */
 
 enum {
                                         /* Values for the TaskStateKind to MPExtractTaskState and MPSetTaskState.*/

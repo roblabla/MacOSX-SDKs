@@ -3,9 +3,9 @@
  
      Contains:   Public Interfaces/Types for Low Level ATSUI
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -232,6 +232,7 @@ ATSUDirectGetLayoutDataArrayPtrFromLineRef(
 
 
 /* ---------------------------------------------------------------------------- */
+#if !__LP64__
 /*
  *  ATSUDirectGetLayoutDataArrayPtrFromTextLayout()
  *  
@@ -299,7 +300,7 @@ ATSUDirectGetLayoutDataArrayPtrFromLineRef(
  *      the entries in the array returned in oLayoutDataArray.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -313,6 +314,8 @@ ATSUDirectGetLayoutDataArrayPtrFromTextLayout(
 
 
 /* ---------------------------------------------------------------------------- */
+#endif  /* !__LP64__ */
+
 /*
  *  ATSUDirectReleaseLayoutDataArrayPtr()
  *  
@@ -355,6 +358,7 @@ ATSUDirectReleaseLayoutDataArrayPtr(
 
 
 /* ---------------------------------------------------------------------------- */
+#if !__LP64__
 /*
  *  ATSUDirectAddStyleSettingRef()
  *  
@@ -394,7 +398,7 @@ ATSUDirectReleaseLayoutDataArrayPtr(
  *      new index will be returned here.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -404,6 +408,8 @@ ATSUDirectAddStyleSettingRef(
   ATSUStyleSettingRef   iStyleSettingRef,
   UInt16 *              oStyleIndex)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

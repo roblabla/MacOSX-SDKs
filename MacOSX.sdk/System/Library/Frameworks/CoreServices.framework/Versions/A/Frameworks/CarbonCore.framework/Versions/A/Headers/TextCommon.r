@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -20,6 +20,11 @@
 #ifndef __CONDITIONALMACROS_R__
 #include <CarbonCore/ConditionalMacros.r>
 #endif
+
+#define kTextFlushDefault 				0
+#define kTextCenter 					1
+#define kTextFlushRight 				(-1)
+#define kTextFlushLeft 					(-2)
 
 															/*  Mac OS encodings */
 #define kTextEncodingMacRoman 			0
@@ -89,6 +94,7 @@
 #define kTextEncodingUnicodeV3_1 		0x0105				/*  Adds characters requiring surrogate pairs in UTF-16 */
 #define kTextEncodingUnicodeV3_2 		0x0106
 #define kTextEncodingUnicodeV4_0 		0x0108
+#define kTextEncodingUnicodeV5_0 		0x010A
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */
@@ -145,7 +151,7 @@
 #define kTextEncodingJIS_X0208_90 		0x0622
 #define kTextEncodingJIS_X0212_90 		0x0623
 #define kTextEncodingJIS_C6226_78 		0x0624
-#define kTextEncodingShiftJIS_X0213_00 	0x0628				/*  Shift-JIS format encoding of JIS X0213 planes 1 and 2 */
+#define kTextEncodingShiftJIS_X0213 	0x0628				/*  Shift-JIS format encoding of JIS X0213 planes 1 and 2 */
 #define kTextEncodingJIS_X0213_MenKuTen  0x0629				/*  JIS X0213 in plane-row-column notation (3 bytes) */
 #define kTextEncodingGB_2312_80 		0x0630
 #define kTextEncodingGBK_95 			0x0631				/*  annex to GB 13000-93; for Windows 95; EUC-CN extended */
@@ -297,7 +303,9 @@
 #define kJapaneseBasicVariant 			2
 #define kJapanesePostScriptScrnVariant 	3
 #define kJapanesePostScriptPrintVariant  4
-#define kJapaneseVertAtKuPlusTenVariant  5					/*  kJapaneseStdNoOneByteKanaVariant = 6,  // replaced by kJapaneseNoOneByteKanaOption */
+#define kJapaneseVertAtKuPlusTenVariant  5
+#define kTextEncodingShiftJIS_X0213_00 	0x0628				/*  Shift-JIS format encoding of JIS X0213 planes 1 and 2 */
+															/*  kJapaneseStdNoOneByteKanaVariant = 6,  // replaced by kJapaneseNoOneByteKanaOption */
 															/*  kJapaneseBasicNoOneByteKanaVariant = 7,    // replaced by kJapaneseNoOneByteKanaOption     */
 #define kHebrewStandardVariant 			0
 #define kHebrewFigureSpaceVariant 		1					/*  Old Unicode variants. Variant 2 (kUnicodeCanonicalDecompVariant, kUnicodeMaxDecomposedVariant) is ambiguous and means */
@@ -311,10 +319,6 @@
 #define kUnicodeMaxDecomposedVariant 	2					/*  use kUnicodeNormalizationFormD or kUnicodeHFSPlusDecompVariant */
 #define kUnicodeCanonicalCompVariant 	3					/*  replaced by kUnicodeNormalizationFormC */
 #define kUnicodeNoComposedVariant 		3					/*  this really meant NoComposing; replaced by kUnicodeNormalizationFormC */
-															/*  The following Japanese variant options were never supported and are now deprecated. */
-															/*  In TEC 1.4 and later their functionality is replaced by the Unicode Converter options listed. */
-#define kJapaneseNoOneByteKanaOption 	0x20				/*  replaced by UnicodeConverter option kUnicodeNoHalfwidthCharsBit */
-#define kJapaneseUseAsciiBackslashOption  0x40				/*  replaced by UnicodeConverter option kUnicodeForceASCIIRangeBit */
 
 															/*  Default TextEncodingFormat for any TextEncodingBase */
 #define kTextEncodingDefaultFormat 		0					/*  Formats for Unicode & ISO 10646 */

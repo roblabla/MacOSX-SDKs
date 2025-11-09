@@ -25,23 +25,17 @@
 	
 	#include <AudioUnit/AudioUnitProperties.h>
 	#include <AudioUnit/AudioUnitParameters.h>
-	
-	#include <AudioUnit/AudioUnitCarbonView.h>
-	
+		
 	#include <AudioUnit/AudioCodec.h>
-	
-	// This file relies on AUComponent.h
-	// and contains the differences of Version 1 API
-	#include <AudioUnit/AUNTComponent.h>
+
 #else
 	#include <AUComponent.h>
 	#include <AudioOutputUnit.h>
 	#include <AudioUnitProperties.h>
 	#include <AudioUnitParameters.h>
 	#include <AudioCodec.h>
-	#include <AUNTComponent.h>
-	#include <AudioUnitCarbonView.h>
 	#include <MusicDevice.h>
+
 #endif
 
 #endif /* __AUDIOUNIT__ */

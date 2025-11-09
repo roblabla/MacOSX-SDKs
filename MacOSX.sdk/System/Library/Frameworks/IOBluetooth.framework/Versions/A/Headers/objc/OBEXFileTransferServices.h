@@ -25,8 +25,10 @@
 /*!
     @class			OBEXFileTransferServices
     @abstract		Implements advanced OBEX operations in addition to simple PUT and GET.
-    @discussion		All operations are asynchronous and callback over a respective delegate 
-					method if the initial return value is successful.
+    @discussion		All operations are asynchronous and will callback over a respective delegate 
+					method if the initial return value is successful.  The initial return value 
+					usually concerns the state of this object where as the delegate return value
+					reflects the response of the remote device.
 */
 
 @interface OBEXFileTransferServices : NSObject
@@ -97,7 +99,8 @@
 	@abstract		Create a new OBEXFileTransferServices object
 	@discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given 
 					IOBluetoothOBEXSession does not need to be connected to the remote server.  
-					This module can be manually connected through the connect() method.
+					OBEXFileTransferServices can be manually connected through the provided connection 
+					methods.
 	@param			inOBEXSession A valid IOBluetoothOBEXSession
 	@result			A newly created OBEXFileTransferServices object on success, nil on failure
 */
@@ -106,7 +109,7 @@
 
 
 #pragma mark -
-#pragma mark ¥ Accessors ¥
+#pragma mark === Accessors ===
 //------------------------------------------
 // Accessors
 //------------------------------------------
@@ -114,8 +117,12 @@
 /*!
 	@method     setDelegate:
 	@abstract   Manually set the delegate
-	@discussion Manually set the delegate
-	@param		inDelegate An object that implements the methods defined in th 
+	@discussion The only way to receive OBEXFileTransferServices transfer operation updates are through
+				using the provided delegate methods below.  The return values from all transfer operations
+				on this object are only initial values reflecting the state of this object, not the transfers
+				as a whole.
+				Note that prior to 10.5, the delegate was erroneously retained by the FTS object. In 10.5 and later it is not retained.
+	@param		inDelegate An object that implements the methods defined in the 
 				OBEXFileTransferServicesDelegate category
 */
 - (void) setDelegate: (id) inDelegate;
@@ -140,8 +147,10 @@
 /*!
 	@method     isBusy
 	@abstract   Get the action state of the module
-	@discussion The actionInProgress flag is set internally when action methods are called 
-				on this module and is reset when the operation has completed
+	@discussion OBEXFileTransferServices will be considered "busy" when an operation in taking place or
+				has not completed.  Calling abort: on this module will not automatically reset its busy
+				state.  The user will have to wait for the operation to complete or for the current
+				operation to timeout.
 	@result		Success or failure code.
 */
 - (BOOL) isBusy;
@@ -159,7 +168,7 @@
 
 
 #pragma mark -
-#pragma mark ¥ Actions ¥
+#pragma mark === Actions ===
 //------------------------------------------
 // Actions
 //------------------------------------------
@@ -192,8 +201,8 @@
     @method     disconnect
     @abstract   Disconnect from the remote device
     @discussion The user can manually disconnect the OBEXSession from the remote device if they want
-				to.  This object will disconnect the OBEXSession at release only if it was responsible 
-				for opening the connection via a connect method on this object.
+				to.  OBEXFileTransferServices will disconnect the OBEXSession at release only if it was responsible 
+				for opening the connection via a connect method.
 	@result		kOBEXSuccess, kOBEXSessionNotConnectedError, or kOBEXSessionBusyError initially. Further results 
 				returned through the fileTransferServicesDisconnectionComplete: delegate method if initially successful.
 */
@@ -270,7 +279,7 @@
 - (OBEXError) sendFile: (NSString*) inLocalPathAndName;
 
 /*!
-    @method     copyRemoteFile: toLocalPath:
+    @method     copyRemoteFile:toLocalPath:
     @abstract   Copy a remote file to a local path
     @discussion Equivalent to 'cp remotePath/remoteFileName localPathAndName'.
 	@param		inRemoteFileName The name of the remote file to get
@@ -283,12 +292,13 @@
 				 toLocalPath: (NSString*) inLocalPathAndName;
 
 /*!
-	@method     sendData: type: name:
+	@method     sendData:type:name:
 	@abstract   Send data to a remote target
-	@discussion Use this method when you have file data to send but not file to read from.
+	@discussion Use this method when you have data to send but no file to read from.
 	@param		inData The data to be sent
-	@param		inType The type of the data to be sent that will used in the OBEX type header.  
-				This argument is optional. 
+	@param		inType The type of the data to be sent that will be used in the OBEX type header,
+				usually a mime-type.  For example, use "text/x-vCard" when sending vCards. This 
+				argument is optional. 
 	@param		inName The name of the file that the data can be referenced as.
 	@result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further 
 				results returned through the fileTransferServicesSendComplete: and 
@@ -300,10 +310,10 @@
 
 /*!
 	@method     getDefaultVCard:
-	@abstract   Get the remote default VCard, if its supported
+	@abstract   Get the remote default VCard, if it is supported
 	@discussion Some devices such as cellphones and computers support default VCards
 	@param		inLocalPathAndName The path and name of where the received file will go
-	@result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError. initially.  Further 
+	@result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially.  Further 
 				results returned through the fileTransferServicesGetComplete: and 
 				fileTransferServicesGetProgress: delegate methods if initially successful.
 */
@@ -312,8 +322,8 @@
 /*!
     @method     abort
     @abstract   Abort the current operation
-    @discussion Attempts send an abort request to the remote device.  Returns OBEXFileTransferServices to an
-				idle state, though the state of the remote device is not guaranteed.
+    @discussion Attempts send an abort request to the remote device.  Returns the OBEXFileTransferServices
+				object to an idle state though the state of the remote device is not guaranteed.
 	@result		kOBEXSuccess, or kOBEXGeneralError if no command is in progress. ABORT 
 				commands can only be sent on our turn, meaning we may have to timeout if the
 				target side never responds to the command in progress.  In that case this object
@@ -328,7 +338,7 @@
 
 
 #pragma mark -
-#pragma mark ¥ Delegate Interface ¥
+#pragma mark === Delegate Interface ===
 //====================================================================================================================
 //  Delegate Methods
 //====================================================================================================================
@@ -342,14 +352,47 @@
 //  These keys are used with the NSDictionary returned from the fileTransferServicesPutProgress:
 // and fileTransferServicesGetProgress: delegate methods
 //
-extern CFStringRef kFTSProgressBytesTransferredKey;	// int
-extern CFStringRef kFTSProgressBytesTotalKey;		// int
-extern CFStringRef kFTSProgressPrecentageKey;		// float
-extern CFStringRef kFTSProgressEstimatedTimeKey;	// double
-extern CFStringRef kFTSProgressTimeElapsedKey;		// int
-extern CFStringRef kFTSProgressTransferRateKey;		// float
+/*!
+ @const			kFTSProgressBytesTransferredKey
+ @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressBytesTransferredKey;
+/*!
+ @const			kFTSProgressBytesTotalKey
+ @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressBytesTotalKey;
+/*!
+ @const			kFTSProgressPercentageKey
+ @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressPercentageKey;
+//  Spelled wrong, but it must be supported for backward compatibility
+//
+extern CFStringRef kFTSProgressPrecentageKey;
 
-#define kFTSProgressPercentageKey	kFTSProgressPrecentageKey
+
+/*!
+ @const			kFTSProgressEstimatedTimeKey
+ @abstract		NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressEstimatedTimeKey;
+/*!
+ @const			kFTSProgressTimeElapsedKey
+ @abstract		NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressTimeElapsedKey;
+/*!
+ @const			kFTSProgressTransferRateKey
+ @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress:
+				and fileTransferServicesGetProgress: delegate methods
+ */
+extern CFStringRef kFTSProgressTransferRateKey;
 
 #pragma mark -
 #pragma mark Listing Keys
@@ -359,18 +402,40 @@ extern CFStringRef kFTSProgressTransferRateKey;		// float
 //  These keys are used with the array of NSDictionary's returned through the delegate method
 // fileTransferServicesGetListingComplete: after calling getFolderListing.  
 //
-extern CFStringRef kFTSListingNameKey;		// NSString
-extern CFStringRef kFTSListingTypeKey;		// FTSFileType
-extern CFStringRef kFTSListingSizeKey;		// int
+/*!
+	@const			kFTSListingNameKey
+	@abstract		NSString value.  This key is used with the array of NSDictionary's returned through the delegate method
+					fileTransferServicesGetListingComplete: after calling getFolderListing.  
+ */
+extern CFStringRef kFTSListingNameKey;
+/*!
+	@const			kFTSListingTypeKey
+	@abstract		FTSFileType value.  This key is used with the array of NSDictionary's returned through the delegate method
+					fileTransferServicesGetListingComplete: after calling getFolderListing.  
+ */
+extern CFStringRef kFTSListingTypeKey;
+/*!
+	@const			kFTSListingSizeKey
+	@abstract		Int value.  This key is used with the array of NSDictionary's returned through the delegate method
+					fileTransferServicesGetListingComplete: after calling getFolderListing.  
+ */
+extern CFStringRef kFTSListingSizeKey;
 
 
-//  the int values matching the kFTSListingTypeKey value
-//
+
+/*!
+ @enum			FTSFileType
+ @discussion	The type values associated with the kFTSListingTypeKey dictionary value
+ @constant		kFTSFileTypeFolder Folder
+ @constant		kFTSFileTypeFile File
+ */
 enum  FTSFileType
 {
 	kFTSFileTypeFolder = 1,
 	kFTSFileTypeFile   = 2
 };
+
+
 
 
 
@@ -401,11 +466,11 @@ enum  FTSFileType
 	@abstract		The delegate method that corresponds to the abort method
 	@discussion		Possible inError values are kOBEXSuccess and kOBEXTimeoutError
 */
-- (void) fileTransferServicesAbortComplete:(OBEXFileTransferServices*)inServices			error:(OBEXError)inError;
+- (void) fileTransferServicesAbortComplete:(OBEXFileTransferServices*)inServices	error:(OBEXError)inError;
 
 /*!
 	@method			fileTransferServicesRemoveItemComplete:error:removedItem:
-	@abstract		The delegate method that corresponds to the removeItemNamed: method
+	@abstract		The delegate method that corresponds to the removeItemNamed: method.
 	@discussion		
 	@param			inItemName The name of the remote item that was removed
 */
@@ -413,11 +478,11 @@ enum  FTSFileType
 
 /*!
 	@method			fileTransferServicesCreateFolderComplete:error:folderName:
-	@abstract		The delegate method that corresponds to the createFolderNamed: method
+	@abstract		The delegate method that corresponds to the createFolderNamed: method.
 	@discussion		
 	@param			inFolderName The name of the newly created folder
 */
-- (void) fileTransferServicesCreateFolderComplete:(OBEXFileTransferServices*)inServices  error:(OBEXError)inError folder:(NSString*)inFolderName;
+- (void) fileTransferServicesCreateFolderComplete:(OBEXFileTransferServices*)inServices		error:(OBEXError)inError folder:(NSString*)inFolderName;
 
 /*!
 	@method			fileTransferServicesPathChangeComplete:error:finalPath:
@@ -433,42 +498,52 @@ enum  FTSFileType
 	@abstract		The delegate method that corresponds to the retrieveFolderListing method
 	@discussion		
 	@param			inListing An array of NSDictionary's that detail each file at the current path.  The keys
-					to this dictionary are defined above.
+					to this dictionary are defined in the OBEXFileTransferServicesDelegate category.
 */
 - (void) fileTransferServicesRetrieveFolderListingComplete:(OBEXFileTransferServices*)inServices	error:(OBEXError)inError listing:(NSArray*)inListing;
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+/*!
+	 @method		fileTransferServicesFilePreparationComplete:error:
+	 @abstract		The delegate method for receiving information on the preparation of each file to send
+	 @discussion	This method will be called before the transfer operation.
+*/
+- (void) fileTransferServicesFilePreparationComplete: (OBEXFileTransferServices*) inServices	error: (OBEXError) inError;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 /*!
 	@method			fileTransferServicesSendFileProgress:transferProgress:
 	@abstract		The delegate method for receiving information on the sendFile: transfer
-	@discussion		This method will be called during the transfer operation
-	@param			inProgressDescription A dictionary containing information on the state of the transfer. The
-					keys are defined above.
+	@discussion		This method will be called during the transfer operation.
+	@param			inProgressDescription A dictionary containing information on the state of the transfer. The keys
+					 to this dictionary are defined in the OBEXFileTransferServicesDelegate category.
 */
-- (void) fileTransferServicesSendFileProgress:(OBEXFileTransferServices*)inServices			transferProgress:(NSDictionary*)inProgressDescription;
+- (void) fileTransferServicesSendFileProgress:(OBEXFileTransferServices*)inServices		transferProgress:(NSDictionary*)inProgressDescription;
 
 /*!
 	@method			fileTransferServicesSendFileComplete:error:
-	@abstract		The delegate method that corresponds to the sendFile: method
-	@discussion		This method will be called when the transfer operation has finished
+	@abstract		The delegate method that corresponds to the sendFile: method.
+	@discussion		This method will be called when the transfer operation has finished.
 */
-- (void) fileTransferServicesSendFileComplete:(OBEXFileTransferServices*)inServices			error:(OBEXError)inError;
+- (void) fileTransferServicesSendFileComplete:(OBEXFileTransferServices*)inServices		error:(OBEXError)inError;
 
 
 /*!
 	@method			fileTransferServicesCopyRemoteFileProgress:transferProgress:
 	@abstract		The delegate method for receiving information on the GET transfer
 	@discussion		This method will be called during the transfer operation
-	@param			inProgressDescription A dictionary containing information on the state of the transfer. The
-					keys are defined above.
+	@param			inProgressDescription A dictionary containing information on the state of the transfer. The keys
+					to this dictionary are defined in the OBEXFileTransferServicesDelegate category.
 */
-- (void) fileTransferServicesCopyRemoteFileProgress:(OBEXFileTransferServices*)inServices			transferProgress:(NSDictionary*)inProgressDescription;
+- (void) fileTransferServicesCopyRemoteFileProgress:(OBEXFileTransferServices*)inServices	transferProgress:(NSDictionary*)inProgressDescription;
 
 /*!
 	@method			fileTransferServicesCopyRemoteFileComplete:error:
 	@abstract		The delegate method that corresponds to the getFileNamed:toLocalPathAndName: method
 	@discussion		This method will be called when the transfer operation has finished
 */
-- (void) fileTransferServicesCopyRemoteFileComplete:(OBEXFileTransferServices*)inServices			error:(OBEXError)inError;
+- (void) fileTransferServicesCopyRemoteFileComplete:(OBEXFileTransferServices*)inServices	error:(OBEXError)inError;
 
 
 
@@ -518,6 +593,14 @@ typedef void (*OBEXFileTransferServicesRetrieveFolderListingComplete)(  void * 	
 																		OBEXError					error,
 																		CFArrayRef					listing);
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+typedef void (*OBEXFileTransferServicesFilePreparationComplete)(		void * 						userRefCon,
+																		OBEXFileTransferServicesRef	servicesRef,
+																		OBEXError					error);
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
+
 typedef void (*OBEXFileTransferServicesSendFileProgress)(				void *						userRefCon,
 																		OBEXFileTransferServicesRef	servicesRef,
 																		CFDictionaryRef				progressDict);
@@ -561,6 +644,13 @@ extern void 	OBEXFileTransferServicesSetPathChangeCallback(				OBEXFileTransferS
 extern void 	OBEXFileTransferServicesSetRetrieveFolderListingCallback(	OBEXFileTransferServicesRef					inRef,
 																			OBEXFileTransferServicesRetrieveFolderListingComplete	callback );
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+extern void 	OBEXFileTransferServicesSetFilePreparationCompleteCallback(	OBEXFileTransferServicesRef					inRef,
+																			OBEXFileTransferServicesFilePreparationComplete	callback );
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
+
+																		
 extern void 	OBEXFileTransferServicesSetSendFileCompleteCallback(		OBEXFileTransferServicesRef					inRef,
 																			OBEXFileTransferServicesSendFileComplete	callback );
 

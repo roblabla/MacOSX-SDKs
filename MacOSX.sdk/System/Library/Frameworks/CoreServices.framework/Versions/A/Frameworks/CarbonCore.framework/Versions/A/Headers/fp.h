@@ -3,7 +3,7 @@
  
      Contains:   FPCE Floating-Point Definitions and Declarations.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1987-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -52,7 +52,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /********************************************************************************
 *                                                                               *
@@ -68,16 +68,18 @@ extern "C" {
 *    x86              double(64)                   double(64)                   *
 *                                                                               *
 ********************************************************************************/
-#if (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__))
-/* these types were already defined in math.h */
+#if TARGET_RT_MAC_MACHO
+    /* math.h already defines almost everything in here.  Most of the */
+    /* remainder of this file until #endif  TARGET_RT_MAC_MACHO is*/
+    /* ignored. */
+#elif (defined(__MWERKS__) && defined(__cmath__))
+    /* many
+ types were already defined in math.h */
 #else
-#if TARGET_CPU_PPC
+#if TARGET_CPU_PPC || TARGET_CPU_PPC64
 typedef float                           float_t;
 typedef double                          double_t;
-#elif TARGET_CPU_68K
-typedef long double                     float_t;
-typedef long double                     double_t;
-#elif TARGET_CPU_X86
+#elif TARGET_CPU_X86 || TARGET_CPU_X86_64
 typedef double                          float_t;
 typedef double                          double_t;
 #elif TARGET_CPU_MIPS
@@ -116,12 +118,11 @@ typedef double                          double_t;
 
 #if TARGET_CPU_PPC
   #define      DECIMAL_DIG              17 /* does not exist for double-double */
-#elif TARGET_CPU_68K
-  #define      DECIMAL_DIG              21
 #endif      
 #endif  /* (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__)) */
 /* MSL or math.h already defines these */
-#if (!defined(__MWERKS__) || !defined(__cmath__)) && (!TARGET_RT_MAC_MACHO || !defined(__MATH__))
+#if TARGET_RT_MAC_MACHO && defined(__MATH__)
+#elif (!defined(__MWERKS__) || !defined(__cmath__))
 /********************************************************************************
 *                                                                               *
 *                            Trigonometric functions                            *
@@ -562,6 +563,7 @@ extern double_t  erf(double_t x);
 extern double_t  erfc(double_t x);
 
 
+#if !defined( __STRICT_ANSI__) && !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
 /*
  *  gamma()
  *  
@@ -573,6 +575,7 @@ extern double_t  erfc(double_t x);
 extern double_t  gamma(double_t x);
 
 
+#endif
 /*
  *  lgamma()
  *  
@@ -691,17 +694,7 @@ extern double_t  round(double_t x);
 extern long  roundtol(double_t round);
 
 
-/*
-    Note: For compatiblity trunc(x) has a return type of
-            int       for classic 68K with FPU enabled
-            double_t  everywhere else
-*/
-#if TARGET_RT_MAC_68881
-typedef int                             _trunc_return_type;
-#else
 typedef double_t                        _trunc_return_type;
-#endif  /* TARGET_RT_MAC_68881 */
-
 /*
  *  trunc()
  *  
@@ -1189,7 +1182,7 @@ extern double_t  fmax(double_t x, double_t y);
 extern double_t  fmin(double_t x, double_t y);
 
 
-#endif /* (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__)) */
+#endif /* TARGET_RT_MAC_MACHO */
 
 /*******************************************************************************
 *                                Constants                                     *
@@ -1321,10 +1314,8 @@ extern relop  relation(double_t x, double_t y)                                  
 *   dec2l       Similar to dec2num except a long is returned.                   *
 *                                                                               *
 ********************************************************************************/
-#if TARGET_CPU_PPC || TARGET_CPU_X86
+#if TARGET_CPU_PPC || TARGET_CPU_X86 || TARGET_CPU_PPC64 || TARGET_CPU_X86_64
     #define SIGDIGLEN      36  
-#elif TARGET_CPU_68K
-    #define SIGDIGLEN      20
 #endif
 #define      DECSTROUTLEN   80               /* max length for dec2str output */
 #define      FLOATDECIMAL   ((char)(0))
@@ -1424,14 +1415,6 @@ extern short  dec2s(const decimal * d)                        AVAILABLE_MAC_OS_X
 extern long  dec2l(const decimal * d)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-
-
-/********************************************************************************
-*                                                                               *
-*                         68k-only Transfer Function Prototypes                 *
-*                                                                               *
-********************************************************************************/
 #endif  /* !defined(__NOEXTENSIONS__) */
 
 /********************************************************************************
@@ -1440,7 +1423,7 @@ extern long  dec2l(const decimal * d)                         AVAILABLE_MAC_OS_X
 *                                                                               *
 ********************************************************************************/
 
-#if TARGET_CPU_PPC
+#if TARGET_CPU_PPC || TARGET_CPU_PPC64
 #ifndef __MWERKS__  /* Metrowerks does not support double double */
 
 /*
@@ -1891,8 +1874,6 @@ extern long double  logbl(long double x);
  * Because of this, you'll need to define the macro below in order for fp.h to export a
  * definition of scalbl.  Or, you could just do the calculation yourself.
  *
- *    
- *
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2028,9 +2009,9 @@ extern long double  erfcl(long double x);
 extern long double  gammal(long double x);
 #if TYPE_LONGDOUBLE_IS_DOUBLE
   #ifdef __cplusplus
-    inline long double gammal(long double x) { return (long double) gamma((double)(x)); }
+    inline long double gammal(long double x) { return (long double) tgamma((double)(x)); }
   #else
-    #define gammal(x) ((long double) gamma((double)(x)))
+    #define gammal(x) ((long double) tgamma((double)(x)))
   #endif
 #endif
 
@@ -2380,7 +2361,7 @@ extern long double  dec2numl(const decimal * d);
 
 #endif  /* !defined(__NOEXTENSIONS__) */
 
-#endif  /* TARGET_CPU_PPC */
+#endif  /* TARGET_CPU_PPC || TARGET_CPU_PPC64 */
 
 #ifndef __NOEXTENSIONS__
 /*    
@@ -2459,7 +2440,7 @@ extern void  ldtox80(const long double *x, extended80 *x80);
 #endif  /* !defined(__NOEXTENSIONS__) */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -157,7 +157,7 @@ public:
 protected:
 	void terminateUnit( void );
 	static void terminateUnitThreadFunc( void * refcon );
-
+	    
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 1);

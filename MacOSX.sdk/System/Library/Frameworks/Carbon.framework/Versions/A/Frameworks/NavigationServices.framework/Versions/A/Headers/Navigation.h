@@ -3,7 +3,7 @@
  
      Contains:   Navigation Services Interfaces
  
-     Version:    NavigationServices-130~640
+     Version:    NavigationServices-160~98
  
      Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
  
@@ -30,8 +30,6 @@
 
 
 
-
-
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -42,8 +40,33 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+
+/*
+ *  Navigation Services
+ *  
+ *  Discussion:
+ *    In Mac OS X 10.5, Navigation Services has been reimplemented atop
+ *    Cocoa's NSSavePanel. A NavDialogRef may be cast to an
+ *    NSSavePanel* for put dialogs, an NSOpenPanel* for get and choose
+ *    dialogs and an NSAlert* for the various ask save changes dialogs.
+ *    Once cast to the appropriate Cocoa object you can call Cocoa APIs
+ *    on that object normally. For instance, the custom area of the Nav
+ *    dialog may be populated with Cocoa NSViews
+ *    [(NSSavePanel*)myNavDialogRef setAccesoryView:myNSView].
+ *    Exception: Once a dialog is created via the NavgationServices API
+ *    it must be invoked with NavDialogRun. Custom preview support is
+ *    no longer available on Mac OS X 10.5. NavPreview procedures are
+ *    no longer called, kNavCBAdjustPreview Nav event callback messages
+ *    are no longer sent and the NavCBRec previewRect field will always
+ *    be empty. Navigation Services now depends on QuickLook for
+ *    preview rendering. Clients may write a QuickLook plug-in to
+ *    generate custom previews for open dialogs as well as Finder and
+ *    Spotlight. Because a NavDialogRef is an Objective-C object
+ *    underneath, -release or CFRelease may be called on it instead of
+ *    NavDialogDispose.
+ */
 typedef UInt32 NavAskSaveChangesAction;
 enum {
                                         /* input action codes for NavAskSaveChanges() */
@@ -97,8 +120,8 @@ struct NavFileOrFolderInfo {
       Boolean             resourceOpen;       /* resource fork is opened */
       Boolean             dataOpen;           /* data fork is opened */
       Boolean             reserved1;
-      UInt32              dataSize;           /* size of the data fork */
-      UInt32              resourceSize;       /* size of the resource fork */
+      ByteCount           dataSize;           /* size of the data fork */
+      ByteCount           resourceSize;       /* size of the resource fork */
       FInfo               finderInfo;         /* more file info: */
       FXInfo              finderXInfo;
     }                       fileInfo;
@@ -109,7 +132,7 @@ struct NavFileOrFolderInfo {
       Boolean             readable;
       Boolean             writeable;
       Boolean             reserved2;
-      UInt32              numberOfFiles;
+      ItemCount           numberOfFiles;
       DInfo               finderDInfo;
       DXInfo              finderDXInfo;
       OSType              folderType;         /* package type, For struct version >= 1 */
@@ -372,6 +395,11 @@ enum {
    * using the Carbon-only NavCreate*Dialog APIs, then the menuType
    * field of the NavMenuItemSpec is set to the index into the client's
    * CFArray of popupExtension strings (see NavDialogCreationOptions).
+   * In these cases, the menuCreator field of the NavManuItemSpec is
+   * set to kNavClientPopupExtensionTag. For system supplied menu items
+   * it will be set to 0. A kNavCBPopupMenuSelect message is also sent
+   * as the dialog opens to notify the client of the initial menu
+   * setting.
    */
   kNavCBPopupMenuSelect         = 8,
 
@@ -386,9 +414,9 @@ enum {
   kNavCBCancel                  = 10,
 
   /*
-   * The custom preview area state has changed. The
-   * NavCBRec.eventData.eventDataParms.param is a Boolean* set to true
-   * if the preview area is visible or false if it is not.
+   * ** NOT SENT STARTING IN 10.5 *** The custom preview area state has
+   * changed. The NavCBRec.eventData.eventDataParms.param is a Boolean*
+   * set to true if the preview area is visible or false if it is not.
    */
   kNavCBAdjustPreview           = 11,
 
@@ -405,7 +433,7 @@ enum {
    * block navigation or dismissal by setting the appropriate action
    * state with the kNavCtlSetActionState NavCustomControl selector.
    */
-  kNavCBOpenSelection           = (long)0x80000000
+  kNavCBOpenSelection           = (SInt32)0x80000000
 };
 
 
@@ -530,6 +558,30 @@ InvokeNavObjectFilterUPP(
   NavFilterModes      filterMode,
   NavObjectFilterUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline NavEventUPP                                          NewNavEventUPP(NavEventProcPtr userRoutine) { return userRoutine; }
+    inline NavPreviewUPP                                        NewNavPreviewUPP(NavPreviewProcPtr userRoutine) { return userRoutine; }
+    inline NavObjectFilterUPP                                   NewNavObjectFilterUPP(NavObjectFilterProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeNavEventUPP(NavEventUPP) { }
+    inline void                                                 DisposeNavPreviewUPP(NavPreviewUPP) { }
+    inline void                                                 DisposeNavObjectFilterUPP(NavObjectFilterUPP) { }
+    inline void                                                 InvokeNavEventUPP(NavEventCallbackMessage callBackSelector, NavCBRecPtr callBackParms, void * callBackUD, NavEventUPP userUPP) { (*userUPP)(callBackSelector, callBackParms, callBackUD); }
+    inline Boolean                                              InvokeNavPreviewUPP(NavCBRecPtr callBackParms, void * callBackUD, NavPreviewUPP userUPP) { return (*userUPP)(callBackParms, callBackUD); }
+    inline Boolean                                              InvokeNavObjectFilterUPP(AEDesc * theItem, void * info, void * callBackUD, NavFilterModes filterMode, NavObjectFilterUPP userUPP) { return (*userUPP)(theItem, info, callBackUD, filterMode); }
+  #else
+    #define NewNavEventUPP(userRoutine)                         ((NavEventUPP)userRoutine)
+    #define NewNavPreviewUPP(userRoutine)                       ((NavPreviewUPP)userRoutine)
+    #define NewNavObjectFilterUPP(userRoutine)                  ((NavObjectFilterUPP)userRoutine)
+    #define DisposeNavEventUPP(userUPP)
+    #define DisposeNavPreviewUPP(userUPP)
+    #define DisposeNavObjectFilterUPP(userUPP)
+    #define InvokeNavEventUPP(callBackSelector, callBackParms, callBackUD, userUPP) (*userUPP)(callBackSelector, callBackParms, callBackUD)
+    #define InvokeNavPreviewUPP(callBackParms, callBackUD, userUPP) (*userUPP)(callBackParms, callBackUD)
+    #define InvokeNavObjectFilterUPP(theItem, info, callBackUD, filterMode, userUPP) (*userUPP)(theItem, info, callBackUD, filterMode)
+  #endif
+#endif
+
 typedef SInt32 NavCustomControlMessage;
 enum {
   kNavCtlShowDesktop            = 0,    /*    show desktop,           parms = nil */
@@ -595,14 +647,14 @@ enum {
 };
 
 
-typedef UInt32 NavDialogOptionFlags;
+typedef OptionBits NavDialogOptionFlags;
 enum {
   kNavDefaultNavDlogOptions     = 0x000000E4, /* use defaults for all the options */
   kNavNoTypePopup               = 0x00000001, /* don't show file type/extension popup on Open/Save */
   kNavDontAutoTranslate         = 0x00000002, /* don't automatically translate on Open */
   kNavDontAddTranslateItems     = 0x00000004, /* don't add translation choices on Open/Save */
   kNavAllFilesInPopup           = 0x00000010, /* "All Files" menu item in the type popup on Open */
-  kNavAllowStationery           = 0x00000020, /* allow saving of stationery files */
+  kNavAllowStationery           = 0x00000020, /* Deprecated: Not available in Mac OS X */
   kNavAllowPreviews             = 0x00000040, /* allow preview to show */
   kNavAllowMultipleFiles        = 0x00000080, /* allow multiple items to be selected */
   kNavAllowInvisibleFiles       = 0x00000100, /* allow invisible items to be shown */
@@ -645,6 +697,10 @@ enum {
   kNavGenericSignature          = '****'
 };
 
+enum {
+  kNavClientPopupExtensionTag   = 'extn'
+};
+
 struct NavTypeList {
   OSType              componentSignature;
   short               reserved;
@@ -654,25 +710,6 @@ struct NavTypeList {
 typedef struct NavTypeList              NavTypeList;
 typedef NavTypeList *                   NavTypeListPtr;
 typedef NavTypeListPtr *                NavTypeListHandle;
-enum {
-  kNavDialogOptionsVersion      = 0
-};
-
-struct NavDialogOptions {
-  UInt16              version;
-  NavDialogOptionFlags  dialogOptionFlags;    /* option flags for affecting the dialog's behavior */
-  Point               location;               /* top-left location of the dialog, or {-1,-1} for default position */
-  Str255              clientName;
-  Str255              windowTitle;
-  Str255              actionButtonLabel;      /* label of the default button (or null string for default) */
-  Str255              cancelButtonLabel;      /* label of the cancel button (or null string for default) */
-  Str255              savedFileName;          /* default name for text box in NavPutFile (or null string for default) */
-  Str255              message;                /* custom message prompt (or null string for default) */
-  UInt32              preferenceKey;          /* a key for to managing preferences for using multiple utility dialogs */
-  NavMenuItemSpecArrayHandle  popupExtension; /* extended popup menu items, an array of NavMenuItemSpecs */
-  char                reserved[494];
-};
-typedef struct NavDialogOptions         NavDialogOptions;
 enum {
   kNavReplyRecordVersion        = 2
 };
@@ -797,248 +834,6 @@ struct NavReplyRecord {
 };
 typedef struct NavReplyRecord           NavReplyRecord;
 /*
- *  NavLoad()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavLoad(void);
-
-
-/*
- *  NavUnload()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavUnload(void);
-
-
-/*
- *  NavLibraryVersion()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern UInt32 
-NavLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavGetDefaultDialogOptions()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavGetDefaultDialogOptions(NavDialogOptions * dialogOptions)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  NavGetFile()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavGetFile(
-  AEDesc *             defaultLocation,       /* can be NULL */
-  NavReplyRecord *     reply,
-  NavDialogOptions *   dialogOptions,         /* can be NULL */
-  NavEventUPP          eventProc,             /* can be NULL */
-  NavPreviewUPP        previewProc,           /* can be NULL */
-  NavObjectFilterUPP   filterProc,            /* can be NULL */
-  NavTypeListHandle    typeList,              /* can be NULL */
-  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavPutFile()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavPutFile(
-  AEDesc *            defaultLocation,       /* can be NULL */
-  NavReplyRecord *    reply,
-  NavDialogOptions *  dialogOptions,         /* can be NULL */
-  NavEventUPP         eventProc,             /* can be NULL */
-  OSType              fileType,
-  OSType              fileCreator,
-  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavAskSaveChanges()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavAskSaveChanges(
-  NavDialogOptions *         dialogOptions,
-  NavAskSaveChangesAction    action,
-  NavAskSaveChangesResult *  reply,
-  NavEventUPP                eventProc,           /* can be NULL */
-  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavCustomAskSaveChanges()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavCustomAskSaveChanges(
-  NavDialogOptions *         dialogOptions,
-  NavAskSaveChangesResult *  reply,
-  NavEventUPP                eventProc,           /* can be NULL */
-  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavAskDiscardChanges()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavAskDiscardChanges(
-  NavDialogOptions *            dialogOptions,
-  NavAskDiscardChangesResult *  reply,
-  NavEventUPP                   eventProc,           /* can be NULL */
-  void *                        callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavChooseFile()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavChooseFile(
-  AEDesc *             defaultLocation,       /* can be NULL */
-  NavReplyRecord *     reply,
-  NavDialogOptions *   dialogOptions,         /* can be NULL */
-  NavEventUPP          eventProc,             /* can be NULL */
-  NavPreviewUPP        previewProc,           /* can be NULL */
-  NavObjectFilterUPP   filterProc,            /* can be NULL */
-  NavTypeListHandle    typeList,              /* can be NULL */
-  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavChooseFolder()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavChooseFolder(
-  AEDesc *             defaultLocation,       /* can be NULL */
-  NavReplyRecord *     reply,
-  NavDialogOptions *   dialogOptions,         /* can be NULL */
-  NavEventUPP          eventProc,             /* can be NULL */
-  NavObjectFilterUPP   filterProc,            /* can be NULL */
-  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavChooseVolume()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavChooseVolume(
-  AEDesc *             defaultSelection,       /* can be NULL */
-  NavReplyRecord *     reply,
-  NavDialogOptions *   dialogOptions,          /* can be NULL */
-  NavEventUPP          eventProc,              /* can be NULL */
-  NavObjectFilterUPP   filterProc,             /* can be NULL */
-  void *               callBackUD)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavChooseObject()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavChooseObject(
-  AEDesc *             defaultLocation,       /* can be NULL */
-  NavReplyRecord *     reply,
-  NavDialogOptions *   dialogOptions,         /* can be NULL */
-  NavEventUPP          eventProc,             /* can be NULL */
-  NavObjectFilterUPP   filterProc,            /* can be NULL */
-  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavNewFolder()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavNewFolder(
-  AEDesc *            defaultLocation,       /* can be NULL */
-  NavReplyRecord *    reply,
-  NavDialogOptions *  dialogOptions,         /* can be NULL */
-  NavEventUPP         eventProc,             /* can be NULL */
-  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  NavTranslateFile()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern OSErr 
-NavTranslateFile(
-  NavReplyRecord *        reply,
-  NavTranslationOptions   howToTranslate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  NavCompleteSave()
  *  
  *  Availability:
@@ -1048,7 +843,7 @@ NavTranslateFile(
  */
 extern OSErr 
 NavCompleteSave(
-  NavReplyRecord *        reply,
+  const NavReplyRecord *  reply,
   NavTranslationOptions   howToTranslate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1067,11 +862,12 @@ NavCustomControl(
   void *                    parms)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
- *  NavCreatePreview()
+ *  NavCreatePreview()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NavigationLib 2.0 and later
  */
@@ -1080,8 +876,10 @@ NavCreatePreview(
   AEDesc *      theObject,
   OSType        previewDataType,
   const void *  previewData,
-  Size          previewDataSize)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          previewDataSize)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  NavDisposeReply()
@@ -1094,46 +892,6 @@ NavCreatePreview(
 extern OSErr 
 NavDisposeReply(NavReplyRecord * reply)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-/*
- *  NavServicesCanRun()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in NavigationLib 1.0 and later
- */
-extern Boolean 
-NavServicesCanRun(void);
-
-
-
-#if TARGET_RT_MAC_CFM
-#ifdef __cplusplus
-    inline pascal Boolean NavServicesAvailable() { return ((NavLibraryVersion != (void*)kUnresolvedCFragSymbolAddress) && NavServicesCanRun()); }
-#else
-    #define NavServicesAvailable()  ((NavLibraryVersion != (void*)kUnresolvedCFragSymbolAddress) && NavServicesCanRun())
-#endif
-#elif TARGET_RT_MAC_MACHO
-/* Navigation is always available on OS X */
-#ifdef __cplusplus
-    inline pascal Boolean NavServicesAvailable() { return true; }
-#else
-    #define NavServicesAvailable()  (true)
-#endif
-#else
-/* NavServicesAvailable() is implemented in Navigation.o for classic 68K clients*/
-/*
- *  NavServicesAvailable()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-#endif  /*  */
 
 /* Carbon API */
 /* Includes support for Unicode and long file names (where available). */
@@ -1157,7 +915,7 @@ enum {
  *    Pascal strings, and adds fields for setting the dialog modality
  *    and the parent window (for sheet dialogs). A
  *    NavDialogCreationOptions structure can be initialized using
- *    NavDialogGetDefaultCreationOptions. Each of the NavCreate*Dialog
+ *    NavGetDefaultDialogCreationOptions. Each of the NavCreate*Dialog
  *    functions accepts a pointer to the client's
  *    NavDialogCreationOptions structure.
  */
@@ -1463,7 +1221,7 @@ NavCreatePutFileDialog(
 extern OSStatus 
 NavCreateAskReviewDocumentsDialog(
   const NavDialogCreationOptions *  inOptions,
-  UInt32                            inDocumentCount,
+  ItemCount                         inDocumentCount,
   NavEventUPP                       inEventProc,           /* can be NULL */
   void *                            inClientData,          /* can be NULL */
   NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
@@ -1894,7 +1652,8 @@ NavDialogRun(NavDialogRef inDialog)                           AVAILABLE_MAC_OS_X
  *    Call this function when completely finished with a Nav Services
  *    dialog. After calling NavDialogDispose, the dialog reference is
  *    no longer valid. NavDialogDispose is safe to call from within a
- *    callback to the client's Nav Services event proc.
+ *    callback to the client's Nav Services event proc. On Mac OS X
+ *    10.5 and later, -release and CFRelease may be used instead.
  *  
  *  Parameters:
  *    
@@ -2192,8 +1951,366 @@ NavDialogSetFilterTypeIdentifiers(
   CFArrayRef     inTypeIdentifiers)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+#pragma mark -
+/*--------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED                                                                        */
+/*                                                                                      */
+/*  All functions below this point are either deprecated (they continue to function     */
+/*  but are not the most modern nor most efficient solution to a problem), or they are  */
+/*  completely unavailable on Mac OS X.                                                 */
+/*--------------------------------------------------------------------------------------*/
+enum {
+  kNavDialogOptionsVersion      = 0
+};
 
-#pragma options align=reset
+struct NavDialogOptions {
+  UInt16              version;
+  NavDialogOptionFlags  dialogOptionFlags;    /* option flags for affecting the dialog's behavior */
+  Point               location;               /* top-left location of the dialog, or {-1,-1} for default position */
+  Str255              clientName;
+  Str255              windowTitle;
+  Str255              actionButtonLabel;      /* label of the default button (or null string for default) */
+  Str255              cancelButtonLabel;      /* label of the cancel button (or null string for default) */
+  Str255              savedFileName;          /* default name for text box in NavPutFile (or null string for default) */
+  Str255              message;                /* custom message prompt (or null string for default) */
+  UInt32              preferenceKey;          /* a key for to managing preferences for using multiple utility dialogs */
+  NavMenuItemSpecArrayHandle  popupExtension; /* extended popup menu items, an array of NavMenuItemSpecs */
+  char                reserved[494];
+};
+typedef struct NavDialogOptions         NavDialogOptions;
+/*
+ *  NavLoad()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Not available in Mac OS X.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavLoad(void);
+
+
+/*
+ *  NavUnload()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Not available in Mac OS X.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavUnload(void);
+
+
+/*
+ *  NavLibraryVersion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Test against the system version instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern UInt32 
+NavLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavGetDefaultDialogOptions()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavGetDefaultDialogCreationOptions instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavGetDefaultDialogOptions(NavDialogOptions * dialogOptions)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+/*
+ *  NavGetFile()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateGetFileDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavGetFile(
+  AEDesc *             defaultLocation,       /* can be NULL */
+  NavReplyRecord *     reply,
+  NavDialogOptions *   dialogOptions,         /* can be NULL */
+  NavEventUPP          eventProc,             /* can be NULL */
+  NavPreviewUPP        previewProc,           /* can be NULL */
+  NavObjectFilterUPP   filterProc,            /* can be NULL */
+  NavTypeListHandle    typeList,              /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavPutFile()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreatePutFileDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavPutFile(
+  AEDesc *            defaultLocation,       /* can be NULL */
+  NavReplyRecord *    reply,
+  NavDialogOptions *  dialogOptions,         /* can be NULL */
+  NavEventUPP         eventProc,             /* can be NULL */
+  OSType              fileType,
+  OSType              fileCreator,
+  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavAskSaveChanges()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateAskSaveChangesDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavAskSaveChanges(
+  NavDialogOptions *         dialogOptions,
+  NavAskSaveChangesAction    action,
+  NavAskSaveChangesResult *  reply,
+  NavEventUPP                eventProc,           /* can be NULL */
+  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavCustomAskSaveChanges()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateAskSaveChangesDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavCustomAskSaveChanges(
+  NavDialogOptions *         dialogOptions,
+  NavAskSaveChangesResult *  reply,
+  NavEventUPP                eventProc,           /* can be NULL */
+  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavAskDiscardChanges()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateAskDiscardChangesDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavAskDiscardChanges(
+  NavDialogOptions *            dialogOptions,
+  NavAskDiscardChangesResult *  reply,
+  NavEventUPP                   eventProc,           /* can be NULL */
+  void *                        callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavChooseFile()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateChooseFileDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavChooseFile(
+  AEDesc *             defaultLocation,       /* can be NULL */
+  NavReplyRecord *     reply,
+  NavDialogOptions *   dialogOptions,         /* can be NULL */
+  NavEventUPP          eventProc,             /* can be NULL */
+  NavPreviewUPP        previewProc,           /* can be NULL */
+  NavObjectFilterUPP   filterProc,            /* can be NULL */
+  NavTypeListHandle    typeList,              /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavChooseFolder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateChooseFolderDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavChooseFolder(
+  AEDesc *             defaultLocation,       /* can be NULL */
+  NavReplyRecord *     reply,
+  NavDialogOptions *   dialogOptions,         /* can be NULL */
+  NavEventUPP          eventProc,             /* can be NULL */
+  NavObjectFilterUPP   filterProc,            /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavChooseVolume()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateChooseVolumeDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavChooseVolume(
+  AEDesc *             defaultSelection,       /* can be NULL */
+  NavReplyRecord *     reply,
+  NavDialogOptions *   dialogOptions,          /* can be NULL */
+  NavEventUPP          eventProc,              /* can be NULL */
+  NavObjectFilterUPP   filterProc,             /* can be NULL */
+  void *               callBackUD)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavChooseObject()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateChooseObjectDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavChooseObject(
+  AEDesc *             defaultLocation,       /* can be NULL */
+  NavReplyRecord *     reply,
+  NavDialogOptions *   dialogOptions,         /* can be NULL */
+  NavEventUPP          eventProc,             /* can be NULL */
+  NavObjectFilterUPP   filterProc,            /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavNewFolder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NavCreateNewFolderDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavNewFolder(
+  AEDesc *            defaultLocation,       /* can be NULL */
+  NavReplyRecord *    reply,
+  NavDialogOptions *  dialogOptions,         /* can be NULL */
+  NavEventUPP         eventProc,             /* can be NULL */
+  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavTranslateFile()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Navigation Services does not include Translation Manager support
+ *    on Mac OS X.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern OSErr 
+NavTranslateFile(
+  const NavReplyRecord *  reply,
+  NavTranslationOptions   howToTranslate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  NavServicesCanRun()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Navigation Services can always run on Mac OS X.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in NavigationLib 1.0 and later
+ */
+extern Boolean 
+NavServicesCanRun(void);
+
+
+
+#if TARGET_RT_MAC_CFM
+#ifdef __cplusplus
+    inline pascal Boolean NavServicesAvailable() { return ((NavLibraryVersion != (void*)kUnresolvedCFragSymbolAddress) && NavServicesCanRun()); }
+#else
+    #define NavServicesAvailable()  ((NavLibraryVersion != (void*)kUnresolvedCFragSymbolAddress) && NavServicesCanRun())
+#endif
+#elif TARGET_RT_MAC_MACHO
+/* Navigation is always available on OS X */
+#ifdef __cplusplus
+    inline pascal Boolean NavServicesAvailable() { return true; }
+#else
+    #define NavServicesAvailable()  (true)
+#endif
+#else
+/* NavServicesAvailable() is implemented in Navigation.o for classic 68K clients*/
+/*
+ *  NavServicesAvailable()
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+
+
+#endif  /*  */
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

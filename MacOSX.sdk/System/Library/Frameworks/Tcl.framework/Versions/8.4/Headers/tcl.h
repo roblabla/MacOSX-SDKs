@@ -328,6 +328,22 @@ typedef long LONG;
 #endif
 
 /*
+ * Darwin specifc configure overrides (to support fat compiles, where
+ * configure runs only once for multiple architectures):
+ */
+
+#ifdef __APPLE__
+#   ifdef __LP64__
+#	undef TCL_WIDE_INT_TYPE
+#	define TCL_WIDE_INT_IS_LONG 1
+#    else /* !__LP64__ */
+#	define TCL_WIDE_INT_TYPE long long
+#	undef TCL_WIDE_INT_IS_LONG
+#    endif /* __LP64__ */
+#    undef HAVE_STRUCT_STAT64
+#endif /* __APPLE__ */
+
+/*
  * Define Tcl_WideInt to be a type that is (at least) 64-bits wide,
  * and define Tcl_WideUInt to be the unsigned variant of that type
  * (assuming that where we have one, we can have the other.)

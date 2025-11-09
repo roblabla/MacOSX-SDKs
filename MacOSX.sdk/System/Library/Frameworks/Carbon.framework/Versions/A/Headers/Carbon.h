@@ -3,7 +3,7 @@
  
      Contains:   Master include for all of Carbon
  
-     Version:    Carbon-129~3631
+     Version:    Carbon-136~534
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -15,10 +15,6 @@
 */
 #ifndef __CARBON__
 #define __CARBON__
-
-#if __LP64__
-    #error 64-bit not supported
-#endif
 
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
@@ -33,9 +29,12 @@
 #include <HIToolbox/HIToolbox.h>
 #endif
 
+#if !__LP64__
 #ifndef __CARBONSOUND__
 #include <CarbonSound/CarbonSound.h>
 #endif
+
+#endif  /* !__LP64__ */
 
 #ifndef __OPENSCRIPTING__
 #include <OpenScripting/OpenScripting.h>
@@ -53,9 +52,12 @@
 #include <CommonPanels/CommonPanels.h>
 #endif
 
+#if !__LP64__
 #ifndef __HTMLRENDERING__
 #include <HTMLRendering/HTMLRendering.h>
 #endif
+
+#endif  /* !__LP64__ */
 
 #ifndef __SPEECHRECOGNITION__
 #include <SpeechRecognition/SpeechRecognition.h>

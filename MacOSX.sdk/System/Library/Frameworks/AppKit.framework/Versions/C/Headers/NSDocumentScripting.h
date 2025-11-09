@@ -1,7 +1,7 @@
 /*
         NSDocumentScripting.h
         AppKit Framework
-        Copyright (c) 1997-2004, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 

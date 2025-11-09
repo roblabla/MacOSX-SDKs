@@ -1,34 +1,35 @@
 /*	NSRange.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
+#import <Foundation/NSObjCRuntime.h>
 
 @class NSString;
 
 typedef struct _NSRange {
-    unsigned int location;
-    unsigned int length;
+    NSUInteger location;
+    NSUInteger length;
 } NSRange;
 
 typedef NSRange *NSRangePointer;
 
-FOUNDATION_STATIC_INLINE NSRange NSMakeRange(unsigned int loc, unsigned int len) {
+NS_INLINE NSRange NSMakeRange(NSUInteger loc, NSUInteger len) {
     NSRange r;
     r.location = loc;
     r.length = len;
     return r;
 }
 
-FOUNDATION_STATIC_INLINE unsigned int NSMaxRange(NSRange range) {
+NS_INLINE NSUInteger NSMaxRange(NSRange range) {
     return (range.location + range.length);
 }
 
-FOUNDATION_STATIC_INLINE BOOL NSLocationInRange(unsigned int loc, NSRange range) {
+NS_INLINE BOOL NSLocationInRange(NSUInteger loc, NSRange range) {
     return (loc - range.location < range.length);
 }
 
-FOUNDATION_STATIC_INLINE BOOL NSEqualRanges(NSRange range1, NSRange range2) {
+NS_INLINE BOOL NSEqualRanges(NSRange range1, NSRange range2) {
     return (range1.location == range2.location && range1.length == range2.length);
 }
 

@@ -3,7 +3,7 @@
  
      Contains:   Master include for OSServices private framework
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -16,6 +16,10 @@
 #ifndef __OSSERVICES__
 #define __OSSERVICES__
 
+#ifndef __COREFOUNDATION__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
 #endif
@@ -25,10 +29,40 @@
 #include <OSServices/AppleDiskPartitions.h>
 #endif
 
+#ifndef __CSIDENTITYAUTHORITY__
+#include <OSServices/CSIdentityAuthority.h>
+#endif
+
+#ifndef __CSIDENTITY__
+#include <OSServices/CSIdentity.h>
+#endif
+
+#ifndef __CSIDENTITYQUERY__
+#include <OSServices/CSIdentityQuery.h>
+#endif
+
 #ifndef __ICONSTORAGE__
 #include <OSServices/IconStorage.h>
 #endif
 
+#ifndef __SYSTEMSOUND__
+#include <OSServices/SystemSound.h>
+#endif
+
+#ifndef __WSTYPES__
+#include <OSServices/WSTypes.h>
+#endif
+
+#ifndef __WSMETHODINVOCATION__
+#include <OSServices/WSMethodInvocation.h>
+#endif
+
+#ifndef __WSPROTOCOLHANDLER__
+#include <OSServices/WSProtocolHandler.h>
+#endif
+
+
+#if !__LP64__
 #ifndef __POWER__
 #include <OSServices/Power.h>
 #endif
@@ -37,14 +71,12 @@
 #include <OSServices/SCSI.h>
 #endif
 
-#ifndef __SYSTEMSOUND__
-#include <OSServices/SystemSound.h>
-#endif
-
-
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4
 #include <OSServices/OpenTransport.h>
 #include <OSServices/OpenTransportProviders.h>
 #include <OSServices/OpenTransportProtocol.h>
+#endif
+#endif
 #include <OSServices/NSLCore.h>
 #include <OSServices/SecurityCore.h>
 

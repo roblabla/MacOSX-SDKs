@@ -198,9 +198,9 @@ struct snmp_session {
     struct snmp_session *subsession;
     struct snmp_session *next;
 
-    /** Domain name or dotted IP address of default peer */
+    /** name or address of default peer (may include transport specifier and/or port number) */
     char           *peername;
-    /** UDP port number of peer. */
+    /** UDP port number of peer. (NO LONGER USED - USE peername INSTEAD) */
     u_short         remote_port;
     /** My Domain name or dotted IP address, 0 for default */
     char           *localname;
@@ -291,7 +291,9 @@ struct snmp_session {
     int             securityModel;
     /** noAuthNoPriv, authNoPriv, authPriv */
     int             securityLevel;  
-    
+    /** target param name */
+    char           *paramName;
+
     /**
      * security module specific 
      */
@@ -341,22 +343,22 @@ typedef struct request_list {
 #define SNMP_DEFAULT_VERSION	    -1
 #define SNMP_DEFAULT_SECMODEL	    -1
 #define SNMP_DEFAULT_CONTEXT        ""
-#ifndef DISABLE_MD5
+#ifndef NETSNMP_DISABLE_MD5
 #define SNMP_DEFAULT_AUTH_PROTO     usmHMACMD5AuthProtocol
 #else
 #define SNMP_DEFAULT_AUTH_PROTO     usmHMACSHA1AuthProtocol
 #endif
 #define SNMP_DEFAULT_AUTH_PROTOLEN  USM_LENGTH_OID_TRANSFORM
-#ifndef DISABLE_DES
+#ifndef NETSNMP_DISABLE_DES
 #define SNMP_DEFAULT_PRIV_PROTO     usmDESPrivProtocol
 #else
 #define SNMP_DEFAULT_PRIV_PROTO     usmAESPrivProtocol
 #endif
 #define SNMP_DEFAULT_PRIV_PROTOLEN  USM_LENGTH_OID_TRANSFORM
 
-    extern const char *snmp_api_errstring(int);
-    extern void     snmp_perror(const char *);
-    extern void     snmp_set_detail(const char *);
+    NETSNMP_IMPORT const char *snmp_api_errstring(int);
+    NETSNMP_IMPORT void     snmp_perror(const char *);
+    NETSNMP_IMPORT void     snmp_set_detail(const char *);
 
 #define SNMP_MAX_MSG_SIZE          1472 /* ethernet MTU minus IP/UDP header */
 #define SNMP_MAX_MSG_V3_HDRS       (4+3+4+7+7+3+7+16)   /* fudge factor=16 */
@@ -392,7 +394,8 @@ typedef struct request_list {
 
 #define SNMP_DETAIL_SIZE        512
 
-#define SNMP_FLAGS_DONT_PROBE      0x100        /* don't probe for an engineID */
+#define SNMP_FLAGS_USER_CREATED    0x200      /* USM user has been created */
+#define SNMP_FLAGS_DONT_PROBE      0x100      /* don't probe for an engineID */
 #define SNMP_FLAGS_STREAM_SOCKET   0x80
 #define SNMP_FLAGS_LISTENING       0x40 /* Server stream sockets only */
 #define SNMP_FLAGS_SUBSESSION      0x20
@@ -484,8 +487,10 @@ typedef struct request_list {
 #define SNMPERR_VAR_TYPE		(-61)
 #define SNMPERR_MALLOC			(-62)
 #define SNMPERR_KRB5			(-63)
+#define SNMPERR_PROTOCOL		(-64)
+#define SNMPERR_OID_NONINCREASING       (-65)
 
-#define SNMPERR_MAX			(-63)
+#define SNMPERR_MAX			(-65)
 
 #define non_repeaters	errstat
 #define max_repetitions errindex
@@ -496,13 +501,13 @@ typedef union {
    oid            *objid;
    u_char         *bitstring;
    struct counter64 *counter64;
-#ifdef OPAQUE_SPECIAL_TYPES
+#ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
    float          *floatVal;
    double         *doubleVal;
    /*
     * t_union *unionVal; 
     */
-#endif                          /* OPAQUE_SPECIAL_TYPES */
+#endif                          /* NETSNMP_WITH_OPAQUE_SPECIAL_TYPES */
 } netsnmp_vardata;
 
 
@@ -719,6 +724,11 @@ struct variable_list {
                                       size_t, size_t);
     int             snmp_oidtree_compare(const oid *, size_t, const oid *,
                                          size_t);
+    int             snmp_oidsubtree_compare(const oid *, size_t, const oid *,
+                                         size_t);
+    int             netsnmp_oid_compare_ll(const oid * in_name1,
+                                           size_t len1, const oid * in_name2,
+                                           size_t len2, size_t *offpt);
     int             netsnmp_oid_equals(const oid *, size_t, const oid *,
                                        size_t);
     int             netsnmp_oid_tree_equals(const oid *, size_t, const oid *,
@@ -729,7 +739,7 @@ struct variable_list {
                                             const oid * in_name2, size_t len2);
     void            init_snmp(const char *);
     u_char         *snmp_pdu_build(netsnmp_pdu *, u_char *, size_t *);
-#ifdef USE_REVERSE_ASNENCODING
+#ifdef NETSNMP_USE_REVERSE_ASNENCODING
     u_char         *snmp_pdu_rbuild(netsnmp_pdu *, u_char *, size_t *);
 #endif
     int             snmpv3_parse(netsnmp_pdu *, u_char *, size_t *,
@@ -775,7 +785,7 @@ struct variable_list {
     /*
      * New re-allocating reverse encoding functions.  
      */
-#ifdef USE_REVERSE_ASNENCODING
+#ifdef NETSNMP_USE_REVERSE_ASNENCODING
 
     int        snmpv3_packet_realloc_rbuild(u_char ** pkt, size_t * pkt_len,
                                      size_t * offset,
@@ -977,6 +987,7 @@ struct variable_list {
                                            netsnmp_session * ss);
     void            snmp_sess_perror(const char *prog_string,
                                      netsnmp_session * ss);
+    const char *    snmp_pdu_type(int type);
 
     /*
      * end single session API 

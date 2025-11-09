@@ -6,7 +6,7 @@
       Version:   Technology: Mac OS X
                  Release:    Mac OS X
  
-    Copyright:   (c) 2002-2003 by Apple Computer, Inc., all rights reserved
+    Copyright:   (c) 2002-2007 Apple Inc.  All Rights Reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,6 +25,21 @@
 #import <DiscRecording/DiscRecording.h>
 #import <AvailabilityMacros.h>
 
+
+
+#if !NSINTEGER_DEFINED
+	#if __LP64__ || NS_BUILD_32_LIKE_64
+		typedef long NSInteger;
+		typedef unsigned long NSUInteger;
+	#else
+		typedef int NSInteger;
+		typedef unsigned int NSUInteger;
+	#endif
+	#define NSINTEGER_DEFINED 1
+#endif
+
+
+
 /*!
 	@class		DRSetupPanel
 	@discussion	This class is the base class for setup panels in the DiscRecordingUI
@@ -40,7 +55,7 @@
 	IBOutlet NSTextField*	_userMessage;
 	IBOutlet NSImageView*	_icon;
 	IBOutlet id				_deviceChooser;
-	void*					_sp_privateStorage;
+	id						_sp_privateStorage;
 	void*					_reservedSetupPanel[2];
 }
 
@@ -65,7 +80,7 @@
 	@result		Returns @link //apple_ref/c/econst/NSOKButton NSOKButton @/link (if the user clicks the default button) or
 				@link //apple_ref/c/econst/NSCancelButton NSCancelButton @/link (if the user clicks the Cancel button).
 */
-- (int) runSetupPanel;
+- (NSInteger) runSetupPanel;
 
 /*!
 	@method		beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo:

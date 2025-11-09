@@ -96,10 +96,10 @@ SOFTWARE.
     /*
      * versions based on version field 
      */
-#ifndef DISABLE_SNMPV1
+#ifndef NETSNMP_DISABLE_SNMPV1
 #define SNMP_VERSION_1	   0
 #endif
-#ifndef DISABLE_SNMPV2C
+#ifndef NETSNMP_DISABLE_SNMPV2C
 #define SNMP_VERSION_2c    1
 #endif
 #define SNMP_VERSION_2u    2    /* not (will never be) supported by this code */
@@ -296,6 +296,7 @@ SOFTWARE.
 #define UCD_MSG_FLAG_ALWAYS_IN_VIEW          0x800
 #define UCD_MSG_FLAG_PDU_TIMEOUT            0x1000
 #define UCD_MSG_FLAG_ONE_PASS_ONLY          0x2000
+#define UCD_MSG_FLAG_TUNNELED               0x4000
 
     /*
      * view status 
@@ -319,6 +320,7 @@ SOFTWARE.
 
 
     char           *uptime_string(u_long, char *);
+    char           *uptime_string_n(u_long, char *, size_t);
     void            xdump(const u_char *, size_t, const char *);
     u_char         *snmp_parse_var_op(u_char *, oid *, size_t *, u_char *,
                                       size_t *, u_char **, size_t *);
@@ -326,7 +328,7 @@ SOFTWARE.
                                       size_t, u_char *, size_t *);
 
 
-#ifdef USE_REVERSE_ASNENCODING
+#ifdef NETSNMP_USE_REVERSE_ASNENCODING
     int             snmp_realloc_rbuild_var_op(u_char ** pkt,
                                                size_t * pkt_len,
                                                size_t * offset,

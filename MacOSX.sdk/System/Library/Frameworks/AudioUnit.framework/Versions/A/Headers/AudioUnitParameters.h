@@ -18,13 +18,14 @@
 #ifndef __AudioUnitParameters
 #define __AudioUnitParameters
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The following specifies the equivalent parameterID's for the Group Scope for the standard
-MIDI Controllers. The list is not exhaustive, but represents a recommended set of 
-parameters in Group Scope (and their corresponding MIDI messages) that should be supported
+#pragma mark General Declarations
 
-ParameterID ranges on the Group Scope from 0 < 512 are reserved for usage when Mapping MIDI 
-controllers
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The following specifies the equivalent parameterID's for the Group scope for standard
+MIDI Controllers. This list is not exhaustive. It represents the parameters, and their corresponding 
+MIDI messages, that should be supported in Group scope by MIDI capable AUs.
+
+Group scope parameter IDs from 0 < 512 are reserved for mapping MIDI controllers.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 enum {
 	kAUGroupParameterID_Volume					= 7,	// value 0 < 128
@@ -54,39 +55,54 @@ enum {
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-A special note on kAUGroupParameterID_KeyPressure (Polyphonic Aftertouch)
-	Publish this (0xA0) to say you support polyphonic key pressure.
-	Polyphonic key pressure is not a single control; it is a control for each of the 128
-		MIDI key numbers.
-	The key pressure values pairs actualy values are to be get or set in the following parameter range
-		ParameterID: 256-383
-		Thus to set/get the value of Poly Key pressure add kAUGroupParameterID_KeyPressure_FirstKey (256)
-		to the MIDI key number - this becomes the parameter ID
-		The pressure Value is 0 < 128
-	Thus to get/set by key value you take the MIDI key number (0 - 127) and add/subtract to/from:
-		kAUGroupParameterID_KeyPressure_FirstKey
+Supporting the kAUGroupParameterID_KeyPressure parameter indicates to hosts that your audio unit
+supports polyphonic "aftertouch" key pressure. 
+
+Each of the 128 MIDI key numbers can have its own value for polyphonic aftertouch. To respond to 
+aftertouch for a particular key, your audio unit needs to support an additional parameter 
+specifically for that key. The aftertouch parameter ID for a given MIDI key is equal to the MIDI 
+key number plus 256. For example, the aftertouch parameter ID for MIDI key #60 (middle C) is:
+
+	60 + kAUGroupParameterID_KeyPressure_FirstKey = 316
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+// Parameters for all Panner AudioUnits
+enum {
+	kPannerParam_Gain = 0,			// 0 .. 1
+	
+	kPannerParam_Azimuth = 1,		// -180 .. +180 degrees
+	kPannerParam_Elevation = 2,		// -90 .. +90 degrees
+	kPannerParam_Distance = 3,		// 0 .. 1
+	
+	kPannerParam_CoordScale = 4,	// 0.01 .. 1000 meters
+	kPannerParam_RefDistance = 5,	// 0.01 .. 1000 meters
+};
+
+
+
+#pragma mark Apple Specific
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The following file specifies the parameter IDs for the various audio units that apple ships,
-allowing code to directly interact with these parameters without first discovering them
-through the AUParameterInfo mechanism (see AudioUnitProperties.h)
+The following sections specify the parameter IDs for the audio units included in Mac OS X.
+Host applications can use these IDs to directly address these parameters without first discovering 
+them through the AUParameterInfo mechanism (see the AudioUnitProperties.h header file)
 
-Each parameter listed below is preceeded by a comment that indicates:
-    // Scope, UnitOfMeasurement, minValue, maxValue, defaultValue
+Each parameter is preceeded by a comment that indicates scope, unit of measurement, minimum
+value, maximum value, and default value.
     
-See AudioUnitProperties for additional information that a parameter may report
+See the AudioUnitProperties.h header file for additional information that a parameter may report
 
-When displaying to the user information about a parameter an application SHOULD ALWAYS
-get the parameter information from the AudioUnit itself
+When displaying to the user information about a parameter, a host application should always
+get the parameter information from the audio unit itself.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 
-// Effects units
-// Some parameters of effects units are dependent on the sample rate of the audio unit
-// (ie. the maximum value is typically the Nyquist limit, or half the sample rate)
+// Effect units
+// The values for some effect unit parameters depend on the audio unit's sample rate.
+// For example, maximum values are typically the Nyquist frequency (indicated here as 
+// SampleRate/2).
 
-// Parameters for the BandpassFilter Unit
+// Parameters for the AUBandpass unit
 enum {
 		// Global, Hz, 20->(SampleRate/2), 5000
 	kBandpassParam_CenterFrequency 			= 0,
@@ -95,13 +111,13 @@ enum {
 	kBandpassParam_Bandwidth 				= 1
 };
 
-// Some parameters for the AUGraphicEQ Unit
+// Some parameters for the AUGraphicEQ unit
 enum {
 		// Global, Indexed, currently either 10 or 31
 	kGraphicEQParam_NumberOfBands 			= 10000
 };
 
-// Parameters of the AUHipass Unit
+// Parameters for the AUHipass unit
 enum {
 		// Global, Hz, 10->(SampleRate/2), 6900
 	kHipassParam_CutoffFrequency 			= 0,
@@ -110,7 +126,7 @@ enum {
 	kHipassParam_Resonance					= 1
 };
 
-// Parameters of the AULowpass Unit
+// Parameters for the AULowpass unit
 enum {
 		// Global, Hz, 10->(SampleRate/2), 6900
 	kLowPassParam_CutoffFrequency 			= 0,
@@ -119,7 +135,7 @@ enum {
 	kLowPassParam_Resonance 				= 1
 };
 
-// Parameters of the AUHighShelfFilter
+// Parameters for the AUHighShelfFilter unit
 enum {
 		// Global, Hz, 10000->(SampleRate/2), 10000
 	kHighShelfParam_CutOffFrequency 		= 0,
@@ -128,7 +144,7 @@ enum {
 	kHighShelfParam_Gain 					= 1
 };
 
-// Parameters of the AULowShelfFilter
+// Parameters for the AULowShelfFilter unit
 enum {
 		// Global, Hz, 10->200, 80
 	kAULowShelfParam_CutoffFrequency = 0,
@@ -137,7 +153,7 @@ enum {
 	kAULowShelfParam_Gain = 1
 };
 
-// Parameters of the AUParametricEQ
+// Parameters for the AUParametricEQ unit
 enum {
 		// Global, Hz, 20->(SampleRate/2), 2000
     kParametricEQParam_CenterFreq = 0,
@@ -149,7 +165,7 @@ enum {
     kParametricEQParam_Gain = 2
 };
 
-// Parameters of the AUMatrixReverb
+// Parameters for the AUMatrixReverb unit
 enum {
 		// Global, EqPow CrossFade, 0->100, 100
 	kReverbParam_DryWetMix 							= 0,
@@ -191,10 +207,19 @@ enum {
 	kReverbParam_ModulationRate						= 12,
 
 		// Global, Genr, 0.0 -> 1.0, 0.2
-	kReverbParam_ModulationDepth					= 13
+	kReverbParam_ModulationDepth					= 13,
+
+		// Global, Hertz, 10.0 -> 20000.0, 800.0
+	kReverbParam_FilterFrequency					= 14,
+
+		// Global, Octaves, 0.05 -> 4.0, 3.0
+	kReverbParam_FilterBandwidth					= 15,
+
+		// Global, Decibels, -18.0 -> +18.0, 0.0
+	kReverbParam_FilterGain							= 16
 };
 
-// Parameters for the Delay Unit
+// Parameters for the AUDelay unit
 enum {
 		// Global, EqPow Crossfade, 0->100, 50
 	kDelayParam_WetDryMix 				= 0,
@@ -209,7 +234,7 @@ enum {
 	kDelayParam_LopassCutoff	 		= 3
 };
 
-// Parameters for the AUPeakLimiter
+// Parameters for the AUPeakLimiter unit
 enum {
 		// Global, Secs, 0.001->0.03, 0.012
 	kLimiterParam_AttackTime 			= 0,
@@ -222,12 +247,12 @@ enum {
 };
 
 
-// Parameters for the AUDynamicsProcessor
+// Parameters for the AUDynamicsProcessor unit
 enum {
 		// Global, dB, -40->20, -20
 	kDynamicsProcessorParam_Threshold 			= 0,
 		
-		// Global, rate, 0.1->40.0, 5
+		// Global, dB, 0.1->40.0, 5
 	kDynamicsProcessorParam_HeadRoom	 		= 1,
 		
 		// Global, rate, 1->50.0, 2
@@ -250,7 +275,7 @@ enum {
 };
 
 
-// Parameters for the AUMultibandCompressor
+// Parameters for the AUMultibandCompressor unit
 enum {
 	kMultibandCompressorParam_Pregain 			= 0,
 	kMultibandCompressorParam_Postgain 			= 1,
@@ -279,20 +304,20 @@ enum {
 	kMultibandCompressorParam_CompressionAmount4 = 4000
 };
 
-// Parameters for the AUVarispeed
+// Parameters for the AUVarispeed unit
 enum {
 	kVarispeedParam_PlaybackRate				= 0,
 	kVarispeedParam_PlaybackCents				= 1
 };
 
-// Parameters for AUTimePitch, AUOfflineTimePitch, AUPitch
+// Parameters for the AUTimePitch, AUTimePitch (offline), and AUPitch units
 enum {
 	kTimePitchParam_Rate						= 0,
 	kTimePitchParam_Pitch						= 1,
-	kTimePitchParam_EffectBlend					= 2		// only for AUPitch
+	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
 };
 
-// Parameters for AUFilter
+// Parameters for the AUFilter unit
 enum
 {
 	kMultibandFilter_LowFilterType  = 0,
@@ -317,7 +342,7 @@ enum
 };
 
 // Mixer Units
-// Parameters for the 3DMixer AudioUnit
+// Parameters for the AUMixer3D unit
 enum {
         // Input, Degrees, -180->180, 0
     k3DMixerParam_Azimuth		= 0,
@@ -334,14 +359,33 @@ enum {
 		// Input, rate scaler	0.5 -> 2.0
     k3DMixerParam_PlaybackRate	= 4,
 	
+		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
+    k3DMixerParam_ReverbBlend		= 5,
+	
+		// Global, dB,		-40.0 -> +40.0
+    k3DMixerParam_GlobalReverbGain	= 6,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
+    k3DMixerParam_OcclusionAttenuation	= 7,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
+    k3DMixerParam_ObstructionAttenuation = 8,
+	
 		// read-only
+		//
+		// For each of the following, use the parameter ID plus the channel number
+		// to get the specific parameter ID for a given channel.
+		// For example, k3DMixerParam_PostAveragePower indicates the left channel
+		// while k3DMixerParam_PostAveragePower + 1 indicates the right channel.
 	k3DMixerParam_PreAveragePower	= 1000,
 	k3DMixerParam_PrePeakHoldLevel	= 2000,
 	k3DMixerParam_PostAveragePower	= 3000,
 	k3DMixerParam_PostPeakHoldLevel	= 4000
 };
 
-// Parameters for the Stereo Mixer AudioUnit
+// Parameters for the Stereo Mixer unit
 enum {
 		// Input/Output, Mixer Fader Curve, 0->1, 1
 	kStereoMixerParam_Volume 	= 0,
@@ -350,13 +394,18 @@ enum {
 	kStereoMixerParam_Pan		= 1,
 	
 		// read-only
+		//
+		// For each of the following, use the parameter ID for the left channel
+		// and the parameter ID plus one for the right channel.
+		// For example, kStereoMixerParam_PostAveragePower indicates the left channel
+		// while kStereiMixerParam_PostAveragePower + 1 indicates the right channel.
 	kStereoMixerParam_PreAveragePower	= 1000,
 	kStereoMixerParam_PrePeakHoldLevel	= 2000,
 	kStereoMixerParam_PostAveragePower	= 3000,
 	kStereoMixerParam_PostPeakHoldLevel	= 4000
 };
 
-// Parameters for the Matrix Mixer AudioUnit
+// Parameters for the AUMatrixMixer unit
 enum {
 	kMatrixMixerParam_Volume 	= 0,
 	kMatrixMixerParam_Enable 	= 1,
@@ -375,20 +424,35 @@ enum {
 	kMatrixMixerParam_PostPeakHoldLevelLinear		= 8000
 };
 
-// Parameters for AUNetReceive
+
+// Parameters for the AUMultiChannelMixer unit
+enum {
+	kMultiChannelMixerParam_Volume 	= 0,
+	kMultiChannelMixerParam_Enable 	= 1,
+
+		// read-only
+	// these report level in dB, as do the other mixers
+	kMultiChannelMixerParam_PreAveragePower		= 1000,
+	kMultiChannelMixerParam_PrePeakHoldLevel	= 2000,
+	kMultiChannelMixerParam_PostAveragePower	= 3000,
+	kMultiChannelMixerParam_PostPeakHoldLevel	= 4000
+};
+
+
+// Parameters for the AUNetReceive unit
 enum {
 	kAUNetReceiveParam_Status = 0,
 	kAUNetReceiveParam_NumParameters = 1
 };
 
-// Parameters for AUNetSend
+// Parameters for the AUNetSend unit
 enum {
 	kAUNetSendParam_Status = 0,
 	kAUNetSendParam_NumParameters = 1
 };
 
 
-// Status values for AUNetSend and AUNetReceive
+// Status values for the AUNetSend and AUNetReceive units
 enum {
 	kAUNetStatus_NotConnected = 0,
 	kAUNetStatus_Connected = 1,
@@ -398,16 +462,53 @@ enum {
 	kAUNetStatus_Listening = 5
 };
 
+// Parameters for the Distortion unit 
+enum {
+	
+	kDistortionParam_Delay = 0,
+	kDistortionParam_Decay = 1,
+	kDistortionParam_DelayMix = 2,
+	
+	kDistortionParam_Decimation = 3,
+	kDistortionParam_Rounding = 4,
+	kDistortionParam_DecimationMix = 5,
+	
+	kDistortionParam_LinearTerm = 6,  
+	kDistortionParam_SquaredTerm = 7,	
+	kDistortionParam_CubicTerm = 8,  
+	kDistortionParam_PolynomialMix = 9,
+	
+	kDistortionParam_RingModFreq1 = 10,
+	kDistortionParam_RingModFreq2 = 11,
+	kDistortionParam_RingModBalance = 12,
+	kDistortionParam_RingModMix = 13,
+				
+	kDistortionParam_SoftClipGain = 14,
+		
+	kDistortionParam_FinalMix = 15
+};
+
+// Parameters for AURogerBeep
+enum {
+	kRogerBeepParam_InGateThreshold = 0,
+	kRogerBeepParam_InGateThresholdTime = 1,
+	kRogerBeepParam_OutGateThreshold = 2,
+	kRogerBeepParam_OutGateThresholdTime = 3,	
+	kRogerBeepParam_Sensitivity = 4,	
+	kRogerBeepParam_RogerType = 5,
+	kRogerBeepParam_RogerGain = 6
+};
+
 
 // Output Units
-// Parameters for the HAL Output Unit (and Default and System Output units)
+// Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
 enum {
 		// Global, LinearGain, 0->1, 1
 	kHALOutputParam_Volume 		= 14 
 };
 
 // Music Device
-// Parameters for the DLSMusicDevice Unit - defined and reported in the global scope
+// Parameters for the DLSMusicDevice unit - defined and reported in the global scope
 enum {
 		// Global, Cents, -1200, 1200, 0
 	kMusicDeviceParam_Tuning 	= 0,
@@ -418,17 +519,22 @@ enum {
 		// Global, dB, -120->40, 0
 	kMusicDeviceParam_ReverbVolume	= 2
 };
-// The DLS music device does NOT currently report parameters in the GroupScope
-// but a parameter value can be set (not retrieved) that corresponds to 
-// controller values that are defined by the MIDI specification in Group scope.
-// This includes the specified MIDI Controller values (e.g. Volume, Mod Wheel, etc)
-// as well as the MIDI status messages (such as PitchWheel 0xE0, ChannelPressure 0xD0 - make sure
-// you pass in zero for the "channel part" when using these as parameterID - to distinguish this 
-// from 0-127 values for midi controllers that will take up the first byte) and the MIDI RPN control messages.
-// Remember, the elementID represents the group or channel number... You can use of course, MusicDeviceMIDIEvent to
-// send a MIDI formatted control command to the device.
+// In Mac OS X v10.5, the DLSMusicDevice audio unit does not report parameters in the Group scope.
+// However, parameter values can be set in Group scope that correspond to controller values defined  
+// by the MIDI specification. This includes the standard MIDI Controller values (such as Volume and
+// Mod Wheel) as well as MIDI status messages (such as Pitch Bend and Channel Pressure) and the 
+// MIDI RPN control messages.
 
-// Using AudioUnitParameterSet with this protocol is done as follows:
+// For MIDI status messages, use a value of 0 for the "channel part" (lower four bits) when setting  
+// these parameters. This allows audio units to distinguish these IDs from the 0-127 
+// values used by MIDI controllers in the first byte of status messages.
+// 
+// The element ID represents the group or channel number.
+//
+// You can use the MusicDeviceMIDIEvent function to send a MIDI formatted control command to a device.
+//
+// You can use the SetParameter API calls, declared in the AUComponent.h header file, as follows:
+//
 //	scope == kAudioUnitScope_Group
 //	element == groupID -> in MIDI equivalent to channel number 0->15, 
 //			but this is not a limitation of the MusicDevice and values greater than 15 can be specified
@@ -436,5 +542,6 @@ enum {
 //	value == typically the range associated with the corresponding MIDI message	(7 bit, 0->127)
 //			pitch bend is specified as a 14 bit value
 	
-// See MusicDevice.h for more comments about using the extended control semantics of this component.	
+// See the MusicDevice.h header file for more about using the extended control semantics 
+// of this API.	
 #endif //__AudioUnitParameters

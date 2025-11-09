@@ -139,66 +139,66 @@ bool_t xdr_sm_status();
 #endif /* Old Style C */
 
 
-#define SM_PROG ((u_long)100024)
-#define SM_VERS ((u_long)1)
+#define SM_PROG ((rpc_uint)100024)
+#define SM_VERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define SM_STAT ((u_long)1)
+#define SM_STAT ((rpc_uint)1)
 extern "C" struct sm_stat_res * sm_stat_1(struct sm_name *, CLIENT *);
 extern "C" struct sm_stat_res * sm_stat_1_svc(struct sm_name *, struct svc_req *);
-#define SM_MON ((u_long)2)
+#define SM_MON ((rpc_uint)2)
 extern "C" struct sm_stat_res * sm_mon_1(struct mon *, CLIENT *);
 extern "C" struct sm_stat_res * sm_mon_1_svc(struct mon *, struct svc_req *);
-#define SM_UNMON ((u_long)3)
+#define SM_UNMON ((rpc_uint)3)
 extern "C" struct sm_stat * sm_unmon_1(struct mon_id *, CLIENT *);
 extern "C" struct sm_stat * sm_unmon_1_svc(struct mon_id *, struct svc_req *);
-#define SM_UNMON_ALL ((u_long)4)
+#define SM_UNMON_ALL ((rpc_uint)4)
 extern "C" struct sm_stat * sm_unmon_all_1(struct my_id *, CLIENT *);
 extern "C" struct sm_stat * sm_unmon_all_1_svc(struct my_id *, struct svc_req *);
-#define SM_SIMU_CRASH ((u_long)5)
+#define SM_SIMU_CRASH ((rpc_uint)5)
 extern "C" void * sm_simu_crash_1(void *, CLIENT *);
 extern "C" void * sm_simu_crash_1_svc(void *, struct svc_req *);
-#define SM_NOTIFY ((u_long)6)
+#define SM_NOTIFY ((rpc_uint)6)
 extern "C" void * sm_notify_1(struct stat_chge *, CLIENT *);
 extern "C" void * sm_notify_1_svc(struct stat_chge *, struct svc_req *);
 
 #elif __STDC__
-#define SM_STAT ((u_long)1)
+#define SM_STAT ((rpc_uint)1)
 extern  struct sm_stat_res * sm_stat_1(struct sm_name *, CLIENT *);
 extern  struct sm_stat_res * sm_stat_1_svc(struct sm_name *, struct svc_req *);
-#define SM_MON ((u_long)2)
+#define SM_MON ((rpc_uint)2)
 extern  struct sm_stat_res * sm_mon_1(struct mon *, CLIENT *);
 extern  struct sm_stat_res * sm_mon_1_svc(struct mon *, struct svc_req *);
-#define SM_UNMON ((u_long)3)
+#define SM_UNMON ((rpc_uint)3)
 extern  struct sm_stat * sm_unmon_1(struct mon_id *, CLIENT *);
 extern  struct sm_stat * sm_unmon_1_svc(struct mon_id *, struct svc_req *);
-#define SM_UNMON_ALL ((u_long)4)
+#define SM_UNMON_ALL ((rpc_uint)4)
 extern  struct sm_stat * sm_unmon_all_1(struct my_id *, CLIENT *);
 extern  struct sm_stat * sm_unmon_all_1_svc(struct my_id *, struct svc_req *);
-#define SM_SIMU_CRASH ((u_long)5)
+#define SM_SIMU_CRASH ((rpc_uint)5)
 extern  void * sm_simu_crash_1(void *, CLIENT *);
 extern  void * sm_simu_crash_1_svc(void *, struct svc_req *);
-#define SM_NOTIFY ((u_long)6)
+#define SM_NOTIFY ((rpc_uint)6)
 extern  void * sm_notify_1(struct stat_chge *, CLIENT *);
 extern  void * sm_notify_1_svc(struct stat_chge *, struct svc_req *);
 
 #else /* Old Style C */
-#define SM_STAT ((u_long)1)
+#define SM_STAT ((rpc_uint)1)
 extern  struct sm_stat_res * sm_stat_1();
 extern  struct sm_stat_res * sm_stat_1_svc();
-#define SM_MON ((u_long)2)
+#define SM_MON ((rpc_uint)2)
 extern  struct sm_stat_res * sm_mon_1();
 extern  struct sm_stat_res * sm_mon_1_svc();
-#define SM_UNMON ((u_long)3)
+#define SM_UNMON ((rpc_uint)3)
 extern  struct sm_stat * sm_unmon_1();
 extern  struct sm_stat * sm_unmon_1_svc();
-#define SM_UNMON_ALL ((u_long)4)
+#define SM_UNMON_ALL ((rpc_uint)4)
 extern  struct sm_stat * sm_unmon_all_1();
 extern  struct sm_stat * sm_unmon_all_1_svc();
-#define SM_SIMU_CRASH ((u_long)5)
+#define SM_SIMU_CRASH ((rpc_uint)5)
 extern  void * sm_simu_crash_1();
 extern  void * sm_simu_crash_1_svc();
-#define SM_NOTIFY ((u_long)6)
+#define SM_NOTIFY ((rpc_uint)6)
 extern  void * sm_notify_1();
 extern  void * sm_notify_1_svc();
 #endif /* Old Style C */

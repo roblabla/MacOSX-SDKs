@@ -3,7 +3,7 @@
  
      Contains:   The Apple disk partition scheme as defined in Inside Macintosh: Volume V.
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Block 0 Definitions */
 enum {
@@ -132,7 +132,7 @@ enum {
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __APPLEDISKPARTITIONS__ */

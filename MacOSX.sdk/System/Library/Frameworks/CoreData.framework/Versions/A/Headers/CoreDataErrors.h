@@ -1,7 +1,7 @@
 /*
 	CoreDataErrors.h
 	Core Data
-	Copyright (c) 2004-2005 Apple Computer, Inc.
+    Copyright (c) 2004-2007 Apple Inc.
 	All rights reserved.
  */
 
@@ -24,6 +24,8 @@ COREDATA_EXTERN NSString * const NSValidationValueErrorKey;     // if non-nil, t
 
 COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey;      // stores prompting an error
 COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey;     // objects prompting an error
+
+COREDATA_EXTERN NSString * const NSSQLiteErrorDomain AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
 
 enum {
     NSManagedObjectValidationError                   = 1550,   // generic validation error
@@ -51,8 +53,27 @@ enum {
     NSPersistentStoreInvalidTypeError                = 134000, // unknown persistent store type/format/version
     NSPersistentStoreTypeMismatchError               = 134010, // returned by persistent store coordinator if a store is accessed that does not match the specified type
     NSPersistentStoreIncompatibleSchemaError         = 134020, // store returned an error for save operation (database level errors ie missing table, no permissions)
-    NSPersistentStoreSaveError                       = 134030, // store returned an error for save operation (database level errors ie missing table, no permissions)
-    NSPersistentStoreIncompleteSaveError             = 134040  // one or more of the stores returned an error during save (stores/objects that failed will be in userInfo)
+    NSPersistentStoreSaveError                       = 134030, // unclassified save error - something we depend on returned an error
+    NSPersistentStoreIncompleteSaveError             = 134040, // one or more of the stores returned an error during save (stores/objects that failed will be in userInfo)
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    NSCoreDataError                                  = 134060, // general Core Data error
+    NSPersistentStoreOperationError                  = 134070, // the persistent store operation failed 
+    NSPersistentStoreOpenError                       = 134080, // an error occured while attempting to open the persistent store
+    NSPersistentStoreTimeoutError                    = 134090, // failed to connect to the persistent store within the specified timeout (see NSPersistentStoreTimeoutOption)
+
+    NSPersistentStoreIncompatibleVersionHashError    = 134100, // entity version hashes incompatible with data model
+    NSMigrationError                                 = 134110, // general migration error
+    NSMigrationCancelledError                        = 134120, // migration failed due to manual cancellation
+    NSMigrationMissingSourceModelError               = 134130, // migration failed due to missing source data model
+    NSMigrationMissingMappingModelError              = 134140, // migration failed due to missing mapping model
+    NSMigrationManagerSourceStoreError               = 134150, // migration failed due to a problem with the source data store
+    NSMigrationManagerDestinationStoreError          = 134160, // migration failed due to a problem with the destination data store
+    NSEntityMigrationPolicyError                     = 134170, // migration failed during processing of the entity migration policy 
+
+    NSSQLiteError                                    = 134180  // general SQLite error 
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+
 };
 
 #endif

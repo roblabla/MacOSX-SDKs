@@ -3,7 +3,7 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -53,7 +53,7 @@
 #define dskFulErr 						(-34)				/* disk full */
 #define nsvErr 							(-35)				/* no such volume */
 #define ioErr 							(-36)				/* I/O error (bummers) */
-#define bdNamErr 						(-37)				/* there may be no bad names in the final system! */
+#define bdNamErr 						(-37)				/*  bad file name passed to routine; there may be no bad names in the final system! */
 #define fnOpnErr 						(-38)				/* File not open */
 #define eofErr 							(-39)				/* End of file */
 #define posErr 							(-40)				/* tried to position to before start of file (r/w) */
@@ -2355,6 +2355,110 @@
 															/*  DS Errors which are specific to the new runtime model introduced with PowerPC  */
 #define dsBadLibrary 					1010				/*  Bad shared library  */
 #define dsMixedModeFailure 				1011				/*  Internal Mixed Mode Failure  */
+
+#define kPOSIXErrorBase 				100000
+#define kPOSIXErrorEPERM 				100001				/*  Operation not permitted  */
+#define kPOSIXErrorENOENT 				100002				/*  No such file or directory  */
+#define kPOSIXErrorESRCH 				100003				/*  No such process  */
+#define kPOSIXErrorEINTR 				100004				/*  Interrupted system call  */
+#define kPOSIXErrorEIO 					100005				/*  Input/output error  */
+#define kPOSIXErrorENXIO 				100006				/*  Device not configured  */
+#define kPOSIXErrorE2BIG 				100007				/*  Argument list too long  */
+#define kPOSIXErrorENOEXEC 				100008				/*  Exec format error  */
+#define kPOSIXErrorEBADF 				100009				/*  Bad file descriptor  */
+#define kPOSIXErrorECHILD 				100010				/*  No child processes  */
+#define kPOSIXErrorEDEADLK 				100011				/*  Resource deadlock avoided  */
+#define kPOSIXErrorENOMEM 				100012				/*  Cannot allocate memory  */
+#define kPOSIXErrorEACCES 				100013				/*  Permission denied  */
+#define kPOSIXErrorEFAULT 				100014				/*  Bad address  */
+#define kPOSIXErrorENOTBLK 				100015				/*  Block device required  */
+#define kPOSIXErrorEBUSY 				100016				/*  Device busy  */
+#define kPOSIXErrorEEXIST 				100017				/*  File exists  */
+#define kPOSIXErrorEXDEV 				100018				/*  Cross-device link  */
+#define kPOSIXErrorENODEV 				100019				/*  Operation not supported by device  */
+#define kPOSIXErrorENOTDIR 				100020				/*  Not a directory  */
+#define kPOSIXErrorEISDIR 				100021				/*  Is a directory  */
+#define kPOSIXErrorEINVAL 				100022				/*  Invalid argument  */
+#define kPOSIXErrorENFILE 				100023				/*  Too many open files in system  */
+#define kPOSIXErrorEMFILE 				100024				/*  Too many open files  */
+#define kPOSIXErrorENOTTY 				100025				/*  Inappropriate ioctl for device  */
+#define kPOSIXErrorETXTBSY 				100026				/*  Text file busy  */
+#define kPOSIXErrorEFBIG 				100027				/*  File too large  */
+#define kPOSIXErrorENOSPC 				100028				/*  No space left on device  */
+#define kPOSIXErrorESPIPE 				100029				/*  Illegal seek  */
+#define kPOSIXErrorEROFS 				100030				/*  Read-only file system  */
+#define kPOSIXErrorEMLINK 				100031				/*  Too many links  */
+#define kPOSIXErrorEPIPE 				100032				/*  Broken pipe  */
+#define kPOSIXErrorEDOM 				100033				/*  Numerical argument out of domain  */
+#define kPOSIXErrorERANGE 				100034				/*  Result too large  */
+#define kPOSIXErrorEAGAIN 				100035				/*  Resource temporarily unavailable  */
+#define kPOSIXErrorEINPROGRESS 			100036				/*  Operation now in progress  */
+#define kPOSIXErrorEALREADY 			100037				/*  Operation already in progress  */
+#define kPOSIXErrorENOTSOCK 			100038				/*  Socket operation on non-socket  */
+#define kPOSIXErrorEDESTADDRREQ 		100039				/*  Destination address required  */
+#define kPOSIXErrorEMSGSIZE 			100040				/*  Message too long  */
+#define kPOSIXErrorEPROTOTYPE 			100041				/*  Protocol wrong type for socket  */
+#define kPOSIXErrorENOPROTOOPT 			100042				/*  Protocol not available  */
+#define kPOSIXErrorEPROTONOSUPPORT 		100043				/*  Protocol not supported  */
+#define kPOSIXErrorESOCKTNOSUPPORT 		100044				/*  Socket type not supported  */
+#define kPOSIXErrorENOTSUP 				100045				/*  Operation not supported  */
+#define kPOSIXErrorEPFNOSUPPORT 		100046				/*  Protocol family not supported  */
+#define kPOSIXErrorEAFNOSUPPORT 		100047				/*  Address family not supported by protocol family  */
+#define kPOSIXErrorEADDRINUSE 			100048				/*  Address already in use  */
+#define kPOSIXErrorEADDRNOTAVAIL 		100049				/*  Can't assign requested address  */
+#define kPOSIXErrorENETDOWN 			100050				/*  Network is down  */
+#define kPOSIXErrorENETUNREACH 			100051				/*  Network is unreachable  */
+#define kPOSIXErrorENETRESET 			100052				/*  Network dropped connection on reset  */
+#define kPOSIXErrorECONNABORTED 		100053				/*  Software caused connection abort  */
+#define kPOSIXErrorECONNRESET 			100054				/*  Connection reset by peer  */
+#define kPOSIXErrorENOBUFS 				100055				/*  No buffer space available  */
+#define kPOSIXErrorEISCONN 				100056				/*  Socket is already connected  */
+#define kPOSIXErrorENOTCONN 			100057				/*  Socket is not connected  */
+#define kPOSIXErrorESHUTDOWN 			100058				/*  Can't send after socket shutdown  */
+#define kPOSIXErrorETOOMANYREFS 		100059				/*  Too many references: can't splice  */
+#define kPOSIXErrorETIMEDOUT 			100060				/*  Operation timed out  */
+#define kPOSIXErrorECONNREFUSED 		100061				/*  Connection refused  */
+#define kPOSIXErrorELOOP 				100062				/*  Too many levels of symbolic links  */
+#define kPOSIXErrorENAMETOOLONG 		100063				/*  File name too long  */
+#define kPOSIXErrorEHOSTDOWN 			100064				/*  Host is down  */
+#define kPOSIXErrorEHOSTUNREACH 		100065				/*  No route to host  */
+#define kPOSIXErrorENOTEMPTY 			100066				/*  Directory not empty  */
+#define kPOSIXErrorEPROCLIM 			100067				/*  Too many processes  */
+#define kPOSIXErrorEUSERS 				100068				/*  Too many users  */
+#define kPOSIXErrorEDQUOT 				100069				/*  Disc quota exceeded  */
+#define kPOSIXErrorESTALE 				100070				/*  Stale NFS file handle  */
+#define kPOSIXErrorEREMOTE 				100071				/*  Too many levels of remote in path  */
+#define kPOSIXErrorEBADRPC 				100072				/*  RPC struct is bad  */
+#define kPOSIXErrorERPCMISMATCH 		100073				/*  RPC version wrong  */
+#define kPOSIXErrorEPROGUNAVAIL 		100074				/*  RPC prog. not avail  */
+#define kPOSIXErrorEPROGMISMATCH 		100075				/*  Program version wrong  */
+#define kPOSIXErrorEPROCUNAVAIL 		100076				/*  Bad procedure for program  */
+#define kPOSIXErrorENOLCK 				100077				/*  No locks available  */
+#define kPOSIXErrorENOSYS 				100078				/*  Function not implemented  */
+#define kPOSIXErrorEFTYPE 				100079				/*  Inappropriate file type or format  */
+#define kPOSIXErrorEAUTH 				100080				/*  Authentication error  */
+#define kPOSIXErrorENEEDAUTH 			100081				/*  Need authenticator  */
+#define kPOSIXErrorEPWROFF 				100082				/*  Device power is off  */
+#define kPOSIXErrorEDEVERR 				100083				/*  Device error, e.g. paper out  */
+#define kPOSIXErrorEOVERFLOW 			100084				/*  Value too large to be stored in data type  */
+#define kPOSIXErrorEBADEXEC 			100085				/*  Bad executable  */
+#define kPOSIXErrorEBADARCH 			100086				/*  Bad CPU type in executable  */
+#define kPOSIXErrorESHLIBVERS 			100087				/*  Shared library version mismatch  */
+#define kPOSIXErrorEBADMACHO 			100088				/*  Malformed Macho file  */
+#define kPOSIXErrorECANCELED 			100089				/*  Operation canceled  */
+#define kPOSIXErrorEIDRM 				100090				/*  Identifier removed  */
+#define kPOSIXErrorENOMSG 				100091				/*  No message of desired type  */
+#define kPOSIXErrorEILSEQ 				100092				/*  Illegal byte sequence  */
+#define kPOSIXErrorENOATTR 				100093				/*  Attribute not found  */
+#define kPOSIXErrorEBADMSG 				100094				/*  Bad message  */
+#define kPOSIXErrorEMULTIHOP 			100095				/*  Reserved  */
+#define kPOSIXErrorENODATA 				100096				/*  No message available on STREAM  */
+#define kPOSIXErrorENOLINK 				100097				/*  Reserved  */
+#define kPOSIXErrorENOSR 				100098				/*  No STREAM resources  */
+#define kPOSIXErrorENOSTR 				100099				/*  Not a STREAM  */
+#define kPOSIXErrorEPROTO 				100100				/*  Protocol error  */
+#define kPOSIXErrorETIME 				100101				/*  STREAM ioctl timeout  */
+#define kPOSIXErrorEOPNOTSUPP 			100102				/*  Operation not supported on socket  */
 
 
 #endif /* __MACERRORS_R__ */

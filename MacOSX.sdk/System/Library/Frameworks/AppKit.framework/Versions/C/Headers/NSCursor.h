@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -22,9 +22,6 @@
 	unsigned int :22;
     } _flags;
     id _image;
-#ifdef WIN32
-    void *_windowsCursor;
-#endif
 }
 
 + (NSCursor *)currentCursor;

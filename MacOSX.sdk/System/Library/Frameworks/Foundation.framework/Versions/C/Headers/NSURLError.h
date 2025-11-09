@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -51,9 +51,15 @@ enum
     NSURLErrorUserCancelledAuthentication = 	-1012,
     NSURLErrorUserAuthenticationRequired = 	-1013,
     NSURLErrorZeroByteResource = 		-1014,
+    NSURLErrorCannotDecodeRawData =             -1015,
+    NSURLErrorCannotDecodeContentData =         -1016,
+    NSURLErrorCannotParseResponse =             -1017,
     NSURLErrorFileDoesNotExist = 		-1100,
     NSURLErrorFileIsDirectory = 		-1101,
     NSURLErrorNoPermissionsToReadFile = 	-1102,
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSURLErrorDataLengthExceedsMaximum =	-1103,
+#endif
     NSURLErrorSecureConnectionFailed = 		-1200,
     NSURLErrorServerCertificateHasBadDate = 	-1201,
     NSURLErrorServerCertificateUntrusted = 	-1202,

@@ -1,5 +1,5 @@
 /*	CFTree.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 /*!
         @header CFTree
@@ -12,9 +12,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*!
         @typedef CFTreeRetainCallBack
@@ -320,9 +318,7 @@ void CFTreeRemoveAllChildren(CFTreeRef tree);
 CF_EXPORT
 void CFTreeSortChildren(CFTreeRef tree, CFComparatorFunction comparator, void *context);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFTREE__ */
 

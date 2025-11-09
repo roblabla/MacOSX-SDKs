@@ -1,5 +1,5 @@
 /*	NSDebug.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 /**************************************************************************
@@ -95,8 +95,8 @@ FOUNDATION_EXPORT BOOL NSIsFreedObject(id anObject);
 
 /****************	Stack processing	****************/
 
-FOUNDATION_EXPORT void *NSFrameAddress(unsigned frame);
-FOUNDATION_EXPORT void *NSReturnAddress(unsigned frame);
+FOUNDATION_EXPORT void *NSFrameAddress(NSUInteger frame);
+FOUNDATION_EXPORT void *NSReturnAddress(NSUInteger frame);
 	// Returns the value of the frame pointer or return address,
 	// respectively, of the specified frame. Frames are numbered
 	// sequentially, with the "current" frame being zero, the
@@ -110,7 +110,7 @@ FOUNDATION_EXPORT void *NSReturnAddress(unsigned frame);
 	// undefined in the presence of code which has been compiled
 	// without frame pointers.
 
-FOUNDATION_EXPORT unsigned NSCountFrames(void);
+FOUNDATION_EXPORT NSUInteger NSCountFrames(void);
 	// Returns the number of call frames on the stack. The behavior
 	// of this functions is undefined in the presence of code which
 	// has been compiled without frame pointers.
@@ -126,7 +126,7 @@ FOUNDATION_EXPORT void _NSAutoreleaseFreedObject(void *freedObject);
 	// Called when a previously freed object would be released
 	// by an autorelease pool. See +enableFreedObjectCheck: below.
 
-FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(unsigned int count);
+FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(NSUInteger count);
 	// Called whenever a high water mark is reached by a pool.
 	// See +setPoolCountHighWaterMark: below.
 
@@ -149,7 +149,7 @@ FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(unsigned int count);
 	// autorelease pool stack.
 
 + (void)resetTotalAutoreleasedObjects;
-+ (unsigned)totalAutoreleasedObjects;
++ (NSUInteger)totalAutoreleasedObjects;
 	// Returns the number of objects autoreleased (in ALL threads,
 	// currently) since the counter was last reset to zero with
 	// +resetTotalAutoreleasedObjects.
@@ -169,16 +169,16 @@ FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(unsigned int count);
 	// are created, they take their initial freed-object-check state
 	// from that environment variable.
 
-+ (unsigned int)autoreleasedObjectCount;
++ (NSUInteger)autoreleasedObjectCount;
 	// Returns the total number of autoreleased objects in all pools
 	// in the current thread's pool stack.
 
-+ (unsigned int)topAutoreleasePoolCount;
++ (NSUInteger)topAutoreleasePoolCount;
 	// Returns the number of autoreleased objects in top pool of
 	// the current thread's pool stack.
 
-+ (unsigned int)poolCountHighWaterMark;
-+ (void)setPoolCountHighWaterMark:(unsigned int)count;
++ (NSUInteger)poolCountHighWaterMark;
++ (void)setPoolCountHighWaterMark:(NSUInteger)count;
 	// Sets the pool count high water mark for the pool stack of
 	// the current thread (and any future pools in that thread). When
 	// 'count' objects have accumulated in the top autorelease pool,
@@ -193,8 +193,8 @@ FOUNDATION_EXPORT void _NSAutoreleaseHighWaterLog(unsigned int count);
 	// they take their initial high water mark value from that
 	// environment variable. See also +setPoolCountHighWaterResolution:.
 
-+ (unsigned int)poolCountHighWaterResolution;
-+ (void)setPoolCountHighWaterResolution:(unsigned int)res;
++ (NSUInteger)poolCountHighWaterResolution;
++ (void)setPoolCountHighWaterResolution:(NSUInteger)res;
 	// Sets the pool count high water resolution for the pool stack of
 	// the current thread (and any future pools in that thread). A
 	// call to _NSAutoreleaseHighWaterLog() is generated every multiple
@@ -228,11 +228,10 @@ FOUNDATION_EXPORT BOOL NSKeepAllocationStatistics;
 #define NSObjectInternalRefDecrementedEvent	7
 
 
-FOUNDATION_EXPORT void NSRecordAllocationEvent(int eventType, ...);
+FOUNDATION_EXPORT void NSRecordAllocationEvent(int eventType, id object);
 	// Notes an object or zone allocation event and various other
-	// statistics, such as the time and current thread. The additional
-	// arguments to be passed to this function vary by the type of
-	// event. The behavior is undefined (and likely catastrophic) if
+	// statistics, such as the time and current thread.
+	// The behavior is undefined (and likely catastrophic) if
 	// the correct arguments for 'eventType' are not provided.
 	//
 	// The parameter prototypes for each event type are shown below.
@@ -243,13 +242,9 @@ FOUNDATION_EXPORT void NSRecordAllocationEvent(int eventType, ...);
 	//   NSRecordAllocationEvent(NSObjectInternalRefDecrementedEvent, curObj)
 	//
 	// Only the Foundation should have reason to use many of these.
-	// Do not call NSRecordAllocationEvent(NSZoneMallocEvent, ...)
-	// after NSZoneMalloc(), for example, in your own code because
-	// NSZoneMalloc() has already done this for you. The only common
-	// use of this function should be with these two events:
+	// The only common use of this function should be with these two events:
 	//	NSObjectInternalRefIncrementedEvent
 	//	NSObjectInternalRefDecrementedEvent
 	// when a class overrides -retain and -release to do its own
 	// reference counting.
-	//
 

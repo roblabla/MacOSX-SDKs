@@ -3,7 +3,7 @@
  
      Contains:   International Resource definitions.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1983-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
                                         /* Bits in the itlcFlags byte */
@@ -169,16 +169,16 @@ struct Itl1ExtRec {
   short               version;
   short               format;
   short               calendarCode;           /*calendar code for this itl1 resource*/
-  long                extraDaysTableOffset;   /*offset in itl1 to extra days table*/
-  long                extraDaysTableLength;   /*length of extra days table*/
-  long                extraMonthsTableOffset; /*offset in itl1 to extra months table*/
-  long                extraMonthsTableLength; /*length of extra months table*/
-  long                abbrevDaysTableOffset;  /*offset in itl1 to abbrev days table*/
-  long                abbrevDaysTableLength;  /*length of abbrev days table*/
-  long                abbrevMonthsTableOffset; /*offset in itl1 to abbrev months table*/
-  long                abbrevMonthsTableLength; /*length of abbrev months table*/
-  long                extraSepsTableOffset;   /*offset in itl1 to extra seps table*/
-  long                extraSepsTableLength;   /*length of extra seps table*/
+  SInt32              extraDaysTableOffset;   /*offset in itl1 to extra days table*/
+  SInt32              extraDaysTableLength;   /*length of extra days table*/
+  SInt32              extraMonthsTableOffset; /*offset in itl1 to extra months table*/
+  SInt32              extraMonthsTableLength; /*length of extra months table*/
+  SInt32              abbrevDaysTableOffset;  /*offset in itl1 to abbrev days table*/
+  SInt32              abbrevDaysTableLength;  /*length of abbrev days table*/
+  SInt32              abbrevMonthsTableOffset; /*offset in itl1 to abbrev months table*/
+  SInt32              abbrevMonthsTableLength; /*length of abbrev months table*/
+  SInt32              extraSepsTableOffset;   /*offset in itl1 to extra seps table*/
+  SInt32              extraSepsTableLength;   /*length of extra seps table*/
   short               tables[1];              /*now a flag for opt extension*/
 };
 typedef struct Itl1ExtRec               Itl1ExtRec;
@@ -243,20 +243,20 @@ typedef NumberParts *                   NumberPartsPtr;
 
 struct Itl4Rec {
   short               flags;                  /*reserved*/
-  long                resourceType;           /*contains 'itl4'*/
+  SInt32              resourceType;           /*contains 'itl4'*/
   short               resourceNum;            /*resource ID*/
   short               version;                /*version number*/
-  long                resHeader1;             /*reserved*/
-  long                resHeader2;             /*reserved*/
+  SInt32              resHeader1;             /*reserved*/
+  SInt32              resHeader2;             /*reserved*/
   short               numTables;              /*number of tables, one-based*/
-  long                mapOffset;              /*offset to table that maps byte to token*/
-  long                strOffset;              /*offset to routine that copies canonical string*/
-  long                fetchOffset;            /*offset to routine that gets next byte of character*/
-  long                unTokenOffset;          /*offset to table that maps token to canonical string*/
-  long                defPartsOffset;         /*offset to default number parts table*/
-  long                resOffset6;             /*reserved*/
-  long                resOffset7;             /*reserved*/
-  long                resOffset8;             /*reserved*/
+  SInt32              mapOffset;              /*offset to table that maps byte to token*/
+  SInt32              strOffset;              /*offset to routine that copies canonical string*/
+  SInt32              fetchOffset;            /*offset to routine that gets next byte of character*/
+  SInt32              unTokenOffset;          /*offset to table that maps token to canonical string*/
+  SInt32              defPartsOffset;         /*offset to default number parts table*/
+  SInt32              resOffset6;             /*reserved*/
+  SInt32              resOffset7;             /*reserved*/
+  SInt32              resOffset8;             /*reserved*/
 };
 typedef struct Itl4Rec                  Itl4Rec;
 typedef Itl4Rec *                       Itl4Ptr;
@@ -264,21 +264,21 @@ typedef Itl4Ptr *                       Itl4Handle;
 /* New NItl4Rec for System 7.0: */
 struct NItl4Rec {
   short               flags;                  /*reserved*/
-  long                resourceType;           /*contains 'itl4'*/
+  SInt32              resourceType;           /*contains 'itl4'*/
   short               resourceNum;            /*resource ID*/
   short               version;                /*version number*/
   short               format;                 /*format code*/
   short               resHeader;              /*reserved*/
-  long                resHeader2;             /*reserved*/
+  SInt32              resHeader2;             /*reserved*/
   short               numTables;              /*number of tables, one-based*/
-  long                mapOffset;              /*offset to table that maps byte to token*/
-  long                strOffset;              /*offset to routine that copies canonical string*/
-  long                fetchOffset;            /*offset to routine that gets next byte of character*/
-  long                unTokenOffset;          /*offset to table that maps token to canonical string*/
-  long                defPartsOffset;         /*offset to default number parts table*/
-  long                whtSpListOffset;        /*offset to white space code list*/
-  long                resOffset7;             /*reserved*/
-  long                resOffset8;             /*reserved*/
+  SInt32              mapOffset;              /*offset to table that maps byte to token*/
+  SInt32              strOffset;              /*offset to routine that copies canonical string*/
+  SInt32              fetchOffset;            /*offset to routine that gets next byte of character*/
+  SInt32              unTokenOffset;          /*offset to table that maps token to canonical string*/
+  SInt32              defPartsOffset;         /*offset to default number parts table*/
+  SInt32              whtSpListOffset;        /*offset to white space code list*/
+  SInt32              resOffset7;             /*reserved*/
+  SInt32              resOffset8;             /*reserved*/
   short               resLength1;             /*reserved*/
   short               resLength2;             /*reserved*/
   short               resLength3;             /*reserved*/
@@ -294,9 +294,9 @@ typedef NItl4Ptr *                      NItl4Handle;
 
 struct TableDirectoryRecord {
   OSType              tableSignature;         /*4 byte long table name */
-  unsigned long       reserved;               /*Reserved for internal use */
-  unsigned long       tableStartOffset;       /*Table start offset in byte*/
-  unsigned long       tableSize;              /*Table size in byte*/
+  UInt32              reserved;               /*Reserved for internal use */
+  UInt32              tableStartOffset;       /*Table start offset in byte*/
+  UInt32              tableSize;              /*Table size in byte*/
 };
 typedef struct TableDirectoryRecord     TableDirectoryRecord;
 struct Itl5Record {
@@ -347,7 +347,7 @@ typedef struct ItlbRecord               ItlbRecord;
 /* New ItlbExtRecord structure for System 7.0 */
 struct ItlbExtRecord {
   ItlbRecord          base;                   /*un-extended ItlbRecord*/
-  long                itlbLocalSize;          /*size of script's local record*/
+  SInt32              itlbLocalSize;          /*size of script's local record*/
   short               itlbMonoFond;           /*default monospace FOND ID*/
   short               itlbMonoSize;           /*default monospace font size*/
   short               itlbPrefFond;           /*preferred FOND ID*/
@@ -367,7 +367,7 @@ typedef struct ItlbExtRecord            ItlbExtRecord;
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __INTLRESOURCES__ */

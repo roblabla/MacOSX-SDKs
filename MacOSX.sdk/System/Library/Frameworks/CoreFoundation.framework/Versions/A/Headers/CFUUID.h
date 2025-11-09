@@ -1,5 +1,5 @@
 /*	CFUUID.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUUID__)
@@ -8,9 +8,7 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef const struct __CFUUID * CFUUIDRef;
 
@@ -67,9 +65,7 @@ CFUUIDBytes CFUUIDGetUUIDBytes(CFUUIDRef uuid);
 CF_EXPORT
 CFUUIDRef CFUUIDCreateFromUUIDBytes(CFAllocatorRef alloc, CFUUIDBytes bytes);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFUUID__ */
 

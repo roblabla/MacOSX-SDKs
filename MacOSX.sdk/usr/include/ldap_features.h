@@ -1,8 +1,8 @@
-/* include/ldap_features.h.  Generated automatically by configure.  */
-/* $OpenLDAP: pkg/ldap/include/ldap_features.h.in,v 1.15.2.3 2004/01/01 18:16:28 kurt Exp $ */
+/* include/ldap_features.h.  Generated from ldap_features.hin by configure.  */
+/* $OpenLDAP: pkg/ldap/include/ldap_features.hin,v 1.2.2.2 2006/01/03 22:16:06 kurt Exp $ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2004 The OpenLDAP Foundation.
+ * Copyright 1998-2006 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,10 +22,10 @@
 #define _LDAP_FEATURES_H 1
 
 /* OpenLDAP API version macros */
-#define LDAP_VENDOR_VERSION 20219
+#define LDAP_VENDOR_VERSION 20327
 #define LDAP_VENDOR_VERSION_MAJOR 2
-#define LDAP_VENDOR_VERSION_MINOR 2
-#define LDAP_VENDOR_VERSION_PATCH 19
+#define LDAP_VENDOR_VERSION_MINOR 3
+#define LDAP_VENDOR_VERSION_PATCH 27
 
 /*
 ** WORK IN PROGRESS!

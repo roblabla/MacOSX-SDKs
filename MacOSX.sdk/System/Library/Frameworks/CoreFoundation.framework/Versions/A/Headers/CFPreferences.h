@@ -1,5 +1,5 @@
 /*	CFPreferences.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPREFERENCES__)
@@ -9,9 +9,7 @@
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 CF_EXPORT
 const CFStringRef kCFPreferencesAnyApplication;
@@ -129,9 +127,7 @@ Boolean CFPreferencesAppValueIsForced(CFStringRef key, CFStringRef applicationID
 #endif
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFPREFERENCES__ */
 

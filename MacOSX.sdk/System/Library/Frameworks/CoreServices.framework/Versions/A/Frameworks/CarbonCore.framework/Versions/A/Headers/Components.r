@@ -3,7 +3,7 @@
  
      Contains:   Component Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -86,8 +86,10 @@ type 'thng' {
                    platformInterpreted = 3,
                    platformWin32 = 4,
                  platformPowerPCNativeEntryPoint = 5,
-                   platformIA32NativeEntryPoint = 6;
-      };
+                   platformIA32NativeEntryPoint = 6,
+                  platformPowerPC64NativeEntryPoint = 7,
+                 platformX86_64NativeEntryPoint = 8;
+        };
 #if thng_RezTemplateVersion >= 2
         literal longint;                                        /* resource map type */
         integer;                                                /* resource map id */

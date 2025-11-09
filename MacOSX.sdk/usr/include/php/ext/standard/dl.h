@@ -1,6 +1,6 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -18,13 +18,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.h,v 1.16.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: dl.h,v 1.23.2.1.2.2 2007/12/31 07:20:12 sebastian Exp $ */
 
 #ifndef DL_H
 #define DL_H
 
-void php_dl(pval *file,int type,pval *return_value TSRMLS_DC);
-
+PHPAPI void php_dl(zval *file,int type, zval *return_value, int start_now TSRMLS_DC);
 
 /* dynamic loading functions */
 PHP_FUNCTION(dl);

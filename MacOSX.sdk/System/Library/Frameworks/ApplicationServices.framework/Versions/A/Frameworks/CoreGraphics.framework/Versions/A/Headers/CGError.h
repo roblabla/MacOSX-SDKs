@@ -63,7 +63,11 @@ enum _CGError {
 	kCGErrorForkFailed = 1028,
 		/*	CPS was unable to fork a new process in order to launch an application. */
 
-    kCGErrorLast = kCGErrorForkFailed
+	kCGErrorRetryRegistration = 1029,
+		/*	The application registering should retry its registration in a short time to
+			allow a better application to register and create the CPS session information */
+
+    kCGErrorLast = kCGErrorRetryRegistration
 };
 typedef int32_t  CGError;
 

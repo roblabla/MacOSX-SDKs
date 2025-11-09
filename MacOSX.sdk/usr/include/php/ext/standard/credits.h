@@ -1,6 +1,6 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.h,v 1.6.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: credits.h,v 1.11.2.1.2.2 2007/12/31 07:20:12 sebastian Exp $ */
 
 #ifndef CREDITS_H
 #define CREDITS_H
@@ -37,6 +37,6 @@
 
 #endif /* HAVE_CREDITS_DEFS */
 
-PHPAPI void php_print_credits(int flag);
+PHPAPI void php_print_credits(int flag TSRMLS_DC);
 
 #endif

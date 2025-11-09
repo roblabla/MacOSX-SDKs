@@ -3,7 +3,7 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-3.5.19~278
+     Version:    SpeechSynthesis-3.6.59~90
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -20,6 +20,12 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
+#ifndef __COREFOUNDATION__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
+#include <stdint.h>
+
 
 #include <AvailabilityMacros.h>
 
@@ -31,7 +37,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
   kTextToSpeechSynthType        = 'ttsc',
@@ -79,13 +85,21 @@ enum {
   soSyncCallBack                = 'sycb', /* use with SpeechSyncProcPtr*/
   soErrorCallBack               = 'ercb', /* use with SpeechErrorProcPtr*/
   soPhonemeCallBack             = 'phcb', /* use with SpeechPhonemeProcPtr*/
-  soWordCallBack                = 'wdcb',
+  soWordCallBack                = 'wdcb', /* use with SpeechWordProcPtr*/
   soSynthExtension              = 'xtnd',
   soSoundOutput                 = 'sndo',
   soOutputToFileWithCFURL       = 'opaf' /* Pass a CFURLRef to write to this file, NULL to generate sound.*/
 };
 
 
+/* Type for stopSpeakingAtBoundary: and pauseSpeakingAtBoundary:*/
+enum {
+  kSpeechImmediateBoundary      = 0,
+  kSpeechWordBoundary           = 1,
+  kSpeechSentenceBoundary       = 2
+};
+
+typedef UInt32                          SpeechBoundary;
 /*------------------------------------------*/
 /* Speaking Mode Constants                  */
 /*------------------------------------------*/
@@ -102,6 +116,14 @@ enum {
   soVoiceFile                   = 'fref'
 };
 
+/*------------------------------------------*/
+/* AudioUnit constants - new in 10.5        */
+/*------------------------------------------*/
+enum {
+  kAudioUnitSubType_SpeechSynthesis = 'ttsp', /* kAudioUnitType_Generator */
+  kAudioUnitProperty_Voice      = 3330, /* Get/Set (VoiceSpec)      */
+  kAudioUnitProperty_SpeechChannel = 3331 /* Get (SpeechChannel)      */
+};
 
 /*
    The speech manager sources may or may not need SpeechChannelRecord.
@@ -130,37 +152,37 @@ enum {
 
 
 struct VoiceDescription {
-  long                length;
+  SInt32              length;
   VoiceSpec           voice;
-  long                version;
+  SInt32              version;
   Str63               name;
   Str255              comment;
-  short               gender;
-  short               age;
-  short               script;
-  short               language;
-  short               region;
-  long                reserved[4];
+  SInt16              gender;
+  SInt16              age;
+  SInt16              script;
+  SInt16              language;
+  SInt16              region;
+  SInt32              reserved[4];
 };
 typedef struct VoiceDescription         VoiceDescription;
 
 
 struct VoiceFileInfo {
   FSSpec              fileSpec;
-  short               resID;
+  SInt16              resID;
 };
 typedef struct VoiceFileInfo            VoiceFileInfo;
 struct SpeechStatusInfo {
   Boolean             outputBusy;
   Boolean             outputPaused;
   long                inputBytesLeft;
-  short               phonemeCode;
+  SInt16              phonemeCode;
 };
 typedef struct SpeechStatusInfo         SpeechStatusInfo;
 
 
 struct SpeechErrorInfo {
-  short               count;
+  SInt16              count;
   OSErr               oldest;
   long                oldPos;
   OSErr               newest;
@@ -173,23 +195,23 @@ struct SpeechVersionInfo {
   OSType              synthType;
   OSType              synthSubType;
   OSType              synthManufacturer;
-  long                synthFlags;
+  SInt32              synthFlags;
   NumVersion          synthVersion;
 };
 typedef struct SpeechVersionInfo        SpeechVersionInfo;
 
 
 struct PhonemeInfo {
-  short               opcode;
+  SInt16              opcode;
   Str15               phStr;
   Str31               exampleStr;
-  short               hiliteStart;
-  short               hiliteEnd;
+  SInt16              hiliteStart;
+  SInt16              hiliteEnd;
 };
 typedef struct PhonemeInfo              PhonemeInfo;
 
 struct PhonemeDescriptor {
-  short               phonemeCount;
+  SInt16              phonemeCount;
   PhonemeInfo         thePhonemes[1];
 };
 typedef struct PhonemeDescriptor        PhonemeDescriptor;
@@ -204,13 +226,555 @@ struct DelimiterInfo {
   Byte                endDelimiter[2];
 };
 typedef struct DelimiterInfo            DelimiterInfo;
+/* Synthesizer Properties */
+/*
+ *  kSpeechStatusProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechStatusProperty                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorsProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorsProperty                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechInputModeProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechInputModeProperty                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechCharacterModeProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechCharacterModeProperty                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechNumberModeProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechNumberModeProperty                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechRateProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechRateProperty                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPitchBaseProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPitchBaseProperty                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPitchModProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPitchModProperty                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechVolumeProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechVolumeProperty                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechSynthesizerInfoProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSynthesizerInfoProperty                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechRecentSyncProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechRecentSyncProperty                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeSymbolsProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeSymbolsProperty                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechCurrentVoiceProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechCurrentVoiceProperty                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechCommandDelimiterProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechCommandDelimiterProperty                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechResetProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechResetProperty                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechOutputToFileURLProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechOutputToFileURLProperty                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechRefConProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechRefConProperty                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechTextDoneCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechTextDoneCallBack                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechSpeechDoneCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSpeechDoneCallBack                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechSyncCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSyncCallBack                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeCallBack                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorCFCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorCFCallBack                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechWordCFCallBack
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechWordCFCallBack                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Speaking Modes*/
+/*
+ *  kSpeechModeText
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechModeText                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechModePhoneme
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechModePhoneme                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechModeNormal
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechModeNormal                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechModeLiteral
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechModeLiteral                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys for options parameter in SpeakCFString*/
+/*
+ *  kSpeechNoEndingProsody
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechNoEndingProsody                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechNoSpeechInterrupt
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechNoSpeechInterrupt                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPreflightThenPause
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPreflightThenPause                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechStatusProperty*/
+/*
+ *  kSpeechStatusOutputBusy
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechStatusOutputBusy                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechStatusOutputPaused
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechStatusOutputPaused                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechStatusNumberOfCharactersLeft
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechStatusNumberOfCharactersLeft               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechStatusPhonemeCode
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechStatusPhonemeCode                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechErrorProperty*/
+/*
+ *  kSpeechErrorCount
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorCount                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorOldest
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorOldest                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorOldestCharacterOffset
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorOldestCharacterOffset                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorNewest
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorNewest                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorNewestCharacterOffset
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorNewestCharacterOffset                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechSynthesizerInfoProperty*/
+/*
+ *  kSpeechSynthesizerInfoIdentifier
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSynthesizerInfoIdentifier                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechSynthesizerInfoManufacturer
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSynthesizerInfoManufacturer                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechSynthesizerInfoVersion
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSynthesizerInfoVersion                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechPhonemeSymbolsProperty*/
+/*
+ *  kSpeechPhonemeInfoOpcode
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeInfoOpcode                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeInfoSymbol
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeInfoSymbol                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeInfoExample
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeInfoExample                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeInfoHiliteStart
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeInfoHiliteStart                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechPhonemeInfoHiliteEnd
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechPhonemeInfoHiliteEnd                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechCurrentVoiceProperty*/
+/*
+ *  kSpeechVoiceCreator
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechVoiceCreator                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechVoiceID
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechVoiceID                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Dictionary keys returned by kSpeechCommandDelimiterProperty*/
+/*
+ *  kSpeechCommandPrefix
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechCommandPrefix                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechCommandSuffix
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechCommandSuffix                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Use with useSpeechDictionary:*/
+/*
+ *  kSpeechDictionaryLocaleIdentifier
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryLocaleIdentifier                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechDictionaryModificationDate
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryModificationDate                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechDictionaryPronunciations
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryPronunciations                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechDictionaryAbbreviations
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryAbbreviations                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechDictionaryEntrySpelling
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryEntrySpelling                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechDictionaryEntryPhonemes
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechDictionaryEntryPhonemes                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* Error callback user info keys*/
+/*
+ *  kSpeechErrorCallbackSpokenString
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorCallbackSpokenString                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechErrorCallbackCharacterOffset
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechErrorCallbackCharacterOffset               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-typedef CALLBACK_API( void , SpeechTextDoneProcPtr )(SpeechChannel chan, long refCon, const void **nextBuf, unsigned long *byteLen, long *controlFlags);
-typedef CALLBACK_API( void , SpeechDoneProcPtr )(SpeechChannel chan, long refCon);
-typedef CALLBACK_API( void , SpeechSyncProcPtr )(SpeechChannel chan, long refCon, OSType syncMessage);
-typedef CALLBACK_API( void , SpeechErrorProcPtr )(SpeechChannel chan, long refCon, OSErr theError, long bytePos);
-typedef CALLBACK_API( void , SpeechPhonemeProcPtr )(SpeechChannel chan, long refCon, short phonemeOpcode);
-typedef CALLBACK_API( void , SpeechWordProcPtr )(SpeechChannel chan, long refCon, unsigned long wordPos, unsigned short wordLen);
+typedef CALLBACK_API( void , SpeechTextDoneProcPtr )(SpeechChannel chan, SRefCon refCon, const void **nextBuf, unsigned long *byteLen, SInt32 *controlFlags);
+typedef CALLBACK_API( void , SpeechDoneProcPtr )(SpeechChannel chan, SRefCon refCon);
+typedef CALLBACK_API( void , SpeechSyncProcPtr )(SpeechChannel chan, SRefCon refCon, OSType syncMessage);
+typedef CALLBACK_API( void , SpeechErrorProcPtr )(SpeechChannel chan, SRefCon refCon, OSErr theError, long bytePos);
+typedef CALLBACK_API( void , SpeechPhonemeProcPtr )(SpeechChannel chan, SRefCon refCon, SInt16 phonemeOpcode);
+typedef CALLBACK_API( void , SpeechWordProcPtr )(SpeechChannel chan, SRefCon refCon, unsigned long wordPos, UInt16 wordLen);
 typedef STACK_UPP_TYPE(SpeechTextDoneProcPtr)                   SpeechTextDoneUPP;
 typedef STACK_UPP_TYPE(SpeechDoneProcPtr)                       SpeechDoneUPP;
 typedef STACK_UPP_TYPE(SpeechSyncProcPtr)                       SpeechSyncUPP;
@@ -360,10 +924,10 @@ DisposeSpeechWordUPP(SpeechWordUPP userUPP)                   AVAILABLE_MAC_OS_X
 extern void
 InvokeSpeechTextDoneUPP(
   SpeechChannel      chan,
-  long               refCon,
+  SRefCon            refCon,
   const void **      nextBuf,
   unsigned long *    byteLen,
-  long *             controlFlags,
+  SInt32 *           controlFlags,
   SpeechTextDoneUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -377,7 +941,7 @@ InvokeSpeechTextDoneUPP(
 extern void
 InvokeSpeechDoneUPP(
   SpeechChannel  chan,
-  long           refCon,
+  SRefCon        refCon,
   SpeechDoneUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -391,7 +955,7 @@ InvokeSpeechDoneUPP(
 extern void
 InvokeSpeechSyncUPP(
   SpeechChannel  chan,
-  long           refCon,
+  SRefCon        refCon,
   OSType         syncMessage,
   SpeechSyncUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -406,7 +970,7 @@ InvokeSpeechSyncUPP(
 extern void
 InvokeSpeechErrorUPP(
   SpeechChannel   chan,
-  long            refCon,
+  SRefCon         refCon,
   OSErr           theError,
   long            bytePos,
   SpeechErrorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -422,8 +986,8 @@ InvokeSpeechErrorUPP(
 extern void
 InvokeSpeechPhonemeUPP(
   SpeechChannel     chan,
-  long              refCon,
-  short             phonemeOpcode,
+  SRefCon           refCon,
+  SInt16            phonemeOpcode,
   SpeechPhonemeUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -436,11 +1000,56 @@ InvokeSpeechPhonemeUPP(
  */
 extern void
 InvokeSpeechWordUPP(
-  SpeechChannel   chan,
-  long            refCon,
-  unsigned long   wordPos,
-  unsigned short  wordLen,
-  SpeechWordUPP   userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechChannel  chan,
+  SRefCon        refCon,
+  unsigned long  wordPos,
+  UInt16         wordLen,
+  SpeechWordUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SpeechTextDoneUPP                                    NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine) { return userRoutine; }
+    inline SpeechDoneUPP                                        NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine) { return userRoutine; }
+    inline SpeechSyncUPP                                        NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine) { return userRoutine; }
+    inline SpeechErrorUPP                                       NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine) { return userRoutine; }
+    inline SpeechPhonemeUPP                                     NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine) { return userRoutine; }
+    inline SpeechWordUPP                                        NewSpeechWordUPP(SpeechWordProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSpeechTextDoneUPP(SpeechTextDoneUPP) { }
+    inline void                                                 DisposeSpeechDoneUPP(SpeechDoneUPP) { }
+    inline void                                                 DisposeSpeechSyncUPP(SpeechSyncUPP) { }
+    inline void                                                 DisposeSpeechErrorUPP(SpeechErrorUPP) { }
+    inline void                                                 DisposeSpeechPhonemeUPP(SpeechPhonemeUPP) { }
+    inline void                                                 DisposeSpeechWordUPP(SpeechWordUPP) { }
+    inline void                                                 InvokeSpeechTextDoneUPP(SpeechChannel chan, SRefCon refCon, const void ** nextBuf, unsigned long * byteLen, SInt32 * controlFlags, SpeechTextDoneUPP userUPP) { (*userUPP)(chan, refCon, nextBuf, byteLen, controlFlags); }
+    inline void                                                 InvokeSpeechDoneUPP(SpeechChannel chan, SRefCon refCon, SpeechDoneUPP userUPP) { (*userUPP)(chan, refCon); }
+    inline void                                                 InvokeSpeechSyncUPP(SpeechChannel chan, SRefCon refCon, OSType syncMessage, SpeechSyncUPP userUPP) { (*userUPP)(chan, refCon, syncMessage); }
+    inline void                                                 InvokeSpeechErrorUPP(SpeechChannel chan, SRefCon refCon, OSErr theError, long bytePos, SpeechErrorUPP userUPP) { (*userUPP)(chan, refCon, theError, bytePos); }
+    inline void                                                 InvokeSpeechPhonemeUPP(SpeechChannel chan, SRefCon refCon, SInt16 phonemeOpcode, SpeechPhonemeUPP userUPP) { (*userUPP)(chan, refCon, phonemeOpcode); }
+    inline void                                                 InvokeSpeechWordUPP(SpeechChannel chan, SRefCon refCon, unsigned long wordPos, UInt16 wordLen, SpeechWordUPP userUPP) { (*userUPP)(chan, refCon, wordPos, wordLen); }
+  #else
+    #define NewSpeechTextDoneUPP(userRoutine)                   ((SpeechTextDoneUPP)userRoutine)
+    #define NewSpeechDoneUPP(userRoutine)                       ((SpeechDoneUPP)userRoutine)
+    #define NewSpeechSyncUPP(userRoutine)                       ((SpeechSyncUPP)userRoutine)
+    #define NewSpeechErrorUPP(userRoutine)                      ((SpeechErrorUPP)userRoutine)
+    #define NewSpeechPhonemeUPP(userRoutine)                    ((SpeechPhonemeUPP)userRoutine)
+    #define NewSpeechWordUPP(userRoutine)                       ((SpeechWordUPP)userRoutine)
+    #define DisposeSpeechTextDoneUPP(userUPP)
+    #define DisposeSpeechDoneUPP(userUPP)
+    #define DisposeSpeechSyncUPP(userUPP)
+    #define DisposeSpeechErrorUPP(userUPP)
+    #define DisposeSpeechPhonemeUPP(userUPP)
+    #define DisposeSpeechWordUPP(userUPP)
+    #define InvokeSpeechTextDoneUPP(chan, refCon, nextBuf, byteLen, controlFlags, userUPP) (*userUPP)(chan, refCon, nextBuf, byteLen, controlFlags)
+    #define InvokeSpeechDoneUPP(chan, refCon, userUPP)          (*userUPP)(chan, refCon)
+    #define InvokeSpeechSyncUPP(chan, refCon, syncMessage, userUPP) (*userUPP)(chan, refCon, syncMessage)
+    #define InvokeSpeechErrorUPP(chan, refCon, theError, bytePos, userUPP) (*userUPP)(chan, refCon, theError, bytePos)
+    #define InvokeSpeechPhonemeUPP(chan, refCon, phonemeOpcode, userUPP) (*userUPP)(chan, refCon, phonemeOpcode)
+    #define InvokeSpeechWordUPP(chan, refCon, wordPos, wordLen, userUPP) (*userUPP)(chan, refCon, wordPos, wordLen)
+  #endif
+#endif
+
+typedef CALLBACK_API( void , SpeechErrorCFProcPtr )(SpeechChannel chan, SRefCon refCon, CFErrorRef theError);
+typedef CALLBACK_API( void , SpeechWordCFProcPtr )(SpeechChannel chan, SRefCon refCon, CFStringRef aString, CFRange wordRange);
 
 /*
  *  SpeechManagerVersion()
@@ -478,7 +1087,7 @@ MakeVoiceSpec(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-CountVoices(short * numVoices)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountVoices(SInt16 * numVoices)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -491,7 +1100,7 @@ CountVoices(short * numVoices)                                AVAILABLE_MAC_OS_X
  */
 extern OSErr 
 GetIndVoice(
-  short        index,
+  SInt16       index,
   VoiceSpec *  voice)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -591,7 +1200,7 @@ SpeakBuffer(
   SpeechChannel   chan,
   const void *    textBuf,
   unsigned long   textBytes,
-  long            controlFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          controlFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -617,7 +1226,7 @@ StopSpeech(SpeechChannel chan)                                AVAILABLE_MAC_OS_X
 extern OSErr 
 StopSpeechAt(
   SpeechChannel   chan,
-  long            whereToStop)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          whereToStop)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -631,7 +1240,7 @@ StopSpeechAt(
 extern OSErr 
 PauseSpeechAt(
   SpeechChannel   chan,
-  long            whereToPause)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          whereToPause)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -654,7 +1263,7 @@ ContinueSpeech(SpeechChannel chan)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
-extern short 
+extern SInt16 
 SpeechBusy(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -666,7 +1275,7 @@ SpeechBusy(void)                                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
-extern short 
+extern SInt16 
 SpeechBusySystemWide(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -787,10 +1396,89 @@ UseDictionary(
   Handle          dictionary)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* Replaces SpeakBuffer*/
+/*
+ *  SpeakCFString()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+SpeakCFString(
+  SpeechChannel     chan,
+  CFStringRef       aString,
+  CFDictionaryRef   options)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* Replaces UseDictionary*/
+/*
+ *  UseSpeechDictionary()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+UseSpeechDictionary(
+  SpeechChannel     chan,
+  CFDictionaryRef   speechDictionary)                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* Replaces TextToPhonemes*/
+/*
+ *  CopyPhonemesFromText()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+CopyPhonemesFromText(
+  SpeechChannel   chan,
+  CFStringRef     text,
+  CFStringRef *   phonemes)                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* Replaces GetSpeechInfo*/
+/*
+ *  CopySpeechProperty()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+CopySpeechProperty(
+  SpeechChannel   chan,
+  CFStringRef     property,
+  CFTypeRef *     object)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/* Replaces SetSpeechInfo*/
+/*
+ *  SetSpeechProperty()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+SetSpeechProperty(
+  SpeechChannel   chan,
+  CFStringRef     property,
+  CFTypeRef       object)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 
-#pragma options align=reset
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

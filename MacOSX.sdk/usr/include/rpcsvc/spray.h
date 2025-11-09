@@ -59,39 +59,39 @@ bool_t xdr_sprayarr();
 
 #endif /* _RPCSVC_SPRAY_H_ */
 
-#define SPRAYPROG ((u_long)100012)
-#define SPRAYVERS ((u_long)1)
+#define SPRAYPROG ((rpc_uint)100012)
+#define SPRAYVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define SPRAYPROC_SPRAY ((u_long)1)
+#define SPRAYPROC_SPRAY ((rpc_uint)1)
 extern "C" void * sprayproc_spray_1(sprayarr *, CLIENT *);
 extern "C" void * sprayproc_spray_1_svc(sprayarr *, struct svc_req *);
-#define SPRAYPROC_GET ((u_long)2)
+#define SPRAYPROC_GET ((rpc_uint)2)
 extern "C" spraycumul * sprayproc_get_1(void *, CLIENT *);
 extern "C" spraycumul * sprayproc_get_1_svc(void *, struct svc_req *);
-#define SPRAYPROC_CLEAR ((u_long)3)
+#define SPRAYPROC_CLEAR ((rpc_uint)3)
 extern "C" void * sprayproc_clear_1(void *, CLIENT *);
 extern "C" void * sprayproc_clear_1_svc(void *, struct svc_req *);
 
 #elif __STDC__
-#define SPRAYPROC_SPRAY ((u_long)1)
+#define SPRAYPROC_SPRAY ((rpc_uint)1)
 extern  void * sprayproc_spray_1(sprayarr *, CLIENT *);
 extern  void * sprayproc_spray_1_svc(sprayarr *, struct svc_req *);
-#define SPRAYPROC_GET ((u_long)2)
+#define SPRAYPROC_GET ((rpc_uint)2)
 extern  spraycumul * sprayproc_get_1(void *, CLIENT *);
 extern  spraycumul * sprayproc_get_1_svc(void *, struct svc_req *);
-#define SPRAYPROC_CLEAR ((u_long)3)
+#define SPRAYPROC_CLEAR ((rpc_uint)3)
 extern  void * sprayproc_clear_1(void *, CLIENT *);
 extern  void * sprayproc_clear_1_svc(void *, struct svc_req *);
 
 #else /* Old Style C */
-#define SPRAYPROC_SPRAY ((u_long)1)
+#define SPRAYPROC_SPRAY ((rpc_uint)1)
 extern  void * sprayproc_spray_1();
 extern  void * sprayproc_spray_1_svc();
-#define SPRAYPROC_GET ((u_long)2)
+#define SPRAYPROC_GET ((rpc_uint)2)
 extern  spraycumul * sprayproc_get_1();
 extern  spraycumul * sprayproc_get_1_svc();
-#define SPRAYPROC_CLEAR ((u_long)3)
+#define SPRAYPROC_CLEAR ((rpc_uint)3)
 extern  void * sprayproc_clear_1();
 extern  void * sprayproc_clear_1_svc();
 #endif /* Old Style C */

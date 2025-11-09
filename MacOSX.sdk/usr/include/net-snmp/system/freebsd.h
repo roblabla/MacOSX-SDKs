@@ -19,3 +19,11 @@
 #else
 #define UTMP_FILE "/var/run/utmp"
 #endif
+
+#define UDP_ADDRESSES_IN_HOST_ORDER 1
+
+/* define the extra mib modules that are supported */
+#define NETSNMP_INCLUDE_HOST_RESOURCES
+#ifdef NETSNMP_ENABLE_MFD_REWRITES
+#define NETSNMP_INCLUDE_IFTABLE_REWRITES
+#endif

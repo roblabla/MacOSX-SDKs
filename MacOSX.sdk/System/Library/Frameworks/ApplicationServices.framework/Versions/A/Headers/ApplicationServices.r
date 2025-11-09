@@ -3,7 +3,7 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-22~2319
+     Version:    ApplicationServices-34~89
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -23,10 +23,6 @@
 
 #ifndef __QD_R__
 #include <QD/QD.r>
-#endif
-
-#ifndef __AE_R__
-#include <AE/AE.r>
 #endif
 
 #ifndef __HISERVICES_R__

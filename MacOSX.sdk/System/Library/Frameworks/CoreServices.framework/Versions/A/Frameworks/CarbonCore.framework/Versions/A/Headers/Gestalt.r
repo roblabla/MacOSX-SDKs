@@ -3,7 +3,7 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1988-2006 by Apple Computer, Inc.  All rights reserved
  
@@ -27,7 +27,7 @@
 #define gestalt32BitCapable 			2					/*  Machine is 32-bit capable  */
 
 #define gestaltAFPClient 				'afps'
-#define gestaltAFPClientVersionMask 	0x0000FFFF			/*  low word of long is the  */
+#define gestaltAFPClientVersionMask 	0x0000FFFF			/*  low word of SInt32 is the  */
 															/*  client version 0x0001 -> 0x0007 */
 #define gestaltAFPClient3_5 			0x0001
 #define gestaltAFPClient3_6 			0x0002
@@ -40,7 +40,7 @@
 #define gestaltAFPClient3_8_1 			0x0009				/*  including 3.8.2  */
 #define gestaltAFPClient3_8_3 			0x000A
 #define gestaltAFPClient3_8_4 			0x000B				/*  including 3.8.5, 3.8.6  */
-#define gestaltAFPClientAttributeMask 	0xFFFF0000			/*  high word of long is a  */
+#define gestaltAFPClientAttributeMask 	0xFFFF0000			/*  high word of response is a  */
 															/*  set of attribute bits */
 #define gestaltAFPClientCfgRsrc 		16					/*  Client uses config resources */
 #define gestaltAFPClientSupportsIP 		29					/*  Client supports AFP over TCP/IP */
@@ -83,7 +83,7 @@
 #define gestaltMacOSCompatibilityBoxless  2					/*  True if we're Boxless (screen shared with Carbon/Cocoa)  */
 
 #define gestaltBusClkSpeed 				'bclk'				/*  main I/O bus clock speed in hertz  */
-#define gestaltBusClkSpeedMHz 			'bclm'				/*  main I/O bus clock speed in megahertz ( an unsigned long )  */
+#define gestaltBusClkSpeedMHz 			'bclm'				/*  main I/O bus clock speed in megahertz ( a UInt32 )  */
 #define gestaltCloseViewAttr 			'BSDa'				/*  CloseView attributes  */
 #define gestaltCloseViewEnabled 		0					/*  Closeview enabled (dynamic bit - returns current state)  */
 #define gestaltCloseViewDisplayMgrFriendly  1				/*  Closeview compatible with Display Manager (FUTURE)  */
@@ -159,6 +159,7 @@
 #define gestaltCPU750FX 				0x0120				/*  Sahara,G3 like thing  */
 #define gestaltCPU970 					0x0139				/*  G5  */
 #define gestaltCPU970FX 				0x013C				/*  another G5  */
+#define gestaltCPU970MP 				0x0144
 
 															/*  x86 CPUs all start with 'i' in the high nybble  */
 #define gestaltCPU486 					'i486'
@@ -700,8 +701,8 @@
 #define gestaltPCCardHasPowerControl 	2					/*     PCCardSetPowerLevel is supported */
 #define gestaltPCCardSupportsCardBus 	3					/*     CardBus is supported */
 
-#define gestaltProcClkSpeed 			'pclk'				/*  processor clock speed in hertz (an unsigned long)  */
-#define gestaltProcClkSpeedMHz 			'mclk'				/*  processor clock speed in megahertz (an unsigned long)  */
+#define gestaltProcClkSpeed 			'pclk'				/*  processor clock speed in hertz (a UInt32)  */
+#define gestaltProcClkSpeedMHz 			'mclk'				/*  processor clock speed in megahertz (a UInt32)  */
 #define gestaltPCXAttr 					'pcxg'				/*  PC Exchange attributes  */
 #define gestaltPCXHas8and16BitFAT 		0					/*  PC Exchange supports both 8 and 16 bit FATs  */
 #define gestaltPCXHasProDOS 			1					/*  PC Exchange supports ProDOS  */

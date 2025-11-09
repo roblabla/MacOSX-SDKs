@@ -33,17 +33,22 @@
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
 #    include <TargetConditionals.h>
+#    include <AvailabilityMacros.h>
 #    if TARGET_RT_MAC_CFM
 #        error "Use KfM 4.0 SDK headers for CFM compilation."
 #    endif
+#endif
+
+#ifndef DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
+#define DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
 #endif
 
 #if TARGET_OS_MAC
 #    include <Kerberos/CredentialsCache.h>
 #    include <Kerberos/profile.h>
 #    include <Kerberos/des.h>
-#    include <Kerberos/KClientTypes.h>
 #    include <CoreServices/CoreServices.h>
+#    include <Kerberos/KClientTypes.h>
 #else
 #    include <CredentialsCache.h>
 #    include <profile.h>
@@ -56,10 +61,7 @@ extern "C" {
 #endif
 
 #if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import on
-#    endif
-#    pragma options align=mac68k
+#    pragma pack(push,2)
 #endif
     
 /* Constants */
@@ -111,95 +113,117 @@ enum {
 OSStatus KClientGetVersion (
 	UInt16*					outMajorVersion,
 	UInt16*					outMinorVersion,
-	const char**			outVersionString);
+	const char**			outVersionString) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Initialization / destruction */
 
 OSStatus KClientNewClientSession (
-	KClientSession*			outSession);
+	KClientSession*			outSession) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientNewServerSession (
 	KClientSession*			inSession,
-	KClientPrincipal		inService);
+	KClientPrincipal		inService) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientDisposeSession (
-	KClientSession			inSession);
+	KClientSession			inSession) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Accessing session properties */
 OSStatus KClientGetClientPrincipal (
 	KClientSession			inSession,
-	KClientPrincipal*		outPrincipal);
+	KClientPrincipal*		outPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientSetClientPrincipal (
 	KClientSession			inSession,
-	KClientPrincipal		inPrincipal);
+	KClientPrincipal		inPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetServerPrincipal (
 	KClientSession			inSession,
-	KClientPrincipal*		outPrincipal);
+	KClientPrincipal*		outPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientSetServerPrincipal (
 	KClientSession			inSession,
-	KClientPrincipal		inPrincipal);
+	KClientPrincipal		inPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetLocalAddress (
 	KClientSession			inSession,
-	KClientAddress*			outLocalAddress);
+	KClientAddress*			outLocalAddress) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientSetLocalAddress (
 	KClientSession			inSession,
-	const KClientAddress*	inLocalAddress);
+	const KClientAddress*	inLocalAddress) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetRemoteAddress (
 	KClientSession			inSession,
-	KClientAddress*			outRemoteAddress);
+	KClientAddress*			outRemoteAddress) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientSetRemoteAddress (
 	KClientSession			inSession,
-	const KClientAddress*	inRemoteAddress);
+	const KClientAddress*	inRemoteAddress) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetSessionKey (
 	KClientSession			inSession,
-	KClientKey*				outKey);
+	KClientKey*				outKey) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientGetExpirationTime (
 	KClientSession			inSession,
-	UInt32*					outExpiration);
+	UInt32*					outExpiration) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientSetKeyFile (
 	KClientSession			inSession,
-	const KClientFile*		inKeyFile);
+	const KClientFile*		inKeyFile) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Logging in and out (client) */
 
 OSStatus KClientLogin (
-	KClientSession			inSession);
+	KClientSession			inSession) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientPasswordLogin (
 	KClientSession			inSession,
-	const char* 			inPassword);
+	const char* 			inPassword) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientKeyFileLogin (
-	KClientSession			inSession);
+	KClientSession			inSession) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*OSStatus KClientKeyLogin (
 	KClientSession			inSession,
-	const KClientKey*		inKey);*/
+	const KClientKey*		inKey) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;*/
 	
 OSStatus KClientLogout (
-	KClientSession			inSession);
+	KClientSession			inSession) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Accessing service keys (server) */
 
 OSStatus KClientGetServiceKey (
 	KClientSession			inSession,
 	UInt32					inVersion,
-	KClientKey*				outKey);
+	KClientKey*				outKey) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientAddServiceKey (
 	KClientSession			inSession,
 	UInt32					inVersion,
-	const KClientKey*		inKey);
+	const KClientKey*		inKey) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Authenticating to a service (client) */
 
@@ -207,41 +231,48 @@ OSStatus KClientGetTicketForService (
 	KClientSession			inSession,
 	UInt32					inChecksum,
 	void*					outBuffer,
-	UInt32*					ioBufferLength);
+	UInt32*					ioBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetAuthenticatorForService (
 	KClientSession			inSession,
 	UInt32					inChecksum,
 	const char*				inApplicationVersion,
 	void*					outBuffer,
-	UInt32*					ioBufferLength);
+	UInt32*					ioBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientVerifyEncryptedServiceReply (
 	KClientSession			inSession,
 	const void*				inBuffer,
-	UInt32					inBufferLength);
+	UInt32					inBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientVerifyProtectedServiceReply (
 	KClientSession			inSession,
 	const void*				inBuffer,
-	UInt32					inBufferLength);
+	UInt32					inBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Authenticating a client (server) */
 
 OSStatus KClientVerifyAuthenticator (
 	KClientSession			inSession,
 	const void*				inBuffer,
-	UInt32					inBufferLength);
+	UInt32					inBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetEncryptedServiceReply (
 	KClientSession			inSession,
 	void*					outBuffer,
-	UInt32*					ioBufferSize);
+	UInt32*					ioBufferSize) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientGetProtectedServiceReply (
 	KClientSession			inSession,
 	void*					outBuffer,
-	UInt32*					ioBufferSize);
+	UInt32*					ioBufferSize) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Communicating between a server and a client */
 
@@ -250,70 +281,78 @@ OSStatus KClientEncrypt (
 	const void*				inPlainBuffer,
 	UInt32					inPlainBufferLength,
 	void*					outEncryptedBuffer,
-	UInt32*					ioEncryptedBufferLength);
+	UInt32*					ioEncryptedBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientDecrypt (
 	KClientSession			inSession,
 	void*					inEncryptedBuffer,
 	UInt32					inDecryptedBufferLength,
 	UInt32*					outPlainOffset,
-	UInt32*					outPlainLength);
+	UInt32*					outPlainLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientProtectIntegrity (
 	KClientSession			inSession,
 	const void*				inPlainBuffer,
 	UInt32					inPlainBufferLength,
 	void*					outProtectedBuffer,
-	UInt32*					ioProtectedBufferLength);
+	UInt32*					ioProtectedBufferLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientVerifyIntegrity (
 	KClientSession			inSession,
 	void*					inProtectedBuffer,
 	UInt32					inProtectedBufferLength,
 	UInt32*					outPlainOffset,
-	UInt32*					outPlainLength);
+	UInt32*					outPlainLength) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Miscellaneous */
 
 OSStatus KClientPasswordToKey (
 	KClientSession			inSession,
 	const char*				inPassword,
-	KClientKey*				outKey);
+	KClientKey*				outKey) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 /* Getting to other APIs */
 
 OSStatus KClientGetCCacheReference (
 	KClientSession			inSession,
-	cc_ccache_t*			outCCacheReference);
+	cc_ccache_t*			outCCacheReference) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 OSStatus KClientGetProfileHandle (
 	KClientSession			inSession,
-	profile_t*				outProfileHandle);
+	profile_t*				outProfileHandle) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Principal manipulation */
 
 OSStatus KClientV4StringToPrincipal (
 	const char*				inPrincipalString,
-	KClientPrincipal*		outPrincipal);
+	KClientPrincipal*		outPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientPrincipalToV4String (
 	KClientPrincipal		inPrincipal,
-	char*					outPrincipalString);
+	char*					outPrincipalString) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientPrincipalToV4Triplet (
 	KClientPrincipal		inPrincipal,
 	char*					outName,
 	char*					outInstance,
-	char*					outRealm);
+	char*					outRealm) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 	
 OSStatus KClientDisposePrincipal (
-	KClientPrincipal		inPrincipal);
+	KClientPrincipal		inPrincipal) 
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import reset
-#    endif
-#    pragma options align=reset
+#    pragma pack(pop)
 #endif
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 /*      MDQuery.h
-        Copyright (c) 2003-2004, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 2003-2005, Apple Computer, Inc. All rights reserved.
 */
 
 /*!
@@ -16,30 +16,6 @@
         is kept up to date with respect to value lists and sorting as
         the progress notifications are sent out, so the query is in a
         good state during those events.
-
-        Query Expression Syntax
-        The query language understood by MDQuery is very simple. A
-        simplified form of regular expressions are used
-        (globbing). All queries have the following format
-
-        Attribute = Value.
-
-        Where Attribute is a user defined attribute, or a system
-        defined attribute as defined in MDItem.h. So for example if
-        you wanted to find all files whos title contains the word
-        "work" the query would look like
-
-                kMDItemTitle = "*work*"
-
-                Queries are combinded using a C like syntax for And (&&) and
-                Or (||) So for example to file a file whos type was an audio
-                file and the title contained the word "work" in it the query
-                would be
-
-                kMDItemContentType = "*audio*" && kMDItemTitle = "*work*"
-
-                Parentesis can be used to group and force a particular
-                grouping of the query.
 
         Result Retreval
                 An MDQueryRef presents its results as if it were a simple
@@ -89,6 +65,7 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
+#include <sys/types.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFArray.h>
@@ -588,7 +565,7 @@ MD_EXPORT void MDQueryEnableUpdates(MDQueryRef query) MD_AVAIL;
         @param query The query to be interrogated.
         @result A boolean indicating whether or not the first phase
                 of a query has completed.
-*/
+ */
 MD_EXPORT Boolean MDQueryIsGatheringComplete(MDQueryRef query) MD_AVAIL;
 
 /*!
@@ -638,8 +615,9 @@ MD_EXPORT const void *MDQueryGetResultAtIndex(MDQueryRef query, CFIndex idx) MD_
                 must be a valid MDItemRef.
         @result The index of the given result, or kCFNotFound if the
                 value is not one of the query's existing results. If
-          you provided a custom result creation function
-          result will be objects created by that function.
+                you provided a custom result creation function, 
+                as well as a custom object comparator function,
+                result will be objects created by that function.
 */
 MD_EXPORT CFIndex MDQueryGetIndexOfResult(MDQueryRef query, const void *result) MD_AVAIL;
 
@@ -726,7 +704,7 @@ MD_EXPORT CFIndex MDQueryGetCountOfResultsWithAttributeValue(MDQueryRef query, C
 */
 typedef CFComparisonResult (*MDQuerySortComparatorFunction)(const CFTypeRef attrs1[], const CFTypeRef attrs2[], void *context);
 
-/*
+/*!
         @function MDQuerySetSortComparator
         Sets the function used to sort the results of an MDQuery. You
                 may set the comparator function as many times as you
@@ -851,11 +829,11 @@ MD_EXPORT const CFStringRef kMDQueryUpdateRemovedItems MD_AVAIL;
         @constant kMDQueryResultContentRelevance
         The name of a query-specific attribute for use in sorting.
                 The relevance of an item is a CFNumberRef with a
-                floating point value. This is the relevance for 
-                content searches.  
+                floating point value. This is the relevance for
+                content searches.
                 The maximum and minimum values for a particular
                 search cannot be determined until all of the results
-                have been returned.  If there are multiple 
+                have been returned.  If there are multiple
                 kMDItemTextContent predicates in the query, no
                 relevance is returned.
                 This is an attribute of a result item that is
@@ -886,8 +864,8 @@ MD_EXPORT const CFStringRef kMDQueryResultContentRelevance MD_AVAIL;
 			 options. This must be called before the query is executed.
     @param query The query object to modify.
     @param scopeDirectories a CFArray of CFStringRef or CFURLRef objects which
-           specify where to search.  For conveinience, the kMDQueryScopeHome, 
-			kMDQueryScopeComputer and kMDQueryScopeNetwork constants may also 
+           specify where to search.  For conveinience, the kMDQueryScopeHome,
+			kMDQueryScopeComputer and kMDQueryScopeNetwork constants may also
 			be present in this array.
     @param scopeOptions additional options for modifying the search.
            Currently, pass 0 (zero).
@@ -896,30 +874,36 @@ MD_EXPORT const CFStringRef kMDQueryResultContentRelevance MD_AVAIL;
 MD_EXPORT void MDQuerySetSearchScope(MDQueryRef query, CFArrayRef scopeDirectories, OptionBits scopeOptions) MD_AVAIL;
 
 /*!
-	@constant kMDQueryScopeHome
+@constant kMDQueryScopeHome
 	A constant, which can be passed in the scopeDirectories array, to specify
 	that the search should be restricted to the volume and directory that contains
 	the current user's home directory
  */
-
 MD_EXPORT const CFStringRef kMDQueryScopeHome MD_AVAIL;
 
 /*!
-	@constant kMDQueryScopeComputer
+@constant kMDQueryScopeComputer
 	A constant, which can be passed in the scopeDirectories array, to specify
 	that the search should be restricted to all locally mounted volumes, plus the user's
 	home directory (which may be on a remote volume).
  */
-
 MD_EXPORT const CFStringRef kMDQueryScopeComputer MD_AVAIL;
 
 /*!
-	@constant kMDQueryScopeNetwork
+@constant kMDQueryScopeNetwork
 	A constant, which can be passed in the scopeDirectories array, to specify
 	that the search should include all user mounted remote volumes.
  */
-
 MD_EXPORT const CFStringRef kMDQueryScopeNetwork MD_AVAIL;
+
+/*!
+ @function MDQuerySetMaxCount
+ @discussion Use MDQuerySetMaxCount to limit the number of results
+ returned by the query engine.  This must be called before the query is executed.
+ @param query The query object to modify.
+ @param size The maximum number of results desired.
+ */
+MD_EXPORT void MDQuerySetMaxCount(MDQueryRef query, CFIndex size) MD_AVAIL_LEOPARD;
 
 MD_END_C_DECLS
 

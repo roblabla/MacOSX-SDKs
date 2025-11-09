@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Registry constants.
  
-     Version:    OSA-97~629
+     Version:    OSA-122~37
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved
  
@@ -155,8 +155,8 @@ enum {
   cClassIdentifier              = pClass,
   cObjectBeingExamined          = typeObjectBeingExamined,
   cList                         = typeAEList,
-  cSmallReal                    = typeSMFloat,
-  cReal                         = typeFloat,
+  cSmallReal                    = typeIEEE32BitFloatingPoint,
+  cReal                         = typeIEEE64BitFloatingPoint,
   cRecord                       = typeAERecord,
   cReference                    = cObjectSpecifier,
   cUndefined                    = 'undf',

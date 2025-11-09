@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.43.2.1.8.4 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: fsock.h,v 1.50.2.1.2.2 2007/12/31 07:20:12 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -31,10 +31,6 @@
 
 PHP_FUNCTION(fsockopen);
 PHP_FUNCTION(pfsockopen);
-
-PHPAPI int php_lookup_hostname(const char *addr, struct in_addr *in);
-
-PHP_RSHUTDOWN_FUNCTION(fsock);
 
 /*
  * Local variables:

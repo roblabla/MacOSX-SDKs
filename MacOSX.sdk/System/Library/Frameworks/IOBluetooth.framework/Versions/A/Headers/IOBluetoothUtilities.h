@@ -71,8 +71,6 @@ extern	NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString
 
 #else
 
-// C Versions of the above API.
-
 extern	IOReturn	IOBluetoothCFStringToDeviceAddress( CFStringRef inNameString, BluetoothDeviceAddress * outDeviceAddress );
 extern	CFStringRef	IOBluetoothCFStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMDataAtCFStringPath( CFStringRef inFileName );
@@ -140,8 +138,8 @@ extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef 
 	</i>
 */
 
-int32_t		IOBluetoothPackData( void *ioBuffer, const char *inFormat, ... );
-int32_t		IOBluetoothPackDataList( void *ioBuffer, const char *inFormat, va_list inArgs );
+extern long		IOBluetoothPackData( void *ioBuffer, const char *inFormat, ... );
+extern long		IOBluetoothPackDataList( void *ioBuffer, const char *inFormat, va_list inArgs );
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothUnpackData
@@ -191,19 +189,51 @@ int32_t		IOBluetoothPackDataList( void *ioBuffer, const char *inFormat, va_list 
 	</pre>
 */
 
-int32_t		IOBluetoothUnpackData( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, ... );
-int32_t		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, va_list inArgs );
+extern long		IOBluetoothUnpackData( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, ... );
+extern long		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, va_list inArgs );
 
 #pragma mark -
 #pragma mark === Registry Stuff ===
 
-// $$$WARNING$$$ These really should be private, so please don't use them - they are likely to change.
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothNumberOfAvailableHIDDevices
+	@abstract	Returns total number of HID devices on the system (Bluetooth + USB)
+	@result		Number of HID devices.
+*/
 
-int IOBluetoothNumberOfAvailableHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
-int IOBluetoothNumberOfPointingHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
-int IOBluetoothNumberOfKeyboardHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
-int IOBluetoothNumberOfTabletHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
-int IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *deviceType ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+extern long IOBluetoothNumberOfAvailableHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothNumberOfPointingHIDDevices
+	@abstract	Returns number of "pointing" HID devices on the system (Bluetooth + USB)
+	@result		Number of HID devices.
+*/
+
+extern long IOBluetoothNumberOfPointingHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothNumberOfKeyboardHIDDevices
+	@abstract	Returns number of keyboard HID devices on the system (Bluetooth + USB)
+	@result		Number of HID devices.
+*/
+
+extern long IOBluetoothNumberOfKeyboardHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothNumberOfTabletHIDDevices
+	@abstract	Returns number of "Tablet" HID devices on the system (Bluetooth + USB)
+	@result		Number of HID devices.
+*/
+
+extern long IOBluetoothNumberOfTabletHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothFindNumberOfRegistryEntriesOfClassName
+	@abstract	Returns total number of registry entries with the provided device classname. e.g. "IOHIPointing"
+	@result		Number of HID devices.
+*/
+
+extern long IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *deviceType ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
 
 
 #ifdef	__cplusplus

@@ -1,11 +1,11 @@
 /*
 	NSExceptionHandler.h
 	Exception Handling
-	Copyright (c) 1998, Apple Computer, Inc.
+	Copyright (c) 1998-2006, Apple Computer, Inc.
 	All rights reserved.
 */
 
-#import "ExceptionHandlingDefines.h"
+#import <ExceptionHandling/ExceptionHandlingDefines.h>
 #import <Foundation/NSObject.h>
 
 @class NSString, NSException;
@@ -57,10 +57,10 @@ enum {
 }
 
 + (NSExceptionHandler *)defaultExceptionHandler;
-- (void)setExceptionHandlingMask:(unsigned int)aMask;
-- (unsigned int)exceptionHandlingMask;
-- (void)setExceptionHangingMask:(unsigned int)aMask;
-- (unsigned int)exceptionHangingMask;
+- (void)setExceptionHandlingMask:(NSUInteger)aMask;
+- (NSUInteger)exceptionHandlingMask;
+- (void)setExceptionHangingMask:(NSUInteger)aMask;
+- (NSUInteger)exceptionHangingMask;
 - (void)setDelegate:(id)anObject;
 - (id)delegate;
 
@@ -68,8 +68,8 @@ enum {
 
 @interface NSObject(NSExceptionHandlerDelegate)
 
-- (BOOL)exceptionHandler:(NSExceptionHandler *)sender shouldLogException:(NSException *)exception mask:(unsigned int)aMask;	// mask is NSLog<exception type>Mask, exception's userInfo has stack trace for key NSStackTraceKey
-- (BOOL)exceptionHandler:(NSExceptionHandler *)sender shouldHandleException:(NSException *)exception mask:(unsigned int)aMask;	// mask is NSHandle<exception type>Mask, exception's userInfo has stack trace for key NSStackTraceKey
+- (BOOL)exceptionHandler:(NSExceptionHandler *)sender shouldLogException:(NSException *)exception mask:(NSUInteger)aMask;	// mask is NSLog<exception type>Mask, exception's userInfo has stack trace for key NSStackTraceKey
+- (BOOL)exceptionHandler:(NSExceptionHandler *)sender shouldHandleException:(NSException *)exception mask:(NSUInteger)aMask;	// mask is NSHandle<exception type>Mask, exception's userInfo has stack trace for key NSStackTraceKey
 
 @end
 

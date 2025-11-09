@@ -3,9 +3,7 @@
    Copyright (c) 2004 Apple Computer, Inc.
    All rights reserved. */
 
-#import <Foundation/NSObject.h>
-
-#import <ApplicationServices/ApplicationServices.h>
+#import <QuartzCore/CIVector.h>
 
 @interface CIColor : NSObject <NSCoding, NSCopying>
 {
@@ -19,8 +17,8 @@
 
 /* Create a new color object. It's created using the GenericRGB color space. */
 
-+ (CIColor *)colorWithRed:(float)r green:(float)g blue:(float)b alpha:(float)a;
-+ (CIColor *)colorWithRed:(float)r green:(float)g blue:(float)b;
++ (CIColor *)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a;
++ (CIColor *)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b;
 
 /* Create a new color object, 'representation' should be a string in one of
  * the formats returned by the stringRepresentation method. */
@@ -37,11 +35,11 @@
 
 /* Return the color components (including alpha). */
 
-- (const float *)components;
+- (const CGFloat *)components;
 
 /* Return the alpha value of the color. */
 
-- (float)alpha;
+- (CGFloat)alpha;
 
 /* Return the color space object associated with the color. */
 
@@ -49,9 +47,9 @@
 
 /* Return the (unpremultiplied) red, green or blue components of the color. */
 
-- (float)red;
-- (float)green;
-- (float)blue;
+- (CGFloat)red;
+- (CGFloat)green;
+- (CGFloat)blue;
 
 /* Returns a formatted string with the components of the color. */
 

@@ -1,12 +1,13 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotationInk.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-#import "PDFAnnotation.h"
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFAnnotation.h>
 
 
-@class NSBezierPath, PDFAnnotationInkPrivateVars;
+@class PDFAnnotationInkPrivateVars;
 
 
 @interface PDFAnnotationInk : PDFAnnotation
@@ -19,6 +20,7 @@
 - (NSArray *) paths;
 
 // Add or remove paths from the annotation.
+// Path points are specified relative to the annotation's bound's origin.
 - (void) addBezierPath: (NSBezierPath *) path;
 - (void) removeBezierPath: (NSBezierPath *) path;
 

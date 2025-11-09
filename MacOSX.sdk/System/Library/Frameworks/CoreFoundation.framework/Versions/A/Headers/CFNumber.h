@@ -1,5 +1,5 @@
 /*	CFNumber.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBER__)
@@ -7,9 +7,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef const struct __CFBoolean * CFBooleanRef;
 
@@ -24,8 +22,8 @@ CFTypeID CFBooleanGetTypeID(void);
 CF_EXPORT
 Boolean CFBooleanGetValue(CFBooleanRef boolean);
 
-typedef enum {
-    /* Types from MacTypes.h */
+enum {
+    /* Fixed-width types */
     kCFNumberSInt8Type = 1,
     kCFNumberSInt16Type = 2,
     kCFNumberSInt32Type = 3,
@@ -42,8 +40,15 @@ typedef enum {
     kCFNumberDoubleType = 13,
     /* Other */
     kCFNumberCFIndexType = 14,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    kCFNumberNSIntegerType = 15,
+    kCFNumberCGFloatType = 16,
+    kCFNumberMaxType = 16
+#else
     kCFNumberMaxType = 14
-} CFNumberType;
+#endif
+};
+typedef CFIndex CFNumberType;
 
 typedef const struct __CFNumber * CFNumberRef;
 
@@ -116,9 +121,7 @@ Boolean CFNumberGetValue(CFNumberRef number, CFNumberType theType, void *valuePt
 CF_EXPORT
 CFComparisonResult CFNumberCompare(CFNumberRef number, CFNumberRef otherNumber, void *context);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFNUMBER__ */
 

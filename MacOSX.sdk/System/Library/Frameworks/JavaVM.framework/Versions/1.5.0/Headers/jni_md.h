@@ -8,11 +8,11 @@
 #ifndef _JAVASOFT_JNI_MD_H_
 #define _JAVASOFT_JNI_MD_H_
 
-#define JNIEXPORT 
+#define JNIEXPORT __attribute__((visibility("default")))
 #define JNIIMPORT
 #define JNICALL
 
-#ifdef __LP64__
+#if __LP64__
 typedef int jint;
 #else
 typedef long jint;

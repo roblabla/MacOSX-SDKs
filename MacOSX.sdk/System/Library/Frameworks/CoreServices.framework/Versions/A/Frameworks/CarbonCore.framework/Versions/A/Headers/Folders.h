@@ -3,7 +3,7 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -40,11 +40,31 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint off
 #endif
+
+/*
+    Common folder locations:
+    ========================
+    kSystemDomain is generally /System and things inside it, so
+     - kSystemDomain, kDomainLibraryFolderType is /System/Library/
+     - kSystemDomain, kTrashFolderType is a trash folder on the same volume as /System ( the boot disk )
+     - kSystemDomain, kDomainTopLevelFolderType is the root of the system domain, so it's the same as /System
+    kLocalDomain is generally the admin-writeable, system-wide location for things, so
+     - kLocalDomain, kDomainLibraryFolderType is /Library/
+    kUserDomain maps to the current user's home folder, so that
+     - kUserDomain, kCurrentUserFolderType is the user's home folder itself ( "$HOME", ~ )
+     - kUserDomain, kDomainLibraryFolderType is the Library folder in the user home ( "$HOME/Library", "~/Library/" )
+     - kUserDomain, kPreferencesFolderType is the Preferences folder in the user home ( "$HOME/Library/Preferences/" )
+     - kUserDomain, kTrashFolderType is a trash folder on the same volume as the user home
+    kNetworkDomain, if configured, is a network file system which a network administrator may have installed items into
+     - kNetworkDomain, kApplicationsFolderType is /Network/Applications/
+    kClassicDomain, if configured, is where the Mac OS X Classic environment information is stored
+     - kClassicDomain, kSystemFolderType is the currently active Macintosh Classic system folder ( or fnfErr if a Classic isn't installed )
+*/
 
 enum {
   kOnSystemDisk                 = -32768L, /* previously was 0x8000 but that is an unsigned value whereas vRefNum is signed*/
@@ -55,7 +75,8 @@ enum {
   kLocalDomain                  = -32765, /* All users of a single machine have access to these resources.*/
   kNetworkDomain                = -32764, /* All users configured to use a common network server has access to these resources.*/
   kUserDomain                   = -32763, /* Read/write. Resources that are private to the user.*/
-  kClassicDomain                = -32762 /* Domain referring to the currently configured Classic System Folder*/
+  kClassicDomain                = -32762, /* Domain referring to the currently configured Classic System Folder.  Not supported in Mac OS X Leopard and later.*/
+  kFolderManagerLastDomain      = -32760
 };
 
 /*
@@ -63,44 +84,13 @@ enum {
    parameter should be treated as a domain or a volume...
 */
 enum {
-  kLastDomainConstant           = -32761
+  kLastDomainConstant           = -32760
 };
 
 enum {
   kCreateFolder                 = true,
   kDontCreateFolder             = false
 };
-
-enum {
-  kSystemFolderType             = 'macs', /* the system folder */
-  kDesktopFolderType            = 'desk', /* the desktop folder; objects in this folder show on the desk top. */
-  kSystemDesktopFolderType      = 'sdsk', /* the desktop folder at the root of the hard drive, never the redirected user desktop folder */
-  kTrashFolderType              = 'trsh', /* the trash folder; objects in this folder show up in the trash */
-  kSystemTrashFolderType        = 'strs', /* the trash folder at the root of the drive, never the redirected user trash folder */
-  kWhereToEmptyTrashFolderType  = 'empt', /* the "empty trash" folder; Finder starts empty from here down */
-  kPrintMonitorDocsFolderType   = 'prnt', /* Print Monitor documents */
-  kStartupFolderType            = 'strt', /* Finder objects (applications, documents, DAs, aliases, to...) to open at startup go here */
-  kShutdownFolderType           = 'shdf', /* Finder objects (applications, documents, DAs, aliases, to...) to open at shutdown go here */
-  kAppleMenuFolderType          = 'amnu', /* Finder objects to put into the Apple menu go here */
-  kControlPanelFolderType       = 'ctrl', /* Control Panels go here (may contain INITs) */
-  kSystemControlPanelFolderType = 'sctl', /* System control panels folder - never the redirected one, always "Control Panels" inside the System Folder */
-  kExtensionFolderType          = 'extn', /* System extensions go here */
-  kFontsFolderType              = 'font', /* Fonts go here */
-  kPreferencesFolderType        = 'pref', /* preferences for applications go here */
-  kSystemPreferencesFolderType  = 'sprf', /* System-type Preferences go here - this is always the system's preferences folder, never a logged in user's */
-                                        /*    On Mac OS X, items in the temporary items folder on the boot volume will be deleted a certain amount of time after their*/
-                                        /*    last access.  On non-boot volumes, items in the temporary items folder may never get deleted.  Thus, the use of the*/
-                                        /*    temporary items folder on Mac OS X is discouraged, especially for long lived data.  Using this folder temporarily ( like*/
-                                        /*    to write a temporary copy of a document to during a save, after which you FSpExchangeFiles() to swap the new contents with*/
-                                        /*    the old version ) is certainly ok, but using the temporary items folder to cache data is not a good idea.  Instead, look*/
-                                        /*    at tmpfile() and its cousins for a better way to do this kind of thing.  On Mac OS X 10.4 and later, this folder is inside a*/
-                                        /*    folder named ".TemporaryItems" and in earlier versions of Mac OS X this folder is inside a folder named "Temporary Items".*/
-                                        /*    On Mac OS 9.x, items in the the Temporary Items folder are never automatically deleted.  Instead, when a 9.x machine boots*/
-                                        /*    up the temporary items folder on a volume ( if one still exists, and is not empty ) is moved into the trash folder on the*/
-                                        /*    same volume and renamed "Rescued Items from <diskname>".   */
-  kTemporaryFolderType          = 'temp' /* temporary files go here (deleted periodically, but don't rely on it.) */
-};
-
 
 /*
  *  FindFolder()
@@ -186,105 +176,11 @@ enum {
  */
 extern OSErr 
 FindFolder(
-  short     vRefNum,
-  OSType    folderType,
-  Boolean   createFolder,
-  short *   foundVRefNum,
-  long *    foundDirID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  FindFolderExtended()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    Use FindFolder instead wherever possible.
- *  
- *  Summary:
- *    Obtains location information for system-related directories.
- *  
- *  Discussion:
- *    For the folder type on the particular volume (specified,
- *    respectively, in the folderType and vRefNum parameters), the
- *    FindFolder function returns the directory's volume reference
- *    number in the foundVRefNum parameter and its directory ID in the
- *    foundDirID parameter.
- *    
- *    The specified folder used for a given volume might be located on
- *    a different volume in future versions of system software;
- *    therefore, do not assume the volume that you specify in vRefNum
- *    and the volume returned in foundVRefNum will be the same.
- *     
- *    Specify a volume reference number (or the constant kOnSystemDisk
- *    for the startup disk) or one of the domain constants ( on Mac OS
- *    X ) in the vRefNum parameter.
- *    
- *    Specify a four-character folder type--or the constant that
- *    represents it--in the folderType parameter.
- *    
- *    Use the constant kCreateFolder in the createFolder parameter to
- *    tell FindFolder to create a directory if it does not already
- *    exist; otherwise, use the constant kDontCreateFolder. Directories
- *    inside the System Folder are created only if the System Folder
- *    directory exists. The FindFolder function will not create a
- *    System Folder directory even if you specify the kCreateFolder
- *    constant in the createFolder parameter.
- *    
- *    The FindFolder function returns a nonzero result code if the
- *    folder isn't found, and it can also return other file system
- *    errors reported by the File Manager or Memory Manager.
- *     FindFolderExtended() is equivalent to FindFolder() on Mac OS X.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    vRefNum:
- *      The volume reference number (or the constant kOnSystemDisk for
- *      the startup disk) or one of the domain constants ( like
- *      kUserDomain ) of the volume or domain in which you want to
- *      locate a directory.
- *    
- *    folderType:
- *      A four-character folder type, or a constant that represents the
- *      type, for the directory you want to find.
- *    
- *    createFolder:
- *      Pass the constant kCreateFolder in this parameter to create a
- *      directory if it does not already exist; otherwise, pass the
- *      constant kDontCreateFolder.
- *    
- *    foundVRefNum:
- *      The volume reference number, returned by FindFolder , for the
- *      volume containing the directory you specify in the folderType
- *      parameter.
- *    
- *    flags:
- *      The flags passed in which control extended behaviour
- *    
- *    data:
- *      Unique data which is interpreted differently depending on the
- *      passed in flags.
- *    
- *    foundDirID:
- *      The directory ID number, returned by FindFolder , for the
- *      directory you specify in the folderType parameter.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr 
-FindFolderExtended(
-  short     vRefNum,
-  OSType    folderType,
-  Boolean   createFolder,
-  UInt32    flags,
-  void *    data,
-  short *   foundVRefNum,
-  long *    foundDirID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  FSVolumeRefNum    vRefNum,
+  OSType            folderType,
+  Boolean           createFolder,
+  FSVolumeRefNum *  foundVRefNum,
+  SInt32 *          foundDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -322,8 +218,8 @@ FindFolderExtended(
  */
 extern OSErr 
 ReleaseFolder(
-  short    vRefNum,
-  OSType   folderType)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  FSVolumeRefNum   vRefNum,
+  OSType           folderType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 
@@ -394,175 +290,83 @@ ReleaseFolder(
  */
 extern OSErr 
 FSFindFolder(
-  short     vRefNum,
-  OSType    folderType,
-  Boolean   createFolder,
-  FSRef *   foundRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSVolumeRefNum   vRefNum,
+  OSType           folderType,
+  Boolean          createFolder,
+  FSRef *          foundRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*//*/
 
 /*
- *  FSFindFolderExtended()   *** DEPRECATED ***
+ *  Folder types
  *  
- *  Summary:
- *    FSFindFolderExtended returns an FSRef for certain system-related
- *    directories.
- *  
- *  Discussion:
- *    For the folder type on the particular volume (specified,
- *    respectively, in the folderType and vRefNum parameters), the
- *    FindFolder function returns the FSRef of that directory. 
- *     
- *    The specified folder used for a given volume might be located on
- *    a different volume in future versions of system software;
- *    therefore, do not assume the volume that you specify in vRefNum
- *    and the volume returned in the FSRef will be the same.
- *    
- *    Specify a volume reference number (or the constant kOnSystemDisk
- *    for the startup disk) or one of the domain constants ( on Mac OS
- *    X ) in the vRefNum parameter.
- *    
- *    Specify a four-character folder type--or the constant that
- *    represents it--in the folderType parameter.
- *    
- *    Use the constant kCreateFolder in the createFolder parameter to
- *    tell FindFolder to create a directory if it does not already
- *    exist; otherwise, use the constant kDontCreateFolder. Directories
- *    inside the System Folder are created only if the System Folder
- *    directory exists. The FindFolder function will not create a
- *    System Folder directory even if you specify the kCreateFolder
- *    constant in the createFolder parameter.
- *    
- *    The FindFolder function returns a nonzero result code if the
- *    folder isn't found, and it can also return other file system
- *    errors reported by the File Manager or Memory Manager.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    vRefNum:
- *      The volume reference number (or the constant kOnSystemDisk for
- *      the startup disk) or one of the domain constants ( like
- *      kUserDomain ) of the volume or domain in which you want to
- *      locate a directory.
- *    
- *    folderType:
- *      A four-character folder type, or a constant that represents the
- *      type, for the directory you want to find.
- *    
- *    createFolder:
- *      Pass the constant kCreateFolder in this parameter to create a
- *      directory if it does not already exist; otherwise, pass the
- *      constant kDontCreateFolder.
- *    
- *    flags:
- *      The flags passed in which control extended behaviour
- *    
- *    data:
- *      Unique data which is interpreted differently depending on the
- *      passed in flags.
- *    
- *    foundRef:
- *      The FSRef for the directory you specify on the volume or domain
- *      and folderType given.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
-extern OSErr 
-FSFindFolderExtended(
-  short     vRefNum,
-  OSType    folderType,
-  Boolean   createFolder,
-  UInt32    flags,
-  void *    data,
-  FSRef *   foundRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
-
-
-
-/******************************************/
-/* Extensible Folder Manager declarations */
-/******************************************/
-
-/****************************/
-/* Folder Manager constants */
-/****************************/
-
 enum {
-  kExtensionDisabledFolderType  = 'extD',
-  kControlPanelDisabledFolderType = 'ctrD',
-  kSystemExtensionDisabledFolderType = 'macD',
-  kStartupItemsDisabledFolderType = 'strD',
-  kShutdownItemsDisabledFolderType = 'shdD',
-  kApplicationsFolderType       = 'apps',
-  kDocumentsFolderType          = 'docs'
+  kDesktopFolderType            = 'desk', /* the desktop folder; objects in this folder show on the desktop. */
+  kTrashFolderType              = 'trsh', /* the trash folder; objects in this folder show up in the trash */
+  kWhereToEmptyTrashFolderType  = 'empt', /* the "empty trash" folder; Finder starts empty from here down */
+  kFontsFolderType              = 'font', /* Fonts go here */
+  kPreferencesFolderType        = 'pref', /* preferences for applications go here */
+  kSystemPreferencesFolderType  = 'sprf', /* the PreferencePanes folder, where Mac OS X Preference Panes go */
+  kTemporaryFolderType          = 'temp', /*    On Mac OS X, each user has their own temporary items folder, and the Folder Manager attempts to set permissions of these*/
+                                        /*    folders such that other users can not access the data inside.  On Mac OS X 10.4 and later the data inside the temporary*/
+                                        /*    items folder is deleted at logout and at boot, but not otherwise.  Earlier version of Mac OS X would delete items inside*/
+                                        /*    the temporary items folder after a period of inaccess.  You can ask for a temporary item in a specific domain or on a */
+                                        /*    particular volume by FSVolumeRefNum.  If you want a location for temporary items for a short time, then use either*/
+                                        /*    ( kUserDomain, kkTemporaryFolderType ) or ( kSystemDomain, kTemporaryFolderType ).  The kUserDomain varient will always be*/
+                                        /*    on the same volume as the user's home folder, while the kSystemDomain version will be on the same volume as /var/tmp/ ( and*/
+                                        /*    will probably be on the local hard drive in case the user's home is a network volume ).  If you want a location for a temporary*/
+                                        /*    file or folder to use for saving a document, especially if you want to use FSpExchangeFile() to implement a safe-save, then*/
+                                        /*    ask for the temporary items folder on the same volume as the file you are safe saving.*/
+                                        /*    However, be prepared for a failure to find a temporary folder in any domain or on any volume.  Some volumes may not have*/
+                                        /*    a location for a temporary folder, or the permissions of the volume may be such that the Folder Manager can not return*/
+                                        /*    a temporary folder for the volume.*/
+                                        /*    If your application creates an item in a temporary items older you should delete that item as soon as it is not needed,*/
+                                        /*    and certainly before your application exits, since otherwise the item is consuming disk space until the user logs out or*/
+                                        /*    restarts.  Any items left inside a temporary items folder should be moved into a folder inside the Trash folder on the disk*/
+                                        /*    when the user logs in, inside a folder named "Recovered items", in case there is anything useful to the end user.*/
+  kChewableItemsFolderType      = 'flnt', /* similar to kTemporaryItemsFolderType, except items in this folder are deleted at boot or when the disk is unmounted */
+  kTemporaryItemsInCacheDataFolderType = 'vtmp', /* A folder inside the kCachedDataFolderType for the given domain which can be used for transient data*/
+  kApplicationsFolderType       = 'apps', /*    Applications on Mac OS X are typically put in this folder ( or a subfolder ).*/
+  kVolumeRootFolderType         = 'root', /* root folder of a volume or domain */
+  kDomainTopLevelFolderType     = 'dtop', /* The top-level of a Folder domain, e.g. "/System"*/
+  kDomainLibraryFolderType      = 'dlib', /* the Library subfolder of a particular domain*/
+  kUsersFolderType              = 'usrs', /* "Users" folder, usually contains one folder for each user. */
+  kCurrentUserFolderType        = 'cusr', /* The folder for the currently logged on user; domain passed in is ignored. */
+  kSharedUserDataFolderType     = 'sdat' /* A Shared folder, readable & writeable by all users */
+};
+
+/*
+    The following selectors refer specifically to subfolders inside the user's home folder, and should
+    be used only with  kUserDomain as the domain in the various FindFolder calls.
+*/
+enum {
+  kDocumentsFolderType          = 'docs', /*    User documents are typically put in this folder ( or a subfolder ).*/
+  kPictureDocumentsFolderType   = 'pdoc', /* Refers to the "Pictures" folder in a users home directory*/
+  kMovieDocumentsFolderType     = 'mdoc', /* Refers to the "Movies" folder in a users home directory*/
+  kMusicDocumentsFolderType     = 0xB5646F63/*'µdoc'*/, /* Refers to the "Music" folder in a users home directory*/
+  kInternetSitesFolderType      = 'site', /* Refers to the "Sites" folder in a users home directory*/
+  kPublicFolderType             = 'pubb' /* Refers to the "Public" folder in a users home directory*/
 };
 
 enum {
-                                        /* new constants */
-  kVolumeRootFolderType         = 'root', /* root folder of a volume */
-  kChewableItemsFolderType      = 'flnt', /* items deleted at boot */
-  kApplicationSupportFolderType = 'asup', /* third-party items and folders */
-  kTextEncodingsFolderType      = 0xC4746578/*'Ätex'*/, /* encoding tables */
-  kStationeryFolderType         = 'odst', /* stationery */
-  kOpenDocFolderType            = 'odod', /* OpenDoc root */
-  kOpenDocShellPlugInsFolderType = 'odsp', /* OpenDoc Shell Plug-Ins in OpenDoc folder */
-  kEditorsFolderType            = 'oded', /* OpenDoc editors in MacOS Folder */
-  kOpenDocEditorsFolderType     = 0xC46F6466/*'Äodf'*/, /* OpenDoc subfolder of Editors folder */
-  kOpenDocLibrariesFolderType   = 'odlb', /* OpenDoc libraries folder */
-  kGenEditorsFolderType         = 0xC4656469/*'Äedi'*/, /* CKH general editors folder at root level of Sys folder */
-  kHelpFolderType               = 0xC4686C70/*'Ählp'*/, /* CKH help folder currently at root of system folder */
-  kInternetPlugInFolderType     = 0xC46E6574/*'Änet'*/, /* CKH internet plug ins for browsers and stuff */
-  kModemScriptsFolderType       = 0xC46D6F64/*'Ämod'*/, /* CKH modem scripts, get 'em OUT of the Extensions folder */
-  kPrinterDescriptionFolderType = 'ppdf', /* CKH new folder at root of System folder for printer descs. */
-  kPrinterDriverFolderType      = 0xC4707264/*'Äprd'*/, /* CKH new folder at root of System folder for printer drivers */
-  kScriptingAdditionsFolderType = 0xC4736372/*'Äscr'*/, /* CKH at root of system folder */
-  kSharedLibrariesFolderType    = 0xC46C6962/*'Älib'*/, /* CKH for general shared libs. */
-  kVoicesFolderType             = 'fvoc', /* CKH macintalk can live here */
-  kControlStripModulesFolderType = 'sdev', /* CKH for control strip modules */
-  kAssistantsFolderType         = 0x617374C4/*'astÄ'*/, /* SJF for Assistants (MacOS Setup Assistant, etc) */
-  kUtilitiesFolderType          = 0x757469C4/*'utiÄ'*/, /* SJF for Utilities folder */
-  kAppleExtrasFolderType        = 0x616578C4/*'aexÄ'*/, /* SJF for Apple Extras folder */
-  kContextualMenuItemsFolderType = 'cmnu', /* SJF for Contextual Menu items */
-  kMacOSReadMesFolderType       = 0x6D6F72C4/*'morÄ'*/, /* SJF for MacOS ReadMes folder */
-  kALMModulesFolderType         = 'walk', /* EAS for Location Manager Module files except type 'thng' (within kExtensionFolderType) */
-  kALMPreferencesFolderType     = 'trip', /* EAS for Location Manager Preferences (within kPreferencesFolderType; contains kALMLocationsFolderType) */
-  kALMLocationsFolderType       = 'fall', /* EAS for Location Manager Locations (within kALMPreferencesFolderType) */
-  kColorSyncProfilesFolderType  = 'prof', /* for ColorSyncª Profiles */
+  kSharedLibrariesFolderType    = 0xC46C6962/*'Älib'*/, /* for general shared libs. */
+  kVoicesFolderType             = 'fvoc', /* macintalk can live here */
+  kUtilitiesFolderType          = 0x757469C4/*'utiÄ'*/, /* for Utilities folder */
   kThemesFolderType             = 'thme', /* for Theme data files */
   kFavoritesFolderType          = 'favs', /* Favorties folder for Navigation Services */
-  kInternetFolderType           = 0x696E74C4/*'intÄ'*/, /* Internet folder (root level of startup volume) */
-  kAppearanceFolderType         = 'appr', /* Appearance folder (root of system folder) */
-  kSoundSetsFolderType          = 'snds', /* Sound Sets folder (in Appearance folder) */
-  kDesktopPicturesFolderType    = 0x647470C4/*'dtpÄ'*/, /* Desktop Pictures folder (in Appearance folder) */
   kInternetSearchSitesFolderType = 'issf', /* Internet Search Sites folder */
-  kFindSupportFolderType        = 'fnds', /* Find support folder */
-  kFindByContentFolderType      = 'fbcf', /* Find by content folder */
   kInstallerLogsFolderType      = 'ilgf', /* Installer Logs folder */
   kScriptsFolderType            = 0x736372C4/*'scrÄ'*/, /* Scripts folder */
   kFolderActionsFolderType      = 'fasf', /* Folder Actions Scripts folder */
-  kLauncherItemsFolderType      = 'laun', /* Launcher Items folder */
-  kRecentApplicationsFolderType = 'rapp', /* Recent Applications folder */
-  kRecentDocumentsFolderType    = 'rdoc', /* Recent Documents folder */
-  kRecentServersFolderType      = 'rsvr', /* Recent Servers folder */
   kSpeakableItemsFolderType     = 'spki', /* Speakable Items folder */
-  kKeychainFolderType           = 'kchn', /* Keychain folder */
-  kQuickTimeExtensionsFolderType = 'qtex', /* QuickTime Extensions Folder (in Extensions folder) */
-  kDisplayExtensionsFolderType  = 'dspl', /* Display Extensions Folder (in Extensions folder) */
-  kMultiprocessingFolderType    = 'mpxf', /* Multiprocessing Folder (in Extensions folder) */
-  kPrintingPlugInsFolderType    = 'pplg' /* Printing Plug-Ins Folder (in Extensions folder) */
+  kKeychainFolderType           = 'kchn' /* Keychain folder */
 };
-
 
 /* New Folder Types to accommodate the Mac OS X Folder Manager */
 /* These folder types are not applicable on Mac OS 9.          */
 enum {
-  kDomainTopLevelFolderType     = 'dtop', /* The top-level of a Folder domain, e.g. "/System"*/
-  kDomainLibraryFolderType      = 'dlib', /* the Library subfolder of a particular domain*/
   kColorSyncFolderType          = 'sync', /* Contains ColorSync-related folders*/
   kColorSyncCMMFolderType       = 'ccmm', /* ColorSync CMMs*/
   kColorSyncScriptingFolderType = 'cscr', /* ColorSync Scripting support*/
@@ -570,28 +374,16 @@ enum {
   kSpeechFolderType             = 'spch', /* Contains Speech-related folders*/
   kCarbonLibraryFolderType      = 'carb', /* Contains Carbon-specific file*/
   kDocumentationFolderType      = 'info', /* Contains Documentation files (not user documents)*/
-  kDeveloperDocsFolderType      = 'ddoc', /* Contains Developer Documentation files and folders*/
-  kDeveloperHelpFolderType      = 'devh', /* Contains Developer Help related files*/
   kISSDownloadsFolderType       = 'issd', /* Contains Internet Search Sites downloaded from the Internet*/
   kUserSpecificTmpFolderType    = 'utmp', /* Contains temporary items created on behalf of the current user*/
   kCachedDataFolderType         = 'cach', /* Contains various cache files for different clients*/
-  kTemporaryItemsInCacheDataFolderType = 'vtmp',
-  kMagicTemporaryItemsFolderType = 'mtmp',
   kFrameworksFolderType         = 'fram', /* Contains MacOS X Framework folders*/
   kPrivateFrameworksFolderType  = 'pfrm', /* Contains MacOS X Private Framework folders     */
-  kClassicDesktopFolderType     = 'sdsk', /* MacOS 9 compatible desktop folder - same as */
-                                        /* kSystemDesktopFolderType but with a more appropriate*/
-                                        /* name for Mac OS X code.*/
-  kDeveloperFolderType          = 'devf', /* Contains MacOS X Developer Resources*/
+  kClassicDesktopFolderType     = 'sdsk', /* MacOS 9 compatible desktop folder - same as kSystemDesktopFolderType but with a more appropriate name for Mac OS X code.*/
   kSystemSoundsFolderType       = 'ssnd', /* Contains Mac OS X System Sound Files ( valid in kSystemDomain, kLocalDomain, and kUserDomain )*/
   kComponentsFolderType         = 'cmpd', /* Contains Mac OS X components   ( valid in kSystemDomain, kLocalDomain, and kUserDomain )*/
   kQuickTimeComponentsFolderType = 'wcmp', /* Contains QuickTime components for Mac OS X ( valid in kSystemDomain, kLocalDomain, and kUserDomain )*/
-  kCoreServicesFolderType       = 'csrv', /* Refers to the "CoreServices" folder on Mac OS X*/
-  kPictureDocumentsFolderType   = 'pdoc', /* Refers to the "Pictures" folder in a users home directory*/
-  kMovieDocumentsFolderType     = 'mdoc', /* Refers to the "Movies" folder in a users home directory*/
-  kMusicDocumentsFolderType     = 0xB5646F63/*'µdoc'*/, /* Refers to the "Music" folder in a users home directory*/
-  kInternetSitesFolderType      = 'site', /* Refers to the "Sites" folder in a users home directory*/
-  kPublicFolderType             = 'pubb', /* Refers to the "Public" folder in a users home directory*/
+  kCoreServicesFolderType       = 'csrv', /* Refers to the "/System/Library/CoreServices" folder on Mac OS X*/
   kAudioSupportFolderType       = 'adio', /* Refers to the Audio support folder for Mac OS X*/
   kAudioPresetsFolderType       = 'apst', /* "Presets" folder of "Audio" folder, Mac OS X 10.4 and later*/
   kAudioSoundsFolderType        = 'asnd', /* Refers to the Sounds subfolder of Audio Support*/
@@ -611,21 +403,34 @@ enum {
   kIndexFilesFolderType         = 'indx', /* Refers to the [domain]/Library/Indexes folder in Mac OS X*/
   kFindByContentIndexesFolderType = 'fbcx', /* Refers to the [domain]/Library/Indexes/FindByContent folder in Mac OS X*/
   kManagedItemsFolderType       = 'mang', /* Refers to the Managed Items folder for Mac OS X */
-  kBootTimeStartupItemsFolderType = 'empz' /* Refers to the "StartupItems" folder of Mac OS X */
+  kBootTimeStartupItemsFolderType = 'empz', /* Refers to the "StartupItems" folder of Mac OS X */
+  kAutomatorWorkflowsFolderType = 'flow', /* Automator Workflows folder */
+  kAutosaveInformationFolderType = 'asav', /* ~/Library/Autosaved Information/ folder, can be used to store autosave information for user's applications.  Available in Mac OS X 10.4 and later.  */
+  kSpotlightSavedSearchesFolderType = 'spot', /* Usually ~/Library/Saved Searches/; used by Finder and Nav/Cocoa panels to find saved Spotlight searches */
+                                        /* The following folder types are available in Mac OS X 10.5 and later */
+  kSpotlightImportersFolderType = 'simp', /* Folder for Spotlight importers, usually /Library/Spotlight/ or ~/Library/Spotlight, etc. */
+  kSpotlightMetadataCacheFolderType = 'scch', /* Folder for Spotlight metadata caches, for example: ~/Library/Caches/Metadata/ */
+  kInputManagersFolderType      = 'inpt', /* InputManagers */
+  kInputMethodsFolderType       = 'inpf', /* ../Library/Input Methods/ */
+  kLibraryAssistantsFolderType  = 'astl', /* Refers to the [domain]/Library/Assistants folder*/
+  kAudioDigidesignFolderType    = 'adig', /* Refers to the Digidesign subfolder of the Audio Plug-ins folder*/
+  kAudioVSTFolderType           = 'avst', /* Refers to the VST subfolder of the Audio Plug-ins folder*/
+  kColorPickersFolderType       = 'cpkr', /* Refers to the ColorPickers folder*/
+  kCompositionsFolderType       = 'cmps', /* Refers to the Compositions folder*/
+  kFontCollectionsFolderType    = 'fncl', /* Refers to the FontCollections folder*/
+  kiMovieFolderType             = 'imov', /* Refers to the iMovie folder*/
+  kiMoviePlugInsFolderType      = 'impi', /* Refers to the Plug-ins subfolder of the iMovie Folder*/
+  kiMovieSoundEffectsFolderType = 'imse', /* Refers to the Sound Effects subfolder of the iMovie Folder*/
+  kDownloadsFolderType          = 'down' /* Refers to the ~/Downloads folder*/
 };
 
 enum {
-  kLocalesFolderType            = 0xC46C6F63/*'Äloc'*/, /* PKE for Locales folder */
-  kFindByContentPluginsFolderType = 'fbcp' /* Find By Content Plug-ins */
-};
-
-enum {
-  kUsersFolderType              = 'usrs', /* "Users" folder, contains one folder for each user. */
-  kCurrentUserFolderType        = 'cusr', /* The folder for the currently logged on user. */
-  kCurrentUserRemoteFolderLocation = 'rusf', /* The remote folder for the currently logged on user */
-  kCurrentUserRemoteFolderType  = 'rusr', /* The remote folder location for the currently logged on user */
-  kSharedUserDataFolderType     = 'sdat', /* A Shared "Documents" folder, readable & writeable by all users */
-  kVolumeSettingsFolderType     = 'vsfd' /* Volume specific user information goes here */
+  kColorSyncProfilesFolderType  = 'prof', /* for ColorSyncª Profiles */
+  kApplicationSupportFolderType = 'asup', /* third-party items and folders */
+  kTextEncodingsFolderType      = 0xC4746578/*'Ätex'*/, /* encoding tables */
+  kPrinterDescriptionFolderType = 'ppdf', /* new folder at root of System folder for printer descs. */
+  kPrinterDriverFolderType      = 0xC4707264/*'Äprd'*/, /* new folder at root of System folder for printer drivers */
+  kScriptingAdditionsFolderType = 0xC4736372/*'Äscr'*/ /* at root of system folder */
 };
 
 enum {
@@ -633,7 +438,55 @@ enum {
 };
 
 enum {
+                                        /*    The following selectors really only make sense when used within the Classic environment on Mac OS X.*/
+  kSystemFolderType             = 'macs', /* the system folder */
+  kSystemDesktopFolderType      = 'sdsk', /* the desktop folder at the root of the hard drive, never the redirected user desktop folder */
+  kSystemTrashFolderType        = 'strs', /* the trash folder at the root of the drive, never the redirected user trash folder */
+  kPrintMonitorDocsFolderType   = 'prnt', /* Print Monitor documents */
+  kALMModulesFolderType         = 'walk', /* for Location Manager Module files except type 'thng' (within kExtensionFolderType) */
+  kALMPreferencesFolderType     = 'trip', /* for Location Manager Preferences (within kPreferencesFolderType; contains kALMLocationsFolderType) */
+  kALMLocationsFolderType       = 'fall', /* for Location Manager Locations (within kALMPreferencesFolderType) */
+  kAppleExtrasFolderType        = 0x616578C4/*'aexÄ'*/, /* for Apple Extras folder */
+  kContextualMenuItemsFolderType = 'cmnu', /* for Contextual Menu items */
+  kMacOSReadMesFolderType       = 0x6D6F72C4/*'morÄ'*/, /* for MacOS ReadMes folder */
+  kStartupFolderType            = 'strt', /* Finder objects (applications, documents, DAs, aliases, to...) to open at startup go here */
+  kShutdownFolderType           = 'shdf', /* Finder objects (applications, documents, DAs, aliases, to...) to open at shutdown go here */
+  kAppleMenuFolderType          = 'amnu', /* Finder objects to put into the Apple menu go here */
+  kControlPanelFolderType       = 'ctrl', /* Control Panels go here (may contain INITs) */
+  kSystemControlPanelFolderType = 'sctl', /* System control panels folder - never the redirected one, always "Control Panels" inside the System Folder */
+  kExtensionFolderType          = 'extn', /* System extensions go here */
+  kExtensionDisabledFolderType  = 'extD',
+  kControlPanelDisabledFolderType = 'ctrD',
+  kSystemExtensionDisabledFolderType = 'macD',
+  kStartupItemsDisabledFolderType = 'strD',
+  kShutdownItemsDisabledFolderType = 'shdD',
+  kAssistantsFolderType         = 0x617374C4/*'astÄ'*/, /* for Assistants (MacOS Setup Assistant, etc) */
+  kStationeryFolderType         = 'odst', /* stationery */
+  kOpenDocFolderType            = 'odod', /* OpenDoc root */
+  kOpenDocShellPlugInsFolderType = 'odsp', /* OpenDoc Shell Plug-Ins in OpenDoc folder */
+  kEditorsFolderType            = 'oded', /* OpenDoc editors in MacOS Folder */
+  kOpenDocEditorsFolderType     = 0xC46F6466/*'Äodf'*/, /* OpenDoc subfolder of Editors folder */
+  kOpenDocLibrariesFolderType   = 'odlb', /* OpenDoc libraries folder */
+  kGenEditorsFolderType         = 0xC4656469/*'Äedi'*/, /* CKH general editors folder at root level of Sys folder */
+  kHelpFolderType               = 0xC4686C70/*'Ählp'*/, /* CKH help folder currently at root of system folder */
+  kInternetPlugInFolderType     = 0xC46E6574/*'Änet'*/, /* CKH internet plug ins for browsers and stuff */
+  kModemScriptsFolderType       = 0xC46D6F64/*'Ämod'*/, /* CKH modem scripts, get 'em OUT of the Extensions folder */
+  kControlStripModulesFolderType = 'sdev', /* CKH for control strip modules */
+  kInternetFolderType           = 0x696E74C4/*'intÄ'*/, /* Internet folder (root level of startup volume) */
+  kAppearanceFolderType         = 'appr', /* Appearance folder (root of system folder) */
+  kSoundSetsFolderType          = 'snds', /* Sound Sets folder (in Appearance folder) */
+  kDesktopPicturesFolderType    = 0x647470C4/*'dtpÄ'*/, /* Desktop Pictures folder (in Appearance folder) */
+  kFindSupportFolderType        = 'fnds', /* Find support folder */
+  kRecentApplicationsFolderType = 'rapp', /* Recent Applications folder */
+  kRecentDocumentsFolderType    = 'rdoc', /* Recent Documents folder */
+  kRecentServersFolderType      = 'rsvr', /* Recent Servers folder */
+  kLauncherItemsFolderType      = 'laun', /* Launcher Items folder */
+  kQuickTimeExtensionsFolderType = 'qtex', /* QuickTime Extensions Folder (in Extensions folder) */
+  kDisplayExtensionsFolderType  = 'dspl', /* Display Extensions Folder (in Extensions folder) */
+  kMultiprocessingFolderType    = 'mpxf', /* Multiprocessing Folder (in Extensions folder) */
+  kPrintingPlugInsFolderType    = 'pplg', /* Printing Plug-Ins Folder (in Extensions folder) */
   kAppleshareAutomountServerAliasesFolderType = 0x737276C4/*'srvÄ'*/, /* Appleshare puts volumes to automount inside this folder. */
+  kVolumeSettingsFolderType     = 'vsfd', /* Volume specific user information goes here */
   kPreMacOS91ApplicationsFolderType = 0x8C707073/*'Œpps'*/, /* The "Applications" folder, pre Mac OS 9.1 */
   kPreMacOS91InstallerLogsFolderType = 0x946C6766/*'”lgf'*/, /* The "Installer Logs" folder, pre Mac OS 9.1 */
   kPreMacOS91AssistantsFolderType = 0x8C7374C4/*'ŒstÄ'*/, /* The "Assistants" folder, pre Mac OS 9.1 */
@@ -642,14 +495,29 @@ enum {
   kPreMacOS91MacOSReadMesFolderType = 0xB56F72C4/*'µorÄ'*/, /* The "Mac OS ReadMes" folder, pre Mac OS 9.1 */
   kPreMacOS91InternetFolderType = 0x946E74C4/*'”ntÄ'*/, /* The "Internet" folder, pre Mac OS 9.1 */
   kPreMacOS91AutomountedServersFolderType = 0xA77276C4/*'§rvÄ'*/, /* The "Servers" folder, pre Mac OS 9.1 */
-  kPreMacOS91StationeryFolderType = 0xBF647374/*'¿dst'*/ /* The "Stationery" folder, pre Mac OS 9.1 */
+  kPreMacOS91StationeryFolderType = 0xBF647374/*'¿dst'*/, /* The "Stationery" folder, pre Mac OS 9.1 */
+  kLocalesFolderType            = 0xC46C6F63/*'Äloc'*/, /* PKE for Locales folder */
+  kFindByContentPluginsFolderType = 'fbcp', /* Find By Content Plug-ins */
+  kFindByContentFolderType      = 'fbcf' /* Find by content folder */
 };
 
+/*  These folder types are not supported on Mac OS X at all and should be removed from your source code.*/
 enum {
+  kMagicTemporaryItemsFolderType = 'mtmp',
   kTemporaryItemsInUserDomainFolderType = 'temq',
-  kAutosaveInformationFolderType = 'asav', /* ~/Library/Autosaved Information/ folder, used to store autosave information for user's applications.  Available in Mac OS X 10.4 and later.  */
-  kSpotlightSavedSearchesFolderType = 'spot', /* Usually ~/Library/Saved Searches/; used by Finder and Nav/Cocoa panels to find saved Spotlight searches */
-  kAutomatorWorkflowsFolderType = 'flow' /* Automator Workflows folder */
+  kCurrentUserRemoteFolderLocation = 'rusf', /* The remote folder for the currently logged on user */
+  kCurrentUserRemoteFolderType  = 'rusr' /* The remote folder location for the currently logged on user */
+};
+
+/*
+   These folder types are deprecated in 10.5. The location of developer tools is no longer hard coded to "/Developer/" and 
+   so these folder types work only when developer tools are installed at the default location.
+*/
+enum {
+  kDeveloperDocsFolderType      = 'ddoc', /* Deprecated in 10.5. Contains Developer Documentation files and folders*/
+  kDeveloperHelpFolderType      = 'devh', /* Deprecated in 10.5. Contains Developer Help related files*/
+  kDeveloperFolderType          = 'devf', /* Deprecated in 10.5. Contains MacOS X Developer Resources*/
+  kDeveloperApplicationsFolderType = 'dapp' /* Deprecated in 10.5. Contains Developer Applications*/
 };
 
 /* FolderDescFlags values */
@@ -707,8 +575,13 @@ enum {
 enum {
   kDictionariesFolderType       = 'dict', /* Dictionaries folder */
   kLogsFolderType               = 'logs', /* Logs folder */
-  kDeveloperApplicationsFolderType = 'dapp', /* Contains Developer Applications*/
   kPreferencePanesFolderType    = 'ppan' /* PreferencePanes folder, in .../Library/ */
+};
+
+
+enum {
+  kWidgetsFolderType            = 'wdgt', /* Dashboard Widgets folder, in system, local, and user domains  */
+  kScreenSaversFolderType       = 'scrn' /* Screen Savers folder, in system, local, and user domains */
 };
 
 typedef OSType                          FolderType;
@@ -738,111 +611,7 @@ struct FolderRouting {
 };
 typedef struct FolderRouting            FolderRouting;
 typedef FolderRouting *                 FolderRoutingPtr;
-/* routing constants */
 
-/*  These are bits in the .flags field of the FindFolderUserRedirectionGlobals struct*/
-enum {
-                                        /*    Set this bit to 1 in the .flags field of a FindFolderUserRedirectionGlobals*/
-                                        /*    structure if the userName in the struct should be used as the current*/
-                                        /*    "User" name*/
-  kFindFolderRedirectionFlagUseDistinctUserFoldersBit = 0, /*    Set this bit to 1 and the currentUserFolderVRefNum and currentUserFolderDirID*/
-                                        /*    fields of the user record will get used instead of finding the user folder*/
-                                        /*    with the userName field.*/
-  kFindFolderRedirectionFlagUseGivenVRefAndDirIDAsUserFolderBit = 1, /*    Set this bit to 1 and the remoteUserFolderVRefNum and remoteUserFolderDirID*/
-                                        /*    fields of the user record will get used instead of finding the user folder*/
-                                        /*    with the userName field.*/
-  kFindFolderRedirectionFlagsUseGivenVRefNumAndDirIDAsRemoteUserFolderBit = 2
-};
-
-struct FindFolderUserRedirectionGlobals {
-  UInt32              version;
-  UInt32              flags;
-
-  Str31               userName;
-  short               userNameScript;
-
-  short               currentUserFolderVRefNum;
-  long                currentUserFolderDirID;
-
-  short               remoteUserFolderVRefNum;
-  long                remoteUserFolderDirID;
-};
-typedef struct FindFolderUserRedirectionGlobals FindFolderUserRedirectionGlobals;
-typedef FindFolderUserRedirectionGlobals * FindFolderUserRedirectionGlobalsPtr;
-enum {
-  kFolderManagerUserRedirectionGlobalsCurrentVersion = 1
-};
-
-/*
-    These are passed into FindFolderExtended(), FindFolderInternalExtended(), and
-    FindFolderNewInstallerEntryExtended() in the flags field. 
-*/
-enum {
-                                        /*    These constants only work on Mac OS 9.x.  On Mac OS X, they are ignored.*/
-  kFindFolderExtendedFlagsDoNotFollowAliasesBit = 0,
-  kFindFolderExtendedFlagsDoNotUseUserFolderBit = 1,
-  kFindFolderExtendedFlagsUseOtherUserRecord = 0x01000000
-};
-
-typedef CALLBACK_API( OSStatus , FolderManagerNotificationProcPtr )(OSType message, void *arg, void *userRefCon);
-typedef STACK_UPP_TYPE(FolderManagerNotificationProcPtr)        FolderManagerNotificationUPP;
-/*
- *  NewFolderManagerNotificationUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0.2 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern FolderManagerNotificationUPP
-NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  DisposeFolderManagerNotificationUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0.2 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  InvokeFolderManagerNotificationUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0.2 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern OSStatus
-InvokeFolderManagerNotificationUPP(
-  OSType                        message,
-  void *                        arg,
-  void *                        userRefCon,
-  FolderManagerNotificationUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-enum {
-  kFolderManagerNotificationMessageUserLogIn = 'log+', /*    Sent by system & third party software after a user logs in.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner*/
-  kFolderManagerNotificationMessagePreUserLogIn = 'logj', /*    Sent by system & third party software before a user logs in.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner*/
-  kFolderManagerNotificationMessageUserLogOut = 'log-', /*    Sent by system & third party software before a user logs out.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner*/
-  kFolderManagerNotificationMessagePostUserLogOut = 'logp', /*    Sent by system & third party software after a user logs out.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner*/
-  kFolderManagerNotificationDiscardCachedData = 'dche', /*    Sent by system & third party software when the entire Folder Manager cache should be flushed*/
-  kFolderManagerNotificationMessageLoginStartup = 'stup' /*    Sent by 'Login' application the first time it starts up after each boot*/
-};
-
-
-/*  These get used in the options parameter of FolderManagerRegisterNotificationProc()*/
-enum {
-  kDoNotRemoveWhenCurrentApplicationQuitsBit = 0,
-  kDoNotRemoveWheCurrentApplicationQuitsBit = kDoNotRemoveWhenCurrentApplicationQuitsBit /*    Going away soon, use kDoNotRemoveWheCurrentApplicationQuitsBit*/
-};
-
-/*  These get used in the options parameter of FolderManagerCallNotificationProcs()*/
-enum {
-  kStopIfAnyNotificationProcReturnsErrorBit = 31
-};
 
 /*
  *  AddFolderDescriptor()
@@ -926,49 +695,6 @@ AddFolderDescriptor(
 
 
 /*
- *  GetFolderDescriptor()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *    GetFolderDescriptor is deprecated on Mac OS X.
- *  
- *  Summary:
- *    Obtains the folder descriptor information for the specified
- *    folder type from the global descriptor list.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    foldType:
- *      Pass a constant identifying the type of the folder for which
- *      you wish to get descriptor information. See "Folder Type
- *      Constants".
- *    
- *    descSize:
- *      Pass the size (in bytes) of the folder descriptor structure for
- *      which a pointer is passed in the foldDesc parameter. This value
- *      is needed in order to determine the version of the structure
- *      being used.
- *    
- *    foldDesc:
- *      Pass a pointer to a folder descriptor structure. On return, the
- *      folder descriptor structure contains information from the
- *      global descriptor list for the specified folder type.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FoldersLib 1.0 and later
- */
-extern OSErr 
-GetFolderDescriptor(
-  FolderType    foldType,
-  Size          descSize,
-  FolderDesc *  foldDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
-
-
-/*
  *  GetFolderTypes()
  *  
  *  Summary:
@@ -1040,8 +766,491 @@ extern OSErr
 RemoveFolderDescriptor(FolderType foldType)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /*
- *  GetFolderName()
+ *  GetFolderNameUnicode()
+ *  
+ *  Summary:
+ *    Obtains the name of the specified folder.
+ *  
+ *  Discussion:
+ *    The GetFolderName function obtains the name of the folder in the
+ *    folder descriptor, not the name of the folder on the disk. The
+ *    names may differ for a few special folders such as the System
+ *    Folder. For relative folders, however, the actual name is always
+ *    returned. You typically do not need to call this function.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      Pass the volume reference number (or the constant kOnSystemDisk
+ *      for the startup disk) of the volume containing the folder for
+ *      which you wish the name to be identified.
+ *    
+ *    foldType:
+ *      Pass a constant identifying the type of the folder for which
+ *      you wish the name to be identified. See "Folder Type Constants".
+ *    
+ *    foundVRefNum:
+ *      On return, a pointer to the volume reference number for the
+ *      volume containing the folder specified in the foldType
+ *      parameter.
+ *    
+ *    name:
+ *      A pointer to an HFSUniStr255 which will contain the unicode
+ *      name on return.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetFolderNameUnicode(
+  FSVolumeRefNum    vRefNum,
+  OSType            foldType,
+  FSVolumeRefNum *  foundVRefNum,
+  HFSUniStr255 *    name)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  InvalidateFolderDescriptorCache()
+ *  
+ *  Summary:
+ *    Invalidates any prior FindFolder results for the specified folder.
+ *  
+ *  Discussion:
+ *    The InvalidateFolderDescriptorCache function searches to see if
+ *    there is currently a cache of results from FindFolder calls on
+ *    the specified folder. If so, it invalidates the cache from the
+ *    previous calls to the FindFolder function in order to force the
+ *    Folder Manager to reexamine the disk when FindFolder is called
+ *    again on the specified directory ID or volume reference number.
+ *    
+ *    
+ *    You should not normally need to call
+ *    InvalidateFolderDescriptorCache.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      Pass the volume reference number (or the constant kOnSystemDisk
+ *      for the startup disk) of the volume containing the folder for
+ *      which you wish the descriptor cache to be invalidated. Pass 0
+ *      to completely invalidate all folder cache information.
+ *    
+ *    dirID:
+ *      Pass the directory ID number for the folder for which you wish
+ *      the descriptor cache to be invalidated. Pass 0 to invalidate
+ *      the cache for all folders on the specified disk.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FoldersLib 1.0 and later
+ */
+extern OSErr 
+InvalidateFolderDescriptorCache(
+  FSVolumeRefNum   vRefNum,
+  SInt32           dirID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  IdentifyFolder()
+ *  
+ *  Summary:
+ *    Obtains the folder type for the specified folder.
+ *  
+ *  Discussion:
+ *    The folder type is identified for the folder specified by the
+ *    vRefNum and dirID parameters, if such a folder exists. Note that
+ *    IdentifyFolder may take several seconds to complete. Note also
+ *    that if there are multiple folder descriptors that map to an
+ *    individual folder, IdentifyFolder returns the folder type of only
+ *    the first matching descriptor that it finds.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      Pass the volume reference number (or the constant kOnSystemDisk
+ *      for the startup disk) of the volume containing the folder whose
+ *      type you wish to identify.
+ *    
+ *    dirID:
+ *      Pass the directory ID number for the folder whose type you wish
+ *      to identify.
+ *    
+ *    foldType:
+ *      Pass a pointer to a value of type FolderType. On return, the
+ *      value is set to the folder type of the folder with the
+ *      specified vRefNum and dirID parameters; see "Folder Type
+ *      Constants" for descriptions of possible values.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+IdentifyFolder(
+  FSVolumeRefNum   vRefNum,
+  SInt32           dirID,
+  FolderType *     foldType)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  FSDetermineIfRefIsEnclosedByFolder()
+ *  
+ *  Summary:
+ *    Determine whether the given FSRef is enclosed inside the given
+ *    special folder type for the given domain.
+ *  
+ *  Discussion:
+ *    This is a fairly fast call which can determine whether a given
+ *    FSRef on disk is 'inside' the given special folder type for the
+ *    given domain.  This call will be more efficient than the
+ *    equivalent client code which walked up the file list, checking
+ *    each parent with IdentifyFolder() to see if it matches. One use
+ *    for this call is to determine if a given file or folder is inside
+ *    the trash on a volume, with something like
+ *    
+ *    err = FSDetermineIfRefIsEnclosedByFolder( kOnAppropriateDisk,
+ *    kTrashFolderType, & ref, & result );
+ *    if ( err == noErr && result ) {
+ *    //  FSRef is inside trash on the volume.<br> }
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Parameters:
+ *    
+ *    domainOrVRefNum:
+ *      The domain or vRefNum to check.  You can also pass
+ *      kOnAppropriateDisk to check whatever vRefNum is appropriate for
+ *      the given FSRef, or the value 0 to check all vRefNums and
+ *      domains.
+ *    
+ *    folderType:
+ *      The folder type to check
+ *    
+ *    inRef:
+ *      The FSRef to look for.
+ *    
+ *    outResult:
+ *      If non-NULL, this will be filled in with true if the given
+ *      FSRef is enclosed inside the special folder type for the given
+ *      domain, or false otherwise.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSDetermineIfRefIsEnclosedByFolder(
+  FSVolumeRefNum   domainOrVRefNum,
+  OSType           folderType,
+  const FSRef *    inRef,
+  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  DetermineIfPathIsEnclosedByFolder()
+ *  
+ *  Summary:
+ *    Determine whether a file path is enclosed inside the given
+ *    special folder type for the given domain.
+ *  
+ *  Discussion:
+ *    This is a fairly fast call which can determine whether a given
+ *    path on disk is 'inside' the given special folder type for the
+ *    given domain.  This call will be more efficient than the
+ *    equivalent client code which walked up the file list, checking
+ *    each parent with IdentifyFolder() to see if it matches. One use
+ *    for this call is to determine if a given file or folder is inside
+ *    the trash on a volume, with something like
+ *    
+ *    err = DetermineIfPathIsEnclosedByFolder( kOnAppropriateDisk,
+ *    kTrashFolderType, path, false, & result );
+ *    if ( err == noErr && result ) {
+ *    //  path is inside trash on the volume.<br> }
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Parameters:
+ *    
+ *    domainOrVRefNum:
+ *      The domain or vRefNum to check.  You can also pass
+ *      kOnAppropriateDisk to check whatever vRefNum is appropriate for
+ *      the given path, or the value 0 to check all vRefNums and
+ *      domains.
+ *    
+ *    folderType:
+ *      The folder type to check
+ *    
+ *    utf8Path:
+ *      A UTF-8 encoded path name for the file.
+ *    
+ *    pathIsRealPath:
+ *      Pass true if utf8Path is guaranteed to be a real pathname, with
+ *      no symlinks or relative pathname items. Pass false if the
+ *      utf8Path may contain relative pathnames, or symlinks, or
+ *      aliases, etc.
+ *    
+ *    outResult:
+ *      If non-NULL, this will be filled in with true if the given path
+ *      is enclosed inside the special folder type for the given
+ *      domain, or false otherwise.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FoldersLib 1.0 and later
+ */
+extern OSErr 
+DetermineIfPathIsEnclosedByFolder(
+  FSVolumeRefNum   domainOrVRefNum,
+  OSType           folderType,
+  const UInt8 *    utf8Path,
+  Boolean          pathIsRealPath,
+  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+#if !__LP64__
+/*
+ *  FindFolderExtended()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use FindFolder instead wherever possible.
+ *  
+ *  Summary:
+ *    Obtains location information for system-related directories.
+ *  
+ *  Discussion:
+ *    For the folder type on the particular volume (specified,
+ *    respectively, in the folderType and vRefNum parameters), the
+ *    FindFolder function returns the directory's volume reference
+ *    number in the foundVRefNum parameter and its directory ID in the
+ *    foundDirID parameter.
+ *    
+ *    The specified folder used for a given volume might be located on
+ *    a different volume in future versions of system software;
+ *    therefore, do not assume the volume that you specify in vRefNum
+ *    and the volume returned in foundVRefNum will be the same.
+ *     
+ *    Specify a volume reference number (or the constant kOnSystemDisk
+ *    for the startup disk) or one of the domain constants ( on Mac OS
+ *    X ) in the vRefNum parameter.
+ *    
+ *    Specify a four-character folder type--or the constant that
+ *    represents it--in the folderType parameter.
+ *    
+ *    Use the constant kCreateFolder in the createFolder parameter to
+ *    tell FindFolder to create a directory if it does not already
+ *    exist; otherwise, use the constant kDontCreateFolder. Directories
+ *    inside the System Folder are created only if the System Folder
+ *    directory exists. The FindFolder function will not create a
+ *    System Folder directory even if you specify the kCreateFolder
+ *    constant in the createFolder parameter.
+ *    
+ *    The FindFolder function returns a nonzero result code if the
+ *    folder isn't found, and it can also return other file system
+ *    errors reported by the File Manager or Memory Manager.
+ *     FindFolderExtended() is equivalent to FindFolder() on Mac OS X.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number (or the constant kOnSystemDisk for
+ *      the startup disk) or one of the domain constants ( like
+ *      kUserDomain ) of the volume or domain in which you want to
+ *      locate a directory.
+ *    
+ *    folderType:
+ *      A four-character folder type, or a constant that represents the
+ *      type, for the directory you want to find.
+ *    
+ *    createFolder:
+ *      Pass the constant kCreateFolder in this parameter to create a
+ *      directory if it does not already exist; otherwise, pass the
+ *      constant kDontCreateFolder.
+ *    
+ *    foundVRefNum:
+ *      The volume reference number, returned by FindFolder , for the
+ *      volume containing the directory you specify in the folderType
+ *      parameter.
+ *    
+ *    flags:
+ *      The flags passed in which control extended behaviour
+ *    
+ *    data:
+ *      Unique data which is interpreted differently depending on the
+ *      passed in flags.
+ *    
+ *    foundDirID:
+ *      The directory ID number, returned by FindFolder , for the
+ *      directory you specify in the folderType parameter.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr 
+FindFolderExtended(
+  FSVolumeRefNum    vRefNum,
+  OSType            folderType,
+  Boolean           createFolder,
+  UInt32            flags,
+  void *            data,
+  FSVolumeRefNum *  foundVRefNum,
+  SInt32 *          foundDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+/*
+ *  FSFindFolderExtended()   *** DEPRECATED ***
+ *  
+ *  Summary:
+ *    FSFindFolderExtended returns an FSRef for certain system-related
+ *    directories.
+ *  
+ *  Discussion:
+ *    For the folder type on the particular volume (specified,
+ *    respectively, in the folderType and vRefNum parameters), the
+ *    FindFolder function returns the FSRef of that directory. 
+ *     
+ *    The specified folder used for a given volume might be located on
+ *    a different volume in future versions of system software;
+ *    therefore, do not assume the volume that you specify in vRefNum
+ *    and the volume returned in the FSRef will be the same.
+ *    
+ *    Specify a volume reference number (or the constant kOnSystemDisk
+ *    for the startup disk) or one of the domain constants ( on Mac OS
+ *    X ) in the vRefNum parameter.
+ *    
+ *    Specify a four-character folder type--or the constant that
+ *    represents it--in the folderType parameter.
+ *    
+ *    Use the constant kCreateFolder in the createFolder parameter to
+ *    tell FindFolder to create a directory if it does not already
+ *    exist; otherwise, use the constant kDontCreateFolder. Directories
+ *    inside the System Folder are created only if the System Folder
+ *    directory exists. The FindFolder function will not create a
+ *    System Folder directory even if you specify the kCreateFolder
+ *    constant in the createFolder parameter.
+ *    
+ *    The FindFolder function returns a nonzero result code if the
+ *    folder isn't found, and it can also return other file system
+ *    errors reported by the File Manager or Memory Manager.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number (or the constant kOnSystemDisk for
+ *      the startup disk) or one of the domain constants ( like
+ *      kUserDomain ) of the volume or domain in which you want to
+ *      locate a directory.
+ *    
+ *    folderType:
+ *      A four-character folder type, or a constant that represents the
+ *      type, for the directory you want to find.
+ *    
+ *    createFolder:
+ *      Pass the constant kCreateFolder in this parameter to create a
+ *      directory if it does not already exist; otherwise, pass the
+ *      constant kDontCreateFolder.
+ *    
+ *    flags:
+ *      The flags passed in which control extended behaviour
+ *    
+ *    data:
+ *      Unique data which is interpreted differently depending on the
+ *      passed in flags.
+ *    
+ *    foundRef:
+ *      The FSRef for the directory you specify on the volume or domain
+ *      and folderType given.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
+ */
+extern OSErr 
+FSFindFolderExtended(
+  FSVolumeRefNum   vRefNum,
+  OSType           folderType,
+  Boolean          createFolder,
+  UInt32           flags,
+  void *           data,
+  FSRef *          foundRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+/*
+ *  GetFolderDescriptor()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    GetFolderDescriptor is deprecated on Mac OS X.
+ *  
+ *  Summary:
+ *    Obtains the folder descriptor information for the specified
+ *    folder type from the global descriptor list.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    foldType:
+ *      Pass a constant identifying the type of the folder for which
+ *      you wish to get descriptor information. See "Folder Type
+ *      Constants".
+ *    
+ *    descSize:
+ *      Pass the size (in bytes) of the folder descriptor structure for
+ *      which a pointer is passed in the foldDesc parameter. This value
+ *      is needed in order to determine the version of the structure
+ *      being used.
+ *    
+ *    foldDesc:
+ *      Pass a pointer to a folder descriptor structure. On return, the
+ *      folder descriptor structure contains information from the
+ *      global descriptor list for the specified folder type.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FoldersLib 1.0 and later
+ */
+extern OSErr 
+GetFolderDescriptor(
+  FolderType    foldType,
+  Size          descSize,
+  FolderDesc *  foldDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+/*
+ *  GetFolderName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use GetFolderNameUnicode.
  *  
  *  Summary:
  *    Obtains the name of the specified folder.
@@ -1077,16 +1286,16 @@ RemoveFolderDescriptor(FolderType foldType)                   AVAILABLE_MAC_OS_X
  *      specified in the foldType and vRefNum parameters.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
 extern OSErr 
 GetFolderName(
-  short         vRefNum,
-  OSType        foldType,
-  short *       foundVRefNum,
-  StrFileName   name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSVolumeRefNum    vRefNum,
+  OSType            foldType,
+  FSVolumeRefNum *  foundVRefNum,
+  StrFileName       name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -1133,7 +1342,7 @@ GetFolderName(
  *      the folder to which the item is being routed.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
@@ -1176,7 +1385,7 @@ AddFolderRouting(
  *      Constants" for descriptions of possible values.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
@@ -1228,7 +1437,7 @@ RemoveFolderRouting(
  *      Reserved; pass 0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
@@ -1282,7 +1491,7 @@ FindFolderRouting(
  *      information.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
@@ -1295,103 +1504,10 @@ GetFolderRoutings(
 
 
 /*
- *  InvalidateFolderDescriptorCache()
+ *  FSpDetermineIfSpecIsEnclosedByFolder()   *** DEPRECATED ***
  *  
- *  Summary:
- *    Invalidates any prior FindFolder results for the specified folder.
- *  
- *  Discussion:
- *    The InvalidateFolderDescriptorCache function searches to see if
- *    there is currently a cache of results from FindFolder calls on
- *    the specified folder. If so, it invalidates the cache from the
- *    previous calls to the FindFolder function in order to force the
- *    Folder Manager to reexamine the disk when FindFolder is called
- *    again on the specified directory ID or volume reference number.
- *    
- *    
- *    You should not normally need to call
- *    InvalidateFolderDescriptorCache.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    vRefNum:
- *      Pass the volume reference number (or the constant kOnSystemDisk
- *      for the startup disk) of the volume containing the folder for
- *      which you wish the descriptor cache to be invalidated. Pass 0
- *      to completely invalidate all folder cache information.
- *    
- *    dirID:
- *      Pass the directory ID number for the folder for which you wish
- *      the descriptor cache to be invalidated. Pass 0 to invalidate
- *      the cache for all folders on the specified disk.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FoldersLib 1.0 and later
- */
-extern OSErr 
-InvalidateFolderDescriptorCache(
-  short   vRefNum,
-  long    dirID)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  IdentifyFolder()
- *  
- *  Summary:
- *    Obtains the folder type for the specified folder.
- *  
- *  Discussion:
- *    The folder type is identified for the folder specified by the
- *    vRefNum and dirID parameters, if such a folder exists. Note that
- *    IdentifyFolder may take several seconds to complete. Note also
- *    that if there are multiple folder descriptors that map to an
- *    individual folder, IdentifyFolder returns the folder type of only
- *    the first matching descriptor that it finds.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    vRefNum:
- *      Pass the volume reference number (or the constant kOnSystemDisk
- *      for the startup disk) of the volume containing the folder whose
- *      type you wish to identify.
- *    
- *    dirID:
- *      Pass the directory ID number for the folder whose type you wish
- *      to identify.
- *    
- *    foldType:
- *      Pass a pointer to a value of type FolderType. On return, the
- *      value is set to the folder type of the folder with the
- *      specified vRefNum and dirID parameters; see "Folder Type
- *      Constants" for descriptions of possible values.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSErr 
-IdentifyFolder(
-  short         vRefNum,
-  long          dirID,
-  FolderType *  foldType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-
-
-
-
-/*
- *  FSpDetermineIfSpecIsEnclosedByFolder()
+ *  Deprecated:
+ *    Use FSDetemineIfRefIsEnclosedByFolder
  *  
  *  Summary:
  *    Determine whether the given FSSpec is enclosed inside the given
@@ -1419,7 +1535,7 @@ IdentifyFolder(
  *    domainOrVRefNum:
  *      The domain or vRefNum to check.  You can also pass
  *      kOnAppropriateDisk to check whatever vRefNum is appropriate for
- *      the given FSRef, or the value 0 to check all vRefNums and
+ *      the given FSSpec, or the value 0 to check all vRefNums and
  *      domains.
  *    
  *    folderType:
@@ -1430,141 +1546,76 @@ IdentifyFolder(
  *    
  *    outResult:
  *      If non-NULL, this will be filled in with true if the given
- *      FSRef is enclosed inside the special folder type for the given
+ *      FSSpec is enclosed inside the special folder type for the given
  *      domain, or false otherwise.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 FSpDetermineIfSpecIsEnclosedByFolder(
-  short           domainOrVRefNum,
-  OSType          folderType,
-  const FSSpec *  inSpec,
-  Boolean *       outResult)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  FSVolumeRefNum   domainOrVRefNum,
+  OSType           folderType,
+  const FSSpec *   inSpec,
+  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+#endif  /* !__LP64__ */
+
+typedef CALLBACK_API( OSStatus , FolderManagerNotificationProcPtr )(OSType message, void *arg, void *userRefCon);
+typedef STACK_UPP_TYPE(FolderManagerNotificationProcPtr)        FolderManagerNotificationUPP;
 /*
- *  FSDetermineIfRefIsEnclosedByFolder()
- *  
- *  Summary:
- *    Determine whether the given FSRef is enclosed inside the given
- *    special folder type for the given domain.
- *  
- *  Discussion:
- *    This is a fairly fast call which can determine whether a given
- *    FSRef on disk is 'inside' the given special folder type for the
- *    given domain.  This call will be more efficient than the
- *    equivalent client code which walked up the file list, checking
- *    each parent with IdentifyFolder() to see if it matches. One use
- *    for this call is to determine if a given file or folder is inside
- *    the trash on a volume, with something like
- *    
- *    err = FSDetermineIfRefIsEnclosedByFolder( kOnAppropriateDisk,
- *    kTrashFolderType, & ref, & result );
- *    if ( err == noErr && result ) {
- *    //  FSRef is inside trash on the volume.<br> }
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Parameters:
- *    
- *    domainOrVRefNum:
- *      The domain or vRefNum to check.  You can also pass
- *      kOnAppropriateDisk to check whatever vRefNum is appropriate for
- *      the given FSRef, or the value 0 to check all vRefNums and
- *      domains.
- *    
- *    folderType:
- *      The folder type to check
- *    
- *    inRef:
- *      The FSRef to look for.
- *    
- *    outResult:
- *      If non-NULL, this will be filled in with true if the given
- *      FSRef is enclosed inside the special folder type for the given
- *      domain, or false otherwise.
+ *  NewFolderManagerNotificationUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
- *    Non-Carbon CFM:   not available
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
+ *    Non-Carbon CFM:   available as macro/inline
  */
-extern OSErr 
-FSDetermineIfRefIsEnclosedByFolder(
-  short          domainOrVRefNum,
-  OSType         folderType,
-  const FSRef *  inRef,
-  Boolean *      outResult)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
+extern FolderManagerNotificationUPP
+NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
- *  DetermineIfPathIsEnclosedByFolder()
- *  
- *  Summary:
- *    Determine whether the given FSRef is enclosed inside the given
- *    special folder type for the given domain.
- *  
- *  Discussion:
- *    This is a fairly fast call which can determine whether a given
- *    path on disk is 'inside' the given special folder type for the
- *    given domain.  This call will be more efficient than the
- *    equivalent client code which walked up the file list, checking
- *    each parent with IdentifyFolder() to see if it matches. One use
- *    for this call is to determine if a given file or folder is inside
- *    the trash on a volume, with something like
- *    
- *    err = DetermineIfPathIsEnclosedByFolder( kOnAppropriateDisk,
- *    kTrashFolderType, path, false, & result );
- *    if ( err == noErr && result ) {
- *    //  FSRef is inside trash on the volume.<br> }
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Parameters:
- *    
- *    domainOrVRefNum:
- *      The domain or vRefNum to check.  You can also pass
- *      kOnAppropriateDisk to check whatever vRefNum is appropriate for
- *      the given FSRef, or the value 0 to check all vRefNums and
- *      domains.
- *    
- *    folderType:
- *      The folder type to check
- *    
- *    utf8Path:
- *      A UTF-8 encoded path name for the file.
- *    
- *    pathIsRealPath:
- *      Pass true if utf8Path is guaranteed to be a real pathname, with
- *      no symlinks or relative pathname items. Pass false if the
- *      utf8Path may contain relative pathnames, or symlinks, or
- *      aliases, etc.
- *    
- *    outResult:
- *      If non-NULL, this will be filled in with true if the given
- *      FSRef is enclosed inside the special folder type for the given
- *      domain, or false otherwise.
+ *  DisposeFolderManagerNotificationUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FoldersLib 1.0 and later
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
+ *    Non-Carbon CFM:   available as macro/inline
  */
-extern OSErr 
-DetermineIfPathIsEnclosedByFolder(
-  short          domainOrVRefNum,
-  OSType         folderType,
-  const UInt8 *  utf8Path,
-  Boolean        pathIsRealPath,
-  Boolean *      outResult)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern void
+DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+/*
+ *  InvokeFolderManagerNotificationUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern OSStatus
+InvokeFolderManagerNotificationUPP(
+  OSType                        message,
+  void *                        arg,
+  void *                        userRefCon,
+  FolderManagerNotificationUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline FolderManagerNotificationUPP                         NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP) { }
+    inline OSStatus                                             InvokeFolderManagerNotificationUPP(OSType message, void * arg, void * userRefCon, FolderManagerNotificationUPP userUPP) { return (*userUPP)(message, arg, userRefCon); }
+  #else
+    #define NewFolderManagerNotificationUPP(userRoutine)        ((FolderManagerNotificationUPP)userRoutine)
+    #define DisposeFolderManagerNotificationUPP(userUPP)
+    #define InvokeFolderManagerNotificationUPP(message, arg, userRefCon, userUPP) (*userUPP)(message, arg, userRefCon)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  FolderManagerRegisterNotificationProc()   *** DEPRECATED ***
  *  
@@ -1586,7 +1637,7 @@ DetermineIfPathIsEnclosedByFolder(
  *    options:
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -1616,7 +1667,7 @@ FolderManagerRegisterNotificationProc(
  *    refCon:
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -1647,7 +1698,7 @@ FolderManagerUnregisterNotificationProc(
  *    options:
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -1659,81 +1710,14 @@ FolderManagerRegisterCallNotificationProcs(
 
 
 
-
-/*******************************/
-/* MultiUser (At Ease) globals */
-/*******************************/
-/*
-   This structure has been through some evolution since the early days of At Ease 1.0.  The structure
-   has been expanded (and developers should assume that it will continue this way into the future).  Older
-   fields have been obsoleted as the features have changed in newer versions of the code.
-*/
-
-/* Some fields in here are really only valid for the network version of Macintosh Manager*/
-
-struct MultiUserGestalt {
-                                              /*    Version 1 fields.*/
-  short               giVersion;              /* structure version: 0 = invalid, 6 = OS 9*/
-  short               giReserved0;            /* [OBSOLETE with v3] giIsActive: if true then At Ease is currently running*/
-  short               giReserved1;            /* [OBSOLETE] if true then auto create alias*/
-  short               giReserved2;            /* [OBSOLETE with v6]  if true then request floppy on new saves*/
-  short               giReserved3;            /* [OBSOLETE] if true then hypercard stacks are shown on Applications panel*/
-  FSSpec              giReserved4;            /* [OBSOLETE with v6] location of At Ease Items folder*/
-
-                                              /*    Version 2 fields.*/
-  short               giDocsVRefNum;          /* vrefnum of user's documents location (only valid if not on floppy)*/
-  long                giDocsDirID;            /* directory id of user's documents folder (only valid if not on floppy)*/
-  short               giForceSaves;           /* true if user is forced to save to their documents folder*/
-  short               giForceOpens;           /* true if user is forced to open from their documents folder*/
-  Str31               giSetupName;            /* name of current setup*/
-  Str31               giUserName;             /* name of current user*/
-  Str31               giFrontAppName;         /* name of the frontmost application*/
-  short               giReserved5;            /* [OBSOLETE with v6] true if user has Go To Finder menu item*/
-  short               giIsOn;                 /* true if Multiple Users/Macintosh Manager is on right now*/
-
-                                              /*    Version 3 fields.*/
-                                              /*  There were no additional fields for version 3.x*/
-
-                                              /*    Version 4 fields.*/
-  short               giUserLoggedInType;     /* 0 = normal user, 1 = workgroup admin, 2 = global admin*/
-  char                giUserEncryptPwd[16];   /* encrypted user password (our digest form)*/
-  short               giUserEnvironment;      /* 0 = panels, 1 = normal Finder, 2 = limited/restricted Finder*/
-  long                giReserved6;            /* [OBSOLETE]*/
-  long                giReserved7;            /* [OBSOLETE]*/
-  Boolean             giDisableScrnShots;     /* true if screen shots are not allowed*/
-
-                                              /*    Version 5 fields.*/
-  Boolean             giSupportsAsyncFSCalls; /* Finder uses this to tell if our patches support async trap patches*/
-  short               giPrefsVRefNum;         /* vrefnum of preferences*/
-  long                giPrefsDirID;           /* dirID of the At Ease Items folder on preferences volume*/
-  unsigned long       giUserLogInTime;        /* time in seconds we've been logged in (0 or 1 mean not logged in)*/
-  Boolean             giUsingPrintQuotas;     /* true if logged in user is using printer quotas*/
-  Boolean             giUsingDiskQuotas;      /* true if logged in user has disk quotas active*/
-
-                                              /* Version 6 fields - As of Mac OS 9's "Multiple Users 1.0"*/
-  Boolean             giInSystemAccess;       /* true if system is in System Access (i.e., owner logged in)*/
-  Boolean             giUserFolderEnabled;    /* true if FindFolder is redirecting folders (uses giUserName for user)*/
-  short               giReserved8;
-  long                giReserved9;
-  Boolean             giInLoginScreen;        /* true if no user has logged in (including owner)*/
-
-
-                                              /* May have more fields added in future, so never check for sizeof(GestaltRec)*/
-
-};
-typedef struct MultiUserGestalt         MultiUserGestalt;
-typedef MultiUserGestalt *              MultiUserGestaltPtr;
-typedef MultiUserGestaltPtr *           MultiUserGestaltHandle;
-
-
-
+#endif  /* !__LP64__ */
 
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint reset
 #endif
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

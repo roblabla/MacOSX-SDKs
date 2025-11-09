@@ -33,6 +33,13 @@ enum _CGMouseButton
 };
 typedef uint32_t CGMouseButton;
 
+
+enum {
+    kCGScrollEventUnitPixel = 0,
+    kCGScrollEventUnitLine = 1,
+};
+typedef uint32_t CGScrollEventUnit;
+
 /*
  * The flags field includes both modifier key state at the time the event was created,
  * as well as other event related state.
@@ -162,10 +169,20 @@ enum _CGEventField {
 
 
     /* Additional keys and values found in scroll wheel events:	*/
-
+    /* Fields reflecting line-based scrolling */
     kCGScrollWheelEventDeltaAxis1 = 11,
     kCGScrollWheelEventDeltaAxis2 = 12,
     kCGScrollWheelEventDeltaAxis3 = 13,
+    /* Fields reflecting line-based scrolling, as 16.16 format integers,
+     * or as doubles via CGEventGetDoubleValueField with scaling applied*/
+    kCGScrollWheelEventFixedPtDeltaAxis1 = 93,
+    kCGScrollWheelEventFixedPtDeltaAxis2 = 94,
+    kCGScrollWheelEventFixedPtDeltaAxis3 = 95,
+    /* Fields reflecting pixel-based scrolling */
+    kCGScrollWheelEventPointDeltaAxis1 = 96,
+    kCGScrollWheelEventPointDeltaAxis2 = 97,
+    kCGScrollWheelEventPointDeltaAxis3 = 98,
+
     /* Key associated with an integer value representing a change in scrollwheel position. */
 
     kCGScrollWheelEventInstantMouser = 14,
@@ -263,8 +280,13 @@ enum _CGEventField {
     kCGEventSourceGroupID = 44,
     /* Key for the event source Unix effective GID */
     
-    kCGEventSourceStateID = 45
+    kCGEventSourceStateID = 45,
     /* Key for the event source state ID used to create this event */
+    
+    /* New for 10.5 */
+    /* Scrollwheel isContinuous; will become public for Chablis */
+    kCGScrollWheelEventIsContinuous = 88
+
 };
 typedef uint32_t CGEventField;
 
@@ -320,13 +342,28 @@ enum _CGEventTapLocation {
 };
 typedef uint32_t CGEventTapLocation;
 
+/*
+ * Taps may be inserted at a specified point at the
+ * head of pre-existing filters,
+ * or appended after any pre-existing filters.
+ */
+
 enum _CGEventTapPlacement {
     kCGHeadInsertEventTap = 0,
     kCGTailAppendEventTap
 };
 typedef uint32_t CGEventTapPlacement;
 
+/*
+ * Taps may be passive event listeners, or active filters.
+ * An active filter may pass an event through unmodified, modify
+ * an event, or discard an event.  When a tap is registered, it
+ * identifies the set of events to be observed with a mask, and
+ * indicates if it is a passive or active event filter.  Multiple
+ * event type bitmasks may be ORed together.
+ */
 enum _CGEventTapOptions {
+    kCGEventTapOptionDefault = 0x00000000,
     kCGEventTapOptionListenOnly = 0x00000001
 };
 typedef uint32_t CGEventTapOptions;

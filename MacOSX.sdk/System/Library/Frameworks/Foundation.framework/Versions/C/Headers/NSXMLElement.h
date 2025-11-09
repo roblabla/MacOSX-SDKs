@@ -1,10 +1,10 @@
-/*		NSXMLElement.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLElement.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 #import <Foundation/NSXMLNode.h>
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSDictionary, NSMutableArray, NSEnumerator;
 
@@ -22,7 +22,7 @@
 	BOOL _childrenHaveMutated;
 	uint8_t _padding3[3];
 	NSString *_URI;	
-	int _prefixIndex;
+	NSInteger _prefixIndex;
 }
 
 /*!
@@ -157,19 +157,19 @@
     @method insertChild:atIndex:
     @abstract Inserts a child at a particular index.
 */
-- (void)insertChild:(NSXMLNode *)child atIndex:(unsigned)index; //primitive
+- (void)insertChild:(NSXMLNode *)child atIndex:(NSUInteger)index; //primitive
 
 /*!
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(unsigned)index;
+- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:atIndex:
     @abstract Removes a child at a particular index.
 */
-- (void)removeChildAtIndex:(unsigned)index; //primitive
+- (void)removeChildAtIndex:(NSUInteger)index; //primitive
 
 /*!
     @method setChildren:
@@ -187,7 +187,7 @@
     @method replaceChildAtIndex:withNode:
     @abstract Replaces a child at a particular index with another child.
 */
-- (void)replaceChildAtIndex:(unsigned)index withNode:(NSXMLNode *)node;
+- (void)replaceChildAtIndex:(NSUInteger)index withNode:(NSXMLNode *)node;
 
 /*!
     @method normalizeAdjacentTextNodesPreservingCDATA:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -41,12 +41,26 @@
 #define kIOPartitionSchemeClass "IOPartitionScheme"
 
 /*!
+ * @defined kIOMediaLiveKey
+ * @abstract
+ * A property of IOMedia objects.
+ * @discussion
+ * The kIOMediaLiveKey property has an OSBoolean
+ * value and is placed into an IOMedia instance
+ * created via the partition scheme.  It describes whether the
+ * partition is live, that is, it is up-to-date with respect
+ * to the on-disk partition table.
+ */
+
+#define kIOMediaLiveKey "Live"
+
+/*!
  * @defined kIOMediaPartitionIDKey
  * @abstract
  * A property of IOMedia objects.
  * @discussion
  * The kIOMediaPartitionIDKey property has an OSNumber
- * value and is placed into each IOMedia instance
+ * value and is placed into an IOMedia instance
  * created via the partition scheme.  It is an ID that differentiates one 
  * partition from the other (within a given scheme).  It is typically an index
  * into the on-disk partition table.

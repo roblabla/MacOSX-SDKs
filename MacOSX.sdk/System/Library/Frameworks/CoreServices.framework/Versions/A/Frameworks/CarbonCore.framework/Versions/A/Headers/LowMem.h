@@ -3,7 +3,7 @@
  
      Contains:   Low Memory Accessor Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
  
@@ -49,7 +49,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /**************************************************************************************
 
@@ -112,11 +112,12 @@ extern "C" {
 
 */
 
+#if !__LP64__
 /*
  *  LMGetMemTop()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -127,7 +128,7 @@ extern Ptr  LMGetMemTop(void)                                 AVAILABLE_MAC_OS_X
  *  LMSetMemTop()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -139,7 +140,7 @@ extern void  LMSetMemTop(Ptr value)                           AVAILABLE_MAC_OS_X
  *  LMGetBufPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -150,7 +151,7 @@ extern Ptr  LMGetBufPtr(void)                                 AVAILABLE_MAC_OS_X
  *  LMSetBufPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -162,7 +163,7 @@ extern void  LMSetBufPtr(Ptr value)                           AVAILABLE_MAC_OS_X
  *  LMGetHeapEnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -173,7 +174,7 @@ extern Ptr  LMGetHeapEnd(void)                                AVAILABLE_MAC_OS_X
  *  LMSetHeapEnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -184,7 +185,7 @@ extern void  LMSetHeapEnd(Ptr value)                          AVAILABLE_MAC_OS_X
  *  LMGetCPUFlag()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -195,7 +196,7 @@ extern UInt8  LMGetCPUFlag(void)                              AVAILABLE_MAC_OS_X
  *  LMSetCPUFlag()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -204,25 +205,25 @@ extern void  LMSetCPUFlag(UInt8 value)                        AVAILABLE_MAC_OS_X
 
 
 /*
- *  LMGetRndSeed()
+ *  LMGetRndSeed()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetRndSeed(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt32  LMGetRndSeed(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetRndSeed()
+ *  LMSetRndSeed()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -230,7 +231,7 @@ extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X
  *  LMGetSEvtEnb()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -241,12 +242,14 @@ extern UInt8  LMGetSEvtEnb(void)                              AVAILABLE_MAC_OS_X
  *  LMSetSEvtEnb()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void  LMSetSEvtEnb(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetBootDrive()
@@ -271,11 +274,12 @@ extern void  LMSetBootDrive(SInt16 value)                     AVAILABLE_MAC_OS_X
 
 
 
+#if !__LP64__
 /*
  *  LMGetSdVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -286,7 +290,7 @@ extern UInt8  LMGetSdVolume(void)                             AVAILABLE_MAC_OS_X
  *  LMSetSdVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -298,7 +302,7 @@ extern void  LMSetSdVolume(UInt8 value)                       AVAILABLE_MAC_OS_X
  *  LMGetSoundPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -309,7 +313,7 @@ extern Ptr  LMGetSoundPtr(void)                               AVAILABLE_MAC_OS_X
  *  LMSetSoundPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -318,73 +322,75 @@ extern void  LMSetSoundPtr(Ptr value)                         AVAILABLE_MAC_OS_X
 
 
 /*
- *  LMGetSoundBase()
+ *  LMGetSoundBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetSoundBase(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern Ptr  LMGetSoundBase(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetSoundBase()
+ *  LMSetSoundBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundBase(Ptr value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  LMGetSoundLevel()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern UInt8  LMGetSoundLevel(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  LMSetSoundLevel()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void  LMSetSoundLevel(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetSoundBase(Ptr value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*
- *  LMGetCurPitch()
+ *  LMGetSoundLevel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurPitch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern UInt8  LMGetSoundLevel(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetCurPitch()
+ *  LMSetSoundLevel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetSoundLevel(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+
+/*
+ *  LMGetCurPitch()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern SInt16  LMGetCurPitch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  LMSetCurPitch()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetROM85()
@@ -569,11 +575,12 @@ extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X
  */
 
 
+#if !__LP64__
 /*
  *  LMGetScrDmpEnb()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -584,7 +591,7 @@ extern UInt8  LMGetScrDmpEnb(void)                            AVAILABLE_MAC_OS_X
  *  LMSetScrDmpEnb()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -593,147 +600,146 @@ extern void  LMSetScrDmpEnb(UInt8 value)                      AVAILABLE_MAC_OS_X
 
 
 /*
- *  LMGetBufTgFNum()
+ *  LMGetBufTgFNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetBufTgFNum(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt32  LMGetBufTgFNum(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetBufTgFNum()
+ *  LMSetBufTgFNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFNum(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  LMGetBufTgFFlg()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern SInt16  LMGetBufTgFFlg(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  LMSetBufTgFFlg()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void  LMSetBufTgFFlg(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetBufTgFNum(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*
- *  LMGetBufTgFBkNum()
+ *  LMGetBufTgFFlg()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBufTgFBkNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt16  LMGetBufTgFFlg(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetBufTgFBkNum()
+ *  LMSetBufTgFFlg()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFBkNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  LMGetBufTgDate()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern SInt32  LMGetBufTgDate(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  LMSetBufTgDate()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void  LMSetBufTgDate(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  LMGetMinStack()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern SInt32  LMGetMinStack(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  LMSetMinStack()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void  LMSetMinStack(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetBufTgFFlg(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*
- *  LMGetDefltStack()
+ *  LMGetBufTgFBkNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetDefltStack(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt16  LMGetBufTgFBkNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetDefltStack()
+ *  LMSetBufTgFBkNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetDefltStack(SInt32 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetBufTgFBkNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+
+/*
+ *  LMGetBufTgDate()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern SInt32  LMGetBufTgDate(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  LMSetBufTgDate()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void  LMSetBufTgDate(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  LMGetMinStack()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern SInt32  LMGetMinStack(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  LMSetMinStack()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void  LMSetMinStack(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+/*
+ *  LMGetDefltStack()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern SInt32  LMGetDefltStack(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/*
+ *  LMSetDefltStack()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void  LMSetDefltStack(SInt32 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
  *  LMGetGZRootHnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -744,7 +750,7 @@ extern Handle  LMGetGZRootHnd(void)                           AVAILABLE_MAC_OS_X
  *  LMSetGZRootHnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -753,91 +759,91 @@ extern void  LMSetGZRootHnd(Handle value)                     AVAILABLE_MAC_OS_X
 
 
 /*
- *  LMGetGZMoveHnd()
+ *  LMGetGZMoveHnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Handle  LMGetGZMoveHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern Handle  LMGetGZMoveHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetGZMoveHnd()
+ *  LMSetGZMoveHnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetGZMoveHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetGZMoveHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMGetToExtFS()
+ *  LMGetToExtFS()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetToExtFS(void)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern UniversalProcPtr  LMGetToExtFS(void)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetToExtFS()
+ *  LMSetToExtFS()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetToExtFS(UniversalProcPtr value)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetToExtFS(UniversalProcPtr value)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMGetJStash()
+ *  LMGetJStash()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetJStash(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern UniversalProcPtr  LMGetJStash(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetJStash()
+ *  LMSetJStash()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetJStash(UniversalProcPtr value)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetJStash(UniversalProcPtr value)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMGetCurApRefNum()
+ *  LMGetCurApRefNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurApRefNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern FSIORefNum  LMGetCurApRefNum(void)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetCurApRefNum()
+ *  LMSetCurApRefNum()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApRefNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetCurApRefNum(FSIORefNum value)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -849,7 +855,7 @@ extern void  LMSetCurApRefNum(SInt16 value)                   AVAILABLE_MAC_OS_X
  *    pthread_get_stackaddr_np().
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -863,7 +869,7 @@ extern Ptr  LMGetCurStackBase(void)                           AVAILABLE_MAC_OS_X
  *    Mac OS X does not support setting the stack base.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -874,7 +880,7 @@ extern void  LMSetCurStackBase(Ptr value)                     AVAILABLE_MAC_OS_X
  *  LMGetCurPageOption()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -885,7 +891,7 @@ extern SInt16  LMGetCurPageOption(void)                       AVAILABLE_MAC_OS_X
  *  LMSetCurPageOption()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -898,7 +904,7 @@ extern void  LMSetCurPageOption(SInt16 value)                 AVAILABLE_MAC_OS_X
  *  LMGetPrintErr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -909,12 +915,14 @@ extern SInt16  LMGetPrintErr(void)                            AVAILABLE_MAC_OS_X
  *  LMSetPrintErr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void  LMSetPrintErr(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetApFontID()   *** DEPRECATED ***
@@ -946,33 +954,34 @@ extern SInt16  LMGetApFontID(void)                            AVAILABLE_MAC_OS_X
 extern void  LMSetApFontID(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+#if !__LP64__
 /*
- *  LMGetOneOne()
+ *  LMGetOneOne()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetOneOne(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt32  LMGetOneOne(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetOneOne()
+ *  LMSetOneOne()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetOneOne(SInt32 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetOneOne(SInt32 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
  *  LMGetMinusOne()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -983,12 +992,14 @@ extern SInt32  LMGetMinusOne(void)                            AVAILABLE_MAC_OS_X
  *  LMSetMinusOne()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void  LMSetMinusOne(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetSysMap()
@@ -1102,6 +1113,7 @@ extern void  LMSetIntlSpec(Ptr value)                         AVAILABLE_MAC_OS_X
 
 
 /* LMGetWordRedraw and LMSetWordRedraw moved to TextEdit.h */
+#if !__LP64__
 /*
  *  LMGetSysFontFam()   *** DEPRECATED ***
  *  
@@ -1110,12 +1122,14 @@ extern void  LMSetIntlSpec(Ptr value)                         AVAILABLE_MAC_OS_X
  *    Quickdraw framework instead of this.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16  LMGetSysFontFam(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMSetSysFontFam()   *** DEPRECATED ***
@@ -1167,26 +1181,27 @@ extern void  LMSetSysFontSize(SInt16 value)                   AVAILABLE_MAC_OS_X
     
         These lowmem accessors use the BlockMove to set
 **************************************************************************************/
+#if !__LP64__
 /*
- *  LMGetCurApName()
+ *  LMGetCurApName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetCurApName(void)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern StringPtr  LMGetCurApName(void)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  LMSetCurApName()
+ *  LMSetCurApName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -1197,7 +1212,7 @@ extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X
  *    Remove usage of this lowmem value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1212,7 +1227,7 @@ extern StringPtr  LMGetSysResName(void)                       AVAILABLE_MAC_OS_X
  *    Remove usage of this lowmem value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1229,7 +1244,7 @@ extern void  LMSetSysResName(ConstStr15Param sysResNameValue) AVAILABLE_MAC_OS_X
  *    lowmem value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1244,7 +1259,7 @@ extern StringPtr  LMGetFinderName(void)                       AVAILABLE_MAC_OS_X
  *    Mac OS X.  Remove usage of this lowmem accessor.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1261,7 +1276,7 @@ extern void  LMSetFinderName(ConstStr15Param finderNameValue) AVAILABLE_MAC_OS_X
  *    export it from one library and import it into the others.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1278,7 +1293,7 @@ extern Ptr  LMGetToolScratch(void)                            AVAILABLE_MAC_OS_X
  *    export it from one library and import it into the others.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1295,7 +1310,7 @@ extern void  LMSetToolScratch(const void * toolScratchValue)  AVAILABLE_MAC_OS_X
  *  LMGetLvl2DT()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1306,7 +1321,7 @@ extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber)      AVAILABLE_MAC_OS_X
  *  LMSetLvl2DT()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1330,7 +1345,7 @@ extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber)      
  *  LMGetHighHeapMark()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1341,7 +1356,7 @@ extern Ptr  LMGetHighHeapMark(void)                           AVAILABLE_MAC_OS_X
  *  LMSetHighHeapMark()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1353,7 +1368,7 @@ extern void  LMSetHighHeapMark(Ptr value)                     AVAILABLE_MAC_OS_X
  *  LMGetStackLowPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1364,7 +1379,7 @@ extern Ptr  LMGetStackLowPoint(void)                          AVAILABLE_MAC_OS_X
  *  LMSetStackLowPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1376,7 +1391,7 @@ extern void  LMSetStackLowPoint(Ptr value)                    AVAILABLE_MAC_OS_X
  *  LMGetDiskFormatingHFSDefaults()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1387,7 +1402,7 @@ extern Ptr  LMGetDiskFormatingHFSDefaults(void)               AVAILABLE_MAC_OS_X
  *  LMSetDiskFormatingHFSDefaults()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
@@ -1395,8 +1410,10 @@ extern void  LMSetDiskFormatingHFSDefaults(Ptr value)         AVAILABLE_MAC_OS_X
 
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -531,6 +531,42 @@ vImage_Error vImageConvert_RGB888toPlanar8( const vImage_Buffer *rgbSrc, const v
 vImage_Error vImageConvert_RGBFFFtoPlanarF( const vImage_Buffer *rgbSrc, const vImage_Buffer *redDest, const vImage_Buffer *greenDest, const vImage_Buffer *blueDest, vImage_Flags flags ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; 
 
 
+/*
+ *  Does the same thing as vImageOverwriteChannels_ARGB8888 except that the newSrc buffer is formatted as ARGB8888
+ *  If the appropriate copyMask bit is set, then the color channel from newSrc is used. Otherwise the color channel from origSrc is used.
+ *  We note that functions of this kind only exist for interleaved buffers. If you had been using planar data, this would just be a pointer swap.
+ */
+vImage_Error	vImageSelectChannels_ARGB8888( const vImage_Buffer *newSrc,       /* A ARGB interleaved buffer */
+                                                const vImage_Buffer *origSrc,      /* A ARGB interleaved buffer */
+                                                const vImage_Buffer *dest,      /* A ARGB interleaved buffer */
+                                                uint8_t copyMask,               /* Copy plane into  0x8  -- alpha, 0x4 -- red, 0x2 --- green, 0x1 --- blue */ 
+                                                vImage_Flags    flags )     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+vImage_Error	vImageSelectChannels_ARGBFFFF( const vImage_Buffer *newSrc,       /* A ARGB interleaved buffer */
+                                                const vImage_Buffer *origSrc,      /* A ARGB interleaved buffer */
+                                                const vImage_Buffer *dest,      /* A ARGB interleaved buffer */
+                                                uint8_t copyMask,               /* Copy plane into  0x8  -- alpha, 0x4 -- red, 0x2 --- green, 0x1 --- blue */ 
+                                                vImage_Flags    flags )     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*
+ *  The following are like vImageOverwriteChannelsWithScalar_ARGB*, except that they take a ARGB input pixel, instead of a planar one. 
+ *  This allows you to write in different constant values for different channels. This is the interface that we should have put in X.4. 
+ *  Alas, better late than never. We anticipate performance to be identical to the older function.
+ */
+vImage_Error vImageOverwriteChannelsWithPixel_ARGB8888( const Pixel_8888     the_pixel,
+                                                                const vImage_Buffer *src,      /* A ARGB interleaved buffer */
+                                                                const vImage_Buffer *dest,      /* A ARGB interleaved buffer */
+                                                                uint8_t copyMask,               /* Copy plane into  0x8  -- alpha, 0x4 -- red, 0x2 --- green, 0x1 --- blue */ 
+                                                                vImage_Flags    flags )     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+vImage_Error vImageOverwriteChannelsWithPixel_ARGBFFFF( const Pixel_FFFF     the_pixel,
+                                                                const vImage_Buffer *src,      /* A ARGB interleaved buffer */
+                                                                const vImage_Buffer *dest,      /* A ARGB interleaved buffer */
+                                                                uint8_t copyMask,               /* Copy plane into  0x8  -- alpha, 0x4 -- red, 0x2 --- green, 0x1 --- blue */ 
+                                                                vImage_Flags    flags )     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+
 #ifdef __cplusplus
 }
 #endif

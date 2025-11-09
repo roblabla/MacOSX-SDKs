@@ -1,5 +1,5 @@
 /* CoreGraphics - CGImage.h
- * Copyright (c) 2000-2004 Apple Computer, Inc.
+ * Copyright (c) 2000-2005 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -53,24 +53,24 @@ CG_EXTERN CFTypeID CGImageGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LA
 
 /* Create an image. */
 
-CG_EXTERN CGImageRef CGImageCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGColorSpaceRef colorspace, CGBitmapInfo bitmapInfo, CGDataProviderRef provider, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
+CG_EXTERN CGImageRef CGImageCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGColorSpaceRef colorspace, CGBitmapInfo bitmapInfo, CGDataProviderRef provider, const CGFloat decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
 
 /* Create an image mask. */
 
-CG_EXTERN CGImageRef CGImageMaskCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGDataProviderRef provider, const float decode[], bool shouldInterpolate);
+CG_EXTERN CGImageRef CGImageMaskCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGDataProviderRef provider, const CGFloat decode[], bool shouldInterpolate);
 
 /* Return a copy of `image'. Only the image structure itself is copied; the
  * underlying data is not. */
 
-CG_EXTERN CGImageRef CGImageCreateCopy(CGImageRef image);
+CG_EXTERN CGImageRef CGImageCreateCopy(CGImageRef image) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Create an image from `source', a data provider of JPEG-encoded data. */
 
-CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef source, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef source, const CGFloat decode[], bool shouldInterpolate, CGColorRenderingIntent intent) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /* Create an image using `source', a data provider for PNG-encoded data. */
 
-CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source, const CGFloat decode[], bool shouldInterpolate, CGColorRenderingIntent intent) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Create an image using the data contained within the subrectangle `rect'
  * of `image'.
@@ -104,22 +104,22 @@ CG_EXTERN CGImageRef CGImageCreateWithImageInRect(CGImageRef image, CGRect rect)
  * determine which areas are painted, acting as an "inverse alpha": if the
  * value of a source sample in the image mask is S, then the corresponding
  * region in `image' is blended with the destination using an alpha of
- * (1-S).  (For example, if S is 1, then the region is not painted, while
- * if S is 0, the region is fully painted.)
+ * (1-S). (For example, if S is 1, then the region is not painted, while if
+ * S is 0, the region is fully painted.)
  *
  * If `mask' is an image, then it serves as alpha mask for blending the
- * image onto the destination.  The source samples of `mask' determine
- * which areas are painted: if the value of the source sample in mask is S,
- * then the corresponding region in image is blended with the destination
- * with an alpha of S.  (For example, if S is 0, then the region is not
- * painted, while if S is 1, the region is fully painted.)
+ * image onto the destination. The source samples of `mask' determine which
+ * areas are painted: if the value of the source sample in mask is S, then
+ * the corresponding region in image is blended with the destination with
+ * an alpha of S. (For example, if S is 0, then the region is not painted,
+ * while if S is 1, the region is fully painted.)
  *
  * The parameter `image' may not be an image mask and may not have an image
  * mask or masking color associated with it.
  *
  * If `mask' is an image, then it must be in the DeviceGray color space,
- * may not have alpha, and may not itself be masked by an image mask
- * or a masking color. */
+ * may not have alpha, and may not itself be masked by an image mask or a
+ * masking color. */
 
 CG_EXTERN CGImageRef CGImageCreateWithMask(CGImageRef image, CGImageRef mask) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -139,12 +139,12 @@ CG_EXTERN CGImageRef CGImageCreateWithMask(CGImageRef image, CGImageRef mask) AV
  * The parameter `image' may not be an image mask, and may not already have
  * an image mask or masking color associated with it. */
 
-CG_EXTERN CGImageRef CGImageCreateWithMaskingColors(CGImageRef image, const float components[]) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN CGImageRef CGImageCreateWithMaskingColors(CGImageRef image, const CGFloat components[]) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Create a copy of `image', replacing the image's colorspace with
- * `colorspace'.  Returns NULL if `image' is an image mask, or if the
- * number of components of `colorspace' isn't the same as the number of
- * components of the colorspace of `image'. */
+ * `colorspace'. Returns NULL if `image' is an image mask, or if the number
+ * of components of `colorspace' isn't the same as the number of components
+ * of the colorspace of `image'. */
 
 CG_EXTERN CGImageRef CGImageCreateCopyWithColorSpace(CGImageRef image, CGColorSpaceRef colorspace) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -195,7 +195,7 @@ CG_EXTERN CGDataProviderRef CGImageGetDataProvider(CGImageRef image);
 
 /* Return the decode array of `image'. */
 
-CG_EXTERN const float *CGImageGetDecode(CGImageRef image);
+CG_EXTERN const CGFloat *CGImageGetDecode(CGImageRef image);
 
 /* Return the interpolation parameter of `image'. */
 

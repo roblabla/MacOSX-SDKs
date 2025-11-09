@@ -712,6 +712,96 @@ typedef struct __GLIFunctionDispatchRec
 	void (*program_env_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
 	void (*program_local_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
 
+	GLenum (*object_purgeable_APPLE)(GLIContext ctx, GLenum objectType, GLuint name, GLenum option);
+	GLenum (*object_unpurgeable_APPLE)(GLIContext ctx, GLenum objectType, GLuint name, GLenum option);
+	void   (*get_object_parameteriv_APPLE) (GLIContext ctx, GLenum objectType, GLuint name, GLenum pname, GLint* params);
+
+	/* geometry shader4 */
+	void (*program_parameteri_EXT)(GLIContext ctx, GLuint program_name, GLenum pname, GLint value);
+	void (*framebuffer_texture_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level);
+	void (*framebuffer_texture_layer_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
+	void (*framebuffer_texture_face_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
+	
+	/* transform feedback */
+	void (*bind_buffer_range_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
+	void (*bind_buffer_offset_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer, GLintptr offset);
+	void (*bind_buffer_base_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer);
+	void (*begin_transform_feedback_EXT)(GLIContext ctx, GLenum primitiveMode);
+	void (*end_transform_feedback_EXT)(GLIContext ctx);
+	void (*transform_feedback_varyings_EXT)(GLIContext ctx, GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+	void (*get_transform_feedback_varying_EXT)(GLIContext ctx, GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+	void (*get_integer_indexedv_EXT)(GLIContext ctx, GLenum param, GLuint index, GLint *values); 
+	void (*get_boolean_indexedv_EXT)(GLIContext ctx, GLenum param, GLuint index, GLboolean *values);
+
+	/* bindable uniform */
+	void (*uniform_buffer_EXT)(GLIContext ctx, GLuint program, GLint location, GLuint buffer);
+	GLint (*get_uniform_buffer_size_EXT)(GLIContext ctx, GLuint program, GLint location);
+	GLintptr (*get_uniform_buffer_offset_EXT)(GLIContext ctx, GLuint program, GLint location);
+
+	/* texture integer */
+	void (*clear_colorIi_EXT) (GLIContext ctx, GLint r, GLint g, GLint b, GLint a );
+	void (*clear_colorIui_EXT) (GLIContext ctx, GLuint r, GLuint g, GLuint b, GLuint a );
+	void (*tex_parameterIiv_EXT)(GLIContext ctx, GLenum target, GLenum pname, GLint *params );
+	void (*tex_parameterIuiv_EXT)(GLIContext ctx, GLenum target, GLenum pname, GLuint *params );
+	void (*get_tex_parameterIiv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLint *params);
+	void (*get_tex_parameterIiuv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLuint *params);
+
+	/* gpu_shader4 */
+	void (*vertex_attribI1i_EXT)(GLIContext ctx, GLuint index, GLint x);
+	void (*vertex_attribI2i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y);
+	void (*vertex_attribI3i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y, GLint z);
+	void (*vertex_attribI4i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y, GLint z, GLint w);
+	void (*vertex_attribI1ui_EXT)(GLIContext ctx, GLuint index, GLuint x);
+	void (*vertex_attribI2ui_EXT)(GLIContext ctx, GLuint index, GLuint x, GLuint y);
+	void (*vertex_attribI3ui_EXT)(GLIContext ctx, GLuint index, GLuint x, GLuint y, GLuint z);
+	void (*vertex_attribI4ui_EXT)(GLIContext ctx, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+	void (*vertex_attribI1iv_EXT)(GLIContext ctx, GLuint index, const GLint *v);
+	void (*vertex_attribI2iv_EXT)(GLIContext ctx, GLuint index, const GLint *v);
+	void (*vertex_attribI3iv_EXT)(GLIContext ctx, GLuint index, const GLint *v);
+	void (*vertex_attribI4iv_EXT)(GLIContext ctx, GLuint index, const GLint *v);
+	void (*vertex_attribI1uiv_EXT)(GLIContext ctx, GLuint index, const GLuint *v);
+	void (*vertex_attribI2uiv_EXT)(GLIContext ctx, GLuint index, const GLuint *v);
+	void (*vertex_attribI3uiv_EXT)(GLIContext ctx, GLuint index, const GLuint *v);
+	void (*vertex_attribI4uiv_EXT)(GLIContext ctx, GLuint index, const GLuint *v);
+	void (*vertex_attribI4bv_EXT)(GLIContext ctx, GLuint index, const GLbyte *v);
+	void (*vertex_attribI4sv_EXT)(GLIContext ctx, GLuint index, const GLshort *v);
+	void (*vertex_attribI4ubv_EXT)(GLIContext ctx, GLuint index, const GLubyte *v);
+	void (*vertex_attribI4usv_EXT)(GLIContext ctx, GLuint index, const GLushort *v);
+	void (*vertex_attribI_pointer_EXT)(GLIContext ctx, GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+	void (*get_vertex_attribIiv_EXT)(GLIContext ctx, GLuint index, GLenum pname, GLint *params);
+	void (*get_vertex_attribIuiv_EXT)(GLIContext ctx, GLuint index, GLenum pname, GLuint *params);
+	void (*uniform1ui_EXT)(GLIContext ctx, GLint location, GLuint v0);
+	void (*uniform2ui_EXT)(GLIContext ctx, GLint location, GLuint v0, GLuint v1);
+	void (*uniform3ui_EXT)(GLIContext ctx, GLint location, GLuint v0, GLuint v1, GLuint v2);
+	void (*uniform4ui_EXT)(GLIContext ctx, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+	void (*uniform1uiv_EXT)(GLIContext ctx, GLint location, GLsizei count, const GLuint *value);
+	void (*uniform2uiv_EXT)(GLIContext ctx, GLint location, GLsizei count, const GLuint *value);
+	void (*uniform3uiv_EXT)(GLIContext ctx, GLint location, GLsizei count, const GLuint *value);
+	void (*uniform4uiv_EXT)(GLIContext ctx, GLint location, GLsizei count, const GLuint *value);
+	void (*get_uniformuiv_EXT)(GLIContext ctx, GLuint program, GLint location, GLuint *params);
+	void (*bind_frag_data_location_EXT)(GLIContext ctx, GLuint program, GLuint colorNumber, const GLchar *name);
+	GLint (*get_frag_data_location_EXT)(GLIContext ctx, GLuint program, const GLchar *name);
+
+	/* introduced by OpenGL ES 2.0 */
+	void (*shader_binary_OES)(GLIContext ctx, GLint n, GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLint length);
+	void (*get_shader_precision_format_OES)(GLIContext ctx, GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision);
+	void (*release_shader_compiler_OES)(GLIContext ctx);
+	void (*get_renderbuffer_storage_formatsiv_OES)(GLIContext ctx, GLenum target, GLint n, GLint *listofformats, GLint *numsupportedformats);
+
+	/* OpenGL 2.1 */
+	void (*uniform_matrix2x3fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*uniform_matrix3x2fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*uniform_matrix2x4fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*uniform_matrix4x2fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*uniform_matrix3x4fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*uniform_matrix4x3fv) (GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+
+	/* EXT_framebuffer_blit and EXT_framebuffer_multisample */
+	void (*blit_framebuffer_EXT) (GLIContext ctx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+	void (*renderbuffer_storage_multisample_EXT) (GLIContext ctx, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+	
+	void (*depth_rangef)(GLIContext ctx, GLclampf zNear, GLclampf zFar);
+	void (*clear_depthf)(GLIContext ctx, GLclampf depth);
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus

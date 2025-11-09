@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -22,19 +22,21 @@ typedef struct __NSProgressIndicatorThreadInfo _NSProgressIndicatorThreadInfo;
 //	large		18		16
 //	Aqua		12		12
 
-typedef enum _NSProgressIndicatorThickness {
+enum {
     NSProgressIndicatorPreferredThickness 	= 14,
     NSProgressIndicatorPreferredSmallThickness 	= 10,
     NSProgressIndicatorPreferredLargeThickness	= 18,
     NSProgressIndicatorPreferredAquaThickness	= 12
-} NSProgressIndicatorThickness;
+};
+typedef NSUInteger NSProgressIndicatorThickness;
 
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-typedef enum _NSProgressIndicatorStyle {
+enum {
     NSProgressIndicatorBarStyle = 0,
     NSProgressIndicatorSpinningStyle = 1
-} NSProgressIndicatorStyle;
+};
+typedef NSUInteger NSProgressIndicatorStyle;
 #endif
 
 //================================================================================
@@ -73,13 +75,13 @@ typedef enum _NSProgressIndicatorStyle {
 	unsigned int style:1;
         unsigned int _delayedStartup:1;
         unsigned int _orderOutForResize:1;
-        unsigned int _lastImageIndex:4;
  	unsigned int hideWhenStopped:1;
-        unsigned int RESERVED:16;
+        unsigned int revive:1;
+        unsigned int RESERVED:19;
     } _progressIndicatorFlags;
 
     /* For future use */
-    void		*_NSProgressIndicatorReserved1;
+    id _NSProgressIndicatorReserved1;
 }
 
 	/* Options */

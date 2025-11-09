@@ -1,7 +1,7 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2005, Apple Computer, Inc.
+        Copyright (c) 1994-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -13,7 +13,7 @@
 @interface NSRulerMarker : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
     NSRulerView *_ruler;
-    float _location;
+    CGFloat _location;
     NSImage *_image;
     NSPoint _imageOrigin;
 
@@ -30,7 +30,7 @@
 
 /**************************** Initialization ****************************/
 
-- (id)initWithRulerView:(NSRulerView *)ruler markerLocation:(float)location image:(NSImage *)image imageOrigin:(NSPoint)imageOrigin;
+- (id)initWithRulerView:(NSRulerView *)ruler markerLocation:(CGFloat)location image:(NSImage *)image imageOrigin:(NSPoint)imageOrigin;
     // Designated initializer.  Location is expressed in the client view's bounds coordinates.  Location is the x position if the ruler is horizontal or the y position if the ruler is vertical.  The image will not be scaled or rotated.  The image origin indicates the point in the image that will be placed on the ruler's baseline at the given location and is expressed in the image's coordinate system.  NSRulerMarkers are movable but not removable by default.  A removable object should have its dimmed image set.
 
 /*********************** Query/Set basic attributes ***********************/
@@ -39,8 +39,8 @@
     // Returns the ruler.
 
 
-- (void)setMarkerLocation:(float)location;
-- (float)markerLocation;
+- (void)setMarkerLocation:(CGFloat)location;
+- (CGFloat)markerLocation;
     // The location is set by the -init... method and the -setLocation: method.  Location is an x position for horizontal rulers or a y position for vertical rulers.  It is expressed in the client view's coordinate system.
 
 - (void)setImage:(NSImage *)image;
@@ -69,7 +69,7 @@
 - (NSRect)imageRectInRuler;
     // Returns the rect that would be occupied by the object's image in the ruler's bounds coordinates.  This takes the flippedness of the ruler into account.
 
-- (float)thicknessRequiredInRuler;
+- (CGFloat)thicknessRequiredInRuler;
     // Returns the height or width (depending on the ruler's orientation) required in the ruler to display the object.
 
 - (void)drawRect:(NSRect)rect;

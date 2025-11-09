@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -52,12 +52,12 @@ enum {
 - (BOOL)isOpaque;
 - (void)setColorSpaceName:(NSString *)string;
 - (NSString *)colorSpaceName;
-- (void)setBitsPerSample:(int)anInt;
-- (int)bitsPerSample;
-- (void)setPixelsWide:(int)anInt;
-- (int)pixelsWide;
-- (void)setPixelsHigh:(int)anInt;
-- (int)pixelsHigh;
+- (void)setBitsPerSample:(NSInteger)anInt;
+- (NSInteger)bitsPerSample;
+- (void)setPixelsWide:(NSInteger)anInt;
+- (NSInteger)pixelsWide;
+- (void)setPixelsHigh:(NSInteger)anInt;
+- (NSInteger)pixelsHigh;
 
 /* The rest of the methods all deal with subclassers which can read/write data in files or pasteboards. 
 */
@@ -69,6 +69,9 @@ enum {
 + (NSArray *)registeredImageRepClasses;
 + (Class)imageRepClassForFileType:(NSString *)type;
 + (Class)imageRepClassForPasteboardType:(NSString *)type;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
++ (Class)imageRepClassForType:(NSString *)type;
+#endif
 + (Class)imageRepClassForData:(NSData *)data;
 	
 /* Should be overridden by subclassers to load an unfiltered image. 
@@ -84,6 +87,18 @@ enum {
 */
 + (NSArray *)imageFileTypes;
 + (NSArray *)imagePasteboardTypes;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+/* Implemented by subclassers to indicate what UTI-identified data types they can deal with.
+*/
++ (NSArray *)imageUnfilteredTypes;
+
+/* This expands the unfiltered list returned by imageUnfilteredTypes.
+*/
++ (NSArray *)imageTypes;
+
+#endif
 
 /* Convenience method: Checks to see if any of the types on the pasteboard can be understood by a registered imagerep class after filtering or if the pasteboard contains a filename that can be understood by a registered imagerep class after filtering. If sent to a subclass, does this for just the types understood by the subclass.
 */

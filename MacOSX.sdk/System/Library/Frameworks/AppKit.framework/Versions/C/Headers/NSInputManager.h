@@ -1,7 +1,7 @@
 /*
 	NSInputManager.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -20,7 +20,7 @@
 
 - (void) unmarkText;
 - (BOOL) hasMarkedText;
-- (long) conversationIdentifier;
+- (NSInteger) conversationIdentifier;
 
 /* Returns attributed string at the range.  This allows input mangers to query any range in backing-store.  May return nil.
 */
@@ -40,7 +40,7 @@
 
 /* This method returns the index for character that is nearest to thePoint.  thPoint is in screen coordinate system.
 */
-- (unsigned int)characterIndexForPoint:(NSPoint)thePoint;
+- (NSUInteger)characterIndexForPoint:(NSPoint)thePoint;
 
 /* This method is the key to attribute extension.  We could add new attributes through this method. NSInputServer examines the return value of this method & constructs appropriate attributed string.
 */
@@ -95,7 +95,7 @@
 
 - (NSImage *) image;
 
-- (NSInputServer*) server;
+- (NSInputServer *) server;
 
 /* If corresponding input server wants to handle mouse events within marked region, this should return YES.  In that case, handleMouseEvent is sent. Otherwiese, mouse events are handled by first responder.
 */

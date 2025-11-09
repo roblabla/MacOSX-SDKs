@@ -3,7 +3,7 @@
  
      Contains:   Pasteboard Manager Interfaces.
  
-     Version:    HIServices-169~651
+     Version:    HIServices-247.0.1~2
  
      Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -19,6 +19,11 @@
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
+
+#ifndef __CGGEOMETRY__
+#include <CoreGraphics/CGGeometry.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -114,7 +119,7 @@ enum {
  *    routine to indicate the status of the local pasteboard reference
  *    in relation to the global, cross process pasteboard resource.
  */
-typedef UInt32 PasteboardSyncFlags;
+typedef OptionBits PasteboardSyncFlags;
 enum {
 
   /*
@@ -137,6 +142,55 @@ enum {
   kPasteboardClientIsOwner      = (1 << 1)
 };
 
+/*
+ *  Pasteboard File Promising
+ *  
+ *  Summary:
+ *    With the FSSpec type being deprecated and removed for 64 bit it is necessary
+ *    to introduce a replacement for kDragFlavorTypePromiseHFS. The replacement comes
+ *    in the form of two new Uniform Type Identifiers specifically for use with the
+ *    pasteboard and promised files. Like the old HFS promise mechanism, the new UTI
+ *    based method still requires a multistage handshake between sender and receiver
+ *    but the process is somewhat simplified.
+ *    
+ *    Order of operations on copy or drag
+ *    
+ *    1) The sender promises kPasteboardTypeFileURLPromise for a file yet to be created.
+ *    2) The sender adds kPasteboardTypeFilePromiseContent containing the UTI describing
+ *          the file's content.
+ *    
+ *    Order of operations on paste or drop
+ *    
+ *    3) The receiver asks for kPasteboardTypeFilePromiseContent to decide if it wants the file.
+ *    4) The receiver sets the paste location with PasteboardSetPasteLocation.
+ *    5) The receiver asks for kPasteboardTypeFileURLPromise.
+ *    6) The sender's promise callback for kPasteboardTypeFileURLPromise is called.
+ *    7) The sender uses PasteboardCopyPasteLocation to retrieve the paste location, creates the file
+ *          and keeps its kPasteboardTypeFileURLPromise promise.
+ *
+ *    Automatic translation support has been added so clients operating in the modern
+ *    kPasteboardTypeFileURLPromise and kPasteboardTypeFilePromiseContent world can continue
+ *    to communicate properly with clients using the traditional kDragFlavorTypePromiseHFS and
+ *    kDragPromisedFlavor model.
+ */
+
+/*
+ *  kPasteboardTypeFileURLPromise
+ *  
+ *  Discussion:
+ *    A UTF-8 encoded promised file url on the pasteboard to a file
+ *    which does not yet exist.
+ */
+#define kPasteboardTypeFileURLPromise   CFSTR("com.apple.pasteboard.promised-file-url")
+
+/*
+ *  kPasteboardTypeFilePromiseContent
+ *  
+ *  Discussion:
+ *    A UTF-8 encoded UTI describing the type of data to be contained
+ *    within the promised file.
+ */
+#define kPasteboardTypeFilePromiseContent  CFSTR("com.apple.pasteboard.promised-file-content-type")
 
 /*
  *  PasteboardFlavorFlags
@@ -150,7 +204,7 @@ enum {
  *    the client via PasteboardPutItemFlavor(). They may all be
  *    received via PasteboardGetItemFlavorFlags().
  */
-typedef UInt32 PasteboardFlavorFlags;
+typedef OptionBits PasteboardFlavorFlags;
 enum {
 
   /*
@@ -211,6 +265,33 @@ enum {
    * by the Pasteboard Manager when appropriate.
    */
   kPasteboardFlavorPromised     = (1 << 9)
+};
+
+
+/*
+ *  PasteboardStandardLocation
+ *  
+ *  Summary:
+ *    Pasteboard Standard Drop Locations
+ *  
+ *  Discussion:
+ *    The following constants define common "meta" paste locations.
+ */
+typedef OSType PasteboardStandardLocation;
+enum {
+
+  /*
+   * The paste or drop location was in the trash.  This is set when a
+   * drag is dropped on the trash icon or a paste occurs within the
+   * trash.  Setting this standard paste location sets the traditional
+   * paste location to an alias to the trash folder automatically.
+   */
+  kPasteboardStandardLocationTrash = 'trsh',
+
+  /*
+   * The receiver did not specify a paste location. This is the default.
+   */
+  kPasteboardStandardLocationUnknown = 'unkn'
 };
 
 /*
@@ -430,8 +511,7 @@ PasteboardGetItemCount(
  *      A local pasteboard reference.
  *    
  *    inIndex:
- *      A 1-based UInt32 index requesting the nth pasteboard item
- *      reference.
+ *      A 1-based CFIndex requesting the nth pasteboard item reference.
  *    
  *    outItem:
  *      A PasteboardItemID which receives the nth pasteboard item
@@ -448,7 +528,7 @@ PasteboardGetItemCount(
 extern OSStatus 
 PasteboardGetItemIdentifier(
   PasteboardRef       inPasteboard,
-  UInt32              inIndex,
+  CFIndex             inIndex,
   PasteboardItemID *  outItem)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 

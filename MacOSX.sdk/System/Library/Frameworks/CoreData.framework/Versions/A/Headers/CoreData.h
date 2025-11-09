@@ -1,7 +1,7 @@
 /*
 	CoreData.h
 	Core Data
-	Copyright (c) 2004-2005 Apple Computer, Inc.
+    Copyright (c) 2004-2007 Apple Inc. All rights reserved.
 	All rights reserved.
 */
 
@@ -13,11 +13,23 @@
 #import <CoreData/NSAttributeDescription.h>
 #import <CoreData/NSEntityDescription.h>
 #import <CoreData/NSFetchedPropertyDescription.h>
-#import <CoreData/NSFetchRequest.h>
-#import <CoreData/NSManagedObject.h>
-#import <CoreData/NSManagedObjectContext.h>
-#import <CoreData/NSManagedObjectID.h>
-#import <CoreData/NSManagedObjectModel.h>
-#import <CoreData/NSPersistentStoreCoordinator.h>
 #import <CoreData/NSPropertyDescription.h>
 #import <CoreData/NSRelationshipDescription.h>
+#import <CoreData/NSFetchRequest.h>
+#import <CoreData/NSFetchRequestExpression.h>
+#import <CoreData/NSManagedObjectModel.h>
+
+#import <CoreData/NSManagedObject.h>
+#import <CoreData/NSManagedObjectID.h>
+#import <CoreData/NSManagedObjectContext.h>
+#import <CoreData/NSPersistentStoreCoordinator.h>
+
+#import <CoreData/NSPersistentStore.h>
+#import <CoreData/NSAtomicStore.h>
+#import <CoreData/NSAtomicStoreCacheNode.h>
+
+#import <CoreData/NSEntityMigrationPolicy.h>
+#import <CoreData/NSMappingModel.h>
+#import <CoreData/NSEntityMapping.h>
+#import <CoreData/NSPropertyMapping.h>
+#import <CoreData/NSMigrationManager.h>

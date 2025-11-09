@@ -3,7 +3,7 @@
  
      Contains:   Definitions likely to be used by low-level protocol stack implementation.
  
-     Version:    OpenTransport-105~810
+     Version:    OpenTransport-107~183
  
      Copyright:  © 1993-2006 by Apple Computer, Inc. and Mentat Inc., all rights reserved.
  
@@ -51,7 +51,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
     All OpenTransport Manager APIs are deprecated in MacOSX 10.4, instead of using OpenTransport,
@@ -492,7 +492,7 @@ typedef struct iocblk                   iocblk;
 
 
 enum {
-  TRANSPARENT                   = (unsigned long)0xFFFFFFFF
+  TRANSPARENT                   = (UInt32)0xFFFFFFFF
 };
 
 /*
@@ -674,7 +674,7 @@ enum {
 
 /* Infinite poll wait time */
 enum {
-  INFTIM                        = (unsigned long)0xFFFFFFFF
+  INFTIM                        = (UInt32)0xFFFFFFFF
 };
 
 /* flush requests */
@@ -2690,11 +2690,11 @@ enum {
 */
 
 enum {
-  kOTNoMessagesAvailable        = (unsigned long)0xFFFFFFFF,
-  kOTAnyMsgType                 = (unsigned long)0xFFFFFFFE,
-  kOTDataMsgTypes               = (unsigned long)0xFFFFFFFC,
-  kOTMProtoMsgTypes             = (unsigned long)0xFFFFFFFB,
-  kOTOnlyMProtoMsgTypes         = (unsigned long)0xFFFFFFFA
+  kOTNoMessagesAvailable        = (UInt32)0xFFFFFFFF,
+  kOTAnyMsgType                 = (UInt32)0xFFFFFFFE,
+  kOTDataMsgTypes               = (UInt32)0xFFFFFFFC,
+  kOTMProtoMsgTypes             = (UInt32)0xFFFFFFFB,
+  kOTOnlyMProtoMsgTypes         = (UInt32)0xFFFFFFFA
 };
 
 /*
@@ -3178,11 +3178,12 @@ typedef long                            OTTimerTask;
    after calling InitOpenTransport(kInitOTForApplicationMask, ...).  Non-applications must always pass a
    valid client context.
 */
+#if !__LP64__
 /*
  *  OTCreateTimerTaskInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3192,6 +3193,8 @@ OTCreateTimerTaskInContext(
   void *               arg,
   OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  OTCreateTimerTask()
@@ -3203,11 +3206,12 @@ OTCreateTimerTaskInContext(
  */
 
 
+#if !__LP64__
 /*
  *  OTCancelTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3219,7 +3223,7 @@ OTCancelTimerTask(OTTimerTask timerTask)                      AVAILABLE_MAC_OS_X
  *  OTDestroyTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3231,7 +3235,7 @@ OTDestroyTimerTask(OTTimerTask timerTask)                     AVAILABLE_MAC_OS_X
  *  OTScheduleTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3240,6 +3244,8 @@ OTScheduleTimerTask(
   OTTimerTask   timerTask,
   OTTimeout     milliSeconds)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 #if OTCARBONAPPLICATION
 /* The following macro may be used by applications only.*/
@@ -3257,11 +3263,12 @@ OTScheduleTimerTask(
    you will need some of these routines, and may choose to use others.
    See "Open Tranport Advanced Client Programming" for documentation.
 */
+#if !__LP64__
 /*
  *  OTBufferDataSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -3273,7 +3280,7 @@ OTBufferDataSize(OTBuffer * buffer)                           AVAILABLE_MAC_OS_X
  *  OTReadBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -3288,7 +3295,7 @@ OTReadBuffer(
  *  OTReleaseBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -3296,6 +3303,8 @@ extern void
 OTReleaseBuffer(OTBuffer * buffer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  StoreIntoNetbuf()
@@ -4270,11 +4279,12 @@ typedef CALLBACK_API_C( Boolean , OTGetPortIconProcPtr )(OTPortRecord *port, OTR
    giving up after "numBits".  Returns the bit # that was set, or
    a kOTNotFoundErr if there was no clear bit available
 */
+#if !__LP64__
 /*
  *  OTSetFirstClearBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -4290,7 +4300,7 @@ OTSetFirstClearBit(
  *  OTClearBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -4304,7 +4314,7 @@ OTClearBit(
  *  OTSetBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -4318,7 +4328,7 @@ OTSetBit(
  *  OTTestBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -4334,6 +4344,8 @@ OTTestBit(
    This implements a simple, but efficient hash list.  It is not
    thread-safe.
 */
+
+#endif  /* !__LP64__ */
 
 typedef CALLBACK_API_C( UInt32 , OTHashProcPtr )(OTLink * linkToHash);
 typedef CALLBACK_API_C( Boolean , OTHashSearchProcPtr )(const void *ref, OTLink *linkToCheck);
@@ -4817,7 +4829,7 @@ extern "C" {        // resume C definitions
 #endif
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

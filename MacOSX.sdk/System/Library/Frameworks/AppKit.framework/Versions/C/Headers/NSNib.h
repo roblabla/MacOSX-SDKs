@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2005, Apple Computer, Inc.
+	Copyright (c) 2003-2007, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -13,16 +13,13 @@ NSNib implemenents NSCoding protocol.  For example, using NSNib, the entire cont
 As are all NSObjects, instantiated nib objects are allocated in a memory zone (NSZone).  If an NSNibOwner is provided for instantiation, then the objects will be allocated in the owner's zone.  If no NSNibOwner is provided, the resulting objects will be allocated in the default zone.
 */
 
-#import <Foundation/Foundation.h>
 #import <AppKit/AppKitDefines.h>
-
+#import <Foundation/Foundation.h>
 
 // NSNib is a post Jaguar feature
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-
-@class NSIBObjectData;
-
+@class NSArray, NSBundle, NSData, NSDictionary, NSIBObjectData, NSURL;
 
 @interface NSNib : NSObject <NSCoding> {
    @private

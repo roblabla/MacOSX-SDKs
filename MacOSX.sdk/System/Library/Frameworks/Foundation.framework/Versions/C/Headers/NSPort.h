@@ -1,14 +1,10 @@
 /*	NSPort.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-#if defined(__WIN32__)
-    #include <winsock.h>
-    typedef SOCKET NSSocketNativeHandle;
-#else
-    typedef int NSSocketNativeHandle;
-#endif /* __WIN32__ */
+
+typedef int NSSocketNativeHandle;
 
 @class NSRunLoop, NSMutableArray, NSDate;
 @class NSConnection, NSPortMessage;
@@ -41,9 +37,9 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 - (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 
 // DO Transport API; subclassers should implement these methods
-- (unsigned)reservedSpaceLength;	// default is 0
-- (BOOL)sendBeforeDate:(NSDate *)limitDate components:(NSMutableArray *)components from:(NSPort *) receivePort reserved:(unsigned)headerSpaceReserved;
-- (BOOL)sendBeforeDate:(NSDate *)limitDate msgid:(unsigned)msgID components:(NSMutableArray *)components from:(NSPort *)receivePort reserved:(unsigned)headerSpaceReserved;
+- (NSUInteger)reservedSpaceLength;	// default is 0
+- (BOOL)sendBeforeDate:(NSDate *)limitDate components:(NSMutableArray *)components from:(NSPort *) receivePort reserved:(NSUInteger)headerSpaceReserved;
+- (BOOL)sendBeforeDate:(NSDate *)limitDate msgid:(NSUInteger)msgID components:(NSMutableArray *)components from:(NSPort *)receivePort reserved:(NSUInteger)headerSpaceReserved;
 	// The components array consists of a series of instances
 	// of some subclass of NSData, and instances of some
 	// subclass of NSPort; since one subclass of NSPort does
@@ -77,15 +73,26 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 @interface NSMachPort : NSPort {
     @private
     id _delegate;
-    void *_tickler;
-    int _machPort;
-    unsigned _reserved;
+    NSUInteger _flags;
+    uint32_t _machPort;
+    NSUInteger _reserved;
 }
 
-+ (NSPort *)portWithMachPort:(int)machPort;
++ (NSPort *)portWithMachPort:(uint32_t)machPort;
+- (id)initWithMachPort:(uint32_t)machPort;	// designated initializer
 
-- (id)initWithMachPort:(int)machPort;	// designated initializer
-- (int)machPort;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+enum {
+    NSMachPortDeallocateNone = 0,
+    NSMachPortDeallocateSendRight = (1 << 0),
+    NSMachPortDeallocateReceiveRight = (1 << 1)
+};
+
++ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif
+
+- (uint32_t)machPort;
 
 - (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 - (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
@@ -109,7 +116,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 // message sending on all platforms.
 @interface NSMessagePort : NSPort {
     @private
-    void *_port;
+    void * __strong _port;
     id _delegate;
 }
 
@@ -127,9 +134,9 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
     id _signature;
     id _delegate;
     id _lock;
-    unsigned _maxSize;
-    unsigned _maxSockets;
-    unsigned _reserved;
+    NSUInteger _maxSize;
+    NSUInteger _maxSockets;
+    NSUInteger _reserved;
 }
 
 - (id)init;

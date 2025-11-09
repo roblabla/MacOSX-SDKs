@@ -1,5 +1,5 @@
 /*	CFBase.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
@@ -13,17 +13,30 @@
 #define __i386__ 1
 #endif
 
-#if defined(__WIN32__)
-#include <windows.h>
+#if (defined(__i386__) || defined(__x86_64__)) && !defined(__LITTLE_ENDIAN__)
+    #define __LITTLE_ENDIAN__ 1
 #endif
 
-#if defined(__GNUC__)
+#if !defined(__BIG_ENDIAN__) && !defined(__LITTLE_ENDIAN__)
+#error Do not know the endianess of this architecture
+#endif
+
+#if !__BIG_ENDIAN__ && !__LITTLE_ENDIAN__
+#error Both __BIG_ENDIAN__ and __LITTLE_ENDIAN__ cannot be false
+#endif
+
+#if __BIG_ENDIAN__ && __LITTLE_ENDIAN__
+#error Both __BIG_ENDIAN__ and __LITTLE_ENDIAN__ cannot be true
+#endif
+
+#if defined(__WIN32__)
+#include <windows.h>
+#include <winsock2.h>
 #include <stdint.h>
 #include <stdbool.h>
-#elif defined(__WIN32__)
-// mostly for the benefit of MSVC
-#include <GNUCompatibility/stdint.h>
-#include <GNUCompatibility/stdbool.h>
+#elif defined(__GNUC__)
+#include <stdint.h>
+#include <stdbool.h>
 #endif
 #include <AvailabilityMacros.h>
 
@@ -35,20 +48,23 @@
     #endif
 #else // CF_OPEN_SOURCE
     #if defined(__MACH__)
-        #include <CarbonCore/MacTypes.h>
+        #include <libkern/OSTypes.h>
     #endif
 #endif // CF_OPEN_SOURCE
 
 #if !defined(__MACTYPES__)
+#if !defined(_OS_OSTYPES_H)
     typedef unsigned char           Boolean;
     typedef unsigned char           UInt8;
     typedef signed char             SInt8;
     typedef unsigned short          UInt16;
     typedef signed short            SInt16;
-    typedef unsigned long           UInt32;
-    typedef signed long             SInt32;
+    typedef unsigned int            UInt32;
+    typedef signed int              SInt32;
     typedef uint64_t		    UInt64;
     typedef int64_t		    SInt64;
+    typedef SInt32                  OSStatus;
+#endif
     typedef float                   Float32;
     typedef double                  Float64;
     typedef unsigned short          UniChar;
@@ -57,7 +73,8 @@
     typedef unsigned char           Str255[256];
     typedef const unsigned char *   ConstStr255Param;
     typedef SInt16                  OSErr;
-    typedef SInt32                  OSStatus;
+    typedef SInt16                  RegionCode;
+    typedef SInt16                  LangCode;
 #endif
 #if !defined(__MACTYPES__) || (defined(UNIVERSAL_INTERFACES_VERSION) && UNIVERSAL_INTERFACES_VERSION < 0x0340)
     typedef UInt32                  UTF32Char;
@@ -65,22 +82,27 @@
     typedef UInt8                   UTF8Char;
 #endif
 
-
+#if !defined(CF_EXTERN_C_BEGIN)
 #if defined(__cplusplus)
-extern "C" {
+#define CF_EXTERN_C_BEGIN extern "C" {
+#define CF_EXTERN_C_END   }
+#else
+#define CF_EXTERN_C_BEGIN
+#define CF_EXTERN_C_END
+#endif
 #endif
 
-#ifndef NULL
-#ifdef __GNUG__
-#define NULL __null
-#else /* ! __GNUG__ */
-#ifndef __cplusplus
-#define NULL ((void *)0)
-#else /* __cplusplus */
-#define NULL 0
-#endif /* ! __cplusplus */
-#endif /* __GNUG__ */
-#endif /* ! NULL */
+CF_EXTERN_C_BEGIN
+
+#if !defined(NULL)
+#if defined(__GNUG__)
+    #define NULL __null
+#elif defined(__cplusplus)
+    #define NULL 0
+#else
+    #define NULL ((void *)0)
+#endif
+#endif
 
 #if !defined(TRUE)
     #define TRUE	1
@@ -92,14 +114,6 @@ extern "C" {
 
 #if defined(__WIN32__)
     #undef CF_EXPORT
-/*
-    We don't build as a library now, but this would be the starting point.
-    #if defined(CF_BUILDING_CF_AS_LIB)
-    // we're building CF as a library
-    #define CF_EXPORT	extern
-    #elif defined(CF_BUILDING_CF)
-    // we're building CF as a DLL
-*/
     #if defined(CF_BUILDING_CF)
 	#define CF_EXPORT __declspec(dllexport) extern
     #else
@@ -117,9 +131,9 @@ extern "C" {
 
 #if !defined(CF_INLINE)
     #if defined(__GNUC__) && (__GNUC__ == 4) && !defined(DEBUG)
-	#define CF_INLINE static __inline__ __attribute__((always_inline))
+        #define CF_INLINE static __inline__ __attribute__((always_inline))
     #elif defined(__GNUC__)
-    #define CF_INLINE static __inline__
+        #define CF_INLINE static __inline__
     #elif defined(__MWERKS__) || defined(__cplusplus)
 	#define CF_INLINE static inline
     #elif defined(_MSC_VER)
@@ -132,28 +146,53 @@ extern "C" {
 
 CF_EXPORT double kCFCoreFoundationVersionNumber;
 
-#define kCFCoreFoundationVersionNumber10_0 196.4
-#define kCFCoreFoundationVersionNumber10_0_3 196.5
-#define kCFCoreFoundationVersionNumber10_1 226.0
-/* Note the next two do not follow the usual numbering policy from the base release */
-#define kCFCoreFoundationVersionNumber10_1_2 227.2
-#define kCFCoreFoundationVersionNumber10_1_4 227.3
-#define kCFCoreFoundationVersionNumber10_2 263.0
-#define kCFCoreFoundationVersionNumber10_3 299.0
-#define kCFCoreFoundationVersionNumber10_3_3 299.3
-#define kCFCoreFoundationVersionNumber10_3_4 299.31
+#define kCFCoreFoundationVersionNumber10_0	196.40
+#define kCFCoreFoundationVersionNumber10_0_3	196.50
+#define kCFCoreFoundationVersionNumber10_1	226.00
+#define kCFCoreFoundationVersionNumber10_1_1	226.00
+/* Note the next three do not follow the usual numbering policy from the base release */
+#define kCFCoreFoundationVersionNumber10_1_2	227.20
+#define kCFCoreFoundationVersionNumber10_1_3	227.20
+#define kCFCoreFoundationVersionNumber10_1_4	227.30
+#define kCFCoreFoundationVersionNumber10_2	263.00
+#define kCFCoreFoundationVersionNumber10_2_1	263.10
+#define kCFCoreFoundationVersionNumber10_2_2	263.10
+#define kCFCoreFoundationVersionNumber10_2_3	263.30
+#define kCFCoreFoundationVersionNumber10_2_4	263.30
+#define kCFCoreFoundationVersionNumber10_2_5	263.50
+#define kCFCoreFoundationVersionNumber10_2_6	263.50
+#define kCFCoreFoundationVersionNumber10_2_7	263.50
+#define kCFCoreFoundationVersionNumber10_2_8	263.50
+#define kCFCoreFoundationVersionNumber10_3	299.00
+#define kCFCoreFoundationVersionNumber10_3_1	299.00
+#define kCFCoreFoundationVersionNumber10_3_2	299.00
+#define kCFCoreFoundationVersionNumber10_3_3	299.30
+#define kCFCoreFoundationVersionNumber10_3_4	299.31
+#define kCFCoreFoundationVersionNumber10_3_5	299.31
+#define kCFCoreFoundationVersionNumber10_3_6	299.32
+#define kCFCoreFoundationVersionNumber10_3_7	299.33
+#define kCFCoreFoundationVersionNumber10_3_8	299.33
+#define kCFCoreFoundationVersionNumber10_3_9	299.35
+#define kCFCoreFoundationVersionNumber10_4	368.00
+#define kCFCoreFoundationVersionNumber10_4_1	368.10
+#define kCFCoreFoundationVersionNumber10_4_2	368.11
+#define kCFCoreFoundationVersionNumber10_4_3	368.18
+#define kCFCoreFoundationVersionNumber10_4_4_Intel	368.26
+#define kCFCoreFoundationVersionNumber10_4_4_PowerPC	368.25
+#define kCFCoreFoundationVersionNumber10_4_5_Intel	368.26
+#define kCFCoreFoundationVersionNumber10_4_5_PowerPC	368.25
+#define kCFCoreFoundationVersionNumber10_4_6_Intel	368.26
+#define kCFCoreFoundationVersionNumber10_4_6_PowerPC	368.25
+#define kCFCoreFoundationVersionNumber10_4_7	368.27
+#define kCFCoreFoundationVersionNumber10_4_8	368.27
+#define kCFCoreFoundationVersionNumber10_4_9	368.28
+#define kCFCoreFoundationVersionNumber10_4_10	368.28
+#define kCFCoreFoundationVersionNumber10_4_11	368.31
 
-#if defined(__ppc64__)
-typedef UInt32 CFTypeID;
-typedef UInt64 CFOptionFlags;
-typedef UInt32 CFHashCode;
-typedef SInt64 CFIndex;
-#else
-typedef UInt32 CFTypeID;
-typedef UInt32 CFOptionFlags;
-typedef UInt32 CFHashCode;
-typedef SInt32 CFIndex;
-#endif
+typedef unsigned long CFTypeID;
+typedef unsigned long CFOptionFlags;
+typedef unsigned long CFHashCode;
+typedef signed long CFIndex;
 
 /* Base "type" of all "CF objects", and polymorphic functions on them */
 typedef const void * CFTypeRef;
@@ -169,11 +208,12 @@ typedef struct __CFString * CFMutableStringRef;
 typedef CFTypeRef CFPropertyListRef;
 
 /* Values returned from comparison functions */
-typedef enum {
+enum {
     kCFCompareLessThan = -1,
     kCFCompareEqualTo = 0,
     kCFCompareGreaterThan = 1
-} CFComparisonResult;
+};
+typedef CFIndex CFComparisonResult;
 
 /* A standard comparison function */
 typedef CFComparisonResult (*CFComparatorFunction)(const void *val1, const void *val2, void *context);
@@ -372,9 +412,7 @@ CFStringRef CFCopyDescription(CFTypeRef cf);
 CF_EXPORT
 CFAllocatorRef CFGetAllocator(CFTypeRef cf);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFBASE__ */
 

@@ -1,13 +1,13 @@
 /*
     NSManagedObjectModel.h
     Core Data
-    Copyright (c) 2004-2005 Apple Computer, Inc.
+    Copyright (c) 2004-2007 Apple Inc.
     All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <Foundation/NSObject.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSArray;
 @class NSDictionary;
@@ -18,18 +18,19 @@
 @class NSURL;
 
 // Models describe object graphs to be managed. Models (and their entities/properties/fetch request templates) are editable until they are used by a persistent store coordinator, allowing developers to create/modify them dynamically. However, once a model is being used, it MUST NOT be changed. When the persistent store coordinator first fetches data using a model, it will become uneditable. Any attempt to mutate a model or any of it's subobjects after that point will cause an exception to be thrown. If you need to modify a model that is in use, create a copy, modify the copy, and then discard the objects with the old model.
-@interface NSManagedObjectModel : NSObject <NSCoding, NSCopying> {
+@interface NSManagedObjectModel : NSObject <NSCoding, NSCopying, NSFastEnumeration> {
 @private
 	void *_reserved;
 	void *_reserved2;
-	void *_reserved3;
     id _localizationPolicy;
     NSMutableDictionary *_entities;
     NSMutableDictionary *_configurations;
     NSMutableDictionary *_fetchRequestTemplates;
+	NSSet *_versionIdentifiers;
     struct __managedObjectModelFlags {
         unsigned int _isInUse:1;
-        unsigned int _reservedEntityDescription:31;
+        unsigned int _isImmutable:1;
+        unsigned int _reservedEntityDescription:30;
     } _managedObjectModelFlags;
 }
 
@@ -70,6 +71,39 @@
  */
 - (NSDictionary *)localizationDictionary;
 - (void)setLocalizationDictionary:(NSDictionary *)localizationDictionary;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+/* Returns the managed object model used to create the store for the specified metadata.  This method is a companion to the mergedModelFromBundles: method;  in this case, the framework uses the version information stored in the metadata for a store to locate the models/entities used to create the store in the available bundles, and return the model.  If the model for the store cannot be found, this method will return nil.
+*/
++ (NSManagedObjectModel *)mergedModelFromBundles:(NSArray *)bundles forStoreMetadata:(NSDictionary *)metadata;
+
+
+/* Returns a merged model from the specified array for the version information in the provided metadata.  (This is the companion method to mergedModelFromBundles:forStoreMetadata:)  If a model cannot be created to match the version information in the specified metadata, this method will return nil.  
+*/
++ (NSManagedObjectModel *)modelByMergingModels:(NSArray *)models forStoreMetadata:(NSDictionary *)metadata;
+
+
+/* Returns the dictionary of fetch request templates, keyed by name, for the model.  If the template contains a predicate with substitution variables, you should instead use fetchRequestFromTemplateWithName:substitutionVariables: to create a new fetch request.
+*/
+- (NSDictionary *)fetchRequestTemplatesByName;
+
+/* Returns the collection of developer-defined version identifiers for the model.  For models created in Xcode, this value is set by the developer in the model inspector. Merged models return the combined  collection of identifiers. This value is meant to be used as a debugging hint to help developers determine the models that were combined to create a merged model. The framework does not give models a default identifier, nor does it depend this value at runtime.
+*/
+- (NSSet *)versionIdentifiers;
+- (void)setVersionIdentifiers:(NSSet *)identifiers;
+
+
+/* Compares the version information in the store metadata with the entity version of a given configuration. Returns NO if there are differences between the version information.  (For information on specific differences, developers should utilize the entityVersionHashesByName method, and perform a comparison.)
+*/
+- (BOOL)isConfiguration:(NSString *)configuration compatibleWithStoreMetadata:(NSDictionary *)metadata;
+
+
+/* Returns a dictionary of the version hashes for the entities in the model, keyed by entity name.  (The dictionary of version hash information is used by Core Data to determine schema compatibility.)
+*/
+- (NSDictionary *)entityVersionHashesByName;
+
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 @end
 

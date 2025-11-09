@@ -374,9 +374,6 @@ public:
 	
 	virtual bool	DoesHBAPerformAutoSense ( void );
 	
-
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
-	
 	/*!
 		@function ReportHBAConstraints
 		@abstract Called to report the I/O constraints for this controller.
@@ -396,12 +393,6 @@ public:
 	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 2 );
 	
 	virtual void	ReportHBAConstraints ( OSDictionary * constraints );
-
-#else
-	
-	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 2 );
-	
-#endif
 	
 	// Padding for the Client API
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 3 );
@@ -692,7 +683,8 @@ protected:
 		@abstract Called to stop the controller
 		@discussion The StopController method will be called any time that the 
 		system wants the card to stop accepting requests. ( See StartController 
-		discussion )
+		discussion ). The subclass should disable the hardware interrupt for
+		the particular controller (if possible) in this method.
 	*/
 	
 	virtual void	StopController ( void ) = 0;
@@ -1393,8 +1385,7 @@ protected:
 	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 10 );
 	
 	virtual bool		FilterInterruptRequest ( void );
-
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+	
 	/*!
 		@function InitializeDMASpecification
 		@abstract Called to initialize an IODMACommand with a DMA specification.
@@ -1404,18 +1395,37 @@ protected:
 		@result boolean value indicating success or failure.
 	*/
 	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 11 );
-
+	
 	virtual bool	InitializeDMASpecification ( IODMACommand * command );
 	
-#else
+	/*!
+		@function CreateDeviceInterrupt
+		@abstract Called to create an IOInterruptEventSource for the device. Subclasses
+		may wish to use a different interrupt index than 0 (e.g. for using PCI Message
+		Signaled Interrupts) or might not need an interrupt at all (virtual HBA).
+		@param action A pointer to the action routine that should be passed to either
+		IOInterruptEventSource::interruptEventSource() or
+		IOFilterInterruptEventSource::filterInterruptEventSource as the method to call
+		when an interrupt occurs for the device (sometimes called the "deferred procedure call"
+		or the "secondary context method". By passing this routine along, it will
+		properly wire up the HandleInterruptRequest() method you should override to handle
+		interrupts.
+		@param filter A pointer to the filter routine that should be passed to
+		IOFilterInterruptEventSource::filterInterruptEventSource as the method to call
+		at primary interrupt time when an interrupt occurs for the device.
+		By passing this routine along, it will properly wire up the
+		FilterInterruptRequest() method you may override to handle primary interrupts.
+		@result IOInterruptEventSource. May return NULL if and only if there is no
+		hardware interrupt associated with this device.
+	*/
+	OSMetaClassDeclareReservedUsed ( IOSCSIParallelInterfaceController, 12 );
 	
-	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 11 );
-	
-#endif
-	
+	virtual IOInterruptEventSource *	CreateDeviceInterrupt (
+											IOInterruptEventSource::Action			action,
+											IOFilterInterruptEventSource::Filter	filter,
+											IOService *								provider );
 	
 	// Padding for the Child Class API
-	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 12 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 13 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIParallelInterfaceController, 15 );
@@ -1523,8 +1533,12 @@ private:
 	// These shall not be overridden by the HBA child classes.
 	bool			start ( IOService * 				provider );
 	void			stop ( 	IOService *  				provider );
+
+
+protected:
 	
-	// These may be overriden by the HBA child classes if necessary.
+	// These may be overriden by the HBA child classes if necessary, but should
+	// call the superclass implementation.
 	virtual bool	handleOpen ( 
 							IOService * 				client, 
 							IOOptionBits 				options, 
@@ -1536,6 +1550,9 @@ private:
 
 	virtual bool	handleIsOpen ( 
 							const IOService * 			client ) const;
+	
+	virtual bool	willTerminate ( IOService * provider, IOOptionBits options );
+	virtual bool	didTerminate ( IOService * provider, IOOptionBits options, bool * defer );
 	
 };
 

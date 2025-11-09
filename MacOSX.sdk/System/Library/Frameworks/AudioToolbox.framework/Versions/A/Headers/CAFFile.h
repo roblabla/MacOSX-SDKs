@@ -19,9 +19,15 @@
 #define _CAFFile_H_
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreServices/CoreServices.h>
+    #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>
 #else
 	#include <MacTypes.h>
+#endif
+
+#if TARGET_OS_WIN32
+#define ATTRIBUTE_PACKED
+#else
+#define ATTRIBUTE_PACKED __attribute__((__packed__))
 #endif
 
 // In a CAF File all of these types' byte order is big endian.
@@ -51,7 +57,8 @@ enum {
 	kCAF_PeakChunkID				= 'peak',
 	kCAF_OverviewChunkID			= 'ovvw',
 	kCAF_MIDIChunkID				= 'midi',
-	kCAF_UMIDChunkID				= 'umid'
+	kCAF_UMIDChunkID				= 'umid',
+	kCAF_FormatListID				= 'ldsc'
 };
 
 
@@ -60,7 +67,7 @@ struct CAFFileHeader
         UInt32          mFileType;			// 'caff'
 		UInt16			mFileVersion;		//initial revision set to 1
 		UInt16			mFileFlags;			//initial revision set to 0
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFFileHeader CAFFileHeader;
 
 
@@ -70,14 +77,15 @@ struct CAFChunkHeader
         SInt64          mChunkSize;  // size in bytes of the chunk data (not including this header).
 									// mChunkSize is SInt64 not UInt64 because negative values for 
 									// the data size can have a special meaning
-};
+} ATTRIBUTE_PACKED;
+
 typedef struct CAFChunkHeader CAFChunkHeader;
 
 struct CAF_UUID_ChunkHeader
 {
         CAFChunkHeader   mHeader;
         UInt8            mUUID[16];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAF_UUID_ChunkHeader CAF_UUID_ChunkHeader;
 
 
@@ -91,7 +99,7 @@ struct CAFAudioDescription
         UInt32  mFramesPerPacket;
         UInt32  mChannelsPerFrame;
         UInt32  mBitsPerChannel;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFAudioDescription  CAFAudioDescription;
 
 // these are the flags if the format ID is 'lpcm'
@@ -103,6 +111,17 @@ enum
     kCAFLinearPCMFormatFlagIsLittleEndian		= (1L << 1)
 };
 
+
+// 'ldsc'  format list chunk.
+// for data formats like AAC SBR which can be decompressed to multiple formats, this chunk contains a list of
+// CAFAudioFormatListItem describing those formats. The list is ordered from best to worst by number of channels 
+// and sample rate in that order. mChannelLayoutTag is an AudioChannelLayoutTag as defined in CoreAudioTypes.h
+
+struct CAFAudioFormatListItem
+{
+	CAFAudioDescription mFormat;
+	UInt32 				mChannelLayoutTag;
+} ATTRIBUTE_PACKED;
 
 // 'chan'  Optional chunk.
 // struct AudioChannelLayout  as defined in CoreAudioTypes.h.
@@ -153,14 +172,14 @@ struct CAFPacketTableHeader
         SInt32  mRemainderFrames;
 		
 		UInt8   mPacketDescriptions[kVariableLengthArray];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFPacketTableHeader CAFPacketTableHeader;
 
 struct CAFDataChunk
 {
 		UInt32 mEditCount;
 		UInt8 mData[kVariableLengthArray];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFDataChunk CAFDataChunk;
 
 // markers types
@@ -189,15 +208,19 @@ enum {
 
 enum
 {
-        kCAF_SMPTE_TimeTypeNone		 = 0,
-        kCAF_SMPTE_TimeType24        = 1,
-        kCAF_SMPTE_TimeType25        = 2,
-        kCAF_SMPTE_TimeType30Drop    = 3,
-        kCAF_SMPTE_TimeType30        = 4,
-        kCAF_SMPTE_TimeType2997      = 5,
-        kCAF_SMPTE_TimeType2997Drop  = 6,
-        kCAF_SMPTE_TimeType60        = 7,
-        kCAF_SMPTE_TimeType5994      = 8
+    kCAF_SMPTE_TimeTypeNone		 = 0,
+    kCAF_SMPTE_TimeType24        = 1,
+    kCAF_SMPTE_TimeType25        = 2,
+    kCAF_SMPTE_TimeType30Drop    = 3,
+    kCAF_SMPTE_TimeType30        = 4,
+    kCAF_SMPTE_TimeType2997      = 5,
+    kCAF_SMPTE_TimeType2997Drop  = 6,
+    kCAF_SMPTE_TimeType60        = 7,
+    kCAF_SMPTE_TimeType5994      = 8,
+    kCAF_SMPTE_TimeType60Drop    = 9,
+    kCAF_SMPTE_TimeType5994Drop  = 10,
+    kCAF_SMPTE_TimeType50        = 11,
+    kCAF_SMPTE_TimeType2398      = 12
 };
 
 struct CAF_SMPTE_Time
@@ -207,7 +230,7 @@ struct CAF_SMPTE_Time
 	SInt8 mSeconds;
 	SInt8 mFrames;
 	UInt32 mSubFrameSampleOffset;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAF_SMPTE_Time CAF_SMPTE_Time;
 
 struct CAFMarker
@@ -217,7 +240,7 @@ struct CAFMarker
         UInt32               mMarkerID;
         CAF_SMPTE_Time       mSMPTETime;
         UInt32               mChannel;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFMarker CAFMarker;
 
 struct CAFMarkerChunk
@@ -225,7 +248,7 @@ struct CAFMarkerChunk
         UInt32          mSMPTE_TimeType;
         UInt32          mNumberMarkers;
         CAFMarker       mMarkers[kVariableLengthArray]; 
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFMarkerChunk CAFMarkerChunk;
 
 #define kCAFMarkerChunkHdrSize		offsetof(CAFMarkerChunk, mMarkers)
@@ -242,7 +265,7 @@ struct CAFRegion
         UInt32          mFlags;
         UInt32          mNumberMarkers;
         CAFMarker       mMarkers[kVariableLengthArray];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFRegion CAFRegion;
 
 /* because AudioFileRegions are variable length, you cannot access them as an array. Use NextAudioFileRegion to walk the list. */
@@ -255,7 +278,7 @@ struct CAFRegionChunk
         UInt32          mSMPTE_TimeType;
         UInt32          mNumberRegions;
         CAFRegion       mRegions[kVariableLengthArray];  //variable sized chunk
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFRegionChunk CAFRegionChunk;
 
 #define kCAFRegionChunkHdrSize		offsetof(CAFRegionChunk, mRegions)
@@ -272,7 +295,7 @@ struct CAFInstrumentChunk
         UInt32          mSustainRegionID;               
         UInt32          mReleaseRegionID;               
         UInt32          mInstrumentID;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFInstrumentChunk CAFInstrumentChunk;
 
 
@@ -280,7 +303,7 @@ typedef struct CAFInstrumentChunk CAFInstrumentChunk;
 struct CAFStringID {
         UInt32         mStringID;
         SInt64         mStringStartByteOffset;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFStringID CAFStringID;
 
 struct CAFStrings
@@ -289,7 +312,7 @@ struct CAFStrings
 		CAFStringID    mStringsIDs[kVariableLengthArray];
 // this struct is only fictionally described due to the variable length fields
 //		UInt8          mStrings[kVariableLengthArray]; // null terminated UTF8 strings
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFStrings CAFStrings;
 
 
@@ -302,7 +325,7 @@ struct CAFInfoStrings
 //              UInt8   mKey[kVariableLengthArray];			// null terminated UTF8 string
 //              UInt8   mValue[kVariableLengthArray];		// null terminated UTF8 string
 //      } mStrings[kVariableLengthArray];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFInfoStrings CAFInfoStrings;
 
 
@@ -310,14 +333,14 @@ struct CAFPositionPeak
 {
         Float32       mValue;
         UInt64        mFrameNumber;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFPositionPeak CAFPositionPeak;
 
 struct CAFPeakChunk
 {
 	UInt32 mEditCount;
 	CAFPositionPeak mPeaks[kVariableLengthArray];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFPeakChunk CAFPeakChunk;
 
 
@@ -325,7 +348,7 @@ struct CAFOverviewSample
 {
         SInt16       mMinValue;
         SInt16       mMaxValue;
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFOverviewSample CAFOverviewSample;
 
 struct CAFOverviewChunk
@@ -333,13 +356,13 @@ struct CAFOverviewChunk
         UInt32                   mEditCount;
         UInt32                   mNumFramesPerOVWSample;
         CAFOverviewSample        mData[kVariableLengthArray];
-};
-typedef struct CAFOverview CAFOverview;
+} ATTRIBUTE_PACKED;
+typedef struct CAFOverviewChunk CAFOverviewChunk;
 
 struct CAFUMIDChunk
 {
 	UInt8 mBytes[64];
-};
+} ATTRIBUTE_PACKED;
 typedef struct CAFUMIDChunk CAFUMIDChunk;
 
 

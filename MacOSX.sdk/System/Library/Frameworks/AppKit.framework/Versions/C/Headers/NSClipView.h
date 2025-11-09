@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -33,7 +33,8 @@
         unsigned int	    nextScrollRelativeToCurrentPosition:1;
         unsigned int        viewBoundsChangedOverridden:1;
         unsigned int        viewFrameChangedOverridden:1;
-        unsigned int        RESERVED:18;
+        unsigned int        documentViewAlignment:4;
+        unsigned int        RESERVED:14;
     } _cvFlags;
 }
 

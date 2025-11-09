@@ -3,9 +3,9 @@
  
      Contains:   Public interface to the font access and data management functions of ATS.
  
-     Version:    ATS-184.7.7~42
+     Version:    ATS-236~129
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint on
@@ -77,22 +77,20 @@ enum {
 };
 
 enum {
+  kATSOptionFlagsActivateDisabled = 0x00000001 << 5, /* Used by activate to activate fonts in the disabled state */
   kATSOptionFlagsProcessSubdirectories = 0x00000001 << 6, /* Used by activation/deactivation & iteration */
-  kATSOptionFlagsDoNotNotify    = 0x00000001 << 7 /* Do not notify after global activation/deactivation */
+  kATSOptionFlagsDoNotNotify    = 0x00000001 << 7, /* Do not notify after global activation/deactivation */
+  kATSOptionFlagsRecordPersistently = 0x00000001 << 18 /* Used by activated/deactivation to record/remove font references in persistent store to be remembered at next login */
 };
 
 /* Iteration Option Flags */
 enum {
   kATSOptionFlagsIterateByPrecedenceMask = 0x00000001 << 5, /* Fonts returned from highest to lowest precedece */
+  kATSOptionFlagsIncludeDisabledMask = 0x00000001 << 7, /* Disabled Fonts will show up in iteration, also valid for ATSFontFindFromContainer */
   kATSOptionFlagsIterationScopeMask = 0x00000007 << 12, /* Mask option bits 12-14 for iteration scopes */
   kATSOptionFlagsDefaultScope   = 0x00000000 << 12,
   kATSOptionFlagsUnRestrictedScope = 0x00000001 << 12,
   kATSOptionFlagsRestrictedScope = 0x00000002 << 12
-};
-
-typedef UInt32                          ATSFontFormat;
-enum {
-  kATSFontFormatUnspecified     = 0
 };
 
 typedef CALLBACK_API_C( OSStatus , ATSFontFamilyApplierFunction )(ATSFontFamilyRef iFamily, void *iRefCon);
@@ -108,7 +106,8 @@ enum ATSFontFilterSelector {
   kATSFontFilterSelectorGeneration = 3,
   kATSFontFilterSelectorFontFamily = 7,
   kATSFontFilterSelectorFontFamilyApplierFunction = 8,
-  kATSFontFilterSelectorFontApplierFunction = 9
+  kATSFontFilterSelectorFontApplierFunction = 9,
+  kATSFileReferenceFilterSelector = 10
 };
 typedef enum ATSFontFilterSelector ATSFontFilterSelector;
 
@@ -120,6 +119,7 @@ struct ATSFontFilter {
     ATSFontFamilyRef    fontFamilyFilter;
     ATSFontFamilyApplierFunction  fontFamilyApplierFunctionFilter;
     ATSFontApplierFunction  fontApplierFunctionFilter;
+    const FSRef *       fontFileRefFilter;
   }                       filter;
 };
 typedef struct ATSFontFilter            ATSFontFilter;
@@ -224,14 +224,52 @@ extern ATSGeneration
 ATSGetGeneration(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
- *  ATSFontActivateFromFileSpecification()
+ *  ATSFontActivateFromFileSpecification()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSFontActivateFromFileReference instead.
+ *  
+ *  Summary:
+ *    Activates one or more fonts from a file specification.
  *  
  *  Mac OS X threading:
  *    Thread safe since version Jaguar
  *  
+ *  Parameters:
+ *    
+ *    iFile:
+ *      A pointer to the file specification that specifies the name and
+ *      location of a file or directory that contains the font data you
+ *      want to activate.
+ *    
+ *    iContext:
+ *      A value that specifies the context of the activated font.
+ *    
+ *    iFormat:
+ *      A value that represents the format identifier of the font. Pass
+ *      kATSFontFormatUnspecified as the system automatically
+ *      determines the format of the font.
+ *    
+ *    iReserved:
+ *      This parameter is currently reserved for future use, so you
+ *      should pass NULL.
+ *    
+ *    iOptions:
+ *      An options flag.  See developer documentation for appropriate
+ *      flags.
+ *    
+ *    oContainer:
+ *      On output, a reference to the font container that is activated
+ *      from the file specification. You need this reference when you
+ *      deactivate the font by calling the function ATSFontDeactivate.
+ *  
+ *  Result:
+ *    noErr Activated successfully
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -242,7 +280,64 @@ ATSFontActivateFromFileSpecification(
   ATSFontFormat          iFormat,
   void *                 iReserved,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+/*
+ *  ATSFontActivateFromFileReference()
+ *  
+ *  Summary:
+ *    Activates one or more fonts from a file reference.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFile:
+ *      A pointer to the file specification that specifies the name and
+ *      location of a file or directory that contains the font data you
+ *      want to activate.
+ *    
+ *    iContext:
+ *      A value that specifies the context of the activated font.
+ *    
+ *    iFormat:
+ *      A value that represents the format identifier of the font. Pass
+ *      kATSFontFormatUnspecified as the system automatically
+ *      determines the format of the font.
+ *    
+ *    iRefCon:
+ *      This parameter is currently reserved for future use, so you
+ *      should pass NULL.
+ *    
+ *    iOptions:
+ *      An options flag.  See developer documentation for appropriate
+ *      flags.
+ *    
+ *    oContainer:
+ *      On output, a reference to the font container that is activated
+ *      from the file specification. You need this reference when you
+ *      deactivate the font by calling the function ATSFontDeactivate.
+ *  
+ *  Result:
+ *    noErr Activated successfully
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontActivateFromFileReference(
+  const FSRef *          iFile,
+  ATSFontContext         iContext,
+  ATSFontFormat          iFormat,
+  void *                 iRefCon,
+  ATSOptionFlags         iOptions,
+  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -283,6 +378,160 @@ ATSFontDeactivate(
   ATSFontContainerRef   iContainer,
   void *                iRefCon,
   ATSOptionFlags        iOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  ATSFontGetContainerFromFileReference()
+ *  
+ *  Summary:
+ *    Get the font container reference associated with an activated
+ *    file reference.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFile:
+ *      A pointer to the valid file reference that specificies the
+ *      activated font file for which to get the container.
+ *    
+ *    iContext:
+ *      The context that the font file is accessible too. If
+ *      kATSFontContextGlobal is specified this function will return
+ *      only a valid font container reference that was activated in
+ *      kATSFontContextGlobal. If kATSFontContextDefault or
+ *      kATSFontContextLocal is used, the container returned will
+ *      adhere to precedence rules. In which case a container activated
+ *      in kATSFontContextLocal will be preferred over one activated in
+ *      kATSFontContextGlobal.
+ *    
+ *    iOptions:
+ *      An options flag.  See developer documentation for appropriate
+ *      flags.
+ *    
+ *    oContainer:
+ *      On output, a reference to the font container representing the
+ *      file reference activated in the specified context. On error or
+ *      for a file that is not activated, this will be set to
+ *      kATSFontContainerRefUnspecified.
+ *  
+ *  Result:
+ *    paramErr One or more parameters are invalid.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontGetContainerFromFileReference(
+  const FSRef *          iFile,
+  ATSFontContext         iContext,
+  ATSOptionFlags         iOptions,
+  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontGetContainer()
+ *  
+ *  Summary:
+ *    Gets the font container reference for the font.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFont:
+ *      The font reference.
+ *    
+ *    iOptions:
+ *      An options flag.  See developer documentation for appropriate
+ *      flags.
+ *    
+ *    oContainer:
+ *      On output, a reference to the font container that was used to
+ *      activate the font reference. On error this will be set to
+ *      kATSFontContainerRefUnspecified.
+ *  
+ *  Result:
+ *    kATSInvalidFontContainerAccess The font container is invalid.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontGetContainer(
+  ATSFontRef             iFont,
+  ATSOptionFlags         iOptions,
+  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontSetEnabled()
+ *  
+ *  Summary:
+ *    Sets a font's state to enabled or disabled.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFont:
+ *      The font reference.
+ *    
+ *    iOptions:
+ *      An options flag.  See developer documentation for appropriate
+ *      flags.
+ *    
+ *    iEnabled:
+ *      The state to set the font to. True for enabled, false for
+ *      disabled.
+ *  
+ *  Result:
+ *    kATSInvalidFontAccess The font reference is invalid in the
+ *    current application context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontSetEnabled(
+  ATSFontRef       iFont,
+  ATSOptionFlags   iOptions,
+  Boolean          iEnabled)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontIsEnabled()
+ *  
+ *  Summary:
+ *    Returns true if the font is enabled.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFont:
+ *      The font reference
+ *  
+ *  Result:
+ *    false The font is disabled.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+ATSFontIsEnabled(ATSFontRef iFont)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /* ----------------------------------------------------------------------------------------- */
@@ -750,21 +999,79 @@ ATSFontFamilyGetQuickDrawName(
   Str255             oName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
- *  ATSFontGetFileSpecification()
+ *  ATSFontGetFileSpecification()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSFontGetFileReference instead.
+ *  
+ *  Summary:
+ *    Obtains the file specification for a font.
  *  
  *  Mac OS X threading:
  *    Thread safe since version Jaguar
  *  
+ *  Parameters:
+ *    
+ *    iFont:
+ *      A reference to the font whose file specification you want to
+ *      obtain.
+ *    
+ *    oFile:
+ *      On output, points to the file specification that specifies the
+ *      name and location of a file or directory that contains the font
+ *      data specified by the iFont parameter.
+ *  
+ *  Result:
+ *    noErr File specification obtained successfully.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 ATSFontGetFileSpecification(
   ATSFontRef   iFont,
-  FSSpec *     oFile)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFSSpec *  oFile)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+/*
+ *  ATSFontGetFileReference()
+ *  
+ *  Summary:
+ *    Obtains the file reference for a font.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.5
+ *  
+ *  Parameters:
+ *    
+ *    iFont:
+ *      A reference to the font whose file specification you want to
+ *      obtain.
+ *    
+ *    oFile:
+ *      On output, points to the file reference that specifies the name
+ *      and location of a file or directory that contains the font data
+ *      specified by the iFont parameter.
+ *  
+ *  Result:
+ *    noErr File specification obtained successfully.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontGetFileReference(
+  ATSFontRef   iFont,
+  FSRef *      oFile)                                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 
 
 /*
@@ -1134,12 +1441,170 @@ ATSCreateFontQueryRunLoopSource(
  *    CFDataRef that contains the raw name bytes.
  */
 #define kATSFontNameTableBytes          CFSTR("font name table bytes")
+/* ----------------------------------------------------------------------------------------- */
+/* Auto activation settings                                                                  */
+/* ----------------------------------------------------------------------------------------- */
+
+/*
+ *  ATSAutoActivationSetting
+ *  
+ *  Summary:
+ *    Values for auto activation settings.
+ */
+enum {
+
+  /*
+   * Resets the setting the the default state. For application settings
+   * this clears the setting. For the global setting it will revert to
+   * the initial system setting, kATSFontAutoActivationEnabled.
+   */
+  kATSFontAutoActivationDefault = 0,
+  kATSFontAutoActivationDisabled = 1,
+  kATSFontAutoActivationEnabled = 2,
+
+  /*
+   * Asks the user before auto-activating fonts requested by the
+   * application.
+   */
+  kATSFontAutoActivationAsk     = 4
+};
+
+
+typedef UInt32                          ATSFontAutoActivationSetting;
+/*
+ *  ATSFontSetGlobalAutoActivationSetting()
+ *  
+ *  Summary:
+ *    Sets the user's global auto-activation setting.
+ *  
+ *  Discussion:
+ *    This function can be used to set the user's global
+ *    auto-activation setting.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Leopard
+ *  
+ *  Parameters:
+ *    
+ *    iSetting:
+ *      One of the enumerated constants above specifying the setting
+ *      for font auto-activation. Will return paramErr on invalid input.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontSetGlobalAutoActivationSetting(ATSFontAutoActivationSetting iSetting) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontGetGlobalAutoActivationSetting()
+ *  
+ *  Summary:
+ *    Gets the user's global auto-activation setting.
+ *  
+ *  Discussion:
+ *    This function can be used to get the user's global
+ *    auto-activation setting.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Leopard
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern ATSFontAutoActivationSetting 
+ATSFontGetGlobalAutoActivationSetting(void)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontSetAutoActivationSettingForApplication()
+ *  
+ *  Summary:
+ *    Sets the auto-activation setting for the specified application
+ *    bundle.
+ *  
+ *  Discussion:
+ *    This function can be used to set the auto-activation setting for
+ *    the specified application. The per-application setting overrides
+ *    the global setting.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Leopard
+ *  
+ *  Parameters:
+ *    
+ *    iSetting:
+ *      One of the enumerated constants above specifying the setting
+ *      for font auto-activation. Specifying
+ *      kATSFontAutoActivationDefault will clear the application
+ *      specific setting and the global setting will be used.
+ *    
+ *    iApplicationFileURL:
+ *      A valid file URL for an application. Passing NULL for this
+ *      parameter indicates the current process.
+ *  
+ *  Result:
+ *    An OSStatus code. Will return noErr on success, and paramErr on
+ *    any invalid input. May return memFullErr if unable to allocate
+ *    temporary structures.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ATSFontSetAutoActivationSettingForApplication(
+  ATSFontAutoActivationSetting   iSetting,
+  CFURLRef                       iApplicationFileURL)         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  ATSFontGetAutoActivationSettingForApplication()
+ *  
+ *  Summary:
+ *    Query the activation setting for the specified application.
+ *  
+ *  Discussion:
+ *    This function can be used to query the auto-activation setting
+ *    for the specified application. The setting is the app-specific
+ *    setting if available, otherwise it is
+ *    kATSFontAutoActivationDefault.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Leopard
+ *  
+ *  Parameters:
+ *    
+ *    iApplicationFileURL:
+ *      A valid file URL for an application. Passing NULL for this
+ *      parameter indicates the current process.
+ *  
+ *  Result:
+ *    Returns the setting that will be used for the specified
+ *    application. If this returns kATSFontAutoActivationDefault the
+ *    global setting will be used.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern ATSFontAutoActivationSetting 
+ATSFontGetAutoActivationSettingForApplication(CFURLRef iApplicationFileURL) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint reset
 #endif
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -25,12 +25,13 @@
 
 
 #include <IOKit/IOTypes.h>
+#include <IOKit/IOKitKeys.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define IOGRAPHICSTYPES_REV	9
+#define IOGRAPHICSTYPES_REV	13
 
 typedef SInt32	IOIndex;
 typedef UInt32	IOSelect;
@@ -60,6 +61,12 @@ typedef char IOPixelEncoding[ kIOMaxPixelBits ];
 #define IO16BitDirectPixels	"-RRRRRGGGGGBBBBB"
 #define IO32BitDirectPixels	"--------RRRRRRRRGGGGGGGGBBBBBBBB"
 
+#define kIO30BitDirectPixels	"--RRRRRRRRRRGGGGGGGGGGBBBBBBBBBB"
+#define kIO64BitDirectPixels	"-16R16G16B16"
+
+#define kIO16BitFloatPixels	"-16FR16FG16FB16"
+#define kIO32BitFloatPixels	"-32FR32FG32FB32"
+
 // other possible pixel formats
 
 #define IOYUV422Pixels		"Y4U2V2"
@@ -72,11 +79,13 @@ typedef char IOPixelEncoding[ kIOMaxPixelBits ];
 
 // Info about a pixel format
 enum {
-    kIOCLUTPixels		= 0,
-    kIOFixedCLUTPixels		= 1,
-    kIORGBDirectPixels 		= 2,
-    kIOMonoDirectPixels 	= 3,
-    kIOMonoInverseDirectPixels	= 4
+    kIOCLUTPixels		    = 0,
+    kIOFixedCLUTPixels		    = 1,
+    kIORGBDirectPixels 		    = 2,
+    kIOMonoDirectPixels 	    = 3,
+    kIOMonoInverseDirectPixels	    = 4,
+    kIORGBSignedDirectPixels	    = 5,
+    kIORGBSignedFloatingPointPixels = 6
 };
 
 /*!
@@ -158,7 +167,9 @@ enum {
     kDisplayModeNotPresetFlag		= 0x00000200,
     kDisplayModeStretchedFlag		= 0x00000800,
     kDisplayModeNotGraphicsQualityFlag	= 0x00001000,
-    kDisplayModeTelevisionFlag		= 0x00100000
+    kDisplayModeValidateAgainstDisplay	= 0x00002000,
+    kDisplayModeTelevisionFlag          = 0x00100000,
+    kDisplayModeValidForMirroringFlag   = 0x00200000
 };
 enum {
     kDisplayModeValidFlag		= 0x00000001,
@@ -666,6 +677,7 @@ enum {
     kConnectionSupportsLLDDCSense	= 'lddc',
     kConnectionSupportsHLDDCSense	= 'hddc',
     kConnectionEnable			= 'enab',
+    kConnectionProbe			= 'prob',
     kConnectionChanged			= 'chng',
     kConnectionPower			= 'powr',
     kConnectionPostWake			= 'pwak',
@@ -742,6 +754,8 @@ struct IOGBounds {
 };
 typedef struct IOGBounds IOGBounds;
 
+#ifndef kIODescriptionKey
+
 #if !defined(__Point__) && !defined(BINTREE_H) && !defined(__MACTYPES__)
 #define __Point__
 typedef IOGPoint Point;
@@ -751,6 +765,8 @@ typedef IOGPoint Point;
 #define __Bounds__
 typedef IOGBounds Bounds;
 #endif
+
+#endif /* !kIODescriptionKey */
 
 // cursor description
 
@@ -912,6 +928,16 @@ enum {
 #define kIOFBGammaWidthKey		"IOFBGammaWidth"
 #define kIOFBGammaCountKey		"IOFBGammaCount"
 #define kIOFBCLUTDeferKey		"IOFBCLUTDefer"
+
+// exists on the hibernate progress display device
+#ifndef kIOHibernatePreviewActiveKey
+#define kIOHibernatePreviewActiveKey	"IOHibernatePreviewActive"
+// values for kIOHibernatePreviewActiveKey set by driver
+enum {
+    kIOHibernatePreviewActive  = 0x00000001,
+    kIOHibernatePreviewUpdates = 0x00000002
+};
+#endif
 
 // diagnostic keys
 

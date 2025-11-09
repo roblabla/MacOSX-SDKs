@@ -1,3 +1,4 @@
+#if !__LP64__
 /*
      File Name:  PPDLib.h
 
@@ -14,12 +15,9 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __PPDLIB__
 #define __PPDLIB__
-
-#ifndef __CARBON__
-#include <Carbon/Carbon.h>
-#endif
 
 #ifndef __PMTICKET__
 #include <PrintCore/PMTicket.h>
@@ -30,13 +28,7 @@ extern "C" {
 #endif
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*** Constants ***/
 
@@ -188,10 +180,6 @@ typedef OSStatus (*WebSearchProgressProc)(ConstStr255Param status, int percentDo
 typedef OSStatus (*PPDEventFilter)(EventRecord *event, void *filterData) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;;
 
 /*** Prototypes ***/
-
-#if PRAGMA_IMPORT_SUPPORTED
-#pragma import on
-#endif
 
 
 OSErr ppdParseFile (const FSSpec *ppdFileSpec, short compiledRef, short compiledResFRef, PPDParseErr *errInfoP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -517,21 +505,12 @@ OSStatus ppdOpenAndParsePPDAutoSetup(Collection prInfo,
 
 */
 
-#if PRAGMA_IMPORT_SUPPORTED
-#pragma import off
-#endif
-
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif	/* __PPDLIB__ */
+
+#endif /* !__LP64__ */

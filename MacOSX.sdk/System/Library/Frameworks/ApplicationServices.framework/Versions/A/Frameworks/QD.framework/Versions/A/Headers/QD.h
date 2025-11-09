@@ -3,7 +3,7 @@
  
      Contains:   Master include for QD private framework
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -37,6 +37,14 @@
 #include <AE/AE.h>
 #endif
 
+
+#ifndef __QUICKDRAWTYPES__
+#include <QD/QuickdrawTypes.h>
+#endif
+
+#ifndef __QUICKDRAWAPI__
+#include <QD/QuickdrawAPI.h>
+#endif
 
 #ifndef __QUICKDRAW__
 #include <QD/Quickdraw.h>

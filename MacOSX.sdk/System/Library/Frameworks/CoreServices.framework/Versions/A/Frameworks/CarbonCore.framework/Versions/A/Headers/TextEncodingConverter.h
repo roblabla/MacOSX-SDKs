@@ -3,7 +3,7 @@
  
      Contains:   Text Encoding Conversion Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef OSType                          TECPluginSignature;
 typedef UInt32                          TECPluginVersion;
@@ -685,7 +685,7 @@ TECGetTextEncodingFromInternetNameOrMIB(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

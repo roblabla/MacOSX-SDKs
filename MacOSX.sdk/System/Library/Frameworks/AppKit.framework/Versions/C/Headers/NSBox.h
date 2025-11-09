@@ -1,7 +1,7 @@
 /*
 	NSBox.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 @class NSFont;
 
-typedef enum _NSTitlePosition {
+enum {
     NSNoTitle				= 0,
     NSAboveTop				= 1,
     NSAtTop				= 2,
@@ -17,14 +17,19 @@ typedef enum _NSTitlePosition {
     NSAboveBottom			= 4,
     NSAtBottom				= 5,
     NSBelowBottom			= 6
-} NSTitlePosition;
+};
+typedef NSUInteger NSTitlePosition;
 
-typedef enum {
-    NSBoxPrimary	= 0,	// default
-    NSBoxSecondary	= 1,
-    NSBoxSeparator	= 2,
-    NSBoxOldStyle	= 3	// use border type
-} NSBoxType;
+enum {
+    NSBoxPrimary	= 0,	// group subviews with a standard look. default
+    NSBoxSecondary	= 1,    // same as primary since 10.3
+    NSBoxSeparator	= 2,    // vertical or horizontal separtor line.  Not used with subviews.
+    NSBoxOldStyle	= 3,    // 10.2 and earlier style boxes
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    NSBoxCustom		= 4     // draw based entirely on user parameters, not human interface guidelines
+#endif
+};
+typedef NSUInteger NSBoxType;
 
 @interface NSBox : NSView
 {
@@ -37,10 +42,13 @@ typedef enum {
     struct __bFlags {
 	NSBorderType	borderType:2;
 	NSTitlePosition	titlePosition:3;
-	unsigned int	transparent:1;
-        unsigned int	boxType:2;
+	unsigned int	backgroundTransparent:1;
+        unsigned int	reserved:2;
         unsigned int	needsTile:1;
-        unsigned int	_RESERVED:23;
+        unsigned int	transparent:1;
+        unsigned int	colorAltInterpretation:1;
+        unsigned int	boxType:3;
+        unsigned int	_RESERVED:18;
     } _bFlags;
     id			_unused;
 }
@@ -65,8 +73,34 @@ typedef enum {
 - (id)contentView;
 - (void)setContentView:(NSView *)aView;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+// Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
+- (BOOL)isTransparent;
+- (void)setTransparent:(BOOL)flag;
+#endif
+
 @end
 
 @interface NSBox(NSKeyboardUI)
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 @end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@interface NSBox (NSCustomBoxTypeProperties)
+/* These properties only apply to boxes with boxType NSBoxCustom.
+ */
+
+- (CGFloat)borderWidth;
+- (void)setBorderWidth:(CGFloat)borderWidth;	// Only meaningful for boxes configured with NSBoxCustom
+
+- (CGFloat)cornerRadius;
+- (void)setCornerRadius:(CGFloat)cornerRadius;	// Only meaningful for boxes configured with NSBoxCustom
+
+- (NSColor *)borderColor;
+- (void)setBorderColor:(NSColor *)borderColor;	// Only meaningful for boxes configured with NSBoxCustom
+
+- (NSColor *)fillColor;
+- (void)setFillColor:(NSColor *)fillColor;	// Only meaningful for boxes configured with NSBoxCustom
+
+@end
+#endif

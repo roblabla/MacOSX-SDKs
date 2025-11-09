@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,7 +13,7 @@
 - (NSData *)availableData;
 
 - (NSData *)readDataToEndOfFile;
-- (NSData *)readDataOfLength:(unsigned int)length;
+- (NSData *)readDataOfLength:(NSUInteger)length;
 
 - (void)writeData:(NSData *)data;
 
@@ -68,12 +68,6 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes;
 @end
 
 @interface NSFileHandle (NSFileHandlePlatformSpecific)
-
-#if defined(__WIN32__)
-- (id)initWithNativeHandle:(void *)nativeHandle closeOnDealloc:(BOOL)closeopt;
-- (id)initWithNativeHandle:(void *)nativeHandle;
-- (void *)nativeHandle;
-#endif	/* __WIN32__ */
 
 - (id)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt;
 - (id)initWithFileDescriptor:(int)fd;

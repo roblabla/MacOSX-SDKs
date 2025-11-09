@@ -1,9 +1,10 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotationLink.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-#import "PDFAnnotation.h"
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFAnnotation.h>
 
 
 @class PDFDestination, PDFAnnotationLinkPrivateVars;
@@ -15,11 +16,13 @@
     PDFAnnotationLinkPrivateVars *_pdfPriv2;
 }
 
-// Destination for the link.
+// Destination for the link. May be NULL if no destination associated with link; in this case the -[URL] may be valid.
+// The preferred way though is to call -[PDFAnnotation mouseUpAction] and -[PDFAnnotation setMouseUpAction].
 - (PDFDestination *) destination;
 - (void) setDestination: (PDFDestination *) destination;
 
-// URL for the link.
+// URL for the link. May be NULL if no URL action associated with link; in this case the -[destination] may be valid.
+// The preferred way though is to call -[PDFAnnotation mouseUpAction] and -[PDFAnnotation setMouseUpAction].
 - (NSURL *) URL;
 - (void) setURL: (NSURL *) url;
 

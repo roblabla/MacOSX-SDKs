@@ -1,5 +1,5 @@
 /*	CFPlugInCOM.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGINCOM__)
@@ -7,9 +7,7 @@
 
 #include <CoreFoundation/CFPlugIn.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /* ================= IUnknown definition (C struct) ================= */
 
@@ -59,7 +57,7 @@ typedef CFUUIDBytes REFIID;
 #define __RPC_FAR
 
 /* The IUnknown interface */
-#define IUnknownUUID CFUUIDGetConstantUUIDWithBytes(NULL, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)
+#define IUnknownUUID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)
 
 #define IUNKNOWN_C_GUTS \
     void *_reserved; \
@@ -71,10 +69,7 @@ typedef struct IUnknownVTbl {
     IUNKNOWN_C_GUTS;
 } IUnknownVTbl;
 
-/* End of extern "C" stuff */
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 
 /* C++ specific stuff */
@@ -86,7 +81,7 @@ typedef struct IUnknownVTbl {
 class IUnknown
 #if defined(__MWERKS__) && !defined(__MACH__)
  : __comobject
-#endif
+#endif /* __MWERKS__ && !__MACH__ */
 {
     public:
     virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID iid, LPVOID *ppv) = 0;
@@ -94,7 +89,7 @@ class IUnknown
     virtual ULONG STDMETHODCALLTYPE Release(void) = 0;
 };
 
-#endif
+#endif /* __cplusplus */
 
 #endif /* ! __COREFOUNDATION_CFPLUGINCOM__ */
 

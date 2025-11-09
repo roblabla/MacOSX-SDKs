@@ -1,6 +1,6 @@
 /*	
     NSURLProtocol.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -303,6 +303,18 @@ implementors.
     @param request The request in which to store the property. 
 */
 + (void)setProperty:(id)value forKey:(NSString *)key inRequest:(NSMutableURLRequest *)request;
+
+/*!
+    @method removePropertyForKey:inRequest:
+    @abstract Remove any property stored under the given key
+    @discussion Like setProperty:forKey:inRequest: above, the purpose of this
+        method is to give protocol implementors the ability to store 
+        protocol-specific information in an NSURLRequest
+    @param key The key whose value should be removed
+    @param request The request to be modified
+*/
++ (void)removePropertyForKey:(NSString *)key inRequest:(NSMutableURLRequest *)request;
+
 
 /*! 
     @method registerClass:

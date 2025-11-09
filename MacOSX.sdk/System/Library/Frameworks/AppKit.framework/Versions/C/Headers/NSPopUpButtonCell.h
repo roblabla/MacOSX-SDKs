@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -10,11 +10,12 @@
 
 @class NSMenu;
 
-typedef enum {
+enum {
     NSPopUpNoArrow = 0,
     NSPopUpArrowAtCenter = 1,
     NSPopUpArrowAtBottom = 2
-} NSPopUpArrowPosition;
+};
+typedef NSUInteger NSPopUpArrowPosition;
 
 @interface NSPopUpButtonCell : NSMenuItemCell {
     /*All instance variables are private*/
@@ -33,6 +34,9 @@ typedef enum {
         unsigned int drawing:1;
         unsigned int RESERVED:20;
     } _pbcFlags;
+#if __LP64__
+    id _popupReserved;
+#endif
 }
 
 - (id)initTextCell:(NSString *)stringValue pullsDown:(BOOL)pullDown;
@@ -42,6 +46,7 @@ typedef enum {
 - (NSMenu *)menu;
 
 // Behavior settings
+// If usesItemFromMenu is true, then pull down popup buttons always show the first item in the menu.  That menu item is hidden via [menuItem setHidden:YES]; if you wish to make it visible you can unhide it with setHidden:NO
 - (void)setPullsDown:(BOOL)flag;
 - (BOOL)pullsDown;
     
@@ -63,44 +68,44 @@ typedef enum {
 // Adding and removing items
 - (void)addItemWithTitle:(NSString *)title;
 - (void)addItemsWithTitles:(NSArray *)itemTitles;
-- (void)insertItemWithTitle:(NSString *)title atIndex:(int)index;
+- (void)insertItemWithTitle:(NSString *)title atIndex:(NSInteger)index;
 
 - (void)removeItemWithTitle:(NSString *)title;
-- (void)removeItemAtIndex:(int)index;
+- (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeAllItems;
 
 
 // Accessing the items
 - (NSArray *)itemArray;
-- (int)numberOfItems;
+- (NSInteger)numberOfItems;
 
-- (int)indexOfItem:(id <NSMenuItem>)item;
-- (int)indexOfItemWithTitle:(NSString *)title;
-- (int)indexOfItemWithTag:(int)tag;
-- (int)indexOfItemWithRepresentedObject:(id)obj;
-- (int)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
+- (NSInteger)indexOfItem:(NSMenuItem *)item;
+- (NSInteger)indexOfItemWithTitle:(NSString *)title;
+- (NSInteger)indexOfItemWithTag:(NSInteger)tag;
+- (NSInteger)indexOfItemWithRepresentedObject:(id)obj;
+- (NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
 
-- (id <NSMenuItem>)itemAtIndex:(int)index;
-- (id <NSMenuItem>)itemWithTitle:(NSString *)title;
-- (id <NSMenuItem>)lastItem;
+- (NSMenuItem *)itemAtIndex:(NSInteger)index;
+- (NSMenuItem *)itemWithTitle:(NSString *)title;
+- (NSMenuItem *)lastItem;
 
 
 // Dealing with selection
-- (void)selectItem:(id <NSMenuItem>)item;
-- (void)selectItemAtIndex:(int)index;
+- (void)selectItem:(NSMenuItem *)item;
+- (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (BOOL)selectItemWithTag:(int)tag;
+- (BOOL)selectItemWithTag:(NSInteger)tag;
 #endif
 - (void)setTitle:(NSString *)aString;
 
-- (id <NSMenuItem>)selectedItem;
-- (int)indexOfSelectedItem;
+- (NSMenuItem *)selectedItem;
+- (NSInteger)indexOfSelectedItem;
 - (void)synchronizeTitleAndSelectedItem;
 
 
 // Title conveniences
-- (NSString *)itemTitleAtIndex:(int)index;
+- (NSString *)itemTitleAtIndex:(NSInteger)index;
 - (NSArray *)itemTitles;
 - (NSString *)titleOfSelectedItem;
 
@@ -113,8 +118,8 @@ typedef enum {
 - (void)setArrowPosition:(NSPopUpArrowPosition)position;
 
 // Object values
-- (id <NSCopying>)objectValue;
-- (void)setObjectValue:(id <NSCopying>)obj;
+- (id)objectValue;
+- (void)setObjectValue:(id)obj;
 
 @end
 

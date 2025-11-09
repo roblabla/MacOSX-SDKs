@@ -1,7 +1,7 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,16 +10,16 @@
 @interface NSFormCell : NSActionCell
 {
     /*All instance variables are private*/
-    float	_titleWidth;
+    CGFloat	_titleWidth;
     id		_titleCell;
-    float	_titleEndPoint;
+    CGFloat	_titleEndPoint;
 }
 
 - (id)initTextCell:(NSString *)aString;
 
-- (float)titleWidth:(NSSize)aSize;
-- (float)titleWidth;
-- (void)setTitleWidth:(float)width;
+- (CGFloat)titleWidth:(NSSize)aSize;
+- (CGFloat)titleWidth;
+- (void)setTitleWidth:(CGFloat)width;
 - (NSString *)title;
 - (void)setTitle:(NSString *)aString;
 - (NSFont *)titleFont;

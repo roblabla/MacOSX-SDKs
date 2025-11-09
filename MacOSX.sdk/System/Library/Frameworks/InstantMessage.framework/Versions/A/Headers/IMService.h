@@ -23,12 +23,17 @@
 /*! @group Notifications */
 
 /*! Received from IMService's custom notification center. Posted when the user logs in, logs off, goes away, and so on. 
-	This notification is relevant to no particular object. The user information dictionary will not contain keys. The client 
+	This notification is for the IMService object. The user information dictionary will not contain keys. The client 
 	should call <tt>status</tt> to get the new status. */
 extern NSString *IMServiceStatusChangedNotification;
 
+/*! Received from IMService's custom notification center. Posted when the local user changes online status.
+	This notification is relevant to no particular object. The user information dictionary will not contain keys. 
+	The client should call <tt>myStatus</tt> to get the new status. */
+extern NSString *IMMyStatusChangedNotification;
+
 /*! Received from IMService's custom notification center. Posted when a different user (screenName) logs in, logs off, goes away, 
-	and so on. This notification is for the IMService object.The user information dictionary will always contain an 
+	and so on. This notification is for the IMService object. The user information dictionary will always contain an 
 	IMPersonScreenNameKey and an IMPersonStatusKey, and no others. */
 extern NSString *IMPersonStatusChangedNotification;
 
@@ -44,28 +49,38 @@ extern NSString *IMPersonInfoChangedNotification;
 	status information graphically (using the green/yellow/red dots) should call <tt>imageURLForStatus:</tt> to get the new image. 
 	See "Class Methods" for IMService in this document. */
 extern NSString *IMStatusImagesChangedAppearanceNotification;
-	
 
 /*! @group Status States */
 
-/*! Status states for the service (accessed using the status: instance method). <tt>IMServiceStatusDisconnected</tt> indicates the user
+/*! Status states for the service (accessed using the <tt>status:</tt> instance method). <tt>IMServiceStatusDisconnected</tt> indicates the user
 	was disconnected by the server, not by the user. */
-typedef enum _IMServiceStatus{
+enum {
     IMServiceStatusLoggedOut,
     IMServiceStatusDisconnected,     
     IMServiceStatusLoggingOut,
     IMServiceStatusLoggingIn,
     IMServiceStatusLoggedIn
-} IMServiceStatus;
+};
+typedef NSUInteger IMServiceStatus;
 
-/*! Online status states for a person (accessed using the IMPersonStatus key) */
-typedef enum _IMPersonStatus {
+/*! Online status states for a person (accessed using the <tt>IMPersonStatus</tt> key) */
+enum {
     IMPersonStatusUnknown,
     IMPersonStatusOffline,
     IMPersonStatusIdle,
     IMPersonStatusAway,
-    IMPersonStatusAvailable
-} IMPersonStatus;
+    IMPersonStatusAvailable,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    IMPersonStatusNoStatus
+#endif
+};
+typedef NSUInteger IMPersonStatus;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/*! Compare two IMPersonStatus values to determine which one has a higher availablity.
+ You should always use this function when comparing status values. */
+NSComparisonResult IMComparePersonStatus( IMPersonStatus status, IMPersonStatus compareTo );
+#endif
 
 // Keys for the notifications
 /*! @group Dictionary Keys */
@@ -123,14 +138,17 @@ extern NSString *IMCapabilityVideoConference;
 */
 @interface IMService : NSObject { }
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /*! 
-    @method imageURLForStatus   
-	@abstract Returns the URL of the image corresponding to the IMPersonStatus specified by <i>status</i>. This image reflects the 
-			  status of the user, and is usually reflected by a colored bubble or triangle.
-	@param status  An NSNumber from IMPersonStatus.
-	@result  Returns the newly initialized NSURL object with a URL to the image.
+    @method imageNameForStatus   
+    @abstract Returns the name of the image corresponding to the IMPersonStatus specified by <i>status</i>. This image reflects the 
+              status of the user, and is usually reflected by a colored bubble or triangle.
+    @param status  An NSNumber from IMPersonStatus.
+    @result  Returns an NSString with the name of an image suitable for passing to +[NSImage imageNamed:]
 */
-+ (NSURL *)imageURLForStatus:(IMPersonStatus)status;
++ (NSString *)imageNameForStatus:(IMPersonStatus)status;
+#endif
+
 /*! 
     @method allServices
 	@abstract Returns the list of services currently available to the user, regardless of their status.
@@ -233,4 +251,15 @@ extern NSString *IMCapabilityVideoConference;
 */
 - (NSArray *)screenNamesForPerson:(ABPerson *)person;
 
+@end
+
+@interface IMService (NSDeprecatedMethods)
+/*! DEPRECATED in 10.5 or newer, please use imageNameForStatus, and [NSImage imageNamed: name]
+    @method imageURLForStatus   
+    @abstract Returns the URL of the image corresponding to the IMPersonStatus specified by <i>status</i>. This image reflects the 
+    status of the user, and is usually reflected by a colored bubble or triangle.
+    @param status  An NSNumber from IMPersonStatus.
+    @result  Returns the newly initialized NSURL object with a URL to the image.
+*/
++ (NSURL *)imageURLForStatus:(IMPersonStatus)status AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 @end

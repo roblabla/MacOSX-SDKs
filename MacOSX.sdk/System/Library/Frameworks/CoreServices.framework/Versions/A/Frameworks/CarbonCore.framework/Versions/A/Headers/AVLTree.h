@@ -3,7 +3,7 @@
  
      Contains:   Interfaces for AVL balanced trees.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -189,7 +189,7 @@ typedef CALLBACK_API( SInt32 , AVLCompareItemsProcPtr )(AVLTreePtr tree, const v
  *  Result:
  *    The size of the item.
  */
-typedef CALLBACK_API( UInt32 , AVLItemSizeProcPtr )(AVLTreePtr tree, const void *itemPtr);
+typedef CALLBACK_API( ByteCount , AVLItemSizeProcPtr )(AVLTreePtr tree, const void *itemPtr);
 
 /*
  *  AVLDisposeItemProcPtr
@@ -280,7 +280,7 @@ typedef STACK_UPP_TYPE(AVLWalkProcPtr)                          AVLWalkUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLCompareItemsUPP
-NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewAVLItemSizeUPP()
@@ -291,7 +291,7 @@ NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLItemSizeUPP
-NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewAVLDisposeItemUPP()
@@ -302,7 +302,7 @@ NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLDisposeItemUPP
-NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewAVLWalkUPP()
@@ -313,7 +313,7 @@ NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLWalkUPP
-NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeAVLCompareItemsUPP()
@@ -324,7 +324,7 @@ NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeAVLItemSizeUPP()
@@ -335,7 +335,7 @@ DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeAVLDisposeItemUPP()
@@ -346,7 +346,7 @@ DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeAVLWalkUPP()
@@ -357,7 +357,7 @@ DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLWalkUPP(AVLWalkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAVLWalkUPP(AVLWalkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeAVLCompareItemsUPP()
@@ -373,7 +373,7 @@ InvokeAVLCompareItemsUPP(
   const void *        i1,
   const void *        i2,
   AVLNodeType         nd_typ,
-  AVLCompareItemsUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLCompareItemsUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeAVLItemSizeUPP()
@@ -383,11 +383,11 @@ InvokeAVLCompareItemsUPP(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
-extern UInt32
+extern ByteCount
 InvokeAVLItemSizeUPP(
   AVLTreePtr      tree,
   const void *    itemPtr,
-  AVLItemSizeUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLItemSizeUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeAVLDisposeItemUPP()
@@ -401,7 +401,7 @@ extern void
 InvokeAVLDisposeItemUPP(
   AVLTreePtr         tree,
   const void *       dataP,
-  AVLDisposeItemUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLDisposeItemUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeAVLWalkUPP()
@@ -420,10 +420,41 @@ InvokeAVLWalkUPP(
   UInt32         level,
   SInt32         balance,
   void *         refCon,
-  AVLWalkUPP     userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLWalkUPP     userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline AVLCompareItemsUPP                                   NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine) { return userRoutine; }
+    inline AVLItemSizeUPP                                       NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine) { return userRoutine; }
+    inline AVLDisposeItemUPP                                    NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine) { return userRoutine; }
+    inline AVLWalkUPP                                           NewAVLWalkUPP(AVLWalkProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeAVLCompareItemsUPP(AVLCompareItemsUPP) { }
+    inline void                                                 DisposeAVLItemSizeUPP(AVLItemSizeUPP) { }
+    inline void                                                 DisposeAVLDisposeItemUPP(AVLDisposeItemUPP) { }
+    inline void                                                 DisposeAVLWalkUPP(AVLWalkUPP) { }
+    inline SInt32                                               InvokeAVLCompareItemsUPP(AVLTreePtr tree, const void * i1, const void * i2, AVLNodeType nd_typ, AVLCompareItemsUPP userUPP) { return (*userUPP)(tree, i1, i2, nd_typ); }
+    inline ByteCount                                            InvokeAVLItemSizeUPP(AVLTreePtr tree, const void * itemPtr, AVLItemSizeUPP userUPP) { return (*userUPP)(tree, itemPtr); }
+    inline void                                                 InvokeAVLDisposeItemUPP(AVLTreePtr tree, const void * dataP, AVLDisposeItemUPP userUPP) { (*userUPP)(tree, dataP); }
+    inline OSErr                                                InvokeAVLWalkUPP(AVLTreePtr tree, const void * dataPtr, AVLVisitStage visitStage, AVLNodeType node, UInt32 level, SInt32 balance, void * refCon, AVLWalkUPP userUPP) { return (*userUPP)(tree, dataPtr, visitStage, node, level, balance, refCon); }
+  #else
+    #define NewAVLCompareItemsUPP(userRoutine)                  ((AVLCompareItemsUPP)userRoutine)
+    #define NewAVLItemSizeUPP(userRoutine)                      ((AVLItemSizeUPP)userRoutine)
+    #define NewAVLDisposeItemUPP(userRoutine)                   ((AVLDisposeItemUPP)userRoutine)
+    #define NewAVLWalkUPP(userRoutine)                          ((AVLWalkUPP)userRoutine)
+    #define DisposeAVLCompareItemsUPP(userUPP)
+    #define DisposeAVLItemSizeUPP(userUPP)
+    #define DisposeAVLDisposeItemUPP(userUPP)
+    #define DisposeAVLWalkUPP(userUPP)
+    #define InvokeAVLCompareItemsUPP(tree, i1, i2, nd_typ, userUPP) (*userUPP)(tree, i1, i2, nd_typ)
+    #define InvokeAVLItemSizeUPP(tree, itemPtr, userUPP)        (*userUPP)(tree, itemPtr)
+    #define InvokeAVLDisposeItemUPP(tree, dataP, userUPP)       (*userUPP)(tree, dataP)
+    #define InvokeAVLWalkUPP(tree, dataPtr, visitStage, node, level, balance, refCon, userUPP) (*userUPP)(tree, dataPtr, visitStage, node, level, balance, refCon)
+  #endif
+#endif
+
+#if !__LP64__
 /*
- *  AVLInit()
+ *  AVLInit()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Create an AVL ( balanced binary ) tree
@@ -473,7 +504,7 @@ InvokeAVLWalkUPP(
  *      The created AVLTree, or NULL if there is an error.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -484,11 +515,11 @@ AVLInit(
   AVLItemSizeUPP       sizeItemProc,
   AVLDisposeItemUPP    disposeItemProc,
   void *               refCon,
-  AVLTreePtr *         tree)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLTreePtr *         tree)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLDispose()
+ *  AVLDispose()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Dispose of an AVL tree created with AVLInit()
@@ -513,18 +544,18 @@ AVLInit(
  *      The order to dispose of the items in the tree.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
 AVLDispose(
   AVLTreePtr *  tree,
-  AVLOrder      order)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLOrder      order)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLWalk()
+ *  AVLWalk()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Iterate across all of the items in an AVL tree, in a specified
@@ -581,7 +612,7 @@ AVLDispose(
  *      A 32 bit value passed to the walkProc each time it is called.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -590,11 +621,11 @@ AVLWalk(
   AVLTreePtr   tree,
   AVLWalkUPP   walkProc,
   AVLOrder     order,
-  void *       walkRefCon)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *       walkRefCon)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLCount()
+ *  AVLCount()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the number of items in the given tree.
@@ -617,18 +648,18 @@ AVLWalk(
  *      On return, the count of items ( 1-based ) in the tree.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
 AVLCount(
   AVLTreePtr   tree,
-  UInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLGetIndItem()
+ *  AVLGetIndItem()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the data of the index-th item from the tree.
@@ -667,7 +698,7 @@ AVLCount(
  *      do not care about the size of the data, pass NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -676,11 +707,11 @@ AVLGetIndItem(
   AVLTreePtr   tree,
   UInt32       index,
   void *       dataPtr,
-  UInt32 *     itemSize)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *  itemSize)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLInsert()
+ *  AVLInsert()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Insert an item into the tree.
@@ -709,18 +740,18 @@ AVLGetIndItem(
  *      A pointer to the item to be inserted.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
 AVLInsert(
   AVLTreePtr    tree,
-  const void *  data)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *  data)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLRemove()
+ *  AVLRemove()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Remove an item from the tree.
@@ -761,7 +792,7 @@ AVLInsert(
  *      do not care about the size of the data, pass NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -770,11 +801,11 @@ AVLRemove(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  UInt32 *      itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *   itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLFind()
+ *  AVLFind()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Remove an item from the tree.
@@ -813,7 +844,7 @@ AVLRemove(
  *      do not care about the size of the data, pass NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
@@ -822,11 +853,11 @@ AVLFind(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  UInt32 *      itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *   itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  AVLGetRefcon()
+ *  AVLGetRefcon()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the refCon set when the tree was created.
@@ -849,18 +880,20 @@ AVLFind(
  *      On return, the refCon for the tree, or NULL if tree is invalid.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
 AVLGetRefcon(
   AVLTreePtr   tree,
-  void **      refCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **      refCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

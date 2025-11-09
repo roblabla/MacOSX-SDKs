@@ -2,7 +2,7 @@
 //  ABPeoplePickerC.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #ifndef __PEOPLEPICKERC__
@@ -144,8 +144,8 @@ enum {
 };
 
     // Set the event handler for People Picker events.
-extern void ABPickerSetDelegate(ABPickerRef inPicker, HIObjectRef inDelegate) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern HIObjectRef ABPickerGetDelegate(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern void ABPickerSetDelegate(ABPickerRef inPicker, EventTargetRef inDelegate) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern EventTargetRef ABPickerGetDelegate(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
     // Clear the search field and reset the list of displayed names.
 extern void ABPickerClearSearchField(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

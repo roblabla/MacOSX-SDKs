@@ -3,7 +3,7 @@
  
      Contains:   Carbon Font Panel package Interfaces.
  
-     Version:    CommonPanels-73.2~861
+     Version:    CommonPanels-87~138
  
      Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved
  
@@ -29,6 +29,7 @@
 #endif
 
 
+
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -39,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Font Panel-Related Events
@@ -89,10 +90,10 @@ enum {
  *    kEventWindowClosed has no parameters. When the user selects an
  *    item in the Font Panel, the system will send a
  *    kEventFontSelection event to the event target specified when the
- *    application called SetFontPanelInfo(). kEventFontSelection will
- *    contain parameters reflecting the current Font Panel selection in
- *    all supported formats. Font events are available after Mac OS X
- *    10.2 in the Carbon framework.
+ *    application called SetFontInfoForSelection(). kEventFontSelection
+ *    will contain parameters reflecting the current Font Panel
+ *    selection in all supported formats. Font events are available
+ *    after Mac OS X 10.2 in the Carbon framework.
  */
 enum {
 
@@ -125,27 +126,33 @@ enum {
         -->     kEventParamFMFontFamily             typeFMFontFamily
         -->     kEventParamFMFontSize               typeFMFontSize
         -->     kEventParamFontColor                typeFontColor
-        -->     kEventParamDictionary               typeCFDictionary 
+        -->     kEventParamDictionary               typeCFDictionaryRef 
+        -->     kEventParamViewAttributesDictionary typeCFDictionaryRef
+                A dictionary containing attributes that can be applied to an entire text view.  An example of this is the background color to 
+                apply to the view.
 */
 enum {
+  typeCTFontDescriptorRef       = typeCFTypeRef, /* CTFontDescriptor reference.*/
   typeATSUFontID                = typeUInt32, /* ATSUI font ID.*/
   typeATSUSize                  = typeFixed, /* ATSUI font size.*/
   typeFMFontFamily              = typeSInt16, /* Font family reference.*/
   typeFMFontStyle               = typeSInt16, /* Quickdraw font style*/
   typeFMFontSize                = typeSInt16, /* Integer font size.*/
   typeFontColor                 = typeRGBColor, /* Font color spec (optional).*/
+  kEventParamCTFontDescriptor   = 'ctfd', /* typeCTFontDescriptorRef*/
   kEventParamATSUFontID         = 'auid', /* typeATSUFontID*/
   kEventParamATSUFontSize       = 'ausz', /* typeATSUSize*/
   kEventParamFMFontFamily       = 'fmfm', /* typeFMFontFamily*/
   kEventParamFMFontStyle        = 'fmst', /* typeFMFontStyle*/
   kEventParamFMFontSize         = 'fmsz', /* typeFMFontSize*/
   kEventParamFontColor          = 'fclr', /* typeFontColor*/
-  kEventParamDictionary         = 'dict' /*    typeCFDictionaryRef*/
+  kEventParamDictionary         = 'dict', /*    typeCFDictionaryRef*/
+  kEventParamViewAttributesDictionary = 'dadc' /*    typeCFDictionaryRef*/
 };
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Key constants to be used to access data inside the dictionary that may
-    be contained in the kEventFontSelection dictionary.
+    be contained in the kEventFontSelection dictionary. (kEventParamDictionary)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
  *  kFontPanelATSUFontIDKey
@@ -268,6 +275,40 @@ extern const CFStringRef kFontPanelAttributeSizesKey                 AVAILABLE_M
  */
 extern const CFStringRef kFontPanelAttributeValuesKey                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 /*Value is a CFDataRef containing one or more style values*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Keys to access to access the optional mouse tracking state if the font attribute/feature control is tracking
+An application can look for this optional value to aid in supporting undo/redo for a font attribute/feature that is represented by
+a control that tracks such as a slider.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*
+ *  kFontPanelMouseTrackingState
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kFontPanelMouseTrackingState                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+   The value referenced by this key is a CFNumberRef that will contain one of the following values
+  from CarbonEvents.h
+   kEventMouseDown
+   kEventMouseUp
+   kEventMouseDragged
+*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Keys to access the data from the document attributes dictionary (kEventParamViewAttributesDictionary)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*
+ *  kFontPanelBackgroundColorAttributeName
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kFontPanelBackgroundColorAttributeName      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Other Font Panel Constants
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -281,13 +322,14 @@ enum {
 };
 
 /*
-Type of font information passed in SetFontPanelInfo(). If the client is
+Type of font information passed in SetFontInfoForSelection(). If the client is
 sending ATSUI style data, it specifies kFontSelectionATSUIType; if it is
 sending Quickdraw style data, it specifies kFontSelectionQDType.
 */
 enum {
   kFontSelectionATSUIType       = 'astl', /* Use ATSUIStyle collection.*/
-  kFontSelectionQDType          = 'qstl' /* Use FontSelectionQDStyle record.*/
+  kFontSelectionQDType          = 'qstl', /* Use FontSelectionQDStyle record.*/
+  kFontSelectionCoreTextType    = 'ctfd' /* Use CTFontDescriptorRef.*/
 };
 
 /*
@@ -305,7 +347,7 @@ enum {
 /*
 Record specifying the font information to be specified in the Font
 Panel. This record is used if the client is sending Quickdraw style data
-(i.e., it specified kFontSelectionQDType in SetFontPanelInfo()).
+(i.e., it specified kFontSelectionQDType in SetFontInfoForSelection()).
 */
 struct FontSelectionQDStyle {
   UInt32              version;                /* Version number of struct.*/
@@ -646,6 +688,7 @@ extern FCFontDescriptorRef
 FCFontDescriptorCreateWithFontAttributes(CFDictionaryRef iAttributes) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
+
 /*
  *  FCFontDescriptorCreateWithName()
  *  
@@ -671,11 +714,11 @@ FCFontDescriptorCreateWithFontAttributes(CFDictionaryRef iAttributes) AVAILABLE_
 extern FCFontDescriptorRef 
 FCFontDescriptorCreateWithName(
   CFStringRef   iFontName,
-  float         iSize)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGFloat       iSize)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

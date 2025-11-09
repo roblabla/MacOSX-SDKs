@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -347,6 +347,21 @@ enum
 	kINQUIRY_Byte56_CLOCKING_ST_AND_DT		= 0x0C
 };
 
+#if 0
+#pragma mark -
+#pragma mark ¥ INQUIRY VERSION_DESCRIPTOR Definitions
+#pragma mark -
+#endif
+
+
+#define	kINQUIRY_VERSION_DESCRIPTOR_MaxCount		8
+
+enum
+{
+	kINQUIRY_VERSION_DESCRIPTOR_SAT					= 0x1EA0
+};
+	
+
 // IORegistry property names for information derived from the Inquiry data.
 // The Peripheral Device Type is the only property that the 
 // generic Logical Unit Drivers will use to match.
@@ -366,7 +381,8 @@ enum
 {
 	kINQUIRY_Page00_PageCode				= 0x00,
 	kINQUIRY_Page80_PageCode				= 0x80,
-	kINQUIRY_Page83_PageCode				= 0x83
+	kINQUIRY_Page83_PageCode				= 0x83,
+	kINQUIRY_Page89_PageCode				= 0x89
 };	
 
 
@@ -446,11 +462,10 @@ enum
 	kINQUIRY_Page83_CodeSetBinaryData		= 0x1,
 	kINQUIRY_Page83_CodeSetASCIIData		= 0x2,
 	kINQUIRY_Page83_CodeSetUTF8Data			= 0x3,
-	// 0x3 - 0xF
-
+	// 0x4 - 0xF reserved
 	kINQUIRY_Page83_CodeSetMask				= 0xF
 };	
-		
+
 // Definitions for the Association field
 enum
 {
@@ -474,19 +489,44 @@ enum
 // Definitions for the Identifier type field
 enum
 {
-	kINQUIRY_Page83_IdentifierTypeUndefined					= 0x0,
-	kINQUIRY_Page83_IdentifierTypeVendorID					= 0x1,
-	kINQUIRY_Page83_IdentifierTypeIEEE_EUI64				= 0x2,
-	kINQUIRY_Page83_IdentifierTypeFCNameIdentifier			= 0x3,
-	kINQUIRY_Page83_IdentifierTypeRelativePortIdentifier	= 0x4,
-	kINQUIRY_Page83_IdentifierTypeTargetPortGroup			= 0x5,
-	kINQUIRY_Page83_IdentifierTypeLogicalUnitGroup			= 0x6,
-	kINQUIRY_Page83_IdentifierTypeMD5LogicalUnitIdentifier  = 0x7,
-	kINQUIRY_Page83_IdentifierTypeSCSINameString			= 0x8,
-	// 0x5 - 0xF
-
-	kINQUIRY_Page83_IdentifierTypeMask						= 0xF
+	kINQUIRY_Page83_IdentifierTypeUndefined					= 0,
+	kINQUIRY_Page83_IdentifierTypeVendorID					= 1,
+	kINQUIRY_Page83_IdentifierTypeIEEE_EUI64				= 2,
+	kINQUIRY_Page83_IdentifierTypeNAAIdentifier				= 3,
+	kINQUIRY_Page83_IdentifierTypeRelativePortIdentifier	= 4,
+	kINQUIRY_Page83_IdentifierTypeTargetPortGroup			= 5,
+	kINQUIRY_Page83_IdentifierTypeLogicalUnitGroup			= 6,
+	kINQUIRY_Page83_IdentifierTypeMD5LogicalUnitIdentifier  = 7,
+	kINQUIRY_Page83_IdentifierTypeSCSINameString			= 8,
+	// 0x9 - 0xF Reserved
+	
+	kINQUIRY_Page83_IdentifierTypeMask						= 0xF,
+	
+	kINQUIRY_Page83_ProtocolIdentifierValidBit				= 7,
+	kINQUIRY_Page83_ProtocolIdentifierValidMask				= (1 << kINQUIRY_Page83_ProtocolIdentifierValidBit)
+	
 };	
+
+// Backwards compatibility
+#define kINQUIRY_Page83_IdentifierTypeFCNameIdentifier		kINQUIRY_Page83_IdentifierTypeNAAIdentifier
+
+
+// Definitions for the protocol identifier values
+enum
+{
+	kSCSIProtocolIdentifier_FibreChannel					= 0,
+	kSCSIProtocolIdentifier_ParallelSCSI					= 1,
+	kSCSIProtocolIdentifier_SSA								= 2,
+	kSCSIProtocolIdentifier_FireWire						= 3,
+	kSCSIProtocolIdentifier_RDMA							= 4,
+	kSCSIProtocolIdentifier_iSCSI							= 5,
+	kSCSIProtocolIdentifier_SAS								= 6,
+	kSCSIProtocolIdentifier_ADT								= 7,
+	kSCSIProtocolIdentifier_ATAPI							= 8,
+	// 0x9-0xE Reserved
+	kSCSIProtocolIdentifier_None							= 0xF
+};
+
 
 #define kIOPropertySCSIINQUIRYDeviceIdentification		"INQUIRY Device Identification"
 #define kIOPropertySCSIINQUIRYDeviceIdCodeSet			"Code Set"
@@ -494,5 +534,34 @@ enum
 #define kIOPropertySCSIINQUIRYDeviceIdAssociation		"Association"
 #define kIOPropertySCSIINQUIRYDeviceIdentifier			"Identifier"
 		
+
+#if 0
+#pragma mark -
+#pragma mark ¥ INQUIRY Device ID Page 89 Definitions
+#pragma mark -
+#endif
+
+// This section contians all structures and definitions used by the INQUIRY
+// command in response to a request for page 89h - ATA information VPD Page 
+
+typedef struct SCSICmd_INQUIRY_Page89_Data
+{
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;							// Must be equal to 89h
+	UInt16		PAGE_LENGTH;						// Must be equal to 238h
+	UInt32		Reserved;
+	UInt8		SAT_VENDOR_IDENTIFICATION[kINQUIRY_VENDOR_IDENTIFICATION_Length];
+	UInt8		SAT_PRODUCT_IDENTIFICATION[kINQUIRY_PRODUCT_IDENTIFICATION_Length];
+	UInt8		SAT_PRODUCT_REVISION_LEVEL[kINQUIRY_PRODUCT_REVISION_LEVEL_Length];
+	UInt8		ATA_DEVICE_SIGNATURE[20];
+	UInt8		COMMAND_CODE;
+	UInt8		Reserved2[3];
+	UInt8		IDENTIFY_DATA[512];
+} SCSICmd_INQUIRY_Page89_Data;
+
+
+#define kIOPropertySATVendorIdentification			"SAT Vendor Identification"
+#define kIOPropertySATProductIdentification			"SAT Product Identification"
+#define kIOPropertySATProductRevisonLevel			"SAT Product Revision Level"
 
 #endif	/* _IOKIT_SCSI_CMDS_INQUIRY_H_ */

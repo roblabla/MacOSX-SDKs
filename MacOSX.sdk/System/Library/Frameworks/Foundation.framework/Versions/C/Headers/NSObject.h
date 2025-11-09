@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -13,7 +13,7 @@
 @protocol NSObject
 
 - (BOOL)isEqual:(id)object;
-- (unsigned)hash;
+- (NSUInteger)hash;
 
 - (Class)superclass;
 - (Class)class;
@@ -35,7 +35,7 @@
 - (id)retain;
 - (oneway void)release;
 - (id)autorelease;
-- (unsigned)retainCount;
+- (NSUInteger)retainCount;
 
 - (NSString *)description;
 
@@ -76,9 +76,7 @@
 + (id)alloc;
 - (void)dealloc;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (void)finalize;
-#endif
+- (void)finalize AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 - (id)copy;
 - (id)mutableCopy;
@@ -88,45 +86,57 @@
 
 + (Class)superclass;
 + (Class)class;
-+ (void)poseAsClass:(Class)aClass;
 + (BOOL)instancesRespondToSelector:(SEL)aSelector;
 + (BOOL)conformsToProtocol:(Protocol *)protocol;
 - (IMP)methodForSelector:(SEL)aSelector;
 + (IMP)instanceMethodForSelector:(SEL)aSelector;
-+ (int)version;
-+ (void)setVersion:(int)aVersion;
 - (void)doesNotRecognizeSelector:(SEL)aSelector;
+
+// - (id)forwardingTargetForSelector:(SEL)aSelector;
 - (void)forwardInvocation:(NSInvocation *)anInvocation;
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
 
 + (NSMethodSignature *)instanceMethodSignatureForSelector:(SEL)aSelector;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-+ (BOOL)isSubclassOfClass:(Class)aClass;
-#endif
-
 + (NSString *)description;
 
++ (BOOL)isSubclassOfClass:(Class)aClass AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
++ (BOOL)resolveClassMethod:(SEL)sel AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (BOOL)resolveInstanceMethod:(SEL)sel AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+@end
+
+@interface NSObject (NSCoderMethods)
+
++ (NSInteger)version;
++ (void)setVersion:(NSInteger)aVersion;
 - (Class)classForCoder;
 - (id)replacementObjectForCoder:(NSCoder *)aCoder;
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder;
 
 @end
 
+@interface NSObject (NSDeprecatedMethods)
+
++ (void)poseAsClass:(Class)aClass DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+@end
+
 /***********	Object Allocation / Deallocation		*******/
     
-FOUNDATION_EXPORT id <NSObject> NSAllocateObject(Class aClass, unsigned extraBytes, NSZone *zone);
+FOUNDATION_EXPORT id NSAllocateObject(Class aClass, NSUInteger extraBytes, NSZone *zone);
 
-FOUNDATION_EXPORT void NSDeallocateObject(id <NSObject>object);
+FOUNDATION_EXPORT void NSDeallocateObject(id object);
 
-FOUNDATION_EXPORT id <NSObject> NSCopyObject(id <NSObject>object, unsigned extraBytes, NSZone *zone);
+FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone *zone);
 
-FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id <NSObject> anObject, NSZone *requestedZone);
+FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id anObject, NSZone *requestedZone);
 
 FOUNDATION_EXPORT void NSIncrementExtraRefCount(id object);
 
 FOUNDATION_EXPORT BOOL NSDecrementExtraRefCountWasZero(id object);
 
-FOUNDATION_EXPORT unsigned NSExtraRefCount(id object);
+FOUNDATION_EXPORT NSUInteger NSExtraRefCount(id object);
 
 

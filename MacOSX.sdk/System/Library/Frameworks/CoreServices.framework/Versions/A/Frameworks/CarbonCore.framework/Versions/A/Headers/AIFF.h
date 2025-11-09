@@ -3,7 +3,7 @@
  
      Contains:   Definition of AIFF file format components.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
   AIFFID                        = 'AIFF',
@@ -55,9 +55,10 @@ enum {
   ForwardBackwardLooping        = 2
 };
 
+
 enum {
-                                        /* AIFF-C Versions */
-  AIFCVersion1                  = (long)0xA2805140
+    /* AIFF-C Versions */
+  AIFCVersion1                  = (uint32_t)0xA2805140
 };
 
 /* Compression Names */
@@ -75,42 +76,42 @@ enum {
   MACE6Type                     = 'MAC6'
 };
 
-typedef unsigned long                   ID;
-typedef short                           MarkerIdType;
+typedef UInt32                          ID;
+typedef SInt16                          MarkerIdType;
 struct ChunkHeader {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
 };
 typedef struct ChunkHeader              ChunkHeader;
 struct ContainerChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   ID                  formType;
 };
 typedef struct ContainerChunk           ContainerChunk;
 struct FormatVersionChunk {
   ID                  ckID;
-  long                ckSize;
-  unsigned long       timestamp;
+  SInt32              ckSize;
+  UInt32              timestamp;
 };
 typedef struct FormatVersionChunk       FormatVersionChunk;
 typedef FormatVersionChunk *            FormatVersionChunkPtr;
 struct CommonChunk {
   ID                  ckID;
-  long                ckSize;
-  short               numChannels;
-  unsigned long       numSampleFrames;
-  short               sampleSize;
+  SInt32              ckSize;
+  SInt16              numChannels;
+  UInt32              numSampleFrames;
+  SInt16              sampleSize;
   extended80          sampleRate;
 };
 typedef struct CommonChunk              CommonChunk;
 typedef CommonChunk *                   CommonChunkPtr;
 struct ExtCommonChunk {
   ID                  ckID;
-  long                ckSize;
-  short               numChannels;
-  unsigned long       numSampleFrames;
-  short               sampleSize;
+  SInt32              ckSize;
+  SInt16              numChannels;
+  UInt32              numSampleFrames;
+  SInt16              sampleSize;
   extended80          sampleRate;
   ID                  compressionType;
   char                compressionName[1];     /* variable length array, Pascal string */
@@ -119,42 +120,42 @@ typedef struct ExtCommonChunk           ExtCommonChunk;
 typedef ExtCommonChunk *                ExtCommonChunkPtr;
 struct SoundDataChunk {
   ID                  ckID;
-  long                ckSize;
-  unsigned long       offset;
-  unsigned long       blockSize;
+  SInt32              ckSize;
+  UInt32              offset;
+  UInt32              blockSize;
 };
 typedef struct SoundDataChunk           SoundDataChunk;
 typedef SoundDataChunk *                SoundDataChunkPtr;
 struct Marker {
   MarkerIdType        id;
-  unsigned long       position;
+  UInt32              position;
   Str255              markerName;
 };
 typedef struct Marker                   Marker;
 struct MarkerChunk {
   ID                  ckID;
-  long                ckSize;
-  unsigned short      numMarkers;
+  SInt32              ckSize;
+  UInt16              numMarkers;
   Marker              Markers[1];             /* variable length array */
 };
 typedef struct MarkerChunk              MarkerChunk;
 typedef MarkerChunk *                   MarkerChunkPtr;
 struct AIFFLoop {
-  short               playMode;
+  SInt16              playMode;
   MarkerIdType        beginLoop;
   MarkerIdType        endLoop;
 };
 typedef struct AIFFLoop                 AIFFLoop;
 struct InstrumentChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   UInt8               baseFrequency;
   UInt8               detune;
   UInt8               lowFrequency;
   UInt8               highFrequency;
   UInt8               lowVelocity;
   UInt8               highVelocity;
-  short               gain;
+  SInt16              gain;
   AIFFLoop            sustainLoop;
   AIFFLoop            releaseLoop;
 };
@@ -162,50 +163,50 @@ typedef struct InstrumentChunk          InstrumentChunk;
 typedef InstrumentChunk *               InstrumentChunkPtr;
 struct MIDIDataChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   UInt8               MIDIdata[1];            /* variable length array */
 };
 typedef struct MIDIDataChunk            MIDIDataChunk;
 typedef MIDIDataChunk *                 MIDIDataChunkPtr;
 struct AudioRecordingChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   UInt8               AESChannelStatus[24];
 };
 typedef struct AudioRecordingChunk      AudioRecordingChunk;
 typedef AudioRecordingChunk *           AudioRecordingChunkPtr;
 struct ApplicationSpecificChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   OSType              applicationSignature;
   UInt8               data[1];                /* variable length array */
 };
 typedef struct ApplicationSpecificChunk ApplicationSpecificChunk;
 typedef ApplicationSpecificChunk *      ApplicationSpecificChunkPtr;
 struct Comment {
-  unsigned long       timeStamp;
+  UInt32              timeStamp;
   MarkerIdType        marker;
-  unsigned short      count;
+  UInt16              count;
   char                text[1];                /* variable length array, Pascal string */
 };
 typedef struct Comment                  Comment;
 struct CommentsChunk {
   ID                  ckID;
-  long                ckSize;
-  unsigned short      numComments;
+  SInt32              ckSize;
+  UInt16              numComments;
   Comment             comments[1];            /* variable length array */
 };
 typedef struct CommentsChunk            CommentsChunk;
 typedef CommentsChunk *                 CommentsChunkPtr;
 struct TextChunk {
   ID                  ckID;
-  long                ckSize;
+  SInt32              ckSize;
   char                text[1];                /* variable length array, Pascal string */
 };
 typedef struct TextChunk                TextChunk;
 typedef TextChunk *                     TextChunkPtr;
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __AIFF__ */

@@ -1,10 +1,10 @@
-//
-//  InstallerSection.h
-//  InstallerSection
-//
-//  Created by Christopher Ryan on Mon Dec 01 2003.
-//  Copyright (c) 2003 Apple Comptuer. All rights reserved.
-//
+/*
+	InstallerSection.h
+	InstallerPlugins
+	Copyright (c) 2003-2005 Apple Computer, Inc.
+	All rights reserved.
+*/
+
 /*!
     @header InstallerSection
     @discussion Contains the InstallerSection class definition
@@ -100,8 +100,9 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 
 /*!
     @method     didLoadMainNib
-    @discussion Called immediatly after the default nib for the section is loaded.  If no default nib is specified,
-				didLoadMainNib is called immediatly after willLoadMainNib is called.
+    @discussion Called immediatly after the default nib for the section is loaded.
+				If no default nib is specified, didLoadMainNib is called immediately
+				after willLoadMainNib is called.
  
 				didLoadMainNib is called before the section's panes are in view.
  
@@ -110,10 +111,10 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 
 /*!
     @method		sharedDictionary
-    @discussion A global Mutable Dictionary which is global to the Install session.  Use this dictionary to pass information
-				between sections.
+    @discussion A global Mutable Dictionary which is global to the Install
+				session. Use this dictionary to pass information between sections.
  
-				This dictionary should not be used to store state for your section or it's panes.
+				This dictionary should not be used to store state for your section or its panes.
 */
 - (NSMutableDictionary *)sharedDictionary;
 

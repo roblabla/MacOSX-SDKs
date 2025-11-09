@@ -3,7 +3,7 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
   kAppearanceEventClass         = 'appr', /* Event Class */
@@ -181,7 +181,8 @@ enum {
   kAppearanceRegionCollapseBox  = 7,
   kAppearanceRegionTitleProxyIcon = 8,  /* Mac OS 8.5 forward*/
   kAppearanceRegionStructure    = 32,
-  kAppearanceRegionContent      = 33    /* Content area of the window; empty when the window is collapsed*/
+  kAppearanceRegionContent      = 33,   /* Content area of the window; empty when the window is collapsed*/
+  kAppearanceRegionToolbarButton = 41
 };
 
 
@@ -579,7 +580,7 @@ enum {
    * A special cursor to indicate that letting up the mouse will cause
    * a dragged item to go away. When the item goes away, a poof cloud
    * animation should occur. This cursor should be updated dynamically
-   * dependeding on whether the mouse up action will remove the item.
+   * depending on whether the mouse up action will remove the item.
    * Available in Mac OS X 10.3 or later.
    */
   kThemePoofCursor              = 22
@@ -796,7 +797,7 @@ enum {
    * The font used to draw file and folder names in Finder windows or
    * other browsable lists.
    */
-  kThemeViewsFont               = 3,    /* The following ID's are only available with MacOS X or CarbonLib 1.3 and later*/
+  kThemeViewsFont               = 3,
 
   /*
    * Identical to kThemeSystemFont, except it draws bolded (or
@@ -821,6 +822,8 @@ enum {
    * available on Mac OS X or CarbonLib 1.3 or later.
    */
   kThemeLabelFont               = 6,
+  kThemeSystemFontDetail        = 7,
+  kThemeSystemFontDetailEmphasized = 8,
 
   /*
    * The font used to draw menu titles in the menu bar. Only available
@@ -869,8 +872,18 @@ enum {
    * alert window. Only available on Mac OS X or CarbonLib 1.3 or later.
    */
   kThemeAlertHeaderFont         = 107,
-  kThemeSystemFontDetail        = 7,
-  kThemeSystemFontDetailEmphasized = 8,
+
+  /*
+   * The font used to draw the label of a toolbar item. Available in
+   * Mac OS X 10.2 or later.
+   */
+  kThemeToolbarFont             = 108,
+
+  /*
+   * The appropriate system font for mini-sized controls. Available in
+   * Mac OS X 10.3 or later.
+   */
+  kThemeMiniSystemFont          = 109,
 
   /*
    * Unlike the other ThemeFontIDs, this one doesn't map to a font
@@ -897,21 +910,20 @@ enum {
   kThemeCurrentPortFont         = 200,
 
   /*
-   * The font used to draw the label of a toolbar item. Available in
-   * Mac OS X 10.2 or later.
+   * Only to be used as a fontID parameter in the HIThemeTextInfo
+   * structure. It allows the caller to measure and draw text using a
+   * CTFontRef and is the correct method for using custom fonts due to
+   * QuickDraw deprecation. When the fontID parameter of the
+   * HIThemeTextInfo structure is kThemeSpecifiedFont, the version
+   * field must be kHIThemeTextInfoVersionOne and the font field must
+   * be a valid CTFontRef. Available in Mac OS X 10.5 or later.
    */
-  kThemeToolbarFont             = 108,
-
-  /*
-   * The appropriate system font for mini-sized controls. Available in
-   * Mac OS X 10.3 or later.
-   */
-  kThemeMiniSystemFont          = 109
+  kThemeSpecifiedFont           = 201
 };
 
 /* This is the total of the PUBLIC ThemeFontIDs!*/
 enum {
-  kPublicThemeFontCount         = 20
+  kPublicThemeFontCount         = 21
 };
 
 typedef UInt16                          ThemeFontID;
@@ -1174,9 +1186,16 @@ enum {
 
   /*
    * The thumb has focus.  This attribute currently has effect only on
-   * sliders.  Available only in Mac OS X after 10.1.
+   * sliders.  Available only in Mac OS X 10.2 and later.
    */
-  kThemeTrackHasFocus           = (1 << 5)
+  kThemeTrackHasFocus           = (1 << 5),
+
+  /*
+   * The track's track (i.e. the groove for a slider or the
+   * gutter+arrows of a scroll bar) should not be drawn. Available only
+   * in Mac OS X 10.5 and later.
+   */
+  kThemeTrackHideTrack          = (1 << 6)
 };
 
 typedef UInt16                          ThemeTrackAttributes;
@@ -1677,7 +1696,7 @@ enum {
    * normal size. Since a mini variant was introduced in Mac OS X 10.3,
    * smaller than normal size is can also mean mini. To avoid confusion
    * with existing code, the mini variant will never be implicitly
-   * determined and must be explicity requested with the
+   * determined and must be explicitly requested with the
    * kThemePushButtonMini constant.
    */
   kThemePushButtonMini          = 27,
@@ -1707,7 +1726,7 @@ enum {
    * were normal size. Since a mini variant was introduced in Mac OS X
    * 10.3, smaller than normal size is can also mean mini. To avoid
    * confusion with existing code, the mini variant will never be
-   * implicitly determined and must be explicity requested with the
+   * implicitly determined and must be explicitly requested with the
    * kThemePopupButtonMini constant.
    */
   kThemePopupButtonMini         = 30
@@ -1883,7 +1902,14 @@ enum {
   /*
    * Draw a up arrow on the arrow button.
    */
-  kThemeAdornmentArrowUpArrow   = (1 << 9)
+  kThemeAdornmentArrowUpArrow   = (1 << 9),
+
+  /*
+   * Draw a right disclosure triangle. Can be combined with
+   * kThemeAdornmentArrowDownArrow to draw an intermediate disclosure
+   * triangle.
+   */
+  kThemeAdornmentArrowRightArrow = (1 << 10)
 };
 
 
@@ -1983,7 +2009,7 @@ typedef OSType                          ThemeDragSoundKind;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* State-change sounds                                                      */
 /*                                                                          */
-/* State-change sounds are played asynchonously as a one-shot.              */
+/* State-change sounds are played asynchronously as a one-shot.             */
 /*                                                                          */
 /* Call PlayThemeSound to play the sound.  The sound will play              */
 /* asynchronously until complete, then stop automatically.                  */
@@ -2269,7 +2295,7 @@ enum {
   kThemeMetricSmallTabCapsWidth = 16,
 
   /*
-   * The height and the width of the push button control.
+   * The height of the push button control.
    */
   kThemeMetricPushButtonHeight  = 19,
 
@@ -2670,9 +2696,49 @@ enum {
   /*
    * The minimum thumb width for a thumb on a small scroll bar.
    */
-  kThemeMetricSmallScrollBarMinThumbWidth = 135
+  kThemeMetricSmallScrollBarMinThumbWidth = 135,
+
+  /*
+   * The height of the round-ended button. (For example, the Kind
+   * button in a Finder Search query.)
+   */
+  kThemeMetricButtonRoundedHeight = 136,
+
+  /*
+   * The height of the inset round-ended button. (For example, the
+   * Servers button in a Finder Search query.)
+   */
+  kThemeMetricButtonRoundedRecessedHeight = 137
 };
 
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.5 and
+ *    later.
+ */
+enum {
+
+  /*
+   * This metric refers to the appearance of the separator control.
+   * That separator is drawn with the HIThemeDrawSeparator theme
+   * primitive. This metric is the height of a horizontal separator or
+   * the width of a vertical separator.
+   */
+  kThemeMetricSeparatorSize     = 138,
+
+  /*
+   * The height of the push button control variant that is designed to
+   * be used in a textured window.
+   */
+  kThemeMetricTexturedPushButtonHeight = 139,
+
+  /*
+   * The height of the small push button control variant that is
+   * designed to be used in a textured window.
+   */
+  kThemeMetricTexturedSmallPushButtonHeight = 140
+};
 
 typedef UInt32                          ThemeMetric;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -2682,11 +2748,47 @@ typedef struct OpaqueThemeDrawingState*  ThemeDrawingState;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Callback procs                                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-typedef CALLBACK_API( void , ThemeTabTitleDrawProcPtr )(const Rect *bounds, ThemeTabStyle style, ThemeTabDirection direction, SInt16 depth, Boolean isColorDev, UInt32 userData);
-typedef CALLBACK_API( void , ThemeEraseProcPtr )(const Rect *bounds, UInt32 eraseData, SInt16 depth, Boolean isColorDev);
-typedef CALLBACK_API( void , ThemeButtonDrawProcPtr )(const Rect *bounds, ThemeButtonKind kind, const ThemeButtonDrawInfo *info, UInt32 userData, SInt16 depth, Boolean isColorDev);
-typedef CALLBACK_API( void , WindowTitleDrawingProcPtr )(const Rect *bounds, SInt16 depth, Boolean colorDevice, UInt32 userData);
-typedef CALLBACK_API( Boolean , ThemeIteratorProcPtr )(ConstStr255Param inFileName, SInt16 resID, Collection inThemeSettings, void *inUserData);
+
+/*
+ *  ThemeTabTitleDrawProcPtr
+ *  
+ *  Summary:
+ *    Callback function for drawing the label text of a tab.
+ */
+typedef CALLBACK_API( void , ThemeTabTitleDrawProcPtr )(const Rect *bounds, ThemeTabStyle style, ThemeTabDirection direction, SInt16 depth, Boolean isColorDev, URefCon userData);
+
+/*
+ *  ThemeEraseProcPtr
+ *  
+ *  Summary:
+ *    Callback function for erasing the background behind a theme
+ *    primitive.
+ */
+typedef CALLBACK_API( void , ThemeEraseProcPtr )(const Rect *bounds, URefCon eraseData, SInt16 depth, Boolean isColorDev);
+
+/*
+ *  ThemeButtonDrawProcPtr
+ *  
+ *  Summary:
+ *    Callback function for drawing the label text of a button.
+ */
+typedef CALLBACK_API( void , ThemeButtonDrawProcPtr )(const Rect *bounds, ThemeButtonKind kind, const ThemeButtonDrawInfo *info, URefCon userData, SInt16 depth, Boolean isColorDev);
+
+/*
+ *  WindowTitleDrawingProcPtr
+ *  
+ *  Summary:
+ *    Callback function for drawing the title text of a window.
+ */
+typedef CALLBACK_API( void , WindowTitleDrawingProcPtr )(const Rect *bounds, SInt16 depth, Boolean colorDevice, URefCon userData);
+
+/*
+ *  ThemeIteratorProcPtr
+ *  
+ *  Summary:
+ *    Callback function for iterating over all known themes.
+ */
+typedef CALLBACK_API( Boolean , ThemeIteratorProcPtr )(ConstStr255Param inFileName, SInt16 resID, Collection inThemeSettings, PRefCon inUserData);
 typedef STACK_UPP_TYPE(ThemeTabTitleDrawProcPtr)                ThemeTabTitleDrawUPP;
 typedef STACK_UPP_TYPE(ThemeEraseProcPtr)                       ThemeEraseUPP;
 typedef STACK_UPP_TYPE(ThemeButtonDrawProcPtr)                  ThemeButtonDrawUPP;
@@ -2701,7 +2803,7 @@ typedef STACK_UPP_TYPE(ThemeIteratorProcPtr)                    ThemeIteratorUPP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThemeTabTitleDrawUPP
-NewThemeTabTitleDrawUPP(ThemeTabTitleDrawProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThemeTabTitleDrawUPP(ThemeTabTitleDrawProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewThemeEraseUPP()
@@ -2712,7 +2814,7 @@ NewThemeTabTitleDrawUPP(ThemeTabTitleDrawProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThemeEraseUPP
-NewThemeEraseUPP(ThemeEraseProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThemeEraseUPP(ThemeEraseProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewThemeButtonDrawUPP()
@@ -2723,7 +2825,7 @@ NewThemeEraseUPP(ThemeEraseProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThemeButtonDrawUPP
-NewThemeButtonDrawUPP(ThemeButtonDrawProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThemeButtonDrawUPP(ThemeButtonDrawProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewWindowTitleDrawingUPP()
@@ -2734,7 +2836,7 @@ NewThemeButtonDrawUPP(ThemeButtonDrawProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern WindowTitleDrawingUPP
-NewWindowTitleDrawingUPP(WindowTitleDrawingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewWindowTitleDrawingUPP(WindowTitleDrawingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewThemeIteratorUPP()
@@ -2745,7 +2847,7 @@ NewWindowTitleDrawingUPP(WindowTitleDrawingProcPtr userRoutine) AVAILABLE_MAC_OS
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThemeIteratorUPP
-NewThemeIteratorUPP(ThemeIteratorProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThemeIteratorUPP(ThemeIteratorProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeThemeTabTitleDrawUPP()
@@ -2756,7 +2858,7 @@ NewThemeIteratorUPP(ThemeIteratorProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThemeTabTitleDrawUPP(ThemeTabTitleDrawUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThemeTabTitleDrawUPP(ThemeTabTitleDrawUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeThemeEraseUPP()
@@ -2767,7 +2869,7 @@ DisposeThemeTabTitleDrawUPP(ThemeTabTitleDrawUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThemeEraseUPP(ThemeEraseUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThemeEraseUPP(ThemeEraseUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeThemeButtonDrawUPP()
@@ -2778,7 +2880,7 @@ DisposeThemeEraseUPP(ThemeEraseUPP userUPP)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThemeButtonDrawUPP(ThemeButtonDrawUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThemeButtonDrawUPP(ThemeButtonDrawUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeWindowTitleDrawingUPP()
@@ -2789,7 +2891,7 @@ DisposeThemeButtonDrawUPP(ThemeButtonDrawUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeWindowTitleDrawingUPP(WindowTitleDrawingUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeWindowTitleDrawingUPP(WindowTitleDrawingUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeThemeIteratorUPP()
@@ -2800,7 +2902,7 @@ DisposeWindowTitleDrawingUPP(WindowTitleDrawingUPP userUPP)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThemeIteratorUPP(ThemeIteratorUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThemeIteratorUPP(ThemeIteratorUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeThemeTabTitleDrawUPP()
@@ -2817,8 +2919,8 @@ InvokeThemeTabTitleDrawUPP(
   ThemeTabDirection     direction,
   SInt16                depth,
   Boolean               isColorDev,
-  UInt32                userData,
-  ThemeTabTitleDrawUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon               userData,
+  ThemeTabTitleDrawUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeThemeEraseUPP()
@@ -2831,10 +2933,10 @@ InvokeThemeTabTitleDrawUPP(
 extern void
 InvokeThemeEraseUPP(
   const Rect *   bounds,
-  UInt32         eraseData,
+  URefCon        eraseData,
   SInt16         depth,
   Boolean        isColorDev,
-  ThemeEraseUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeEraseUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeThemeButtonDrawUPP()
@@ -2849,10 +2951,10 @@ InvokeThemeButtonDrawUPP(
   const Rect *                 bounds,
   ThemeButtonKind              kind,
   const ThemeButtonDrawInfo *  info,
-  UInt32                       userData,
+  URefCon                      userData,
   SInt16                       depth,
   Boolean                      isColorDev,
-  ThemeButtonDrawUPP           userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeButtonDrawUPP           userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeWindowTitleDrawingUPP()
@@ -2867,8 +2969,8 @@ InvokeWindowTitleDrawingUPP(
   const Rect *           bounds,
   SInt16                 depth,
   Boolean                colorDevice,
-  UInt32                 userData,
-  WindowTitleDrawingUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                userData,
+  WindowTitleDrawingUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeThemeIteratorUPP()
@@ -2883,14 +2985,64 @@ InvokeThemeIteratorUPP(
   ConstStr255Param  inFileName,
   SInt16            resID,
   Collection        inThemeSettings,
-  void *            inUserData,
-  ThemeIteratorUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PRefCon           inUserData,
+  ThemeIteratorUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ThemeTabTitleDrawUPP                                 NewThemeTabTitleDrawUPP(ThemeTabTitleDrawProcPtr userRoutine) { return userRoutine; }
+    inline ThemeEraseUPP                                        NewThemeEraseUPP(ThemeEraseProcPtr userRoutine) { return userRoutine; }
+    inline ThemeButtonDrawUPP                                   NewThemeButtonDrawUPP(ThemeButtonDrawProcPtr userRoutine) { return userRoutine; }
+    inline WindowTitleDrawingUPP                                NewWindowTitleDrawingUPP(WindowTitleDrawingProcPtr userRoutine) { return userRoutine; }
+    inline ThemeIteratorUPP                                     NewThemeIteratorUPP(ThemeIteratorProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeThemeTabTitleDrawUPP(ThemeTabTitleDrawUPP) { }
+    inline void                                                 DisposeThemeEraseUPP(ThemeEraseUPP) { }
+    inline void                                                 DisposeThemeButtonDrawUPP(ThemeButtonDrawUPP) { }
+    inline void                                                 DisposeWindowTitleDrawingUPP(WindowTitleDrawingUPP) { }
+    inline void                                                 DisposeThemeIteratorUPP(ThemeIteratorUPP) { }
+    inline void                                                 InvokeThemeTabTitleDrawUPP(const Rect * bounds, ThemeTabStyle style, ThemeTabDirection direction, SInt16 depth, Boolean isColorDev, URefCon userData, ThemeTabTitleDrawUPP userUPP) { (*userUPP)(bounds, style, direction, depth, isColorDev, userData); }
+    inline void                                                 InvokeThemeEraseUPP(const Rect * bounds, URefCon eraseData, SInt16 depth, Boolean isColorDev, ThemeEraseUPP userUPP) { (*userUPP)(bounds, eraseData, depth, isColorDev); }
+    inline void                                                 InvokeThemeButtonDrawUPP(const Rect * bounds, ThemeButtonKind kind, const ThemeButtonDrawInfo * info, URefCon userData, SInt16 depth, Boolean isColorDev, ThemeButtonDrawUPP userUPP) { (*userUPP)(bounds, kind, info, userData, depth, isColorDev); }
+    inline void                                                 InvokeWindowTitleDrawingUPP(const Rect * bounds, SInt16 depth, Boolean colorDevice, URefCon userData, WindowTitleDrawingUPP userUPP) { (*userUPP)(bounds, depth, colorDevice, userData); }
+    inline Boolean                                              InvokeThemeIteratorUPP(ConstStr255Param inFileName, SInt16 resID, Collection inThemeSettings, PRefCon inUserData, ThemeIteratorUPP userUPP) { return (*userUPP)(inFileName, resID, inThemeSettings, inUserData); }
+  #else
+    #define NewThemeTabTitleDrawUPP(userRoutine)                ((ThemeTabTitleDrawUPP)userRoutine)
+    #define NewThemeEraseUPP(userRoutine)                       ((ThemeEraseUPP)userRoutine)
+    #define NewThemeButtonDrawUPP(userRoutine)                  ((ThemeButtonDrawUPP)userRoutine)
+    #define NewWindowTitleDrawingUPP(userRoutine)               ((WindowTitleDrawingUPP)userRoutine)
+    #define NewThemeIteratorUPP(userRoutine)                    ((ThemeIteratorUPP)userRoutine)
+    #define DisposeThemeTabTitleDrawUPP(userUPP)
+    #define DisposeThemeEraseUPP(userUPP)
+    #define DisposeThemeButtonDrawUPP(userUPP)
+    #define DisposeWindowTitleDrawingUPP(userUPP)
+    #define DisposeThemeIteratorUPP(userUPP)
+    #define InvokeThemeTabTitleDrawUPP(bounds, style, direction, depth, isColorDev, userData, userUPP) (*userUPP)(bounds, style, direction, depth, isColorDev, userData)
+    #define InvokeThemeEraseUPP(bounds, eraseData, depth, isColorDev, userUPP) (*userUPP)(bounds, eraseData, depth, isColorDev)
+    #define InvokeThemeButtonDrawUPP(bounds, kind, info, userData, depth, isColorDev, userUPP) (*userUPP)(bounds, kind, info, userData, depth, isColorDev)
+    #define InvokeWindowTitleDrawingUPP(bounds, depth, colorDevice, userData, userUPP) (*userUPP)(bounds, depth, colorDevice, userData)
+    #define InvokeThemeIteratorUPP(inFileName, resID, inThemeSettings, inUserData, userUPP) (*userUPP)(inFileName, resID, inThemeSettings, inUserData)
+  #endif
+#endif
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Menu Drawing callbacks                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-typedef CALLBACK_API( void , MenuTitleDrawingProcPtr )(const Rect *inBounds, SInt16 inDepth, Boolean inIsColorDevice, SInt32 inUserData);
-typedef CALLBACK_API( void , MenuItemDrawingProcPtr )(const Rect *inBounds, SInt16 inDepth, Boolean inIsColorDevice, SInt32 inUserData);
+
+/*
+ *  MenuTitleDrawingProcPtr
+ *  
+ *  Summary:
+ *    Callback function for drawing the title text of a menu.
+ */
+typedef CALLBACK_API( void , MenuTitleDrawingProcPtr )(const Rect *inBounds, SInt16 inDepth, Boolean inIsColorDevice, SRefCon inUserData);
+
+/*
+ *  MenuItemDrawingProcPtr
+ *  
+ *  Summary:
+ *    Callback function for drawing the text of a menu item.
+ */
+typedef CALLBACK_API( void , MenuItemDrawingProcPtr )(const Rect *inBounds, SInt16 inDepth, Boolean inIsColorDevice, SRefCon inUserData);
 typedef STACK_UPP_TYPE(MenuTitleDrawingProcPtr)                 MenuTitleDrawingUPP;
 typedef STACK_UPP_TYPE(MenuItemDrawingProcPtr)                  MenuItemDrawingUPP;
 /*
@@ -2902,7 +3054,7 @@ typedef STACK_UPP_TYPE(MenuItemDrawingProcPtr)                  MenuItemDrawingU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern MenuTitleDrawingUPP
-NewMenuTitleDrawingUPP(MenuTitleDrawingProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMenuTitleDrawingUPP(MenuTitleDrawingProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewMenuItemDrawingUPP()
@@ -2913,7 +3065,7 @@ NewMenuTitleDrawingUPP(MenuTitleDrawingProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern MenuItemDrawingUPP
-NewMenuItemDrawingUPP(MenuItemDrawingProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMenuItemDrawingUPP(MenuItemDrawingProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeMenuTitleDrawingUPP()
@@ -2924,7 +3076,7 @@ NewMenuItemDrawingUPP(MenuItemDrawingProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeMenuTitleDrawingUPP(MenuTitleDrawingUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMenuTitleDrawingUPP(MenuTitleDrawingUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeMenuItemDrawingUPP()
@@ -2935,7 +3087,7 @@ DisposeMenuTitleDrawingUPP(MenuTitleDrawingUPP userUPP)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeMenuItemDrawingUPP(MenuItemDrawingUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMenuItemDrawingUPP(MenuItemDrawingUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeMenuTitleDrawingUPP()
@@ -2950,8 +3102,8 @@ InvokeMenuTitleDrawingUPP(
   const Rect *         inBounds,
   SInt16               inDepth,
   Boolean              inIsColorDevice,
-  SInt32               inUserData,
-  MenuTitleDrawingUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon              inUserData,
+  MenuTitleDrawingUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeMenuItemDrawingUPP()
@@ -2966,56 +3118,94 @@ InvokeMenuItemDrawingUPP(
   const Rect *        inBounds,
   SInt16              inDepth,
   Boolean             inIsColorDevice,
-  SInt32              inUserData,
-  MenuItemDrawingUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             inUserData,
+  MenuItemDrawingUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline MenuTitleDrawingUPP                                  NewMenuTitleDrawingUPP(MenuTitleDrawingProcPtr userRoutine) { return userRoutine; }
+    inline MenuItemDrawingUPP                                   NewMenuItemDrawingUPP(MenuItemDrawingProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeMenuTitleDrawingUPP(MenuTitleDrawingUPP) { }
+    inline void                                                 DisposeMenuItemDrawingUPP(MenuItemDrawingUPP) { }
+    inline void                                                 InvokeMenuTitleDrawingUPP(const Rect * inBounds, SInt16 inDepth, Boolean inIsColorDevice, SRefCon inUserData, MenuTitleDrawingUPP userUPP) { (*userUPP)(inBounds, inDepth, inIsColorDevice, inUserData); }
+    inline void                                                 InvokeMenuItemDrawingUPP(const Rect * inBounds, SInt16 inDepth, Boolean inIsColorDevice, SRefCon inUserData, MenuItemDrawingUPP userUPP) { (*userUPP)(inBounds, inDepth, inIsColorDevice, inUserData); }
+  #else
+    #define NewMenuTitleDrawingUPP(userRoutine)                 ((MenuTitleDrawingUPP)userRoutine)
+    #define NewMenuItemDrawingUPP(userRoutine)                  ((MenuItemDrawingUPP)userRoutine)
+    #define DisposeMenuTitleDrawingUPP(userUPP)
+    #define DisposeMenuItemDrawingUPP(userUPP)
+    #define InvokeMenuTitleDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP) (*userUPP)(inBounds, inDepth, inIsColorDevice, inUserData)
+    #define InvokeMenuItemDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP) (*userUPP)(inBounds, inDepth, inIsColorDevice, inUserData)
+  #endif
+#endif
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  Appearance Manager APIs                                                         */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Registering Appearance-Savvy Applications */
+#if !__LP64__
 /*
- *  RegisterAppearanceClient()
+ *  RegisterAppearanceClient()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function does nothing on Mac OS X. Do not call it.
+ *  
+ *  Summary:
+ *    Registers a process as a client of the Appearance Manager.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
-RegisterAppearanceClient(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RegisterAppearanceClient(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  UnregisterAppearanceClient()
+ *  UnregisterAppearanceClient()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function does nothing on Mac OS X. Do not call it.
+ *  
+ *  Summary:
+ *    Unregisters a process as a client of the Appearance Manager.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
-UnregisterAppearanceClient(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UnregisterAppearanceClient(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  IsAppearanceClient()
+ *  IsAppearanceClient()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function always returns true on Mac OS X. Do not call it.
+ *  
+ *  Summary:
+ *    Indicates whether a process is registered with the Appearance
+ *    Manager.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern Boolean 
-IsAppearanceClient(const ProcessSerialNumber * process)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsAppearanceClient(const ProcessSerialNumber * process)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*****************************************************************************
@@ -3031,13 +3221,21 @@ IsAppearanceClient(const ProcessSerialNumber * process)       AVAILABLE_MAC_OS_X
 *****************************************************************************/
 
 /*
- *  SetThemePen()
+ *  SetThemePen()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.4 and later, use HIThemeSetStroke, and draw using
+ *    CoreGraphics.
+ *  
+ *  Summary:
+ *    Sets the foreground color and/or pen pattern of the current
+ *    GrafPort to allow drawing with a specified theme brush.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3045,17 +3243,25 @@ extern OSStatus
 SetThemePen(
   ThemeBrush   inBrush,
   SInt16       inDepth,
-  Boolean      inIsColorDevice)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean      inIsColorDevice)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetThemeBackground()
+ *  SetThemeBackground()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.4 and later, use HIThemeSetFill, and draw using
+ *    CoreGraphics.
+ *  
+ *  Summary:
+ *    Sets the background color and/or fill pattern of the current
+ *    GrafPort to allow drawing with a specified theme brush.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3063,17 +3269,25 @@ extern OSStatus
 SetThemeBackground(
   ThemeBrush   inBrush,
   SInt16       inDepth,
-  Boolean      inIsColorDevice)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean      inIsColorDevice)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetThemeTextColor()
+ *  SetThemeTextColor()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.4 and later, use HIThemeTextFill, and draw with
+ *    CoreGraphics, ATSUI, or HIThemeDrawTextBox.
+ *  
+ *  Summary:
+ *    Sets the foreground color and/or pen pattern of the current
+ *    GrafPort to allow drawing with a specified theme text color.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3081,196 +3295,264 @@ extern OSStatus
 SetThemeTextColor(
   ThemeTextColor   inColor,
   SInt16           inDepth,
-  Boolean          inIsColorDevice)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          inIsColorDevice)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  SetThemeWindowBackground() has moved to MacWindows.h
- */
 /* Window Placards, Headers and Frames */
 /*
- *  DrawThemeWindowHeader()
+ *  DrawThemeWindowHeader()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawHeader.
+ *  
+ *  Summary:
+ *    Draws a window header theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeWindowHeader(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeWindowListViewHeader()
+ *  DrawThemeWindowListViewHeader()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawHeader.
+ *  
+ *  Summary:
+ *    Draws a window header theme primitive that is suitable for use at
+ *    the top of a list view.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeWindowListViewHeader(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemePlacard()
+ *  DrawThemePlacard()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawPlacard.
+ *  
+ *  Summary:
+ *    Draws a placard theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemePlacard(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeEditTextFrame()
+ *  DrawThemeEditTextFrame()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawFrame.
+ *  
+ *  Summary:
+ *    Draws a frame theme primitive suitable for use around an edit
+ *    text control.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeEditTextFrame(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeListBoxFrame()
+ *  DrawThemeListBoxFrame()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawFrame.
+ *  
+ *  Summary:
+ *    Draws a frame theme primitive suitable for use around a list box.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeListBoxFrame(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Keyboard Focus Drawing */
 /*
- *  DrawThemeFocusRect()
+ *  DrawThemeFocusRect()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawFocusRect. This API
+ *    erases the focus ring when called with inHasFocus equal to false,
+ *    but HIThemeDrawFocsuRect does not; to simulate the behavior of
+ *    DrawThemeFocusRect in this case, simply erase the desired area
+ *    yourself.
+ *  
+ *  Summary:
+ *    Draws a focus ring around a specified rectangle.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeFocusRect(
   const Rect *  inRect,
-  Boolean       inHasFocus)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean       inHasFocus)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* Dialog Group Boxes and Separators */
 /*
- *  DrawThemePrimaryGroup()
+ *  DrawThemePrimaryGroup()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawGroupBox.
+ *  
+ *  Summary:
+ *    Draws a primary group theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemePrimaryGroup(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeSecondaryGroup()
+ *  DrawThemeSecondaryGroup()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawGroupBox.
+ *  
+ *  Summary:
+ *    Draws a secondary group theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeSecondaryGroup(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeSeparator()
+ *  DrawThemeSeparator()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawSeparator.
+ *  
+ *  Summary:
+ *    Draws a separator theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeSeparator(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ BEGIN APPEARANCE 1.0.1 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* The following Appearance Manager APIs are only available */
-/* in Appearance 1.0.1 or later                             */
+/* The following Appearance Manager APIs are only available in Appearance 1.0.1 or later */
 /*
- *  DrawThemeModelessDialogFrame()
+ *  DrawThemeModelessDialogFrame()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawWindowFrame.
+ *  
+ *  Summary:
+ *    Draws a modeless dialog window frame theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeModelessDialogFrame(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeGenericWell()
+ *  DrawThemeGenericWell()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawGenericWell.
+ *  
+ *  Summary:
+ *    Draws an image well theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3278,68 +3560,102 @@ extern OSStatus
 DrawThemeGenericWell(
   const Rect *     inRect,
   ThemeDrawState   inState,
-  Boolean          inFillCenter)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          inFillCenter)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeFocusRegion()
+ *  DrawThemeFocusRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawFocusRect. This API
+ *    erases the focus ring when called with inHasFocus equal to false,
+ *    but HIThemeDrawFocsuRect does not; to simulate the behavior of
+ *    DrawThemeFocusRect in this case, simply erase the desired area
+ *    yourself.
+ *  
+ *  Summary:
+ *    Draws a focus ring around a specified region.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeFocusRegion(
   RgnHandle   inRegion,
-  Boolean     inHasFocus)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean     inHasFocus)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  IsThemeInColor()
+ *  IsThemeInColor()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X, the Aqua theme is always drawn in color, and this
+ *    API always returns true.
+ *  
+ *  Summary:
+ *    Indicates whether the current theme would be drawn in color or
+ *    black and white.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern Boolean 
 IsThemeInColor(
   SInt16    inDepth,
-  Boolean   inIsColorDevice)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   inIsColorDevice)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* IMPORTANT: GetThemeAccentColors will only work in the platinum theme. Any other theme will */
-/* most likely return an error */
 /*
- *  GetThemeAccentColors()
+ *  GetThemeAccentColors()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function always returns appearanceThemeHasNoAccents on Mac
+ *    OS X. Do not call it.
+ *  
+ *  Summary:
+ *    Returns the accent colors for the current theme.
+ *  
+ *  Discussion:
+ *    GetThemeAccentColors will only work in the platinum theme on Mac
+ *    OS 8.x and 9.x. It returns an error on Mac OS X, since the Aqua
+ *    theme does not support accent colors.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
-GetThemeAccentColors(CTabHandle * outColors)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetThemeAccentColors(CTabHandle * outColors)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeMenuBarBackground()
+ *  DrawThemeMenuBarBackground()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawMenuBarBackground.
+ *  
+ *  Summary:
+ *    Draws a menubar background theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3347,17 +3663,23 @@ extern OSStatus
 DrawThemeMenuBarBackground(
   const Rect *        inBounds,
   ThemeMenuBarState   inState,
-  UInt32              inAttributes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              inAttributes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeMenuTitle()
+ *  DrawThemeMenuTitle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawMenuTitle.
+ *  
+ *  Summary:
+ *    Draws a menu title theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3368,18 +3690,26 @@ DrawThemeMenuTitle(
   ThemeMenuState        inState,
   UInt32                inAttributes,
   MenuTitleDrawingUPP   inTitleProc,         /* can be NULL */
-  UInt32                inTitleData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon               inTitleData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*
  *  GetThemeMenuBarHeight()
  *  
+ *  Summary:
+ *    Returns the height of the menubar, in points.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    outHeight:
+ *      On exit, contains the height of the menubar, in points.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3388,30 +3718,42 @@ GetThemeMenuBarHeight(SInt16 * outHeight)                     AVAILABLE_MAC_OS_X
 
 
 /*
- *  DrawThemeMenuBackground()
+ *  DrawThemeMenuBackground()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawMenuBackground.
+ *  
+ *  Summary:
+ *    Draws a menu background theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
 DrawThemeMenuBackground(
   const Rect *    inMenuRect,
-  ThemeMenuType   inMenuType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeMenuType   inMenuType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeMenuBackgroundRegion()
+ *  GetThemeMenuBackgroundRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeGetMenuBackgroundShape.
+ *  
+ *  Summary:
+ *    Constructs a region that covers the entire area of a menu.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3419,17 +3761,23 @@ extern OSStatus
 GetThemeMenuBackgroundRegion(
   const Rect *    inMenuRect,
   ThemeMenuType   menuType,
-  RgnHandle       region)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle       region)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeMenuItem()
+ *  DrawThemeMenuItem()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawMenuItem.
+ *  
+ *  Summary:
+ *    Draws a menu item theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
@@ -3442,29 +3790,46 @@ DrawThemeMenuItem(
   ThemeMenuState       inState,
   ThemeMenuItemType    inItemType,
   MenuItemDrawingUPP   inDrawProc,                /* can be NULL */
-  UInt32               inUserData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon              inUserData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeMenuSeparator()
+ *  DrawThemeMenuSeparator()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawMenuSeparator.
+ *  
+ *  Summary:
+ *    Draws a menu item separator theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
-DrawThemeMenuSeparator(const Rect * inItemRect)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DrawThemeMenuSeparator(const Rect * inItemRect)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  GetThemeMenuSeparatorHeight()
  *  
+ *  Summary:
+ *    Returns the height of a menu item separator, in points.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outHeight:
+ *      On exit, contains the height of a menu item separator, in
+ *      points.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3478,8 +3843,23 @@ GetThemeMenuSeparatorHeight(SInt16 * outHeight)               AVAILABLE_MAC_OS_X
 /*
  *  GetThemeMenuItemExtra()
  *  
+ *  Summary:
+ *    Returns the extra width and height required for a menu item
+ *    beyond the height of the text.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inItemType:
+ *      The type of menu item.
+ *    
+ *    outHeight:
+ *      Extra height, in points, for this item type.
+ *    
+ *    outWidth:
+ *      Extra width, in points, for this item type.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3496,8 +3876,20 @@ GetThemeMenuItemExtra(
 /*
  *  GetThemeMenuTitleExtra()
  *  
+ *  Summary:
+ *    Returns the extra width for a menu title, in points.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outWidth:
+ *      On exit, contains the extra menu title width, in points.
+ *    
+ *    inIsSquished:
+ *      Indicates whether the menu title is being drawn with a
+ *      condensed appearance.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3516,14 +3908,26 @@ GetThemeMenuTitleExtra(
 /*  X ALERT: Please note that Get/SetTheme are severely neutered under Mac OS X at present.         */
 /*           See the note above regarding what collection tags are supported under X.               */
 
+#if !__LP64__
 /*
  *  GetTheme()
+ *  
+ *  Summary:
+ *    Returns information about the current theme.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    ioCollection:
+ *      On entry, a valid empty collection. On exit, contains
+ *      information about the current theme. See Theme Collection Tags
+ *      for the set of collection tags that are used to retrieve
+ *      information from this collection.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3532,63 +3936,88 @@ GetTheme(Collection ioCollection)                             AVAILABLE_MAC_OS_X
 
 
 /*
- *  SetTheme()
+ *  SetTheme()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This API does not modify the current theme in any way on Mac OS X.
+ *  
+ *  Summary:
+ *    Sets information about the current theme.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
-SetTheme(Collection ioCollection)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetTheme(Collection ioCollection)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  IterateThemes()
+ *  IterateThemes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This API does nothing on Mac OS X; it does not call the theme
+ *    iterator callback function.
+ *  
+ *  Summary:
+ *    Iterates over all known themes.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 IterateThemes(
   ThemeIteratorUPP   inProc,
-  void *             inUserData)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PRefCon            inUserData)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ TABS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  DrawThemeTabPane()
+ *  DrawThemeTabPane()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTabPane.
+ *  
+ *  Summary:
+ *    Draws a tab pane theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 DrawThemeTabPane(
   const Rect *     inRect,
-  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   inState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeTab()
+ *  DrawThemeTab()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTab.
+ *  
+ *  Summary:
+ *    Draws a tab theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3598,17 +4027,23 @@ DrawThemeTab(
   ThemeTabStyle          inStyle,
   ThemeTabDirection      inDirection,
   ThemeTabTitleDrawUPP   labelProc,         /* can be NULL */
-  UInt32                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                userData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTabRegion()
+ *  GetThemeTabRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTabDrawShape.
+ *  
+ *  Summary:
+ *    Constructs a region that covers the area of a tab.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3617,18 +4052,26 @@ GetThemeTabRegion(
   const Rect *        inRect,
   ThemeTabStyle       inStyle,
   ThemeTabDirection   inDirection,
-  RgnHandle           ioRgn)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle           ioRgn)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ CURSORS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  SetThemeCursor()
  *  
+ *  Summary:
+ *    Sets the current cursor to a specified theme-compliant cursor.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inCursor:
+ *      The cursor to set.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3639,11 +4082,26 @@ SetThemeCursor(ThemeCursor inCursor)                          AVAILABLE_MAC_OS_X
 /*
  *  SetAnimatedThemeCursor()
  *  
+ *  Summary:
+ *    Sets the current cursor to the next frame of a specified
+ *    theme-compliant cursor.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inCursor:
+ *      The cursor to set.
+ *    
+ *    inAnimationStep:
+ *      A value indicating which frame of animation should be used. The
+ *      exact value does not matter, but the value should increase by 1
+ *      before each call to this API. Not all cursors support
+ *      animation; those that do not will ignore this parameter.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3657,11 +4115,20 @@ SetAnimatedThemeCursor(
 /*
  *  GetThemeScrollBarThumbStyle()
  *  
+ *  Summary:
+ *    Retrieves the current scrollbar thumb style, which may be
+ *    proportional or non-proportional.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    outStyle:
+ *      On exit, contains the current scrollbar thumb style.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3672,11 +4139,21 @@ GetThemeScrollBarThumbStyle(ThemeScrollBarThumbStyle * outStyle) AVAILABLE_MAC_O
 /*
  *  GetThemeScrollBarArrowStyle()
  *  
+ *  Summary:
+ *    Retrieves the current scrollbar arrow style. Arrows may be single
+ *    at each end of the scrollbar, double at one end, or double at
+ *    both ends.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    outStyle:
+ *      On exit, contains the current scrollbar arrow style.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3687,11 +4164,20 @@ GetThemeScrollBarArrowStyle(ThemeScrollBarArrowStyle * outStyle) AVAILABLE_MAC_O
 /*
  *  GetThemeCheckBoxStyle()
  *  
+ *  Summary:
+ *    Retrieves the current checkbox style, which may use an X or a
+ *    checkmark.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    outStyle:
+ *      On exit, contains the current checkbox style.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3701,30 +4187,45 @@ GetThemeCheckBoxStyle(ThemeCheckBoxStyle * outStyle)          AVAILABLE_MAC_OS_X
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ FONTS/TEXT ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  UseThemeFont()
+ *  UseThemeFont()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIThemeDrawTextBox instead.
+ *  
+ *  Summary:
+ *    Sets the font of the current GrafPort to allow drawing with a
+ *    specified theme font.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 UseThemeFont(
   ThemeFontID   inFontID,
-  ScriptCode    inScript)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode    inScript)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeFont()
+ *  GetThemeFont()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Some theme fonts cannot be drawn using QuickDraw. Use
+ *    HIThemeDrawTextBox instead.
+ *  
+ *  Summary:
+ *    Retrieves the QuickDraw font name, size, and style for a
+ *    specified theme font.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -3734,11 +4235,14 @@ GetThemeFont(
   ScriptCode    inScript,
   Str255        outFontName,       /* can be NULL */
   SInt16 *      outFontSize,
-  Style *       outStyle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Style *       outStyle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeTextBox()
+ *  DrawThemeTextBox()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTextBox.
  *  
  *  Summary:
  *    Draws text into the area you specify.
@@ -3815,7 +4319,7 @@ GetThemeFont(
  *      parameter is ignored.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3827,11 +4331,16 @@ DrawThemeTextBox(
   Boolean          inWrapToWidth,
   const Rect *     inBoundingBox,
   SInt16           inJust,
-  void *           inContext)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CGContextRef     inContext)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  TruncateThemeText()
+ *  TruncateThemeText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTextDimensions or
+ *    HIThemeDrawTextBox. There is currently no replacement API that
+ *    actually alters the string.
  *  
  *  Summary:
  *    Truncates text to fit within the width you specify.
@@ -3881,7 +4390,7 @@ DrawThemeTextBox(
  *      string was not (and did not need to be) truncated.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3892,11 +4401,14 @@ TruncateThemeText(
   ThemeDrawState       inState,
   SInt16               inPixelWidthLimit,
   TruncCode            inTruncWhere,
-  Boolean *            outTruncated)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            outTruncated)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTextDimensions()
+ *  GetThemeTextDimensions()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTextDimensions.
  *  
  *  Summary:
  *    Tells you the height, width, and baseline for a string.
@@ -3951,7 +4463,7 @@ TruncateThemeText(
  *      if you don't want this information.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3962,7 +4474,7 @@ GetThemeTextDimensions(
   ThemeDrawState   inState,
   Boolean          inWrapToWidth,
   Point *          ioBounds,
-  SInt16 *         outBaseline)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *         outBaseline)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -4005,7 +4517,7 @@ GetThemeTextDimensions(
  *      will either be positive values or zero.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -4018,13 +4530,19 @@ GetThemeTextShadowOutset(
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ TRACKS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  DrawThemeTrack()
+ *  DrawThemeTrack()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTrack.
+ *  
+ *  Summary:
+ *    Draws a track theme primitive, such as a slider or scrollbar.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4033,17 +4551,23 @@ DrawThemeTrack(
   const ThemeTrackDrawInfo *  drawInfo,
   RgnHandle                   rgnGhost,        /* can be NULL */
   ThemeEraseUPP               eraseProc,       /* can be NULL */
-  UInt32                      eraseData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                     eraseData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  HitTestThemeTrack()
+ *  HitTestThemeTrack()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeHitTestTrack.
+ *  
+ *  Summary:
+ *    Determines the part of a track that is is under a specified point.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4051,68 +4575,92 @@ extern Boolean
 HitTestThemeTrack(
   const ThemeTrackDrawInfo *  drawInfo,
   Point                       mousePoint,
-  AppearancePartCode *        partHit)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearancePartCode *        partHit)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackBounds()
+ *  GetThemeTrackBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTrackBounds.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a track theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 GetThemeTrackBounds(
   const ThemeTrackDrawInfo *  drawInfo,
-  Rect *                      bounds)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                      bounds)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackThumbRgn()
+ *  GetThemeTrackThumbRgn()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTrackThumbShape.
+ *  
+ *  Summary:
+ *    Constructs a region that covers the ara of a track thumb.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 GetThemeTrackThumbRgn(
   const ThemeTrackDrawInfo *  drawInfo,
-  RgnHandle                   thumbRgn)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                   thumbRgn)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackDragRect()
+ *  GetThemeTrackDragRect()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTrackDragRect.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a track dragging area.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 GetThemeTrackDragRect(
   const ThemeTrackDrawInfo *  drawInfo,
-  Rect *                      dragRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                      dragRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeTrackTickMarks()
+ *  DrawThemeTrackTickMarks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTrackTickMarks.
+ *  
+ *  Summary:
+ *    Draws the tick marks for a track theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4121,17 +4669,25 @@ DrawThemeTrackTickMarks(
   const ThemeTrackDrawInfo *  drawInfo,
   ItemCount                   numTicks,
   ThemeEraseUPP               eraseProc,       /* can be NULL */
-  UInt32                      eraseData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                     eraseData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackThumbPositionFromOffset()
+ *  GetThemeTrackThumbPositionFromOffset()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use
+ *    HIThemeGetTrackThumbPositionFromOffset.
+ *  
+ *  Summary:
+ *    Retrieves a track's thumb position based on its offset in the
+ *    track bounds.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4139,17 +4695,25 @@ extern OSStatus
 GetThemeTrackThumbPositionFromOffset(
   const ThemeTrackDrawInfo *  drawInfo,
   Point                       thumbOffset,
-  SInt32 *                    relativePosition)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                    relativePosition)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackThumbPositionFromRegion()
+ *  GetThemeTrackThumbPositionFromRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use
+ *    HIThemeGetTrackThumbPositionFromBounds.
+ *  
+ *  Summary:
+ *    Retrieves a track's thumb position based on a region covering the
+ *    thumb.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4157,17 +4721,24 @@ extern OSStatus
 GetThemeTrackThumbPositionFromRegion(
   const ThemeTrackDrawInfo *  drawInfo,
   RgnHandle                   thumbRgn,
-  SInt32 *                    relativePosition)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                    relativePosition)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeTrackLiveValue()
+ *  GetThemeTrackLiveValue()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetTrackLiveValue.
+ *  
+ *  Summary:
+ *    Retrieves the value that a track would have based on a thumb
+ *    position.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4175,18 +4746,26 @@ extern OSStatus
 GetThemeTrackLiveValue(
   const ThemeTrackDrawInfo *  drawInfo,
   SInt32                      relativePosition,
-  SInt32 *                    value)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                    value)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ SCROLLBAR ARROWS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  DrawThemeScrollBarArrows()
+ *  DrawThemeScrollBarArrows()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTrack, which will draw
+ *    the entire scrollbar, including both the track and arrows.
+ *  
+ *  Summary:
+ *    Draws the arrows at each or both ends of a scrollbar theme
+ *    primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4196,17 +4775,23 @@ DrawThemeScrollBarArrows(
   ThemeTrackEnableState   enableState,
   ThemeTrackPressState    pressState,
   Boolean                 isHoriz,
-  Rect *                  trackBounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                  trackBounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeScrollBarTrackRect()
+ *  GetThemeScrollBarTrackRect()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetScrollBarTrackRect.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a scrollbar track.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4216,17 +4801,23 @@ GetThemeScrollBarTrackRect(
   ThemeTrackEnableState   enableState,
   ThemeTrackPressState    pressState,
   Boolean                 isHoriz,
-  Rect *                  trackBounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                  trackBounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  HitTestThemeScrollBarArrows()
+ *  HitTestThemeScrollBarArrows()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeHitTestScrollBarArrows.
+ *  
+ *  Summary:
+ *    Determines which scrollbar arrow is under a specified point.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4238,18 +4829,24 @@ HitTestThemeScrollBarArrows(
   Boolean                 isHoriz,
   Point                   ptHit,
   Rect *                  trackBounds,
-  AppearancePartCode *    partcode)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearancePartCode *    partcode)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ WINDOWS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  GetThemeWindowRegion()
+ *  GetThemeWindowRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetWindowShape.
+ *  
+ *  Summary:
+ *    Constructs a region that covers a specified part of a window.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4261,17 +4858,23 @@ GetThemeWindowRegion(
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       attributes,
   AppearanceRegionCode        winRegion,
-  RgnHandle                   rgn)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                   rgn)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeWindowFrame()
+ *  DrawThemeWindowFrame()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawWindowFrame.
+ *  
+ *  Summary:
+ *    Draws a window frame theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4283,11 +4886,14 @@ DrawThemeWindowFrame(
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       attributes,
   WindowTitleDrawingUPP       titleProc,        /* can be NULL */
-  UInt32                      titleData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                     titleData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeTitleBarWidget()
+ *  DrawThemeTitleBarWidget()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTitleBarWidget.
  *  
  *  Summary:
  *    Draws the requested theme title bar widget.
@@ -4337,7 +4943,7 @@ DrawThemeWindowFrame(
  *      draw.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4348,17 +4954,23 @@ DrawThemeTitleBarWidget(
   ThemeDrawState              state,
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       attributes,
-  ThemeTitleBarWidget         widget)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeTitleBarWidget         widget)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeWindowRegionHit()
+ *  GetThemeWindowRegionHit()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetWindowRegionHit.
+ *  
+ *  Summary:
+ *    Determines the window part that is under a specified point.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4370,17 +4982,23 @@ GetThemeWindowRegionHit(
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       inAttributes,
   Point                       inPoint,
-  AppearanceRegionCode *      outRegionHit)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearanceRegionCode *      outRegionHit)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeScrollBarDelimiters()
+ *  DrawThemeScrollBarDelimiters()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    In Mac OS X 10.3 and later, use HIThemeDrawScrollBarDelimiters.
+ *  
+ *  Summary:
+ *    Draws the scrollbar delimeters in a window frame.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4389,19 +5007,25 @@ DrawThemeScrollBarDelimiters(
   ThemeWindowType         flavor,
   const Rect *            inContRect,
   ThemeDrawState          state,
-  ThemeWindowAttributes   attributes)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeWindowAttributes   attributes)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ BUTTONS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  DrawThemeButton()
+ *  DrawThemeButton()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawButton.
+ *  
+ *  Summary:
+ *    Draws a button theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4413,17 +5037,23 @@ DrawThemeButton(
   const ThemeButtonDrawInfo *  inPrevInfo,        /* can be NULL */
   ThemeEraseUPP                inEraseProc,       /* can be NULL */
   ThemeButtonDrawUPP           inLabelProc,       /* can be NULL */
-  UInt32                       inUserData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                      inUserData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeButtonRegion()
+ *  GetThemeButtonRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetButtonShape.
+ *  
+ *  Summary:
+ *    Constructs a region that covers the area of a button.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4432,17 +5062,23 @@ GetThemeButtonRegion(
   const Rect *                 inBounds,
   ThemeButtonKind              inKind,
   const ThemeButtonDrawInfo *  inNewInfo,
-  RgnHandle                    outRegion)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                    outRegion)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeButtonContentBounds()
+ *  GetThemeButtonContentBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetButtonContentBounds.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a button's content.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4451,17 +5087,23 @@ GetThemeButtonContentBounds(
   const Rect *                 inBounds,
   ThemeButtonKind              inKind,
   const ThemeButtonDrawInfo *  inDrawInfo,
-  Rect *                       outBounds)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                       outBounds)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeButtonBackgroundBounds()
+ *  GetThemeButtonBackgroundBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetButtonBackgroundBounds.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a button's background.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4470,7 +5112,7 @@ GetThemeButtonBackgroundBounds(
   const Rect *                 inBounds,
   ThemeButtonKind              inKind,
   const ThemeButtonDrawInfo *  inDrawInfo,
-  Rect *                       outBounds)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                       outBounds)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -4480,11 +5122,20 @@ GetThemeButtonBackgroundBounds(
 /*
  *  PlayThemeSound()
  *  
+ *  Summary:
+ *    Plays a theme-compliant sound. Note that this API does not play
+ *    sound on any version of Mac OS X.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    kind:
+ *      The kind of sound to play.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4495,11 +5146,24 @@ PlayThemeSound(ThemeSoundKind kind)                           AVAILABLE_MAC_OS_X
 /*
  *  BeginThemeDragSound()
  *  
+ *  Summary:
+ *    Begins playing a theme-compliant sound to indicate that a drag is
+ *    occuring. Note that this API does not play sound on any version
+ *    of Mac OS X.
+ *  
+ *  Discussion:
+ *    You should call EndThemeDragSound when the drag is complete.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    kind:
+ *      The kind of drag sound to play.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4510,11 +5174,19 @@ BeginThemeDragSound(ThemeDragSoundKind kind)                  AVAILABLE_MAC_OS_X
 /*
  *  EndThemeDragSound()
  *  
+ *  Summary:
+ *    Stops playing a theme-compliant sound to indicate that a drag is
+ *    occuring.
+ *  
+ *  Discussion:
+ *    This API should only be called after BeginThemeDragSound has been
+ *    called.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4524,30 +5196,42 @@ EndThemeDragSound(void)                                       AVAILABLE_MAC_OS_X
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ PRIMITIVES ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
- *  DrawThemeTickMark()
+ *  DrawThemeTickMark()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawTickMark.
+ *  
+ *  Summary:
+ *    Draws a tick mark theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern OSStatus 
 DrawThemeTickMark(
   const Rect *     bounds,
-  ThemeDrawState   state)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState   state)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeChasingArrows()
+ *  DrawThemeChasingArrows()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawChasingArrows.
+ *  
+ *  Summary:
+ *    Draws a chasing arrows theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4557,17 +5241,23 @@ DrawThemeChasingArrows(
   UInt32           index,
   ThemeDrawState   state,
   ThemeEraseUPP    eraseProc,       /* can be NULL */
-  UInt32           eraseData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon          eraseData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemePopupArrow()
+ *  DrawThemePopupArrow()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawPopupArrow.
+ *  
+ *  Summary:
+ *    Draws a popup arrow theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4578,17 +5268,24 @@ DrawThemePopupArrow(
   ThemePopupArrowSize     size,
   ThemeDrawState          state,
   ThemeEraseUPP           eraseProc,         /* can be NULL */
-  UInt32                  eraseData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URefCon                 eraseData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeStandaloneGrowBox()
+ *  DrawThemeStandaloneGrowBox()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawGrowBox.
+ *  
+ *  Summary:
+ *    Draws a grow box theme primitive that is designed to be detached
+ *    from the window frame.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4597,17 +5294,24 @@ DrawThemeStandaloneGrowBox(
   Point                origin,
   ThemeGrowDirection   growDirection,
   Boolean              isSmall,
-  ThemeDrawState       state)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState       state)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  DrawThemeStandaloneNoGrowBox()
+ *  DrawThemeStandaloneNoGrowBox()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeDrawGrowBox.
+ *  
+ *  Summary:
+ *    Draws a blank area that can be used to fill in the corner of two
+ *    scrollbars, when no grow box is required.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4616,17 +5320,23 @@ DrawThemeStandaloneNoGrowBox(
   Point                origin,
   ThemeGrowDirection   growDirection,
   Boolean              isSmall,
-  ThemeDrawState       state)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThemeDrawState       state)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetThemeStandaloneGrowBoxBounds()
+ *  GetThemeStandaloneGrowBoxBounds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeGetGrowBoxBounds.
+ *  
+ *  Summary:
+ *    Retrieves the bounds of a standalone grow box theme primitive.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4635,7 +5345,7 @@ GetThemeStandaloneGrowBoxBounds(
   Point                origin,
   ThemeGrowDirection   growDirection,
   Boolean              isSmall,
-  Rect *               bounds)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *               bounds)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ DRAWING STATE ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4664,11 +5374,14 @@ GetThemeStandaloneGrowBoxBounds(
 /*
  *  NormalizeThemeDrawingState()
  *  
+ *  Summary:
+ *    Normalizes the drawing state of the current GrafPort.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4679,11 +5392,21 @@ NormalizeThemeDrawingState(void)                              AVAILABLE_MAC_OS_X
 /*
  *  GetThemeDrawingState()
  *  
+ *  Summary:
+ *    Retrieves the drawing state of the current port.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    outState:
+ *      On exit, contains the saved drawing state. This state must be
+ *      released by calling either DisposeThemeDrawingState or
+ *      SetThemeDrawingState with inDisposeNow equal to true.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4694,11 +5417,22 @@ GetThemeDrawingState(ThemeDrawingState * outState)            AVAILABLE_MAC_OS_X
 /*
  *  SetThemeDrawingState()
  *  
+ *  Summary:
+ *    Restores saved drawing state of the current port.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inState:
+ *      The state to restore.
+ *    
+ *    inDisposeNow:
+ *      Whether the drawing state should be disposed by this API.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4711,11 +5445,19 @@ SetThemeDrawingState(
 /*
  *  DisposeThemeDrawingState()
  *  
+ *  Summary:
+ *    Releases the memory used by a saved drawing state object.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inState:
+ *      The state to release.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4724,18 +5466,58 @@ DisposeThemeDrawingState(ThemeDrawingState inState)           AVAILABLE_MAC_OS_X
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ MISCELLANEOUS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* ApplyThemeBackground is used to set up the background for embedded controls  */
-/* It is normally called by controls that are embedders. The standard controls  */
-/* call this API to ensure a correct background for the current theme. You pass */
-/* in the same rectangle you would if you were calling the drawing primitive.   */
 /*
- *  ApplyThemeBackground()
+ *  ApplyThemeBackground()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    On Mac OS X 10.3 and later, use HIThemeApplyBackground.
+ *  
+ *  Summary:
+ *    Sets up the background color and/or pattern in the current
+ *    GrafPort so that an embedded control may erase its content bounds
+ *    appropriately for its containing control.
+ *  
+ *  Discussion:
+ *    This API is normally called by embedding controls in response to
+ *    a kEventControlApplyBackground Carbon event. It is only needed
+ *    when an embedding control is contained in a non-composited
+ *    window. The standard controls call this API to ensure a correct
+ *    background for the current theme prior to erasing their content
+ *    bounds (in a non-composited window). You should pass in the same
+ *    rectangle you would use if you were calling the drawing primitive
+ *    that corresponds to the ThemeBackgroundKind that you provide to
+ *    this API.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inKind:
+ *      The type of theme background for which to set the current
+ *      GrafPort's background color and/or pattern.
+ *    
+ *    bounds:
+ *      The bounds of the area that would be covered by the theme
+ *      background. This parameter is used to determine the appropriate
+ *      pattern offset, if necessary.
+ *    
+ *    inState:
+ *      The theme drawing state that should be used by the theme
+ *      background.
+ *    
+ *    inDepth:
+ *      The depth of the GDevice containing the current GrafPort. On
+ *      Mac OS X, this parameter is ignored, and you should always pass
+ *      32.
+ *    
+ *    inColorDev:
+ *      Whether the GDevice containing the current GrafPort is color or
+ *      black and white. On Mac OS X, this parameter is ignored, and
+ *      you should always pass true.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4745,35 +5527,65 @@ ApplyThemeBackground(
   const Rect *          bounds,
   ThemeDrawState        inState,
   SInt16                inDepth,
-  Boolean               inColorDev)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean               inColorDev)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  SetThemeTextColorForWindow() has moved to MacWindows.h
- */
-/*
- *  IsValidAppearanceFileType()
+ *  IsValidAppearanceFileType()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This API always returns false on Mac OS X.
+ *  
+ *  Summary:
+ *    Indicates whether a specified file type is used for theme files.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
 extern Boolean 
-IsValidAppearanceFileType(OSType fileType)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsValidAppearanceFileType(OSType fileType)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
  *  GetThemeBrushAsColor()
  *  
+ *  Summary:
+ *    Retrieves the color that most closely matches a theme brush.
+ *  
+ *  Discussion:
+ *    Note that the color may not exactly reproduce the theme brush,
+ *    since many brushes are drawn using a pattern rather than a solid
+ *    color.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inBrush:
+ *      The brush whose color to retrieve.
+ *    
+ *    inDepth:
+ *      The depth of the GDevice containing the current GrafPort. On
+ *      Mac OS X, this parameter is ignored, and you should always pass
+ *      32.
+ *    
+ *    inColorDev:
+ *      Whether the GDevice containing the current GrafPort is color or
+ *      black and white. On Mac OS X, this parameter is ignored, and
+ *      you should always pass true.
+ *    
+ *    outColor:
+ *      On exit, contains the color that corresponds to the specified
+ *      brush.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4788,11 +5600,32 @@ GetThemeBrushAsColor(
 /*
  *  GetThemeTextColor()
  *  
+ *  Summary:
+ *    Retrieves the color that is used to draw a specified type of text.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inColor:
+ *      The text color to retrieve.
+ *    
+ *    inDepth:
+ *      The depth of the GDevice containing the current GrafPort. On
+ *      Mac OS X, this parameter is ignored, and you should always pass
+ *      32.
+ *    
+ *    inColorDev:
+ *      Whether the GDevice containing the current GrafPort is color or
+ *      black and white. On Mac OS X, this parameter is ignored, and
+ *      you should always pass true.
+ *    
+ *    outColor:
+ *      On exit, contains the specified text color.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
  */
@@ -4805,11 +5638,25 @@ GetThemeTextColor(
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ BEGIN CARBON ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+#endif  /* !__LP64__ */
+
 /*
  *  GetThemeMetric()
  *  
+ *  Summary:
+ *    Returns a measurement in points for a specified type of user
+ *    interface element.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMetric:
+ *      The metric to retrieve.
+ *    
+ *    outMetric:
+ *      The size of the specified user interface element, in points.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4825,8 +5672,18 @@ GetThemeMetric(
 /*
  *  CopyThemeIdentifier()
  *  
+ *  Summary:
+ *    Retrieves a string identifying the current theme variant, which
+ *    may be Aqua or Graphite.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outIdentifier:
+ *      On exit, contains the theme variant identifier. This string
+ *      must be released by the caller.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
@@ -4956,7 +5813,7 @@ enum {
 };
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

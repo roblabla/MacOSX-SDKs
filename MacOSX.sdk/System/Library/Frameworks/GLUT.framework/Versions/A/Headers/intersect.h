@@ -140,7 +140,7 @@
 {								\
    double v21[3], v32[3];					\
    double len21, len32;						\
-   double dot;							\
+   double vdot;							\
 								\
    VEC_DIFF (v21, v2, v1);					\
    VEC_DIFF (v32, v3, v2);					\
@@ -180,18 +180,18 @@
          len32 = 1.0 / len32;					\
          VEC_SCALE (v32, len32, v32);				\
 								\
-         VEC_DOT_PRODUCT (dot, v32, v21);			\
+         VEC_DOT_PRODUCT (vdot, v32, v21);			\
 								\
-         /* if dot == 1 or -1, then points are colinear */	\
-         if ((dot >= (1.0-DEGENERATE_TOLERANCE)) || 		\
-             (dot <= (-1.0+DEGENERATE_TOLERANCE))) {		\
+         /* if vdot == 1 or -1, then points are colinear */	\
+         if ((vdot >= (1.0-DEGENERATE_TOLERANCE)) || 		\
+             (vdot <= (-1.0+DEGENERATE_TOLERANCE))) {		\
             VEC_COPY (n, v21);					\
          } else {						\
    								\
             /* go do the full computation */ 			\
-            n[0] = dot * (v32[0] + v21[0]) - v32[0] - v21[0];	\
-            n[1] = dot * (v32[1] + v21[1]) - v32[1] - v21[1];	\
-            n[2] = dot * (v32[2] + v21[2]) - v32[2] - v21[2];	\
+            n[0] = vdot * (v32[0] + v21[0]) - v32[0] - v21[0];	\
+            n[1] = vdot * (v32[1] + v21[1]) - v32[1] - v21[1];	\
+            n[2] = vdot * (v32[2] + v21[2]) - v32[2] - v21[2];	\
 								\
             /* if above if-test's passed, 			\
              * n should NEVER be of zero length */		\
@@ -217,7 +217,7 @@
 {								\
    double v21[3], v32[3];					\
    double len21, len32;						\
-   double dot;							\
+   double vdot;							\
 								\
    VEC_DIFF (v21, v2, v1);					\
    VEC_DIFF (v32, v3, v2);					\
@@ -252,17 +252,17 @@
          len32 = 1.0 / len32;					\
          VEC_SCALE (v32, len32, v32);				\
 								\
-         VEC_DOT_PRODUCT (dot, v32, v21);			\
+         VEC_DOT_PRODUCT (vdot, v32, v21);			\
 								\
-         /* if dot == 1 or -1, then points are colinear */	\
-         if ((dot == 1.0) || (dot == -1.0)) {			\
+         /* if vdot == 1 or -1, then points are colinear */	\
+         if ((vdot == 1.0) || (vdot == -1.0)) {			\
             VEC_COPY (n, v21);					\
          } else {						\
    								\
             /* go do the full computation */ 			\
-            n[0] = dot * (v32[0] + v21[0]) - v32[0] - v21[0];	\
-            n[1] = dot * (v32[1] + v21[1]) - v32[1] - v21[1];	\
-            n[2] = dot * (v32[2] + v21[2]) - v32[2] - v21[2];	\
+            n[0] = vdot * (v32[0] + v21[0]) - v32[0] - v21[0];	\
+            n[1] = vdot * (v32[1] + v21[1]) - v32[1] - v21[1];	\
+            n[2] = vdot * (v32[2] + v21[2]) - v32[2] - v21[2];	\
 								\
             /* if above if-test's passed, 			\
              * n should NEVER be of zero length */		\

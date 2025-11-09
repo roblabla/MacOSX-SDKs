@@ -61,11 +61,24 @@ extern NSString *kCIContextUseSoftwareRenderer AVAILABLE_MAC_OS_X_VERSION_10_4_A
 
 - (CGImageRef)createCGImage:(CIImage *)im fromRect:(CGRect)r;
 
+/* Create a new CGImage from the specified subrect of the image. If
+ * non-nil the new image will be created in the specified format and
+ * colorspace. */
+
+- (CGImageRef)createCGImage:(CIImage *)im fromRect:(CGRect)r
+    format:(CIFormat)f colorSpace:(CGColorSpaceRef)cs;
+
 /* Create a CoreGraphics layer object suitable for creating content for
  * subsequently rendering into this CI context. The 'd' parameter is
  * passed into CGLayerCreate () as the auxiliaryInfo dictionary. */
 
 - (CGLayerRef)createCGLayerWithSize:(CGSize)size info:(CFDictionaryRef)d;
+
+/* Render to the given bitmap. Null colorspace means to use the context's
+   output colorspace. */
+
+- (void)render:(CIImage *)im toBitmap:(void *)data rowBytes:(ptrdiff_t)rb
+    bounds:(CGRect)r format:(CIFormat)f colorSpace:(CGColorSpaceRef)cs;
 
 /* Runs the context's garbage collector to reclaim any resources that
  * are no longer required (e.g. removes textures from the texture cache

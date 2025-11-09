@@ -3,14 +3,9 @@
  
      Contains:   ICC Profile Format Definitions
  
-     Version:    ColorSync-174.3.3~45
+     Copyright:  1994-2005 by Apple Computer, Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+     Bugs?:      For bug reports, consult http://developer.apple.com/bugreporter/
  
 */
 #ifndef __CMICCPROFILE__
@@ -20,6 +15,7 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
+#include <ColorSync/CMBase.h>
 
 #include <AvailabilityMacros.h>
 
@@ -27,7 +23,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* ICC Profile version constants  */
 enum {
@@ -40,7 +36,7 @@ enum {
 
 /* Current Major version number */
 enum {
-  cmProfileMajorVersionMask     = (long)0xFF000000,
+  cmProfileMajorVersionMask     = (int)0xFF000000,
   cmCurrentProfileMajorVersion  = 0x02000000
 };
 
@@ -58,8 +54,8 @@ enum {
   cmICCReservedFlagsMask        = 0x0000FFFF, /* these bits of the flags field are defined and reserved by ICC */
   cmEmbeddedMask                = 0x00000001, /* if bit 0 is 0 then not embedded profile, if 1 then embedded profile */
   cmEmbeddedUseMask             = 0x00000002, /* if bit 1 is 0 then ok to use anywhere, if 1 then ok to use as embedded profile only */
-  cmBlackPointCompensationMask  = 0x00000004, /* if bit 1 is 0 then ok to use anywhere, if 1 then ok to use as embedded profile only */
-  cmCMSReservedFlagsMask        = (long)0xFFFF0000, /* these bits of the flags field are defined and reserved by CMS vendor */
+  cmBlackPointCompensationMask  = 0x00000004, /* if bit 2 is 1 then CMM will enable Black Point Compensation if applicable*/
+  cmCMSReservedFlagsMask        = (int)0xFFFF0000, /* these bits of the flags field are defined and reserved by CMS vendor */
   cmQualityMask                 = 0x00030000, /* if bits 16-17 is 0 then normal, if 1 then draft, if 2 then best */
   cmInterpolationMask           = 0x00040000, /* if bit 18 is 0 then interpolation, if 1 then lookup only */
   cmGamutCheckingMask           = 0x00080000 /* if bit 19 is 0 then create gamut checking info, if 1 then no gamut checking info */
@@ -371,34 +367,34 @@ enum {
 };
 
 /* General element data types */
-struct CMDateTime {
+typedef struct CMDateTime {
   UInt16              year;
   UInt16              month;
   UInt16              dayOfTheMonth;
   UInt16              hours;
   UInt16              minutes;
   UInt16              seconds;
-};
-typedef struct CMDateTime               CMDateTime;
-struct CMFixedXYColor {
+} CMDateTime;
+
+typedef struct CMFixedXYColor {
   Fixed               x;
   Fixed               y;
-};
-typedef struct CMFixedXYColor           CMFixedXYColor;
-struct CMFixedXYZColor {
+} CMFixedXYColor;
+
+typedef struct CMFixedXYZColor {
   Fixed               X;
   Fixed               Y;
   Fixed               Z;
-};
-typedef struct CMFixedXYZColor          CMFixedXYZColor;
+} CMFixedXYZColor;
 
 typedef UInt16                          CMXYZComponent;
-struct CMXYZColor {
+
+typedef struct CMXYZColor {
   CMXYZComponent      X;
   CMXYZComponent      Y;
   CMXYZComponent      Z;
-};
-typedef struct CMXYZColor               CMXYZColor;
+} CMXYZColor;
+
 /* Typedef for Profile MD5 message digest */
 /* Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm */
 
@@ -413,16 +409,16 @@ typedef CMProfileMD5 *                  CMProfileMD5Ptr;
 #ifdef __cplusplus
   inline Boolean CMProfileMD5AreEqual(CMProfileMD5 a, CMProfileMD5 b)
   {
-    return  ((long*)a)[0]==((long*)b)[0] && ((long*)a)[1]==((long*)b)[1] &&
-         ((long*)a)[2]==((long*)b)[2] && ((long*)a)[3]==((long*)b)[3];
+    return  ((UInt32*)a)[0]==((UInt32*)b)[0] && ((UInt32*)a)[1]==((UInt32*)b)[1] &&
+            ((UInt32*)a)[2]==((UInt32*)b)[2] && ((UInt32*)a)[3]==((UInt32*)b)[3];
   }
 #else
   #define CMProfileMD5AreEqual(a, b) (\
-    ((long*)a)[0]==((long*)b)[0] && ((long*)a)[1]==((long*)b)[1] && \
-  ((long*)a)[2]==((long*)b)[2] && ((long*)a)[3]==((long*)b)[3])
+    ((UInt32*)a)[0]==((UInt32*)b)[0] && ((UInt32*)a)[1]==((UInt32*)b)[1] && \
+    ((UInt32*)a)[2]==((UInt32*)b)[2] && ((UInt32*)a)[3]==((UInt32*)b)[3])
 #endif
 
-struct CM2Header {
+typedef struct CM2Header {
   UInt32              size;                   /* This is the total size of the Profile */
   OSType              CMMType;                /* CMM signature,  Registered with CS2 consortium  */
   UInt32              profileVersion;         /* Version of CMProfile format */
@@ -440,9 +436,9 @@ struct CM2Header {
   CMFixedXYZColor     white;                  /* profile illuminant */
   OSType              creator;                /* profile creator */
   char                reserved[44];           /* reserved for future use */
-};
-typedef struct CM2Header                CM2Header;
-struct CM4Header {
+} CM2Header;
+
+typedef struct CM4Header {
   UInt32              size;                   /* This is the total size of the Profile */
   OSType              CMMType;                /* CMM signature,  Registered with CS2 consortium  */
   UInt32              profileVersion;         /* Version of CMProfile format */
@@ -461,55 +457,53 @@ struct CM4Header {
   OSType              creator;                /* profile creator */
   CMProfileMD5        digest;                 /* Profile message digest */
   char                reserved[28];           /* reserved for future use */
-};
-typedef struct CM4Header                CM4Header;
-struct CMTagRecord {
+} CM4Header;
+
+typedef struct CMTagRecord {
   OSType              tag;                    /* Registered with CS2 consortium */
   UInt32              elementOffset;          /* Relative to start of CMProfile */
   UInt32              elementSize;
-};
-typedef struct CMTagRecord              CMTagRecord;
-struct CMTagElemTable {
+} CMTagRecord;
+
+typedef struct CMTagElemTable {
   UInt32              count;
   CMTagRecord         tagList[1];             /* variable size, determined by count */
-};
-typedef struct CMTagElemTable           CMTagElemTable;
-struct CM2Profile {
+} CMTagElemTable;
+
+typedef struct CM2Profile {
   CM2Header           header;
   CMTagElemTable      tagTable;
   char                elemData[1];            /* variable size data for tagged element storage */
-};
-typedef struct CM2Profile               CM2Profile;
-typedef CM2Profile *                    CM2ProfilePtr;
-typedef CM2ProfilePtr *                 CM2ProfileHandle;
+} CM2Profile, *CM2ProfilePtr, **CM2ProfileHandle;
+
 /* Tag Type Definitions */
-struct CMAdaptationMatrixType {
+typedef struct CMAdaptationMatrixType {
   OSType              typeDescriptor;         /* 'sf32' = cmSigS15Fixed16Type */
-  unsigned long       reserved;               /* fill with 0x00 */
+  UInt32              reserved;               /* fill with 0x00 */
   Fixed               adaptationMatrix[9];    /* fixed size of nine matrix entries */
-};
-typedef struct CMAdaptationMatrixType   CMAdaptationMatrixType;
-struct CMCurveType {
+} CMAdaptationMatrixType;
+
+typedef struct CMCurveType {
   OSType              typeDescriptor;         /* 'curv' = cmSigCurveType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              countValue;             /* number of entries in table that follows */
   UInt16              data[1];                /* variable size, determined by countValue */
-};
-typedef struct CMCurveType              CMCurveType;
-struct CMDataType {
+} CMCurveType;
+
+typedef struct CMDataType {
   OSType              typeDescriptor;         /* 'data' = cmSigDataType*/
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              dataFlag;               /* 0 = ASCII, 1 = binary */
   char                data[1];                /* variable size, determined by tag element size */
-};
-typedef struct CMDataType               CMDataType;
-struct CMDateTimeType {
+} CMDataType;
+
+typedef struct CMDateTimeType {
   OSType              typeDescriptor;         /* 'dtim' = cmSigDateTimeType */
   UInt32              reserved;               /* fill with 0x00 */
   CMDateTime          dateTime;               /* */
-};
-typedef struct CMDateTimeType           CMDateTimeType;
-struct CMLut16Type {
+} CMDateTimeType;
+
+typedef struct CMLut16Type {
   OSType              typeDescriptor;         /* 'mft2' = cmSigLut16Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               inputChannels;          /* Number of input channels */
@@ -528,9 +522,9 @@ struct CMLut16Type {
   UInt16              CLUT[];                 /* variable size, determined by (gridPoints^inputChannels)*outputChannels */
   UInt16              outputTable[];          /* variable size, determined by outputChannels*outputTableEntries */
 #endif
-};
-typedef struct CMLut16Type              CMLut16Type;
-struct CMLut8Type {
+} CMLut16Type;
+
+typedef struct CMLut8Type {
   OSType              typeDescriptor;         /* 'mft1' = cmSigLut8Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               inputChannels;          /* Number of input channels */
@@ -547,9 +541,9 @@ struct CMLut8Type {
   UInt8               CLUT[];                 /* variable size, determined by (gridPoints^inputChannels)*outputChannels */
   UInt8               outputTable[];          /* variable size, determined by outputChannels*256 */
 #endif
-};
-typedef struct CMLut8Type               CMLut8Type;
-struct CMMultiFunctLutType {
+} CMLut8Type;
+
+typedef struct CMMultiFunctLutType {
   OSType              typeDescriptor;         /* 'mAB ' = cmSigMultiFunctA2BType or 'mBA ' = cmSigMultiFunctB2AType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               inputChannels;          /* Number of input channels */
@@ -561,18 +555,16 @@ struct CMMultiFunctLutType {
   UInt32              offsetCLUT;             /* offset to multi-dimensional LUT of type CMMultiFunctCLUTType */
   UInt32              offsetAcurves;          /* offset to first "A" curve */
   UInt8               data[1];                /* variable size */
-};
-typedef struct CMMultiFunctLutType      CMMultiFunctLutType;
-typedef CMMultiFunctLutType             CMMultiFunctLutA2BType;
-typedef CMMultiFunctLutType             CMMultiFunctLutB2AType;
-struct CMMultiFunctCLUTType {
+} CMMultiFunctLutType, CMMultiFunctLutA2BType, CMMultiFunctLutB2AType;
+
+typedef struct CMMultiFunctCLUTType {
   UInt8               gridPoints[16];         /* grigpoints for each input channel dimension (remaining are 0) */
   UInt8               entrySize;              /* bytes per lut enrty (1 or 2) */
   UInt8               reserved[3];            /* fill with 0x00 */
-  UInt8               data[1];                /* variable size, determined by above */
-};
-typedef struct CMMultiFunctCLUTType     CMMultiFunctCLUTType;
-struct CMMeasurementType {
+  UInt8               data[2];                /* variable size, determined by above */
+} CMMultiFunctCLUTType;
+
+typedef struct CMMeasurementType {
   OSType              typeDescriptor;         /* 'meas' = cmSigMeasurementType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              standardObserver;       /* cmStdobsUnknown, cmStdobs1931TwoDegrees, cmStdobs1964TenDegrees */
@@ -580,9 +572,9 @@ struct CMMeasurementType {
   UInt32              geometry;               /* cmGeometryUnknown, cmGeometry045or450 (0/45), cmGeometry0dord0 (0/d or d/0) */
   UInt32              flare;                  /* cmFlare0, cmFlare100 */
   UInt32              illuminant;             /* cmIlluminantUnknown, cmIlluminantD50, ... */
-};
-typedef struct CMMeasurementType        CMMeasurementType;
-struct CMNamedColorType {
+} CMMeasurementType;
+
+typedef struct CMNamedColorType {
   OSType              typeDescriptor;         /* 'ncol' = cmSigNamedColorType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              vendorFlag;             /* */
@@ -599,15 +591,15 @@ struct CMNamedColorType {
     UInt8             colorCoords[];          /* variable size */
   } colorName[];                              /* variable size */
 #endif
-};
-typedef struct CMNamedColorType         CMNamedColorType;
-struct CMNamedColor2EntryType {
+} CMNamedColorType;
+
+typedef struct CMNamedColor2EntryType {
   UInt8               rootName[32];           /* 32 byte field.  7 bit ASCII null terminated */
   UInt16              PCSColorCoords[3];      /* Lab or XYZ color */
   UInt16              DeviceColorCoords[1];   /* variable size */
-};
-typedef struct CMNamedColor2EntryType   CMNamedColor2EntryType;
-struct CMNamedColor2Type {
+} CMNamedColor2EntryType;
+
+typedef struct CMNamedColor2Type {
   OSType              typeDescriptor;         /* 'ncl2' = cmSigNamedColor2Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              vendorFlag;             /* lower 16 bits reserved for ICC use */
@@ -616,9 +608,9 @@ struct CMNamedColor2Type {
   UInt8               prefixName[32];         /* Fixed 32 byte size.  7 bit ASCII null terminated */
   UInt8               suffixName[32];         /* Fixed 32 byte size.  7 bit ASCII null terminated */
   char                data[1];                /* variable size data for CMNamedColor2EntryType */
-};
-typedef struct CMNamedColor2Type        CMNamedColor2Type;
-struct CMNativeDisplayInfo {
+} CMNamedColor2Type;
+
+typedef struct CMNativeDisplayInfo {
   UInt32              dataSize;               /* Size of this structure */
   CMFixedXYColor      redPhosphor;            /* Phosphors - native cromaticity values of the display  */
   CMFixedXYColor      greenPhosphor;
@@ -634,23 +626,23 @@ struct CMNativeDisplayInfo {
   UInt16              gammaEntryCount;        /* 1-based number of entries per channel */
   UInt16              gammaEntrySize;         /* size in bytes of each entry */
   char                gammaData[1];           /* variable size, determined by channels*entryCount*entrySize */
-};
-typedef struct CMNativeDisplayInfo      CMNativeDisplayInfo;
-struct CMNativeDisplayInfoType {
+} CMNativeDisplayInfo;
+
+typedef struct CMNativeDisplayInfoType {
   OSType              typeDescriptor;         /* 'ndin' = cmSigNativeDisplayInfoType */
-  unsigned long       reserved;               /* fill with 0x00 */
-  CMNativeDisplayInfo  nativeDisplayInfo;     /* data of type CMNativeDisplayInfo */
-};
-typedef struct CMNativeDisplayInfoType  CMNativeDisplayInfoType;
-struct CMParametricCurveType {
+  UInt32              reserved;               /* fill with 0x00 */
+  CMNativeDisplayInfo nativeDisplayInfo;      /* data of type CMNativeDisplayInfo */
+} CMNativeDisplayInfoType;
+
+typedef struct CMParametricCurveType {
   OSType              typeDescriptor;         /* 'para' = cmSigParametricCurveType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt16              functionType;           /* cmParametricType0, cmParametricType1, etc. */
   UInt16              reserved2;              /* fill with 0x00 */
   Fixed               value[1];               /* variable size, determined by functionType */
-};
-typedef struct CMParametricCurveType    CMParametricCurveType;
-struct CMTextDescriptionType {
+} CMParametricCurveType;
+
+typedef struct CMTextDescriptionType {
   OSType              typeDescriptor;         /* 'desc' = cmSigProfileDescriptionType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              ASCIICount;             /* Count of bytes (including null terminator)  */
@@ -667,98 +659,98 @@ struct CMTextDescriptionType {
   UInt8               ScriptCodeCount;        /* Count of bytes (including null terminator) */
   UInt8               ScriptCodeName[];       /* variable size, determined by ScriptCodeCount */
 #endif
-};
-typedef struct CMTextDescriptionType    CMTextDescriptionType;
-struct CMTextType {
+} CMTextDescriptionType;
+
+typedef struct CMTextType {
   OSType              typeDescriptor;         /* 'text' = cmSigTextType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               text[1];                /* variable size, determined by tag element size */
-};
-typedef struct CMTextType               CMTextType;
-struct CMUnicodeTextType {
+} CMTextType;
+
+typedef struct CMUnicodeTextType {
   OSType              typeDescriptor;         /* 'utxt' = cmSigUnicodeTextType */
   UInt32              reserved;               /* fill with 0x00 */
   UniChar             text[1];                /* variable size, determined by tag element size  */
-};
-typedef struct CMUnicodeTextType        CMUnicodeTextType;
-struct CMScreeningChannelRec {
+} CMUnicodeTextType;
+
+typedef struct CMScreeningChannelRec {
   Fixed               frequency;
   Fixed               angle;
   UInt32              spotFunction;
-};
-typedef struct CMScreeningChannelRec    CMScreeningChannelRec;
-struct CMScreeningType {
+} CMScreeningChannelRec;
+
+typedef struct CMScreeningType {
   OSType              typeDescriptor;         /* 'scrn' = cmSigScreeningType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              screeningFlag;          /* bit 0 : use printer default screens, bit 1 : inch/cm */
   UInt32              channelCount;           /* */
   CMScreeningChannelRec  channelInfo[1];      /* variable size, determined by channelCount */
-};
-typedef struct CMScreeningType          CMScreeningType;
-struct CMSignatureType {
+} CMScreeningType;
+
+typedef struct CMSignatureType {
   OSType              typeDescriptor;         /* 'sig ' = cmSigSignatureType */
   UInt32              reserved;               /* fill with 0x00 */
   OSType              signature;
-};
-typedef struct CMSignatureType          CMSignatureType;
-struct CMS15Fixed16ArrayType {
+} CMSignatureType;
+
+typedef struct CMS15Fixed16ArrayType {
   OSType              typeDescriptor;         /* 'sf32' = cmSigS15Fixed16Type */
   UInt32              reserved;               /* fill with 0x00 */
   Fixed               value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMS15Fixed16ArrayType    CMS15Fixed16ArrayType;
-struct CMU16Fixed16ArrayType {
+} CMS15Fixed16ArrayType;
+
+typedef struct CMU16Fixed16ArrayType {
   OSType              typeDescriptor;         /* 'uf32' = cmSigU16Fixed16Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMU16Fixed16ArrayType    CMU16Fixed16ArrayType;
-struct CMUInt8ArrayType {
+} CMU16Fixed16ArrayType;
+
+typedef struct CMUInt8ArrayType {
   OSType              typeDescriptor;         /* 'ui08' = cmSigUInt8Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMUInt8ArrayType         CMUInt8ArrayType;
-struct CMUInt16ArrayType {
+} CMUInt8ArrayType;
+
+typedef struct CMUInt16ArrayType {
   OSType              typeDescriptor;         /* 'ui16' = cmSigUInt16Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt16              value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMUInt16ArrayType        CMUInt16ArrayType;
-struct CMUInt32ArrayType {
+} CMUInt16ArrayType;
+
+typedef struct CMUInt32ArrayType {
   OSType              typeDescriptor;         /* 'ui32' = cmSigUInt32Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMUInt32ArrayType        CMUInt32ArrayType;
-struct CMUInt64ArrayType {
+} CMUInt32ArrayType;
+
+typedef struct CMUInt64ArrayType {
   OSType              typeDescriptor;         /* 'ui64' = cmSigUInt64Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-};
-typedef struct CMUInt64ArrayType        CMUInt64ArrayType;
-struct CMViewingConditionsType {
+} CMUInt64ArrayType;
+
+typedef struct CMViewingConditionsType {
   OSType              typeDescriptor;         /* 'view' = cmSigViewingConditionsType */
   UInt32              reserved;               /* fill with 0x00 */
   CMFixedXYZColor     illuminant;             /* absolute XYZs of illuminant  in cd/m^2 */
   CMFixedXYZColor     surround;               /* absolute XYZs of surround in cd/m^2 */
   UInt32              stdIlluminant;          /* see definitions of std illuminants */
-};
-typedef struct CMViewingConditionsType  CMViewingConditionsType;
-struct CMXYZType {
+} CMViewingConditionsType;
+
+typedef struct CMXYZType {
   OSType              typeDescriptor;         /* 'XYZ ' = cmSigXYZType */
   UInt32              reserved;               /* fill with 0x00 */
   CMFixedXYZColor     XYZ[1];                 /* variable size, determined by tag element size */
-};
-typedef struct CMXYZType                CMXYZType;
-struct CMProfileSequenceDescType {
+} CMXYZType;
+
+typedef struct CMProfileSequenceDescType {
   OSType              typeDescriptor;         /* 'pseq' = cmProfileSequenceDescTag */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              count;                  /* Number of descriptions */
   char                data[1];                /* variable size data explained in ICC spec */
-};
-typedef struct CMProfileSequenceDescType CMProfileSequenceDescType;
-struct CMUcrBgType {
+} CMProfileSequenceDescType;
+
+typedef struct CMUcrBgType {
   OSType              typeDescriptor;         /* 'bfd ' = cmSigUcrBgType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              ucrCount;               /* Number of UCR entries */
@@ -772,34 +764,38 @@ struct CMUcrBgType {
   UInt16              bgValues[];             /* variable size, determined by bgCount */
   UInt8               ucrbgASCII[];           /* null terminated ASCII string */
 #endif
-};
-typedef struct CMUcrBgType              CMUcrBgType;
+} CMUcrBgType;
+
+
 /* Private Tag Type Definitions */
-struct CMIntentCRDVMSize {
-  long                renderingIntent;        /* rendering intent */
+
+
+typedef struct CMIntentCRDVMSize {
+  UInt32              renderingIntent;        /* rendering intent */
   UInt32              VMSize;                 /* VM size taken up by the CRD */
-};
-typedef struct CMIntentCRDVMSize        CMIntentCRDVMSize;
-struct CMPS2CRDVMSizeType {
+} CMIntentCRDVMSize;
+
+typedef struct CMPS2CRDVMSizeType {
   OSType              typeDescriptor;         /* 'psvm' = cmSigPS2CRDVMSizeType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              count;                  /* number of intent entries */
   CMIntentCRDVMSize   intentCRD[1];           /* variable size, determined by count */
-};
-typedef struct CMPS2CRDVMSizeType       CMPS2CRDVMSizeType;
+} CMPS2CRDVMSizeType;
+
+
 enum {
   cmVideoCardGammaTableType     = 0,
   cmVideoCardGammaFormulaType   = 1
 };
 
-struct CMVideoCardGammaTable {
+typedef struct CMVideoCardGammaTable {
   UInt16              channels;               /* # of gamma channels (1 or 3) */
   UInt16              entryCount;             /* 1-based number of entries per channel */
   UInt16              entrySize;              /* size in bytes of each entry */
   char                data[1];                /* variable size, determined by channels*entryCount*entrySize */
-};
-typedef struct CMVideoCardGammaTable    CMVideoCardGammaTable;
-struct CMVideoCardGammaFormula {
+} CMVideoCardGammaTable;
+
+typedef struct CMVideoCardGammaFormula {
   Fixed               redGamma;               /* must be > 0.0 */
   Fixed               redMin;                 /* must be > 0.0 and < 1.0 */
   Fixed               redMax;                 /* must be > 0.0 and < 1.0 */
@@ -809,23 +805,23 @@ struct CMVideoCardGammaFormula {
   Fixed               blueGamma;              /* must be > 0.0 */
   Fixed               blueMin;                /* must be > 0.0 and < 1.0 */
   Fixed               blueMax;                /* must be > 0.0 and < 1.0 */
-};
-typedef struct CMVideoCardGammaFormula  CMVideoCardGammaFormula;
-struct CMVideoCardGamma {
+} CMVideoCardGammaFormula;
+
+typedef struct CMVideoCardGamma {
   UInt32              tagType;
   union {
-    CMVideoCardGammaTable  table;
+    CMVideoCardGammaTable    table;
     CMVideoCardGammaFormula  formula;
   }                       u;
-};
-typedef struct CMVideoCardGamma         CMVideoCardGamma;
-struct CMVideoCardGammaType {
+} CMVideoCardGamma;
+
+typedef struct CMVideoCardGammaType {
   OSType              typeDescriptor;         /* 'vcgt' = cmSigVideoCardGammaType */
   UInt32              reserved;               /* fill with 0x00 */
   CMVideoCardGamma    gamma;
-};
-typedef struct CMVideoCardGammaType     CMVideoCardGammaType;
-struct CMMakeAndModel {
+} CMVideoCardGammaType;
+
+typedef struct CMMakeAndModel {
   OSType              manufacturer;
   UInt32              model;
   UInt32              serialNumber;
@@ -834,32 +830,32 @@ struct CMMakeAndModel {
   UInt32              reserved2;              /* fill with 0x00 */
   UInt32              reserved3;              /* fill with 0x00 */
   UInt32              reserved4;              /* fill with 0x00 */
-};
-typedef struct CMMakeAndModel           CMMakeAndModel;
-struct CMMakeAndModelType {
+} CMMakeAndModel;
+
+typedef struct CMMakeAndModelType {
   OSType              typeDescriptor;         /* 'mmod' = cmSigMakeAndModelType */
   UInt32              reserved;               /* fill with 0x00 */
   CMMakeAndModel      makeAndModel;
-};
-typedef struct CMMakeAndModelType       CMMakeAndModelType;
-struct CMMultiLocalizedUniCodeEntryRec {
+} CMMakeAndModelType;
+
+typedef struct CMMultiLocalizedUniCodeEntryRec {
   char                languageCode[2];        /* language code from ISO-639 */
   char                regionCode[2];          /* region code from ISO-3166 */
   UInt32              textLength;             /* the length in bytes of the string */
   UInt32              textOffset;             /* the offset from the start of tag in bytes */
-};
-typedef struct CMMultiLocalizedUniCodeEntryRec CMMultiLocalizedUniCodeEntryRec;
-struct CMMultiLocalizedUniCodeType {
+} CMMultiLocalizedUniCodeEntryRec;
+
+typedef struct CMMultiLocalizedUniCodeType {
   OSType              typeDescriptor;         /* 'mluc' = cmSigMultiLocalizedUniCodeType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              entryCount;             /* 1-based number of name records that follow */
   UInt32              entrySize;              /* size in bytes of name records that follow */
-
                                               /* variable-length data for storage of CMMultiLocalizedUniCodeEntryRec */
-
                                               /* variable-length data for storage of Unicode strings*/
-};
-typedef struct CMMultiLocalizedUniCodeType CMMultiLocalizedUniCodeType;
+} CMMultiLocalizedUniCodeType;
+
+
+#if !__LP64__
 /************************************************************************/
 /*************** ColorSync 1.0 profile specification ********************/
 /************************************************************************/
@@ -885,11 +881,11 @@ enum {
 };
 
 
-struct CMIString {
+typedef struct CMIString {
   ScriptCode          theScript;
   Str63               theString;
-};
-typedef struct CMIString                CMIString;
+} CMIString;
+
 /* Profile options */
 enum {
   cmPerceptualMatch             = 0x0000, /* Default. For photographic images */
@@ -904,9 +900,10 @@ enum {
 };
 
 
-typedef long                            CMMatchOption;
-typedef long                            CMMatchFlag;
-struct CMHeader {
+typedef UInt32 CMMatchOption;
+typedef UInt32 CMMatchFlag;
+
+typedef struct CMHeader {
   UInt32              size;
   OSType              CMMType;
   UInt32              applProfileVersion;
@@ -921,36 +918,34 @@ struct CMHeader {
   CMMatchOption       options;
   CMXYZColor          white;
   CMXYZColor          black;
-};
-typedef struct CMHeader                 CMHeader;
-struct CMProfileChromaticities {
+} CMHeader;
+
+typedef struct CMProfileChromaticities {
   CMXYZColor          red;
   CMXYZColor          green;
   CMXYZColor          blue;
   CMXYZColor          cyan;
   CMXYZColor          magenta;
   CMXYZColor          yellow;
-};
-typedef struct CMProfileChromaticities  CMProfileChromaticities;
-struct CMProfileResponse {
+} CMProfileChromaticities;
+
+typedef struct CMProfileResponse {
   UInt16              counts[9];
   UInt16              data[1];                /* Variable size */
-};
-typedef struct CMProfileResponse        CMProfileResponse;
-struct CMProfile {
+} CMProfileResponse;
+
+typedef struct CMProfile {
   CMHeader            header;
   CMProfileChromaticities  profile;
   CMProfileResponse   response;
   CMIString           profileName;
   char                customData[1];          /* Variable size */
-};
-typedef struct CMProfile                CMProfile;
-typedef CMProfile *                     CMProfilePtr;
-typedef CMProfilePtr *                  CMProfileHandle;
+} CMProfile, *CMProfilePtr, **CMProfileHandle;
+
+#endif // !__LP64__
 
 
-
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __CMICCPROFILE__ */

@@ -1,7 +1,7 @@
 /*
 	NSView.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,8 +10,12 @@
 #import <Foundation/NSRange.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSGraphics.h>
+#import <AppKit/NSAnimation.h>
 
 @class NSBitmapImageRep, NSCursor, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSWindow, NSAttributedString;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class CIFilter, CALayer, NSDictionary, NSScreen, NSShadow, NSTrackingArea;
+#endif
 
 enum {
     NSViewNotSizable			=  0,
@@ -23,12 +27,13 @@ enum {
     NSViewMaxYMargin			= 32
 };
 
-typedef enum _NSBorderType {
+enum {
     NSNoBorder				= 0,
     NSLineBorder			= 1,
     NSBezelBorder			= 2,
     NSGrooveBorder			= 3
-} NSBorderType;
+};
+typedef NSUInteger NSBorderType;
 
 typedef struct __VFlags {
 #ifdef __BIG_ENDIAN__
@@ -80,12 +85,15 @@ typedef struct __VFlags {
 #endif
 } _VFlags;
 
-typedef int NSTrackingRectTag;
-typedef int NSToolTipTag;
+typedef NSInteger NSTrackingRectTag;
+typedef NSInteger NSToolTipTag;
 
 @class _NSViewAuxiliary;
 
 @interface NSView : NSResponder
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+<NSAnimatablePropertyContainer>
+#endif
 {
     /*All instance variables are private*/
     NSRect              _frame;
@@ -123,13 +131,19 @@ typedef int NSToolTipTag;
 - (BOOL)isHidden;
 - (BOOL)isHiddenOrHasHiddenAncestor;
 
-- (void)getRectsBeingDrawn:(const NSRect **)rects count:(int *)count;
+- (void)getRectsBeingDrawn:(const NSRect **)rects count:(NSInteger *)count;
 - (BOOL)needsToDrawRect:(NSRect)aRect;
 - (BOOL)wantsDefaultClipping;
 #endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)viewDidHide;
+- (void)viewDidUnhide;
+
+- (void)setSubviews:(NSArray *)newSubviews;
+#endif
 - (void)addSubview:(NSView *)aView;
 - (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(NSView *)otherView;
-- (void)sortSubviewsUsingFunction:(int (*)(id, id, void *))compare context:(void *)context;
+- (void)sortSubviewsUsingFunction:(NSComparisonResult (*)(id, id, void *))compare context:(void *)context;
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow;
 - (void)viewDidMoveToWindow;
 - (void)viewWillMoveToSuperview:(NSView *)newSuperview;
@@ -146,23 +160,27 @@ typedef int NSToolTipTag;
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize;
 - (void)setAutoresizesSubviews:(BOOL)flag;
 - (BOOL)autoresizesSubviews;
-- (void)setAutoresizingMask:(unsigned int)mask;
-- (unsigned int)autoresizingMask;
+- (void)setAutoresizingMask:(NSUInteger)mask;
+- (NSUInteger)autoresizingMask;
 
 - (void)setFrameOrigin:(NSPoint)newOrigin;
 - (void)setFrameSize:(NSSize)newSize;
 - (void)setFrame:(NSRect)frameRect;
 - (NSRect)frame;
-- (void)setFrameRotation:(float)angle;
-- (float)frameRotation;
+- (void)setFrameRotation:(CGFloat)angle;
+- (CGFloat)frameRotation;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setFrameCenterRotation:(CGFloat)angle;
+- (CGFloat)frameCenterRotation;
+#endif
 
 - (void)setBoundsOrigin:(NSPoint)newOrigin;
 - (void)setBoundsSize:(NSSize)newSize;
-- (void)setBoundsRotation:(float)angle;
-- (float)boundsRotation;
+- (void)setBoundsRotation:(CGFloat)angle;
+- (CGFloat)boundsRotation;
 - (void)translateOriginToPoint:(NSPoint)translation;
 - (void)scaleUnitSquareToSize:(NSSize)newUnitSize;
-- (void)rotateByAngle:(float)angle;
+- (void)rotateByAngle:(CGFloat)angle;
 - (void)setBounds:(NSRect)aRect;
 - (NSRect)bounds;
 
@@ -178,6 +196,15 @@ typedef int NSToolTipTag;
 - (NSRect)convertRect:(NSRect)aRect fromView:(NSView *)aView;
 - (NSRect)convertRect:(NSRect)aRect toView:(NSView *)aView;
 - (NSRect)centerScanRect:(NSRect)aRect;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSPoint)convertPointToBase:(NSPoint)aPoint;
+- (NSPoint)convertPointFromBase:(NSPoint)aPoint;
+- (NSSize)convertSizeToBase:(NSSize)aSize;
+- (NSSize)convertSizeFromBase:(NSSize)aSize;
+- (NSRect)convertRectToBase:(NSRect)aRect;
+- (NSRect)convertRectFromBase:(NSRect)aRect;
+#endif
 
 - (BOOL)canDraw;
 - (void)setNeedsDisplay:(BOOL)flag;
@@ -206,8 +233,11 @@ typedef int NSToolTipTag;
 - (NSBitmapImageRep *)bitmapImageRepForCachingDisplayInRect:(NSRect)rect;
 - (void)cacheDisplayInRect:(NSRect)rect toBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
 #endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)viewWillDraw;
+#endif
 
-- (int)gState;
+- (NSInteger)gState;
 - (void)allocateGState;
 - (void)releaseGState;
 - (void)setUpGState;
@@ -218,11 +248,14 @@ typedef int NSToolTipTag;
 - (BOOL)autoscroll:(NSEvent *)theEvent;
 - (NSRect)adjustScroll:(NSRect)newVisible;
 - (void)scrollRect:(NSRect)aRect by:(NSSize)delta;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)translateRectsNeedingDisplayInRect:(NSRect)clipRect by:(NSSize)delta;
+#endif
 
 - (NSView *)hitTest:(NSPoint)aPoint;
 - (BOOL)mouse:(NSPoint)aPoint inRect:(NSRect)aRect;
-- (id)viewWithTag:(int)aTag;
-- (int)tag;
+- (id)viewWithTag:(NSInteger)aTag;
+- (NSInteger)tag;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 - (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)theEvent;
@@ -238,6 +271,40 @@ typedef int NSToolTipTag;
 
 - (NSTrackingRectTag)addTrackingRect:(NSRect)aRect owner:(id)anObject userData:(void *)data assumeInside:(BOOL)flag;
 - (void)removeTrackingRect:(NSTrackingRectTag)tag;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setWantsLayer:(BOOL)flag;
+- (BOOL)wantsLayer;
+
+- (void)setLayer:(CALayer *)newLayer;
+- (CALayer *)layer;
+
+- (void)setAlphaValue:(CGFloat)viewAlpha;
+- (CGFloat)alphaValue;
+
+- (void)setBackgroundFilters:(NSArray *)filters;
+- (NSArray *)backgroundFilters;
+
+- (void)setCompositingFilter:(CIFilter *)filter;
+- (CIFilter *)compositingFilter;
+
+- (void)setContentFilters:(NSArray *)filters;
+- (NSArray *)contentFilters;
+
+- (void)setShadow:(NSShadow *)shadow;
+- (NSShadow *)shadow;
+
+/* The following methods are meant to be invoked, and probably don't need to be overridden
+*/
+- (void)addTrackingArea:(NSTrackingArea *)trackingArea;
+- (void)removeTrackingArea:(NSTrackingArea *)trackingArea;
+- (NSArray *)trackingAreas;
+
+/* updateTrackingAreas should be overridden to remove out of date tracking areas and add recomputed tracking areas, and should call super.
+*/
+- (void)updateTrackingAreas;
+#endif
+
 
 - (BOOL)shouldDrawColor;
 
@@ -268,7 +335,7 @@ typedef int NSToolTipTag;
 /* -rectPreservedDuringLiveResize indicates the rect the view previously occupied, in the current coordinate system of the view */
 - (NSRect)rectPreservedDuringLiveResize;
 /* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
-- (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(int *)count;
+- (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(NSInteger *)count;
 #endif
 @end
 
@@ -310,11 +377,11 @@ typedef int NSToolTipTag;
 
 /* Pagination */
 - (BOOL)knowsPageRange:(NSRangePointer)range;
-- (float)heightAdjustLimit;
-- (float)widthAdjustLimit;
-- (void)adjustPageWidthNew:(float *)newRight left:(float)oldLeft right:(float)oldRight limit:(float)rightLimit;
-- (void)adjustPageHeightNew:(float *)newBottom top:(float)oldTop bottom:(float)oldBottom limit:(float)bottomLimit;
-- (NSRect)rectForPage:(int)page;
+- (CGFloat)heightAdjustLimit;
+- (CGFloat)widthAdjustLimit;
+- (void)adjustPageWidthNew:(CGFloat *)newRight left:(CGFloat)oldLeft right:(CGFloat)oldRight limit:(CGFloat)rightLimit;
+- (void)adjustPageHeightNew:(CGFloat *)newBottom top:(CGFloat)oldTop bottom:(CGFloat)oldBottom limit:(CGFloat)bottomLimit;
+- (NSRect)rectForPage:(NSInteger)page;
 - (NSPoint)locationOfPrintRect:(NSRect)aRect;
 - (void)drawPageBorderWithSize:(NSSize)borderSize;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -351,6 +418,19 @@ typedef int NSToolTipTag;
 #endif
 @end
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@interface NSView (NSFullScreenMode) 
+- (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(NSDictionary *)options;
+- (void)exitFullScreenModeWithOptions:(NSDictionary *)options;
+- (BOOL)isInFullScreenMode; 
+@end
+
+/* Constants for options when entering and exiting full screen mode */
+APPKIT_EXTERN NSString * const NSFullScreenModeAllScreens;     // NSNumber numberWithBool:YES/NO
+APPKIT_EXTERN NSString * const NSFullScreenModeSetting;        // NSDictionary (obtained from CGSDisplay based functions)
+APPKIT_EXTERN NSString * const NSFullScreenModeWindowLevel;	   // NSNumber numberWithInt:windowLevel
+#endif
+
 /* Notifications */
 
 APPKIT_EXTERN NSString *NSViewFrameDidChangeNotification;
@@ -359,4 +439,6 @@ APPKIT_EXTERN NSString *NSViewBoundsDidChangeNotification;
     // This notification is sent whenever the views bounds change and the frame does not.  That is, it is sent whenever the view's bounds are translated, scaled or rotated, but NOT when the bounds change as a result of, for example, setFrameSize:.
 APPKIT_EXTERN NSString *NSViewGlobalFrameDidChangeNotification;
     // This notification is sent whenever an NSView that has an attached NSSurface changes size or changes screens (thus potentially changing graphics hardware drivers.)
-
+    
+APPKIT_EXTERN NSString *NSViewDidUpdateTrackingAreasNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+    // This notification is sent whenever tracking areas should be recalculated for the view.  It is sent after the view receives -updateTrackingAreas.

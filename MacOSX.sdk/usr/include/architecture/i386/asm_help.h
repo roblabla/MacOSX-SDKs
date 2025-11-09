@@ -325,7 +325,7 @@ name:
 
 #if defined(__i386__)
 #define NON_LAZY_STUB(var)	\
-.non_lazy_symbol_pointer	; \
+.section __IMPORT,__pointers,non_lazy_symbol_pointers	; \
 L ## var ## __non_lazy_ptr:	; \
 .indirect_symbol var		; \
 .long 0				; \

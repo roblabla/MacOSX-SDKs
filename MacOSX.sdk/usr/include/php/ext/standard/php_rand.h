@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.19.4.5.4.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: php_rand.h,v 1.28.2.1.2.4 2008/03/07 08:56:45 tony2001 Exp $ */
 
 #ifndef PHP_RAND_H
 #define	PHP_RAND_H
@@ -41,15 +41,15 @@
 #endif
 
 #define RAND_RANGE(__n, __min, __max, __tmax) \
-    (__n) = (__min) + (long) ((double) ((__max) - (__min) + 1.0) * ((__n) / ((__tmax) + 1.0)))
+    (__n) = (__min) + (long) ((double) ( (double) (__max) - (__min) + 1.0) * ((__n) / ((__tmax) + 1.0)))
 
 /* MT Rand */
 #define PHP_MT_RAND_MAX ((long) (0x7FFFFFFF)) /* (1<<31) - 1 */ 
 
 #ifdef PHP_WIN32
-#define GENERATE_SEED() ((long) (time(0) * GetCurrentProcessId() * 1000000 * php_combined_lcg(TSRMLS_C)))
+#define GENERATE_SEED() (((long) (time(0) * GetCurrentProcessId())) ^ ((long) (1000000.0 * php_combined_lcg(TSRMLS_C))))
 #else
-#define GENERATE_SEED() ((long) (time(0) * getpid() * 1000000 * php_combined_lcg(TSRMLS_C)))
+#define GENERATE_SEED() (((long) (time(0) * getpid())) ^ ((long) (1000000.0 * php_combined_lcg(TSRMLS_C))))
 #endif
 
 PHPAPI void php_srand(long seed TSRMLS_DC);

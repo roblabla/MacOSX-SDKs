@@ -18,6 +18,8 @@
 #ifndef __PMPRINTERBROWSERS__
 #define __PMPRINTERBROWSERS__
 
+#if !__LP64__
+
 #include <ApplicationServices/ApplicationServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFBundle.h>	
@@ -106,6 +108,7 @@ Basic types...
 */
 typedef SInt32 		PMPrBrowserRef;			/* Printer browser module reference. */
 typedef UInt32 		PMPrBrowserContext;		/* PB Module private context. */
+
 typedef UInt32 		PMPrBrowserFlags;		/* PB Module feature request flags. */
 
 /*
@@ -293,6 +296,8 @@ typedef	PMInterfacePrBrowser				**PMInterfacePrBrowserHdl;
 #ifdef __cplusplus
 }
 #endif
+
+#endif  /* !__LP64__ */
 
 #endif /* __PMPRINTERBROWSERS__ */
 

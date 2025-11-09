@@ -1,6 +1,6 @@
 /*	
     NSURLConnection.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -19,6 +19,7 @@
 @class NSURLConnectionInternal;
 @class NSURLRequest;
 @class NSURLResponse;
+@class NSRunLoop;
 
 /*!
     @class NSURLConnection
@@ -105,6 +106,30 @@
 */
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
 
+/*!
+    @method initWithRequest:delegate:startImmediately:
+    @abstract Designated initializer for NSURLConnection; initializes an
+        NSURLConnection with the given request and delegate and optionally 
+        starts the connection.
+    @discussion This method extends the older initWithRequest:delegate: by allowing
+        the caller to delay the start of the connection.  This allows the caller
+        to customize where the delegate will receive its NSURLConnectionDelegate
+        messages via -scheduleWithRunLoop:forMode: and -removeFromRunLoop:forMode:
+        before the connection starts its work.  If startImmediately is NO, the connection
+        needs to be started by calling -start before any work to process the request wil be done.
+    @param request The request to load.
+    @param delegate The object which will receive the delegation messages for the connection
+    @param startImmediately Whether the connection should start processing request immediately
+        or should delay processing until it receives the -start message.
+    @result The initialized NSURLConnection instance
+*/
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
+    @method start
+    @abstract Causes the NSURLConnection to start processing its request, if it has not already.
+*/
+- (void)start AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*! 
     @method cancel
@@ -115,6 +140,18 @@
     this NSURLConnection.
 */
 - (void)cancel;
+
+/* Scheduling APIs
+    NSURLConnection sends its delegate messages via the run loop; these methods
+    determine which runlopes and which modes the messages will be sent on.  At creation,
+    a connection is scheduled on the current thread (the one where the creation takes place)
+    in the default mode.  That can be changed to add or remove runloop + mode pairs
+    using the following methods.  It is permissible to be scheduled on multiple run loops and modes,
+    or on the same run loop in multiple modes, so scheduling in one place does not cause unscheduling
+    in another.
+*/
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 

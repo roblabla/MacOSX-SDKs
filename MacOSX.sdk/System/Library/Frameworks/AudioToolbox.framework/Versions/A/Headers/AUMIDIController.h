@@ -8,6 +8,9 @@
 #ifndef __AUMIDIController_h__
 #define __AUMIDIController_h__
 
+#if !__LP64__
+// This API set is not available for 64-bit
+
 #include <AudioUnit/AudioUnit.h>
 #include <CoreMIDI/CoreMIDI.h>
 #include <AudioToolbox/AudioUnitUtilities.h>
@@ -25,10 +28,12 @@ extern "C" {
 */
 extern OSStatus
 AUMIDIControllerCreate(			CFStringRef				inVirtualDestinationName,
-								AUMIDIControllerRef *	outController)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+								AUMIDIControllerRef *	outController)				
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 extern OSStatus
-AUMIDIControllerDispose(		AUMIDIControllerRef		inController)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+AUMIDIControllerDispose(		AUMIDIControllerRef		inController)			
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 extern OSStatus
 AUMIDIControllerMapChannelToAU(	AUMIDIControllerRef		inController,
@@ -36,14 +41,15 @@ AUMIDIControllerMapChannelToAU(	AUMIDIControllerRef		inController,
 								AudioUnit				inAudioUnit,
 								SInt32					inDestMIDIChannel,
 								Boolean					inCreateDefaultControlMappings)
-																					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 extern OSStatus
 AUMIDIControllerMapEventToParameter(	AUMIDIControllerRef		inController,
 										UInt8					inMIDIStatusByte,
 										UInt16					inMIDIControl,
-										const AudioUnitParameter *inParameter)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+										const AudioUnitParameter *inParameter)	
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 // this will remove any mapping held by this controller
 // to the specified audio unit - whether those are:
@@ -54,7 +60,8 @@ AUMIDIControllerMapEventToParameter(	AUMIDIControllerRef		inController,
 // should receive MIDI events for its parameters (or the AU is being disposed)
 extern OSStatus
 AUMIDIControllerUnmapAudioUnit(		AUMIDIControllerRef		inController,
-									AudioUnit				inAudioUnit)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+									AudioUnit				inAudioUnit)		
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 										
 /*
 	$$$ need description of timestamps in the packets (if any) are treated -- needs
@@ -62,16 +69,19 @@ AUMIDIControllerUnmapAudioUnit(		AUMIDIControllerRef		inController,
 */
 extern OSStatus
 AUMIDIControllerHandleMIDI(			AUMIDIControllerRef		inController,
-									const MIDIPacketList *	inMIDIPacketList)		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									const MIDIPacketList *	inMIDIPacketList)	
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 extern OSStatus
 AUMIDIControllerConnectSource(		AUMIDIControllerRef		inController,
-									MIDIEndpointRef			inSource)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									MIDIEndpointRef			inSource)			
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 extern OSStatus
 AUMIDIControllerDisconnectSource(	AUMIDIControllerRef		inController,
-									MIDIEndpointRef			inSource)				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									MIDIEndpointRef			inSource)			
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
 	Tells an AUMIDIController to generate an XML description of the control/NRPN 
@@ -82,12 +92,15 @@ AUMIDIControllerDisconnectSource(	AUMIDIControllerRef		inController,
 */
 extern OSStatus
 AUMIDIControllerExportXMLNames(		AUMIDIControllerRef		inController,
-									CFURLRef *				outXMLFileURL)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+									CFURLRef *				outXMLFileURL)		
+	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !__LP64__
 
 #endif // __AUMIDIController_h__
 

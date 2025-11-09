@@ -3,7 +3,7 @@
  
      Contains:   Keychain low-level Interfaces
  
-     Version:    SecurityCore-25606~262
+     Version:    SecurityCore-29877~635
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
  
@@ -48,7 +48,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Data structures and types */
 #ifndef __SEC_TYPES__
@@ -114,8 +114,8 @@ typedef UInt8                           KCPublicKeyHash[20];
 struct KCCallbackInfo {
   UInt32              version;
   KCItemRef           item;
-  long                processID[2];           /* unavailable on Mac OS X*/
-  long                event[4];               /* unavailable on Mac OS X*/
+  SInt32              processID[2];           /* unavailable on Mac OS X*/
+  SInt32              event[4];               /* unavailable on Mac OS X*/
   KCRef               keychain;
 };
 typedef struct KCCallbackInfo           KCCallbackInfo;
@@ -336,8 +336,26 @@ KCIsInteractionAllowed(void)                                  AVAILABLE_MAC_OS_X
 
 
 /* Creating references to keychains */
+/* KCMakeKCRefFromFSSpec is deprecated in Mac OS X 10.5. Use KCMakeKCRefFromFSRef instead. */
+#if !__LP64__
 /*
- *  KCMakeKCRefFromFSSpec()
+ *  KCMakeKCRefFromFSSpec()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in KeychainLib 2.0 and later
+ */
+extern OSStatus 
+KCMakeKCRefFromFSSpec(
+  FSSpec *  keychainFSSpec,
+  KCRef *   keychain)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+/*
+ *  KCMakeKCRefFromFSRef()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -345,9 +363,9 @@ KCIsInteractionAllowed(void)                                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in KeychainLib 2.0 and later
  */
 extern OSStatus 
-KCMakeKCRefFromFSSpec(
-  FSSpec *  keychainFSSpec,
-  KCRef *   keychain)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+KCMakeKCRefFromFSRef(
+  FSRef *  keychainFSRef,
+  KCRef *  keychain)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -523,6 +541,18 @@ InvokeKCCallbackUPP(
   KCCallbackInfo *  info,
   void *            userContext,
   KCCallbackUPP     userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline KCCallbackUPP                                        NewKCCallbackUPP(KCCallbackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeKCCallbackUPP(KCCallbackUPP) { }
+    inline OSStatus                                             InvokeKCCallbackUPP(KCEvent keychainEvent, KCCallbackInfo * info, void * userContext, KCCallbackUPP userUPP) { return (*userUPP)(keychainEvent, info, userContext); }
+  #else
+    #define NewKCCallbackUPP(userRoutine)                       ((KCCallbackUPP)userRoutine)
+    #define DisposeKCCallbackUPP(userUPP)
+    #define InvokeKCCallbackUPP(keychainEvent, info, userContext, userUPP) (*userUPP)(keychainEvent, info, userContext)
+  #endif
+#endif
 
 /* High-level interface for retrieving passwords */
 /*
@@ -924,7 +954,7 @@ kcfindgenericpassword(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

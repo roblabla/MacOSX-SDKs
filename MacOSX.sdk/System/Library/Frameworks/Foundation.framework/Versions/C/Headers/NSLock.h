@@ -1,5 +1,5 @@
 /*	NSLock.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -21,6 +21,9 @@
 - (BOOL)tryLock;
 - (BOOL)lockBeforeDate:(NSDate *)limit;
 
+- (void)setName:(NSString *)n AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 @end
 
 @interface NSConditionLock : NSObject <NSLocking> {
@@ -28,15 +31,18 @@
     void *_priv;
 }
 
-- (id)initWithCondition:(int)condition;
+- (id)initWithCondition:(NSInteger)condition;
 
-- (int)condition;
-- (void)lockWhenCondition:(int)condition;
+- (NSInteger)condition;
+- (void)lockWhenCondition:(NSInteger)condition;
 - (BOOL)tryLock;
-- (BOOL)tryLockWhenCondition:(int)condition;
-- (void)unlockWithCondition:(int)condition;
+- (BOOL)tryLockWhenCondition:(NSInteger)condition;
+- (void)unlockWithCondition:(NSInteger)condition;
 - (BOOL)lockBeforeDate:(NSDate *)limit;
-- (BOOL)lockWhenCondition:(int)condition beforeDate:(NSDate *)limit;
+- (BOOL)lockWhenCondition:(NSInteger)condition beforeDate:(NSDate *)limit;
+
+- (void)setName:(NSString *)n AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 @end
 
@@ -48,4 +54,23 @@
 - (BOOL)tryLock;
 - (BOOL)lockBeforeDate:(NSDate *)limit;
 
+- (void)setName:(NSString *)n AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 @end
+
+@interface NSCondition : NSObject <NSLocking> {
+@private
+    void *_priv;
+}
+
+- (void)wait;
+- (BOOL)waitUntilDate:(NSDate *)limit;
+- (void)signal;
+- (void)broadcast;
+
+- (void)setName:(NSString *)n AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+@end
+

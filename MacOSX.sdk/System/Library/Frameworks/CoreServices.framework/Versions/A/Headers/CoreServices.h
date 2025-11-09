@@ -3,7 +3,7 @@
  
      Contains:   Master include for CoreServices (non-UI toolbox)
  
-     Version:    CoreServices-17~2493
+     Version:    CoreServices-32~91
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -16,8 +16,9 @@
 #ifndef __CORESERVICES__
 #define __CORESERVICES__
 
-#if __LP64__
-    #error 64-bit not supported
+
+#ifndef __AE__
+#include <AE/AE.h>
 #endif
 
 #ifndef __CARBONCORE__
@@ -36,8 +37,8 @@
 #include <CFNetwork/CFNetwork.h>
 #endif
 
-#ifndef __WEBSERVICESCORE__
-#include <WebServicesCore/WebServicesCore.h>
+#ifndef __LAUNCHSERVICES__
+#include <LaunchServices/LaunchServices.h>
 #endif
 
 #ifndef __SEARCHKIT__
@@ -45,6 +46,7 @@
 #endif
 
 #include <Metadata/Metadata.h>
+#include <DictionaryServices/DictionaryServices.h>
 
 #endif /* __CORESERVICES__ */
 

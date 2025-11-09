@@ -88,7 +88,7 @@ typedef __uint8_t		sa_family_t;
 #define __KAME__
 #define __KAME_VERSION		"20010528/apple-darwin"
 
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*
  * Local port number conventions:
  *
@@ -122,7 +122,7 @@ typedef __uint8_t		sa_family_t;
 #define	IPV6PORT_ANONMAX	65535
 #define	IPV6PORT_RESERVEDMIN	600
 #define	IPV6PORT_RESERVEDMAX	(IPV6PORT_RESERVED-1)
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 /*
  * IPv6 address
@@ -142,9 +142,9 @@ struct in6_addr {
 /*
  * Socket address for IPv6
  */
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define SIN6_LEN
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 struct sockaddr_in6 {
 	__uint8_t	sin6_len;	/* length of this struct(sa_family_t)*/
 	sa_family_t	sin6_family;	/* AF_INET6 (sa_family_t) */
@@ -173,7 +173,7 @@ struct sockaddr_in6 {
 #define IN6ADDR_LOOPBACK_INIT \
 	{{{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }}}
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define IN6ADDR_NODELOCAL_ALLNODES_INIT \
 	{{{ 0xff, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }}}
@@ -183,15 +183,15 @@ struct sockaddr_in6 {
 #define IN6ADDR_LINKLOCAL_ALLROUTERS_INIT \
 	{{{ 0xff, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02 }}}
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 extern const struct in6_addr in6addr_any;
 extern const struct in6_addr in6addr_loopback;
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 extern const struct in6_addr in6addr_nodelocal_allnodes;
 extern const struct in6_addr in6addr_linklocal_allnodes;
 extern const struct in6_addr in6addr_linklocal_allrouters;
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 /*
  * Equality
@@ -199,10 +199,10 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
  * does not supply memcmp().  For userland memcmp() is preferred as it is
  * in ANSI standard.
  */
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define IN6_ARE_ADDR_EQUAL(a, b)			\
     (memcmp(&(a)->s6_addr[0], &(b)->s6_addr[0], sizeof(struct in6_addr)) == 0)
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 
 /*
@@ -290,15 +290,15 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 /*
  * IP6 route structure
  */
-#ifndef _POSIX_C_SOURCE
-#endif /* _POSIX_C_SOURCE */
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 /*
  * Options for use with [gs]etsockopt at the IPV6 level.
  * First word of comment is data type; bool is stored in int.
  */
 /* no hdrincl */
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #if 0 /* the followings are relic in IPv4 and hence are disabled */
 #define IPV6_OPTIONS		1  /* buf/ip6_opts; set/get IP6 options */
 #define IPV6_RECVOPTS		5  /* bool; receive all IP6 opts w/dgram */
@@ -307,7 +307,7 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_RETOPTS		8  /* ip6_opts; set/get IP6 options */
 #endif /* 0 */
 #define IPV6_SOCKOPT_RESERVED1	3  /* reserved for future use */
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #define IPV6_UNICAST_HOPS	4  /* int; IP6 hops */
 #define IPV6_MULTICAST_IF	9  /* __uint8_t; set/get IP6 multicast i/f  */
 #define IPV6_MULTICAST_HOPS	10 /* __uint8_t; set/get IP6 multicast hops */
@@ -315,7 +315,7 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_JOIN_GROUP		12 /* ip6_mreq; join a group membership */
 #define IPV6_LEAVE_GROUP	13 /* ip6_mreq; leave a group membership */
 
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define IPV6_PORTRANGE		14 /* int; range to choose for unspec port */
 #define ICMP6_FILTER		18 /* icmp6_filter; icmp6 filter */
 /* RFC2292 options */
@@ -328,9 +328,9 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_PKTOPTIONS		25 /* buf/cmsghdr; set/get IPv6 options */
 
 #define IPV6_CHECKSUM		26 /* int; checksum offset for raw socket */
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #define IPV6_V6ONLY		27 /* bool; only bind INET6 at wildcard bind */
-#ifndef _POSIX_C_SOURCE
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define IPV6_BINDV6ONLY		IPV6_V6ONLY
 
 
@@ -480,5 +480,5 @@ extern int inet6_rth_reverse(const void *, void *);
 extern int inet6_rth_segments(const void *);
 extern struct in6_addr *inet6_rth_getaddr(const void *, int);
 __END_DECLS
-#endif /* _POSIX_C_SOURCE */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #endif /* !_NETINET6_IN6_H_ */

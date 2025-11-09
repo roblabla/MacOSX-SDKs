@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -197,7 +197,7 @@
     @param length The length of the received data.
     @discussion This method will be called one or more times.
 */
-- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length;
+- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length;
 
 /*!
     @method download:shouldDecodeSourceDataOfMIMEType:

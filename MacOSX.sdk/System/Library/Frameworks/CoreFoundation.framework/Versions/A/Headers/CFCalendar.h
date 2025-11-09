@@ -1,5 +1,5 @@
 /*	CFCalendar.h
-	Copyright (c) 2004-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFCALENDAR__)
@@ -10,11 +10,9 @@
 #include <CoreFoundation/CFDate.h>
 #include <CoreFoundation/CFTimeZone.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFCalendar * CFCalendarRef;
 
@@ -58,7 +56,7 @@ CF_EXPORT
 void CFCalendarSetMinimumDaysInFirstWeek(CFCalendarRef calendar, CFIndex mwd) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-typedef enum {
+enum {
 	kCFCalendarUnitEra = (1 << 1),
 	kCFCalendarUnitYear = (1 << 2),
 	kCFCalendarUnitMonth = (1 << 3),
@@ -69,7 +67,8 @@ typedef enum {
 	kCFCalendarUnitWeek = (1 << 8),
 	kCFCalendarUnitWeekday = (1 << 9),
 	kCFCalendarUnitWeekdayOrdinal = (1 << 10)
-} CFCalendarUnit;
+};
+typedef CFOptionFlags CFCalendarUnit;
 
 CF_EXPORT
 CFRange CFCalendarGetMinimumRangeOfUnit(CFCalendarRef calendar, CFCalendarUnit unit) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -83,12 +82,14 @@ CFRange CFCalendarGetRangeOfUnit(CFCalendarRef calendar, CFCalendarUnit smallerU
 CF_EXPORT
 CFIndex CFCalendarGetOrdinalityOfUnit(CFCalendarRef calendar, CFCalendarUnit smallerUnit, CFCalendarUnit biggerUnit, CFAbsoluteTime at) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+CF_EXPORT
+Boolean CFCalendarGetTimeRangeOfUnit(CFCalendarRef calendar, CFCalendarUnit unit, CFAbsoluteTime at, CFAbsoluteTime *startp, CFTimeInterval *tip) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 CF_EXPORT
-Boolean CFCalendarComposeAbsoluteTime(CFCalendarRef calendar, /* out */ CFAbsoluteTime *at, const unsigned char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+Boolean CFCalendarComposeAbsoluteTime(CFCalendarRef calendar, /* out */ CFAbsoluteTime *at, const char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CF_EXPORT
-Boolean CFCalendarDecomposeAbsoluteTime(CFCalendarRef calendar, CFAbsoluteTime at, const unsigned char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+Boolean CFCalendarDecomposeAbsoluteTime(CFCalendarRef calendar, CFAbsoluteTime at, const char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 enum {
@@ -96,15 +97,13 @@ enum {
 };
 
 CF_EXPORT
-Boolean CFCalendarAddComponents(CFCalendarRef calendar, /* inout */ CFAbsoluteTime *at, CFOptionFlags options, const unsigned char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+Boolean CFCalendarAddComponents(CFCalendarRef calendar, /* inout */ CFAbsoluteTime *at, CFOptionFlags options, const char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CF_EXPORT
-Boolean CFCalendarGetComponentDifference(CFCalendarRef calendar, CFAbsoluteTime startingAT, CFAbsoluteTime resultAT, CFOptionFlags options, const unsigned char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+Boolean CFCalendarGetComponentDifference(CFCalendarRef calendar, CFAbsoluteTime startingAT, CFAbsoluteTime resultAT, CFOptionFlags options, const char *componentDesc, ...) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif
 

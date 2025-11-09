@@ -41,4 +41,8 @@
 
 - (void)setImage:(CIImage *)im dirtyRect:(CGRect)r;
 
+/* Reset the accumulator, discarding any pending updates and current content. */
+
+- (void)clear;
+
 @end

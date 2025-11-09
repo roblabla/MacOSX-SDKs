@@ -81,6 +81,17 @@ CG_EXTERN CGEventSourceRef CGEventSourceCreate(CGEventSourceStateID sourceState)
 CG_EXTERN CGEventSourceKeyboardType CGEventSourceGetKeyboardType(CGEventSourceRef source) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef source, CGEventSourceKeyboardType keyboardType) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+/*
+ * Set and get the scale used to interpret between scrollwheel events that
+ * scroll by line and by pixel.
+ *
+ * Every scrollwheel event can be interpreted to be scrolling by pixel or by line.
+ * The scale between the two is about 10 pixels per line by default.  The scale can be
+ * altered by setting a custom value for the event source
+ */
+CG_EXTERN void CGEventSourceSetPixelsPerLine( CGEventSourceRef source, double pixelsPerLine );
+CG_EXTERN double CGEventSourceGetPixelsPerLine( CGEventSourceRef source );
+
 
 /*
  * Return the event source state ID associated with the event source.

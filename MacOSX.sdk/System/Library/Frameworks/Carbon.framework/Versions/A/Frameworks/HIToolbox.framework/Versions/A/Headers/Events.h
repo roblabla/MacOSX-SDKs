@@ -3,7 +3,7 @@
  
      Contains:   Event Manager Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef UInt16                          EventKind;
 typedef UInt16                          EventMask;
@@ -67,7 +67,7 @@ enum {
   charCodeMask                  = 0x000000FF,
   keyCodeMask                   = 0x0000FF00,
   adbAddrMask                   = 0x00FF0000,
-  osEvtMessageMask              = (unsigned long)0xFF000000
+  osEvtMessageMask              = (UInt32)0xFF000000
 };
 
 enum {
@@ -179,9 +179,158 @@ enum {
   kAppleLogoUnicode             = 0xF8FF /* Unicode APPLE LOGO*/
 };
 
+
+/*
+ *  Summary:
+ *    Virtual keycodes
+ *  
+ *  Discussion:
+ *    These constants are the virtual keycodes defined originally in
+ *    Inside Mac Volume V, pg. V-191. They identify physical keys on a
+ *    keyboard. Those constants with "ANSI" in the name are labeled
+ *    according to the key position on an ANSI-standard US keyboard.
+ *    For example, kVK_ANSI_A indicates the virtual keycode for the key
+ *    with the letter 'A' in the US keyboard layout. Other keyboard
+ *    layouts may have the 'A' key label on a different physical key;
+ *    in this case, pressing 'A' will generate a different virtual
+ *    keycode.
+ */
+enum {
+  kVK_ANSI_A                    = 0x00,
+  kVK_ANSI_S                    = 0x01,
+  kVK_ANSI_D                    = 0x02,
+  kVK_ANSI_F                    = 0x03,
+  kVK_ANSI_H                    = 0x04,
+  kVK_ANSI_G                    = 0x05,
+  kVK_ANSI_Z                    = 0x06,
+  kVK_ANSI_X                    = 0x07,
+  kVK_ANSI_C                    = 0x08,
+  kVK_ANSI_V                    = 0x09,
+  kVK_ANSI_B                    = 0x0B,
+  kVK_ANSI_Q                    = 0x0C,
+  kVK_ANSI_W                    = 0x0D,
+  kVK_ANSI_E                    = 0x0E,
+  kVK_ANSI_R                    = 0x0F,
+  kVK_ANSI_Y                    = 0x10,
+  kVK_ANSI_T                    = 0x11,
+  kVK_ANSI_1                    = 0x12,
+  kVK_ANSI_2                    = 0x13,
+  kVK_ANSI_3                    = 0x14,
+  kVK_ANSI_4                    = 0x15,
+  kVK_ANSI_6                    = 0x16,
+  kVK_ANSI_5                    = 0x17,
+  kVK_ANSI_Equal                = 0x18,
+  kVK_ANSI_9                    = 0x19,
+  kVK_ANSI_7                    = 0x1A,
+  kVK_ANSI_Minus                = 0x1B,
+  kVK_ANSI_8                    = 0x1C,
+  kVK_ANSI_0                    = 0x1D,
+  kVK_ANSI_RightBracket         = 0x1E,
+  kVK_ANSI_O                    = 0x1F,
+  kVK_ANSI_U                    = 0x20,
+  kVK_ANSI_LeftBracket          = 0x21,
+  kVK_ANSI_I                    = 0x22,
+  kVK_ANSI_P                    = 0x23,
+  kVK_ANSI_L                    = 0x25,
+  kVK_ANSI_J                    = 0x26,
+  kVK_ANSI_Quote                = 0x27,
+  kVK_ANSI_K                    = 0x28,
+  kVK_ANSI_Semicolon            = 0x29,
+  kVK_ANSI_Backslash            = 0x2A,
+  kVK_ANSI_Comma                = 0x2B,
+  kVK_ANSI_Slash                = 0x2C,
+  kVK_ANSI_N                    = 0x2D,
+  kVK_ANSI_M                    = 0x2E,
+  kVK_ANSI_Period               = 0x2F,
+  kVK_ANSI_Grave                = 0x32,
+  kVK_ANSI_KeypadDecimal        = 0x41,
+  kVK_ANSI_KeypadMultiply       = 0x43,
+  kVK_ANSI_KeypadPlus           = 0x45,
+  kVK_ANSI_KeypadClear          = 0x47,
+  kVK_ANSI_KeypadDivide         = 0x4B,
+  kVK_ANSI_KeypadEnter          = 0x4C,
+  kVK_ANSI_KeypadMinus          = 0x4E,
+  kVK_ANSI_KeypadEquals         = 0x51,
+  kVK_ANSI_Keypad0              = 0x52,
+  kVK_ANSI_Keypad1              = 0x53,
+  kVK_ANSI_Keypad2              = 0x54,
+  kVK_ANSI_Keypad3              = 0x55,
+  kVK_ANSI_Keypad4              = 0x56,
+  kVK_ANSI_Keypad5              = 0x57,
+  kVK_ANSI_Keypad6              = 0x58,
+  kVK_ANSI_Keypad7              = 0x59,
+  kVK_ANSI_Keypad8              = 0x5B,
+  kVK_ANSI_Keypad9              = 0x5C
+};
+
+/* keycodes for keys that are independent of keyboard layout*/
+enum {
+  kVK_Return                    = 0x24,
+  kVK_Tab                       = 0x30,
+  kVK_Space                     = 0x31,
+  kVK_Delete                    = 0x33,
+  kVK_Escape                    = 0x35,
+  kVK_Command                   = 0x37,
+  kVK_Shift                     = 0x38,
+  kVK_CapsLock                  = 0x39,
+  kVK_Option                    = 0x3A,
+  kVK_Control                   = 0x3B,
+  kVK_RightShift                = 0x3C,
+  kVK_RightOption               = 0x3D,
+  kVK_RightControl              = 0x3E,
+  kVK_Function                  = 0x3F,
+  kVK_F17                       = 0x40,
+  kVK_VolumeUp                  = 0x48,
+  kVK_VolumeDown                = 0x49,
+  kVK_Mute                      = 0x4A,
+  kVK_F18                       = 0x4F,
+  kVK_F19                       = 0x50,
+  kVK_F20                       = 0x5A,
+  kVK_F5                        = 0x60,
+  kVK_F6                        = 0x61,
+  kVK_F7                        = 0x62,
+  kVK_F3                        = 0x63,
+  kVK_F8                        = 0x64,
+  kVK_F9                        = 0x65,
+  kVK_F11                       = 0x67,
+  kVK_F13                       = 0x69,
+  kVK_F16                       = 0x6A,
+  kVK_F14                       = 0x6B,
+  kVK_F10                       = 0x6D,
+  kVK_F12                       = 0x6F,
+  kVK_F15                       = 0x71,
+  kVK_Help                      = 0x72,
+  kVK_Home                      = 0x73,
+  kVK_PageUp                    = 0x74,
+  kVK_ForwardDelete             = 0x75,
+  kVK_F4                        = 0x76,
+  kVK_End                       = 0x77,
+  kVK_F2                        = 0x78,
+  kVK_PageDown                  = 0x79,
+  kVK_F1                        = 0x7A,
+  kVK_LeftArrow                 = 0x7B,
+  kVK_RightArrow                = 0x7C,
+  kVK_DownArrow                 = 0x7D,
+  kVK_UpArrow                   = 0x7E
+};
+
+/* ISO keyboards only*/
+enum {
+  kVK_ISO_Section               = 0x0A
+};
+
+/* JIS keyboards only*/
+enum {
+  kVK_JIS_Yen                   = 0x5D,
+  kVK_JIS_Underscore            = 0x5E,
+  kVK_JIS_KeypadComma           = 0x5F,
+  kVK_JIS_Eisu                  = 0x66,
+  kVK_JIS_Kana                  = 0x68
+};
+
 struct EventRecord {
   EventKind           what;
-  UInt32              message;
+  unsigned long       message;
   UInt32              when;
   Point               where;
   EventModifiers      modifiers;
@@ -216,20 +365,26 @@ typedef STACK_UPP_TYPE(FKEYProcPtr)                             FKEYUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 
+#if !__LP64__
 /*
- *  GetMouse()
+ *  GetMouse()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIGetMousePosition instead
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetMouse(Point * mouseLoc)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetMouse(Point * mouseLoc)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  Button()
@@ -246,6 +401,7 @@ extern Boolean
 Button(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  StillDown()
  *  
@@ -253,7 +409,7 @@ Button(void)                                                  AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -268,7 +424,7 @@ StillDown(void)                                               AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -283,7 +439,7 @@ WaitMouseUp(void)                                             AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -301,7 +457,7 @@ KeyTranslate(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -309,6 +465,8 @@ extern UInt32
 GetCaretTime(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+#endif  /* !__LP64__ */
 
 /* 
     QuickTime 3.0 supports GetKeys() on unix and win32
@@ -359,7 +517,7 @@ struct EvQEl {
   QElemPtr            qLink;
   SInt16              qType;
   EventKind           evtQWhat;               /* this part is identical to the EventRecord as defined above */
-  UInt32              evtQMessage;
+  unsigned long       evtQMessage;
   UInt32              evtQWhen;
   Point               evtQWhere;
   EventModifiers      evtQModifiers;
@@ -396,6 +554,7 @@ typedef STACK_UPP_TYPE(GetNextEventFilterProcPtr)               GetNextEventFilt
  */
 
 typedef GetNextEventFilterUPP           GNEFilterUPP;
+#if !__LP64__
 /*
  *  GetDblTime()
  *  
@@ -403,7 +562,7 @@ typedef GetNextEventFilterUPP           GNEFilterUPP;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -418,32 +577,12 @@ GetDblTime(void)                                              AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 SetEventMask(EventMask value)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  GetEvQHdr()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  PPostEvent()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
 
 
 /*
@@ -453,7 +592,7 @@ SetEventMask(EventMask value)                                 AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -470,7 +609,7 @@ GetNextEvent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -489,7 +628,7 @@ WaitNextEvent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -506,7 +645,7 @@ EventAvail(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -516,32 +655,7 @@ PostEvent(
   UInt32      eventMsg)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-    For Carbon, use EventAvail, TickCount, GetGlobalMouse,
-    GetKeys, or GetCurrentKeyModifiers instead of
-    OSEventAvail, and use GetNextEvent or WaitNextEvent
-    instead of GetOSEvent.
-*/
-
-/*
- *  OSEventAvail()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  GetOSEvent()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
+#endif  /* !__LP64__ */
 
 /*
  *  FlushEvents()
@@ -560,150 +674,36 @@ FlushEvents(
   EventMask   stopMask)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
- *  SystemClick()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SystemTask()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SystemEvent()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
 #if OLDROUTINENAMES
 #define KeyTrans(transData, keycode, state) KeyTranslate(transData, keycode, state)
 #endif  /* OLDROUTINENAMES */
 
+#if !__LP64__
 /*
-    GetGlobalMouse, GetCurrentKeyModifiers, and CheckEventQueueForUserCancel
-    are only available as part of the Carbon API.
-*/
-
-/*
- *  GetGlobalMouse()
+ *  KeyScript()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use TISSelectInputSource API for positive verbs (ScriptCode).
+ *     Use TSMDocument properties to restrict input sources:
+ *     kTSMDocumentEnabledInputSourcesPropertyTag
+ *     kTSMDocumentInputSourceOverridePropertyTag
  *  
  *  Summary:
- *    Returns the position of the mouse in global coordinates.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    globalMouse:
- *      On exit, contains the mouse position in global coordinates.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
- */
-extern void 
-GetGlobalMouse(Point * globalMouse)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  GetCurrentKeyModifiers()
- *  
- *  Summary:
- *    Returns the current hardware keyboard modifier state.
- *  
- *  Discussion:
- *    In most cases, you should not use GetCurrentKeyModifiers, but
- *    should use the GetCurrentEventKeyModifiers function instead.
- *    GetCurrentEventKeyModifiers is much faster than
- *    GetCurrentKeyModifiers because it returns the locally cached
- *    modifier state; GetCurrentKeyModifiers must get the modifier
- *    state from the window server, which is slower. Using
- *    GetCurrentKeyModifiers also can prevent your application from
- *    being operated by remote posting of events, since the hardware
- *    input device is not actually changing state in that case. Most
- *    commonly, you might need to use GetCurrentKeyModifiers when your
- *    application is not the active application (as determined by the
- *    Process Manager function GetFrontProcess). In that case, the
- *    cached modifier state returned by GetCurrentEventKeyModifiers is
- *    not valid because modifier-changed events are not flowing to your
- *    application, and you must use GetCurrentKeyModifiers to determine
- *    the current hardware state.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Result:
- *    The hardware state of the keyboard modifiers. The format of the
- *    return value is the same as the modifiers field of an EventRecord
- *    (but only includes keyboard modifiers and not the other modifier
- *    flags included in an EventRecord).
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern UInt32 
-GetCurrentKeyModifiers(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  CheckEventQueueForUserCancel()
- *  
- *  Summary:
- *    Determines if there is a cancel event in the main thread's event
- *    queue.
- *  
- *  Discussion:
- *    This API supports two cancel events: Escape and Cmd-Period. The
- *    cancel event itself, as well as mouse or keyboard events in front
- *    of the cancel event in the event queue, will be removed from the
- *    queue.
+ *    Switch to the specified script's default (last used) input source.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern Boolean 
-CheckEventQueueForUserCancel(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
- *  KeyScript()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-KeyScript(short code)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+KeyScript(short code)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  IsCmdChar()
@@ -741,6 +741,7 @@ extern SInt16
 LMGetKeyThresh(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  LMSetKeyThresh()
  *  
@@ -748,7 +749,7 @@ LMGetKeyThresh(void)                                          AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -756,6 +757,8 @@ extern void
 LMSetKeyThresh(SInt16 value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetKeyRepThresh()
@@ -772,6 +775,7 @@ extern SInt16
 LMGetKeyRepThresh(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  LMSetKeyRepThresh()
  *  
@@ -779,13 +783,15 @@ LMGetKeyRepThresh(void)                                       AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 LMSetKeyRepThresh(SInt16 value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetKbdLast()
@@ -802,6 +808,7 @@ extern UInt8
 LMGetKbdLast(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  LMSetKbdLast()
  *  
@@ -809,7 +816,7 @@ LMGetKbdLast(void)                                            AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -817,6 +824,8 @@ extern void
 LMSetKbdLast(UInt8 value)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  LMGetKbdType()
@@ -833,6 +842,7 @@ extern UInt8
 LMGetKbdType(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  LMSetKbdType()
  *  
@@ -840,7 +850,7 @@ LMGetKbdType(void)                                            AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -848,8 +858,10 @@ extern void
 LMSetKbdType(UInt8 value)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

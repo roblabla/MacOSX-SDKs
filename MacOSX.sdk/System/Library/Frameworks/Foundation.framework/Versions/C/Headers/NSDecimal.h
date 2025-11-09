@@ -1,5 +1,5 @@
 /*	NSDecimal.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 #include <limits.h>
@@ -17,20 +17,22 @@
 // Up       1.2  1.3   1.3   1.4   1.3
 // Bankers  1.2  1.2   1.2   1.4   1.3
 
-typedef enum {
+enum {
     NSRoundPlain,   // Round up on a tie
     NSRoundDown,    // Always down == truncate
     NSRoundUp,      // Always up
     NSRoundBankers  // on a tie round so last digit is even
-} NSRoundingMode;
+};
+typedef NSUInteger NSRoundingMode;
 
-typedef enum {
+enum {
     NSCalculationNoError = 0,
     NSCalculationLossOfPrecision, // Result lost precision
     NSCalculationUnderflow,       // Result became 0
     NSCalculationOverflow,        // Result exceeds possible representation
     NSCalculationDivideByZero
-} NSCalculationError;
+};
+typedef NSUInteger NSCalculationError;
 
 #define NSDecimalMaxSize (8)
     // Give a precision of at least 38 decimal digits, 128 binary positions.
@@ -46,7 +48,7 @@ typedef struct {
     unsigned short _mantissa[NSDecimalMaxSize];
 } NSDecimal;
 
-FOUNDATION_STATIC_INLINE BOOL NSDecimalIsNotANumber(const NSDecimal *dcm)
+NS_INLINE BOOL NSDecimalIsNotANumber(const NSDecimal *dcm)
   { return ((dcm->_length == 0) && dcm->_isNegative); }
 
 /***************	Operations		***********/
@@ -58,7 +60,7 @@ FOUNDATION_EXPORT void NSDecimalCompact(NSDecimal *number);
 FOUNDATION_EXPORT NSComparisonResult NSDecimalCompare(const NSDecimal *leftOperand, const NSDecimal *rightOperand);
     // NSDecimalCompare:Compares leftOperand and rightOperand.
 
-FOUNDATION_EXPORT void NSDecimalRound(NSDecimal *result, const NSDecimal *number, int scale, NSRoundingMode roundingMode);
+FOUNDATION_EXPORT void NSDecimalRound(NSDecimal *result, const NSDecimal *number, NSInteger scale, NSRoundingMode roundingMode);
     // Rounds num to the given scale using the given mode.
     // result may be a pointer to same space as num.
     // scale indicates number of significant digits after the decimal point
@@ -78,9 +80,9 @@ FOUNDATION_EXPORT NSCalculationError NSDecimalDivide(NSDecimal *result, const NS
     // Division could be silently inexact;
     // Exact operations. result may be a pointer to same space as leftOperand or rightOperand
     
-FOUNDATION_EXPORT NSCalculationError NSDecimalPower(NSDecimal *result, const NSDecimal *number, unsigned power, NSRoundingMode roundingMode);
+FOUNDATION_EXPORT NSCalculationError NSDecimalPower(NSDecimal *result, const NSDecimal *number, NSUInteger power, NSRoundingMode roundingMode);
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalMultiplyByPowerOf10(NSDecimal *result, const NSDecimal *number, short power, NSRoundingMode roundingMode);
 
-FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, NSDictionary *locale);
+FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, id locale);
 

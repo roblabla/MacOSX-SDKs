@@ -1,5 +1,5 @@
 /*	CFString.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTRING__)
@@ -13,9 +13,7 @@
 #include <CoreFoundation/CFLocale.h>
 #include <stdarg.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*
 Please note: CFStrings are conceptually an array of Unicode characters.
@@ -96,7 +94,7 @@ typedef UInt32 CFStringEncoding;
    Call CFStringGetSystemEncoding() to get the default system encoding.
 */
 #define kCFStringEncodingInvalidId (0xffffffffU)
-typedef enum {
+enum {
     kCFStringEncodingMacRoman = 0,
     kCFStringEncodingWindowsLatin1 = 0x0500, /* ANSI codepage 1252 */
     kCFStringEncodingISOLatin1 = 0x0201, /* ISO 8859-1 */
@@ -115,7 +113,8 @@ typedef enum {
     kCFStringEncodingUTF32BE = 0x18000100, /* kTextEncodingUnicodeDefault + kUnicodeUTF32BEFormat */
     kCFStringEncodingUTF32LE = 0x1c000100 /* kTextEncodingUnicodeDefault + kUnicodeUTF32LEFormat */
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-} CFStringBuiltInEncodings;
+};
+typedef CFStringEncoding CFStringBuiltInEncodings;
 
 /* CFString type ID */
 CF_EXPORT
@@ -149,15 +148,21 @@ it might not work for a user with a different language preference.
 /* Functions to create basic immutable strings. The provided allocator is used for all memory activity in these functions.
 */
 
-/* These functions copy the provided buffer into CFString's internal storage. */
+/* The following four functions copy the provided buffer into CFString's internal storage. */
 CF_EXPORT
 CFStringRef CFStringCreateWithPascalString(CFAllocatorRef alloc, ConstStr255Param pStr, CFStringEncoding encoding);
 
 CF_EXPORT
 CFStringRef CFStringCreateWithCString(CFAllocatorRef alloc, const char *cStr, CFStringEncoding encoding);
 
+/* The following takes an explicit length, and allows you to specify whether the data is an external format --- that is, whether to pay attention to the BOM character (if any) and do byte swapping if necessary
+*/
+CF_EXPORT
+CFStringRef CFStringCreateWithBytes(CFAllocatorRef alloc, const UInt8 *bytes, CFIndex numBytes, CFStringEncoding encoding, Boolean isExternalRepresentation);
+
 CF_EXPORT
 CFStringRef CFStringCreateWithCharacters(CFAllocatorRef alloc, const UniChar *chars, CFIndex numChars);
+
 
 /* These functions try not to copy the provided buffer. The buffer will be deallocated 
 with the provided contentsDeallocator when it's no longer needed; to not free
@@ -180,6 +185,13 @@ CFStringRef CFStringCreateWithPascalStringNoCopy(CFAllocatorRef alloc, ConstStr2
 
 CF_EXPORT
 CFStringRef CFStringCreateWithCStringNoCopy(CFAllocatorRef alloc, const char *cStr, CFStringEncoding encoding, CFAllocatorRef contentsDeallocator);
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* The following takes an explicit length, and allows you to specify whether the data is an external format --- that is, whether to pay attention to the BOM character (if any) and do byte swapping if necessary
+*/
+CF_EXPORT
+CFStringRef CFStringCreateWithBytesNoCopy(CFAllocatorRef alloc, const UInt8 *bytes, CFIndex numBytes, CFStringEncoding encoding, Boolean isExternalRepresentation, CFAllocatorRef contentsDeallocator) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+#endif
 
 CF_EXPORT
 CFStringRef CFStringCreateWithCharactersNoCopy(CFAllocatorRef alloc, const UniChar *chars, CFIndex numChars, CFAllocatorRef contentsDeallocator);
@@ -244,7 +256,7 @@ These functions do zero-terminate or put the length byte; the provided bufferSiz
 space for this (so pass 256 for Str255). More sophisticated usages can go through CFStringGetBytes().
 These functions are equivalent to calling CFStringGetBytes() with 
 the range of the string; lossByte = 0; and isExternalRepresentation = false; 
-if successful, they then insert the leading length of terminating zero, as desired.
+if successful, they then insert the leading length or terminating zero, as desired.
 */
 CF_EXPORT
 Boolean CFStringGetPascalString(CFStringRef theString, StringPtr buffer, CFIndex bufferSize, CFStringEncoding encoding);
@@ -281,15 +293,6 @@ const UniChar *CFStringGetCharactersPtr(CFStringRef theString);					/* May retur
 CF_EXPORT
 CFIndex CFStringGetBytes(CFStringRef theString, CFRange range, CFStringEncoding encoding, UInt8 lossByte, Boolean isExternalRepresentation, UInt8 *buffer, CFIndex maxBufLen, CFIndex *usedBufLen);
 
-/* This one goes the other way by creating a CFString from a bag of bytes.
-This is much like CFStringCreateWithPascalString or CFStringCreateWithCString,
-except the length is supplied explicitly. In addition, you can specify whether
-the data is an external format --- that is, whether to pay attention to the
-BOM character (if any) and do byte swapping if necessary
-*/
-CF_EXPORT
-CFStringRef CFStringCreateWithBytes(CFAllocatorRef alloc, const UInt8 *bytes, CFIndex numBytes, CFStringEncoding encoding, Boolean isExternalRepresentation);
-
 /* Convenience functions String <-> Data. These generate "external" formats, that is, formats that
    can be written out to disk. For instance, if the encoding is Unicode, CFStringCreateFromExternalRepresentation()
    pays attention to the BOM character (if any) and does byte swapping if necessary.
@@ -321,7 +324,7 @@ CFIndex CFStringGetMaximumSizeForEncoding(CFIndex length, CFStringEncoding encod
 
 /*** FileSystem path conversion functions ***/
 
-/* Extract the contents of the string as a NULL-terminated 8-bit string appropriate for passing to POSIX APIs.  The string is zero-terminated. false will be returned if the conversion results don't fit into the buffer.  Use CFStringGetMaximumSizeOfFileSystemRepresentation() if you want to make sure the buffer is of sufficient length.
+/* Extract the contents of the string as a NULL-terminated 8-bit string appropriate for passing to POSIX APIs (for example, normalized for HFS+).  The string is zero-terminated. false will be returned if the conversion results don't fit into the buffer.  Use CFStringGetMaximumSizeOfFileSystemRepresentation() if you want to make sure the buffer is of sufficient length.
 */
 CF_EXPORT
 Boolean CFStringGetFileSystemRepresentation(CFStringRef string, char *buffer, CFIndex maxBufLen) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -342,19 +345,35 @@ CFStringRef CFStringCreateWithFileSystemRepresentation(CFAllocatorRef alloc, con
 /* Find and compare flags; these are OR'ed together as compareOptions or searchOptions in the various functions. 
    This typedef doesn't appear in the functions; instead the argument is CFOptionFlags. 
 */
-typedef enum {	
+enum {	
     kCFCompareCaseInsensitive = 1,	
     kCFCompareBackwards = 4,		/* Starting from the end of the string */
     kCFCompareAnchored = 8,		/* Only at the specified starting point */
     kCFCompareNonliteral = 16,		/* If specified, loose equivalence is performed (o-umlaut == o, umlaut) */
     kCFCompareLocalized = 32,		/* User's default locale is used for the comparisons */
     kCFCompareNumerically = 64		/* Numeric comparison is used; that is, Foo2.txt < Foo7.txt < Foo25.txt */
-} CFStringCompareFlags;	
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    ,
+    kCFCompareDiacriticInsensitive = 128, /* If specified, ignores diacritics (o-umlaut == o) */
+    kCFCompareWidthInsensitive = 256, /* If specified, ignores width differences ('a' == UFF41) */
+    kCFCompareForcedOrdering = 512 /* If specified, comparisons are forced to return either kCFCompareLessThan or kCFCompareGreaterThan if the strings are equivalent but not strictly equal, for stability when sorting (e.g. "aaa" > "AAA" with kCFCompareCaseInsensitive specified) */
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+};
+typedef CFOptionFlags CFStringCompareFlags;
 
 /* The main comparison routine; compares specified range of the first string to (the full range of) the second string.
-   locale == NULL indicates canonical locale.
-   kCFCompareNumerically, added in 10.2, does not work if kCFCompareLocalized is specified on systems before 10.3
-   kCFCompareBackwards and kCFCompareAnchored are not applicable.
+locale == NULL indicates canonical locale (the return value from CFLocaleGetSystem()).
+kCFCompareNumerically, added in 10.2, does not work if kCFCompareLocalized is specified on systems before 10.3
+kCFCompareBackwards and kCFCompareAnchored are not applicable.
+*/
+#if !defined (__WIN32__)
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+CF_EXPORT
+CFComparisonResult CFStringCompareWithOptionsAndLocale(CFStringRef theString1, CFStringRef theString2, CFRange rangeToCompare, CFOptionFlags compareOptions, CFLocaleRef locale) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+#endif //__WIN32__
+
+/* Comparison convenience. Uses the current user locale (the return value from CFLocaleCopyCurrent()) if kCFCompareLocalized.
 */
 CF_EXPORT
 CFComparisonResult CFStringCompareWithOptions(CFStringRef theString1, CFStringRef theString2, CFRange rangeToCompare, CFOptionFlags compareOptions);
@@ -366,9 +385,19 @@ CFComparisonResult CFStringCompareWithOptions(CFStringRef theString1, CFStringRe
 CF_EXPORT
 CFComparisonResult CFStringCompare(CFStringRef theString1, CFStringRef theString2, CFOptionFlags compareOptions);
 
-/* CFStringFindWithOptions() returns the found range in the CFRange * argument; you can pass NULL for simple discovery check.
-   If stringToFind is the empty string (zero length), nothing is found.
-   Ignores the kCFCompareNumerically option.
+/* CFStringFindWithOptionsAndLocale() returns the found range in the CFRange * argument; you can pass NULL for simple discovery check.
+ locale == NULL indicates canonical locale (the return value from CFLocaleGetSystem()).
+ If stringToFind is the empty string (zero length), nothing is found.
+ Ignores the kCFCompareNumerically option.
+*/
+#if !defined (__WIN32__)
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+CF_EXPORT
+Boolean CFStringFindWithOptionsAndLocale(CFStringRef theString, CFStringRef stringToFind, CFRange rangeToSearch, CFOptionFlags searchOptions, CFLocaleRef locale, CFRange *result) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+#endif //__WIN32__
+
+/* Find convenience. Uses the current user locale (the return value from CFLocaleCopyCurrent()) if kCFCompareLocalized.
 */
 CF_EXPORT
 Boolean CFStringFindWithOptions(CFStringRef theString, CFStringRef stringToFind, CFRange rangeToSearch, CFOptionFlags searchOptions, CFRange *result);
@@ -434,7 +463,8 @@ CF_EXPORT CFRange CFStringGetRangeOfComposedCharactersAtIndex(CFStringRef theStr
                         is undefined.
 	@param result The pointer to a CFRange supplied by the caller in
 			which the search result is stored.  Note that the length
-                        of this range could be more than If a pointer to an invalid
+			of this range can be more than 1, if for instance the 
+			result is a composed character. If a pointer to an invalid
 			memory is specified, the behavior is undefined.
 	@result true, if at least a character which is a member of the character
 			set is found and result is filled, otherwise, false.
@@ -443,17 +473,21 @@ CF_EXPORT Boolean CFStringFindCharacterFromSet(CFStringRef theString, CFCharacte
 #endif
 
 /* Find range of bounds of the line(s) that span the indicated range (startIndex, numChars),
-   taking into account various possible line separator sequences (CR, CRLF, LF, and Unicode LS, PS).
+   taking into account various possible line separator sequences (CR, CRLF, LF, and Unicode NextLine, LineSeparator, ParagraphSeparator).
    All return values are "optional" (provide NULL if you don't want them)
-     lineStartIndex: index of first character in line
+     lineBeginIndex: index of first character in line
      lineEndIndex: index of first character of the next line (including terminating line separator characters)
      contentsEndIndex: index of the first line separator character
-   Thus, lineEndIndex - lineStartIndex is the number of chars in the line, including the line separators
-         contentsEndIndex - lineStartIndex is the number of chars in the line w/out the line separators
+   Thus, lineEndIndex - lineBeginIndex is the number of chars in the line, including the line separators
+         contentsEndIndex - lineBeginIndex is the number of chars in the line w/out the line separators
 */
 CF_EXPORT
 void CFStringGetLineBounds(CFStringRef theString, CFRange range, CFIndex *lineBeginIndex, CFIndex *lineEndIndex, CFIndex *contentsEndIndex); 
 
+/* Same as CFStringGetLineBounds(), however, will only look for paragraphs. Won't stop at Unicode NextLine or LineSeparator characters.
+*/
+CF_EXPORT
+void CFStringGetParagraphBounds(CFStringRef string, CFRange range, CFIndex *parBeginIndex, CFIndex *parEndIndex, CFIndex *contentsEndIndex) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*** Exploding and joining strings with a separator string ***/
 
@@ -578,14 +612,16 @@ void CFStringCapitalize(CFMutableStringRef theString, const void *localeTBD); //
 /*!
 	@typedef CFStringNormalizationForm
 	This is the type of Unicode normalization forms as described in
-	Unicode Technical Report #15.
+	Unicode Technical Report #15. To normalize for use with file
+	system calls, use CFStringGetFileSystemRepresentation().
 */
-typedef enum {
+enum {
 	kCFStringNormalizationFormD = 0, // Canonical Decomposition
 	kCFStringNormalizationFormKD, // Compatibility Decomposition
 	kCFStringNormalizationFormC, // Canonical Decomposition followed by Canonical Composition
 	kCFStringNormalizationFormKC // Compatibility Decomposition followed by Canonical Composition
-} CFStringNormalizationForm;
+};
+typedef CFIndex CFStringNormalizationForm;
 
 /*!
 	@function CFStringNormalize
@@ -601,7 +637,38 @@ typedef enum {
 CF_EXPORT void CFStringNormalize(CFMutableStringRef theString, CFStringNormalizationForm theForm);
 #endif
 
-/* Perform string transliteration.  The transformation represented by transform (see below for the full list of transforms supported) is applied to the given range of string, modifying it in place. Only the specified range will be modified, but the transform may look at portions of the string outside that range for context. NULL range pointer causes the whole string to be transformed. On return, range is modified to reflect the new range corresponding to the original range. reverse indicates that the inverse transform should be used instead, if it exists. If the transform is successful, true is returned; if unsuccessful, false. Reasons for the transform being unsuccessful include an invalid transform identifier, or attempting to reverse an irreversible transform.
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/*!
+	@function CFStringFold
+	Folds the string into the form specified by the flags.
+		Character foldings are operations that convert any of a set of characters
+		sharing similar semantics into a single representative from that set.
+		This function can be used to preprocess strings that are to be compared,
+		searched, or indexed.
+		Note that folding does not include normalization, so it is necessary
+		to use CFStringNormalize in addition to CFStringFold in order to obtain
+		the effect of kCFCompareNonliteral.
+	@param theString  The string which is to be folded.  If this parameter is not
+		a valid mutable CFString, the behavior is undefined.
+	@param theFlag  The equivalency flags which describes the character folding form.
+		Only those flags containing the word "insensitive" are recognized here; other flags are ignored.		
+		Folding with kCFCompareCaseInsensitive removes case distinctions in accordance with the mapping
+		specified by ftp://ftp.unicode.org/Public/UNIDATA/CaseFolding.txt.  Folding with
+		kCFCompareDiacriticInsensitive removes distinctions of accents and other diacritics.  Folding
+		with kCFCompareWidthInsensitive removes character width distinctions by mapping characters in
+		the range U+FF00-U+FFEF to their ordinary equivalents.
+	@param theLocale The locale tailoring the character folding behavior. If NULL,
+		it's considered to be the system locale returned from CFLocaleGetSystem().
+		If non-NULL and not a valid CFLocale object, the behavior is undefined.
+*/
+
+CF_EXPORT
+void CFStringFold(CFMutableStringRef theString, CFOptionFlags theFlags, CFLocaleRef theLocale) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+
+/* Perform string transliteration.  The transformation represented by transform is applied to the given range of string, modifying it in place. Only the specified range will be modified, but the transform may look at portions of the string outside that range for context. NULL range pointer causes the whole string to be transformed. On return, range is modified to reflect the new range corresponding to the original range. reverse indicates that the inverse transform should be used instead, if it exists. If the transform is successful, true is returned; if unsuccessful, false. Reasons for the transform being unsuccessful include an invalid transform identifier, or attempting to reverse an irreversible transform.
+
+You can pass one of the predefined transforms below, or any valid ICU transform ID as defined in the ICU User Guide. Note that we do not support arbitrary set of ICU transform rules.
 */
 Boolean CFStringTransform(CFMutableStringRef string, CFRange *range, CFStringRef transform, Boolean reverse) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -622,6 +689,7 @@ CF_EXPORT const CFStringRef kCFStringTransformLatinCyrillic AVAILABLE_MAC_OS_X_V
 CF_EXPORT const CFStringRef kCFStringTransformLatinGreek AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 CF_EXPORT const CFStringRef kCFStringTransformToXMLHex AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 CF_EXPORT const CFStringRef kCFStringTransformToUnicodeName AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CF_EXPORT const CFStringRef kCFStringTransformStripDiacritics AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*** General encoding related functionality ***/
@@ -644,10 +712,10 @@ CFStringRef CFStringGetNameOfEncoding(CFStringEncoding encoding);
 /* ID mapping functions from/to Cocoa NSStringEncoding.  Returns kCFStringEncodingInvalidId if no mapping exists.
 */
 CF_EXPORT
-UInt32 CFStringConvertEncodingToNSStringEncoding(CFStringEncoding encoding);
+unsigned long CFStringConvertEncodingToNSStringEncoding(CFStringEncoding encoding);
 
 CF_EXPORT
-CFStringEncoding CFStringConvertNSStringEncodingToEncoding(UInt32 encoding);
+CFStringEncoding CFStringConvertNSStringEncodingToEncoding(unsigned long encoding);
 
 /* ID mapping functions from/to Microsoft Windows codepage (covers both OEM & ANSI).  Returns kCFStringEncodingInvalidId if no mapping exists.
 */
@@ -747,9 +815,7 @@ void CFShowStr(CFStringRef str);
 CF_EXPORT
 CFStringRef  __CFStringMakeConstantString(const char *cStr);	/* Private; do not use */
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
-#endif /* !__COREFOUNDATION_CFSTRING__ */
+#endif /* ! __COREFOUNDATION_CFSTRING__ */
 

@@ -43,12 +43,18 @@
                 #define MD_EXPORT extern
         #endif
         #define MD_AVAIL AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
+        #define MD_AVAIL_LEOPARD AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
         #if defined(__cplusplus)
                 #define MD_BEGIN_C_DECLS extern "C" {
                 #define MD_END_C_DECLS   }
         #else
                 #define MD_BEGIN_C_DECLS
                 #define MD_END_C_DECLS
+        #endif
+        #if defined(macintosh) && defined(__MWERKS__)
+                #define MD_DEPRECATED
+        #else
+                #define MD_DEPRECATED __attribute__ ((deprecated))
         #endif
 #endif
 
@@ -157,7 +163,14 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    authors in the array is preserved, but is not intended to represent
    the main author or relative importance of the authors. Type is a
    CFArray of CFStrings.
-
+ 
+   @constant kMDItemEditors
+   The list of editor/editors that has worked on this file. There
+   could be 0 or more editors of a particular file. The order of the
+   editors in the array is preserved, but is not intended to represent
+   the main editor or relative importance of the editors. Type is a
+   CFArray of CFStrings.
+ 
    @constant kMDItemProjects
    The list of projects etc that this file is part of. For example if
    you were working on a movie, all of the movie files could be marked
@@ -277,6 +290,9 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    @const kMDItemEXIFVersion
    The verion of the EXIF header that was used to generate the metadata
 
+   @const kMDItemEXIFGPSVersion
+   The version of GPSInfoIFD header that was used to generate the metadata
+ 
    @const kMDItemCodecs
    The codecs used to encode/decode the media
 
@@ -350,13 +366,44 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    Provides full, publishable, name of the country/primary location
    where the intellectual property of the objectdata was created,
    according to guidelines of the provider.
+ 
+ @const kMDItemEXIFGPSVersion
+ The version of GPSInfoIFD in EXIF used to generate the metadata.
+ 
+ @const kMDItemAltitude
+ The altitude of the item in meters above sea level, expressed 
+ using the WGS84 datum.  Negative values lie below sea level.
+ 
+ @const kMDItemLatitude
+ The latitude of the item in degrees north of the equator, expressed
+ using the WGS84 datum.  Negative values lie south of the equator.
+ 
+ @const kMDItemLongitude
+ The longitude of the item in degrees east of the prime meridian,
+ expressed using the WGS84 datum.  Negative values lie west of the prime meridian.
+ 
+ @const kMDItemTimestamp
+ The timestamp on the item.  This generally is used to indicate the time at
+ which the event captured by the item took place.
+ 
+ @const kMDItemSpeed
+ The speed of the item, in kilometers per hour.
+ 
+ @const kMDItemGPSTrack
+ The direction of travel of the item, in degrees from true north.
+ 
+ @const kMDItemImageDirection
+ The direction of the item's image, in degrees from true north.
+ 
 */
 
 MD_EXPORT const CFStringRef     kMDItemAttributeChangeDate MD_AVAIL;       // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentType MD_AVAIL;               // CFString
+MD_EXPORT const CFStringRef     kMDItemContentTypeTree MD_AVAIL_LEOPARD;   // Array of CFStringRef
 MD_EXPORT const CFStringRef     kMDItemKeywords MD_AVAIL;                  // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemTitle MD_AVAIL;                     // CFString
 MD_EXPORT const CFStringRef     kMDItemAuthors MD_AVAIL;                   // CFArray of CFString
+MD_EXPORT const CFStringRef     kMDItemEditors MD_AVAIL_LEOPARD;           // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemProjects MD_AVAIL;                  // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemWhereFroms MD_AVAIL;                // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemComment MD_AVAIL;                   // CFString
@@ -387,6 +434,15 @@ MD_EXPORT const CFStringRef     kMDItemResolutionHeightDPI MD_AVAIL;       // CF
 MD_EXPORT const CFStringRef     kMDItemExposureMode MD_AVAIL;              // CFNumber
 MD_EXPORT const CFStringRef     kMDItemExposureTimeSeconds MD_AVAIL;       // CFNumber
 MD_EXPORT const CFStringRef     kMDItemEXIFVersion MD_AVAIL;               // CFString
+
+MD_EXPORT const CFStringRef     kMDItemEXIFGPSVersion MD_AVAIL_LEOPARD;    // CFString
+MD_EXPORT const CFStringRef     kMDItemAltitude MD_AVAIL_LEOPARD;          // CFNumber
+MD_EXPORT const CFStringRef     kMDItemLatitude MD_AVAIL_LEOPARD;          // CFNumber
+MD_EXPORT const CFStringRef     kMDItemLongitude MD_AVAIL_LEOPARD;         // CFNumber
+MD_EXPORT const CFStringRef     kMDItemSpeed MD_AVAIL_LEOPARD;             // CFNumber
+MD_EXPORT const CFStringRef     kMDItemTimestamp MD_AVAIL_LEOPARD;         // CFDate
+MD_EXPORT const CFStringRef     kMDItemGPSTrack MD_AVAIL_LEOPARD;          // CFNumber
+MD_EXPORT const CFStringRef     kMDItemImageDirection MD_AVAIL_LEOPARD;    // CFNumber
 
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
@@ -419,7 +475,7 @@ MD_EXPORT const CFStringRef     kMDItemCountry MD_AVAIL;                   // CF
    @constant kMDItemDisplayName
    This is the localized version of the LaunchServices call
    LSCopyDisplayNameForURL()/LSCopyDisplayNameForRef().
-
+ 
    @constant kMDItemFSName
    This is the file name of the MDItemRef. Type is a CFString
 
@@ -452,11 +508,17 @@ MD_EXPORT const CFStringRef     kMDItemCountry MD_AVAIL;                   // CF
    @constant kMDItemFSIsWriteable *** DEPRECATED ***
    Boolean indicating if this file is writable. Type is a CFBoolean.
 
+   @constant kMDItemFSNodeCount
+   Number of files in directory. Type is a CFNumber.
+
+   @constant kMDItemFSHasCustomIcon
+   Boolean indicating if this file has a custom icon. Type is a CFBoolean.
+
    @constant kMDItemFSIsExtensionHidden
    Boolean indicating if this file has its extension hidden. Type is a CFBoolean.
 
-   @constant kMDItemFSNodeCount
-   Number of files in directory. Type is a CFNumber.
+   @constant kMDItemFSIsStationery
+   Boolean indicating if this file is stationery. Type is a CFBoolean.
 
    @constant kMDItemFSInvisible
    Boolean indicating if this file is visible. Type is a CFBoolean.
@@ -477,7 +539,9 @@ MD_EXPORT const CFStringRef     kMDItemFSOwnerGroupID MD_AVAIL;          // CFNu
 MD_EXPORT const CFStringRef     kMDItemFSExists AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 MD_EXPORT const CFStringRef     kMDItemFSIsReadable AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 MD_EXPORT const CFStringRef     kMDItemFSIsWriteable AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef     kMDItemFSHasCustomIcon MD_AVAIL;         // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemFSIsExtensionHidden MD_AVAIL;     // CFBoolean
+MD_EXPORT const CFStringRef     kMDItemFSIsStationery MD_AVAIL;          // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemFSInvisible MD_AVAIL;             // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemFSLabel MD_AVAIL;                 // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFSNodeCount MD_AVAIL;             // CFNumber
@@ -558,7 +622,7 @@ MD_EXPORT const CFStringRef     kMDItemMusicalGenre MD_AVAIL;                   
 MD_EXPORT const CFStringRef     kMDItemIsGeneralMIDISequence MD_AVAIL;           // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemRecordingYear MD_AVAIL;                   // CFNumber
 
-/*
+/*!
         @const kMDItemOrganizations
         Used to indicate company/Organization that created the document.
         Type is a CFArray of CFStrings.
@@ -606,6 +670,9 @@ MD_EXPORT const CFStringRef     kMDItemRecordingYear MD_AVAIL;                  
         @const kMDItemSubject
         Subject of the this item. Type is a CFString.
 
+        @const kMDItemTheme
+        Theme of the this item. Type is a CFString.
+ 
         @const kMDItemDescription
         An account of the content of the resource. Description may include
         but is not limited to: an abstract, table of contents, reference
@@ -631,12 +698,13 @@ MD_EXPORT const CFStringRef     kMDItemPublishers MD_AVAIL;                     
 MD_EXPORT const CFStringRef     kMDItemContributors MD_AVAIL;                     // CFArray of CFStrings
 MD_EXPORT const CFStringRef     kMDItemCoverage MD_AVAIL;                         // CFArray of CFStrings
 MD_EXPORT const CFStringRef     kMDItemSubject MD_AVAIL;                          // CFString
+MD_EXPORT const CFStringRef     kMDItemTheme MD_AVAIL;                            // CFString
 MD_EXPORT const CFStringRef     kMDItemDescription MD_AVAIL;                      // CFString
 MD_EXPORT const CFStringRef     kMDItemIdentifier MD_AVAIL;                       // CFString
 MD_EXPORT const CFStringRef     kMDItemAudiences MD_AVAIL;                        // CFArray of CFStrings
 
 
-/*
+/*!
         @const kMDItemNumberOfPages
         Number of pages in the item. Type is a CFNumberRef
 
@@ -760,6 +828,9 @@ MD_EXPORT const CFStringRef    kMDItemFonts MD_AVAIL;                           
         instrument name associated with them if they have certain
         instrument categories (e.g., the category Percussion has
         multiple instruments, including Conga and Bongo).
+
+        @const kMDItemCFBundleIdentifier
+        If this item is a bundle, then this is the CFBundleIdentifier
 */
 
 MD_EXPORT const CFStringRef    kMDItemAppleLoopsRootKey MD_AVAIL;                // CFString
@@ -769,6 +840,53 @@ MD_EXPORT const CFStringRef    kMDItemAppleLoopDescriptors MD_AVAIL;            
 MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentCategory MD_AVAIL;        // CFString
 MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentName MD_AVAIL;            // CFString
 
+MD_EXPORT const CFStringRef    kMDItemCFBundleIdentifier MD_AVAIL_LEOPARD;       // CFString
+MD_EXPORT const CFStringRef    kMDItemSupportFileType MD_AVAIL_LEOPARD;          // CFArray of CFStrings
+
+/*!
+        @const kMDItemInformation
+        Information about the item
+
+        @const kMDItemDirector
+        Director of the movie
+
+        @const kMDItemProducer
+        Producer of the content
+
+        @const kMDItemGenre
+        Genre of the movie
+
+        @const kMDItemPerformers
+        Performers in the movie
+
+        @const kMDItemOriginalFormat
+        Original format of the movie
+
+        @const kMDItemOriginalSource
+        Original source of the movie
+
+        @const kMDItemAuthorEmailAddresses
+        This attribute indicates the author of the emails message addresses. (This is always
+        the email address, and not the human readable version)
+
+        @const kMDItemRecipientEmailAddresses
+        This attribute indicates the reciepients email addresses. (This is always the email
+        address,  and not the human readable version).
+
+        @const kMDItemURL
+        Url of the item
+
+*/
+MD_EXPORT const CFStringRef    kMDItemInformation MD_AVAIL_LEOPARD;              // CFString
+MD_EXPORT const CFStringRef    kMDItemDirector MD_AVAIL_LEOPARD;                 // CFString
+MD_EXPORT const CFStringRef    kMDItemProducer MD_AVAIL_LEOPARD;                 // CFString
+MD_EXPORT const CFStringRef    kMDItemGenre MD_AVAIL_LEOPARD;                    // CFString
+MD_EXPORT const CFStringRef    kMDItemPerformers MD_AVAIL_LEOPARD;               // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemOriginalFormat MD_AVAIL_LEOPARD;           // CFString
+MD_EXPORT const CFStringRef    kMDItemOriginalSource MD_AVAIL_LEOPARD;           // CFString
+MD_EXPORT const CFStringRef    kMDItemAuthorEmailAddresses MD_AVAIL_LEOPARD;     // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemRecipientEmailAddresses MD_AVAIL_LEOPARD;  // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemURL MD_AVAIL_LEOPARD;                      // CFString
 MD_END_C_DECLS
 
 /* ================================================================ */
@@ -776,9 +894,8 @@ MD_END_C_DECLS
 #if defined(__GNUC__) || __STDC_VERSION__ >= 199901L
 /* Private function rewriting */
 MD_BEGIN_C_DECLS
-extern CFDictionaryRef __MDItemCopyAttributesEllipsis1(MDItemRef item, ...) MD_AVAIL;
-
 #define MDItemCopyAttributeList(item, ...) __MDItemCopyAttributesEllipsis1(item, __VA_ARGS__, NULL)
+extern CFDictionaryRef __MDItemCopyAttributesEllipsis1(MDItemRef item, ...) MD_AVAIL;
 MD_END_C_DECLS
 #endif
 

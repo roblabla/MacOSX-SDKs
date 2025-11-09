@@ -1,18 +1,19 @@
 /*	NSDictionary.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSEnumerator.h>
 
-@class NSArray, NSEnumerator, NSString, NSURL;
+@class NSArray, NSString, NSURL;
 
 /****************	Immutable Dictionary	****************/
 
-@interface NSDictionary : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSDictionary : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
 
-- (unsigned)count;
-- (NSEnumerator *)keyEnumerator;
+- (NSUInteger)count;
 - (id)objectForKey:(id)aKey;
+- (NSEnumerator *)keyEnumerator;
 
 @end
 
@@ -23,8 +24,8 @@
 - (NSArray *)allValues;
 - (NSString *)description;
 - (NSString *)descriptionInStringsFileFormat;
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale;
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale indent:(unsigned)level;
+- (NSString *)descriptionWithLocale:(id)locale;
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (BOOL)isEqualToDictionary:(NSDictionary *)otherDictionary;
 - (NSEnumerator *)objectEnumerator;
 - (NSArray *)objectsForKeys:(NSArray *)keys notFoundMarker:(id)marker;
@@ -32,27 +33,29 @@
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically; // the atomically flag is ignored if url of a type that cannot be written atomically.
 
 - (NSArray *)keysSortedByValueUsingSelector:(SEL)comparator;
+- (void)getObjects:(id *)objects andKeys:(id *)keys;
 
 @end
 
 @interface NSDictionary (NSDictionaryCreation)
 
 + (id)dictionary;
++ (id)dictionaryWithObject:(id)object forKey:(id)key;
++ (id)dictionaryWithObjects:(id *)objects forKeys:(id *)keys count:(NSUInteger)cnt;
++ (id)dictionaryWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
++ (id)dictionaryWithDictionary:(NSDictionary *)dict;
++ (id)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
+
+- (id)initWithObjects:(id *)objects forKeys:(id *)keys count:(NSUInteger)cnt;
+- (id)initWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)initWithDictionary:(NSDictionary *)otherDictionary;
+- (id)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag;
+- (id)initWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
+
 + (id)dictionaryWithContentsOfFile:(NSString *)path;
 + (id)dictionaryWithContentsOfURL:(NSURL *)url;
-+ (id)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
-+ (id)dictionaryWithObjects:(id *)objects forKeys:(id *)keys count:(unsigned)count;
-+ (id)dictionaryWithObjectsAndKeys:(id)firstObject, ...;
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;
-- (id)initWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
-- (id)initWithObjects:(id *)objects forKeys:(id *)keys count:(unsigned)count;
-- (id)initWithObjectsAndKeys:(id)firstObject, ...;
-- (id)initWithDictionary:(NSDictionary *)otherDictionary;
-
-+ (id)dictionaryWithDictionary:(NSDictionary *)dict;
-+ (id)dictionaryWithObject:(id)object forKey:(id)key;
-- (id)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)aBool;
 
 @end
 
@@ -76,8 +79,8 @@
 
 @interface NSMutableDictionary (NSMutableDictionaryCreation)
 
-+ (id)dictionaryWithCapacity:(unsigned)numItems;
-- (id)initWithCapacity:(unsigned)numItems;
++ (id)dictionaryWithCapacity:(NSUInteger)numItems;
+- (id)initWithCapacity:(NSUInteger)numItems;
 
 @end
 

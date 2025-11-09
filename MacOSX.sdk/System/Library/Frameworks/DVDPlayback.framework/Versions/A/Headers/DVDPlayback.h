@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
 
-     Copyright:  (c) 2001-2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2001-2007 by Apple Inc. All rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -42,7 +42,6 @@
 extern "C" {
 #endif
 
-
 //-----------------------------------------------------
 // DVDErrorCode - Errors returned by the framework (-70000 to -70099)
 //-----------------------------------------------------
@@ -75,7 +74,12 @@ enum {
 	kDVDErrorOutOfVideoMemory			= -70026,	//	The video driver does not have enough video memory available to playback the media.
 	kDVDErrorNoAudioOutputDevice		= -70027,	//	An appropriate audio output device could not be found.
 	kDVDErrorSystem						= -70028,	//	A system error was encountered.
-	kDVDErrorNavigation					= -70029	//	The user has made a selection not supported in the current menu.
+	kDVDErrorNavigation					= -70029,	//	The user has made a selection not supported in the current menu.
+	kDVDErrorInvalidBookmarkVersion		= -70030,	//	invalid bookmark version
+	kDVDErrorInvalidBookmarkSize		= -70031,	//	invalid bookmark size
+	kDVDErrorInvalidBookmarkForMedia	= -70032,	//	invalid bookmark for media
+	kDVDErrorNoValidBookmarkForLastPlay	= -70033	//	no valid last play bookmark
+
 };
 typedef	OSStatus	DVDErrorCode;
 
@@ -213,6 +217,17 @@ typedef SInt16	DVDFormat;
 
 
 //-----------------------------------------------------
+// DVDAudioMode - The supported audio output formats
+//-----------------------------------------------------
+enum{
+	kDVDAudioModeUninitialized 		= 0,
+	kDVDAudioModeProLogic 			= 1 << 0,
+	kDVDAudioModeSPDIF				= 1 << 1
+};
+typedef SInt32	DVDAudioMode;
+
+
+//-----------------------------------------------------
 // DVDAudioStreamFormat - The different possible audio stream formats.
 //-----------------------------------------------------
 enum{
@@ -223,7 +238,9 @@ enum{
 	kDVDAudioPCMFormat,
 	kDVDAudioDTSFormat,
 	kDVDAudioSDDSFormat,
-	kDVDAudioMLPFormat
+	kDVDAudioMLPFormat,
+	kDVDAudioDDPlusFormat,
+	kDVDAudioDTSHDFormat
 };
 typedef SInt16	DVDAudioFormat;
 
@@ -522,6 +539,16 @@ enum {
 };
 typedef UInt32	DVDEventCode;
 
+//-----------------------------------------------------
+// DVDEventValue - The value for a registered event
+//-----------------------------------------------------
+typedef unsigned long	DVDEventValue;
+
+//-----------------------------------------------------
+// DVDEventCallBackRef - The reference to a registered event callback
+//-----------------------------------------------------
+typedef void *	DVDEventCallBackRef;
+
 
 
 //-----------------------------------------------------
@@ -537,8 +564,8 @@ typedef UInt32	DVDEventCode;
 //										and inRefCon is the refcon passed in when the callback was registered.
 //										If the call was registered for multiple events, each event will be called separately.
 //-----------------------------------------------------
-typedef void	(*DVDFatalErrCallBackFunctionPtr)(DVDErrorCode inError, UInt32 inRefCon);
-typedef void	(*DVDEventCallBackFunctionPtr)(DVDEventCode inEventCode, UInt32 inEventValue1, UInt32 inEventValue2, UInt32 inRefCon);
+typedef void	(*DVDFatalErrCallBackFunctionPtr)(DVDErrorCode inError, void *inRefCon);
+typedef void	(*DVDEventCallBackFunctionPtr)(DVDEventCode inEventCode, DVDEventValue inEventValue1, DVDEventValue inEventValue2, void *inRefCon);
 
 
 
@@ -605,10 +632,12 @@ extern	OSStatus	DVDCloseMediaVolume()																		AVAILABLE_MAC_OS_X_VERSIO
 //	DVDSetVideoDevice		- 	Set the device to playback video on.
 //	DVDGetVideoDevice		- 	Returns the device video playback is on.
 //-----------------------------------------------------
-extern	OSStatus	DVDIsSupportedDevice(GDHandle inDevice,Boolean *outSupported)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSwitchToDevice(GDHandle newDevice,Boolean *outSupported)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetVideoDevice(GDHandle inDevice)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoDevice(GDHandle *outDevice)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#if !__LP64__
+extern	OSStatus	DVDIsSupportedDevice(GDHandle inDevice,Boolean *outSupported)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDSwitchToDevice(GDHandle newDevice,Boolean *outSupported)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDSetVideoDevice(GDHandle inDevice)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDGetVideoDevice(GDHandle *outDevice)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#endif
 
 
 //-----------------------------------------------------
@@ -653,18 +682,34 @@ extern	OSStatus	DVDGetVideoDisplay(CGDirectDisplayID *outDisplay)											AVAI
 //							  	with the native video size to calculate the video bounds.
 //	DVDSetAspectRatio		- 	Set the aspect ratio to use for the current title.
 //	DVDGetFormatStandard	- 	Returns the format of the title.
+//
+//	DVDSetVideoWindowRef	- 	Sets the window to play into and causes the appropriate
+//							 	video driver to be loaded.  Passing NULL causes the
+//								low-level DVD driver to close.
+//	DVDGetVideoWindowRef	- 	Returns the window the playback framework is set to.
+//	DVDSetVideoCGBounds		- 	Sets (in window root view coordinates) the rect to play the video in.
+//	DVDGetVideoCGBounds		- 	Returns (in window root view coordinates) the rect used to play video.
 //-----------------------------------------------------
-extern	OSStatus	DVDSetVideoPort(CGrafPtr inVidPort)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoPort(CGrafPtr *outVidPort)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#if !__LP64__
+extern	OSStatus	DVDSetVideoPort(CGrafPtr inVidPort)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDGetVideoPort(CGrafPtr *outVidPort)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#endif
 extern	OSStatus	DVDSetVideoWindowID(UInt32 inVidWindowID)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGetVideoWindowID(UInt32 *outVidWindowID)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetVideoBounds(Rect *inPortRect)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoBounds(Rect *outPortRect)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoKeyColor(RGBColor *outKeyColor)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNativeVideoSize(UInt16 *outWidth,UInt16 *outHeight)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#if !__LP64__
+extern	OSStatus	DVDSetVideoBounds(Rect *inPortRect)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDGetVideoBounds(Rect *outPortRect)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDGetVideoKeyColor(RGBColor *outKeyColor)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#endif
+extern	OSStatus	DVDGetNativeVideoSize(UInt16 *outWidth, UInt16 *outHeight)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGetAspectRatio(DVDAspectRatio *outRatio)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDSetAspectRatio(DVDAspectRatio inRatio)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGetFormatStandard(DVDFormat *outFormat)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+extern	OSStatus	DVDSetVideoWindowRef(WindowRef inWindowRef)													AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDGetVideoWindowRef(WindowRef *outWindowRef)												AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDSetVideoCGBounds(CGRect *inRect)															AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDGetVideoCGBounds(CGRect *outRect)														AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 
@@ -676,10 +721,26 @@ extern	OSStatus	DVDGetFormatStandard(DVDFormat *outFormat)													AVAILABLE
 //	
 //	DVDGetAudioStreamFormat			-	Gets the current audio format (AC3,for example).
 //	DVDGetAudioStreamFormatByStream	-	Gets the audio format for selected stream (1,2,3...).
+//
+//	DVDGetAudioOutputModeCapabilities	- returns the current possible audio output mode possibilities
+//										  outModes returns a mask of supported modes
+//	DVDSetAudioOutputMode				- set the audio mode
+//	DVDGetAudioOutputMode				- gets the current audio mode setting
+//	DVDGetSPDIFDataOutDeviceCount		- gets the number of SPDIF capable audio devices
+//	DVDGetSPDIFDataOutDeviceCFName		- gets the name - CFStringRef - of a SPDIF capable audio device
+//	DVDSetSPDIFDataOutDevice			- selects a SPDIF capable audio device
+//	DVDGetSPDIFDataOutDevice			- returns the selected SPDIF capable audio device
 //-----------------------------------------------------
 extern	OSStatus	DVDGetAudioStreamFormat(DVDAudioFormat *outFormat, UInt32 *outBitsPerSample, UInt32 *outSamplesPerSecond, UInt32 *outChannels)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGetAudioStreamFormatByStream(UInt32 inStreamNum, DVDAudioFormat *outFormat, UInt32 *outBitsPerSample, UInt32 *outSamplesPerSecond, UInt32 *outChannels)	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+extern	OSStatus	DVDGetAudioOutputModeCapabilities(DVDAudioMode *outModes)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetAudioOutputMode(DVDAudioMode inMode)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetAudioOutputMode(DVDAudioMode *outMode)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetSPDIFDataOutDeviceCount(UInt32 *outCount)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetSPDIFDataOutDeviceCFName(UInt32 inIndex, CFStringRef *outName)						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetSPDIFDataOutDevice(UInt32 inIndex)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetSPDIFDataOutDevice(UInt32 *outIndex)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -779,6 +840,9 @@ extern	OSStatus	DVDGetAudioVolumeInfo(UInt16 *outMinVolume,UInt16 *outCurVolume,
 //	DVDDoButtonActivate		-	selects and activates button by index.
 //	DVDGetButtoninfo		-	returns current info of all available buttons in current title/domain/content.
 //	DVDGetButtonPosition	-	returns position/auto actiuon of button.
+//	
+//	DVDDoMenuCGClick		-	If the point (in window root view coordinates) coincides with a menu button, it will be selected.
+//	DVDDoMenuCGMouseOver	-	If the point (in window root view coordinates) coincides with a menu button, it will be hightlighted
 //-----------------------------------------------------
 extern	OSStatus	DVDHasMenu(DVDMenu inMenu,Boolean *outHasMenu)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDIsOnMenu(Boolean *outOnMenu,DVDMenu *outMenu)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -786,8 +850,10 @@ extern	OSStatus	DVDGoToMenu(DVDMenu inMenu)																	AVAILABLE_MAC_OS_X_V
 extern	OSStatus	DVDReturnToTitle()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGoBackOneLevel()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDDoUserNavigation(DVDUserNavigation inNavigation)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDDoMenuClick(Point inPortPt,SInt32 *outIndex)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDDoMenuMouseOver(Point inPortPt,SInt32 *outIndex)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#if !__LP64__
+extern	OSStatus	DVDDoMenuClick(Point inPortPt, SInt32 *outIndex)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern	OSStatus	DVDDoMenuMouseOver(Point inPortPt, SInt32 *outIndex)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#endif
 extern	OSStatus	DVDDoButtonActivate(SInt32 inIndex)															AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 extern	OSStatus	DVDGetButtoninfo(UInt32	*numberOfButtons, 
@@ -797,6 +863,8 @@ extern	OSStatus	DVDGetButtoninfo(UInt32	*numberOfButtons,
 									 UInt32 *numberOfUserButtons)												AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 extern	OSStatus	DVDGetButtonPosition(UInt32 index, CGRect *outRect, UInt32 *autoAction)						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+extern	OSStatus	DVDDoMenuCGClick(CGPoint *inPt, SInt32 *outIndex)											AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDDoMenuCGMouseOver(CGPoint *inPt, SInt32 *outIndex)										AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 
@@ -1003,11 +1071,11 @@ extern	OSStatus	DVDGetGPRMValue(UInt32 index, UInt32 *value)												AVAILABL
 //	DVDGetTimeEventRate				-	Gets the rate of the time DVD event.
 //
 //-----------------------------------------------------
-extern	OSStatus	DVDSetFatalErrorCallBack(DVDFatalErrCallBackFunctionPtr inCallBackProc, UInt32 inRefCon)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetFatalErrorCallBack(DVDFatalErrCallBackFunctionPtr inCallBackProc, void *inRefCon)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-extern	OSStatus	DVDRegisterEventCallBack(DVDEventCallBackFunctionPtr inCallBackProc, DVDEventCode *inCode, UInt32 inCodeCount, UInt32 inRefCon, UInt32 *outCallBackID)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDUnregisterEventCallBack(UInt32 inCallBackID)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	Boolean		DVDIsRegisteredEventCallBack(UInt32 inCallBackID)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDRegisterEventCallBack(DVDEventCallBackFunctionPtr inCallBackProc, DVDEventCode *inCode, UInt32 inCodeCount, void *inRefCon, DVDEventCallBackRef *outCallBackID)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDUnregisterEventCallBack(DVDEventCallBackRef inCallBackID)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	Boolean		DVDIsRegisteredEventCallBack(DVDEventCallBackRef inCallBackID)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 extern	OSStatus	DVDSetTimeEventRate(UInt32 inMilliseconds)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern	OSStatus	DVDGetTimeEventRate(UInt32 *outMilliseconds)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -1024,8 +1092,8 @@ extern	OSStatus	DVDGetTimeEventRate(UInt32 *outMilliseconds)												AVAILABL
 //	DVDSleep	- Call when system is putting machine to sleep so playback information can be saved.
 //	DVDWakeUp	- Call when system is waking up so playback information can be reset.
 //-----------------------------------------------------
-extern	OSStatus	DVDSleep()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDWakeUp()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSleep(void)																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDWakeUp(void)																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

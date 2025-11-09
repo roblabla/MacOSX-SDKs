@@ -1,6 +1,7 @@
 /*
         NSTextList.h
-        Copyright (c) 2004-2005, Apple Computer, Inc.  All rights reserved.
+	Copyright (c) 2004-2007, Apple Inc.
+        All rights reserved.
 
         Class to represent text lists.
 */
@@ -16,15 +17,15 @@ enum {
 @interface NSTextList : NSObject <NSCoding, NSCopying> {
     /*All instance variables are private*/
     NSString *_markerFormat;
-    unsigned _listFlags;
+    NSUInteger _listFlags;
     void *_listPrimary;
     void *_listSecondary;
 }
 
-- (id)initWithMarkerFormat:(NSString *)format options:(unsigned)mask;
+- (id)initWithMarkerFormat:(NSString *)format options:(NSUInteger)mask;
 - (NSString *)markerFormat;
-- (unsigned)listOptions;
-- (NSString *)markerForItemNumber:(int)itemNum;
+- (NSUInteger)listOptions;
+- (NSString *)markerForItemNumber:(NSInteger)itemNum;
 
 @end
 

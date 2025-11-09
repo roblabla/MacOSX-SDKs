@@ -1,7 +1,7 @@
 #ifndef _SNMPUNIXDOMAIN_H
 #define _SNMPUNIXDOMAIN_H
 
-#ifdef SNMP_TRANSPORT_UNIX_DOMAIN
+#ifdef NETSNMP_TRANSPORT_UNIX_DOMAIN
 
 #ifdef __cplusplus
 extern          "C" {
@@ -23,7 +23,7 @@ extern          "C" {
  */
 
 #define TRANSPORT_DOMAIN_LOCAL	1,3,6,1,2,1,100,1,13
-extern oid netsnmp_UnixDomain[];
+NETSNMP_IMPORT oid netsnmp_UnixDomain[];
 
 netsnmp_transport *netsnmp_unix_transport(struct sockaddr_un *addr,
                                           int local);
@@ -44,6 +44,6 @@ void            netsnmp_unix_ctor(void);
 #ifdef __cplusplus
 }
 #endif
-#endif                          /*SNMP_TRANSPORT_UNIX_DOMAIN */
+#endif                          /*NETSNMP_TRANSPORT_UNIX_DOMAIN */
 
 #endif/*_SNMPUNIXDOMAIN_H*/

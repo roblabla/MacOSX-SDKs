@@ -1,55 +1,63 @@
-#!/bin/sh
+#! /bin/sh
 #
-# "$Id: cups-config,v 1.40 2005/01/04 22:10:35 jlovell Exp $"
+# "$Id: cups-config.in 6649 2007-07-11 21:46:42Z mike $"
 # 
 #   CUPS configuration utility.
 #
-#   Copyright 2001-2005 by Easy Software Products, all rights reserved.
+#   Copyright 2007 by Apple Inc.
+#   Copyright 2001-2006 by Easy Software Products, all rights reserved.
 #
 #   These coded instructions, statements, and computer programs are the
-#   property of Easy Software Products and are protected by Federal
-#   copyright law.  Distribution and use rights are outlined in the file
-#   "LICENSE.txt" which should have been included with this file.  If this
-#   file is missing or damaged please contact Easy Software Products
-#   at:
-#
-#       Attn: CUPS Licensing Information
-#       Easy Software Products
-#       44141 Airport View Drive, Suite 204
-#       Hollywood, Maryland 20636 USA
-#
-#       Voice: (301) 373-9600
-#       EMail: cups-info@cups.org
-#         WWW: http://www.cups.org
+#   property of Apple Inc. and are protected by Federal copyright
+#   law.  Distribution and use rights are outlined in the file "LICENSE.txt"
+#   which should have been included with this file.  If this file is
+#   file is missing or damaged, see the license at "http://www.cups.org/".
 #
 
-VERSION="1.1.23"
-APIVERSION="1.1"
+VERSION="1.3.3"
+APIVERSION="1.3"
 
 prefix=/
 exec_prefix=/usr
-bindir=${exec_prefix}/bin
+bindir=/usr/bin
 includedir=/usr/include
-libdir=/usr/lib
+libdir=${exec_prefix}/lib
+imagelibdir=${exec_prefix}/lib
+datarootdir=/usr/share
 datadir=/usr/share
 sysconfdir=/private/etc
 cups_datadir=/usr/share/cups
 cups_serverbin=/usr/libexec/cups
 cups_serverroot=/private/etc/cups
+INSTALLSTATIC=
 
 # flags for C++ compiler:
 CFLAGS=""
 LDFLAGS=""
-LIBS="   "
-IMGLIBS="   -lz"
+LIBS="-weak_framework Kerberos -framework CoreFoundation -framework Security -lz -lpthread -framework CoreFoundation "
+IMGLIBS="  "
 
-if test $includedir != /usr/include; then
-    CFLAGS="$CFLAGS -I$includedir"
+# Check for local invocation...
+selfdir=`dirname $0`
+
+if test -f "$selfdir/cups/cups.h"; then
+    CFLAGS="-I$selfdir"
+    LDFLAGS="-L$selfdir/cups -L$selfdir/filter $LDFLAGS"
+    libdir="$selfdir/cups"
+    imagelibdir="$selfdir/filter"
+    if test ! -f "$selfdir/cups/raster.h"; then
+        ln -s ../filter/raster.h "$selfdir/cups"
+    fi
+else
+    if test $includedir != /usr/include; then
+	CFLAGS="$CFLAGS -I$includedir"
+    fi
+
+    if test $libdir != /usr/lib -a $libdir != /usr/lib32 -a $libdir != /usr/lib64; then
+	LDFLAGS="$LDFLAGS -L$libdir"
+    fi
 fi
 
-if test $libdir != /usr/lib -a $libdir != /usr/lib32; then
-    LDFLAGS="$LDFLAGS -L$libdir"
-fi
 
 usage ()
 {
@@ -96,16 +104,16 @@ while test $# -gt 0; do
 	    ;;
 	--libs)
 	    if test $static = no; then
-	        if test $image = no; then
-	            echo -lcups $LIBS
-		else
-	            echo -lcupsimage $IMGLIBS -lcups $LIBS
-		fi
+ 	        if test $image = no; then
+ 	            echo -lcups $LIBS
+ 		else
+ 	            echo -lcupsimage -lcups $IMGLIBS $LIBS
+ 		fi
 	    else
 	        if test $image = no; then
 	            echo $libdir/libcups.a $LIBS
 		else
-	            echo $libdir/libcupsimage.a $IMGLIBS $libdir/libcups.a $LIBS
+	            echo $imagelibdir/libcupsimage.a $libdir/libcups.a $IMGLIBS $LIBS
 		fi
 	    fi
 	    ;;
@@ -116,7 +124,11 @@ while test $# -gt 0; do
 	    echo $cups_serverroot
 	    ;;
 	--static)
-	    static=yes
+	    if test -z "$INSTALLSTATIC"; then
+	        echo "WARNING: Static libraries not installed!" >&2
+	    else
+	        static=yes
+	    fi
 	    ;;
 	--version)
 	    echo $VERSION
@@ -130,5 +142,5 @@ while test $# -gt 0; do
 done
 
 #
-# End of "$Id: cups-config,v 1.40 2005/01/04 22:10:35 jlovell Exp $".
+# End of "$Id: cups-config.in 6649 2007-07-11 21:46:42Z mike $".
 #

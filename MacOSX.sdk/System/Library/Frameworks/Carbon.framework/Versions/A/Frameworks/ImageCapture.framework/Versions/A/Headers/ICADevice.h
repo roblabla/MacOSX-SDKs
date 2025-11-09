@@ -1,169 +1,239 @@
-/*
-     File:       ImageCapture/ICADevice.h
- 
-     Contains:   Low level Image Capture device definitions.
- 
-     Version:    ImageCaptureFramework-328~385
- 
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
-*/
+/*------------------------------------------------------------------------------------------------------------------------------
+ *
+ *  ImageCapture/ICADevice.h
+ *
+ *  Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ *
+ *  For bug reports, consult the following page onthe World Wide Web:
+ *  http://developer.apple.com/bugreporter/
+ *
+ *----------------------------------------------------------------------------------------------------------------------------*/
+
+#pragma once
+
 #ifndef __ICADEVICE__
 #define __ICADEVICE__
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 #ifndef __ICAAPPLICATION__
 #include <ImageCapture/ICAApplication.h>
 #endif
 
-
-
+#ifndef __AVAILABILITYMACROS__
 #include <AvailabilityMacros.h>
-
-#if PRAGMA_ONCE
-#pragma once
 #endif
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
-/* 
---------------- Completion Procs --------------- 
+//------------------------------------------------------------------------------------------------------------------------------
+/*!
+    @header ICADevice.h
+    @discussion
+        ICADevice.h defines structures and functions that are used by native Image Capture device modules. 
 */
-/*
-   
-   NOTE: the parameter for the completion proc (ICDHeader*) has to be casted to the appropriate type
-   e.g. (ICD_BuildObjectChildrenPB*), ...
-   
+
+//-------------------------------------------------------------------------------------------------------------------- ICDHeader
+/*!
+    @struct ICDHeader
+    @discussion
+        This is the first field in all parameter blocks used by APIs defined in ICADevices.h.
+        Type of parameter passed to a callback function used by APIs defined in ICADevices.h.
+        The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
+    @field err
+        Error returned by an API. -->
+    @field refcon
+        An arbitrary refcon value passed to the callback. <--
 */
-typedef struct ICDHeader                ICDHeader;
+typedef struct ICDHeader {
+  ICAError            err;
+  unsigned long       refcon;
+} ICDHeader;
+
+//--------------------------------------------------------------------------------------------------------------- Callback procs
+
+/*!
+    @typedef ICDCompletion
+    @discussion
+        Type of callback function used by APIs defined in ICADevices.h.
+    @param pb
+        The parameter pb is a pointer to the parameter block passed to the API.
+*/
+
 typedef CALLBACK_API_C( void , ICDCompletion )(ICDHeader * pb);
-/* 
---------------- ICDHeader --------------- 
-*/
-struct ICDHeader {
-  OSErr               err;                    /* --> */
-  UInt32              refcon;                 /* <-- */
-};
 
-/*
---------------- Object parameter blocks ---------------
+//----------------------------------------------------------------------------------------------------------------- ICDNewObject
+/*!
+    @struct ICD_NewObjectPB
+    @discussion
+        Parameter block passed to function <code>ICDNewObject</code>.
+    @field header
+        The function returns error code in the <code>err</code> field of this structure. 
+        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDNewObject</code> is called asynchronously.
+    @field  parentObject
+        Parent object of the new object.
+    @field  objectInfo
+        <code>ICAObjectInfo</code> struct filled with information about the new object.
+    @field  object
+        New object.
 */
-struct ICD_NewObjectPB {
+typedef struct ICD_NewObjectPB {
   ICDHeader           header;
+  ICAObject           parentObject;
+  ICAObjectInfo       objectInfo;
+  ICAObject           object;
+} ICD_NewObjectPB;
 
-  ICAObject           parentObject;           /* <-- */
-  ICAObjectInfo       objectInfo;             /* <-- */
-
-  ICAObject           object;                 /* --> */
-};
-typedef struct ICD_NewObjectPB          ICD_NewObjectPB;
-struct ICD_DisposeObjectPB {
-  ICDHeader           header;
-
-  ICAObject           object;                 /* <-- */
-};
-typedef struct ICD_DisposeObjectPB      ICD_DisposeObjectPB;
-/*
---------------- Property parameter blocks ---------------
+/*!
+    @function ICDNewObject
+    @abstract
+        A function to create a new object.
+    @discussion
+        Call this function to create a new object.
+    @param pb
+        An <code>ICD_NewObjectPB</code> structure.
+    @param completion
+        A pointer to a callback function that conforms to the interface of <code>ICDCompletion</code>. Pass <code>NULL</code> to make a synchronous call. 
+    @result
+        Returns an error code. If the function is called asynchronously, it returns <code>0</code> if the the call is accepted for asynchronous
+        processing and returns an error code in the header passed to the callback function.
 */
-struct ICD_NewPropertyPB {
-  ICDHeader           header;
-
-  ICAObject           object;                 /* <-- */
-  ICAPropertyInfo     propertyInfo;           /* <-- */
-
-  ICAProperty         property;               /* --> */
-};
-typedef struct ICD_NewPropertyPB        ICD_NewPropertyPB;
-struct ICD_DisposePropertyPB {
-  ICDHeader           header;
-
-  ICAProperty         property;               /* <-- */
-};
-typedef struct ICD_DisposePropertyPB    ICD_DisposePropertyPB;
-/*
-   
-   NOTE: for all APIs - pass NULL as completion parameter to make a synchronous call 
-   
-*/
-
-/* 
---------------- Object utilities for device libraries --------------- 
-*/
-/*
- *  ICDNewObject()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
- */
-extern OSErr 
+extern ICAError 
 ICDNewObject(
-  ICD_NewObjectPB *  pb,
-  ICDCompletion      completion)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+    ICD_NewObjectPB*  pb,
+    ICDCompletion     completion
+)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+//------------------------------------------------------------------------------------------------------------- ICDDisposeObject
+/*!
+    @struct ICD_DisposeObjectPB
+    @discussion
+        Parameter block passed to function <code>ICDDisposeObject</code>.
+    @field header
+        The function returns error code in the <code>err</code> field of this structure. 
+        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDDisposeObject</code> is called asynchronously.
+    @field object
+        Object to be disposed.
+*/
+typedef struct ICD_DisposeObjectPB {
+  ICDHeader           header;
+  ICAObject           object;
+} ICD_DisposeObjectPB;
 
-/*
- *  ICDDisposeObject()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
- */
-extern OSErr 
+/*!
+    @function ICDDisposeObject
+    @abstract
+        A function to dispose an object.
+    @discussion
+        Call this function to dispose an object.
+    @param pb
+        An <code>ICD_DisposeObjectPB</code> structure.
+    @param completion
+        A pointer to a callback function that conforms to the interface of <code>ICDCompletion</code>. Pass <code>NULL</code> to make a synchronous call. 
+    @result
+        Returns an error code. If the function is called asynchronously, it returns <code>0</code> if the the call is accepted for asynchronous 
+        processing and returns an error code in the header passed to the callback function.
+*/
+extern ICAError 
 ICDDisposeObject(
-  ICD_DisposeObjectPB *  pb,
-  ICDCompletion          completion)       /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+    ICD_DisposeObjectPB*  pb,
+    ICDCompletion         completion
+)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-/*
- *  ICDNewProperty()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
- */
-extern OSErr 
+//--------------------------------------------------------------------------------------------------------------- ICDNewProperty
+/*!
+    @struct ICD_NewPropertyPB
+    @discussion
+        Parameter block passed to function <code>ICDNewProperty</code>.
+    @field header
+        The function returns error code in the <code>err</code> field of this structure.
+        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDNewProperty</code> is called asynchronously.
+    @field object
+        Object for which the property will be created.
+    @field propertyInfo
+        <code>ICAPropertyInfo</code> struct filled with information about the new property.
+    @field property
+        New property.
+*/
+typedef struct ICD_NewPropertyPB {
+  ICDHeader           header;
+  ICAObject           object;
+  ICAPropertyInfo     propertyInfo;
+  ICAProperty         property;
+} ICD_NewPropertyPB;
+ 
+/*!
+    @function ICDNewProperty
+    @abstract
+        A function to create a new property.
+    @discussion
+        Call this function to create a new property.
+    @param pb
+        An <code>ICD_NewPropertyPB</code> structure.
+    @param completion
+        A pointer to a callback function that conforms to the interface of <code>ICDCompletion</code>. Pass <code>NULL</code> to make a synchronous call. 
+    @result
+        Returns an error code. If the function is called asynchronously, it returns <code>0</code> if the the call is accepted for asynchronous 
+        processing and returns an error code in the header passed to the callback function.
+*/
+extern ICAError 
 ICDNewProperty(
-  ICD_NewPropertyPB *  pb,
-  ICDCompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+    ICD_NewPropertyPB*  pb,
+    ICDCompletion       completion
+)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-/*
- *  ICDDisposeProperty()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
- */
-extern OSErr 
+//----------------------------------------------------------------------------------------------------------- ICDDisposeProperty
+/*!
+    @struct ICD_DisposePropertyPB
+    @discussion
+        Parameter block passed to function <code>ICDDisposeProperty</code>.
+    @field header
+        The function returns error code in the <code>err</code> field of this structure.
+        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDDisposeProperty</code> is called asynchronously.
+    @field property
+        Property to be disposed.
+*/
+typedef struct ICD_DisposePropertyPB {
+  ICDHeader           header;
+  ICAProperty         property;
+} ICD_DisposePropertyPB;
+ 
+/*!
+    @function ICDDisposeProperty
+    @abstract
+        A function to dispose a property.
+    @discussion
+        Call this function to dispose a property.
+    @param pb
+        An <code>ICD_DisposePropertyPB</code> structure.
+    @param completion
+        A pointer to a callback function that conforms to the interface of <code>ICDCompletion</code>. Pass <code>NULL</code> to make a synchronous call. 
+    @result
+        Returns an error code. If the function is called asynchronously, it returns <code>0</code> if the the call is accepted for asynchronous 
+        processing and returns an error code in the header passed to the callback function.
+*/
+extern ICAError 
 ICDDisposeProperty(
-  ICD_DisposePropertyPB *  pb,
-  ICDCompletion            completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+    ICD_DisposePropertyPB*  pb,
+    ICDCompletion           completion
+)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+//------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }
 #endif
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 #endif /* __ICADEVICE__ */
 
+//------------------------------------------------------------------------------------------------------------------------------

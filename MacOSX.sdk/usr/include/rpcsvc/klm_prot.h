@@ -132,48 +132,48 @@ bool_t xdr_klm_unlockargs();
 #endif /* Old Style C */
 
 
-#define KLM_PROG ((u_long)100020)
-#define KLM_VERS ((u_long)1)
+#define KLM_PROG ((rpc_uint)100020)
+#define KLM_VERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define KLM_TEST ((u_long)1)
+#define KLM_TEST ((rpc_uint)1)
 extern "C" klm_testrply * klm_test_1(struct klm_testargs *, CLIENT *);
 extern "C" klm_testrply * klm_test_1_svc(struct klm_testargs *, struct svc_req *);
-#define KLM_LOCK ((u_long)2)
+#define KLM_LOCK ((rpc_uint)2)
 extern "C" klm_stat * klm_lock_1(struct klm_lockargs *, CLIENT *);
 extern "C" klm_stat * klm_lock_1_svc(struct klm_lockargs *, struct svc_req *);
-#define KLM_CANCEL ((u_long)3)
+#define KLM_CANCEL ((rpc_uint)3)
 extern "C" klm_stat * klm_cancel_1(struct klm_lockargs *, CLIENT *);
 extern "C" klm_stat * klm_cancel_1_svc(struct klm_lockargs *, struct svc_req *);
-#define KLM_UNLOCK ((u_long)4)
+#define KLM_UNLOCK ((rpc_uint)4)
 extern "C" klm_stat * klm_unlock_1(struct klm_unlockargs *, CLIENT *);
 extern "C" klm_stat * klm_unlock_1_svc(struct klm_unlockargs *, struct svc_req *);
 
 #elif __STDC__
-#define KLM_TEST ((u_long)1)
+#define KLM_TEST ((rpc_uint)1)
 extern  klm_testrply * klm_test_1(struct klm_testargs *, CLIENT *);
 extern  klm_testrply * klm_test_1_svc(struct klm_testargs *, struct svc_req *);
-#define KLM_LOCK ((u_long)2)
+#define KLM_LOCK ((rpc_uint)2)
 extern  klm_stat * klm_lock_1(struct klm_lockargs *, CLIENT *);
 extern  klm_stat * klm_lock_1_svc(struct klm_lockargs *, struct svc_req *);
-#define KLM_CANCEL ((u_long)3)
+#define KLM_CANCEL ((rpc_uint)3)
 extern  klm_stat * klm_cancel_1(struct klm_lockargs *, CLIENT *);
 extern  klm_stat * klm_cancel_1_svc(struct klm_lockargs *, struct svc_req *);
-#define KLM_UNLOCK ((u_long)4)
+#define KLM_UNLOCK ((rpc_uint)4)
 extern  klm_stat * klm_unlock_1(struct klm_unlockargs *, CLIENT *);
 extern  klm_stat * klm_unlock_1_svc(struct klm_unlockargs *, struct svc_req *);
 
 #else /* Old Style C */
-#define KLM_TEST ((u_long)1)
+#define KLM_TEST ((rpc_uint)1)
 extern  klm_testrply * klm_test_1();
 extern  klm_testrply * klm_test_1_svc();
-#define KLM_LOCK ((u_long)2)
+#define KLM_LOCK ((rpc_uint)2)
 extern  klm_stat * klm_lock_1();
 extern  klm_stat * klm_lock_1_svc();
-#define KLM_CANCEL ((u_long)3)
+#define KLM_CANCEL ((rpc_uint)3)
 extern  klm_stat * klm_cancel_1();
 extern  klm_stat * klm_cancel_1_svc();
-#define KLM_UNLOCK ((u_long)4)
+#define KLM_UNLOCK ((rpc_uint)4)
 extern  klm_stat * klm_unlock_1();
 extern  klm_stat * klm_unlock_1_svc();
 #endif /* Old Style C */

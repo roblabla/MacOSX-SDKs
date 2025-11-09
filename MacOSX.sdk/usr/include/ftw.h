@@ -52,9 +52,9 @@ struct FTW {
 
 __BEGIN_DECLS
 int	ftw(const char *, int (*)(const char *, const struct stat *, int), int) 
-	__DARWIN_ALIAS(ftw);
+	__DARWIN_ALIAS_I(ftw);
 int	nftw(const char *, int (*)(const char *, const struct stat *, int,
-	    struct FTW *), int, int) __DARWIN_ALIAS(nftw);
+	    struct FTW *), int, int) __DARWIN_ALIAS_I(nftw);
 __END_DECLS
 
 #endif	/* !_FTW_H */

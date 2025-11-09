@@ -44,17 +44,25 @@ Calls to updateStatus: return YES if in the unlocked state, NO otherwise. Note t
 
 @interface SFAuthorizationView : NSView
 {
+#if defined (__LP64__)
+@private
+	/* All instance variables are private */
+	id _reserved_SFAuthorizationView;
+#else
 @protected
+	/* Warning: do not access these instance variables directly from a subclass;
+	   always use accessor methods! */
 	SFAnimatedLockButton *_button;
-    NSButton *_textButton;
+	NSButton *_textButton;
 	AuthorizationRights *_authorizationRights;
 	SFAuthorization *_authorization;
 	id _delegate;
-	int	_currentState;
-    BOOL _authorized;
-    NSTimeInterval _timeInterval;
-    AuthorizationFlags _flags;
-	void *_privateData;
+	SFAuthorizationViewState _currentState;
+	BOOL _authorized;
+	NSTimeInterval _timeInterval;
+	AuthorizationFlags _flags;
+	id _privateData;
+#endif
 }
 
 /*!

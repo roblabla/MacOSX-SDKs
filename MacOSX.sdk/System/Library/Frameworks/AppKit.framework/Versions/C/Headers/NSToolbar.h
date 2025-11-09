@@ -1,20 +1,20 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2004, Apple Computer, Inc.
+	Copyright (c) 2000-2007, Apple Inc.
 	All rights reserved.
 */
 
-#import <Foundation/Foundation.h>
 #import <AppKit/AppKitDefines.h>
+#import <Foundation/Foundation.h>
 
-@class NSToolbarItem;
-@class NSWindow;
-@class NSString;
-@class NSMutableArray;
+@class NSArray, NSDictionary, NSMutableArray, NSNotification, NSString, NSToolbarItem, NSWindow;
 
-typedef enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NSToolbarDisplayModeIconOnly, NSToolbarDisplayModeLabelOnly } NSToolbarDisplayMode;
-typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSizeModeSmall } NSToolbarSizeMode;
+enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NSToolbarDisplayModeIconOnly, NSToolbarDisplayModeLabelOnly };
+typedef NSUInteger NSToolbarDisplayMode;
+
+enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSizeModeSmall };
+typedef NSUInteger NSToolbarSizeMode;
 
 @interface NSToolbar : NSObject {
 @private
@@ -33,7 +33,7 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
     NSWindow *			_window;
     id				_configPalette;
     id 				_toolbarView;
-    int				_syncPostEnabledCount;
+    NSInteger			_syncPostEnabledCount;
     
     struct __tbFlags {
 	unsigned int allowsUserCustomization:1;
@@ -63,15 +63,15 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
 	unsigned int loadedMetrics:1;
     } _tbFlags;
 
-    int				_customizationSheetWidth;
+    NSInteger			_customizationSheetWidth;
     id				_tbReserved;
 }
 
 - (id)initWithIdentifier:(NSString *)identifier;
     /* The identifier is used to form the toolbar's autosave name.  Also, toolbars with the same identifier are implicitly synchronized so that they maintain the same state. */
 
-- (void)insertItemWithItemIdentifier:(NSString *)itemIdentifier atIndex:(int)index;
-- (void)removeItemAtIndex:(int)index;
+- (void)insertItemWithItemIdentifier:(NSString *)itemIdentifier atIndex:(NSInteger)index;
+- (void)removeItemAtIndex:(NSInteger)index;
     /* Primitives for explicitly adding and removing items.  Any change made will be propogated immediately to all other toolbars with the same identifier. */
 
 - (void)setDelegate:(id)delegate;

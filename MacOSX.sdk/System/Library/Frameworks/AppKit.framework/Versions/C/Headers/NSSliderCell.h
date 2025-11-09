@@ -1,24 +1,26 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 
-typedef enum _NSTickMarkPosition {
+enum {
     NSTickMarkBelow = 0,
     NSTickMarkAbove = 1,
     NSTickMarkLeft  = NSTickMarkAbove,
     NSTickMarkRight = NSTickMarkBelow
-} NSTickMarkPosition;
+};
+typedef NSUInteger NSTickMarkPosition;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-typedef enum {
+enum {
     NSLinearSlider   = 0,
     NSCircularSlider = 1
-} NSSliderType;
+};
+typedef NSUInteger NSSliderType;
 #endif
 
 @interface NSSliderCell : NSActionCell
@@ -54,7 +56,7 @@ typedef enum {
 - (void)setMaxValue:(double)aDouble;
 - (void)setAltIncrementValue:(double)incValue;
 - (double)altIncrementValue;
-- (int)isVertical;
+- (NSInteger)isVertical;
 - (void)setTitleColor:(NSColor *)newColor;
 - (NSColor *)titleColor;
 - (void)setTitleFont:(NSFont *)fontObj;
@@ -63,8 +65,8 @@ typedef enum {
 - (void)setTitle:(NSString *)aString;
 - (void)setTitleCell:(NSCell *)aCell;
 - (id)titleCell;
-- (void)setKnobThickness:(float)aFloat;
-- (float)knobThickness;
+- (void)setKnobThickness:(CGFloat)aFloat;
+- (CGFloat)knobThickness;
 - (NSRect)knobRectFlipped:(BOOL)flipped;
 - (void)drawKnob:(NSRect)knobRect;
 - (void)drawKnob;
@@ -82,8 +84,8 @@ typedef enum {
 
 // For setting and retrieving the number of tick marks on a slider.
 //   0 indicates no tick marks are present, which is the default
-- (void)setNumberOfTickMarks:(int)count;
-- (int)numberOfTickMarks;
+- (void)setNumberOfTickMarks:(NSInteger)count;
+- (NSInteger)numberOfTickMarks;
 
 // For setting and retrieving the position tick marks will be displayed in.
 //   This has no effect if numberOfTickMarks is 0.
@@ -98,16 +100,16 @@ typedef enum {
 
 // Determine the slider value for a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.
-- (double)tickMarkValueAtIndex:(int)index;
+- (double)tickMarkValueAtIndex:(NSInteger)index;
 
 // Determine the bounding rectangle of a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.
-- (NSRect)rectOfTickMarkAtIndex:(int)index;
+- (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 
 // Determine whether a particular point is "near" a tick mark and return its
 // index if so.  NSNotFound will be returned if no tick mark is close enough
 // to qualify.
-- (int)indexOfTickMarkAtPoint:(NSPoint)point;
+- (NSInteger)indexOfTickMarkAtPoint:(NSPoint)point;
 
 - (double)closestTickMarkValueToValue:(double)value;
 

@@ -7,7 +7,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
 
-     Copyright:  (c) 1985-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +44,8 @@
     Plug-ins do not have to manage device or stream property listener procs. Instead, a plug-in can
     call AudioHardwareDevicePropertyChanged() or AudioHardwareStreamPropertyChanged() and the HAL
     will take care of calling all the appropriate listeners.
+    
+    Note that only version 4 or later plug-ins will be loaded into 64 bit processes.
 */
 
 //==================================================================================================
@@ -118,6 +120,15 @@ typedef AudioHardwarePlugInInterface**      AudioHardwarePlugInRef;
 #define kAudioHardwarePlugInInterface3ID                                                            \
             CFUUIDGetConstantUUIDWithBytes( NULL, 0x38, 0xD7, 0x8A, 0x18, 0x77, 0xA5, 0x11, 0xD8,   \
                                             0xB8, 0xB8, 0x00, 0x0A, 0x95, 0x88, 0x78, 0x7E)
+
+/*!
+    @defined        kAudioHardwarePlugInInterface4ID
+    @discussion     This is the UUID of version 4 of the plug-in interface
+                    (E96C3E92-E745-4CB7-BA91-B33C68F2F026).
+*/
+#define kAudioHardwarePlugInInterface4ID                                                            \
+            CFUUIDGetConstantUUIDWithBytes( NULL, 0xE9, 0x6C, 0x3E, 0x92, 0xE7, 0x45, 0x4C, 0xB7,   \
+                                            0xBA, 0x91, 0xB3, 0x3C, 0x68, 0xF2, 0xF0, 0x26)
 
 //==================================================================================================
 #pragma mark    Plug-In Interface
@@ -237,13 +248,13 @@ struct  AudioHardwarePlugInInterface
 
 /*!
     @method         DeviceStart
-    @abstract       Starts IO for the given AudioDeviceIOProc.
+    @abstract       Starts IO for the given AudioDeviceIOProcID.
     @param          inSelf
                         The plug-in instance that owns the AudioDevice.
     @param          inDevice
                         The AudioDevice to start the IOProc on.
     @param          inProc
-                        The AudioDeviceIOProc to start. Note that this can be NULL, which starts
+                        The AudioDeviceIOProcID to start. Note that this can be NULL, which starts
                         the hardware regardless of whether or not there are any IOProcs
                         registered. This is necessary if any of the AudioDevice's timing
                         services are to be used. A balancing call to AudioDeviceStop with a NULL
@@ -253,23 +264,23 @@ struct  AudioHardwarePlugInInterface
     OSStatus
     (*DeviceStart)( AudioHardwarePlugInRef  inSelf,
                     AudioDeviceID           inDevice,
-                    AudioDeviceIOProc       inProc);
+                    AudioDeviceIOProcID		inProc);
 
 /*!
     @method         DeviceStop
-    @abstract       Stops IO for the given AudioDeviceIOProc.
+    @abstract       Stops IO for the given AudioDeviceIOProcID.
     @param          inSelf
                         The plug-in instance that owns the AudioDevice.
     @param          inDevice
                         The AudioDevice to stop the IOProc on.
     @param          inProc
-                        The AudioDeviceIOProc to stop.
+                        The AudioDeviceIOProcID to stop.
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
     (*DeviceStop)(  AudioHardwarePlugInRef  inSelf,
                     AudioDeviceID           inDevice,
-                    AudioDeviceIOProc       inProc);
+                    AudioDeviceIOProcID		inProc);
 
 /*!
     @method         DeviceRead
@@ -531,14 +542,14 @@ struct  AudioHardwarePlugInInterface
 
 /*!
     @method         DeviceStartAtTime
-    @abstract       Starts IO for the given AudioDeviceIOProc and aligns the IO cycle of the
+    @abstract       Starts IO for the given AudioDeviceIOProcID and aligns the IO cycle of the
                     AudioDevice with the given time.
     @param          inSelf
                         The plug-in instance that owns the AudioDevice.
     @param          inDevice
                         The AudioDevice to start the IOProc on.
     @param          inProc
-                        The AudioDeviceIOProc to start. Note that this can be NULL, which starts
+                        The AudioDeviceIOProcID to start. Note that this can be NULL, which starts
                         the hardware regardless of whether or not there are any IOProcs
                         registered.
     @param          ioRequestedStartTime
@@ -555,7 +566,7 @@ struct  AudioHardwarePlugInInterface
     OSStatus
     (*DeviceStartAtTime)(   AudioHardwarePlugInRef  inSelf,
                             AudioDeviceID           inDevice,
-                            AudioDeviceIOProc       inProc,
+                            AudioDeviceIOProcID		inProc,
                             AudioTimeStamp*         ioRequestedStartTime,
                             UInt32                  inFlags);
 
@@ -761,6 +772,50 @@ struct  AudioHardwarePlugInInterface
                                 UInt32                              inDataSize,
                                 const void*                         inData);
 
+/*!
+    @function       DeviceCreateIOProcID
+    @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOProc and a client data
+                    pointer.
+    @discussion     AudioDeviceIOProcIDs allow for the client to register the same function pointer
+                    with a device multiple times
+    @param          inSelf
+                        The plug-in instance that owns the AudioDevice.
+    @param          inDevice
+                        The AudioDevice to register the IOProc with.
+    @param          inProc
+                        The AudioDeviceIOProc to register.
+    @param          inClientData
+                        A pointer to client data that is passed back to the IOProc when it is
+                        called.
+    @param          outIOProcID
+                        The newly created AudioDeviceIOProcID.
+    @result         An OSStatus indicating success or failure.
+*/
+    OSStatus
+    (*DeviceCreateIOProcID)(    AudioHardwarePlugInRef  inSelf,
+                                AudioDeviceID           inDevice,
+                                AudioDeviceIOProc       inProc,
+                                void*                   inClientData,
+                                AudioDeviceIOProcID*    outIOProcID);
+
+/*!
+    @function       DeviceDestroyIOProcID
+    @abstract       Destroys an AudioDeviceIOProcID.
+    @discussion     AudioDeviceIOProcIDs allow for the client to register the same function pointer
+                    with a device multiple times
+    @param          inSelf
+                        The plug-in instance that owns the AudioDevice.
+    @param          inDevice
+                        The AudioDevice from which the ID came.
+    @param          inIOProcID
+                        The AudioDeviceIOProcID to get rid of.
+    @result         An OSStatus indicating success or failure.
+*/
+    OSStatus
+    (*DeviceDestroyIOProcID)(   AudioHardwarePlugInRef  inSelf,
+                                AudioDeviceID           inDevice,
+                                AudioDeviceIOProcID     inIOProcID);
+
 };
 
 //==================================================================================================
@@ -860,7 +915,7 @@ AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlug
 */
 extern OSStatus
 AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID*          outAudioDeviceID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                    AudioDeviceID*          outAudioDeviceID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareDevicesCreated
@@ -878,7 +933,7 @@ AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
                                 UInt32                  inNumberDevices,
-                                const AudioDeviceID*    inAudioDeviceIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                const AudioDeviceID*    inAudioDeviceIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareDevicesDied
@@ -894,7 +949,7 @@ AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareDevicesDied(   AudioHardwarePlugInRef  inOwner,
                             UInt32                  inNumberDevices,
-                            const AudioDeviceID*    inAudioDeviceIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                            const AudioDeviceID*    inAudioDeviceIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareDevicePropertyChanged
@@ -918,7 +973,7 @@ AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inDeviceID,
                                     UInt32                  inChannel,
                                     Boolean                 isInput,
-                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 //==================================================================================================
 #pragma mark    AudioStream Functions
@@ -941,7 +996,7 @@ AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
 extern OSStatus
 AudioHardwareClaimAudioStreamID(    AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inOwningDeviceID,
-                                    AudioStreamID*          outAudioStreamID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                    AudioStreamID*          outAudioStreamID)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareStreamsCreated
@@ -962,7 +1017,7 @@ extern OSStatus
 AudioHardwareStreamsCreated(    AudioHardwarePlugInRef  inOwner,
                                 AudioDeviceID           inOwningDeviceID,
                                 UInt32                  inNumberStreams,
-                                const AudioStreamID*    inAudioStreamIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                const AudioStreamID*    inAudioStreamIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareStreamsDied
@@ -981,7 +1036,7 @@ extern OSStatus
 AudioHardwareStreamsDied(   AudioHardwarePlugInRef  inOwner,
                             AudioDeviceID           inOwningDeviceID,
                             UInt32                  inNumberStreams,
-                            const AudioStreamID*    inAudioStreamIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                            const AudioStreamID*    inAudioStreamIDs)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*!
     @function       AudioHardwareStreamPropertyChanged
@@ -1005,7 +1060,7 @@ AudioHardwareStreamPropertyChanged( AudioHardwarePlugInRef  inOwner,
                                     AudioDeviceID           inOwningDeviceID,
                                     AudioStreamID           inStreamID,
                                     UInt32                  inChannel,
-                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                    AudioDevicePropertyID   inPropertyID)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 //==================================================================================================
 

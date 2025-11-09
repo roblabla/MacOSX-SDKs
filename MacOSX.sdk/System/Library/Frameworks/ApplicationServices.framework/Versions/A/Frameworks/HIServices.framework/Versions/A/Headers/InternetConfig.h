@@ -3,7 +3,7 @@
  
      Contains:   Internet Config interfaces
  
-     Version:    HIServices-169~651
+     Version:    HIServices-247.0.1~2
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -54,7 +54,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /************************************************************************************************
   IC error codes
@@ -93,7 +93,7 @@ enum {
  ************************************************************************************************/
 
 typedef struct OpaqueICInstance*        ICInstance;
-
+#if !__LP64__
 /************************************************************************************************
   a record that specifies a folder, an array of such records, and a pointer to such an array
  ************************************************************************************************/
@@ -104,19 +104,19 @@ struct ICDirSpec {
 typedef struct ICDirSpec                ICDirSpec;
 typedef ICDirSpec                       ICDirSpecArray[4];
 typedef ICDirSpecArray *                ICDirSpecArrayPtr;
+#endif  /* !__LP64__ */
 
 /************************************************************************************************
   preference attributes type, bit number constants, and mask constants
  ************************************************************************************************/
 typedef UInt32                          ICAttr;
-
 enum {
   kICAttrLockedBit              = 0,
   kICAttrVolatileBit            = 1
 };
 
 enum {
-  kICAttrNoChange               = (unsigned long)0xFFFFFFFF, /* pass this to ICSetPref to tell it not to change the attributes  */
+  kICAttrNoChange               = (UInt32)0xFFFFFFFF, /* pass this to ICSetPref to tell it not to change the attributes  */
   kICAttrLockedMask             = 0x00000001,
   kICAttrVolatileMask           = 0x00000002
 };
@@ -124,36 +124,19 @@ enum {
 /************************************************************************************************
   permissions for use with ICBegin
  ************************************************************************************************/
-
 typedef UInt8                           ICPerm;
-
 enum {
   icNoPerm                      = 0,
   icReadOnlyPerm                = 1,
   icReadWritePerm               = 2
 };
 
-/************************************************************************************************
-  a reference to an instance's current configuration
- ************************************************************************************************/
-
-#if CALL_NOT_IN_CARBON
-struct ICConfigRef {
-  OSType              manufacturer;
-                                              /* other private data follows  */
-};
-typedef struct ICConfigRef              ICConfigRef;
-typedef ICConfigRef *                   ICConfigRefPtr;
-typedef ICConfigRefPtr *                ICConfigRefHandle;
-
-#endif  /* CALL_NOT_IN_CARBON */
 
 /************************************************************************************************
   profile IDs
  ************************************************************************************************/
-typedef long                            ICProfileID;
+typedef SInt32                          ICProfileID;
 typedef ICProfileID *                   ICProfileIDPtr;
-
 enum {
   kICNilProfileID               = 0
 };
@@ -161,7 +144,6 @@ enum {
 /************************************************************************************************
   other constants
  ************************************************************************************************/
-
 enum {
   kICNoUserInteractionBit       = 0
 };
@@ -178,7 +160,6 @@ enum {
 /************************************************************************************************
   Apple event constants
  ************************************************************************************************/
-
 enum {
   kInternetEventClass           = 'GURL',
   kAEGetURL                     = 'GURL',
@@ -187,7 +168,6 @@ enum {
 };
 
 /* AERegistry.i defines a compatible keyAEDestination */
-
 enum {
   kICEditPreferenceEventClass   = 'ICAp',
   kICEditPreferenceEvent        = 'ICAp',
@@ -197,7 +177,6 @@ enum {
 /************************************************************************************************
   constants for use with ICGetVersion
  ************************************************************************************************/
-
 enum {
   kICComponentVersion           = 0,    /* Return a component version, comparable to kICComponentInterfaceVersion  */
   kICNumVersion                 = 1     /* Return a NumVersion structure  */
@@ -207,7 +186,7 @@ enum {
   types and constants for use with kICDocumentFont, et. al.
  ************************************************************************************************/
 struct ICFontRecord {
-  short               size;
+  SInt16              size;
   Style               face;
   char                pad;
   Str255              font;
@@ -238,7 +217,7 @@ typedef struct ICAppSpec                ICAppSpec;
 typedef ICAppSpec *                     ICAppSpecPtr;
 typedef ICAppSpecPtr *                  ICAppSpecHandle;
 struct ICAppSpecList {
-  short               numberOfItems;
+  SInt16              numberOfItems;
   ICAppSpec           appSpecs[1];
 };
 typedef struct ICAppSpecList            ICAppSpecList;
@@ -248,12 +227,10 @@ typedef ICAppSpecListPtr *              ICAppSpecListHandle;
 /************************************************************************************************
   types and constants for use with kICDownloadFolder, et. al.
  ************************************************************************************************/
-
-#if !OLDROUTINENAMES
 struct ICFileSpec {
-  Str31               volName;
-  long                volCreationDate;
-  FSSpec              fss;
+  Str31               volName;                /* this field should be ignored, use the alias */
+  SInt32              volCreationDate;        /* this field should be ignored, use the alias */
+  FSSpec              fss;                    /* this field should be ignored, use the alias */
   AliasRecord         alias;
                                               /* plus extra data, aliasSize 0 means no alias manager present when*/
                                               /* ICFileSpecification was created*/
@@ -261,18 +238,6 @@ struct ICFileSpec {
 typedef struct ICFileSpec               ICFileSpec;
 typedef ICFileSpec *                    ICFileSpecPtr;
 typedef ICFileSpecPtr *                 ICFileSpecHandle;
-#else
-struct ICFileSpec {
-  Str31               vol_name;
-  long                vol_creation_date;
-  FSSpec              fss;
-  AliasRecord         alias;
-};
-typedef struct ICFileSpec               ICFileSpec;
-typedef ICFileSpec *                    ICFileSpecPtr;
-typedef ICFileSpecPtr *                 ICFileSpecHandle;
-#endif  /* !OLDROUTINENAMES */
-
 enum {
   kICFileSpecHeaderSize         = sizeof(ICFileSpec) - sizeof(AliasRecord)
 };
@@ -280,14 +245,12 @@ enum {
 /************************************************************************************************
   types and constants for use with ICMapFilename, et. al.
  ************************************************************************************************/
-typedef long                            ICMapEntryFlags;
-typedef short                           ICFixedLength;
-
-#if !OLDROUTINENAMES
+typedef SInt32                          ICMapEntryFlags;
+typedef SInt16                          ICFixedLength;
 struct ICMapEntry {
-  short               totalLength;
+  SInt16              totalLength;
   ICFixedLength       fixedLength;
-  short               version;
+  SInt16              version;
   OSType              fileType;
   OSType              fileCreator;
   OSType              postCreator;
@@ -302,29 +265,8 @@ struct ICMapEntry {
 typedef struct ICMapEntry               ICMapEntry;
 typedef ICMapEntry *                    ICMapEntryPtr;
 typedef ICMapEntryPtr *                 ICMapEntryHandle;
-
-#else
-struct ICMapEntry {
-  short               total_length;
-  ICFixedLength       fixed_length;
-  short               version;
-  OSType              file_type;
-  OSType              file_creator;
-  OSType              post_creator;
-  ICMapEntryFlags     flags;
-  Str255              extension;
-  Str255              creator_app_name;
-  Str255              post_app_name;
-  Str255              MIME_type;
-  Str255              entry_name;
-};
-typedef struct ICMapEntry               ICMapEntry;
-typedef ICMapEntry *                    ICMapEntryPtr;
-typedef ICMapEntryPtr *                 ICMapEntryHandle;
-#endif  /* !OLDROUTINENAMES */
-
 enum {
-  kICMapFixedLength             = 22    /* number in fixedLength field*/
+  kICMapFixedLength             = 22
 };
 
 enum {
@@ -348,10 +290,10 @@ enum {
 /************************************************************************************************
   types and constants for use with kICServices, et. al.
  ************************************************************************************************/
-typedef short                           ICServiceEntryFlags;
+typedef SInt16                          ICServiceEntryFlags;
 struct ICServiceEntry {
   Str255              name;
-  short               port;
+  SInt16              port;
   ICServiceEntryFlags  flags;
 };
 typedef struct ICServiceEntry           ICServiceEntry;
@@ -369,21 +311,12 @@ enum {
 };
 
 struct ICServices {
-  short               count;
+  SInt16              count;
   ICServiceEntry      services[1];
 };
 typedef struct ICServices               ICServices;
 typedef ICServices *                    ICServicesPtr;
 typedef ICServicesPtr *                 ICServicesHandle;
-
-/************************************************************************************************
-  default file name, for internal use, overridden by a component resource
- ************************************************************************************************/
-
-#if CALL_NOT_IN_CARBON
-#define kICDefaultFileName              "\pInternet Preferences"
-#endif  /* CALL_NOT_IN_CARBON */
-
 /************************************************************************************************
   keys
  ************************************************************************************************/
@@ -776,94 +709,6 @@ ICGetVersion(
    * to get the version as previously returned by GetComponenVerson.
    * Pass kICNumVersion to get a NumVersion structure.
    */
-/* ***** Specifying a Configuration *****  */
-/*
- *  ICFindConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [b5] 
-   * Call to configure this connection to IC.
-   * Set count as the number of valid elements in folders.
-   * Set folders to a pointer to the folders to search.
-   * Setting count to 0 and folders to nil is OK.
-   * Searches the specified folders and then the Preferences folder
-   * in a unspecified manner.
-   */
-/*
- *  ICFindUserConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r1] [b5] 
-   * Similar to ICFindConfigFile except that it only searches the folder
-   * specified in where.  If the input parameters are valid the routine
-   * will always successful configure the instance, creating an
-   * empty configuration if necessary
-   * For use with double-clickable preference files.
-   */
-/*
- *  ICGeneralFindConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r2] [b5] 
-   * Call to configure this connection to IC.
-   * This routine acts as a more general replacement for
-   * ICFindConfigFile and ICFindUserConfigFile.
-   * Set search_prefs to true if you want it to search the preferences folder.
-   * Set can_create to true if you want it to be able to create a new config.
-   * Set count as the number of valid elements in folders.
-   * Set folders to a pointer to the folders to search.
-   * Setting count to 0 and folders to nil is OK.
-   * Searches the specified folders and then optionally the Preferences folder
-   * in a unspecified manner.
-   */
-/*
- *  ICChooseConfig()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r2] [b5] 
-   * Requests the user to choose a configuration, typically using some
-   * sort of modal dialog. If the user cancels the dialog the configuration
-   * state will be unaffected.
-   */
-/*
- *  ICChooseNewConfig()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r2] [b5] 
-   * Requests the user to create a new configuration, typically using some
-   * sort of modal dialog. If the user cancels the dialog the configuration
-   * state will be unaffected.
-   */
 /*
  *  ICGetConfigName()
  *  
@@ -890,75 +735,6 @@ ICGetConfigName(
    * The returned string is for user display only. If you rely on the
    * exact format of it, you will conflict with any future IC
    * implementation that doesn't use explicit preference files.
-   */
-/*
- *  ICGetConfigReference()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r2] [c1] [b3] 
-   * Returns a self-contained reference to the instance's current
-   * configuration.
-   * ref must be a valid non-nil handle and it will be resized to fit the
-   * resulting data.
-   */
-/*
- *  ICSetConfigReference()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r2] [b5] 
-   * Reconfigures the instance using a configuration reference that was
-   * got using ICGetConfigReference reference. Set the
-   * icNoUserInteraction_bit in flags if you require that this routine
-   * not present a modal dialog. Other flag bits are reserved and should
-   * be set to zero.
-   * ref must not be nil.
-   */
-/* ***** Private Routines *****
- * 
- * If you are calling these routines, you are most probably doing something
- * wrong.  Please read the documentation for more details.
-  */
-/*
- *  ICSpecifyConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [b5] 
-   * For use only by the IC application.
-   * If you call this routine yourself, you will conflict with any
-   * future IC implementation that doesn't use explicit preference files.
-   */
-/*
- *  ICRefreshCaches()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r3] [c1] [b3] 
-   * For use only by the IC application.
-   * If you call this routine yourself, you will conflict with any
-   * future IC implementation that doesn't use explicit preference files.
    */
 /* ***** Getting Information *****  */
 /*
@@ -1004,42 +780,6 @@ ICGetPerm(
    * Returns the access permissions currently associated with this instance.
    * While applications normally know what permissions they have,
    * this routine is designed for use by override components.
-   */
-/*
- *  ICDefaultFileName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [c3] [b3] 
-   * Returns the default file name for IC preference files.
-   * Applications should never need to call this routine.
-   * If you rely on information returned by this routine yourself,
-   * you may conflict with any future IC implementation that doesn't use
-   * explicit preference files.
-   * The component calls this routine to set up the default IC file name.
-   * This allows this operation to be intercepted by a component that has
-   * captured us. It currently gets it from the component resource file.
-   * The glue version is hardwired to "Internet Preferences".
-   */
-/*
- *  ICGetComponentInstance()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [c3] [b3] 
-   * Returns noErr and the connection to the IC component,
-   * if we're using the component.
-   * Returns badComponenInstance and nil if we're operating with glue.
    */
 /* ***** Reading and Writing Preferences *****  */
 /*
@@ -1931,900 +1671,8 @@ ICDeleteProfile(
    * thisID.  Attempting to delete the current profile
    * or the last profile will return error.
    */
-/************************************************************************************************
-  NOTHING BELOW THIS DIVIDER IS IN CARBON
- ************************************************************************************************/
-/* ***** Interrupt Safe Routines *****  */
-/*
- *  ICRequiresInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
 
-
-/* [r3] [c2] [b3] 
-   * You must call this routine before calling GetMapEntryInterruptSafe
-   * to give IC chance to cache the mappings data in memory.  The only
-   * way to clear this state is to close the instance.  You can not reconfigure
-   * the instance after calling this routine.
-   */
-/*
- *  ICGetMappingInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r3] [c2] [b3] 
-   * Returns the "Mapping" preference in an interrupt safe fashion.
-   * The preference returned pointer is valid until the next
-   * non-interrupt safe call to IC.  Typically this API is used
-   * by software that needs to map extensions to type and creator
-   * at interrupt time, eg foreign file systems.
-   */
-/*
- *  ICGetSeedInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* [r3] [c2] [b3] 
-   * An interrupt safe version of ICGetSeed.
-   */
-/* ***** Starting Up and Shutting Down *****  */
-/*
- *  ICCStart()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCStart.  */
-/*
- *  ICCStop()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCStop.  */
-/*
- *  ICCGetVersion()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetVersion.  */
-/* ***** Specifying a Configuration *****  */
-/*
- *  ICCFindConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCFindConfigFile.  */
-/*
- *  ICCFindUserConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCFindUserConfigFile.  */
-/*
- *  ICCGeneralFindConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGeneralFindConfigFile.  */
-/*
- *  ICCChooseConfig()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCChooseConfig.  */
-/*
- *  ICCChooseNewConfig()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCChooseNewConfig.  */
-/*
- *  ICCGetConfigName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetConfigName.  */
-/*
- *  ICCGetConfigReference()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetConfigReference.  */
-/*
- *  ICCSetConfigReference()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetConfigReference.  */
-/* ***** Private Routines *****
- * 
- * If you are calling these routines, you are most probably doing something
- * wrong.  Please read the documentation for more details.
-  */
-/*
- *  ICCSpecifyConfigFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSpecifyConfigFile.  */
-/*
- *  ICCRefreshCaches()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCRefreshCaches.  */
-/* ***** Getting Information *****  */
-/*
- *  ICCGetSeed()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetSeed.  */
-/*
- *  ICCGetPerm()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetPerm.  */
-/*
- *  ICCDefaultFileName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCDefaultFileName.  */
-/*
- *  ICCGetComponentInstance()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetComponentInstance.  */
-/* ***** Reading and Writing Preferences *****  */
-/*
- *  ICCBegin()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCBegin.  */
-/*
- *  ICCGetPref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetPref.  */
-/*
- *  ICCSetPref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetPref.  */
-/*
- *  ICCFindPrefHandle()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCFindPrefHandle.  */
-/*
- *  ICCGetPrefHandle()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetPrefHandle.  */
-/*
- *  ICCSetPrefHandle()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetPrefHandle.  */
-/*
- *  ICCCountPref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCCountPref.  */
-/*
- *  ICCGetIndPref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetIndPref.  */
-/*
- *  ICCDeletePref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCDeletePref.  */
-/*
- *  ICCEnd()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCEnd.  */
-/*
- *  ICCGetDefaultPref()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetDefaultPref.  */
-/* ***** User Interface Stuff *****  */
-/*
- *  ICCEditPreferences()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCEditPreferences.  */
-/* ***** URL Handling *****  */
-/*
- *  ICCLaunchURL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCLaunchURL.  */
-/*
- *  ICCParseURL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCParseURL.  */
-/*
- *  ICCCreateGURLEvent()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCCreateGURLEvent.  */
-/*
- *  ICCSendGURLEvent()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSendGURLEvent.  */
-/* ***** Mappings Routines *****
- * 
- * Routines for interrogating mappings database.
- * 
- * ----- High Level Routines -----
-  */
-/*
- *  ICCMapFilename()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCMapFilename.  */
-/*
- *  ICCMapTypeCreator()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCMapTypeCreator.  */
-/* ----- Mid Level Routines -----  */
-/*
- *  ICCMapEntriesFilename()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCMapEntriesFilename.  */
-/*
- *  ICCMapEntriesTypeCreator()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCMapEntriesTypeCreator.  */
-/* ----- Low Level Routines -----  */
-/*
- *  ICCCountMapEntries()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCCountMapEntries.  */
-/*
- *  ICCGetIndMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetIndMapEntry.  */
-/*
- *  ICCGetMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetMapEntry.  */
-/*
- *  ICCSetMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetMapEntry.  */
-/*
- *  ICCDeleteMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCDeleteMapEntry.  */
-/*
- *  ICCAddMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCAddMapEntry.  */
-/* ***** Profile Management Routines *****  */
-/*
- *  ICCGetCurrentProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetCurrentProfile.  */
-/*
- *  ICCSetCurrentProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetCurrentProfile.  */
-/*
- *  ICCCountProfiles()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCCountProfiles.  */
-/*
- *  ICCGetIndProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetIndProfile.  */
-/*
- *  ICCGetProfileName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetProfileName.  */
-/*
- *  ICCSetProfileName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCSetProfileName.  */
-/*
- *  ICCAddProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCAddProfile.  */
-/*
- *  ICCDeleteProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCDeleteProfile.  */
-/* ***** Interrupt Safe Routines *****  */
-/*
- *  ICCRequiresInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCRequiresInterruptSafe.  */
-/*
- *  ICCGetMappingInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetMappingInterruptSafe.  */
-/*
- *  ICCGetSeedInterruptSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InternetConfig 2.5 and later
- */
-
-
-/* See comment for ICCGetSeedInterruptSafe.  */
-#if CALL_NOT_IN_CARBON
-
-/************************************************************************************************
-  component selectors
- ************************************************************************************************/
-
-enum {
-  kICCStart                     = 0,
-  kICCStop                      = 1,
-  kICCGetVersion                = 50,
-  kICCFindConfigFile            = 2,
-  kICCFindUserConfigFile        = 14,
-  kICCGeneralFindConfigFile     = 30,
-  kICCChooseConfig              = 33,
-  kICCChooseNewConfig           = 34,
-  kICCGetConfigName             = 35,
-  kICCGetConfigReference        = 31,
-  kICCSetConfigReference        = 32,
-  kICCSpecifyConfigFile         = 3,
-  kICCRefreshCaches             = 47,
-  kICCGetSeed                   = 4,
-  kICCGetPerm                   = 13,
-  kICCDefaultFileName           = 11,
-  kICCBegin                     = 5,
-  kICCGetPref                   = 6,
-  kICCSetPref                   = 7,
-  kICCFindPrefHandle            = 36,
-  kICCGetPrefHandle             = 26,
-  kICCSetPrefHandle             = 27,
-  kICCCountPref                 = 8,
-  kICCGetIndPref                = 9,
-  kICCDeletePref                = 12,
-  kICCEnd                       = 10,
-  kICCGetDefaultPref            = 49,
-  kICCEditPreferences           = 15,
-  kICCLaunchURL                 = 17,
-  kICCParseURL                  = 16,
-  kICCCreateGURLEvent           = 51,
-  kICCSendGURLEvent             = 52,
-  kICCMapFilename               = 24,
-  kICCMapTypeCreator            = 25,
-  kICCMapEntriesFilename        = 28,
-  kICCMapEntriesTypeCreator     = 29,
-  kICCCountMapEntries           = 18,
-  kICCGetIndMapEntry            = 19,
-  kICCGetMapEntry               = 20,
-  kICCSetMapEntry               = 21,
-  kICCDeleteMapEntry            = 22,
-  kICCAddMapEntry               = 23,
-  kICCGetCurrentProfile         = 37,
-  kICCSetCurrentProfile         = 38,
-  kICCCountProfiles             = 39,
-  kICCGetIndProfile             = 40,
-  kICCGetProfileName            = 41,
-  kICCSetProfileName            = 42,
-  kICCAddProfile                = 43,
-  kICCDeleteProfile             = 44,
-  kICCRequiresInterruptSafe     = 45,
-  kICCGetMappingInterruptSafe   = 46,
-  kICCGetSeedInterruptSafe      = 48,
-  kICCFirstSelector             = kICCStart,
-  kICCLastSelector              = 52
-};
-
-/************************************************************************************************
-  component selector proc infos
- ************************************************************************************************/
-
-enum {
-  kICCStartProcInfo             = 1008,
-  kICCStopProcInfo              = 240,
-  kICCGetVersionProcInfo        = 4080,
-  kICCFindConfigFileProcInfo    = 3824,
-  kICCFindUserConfigFileProcInfo = 1008,
-  kICCGeneralFindConfigFileProcInfo = 58864L,
-  kICCChooseConfigProcInfo      = 240,
-  kICCChooseNewConfigProcInfo   = 240,
-  kICCGetConfigNameProcInfo     = 3568,
-  kICCGetConfigReferenceProcInfo = 1008,
-  kICCSetConfigReferenceProcInfo = 4080,
-  kICCSpecifyConfigFileProcInfo = 1008,
-  kICCRefreshCachesProcInfo     = 240,
-  kICCGetSeedProcInfo           = 1008,
-  kICCGetPermProcInfo           = 1008,
-  kICCDefaultFileNameProcInfo   = 1008,
-  kICCGetComponentInstanceProcInfo = 1008,
-  kICCBeginProcInfo             = 496,
-  kICCGetPrefProcInfo           = 65520L,
-  kICCSetPrefProcInfo           = 65520L,
-  kICCFindPrefHandleProcInfo    = 16368,
-  kICCGetPrefHandleProcInfo     = 16368,
-  kICCSetPrefHandleProcInfo     = 16368,
-  kICCCountPrefProcInfo         = 1008,
-  kICCGetIndPrefProcInfo        = 4080,
-  kICCDeletePrefProcInfo        = 1008,
-  kICCEndProcInfo               = 240,
-  kICCGetDefaultPrefProcInfo    = 4080,
-  kICCEditPreferencesProcInfo   = 1008,
-  kICCLaunchURLProcInfo         = 262128L,
-  kICCParseURLProcInfo          = 1048560L,
-  kICCCreateGURLEventProcInfo   = 16368,
-  kICCSendGURLEventProcInfo     = 1008,
-  kICCMapFilenameProcInfo       = 4080,
-  kICCMapTypeCreatorProcInfo    = 65520L,
-  kICCMapEntriesFilenameProcInfo = 16368,
-  kICCMapEntriesTypeCreatorProcInfo = 262128L,
-  kICCCountMapEntriesProcInfo   = 4080,
-  kICCGetIndMapEntryProcInfo    = 65520L,
-  kICCGetMapEntryProcInfo       = 16368,
-  kICCSetMapEntryProcInfo       = 16368,
-  kICCDeleteMapEntryProcInfo    = 4080,
-  kICCAddMapEntryProcInfo       = 4080,
-  kICCGetCurrentProfileProcInfo = 1008,
-  kICCSetCurrentProfileProcInfo = 1008,
-  kICCCountProfilesProcInfo     = 1008,
-  kICCGetIndProfileProcInfo     = 4080,
-  kICCGetProfileNameProcInfo    = 4080,
-  kICCSetProfileNameProcInfo    = 4080,
-  kICCAddProfileProcInfo        = 4080,
-  kICCDeleteProfileProcInfo     = 1008,
-  kICCRequiresInterruptSafeProcInfo = 240,
-  kICCGetMappingInterruptSafeProcInfo = 4080,
-  kICCGetSeedInterruptSafeProcInfo = 1008
-};
-
-/************************************************************************************************
-  component identifiers
- ************************************************************************************************/
-
-enum {
-  kICComponentType              = 'PREF',
-  kICComponentSubType           = 'ICAp',
-  kICComponentManufacturer      = 'JPQE'
-};
-
-/************************************************************************************************
-  The following type is now obsolete.
-  If you're using it, please switch to ComponentInstance or ICInstance.
- ************************************************************************************************/
-
-#if OLDROUTINENAMES
-typedef ComponentInstance               internetConfigurationComponent;
-
-#endif  /* OLDROUTINENAMES */
-
-#endif  /* CALL_NOT_IN_CARBON */
-
-/************************************************************************************************
-  old names for stuff declared above
- ************************************************************************************************/
-
-#if OLDROUTINENAMES
-
-typedef long                            ICError;
-
-enum {
-  ICattr_no_change              = (unsigned long)(kICAttrNoChange),
-  ICattr_locked_bit             = kICAttrLockedBit,
-  ICattr_locked_mask            = kICAttrLockedMask,
-  ICattr_volatile_bit           = kICAttrVolatileBit,
-  ICattr_volatile_mask          = kICAttrVolatileMask,
-  icNoUserInteraction_bit       = kICNoUserInteractionBit,
-  icNoUserInteraction_mask      = kICNoUserInteractionMask,
-  ICfiletype                    = kICFileType,
-  ICcreator                     = kICCreator
-};
-
-/*
-    ICFileInfo was originally used to define the format of a key.
-    That key was removed, but we forgot to remove ICFileInfo.
-    I hope to remove it entirely, but for the moment it's available
-    if you define OLDROUTINENAMES.
-*/
-struct ICFileInfo {
-  OSType              fType;
-  OSType              fCreator;
-  Str63               name;
-};
-typedef struct ICFileInfo               ICFileInfo;
-typedef ICFileInfo *                    ICFileInfoPtr;
-typedef ICFileInfoPtr *                 ICFileInfoHandle;
-
-enum {
-  ICfile_spec_header_size       = kICFileSpecHeaderSize
-};
-
-enum {
-  ICmap_binary_bit              = kICMapBinaryBit,
-  ICmap_binary_mask             = kICMapBinaryMask,
-  ICmap_resource_fork_bit       = kICMapResourceForkBit,
-  ICmap_resource_fork_mask      = kICMapResourceForkMask,
-  ICmap_data_fork_bit           = kICMapDataForkBit,
-  ICmap_data_fork_mask          = kICMapDataForkMask,
-  ICmap_post_bit                = kICMapPostBit,
-  ICmap_post_mask               = kICMapPostMask,
-  ICmap_not_incoming_bit        = kICMapNotIncomingBit,
-  ICmap_not_incoming_mask       = kICMapNotIncomingMask,
-  ICmap_not_outgoing_bit        = kICMapNotOutgoingBit,
-  ICmap_not_outgoing_mask       = kICMapNotOutgoingMask,
-  ICmap_fixed_length            = kICMapFixedLength
-};
-
-enum {
-  ICservices_tcp_bit            = kICServicesTCPBit,
-  ICservices_tcp_mask           = kICServicesTCPMask,
-  ICservices_udp_bit            = kICServicesUDPBit,
-  ICservices_udp_mask           = kICServicesUDPMask
-};
-
-/*    This definitions are a) very long, and b) don't conform
-    to Mac OS standards for naming constants, so I've put
-    them in only if you're using OLDROUTINENAMES.  Please switch
-    to the new names given above.
-*/
-enum {
-  internetConfigurationComponentType = 'PREF', /* the component type */
-  internetConfigurationComponentSubType = 'ICAp', /* the component subtype */
-  internetConfigurationComponentInterfaceVersion0 = 0x00000000, /* IC >= 1.0 */
-  internetConfigurationComponentInterfaceVersion1 = 0x00010000, /* IC >= 1.1 */
-  internetConfigurationComponentInterfaceVersion2 = 0x00020000, /* IC >= 1.2 */
-  internetConfigurationComponentInterfaceVersion3 = 0x00030000, /* IC >= 2.0 */
-                                        /* current version number is version 3 */
-  internetConfigurationComponentInterfaceVersion = internetConfigurationComponentInterfaceVersion3
-};
-
-#endif  /* OLDROUTINENAMES */
-
-
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

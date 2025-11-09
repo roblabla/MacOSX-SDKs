@@ -271,7 +271,7 @@ bool_t xdr_nlm_shareres();
 
 struct nlm_notify {
 	char *name;
-	long state;
+	rpc_int state;
 };
 typedef struct nlm_notify nlm_notify;
 #ifdef __cplusplus
@@ -537,168 +537,168 @@ bool_t xdr_nlm4_notify();
 #endif /* Old Style C */
 
 
-#define NLM_PROG ((u_long)100021)
-#define NLM_SM ((u_long)0)
+#define NLM_PROG ((rpc_uint)100021)
+#define NLM_SM ((rpc_uint)0)
 
 #ifdef __cplusplus
-#define NLM_SM_NOTIFY ((u_long)1)
+#define NLM_SM_NOTIFY ((rpc_uint)1)
 extern "C" void * nlm_sm_notify_0(struct nlm_sm_status *, CLIENT *);
 extern "C" void * nlm_sm_notify_0_svc(struct nlm_sm_status *, struct svc_req *);
 
 #elif __STDC__
-#define NLM_SM_NOTIFY ((u_long)1)
+#define NLM_SM_NOTIFY ((rpc_uint)1)
 extern  void * nlm_sm_notify_0(struct nlm_sm_status *, CLIENT *);
 extern  void * nlm_sm_notify_0_svc(struct nlm_sm_status *, struct svc_req *);
 
 #else /* Old Style C */
-#define NLM_SM_NOTIFY ((u_long)1)
+#define NLM_SM_NOTIFY ((rpc_uint)1)
 extern  void * nlm_sm_notify_0();
 extern  void * nlm_sm_notify_0_svc();
 #endif /* Old Style C */
-#define NLM_VERS ((u_long)1)
+#define NLM_VERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define NLM_TEST ((u_long)1)
+#define NLM_TEST ((rpc_uint)1)
 extern "C" nlm_testres * nlm_test_1(struct nlm_testargs *, CLIENT *);
 extern "C" nlm_testres * nlm_test_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_LOCK ((u_long)2)
+#define NLM_LOCK ((rpc_uint)2)
 extern "C" nlm_res * nlm_lock_1(struct nlm_lockargs *, CLIENT *);
 extern "C" nlm_res * nlm_lock_1_svc(struct nlm_lockargs *, struct svc_req *);
-#define NLM_CANCEL ((u_long)3)
+#define NLM_CANCEL ((rpc_uint)3)
 extern "C" nlm_res * nlm_cancel_1(struct nlm_cancargs *, CLIENT *);
 extern "C" nlm_res * nlm_cancel_1_svc(struct nlm_cancargs *, struct svc_req *);
-#define NLM_UNLOCK ((u_long)4)
+#define NLM_UNLOCK ((rpc_uint)4)
 extern "C" nlm_res * nlm_unlock_1(struct nlm_unlockargs *, CLIENT *);
 extern "C" nlm_res * nlm_unlock_1_svc(struct nlm_unlockargs *, struct svc_req *);
-#define NLM_GRANTED ((u_long)5)
+#define NLM_GRANTED ((rpc_uint)5)
 extern "C" nlm_res * nlm_granted_1(struct nlm_testargs *, CLIENT *);
 extern "C" nlm_res * nlm_granted_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_TEST_MSG ((u_long)6)
+#define NLM_TEST_MSG ((rpc_uint)6)
 extern "C" void * nlm_test_msg_1(struct nlm_testargs *, CLIENT *);
 extern "C" void * nlm_test_msg_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_LOCK_MSG ((u_long)7)
+#define NLM_LOCK_MSG ((rpc_uint)7)
 extern "C" void * nlm_lock_msg_1(struct nlm_lockargs *, CLIENT *);
 extern "C" void * nlm_lock_msg_1_svc(struct nlm_lockargs *, struct svc_req *);
-#define NLM_CANCEL_MSG ((u_long)8)
+#define NLM_CANCEL_MSG ((rpc_uint)8)
 extern "C" void * nlm_cancel_msg_1(struct nlm_cancargs *, CLIENT *);
 extern "C" void * nlm_cancel_msg_1_svc(struct nlm_cancargs *, struct svc_req *);
-#define NLM_UNLOCK_MSG ((u_long)9)
+#define NLM_UNLOCK_MSG ((rpc_uint)9)
 extern "C" void * nlm_unlock_msg_1(struct nlm_unlockargs *, CLIENT *);
 extern "C" void * nlm_unlock_msg_1_svc(struct nlm_unlockargs *, struct svc_req *);
-#define NLM_GRANTED_MSG ((u_long)10)
+#define NLM_GRANTED_MSG ((rpc_uint)10)
 extern "C" void * nlm_granted_msg_1(struct nlm_testargs *, CLIENT *);
 extern "C" void * nlm_granted_msg_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_TEST_RES ((u_long)11)
+#define NLM_TEST_RES ((rpc_uint)11)
 extern "C" void * nlm_test_res_1(nlm_testres *, CLIENT *);
 extern "C" void * nlm_test_res_1_svc(nlm_testres *, struct svc_req *);
-#define NLM_LOCK_RES ((u_long)12)
+#define NLM_LOCK_RES ((rpc_uint)12)
 extern "C" void * nlm_lock_res_1(nlm_res *, CLIENT *);
 extern "C" void * nlm_lock_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_CANCEL_RES ((u_long)13)
+#define NLM_CANCEL_RES ((rpc_uint)13)
 extern "C" void * nlm_cancel_res_1(nlm_res *, CLIENT *);
 extern "C" void * nlm_cancel_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_UNLOCK_RES ((u_long)14)
+#define NLM_UNLOCK_RES ((rpc_uint)14)
 extern "C" void * nlm_unlock_res_1(nlm_res *, CLIENT *);
 extern "C" void * nlm_unlock_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_GRANTED_RES ((u_long)15)
+#define NLM_GRANTED_RES ((rpc_uint)15)
 extern "C" void * nlm_granted_res_1(nlm_res *, CLIENT *);
 extern "C" void * nlm_granted_res_1_svc(nlm_res *, struct svc_req *);
 
 #elif __STDC__
-#define NLM_TEST ((u_long)1)
+#define NLM_TEST ((rpc_uint)1)
 extern  nlm_testres * nlm_test_1(struct nlm_testargs *, CLIENT *);
 extern  nlm_testres * nlm_test_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_LOCK ((u_long)2)
+#define NLM_LOCK ((rpc_uint)2)
 extern  nlm_res * nlm_lock_1(struct nlm_lockargs *, CLIENT *);
 extern  nlm_res * nlm_lock_1_svc(struct nlm_lockargs *, struct svc_req *);
-#define NLM_CANCEL ((u_long)3)
+#define NLM_CANCEL ((rpc_uint)3)
 extern  nlm_res * nlm_cancel_1(struct nlm_cancargs *, CLIENT *);
 extern  nlm_res * nlm_cancel_1_svc(struct nlm_cancargs *, struct svc_req *);
-#define NLM_UNLOCK ((u_long)4)
+#define NLM_UNLOCK ((rpc_uint)4)
 extern  nlm_res * nlm_unlock_1(struct nlm_unlockargs *, CLIENT *);
 extern  nlm_res * nlm_unlock_1_svc(struct nlm_unlockargs *, struct svc_req *);
-#define NLM_GRANTED ((u_long)5)
+#define NLM_GRANTED ((rpc_uint)5)
 extern  nlm_res * nlm_granted_1(struct nlm_testargs *, CLIENT *);
 extern  nlm_res * nlm_granted_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_TEST_MSG ((u_long)6)
+#define NLM_TEST_MSG ((rpc_uint)6)
 extern  void * nlm_test_msg_1(struct nlm_testargs *, CLIENT *);
 extern  void * nlm_test_msg_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_LOCK_MSG ((u_long)7)
+#define NLM_LOCK_MSG ((rpc_uint)7)
 extern  void * nlm_lock_msg_1(struct nlm_lockargs *, CLIENT *);
 extern  void * nlm_lock_msg_1_svc(struct nlm_lockargs *, struct svc_req *);
-#define NLM_CANCEL_MSG ((u_long)8)
+#define NLM_CANCEL_MSG ((rpc_uint)8)
 extern  void * nlm_cancel_msg_1(struct nlm_cancargs *, CLIENT *);
 extern  void * nlm_cancel_msg_1_svc(struct nlm_cancargs *, struct svc_req *);
-#define NLM_UNLOCK_MSG ((u_long)9)
+#define NLM_UNLOCK_MSG ((rpc_uint)9)
 extern  void * nlm_unlock_msg_1(struct nlm_unlockargs *, CLIENT *);
 extern  void * nlm_unlock_msg_1_svc(struct nlm_unlockargs *, struct svc_req *);
-#define NLM_GRANTED_MSG ((u_long)10)
+#define NLM_GRANTED_MSG ((rpc_uint)10)
 extern  void * nlm_granted_msg_1(struct nlm_testargs *, CLIENT *);
 extern  void * nlm_granted_msg_1_svc(struct nlm_testargs *, struct svc_req *);
-#define NLM_TEST_RES ((u_long)11)
+#define NLM_TEST_RES ((rpc_uint)11)
 extern  void * nlm_test_res_1(nlm_testres *, CLIENT *);
 extern  void * nlm_test_res_1_svc(nlm_testres *, struct svc_req *);
-#define NLM_LOCK_RES ((u_long)12)
+#define NLM_LOCK_RES ((rpc_uint)12)
 extern  void * nlm_lock_res_1(nlm_res *, CLIENT *);
 extern  void * nlm_lock_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_CANCEL_RES ((u_long)13)
+#define NLM_CANCEL_RES ((rpc_uint)13)
 extern  void * nlm_cancel_res_1(nlm_res *, CLIENT *);
 extern  void * nlm_cancel_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_UNLOCK_RES ((u_long)14)
+#define NLM_UNLOCK_RES ((rpc_uint)14)
 extern  void * nlm_unlock_res_1(nlm_res *, CLIENT *);
 extern  void * nlm_unlock_res_1_svc(nlm_res *, struct svc_req *);
-#define NLM_GRANTED_RES ((u_long)15)
+#define NLM_GRANTED_RES ((rpc_uint)15)
 extern  void * nlm_granted_res_1(nlm_res *, CLIENT *);
 extern  void * nlm_granted_res_1_svc(nlm_res *, struct svc_req *);
 
 #else /* Old Style C */
-#define NLM_TEST ((u_long)1)
+#define NLM_TEST ((rpc_uint)1)
 extern  nlm_testres * nlm_test_1();
 extern  nlm_testres * nlm_test_1_svc();
-#define NLM_LOCK ((u_long)2)
+#define NLM_LOCK ((rpc_uint)2)
 extern  nlm_res * nlm_lock_1();
 extern  nlm_res * nlm_lock_1_svc();
-#define NLM_CANCEL ((u_long)3)
+#define NLM_CANCEL ((rpc_uint)3)
 extern  nlm_res * nlm_cancel_1();
 extern  nlm_res * nlm_cancel_1_svc();
-#define NLM_UNLOCK ((u_long)4)
+#define NLM_UNLOCK ((rpc_uint)4)
 extern  nlm_res * nlm_unlock_1();
 extern  nlm_res * nlm_unlock_1_svc();
-#define NLM_GRANTED ((u_long)5)
+#define NLM_GRANTED ((rpc_uint)5)
 extern  nlm_res * nlm_granted_1();
 extern  nlm_res * nlm_granted_1_svc();
-#define NLM_TEST_MSG ((u_long)6)
+#define NLM_TEST_MSG ((rpc_uint)6)
 extern  void * nlm_test_msg_1();
 extern  void * nlm_test_msg_1_svc();
-#define NLM_LOCK_MSG ((u_long)7)
+#define NLM_LOCK_MSG ((rpc_uint)7)
 extern  void * nlm_lock_msg_1();
 extern  void * nlm_lock_msg_1_svc();
-#define NLM_CANCEL_MSG ((u_long)8)
+#define NLM_CANCEL_MSG ((rpc_uint)8)
 extern  void * nlm_cancel_msg_1();
 extern  void * nlm_cancel_msg_1_svc();
-#define NLM_UNLOCK_MSG ((u_long)9)
+#define NLM_UNLOCK_MSG ((rpc_uint)9)
 extern  void * nlm_unlock_msg_1();
 extern  void * nlm_unlock_msg_1_svc();
-#define NLM_GRANTED_MSG ((u_long)10)
+#define NLM_GRANTED_MSG ((rpc_uint)10)
 extern  void * nlm_granted_msg_1();
 extern  void * nlm_granted_msg_1_svc();
-#define NLM_TEST_RES ((u_long)11)
+#define NLM_TEST_RES ((rpc_uint)11)
 extern  void * nlm_test_res_1();
 extern  void * nlm_test_res_1_svc();
-#define NLM_LOCK_RES ((u_long)12)
+#define NLM_LOCK_RES ((rpc_uint)12)
 extern  void * nlm_lock_res_1();
 extern  void * nlm_lock_res_1_svc();
-#define NLM_CANCEL_RES ((u_long)13)
+#define NLM_CANCEL_RES ((rpc_uint)13)
 extern  void * nlm_cancel_res_1();
 extern  void * nlm_cancel_res_1_svc();
-#define NLM_UNLOCK_RES ((u_long)14)
+#define NLM_UNLOCK_RES ((rpc_uint)14)
 extern  void * nlm_unlock_res_1();
 extern  void * nlm_unlock_res_1_svc();
-#define NLM_GRANTED_RES ((u_long)15)
+#define NLM_GRANTED_RES ((rpc_uint)15)
 extern  void * nlm_granted_res_1();
 extern  void * nlm_granted_res_1_svc();
 #endif /* Old Style C */
-#define NLM_VERSX ((u_long)3)
+#define NLM_VERSX ((rpc_uint)3)
 
 #ifdef __cplusplus
 extern "C" nlm_testres * nlm_test_3(struct nlm_testargs *, CLIENT *);
@@ -731,16 +731,16 @@ extern "C" void * nlm_unlock_res_3(nlm_res *, CLIENT *);
 extern "C" void * nlm_unlock_res_3_svc(nlm_res *, struct svc_req *);
 extern "C" void * nlm_granted_res_3(nlm_res *, CLIENT *);
 extern "C" void * nlm_granted_res_3_svc(nlm_res *, struct svc_req *);
-#define NLM_SHARE ((u_long)20)
+#define NLM_SHARE ((rpc_uint)20)
 extern "C" nlm_shareres * nlm_share_3(nlm_shareargs *, CLIENT *);
 extern "C" nlm_shareres * nlm_share_3_svc(nlm_shareargs *, struct svc_req *);
-#define NLM_UNSHARE ((u_long)21)
+#define NLM_UNSHARE ((rpc_uint)21)
 extern "C" nlm_shareres * nlm_unshare_3(nlm_shareargs *, CLIENT *);
 extern "C" nlm_shareres * nlm_unshare_3_svc(nlm_shareargs *, struct svc_req *);
-#define NLM_NM_LOCK ((u_long)22)
+#define NLM_NM_LOCK ((rpc_uint)22)
 extern "C" nlm_res * nlm_nm_lock_3(nlm_lockargs *, CLIENT *);
 extern "C" nlm_res * nlm_nm_lock_3_svc(nlm_lockargs *, struct svc_req *);
-#define NLM_FREE_ALL ((u_long)23)
+#define NLM_FREE_ALL ((rpc_uint)23)
 extern "C" void * nlm_free_all_3(nlm_notify *, CLIENT *);
 extern "C" void * nlm_free_all_3_svc(nlm_notify *, struct svc_req *);
 
@@ -775,16 +775,16 @@ extern  void * nlm_unlock_res_3(nlm_res *, CLIENT *);
 extern  void * nlm_unlock_res_3_svc(nlm_res *, struct svc_req *);
 extern  void * nlm_granted_res_3(nlm_res *, CLIENT *);
 extern  void * nlm_granted_res_3_svc(nlm_res *, struct svc_req *);
-#define NLM_SHARE ((u_long)20)
+#define NLM_SHARE ((rpc_uint)20)
 extern  nlm_shareres * nlm_share_3(nlm_shareargs *, CLIENT *);
 extern  nlm_shareres * nlm_share_3_svc(nlm_shareargs *, struct svc_req *);
-#define NLM_UNSHARE ((u_long)21)
+#define NLM_UNSHARE ((rpc_uint)21)
 extern  nlm_shareres * nlm_unshare_3(nlm_shareargs *, CLIENT *);
 extern  nlm_shareres * nlm_unshare_3_svc(nlm_shareargs *, struct svc_req *);
-#define NLM_NM_LOCK ((u_long)22)
+#define NLM_NM_LOCK ((rpc_uint)22)
 extern  nlm_res * nlm_nm_lock_3(nlm_lockargs *, CLIENT *);
 extern  nlm_res * nlm_nm_lock_3_svc(nlm_lockargs *, struct svc_req *);
-#define NLM_FREE_ALL ((u_long)23)
+#define NLM_FREE_ALL ((rpc_uint)23)
 extern  void * nlm_free_all_3(nlm_notify *, CLIENT *);
 extern  void * nlm_free_all_3_svc(nlm_notify *, struct svc_req *);
 
@@ -819,195 +819,195 @@ extern  void * nlm_unlock_res_3();
 extern  void * nlm_unlock_res_3_svc();
 extern  void * nlm_granted_res_3();
 extern  void * nlm_granted_res_3_svc();
-#define NLM_SHARE ((u_long)20)
+#define NLM_SHARE ((rpc_uint)20)
 extern  nlm_shareres * nlm_share_3();
 extern  nlm_shareres * nlm_share_3_svc();
-#define NLM_UNSHARE ((u_long)21)
+#define NLM_UNSHARE ((rpc_uint)21)
 extern  nlm_shareres * nlm_unshare_3();
 extern  nlm_shareres * nlm_unshare_3_svc();
-#define NLM_NM_LOCK ((u_long)22)
+#define NLM_NM_LOCK ((rpc_uint)22)
 extern  nlm_res * nlm_nm_lock_3();
 extern  nlm_res * nlm_nm_lock_3_svc();
-#define NLM_FREE_ALL ((u_long)23)
+#define NLM_FREE_ALL ((rpc_uint)23)
 extern  void * nlm_free_all_3();
 extern  void * nlm_free_all_3_svc();
 #endif /* Old Style C */
-#define NLM_VERS4 ((u_long)4)
+#define NLM_VERS4 ((rpc_uint)4)
 
 #ifdef __cplusplus
-#define NLM4_TEST ((u_long)1)
+#define NLM4_TEST ((rpc_uint)1)
 extern "C" nlm4_testres * nlm4_test_4(nlm4_testargs *, CLIENT *);
 extern "C" nlm4_testres * nlm4_test_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_LOCK ((u_long)2)
+#define NLM4_LOCK ((rpc_uint)2)
 extern "C" nlm4_res * nlm4_lock_4(nlm4_lockargs *, CLIENT *);
 extern "C" nlm4_res * nlm4_lock_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_CANCEL ((u_long)3)
+#define NLM4_CANCEL ((rpc_uint)3)
 extern "C" nlm4_res * nlm4_cancel_4(nlm4_cancargs *, CLIENT *);
 extern "C" nlm4_res * nlm4_cancel_4_svc(nlm4_cancargs *, struct svc_req *);
-#define NLM4_UNLOCK ((u_long)4)
+#define NLM4_UNLOCK ((rpc_uint)4)
 extern "C" nlm4_res * nlm4_unlock_4(nlm4_unlockargs *, CLIENT *);
 extern "C" nlm4_res * nlm4_unlock_4_svc(nlm4_unlockargs *, struct svc_req *);
-#define NLM4_GRANTED ((u_long)5)
+#define NLM4_GRANTED ((rpc_uint)5)
 extern "C" nlm4_res * nlm4_granted_4(nlm4_testargs *, CLIENT *);
 extern "C" nlm4_res * nlm4_granted_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_TEST_MSG ((u_long)6)
+#define NLM4_TEST_MSG ((rpc_uint)6)
 extern "C" void * nlm4_test_msg_4(nlm4_testargs *, CLIENT *);
 extern "C" void * nlm4_test_msg_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_LOCK_MSG ((u_long)7)
+#define NLM4_LOCK_MSG ((rpc_uint)7)
 extern "C" void * nlm4_lock_msg_4(nlm4_lockargs *, CLIENT *);
 extern "C" void * nlm4_lock_msg_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_CANCEL_MSG ((u_long)8)
+#define NLM4_CANCEL_MSG ((rpc_uint)8)
 extern "C" void * nlm4_cancel_msg_4(nlm4_cancargs *, CLIENT *);
 extern "C" void * nlm4_cancel_msg_4_svc(nlm4_cancargs *, struct svc_req *);
-#define NLM4_UNLOCK_MSG ((u_long)9)
+#define NLM4_UNLOCK_MSG ((rpc_uint)9)
 extern "C" void * nlm4_unlock_msg_4(nlm4_unlockargs *, CLIENT *);
 extern "C" void * nlm4_unlock_msg_4_svc(nlm4_unlockargs *, struct svc_req *);
-#define NLM4_GRANTED_MSG ((u_long)10)
+#define NLM4_GRANTED_MSG ((rpc_uint)10)
 extern "C" void * nlm4_granted_msg_4(nlm4_testargs *, CLIENT *);
 extern "C" void * nlm4_granted_msg_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_TEST_RES ((u_long)11)
+#define NLM4_TEST_RES ((rpc_uint)11)
 extern "C" void * nlm4_test_res_4(nlm4_testres *, CLIENT *);
 extern "C" void * nlm4_test_res_4_svc(nlm4_testres *, struct svc_req *);
-#define NLM4_LOCK_RES ((u_long)12)
+#define NLM4_LOCK_RES ((rpc_uint)12)
 extern "C" void * nlm4_lock_res_4(nlm4_res *, CLIENT *);
 extern "C" void * nlm4_lock_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_CANCEL_RES ((u_long)13)
+#define NLM4_CANCEL_RES ((rpc_uint)13)
 extern "C" void * nlm4_cancel_res_4(nlm4_res *, CLIENT *);
 extern "C" void * nlm4_cancel_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_UNLOCK_RES ((u_long)14)
+#define NLM4_UNLOCK_RES ((rpc_uint)14)
 extern "C" void * nlm4_unlock_res_4(nlm4_res *, CLIENT *);
 extern "C" void * nlm4_unlock_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_GRANTED_RES ((u_long)15)
+#define NLM4_GRANTED_RES ((rpc_uint)15)
 extern "C" void * nlm4_granted_res_4(nlm4_res *, CLIENT *);
 extern "C" void * nlm4_granted_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_SHARE ((u_long)20)
+#define NLM4_SHARE ((rpc_uint)20)
 extern "C" nlm4_shareres * nlm4_share_4(nlm4_shareargs *, CLIENT *);
 extern "C" nlm4_shareres * nlm4_share_4_svc(nlm4_shareargs *, struct svc_req *);
-#define NLM4_UNSHARE ((u_long)21)
+#define NLM4_UNSHARE ((rpc_uint)21)
 extern "C" nlm4_shareres * nlm4_unshare_4(nlm4_shareargs *, CLIENT *);
 extern "C" nlm4_shareres * nlm4_unshare_4_svc(nlm4_shareargs *, struct svc_req *);
-#define NLM4_NM_LOCK ((u_long)22)
+#define NLM4_NM_LOCK ((rpc_uint)22)
 extern "C" nlm4_res * nlm4_nm_lock_4(nlm4_lockargs *, CLIENT *);
 extern "C" nlm4_res * nlm4_nm_lock_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_FREE_ALL ((u_long)23)
+#define NLM4_FREE_ALL ((rpc_uint)23)
 extern "C" void * nlm4_free_all_4(nlm4_notify *, CLIENT *);
 extern "C" void * nlm4_free_all_4_svc(nlm4_notify *, struct svc_req *);
 
 #elif __STDC__
-#define NLM4_TEST ((u_long)1)
+#define NLM4_TEST ((rpc_uint)1)
 extern  nlm4_testres * nlm4_test_4(nlm4_testargs *, CLIENT *);
 extern  nlm4_testres * nlm4_test_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_LOCK ((u_long)2)
+#define NLM4_LOCK ((rpc_uint)2)
 extern  nlm4_res * nlm4_lock_4(nlm4_lockargs *, CLIENT *);
 extern  nlm4_res * nlm4_lock_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_CANCEL ((u_long)3)
+#define NLM4_CANCEL ((rpc_uint)3)
 extern  nlm4_res * nlm4_cancel_4(nlm4_cancargs *, CLIENT *);
 extern  nlm4_res * nlm4_cancel_4_svc(nlm4_cancargs *, struct svc_req *);
-#define NLM4_UNLOCK ((u_long)4)
+#define NLM4_UNLOCK ((rpc_uint)4)
 extern  nlm4_res * nlm4_unlock_4(nlm4_unlockargs *, CLIENT *);
 extern  nlm4_res * nlm4_unlock_4_svc(nlm4_unlockargs *, struct svc_req *);
-#define NLM4_GRANTED ((u_long)5)
+#define NLM4_GRANTED ((rpc_uint)5)
 extern  nlm4_res * nlm4_granted_4(nlm4_testargs *, CLIENT *);
 extern  nlm4_res * nlm4_granted_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_TEST_MSG ((u_long)6)
+#define NLM4_TEST_MSG ((rpc_uint)6)
 extern  void * nlm4_test_msg_4(nlm4_testargs *, CLIENT *);
 extern  void * nlm4_test_msg_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_LOCK_MSG ((u_long)7)
+#define NLM4_LOCK_MSG ((rpc_uint)7)
 extern  void * nlm4_lock_msg_4(nlm4_lockargs *, CLIENT *);
 extern  void * nlm4_lock_msg_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_CANCEL_MSG ((u_long)8)
+#define NLM4_CANCEL_MSG ((rpc_uint)8)
 extern  void * nlm4_cancel_msg_4(nlm4_cancargs *, CLIENT *);
 extern  void * nlm4_cancel_msg_4_svc(nlm4_cancargs *, struct svc_req *);
-#define NLM4_UNLOCK_MSG ((u_long)9)
+#define NLM4_UNLOCK_MSG ((rpc_uint)9)
 extern  void * nlm4_unlock_msg_4(nlm4_unlockargs *, CLIENT *);
 extern  void * nlm4_unlock_msg_4_svc(nlm4_unlockargs *, struct svc_req *);
-#define NLM4_GRANTED_MSG ((u_long)10)
+#define NLM4_GRANTED_MSG ((rpc_uint)10)
 extern  void * nlm4_granted_msg_4(nlm4_testargs *, CLIENT *);
 extern  void * nlm4_granted_msg_4_svc(nlm4_testargs *, struct svc_req *);
-#define NLM4_TEST_RES ((u_long)11)
+#define NLM4_TEST_RES ((rpc_uint)11)
 extern  void * nlm4_test_res_4(nlm4_testres *, CLIENT *);
 extern  void * nlm4_test_res_4_svc(nlm4_testres *, struct svc_req *);
-#define NLM4_LOCK_RES ((u_long)12)
+#define NLM4_LOCK_RES ((rpc_uint)12)
 extern  void * nlm4_lock_res_4(nlm4_res *, CLIENT *);
 extern  void * nlm4_lock_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_CANCEL_RES ((u_long)13)
+#define NLM4_CANCEL_RES ((rpc_uint)13)
 extern  void * nlm4_cancel_res_4(nlm4_res *, CLIENT *);
 extern  void * nlm4_cancel_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_UNLOCK_RES ((u_long)14)
+#define NLM4_UNLOCK_RES ((rpc_uint)14)
 extern  void * nlm4_unlock_res_4(nlm4_res *, CLIENT *);
 extern  void * nlm4_unlock_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_GRANTED_RES ((u_long)15)
+#define NLM4_GRANTED_RES ((rpc_uint)15)
 extern  void * nlm4_granted_res_4(nlm4_res *, CLIENT *);
 extern  void * nlm4_granted_res_4_svc(nlm4_res *, struct svc_req *);
-#define NLM4_SHARE ((u_long)20)
+#define NLM4_SHARE ((rpc_uint)20)
 extern  nlm4_shareres * nlm4_share_4(nlm4_shareargs *, CLIENT *);
 extern  nlm4_shareres * nlm4_share_4_svc(nlm4_shareargs *, struct svc_req *);
-#define NLM4_UNSHARE ((u_long)21)
+#define NLM4_UNSHARE ((rpc_uint)21)
 extern  nlm4_shareres * nlm4_unshare_4(nlm4_shareargs *, CLIENT *);
 extern  nlm4_shareres * nlm4_unshare_4_svc(nlm4_shareargs *, struct svc_req *);
-#define NLM4_NM_LOCK ((u_long)22)
+#define NLM4_NM_LOCK ((rpc_uint)22)
 extern  nlm4_res * nlm4_nm_lock_4(nlm4_lockargs *, CLIENT *);
 extern  nlm4_res * nlm4_nm_lock_4_svc(nlm4_lockargs *, struct svc_req *);
-#define NLM4_FREE_ALL ((u_long)23)
+#define NLM4_FREE_ALL ((rpc_uint)23)
 extern  void * nlm4_free_all_4(nlm4_notify *, CLIENT *);
 extern  void * nlm4_free_all_4_svc(nlm4_notify *, struct svc_req *);
 
 #else /* Old Style C */
-#define NLM4_TEST ((u_long)1)
+#define NLM4_TEST ((rpc_uint)1)
 extern  nlm4_testres * nlm4_test_4();
 extern  nlm4_testres * nlm4_test_4_svc();
-#define NLM4_LOCK ((u_long)2)
+#define NLM4_LOCK ((rpc_uint)2)
 extern  nlm4_res * nlm4_lock_4();
 extern  nlm4_res * nlm4_lock_4_svc();
-#define NLM4_CANCEL ((u_long)3)
+#define NLM4_CANCEL ((rpc_uint)3)
 extern  nlm4_res * nlm4_cancel_4();
 extern  nlm4_res * nlm4_cancel_4_svc();
-#define NLM4_UNLOCK ((u_long)4)
+#define NLM4_UNLOCK ((rpc_uint)4)
 extern  nlm4_res * nlm4_unlock_4();
 extern  nlm4_res * nlm4_unlock_4_svc();
-#define NLM4_GRANTED ((u_long)5)
+#define NLM4_GRANTED ((rpc_uint)5)
 extern  nlm4_res * nlm4_granted_4();
 extern  nlm4_res * nlm4_granted_4_svc();
-#define NLM4_TEST_MSG ((u_long)6)
+#define NLM4_TEST_MSG ((rpc_uint)6)
 extern  void * nlm4_test_msg_4();
 extern  void * nlm4_test_msg_4_svc();
-#define NLM4_LOCK_MSG ((u_long)7)
+#define NLM4_LOCK_MSG ((rpc_uint)7)
 extern  void * nlm4_lock_msg_4();
 extern  void * nlm4_lock_msg_4_svc();
-#define NLM4_CANCEL_MSG ((u_long)8)
+#define NLM4_CANCEL_MSG ((rpc_uint)8)
 extern  void * nlm4_cancel_msg_4();
 extern  void * nlm4_cancel_msg_4_svc();
-#define NLM4_UNLOCK_MSG ((u_long)9)
+#define NLM4_UNLOCK_MSG ((rpc_uint)9)
 extern  void * nlm4_unlock_msg_4();
 extern  void * nlm4_unlock_msg_4_svc();
-#define NLM4_GRANTED_MSG ((u_long)10)
+#define NLM4_GRANTED_MSG ((rpc_uint)10)
 extern  void * nlm4_granted_msg_4();
 extern  void * nlm4_granted_msg_4_svc();
-#define NLM4_TEST_RES ((u_long)11)
+#define NLM4_TEST_RES ((rpc_uint)11)
 extern  void * nlm4_test_res_4();
 extern  void * nlm4_test_res_4_svc();
-#define NLM4_LOCK_RES ((u_long)12)
+#define NLM4_LOCK_RES ((rpc_uint)12)
 extern  void * nlm4_lock_res_4();
 extern  void * nlm4_lock_res_4_svc();
-#define NLM4_CANCEL_RES ((u_long)13)
+#define NLM4_CANCEL_RES ((rpc_uint)13)
 extern  void * nlm4_cancel_res_4();
 extern  void * nlm4_cancel_res_4_svc();
-#define NLM4_UNLOCK_RES ((u_long)14)
+#define NLM4_UNLOCK_RES ((rpc_uint)14)
 extern  void * nlm4_unlock_res_4();
 extern  void * nlm4_unlock_res_4_svc();
-#define NLM4_GRANTED_RES ((u_long)15)
+#define NLM4_GRANTED_RES ((rpc_uint)15)
 extern  void * nlm4_granted_res_4();
 extern  void * nlm4_granted_res_4_svc();
-#define NLM4_SHARE ((u_long)20)
+#define NLM4_SHARE ((rpc_uint)20)
 extern  nlm4_shareres * nlm4_share_4();
 extern  nlm4_shareres * nlm4_share_4_svc();
-#define NLM4_UNSHARE ((u_long)21)
+#define NLM4_UNSHARE ((rpc_uint)21)
 extern  nlm4_shareres * nlm4_unshare_4();
 extern  nlm4_shareres * nlm4_unshare_4_svc();
-#define NLM4_NM_LOCK ((u_long)22)
+#define NLM4_NM_LOCK ((rpc_uint)22)
 extern  nlm4_res * nlm4_nm_lock_4();
 extern  nlm4_res * nlm4_nm_lock_4_svc();
-#define NLM4_FREE_ALL ((u_long)23)
+#define NLM4_FREE_ALL ((rpc_uint)23)
 extern  void * nlm4_free_all_4();
 extern  void * nlm4_free_all_4_svc();
 #endif /* Old Style C */

@@ -1,6 +1,6 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+   | Author: Stig Sæther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_versioning.h,v 1.5.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
+/* $Id: php_versioning.h,v 1.10.2.1.2.2 2007/12/31 07:20:13 sebastian Exp $ */
 
 #ifndef PHP_VERSIONING_H
 #define PHP_VERSIONING_H

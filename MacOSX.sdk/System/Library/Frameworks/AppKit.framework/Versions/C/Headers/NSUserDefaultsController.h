@@ -1,7 +1,7 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2005, Apple Computer, Inc.
+	Copyright (c) 2002-2007, Apple Inc.
 	All rights reserved.
  */
 

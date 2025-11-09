@@ -35,17 +35,18 @@ extern "C" {
 #pragma import on
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-	#pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-	#pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-	#pragma pack(2)
+#if !__LP64__
+	#if PRAGMA_STRUCT_ALIGN
+		#pragma options align=mac68k
+	#elif PRAGMA_STRUCT_PACKPUSH
+		#pragma pack(push, 2)
+	#elif PRAGMA_STRUCT_PACK
+		#pragma pack(2)
+	#endif
 #endif
 
-
 //-----------------------------------------------------------------------------
-//	Start/stop methods for audio output units
+//	Start/stop methods for output units
 //-----------------------------------------------------------------------------
 extern ComponentResult
 AudioOutputUnitStart(	AudioUnit	ci)											AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -62,13 +63,14 @@ enum {
 	kAudioOutputUnitStopSelect					= 0x0202
 };
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
+#if !__LP64__
+	#if PRAGMA_STRUCT_ALIGN
+		#pragma options align=reset
+	#elif PRAGMA_STRUCT_PACKPUSH
+		#pragma pack(pop)
+	#elif PRAGMA_STRUCT_PACK
+		#pragma pack()
+	#endif
 #endif
 
 #ifdef PRAGMA_IMPORT_OFF

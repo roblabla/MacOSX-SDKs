@@ -226,10 +226,10 @@ extern "C" {
 
 #define VEC_IMPACT_SQ(bsq,direction,position)		\
 {							\
-   gleDouble len, llel;					\
-   VEC_DOT_PRODUCT (len, position, position);		\
+   gleDouble vlen, llel;					\
+   VEC_DOT_PRODUCT (vlen, position, position);		\
    VEC_DOT_PRODUCT (llel, direction, position);		\
-   bsq = len - llel*llel;				\
+   bsq = vlen - llel*llel;				\
 }
 
 /* ========================================================== */
@@ -244,50 +244,50 @@ extern "C" {
 /* ========================================================== */
 /* Vector length */
 
-#define VEC_LENGTH_2(len,a)			\
+#define VEC_LENGTH_2(vlen,a)			\
 {						\
-   len = a[0]*a[0] + a[1]*a[1];			\
-   len = sqrt (len);				\
+   vlen = a[0]*a[0] + a[1]*a[1];			\
+   vlen = sqrt (vlen);				\
 }
 
 /* ========================================================== */
 /* Vector length */
 
-#define VEC_LENGTH(len,a)			\
+#define VEC_LENGTH(vlen,a)			\
 {						\
-   len = (a)[0]*(a)[0] + (a)[1]*(a)[1];		\
-   len += (a)[2]*(a)[2];			\
-   len = sqrt (len);				\
+   vlen = (a)[0]*(a)[0] + (a)[1]*(a)[1];		\
+   vlen += (a)[2]*(a)[2];			\
+   vlen = sqrt (vlen);				\
 }
 
 /* ========================================================== */
 /* Vector length */
 
-#define VEC_LENGTH_4(len,a)			\
+#define VEC_LENGTH_4(vlen,a)			\
 {						\
-   len = (a)[0]*(a)[0] + (a)[1]*(a)[1];		\
-   len += (a)[2]*(a)[2];			\
-   len += (a)[3] * (a)[3];			\
-   len = sqrt (len);				\
+   vlen = (a)[0]*(a)[0] + (a)[1]*(a)[1];		\
+   vlen += (a)[2]*(a)[2];			\
+   vlen += (a)[3] * (a)[3];			\
+   vlen = sqrt (vlen);				\
 }
 
 /* ========================================================== */
 /* distance between two points */
 
-#define VEC_DISTANCE(len,va,vb)			\
+#define VEC_DISTANCE(vlen,va,vb)			\
 {						\
     gleDouble tmp[4];				\
     VEC_DIFF (tmp, vb, va);			\
-    VEC_LENGTH (len, tmp);			\
+    VEC_LENGTH (vlen, tmp);			\
 }
 
 /* ========================================================== */
 /* Vector length */
 
-#define VEC_CONJUGATE_LENGTH(len,a)		\
+#define VEC_CONJUGATE_LENGTH(vlen,a)		\
 {						\
-   len = 1.0 - a[0]*a[0] - a[1]*a[1] - a[2]*a[2];\
-   len = sqrt (len);				\
+   vlen = 1.0 - a[0]*a[0] - a[1]*a[1] - a[2]*a[2];\
+   vlen = sqrt (vlen);				\
 }
 
 /* ========================================================== */
@@ -295,13 +295,13 @@ extern "C" {
 
 #define VEC_NORMALIZE(a)			\
 {						\
-   double len;					\
-   VEC_LENGTH (len,a);				\
-   if (len != 0.0) {				\
-      len = 1.0 / len;				\
-      a[0] *= len;				\
-      a[1] *= len;				\
-      a[2] *= len;				\
+   double vlen;					\
+   VEC_LENGTH (vlen,a);				\
+   if (vlen != 0.0) {				\
+      vlen = 1.0 / vlen;				\
+      a[0] *= vlen;				\
+      a[1] *= vlen;				\
+      a[2] *= vlen;				\
    }						\
 }
 
@@ -310,13 +310,13 @@ extern "C" {
 
 #define VEC_RENORMALIZE(a,newlen)		\
 {						\
-   double len;					\
-   VEC_LENGTH (len,a);				\
-   if (len != 0.0) {				\
-      len = newlen / len;				\
-      a[0] *= len;				\
-      a[1] *= len;				\
-      a[2] *= len;				\
+   double vlen;					\
+   VEC_LENGTH (vlen,a);				\
+   if (vlen != 0.0) {				\
+      vlen = newlen / vlen;				\
+      a[0] *= vlen;				\
+      a[1] *= vlen;				\
+      a[2] *= vlen;				\
    }						\
 }
 
@@ -336,12 +336,12 @@ extern "C" {
 
 #define VEC_PERP(vp,v,n)			\
 {						\
-   double dot;					\
+   double vdot;					\
 						\
-   VEC_DOT_PRODUCT (dot, v, n);			\
-   vp[0] = (v)[0] - (dot) * (n)[0];		\
-   vp[1] = (v)[1] - (dot) * (n)[1];		\
-   vp[2] = (v)[2] - (dot) * (n)[2];		\
+   VEC_DOT_PRODUCT (vdot, v, n);			\
+   vp[0] = (v)[0] - (vdot) * (n)[0];		\
+   vp[1] = (v)[1] - (vdot) * (n)[1];		\
+   vp[2] = (v)[2] - (vdot) * (n)[2];		\
 }
 
 /* ========================================================== */
@@ -350,12 +350,12 @@ extern "C" {
 
 #define VEC_PARALLEL(vp,v,n)			\
 {						\
-   double dot;					\
+   double vdot;					\
 						\
-   VEC_DOT_PRODUCT (dot, v, n);			\
-   vp[0] = (dot) * (n)[0];			\
-   vp[1] = (dot) * (n)[1];			\
-   vp[2] = (dot) * (n)[2];			\
+   VEC_DOT_PRODUCT (vdot, v, n);			\
+   vp[0] = (vdot) * (n)[0];			\
+   vp[1] = (vdot) * (n)[1];			\
+   vp[2] = (vdot) * (n)[2];			\
 }
 
 /* ========================================================== */
@@ -364,12 +364,12 @@ extern "C" {
 
 #define VEC_REFLECT(vr,v,n)			\
 {						\
-   double dot;					\
+   double vdot;					\
 						\
-   VEC_DOT_PRODUCT (dot, v, n);			\
-   vr[0] = (v)[0] - 2.0 * (dot) * (n)[0];	\
-   vr[1] = (v)[1] - 2.0 * (dot) * (n)[1];	\
-   vr[2] = (v)[2] - 2.0 * (dot) * (n)[2];	\
+   VEC_DOT_PRODUCT (vdot, v, n);			\
+   vr[0] = (v)[0] - 2.0 * (vdot) * (n)[0];	\
+   vr[1] = (v)[1] - 2.0 * (vdot) * (n)[1];	\
+   vr[2] = (v)[2] - 2.0 * (vdot) * (n)[2];	\
 }
 
 /* ========================================================== */
@@ -389,9 +389,9 @@ extern "C" {
 
 #define VEC_PRINT_2(a)					\
 {							\
-   double len;						\
-   VEC_LENGTH_2 (len, a);					\
-   printf (" a is %f %f length of a is %f \n", a[0], a[1], len); \
+   double vlen;						\
+   VEC_LENGTH_2 (vlen, a);					\
+   printf (" a is %f %f length of a is %f \n", a[0], a[1], vlen); \
 }
 
 /* ========================================================== */
@@ -399,9 +399,9 @@ extern "C" {
 
 #define VEC_PRINT(a)					\
 {							\
-   double len;						\
-   VEC_LENGTH (len, (a));				\
-   printf (" a is %f %f %f length of a is %f \n", (a)[0], (a)[1], (a)[2], len); \
+   double vlen;						\
+   VEC_LENGTH (vlen, (a));				\
+   printf (" a is %f %f %f length of a is %f \n", (a)[0], (a)[1], (a)[2], vlen); \
 }
 
 /* ========================================================== */
@@ -409,10 +409,10 @@ extern "C" {
 
 #define VEC_PRINT_4(a)					\
 {							\
-   double len;						\
-   VEC_LENGTH_4 (len, (a));				\
+   double vlen;						\
+   VEC_LENGTH_4 (vlen, (a));				\
    printf (" a is %f %f %f %f length of a is %f \n",	\
-       (a)[0], (a)[1], (a)[2], (a)[3], len);		\
+       (a)[0], (a)[1], (a)[2], (a)[3], vlen);		\
 }
 
 /* ========================================================== */
@@ -903,7 +903,7 @@ extern "C" {
 
 #define NORM_XFORM_2X2(p,m,v)					\
 {								\
-   double len;							\
+   double mlen;							\
 								\
    /* do nothing if off-diagonals are zero and diagonals are 	\
     * equal */							\
@@ -911,10 +911,10 @@ extern "C" {
       p[0] = m[1][1]*v[0] - m[1][0]*v[1];			\
       p[1] = - m[0][1]*v[0] + m[0][0]*v[1];			\
 								\
-      len = p[0]*p[0] + p[1]*p[1];				\
-      len = 1.0 / sqrt (len);					\
-      p[0] *= len;						\
-      p[1] *= len;						\
+      mlen = p[0]*p[0] + p[1]*p[1];				\
+      mlen = 1.0 / sqrt (mlen);					\
+      p[0] *= mlen;						\
+      p[1] *= mlen;						\
    } else {							\
       VEC_COPY_2 (p, v);					\
    }								\

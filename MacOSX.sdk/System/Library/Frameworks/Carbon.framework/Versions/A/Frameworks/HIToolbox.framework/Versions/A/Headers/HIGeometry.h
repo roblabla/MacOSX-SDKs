@@ -3,7 +3,7 @@
  
      Contains:   HIToolbox interfaces for geometry
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1984-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 /*
@@ -72,6 +72,7 @@ typedef CGSize                          HISize;
  *    screen is 0, 0.
  */
 typedef CGRect                          HIRect;
+#if !__LP64__
 /*
  *  HIGetScaleFactor()
  *  
@@ -85,14 +86,16 @@ typedef CGRect                          HIRect;
  *    A float indicating the resolution independence scale factor.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern float 
+extern CGFloat 
 HIGetScaleFactor(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+
+#endif  /* !__LP64__ */
 
 
 /*
@@ -309,7 +312,7 @@ HISizeConvert(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

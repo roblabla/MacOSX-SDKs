@@ -88,6 +88,9 @@ protected:
     struct ExpansionData 
 	{
 		bool				fStarted;
+		OSArray *			fPendingMgtAgentCommands ;
+		UInt32				fNumberPendingMgtAgentOrbs;
+		UInt32				fNumLUNs;
 	};
     ExpansionData * fExpansionData; 
     
@@ -197,6 +200,11 @@ public:
 	virtual void endIOCriticalSection( void );
 
     virtual bool finalize( IOOptionBits options );
+    
+    IOReturn 	synchMgmtAgentAccess( IOFWCommand * mgmtOrbCommand );
+	void		completeMgmtAgentAccess( );
+	void 		clearMgmtAgentAccess( );
+	void		cancelMgmtAgentAccess( IOFWCommand * mgmtOrbCommand );
 
 protected:
 

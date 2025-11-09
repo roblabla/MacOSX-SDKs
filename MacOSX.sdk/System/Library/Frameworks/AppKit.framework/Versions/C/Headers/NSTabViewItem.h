@@ -1,7 +1,7 @@
 /*
 	NSTabViewItem.h
         Application Kit
-        Copyright (c) 2000-2005, Apple Computer, Inc.
+        Copyright (c) 2000-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -11,11 +11,12 @@
 
 @class NSColor, NSTabView, NSView;
 
-typedef enum _NSTabState {
+enum {
     NSSelectedTab = 0,
     NSBackgroundTab = 1,
     NSPressedTab = 2
-} NSTabState;
+};
+typedef NSUInteger NSTabState;
 
 @interface NSTabViewItem : NSObject <NSCoding>
 {

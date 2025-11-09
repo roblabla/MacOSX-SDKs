@@ -1,5 +1,5 @@
 /*
- * $Id: baby_steps.h,v 1.7 2004/09/14 02:29:15 rstory Exp $
+ * $Id: baby_steps.h 11068 2004-09-14 02:29:16Z rstory $
  */
 #ifndef BABY_STEPS_H
 #define BABY_STEPS_H

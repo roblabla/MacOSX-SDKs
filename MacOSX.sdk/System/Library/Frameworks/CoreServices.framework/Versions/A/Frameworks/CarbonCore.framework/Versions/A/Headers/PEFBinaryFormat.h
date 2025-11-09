@@ -3,7 +3,7 @@
  
      Contains:   PEF Types and Macros
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -30,7 +30,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 
@@ -1576,7 +1576,7 @@ typedef struct PEF2LoaderRelocationHeader PEF2LoaderRelocationHeader;
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __PEFBINARYFORMAT__ */

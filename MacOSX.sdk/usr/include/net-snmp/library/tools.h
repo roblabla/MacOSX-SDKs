@@ -1,5 +1,5 @@
 /**
- * @file tools.h
+ * @file library/tools.h
  * @defgroup util Memory Utility Routines
  * @ingroup library
  * @{
@@ -46,7 +46,7 @@ extern          "C" {
 #define BYTESIZE(bitsize)       ((bitsize + 7) >> 3)
 #define ROUNDUP8(x)		( ( (x+7) >> 3 ) * 8 )
 
-
+#define SNMP_STRORNULL(x)       ( x ? x : "(null)")
 
 /** @def SNMP_FREE(s)
     Frees a pointer only if it is !NULL and sets its value to NULL */
@@ -162,11 +162,11 @@ extern          "C" {
                                   char **output);
                     /* preferred */
     int             netsnmp_hex_to_binary(u_char ** buf, size_t * buf_len,
-                                         size_t * out_len, int allow_realloc,
+                                         size_t * offset, int allow_realloc,
                                          const char *hex, const char *delim);
                     /* calls netsnmp_hex_to_binary w/delim of " " */
     int             snmp_hex_to_binary(u_char ** buf, size_t * buf_len,
-                                       size_t * out_len, int allow_realloc,
+                                       size_t * offset, int allow_realloc,
                                        const char *hex);
                     /* handles odd lengths */
     int             hex_to_binary2(const u_char * input, size_t len,
@@ -176,6 +176,7 @@ extern          "C" {
                                            size_t * out_len,
                                            int allow_realloc,
                                            const char *decimal);
+#define snmp_cstrcat(b,l,o,a,s) snmp_strcat(b,l,o,a,(const u_char *)s)
     int             snmp_strcat(u_char ** buf, size_t * buf_len,
                                 size_t * out_len, int allow_realloc,
                                 const u_char * s);
@@ -198,7 +199,9 @@ extern          "C" {
     int             marker_tticks(marker_t pm);
     int             timeval_tticks(struct timeval *tv);
     char            *netsnmp_getenv(const char *name);
-    
+
+    int             netsnmp_addrstr_hton(char *ptr, size_t len);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,7 +1,7 @@
 /*
         NSTableHeaderView.h
         Application Kit
-        Copyright (c) 1995-2004, Apple Computer, Inc.
+        Copyright (c) 1995-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -16,14 +16,14 @@
 {
     /*All instance variables are private*/
     NSTableView			*_tableView;
-    int				_resizedColumn;
-    int				_draggedColumn;
-    int				_pressedColumn;
+    NSInteger			_resizedColumn;
+    NSInteger			_draggedColumn;
+    NSInteger			_pressedColumn;
     NSImage			*_headerDragImage;
-    float			_draggedDistance;
+    CGFloat			_draggedDistance;
     BOOL			_isColumnResizing;
     BOOL			_showHandCursorFired;
-    BOOL			_reserved3;
+    BOOL			_toolTipRectsDirty;
     BOOL			_reserved4;
     BOOL			_skipDrawingSeparator;
     id				_reserved;
@@ -31,10 +31,10 @@
 
 - (void)setTableView:(NSTableView *)tableView;
 - (NSTableView *)tableView;
-- (int)draggedColumn;
-- (float)draggedDistance;
-- (int)resizedColumn;
-- (NSRect)headerRectOfColumn:(int)column;
-- (int)columnAtPoint:(NSPoint)point;
+- (NSInteger)draggedColumn;
+- (CGFloat)draggedDistance;
+- (NSInteger)resizedColumn;
+- (NSRect)headerRectOfColumn:(NSInteger)column;
+- (NSInteger)columnAtPoint:(NSPoint)point;
 
 @end

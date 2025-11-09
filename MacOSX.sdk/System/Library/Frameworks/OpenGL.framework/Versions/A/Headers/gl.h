@@ -37,16 +37,16 @@ extern "C" {
 // switches to providing function pointers
 //#define GL_GLEXT_FUNCTION_POINTERS 1
 
-typedef unsigned long GLenum;
+typedef unsigned int GLenum;
 typedef unsigned char GLboolean;
-typedef unsigned long GLbitfield;
+typedef unsigned int GLbitfield;
 typedef signed char GLbyte;
 typedef short GLshort;
-typedef long GLint;
-typedef long GLsizei;
+typedef int GLint;
+typedef int GLsizei;
 typedef unsigned char GLubyte;
 typedef unsigned short GLushort;
-typedef unsigned long GLuint;
+typedef unsigned int GLuint;
 typedef float GLfloat;
 typedef float GLclampf;
 typedef double GLdouble;
@@ -78,6 +78,7 @@ typedef long GLsizeiptr;
 #define GL_VERSION_1_4                    1
 #define GL_VERSION_1_5                    1
 #define GL_VERSION_2_0                    1
+#define GL_VERSION_2_1                    1
 
 /* AccumOp */
 #define GL_ACCUM                          0x0100
@@ -1710,7 +1711,7 @@ typedef long GLsizeiptr;
 /* Obsolete */
 #define GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING         0x889D
 
-/* OpenGL20 */
+/* OpenGL 2.0 */
 #define GL_CURRENT_PROGRAM                0x8B8D
 #define GL_SHADER_TYPE                    0x8B4F
 #define GL_DELETE_STATUS                  0x8B80
@@ -1793,6 +1794,31 @@ typedef long GLsizeiptr;
 #define GL_STENCIL_BACK_PASS_DEPTH_FAIL   0x8802
 #define GL_STENCIL_BACK_PASS_DEPTH_PASS   0x8803
 #define GL_STENCIL_BACK_WRITEMASK         0x8CA5
+
+/* OpenGL 2.1 */
+#define GL_CURRENT_RASTER_SECONDARY_COLOR 0x845F
+#define GL_PIXEL_PACK_BUFFER              0x88EB
+#define GL_PIXEL_UNPACK_BUFFER            0x88EC
+#define GL_PIXEL_PACK_BUFFER_BINDING      0x88ED
+#define GL_PIXEL_UNPACK_BUFFER_BINDING    0x88EF
+#define GL_FLOAT_MAT2x3                   0x8B65
+#define GL_FLOAT_MAT2x4                   0x8B66
+#define GL_FLOAT_MAT3x2                   0x8B67
+#define GL_FLOAT_MAT3x4                   0x8B68
+#define GL_FLOAT_MAT4x2                   0x8B69
+#define GL_FLOAT_MAT4x3                   0x8B6A
+#define GL_SRGB                           0x8C40
+#define GL_SRGB8                          0x8C41
+#define GL_SRGB_ALPHA                     0x8C42
+#define GL_SRGB8_ALPHA8                   0x8C43
+#define GL_SLUMINANCE_ALPHA               0x8C44
+#define GL_SLUMINANCE8_ALPHA8             0x8C45
+#define GL_SLUMINANCE                     0x8C46
+#define GL_SLUMINANCE8                    0x8C47
+#define GL_COMPRESSED_SRGB                0x8C48
+#define GL_COMPRESSED_SRGB_ALPHA          0x8C49
+#define GL_COMPRESSED_SLUMINANCE          0x8C4A
+#define GL_COMPRESSED_SLUMINANCE_ALPHA    0x8C4B
 
 /*************************************************************/
 
@@ -2378,16 +2404,23 @@ typedef void (* glGetAttachedShadersProcPtr) (GLuint program, GLsizei maxCount, 
 typedef void (* glGetShaderInfoLogProcPtr) (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 typedef void (* glGetProgramInfoLogProcPtr) (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 typedef GLint (* glGetUniformLocationProcPtr) (GLuint program, const GLchar *name);
-typedef void (* glGetActiveUniformProcPtr) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+typedef void (* glGetActiveUniformProcPtr) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 typedef void (* glGetUniformfvProcPtr) (GLuint program, GLint location, GLfloat *params);
 typedef void (* glGetUniformivProcPtr) (GLuint program, GLint location, GLint *params);
 typedef void (* glGetShaderSourceProcPtr) (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source);
 typedef void (* glBindAttribLocationProcPtr) (GLuint program, GLuint index, const GLchar *name);
-typedef void (* glGetActiveAttribProcPtr) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+typedef void (* glGetActiveAttribProcPtr) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 typedef GLint (* glGetAttribLocationProcPtr) (GLuint program, const GLchar *name);
 typedef void (* glStencilFuncSeparateProcPtr) (GLenum face, GLenum func, GLint ref, GLuint mask);
 typedef void (* glStencilOpSeparateProcPtr) (GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
 typedef void (* glStencilMaskSeparateProcPtr) (GLenum face, GLuint mask);
+
+typedef void (* glUniformMatrix2x3fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix3x2fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix2x4fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix4x2fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix3x4fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix4x3fvProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 
 #else /* GL_GLEXT_FUNCTION_POINTERS */
 
@@ -2972,16 +3005,23 @@ extern void glGetAttachedShaders (GLuint program, GLsizei maxCount, GLsizei *cou
 extern void glGetShaderInfoLog (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 extern void glGetProgramInfoLog (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 extern GLint glGetUniformLocation (GLuint program, const GLchar *name);
-extern void glGetActiveUniform (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+extern void glGetActiveUniform (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 extern void glGetUniformfv (GLuint program, GLint location, GLfloat *params);
 extern void glGetUniformiv (GLuint program, GLint location, GLint *params);
 extern void glGetShaderSource (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source);
 extern void glBindAttribLocation (GLuint program, GLuint index, const GLchar *name);
-extern void glGetActiveAttrib (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+extern void glGetActiveAttrib (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 extern GLint glGetAttribLocation (GLuint program, const GLchar *name);
 extern void glStencilFuncSeparate (GLenum face, GLenum func, GLint ref, GLuint mask);
 extern void glStencilOpSeparate (GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
 extern void glStencilMaskSeparate (GLenum face, GLuint mask);
+
+extern void glUniformMatrix2x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix3x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix2x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix4x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix3x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+extern void glUniformMatrix4x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 
 
 #endif /* GL_GLEXT_FUNCTION_POINTERS */

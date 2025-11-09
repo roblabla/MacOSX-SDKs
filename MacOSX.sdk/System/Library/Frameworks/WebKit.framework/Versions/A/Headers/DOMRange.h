@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004, 2005, 2006, 2007 Apple Inc. All rights reserved.
+ * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -23,37 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
+#import <WebKit/DOMObject.h>
 #import <WebKit/DOMCore.h>
+#import <WebKit/DOMDocument.h>
+#import <WebKit/DOMRangeException.h>
 
-extern NSString * const DOMRangeException;
 
-enum {
-    //
-    // DOM range exception codes
-    //
-    DOM_BAD_BOUNDARYPOINTS_ERR        = 1,
-    DOM_INVALID_NODE_TYPE_ERR         = 2,
-};
+@class DOMDocumentFragment;
+@class DOMNode;
+@class DOMRange;
+@class NSString;
 
 enum {
-    //
-    // DOM Range comparison codes
-    //
-    DOM_START_TO_START                = 0,
-    DOM_START_TO_END                  = 1,
-    DOM_END_TO_END                    = 2,
-    DOM_END_TO_START                  = 3,
+    DOM_START_TO_START = 0,
+    DOM_START_TO_END = 1,
+    DOM_END_TO_END = 2,
+    DOM_END_TO_START = 3,
+    DOM_NODE_BEFORE = 0,
+    DOM_NODE_AFTER = 1,
+    DOM_NODE_BEFORE_AND_AFTER = 2,
+    DOM_NODE_INSIDE = 3
 };
 
 @interface DOMRange : DOMObject
-- (DOMNode *)startContainer;
-- (long)startOffset;
-- (DOMNode *)endContainer;
-- (long)endOffset;
-- (BOOL)collapsed;
-- (DOMNode *)commonAncestorContainer;
-- (void)setStart:(DOMNode *)refNode :(long)offset;
-- (void)setEnd:(DOMNode *)refNode :(long)offset;
+@property(readonly, retain) DOMNode *startContainer;
+@property(readonly) int startOffset;
+@property(readonly, retain) DOMNode *endContainer;
+@property(readonly) int endOffset;
+@property(readonly) BOOL collapsed;
+@property(readonly, retain) DOMNode *commonAncestorContainer;
+@property(readonly, copy) NSString *text;
+
+- (void)setStart:(DOMNode *)refNode offset:(int)offset;
+- (void)setEnd:(DOMNode *)refNode offset:(int)offset;
 - (void)setStartBefore:(DOMNode *)refNode;
 - (void)setStartAfter:(DOMNode *)refNode;
 - (void)setEndBefore:(DOMNode *)refNode;
@@ -61,7 +64,7 @@ enum {
 - (void)collapse:(BOOL)toStart;
 - (void)selectNode:(DOMNode *)refNode;
 - (void)selectNodeContents:(DOMNode *)refNode;
-- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange;
+- (short)compareBoundaryPoints:(unsigned short)how sourceRange:(DOMRange *)sourceRange;
 - (void)deleteContents;
 - (DOMDocumentFragment *)extractContents;
 - (DOMDocumentFragment *)cloneContents;
@@ -72,6 +75,8 @@ enum {
 - (void)detach;
 @end
 
-@interface DOMDocument (DOMDocumentRange)
-- (DOMRange *)createRange;
+@interface DOMRange (DOMRangeDeprecated)
+- (void)setStart:(DOMNode *)refNode :(int)offset DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setEnd:(DOMNode *)refNode :(int)offset DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 @end

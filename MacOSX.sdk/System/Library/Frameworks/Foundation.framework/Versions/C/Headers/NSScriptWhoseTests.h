@@ -1,5 +1,5 @@
 /*	NSScriptWhoseTests.h
-	Copyright (c) 1997-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,7 +9,7 @@
 @class NSString;
 
 
-typedef enum {
+enum {
     NSEqualToComparison = 0,
     NSLessThanOrEqualToComparison,
     NSLessThanComparison,
@@ -18,8 +18,8 @@ typedef enum {
     NSBeginsWithComparison,
     NSEndsWithComparison,
     NSContainsComparison
-} NSTestComparisonOperation;
-
+};
+typedef NSUInteger NSTestComparisonOperation;
 
 @interface NSScriptWhoseTest : NSObject <NSCoding> {}
 

@@ -1,5 +1,5 @@
 /*	CFNumberFormatter.h
-	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBERFORMATTER__)
@@ -9,11 +9,9 @@
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFLocale.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFNumberFormatter *CFNumberFormatterRef;
 
@@ -22,14 +20,15 @@ typedef struct __CFNumberFormatter *CFNumberFormatterRef;
 CF_EXPORT
 CFTypeID CFNumberFormatterGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-typedef enum {	// number format styles
+enum {	// number format styles
 	kCFNumberFormatterNoStyle = 0,
 	kCFNumberFormatterDecimalStyle = 1,
 	kCFNumberFormatterCurrencyStyle = 2,
 	kCFNumberFormatterPercentStyle = 3,
 	kCFNumberFormatterScientificStyle = 4,
 	kCFNumberFormatterSpellOutStyle = 5
-} CFNumberFormatterStyle;
+};
+typedef CFIndex CFNumberFormatterStyle;
 
 
 CF_EXPORT
@@ -66,9 +65,10 @@ CFStringRef CFNumberFormatterCreateStringWithValue(CFAllocatorRef allocator, CFN
 	// using the current state of the number formatter.
 
 
-typedef enum {
+enum {
     kCFNumberFormatterParseIntegersOnly = 1	/* only parse integers */
-} CFNumberFormatterOptionFlags;
+};
+typedef CFOptionFlags CFNumberFormatterOptionFlags;
 
 CF_EXPORT
 CFNumberRef CFNumberFormatterCreateNumberFromString(CFAllocatorRef allocator, CFNumberFormatterRef formatter, CFStringRef string, CFRange *rangep, CFOptionFlags options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -127,8 +127,13 @@ CF_EXPORT const CFStringRef kCFNumberFormatterNegativePrefix AVAILABLE_MAC_OS_X_
 CF_EXPORT const CFStringRef kCFNumberFormatterNegativeSuffix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
 CF_EXPORT const CFStringRef kCFNumberFormatterPerMillSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
 CF_EXPORT const CFStringRef kCFNumberFormatterInternationalCurrencySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterCurrencyGroupingSeparator AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterIsLenient AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		// CFBoolean
+CF_EXPORT const CFStringRef kCFNumberFormatterUseSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// CFBoolean
+CF_EXPORT const CFStringRef kCFNumberFormatterMinSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// CFNumber
+CF_EXPORT const CFStringRef kCFNumberFormatterMaxSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	// CFNumber
 
-typedef enum {
+enum {
     kCFNumberFormatterRoundCeiling = 0,
     kCFNumberFormatterRoundFloor = 1,
     kCFNumberFormatterRoundDown = 2,
@@ -136,14 +141,16 @@ typedef enum {
     kCFNumberFormatterRoundHalfEven = 4,
     kCFNumberFormatterRoundHalfDown = 5,
     kCFNumberFormatterRoundHalfUp = 6
-} CFNumberFormatterRoundingMode;
+};
+typedef CFIndex CFNumberFormatterRoundingMode;
 
-typedef enum {
+enum {
     kCFNumberFormatterPadBeforePrefix = 0,
     kCFNumberFormatterPadAfterPrefix = 1,
     kCFNumberFormatterPadBeforeSuffix = 2,
     kCFNumberFormatterPadAfterSuffix = 3
-} CFNumberFormatterPadPosition;
+};
+typedef CFIndex CFNumberFormatterPadPosition;
 
 
 CF_EXPORT
@@ -154,9 +161,7 @@ Boolean CFNumberFormatterGetDecimalInfoForCurrencyCode(CFStringRef currencyCode,
 	// or the information is not available.
 	// Not localized because these are properties of the currency.
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif
 

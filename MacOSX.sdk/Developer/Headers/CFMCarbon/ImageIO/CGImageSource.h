@@ -1,1 +1,0 @@
-../../../../System/Library/Frameworks/ApplicationServices.framework/Frameworks/ImageIO.framework/Headers/CGImageSource.h

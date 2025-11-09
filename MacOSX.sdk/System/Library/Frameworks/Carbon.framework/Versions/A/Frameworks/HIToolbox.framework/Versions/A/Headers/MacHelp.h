@@ -1,9 +1,9 @@
 /*
      File:       HIToolbox/MacHelp.h
  
-     Contains:   Macintosh Help Package Interfaces.
+     Contains:   Carbon Help Manager Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,6 +36,10 @@
 #include <HIToolbox/Menus.h>
 #endif
 
+#ifndef __HIVIEW__
+#include <HIToolbox/HIView.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -48,7 +52,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Help Manager constants, etc.                                                     */
@@ -67,15 +71,99 @@ enum {
   kHMDisposeContent             = 1
 };
 
+
+/*
+ *  HMContentType
+ *  
+ *  Summary:
+ *    These constants should be used in the contentType field of the
+ *    HMHelpContent structure.
+ */
 typedef UInt32 HMContentType;
 enum {
+
+  /*
+   * No help content is provided.
+   */
   kHMNoContent                  = 'none',
-  kHMCFStringContent            = 'cfst', /* CFStringRef*/
-  kHMCFStringLocalizedContent   = 'cfsl', /* CFStringRef; name of a localized string. Supported by Jaguar and later.*/
+
+  /*
+   * Help content is a CFStringRef in the HMHelpContent.u.tagCFString
+   * field. 
+   * 
+   * The string is automatically retained by the Help Manager when
+   * provided to the HMSetControl/Window/MenuItemHelpContent APIs, and
+   * automatically released when the control/window/menu is destroyed.
+   * When this type of help content is provided by a
+   * control/window/menu title/menu item help content proc, then the
+   * string is not automatically released, but the content proc will be
+   * called again later with the kHMDisposeContent message to allow
+   * your application to release the string, if appropriate.
+   */
+  kHMCFStringContent            = 'cfst',
+
+  /*
+   * Help content is a localized string loaded automatically by the
+   * Help Manager using CFCopyLocalizedString. The key that identifies
+   * the localized string should be placed in the
+   * HMHelpContent.u.tagCFString field. 
+   * 
+   * The string is automatically retained by the Help Manager when
+   * provided to the HMSetControl/Window/MenuItemHelpContent APIs, and
+   * automatically released when the control/window/menu is destroyed.
+   * When this type of help content is provided by a
+   * control/window/menu title/menu item help content proc, then the
+   * string is not automatically released, but the content proc will be
+   * called again later with the kHMDisposeContent message to allow
+   * your application to release the string, if appropriate.
+   */
+  kHMCFStringLocalizedContent   = 'cfsl',
+
+  /*
+   * Help content is a Pascal string in the application's text encoding
+   * in the HMHelpContent.u.tagString field.
+   */
   kHMPascalStrContent           = 'pstr',
+
+  /*
+   * Help content is text in the application's text encoding loaded
+   * from a 'TEXT' resource. The 'TEXT' resource ID should be placed in
+   * the HMHelpContent.u.tagTextRes field. This help content type is
+   * available in Mac OS X 10.2 and later.
+   */
+  kHMTextResContent             = 'text',
+
+  /*
+   * Help content is a TEHandle in the HMHelpContent.u.tagTEHandle.
+   * Note that Mac OS X ignores all style information contained in the
+   * TEHandle and only uses the text. This help content type is
+   * available in Mac OS X 10.2 and later. It is not supported in
+   * 64-bit mode. 
+   * 
+   * When this type of help content is provided to the
+   * HMSetControl/Window/MenuItemHelpContent APIs, the TEHandle is
+   * _not_ released when the control/window/menu is destroyed. When
+   * this type of help content is provided by a control/window/menu
+   * title/menu item help content proc, then the content proc will be
+   * called again later with the kHMDisposeContent message to allow
+   * your application to release the TEHandle, if appropriate.
+   */
+  kHMTEHandleContent            = 'txth',
+
+  /*
+   * Help content is a Pascal string in the application's text encoding
+   * loaded from a 'STR#' resource. The 'STR#' resource ID and string
+   * index should be placed in the HMHelpContent.u.tagStringRes field.
+   * This help content type is not supported in 64-bit mode.
+   */
   kHMStringResContent           = 'str#',
-  kHMTEHandleContent            = 'txth', /* Supported by CarbonLib and Jaguar and later*/
-  kHMTextResContent             = 'text', /* Supported by CarbonLib and Jaguar and later*/
+
+  /*
+   * Help content is a Pascal string in the application's text encoding
+   * loaded from a 'STR ' resource. The 'STR ' resource ID should be
+   * placed in the HMHelpContent.u.tagStrRes field. This help content
+   * type is not supported in 64-bit mode.
+   */
   kHMStrResContent              = 'str '
 };
 
@@ -103,6 +191,10 @@ enum {
    * To the left, centered vertically
    */
   kHMOutsideLeftCenterAligned   = 2,
+
+  /*
+   * Below, aligned with left or right depending on system script
+   */
   kHMOutsideBottomScriptAligned = 3,
 
   /*
@@ -131,15 +223,23 @@ enum {
   kHMOutsideLeftBottomAligned   = 8,
 
   /*
-   * To the right, aligned with top
+   * Below, aligned with left
    */
   kHMOutsideBottomLeftAligned   = 9,
 
   /*
-   * To the right, aligned with bottom
+   * Below, aligned with right
    */
   kHMOutsideBottomRightAligned  = 10,
+
+  /*
+   * To the right, aligned with top
+   */
   kHMOutsideRightTopAligned     = 11,
+
+  /*
+   * To the right, aligned with bottom
+   */
   kHMOutsideRightBottomAligned  = 12,
 
   /*
@@ -268,10 +368,10 @@ typedef HMHelpContentRec *              HMHelpContentPtr;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Callback procs                                       */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ */
-typedef CALLBACK_API( OSStatus , HMControlContentProcPtr )(ControlRef inControl, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentPtr ioHelpContent);
-typedef CALLBACK_API( OSStatus , HMWindowContentProcPtr )(WindowRef inWindow, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentPtr ioHelpContent);
-typedef CALLBACK_API( OSStatus , HMMenuTitleContentProcPtr )(MenuRef inMenu, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentPtr ioHelpContent);
-typedef CALLBACK_API( OSStatus , HMMenuItemContentProcPtr )(const MenuTrackingData *inTrackingData, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentPtr ioHelpContent);
+typedef CALLBACK_API( OSStatus , HMControlContentProcPtr )(ControlRef inControl, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentRec *ioHelpContent);
+typedef CALLBACK_API( OSStatus , HMWindowContentProcPtr )(WindowRef inWindow, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentRec *ioHelpContent);
+typedef CALLBACK_API( OSStatus , HMMenuTitleContentProcPtr )(MenuRef inMenu, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentRec *ioHelpContent);
+typedef CALLBACK_API( OSStatus , HMMenuItemContentProcPtr )(const MenuTrackingData *inTrackingData, HMContentRequest inRequest, HMContentProvidedType *outContentProvided, HMHelpContentRec *ioHelpContent);
 typedef STACK_UPP_TYPE(HMControlContentProcPtr)                 HMControlContentUPP;
 typedef STACK_UPP_TYPE(HMWindowContentProcPtr)                  HMWindowContentUPP;
 typedef STACK_UPP_TYPE(HMMenuTitleContentProcPtr)               HMMenuTitleContentUPP;
@@ -378,7 +478,7 @@ InvokeHMControlContentUPP(
   Point                    inGlobalMouse,
   HMContentRequest         inRequest,
   HMContentProvidedType *  outContentProvided,
-  HMHelpContentPtr         ioHelpContent,
+  HMHelpContentRec *       ioHelpContent,
   HMControlContentUPP      userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -395,7 +495,7 @@ InvokeHMWindowContentUPP(
   Point                    inGlobalMouse,
   HMContentRequest         inRequest,
   HMContentProvidedType *  outContentProvided,
-  HMHelpContentPtr         ioHelpContent,
+  HMHelpContentRec *       ioHelpContent,
   HMWindowContentUPP       userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -411,7 +511,7 @@ InvokeHMMenuTitleContentUPP(
   MenuRef                  inMenu,
   HMContentRequest         inRequest,
   HMContentProvidedType *  outContentProvided,
-  HMHelpContentPtr         ioHelpContent,
+  HMHelpContentRec *       ioHelpContent,
   HMMenuTitleContentUPP    userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
@@ -427,13 +527,44 @@ InvokeHMMenuItemContentUPP(
   const MenuTrackingData *  inTrackingData,
   HMContentRequest          inRequest,
   HMContentProvidedType *   outContentProvided,
-  HMHelpContentPtr          ioHelpContent,
+  HMHelpContentRec *        ioHelpContent,
   HMMenuItemContentUPP      userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline HMControlContentUPP                                  NewHMControlContentUPP(HMControlContentProcPtr userRoutine) { return userRoutine; }
+    inline HMWindowContentUPP                                   NewHMWindowContentUPP(HMWindowContentProcPtr userRoutine) { return userRoutine; }
+    inline HMMenuTitleContentUPP                                NewHMMenuTitleContentUPP(HMMenuTitleContentProcPtr userRoutine) { return userRoutine; }
+    inline HMMenuItemContentUPP                                 NewHMMenuItemContentUPP(HMMenuItemContentProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeHMControlContentUPP(HMControlContentUPP) { }
+    inline void                                                 DisposeHMWindowContentUPP(HMWindowContentUPP) { }
+    inline void                                                 DisposeHMMenuTitleContentUPP(HMMenuTitleContentUPP) { }
+    inline void                                                 DisposeHMMenuItemContentUPP(HMMenuItemContentUPP) { }
+    inline OSStatus                                             InvokeHMControlContentUPP(ControlRef inControl, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType * outContentProvided, HMHelpContentRec * ioHelpContent, HMControlContentUPP userUPP) { return (*userUPP)(inControl, inGlobalMouse, inRequest, outContentProvided, ioHelpContent); }
+    inline OSStatus                                             InvokeHMWindowContentUPP(WindowRef inWindow, Point inGlobalMouse, HMContentRequest inRequest, HMContentProvidedType * outContentProvided, HMHelpContentRec * ioHelpContent, HMWindowContentUPP userUPP) { return (*userUPP)(inWindow, inGlobalMouse, inRequest, outContentProvided, ioHelpContent); }
+    inline OSStatus                                             InvokeHMMenuTitleContentUPP(MenuRef inMenu, HMContentRequest inRequest, HMContentProvidedType * outContentProvided, HMHelpContentRec * ioHelpContent, HMMenuTitleContentUPP userUPP) { return (*userUPP)(inMenu, inRequest, outContentProvided, ioHelpContent); }
+    inline OSStatus                                             InvokeHMMenuItemContentUPP(const MenuTrackingData * inTrackingData, HMContentRequest inRequest, HMContentProvidedType * outContentProvided, HMHelpContentRec * ioHelpContent, HMMenuItemContentUPP userUPP) { return (*userUPP)(inTrackingData, inRequest, outContentProvided, ioHelpContent); }
+  #else
+    #define NewHMControlContentUPP(userRoutine)                 ((HMControlContentUPP)userRoutine)
+    #define NewHMWindowContentUPP(userRoutine)                  ((HMWindowContentUPP)userRoutine)
+    #define NewHMMenuTitleContentUPP(userRoutine)               ((HMMenuTitleContentUPP)userRoutine)
+    #define NewHMMenuItemContentUPP(userRoutine)                ((HMMenuItemContentUPP)userRoutine)
+    #define DisposeHMControlContentUPP(userUPP)
+    #define DisposeHMWindowContentUPP(userUPP)
+    #define DisposeHMMenuTitleContentUPP(userUPP)
+    #define DisposeHMMenuItemContentUPP(userUPP)
+    #define InvokeHMControlContentUPP(inControl, inGlobalMouse, inRequest, outContentProvided, ioHelpContent, userUPP) (*userUPP)(inControl, inGlobalMouse, inRequest, outContentProvided, ioHelpContent)
+    #define InvokeHMWindowContentUPP(inWindow, inGlobalMouse, inRequest, outContentProvided, ioHelpContent, userUPP) (*userUPP)(inWindow, inGlobalMouse, inRequest, outContentProvided, ioHelpContent)
+    #define InvokeHMMenuTitleContentUPP(inMenu, inRequest, outContentProvided, ioHelpContent, userUPP) (*userUPP)(inMenu, inRequest, outContentProvided, ioHelpContent)
+    #define InvokeHMMenuItemContentUPP(inTrackingData, inRequest, outContentProvided, ioHelpContent, userUPP) (*userUPP)(inTrackingData, inRequest, outContentProvided, ioHelpContent)
+  #endif
+#endif
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* API                                                                                      */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Help Menu */
+#if !__LP64__
 /*
  *  HMGetHelpMenu()
  *  
@@ -453,7 +584,7 @@ InvokeHMMenuItemContentUPP(
  *      first item added by the application. This parameter may be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -465,8 +596,7 @@ HMGetHelpMenu(
 
 /* Installing/Retrieving Content */
 /* Menu title and item help tags are not supported by CarbonLib. They are fully supported on Mac OS X. */
-/* Pass NULL for the inContent parameter of HMSetControl/Window/MenuItemHelpContent to remove help content
-       from a control, window, or menu. */
+/* Pass NULL for the inContent parameter of these APIs to remove help content from a control, window, or menu. */
 /*
  *  HMSetControlHelpContent()
  *  
@@ -474,7 +604,7 @@ HMGetHelpMenu(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -491,7 +621,7 @@ HMSetControlHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -508,7 +638,7 @@ HMGetControlHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -525,7 +655,7 @@ HMSetWindowHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -542,7 +672,7 @@ HMGetWindowHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -560,7 +690,7 @@ HMSetMenuItemHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -579,7 +709,7 @@ HMGetMenuItemHelpContent(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -596,7 +726,7 @@ HMInstallControlContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -613,7 +743,7 @@ HMInstallWindowContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -630,7 +760,7 @@ HMInstallMenuTitleContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -647,7 +777,7 @@ HMInstallMenuItemContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -664,7 +794,7 @@ HMGetControlContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -681,7 +811,7 @@ HMGetWindowContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -698,7 +828,7 @@ HMGetMenuTitleContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -716,7 +846,7 @@ HMGetMenuItemContentCallback(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -731,7 +861,7 @@ HMAreHelpTagsDisplayed(void)                                  AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -746,7 +876,7 @@ HMSetHelpTagsDisplayed(Boolean inDisplayTags)                 AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -761,62 +891,12 @@ HMSetTagDelay(Duration inDelay)                               AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 HMGetTagDelay(Duration * outDelay)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/* Compatibility */
-/*
- *  HMSetMenuHelpFromBalloonRsrc()
- *  
- *  Summary:
- *    Not really implemented.
- *  
- *  Discussion:
- *    Though this API is exported from CarbonLib and Mac OS X, it is
- *    completely non-functional. We have no plans to implement it.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HMSetMenuHelpFromBalloonRsrc(
-  MenuRef   inMenu,
-  SInt16    inHmnuRsrcID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  HMSetDialogHelpFromBalloonRsrc()
- *  
- *  Summary:
- *    Not really implemented.
- *  
- *  Discussion:
- *    Though this API is exported from CarbonLib and Mac OS X, it is
- *    completely non-functional. We have no plans to implement it.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HMSetDialogHelpFromBalloonRsrc(
-  DialogRef   inDialog,
-  SInt16      inHdlgRsrcID,
-  SInt16      inItemStart)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Displaying tags */
@@ -827,12 +907,15 @@ HMSetDialogHelpFromBalloonRsrc(
  *    Displays a help tag at a user-defined location.
  *  
  *  Discussion:
- *    Note that HMDisplayTag does not currently retain the help content
- *    that is passed to it, nor release it when the tag is closed. Your
- *    application must ensure that the help content remains valid as
- *    long as the tag may be visible (which effectively means that your
- *    application should never dispose of help content that is passed
- *    to HMDisplayTag).
+ *    Prior to Mac OS X 10.4, HMDisplayTag does not retain the help
+ *    content that is passed to it, nor release it when the tag is
+ *    closed. Your application must ensure that the help content
+ *    remains valid as long as the tag may be visible (which
+ *    effectively means that your application should never dispose of
+ *    help content that is passed to HMDisplayTag). In Mac OS X 10.4
+ *    and later, HMDisplayTag makes a copy of the content and releases
+ *    the copy when the tag closes, so you can release the content
+ *    after HMDisplayTag returns.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -846,7 +929,7 @@ HMSetDialogHelpFromBalloonRsrc(
  *    An OSStatus code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -868,13 +951,15 @@ HMDisplayTag(const HMHelpContentRec * inContent)              AVAILABLE_MAC_OS_X
  *    An OSStatus code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 HMHideTag(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 /*
@@ -897,6 +982,7 @@ enum {
   kHMHideTagImmediately         = 1 << 1
 };
 
+#if !__LP64__
 /*
  *  HMHideTagWithOptions()
  *  
@@ -918,7 +1004,7 @@ enum {
  *    tag currently visible.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -926,9 +1012,68 @@ extern OSStatus
 HMHideTagWithOptions(OptionBits inOptions)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+/*--------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED                                                                        */
+/*                                                                                      */
+/*  All functions below this point are either deprecated (they continue to function     */
+/*  but are not the most modern nor most efficient solution to a problem), or they are  */
+/*  completely unavailable on Mac OS X.                                                 */
+/*--------------------------------------------------------------------------------------*/
+/*
+ *  HMSetMenuHelpFromBalloonRsrc()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Though this API is exported from CarbonLib and Mac OS X, it is
+ *    completely non-functional.
+ *  
+ *  Summary:
+ *    Not really implemented.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HMSetMenuHelpFromBalloonRsrc(
+  MenuRef   inMenu,
+  SInt16    inHmnuRsrcID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-#pragma options align=reset
+/*
+ *  HMSetDialogHelpFromBalloonRsrc()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Though this API is exported from CarbonLib and Mac OS X, it is
+ *    completely non-functional.
+ *  
+ *  Summary:
+ *    Not really implemented.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HMSetDialogHelpFromBalloonRsrc(
+  DialogRef   inDialog,
+  SInt16      inHdlgRsrcID,
+  SInt16      inItemStart)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+
+
+#endif  /* !__LP64__ */
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

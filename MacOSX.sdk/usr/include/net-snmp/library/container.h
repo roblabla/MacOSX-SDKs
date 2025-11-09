@@ -2,7 +2,7 @@
 #define NETSNMP_CONTAINER_H
 
 /*
- * $Id: container.h,v 1.25 2004/09/14 02:29:16 rstory Exp $
+ * $Id: container.h 13803 2005-12-04 18:43:04Z rstory $
  *
  * WARNING: This is a recently created file, and all of it's contents are
  *          subject to change at any time.
@@ -33,10 +33,16 @@ extern "C" {
     /*
      * function returning an int for an operation on a container
      */
-    typedef int (netsnmp_container_rc)(struct netsnmp_container_s *);
+    typedef int (netsnmp_container_option)(struct netsnmp_container_s *,
+                                           int set, u_int flags);
 
     /*
      * function returning an int for an operation on a container
+     */
+    typedef int (netsnmp_container_rc)(struct netsnmp_container_s *);
+
+    /*
+     * function returning an iterator for a container
      */
     typedef struct netsnmp_iterator_s * (netsnmp_container_it)
         (struct netsnmp_container_s *);
@@ -66,7 +72,7 @@ extern "C" {
     typedef void (netsnmp_container_obj_func)(void *data, void *context);
 
     /*
-     * function with no return which acts on an object
+     * function with no return which calls a function on an object
      */
     typedef void (netsnmp_container_func)(struct netsnmp_container_s *,
                                           netsnmp_container_obj_func *,
@@ -176,6 +182,16 @@ extern "C" {
        netsnmp_container_func         *clear;
 
        /*
+        * OPTIONAL function to filter inserts to the container
+        *  (intended for a secondary container, which only wants
+        *   a sub-set of the objects in the primary/parent container)
+        * Returns:
+        *   1 : filter matched (don't insert)
+        *   0 : no match (insert)
+        */
+       netsnmp_container_op    *insert_filter;
+
+       /*
         * function to compare two object stored in the container.
         *
         * Returns:
@@ -192,9 +208,20 @@ extern "C" {
        netsnmp_container_compare        *ncompare;
 
        /*
+        * function to set container options
+        */
+       netsnmp_container_option         *options;
+
+       /*
         * unique name for finding a particular container in a list
         */
        char *container_name;
+
+       /*
+        * sort count, for iterators to track (insert/delete
+        * bumps coutner, invalidates iterator
+        */
+       u_long                          sync;
 
        /*
         * containers can contain other containers (additional indexes)
@@ -213,6 +240,9 @@ extern "C" {
     /*
      * register a new container factory
      */
+    int netsnmp_container_register_with_compare(const char* name,
+                                                netsnmp_factory *f,
+                                                netsnmp_container_compare *c);
     int netsnmp_container_register(const char* name, netsnmp_factory *f);
 
     /*
@@ -246,8 +276,32 @@ extern "C" {
     int netsnmp_compare_mem(const char * lhs, size_t lhs_len,
                             const char * rhs, size_t rhs_len);
 
+    /** no structure, just 'char *' pointers */
+    int netsnmp_compare_direct_cstring(const void * lhs, const void * rhs);
+
     /** for_each callback to call free on data item */
     void  netsnmp_container_simple_free(void *data, void *context);
+
+/*
+ * container optionflags
+ */
+#define CONTAINER_KEY_ALLOW_DUPLICATES             0x00000001
+#define CONTAINER_KEY_UNSORTED                     0x00000002
+
+#define CONTAINER_SET_OPTIONS(x,o,rc)  do {                             \
+        if (NULL==(x)->options)                                         \
+            rc = -1;                                                    \
+        else                                                            \
+            rc = (x)->options(x, 1, o);                                 \
+    } while(0)
+
+#define CONTAINER_CHECK_OPTION(x,o,rc)    do {                          \
+        if (NULL==(x)->options)                                         \
+            rc = -1;                                                    \
+        else                                                            \
+            rc = (x)->options(x,0, o);                                  \
+    } while(0)
+
 
     /*
      * useful macros (x = container; k = key; c = user context)
@@ -307,13 +361,16 @@ extern "C" {
         /** start at first container */
         while(x->prev)
             x = x->prev;
-        while(x) {
+        for(; x; x = x->next) {
+            if ((NULL != x->insert_filter) &&
+                (x->insert_filter(x,k) == 1))
+                continue;
             rc2 = x->insert(x,k);
             if (rc2) {
-                snmp_log(LOG_ERR,"error on subcontainer insert (%d)\n", rc2);
+                snmp_log(LOG_ERR,"error on subcontainer '%s' insert (%d)\n",
+                         x->container_name ? x->container_name : "", rc2);
                 rc = rc2;
             }
-            x = x->next;
         }
         return rc;
     }
@@ -332,7 +389,8 @@ extern "C" {
             x = x->next;
         while(x) {
             rc2 = x->remove(x,k);
-            if (rc2) {
+            /** ignore remove errors if there is a filter in place */
+            if ((rc2) && (NULL == x->insert_filter)) {
                 snmp_log(LOG_ERR,"error on subcontainer remove (%d)\n", rc2);
                 rc = rc2;
             }
@@ -431,28 +489,42 @@ extern "C" {
     typedef int (netsnmp_iterator_rc)(struct netsnmp_iterator_s *);
 
     /*
-     * function returning an int for an operation on an iterator and
-     * an object in the container.
-     */
-    typedef int (netsnmp_iterator_rc_op)(struct netsnmp_iterator_s *,
-                                         void *data);
-
-    /*
      * function returning an oject for an operation on an iterator
      */
     typedef void * (netsnmp_iterator_rtn)(struct netsnmp_iterator_s *);
 
+
+    /*
+     * iterator structure
+     */
     typedef struct netsnmp_iterator_s {
 
        netsnmp_container              *container;
 
-       void                           *context;
+        /*
+         * sync from container when iterator created. used to invalidate
+         * the iterator when the container changes.
+         */
+       u_long                          sync;
 
-       netsnmp_iterator_rc           *init;
-       netsnmp_iterator_rc_op        *position;
+        /*
+         * reset iterator position to beginning of container.
+         */
+       netsnmp_iterator_rc           *reset;
+
+        /*
+         * release iterator and memory it uses
+         */
+       netsnmp_iterator_rc           *release;
+
+        /*
+         * first, last and current DO NOT advance the iterator
+         */
        netsnmp_iterator_rtn          *first;
-       netsnmp_iterator_rtn          *next;
+       netsnmp_iterator_rtn          *curr;
        netsnmp_iterator_rtn          *last;
+
+       netsnmp_iterator_rtn          *next;
 
     } netsnmp_iterator;
 
@@ -460,35 +532,7 @@ extern "C" {
 #define ITERATOR_FIRST(x)  x->first(x)
 #define ITERATOR_NEXT(x)   x->next(x)
 #define ITERATOR_LAST(x)   x->last(x)
-
-
-    /*************************************************************************
-     *
-     * Sorted container
-     *
-     *************************************************************************/
-    typedef struct netsnmp_sorted_container_s {
-       
-       netsnmp_container                bc;
-       
-       /*
-        * methods to manipulate container
-        */
-
-       netsnmp_container_rtn            *first;
-       netsnmp_container_rtn            *next;
-       netsnmp_container_set            *subset;
-       
-    } netsnmp_sorted_container;
-    
-
-    void
-    netsnmp_init_sorted_container(netsnmp_sorted_container  *sc,
-                                  netsnmp_container_rtn     *first,
-                                  netsnmp_container_rtn     *next,
-                                  netsnmp_container_set     *subset);
-    
-    
+#define ITERATOR_RELEASE(x) do { x->release(x); x = NULL; } while(0)
     
 #ifdef  __cplusplus
 }

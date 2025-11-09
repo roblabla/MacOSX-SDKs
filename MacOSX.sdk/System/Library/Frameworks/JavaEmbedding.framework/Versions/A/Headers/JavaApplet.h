@@ -3,7 +3,7 @@
  
      Contains:   interface to embedding a Java Applet in a Carbon Control
  
-     Version:    JavaEmbedding-34~361
+     Version:    JavaEmbeddingStub-2~225
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint on
@@ -392,7 +392,7 @@ RegisterShowDocumentCallback(
     #pragma enumsalwaysint reset
 #endif
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,7 @@
 #import <ApplicationServices/ApplicationServices.h>
 #import <QuartzCore/CVImageBuffer.h>
 
-@class NSData, NSURL, NSDictionary, CIContext, CIFilterShape;
+@class NSData, NSURL, NSDictionary, CIContext, CIFilterShape, CIColor;
 
 @interface CIImage : NSObject <NSCoding, NSCopying>
 {
@@ -69,6 +69,14 @@ extern NSString *kCIImageColorSpace AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 + (CIImage *)imageWithCVImageBuffer:(CVImageBufferRef)imageBuffer
     options:(NSDictionary *)dict;
 
+/* Return or initialize a new image with an infinite amount of the color
+ * 'color'. */
+
++ (CIImage *)imageWithColor:(CIColor *)color;
+
+/* Create an empty Image. */
++ (CIImage *)emptyImage;
+
 /* Initializers. */
 
 - (id)initWithCGImage:(CGImageRef)image;
@@ -93,10 +101,16 @@ extern NSString *kCIImageColorSpace AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer
     options:(NSDictionary *)dict;
 
+- (id)initWithColor:(CIColor *)color;
+
 /* Returns a new image representing the original image with the transform
  * 'matrix' appended to it. */
 
 - (CIImage *)imageByApplyingTransform:(CGAffineTransform)matrix;
+
+/* Return a new image cropped to the rectangle or shape. */
+
+- (CIImage *)imageByCroppingToRect:(CGRect)r;
 
 /* The extent of the image in world coordinates. */
 

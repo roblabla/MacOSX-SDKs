@@ -3,7 +3,7 @@
  
      Contains:   Interface to API for using the NSL User Interface
  
-     Version:    CommonPanels-73.2~861
+     Version:    CommonPanels-87~138
  
      Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef UInt32 NSLDialogOptionFlags;
 enum {
@@ -132,6 +132,24 @@ InvokeNSLEventUPP(
   EventRecord *  newEvent,
   void *         userContext,
   NSLEventUPP    userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline NSLURLFilterUPP                                      NewNSLURLFilterUPP(NSLURLFilterProcPtr userRoutine) { return userRoutine; }
+    inline NSLEventUPP                                          NewNSLEventUPP(NSLEventProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeNSLURLFilterUPP(NSLURLFilterUPP) { }
+    inline void                                                 DisposeNSLEventUPP(NSLEventUPP) { }
+    inline Boolean                                              InvokeNSLURLFilterUPP(char * url, Str255 displayString, NSLURLFilterUPP userUPP) { return (*userUPP)(url, displayString); }
+    inline void                                                 InvokeNSLEventUPP(EventRecord * newEvent, void * userContext, NSLEventUPP userUPP) { (*userUPP)(newEvent, userContext); }
+  #else
+    #define NewNSLURLFilterUPP(userRoutine)                     ((NSLURLFilterUPP)userRoutine)
+    #define NewNSLEventUPP(userRoutine)                         ((NSLEventUPP)userRoutine)
+    #define DisposeNSLURLFilterUPP(userUPP)
+    #define DisposeNSLEventUPP(userUPP)
+    #define InvokeNSLURLFilterUPP(url, displayString, userUPP)  (*userUPP)(url, displayString)
+    #define InvokeNSLEventUPP(newEvent, userContext, userUPP)   (*userUPP)(newEvent, userContext)
+  #endif
+#endif
 
 
 /* <--- function returns OSStatus of the operation.  noErr will be returned if valid, kNSLUserCanceled will be returned if the user cancels */
@@ -279,7 +297,7 @@ NSLSaveURLAliasToFolder(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

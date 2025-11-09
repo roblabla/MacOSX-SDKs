@@ -19,7 +19,11 @@
 
 #include <TargetConditionals.h>
 
+#if TARGET_OS_IPHONE
+#include <CoreGraphics/CoreGraphics.h>
+#else
 #include <ApplicationServices/ApplicationServices.h>
+#endif
 #include <CoreVideo/CVBuffer.h>
 
 #if defined(__cplusplus)
@@ -52,12 +56,44 @@ CV_EXPORT const CFStringRef kCVImageBufferDisplayDimensionsKey AVAILABLE_MAC_OS_
 CV_EXPORT const CFStringRef	kCVImageBufferDisplayWidthKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber
 CV_EXPORT const CFStringRef	kCVImageBufferDisplayHeightKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber
 
-CV_EXPORT const CFStringRef kCVImageBufferGammaLevelKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber describing the gamma level
+CV_EXPORT const CFStringRef kCVImageBufferGammaLevelKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber describing the gamma level, used in absence of (or ignorance of) kCVImageBufferTransferFunctionKey
+
+CV_EXPORT const CFStringRef kCVImageBufferICCProfileKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;				// CFData representation of the ICC profile
+
 CV_EXPORT const CFStringRef kCVImageBufferYCbCrMatrixKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFString describing the color matrix for YCbCr->RGB. This key can be one of the following values:
 CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFString
 CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_601_4 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFString
 CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_SMPTE_240M_1995 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
 
+CV_EXPORT const CFStringRef kCVImageBufferColorPrimariesKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;				// CFString describing the color primaries. This key can be one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_EBU_3213 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_SMPTE_C AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+CV_EXPORT const CFStringRef kCVImageBufferTransferFunctionKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;				// CFString describing the transfer function. This key can be one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_240M_1995 AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_UseGamma AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_EBU_3213 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;			// Should not be used.
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_C AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;			// Should not be used.
+
+/* Chroma siting information. For progressive images, only the TopField value is used. */
+CV_EXPORT const CFStringRef kCVImageBufferChromaLocationTopFieldKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			// CFString with one of the following CFString values
+CV_EXPORT const CFStringRef kCVImageBufferChromaLocationBottomFieldKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		// CFString with one of the following CFString values
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Left AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally co-sited with the left column of luma samples, but centered vertically.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Center AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is fully centered
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_TopLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is co-sited with the top-left luma sample.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Top AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally centered, but co-sited with the top row of luma samples.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_BottomLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		    // Chroma sample is co-sited with the bottom-left luma sample.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Bottom AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally centered, but co-sited with the bottom row of luma samples.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_DV420 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Cr and Cb samples are alternately co-sited with the left luma samples of the same field.
+
+// These describe the format of the original subsampled data before conversion to 422/2vuy.   In order to use
+// these tags, the data must have been converted to 4:2:2 via simple pixel replication.
+CV_EXPORT const CFStringRef kCVImageBufferChromaSubsamplingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		// CFString/CFNumber with one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_420 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_422 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_411 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #pragma mark CVImageBufferRef
 

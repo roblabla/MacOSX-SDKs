@@ -3,7 +3,7 @@
  
      Contains:   Time Manager interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 
@@ -428,10 +428,22 @@ InvokeTimerUPP(
   TMTaskPtr  tmTaskPtr,
   TimerUPP   userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline TimerUPP                                             NewTimerUPP(TimerProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeTimerUPP(TimerUPP) { }
+    inline void                                                 InvokeTimerUPP(TMTaskPtr tmTaskPtr, TimerUPP userUPP) { (*userUPP)(tmTaskPtr); }
+  #else
+    #define NewTimerUPP(userRoutine)                            ((TimerUPP)userRoutine)
+    #define DisposeTimerUPP(userUPP)
+    #define InvokeTimerUPP(tmTaskPtr, userUPP)                  (*userUPP)(tmTaskPtr)
+  #endif
+#endif
 
 
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

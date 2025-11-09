@@ -1,6 +1,6 @@
 /*
-    File:		IOBluetoothPairingController.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+	File:		IOBluetoothPairingController.h
+	Copyright (c) 2002-2006 Apple Computer, Inc. All rights reserved.
 */
  
 #import <Cocoa/Cocoa.h>
@@ -9,21 +9,22 @@
 #import <IOBluetoothUI/IOBluetoothUIUserLib.h>
 
 //--------------------------------------------------------------------------------------------------------------------------
-/*!	@header		IOBluetoothPairingController.h
-	@abstract	Public Interfaces for Apple's implementation of a pairing window for Bluetooth technology.
-	@discussion	This implements a WindowController accessible from Cocoa applications to select a device, and
-                        initiate pairing.
+/*!	@header			IOBluetoothPairingController.h
+	@abstract		Public Interfaces for Apple's implementation of a pairing window for Bluetooth technology.
+	@discussion		This implements a WindowController accessible from Cocoa applications to select a device, and
+					initiate pairing.
 */
 
 
 /*!
- 	@class IOBluetoothPairingController
-	@abstract A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
-	@discussion Implementation of a window controller to handle pairing with a bluetooth device.  This
-        class will handle connecting to the Bluetooth Daemon for the purposes of searches, and displaying the results.
-        When necessary this class will display a sheet asking the user for a PIN code.  This window will not return
-        anything to the caller if it is canceled or if pairing occurs.
+ 	@class			IOBluetoothPairingController
+	@abstract		A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
+	@discussion		Implementation of a window controller to handle pairing with a bluetooth device.  This
+					class will handle connecting to the Bluetooth Daemon for the purposes of searches, and displaying the results.
+					When necessary this class will display a sheet asking the user for a PIN code.  This window will not return
+					anything to the caller if it is canceled or if pairing occurs.
 */
+
 @interface IOBluetoothPairingController : NSWindowController
 {
 }
@@ -35,7 +36,7 @@
 	@discussion	Method call to instantiate a new IOBluetoothPairingController object.
 	@result		An IOBluetoothPairingController instance.  Call runPanelWithAttributes
         
-                        Success - a new instance of the Paring Controller
+                        Success - a new instance of the Pairing Controller
         
                         Failure	- nil
 */
@@ -62,7 +63,7 @@
 				When called this routine will display the PairingController window, using the attributes parameter as a filter of device types to display in the UI.
 	@result		none - runs the panel from a previously created pairing controller.
 */
-- (void)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes;
+- (void)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 

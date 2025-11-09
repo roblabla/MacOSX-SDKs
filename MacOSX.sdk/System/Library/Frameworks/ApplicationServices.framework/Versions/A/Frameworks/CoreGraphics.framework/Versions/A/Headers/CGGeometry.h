@@ -1,5 +1,5 @@
 /* CoreGraphics - CGGeometry.h
- * Copyright (c) 1998-2003 Apple Computer, Inc.
+ * Copyright (c) 1998-2006 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -7,23 +7,23 @@
 #define CGGEOMETRY_H_
 
 #include <CoreGraphics/CGBase.h>
-#include <CoreFoundation/CFByteOrder.h>
+#include <CoreFoundation/CFDictionary.h>
 
 CG_EXTERN_C_BEGIN
 
 /* Points. */
 
 struct CGPoint {
-    float x;
-    float y;
+    CGFloat x;
+    CGFloat y;
 };
 typedef struct CGPoint CGPoint;
 
 /* Sizes. */
 
 struct CGSize {
-    float width;
-    float height;
+    CGFloat width;
+    CGFloat height;
 };
 typedef struct CGSize CGSize;
 
@@ -54,86 +54,87 @@ CG_EXTERN const CGSize CGSizeZero;
 
 CG_EXTERN const CGRect CGRectZero;
 
-/* The "empty" rect.  This is the rectangle returned when, for example, we
- * intersect two disjoint rectangles.  Note that the null rect is not the
+/* The "empty" rect. This is the rectangle returned when, for example, we
+ * intersect two disjoint rectangles. Note that the null rect is not the
  * same as the zero rect. */
 
 CG_EXTERN const CGRect CGRectNull;
 
 /* The infinite rectangle. */
 
-CG_EXTERN const CGRect CGRectInfinite AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CG_EXTERN const CGRect CGRectInfinite
+    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Make a point from `(x, y)'. */
 
-CG_INLINE CGPoint CGPointMake(float x, float y);
+CG_INLINE CGPoint CGPointMake(CGFloat x, CGFloat y);
 
 /* Make a size from `(width, height)'. */
 
-CG_INLINE CGSize CGSizeMake(float width, float height);
+CG_INLINE CGSize CGSizeMake(CGFloat width, CGFloat height);
 
 /* Make a rect from `(x, y; width, height)'. */
 
-CG_INLINE CGRect CGRectMake(float x, float y, float width, float height);
+CG_INLINE CGRect CGRectMake(CGFloat x, CGFloat y, CGFloat width,
+    CGFloat height);
 
 /* Return the leftmost x-value of `rect'. */
 
-CG_EXTERN float CGRectGetMinX(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMinX(CGRect rect);
 
 /* Return the midpoint x-value of `rect'. */
 
-CG_EXTERN float CGRectGetMidX(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMidX(CGRect rect);
 
 /* Return the rightmost x-value of `rect'. */
 
-CG_EXTERN float CGRectGetMaxX(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMaxX(CGRect rect);
 
 /* Return the bottommost y-value of `rect'. */
 
-CG_EXTERN float CGRectGetMinY(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMinY(CGRect rect);
 
 /* Return the midpoint y-value of `rect'. */
 
-CG_EXTERN float CGRectGetMidY(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMidY(CGRect rect);
 
 /* Return the topmost y-value of `rect'. */
 
-CG_EXTERN float CGRectGetMaxY(CGRect rect);
+CG_EXTERN CGFloat CGRectGetMaxY(CGRect rect);
 
 /* Return the width of `rect'. */
 
-CG_EXTERN float CGRectGetWidth(CGRect rect);
+CG_EXTERN CGFloat CGRectGetWidth(CGRect rect);
 
 /* Return the height of `rect'. */
 
-CG_EXTERN float CGRectGetHeight(CGRect rect);
+CG_EXTERN CGFloat CGRectGetHeight(CGRect rect);
 
-/* Return 1 if `point1' and `point2' are the same, 0 otherwise. */
+/* Return true if `point1' and `point2' are the same, false otherwise. */
 
-CG_EXTERN int CGPointEqualToPoint(CGPoint point1, CGPoint point2);
+CG_EXTERN bool CGPointEqualToPoint(CGPoint point1, CGPoint point2);
 
-/* Return 1 if `size1' and `size2' are the same, 0 otherwise. */
+/* Return true if `size1' and `size2' are the same, false otherwise. */
 
-CG_EXTERN int CGSizeEqualToSize(CGSize size1, CGSize size2);
+CG_EXTERN bool CGSizeEqualToSize(CGSize size1, CGSize size2);
 
-/* Return 1 if `rect1' and `rect2' are the same, 0 otherwise. */
+/* Return true if `rect1' and `rect2' are the same, false otherwise. */
 
-CG_EXTERN int CGRectEqualToRect(CGRect rect1, CGRect rect2);
+CG_EXTERN bool CGRectEqualToRect(CGRect rect1, CGRect rect2);
 
 /* Standardize `rect' -- i.e., convert it to an equivalent rect which has
  * positive width and height. */
 
 CG_EXTERN CGRect CGRectStandardize(CGRect rect);
 
-/* Return 1 if `rect' is empty -- i.e., if it has zero width or height.  A
- * null rect is defined to be empty. */
+/* Return true if `rect' is empty (that is, if it has zero width or
+ * height), false otherwise. A null rect is defined to be empty. */
 
-CG_EXTERN int CGRectIsEmpty(CGRect rect);
+CG_EXTERN bool CGRectIsEmpty(CGRect rect);
 
-/* Return 1 if `rect' is null -- e.g., the result of intersecting two
- * disjoint rectangles is a null rect. */
+/* Return true if `rect' is the null rectangle, false otherwise. */
 
-CG_EXTERN int CGRectIsNull(CGRect rect);
+CG_EXTERN bool CGRectIsNull(CGRect rect);
 
 /* Return true if `rect' is the infinite rectangle, false otherwise. */
 
@@ -142,7 +143,7 @@ CG_EXTERN bool CGRectIsInfinite(CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND
 /* Inset `rect' by `(dx, dy)' -- i.e., offset its origin by `(dx, dy)', and
  * decrease its size by `(2*dx, 2*dy)'. */
 
-CG_EXTERN CGRect CGRectInset(CGRect rect, float dx, float dy);
+CG_EXTERN CGRect CGRectInset(CGRect rect, CGFloat dx, CGFloat dy);
 
 /* Expand `rect' to the smallest rect containing it with integral origin
  * and size. */
@@ -153,52 +154,94 @@ CG_EXTERN CGRect CGRectIntegral(CGRect rect);
 
 CG_EXTERN CGRect CGRectUnion(CGRect r1, CGRect r2);
 
-/* Return the intersection of `r1' and `r2'.  This may return a null
+/* Return the intersection of `r1' and `r2'. This may return a null
  * rect. */
 
 CG_EXTERN CGRect CGRectIntersection(CGRect r1, CGRect r2);
 
 /* Offset `rect' by `(dx, dy)'. */
 
-CG_EXTERN CGRect CGRectOffset(CGRect rect, float dx, float dy);
+CG_EXTERN CGRect CGRectOffset(CGRect rect, CGFloat dx, CGFloat dy);
 
 /* Make two new rectangles, `slice' and `remainder', by dividing `rect'
  * with a line that's parallel to one of its sides, specified by `edge' --
  * either `CGRectMinXEdge', `CGRectMinYEdge', `CGRectMaxXEdge', or
- * `CGRectMaxYEdge'.  The size of `slice' is determined by `amount', which
+ * `CGRectMaxYEdge'. The size of `slice' is determined by `amount', which
  * measures the distance from the specified edge. */
 
-CG_EXTERN void CGRectDivide(CGRect rect, CGRect *slice, CGRect *remainder, float amount, CGRectEdge edge);
+CG_EXTERN void CGRectDivide(CGRect rect, CGRect *slice, CGRect *remainder,
+    CGFloat amount, CGRectEdge edge);
 
-/* Return 1 if `point' is contained in `rect', 0 otherwise. */
+/* Return true if `point' is contained in `rect', false otherwise. */
 
-CG_EXTERN int CGRectContainsPoint(CGRect rect, CGPoint point);
+CG_EXTERN bool CGRectContainsPoint(CGRect rect, CGPoint point);
 
-/* Return 1 if `rect2' is contained in `rect1', 0 otherwise.  `rect2' is
- * contained in `rect1' if the union of `rect1' and `rect2' is equal to
+/* Return true if `rect2' is contained in `rect1', false otherwise. `rect2'
+ * is contained in `rect1' if the union of `rect1' and `rect2' is equal to
  * `rect1'. */
 
-CG_EXTERN int CGRectContainsRect(CGRect rect1, CGRect rect2);
+CG_EXTERN bool CGRectContainsRect(CGRect rect1, CGRect rect2);
 
-/* Return 1 if `rect1' intersects `rect2', 0 otherwise.  `rect1' intersects
- * `rect2' if the intersection of `rect1' and `rect2' is not the null
- * rect. */
+/* Return true if `rect1' intersects `rect2', false otherwise. `rect1'
+ * intersects `rect2' if the intersection of `rect1' and `rect2' is not the
+ * null rect. */
 
-CG_EXTERN int CGRectIntersectsRect(CGRect rect1, CGRect rect2);
+CG_EXTERN bool CGRectIntersectsRect(CGRect rect1, CGRect rect2);
+
+/*** Persistent representations. ***/
+
+/* Return a dictionary representation of `point'. */
+
+CG_EXTERN CFDictionaryRef CGPointCreateDictionaryRepresentation(CGPoint point)
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Make a CGPoint from the contents of `dict' (presumably returned earlier
+ * from `CGPointCreateDictionaryRepresentation') and store the value in
+ * `point'. Returns true on success; false otherwise. */
+
+CG_EXTERN bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict,
+    CGPoint *point) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Return a dictionary representation of `size'. */
+
+CG_EXTERN CFDictionaryRef CGSizeCreateDictionaryRepresentation(CGSize size)
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Make a CGSize from the contents of `dict' (presumably returned earlier
+ * from `CGSizeCreateDictionaryRepresentation') and store the value in
+ * `size'. Returns true on success; false otherwise. */
+
+CG_EXTERN bool CGSizeMakeWithDictionaryRepresentation(CFDictionaryRef dict,
+    CGSize *size) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Return a dictionary representation of `rect'. */
+
+CG_EXTERN CFDictionaryRef CGRectCreateDictionaryRepresentation(CGRect)
+    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/* Make a CGRect from the contents of `dict' (presumably returned earlier
+ * from `CGRectCreateDictionaryRepresentation') and store the value in
+ * `rect'. Returns true on success; false otherwise. */
+
+CG_EXTERN bool CGRectMakeWithDictionaryRepresentation(CFDictionaryRef dict,
+    CGRect *rect) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*** Definitions of inline functions. ***/
 
-CG_INLINE CGPoint CGPointMake(float x, float y)
+CG_INLINE CGPoint
+CGPointMake(CGFloat x, CGFloat y)
 {
     CGPoint p; p.x = x; p.y = y; return p;
 }
 
-CG_INLINE CGSize CGSizeMake(float width, float height)
+CG_INLINE CGSize
+CGSizeMake(CGFloat width, CGFloat height)
 {
     CGSize size; size.width = width; size.height = height; return size;
 }
 
-CG_INLINE CGRect CGRectMake(float x, float y, float width, float height)
+CG_INLINE CGRect
+CGRectMake(CGFloat x, CGFloat y, CGFloat width, CGFloat height)
 {
     CGRect rect;
     rect.origin.x = x; rect.origin.y = y;

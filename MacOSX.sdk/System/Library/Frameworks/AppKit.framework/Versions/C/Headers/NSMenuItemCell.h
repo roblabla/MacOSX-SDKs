@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -9,7 +9,9 @@
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSMenuItem.h>
 
+#if ! __LP64__
 @class NSMenuView;
+#endif
 
 @interface NSMenuItemCell : NSButtonCell {
     /*All instance variables are private*/
@@ -22,7 +24,7 @@
     NSSize _size;
     struct __micFlags {
         unsigned int needsSizing:1;
-        unsigned int highlighted:1;
+        unsigned int reserved:1;
         unsigned int needsDisplay:1;
         unsigned int keyEquivGlyphWidth:16;
         unsigned int RESERVED:13;
@@ -31,11 +33,11 @@
 
 - (void)setMenuItem:(NSMenuItem *)item;
 - (NSMenuItem *)menuItem;
+
+#if ! __LP64__
 - (void)setMenuView:(NSMenuView *)menuView;
 - (NSMenuView *)menuView;
-
-- (void)setHighlighted:(BOOL)flag;
-- (BOOL)isHighlighted;
+#endif
 
 - (void)setNeedsSizing:(BOOL)flag;
 - (BOOL)needsSizing;
@@ -44,13 +46,12 @@
 - (void)setNeedsDisplay:(BOOL)flag;
 - (BOOL)needsDisplay;
 
-- (float)stateImageWidth;
-- (float)imageWidth;
-- (float)titleWidth;
-- (float)keyEquivalentWidth;
+- (CGFloat)stateImageWidth;
+- (CGFloat)imageWidth;
+- (CGFloat)titleWidth;
+- (CGFloat)keyEquivalentWidth;
 
 - (NSRect)stateImageRectForBounds:(NSRect)cellFrame;
-- (NSRect)imageRectForBounds:(NSRect)cellFrame;
 - (NSRect)titleRectForBounds:(NSRect)cellFrame;
 - (NSRect)keyEquivalentRectForBounds:(NSRect)cellFrame;
 
@@ -61,6 +62,6 @@
 - (void)drawKeyEquivalentWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
-- (int)tag;
+- (NSInteger)tag;
 
 @end

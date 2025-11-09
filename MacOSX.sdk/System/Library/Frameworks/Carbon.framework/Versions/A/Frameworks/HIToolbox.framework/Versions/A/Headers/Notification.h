@@ -3,7 +3,7 @@
  
      Contains:   Notification Manager interfaces
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 typedef struct NMRec                    NMRec;
 typedef NMRec *                         NMRecPtr;
@@ -41,14 +41,14 @@ struct NMRec {
   QElemPtr            qLink;                  /* next queue entry*/
   short               qType;                  /* queue type -- ORD(nmType) = 8*/
   short               nmFlags;                /* reserved*/
-  long                nmPrivate;              /* reserved*/
+  SRefCon             nmPrivate;              /* reserved*/
   short               nmReserved;             /* reserved*/
   short               nmMark;                 /* item to mark in Apple menu*/
   Handle              nmIcon;                 /* handle to small icon*/
   Handle              nmSound;                /* handle to sound record*/
   StringPtr           nmStr;                  /* string to appear in alert*/
   NMUPP               nmResp;                 /* pointer to response routine*/
-  long                nmRefCon;               /* for application use*/
+  SRefCon             nmRefCon;               /* for application use*/
 };
 
 /*
@@ -86,6 +86,19 @@ InvokeNMUPP(
   NMRecPtr  nmReqPtr,
   NMUPP     userUPP)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline NMUPP                                                NewNMUPP(NMProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeNMUPP(NMUPP) { }
+    inline void                                                 InvokeNMUPP(NMRecPtr nmReqPtr, NMUPP userUPP) { (*userUPP)(nmReqPtr); }
+  #else
+    #define NewNMUPP(userRoutine)                               ((NMUPP)userRoutine)
+    #define DisposeNMUPP(userUPP)
+    #define InvokeNMUPP(nmReqPtr, userUPP)                      (*userUPP)(nmReqPtr)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  NMInstall()
  *  
@@ -93,7 +106,7 @@ InvokeNMUPP(
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -108,7 +121,7 @@ NMInstall(NMRecPtr nmReqPtr)                                  AVAILABLE_MAC_OS_X
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -117,8 +130,10 @@ NMRemove(NMRecPtr nmReqPtr)                                   AVAILABLE_MAC_OS_X
 
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

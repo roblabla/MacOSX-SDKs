@@ -1,7 +1,7 @@
 /*
         NSCIImageRep.h
         Application Kit
-        Copyright (c) 2003-2005, Apple Computer, Inc.
+        Copyright (c) 2003-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -25,8 +25,8 @@
 @interface CIImage (NSAppKitAdditions)
 - (id)initWithBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
 
-- (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(float)delta;
-- (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(float)delta;
+- (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
+- (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 @end
 
 #endif

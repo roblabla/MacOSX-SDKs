@@ -3,7 +3,7 @@
  
      Contains:   SCSI Family Interfaces.
  
-     Version:    OSServices-101.1~790
+     Version:    OSServices-208~152
  
      Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,8 +36,9 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+#if !__LP64__
 /* TIB opcodes */
 enum {
   scInc                         = 1,
@@ -232,6 +233,18 @@ extern void
 InvokeSCSICallbackUPP(
   void *           scsiPB,
   SCSICallbackUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SCSICallbackUPP                                      NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSCSICallbackUPP(SCSICallbackUPP) { }
+    inline void                                                 InvokeSCSICallbackUPP(void * scsiPB, SCSICallbackUPP userUPP) { (*userUPP)(scsiPB); }
+  #else
+    #define NewSCSICallbackUPP(userRoutine)                     ((SCSICallbackUPP)userRoutine)
+    #define DisposeSCSICallbackUPP(userUPP)
+    #define InvokeSCSICallbackUPP(scsiPB, userUPP)              (*userUPP)(scsiPB)
+  #endif
+#endif
 
 
 
@@ -933,6 +946,7 @@ enum {
 };
 
 
+#if !__LP64__
 /*
  *  SCSIAction()   *** DEPRECATED ***
  *  
@@ -944,13 +958,15 @@ enum {
  *    is no longer being maintained.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.2
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.2
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
 SCSIAction(SCSI_PB * parameterBlock)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  SCSIRegisterBus()
@@ -992,10 +1008,10 @@ SCSIAction(SCSI_PB * parameterBlock)                          AVAILABLE_MAC_OS_X
  */
 
 
+#endif  /* !__LP64__ */
 
 
-
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

@@ -3,7 +3,7 @@
  
      Contains:   Master include for CoreServices (non-UI toolbox)
  
-     Version:    CoreServices-17~2493
+     Version:    CoreServices-32~91
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -16,6 +16,10 @@
 
 #ifndef __CORESERVICES_R__
 #define __CORESERVICES_R__
+
+#ifndef __AE_R__
+#include <AE/AE.r>
+#endif
 
 #ifndef __CARBONCORE_R__
 #include <CarbonCore/CarbonCore.r>

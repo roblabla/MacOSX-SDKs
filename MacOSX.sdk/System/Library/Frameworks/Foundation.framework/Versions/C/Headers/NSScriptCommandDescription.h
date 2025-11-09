@@ -1,6 +1,6 @@
 /*
 	NSScriptCommandDescription.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,11 +12,11 @@
     @private
     NSString *_suiteName;
     NSString *_plistCommandName;
-    unsigned long _classAppleEventCode;
-    unsigned long _idAppleEventCode;
+    FourCharCode _classAppleEventCode;
+    FourCharCode _idAppleEventCode;
     NSString *_objcClassName;
     NSObject *_resultTypeNameOrDescription;
-    unsigned long _plistResultTypeAppleEventCode;
+    FourCharCode _plistResultTypeAppleEventCode;
     id _moreVars;
 }
 
@@ -24,15 +24,15 @@
 */
 - (id)initWithSuiteName:(NSString *)suiteName commandName:(NSString *)commandName dictionary:(NSDictionary *)commandDeclaration;
 
-/* Return the suite name or class name provided at initialization time.
+/* Return the suite name or command name provided at initialization time.
 */
 - (NSString *)suiteName;
 - (NSString *)commandName;
 
 /* Return the four character codes that identify the command in Apple events.
 */
-- (unsigned long)appleEventClassCode;
-- (unsigned long)appleEventCode;
+- (FourCharCode)appleEventClassCode;
+- (FourCharCode)appleEventCode;
 
 /* Return the Objective-C class name for instances of the described command.
 */
@@ -44,7 +44,7 @@
 
 /* Return the four character code that identifies in Apple events the declared type of the result of execution of the described command.
 */
-- (unsigned long)appleEventCodeForReturnType;
+- (FourCharCode)appleEventCodeForReturnType;
 
 /* Return the strings valid for use as keys into argument dictionaries in instances of the described command.
 */
@@ -56,7 +56,7 @@
 
 /* Return the four character code that identifies in Apple events the declared type of the named argument in instances of the described command.
 */
-- (unsigned long)appleEventCodeForArgumentWithName:(NSString *)argumentName;
+- (FourCharCode)appleEventCodeForArgumentWithName:(NSString *)argumentName;
 
 /* Return YES if the named argument is declared to be optional, NO otherwise.
 */

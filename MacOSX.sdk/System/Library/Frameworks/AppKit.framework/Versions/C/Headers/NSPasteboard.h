@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 #import <Foundation/NSURL.h>
 #import <CoreFoundation/CFBase.h>
 
-@class NSArray, NSData, NSFileWrapper;
+@class NSArray, NSData, NSFileWrapper, NSMutableDictionary;
 
 /* standard Pasteboard types */
 
@@ -31,6 +31,7 @@ APPKIT_EXTERN NSString *NSPDFPboardType;
 APPKIT_EXTERN NSString *NSVCardPboardType AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 APPKIT_EXTERN NSString *NSFilesPromisePboardType AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // HFS Promise type for dragging only
 APPKIT_EXTERN NSString *NSInkTextPboardType AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *NSMultipleTextSelectionPboardType   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* standard Pasteboard names */
 
@@ -55,7 +56,9 @@ APPKIT_EXTERN NSArray *NSGetFileTypes(NSArray *pboardTypes);
     id			_owners;
     CFIndex		_cachedTypeNameChangeCount;
     NSArray *		_cachedTypeNames;
-    void *		_reserved[6];
+    NSMutableDictionary *_promiseTypeNamesByIdentifier;
+    id			_support;	
+    void *		_reserved[4];
 }
 
 + (NSPasteboard *)generalPasteboard;
@@ -72,9 +75,9 @@ APPKIT_EXTERN NSArray *NSGetFileTypes(NSArray *pboardTypes);
 
 - (void)releaseGlobally;
 
-- (int)declareTypes:(NSArray *)newTypes owner:(id)newOwner;
-- (int)addTypes:(NSArray *)newTypes owner:(id)newOwner;
-- (int)changeCount;
+- (NSInteger)declareTypes:(NSArray *)newTypes owner:(id)newOwner;
+- (NSInteger)addTypes:(NSArray *)newTypes owner:(id)newOwner;
+- (NSInteger)changeCount;
 
 - (NSArray *)types;
 - (NSString *)availableTypeFromArray:(NSArray *)types;

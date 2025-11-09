@@ -52,6 +52,10 @@
       client will only push changes to the engine but for which it will never pull changes from
       the engine.
 
+      NeverFormatsRelationships - a Boolean that indicates that this client will never format
+      a relationship that it pulls. If yes then the sync services frameworks can make certain
+      optimizations for this client.
+      
       SyncsWith - a dictionary specifying the kinds of clients this client wants to sync
       with.  See -setShouldSynchronize:withClientsOfType: for details.  The dictionary contains the
       following keys:
@@ -93,7 +97,13 @@
       you should never change the schema name.  Doing so will orphan the old schema definition and
       you will have to manually remove it.  We recommend using the reverse-DNS naming scheme,
 	  e.g., "com.apple.Contacts".
-
+	
+	* StrictParsing - a bool that allows opting in / out of the new strict validation of schemas in Leopard. This is a top level key in a schema.
+	  If this value is true, Leopard strict validation will be used.
+	  If this value is false, the same checking as under Tiger will be used.
+	  If this value is not present, it will be based on the version of the SyncServices framework the registering binary linked against.  
+	  If it linked against a Leopard framework version, strict validation will be used.
+	  
     * DataClasses - an array containing various data class descriptions.  The data class
       description contains the following:
 
@@ -101,7 +111,7 @@
          naming scheme, e.g., "com.apple.Contacts". The name can be localized using the strings from Schema.strings
 	     in the .syncschema bundle.
 
-         Image - the path of an image representing the data class.  For most data classes this
+         ImagePath - the path of an image representing the data class.  For most data classes this
          will be the same image as would be used for the associated document type.  (E.g. Contacts
          would use AddressBook's .vcd image.)  The path can be an absolute path, but if it is not
 		 then SyncServices will attempt to use it to load an image resource from the .syncschema bundle.
@@ -122,9 +132,9 @@
 
          DataClass - the name of the data class this entity belongs to.
 
-        ExcludeFromDataChangeAlert - <true/> or <false/>.  Defaults to false if omitted.  If this flag is set then
-        a change to this entity will not count towards the number of changed entities for the purpose
-        of displaying the data change alert.
+         ExcludeFromDataChangeAlert - <true/> or <false/>.  Defaults to false if omitted.  If this flag is set then
+         a change to this entity will not count towards the number of changed entities for the purpose
+         of displaying the data change alert.
 
          Attributes - an array containing the description of all attributes in the extension.
          Each attribute description is a dictionary containing the following sub-keys.
@@ -168,6 +178,11 @@
 
                 RelationshipName - the name of the inverse relationship on that entity.
 
+            ExcludeFromDataChangeAlert - <true/> or <false/>.  Defaults to false if omitted.  If this flag is set then
+            a change to this relationship will not count towards the number of changed relationships for the purpose
+            of displaying the data change alert.
+
+
          IdentityProperties - an array specifying the set of properties that are used to match a new
          record from a Sync client with an existing record. If the target of a one to one relationship
          is to be used, the name of the relationship is specified. 
@@ -178,10 +193,71 @@
          the names of the co-dependent properties.  Entries may be an attribute name or a relationship
          name.
 
-        ExcludeFromDataChangeAlert - <true/> or <false/>.  Defaults to false if omitted.  If this flag is set then
-        a change to this relationship will not count towards the number of changed relationships for the purpose
-        of displaying the data change alert.
-
+         Parent - the name of a relationship back to the parent for this entity. A parent is an enclosing
+         entity type which is used to bill changes for data change alerts and to house child records in the
+         conflict manager display. As an example, a contact is the parent of a phone number. If there is a
+         change to a phone number (or if a phone number is added or deleted), that will count as a change
+         to the parent contact, rather than a change to the phone number. If there is a conflict on a
+         phone number, it will appear as if the parent contact is in conflict, not the phone number. Not
+         all contained objects have a parent - for example although a bookmark is contained in a folder,
+         the folder is not considered the parent of the bookmark. The parent is used when a record is really
+         a "part" of an enclosing record, such as the phone number which is a "part" of a contact.
+    
+	* Comment - used to insert optional comments to document the schema.
+	
+    * ManagedObjectModels - an array containing paths to one or more CoreData managed object models (.mom files).
+        Relative paths are resolved against the .syncschema bundle's Resources directory.  As a special case, 
+        you can specify a path like "../../../foo.mom" to load a model that lives outside the schema bundle 
+        (eg. in the application's Resources directory).
+        This registers every entity, attribute and relationship in the managed object model with Sync Services.  
+        (Entity extensions cannot be specified in a model file.)  Information specific to Sync Services is specified 
+        in the entity or property's 'User Info' dictionary:
+ 
+        Entity User Info:
+            "com.apple.syncservices.SyncName" - the value is a string specifying the name the entity will be 
+            registered as with Sync Services.  Clients must use this name when refering to this entity.  
+            The "sync" name may be different from the entity's name: Sync Services uses a global name space 
+            for entities and to avoid collisions, we recommend a reverse-DNS naming scheme, 
+            eg. "com.apple.contacts.Contact".  Names with '.'s in them don't work too well with CoreData, 
+            so this key lets you specify a globally unique name for the entity.
+            This key is optional.  If it's not specified, Sync Services tries to construct a unique name for 
+            the entity: if the entity name has a '.' in it, we use that directly; otherwise, we catenate the 
+            entity's data class name with the entity's name, separated by a '.'  eg. a "Contact" entity in 
+            the "com.apple.contacts" data class would be registered with Sync Services as "com.apple.contacts.Contact" 
+            
+            "com.apple.syncservices.DataClass" - the value is a string specifying the name of the entity's data class.
+            This key is required.
+ 
+            "com.apple.syncservices.Parent" - the value is a string specifying the name of a relationship 
+            back to the parent for this entity. A parent is an enclosing entity type which is used to bill changes for 
+            data change alerts and to house child records in the conflict manager display. As an example, a contact is 
+            the parent of a phone number. If there is a change to a phone number (or if a phone number is added or deleted), 
+            that will count as a change to the parent contact, rather than a change to the phone number. If there is a 
+            conflict on a  phone number, it will appear as if the parent contact is in conflict, not the phone number. 
+            Not all contained objects have a parent - for example although a bookmark is contained in a folder,
+            the folder is not considered the parent of the bookmark. The parent is used when a record is really
+            a "part" of an enclosing record, such as the phone number which is a "part" of a contact.
+ 
+            "com.apple.syncservices.Syncable" - "YES" or "NO". Defaults to "YES" if omitted. If this flag is set to "NO"
+            then the entity will not be parsed and thus not synchronized.
+ 
+            "com.apple.syncservices.ExcludeFromDataChangeAlert" - "YES" or "NO". Defaults to "NO" if omitted. 
+            If this flag is set to "YES" then a change to this entity will not count towards the number of changed 
+            entities for the purpose of displaying the data change alert.
+ 
+            "com.apple.syncservices.IdentityProperties" - an array of array of strings (no, that's not a typo) specifying
+            the properties that are used to match a new record from a sync client with an existing record.  Properties
+            are identified by name, eg "((property1, property2, property3))".  At this time, only the first array of strings
+            is used and any subsequent arrays are quietly ignored.
+ 
+        Attribute and Relationship User Info: 
+            "com.apple.syncservices.Syncable" - "YES" or "NO". Defaults to "YES" if omitted. If this flag is set to "NO"
+            then the attribute / relationship will not be parsed and thus not synchronized.
+ 
+            "com.apple.syncservices.ExcludeFromDataChangeAlert" - "YES" or "NO". Defaults to "NO" if omitted. If this flag
+            is set to "YES" then a change to this attribute / relationship will not count towards the number of changed 
+            entities for the purpose of displaying the data change alert.
+ 
    It is perfectly valid to call this method for a schema that has already been registered.  It is the
    recommended way to update a schema.  Certains kinds of changes may result in a slow sync of all
    clients synchronizing the constituent entities and relationships, however.  It depends on whether
@@ -205,6 +281,16 @@
    before you ask for the snapshot.  If that happens, the records in this snapshot will not match the
    state in the session.  Use the method on ISyncSession instead. */
 - (ISyncRecordSnapshot *)snapshotOfRecordsInTruthWithEntityNames:(NSArray /* NSString */ *)entityNames usingIdentifiersForClient:(ISyncClient *)client;
+
+/* Clients that register sync alert handlers may use the following three methods to manage the request modes
+   of the connections that are sent alerts by the sync server. (These request modes are simply the runloop modes
+   of the runloop that  is servicing the connection's sync alerts.) The API mirrors that of NSConnection. For
+   example, a client that registers a sync alert handler in a process that might present a modal dialog to the
+   user should add the appropriate request mode of the loop, so alerts can be handled in a timely manner even
+   when the application is blocked for user input. */
+- (void)addRequestMode:(NSString *)mode;
+- (void)removeRequestMode:(NSString *)mode;
+- (NSArray *)requestModes;
 
 @end
 

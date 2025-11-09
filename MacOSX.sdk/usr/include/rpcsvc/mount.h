@@ -134,75 +134,75 @@ bool_t xdr_exportnode();
 #endif /* Old Style C */
 
 
-#define MOUNTPROG ((u_long)100005)
-#define MOUNTVERS ((u_long)1)
+#define MOUNTPROG ((rpc_uint)100005)
+#define MOUNTVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define MOUNTPROC_NULL ((u_long)0)
+#define MOUNTPROC_NULL ((rpc_uint)0)
 extern "C" void * mountproc_null_1(void *, CLIENT *);
 extern "C" void * mountproc_null_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_MNT ((u_long)1)
+#define MOUNTPROC_MNT ((rpc_uint)1)
 extern "C" fhstatus * mountproc_mnt_1(dirpath *, CLIENT *);
 extern "C" fhstatus * mountproc_mnt_1_svc(dirpath *, struct svc_req *);
-#define MOUNTPROC_DUMP ((u_long)2)
+#define MOUNTPROC_DUMP ((rpc_uint)2)
 extern "C" mountlist * mountproc_dump_1(void *, CLIENT *);
 extern "C" mountlist * mountproc_dump_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_UMNT ((u_long)3)
+#define MOUNTPROC_UMNT ((rpc_uint)3)
 extern "C" void * mountproc_umnt_1(dirpath *, CLIENT *);
 extern "C" void * mountproc_umnt_1_svc(dirpath *, struct svc_req *);
-#define MOUNTPROC_UMNTALL ((u_long)4)
+#define MOUNTPROC_UMNTALL ((rpc_uint)4)
 extern "C" void * mountproc_umntall_1(void *, CLIENT *);
 extern "C" void * mountproc_umntall_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_EXPORT ((u_long)5)
+#define MOUNTPROC_EXPORT ((rpc_uint)5)
 extern "C" exports * mountproc_export_1(void *, CLIENT *);
 extern "C" exports * mountproc_export_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_EXPORTALL ((u_long)6)
+#define MOUNTPROC_EXPORTALL ((rpc_uint)6)
 extern "C" exports * mountproc_exportall_1(void *, CLIENT *);
 extern "C" exports * mountproc_exportall_1_svc(void *, struct svc_req *);
 
 #elif __STDC__
-#define MOUNTPROC_NULL ((u_long)0)
+#define MOUNTPROC_NULL ((rpc_uint)0)
 extern  void * mountproc_null_1(void *, CLIENT *);
 extern  void * mountproc_null_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_MNT ((u_long)1)
+#define MOUNTPROC_MNT ((rpc_uint)1)
 extern  fhstatus * mountproc_mnt_1(dirpath *, CLIENT *);
 extern  fhstatus * mountproc_mnt_1_svc(dirpath *, struct svc_req *);
-#define MOUNTPROC_DUMP ((u_long)2)
+#define MOUNTPROC_DUMP ((rpc_uint)2)
 extern  mountlist * mountproc_dump_1(void *, CLIENT *);
 extern  mountlist * mountproc_dump_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_UMNT ((u_long)3)
+#define MOUNTPROC_UMNT ((rpc_uint)3)
 extern  void * mountproc_umnt_1(dirpath *, CLIENT *);
 extern  void * mountproc_umnt_1_svc(dirpath *, struct svc_req *);
-#define MOUNTPROC_UMNTALL ((u_long)4)
+#define MOUNTPROC_UMNTALL ((rpc_uint)4)
 extern  void * mountproc_umntall_1(void *, CLIENT *);
 extern  void * mountproc_umntall_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_EXPORT ((u_long)5)
+#define MOUNTPROC_EXPORT ((rpc_uint)5)
 extern  exports * mountproc_export_1(void *, CLIENT *);
 extern  exports * mountproc_export_1_svc(void *, struct svc_req *);
-#define MOUNTPROC_EXPORTALL ((u_long)6)
+#define MOUNTPROC_EXPORTALL ((rpc_uint)6)
 extern  exports * mountproc_exportall_1(void *, CLIENT *);
 extern  exports * mountproc_exportall_1_svc(void *, struct svc_req *);
 
 #else /* Old Style C */
-#define MOUNTPROC_NULL ((u_long)0)
+#define MOUNTPROC_NULL ((rpc_uint)0)
 extern  void * mountproc_null_1();
 extern  void * mountproc_null_1_svc();
-#define MOUNTPROC_MNT ((u_long)1)
+#define MOUNTPROC_MNT ((rpc_uint)1)
 extern  fhstatus * mountproc_mnt_1();
 extern  fhstatus * mountproc_mnt_1_svc();
-#define MOUNTPROC_DUMP ((u_long)2)
+#define MOUNTPROC_DUMP ((rpc_uint)2)
 extern  mountlist * mountproc_dump_1();
 extern  mountlist * mountproc_dump_1_svc();
-#define MOUNTPROC_UMNT ((u_long)3)
+#define MOUNTPROC_UMNT ((rpc_uint)3)
 extern  void * mountproc_umnt_1();
 extern  void * mountproc_umnt_1_svc();
-#define MOUNTPROC_UMNTALL ((u_long)4)
+#define MOUNTPROC_UMNTALL ((rpc_uint)4)
 extern  void * mountproc_umntall_1();
 extern  void * mountproc_umntall_1_svc();
-#define MOUNTPROC_EXPORT ((u_long)5)
+#define MOUNTPROC_EXPORT ((rpc_uint)5)
 extern  exports * mountproc_export_1();
 extern  exports * mountproc_export_1_svc();
-#define MOUNTPROC_EXPORTALL ((u_long)6)
+#define MOUNTPROC_EXPORTALL ((rpc_uint)6)
 extern  exports * mountproc_exportall_1();
 extern  exports * mountproc_exportall_1_svc();
 #endif /* Old Style C */

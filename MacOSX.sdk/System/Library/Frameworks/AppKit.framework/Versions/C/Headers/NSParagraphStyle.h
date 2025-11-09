@@ -1,6 +1,6 @@
 /*
         NSParagraphStyle.h
-        Copyright (c) 1994-2005, Apple Computer, Inc.  All rights reserved.
+        Copyright (c) 1994-2007, Apple Inc.  All rights reserved.
 
 	NSParagraphStyle and NSMutableParagraphStyle hold paragraph style information
 	NSTextTab holds information about a single tab stop
@@ -9,21 +9,23 @@
 #import <Foundation/NSObject.h>
 #import <AppKit/NSText.h>
 
-typedef enum _NSTextTabType {
+enum {
     NSLeftTabStopType = 0,
     NSRightTabStopType,
     NSCenterTabStopType,
     NSDecimalTabStopType
-} NSTextTabType;
+};
+typedef NSUInteger NSTextTabType;
 
-typedef enum _NSLineBreakMode {		/* What to do with long lines */
+enum {		/* What to do with long lines */
     NSLineBreakByWordWrapping = 0,     	/* Wrap at word boundaries, default */
     NSLineBreakByCharWrapping,		/* Wrap at character boundaries */
     NSLineBreakByClipping,		/* Simply clip */
     NSLineBreakByTruncatingHead,	/* Truncate at head of line: "...wxyz" */
     NSLineBreakByTruncatingTail,	/* Truncate at tail of line: "abcd..." */
     NSLineBreakByTruncatingMiddle	/* Truncate middle of line:  "ab...yz" */
-} NSLineBreakMode;
+};
+typedef NSUInteger NSLineBreakMode;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /* An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab itself and newline characters are implied even if non-existent in the character set.
@@ -37,8 +39,11 @@ APPKIT_EXTERN NSString *NSTabColumnTerminatorsAttributeName    AVAILABLE_MAC_OS_
 	NSTextAlignment alignment:4;
         unsigned int refCount:24;
         unsigned int unused:4;
+#if __LP64__
+        unsigned int :32;
+#endif
     } _flags;
-    float _location;
+    CGFloat _location;
     id _reserved;
 }
 
@@ -59,25 +64,25 @@ NSRightTabStopType -> NSRightTextAlignment
 NSCenterTabStopType -> NSCenterTextAlignment
 NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the user setting
 */
-- (id)initWithTextAlignment:(NSTextAlignment)alignment location:(float)loc options:(NSDictionary *)options;
+- (id)initWithTextAlignment:(NSTextAlignment)alignment location:(CGFloat)loc options:(NSDictionary *)options;
 
 - (NSTextAlignment)alignment;
 - (NSDictionary *)options;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
-- (id)initWithType:(NSTextTabType)type location:(float)loc;
-- (float)location;
+- (id)initWithType:(NSTextTabType)type location:(CGFloat)loc;
+- (CGFloat)location;
 - (NSTextTabType)tabStopType;
 @end
 
 @interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSCoding> {
     /*All instance variables are private*/
-    float _lineSpacing;
-    float _paragraphSpacing;
-    float _headIndent;
-    float _tailIndent;
-    float _firstLineHeadIndent;
-    float _minimumLineHeight;
-    float _maximumLineHeight;
+    CGFloat _lineSpacing;
+    CGFloat _paragraphSpacing;
+    CGFloat _headIndent;
+    CGFloat _tailIndent;
+    CGFloat _firstLineHeadIndent;
+    CGFloat _minimumLineHeight;
+    CGFloat _maximumLineHeight;
     NSArray *_tabStops;
     struct {
 	NSTextAlignment alignment:4;
@@ -87,8 +92,11 @@ NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the 
         unsigned int rightToLeftDirection:1;
         unsigned int fixedMultiple:2;
         unsigned int refCount:19;
+#if __LP64__
+        unsigned int :32;
+#endif
     } _flags;
-    float _defaultTabInterval;
+    CGFloat _defaultTabInterval;
     id _extraData;
 }
 
@@ -98,19 +106,19 @@ NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the 
 + (NSWritingDirection)defaultWritingDirectionForLanguage:(NSString *)languageName;  // languageName is in ISO lang region format
 #endif
 
-- (float)lineSpacing;		/* "Leading": distance between the bottom of one line fragment and top of next (applied between lines in the same container). Can't be negative. This value is included in the line fragment heights in layout manager. */
-- (float)paragraphSpacing; 	/* Distance between the bottom of this paragraph and top of next (or the beginning of its paragraphSpacingBefore, if any). */
+- (CGFloat)lineSpacing;		/* "Leading": distance between the bottom of one line fragment and top of next (applied between lines in the same container). Can't be negative. This value is included in the line fragment heights in layout manager. */
+- (CGFloat)paragraphSpacing; 	/* Distance between the bottom of this paragraph and top of next (or the beginning of its paragraphSpacingBefore, if any). */
 - (NSTextAlignment)alignment;
 
 /* The following values are relative to the appropriate margin (depending on the paragraph direction) */
    
-- (float)headIndent;		/* Distance from margin to front edge of paragraph */
-- (float)tailIndent;		/* Distance from margin to back edge of paragraph; if negative or 0, from other margin */
-- (float)firstLineHeadIndent;	/* Distance from margin to edge appropriate for text direction */
+- (CGFloat)headIndent;		/* Distance from margin to front edge of paragraph */
+- (CGFloat)tailIndent;		/* Distance from margin to back edge of paragraph; if negative or 0, from other margin */
+- (CGFloat)firstLineHeadIndent;	/* Distance from margin to edge appropriate for text direction */
 - (NSArray *)tabStops;		/* Distance from margin to tab stops */
 
-- (float)minimumLineHeight;	/* Line height is the distance from bottom of descenders to top of ascenders; basically the line fragment height. Does not include lineSpacing (which is added after this computation). */
-- (float)maximumLineHeight;	/* 0 implies no maximum. */ 
+- (CGFloat)minimumLineHeight;	/* Line height is the distance from bottom of descenders to top of ascenders; basically the line fragment height. Does not include lineSpacing (which is added after this computation). */
+- (CGFloat)maximumLineHeight;	/* 0 implies no maximum. */ 
 
 - (NSLineBreakMode)lineBreakMode;
 
@@ -119,9 +127,9 @@ NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the 
 #endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-- (float)lineHeightMultiple;	/* Natural line height is multiplied by this factor (if positive) before being constrained by minimum and maximum line height. */
-- (float)paragraphSpacingBefore;/* Distance between the bottom of the previous paragraph (or the end of its paragraphSpacing, if any) and the top of this paragraph. */
-- (float)defaultTabInterval;	/* Tabs after the last specified in tabStops are placed at integral multiples of this distance (if positive). */ 
+- (CGFloat)lineHeightMultiple;	/* Natural line height is multiplied by this factor (if positive) before being constrained by minimum and maximum line height. */
+- (CGFloat)paragraphSpacingBefore;/* Distance between the bottom of the previous paragraph (or the end of its paragraphSpacing, if any) and the top of this paragraph. */
+- (CGFloat)defaultTabInterval;	/* Tabs after the last specified in tabStops are placed at integral multiples of this distance (if positive). */ 
 #endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -137,22 +145,22 @@ NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the 
 - (float)tighteningFactorForTruncation;
 
 /* Specifies whether the paragraph is to be treated as a header for purposes of HTML generation.  Should be set to 0 (the default value) if the paragraph is not a header, or from 1 through 6 if the paragraph is to be treated as a header. */
-- (int)headerLevel;
+- (NSInteger)headerLevel;
 
 #endif
 @end
 
 @interface NSMutableParagraphStyle : NSParagraphStyle
 
-- (void)setLineSpacing:(float)aFloat;
-- (void)setParagraphSpacing:(float)aFloat;
+- (void)setLineSpacing:(CGFloat)aFloat;
+- (void)setParagraphSpacing:(CGFloat)aFloat;
 - (void)setAlignment:(NSTextAlignment)alignment;
-- (void)setFirstLineHeadIndent:(float)aFloat;
-- (void)setHeadIndent:(float)aFloat;
-- (void)setTailIndent:(float)aFloat;
+- (void)setFirstLineHeadIndent:(CGFloat)aFloat;
+- (void)setHeadIndent:(CGFloat)aFloat;
+- (void)setTailIndent:(CGFloat)aFloat;
 - (void)setLineBreakMode:(NSLineBreakMode)mode;
-- (void)setMinimumLineHeight:(float)aFloat;
-- (void)setMaximumLineHeight:(float)aFloat;
+- (void)setMinimumLineHeight:(CGFloat)aFloat;
+- (void)setMaximumLineHeight:(CGFloat)aFloat;
 - (void)addTabStop:(NSTextTab *)anObject;
 - (void)removeTabStop:(NSTextTab *)anObject;
 - (void)setTabStops:(NSArray *)array;
@@ -161,15 +169,15 @@ NSDecimalTabStopType -> NSRightTextAlignment with the decimal character for the 
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
 #endif
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-- (void)setLineHeightMultiple:(float)aFloat;
-- (void)setParagraphSpacingBefore:(float)aFloat;
-- (void)setDefaultTabInterval:(float)aFloat;
+- (void)setLineHeightMultiple:(CGFloat)aFloat;
+- (void)setParagraphSpacingBefore:(CGFloat)aFloat;
+- (void)setDefaultTabInterval:(CGFloat)aFloat;
 #endif
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setTextBlocks:(NSArray *)array;
 - (void)setTextLists:(NSArray *)array;
 - (void)setHyphenationFactor:(float)aFactor;
 - (void)setTighteningFactorForTruncation:(float)aFactor;
-- (void)setHeaderLevel:(int)level;
+- (void)setHeaderLevel:(NSInteger)level;
 #endif
 @end

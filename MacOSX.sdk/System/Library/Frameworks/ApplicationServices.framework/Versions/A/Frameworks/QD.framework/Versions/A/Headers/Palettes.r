@@ -3,7 +3,7 @@
  
      Contains:   Palette Manager Interfaces.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
      Copyright:  © 1987-2006 by Apple Computer, Inc., all rights reserved
  
@@ -21,6 +21,7 @@
 #include <CoreServices/CoreServices.r>
 #endif
 
+#if !__LP64__
 /*----------------------------pltt ¥ Color Palette--------------------------------------*/
 type 'pltt' {
         integer = $$CountOf(ColorInfo);                         /* Color table count    */
@@ -39,6 +40,8 @@ type 'pltt' {
             fill long;                                          /* Private              */
         };
 };
+#endif  /* !__LP64__ */
+
 
 #endif /* __PALETTES_R__ */
 

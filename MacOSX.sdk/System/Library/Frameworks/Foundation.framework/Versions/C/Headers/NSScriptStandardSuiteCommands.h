@@ -1,6 +1,6 @@
 /*
 	NSScriptStandardSuiteCommands.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,12 +11,12 @@
 @class NSScriptClassDescription;
 
 
-typedef enum {
+enum {
     NSSaveOptionsYes = 0,
     NSSaveOptionsNo,
     NSSaveOptionsAsk
-} NSSaveOptions;
-
+};
+typedef NSUInteger NSSaveOptions;
 
 @interface NSCloneCommand : NSScriptCommand {
     @private
@@ -46,7 +46,7 @@ typedef enum {
 
 @interface NSCreateCommand : NSScriptCommand {
     @private
-    id _privateVars;
+    id _moreVars2;
 }
 
 - (NSScriptClassDescription *)createClassDescription;

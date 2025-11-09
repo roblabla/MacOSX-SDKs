@@ -3,9 +3,9 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-192.17
+     Version:    vecLib-240.0
  
-     Copyright:  © 1999-2007 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -115,7 +115,7 @@ extern "C" {
 *  Following are a set of structures for vector data types and scalar data types    *
 *                                                                                   *
 ************************************************************************************/
-#if (defined(__ppc__) || defined(__ppc64__)) && defined(__VEC__)
+#if defined _AltiVecPIMLanguageExtensionsAreEnabled
 union vU128 {
   vUInt32             v;
   struct {
@@ -547,7 +547,7 @@ union vS1024 {
 typedef union vS1024                    vS1024;
 #endif  /*  */
 
-#if defined(__VEC__) || defined(__SSE2__)
+#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 /************************************************************************************
 *                                                                                   *
 *                                Division operations                                *
@@ -1637,7 +1637,7 @@ vR1024Rotate(
   vU1024 *        result)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE2__) */
+#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 

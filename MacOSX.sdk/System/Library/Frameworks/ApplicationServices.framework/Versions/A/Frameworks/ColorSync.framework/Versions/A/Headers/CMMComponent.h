@@ -3,14 +3,9 @@
  
      Contains:   ColorSync CMM Component API
  
-     Version:    ColorSync-174.3.3~45
+     Copyright:  1994-2005 by Apple Computer, Inc., all rights reserved.
  
-     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+     Bugs?:      For bug reports, consult http://developer.apple.com/bugreporter/
  
 */
 #ifndef __CMMCOMPONENT__
@@ -41,254 +36,83 @@
 extern "C" {
 #endif
 
+CSEXTERN void
+CWColorWorldSetProperty(
+  CMWorldRef    cw,
+  CFStringRef   key,
+  CFTypeRef     value) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+CSEXTERN const void* 
+CWColorWorldGetProperty(
+  CMWorldRef    cw,
+  CFStringRef   key) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 /*
    The following declarations specify the calling conventions for CMM entry-points on Mac OS X.
-   On TARGET_API_MAC_OSX, cmmInstance is undefined
 */
-/*
- *  CMMOpen()
- *  
- *  Availability:
- *    Implemented by client
- */
+
+/* Required */
 extern CMError 
-CMMOpen(
-  UInt32 *  cmmStorage,
-  void *    cmmInstance);
+CMM_ConcatColorWorld(
+  CMWorldRef             cw,
+  NCMConcatProfileSet *  profileSet,
+  CMConcatCallBackUPP    proc,
+  void *                 refCon);
 
-
-/*
- *  CMMClose()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMClose(UInt32 * cmmStorage);
+CMM_MatchColors(
+  CMWorldRef  cw,
+  CMColor *   colors,
+  UInt32      count);
 
-
-/*
- *  NCMMInit()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-NCMMInit(
-  UInt32 *       cmmStorage,
-  CMProfileRef   srcProfile,
-  CMProfileRef   dstProfile);
+CMM_CheckColors(
+  CMWorldRef  cw,
+  CMColor *   colors,
+  UInt32      count,
+  UInt8 *     result);
 
+/* Optional */
 
-/*
- *  CMMMatchColors()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMMatchColors(
-  UInt32 *   cmmStorage,
-  CMColor *  colors,
-  UInt32     count);
-
-
-/*
- *  CMMCheckColors()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMCheckColors(
-  UInt32 *   cmmStorage,
-  CMColor *  colors,
-  UInt32     count,
-  UInt8 *    result);
-
-
-/*
- *  CMMValidateProfile()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMValidateProfile(
-  UInt32 *       cmmStorage,
+CMM_ValidateProfile(
   CMProfileRef   prof,
   Boolean *      valid);
 
-
-/*
- *  CMMMatchBitmap()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMMatchBitmap(
-  UInt32 *              cmmStorage,
+CMM_MatchBitmap(
+  CMWorldRef            cw,
   CMBitmap *            bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
   CMBitmap *            matchedBitmap);
 
-
-/*
- *  CMMCheckBitmap()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMCheckBitmap(
-  UInt32 *              cmmStorage,
+CMM_CheckBitmap(
+  CMWorldRef            cw,
   const CMBitmap *      bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
   CMBitmap *            resultBitmap);
 
-
-/*
- *  CMMMatchFloatBitmap()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMMatchFloatBitmap(
-  UInt32 *               cmmStorage,
+CMM_MatchFloatBitmap(
+  CMWorldRef             cw,
   const CMFloatBitmap *  bitmap,
   CMFloatBitmap *        resultBitmap);
 
-
-/*
- *  CMMConcatInit()
- *  
- *  Availability:
- *    Implemented by client
- */
 extern CMError 
-CMMConcatInit(
-  UInt32 *              cmmStorage,
-  CMConcatProfileSet *  profileSet);
-
-
-/*
- *  NCMMConcatInit()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-NCMMConcatInit(
-  UInt32 *               cmmStorage,
-  NCMConcatProfileSet *  profileSet,
-  CMConcatCallBackUPP    proc,
-  void *                 refCon);
-
-
-/*
- *  CMMSetProperties()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMSetProperties(
-  UInt32 *      cmmStorage,
-  CMWorldRef    cw,
-  CFStringRef   requestedKey);
-
-
-/*
- *  CMMNewLinkProfile()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMNewLinkProfile(
-  UInt32 *                   cmmStorage,
-  CMProfileRef *             prof,
-  const CMProfileLocation *  targetLocation,
-  CMConcatProfileSet *       profileSet);
-
-
-/*
- *  NCMMNewLinkProfile()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-NCMMNewLinkProfile(
-  UInt32 *               cmmStorage,
+CMM_CreateLinkProfile(
   CMProfileRef           prof,
   NCMConcatProfileSet *  profileSet,
   CMConcatCallBackUPP    proc,
   void *                 refCon);
 
-
-/*
- *  CMMGetPS2ColorSpace()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMGetPS2ColorSpace(
-  UInt32 *       cmmStorage,
-  CMProfileRef   srcProf,
-  UInt32         flags,
-  CMFlattenUPP   proc,
-  void *         refCon);
-
-
-/*
- *  CMMGetPS2ColorRenderingIntent()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMGetPS2ColorRenderingIntent(
-  UInt32 *       cmmStorage,
-  CMProfileRef   srcProf,
-  UInt32         flags,
-  CMFlattenUPP   proc,
-  void *         refCon);
-
-
-/*
- *  CMMGetPS2ColorRendering()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMGetPS2ColorRendering(
-  UInt32 *       cmmStorage,
-  CMProfileRef   srcProf,
-  CMProfileRef   dstProf,
-  UInt32         flags,
-  CMFlattenUPP   proc,
-  void *         refCon);
-
-
-/*
- *  CMMGetPS2ColorRenderingVMSize()
- *  
- *  Availability:
- *    Implemented by client
- */
-extern CMError 
-CMMGetPS2ColorRenderingVMSize(
-  UInt32 *       cmmStorage,
-  CMProfileRef   srcProf,
-  CMProfileRef   dstProf,
-  UInt32 *       vmSize);
+extern CFTypeRef 
+CMM_GetProperty(
+  CMWorldRef    cw,
+  CFStringRef   requestedKey);
 
 
 

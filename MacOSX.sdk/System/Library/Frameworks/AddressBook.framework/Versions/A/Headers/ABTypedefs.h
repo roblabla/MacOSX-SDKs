@@ -2,12 +2,17 @@
  *  ABTypedefs.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+ *  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
  *
  */
 
 #ifndef __ABTYPEDEFS__
 #define __ABTYPEDEFS__
+
+#include <CoreFoundation/CoreFoundation.h>
+
+// These typedefs are CFIndexes rather then NSIntegers because
+// they're used in the C API as well as the Obj-C one.
 
 // ================================================================
 //      Property Type
@@ -15,7 +20,7 @@
 
 #define kABMultiValueMask        0x100
 
-typedef enum _ABPropertyType {
+enum _ABPropertyType {
     kABErrorInProperty           = 0x0,
     kABStringProperty            = 0x1,
     kABIntegerProperty           = 0x2,
@@ -31,13 +36,14 @@ typedef enum _ABPropertyType {
     kABMultiArrayProperty        = kABMultiValueMask | kABArrayProperty,
     kABMultiDictionaryProperty   = kABMultiValueMask | kABDictionaryProperty,
     kABMultiDataProperty         = kABMultiValueMask | kABDataProperty
-} ABPropertyType;
+};
+typedef CFIndex ABPropertyType;
 
 // ================================================================
 //      Search APIs
 // ================================================================
 
-typedef enum _ABSearchComparison {
+enum _ABSearchComparison {
         kABEqual,
         kABNotEqual,
         kABLessThan,
@@ -68,11 +74,14 @@ typedef enum _ABSearchComparison {
         kABNotWithinIntervalFromToday,
         kABNotWithinIntervalFromTodayYearless
 #endif
-} ABSearchComparison;
+};
+typedef CFIndex ABSearchComparison;
 
-typedef enum _ABSearchConjunction {
+enum _ABSearchConjunction {
         kABSearchAnd,
         kABSearchOr
-} ABSearchConjunction;
+};
+typedef CFIndex ABSearchConjunction;
+
 
 #endif

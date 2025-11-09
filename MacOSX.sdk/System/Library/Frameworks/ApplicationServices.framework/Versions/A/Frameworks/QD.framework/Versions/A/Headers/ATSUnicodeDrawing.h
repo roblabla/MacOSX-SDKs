@@ -3,9 +3,9 @@
  
      Contains:   ATSUI drawing, measuring, and highlighting functions.
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -127,6 +127,7 @@ ATSUDrawText(
   ATSUTextMeasurement   iLocationY)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUGetUnjustifiedBounds()
  *  
@@ -203,7 +204,7 @@ ATSUDrawText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -289,7 +290,7 @@ ATSUGetUnjustifiedBounds(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -302,6 +303,8 @@ ATSUMeasureTextImage(
   ATSUTextMeasurement   iLocationY,
   Rect *                oTextImageRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  ATSUGetGlyphBounds()
@@ -441,6 +444,7 @@ ATSUGetGlyphBounds(
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI line breaking                                                         */
 /* ---------------------------------------------------------------------------- */
+#if !__LP64__
 /*
  *  ATSUBatchBreakLines()
  *  
@@ -485,7 +489,7 @@ ATSUGetGlyphBounds(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -563,7 +567,7 @@ ATSUBatchBreakLines(
  *    for other possible error codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -606,7 +610,7 @@ ATSUBreakLine(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -677,7 +681,7 @@ ATSUSetSoftLineBreak(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -725,7 +729,7 @@ ATSUGetSoftLineBreaks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -811,7 +815,7 @@ ATSUClearSoftLineBreaks(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -885,7 +889,7 @@ ATSUSetHighlightingMethod(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -960,7 +964,7 @@ ATSUHighlightText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1033,7 +1037,7 @@ ATSUUnhighlightText(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1100,7 +1104,7 @@ ATSUGetTextHighlight(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1116,6 +1120,8 @@ ATSUHighlightInactiveText(
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI hit-testing                                                           */
 /* ---------------------------------------------------------------------------- */
+#endif  /* !__LP64__ */
+
 /*
  *  ATSUPositionToOffset()
  *  
@@ -1237,6 +1243,7 @@ ATSUPositionToOffset(
   UniCharArrayOffset *  oSecondaryOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ATSUOffsetToPosition()
  *  
@@ -1318,7 +1325,7 @@ ATSUPositionToOffset(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1405,7 +1412,7 @@ ATSUOffsetToPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.2.2 and later
  */
@@ -1485,7 +1492,7 @@ ATSUPositionToCursorOffset(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.2.2 and later
  */
@@ -1540,7 +1547,7 @@ ATSUOffsetToCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1589,7 +1596,7 @@ ATSUNextCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1645,7 +1652,7 @@ ATSUPreviousCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1701,7 +1708,7 @@ ATSURightwardCursorPosition(
  *    codes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1726,7 +1733,7 @@ ATSULeftwardCursorPosition(
  *    ATSUGetUnjustifiedBounds instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1740,6 +1747,8 @@ ATSUMeasureText(
   ATSUTextMeasurement *  oAscent,
   ATSUTextMeasurement *  oDescent)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

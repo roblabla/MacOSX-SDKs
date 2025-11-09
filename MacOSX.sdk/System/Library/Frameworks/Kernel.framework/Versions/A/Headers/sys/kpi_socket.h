@@ -1,23 +1,29 @@
 /*
  * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*!
 	@header kpi_socket.h
@@ -35,21 +41,23 @@
 #include <sys/kernel_types.h>
 #include <sys/socket.h>
 
+__BEGIN_DECLS
+
 struct timeval;
 
 /*!
 	@typedef sock_upcall
-	
+
 	@discussion sock_upcall is used by a socket to notify an in kernel
 		client that data is waiting. Instead of making blocking calls in
 		the kernel, a client can specify an upcall which will be called
 		when data is available or the socket is ready for sending.
-		
+
 		Calls to your upcall function are not serialized and may be
 		called concurrently from multiple threads in the kernel.
-		
+
 		Your upcall function will be called when:
-		
+
 	@param so A reference to the socket that's ready.
 	@param cookie The cookie passed in when the socket was created.
 	@param waitf Indicates whether or not it's safe to block.
@@ -78,8 +86,7 @@ typedef void (*sock_upcall)(socket_t so, void* cookie, int waitf);
 	@result 0 on success otherwise the errno error.
  */
 errno_t sock_accept(socket_t so, struct sockaddr *from, int fromlen,
-					int flags, sock_upcall callback, void* cookie,
-					socket_t *new_so);
+    int flags, sock_upcall callback, void* cookie, socket_t *new_so);
 
 /*!
 	@function sock_bind
@@ -117,7 +124,8 @@ errno_t sock_connect(socket_t so, const struct sockaddr *to, int flags);
 	@param peernamelen Length of storage for the peer name.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getpeername(socket_t so, struct sockaddr *peername, int peernamelen);
+errno_t sock_getpeername(socket_t so, struct sockaddr *peername,
+    int peernamelen);
 
 /*!
 	@function sock_getsockname
@@ -128,7 +136,8 @@ errno_t sock_getpeername(socket_t so, struct sockaddr *peername, int peernamelen
 	@param socknamelen Length of storage for the socket name.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getsockname(socket_t so, struct sockaddr *sockname, int socknamelen);
+errno_t sock_getsockname(socket_t so, struct sockaddr *sockname,
+    int socknamelen);
 
 /*!
 	@function sock_getsockopt
@@ -140,7 +149,8 @@ errno_t sock_getsockname(socket_t so, struct sockaddr *sockname, int socknamelen
 	@param optlen The length of optval, returns the actual length.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_getsockopt(socket_t so, int level, int optname, void *optval, int *optlen);
+errno_t sock_getsockopt(socket_t so, int level, int optname, void *optval,
+    int *optlen);
 
 /*!
 	@function sock_ioctl
@@ -162,7 +172,8 @@ errno_t sock_ioctl(socket_t so, unsigned long request, void *argp);
 	@param optlen The length of optval.
 	@result 0 on success otherwise the errno error.
  */
-errno_t sock_setsockopt(socket_t so, int level, int optname, const void *optval, int optlen);
+errno_t sock_setsockopt(socket_t so, int level, int optname, const void *optval,
+    int optlen);
 
 /*!
 	@function sock_listen
@@ -186,7 +197,8 @@ errno_t sock_listen(socket_t so, int backlog);
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_receive(socket_t so, struct msghdr *msg, int flags, size_t *recvdlen);
+errno_t sock_receive(socket_t so, struct msghdr *msg, int flags,
+    size_t *recvdlen);
 
 /*!
 	@function sock_receivembuf
@@ -206,7 +218,8 @@ errno_t sock_receive(socket_t so, struct msghdr *msg, int flags, size_t *recvdle
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data, int flags, size_t *recvlen);
+errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data,
+    int flags, size_t *recvlen);
 
 /*!
 	@function sock_send
@@ -220,7 +233,8 @@ errno_t sock_receivembuf(socket_t so, struct msghdr *msg, mbuf_t *data, int flag
 	@result 0 on success, EWOULDBLOCK if non-blocking and operation
 		would cause the thread to block, otherwise the errno error.
  */
-errno_t sock_send(socket_t so, const struct msghdr *msg, int flags, size_t *sentlen);
+errno_t sock_send(socket_t so, const struct msghdr *msg, int flags,
+    size_t *sentlen);
 
 /*!
 	@function sock_sendmbuf
@@ -236,7 +250,8 @@ errno_t sock_send(socket_t so, const struct msghdr *msg, int flags, size_t *sent
 		would cause the thread to block, otherwise the errno error.
 		Regardless of return value, the mbuf chain 'data' will be freed.
  */
-errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data, int flags, size_t *sentlen);
+errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data,
+    int flags, size_t *sentlen);
 
 /*!
 	@function sock_shutdown
@@ -263,7 +278,7 @@ errno_t sock_shutdown(socket_t so, int how);
 	@result 0 on success otherwise the errno error.
  */
 errno_t sock_socket(int domain, int type, int protocol, sock_upcall callback,
-			   void* cookie, socket_t *new_so);
+    void* cookie, socket_t *new_so);
 
 /*!
 	@function sock_close
@@ -275,27 +290,6 @@ errno_t sock_socket(int domain, int type, int protocol, sock_upcall callback,
  */
 void	sock_close(socket_t so);
 
-/*!
-	@function sock_retain
-	@discussion Prevents the socket from closing
-	@param so The socket to close.  Increment a retain count on the
-		socket, preventing it from being closed when sock_close is
-		called. This is used when a File Descriptor is passed (and
-		closed) from userland and the kext wants to keep ownership of
-		that socket. It is used in conjunction with
-		sock_release(socket_t so).
- */
-void	sock_retain(socket_t so);
-
-/*!
-	@function sock_release
-	@discussion Decrement the retain count and close the socket if the
-		retain count reaches zero.
-	@param so The socket to release. This is used to release ownership
-		on a socket acquired with sock_retain. When the last retain
-		count is reached, this will call sock_close to close the socket.
- */
-void	sock_release(socket_t so);
 
 /*!
 	@function sock_setpriv
@@ -320,7 +314,7 @@ int sock_isconnected(socket_t so);
 	@discussion Returns whether or not the socket is non-blocking. In
 		the context of this KPI, non-blocking means that functions to
 		perform operations on a socket will not wait for completion.
-		
+
 		To enable or disable blocking, use the FIONBIO ioctl. The
 		parameter is an int. If the int is zero, the socket will block.
 		If the parameter is non-zero, the socket will not block.
@@ -342,4 +336,6 @@ int sock_isnonblocking(socket_t so);
  */
 errno_t sock_gettype(socket_t so, int *domain, int *type, int *protocol);
 
-#endif __KPI_SOCKET__
+
+__END_DECLS
+#endif /* __KPI_SOCKET__ */

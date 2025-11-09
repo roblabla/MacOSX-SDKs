@@ -1,5 +1,5 @@
 /*	NSError.h
-	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,20 +37,20 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 @interface NSError : NSObject <NSCopying, NSCoding> {
     @private
     void *_reserved;
-    int _code;
+    NSInteger _code;
     NSString *_domain;
     NSDictionary *_userInfo;
 }
 
 /* Designated initializer. Domain cannot be nil; dict may be nil if no userInfo desired.
 */
-- (id)initWithDomain:(NSString *)domain code:(int)code userInfo:(NSDictionary *)dict;
-+ (id)errorWithDomain:(NSString *)domain code:(int)code userInfo:(NSDictionary *)dict;
+- (id)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)dict;
++ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)dict;
 
 /* These define the error. Domains are described by names that are arbitrary strings used to differentiate groups of codes; for custom domain using reverse-DNS naming will help avoid conflicts. Codes are domain-specific.
 */
 - (NSString *)domain;
-- (int)code;
+- (NSInteger)code;
 
 /* Additional info which may be used to describe the error further. Examples of keys that might be included in here are "Line Number", "Failed URL", etc. Embedding other errors in here can also be used as a way to communicate underlying reasons for failures; for instance "File System Error" embedded in the userInfo of an NSError returned from a higher level document object. If the embedded error information is itself NSError, the standard key NSUnderlyingErrorKey can be used.
 */
@@ -70,7 +70,7 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 */
 - (NSString *)localizedRecoverySuggestion;
 
-/* Return titles of buttons that are appropriate for displaying in an alert. These should match the string provided as a part of localizedRecoverySuggestion.  The first string would be the title of the right-most and default button, the second one next to it, and so on. If used in an alert the corresponding default return values are NSAlertFirstButtonReturn + n. Default implementation of this will pick up the value of the NSLocalizedRecoveryOptionsKey from the userInfo dictionary.  nil return usually implies no special suggestion, which would imply a single "OK" button.
+/* Return titles of buttons that are appropriate for displaying in an alert. These should match the string provided as a part of localizedRecoverySuggestion.  The first string would be the title of the right-most and default button, the second one next to it, and so on. If used in an alert the corresponding default return values are NSAlertFirstButtonReturn + n. Default implementation of this will pick up the value of the NSLocalizedRecoveryOptionsErrorKey from the userInfo dictionary.  nil return usually implies no special suggestion, which would imply a single "OK" button.
 */
 - (NSArray *)localizedRecoveryOptions;
 
@@ -92,11 +92,11 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 
 The value passed for didRecover must be YES if error recovery was completely successful, NO otherwise.
 */
-- (void)attemptRecoveryFromError:(NSError *)error optionIndex:(unsigned int)recoveryOptionIndex delegate:(id)delegate didRecoverSelector:(SEL)didRecoverSelector contextInfo:(void *)contextInfo;
+- (void)attemptRecoveryFromError:(NSError *)error optionIndex:(NSUInteger)recoveryOptionIndex delegate:(id)delegate didRecoverSelector:(SEL)didRecoverSelector contextInfo:(void *)contextInfo;
 
 /* Given that an error alert has been presented applicaton-modally to the user, and the user has chosen one of the error's recovery options, attempt recovery from the error, and return YES if error recovery was completely successful, NO otherwise. The recovery option index is an index into the error's array of localized recovery options.
 */
-- (BOOL)attemptRecoveryFromError:(NSError *)error optionIndex:(unsigned int)recoveryOptionIndex;
+- (BOOL)attemptRecoveryFromError:(NSError *)error optionIndex:(NSUInteger)recoveryOptionIndex;
 
 @end
 

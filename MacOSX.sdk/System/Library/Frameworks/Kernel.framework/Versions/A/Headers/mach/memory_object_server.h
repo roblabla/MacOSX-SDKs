@@ -74,7 +74,8 @@ kern_return_t memory_object_data_request
 	memory_object_t memory_object,
 	memory_object_offset_t offset,
 	memory_object_cluster_size_t length,
-	vm_prot_t desired_access
+	vm_prot_t desired_access,
+	memory_object_fault_info_t fault_info
 );
 
 /* Routine memory_object_data_return */
@@ -206,6 +207,7 @@ extern const struct memory_object_subsystem {
 		memory_object_offset_t offset;
 		memory_object_cluster_size_t length;
 		vm_prot_t desired_access;
+		memory_object_fault_info_t fault_info;
 	} __Request__memory_object_data_request_t;
 #ifdef  __MigPackStructs
 #pragma pack()

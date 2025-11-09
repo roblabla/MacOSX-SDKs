@@ -73,6 +73,7 @@
 #define IPSEC_POLICY_IPSEC	2	/* do IPsec */
 #define IPSEC_POLICY_ENTRUST	3	/* consulting SPD if present. */
 #define IPSEC_POLICY_BYPASS	4	/* only for privileged socket. */
+#define IPSEC_POLICY_GENERATE   5       /* same as discard - IKE daemon can override with generated policy */
 
 /* Security protocol level */
 #define	IPSEC_LEVEL_DEFAULT	0	/* reference to system default */

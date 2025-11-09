@@ -17,7 +17,6 @@
 #ifndef __PMTEMPLATE__
 #define __PMTEMPLATE__
 
-#include <ApplicationServices/ApplicationServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <PrintCore/PMTicket.h>
 

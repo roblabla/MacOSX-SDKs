@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -47,16 +47,16 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 - (id)initWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
 - (id)initWithDecimal:(NSDecimal)dcm;
 - (id)initWithString:(NSString *)numberValue;
-- (id)initWithString:(NSString *)numberValue locale:(NSDictionary *)locale;
+- (id)initWithString:(NSString *)numberValue locale:(id)locale;
 
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale;
+- (NSString *)descriptionWithLocale:(id)locale;
 
 - (NSDecimal)decimalValue;
 
 + (NSDecimalNumber *)decimalNumberWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
 + (NSDecimalNumber *)decimalNumberWithDecimal:(NSDecimal)dcm;
 + (NSDecimalNumber *)decimalNumberWithString:(NSString *)numberValue;
-+ (NSDecimalNumber *)decimalNumberWithString:(NSString *)numberValue locale:(NSDictionary *)locale;
++ (NSDecimalNumber *)decimalNumberWithString:(NSString *)numberValue locale:(id)locale;
 
 + (NSDecimalNumber *)zero;
 + (NSDecimalNumber *)one;
@@ -76,8 +76,8 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
 - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
 
-- (NSDecimalNumber *)decimalNumberByRaisingToPower:(unsigned)power;
-- (NSDecimalNumber *)decimalNumberByRaisingToPower:(unsigned)power withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByRaisingToPower:(NSUInteger)power;
+- (NSDecimalNumber *)decimalNumberByRaisingToPower:(NSUInteger)power withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberByMultiplyingByPowerOf10:(short)power;
 - (NSDecimalNumber *)decimalNumberByMultiplyingByPowerOf10:(short)power withBehavior:(id <NSDecimalNumberBehaviors>)behavior;

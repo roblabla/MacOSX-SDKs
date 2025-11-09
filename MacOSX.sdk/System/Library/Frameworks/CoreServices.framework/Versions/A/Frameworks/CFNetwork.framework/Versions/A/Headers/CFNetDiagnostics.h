@@ -2,11 +2,8 @@
      File:       CFNetwork/CFNetDiagnostics.h
  
      Contains:   CFNetDiagnostics interface
- 
-     Version:    Technology: 1.0
-                 Release:    CFNetwork-129.20~93
- 
-     Copyright:  © 2004-2006 by Apple Computer, Inc., all rights reserved
+  
+     Copyright:  Copyright (c) 2004-2008, Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,6 +14,10 @@
 #ifndef __CFNETDIAGNOSTICS__
 #define __CFNETDIAGNOSTICS__
 
+#ifndef __CFNETWORKDEFS__
+#include <CFNetwork/CFNetworkDefs.h>
+#endif
+
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
@@ -24,7 +25,7 @@
 #include <stdint.h>
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -38,14 +39,6 @@ extern "C" {
     #pragma enumsalwaysint on
 #endif
 
-
-/*
- *  CFNetDiagnosticStatus
- *  
- *  Discussion:
- *    Returned by the various status and diagnostic calls
- */
-typedef int32_t                         CFNetDiagnosticStatus;
 
 /*
  *  CFNetDiagnosticRef
@@ -89,6 +82,13 @@ typedef enum CFNetDiagnosticStatusValues CFNetDiagnosticStatusValues;
 
 
 /*
+ *  CFNetDiagnosticStatus
+ *  
+ *  Discussion:
+ *    Returned by the various status and diagnostic calls
+ */
+typedef CFIndex                         CFNetDiagnosticStatus;
+/*
  *  CFNetDiagnosticCreateWithStreams()
  *  
  *  Discussion:
@@ -116,11 +116,11 @@ typedef enum CFNetDiagnosticStatusValues CFNetDiagnosticStatusValues;
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFNetDiagnosticRef 
+CFN_EXPORT CFNetDiagnosticRef 
 CFNetDiagnosticCreateWithStreams(
   CFAllocatorRef     alloc,
   CFReadStreamRef    readStream,
-  CFWriteStreamRef   writeStream)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFWriteStreamRef   writeStream)                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 
 /*
@@ -146,10 +146,10 @@ CFNetDiagnosticCreateWithStreams(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFNetDiagnosticRef 
+CFN_EXPORT CFNetDiagnosticRef 
 CFNetDiagnosticCreateWithURL(
   CFAllocatorRef   alloc,
-  CFURLRef         url)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFURLRef         url)                                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 
 
@@ -161,7 +161,7 @@ CFNetDiagnosticCreateWithURL(
  *    the user it will derive it from the bundle identifier of the
  *    currently running application, in that application's current
  *    localization. If you want to override that you may use
- *    CFNetDiagnosticAddName to specify a CFStringRef to be used.
+ *    CFNetDiagnosticSetName to specify a CFStringRef to be used.
  *  
  *  Parameters:
  *    
@@ -177,10 +177,10 @@ CFNetDiagnosticCreateWithURL(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern void 
+CFN_EXPORT void 
 CFNetDiagnosticSetName(
   CFNetDiagnosticRef   details,
-  CFStringRef          name)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFStringRef          name)                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 
 
@@ -207,8 +207,9 @@ CFNetDiagnosticSetName(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFNetDiagnosticStatus 
-CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CFN_EXPORT CFNetDiagnosticStatus 
+CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+
 
 
 /*
@@ -227,7 +228,7 @@ CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) AVAILABL
  *  Parameters:
  *    
  *    details:
- *      CFNetDiagnosticRef referring to the current problem
+ *      CFNetDiagnosticRef referring to the current problem.
  *    
  *    description:
  *      A pointer to a CFStringRef that, upon return, will point to a
@@ -240,10 +241,10 @@ CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) AVAILABL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFNetDiagnosticStatus 
+CFN_EXPORT CFNetDiagnosticStatus 
 CFNetDiagnosticCopyNetworkStatusPassively(
   CFNetDiagnosticRef   details,
-  CFStringRef *        description)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFStringRef *        description)                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
 
 
 

@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFObject.h
- * Copyright (c) 2002-2004 Apple Computer, Inc.
+ * Copyright (c) 2002-2007 Apple Inc.
  * All rights reserved.
  */
 
@@ -18,7 +18,7 @@ typedef long int CGPDFInteger;
 
 /* A type for real values. */
 
-typedef float CGPDFReal;
+typedef CGFloat CGPDFReal;
 
 /* A type to hold any object. */
 
@@ -45,10 +45,10 @@ CG_EXTERN_C_BEGIN
 
 CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef object) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-/* Get the value of `object'.  If the type of `object' is equal to `type',
+/* Get the value of `object'. If the type of `object' is equal to `type',
  * then copy the value of `object' to `value' (if it's non-NULL) and return
- * true.  Otherwise, if the type of `object' is `kCGPDFObjectTypeInteger'
- * and `type' is equal to `kCGPDFObjectTypeReal', then convert the value of
+ * true. Otherwise, if the type of `object' is `kCGPDFObjectTypeInteger' and
+ * `type' is equal to `kCGPDFObjectTypeReal', then convert the value of
  * `object' to floating point and copy the result to `value' (if it's
  * non-NULL) and return true. Otherwise, return false. */
 

@@ -16,8 +16,6 @@
 typedef int errno_t;
 typedef int64_t daddr64_t;
 
-typedef	int64_t	ino64_t;
-
 #ifndef BSD_BUILD
 struct buf;
 typedef struct buf * buf_t;
@@ -83,18 +81,6 @@ typedef struct user_iovec * user_iovec_t;
 typedef struct vfs_context * vfs_context_t;
 typedef struct vfstable * vfstable_t;
 
-#if KERNEL_PRIVATE
-typedef struct kern_iovec * kern_iovec_t;
-typedef	struct ifnet*		ifnet_t;
-typedef	struct mbuf*		mbuf_t;
-typedef	struct pkthdr*		pkthdr_t;
-typedef	struct socket*		socket_t;
-typedef struct sockopt*		sockopt_t;
-typedef struct ifaddr*		ifaddr_t;
-typedef struct ifmultiaddr*	ifmultiaddr_t;
-typedef struct ifnet_filter*	interface_filter_t;
-typedef struct rtentry*		route_t;
-#endif /* KERNEL_PRIVATE */
 
 #endif /* !BSD_BUILD */
 

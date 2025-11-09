@@ -150,7 +150,11 @@ enum {
     kIOFBNotifyWillChangeSpeed	= 9,
     kIOFBNotifyDidChangeSpeed	= 10,
 
-    kIOFBNotifyClamshellChange	= 20
+    kIOFBNotifyClamshellChange	= 20,
+
+    kIOFBNotifyCaptureChange	= 30,
+
+    kIOFBNotifyOnlineChange	= 40
 };
 
 enum {
@@ -219,7 +223,7 @@ protected:
     volatile unsigned char *		cursorSave;
     unsigned int			white;
 
-    Point				nextCursorLoc;
+    IOGPoint				nextCursorLoc;
     int					nextCursorFrame;
     SInt32				connectChange;
     semaphore_t				vblSemaphore;
@@ -324,7 +328,7 @@ public:
     static void initialize();
 
     virtual bool requestTerminate( IOService * provider, IOOptionBits options );
-    virtual IOService * IOFramebuffer::probe( IOService * provider, SInt32 * score );
+    virtual IOService * probe( IOService * provider, SInt32 * score );
     virtual bool start( IOService * provider );
     virtual void stop( IOService * provider );
     virtual void free();
@@ -345,14 +349,14 @@ public:
 				    void *p3, void *p4 );
 
     virtual void hideCursor( void );
-    virtual void showCursor( Point * cursorLoc, int frame );
-    virtual void moveCursor( Point * cursorLoc, int frame );
+    virtual void showCursor( IOGPoint * cursorLoc, int frame );
+    virtual void moveCursor( IOGPoint * cursorLoc, int frame );
     // virtual
     void resetCursor( void );
 
     virtual void getVBLTime( AbsoluteTime * time, AbsoluteTime * delta );
 
-    virtual void getBoundingRect ( Bounds ** bounds );
+    virtual void getBoundingRect ( IOGBounds ** bounds );
 
     virtual IOReturn open( void );
     

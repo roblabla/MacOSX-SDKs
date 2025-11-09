@@ -1,5 +1,5 @@
 /*	NSNotification.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -27,9 +27,9 @@
 
 @interface NSNotificationCenter : NSObject {
     @protected
-    void *_impl;
-    uintptr_t _counter;
-    void *_pad[11];
+    void * __strong _impl;
+    void *_callback_block[4];
+    void *_pad[8];
 }
 
 + (id)defaultCenter;

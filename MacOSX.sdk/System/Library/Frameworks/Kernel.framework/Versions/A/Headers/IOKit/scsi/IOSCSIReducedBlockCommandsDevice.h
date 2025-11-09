@@ -66,6 +66,8 @@ enum
 	kMediaStateLocked 	= 1
 };
 
+#define kCapacityDataBufferSize				8
+
 // Forward declaration for the SCSIReducedBlockCommands that is used internally by the
 // IOSCSIReducedBlockCommandsDevice class.
 class SCSIReducedBlockCommands;

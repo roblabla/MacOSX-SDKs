@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,13 @@
 
 @class NSColorList, NSMutableArray;
 
+typedef NSInteger NSColorPanelMode;
+
 enum {
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+    /* If the color panel is not displaying a mode, the NSNoModeColorPanel will be returned */
+    NSNoModeColorPanel                  = -1,
+#endif
     NSGrayModeColorPanel		= 0,
     NSRGBModeColorPanel			= 1,
     NSCMYKModeColorPanel		= 2,
@@ -78,8 +84,8 @@ enum {
 + (NSColorPanel *)sharedColorPanel;
 + (BOOL)sharedColorPanelExists;
 + (BOOL)dragColor:(NSColor *)color withEvent:(NSEvent *)theEvent fromView:(NSView *)sourceView;
-+ (void)setPickerMask:(int)mask;
-+ (void)setPickerMode:(int)mode;
++ (void)setPickerMask:(NSUInteger)mask;
++ (void)setPickerMode:(NSColorPanelMode)mode;
 
 - (void)setAccessoryView:(NSView *)aView;
 - (NSView *)accessoryView;
@@ -87,11 +93,11 @@ enum {
 - (BOOL)isContinuous;
 - (void)setShowsAlpha:(BOOL)flag;
 - (BOOL)showsAlpha;
-- (void)setMode:(int)mode;
-- (int)mode;
+- (void)setMode:(NSColorPanelMode)mode;
+- (NSColorPanelMode)mode;
 - (void)setColor:(NSColor *)color;
 - (NSColor *)color;
-- (float)alpha;
+- (CGFloat)alpha;
 - (void)setAction:(SEL)aSelector;
 - (void)setTarget:(id)anObject;
 - (void)attachColorList:(NSColorList *)colorList;

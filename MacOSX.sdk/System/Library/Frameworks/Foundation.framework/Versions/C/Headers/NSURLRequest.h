@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -52,30 +52,38 @@
 
 /*!
     @enum NSURLRequestCachePolicy
-    
+
     @discussion The NSURLRequestCachePolicy enum defines constants that
     can be used to specify the type of interactions that take place with
     the caching system when the URL loading system processes a request.
     Specifically, these constants cover interactions that have to do
     with whether already-existing cache data is returned to satisfy a
     URL load request.
-    
+
     @constant NSURLRequestUseProtocolCachePolicy Specifies that the
     caching logic defined in the protocol implementation, if any, is
     used for a particular URL load request. This is the default policy
     for URL load requests.
-              
-    @constant NSURLRequestReloadIgnoringCacheData Specifies that the
+
+    @constant NSURLRequestReloadIgnoringLocalCacheData Specifies that the
     data for the URL load should be loaded from the origin source. No
-    existing cache data, regardless of its freshness or validity,
+    existing local cache data, regardless of its freshness or validity,
     should be used to satisfy a URL load request.
-              
+
+    @constant NSURLRequestReloadIgnoringLocalAndRemoteCacheData Specifies that
+    not only should the local cache data be ignored, but that proxies and
+    other intermediates should be instructed to disregard their caches
+    so far as the protocol allows.  Unimplemented.
+
+    @constant NSURLRequestReloadIgnoringCacheData Older name for
+    NSURLRequestReloadIgnoringLocalCacheData.
+
     @constant NSURLRequestReturnCacheDataElseLoad Specifies that the
     existing cache data should be used to satisfy a URL load request,
     regardless of its age or expiration date. However, if there is no
     existing data in the cache corresponding to a URL load request,
     the URL is loaded from the origin source.
-              
+
     @constant NSURLRequestReturnCacheDataDontLoad Specifies that the
     existing cache data should be used to satisfy a URL load request,
     regardless of its age or expiration date. However, if there is no
@@ -83,14 +91,26 @@
     attempt is made to load the URL from the origin source, and the
     load is considered to have failed. This constant specifies a
     behavior that is similar to an "offline" mode.
+
+    @constant NSURLRequestReloadRevalidatingCacheData Specifies that
+    the existing cache data may be used provided the origin source
+    confirms its validity, otherwise the URL is loaded from the
+    origin source.  Unimplemented.
 */
-typedef enum
+enum
 {
-    NSURLRequestUseProtocolCachePolicy,
-    NSURLRequestReloadIgnoringCacheData,
-    NSURLRequestReturnCacheDataElseLoad,
-    NSURLRequestReturnCacheDataDontLoad,
-} NSURLRequestCachePolicy;
+    NSURLRequestUseProtocolCachePolicy = 0,
+
+    NSURLRequestReloadIgnoringLocalCacheData = 1,
+    NSURLRequestReloadIgnoringLocalAndRemoteCacheData = 4, // Unimplemented
+    NSURLRequestReloadIgnoringCacheData = NSURLRequestReloadIgnoringLocalCacheData,
+
+    NSURLRequestReturnCacheDataElseLoad = 2,
+    NSURLRequestReturnCacheDataDontLoad = 3,
+
+    NSURLRequestReloadRevalidatingCacheData = 5, // Unimplemented
+};
+typedef NSUInteger NSURLRequestCachePolicy;
 
 
 /*!
@@ -375,9 +395,7 @@ typedef enum
     @method HTTPShouldHandleCookies
     @abstract Determine whether default cookie handling will happen for 
     this request.
-    @discussion NOTE: In the current implementation, this value is unused by the
-    framework. A fully functional version of this method will be available 
-    in the future. 
+    @discussion NOTE: This value is not used prior to 10.3
     @result YES if cookies will be sent with and set for this request; 
     otherwise NO.
 */
@@ -475,9 +493,7 @@ typedef enum
     otherwise NO.
     @discussion The default is YES - in other words, cookies are sent from and 
     stored to the cookie manager by default.
-    NOTE: In the current implementation, the passed-in value is unused by the
-    framework. A fully functional version of this method will be available 
-    in the future. 
+    NOTE: In releases prior to 10.3, this value is ignored
 */
 - (void)setHTTPShouldHandleCookies:(BOOL)should;
 

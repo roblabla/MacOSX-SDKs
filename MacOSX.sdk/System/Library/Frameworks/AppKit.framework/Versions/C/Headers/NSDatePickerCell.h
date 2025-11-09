@@ -1,26 +1,29 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2005, Apple Computer, Inc.
+	Copyright (c) 2004-2007, Apple Inc.
 	All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 #import <Foundation/NSDate.h>
 #import <AppKit/NSActionCell.h>
 
-typedef enum {
-    NSTextFieldAndStepperDatePickerStyle    = 0,
-    NSClockAndCalendarDatePickerStyle       = 1
-} NSDatePickerStyle;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
-typedef enum {
+enum {
+    NSTextFieldAndStepperDatePickerStyle    = 0,
+    NSClockAndCalendarDatePickerStyle       = 1,
+    NSTextFieldDatePickerStyle              = 2
+};
+typedef NSUInteger NSDatePickerStyle;
+
+enum {
     NSSingleDateMode = 0,
     NSRangeDateMode = 1
-} NSDatePickerMode;
+};
+typedef NSUInteger NSDatePickerMode;
 
-typedef unsigned int NSDatePickerElementFlags;
+typedef NSUInteger NSDatePickerElementFlags;
 enum {
     /* Time Elements */
     NSHourMinuteDatePickerElementFlag       = 0x000c,
@@ -42,14 +45,15 @@ enum {
     NSDate *_minDate;
     NSDate *_maxDate;
     struct __dateCellFlags {
-	unsigned int elements:16;
-	unsigned int controlStyle:3;
-	unsigned int controlMode:2;
+        unsigned int elements:16;
+        unsigned int controlStyle:3;
+        unsigned int controlMode:2;
         unsigned int trackingHand:2;
-        unsigned int displayedMonth:4;
-	unsigned int drawsBackground:1;
+        unsigned int reserved2:4;
+        unsigned int drawsBackground:1;
         unsigned int digitsEntered:2;
-	unsigned int reserved:2;
+        unsigned int forcesLeadingZeroes:1;
+        unsigned int wrapsDateComponentArithmetic:1;
     } _dcFlags;
     id _delegate;
     NSCalendar *_calendar;
@@ -58,7 +62,7 @@ enum {
     NSColor *_backgroundColor;
     NSColor *_textColor;
     int _indexOfSelectedSubfield;
-    int _displayedYear;
+    int _reserved0;
     id _reserved1;
     id _reserved2;
     id _reserved3;
@@ -87,7 +91,7 @@ enum {
 #pragma mark *** Date Presentation Control ***
 
 - (NSDatePickerElementFlags)datePickerElements;
-- (void)setDatePickerElements:(unsigned)elementFlags;
+- (void)setDatePickerElements:(NSDatePickerElementFlags)elementFlags;
 
 - (NSCalendar *)calendar;
 - (void)setCalendar:(NSCalendar *)newCalendar;

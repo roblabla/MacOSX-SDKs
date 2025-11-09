@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,37 +10,41 @@
 
 @class NSColor, NSFont, NSNotification;
 
-/* Various important unicodes */
+/* Various important Unicode code points */
 enum {
-    NSParagraphSeparatorCharacter = 0x2029,
-    NSLineSeparatorCharacter = 0x2028,
-    NSTabCharacter = 0x0009,
-    NSFormFeedCharacter = 0x000c,
-    NSNewlineCharacter = 0x000a,
-    NSCarriageReturnCharacter = 0x000d,
-    NSEnterCharacter = 0x0003,
-    NSBackspaceCharacter = 0x0008,
-    NSBackTabCharacter = 0x0019,
-    NSDeleteCharacter = 0x007f
+    NSEnterCharacter                = 0x0003,
+    NSBackspaceCharacter            = 0x0008,
+    NSTabCharacter                  = 0x0009,
+    NSNewlineCharacter              = 0x000a,
+    NSFormFeedCharacter             = 0x000c,
+    NSCarriageReturnCharacter       = 0x000d,
+    NSBackTabCharacter              = 0x0019,
+    NSDeleteCharacter               = 0x007f,
+    NSLineSeparatorCharacter        = 0x2028,
+    NSParagraphSeparatorCharacter   = 0x2029
 };
 
-typedef enum _NSTextAlignment {
-    NSLeftTextAlignment		= 0, /* Visually left aligned */
-    NSRightTextAlignment	= 1, /* Visually right aligned */
-    NSCenterTextAlignment	= 2,
-    NSJustifiedTextAlignment	= 3, /* Fully-justified. The last line in a paragraph is natural-aligned. */
-    NSNaturalTextAlignment	= 4  /* Indicates the default alignment for script */
-} NSTextAlignment;
+/* Values for NSTextAlignment */
+enum {
+    NSLeftTextAlignment		= 0,    // Visually left aligned
+    NSRightTextAlignment	= 1,    // Visually right aligned
+    NSCenterTextAlignment	= 2,    // Visually centered
+    NSJustifiedTextAlignment	= 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
+    NSNaturalTextAlignment	= 4     // Indicates the default alignment for script
+};
+typedef NSUInteger NSTextAlignment;
 
-typedef enum _NSWritingDirection {
+/* Values for NSWritingDirection */
+enum {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-    NSWritingDirectionNatural = -1, /* Determines direction using the Unicode Bidi Algorithm rules P2 and P3 */
+    NSWritingDirectionNatural       = -1,   // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-    NSWritingDirectionLeftToRight = 0,	/* Left to right writing direction */
-    NSWritingDirectionRightToLeft	/* Right to left writing direction */
-} NSWritingDirection;
+    NSWritingDirectionLeftToRight   = 0,    // Left to right writing direction
+    NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
+};
+typedef NSInteger NSWritingDirection;
 
-/* Movement codes for movement between fields; these codes are the intValue of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
+/* Movement codes for movement between fields; these codes are the integer values of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
 */
 enum {
     NSIllegalTextMovement		= 0,
@@ -55,9 +59,8 @@ enum {
     ,
     NSCancelTextMovement		= 0x17,
     NSOtherTextMovement			= 0
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 };
-
 
 @interface NSText : NSView <NSChangeSpelling, NSIgnoreMisspelledWords> {
     /*All instance variables are private*/
@@ -85,13 +88,24 @@ enum {
 - (BOOL)isSelectable;
 - (void)setSelectable:(BOOL)flag;
 - (BOOL)isRichText;
-- (void)setRichText:(BOOL)flag;		/* If NO, also clears setImportsGraphics: */
+- (void)setRichText:(BOOL)flag;         //If NO, also clears setImportsGraphics:
 - (BOOL)importsGraphics;
-- (void)setImportsGraphics:(BOOL)flag;	/* If YES, also sets setRichText: */
-- (void)setBackgroundColor:(NSColor *)color;
-- (NSColor *)backgroundColor;
-- (void)setDrawsBackground:(BOOL)flag;
+- (void)setImportsGraphics:(BOOL)flag;  // If YES, also sets setRichText:
+- (BOOL)isFieldEditor;
+- (void)setFieldEditor:(BOOL)flag;      // Indicates whether to end editing on CR, TAB, etc.
+- (BOOL)usesFontPanel;
+- (void)setUsesFontPanel:(BOOL)flag;
 - (BOOL)drawsBackground;
+- (void)setDrawsBackground:(BOOL)flag;
+- (NSColor *)backgroundColor;
+- (void)setBackgroundColor:(NSColor *)color;
+
+- (BOOL)isRulerVisible;
+
+- (NSRange)selectedRange;
+- (void)setSelectedRange:(NSRange)range;
+
+- (void)scrollRangeToVisible:(NSRange)range;
 
 - (void)setFont:(NSFont *)obj;
 - (NSFont *)font;
@@ -104,14 +118,8 @@ enum {
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
-- (void)setFieldEditor:(BOOL)flag; /* A BOOL to indicate whether to end on CR, TAB, etc */
-- (BOOL)isFieldEditor;
-
 - (void)setTextColor:(NSColor *)color range:(NSRange)range;
 - (void)setFont:(NSFont *)font range:(NSRange)range;
-
-- (BOOL)usesFontPanel;
-- (void)setUsesFontPanel:(BOOL)flag;
 
 - (NSSize)maxSize;
 - (void)setMaxSize:(NSSize)newMaxSize;
@@ -146,24 +154,17 @@ enum {
 - (void)checkSpelling:(id)sender;
 - (void)toggleRuler:(id)sender;
 
-- (BOOL)isRulerVisible;
-
-- (NSRange)selectedRange;
-- (void)setSelectedRange:(NSRange)range;
-
-- (void)scrollRangeToVisible:(NSRange)range;
-
 @end
 
 @interface NSObject(NSTextDelegate)
-- (BOOL)textShouldBeginEditing:(NSText *)textObject; /* YES means do it */
-- (BOOL)textShouldEndEditing:(NSText *)textObject; /* YES means do it */
+- (BOOL)textShouldBeginEditing:(NSText *)textObject;        // YES means do it
+- (BOOL)textShouldEndEditing:(NSText *)textObject;          // YES means do it
 - (void)textDidBeginEditing:(NSNotification *)notification;
 - (void)textDidEndEditing:(NSNotification *)notification;
-- (void)textDidChange:(NSNotification *)notification; /* Any keyDown or paste which changes the contents causes this */
+- (void)textDidChange:(NSNotification *)notification;       // Any keyDown or paste which changes the contents causes this
 @end
 
 /* Notifications */
 APPKIT_EXTERN NSString *NSTextDidBeginEditingNotification;
-APPKIT_EXTERN NSString *NSTextDidEndEditingNotification;	// userInfo key:  @"NSTextMovement"
+APPKIT_EXTERN NSString *NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
 APPKIT_EXTERN NSString *NSTextDidChangeNotification;

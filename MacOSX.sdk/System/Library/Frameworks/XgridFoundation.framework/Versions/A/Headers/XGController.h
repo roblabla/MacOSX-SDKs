@@ -120,4 +120,19 @@ extern NSString * const XGControllerWillDeallocNotification;
 */
 + (id)controllerWithHostname:(NSString *)hostname portnumber:(UInt32)portnumber;
 
+/*!
+    @method privateController
+    @abstract Returns an instance initialized with a connection to a private controller.
+    This controller is not shared with anyone else, and has its own private agent.
+*/
++ (id)privateController;
+
+/*!
+    @method defaultController
+    @abstract Returns an instance initialized with a connection to the default
+    controller.  If no default controller has been set then this is equivalent
+    to calling +privateController.
+*/
++ (id)defaultController;
+
 @end

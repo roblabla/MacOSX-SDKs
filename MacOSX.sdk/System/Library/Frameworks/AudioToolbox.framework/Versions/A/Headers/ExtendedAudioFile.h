@@ -19,8 +19,10 @@
 
 #include <AvailabilityMacros.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <CoreFoundation/CoreFoundation.h>
 	#include <AudioToolbox/AudioFile.h>
 #else
+	#include <CoreFoundation.h>
 	#include <AudioFile.h>
 #endif
 
@@ -92,6 +94,8 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 						property on the ExtAudioFileRef afterwards. A NULL configuration is 
 						sufficient. This will ensure that the output file's data format is consistent
 						with the format being produced by the converter.
+	@constant		kExtAudioFileProperty_AudioFile
+						The underlying AudioFileID. Read-only.
 	@constant		kExtAudioFileProperty_FileMaxPacketSize
 						UInt32 representing the file data format's maximum packet size in bytes.
 						Read-only.
@@ -127,6 +131,7 @@ enum { // ExtAudioFilePropertyID
 	
 	// read-only:
 	kExtAudioFileProperty_AudioConverter		= 'acnv',	// AudioConverterRef
+	kExtAudioFileProperty_AudioFile				= 'afil',	// AudioFileID
 	kExtAudioFileProperty_FileMaxPacketSize		= 'fmps',	// UInt32
 	kExtAudioFileProperty_ClientMaxPacketSize	= 'cmps',	// UInt32
 	kExtAudioFileProperty_FileLengthFrames		= '#frm',	// SInt64
@@ -160,9 +165,26 @@ enum {
 */
 
 /*!
+	@function   ExtAudioFileOpenURL
+	
+	@abstract   Opens an audio file specified by a CFURLRef.
+	@param		inURLRef
+					The audio file to read.
+	@param		outExtAudioFile
+					On exit, a newly-allocated ExtAudioAudioFileRef.
+	@result		An OSStatus error code.
+
+	@discussion
+				Allocates a new ExtAudioFileRef, for reading an existing audio file.
+*/
+extern OSStatus
+ExtAudioFileOpenURL(		CFURLRef					inURL,
+							ExtAudioFileRef *			outExtAudioFile)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
 	@function   ExtAudioFileOpen
 	
-	@abstract   Opens an audio file.
+	@abstract   Opens an audio file specified by an FSRef.
 	@param		inFSRef
 					The audio file to read.
 	@param		outExtAudioFile
@@ -237,6 +259,44 @@ ExtAudioFileCreateNew(		const FSRef *						inParentDir,
 																			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
+	@function   ExtAudioFileCreateWithURL
+	
+	@abstract   Create a new audio file.
+	@param		inURL
+					The URL of the new audio file.
+	@param		inFileType
+					The type of file to create. This is a constant from AudioToolbox/AudioFile.h, e.g.
+					kAudioFileAIFFType. Note that this is not an HFSTypeCode.
+	@param		inStreamDesc
+					The format of the audio data to be written to the file.
+	@param		inChannelLayout
+					The channel layout of the audio data. If non-null, this must be consistent
+					with the number of channels specified by inStreamDesc.
+	@param		inFlags
+					The same flags as are used with AudioFileCreateWithURL
+					Can use these to control whether an existing file is overwritten (or not).
+	@param		outExtAudioFile
+					On exit, a newly-allocated ExtAudioAudioFileRef.
+	@result		An OSStatus error code.
+
+	@discussion
+				Creates a new audio file.
+				
+				If the file to be created is in an encoded format, it is permissible for the
+				sample rate in inStreamDesc to be 0, since in all cases, the file's encoding
+				AudioConverter may produce audio at a different sample rate than the source. The
+				file will be created with the audio format actually produced by the encoder.
+*/
+extern OSStatus
+ExtAudioFileCreateWithURL(	CFURLRef							inURL,
+							AudioFileTypeID						inFileType,
+							const AudioStreamBasicDescription * inStreamDesc,
+							const AudioChannelLayout *			inChannelLayout,
+                    		UInt32								inFlags,
+							ExtAudioFileRef *					outExtAudioFile)						
+																			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
 	@function   ExtAudioFileDispose
 	
 	@abstract   Close the file and dispose the object.
@@ -245,8 +305,7 @@ ExtAudioFileCreateNew(		const FSRef *						inParentDir,
 	@result		An OSStatus error code.
 	
 	@discussion
-				Closes the file and deletes the object. If no frames were written to an
-				ExtAudioFile allocated by ExtAudioFileCreateNew, the output file is deleted.
+				Closes the file and deletes the object.
 */
 extern OSStatus
 ExtAudioFileDispose(		ExtAudioFileRef				inExtAudioFile)		

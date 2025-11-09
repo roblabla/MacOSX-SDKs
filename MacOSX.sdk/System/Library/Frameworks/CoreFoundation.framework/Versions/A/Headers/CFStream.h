@@ -1,5 +1,5 @@
 /*	CFStream.h
-	Copyright (c) 2000-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2000-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)
@@ -11,12 +11,11 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFRunLoop.h>
 #include <CoreFoundation/CFSocket.h>
+#include <CoreFoundation/CFError.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
-typedef enum {
+enum {
     kCFStreamStatusNotOpen = 0,
     kCFStreamStatusOpening,  /* open is in-progress */
     kCFStreamStatusOpen,
@@ -25,27 +24,18 @@ typedef enum {
     kCFStreamStatusAtEnd,    /* no further bytes can be read/written */
     kCFStreamStatusClosed,
     kCFStreamStatusError
-} CFStreamStatus;
+};
+typedef CFIndex CFStreamStatus;
 
-typedef enum {
-    kCFStreamErrorDomainCustom = -1,      /* custom to the kind of stream in question */
-    kCFStreamErrorDomainPOSIX = 1,        /* POSIX errno; interpret using <sys/errno.h> */
-    kCFStreamErrorDomainMacOSStatus      /* OSStatus type from Carbon APIs; interpret using <MacTypes.h> */
-} CFStreamErrorDomain;
-
-typedef struct {
-    CFStreamErrorDomain domain;
-    SInt32 error;
-} CFStreamError;
-
-typedef enum {
+enum {
     kCFStreamEventNone = 0,
     kCFStreamEventOpenCompleted = 1,
     kCFStreamEventHasBytesAvailable = 2,
     kCFStreamEventCanAcceptBytes = 4, 
     kCFStreamEventErrorOccurred = 8,
     kCFStreamEventEndEncountered = 16
-} CFStreamEventType;
+};
+typedef CFOptionFlags CFStreamEventType;
 
 typedef struct {
     CFIndex version;
@@ -89,6 +79,8 @@ CF_EXPORT
 CFReadStreamRef CFReadStreamCreateWithFile(CFAllocatorRef alloc, CFURLRef fileURL);
 CF_EXPORT
 CFWriteStreamRef CFWriteStreamCreateWithFile(CFAllocatorRef alloc, CFURLRef fileURL);
+CF_EXPORT
+void CFStreamCreateBoundPair(CFAllocatorRef alloc, CFReadStreamRef *readStream, CFWriteStreamRef *writeStream, CFIndex transferBufferSize);
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /* Property for file write streams; value should be a CFBoolean.  Set to TRUE to append to a file, rather than to replace its contents */
@@ -133,13 +125,11 @@ CFStreamStatus CFReadStreamGetStatus(CFReadStreamRef stream);
 CF_EXPORT
 CFStreamStatus CFWriteStreamGetStatus(CFWriteStreamRef stream);
 
-/* 0 is returned if no error has occurred.  errorDomain specifies the domain
-   in which the error code should be interpretted; pass NULL if you are not 
-   interested. */
+/* Returns NULL if no error has occurred; otherwise returns the error. */
 CF_EXPORT
-CFStreamError CFReadStreamGetError(CFReadStreamRef stream);
+CFErrorRef CFReadStreamCopyError(CFReadStreamRef stream) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 CF_EXPORT
-CFStreamError CFWriteStreamGetError(CFWriteStreamRef stream);
+CFErrorRef CFWriteStreamCopyError(CFWriteStreamRef stream) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Returns success/failure.  Opening a stream causes it to reserve all the system
    resources it requires.  If the stream can open non-blocking, this will always 
@@ -231,9 +221,11 @@ Boolean CFWriteStreamSetProperty(CFWriteStreamRef stream, CFStringRef propertyNa
    run loops; It is the caller's responsibility to ensure that at least one of the 
    scheduled run loops is being run.
 
-   NOTE: not all streams provide these notifications.  If a stream does not support
-   asynchronous notification, CFStreamSetClient() will return NO; typically, such
-   streams will never block for device I/O (e.g. a stream on memory)
+   NOTE: Unlike other CoreFoundation APIs, pasing a NULL clientContext here will remove
+   the client.  If you do not care about the client context (i.e. your only concern
+   is that your callback be called), you should pass in a valid context where every
+   entry is 0 or NULL.
+
 */
 
 CF_EXPORT
@@ -251,8 +243,25 @@ void CFReadStreamUnscheduleFromRunLoop(CFReadStreamRef stream, CFRunLoopRef runL
 CF_EXPORT
 void CFWriteStreamUnscheduleFromRunLoop(CFWriteStreamRef stream, CFRunLoopRef runLoop, CFStringRef runLoopMode);
 
-#if defined(__cplusplus)
-}
-#endif
+
+/* The following API is deprecated starting in 10.5; please use CFRead/WriteStreamCopyError(), above, instead */
+enum {
+    kCFStreamErrorDomainCustom = -1,      /* custom to the kind of stream in question */
+    kCFStreamErrorDomainPOSIX = 1,        /* POSIX errno; interpret using <sys/errno.h> */
+    kCFStreamErrorDomainMacOSStatus      /* OSStatus type from Carbon APIs; interpret using <MacTypes.h> */
+};
+typedef CFIndex CFStreamErrorDomain;
+
+typedef struct {
+    CFIndex domain; 
+    SInt32 error;
+} CFStreamError;
+CF_EXPORT
+CFStreamError CFReadStreamGetError(CFReadStreamRef stream);
+CF_EXPORT
+CFStreamError CFWriteStreamGetError(CFWriteStreamRef stream);
+
+
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFSTREAM__ */

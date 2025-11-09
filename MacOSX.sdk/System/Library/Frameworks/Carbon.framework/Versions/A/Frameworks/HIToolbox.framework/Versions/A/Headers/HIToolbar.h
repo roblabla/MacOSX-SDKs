@@ -3,7 +3,7 @@
  
      Contains:   Toolbar and Toolbar Item API
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -177,7 +177,7 @@ enum {
   kHICommandHideToolbar         = 'tbhd',
 
   /*
-   * This command causes a window's toolbar visibility to be toggled;
+   * This command causes a window's toolbar visibility to be toggled:
    * if the toolbar is currently visible, then the toolbar is hidden,
    * and vice versa. You can set a menu item's command to this ID and
    * it will be handled and updated automatically for you. The text of
@@ -594,9 +594,9 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemImageChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the image changes.
- *    Any interested parties can install handlers on the toolbar item
- *    to receive notifications.
+ *    This event is sent to the item when the image changes. Any
+ *    interested parties can install handlers on the toolbar item to
+ *    receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -613,9 +613,9 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemLabelChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the label changes.
- *    Any interested parties can install handlers on the toolbar item
- *    to receive notifications.
+ *    This event is sent to the item when the label changes. Any
+ *    interested parties can install handlers on the toolbar item to
+ *    receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -632,9 +632,9 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemHelpTextChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the help text
- *    changes. Any interested parties can install handlers on the
- *    toolbar item to receive notifications.
+ *    This event is sent to the item when the help text changes. Any
+ *    interested parties can install handlers on the toolbar item to
+ *    receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -651,9 +651,9 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemCommandIDChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the command ID
- *    changes. Any interested parties can install handlers on the
- *    toolbar item to receive notifications.
+ *    This event is sent to the item when the command ID changes. Any
+ *    interested parties can install handlers on the toolbar item to
+ *    receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -670,12 +670,12 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemGetPersistentData
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the toolbar is going
- *    to write out the configuration information for the item. Any
- *    custom items can listen for this event and add any extra
- *    information to what is written out into the config so that it can
- *    be reanimated later on from the same config data. Typically,
- *    you'd not need to handle this event.
+ *    This event is sent to the item when the toolbar is going to write
+ *    out the configuration information for the item. Any custom items
+ *    can listen for this event and add any extra information to what
+ *    is written out into the config so that it can be reanimated later
+ *    on from the same config data. Typically, you'd not need to handle
+ *    this event.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -722,12 +722,21 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemEnabledStateChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the enabled state
- *    changes. Any interested parties can install handlers on the
- *    toolbar item to receive notifications.
+ *    This event is sent to the item when the enabled state changes.
+ *    Any interested parties can install handlers on the toolbar item
+ *    to receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    <-- kEventParamControlRef (out, typeControlRef)
+ *          The window in which the item is changing state. This
+ *          parameter is optional and may not be present in all
+ *          instances of this event. If not present, the item is
+ *          changing state across all windows that share the same
+ *          toolbar.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
@@ -741,9 +750,9 @@ enum {
  *  kEventClassToolbarItem / kEventToolbarItemSelectedStateChanged
  *  
  *  Summary:
- *    This event is sent to the item (itself) when the selected state
- *    changes. Any interested parties can install handlers on the
- *    toolbar item to receive notifications.
+ *    This event is sent to the item when the selected state changes.
+ *    Any interested parties can install handlers on the toolbar item
+ *    to receive notifications.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1066,16 +1075,20 @@ enum {
 /*======================================================================================*/
 /* FUNCTIONS                                                                            */
 /*======================================================================================*/
+#if !__LP64__
 /*
  *  HIToolbarCreate()
  *  
+ *  Summary:
+ *    Creates a toolbar.
+ *  
  *  Discussion:
- *    Creates a toolbar. After creating a toolbar, one would normally
- *    attach it to a window using SetWindowToolbar, described in
- *    MacWindows.h. Since the toolbar is merely the model (as opposed
- *    to the view), there are no routines to hide/show it here. Please
- *    look to MacWindows.h for the routines ShowHideWindowToolbar and
- *    IsWindowToolbarVisible there for more information.
+ *    After creating a toolbar, one would normally attach it to a
+ *    window using SetWindowToolbar, described in MacWindows.h. Since
+ *    the toolbar is merely the model (as opposed to the view), there
+ *    are no routines to hide or show it here. Please look to
+ *    MacWindows.h for the routines ShowHideWindowToolbar and
+ *    IsWindowToolbarVisible for more information.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1089,16 +1102,17 @@ enum {
  *      specify an identifier.
  *    
  *    inAttributes:
- *      Any attributes you wish to specify.
+ *      Any toolbar attributes you wish to specify, such as
+ *      kHIToolbarAutoSavesConfig or kHIToolbarIsConfigurable.
  *    
  *    outToolbar:
- *      The toolbar reference to your shiny new toolbar.
+ *      The toolbar reference to your new toolbar.
  *  
  *  Result:
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1112,7 +1126,7 @@ HIToolbarCreate(
 /*
  *  HIToolbarGetAttributes()
  *  
- *  Discussion:
+ *  Summary:
  *    Returns the attributes for the given toolbar.
  *  
  *  Mac OS X threading:
@@ -1121,7 +1135,7 @@ HIToolbarCreate(
  *  Parameters:
  *    
  *    inToolbar:
- *      The toolbar whose attributes you desire.
+ *      The toolbar whose attributes to retrieve.
  *    
  *    outAttributes:
  *      The attributes.
@@ -1130,7 +1144,7 @@ HIToolbarCreate(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1143,7 +1157,7 @@ HIToolbarGetAttributes(
 /*
  *  HIToolbarChangeAttributes()
  *  
- *  Discussion:
+ *  Summary:
  *    Changes the attributes of a toolbar.
  *  
  *  Mac OS X threading:
@@ -1164,7 +1178,7 @@ HIToolbarGetAttributes(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1178,7 +1192,7 @@ HIToolbarChangeAttributes(
 /*
  *  HIToolbarGetDisplayMode()
  *  
- *  Discussion:
+ *  Summary:
  *    Returns the current display mode of a toolbar.
  *  
  *  Mac OS X threading:
@@ -1196,7 +1210,7 @@ HIToolbarChangeAttributes(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1209,7 +1223,7 @@ HIToolbarGetDisplayMode(
 /*
  *  HIToolbarSetDisplayMode()
  *  
- *  Discussion:
+ *  Summary:
  *    Sets the current display mode of a toolbar.
  *  
  *  Mac OS X threading:
@@ -1227,7 +1241,7 @@ HIToolbarGetDisplayMode(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1240,7 +1254,7 @@ HIToolbarSetDisplayMode(
 /*
  *  HIToolbarGetDisplaySize()
  *  
- *  Discussion:
+ *  Summary:
  *    Gets the current display size of a toolbar.
  *  
  *  Mac OS X threading:
@@ -1258,7 +1272,7 @@ HIToolbarSetDisplayMode(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1271,7 +1285,7 @@ HIToolbarGetDisplaySize(
 /*
  *  HIToolbarSetDisplaySize()
  *  
- *  Discussion:
+ *  Summary:
  *    Sets the current display size of a toolbar.
  *  
  *  Mac OS X threading:
@@ -1289,7 +1303,7 @@ HIToolbarGetDisplaySize(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1302,7 +1316,7 @@ HIToolbarSetDisplaySize(
 /*
  *  HIToolbarCopyIdentifier()
  *  
- *  Discussion:
+ *  Summary:
  *    Returns the identifier for a toolbar.
  *  
  *  Mac OS X threading:
@@ -1321,7 +1335,7 @@ HIToolbarSetDisplaySize(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1334,13 +1348,20 @@ HIToolbarCopyIdentifier(
 /*
  *  HIToolbarSetItemsWithIdentifiers()
  *  
+ *  Summary:
+ *    Allows you to set a toolbar's items all at once.
+ *  
  *  Discussion:
- *    Allows you to set a toolbar's items all at once. The array
- *    contains either CFStringRefs of item identifiers, or a small
- *    CFDictionaryRef containing the identifier string, and the config
- *    data (if the item requires it). The key for the identifier string
- *    is kHIToolbarIdentifierKey and the key for the config data string
- *    is kHIToolbarDataKey.
+ *    The entries in the array must be either CFStringRefs or
+ *    CFDictionaryRefs. You do not need to use the same type for all
+ *    entries; different entries can use different types. If an array
+ *    entry is a CFStringRef, the string must contain a toolbar item
+ *    identifier. If an array entry is a dictionary, the dictionary
+ *    must contain a CFStringRef specifying a toolbar item identifier,
+ *    and may optionally also contain a CFTypeRef specifying the
+ *    toolbar item's configuration data, if the item requires it. The
+ *    key for the identifier string is kHIToolbarIdentifierKey, and the
+ *    key for the config data string is kHIToolbarDataKey.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1357,7 +1378,7 @@ HIToolbarCopyIdentifier(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1370,7 +1391,7 @@ HIToolbarSetItemsWithIdentifiers(
 /*
  *  HIToolbarCopyItems()
  *  
- *  Discussion:
+ *  Summary:
  *    Returns the array of toolbar items for a toolbar.
  *  
  *  Mac OS X threading:
@@ -1389,7 +1410,7 @@ HIToolbarSetItemsWithIdentifiers(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1402,11 +1423,14 @@ HIToolbarCopyItems(
 /*
  *  HIToolbarCreateItemWithIdentifier()
  *  
+ *  Summary:
+ *    Creates an item specified by a particular identifier.
+ *  
  *  Discussion:
- *    Creates an item specified by a particular identifier. Using this
- *    function allows you to create any item a delegate supports by
- *    naming its identifier. It also allows you to create standard
- *    items supplied by the Toolbox, such as the separator item.
+ *    Using this function allows you to create any item a delegate
+ *    supports by naming its identifier. It also allows you to create
+ *    standard items supplied by the Toolbox, such as the separator
+ *    item.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1431,7 +1455,7 @@ HIToolbarCopyItems(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1447,8 +1471,10 @@ HIToolbarCreateItemWithIdentifier(
 /*
  *  HIToolbarInsertItemAtIndex()
  *  
- *  Discussion:
+ *  Summary:
  *    Inserts a toolbar item at a given index into a toolbar.
+ *  
+ *  Discussion:
  *    Generally, you should always add items via identifier, and not
  *    with this routine.
  *  
@@ -1470,7 +1496,7 @@ HIToolbarCreateItemWithIdentifier(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1485,9 +1511,12 @@ HIToolbarInsertItemAtIndex(
 /*
  *  HIToolbarAppendItem()
  *  
+ *  Summary:
+ *    Appends an item to the end of a toolbar.
+ *  
  *  Discussion:
- *    Appends an item to the end of a toolbar. Generally, you should
- *    always add items via identifier, and not with this routine.
+ *    Generally, you should always add items via identifier, and not
+ *    with this routine.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1504,7 +1533,7 @@ HIToolbarInsertItemAtIndex(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1517,7 +1546,7 @@ HIToolbarAppendItem(
 /*
  *  HIToolbarRemoveItemAtIndex()
  *  
- *  Discussion:
+ *  Summary:
  *    Removes an item at a given index from a toolbar.
  *  
  *  Mac OS X threading:
@@ -1535,7 +1564,7 @@ HIToolbarAppendItem(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1549,12 +1578,11 @@ HIToolbarRemoveItemAtIndex(
  *  HIToolbarSetDelegate()
  *  
  *  Discussion:
- *    Sets the delegate event target for a toolbar. This is necessary
- *    for a toolbar to work properly if it wants items of its own. The
- *    delegate is who is asked to create toolbar items. If the delegate
- *    does not respond, the toolbar will attempt to create a toolbar
- *    item, but it can only create the standard items defined at the
- *    top of this header.
+ *    A delegate is required for the toolbar to work properly if the
+ *    toolbar uses custom toolbar items. The delegate is asked to
+ *    create toolbar items. If the delegate does not respond, the
+ *    toolbar will attempt to create a toolbar item, but it can only
+ *    create the standard items defined at the top of this header.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1571,7 +1599,7 @@ HIToolbarRemoveItemAtIndex(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1599,7 +1627,7 @@ HIToolbarSetDelegate(
  *    An HIObjectRef.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1612,6 +1640,8 @@ HIToolbarGetDelegate(HIToolbarRef inToolbar)                  AVAILABLE_MAC_OS_X
 /*==========================================================================*/
 /* The HIObject class ID for the ToolbarItem class. */
 
+#endif  /* !__LP64__ */
+
 #define kHIToolbarItemClassID           CFSTR("com.apple.hitoolbaritem")
 
 
@@ -1621,9 +1651,10 @@ HIToolbarGetDelegate(HIToolbarRef inToolbar)                  AVAILABLE_MAC_OS_X
 /* subclassing the toolbar item                                             */
 /*                                                                          */
 /*      kEventParamToolbarItemIdentifier            typeCFStringRef         */
-/*      kEventParamAttibutes                        typeUInt32              */
+/*      kEventParamAttributes                       typeUInt32              */
 
 
+#if !__LP64__
 /*
  *  HIToolbarItemCreate()
  *  
@@ -1651,7 +1682,7 @@ HIToolbarGetDelegate(HIToolbarRef inToolbar)                  AVAILABLE_MAC_OS_X
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1687,7 +1718,7 @@ HIToolbarItemCreate(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1718,7 +1749,7 @@ HIToolbarItemCopyIdentifier(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1756,7 +1787,7 @@ HIToolbarItemGetAttributes(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1811,7 +1842,7 @@ HIToolbarItemChangeAttributes(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1903,7 +1934,7 @@ HIToolbarItemGetAttributesInWindow(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1945,7 +1976,7 @@ HIToolbarItemChangeAttributesInWindow(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1979,7 +2010,7 @@ HIToolbarGetSelectedItemInWindow(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2011,7 +2042,7 @@ HIToolbarItemSetLabel(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2044,13 +2075,13 @@ HIToolbarItemCopyLabel(
  *      The long help text. This is what is displayed by the help tag
  *      system when the user hovers over the toolbar item with the
  *      mouse and holds the command key down. This parameter is
- *      optional, you may pass NULL.
+ *      optional; you may pass NULL.
  *  
  *  Result:
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2093,7 +2124,7 @@ HIToolbarItemSetHelpText(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2129,7 +2160,7 @@ HIToolbarItemCopyHelpText(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2160,7 +2191,7 @@ HIToolbarItemSetCommandID(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2193,7 +2224,7 @@ HIToolbarItemGetCommandID(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2201,6 +2232,39 @@ extern OSStatus
 HIToolbarItemSetIconRef(
   HIToolbarItemRef   inItem,
   IconRef            inIcon)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  HIToolbarItemCopyIconRef()
+ *  
+ *  Discussion:
+ *    Returns the icon for a toolbar item. This icon is already
+ *    retained by the time you receive it, so you can release it when
+ *    you are done with it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inItem:
+ *      The item in question.
+ *    
+ *    outIcon:
+ *      The retained icon. You should release it when finished with it.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIToolbarItemCopyIconRef(
+  HIToolbarItemRef   inItem,
+  IconRef *          outIcon)                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -2228,7 +2292,7 @@ HIToolbarItemSetIconRef(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2261,7 +2325,7 @@ HIToolbarItemSetImage(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2302,7 +2366,7 @@ HIToolbarItemCopyImage(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2334,7 +2398,7 @@ HIToolbarItemSetMenu(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2349,7 +2413,13 @@ HIToolbarItemCopyMenu(
  *  HIToolbarItemGetToolbar()
  *  
  *  Discussion:
- *    Gets the toolbar a toolbar item is attached to.
+ *    Returns the toolbar containing a toolbar item. 
+ *    
+ *    Due to a bug in the toolbar item implementation in Mac OS X 10.2,
+ *    Mac OS X 10.3, and Mac OS X 10.4, this function may crash or
+ *    return an invalid HIToolbarRef if called before toolbar item is
+ *    inserted into a toolbar. This bug is fixed in Mac OS X 10.5 and
+ *    later.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2364,7 +2434,7 @@ HIToolbarItemCopyMenu(
  *    or NULL if this toolbar item is not attached to any toolbar.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2390,7 +2460,7 @@ HIToolbarItemGetToolbar(HIToolbarItemRef inItem)              AVAILABLE_MAC_OS_X
  *    A boolean result.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2419,7 +2489,7 @@ HIToolbarItemIsEnabled(HIToolbarItemRef inItem)               AVAILABLE_MAC_OS_X
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2452,13 +2522,15 @@ HIToolbarItemSetEnabled(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 HIToolbarItemConfigDataChanged(HIToolbarItemRef inItem)       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

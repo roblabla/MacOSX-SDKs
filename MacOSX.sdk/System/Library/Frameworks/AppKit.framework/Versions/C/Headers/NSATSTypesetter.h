@@ -1,7 +1,7 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2005, Apple Computer, Inc.
+        Copyright (c) 2002-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -17,7 +17,7 @@
 
     NSRange paragraphSeparatorGlyphRange; // The current paragraph separator range (the length == 0 at the end of document)
 
-    float lineFragmentPadding; // The margin on both sides of lines
+    CGFloat lineFragmentPadding; // The margin on both sides of lines
 
 /* Ivars for the Cocoa Text System interface */
     NSLayoutManager *layoutManager;
@@ -25,7 +25,7 @@
 
 /* Cached NSTextContainer settings */
     NSTextContainer *currentTextContainer;
-    unsigned int currentTextContainerIndex;
+    NSUInteger currentTextContainerIndex;
     NSSize currentTextContainerSize;
 
 /* Cached NSParagraphStyle */
@@ -40,13 +40,11 @@
 + (id)sharedTypesetter;
 @end
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
 @interface NSATSTypesetter (NSPantherCompatibility)
 // This interface is deprecated.
 // Use -getLineFragmentRect:usedRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:remainingRect: instead
-- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(NSRectPointer)remainingRect;
+- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(NSRectPointer)remainingRect DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 @end
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4 */
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4
 // The following interfaces are moved to the abstract NSTypesetter class
@@ -62,14 +60,14 @@
 - (void)setHyphenationFactor:(float)factor;
 
 // NSTextContainer attributes
-- (float)lineFragmentPadding;
-- (void)setLineFragmentPadding:(float)padding;
+- (CGFloat)lineFragmentPadding;
+- (void)setLineFragmentPadding:(CGFloat)padding;
 
 // Screen/printer font mapping
 - (NSFont *)substituteFontForFont:(NSFont *)originalFont;
 
 // Tab stops
-- (NSTextTab *)textTabForGlyphLocation:(float)glyphLocation writingDirection:(NSWritingDirection)direction maxLocation:(float)maxLocation;
+- (NSTextTab *)textTabForGlyphLocation:(CGFloat)glyphLocation writingDirection:(NSWritingDirection)direction maxLocation:(CGFloat)maxLocation;
 
 // Bidi control
 - (BOOL)bidiProcessingEnabled;
@@ -83,12 +81,12 @@
 - (NSRange)paragraphSeparatorGlyphRange;
 
 // layout primitive
-- (unsigned int)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigin; // lineFragmentOrigin specifies the upper-left corner of line fragment rect.  On return, set to the next origin. The method returns the next glyph index. Usually the index right after paragraph separator but can be inside the paragraph range (i.e. text container exhaustion)
+- (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigin; // lineFragmentOrigin specifies the upper-left corner of line fragment rect.  On return, set to the next origin. The method returns the next glyph index. Usually the index right after paragraph separator but can be inside the paragraph range (i.e. text container exhaustion)
 
 // Line/paragraph spacing
-- (float)lineSpacingAfterGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
-- (float)paragraphSpacingBeforeGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
-- (float)paragraphSpacingAfterGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
+- (CGFloat)lineSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
+- (CGFloat)paragraphSpacingBeforeGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
+- (CGFloat)paragraphSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect;
 
 /* Cocoa Text System interface methods */
 
@@ -107,15 +105,15 @@
 /* NSLayoutPhaseInterface declares various subclass override points that are invoked if implemented */
 @interface NSATSTypesetter (NSLayoutPhaseInterface)
 // Called right before setLineFragmentRect:forGlyphRange:usedRect:
-- (void)willSetLineFragmentRect:(NSRect *)lineRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect *)usedRect baselineOffset:(float *)baselineOffset;
+- (void)willSetLineFragmentRect:(NSRect *)lineRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect *)usedRect baselineOffset:(CGFloat *)baselineOffset;
 
-- (BOOL)shouldBreakLineByWordBeforeCharacterAtIndex:(unsigned)charIndex;
-- (BOOL)shouldBreakLineByHyphenatingBeforeCharacterAtIndex:(unsigned)charIndex;
+- (BOOL)shouldBreakLineByWordBeforeCharacterAtIndex:(NSUInteger)charIndex;
+- (BOOL)shouldBreakLineByHyphenatingBeforeCharacterAtIndex:(NSUInteger)charIndex;
 
-- (float)hyphenationFactorForGlyphAtIndex:(unsigned)glyphIndex;
-- (UTF32Char)hyphenCharacterForGlyphAtIndex:(unsigned)glyphIndex;
+- (float)hyphenationFactorForGlyphAtIndex:(NSUInteger)glyphIndex;
+- (UTF32Char)hyphenCharacterForGlyphAtIndex:(NSUInteger)glyphIndex;
 
-- (NSRect)boundingBoxForControlGlyphAtIndex:(unsigned)glyphIndex forTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(NSRect)proposedRect glyphPosition:(NSPoint)glyphPosition characterIndex:(unsigned)charIndex;
+- (NSRect)boundingBoxForControlGlyphAtIndex:(NSUInteger)glyphIndex forTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(NSRect)proposedRect glyphPosition:(NSPoint)glyphPosition characterIndex:(NSUInteger)charIndex;
 @end
 
 /* NSGlyphStorageInterface declares all primitives interfacing to the glyph storage (usually NSLayoutManager). By overriding all the methods, you can implement an NSATSTypesetter subclass that interacts with custom glyph storage. */
@@ -125,16 +123,16 @@
 - (NSRange)glyphRangeForCharacterRange:(NSRange)charRange actualCharacterRange:(NSRangePointer)actualCharRange;
 
 // Glyph data
-- (unsigned)getGlyphsInRange:(NSRange)glyphsRange glyphs:(NSGlyph *)glyphBuffer characterIndexes:(unsigned *)charIndexBuffer glyphInscriptions:(NSGlyphInscription *)inscribeBuffer elasticBits:(BOOL *)elasticBuffer;
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(NSGlyph *)glyphBuffer characterIndexes:(NSUInteger *)charIndexBuffer glyphInscriptions:(NSGlyphInscription *)inscribeBuffer elasticBits:(BOOL *)elasticBuffer;
 
 // Layout storage
-- (void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(float)baselineOffset;
+- (void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(CGFloat)baselineOffset;
 - (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(NSGlyph *)glyphs;
-- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(unsigned)glyphIndex characterIndex:(unsigned)characterIndex;
+- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex;
 - (void)deleteGlyphsInRange:(NSRange)glyphRange;
 - (void)setNotShownAttribute:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
 - (void)setDrawsOutsideLineFragment:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
-- (void)setLocation:(NSPoint)location withAdvancements:(const float *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
+- (void)setLocation:(NSPoint)location withAdvancements:(const CGFloat *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
 - (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
 - (void)setBidiLevels:(const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
 @end

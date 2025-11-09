@@ -1,6 +1,7 @@
 /*
  * SyncServices -- ISyncChange.h
  * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved.
+ * updated for 64bit
  */
 
 #import <SyncServices/ISyncCommon.h>

@@ -40,6 +40,14 @@ extern NSString * const XGJobSpecificationTaskPrototypeIdentifierKey;
 extern NSString * const XGJobSpecificationDependsOnTasksKey;
 extern NSString * const XGJobSpecificationNotificationEmailKey;
 extern NSString * const XGJobSpecificationApplicationIdentifierKey;
+extern NSString * const XGJobSpecificationSchedulerHintsKey;
+
+extern NSString * const XGJobSpecificationARTSpecificationsKey;
+extern NSString * const XGJobSpecificationARTConditionsKey;
+extern NSString * const XGJobSpecificationARTDataKey;
+extern NSString * const XGJobSpecificationARTMinimumKey;
+extern NSString * const XGJobSpecificationARTMaximumKey;
+extern NSString * const XGJobSpecificationARTEqualKey;
 
 extern NSString * const XGJobSpecificationTypeTaskListValue;
 
@@ -51,6 +59,13 @@ extern NSString * const XGJobSpecificationTypeTaskListValue;
 {
 	XGJobInternal *_internal1;
 }
+
+/*!
+    @method name
+    @abstract Returns the name associated with the job.
+    @result A string.
+*/
+- (NSString *)name;
 
 /*!
 	@method applicationIdentifier
@@ -92,14 +107,14 @@ extern NSString * const XGJobSpecificationTypeTaskListValue;
 	@abstract Returns the number of tasks that make up the job.
 	@result The number of tasks.
 */
-- (int)taskCount;
+- (NSInteger)taskCount;
 
 /*!
 	@method completedTaskCount
 	@abstract Returns the number of tasks that have completed.
 	@result The number of completed tasks.
 */
-- (int)completedTaskCount;
+- (NSInteger)completedTaskCount;
 
 /*!
 	@method dateSubmitted

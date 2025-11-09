@@ -3,9 +3,9 @@
  
      Contains:   Public interface for FontSync
  
-     Version:    Quickdraw-192.24~58
+     Version:    Quickdraw-242~94
  
-     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -56,16 +56,17 @@ enum {
   kFNSMatchWSLayout             = 0x00000080, /* WorldScript layout tables must match */
   kFNSMatchAATLayout            = 0x00000100, /* AAT (incl. OpenType) layout tables must match */
   kFNSMatchPrintEncoding        = 0x00000200, /* PostScript font and glyph names and re-encoding vector must match */
-  kFNSMissingDataNoMatch        = (unsigned long)0x80000000, /* treat missing data as mismatch */
-  kFNSMatchAll                  = (unsigned long)0xFFFFFFFF, /* everything must match */
+  kFNSMissingDataNoMatch        = (UInt32)0x80000000, /* treat missing data as mismatch */
+  kFNSMatchAll                  = (UInt32)0xFFFFFFFF, /* everything must match */
   kFNSMatchDefaults             = 0     /* use global default match options */
 };
 
+#if !__LP64__
 /*
  *  FNSMatchDefaultsGet()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -75,6 +76,8 @@ FNSMatchDefaultsGet(void)                                     AVAILABLE_MAC_OS_X
 
 
 /* Version control */
+#endif  /* !__LP64__ */
+
 typedef UInt32 FNSObjectVersion;
 enum {
   kFNSVersionDontCare           = 0,
@@ -97,11 +100,12 @@ struct FNSSysInfo {
   UInt16              oFontSyncVersion;
 };
 typedef struct FNSSysInfo               FNSSysInfo;
+#if !__LP64__
 /*
  *  FNSSysInfoGet()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -111,12 +115,15 @@ FNSSysInfoGet(FNSSysInfo * ioInfo)                            AVAILABLE_MAC_OS_X
 
 
 /* FontSync References */
+#endif  /* !__LP64__ */
+
 typedef struct OpaqueFNSFontReference*  FNSFontReference;
+#if !__LP64__
 /*
  *  FNSReferenceGetVersion()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -130,7 +137,7 @@ FNSReferenceGetVersion(
  *  FNSReferenceDispose()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -142,7 +149,7 @@ FNSReferenceDispose(FNSFontReference iReference)              AVAILABLE_MAC_OS_X
  *  FNSReferenceMatch()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -158,7 +165,7 @@ FNSReferenceMatch(
  *  FNSReferenceFlattenedSize()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -172,7 +179,7 @@ FNSReferenceFlattenedSize(
  *  FNSReferenceFlatten()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -187,7 +194,7 @@ FNSReferenceFlatten(
  *  FNSReferenceUnflatten()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -200,17 +207,20 @@ FNSReferenceUnflatten(
 
 
 /* FontSync Profiles */
+#endif  /* !__LP64__ */
+
 enum {
   kFNSCreatorDefault            = 0,
   kFNSProfileFileType           = 'fnsp'
 };
 
 typedef struct OpaqueFNSFontProfile*    FNSFontProfile;
+#if !__LP64__
 /*
  *  FNSProfileCreate()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -227,7 +237,7 @@ FNSProfileCreate(
  *  FNSProfileOpen()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -243,7 +253,7 @@ FNSProfileOpen(
  *  FNSProfileCreateWithFSRef()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -262,7 +272,7 @@ FNSProfileCreateWithFSRef(
  *  FNSProfileOpenWithFSRef()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -277,7 +287,7 @@ FNSProfileOpenWithFSRef(
  *  FNSProfileGetVersion()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -291,7 +301,7 @@ FNSProfileGetVersion(
  *  FNSProfileCompact()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -303,7 +313,7 @@ FNSProfileCompact(FNSFontProfile iProfile)                    AVAILABLE_MAC_OS_X
  *  FNSProfileClose()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -315,7 +325,7 @@ FNSProfileClose(FNSFontProfile iProfile)                      AVAILABLE_MAC_OS_X
  *  FNSProfileAddReference()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -329,7 +339,7 @@ FNSProfileAddReference(
  *  FNSProfileRemoveReference()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -343,7 +353,7 @@ FNSProfileRemoveReference(
  *  FNSProfileRemoveIndReference()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -357,7 +367,7 @@ FNSProfileRemoveIndReference(
  *  FNSProfileClear()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -369,7 +379,7 @@ FNSProfileClear(FNSFontProfile iProfile)                      AVAILABLE_MAC_OS_X
  *  FNSProfileCountReferences()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -383,7 +393,7 @@ FNSProfileCountReferences(
  *  FNSProfileGetIndReference()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -398,7 +408,7 @@ FNSProfileGetIndReference(
  *  FNSProfileMatchReference()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -418,7 +428,7 @@ FNSProfileMatchReference(
  *  FNSReferenceCreate()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -433,7 +443,7 @@ FNSReferenceCreate(
  *  FNSReferenceMatchFonts()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -452,7 +462,7 @@ FNSReferenceMatchFonts(
  *  FNSReferenceCreateFromFamily()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -469,7 +479,7 @@ FNSReferenceCreateFromFamily(
  *  FNSReferenceMatchFamilies()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -488,7 +498,7 @@ FNSReferenceMatchFamilies(
  *  FNSReferenceGetFamilyInfo()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -504,7 +514,7 @@ FNSReferenceGetFamilyInfo(
  *  FNSReferenceCountNames()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -518,7 +528,7 @@ FNSReferenceCountNames(
  *  FNSReferenceGetIndName()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -539,7 +549,7 @@ FNSReferenceGetIndName(
  *  FNSReferenceFindName()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
@@ -561,13 +571,15 @@ FNSReferenceFindName(
  *  FNSEnabled()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern Boolean 
 FNSEnabled(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #pragma options align=reset

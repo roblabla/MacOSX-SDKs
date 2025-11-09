@@ -126,6 +126,16 @@
 */
 - (IOBluetoothDevice*) getDevice;
 
+
+/*!
+	@method		isTransferInProgress:
+	@abstract	Gets state of the transfer
+	@discussion	
+	@result		The state of the transfer
+*/
+- (BOOL) isTransferInProgress;
+
+
 @end
 
 

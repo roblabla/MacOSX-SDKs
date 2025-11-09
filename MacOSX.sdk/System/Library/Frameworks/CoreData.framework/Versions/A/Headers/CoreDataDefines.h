@@ -1,6 +1,7 @@
 /*
 	CoreDataDefines.h
-	Copyright (c) 2004-2005 Apple Computer, Inc.
+    Core Data
+    Copyright (c) 2004-2007 Apple Inc.
 	All rights reserved.
 */
 #ifndef _COREDATADEFINES_H
@@ -68,5 +69,8 @@
 //
 
 COREDATA_EXTERN double NSCoreDataVersionNumber;
+
+#define NSCoreDataVersionNumber10_4       46.0
+#define NSCoreDataVersionNumber10_4_3     77.0
 
 #endif // _COREDATADEFINES_H

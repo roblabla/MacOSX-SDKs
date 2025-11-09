@@ -1,390 +1,13 @@
 /*
- * This file is auto generated.
- * Please do not edit it.
+ * This file is auto generated.  Please do not edit it.
  */
 
 #ifndef __KERBEROS5__
 #define __KERBEROS5__
 
-/* Environment dependent macros */
-
-/* Error tables from asn1_err.h */
-#define initialize_asn1_error_table()
-#define ASN1_BAD_TIMEFORMAT                      (1859794432L)
-#define ASN1_MISSING_FIELD                       (1859794433L)
-#define ASN1_MISPLACED_FIELD                     (1859794434L)
-#define ASN1_TYPE_MISMATCH                       (1859794435L)
-#define ASN1_OVERFLOW                            (1859794436L)
-#define ASN1_OVERRUN                             (1859794437L)
-#define ASN1_BAD_ID                              (1859794438L)
-#define ASN1_BAD_LENGTH                          (1859794439L)
-#define ASN1_BAD_FORMAT                          (1859794440L)
-#define ASN1_PARSE_ERROR                         (1859794441L)
-#define ASN1_BAD_GMTIME                          (1859794442L)
-#define ASN1_MISMATCH_INDEF                      (1859794443L)
-#define ASN1_MISSING_EOC                         (1859794444L)
-#define ERROR_TABLE_BASE_asn1                    (1859794432L)
-
-/* Error tables from kdb5_err.h */
-#define initialize_kdb5_error_table()
-#define KRB5_KDB_RCSID                           (-1780008448L)
-#define KRB5_KDB_INUSE                           (-1780008447L)
-#define KRB5_KDB_UK_SERROR                       (-1780008446L)
-#define KRB5_KDB_UK_RERROR                       (-1780008445L)
-#define KRB5_KDB_UNAUTH                          (-1780008444L)
-#define KRB5_KDB_NOENTRY                         (-1780008443L)
-#define KRB5_KDB_ILL_WILDCARD                    (-1780008442L)
-#define KRB5_KDB_DB_INUSE                        (-1780008441L)
-#define KRB5_KDB_DB_CHANGED                      (-1780008440L)
-#define KRB5_KDB_TRUNCATED_RECORD                (-1780008439L)
-#define KRB5_KDB_RECURSIVELOCK                   (-1780008438L)
-#define KRB5_KDB_NOTLOCKED                       (-1780008437L)
-#define KRB5_KDB_BADLOCKMODE                     (-1780008436L)
-#define KRB5_KDB_DBNOTINITED                     (-1780008435L)
-#define KRB5_KDB_DBINITED                        (-1780008434L)
-#define KRB5_KDB_ILLDIRECTION                    (-1780008433L)
-#define KRB5_KDB_NOMASTERKEY                     (-1780008432L)
-#define KRB5_KDB_BADMASTERKEY                    (-1780008431L)
-#define KRB5_KDB_INVALIDKEYSIZE                  (-1780008430L)
-#define KRB5_KDB_CANTREAD_STORED                 (-1780008429L)
-#define KRB5_KDB_BADSTORED_MKEY                  (-1780008428L)
-#define KRB5_KDB_CANTLOCK_DB                     (-1780008427L)
-#define KRB5_KDB_DB_CORRUPT                      (-1780008426L)
-#define KRB5_KDB_BAD_VERSION                     (-1780008425L)
-#define KRB5_KDB_BAD_SALTTYPE                    (-1780008424L)
-#define KRB5_KDB_BAD_ENCTYPE                     (-1780008423L)
-#define KRB5_KDB_BAD_CREATEFLAGS                 (-1780008422L)
-#define KRB5_KDB_NO_PERMITTED_KEY                (-1780008421L)
-#define KRB5_KDB_NO_MATCHING_KEY                 (-1780008420L)
-#define ERROR_TABLE_BASE_kdb5                    (-1780008448L)
-
-/* Error tables from krb5_err.h */
-#define initialize_krb5_error_table()
-#define KRB5KDC_ERR_NONE                         (-1765328384L)
-#define KRB5KDC_ERR_NAME_EXP                     (-1765328383L)
-#define KRB5KDC_ERR_SERVICE_EXP                  (-1765328382L)
-#define KRB5KDC_ERR_BAD_PVNO                     (-1765328381L)
-#define KRB5KDC_ERR_C_OLD_MAST_KVNO              (-1765328380L)
-#define KRB5KDC_ERR_S_OLD_MAST_KVNO              (-1765328379L)
-#define KRB5KDC_ERR_C_PRINCIPAL_UNKNOWN          (-1765328378L)
-#define KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN          (-1765328377L)
-#define KRB5KDC_ERR_PRINCIPAL_NOT_UNIQUE         (-1765328376L)
-#define KRB5KDC_ERR_NULL_KEY                     (-1765328375L)
-#define KRB5KDC_ERR_CANNOT_POSTDATE              (-1765328374L)
-#define KRB5KDC_ERR_NEVER_VALID                  (-1765328373L)
-#define KRB5KDC_ERR_POLICY                       (-1765328372L)
-#define KRB5KDC_ERR_BADOPTION                    (-1765328371L)
-#define KRB5KDC_ERR_ETYPE_NOSUPP                 (-1765328370L)
-#define KRB5KDC_ERR_SUMTYPE_NOSUPP               (-1765328369L)
-#define KRB5KDC_ERR_PADATA_TYPE_NOSUPP           (-1765328368L)
-#define KRB5KDC_ERR_TRTYPE_NOSUPP                (-1765328367L)
-#define KRB5KDC_ERR_CLIENT_REVOKED               (-1765328366L)
-#define KRB5KDC_ERR_SERVICE_REVOKED              (-1765328365L)
-#define KRB5KDC_ERR_TGT_REVOKED                  (-1765328364L)
-#define KRB5KDC_ERR_CLIENT_NOTYET                (-1765328363L)
-#define KRB5KDC_ERR_SERVICE_NOTYET               (-1765328362L)
-#define KRB5KDC_ERR_KEY_EXP                      (-1765328361L)
-#define KRB5KDC_ERR_PREAUTH_FAILED               (-1765328360L)
-#define KRB5KDC_ERR_PREAUTH_REQUIRED             (-1765328359L)
-#define KRB5KDC_ERR_SERVER_NOMATCH               (-1765328358L)
-#define KRB5PLACEHOLD_27                         (-1765328357L)
-#define KRB5PLACEHOLD_28                         (-1765328356L)
-#define KRB5PLACEHOLD_29                         (-1765328355L)
-#define KRB5PLACEHOLD_30                         (-1765328354L)
-#define KRB5KRB_AP_ERR_BAD_INTEGRITY             (-1765328353L)
-#define KRB5KRB_AP_ERR_TKT_EXPIRED               (-1765328352L)
-#define KRB5KRB_AP_ERR_TKT_NYV                   (-1765328351L)
-#define KRB5KRB_AP_ERR_REPEAT                    (-1765328350L)
-#define KRB5KRB_AP_ERR_NOT_US                    (-1765328349L)
-#define KRB5KRB_AP_ERR_BADMATCH                  (-1765328348L)
-#define KRB5KRB_AP_ERR_SKEW                      (-1765328347L)
-#define KRB5KRB_AP_ERR_BADADDR                   (-1765328346L)
-#define KRB5KRB_AP_ERR_BADVERSION                (-1765328345L)
-#define KRB5KRB_AP_ERR_MSG_TYPE                  (-1765328344L)
-#define KRB5KRB_AP_ERR_MODIFIED                  (-1765328343L)
-#define KRB5KRB_AP_ERR_BADORDER                  (-1765328342L)
-#define KRB5KRB_AP_ERR_ILL_CR_TKT                (-1765328341L)
-#define KRB5KRB_AP_ERR_BADKEYVER                 (-1765328340L)
-#define KRB5KRB_AP_ERR_NOKEY                     (-1765328339L)
-#define KRB5KRB_AP_ERR_MUT_FAIL                  (-1765328338L)
-#define KRB5KRB_AP_ERR_BADDIRECTION              (-1765328337L)
-#define KRB5KRB_AP_ERR_METHOD                    (-1765328336L)
-#define KRB5KRB_AP_ERR_BADSEQ                    (-1765328335L)
-#define KRB5KRB_AP_ERR_INAPP_CKSUM               (-1765328334L)
-#define KRB5KRB_AP_PATH_NOT_ACCEPTED             (-1765328333L)
-#define KRB5KRB_ERR_RESPONSE_TOO_BIG             (-1765328332L)
-#define KRB5PLACEHOLD_53                         (-1765328331L)
-#define KRB5PLACEHOLD_54                         (-1765328330L)
-#define KRB5PLACEHOLD_55                         (-1765328329L)
-#define KRB5PLACEHOLD_56                         (-1765328328L)
-#define KRB5PLACEHOLD_57                         (-1765328327L)
-#define KRB5PLACEHOLD_58                         (-1765328326L)
-#define KRB5PLACEHOLD_59                         (-1765328325L)
-#define KRB5KRB_ERR_GENERIC                      (-1765328324L)
-#define KRB5KRB_ERR_FIELD_TOOLONG                (-1765328323L)
-#define KRB5PLACEHOLD_62                         (-1765328322L)
-#define KRB5PLACEHOLD_63                         (-1765328321L)
-#define KRB5PLACEHOLD_64                         (-1765328320L)
-#define KRB5PLACEHOLD_65                         (-1765328319L)
-#define KRB5PLACEHOLD_66                         (-1765328318L)
-#define KRB5PLACEHOLD_67                         (-1765328317L)
-#define KRB5PLACEHOLD_68                         (-1765328316L)
-#define KRB5PLACEHOLD_69                         (-1765328315L)
-#define KRB5PLACEHOLD_70                         (-1765328314L)
-#define KRB5PLACEHOLD_71                         (-1765328313L)
-#define KRB5PLACEHOLD_72                         (-1765328312L)
-#define KRB5PLACEHOLD_73                         (-1765328311L)
-#define KRB5PLACEHOLD_74                         (-1765328310L)
-#define KRB5PLACEHOLD_75                         (-1765328309L)
-#define KRB5PLACEHOLD_76                         (-1765328308L)
-#define KRB5PLACEHOLD_77                         (-1765328307L)
-#define KRB5PLACEHOLD_78                         (-1765328306L)
-#define KRB5PLACEHOLD_79                         (-1765328305L)
-#define KRB5PLACEHOLD_80                         (-1765328304L)
-#define KRB5PLACEHOLD_81                         (-1765328303L)
-#define KRB5PLACEHOLD_82                         (-1765328302L)
-#define KRB5PLACEHOLD_83                         (-1765328301L)
-#define KRB5PLACEHOLD_84                         (-1765328300L)
-#define KRB5PLACEHOLD_85                         (-1765328299L)
-#define KRB5PLACEHOLD_86                         (-1765328298L)
-#define KRB5PLACEHOLD_87                         (-1765328297L)
-#define KRB5PLACEHOLD_88                         (-1765328296L)
-#define KRB5PLACEHOLD_89                         (-1765328295L)
-#define KRB5PLACEHOLD_90                         (-1765328294L)
-#define KRB5PLACEHOLD_91                         (-1765328293L)
-#define KRB5PLACEHOLD_92                         (-1765328292L)
-#define KRB5PLACEHOLD_93                         (-1765328291L)
-#define KRB5PLACEHOLD_94                         (-1765328290L)
-#define KRB5PLACEHOLD_95                         (-1765328289L)
-#define KRB5PLACEHOLD_96                         (-1765328288L)
-#define KRB5PLACEHOLD_97                         (-1765328287L)
-#define KRB5PLACEHOLD_98                         (-1765328286L)
-#define KRB5PLACEHOLD_99                         (-1765328285L)
-#define KRB5PLACEHOLD_100                        (-1765328284L)
-#define KRB5PLACEHOLD_101                        (-1765328283L)
-#define KRB5PLACEHOLD_102                        (-1765328282L)
-#define KRB5PLACEHOLD_103                        (-1765328281L)
-#define KRB5PLACEHOLD_104                        (-1765328280L)
-#define KRB5PLACEHOLD_105                        (-1765328279L)
-#define KRB5PLACEHOLD_106                        (-1765328278L)
-#define KRB5PLACEHOLD_107                        (-1765328277L)
-#define KRB5PLACEHOLD_108                        (-1765328276L)
-#define KRB5PLACEHOLD_109                        (-1765328275L)
-#define KRB5PLACEHOLD_110                        (-1765328274L)
-#define KRB5PLACEHOLD_111                        (-1765328273L)
-#define KRB5PLACEHOLD_112                        (-1765328272L)
-#define KRB5PLACEHOLD_113                        (-1765328271L)
-#define KRB5PLACEHOLD_114                        (-1765328270L)
-#define KRB5PLACEHOLD_115                        (-1765328269L)
-#define KRB5PLACEHOLD_116                        (-1765328268L)
-#define KRB5PLACEHOLD_117                        (-1765328267L)
-#define KRB5PLACEHOLD_118                        (-1765328266L)
-#define KRB5PLACEHOLD_119                        (-1765328265L)
-#define KRB5PLACEHOLD_120                        (-1765328264L)
-#define KRB5PLACEHOLD_121                        (-1765328263L)
-#define KRB5PLACEHOLD_122                        (-1765328262L)
-#define KRB5PLACEHOLD_123                        (-1765328261L)
-#define KRB5PLACEHOLD_124                        (-1765328260L)
-#define KRB5PLACEHOLD_125                        (-1765328259L)
-#define KRB5PLACEHOLD_126                        (-1765328258L)
-#define KRB5PLACEHOLD_127                        (-1765328257L)
-#define KRB5_ERR_RCSID                           (-1765328256L)
-#define KRB5_LIBOS_BADLOCKFLAG                   (-1765328255L)
-#define KRB5_LIBOS_CANTREADPWD                   (-1765328254L)
-#define KRB5_LIBOS_BADPWDMATCH                   (-1765328253L)
-#define KRB5_LIBOS_PWDINTR                       (-1765328252L)
-#define KRB5_PARSE_ILLCHAR                       (-1765328251L)
-#define KRB5_PARSE_MALFORMED                     (-1765328250L)
-#define KRB5_CONFIG_CANTOPEN                     (-1765328249L)
-#define KRB5_CONFIG_BADFORMAT                    (-1765328248L)
-#define KRB5_CONFIG_NOTENUFSPACE                 (-1765328247L)
-#define KRB5_BADMSGTYPE                          (-1765328246L)
-#define KRB5_CC_BADNAME                          (-1765328245L)
-#define KRB5_CC_UNKNOWN_TYPE                     (-1765328244L)
-#define KRB5_CC_NOTFOUND                         (-1765328243L)
-#define KRB5_CC_END                              (-1765328242L)
-#define KRB5_NO_TKT_SUPPLIED                     (-1765328241L)
-#define KRB5KRB_AP_WRONG_PRINC                   (-1765328240L)
-#define KRB5KRB_AP_ERR_TKT_INVALID               (-1765328239L)
-#define KRB5_PRINC_NOMATCH                       (-1765328238L)
-#define KRB5_KDCREP_MODIFIED                     (-1765328237L)
-#define KRB5_KDCREP_SKEW                         (-1765328236L)
-#define KRB5_IN_TKT_REALM_MISMATCH               (-1765328235L)
-#define KRB5_PROG_ETYPE_NOSUPP                   (-1765328234L)
-#define KRB5_PROG_KEYTYPE_NOSUPP                 (-1765328233L)
-#define KRB5_WRONG_ETYPE                         (-1765328232L)
-#define KRB5_PROG_SUMTYPE_NOSUPP                 (-1765328231L)
-#define KRB5_REALM_UNKNOWN                       (-1765328230L)
-#define KRB5_SERVICE_UNKNOWN                     (-1765328229L)
-#define KRB5_KDC_UNREACH                         (-1765328228L)
-#define KRB5_NO_LOCALNAME                        (-1765328227L)
-#define KRB5_MUTUAL_FAILED                       (-1765328226L)
-#define KRB5_RC_TYPE_EXISTS                      (-1765328225L)
-#define KRB5_RC_MALLOC                           (-1765328224L)
-#define KRB5_RC_TYPE_NOTFOUND                    (-1765328223L)
-#define KRB5_RC_UNKNOWN                          (-1765328222L)
-#define KRB5_RC_REPLAY                           (-1765328221L)
-#define KRB5_RC_IO                               (-1765328220L)
-#define KRB5_RC_NOIO                             (-1765328219L)
-#define KRB5_RC_PARSE                            (-1765328218L)
-#define KRB5_RC_IO_EOF                           (-1765328217L)
-#define KRB5_RC_IO_MALLOC                        (-1765328216L)
-#define KRB5_RC_IO_PERM                          (-1765328215L)
-#define KRB5_RC_IO_IO                            (-1765328214L)
-#define KRB5_RC_IO_UNKNOWN                       (-1765328213L)
-#define KRB5_RC_IO_SPACE                         (-1765328212L)
-#define KRB5_TRANS_CANTOPEN                      (-1765328211L)
-#define KRB5_TRANS_BADFORMAT                     (-1765328210L)
-#define KRB5_LNAME_CANTOPEN                      (-1765328209L)
-#define KRB5_LNAME_NOTRANS                       (-1765328208L)
-#define KRB5_LNAME_BADFORMAT                     (-1765328207L)
-#define KRB5_CRYPTO_INTERNAL                     (-1765328206L)
-#define KRB5_KT_BADNAME                          (-1765328205L)
-#define KRB5_KT_UNKNOWN_TYPE                     (-1765328204L)
-#define KRB5_KT_NOTFOUND                         (-1765328203L)
-#define KRB5_KT_END                              (-1765328202L)
-#define KRB5_KT_NOWRITE                          (-1765328201L)
-#define KRB5_KT_IOERR                            (-1765328200L)
-#define KRB5_NO_TKT_IN_RLM                       (-1765328199L)
-#define KRB5DES_BAD_KEYPAR                       (-1765328198L)
-#define KRB5DES_WEAK_KEY                         (-1765328197L)
-#define KRB5_BAD_ENCTYPE                         (-1765328196L)
-#define KRB5_BAD_KEYSIZE                         (-1765328195L)
-#define KRB5_BAD_MSIZE                           (-1765328194L)
-#define KRB5_CC_TYPE_EXISTS                      (-1765328193L)
-#define KRB5_KT_TYPE_EXISTS                      (-1765328192L)
-#define KRB5_CC_IO                               (-1765328191L)
-#define KRB5_FCC_PERM                            (-1765328190L)
-#define KRB5_FCC_NOFILE                          (-1765328189L)
-#define KRB5_FCC_INTERNAL                        (-1765328188L)
-#define KRB5_CC_WRITE                            (-1765328187L)
-#define KRB5_CC_NOMEM                            (-1765328186L)
-#define KRB5_CC_FORMAT                           (-1765328185L)
-#define KRB5_CC_NOT_KTYPE                        (-1765328184L)
-#define KRB5_INVALID_FLAGS                       (-1765328183L)
-#define KRB5_NO_2ND_TKT                          (-1765328182L)
-#define KRB5_NOCREDS_SUPPLIED                    (-1765328181L)
-#define KRB5_SENDAUTH_BADAUTHVERS                (-1765328180L)
-#define KRB5_SENDAUTH_BADAPPLVERS                (-1765328179L)
-#define KRB5_SENDAUTH_BADRESPONSE                (-1765328178L)
-#define KRB5_SENDAUTH_REJECTED                   (-1765328177L)
-#define KRB5_PREAUTH_BAD_TYPE                    (-1765328176L)
-#define KRB5_PREAUTH_NO_KEY                      (-1765328175L)
-#define KRB5_PREAUTH_FAILED                      (-1765328174L)
-#define KRB5_RCACHE_BADVNO                       (-1765328173L)
-#define KRB5_CCACHE_BADVNO                       (-1765328172L)
-#define KRB5_KEYTAB_BADVNO                       (-1765328171L)
-#define KRB5_PROG_ATYPE_NOSUPP                   (-1765328170L)
-#define KRB5_RC_REQUIRED                         (-1765328169L)
-#define KRB5_ERR_BAD_HOSTNAME                    (-1765328168L)
-#define KRB5_ERR_HOST_REALM_UNKNOWN              (-1765328167L)
-#define KRB5_SNAME_UNSUPP_NAMETYPE               (-1765328166L)
-#define KRB5KRB_AP_ERR_V4_REPLY                  (-1765328165L)
-#define KRB5_REALM_CANT_RESOLVE                  (-1765328164L)
-#define KRB5_TKT_NOT_FORWARDABLE                 (-1765328163L)
-#define KRB5_FWD_BAD_PRINCIPAL                   (-1765328162L)
-#define KRB5_GET_IN_TKT_LOOP                     (-1765328161L)
-#define KRB5_CONFIG_NODEFREALM                   (-1765328160L)
-#define KRB5_SAM_UNSUPPORTED                     (-1765328159L)
-#define KRB5_SAM_INVALID_ETYPE                   (-1765328158L)
-#define KRB5_SAM_NO_CHECKSUM                     (-1765328157L)
-#define KRB5_SAM_BAD_CHECKSUM                    (-1765328156L)
-#define KRB5_KT_NAME_TOOLONG                     (-1765328155L)
-#define KRB5_KT_KVNONOTFOUND                     (-1765328154L)
-#define KRB5_APPL_EXPIRED                        (-1765328153L)
-#define KRB5_LIB_EXPIRED                         (-1765328152L)
-#define KRB5_CHPW_PWDNULL                        (-1765328151L)
-#define KRB5_CHPW_FAIL                           (-1765328150L)
-#define KRB5_KT_FORMAT                           (-1765328149L)
-#define KRB5_NOPERM_ETYPE                        (-1765328148L)
-#define KRB5_CONFIG_ETYPE_NOSUPP                 (-1765328147L)
-#define KRB5_OBSOLETE_FN                         (-1765328146L)
-#define KRB5_EAI_FAIL                            (-1765328145L)
-#define KRB5_EAI_NODATA                          (-1765328144L)
-#define KRB5_EAI_NONAME                          (-1765328143L)
-#define KRB5_EAI_SERVICE                         (-1765328142L)
-#define KRB5_ERR_NUMERIC_REALM                   (-1765328141L)
-#define KRB5_ERR_BAD_S2K_PARAMS                  (-1765328140L)
-#define KRB5_ERR_NO_SERVICE                      (-1765328139L)
-#define KRB5_CC_READONLY                         (-1765328138L)
-#define KRB5_CC_NOSUPP                           (-1765328137L)
-#define KRB5_DELTAT_BADFORMAT                    (-1765328136L)
-#define ERROR_TABLE_BASE_krb5                    (-1765328384L)
-
-/* Error tables from krb524_err.h */
-#define initialize_k524_error_table()
-#define KRB524_BADKEY                            (-1750206208L)
-#define KRB524_BADADDR                           (-1750206207L)
-#define KRB524_BADPRINC                          (-1750206206L)
-#define KRB524_BADREALM                          (-1750206205L)
-#define KRB524_V4ERR                             (-1750206204L)
-#define KRB524_ENCFULL                           (-1750206203L)
-#define KRB524_DECEMPTY                          (-1750206202L)
-#define KRB524_NOTRESP                           (-1750206201L)
-#define KRB524_KRB4_DISABLED                     (-1750206200L)
-#define ERROR_TABLE_BASE_k524                    (-1750206208L)
-
-/* Error tables from kv5m_err.h */
-#define initialize_kv5m_error_table()
-#define KV5M_NONE                                (-1760647424L)
-#define KV5M_PRINCIPAL                           (-1760647423L)
-#define KV5M_DATA                                (-1760647422L)
-#define KV5M_KEYBLOCK                            (-1760647421L)
-#define KV5M_CHECKSUM                            (-1760647420L)
-#define KV5M_ENCRYPT_BLOCK                       (-1760647419L)
-#define KV5M_ENC_DATA                            (-1760647418L)
-#define KV5M_CRYPTOSYSTEM_ENTRY                  (-1760647417L)
-#define KV5M_CS_TABLE_ENTRY                      (-1760647416L)
-#define KV5M_CHECKSUM_ENTRY                      (-1760647415L)
-#define KV5M_AUTHDATA                            (-1760647414L)
-#define KV5M_TRANSITED                           (-1760647413L)
-#define KV5M_ENC_TKT_PART                        (-1760647412L)
-#define KV5M_TICKET                              (-1760647411L)
-#define KV5M_AUTHENTICATOR                       (-1760647410L)
-#define KV5M_TKT_AUTHENT                         (-1760647409L)
-#define KV5M_CREDS                               (-1760647408L)
-#define KV5M_LAST_REQ_ENTRY                      (-1760647407L)
-#define KV5M_PA_DATA                             (-1760647406L)
-#define KV5M_KDC_REQ                             (-1760647405L)
-#define KV5M_ENC_KDC_REP_PART                    (-1760647404L)
-#define KV5M_KDC_REP                             (-1760647403L)
-#define KV5M_ERROR                               (-1760647402L)
-#define KV5M_AP_REQ                              (-1760647401L)
-#define KV5M_AP_REP                              (-1760647400L)
-#define KV5M_AP_REP_ENC_PART                     (-1760647399L)
-#define KV5M_RESPONSE                            (-1760647398L)
-#define KV5M_SAFE                                (-1760647397L)
-#define KV5M_PRIV                                (-1760647396L)
-#define KV5M_PRIV_ENC_PART                       (-1760647395L)
-#define KV5M_CRED                                (-1760647394L)
-#define KV5M_CRED_INFO                           (-1760647393L)
-#define KV5M_CRED_ENC_PART                       (-1760647392L)
-#define KV5M_PWD_DATA                            (-1760647391L)
-#define KV5M_ADDRESS                             (-1760647390L)
-#define KV5M_KEYTAB_ENTRY                        (-1760647389L)
-#define KV5M_CONTEXT                             (-1760647388L)
-#define KV5M_OS_CONTEXT                          (-1760647387L)
-#define KV5M_ALT_METHOD                          (-1760647386L)
-#define KV5M_ETYPE_INFO_ENTRY                    (-1760647385L)
-#define KV5M_DB_CONTEXT                          (-1760647384L)
-#define KV5M_AUTH_CONTEXT                        (-1760647383L)
-#define KV5M_KEYTAB                              (-1760647382L)
-#define KV5M_RCACHE                              (-1760647381L)
-#define KV5M_CCACHE                              (-1760647380L)
-#define KV5M_PREAUTH_OPS                         (-1760647379L)
-#define KV5M_SAM_CHALLENGE                       (-1760647378L)
-#define KV5M_SAM_CHALLENGE_2                     (-1760647377L)
-#define KV5M_SAM_KEY                             (-1760647376L)
-#define KV5M_ENC_SAM_RESPONSE_ENC                (-1760647375L)
-#define KV5M_ENC_SAM_RESPONSE_ENC_2              (-1760647374L)
-#define KV5M_SAM_RESPONSE                        (-1760647373L)
-#define KV5M_SAM_RESPONSE_2                      (-1760647372L)
-#define KV5M_PREDICTED_SAM_RESPONSE              (-1760647371L)
-#define KV5M_PASSWD_PHRASE_ELEMENT               (-1760647370L)
-#define KV5M_GSS_OID                             (-1760647369L)
-#define KV5M_GSS_QUEUE                           (-1760647368L)
-#define ERROR_TABLE_BASE_kv5m                    (-1760647424L)
-
+/* This file is generated, please don't edit it directly.  */
+#ifndef KRB5_KRB5_H_INCLUDED
+#define KRB5_KRB5_H_INCLUDED
 /*
  * include/krb5.h
  *
@@ -496,7 +119,7 @@
 KRB5INT_BEGIN_DECLS
 
 #if TARGET_OS_MAC
-#    pragma options align=mac68k
+#    pragma pack(push,2)
 #endif
 
 /* from profile.h */
@@ -647,6 +270,16 @@ typedef const krb5_principal_data *krb5_const_principal;
 	     : NULL)
 
 /*
+ * Constants for realm referrals.
+ */
+#define        KRB5_REFERRAL_REALM	""
+
+/*
+ * Referral-specific functions.
+ */
+krb5_boolean KRB5_CALLCONV krb5_is_referral_realm(const krb5_data *);
+
+/*
  * end "base-defs.h"
  */
 
@@ -734,6 +367,15 @@ typedef struct _krb5_enc_data {
 #define	ENCTYPE_DES3_CBC_SHA	0x0005	/* DES-3 cbc mode with NIST-SHA */
 #define	ENCTYPE_DES3_CBC_RAW	0x0006	/* DES-3 cbc mode raw */
 #define ENCTYPE_DES_HMAC_SHA1	0x0008
+/* PKINIT */
+#define ENCTYPE_DSA_SHA1_CMS	0x0009	/* DSA with SHA1, CMS signature */
+#define ENCTYPE_MD5_RSA_CMS	0x000a	/* MD5 with RSA, CMS signature */
+#define ENCTYPE_SHA1_RSA_CMS	0x000b	/* SHA1 with RSA, CMS signature */
+#define ENCTYPE_RC2_CBC_ENV	0x000c	/* RC2 cbc mode, CMS enveloped data */
+#define ENCTYPE_RSA_ENV		0x000d	/* RSA encryption, CMS enveloped data */
+#define ENCTYPE_RSA_ES_OAEP_ENV	0x000e	/* RSA w/OEAP encryption, CMS enveloped data */
+#define ENCTYPE_DES3_CBC_ENV	0x000f	/* DES-3 cbc mode, CMS enveloped data */
+
 #define ENCTYPE_DES3_CBC_SHA1	0x0010
 #define ENCTYPE_AES128_CTS_HMAC_SHA1_96	0x0011
 #define ENCTYPE_AES256_CTS_HMAC_SHA1_96	0x0012
@@ -814,6 +456,11 @@ krb5_error_code KRB5_CALLCONV
 		    size_t *blocksize);
 
 krb5_error_code KRB5_CALLCONV
+    krb5_c_keylengths
+    (krb5_context context, krb5_enctype enctype,
+		    size_t *keybytes, size_t *keylength);
+
+krb5_error_code KRB5_CALLCONV
 	krb5_c_init_state
 (krb5_context context,
 const krb5_keyblock *key, krb5_keyusage usage,
@@ -824,9 +471,21 @@ krb5_error_code KRB5_CALLCONV
 (krb5_context context, const krb5_keyblock *key, krb5_data *state);
 
 krb5_error_code KRB5_CALLCONV
+    krb5_c_prf (krb5_context, const krb5_keyblock *,
+		krb5_data *in, krb5_data *out);
+
+krb5_error_code KRB5_CALLCONV
+    krb5_c_prf_length (krb5_context, krb5_enctype, size_t *outlen);
+
+krb5_error_code KRB5_CALLCONV
     krb5_c_make_random_key
     (krb5_context context, krb5_enctype enctype,
 		    krb5_keyblock *k5_random_key);
+
+krb5_error_code KRB5_CALLCONV
+    krb5_c_random_to_key
+    (krb5_context context, krb5_enctype enctype,
+		    krb5_data *random_data, krb5_keyblock *k5_random_key);
 
 /* Register a new entropy sample  with the PRNG. may cause
 * the PRNG to be reseeded, although this is not guaranteed.  See previous randsource definitions
@@ -933,6 +592,9 @@ krb5_error_code KRB5_CALLCONV
 #define KRB5_KEYUSAGE_PA_SAM_CHALLENGE_CKSUM	25
 #define KRB5_KEYUSAGE_PA_SAM_CHALLENGE_TRACKID	26
 #define KRB5_KEYUSAGE_PA_SAM_RESPONSE		27
+
+/* Defined in KDC referrals draft */
+#define KRB5_KEYUSAGE_PA_REFERRAL		26 /* XXX note conflict with above */
 
 krb5_boolean KRB5_CALLCONV krb5_c_valid_enctype
 	(krb5_enctype ktype);
@@ -1070,7 +732,7 @@ krb5_error_code krb5_decrypt_data
 /* #define	KDC_OPT_RESERVED	0x00080000 */
 /* #define	KDC_OPT_RESERVED	0x00040000 */
 #define	KDC_OPT_REQUEST_ANONYMOUS	0x00020000
-/* #define	KDC_OPT_RESERVED	0x00010000 */
+#define	KDC_OPT_CANONICALIZE		0x00010000
 /* #define	KDC_OPT_RESERVED	0x00008000 */
 /* #define	KDC_OPT_RESERVED	0x00004000 */
 /* #define	KDC_OPT_RESERVED	0x00002000 */
@@ -1251,9 +913,15 @@ krb5_error_code krb5_decrypt_data
 #define KRB5_PADATA_ETYPE_INFO		11 /* Etype info for preauth */
 #define KRB5_PADATA_SAM_CHALLENGE	12 /* draft challenge system */
 #define KRB5_PADATA_SAM_RESPONSE	13 /* draft challenge system response */
-#define KRB5_PADATA_PK_AS_REQ		14 /* PKINIT */
-#define KRB5_PADATA_PK_AS_REP		15 /* PKINIT */
-#define KRB5_PADATA_ETYPE_INFO2 19
+#define KRB5_PADATA_PK_AS_REQ_OLD	14 /* PKINIT */
+#define KRB5_PADATA_PK_AS_REP_OLD	15 /* PKINIT */
+#define KRB5_PADATA_PK_AS_REQ		16 /* PKINIT */
+#define KRB5_PADATA_PK_AS_REP		17 /* PKINIT */
+#define KRB5_PADATA_ETYPE_INFO2		19
+#define KRB5_PADATA_USE_SPECIFIED_KVNO	20
+#define KRB5_PADATA_SAM_REDIRECT	21
+#define KRB5_PADATA_GET_FROM_TYPED_DATA	22
+#define KRB5_PADATA_REFERRAL		25 /* draft referral system */
 #define KRB5_PADATA_SAM_CHALLENGE_2	30 /* draft challenge system, updated */
 #define KRB5_PADATA_SAM_RESPONSE_2	31 /* draft challenge system, updated */
     
@@ -1573,6 +1241,12 @@ typedef struct _krb5_ccache *krb5_ccache;
 struct _krb5_cc_ops;
 typedef struct _krb5_cc_ops krb5_cc_ops;
 
+/*
+ * Cursor for iterating over all ccaches
+ */
+struct _krb5_cccol_cursor;
+typedef struct _krb5_cccol_cursor *krb5_cccol_cursor;
+
 /* for retrieve_cred */
 #define	KRB5_TC_MATCH_TIMES		0x00000001
 #define	KRB5_TC_MATCH_IS_SKEY		0x00000002
@@ -1637,8 +1311,30 @@ krb5_cc_remove_cred (krb5_context context, krb5_ccache cache, krb5_flags flags,
 krb5_error_code KRB5_CALLCONV
 krb5_cc_set_flags (krb5_context context, krb5_ccache cache, krb5_flags flags);
 
+krb5_error_code KRB5_CALLCONV
+krb5_cc_get_flags (krb5_context context, krb5_ccache cache, krb5_flags *flags);
+
 const char * KRB5_CALLCONV
 krb5_cc_get_type (krb5_context context, krb5_ccache cache);
+
+krb5_error_code KRB5_CALLCONV
+krb5_cccol_cursor_new(krb5_context context, krb5_cccol_cursor *cursor);
+
+krb5_error_code KRB5_CALLCONV
+krb5_cccol_cursor_next(
+    krb5_context context,
+    krb5_cccol_cursor cursor,
+    krb5_ccache *ccache);
+
+krb5_error_code KRB5_CALLCONV
+krb5_cccol_cursor_free(krb5_context context, krb5_cccol_cursor *cursor);
+
+krb5_error_code KRB5_CALLCONV
+krb5_cc_new_unique(
+    krb5_context context,
+    const char *type,
+    const char *hint,
+    krb5_ccache *id);
 
 /*
  * end "ccache.h"
@@ -1720,6 +1416,8 @@ krb5_error_code KRB5_CALLCONV krb5_init_secure_context
 	(krb5_context *);
 void KRB5_CALLCONV krb5_free_context
 	(krb5_context);
+krb5_error_code KRB5_CALLCONV krb5_copy_context
+	(krb5_context, krb5_context *);
 
 #if KRB5_PRIVATE
 krb5_error_code krb5_set_default_in_tkt_ktypes
@@ -1790,7 +1488,19 @@ krb5_error_code krb5_get_cred_from_kdc_renew
 		krb5_creds *,
 		krb5_creds **,
 		krb5_creds *** );
+
+krb5_error_code KRB5_CALLCONV
+krb5int_server_decrypt_ticket_keyblock
+  	(krb5_context context,
+                const krb5_keyblock *key,
+                krb5_ticket  *ticket);
 #endif
+
+krb5_error_code KRB5_CALLCONV
+krb5_server_decrypt_ticket_keytab
+  	(krb5_context context,
+                const krb5_keytab kt,
+                krb5_ticket  *ticket);
 
 void KRB5_CALLCONV krb5_free_tgt_creds
 	(krb5_context,
@@ -2179,11 +1889,11 @@ void KRB5_CALLCONV krb5_free_cksumtypes
 /* From krb5/os but needed but by the outside world */
 krb5_error_code KRB5_CALLCONV krb5_us_timeofday
 	(krb5_context,
-		krb5_int32 *,
+		krb5_timestamp *,
 		krb5_int32 * );
 krb5_error_code KRB5_CALLCONV krb5_timeofday
 	(krb5_context,
-		krb5_int32 * );
+		krb5_timestamp * );
 		 /* get all the addresses of this host */
 krb5_error_code KRB5_CALLCONV krb5_os_localaddr
 	(krb5_context,
@@ -2617,6 +2327,10 @@ krb5_error_code KRB5_CALLCONV krb5_get_host_realm
 	(krb5_context,
 		const char *,
 		char *** );
+krb5_error_code KRB5_CALLCONV krb5_get_fallback_host_realm
+	(krb5_context,
+		krb5_data *,
+		char *** );
 krb5_error_code KRB5_CALLCONV krb5_free_host_realm
 	(krb5_context,
 		char * const * );
@@ -2652,19 +2366,19 @@ krb5_error_code krb5_make_fulladdr
 #endif
 
 krb5_error_code KRB5_CALLCONV krb5_set_real_time
-	(krb5_context, krb5_int32, krb5_int32);
+	(krb5_context, krb5_timestamp, krb5_int32);
 
 #if KRB5_PRIVATE
 krb5_error_code krb5_set_debugging_time
-	(krb5_context, krb5_int32, krb5_int32);
+	(krb5_context, krb5_timestamp, krb5_int32);
 krb5_error_code krb5_use_natural_time
 	(krb5_context);
 #endif
 krb5_error_code KRB5_CALLCONV krb5_get_time_offsets
-	(krb5_context, krb5_int32 *, krb5_int32 *);
+	(krb5_context, krb5_timestamp *, krb5_int32 *);
 #if KRB5_PRIVATE
 krb5_error_code krb5_set_time_offsets
-	(krb5_context, krb5_int32, krb5_int32);
+	(krb5_context, krb5_timestamp, krb5_int32);
 #endif
 
 /* str_conv.c */
@@ -2746,7 +2460,17 @@ typedef struct _krb5_get_init_creds_opt {
 #define KRB5_GET_INIT_CREDS_OPT_ADDRESS_LIST	0x0020
 #define KRB5_GET_INIT_CREDS_OPT_PREAUTH_LIST	0x0040
 #define KRB5_GET_INIT_CREDS_OPT_SALT		0x0080
+#define KRB5_GET_INIT_CREDS_OPT_CHG_PWD_PRMPT	0x0100
 
+krb5_error_code KRB5_CALLCONV
+krb5_get_init_creds_opt_alloc
+(krb5_context context,
+		krb5_get_init_creds_opt **opt);
+
+void KRB5_CALLCONV
+krb5_get_init_creds_opt_free
+(krb5_context context,
+		krb5_get_init_creds_opt *opt);
 
 void KRB5_CALLCONV
 krb5_get_init_creds_opt_init
@@ -2794,7 +2518,31 @@ krb5_get_init_creds_opt_set_salt
 (krb5_get_init_creds_opt *opt,
 		krb5_data *salt);
 
+void KRB5_CALLCONV
+krb5_get_init_creds_opt_set_change_password_prompt
+(krb5_get_init_creds_opt *opt,
+		int prompt);
 
+/* Generic preauth option attribute/value pairs */
+typedef struct _krb5_gic_opt_pa_data {
+    char *attr;
+    char *value;
+} krb5_gic_opt_pa_data;
+
+/*
+ * This function allows the caller to supply options to preauth
+ * plugins.  Preauth plugin modules are given a chance to look
+ * at each option at the time this function is called in ordre
+ * to check the validity of the option.
+ * The 'opt' pointer supplied to this function must have been
+ * obtained using krb5_get_init_creds_opt_alloc()
+ */
+krb5_error_code KRB5_CALLCONV
+krb5_get_init_creds_opt_set_pa
+		(krb5_context context,
+		krb5_get_init_creds_opt *opt,
+		const char *attr,
+		const char *value);
 
 krb5_error_code KRB5_CALLCONV
 krb5_get_init_creds_password
@@ -2913,8 +2661,33 @@ typedef krb5_int32 krb5_prompt_type;
 krb5_prompt_type* KRB5_CALLCONV krb5_get_prompt_types
 	(krb5_context context);
 
+/* Error reporting */
+void KRB5_CALLCONV_C
+krb5_set_error_message (krb5_context, krb5_error_code, const char *, ...);
+#ifdef va_start
+void KRB5_CALLCONV
+krb5_vset_error_message (krb5_context, krb5_error_code, const char *, va_list);
+#endif
+/*
+ * The behavior of krb5_get_error_message is only defined the first
+ * time it is called after a failed call to a krb5 function using the
+ * same context, and only when the error code passed in is the same as
+ * that returned by the krb5 function.  Future versions may return the
+ * same string for the second and following calls.
+ *
+ * The string returned by this function must be freed using
+ * krb5_free_error_message.
+ */
+const char * KRB5_CALLCONV
+krb5_get_error_message (krb5_context, krb5_error_code);
+void KRB5_CALLCONV
+krb5_free_error_message (krb5_context, const char *);
+void KRB5_CALLCONV
+krb5_clear_error_message (krb5_context);
+
+
 #if TARGET_OS_MAC
-#    pragma options align=reset
+#    pragma pack(pop)
 #endif
 
 KRB5INT_END_DECLS
@@ -2925,4 +2698,482 @@ KRB5INT_END_DECLS
 
 #endif /* KRB5_GENERAL__ */
 
-#endif /* __KERBEROS5__ */
+/*
+ * ettmp23538.h:
+ * This file is automatically generated; please do not edit it.
+ */
+
+#include <Kerberos/com_err.h>
+
+#define KRB5KDC_ERR_NONE                         (-1765328384L)
+#define KRB5KDC_ERR_NAME_EXP                     (-1765328383L)
+#define KRB5KDC_ERR_SERVICE_EXP                  (-1765328382L)
+#define KRB5KDC_ERR_BAD_PVNO                     (-1765328381L)
+#define KRB5KDC_ERR_C_OLD_MAST_KVNO              (-1765328380L)
+#define KRB5KDC_ERR_S_OLD_MAST_KVNO              (-1765328379L)
+#define KRB5KDC_ERR_C_PRINCIPAL_UNKNOWN          (-1765328378L)
+#define KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN          (-1765328377L)
+#define KRB5KDC_ERR_PRINCIPAL_NOT_UNIQUE         (-1765328376L)
+#define KRB5KDC_ERR_NULL_KEY                     (-1765328375L)
+#define KRB5KDC_ERR_CANNOT_POSTDATE              (-1765328374L)
+#define KRB5KDC_ERR_NEVER_VALID                  (-1765328373L)
+#define KRB5KDC_ERR_POLICY                       (-1765328372L)
+#define KRB5KDC_ERR_BADOPTION                    (-1765328371L)
+#define KRB5KDC_ERR_ETYPE_NOSUPP                 (-1765328370L)
+#define KRB5KDC_ERR_SUMTYPE_NOSUPP               (-1765328369L)
+#define KRB5KDC_ERR_PADATA_TYPE_NOSUPP           (-1765328368L)
+#define KRB5KDC_ERR_TRTYPE_NOSUPP                (-1765328367L)
+#define KRB5KDC_ERR_CLIENT_REVOKED               (-1765328366L)
+#define KRB5KDC_ERR_SERVICE_REVOKED              (-1765328365L)
+#define KRB5KDC_ERR_TGT_REVOKED                  (-1765328364L)
+#define KRB5KDC_ERR_CLIENT_NOTYET                (-1765328363L)
+#define KRB5KDC_ERR_SERVICE_NOTYET               (-1765328362L)
+#define KRB5KDC_ERR_KEY_EXP                      (-1765328361L)
+#define KRB5KDC_ERR_PREAUTH_FAILED               (-1765328360L)
+#define KRB5KDC_ERR_PREAUTH_REQUIRED             (-1765328359L)
+#define KRB5KDC_ERR_SERVER_NOMATCH               (-1765328358L)
+#define KRB5PLACEHOLD_27                         (-1765328357L)
+#define KRB5PLACEHOLD_28                         (-1765328356L)
+#define KRB5PLACEHOLD_29                         (-1765328355L)
+#define KRB5PLACEHOLD_30                         (-1765328354L)
+#define KRB5KRB_AP_ERR_BAD_INTEGRITY             (-1765328353L)
+#define KRB5KRB_AP_ERR_TKT_EXPIRED               (-1765328352L)
+#define KRB5KRB_AP_ERR_TKT_NYV                   (-1765328351L)
+#define KRB5KRB_AP_ERR_REPEAT                    (-1765328350L)
+#define KRB5KRB_AP_ERR_NOT_US                    (-1765328349L)
+#define KRB5KRB_AP_ERR_BADMATCH                  (-1765328348L)
+#define KRB5KRB_AP_ERR_SKEW                      (-1765328347L)
+#define KRB5KRB_AP_ERR_BADADDR                   (-1765328346L)
+#define KRB5KRB_AP_ERR_BADVERSION                (-1765328345L)
+#define KRB5KRB_AP_ERR_MSG_TYPE                  (-1765328344L)
+#define KRB5KRB_AP_ERR_MODIFIED                  (-1765328343L)
+#define KRB5KRB_AP_ERR_BADORDER                  (-1765328342L)
+#define KRB5KRB_AP_ERR_ILL_CR_TKT                (-1765328341L)
+#define KRB5KRB_AP_ERR_BADKEYVER                 (-1765328340L)
+#define KRB5KRB_AP_ERR_NOKEY                     (-1765328339L)
+#define KRB5KRB_AP_ERR_MUT_FAIL                  (-1765328338L)
+#define KRB5KRB_AP_ERR_BADDIRECTION              (-1765328337L)
+#define KRB5KRB_AP_ERR_METHOD                    (-1765328336L)
+#define KRB5KRB_AP_ERR_BADSEQ                    (-1765328335L)
+#define KRB5KRB_AP_ERR_INAPP_CKSUM               (-1765328334L)
+#define KRB5KRB_AP_PATH_NOT_ACCEPTED             (-1765328333L)
+#define KRB5KRB_ERR_RESPONSE_TOO_BIG             (-1765328332L)
+#define KRB5PLACEHOLD_53                         (-1765328331L)
+#define KRB5PLACEHOLD_54                         (-1765328330L)
+#define KRB5PLACEHOLD_55                         (-1765328329L)
+#define KRB5PLACEHOLD_56                         (-1765328328L)
+#define KRB5PLACEHOLD_57                         (-1765328327L)
+#define KRB5PLACEHOLD_58                         (-1765328326L)
+#define KRB5PLACEHOLD_59                         (-1765328325L)
+#define KRB5KRB_ERR_GENERIC                      (-1765328324L)
+#define KRB5KRB_ERR_FIELD_TOOLONG                (-1765328323L)
+#define KRB5KDC_ERR_CLIENT_NOT_TRUSTED           (-1765328322L)
+#define KRB5KDC_ERR_KDC_NOT_TRUSTED              (-1765328321L)
+#define KRB5KDC_ERR_INVALID_SIG                  (-1765328320L)
+#define KRB5KDC_ERR_DH_KEY_PARAMETERS_NOT_ACCEPTED (-1765328319L)
+#define KRB5KDC_ERR_CERTIFICATE_MISMATCH         (-1765328318L)
+#define KRB5PLACEHOLD_67                         (-1765328317L)
+#define KRB5PLACEHOLD_68                         (-1765328316L)
+#define KRB5PLACEHOLD_69                         (-1765328315L)
+#define KRB5KDC_ERR_CANT_VERIFY_CERTIFICATE      (-1765328314L)
+#define KRB5KDC_ERR_INVALID_CERTIFICATE          (-1765328313L)
+#define KRB5KDC_ERR_REVOKED_CERTIFICATE          (-1765328312L)
+#define KRB5KDC_ERR_REVOCATION_STATUS_UNKNOWN    (-1765328311L)
+#define KRB5KDC_ERR_REVOCATION_STATUS_UNAVAILABLE (-1765328310L)
+#define KRB5KDC_ERR_CLIENT_NAME_MISMATCH         (-1765328309L)
+#define KRB5KDC_ERR_KDC_NAME_MISMATCH            (-1765328308L)
+#define KRB5KDC_ERR_INCONSISTENT_KEY_PURPOSE     (-1765328307L)
+#define KRB5KDC_ERR_DIGEST_IN_CERT_NOT_ACCEPTED  (-1765328306L)
+#define KRB5KDC_ERR_PA_CHECKSUM_MUST_BE_INCLUDED (-1765328305L)
+#define KRB5KDC_ERR_DIGEST_IN_SIGNED_DATA_NOT_ACCEPTED (-1765328304L)
+#define KRB5KDC_ERR_PUBLIC_KEY_ENCRYPTION_NOT_SUPPORTED (-1765328303L)
+#define KRB5PLACEHOLD_82                         (-1765328302L)
+#define KRB5PLACEHOLD_83                         (-1765328301L)
+#define KRB5PLACEHOLD_84                         (-1765328300L)
+#define KRB5PLACEHOLD_85                         (-1765328299L)
+#define KRB5PLACEHOLD_86                         (-1765328298L)
+#define KRB5PLACEHOLD_87                         (-1765328297L)
+#define KRB5PLACEHOLD_88                         (-1765328296L)
+#define KRB5PLACEHOLD_89                         (-1765328295L)
+#define KRB5PLACEHOLD_90                         (-1765328294L)
+#define KRB5PLACEHOLD_91                         (-1765328293L)
+#define KRB5PLACEHOLD_92                         (-1765328292L)
+#define KRB5PLACEHOLD_93                         (-1765328291L)
+#define KRB5PLACEHOLD_94                         (-1765328290L)
+#define KRB5PLACEHOLD_95                         (-1765328289L)
+#define KRB5PLACEHOLD_96                         (-1765328288L)
+#define KRB5PLACEHOLD_97                         (-1765328287L)
+#define KRB5PLACEHOLD_98                         (-1765328286L)
+#define KRB5PLACEHOLD_99                         (-1765328285L)
+#define KRB5PLACEHOLD_100                        (-1765328284L)
+#define KRB5PLACEHOLD_101                        (-1765328283L)
+#define KRB5PLACEHOLD_102                        (-1765328282L)
+#define KRB5PLACEHOLD_103                        (-1765328281L)
+#define KRB5PLACEHOLD_104                        (-1765328280L)
+#define KRB5PLACEHOLD_105                        (-1765328279L)
+#define KRB5PLACEHOLD_106                        (-1765328278L)
+#define KRB5PLACEHOLD_107                        (-1765328277L)
+#define KRB5PLACEHOLD_108                        (-1765328276L)
+#define KRB5PLACEHOLD_109                        (-1765328275L)
+#define KRB5PLACEHOLD_110                        (-1765328274L)
+#define KRB5PLACEHOLD_111                        (-1765328273L)
+#define KRB5PLACEHOLD_112                        (-1765328272L)
+#define KRB5PLACEHOLD_113                        (-1765328271L)
+#define KRB5PLACEHOLD_114                        (-1765328270L)
+#define KRB5PLACEHOLD_115                        (-1765328269L)
+#define KRB5PLACEHOLD_116                        (-1765328268L)
+#define KRB5PLACEHOLD_117                        (-1765328267L)
+#define KRB5PLACEHOLD_118                        (-1765328266L)
+#define KRB5PLACEHOLD_119                        (-1765328265L)
+#define KRB5PLACEHOLD_120                        (-1765328264L)
+#define KRB5PLACEHOLD_121                        (-1765328263L)
+#define KRB5PLACEHOLD_122                        (-1765328262L)
+#define KRB5PLACEHOLD_123                        (-1765328261L)
+#define KRB5PLACEHOLD_124                        (-1765328260L)
+#define KRB5PLACEHOLD_125                        (-1765328259L)
+#define KRB5PLACEHOLD_126                        (-1765328258L)
+#define KRB5PLACEHOLD_127                        (-1765328257L)
+#define KRB5_ERR_RCSID                           (-1765328256L)
+#define KRB5_LIBOS_BADLOCKFLAG                   (-1765328255L)
+#define KRB5_LIBOS_CANTREADPWD                   (-1765328254L)
+#define KRB5_LIBOS_BADPWDMATCH                   (-1765328253L)
+#define KRB5_LIBOS_PWDINTR                       (-1765328252L)
+#define KRB5_PARSE_ILLCHAR                       (-1765328251L)
+#define KRB5_PARSE_MALFORMED                     (-1765328250L)
+#define KRB5_CONFIG_CANTOPEN                     (-1765328249L)
+#define KRB5_CONFIG_BADFORMAT                    (-1765328248L)
+#define KRB5_CONFIG_NOTENUFSPACE                 (-1765328247L)
+#define KRB5_BADMSGTYPE                          (-1765328246L)
+#define KRB5_CC_BADNAME                          (-1765328245L)
+#define KRB5_CC_UNKNOWN_TYPE                     (-1765328244L)
+#define KRB5_CC_NOTFOUND                         (-1765328243L)
+#define KRB5_CC_END                              (-1765328242L)
+#define KRB5_NO_TKT_SUPPLIED                     (-1765328241L)
+#define KRB5KRB_AP_WRONG_PRINC                   (-1765328240L)
+#define KRB5KRB_AP_ERR_TKT_INVALID               (-1765328239L)
+#define KRB5_PRINC_NOMATCH                       (-1765328238L)
+#define KRB5_KDCREP_MODIFIED                     (-1765328237L)
+#define KRB5_KDCREP_SKEW                         (-1765328236L)
+#define KRB5_IN_TKT_REALM_MISMATCH               (-1765328235L)
+#define KRB5_PROG_ETYPE_NOSUPP                   (-1765328234L)
+#define KRB5_PROG_KEYTYPE_NOSUPP                 (-1765328233L)
+#define KRB5_WRONG_ETYPE                         (-1765328232L)
+#define KRB5_PROG_SUMTYPE_NOSUPP                 (-1765328231L)
+#define KRB5_REALM_UNKNOWN                       (-1765328230L)
+#define KRB5_SERVICE_UNKNOWN                     (-1765328229L)
+#define KRB5_KDC_UNREACH                         (-1765328228L)
+#define KRB5_NO_LOCALNAME                        (-1765328227L)
+#define KRB5_MUTUAL_FAILED                       (-1765328226L)
+#define KRB5_RC_TYPE_EXISTS                      (-1765328225L)
+#define KRB5_RC_MALLOC                           (-1765328224L)
+#define KRB5_RC_TYPE_NOTFOUND                    (-1765328223L)
+#define KRB5_RC_UNKNOWN                          (-1765328222L)
+#define KRB5_RC_REPLAY                           (-1765328221L)
+#define KRB5_RC_IO                               (-1765328220L)
+#define KRB5_RC_NOIO                             (-1765328219L)
+#define KRB5_RC_PARSE                            (-1765328218L)
+#define KRB5_RC_IO_EOF                           (-1765328217L)
+#define KRB5_RC_IO_MALLOC                        (-1765328216L)
+#define KRB5_RC_IO_PERM                          (-1765328215L)
+#define KRB5_RC_IO_IO                            (-1765328214L)
+#define KRB5_RC_IO_UNKNOWN                       (-1765328213L)
+#define KRB5_RC_IO_SPACE                         (-1765328212L)
+#define KRB5_TRANS_CANTOPEN                      (-1765328211L)
+#define KRB5_TRANS_BADFORMAT                     (-1765328210L)
+#define KRB5_LNAME_CANTOPEN                      (-1765328209L)
+#define KRB5_LNAME_NOTRANS                       (-1765328208L)
+#define KRB5_LNAME_BADFORMAT                     (-1765328207L)
+#define KRB5_CRYPTO_INTERNAL                     (-1765328206L)
+#define KRB5_KT_BADNAME                          (-1765328205L)
+#define KRB5_KT_UNKNOWN_TYPE                     (-1765328204L)
+#define KRB5_KT_NOTFOUND                         (-1765328203L)
+#define KRB5_KT_END                              (-1765328202L)
+#define KRB5_KT_NOWRITE                          (-1765328201L)
+#define KRB5_KT_IOERR                            (-1765328200L)
+#define KRB5_NO_TKT_IN_RLM                       (-1765328199L)
+#define KRB5DES_BAD_KEYPAR                       (-1765328198L)
+#define KRB5DES_WEAK_KEY                         (-1765328197L)
+#define KRB5_BAD_ENCTYPE                         (-1765328196L)
+#define KRB5_BAD_KEYSIZE                         (-1765328195L)
+#define KRB5_BAD_MSIZE                           (-1765328194L)
+#define KRB5_CC_TYPE_EXISTS                      (-1765328193L)
+#define KRB5_KT_TYPE_EXISTS                      (-1765328192L)
+#define KRB5_CC_IO                               (-1765328191L)
+#define KRB5_FCC_PERM                            (-1765328190L)
+#define KRB5_FCC_NOFILE                          (-1765328189L)
+#define KRB5_FCC_INTERNAL                        (-1765328188L)
+#define KRB5_CC_WRITE                            (-1765328187L)
+#define KRB5_CC_NOMEM                            (-1765328186L)
+#define KRB5_CC_FORMAT                           (-1765328185L)
+#define KRB5_CC_NOT_KTYPE                        (-1765328184L)
+#define KRB5_INVALID_FLAGS                       (-1765328183L)
+#define KRB5_NO_2ND_TKT                          (-1765328182L)
+#define KRB5_NOCREDS_SUPPLIED                    (-1765328181L)
+#define KRB5_SENDAUTH_BADAUTHVERS                (-1765328180L)
+#define KRB5_SENDAUTH_BADAPPLVERS                (-1765328179L)
+#define KRB5_SENDAUTH_BADRESPONSE                (-1765328178L)
+#define KRB5_SENDAUTH_REJECTED                   (-1765328177L)
+#define KRB5_PREAUTH_BAD_TYPE                    (-1765328176L)
+#define KRB5_PREAUTH_NO_KEY                      (-1765328175L)
+#define KRB5_PREAUTH_FAILED                      (-1765328174L)
+#define KRB5_RCACHE_BADVNO                       (-1765328173L)
+#define KRB5_CCACHE_BADVNO                       (-1765328172L)
+#define KRB5_KEYTAB_BADVNO                       (-1765328171L)
+#define KRB5_PROG_ATYPE_NOSUPP                   (-1765328170L)
+#define KRB5_RC_REQUIRED                         (-1765328169L)
+#define KRB5_ERR_BAD_HOSTNAME                    (-1765328168L)
+#define KRB5_ERR_HOST_REALM_UNKNOWN              (-1765328167L)
+#define KRB5_SNAME_UNSUPP_NAMETYPE               (-1765328166L)
+#define KRB5KRB_AP_ERR_V4_REPLY                  (-1765328165L)
+#define KRB5_REALM_CANT_RESOLVE                  (-1765328164L)
+#define KRB5_TKT_NOT_FORWARDABLE                 (-1765328163L)
+#define KRB5_FWD_BAD_PRINCIPAL                   (-1765328162L)
+#define KRB5_GET_IN_TKT_LOOP                     (-1765328161L)
+#define KRB5_CONFIG_NODEFREALM                   (-1765328160L)
+#define KRB5_SAM_UNSUPPORTED                     (-1765328159L)
+#define KRB5_SAM_INVALID_ETYPE                   (-1765328158L)
+#define KRB5_SAM_NO_CHECKSUM                     (-1765328157L)
+#define KRB5_SAM_BAD_CHECKSUM                    (-1765328156L)
+#define KRB5_KT_NAME_TOOLONG                     (-1765328155L)
+#define KRB5_KT_KVNONOTFOUND                     (-1765328154L)
+#define KRB5_APPL_EXPIRED                        (-1765328153L)
+#define KRB5_LIB_EXPIRED                         (-1765328152L)
+#define KRB5_CHPW_PWDNULL                        (-1765328151L)
+#define KRB5_CHPW_FAIL                           (-1765328150L)
+#define KRB5_KT_FORMAT                           (-1765328149L)
+#define KRB5_NOPERM_ETYPE                        (-1765328148L)
+#define KRB5_CONFIG_ETYPE_NOSUPP                 (-1765328147L)
+#define KRB5_OBSOLETE_FN                         (-1765328146L)
+#define KRB5_EAI_FAIL                            (-1765328145L)
+#define KRB5_EAI_NODATA                          (-1765328144L)
+#define KRB5_EAI_NONAME                          (-1765328143L)
+#define KRB5_EAI_SERVICE                         (-1765328142L)
+#define KRB5_ERR_NUMERIC_REALM                   (-1765328141L)
+#define KRB5_ERR_BAD_S2K_PARAMS                  (-1765328140L)
+#define KRB5_ERR_NO_SERVICE                      (-1765328139L)
+#define KRB5_CC_READONLY                         (-1765328138L)
+#define KRB5_CC_NOSUPP                           (-1765328137L)
+#define KRB5_DELTAT_BADFORMAT                    (-1765328136L)
+#define KRB5_PLUGIN_NO_HANDLE                    (-1765328135L)
+#define KRB5_PLUGIN_OP_NOTSUPP                   (-1765328134L)
+#define ERROR_TABLE_BASE_krb5 (-1765328384L)
+
+extern const struct error_table et_krb5_error_table;
+
+#if !defined(_WIN32)
+/* for compatibility with older versions... */
+extern void initialize_krb5_error_table (void) /*@modifies internalState@*/;
+#else
+#define initialize_krb5_error_table()
+#endif
+
+#if !defined(_WIN32)
+#define init_krb5_err_tbl initialize_krb5_error_table
+#define krb5_err_base ERROR_TABLE_BASE_krb5
+#endif
+/*
+ * ettmp23524.h:
+ * This file is automatically generated; please do not edit it.
+ */
+
+#include <Kerberos/com_err.h>
+
+#define KRB5_KDB_RCSID                           (-1780008448L)
+#define KRB5_KDB_INUSE                           (-1780008447L)
+#define KRB5_KDB_UK_SERROR                       (-1780008446L)
+#define KRB5_KDB_UK_RERROR                       (-1780008445L)
+#define KRB5_KDB_UNAUTH                          (-1780008444L)
+#define KRB5_KDB_NOENTRY                         (-1780008443L)
+#define KRB5_KDB_ILL_WILDCARD                    (-1780008442L)
+#define KRB5_KDB_DB_INUSE                        (-1780008441L)
+#define KRB5_KDB_DB_CHANGED                      (-1780008440L)
+#define KRB5_KDB_TRUNCATED_RECORD                (-1780008439L)
+#define KRB5_KDB_RECURSIVELOCK                   (-1780008438L)
+#define KRB5_KDB_NOTLOCKED                       (-1780008437L)
+#define KRB5_KDB_BADLOCKMODE                     (-1780008436L)
+#define KRB5_KDB_DBNOTINITED                     (-1780008435L)
+#define KRB5_KDB_DBINITED                        (-1780008434L)
+#define KRB5_KDB_ILLDIRECTION                    (-1780008433L)
+#define KRB5_KDB_NOMASTERKEY                     (-1780008432L)
+#define KRB5_KDB_BADMASTERKEY                    (-1780008431L)
+#define KRB5_KDB_INVALIDKEYSIZE                  (-1780008430L)
+#define KRB5_KDB_CANTREAD_STORED                 (-1780008429L)
+#define KRB5_KDB_BADSTORED_MKEY                  (-1780008428L)
+#define KRB5_KDB_CANTLOCK_DB                     (-1780008427L)
+#define KRB5_KDB_DB_CORRUPT                      (-1780008426L)
+#define KRB5_KDB_BAD_VERSION                     (-1780008425L)
+#define KRB5_KDB_BAD_SALTTYPE                    (-1780008424L)
+#define KRB5_KDB_BAD_ENCTYPE                     (-1780008423L)
+#define KRB5_KDB_BAD_CREATEFLAGS                 (-1780008422L)
+#define KRB5_KDB_NO_PERMITTED_KEY                (-1780008421L)
+#define KRB5_KDB_NO_MATCHING_KEY                 (-1780008420L)
+#define KRB5_KDB_DBTYPE_NOTFOUND                 (-1780008419L)
+#define KRB5_KDB_DBTYPE_NOSUP                    (-1780008418L)
+#define KRB5_KDB_DBTYPE_INIT                     (-1780008417L)
+#define KRB5_KDB_SERVER_INTERNAL_ERR             (-1780008416L)
+#define KRB5_KDB_ACCESS_ERROR                    (-1780008415L)
+#define KRB5_KDB_INTERNAL_ERROR                  (-1780008414L)
+#define KRB5_KDB_CONSTRAINT_VIOLATION            (-1780008413L)
+#define ERROR_TABLE_BASE_kdb5 (-1780008448L)
+
+extern const struct error_table et_kdb5_error_table;
+
+#if !defined(_WIN32)
+/* for compatibility with older versions... */
+extern void initialize_kdb5_error_table (void) /*@modifies internalState@*/;
+#else
+#define initialize_kdb5_error_table()
+#endif
+
+#if !defined(_WIN32)
+#define init_kdb5_err_tbl initialize_kdb5_error_table
+#define kdb5_err_base ERROR_TABLE_BASE_kdb5
+#endif
+/*
+ * ettmp23552.h:
+ * This file is automatically generated; please do not edit it.
+ */
+
+#include <Kerberos/com_err.h>
+
+#define KV5M_NONE                                (-1760647424L)
+#define KV5M_PRINCIPAL                           (-1760647423L)
+#define KV5M_DATA                                (-1760647422L)
+#define KV5M_KEYBLOCK                            (-1760647421L)
+#define KV5M_CHECKSUM                            (-1760647420L)
+#define KV5M_ENCRYPT_BLOCK                       (-1760647419L)
+#define KV5M_ENC_DATA                            (-1760647418L)
+#define KV5M_CRYPTOSYSTEM_ENTRY                  (-1760647417L)
+#define KV5M_CS_TABLE_ENTRY                      (-1760647416L)
+#define KV5M_CHECKSUM_ENTRY                      (-1760647415L)
+#define KV5M_AUTHDATA                            (-1760647414L)
+#define KV5M_TRANSITED                           (-1760647413L)
+#define KV5M_ENC_TKT_PART                        (-1760647412L)
+#define KV5M_TICKET                              (-1760647411L)
+#define KV5M_AUTHENTICATOR                       (-1760647410L)
+#define KV5M_TKT_AUTHENT                         (-1760647409L)
+#define KV5M_CREDS                               (-1760647408L)
+#define KV5M_LAST_REQ_ENTRY                      (-1760647407L)
+#define KV5M_PA_DATA                             (-1760647406L)
+#define KV5M_KDC_REQ                             (-1760647405L)
+#define KV5M_ENC_KDC_REP_PART                    (-1760647404L)
+#define KV5M_KDC_REP                             (-1760647403L)
+#define KV5M_ERROR                               (-1760647402L)
+#define KV5M_AP_REQ                              (-1760647401L)
+#define KV5M_AP_REP                              (-1760647400L)
+#define KV5M_AP_REP_ENC_PART                     (-1760647399L)
+#define KV5M_RESPONSE                            (-1760647398L)
+#define KV5M_SAFE                                (-1760647397L)
+#define KV5M_PRIV                                (-1760647396L)
+#define KV5M_PRIV_ENC_PART                       (-1760647395L)
+#define KV5M_CRED                                (-1760647394L)
+#define KV5M_CRED_INFO                           (-1760647393L)
+#define KV5M_CRED_ENC_PART                       (-1760647392L)
+#define KV5M_PWD_DATA                            (-1760647391L)
+#define KV5M_ADDRESS                             (-1760647390L)
+#define KV5M_KEYTAB_ENTRY                        (-1760647389L)
+#define KV5M_CONTEXT                             (-1760647388L)
+#define KV5M_OS_CONTEXT                          (-1760647387L)
+#define KV5M_ALT_METHOD                          (-1760647386L)
+#define KV5M_ETYPE_INFO_ENTRY                    (-1760647385L)
+#define KV5M_DB_CONTEXT                          (-1760647384L)
+#define KV5M_AUTH_CONTEXT                        (-1760647383L)
+#define KV5M_KEYTAB                              (-1760647382L)
+#define KV5M_RCACHE                              (-1760647381L)
+#define KV5M_CCACHE                              (-1760647380L)
+#define KV5M_PREAUTH_OPS                         (-1760647379L)
+#define KV5M_SAM_CHALLENGE                       (-1760647378L)
+#define KV5M_SAM_CHALLENGE_2                     (-1760647377L)
+#define KV5M_SAM_KEY                             (-1760647376L)
+#define KV5M_ENC_SAM_RESPONSE_ENC                (-1760647375L)
+#define KV5M_ENC_SAM_RESPONSE_ENC_2              (-1760647374L)
+#define KV5M_SAM_RESPONSE                        (-1760647373L)
+#define KV5M_SAM_RESPONSE_2                      (-1760647372L)
+#define KV5M_PREDICTED_SAM_RESPONSE              (-1760647371L)
+#define KV5M_PASSWD_PHRASE_ELEMENT               (-1760647370L)
+#define KV5M_GSS_OID                             (-1760647369L)
+#define KV5M_GSS_QUEUE                           (-1760647368L)
+#define ERROR_TABLE_BASE_kv5m (-1760647424L)
+
+extern const struct error_table et_kv5m_error_table;
+
+#if !defined(_WIN32)
+/* for compatibility with older versions... */
+extern void initialize_kv5m_error_table (void) /*@modifies internalState@*/;
+#else
+#define initialize_kv5m_error_table()
+#endif
+
+#if !defined(_WIN32)
+#define init_kv5m_err_tbl initialize_kv5m_error_table
+#define kv5m_err_base ERROR_TABLE_BASE_kv5m
+#endif
+/*
+ * ettmp23566.h:
+ * This file is automatically generated; please do not edit it.
+ */
+
+#include <Kerberos/com_err.h>
+
+#define KRB524_BADKEY                            (-1750206208L)
+#define KRB524_BADADDR                           (-1750206207L)
+#define KRB524_BADPRINC                          (-1750206206L)
+#define KRB524_BADREALM                          (-1750206205L)
+#define KRB524_V4ERR                             (-1750206204L)
+#define KRB524_ENCFULL                           (-1750206203L)
+#define KRB524_DECEMPTY                          (-1750206202L)
+#define KRB524_NOTRESP                           (-1750206201L)
+#define KRB524_KRB4_DISABLED                     (-1750206200L)
+#define ERROR_TABLE_BASE_k524 (-1750206208L)
+
+extern const struct error_table et_k524_error_table;
+
+#if !defined(_WIN32)
+/* for compatibility with older versions... */
+extern void initialize_k524_error_table (void) /*@modifies internalState@*/;
+#else
+#define initialize_k524_error_table()
+#endif
+
+#if !defined(_WIN32)
+#define init_k524_err_tbl initialize_k524_error_table
+#define k524_err_base ERROR_TABLE_BASE_k524
+#endif
+/*
+ * ettmp23510.h:
+ * This file is automatically generated; please do not edit it.
+ */
+
+#include <Kerberos/com_err.h>
+
+#define ASN1_BAD_TIMEFORMAT                      (1859794432L)
+#define ASN1_MISSING_FIELD                       (1859794433L)
+#define ASN1_MISPLACED_FIELD                     (1859794434L)
+#define ASN1_TYPE_MISMATCH                       (1859794435L)
+#define ASN1_OVERFLOW                            (1859794436L)
+#define ASN1_OVERRUN                             (1859794437L)
+#define ASN1_BAD_ID                              (1859794438L)
+#define ASN1_BAD_LENGTH                          (1859794439L)
+#define ASN1_BAD_FORMAT                          (1859794440L)
+#define ASN1_PARSE_ERROR                         (1859794441L)
+#define ASN1_BAD_GMTIME                          (1859794442L)
+#define ASN1_MISMATCH_INDEF                      (1859794443L)
+#define ASN1_MISSING_EOC                         (1859794444L)
+#define ERROR_TABLE_BASE_asn1 (1859794432L)
+
+extern const struct error_table et_asn1_error_table;
+
+#if !defined(_WIN32)
+/* for compatibility with older versions... */
+extern void initialize_asn1_error_table (void) /*@modifies internalState@*/;
+#else
+#define initialize_asn1_error_table()
+#endif
+
+#if !defined(_WIN32)
+#define init_asn1_err_tbl initialize_asn1_error_table
+#define asn1_err_base ERROR_TABLE_BASE_asn1
+#endif
+#endif /* KRB5_KRB5_H_INCLUDED */
+
+#endif \* __KERBEROS5__ */

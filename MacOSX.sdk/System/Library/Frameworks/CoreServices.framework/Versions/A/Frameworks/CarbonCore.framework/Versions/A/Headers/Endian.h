@@ -3,7 +3,7 @@
  
      Contains:   Endian swapping utilties
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
     This file provides Endian Flipping routines for dealing with converting data
@@ -101,17 +101,15 @@ extern "C" {
 /*
     Macro versions for non-gcc compilers
 */
+#define Endian16_Swap(value) \
+      ((((UInt16)((value) & 0x00FF)) << 8) | \
+         (((UInt16)((value) & 0xFF00)) >> 8))
 
-#define Endian16_Swap(value)                 \
-        (((((UInt16)value)<<8) & 0xFF00)   | \
-         ((((UInt16)value)>>8) & 0x00FF))
-
-#define Endian32_Swap(value)                     \
-        (((((UInt32)value)<<24) & 0xFF000000)  | \
-         ((((UInt32)value)<< 8) & 0x00FF0000)  | \
-         ((((UInt32)value)>> 8) & 0x0000FF00)  | \
-         ((((UInt32)value)>>24) & 0x000000FF))
-
+#define Endian32_Swap(value) \
+         ((((UInt32)((value) & 0x000000FF)) << 24) | \
+         (((UInt32)((value) & 0x0000FF00)) << 8) | \
+         (((UInt32)((value) & 0x00FF0000)) >> 8) | \
+         (((UInt32)((value) & 0xFF000000)) >> 24))
 
 #if TYPE_LONGLONG
         #define Endian64_Swap(value)                                \
@@ -350,7 +348,7 @@ enum {
  *    indicate that the data was flipped as appropriate; any other
  *    error will be propagated back to the caller.
  */
-typedef CALLBACK_API( OSStatus , CoreEndianFlipProc )(OSType dataDomain, OSType dataType, short id, void *dataPtr, UInt32 dataSize, Boolean currentlyNative, void *refcon);
+typedef CALLBACK_API( OSStatus , CoreEndianFlipProc )(OSType dataDomain, OSType dataType, SInt16 id, void *dataPtr, ByteCount dataSize, Boolean currentlyNative, void *refcon);
 /*
  * Install a flipper for this application
  */
@@ -477,18 +475,18 @@ CoreEndianGetFlipper(
  */
 extern OSStatus 
 CoreEndianFlipData(
-  OSType    dataDomain,
-  OSType    dataType,
-  short     id,
-  void *    data,
-  UInt32    dataLen,
-  Boolean   currentlyNative)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  OSType      dataDomain,
+  OSType      dataType,
+  SInt16      id,
+  void *      data,
+  ByteCount   dataLen,
+  Boolean     currentlyNative)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 #endif  /* TARGET_API_MAC_OSX */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

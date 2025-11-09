@@ -3,7 +3,7 @@
  
      Contains:   Nib support for Carbon
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -54,6 +54,7 @@ enum {
 /* ----- typedef ------ */
 typedef struct OpaqueIBNibRef*          IBNibRef;
 /* ----- Create & Dispose NIB References ------ */
+#if !__LP64__
 /*
  *  CreateNibReference()
  *  
@@ -61,7 +62,7 @@ typedef struct OpaqueIBNibRef*          IBNibRef;
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -78,7 +79,7 @@ CreateNibReference(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -96,7 +97,7 @@ CreateNibReferenceWithCFBundle(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -108,11 +109,32 @@ DisposeNibReference(IBNibRef inNibRef)                        AVAILABLE_MAC_OS_X
 /*
  *  CreateWindowFromNib()
  *  
+ *  Summary:
+ *    Creates a window from a description stored in a nib file.
+ *  
+ *  Discussion:
+ *    Note that in 64-bit mode, all windows must be compositing. If you
+ *    attempt to create a non-compositing window from a nib file, this
+ *    API returns errUnsupportedWindowAttributesForClass.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    inNibRef:
+ *      The identifier for the nib file containing the window
+ *      description.
+ *    
+ *    inName:
+ *      The name of the window description.
+ *    
+ *    outWindow:
+ *      On exit, contains the window, if creation of the window was
+ *      successful.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -132,7 +154,7 @@ CreateWindowFromNib(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -152,7 +174,7 @@ CreateMenuFromNib(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -170,7 +192,7 @@ CreateMenuBarFromNib(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -179,6 +201,8 @@ SetMenuBarFromNib(
   IBNibRef      inNibRef,
   CFStringRef   inName)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

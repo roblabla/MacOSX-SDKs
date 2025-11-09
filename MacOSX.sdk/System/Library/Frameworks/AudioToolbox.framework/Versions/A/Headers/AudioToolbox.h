@@ -21,26 +21,32 @@
 	#include <AudioToolbox/AudioConverter.h>
 	#include <AudioToolbox/AudioFile.h>
 	#include <AudioToolbox/AudioFileComponent.h>
+	#include <AudioToolbox/AudioFileStream.h>
 	#include <AudioToolbox/AudioFormat.h>
+	#include <AudioToolbox/AudioQueue.h>
 	#include <AudioToolbox/AudioUnitUtilities.h>
 	#include <AudioToolbox/AUGraph.h>
 	#include <AudioToolbox/AUMIDIController.h>
-	#include <AudioToolbox/DefaultAudioOutput.h>
-	#include <AudioToolbox/MusicPlayer.h>
-	#include <AudioToolbox/ExtendedAudioFile.h>
+	#include <AudioToolbox/CAFFile.h>
 	#include <AudioToolbox/CoreAudioClock.h>
+	#include <AudioToolbox/ExtendedAudioFile.h>
+	#include <AudioToolbox/MusicPlayer.h>
+	#include <AudioToolbox/AudioServices.h>
 #else
 	#include <AudioConverter.h>
 	#include <AudioFile.h>
 	#include <AudioFileComponent.h>
+	#include <AudioFileStream.h>
 	#include <AudioFormat.h>
+	#include <AudioQueue.h>
 	#include <AudioUnitUtilities.h>
 	#include <AUGraph.h>
 	#include <AUMIDIController.h>
-	#include <DefaultAudioOutput.h>
-	#include <MusicPlayer.h>
-	#include <ExtendedAudioFile.h>
+	#include <CAFFile.h>
 	#include <CoreAudioClock.h>
+	#include <ExtendedAudioFile.h>
+	#include <MusicPlayer.h>
+	#include <AudioServices.h>
 #endif
 
 #ifndef __AudioToolbox_H
@@ -60,7 +66,14 @@ extern void CAShow (void* inObject);
 extern void CAShowFile (void* inObject, FILE* inFile);
 
 // this will return the name of a sound bank from a sound bank file
-extern OSStatus GetNameFromSoundBank(const FSRef *inSoundBankRef, CFStringRef *outName);
+// the name should be released by the caller
+struct FSRef;
+extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef *outName)
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER
+																DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+extern OSStatus 
+CopyNameFromSoundBank (CFURLRef inURL, CFStringRef *outName) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #if defined(__cplusplus)
 }

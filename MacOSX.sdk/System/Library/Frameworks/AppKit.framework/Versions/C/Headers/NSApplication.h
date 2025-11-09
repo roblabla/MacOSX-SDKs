@@ -1,16 +1,19 @@
 /*
 	NSApplication.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
-
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class NSDockTile;
+#endif
 /* The version of the AppKit framework */
 APPKIT_EXTERN const double NSAppKitVersionNumber;
 
@@ -22,6 +25,10 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_3_2 743.14
 #define NSAppKitVersionNumber10_3_3 743.2
 #define NSAppKitVersionNumber10_3_5 743.24
+#define NSAppKitVersionNumber10_3_7 743.33
+#define NSAppKitVersionNumber10_3_9 743.36
+#define NSAppKitVersionNumber10_4 824
+
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
@@ -46,19 +53,19 @@ typedef struct _NSModalSession *NSModalSession;
 // threading information
 typedef struct NSThreadPrivate _NSThreadPrivate;
 
-@interface NSApplication : NSResponder
+@interface NSApplication : NSResponder <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
     NSEvent            *_currentEvent;
-    void     		*_windowList;
+    id     		_windowList;
     id                  _keyWindow;
     id                  _mainWindow;
     id                  _delegate;
     id            	*_hiddenList;
     int                 _hiddenCount;
-    void		*_context;
+    NSInteger               _context;
     void		*_appleEventSuspensionID;
-    id			obsolete2;
+    __weak id			_previousKeyWindow;
     short               _unusedApp;
     short               _running;
     struct __appFlags {
@@ -103,7 +110,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
 - (void)hide:(id)sender;
 - (void)unhide:(id)sender;
 - (void)unhideWithoutActivation;
-- (NSWindow *)windowWithWindowNumber:(int)windowNum;
+- (NSWindow *)windowWithWindowNumber:(NSInteger)windowNum;
 - (NSWindow *)mainWindow;
 - (NSWindow *)keyWindow;
 - (BOOL)isActive;
@@ -117,51 +124,52 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
 
 - (void)finishLaunching;
 - (void)run;
-- (int)runModalForWindow:(NSWindow *)theWindow;
+- (NSInteger)runModalForWindow:(NSWindow *)theWindow;
 - (void)stop:(id)sender;
 - (void)stopModal;
-- (void)stopModalWithCode:(int)returnCode;
+- (void)stopModalWithCode:(NSInteger)returnCode;
 - (void)abortModal;
 - (NSWindow *)modalWindow;
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow;
-- (int)runModalSession:(NSModalSession)session;
+- (NSInteger)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
 - (void)terminate:(id)sender;
 
-typedef enum {
+enum {
       NSCriticalRequest = 0,
       NSInformationalRequest = 10
-} NSRequestUserAttentionType;
+};
+typedef NSUInteger NSRequestUserAttentionType;
 
 // inform the user that this application needs attention - call this method only if your application is not already active
-- (int)requestUserAttention:(NSRequestUserAttentionType)requestType;
-- (void)cancelUserAttentionRequest:(int)request;
+- (NSInteger)requestUserAttention:(NSRequestUserAttentionType)requestType;
+- (void)cancelUserAttentionRequest:(NSInteger)request;
 
 /*
 **  Present a sheet on the given window.  When the modal session is ended,
 ** the didEndSelector will be invoked in the modalDelegate.  The didEndSelector
 ** should have the following signature, and will be invoked when the modal session ends.
 ** This method should dimiss the sheet using orderOut:
-** - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+** - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 **
 */
 - (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
 - (void)endSheet:(NSWindow *)sheet;
-- (void)endSheet:(NSWindow *)sheet returnCode:(int)returnCode;
+- (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode;
 
 /*
 ** runModalForWindow:relativeToWindow: is deprecated.  
 ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
 */
-- (int)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow;
+- (NSInteger)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow;
 
 /* 
 ** beginModalSessionForWindow:relativeToWindow: is deprecated.
 ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
 */
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow;
-- (NSEvent *)nextEventMatchingMask:(unsigned int)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
-- (void)discardEventsMatchingMask:(unsigned int)mask beforeEvent:(NSEvent *)lastEvent;
+- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
 - (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
 - (NSEvent *)currentEvent;
 
@@ -178,6 +186,10 @@ typedef enum {
 - (void)setApplicationIconImage:(NSImage *)image;
 - (NSImage *)applicationIconImage;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSDockTile *)dockTile;
+#endif
+
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget from:(id)sender;
 - (id)targetForAction:(SEL)theAction;
 - (id)targetForAction:(SEL)theAction to:(id)theTarget from:(id)sender;
@@ -191,11 +203,12 @@ typedef enum {
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-typedef enum NSApplicationDelegateReply {
+enum {
     NSApplicationDelegateReplySuccess = 0,
     NSApplicationDelegateReplyCancel = 1,
     NSApplicationDelegateReplyFailure = 2
-} NSApplicationDelegateReply;
+};
+typedef NSUInteger NSApplicationDelegateReply;
 
 /* If an application delegate encounters an error while handling -application:openFiles: or -application:printFiles:, -replyToOpenOrPrint: should be called with NSApplicationDelegateReplyFailure.  If the user cancels the operation, NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, NSApplicationDelegateReplySuccess should be used */
 - (void)replyToOpenOrPrint:(NSApplicationDelegateReply)reply;
@@ -235,20 +248,22 @@ typedef enum NSApplicationDelegateReply {
 @end
 
 // return values for -applicationShouldTerminate:
-typedef enum NSApplicationTerminateReply {
+enum {
         NSTerminateCancel = 0,
         NSTerminateNow = 1, 
         NSTerminateLater = 2
-} NSApplicationTerminateReply;
+};
+typedef NSUInteger NSApplicationTerminateReply;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 // return values for -application:printFiles:withSettings:showPrintPanels:.
-typedef enum NSApplicationPrintReply {
+enum {
     NSPrintingCancelled = 0,
     NSPrintingSuccess = 1, 
     NSPrintingFailure = 3,
     NSPrintingReplyLater = 2
-} NSApplicationPrintReply;
+};
+typedef NSUInteger NSApplicationPrintReply;
 #endif
 
 @interface NSObject(NSApplicationDelegate)
@@ -330,14 +345,6 @@ If not specified, obtain from CFBundleShortVersionString key in infoDictionary. 
 
 @end
 
-#ifdef WIN32
-@interface NSApplication (NSWindowsExtensions)
-+ (void)setApplicationHandle:(void * /*HINSTANCE*/)hInstance previousHandle:(void * /*HINSTANCE*/)PrevInstance commandLine:(NSString *)cmdLine show:(int)cmdShow;
-+ (void)useRunningCopyOfApplication;
-- (void * /*HINSTANCE*/)applicationHandle;
-- (NSWindow *)windowWithWindowHandle:(void * /*HWND*/)hWnd; // does not create a new NSWindow
-@end
-#endif
 
 /* An Application's startup function */
 
@@ -353,7 +360,7 @@ APPKIT_EXTERN BOOL NSApplicationLoad(void);
 APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString * itemName);
 
 /* NSSetShowsServicesMenuItem() has no effect, and always returns 0. */
-APPKIT_EXTERN int NSSetShowsServicesMenuItem(NSString * itemName, BOOL enabled);
+APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString * itemName, BOOL enabled);
 
 /* NSUpdateDynamicServices() causes the services information for the system to be updated.  This will only be necessary if your program adds dynamic services to the system (i.e. services not found in macho segments of executables).
 */

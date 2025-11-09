@@ -78,6 +78,7 @@ public:
     IOReturn							mStatus;									// Success/failure code of request.
 	UInt32								mTimeout;									// Timeout for request to complete, in milliseconds.
 	UInt32								mControlFlags;
+	int									mPID;										// Creating Task
 	
 public:
 
@@ -145,4 +146,6 @@ public:
 	
 	void						SetControlFlags( UInt32 controlFlags ) { mControlFlags = controlFlags; }
 	UInt32						GetControlFlags() { return mControlFlags; }
+	
+	const char *				RequestDescription();
 };

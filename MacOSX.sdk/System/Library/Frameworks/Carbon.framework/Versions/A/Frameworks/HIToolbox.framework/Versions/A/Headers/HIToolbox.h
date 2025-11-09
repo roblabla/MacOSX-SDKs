@@ -3,7 +3,7 @@
  
      Contains:   Master include for HIToolbox private framework
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -45,8 +45,8 @@
 #include <HIToolbox/HITextUtils.h>
 #endif
 
-#ifndef __HISHAPE__
-#include <HIToolbox/HIShape.h>
+#ifndef __HIACCESSIBILITY__
+#include <HIToolbox/HIAccessibility.h>
 #endif
 
 #ifndef __EVENTS__
@@ -77,20 +77,12 @@
 #include <HIToolbox/MacWindows.h>
 #endif
 
-#ifndef __TEXTEDIT__
-#include <HIToolbox/TextEdit.h>
-#endif
-
 #ifndef __MENUS__
 #include <HIToolbox/Menus.h>
 #endif
 
 #ifndef __DIALOGS__
 #include <HIToolbox/Dialogs.h>
-#endif
-
-#ifndef __LISTS__
-#include <HIToolbox/Lists.h>
 #endif
 
 #ifndef __CARBONEVENTSCORE__
@@ -117,12 +109,96 @@
 #include <HIToolbox/MacHelp.h>
 #endif
 
-#ifndef __CONTROLDEFINITIONS__
-#include <HIToolbox/ControlDefinitions.h>
+#ifndef __HIBUTTONVIEWS__
+#include <HIToolbox/HIButtonViews.h>
 #endif
 
-#ifndef __TSMTE__
-#include <HIToolbox/TSMTE.h>
+#ifndef __HICLOCKVIEW__
+#include <HIToolbox/HIClockView.h>
+#endif
+
+#ifndef __HICOCOAVIEW__
+#include <HIToolbox/HICocoaView.h>
+#endif
+
+#ifndef __HICOMBOBOX__
+#include <HIToolbox/HIComboBox.h>
+#endif
+
+#ifndef __HICONTAINERVIEWS__
+#include <HIToolbox/HIContainerViews.h>
+#endif
+
+#ifndef __HIDATABROWSER__
+#include <HIToolbox/HIDataBrowser.h>
+#endif
+
+#ifndef __HIDISCLOSUREVIEWS__
+#include <HIToolbox/HIDisclosureViews.h>
+#endif
+
+#ifndef __HIIMAGEVIEWS__
+#include <HIToolbox/HIImageViews.h>
+#endif
+
+#ifndef __HILITTLEARROWS__
+#include <HIToolbox/HILittleArrows.h>
+#endif
+
+#ifndef __HIMENUVIEW__
+#include <HIToolbox/HIMenuView.h>
+#endif
+
+#ifndef __HIPOPUPBUTTON__
+#include <HIToolbox/HIPopupButton.h>
+#endif
+
+#ifndef __HIPROGRESSVIEWS__
+#include <HIToolbox/HIProgressViews.h>
+#endif
+
+#ifndef __HIRELEVANCEBAR__
+#include <HIToolbox/HIRelevanceBar.h>
+#endif
+
+#ifndef __HISCROLLVIEW__
+#include <HIToolbox/HIScrollView.h>
+#endif
+
+#ifndef __HISEARCHFIELD__
+#include <HIToolbox/HISearchField.h>
+#endif
+
+#ifndef __HISEGMENTEDVIEW__
+#include <HIToolbox/HISegmentedView.h>
+#endif
+
+#ifndef __HISEPARATOR__
+#include <HIToolbox/HISeparator.h>
+#endif
+
+#ifndef __HISLIDER__
+#include <HIToolbox/HISlider.h>
+#endif
+
+#ifndef __HITABBEDVIEW__
+#include <HIToolbox/HITabbedView.h>
+#endif
+
+#ifndef __HITEXTVIEWS__
+#include <HIToolbox/HITextViews.h>
+#endif
+
+#ifndef __HIWINDOWVIEWS__
+#include <HIToolbox/HIWindowViews.h>
+#endif
+
+#ifndef __HITEXTLENGTHFILTER__
+#include <HIToolbox/HITextLengthFilter.h>
+#endif
+
+#ifndef __CONTROLDEFINITIONS__
+#include <HIToolbox/ControlDefinitions.h>
 #endif
 
 #ifndef __TRANSLATIONEXTENSIONS__
@@ -153,8 +229,34 @@
 #include <HIToolbox/IBCarbonRuntime.h>
 #endif
 
+#ifndef __TEXTINPUTSOURCES__
+#include <HIToolbox/TextInputSources.h>
+#endif
 
-/*  #include <Displays.i>  -- moved to QD.i */
+#ifndef __HITOOLBOXDEBUGGING__
+#include <HIToolbox/HIToolboxDebugging.h>
+#endif
+
+
+#ifndef __IMKINPUTSESSION__
+   #include <HIToolbox/IMKInputSession.h>
+#endif
+  
+#if !__LP64__
+#ifndef __LISTS__
+#include <HIToolbox/Lists.h>
+#endif
+
+#ifndef __TEXTEDIT__
+#include <HIToolbox/TextEdit.h>
+#endif
+
+#ifndef __TSMTE__
+#include <HIToolbox/TSMTE.h>
+#endif
+
+#endif  /* !__LP64__ */
+
 
 #endif /* __HITOOLBOX__ */
 

@@ -1,14 +1,14 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2004, Apple Computer, Inc.
+	Copyright (c) 2000-2007, Apple Inc.
 	All rights reserved.
 */
 
-#import <Foundation/Foundation.h>
-#import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSToolbar.h>
+#import <AppKit/NSUserInterfaceValidation.h>
+#import <Foundation/Foundation.h>
 
 @class NSToolbarItemViewer, NSMenuItem, NSView, NSImage;
 
@@ -24,7 +24,7 @@
     
     NSString *		_toolTip;
     NSMenuItem *	_menuItemRep;
-    int			_tag;
+    NSInteger		_tag;
     
     struct __tbiFlags {
 	unsigned int viewRespondsToIsEnabled:1;
@@ -48,7 +48,10 @@
 	unsigned int useAutoModeConfiguration:1;
         unsigned int hasNonDefaultPrioritySetting:1;
         unsigned int autovalidationDisabled:1;
-	unsigned int RESERVED:11;
+        unsigned int tagHasBeenSet:1;
+	unsigned int sizeHasBeenSet:1;
+        unsigned int stateWasDisabledBeforeSheet:1;
+	unsigned int RESERVED:8;
     } _tbiFlags;
     NSArray *		_allPossibleLabelsToFit;
         
@@ -56,6 +59,9 @@
     NSView *		_view;
     NSSize		_minSize;
     NSSize		_maxSize;
+#if __LP64__
+    id			_toolbarItemReserved;
+#endif
 }
 
 - (id)initWithItemIdentifier:(NSString *)itemIdentifier;
@@ -83,8 +89,8 @@
 - (NSMenuItem *)menuFormRepresentation;
     /* The menu form of a toolbar item's purpose is twofold.  First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here.  Second, in text only mode, the menu returned will be used to create the displayed items.  Singleton menu items will be clickable, while submenu items will be represented as a pull down.  For instance, say you want a button that allows you to switch between modes A, B, and C.  You could represent this as a menu by :  a menu item "mode" with three submenu items "A", "B", and "C".   By default, this method returns a singleton menu item with item label as the title.  For standard items, the target, action is set.  */
 
-- (void)setTag:(int)tag;  
-- (int)tag;
+- (void)setTag:(NSInteger)tag;  
+- (NSInteger)tag;
     /* Tag for your own custom purpose. (forwards to -view if it responds) */
 
 - (void)setTarget:(id)target;
@@ -124,8 +130,8 @@ enum {
    NSToolbarItemVisibilityPriorityUser  = 2000  // Value assigned to an item the user wants to "keep visible". You should only use values less than this
 };
 
-- (void)setVisibilityPriority:(int)visibilityPriority;
-- (int)visibilityPriority;
+- (void)setVisibilityPriority:(NSInteger)visibilityPriority;
+- (NSInteger)visibilityPriority;
     /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.  In configurable toolbars, users can control the setting of any item, and the value is rememeber by NSToolbar along with its other autosaved information.  You should allow user setting to have the highest priority. */
 
 #endif

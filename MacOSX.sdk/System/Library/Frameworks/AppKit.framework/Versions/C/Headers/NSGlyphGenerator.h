@@ -1,7 +1,7 @@
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2005, Apple Computer, Inc.
+        Copyright (c) 1993-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -17,17 +17,17 @@ enum {
 };
 
 @protocol NSGlyphStorage
-- (void)insertGlyphs:(const NSGlyph *)glyphs length:(unsigned int)length forStartingGlyphAtIndex:(unsigned int)glyphIndex characterIndex:(unsigned int)charIndex;
+- (void)insertGlyphs:(const NSGlyph *)glyphs length:(NSUInteger)length forStartingGlyphAtIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)charIndex;
 
 // sets glyph attribute defined in NSLayoutManager.h
-- (void)setIntAttribute:(int)attributeTag value:(int)val forGlyphAtIndex:(unsigned)glyphIndex;
+- (void)setIntAttribute:(NSInteger)attributeTag value:(NSInteger)val forGlyphAtIndex:(NSUInteger)glyphIndex;
 
 - (NSAttributedString *)attributedString;
-- (unsigned int)layoutOptions;
+- (NSUInteger)layoutOptions;
 @end
 
 @interface NSGlyphGenerator : NSObject
-- (void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(unsigned int)nChars glyphIndex:(unsigned int *)glyphIndex characterIndex:(unsigned int *)charIndex;
+- (void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(NSUInteger)nChars glyphIndex:(NSUInteger *)glyphIndex characterIndex:(NSUInteger *)charIndex;
 
 + (id) sharedGlyphGenerator;
 @end

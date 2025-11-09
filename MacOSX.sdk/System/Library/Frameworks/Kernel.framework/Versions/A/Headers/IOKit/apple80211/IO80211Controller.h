@@ -64,7 +64,6 @@ typedef WepNetwork *WepNetworkPtr;
 #endif
 #endif
 
-#define DEFAULT_SCAN_TIME		3	// seconds
 #define AUTH_TIMEOUT			15	// seconds
 
 /*! @enum LinkSpeed.
@@ -96,6 +95,12 @@ enum IO80211SystemPowerState
 };
 typedef enum IO80211SystemPowerState IO80211SystemPowerState;
 
+enum IO80211FeatureCode
+{
+	kIO80211Feature80211n = 1,
+};
+typedef enum IO80211FeatureCode IO80211FeatureCode;
+
 #define IO80211_LOG( _interface, _level, _msg, ... )	do{ if( _interface && ( _interface->debugFlags() & _level ) ) IOLog( _msg, ##__VA_ARGS__ ); }while(0)
 
 class IO80211Interface;
@@ -112,9 +117,7 @@ class IO80211Controller : public IOEthernetController
 
 	#ifdef IO80211_LEGACY_COMPAT
 	private:
-		struct apple80211_key			_lastAssocKey;
 		struct apple80211_assoc_data	_lastAssocData;
-		UInt8							_mcastCipher;
 		bool							_interferenceRobustness;
 		IO80211Scanner					*_scanner;
 		WepNetwork						_lastLegacyAssocInfo;
@@ -124,12 +127,9 @@ class IO80211Controller : public IOEthernetController
 						OSDictionary * properties, IOUserClient ** handler );
 		IOReturn queueCommand( UInt8 commandCode, void *arguments, void *returnValue );
 		static IOReturn execCommand( OSObject * obj, void *field0, void *field1, void *field2, void *field3 );
-
-		IOReturn getLastAssocKey(struct apple80211_key* key, UInt8* mcastCipher);
-		IOReturn setLastAssocKey(struct apple80211_key* key, UInt8 mcastCipher);
 		
-		SInt32 getLastAssocData( struct apple80211_assoc_data * ad );
-		SInt32 setLastAssocData( struct apple80211_assoc_data * ad );
+		SInt32 getLastAssocData( struct apple80211_assoc_data * ad);
+		SInt32 setLastAssocData( struct apple80211_assoc_data * ad);
 
 		IOReturn getLastLegacyAssocInfo(WepNetworkPtr netPtr );
 		IOReturn setLastLegacyAssocInfo(WepNetworkPtr netPtr );
@@ -228,30 +228,12 @@ public:
 		*/
 	virtual bool configureInterface(IONetworkInterface * netIf);
 	
-	/*! @function registerWithPolicyMaker
-		@abstract ???.
-		@param policyMaker ???.
-		@result Returns ???. 
-		*/ 
-    virtual IOReturn			registerWithPolicyMaker(IOService *policyMaker);
-	
-	/*! @function scanTimeForRequest
-		@abstract ???.
-		@param policyMaker ???.
-		@result Returns ???. 
-		*/ 
-	virtual UInt32				scanTimeForRequest( IO80211Interface * interface, 
-													struct apple80211_scan_data * sd ) { return DEFAULT_SCAN_TIME; }
-	
 	/*! @function inputMonitorPacket
 		@abstract ???.
 		@param m ???.
 		*/ 
-#if defined( _MODERN_BPF )
+
 	virtual void				inputMonitorPacket( mbuf_t m, UInt32 dlt, void * header, size_t header_len );
-#else
-	virtual void				inputMonitorPacket( mbuf_t m );
-#endif
 	
 	/*! @function outputRaw80211Packet
 		@abstract ???.
@@ -277,12 +259,7 @@ public:
 		@result Returns ???. 
 		*/ 
 	
-#if defined( _MODERN_BPF )
 	virtual SInt32				monitorModeSetEnabled( IO80211Interface * interface, bool enabled, UInt32 dlt ) {return ENXIO; }
-#else
-	virtual	SInt32				monitorModeSetEnabled( IO80211Interface * interface, bool enabled )	{ return ENXIO; }
-#endif
-	
 	
 	/*! @function getNetworkInterface
 		@abstract ???.
@@ -306,399 +283,20 @@ public:
 	
 	/* ioctl handlers */
 	
+	#define IOCTL_GET( type, intf, data ) apple80211Request( SIOCGA80211, APPLE80211_IOC_##type, intf, (void *)data )
+	#define IOCTL_SET( type, intf, data ) apple80211Request( SIOCSA80211, APPLE80211_IOC_##type, intf, (void *)data )
+	virtual SInt32 apple80211Request( UInt32 req, int type, IO80211Interface * intf, void * data ) = 0;
+	
 	// SIOCGA80211
 	
 	SInt32 getASSOCIATE_RESULT( IO80211Interface * interface, 
 								struct apple80211_assoc_result_data * ard );
 	
-	// Required
-	virtual SInt32				getSSID(IO80211Interface			*interface,
-										struct apple80211_ssid_data *sd) = 0;
-
-	virtual SInt32				getCHANNEL(IO80211Interface			*interface,
-										   struct apple80211_channel_data *cd) = 0;
-
-	virtual SInt32				getBSSID(IO80211Interface			*interface,
-										 struct apple80211_bssid_data *bd) = 0;
-
-	virtual SInt32				getCARD_CAPABILITIES(IO80211Interface	*interface,
-													 struct apple80211_capability_data *cd) = 0;
-
-	virtual SInt32				getSTATE(IO80211Interface			*interface,
-										 struct apple80211_state_data *sd) = 0;
-
-	virtual SInt32				getRSSI(IO80211Interface			*interface,
-										struct apple80211_rssi_data *rd) = 0;
-
-	virtual SInt32				getPOWER(IO80211Interface			*interface,
-										 struct apple80211_power_data *pd) = 0;
-
-	virtual SInt32				getSCAN_RESULT(IO80211Interface		*interface,
-											   struct apple80211_scan_result **scan_result)	= 0;
-	
-	virtual SInt32				getASSOCIATION_STATUS( IO80211Interface * interface,
-														struct apple80211_assoc_status_data * asd ) = 0;
-
-	virtual SInt32				getRATE(IO80211Interface			*interface,
-										struct apple80211_rate_data *rd) = 0;
-
-	virtual SInt32				getSTATUS_DEV(IO80211Interface		*interface,
-											  struct apple80211_status_dev_data *dd) = 0;
-											  
-	virtual SInt32				getRATE_SET(IO80211Interface	*interface,
-												  struct apple80211_rate_set_data *rd) = 0;
-
-	virtual SInt32				getPOWERSAVE(IO80211Interface		*interface,
-											 struct apple80211_powersave_data *pd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getPROTMODE(IO80211Interface		*interface,
-											struct apple80211_protmode_data *pd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getTXPOWER(IO80211Interface			*interface,
-										   struct apple80211_txpower_data *td)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getPHY_MODE(IO80211Interface		*interface,
-											struct apple80211_phymode_data *pd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getOP_MODE(IO80211Interface			*interface,
-										   struct apple80211_opmode_data *od)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getNOISE(IO80211Interface			*interface,
-										 struct apple80211_noise_data *nd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getINT_MIT(IO80211Interface			*interface,
-										   struct apple80211_intmit_data *imd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getAUTH_TYPE(IO80211Interface		*interface,
-											 struct apple80211_authtype_data *ad)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getSUPPORTED_CHANNELS(IO80211Interface	*interface,
-													  struct apple80211_sup_channel_data *sd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getLOCALE(IO80211Interface			*interface,
-										  struct apple80211_locale_data *ld)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getAP_MODE(IO80211Interface			*interface,
-										   struct apple80211_apmode_data *ad)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				getFRAG_THRESHOLD(IO80211Interface	*interface,
-												  struct apple80211_frag_threshold_data *td)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getSHORT_SLOT(IO80211Interface *interface, 
-												  struct apple80211_short_slot_data * sd)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getMULTICAST_RATE( IO80211Interface * interface,
-												  struct apple80211_rate_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getSHORT_RETRY_LIMIT( IO80211Interface * interface,
-													struct apple80211_retry_limit_data * rld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getLONG_RETRY_LIMIT( IO80211Interface * interface,
-													struct apple80211_retry_limit_data * rld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getTX_ANTENNA( IO80211Interface * interface,
-											   struct apple80211_antenna_data * ad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getRX_ANTENNA( IO80211Interface * interface,
-											   struct apple80211_antenna_data * ad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getANTENNA_DIVERSITY( IO80211Interface * interface,
-													  struct apple80211_antenna_data * ad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getDTIM_INT( IO80211Interface * interface,
-											  struct apple80211_dtim_int_data * dd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getSTATION_LIST( IO80211Interface * interface,
-												 struct apple80211_sta_data * sd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getDRIVER_VERSION( IO80211Interface * interface,
-												   struct apple80211_version_data * vd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getHARDWARE_VERSION( IO80211Interface * interface,
-												    struct apple80211_version_data * vd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getROM( IO80211Interface * interface,
-										struct apple80211_rom_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getRAND( IO80211Interface * interface,
-										 struct apple80211_rand_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getBACKGROUND_SCAN( IO80211Interface * interface,
-													struct apple80211_scan_data * sd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getRSN_IE( IO80211Interface * interface,
-											struct apple80211_rsn_ie_data * rid )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getAP_IE_LIST( IO80211Interface * interface,
-												struct apple80211_ap_ie_data * ied )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getSTATS( IO80211Interface * interface,
-										   struct apple80211_stats_data * sd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getDEAUTH( IO80211Interface * interface,
-										   struct apple80211_deauth_data *dd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getCOUNTRY_CODE( IO80211Interface * interface,
-												 struct apple80211_country_code_data * ccd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getLAST_RX_PKT_DATA( IO80211Interface * interface,
-													 struct apple80211_last_rx_pkt_data * pd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getRADIO_INFO( IO80211Interface * interface,
-											   struct apple80211_radio_info_data * rid )
-		{ rid->count = 1; return 0; }
-		
-	virtual SInt32				getGUARD_INTERVAL( IO80211Interface * interface,
-												   struct apple80211_guard_interval_data * gid )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getMIMO_POWERSAVE( IO80211Interface * interface,
-												   struct apple80211_powersave_data * pd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getMCS(	IO80211Interface * interface,
-										struct apple80211_mcs_data * md )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getRIFS( IO80211Interface * interface,
-										 struct apple80211_rifs_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getLDPC( IO80211Interface * interface,
-										 struct apple80211_ldpc_data * ld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getMSDU( IO80211Interface * interface,
-										 struct apple80211_msdu_data * md )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getMPDU( IO80211Interface * interface,
-										 struct apple80211_mpdu_data * md )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getBLOCK_ACK( IO80211Interface * interface,
-											  struct apple80211_block_ack_data * bad )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getPLS( IO80211Interface * interface,
-										struct apple80211_pls_data * pd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getPSMP( IO80211Interface * interface,
-										 struct apple80211_psmp_data * pd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				getPHY_SUB_MODE( IO80211Interface * interface,
-												 struct apple80211_physubmode_data * pd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				getMCS_INDEX_SET( IO80211Interface * interface,
-												  struct apple80211_mcs_index_set_data * misd )
-		{ return EOPNOTSUPP; }
-	
-	
-	// SIOCSA80211
-	
-	// Required 
-	virtual SInt32				setSCAN_REQ(IO80211Interface		*interface,
-											struct apple80211_scan_data *sd) = 0;
-
-	virtual SInt32				setASSOCIATE(IO80211Interface		*interface,
-											 struct apple80211_assoc_data *ad) = 0;
-
-	virtual SInt32				setPOWER(IO80211Interface			*interface,
-										 struct apple80211_power_data *pd) = 0;
-
-	virtual SInt32				setCIPHER_KEY(IO80211Interface		*interface,
-											  struct apple80211_key *key) = 0;
-
-	virtual SInt32				setAUTH_TYPE(IO80211Interface		*interface,
-											 struct apple80211_authtype_data *ad) = 0;
-
-	virtual SInt32				setDISASSOCIATE(IO80211Interface	*interface) = 0;
-
-	virtual SInt32				setSSID(IO80211Interface			*interface,
-										struct apple80211_ssid_data *sd) = 0;
-
-	virtual SInt32				setAP_MODE(IO80211Interface			*interface,
-										   struct apple80211_apmode_data *ad) = 0;
-	
-	virtual SInt32				setCHANNEL(IO80211Interface			*interface,
-										   struct apple80211_channel_data *cd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setPOWERSAVE(IO80211Interface		*interface,
-											 struct apple80211_powersave_data *pd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setPROTMODE(IO80211Interface		*interface,
-											struct apple80211_protmode_data *pd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setTXPOWER(IO80211Interface			*interface,
-										   struct apple80211_txpower_data *td)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setIBSS_MODE(IO80211Interface		*interface,
-											 struct apple80211_network_data *nd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setHOST_AP_MODE(IO80211Interface	*interface,
-												struct apple80211_network_data *nd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setLOCALE(IO80211Interface			*interface,
-										  struct apple80211_locale_data *ld)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setINT_MIT(IO80211Interface			*interface,
-										   struct apple80211_intmit_data *imd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setBSSID(IO80211Interface			*interface,
-										 struct apple80211_bssid_data *bd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setDEAUTH(IO80211Interface			*interface,
-										  struct apple80211_deauth_data *dd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setCOUNTERMEASURES(IO80211Interface	*interface,
-												   struct apple80211_countermeasures_data *cd)
-		{ return EOPNOTSUPP; }
-
-	virtual SInt32				setFRAG_THRESHOLD(IO80211Interface	*interface,
-												  struct apple80211_frag_threshold_data *td)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setRATE_SET(IO80211Interface	*interface,
-												  struct apple80211_rate_set_data *rd)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setSHORT_SLOT(IO80211Interface *interface, 
-												  struct apple80211_short_slot_data * sd)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setRATE( IO80211Interface * interface,
-												  struct apple80211_rate_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setMULTICAST_RATE( IO80211Interface * interface,
-												  struct apple80211_rate_data * rd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setSHORT_RETRY_LIMIT( IO80211Interface * interface,
-													struct apple80211_retry_limit_data * rld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setLONG_RETRY_LIMIT( IO80211Interface * interface,
-													struct apple80211_retry_limit_data * rld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setTX_ANTENNA( IO80211Interface * interface,
-											   struct apple80211_antenna_data * ad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setANTENNA_DIVERSITY( IO80211Interface * interface,
-													  struct apple80211_antenna_data * ad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setDTIM_INT( IO80211Interface * interface,
-											  struct apple80211_dtim_int_data * dd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setRSN_IE( IO80211Interface * interface,
-											struct apple80211_rsn_ie_data * rid )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setBACKGROUND_SCAN( IO80211Interface * interface,
-													struct apple80211_scan_data * sd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setPHY_MODE(IO80211Interface		*interface,
-											struct apple80211_phymode_data *pd)
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setGUARD_INTERVAL( IO80211Interface * interface,
-												   struct apple80211_guard_interval_data * gid )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setMCS(	IO80211Interface * interface,
-										struct apple80211_mcs_data * md )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setRIFS( IO80211Interface * interface,
-										 struct apple80211_rifs_data * rd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				setLDPC( IO80211Interface * interface,
-										 struct apple80211_ldpc_data * ld )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setMSDU( IO80211Interface * interface,
-										 struct apple80211_msdu_data * md )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setMPDU( IO80211Interface * interface,
-										 struct apple80211_mpdu_data * md )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setBLOCK_ACK( IO80211Interface * interface,
-											  struct apple80211_block_ack_data * bad )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setPLS( IO80211Interface * interface,
-										struct apple80211_pls_data * pd )
-		{ return EOPNOTSUPP; }
-		
-	virtual SInt32				setPSMP( IO80211Interface * interface,
-										 struct apple80211_psmp_data * pd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				setPHY_SUB_MODE( IO80211Interface * interface,
-												 struct apple80211_physubmode_data * pd )
-		{ return EOPNOTSUPP; }
-	
-	virtual SInt32				setMCS_INDEX_SET( IO80211Interface * interface,
-												  struct apple80211_mcs_index_set_data * misd )
-		{ return EOPNOTSUPP; }
-	
 	// Power management methods
-	static	IOReturn	stopDMAGated( OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
+	static	IOReturn	powerChangeGated( OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
 	
 	virtual SInt32	stopDMA() { return EOPNOTSUPP; }
+	void setSleeping( bool sleeping ) { _sleeping = sleeping; }
 	
 	// Output queue introspection
 	virtual UInt32	hardwareOutputQueueDepth( IO80211Interface * interface )	{ return 0; }
@@ -712,13 +310,15 @@ public:
 	
 	UInt32 radioCountForInterface( IO80211Interface * interface );
 
+	virtual SInt32 enableFeature( IO80211FeatureCode feature, void * refcon ) { return EOPNOTSUPP; }
+
 protected:
 	
 		/*! @function powerDownHandler
 		@abstract ???.
 		@discussion ???.
 		*/
-	static IOReturn		powerDownHandler( void *target, void *refCon, UInt32 messageType,
+	static IOReturn		powerChangeHandler( void *target, void *refCon, UInt32 messageType,
 										  IOService *service, void *messageArgument, vm_size_t argSize );
 	
 		// optional methods provided by subclass
@@ -762,6 +362,7 @@ private:
 	
 	bool _ifAttachPending;
 	
+	bool _sleeping;
 
 		// Virtual function padding
 	OSMetaClassDeclareReservedUnused( IO80211Controller,  0);

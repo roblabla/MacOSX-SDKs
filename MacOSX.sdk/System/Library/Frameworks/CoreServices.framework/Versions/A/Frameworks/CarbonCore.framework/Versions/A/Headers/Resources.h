@@ -3,7 +3,7 @@
  
      Contains:   Resource Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -40,6 +40,12 @@
 extern "C" {
 #endif
 
+typedef SInt16                          ResID;
+typedef SInt16                          ResAttributes;
+typedef SInt16                          ResFileAttributes;
+typedef SInt16                          ResourceCount;
+typedef SInt16                          ResourceIndex;
+typedef FSIORefNum                      ResFileRefNum;
 /* Resource Attribute Bits */
 enum {
   resSysRefBit                  = 7,    /*reference to system/local reference*/
@@ -119,28 +125,20 @@ InvokeResErrUPP(
   OSErr      thErr,
   ResErrUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline ResErrUPP                                            NewResErrUPP(ResErrProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeResErrUPP(ResErrUPP) { }
+    inline void                                                 InvokeResErrUPP(OSErr thErr, ResErrUPP userUPP) { (*userUPP)(thErr); }
+  #else
+    #define NewResErrUPP(userRoutine)                           ((ResErrUPP)userRoutine)
+    #define DisposeResErrUPP(userUPP)
+    #define InvokeResErrUPP(thErr, userUPP)                     (*userUPP)(thErr)
+  #endif
+#endif
+
 /* QuickTime 3.0*/
 typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Boolean currentlyNativeEndian);
-/*
- *  InitResources()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  RsrcZoneInit()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
 /*
  *  CloseResFile()
  *  
@@ -153,7 +151,7 @@ typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Bool
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CloseResFile(short refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseResFile(ResFileRefNum refNum)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -182,7 +180,7 @@ ResError(void)                                                AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResFileRefNum 
 CurResFile(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -197,28 +195,8 @@ CurResFile(void)                                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResFileRefNum 
 HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  CreateResFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  OpenResFile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
 
 
 /*
@@ -233,7 +211,7 @@ HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UseResFile(short refNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UseResFile(ResFileRefNum refNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -247,7 +225,7 @@ UseResFile(short refNum)                                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResourceCount 
 CountTypes(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -262,7 +240,7 @@ CountTypes(void)                                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResourceCount 
 Count1Types(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -279,8 +257,8 @@ Count1Types(void)                                             AVAILABLE_MAC_OS_X
  */
 extern void 
 GetIndType(
-  ResType *  theType,
-  short      index)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType *       theType,
+  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -296,8 +274,8 @@ GetIndType(
  */
 extern void 
 Get1IndType(
-  ResType *  theType,
-  short      index)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType *       theType,
+  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -326,7 +304,7 @@ SetResLoad(Boolean load)                                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResourceCount 
 CountResources(ResType theType)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -341,7 +319,7 @@ CountResources(ResType theType)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResourceCount 
 Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -358,8 +336,8 @@ Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X
  */
 extern Handle 
 GetIndResource(
-  ResType   theType,
-  short     index)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType         theType,
+  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -375,8 +353,8 @@ GetIndResource(
  */
 extern Handle 
 Get1IndResource(
-  ResType   theType,
-  short     index)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType         theType,
+  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -393,7 +371,7 @@ Get1IndResource(
 extern Handle 
 GetResource(
   ResType   theType,
-  short     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResID     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -410,7 +388,7 @@ GetResource(
 extern Handle 
 Get1Resource(
   ResType   theType,
-  short     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResID     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -506,7 +484,7 @@ DetachResource(Handle theResource)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResID 
 UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -521,7 +499,7 @@ UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResID 
 Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -536,7 +514,7 @@ Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
+extern ResAttributes 
 GetResAttrs(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -554,7 +532,7 @@ GetResAttrs(Handle theResource)                               AVAILABLE_MAC_OS_X
 extern void 
 GetResInfo(
   Handle     theResource,
-  short *    theID,
+  ResID *    theID,
   ResType *  theType,
   Str255     name)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -573,7 +551,7 @@ GetResInfo(
 extern void 
 SetResInfo(
   Handle             theResource,
-  short              theID,
+  ResID              theID,
   ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -592,7 +570,7 @@ extern void
 AddResource(
   Handle             theData,
   ResType            theType,
-  short              theID,
+  ResID              theID,
   ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -627,16 +605,6 @@ GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X
 
 
 /*
- *  RsrcMapEntry()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
  *  SetResAttrs()
  *  
  *  Mac OS X threading:
@@ -649,8 +617,8 @@ GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X
  */
 extern void 
 SetResAttrs(
-  Handle   theResource,
-  short    attrs)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          theResource,
+  ResAttributes   attrs)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -695,7 +663,7 @@ RemoveResource(Handle theResource)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UpdateResFile(short refNum)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UpdateResFile(ResFileRefNum refNum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -739,8 +707,8 @@ SetResPurge(Boolean install)                                  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern short 
-GetResFileAttrs(short refNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern ResFileAttributes 
+GetResFileAttrs(ResFileRefNum refNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -756,109 +724,8 @@ GetResFileAttrs(short refNum)                                 AVAILABLE_MAC_OS_X
  */
 extern void 
 SetResFileAttrs(
-  short   refNum,
-  short   attrs)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  OpenRFPerm()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern short 
-OpenRFPerm(
-  ConstStr255Param   fileName,
-  short              vRefNum,
-  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  RGetResource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  HOpenResFile()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern short 
-HOpenResFile(
-  short              vRefNum,
-  long               dirID,
-  ConstStr255Param   fileName,
-  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  HCreateResFile()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void 
-HCreateResFile(
-  short              vRefNum,
-  long               dirID,
-  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  FSpOpenResFile()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern short 
-FSpOpenResFile(
-  const FSSpec *  spec,
-  SignedByte      permission)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  FSpCreateResFile()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void 
-FSpCreateResFile(
-  const FSSpec *  spec,
-  OSType          creator,
-  OSType          fileType,
-  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum       refNum,
+  ResFileAttributes   attrs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -942,21 +809,6 @@ GetNextFOND(Handle fondHandle)                                AVAILABLE_MAC_OS_X
  */
 
 
-/* Use TempInsertROMMap to force the ROM resource map to be
-   inserted into the chain in front of the system. Note that
-   this call is only temporary - the modified resource chain
-   is only used for the next call to the resource manager.
-   See IM IV 19 for more information. 
-*/
-/*
- *  TempInsertROMMap()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
 
 /*
   _________________________________________________________________________________________________________
@@ -991,7 +843,7 @@ enum {
  */
 extern OSErr 
 InsertResourceFile(
-  SInt16              refNum,
+  ResFileRefNum       refNum,
   RsrcChainLocation   where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1011,59 +863,7 @@ InsertResourceFile(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-DetachResourceFile(SInt16 refNum)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
-   Returns true if the resource file is already open and known by the Resource Manager (i.e., it is
-   either in the current resource chain or it's a detached resource file.)  If it's in the resource 
-   chain, the inChain Boolean is set to true on exit and true is returned.  If it's an open file, but
-   the file is currently detached, inChain is set to false and true is returned.  If the file is open,
-   the refNum to the file is returned.
-*/
-/*
- *  FSpResourceFileAlreadyOpen()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern Boolean 
-FSpResourceFileAlreadyOpen(
-  const FSSpec *  resourceFile,
-  Boolean *       inChain,
-  SInt16 *        refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
-   FSpOpenOrphanResFile should be used to open a resource file that is persistent across all contexts,
-   because using OpenResFile normally loads a map and all preloaded resources into the application
-   context.  FSpOpenOrphanResFile loads everything into the system context and detaches the file 
-   from the context in which it was opened.  If the file is already in the resource chain and a new
-   instance is not opened, FSpOpenOrphanResFile will return a paramErr.
-   Use with care, as can and will fail if the map is very large or a lot of preload
-   resources exist.
-*/
-/*
- *  FSpOpenOrphanResFile()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSErr 
-FSpOpenOrphanResFile(
-  const FSSpec *  spec,
-  SignedByte      permission,
-  SInt16 *        refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DetachResourceFile(ResFileRefNum refNum)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1082,7 +882,7 @@ FSpOpenOrphanResFile(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-GetTopResourceFile(SInt16 * refNum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTopResourceFile(ResFileRefNum * refNum)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1104,96 +904,9 @@ GetTopResourceFile(SInt16 * refNum)                           AVAILABLE_MAC_OS_X
  */
 extern OSErr 
 GetNextResourceFile(
-  SInt16    curRefNum,
-  SInt16 *  nextRefNum)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum    curRefNum,
+  ResFileRefNum *  nextRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-
-/*
- *  getnamedresource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  get1namedresource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  openrfperm()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  openresfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  createresfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  getresinfo()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  setresinfo()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  addresource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-#if OLDROUTINENAMES
-#define SizeResource(theResource) GetResourceSizeOnDisk(theResource)
-#define MaxSizeRsrc(theResource) GetMaxResourceSize(theResource)
-#define RmveResource(theResource) RemoveResource(theResource)
-#endif  /* OLDROUTINENAMES */
 
 /*
  *  FSOpenResFile()
@@ -1206,7 +919,7 @@ GetNextResourceFile(
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
-extern short 
+extern ResFileRefNum 
 FSOpenResFile(
   const FSRef *  ref,
   SInt8          permission)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -1231,9 +944,16 @@ FSCreateResFile(
   FSCatalogInfoBitmap    whichInfo,
   const FSCatalogInfo *  catalogInfo,       /* can be NULL */
   FSRef *                newRef,            /* can be NULL */
-  FSSpec *               newSpec)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSSpecPtr              newSpec)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   Returns true if the resource file is already open and known by the Resource Manager (i.e., it is
+   either in the current resource chain or it's a detached resource file.)  If it's in the resource 
+   chain, the inChain Boolean is set to true on exit and true is returned.  If it's an open file, but
+   the file is currently detached, inChain is set to false and true is returned.  If the file is open,
+   the refNum to the file is returned.
+*/
 /*
  *  FSResourceFileAlreadyOpen()
  *  
@@ -1247,10 +967,37 @@ FSCreateResFile(
  */
 extern Boolean 
 FSResourceFileAlreadyOpen(
-  const FSRef *  resourceFileRef,
-  Boolean *      inChain,
-  SInt16 *       refNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const FSRef *    resourceFileRef,
+  Boolean *        inChain,
+  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+
+/*
+   FSOpenOrphanResFile should be used to open a resource file that is persistent across all contexts,
+   because using OpenResFile normally loads a map and all preloaded resources into the application
+   context.  FSOpenOrphanResFile loads everything into the system context and detaches the file 
+   from the context in which it was opened.  If the file is already in the resource chain and a new
+   instance is not opened, FSOpenOrphanResFile will return a paramErr.
+   Use with care, as can and will fail if the map is very large or a lot of preload
+   resources exist.
+*/
+/*
+ *  FSOpenOrphanResFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.5 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSOpenOrphanResFile(
+  const FSRef *    ref,
+  SignedByte       permission,
+  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*
@@ -1296,7 +1043,8 @@ FSResourceFileAlreadyOpen(
  *      A pointer to the FSRef for the new file; may be NULL
  *    
  *    newSpec:
- *      A pointer to the FSSpec for the new directory; may be NULL
+ *      A pointer to the FSSpec for the new directory; may be NULL. 
+ *      Ignored on 64 bit.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1313,7 +1061,7 @@ FSCreateResourceFile(
   UniCharCount           forkNameLength,
   const UniChar *        forkName,             /* can be NULL */
   FSRef *                newRef,               /* can be NULL */
-  FSSpec *               newSpec)              /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSSpecPtr              newSpec)              /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1402,27 +1150,157 @@ FSOpenResourceFile(
   UniCharCount     forkNameLength,
   const UniChar *  forkName,             /* can be NULL */
   SInt8            permissions,
-  SInt16 *         refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+/* Deprecated Functions -------------------------------------------------------*/
+
+/* use FSOpenResourceFile instead*/
+#if !__LP64__
 /*
-    These typedefs were originally created for the Copland Resource Mangager
-*/
-typedef short                           ResFileRefNum;
-typedef short                           ResID;
-typedef short                           ResAttributes;
-typedef short                           ResFileAttributes;
-/*
- *  SortResourceFile()
+ *  OpenRFPerm()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 9.2 and later
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+extern ResFileRefNum 
+OpenRFPerm(
+  ConstStr255Param   fileName,
+  FSVolumeRefNum     vRefNum,
+  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+/* use FSOpenResourceFile instead*/
+/*
+ *  HOpenResFile()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern ResFileRefNum 
+HOpenResFile(
+  FSVolumeRefNum     vRefNum,
+  long               dirID,
+  ConstStr255Param   fileName,
+  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+/* use FSCreateResourceFile instead*/
+/*
+ *  HCreateResFile()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+HCreateResFile(
+  FSVolumeRefNum     vRefNum,
+  long               dirID,
+  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* use FSOpenResourceFile instead*/
+/*
+ *  FSpOpenResFile()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern ResFileRefNum 
+FSpOpenResFile(
+  const FSSpec *  spec,
+  SignedByte      permission)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* use FSCreateResourceFile instead*/
+/*
+ *  FSpCreateResFile()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+FSpCreateResFile(
+  const FSSpec *  spec,
+  OSType          creator,
+  OSType          fileType,
+  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* use FSResourceFileAlreadyOpen instead*/
+/*
+ *  FSpResourceFileAlreadyOpen()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern Boolean 
+FSpResourceFileAlreadyOpen(
+  const FSSpec *   resourceFile,
+  Boolean *        inChain,
+  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+/* use FSOpenOrphanResFile instead*/
+/*
+ *  FSpOpenOrphanResFile()   *** DEPRECATED ***
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSpOpenOrphanResFile(
+  const FSSpec *   spec,
+  SignedByte       permission,
+  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+
+#endif  /* !__LP64__ */
+
+#if !__LP64__
+#if OLDROUTINENAMES
+#define SizeResource(theResource) GetResourceSizeOnDisk(theResource)
+#define MaxSizeRsrc(theResource) GetMaxResourceSize(theResource)
+#define RmveResource(theResource) RemoveResource(theResource)
+#endif  /* OLDROUTINENAMES */
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

@@ -1,12 +1,12 @@
 /*	NSException.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <stdarg.h>
 #import <setjmp.h>
 
-@class NSString, NSDictionary;
+@class NSString, NSDictionary, NSArray;
 
 /***************	Generic Exception names		***************/
 
@@ -31,12 +31,15 @@ FOUNDATION_EXPORT NSString * const NSOldStyleException;
 
 /***************	Exception object	***************/
 
+#if __LP64__ && OBJC_ZEROCOST_EXCEPTIONS
+__attribute__((__objc_exception__))
+#endif
 @interface NSException : NSObject <NSCopying, NSCoding> {
     @private
     NSString		*name;
     NSString		*reason;
     NSDictionary	*userInfo;
-    void		*reserved;
+    id			reserved;
 }
 
 + (NSException *)exceptionWithName:(NSString *)name reason:(NSString *)reason userInfo:(NSDictionary *)userInfo;
@@ -45,6 +48,8 @@ FOUNDATION_EXPORT NSString * const NSOldStyleException;
 - (NSString *)name;
 - (NSString *)reason;
 - (NSDictionary *)userInfo;
+
+- (NSArray *)callStackReturnAddresses AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)raise;
 
@@ -58,46 +63,12 @@ FOUNDATION_EXPORT NSString * const NSOldStyleException;
 @end
 
 
-typedef struct _NSHandler NSHandler;	/* Private */
+#define NS_DURING		@try {
+#define NS_HANDLER		} @catch (NSException *localException) {
+#define NS_ENDHANDLER		}
+#define NS_VALUERETURN(v,t)	return (v)
+#define NS_VOIDRETURN		return
 
-typedef struct _NSHandler2 {	/* Private */
-    jmp_buf _state;
-    NSException *_exception;
-    void *_others;
-    void *_thread;
-    void *_reserved1;
-} NSHandler2;
-
-/* private support routines.  Do not call directly. */
-FOUNDATION_EXPORT void _NSAddHandler2(NSHandler2 *handler);
-FOUNDATION_EXPORT void _NSRemoveHandler2(NSHandler2 *handler);
-FOUNDATION_EXPORT NSException *_NSExceptionObjectFromHandler2(NSHandler2 *handler);
-
-#if !defined(_NSSETJMP)
-#if defined(__svr4__) || defined(__WIN32__)
-#define _NSSETJMP(B, S)	setjmp((B))
-#elif defined(__hpux__)
-#define _NSSETJMP(B, S)	sigsetjmp((B), (S))
-#else
-#define _NSSETJMP(B, S)	_setjmp((B))
-#endif
-#endif
-
-#define NS_DURING { NSHandler2 _localHandler;			\
-		    _NSAddHandler2(&_localHandler);		\
-		    if (!_NSSETJMP(_localHandler._state, 0)) {
-
-#define NS_HANDLER _NSRemoveHandler2(&_localHandler); } else { \
-		    NSException	*localException = _NSExceptionObjectFromHandler2(&_localHandler);
-
-#define NS_ENDHANDLER localException = nil; /* to avoid compiler warning */}}
-
-#define NS_VALUERETURN(val,type)  do { type temp = (val);	\
-			_NSRemoveHandler2(&_localHandler);	\
-			return(temp); } while (0)
-
-#define NS_VOIDRETURN	do { _NSRemoveHandler2(&_localHandler);	\
-			return; } while (0)
 
 typedef void NSUncaughtExceptionHandler(NSException *exception);
 
@@ -112,7 +83,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define _NSAssertBody(condition, desc, arg1, arg2, arg3, arg4, arg5)	\
     do {						\
 	if (!(condition)) {				\
-	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd object:self file:[NSString stringWithCString:__FILE__] \
+	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd object:self file:[NSString stringWithUTF8String:__FILE__] \
 	    	lineNumber:__LINE__ description:(desc), (arg1), (arg2), (arg3), (arg4), (arg5)];	\
 	}						\
     } while(0)
@@ -121,7 +92,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define _NSCAssertBody(condition, desc, arg1, arg2, arg3, arg4, arg5)	\
     do {						\
 	if (!(condition)) {				\
-	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__] file:[NSString stringWithCString:__FILE__] \
+	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] file:[NSString stringWithUTF8String:__FILE__] \
 	    	lineNumber:__LINE__ description:(desc), (arg1), (arg2), (arg3), (arg4), (arg5)];	\
 	}						\
     } while(0)
@@ -192,8 +163,9 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 
 + (NSAssertionHandler *)currentHandler;
 
-- (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(int)line description:(NSString *)format,...;
+- (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format,...;
 
-- (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(int)line description:(NSString *)format,...;
+- (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format,...;
 
 @end
+

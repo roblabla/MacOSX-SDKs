@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 @class NSAttributedString, NSFont, NSImage, NSSound;
 
-typedef enum _NSButtonType {
+enum {
     NSMomentaryLightButton		= 0,	// was NSMomentaryPushButton
     NSPushOnPushOffButton		= 1,
     NSToggleButton			= 2,
@@ -25,9 +25,10 @@ typedef enum _NSButtonType {
     NSMomentaryPushButton		= 0,
     NSMomentaryLight			= 7
     
-} NSButtonType;
+};
+typedef NSUInteger NSButtonType;
 
-typedef enum _NSBezelStyle {
+enum {
 
     NSRoundedBezelStyle          = 1,
     NSRegularSquareBezelStyle    = 2,
@@ -54,7 +55,8 @@ typedef enum _NSBezelStyle {
 
     NSSmallIconButtonBezelStyle  = 2
     
-} NSBezelStyle;
+};
+typedef NSUInteger NSBezelStyle;
 
 typedef struct __BCFlags {
 #ifdef __BIG_ENDIAN__
@@ -109,7 +111,7 @@ typedef struct __BCFlags {
 typedef struct __BCFlags2 {
 #ifdef __BIG_ENDIAN__
     unsigned int	keyEquivalentModifierMask:24;
-    unsigned int	reserved:2;
+    unsigned int	imageScaling:2;
     unsigned int	bezelStyle2:1;
     unsigned int	mouseInside:1;
     unsigned int	showsBorderOnlyWhileMouseInside:1;
@@ -119,7 +121,7 @@ typedef struct __BCFlags2 {
     unsigned int	showsBorderOnlyWhileMouseInside:1;
     unsigned int	mouseInside:1;
     unsigned int	bezelStyle2:1;
-    unsigned int	reserved:2;
+    unsigned int	imageScaling:2;
     unsigned int	keyEquivalentModifierMask:24;
 #endif
 } _BCFlags2;
@@ -143,14 +145,20 @@ typedef struct __BCFlags2 {
 - (void)setTitle:(NSString *)aString;
 - (NSString *)alternateTitle;
 - (void)setAlternateTitle:(NSString *)aString;
+
 - (NSImage *)alternateImage;
 - (void)setAlternateImage:(NSImage *)image;
 - (NSCellImagePosition)imagePosition;
 - (void)setImagePosition:(NSCellImagePosition)aPosition;
-- (int)highlightsBy;
-- (void)setHighlightsBy:(int)aType;
-- (int)showsStateBy;
-- (void)setShowsStateBy:(int)aType;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSImageScaling)imageScaling;
+- (void)setImageScaling:(NSImageScaling)scaling;
+#endif
+
+- (NSInteger)highlightsBy;
+- (void)setHighlightsBy:(NSInteger)aType;
+- (NSInteger)showsStateBy;
+- (void)setShowsStateBy:(NSInteger)aType;
 - (void)setButtonType:(NSButtonType)aType;
 - (BOOL)isOpaque;
 - (void)setFont:(NSFont *)fontObj;
@@ -160,11 +168,11 @@ typedef struct __BCFlags2 {
 - (void)getPeriodicDelay:(float *)delay interval:(float *)interval;
 - (NSString *)keyEquivalent;
 - (void)setKeyEquivalent:(NSString *)aKeyEquivalent;
-- (unsigned int)keyEquivalentModifierMask;
-- (void)setKeyEquivalentModifierMask:(unsigned int)mask;
+- (NSUInteger)keyEquivalentModifierMask;
+- (void)setKeyEquivalentModifierMask:(NSUInteger)mask;
 - (NSFont *)keyEquivalentFont;
 - (void)setKeyEquivalentFont:(NSFont *)fontObj;
-- (void)setKeyEquivalentFont:(NSString *)fontName size:(float)fontSize;
+- (void)setKeyEquivalentFont:(NSString *)fontName size:(CGFloat)fontSize;
 - (void)performClick:(id)sender; // Significant NSCell override, actually clicks itself.
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -177,8 +185,8 @@ typedef struct __BCFlags2 {
 @interface NSButtonCell(NSKeyboardUI)
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 - (void)setAlternateTitleWithMnemonic:(NSString *)stringWithAmpersand;
-- (void)setAlternateMnemonicLocation:(unsigned)location;
-- (unsigned)alternateMnemonicLocation;
+- (void)setAlternateMnemonicLocation:(NSUInteger)location;
+- (NSUInteger)alternateMnemonicLocation;
 - (NSString *)alternateMnemonic;
 @end
 
@@ -189,13 +197,14 @@ typedef struct __BCFlags2 {
 //
 // Weak versus strong is how much contrast exists between
 // the colors used in opposite corners
-typedef enum _NSGradientType {
+enum {
     NSGradientNone          = 0,
     NSGradientConcaveWeak   = 1,
     NSGradientConcaveStrong = 2,
     NSGradientConvexWeak    = 3,
     NSGradientConvexStrong  = 4
-} NSGradientType;
+};
+typedef NSUInteger NSGradientType;
 
 @interface NSButtonCell(NSButtonCellExtensions)
 - (NSGradientType)gradientType;

@@ -1,58 +1,58 @@
 /*	CFByteOrder.h
-	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBYTEORDER__)
 #define __COREFOUNDATION_CFBYTEORDER__ 1
 
-#if defined(__i386__) && !defined(__LITTLE_ENDIAN__)
-    #define __LITTLE_ENDIAN__ 1
-#endif
-
-#if !defined(__BIG_ENDIAN__) && !defined(__LITTLE_ENDIAN__)
-#error Do not know the endianess of this architecture
-#endif
-
 #include <CoreFoundation/CFBase.h>
-
-#if defined(__cplusplus)
-extern "C" {
+#if defined(__MACH__) && !defined(CF_USE_OSBYTEORDER_H)
+#include <libkern/OSByteOrder.h>
+#define CF_USE_OSBYTEORDER_H 1
 #endif
 
-typedef enum __CFByteOrder {
+CF_EXTERN_C_BEGIN
+
+enum __CFByteOrder {
     CFByteOrderUnknown,
     CFByteOrderLittleEndian,
     CFByteOrderBigEndian
-} CFByteOrder;
+};
+typedef CFIndex CFByteOrder;
 
 CF_INLINE CFByteOrder CFByteOrderGetCurrent(void) {
-    uint32_t x = (CFByteOrderBigEndian << 24) | CFByteOrderLittleEndian;
-    return (CFByteOrder)*((uint8_t *)&x);
+#if CF_USE_OSBYTEORDER_H
+    int32_t byteOrder = OSHostByteOrder();
+    switch (byteOrder) {
+    case OSLittleEndian: return CFByteOrderLittleEndian;
+    case OSBigEndian: return CFByteOrderBigEndian;
+    default: break;
+    }
+    return CFByteOrderUnknown;
+#else
+#if __LITTLE_ENDIAN__
+    return CFByteOrderLittleEndian;
+#elif __BIG_ENDIAN__
+    return CFByteOrderBigEndian;
+#else
+    return CFByteOrderUnknown;
+#endif
+#endif
 }
 
 CF_INLINE uint16_t CFSwapInt16(uint16_t arg) {
-#if defined(__i386__) && defined(__GNUC__)
-    __asm__("xchgb %b0, %h0" : "+q" (arg));
-    return arg;
-#elif defined(__ppc__) && defined(__GNUC__)
-    uint16_t result;
-    __asm__("lhbrx %0,0,%1" : "=r" (result) : "r" (&arg), "m" (arg));
-    return result;
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapInt16(arg);
 #else
     uint16_t result;
-    result = ((arg << 8) & 0xFF00) | ((arg >> 8) & 0xFF);
+    result = (uint16_t)(((arg << 8) & 0xFF00) | ((arg >> 8) & 0xFF));
     return result;
 #endif
 }
 
 CF_INLINE uint32_t CFSwapInt32(uint32_t arg) {
-#if defined(__i386__) && defined(__GNUC__)
-    __asm__("bswap %0" : "+r" (arg));
-    return arg;
-#elif defined(__ppc__) && defined(__GNUC__)
-    uint32_t result;
-    __asm__("lwbrx %0,0,%1" : "=r" (result) : "r" (&arg), "m" (arg));
-    return result;
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapInt32(arg);
 #else
     uint32_t result;
     result = ((arg & 0xFF) << 24) | ((arg & 0xFF00) << 8) | ((arg >> 8) & 0xFF00) | ((arg >> 24) & 0xFF);
@@ -61,6 +61,9 @@ CF_INLINE uint32_t CFSwapInt32(uint32_t arg) {
 }
 
 CF_INLINE uint64_t CFSwapInt64(uint64_t arg) {
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapInt64(arg);
+#else
     union CFSwap {
         uint64_t sv;
         uint32_t ul[2];
@@ -69,10 +72,13 @@ CF_INLINE uint64_t CFSwapInt64(uint64_t arg) {
     result.ul[0] = CFSwapInt32(tmp.ul[1]); 
     result.ul[1] = CFSwapInt32(tmp.ul[0]);
     return result.sv;
+#endif
 }
 
 CF_INLINE uint16_t CFSwapInt16BigToHost(uint16_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapBigToHostInt16(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt16(arg);
@@ -80,7 +86,9 @@ CF_INLINE uint16_t CFSwapInt16BigToHost(uint16_t arg) {
 }
 
 CF_INLINE uint32_t CFSwapInt32BigToHost(uint32_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapBigToHostInt32(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt32(arg);
@@ -88,7 +96,9 @@ CF_INLINE uint32_t CFSwapInt32BigToHost(uint32_t arg) {
 }
 
 CF_INLINE uint64_t CFSwapInt64BigToHost(uint64_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapBigToHostInt64(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt64(arg);
@@ -96,7 +106,9 @@ CF_INLINE uint64_t CFSwapInt64BigToHost(uint64_t arg) {
 }
 
 CF_INLINE uint16_t CFSwapInt16HostToBig(uint16_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToBigInt16(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt16(arg);
@@ -104,7 +116,9 @@ CF_INLINE uint16_t CFSwapInt16HostToBig(uint16_t arg) {
 }
 
 CF_INLINE uint32_t CFSwapInt32HostToBig(uint32_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToBigInt32(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt32(arg);
@@ -112,7 +126,9 @@ CF_INLINE uint32_t CFSwapInt32HostToBig(uint32_t arg) {
 }
 
 CF_INLINE uint64_t CFSwapInt64HostToBig(uint64_t arg) {
-#if defined(__BIG_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToBigInt64(arg);
+#elif __BIG_ENDIAN__
     return arg;
 #else
     return CFSwapInt64(arg);
@@ -120,7 +136,9 @@ CF_INLINE uint64_t CFSwapInt64HostToBig(uint64_t arg) {
 }
 
 CF_INLINE uint16_t CFSwapInt16LittleToHost(uint16_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapLittleToHostInt16(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt16(arg);
@@ -128,7 +146,9 @@ CF_INLINE uint16_t CFSwapInt16LittleToHost(uint16_t arg) {
 }
 
 CF_INLINE uint32_t CFSwapInt32LittleToHost(uint32_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapLittleToHostInt32(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt32(arg);
@@ -136,7 +156,9 @@ CF_INLINE uint32_t CFSwapInt32LittleToHost(uint32_t arg) {
 }
 
 CF_INLINE uint64_t CFSwapInt64LittleToHost(uint64_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapLittleToHostInt64(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt64(arg);
@@ -144,7 +166,9 @@ CF_INLINE uint64_t CFSwapInt64LittleToHost(uint64_t arg) {
 }
 
 CF_INLINE uint16_t CFSwapInt16HostToLittle(uint16_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToLittleInt16(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt16(arg);
@@ -152,7 +176,9 @@ CF_INLINE uint16_t CFSwapInt16HostToLittle(uint16_t arg) {
 }
 
 CF_INLINE uint32_t CFSwapInt32HostToLittle(uint32_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToLittleInt32(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt32(arg);
@@ -160,7 +186,9 @@ CF_INLINE uint32_t CFSwapInt32HostToLittle(uint32_t arg) {
 }
 
 CF_INLINE uint64_t CFSwapInt64HostToLittle(uint64_t arg) {
-#if defined(__LITTLE_ENDIAN__)
+#if CF_USE_OSBYTEORDER_H
+    return OSSwapHostToLittleInt64(arg);
+#elif __LITTLE_ENDIAN__
     return arg;
 #else
     return CFSwapInt64(arg);
@@ -176,7 +204,7 @@ CF_INLINE CFSwappedFloat32 CFConvertFloat32HostToSwapped(Float32 arg) {
 	CFSwappedFloat32 sv;
     } result;
     result.v = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt32(result.sv.v);
 #endif
     return result.sv;
@@ -188,7 +216,7 @@ CF_INLINE Float32 CFConvertFloat32SwappedToHost(CFSwappedFloat32 arg) {
 	CFSwappedFloat32 sv;
     } result;
     result.sv = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt32(result.sv.v);
 #endif
     return result.v;
@@ -200,7 +228,7 @@ CF_INLINE CFSwappedFloat64 CFConvertFloat64HostToSwapped(Float64 arg) {
 	CFSwappedFloat64 sv;
     } result;
     result.v = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt64(result.sv.v);
 #endif
     return result.sv;
@@ -212,7 +240,7 @@ CF_INLINE Float64 CFConvertFloat64SwappedToHost(CFSwappedFloat64 arg) {
 	CFSwappedFloat64 sv;
     } result;
     result.sv = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt64(result.sv.v);
 #endif
     return result.v;
@@ -224,7 +252,7 @@ CF_INLINE CFSwappedFloat32 CFConvertFloatHostToSwapped(float arg) {
 	CFSwappedFloat32 sv;
     } result;
     result.v = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt32(result.sv.v);
 #endif
     return result.sv;
@@ -236,7 +264,7 @@ CF_INLINE float CFConvertFloatSwappedToHost(CFSwappedFloat32 arg) {
 	CFSwappedFloat32 sv;
     } result;
     result.sv = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt32(result.sv.v);
 #endif
     return result.v;
@@ -248,7 +276,7 @@ CF_INLINE CFSwappedFloat64 CFConvertDoubleHostToSwapped(double arg) {
 	CFSwappedFloat64 sv;
     } result;
     result.v = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt64(result.sv.v);
 #endif
     return result.sv;
@@ -260,15 +288,13 @@ CF_INLINE double CFConvertDoubleSwappedToHost(CFSwappedFloat64 arg) {
 	CFSwappedFloat64 sv;
     } result;
     result.sv = arg;
-#if defined(__LITTLE_ENDIAN__)
+#if __LITTLE_ENDIAN__
     result.sv.v = CFSwapInt64(result.sv.v);
 #endif
     return result.v;
 }
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFBYTEORDER__ */
 

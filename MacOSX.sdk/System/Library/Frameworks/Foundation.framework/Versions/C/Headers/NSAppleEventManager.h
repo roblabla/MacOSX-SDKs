@@ -1,6 +1,6 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,7 +37,7 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 
 // Given an event, reply event, and refCon of the sort passed into Apple event handler functions that can be registered with AEInstallEventHandler(), dispatch the event to a handler that has been registered with -setEventHandler:andSelector:forEventClass:andEventID:.
 // This method is primarily meant for Cocoa's internal use.  It does not send events to other applications!
-- (OSErr)dispatchRawAppleEvent:(const AppleEvent *)theAppleEvent withRawReply:(AppleEvent *)theReply handlerRefCon:(UInt32)handlerRefCon;
+- (OSErr)dispatchRawAppleEvent:(const AppleEvent *)theAppleEvent withRawReply:(AppleEvent *)theReply handlerRefCon:(SRefCon)handlerRefCon;
 
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 

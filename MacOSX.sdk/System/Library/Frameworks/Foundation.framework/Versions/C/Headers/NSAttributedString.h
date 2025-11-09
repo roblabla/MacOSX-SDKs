@@ -1,5 +1,5 @@
 /*	NSAttributedString.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -8,18 +8,18 @@
 @interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSCoding>
 
 - (NSString *)string;
-- (NSDictionary *)attributesAtIndex:(unsigned)location effectiveRange:(NSRangePointer)range;
+- (NSDictionary *)attributesAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range;
 
 @end
 
 @interface NSAttributedString (NSExtendedAttributedString)
 
-- (unsigned)length;
-- (id)attribute:(NSString *)attrName atIndex:(unsigned int)location effectiveRange:(NSRangePointer)range;
+- (NSUInteger)length;
+- (id)attribute:(NSString *)attrName atIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range;
 - (NSAttributedString *)attributedSubstringFromRange:(NSRange)range;
 
-- (NSDictionary *)attributesAtIndex:(unsigned)location longestEffectiveRange:(NSRangePointer)range inRange:(NSRange)rangeLimit;
-- (id)attribute:(NSString *)attrName atIndex:(unsigned int)location longestEffectiveRange:(NSRangePointer)range inRange:(NSRange)rangeLimit;
+- (NSDictionary *)attributesAtIndex:(NSUInteger)location longestEffectiveRange:(NSRangePointer)range inRange:(NSRange)rangeLimit;
+- (id)attribute:(NSString *)attrName atIndex:(NSUInteger)location longestEffectiveRange:(NSRangePointer)range inRange:(NSRange)rangeLimit;
 
 - (BOOL)isEqualToAttributedString:(NSAttributedString *)other;
 
@@ -45,7 +45,7 @@
 - (void)removeAttribute:(NSString *)name range:(NSRange)range;
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedString:(NSAttributedString *)attrString;
-- (void)insertAttributedString:(NSAttributedString *)attrString atIndex:(unsigned)loc;
+- (void)insertAttributedString:(NSAttributedString *)attrString atIndex:(NSUInteger)loc;
 - (void)appendAttributedString:(NSAttributedString *)attrString;
 - (void)deleteCharactersInRange:(NSRange)range;
 - (void)setAttributedString:(NSAttributedString *)attrString;

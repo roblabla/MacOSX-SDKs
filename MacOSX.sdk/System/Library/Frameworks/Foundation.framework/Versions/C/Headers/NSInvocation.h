@@ -1,11 +1,48 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #include <stdbool.h>
 
-@class NSMutableArray, NSMethodSignature;
+@class NSMethodSignature;
+
+@interface NSInvocation : NSObject {
+@private
+    void *_frame;
+    void *_retdata;
+    id _signature;
+    id _container;
+    uint8_t _retainedArgs;
+    uint8_t _reserved[15];
+}
+
++ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;
+
+- (NSMethodSignature *)methodSignature;
+
+- (void)retainArguments;
+- (BOOL)argumentsRetained;
+
+- (id)target;
+- (void)setTarget:(id)target;
+
+- (SEL)selector;
+- (void)setSelector:(SEL)selector;
+
+- (void)getReturnValue:(void *)retLoc;
+- (void)setReturnValue:(void *)retLoc;
+
+- (void)getArgument:(void *)argumentLocation atIndex:(NSInteger)idx;
+- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;
+
+- (void)invoke;
+- (void)invokeWithTarget:(id)target;
+
+@end
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5
 
 enum _NSObjCValueType {
     NSObjCNoType = 0,
@@ -27,10 +64,10 @@ enum _NSObjCValueType {
     NSObjCArrayType = '[',
     NSObjCUnionType = '(',
     NSObjCBitfield = 'b'
-};
+} DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 typedef struct {
-    enum _NSObjCValueType type;
+    NSInteger type DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
     union {
     	char charValue;
 	short shortValue;
@@ -46,46 +83,8 @@ typedef struct {
 	void *pointerValue;
 	void *structLocation;
 	char *cStringLocation;
-    } value;
-} NSObjCValue;
+    } value DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+} NSObjCValue DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-@interface NSInvocation : NSObject <NSCoding> {
-    @private
-    NSObjCValue	returnValue;
-    void	*argumentFrame;
-    NSMethodSignature	*signature;
-    NSMutableArray	*container;
-    unsigned 	retainedArgs:1;
-    unsigned	isInvalid:1;
-    unsigned	signatureValid:1;
-    unsigned	retainedRet:1;
-    unsigned	externalArgFrame:1;
-    unsigned	unused:3;
-    unsigned	refCount:24;
-    void	*reserved;
-}
-
-+ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;
-
-- (SEL)selector;
-- (void)setSelector:(SEL)selector;
-
-- (id)target;
-- (void)setTarget:(id)target;
-
-- (void)retainArguments;
-- (BOOL)argumentsRetained;
-
-- (void)getReturnValue:(void *)retLoc;
-- (void)setReturnValue:(void *)retLoc;
-
-- (void)getArgument:(void *)argumentLocation atIndex:(int)index;
-- (void)setArgument:(void *)argumentLocation atIndex:(int)index;
-
-- (NSMethodSignature *)methodSignature;
-
-- (void)invoke;
-- (void)invokeWithTarget:(id)target;
-
-@end
+#endif
 

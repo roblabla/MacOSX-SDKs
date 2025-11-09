@@ -72,11 +72,11 @@ enum {
     */
 enum {
     kHubPortConnection		= 0x0001,
-    kHubPortEnabled		= 0x0002,
-    kHubPortSuspend		= 0x0004,
+    kHubPortEnabled			= 0x0002,
+    kHubPortSuspend			= 0x0004,
     kHubPortOverCurrent		= 0x0008,
     kHubPortBeingReset		= 0x0010,
-    kHubPortPower		= 0x0100,
+    kHubPortPower			= 0x0100,
     kHubPortLowSpeed		= 0x0200,
     kHubPortHighSpeed		= 0x0400,
     kHubPortTestMode		= 0x0800,

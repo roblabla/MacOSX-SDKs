@@ -1,3 +1,23 @@
+/*
+     File:       PDEPluginInterface.h
+ 
+     Contains:   Mac OS X Printing Manager Print Dialog Extensions Interfaces.
+ 
+     Version:    Technology: Mac OS X
+                 Release:    1.0
+ 
+     Copyright:  © 2004-2006 by Apple Computer, Inc., all rights reserved
+ 
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
+ 
+                     http://developer.apple.com/bugreporter/
+*/
+
+#ifndef __PDEPLUGININTERFACE__
+#define __PDEPLUGININTERFACE__
+
+
 #import <Cocoa/Cocoa.h>
 
 #import <PrintCore/PMTicket.h>
@@ -160,6 +180,9 @@
  * @discussion	The panel's controls are rendered into a single view. The print system
  *				invokes this method to obtain the panel's view so that it can be embedded
  *				into the print dialog.
+ *
+ *				This method has "Get" semantics: any references owned by the
+ *				PDE must be released by the PDE.
  */
 - (NSView*)panelView;
 
@@ -330,4 +353,6 @@
 
 
 @end
+
+#endif /* __PDEPLUGININTERFACE__ */
 

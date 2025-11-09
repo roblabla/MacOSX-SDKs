@@ -3,7 +3,7 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
@@ -55,6 +55,7 @@
 #define kAppearanceRegionTitleProxyIcon  8					/*  Mac OS 8.5 forward */
 #define kAppearanceRegionStructure 		32
 #define kAppearanceRegionContent 		33					/*  Content area of the window; empty when the window is collapsed */
+#define kAppearanceRegionToolbarButton 	41
 
 #define kThemeBrushDialogBackgroundActive  1
 #define kThemeBrushDialogBackgroundInactive  2
@@ -291,10 +292,12 @@
 #define kThemeSystemFont 				0
 #define kThemeSmallSystemFont 			1
 #define kThemeSmallEmphasizedSystemFont  2
-#define kThemeViewsFont 				3					/*  The following ID's are only available with MacOS X or CarbonLib 1.3 and later */
+#define kThemeViewsFont 				3
 #define kThemeEmphasizedSystemFont 		4
 #define kThemeApplicationFont 			5
 #define kThemeLabelFont 				6
+#define kThemeSystemFontDetail 			7
+#define kThemeSystemFontDetailEmphasized  8
 #define kThemeMenuTitleFont 			100
 #define kThemeMenuItemFont 				101
 #define kThemeMenuItemMarkFont 			102
@@ -303,13 +306,12 @@
 #define kThemePushButtonFont 			105
 #define kThemeUtilityWindowTitleFont 	106
 #define kThemeAlertHeaderFont 			107
-#define kThemeSystemFontDetail 			7
-#define kThemeSystemFontDetailEmphasized  8
-#define kThemeCurrentPortFont 			200
 #define kThemeToolbarFont 				108
 #define kThemeMiniSystemFont 			109
+#define kThemeCurrentPortFont 			200
+#define kThemeSpecifiedFont 			201
 
-#define kPublicThemeFontCount 			20
+#define kPublicThemeFontCount 			21
 #define kThemeTabNonFront 				0
 #define kThemeTabNonFrontPressed 		1
 #define kThemeTabNonFrontInactive 		2
@@ -389,6 +391,7 @@
 #define kThemeTrackThumbRgnIsNotGhost 	0x08
 #define kThemeTrackNoScrollBarArrows 	0x10
 #define kThemeTrackHasFocus 			0x20
+#define kThemeTrackHideTrack 			0x40
 
 #define kThemeWindowHasGrow 			0x01
 #define kThemeWindowHasHorizontalZoom 	0x08
@@ -513,6 +516,7 @@
 #define kThemeAdornmentArrowDownArrow 	0x80
 #define kThemeAdornmentArrowDoubleArrow  0x0100
 #define kThemeAdornmentArrowUpArrow 	0x0200
+#define kThemeAdornmentArrowRightArrow 	0x0400
 
 #define kThemeAdornmentNoShadow 		0x0400
 #define kThemeAdornmentShadowOnly 		0x0800
@@ -800,6 +804,12 @@
 #define kThemeMetricScrollBarMinThumbWidth  133
 #define kThemeMetricSmallScrollBarMinThumbHeight  134
 #define kThemeMetricSmallScrollBarMinThumbWidth  135
+#define kThemeMetricButtonRoundedHeight  136
+#define kThemeMetricButtonRoundedRecessedHeight  137
+
+#define kThemeMetricSeparatorSize 		138
+#define kThemeMetricTexturedPushButtonHeight  139
+#define kThemeMetricTexturedSmallPushButtonHeight  140
 
 #define appearanceBadBrushIndexErr 		(-30560)			/*  pattern index invalid  */
 #define appearanceProcessRegisteredErr 	(-30561)

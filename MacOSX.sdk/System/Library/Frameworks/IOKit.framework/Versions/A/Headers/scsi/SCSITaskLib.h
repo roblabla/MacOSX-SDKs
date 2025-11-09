@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2002 Apple Computer, Inc. All rights reserved. 
+ * Copyright (c) 2001-2007 Apple Inc. All rights reserved. 
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -160,6 +160,11 @@ enum
 };
 
 
+#if defined(__LP64__)
+typedef IOAddressRange	SCSITaskSGElement;
+#else
+typedef IOVirtualRange	SCSITaskSGElement;
+#endif
 
 
 #if !KERNEL
@@ -268,11 +273,11 @@ typedef struct SCSITaskInterface
 	/*! @function SetScatterGatherEntries
     @abstract Method to set the task's scatter-gather list entries.
     @discussion This method can be used to set the SCSITask's scatter-gather
-    list entries. Scatter-gather lists are represented as an array of IOVirtualRanges.
-    The IOVirtualRange structure has two elements, the address of the buffer and the
+    list entries. Scatter-gather lists are represented as an array of SCSITaskSGElements.
+    The SCSITaskSGElement structure has two elements, the address of the buffer and the
     length of the buffer.
     @param task Pointer to an instance of an SCSITaskInterface.
-	@param inScatterGatherList Pointer to an array of IOVirtualRanges.
+	@param inScatterGatherList Pointer to an array of SCSITaskSGElements.
 	@param inScatterGatherEntries The size of the inScatterGatherList array.
 	@param inTransferCount The TOTAL amount of data to transfer. The length of all the
 	entries in the scatter-gather list should at least add up to the amount
@@ -283,11 +288,11 @@ typedef struct SCSITaskInterface
     @result Returns kIOReturnSucces or kIOReturnError.  
 	*/
 
-	IOReturn	( *SetScatterGatherEntries ) ( void * 			task,
-											   IOVirtualRange * inScatterGatherList,
-											   UInt8 			inScatterGatherEntries,
-											   UInt64			inTransferCount,
-											   UInt8			inTransferDirection );
+	IOReturn	( *SetScatterGatherEntries ) ( void *				task,
+											   SCSITaskSGElement *	inScatterGatherList,
+											   UInt8				inScatterGatherEntries,
+											   UInt64				inTransferCount,
+											   UInt8				inTransferDirection );
 
 	/*! @function SetTimeoutDuration
     @abstract Method to set the timeout duration for the SCSITask.
@@ -331,8 +336,10 @@ typedef struct SCSITaskInterface
     @abstract Method to execute the SCSITask asynchronously.
     @discussion This method can be used to execute the SCSITask asynchronously.
     @param task Pointer to an instance of an SCSITaskInterface.
-    @result Returns kIOReturnSuccess, kIOReturnError, or kIOReturnNotPermitted if the
-    client has not called AddCallbackDispatcherToRunLoop on the SCSITaskDeviceInterface.
+	@result Returns a valid IOReturn code such as kIOReturnSuccess, kIOReturnError, kIOReturnVMError, kIOReturnCannotWire, etc.
+	It will return kIOReturnNotPermitted if the client has not called AddCallbackDispatcherToRunLoop on the SCSITaskDeviceInterface.
+    NOTE: IOReturn is defined as kern_return_t and as such, you may get errors back that do not fall under the IOKit subsystem
+    error domain (sys_iokit) defined in IOReturn.h.
 	*/
 	
 	IOReturn	( *ExecuteTaskAsync ) ( void * task );
@@ -349,7 +356,9 @@ typedef struct SCSITaskInterface
 	@param realizedTransferCount Pointer to an UInt64 which reflects how much data was
 	actually transferred. May be NULL if caller does not wish to know
 	how many bytes were transferred.
-    @result Returns kIOReturnSuccess or kIOReturnError.
+    @result Returns a valid IOReturn code such as kIOReturnSuccess, kIOReturnError, kIOReturnVMError, kIOReturnCannotWire, etc.
+    NOTE: IOReturn is defined as kern_return_t and as such, you may get errors back that do not fall under the IOKit subsystem
+    error domain (sys_iokit) defined in IOReturn.h.
 	*/
 
 	IOReturn	( *ExecuteTaskSync ) ( void *				task,
@@ -522,7 +531,7 @@ typedef struct SCSITaskDeviceInterface
 	drivers (if any).	
 	@param self Pointer to a SCSITaskDeviceInterface instance.
 	@result Returns kIOReturnSuccess if exclusive access was released, else some
-	appropriate error ¥¥¥¥¥¥¥¥¥¥¥¥¥¥.
+	appropriate error.
 	*/
 	
 	IOReturn ( *ReleaseExclusiveAccess ) ( void * self );
@@ -982,6 +991,96 @@ typedef struct MMCDeviceInterface
 										 SCSICmdField2Byte		bufferSize,
 										 SCSITaskStatus *		taskStatus,
 										 SCSI_Sense_Data *		senseDataBuffer );
+	
+	/*! @function ReadDiscStructure
+    @abstract Issues a READ_DISC_STRUCTURE command to the device as defined in MMC-5.
+    @discussion Once an MMCDeviceInterface is opened the client may send this command to
+    read information about Disc specific structures on the disc.
+    @param self Pointer to an MMCDeviceInterface for one IOService.
+	@param MEDIA_TYPE The MEDIA_TYPE field as defined in MMC-5.
+	@param ADDRESS The ADDRESS field as defined in MMC-5.
+    @param LAYER_NUMBER The LAYER_NUMBER field as defined in MMC-5.
+    @param format The FORMAT field as defined in MMC-5.
+	@param buffer Pointer to the buffer to be used for this function.
+	@param bufferSize The size of the data transfer requested.
+	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask
+	which was executed. Valid SCSITaskStatus values are defined in
+	SCSITask.h
+    @param senseDataBuffer Pointer to a buffer the size of the SCSI_Sense_Data struct
+    found in SCSICmds_REQUEST_SENSE_Defs.h.
+	The sense data is only valid if the SCSITaskStatus is kSCSITaskStatus_CHECK_CONDITION.
+    @result Returns kIOReturnSuccess if successful, kIOReturnNoDevice if there is no
+    connection to an IOService, kIOReturnNoMemory if a SCSITask couldn't be created,
+	or kIOReturnExclusiveAccess if the device is already opened for exclusive access
+	by another client.
+	*/
+
+	IOReturn ( *ReadDiscStructure ) (	void *				self,
+										SCSICmdField4Bit	MEDIA_TYPE,
+										SCSICmdField4Byte	ADDRESS,
+										SCSICmdField1Byte	LAYER_NUMBER,
+										SCSICmdField1Byte	FORMAT,
+										void *				buffer,
+										SCSICmdField2Byte	bufferSize,
+										SCSITaskStatus *	taskStatus,
+										SCSI_Sense_Data *	senseDataBuffer );
+	
+	/*! @function ReadDiscInformationV2
+    @abstract Issues a READ_DISC_INFORMATION command to the device as defined in MMC-5.
+    @discussion Once an MMCDeviceInterface is opened the client may send this command
+    to read information about the disc (CD-R/RW, (un)finalized, etc..
+    @param self Pointer to an MMCDeviceInterface for one IOService.
+    @param DATA_TYPE The DATA_TYPE field as defined in MMC-5.
+	@param buffer Pointer to the buffer to be used for this function.
+	@param bufferSize The size of the data transfer requested.
+	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask which
+	was executed. Valid SCSITaskStatus values are defined in SCSITask.h
+    @param senseDataBuffer Pointer to a buffer the size of the SCSI_Sense_Data struct found
+    in SCSICmds_REQUEST_SENSE_Defs.h.
+	The sense data is only valid if the SCSITaskStatus is kSCSITaskStatus_CHECK_CONDITION.
+    @result Returns kIOReturnSuccess if successful, kIOReturnNoDevice if there is no connection
+    to an IOService, kIOReturnNoMemory if a SCSITask couldn't be created, or
+    kIOReturnExclusiveAccess if the device is already opened for exclusive access
+    by another client.
+	*/
+
+	IOReturn ( *ReadDiscInformationV2 ) (	void *				self,
+											SCSICmdField3Bit	DATA_TYPE,
+											void *				buffer,
+											SCSICmdField2Byte	bufferSize,
+											SCSITaskStatus *	taskStatus,
+											SCSI_Sense_Data *	senseDataBuffer );
+	
+	/*! @function ReadTrackInformationV2
+    @abstract Issues a READ_TRACK_INFORMATION command to the device as defined in Mt. Fuji 5.
+    @discussion Once an MMCDeviceInterface is opened the client may send this command to
+    read information about selected tracks on the disc.
+    @param self Pointer to an MMCDeviceInterface for one IOService.
+    @param OPEN The OPEN field as defined in Mt. Fuji 5.
+	@param ADDRESS_NUMBER_TYPE The ADDRESS/NUMBER_TYPE field as defined in Mt. Fuji 5.
+    @param LOGICAL_BLOCK_ADDRESS_TRACK_SESSION_NUMBER The LOGICAL_BLOCK_ADDRESS/SESSION_NUMBER
+    field as defined in Mt. Fuji 5.
+	@param buffer Pointer to the buffer to be used for this function.
+	@param bufferSize The size of the data transfer requested.
+	@param taskStatus Pointer to a SCSITaskStatus to get the status of the SCSITask which
+	was executed. Valid SCSITaskStatus values are defined in SCSITask.h
+    @param senseDataBuffer Pointer to a buffer the size of the SCSI_Sense_Data struct found
+    in SCSICmds_REQUEST_SENSE_Defs.h. The sense data is only valid
+    if the SCSITaskStatus is kSCSITaskStatus_CHECK_CONDITION.
+    @result Returns kIOReturnSuccess if successful, kIOReturnNoDevice if there is no
+    connection to an IOService, kIOReturnNoMemory if a SCSITask couldn't be created,
+	or kIOReturnExclusiveAccess if the device is already opened for exclusive access
+	by another client.
+	*/
+
+	IOReturn ( *ReadTrackInformationV2 ) (	void *				self,
+											SCSICmdField1Bit	OPEN,
+											SCSICmdField2Bit	ADDRESS_NUMBER_TYPE,
+											SCSICmdField4Byte	LOGICAL_BLOCK_ADDRESS_TRACK_SESSION_NUMBER,
+											void *				buffer,
+											SCSICmdField2Byte	bufferSize,
+											SCSITaskStatus *	taskStatus,
+											SCSI_Sense_Data *	senseDataBuffer );
 	
 } MMCDeviceInterface;
 	

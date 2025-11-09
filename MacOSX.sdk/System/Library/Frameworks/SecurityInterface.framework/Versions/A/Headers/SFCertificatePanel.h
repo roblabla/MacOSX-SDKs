@@ -10,6 +10,7 @@
 
 #import <Cocoa/Cocoa.h>
 #include <Security/SecCertificate.h>
+#include <Security/SecTrust.h>
 
 @class SFCertificateView;
 
@@ -22,16 +23,20 @@
 {
 @private
 	/* All instance variables are private */
+#if defined (__LP64__)
+	id _reserved_SFCertificatePanel;
+#else
 	IBOutlet SFCertificateView *_certView;
 	IBOutlet NSWindow *_panel;
-	IBOutlet NSButton *_okButton;	
+	IBOutlet NSButton *_okButton;
 	IBOutlet NSTableView *_certTable;
-	NSWindow *_parentWindowForSheet;	
+	NSWindow *_parentWindowForSheet;
 	SEL _clientDidEndSelector;
-	id _clientDelegate;			
+	id _clientDelegate;
 	void *_clientContextInfo;
 	NSMutableArray *_certDataArray;
 	id _reserved_SFCertificatePanel;
+#endif
 }
 
 /*!
@@ -43,6 +48,16 @@
 + (SFCertificatePanel *)sharedCertificatePanel;
 
 /*!
+    @method runModalForTrust:showGroup:
+	@abstract Displays a certificate chain in a modal panel, returning NSOKButton when dismissed.
+		This method is preferred over runModalForCertificates, since the SecTrustRef parameter lets you
+		specify policies that determine whether the certificate is valid within your application's context.
+    @param trust A trust reference which contains the certificates to display.
+    @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
+*/
+- (NSInteger)runModalForTrust:(SecTrustRef)trust showGroup:(BOOL)showGroup;
+
+/*!
     @method runModalForCertificates:showGroup:
 	@abstract Displays one or more specified certificates in a modal panel, returning NSOKButton when dismissed.
     @param certificates The certificates to display.
@@ -51,7 +66,23 @@
     @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
 		To show only a single certificate, specify only one SecCertificateRef in the array and set showGroup to NO.
 */
-- (int)runModalForCertificates:(NSArray *)certificates showGroup:(BOOL)showGroup;
+- (NSInteger)runModalForCertificates:(NSArray *)certificates showGroup:(BOOL)showGroup;
+
+/*!
+    @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup:
+	@abstract Displays a certificate chain in a modal sheet.
+		This is the preferred sheet method for SFCertificatePanel, since the SecTrustRef parameter lets you
+		specify policies that determine whether the certificate is valid within your application's context.
+    @param docWindow The parent window to which the sheet is attached.
+    @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed.
+    @param didEndSelector This method is called when the sheet is dismissed.
+    @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method.
+    @param trust A trust reference which contains the certificates to display.
+    @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
+    @discussion The didEndSelector method should have the following signature:
+        - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+*/
+- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust showGroup:(BOOL)showGroup;
 
 /*!
     @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:certificates:showGroup:
@@ -64,7 +95,7 @@
 		Pass a NSArray containing one or more SecCertificateRef instances in this parameter.
     @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
     @discussion The didEndSelector method should have the following signature:
-        - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+        - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 */
 - (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo certificates:(NSArray *)certificates showGroup:(BOOL)showGroup;
 
@@ -129,6 +160,12 @@ is first consulted.  If the delegate does not implement -certificatePanelShowHel
 	@abstract Returns the current help anchor string for the modal panel.
 */
 - (NSString *)helpAnchor;
+
+/*
+    @method certificateView
+	@abstract Returns the current SFCertificateView instance for the modal panel.
+*/
+- (SFCertificateView *)certificateView;
 
 @end
 

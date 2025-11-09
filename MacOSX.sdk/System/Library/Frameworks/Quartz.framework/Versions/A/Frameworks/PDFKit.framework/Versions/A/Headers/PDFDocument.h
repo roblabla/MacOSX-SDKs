@@ -1,9 +1,22 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFDocument.h
-// ======================================================================================================================
+// =====================================================================================================================
+
+
+#import <AppKit/AppKit.h>
 
 
 @class PDFDestination, PDFOutline, PDFPage, PDFSelection, PDFDocumentPrivateVars;
+
+
+// Printing page-scaling modes (see PDFView).
+typedef NSInteger PDFPrintScalingMode;
+enum
+{
+    kPDFPrintPageScaleNone = 0, 
+    kPDFPrintPageScaleToFit = 1, 
+    kPDFPrintPageScaleDownToFit = 2
+};
 
 
 // Notifications.
@@ -21,11 +34,20 @@ extern NSString *PDFDocumentDidFindMatchNotification;		// The notification objec
 															//  contains a PDFSelection (found instance) for the key 
 															//  @"PDFDocumentFoundSelection".
 
+extern NSString *PDFDocumentDidBeginWriteNotification;		// The notification object is self, no userInfo dictionary.
+extern NSString *PDFDocumentDidEndWriteNotification;		// The notification object is self, no userInfo dictionary.
+extern NSString *PDFDocumentDidBeginPageWriteNotification;	// The notification object is self, the userInfo dictionary 
+															//  contains the page index as an NSNumber for the key 
+															//  @"PDFDocumentPageIndex".
+extern NSString *PDFDocumentDidEndPageWriteNotification;	// The notification object is self, the userInfo dictionary 
+															//  contains the page index as an NSNumber for the key 
+															//  @"PDFDocumentPageIndex".
+
 // Document attributes (see -[documentAttributes] below).
 extern NSString *PDFDocumentTitleAttribute;				// NSString containing document title.
 extern NSString *PDFDocumentAuthorAttribute;			// NSString containing document author.
 extern NSString *PDFDocumentSubjectAttribute;			// NSString containing document title.
-extern NSString *PDFDocumentCreatorAttribute;			// NSString containing name of app that created document content.
+extern NSString *PDFDocumentCreatorAttribute;			// NSString containing name of app that created document.
 extern NSString *PDFDocumentProducerAttribute;			// NSString containing name of app that produced PDF data.
 extern NSString *PDFDocumentCreationDateAttribute;		// NSDate representing document creation date.
 extern NSString *PDFDocumentModificationDateAttribute;	// NSDate representing last document modification date.
@@ -85,7 +107,8 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 - (void) setDelegate: (id) anObject;
 - (id) delegate;
 
-// Methods to record the current state of the PDFDocument as data or a file.
+// Methods to record the current state of the PDFDocument as data or a file.  Passing a QuartzFilter object in the 
+// options dictionary with the key @"QuartzFilter" will allow you to have the filter applied when saving the PDF.
 - (NSData *) dataRepresentation;
 - (BOOL) writeToFile: (NSString *) path;
 - (BOOL) writeToFile: (NSString *) path withOptions: (NSDictionary *) options;
@@ -97,6 +120,14 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // Returns the root outline object for the PDF (or NULL if none).
 - (PDFOutline *) outlineRoot;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Allows you specify a PDFOutline as the root outline item for this document.  When the PDF is saved the outline tree 
+// structure is written out to the destination PDF file. Passing NULL is a way to strip any outline from a document.
+- (void) setOutlineRoot: (PDFOutline *) outline;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 // Given a PDFSelection, this method returns the child outline item the selection most closely falls beneath. Since a 
 // selection may span multiple outline items, only the point representing the first character of the PDFSelection is 
 // considered. Typically, outline's indicate things like chapters for the PDF.  Therefore, this method would help you 
@@ -106,31 +137,53 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // -------- pages
 
 // The number of pages in the document.
-- (unsigned int) pageCount;
+- (NSUInteger) pageCount;
 
 // Returns a PDFPage object representing the page at index. Will raise an exception if index is out of bounds. Indicees 
 // are zero-based.
-- (PDFPage *) pageAtIndex: (unsigned int) index;
+- (PDFPage *) pageAtIndex: (NSUInteger) index;
 
 // Given a PDFPage, returns the pages index within the document. Indicees are zero-based.
-- (unsigned int) indexForPage: (PDFPage *) page;
+- (NSUInteger) indexForPage: (PDFPage *) page;
 
 // Methods allowing pages to be inserted, removed, and re-ordered. Can throw range exceptions.
-- (void) insertPage: (PDFPage *) page atIndex: (unsigned int) index;
-- (void) removePageAtIndex: (unsigned int) index;
-- (void) exchangePageAtIndex: (unsigned int) indexA withPageAtIndex: (unsigned int) indexB;
+// Note: when inserting a PDFPage, you have to be careful if that page came from another PDFDocument. PDFPage's have a 
+// notion of a single document that owns them and when you call the methods below the PDFPage passed in is assigned a 
+// new owning document.  You'll want to call -[PDFPage copy] first then and pass this copy to the blow methods. This 
+// allows the orignal PDFPage to maintina its original document.
+- (void) insertPage: (PDFPage *) page atIndex: (NSUInteger) index;
+- (void) removePageAtIndex: (NSUInteger) index;
+- (void) exchangePageAtIndex: (NSUInteger) indexA withPageAtIndex: (NSUInteger) indexB;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// This is the class that will be allocated and initialized when page objects are created for the document.  The 
+// default implementation returns [PDFPage class] but if you want PDFDocument to use your own custom class you can 
+// subclass PDFDocument and implement this method to return your own custom class.  Your class should be a subclass of 
+// PDFPage (otherwise the behavior is undefined).
+- (Class) pageClass;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // -------- find
 
 // Searches entire document for string and returns an array of PDFSelections representing all instances found. May 
 // return an empty array (if not found). Supported options are: NSCaseInsensitiveSearch, NSLiteralSearch, and 
 // NSBackwardsSearch.
-- (NSArray *) findString: (NSString *) string withOptions: (int) options;
+- (NSArray *) findString: (NSString *) string withOptions: (NSUInteger) options;
 
 // Begins a find, searching the document for string.  Search results are handled via a 
 // PDFDocumentDidFindMatchNotification or if the delegate implements -[didMatchString:]. Supported options are: 
 // NSCaseInsensitiveSearch, NSLiteralSearch, and NSBackwardsSearch.
-- (void) beginFindString: (NSString *) string withOptions: (int) options;
+- (void) beginFindString: (NSString *) string withOptions: (NSUInteger) options;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Like -[beginFindString:withOptions:] above but it accepts an array of strings to search for.
+// All other comments for -[beginFindString:withOptions:] above apply.
+- (void) beginFindStrings: (NSArray *) strings withOptions: (NSUInteger) options;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // Searches for only the next instance of string beginning after the last character of selection with options (or 
 // preceding the first character of the selection if NSBackwardsSearch is specified as a search option).
@@ -138,7 +191,7 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // NSCaseInsensitiveSearch, NSLiteralSearch, and NSBackwardsSearch. Passing in NULL for selection will start the 
 // search from the beginning of the document (or end if NSBackwardsSearch is specified).
 - (PDFSelection *) findString: (NSString *) string fromSelection: (PDFSelection *) selection 
-		withOptions: (int) options;
+		withOptions: (NSUInteger) options;
 
 // Returns YES if document is currently searching for a string.
 - (BOOL) isFinding;
@@ -158,8 +211,8 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 		atPoint: (NSPoint) endPt;
 
 // Similar to the obove method but allows you to specify a character index for the start and end pages.
-- (PDFSelection *) selectionFromPage: (PDFPage *) startPage atCharacterIndex: (unsigned int) startChar 
-		toPage: (PDFPage *) endPage atCharacterIndex: (unsigned int) endChar;
+- (PDFSelection *) selectionFromPage: (PDFPage *) startPage atCharacterIndex: (NSUInteger) startChar 
+		toPage: (PDFPage *) endPage atCharacterIndex: (NSUInteger) endChar;
 
 @end
 
@@ -176,7 +229,7 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 
 @interface NSObject(PDFDocumentDelegate)
 
-// If implemented by the delegate, called for every search instance found during a find. PDFDocument's implentation 
+// If implemented by the delegate, called for every search instance found during a find. PDFDocument's implementation 
 // accumulates each PDFSelection (instance) in an NSArray.
 - (void) didMatchString: (PDFSelection *) instance;
 @end

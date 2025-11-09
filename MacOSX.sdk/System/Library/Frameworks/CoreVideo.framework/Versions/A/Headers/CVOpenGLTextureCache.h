@@ -26,6 +26,18 @@ extern "C" {
 */
 typedef struct __CVOpenGLTextureCache *CVOpenGLTextureCacheRef;
 
+/* Dictionary keys and values for use with the 'cacheAttributes' parameter of CVOpenGLTextureCacheCreate */
+
+/* CVOpenGLTextureCache can (in some cases) do higher quality chroma upsampling on GPUs that support ARB_fragment_program.  By
+   default it will be enabled automatically if the texture cache determines that the GPU has the needed support and the image
+   size is something reasonable for the GPU being used.   The automatic behaviour can be overridden below.  Note that setting
+   kCVOpenGLTextureCacheChromaSamplingModeHighQuality is only a request.   GPUs that don't support ARB_fragment_program will still
+   resort back to the native hardware support for YCbCr textures. */
+CV_EXPORT const CFStringRef kCVOpenGLTextureCacheChromaSamplingModeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeAutomatic AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // Defaut if the key is not present
+CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeHighestQuality AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;    // Force highest quality regardless of performance impact
+CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeBestPerformance AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;   // Do it the quickest way possible
+
 CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!

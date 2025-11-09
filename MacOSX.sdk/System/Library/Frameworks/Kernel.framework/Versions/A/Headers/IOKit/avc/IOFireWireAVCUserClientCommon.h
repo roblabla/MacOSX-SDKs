@@ -48,7 +48,7 @@ enum IOFWAVCUserClientCommandCodes {
 };
 
 enum IOFWAVCUserClientAsyncCommandCodes {
-    kIOFWAVCUserClientInstallAsyncAVCCommandCallback,	// kIOUCScalarIScalarO 1, 1
+    kIOFWAVCUserClientInstallAsyncAVCCommandCallback = kIOFWAVCUserClientNumCommands,	// kIOUCScalarIScalarO 1, 1
     kIOFWAVCUserClientNumAsyncCommands
 };
 
@@ -76,7 +76,7 @@ enum IOFWAVCProtocolUserClientCommandCodes {
 };
 
 enum IOFWAVCProtocolUserClientAsyncCommandCodes {
-    kIOFWAVCProtocolUserClientSetAVCRequestCallback,   		// kIOUCScalarIScalarO 2, 0
+    kIOFWAVCProtocolUserClientSetAVCRequestCallback = kIOFWAVCProtocolUserClientNumCommands,   		// kIOUCScalarIScalarO 2, 0
     kIOFWAVCProtocolUserClientAllocateInputPlug,			// kIOUCScalarIScalarO 1, 1
     kIOFWAVCProtocolUserClientAllocateOutputPlug,			// kIOUCScalarIScalarO 1, 1
     kIOFWAVCProtocolUserClientInstallAVCCommandHandler,		// kIOUCScalarIScalarO 4, 0

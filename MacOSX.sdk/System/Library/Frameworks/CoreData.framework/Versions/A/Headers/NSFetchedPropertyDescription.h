@@ -1,7 +1,7 @@
 /*
     NSFetchedPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2005 Apple Computer, Inc.
+    Copyright (c) 2004-2007 Apple Inc.
     All rights reserved.
 */
 

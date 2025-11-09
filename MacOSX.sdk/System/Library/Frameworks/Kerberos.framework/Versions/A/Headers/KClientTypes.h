@@ -27,16 +27,21 @@
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
 #    include <TargetConditionals.h>
+#    include <AvailabilityMacros.h>
 #    if TARGET_RT_MAC_CFM
 #        error "Use KfM 4.0 SDK headers for CFM compilation."
 #    endif
+#endif
+
+#ifndef DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
+#define DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
 #endif
 
 #if TARGET_OS_MAC
 #    include <Kerberos/des.h>
 #    include <CoreServices/CoreServices.h>
 #else
-#    include <KerberosIV/des.h>
+#    include <kerberosIV/des.h>
 #    include <CoreServices.h>
 #endif
 
@@ -45,10 +50,7 @@ extern "C" {
 #endif
 
 #if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import on
-#    endif
-#    pragma options align=mac68k
+#    pragma pack(push,2)
 #endif
     
 /* Constants */
@@ -63,36 +65,39 @@ enum {
 /* Opaque types */
 
 struct KClientSessionOpaque;
-typedef struct KClientSessionOpaque* KClientSession;
+typedef struct KClientSessionOpaque* KClientSession
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 struct KClientPrincipalOpaque;
-typedef struct KClientPrincipalOpaque* KClientPrincipal;
+typedef struct KClientPrincipalOpaque* KClientPrincipal
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /* Visible types */
 
-typedef FSSpec KClientFile;
+typedef FSSpec KClientFile
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 struct KClientAddress {
 	UInt32				address;
 	UInt16				port;
 };
-typedef struct KClientAddress KClientAddress;
+typedef struct KClientAddress KClientAddress
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 struct KClientKey {
 	des_cblock			key;
 };
-typedef struct KClientKey KClientKey;
+typedef struct KClientKey KClientKey
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 struct KClientKeySchedule {
 	des_key_schedule	keySchedule;
 };
-typedef struct KClientKeySchedule KClientKeySchedule;
+typedef struct KClientKeySchedule KClientKeySchedule
+DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import reset
-#    endif
-#    pragma options align=reset
+#    pragma pack(pop)
 #endif
 
 #ifdef __cplusplus

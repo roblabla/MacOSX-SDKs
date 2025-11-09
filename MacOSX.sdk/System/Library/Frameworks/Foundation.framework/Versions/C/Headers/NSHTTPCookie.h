@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -296,7 +296,7 @@ extern NSString * const NSHTTPCookiePort;
     Version 1 maps to RFC2965 cookies. There may be future versions.
     @result the version of the receiver.
 */
-- (unsigned)version;
+- (NSUInteger)version;
 
 /*!
     @method name

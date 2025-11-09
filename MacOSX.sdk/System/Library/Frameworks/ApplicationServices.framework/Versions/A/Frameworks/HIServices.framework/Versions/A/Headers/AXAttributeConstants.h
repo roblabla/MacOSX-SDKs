@@ -3,7 +3,7 @@
  *  HIServices
  *
  *  Created by John Louch on Wed Feb 25 2004.
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004, 2006 Apple Computer, Inc. All rights reserved.
  *
  */
 
@@ -44,6 +44,7 @@
 	
 	// value attributes
 	kAXValueAttribute
+    kAXValueDescriptionAttribute
 	kAXMinValueAttribute
 	kAXMaxValueAttribute
 	kAXValueIncrementAttribute
@@ -53,6 +54,7 @@
 	// text-specific attributes
 	kAXSelectedTextAttribute
 	kAXSelectedTextRangeAttribute
+    kAXSelectedTextRangesAttribute
 	kAXVisibleCharacterRangeAttribute
 	kAXNumberOfCharactersAttribute
 	kAXSharedTextUIElementsAttribute
@@ -282,6 +284,27 @@
 	important information.
 */
 #define kAXValueAttribute				CFSTR("AXValue")
+
+
+/*
+    kAXValueDescriptionAttribute
+    
+    Used to supplement kAXValueAttribute.  This attribute returns a string description that best 
+    describes the current value stored in kAXValueAttribute.  This is useful for things like
+    slider where the numeric value in kAXValueAttribute does not always convey enough information
+    about the adjustment made on the slider.  As an example, a color slider that adjusts thru various  
+    colors cannot be well-described by the numeric value in existing AXValueAttribute.  This is where 
+    the kAXValueDescriptionAttribute comes in handy.  In this example, the developer can provide the  
+    color information using this attribute.       
+    
+    Value: A localized, human-readable CFStringRef.
+	
+	Writable? No.
+    
+    Recommended for elements that support kAXValueAttribute.
+
+*/
+#define kAXValueDescriptionAttribute    CFSTR("AXValueDescription")
 
 
 /*
@@ -557,11 +580,11 @@
 /*
 	kAXDescriptionAttribute
 	
-	An indication of an element's purpose, in a way that is slightly more specific
-	than the kAXRoleDescriptionAttribute, but which is less wordy than the
-	kAXHelpAttribute. In English, the description should typically be a concatenation
-	of a usage adjective with the element's role description. For example, the
-	description of a slider in a font panel might be "font size slider". The string
+	A localized, human-readable string that indicates an element's purpose in a way
+	that is slightly more specific than the kAXRoleDescriptionAttribute, but which
+	is less wordy than the kAXHelpAttribute. Typically, the description should be
+	an adjective or short phrase that describes the element's usage. For example,
+	the description of a slider in a font panel might be "font size". The string
 	should be all lower-case and contain no punctuation.
 	
 	Value: A localized, human-readable CFStringRef.
@@ -603,6 +626,20 @@
 */
 #define kAXSelectedTextRangeAttribute			CFSTR("AXSelectedTextRange")
 
+/*
+	kAXSelectedTextRangesAttribute
+	
+	An array of noncontiguous ranges of characters (not bytes) that defines the current selections of an
+	editable text element.  
+	
+	Value: A CFArrayRef of kAXValueCFRanges.
+	
+	Writable? Yes.
+	
+	Recommended for text elements that support noncontiguous selections.
+*/
+#define kAXSelectedTextRangesAttribute			CFSTR("AXSelectedTextRanges")
+
 
 /*
 	kAXVisibleCharacterRangeAttribute
@@ -617,6 +654,7 @@
 	Required for elements of role kAXTextAreaRole. Not required for any other
 	elements, including those of role kAXTextFieldRole.
 */
+
 #define kAXVisibleCharacterRangeAttribute		CFSTR("AXVisibleCharacterRange")
 
 
@@ -1093,6 +1131,11 @@
 
 // system-wide attributes
 #define kAXFocusedApplicationAttribute			CFSTR("AXFocusedApplication")
+
+// grid attributes
+#define kAXRowCountAttribute				CFSTR("AXRowCount")
+#define kAXColumnCountAttribute				CFSTR("AXColumnCount")
+#define kAXOrderedByRowAttribute			CFSTR("AXOrderedByRow")
 
 // obsolete/unknown attributes
 #define kAXTextAttribute				CFSTR("AXText")

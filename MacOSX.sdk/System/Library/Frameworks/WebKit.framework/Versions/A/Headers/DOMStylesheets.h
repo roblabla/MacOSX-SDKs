@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2006 Samuel Weinig <sam.weinig@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -24,41 +25,9 @@
  */
 
 #import <WebKit/DOMCore.h>
+#import <WebKit/DOMDocument.h>
+#import <WebKit/DOMObject.h>
 
-@class DOMMediaList;
-@class DOMStyleSheet;
-
-extern NSString * const DOMEventException;
-
-@interface DOMStyleSheet : DOMObject
-- (NSString *)type;
-- (BOOL)disabled;
-- (void)setDisabled:(BOOL)disabled;
-- (DOMNode *)ownerNode;
-- (DOMStyleSheet *)parentStyleSheet;
-- (NSString *)href;
-- (NSString *)title;
-- (DOMMediaList *)media;
-@end
-
-@interface DOMStyleSheetList : DOMObject
-- (unsigned long)length;
-- (DOMStyleSheet *)item:(unsigned long)index;
-@end
-
-@interface DOMMediaList : DOMObject
-- (NSString *)mediaText;
-- (void)setMediaText:(NSString *)mediaText;
-- (unsigned long)length;
-- (NSString *)item:(unsigned long)index;
-- (void)deleteMedium:(NSString *)oldMedium;
-- (void)appendMedium:(NSString *)newMedium;
-@end
-
-@interface DOMObject (DOMLinkStyle)
-- (DOMStyleSheet *)sheet;
-@end
-
-@interface DOMDocument (DOMDocumentStyle)
-- (DOMStyleSheetList *)styleSheets;
-@end
+#import <WebKit/DOMStyleSheet.h>
+#import <WebKit/DOMStyleSheetList.h>
+#import <WebKit/DOMMediaList.h>

@@ -1,5 +1,5 @@
 /*	CFMessagePort.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFMESSAGEPORT__)
@@ -9,9 +9,7 @@
 #include <CoreFoundation/CFRunLoop.h>
 #include <CoreFoundation/CFData.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef struct __CFMessagePort * CFMessagePortRef;
 
@@ -54,9 +52,7 @@ CF_EXPORT SInt32	CFMessagePortSendRequest(CFMessagePortRef remote, SInt32 msgid,
 
 CF_EXPORT CFRunLoopSourceRef	CFMessagePortCreateRunLoopSource(CFAllocatorRef allocator, CFMessagePortRef local, CFIndex order);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFMESSAGEPORT__ */
 

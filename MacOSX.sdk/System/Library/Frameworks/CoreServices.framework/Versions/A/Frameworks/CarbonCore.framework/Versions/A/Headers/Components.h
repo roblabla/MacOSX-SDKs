@@ -3,7 +3,7 @@
  
      Contains:   Component Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -32,6 +32,10 @@
 #include <CarbonCore/Files.h>
 #endif
 
+#ifndef __RESOURCES__
+#include <CarbonCore/Resources.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -44,7 +48,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 enum {
   kAppleManufacturer            = 'appl', /* Apple supplied components */
@@ -112,14 +116,14 @@ struct ComponentDescription {
   OSType              componentType;          /* A unique 4-byte code indentifying the command set */
   OSType              componentSubType;       /* Particular flavor of this instance */
   OSType              componentManufacturer;  /* Vendor indentification */
-  unsigned long       componentFlags;         /* 8 each for Component,Type,SubType,Manuf/revision */
-  unsigned long       componentFlagsMask;     /* Mask for specifying which flags to consider in search, zero during registration */
+  UInt32              componentFlags;         /* 8 each for Component,Type,SubType,Manuf/revision */
+  UInt32              componentFlagsMask;     /* Mask for specifying which flags to consider in search, zero during registration */
 };
 typedef struct ComponentDescription     ComponentDescription;
 
 struct ResourceSpec {
   OSType              resType;                /* 4-byte code    */
-  short               resID;                  /*         */
+  SInt16              resID;                  /*         */
 };
 typedef struct ResourceSpec             ResourceSpec;
 struct ComponentResource {
@@ -133,19 +137,19 @@ typedef struct ComponentResource        ComponentResource;
 typedef ComponentResource *             ComponentResourcePtr;
 typedef ComponentResourcePtr *          ComponentResourceHandle;
 struct ComponentPlatformInfo {
-  long                componentFlags;         /* flags of Component */
+  SInt32              componentFlags;         /* flags of Component */
   ResourceSpec        component;              /* resource where Component code is found */
-  short               platformType;           /* gestaltSysArchitecture result */
+  SInt16              platformType;           /* gestaltSysArchitecture result */
 };
 typedef struct ComponentPlatformInfo    ComponentPlatformInfo;
 struct ComponentResourceExtension {
-  long                componentVersion;       /* version of Component */
-  long                componentRegisterFlags; /* flags for registration */
-  short               componentIconFamily;    /* resource id of Icon Family */
+  SInt32              componentVersion;       /* version of Component */
+  SInt32              componentRegisterFlags; /* flags for registration */
+  SInt16              componentIconFamily;    /* resource id of Icon Family */
 };
 typedef struct ComponentResourceExtension ComponentResourceExtension;
 struct ComponentPlatformInfoArray {
-  long                count;
+  SInt32              count;
   ComponentPlatformInfo  platformArray[1];
 };
 typedef struct ComponentPlatformInfoArray ComponentPlatformInfoArray;
@@ -155,10 +159,10 @@ struct ExtComponentResource {
   ResourceSpec        componentName;          /* name string resource */
   ResourceSpec        componentInfo;          /* info string resource */
   ResourceSpec        componentIcon;          /* icon resource */
-  long                componentVersion;       /* version of Component */
-  long                componentRegisterFlags; /* flags for registration */
-  short               componentIconFamily;    /* resource id of Icon Family */
-  long                count;                  /* elements in platformArray */
+  SInt32              componentVersion;       /* version of Component */
+  SInt32              componentRegisterFlags; /* flags for registration */
+  SInt16              componentIconFamily;    /* resource id of Icon Family */
+  SInt32              count;                  /* elements in platformArray */
   ComponentPlatformInfo  platformArray[1];
 };
 typedef struct ExtComponentResource     ExtComponentResource;
@@ -173,7 +177,12 @@ typedef struct ComponentAliasResource   ComponentAliasResource;
 struct ComponentParameters {
   UInt8               flags;                  /* call modifiers: sync/async, deferred, immed, etc */
   UInt8               paramSize;              /* size in bytes of actual parameters passed to this call */
-  short               what;                   /* routine selector, negative for Component management calls */
+  SInt16              what;                   /* routine selector, negative for Component management calls */
+#if __LP64__
+
+  UInt32              padding;
+#endif
+
   long                params[1];              /* actual parameters for the indicated routine */
 };
 typedef struct ComponentParameters      ComponentParameters;
@@ -197,14 +206,16 @@ struct RegisteredComponentInstanceRecord {
 };
 typedef struct RegisteredComponentInstanceRecord RegisteredComponentInstanceRecord;
 typedef RegisteredComponentInstanceRecord * RegisteredComponentInstanceRecordPtr;
-typedef long                            ComponentResult;
+typedef SInt32                          ComponentResult;
 enum {
   platform68k                   = 1,    /* platform type (response from gestaltComponentPlatform) */
   platformPowerPC               = 2,    /* (when gestaltComponentPlatform is not implemented, use */
   platformInterpreted           = 3,    /* gestaltSysArchitecture) */
   platformWin32                 = 4,
   platformPowerPCNativeEntryPoint = 5,
-  platformIA32NativeEntryPoint  = 6
+  platformIA32NativeEntryPoint  = 6,
+  platformPowerPC64NativeEntryPoint = 7,
+  platformX86_64NativeEntryPoint = 8
 };
 
 enum {
@@ -312,7 +323,7 @@ typedef struct ComponentMPWorkFunctionHeaderRecord ComponentMPWorkFunctionHeader
 typedef ComponentMPWorkFunctionHeaderRecord * ComponentMPWorkFunctionHeaderRecordPtr;
 typedef CALLBACK_API( ComponentResult , ComponentMPWorkFunctionProcPtr )(void *globalRefCon, ComponentMPWorkFunctionHeaderRecordPtr header);
 typedef CALLBACK_API( ComponentResult , ComponentRoutineProcPtr )(ComponentParameters *cp, Handle componentStorage);
-typedef CALLBACK_API( OSErr , GetMissingComponentResourceProcPtr )(Component c, OSType resType, short resID, void *refCon, Handle *resource);
+typedef CALLBACK_API( OSErr , GetMissingComponentResourceProcPtr )(Component c, OSType resType, SInt16 resID, void *refCon, Handle *resource);
 typedef STACK_UPP_TYPE(ComponentMPWorkFunctionProcPtr)          ComponentMPWorkFunctionUPP;
 typedef STACK_UPP_TYPE(ComponentRoutineProcPtr)                 ComponentRoutineUPP;
 typedef STACK_UPP_TYPE(GetMissingComponentResourceProcPtr)      GetMissingComponentResourceUPP;
@@ -408,7 +419,7 @@ extern Component
 RegisterComponent(
   ComponentDescription *  cd,
   ComponentRoutineUPP     componentEntryPoint,
-  short                   global,
+  SInt16                  global,
   Handle                  componentName,
   Handle                  componentInfo,
   Handle                  componentIcon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -429,7 +440,7 @@ RegisterComponent(
 extern Component 
 RegisterComponentResource(
   ComponentResourceHandle   cr,
-  short                     global)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16                    global)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -515,7 +526,7 @@ GetComponentInfo(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern SInt32 
 GetComponentListModSeed(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -531,7 +542,7 @@ GetComponentListModSeed(void)                                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib via QuickTime 2.5 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern SInt32 
 GetComponentTypeModSeed(OSType componentType)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -642,7 +653,7 @@ extern OSErr
 GetComponentPublicResource(
   Component   aComponent,
   OSType      resourceType,
-  short       resourceID,
+  SInt16      resourceID,
   Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -660,8 +671,8 @@ GetComponentPublicResource(
 extern OSErr 
 GetComponentPublicResourceList(
   OSType                           resourceType,
-  short                            resourceID,
-  long                             flags,
+  SInt16                           resourceID,
+  SInt32                           flags,
   ComponentDescription *           cd,
   GetMissingComponentResourceUPP   missingProc,
   void *                           refCon,
@@ -683,8 +694,8 @@ extern OSErr
 GetComponentPublicIndString(
   Component   aComponent,
   Str255      theString,
-  short       strListID,
-  short       index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      strListID,
+  SInt16      index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -759,7 +770,7 @@ SetComponentRefcon(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern short 
+extern ResFileRefNum 
 OpenComponentResFile(Component aComponent)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -777,8 +788,8 @@ OpenComponentResFile(Component aComponent)                    AVAILABLE_MAC_OS_X
  */
 extern OSErr 
 OpenAComponentResFile(
-  Component   aComponent,
-  short *     resRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component        aComponent,
+  ResFileRefNum *  resRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -794,7 +805,7 @@ OpenAComponentResFile(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-CloseComponentResFile(short refnum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseComponentResFile(ResFileRefNum refnum)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Note: GetComponentResource returns a Handle, not a resource.  The caller must dispose it with DisposeHandle. */
@@ -814,7 +825,7 @@ extern OSErr
 GetComponentResource(
   Component   aComponent,
   OSType      resType,
-  short       resID,
+  SInt16      resID,
   Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -834,8 +845,8 @@ extern OSErr
 GetComponentIndString(
   Component   aComponent,
   Str255      theString,
-  short       strListID,
-  short       index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      strListID,
+  SInt16      index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -876,33 +887,6 @@ SetComponentInstanceStorage(
 
 
 /*
- *  GetComponentInstanceA5()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
- */
-extern long 
-GetComponentInstanceA5(ComponentInstance aComponentInstance)  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-
-/*
- *  SetComponentInstanceA5()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
- */
-
-
-/*
  *  CountComponentInstances()
  *  
  *  Mac OS X threading:
@@ -930,7 +914,7 @@ CountComponentInstances(Component aComponent)                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern long 
+extern ComponentResult 
 CallComponentFunction(
   ComponentParameters *  params,
   ComponentFunctionUPP   func)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -948,7 +932,7 @@ CallComponentFunction(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern ComponentResult 
 CallComponentFunctionWithStorage(
   Handle                 storage,
   ComponentParameters *  params,
@@ -966,7 +950,7 @@ CallComponentFunctionWithStorage(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib via QuickTime 2.5 and later
  */
-extern long 
+extern ComponentResult 
 CallComponentFunctionWithStorageProcInfo(
   Handle                 storage,
   ComponentParameters *  params,
@@ -986,7 +970,7 @@ CallComponentFunctionWithStorageProcInfo(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern ComponentResult 
 DelegateComponentCall(
   ComponentParameters *  originalParams,
   ComponentInstance      ci)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -1007,7 +991,7 @@ DelegateComponentCall(
 extern OSErr 
 SetDefaultComponent(
   Component   aComponent,
-  short       flags)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      flags)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1093,12 +1077,14 @@ UncaptureComponent(Component aComponent)                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern SInt32 
 RegisterComponentResourceFile(
-  short   resRefNum,
-  short   global)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16   resRefNum,
+  SInt16   global)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* This call is deprecated. Please use GetIconRefFromComponent() instead.*/
+#if !__LP64__
 /*
  *  GetComponentIconSuite()
  *  
@@ -1106,7 +1092,7 @@ RegisterComponentResourceFile(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only]
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
@@ -1116,6 +1102,8 @@ GetComponentIconSuite(
   Component   aComponent,
   Handle *    iconSuite)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 /*
  * These calls allow you to register a file system entity.  The
@@ -1127,31 +1115,32 @@ GetComponentIconSuite(
  * which will be used to register selective components.  (Passing
  * NULL, 0 means to register all components.  
  */
+#if !__LP64__
 /*
- *  RegisterComponentFile()
+ *  RegisterComponentFile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 RegisterComponentFile(
   const FSSpec *  spec,
-  short           global)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           global)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  RegisterComponentFileEntries()
+ *  RegisterComponentFileEntries()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1160,8 +1149,10 @@ RegisterComponentFileEntries(
   const FSSpec *                spec,
   short                         global,
   const ComponentDescription *  toRegister,          /* can be NULL */
-  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  RegisterComponentFileRef()
@@ -1177,7 +1168,7 @@ RegisterComponentFileEntries(
 extern OSErr 
 RegisterComponentFileRef(
   const FSRef *  ref,
-  short          global)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16         global)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1194,7 +1185,7 @@ RegisterComponentFileRef(
 extern OSErr 
 RegisterComponentFileRefEntries(
   const FSRef *                 ref,
-  short                         global,
+  SInt16                        global,
   const ComponentDescription *  toRegister,          /* can be NULL */
   UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -1206,59 +1197,62 @@ RegisterComponentFileRefEntries(
 ********************************************************/
 /* Old style names*/
 
+#if !__LP64__
 /*
- *  ComponentFunctionImplemented()
+ *  ComponentFunctionImplemented()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern ComponentResult 
 ComponentFunctionImplemented(
   ComponentInstance   ci,
-  short               ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16              ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetComponentVersion()
+ *  GetComponentVersion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
-GetComponentVersion(ComponentInstance ci)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern ComponentResult 
+GetComponentVersion(ComponentInstance ci)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  ComponentSetTarget()
+ *  ComponentSetTarget()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
-extern long 
+extern ComponentResult 
 ComponentSetTarget(
   ComponentInstance   ci,
-  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* New style names*/
+
+#endif  /* !__LP64__ */
 
 /*
  *  CallComponentOpen()
@@ -1311,7 +1305,7 @@ CallComponentClose(
 extern ComponentResult 
 CallComponentCanDo(
   ComponentInstance   ci,
-  short               ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16              ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1414,7 +1408,7 @@ extern ComponentResult
 CallComponentGetPublicResource(
   ComponentInstance   ci,
   OSType              resourceType,
-  short               resourceID,
+  SInt16              resourceID,
   Handle *            resource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1546,10 +1540,34 @@ extern OSErr
 InvokeGetMissingComponentResourceUPP(
   Component                       c,
   OSType                          resType,
-  short                           resID,
+  SInt16                          resID,
   void *                          refCon,
   Handle *                        resource,
   GetMissingComponentResourceUPP  userUPP)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ComponentMPWorkFunctionUPP                           NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine) { return userRoutine; }
+    inline ComponentRoutineUPP                                  NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine) { return userRoutine; }
+    inline GetMissingComponentResourceUPP                       NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP) { }
+    inline void                                                 DisposeComponentRoutineUPP(ComponentRoutineUPP) { }
+    inline void                                                 DisposeGetMissingComponentResourceUPP(GetMissingComponentResourceUPP) { }
+    inline ComponentResult                                      InvokeComponentMPWorkFunctionUPP(void * globalRefCon, ComponentMPWorkFunctionHeaderRecordPtr header, ComponentMPWorkFunctionUPP userUPP) { return (*userUPP)(globalRefCon, header); }
+    inline ComponentResult                                      InvokeComponentRoutineUPP(ComponentParameters * cp, Handle componentStorage, ComponentRoutineUPP userUPP) { return (*userUPP)(cp, componentStorage); }
+    inline OSErr                                                InvokeGetMissingComponentResourceUPP(Component c, OSType resType, SInt16 resID, void * refCon, Handle * resource, GetMissingComponentResourceUPP userUPP) { return (*userUPP)(c, resType, resID, refCon, resource); }
+  #else
+    #define NewComponentMPWorkFunctionUPP(userRoutine)          ((ComponentMPWorkFunctionUPP)userRoutine)
+    #define NewComponentRoutineUPP(userRoutine)                 ((ComponentRoutineUPP)userRoutine)
+    #define NewGetMissingComponentResourceUPP(userRoutine)      ((GetMissingComponentResourceUPP)userRoutine)
+    #define DisposeComponentMPWorkFunctionUPP(userUPP)
+    #define DisposeComponentRoutineUPP(userUPP)
+    #define DisposeGetMissingComponentResourceUPP(userUPP)
+    #define InvokeComponentMPWorkFunctionUPP(globalRefCon, header, userUPP) (*userUPP)(globalRefCon, header)
+    #define InvokeComponentRoutineUPP(cp, componentStorage, userUPP) (*userUPP)(cp, componentStorage)
+    #define InvokeGetMissingComponentResourceUPP(c, resType, resID, refCon, resource, userUPP) (*userUPP)(c, resType, resID, refCon, resource)
+  #endif
+#endif
 
 /* ProcInfos */
 
@@ -1575,7 +1593,7 @@ enum {
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

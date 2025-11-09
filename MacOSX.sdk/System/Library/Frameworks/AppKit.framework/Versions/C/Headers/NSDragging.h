@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 
 @class NSImage, NSPasteboard, NSWindow, NSURL, NSArray;
 
-typedef unsigned int NSDragOperation;
+typedef NSUInteger NSDragOperation;
 
 enum {
     NSDragOperationNone		= 0,
@@ -22,7 +22,7 @@ enum {
     NSDragOperationAll_Obsolete	= 15,
     NSDragOperationMove		= 16,
     NSDragOperationDelete	= 32,
-    NSDragOperationEvery	= UINT_MAX
+    NSDragOperationEvery	= NSUIntegerMax
 };
 
 // NSDragOperationAll is deprecated - please use NSDragOperationEvery
@@ -40,7 +40,7 @@ enum {
 - (NSImage *)draggedImage;
 - (NSPasteboard *)draggingPasteboard;
 - (id)draggingSource;
-- (int)draggingSequenceNumber;
+- (NSInteger)draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (NSArray *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
@@ -59,7 +59,7 @@ enum {
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender;
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender;
-// draggingEnded: is not yet implemented
+/* draggingEnded: is implemented as of Mac OS 10.5 */
 - (void)draggingEnded:(id <NSDraggingInfo>)sender;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* the receiver of -wantsPeriodicDraggingUpdates should return NO if it does not require periodic -draggingUpdated messages (eg. not autoscrolling or otherwise dependent on draggingUpdated: sent while mouse is stationary) */

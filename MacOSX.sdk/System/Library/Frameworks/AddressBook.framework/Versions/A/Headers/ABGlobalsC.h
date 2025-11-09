@@ -2,7 +2,7 @@
  *  ABGlobalsC.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+ *  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
  *
  */
 
@@ -45,8 +45,10 @@ extern CFStringRef const kABJobTitleProperty;              // Job Title - kABStr
 // Deprecated in Mac OS 10.4. You should use kABURLsProperty.
 extern CFStringRef const kABHomePageProperty;              // Home Web page - kABStringProperty
 
-extern CFStringRef * const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // URLs - kABMultiStringProperty
-    extern CFStringRef * const kABHomePageLabel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // Homepage URL
+extern CFStringRef const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // URLs - kABMultiStringProperty
+    extern CFStringRef const kABHomePageLabel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // Homepage URL
+	
+extern CFStringRef const kABCalendarURIsProperty AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // Calendar URIs - kABMultiStringProperty
 
 extern CFStringRef const kABEmailProperty;                 // Email(s) - kABMultiStringProperty
         extern CFStringRef const kABEmailWorkLabel;        // Work email

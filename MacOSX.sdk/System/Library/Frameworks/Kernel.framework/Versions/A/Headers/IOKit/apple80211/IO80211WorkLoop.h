@@ -17,14 +17,7 @@ public:
 
 	static IO80211WorkLoop * workLoop();
 	
-	virtual bool init();
-	virtual void free();
-	
-	virtual bool releaseGateLock();
-	virtual void retakeGateLock();
-	
-private:
-	
-	UInt32 _lockDepth;
-	IOLock * _releaseGateLock;
+	virtual int sleepGate( void * event, UInt32 interuptibleType );
+	virtual int sleepGateDeadline( void * event, UInt32 interuptibleType, AbsoluteTime deadline );
+	virtual void wakeupGate( void * event, bool oneThread );
 };

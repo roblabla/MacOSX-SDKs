@@ -1,28 +1,26 @@
 /*	NSMethodSignature.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @interface NSMethodSignature : NSObject {
-    @private
-    const char	*_types;
-    int		_nargs;
-    unsigned	_sizeofParams;
-    unsigned	_returnValueLength;
-    void	*_parmInfoP;
-    int		*_fixup;
-    void	*_reserved;
+@private
+    void *_private;
+    void *_reserved[6];
 }
 
-- (unsigned)numberOfArguments;
-- (const char *)getArgumentTypeAtIndex:(unsigned)index;
++ (NSMethodSignature *)signatureWithObjCTypes:(const char *)types;
 
-- (unsigned)frameLength;
+- (NSUInteger)numberOfArguments;
+- (const char *)getArgumentTypeAtIndex:(NSUInteger)idx;
+
+- (NSUInteger)frameLength;
 
 - (BOOL)isOneway;
 
 - (const char *)methodReturnType;
-- (unsigned)methodReturnLength;
+- (NSUInteger)methodReturnLength;
 
 @end
+

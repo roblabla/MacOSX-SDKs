@@ -1,7 +1,7 @@
 /*
 	NSImageCell.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,13 +10,7 @@
 
 @class NSImage;
 
-typedef enum {
-    NSScaleProportionally = 0,   // Fit proportionally
-    NSScaleToFit,                // Forced fit (distort if necessary)
-    NSScaleNone                  // Don't scale (clip)
-} NSImageScaling;
-
-typedef enum {
+enum {
     NSImageAlignCenter = 0,
     NSImageAlignTop,
     NSImageAlignTopLeft,
@@ -26,15 +20,17 @@ typedef enum {
     NSImageAlignBottomLeft,
     NSImageAlignBottomRight,
     NSImageAlignRight
-} NSImageAlignment;
+};
+typedef NSUInteger NSImageAlignment;
 
-typedef enum {
+enum {
     NSImageFrameNone = 0,
     NSImageFramePhoto,
     NSImageFrameGrayBezel,
     NSImageFrameGroove,
     NSImageFrameButton
-} NSImageFrameStyle;
+};
+typedef NSUInteger NSImageFrameStyle;
 
 
 @interface NSImageCell : NSCell <NSCopying, NSCoding>

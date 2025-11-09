@@ -1,6 +1,6 @@
 /*
 	File:		BluetoothAssignedNumbers.h
-	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+	Copyright:	© 2002-2006 by Apple Computer, Inc. All rights reserved.
 */
 
 #pragma once
@@ -10,7 +10,7 @@
 #endif
 
 #pragma mark -
-#pragma mark ¥ Baseband ¥
+#pragma mark === Baseband ===
 
 //==================================================================================================================
 //	Baseband
@@ -183,7 +183,7 @@ enum
 };
 
 #pragma mark -
-#pragma mark ¥ L2CAP ¥
+#pragma mark === L2CAP ===
 
 //===========================================================================================================================
 //	L2CAP
@@ -215,7 +215,7 @@ enum
 
 
 #pragma mark -
-#pragma mark ¥ SDP ¥
+#pragma mark === SDP ===
 
 //===========================================================================================================================
 //	Service Discovery Protocol
@@ -389,6 +389,27 @@ enum ProtocolParameters
     kBluetoothSDPProtocolParameterBNEPVersion							= 1,
     kBluetoothSDPProtocolParameterBNEPSupportedNetworkPacketTypeList	= 2
 };
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
+
+//Inquiries with 'Extended Inquiry Response' (v2.1 specification)
+
+enum BluetoothHCIExtendedInquiryResponseDataTypes
+{
+	kBluetoothHCIExtendedInquiryResponseDataTypeFlags										=	0x01,
+	kBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsWithMoreAvailable		=	0x02,
+	kBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsCompleteList			=	0x03,
+	kBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsWithMoreAvailable		=	0x04,
+	kBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsCompleteList			=	0x05,
+	kBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsWithMoreAvailable	=	0x06,
+	kBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsCompleteList			=	0x07,
+	kBluetoothHCIExtendedInquiryResponseDataTypeShortenedLocalName							=	0x08,
+	kBluetoothHCIExtendedInquiryResponseDataTypeCompleteLocalName							=	0x09,
+	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF
+};
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
+
 
 #ifdef	__cplusplus
 	}

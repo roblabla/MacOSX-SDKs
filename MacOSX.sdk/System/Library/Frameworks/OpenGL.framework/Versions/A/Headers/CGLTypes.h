@@ -48,16 +48,24 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
 	kCGLPFAAccelerated        =  73,	/* choose a hardware accelerated renderer       */
 	kCGLPFAClosestPolicy      =  74,	/* choose the closest color buffer to request   */
-	kCGLPFARobust             =  75,	/* renderer does not need failure recovery      */
 	kCGLPFABackingStore       =  76,	/* back buffer contents are valid after swap    */
-	kCGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
 	kCGLPFAWindow             =  80,	/* can be used to render to an onscreen window  */
-	kCGLPFAMultiScreen        =  81,	/* single window can span multiple screens      */
 	kCGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	kCGLPFADisplayMask        =  84,	/* mask limiting supported displays             */
 	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
 	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
-	kCGLPFAVirtualScreenCount = 128 	/* number of virtual screens in this format     */
+	kCGLPFAAllowOfflineRenderers = 96,	/* show offline renderers in pixel formats      */
+	kCGLPFAVirtualScreenCount = 128, 	/* number of virtual screens in this format     */
+
+/*
+	Note: 
+		kCGLPFARobust, kCGLPFAMPSafe and kCGLPFAMultiScreen attributes will be deprecated in 10.5
+		Applications with these attributes will continue to work but these are being
+		deprecated for new applications.
+*/
+	kCGLPFARobust             =  75,	/* renderer does not need failure recovery      */
+	kCGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
+	kCGLPFAMultiScreen        =  81		/* single window can span multiple screens      */
 } CGLPixelFormatAttribute;
 
 /*
@@ -89,7 +97,8 @@ typedef enum _CGLRendererProperty {
 	kCGLRPTextureMemory       = 121,	/* video memory useable for texture storage      */
 	kCGLRPGPUVertProcCapable  = 122,	/* renderer capable of GPU vertex processing     */
 	kCGLRPGPUFragProcCapable  = 123,	/* renderer capable of GPU fragment processing   */
-	kCGLRPRendererCount       = 128 	/* the number of renderers in this renderer info */
+	kCGLRPRendererCount       = 128,	/* the number of renderers in this renderer info */
+	kCGLRPOnline              = 129 	/* a boolean stating if renderer is on/offline   */
 } CGLRendererProperty;
 
 /*
@@ -109,30 +118,32 @@ typedef enum _CGLContextEnable {
 ** Parameter names for CGLSetParameter and CGLGetParameter.
 */
 typedef enum _CGLContextParameter {
-	kCGLCPSwapRectangle     = 200,  /* 4 params.  Set or get the swap rectangle {x, y, w, h}  */
-	kCGLCPSwapInterval      = 222,  /* 1 param.   0 -> Don't sync, n -> Sync every n retrace  */
-	kCGLCPDispatchTableSize = 224,  /* 1 param.   Get the dispatch table size                 */
+	kCGLCPSwapRectangle          = 200, /* 4 params.  Set or get the swap rectangle {x, y, w, h}        */
+	kCGLCPSwapInterval           = 222, /* 1 param.   0 -> Don't sync, n -> Sync every n retrace        */
+	kCGLCPDispatchTableSize      = 224, /* 1 param.   Get the dispatch table size                       */
 	/* Note: kCGLCPClientStorage is always a pointer-sized parameter, even though the API claims GLint. */
-	kCGLCPClientStorage     = 226,  /* 1 param.   Context specific generic storage            */
-	kCGLCPSurfaceTexture    = 228,  /* 3 params.  SID, target, internal_format                */
+	kCGLCPClientStorage          = 226, /* 1 param.   Context specific generic storage                  */
+	kCGLCPSurfaceTexture         = 228, /* 3 params.  SID, target, internal_format                      */
 /*  - Used by AGL - */
-/*  AGL_STATE_VALIDATION     230    */
-/*  AGL_BUFFER_NAME          231    */
-/*  AGL_ORDER_CONTEXT_TO_FRONT  232 */
-/*  AGL_CONTEXT_SURFACE_ID   233    */
-/*  AGL_CONTEXT_DISPLAY_ID   234    */
-	kCGLCPSurfaceOrder      = 235,  /* 1 param.   1 -> Above window, -1 -> Below Window       */
-	kCGLCPSurfaceOpacity    = 236,  /* 1 param.   1 -> Surface is opaque (default), 0 -> non-opaque */
+/*  AGL_STATE_VALIDATION           230 */
+/*  AGL_BUFFER_NAME                231 */
+/*  AGL_ORDER_CONTEXT_TO_FRONT     232 */
+/*  AGL_CONTEXT_SURFACE_ID         233 */
+/*  AGL_CONTEXT_DISPLAY_ID         234 */
+	kCGLCPSurfaceOrder           = 235, /* 1 param.   1 -> Above window, -1 -> Below Window             */
+	kCGLCPSurfaceOpacity         = 236, /* 1 param.   1 -> Surface is opaque (default), 0 -> non-opaque */
 /*  - Used by AGL - */
-/*  AGL_CLIP_REGION          254   */
-/*  AGL_FS_CAPTURE_SINGLE    255   */
-	kCGLCPSurfaceBackingSize = 304,  	/* 2 params.   Width/height of surface backing size     */
-/* AGL_SURFACE_VOLATILE		 306	*/
-	kCGLCPSurfaceSurfaceVolatile = 306,	/* 1 param.   Surface volatile state					*/
-	kCGLCPReclaimResources		 = 308,	/* 0 params.  */
-	kCGLCPCurrentRendererID      = 309,	/* 1 param.   Retrieves the current renderer ID         */
-	kCGLCPGPUVertexProcessing	 = 310, /* 1 param.   Currently processing vertices with GPU (get) */
-	kCGLCPGPUFragmentProcessing	 = 311, /* 1 param.   Currently processing fragments with GPU (get) */
+/*  AGL_CLIP_REGION                254 */
+/*  AGL_FS_CAPTURE_SINGLE          255 */
+	kCGLCPSurfaceBackingSize     = 304, /* 2 params.  Width/height of surface backing size              */
+/*  AGL_SURFACE_VOLATILE           306 */
+	kCGLCPSurfaceSurfaceVolatile = 306, /* 1 param.   Surface volatile state                            */
+	kCGLCPReclaimResources       = 308, /* 0 params.                                                    */
+	kCGLCPCurrentRendererID      = 309, /* 1 param.   Retrieves the current renderer ID                 */
+	kCGLCPGPUVertexProcessing    = 310, /* 1 param.   Currently processing vertices with GPU (get)      */
+	kCGLCPGPUFragmentProcessing  = 311, /* 1 param.   Currently processing fragments with GPU (get)     */
+	kCGLCPHasDrawable			 = 314, /* 1 param.   Boolean returned if drawable is attached			*/
+	kCGLCPMPSwapsInFlight		 = 315, /* 1 param.   Max number of swaps queued by the MP GL engine	*/
 } CGLContextParameter;
 
 /*
@@ -145,6 +156,8 @@ typedef enum _CGLGlobalOption {
 	kCGLGOResetLibrary     = 504,	/* *** DEPRECATED in MacOS X 10.4 ***            */
 	                             	/* Do a soft reset of the CGL library if true    */
 	kCGLGOUseErrorHandler  = 505,	/* Call the Core Graphics handler on CGL errors  */
+	kCGLGOUseBuildCache    = 506,	/* Enable the function compilation block cache.  */
+	                                /* Off by default.  Must be enabled at startup.  */
 } CGLGlobalOption;
 
 /*

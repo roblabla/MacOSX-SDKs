@@ -2,7 +2,7 @@
 //  ABGroup.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
 
 #import <AddressBook/ABRecord.h>
@@ -20,8 +20,8 @@
 @interface ABGroup : ABRecord
 {
 @private
-    NSMutableArray *_members;
-    NSMutableArray *_subgroups;
+    id _groupReserved1;
+    id _groupReserved2;
 }
 
 - (NSArray *)members;
@@ -79,16 +79,16 @@
 
 @interface ABGroup (ABGroup_Properties)
 
-+ (int)addPropertiesAndTypes:(NSDictionary *)properties;
++ (NSInteger)addPropertiesAndTypes:(NSDictionary *)properties;
     // Add properties to all groups. The dictionary must be of the form:
     //          key: propety name
     //          value: property type
     // Property name must be unique
-    // Returns YES if successful
+    // Returns the number of properties successfuly added (-1 if an error occured)
 
-+ (int)removeProperties:(NSArray *)properties;
++ (NSInteger)removeProperties:(NSArray *)properties;
     // Removes properties from all groups
-    // returns YES if successful
+    // Returns the number of properties successfuly removed (-1 if an error occured)
 
 + (NSArray *)properties;
     // Returns an array of property names
@@ -111,13 +111,13 @@
                                         value:(id)value
                                    comparison:(ABSearchComparison)comparison;
     // Returns a search element that will search on groups
-    //          property: the name of the property to search on (cannot be null)
-    //          label: for multi-value properties an optional label (can be null)
-    //          key: for dictionary values an optional key (can be null)
-    //          value: value to match (can be null)
+    //          property: the name of the property to search on (cannot be nil)
+    //          label: for multi-value properties an optional label (can be nil)
+    //          key: for dictionary values an optional key (can be nil)
+    //          value: value to match (can be nil)
     //          comparison: the type of search (see ABTypedefs.h)
     //
-    // if the value is null the only supported comparisons are kABEqual or kABNotEqual
-    // Note: Support for Null values was added to Mac OS X version 10.2.4
+    // if the value is nil the only supported comparisons are kABEqual or kABNotEqual
+    // Note: Support for nil values was added to Mac OS X version 10.2.4
 @end
 

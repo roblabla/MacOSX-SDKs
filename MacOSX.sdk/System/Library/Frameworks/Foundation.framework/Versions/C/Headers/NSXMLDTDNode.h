@@ -1,16 +1,16 @@
-/*		NSXMLDTDNode.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLDTDNode.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 #import <Foundation/NSXMLNode.h>
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /*!
     @typedef NSXMLDTDNodeKind
 	@abstract The subkind of a DTD node kind.
 */
-typedef enum {
+enum {
 	NSXMLEntityGeneralKind = 1,
 	NSXMLEntityParsedKind,
 	NSXMLEntityUnparsedKind,
@@ -33,7 +33,8 @@ typedef enum {
 	NSXMLElementDeclarationAnyKind,
 	NSXMLElementDeclarationMixedKind,
 	NSXMLElementDeclarationElementKind
-} NSXMLDTDNodeKind;
+};
+typedef NSUInteger NSXMLDTDNodeKind;
 
 /*!
     @class NSXMLDTDNode

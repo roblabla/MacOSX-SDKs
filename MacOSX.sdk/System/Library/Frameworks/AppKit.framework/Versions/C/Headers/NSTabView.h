@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2005, Apple Computer, Inc.
+        Copyright (c) 2000-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -12,7 +12,7 @@
 
 #define NSAppKitVersionNumberWithDirectionalTabs 631.0
 
-typedef enum _NSTabViewType {
+enum {
     NSTopTabsBezelBorder	= 0,			// the default
     NSLeftTabsBezelBorder	= 1,
     NSBottomTabsBezelBorder	= 2,
@@ -20,7 +20,8 @@ typedef enum _NSTabViewType {
     NSNoTabsBezelBorder		= 4,
     NSNoTabsLineBorder		= 5,
     NSNoTabsNoBorder		= 6
-} NSTabViewType;
+};
+typedef NSUInteger NSTabViewType;
 
 @interface NSTabView : NSView
 {
@@ -41,9 +42,9 @@ typedef enum _NSTabViewType {
     
     BOOL		_drawsBackground;		// YES if we draw the background when borderless
     NSTabViewItem	*_pressedTabViewItem;		// using during tracking
-    int			_endTabWidth;			// Width of the end tab. It depends on the font used.
-    int			_maxOverlap;			// Maximum tab overlap. Function of _enTabWidth
-    int			_tabHeight;			// Cache height of tabs
+    NSInteger		_endTabWidth;			// Width of the end tab. It depends on the font used.
+    NSInteger		_maxOverlap;			// Maximum tab overlap. Function of _enTabWidth
+    CGFloat		_tabHeight;			// Cache height of tabs
     NSTabViewItem	*_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
     NSView 		*_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
     struct __NSTabViewDelegateRespondTo {
@@ -74,7 +75,7 @@ typedef enum _NSTabViewType {
 	/* Select */
 
 - (void)selectTabViewItem:(NSTabViewItem *)tabViewItem;
-- (void)selectTabViewItemAtIndex:(int)index;				// May raise an NSRangeException
+- (void)selectTabViewItemAtIndex:(NSInteger)index;				// May raise an NSRangeException
 - (void)selectTabViewItemWithIdentifier:(id)identifier;			// May raise an NSRangeException if identifier not found
 - (void)takeSelectedTabViewItemFromSender:(id)sender;			// May raise an NSRangeException
 
@@ -109,7 +110,7 @@ typedef enum _NSTabViewType {
 	/* Add/Remove tabs */
 
 - (void)addTabViewItem:(NSTabViewItem *)tabViewItem;				// Add tab at the end.
-- (void)insertTabViewItem:(NSTabViewItem *)tabViewItem atIndex:(int)index;	// May raise an NSRangeException
+- (void)insertTabViewItem:(NSTabViewItem *)tabViewItem atIndex:(NSInteger)index;	// May raise an NSRangeException
 - (void)removeTabViewItem:(NSTabViewItem *)tabViewItem;				// tabViewItem must be an existing tabViewItem
 
 	/* Delegate */
@@ -127,10 +128,10 @@ typedef enum _NSTabViewType {
 
 	/* Query */
 
-- (int)numberOfTabViewItems;
-- (int)indexOfTabViewItem:(NSTabViewItem *)tabViewItem;			// NSNotFound if not found
-- (NSTabViewItem *)tabViewItemAtIndex:(int)index;			// May raise an NSRangeException	
-- (int)indexOfTabViewItemWithIdentifier:(id)identifier;			// NSNotFound if not found
+- (NSInteger)numberOfTabViewItems;
+- (NSInteger)indexOfTabViewItem:(NSTabViewItem *)tabViewItem;			// NSNotFound if not found
+- (NSTabViewItem *)tabViewItemAtIndex:(NSInteger)index;			// May raise an NSRangeException	
+- (NSInteger)indexOfTabViewItemWithIdentifier:(id)identifier;			// NSNotFound if not found
 
 @end
 

@@ -1,12 +1,13 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotationSquare.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-#import "PDFAnnotation.h"
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFAnnotation.h>
 
 
-@class NSColor, PDFBorder, PDFAnnotationSquarePrivateVars;
+@class PDFAnnotationSquarePrivateVars;
 
 
 @interface PDFAnnotationSquare : PDFAnnotation
@@ -15,7 +16,7 @@
     PDFAnnotationSquarePrivateVars	*_pdfPriv2;
 }
 
-// Fill color used for drawing annotation.
+// Fill color used for drawing annotation (optional, PDF 1.4).
 - (NSColor *) interiorColor;
 - (void) setInteriorColor: (NSColor *) color;
 

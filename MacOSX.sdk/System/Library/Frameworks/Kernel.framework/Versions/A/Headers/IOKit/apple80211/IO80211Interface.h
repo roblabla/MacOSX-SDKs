@@ -55,6 +55,8 @@ class RSNSupplicant;
 class IOTimerEventSource;
 class IOGatedOutputQueue;
 class IO80211Controller;
+class IO80211ScanManager;
+
 struct rsn_pmksa_node;
 
 /*!	@class IO80211Interface
@@ -134,19 +136,7 @@ public:
 		@abstract <abstract>.
 		@discussion ???. 
 		*/
-	void				postMessage(int msg);
-	
-	/*! @function setScanTimeout
-		@abstract <abstract>.
-		@discussion ???. 
-		*/
-	void				setScanTimeout( unsigned int timeout );
-	
-	/*! @function scanTimeout
-		@abstract <abstract>.
-		@discussion ???. 
-		*/
-	unsigned int		scanTimeout();
+	void				postMessage( UInt32 msg, void * data = NULL, size_t dataLen = 0 );
 	
 	/*! @function setAuthTimeout
 		@abstract <abstract>.
@@ -159,18 +149,6 @@ public:
 		@discussion ???. 
 		*/
 	unsigned int		authTimeout();
-	
-	/*! @function setScanPid
-		@abstract <abstract>.
-		@discussion ???. 
-		*/
-	void				setScanPid( pid_t pid );
-	
-	/*! @function scanPid
-		@abstract <abstract>.
-		@discussion ???. 
-		*/
-	pid_t				scanPid();
 	
 	/*! @function setLinkState
 		@abstract <abstract>.
@@ -237,6 +215,12 @@ public:
 		@discussion ???. 
 		*/
 	void cachePMKSA( UInt8 * pmk, size_t pmkLen, struct ether_addr * aa, UInt8 * pmkID );
+	
+	/*! @function cachePMKSA
+		@abstract <abstract>.
+		@discussion ???. 
+		*/
+	SInt32 cachePMKSA( UInt8 * pmk, size_t pmkLen, struct ether_addr * authenticatorEA );
 	
 	/*! @function pmksaLookup
 		@abstract <abstract>.
@@ -349,8 +333,6 @@ public:
 		*/
 	IOGatedOutputQueue * getOutputQueue();
 	
-#if defined( _MODERN_BPF )
-	
 	/*! @function bpfAttach
 		@abstract <abstract>.
 		@discussion ???. 
@@ -362,16 +344,6 @@ public:
 		@discussion ???. 
 		*/
 	errno_t		monitorModeInputPacket( mbuf_t m, UInt32 dlt, void * header, size_t header_len );
-	
-#else
-	
-	/*! @function monitorModeInputPacket
-		@abstract ???.
-		@discussion ???. 
-		*/
-	void		monitorModeInputPacket(mbuf_t m);
-	
-#endif
 
 	/*! @function get80211OutputQueue
 		@abstract <abstract>.
@@ -384,6 +356,30 @@ public:
 		@discussion ???. 
 		*/
 	virtual UInt32 output80211Packet( mbuf_t m, void * param );
+	
+#ifdef WME_QUEUES
+	IOGatedOutputQueue * getWMEBestEffortQueue() { return _outputQueue; }
+	IOGatedOutputQueue * getWMEBackgroundQueue() { return _queueBackground; }
+	IOGatedOutputQueue * getWMEVoiceQueue()	{ return _queueVoice; }
+	IOGatedOutputQueue * getWMEVideoQueue() { return _queueVideo; }
+	bool wmeSupported() { return _wmeSupported; }
+	UInt32 queueWMEPacket( mbuf_t m, void * param );
+	IOOutputAction getWMEOutputHandler() { return (IOOutputAction)&IO80211Interface::queueWMEPacket; }
+	void startOutputQueues();
+	void stopOutputQueues();
+#endif /* WME_QUEUES */
+
+	bool shortGISupported40MHz() { return _shortGISupported40MHz; }
+	bool shortGISupported20MHz() { return _shortGISupported20MHz; }
+	
+	IO80211ScanManager * getScanManager() { return _scanManager; }
+	
+	static IOReturn monitorCallbackGated( OSObject *owner, void * arg0, void * arg1, void *arg2, void *arg3 );
+	
+	void setWoWEnabled( bool enabled ) { _wowEnabled = enabled; }
+	bool wowEnabled() { return _wowEnabled; }
+	
+	void setBPFCallbackPending( bool pending ) { _bpfCallbackPending = pending; }
 	
 protected:
 	
@@ -445,8 +441,7 @@ private:
 		@discussion ???. 
 		*/
 	void freePMKSACache();
-		
-	ifnet_t		wlt_if;
+	
 	int			_minor;
 	u_int32_t	_devUnit;
 	char *		_statusDevName;
@@ -454,10 +449,6 @@ private:
 	
 	bool		_poweredOnByUser;
 	bool		_enabledBySystem;	// IFF_UP flag set?
-	
-	// Scan data
-	unsigned int	_scanTimeout;
-	pid_t			_scanPid;
 	
 	unsigned int	_authTimeout;
 	
@@ -490,7 +481,20 @@ private:
 	UInt8 _ifiType;
 	
 	bool _wmeSupported;
-	bool _shortGISupported;
+	bool _shortGISupported40MHz;
+	bool _shortGISupported20MHz;
+	
+#ifdef WME_QUEUES
+	IOGatedOutputQueue * _queueBackground;
+	IOGatedOutputQueue * _queueVoice;
+	IOGatedOutputQueue * _queueVideo;
+#endif /* WME_QUEUES */
+
+	IO80211ScanManager * _scanManager;
+	
+	bool _wowEnabled;
+	
+	bool _bpfCallbackPending;
 	
 public:
 

@@ -3,7 +3,7 @@
  
      Contains:   Public Code Fragment Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -54,15 +54,15 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
+#if !__LP64__
 /*
    ¤
    ===========================================================================================
    General Types and Constants
    ===========================
 */
-
 
 enum {
   kCFragResourceType            = 'cfrg',
@@ -88,12 +88,12 @@ enum {
 
 #endif  /* TARGET_CPU_PPC */
 
-#if TARGET_CPU_X86
+#if TARGET_CPU_X86 || TARGET_CPU_X86_64
 enum {
   kCompiledCFragArch            = 'none'
 };
 
-#endif  /* TARGET_CPU_X86 */
+#endif  /* TARGET_CPU_X86 || TARGET_CPU_X86_64 */
 
 typedef UInt32                          CFragVersionNumber;
 enum {
@@ -295,8 +295,9 @@ enum {
 
 #define CFragHasFileLocation(where) \
         ( ((where) == kDataForkCFragLocator) || ((where) == kResourceCFragLocator) )
+#if !__LP64__
 /*
- *  GetSharedLibrary()
+ *  GetSharedLibrary()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    The connID, mainAddr, and errMessage parameters may be NULL with
@@ -307,7 +308,7 @@ enum {
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
@@ -318,17 +319,17 @@ GetSharedLibrary(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,
   Ptr *                mainAddr,
-  Str255               errMessage)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255               errMessage)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetDiskFragment()
+ *  GetDiskFragment()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
@@ -341,17 +342,17 @@ GetDiskFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetMemFragment()
+ *  GetMemFragment()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
@@ -363,32 +364,32 @@ GetMemFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  CloseConnection()
+ *  CloseConnection()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
 extern OSErr 
-CloseConnection(CFragConnectionID * connID)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseConnection(CFragConnectionID * connID)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  FindSymbol()
+ *  FindSymbol()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
@@ -397,34 +398,34 @@ FindSymbol(
   CFragConnectionID   connID,
   ConstStr255Param    symName,
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  CountSymbols()
+ *  CountSymbols()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
 extern OSErr 
 CountSymbols(
   CFragConnectionID   connID,
-  long *              symCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *              symCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  GetIndSymbol()
+ *  GetIndSymbol()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
@@ -434,7 +435,7 @@ GetIndSymbol(
   long                symIndex,
   Str255              symName,        /* can be NULL */
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -475,6 +476,8 @@ GetIndSymbol(
    ! only to avoid perturbing code that (improperly) used the target specific type.
 */
 
+
+#endif  /* !__LP64__ */
 
 struct CFragSystem7MemoryLocator {
   LogicalAddress      address;
@@ -535,16 +538,17 @@ typedef CFragSystem7InitBlockPtr        CFragInitBlockPtr;
 typedef CALLBACK_API_C( OSErr , CFragInitFunction )(const CFragInitBlock * initBlock);
 typedef CALLBACK_API_C( void , CFragTermProcedure )(void);
 /* For use by init routines. If you get a BundlePreLocator, convert it to a CFBundleLocator with this*/
+#if !__LP64__
 /*
- *  ConvertBundlePreLocator()
+ *  ConvertBundlePreLocator()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -563,6 +567,8 @@ ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) AVAILABLE_MAC_O
    "CFrag" into constant and type names.  The old names are defined below in terms of the new.
 */
 
+
+#endif  /* !__LP64__ */
 
 enum {
   kLoadCFrag                    = kReferenceCFrag
@@ -624,13 +630,14 @@ enum {
 
 #endif  /* OLDROUTINENAMES */
 
+#endif  /* !__LP64__ */
 
 
 
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

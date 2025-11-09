@@ -1,53 +1,54 @@
-/*
- File:       ICADevices/ICA_ScannerCalls.h
+/*------------------------------------------------------------------------------------------------------------------------------
+ *
+ *  ICADevices/ICD_ScannerCalls.h
+ *
+ *  Copyright (c) 2004-2006 Apple Computer, Inc. All rights reserved.
+ *
+ *  For bug reports, consult the following page onthe World Wide Web:
+ *  http://developer.apple.com/bugreporter/
+ *
+ *----------------------------------------------------------------------------------------------------------------------------*/
 
- Contains:   Scanner module related interfaces
-
- Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
-
-
- Bugs?:      For bug reports, consult the following page on
- the World Wide Web:
-
- http://developer.apple.com/bugreporter/
-
- */
+#pragma once
 
 #ifndef __ICD_ScannerCalls__
 #define __ICD_ScannerCalls__
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 #include <Carbon/Carbon.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOBluetooth/Bluetooth.h>
 
-#if PRAGMA_ONCE
-#pragma once
-#endif
+//------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-	#pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-	#pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-	#pragma pack(2)
-#endif
+#pragma pack(push, 2)
 
-
+//------------------------------------------------------------------------------------------------------------------------------
 /* DataTypes for _ICD_ReadFileData/_ICD_WriteFileData */
+
 enum {
-    kICS_FileData		= 'file',
-    kICS_ThumbnailData	= 'thum',
-    kICS_MetaData		= 'meta'
+    kICS_FileData                 = 'file',
+    kICS_MetaData                 = 'meta',
+    kICS_ThumbnailData            = 'thum',     // Deprecated in 10.5
+    kICS_ThumbnailDataFormatJPEG  = 'tjpg',     // Deprecated in 10.5.
+                                                // Use kICAThumbnailFormatJPEG or kICAThumbnailFormatJPEGAutoRotated instead.
+    kICS_ThumbnailDataFormatTIFF  = 'ttif',     // Deprecated in 10.5.
+                                                // Use kICAThumbnailFormatTIFF or kICAThumbnailFormatTIFFAutoRotated instead.
+    kICS_ThumbnailDataFormatPNG   = 'tpng'      // Deprecated in 10.5. 
+                                                // Use kICAThumbnailFormatPNG instead.
 };
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 typedef struct ScannerObjectInfo
 {
     ICAObject		icaObject;			// Apple
-    UInt32			reserved;			// Apple
+    unsigned long	reserved;			// Apple
     ICAObjectInfo 	icaObjectInfo;		// vendor
     UInt32			uniqueID;			// vendor
     UInt64			uniqueIDFireWire;	// vendor
@@ -59,7 +60,10 @@ typedef struct ScannerObjectInfo
     UInt8			creationDate[20];	// vendor
     UInt32			flags;				// vendor
     Ptr				privateData;		// vendor
+    UInt32          tag;                // Apple
 } ScannerObjectInfo;
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 struct ICD_ScannerGetPropertyDataPB {
     ICDHeader                       header;
@@ -79,6 +83,8 @@ struct ICD_ScannerGetPropertyDataPB {
 };
 typedef struct ICD_ScannerGetPropertyDataPB    ICD_ScannerGetPropertyDataPB;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 struct ICD_ScannerSetPropertyDataPB {
     ICDHeader                       header;
 
@@ -95,7 +101,7 @@ struct ICD_ScannerSetPropertyDataPB {
 };
 typedef struct ICD_ScannerSetPropertyDataPB    ICD_ScannerSetPropertyDataPB;
 
-
+//------------------------------------------------------------------------------------------------------------------------------
 
 struct ICD_ScannerObjectSendMessagePB {
     ICDHeader                       header;
@@ -109,6 +115,8 @@ struct ICD_ScannerObjectSendMessagePB {
 };
 typedef struct ICD_ScannerObjectSendMessagePB  ICD_ScannerObjectSendMessagePB;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 struct ICD_ScannerOpenSessionPB {
     ICDHeader               header;
     ICAObject           	object;                	/* <-- */
@@ -117,6 +125,8 @@ struct ICD_ScannerOpenSessionPB {
     ICAScannerSessionID  	sessionID;             	/* <-- */
 };
 typedef struct ICD_ScannerOpenSessionPB    ICD_ScannerOpenSessionPB;
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 struct ICD_ScannerCloseSessionPB {
     ICDHeader               header;
@@ -127,6 +137,8 @@ struct ICD_ScannerCloseSessionPB {
 };
 typedef struct ICD_ScannerCloseSessionPB    ICD_ScannerCloseSessionPB;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 struct ICD_ScannerInitializePB {
     ICDHeader             	header;
     ICAObject           	object;                	/* <-- */
@@ -135,6 +147,8 @@ struct ICD_ScannerInitializePB {
     ICAScannerSessionID  	sessionID;             	/* <-- */
 };
 typedef struct ICD_ScannerInitializePB    ICD_ScannerInitializePB;
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 struct ICD_ScannerGetParametersPB {
     ICDHeader         		header;
@@ -146,6 +160,8 @@ struct ICD_ScannerGetParametersPB {
 };
 typedef struct ICD_ScannerGetParametersPB    ICD_ScannerGetParametersPB;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 struct ICD_ScannerSetParametersPB {
     ICDHeader          		header;
     ICAObject           	object;                	/* <-- */
@@ -155,6 +171,8 @@ struct ICD_ScannerSetParametersPB {
     CFMutableDictionaryRef	theDict;               	/* <-> */
 };
 typedef struct ICD_ScannerSetParametersPB    ICD_ScannerSetParametersPB;
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 struct ICD_ScannerStatusPB {
     ICDHeader               header;
@@ -166,6 +184,8 @@ struct ICD_ScannerStatusPB {
 };
 typedef struct ICD_ScannerStatusPB    ICD_ScannerStatusPB;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 struct ICD_ScannerStartPB {
     ICDHeader           	header;
     ICAObject           	object;                	/* <-- */
@@ -175,83 +195,82 @@ struct ICD_ScannerStartPB {
 };
 typedef struct ICD_ScannerStartPB    ICD_ScannerStartPB;
 
+//------------------------------------------------------------------------------------------------------------------------------
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenUSBDevice)(UInt32 locationID,
-                                                          ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenUSBDevice)
+                                    (UInt32 locationID, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenUSBDeviceWithIORegPath)(UInt32 locationID,
-                                                          io_string_t ioregPath,
-                                                          ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenUSBDeviceWithIORegPath)
+                                    (UInt32 locationID, io_string_t ioregPath, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenFireWireDevice)(UInt64 guid,
-                                                               ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenFireWireDevice)
+                                    (UInt64 guid, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenFireWireDeviceWithIORegPath)(UInt64 guid,
-                                                               io_string_t ioregPath,
-                                                               ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenFireWireDeviceWithIORegPath)
+                                    (UInt64 guid, io_string_t ioregPath, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenBluetoothDevice)(CFDictionaryRef     params,
-                                                                ScannerObjectInfo*  objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenBluetoothDevice)
+                                    (CFDictionaryRef params, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenTCPIPDevice)(CFDictionaryRef     params,
-                                                            ScannerObjectInfo*  objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenTCPIPDevice)
+                                    (CFDictionaryRef params, ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerCloseDevice)(ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerCloseDevice)
+                                    (ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerPeriodicTask)(ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerPeriodicTask)
+                                    (ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerGetObjectInfo)(const ScannerObjectInfo * parentInfo,
-                                                          UInt32			 index,		/* index is zero based */
-                                                          ScannerObjectInfo *		 newInfo);
+/* index is zero based */
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerGetObjectInfo)
+                                    (const ScannerObjectInfo* parentInfo, UInt32 index, ScannerObjectInfo* newInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerCleanup)(ScannerObjectInfo * objectInfo);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerCleanup)
+                                    (ScannerObjectInfo* objectInfo);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerGetPropertyData)(const ScannerObjectInfo * objectInfo,
-                                                            ICD_ScannerGetPropertyDataPB	* pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerGetPropertyData)
+                                    (const ScannerObjectInfo* objectInfo, ICD_ScannerGetPropertyDataPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerSetPropertyData)(const ScannerObjectInfo * objectInfo,
-                                                            const ICD_ScannerSetPropertyDataPB	* pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerSetPropertyData)
+                                    (const ScannerObjectInfo* objectInfo, const ICD_ScannerSetPropertyDataPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerReadFileData)(const ScannerObjectInfo *	objectInfo,
-                                                         UInt32			dataType,
-                                                         Ptr			buffer,
-                                                         UInt32			offset,
-                                                         UInt32 *		length);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerReadFileData)
+                                    (const ScannerObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerWriteFileData)(const ScannerObjectInfo *	parentInfo,
-                                                          const char *  filename,
-                                                          UInt32		dataType,
-                                                          Ptr			buffer,
-                                                          UInt32		offset,
-                                                          UInt32 *		length);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteFileData)
+                                    (const ScannerObjectInfo* parentInfo, const char* filename, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerSendMessage)(const ScannerObjectInfo * 			objectInfo,
-                                                        ICD_ScannerObjectSendMessagePB *	pb,
-                                                        ICDCompletion           		completion);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerSendMessage)
+                                    (const ScannerObjectInfo* objectInfo, ICD_ScannerObjectSendMessagePB* pb, ICDCompletion completion);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerAddPropertiesToCFDictionary)(ScannerObjectInfo * 	objectInfo,
-                                                                        CFMutableDictionaryRef	dict);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerAddPropertiesToCFDictionary)
+                                    (ScannerObjectInfo* objectInfo, CFMutableDictionaryRef dict);
 // scanner specific
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenSession)(const ScannerObjectInfo * 	deviceObjectInfo,
-                                                        ICD_ScannerOpenSessionPB *	pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerOpenSession)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerOpenSessionPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerCloseSession)(const ScannerObjectInfo * 		deviceObjectInfo,
-                                                         ICD_ScannerCloseSessionPB *	pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerCloseSession)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerCloseSessionPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerInitialize)(const ScannerObjectInfo * 	deviceObjectInfo,
-                                                       ICD_ScannerInitializePB *	pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerInitialize)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerInitializePB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerGetParameters)(const ScannerObjectInfo * 	deviceObjectInfo,
-                                                          ICD_ScannerGetParametersPB *	pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerGetParameters)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerGetParametersPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerSetParameters)(const ScannerObjectInfo * 	deviceObjectInfo,
-                                                          ICD_ScannerSetParametersPB *	pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerSetParameters)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerSetParametersPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerStatus)(const ScannerObjectInfo *	deviceObjectInfo,
-                                                   ICD_ScannerStatusPB *		pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerStatus)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerStatusPB* pb);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerStart)(const ScannerObjectInfo * deviceObjectInfo,
-                                                  ICD_ScannerStartPB *		pb);
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerStart)
+                                    (const ScannerObjectInfo* deviceObjectInfo, ICD_ScannerStartPB* pb);
+
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFile)
+                                      (const ScannerObjectInfo* objectInfo, FILE* file, UInt32 offset, long* length);
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 // callback functions
 typedef struct ICD_Scannerscanner_callback_functions
@@ -280,24 +299,24 @@ typedef struct ICD_Scannerscanner_callback_functions
     __ICD_ScannerStart								f_ICD_ScannerStart;
     __ICD_ScannerOpenBluetoothDevice                f_ICD_ScannerOpenBluetoothDevice;
     __ICD_ScannerOpenTCPIPDevice                    f_ICD_ScannerOpenTCPIPDevice;
+    __ICD_ScannerWriteDataToFile                    f_ICD_ScannerWriteDataToFile;
 } ICD_scanner_callback_functions;
 extern ICD_scanner_callback_functions gICDScannerCallbackFunctions;
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 
 // scanner related callBacks into the ICADevices.framework:
-int ICD_ScannerMain (int argc, const char * argv[]);
+int ICD_ScannerMain (int argc, const char* argv[]);
 
-OSErr ICDScannerGetStandardPropertyData(const ScannerObjectInfo * objectInfo,
-                                        ICD_ScannerGetPropertyDataPB	* pb);
+ICAError ICDScannerGetStandardPropertyData(const ScannerObjectInfo* objectInfo, ICD_ScannerGetPropertyDataPB* pb);
 
-OSErr ICDScannerNewObjectInfoCreated(const ScannerObjectInfo * parentInfo,
-                                     UInt32			 index,
-                                     ICAObject*		 newICAObject);
+ICAError ICDScannerNewObjectInfoCreated(const ScannerObjectInfo* parentInfo, UInt32 index, ICAObject* newICAObject);
 
-OSErr ICDScannerCopyDeviceInfoDictionary(const char*		deviceName,		// name of the device (from device's objectInfo)
+ICAError ICDScannerCopyDeviceInfoDictionary(const char*		deviceName,		// name of the device (from device's objectInfo)
                                          CFDictionaryRef*	theDict);		// this CFDictionaryRef contains information about the camera, e.g. the icon file,...
 
-OSErr ICDScannerCreateICAThumbnailFromICNS(const char*		fileName,		// filename for .icns icon file (this file has to contain the 48*48 icon - 'huge 32 bit data')
+ICAError ICDScannerCreateICAThumbnailFromICNS(const char*		fileName,		// filename for .icns icon file
                                            ICAThumbnail*	thumbnail);		// pointer to ICAThumbnail
                                                                       // NOTE: you have to allocate and prefill the ICAThumbnail
                                                                       //       malloc(sizeof(ICAThumbnail)+9215);
@@ -305,53 +324,48 @@ OSErr ICDScannerCreateICAThumbnailFromICNS(const char*		fileName,		// filename f
                                                                       //		 dataSize       -> 9216  (= 48*48*4)
 
 
-OSErr ICDScannerInitiateNotificationCallback(const ICAExtendedRegisterEventNotificationPB * pb);
+ICAError ICDScannerInitiateNotificationCallback(const ICAExtendedRegisterEventNotificationPB* pb);
 
-OSErr ICDScannerCreateEventDataCookie(const ICAObject object,
-                                      ICAEventDataCookie * cookie);
+ICAError ICDScannerCreateEventDataCookie(const ICAObject object, ICAEventDataCookie* cookie);
 
-
-// ----------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 // USB
-OSErr ICDScannerConnectUSBDevice(UInt32 locationID);
-OSErr ICDScannerConnectUSBDeviceWithIORegPath(UInt32 	  locationID,
-                                              io_string_t ioregPath);
+ICAError ICDScannerConnectUSBDevice(UInt32 locationID);
+ICAError ICDScannerConnectUSBDeviceWithIORegPath(UInt32 locationID, io_string_t ioregPath);
 
-OSErr ICDScannerDisconnectUSBDevice(UInt32 locationID);
-OSErr ICDScannerDisconnectUSBDeviceWithIORegPath(UInt32 locationID,
-                                                 io_string_t ioregPath);
+ICAError ICDScannerDisconnectUSBDevice(UInt32 locationID);
+ICAError ICDScannerDisconnectUSBDeviceWithIORegPath(UInt32 locationID, io_string_t ioregPath);
 
-// ----------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 // FireWire
-OSErr ICDScannerConnectFWDevice(UInt64 guid);
-OSErr ICDScannerConnectFWDeviceWithIORegPath(UInt64 guid,
-                                             io_string_t ioregPath);
-OSErr ICDScannerDisconnectFWDevice(UInt64 guid);
-OSErr ICDScannerDisconnectFWDeviceWithIORegPath(UInt64 guid,
-                                                io_string_t ioregPath);
+ICAError ICDScannerConnectFWDevice(UInt64 guid);
+ICAError ICDScannerConnectFWDeviceWithIORegPath(UInt64 guid, io_string_t ioregPath);
 
-// ----------------------------------------------------
+ICAError ICDScannerDisconnectFWDevice(UInt64 guid);
+ICAError ICDScannerDisconnectFWDeviceWithIORegPath(UInt64 guid, io_string_t ioregPath);
+
+//------------------------------------------------------------------------------------------------------------------------------
 // Bluetooth
 
-OSErr ICDScannerConnectBluetoothDevice(CFDictionaryRef params);
-OSErr ICDScannerDisconnectBluetoothDevice(CFDictionaryRef params);
+ICAError ICDScannerConnectBluetoothDevice(CFDictionaryRef params);
+ICAError ICDScannerDisconnectBluetoothDevice(CFDictionaryRef params);
 
-// ----------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 // TCP/IP
 
-OSErr ICDScannerConnectTCPIPDevice(CFDictionaryRef params);
-OSErr ICDScannerDisconnectTCPIPDevice(CFDictionaryRef params);
-                          
-#if PRAGMA_STRUCT_ALIGN
-#pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
+ICAError ICDScannerConnectTCPIPDevice(CFDictionaryRef params);
+ICAError ICDScannerDisconnectTCPIPDevice(CFDictionaryRef params);
+
+//------------------------------------------------------------------------------------------------------------------------------
+
 #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-#pragma pack()
-#endif
 
 #ifdef __cplusplus
 }
 #endif
 
+//------------------------------------------------------------------------------------------------------------------------------
+
 #endif
+
+//------------------------------------------------------------------------------------------------------------------------------

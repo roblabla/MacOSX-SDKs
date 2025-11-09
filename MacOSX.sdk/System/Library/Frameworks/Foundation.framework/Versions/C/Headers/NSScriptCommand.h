@@ -1,6 +1,6 @@
 /*
 	NSScriptCommand.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -31,7 +31,7 @@ enum {
     id _directParameter;
     NSScriptObjectSpecifier *_receiversSpecifier;
     id _evaluatedReceivers;
-    NSMutableDictionary *_arguments;
+    NSDictionary *_arguments;
     NSMutableDictionary *_evaluatedArguments;
     struct {
         unsigned int hasEvaluatedReceivers:1;
@@ -76,12 +76,20 @@ enum {
 // If -suspend is invoked during the invocation of this method, its return value is ignored by Cocoa Scripting's built-in Apple event handling.
 - (id)executeCommand;
 
-// Get or set the error number that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply.  If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
+// Set the error number, offending object descriptor, type descriptor, or message, respectively, that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply. If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
 - (void)setScriptErrorNumber:(int)errorNumber;
-- (int)scriptErrorNumber;
-
-// Get or set the error string that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply.
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)setScriptErrorOffendingObjectDescriptor:(NSAppleEventDescriptor *)errorOffendingObjectDescriptor;
+- (void)setScriptErrorExpectedTypeDescriptor:(NSAppleEventDescriptor *)errorExpectedTypeDescriptor;
+#endif
 - (void)setScriptErrorString:(NSString *)errorString;
+
+// Getters that match the above setters.
+- (int)scriptErrorNumber;
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSAppleEventDescriptor *)scriptErrorOffendingObjectDescriptor;
+- (NSAppleEventDescriptor *)scriptErrorExpectedTypeDescriptor;
+#endif
 - (NSString *)scriptErrorString;
 
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED

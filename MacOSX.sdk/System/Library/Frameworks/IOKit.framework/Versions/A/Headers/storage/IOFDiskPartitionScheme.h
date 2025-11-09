@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc.  All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -40,7 +40,7 @@
  * FDisk Partition Map Definitions
  */
 
-#pragma pack(2)   /* (enable 16-bit struct packing for fdisk_part, disk_blk0) */
+#pragma pack(push, 1)                        /* (enable 8-bit struct packing) */
 
 /* Structure constants. */
 
@@ -99,6 +99,6 @@ struct disk_blk0
 #define FDISK_PARTITION_TYPE_AF "Apple_HFS"
 #define FDISK_PARTITION_TYPE_FD "Linux_RAID"
 
-#pragma options align=reset              /* (reset to default struct packing) */
+#pragma pack(pop)                        /* (reset to default struct packing) */
 
 #endif /* !_IOFDISKPARTITIONSCHEME_H */

@@ -1,57 +1,15 @@
 /*
- * This file is auto generated.
- * Please do not edit it.
+ * This file is auto generated.  Please do not edit it.
  */
 
 #ifndef __GSSAPI__
 #define __GSSAPI__
 
-/* Environment dependent macros */
-#define GSS_SIZEOF_INT 4
-#define GSS_SIZEOF_LONG 4
-#define GSS_SIZEOF_SHORT 2
-
-
-/* Error tables from gssapi_err_generic.h */
-#define initialize_ggss_error_table()
-#define G_BAD_SERVICE_NAME                       (-2045022976L)
-#define G_BAD_STRING_UID                         (-2045022975L)
-#define G_NOUSER                                 (-2045022974L)
-#define G_VALIDATE_FAILED                        (-2045022973L)
-#define G_BUFFER_ALLOC                           (-2045022972L)
-#define G_BAD_MSG_CTX                            (-2045022971L)
-#define G_WRONG_SIZE                             (-2045022970L)
-#define G_BAD_USAGE                              (-2045022969L)
-#define G_UNKNOWN_QOP                            (-2045022968L)
-#define G_NO_HOSTNAME                            (-2045022967L)
-#define G_BAD_HOSTNAME                           (-2045022966L)
-#define G_WRONG_MECH                             (-2045022965L)
-#define G_BAD_TOK_HEADER                         (-2045022964L)
-#define G_BAD_DIRECTION                          (-2045022963L)
-#define G_TOK_TRUNC                              (-2045022962L)
-#define G_REFLECT                                (-2045022961L)
-#define G_WRONG_TOKID                            (-2045022960L)
-#define ERROR_TABLE_BASE_ggss                    (-2045022976L)
-
-/* Error tables from gssapi_err_krb5.h */
-#define initialize_k5g_error_table()
-#define KG_CCACHE_NOMATCH                        (39756032L)
-#define KG_KEYTAB_NOMATCH                        (39756033L)
-#define KG_TGT_MISSING                           (39756034L)
-#define KG_NO_SUBKEY                             (39756035L)
-#define KG_CONTEXT_ESTABLISHED                   (39756036L)
-#define KG_BAD_SIGN_TYPE                         (39756037L)
-#define KG_BAD_LENGTH                            (39756038L)
-#define KG_CTX_INCOMPLETE                        (39756039L)
-#define KG_CONTEXT                               (39756040L)
-#define KG_CRED                                  (39756041L)
-#define KG_ENC_DESC                              (39756042L)
-#define KG_BAD_SEQ                               (39756043L)
-#define KG_EMPTY_CCACHE                          (39756044L)
-#define KG_NO_CTYPES                             (39756045L)
-#define KG_LUCID_VERSION                         (39756046L)
-#define ERROR_TABLE_BASE_k5g                     (39756032L)
-
+/* This is the gssapi.h prologue. */
+#include <stdint.h>
+#include <inttypes.h>
+/* no xom.h */
+/* End of gssapi.h prologue. */
 /*
  * Copyright 1993 by OpenVision Technologies, Inc.
  * 
@@ -93,14 +51,11 @@ extern "C" {
 #endif /* __cplusplus */
 
 #if TARGET_OS_MAC
-#	pragma options align=mac68k
+#	pragma pack(push,2)
 #endif
 
 #if defined(_MSDOS) || defined(_WIN32)
 #include <win-mac.h>
-#define GSS_SIZEOF_SHORT SIZEOF_SHORT
-#define GSS_SIZEOF_LONG  SIZEOF_LONG
-#define GSS_SIZEOF_INT   SIZEOF_INT
 #endif
 
 #ifndef KRB5_CALLCONV
@@ -119,31 +74,28 @@ extern "C" {
 #include <sys/types.h>
 
 /*
- * $Id: gssapi.hin 17241 2005-06-15 02:28:30Z  $
+ * $Id: gssapi.hin 18396 2006-07-25 20:29:43Z lxs $
  */
 
 /*
  * First, define the three platform-dependent pointer types.
  */
 
-typedef void * gss_name_t;
-typedef void * gss_cred_id_t;
-typedef void * gss_ctx_id_t;
+struct gss_name_struct;
+typedef struct gss_name_struct * gss_name_t;
+
+struct gss_cred_id_struct;
+typedef struct gss_cred_id_struct * gss_cred_id_t;
+
+struct gss_ctx_id_struct;
+typedef struct gss_ctx_id_struct * gss_ctx_id_t;
 
 /*
  * The following type must be defined as the smallest natural unsigned integer
  * supported by the platform that has at least 32 bits of precision.
  */
-#if (GSS_SIZEOF_SHORT == 4)
-typedef unsigned short gss_uint32;
-typedef short gss_int32;
-#elif (GSS_SIZEOF_INT == 4)
-typedef unsigned int gss_uint32;
-typedef int gss_int32;
-#elif (GSS_SIZEOF_LONG == 4)
-typedef unsigned long gss_uint32;
-typedef long gss_int32;
-#endif
+typedef uint32_t gss_uint32;
+typedef int32_t gss_int32;
 
 #ifdef	OM_STRING
 /*
@@ -756,6 +708,13 @@ OM_uint32 KRB5_CALLCONV gss_inquire_names_for_mech
 	    gss_OID_set *		/* name_types */
 	   );
 
+/* New for V2 */
+OM_uint32 KRB5_CALLCONV gss_inquire_mechs_for_name(
+    OM_uint32 *,		/* minor_status */
+    const gss_name_t,		/* input_name */
+    gss_OID_set *		/* mech_types */
+);
+
 /*
  * The following routines are obsolete variants of gss_get_mic, gss_wrap,
  * gss_verify_mic and gss_unwrap.  They should be provided by GSSAPI V2
@@ -821,7 +780,7 @@ OM_uint32 KRB5_CALLCONV gss_canonicalize_name
 	);
 
 #if TARGET_OS_MAC
-#  pragma options align=reset
+#	pragma pack(pop)
 #endif
 
 #ifdef __cplusplus
@@ -841,4 +800,5 @@ OM_uint32 KRB5_CALLCONV gss_canonicalize_name
 #define GSS_S_CRED_UNAVAIL GSS_S_FAILURE
 
 #endif /* _GSSAPI_H_ */
-#endif /* __GSSAPI__ */
+
+#endif \* __GSSAPI__ */

@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1990, 1991, 1993
@@ -61,6 +67,12 @@
  *
  * $FreeBSD: src/sys/net/bpf.h,v 1.21.2.3 2001/08/01 00:23:13 fenner Exp $
  */
+/*
+ * NOTICE: This file was modified by SPARTA, Inc. in 2006 to introduce
+ * support for mandatory and extensible security protections.  This notice
+ * is included in support of clause 2.2 (b) of the Apple Public License,
+ * Version 2.0.
+ */
 
 #ifndef _NET_BPF_H_
 #define _NET_BPF_H_
@@ -80,7 +92,7 @@ typedef	u_int32_t bpf_u_int32;
  * Alignment macros.  BPF_WORDALIGN rounds up to the next
  * even multiple of BPF_ALIGNMENT.
  */
-#define BPF_ALIGNMENT sizeof(long)
+#define BPF_ALIGNMENT sizeof(int32_t)
 #define BPF_WORDALIGN(x) (((x)+(BPF_ALIGNMENT-1))&~(BPF_ALIGNMENT-1))
 
 #define BPF_MAXINSNS 512
@@ -119,6 +131,13 @@ struct bpf_version {
 	u_short bv_major;
 	u_short bv_minor;
 };
+#if defined(__LP64__)
+#define __need_struct_timeval32
+#include <sys/_structs.h>
+#define BPF_TIMEVAL timeval32
+#else
+#define BPF_TIMEVAL timeval
+#endif
 /* Current version number of filter architecture. */
 #define BPF_MAJOR_VERSION 1
 #define BPF_MINOR_VERSION 1
@@ -131,8 +150,8 @@ struct bpf_version {
 #define	BIOCGDLT	_IOR('B',106, u_int)
 #define BIOCGETIF	_IOR('B',107, struct ifreq)
 #define BIOCSETIF	_IOW('B',108, struct ifreq)
-#define BIOCSRTIMEOUT	_IOW('B',109, struct timeval)
-#define BIOCGRTIMEOUT	_IOR('B',110, struct timeval)
+#define BIOCSRTIMEOUT	_IOW('B',109, struct BPF_TIMEVAL)
+#define BIOCGRTIMEOUT	_IOR('B',110, struct BPF_TIMEVAL)
 #define BIOCGSTATS	_IOR('B',111, struct bpf_stat)
 #define BIOCIMMEDIATE	_IOW('B',112, u_int)
 #define BIOCVERSION	_IOR('B',113, struct bpf_version)
@@ -142,12 +161,14 @@ struct bpf_version {
 #define BIOCSHDRCMPLT	_IOW('B',117, u_int)
 #define BIOCGSEESENT	_IOR('B',118, u_int)
 #define BIOCSSEESENT	_IOW('B',119, u_int)
+#define BIOCSDLT        _IOW('B',120, u_int)
+#define BIOCGDLTLIST    _IOWR('B',121, struct bpf_dltlist)
 
 /*
  * Structure prepended to each packet.
  */
 struct bpf_hdr {
-	struct timeval	bh_tstamp;	/* time stamp */
+	struct BPF_TIMEVAL bh_tstamp;	/* time stamp */
 	bpf_u_int32	bh_caplen;	/* length of captured portion */
 	bpf_u_int32	bh_datalen;	/* original length of packet */
 	u_short		bh_hdrlen;	/* length of bpf header (this struct
@@ -330,6 +351,22 @@ struct bpf_insn {
  */
 #define BPF_STMT(code, k) { (u_short)(code), 0, 0, k }
 #define BPF_JUMP(code, k, jt, jf) { (u_short)(code), jt, jf, k }
+
+#pragma pack(4)
+
+/*
+ * Structure to retrieve available DLTs for the interface.
+ */
+struct bpf_dltlist {
+	u_int32_t	bfl_len;        /* number of bfd_list array */
+	union {
+		u_int32_t   *bflu_list;      /* array of DLTs */
+		u_int64_t	bflu_pad;
+	} bfl_u;
+};
+#define bfl_list bfl_u.bflu_list
+
+#pragma pack()
 
 
 

@@ -7,7 +7,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
 
-     Copyright:  (c) 1985-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2007 by Apple Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,7 +27,9 @@
     on behalf of the HAL. The CFBundle provides routines for opening and closing the device as well
     as the property management routines. The mechanism by which the driver specifies which CFBundle
     to load is defined by the IOAudio driver family in IOKit. The routines described in this header
-    are loaded by name from the CFBundle.
+    are loaded by name from the CFBundle. Note that the HAL will create an instance of a plug-in for
+    each device the plug-in supports that is attached to the system in each process that is using
+    the HAL.
 */
 
 //==================================================================================================

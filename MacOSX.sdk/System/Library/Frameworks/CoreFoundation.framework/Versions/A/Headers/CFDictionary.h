@@ -1,5 +1,5 @@
 /*	CFDictionary.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -23,14 +23,9 @@
 	Dictionaries come in two flavors, immutable, which cannot have
 	values added to them or removed from them after the dictionary is
 	created, and mutable, to which you can add values or from which
-	remove values. Mutable dictionaries have two subflavors,
-	fixed-capacity, for which there is a maximum number set at creation
-	time of values which can be put into the dictionary, and variable
-	capacity, which can have an unlimited number of values (or rather,
-	limited only by constraints external to CFDictionary, like the
-	amount of available memory). Fixed-capacity dictionaries can be
-	somewhat higher performing, if you can put a definate upper limit
-	on the number of values that might be put into the dictionary.
+	remove values. Mutable dictionaries can have an unlimited number
+	of values (or rather, limited only by constraints external to
+	CFDictionary, like the amount of available memory).
 
 	As with all CoreFoundation collection types, dictionaries maintain
 	hard references on the values you put in them, but the retaining and
@@ -66,9 +61,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*!
 	@typedef CFDictionaryKeyCallBacks
@@ -316,13 +309,12 @@ CFDictionaryRef CFDictionaryCreateCopy(CFAllocatorRef allocator, CFDictionaryRef
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained by
-		the CFDictionary. The dictionary starts empty, and can grow
-		to this number of values (and it can have less). If this
-		parameter is 0, the dictionary's maximum capacity is unlimited
-		(or rather, only limited by address space and available memory
-		constraints). If this parameter is negative, the behavior is
-		undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFDictionary. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A dictionary's actual capacity is only limited by 
+                address space and available memory constraints). If this 
+                parameter is negative, the behavior is undefined.
 	@param keyCallBacks A pointer to a CFDictionaryKeyCallBacks structure
 		initialized with the callbacks for the dictionary to use on
 		each key in the dictionary. A copy of the contents of the
@@ -390,15 +382,15 @@ CFMutableDictionaryRef CFDictionaryCreateMutable(CFAllocatorRef allocator, CFInd
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFDictionary. The dictionary starts empty, and can grow
-		to this number of values (and it can have less). If this
-		parameter is 0, the dictionary's maximum capacity is unlimited
-		(or rather, only limited by address space and available memory
-		constraints). This parameter must be greater than or equal
-		to the count of the dictionary which is to be copied, or the
-		behavior is undefined. If this parameter is negative, the
-		behavior is undefined.
+        @param capacity A hint about the number of values that will be held
+                by the CFDictionary. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. A dictionary's actual capacity is only limited by
+                address space and available memory constraints). 
+                This parameter must be greater than or equal
+                to the count of the dictionary which is to be copied, or the
+                behavior is undefined. If this parameter is negative, the
+                behavior is undefined.
 	@param theDict The dictionary which is to be copied. The keys and values
 		from the dictionary are copied as pointers into the new
 		dictionary (that is, the values themselves are copied, not
@@ -588,8 +580,7 @@ void CFDictionaryApplyFunction(CFDictionaryRef theDict, CFDictionaryApplierFunct
 	Adds the key-value pair to the dictionary if no such key already exists.
 	@param theDict The dictionary to which the value is to be added. If this
 		parameter is not a valid mutable CFDictionary, the behavior is
-		undefined. If the dictionary is a fixed-capacity dictionary and
-		it is full before this operation, the behavior is undefined.
+		undefined.
 	@param key The key of the value to add to the dictionary. The key is
 		retained by the dictionary using the retain callback provided
 		when the dictionary was created. If the key is not of the sort
@@ -609,9 +600,7 @@ void CFDictionaryAddValue(CFMutableDictionaryRef theDict, const void *key, const
 	Sets the value of the key in the dictionary.
 	@param theDict The dictionary to which the value is to be set. If this
 		parameter is not a valid mutable CFDictionary, the behavior is
-		undefined. If the dictionary is a fixed-capacity dictionary and
-		it is full before this operation, and the key does not exist in
-		the dictionary, the behavior is undefined.
+		undefined.
 	@param key The key of the value to set into the dictionary. If a key 
 		which matches this key is already present in the dictionary, only
 		the value is changed ("add if absent, replace if present"). If
@@ -672,9 +661,7 @@ void CFDictionaryRemoveValue(CFMutableDictionaryRef theDict, const void *key);
 CF_EXPORT
 void CFDictionaryRemoveAllValues(CFMutableDictionaryRef theDict);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFDICTIONARY__ */
 

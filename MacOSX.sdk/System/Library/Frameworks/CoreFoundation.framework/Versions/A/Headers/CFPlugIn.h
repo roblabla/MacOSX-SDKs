@@ -1,5 +1,5 @@
 /*	CFPlugIn.h
-	Copyright (c) 1999-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2007, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGIN__)
@@ -16,9 +16,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFUUID.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /* ================ Standard Info.plist keys for plugIns ================ */
 
@@ -43,7 +41,7 @@ typedef void *(*CFPlugInFactoryFunction)(CFAllocatorRef allocator, CFUUIDRef typ
 /* ================= Creating PlugIns ================= */
 
 CF_EXPORT
-UInt32 CFPlugInGetTypeID(void);
+CFTypeID CFPlugInGetTypeID(void);
 
 CF_EXPORT
 CFPlugInRef CFPlugInCreate(CFAllocatorRef allocator, CFURLRef plugInURL);
@@ -124,17 +122,15 @@ CFStringRef CFPlugInInstanceGetFactoryName(CFPlugInInstanceRef instance);
 CF_EXPORT
 void *CFPlugInInstanceGetInstanceData(CFPlugInInstanceRef instance);
 CF_EXPORT
-UInt32 CFPlugInInstanceGetTypeID(void);
+CFTypeID CFPlugInInstanceGetTypeID(void);
 CF_EXPORT
 CFPlugInInstanceRef CFPlugInInstanceCreateWithInstanceDataSize(CFAllocatorRef allocator, CFIndex instanceDataSize, CFPlugInInstanceDeallocateInstanceDataFunction deallocateInstanceFunction, CFStringRef factoryName, CFPlugInInstanceGetInterfaceFunction getInterfaceFunction);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #if !COREFOUNDATION_CFPLUGINCOM_SEPARATE
 #include <CoreFoundation/CFPlugInCOM.h>
-#endif
+#endif /* !COREFOUNDATION_CFPLUGINCOM_SEPARATE */
 
 #endif /* ! __COREFOUNDATION_CFPLUGIN__ */
 

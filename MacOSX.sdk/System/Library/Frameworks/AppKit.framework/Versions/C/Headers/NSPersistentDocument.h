@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2005, Apple Computer, Inc.
+	Copyright (c) 2004-2007, Apple Inc.
 	All rights reserved.
  */
 
@@ -27,7 +27,12 @@
 
 - (id)managedObjectModel;    // By default the framework will create a merged model of all models found in an application and its frameworks. Subclasses can return a specific model to use for creating persistent stores.
 
-- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType error:(NSError **)error;    // Configures the persistent store coordinator with the appropriate stores. Subclasses can create the store to save to or load from (invoked from within the other NSDocument methods to read/write files), which gives developers the ability to load/save from/to different persistent store types (default type is XML).
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Configures the persistent store coordinator with the appropriate stores. Subclasses can create the store to save to or load from (invoked from within the other NSDocument methods to read/write files), which gives developers the ability to load/save from/to different persistent store types (default type is XML).
+- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType modelConfiguration:(NSString *)configuration storeOptions:(NSDictionary *)storeOptions error:(NSError **)error;
+
+#endif
 
 - (NSString *)persistentStoreTypeForFileType:(NSString *)fileType;  // Returns the name identifying the store type to save to for the given fileType. The default implementation of this method returns information derived from the application's Info.plist. If no store type information is in the Info.plist, the default implementation returns NSXMLStoreType. See NSPersistentStoreCoordinator.h for store type information. 
 
@@ -39,4 +44,11 @@
 
 @end
 
+@interface NSPersistentDocument (NSPersistentDocumentDeprecated)
+
+- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType error:(NSError **)error;    
+
+@end
+
 #endif
+

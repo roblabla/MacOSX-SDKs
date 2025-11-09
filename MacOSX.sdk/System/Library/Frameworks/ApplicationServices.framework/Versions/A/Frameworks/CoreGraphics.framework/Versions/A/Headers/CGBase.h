@@ -1,5 +1,5 @@
 /* CoreGraphics - CGBase.h
- * Copyright (c) 2000 Apple Computer, Inc.
+ * Copyright (c) 2000-2005 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -8,6 +8,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <float.h>
 #include <AvailabilityMacros.h>
 
 #ifdef __cplusplus
@@ -20,30 +21,31 @@
 
 CG_EXTERN_C_BEGIN
 
-#if defined(__WIN32__)
-#  if defined(CG_BUILDING_CG)
-#    define CG_EXTERN __declspec(dllexport) extern
+#if !defined(CG_EXTERN)
+#  ifdef __cplusplus
+#    define CG_EXTERN extern "C"
 #  else
-#    define CG_EXTERN __declspec(dllimport) extern
-#  endif
-#  if defined(CG_DEBUG)
-#    define CG_PRIVATE_EXTERN CG_EXTERN
-#  else
-#    define CG_PRIVATE_EXTERN extern
+#    define CG_EXTERN extern
 #  endif
 #endif
 
-#if !defined(CG_EXTERN)
-#  define CG_EXTERN extern
-#endif
 
 #if !defined(CG_PRIVATE_EXTERN)
-#  define CG_PRIVATE_EXTERN __private_extern__
+#  if defined(__GNUC__)
+#    define CG_PRIVATE_EXTERN __private_extern__
+#  else
+#    define CG_PRIVATE_EXTERN CG_EXTERN
+#  endif
+#endif
+
+#if !defined(CG_LOCAL)
+#  define CG_LOCAL CG_PRIVATE_EXTERN
 #endif
 
 #if !defined(CG_OBSOLETE)
-#  if defined(__GNUC__) && (__GNUC__ >= 3) && (__GNUC_MINOR__ >= 1)
-#    define CG_OBSOLETE __attribute__((deprecated))
+#  if defined(__GNUC__)							\
+    && ((__GNUC__ == 3 && __GNUC_MINOR__ >= 1) || __GNUC__ >= 4)
+#      define CG_OBSOLETE __attribute__((deprecated))
 #  else
 #    define CG_OBSOLETE
 #  endif
@@ -64,6 +66,19 @@ CG_EXTERN_C_BEGIN
 #if !defined(__GNUC__) && !defined(__MWERKS__)
 #  define __attribute__(attribute)
 #endif
+
+#if defined(__LP64__) && __LP64__
+typedef double CGFloat;
+#define CGFLOAT_MIN DBL_MIN
+#define CGFLOAT_MAX DBL_MAX
+#define CGFLOAT_IS_DOUBLE 1
+#else	/* !defined(__LP64__) || !__LP64__ */
+typedef float CGFloat;
+#define CGFLOAT_MIN FLT_MIN
+#define CGFLOAT_MAX FLT_MAX
+#define CGFLOAT_IS_DOUBLE 0
+#endif	/* !defined(__LP64__) || !__LP64__ */
+#define CGFLOAT_DEFINED 1
 
 CG_EXTERN_C_END
 

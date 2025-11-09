@@ -139,30 +139,30 @@ bool_t xdr_bp_getfile_res();
 #endif /* Old Style C */
 
 
-#define BOOTPARAMPROG ((u_long)100026)
-#define BOOTPARAMVERS ((u_long)1)
+#define BOOTPARAMPROG ((rpc_uint)100026)
+#define BOOTPARAMVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
-#define BOOTPARAMPROC_WHOAMI ((u_long)1)
+#define BOOTPARAMPROC_WHOAMI ((rpc_uint)1)
 extern "C" bp_whoami_res * bootparamproc_whoami_1(bp_whoami_arg *, CLIENT *);
 extern "C" bp_whoami_res * bootparamproc_whoami_1_svc(bp_whoami_arg *, struct svc_req *);
-#define BOOTPARAMPROC_GETFILE ((u_long)2)
+#define BOOTPARAMPROC_GETFILE ((rpc_uint)2)
 extern "C" bp_getfile_res * bootparamproc_getfile_1(bp_getfile_arg *, CLIENT *);
 extern "C" bp_getfile_res * bootparamproc_getfile_1_svc(bp_getfile_arg *, struct svc_req *);
 
 #elif __STDC__
-#define BOOTPARAMPROC_WHOAMI ((u_long)1)
+#define BOOTPARAMPROC_WHOAMI ((rpc_uint)1)
 extern  bp_whoami_res * bootparamproc_whoami_1(bp_whoami_arg *, CLIENT *);
 extern  bp_whoami_res * bootparamproc_whoami_1_svc(bp_whoami_arg *, struct svc_req *);
-#define BOOTPARAMPROC_GETFILE ((u_long)2)
+#define BOOTPARAMPROC_GETFILE ((rpc_uint)2)
 extern  bp_getfile_res * bootparamproc_getfile_1(bp_getfile_arg *, CLIENT *);
 extern  bp_getfile_res * bootparamproc_getfile_1_svc(bp_getfile_arg *, struct svc_req *);
 
 #else /* Old Style C */
-#define BOOTPARAMPROC_WHOAMI ((u_long)1)
+#define BOOTPARAMPROC_WHOAMI ((rpc_uint)1)
 extern  bp_whoami_res * bootparamproc_whoami_1();
 extern  bp_whoami_res * bootparamproc_whoami_1_svc();
-#define BOOTPARAMPROC_GETFILE ((u_long)2)
+#define BOOTPARAMPROC_GETFILE ((rpc_uint)2)
 extern  bp_getfile_res * bootparamproc_getfile_1();
 extern  bp_getfile_res * bootparamproc_getfile_1_svc();
 #endif /* Old Style C */

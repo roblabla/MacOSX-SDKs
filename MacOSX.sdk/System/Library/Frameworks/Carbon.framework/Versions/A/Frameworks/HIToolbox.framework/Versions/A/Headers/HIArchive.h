@@ -3,9 +3,9 @@
  
      Contains:   HIArchive Interfaces.
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
-     Copyright:  © 2004-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2004-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,9 +41,9 @@ extern "C" {
  *    objects for storage in memory or on disk for later retrieval or
  *    transfer to another application. The archive is encoded using the
  *    binary property list format. The binary plist can be converted to
- *    text XML with /usr/bin/plutil for develoment purposes. Details on
- *    how to create an object that supports the HIArchive protocol are
- *    provided in HIToolbox/HIObject.h. 
+ *    text XML with /usr/bin/plutil for development purposes. Details
+ *    on how to create an object that supports the HIArchive protocol
+ *    are provided in HIToolbox/HIObject.h. 
  *    
  *    When writing data out to an archive, the client must first use
  *    HIArchiveCreateForEncoding to generate the archive into which the
@@ -51,10 +51,10 @@ extern "C" {
  *    archive by calling HIArchiveEncodeBoolean, HIArchiveEncodeNumber,
  *    and HIArchiveEncodeCFType. If HIArchiveEncodeCFType is being
  *    called on one of your custom HIObjects, HIToolbox will send it
- *    the kEventHIObjectEncode (HIOBject.h) event. In order to receive
- *    this event your HIObject must first have set its archiving
- *    ignored value to false via HIObjectSetArchivingIgnored. This lets
- *    HIToolbox know your object supports archiving. The
+ *    the kEventHIObjectEncode event (see HIObject.h). In order to
+ *    receive this event your HIObject must first have set its
+ *    archiving-ignored value to false via HIObjectSetArchivingIgnored.
+ *    This lets HIToolbox know your object supports archiving. The
  *    kEventParamHIArchive parameter contains the HIArchiveRef into
  *    which it should encode all of its relevant state information. All
  *    information added to the archive is written with a key. This key
@@ -63,42 +63,42 @@ extern "C" {
  *    keys with an HI prefix. Subclasses of system supplied HIObjects
  *    should only use this namespace if explicitly overriding a value
  *    written to the archive by the superclass. Take care to mantain
- *    the same preference format when overriding the default to avoid
+ *    the same data format when overriding the default to avoid
  *    incompatibilities. When your archiving process is complete,
  *    HIArchiveCopyEncodedData will compress the data into the archive
- *    return it in a CFDataRef. This CFDataRef can be sent to another
- *    application or written out to disk for later retrieval. Once the
- *    encoded data is compressed, no more data may be added to the
- *    archive. At this point, the HIArchiveRef must be released via
+ *    and return it in a CFDataRef. This CFDataRef can be sent to
+ *    another application or written out to disk for later retrieval.
+ *    Once the encoded data is compressed, no more data may be added to
+ *    the archive. At this point, the HIArchiveRef must be released via
  *    CFRelease. 
  *    
  *    When retrieving data from an archive, the client must first use
  *    HIArchiveCreateForDecoding to create an archive reference capable
  *    of decoding the data from the provided CFDataRef. Given the
  *    HIArchiveRef, data may be pulled from the archive via
- *    HIArchiveDecodeBoolean, HIArchiveDecodeNumber,
- *    HIArchiveCopyDecodedCFType and HIArchiveCopyDecodedHIObject. If
- *    HIArchiveCopyDecodedHIObject is called on one of you custom
- *    HIObjects, HIToolbox will send it the kEventHIObjectInitialize
- *    (HIOBject.h) event. The kEventParamHIArchive parameter contains
- *    the HIArchiveRef from which it should decode all of its relevant
- *    state information. Because these data values were written by key,
- *    they can be read in any order regardless of how they were
- *    written. This also means new keyed values can be added without
- *    breaking existing decoding routines. Once all data has been read
- *    from the archive, it may simply be released via CFRelease.
- *    
+ *    HIArchiveDecodeBoolean, HIArchiveDecodeNumber, and
+ *    HIArchiveCopyDecodedCFType. If HIArchiveCopyDecodedCFType is
+ *    called on one of your custom HIObjects, HIToolbox will send it
+ *    the kEventHIObjectInitialize event (see HIOject.h). The
+ *    kEventParamHIArchive parameter contains the HIArchiveRef from
+ *    which it should decode all of its relevant state information.
+ *    Because these data values were written by key, they can be read
+ *    in any order regardless of how they were written. This also means
+ *    new keyed values can be added without breaking existing decoding
+ *    routines. Once all data has been read from the archive, it may
+ *    simply be released via CFRelease. 
  *    
  *    For those clients who wish to provide HIArchive editing features
  *    there are a few tricks necessary to achieve the desired behavior.
  *    A generic HIArchive editor will likely be used by clients to edit
  *    objects for which it has no direct knowledge (or which have not
  *    yet been designed). For instance, it may provide users with the
- *    ability to edit custom HIViews including generic functionality to
- *    set the view's class identifier, title, frame, etc. In this case,
- *    it is necessary to instantiate the superclass
- *    ("com.apple.hiview") of the custom view object because it doesn't
- *    exist and hasn't been registered within the editor. 
+ *    ability to edit custom HIViews, including generic functionality
+ *    to set the view's class identifier, title, frame, etc. In this
+ *    case, it is necessary to instantiate the superclass
+ *    ("com.apple.hiview") of the custom view object because the custom
+ *    view class itself hasn't been registered within the editor.
+ *    
  *    
  *    After the user has completed editing the object and desires to
  *    write out the archive, the editor must set the custom archive
@@ -184,9 +184,19 @@ enum {
    * HIObjectCopyCustomArchiveData. HIArchive is unable to instantiate
    * unregistered objects whose superclasses are also unregistered.
    */
-  kHIArchiveDecodeSuperclassForUnregisteredObjects = (1 << 0)
+  kHIArchiveDecodeSuperclassForUnregisteredObjects = (1 << 0),
+
+  /*
+   * Indicates that an archive is being decoded by an archive editor.
+   * This information is passed to the object being decoded via the
+   * kEventParamDecodingForEditor parameter in the
+   * kEventHIObjectInitialize and kEventHIObjectCreatedFromArchive
+   * event. This option may be used in Mac OS X 10.5 and later.
+   */
+  kHIArchiveDecodingForEditor   = (1 << 1)
 };
 
+#if !__LP64__
 /*
  *  HIArchiveGetTypeID()
  *  
@@ -200,7 +210,7 @@ enum {
  *    A CFTypeID unique to HIArchive instances.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -231,7 +241,7 @@ HIArchiveGetTypeID(void)                                      AVAILABLE_MAC_OS_X
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -264,7 +274,7 @@ HIArchiveCreateForEncoding(HIArchiveRef * outEncoder)         AVAILABLE_MAC_OS_X
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -304,7 +314,7 @@ HIArchiveEncodeBoolean(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -348,7 +358,7 @@ HIArchiveEncodeNumber(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -387,7 +397,7 @@ HIArchiveEncodeCFType(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -429,7 +439,7 @@ HIArchiveCopyEncodedData(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -464,7 +474,7 @@ HIArchiveCreateForDecoding(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -503,7 +513,7 @@ HIArchiveDecodeBoolean(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -546,7 +556,7 @@ HIArchiveDecodeNumber(
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -556,6 +566,8 @@ HIArchiveCopyDecodedCFType(
   CFStringRef    inKey,
   CFTypeRef *    outCFType)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+
+#endif  /* !__LP64__ */
 
 
 #ifdef __cplusplus

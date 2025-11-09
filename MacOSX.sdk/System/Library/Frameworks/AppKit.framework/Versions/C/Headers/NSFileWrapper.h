@@ -1,7 +1,7 @@
 /*
         NSFileWrapper.h
         Application Kit
-        Copyright (c) 1995-2005, Apple Computer, Inc.
+        Copyright (c) 1995-2007, Apple Inc.
         All rights reserved.
 */
 
@@ -10,14 +10,13 @@
 @class NSData, NSDictionary, NSImage;
 
 @interface NSFileWrapper : NSObject <NSCoding> {
-  /*All instance variables are private*/
-  @private
+    @private
     id _impl;
     NSString *_fileName;
     NSString *_preferredFileName;
     NSDictionary *_fileAttributes;
     NSImage *_image;
-    id _subdocuments;
+    id _moreVars;
 }
 
 ////////////////////////////// Initialization //////////////////////////////

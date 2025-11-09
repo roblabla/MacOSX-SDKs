@@ -20,28 +20,31 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-/******************************************************************
+/*
+ * MUSCLE SmartCard Development ( http://www.linuxnet.com )
+ *
+ * Copyright (C) 1999
+ *  David Corcoran <corcoran@linuxnet.com>
+ *
+ * $Id: wintypes.h 2071 2006-06-06 09:20:19Z rousseau $
+ */
 
-	MUSCLE SmartCard Development ( http://www.linuxnet.com )
-	    Title  : wintypes.h
-	    Package: pcsc lite
-            Author : David Corcoran
-            Date   : 7/27/99
-	    License: Copyright (C) 1999 David Corcoran
-	             <corcoran@linuxnet.com>
-            Purpose: This keeps a list of Windows(R) types.
-	            
-********************************************************************/
+/**
+ * @file
+ * @brief This keeps a list of Windows(R) types.
+ */
 
 #ifndef __wintypes_h__
 #define __wintypes_h__
-
-#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+#if !defined(WIN32)
+
+#include <stdint.h>
 
 #ifndef BYTE
 	typedef uint8_t BYTE;
@@ -68,8 +71,31 @@ extern "C"
 	typedef BYTE *LPBYTE;
 	typedef DWORD *LPDWORD;
 	typedef char *LPSTR;
-	typedef char *LPTSTR;
-	typedef char *LPCWSTR;
+
+	/* these types are deprecated but still used by old drivers and applications
+	 * You should use LPSTR instead */
+	typedef char *LPTSTR
+#ifdef __GNUC__
+		/* __attribute__ is a GCC only extension */
+		__attribute__ ((deprecated))
+#endif
+		;
+	typedef const char *LPCTSTR
+#ifdef __GNUC__
+		/* __attribute__ is a GCC only extension */
+		__attribute__ ((deprecated))
+#endif
+		;
+	typedef char *LPCWSTR
+#ifdef __GNUC__
+		/* __attribute__ is a GCC only extension */
+		__attribute__ ((deprecated))
+#endif
+		;
+
+#else
+#include <windows.h>
+#endif
 
 #ifdef __cplusplus
 }

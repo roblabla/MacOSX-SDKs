@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -75,6 +75,10 @@ enum
 	kModePageControlSavedValues			= 0x03
 };
 
+// The command should be tried 5 times.  The original attempt 
+// plus 4 retries.
+#define kDefaultRetryCount		4
+
 // Forward declarations for internal use only classes
 class SCSIPrimaryCommands;
 
@@ -129,11 +133,15 @@ protected:
 		bool						fCMDQUE;
 		SCSITaggedTaskIdentifier	fTaskID;
 		IOSimpleLock *				fTaskIDLock;
+		UInt32						fRetryCount;
+
 	};
 	IOSCSIPrimaryCommandsDeviceExpansionData * fIOSCSIPrimaryCommandsDeviceReserved;
 	
-	#define	fReadTimeoutDuration	fIOSCSIPrimaryCommandsDeviceReserved->fReadTimeoutDuration
-	#define	fWriteTimeoutDuration	fIOSCSIPrimaryCommandsDeviceReserved->fWriteTimeoutDuration
+	#define	fReadTimeoutDuration		fIOSCSIPrimaryCommandsDeviceReserved->fReadTimeoutDuration
+	#define	fWriteTimeoutDuration		fIOSCSIPrimaryCommandsDeviceReserved->fWriteTimeoutDuration
+	#define	fRetryCount					fIOSCSIPrimaryCommandsDeviceReserved->fRetryCount
+	
 	
 	UInt8							fDefaultInquiryCount;
 	OSDictionary *					fDeviceCharacteristicsDictionary;
@@ -147,6 +155,11 @@ protected:
 										SCSICmdField6Bit 			PAGE_CODE,
 										SCSICmdField2Byte 			ALLOCATION_LENGTH,
 										bool *						use10ByteModeSense );
+	bool							RetrieveINQUIRYData (
+										UInt8						EVPD,
+										UInt8						inquiryPage,
+										UInt8 *						inquiryBuffer,
+										UInt16 *					dataSize );
 	
 	// This flag is set if the device responds to a MODE_SENSE_10 command
 	// with the page code set to 0x1A (Power Conditions Mode Page)
@@ -391,6 +404,7 @@ public:
 	UInt8				GetANSIVersion ( void );
 	bool				GetCMDQUE ( void );
     OSString *          MapINQUIRYDataToIconFile ( void );
+	UInt32				GetRetryCount ( void );
 	
 	// -- SCSI Protocol Interface Methods	--
 	// The ExecuteCommand method will take a SCSI Task and transport
@@ -726,6 +740,15 @@ public:
 							SCSICmdField3Byte 			BUFFER_OFFSET,
 							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+	
+	// The SPC-3 INQUIRY command as defined in section 6.4.1 of SPC-3.
+	bool				INQUIRY (
+							SCSITaskIdentifier			request,
+  							IOMemoryDescriptor *		dataBuffer,
+    						SCSICmdField1Bit 			EVPD,
+    						SCSICmdField1Byte 			PAGE_CODE,
+    						SCSICmdField2Byte 			ALLOCATION_LENGTH,
+    						SCSICmdField1Byte 			CONTROL );
 	
 private:
 	

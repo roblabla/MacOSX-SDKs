@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1982, 1986, 1989, 1993
@@ -121,10 +127,20 @@
  */
 
 struct net_event_data {
-     unsigned long	if_family;
-     unsigned long	if_unit;
-     char		if_name[IFNAMSIZ];
+	u_int32_t	if_family;
+	u_int32_t	if_unit;
+	char		if_name[IFNAMSIZ];
 };
+
+#if defined(__LP64__)
+#define __need_struct_timeval32
+#include <sys/_structs.h>
+#define IF_DATA_TIMEVAL timeval32
+#else
+#define IF_DATA_TIMEVAL timeval
+#endif
+
+#pragma pack(4)
 
 /*
  * Structure describing information about an interface
@@ -132,38 +148,36 @@ struct net_event_data {
  */
 struct if_data {
 	/* generic interface information */
-	unsigned char	ifi_type;	/* ethernet, tokenring, etc */
-#ifdef __APPLE__
-	unsigned char	ifi_typelen;	/* Length of frame type id */
-#endif
-	unsigned char	ifi_physical;	/* e.g., AUI, Thinnet, 10base-T, etc */
-	unsigned char	ifi_addrlen;	/* media address length */
-	unsigned char	ifi_hdrlen;	/* media header length */
-	unsigned char	ifi_recvquota;	/* polling quota for receive intrs */
-	unsigned char	ifi_xmitquota;	/* polling quota for xmit intrs */
-    	unsigned char	ifi_unused1;	/* for future use */
-	unsigned long	ifi_mtu;	/* maximum transmission unit */
-	unsigned long	ifi_metric;	/* routing metric (external only) */
-	unsigned long	ifi_baudrate;	/* linespeed */
+	u_char		ifi_type;	/* ethernet, tokenring, etc */
+	u_char		ifi_typelen;	/* Length of frame type id */
+	u_char		ifi_physical;	/* e.g., AUI, Thinnet, 10base-T, etc */
+	u_char		ifi_addrlen;	/* media address length */
+	u_char		ifi_hdrlen;	/* media header length */
+	u_char		ifi_recvquota;	/* polling quota for receive intrs */
+	u_char		ifi_xmitquota;	/* polling quota for xmit intrs */
+	u_char		ifi_unused1;	/* for future use */
+	u_int32_t	ifi_mtu;	/* maximum transmission unit */
+	u_int32_t	ifi_metric;	/* routing metric (external only) */
+	u_int32_t	ifi_baudrate;	/* linespeed */
 	/* volatile statistics */
-	unsigned long	ifi_ipackets;	/* packets received on interface */
-	unsigned long	ifi_ierrors;	/* input errors on interface */
-	unsigned long	ifi_opackets;	/* packets sent on interface */
-	unsigned long	ifi_oerrors;	/* output errors on interface */
-	unsigned long	ifi_collisions;	/* collisions on csma interfaces */
-	unsigned long	ifi_ibytes;	/* total number of octets received */
-	unsigned long	ifi_obytes;	/* total number of octets sent */
-	unsigned long	ifi_imcasts;	/* packets received via multicast */
-	unsigned long	ifi_omcasts;	/* packets sent via multicast */
-	unsigned long	ifi_iqdrops;	/* dropped on input, this interface */
-	unsigned long	ifi_noproto;	/* destined for unsupported protocol */
-	unsigned long	ifi_recvtiming;	/* usec spent receiving when timing */
-	unsigned long	ifi_xmittiming;	/* usec spent xmitting when timing */
-	struct	timeval ifi_lastchange;	/* time of last administrative change */
-	unsigned long	ifi_unused2;	/* used to be the default_proto */
-	unsigned long	ifi_hwassist;	/* HW offload capabilities */
-	unsigned long	ifi_reserved1;	/* for future use */
-	unsigned long	ifi_reserved2;	/* for future use */
+	u_int32_t	ifi_ipackets;	/* packets received on interface */
+	u_int32_t	ifi_ierrors;	/* input errors on interface */
+	u_int32_t	ifi_opackets;	/* packets sent on interface */
+	u_int32_t	ifi_oerrors;	/* output errors on interface */
+	u_int32_t	ifi_collisions;	/* collisions on csma interfaces */
+	u_int32_t	ifi_ibytes;	/* total number of octets received */
+	u_int32_t	ifi_obytes;	/* total number of octets sent */
+	u_int32_t	ifi_imcasts;	/* packets received via multicast */
+	u_int32_t	ifi_omcasts;	/* packets sent via multicast */
+	u_int32_t	ifi_iqdrops;	/* dropped on input, this interface */
+	u_int32_t	ifi_noproto;	/* destined for unsupported protocol */
+	u_int32_t	ifi_recvtiming;	/* usec spent receiving when timing */
+	u_int32_t	ifi_xmittiming;	/* usec spent xmitting when timing */
+	struct IF_DATA_TIMEVAL ifi_lastchange;	/* time of last administrative change */
+	u_int32_t	ifi_unused2;	/* used to be the default_proto */
+	u_int32_t	ifi_hwassist;	/* HW offload capabilities */
+	u_int32_t	ifi_reserved1;	/* for future use */
+	u_int32_t	ifi_reserved2;	/* for future use */
 };
 
 /*
@@ -172,18 +186,16 @@ struct if_data {
  */
 struct if_data64 {
 	/* generic interface information */
-	u_char	ifi_type;		/* ethernet, tokenring, etc */
-#ifdef __APPLE__
-	u_char	ifi_typelen;		/* Length of frame type id */
-#endif
+	u_char		ifi_type;		/* ethernet, tokenring, etc */
+	u_char		ifi_typelen;		/* Length of frame type id */
 	u_char		ifi_physical;		/* e.g., AUI, Thinnet, 10base-T, etc */
 	u_char		ifi_addrlen;		/* media address length */
 	u_char		ifi_hdrlen;		/* media header length */
 	u_char		ifi_recvquota;		/* polling quota for receive intrs */
 	u_char		ifi_xmitquota;		/* polling quota for xmit intrs */
 	u_char		ifi_unused1;		/* for future use */
-	u_long		ifi_mtu;		/* maximum transmission unit */
-	u_long		ifi_metric;		/* routing metric (external only) */
+	u_int32_t	ifi_mtu;		/* maximum transmission unit */
+	u_int32_t	ifi_metric;		/* routing metric (external only) */
 	u_int64_t	ifi_baudrate;		/* linespeed */
 	/* volatile statistics */
 	u_int64_t	ifi_ipackets;		/* packets received on interface */
@@ -197,9 +209,22 @@ struct if_data64 {
 	u_int64_t	ifi_omcasts;		/* packets sent via multicast */
 	u_int64_t	ifi_iqdrops;		/* dropped on input, this interface */
 	u_int64_t	ifi_noproto;		/* destined for unsupported protocol */
-	u_long		ifi_recvtiming;		/* usec spent receiving when timing */
-	u_long		ifi_xmittiming;		/* usec spent xmitting when timing */
-	struct	timeval ifi_lastchange;	/* time of last administrative change */
+	u_int32_t	ifi_recvtiming;		/* usec spent receiving when timing */
+	u_int32_t	ifi_xmittiming;		/* usec spent xmitting when timing */
+	struct IF_DATA_TIMEVAL ifi_lastchange;	/* time of last administrative change */
+};
+
+#pragma pack()
+
+/*
+ * Structure defining a queue for a network interface.
+ */
+struct	ifqueue {
+	void *ifq_head;
+	void *ifq_tail;
+	int	ifq_len;
+	int	ifq_maxlen;
+	int	ifq_drops;
 };
 
 

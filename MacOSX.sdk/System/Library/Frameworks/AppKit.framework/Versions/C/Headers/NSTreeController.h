@@ -1,21 +1,25 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2005, Apple Computer, Inc.
+	Copyright (c) 2003-2007, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSObjectController.h>
 #import <Foundation/NSIndexPath.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class NSTreeNode;
+#endif
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSTreeController : NSObjectController {
-    void *reserved1;
-    NSArray *_modeObservingKeyPaths;
-    void *_observedIndexPathHint;
+    id _treeControllerReserved1;
+    NSArray *_modelObservingKeyPaths;
+    id _treeStructureObservers;
     id _arrangedObjects;
-    id _arrayControllerTree;
+    id _rootNode;
     id _selectionIndexPaths;
     struct __treeControllerFlags {
         unsigned int _avoidsEmptySelection:1;
@@ -25,9 +29,13 @@
         unsigned int _explicitlyCannotInsertChild:1;
         unsigned int _explicitlyCannotAddChild:1;
         unsigned int _alwaysUsesMultipleValuesMarker:1;
-        unsigned int _reservedTreeController:25;
+        unsigned int _observingThroughArrangedObjects:1;
+        unsigned int _mutatingNodes:1;
+        unsigned int _performingFetch:1;
+        unsigned int _skipSortingAfterFetch:1;
+        unsigned int _reservedTreeController:21;
     } _treeControllerFlags;
-    NSMutableArray *_selectedObjects;
+    NSArray *_selectedObjects;
     NSString *_childrenKeyPath;
     NSString *_countKeyPath;
     NSString *_leafKeyPath;
@@ -36,7 +44,8 @@
 
 - (void)rearrangeObjects; // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes
 
-- (id)arrangedObjects; // opaque root node representation of all displayed objects. This is just for binding to or passing around. At this time, developers should not make any assumption about what methods this object responds to.
+// proxy for the root tree node responds to -childNodes and -descendantNodeAtIndexPath:(NSIndexPath *)indexPath
+- (id)arrangedObjects; 
 
 - (void)setChildrenKeyPath:(NSString *)keyPath; // key used to find the children of a model object.
 - (NSString *)childrenKeyPath;
@@ -86,6 +95,18 @@
 - (NSIndexPath *)selectionIndexPath;
 - (BOOL)addSelectionIndexPaths:(NSArray *)indexPaths;
 - (BOOL)removeSelectionIndexPaths:(NSArray *)indexPaths;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSArray *)selectedNodes;
+
+- (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath;
+- (void)moveNodes:(NSArray *)nodes toIndexPath:(NSIndexPath *)startingIndexPath;
+
+- (NSString *)childrenKeyPathForNode:(NSTreeNode *)node;
+- (NSString *)countKeyPathForNode:(NSTreeNode *)node;
+- (NSString *)leafKeyPathForNode:(NSTreeNode *)node;
+#endif
+
 
 @end
 

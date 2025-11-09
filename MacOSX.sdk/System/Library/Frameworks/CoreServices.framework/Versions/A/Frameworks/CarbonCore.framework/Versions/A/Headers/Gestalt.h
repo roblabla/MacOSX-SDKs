@@ -3,7 +3,7 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1988-2006 by Apple Computer, Inc.  All rights reserved
  
@@ -38,7 +38,7 @@ extern "C" {
 
 
 
-typedef CALLBACK_API( OSErr , SelectorFunctionProcPtr )(OSType selector, long *response);
+typedef CALLBACK_API( OSErr , SelectorFunctionProcPtr )(OSType selector, SInt32 *response);
 typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunctionUPP;
 /*
  *  Gestalt()
@@ -49,7 +49,7 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
  *  Discussion:
  *    The Gestalt function places the information requested by the
  *    selector parameter in the variable parameter response . Note that
- *    Gestalt returns the response from all selectors in a long word,
+ *    Gestalt returns the response from all selectors in an SInt32,
  *    which occupies 4 bytes. When not all 4 bytes are needed, the
  *    significant information appears in the low-order byte or bytes.
  *    Although the response parameter is declared as a variable
@@ -84,8 +84,8 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
  *    returns a size in the response parameter.
  *    
  *    Attr:  A range of 32 bits, the meanings of which are defined by a
- *    list of constants. Bit 0 is the least significant bit of the long
- *    word.
+ *    list of constants. Bit 0 is the least significant bit of the
+ *    SInt32.
  *    Count: A number indicating how many of the indicated type of item
  *    exist.
  *    Size: A size, usually in bytes.
@@ -127,10 +127,11 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
  */
 extern OSErr 
 Gestalt(
-  OSType   selector,
-  long *   response)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType    selector,
+  SInt32 *  response)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  ReplaceGestalt()   *** DEPRECATED ***
  *  
@@ -166,7 +167,7 @@ Gestalt(
  *      the specified selector
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -177,6 +178,9 @@ ReplaceGestalt(
   SelectorFunctionUPP *  oldGestaltFunction)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
  *  NewGestalt()   *** DEPRECATED ***
  *  
@@ -221,7 +225,7 @@ ReplaceGestalt(
  *      you need to provide.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -230,6 +234,8 @@ NewGestalt(
   OSType                selector,
   SelectorFunctionUPP   gestaltFunction)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  NewGestaltValue()
@@ -273,7 +279,7 @@ NewGestalt(
 extern OSErr 
 NewGestaltValue(
   OSType   selector,
-  long     newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -313,7 +319,7 @@ NewGestaltValue(
 extern OSErr 
 ReplaceGestaltValue(
   OSType   selector,
-  long     replacementValue)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   replacementValue)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -352,7 +358,7 @@ ReplaceGestaltValue(
 extern OSErr 
 SetGestaltValue(
   OSType   selector,
-  long     newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -422,8 +428,20 @@ DisposeSelectorFunctionUPP(SelectorFunctionUPP userUPP)       AVAILABLE_MAC_OS_X
 extern OSErr
 InvokeSelectorFunctionUPP(
   OSType               selector,
-  long *               response,
+  SInt32 *             response,
   SelectorFunctionUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SelectorFunctionUPP                                  NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSelectorFunctionUPP(SelectorFunctionUPP) { }
+    inline OSErr                                                InvokeSelectorFunctionUPP(OSType selector, SInt32 * response, SelectorFunctionUPP userUPP) { return (*userUPP)(selector, response); }
+  #else
+    #define NewSelectorFunctionUPP(userRoutine)                 ((SelectorFunctionUPP)userRoutine)
+    #define DisposeSelectorFunctionUPP(userUPP)
+    #define InvokeSelectorFunctionUPP(selector, response, userUPP) (*userUPP)(selector, response)
+  #endif
+#endif
 
 
 /* Environment Selectors */
@@ -436,7 +454,7 @@ enum {
 
 enum {
   gestaltAFPClient              = 'afps',
-  gestaltAFPClientVersionMask   = 0x0000FFFF, /* low word of long is the */
+  gestaltAFPClientVersionMask   = 0x0000FFFF, /* low word of SInt32 is the */
                                         /* client version 0x0001 -> 0x0007*/
   gestaltAFPClient3_5           = 0x0001,
   gestaltAFPClient3_6           = 0x0002,
@@ -449,7 +467,7 @@ enum {
   gestaltAFPClient3_8_1         = 0x0009, /* including 3.8.2 */
   gestaltAFPClient3_8_3         = 0x000A,
   gestaltAFPClient3_8_4         = 0x000B, /* including 3.8.5, 3.8.6 */
-  gestaltAFPClientAttributeMask = (long)0xFFFF0000, /* high word of long is a */
+  gestaltAFPClientAttributeMask = (long)0xFFFF0000, /* high word of response is a */
                                         /* set of attribute bits*/
   gestaltAFPClientCfgRsrc       = 16,   /* Client uses config resources*/
   gestaltAFPClientSupportsIP    = 29,   /* Client supports AFP over TCP/IP*/
@@ -536,7 +554,7 @@ enum {
         release     = 0x80
 
     For example, if you call Gestalt with the 'atkv' selector when AppleTalk version 57
-    is loaded, you receive the long integer response value 0x39008000.
+    is loaded, you receive the integer response value 0x39008000.
 */
 enum {
   gestaltAUXVersion             = 'a/ux' /* a/ux version, if present */
@@ -554,7 +572,7 @@ enum {
 };
 
 enum {
-  gestaltBusClkSpeedMHz         = 'bclm' /* main I/O bus clock speed in megahertz ( an unsigned long ) */
+  gestaltBusClkSpeedMHz         = 'bclm' /* main I/O bus clock speed in megahertz ( a UInt32 ) */
 };
 
 enum {
@@ -690,7 +708,8 @@ enum {
   gestaltCPUG47447              = 0x0112,
   gestaltCPU750FX               = 0x0120, /* Sahara,G3 like thing */
   gestaltCPU970                 = 0x0139, /* G5 */
-  gestaltCPU970FX               = 0x013C /* another G5 */
+  gestaltCPU970FX               = 0x013C, /* another G5 */
+  gestaltCPU970MP               = 0x0144
 };
 
 enum {
@@ -1593,11 +1612,11 @@ enum {
 };
 
 enum {
-  gestaltProcClkSpeed           = 'pclk' /* processor clock speed in hertz (an unsigned long) */
+  gestaltProcClkSpeed           = 'pclk' /* processor clock speed in hertz (a UInt32) */
 };
 
 enum {
-  gestaltProcClkSpeedMHz        = 'mclk' /* processor clock speed in megahertz (an unsigned long) */
+  gestaltProcClkSpeedMHz        = 'mclk' /* processor clock speed in megahertz (a UInt32) */
 };
 
 enum {
@@ -1837,7 +1856,7 @@ enum {
     
     For compatability with code which assumed that the value in returned by the
     gestaltPhysicalRAMSize selector would be a signed quantity of bytes, this selector will
-    now return 2 gigabytes-1 ( LONG_MAX ) if the system has 2 gigabytes of physical memory or more.
+    now return 2 gigabytes-1 ( INT_MAX ) if the system has 2 gigabytes of physical memory or more.
 */
 enum {
   gestaltPhysicalRAMSize        = 'ram ' /* physical RAM size, in bytes */
@@ -2048,8 +2067,15 @@ enum {
     Mac OS X 10.3.15 will be returned as 0x1039, and Mac OS X 10.10.5 will
     return 0x1095.
     
-    A better way to get version information on Mac OS X would be to read in the
-    system version information from the file /System/Library/CoreServices/SystemVersion.plist.
+    A better way to get version information on Mac OS X would be to use the
+    new gestaltSystemVersionMajor, gestaltSystemVersionMinor, and 
+    gestaltSystemVersionBugFix selectors, which don't have arbitrary limits
+    on the values returned.
+ 
+    If you want to know the product build version string, product name, or
+    the user visible version string you shuold read in the system version
+    information from the file /System/Library/CoreServices/SystemVersion.plist.
+ 
 */
 enum {
   gestaltSystemVersion          = 'sysv', /* system version*/

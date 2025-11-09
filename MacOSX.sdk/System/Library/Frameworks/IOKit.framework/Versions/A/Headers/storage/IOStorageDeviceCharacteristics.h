@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -141,6 +141,35 @@ Example:
 
 
 /*!
+@defined kIOPropertyProductSerialNumberKey
+@discussion This key is used to define the Product Serial Number for a
+particular device and it has an associated data.
+
+Requirement: Mandatory
+
+Example:
+<pre>
+@textblock
+<dict>
+	<key>Device Characteristics</key>
+	<dict>
+		<key>Vendor Name</key>
+		<string>Apple</string>
+		<key>Product Name</key>
+		<string>iPod</string>
+		<key>Product Revision Level</key>
+		<string>1.0</string>
+		<key>Serial Number</key>
+		<string>123456789</string>
+	</dict>
+</dict>
+@/textblock
+</pre>
+*/
+#define kIOPropertyProductSerialNumberKey		"Serial Number"
+
+
+/*!
 @defined kIOPropertySupportedCDFeaturesKey
 @discussion This key is used to define the supported CD Features for a
 particular optical device and it has an associated bitfield. See
@@ -204,6 +233,41 @@ Example:
 </pre>
 */
 #define kIOPropertySupportedDVDFeaturesKey		"DVD Features"
+
+
+/*!
+@defined kIOPropertySupportedBDFeaturesKey
+@discussion This key is used to define the supported BD Features for a
+particular optical device and it has an associated bitfield. See
+<IOKit/scsi/IOSCSIMultimediaCommandsDevice.h> for definitions of the
+bits and associated bitmasks.
+
+Requirement: Mandatory for optical devices (Peripheral Device Type 05h).
+
+Example:
+<pre>
+@textblock
+<dict>
+	<key>Device Characteristics</key>
+	<dict>
+		<key>Vendor Name</key>
+		<string>Apple</string>
+		<key>Product Name</key>
+		<string>SuperDrive</string>
+		<key>Product Revision Level</key>
+		<string>1.0</string>
+		<key>CD Features</key>
+		<integer>1663</integer>
+		<key>DVD Features</key>
+		<integer>103</integer>
+		<key>BD Features</key>
+		<integer>21</integer>
+	</dict>
+</dict>
+@/textblock
+</pre>
+*/
+#define kIOPropertySupportedBDFeaturesKey		"BD Features"
 
 
 /*!
@@ -389,6 +453,67 @@ Example:
 </pre>
 */
 #define kIOPropertyBytesPerPhysicalSectorKey	"Bytes per Physical Sector"
+
+
+/*!
+@defined kIOPropertyPhysicalBlockSizeKey
+@discussion This key is used to define the physical block size of a hard disk drive.
+
+Requirement: Mandatory for hard disk drives with physical block size other than 512 bytes.
+
+Example:
+<pre>
+@textblock
+<dict>
+	<key>Device Characteristics</key>
+	<dict>
+		<key>Vendor Name</key>
+		<string>Apple</string>
+		<key>Product Name</key>
+		<string>iPod</string>
+		<key>Product Revision Level</key>
+		<string>1.0</string>
+		<key>Physical Block Size</key>
+		<integer>4096</integer>
+		<key>Logical Block Size</key>
+		<integer>512</integer>
+	</dict>
+</dict>
+@/textblock
+</pre>
+*/
+#define kIOPropertyPhysicalBlockSizeKey	"Physical Block Size"
+
+
+/*!
+@defined kIOPropertyLogicalBlockSizeKey
+@discussion This key is used to define the logical block size of a hard disk drive.
+
+Requirement: Mandatory for hard disk drives with logical block size other than 512 bytes
+or that does not match its physical block size.
+
+Example:
+<pre>
+@textblock
+<dict>
+	<key>Device Characteristics</key>
+	<dict>
+		<key>Vendor Name</key>
+		<string>Apple</string>
+		<key>Product Name</key>
+		<string>iPod</string>
+		<key>Product Revision Level</key>
+		<string>1.0</string>
+		<key>Physical Block Size</key>
+		<integer>4096</integer>
+		<key>Logical Block Size</key>
+		<integer>512</integer>
+	</dict>
+</dict>
+@/textblock
+</pre>
+*/
+#define kIOPropertyLogicalBlockSizeKey	"Logical Block Size"
 
 
 #endif	/* _IOKIT_IO_STORAGE_DEVICE_CHARACTERISTICS_H_ */

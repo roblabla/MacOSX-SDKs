@@ -1,15 +1,17 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
+#import <ApplicationServices/ApplicationServices.h>
 
+@class CIImage;
 @class NSColor;
 
-typedef enum _NSTIFFCompression {
+enum {
     NSTIFFCompressionNone		= 1,
     NSTIFFCompressionCCITTFAX3		= 3,		/* 1 bps only */
     NSTIFFCompressionCCITTFAX4		= 4,		/* 1 bps only */
@@ -18,9 +20,10 @@ typedef enum _NSTIFFCompression {
     NSTIFFCompressionNEXT		= 32766,	/* Input only */
     NSTIFFCompressionPackBits		= 32773,
     NSTIFFCompressionOldJPEG		= 32865		/* No longer supported for input or output */
-} NSTIFFCompression;
+};
+typedef NSUInteger NSTIFFCompression;
 
-typedef enum _NSBitmapImageFileType {
+enum {
     NSTIFFFileType,
     NSBMPFileType,
     NSGIFFileType,
@@ -29,25 +32,28 @@ typedef enum _NSBitmapImageFileType {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     NSJPEG2000FileType
 #endif
-} NSBitmapImageFileType;
+};
+typedef NSUInteger NSBitmapImageFileType;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-typedef enum {
+enum {
     NSImageRepLoadStatusUnknownType     = -1, // not enough data to determine image format. please feed me more data
     NSImageRepLoadStatusReadingHeader   = -2, // image format known, reading header. not yet valid. more data needed
     NSImageRepLoadStatusWillNeedAllData = -3, // can't read incrementally. will wait for complete data to become avail.
     NSImageRepLoadStatusInvalidData     = -4, // image decompression encountered error.
     NSImageRepLoadStatusUnexpectedEOF   = -5, // ran out of data before full image was decompressed.
     NSImageRepLoadStatusCompleted       = -6  // all is well, the full pixelsHigh image is valid.
-} NSImageRepLoadStatus;
+};
+typedef NSInteger NSImageRepLoadStatus;
 #endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-typedef enum {
+enum {
     NSAlphaFirstBitmapFormat            = 1 << 0,       // 0 means is alpha last (RGBA, CMYKA, etc.)
     NSAlphaNonpremultipliedBitmapFormat = 1 << 1,       // 0 means is premultiplied
     NSFloatingPointSamplesBitmapFormat  = 1 << 2	// 0 is integer
-} NSBitmapFormat;
+};
+typedef NSUInteger NSBitmapFormat;
 #endif
 
 APPKIT_EXTERN NSString* NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
@@ -63,6 +69,7 @@ APPKIT_EXTERN NSString* NSImageLoopCount             AVAILABLE_MAC_OS_X_VERSION_
 APPKIT_EXTERN NSString* NSImageGamma                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// PNG input/output (float in NSNumber)
 APPKIT_EXTERN NSString* NSImageProgressive           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// JPEG input/output (BOOL in NSNumber)
 APPKIT_EXTERN NSString* NSImageEXIFData              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// JPEG input/output (NSDictionary)
+APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // JPEG output (NSColor)
 
 @interface NSBitmapImageRep : NSImageRep {
     /*All instance variables are private*/
@@ -77,7 +84,7 @@ APPKIT_EXTERN NSString* NSImageEXIFData              AVAILABLE_MAC_OS_X_VERSION_
         unsigned int compressionFactor:14;
         unsigned int imageNumber:8;
         unsigned int bitmapFormat:3;
-        unsigned int reserved:1;
+        unsigned int cgImageIsPrimary:1;
 	unsigned int compression:20;
     } _moreRepFlags;
     unsigned int _bytesPerRow;
@@ -88,24 +95,28 @@ APPKIT_EXTERN NSString* NSImageEXIFData              AVAILABLE_MAC_OS_X_VERSION_
 
 - (id)initWithFocusedViewRect:(NSRect)rect;
 
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(int)width pixelsHigh:(int)height bitsPerSample:(int)bps samplesPerPixel:(int)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(int)rBytes bitsPerPixel:(int)pBits; 
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits; 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(int)width pixelsHigh:(int)height bitsPerSample:(int)bps samplesPerPixel:(int)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(int)rBytes bitsPerPixel:(int)pBits; 
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits; 
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (id)initWithCGImage:(CGImageRef)cgImage;
+- (id)initWithCIImage:(CIImage *)ciImage;
 #endif
 
-+ (NSArray *)imageRepsWithData:(NSData *)tiffData;	/* TIFFs can contain multiple images */
++ (NSArray *)imageRepsWithData:(NSData *)data;	/* some file formats can contain multiple images */
 
-+ (id)imageRepWithData:(NSData *)tiffData;	/* Convenience of initWithData: */
-- (id)initWithData:(NSData *)tiffData;
++ (id)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
+- (id)initWithData:(NSData *)data;
 
 - (unsigned char *)bitmapData;
 - (void)getBitmapDataPlanes:(unsigned char **)data;
 - (BOOL)isPlanar;
-- (int)samplesPerPixel;
-- (int)bitsPerPixel;
-- (int)bytesPerRow;
-- (int)bytesPerPlane;
-- (int)numberOfPlanes;
+- (NSInteger)samplesPerPixel;
+- (NSInteger)bitsPerPixel;
+- (NSInteger)bytesPerRow;
+- (NSInteger)bytesPerPlane;
+- (NSInteger)numberOfPlanes;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSBitmapFormat)bitmapFormat;
 #endif
@@ -119,7 +130,7 @@ APPKIT_EXTERN NSString* NSImageEXIFData              AVAILABLE_MAC_OS_X_VERSION_
 + (NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray *)array;
 + (NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray *)array usingCompression:(NSTIFFCompression)comp factor:(float)factor;
 
-+ (void)getTIFFCompressionTypes:(const NSTIFFCompression **)list count:(int *)numTypes;
++ (void)getTIFFCompressionTypes:(const NSTIFFCompression **)list count:(NSInteger *)numTypes;
 + (NSString *)localizedNameForTIFFCompressionType:(NSTIFFCompression)compression;
 - (BOOL)canBeCompressedUsing:(NSTIFFCompression)compression;
 
@@ -127,30 +138,26 @@ APPKIT_EXTERN NSString* NSImageEXIFData              AVAILABLE_MAC_OS_X_VERSION_
 Gray value of midPoint -> midPointColor, black -> shadowColor, white -> lightColor.
 Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with optional alpha).
 */
-- (void)colorizeByMappingGray:(float)midPoint toColor:(NSColor *)midPointColor blackMapping:(NSColor *)shadowColor whiteMapping:(NSColor *)lightColor;
+- (void)colorizeByMappingGray:(CGFloat)midPoint toColor:(NSColor *)midPointColor blackMapping:(NSColor *)shadowColor whiteMapping:(NSColor *)lightColor;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (id)initForIncrementalLoad;
-- (int)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
+- (NSInteger)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
 #endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-- (void)setColor:(NSColor*)color atX:(int)x y:(int)y;
-- (NSColor*)colorAtX:(int)x y:(int)y;
+- (void)setColor:(NSColor*)color atX:(NSInteger)x y:(NSInteger)y;
+- (NSColor*)colorAtX:(NSInteger)x y:(NSInteger)y;
 
-- (void)getPixel:(unsigned int[])p atX:(int)x y:(int)y;
-- (void)setPixel:(unsigned int[])p atX:(int)x y:(int)y;
+- (void)getPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
+- (void)setPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (CGImageRef)CGImage;
 #endif
 @end
 
-#ifdef WIN32
-
-@interface NSBitmapImageRep (NSWindowsExtensions)
-- (id)initWithIconHandle:(void * /* HICON */)icon;
-- (id)initWithBitmapHandle:(void * /* HBITMAP */)bitmap;
-@end
-
-#endif
 
 @interface NSBitmapImageRep (NSBitmapImageFileTypeExtensions)
 

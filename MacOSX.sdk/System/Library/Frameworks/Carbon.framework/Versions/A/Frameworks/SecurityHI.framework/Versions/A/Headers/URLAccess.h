@@ -3,7 +3,7 @@
  
      Contains:   URL Access Interfaces.
  
-     Version:    SecurityHI-24742~1491
+     Version:    SecurityHI-30817~522
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* Data structures and types */
 typedef struct OpaqueURLReference*      URLReference;
@@ -267,6 +267,24 @@ InvokeURLSystemEventUPP(
   void *             userContext,
   EventRecord *      event,
   URLSystemEventUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline URLNotifyUPP                                         NewURLNotifyUPP(URLNotifyProcPtr userRoutine) { return userRoutine; }
+    inline URLSystemEventUPP                                    NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeURLNotifyUPP(URLNotifyUPP) { }
+    inline void                                                 DisposeURLSystemEventUPP(URLSystemEventUPP) { }
+    inline OSStatus                                             InvokeURLNotifyUPP(void * userContext, URLEvent event, URLCallbackInfo * callbackInfo, URLNotifyUPP userUPP) { return (*userUPP)(userContext, event, callbackInfo); }
+    inline OSStatus                                             InvokeURLSystemEventUPP(void * userContext, EventRecord * event, URLSystemEventUPP userUPP) { return (*userUPP)(userContext, event); }
+  #else
+    #define NewURLNotifyUPP(userRoutine)                        ((URLNotifyUPP)userRoutine)
+    #define NewURLSystemEventUPP(userRoutine)                   ((URLSystemEventUPP)userRoutine)
+    #define DisposeURLNotifyUPP(userUPP)
+    #define DisposeURLSystemEventUPP(userUPP)
+    #define InvokeURLNotifyUPP(userContext, event, callbackInfo, userUPP) (*userUPP)(userContext, event, callbackInfo)
+    #define InvokeURLSystemEventUPP(userContext, event, userUPP) (*userUPP)(userContext, event)
+  #endif
+#endif
 
 /*
  *  URLSimpleDownload()   *** DEPRECATED ***
@@ -540,7 +558,7 @@ URLGetFileInfo(
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

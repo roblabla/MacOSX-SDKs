@@ -3,9 +3,9 @@
  
      Contains:   AltiVec DSP Interfaces
  
-     Version:    vecLib-192.17
+     Version:    vecLib-240.0
  
-     Copyright:  © 2000-2007 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -47,8 +47,8 @@ extern "C" {
 	vDSP_Version0 is a major version number.
 	vDSP_Version1 is a minor version number.
 */
-#define	vDSP_Version0	192
-#define	vDSP_Version1	17
+#define	vDSP_Version0	240
+#define	vDSP_Version1	0
 
 
 typedef unsigned long                   vDSP_Length;
@@ -2252,16 +2252,13 @@ vDSP_zvsubD(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern void 
-vDSP_zvmul(
-  DSPSplitComplex *  __vDSP_input1,
-  vDSP_Stride        __vDSP_stride1,
-  DSPSplitComplex *  __vDSP_input2,
-  vDSP_Stride        __vDSP_stride2,
-  DSPSplitComplex *  __vDSP_result,
-  vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size,
-  int                __vDSP_conjugate)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void vDSP_zvmul(
+	const DSPSplitComplex *__vDSP_input1, vDSP_Stride __vDSP_stride1,
+	const DSPSplitComplex *__vDSP_input2, vDSP_Stride __vDSP_stride2,
+	const DSPSplitComplex *__vDSP_result, vDSP_Stride __vDSP_strideResult,
+	vDSP_Length __vDSP_size,
+	int __vDSP_conjugate)
+		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Complex-split vector multiply, double-precision.*/
@@ -2408,17 +2405,13 @@ vDSP_zrdotprD(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern void 
-vDSP_zvcma(
-  const DSPSplitComplex *  __vDSP_input1,
-  vDSP_Stride              __vDSP_stride1,
-  const DSPSplitComplex *  __vDSP_input2,
-  vDSP_Stride              __vDSP_stride2,
-  DSPSplitComplex *        __vDSP_input3,
-  vDSP_Stride              __vDSP_stride3,
-  DSPSplitComplex *        __vDSP_result,
-  vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void vDSP_zvcma(
+	const DSPSplitComplex *__vDSP_input1, vDSP_Stride __vDSP_stride1,
+	const DSPSplitComplex *__vDSP_input2, vDSP_Stride __vDSP_stride2,
+	const DSPSplitComplex *__vDSP_input3, vDSP_Stride __vDSP_stride3,
+	const DSPSplitComplex *__vDSP_result, vDSP_Stride __vDSP_strideResult,
+	vDSP_Length __vDSP_size)
+		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Complex-split conjugate multiply and add, double-precision.*/

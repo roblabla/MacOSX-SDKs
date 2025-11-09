@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,17 +13,16 @@
 @interface NSControl : NSView
 {
     /*All instance variables are private*/
-    int	_tag;
-    id	_cell;
+    NSInteger	_tag;
+    id		_cell;
     struct __conFlags {
-	unsigned int        enabled:1;
-	unsigned int        ignoreMultiClick:1;
-	unsigned int        calcSize:1;
-	unsigned int        drawingAncestor:1;
+        unsigned int        enabled:1;
+        unsigned int        ignoreMultiClick:1;
+        unsigned int        calcSize:1;
+        unsigned int        drawingAncestor:1;
         unsigned int	    ibReserved:1;
-	unsigned int        updateCellFocus:1;
-        unsigned int        deallocating:1;
-	unsigned int        reserved:25;
+        unsigned int        updateCellFocus:1;
+        unsigned int        reserved:26;
     } _conFlags;
 }
 
@@ -40,17 +39,17 @@
 - (void)setTarget:(id)anObject;
 - (SEL)action;
 - (void)setAction:(SEL)aSelector;
-- (int)tag;
-- (void)setTag:(int)anInt;
-- (int)selectedTag;
+- (NSInteger)tag;
+- (void)setTag:(NSInteger)anInt;
+- (NSInteger)selectedTag;
 - (void)setIgnoresMultiClick:(BOOL)flag;
 - (BOOL)ignoresMultiClick;
-- (int)sendActionOn:(int)mask;
+- (NSInteger)sendActionOn:(NSInteger)mask;
 - (BOOL)isContinuous;
 - (void)setContinuous:(BOOL)flag;
 - (BOOL)isEnabled;
 - (void)setEnabled:(BOOL)flag;
-- (void)setFloatingPointFormat:(BOOL)autoRange left:(unsigned)leftDigits right:(unsigned)rightDigits;
+- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits;
 - (NSTextAlignment)alignment;
 - (void)setAlignment:(NSTextAlignment)mode;
 - (NSFont *)font;
@@ -89,6 +88,13 @@
 - (NSWritingDirection)baseWritingDirection;
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSInteger)integerValue;
+- (void)setIntegerValue:(NSInteger)anInteger;
+- (void)takeIntegerValueFrom:(id)sender;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+
 @end
 
 @interface NSControl(NSKeyboardUI)
@@ -119,7 +125,7 @@
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-- (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(int *)index;
+- (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
 #endif
 @end
 

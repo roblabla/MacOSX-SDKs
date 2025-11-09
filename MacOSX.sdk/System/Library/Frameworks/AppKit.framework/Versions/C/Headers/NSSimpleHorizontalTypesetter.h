@@ -1,6 +1,7 @@
 /* 
     NSSimpleHorizontalTypesetter.h
-    Copyright (c) 2004-2005, Apple Computer, Inc.  All rights reserved. 
+    Copyright (c) 1993-2007, Apple Inc.
+    All rights reserved. 
  
     A concrete class to lay glyphs out in horizontal boxes.
     This class is deprecated starting from Mac OS X 10.4 Tiger.
@@ -10,10 +11,10 @@
 
 #import <AppKit/NSTypesetter.h>
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+#if __LP64__ || MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
 #warning NSSimpleHorizontalTypesetter is deprecated starting from Mac OS X 10.4 Tiger.
 #warning Developers are recommended to adopt NSATSTypesetter, the default concrete subclass from Mac OS X 10.3 Panther.
-#else /* MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 */
+#else /* __LP64__ || MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 */
 @class NSTextContainer;
 @class NSTextStorage;
 @class NSParagraphStyle;
@@ -175,13 +176,13 @@ typedef struct _NSTypesetterGlyphInfo {
 - (NSParagraphStyle *)currentParagraphStyle;
 - (NSTextStorage *)currentTextStorage;
 - (NSTypesetterGlyphInfo *)baseOfTypesetterGlyphInfo;
-- (unsigned)sizeOfTypesetterGlyphInfo;
-- (unsigned)capacityOfTypesetterGlyphInfo;
-- (unsigned)firstGlyphIndexOfCurrentLineFragment;
+- (NSUInteger)sizeOfTypesetterGlyphInfo;
+- (NSUInteger)capacityOfTypesetterGlyphInfo;
+- (NSUInteger)firstGlyphIndexOfCurrentLineFragment;
 
 /* Main public entry point
 */
-- (void)layoutGlyphsInLayoutManager:(NSLayoutManager *)layoutManager startingAtGlyphIndex:(unsigned)startGlyphIndex maxNumberOfLineFragments:(unsigned)maxNumLines nextGlyphIndex:(unsigned *)nextGlyph;
+- (void)layoutGlyphsInLayoutManager:(NSLayoutManager *)layoutManager startingAtGlyphIndex:(NSUInteger)startGlyphIndex maxNumberOfLineFragments:(NSUInteger)maxNumLines nextGlyphIndex:(NSUInteger *)nextGlyph;
 
 /* Currently the one called by above.
 */
@@ -195,7 +196,7 @@ typedef struct _NSTypesetterGlyphInfo {
 
 /* Grows the glyph-related caches to have at least the desired capacity. If fillGlyphInfo is YES, also fills with glyph information from the layout manager and updates firstInvalidGlyphIndex. Returns the number of glyphs received.
 */
-- (unsigned)growGlyphCaches:(unsigned)desiredCapacity fillGlyphInfo:(BOOL)fillGlyphInfo;
+- (NSUInteger)growGlyphCaches:(NSUInteger)desiredCapacity fillGlyphInfo:(BOOL)fillGlyphInfo;
 
 /* Updates the location where the current glyph should be laid out. Often this isn't computed as it's not needed; however, this routine will bring it uptodate if necessary.
 */
@@ -203,18 +204,18 @@ typedef struct _NSTypesetterGlyphInfo {
 
 /* Only used for inserting hyphenation glyphs; never call layoutManager directly to insert glyphs; go through this method.
 */
-- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(unsigned)glyphIndex characterIndex:(unsigned)charIndex;
+- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)charIndex;
 
 - (NSLayoutStatus)layoutControlGlyphForLineFragment:(NSRect)lineFrag;
 - (void)layoutTab;
 
-- (void)breakLineAtIndex:(unsigned)location;
-- (unsigned)glyphIndexToBreakLineByHyphenatingWordAtIndex:(unsigned)charIndex;
-- (unsigned)glyphIndexToBreakLineByWordWrappingAtIndex:(unsigned)charIndex;
+- (void)breakLineAtIndex:(NSUInteger)location;
+- (NSUInteger)glyphIndexToBreakLineByHyphenatingWordAtIndex:(NSUInteger)charIndex;
+- (NSUInteger)glyphIndexToBreakLineByWordWrappingAtIndex:(NSUInteger)charIndex;
 - (void)layoutTab;
 - (NSLayoutStatus)layoutControlGlyphForLineFragment:(NSRect)lineFrag;
 
-- (void)fullJustifyLineAtGlyphIndex:(unsigned)glyphIndexForLineBreak;
+- (void)fullJustifyLineAtGlyphIndex:(NSUInteger)glyphIndexForLineBreak;
 
 @end
 
@@ -231,4 +232,4 @@ typedef struct _NSTypesetterGlyphInfo {
 - (void) willSetLineFragmentRect:(NSRect *)aRect forGlyphRange:(NSRange)aRange usedRect:(NSRect *)bRect;
 
 @end
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 */
+#endif /* __LP64__ || MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 */

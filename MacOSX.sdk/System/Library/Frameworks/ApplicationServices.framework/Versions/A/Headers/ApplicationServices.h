@@ -3,7 +3,7 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-22~2319
+     Version:    ApplicationServices-34~89
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -30,10 +30,6 @@
 #include <QD/QD.h>
 #endif
 
-#ifndef __AE__
-#include <AE/AE.h>
-#endif
-
 #ifndef __HISERVICES__
 #include <HIServices/HIServices.h>
 #endif
@@ -46,18 +42,6 @@
 #include <CoreGraphics/CoreGraphics.h>
 #endif
 
-#ifndef __COLORSYNC__
-#include <ColorSync/ColorSync.h>
-#endif
-
-#ifndef __FINDBYCONTENT__
-#include <FindByContent/FindByContent.h>
-#endif
-
-#ifndef __IMAGEIO__
-#include <ImageIO/ImageIO.h>
-#endif
-
 #ifndef __LANGANALYSIS__
 #include <LangAnalysis/LangAnalysis.h>
 #endif
@@ -66,10 +50,9 @@
 #include <SpeechSynthesis/SpeechSynthesis.h>
 #endif
 
-#ifndef __LAUNCHSERVICES__
-#include <LaunchServices/LaunchServices.h>
-#endif
-
+#include <CoreText/CoreText.h>
+#include <ColorSync/ColorSync.h>
+#include <ImageIO/ImageIO.h>
 
 #endif /* __APPLICATIONSERVICES__ */
 

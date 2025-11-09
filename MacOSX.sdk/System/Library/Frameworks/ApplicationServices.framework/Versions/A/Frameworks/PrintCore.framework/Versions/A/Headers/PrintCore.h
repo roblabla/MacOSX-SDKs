@@ -3,8 +3,6 @@
  
      Contains:   Printing functions that have no UI
  
-     Version:    PrintingCore-177.13~362
- 
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
@@ -20,7 +18,6 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-
 #ifndef __COLORSYNC__
 #include <ColorSync/ColorSync.h>
 #endif
@@ -29,13 +26,20 @@
 #include <QD/QD.h>
 #endif
 
+#ifndef __PMDEFINITIONS__
+#include <PrintCore/PMDefinitions.h>
+#endif
 
 #ifndef __PMCORE__
 #include <PrintCore/PMCore.h>
 #endif
 
-#ifndef __PMDEFINITIONS__
-#include <PrintCore/PMDefinitions.h>
+#ifndef __PMDEFINITIONS_DEPRECATED__
+#include <PrintCore/PMDefinitionsDeprecated.h>
+#endif
+
+#ifndef __PMCORE_DEPRECATED__
+#include <PrintCore/PMCoreDeprecated.h>
 #endif
 
 #ifndef __PMPrintAETypes__

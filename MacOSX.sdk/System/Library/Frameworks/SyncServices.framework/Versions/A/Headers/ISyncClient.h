@@ -1,6 +1,7 @@
 /*
  * SyncServices -- ISyncClient.h
  * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved.
+ * updated for 64bit
  */
 
 #import <SyncServices/ISyncCommon.h>
@@ -16,7 +17,7 @@
    and there is a method on ISyncManager for getting the list of all registered clients. */
 
 
-typedef int ISyncStatus;
+typedef SInt32 ISyncStatus;
 enum __ISyncStatus {
     ISyncStatusRunning = 1,  // currently syncing
     ISyncStatusSuccess,      // the last sync completed with no errors
@@ -120,15 +121,7 @@ enum __ISyncStatus {
 
    A client should probably use -enabledEntityNames as the list of entity names passed to
    ISyncSession's constructor, for example.  If an entity is not enabled, the engine will not
-   allow the client to apply any changes for it; nor will the engine provide any changes for it.
-   
-   When a client attempts to sync for the first time, the user will be given an opportunity to allow
-   or disallow it from syncing.  This choice is presented on a per-DataClass basis.  If the user
-   chooses not to allow the client to sync a particular DataClass then all the Entities from that
-   DataClass supported by the client will be disabled (setEnabled:NO...).  A client may wish to
-   provide a mechanism whereby the user can ask it to re-enable (setEnabled:YES...) those entities
-   in case they change their mind. If re-enabled, the next time the client attempts to sync those
-   entities the user will be given another opportunity to allow or disallow it. */
+   allow the client to apply any changes for it; nor will the engine provide any changes for it. */
 - (NSArray /* NSString */ *)enabledEntityNames;
 - (BOOL)isEnabledForEntityName:(NSString *)entityName;
 - (void)setEnabled:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames;
@@ -149,19 +142,17 @@ enum __ISyncStatus {
 - (id)objectForKey:(NSString *)key;
 - (void)setObject:(id<NSCoding>)value forKey:(NSString *)key;
 
-/* These are the filters used to control which records the client sees.  Don't call this method
+/* These are the filters used to control which records the client sees.  Don't call setFilters:
    trivially: every time the filter changes, the engine must re-examine all records in the Truth
    to determine what needs to be pushed to the client.
 
+   Every time the method filters is called, a unique array of unique filter objects is returned. These
+   filters may be mutated in place and passed back to setFilters, and will be compared against unique
+   filter objects recreated from the archived filters.
+
    New records must be accepted by all matching filters (ie. filters whose -supportedEntityNames
    contains the record's entity).  If any matching filter rejects the record, the record will
-   not be given to the client in the pull phase.
-
-   Oh oh, it seems this is not the case: a record will be given to the client in the pull phase
-   if at least one filter accepts it.  This is a bug and will be fixed; the behaviour described
-   in the paragraph above is the expected behaviour.  For now, you should use a conjunction filter
-   (+[ISyncFilter filterMatchingAllFilters:] and +[ISyncFilter filterMatchingAtLeastOneFilter:])
-   to get your desired behaviour. */
+   not be given to the client in the pull phase. */
 - (NSArray /* id <ISyncFiltering> */ *)filters;
 - (void)setFilters:(NSArray /* id <ISyncFiltering> */ *)filters;
 
@@ -170,7 +161,7 @@ enum __ISyncStatus {
    types.  It will be given a chance to join a sync whenver any client synchronizes the Contacts
    entities.  .Mac might register to synchronize only with device types, so it can participate when a
    Palm of phone is synchronized.  The client will only be notified if it has entities in common with
-   the.
+   the client initiating the sync.
 
    A client may be notified in one of two ways.  It may specify the path of a tool or application which
    will be launched by the sync engine.  The tool will be passed four arguments on the command line:
@@ -203,6 +194,7 @@ enum __ISyncStatus {
 - (void)setSyncAlertHandler:(id)handler selector:(SEL)selector;
 
 @end
+
 
 SYNCSERVICES_EXPORT NSString * const ISyncClientTypeApplication;
 SYNCSERVICES_EXPORT NSString * const ISyncClientTypeDevice;

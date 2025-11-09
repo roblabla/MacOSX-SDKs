@@ -1,5 +1,5 @@
 /*	CFLocale.h
-	Copyright (c) 2002-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 2002-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFLOCALE__)
@@ -9,15 +9,11 @@
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFDictionary.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 typedef const struct __CFLocale *CFLocaleRef;
-
-#ifndef CF_OPEN_SOURCE
 
 CF_EXPORT
 CFTypeID CFLocaleGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -57,24 +53,31 @@ CFArrayRef CFLocaleCopyISOCountryCodes(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND
 CF_EXPORT
 CFArrayRef CFLocaleCopyISOCurrencyCodes(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 	// Returns an array of CFStrings that represents all known legal ISO
-	// currency codes.  Note: some of these may not have any supporting
-	// locale data in Mac OS X.
+	// currency codes.  Note: some of these currencies may be obsolete, or
+	// represent other financial instruments.
+
+CF_EXPORT
+CFArrayRef CFLocaleCopyCommonISOCurrencyCodes(void) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	// Returns an array of CFStrings that represents ISO currency codes for
+	// currencies in common use.
+
+CF_EXPORT
+CFArrayRef CFLocaleCopyPreferredLanguages(void) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	// Returns the array of canonicalized CFString locale IDs that the user prefers.
 
 CF_EXPORT
 CFStringRef CFLocaleCreateCanonicalLanguageIdentifierFromString(CFAllocatorRef allocator, CFStringRef localeIdentifier) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-	// Map an arbitrary locale identification string (something close at
-	// least) to a canonical language-only identifier.
+	// Map an arbitrary language identification string (something close at
+	// least) to a canonical language identifier.
 
 CF_EXPORT
 CFStringRef CFLocaleCreateCanonicalLocaleIdentifierFromString(CFAllocatorRef allocator, CFStringRef localeIdentifier) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	// Map an arbitrary locale identification string (something close at
 	// least) to the canonical identifier.
 
-#if defined(__MACH__)
 CF_EXPORT
 CFStringRef CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes(CFAllocatorRef allocator, LangCode lcode, RegionCode rcode) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	// Map a Mac OS LangCode and RegionCode to the canonical locale identifier.
-#endif
 
 CF_EXPORT
 CFDictionaryRef CFLocaleCreateComponentsFromLocaleIdentifier(CFAllocatorRef allocator, CFStringRef localeID) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -121,6 +124,8 @@ CFStringRef CFLocaleCopyDisplayNameForPropertyValue(CFLocaleRef displayLocale, C
 	// not all locale property keys have values with display name values.
 
 
+CF_EXPORT const CFStringRef kCFLocaleCurrentLocaleDidChangeNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 
 // Locale Keys
 CF_EXPORT const CFStringRef kCFLocaleIdentifier AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -150,12 +155,7 @@ CF_EXPORT const CFStringRef kCFIslamicCivilCalendar AVAILABLE_MAC_OS_X_VERSION_1
 CF_EXPORT const CFStringRef kCFJapaneseCalendar AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-#endif // !CF_OPEN_SOURCE
-
-
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif
 

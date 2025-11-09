@@ -3,7 +3,7 @@
  
      Contains:   64-bit integer math Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
@@ -1383,7 +1383,7 @@ SInt64ToUInt64(SInt64 value);
       extern SInt64 _WideToSInt64LL ( wide w );
 
      extern wide _UInt64ToUnsignedWide ( UInt64 u );
-        extern SInt64 _UnsignedWideToUInt64 ( UnsignedWide uw );
+        extern UInt64 _UnsignedWideToUInt64 ( UnsignedWide uw );
        
        #define SInt64ToWide(x)         _SInt64ToWide(x)
        #define WideToSInt64(x)         _WideToSInt64(x)

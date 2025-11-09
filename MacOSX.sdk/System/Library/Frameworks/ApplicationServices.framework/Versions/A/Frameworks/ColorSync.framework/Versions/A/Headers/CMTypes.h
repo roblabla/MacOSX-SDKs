@@ -3,14 +3,9 @@
  
      Contains:   ColorSync types
  
-     Version:    ColorSync-174.3.3~45
+     Copyright:  2000-2005 by Apple Computer, Inc., all rights reserved.
  
-     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+     Bugs?:      For bug reports, consult http://developer.apple.com/bugreporter/
  
 */
 
@@ -18,12 +13,14 @@
 #ifndef __CMTYPES__
 #define __CMTYPES__
 
+#include <stddef.h>
+#include <sys/types.h>
+
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
 #endif
 
-
-/* Standard type for ColorSync and other system error codes */
+#include <ColorSync/CMBase.h>
 
 #include <AvailabilityMacros.h>
 
@@ -35,15 +32,24 @@
 extern "C" {
 #endif
 
-typedef long                            CMError;
+
+/* Standard type for ColorSync and other system error codes */
+typedef OSStatus                        CMError;
+
 /* Abstract data type for memory-based Profile */
 typedef struct OpaqueCMProfileRef*      CMProfileRef;
+
+#if !__LP64__
 /* Abstract data type for Profile search result */
 typedef struct OpaqueCMProfileSearchRef*  CMProfileSearchRef;
+
 /* Abstract data type for BeginMatching(É) reference */
 typedef struct OpaqueCMMatchRef*        CMMatchRef;
+#endif // !__LP64__
+
 /* Abstract data type for ColorWorld reference */
 typedef struct OpaqueCMWorldRef*        CMWorldRef;
+
 /* Data type for ColorSync DisplayID reference */
 /* On 8 & 9 this is a AVIDType */
 /* On X this is a CGSDisplayID */
@@ -59,204 +65,202 @@ enum {
 
 
 /* Caller-supplied flatten function */
-typedef CALLBACK_API( OSErr , CMFlattenProcPtr )(long command, long *size, void *data, void *refCon);
+typedef CALLBACK_API( OSErr , CMFlattenProcPtr )(SInt32 command, long *size, void *data, void *refCon);
+
+typedef STACK_UPP_TYPE(CMFlattenProcPtr) CMFlattenUPP;
+
+#if TARGET_RT_MAC_CFM
+  CSEXTERN CMFlattenUPP
+  NewCMFlattenUPP(CMFlattenProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN OSErr
+  InvokeCMFlattenUPP(
+    SInt32        command,
+    long *        size,
+    void *        data,
+    void *        refCon,
+    CMFlattenUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN void
+  DisposeCMFlattenUPP(CMFlattenUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#else
+  CF_INLINE CMFlattenUPP NewCMFlattenUPP(CMFlattenProcPtr userRoutine)
+    { return (CMFlattenUPP)userRoutine; }
+
+  CF_INLINE OSErr InvokeCMFlattenUPP(SInt32 command, long * size, void * data, void * refCon, CMFlattenUPP userUPP)
+    { return (*((CMFlattenProcPtr)userUPP))(command, size, data, refCon); }
+
+#ifdef __cplusplus
+  CF_INLINE void DisposeCMFlattenUPP(CMFlattenUPP)
+  {
+  }
+#else
+  CF_INLINE void DisposeCMFlattenUPP(CMFlattenUPP userUPP)
+  {
+  #pragma unused (userUPP)
+  }
+#endif
+
+#endif // TARGET_RT_MAC_CFM
+
+
+
 /* Caller-supplied progress function for Bitmap & PixMap matching routines */
-typedef CALLBACK_API( Boolean , CMBitmapCallBackProcPtr )(long progress, void *refCon);
+typedef CALLBACK_API( Boolean , CMBitmapCallBackProcPtr )(SInt32 progress, void *refCon);
+
+typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr) CMBitmapCallBackUPP;
+
+#if TARGET_RT_MAC_CFM
+  CSEXTERN CMBitmapCallBackUPP
+  NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN Boolean
+  InvokeCMBitmapCallBackUPP(
+    SInt32               progress,
+    void *               refCon,
+    CMBitmapCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN void
+  DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#else
+  CF_INLINE CMBitmapCallBackUPP NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine)
+    { return (CMBitmapCallBackUPP)userRoutine; }
+
+  CF_INLINE Boolean InvokeCMBitmapCallBackUPP(SInt32 progress, void * refCon, CMBitmapCallBackUPP userUPP)
+    { return (*((CMBitmapCallBackProcPtr)userUPP))(progress, refCon); }
+
+#ifdef __cplusplus
+  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP) 
+  {
+  }
+#else
+  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP) 
+  {
+  #pragma unused (userUPP)
+  }
+#endif
+#endif // TARGET_RT_MAC_CFM
+
+
 /* Caller-supplied progress function for NCMMConcatInit & NCMMNewLinkProfile routines */
-typedef CALLBACK_API( Boolean , CMConcatCallBackProcPtr )(long progress, void *refCon);
-/* Caller-supplied filter function for Profile search */
+typedef CALLBACK_API( Boolean , CMConcatCallBackProcPtr )(SInt32 progress, void *refCon);
+
+typedef STACK_UPP_TYPE(CMConcatCallBackProcPtr) CMConcatCallBackUPP;
+
+#if TARGET_RT_MAC_CFM
+  CSEXTERN CMConcatCallBackUPP
+  NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN Boolean
+  InvokeCMConcatCallBackUPP(
+    SInt32               progress,
+    void *               refCon,
+    CMConcatCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+  CSEXTERN void
+  DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#else
+  CF_INLINE CMConcatCallBackUPP NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine)
+    { return (CMConcatCallBackUPP)userRoutine; }
+
+  CF_INLINE
+  Boolean InvokeCMConcatCallBackUPP(SInt32 progress, void * refCon, CMConcatCallBackUPP userUPP)
+    { return (*((CMConcatCallBackProcPtr)userUPP))(progress, refCon); }
+
+#ifdef __cplusplus
+  CF_INLINE void DisposeCMConcatCallBackUPP(CMConcatCallBackUPP)
+  {
+  }
+#else
+  CF_INLINE void DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP)
+  {
+  #pragma unused (userUPP)
+  }
+#endif
+#endif // TARGET_RT_MAC_CFM
+
+
+#if !__LP64__
+
+/* Caller-supplied filter function for Profile search*/
 typedef CALLBACK_API( Boolean , CMProfileFilterProcPtr )(CMProfileRef prof, void *refCon);
-/* Caller-supplied function for profile access */
-typedef CALLBACK_API( OSErr , CMProfileAccessProcPtr )(long command, long offset, long *size, void *data, void *refCon);
-typedef STACK_UPP_TYPE(CMFlattenProcPtr)                        CMFlattenUPP;
-typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr)                 CMBitmapCallBackUPP;
-typedef STACK_UPP_TYPE(CMConcatCallBackProcPtr)                 CMConcatCallBackUPP;
-typedef STACK_UPP_TYPE(CMProfileFilterProcPtr)                  CMProfileFilterUPP;
-typedef STACK_UPP_TYPE(CMProfileAccessProcPtr)                  CMProfileAccessUPP;
-/*
- *  NewCMFlattenUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern CMFlattenUPP
-NewCMFlattenUPP(CMFlattenProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-/*
- *  NewCMBitmapCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern CMBitmapCallBackUPP
-NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+typedef STACK_UPP_TYPE(CMProfileFilterProcPtr) CMProfileFilterUPP;
 
-/*
- *  NewCMConcatCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern CMConcatCallBackUPP
-NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#if TARGET_RT_MAC_CFM
+  CSEXTERN CMProfileFilterUPP
+  NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
-/*
- *  NewCMProfileFilterUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern CMProfileFilterUPP
-NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CSEXTERN Boolean
+  InvokeCMProfileFilterUPP(
+    CMProfileRef        prof,
+    void *              refCon,
+    CMProfileFilterUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
-/*
- *  NewCMProfileAccessUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern CMProfileAccessUPP
-NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CSEXTERN void
+  DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#else
+  CF_INLINE CMProfileFilterUPP NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine)
+    { return (CMProfileFilterUPP)userRoutine; }
 
-/*
- *  DisposeCMFlattenUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeCMFlattenUPP(CMFlattenUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CF_INLINE Boolean InvokeCMProfileFilterUPP(CMProfileRef prof, void * refCon, CMProfileFilterUPP userUPP)
+    { return (*((CMProfileFilterProcPtr)userUPP))(prof, refCon); }
 
-/*
- *  DisposeCMBitmapCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#ifdef __cplusplus
+  CF_INLINE void DisposeCMProfileFilterUPP(CMProfileFilterUPP)
+  {
+  }
+#else
+  CF_INLINE void DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP)
+  {
+  #pragma unused (userUPP)
+  }
+#endif
+#endif // TARGET_RT_MAC_CFM
 
-/*
- *  DisposeCMConcatCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-/*
- *  DisposeCMProfileFilterUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+/* Caller-supplied function for profile access*/
+typedef CALLBACK_API( OSErr , CMProfileAccessProcPtr )(SInt32 command, SInt32 offset, SInt32 *size, void *data, void *refCon);
 
-/*
- *  DisposeCMProfileAccessUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern void
-DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+typedef STACK_UPP_TYPE(CMProfileAccessProcPtr) CMProfileAccessUPP;
 
-/*
- *  InvokeCMFlattenUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern OSErr
-InvokeCMFlattenUPP(
-  long          command,
-  long *        size,
-  void *        data,
-  void *        refCon,
-  CMFlattenUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#if TARGET_RT_MAC_CFM
+  CSEXTERN CMProfileAccessUPP
+  NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
-/*
- *  InvokeCMBitmapCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern Boolean
-InvokeCMBitmapCallBackUPP(
-  long                 progress,
-  void *               refCon,
-  CMBitmapCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CSEXTERN OSErr
+  InvokeCMProfileAccessUPP(
+    SInt32              command,
+    SInt32              offset,
+    SInt32 *            size,
+    void *              data,
+    void *              refCon,
+    CMProfileAccessUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
-/*
- *  InvokeCMConcatCallBackUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern Boolean
-InvokeCMConcatCallBackUPP(
-  long                 progress,
-  void *               refCon,
-  CMConcatCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CSEXTERN void
+  DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+#else
+  CF_INLINE CMProfileAccessUPP NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine)
+    { return (CMProfileAccessUPP)userRoutine; }
 
-/*
- *  InvokeCMProfileFilterUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern Boolean
-InvokeCMProfileFilterUPP(
-  CMProfileRef        prof,
-  void *              refCon,
-  CMProfileFilterUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CF_INLINE OSErr InvokeCMProfileAccessUPP(SInt32 command, SInt32 offset, SInt32 * size, void * data, void * refCon, CMProfileAccessUPP userUPP)
+    { return (*((CMProfileAccessProcPtr)userUPP))(command, offset, size, data, refCon); }
 
-/*
- *  InvokeCMProfileAccessUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   available as macro/inline
- */
-extern OSErr
-InvokeCMProfileAccessUPP(
-  long                command,
-  long                offset,
-  long *              size,
-  void *              data,
-  void *              refCon,
-  CMProfileAccessUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+#ifdef __cplusplus
+  CF_INLINE void DisposeCMProfileAccessUPP(CMProfileAccessUPP)
+  {
+  }
+#else
+  CF_INLINE void DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP)
+  {
+  #pragma unused (userUPP)
+  }
+#endif
+#endif // TARGET_RT_MAC_CFM
+
+
+#endif // !__LP64__
+
 
 
 #ifdef __cplusplus

@@ -1,9 +1,9 @@
 /*
      File:       HIToolbox/TSMTE.h
  
-     Contains:   Text Services Managerfor TextEdit Interfaces. All Textedit functions as well all functions in
+     Contains:   Text Services Manager for TextEdit Interfaces. All TextEdit functions as well all functions in
  
-     Version:    HIToolbox-227.3~63
+     Version:    HIToolbox-343.0.1~2
  
      Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved
  
@@ -48,7 +48,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /* signature, interface types*/
 enum {
@@ -81,8 +81,6 @@ typedef CALLBACK_API( void , TSMTEPreUpdateProcPtr )(TEHandle textH, long refCon
 typedef CALLBACK_API( void , TSMTEPostUpdateProcPtr )(TEHandle textH, long fixLen, long inputAreaStart, long inputAreaEnd, long pinStart, long pinEnd, long refCon);
 typedef STACK_UPP_TYPE(TSMTEPreUpdateProcPtr)                   TSMTEPreUpdateUPP;
 typedef STACK_UPP_TYPE(TSMTEPostUpdateProcPtr)                  TSMTEPostUpdateUPP;
-
-
 /* data types*/
 struct TSMTERec {
   TEHandle            textH;
@@ -94,18 +92,6 @@ struct TSMTERec {
 typedef struct TSMTERec                 TSMTERec;
 typedef TSMTERec *                      TSMTERecPtr;
 typedef TSMTERecPtr *                   TSMTERecHandle;
-#if !OPAQUE_TOOLBOX_STRUCTS
-struct TSMDialogRecord {
-  DialogRecord        fDialog;
-  TSMDocumentID       fDocID;
-  TSMTERecHandle      fTSMTERecH;
-  long                fTSMTERsvd[3];          /* reserved*/
-};
-typedef struct TSMDialogRecord          TSMDialogRecord;
-typedef TSMDialogRecord *               TSMDialogPtr;
-typedef TSMDialogPtr                    TSMDialogPeek;
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 /*
  *  NewTSMTEPreUpdateUPP()
  *  
@@ -183,6 +169,25 @@ InvokeTSMTEPostUpdateUPP(
   long                refCon,
   TSMTEPostUpdateUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline TSMTEPreUpdateUPP                                    NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine) { return userRoutine; }
+    inline TSMTEPostUpdateUPP                                   NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP) { }
+    inline void                                                 DisposeTSMTEPostUpdateUPP(TSMTEPostUpdateUPP) { }
+    inline void                                                 InvokeTSMTEPreUpdateUPP(TEHandle textH, long refCon, TSMTEPreUpdateUPP userUPP) { (*userUPP)(textH, refCon); }
+    inline void                                                 InvokeTSMTEPostUpdateUPP(TEHandle textH, long fixLen, long inputAreaStart, long inputAreaEnd, long pinStart, long pinEnd, long refCon, TSMTEPostUpdateUPP userUPP) { (*userUPP)(textH, fixLen, inputAreaStart, inputAreaEnd, pinStart, pinEnd, refCon); }
+  #else
+    #define NewTSMTEPreUpdateUPP(userRoutine)                   ((TSMTEPreUpdateUPP)userRoutine)
+    #define NewTSMTEPostUpdateUPP(userRoutine)                  ((TSMTEPostUpdateUPP)userRoutine)
+    #define DisposeTSMTEPreUpdateUPP(userUPP)
+    #define DisposeTSMTEPostUpdateUPP(userUPP)
+    #define InvokeTSMTEPreUpdateUPP(textH, refCon, userUPP)     (*userUPP)(textH, refCon)
+    #define InvokeTSMTEPostUpdateUPP(textH, fixLen, inputAreaStart, inputAreaEnd, pinStart, pinEnd, refCon, userUPP) (*userUPP)(textH, fixLen, inputAreaStart, inputAreaEnd, pinStart, pinEnd, refCon)
+  #endif
+#endif
+
+#if !__LP64__
 /*
  *  IsTSMTEDialog()   *** DEPRECATED ***
  *  
@@ -190,7 +195,7 @@ InvokeTSMTEPostUpdateUPP(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
@@ -206,7 +211,7 @@ IsTSMTEDialog(DialogRef dialog)                               AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
@@ -221,7 +226,7 @@ GetTSMTEDialogDocumentID(DialogRef dialog)                    AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
@@ -237,7 +242,7 @@ GetTSMTEDialogTSMTERecHandle(DialogRef dialog)                AVAILABLE_MAC_OS_X
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
@@ -254,7 +259,7 @@ SetTSMTEDialogDocumentID(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
@@ -264,8 +269,10 @@ SetTSMTEDialogTSMTERecHandle(
   TSMTERecHandle   tsmteRecHandle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+#endif  /* !__LP64__ */
 
-#pragma options align=reset
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

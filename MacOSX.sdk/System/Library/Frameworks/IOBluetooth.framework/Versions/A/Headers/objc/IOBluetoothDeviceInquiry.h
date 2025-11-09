@@ -35,7 +35,7 @@
 {
 @private
 	
-	void *							_searchRef;
+	void *							_nameRequestHintType;
 	void *							_searchAttributes;
 	void *							_deviceAttributes;
 
@@ -48,6 +48,7 @@
 	BluetoothDeviceClassMinor		_deviceClassMinor;
 	
     uint8_t							_inquiryLength;
+	BluetoothHCIResponseCount		_inquiryMaxItems;
 
     NSMutableArray  *				_deviceResults;
     NSMutableArray	*				_devicesPendingNames;
@@ -105,7 +106,11 @@
 	@result		Number of seconds the search will be performed.
 	@discussion A default of 10 seconds is used, unless a different value is specified using this method.  Note that if you
 				have called -start again too quickly, your inquiry may actually take much longer than what length you
-				specify, as inquiries are throttled in the system.
+				specify, as inquiries are throttled in the system. Also note that if you have the inquiry object updating
+				device names for you, the whole inquiry process could be much longer than the specified length, depending
+				on the number of devices found and how responsive to name requests they are. If you -must- have a strict
+				inquiry length, disable name updates. In other words, this "length" only refers to the actual device discovery
+				portion of the whole inquiry process.
 */
 
 - (uint8_t)setInquiryLength:(uint8_t)seconds;
@@ -226,7 +231,7 @@
 	@param			devicesRemaining	Number of devices remaining to update.
 */
 
-- (void)	deviceInquiryUpdatingDeviceNamesStarted:(IOBluetoothDeviceInquiry*)sender	devicesRemaining:(int)devicesRemaining;
+- (void)	deviceInquiryUpdatingDeviceNamesStarted:(IOBluetoothDeviceInquiry*)sender	devicesRemaining:(uint32_t)devicesRemaining;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			deviceInquiryDeviceNameUpdated
@@ -236,7 +241,7 @@
 	@param			devicesRemaining	Number of devices remaining to update.
 */
 
-- (void)	deviceInquiryDeviceNameUpdated:(IOBluetoothDeviceInquiry*)sender	device:(IOBluetoothDevice*)device devicesRemaining:(int)devicesRemaining;
+- (void)	deviceInquiryDeviceNameUpdated:(IOBluetoothDeviceInquiry*)sender	device:(IOBluetoothDevice*)device devicesRemaining:(uint32_t)devicesRemaining;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			deviceInquiryComplete

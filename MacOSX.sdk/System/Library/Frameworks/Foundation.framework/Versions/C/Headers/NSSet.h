@@ -1,16 +1,17 @@
 /*	NSSet.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSEnumerator.h>
 
-@class NSArray, NSDictionary, NSEnumerator, NSString;
+@class NSArray, NSDictionary, NSString;
 
 /****************	Immutable Set	****************/
 
-@interface NSSet : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSSet : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
 
-- (unsigned)count;
+- (NSUInteger)count;
 - (id)member:(id)object;
 - (NSEnumerator *)objectEnumerator;
 
@@ -22,7 +23,7 @@
 - (id)anyObject;
 - (BOOL)containsObject:(id)anObject;
 - (NSString *)description;
-- (NSString *)descriptionWithLocale:(NSDictionary *)locale;
+- (NSString *)descriptionWithLocale:(id)locale;
 - (BOOL)intersectsSet:(NSSet *)otherSet;
 - (BOOL)isEqualToSet:(NSSet *)otherSet;
 - (BOOL)isSubsetOfSet:(NSSet *)otherSet;
@@ -30,22 +31,26 @@
 - (void)makeObjectsPerformSelector:(SEL)aSelector;
 - (void)makeObjectsPerformSelector:(SEL)aSelector withObject:(id)argument;
 
+- (NSSet *)setByAddingObject:(id)anObject AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSSet *)setByAddingObjectsFromSet:(NSSet *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSSet *)setByAddingObjectsFromArray:(NSArray *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
 @end
 
 @interface NSSet (NSSetCreation)
 
 + (id)set;
-+ (id)setWithArray:(NSArray *)array;
 + (id)setWithObject:(id)object;
-+ (id)setWithObjects:(id)firstObj, ...;
-- (id)initWithArray:(NSArray *)array;
-- (id)initWithObjects:(id *)objects count:(unsigned)count;
-- (id)initWithObjects:(id)firstObj, ...;
++ (id)setWithObjects:(id *)objects count:(NSUInteger)cnt;
++ (id)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (id)setWithSet:(NSSet *)set;
++ (id)setWithArray:(NSArray *)array;
+
+- (id)initWithObjects:(id *)objects count:(NSUInteger)cnt;
+- (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithSet:(NSSet *)set;
 - (id)initWithSet:(NSSet *)set copyItems:(BOOL)flag;
-
-+ (id)setWithSet:(NSSet *)set;
-+ (id)setWithObjects:(id *)objs count:(unsigned)cnt;
+- (id)initWithArray:(NSArray *)array;
 
 @end
 
@@ -72,8 +77,8 @@
 
 @interface NSMutableSet (NSMutableSetCreation)
 
-+ (id)setWithCapacity:(unsigned)numItems;
-- (id)initWithCapacity:(unsigned)numItems;
++ (id)setWithCapacity:(NSUInteger)numItems;
+- (id)initWithCapacity:(NSUInteger)numItems;
     
 @end
 
@@ -81,16 +86,16 @@
 
 @interface NSCountedSet : NSMutableSet {
     @private
-    void *_table;
+    id _table;
     void *_reserved;
 }
 
-- (id)initWithCapacity:(unsigned)numItems; // designated initializer
+- (id)initWithCapacity:(NSUInteger)numItems; // designated initializer
 
 - (id)initWithArray:(NSArray *)array;
 - (id)initWithSet:(NSSet *)set;
 
-- (unsigned)countForObject:(id)object;
+- (NSUInteger)countForObject:(id)object;
 
 - (NSEnumerator *)objectEnumerator;
 - (void)addObject:(id)object;

@@ -3,7 +3,7 @@
  
      Contains:   Mixed Mode Manager Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -28,7 +28,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
     ===========================================================================
@@ -528,7 +528,7 @@ enum {
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __MIXEDMODE__ */

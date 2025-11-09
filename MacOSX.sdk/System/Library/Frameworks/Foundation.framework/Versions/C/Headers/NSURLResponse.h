@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2007, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -47,7 +47,7 @@
     @result The initialized NSURLResponse.
     @discussion This is the designated initializer for NSURLResponse.
 */
-- (id)initWithURL:(NSURL *)URL MIMEType:(NSString *)MIMEType expectedContentLength:(int)length textEncodingName:(NSString *)name;
+- (id)initWithURL:(NSURL *)URL MIMEType:(NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(NSString *)name;
 
 /*! 
     @method URL
@@ -135,7 +135,7 @@
     @abstract Returns the HTTP status code of the receiver. 
     @result The HTTP status code of the receiver. 
 */
-- (int)statusCode;
+- (NSInteger)statusCode;
 
 /*! 
     @method allHeaderFields
@@ -157,7 +157,7 @@
     @param the status code to use to produce a localized string.
     @result A localized string corresponding to the given status code.
 */
-+ (NSString *)localizedStringForStatusCode:(int)statusCode;
++ (NSString *)localizedStringForStatusCode:(NSInteger)statusCode;
 
 @end
 

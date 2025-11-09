@@ -1,14 +1,14 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2005, Apple Computer, Inc.
+    Copyright (c) 2004-2007, Apple Inc.
     All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <AppKit/NSControl.h>
 #import <AppKit/NSLevelIndicatorCell.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSLevelIndicator : NSControl {
 }
@@ -28,14 +28,14 @@
 - (NSTickMarkPosition)tickMarkPosition;
 - (void)setTickMarkPosition:(NSTickMarkPosition)position;
 
-- (int)numberOfTickMarks;
-- (void)setNumberOfTickMarks:(int)count;
+- (NSInteger)numberOfTickMarks;
+- (void)setNumberOfTickMarks:(NSInteger)count;
 
-- (int)numberOfMajorTickMarks;
-- (void)setNumberOfMajorTickMarks:(int)count;
+- (NSInteger)numberOfMajorTickMarks;
+- (void)setNumberOfMajorTickMarks:(NSInteger)count;
 
-- (double)tickMarkValueAtIndex:(int)index;
-- (NSRect)rectOfTickMarkAtIndex:(int)index;
+- (double)tickMarkValueAtIndex:(NSInteger)index;
+- (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 
 @end
 

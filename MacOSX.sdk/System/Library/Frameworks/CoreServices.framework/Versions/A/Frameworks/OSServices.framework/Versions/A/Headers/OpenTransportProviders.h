@@ -3,7 +3,7 @@
  
      Contains:   This file contains provider-specific definitions for various built-in providers.
  
-     Version:    OpenTransport-105~810
+     Version:    OpenTransport-107~183
  
      Copyright:  © 1993-2006 by Apple Computer, Inc. and Mentat Inc., all rights reserved.
  
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 #if defined(__MWERKS__) && TARGET_CPU_68K
     #pragma push
@@ -326,11 +326,12 @@ struct InetDHCPOption {
 typedef struct InetDHCPOption           InetDHCPOption;
 /* TCP/IP Utility Routines*/
 
+#if !__LP64__
 /*
  *  OTInitInetAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -345,7 +346,7 @@ OTInitInetAddress(
  *  OTInitDNSAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -359,7 +360,7 @@ OTInitDNSAddress(
  *  OTInetStringToHost()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -373,7 +374,7 @@ OTInetStringToHost(
  *  OTInetHostToString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -387,7 +388,7 @@ OTInetHostToString(
  *  OTInetGetInterfaceInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -401,7 +402,7 @@ OTInetGetInterfaceInfo(
  *  OTInetGetSecondaryAddresses()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -411,6 +412,8 @@ OTInetGetSecondaryAddresses(
   UInt32 *    count,
   SInt32      val)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  OTInetGetDHCPConfigInfo()
@@ -430,11 +433,12 @@ OTInetGetSecondaryAddresses(
    after calling InitOpenTransport(kInitOTForApplicationMask, ...).  Non-applications must always pass a
    valid client context.
 */
+#if !__LP64__
 /*
  *  OTOpenInternetServicesInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -450,7 +454,7 @@ OTOpenInternetServicesInContext(
  *  OTAsyncOpenInternetServicesInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -462,6 +466,8 @@ OTAsyncOpenInternetServicesInContext(
   void *               contextPtr,
   OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  OTOpenInternetServices()
@@ -489,11 +495,12 @@ OTAsyncOpenInternetServicesInContext(
 #define OTAsyncOpenInternetServices(cfig, oflags, proc, contextPtr)  OTAsyncOpenInternetServicesInContext(cfig, oflags, proc, contextPtr, NULL)
 #endif  /* OTCARBONAPPLICATION */
 
+#if !__LP64__
 /*
  *  OTInetStringToAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -508,7 +515,7 @@ OTInetStringToAddress(
  *  OTInetAddressToName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -523,7 +530,7 @@ OTInetAddressToName(
  *  OTInetSysInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -538,7 +545,7 @@ OTInetSysInfo(
  *  OTInetMailExchange()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -554,7 +561,7 @@ OTInetMailExchange(
  *  OTInetQuery()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -598,6 +605,8 @@ class TInternetServices : public TProvider
 
 extern "C" {        /* resume C definitions */
 #endif
+#endif  /* !__LP64__ */
+
 #endif  /* !OTKERNEL */
 
 /* ***** AppleTalk ******/
@@ -772,11 +781,12 @@ enum {
    after calling InitOpenTransport(kInitOTForApplicationMask, ...).  Non-applications must always pass a
    valid client context.
 */
+#if !__LP64__
 /*
  *  OTAsyncOpenAppleTalkServicesInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -793,7 +803,7 @@ OTAsyncOpenAppleTalkServicesInContext(
  *  OTOpenAppleTalkServicesInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -804,6 +814,8 @@ OTOpenAppleTalkServicesInContext(
   OSStatus *           err,
   OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
+
+#endif  /* !__LP64__ */
 
 /*
  *  OTAsyncOpenAppleTalkServices()
@@ -832,11 +844,12 @@ OTOpenAppleTalkServicesInContext(
 #endif  /* OTCARBONAPPLICATION */
 
 /* Get the zone associated with the ATSvcRef*/
+#if !__LP64__
 /*
  *  OTATalkGetMyZone()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -854,7 +867,7 @@ OTATalkGetMyZone(
  *  OTATalkGetLocalZones()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -869,7 +882,7 @@ OTATalkGetLocalZones(
  *  OTATalkGetZoneList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -884,7 +897,7 @@ OTATalkGetZoneList(
  *  OTATalkGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   not available
  */
@@ -908,6 +921,8 @@ class TAppleTalkServices : public TProvider
 
 extern "C" {        /* resume C definitions */
 #endif  /* _cplus */
+#endif  /* !__LP64__ */
+
 #endif  /* !OTKERNEL */
 
 /* AppleTalk Addressing*/
@@ -1032,11 +1047,12 @@ typedef struct DDPNBPAddress            DDPNBPAddress;
 /* These are some utility routines for dealing with NBP and DDP addresses. */
 
 /* Functions to initialize the various AppleTalk Address types*/
+#if !__LP64__
 /*
  *  OTInitDDPAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1053,7 +1069,7 @@ OTInitDDPAddress(
  *  OTInitNBPAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1067,7 +1083,7 @@ OTInitNBPAddress(
  *  OTInitDDPNBPAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1086,7 +1102,7 @@ OTInitDDPNBPAddress(
  *  OTCompareDDPAddresses()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1101,7 +1117,7 @@ OTCompareDDPAddresses(
  *  OTInitNBPEntity()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1114,7 +1130,7 @@ OTInitNBPEntity(NBPEntity * entity)                           AVAILABLE_MAC_OS_X
  *  OTGetNBPEntityLengthAsAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1127,7 +1143,7 @@ OTGetNBPEntityLengthAsAddress(const NBPEntity * entity)       AVAILABLE_MAC_OS_X
  *  OTSetAddressFromNBPEntity()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1142,7 +1158,7 @@ OTSetAddressFromNBPEntity(
  *  OTSetAddressFromNBPString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1161,7 +1177,7 @@ OTSetAddressFromNBPString(
  *  OTSetNBPEntityFromAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1177,7 +1193,7 @@ OTSetNBPEntityFromAddress(
  *  OTSetNBPName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1191,7 +1207,7 @@ OTSetNBPName(
  *  OTSetNBPType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1205,7 +1221,7 @@ OTSetNBPType(
  *  OTSetNBPZone()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1220,7 +1236,7 @@ OTSetNBPZone(
  *  OTExtractNBPName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1234,7 +1250,7 @@ OTExtractNBPName(
  *  OTExtractNBPType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1248,7 +1264,7 @@ OTExtractNBPType(
  *  OTExtractNBPZone()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1495,6 +1511,8 @@ inline Boolean DDPNBPAddress::ExtractEntity(NBPEntity& entity, OTByteCount len)
 #endif  /* __cplusplus */
 /* AppleTalkInfo as used by the OTGetATalkInfo function*/
 
+#endif  /* !__LP64__ */
+
 struct AppleTalkInfo {
   DDPAddress          fOurAddress;            /* Our DDP address (network # & node)*/
   DDPAddress          fRouterAddress;         /* The address of a router on our cable*/
@@ -1598,7 +1616,7 @@ enum {
   kETypeStandard                = 0,
   kETypeMulticast               = 1,
   kETypeBroadcast               = 2,
-  kETRawPacketBit               = (unsigned long)0x80000000,
+  kETRawPacketBit               = (UInt32)0x80000000,
   kETTimeStampBit               = 0x40000000
 };
 
@@ -1690,7 +1708,7 @@ enum {
   keaMulticast                  = 1,
   keaBroadcast                  = 2,
   keaBadAddress                 = 3,
-  keaRawPacketBit               = (unsigned long)0x80000000,
+  keaRawPacketBit               = (UInt32)0x80000000,
   keaTimeStampBit               = 0x40000000
 };
 
@@ -1771,7 +1789,7 @@ enum {
   I_SetSerialBreak              = ((MIOC_SRL << 8) | 1), /* Send a break on the line - kOTSerialSetBreakOff = off, kOTSerialSetBreakOn = on,*/
                                         /* Any other number is the number of milliseconds to leave break on, then*/
                                         /* auto shutoff*/
-  kOTSerialSetBreakOn           = (unsigned long)0xFFFFFFFF,
+  kOTSerialSetBreakOn           = (UInt32)0xFFFFFFFF,
   kOTSerialSetBreakOff          = 0,
   I_SetSerialXOffState          = ((MIOC_SRL << 8) | 2), /* Force XOFF state - 0 = Unconditionally clear XOFF state, 1 = unconditionally set it*/
   kOTSerialForceXOffTrue        = 1,
@@ -2183,7 +2201,7 @@ enum {
 enum {
   kPPPAsyncMapCharsNone         = 0x00000000,
   kPPPAsyncMapCharsXOnXOff      = 0x000A0000,
-  kPPPAsyncMapCharsAll          = (unsigned long)0xFFFFFFFF
+  kPPPAsyncMapCharsAll          = (UInt32)0xFFFFFFFF
 };
 
 
@@ -2365,7 +2383,7 @@ enum {
 #endif
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

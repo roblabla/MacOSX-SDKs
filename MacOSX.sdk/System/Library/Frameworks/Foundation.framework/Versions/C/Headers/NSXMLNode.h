@@ -1,11 +1,11 @@
-/*		NSXMLNode.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLNode.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSXMLNodeOptions.h>
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSDictionary, NSError, NSString, NSURL;
 @class NSXMLElement, NSXMLDocument;
@@ -13,7 +13,7 @@
 /*!
     @typedef NSXMLNodeKind
 */
-typedef enum {
+enum {
 	NSXMLInvalidKind = 0,
 	NSXMLDocumentKind,
 	NSXMLElementKind,
@@ -27,7 +27,8 @@ typedef enum {
 	NSXMLAttributeDeclarationKind,
 	NSXMLElementDeclarationKind,
 	NSXMLNotationDeclarationKind
-} NSXMLNodeKind;
+};
+typedef NSUInteger NSXMLNodeKind;
 
 // initWithKind options
 //  NSXMLNodeOptionsNone
@@ -54,7 +55,7 @@ typedef enum {
 @protected
 	NSXMLNodeKind _kind;
 	NSXMLNode *_parent;
-	unsigned _index;
+	NSUInteger _index;
 	id _objectValue;
 }
 
@@ -68,7 +69,7 @@ typedef enum {
     @method initWithKind:options:
     @abstract Inits a node with fidelity options as description NSXMLNodeOptions.h
 */
-- (id)initWithKind:(NSXMLNodeKind)kind options:(unsigned int)options; //primitive
+- (id)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options; //primitive
 
 /*!
     @method document:
@@ -205,13 +206,13 @@ typedef enum {
     @method index
     @abstract A node's index amongst its siblings.
 */
-- (unsigned)index; //primitive
+- (NSUInteger)index; //primitive
 
 /*!
     @method level
     @abstract The depth of the node within the tree. Documents and standalone nodes are level 0.
 */
-- (unsigned)level;
+- (NSUInteger)level;
 
 /*!
     @method rootDocument
@@ -229,7 +230,7 @@ typedef enum {
     @method childCount
     @abstract The amount of children, relevant for documents, elements, and document type declarations. Use this instead of [[self children] count].
 */
-- (unsigned)childCount; //primitive
+- (NSUInteger)childCount; //primitive
 
 /*!
     @method children
@@ -241,7 +242,7 @@ typedef enum {
     @method childAtIndex:
     @abstract Returns the child node at a particular index.
 */
-- (NSXMLNode *)childAtIndex:(unsigned)index; //primitive
+- (NSXMLNode *)childAtIndex:(NSUInteger)index; //primitive
 
 /*!
     @method previousSibling:
@@ -342,7 +343,7 @@ typedef enum {
     @method XMLStringWithOptions:
     @abstract The representation of this node as it would appear in an XML document, with various output options available.
 */
-- (NSString *)XMLStringWithOptions:(unsigned int)options;
+- (NSString *)XMLStringWithOptions:(NSUInteger)options;
 
 /*!
     @method canonicalXMLStringPreservingComments:

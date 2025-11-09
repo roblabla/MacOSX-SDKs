@@ -415,16 +415,6 @@ struct kev_in6_data {
 #define SIOCGETMIFCNT_IN6	_IOWR('u', 107, \
 				      struct sioc_mif_req6) /* get pkt cnt per if */
 
-/*
- * temporary control calls to attach/detach IP to/from an ethernet interface 
- */
-#define SIOCPROTOATTACH_IN6 _IOWR('i', 110, struct in6_aliasreq)    /* attach proto to interface */
-#define SIOCPROTODETACH_IN6 _IOWR('i', 111, struct in6_ifreq)    /* detach proto from interface */
-
-#define SIOCLL_START _IOWR('i', 130, struct in6_aliasreq)    /* start aquiring linklocal on interface */
-#define SIOCLL_STOP _IOWR('i', 131, struct in6_ifreq)    /* deconfigure linklocal from interface */
-#define SIOCAUTOCONF_START _IOWR('i', 132, struct in6_ifreq)    /* accept rtadvd on this interface */
-#define SIOCAUTOCONF_STOP _IOWR('i', 133, struct in6_ifreq)    /* stop accepting rtadv for this interface */
 
 #define IN6_IFF_ANYCAST		0x01	/* anycast address */
 #define IN6_IFF_TENTATIVE	0x02	/* tentative address */

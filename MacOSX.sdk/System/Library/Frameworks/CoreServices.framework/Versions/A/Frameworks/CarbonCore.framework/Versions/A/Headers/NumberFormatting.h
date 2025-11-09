@@ -3,9 +3,9 @@
  
      Contains:   Utilites for formatting numbers
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
-     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1996-2006 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,7 +41,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
 
@@ -127,6 +127,7 @@ numtostring(
   char *  theString)                                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
+#if !__LP64__
 /*
  *  StringToNum()   *** DEPRECATED ***
  *  
@@ -138,7 +139,7 @@ numtostring(
  *    CFStringGetIntValue instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -159,7 +160,7 @@ StringToNum(
  *    CFStringCreateWithFormat instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -169,18 +170,21 @@ NumToString(
   Str255   theString)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+#endif  /* !__LP64__ */
+
+#if !__LP64__
 /*
  *  ExtendedToString()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use CFNumberFormatterCreateNumberFromString instead.
+ *    use CFNumberFormatterCreateStringWithNumber instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
- *    CFNumberFormatterCreateNumberFromString instead.
+ *    CFNumberFormatterCreateStringWithNumber instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -196,14 +200,14 @@ ExtendedToString(
  *  StringToExtended()   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    use CFNumberFormatterCreateStringWithNumber instead.
+ *    use CFNumberFormatterCreateNumberFromString instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
- *    CFNumberFormatterCreateStringWithNumber instead.
+ *    CFNumberFormatterCreateNumberFromString instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -226,7 +230,7 @@ StringToExtended(
  *    CFNumberFormatterSetFormat instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -248,7 +252,7 @@ StringToFormatRec(
  *    CFNumberFormatterSetFormat instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -260,6 +264,8 @@ FormatRecToString(
   TripleInt                positions)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
+
+#endif  /* !__LP64__ */
 
 #if OLDROUTINENAMES
 #define FormatX2Str(x, myCanonical, partsTable, outString)  \
@@ -273,7 +279,7 @@ FormatRecToString(
 #endif  /* OLDROUTINENAMES */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

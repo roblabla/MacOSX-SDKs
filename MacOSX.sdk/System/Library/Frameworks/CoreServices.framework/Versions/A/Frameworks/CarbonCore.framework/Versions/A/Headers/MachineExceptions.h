@@ -3,9 +3,9 @@
  
      Contains:   Processor Exception Handling Interfaces.
  
-     Version:    CarbonCore-682.11~29
+     Version:    CarbonCore-783~134
  
-     Copyright:  ï¿½ 1993-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 #endif
 
 
-#if TARGET_CPU_X86
+#if TARGET_CPU_X86 || TARGET_CPU_X86_64
 #include <xmmintrin.h>
 #endif
 
@@ -112,7 +112,7 @@ struct FPUInformationPowerPC {
 typedef struct FPUInformationPowerPC    FPUInformationPowerPC;
 union Vector128 {
 #ifdef __APPLE_ALTIVEC__
- vector unsigned int         v;
+   vector unsigned int         v;
 #endif
   unsigned long       l[4];
   unsigned short      s[8];
@@ -203,13 +203,23 @@ struct ExceptionInformationPowerPC {
   VectorInformationPowerPC * vectorImage;
 };
 typedef struct ExceptionInformationPowerPC ExceptionInformationPowerPC;
-#if TARGET_CPU_PPC
+#if TARGET_CPU_PPC || TARGET_CPU_PPC64
 typedef ExceptionInformationPowerPC     ExceptionInformation;
 typedef MachineInformationPowerPC       MachineInformation;
 typedef RegisterInformationPowerPC      RegisterInformation;
 typedef FPUInformationPowerPC           FPUInformation;
 typedef VectorInformationPowerPC        VectorInformation;
-#endif  /* TARGET_CPU_PPC */
+#endif  /* TARGET_CPU_PPC || TARGET_CPU_PPC64 */
+
+#if TARGET_CPU_X86 || TARGET_CPU_X86_64
+union Vector128Intel {
+  __m128              s;
+  __m128i             si;
+  __m128d             sd;
+  unsigned char       c[16];
+};
+typedef union Vector128Intel            Vector128Intel;
+#endif  /* TARGET_CPU_X86 || TARGET_CPU_X86_64 */
 
 #if TARGET_CPU_X86
 struct MachineInformationIntel {
@@ -250,13 +260,6 @@ struct FPUInformationIntel {
   unsigned int        DS;
 };
 typedef struct FPUInformationIntel      FPUInformationIntel;
-union Vector128Intel {
-  __m128              s;
-  __m128i             si;
-  __m128d             sd;
-  unsigned char       c[16];
-};
-typedef union Vector128Intel            Vector128Intel;
 struct VectorInformationIntel {
   Vector128Intel      Registers[8];
 };
@@ -266,6 +269,64 @@ typedef MachineInformationIntel         MachineInformation;
 typedef RegisterInformationIntel        RegisterInformation;
 typedef FPUInformationIntel             FPUInformation;
 typedef VectorInformationIntel          VectorInformation;
+#endif  /* TARGET_CPU_X86 */
+
+#if TARGET_CPU_X86_64
+struct MachineInformationIntel64 {
+  unsigned long       CS;
+  unsigned long       FS;
+  unsigned long       GS;
+  unsigned long       RFLAGS;
+  unsigned long       RIP;
+  unsigned long       ExceptTrap;
+  unsigned long       ExceptErr;
+  unsigned long       ExceptAddr;
+};
+typedef struct MachineInformationIntel64 MachineInformationIntel64;
+struct RegisterInformationIntel64 {
+  unsigned long       RAX;
+  unsigned long       RBX;
+  unsigned long       RCX;
+  unsigned long       RDX;
+  unsigned long       RDI;
+  unsigned long       RSI;
+  unsigned long       RBP;
+  unsigned long       RSP;
+  unsigned long       R8;
+  unsigned long       R9;
+  unsigned long       R10;
+  unsigned long       R11;
+  unsigned long       R12;
+  unsigned long       R13;
+  unsigned long       R14;
+  unsigned long       R15;
+};
+typedef struct RegisterInformationIntel64 RegisterInformationIntel64;
+
+typedef unsigned char                   FPRegIntel[10];
+struct FPUInformationIntel64 {
+  FPRegIntel          Registers[8];
+  unsigned short      Control;
+  unsigned short      Status;
+  unsigned short      Tag;
+  unsigned short      Opcode;
+  unsigned int        IP;
+  unsigned int        DP;
+  unsigned int        DS;
+};
+typedef struct FPUInformationIntel64    FPUInformationIntel64;
+struct VectorInformationIntel64 {
+  Vector128Intel      Registers[16];
+};
+typedef struct VectorInformationIntel64 VectorInformationIntel64;
+
+typedef MachineInformationIntel64       MachineInformation;
+typedef RegisterInformationIntel64      RegisterInformation;
+typedef FPUInformationIntel64           FPUInformation;
+typedef VectorInformationIntel64        VectorInformation;
+#endif  /* TARGET_CPU_X86_64 */
+
+#if TARGET_CPU_X86 || TARGET_CPU_X86_64
 struct ExceptionInformation {
   ExceptionKind       theKind;
   MachineInformation * machineState;
@@ -275,7 +336,7 @@ struct ExceptionInformation {
   VectorInformation * vectorImage;
 };
 typedef struct ExceptionInformation     ExceptionInformation;
-#endif  /* TARGET_CPU_X86 */
+#endif  /* TARGET_CPU_X86 || TARGET_CPU_X86_64 */
 
 /* 
     Note:   An ExceptionHandler is NOT a UniversalProcPtr, except in Carbon.
@@ -319,6 +380,18 @@ extern OSStatus
 InvokeExceptionHandlerUPP(
   ExceptionInformation *  theException,
   ExceptionHandlerUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline ExceptionHandlerUPP                                  NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeExceptionHandlerUPP(ExceptionHandlerUPP) { }
+    inline OSStatus                                             InvokeExceptionHandlerUPP(ExceptionInformation * theException, ExceptionHandlerUPP userUPP) { return (*userUPP)(theException); }
+  #else
+    #define NewExceptionHandlerUPP(userRoutine)                 ((ExceptionHandlerUPP)userRoutine)
+    #define DisposeExceptionHandlerUPP(userUPP)
+    #define InvokeExceptionHandlerUPP(theException, userUPP)    (*userUPP)(theException)
+  #endif
+#endif
 
 /*
    ExceptionHandler function pointers (TPP):

@@ -1,7 +1,7 @@
 /*
 	NSWindow.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,10 +11,15 @@
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSDate.h>
 #import <ApplicationServices/ApplicationServices.h>
+#import <AppKit/NSUserInterfaceValidation.h>
+#import <AppKit/NSAnimation.h>
 
 @class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
-@class NSToolbar, NSGraphicsContext;
+@class NSToolbar, NSGraphicsContext, NSURL;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class NSDockTile;
+#endif
 
 #define NSAppKitVersionNumberWithCustomSheetPosition 686.0
 
@@ -56,6 +61,34 @@ enum {
     NSResetCursorRectsRunLoopOrdering	= 700000
 };
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+enum {
+	NSWindowSharingNone = 0,                // Window contents may not be read by another process
+	NSWindowSharingReadOnly = 1,            // Window contents may be read but not modified by another process
+	NSWindowSharingReadWrite = 2            // Window contents may be read or modified by another process
+};
+
+typedef NSUInteger NSWindowSharingType;
+
+enum {
+	NSWindowBackingLocationDefault = 0,		// System determines if window backing store is in VRAM or main memory
+	NSWindowBackingLocationVideoMemory = 1,		// Window backing store is in VRAM
+	NSWindowBackingLocationMainMemory = 2		// Window backing store is in main memory
+};
+
+typedef NSUInteger NSWindowBackingLocation;
+
+enum {
+  NSWindowCollectionBehaviorDefault = 0,
+  NSWindowCollectionBehaviorCanJoinAllSpaces = 1 << 0,
+  NSWindowCollectionBehaviorMoveToActiveSpace = 1 << 1
+};
+
+typedef NSUInteger NSWindowCollectionBehavior;
+
+#endif
+
 #define NSNormalWindowLevel              kCGNormalWindowLevel
 #define NSFloatingWindowLevel		 kCGFloatingWindowLevel
 #define NSSubmenuWindowLevel		 kCGTornOffMenuWindowLevel
@@ -69,21 +102,23 @@ enum {
 #define NSScreenSaverWindowLevel         kCGScreenSaverWindowLevel
 
 
-typedef enum _NSSelectionDirection {
+enum {
     NSDirectSelection = 0,
     NSSelectingNext,
     NSSelectingPrevious
-} NSSelectionDirection;
+};
+typedef NSUInteger NSSelectionDirection;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 // standard window buttons
-typedef enum {
+enum {
     NSWindowCloseButton,
     NSWindowMiniaturizeButton,
     NSWindowZoomButton,
     NSWindowToolbarButton,
     NSWindowDocumentIconButton
-} NSWindowButton;
+};
+typedef NSUInteger NSWindowButton;
 #endif
 
 @class NSWindowAuxiliary;
@@ -91,6 +126,11 @@ typedef enum {
 @class NSWindowController;
 
 @interface NSWindow : NSResponder
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+<NSAnimatablePropertyContainer, NSUserInterfaceValidations>
+#else
+<NSUserInterfaceValidations>
+#endif
 {
     /*All instance variables are private*/
     NSRect              _frame;
@@ -102,7 +142,7 @@ typedef enum {
     id                  _counterpart;
     id                  _fieldEditor;
     int                 _winEventMask;
-    int                 _windowNum;
+    NSInteger               _windowNum;
     int			_level;
     NSColor		*_backgroundColor;
     id                  _borderView;
@@ -113,9 +153,9 @@ typedef enum {
     void		*_cursorRects;
     void		*_trectTable;
     NSImage		*_miniIcon;
-    int			_lastResizeTime;
+    int			_unused;
     NSMutableSet	*_dragTypes;
-    NSString		*_representedFilename;
+    NSURL		*_representedURL;
     NSSize		*_sizeLimits;
     NSString		*_frameSaveName;
     NSSet		*_regDragTypes;
@@ -183,9 +223,9 @@ typedef enum {
     NSWindowAuxiliary   *_auxiliaryStorage;
 }
 
-+ (NSRect)frameRectForContentRect:(NSRect)cRect styleMask:(unsigned int)aStyle;
-+ (NSRect)contentRectForFrameRect:(NSRect)fRect styleMask:(unsigned int)aStyle;
-+ (float)minFrameWidthWithTitle:(NSString *)aTitle styleMask:(unsigned int)aStyle;
++ (NSRect)frameRectForContentRect:(NSRect)cRect styleMask:(NSUInteger)aStyle;
++ (NSRect)contentRectForFrameRect:(NSRect)fRect styleMask:(NSUInteger)aStyle;
++ (CGFloat)minFrameWidthWithTitle:(NSString *)aTitle styleMask:(NSUInteger)aStyle;
 + (NSWindowDepth)defaultDepthLimit;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
@@ -193,11 +233,19 @@ typedef enum {
 - (NSRect)contentRectForFrameRect:(NSRect)frameRect;
 #endif
 
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag;
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag;
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
 
 - (NSString *)title;
 - (void)setTitle:(NSString *)aString;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* setRepresentedURL:
+If url is not nil and its path is not empty, the window will show a document icon in the titlebar.  
+If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using [[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage].  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method window:shouldPopUpDocumentPathMenu:If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+*/
+- (void)setRepresentedURL:(NSURL *)url;
+- (NSURL *)representedURL;
+#endif
 - (NSString *)representedFilename;
 - (void)setRepresentedFilename:(NSString *)aString;
 - (void)setTitleWithRepresentedFilename:(NSString *)filename;
@@ -207,8 +255,8 @@ typedef enum {
 - (id)contentView;
 - (void)setDelegate:(id)anObject;
 - (id)delegate;
-- (int)windowNumber;
-- (unsigned int)styleMask;
+- (NSInteger)windowNumber;
+- (NSUInteger)styleMask;
 - (NSText *)fieldEditor:(BOOL)createFlag forObject:(id)anObject;
 - (void)endEditingFor:(id)anObject;
 
@@ -265,7 +313,7 @@ typedef enum {
 - (void)update;
 - (BOOL)makeFirstResponder:(NSResponder *)aResponder;
 - (NSResponder *)firstResponder;
-- (int)resizeFlags;
+- (NSInteger)resizeFlags;
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)close;
 - (void)setReleasedWhenClosed:(BOOL)flag;
@@ -279,6 +327,14 @@ typedef enum {
 - (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
 - (void)setBackgroundColor:(NSColor *)color;
 - (NSColor *)backgroundColor;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (void)setContentBorderThickness:(CGFloat)thickness forEdge:(NSRectEdge)edge;
+- (CGFloat)contentBorderThicknessForEdge:(NSRectEdge)edge;
+
+- (void)setAutorecalculatesContentBorderThickness:(BOOL)flag forEdge:(NSRectEdge)edge;
+- (BOOL)autorecalculatesContentBorderThicknessForEdge:(NSRectEdge)edge;
+#endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setMovableByWindowBackground:(BOOL)flag;
@@ -297,13 +353,17 @@ typedef enum {
 - (void)orderFront:(id)sender;
 - (void)orderBack:(id)sender;
 - (void)orderOut:(id)sender;
-- (void)orderWindow:(NSWindowOrderingMode)place relativeTo:(int)otherWin;
+- (void)orderWindow:(NSWindowOrderingMode)place relativeTo:(NSInteger)otherWin;
 - (void)orderFrontRegardless;
 
 - (void)setMiniwindowImage:(NSImage *)image;
 - (void)setMiniwindowTitle:(NSString *)title;
 - (NSImage *)miniwindowImage;
 - (NSString *)miniwindowTitle;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (NSDockTile *)dockTile;
+#endif
 
 - (void)setDocumentEdited:(BOOL)flag;
 - (BOOL)isDocumentEdited;
@@ -325,7 +385,7 @@ typedef enum {
 - (void)performClose:(id)sender;
 - (void)performMiniaturize:(id)sender;
 - (void)performZoom:(id)sender;
-- (int)gState;
+- (NSInteger)gState;
 - (void)setOneShot:(BOOL)flag;
 - (BOOL)isOneShot;
 - (NSData *)dataWithEPSInsideRect:(NSRect)rect;
@@ -349,8 +409,8 @@ typedef enum {
 
 - (void)setBackingType:(NSBackingStoreType)bufferingType;
 - (NSBackingStoreType)backingType;
-- (void)setLevel:(int)newLevel;
-- (int)level;
+- (void)setLevel:(NSInteger)newLevel;
+- (NSInteger)level;
 - (void)setDepthLimit:(NSWindowDepth)limit;
 - (NSWindowDepth)depthLimit;
 - (void)setDynamicDepthLimit:(BOOL)flag;
@@ -363,10 +423,29 @@ typedef enum {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)invalidateShadow;
 #endif
-- (void)setAlphaValue:(float)windowAlpha;
-- (float)alphaValue;
+- (void)setAlphaValue:(CGFloat)windowAlpha;
+- (CGFloat)alphaValue;
 - (void)setOpaque:(BOOL)isOpaque;
 - (BOOL)isOpaque;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+/* -setSharingType: specifies whether the window content can be read and/or written from another process.  The default sharing type is NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.  If you set your window sharing type to NSWindowSharingReadWrite, other processes can both read and modify the window content.
+*/
+- (void)setSharingType:(NSWindowSharingType)type;
+- (NSWindowSharingType)sharingType;
+
+/* -setPreferredBackingLocation: sets the preferred location for the window backing store.  In general, you should not use this API unless indicated by performance measurement.
+*/
+- (void)setPreferredBackingLocation:(NSWindowBackingLocation)backingLocation;
+/* -preferredBackingLocation gets the preferred location for the window backing store.  This may be different from the actual location.
+*/
+- (NSWindowBackingLocation)preferredBackingLocation;
+/* -backingLocation gets the current location of the window backing store.
+*/
+- (NSWindowBackingLocation)backingLocation;
+
+#endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL)displaysWhenScreenProfileChanges;
@@ -375,6 +454,22 @@ typedef enum {
 - (void)disableScreenUpdatesUntilFlush;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+*/
+- (BOOL)canBecomeVisibleWithoutLogin;
+- (void)setCanBecomeVisibleWithoutLogin:(BOOL)flag;
+
+
+- (void)setCollectionBehavior:(NSWindowCollectionBehavior)behavior;
+- (NSWindowCollectionBehavior)collectionBehavior;
+
+#endif
+
+/* -setCanBeVisibleOnAllSpaces: controls whether a window can be visible on all spaces (YES) or is associated with one space at a time (NO).  The default setting is NO.  
+*/
+-(BOOL)canBeVisibleOnAllSpaces                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
+-(void)setCanBeVisibleOnAllSpaces:(BOOL)flag    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
 
 - (NSString *)stringWithSavedFrame;
 - (void)setFrameFromString:(NSString *)string;
@@ -401,9 +496,9 @@ typedef enum {
 - (void)setContentMinSize:(NSSize)size;
 - (void)setContentMaxSize:(NSSize)size;
 #endif
-- (NSEvent *)nextEventMatchingMask:(unsigned int)mask;
-- (NSEvent *)nextEventMatchingMask:(unsigned int)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
-- (void)discardEventsMatchingMask:(unsigned int)mask beforeEvent:(NSEvent *)lastEvent;
+- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask;
+- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
 - (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
 - (NSEvent *)currentEvent;
 - (void)setAcceptsMouseMovedEvents:(BOOL)flag;
@@ -424,7 +519,7 @@ typedef enum {
 - (NSWindow *)attachedSheet;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-+ (NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(unsigned int)styleMask;
++ (NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(NSUInteger)styleMask;
 - (NSButton *)standardWindowButton:(NSWindowButton)b;
 #endif
 
@@ -444,7 +539,7 @@ typedef enum {
 
 /* Returns scale factor applied to view coordinate system to get to base coordinate system of window 
 */
-- (float)userSpaceScaleFactor;
+- (CGFloat)userSpaceScaleFactor;
 
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end
@@ -486,11 +581,6 @@ typedef enum {
 - (void)unregisterDraggedTypes;
 @end
 
-#ifdef WIN32
-@interface NSWindow (NSWindowsExtensions)
-- (void * /*HWND*/)windowHandle;
-@end
-#else
 @interface NSWindow(NSCarbonExtensions)
 // create an NSWindow for a Carbon window - windowRef must be a Carbon WindowRef - see MacWindows.h
 - (NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef;
@@ -498,7 +588,6 @@ typedef enum {
 - (void * /* WindowRef */)windowRef;
 @end
 
-#endif
 
 @interface NSObject(NSWindowNotifications)
 - (void)windowDidResize:(NSNotification *)notification;
@@ -531,6 +620,15 @@ typedef enum {
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect;
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* If a window has a representedURL, the window will by default show a path popup menu for a command-click on a rectangle containing the window document icon button and the window title.  The window delegate may implement -window:shouldPopupDocumentPathMenu: to override NSWindow's default behavior for path popup menu.  A return of NO will prevent the menu from being shown.  A return of YES will cause the window to show the menu passed to this method, which by default will contain a menuItem for each path component of the representedURL.  If the representedURL has no path components, the menu will have no menu items.  Before returning YES, the window delegate may customize the menu by changing the menuItems.  menuItems may be added or deleted, and each menuItem title, action, or target may be modified. 
+*/
+- (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu;
+
+/* The window delegate may implement -window:shouldDragDocumentWithEvent:from:withPasteboard: to override NSWindow document icon's default drag behavior.  The delegate can prohibit the drag by returning NO.  Before returning NO, the delegate may implement its own dragging behavior using -[NSWindow dragImage:at:offset:event:pasteboard:source:slideBack:].  Alternatively, the delegate can enable a drag by returning YES, for example to override NSWindow's default behavior of prohibiting the drag of an edited document.  Lastly, the delegate can customize the pasteboard contents before returning YES.
+*/
+- (BOOL)window:(NSWindow *)window shouldDragDocumentWithEvent:(NSEvent *)event from:(NSPoint)dragImageLocation withPasteboard:(NSPasteboard *)pasteboard;
 #endif
 @end
 

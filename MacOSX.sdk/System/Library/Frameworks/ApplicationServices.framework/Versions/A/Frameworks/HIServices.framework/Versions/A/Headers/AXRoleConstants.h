@@ -201,6 +201,8 @@
 #define kAXRulerRole					CFSTR("AXRuler")
 #define kAXRulerMarkerRole				CFSTR("AXRulerMarker")
 
+#define kAXGridRole					CFSTR("AXGrid")
+
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Subroles                                                                                */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -227,6 +229,7 @@
 #define kAXDecrementPageSubrole				CFSTR("AXDecrementPage")
 #define kAXSortButtonSubrole 				CFSTR("AXSortButton")
 #define kAXSearchFieldSubrole				CFSTR("AXSearchField")
+#define kAXTimelineSubrole                  CFSTR("AXTimeline")
 
 // dock subroles
 #define kAXApplicationDockItemSubrole			CFSTR("AXApplicationDockItem")

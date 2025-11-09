@@ -3,7 +3,7 @@
  
      Contains:   Master include for CarbonCore private framework
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -63,10 +63,6 @@
 
 #ifndef __CODEFRAGMENTS_R__
 #include <CarbonCore/CodeFragments.r>
-#endif
-
-#ifndef __DEVICES_R__
-#include <CarbonCore/Devices.r>
 #endif
 
 #ifndef __INTLRESOURCES_R__

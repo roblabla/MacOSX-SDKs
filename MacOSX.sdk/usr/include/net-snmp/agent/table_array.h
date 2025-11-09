@@ -1,6 +1,6 @@
 /*
  * table_array.h
- * $Id: table_array.h,v 5.11 2004/09/14 02:29:15 rstory Exp $
+ * $Id: table_array.h 12757 2005-09-12 15:24:16Z dts12 $
  */
 #ifndef _TABLE_ARRAY_HANDLER_H_
 #define _TABLE_ARRAY_HANDLER_H_
@@ -112,7 +112,7 @@ extern          "C" {
 
         UserRowMethod  *create_row;
         UserRowMethod  *duplicate_row;
-        UserRowMethod  *delete_row;
+        UserRowMethod  *delete_row;    /* always returns NULL */
 
         Netsnmp_User_Group_Method *set_reserve1;
         Netsnmp_User_Group_Method *set_reserve2;
@@ -132,6 +132,12 @@ extern          "C" {
         netsnmp_table_container_register(netsnmp_handler_registration *reginfo,
                                      netsnmp_table_registration_info
                                      *tabreq,
+                                     netsnmp_table_array_callbacks *cb,
+                                     netsnmp_container *container,
+                                     int group_rows);
+
+    int netsnmp_table_array_register(netsnmp_handler_registration *reginfo,
+                                     netsnmp_table_registration_info *tabreq,
                                      netsnmp_table_array_callbacks *cb,
                                      netsnmp_container *container,
                                      int group_rows);

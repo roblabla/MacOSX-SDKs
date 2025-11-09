@@ -65,18 +65,29 @@ MD_EXPORT CFStringRef MDSchemaCopyDisplayNameForAttribute(CFStringRef name) MD_A
 MD_EXPORT CFStringRef MDSchemaCopyDisplayDescriptionForAttribute(CFStringRef name) MD_AVAIL;
 
     /* Returned by MDSchemaCopyAttributesForContentType */
-MD_EXPORT const CFStringRef     kMDAttributeDisplayValues MD_AVAIL;   
+MD_EXPORT const CFStringRef kMDAttributeDisplayValues MD_AVAIL;
                                                                 /* Value == CFArray of CFString attribute names  or
                                                                  * NULL if the type  is not known by the system
                                                                  */
-MD_EXPORT const CFStringRef     kMDAttributeAllValues MD_AVAIL; /* Value == CFArray of CFString attribute names  or
+MD_EXPORT const CFStringRef kMDAttributeAllValues MD_AVAIL;     /* Value == CFArray of CFString attribute names  or
                                                                  * NULL if the type  is not known by the system
                                                                  */
 
+MD_EXPORT const CFStringRef kMDAttributeReadOnlyValues MD_AVAIL_LEOPARD;
+                                                                 /* Value == CFArray of CFString attribute names  or
+                                                                  * NULL if the type  is not known by the system
+                                                                  */
+
+MD_EXPORT const CFStringRef kMDExporterAvaliable MD_AVAIL_LEOPARD;
+                                                                 /* Value == CFBoolean
+                                                                  * indicates if an exporter is avaliable for this
+                                                                  * uti type
+                                                                  */
+
 /* Keys in the dictionary returned from the MDSchemaCopyMetaAttributesForAttribute call */
-MD_EXPORT const CFStringRef     kMDAttributeName MD_AVAIL;              // Value == name of attribute (CFStringRef)
-MD_EXPORT const CFStringRef     kMDAttributeType MD_AVAIL;              // Value == type of Attribute (CFNumberRef, CFTypeId)
-MD_EXPORT const CFStringRef     kMDAttributeMultiValued MD_AVAIL;       // Value == if multivalued (CFBooleanRef)
+MD_EXPORT const CFStringRef  kMDAttributeName MD_AVAIL;           /* Value == name of attribute (CFStringRef) */
+MD_EXPORT const CFStringRef  kMDAttributeType MD_AVAIL;           /* Value == type of Attribute (CFNumberRef, CFTypeID) */
+MD_EXPORT const CFStringRef  kMDAttributeMultiValued MD_AVAIL;    /* Value == if multivalued (CFBooleanRef) */
 
 MD_END_C_DECLS
 

@@ -191,6 +191,7 @@ SOFTWARE.
 #define TYPE_MODID	    24
 #define TYPE_AGENTCAP       25
 #define TYPE_MODCOMP        26
+#define TYPE_OBJIDENTITY    27
 
 #define MIB_ACCESS_READONLY    18
 #define MIB_ACCESS_READWRITE   19
@@ -208,12 +209,19 @@ SOFTWARE.
 #define	ANON	"anonymous#"
 #define	ANON_LEN  strlen(ANON)
 
+    struct tree    *netsnmp_read_module(const char *);
+#ifndef NETSNMP_CLEAN_NAMESPACE
     struct tree    *read_module(const char *);
+#endif
     struct tree    *read_mib(const char *);
     struct tree    *read_all_mibs(void);
+    int             netsnmp_unload_module(const char *name);
+#ifndef NETSNMP_CLEAN_NAMESPACE
     int             unload_module(const char *name);
-    void            unload_all_mibs(void);
     void            init_mib_internals(void);
+#endif
+    void            netsnmp_init_mib_internals(void);
+    void            unload_all_mibs(void);
     int             add_mibfile(const char*, const char*, FILE *);
     int             add_mibdir(const char *);
     void            add_module_replacement(const char *, const char *,

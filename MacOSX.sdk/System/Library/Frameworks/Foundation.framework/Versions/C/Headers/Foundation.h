@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2007, Apple Inc. All rights reserved.
 */
 
 
@@ -38,6 +38,7 @@
 #import <Foundation/NSFileHandle.h>
 #import <Foundation/NSFileManager.h>
 #import <Foundation/NSFormatter.h>
+#import <Foundation/NSGarbageCollector.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSHashTable.h>
 #import <Foundation/NSHFSFileTypes.h>
@@ -45,7 +46,6 @@
 #import <Foundation/NSIndexPath.h>
 #import <Foundation/NSIndexSet.h>
 #import <Foundation/NSInvocation.h>
-#import <Foundation/NSJavaSetup.h>
 #import <Foundation/NSKeyValueCoding.h>
 #import <Foundation/NSKeyValueObserving.h>
 #import <Foundation/NSKeyedArchiver.h>
@@ -60,7 +60,10 @@
 #import <Foundation/NSNull.h>
 #import <Foundation/NSNumberFormatter.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSOperation.h>
 #import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSPointerArray.h>
+#import <Foundation/NSPointerFunctions.h>
 #import <Foundation/NSPort.h>
 #import <Foundation/NSPortCoder.h>
 #import <Foundation/NSPortMessage.h>
@@ -116,9 +119,6 @@
 #import <Foundation/NSScriptSuiteRegistry.h>
 #import <Foundation/NSScriptWhoseTests.h>
 
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
 #import <Foundation/NSURLAuthenticationChallenge.h>
 #import <Foundation/NSURLCredential.h>
 #import <Foundation/NSURLCredentialStorage.h>
@@ -132,13 +132,10 @@
 #import <Foundation/NSHTTPCookieStorage.h>
 #import <Foundation/NSURLDownload.h>
 #import <Foundation/NSURLError.h>
-#endif
 
 #import <Foundation/FoundationErrors.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_2
-	#import <Foundation/NSSerialization.h>
-#else
-	@class NSSerializer, NSDeserializer;
+#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
+	#import <Foundation/NSJavaSetup.h>
 #endif
 

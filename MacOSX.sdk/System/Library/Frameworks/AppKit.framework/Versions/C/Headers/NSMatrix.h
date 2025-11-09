@@ -1,22 +1,24 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2005, Apple Computer, Inc.
+	Copyright (c) 1994-2007, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSColor, NSMutableArray;
 
 /* Matrix Constants */
 
-typedef enum _NSMatrixMode {
+enum {
     NSRadioModeMatrix			= 0,
     NSHighlightModeMatrix		= 1,
     NSListModeMatrix			= 2,
     NSTrackModeMatrix			= 3
-} NSMatrixMode;
+};
+typedef NSUInteger NSMatrixMode;
 
 typedef struct __MFlags {
 #ifdef __BIG_ENDIAN__
@@ -78,7 +80,7 @@ typedef struct __MFlags {
 #endif
 } _MFlags;
 
-@interface NSMatrix : NSControl
+@interface NSMatrix : NSControl <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
     id                  _target;
@@ -87,10 +89,10 @@ typedef struct __MFlags {
     SEL                 _errorAction;
     id                  _delegate;
     id                  _selectedCell;
-    int                 _selectedRow;
-    int                 _selectedCol;
-    int                 _numRows;
-    int                 _numCols;
+    NSInteger           _selectedRow;
+    NSInteger           _selectedCol;
+    NSInteger           _numRows;
+    NSInteger           _numCols;
     NSSize              _cellSize;
     NSSize              _intercell;
     id                  _font;
@@ -104,15 +106,15 @@ typedef struct __MFlags {
 
 
 - (id)initWithFrame:(NSRect)frameRect;
-- (id)initWithFrame:(NSRect)frameRect mode:(int)aMode prototype:(NSCell *)aCell numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;
-- (id)initWithFrame:(NSRect)frameRect mode:(int)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;
+- (id)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (id)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
 
 
 - (void)setCellClass:(Class)factoryId;
 - (Class)cellClass;
 - (id)prototype;
 - (void)setPrototype:(NSCell *)aCell;
-- (NSCell *)makeCellAtRow:(int)row column:(int)col;
+- (NSCell *)makeCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSMatrixMode)mode;
 - (void)setMode:(NSMatrixMode)aMode;
 - (void)setAllowsEmptySelection:(BOOL)flag;
@@ -120,19 +122,19 @@ typedef struct __MFlags {
 - (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
 - (NSArray *)cells;
 - (void)sortUsingSelector:(SEL)comparator;
-- (void)sortUsingFunction:(int (*)(id, id, void *))compare context:(void *)context;
+- (void)sortUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context;
 - (id)selectedCell;
 - (NSArray *)selectedCells;
-- (int)selectedRow;
-- (int)selectedColumn;
+- (NSInteger)selectedRow;
+- (NSInteger)selectedColumn;
 - (void)setSelectionByRect:(BOOL)flag;
 - (BOOL)isSelectionByRect;
-- (void)setSelectionFrom:(int)startPos to:(int)endPos anchor:(int)anchorPos highlight:(BOOL)lit;
+- (void)setSelectionFrom:(NSInteger)startPos to:(NSInteger)endPos anchor:(NSInteger)anchorPos highlight:(BOOL)lit;
 - (void)deselectSelectedCell;
 - (void)deselectAllCells;
-- (void)selectCellAtRow:(int)row column:(int)col;
+- (void)selectCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)selectAll:(id)sender;
-- (BOOL)selectCellWithTag:(int)anInt;
+- (BOOL)selectCellWithTag:(NSInteger)anInt;
 - (NSSize)cellSize;
 - (void)setCellSize:(NSSize)aSize;
 - (NSSize)intercellSpacing;
@@ -146,40 +148,40 @@ typedef struct __MFlags {
 - (BOOL)drawsCellBackground;
 - (void)setDrawsBackground:(BOOL)flag;
 - (BOOL)drawsBackground;
-- (void)setState:(int)value atRow:(int)row column:(int)col;
-- (void)getNumberOfRows:(int *)rowCount columns:(int *)colCount;
-- (int)numberOfRows;
-- (int)numberOfColumns;
-- (id)cellAtRow:(int)row column:(int)col;
-- (NSRect)cellFrameAtRow:(int)row column:(int)col;
-- (BOOL)getRow:(int *)row column:(int *)col ofCell:(NSCell *)aCell;
-- (BOOL)getRow:(int *)row column:(int *)col forPoint:(NSPoint)aPoint;
-- (void)renewRows:(int)newRows columns:(int)newCols;
-- (void)putCell:(NSCell *)newCell atRow:(int)row column:(int)col;
+- (void)setState:(NSInteger)value atRow:(NSInteger)row column:(NSInteger)col;
+- (void)getNumberOfRows:(NSInteger *)rowCount columns:(NSInteger *)colCount;
+- (NSInteger)numberOfRows;
+- (NSInteger)numberOfColumns;
+- (id)cellAtRow:(NSInteger)row column:(NSInteger)col;
+- (NSRect)cellFrameAtRow:(NSInteger)row column:(NSInteger)col;
+- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col ofCell:(NSCell *)aCell;
+- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col forPoint:(NSPoint)aPoint;
+- (void)renewRows:(NSInteger)newRows columns:(NSInteger)newCols;
+- (void)putCell:(NSCell *)newCell atRow:(NSInteger)row column:(NSInteger)col;
 - (void)addRow;
 - (void)addRowWithCells:(NSArray *)newCells;
-- (void)insertRow:(int)row;
-- (void)insertRow:(int)row withCells:(NSArray *)newCells;
-- (void)removeRow:(int)row;
+- (void)insertRow:(NSInteger)row;
+- (void)insertRow:(NSInteger)row withCells:(NSArray *)newCells;
+- (void)removeRow:(NSInteger)row;
 - (void)addColumn;
 - (void)addColumnWithCells:(NSArray *)newCells;
-- (void)insertColumn:(int)column;
-- (void)insertColumn:(int)column withCells:(NSArray *)newCells;
-- (void)removeColumn:(int)col;
-- (id)cellWithTag:(int)anInt;
+- (void)insertColumn:(NSInteger)column;
+- (void)insertColumn:(NSInteger)column withCells:(NSArray *)newCells;
+- (void)removeColumn:(NSInteger)col;
+- (id)cellWithTag:(NSInteger)anInt;
 - (SEL)doubleAction;
 - (void)setDoubleAction:(SEL)aSelector;
 - (void)setAutosizesCells:(BOOL)flag;
 - (BOOL)autosizesCells;
 - (void)sizeToCells;
 - (void)setValidateSize:(BOOL)flag;
-- (void)drawCellAtRow:(int)row column:(int)col;
-- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)col;
+- (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col;
+- (void)highlightCell:(BOOL)flag atRow:(NSInteger)row column:(NSInteger)col;
 
 - (void)setAutoscroll:(BOOL)flag;
 - (BOOL)isAutoscroll;
-- (void)scrollCellToVisibleAtRow:(int)row column:(int)col;
-- (int)mouseDownFlags;
+- (void)scrollCellToVisibleAtRow:(NSInteger)row column:(NSInteger)col;
+- (NSInteger)mouseDownFlags;
 - (void)mouseDown:(NSEvent *)theEvent;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)sendAction;
@@ -192,7 +194,7 @@ typedef struct __MFlags {
 - (void)textDidEndEditing:(NSNotification *)notification;
 - (void)textDidChange:(NSNotification *)notification;
 - (void)selectText:(id)sender;
-- (id)selectTextAtRow:(int)row column:(int)col;
+- (id)selectTextAtRow:(NSInteger)row column:(NSInteger)col;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 - (void)resetCursorRects;
 - (void)setToolTip:(NSString *)toolTipString forCell:(NSCell *)cell;

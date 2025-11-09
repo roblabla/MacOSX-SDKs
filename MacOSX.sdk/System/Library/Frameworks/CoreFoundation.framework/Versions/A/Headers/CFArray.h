@@ -1,5 +1,5 @@
 /*	CFArray.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -18,14 +18,9 @@
 	Arrays come in two flavors, immutable, which cannot have values
 	added to them or removed from them after the array is created, and
 	mutable, to which you can add values or from which remove values.
-	Mutable arrays have two subflavors, fixed-capacity, for which there
-	is a maximum number set at creation time of values which can be put
-	into the array, and variable capacity, which can have an unlimited
-	number of values (or rather, limited only by constraints external
-	to CFArray, like the amount of available memory). Fixed-capacity
-	arrays can be somewhat higher performing, if you can put a definite
-	upper limit on the number of values that might be put into the
-	array.
+	Mutable arrays can have an unlimited number of values (or rather,
+	limited only by constraints external to CFArray, like the amount
+	of available memory).
 
 	As with all CoreFoundation collection types, arrays maintain hard
 	references on the values you put in them, but the retaining and
@@ -51,9 +46,7 @@
 
 #include <CoreFoundation/CFBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*!
 	@typedef CFArrayCallBacks
@@ -208,13 +201,12 @@ CFArrayRef CFArrayCreateCopy(CFAllocatorRef allocator, CFArrayRef theArray);
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFArray. The array starts empty, and can grow to this
-		number of values (and it can have less). If this parameter
-		is 0, the array's maximum capacity is unlimited (or rather,
-		only limited by address space and available memory
-		constraints). If this parameter is negative, the behavior is
-		undefined.
+	@param capacity A hint about the number of values that will be held
+		by the CFArray. Pass 0 for no hint. The implementation may
+		ignore this hint, or may use it to optimize various
+		operations. An array's actual capacity is only limited by
+		address space and available memory constraints). If this
+		parameter is negative, the behavior is undefined.
 	@param callBacks A pointer to a CFArrayCallBacks structure
 		initialized with the callbacks for the array to use on each
 		value in the array. A copy of the contents of the
@@ -226,7 +218,7 @@ CFArrayRef CFArrayCreateCopy(CFAllocatorRef allocator, CFArrayRef theArray);
 		NULL, in which case the CFArray will do nothing to add a
 		retain to the contained values for the array. The release
 		field may be NULL, in which case the CFArray will do nothing
-		to remove the arrays retain (if any) on the values when the
+		to remove the array's retain (if any) on the values when the
 		array is destroyed. If the copyDescription field is NULL,
 		the array will create a simple description for the value. If
 		the equal field is NULL, the array will use pointer equality
@@ -253,12 +245,12 @@ CFMutableArrayRef CFArrayCreateMutable(CFAllocatorRef allocator, CFIndex capacit
 		parameter may be NULL in which case the current default
 		CFAllocator is used. If this reference is not a valid
 		CFAllocator, the behavior is undefined.
-	@param capacity The maximum number of values that can be contained
-		by the CFArray. The array starts empty, and can grow to this
-		number of values (and it can have less). If this parameter
-		is 0, the array's maximum capacity is unlimited (or rather,
-		only limited by address space and available memory
-		constraints). This parameter must be greater than or equal
+        @param capacity A hint about the number of values that will be held
+                by the CFArray. Pass 0 for no hint. The implementation may
+                ignore this hint, or may use it to optimize various
+                operations. An array's actual capacity is only limited by 
+                address space and available memory constraints).
+		This parameter must be greater than or equal
 		to the count of the array which is to be copied, or the
 		behavior is undefined. If this parameter is negative, the
 		behavior is undefined.
@@ -487,8 +479,7 @@ CFIndex CFArrayBSearchValues(CFArrayRef theArray, CFRange range, const void *val
 	Adds the value to the array giving it a new largest index.
 	@param theArray The array to which the value is to be added. If this
 		parameter is not a valid mutable CFArray, the behavior is
-		undefined. If the array is a fixed-capacity array and it
-		is full before this operation, the behavior is undefined.
+		undefined.
 	@param value The value to add to the array. The value is retained by
 		the array using the retain callback provided when the array
 		was created. If the value is not of the sort expected by the
@@ -504,8 +495,7 @@ void CFArrayAppendValue(CFMutableArrayRef theArray, const void *value);
 	Adds the value to the array, giving it the given index.
 	@param theArray The array to which the value is to be added. If this
 		parameter is not a valid mutable CFArray, the behavior is
-		undefined. If the array is a fixed-capacity array and it
-		is full before this operation, the behavior is undefined.
+		undefined.
 	@param idx The index to which to add the new value. If the index is
 		outside the index space of the array (0 to N inclusive,
 		where N is the count of the array before the operation), the
@@ -526,9 +516,7 @@ void CFArrayInsertValueAtIndex(CFMutableArrayRef theArray, CFIndex idx, const vo
 	Changes the value with the given index in the array.
 	@param theArray The array in which the value is to be changed. If this
 		parameter is not a valid mutable CFArray, the behavior is
-		undefined. If the array is a fixed-capacity array and it
-		is full before this operation and the index is the same as
-		N, the behavior is undefined.
+		undefined.
 	@param idx The index to which to set the new value. If the index is
 		outside the index space of the array (0 to N inclusive,
 		where N is the count of the array before the operation), the
@@ -655,10 +643,7 @@ void CFArraySortValues(CFMutableArrayRef theArray, CFRange range, CFComparatorFu
 	Adds the values from an array to another array.
 	@param theArray The array to which values from the otherArray are to
 		be added. If this parameter is not a valid mutable CFArray,
-		the behavior is undefined. If the array is a fixed-capacity
-		array and adding range.length values from the otherArray
-		exceeds the capacity of the array, the behavior is
-		undefined.
+		the behavior is undefined.
 	@param otherArray The array providing the values to be added to the
 		array. If this parameter is not a valid CFArray, the
 		behavior is undefined.
@@ -680,9 +665,7 @@ void CFArraySortValues(CFMutableArrayRef theArray, CFRange range, CFComparatorFu
 CF_EXPORT
 void CFArrayAppendArray(CFMutableArrayRef theArray, CFArrayRef otherArray, CFRange otherRange);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFARRAY__ */
 

@@ -331,10 +331,8 @@ public:
 
 protected:
 	
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	// OSMetaClassDeclareReservedUsed(IOAudioEngine, 12);
     virtual IOReturn createUserClient(task_t task, void *securityID, UInt32 type, IOAudioEngineUserClient **newUserClient, OSDictionary *properties);
-#endif
 	
 private:
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 0);
@@ -349,11 +347,7 @@ private:
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 9);
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 10);
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 11);
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 12);
-#else
-	OSMetaClassDeclareReservedUnused(IOAudioEngine, 12);
-#endif
 
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 13);
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 14);
@@ -569,7 +563,7 @@ public:
      *  This must be overridden by the subclass.  No call to the superclass's implementation is
      *  necessary.  The subclass's implementation must start up the audio I/O engine.  This includes any audio
      *  engine that needs to be started as well as any interrupts that need to be enabled.  Upon successfully
-     *  starting the engine, the subclass's implementation must call setState(kAudioEngineRunning).  If
+     *  starting the engine, the subclass's implementation must call setState(kIOAudioEngineRunning).  If
      *  it has also checked the state using getState() earlier in the implementation, the stateLock must be
      *  acquired for the entire initialization process (using IORecursiveLockLock(stateLock) and
      *  IORecursiveLockUnlock(stateLock)) to ensure that the state remains consistent.  See the general class
@@ -624,7 +618,7 @@ public:
      *  be acquired before the first call to getState() and held until after the last call to setState().
      *  Be careful not to return from the code acquiring the lock while the lock is being held.  That
      *  will cause a deadlock situation.
-     * @result The current state of the IOAudioEngine: kAudioEngineRunning, kAudioEngineStopped.
+     * @result The current state of the IOAudioEngine: kIOAudioEngineRunning, kIOAudioEngineStopped.
      */
     virtual IOAudioEngineState getState();
 
@@ -792,7 +786,7 @@ protected:
      *  and performing flushing operations. When the timer fires, the method timerFired() is ultimately
      *  called which in turn calls performErase() and performFlush().  This is called automatically
      *  to enable the timer event for this audio engine.  It is called by setState() when the audio engine state
-     *  is set to kAudioEngineRunning.  When the timer is no longer needed, removeTimer() is called.
+     *  is set to kIOAudioEngineRunning.  When the timer is no longer needed, removeTimer() is called.
      *  There is no need to call this directly.  
      */
     virtual void addTimer();
@@ -802,7 +796,7 @@ protected:
      * @abstract Disables the timer event for the audio engine.
      * @discussion  This method is called automatically to disable the timer event for this audio engine.
      *  There is need to call it directly.  This method is called by setState() when the audio engine state
-     *  is changed from kAudioEngineRunning to one of the stopped states.
+     *  is changed from kIOAudioEngineRunning to one of the stopped states.
      */
     virtual void removeTimer();
 

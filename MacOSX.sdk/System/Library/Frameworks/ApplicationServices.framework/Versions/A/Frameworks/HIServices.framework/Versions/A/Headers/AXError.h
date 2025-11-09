@@ -29,7 +29,8 @@ enum {
     kAXErrorNotificationNotRegistered		= -25210,
     kAXErrorAPIDisabled				= -25211,
     kAXErrorNoValue				= -25212,
-    kAXErrorParameterizedAttributeUnsupported	= -25213
+    kAXErrorParameterizedAttributeUnsupported	= -25213,
+	kAXErrorNotEnoughPrecision	= -25214
 };
 typedef SInt32 AXError;
 

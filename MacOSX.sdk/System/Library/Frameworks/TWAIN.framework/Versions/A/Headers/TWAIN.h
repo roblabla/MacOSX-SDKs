@@ -169,10 +169,10 @@ typedef wchar_t TW_UNI512[512],   FAR *pTW_UNI512;    /* added 1.9 */
 /* Numeric types. */
 typedef char           TW_INT8,   FAR *pTW_INT8;
 typedef short          TW_INT16,  FAR *pTW_INT16; 
-typedef long           TW_INT32,  FAR *pTW_INT32;
+typedef int            TW_INT32,  FAR *pTW_INT32;
 typedef unsigned char  TW_UINT8,  FAR *pTW_UINT8;
 typedef unsigned short TW_UINT16, FAR *pTW_UINT16;
-typedef unsigned long  TW_UINT32, FAR *pTW_UINT32;
+typedef unsigned int   TW_UINT32, FAR *pTW_UINT32;
 typedef unsigned short TW_BOOL,   FAR *pTW_BOOL; 
 
 /* Fixed point structure type. */
@@ -309,7 +309,7 @@ typedef struct TW_GRAYRESPONSE {
 
 /* DAT_IDENTITY. Identifies the program/library/code resource. */
 typedef struct TW_IDENTITY {
-   TW_UINT32  Id;              /* Unique number.  In Windows, application hWnd      */
+   TW_MEMREF  Id;              /* Unique number.  In Windows, application hWnd      */
    TW_VERSION Version;         /* Identifies the piece of code              */
    TW_UINT16  ProtocolMajor;   /* Application and DS must set to TWON_PROTOCOLMAJOR */
    TW_UINT16  ProtocolMinor;   /* Application and DS must set to TWON_PROTOCOLMINOR */
@@ -567,7 +567,7 @@ typedef struct TW_SETUPAUDIOFILEXFER {
 /* TW_CALLBACK, used to register/invoke callbacks */
 typedef struct TW_CALLBACK {
     TW_MEMREF 	CallBackProc;		/* DSMENTRYPROC used with DAT_CALLBACK/MSG_REGISTER_CALLBACK */
-    TW_UINT32	RefCon;				/* refCon used with DAT_CALLBACK/MSG_REGISTER_CALLBACK and DAT_CALLBACK/MSG_INVOKE_CALLBACK */
+    TW_MEMREF	RefCon;				/* refCon used with DAT_CALLBACK/MSG_REGISTER_CALLBACK and DAT_CALLBACK/MSG_INVOKE_CALLBACK */
     TW_INT16    Message;			/* message used with DAT_CALLBACK/MSG_INVOKE_CALLBACK */
 } TW_CALLBACK, FAR * pTW_CALLBACK;
 

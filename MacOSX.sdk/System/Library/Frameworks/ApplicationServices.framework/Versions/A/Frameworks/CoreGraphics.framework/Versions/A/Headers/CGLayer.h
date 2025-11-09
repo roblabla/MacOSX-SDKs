@@ -15,8 +15,7 @@ CG_EXTERN_C_BEGIN
 
 /* Create a layer of size `size' relative to the context `context'. The
  * value of `size' is specified in default user space (base space) units.
- * If `size' is NULL, then the underlying size of `context' is used. The
- * parameter `auxiliaryInfo' should be NULL; it is reserved for future
+ * The parameter `auxiliaryInfo' should be NULL; it is reserved for future
  * expansion. */
 
 CG_EXTERN CGLayerRef CGLayerCreateWithContext(CGContextRef context, CGSize size, CFDictionaryRef auxiliaryInfo) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;

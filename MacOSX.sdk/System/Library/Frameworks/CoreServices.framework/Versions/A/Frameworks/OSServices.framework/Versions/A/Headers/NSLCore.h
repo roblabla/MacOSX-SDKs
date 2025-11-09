@@ -3,7 +3,7 @@
  
      Contains:   Interface to API for using the NSL Manager
  
-     Version:    NSLCore-138~445
+     Version:    NSLCore-142~130
  
      Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
  
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 
 enum {
@@ -160,7 +160,7 @@ typedef STACK_UPP_TYPE(NSLClientNotifyProcPtr)                  NSLClientNotifyU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NSLMgrNotifyUPP
-NewNSLMgrNotifyUPP(NSLMgrNotifyProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewNSLMgrNotifyUPP(NSLMgrNotifyProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  NewNSLClientNotifyUPP()
@@ -171,7 +171,7 @@ NewNSLMgrNotifyUPP(NSLMgrNotifyProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NSLClientNotifyUPP
-NewNSLClientNotifyUPP(NSLClientNotifyProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewNSLClientNotifyUPP(NSLClientNotifyProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeNSLMgrNotifyUPP()
@@ -182,7 +182,7 @@ NewNSLClientNotifyUPP(NSLClientNotifyProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNSLMgrNotifyUPP(NSLMgrNotifyUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeNSLMgrNotifyUPP(NSLMgrNotifyUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  DisposeNSLClientNotifyUPP()
@@ -193,7 +193,7 @@ DisposeNSLMgrNotifyUPP(NSLMgrNotifyUPP userUPP)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNSLClientNotifyUPP(NSLClientNotifyUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeNSLClientNotifyUPP(NSLClientNotifyUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeNSLMgrNotifyUPP()
@@ -206,7 +206,7 @@ DisposeNSLClientNotifyUPP(NSLClientNotifyUPP userUPP)         AVAILABLE_MAC_OS_X
 extern void
 InvokeNSLMgrNotifyUPP(
   NSLPluginAsyncInfo *  thePluginAsyncInfo,
-  NSLMgrNotifyUPP       userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLMgrNotifyUPP       userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
  *  InvokeNSLClientNotifyUPP()
@@ -219,7 +219,25 @@ InvokeNSLMgrNotifyUPP(
 extern void
 InvokeNSLClientNotifyUPP(
   NSLClientAsyncInfo *  theClientAsyncInfo,
-  NSLClientNotifyUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLClientNotifyUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline NSLMgrNotifyUPP                                      NewNSLMgrNotifyUPP(NSLMgrNotifyProcPtr userRoutine) { return userRoutine; }
+    inline NSLClientNotifyUPP                                   NewNSLClientNotifyUPP(NSLClientNotifyProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeNSLMgrNotifyUPP(NSLMgrNotifyUPP) { }
+    inline void                                                 DisposeNSLClientNotifyUPP(NSLClientNotifyUPP) { }
+    inline void                                                 InvokeNSLMgrNotifyUPP(NSLPluginAsyncInfo * thePluginAsyncInfo, NSLMgrNotifyUPP userUPP) { (*userUPP)(thePluginAsyncInfo); }
+    inline void                                                 InvokeNSLClientNotifyUPP(NSLClientAsyncInfo * theClientAsyncInfo, NSLClientNotifyUPP userUPP) { (*userUPP)(theClientAsyncInfo); }
+  #else
+    #define NewNSLMgrNotifyUPP(userRoutine)                     ((NSLMgrNotifyUPP)userRoutine)
+    #define NewNSLClientNotifyUPP(userRoutine)                  ((NSLClientNotifyUPP)userRoutine)
+    #define DisposeNSLMgrNotifyUPP(userUPP)
+    #define DisposeNSLClientNotifyUPP(userUPP)
+    #define InvokeNSLMgrNotifyUPP(thePluginAsyncInfo, userUPP)  (*userUPP)(thePluginAsyncInfo)
+    #define InvokeNSLClientNotifyUPP(theClientAsyncInfo, userUPP) (*userUPP)(theClientAsyncInfo)
+  #endif
+#endif
 
 
 /*
@@ -287,18 +305,21 @@ typedef NSLPluginData *                 NSLPluginDataPtr;
   -----------------------------------------------------------------------------
 */
 
+#if !__LP64__
 /*
- *  NSLLibraryVersion()
+ *  NSLLibraryVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern UInt32 
-NSLLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+
+#endif  /* !__LP64__ */
 
 
 #define NSLLibraryPresent()        true
@@ -318,18 +339,19 @@ NSLLibraryVersion(void)                                       AVAILABLE_MAC_OS_X
 /*          portions of the url that have illegal characters */
 /* ---> neighborhoodToRegisterIn is an optional parameter for explicitly defining a neighborhood to register in.
             If parameter is NULL, then the plugins will determine where to register the service */
+#if !__LP64__
 /*
- *  NSLStandardRegisterURL()
+ *  NSLStandardRegisterURL()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern NSLError 
 NSLStandardRegisterURL(
   NSLPath           urlToRegister,
-  NSLNeighborhood   neighborhoodToRegisterIn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLNeighborhood   neighborhoodToRegisterIn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* <--- error code from registration */
@@ -338,27 +360,27 @@ NSLStandardRegisterURL(
 /* ---> neighborhoodToDeregisterIn is an optional parameter for explicitly defining a neighborhood to register in.
             If parameter is NULL, then the plugins will determine where to register the service */
 /*
- *  NSLStandardDeregisterURL()
+ *  NSLStandardDeregisterURL()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern NSLError 
 NSLStandardDeregisterURL(
   NSLPath           urlToDeregister,
-  NSLNeighborhood   neighborhoodToDeregisterIn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLNeighborhood   neighborhoodToDeregisterIn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /*-----------------------------------------------------------------------------*/
 
 /*
- *  NSLHexEncodeText()
+ *  NSLHexEncodeText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -368,14 +390,14 @@ NSLHexEncodeText(
   UInt16        rawTextLen,
   char *        newTextBuffer,
   UInt16 *      newTextBufferLen,
-  Boolean *     textChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     textChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLHexDecodeText()
+ *  NSLHexDecodeText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -385,7 +407,7 @@ NSLHexDecodeText(
   UInt16        encodedTextLen,
   char *        decodedTextBuffer,
   UInt16 *      decodedTextBufferLen,
-  Boolean *     textChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     textChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -395,41 +417,41 @@ NSLHexDecodeText(
 */
 
 /*
- *  NSLMakeNewServicesList()
+ *  NSLMakeNewServicesList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLServicesList 
-NSLMakeNewServicesList(const char * initialServiceList)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLMakeNewServicesList(const char * initialServiceList)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLAddServiceToServicesList()
+ *  NSLAddServiceToServicesList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLError 
 NSLAddServiceToServicesList(
   NSLServicesList   serviceList,
-  NSLServiceType    serviceType)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLServiceType    serviceType)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLDisposeServicesList()
+ *  NSLDisposeServicesList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern void 
-NSLDisposeServicesList(NSLServicesList theList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLDisposeServicesList(NSLServicesList theList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -439,49 +461,49 @@ NSLDisposeServicesList(NSLServicesList theList)               AVAILABLE_MAC_OS_X
     of by the user by calling NSLFreeNeighborhood.
 */
 /*
- *  NSLMakeNewNeighborhood()
+ *  NSLMakeNewNeighborhood()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLNeighborhood 
 NSLMakeNewNeighborhood(
   const char *  name,
-  const char *  protocolList)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const char *  protocolList)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* creates an exact copy of an existing neighborhood */
 /*
- *  NSLCopyNeighborhood()
+ *  NSLCopyNeighborhood()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern NSLNeighborhood 
-NSLCopyNeighborhood(NSLNeighborhood neighborhood)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLCopyNeighborhood(NSLNeighborhood neighborhood)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLFreeNeighborhood()
+ *  NSLFreeNeighborhood()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLNeighborhood 
-NSLFreeNeighborhood(NSLNeighborhood neighborhood)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLFreeNeighborhood(NSLNeighborhood neighborhood)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLGetNameFromNeighborhood()
+ *  NSLGetNameFromNeighborhood()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -489,7 +511,7 @@ extern void
 NSLGetNameFromNeighborhood(
   NSLNeighborhood   neighborhood,
   char **           name,
-  long *            length)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *            length)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -497,30 +519,30 @@ NSLGetNameFromNeighborhood(
    in calls (typically request-related calls) for plug-ins that handle the NSL data type.
 */
 /*
- *  NSLMakeServicesRequestPB()
+ *  NSLMakeServicesRequestPB()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern OSStatus 
 NSLMakeServicesRequestPB(
   NSLServicesList    serviceList,
-  NSLTypedDataPtr *  newDataPtr)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLTypedDataPtr *  newDataPtr)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* releases any storage created with MakeXXXPB calls, associated with TypedData.*/
 /*
- *  NSLFreeTypedDataPtr()
+ *  NSLFreeTypedDataPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLTypedDataPtr 
-NSLFreeTypedDataPtr(NSLTypedDataPtr nslTypeData)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLFreeTypedDataPtr(NSLTypedDataPtr nslTypeData)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -528,10 +550,10 @@ NSLFreeTypedDataPtr(NSLTypedDataPtr nslTypeData)              AVAILABLE_MAC_OS_X
    of the url, and the length of the URL.
 */
 /*
- *  NSLGetNextUrl()
+ *  NSLGetNextUrl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -539,7 +561,7 @@ extern Boolean
 NSLGetNextUrl(
   NSLClientAsyncInfoPtr   infoPtr,
   char **                 urlPtr,
-  long *                  urlLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                  urlLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -547,10 +569,10 @@ NSLGetNextUrl(
    of the Neighborhood, and the length of the Neighborhood.
 */
 /*
- *  NSLGetNextNeighborhood()
+ *  NSLGetNextNeighborhood()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -558,7 +580,7 @@ extern Boolean
 NSLGetNextNeighborhood(
   NSLClientAsyncInfoPtr   infoPtr,
   NSLNeighborhood *       neighborhood,
-  long *                  neighborhoodLength)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                  neighborhoodLength)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -571,10 +593,10 @@ NSLGetNextNeighborhood(
 */
 
 /*
- *  NSLErrorToString()
+ *  NSLErrorToString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -582,7 +604,7 @@ extern OSStatus
 NSLErrorToString(
   NSLError   theErr,
   char *     errorString,
-  char *     solutionString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  char *     solutionString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -593,27 +615,27 @@ NSLErrorToString(
 */
 
 /*
- *  NSLOpenNavigationAPI()
+ *  NSLOpenNavigationAPI()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern OSStatus 
-NSLOpenNavigationAPI(NSLClientRef * newRef)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLOpenNavigationAPI(NSLClientRef * newRef)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
- *  NSLCloseNavigationAPI()
+ *  NSLCloseNavigationAPI()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern void 
-NSLCloseNavigationAPI(NSLClientRef theClient)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLCloseNavigationAPI(NSLClientRef theClient)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -633,10 +655,10 @@ NSLCloseNavigationAPI(NSLClientRef theClient)                 AVAILABLE_MAC_OS_X
 */
 
 /*
- *  NSLPrepareRequest()
+ *  NSLPrepareRequest()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -648,7 +670,7 @@ NSLPrepareRequest(
   NSLRequestRef *          ref,
   char *                   bufPtr,
   unsigned long            bufLen,
-  NSLClientAsyncInfoPtr *  infoPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLClientAsyncInfoPtr *  infoPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -659,10 +681,10 @@ NSLPrepareRequest(
 */
 
 /*
- *  NSLStartNeighborhoodLookup()
+ *  NSLStartNeighborhoodLookup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -670,7 +692,7 @@ extern NSLError
 NSLStartNeighborhoodLookup(
   NSLRequestRef         ref,
   NSLNeighborhood       neighborhood,
-  NSLClientAsyncInfo *  asyncInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLClientAsyncInfo *  asyncInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -679,10 +701,10 @@ NSLStartNeighborhoodLookup(
 */
 
 /*
- *  NSLStartServicesLookup()
+ *  NSLStartServicesLookup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -691,37 +713,37 @@ NSLStartServicesLookup(
   NSLRequestRef         ref,
   NSLNeighborhood       neighborhood,
   NSLTypedDataPtr       requestData,
-  NSLClientAsyncInfo *  asyncInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLClientAsyncInfo *  asyncInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /* NSLContinueLookup:  continues a paused/outstanding lookup*/
 
 /*
- *  NSLContinueLookup()
+ *  NSLContinueLookup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLError 
-NSLContinueLookup(NSLClientAsyncInfo * asyncInfo)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLContinueLookup(NSLClientAsyncInfo * asyncInfo)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 /* NSLCancelRequest: cancels an ongoing search*/
 
 /*
- *  NSLCancelRequest()
+ *  NSLCancelRequest()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLError 
-NSLCancelRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLCancelRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -730,15 +752,15 @@ NSLCancelRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X
 */
 
 /*
- *  NSLDeleteRequest()
+ *  NSLDeleteRequest()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
 extern NSLError 
-NSLDeleteRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLDeleteRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -754,10 +776,10 @@ NSLDeleteRequest(NSLRequestRef ref)                           AVAILABLE_MAC_OS_X
 /* ---> serviceListPtr is the address of a pointer which will be set to point at the portion of the newDataPtr that holds the serviceList to be searched */
 /* ---> serviceListLen is the length of the serviceListPtr data pointed to by serviceListPtr */
 /*
- *  NSLParseServicesRequestPB()
+ *  NSLParseServicesRequestPB()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.0 and later
  */
@@ -765,7 +787,7 @@ extern OSStatus
 NSLParseServicesRequestPB(
   NSLTypedDataPtr   newDataPtr,
   char **           serviceListPtr,
-  UInt16 *          serviceListLen)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *          serviceListLen)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
@@ -777,10 +799,10 @@ NSLParseServicesRequestPB(
 /* ---> urlPtr is the address of a pointer which will be set to point at the portion of the newDataPtr that holds the url to be registered */
 /* ---> urlLen is the length of the url data pointed to by urlPtr */
 /*
- *  NSLParseServiceRegistrationPB()
+ *  NSLParseServiceRegistrationPB()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -790,7 +812,7 @@ NSLParseServiceRegistrationPB(
   NSLNeighborhood *  neighborhoodPtr,
   UInt16 *           neighborhoodLen,
   char **            urlPtr,
-  UInt16 *           urlLen)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *           urlLen)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* NSLGetErrorStringsFromResource is obsolete in X.  It will ignore the fileSpecPtr */
@@ -804,10 +826,10 @@ NSLParseServiceRegistrationPB(
 /* <--> errorString is a pointer to valid memory of at least 256 bytes which will be filled out by the error portion of the error string */
 /* <--> solutionString is a pointer to valid memory of at least 256 bytes which will be filled out by the solution portion of the error string */
 /*
- *  NSLGetErrorStringsFromResource()
+ *  NSLGetErrorStringsFromResource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -817,34 +839,34 @@ NSLGetErrorStringsFromResource(
   const FSSpec *  fileSpecPtr,
   SInt16          errorResID,
   char *          errorString,
-  char *          solutionString)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  char *          solutionString)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* <--- Returns true if given service is in the given service list */
 /* ---> serviceList is a valid NSLServicesList containing information about services to be searched */
 /* ---> svcToFind is an NSLServiceType of a particular service to check if it is in the serviceList */
 /*
- *  NSLServiceIsInServiceList()
+ *  NSLServiceIsInServiceList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern Boolean 
 NSLServiceIsInServiceList(
   NSLServicesList   serviceList,
-  NSLServiceType    svcToFind)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  NSLServiceType    svcToFind)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* <--- returns an OSStatus if any errors occur parsing the data */
 /* ---> svcString is the address of a pointer which will be set to point at the portion of theURL that holds the serviceType of theURL */
 /* ---> svcLen is the length of the serviceType pointed to by svcString */
 /*
- *  NSLGetServiceFromURL()
+ *  NSLGetServiceFromURL()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -852,21 +874,21 @@ extern OSStatus
 NSLGetServiceFromURL(
   char *    theURL,
   char **   svcString,
-  UInt16 *  svcLen)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *  svcLen)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* <--- returns the length of a Neighborhood data structure */
 /* ---> neighborhood is a valid NSLNeighborhood */
 /*
- *  NSLGetNeighborhoodLength()
+ *  NSLGetNeighborhoodLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern long 
-NSLGetNeighborhoodLength(NSLNeighborhood neighborhood)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NSLGetNeighborhoodLength(NSLNeighborhood neighborhood)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /*
@@ -878,10 +900,10 @@ NSLGetNeighborhoodLength(NSLNeighborhood neighborhood)        AVAILABLE_MAC_OS_X
 /* this routine works the same as the Thread manager's routine NewThread, except */
 /* that the thread is added to the NSL manager's thread list. */
 /*
- *  NSLNewThread()
+ *  NSLNewThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -893,16 +915,16 @@ NSLNewThread(
   Size                 stackSize,
   ThreadOptions        options,
   void **              threadResult,
-  ThreadID *           threadMade)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID *           threadMade)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 /* this routine works the same as the Thread manager's routine DisposeThread, except */
 /* that the thread is removed from the NSL manager's thread list. */
 /*
- *  NSLDisposeThread()
+ *  NSLDisposeThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -910,9 +932,11 @@ extern OSErr
 NSLDisposeThread(
   ThreadID   threadToDump,
   void *     threadResult,
-  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
+
+#endif  /* !__LP64__ */
 
 #if OLDROUTINENAMES
 typedef NSLClientAsyncInfo              ClientAsyncInfo;
@@ -927,7 +951,7 @@ typedef NSLPluginDataPtr                PluginDataPtr;
 #endif  /* OLDROUTINENAMES */
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

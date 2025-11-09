@@ -90,10 +90,8 @@ protected:
 	#define _returnIsochDoneQueueThread			_v2ExpansionData->_returnIsochDoneQueueThread
 	
     virtual bool 		init( OSDictionary *  propTable );
- #if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
-   	virtual bool 		start( IOService *  provider );
+    virtual bool 		start( IOService *  provider );
     virtual void		free();
-#endif
 
     static IOReturn  DoCreateEP(OSObject *owner,
                            void *arg0, void *arg1,
@@ -292,7 +290,7 @@ public:
     @param highSpeedHub    If non zero, this is a full speed device, the address of the high speed hub to
                            address split transactions to.
     @param highSpeedPort   If highSpeedHub is non zero, the hub port to address split transactions to
-	@param interval		   The raw bInterval value from the endpoint descriptor. Needs to be adjusted in the UIM for HS endpoints.
+	@param interval		   The encoded interval value from the endpoint descriptor
 */
     virtual IOReturn 		UIMCreateIsochEndpoint(		short				functionAddress,
                                                         short				endpointNumber,
@@ -303,7 +301,6 @@ public:
 														UInt8				interval);
 
 
-#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  9);
 	virtual IOUSBControllerIsochEndpoint*		AllocateIsochEP(void);	
 	
@@ -342,32 +339,26 @@ public:
 	
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  21);
 	/*!
-		@function GetLowLatencyOptionsAndPhysicalMask
+	 @function GetLowLatencyOptionsAndPhysicalMask
 	 @abstract Low Latency transfers require that the client have access to the memory after the Isochronous I/O request has already been scheduled. This might be used, for example to fill in outgoing data "just in time." Some controllers, however, may have requirements which need to be followed in order to make sure that the memory buffer isn't moved after the call is made. This call will return an IOOptionBits and mach_vm_address_t which can be used in a call to IOBufferMemoryDescriptor::inTaskWithPhysicalMask which will help meet these requirements.
 	 @param optionBits Pointer to an an IOOptionBits. The only bit which may be returned is kIOMemoryPhysicallyContiguous. Other bits, e.g. direction bits, must be ORd in by the client as needed. This call replaces the old property based method of obtaining this information.
 	 @param physicalMask  Pointer to a mach_vm_address_t which should be used in the call to IOBufferMemoryDescriptor::inTaskWithPhysicalMask and will guarantee that when the memory is wired down it will be accessible by both the client and the USB controller at the same time.
-	 @result returns kIOReturnSuccess if the method is implemented by the controller, otherwise 
+	 @result returns kIOReturnSuccess if the method is implemented by the controller, otherwise kIOReturnUnsupported
 	 */
     virtual IOReturn 		GetLowLatencyOptionsAndPhysicalMask(IOOptionBits *optionBits, mach_vm_address_t *physicalMask);
 	
-#else
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,   9);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  10);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  11);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  12);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  13);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  14);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  15);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  16);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  17);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  18);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  19);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  20);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  21);
-#endif
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  22);
+	/*!
+	 @function GetFrameNumberWithTime
+	 @abstract Real Time A/V applications send and receive Iscohronous data scheduled on certain USB frame numbers. The clock for these frame numbers is independent of the system clock, and drivers need to synchronize these two clocks. This routine will return a system time which corresponds to the beginning of a USB frame number. It is not necessarily the currrent frame, but it will be a frame in the recent past (within the past minute). The jitter between the start of the USB frame and the system time will be as low as possible, but due to hardware interrupt latencies could be as high as 200 microseconds.
+	 @param frameNumber A pointer to a UInt64 in which to hold the USB frame number corresponding to the given system time.
+	 @param theTime A pointer to an AbsoluteTime corresponding to the system time at the beginning of the given USB frame number.
+	 @result returns kIOReturnSuccess if the method is implemented by the controller, otherwise kIOReturnUnsupported
+	 */
+	virtual IOReturn		GetFrameNumberWithTime(UInt64* frameNumber, AbsoluteTime *theTime);
 	
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  22);
-    OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  23);
+	
+	OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  23);
     OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  24);
     OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  25);
     OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  26);

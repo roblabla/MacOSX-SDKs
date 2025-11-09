@@ -72,12 +72,12 @@ __const char *	querylocale(int, locale_t);
 locale_t	uselocale(locale_t);
 __END_DECLS
 
-#ifdef __WCTYPE_H_
-#include <xlocale/__wctype.h>
-#endif /* __WCTYPE_H_ */
 #ifdef _CTYPE_H_
 #include <xlocale/_ctype.h>
 #endif /* _CTYPE_H_ */
+#ifdef __WCTYPE_H_
+#include <xlocale/__wctype.h>
+#endif /* __WCTYPE_H_ */
 #ifdef _INTTYPES_H_
 #include <xlocale/_inttypes.h>
 #endif /* _INTTYPES_H_ */

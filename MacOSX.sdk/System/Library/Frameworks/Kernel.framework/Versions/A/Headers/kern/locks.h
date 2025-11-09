@@ -1,23 +1,29 @@
 /*
- * Copyright (c) 2003-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2003-2007 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
- *
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
- *
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ * 
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
- *
- * @APPLE_LICENSE_HEADER_END@
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
 #ifndef _KERN_LOCKS_H_
@@ -88,6 +94,9 @@ extern	void			lck_attr_setdefault(
 									lck_attr_t		*attr);
 
 extern	void			lck_attr_setdebug(
+									lck_attr_t		*attr);
+
+extern	void			lck_attr_cleardebug(
 									lck_attr_t		*attr);
 
 
@@ -190,6 +199,7 @@ typedef unsigned int	 lck_rw_type_t;
 #define	LCK_RW_TYPE_SHARED			0x01
 #define	LCK_RW_TYPE_EXCLUSIVE		0x02
 
+
 __BEGIN_DECLS
 
 extern lck_rw_t			*lck_rw_alloc_init(
@@ -222,6 +232,7 @@ extern void				lck_rw_unlock_exclusive(
 									lck_rw_t		*lck);
 
 
+
 extern void				lck_rw_destroy(
 									lck_rw_t		*lck,
 									lck_grp_t		*grp);
@@ -242,6 +253,16 @@ extern wait_result_t	lck_rw_sleep_deadline(
 									event_t				event,
 									wait_interrupt_t	interruptible,
 									uint64_t			deadline);
+
+extern boolean_t		lck_rw_lock_shared_to_exclusive(
+									lck_rw_t		*lck);
+
+extern void				lck_rw_lock_exclusive_to_shared(
+									lck_rw_t		*lck);
+
+extern boolean_t		lck_rw_try_lock(
+									lck_rw_t		*lck,
+									lck_rw_type_t	lck_rw_type);
 
 
 __END_DECLS

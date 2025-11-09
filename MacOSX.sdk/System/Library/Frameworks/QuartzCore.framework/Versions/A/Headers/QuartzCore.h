@@ -5,3 +5,4 @@
 
 #import <QuartzCore/CoreImage.h>
 #import <QuartzCore/CoreVideo.h>
+#import <QuartzCore/CoreAnimation.h>

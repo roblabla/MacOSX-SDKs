@@ -53,8 +53,8 @@
 					Type: CAClockSyncMode. Selects between internal synchronization and multiple
 					external synchronization modes such as MIDI Time Code and MIDI beat clock.
 	@constant	kCAClockProperty_SyncSource
-					Type: according to the sync mode. For kCAClockSyncMode, the value is a
-					MIDIEndpointRef.
+					Type: according to the sync mode. For kCAClockSyncMode_MIDIClockTransport or 
+					kCAClockSyncMode_MTCTransport, the value is a MIDIEndpointRef.
 	@constant	kCAClockProperty_SMPTEFormat
 					Type: CAClockSMPTEFormat. Specifies the SMPTE format (fps, drop or non-drop)
 					expected for received SMPTE messages, and used for transmitted SMPTE
@@ -983,6 +983,30 @@ extern OSStatus
 CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 							const CABarBeatTime *inBarBeatTime,
 							CAClockBeats *		outBeats)					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+//  -----------------------------------------------------------------------------
+/*!
+	@function		CAClockParseMIDI
+	
+	@abstract		Provides MIDI messages to a clock without using CoreMIDI
+
+	@discussion		
+					In some situations, a client may wish to drive a clock using MIDI Time Code or
+					beat clock obtained from a source other than Core MIDI. To do so,
+					construct MIDIPacketLists containing the timecode or beat clock messages,
+					and pass them to this function.
+	
+	@param			inCAClock
+						The clock object.
+	
+	@param			inMIDIPacketList
+						The MIDI events to be parsed.
+	
+	@result			An OSStatus error code.
+*/
+extern OSStatus
+CAClockParseMIDI(			CAClockRef			inCAClock,
+							const struct MIDIPacketList *inMIDIPacketList)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 #ifdef __cplusplus
 }

@@ -9,6 +9,12 @@
  * distributed with the Net-SNMP package.
  */
 /*
+ * Note:
+ *    If new default_store entries are added to this header file,
+ *    then remember to run 'perl/default_store/gen' to update the
+ *    corresponding perl interface.
+ */
+/*
  * @file default_store.h: storage space for defaults
  *
  * @addtogroup default_store
@@ -48,7 +54,8 @@ extern          "C" {
 #define NETSNMP_DS_LIB_MIB_PARSE_LABEL     3
 #define NETSNMP_DS_LIB_DUMP_PACKET         4
 #define NETSNMP_DS_LIB_LOG_TIMESTAMP       5
-#define NETSNMP_DS_LIB_DONT_READ_CONFIGS   6
+#define NETSNMP_DS_LIB_DONT_READ_CONFIGS   6    /* don't read normal config files */
+#define NETSNMP_DS_LIB_DISABLE_CONFIG_LOAD      NETSNMP_DS_LIB_DONT_READ_CONFIGS
 #define NETSNMP_DS_LIB_MIB_REPLACE         7    /* replace objects from latest module */
 #define NETSNMP_DS_LIB_PRINT_NUMERIC_ENUM  8    /* print only numeric enum values */
 #define NETSNMP_DS_LIB_PRINT_NUMERIC_OIDS  9    /* print only numeric enum values */
@@ -74,9 +81,12 @@ extern          "C" {
 #define NETSNMP_DS_LIB_DONT_PRINT_UNITS    29 /* don't print UNITS suffix */
 #define NETSNMP_DS_LIB_NO_DISPLAY_HINT     30 /* don't apply DISPLAY-HINTs */
 #define NETSNMP_DS_LIB_16BIT_IDS           31   /* restrict requestIDs, etc to 16-bit values */
-#define NETSNMP_DS_LIB_DONT_PERSIST_STATE  32	/* don't save/load any persistant state */
+#define NETSNMP_DS_LIB_DONT_PERSIST_STATE  32	/* don't load config and don't load/save persistent file */
 #define NETSNMP_DS_LIB_2DIGIT_HEX_OUTPUT   33	/* print a leading 0 on hex values <= 'f' */
-#define NETSNMP_DS_LIB_IGNORE_NO_COMMUNITY 34	/* don't complain if not community is specified in the command arguments */
+#define NETSNMP_DS_LIB_IGNORE_NO_COMMUNITY 34	/* don't complain if no community is specified in the command arguments */
+#define NETSNMP_DS_LIB_DISABLE_PERSISTENT_LOAD  35 /* don't load persistent file */
+#define NETSNMP_DS_LIB_DISABLE_PERSISTENT_SAVE  36 /* don't save persistent file */
+#define NETSNMP_DS_LIB_APPEND_LOGFILES     37 /* append, don't overwrite, log files */
 
     /*
      * library integers 
@@ -97,10 +107,10 @@ extern          "C" {
     /*
      * special meanings for the default SNMP version slot (NETSNMP_DS_LIB_SNMPVERSION) 
      */
-#ifndef DISABLE_SNMPV1
+#ifndef NETSNMP_DISABLE_SNMPV1
 #define NETSNMP_DS_SNMP_VERSION_1    128        /* bogus */
 #endif
-#ifndef DISABLE_SNMPV2C
+#ifndef NETSNMP_DISABLE_SNMPV2C
 #define NETSNMP_DS_SNMP_VERSION_2c   1  /* real */
 #endif
 #define NETSNMP_DS_SNMP_VERSION_3    3  /* real */
@@ -153,6 +163,7 @@ extern          "C" {
     int             netsnmp_ds_register_premib(u_char type, const char *ftype,
                                        const char *token, int storeid,
                                        int which);
+    int             netsnmp_ds_parse_boolean(char *line);
     void            netsnmp_ds_shutdown(void);
 
 #ifdef __cplusplus

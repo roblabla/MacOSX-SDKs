@@ -1,13 +1,13 @@
-// ======================================================================================================================
+// =====================================================================================================================
 //  PDFAnnotationTextWidget.h
-// ======================================================================================================================
+// =====================================================================================================================
 
 
-#import <AppKit/NSText.h>
-#import "PDFAnnotation.h"
+#import <AppKit/AppKit.h>
+#import <PDFKit/PDFAnnotation.h>
 
 
-@class NSColor, PDFAnnotationTextWidgetPrivateVars;
+@class PDFAnnotationTextWidgetPrivateVars;
 
 
 @interface PDFAnnotationTextWidget : PDFAnnotation
@@ -22,11 +22,40 @@
 - (NSString *) stringValue;
 - (void) setStringValue: (NSString *) value;
 
-// Font associated with the text field.
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+- (NSColor *) backgroundColor;
+- (void) setBackgroundColor: (NSColor *) color;
+- (int) rotation;
+- (void) setRotation: (int) rotation;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Font characteristics associated with the text field.
 - (NSFont *) font;
 - (void) setFont: (NSFont *) font;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+- (NSColor *) fontColor;
+- (void) setFontColor: (NSColor *) color;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // Alignment of text.  Supported: NSLeftTextAlignment, NSRightTextAlignment and NSCenterTextAlignment.
 - (NSTextAlignment) alignment;
 - (void) setAlignment: (NSTextAlignment) alignment;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+// Maximum characters allowed (optional, zero indicates no specified maximum).
+- (NSUInteger) maximumLength;
+- (void) setMaximumLength: (NSUInteger) maxLen;
+
+// Internal name for the field (optional).  Used for ResetForm actions.
+- (NSString *) fieldName;
+- (void) setFieldName: (NSString *) name;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 @end

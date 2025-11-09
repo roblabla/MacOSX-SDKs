@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 1998-2003,2004 Free Software Foundation, Inc.              *
+ * Copyright (c) 1998-2004,2005 Free Software Foundation, Inc.              *
  *                                                                          *
  * Permission is hereby granted, free of charge, to any person obtaining a  *
  * copy of this software and associated documentation files (the            *
@@ -29,10 +29,10 @@
 /****************************************************************************
  *  Author: Zeyd M. Ben-Halim <zmbenhal@netcom.com> 1992,1995               *
  *     and: Eric S. Raymond <esr@snark.thyrsus.com>                         *
- *     and: Thomas E. Dickey 1996-on                                        *
+ *     and: Thomas E. Dickey                        1996-on                 *
  ****************************************************************************/
 
-/* $Id: curses.h.in,v 1.148 2004/01/14 23:50:12 tom Exp $ */
+/* $Id: curses.h.in,v 1.157 2005/07/02 16:58:28 tom Exp $ */
 
 #ifndef __NCURSES_H
 #define __NCURSES_H
@@ -48,14 +48,29 @@
 
 /* These are defined only in curses.h, and are used for conditional compiles */
 #define NCURSES_VERSION_MAJOR 5
-#define NCURSES_VERSION_MINOR 4
-#define NCURSES_VERSION_PATCH 20040208
+#define NCURSES_VERSION_MINOR 5
+#define NCURSES_VERSION_PATCH 20051010
 
 /* This is defined in more than one ncurses header, for identification */
 #undef  NCURSES_VERSION
-#define NCURSES_VERSION "5.4"
+#define NCURSES_VERSION "5.5"
 
+/*
+ * Identify the mouse encoding version.
+ */
+#define NCURSES_MOUSE_VERSION 1
+
+/*
+ * Definitions to facilitate DLL's.
+ */
 #include <ncurses_dll.h>
+
+/*
+ * User-definable tweak to disable the include of <stdbool.h>.
+ */
+#ifndef NCURSES_ENABLE_STDBOOL_H
+#define NCURSES_ENABLE_STDBOOL_H 1
+#endif
 
 /*
  * NCURSES_ATTR_T is used to quiet compiler warnings when building ncurses
@@ -96,7 +111,13 @@
 #undef	NCURSES_CH_T
 #define NCURSES_CH_T cchar_t
 
-typedef unsigned long chtype;
+#if 0 && defined(_LP64)
+typedef unsigned chtype;
+typedef unsigned mmask_t;
+#else
+typedef unsigned int chtype;
+typedef unsigned long mmask_t;
+#endif
 
 #include <stdio.h>
 #include <unctrl.h>
@@ -123,7 +144,7 @@ typedef unsigned long chtype;
 #undef FALSE
 #define FALSE   0
 
-typedef unsigned int NCURSES_BOOL;
+typedef unsigned char NCURSES_BOOL;
 
 #if defined(__cplusplus)	/* __cplusplus, etc. */
 
@@ -132,7 +153,7 @@ typedef unsigned int NCURSES_BOOL;
 
 #else			/* c89, c99, etc. */
 
-#if 1
+#if NCURSES_ENABLE_STDBOOL_H
 #include <stdbool.h>
 /* use whatever the C compiler decides bool really is */
 #define NCURSES_BOOL bool
@@ -146,6 +167,9 @@ typedef unsigned int NCURSES_BOOL;
 
 #ifdef __cplusplus
 extern "C" {
+#define NCURSES_CAST(type,value) static_cast<type>(value)
+#else
+#define NCURSES_CAST(type,value) (type)(value)
 #endif
 
 /*
@@ -192,7 +216,7 @@ extern NCURSES_EXPORT_VAR(chtype*) _nc_acs_map(void);
 extern NCURSES_EXPORT_VAR(chtype) acs_map[];
 #endif
 
-#define NCURSES_ACS(c)	(acs_map[(unsigned char)c])
+#define NCURSES_ACS(c)	(acs_map[NCURSES_CAST(unsigned char,c)])
 
 /* VT100 symbols begin here */
 #define ACS_ULCORNER	NCURSES_ACS('l') /* upper left corner */
@@ -310,6 +334,9 @@ typedef struct
 {
     attr_t	attr;
     wchar_t	chars[CCHARW_MAX];
+#if 0
+    int		ext_color;	/* color pair, must be more than 16-bits */
+#endif
 }
 cchar_t;
 
@@ -366,6 +393,9 @@ struct _win_st
 
 #ifdef _XOPEN_SOURCE_EXTENDED
 	cchar_t  _bkgrnd;	/* current background char/attribute pair */
+#if 0
+	int	_color;		/* current color-pair for non-space character */
+#endif
 #endif
 };
 
@@ -788,28 +818,31 @@ extern NCURSES_EXPORT(int) wvline (WINDOW *,chtype,int);		/* implemented */
 #define NCURSES_ATTR_SHIFT       8
 #define NCURSES_BITS(mask,shift) ((mask) << ((shift) + NCURSES_ATTR_SHIFT))
 
-#define A_NORMAL	0L
-#define A_ATTRIBUTES	NCURSES_BITS(~(1UL - 1UL),0)
-#define A_CHARTEXT	(NCURSES_BITS(1UL,0) - 1UL)
-#define A_COLOR		NCURSES_BITS(((1UL) << 8) - 1UL,0)
-#define A_STANDOUT	NCURSES_BITS(1UL,8)
-#define A_UNDERLINE	NCURSES_BITS(1UL,9)
-#define A_REVERSE	NCURSES_BITS(1UL,10)
-#define A_BLINK		NCURSES_BITS(1UL,11)
-#define A_DIM		NCURSES_BITS(1UL,12)
-#define A_BOLD		NCURSES_BITS(1UL,13)
-#define A_ALTCHARSET	NCURSES_BITS(1UL,14)
-#define A_INVIS		NCURSES_BITS(1UL,15)
-#define A_PROTECT	NCURSES_BITS(1UL,16)
-#define A_HORIZONTAL	NCURSES_BITS(1UL,17)
-#define A_LEFT		NCURSES_BITS(1UL,18)
-#define A_LOW		NCURSES_BITS(1UL,19)
-#define A_RIGHT		NCURSES_BITS(1UL,20)
-#define A_TOP		NCURSES_BITS(1UL,21)
-#define A_VERTICAL	NCURSES_BITS(1UL,22)
+#define A_NORMAL	(1U - 1U)
+#define A_ATTRIBUTES	NCURSES_BITS(~(1U - 1U),0)
+#define A_CHARTEXT	(NCURSES_BITS(1U,0) - 1U)
+#define A_COLOR		NCURSES_BITS(((1U) << 8) - 1U,0)
+#define A_STANDOUT	NCURSES_BITS(1U,8)
+#define A_UNDERLINE	NCURSES_BITS(1U,9)
+#define A_REVERSE	NCURSES_BITS(1U,10)
+#define A_BLINK		NCURSES_BITS(1U,11)
+#define A_DIM		NCURSES_BITS(1U,12)
+#define A_BOLD		NCURSES_BITS(1U,13)
+#define A_ALTCHARSET	NCURSES_BITS(1U,14)
+#define A_INVIS		NCURSES_BITS(1U,15)
+#define A_PROTECT	NCURSES_BITS(1U,16)
+#define A_HORIZONTAL	NCURSES_BITS(1U,17)
+#define A_LEFT		NCURSES_BITS(1U,18)
+#define A_LOW		NCURSES_BITS(1U,19)
+#define A_RIGHT		NCURSES_BITS(1U,20)
+#define A_TOP		NCURSES_BITS(1U,21)
+#define A_VERTICAL	NCURSES_BITS(1U,22)
 
+/*
+ * These apply to the first 256 color pairs.
+ */
 #define COLOR_PAIR(n)	NCURSES_BITS(n, 0)
-#define PAIR_NUMBER(a)	((int)(((a) & A_COLOR) >> NCURSES_ATTR_SHIFT))
+#define PAIR_NUMBER(a)	(NCURSES_CAST(int,(((a) & A_COLOR) >> NCURSES_ATTR_SHIFT)))
 
 /*
  * pseudo functions
@@ -851,11 +884,16 @@ extern NCURSES_EXPORT(int) wvline (WINDOW *,chtype,int);		/* implemented */
 
 #define wstandout(win)      	(wattrset(win,A_STANDOUT))
 #define wstandend(win)      	(wattrset(win,A_NORMAL))
-#define wattr_set(win,a,p,opts) ((win)->_attrs = (((a) & ~A_COLOR) | COLOR_PAIR(p)), OK)
 
-#define wattron(win,at)		wattr_on(win, (attr_t) at, (void *)0)
-#define wattroff(win,at)	wattr_off(win, (attr_t) at, (void *)0)
+#define wattron(win,at)		wattr_on(win, NCURSES_CAST(attr_t, at), NULL)
+#define wattroff(win,at)	wattr_off(win, NCURSES_CAST(attr_t, at), NULL)
+
+#if 0
+#define wattrset(win,at)	((win)->_color = PAIR_NUMBER(at), \
+				 (win)->_attrs = (at))
+#else
 #define wattrset(win,at)	((win)->_attrs = (at))
+#endif
 
 #define scroll(win)		wscrl(win,1)
 
@@ -940,7 +978,7 @@ extern NCURSES_EXPORT(int) wvline (WINDOW *,chtype,int);		/* implemented */
 #define mvwgetnstr(win,y,x,str,n)	(wmove(win,y,x) == ERR ? ERR : wgetnstr(win,str,n))
 #define mvwgetstr(win,y,x,str)		(wmove(win,y,x) == ERR ? ERR : wgetstr(win,str))
 #define mvwhline(win,y,x,c,n)		(wmove(win,y,x) == ERR ? ERR : whline(win,c,n))
-#define mvwinch(win,y,x)		(wmove(win,y,x) == ERR ? (chtype)ERR : winch(win))
+#define mvwinch(win,y,x)		(wmove(win,y,x) == ERR ? NCURSES_CAST(chtype, ERR) : winch(win))
 #define mvwinchnstr(win,y,x,s,n)	(wmove(win,y,x) == ERR ? ERR : winchnstr(win,s,n))
 #define mvwinchstr(win,y,x,s)		(wmove(win,y,x) == ERR ? ERR : winchstr(win,s))
 #define mvwinnstr(win,y,x,s,n)		(wmove(win,y,x) == ERR ? ERR : winnstr(win,s,n))
@@ -972,16 +1010,26 @@ extern NCURSES_EXPORT(int) wvline (WINDOW *,chtype,int);		/* implemented */
 #define mvvline(y,x,c,n)		mvwvline(stdscr,y,x,c,n)
 
 /*
- * Some wide-character functions do not depend on the extensions.
+ * Some wide-character functions can be implemented without the extensions.
  */
 #define getbkgd(win)                    ((win)->_bkgd)
 
 #define slk_attr_off(a,v)		((v) ? ERR : slk_attroff(a))
 #define slk_attr_on(a,v)		((v) ? ERR : slk_attron(a))
 
+#if 0
+#define wattr_set(win,a,p,opts)		((win)->_attrs = ((a) & ~A_COLOR), \
+					 (win)->_color = (p), \
+					 OK)
+#define wattr_get(win,a,p,opts)		((void)((a) != 0 && (*(a) = (win)->_attrs)), \
+					 (void)((p) != 0 && (*(p) = (win)->_color)), \
+					 OK)
+#else
+#define wattr_set(win,a,p,opts)		((win)->_attrs = (((a) & ~A_COLOR) | COLOR_PAIR(p)), OK)
 #define wattr_get(win,a,p,opts)		((void)((a) != 0 && (*(a) = (win)->_attrs)), \
 					 (void)((p) != 0 && (*(p) = PAIR_NUMBER((win)->_attrs))), \
 					 OK)
+#endif
 
 /*
  * XSI curses deprecates SVr4 vwprintw/vwscanw, which are supposed to use
@@ -1018,7 +1066,7 @@ NCURSES_EXPORT(int) vsscanf(const char *, const char *, va_list);
 #define KEY_SRESET	0530		/* Soft (partial) reset (unreliable) */
 #define KEY_RESET	0531		/* Reset or hard reset (unreliable) */
 /*
- * These definitions were generated by /SourceCache/ncurses/ncurses-15/ncurses/include/MKkey_defs.sh /SourceCache/ncurses/ncurses-15/ncurses/include/Caps
+ * These definitions were generated by /SourceCache/ncurses/ncurses-21/ncurses/include/MKkey_defs.sh /SourceCache/ncurses/ncurses-21/ncurses/include/Caps
  */
 #define KEY_DOWN	0402		/* down-arrow key */
 #define KEY_UP		0403		/* up-arrow key */
@@ -1115,7 +1163,7 @@ NCURSES_EXPORT(int) vsscanf(const char *, const char *, va_list);
 
 #ifdef _XOPEN_SOURCE_EXTENDED
 
-/* $Id: curses.wide,v 1.28 2004/01/03 20:35:14 tom Exp $ */
+/* $Id: curses.wide,v 1.29 2005/01/28 21:11:53 tom Exp $ */
 
 extern NCURSES_EXPORT_VAR(cchar_t *) _nc_wacs;
 
@@ -1262,7 +1310,7 @@ extern NCURSES_EXPORT(int) wborder_set (WINDOW *,const cchar_t*,const cchar_t*,c
 extern NCURSES_EXPORT(int) wecho_wchar (WINDOW *, const cchar_t *);	/* implemented */
 extern NCURSES_EXPORT(int) wget_wch (WINDOW *, wint_t *);		/* implemented */
 extern NCURSES_EXPORT(int) wget_wstr (WINDOW *, wint_t *);		/* generated:WIDEC */
-extern NCURSES_EXPORT(int) wgetbkgrnd (WINDOW *, cchar_t *);		/* generated:WIDEC */
+extern NCURSES_EXPORT(int) wgetbkgrnd (WINDOW *, cchar_t *);		/* implemented */
 extern NCURSES_EXPORT(int) wgetn_wstr (WINDOW *,wint_t *, int);		/* implemented */
 extern NCURSES_EXPORT(int) whline_set (WINDOW *, const cchar_t *, int);	/* implemented */
 extern NCURSES_EXPORT(int) win_wch (WINDOW *, cchar_t *);		/* implemented */
@@ -1302,13 +1350,10 @@ extern NCURSES_EXPORT(int) wvline_set (WINDOW *, const cchar_t *, int);	/* imple
 #define ins_wch(c)			wins_wch(stdscr,c)
 #define ins_wstr(t)			wins_wstr(stdscr,t)
 #define inwstr(c)			winwstr(stdscr,c)
-#define vid_attr(a,pair,opts)		vidattr(a)
 #define vline_set(c,n)			wvline_set(stdscr,c,n)
 #define wadd_wchstr(win,str)		wadd_wchnstr(win,str,-1)
 #define waddwstr(win,wstr)		waddnwstr(win,wstr,-1)
-#define wattr_set(win,a,p,opts) ((win)->_attrs = (((a) & ~A_COLOR) | COLOR_PAIR(p)), OK)
 #define wget_wstr(w,t)			wgetn_wstr(w,t,-1)
-#define wgetbkgrnd(win,wch)		(*wch = win->_bkgrnd, OK)
 #define win_wchstr(w,c)			win_wchnstr(w,c,-1)
 #define wins_wstr(w,t)			wins_nwstr(w,t,-1)
 
@@ -1351,41 +1396,80 @@ extern NCURSES_EXPORT(int) wvline_set (WINDOW *, const cchar_t *, int);	/* imple
 #define mvwvline_set(win,y,x,c,n)	(wmove(win,y,x) == ERR ? ERR : wvline_set(win,c,n))
 
 #endif /* _XOPEN_SOURCE_EXTENDED */
-/* $Id: curses.tail,v 1.8 2002/11/02 20:26:26 tom Exp $ */
+/* $Id: curses.tail,v 1.12 2005/03/27 00:09:51 tom Exp $ */
 
 /* mouse interface */
-#define NCURSES_MOUSE_VERSION	1
+
+#if NCURSES_MOUSE_VERSION > 1
+#define NCURSES_MOUSE_MASK(b,m) ((m) << (((b) - 1) * 5))
+#else
+#define NCURSES_MOUSE_MASK(b,m) ((m) << (((b) - 1) * 6))
+#endif
+
+#define	NCURSES_BUTTON_RELEASED	001L
+#define	NCURSES_BUTTON_PRESSED	002L
+#define	NCURSES_BUTTON_CLICKED	004L
+#define	NCURSES_DOUBLE_CLICKED	010L
+#define	NCURSES_TRIPLE_CLICKED	020L
+#define	NCURSES_RESERVED_EVENT	040L
 
 /* event masks */
-#define	BUTTON1_RELEASED	000000000001L
-#define	BUTTON1_PRESSED		000000000002L
-#define	BUTTON1_CLICKED		000000000004L
-#define	BUTTON1_DOUBLE_CLICKED	000000000010L
-#define	BUTTON1_TRIPLE_CLICKED	000000000020L
-#define BUTTON1_RESERVED_EVENT	000000000040L
-#define	BUTTON2_RELEASED	000000000100L
-#define	BUTTON2_PRESSED		000000000200L
-#define	BUTTON2_CLICKED		000000000400L
-#define	BUTTON2_DOUBLE_CLICKED	000000001000L
-#define	BUTTON2_TRIPLE_CLICKED	000000002000L
-#define BUTTON2_RESERVED_EVENT	000000004000L
-#define	BUTTON3_RELEASED	000000010000L
-#define	BUTTON3_PRESSED		000000020000L
-#define	BUTTON3_CLICKED		000000040000L
-#define	BUTTON3_DOUBLE_CLICKED	000000100000L
-#define	BUTTON3_TRIPLE_CLICKED	000000200000L
-#define BUTTON3_RESERVED_EVENT	000000400000L
-#define	BUTTON4_RELEASED	000001000000L
-#define	BUTTON4_PRESSED		000002000000L
-#define	BUTTON4_CLICKED		000004000000L
-#define	BUTTON4_DOUBLE_CLICKED	000010000000L
-#define	BUTTON4_TRIPLE_CLICKED	000020000000L
-#define BUTTON4_RESERVED_EVENT	000040000000L
-#define BUTTON_CTRL		000100000000L
-#define BUTTON_SHIFT		000200000000L
-#define BUTTON_ALT		000400000000L
-#define	ALL_MOUSE_EVENTS	000777777777L
-#define	REPORT_MOUSE_POSITION	001000000000L
+#define	BUTTON1_RELEASED	NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_RELEASED)
+#define	BUTTON1_PRESSED		NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_PRESSED)
+#define	BUTTON1_CLICKED		NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_CLICKED)
+#define	BUTTON1_DOUBLE_CLICKED	NCURSES_MOUSE_MASK(1, NCURSES_DOUBLE_CLICKED)
+#define	BUTTON1_TRIPLE_CLICKED	NCURSES_MOUSE_MASK(1, NCURSES_TRIPLE_CLICKED)
+
+#define	BUTTON2_RELEASED	NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_RELEASED)
+#define	BUTTON2_PRESSED		NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_PRESSED)
+#define	BUTTON2_CLICKED		NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_CLICKED)
+#define	BUTTON2_DOUBLE_CLICKED	NCURSES_MOUSE_MASK(2, NCURSES_DOUBLE_CLICKED)
+#define	BUTTON2_TRIPLE_CLICKED	NCURSES_MOUSE_MASK(2, NCURSES_TRIPLE_CLICKED)
+
+#define	BUTTON3_RELEASED	NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_RELEASED)
+#define	BUTTON3_PRESSED		NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_PRESSED)
+#define	BUTTON3_CLICKED		NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_CLICKED)
+#define	BUTTON3_DOUBLE_CLICKED	NCURSES_MOUSE_MASK(3, NCURSES_DOUBLE_CLICKED)
+#define	BUTTON3_TRIPLE_CLICKED	NCURSES_MOUSE_MASK(3, NCURSES_TRIPLE_CLICKED)
+
+#define	BUTTON4_RELEASED	NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_RELEASED)
+#define	BUTTON4_PRESSED		NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_PRESSED)
+#define	BUTTON4_CLICKED		NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_CLICKED)
+#define	BUTTON4_DOUBLE_CLICKED	NCURSES_MOUSE_MASK(4, NCURSES_DOUBLE_CLICKED)
+#define	BUTTON4_TRIPLE_CLICKED	NCURSES_MOUSE_MASK(4, NCURSES_TRIPLE_CLICKED)
+
+/*
+ * In 32 bits the version-1 scheme does not provide enough space for a 5th
+ * button, unless we choose to change the ABI by omitting the reserved-events.
+ */
+#if NCURSES_MOUSE_VERSION > 1
+
+#define	BUTTON5_RELEASED	NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_RELEASED)
+#define	BUTTON5_PRESSED		NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_PRESSED)
+#define	BUTTON5_CLICKED		NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_CLICKED)
+#define	BUTTON5_DOUBLE_CLICKED	NCURSES_MOUSE_MASK(5, NCURSES_DOUBLE_CLICKED)
+#define	BUTTON5_TRIPLE_CLICKED	NCURSES_MOUSE_MASK(5, NCURSES_TRIPLE_CLICKED)
+
+#define	BUTTON_CTRL		NCURSES_MOUSE_MASK(6, 0001L)
+#define	BUTTON_SHIFT		NCURSES_MOUSE_MASK(6, 0002L)
+#define	BUTTON_ALT		NCURSES_MOUSE_MASK(6, 0004L)
+#define	REPORT_MOUSE_POSITION	NCURSES_MOUSE_MASK(6, 0010L)
+
+#else
+
+#define	BUTTON1_RESERVED_EVENT	NCURSES_MOUSE_MASK(1, NCURSES_RESERVED_EVENT)
+#define	BUTTON2_RESERVED_EVENT	NCURSES_MOUSE_MASK(2, NCURSES_RESERVED_EVENT)
+#define	BUTTON3_RESERVED_EVENT	NCURSES_MOUSE_MASK(3, NCURSES_RESERVED_EVENT)
+#define	BUTTON4_RESERVED_EVENT	NCURSES_MOUSE_MASK(4, NCURSES_RESERVED_EVENT)
+
+#define	BUTTON_CTRL		NCURSES_MOUSE_MASK(5, 0001L)
+#define	BUTTON_SHIFT		NCURSES_MOUSE_MASK(5, 0002L)
+#define	BUTTON_ALT		NCURSES_MOUSE_MASK(5, 0004L)
+#define	REPORT_MOUSE_POSITION	NCURSES_MOUSE_MASK(5, 0010L)
+
+#endif
+
+#define	ALL_MOUSE_EVENTS	(REPORT_MOUSE_POSITION - 1)
 
 /* macros to extract single event-bits from masks */
 #define	BUTTON_RELEASE(e, x)		((e) & (001 << (6 * ((x) - 1))))
@@ -1394,8 +1478,6 @@ extern NCURSES_EXPORT(int) wvline_set (WINDOW *, const cchar_t *, int);	/* imple
 #define	BUTTON_DOUBLE_CLICK(e, x)	((e) & (010 << (6 * ((x) - 1))))
 #define	BUTTON_TRIPLE_CLICK(e, x)	((e) & (020 << (6 * ((x) - 1))))
 #define	BUTTON_RESERVED_EVENT(e, x)	((e) & (040 << (6 * ((x) - 1))))
-
-typedef unsigned long mmask_t;
 
 typedef struct
 {
@@ -1410,7 +1492,7 @@ extern NCURSES_EXPORT(int) ungetmouse (MEVENT *);
 extern NCURSES_EXPORT(mmask_t) mousemask (mmask_t, mmask_t *);
 extern NCURSES_EXPORT(bool) wenclose (const WINDOW *, int, int);
 extern NCURSES_EXPORT(int) mouseinterval (int);
-extern NCURSES_EXPORT(bool) wmouse_trafo (const WINDOW* win,int* y, int* x, bool to_screen);
+extern NCURSES_EXPORT(bool) wmouse_trafo (const WINDOW*, int*, int*, bool);
 extern NCURSES_EXPORT(bool) mouse_trafo (int*, int*, bool);              /* generated */
 
 #define mouse_trafo(y,x,to_screen) wmouse_trafo(stdscr,y,x,to_screen)
@@ -1466,6 +1548,7 @@ extern NCURSES_EXPORT(void) trace (const unsigned int);
 extern NCURSES_EXPORT_VAR(int) _nc_optimize_enable;		/* enable optimizations */
 #ifdef _XOPEN_SOURCE_EXTENDED
 extern NCURSES_EXPORT(const char *) _nc_viswbuf(const wchar_t *);
+extern NCURSES_EXPORT(const char *) _nc_viswibuf(const wint_t *);
 #endif
 extern NCURSES_EXPORT(const char *) _nc_visbuf (const char *);
 #define OPTIMIZE_MVCUR		0x01	/* cursor movement optimization */

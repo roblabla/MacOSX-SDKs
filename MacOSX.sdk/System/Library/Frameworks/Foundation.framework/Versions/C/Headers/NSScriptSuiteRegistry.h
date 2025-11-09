@@ -1,6 +1,6 @@
 /*
 	NSScriptSuiteRegistry.h
-	Copyright (c) 1997-2005, Apple Computer, Inc.
+	Copyright (c) 1997-2007, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,7 +50,7 @@
 
 /* Return the four character code used to identify the named suite.
 */
-- (unsigned long)appleEventCodeForSuite:(NSString *)suiteName;
+- (FourCharCode)appleEventCodeForSuite:(NSString *)suiteName;
 
 /* Return the bundle that contains the code that implements the named suite.
 */
@@ -63,15 +63,15 @@
 
 /* Given a four character code used to identify a scripting suite, return the name of the suite.
 */
-- (NSString *)suiteForAppleEventCode:(unsigned long)appleEventCode;
+- (NSString *)suiteForAppleEventCode:(FourCharCode)appleEventCode;
 
 /* Given a four character code used to identify a scriptable class in Apple events, return the class description.
 */
-- (NSScriptClassDescription *)classDescriptionWithAppleEventCode:(unsigned long)appleEventCode;
+- (NSScriptClassDescription *)classDescriptionWithAppleEventCode:(FourCharCode)appleEventCode;
 
 /* Given the pair of four character codes used to identify a scripting command in Apple events, return the command description.
 */
-- (NSScriptCommandDescription *)commandDescriptionWithAppleEventClass:(unsigned long)appleEventClassCode andAppleEventCode:(unsigned long)appleEventIDCode;
+- (NSScriptCommandDescription *)commandDescriptionWithAppleEventClass:(FourCharCode)appleEventClassCode andAppleEventCode:(FourCharCode)appleEventIDCode;
 
 /* Return suitable reply data for the standard Get AETE Apple event, given the set of scripting suites currently registered.
 */

@@ -3,7 +3,7 @@
  
      Contains:   Fixed Math Interfaces.
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
@@ -35,8 +35,70 @@ extern "C" {
 
 #define fixed1              ((Fixed) 0x00010000L)
 #define fract1              ((Fract) 0x40000000L)
-#define positiveInfinity    ((long)  0x7FFFFFFFL)
-#define negativeInfinity    ((long)  0x80000000L)
+#define positiveInfinity    ((Fixed)  0x7FFFFFFFL)
+#define negativeInfinity    ((Fixed)  -0x80000000L)
+
+/*  The _IntSaturate macro converts a float to an int with saturation:
+
+        If x <= -2**31, the result is 0x80000000.
+        If -2**31 < x < 2**31, the result is x truncated to an integer.
+        If 2**31 <= x, the result is 0x7fffffff.
+*/
+#if (defined (__i386__) || defined(__x86_64__)) && __GNUC__
+
+    // For comments, see the annotated version below.
+    #define _IntSaturate(x)     ({                  \
+        int _Result = (int) (x);                    \
+        __asm__("                                   \
+                ucomisd %[LimitFloat], %[xx]    \n  \
+                cmovae  %[LimitInt], %[_Result] "   \
+            :   [_Result] "+r" (_Result)            \
+            :   [LimitFloat] "mx" (0x1p31),     \
+                [LimitInt] "mr" (0x7fffffff),       \
+                [xx] "x" ((double)(x))          \
+            :   "cc"                                \
+            );                                      \
+         _Result; })
+    /*
+        // Assume result will be x.
+        int _Result = (x);
+        __asm__("
+                // Compare x to the floating-point limit.
+                ucomisd %[LimitFloat], %[xx]    \n
+                // If xx is too large, set _Result to the integer limit.
+                cmovae  %[LimitInt], %[_Result]
+                // _Result is input and output, in a general register.
+            :   [_Result] "+r" (_Result)
+                // LimitFloat is 0x1p31f and may be in memory or an XMM
+                // register.
+            :   [LimitFloat] "mx" (0x1p31f),
+                // LimitInt is 0x7fffffff and may be in memory or a general
+                // register.
+                [LimitInt] "mr" (0x7fffffff),
+                // xx is x and must be in an XMM register.
+                [xx] "x" ((double)(x))
+                // The condition code is changed.
+            :   "cc"
+            );
+        // Return _Result.
+         _Result;
+    */
+
+#elif defined __ppc__ || __ppc64__
+
+    #define _IntSaturate(x) ((int) (x))
+
+#else
+
+    #error "Unknown architecture."
+    // To use unoptimized standard C code, remove above line.
+    #define _IntSaturate(x) ((x) <= -0x1p31f ? (int) -0x80000000 : \
+        0x1p31f <= (x) ? (int) 0x7fffffff : (int) (x))
+
+#endif
+
+#define FloatToFixed(a) (_IntSaturate((a) * fixed1))
+#define FloatToFract(a) (_IntSaturate((a) * fract1))
 
 #define FixedRound(a)       ((short)(((Fixed)(a) + fixed1/2) >> 16))
 #define FixedSquareRoot(a)  (((Fixed)FractSquareRoot(a) + 64) >> 7)
@@ -46,9 +108,7 @@ extern "C" {
 #define FixedToInt(a)       ((short)(((Fixed)(a) + fixed1/2) >> 16))
 #define IntToFixed(a)       ((Fixed)(a) << 16)
 #define FixedToFloat(a)     ((float)(a) / fixed1)
-#define FloatToFixed(a)     ((Fixed)((float)(a) * fixed1))
 #define FractToFloat(a)     ((float)(a) / fract1)
-#define FloatToFract(a)     ((Fract)((float)(a) * fract1))
 #define ColorToFract(a)     (((Fract) (a) << 14) + ((Fract)(a) + 2 >> 2))
 #define FractToColor(a)     ((gxColorValue) ((a) - ((a) >> 16) + 8191 >> 14))
 /* These macros were removed because of developer complaints of variable name collision. */
@@ -119,7 +179,7 @@ Fix2Frac(Fixed x)                                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern long 
+extern SInt32 
 Fix2Long(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -132,7 +192,7 @@ Fix2Long(Fixed x)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-Long2Fix(long x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Long2Fix(SInt32 x)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -235,8 +295,8 @@ FracCos(Fixed x)                                              AVAILABLE_MAC_OS_X
  */
 extern Fixed 
 FixATan2(
-  long   x,
-  long   y)                                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   x,
+  SInt32   y)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -426,8 +486,8 @@ WideNegate(wide * target)                                     AVAILABLE_MAC_OS_X
  */
 extern wide * 
 WideShift(
-  wide *  target,
-  long    shift)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *   target,
+  SInt32   shift)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -450,7 +510,7 @@ WideShift(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern unsigned long 
+extern UInt32 
 WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -458,7 +518,7 @@ WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X
  *  WideMultiply()
  *  
  *  Discussion:
- *    Returns the wide result of multipling two signed long values
+ *    Returns the wide result of multipling two SInt32 values
  *  
  *  Parameters:
  *    
@@ -480,9 +540,9 @@ WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X
  */
 extern wide * 
 WideMultiply(
-  long    multiplicand,
-  long    multiplier,
-  wide *  target)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   multiplicand,
+  SInt32   multiplier,
+  wide *   target)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -490,9 +550,9 @@ WideMultiply(
  *  
  *  Discussion:
  *    Returns the integer and remainder results after dividing a wide
- *    value by a long. Will overflow to positiveInfinity or
- *    negativeInfinity if the result won't fit into a long.  If
- *    remainder is (long) -1 then any overflow rounds to
+ *    value by an SInt32. Will overflow to positiveInfinity or
+ *    negativeInfinity if the result won't fit into an SInt32.  If
+ *    remainder is (SInt32) -1 then any overflow rounds to
  *    negativeInfinity.
  *  
  *  Parameters:
@@ -506,22 +566,22 @@ WideMultiply(
  *    remainder:
  *      a pointer to where to put the remainder result, between 0 and
  *      divisor, after dividing divident by divisor. If NULL, no
- *      remainder is returned.  If (long*) -1, then any overflow result
- *      will round to negativeInfinity.
+ *      remainder is returned.  If (SInt32*) -1, then any overflow
+ *      result will round to negativeInfinity.
  *  
  *  Result:
- *    the integer signed long result of dividend / divisor
+ *    the integer signed result of dividend / divisor
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern long 
+extern SInt32 
 WideDivide(
   const wide *  dividend,
-  long          divisor,
-  long *        remainder)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32        divisor,
+  SInt32 *      remainder)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -529,7 +589,7 @@ WideDivide(
  *  
  *  Discussion:
  *    Returns the wide integer and remainder results after dividing a
- *    wide value by a long. Note that dividend is updated with the
+ *    wide value by an SInt32. Note that dividend is updated with the
  *    result.
  *  
  *  Parameters:
@@ -554,9 +614,9 @@ WideDivide(
  */
 extern wide * 
 WideWideDivide(
-  wide *  dividend,
-  long    divisor,
-  long *  remainder)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *    dividend,
+  SInt32    divisor,
+  SInt32 *  remainder)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -585,8 +645,8 @@ WideWideDivide(
  */
 extern wide * 
 WideBitShift(
-  wide *  target,
-  long    shift)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *   target,
+  SInt32   shift)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*

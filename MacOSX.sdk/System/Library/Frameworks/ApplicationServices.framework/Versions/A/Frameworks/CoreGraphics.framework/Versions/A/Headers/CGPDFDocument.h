@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFDocument.h
- * Copyright (c) 2000-2003 Apple Computer, Inc.
+ * Copyright (c) 2000-2007 Apple Inc.
  * All rights reserved.
  */
 
@@ -39,32 +39,32 @@ CG_EXTERN void CGPDFDocumentRelease(CGPDFDocumentRef document);
 CG_EXTERN void CGPDFDocumentGetVersion(CGPDFDocumentRef document, int *majorVersion, int *minorVersion) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return true if the PDF file associated with `document' is encrypted;
- * false otherwise.  If the PDF file is encrypted, then a password must be
+ * false otherwise. If the PDF file is encrypted, then a password must be
  * supplied before certain operations are enabled; different passwords may
  * enable different operations. */
 
 CG_EXTERN bool CGPDFDocumentIsEncrypted(CGPDFDocumentRef document) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Use `password' to decrypt `document' and grant permission for certain
- * operations.  Returns true if `password' is a valid password; false
+ * operations. Returns true if `password' is a valid password; false
  * otherwise. */
 
 CG_EXTERN bool CGPDFDocumentUnlockWithPassword(CGPDFDocumentRef document, const char *password) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/* Return true if `document' is unlocked; false otherwise.  A document is
- * unlocked if it isn't encrypted, or if it is encrypted and a valid password
- * was previously specified with CGPDFDocumentUnlockWithPassword. */
+/* Return true if `document' is unlocked; false otherwise. A document is
+ * unlocked if it isn't encrypted, or if it is encrypted and a valid
+ * password was specified with "CGPDFDocumentUnlockWithPassword". */
 
 CG_EXTERN bool CGPDFDocumentIsUnlocked(CGPDFDocumentRef document) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/* Return true if `document' allows printing; false otherwise.  Typically,
+/* Return true if `document' allows printing; false otherwise. Typically,
  * this function returns false only if the document is encrypted and the
  * document's current password doesn't grant permission to perform
  * printing. */
 
 CG_EXTERN bool CGPDFDocumentAllowsPrinting(CGPDFDocumentRef document) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-/* Return true if `document' allows copying; false otherwise.  Typically,
+/* Return true if `document' allows copying; false otherwise. Typically,
  * this function returns false only if the document is encrypted and the
  * document's current password doesn't grant permission to perform
  * copying. */
@@ -76,7 +76,7 @@ CG_EXTERN bool CGPDFDocumentAllowsCopying(CGPDFDocumentRef document) AVAILABLE_M
 CG_EXTERN size_t CGPDFDocumentGetNumberOfPages(CGPDFDocumentRef document);
 
 /* Return the page corresponding to `pageNumber', or NULL if no such page
- * exists in the document.  Pages are numbered starting at 1. */
+ * exists in the document. Pages are numbered starting at 1. */
 
 CG_EXTERN CGPDFPageRef CGPDFDocumentGetPage(CGPDFDocumentRef document, size_t pageNumber) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
@@ -88,7 +88,7 @@ CG_EXTERN CGPDFDictionaryRef CGPDFDocumentGetCatalog(CGPDFDocumentRef document) 
 
 CG_EXTERN CGPDFDictionaryRef CGPDFDocumentGetInfo(CGPDFDocumentRef document) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-/* Return the "file identifier" of `document'. */
+/* Return the "file identifier" array of `document'. */
 
 CG_EXTERN CGPDFArrayRef CGPDFDocumentGetID(CGPDFDocumentRef document) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -100,28 +100,28 @@ CG_EXTERN CFTypeID CGPDFDocumentGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_
 
 /* DEPRECATED; return the media box of page number `page' in `document'. */
 
-CG_EXTERN CGRect CGPDFDocumentGetMediaBox(CGPDFDocumentRef document, int page);
+CG_EXTERN CGRect CGPDFDocumentGetMediaBox(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* DEPRECATED; return the crop box of page number `page' in `document'. */
 
-CG_EXTERN CGRect CGPDFDocumentGetCropBox(CGPDFDocumentRef document, int page);
+CG_EXTERN CGRect CGPDFDocumentGetCropBox(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* DEPRECATED; return the bleed box of page number `page' in `document'. */
 
-CG_EXTERN CGRect CGPDFDocumentGetBleedBox(CGPDFDocumentRef document, int page);
+CG_EXTERN CGRect CGPDFDocumentGetBleedBox(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* DEPRECATED; return the trim box of page number `page' in `document'. */
 
-CG_EXTERN CGRect CGPDFDocumentGetTrimBox(CGPDFDocumentRef document, int page);
+CG_EXTERN CGRect CGPDFDocumentGetTrimBox(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* DEPRECATED; return the art box of page number `page' in `document'. */
 
-CG_EXTERN CGRect CGPDFDocumentGetArtBox(CGPDFDocumentRef document, int page);
+CG_EXTERN CGRect CGPDFDocumentGetArtBox(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /* DEPRECATED; return the rotation angle (in degrees) of page number `page'
  * in `document'. */
 
-CG_EXTERN int CGPDFDocumentGetRotationAngle(CGPDFDocumentRef document, int page);
+CG_EXTERN int CGPDFDocumentGetRotationAngle(CGPDFDocumentRef document, int page) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 CG_EXTERN_C_END
 

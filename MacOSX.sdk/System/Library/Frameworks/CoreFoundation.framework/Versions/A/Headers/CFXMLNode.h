@@ -1,5 +1,5 @@
 /*	CFXMLNode.h
-	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2007, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLNODE__)
@@ -11,9 +11,7 @@
 #include <CoreFoundation/CFTree.h>
 #include <CoreFoundation/CFURL.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 enum {
 	kCFXMLNodeCurrentVersion = 1
@@ -43,7 +41,7 @@ typedef CFTreeRef CFXMLTreeRef;
     */
 
 /* Type codes for the different possible XML nodes; this list may grow.*/
-typedef enum {
+enum {
     kCFXMLNodeTypeDocument = 1,
     kCFXMLNodeTypeElement = 2,
     kCFXMLNodeTypeAttribute = 3,
@@ -59,7 +57,8 @@ typedef enum {
     kCFXMLNodeTypeNotation = 13,
     kCFXMLNodeTypeElementTypeDeclaration = 14,
     kCFXMLNodeTypeAttributeListDeclaration = 15
-} CFXMLNodeTypeCode;
+};
+typedef CFIndex CFXMLNodeTypeCode;
 
 typedef struct {
     CFDictionaryRef attributes;
@@ -107,13 +106,14 @@ typedef struct {
     CFXMLAttributeDeclarationInfo *attributes;
 } CFXMLAttributeListDeclarationInfo;
 
-typedef enum {
+enum {
     kCFXMLEntityTypeParameter,       /* Implies parsed, internal */
     kCFXMLEntityTypeParsedInternal,
     kCFXMLEntityTypeParsedExternal,
     kCFXMLEntityTypeUnparsed,
     kCFXMLEntityTypeCharacter
-} CFXMLEntityTypeCode;
+};
+typedef CFIndex CFXMLEntityTypeCode;
 
 typedef struct {
     CFXMLEntityTypeCode entityType;
@@ -179,9 +179,7 @@ CFXMLTreeRef CFXMLTreeCreateWithNode(CFAllocatorRef allocator, CFXMLNodeRef node
 CF_EXPORT
 CFXMLNodeRef CFXMLTreeGetNode(CFXMLTreeRef xmlTree);
 
-#if defined(__cplusplus)
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFXMLNODE__ */
 

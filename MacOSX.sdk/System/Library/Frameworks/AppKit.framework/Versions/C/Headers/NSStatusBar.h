@@ -1,11 +1,12 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2005, Apple Computer, Inc.
+        Copyright (c) 1997-2007, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSGeometry.h>
 
 @class NSColor;
 @class NSFont;
@@ -19,17 +20,17 @@
 {
  @private
     NSMutableArray* _actions;
-    long            _fReserved1;
-    long            _fReserved2;
-    long            _fReserved3;
+    void           *_fReserved1;
+    void           *_fReserved2;
+    void           *_fReserved3;
 }
 
-+ (NSStatusBar*) systemStatusBar;
++ (NSStatusBar*)systemStatusBar;
 
-- (NSStatusItem*) statusItemWithLength:(float)length;
-- (void) removeStatusItem:(NSStatusItem*)item;
+- (NSStatusItem*)statusItemWithLength:(CGFloat)length;
+- (void)removeStatusItem:(NSStatusItem*)item;
 
-- (BOOL)     isVertical;
-- (float)    thickness;
+- (BOOL)isVertical;
+- (CGFloat)thickness;
 
 @end

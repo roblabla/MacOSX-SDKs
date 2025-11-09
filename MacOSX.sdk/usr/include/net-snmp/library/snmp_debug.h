@@ -102,7 +102,7 @@ extern          "C" {
      * where the debug/token check has already been performed.
      */
 
-#ifndef SNMP_NO_DEBUGGING       /* make sure we're wanted */
+#ifndef NETSNMP_NO_DEBUGGING       /* make sure we're wanted */
 
     /*
      * define two macros : one macro with, one without,
@@ -209,7 +209,7 @@ extern          "C" {
 #define DEBUGMSG_NC(x)  do { __DBGMSG_NC(x); }while(0)
 #define DEBUGMSGT_NC(x) do { __DBGMSGT_NC(x); }while(0)
 
-#else                           /* SNMP_NO_DEBUGGING := enable streamlining of the code */
+#else                           /* NETSNMP_NO_DEBUGGING := enable streamlining of the code */
 
 #define DEBUGMSG(x)
 #define DEBUGMSGT(x)
@@ -270,8 +270,8 @@ typedef struct netsnmp_token_descr_s {
     char  enabled;
 } netsnmp_token_descr;
 
-extern int                 debug_num_tokens;
-extern netsnmp_token_descr dbg_tokens[MAX_DEBUG_TOKENS];
+NETSNMP_IMPORT int                 debug_num_tokens;
+NETSNMP_IMPORT netsnmp_token_descr dbg_tokens[MAX_DEBUG_TOKENS];
     
 #ifdef __cplusplus
 }

@@ -3,14 +3,9 @@
  
      Contains:   ColorSync Scripting Plugin API
  
-     Version:    ColorSync-174.3.3~45
+     Copyright:  1998-2005 by Apple Computer, Inc., all rights reserved.
  
-     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+     Bugs?:      For bug reports, consult http://developer.apple.com/bugreporter/
  
 */
 #ifndef __CMSCRIPTINGPLUGIN__
@@ -25,13 +20,15 @@
 #endif
 
 
-
+#include <ColorSync/CMBase.h>
 
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
+
+#if !__LP64__ && !TARGET_OS_WIN32
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,72 +55,32 @@ enum {
 };
 
 
-/*
- *  CMValidImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
-CMValidImage(const FSSpec * spec);
+CSEXTERN CMError 
+CMValidImage(const FSSpec * spec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMGetImageSpace()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMGetImageSpace(
   const FSSpec *  spec,
-  OSType *        space);
+  OSType *        space)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMEmbedImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMEmbedImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
   Boolean         repl,
-  CMProfileRef    embProf);
+  CMProfileRef    embProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMUnembedImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMUnembedImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
-  Boolean         repl);
+  Boolean         repl)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMMatchImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMMatchImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
@@ -131,18 +88,10 @@ CMMatchImage(
   UInt32          qual,
   CMProfileRef    srcProf,
   UInt32          srcIntent,
-  CMProfileRef    dstProf);
+  CMProfileRef    dstProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMProofImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMProofImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
@@ -151,77 +100,47 @@ CMProofImage(
   CMProfileRef    srcProf,
   UInt32          srcIntent,
   CMProfileRef    dstProf,
-  CMProfileRef    prfProf);
+  CMProfileRef    prfProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMLinkImage()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMLinkImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
   Boolean         repl,
   UInt32          qual,
   CMProfileRef    lnkProf,
-  UInt32          lnkIntent);
+  UInt32          lnkIntent)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMCountImageProfiles()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMCountImageProfiles(
   const FSSpec *  spec,
-  UInt32 *        count);
+  UInt32 *        count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMGetIndImageProfile()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMGetIndImageProfile(
   const FSSpec *  spec,
   UInt32          index,
-  CMProfileRef *  prof);
+  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/*
- *  CMSetIndImageProfile()
- *  
- *  Availability:
- *    Mac OS X:         in 3.0 and later
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CSScriptingLib 2.6 and later
- */
-extern CMError 
+CSEXTERN CMError 
 CMSetIndImageProfile(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
   Boolean         repl,
   UInt32          index,
-  CMProfileRef    prof);
+  CMProfileRef    prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !__LP64__ && !TARGET_OS_WIN32
 
 #endif /* __CMSCRIPTINGPLUGIN__ */
 

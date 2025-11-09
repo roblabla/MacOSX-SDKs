@@ -3,7 +3,7 @@
  
      Contains:   Required interface for Text Encoding Converter-Plugins
  
-     Version:    CarbonCore-682.26~1
+     Version:    CarbonCore-783~134
  
      Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved.
  
@@ -36,7 +36,7 @@
 #pragma once
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
 
 /*
   ####################################################################################
@@ -89,7 +89,7 @@ struct TextEncodingRec {
 typedef struct TextEncodingRec          TextEncodingRec;
 /* supported encodings & sniffers lists, type TECEncodingsListRec */
 struct TECEncodingsListRec {
-  ItemCount           count;
+  UInt32              count;
   TextEncodingRec     encodings;              /* first of many*/
 };
 typedef struct TECEncodingsListRec      TECEncodingsListRec;
@@ -104,7 +104,7 @@ struct TECSubTextEncodingRec {
 };
 typedef struct TECSubTextEncodingRec    TECSubTextEncodingRec;
 struct TECSubTextEncodingsRec {
-  ItemCount           count;
+  UInt32              count;
   TECSubTextEncodingRec  subTextEncodingRec;  /* first of many*/
 };
 typedef struct TECSubTextEncodingsRec   TECSubTextEncodingsRec;
@@ -123,7 +123,7 @@ struct TECEncodingPairs {
 };
 typedef struct TECEncodingPairs         TECEncodingPairs;
 struct TECEncodingPairsRec {
-  ItemCount           count;
+  UInt32              count;
   TECEncodingPairs    encodingPairs;
 };
 typedef struct TECEncodingPairsRec      TECEncodingPairsRec;
@@ -132,14 +132,14 @@ typedef TECEncodingPairsPtr *           TECEncodingPairsHandle;
 /* mail & web encodings lists - type TECLocaleToEncodingsListRec */
 struct TECLocaleListToEncodingListRec {
   UInt32              offset;                 /* offset to next variable-length record*/
-  ItemCount           count;
+  UInt32              count;
   RegionCode          locales;                /* first in list of locales*/
                                               /* TECEncodingListRec encodingList;     // after local variable length array*/
 };
 typedef struct TECLocaleListToEncodingListRec TECLocaleListToEncodingListRec;
 typedef TECLocaleListToEncodingListRec * TECLocaleListToEncodingListPtr;
 struct TECLocaleToEncodingsListRec {
-  ItemCount           count;
+  UInt32              count;
   TECLocaleListToEncodingListRec  localeListToEncodingList; /* language of name*/
 };
 typedef struct TECLocaleToEncodingsListRec TECLocaleToEncodingsListRec;
@@ -154,7 +154,7 @@ struct TECInternetNameRec {
 };
 typedef struct TECInternetNameRec       TECInternetNameRec;
 struct TECInternetNamesRec {
-  ItemCount           count;
+  UInt32              count;
   TECInternetNameRec  InternetNames;          /* first of many*/
 };
 typedef struct TECInternetNamesRec      TECInternetNamesRec;
@@ -196,7 +196,7 @@ struct TECConverterContextRec {
   UInt32              reserved2;
   TECBufferContextRec  bufferContext;
                                               /* private - manipulated only within Plugin*/
-  UInt32              contextRefCon;
+  URefCon             contextRefCon;
   ProcPtr             conversionProc;
   ProcPtr             flushProc;
   ProcPtr             clearContextInfoProc;
@@ -216,7 +216,7 @@ struct TECSnifferContextRec {
   ItemCount           numFeatures;
   ItemCount           numErrors;
                                               /* private - manipulated only within Plugin*/
-  UInt32              contextRefCon;
+  URefCon             contextRefCon;
   ProcPtr             sniffProc;
   ProcPtr             clearContextInfoProc;
   TECPluginStateRec   pluginState;
@@ -305,7 +305,7 @@ typedef CALLBACK_API_C( TECPluginDispatchTable *, TECPluginGetPluginDispatchTabl
 
 
 
-#pragma options align=reset
+#pragma pack(pop)
 
 
 #endif /* __TEXTENCODINGPLUGIN__ */

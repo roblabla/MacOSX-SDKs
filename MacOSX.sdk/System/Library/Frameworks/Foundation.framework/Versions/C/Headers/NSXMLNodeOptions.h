@@ -1,6 +1,8 @@
-/*		NSXMLNodeOptions.h
-		Copyright 2004-2005, Apple, Inc. All rights reserved.
+/*	NSXMLNodeOptions.h
+	Copyright (c) 2004-2007, Apple Inc. All rights reserved.
 */
+
+#import <Foundation/NSObjCRuntime.h>
 
 #if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
